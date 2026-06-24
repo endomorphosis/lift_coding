@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: f1c3639f0e16fe2a5c627e3e3cb2c1816e84c4e1
+Fingerprint: 6a22be3d657c5c42dec03735a0741405af40726b
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 4
@@ -12,24 +12,28 @@ Track: ops
 
 - ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m hallucinate_app`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - ` m swissknife`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=1, other_dirty=2`
+- Path categories: `modified=2, other_dirty=2`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `swissknife`
 - Name status:
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	swissknife`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 207 +++++++--------------`
-  - ` hallucinate_app                                    |   0`
-  - ` swissknife                                         |   0`
-  - ` 3 files changed, 72 insertions(+), 135 deletions(-)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 60 +++++++++++++++++-----`
+  - ` hallucinate_app                                    |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  6 +--`
+  - ` swissknife                                         |  0`
+  - ` 4 files changed, 50 insertions(+), 16 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -100,23 +104,25 @@ Work surface: `4` candidates, `4` sampled records.
   "candidate_count": 4,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "f1c3639f0e16fe2a5c627e3e3cb2c1816e84c4e1",
+  "fingerprint": "6a22be3d657c5c42dec03735a0741405af40726b",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 207 +++++++--------------\n hallucinate_app                                    |   0\n swissknife                                         |   0\n 3 files changed, 72 insertions(+), 135 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\tswissknife",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 60 +++++++++++++++++-----\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  6 +--\n swissknife                                         |  0\n 4 files changed, 50 insertions(+), 16 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tswissknife",
     "path_categories": {
-      "modified": 1,
+      "modified": 2,
       "other_dirty": 2
     },
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "swissknife"
     ],
     "status_short": [
       " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " m hallucinate_app",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       " m swissknife"
     ]
   },
@@ -136,6 +142,7 @@ Work surface: `4` candidates, `4` sampled records.
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "swissknife"
   ],
   "sample_worktrees": [
