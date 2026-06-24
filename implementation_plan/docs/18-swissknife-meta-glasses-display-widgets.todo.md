@@ -158,7 +158,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-013 Investigate implementation unknowns and expand the backlog
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: ops
