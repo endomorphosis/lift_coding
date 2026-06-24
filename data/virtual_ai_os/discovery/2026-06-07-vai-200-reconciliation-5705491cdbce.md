@@ -1,40 +1,32 @@
 # VAI-200 Reconciliation Guardrail
 
-Date: 2026-06-23
-Fingerprint: d4f97fd518eea827d8145a27ae555595b5445393
+Date: 2026-06-24
+Fingerprint: 8317d5509973bb296d8889c82321435ebc7f76b1
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 1
+Candidate count: 2
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md`
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `UU swissknife`
+- ` m swissknife`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, unmerged=1`
+- Path categories: `other_dirty=1`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md`
-  - `data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `swissknife`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md`
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-  - `U	swissknife`
   - `M	swissknife`
-- Staged name status:
-  - `U	swissknife`
+- Diff stat:
+  - `swissknife | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
-- `implementation/vai-380-attempt-1-1782258296` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-380-attempt-1-1782258296`
+- `implementation/vai-387-attempt-1-1782270557` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557`
+- `implementation/vai-388-attempt-1-1782270568` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-388-attempt-1-1782270568`
 
 ## Why This Blocks Progress
 
@@ -53,7 +45,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `2` candidates, `2` sampled records.
 
 ### Suggested Actions
 
@@ -95,33 +87,22 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 2,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "d4f97fd518eea827d8145a27ae555595b5445393",
+  "fingerprint": "8317d5509973bb296d8889c82321435ebc7f76b1",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nU\tswissknife\nM\tswissknife",
+    "diff_stat": "swissknife | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\tswissknife",
     "path_categories": {
-      "modified": 3,
-      "unmerged": 1
+      "other_dirty": 1
     },
-    "staged_name_status": "U\tswissknife",
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md",
-      "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "swissknife"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md",
-      " M data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-      "UU swissknife"
+      " m swissknife"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -131,17 +112,16 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/vai-380-attempt-1-1782258296"
+    "implementation/vai-387-attempt-1-1782270557",
+    "implementation/vai-388-attempt-1-1782270568"
   ],
-  "sample_count": 1,
+  "sample_count": 2,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-510-codebase-scan-493233b95f34.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-23-hao-511-codebase-scan-51d9b67233ec.md",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "swissknife"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-380-attempt-1-1782258296"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-388-attempt-1-1782270568"
   ],
   "success_signals": [
     "candidate_count_decreases",
@@ -186,11 +166,3 @@ refill updates after the clean reconciliation pass. Those generated changes were
 preserved in main commit `dd61450c` (`Record VAI reconciliation guardrail
 refresh`) rather than discarded, leaving the main checkout clean again for the
 VAI-200 worktree merge.
-
-## 2026-06-24 Resolution Note
-
-The stopped-run worktree directories for `VAI-380`, `MGW-010`, `MGW-411`,
-`HAO-510`, and `HAO-511` were inspected and pruned after the useful MGW-010
-Android DAT readiness changes were merged into the main checkout. The stale
-`UU swissknife` evidence above reflects the guardrail snapshot at discovery
-time; the current main checkout no longer has a registered worktree conflict.
