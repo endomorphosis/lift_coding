@@ -3285,7 +3285,7 @@ cadence remains parseable and resumable.
 
 ## VAI-472 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: quality
