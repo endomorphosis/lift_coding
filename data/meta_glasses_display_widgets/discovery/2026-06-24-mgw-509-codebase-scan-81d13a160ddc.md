@@ -1,4 +1,4 @@
-# HAO-654 Codebase Scan Finding
+# MGW-509 Codebase Scan Finding
 
 Date: 2026-06-24
 Fingerprint: 81d13a160ddc02a7d93da471e31003064c70b4bf
@@ -22,9 +22,8 @@ so the supervisor does not keep re-adding the same work.
 
 ## Resolution
 
-Replaced the invalid generated Python-to-TypeScript body in
+Replaced the malformed Python-to-TypeScript conversion in
 `swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts` with a focused Jest
-fixture for DEiT image-classification metadata, dependency reporting, image
-normalization, hardware selection, and deterministic mock classification. The
-line-1 FIXME annotation is removed because the file no longer contains the
-broken generated template literal placeholders.
+fixture covering DeiT model metadata, device selection, dependency failure
+reporting, image input validation, successful pipeline summaries, and a
+deterministic mock image-classification handler.
