@@ -34,6 +34,8 @@ The TypeScript validator in `swissknife/src/services/meta-glasses-io-transport.t
 
 - omit device/session/app binding identity fields;
 - omit control-plane route decisions, permission state, latency, backpressure, payload limits, content CIDs, receipts, policy decisions, or privacy redaction metadata;
+- use unknown raw transport, bridge provider, bridge route, control-plane route, permission, backpressure, app-layer, or privacy redaction states;
+- exceed the declared content CID count limit or declare a chunking threshold larger than the maximum payload size;
 - set `route.raw_transport_is_ipfs_libp2p_or_mcp` to anything other than `false`;
 - attach libp2p peer/session IDs when the bridge did not provide libp2p;
 - claim bridge-provided libp2p without peer and session IDs.
