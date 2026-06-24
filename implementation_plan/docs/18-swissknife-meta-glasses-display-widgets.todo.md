@@ -2075,3 +2075,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: swissknife/src/services/meta-glasses-io-profile.ts, swissknife/test/mcp-plus-plus/meta-glasses-io-profile.test.ts, swissknife/docs/meta-glasses-io-contract.md, data/meta_glasses_display_widgets/state/discovery
 - Validation: cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-profile.test.ts --config=config/jest/jest.config.cjs --runInBand
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-364. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-24-mgw-520-mgw-364-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-364 from strategy blocked_tasks.
+
+## MGW-521 Resolve validation retry-budget failure for MGW-414
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-364, MGW-413
+- Outputs: swissknife/src/services/meta-glasses-app-capability-registry.ts, swissknife/test/mcp-plus-plus/meta-glasses-app-capability-registry.test.ts, swissknife/docs/meta-glasses-app-capability-registry.md, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-app-capability-registry.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-414. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-24-mgw-521-mgw-414-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-414 from strategy blocked_tasks.
