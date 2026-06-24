@@ -369,7 +369,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-366 Model Bluetooth and Wi-Fi bridge envelopes for IPFS/libp2p/MCP++
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: transport
