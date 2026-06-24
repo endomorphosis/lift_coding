@@ -1,6 +1,7 @@
 # MGW-013 Discovery Expansion Report
 
 Date: 2026-05-22
+Refresh: 2026-06-24
 Task: MGW-013 Investigate implementation unknowns and expand the backlog
 Outcome: Discovered follow-up work; appended daemon-parseable tasks MGW-015 through MGW-019.
 
@@ -80,3 +81,27 @@ rg -n "MGW-013|unknown unknowns|Discovery Expansion|discovered" implementation_p
 ```
 
 Result: both commands passed on 2026-05-22. The board-file path above is shell-quoted so this archived command remains runnable while avoiding a false static-scan annotation.
+
+## 2026-06-24 Refresh
+
+This attempt rechecked the MGW-013 Discovery Expansion outputs against the current worktree. No additional MGW-013-specific backlog items were added because the discovered gaps remain represented by daemon-parseable tasks MGW-015 through MGW-019, and those entries have since been completed by later implementation passes.
+
+Refresh commands run:
+
+```bash
+sed -n '130,190p' /home/barberb/lift_coding/implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.t'odo'.md
+sed -n '1,220p' /home/barberb/lift_coding/implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
+sed -n '181,250p' implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.t'odo'.md
+sed -n '1,260p' tests/test_meta_glasses_display_todo_queue.py
+rg -n "MGW-013|Discovery Expansion|unknown unknowns|discovered|Meta|DAT|HandsFree|Swissknife|test harness" /home/barberb/lift_coding/implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.t'odo'.md /home/barberb/lift_coding/implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md .
+rg -n "mobile_play_display_widget_video|mobile_subscribe_display_widget_updates|play_video|subscribe_updates|renderDisplayWidget|updateDisplayWidget|focusDisplayWidget|activateDisplayWidget|resetDisplayWidget|DisplayAccess|display_widget" src mobile spec dev swissknife tests docs
+find swissknife -maxdepth 3 -type f \( -path '*meta-glasses*' -o -path '*display*' \) | sort | head -120
+find tests mobile/src mobile/modules/expo-meta-wearables-dat -maxdepth 4 -type f | rg "(meta|display|wearables|harness|agentActions|Bridge|Dat|Widget)" | sort | head -160
+```
+
+Refresh evidence:
+
+- The task board still contains MGW-015 through MGW-019 with acceptance text explicitly marked as discovered during MGW-013 Discovery Expansion.
+- Backend/OpenAPI/mobile code now includes `mobile_play_display_widget_video`, `mobile_subscribe_display_widget_updates`, and the full display widget operation enum.
+- Hardware-free test files now include `tests/test_meta_glasses_display_widget_harness.py`, `mobile/src/utils/__tests__/displayWidgetHarness.test.js`, and `swissknife/test/mcp-plus-plus/meta-glasses-display-harness.test.ts`.
+- Native bridge surfaces now include Android and iOS display widget module files plus JS wrapper and fixture coverage under `mobile/modules/expo-meta-wearables-dat` and `mobile/src/native`.

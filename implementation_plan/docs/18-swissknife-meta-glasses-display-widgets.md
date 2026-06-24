@@ -65,6 +65,8 @@ Current public Meta sources broaden MGW beyond display widgets, but split the I/
 
 MGW-363 refreshed this research on 2026-06-24 in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-363-meta-glasses-io-research.md` against the official Meta display developer announcement, Meta Wearables FAQ, Android and iOS DAT v0.7 display release discussions, public Android DAT 0.7.0 repo and DisplayAccess/CameraAccess samples, public iOS DAT 0.7.0 repo and DisplayAccess/CameraAccess samples, and the Meta Wearables Web Apps toolkit. Treat that file as the current hardware-assumption gate for MGW-364 through MGW-372.
 
+MGW-413 refreshed the expanded I/O source matrix on 2026-06-24 in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-413-expanded-io-source-refresh.md`. That record compares the Meta Wearables FAQ, display developer announcement, Android DAT and iOS DAT 0.7 changelogs/samples, Web Apps starter behavior, Mock Device Kit limits, release-channel/package constraints, and unsupported surfaces. Treat MGW-413 as the current source gate for MGW-414 through MGW-424: native DAT owns camera photo/video, native display lifecycle, and Bluetooth audio route modeling; display Web Apps own Meta Neural Band, captouch, motion/orientation, phone GPS, browser-tested D-pad input, and local storage. IPFS/libp2p/MCP++ compatibility remains an app-level bridge-envelope contract with CIDs, peer/session IDs, policy decisions, route decisions, backpressure, and receipts, not a claim about raw Bluetooth or Wi-Fi packet compatibility.
+
 Key MGW-363 constraints:
 
 - Native Device Access Toolkit phone apps and display Web Apps are separate capability paths. DAT owns native camera photo/video stream/capture and native display sessions. Web Apps own standalone HTML/CSS/JavaScript display apps plus documented launch inputs for Meta Neural Band, captouch/D-pad, motion/orientation, phone GPS, and local storage.
@@ -225,6 +227,8 @@ python3 scripts/meta_glasses_display_llm_router.py --task-id MGW-001
 The daemon-facing task IDs use the `MGW-*` prefix. The llm_router wrapper defaults to a dry-run preflight and only calls `llm_router.generate_text` when `--generate` is passed.
 
 The machine-readable board includes `MGW-013`, a final discovery-expansion task. Once the initial implementation tasks are complete, the supervisor should run that task to inspect the resulting codebase and append additional daemon-parseable `MGW-*` tasks for gaps discovered during implementation. If no new work is found, the task must record a dated no-new-unknowns report with the evidence and commands used.
+
+MGW-013 Discovery Expansion is recorded in `data/meta_glasses_display_widgets/discovery/2026-05-22-mgw-013-discovery-expansion.md`. That investigation found missed work in optional widget operations, native bridge metadata preservation, Android manifest-region rendering, iOS DisplayAccess parity, and hardware-free lifecycle coverage, then added daemon-parseable follow-up tasks MGW-015 through MGW-019. A 2026-06-24 refresh confirmed those discovered backlog entries remain present and parseable while later MGW work has already completed them.
 
 ### Phase 0: Source Alignment and Version Guardrails
 
@@ -486,6 +490,7 @@ Exit criteria:
 ### Phase 10: Expanded Meta Glasses I/O for Swissknife Apps
 
 - [ ] Research current Meta Wearables DAT, Web Apps, and display developer-preview documentation before implementing hardware assumptions. MGW-363 recorded the 2026-06-23 official-source baseline in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-363-meta-glasses-io-research.md`; refresh that record before changing native hardware assumptions.
+- [ ] Use the MGW-413 source matrix in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-413-expanded-io-source-refresh.md` as the current official-source gate for expanded I/O work: DAT camera/display/Bluetooth audio route assumptions stay separate from Web Apps Meta Neural Band/captouch/motion/GPS assumptions, and IPFS/libp2p/MCP++ behavior stays in app-level bridge envelopes.
 - [ ] Define a Swissknife Meta glasses I/O capability contract for camera, microphone, speakers/headphones, display, Meta Neural Band, captouch, motion/orientation, phone GPS, permission scopes, route state, fallback state, and lifecycle receipts.
 - [ ] Add hardware-free mocks for DAT camera photo/video capture, Bluetooth audio routes, display lifecycle, Neural Band/captouch events, motion/GPS events, permission denial, disconnect, unsupported capability, and degraded route behavior.
 - [ ] Define Bluetooth/Wi-Fi bridge envelopes that can carry IPFS CIDs, libp2p peer/session identifiers, MCP++ tool/event receipts, policy decisions, and backpressure/latency metadata without pretending the lower-level radio protocol is itself IPFS/libp2p.
