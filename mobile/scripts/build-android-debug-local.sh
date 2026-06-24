@@ -9,6 +9,13 @@ JDK_DIR="${LIFT_CODING_JDK_DIR:-${REPO_ROOT}/.tools/jdk17/current}"
 SDK_DIR="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-${REPO_ROOT}/.tools/android-sdk}}"
 EXPO_CLI="${MOBILE_DIR}/node_modules/expo/bin/cli"
 NODE_BIN="${LIFT_CODING_NODE:-${DEFAULT_NODE_BIN}}"
+HOST_ARCH="$(uname -m)"
+ARM64_NDK_VERSION="${LIFT_CODING_ANDROID_ARM64_NDK_VERSION:-29.0.14206865}"
+ARM64_CMAKE_DIR="${LIFT_CODING_ANDROID_ARM64_CMAKE_DIR:-${REPO_ROOT}/.tools/cmake-arm64}"
+ARM64_SDK_TOOLS_VERSION="${LIFT_CODING_ANDROID_ARM64_SDK_TOOLS_VERSION:-35.0.2}"
+ARM64_AAPT2="${LIFT_CODING_ANDROID_ARM64_AAPT2:-${REPO_ROOT}/.tools/android-arm64/sdk-tools/${ARM64_SDK_TOOLS_VERSION}/build-tools/aapt2}"
+ARM64_COMPAT_LIB="${LIFT_CODING_ANDROID_ARM64_COMPAT_LIB:-${REPO_ROOT}/.tools/android-arm64/compat-lib}"
+ARM64_ARCHITECTURES="${LIFT_CODING_ANDROID_ARM64_ARCHITECTURES:-arm64-v8a}"
 
 if [[ ! -x "${NODE_BIN}" ]]; then
   NODE_BIN="$(command -v node || true)"
@@ -49,18 +56,41 @@ cd "${MOBILE_DIR}"
 "${NODE_BIN}" "${EXPO_CLI}" prebuild --platform android --no-install
 
 mkdir -p "${MOBILE_DIR}/android"
-printf 'sdk.dir=%s\n' "${SDK_DIR}" > "${MOBILE_DIR}/android/local.properties"
-
-cd "${MOBILE_DIR}/android"
 GRADLE_ARGS=("assembleDebug")
-if [[ "$(uname -m)" =~ ^(aarch64|arm64)$ && "${LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK:-}" != "1" ]]; then
-  echo "Full APK assembly is not supported on this Linux ARM host with Google's x86-64 Android SDK/NDK CMake tools." >&2
-  echo "Run npm run android:validate:local here, or set LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK=1 to attempt the unsupported full APK path." >&2
-  exit 2
+LOCAL_PROPERTIES=("sdk.dir=${SDK_DIR}")
+
+if [[ "${HOST_ARCH}" =~ ^(aarch64|arm64)$ ]]; then
+  if [[ -d "${SDK_DIR}/ndk/${ARM64_NDK_VERSION}" &&
+        -x "${ARM64_CMAKE_DIR}/bin/cmake" &&
+        -x "${ARM64_CMAKE_DIR}/bin/ninja" &&
+        -x "${ARM64_AAPT2}" &&
+        -e "${ARM64_COMPAT_LIB}/libxml2.so.16" ]]; then
+    LOCAL_PROPERTIES+=("cmake.dir=${ARM64_CMAKE_DIR}")
+    export LD_LIBRARY_PATH="${ARM64_COMPAT_LIB}:${LD_LIBRARY_PATH:-}"
+    GRADLE_ARGS+=(
+      "-PndkVersion=${ARM64_NDK_VERSION}"
+      "-Pandroid.aapt2FromMavenOverride=${ARM64_AAPT2}"
+    )
+    if [[ -n "${ARM64_ARCHITECTURES}" ]]; then
+      GRADLE_ARGS+=("-PreactNativeArchitectures=${ARM64_ARCHITECTURES}")
+    fi
+    echo "Using unofficial Linux ARM64 Android APK toolchain (${ARM64_NDK_VERSION}, ${ARM64_SDK_TOOLS_VERSION})."
+  elif [[ "${LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK:-}" != "1" ]]; then
+    echo "Full APK assembly on Linux ARM requires the optional unofficial ARM64 Android toolchain." >&2
+    echo "Run npm run android:bootstrap:arm64:local, then retry npm run android:debug:local." >&2
+    echo "For the official Google toolchain validation gate, run npm run android:validate:local." >&2
+    exit 2
+  fi
 fi
 
+{
+  for property in "${LOCAL_PROPERTIES[@]}"; do
+    printf '%s\n' "${property}"
+  done
+} > "${MOBILE_DIR}/android/local.properties"
+
 if [[ "${LIFT_CODING_ANDROID_NEW_ARCH:-auto}" == "auto" ]]; then
-  case "$(uname -m)" in
+  case "${HOST_ARCH}" in
     aarch64|arm64)
       GRADLE_ARGS+=("-PnewArchEnabled=false")
       ;;
@@ -69,6 +99,7 @@ elif [[ -n "${LIFT_CODING_ANDROID_NEW_ARCH}" ]]; then
   GRADLE_ARGS+=("-PnewArchEnabled=${LIFT_CODING_ANDROID_NEW_ARCH}")
 fi
 
+cd "${MOBILE_DIR}/android"
 ./gradlew "${GRADLE_ARGS[@]}"
 
 echo

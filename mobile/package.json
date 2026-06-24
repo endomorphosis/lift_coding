@@ -6,6 +6,7 @@
     "start": "expo start",
     "android": "expo run:android",
     "android:bootstrap:local": "./scripts/bootstrap-android-local-toolchain.sh",
+    "android:bootstrap:arm64:local": "./scripts/bootstrap-android-arm64-unofficial-toolchain.sh",
     "android:validate:local": "./scripts/validate-android-gradle-local.sh",
     "android:debug:local": "./scripts/build-android-debug-local.sh",
     "android:install:local": "./scripts/install-android-debug-apk.sh",

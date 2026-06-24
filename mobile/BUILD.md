@@ -61,18 +61,25 @@ The host-compatible validation path does this:
 - rewrites `android/local.properties` with that SDK path after prebuild creates `android/`
 - compiles the first-party DAT and glasses-audio Expo Android modules with Gradle
 
-Full APK output on supported x86-64/EAS hosts:
+Full APK output:
 
 ```bash
 npm run android:debug:local
 ```
 
-For this ARM host, `npm run android:validate:local` is the repeatable Gradle
-gate: it prebuilds `mobile/android`, writes `local.properties`, and compiles the
-first-party DAT and glasses-audio Expo modules without entering the unsupported
-NDK/CMake APK assembly path.
-Set `LIFT_CODING_ANDROID_ALLOW_ARM_FULL_APK=1` only if you intentionally want to
-attempt the unsupported full APK path on Linux ARM.
+On x86-64/EAS hosts this uses Google's official Android SDK/NDK host tools. On
+Linux ARM64 hosts, bootstrap the explicit opt-in ARM64 path first:
+
+```bash
+npm run android:bootstrap:arm64:local
+npm run android:debug:local
+```
+
+The ARM64 path uses the official SDK packages for platform/API metadata, plus an
+unofficial Linux ARM64 NDK, ARM64 AAPT2 override, and repo-local CMake/Ninja
+shim. The build script auto-detects those files and builds the debug APK for
+`arm64-v8a`. Without that optional bootstrap, `npm run android:validate:local`
+remains the repeatable official-toolchain Gradle gate on ARM hosts.
 
 APK output:
 
@@ -176,6 +183,9 @@ If you want the known-good host build path used in verification, use:
 ```bash
 npm run android:debug:local
 ```
+
+On Linux ARM64, run `npm run android:bootstrap:arm64:local` once before the
+debug build.
 
 ### Option 2: EAS Build (Cloud Build)
 
