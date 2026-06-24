@@ -1,10 +1,10 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: 6fdb20cd059333001827c493247a31b8c3525a59
+Fingerprint: da7a2006fdc15e7b5585315ec1daaec109cecda5
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 23
+Candidate count: 31
 Priority: P1
 Track: ops
 
@@ -109,7 +109,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `23` candidates, `20` sampled records.
+Work surface: `31` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -157,14 +157,14 @@ Work surface: `23` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 23,
+  "candidate_count": 31,
   "conflict_path_counts": {
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 11,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 11,
-    "swissknife": 17
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 16,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 18,
+    "swissknife": 23
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "6fdb20cd059333001827c493247a31b8c3525a59",
+  "fingerprint": "da7a2006fdc15e7b5585315ec1daaec109cecda5",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -231,8 +231,8 @@ Work surface: `23` candidates, `20` sampled records.
   ],
   "top_conflict_paths": [
     "swissknife",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md"
   ]
 }
 ```
