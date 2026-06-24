@@ -3007,3 +3007,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-446-codebase-scan-103085e1d7ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-447 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-447-codebase-scan-5bdd54dddcc6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-448 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-448-codebase-scan-593be57237f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-449 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-449-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
