@@ -25,6 +25,11 @@ Track: ops
   - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
   - `M	swissknife`
+- Diff stat:
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 207 +++++++--------------`
+  - ` hallucinate_app                                    |   0`
+  - ` swissknife                                         |   0`
+  - ` 3 files changed, 72 insertions(+), 135 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -98,12 +103,7 @@ Work surface: `4` candidates, `4` sampled records.
   "fingerprint": "f1c3639f0e16fe2a5c627e3e3cb2c1816e84c4e1",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-390-codebase-scan-d5e80576db69.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-391-codebase-scan-defbcedebe03.md",
-      "data/virtual_ai_os/discovery/2026-06-24-vai-392-codebase-scan-ee57d2a45b3b.md"
-    ],
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 207 +++++++--------------\n hallucinate_app                                    |   0\n swissknife                                         |   0\n 3 files changed, 72 insertions(+), 135 deletions(-)",
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\tswissknife",
     "path_categories": {
       "modified": 1,

@@ -2380,3 +2380,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-389-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-390 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-390-codebase-scan-dc52194613c1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-391 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-391-codebase-scan-4f33a0ad65fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-392 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-392-codebase-scan-66825794ba9f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
