@@ -20,6 +20,19 @@ VAI_019_DISCOVERY_PATH = (
     / "discovery"
     / "2026-06-23-vai-019-cross-submodule-integration-tests.md"
 )
+VAI_501_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-24-vai-501-swissknife-virtual-desktop-launch-readiness-matrix.md"
+)
+INTEGRATION_PLAN_PATH = (
+    REPO_ROOT
+    / "implementation_plan"
+    / "docs"
+    / "19-virtual-ai-os-submodule-integration.md"
+)
 
 
 # Assemble the task-board filename from neutral fragments so static follow-up
@@ -59,6 +72,14 @@ def _load_tasks():
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
 
     return parse_task_file(TASK_BOARD_PATH, "## VAI-")
+
+
+def _json_block_after(source: str, marker: str) -> dict:
+    start = source.index(marker)
+    fence_start = source.index("```json", start)
+    payload_start = source.index("\n", fence_start) + 1
+    payload_end = source.index("\n```", payload_start)
+    return json.loads(source[payload_start:payload_end])
 
 
 def test_daemon_treats_merge_lock_deferrals_as_retryable_waits():
@@ -543,6 +564,70 @@ def test_vai_019_cross_submodule_integration_evidence_is_wired():
     ):
         assert required_text in harness_source
         assert required_text in discovery_source
+
+
+def test_vai_501_swissknife_virtual_desktop_launch_matrix_is_daemon_readable():
+    discovery_source = VAI_501_DISCOVERY_PATH.read_text(encoding="utf-8")
+    plan_source = INTEGRATION_PLAN_PATH.read_text(encoding="utf-8")
+    matrix = _json_block_after(
+        discovery_source,
+        "## SwissknifeVirtualDesktopLaunchReadinessMatrix",
+    )
+
+    assert matrix["schema"] == "swissknife_virtual_desktop_launch_readiness_matrix_v1"
+    assert matrix["task_id"] == "VAI-501"
+    assert matrix["priority"] == "P0"
+    assert matrix["track"] == "integration"
+    assert matrix["gate_state"] == "open_until_all_required_validations_pass"
+    assert matrix["lineage_id"] == "VAIOS-G697:launch-readiness:phone-desktop-glasses"
+    assert matrix["depends_on"] == ["VAI-003", "VAI-004", "VAI-006", "VAI-007", "VAI-010", "VAI-019"]
+    assert (
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets "
+        "pytest tests/test_virtual_ai_os_todo_queue.py"
+    ) in matrix["required_validation_commands"]
+    assert any("test:e2e:meta-glasses" in command for command in matrix["required_validation_commands"])
+    assert any("multimodal-control-surface.spec.ts" in command for command in matrix["required_validation_commands"])
+    assert any("VAI-501|Swissknife virtual desktop|desktop peer offload" in command for command in matrix["required_validation_commands"])
+
+    expected_surfaces = [
+        "swissknife_desktop_mobile_ui",
+        "hallucinate_app_mediation",
+        "ipfs_accelerate_mcp_server",
+        "ipfs_datasets_mcp_server",
+        "ipfs_kit_mcp_server",
+        "desktop_peer_offload",
+        "meta_glasses_terminal_io",
+        "ipfs_libp2p_transport",
+        "mcp_plus_plus_compatibility",
+        "playwright_evidence_lineage",
+    ]
+    rows = matrix["matrix"]
+    assert [row["priority_order"] for row in rows] == list(range(1, len(rows) + 1))
+    assert [row["surface"] for row in rows] == expected_surfaces
+    assert set(matrix["owners"]) == set(expected_surfaces)
+
+    for row in rows:
+        assert row["owner"] == matrix["owners"][row["surface"]]
+        assert row["readiness_requirement"]
+        assert row["validation_commands"]
+        assert row["evidence_refs"]
+        assert row["blocks_launch"] is True
+
+    for required_text in (
+        "VAI-501",
+        "Swissknife virtual desktop",
+        "desktop peer offload",
+        "Hallucinate App mediation",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "Meta glasses terminal IO",
+        "IPFS/libp2p transport",
+        "MCP++ compatibility",
+        "Playwright evidence",
+    ):
+        assert required_text in discovery_source
+        assert required_text in plan_source
 
 
 def test_virtual_ai_os_mcplusplus_source_task_is_explicit():

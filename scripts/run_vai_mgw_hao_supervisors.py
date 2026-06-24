@@ -50,18 +50,18 @@ DETACHED_WORKTREE_POLICY = (
 )
 
 MERGE_CLEANUP_DEFAULTS = {
-    "worktree_reconciliation_max_merges": os.environ.get("WORKTREE_RECONCILIATION_MAX_MERGES", "3"),
-    "merge_reconciliation_max_merges": os.environ.get("MERGE_RECONCILIATION_MAX_MERGES", "3"),
+    "worktree_reconciliation_max_merges": "3",
+    "merge_reconciliation_max_merges": "3",
     "daemon_merged_worktree_cleanup_max": "50",
 }
 
 REFILL_DEFAULTS = {
-    "objective_scan_min_open_tasks": os.environ.get("OBJECTIVE_SCAN_MIN_OPEN_TASKS", "20"),
-    "objective_scan_max_findings": os.environ.get("OBJECTIVE_SCAN_MAX_FINDINGS", "6"),
-    "objective_surplus_findings_per_goal": os.environ.get("OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL", "2"),
-    "codebase_scan_min_open_tasks": os.environ.get("CODEBASE_SCAN_MIN_OPEN_TASKS", "8"),
-    "codebase_scan_max_findings": os.environ.get("CODEBASE_SCAN_MAX_FINDINGS", "3"),
-    "objective_max_interoperability_goals": os.environ.get("OBJECTIVE_MAX_INTEROPERABILITY_GOALS", "12"),
+    "objective_scan_min_open_tasks": "20",
+    "objective_scan_max_findings": "6",
+    "objective_surplus_findings_per_goal": "2",
+    "codebase_scan_min_open_tasks": "8",
+    "codebase_scan_max_findings": "3",
+    "objective_max_interoperability_goals": "12",
 }
 
 VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS = (

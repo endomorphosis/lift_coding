@@ -279,6 +279,41 @@ Discovery result:
 - the 2026-06-23 validation rerun passed the daemon queue test and discovery
   grep recorded in the VAI-014 closeout artifact
 
+## VAI-501 Swissknife Virtual Desktop Launch Readiness Matrix (2026-06-24)
+
+VAI-501 adds the daemon-readable `swissknife_virtual_desktop_launch_readiness_matrix_v1`
+gate for the phone-hosted Swissknife virtual desktop launch slice. The matrix
+keeps the launch gate P0 and open until all product-critical rows have an owner,
+priority, validation command, evidence reference, and `blocks_launch=true`.
+
+Coverage tied into one prioritized launch gate:
+
+| Priority | Surface | Owner | Required proof |
+| --- | --- | --- | --- |
+| 1 | Swissknife desktop/mobile UI | Swissknife UI/ORB owner | Swissknife virtual desktop opens the operator apps and renders through the Meta glasses ORB template. |
+| 2 | Hallucinate App mediation | Hallucinate App control-plane owner | Phone-originated interaction envelopes record policy and mediation receipts before dispatch. |
+| 3 | `ipfs_accelerate_py` MCP server | placement/MCP owner | Placement and acceleration capabilities support desktop peer offload and phone-local recovery. |
+| 4 | `ipfs_datasets_py` MCP server | routing/MCP owner | Semantic routing and backlog orchestration remain addressable through the shared capability envelope. |
+| 5 | `ipfs_kit_py` MCP server | provenance/MCP owner | IPFS content addressing, artifact pinning, and receipt provenance remain available. |
+| 6 | desktop peer offload | runtime placement owner | Desktop-peer execution and phone-local fallback preserve command/session lineage. |
+| 7 | Meta glasses terminal IO | Meta glasses terminal owner | Status output, confirmation, cancel, and display-widget receipts are recorded for the launch session. |
+| 8 | IPFS/libp2p transport | transport owner | Content-addressed receipts, widget descriptors, and peer metadata preserve provenance across transport. |
+| 9 | MCP++ compatibility | MCP++ compatibility owner | Runtime MCP++ remains distributed across Swissknife, `ipfs_accelerate_py`, and `ipfs_datasets_py` with `Mcp-Plus-Plus` as the spec/docs pin. |
+| 10 | Playwright evidence lineage | launch validation owner | Swissknife and Hallucinate App Playwright evidence shares the VAIOS-G697 readiness lineage. |
+
+Launch validation commands:
+
+```bash
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q
+npm --prefix swissknife run test:e2e:meta-glasses
+npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+rg -n "VAI-501|Swissknife virtual desktop|desktop peer offload|MCP\\+\\+|Playwright" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+```
+
+Evidence:
+[data/virtual_ai_os/discovery/2026-06-24-vai-501-swissknife-virtual-desktop-launch-readiness-matrix.md](../../data/virtual_ai_os/discovery/2026-06-24-vai-501-swissknife-virtual-desktop-launch-readiness-matrix.md)
+
 ## Discovery closeout (2026-05-22)
 
 The final backlog discovery pass reviewed the control-plane, UI-plane, device-plane, and daemon-integration surfaces added during `VAI-003` through `VAI-013`.
