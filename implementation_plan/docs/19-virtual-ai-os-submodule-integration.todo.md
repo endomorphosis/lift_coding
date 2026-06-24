@@ -2328,7 +2328,7 @@ cadence remains parseable and resumable.
 
 ## VAI-385 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: ops
