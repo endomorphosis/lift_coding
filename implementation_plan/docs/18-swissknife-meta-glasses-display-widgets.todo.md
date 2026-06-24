@@ -923,7 +923,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-416 Add privacy and policy threat model for expanded Meta glasses I/O
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: security
