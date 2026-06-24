@@ -2056,7 +2056,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-519 Add Meta glasses control-plane mocks and Playwright-ready fixtures
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: validation
