@@ -1,10 +1,10 @@
 # VAI-203 Reconciliation Guardrail
 
-Date: 2026-06-23
-Fingerprint: dbf4c7aa1516738acdc4d0255ac64f6933c20997
+Date: 2026-06-24
+Fingerprint: 34a6322a91471fc7f6fc6fcc591d5186037c727a
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 1
+Candidate count: 26
 Priority: P1
 Track: ops
 
@@ -18,9 +18,78 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032`
+- `implementation/vai-387-attempt-1-1782270557` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557`
   - Conflict paths:
-    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.md`
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `swissknife`
+- `implementation/vai-388-attempt-1-1782270568` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-388-attempt-1-1782270568`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `swissknife`
+- `implementation/vai-390-attempt-1-1782271001` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-390-attempt-1-1782271001`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `swissknife`
+- `implementation/vai-391-attempt-1-1782271083` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-391-attempt-1-1782271083`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `swissknife`
+- `implementation/vai-392-attempt-1-1782271540` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-392-attempt-1-1782271540`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `swissknife`
+- `implementation/vai-396-attempt-1-1782272127` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-396-attempt-1-1782272127`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-399-attempt-1-1782272601` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-399-attempt-1-1782272601`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `swissknife`
+- `implementation/vai-400-attempt-1-1782272626` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-400-attempt-1-1782272626`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-401-attempt-1-1782273617` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-401-attempt-1-1782273617`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `swissknife`
+- `implementation/vai-403-attempt-1-1782273965` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-403-attempt-1-1782273965`
+  - Conflict paths:
+    - `swissknife`
+- `implementation/vai-406-attempt-1-1782274280` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-406-attempt-1-1782274280`
+  - Conflict paths:
+    - `swissknife`
+- `implementation/vai-408-attempt-1-1782274810` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-408-attempt-1-1782274810`
+  - Conflict paths:
+    - `swissknife`
+- `implementation/vai-409-attempt-1-1782274706` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-409-attempt-1-1782274706`
+  - Conflict paths:
+    - `swissknife`
+- `implementation/vai-411-attempt-1-1782275130` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-411-attempt-1-1782275130`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `swissknife`
+- `implementation/vai-412-attempt-1-1782275200` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-412-attempt-1-1782275200`
+  - Conflict paths:
+    - `swissknife`
+- `implementation/vai-414-attempt-1-1782275674` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-414-attempt-1-1782275674`
+  - Conflict paths:
+    - `swissknife`
+- `implementation/vai-415-attempt-1-1782275738` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-415-attempt-1-1782275738`
+  - Conflict paths:
+    - `swissknife`
+- `rescue/worktree/implementation-vai-418-attempt-1-1782276227-ec35d5b8594a` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-418-attempt-1-1782276227`
+  - Conflict paths:
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+    - `swissknife`
+- `implementation/vai-421-attempt-1-1782276524` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-421-attempt-1-1782276524`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-426-attempt-1-1782277180` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-426-attempt-1-1782277180`
+  - Conflict paths:
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 
 ## Why This Blocks Progress
 
@@ -39,7 +108,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `26` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -87,12 +156,14 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 26,
   "conflict_path_counts": {
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md": 1
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 13,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 8,
+    "swissknife": 21
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "dbf4c7aa1516738acdc4d0255ac64f6933c20997",
+  "fingerprint": "34a6322a91471fc7f6fc6fcc591d5186037c727a",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -102,14 +173,54 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/implementation-vai-015-attempt-1-1782230032-a0996c691adc"
+    "implementation/vai-387-attempt-1-1782270557",
+    "implementation/vai-388-attempt-1-1782270568",
+    "implementation/vai-390-attempt-1-1782271001",
+    "implementation/vai-391-attempt-1-1782271083",
+    "implementation/vai-392-attempt-1-1782271540",
+    "implementation/vai-396-attempt-1-1782272127",
+    "implementation/vai-399-attempt-1-1782272601",
+    "implementation/vai-400-attempt-1-1782272626",
+    "implementation/vai-401-attempt-1-1782273617",
+    "implementation/vai-403-attempt-1-1782273965",
+    "implementation/vai-406-attempt-1-1782274280",
+    "implementation/vai-408-attempt-1-1782274810",
+    "implementation/vai-409-attempt-1-1782274706",
+    "implementation/vai-411-attempt-1-1782275130",
+    "implementation/vai-412-attempt-1-1782275200",
+    "implementation/vai-414-attempt-1-1782275674",
+    "implementation/vai-415-attempt-1-1782275738",
+    "rescue/worktree/implementation-vai-418-attempt-1-1782276227-ec35d5b8594a",
+    "implementation/vai-421-attempt-1-1782276524",
+    "implementation/vai-426-attempt-1-1782277180"
   ],
-  "sample_count": 1,
+  "sample_count": 20,
   "sample_status_paths": [
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md"
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "swissknife",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-015-attempt-1-1782230032"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-387-attempt-1-1782270557",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-388-attempt-1-1782270568",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-390-attempt-1-1782271001",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-391-attempt-1-1782271083",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-392-attempt-1-1782271540",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-396-attempt-1-1782272127",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-399-attempt-1-1782272601",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-400-attempt-1-1782272626",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-401-attempt-1-1782273617",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-403-attempt-1-1782273965",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-406-attempt-1-1782274280",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-408-attempt-1-1782274810",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-409-attempt-1-1782274706",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-411-attempt-1-1782275130",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-412-attempt-1-1782275200",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-414-attempt-1-1782275674",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-415-attempt-1-1782275738",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-418-attempt-1-1782276227",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-421-attempt-1-1782276524",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-426-attempt-1-1782277180"
   ],
   "success_signals": [
     "preflight_blocked_count_decreases",
@@ -118,7 +229,9 @@ Work surface: `1` candidates, `1` sampled records.
     "main_checkout_dirty_becomes_false"
   ],
   "top_conflict_paths": [
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.md"
+    "swissknife",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
   ]
 }
 ```
