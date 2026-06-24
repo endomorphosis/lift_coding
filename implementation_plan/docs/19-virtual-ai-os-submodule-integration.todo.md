@@ -3605,3 +3605,25 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-500-codebase-scan-5481b197a30a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-501 Build the Swissknife virtual-desktop launch readiness matrix
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: integration
+- Depends on: VAI-003, VAI-004, VAI-006, VAI-007, VAI-010, VAI-019
+- Outputs: implementation_plan/docs/19-virtual-ai-os-submodule-integration.md, data/virtual_ai_os/discovery, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py; rg -n "VAI-501|Swissknife virtual desktop|desktop peer offload|MCP\\+\\+|Playwright" implementation_plan/docs/19-virtual-ai-os-submodule-integration.md data/virtual_ai_os/discovery
+- Acceptance: Produce a daemon-readable launch readiness matrix that ties Swissknife desktop/mobile UI, Hallucinate App mediation, ipfs_accelerate_py/ipfs_datasets_py/ipfs_kit_py MCP servers, desktop peer offload, Meta glasses terminal IO, IPFS/libp2p transport, MCP++ compatibility, and Playwright evidence into one prioritized launch gate with owners and concrete validation commands.
+
+## VAI-502 Add the cross-device virtual desktop Playwright replay harness
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: validation
+- Depends on: VAI-501
+- Outputs: tests, swissknife, hallucinate_app, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py; rg -n "VAI-502|Playwright|phone-hosted|desktop peer|Meta glasses|control plane" tests swissknife hallucinate_app data/virtual_ai_os/discovery
+- Acceptance: Add or specify a hardware-free Playwright replay path that launches the Swissknife virtual desktop, routes a control-plane command through Hallucinate App mediation, simulates phone-hosted execution with desktop peer offload fallback, and records Meta glasses status output plus proof artifacts suitable for the supervisor launch receipt.
