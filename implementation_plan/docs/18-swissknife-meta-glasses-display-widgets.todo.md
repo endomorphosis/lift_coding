@@ -336,7 +336,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-363 Research current Meta glasses I/O capability surface
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: research
