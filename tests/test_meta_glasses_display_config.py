@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import sys
+import types
 from types import SimpleNamespace
 
 from handsfree.agent_providers import _display_widget_action_items_from_context
@@ -164,3 +166,55 @@ def test_display_widget_metrics_snapshot_tracks_rollout_metrics() -> None:
     assert snapshot["bridge_error_total"] == 1
     assert snapshot["bridge_error_counts"] == {"bridge_timeout": 1}
     assert snapshot["render_latency_ms"] == {"p50": 50, "p95": 120, "count": 3}
+
+
+def test_mobile_orb_receipt_metrics_record_render_success_and_bridge_errors() -> None:
+    if "handsfree.secrets" not in sys.modules:
+        secrets_module = types.ModuleType("handsfree.secrets")
+        secrets_module.get_default_secret_manager = lambda: None
+        secrets_module.get_secret_manager = lambda *args, **kwargs: None
+        secrets_module.reset_secret_manager = lambda: None
+        sys.modules["handsfree.secrets"] = secrets_module
+
+    from handsfree.api import _record_mobile_orb_display_widget_metrics
+
+    metrics = get_metrics_collector()
+    metrics.reset()
+
+    _record_mobile_orb_display_widget_metrics(
+        {
+            "ok": True,
+            "display_widget_action": {
+                "type": "mobile_render_display_widget",
+                "operation": "render_widget",
+                "fallback": {"render_path": "native-dat-ios"},
+                "render_latency_ms": "33",
+            },
+        }
+    )
+    _record_mobile_orb_display_widget_metrics(
+        {
+            "ok": False,
+            "display_widget_action": {
+                "type": "mobile_render_display_widget",
+                "operation": "render_widget",
+            },
+            "service_result": {
+                "transport_result": {
+                    "status": "error",
+                    "error": "bridge_timeout",
+                    "latency_ms": 125,
+                },
+            },
+        }
+    )
+
+    snapshot = metrics.get_snapshot()["display_widget_metrics"]
+
+    assert snapshot["render_success_total"] == 1
+    assert snapshot["render_success_counts"] == {"native-dat-ios": 1}
+    assert snapshot["bridge_error_total"] == 1
+    assert snapshot["bridge_error_counts"] == {"bridge_timeout": 1}
+    assert snapshot["render_latency_ms"] == {"p50": 125, "p95": 125, "count": 2}
+
+    metrics.reset()

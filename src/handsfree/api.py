@@ -429,6 +429,62 @@ def _mobile_orb_fallback_reason(fallback: dict[str, Any]) -> str | None:
     return None
 
 
+def _mobile_orb_number(value: Any) -> float | None:
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int | float):
+        return float(value) if value >= 0 else None
+    if isinstance(value, str):
+        try:
+            parsed = float(value.strip())
+        except ValueError:
+            return None
+        return parsed if parsed >= 0 else None
+    return None
+
+
+def _mobile_orb_display_widget_latency_ms(*records: dict[str, Any]) -> float | None:
+    for record in records:
+        for key in ("render_latency_ms", "latency_ms", "duration_ms"):
+            latency_ms = _mobile_orb_number(record.get(key))
+            if latency_ms is not None:
+                return latency_ms
+    return None
+
+
+def _record_mobile_orb_display_widget_metrics(response_payload: dict[str, Any]) -> None:
+    display_widget_action = _mobile_orb_dict(response_payload.get("display_widget_action"))
+    if display_widget_action.get("type") != "mobile_render_display_widget":
+        return
+
+    service_result = _mobile_orb_dict(response_payload.get("service_result"))
+    transport_result = _mobile_orb_dict(service_result.get("transport_result"))
+    latency_ms = _mobile_orb_display_widget_latency_ms(
+        display_widget_action,
+        service_result,
+        transport_result,
+    )
+    from handsfree.metrics import get_metrics_collector
+
+    metrics = get_metrics_collector()
+    if response_payload.get("ok") is False or transport_result.get("status") == "error":
+        error_code = _mobile_orb_fallback_reason(transport_result) or "bridge_error"
+        metrics.record_display_widget_bridge_error(
+            error_code=error_code,
+            latency_ms=latency_ms,
+        )
+        return
+
+    if response_payload.get("ok") is True:
+        render_path = _mobile_orb_fallback_reason(
+            _mobile_orb_dict(display_widget_action.get("fallback"))
+        )
+        metrics.record_display_widget_render_success(
+            render_path=render_path or display_widget_action.get("operation") or "unknown",
+            latency_ms=latency_ms,
+        )
+
+
 def _mobile_orb_collect_fallback_details(record: dict[str, Any]) -> list[dict[str, Any]]:
     details: list[dict[str, Any]] = []
     candidates = [
@@ -573,6 +629,7 @@ def _record_mobile_orb_receipt(
         return
     response_payload = response.model_dump() if hasattr(response, "model_dump") else response
     response_payload = response_payload if isinstance(response_payload, dict) else {}
+    _record_mobile_orb_display_widget_metrics(response_payload)
     mobile_orb_receipts[receipt_cid] = {
         "operation": operation,
         "receipt_cid": receipt_cid,
