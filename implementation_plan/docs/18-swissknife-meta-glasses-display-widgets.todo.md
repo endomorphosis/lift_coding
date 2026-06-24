@@ -125,7 +125,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-010 Add Android native DAT display renderer path
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: mobile
