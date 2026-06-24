@@ -46,6 +46,9 @@ META_GLASSES_TERMINAL_RECEIPT_PATH = (
 PHONE_INGRESS_REHEARSAL_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-437-phone-ingress-rehearsal.md"
 )
+MCP_LAUNCH_CONTRACT_INTEGRATION_PATH = (
+    DISCOVERY_ROOT / "2026-06-24-hao-674-mcp-launch-contract-integration.md"
+)
 
 
 def _load_script_module(name: str):
@@ -276,6 +279,104 @@ def test_hao_mcp_swissknife_launch_children_cover_python_servers_and_playwright(
 
     assert "hao-swissknife-mcp-integration.spec.ts" in " ".join(tasks["HAO-446"].validation)
     assert "swissknife run test:e2e:mcp" in " ".join(tasks["HAO-446"].validation)
+
+
+def test_hao_674_integrates_mcp_launch_contracts_with_swissknife_control_surface():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    task = tasks["HAO-674"]
+    idl_source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
+    daemon_doc = (REPO_ROOT / "hallucinate_app" / "docs" / "MCP_DAEMON_ARCHITECTURE.md").read_text(
+        encoding="utf-8"
+    )
+    registry_source = (
+        REPO_ROOT / "swissknife" / "src" / "services" / "swissknife-mcp-capability-registry.ts"
+    ).read_text(encoding="utf-8")
+    discovery_source = MCP_LAUNCH_CONTRACT_INTEGRATION_PATH.read_text(encoding="utf-8")
+    fixture = _json_block_after(discovery_source, "## Integration Fixture")
+    normalized_idl_source = " ".join(idl_source.split())
+    normalized_daemon_doc = " ".join(daemon_doc.split())
+
+    assert task.status == PENDING_TASK_STATUS
+    assert task.priority == "P0"
+    assert task.track == "integration"
+    assert task.depends_on == ["HAO-014", "HAO-020", "HAO-021"]
+
+    assert fixture["task_id"] == "HAO-674"
+    assert fixture["artifact_id"] == "mcp_launch_contract_integration"
+    assert fixture["supervision_owner"] == "hallucinate_app.mcp_daemon_manager"
+    assert fixture["before_invoke_hook"].endswith("ControlSurfaceInvocationGate.beforeInvoke")
+    assert fixture["control_surface_route"] == [
+        "Swissknife command intent",
+        "MCP++ capability descriptor",
+        "Hallucinate App interaction_envelope",
+        "control_surface policy_decision",
+        "mediation_receipt",
+        "supervised MCP server transport",
+    ]
+
+    expected_servers = {
+        "ipfs_kit_py": {
+            "daemon_id": "ipfs-kit",
+            "startup_order": 10,
+            "sample_intent": "storage.pin_content",
+            "sample_tool": "ipfs_pin_add",
+        },
+        "ipfs_datasets_py": {
+            "daemon_id": "ipfs-datasets",
+            "startup_order": 20,
+            "sample_intent": "dataset.browse",
+            "sample_tool": "tools_dispatch",
+        },
+        "ipfs_accelerate_py": {
+            "daemon_id": "ipfs-accelerate",
+            "startup_order": 30,
+            "sample_intent": "compute.run_inference",
+            "sample_tool": "tools_dispatch",
+        },
+    }
+    servers = {server["server_package"]: server for server in fixture["servers"]}
+    assert set(servers) == set(expected_servers)
+
+    for package, expected in expected_servers.items():
+        server = servers[package]
+        assert server["daemon_id"] == expected["daemon_id"]
+        assert server["startup_order"] == expected["startup_order"]
+        assert server["sample_intent"] == expected["sample_intent"]
+        assert server["sample_tool"] == expected["sample_tool"]
+        assert package in idl_source
+        assert package in daemon_doc
+        assert package in registry_source
+        assert expected["daemon_id"] in daemon_doc
+        assert expected["daemon_id"] in registry_source
+
+    for required_term in (
+        "### HAO-674 supervised MCP server launch contract",
+        "Swissknife command intent",
+        "MCP++ capability descriptor",
+        "Hallucinate App interaction_envelope",
+        "control_surface policy_decision",
+        "mediation_receipt",
+        "supervised MCP server transport",
+    ):
+        assert required_term in normalized_idl_source
+        assert required_term in normalized_daemon_doc or required_term.startswith("### HAO-674")
+
+    for registry_term in (
+        "SwissknifeMCPLaunchContract",
+        "launch_owner: 'hallucinate_app.mcp_daemon_manager'",
+        "mcp_plus_plus_advertisement",
+        "control_surface_route",
+        "buildSwissknifeMCPMediatedInvocationPlan",
+        "CONTROL_SURFACE_DAEMON_MEDIATION",
+        "MCP++",
+        "HAO-674",
+    ):
+        assert registry_term in registry_source
+
+    assert "mediation_receipt_id" in fixture["receipt_requirements"]
+    assert "Every service invocation routes through the multimodal control surface" in " ".join(
+        fixture["assertions"]
+    )
 
 
 def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
