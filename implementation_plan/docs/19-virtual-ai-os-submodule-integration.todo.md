@@ -2460,7 +2460,7 @@ cadence remains parseable and resumable.
 
 ## VAI-397 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: quality
