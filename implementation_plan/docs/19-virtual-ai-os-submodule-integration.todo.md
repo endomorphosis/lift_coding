@@ -1660,7 +1660,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 9f8a78dd1d5196a8c83153b547ff30bd08aa782b
+- Fingerprint: 2fa9390868eb639cecb3e70099ee3f6ec711d0d7
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -3307,7 +3307,11 @@ cadence remains parseable and resumable.
 
 ## VAI-474 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts:1
 
+<<<<<<< HEAD
 - Status: completed
+=======
+- Status: todo
+>>>>>>> implementation/mgw-507-attempt-1-1782283691
 - Completion: manual
 - Priority: P2
 - Track: quality
