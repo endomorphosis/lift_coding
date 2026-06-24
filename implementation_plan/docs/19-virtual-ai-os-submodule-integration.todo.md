@@ -2578,3 +2578,36 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-407-codebase-scan-b71e1b7130ac.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-408 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-408-codebase-scan-067c64675c26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-409 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-409-codebase-scan-69a234bf9d55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
+
+## VAI-410 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1
+
+- Status: todo
+- Completion: manual
+- Priority: P2
+- Track: quality
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
+- Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
+- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-410-codebase-scan-07a35e081f65.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.

@@ -29,11 +29,11 @@ Track: ops
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	swissknife`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 23 ++++++++++++++--------`
-  - ` ...026-06-24-hao-558-codebase-scan-103085e1d7ec.md |  7 +++++++`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 45 ++++++++++++++++------`
+  - ` ...026-06-24-hao-558-codebase-scan-103085e1d7ec.md |  7 ++++`
   - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
   - ` swissknife                                         |  0`
-  - ` 4 files changed, 23 insertions(+), 9 deletions(-)`
+  - ` 4 files changed, 41 insertions(+), 13 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -114,7 +114,7 @@ Work surface: `11` candidates, `11` sampled records.
   "fingerprint": "ef90ab2bd81ff2ecab9249822d12727f19edfcdc",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 23 ++++++++++++++--------\n ...026-06-24-hao-558-codebase-scan-103085e1d7ec.md |  7 +++++++\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n swissknife                                         |  0\n 4 files changed, 23 insertions(+), 9 deletions(-)",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 45 ++++++++++++++++------\n ...026-06-24-hao-558-codebase-scan-103085e1d7ec.md |  7 ++++\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n swissknife                                         |  0\n 4 files changed, 41 insertions(+), 13 deletions(-)",
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\tdata/hallucinate_multimodal_control/discovery/2026-06-24-hao-558-codebase-scan-103085e1d7ec.md\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\tswissknife",
     "path_categories": {
       "modified": 3,
