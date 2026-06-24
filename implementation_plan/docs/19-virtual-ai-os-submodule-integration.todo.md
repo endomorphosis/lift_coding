@@ -3604,7 +3604,7 @@ cadence remains parseable and resumable.
 
 ## VAI-501 Build the Swissknife virtual-desktop launch readiness matrix
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: integration
