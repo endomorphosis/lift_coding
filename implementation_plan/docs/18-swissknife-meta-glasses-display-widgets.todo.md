@@ -131,7 +131,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Track: mobile
 - Depends on: MGW-007, MGW-008
 - Outputs: mobile/modules/expo-meta-wearables-dat/android/src/main/java/expo/modules/metawearablesdat/ExpoMetaWearablesDatModule.kt, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, docs/meta-wearables-dat-display-physical-validation-checklist.md
-- Validation: cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Validation: cd mobile && npm ci && npm run android:validate:local
 - Acceptance: Android follows the DisplayAccess lifecycle when DAT display SDK linkage is available, while the default bridge-only build still succeeds without Meta package credentials or paired glasses.
 
 ## MGW-011 Add Swissknife widget authoring CLI and gallery
@@ -331,7 +331,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Track: ops
 - Depends on: MGW-007, MGW-008
 - Outputs: mobile/modules/expo-meta-wearables-dat/android/src/main/java/expo/modules/metawearablesdat/ExpoMetaWearablesDatModule.kt, mobile/modules/expo-meta-wearables-dat/__tests__/index.test.js, docs/meta-wearables-dat-display-physical-validation-checklist.md, data/meta_glasses_display_widgets/state/discovery
-- Validation: cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false
+- Validation: cd mobile && npm ci && npm run android:validate:local
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-010. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-028-mgw-010-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-010 from strategy blocked_tasks.
 
 ## MGW-363 Research current Meta glasses I/O capability surface
