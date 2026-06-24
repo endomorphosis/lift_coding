@@ -26,10 +26,10 @@ Track: ops
   - `M	hallucinate_app`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 62 +++++-----------------`
-  - ` hallucinate_app                                    |  0`
-  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
-  - ` 3 files changed, 13 insertions(+), 51 deletions(-)`
+  - `...026-06-07-hao-309-reconciliation-c05f71151a70.md | 21 ++++++++++++++-------`
+  - ` hallucinate_app                                     |  0`
+  - ` ...-swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` 3 files changed, 15 insertions(+), 8 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -119,7 +119,7 @@ Work surface: `26` candidates, `20` sampled records.
   "fingerprint": "031450478b1f57291a761851010d19dbc0e85411",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 62 +++++-----------------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 3 files changed, 13 insertions(+), 51 deletions(-)",
+    "diff_stat": "...026-06-07-hao-309-reconciliation-c05f71151a70.md | 21 ++++++++++++++-------\n hallucinate_app                                     |  0\n ...-swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n 3 files changed, 15 insertions(+), 8 deletions(-)",
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "path_categories": {
       "modified": 2,
