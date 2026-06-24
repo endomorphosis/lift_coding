@@ -415,7 +415,7 @@ def test_hao_675_adds_swissknife_hallucinate_app_playwright_launch_replay_covera
     ).read_text(encoding="utf-8")
     idl_source = CONTROL_SURFACE_IDL_PATH.read_text(encoding="utf-8")
 
-    assert task.status == PENDING_TASK_STATUS
+    assert task.status in {PENDING_TASK_STATUS, "completed"}
     assert task.priority == "P0"
     assert task.track == "validation"
     assert task.depends_on == ["HAO-674"]

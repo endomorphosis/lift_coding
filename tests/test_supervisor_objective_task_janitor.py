@@ -436,6 +436,106 @@ def test_refill_backlog_treats_zero_eligible_ready_as_runnable_drained(tmp_path)
     assert task_count == 3
 
 
+def test_refill_backlog_uses_markdown_status_when_daemon_state_is_stale(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import should_refill_backlog
+
+    todo_text = "\n".join(
+        (
+            "# Board",
+            "",
+            "## VAI-001 Retired stale scan",
+            "- Status: blocked",
+            "- Blocked reason: Deferred by objective-task janitor during launch steering.",
+        )
+    )
+    state_path = tmp_path / "state.json"
+    state_path.write_text(
+        json.dumps(
+            {
+                "task_count": 1,
+                "completed_count": 0,
+                "ready_count": 1,
+                "eligible_ready_count": 1,
+                "blocked_count": 0,
+                "waiting_count": 0,
+                "task_statuses": {"VAI-001": "ready"},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    should_scan, mode, current_open, task_count = should_refill_backlog(
+        todo_text=todo_text,
+        state_path=state_path,
+        strategy={},
+        last_scan_key="last_objective_goal_scan_at",
+        last_drained_scan_task_count_key="last_drained_objective_goal_scan_task_count",
+        task_prefix="VAI-",
+        min_open_tasks=0,
+        cooldown_seconds=86400,
+    )
+
+    assert should_scan
+    assert mode == "drained_exhaustive"
+    assert current_open == 0
+    assert task_count == 1
+
+
+def test_supervisor_materializes_janitor_deprioritization_as_blocked_task(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    todo_path = tmp_path / "vai.todo.md"
+    strategy_path = state_dir / "virtual_ai_os_strategy.json"
+    objective_path = tmp_path / "objective.md"
+    todo_path.write_text(
+        "\n".join(
+            (
+                "# VAI",
+                "",
+                "## VAI-001 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_noise.ts:1",
+                _task_status_line("todo"),
+                "- Priority: P3",
+                "- Track: docs",
+                "- Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_noise.ts:1.",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    objective_path.write_text("# Goals\n", encoding="utf-8")
+    strategy_path.write_text(json.dumps({"blocked_tasks": [], "deprioritized_tasks": []}), encoding="utf-8")
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=todo_path,
+            state_path=state_dir / "virtual_ai_os_task_state.json",
+            strategy_path=strategy_path,
+            events_path=state_dir / "virtual_ai_os_supervisor_events.jsonl",
+            state_dir=state_dir,
+            task_prefix="## VAI-",
+            state_prefix="virtual_ai_os",
+            objective_path=objective_path,
+            repo_root=tmp_path,
+        )
+    )
+
+    result = supervisor.reconcile_objective_task_janitor()
+    updated_todo = todo_path.read_text(encoding="utf-8")
+    updated_strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
+
+    assert result["materialized"]["blocked_task_ids"] == ["VAI-001"]
+    assert result["materialized"]["reason_task_ids"] == ["VAI-001"]
+    assert updated_strategy["deprioritized_tasks"] == ["VAI-001"]
+    assert "- Status: blocked" in updated_todo
+    assert "- Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task" in updated_todo
+
+
 def test_supervisor_run_forever_defers_refill_before_daemon_loop(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
