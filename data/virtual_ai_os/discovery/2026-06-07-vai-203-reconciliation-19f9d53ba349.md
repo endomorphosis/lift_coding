@@ -1,10 +1,10 @@
 # VAI-203 Reconciliation Guardrail
 
 Date: 2026-06-24
-Fingerprint: 34a6322a91471fc7f6fc6fcc591d5186037c727a
+Fingerprint: d08b914cebb5cc024ee666b84764644945789001
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 26
+Candidate count: 32
 Priority: P1
 Track: ops
 
@@ -108,7 +108,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `26` candidates, `20` sampled records.
+Work surface: `32` candidates, `20` sampled records.
 
 ### Suggested Actions
 
@@ -156,14 +156,14 @@ Work surface: `26` candidates, `20` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 26,
+  "candidate_count": 32,
   "conflict_path_counts": {
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 13,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 8,
-    "swissknife": 21
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 18,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 12,
+    "swissknife": 26
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "34a6322a91471fc7f6fc6fcc591d5186037c727a",
+  "fingerprint": "d08b914cebb5cc024ee666b84764644945789001",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
