@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: e4da1e9e514501a904bc41ae3518ec8240f5d67e
+Fingerprint: 1f589367dc8a38cf2253e8ce2a9c5406b2826685
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 4
@@ -10,35 +10,41 @@ Track: ops
 
 ## Main Checkout Status
 
-- `MM data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m hallucinate_app`
+- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - ` M tests/test_hallucinate_multimodal_control_todo_queue.py`
 - ` M tests/test_meta_glasses_display_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1`
+- Path categories: `modified=4, other_dirty=1`
 - Status paths:
   - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
+  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `tests/test_meta_glasses_display_todo_queue.py`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
+  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `M	tests/test_meta_glasses_display_todo_queue.py`
 - Diff stat:
-  - `hallucinate_app                                         | 0`
-  - ` tests/test_hallucinate_multimodal_control_todo_queue.py | 2 +-`
-  - ` tests/test_meta_glasses_display_todo_queue.py           | 2 +-`
-  - ` 3 files changed, 2 insertions(+), 2 deletions(-)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 31 ++++++++++------------`
+  - ` hallucinate_app                                    |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-`
+  - ` tests/test_meta_glasses_display_todo_queue.py      |  2 +-`
+  - ` 5 files changed, 17 insertions(+), 20 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
 - `implementation/vai-503-attempt-1-1782421864` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864`
 - `rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223`
 - `implementation/vai-511-attempt-1-1782424223` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223`
-- `rescue/worktree/rescue-worktree-rescue-worktree-implementation-vai-512-attempt-3-1782425881-7d5e1ed31699-28ed489-89ed41d29516` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-implementation-vai-512-attempt-3-1782425881-7d5e-8549c4cef181` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
 
 ## Why This Blocks Progress
 
@@ -102,24 +108,26 @@ Work surface: `4` candidates, `4` sampled records.
   "candidate_count": 4,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "e4da1e9e514501a904bc41ae3518ec8240f5d67e",
+  "fingerprint": "1f589367dc8a38cf2253e8ce2a9c5406b2826685",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app                                         | 0\n tests/test_hallucinate_multimodal_control_todo_queue.py | 2 +-\n tests/test_meta_glasses_display_todo_queue.py           | 2 +-\n 3 files changed, 2 insertions(+), 2 deletions(-)",
-    "name_status": "M\thallucinate_app\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 31 ++++++++++------------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-\n tests/test_meta_glasses_display_todo_queue.py      |  2 +-\n 5 files changed, 17 insertions(+), 20 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "path_categories": {
-      "modified": 3,
+      "modified": 4,
       "other_dirty": 1
     },
     "status_paths": [
       "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "hallucinate_app",
+      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "tests/test_hallucinate_multimodal_control_todo_queue.py",
       "tests/test_meta_glasses_display_todo_queue.py"
     ],
     "status_short": [
-      "MM data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " m hallucinate_app",
+      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       " M tests/test_hallucinate_multimodal_control_todo_queue.py",
       " M tests/test_meta_glasses_display_todo_queue.py"
     ]
@@ -134,12 +142,13 @@ Work surface: `4` candidates, `4` sampled records.
     "implementation/vai-503-attempt-1-1782421864",
     "rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb",
     "implementation/vai-511-attempt-1-1782424223",
-    "rescue/worktree/rescue-worktree-rescue-worktree-implementation-vai-512-attempt-3-1782425881-7d5e1ed31699-28ed489-89ed41d29516"
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-implementation-vai-512-attempt-3-1782425881-7d5e-8549c4cef181"
   ],
   "sample_count": 4,
   "sample_status_paths": [
     "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "hallucinate_app",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
     "tests/test_meta_glasses_display_todo_queue.py"
   ],
