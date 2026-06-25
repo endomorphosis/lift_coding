@@ -1,7 +1,7 @@
 # VAI-202 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: 7bb7f85ddc1dc3bce6d532a282618283db9da27a
+Fingerprint: 833f4c539fce5f19cf5e2bf233f4238406b3dab3
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
 Candidate count: 1
@@ -18,7 +18,7 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/implementation-vai-508-attempt-1-1782422956-47b137c32f45` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956` status: ` m swissknife`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--53ccd9ffd7c7` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956` status: ` m swissknife`
   - Name status:
     - `M	swissknife`
   - Diff stat:
@@ -93,7 +93,7 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "7bb7f85ddc1dc3bce6d532a282618283db9da27a",
+  "fingerprint": "833f4c539fce5f19cf5e2bf233f4238406b3dab3",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -103,7 +103,7 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/implementation-vai-508-attempt-1-1782422956-47b137c32f45"
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--53ccd9ffd7c7"
   ],
   "sample_count": 1,
   "sample_status_paths": [
