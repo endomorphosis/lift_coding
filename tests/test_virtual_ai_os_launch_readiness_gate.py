@@ -303,6 +303,9 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
         assert runner_term in runner_source
     assert "ensureE2EDependencies" in runner_source
     assert "runPlaywright(args)" in runner_source
+    assert "xvfb-run" in runner_source
+    assert "missing_xvfb_for_electron_playwright" in runner_source
+    assert "HALLUCINATE_APP_E2E_DISABLE_XVFB" in runner_source
 
     for client in ("voice", "gesture", "mouse", "agent", "remote-meta-glasses"):
         assert client in spec_source
