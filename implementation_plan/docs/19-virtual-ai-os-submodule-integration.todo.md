@@ -1701,7 +1701,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: 1f589367dc8a38cf2253e8ce2a9c5406b2826685
+- Fingerprint: a4f41701acff993d202003f53b402225eec5cefd
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -4015,7 +4015,7 @@ cadence remains parseable and resumable.
 
 ## VAI-514 Resolve validation retry-budget failure for VAI-512
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
