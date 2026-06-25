@@ -1,10 +1,10 @@
 # HAO-310 Reconciliation Guardrail
 
-Date: 2026-06-12
-Fingerprint: d8c53b0842812253f457ab6430d5d95c8c404195
+Date: 2026-06-25
+Fingerprint: 190e23b151652108033a92592695f14d170d6c5a
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
-Candidate count: 2
+Candidate count: 1
 Priority: P1
 Track: ops
 
@@ -18,18 +18,16 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--faefc61f0b0f` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781237072` status: ` m hallucinate_app`
+- `implementation/hao-680-attempt-1-1782423241` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-1-1782423241` status: ` m hallucinate_app;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md; ?? data/hallucinate_multimodal_control/discovery/2026-06-25-hao-680-dashboard-receipts.md`
   - Name status:
     - `M	hallucinate_app`
+    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
   - Diff stat:
-    - `hallucinate_app | 0`
-    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-hao-424-attempt-2-744498f9de0b` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-424-attempt-2-1781299533` status: ` m hallucinate_app`
-  - Name status:
-    - `M	hallucinate_app`
-  - Diff stat:
-    - `hallucinate_app | 0`
-    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+    - `hallucinate_app                                                     | 0`
+    - ` .../docs/19-virtual-ai-os-submodule-integration.todo.md             | 6 ++++--`
+    - ` 2 files changed, 4 insertions(+), 2 deletions(-)`
+  - Untracked paths:
+    - `data/hallucinate_multimodal_control/discovery/2026-06-25-hao-680-dashboard-receipts.md`
 
 ## Why This Blocks Progress
 
@@ -48,7 +46,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `2` candidates, `2` sampled records.
+Work surface: `1` candidates, `1` sampled records.
 
 ### Suggested Actions
 
@@ -96,10 +94,10 @@ Work surface: `2` candidates, `2` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 2,
+  "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "d8c53b0842812253f457ab6430d5d95c8c404195",
+  "fingerprint": "190e23b151652108033a92592695f14d170d6c5a",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -109,16 +107,16 @@ Work surface: `2` candidates, `2` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--faefc61f0b0f",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-hao-424-attempt-2-744498f9de0b"
+    "implementation/hao-680-attempt-1-1782423241"
   ],
-  "sample_count": 2,
+  "sample_count": 1,
   "sample_status_paths": [
-    "hallucinate_app"
+    "hallucinate_app",
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-25-hao-680-dashboard-receipts.md"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781237072",
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-424-attempt-2-1781299533"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-1-1782423241"
   ],
   "success_signals": [
     "candidate_count_decreases",
@@ -188,32 +186,3 @@ jq -r 'select(.type=="merged_worktree_cleanup") | [.timestamp, (.removed_count /
 Success signal: the HAO-310 `unsupported_status` blocked candidate count
 decreased from `14` to `0`, and the supervisor removed all `14` sampled stale
 merged worktree registrations.
-
-## Current Verification
-
-Verified during HAO-310 attempt 1 on 2026-06-23.
-
-- The two worktrees named by this guardrail are no longer registered or present:
-  `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-217-attempt-1-1781237072`
-  and
-  `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-424-attempt-2-1781299533`.
-- The main checkout at `/home/barberb/lift_coding` and the active HAO-310
-  worktree were clean before the rerun.
-- Reran the supervisor reconciliation pass from `/home/barberb/lift_coding`
-  with `python3` because `python` was not available on `PATH`:
-
-```sh
-python3 scripts/hallucinate_multimodal_control_todo_supervisor.py --once --reconciliation-only --no-worktree-scan-cache --worktree-reconciliation-max-merges 0 --log-level INFO
-```
-
-Rerun result:
-
-- `worktree_reconciliation.candidate_count`: `0`
-- `worktree_reconciliation.preflight_blocked_count`: `0`
-- `worktree_cleanup.removed_count`: `0`
-- `worktree_cleanup.skipped_reason_counts`: `active_state_worktree=1`
-- `worktree_cleanup.dirty_worktree_groups`: `{}`
-
-Current success signal: the `unsupported_status` dirty worktree group remains
-absent / `0`, so the blocked candidate count is still decreased from the
-original HAO-310 guardrail count of `2`.
