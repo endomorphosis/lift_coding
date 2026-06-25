@@ -1,7 +1,7 @@
 # VAI-202 Reconciliation Guardrail
 
-Date: 2026-06-24
-Fingerprint: 23f3f08b5881d55a02b5cb5f5e564060b013c23d
+Date: 2026-06-25
+Fingerprint: 7bb7f85ddc1dc3bce6d532a282618283db9da27a
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
 Candidate count: 1
@@ -18,33 +18,12 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `implementation/vai-138-attempt-2-1782266235` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-138-attempt-2-1782266235` status: ` m external/ipfs_kit;  D swissknife`
+- `rescue/worktree/implementation-vai-508-attempt-1-1782422956-47b137c32f45` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956` status: ` m swissknife`
   - Name status:
-    - `asses.md`
-    - `D	tracking/PR-030-mobile-companion-app-scaffold.md`
-    - `D	tracking/PR-031-mobile-push-notifications.md`
-    - `D	tracking/PR-032-agent-runner-create-prs.md`
-    - `D	tracking/PR-033-meta-ai-glasses-audio-routing.md`
-    - `D	tracking/PR-037-mobile-audio-capture-upload.md`
-    - `D	tracking/PR-042-openapi-notifications-sync.md`
-    - `D	tracking/PR-043-inbox-endpoint-wiring.md`
-    - `D	tracking/PR-045-agent-runner-apply-diff.md`
-    - `D	tracking/PR-046-expo-dev-client-native-glasses.md`
-    - `D	tracking/PR-047-ios-audio-route-monitor.md`
-    - `D	tracking/PR-048-ios-glasses-recorder-wav.md`
+    - `M	swissknife`
   - Diff stat:
-    - `cking/PR-052-glasses-js-integration-tts.md      |   40 -`
-    - ` tracking/PR-053-expo-push-provider.md              |   26 -`
-    - ` tracking/PR-054-agent-delegation-real-dispatch.md  |   24 -`
-    - ` tracking/PR-055-openapi-and-dev-audio-hygiene.md   |   24 -`
-    - ` ...-056-notification-subscription-expo-platform.md |   30 -`
-    - ` tracking/PR-057-notification-detail-endpoint.md    |   28 -`
-    - ` ...-delegation-default-provider-when-configured.md |   26 -`
-    - ` tracking/PR-059-ios-rayban-mvp1-demo-runbook.md    |  109 -`
-    - ` tracking/PR-060-ios-rayban-implementation-queue.md |   39 -`
-    - ` tracking/PR-061-ios-rayban-troubleshooting.md      |   24 -`
-    - ` tracking/PR-062-mvp1-demo-checklist.md             |   20 -`
-    - ` tracking/PR-063-ios-rayban-mvp1-runbook.md         |   34 -`
+    - `swissknife | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Why This Blocks Progress
 
@@ -114,7 +93,7 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "23f3f08b5881d55a02b5cb5f5e564060b013c23d",
+  "fingerprint": "7bb7f85ddc1dc3bce6d532a282618283db9da27a",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -124,53 +103,14 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/vai-138-attempt-2-1782266235"
+    "rescue/worktree/implementation-vai-508-attempt-1-1782422956-47b137c32f45"
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "external/ipfs_kit",
-    "swissknife",
-    "asses.md",
-    "tracking/PR-030-mobile-companion-app-scaffold.md",
-    "tracking/PR-031-mobile-push-notifications.md",
-    "tracking/PR-032-agent-runner-create-prs.md",
-    "tracking/PR-033-meta-ai-glasses-audio-routing.md",
-    "tracking/PR-037-mobile-audio-capture-upload.md",
-    "tracking/PR-042-openapi-notifications-sync.md",
-    "tracking/PR-043-inbox-endpoint-wiring.md",
-    "tracking/PR-045-agent-runner-apply-diff.md",
-    "tracking/PR-046-expo-dev-client-native-glasses.md",
-    "tracking/PR-047-ios-audio-route-monitor.md",
-    "tracking/PR-048-ios-glasses-recorder-wav.md",
-    "tracking/PR-049-ios-glasses-player.md",
-    "tracking/PR-050-android-audio-route-monitor.md",
-    "tracking/PR-051-android-glasses-recorder-player.md",
-    "tracking/PR-052-glasses-js-integration-tts.md",
-    "tracking/PR-053-expo-push-provider.md",
-    "tracking/PR-054-agent-delegation-real-dispatch.md",
-    "tracking/PR-055-openapi-and-dev-audio-hygiene.md",
-    "tracking/PR-056-notification-subscription-expo-platform.md",
-    "tracking/PR-057-notification-detail-endpoint.md",
-    "tracking/PR-058-agent-delegation-default-provider-when-configured.md",
-    "tracking/PR-059-ios-rayban-mvp1-demo-runbook.md",
-    "tracking/PR-060-ios-rayban-implementation-queue.md",
-    "tracking/PR-061-ios-rayban-troubleshooting.md",
-    "tracking/PR-062-mvp1-demo-checklist.md",
-    "tracking/PR-063-ios-rayban-mvp1-runbook.md",
-    "tracking/PR-064-github-oauth-state-hardening.md",
-    "tracking/PR-065-demo-env-and-smoke-script.md",
-    "tracking/PR-066-plan-vs-code-gap-matrix.md",
-    "tracking/PR-068-mobile-audio-source-selector.md",
-    "tracking/PR-069-mobile-github-oauth-ui.md",
-    "tracking/PR-070-mobile-profile-selector-ui.md",
-    "tracking/PR-071-mobile-push-speak-automation.md",
-    "tracking/PR-073-policy-configuration-file.md",
-    "tracking/PR-075-agent-notification-integration.md",
-    "tracking/PR-076-mobile-voice-confirmation.md",
-    "tracking/PR-077-github-rate-limit-handling.md"
+    "swissknife"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-138-attempt-2-1782266235"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956"
   ],
   "success_signals": [
     "candidate_count_decreases",
