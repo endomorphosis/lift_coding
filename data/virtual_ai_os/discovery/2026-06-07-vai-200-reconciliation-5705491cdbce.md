@@ -1,45 +1,42 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: 2f33120333d2ccb024b1a4856f4225172e5b81ed
+Fingerprint: 19df826dafefc4ee371b365611e1acd0b3bf2c9c
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 3
+Candidate count: 4
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
 - ` m hallucinate_app`
-- ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - ` M tests/test_hallucinate_multimodal_control_todo_queue.py`
 - ` M tests/test_meta_glasses_display_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1`
+- Path categories: `modified=2, other_dirty=1`
 - Status paths:
   - `hallucinate_app`
-  - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `tests/test_meta_glasses_display_todo_queue.py`
 - Name status:
   - `M	hallucinate_app`
-  - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `M	tests/test_meta_glasses_display_todo_queue.py`
 - Diff stat:
-  - `hallucinate_app                                                         | 0`
-  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-`
-  - ` tests/test_hallucinate_multimodal_control_todo_queue.py                 | 2 +-`
-  - ` tests/test_meta_glasses_display_todo_queue.py                           | 2 +-`
-  - ` 4 files changed, 3 insertions(+), 3 deletions(-)`
+  - `hallucinate_app                                         | 0`
+  - ` tests/test_hallucinate_multimodal_control_todo_queue.py | 2 +-`
+  - ` tests/test_meta_glasses_display_todo_queue.py           | 2 +-`
+  - ` 3 files changed, 2 insertions(+), 2 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
 - `implementation/vai-503-attempt-1-1782421864` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864`
 - `rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223`
 - `implementation/vai-511-attempt-1-1782424223` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223`
+- `rescue/worktree/rescue-worktree-implementation-vai-512-attempt-3-1782425881-7d5e1ed31699-28ed48909d26` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
 
 ## Why This Blocks Progress
 
@@ -58,7 +55,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `3` candidates, `3` sampled records.
+Work surface: `4` candidates, `4` sampled records.
 
 ### Suggested Actions
 
@@ -100,27 +97,25 @@ Work surface: `3` candidates, `3` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 3,
+  "candidate_count": 4,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "2f33120333d2ccb024b1a4856f4225172e5b81ed",
+  "fingerprint": "19df826dafefc4ee371b365611e1acd0b3bf2c9c",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app                                                         | 0\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-\n tests/test_hallucinate_multimodal_control_todo_queue.py                 | 2 +-\n tests/test_meta_glasses_display_todo_queue.py                           | 2 +-\n 4 files changed, 3 insertions(+), 3 deletions(-)",
-    "name_status": "M\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
+    "diff_stat": "hallucinate_app                                         | 0\n tests/test_hallucinate_multimodal_control_todo_queue.py | 2 +-\n tests/test_meta_glasses_display_todo_queue.py           | 2 +-\n 3 files changed, 2 insertions(+), 2 deletions(-)",
+    "name_status": "M\thallucinate_app\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "path_categories": {
-      "modified": 3,
+      "modified": 2,
       "other_dirty": 1
     },
     "status_paths": [
       "hallucinate_app",
-      "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "tests/test_hallucinate_multimodal_control_todo_queue.py",
       "tests/test_meta_glasses_display_todo_queue.py"
     ],
     "status_short": [
       " m hallucinate_app",
-      " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       " M tests/test_hallucinate_multimodal_control_todo_queue.py",
       " M tests/test_meta_glasses_display_todo_queue.py"
     ]
@@ -134,19 +129,20 @@ Work surface: `3` candidates, `3` sampled records.
   "sample_branches": [
     "implementation/vai-503-attempt-1-1782421864",
     "rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb",
-    "implementation/vai-511-attempt-1-1782424223"
+    "implementation/vai-511-attempt-1-1782424223",
+    "rescue/worktree/rescue-worktree-implementation-vai-512-attempt-3-1782425881-7d5e1ed31699-28ed48909d26"
   ],
-  "sample_count": 3,
+  "sample_count": 4,
   "sample_status_paths": [
     "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
     "tests/test_meta_glasses_display_todo_queue.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881"
   ],
   "success_signals": [
     "candidate_count_decreases",
