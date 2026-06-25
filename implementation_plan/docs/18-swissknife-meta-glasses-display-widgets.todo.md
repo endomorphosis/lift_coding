@@ -915,7 +915,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: 0e851fc6b3e41a04852dca8bead569c303e6834f
+- Fingerprint: 80b4fef8992da964203a97708d76c046d1d0dd42
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -2262,3 +2262,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Candidate kind: validation_gate
 - Todo vector key: 423c5c08373fafe1
 - Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-25-mgw-524-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+
+## MGW-525 Resolve validation retry-budget failure for MGW-524
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-524. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-25-mgw-525-mgw-524-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-524 from strategy blocked_tasks.
