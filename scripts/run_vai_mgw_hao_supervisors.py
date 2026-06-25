@@ -60,7 +60,9 @@ REFILL_DEFAULTS = {
     "objective_scan_max_findings": "6",
     "objective_surplus_findings_per_goal": "2",
     "codebase_scan_min_open_tasks": "8",
-    "codebase_scan_max_findings": "3",
+    # The launch runner should be fed by the objective heap and validation
+    # guardrails, not by generic source-annotation sweeps.
+    "codebase_scan_max_findings": "0",
     "objective_max_interoperability_goals": "12",
 }
 

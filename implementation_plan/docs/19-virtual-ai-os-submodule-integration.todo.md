@@ -3900,3 +3900,87 @@ cadence remains parseable and resumable.
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-509-codebase-scan-5481b197a30a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
+## VAI-510 Reconcile the VAIOS-G723 dashboard launch branch into main
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: VAI-501, VAI-502
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, docs/launch/phone_desktop_glasses_readiness.md, hallucinate_app, swissknife, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+- Bundle: objective/launch/hallucinate-mcp-dashboard
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G723
+- Graph depth: 1
+- Parallel lane: vaios-dashboard-reconciliation
+- Conflict policy: preserve generated supervisor board edits, Hallucinate dashboard catalog changes, Swissknife MCP consumer changes, and launch evidence receipts; resolve dirty checkout blockers by committing safe generated outputs or by recording explicit blockers before retrying merge.
+- Goal id: VAIOS-G723
+- Missing evidence: clean main reconciliation for the Hallucinate MCP dashboard launch gate
+- Embedding query: VAIOS-G723 VAI-503 dashboard branch merge reconciliation Hallucinate MCP dashboard Swissknife MCP consumers launch receipt generated dirty supervisor output
+- AST query: VAI-503, mcp-dashboard-interoperability, getDashboardCapabilityCatalog, mcp_daemon_manager, ControlSurfaceInvocationGate, run_vai_mgw_hao_supervisors
+- Surplus group: objective/VAIOS-G723
+- Merge key: vaios-g723-dashboard-reconciliation
+- Merge family: objective/VAIOS-G723
+- Merge role: reconciliation_gate
+- Work item count: 1
+- Work scope: launch_reconciliation_gate
+- Candidate kind: validation_gate
+- Acceptance: Reconcile or unblock the existing implementation/vai-503-attempt-1-1782421864 branch so the Hallucinate App dashboard, daemon-manager, Swissknife MCP, readiness receipt, and Playwright evidence become main-line launch assets. If nested submodule dirt prevents a safe merge, produce a focused discovery receipt that names the exact repositories, dirty paths, and next automatic cleanup task rather than letting VAI idle.
+
+## VAI-511 Add objective-heap seed coverage for VAI/MGW/HAO supervisor lanes
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: validation
+- Depends on: VAI-501, VAI-502
+- Outputs: scripts/run_vai_mgw_hao_supervisors.py, scripts/hallucinate_multimodal_control_todo_supervisor.py, tests/test_virtual_ai_os_todo_queue.py, tests/test_hallucinate_multimodal_control_todo_queue.py, data/virtual_ai_os/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_meta_glasses_display_todo_queue.py -q; python3 -m py_compile scripts/run_vai_mgw_hao_supervisors.py scripts/hallucinate_multimodal_control_todo_supervisor.py
+- Bundle: objective/launch/supervisor-objective-seeding
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G723
+- Graph depth: 1
+- Parallel lane: supervisor-objective-seeding
+- Conflict policy: keep launch-runner defaults objective-first, codebase-scan findings disabled for long launch runs, and HAO lane CLI args preserved when invoked as a script.
+- Goal id: VAIOS-G723
+- Missing evidence: automated VAI/MGW/HAO task-board seeding from the objective heap
+- Embedding query: objective heap supervisor daemon seeding VAI MGW HAO task board VAIOS-G723 codebase scan max findings zero lane args
+- AST query: REFILL_DEFAULTS, default_supervisor_args, objective_refill_scan, objective_heap_schedule, HALLUCINATE_DASHBOARD_LAUNCH_MISSION_ARGS
+- Surplus group: objective/VAIOS-G723
+- Merge key: vaios-g723-supervisor-seeding
+- Merge family: objective/VAIOS-G723
+- Merge role: supervisor_seed_gate
+- Work item count: 1
+- Work scope: supervisor_validation_gate
+- Candidate kind: validation_gate
+- Acceptance: Add or extend tests and receipts proving the launch runner starts VAI/MGW/HAO lanes with objective-refill enabled, launch mission terms present, generic codebase-scan findings capped at zero, HAO preserving lane arguments, and failed validation/reconciliation producing objective-aligned follow-up work instead of idle lanes.
+
+## VAI-512 Prove Hallucinate and Swissknife can consume MCP dashboard tools end to end
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: validation
+- Depends on: VAI-501, VAI-502
+- Outputs: hallucinate_app, swissknife, tests, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; npm --prefix swissknife run test:e2e:mcp; npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+- Bundle: objective/launch/mcp-dashboard-consumption
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G723
+- Graph depth: 1
+- Parallel lane: mcp-dashboard-consumption
+- Conflict policy: keep the Hallucinate dashboard capability catalog and Swissknife MCP consumers additive; preserve one shared launch receipt schema and one mediated tool-call evidence format.
+- Goal id: VAIOS-G723
+- Missing evidence: Hallucinate dashboard to Swissknife MCP consumer launch receipt
+- Embedding query: Hallucinate App MCP dashboard tools/list tools/call Swissknife MCP consumer ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Playwright receipt MCP++ compatibility
+- AST query: mcp-feature-exposure, mcp-dashboard-interoperability, test:e2e:mcp, getDashboardCapabilityCatalog, tools/list, tools/call
+- Surplus group: objective/VAIOS-G723
+- Merge key: vaios-g723-mcp-dashboard-consumption
+- Merge family: objective/VAIOS-G723
+- Merge role: end_to_end_validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate
+- Candidate kind: validation_gate
+- Acceptance: Produce hardware-free Playwright evidence that Hallucinate App exposes the ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP server dashboards, mediates tools/list and tools/call through the control plane, and lets Swissknife applications consume the same catalog without duplicate schemas or dashboard-only mocks.

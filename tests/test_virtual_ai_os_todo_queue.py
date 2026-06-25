@@ -774,7 +774,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "--codebase-scan-min-open-tasks" in common_arg_values
     assert common_arg_values[common_arg_values.index("--codebase-scan-min-open-tasks") + 1] == "8"
     assert "--codebase-scan-max-findings" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "3"
+    assert common_arg_values[common_arg_values.index("--codebase-scan-max-findings") + 1] == "0"
     assert "--no-objective-goal-refinement" not in common_arg_values
     assert "--objective-max-refinement-children" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-refinement-children") + 1] == "2"

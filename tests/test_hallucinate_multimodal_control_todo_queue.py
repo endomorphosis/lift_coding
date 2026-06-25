@@ -160,7 +160,9 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     ]
     tasks = {task.task_id: task for task in _load_tasks()}
 
-    assert runnable_stale_tasks == ["HAO-684", "HAO-685", "HAO-686"]
+    assert runnable_stale_tasks == []
+    for stale_task_id in ("HAO-684", "HAO-685", "HAO-686", "HAO-694", "HAO-695", "HAO-696"):
+        assert tasks[stale_task_id].status == "blocked"
     assert tasks["HAO-427"].status == "completed"
     assert tasks["HAO-428"].status == "completed"
     assert tasks["HAO-431"].status == "completed"
@@ -1818,6 +1820,39 @@ def test_objective_driven_supervisor_loop_evidence_is_tracked():
         "ipfs_kit_py",
     ):
         assert term in supervisor_args
+
+
+def test_hallucinate_supervisor_default_args_preserve_script_argv(monkeypatch):
+    supervisor_module = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "hallucinate_multimodal_control_todo_supervisor.py",
+            "--state-dir",
+            "/tmp/hao-lane-0",
+            "--state-prefix",
+            "hallucinate_multimodal_control_lane_0",
+            "--task-shard-count",
+            "2",
+            "--task-shard-index",
+            "0",
+            "--codebase-scan-max-findings",
+            "0",
+        ],
+    )
+
+    supervisor_args = supervisor_module.default_supervisor_args()
+
+    assert supervisor_args[:10] == sys.argv[1:]
+    assert "--objective-mission-term" in supervisor_args
+    assert "Hallucinate App dashboard capability catalog" in supervisor_args
+    assert supervisor_args[supervisor_args.index("--state-dir") + 1] == "/tmp/hao-lane-0"
+    assert supervisor_args[supervisor_args.index("--state-prefix") + 1] == (
+        "hallucinate_multimodal_control_lane_0"
+    )
+    assert supervisor_args[supervisor_args.index("--codebase-scan-max-findings") + 1] == "0"
 
 
 # Keep daemon constructor fixture paths centralized so required task-board wiring

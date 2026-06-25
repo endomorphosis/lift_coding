@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import logging
+import sys
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
@@ -168,7 +169,8 @@ ensure_hallucinate_supervisor_running = _hallucinate_supervisor_exports.ensure_r
 def default_supervisor_args(argv: list[str] | None = None) -> list[str]:
     """Return supervisor CLI args with Hallucinate dashboard mission defaults."""
 
-    return [*(argv or []), *HALLUCINATE_DASHBOARD_LAUNCH_MISSION_ARGS]
+    base_args = list(sys.argv[1:] if argv is None else argv)
+    return [*base_args, *HALLUCINATE_DASHBOARD_LAUNCH_MISSION_ARGS]
 
 
 def main(argv: list[str] | None = None) -> None:
