@@ -3984,3 +3984,31 @@ cadence remains parseable and resumable.
 - Work scope: launch_validation_gate
 - Candidate kind: validation_gate
 - Acceptance: Produce hardware-free Playwright evidence that Hallucinate App exposes the ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP server dashboards, mediates tools/list and tools/call through the control plane, and lets Swissknife applications consume the same catalog without duplicate schemas or dashboard-only mocks.
+
+## VAI-513 Keep VAIOS-G723 Playwright gates from passing via skipped Electron coverage
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: validation
+- Depends on: VAI-511, VAI-512
+- Outputs: hallucinate_app/scripts/run_playwright_test.mjs, tests/test_virtual_ai_os_launch_readiness_gate.py, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py tests/test_virtual_ai_os_todo_queue.py -q; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)
+- Bundle: objective/launch/mcp-dashboard-consumption
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G723
+- Graph depth: 1
+- Parallel lane: mcp-dashboard-validation-environment
+- Conflict policy: preserve real Playwright coverage and require the no-display path to be explicit, deterministic, and visible to retry-budget repair tasks.
+- Goal id: VAIOS-G723
+- Missing evidence: non-skipped Hallucinate Electron Playwright launch gate on headless supervisor hosts
+- Embedding query: VAIOS-G723 Hallucinate Electron Playwright headless xvfb-run validation environment supervisor retry budget missing display
+- AST query: run_playwright_test, missing_xvfb_for_electron_playwright, xvfb-run, test_virtual_ai_os_launch_readiness_gate
+- Surplus group: objective/VAIOS-G723
+- Merge key: vaios-g723-playwright-validation-environment
+- Merge family: objective/VAIOS-G723
+- Merge role: validation_environment_gate
+- Work item count: 1
+- Work scope: launch_validation_environment
+- Candidate kind: validation_gate
+- Acceptance: Prove the VAI launch gate cannot be satisfied by no-display Electron skips: the Hallucinate runner must use xvfb-run when present, report missing_xvfb_for_electron_playwright when it is absent, and keep the supervisor/objective heap focused on fixing the validation environment before declaring the MCP dashboard and Swissknife interoperability path production-ready.
