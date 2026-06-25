@@ -809,6 +809,11 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "Hallucinate App mediation",
         "Hallucinate App menus",
         "Hallucinate App dashboards",
+        "Hallucinate App MCP dashboard",
+        "Hallucinate App dashboard capability catalog",
+        "Hallucinate App daemon health",
+        "Hallucinate App tools/list",
+        "Hallucinate App tools/call",
         "Meta glasses interface",
         "Meta Wearables DAT",
         "camera",
@@ -828,6 +833,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "ipfs_accelerate_py",
         "ipfs_datasets_py",
         "ipfs_kit_py",
+        "Python MCP package names",
         "Swissknife applications",
         "control plane",
         "Playwright launch replay",
@@ -854,6 +860,56 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
         "--duration-seconds",
         "5",
     ]
+
+
+def test_hallucinate_dashboard_objective_tasks_are_launch_mission_aligned():
+    runner_module = _load_script_module("run_vai_mgw_hao_supervisors")
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+    from ipfs_accelerate_py.agent_supervisor.objective_task_janitor import (
+        reconcile_objective_task_strategy,
+    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTask
+
+    goals = parse_goal_heap(OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8"))
+    goal = next(item for item in goals if item.goal_id == "VAIOS-G723")
+    task = PortalTask(
+        "HAO-900",
+        "Close virtual AI OS objective gap: Hallucinate MCP dashboard interoperability console",
+        PENDING_TASK_STATUS,
+        "manual",
+        "P1",
+        "launch",
+        outputs=["hallucinate_app", "data/hallucinate_multimodal_control/discovery"],
+        validation=["npm --prefix hallucinate_app run test:e2e -- mcp-dashboard-interoperability.spec.ts"],
+        metadata={
+            "goal id": "VAIOS-G723",
+            "bundle": "objective/launch/hallucinate-mcp-dashboard",
+            "missing evidence": "Hallucinate App dashboard capability catalog; daemon health; tools/list; tools/call",
+            "parallel lane": "supervisor-dashboard-objective-refill",
+        },
+        acceptance=(
+            "Objective scan filed this gap for VAIOS-G723. Keep Hallucinate App menus, "
+            "dashboards, dashboard capability catalog, daemon health, tools/list, tools/call, "
+            "ipfs_kit_py, ipfs_datasets_py, and ipfs_accelerate_py covered by generated subtasks."
+        ),
+    )
+
+    result = reconcile_objective_task_strategy(
+        goals=goals,
+        tasks=[task],
+        strategy={},
+        now="2026-06-25T00:00:00+00:00",
+        mission_terms=runner_module.VAI_MGW_HAO_LAUNCH_MISSION_TERMS,
+    )
+
+    updated = result["strategy"]
+    assert "HAO-900" not in updated["deprioritized_tasks"]
+    assert "HAO-900" not in updated["blocked_tasks"]
+    assert not any(
+        receipt["task_id"] == "HAO-900" and receipt["retired_task_reason"].startswith("off_mission_")
+        for receipt in updated["objective_task_janitor_receipts"]
+    )
 
 
 def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_path):
