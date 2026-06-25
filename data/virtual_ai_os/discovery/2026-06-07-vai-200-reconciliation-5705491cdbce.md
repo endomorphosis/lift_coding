@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: 3782f568fd1c47fcdccbba0aa61fa445dfb72e3f
+Fingerprint: 1c00f419339d156c02d5b919579ceefa3cdc11d4
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 1
@@ -11,20 +11,17 @@ Track: ops
 ## Main Checkout Status
 
 - ` m hallucinate_app`
-- ` M scripts/run_vai_mgw_hao_supervisors.py`
-- ` M tests/test_virtual_ai_os_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=2, other_dirty=1`
+- Path categories: `other_dirty=1`
 - Status paths:
   - `hallucinate_app`
-  - `scripts/run_vai_mgw_hao_supervisors.py`
-  - `tests/test_virtual_ai_os_todo_queue.py`
 - Name status:
   - `M	hallucinate_app`
-  - `M	scripts/run_vai_mgw_hao_supervisors.py`
-  - `M	tests/test_virtual_ai_os_todo_queue.py`
+- Diff stat:
+  - `hallucinate_app | 0`
+  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -92,27 +89,19 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "3782f568fd1c47fcdccbba0aa61fa445dfb72e3f",
+  "fingerprint": "1c00f419339d156c02d5b919579ceefa3cdc11d4",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "filtered_generated_status_paths": [
-      "data/virtual_ai_os/discovery/2026-06-07-vai-200-reconciliation-5705491cdbce.md",
-      "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md"
-    ],
-    "name_status": "M\thallucinate_app\nM\tscripts/run_vai_mgw_hao_supervisors.py\nM\ttests/test_virtual_ai_os_todo_queue.py",
+    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
+    "name_status": "M\thallucinate_app",
     "path_categories": {
-      "modified": 2,
       "other_dirty": 1
     },
     "status_paths": [
-      "hallucinate_app",
-      "scripts/run_vai_mgw_hao_supervisors.py",
-      "tests/test_virtual_ai_os_todo_queue.py"
+      "hallucinate_app"
     ],
     "status_short": [
-      " m hallucinate_app",
-      " M scripts/run_vai_mgw_hao_supervisors.py",
-      " M tests/test_virtual_ai_os_todo_queue.py"
+      " m hallucinate_app"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -126,9 +115,7 @@ Work surface: `1` candidates, `1` sampled records.
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "hallucinate_app",
-    "scripts/run_vai_mgw_hao_supervisors.py",
-    "tests/test_virtual_ai_os_todo_queue.py"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864"
