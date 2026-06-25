@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: 2f33120333d2ccb024b1a4856f4225172e5b81ed
+Fingerprint: 2fe16970d20665045b5cac39b7554cd3f0733150
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 3
@@ -14,26 +14,30 @@ Track: ops
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - ` M tests/test_hallucinate_multimodal_control_todo_queue.py`
 - ` M tests/test_meta_glasses_display_todo_queue.py`
+- ` M tests/test_virtual_ai_os_launch_readiness_gate.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3, other_dirty=1`
+- Path categories: `modified=4, other_dirty=1`
 - Status paths:
   - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `tests/test_meta_glasses_display_todo_queue.py`
+  - `tests/test_virtual_ai_os_launch_readiness_gate.py`
 - Name status:
   - `M	hallucinate_app`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `M	tests/test_meta_glasses_display_todo_queue.py`
+  - `M	tests/test_virtual_ai_os_launch_readiness_gate.py`
 - Diff stat:
-  - `hallucinate_app                                                         | 0`
-  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-`
-  - ` tests/test_hallucinate_multimodal_control_todo_queue.py                 | 2 +-`
-  - ` tests/test_meta_glasses_display_todo_queue.py                           | 2 +-`
-  - ` 4 files changed, 3 insertions(+), 3 deletions(-)`
+  - `hallucinate_app                                                        | 0`
+  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md            | 2 +-`
+  - ` tests/test_hallucinate_multimodal_control_todo_queue.py                | 2 +-`
+  - ` tests/test_meta_glasses_display_todo_queue.py                          | 2 +-`
+  - ` tests/test_virtual_ai_os_launch_readiness_gate.py                      | 3 +++`
+  - ` 5 files changed, 6 insertions(+), 3 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -103,26 +107,28 @@ Work surface: `3` candidates, `3` sampled records.
   "candidate_count": 3,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "2f33120333d2ccb024b1a4856f4225172e5b81ed",
+  "fingerprint": "2fe16970d20665045b5cac39b7554cd3f0733150",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app                                                         | 0\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md             | 2 +-\n tests/test_hallucinate_multimodal_control_todo_queue.py                 | 2 +-\n tests/test_meta_glasses_display_todo_queue.py                           | 2 +-\n 4 files changed, 3 insertions(+), 3 deletions(-)",
-    "name_status": "M\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
+    "diff_stat": "hallucinate_app                                                        | 0\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md            | 2 +-\n tests/test_hallucinate_multimodal_control_todo_queue.py                | 2 +-\n tests/test_meta_glasses_display_todo_queue.py                          | 2 +-\n tests/test_virtual_ai_os_launch_readiness_gate.py                      | 3 +++\n 5 files changed, 6 insertions(+), 3 deletions(-)",
+    "name_status": "M\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py\nM\ttests/test_virtual_ai_os_launch_readiness_gate.py",
     "path_categories": {
-      "modified": 3,
+      "modified": 4,
       "other_dirty": 1
     },
     "status_paths": [
       "hallucinate_app",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "tests/test_hallucinate_multimodal_control_todo_queue.py",
-      "tests/test_meta_glasses_display_todo_queue.py"
+      "tests/test_meta_glasses_display_todo_queue.py",
+      "tests/test_virtual_ai_os_launch_readiness_gate.py"
     ],
     "status_short": [
       " m hallucinate_app",
       " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       " M tests/test_hallucinate_multimodal_control_todo_queue.py",
-      " M tests/test_meta_glasses_display_todo_queue.py"
+      " M tests/test_meta_glasses_display_todo_queue.py",
+      " M tests/test_virtual_ai_os_launch_readiness_gate.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -141,7 +147,8 @@ Work surface: `3` candidates, `3` sampled records.
     "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
-    "tests/test_meta_glasses_display_todo_queue.py"
+    "tests/test_meta_glasses_display_todo_queue.py",
+    "tests/test_virtual_ai_os_launch_readiness_gate.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864",
