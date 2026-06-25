@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: 2fe16970d20665045b5cac39b7554cd3f0733150
+Fingerprint: 8b4e04ea4d375a4f3527f3ce6d7142d96f2bee41
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 3
@@ -10,34 +10,34 @@ Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
 - ` m hallucinate_app`
 - ` M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
 - ` M tests/test_hallucinate_multimodal_control_todo_queue.py`
 - ` M tests/test_meta_glasses_display_todo_queue.py`
-- ` M tests/test_virtual_ai_os_launch_readiness_gate.py`
 
 ## Main Checkout Evidence
 
 - Path categories: `modified=4, other_dirty=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `hallucinate_app`
   - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `tests/test_meta_glasses_display_todo_queue.py`
-  - `tests/test_virtual_ai_os_launch_readiness_gate.py`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
   - `M	hallucinate_app`
   - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
   - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `M	tests/test_meta_glasses_display_todo_queue.py`
-  - `M	tests/test_virtual_ai_os_launch_readiness_gate.py`
 - Diff stat:
-  - `hallucinate_app                                                        | 0`
-  - ` .../docs/18-swissknife-meta-glasses-display-widgets.todo.md            | 2 +-`
-  - ` tests/test_hallucinate_multimodal_control_todo_queue.py                | 2 +-`
-  - ` tests/test_meta_glasses_display_todo_queue.py                          | 2 +-`
-  - ` tests/test_virtual_ai_os_launch_readiness_gate.py                      | 3 +++`
-  - ` 5 files changed, 6 insertions(+), 3 deletions(-)`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 38 ++++++----------------`
+  - ` hallucinate_app                                    |  0`
+  - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
+  - ` ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-`
+  - ` tests/test_meta_glasses_display_todo_queue.py      |  2 +-`
+  - ` 5 files changed, 13 insertions(+), 31 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
@@ -107,28 +107,28 @@ Work surface: `3` candidates, `3` sampled records.
   "candidate_count": 3,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "2fe16970d20665045b5cac39b7554cd3f0733150",
+  "fingerprint": "8b4e04ea4d375a4f3527f3ce6d7142d96f2bee41",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app                                                        | 0\n .../docs/18-swissknife-meta-glasses-display-widgets.todo.md            | 2 +-\n tests/test_hallucinate_multimodal_control_todo_queue.py                | 2 +-\n tests/test_meta_glasses_display_todo_queue.py                          | 2 +-\n tests/test_virtual_ai_os_launch_readiness_gate.py                      | 3 +++\n 5 files changed, 6 insertions(+), 3 deletions(-)",
-    "name_status": "M\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py\nM\ttests/test_virtual_ai_os_launch_readiness_gate.py",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 38 ++++++----------------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-\n tests/test_meta_glasses_display_todo_queue.py      |  2 +-\n 5 files changed, 13 insertions(+), 31 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "path_categories": {
       "modified": 4,
       "other_dirty": 1
     },
     "status_paths": [
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       "hallucinate_app",
       "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       "tests/test_hallucinate_multimodal_control_todo_queue.py",
-      "tests/test_meta_glasses_display_todo_queue.py",
-      "tests/test_virtual_ai_os_launch_readiness_gate.py"
+      "tests/test_meta_glasses_display_todo_queue.py"
     ],
     "status_short": [
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
       " m hallucinate_app",
       " M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
       " M tests/test_hallucinate_multimodal_control_todo_queue.py",
-      " M tests/test_meta_glasses_display_todo_queue.py",
-      " M tests/test_virtual_ai_os_launch_readiness_gate.py"
+      " M tests/test_meta_glasses_display_todo_queue.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -144,11 +144,11 @@ Work surface: `3` candidates, `3` sampled records.
   ],
   "sample_count": 3,
   "sample_status_paths": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
     "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "tests/test_hallucinate_multimodal_control_todo_queue.py",
-    "tests/test_meta_glasses_display_todo_queue.py",
-    "tests/test_virtual_ai_os_launch_readiness_gate.py"
+    "tests/test_meta_glasses_display_todo_queue.py"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864",
