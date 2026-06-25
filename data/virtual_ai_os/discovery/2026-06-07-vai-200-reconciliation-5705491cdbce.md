@@ -1,31 +1,45 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-25
-Fingerprint: 1c00f419339d156c02d5b919579ceefa3cdc11d4
+Fingerprint: 3badc6e5fd179a0498cbdea33e1bec1bb5744996
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
-Candidate count: 1
+Candidate count: 3
 Priority: P1
 Track: ops
 
 ## Main Checkout Status
 
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
 - ` m hallucinate_app`
+- ` M tests/test_hallucinate_multimodal_control_todo_queue.py`
+- ` M tests/test_meta_glasses_display_todo_queue.py`
 
 ## Main Checkout Evidence
 
-- Path categories: `other_dirty=1`
+- Path categories: `modified=3, other_dirty=1`
 - Status paths:
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
   - `hallucinate_app`
+  - `tests/test_hallucinate_multimodal_control_todo_queue.py`
+  - `tests/test_meta_glasses_display_todo_queue.py`
 - Name status:
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
   - `M	hallucinate_app`
+  - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
+  - `M	tests/test_meta_glasses_display_todo_queue.py`
 - Diff stat:
-  - `hallucinate_app | 0`
-  - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
+  - `.../2026-06-07-hao-311-reconciliation-534cc45af3d6.md | 19 ++++++++++++-------`
+  - ` hallucinate_app                                       |  0`
+  - ` .../test_hallucinate_multimodal_control_todo_queue.py |  2 +-`
+  - ` tests/test_meta_glasses_display_todo_queue.py         |  2 +-`
+  - ` 4 files changed, 14 insertions(+), 9 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
 - `implementation/vai-503-attempt-1-1782421864` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864`
+- `rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223`
+- `implementation/vai-511-attempt-1-1782424223` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223`
 
 ## Why This Blocks Progress
 
@@ -44,7 +58,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `1` candidates, `1` sampled records.
+Work surface: `3` candidates, `3` sampled records.
 
 ### Suggested Actions
 
@@ -86,22 +100,29 @@ Work surface: `1` candidates, `1` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 1,
+  "candidate_count": 3,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "1c00f419339d156c02d5b919579ceefa3cdc11d4",
+  "fingerprint": "3badc6e5fd179a0498cbdea33e1bec1bb5744996",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "hallucinate_app | 0\n 1 file changed, 0 insertions(+), 0 deletions(-)",
-    "name_status": "M\thallucinate_app",
+    "diff_stat": ".../2026-06-07-hao-311-reconciliation-534cc45af3d6.md | 19 ++++++++++++-------\n hallucinate_app                                       |  0\n .../test_hallucinate_multimodal_control_todo_queue.py |  2 +-\n tests/test_meta_glasses_display_todo_queue.py         |  2 +-\n 4 files changed, 14 insertions(+), 9 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md\nM\thallucinate_app\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "path_categories": {
+      "modified": 3,
       "other_dirty": 1
     },
     "status_paths": [
-      "hallucinate_app"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      "hallucinate_app",
+      "tests/test_hallucinate_multimodal_control_todo_queue.py",
+      "tests/test_meta_glasses_display_todo_queue.py"
     ],
     "status_short": [
-      " m hallucinate_app"
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      " m hallucinate_app",
+      " M tests/test_hallucinate_multimodal_control_todo_queue.py",
+      " M tests/test_meta_glasses_display_todo_queue.py"
     ]
   },
   "reason": "main_checkout_dirty",
@@ -111,14 +132,21 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/vai-503-attempt-1-1782421864"
+    "implementation/vai-503-attempt-1-1782421864",
+    "rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb",
+    "implementation/vai-511-attempt-1-1782424223"
   ],
-  "sample_count": 1,
+  "sample_count": 3,
   "sample_status_paths": [
-    "hallucinate_app"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+    "hallucinate_app",
+    "tests/test_hallucinate_multimodal_control_todo_queue.py",
+    "tests/test_meta_glasses_display_todo_queue.py"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223"
   ],
   "success_signals": [
     "candidate_count_decreases",
