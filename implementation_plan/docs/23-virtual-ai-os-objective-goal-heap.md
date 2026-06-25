@@ -1513,6 +1513,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Bundle: objective/launch/hallucinate-mcp-dashboard
 - Parallel lane: hallucinate-mcp-dashboard
 - Refinement depth: 1
+- Supervisor refill: VAI/MGW/HAO and HAO-only supervisor mission terms keep Hallucinate App menus, dashboards, dashboard capability catalog, daemon health, tools/list, tools/call, ipfs_kit_py, ipfs_datasets_py, and ipfs_accelerate_py eligible for generated tasks, validation-gate subtasks, and child subgoals.
 - Embedding query: Hallucinate App menus dashboards MCP dashboard capability catalog daemon health tools/list tools/call ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py Swissknife MCP++ Playwright launch interoperability
 - AST query: MenuGenerator, mcpServers, dashboardMcpServers, getLaunchPlan, getDashboardCapabilityCatalog, mcp_daemon_manager, mcp-feature-exposure, mcp-dashboard-interoperability, ControlSurfaceInvocationGate
 - Conflict policy: keep Hallucinate App dashboard, daemon manager, and Swissknife catalog edits additive; preserve one shared catalog and one receipt schema when resolving parallel UI/test changes

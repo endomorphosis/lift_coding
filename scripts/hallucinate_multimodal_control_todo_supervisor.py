@@ -72,6 +72,29 @@ _default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
     HALLUCINATE_ENV_PREFIX
 )
 
+HALLUCINATE_DASHBOARD_LAUNCH_MISSION_TERMS = (
+    "Hallucinate App menus",
+    "Hallucinate App dashboards",
+    "Hallucinate App MCP dashboard",
+    "Hallucinate App dashboard capability catalog",
+    "Hallucinate App daemon health",
+    "Hallucinate App tools/list",
+    "Hallucinate App tools/call",
+    "dashboard capability catalog",
+    "daemon health",
+    "tools/list",
+    "tools/call",
+    "ipfs_accelerate_py",
+    "ipfs_datasets_py",
+    "ipfs_kit_py",
+)
+
+HALLUCINATE_DASHBOARD_LAUNCH_MISSION_ARGS = tuple(
+    item
+    for term in HALLUCINATE_DASHBOARD_LAUNCH_MISSION_TERMS
+    for item in ("--objective-mission-term", term)
+)
+
 _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_factory(
     HALLUCINATE_DATA_PATHS,
     objective_path_key="objective_goal_heap_path",
@@ -140,8 +163,16 @@ _hallucinate_supervisor_exports = build_configured_supervisor_runtime_exports(_h
 repair_hallucinate_supervisor_runtime = _hallucinate_supervisor_exports.repair_runtime
 hallucinate_supervisor_is_running = _hallucinate_supervisor_exports.is_running
 ensure_hallucinate_supervisor_running = _hallucinate_supervisor_exports.ensure_running
+
+
+def default_supervisor_args(argv: list[str] | None = None) -> list[str]:
+    """Return supervisor CLI args with Hallucinate dashboard mission defaults."""
+
+    return [*(argv or []), *HALLUCINATE_DASHBOARD_LAUNCH_MISSION_ARGS]
+
+
 def main(argv: list[str] | None = None) -> None:
-    _hallucinate_supervisor_runner.run(argv)
+    _hallucinate_supervisor_runner.run(default_supervisor_args(argv))
 
 
 if __name__ == "__main__":
