@@ -55,6 +55,9 @@ PLAYWRIGHT_LAUNCH_REPLAY_PATH = (
 MCP_DASHBOARD_REVIEW_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-676-hallucinate-mcp-dashboard-review.md"
 )
+MCP_DASHBOARD_CATALOG_PATH = (
+    DISCOVERY_ROOT / "2026-06-25-hao-677-dashboard-capability-catalog.md"
+)
 
 
 def _load_script_module(name: str):
@@ -557,6 +560,85 @@ def test_hao_676_reviews_and_fixes_hallucinate_mcp_dashboard_menu_surface():
         assert required in review_source
 
 
+def test_hao_677_adds_daemon_owned_mcp_dashboard_capability_catalog():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    task = tasks["HAO-677"]
+    catalog_source = MCP_DASHBOARD_CATALOG_PATH.read_text(encoding="utf-8")
+    catalog = _json_block_after(catalog_source, "## Catalog Fixture")
+    mcp_launch_contract = _json_block_after(
+        MCP_LAUNCH_CONTRACT_INTEGRATION_PATH.read_text(encoding="utf-8"),
+        "## Integration Fixture",
+    )
+    daemon_manager_source = (
+        REPO_ROOT / "hallucinate_app" / "hallucinate_app" / "node" / "mcp_daemon_manager.js"
+    ).read_text(encoding="utf-8")
+    index_source = (REPO_ROOT / "hallucinate_app" / "index.js").read_text(encoding="utf-8")
+    preload_cjs_source = (REPO_ROOT / "hallucinate_app" / "preload.cjs").read_text(encoding="utf-8")
+    preload_js_source = (REPO_ROOT / "hallucinate_app" / "preload.js").read_text(encoding="utf-8")
+    daemon_test_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "js" / "test_mcp_daemon_manager.js"
+    ).read_text(encoding="utf-8")
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-feature-exposure.spec.ts"
+    ).read_text(encoding="utf-8")
+
+    assert task.status == "completed"
+    assert task.priority == "P0"
+    assert task.track == "integration"
+    assert task.depends_on == ["HAO-676"]
+    assert task.metadata["goal id"] == "VAIOS-G723"
+    assert task.metadata["parallel lane"] == "hallucinate-mcp-dashboard-capability-catalog"
+    assert MCP_DASHBOARD_CATALOG_PATH.relative_to(REPO_ROOT).as_posix() in task.outputs
+    assert "npm --prefix hallucinate_app run test:daemon-manager" in task.validation
+
+    assert catalog["schema"] == "hallucinate_app.mcp_dashboard_capability_catalog.v1"
+    assert catalog["task_id"] == "HAO-677"
+    assert catalog["goal_id"] == "VAIOS-G723"
+    assert catalog["control_surface_route"] == [
+        "Hallucinate App dashboard action",
+        "dashboard capability catalog",
+        "interaction_envelope",
+        "policy_decision",
+        "mediation_receipt",
+        "supervised MCP server transport",
+    ]
+
+    servers = {item["server_package"]: item for item in catalog["servers"]}
+    assert set(servers) == {"ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"}
+    assert servers["ipfs_kit_py"]["port"] == 8004
+    assert servers["ipfs_kit_py"]["endpoint"] == "http://127.0.0.1:8004"
+    assert servers["ipfs_kit_py"]["tool_protocols"]["tools_call"]["safeProbe"]["mutation"] is False
+    assert servers["ipfs_datasets_py"]["native_dashboard_catalog_url"] == (
+        "http://127.0.0.1:8899/api/hallucinate/dashboard-catalog"
+    )
+    assert servers["ipfs_datasets_py"]["mcpplusplus"]["mode"] == "optional_bridge"
+    assert "mcp++/profile-e-mcp-p2p" in servers["ipfs_accelerate_py"]["mcpplusplus"]["profiles"]
+
+    for server in servers.values():
+        assert server["tool_protocols"]["tools_list"]["operation"] == "tools/list"
+        assert server["tool_protocols"]["tools_call"]["operation"] == "tools/call"
+        assert server["control_surface_mediation_contract"].startswith("control_surface_contract:mcp-daemon:")
+        assert "receipt_cid" in server["control_surface_receipt_requirements"]
+        assert server["swissknife_consumer"]
+
+    launch_servers = {item["server_package"]: item for item in mcp_launch_contract["servers"]}
+    assert launch_servers["ipfs_kit_py"]["port"] == 8004
+
+    for required in (
+        "DASHBOARD_CATALOG_SCHEMA",
+        "getDashboardCapabilityCatalog",
+        "DASHBOARD_TOOL_PROTOCOLS",
+        "tools/list",
+        "tools/call",
+    ):
+        assert required in daemon_manager_source
+    assert "daemon:getDashboardCapabilityCatalog" in index_source
+    assert "getDashboardCapabilityCatalog" in preload_cjs_source
+    assert "getDashboardCapabilityCatalog" in preload_js_source
+    assert "Dashboard capability catalog" in daemon_test_source
+    assert "dashboard capability catalog reconciles menu URLs" in playwright_source
+
+
 def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
     tasks = {task.task_id: task for task in _load_tasks()}
     expected = {
@@ -613,7 +695,10 @@ def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
 
     for task_id, values in expected.items():
         task = tasks[task_id]
-        assert task.status == PENDING_TASK_STATUS
+        if task_id == "HAO-677":
+            assert task.status == "completed"
+        else:
+            assert task.status == PENDING_TASK_STATUS
         assert task.priority == values["priority"]
         assert task.track == values["track"]
         assert task.depends_on == values["depends_on"]

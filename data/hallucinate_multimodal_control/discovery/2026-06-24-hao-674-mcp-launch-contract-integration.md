@@ -29,7 +29,7 @@ control surfaces for `ipfs_accelerate_py`, `ipfs_datasets_py`, and
       "daemon_id": "ipfs-kit",
       "startup_order": 10,
       "entrypoint": "python -m ipfs_kit_py.cli mcp start",
-      "port": 3001,
+      "port": 8004,
       "rpc_path": "/mcp/tools/call",
       "swissknife_capability_family": "storage",
       "mcp_plus_plus_operations": [
