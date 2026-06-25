@@ -1701,7 +1701,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: e4da1e9e514501a904bc41ae3518ec8240f5d67e
+- Fingerprint: 1f589367dc8a38cf2253e8ce2a9c5406b2826685
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -4012,3 +4012,14 @@ cadence remains parseable and resumable.
 - Work scope: launch_validation_environment
 - Candidate kind: validation_gate
 - Acceptance: Prove the VAI launch gate cannot be satisfied by no-display Electron skips: the Hallucinate runner must use xvfb-run when present, report missing_xvfb_for_electron_playwright when it is absent, and keep the supervisor/objective heap focused on fixing the validation environment before declaring the MCP dashboard and Swissknife interoperability path production-ready.
+
+## VAI-514 Resolve validation retry-budget failure for VAI-512
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-501, VAI-502
+- Outputs: hallucinate_app, swissknife, tests, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery, data/virtual_ai_os/state/discovery
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-512. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-25-vai-514-vai-512-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-512 from strategy blocked_tasks.
