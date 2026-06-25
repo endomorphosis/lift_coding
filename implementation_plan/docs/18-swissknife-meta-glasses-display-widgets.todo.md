@@ -915,7 +915,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: efd7055b547b3e8cc601a6b5370fc1e1b67faf02
+- Fingerprint: 856ae2d564987976201634d75158892022bd30f6
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -2273,3 +2273,31 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-524. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-25-mgw-525-mgw-524-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-524 from strategy blocked_tasks.
+
+## MGW-526 Make Meta glasses MCP dashboard validation use the headless-aware Hallucinate runner
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: validation
+- Depends on: MGW-524, MGW-525
+- Outputs: hallucinate_app/scripts/run_playwright_test.mjs, tests/test_virtual_ai_os_launch_readiness_gate.py, data/meta_glasses_display_widgets/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py tests/test_meta_glasses_display_todo_queue.py -q; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)
+- Bundle: objective/launch/meta-glasses-mcp-dashboard-validation
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G723
+- Graph depth: 1
+- Parallel lane: meta-glasses-playwright-headless
+- Conflict policy: keep Meta glasses dashboard validation attached to the same Hallucinate MCP dashboard Playwright gate, but surface display/Xvfb environment failures as repair work instead of feature failures.
+- Goal id: VAIOS-G723
+- Missing evidence: Meta glasses interaction contracts validated through a non-skipped Hallucinate MCP dashboard Playwright gate
+- Embedding query: Meta glasses Swissknife Hallucinate MCP dashboard Playwright headless xvfb-run missing display control plane validation
+- AST query: run_playwright_test, missing_xvfb_for_electron_playwright, mcp-feature-exposure, meta glasses, control plane
+- Surplus group: objective/VAIOS-G723
+- Merge key: vaios-g723-mgw-playwright-validation-environment
+- Merge family: objective/VAIOS-G723
+- Merge role: validation_environment_gate
+- Work item count: 1
+- Work scope: launch_validation_environment
+- Candidate kind: validation_gate
+- Acceptance: Ensure MGW launch validation inherits the headless-aware Hallucinate Playwright runner so Meta glasses camera/microphone/headphones/neural-band control-plane tests fail only for real contract gaps, while missing DISPLAY/Xvfb is recorded as a repairable launch-environment blocker.
