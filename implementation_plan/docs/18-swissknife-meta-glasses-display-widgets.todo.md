@@ -909,18 +909,18 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-411-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
-## MGW-412 Resolve dirty main checkout blocking 4 worktree merges
+## MGW-412 Resolve dirty main checkout blocking 5 worktree merges
 
 - Status: completed
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: e75f991b8c95e0dbf926c30f35ec9288d020ce22
+- Fingerprint: 61f58c11c8cb85b92e481b2ba7ae1a6aba2a582c
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md
-- Acceptance: Reconciliation guardrail filed this because 4 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 5 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## MGW-413 Refresh official Meta glasses I/O source matrix
 
