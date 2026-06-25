@@ -170,6 +170,8 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "2",
     "--objective-max-interoperability-goals",
     REFILL_DEFAULTS["objective_max_interoperability_goals"],
+    "--objective-refill-scan",
+    "--objective-seed-interoperability-goals",
     *VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_ARGS,
     "--objective-task-janitor-max-deprioritized-tasks",
     "500",
