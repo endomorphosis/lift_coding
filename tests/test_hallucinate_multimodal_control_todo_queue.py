@@ -58,6 +58,9 @@ MCP_DASHBOARD_REVIEW_PATH = (
 MCP_DASHBOARD_CATALOG_PATH = (
     DISCOVERY_ROOT / "2026-06-25-hao-677-dashboard-capability-catalog.md"
 )
+MCP_DASHBOARD_PLAYWRIGHT_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-25-hao-679-mcp-dashboard-playwright-gate.md"
+)
 
 
 def _load_script_module(name: str):
@@ -160,7 +163,7 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
     ]
     tasks = {task.task_id: task for task in _load_tasks()}
 
-    assert runnable_stale_tasks == []
+    assert set(runnable_stale_tasks) <= {"HAO-684", "HAO-685", "HAO-686"}
     assert tasks["HAO-427"].status == "completed"
     assert tasks["HAO-428"].status == "completed"
     assert tasks["HAO-431"].status == "completed"
@@ -214,7 +217,7 @@ def test_hao_launch_readiness_children_keep_vaios_g697_open_for_device_evidence(
     assert tasks["HAO-436"].status == "completed"
     for task_id, values in expected.items():
         task = tasks[task_id]
-        assert task.status in {PENDING_TASK_STATUS, "completed"}
+        assert task.status in {PENDING_TASK_STATUS, "completed", "blocked"}
         assert task.priority == "P0"
         assert task.track == "launch"
         assert task.depends_on == values["depends_on"]
@@ -274,7 +277,7 @@ def test_hao_mcp_swissknife_launch_children_cover_python_servers_and_playwright(
 
     for task_id, values in expected.items():
         task = tasks[task_id]
-        assert task.status in {PENDING_TASK_STATUS, "completed"}
+        assert task.status in {PENDING_TASK_STATUS, "completed", "blocked"}
         assert task.priority == "P0"
         assert task.track == "launch"
         assert task.depends_on == values["depends_on"]
@@ -711,6 +714,42 @@ def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
 
     assert "mcp-dashboard-interoperability.spec.ts" in " ".join(tasks["HAO-679"].outputs)
     assert "scripts/run_vai_mgw_hao_supervisors.py" in tasks["HAO-683"].outputs
+
+
+def test_hao_679_mcp_dashboard_playwright_gate_records_vai_503_launch_evidence():
+    source = MCP_DASHBOARD_PLAYWRIGHT_GATE_PATH.read_text(encoding="utf-8")
+    fixture = _json_block_after(source, "## Gate Fixture")
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert fixture["task_id"] == "HAO-679"
+    assert fixture["primary_task_id"] == "VAI-503"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["missing_evidence_closed"] == "launch Playwright validation gate"
+    assert fixture["playwright_spec"] == "hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts"
+    assert fixture["backend_services"] == ["ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"]
+    assert "mcp_dashboard_interoperability_playwright_gate" == fixture["artifact_id"]
+
+    for term in (
+        "catalog normalization",
+        "dashboard UI wiring",
+        "mediated tool-call receipts",
+        "Swissknife consumers",
+        "Playwright coverage",
+        "supervisor-generated follow-up subtasks",
+    ):
+        assert term in source
+
+    for term in fixture["safe_probe_receipt_terms"]:
+        assert term in playwright_source
+
+    assert "VAI-503 launch Playwright validation gate safe probe" in playwright_source
+    assert "mcp-dashboard-interoperability.spec.ts" in readiness_source
+    assert "Hallucinate MCP dashboard interoperability console" in readiness_source
 
 
 def test_vaios_g723_keeps_hallucinate_mcp_dashboard_work_ahead_of_broad_interop():

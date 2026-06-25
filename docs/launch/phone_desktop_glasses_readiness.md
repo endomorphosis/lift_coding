@@ -19,6 +19,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - Backlog bridge: `HAO-436` / `MGW-274` / `VAI-340` for `VAIOS-G697`
 - Replay base: `data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
 - Python guard: `tests/test_virtual_ai_os_launch_readiness_gate.py`
+- Hallucinate MCP dashboard interoperability command: `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`
 - Swissknife Playwright command: `npm --prefix swissknife run test:e2e:meta-glasses`
 - Hallucinate App Playwright command: `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts`
 
@@ -27,6 +28,7 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 | Hop | Launch evidence |
 | --- | --- |
 | Phone-originated command | HAO-437 adds the real phone ingress rehearsal receipt: a physical `phone:operator` UI event enters Hallucinate App as an `interaction_envelope`, preserves `session_id`, `correlation_id`, and `request_id`, blocks `desktop:peer` and `phone_local` dispatch until `mediation_receipt` and `policy_receipt_id` exist, and records fail-closed recovery when the physical adapter is absent. |
+| Hallucinate MCP dashboard interoperability console | VAI-503 adds the dashboard-specific `launch Playwright validation gate`: `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` proves catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`. |
 | Hallucinate App mediation | `hallucinate_app/test/e2e/multimodal-control-surface.spec.ts` exercises voice, gesture, mouse, agent, and remote Meta glasses clients through `policy_decision` and `mediation_receipt`. |
 | Swissknife virtual desktop | `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts` opens every Swissknife desktop app and writes a reusable Meta glasses ORB template report. |
 | Desktop-peer offload | HAO-438 adds a desktop-peer offload smoke receipt: a phone-originated command selects `desktop:peer`, records capability and runtime health, emits `peer_offload_policy_receipt`, then recovers to `phone_local` with the same session, command, policy, and placement IDs when the peer is unavailable. |
@@ -51,6 +53,7 @@ The launch gate passes only when these commands pass in order:
 
 ```bash
 PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
 npm --prefix swissknife run test:e2e:meta-glasses
 npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 ```
@@ -61,10 +64,16 @@ replay packet, and `launch_readiness_receipt_v1` packet before the heavier
 browser tests run. That prevents scanner-only AST matches from satisfying the
 production objective.
 
-The `LaunchReadinessGate` remains open until the Python guard, Swissknife
-Playwright replay, and Hallucinate App Playwright mediation command all pass for
-the same receipt lineage. Only that all-pass result moves the gate state to
-`launch_ready`.
+The VAI-503 dashboard gate must pass before downstream Swissknife, phone,
+desktop offload, or Meta glasses flows depend on MCP backend capability. It
+checks the Hallucinate App dashboard capability catalog, backend service catalog,
+daemon health wiring, MCP++ telemetry, `tools/list`, `tools/call`, safe probes,
+and `control_surface` mediation receipts that Swissknife consumes.
+
+The `LaunchReadinessGate` remains open until the Python guard, Hallucinate MCP
+dashboard interoperability gate, Swissknife Playwright replay, and Hallucinate
+App Playwright mediation command all pass for the same receipt lineage. Only
+that all-pass result moves the gate state to `launch_ready`.
 
 The `launch_readiness_receipt_v1` also requires the same lineage to include the
 HAO-437 physical phone ingress receipt, HAO-438 desktop-peer offload smoke
