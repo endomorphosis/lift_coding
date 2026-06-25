@@ -699,7 +699,7 @@ def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
 
     for task_id, values in expected.items():
         task = tasks[task_id]
-        if task_id == "HAO-677":
+        if task_id in {"HAO-677", "HAO-683"}:
             assert task.status == "completed"
         else:
             assert task.status == PENDING_TASK_STATUS
