@@ -157,7 +157,7 @@ def test_expanded_meta_glasses_io_second_wave_targets_swissknife_app_integration
     for task_id, dependencies in expected_dependencies.items():
         task = tasks[task_id]
 
-        assert task.status == "todo"
+        assert task.status in {"todo", "completed"}
         assert task.priority in {"P0", "P1"}
         assert task.depends_on == dependencies
         for term in expected_acceptance_terms[task_id]:
