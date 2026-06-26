@@ -62,6 +62,19 @@ MGW_DISCOVERY_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "disc
 MGW_534_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
 )
+VAI_DISCOVERY_ROOT = REPO_ROOT / "data" / "virtual_ai_os" / "discovery"
+VAI_519_DAEMON_GATE_PATH = (
+    VAI_DISCOVERY_ROOT / "2026-06-26-vai-519-daemon-launch-health-gate.md"
+)
+VAI_519_DAEMON_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-519-daemon-launch-health-gate.json"
+)
+HEAP_PATH = REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
 
 
 def _load_script_module(name: str):
@@ -813,6 +826,48 @@ def test_mgw_534_packet_proof_aligns_vaios_g727_and_g729_launch_gate():
     ):
         assert term in receipt_source
         assert term in g727_text
+
+
+def test_vai_519_daemon_launch_gate_aligns_vaios_g728_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    receipt_source = VAI_519_DAEMON_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    fixture = json.loads(VAI_519_DAEMON_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+
+    assert receipt["task_id"] == "VAI-519"
+    assert fixture["task_id"] == "VAI-519"
+    assert fixture["daemon_gate_task_id"] == "MGW-535"
+    assert receipt["goal_id"] == "VAIOS-G728"
+    assert fixture["goal_id"] == "VAIOS-G728"
+    assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert fixture["goal_packet"] == receipt["goal_packet"]
+    assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert fixture["packet_goals"] == receipt["packet_goals"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["evidence_term"] == receipt["evidence_term"]
+    assert "daemon-launch-health.spec.ts" in " ".join(fixture["playwright_specs"])
+    assert "2026-06-26-vai-519-daemon-launch-health-gate.md" in g728_text
+    assert "vai-519-daemon-launch-health-gate.json" in g728_text
+    assert "VAI-519 daemon gate proof" in heap_source
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_kit_py",
+        "ipfs_datasets_py",
+        "ipfs_accelerate_py",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
+        assert term in fixture["required_evidence"] or term in g728_text
 
 
 def test_vaios_g723_validation_failure_can_generate_follow_up_task_and_subgoal(tmp_path):
