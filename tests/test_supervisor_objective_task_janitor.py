@@ -164,6 +164,48 @@ def test_objective_task_janitor_records_configured_mission_terms():
     assert updated["objective_task_janitor_mission_terms"] == ["edge compositor handshake"]
 
 
+def test_objective_task_janitor_keeps_launch_playwright_gate_repairs_on_mission():
+    ObjectiveGoal, PortalTask, _schema, reconcile = _imports()
+    goals = [
+        ObjectiveGoal(
+            "VAIOS-G729",
+            "Objective heap active steering and validation repair",
+            {
+                "status": "active",
+                "fib_priority": "1",
+                "priority": "P0",
+                "track": "launch",
+                "goal": (
+                    "The supervisor actively manages the objective heap and repairs failed "
+                    "validation results including Playwright launch replays."
+                ),
+            },
+        )
+    ]
+    tasks = [
+        PortalTask(
+            "MGW-999",
+            "Objective scan: repair launch validation gate",
+            _task_status("to", "do"),
+            "manual",
+            "P2",
+            "ops",
+            acceptance=(
+                "Objective scan filed this follow-up for the launch Playwright validation gate "
+                "after repeated supervisor validation failures."
+            ),
+        )
+    ]
+
+    result = reconcile(goals=goals, tasks=tasks, strategy={}, now="2026-06-23T00:00:00+00:00")
+    updated = result["strategy"]
+
+    assert updated["deprioritized_tasks"] == []
+    assert updated["objective_task_janitor_reopen_goal_ids"] == ["VAIOS-G729"]
+    assert updated["objective_task_janitor_force_goal_ids"] == ["VAIOS-G729"]
+    assert "launch playwright validation gate" in updated["objective_task_janitor_mission_terms"]
+
+
 def test_backlog_refill_treats_nonselectable_ready_tasks_as_drained(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import should_refill_backlog
