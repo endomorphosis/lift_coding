@@ -2230,7 +2230,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-524 Close objective gap: Hallucinate MCP dashboard interoperability console
 
-- Status: blocked
+- Status: todo
 - Completion: manual
 - Priority: P0
 - Track: launch
@@ -2263,7 +2263,6 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Todo vector key: 423c5c08373fafe1
 - Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-25-mgw-524-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
 
-- Blocked reason: Retired by objective-task janitor during launch steering because goal_completed.
 ## MGW-525 Resolve validation retry-budget failure for MGW-524
 
 - Status: todo
@@ -2277,7 +2276,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-526 Make Meta glasses MCP dashboard validation use the headless-aware Hallucinate runner
 
-- Status: blocked
+- Status: todo
 - Completion: manual
 - Priority: P0
 - Track: validation
@@ -2302,7 +2301,6 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Work scope: launch_validation_environment
 - Candidate kind: validation_gate
 - Acceptance: Ensure MGW launch validation inherits the headless-aware Hallucinate Playwright runner so Meta glasses camera/microphone/headphones/neural-band control-plane tests fail only for real contract gaps, while missing DISPLAY/Xvfb is recorded as a repairable launch-environment blocker.
-- Blocked reason: Retired by objective-task janitor during launch steering because goal_completed.
 
 ## MGW-527 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
