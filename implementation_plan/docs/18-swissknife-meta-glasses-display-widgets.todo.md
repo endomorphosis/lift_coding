@@ -2305,7 +2305,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-527 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
