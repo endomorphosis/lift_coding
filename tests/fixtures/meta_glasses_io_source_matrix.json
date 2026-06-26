@@ -1,0 +1,47 @@
+{
+  "mirrors": "swissknife/test/fixtures/meta-glasses-io/source-matrix/index.json",
+  "id": "mgw-415-public-dat-webapps-source-matrix",
+  "profile": "handsfree.meta-glasses/io-source-matrix",
+  "profile_version": "0.1.0",
+  "hardware_free": true,
+  "credentials_required": false,
+  "dat_package_access_required": false,
+  "paired_glasses_required": false,
+  "physical_hardware_required": false,
+  "required_source_families": [
+    "android-dat-displayaccess-v0.7",
+    "ios-dat-displayaccess-v0.7",
+    "dat-cameraaccess-v0.7",
+    "meta-display-webapps-inputs",
+    "bluetooth-audio-route-readiness"
+  ],
+  "required_lifecycle_terms": [
+    "display_target_selected",
+    "device_session_started",
+    "display_attached",
+    "display_ready",
+    "display_content_sent",
+    "camera_stream_started",
+    "camera_photo_captured"
+  ],
+  "required_input_terms": [
+    "ArrowLeft",
+    "ArrowRight",
+    "Enter",
+    "pinch",
+    "swipe_forward",
+    "motion.orientation",
+    "phone_gps.context"
+  ],
+  "required_failure_modes": [
+    "permission_denial",
+    "unsupported_display",
+    "release_channel_missing",
+    "firmware_update_required",
+    "dat_app_update_required",
+    "route_loss",
+    "backpressure",
+    "local_storage_limit",
+    "recovery"
+  ]
+}

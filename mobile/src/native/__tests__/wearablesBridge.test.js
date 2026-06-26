@@ -683,4 +683,66 @@ describe('wearablesBridge wrapper', () => {
       recovery: { readiness: 'ready' },
     });
   });
+
+  test('loads the DAT and Web Apps source matrix fixture without SDK credentials or hardware', () => {
+    const {
+      META_WEARABLES_DAT_SOURCE_MATRIX,
+      createMetaWearablesDatSourceMatrixMock,
+    } = require('../__fixtures__/metaWearablesDatSourceMatrix');
+    const matrix = createMetaWearablesDatSourceMatrixMock();
+
+    expect(META_WEARABLES_DAT_SOURCE_MATRIX).toMatchObject({
+      hardwareFree: true,
+      credentialsRequired: false,
+      datPackageAccessRequired: false,
+      pairedGlassesRequired: false,
+      physicalHardwareRequired: false,
+    });
+    expect(matrix.sourceFamilies).toEqual(expect.arrayContaining([
+      'android-dat-displayaccess-v0.7',
+      'ios-dat-displayaccess-v0.7',
+      'dat-cameraaccess-v0.7',
+      'meta-display-webapps-inputs',
+      'bluetooth-audio-route-readiness',
+    ]));
+    expect(matrix.displayAccessLifecycleV07).toEqual(expect.arrayContaining([
+      'display_target_selected',
+      'device_session_started',
+      'display_attached',
+      'display_ready',
+      'display_content_sent',
+    ]));
+    expect(matrix.cameraAccessLifecycleV07).toEqual(expect.arrayContaining([
+      'camera_stream_ready',
+      'camera_stream_started',
+      'camera_photo_captured',
+    ]));
+    expect(matrix.audioRouteStates).toEqual(expect.arrayContaining([
+      expect.objectContaining({ capability: 'microphone.input', route: 'bluetooth-hfp-input' }),
+      expect.objectContaining({ capability: 'speaker.output', route: 'bluetooth-a2dp-output' }),
+      expect.objectContaining({ capability: 'headphone.output', route: 'bluetooth-a2dp-output' }),
+    ]));
+    expect(matrix.webAppInputs).toEqual(expect.arrayContaining([
+      expect.objectContaining({ key: 'ArrowLeft' }),
+      expect.objectContaining({ key: 'ArrowRight' }),
+      expect.objectContaining({ key: 'Enter' }),
+      expect.objectContaining({ gesture: 'pinch' }),
+      expect.objectContaining({ touch: 'swipe_forward' }),
+    ]));
+    expect(matrix.sensorContexts).toEqual(expect.arrayContaining([
+      expect.objectContaining({ capability: 'motion.orientation' }),
+      expect.objectContaining({ capability: 'phone_gps.context' }),
+    ]));
+    expect(matrix.failureModes.map((mode) => mode.id)).toEqual(expect.arrayContaining([
+      'permission_denial',
+      'unsupported_display',
+      'release_channel_missing',
+      'firmware_update_required',
+      'dat_app_update_required',
+      'route_loss',
+      'backpressure',
+      'local_storage_limit',
+      'recovery',
+    ]));
+  });
 });
