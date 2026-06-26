@@ -127,3 +127,7 @@ PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hal
 test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses
 test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 ```
+
+- 2026-06-26: Python launch receipt gate passed with 86 tests.
+- 2026-06-26: Swissknife Meta glasses Playwright gate passed with 3 tests.
+- 2026-06-26: Hallucinate App multimodal control surface Playwright gate passed with 5 tests.
