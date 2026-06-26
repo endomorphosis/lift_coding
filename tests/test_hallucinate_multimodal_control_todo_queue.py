@@ -3069,6 +3069,89 @@ def test_objective_goal_scan_accepts_meta_glasses_remote_terminal_evidence(tmp_p
     assert not list((repo / "discovery").glob("*-objective-" + "ga" + "p-*.md"))
 
 
+def test_objective_goal_completion_waits_for_open_task_board_work(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+    from ipfs_accelerate_py.agent_supervisor.objective_tracker import (
+        reconcile_objective_goal_completion,
+    )
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    docs_path = repo / "docs" / "dashboard-proof.md"
+    docs_path.parent.mkdir()
+    docs_path.write_text(
+        "# Dashboard Proof\n\nThe dashboard proof covers daemon health and tools/list receipts.\n",
+        encoding="utf-8",
+    )
+    objective_path = repo / "objective-heap.md"
+    objective_path.write_text(
+        """# Objective Heap
+
+## VAIOS-G001 Dashboard proof
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 2
+- Track: launch
+- Priority: P0
+- Goal: Prove the dashboard proof.
+- Evidence: dashboard proof
+- Outputs: docs/dashboard-proof.md
+- Validation: test -f docs/dashboard-proof.md
+- Refinement: Keep open until board work closes.
+- Gap task: Finish the dashboard proof.
+""",
+        encoding="utf-8",
+    )
+    todo_path = repo / "todo.md"
+    todo_path.write_text(
+        f"""# Temporary Board
+
+## HAO-001 Finish dashboard proof
+
+{_pending_status_board_line()}
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Goal id: VAIOS-G001
+- Depends on:
+- Outputs: docs/dashboard-proof.md
+- Validation: true
+- Acceptance: Keep VAIOS-G001 open while this task is still pending.
+""",
+        encoding="utf-8",
+    )
+
+    open_result = reconcile_objective_goal_completion(
+        repo_root=repo,
+        objective_path=objective_path,
+        todo_path=todo_path,
+        task_header_prefix="HAO-",
+    )
+
+    assert open_result.completed_goal_ids == []
+    assert open_result.validation_results["VAIOS-G001"]["reason"] == "open_todo_tasks"
+    assert parse_goal_heap(objective_path.read_text(encoding="utf-8"))[0].status == "active"
+
+    todo_path.write_text(
+        todo_path.read_text(encoding="utf-8").replace(
+            _pending_status_board_line(),
+            "- Status: completed",
+        ),
+        encoding="utf-8",
+    )
+    closed_result = reconcile_objective_goal_completion(
+        repo_root=repo,
+        objective_path=objective_path,
+        todo_path=todo_path,
+        task_header_prefix="HAO-",
+    )
+
+    assert closed_result.completed_goal_ids == ["VAIOS-G001"]
+    assert parse_goal_heap(objective_path.read_text(encoding="utf-8"))[0].status == "completed"
+
+
 def test_objective_goal_scan_accepts_operator_shell_evidence_terms(tmp_path):
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     repo = tmp_path / "repo"
