@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
-Date: 2026-06-25
-Fingerprint: 7820681ec3b1b27163818821ce186760ce782e46
+Date: 2026-06-26
+Fingerprint: 2a538671811cf5c87a97f733950ab334f8e11dc3
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 5
@@ -32,19 +32,19 @@ Track: ops
   - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
   - `M	tests/test_meta_glasses_display_todo_queue.py`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 24 ++++++++--------------`
+  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 38 ++++++++++++++++------`
   - ` hallucinate_app                                    |  0`
   - ` ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-`
   - ` ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-`
   - ` tests/test_meta_glasses_display_todo_queue.py      |  2 +-`
-  - ` 5 files changed, 12 insertions(+), 18 deletions(-)`
+  - ` 5 files changed, 31 insertions(+), 13 deletions(-)`
 
 ## Sample Branches Or Worktrees
 
 - `implementation/vai-503-attempt-1-1782421864` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864`
 - `rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223`
 - `implementation/vai-511-attempt-1-1782424223` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--c5a2653cc583` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--ba9272a681ea` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
 - `implementation/vai-514-attempt-1-1782427150` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-514-attempt-1-1782427150`
 
 ## Why This Blocks Progress
@@ -109,10 +109,10 @@ Work surface: `5` candidates, `5` sampled records.
   "candidate_count": 5,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "7820681ec3b1b27163818821ce186760ce782e46",
+  "fingerprint": "2a538671811cf5c87a97f733950ab334f8e11dc3",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 24 ++++++++--------------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-\n tests/test_meta_glasses_display_todo_queue.py      |  2 +-\n 5 files changed, 12 insertions(+), 18 deletions(-)",
+    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 38 ++++++++++++++++------\n hallucinate_app                                    |  0\n ...swissknife-meta-glasses-display-widgets.todo.md |  2 +-\n ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-\n tests/test_meta_glasses_display_todo_queue.py      |  2 +-\n 5 files changed, 31 insertions(+), 13 deletions(-)",
     "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\thallucinate_app\nM\timplementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
     "path_categories": {
       "modified": 4,
@@ -143,7 +143,7 @@ Work surface: `5` candidates, `5` sampled records.
     "implementation/vai-503-attempt-1-1782421864",
     "rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb",
     "implementation/vai-511-attempt-1-1782424223",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--c5a2653cc583",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--ba9272a681ea",
     "implementation/vai-514-attempt-1-1782427150"
   ],
   "sample_count": 5,
