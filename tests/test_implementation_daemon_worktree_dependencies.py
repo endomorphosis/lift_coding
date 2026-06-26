@@ -53,6 +53,38 @@ def test_launch_js_node_modules_are_linked_into_validation_worktrees(tmp_path):
         assert (target / ".installed").read_text(encoding="utf-8") == "ready\n"
 
 
+def test_self_looping_shared_node_modules_path_is_skipped(tmp_path):
+    module = _daemon_module()
+
+    repo_root = tmp_path / "repo"
+    worktree_path = tmp_path / "worktree"
+    repo_root.mkdir()
+    worktree_path.mkdir()
+
+    loop = repo_root / "mobile" / "node_modules"
+    loop.parent.mkdir(parents=True)
+    loop.symlink_to(loop, target_is_directory=True)
+
+    valid_source = repo_root / "swissknife" / "node_modules"
+    valid_source.mkdir(parents=True)
+    (valid_source / ".installed").write_text("ready\n", encoding="utf-8")
+
+    daemon = module.PortalImplementationDaemon(
+        todo_path=tmp_path / "todo.md",
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo_root,
+    )
+
+    daemon._link_shared_worktree_paths(worktree_path)
+
+    assert not (worktree_path / "mobile" / "node_modules").exists()
+    linked = worktree_path / "swissknife" / "node_modules"
+    assert linked.is_symlink()
+    assert linked.resolve() == valid_source.resolve()
+
+
 def test_launch_js_node_modules_are_ephemeral_commit_paths():
     module = _daemon_module()
 

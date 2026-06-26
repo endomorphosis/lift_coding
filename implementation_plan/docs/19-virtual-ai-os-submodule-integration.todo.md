@@ -4037,11 +4037,11 @@ cadence remains parseable and resumable.
 
 ## VAI-516 Resolve implementation retry-budget failure for VAI-512
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-26: fixed the implementation worktree setup blocker by making shared node_modules linking skip broken/self-looping dependency paths, removing the tracked mobile/node_modules self-loop, and adding regression coverage for the VAI-512 retry-budget failure.
 - Priority: P1
 - Track: ops
 - Depends on: VAI-501, VAI-502
-- Outputs: hallucinate_app, swissknife, tests, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery, data/virtual_ai_os/state/discovery
-- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-516-vai-512-implementation-retry-budget.md
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, tests/test_implementation_daemon_worktree_dependencies.py, data/virtual_ai_os/state/discovery/2026-06-26-vai-516-vai-512-implementation-retry-budget.md
+- Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_implementation_daemon_worktree_dependencies.py -q
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-512. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-516-vai-512-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-512 from strategy blocked_tasks.
