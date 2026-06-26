@@ -910,7 +910,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
 <<<<<<< HEAD
-## MGW-412 Resolve dirty main checkout blocking 9 worktree merges
+## MGW-412 Resolve dirty main checkout blocking 10 worktree merges
 =======
 ## MGW-412 Resolve dirty main checkout blocking 6 worktree merges
 >>>>>>> implementation/mgw-525-attempt-1-1782436831
