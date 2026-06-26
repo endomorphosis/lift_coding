@@ -1525,3 +1525,141 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Child goals: VAIOS-G723-C1 Catalog normalization; VAIOS-G723-C2 Dashboard UI wiring; VAIOS-G723-C3 Mediated tool-call receipts; VAIOS-G723-C4 Swissknife consumers; VAIOS-G723-C5 Playwright coverage; VAIOS-G723-C6 Supervisor-generated follow-up subtasks.
 - Launch Playwright validation gate: `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts` with evidence in `data/hallucinate_multimodal_control/discovery/2026-06-25-hao-682-mcp-dashboard-launch-readiness.md`, `data/meta_glasses_display_widgets/discovery/2026-06-25-mgw-524-launch-playwright-validation-gate.md`, and `hallucinate_app/test/e2e/fixtures/hao-682-mcp-dashboard-launch-readiness.json`.
 - Gap task: Turn the Hallucinate App menus and dashboards into the high-value launch console that continuously verifies Python MCP server interoperability before Swissknife, phone, desktop offload, or Meta glasses flows depend on those backend capabilities.
+
+## VAIOS-G724 Hallucinate App MCP dashboard capability catalog
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3000
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
+- Goal kind: launch_readiness
+- Launch key: hallucinate-mcp-dashboard-capability-catalog
+- Submodules: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
+- Mission terms: hallucinate_app menus, Hallucinate App MCP dashboard, dashboard capability catalog, daemon health, tools/list, tools/call, ipfs_accelerate_py MCP server, ipfs_datasets_py MCP server, ipfs_kit_py MCP server, Swissknife applications, Playwright MCP dashboard interoperability
+- Goal: Hallucinate App menus and dashboards expose ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP server dashboards, daemon health, tools/list, and tools/call so Swissknife can test backend interoperability from the UI.
+- Evidence: hallucinate_app menus, Hallucinate App MCP dashboard, dashboard capability catalog, daemon health, tools/list, tools/call, ipfs_accelerate_py MCP server, ipfs_datasets_py MCP server, ipfs_kit_py MCP server, Swissknife applications, Playwright MCP dashboard interoperability
+- Outputs: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+- Refinement depth: 1
+- Embedding query: Hallucinate App MCP dashboard dashboard capability catalog tools/list tools/call ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Swissknife Playwright
+- AST query: hallucinate_app, swissknife, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, tools/list, tools/call, daemon health, MCP dashboard
+- Parallel lane: objective/launch/hallucinate-mcp-dashboard-capability-catalog
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Gap task: Create or repair the Hallucinate App dashboard/menu integration so it lists and calls each backend MCP server tool, then cover it with Playwright.
+
+## VAIOS-G725 Swissknife MCP++ server dashboard interoperability
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3001
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/swissknife-mcp-plus-plus-server-dashboard-interop
+- Goal kind: launch_readiness
+- Launch key: swissknife-mcp-plus-plus-server-dashboard-interop
+- Submodules: swissknife, hallucinate_app, Mcp-Plus-Plus, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
+- Mission terms: Swissknife applications, Mcp-Plus-Plus, MCP++ compatibility, MCP server dashboard, dashboard capability catalog, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, tools/list, tools/call, control plane
+- Goal: Swissknife applications consume MCP++ compatible control-plane contracts from Hallucinate App and the ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP servers.
+- Evidence: Swissknife applications, Mcp-Plus-Plus, MCP++ compatibility, MCP server dashboard, dashboard capability catalog, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, tools/list, tools/call, control plane
+- Outputs: swissknife, Mcp-Plus-Plus, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, swissknife/test/e2e/mcp-dashboard.spec.ts
+- Validation: npm --prefix swissknife run test:e2e:mcp
+- Refinement depth: 1
+- Embedding query: Swissknife MCP++ MCP server dashboard control plane tools/list tools/call ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py
+- AST query: swissknife, Mcp-Plus-Plus, MCP++, MCP server, tools/list, tools/call, control plane
+- Parallel lane: objective/launch/swissknife-mcp-plus-plus-server-dashboard-interop
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Gap task: Implement the Swissknife-facing MCP++ dashboard contract and tests that prove Swissknife can enumerate and invoke backend services through the control plane.
+
+## VAIOS-G726 Cross-device virtual desktop offload launch replay
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3002
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/cross-device-virtual-desktop-offload-replay
+- Goal kind: launch_readiness
+- Launch key: cross-device-virtual-desktop-offload-replay
+- Submodules: mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
+- Mission terms: phone-hosted Swissknife virtual desktop, desktop peer offload, mobile phone, Hallucinate App mediation, IPFS, libp2p, MCP++, launch readiness receipt, cross-device e2e validation, Playwright launch replay
+- Goal: A phone-hosted Swissknife virtual desktop can discover a desktop peer, offload compute, route Hallucinate App mediation through IPFS/libp2p/MCP++, and produce a launch readiness receipt.
+- Evidence: phone-hosted Swissknife virtual desktop, desktop peer offload, mobile phone, Hallucinate App mediation, IPFS, libp2p, MCP++, launch readiness receipt, cross-device e2e validation, Playwright launch replay
+- Outputs: mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, tests/test_virtual_ai_os_launch_readiness_gate.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Refinement depth: 1
+- Embedding query: phone hosted Swissknife virtual desktop desktop peer offload mobile IPFS libp2p MCP++ launch readiness receipt Playwright
+- AST query: mobile, swissknife, hallucinate_app, desktop peer offload, launch readiness, Playwright
+- Parallel lane: objective/launch/cross-device-virtual-desktop-offload-replay
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Gap task: Build the deterministic cross-device launch replay and receipt path that proves phone-to-desktop offload works through the planned control plane.
+
+## VAIOS-G727 Meta glasses control-plane input routing
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3003
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/meta-glasses-control-plane-input-routing
+- Goal kind: launch_readiness
+- Launch key: meta-glasses-control-plane-input-routing
+- Submodules: external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app
+- Mission terms: Meta glasses interface, Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth transport, Wi-Fi transport, mobile phone, Swissknife applications, IPFS, libp2p, MCP++, control plane
+- Goal: Meta glasses camera, microphone, headphones, Neural Band, and captouch inputs route through the mobile phone into Swissknife applications and the control plane using Bluetooth, Wi-Fi, IPFS/libp2p, and MCP++ compatible envelopes where possible.
+- Evidence: Meta glasses interface, Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth transport, Wi-Fi transport, mobile phone, Swissknife applications, IPFS, libp2p, MCP++, control plane
+- Outputs: external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Refinement depth: 1
+- Embedding query: Meta glasses camera microphone headphones Neural Band captouch Bluetooth Wi-Fi Swissknife control plane IPFS libp2p MCP++
+- AST query: Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth, Wi-Fi, Swissknife, control plane
+- Parallel lane: objective/launch/meta-glasses-control-plane-input-routing
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Gap task: Research and codify the Meta glasses input contracts, mocks, and transport tests that let Swissknife applications consume those interaction methods.
+
+## VAIOS-G728 Hallucinate App daemon launch orchestration
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3004
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-daemon-launch-orchestration
+- Goal kind: launch_readiness
+- Launch key: hallucinate-daemon-launch-orchestration
+- Submodules: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
+- Mission terms: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications
+- Goal: Hallucinate App launches and monitors the ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP daemons, exposes their health in dashboards, and hands capability records to Swissknife.
+- Evidence: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications
+- Outputs: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q
+- Refinement depth: 1
+- Embedding query: Hallucinate App daemon launch health MCP server dashboard ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Swissknife
+- AST query: hallucinate_app, daemon health, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py
+- Parallel lane: objective/launch/hallucinate-daemon-launch-orchestration
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Gap task: Make Hallucinate App own daemon launch and health reporting for the backend MCP servers, with UI and integration tests that Swissknife can exercise.
+
+## VAIOS-G729 Objective heap active steering and validation repair
+
+- Status: active
+- Parent: VAIOS-G000
+- Fib priority: 3005
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/objective-heap-autosteer-validation-repair
+- Goal kind: launch_readiness
+- Launch key: objective-heap-autosteer-validation-repair
+- Submodules: external/ipfs_accelerate, hallucinate_app, swissknife, mobile
+- Mission terms: objective heap, fibonacci priority, supervisor active management, failed validation repair, Playwright launch replay, HAO task board, MGW task board, VAI task board, production readiness
+- Goal: The supervisor actively manages the objective heap and todo boards by adding, deprioritizing, and repairing goals, subgoals, tasks, and subtasks from validation results including Playwright launch replays.
+- Evidence: objective heap, fibonacci priority, supervisor active management, failed validation repair, Playwright launch replay, HAO task board, MGW task board, VAI task board, production readiness
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py
+- Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py tests/test_reconciliation_guardrail_refresh.py -q
+- Refinement depth: 1
+- Embedding query: objective heap fibonacci priority supervisor active management failed validation repair Playwright VAI MGW HAO production readiness
+- AST query: objective heap, supervisor, validation repair, Playwright, VAI, MGW, HAO
+- Parallel lane: objective/launch/objective-heap-autosteer-validation-repair
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Gap task: Extend the supervisor loop so failed validation and stale idle lanes generate mission-aligned follow-up tasks and subgoals instead of generic reconciliation churn.
