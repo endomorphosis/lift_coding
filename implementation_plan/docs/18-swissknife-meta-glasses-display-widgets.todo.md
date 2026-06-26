@@ -2351,8 +2351,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-531 Resolve implementation retry-budget failure for MGW-369
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-26: verified the MGW-369 implementation setup blocker is resolved by the submodule worktree fallback in `external/ipfs_accelerate` (`b14f4df49c35ffb2891df1e25c171d446c083327`), which fetches and falls back to source `HEAD` when a nested gitlink ref is unavailable; see `data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-531-resolution.md`.
 - Priority: P1
 - Track: ops
 - Depends on: MGW-364, MGW-365, MGW-366
