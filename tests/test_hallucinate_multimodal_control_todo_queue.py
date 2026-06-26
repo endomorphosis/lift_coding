@@ -58,6 +58,10 @@ MCP_DASHBOARD_REVIEW_PATH = (
 MCP_DASHBOARD_CATALOG_PATH = (
     DISCOVERY_ROOT / "2026-06-25-hao-677-dashboard-capability-catalog.md"
 )
+MGW_DISCOVERY_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
+MGW_534_LAUNCH_GATE_PATH = (
+    MGW_DISCOVERY_ROOT / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
+)
 
 
 def _load_script_module(name: str):
@@ -757,6 +761,58 @@ def test_vaios_g723_keeps_hallucinate_mcp_dashboard_work_ahead_of_broad_interop(
         "Playwright",
     ):
         assert term in combined_goal_text
+
+
+def test_mgw_534_packet_proof_aligns_vaios_g727_and_g729_launch_gate():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = MGW_534_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt["task_id"] == "MGW-534"
+    assert receipt["goal_packet"] == "goal_packet/launch/external/ec964340486b"
+    assert receipt["packet_goals"] == ["VAIOS-G727", "VAIOS-G729"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+
+    g727 = goals["VAIOS-G727"]
+    g729 = goals["VAIOS-G729"]
+    assert g727.fields["bundle"] == "objective/launch/meta-glasses-control-plane-input-routing"
+    assert g729.fields["bundle"] == "objective/launch/objective-heap-autosteer-validation-repair"
+
+    g727_text = " ".join([*g727.fields.keys(), *g727.fields.values()])
+    g729_text = " ".join([*g729.fields.keys(), *g729.fields.values()])
+    for term in (
+        "launch Playwright validation gate",
+        "goal_packet/launch/external/ec964340486b",
+        "2026-06-26-mgw-534-launch-playwright-validation-gate.md",
+    ):
+        assert term in g727_text
+        assert term in g729_text
+    assert "MGW-534" in g727_text
+    assert "MGW-534 packet proof" in heap_source
+    assert "mgw_534_packet_proof" in g729_text
+
+    for term in (
+        "camera",
+        "microphone",
+        "headphones",
+        "captouch",
+        "Neural Band",
+        "Bluetooth transport",
+        "Wi-Fi transport",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "Swissknife applications",
+        "control plane",
+    ):
+        assert term in receipt_source
+        assert term in g727_text
 
 
 def test_vaios_g723_validation_failure_can_generate_follow_up_task_and_subgoal(tmp_path):

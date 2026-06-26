@@ -163,9 +163,10 @@ def build_meta_glasses_playwright_fixture(
 ) -> dict[str, object]:
     """Build a deterministic hardware-free fixture for Playwright replay.
 
-    The fixture keeps camera, microphone, headphones, display, and Neural Band
-    events on the same control-plane route that physical DAT adapters will use
-    later, with receipt CIDs preserved for replay against real devices.
+    The fixture keeps camera, microphone, headphones, display, captouch, and
+    Neural Band events on the same control-plane route that physical DAT
+    adapters will use later, with receipt CIDs preserved for replay against real
+    devices.
     """
 
     base_handoff = {
@@ -218,6 +219,18 @@ def build_meta_glasses_playwright_fixture(
                 "render_path": "display-webapp",
             },
             "bafy-mgw519-receipt-display",
+        ),
+        (
+            "captouch.intent",
+            "captouch",
+            "corr-mgw519-captouch",
+            {
+                "intent": "select",
+                "gesture": "single_tap",
+                "surface": "right_temple",
+                "confidence": 0.97,
+            },
+            "bafy-mgw519-receipt-captouch",
         ),
         (
             "Neural Band.intent",

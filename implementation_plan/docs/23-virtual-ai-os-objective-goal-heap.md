@@ -1610,15 +1610,16 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Submodules: external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app
 - Mission terms: Meta glasses interface, Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth transport, Wi-Fi transport, mobile phone, Swissknife applications, IPFS, libp2p, MCP++, control plane
 - Goal: Meta glasses camera, microphone, headphones, Neural Band, and captouch inputs route through the mobile phone into Swissknife applications and the control plane using Bluetooth, Wi-Fi, IPFS/libp2p, and MCP++ compatible envelopes where possible.
-- Evidence: Meta glasses interface, Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth transport, Wi-Fi transport, mobile phone, Swissknife applications, IPFS, libp2p, MCP++, control plane
+- Evidence: Meta glasses interface, Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth transport, Wi-Fi transport, mobile phone, Swissknife applications, IPFS, libp2p, MCP++, control plane, launch Playwright validation gate, data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-534-launch-playwright-validation-gate.md, swissknife/test/e2e/fixtures/mgw-519-meta-glasses-control-plane.json
 - Outputs: external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py
-- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_launch_readiness_gate.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Refinement depth: 1
 - Embedding query: Meta glasses camera microphone headphones Neural Band captouch Bluetooth Wi-Fi Swissknife control plane IPFS libp2p MCP++
 - AST query: Meta Wearables DAT, camera, microphone, headphones, Neural Band, captouch, Bluetooth, Wi-Fi, Swissknife, control plane
 - Parallel lane: objective/launch/meta-glasses-control-plane-input-routing
 - Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
 - Gap task: Research and codify the Meta glasses input contracts, mocks, and transport tests that let Swissknife applications consume those interaction methods.
+- Launch Playwright validation gate: MGW-534 binds `goal_packet/launch/external/ec964340486b` to `npm --prefix swissknife run test:e2e:meta-glasses` and `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts`, with VAIOS-G727 camera, microphone, headphones, captouch, Neural Band, Bluetooth transport, Wi-Fi transport, IPFS, libp2p, MCP++, mobile phone, Swissknife applications, Hallucinate App mediation, and control-plane evidence in `data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-534-launch-playwright-validation-gate.md` and `swissknife/test/e2e/fixtures/mgw-519-meta-glasses-control-plane.json`.
 
 ## VAIOS-G728 Hallucinate App daemon launch orchestration
 
@@ -1633,7 +1634,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Submodules: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
 - Mission terms: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications
 - Goal: Hallucinate App launches and monitors the ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP daemons, exposes their health in dashboards, and hands capability records to Swissknife.
-- Evidence: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications, launch Playwright validation gate, data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md, hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json
+- Evidence: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications, launch Playwright validation gate, data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md, hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json, data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, hallucinate_app/test/e2e/fixtures/mgw-535-daemon-launch-health-gate.json
 - Outputs: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q
 - Refinement depth: 1
@@ -1644,6 +1645,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Gap task: Make Hallucinate App own daemon launch and health reporting for the backend MCP servers, with UI and integration tests that Swissknife can exercise.
 - Launch Playwright validation gate: VAI-517 binds the shared goal packet `goal_packet/launch/hallucinate_app/44dceea6bc53` to `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`, including daemon health and Swissknife consumer receipt coverage in `hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json`.
 - MGW-533 packet proof: `hallucinate_app/test/e2e/fixtures/mgw-533-mcp-dashboard-launch-gate.json` requires `VAIOS-G728` in the same goal packet as `VAIOS-G724` and covers the `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` dashboard servers, daemon health path, dashboard capability catalog, and Swissknife handoff used by the Hallucinate App launch gate.
+- MGW-535 proof: `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes `getDaemonLaunchValidationGate`, `launch_objective_ids`, and `launch_validation_gate` for `VAIOS-G728` and packet sibling `VAIOS-G724`. `hallucinate_app/test/e2e/daemon-launch-health.spec.ts`, `hallucinate_app/test/e2e/fixtures/mgw-535-daemon-launch-health-gate.json`, `hallucinate_app/test/js/test_mcp_daemon_manager.js`, and `data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md` prove the launch Playwright validation gate covers Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`, `ipfs_datasets_py`, `ipfs_accelerate_py`, dashboard capability catalog, and Swissknife applications without mutating the shared dashboard catalog schema.
 
 ## VAIOS-G729 Objective heap active steering and validation repair
 
@@ -1658,7 +1660,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Submodules: external/ipfs_accelerate, hallucinate_app, swissknife, mobile
 - Mission terms: objective heap, fibonacci priority, supervisor active management, failed validation repair, Playwright launch replay, HAO task board, MGW task board, VAI task board, production readiness
 - Goal: The supervisor actively manages the objective heap and todo boards by adding, deprioritizing, and repairing goals, subgoals, tasks, and subtasks from validation results including Playwright launch replays.
-- Evidence: objective heap, fibonacci priority, supervisor active management, failed validation repair, Playwright launch replay, HAO task board, MGW task board, VAI task board, production readiness
+- Evidence: objective heap, fibonacci priority, supervisor active management, failed validation repair, Playwright launch replay, HAO task board, MGW task board, VAI task board, production readiness, launch Playwright validation gate, data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-534-launch-playwright-validation-gate.md
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py
 - Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py tests/test_reconciliation_guardrail_refresh.py -q
 - Refinement depth: 1
@@ -1667,3 +1669,4 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/launch/objective-heap-autosteer-validation-repair
 - Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
 - Gap task: Extend the supervisor loop so failed validation and stale idle lanes generate mission-aligned follow-up tasks and subgoals instead of generic reconciliation churn.
+- MGW-534 packet proof: `data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-534-launch-playwright-validation-gate.md` requires `VAIOS-G729` in the same `goal_packet/launch/external/ec964340486b` packet as `VAIOS-G727`, records the full Python plus Swissknife and Hallucinate App Playwright launch packet command, and names the objective heap, MGW task board, HAO/VAI-aligned validation gate, and production-readiness route that supervisor-fed backlog repair must preserve.

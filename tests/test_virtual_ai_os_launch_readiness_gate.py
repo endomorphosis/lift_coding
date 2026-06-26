@@ -62,12 +62,27 @@ MGW_526_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-26-mgw-526-headless-aware-hallucinate-runner.md"
 )
+MGW_534_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "meta_glasses_display_widgets"
+    / "discovery"
+    / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
     REPO_ROOT / "swissknife" / "build-tools" / "configs" / "playwright.meta-glasses.config.ts"
 )
 SWISSKNIFE_SPEC_PATH = REPO_ROOT / "swissknife" / "test" / "e2e" / "meta-glasses-virtual-os.spec.ts"
+SWISSKNIFE_CONTROL_PLANE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "swissknife"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "mgw-519-meta-glasses-control-plane.json"
+)
 HALLUCINATE_PACKAGE_PATH = REPO_ROOT / "hallucinate_app" / "package.json"
 HALLUCINATE_RUNNER_PATH = REPO_ROOT / "hallucinate_app" / "scripts" / "run_playwright_test.mjs"
 HALLUCINATE_SPEC_PATH = (
@@ -329,6 +344,7 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "HALLUCINATE_APP_E2E_DISABLE_XVFB" in runner_source
     assert "noDisplayHeadlessGateSpecs" in runner_source
     assert "canRunWithoutVirtualDisplay" in runner_source
+    assert "daemon-launch-health.spec.ts" in runner_source
     assert "mcp-dashboard-interoperability.spec.ts" in runner_source
     assert "mcp-feature-exposure.spec.ts" in runner_source
     assert "multimodal-control-surface.spec.ts" in runner_source
@@ -386,6 +402,81 @@ def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_run
     assert "control_surface_route" in dashboard_spec_source
     assert "dashboard capability catalog" in exposure_spec_source
     assert "VAIOS-G723" in exposure_spec_source
+
+
+def test_mgw_534_meta_glasses_input_routing_has_launch_playwright_gate():
+    receipt_source = MGW_534_RECEIPT_PATH.read_text(encoding="utf-8")
+    receipt = _load_receipt(MGW_534_RECEIPT_PATH, "## Gate Fixture")
+    fixture = json.loads(SWISSKNIFE_CONTROL_PLANE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    swissknife_spec_source = SWISSKNIFE_SPEC_PATH.read_text(encoding="utf-8")
+    hallucinate_spec_source = HALLUCINATE_SPEC_PATH.read_text(encoding="utf-8")
+
+    assert receipt["schema"] == "mgw_launch_playwright_validation_gate_v1"
+    assert receipt["task_id"] == "MGW-534"
+    assert receipt["goal_id"] == "VAIOS-G727"
+    assert receipt["goal_packet"] == "goal_packet/launch/external/ec964340486b"
+    assert receipt["packet_goals"] == ["VAIOS-G727", "VAIOS-G729"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["python_gate"]["command"] == (
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets "
+        "pytest tests/test_hallucinate_multimodal_control_todo_queue.py "
+        "tests/test_virtual_ai_os_launch_readiness_gate.py -q"
+    )
+    assert {gate["command"] for gate in receipt["playwright_gates"]} == {
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    }
+    assert receipt["launch_packet_command"] == (
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets "
+        "pytest tests/test_hallucinate_multimodal_control_todo_queue.py "
+        "tests/test_virtual_ai_os_launch_readiness_gate.py -q && "
+        "(test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && "
+        "(test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)"
+    )
+
+    required_inputs = set(receipt["required_inputs"])
+    events_by_device = {event["device"]: event for event in fixture["events"]}
+    assert required_inputs == {"camera", "microphone", "headphones", "captouch", "Neural Band"}
+    assert required_inputs.issubset(events_by_device)
+    assert events_by_device["captouch"]["event_type"] == "captouch.intent"
+    assert events_by_device["captouch"]["payload"]["gesture"] == "single_tap"
+
+    for event in events_by_device.values():
+        assert event["control_plane"] == {
+            "route": "swissknife.mobile_orb.publish_glasses_event",
+            "operation": "publish_glasses_event",
+        }
+        assert event["transport"]["bluetooth"] == "route-state"
+        assert event["transport"]["wifi"] == "app-level-handoff"
+        assert event["handoff"]["ipfs_cids"]
+        assert event["handoff"]["libp2p_session_id"] == "libp2p-mgw-519-playwright"
+        assert event["handoff"]["mcp_plus_plus_profile"] == fixture["profile"]
+        assert event["receipts"]
+
+    assert {item["receipt_cid"] for item in fixture["replay_receipts"]} == {
+        event["receipts"][0] for event in fixture["events"]
+    }
+    assert all(item["preserve_for_dat_replay"] is True for item in fixture["replay_receipts"])
+    assert {"external/meta-wearables-dat-android", "external/meta-wearables-dat-ios", "mobile"} == set(
+        receipt["mobile_edges"]
+    )
+
+    for required_term in (
+        "MGW-534",
+        "VAIOS-G727",
+        "VAIOS-G729",
+        "launch Playwright validation gate",
+        "swissknife/test/e2e/fixtures/mgw-519-meta-glasses-control-plane.json",
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    ):
+        assert required_term in receipt_source
+        assert required_term in heap_source
+
+    assert "opens every SwissKnife desktop app" in swissknife_spec_source
+    assert "remote-meta-glasses" in hallucinate_spec_source
+    assert "mobile-orb-publish-glasses-event" in hallucinate_spec_source
 
 
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():

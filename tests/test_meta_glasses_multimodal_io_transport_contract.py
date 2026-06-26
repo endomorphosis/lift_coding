@@ -119,14 +119,20 @@ def test_mgw_519_playwright_fixture_covers_modalities_and_replay_receipts():
     devices = {event["device"] for event in events}
     event_types = {event["event_type"] for event in events}
 
-    assert {"camera", "microphone", "headphones", "display", "Neural Band"}.issubset(
-        devices
-    )
+    assert {
+        "camera",
+        "microphone",
+        "headphones",
+        "display",
+        "captouch",
+        "Neural Band",
+    }.issubset(devices)
     assert {
         "camera.photo_ref",
         "microphone.transcript_ref",
         "headphones.playback_state",
         "display.action",
+        "captouch.intent",
         "Neural Band.intent",
     }.issubset(event_types)
 
@@ -159,6 +165,7 @@ def test_mgw_519_checked_in_playwright_fixture_is_replayable():
         "microphone",
         "headphones",
         "display",
+        "captouch",
         "Neural Band",
     }
     assert all(
