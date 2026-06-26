@@ -75,6 +75,27 @@ fallback remains explicit and non-launch-ready: if physical capture is
 unavailable, the gate state stays `gate_open_physical_capture_pending` while the
 VAI-010, HAO-430, and VAI-339 replay receipts remain development evidence.
 
+## Hallucinate MCP Dashboard Gate
+
+`VAI-503` extends the launch Playwright validation gate for `VAIOS-G723` with
+the Hallucinate App MCP dashboard interoperability console. The gate evidence is
+recorded in
+`data/virtual_ai_os/discovery/2026-06-26-vai-503-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-25-hao-682-mcp-dashboard-launch-readiness.md`.
+
+The dashboard gate must prove the shared dashboard capability catalog for
+`ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`, the menu and
+dashboard UI wiring, mediated `tools/list` and safe `tools/call` receipts,
+MCP++ telemetry, Swissknife consumer coverage, and supervisor-generated
+follow-up subtasks for any dashboard or backend validation failure. The
+executable gate is:
+
+```bash
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+npm --prefix swissknife run test:e2e:mcp
+```
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
