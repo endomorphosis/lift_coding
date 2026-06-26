@@ -235,3 +235,75 @@ def test_reconciliation_guardrail_todo_conflict_repair_keeps_main_variant(tmp_pa
     assert "main-fingerprint" in source
     assert "branch-fingerprint" not in source
     assert "<<<<<<<" not in source
+
+
+def test_launch_validation_retry_repair_preserves_playwright_gate(tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        record_retry_budget_findings,
+    )
+
+    board = tmp_path / "mgw.todo.md"
+    events = tmp_path / "events.jsonl"
+    strategy = tmp_path / "strategy.json"
+    discovery = tmp_path / "discovery"
+    failed_command = "PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py -q"
+    board.write_text(
+        "\n".join(
+            (
+                "# MGW",
+                "",
+                "## MGW-536 Close virtual AI OS launch objective gap",
+                "- Status: todo",
+                "- Completion: manual",
+                "- Priority: P0",
+                "- Track: launch",
+                "- Depends on:",
+                "- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+                f"- Validation: {failed_command}",
+                "- Acceptance: Objective scan filed this gap for VAIOS-G729 and requires the launch Playwright validation gate.",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    events.write_text(
+        "\n".join(
+            json.dumps(
+                {
+                    "type": "implementation_finished",
+                    "task_id": "MGW-536",
+                    "attempt": attempt,
+                    "validation_result": {
+                        "attempted": True,
+                        "passed": False,
+                        "failed_command": failed_command,
+                    },
+                }
+            )
+            for attempt in (1, 2)
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    strategy.write_text(json.dumps({}), encoding="utf-8")
+
+    findings = record_retry_budget_findings(
+        todo_path=board,
+        events_path=events,
+        strategy_path=strategy,
+        discovery_dir=discovery,
+        task_header_prefix_value="## MGW-",
+        task_prefix="MGW-",
+        validation_retry_budget=2,
+        merge_retry_budget=0,
+        implementation_retry_budget=0,
+    )
+
+    updated_board = board.read_text(encoding="utf-8")
+    updated_strategy = json.loads(strategy.read_text(encoding="utf-8"))
+    assert findings[0]["source_task_id"] == "MGW-536"
+    assert findings[0]["launch_playwright_validation_gate"] is True
+    assert "launch Playwright validation gate" in updated_board
+    assert "npm --prefix swissknife run test:e2e:meta-glasses" in updated_board
+    assert "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts" in updated_board
+    assert updated_strategy["blocked_tasks"] == ["MGW-536"]
