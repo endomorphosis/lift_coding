@@ -69,6 +69,13 @@ MGW_534_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
 )
+MGW_538_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "meta_glasses_display_widgets"
+    / "discovery"
+    / "2026-06-26-mgw-538-launch-playwright-validation-gate.md"
+)
 HAO_701_RECEIPT_PATH = (
     REPO_ROOT
     / "data"
@@ -94,6 +101,9 @@ HALLUCINATE_PACKAGE_PATH = REPO_ROOT / "hallucinate_app" / "package.json"
 HALLUCINATE_RUNNER_PATH = REPO_ROOT / "hallucinate_app" / "scripts" / "run_playwright_test.mjs"
 HALLUCINATE_SPEC_PATH = (
     REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "multimodal-control-surface.spec.ts"
+)
+HAO_675_REPLAY_FIXTURE_PATH = (
+    REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "fixtures" / "hao-675-launch-replay.json"
 )
 
 PYTHON_GATE_COMMAND = (
@@ -557,6 +567,101 @@ def test_hao_701_meta_glasses_input_routing_has_hallucinate_owned_gate():
         "launch Playwright validation gate",
         "2026-06-26-hao-701-launch-playwright-validation-gate.md",
         "swissknife/test/e2e/fixtures/mgw-519-meta-glasses-control-plane.json",
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    ):
+        assert required_term in receipt_source
+        assert required_term in heap_source
+
+
+def test_mgw_538_cross_device_offload_replay_has_launch_playwright_gate():
+    receipt_source = MGW_538_RECEIPT_PATH.read_text(encoding="utf-8")
+    receipt = _load_receipt(MGW_538_RECEIPT_PATH, "## Gate Fixture")
+    replay = _json_block_after(
+        VAI_339_REPLAY_PATH.read_text(encoding="utf-8"),
+        "## Deterministic Launch Replay Gate",
+    )
+    hao_675 = json.loads(HAO_675_REPLAY_FIXTURE_PATH.read_text(encoding="utf-8"))
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    swissknife_spec_source = SWISSKNIFE_SPEC_PATH.read_text(encoding="utf-8")
+    hallucinate_spec_source = HALLUCINATE_SPEC_PATH.read_text(encoding="utf-8")
+
+    assert receipt["schema"] == "mgw_cross_device_offload_launch_playwright_gate_v1"
+    assert receipt["task_id"] == "MGW-538"
+    assert receipt["goal_id"] == "VAIOS-G726"
+    assert receipt["execution_packet"] == "execution_packet/521842cea53f"
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["python_gate"]["command"] == PYTHON_GATE_COMMAND
+    assert {gate["command"] for gate in receipt["playwright_gates"]} == {
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    }
+    assert receipt["launch_packet_command"] == (
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets "
+        "pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && "
+        "(test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && "
+        "(test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)"
+    )
+
+    assert receipt["source_replay_receipts"] == [
+        "data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md",
+        "hallucinate_app/test/e2e/fixtures/hao-675-launch-replay.json",
+        "data/virtual_ai_os/discovery/2026-06-23-vai-340-launch-readiness-gate.md",
+    ]
+    assert receipt["placement_policy"] == {
+        "selected_runtime": replay["placement_policy"]["selected_runtime"],
+        "fallback_runtime": replay["placement_policy"]["fallback_runtime"],
+        "selected_runtime_receipt": "desktop_peer_execution_receipt",
+        "fallback_runtime_receipt": "recovery_receipt_cid",
+    }
+    assert receipt["required_receipt_chain"] == [
+        item["receipt"] for item in replay["receipt_chain"]
+    ]
+    assert receipt["supervisor_alignment"] == {
+        "objective_heap_goal": "VAIOS-G726",
+        "backlog_task": "MGW-538",
+        "merge_family": "objective/VAIOS-G726",
+        "merge_role": "validation_gate",
+        "keeps_supervisor_fed_backlog_aligned": True,
+    }
+
+    assert hao_675["schema"] == "launch_replay_playwright_receipt_v1"
+    assert hao_675["pass_fail_receipts"]["desktop_peer_offload"] == "passed"
+    assert hao_675["pass_fail_receipts"]["production_launch_readiness"] == "passed"
+    assert "desktop peer offload receipt" in hao_675["route"]
+    assert "Playwright launch replay" in swissknife_spec_source
+    assert "phone-hosted Swissknife virtual desktop" in swissknife_spec_source
+    assert "desktop peer offload" in swissknife_spec_source
+    assert "Hallucinate App mediation" in hallucinate_spec_source
+    assert "ipfs_kit_py" in hallucinate_spec_source
+    assert "ipfs_datasets_py" in hallucinate_spec_source
+    assert "ipfs_accelerate_py" in hallucinate_spec_source
+    assert "MCP++" in hallucinate_spec_source
+    assert {capability["server_package"] for capability in hao_675["service_capabilities"]} == {
+        "ipfs_kit_py",
+        "ipfs_datasets_py",
+        "ipfs_accelerate_py",
+    }
+    assert all(
+        "Profile E P2P" in capability["mcp_plus_plus_profiles"]
+        for capability in hao_675["service_capabilities"]
+    )
+
+    for required_term in (
+        "MGW-538",
+        "VAIOS-G726",
+        "execution_packet/521842cea53f",
+        "launch Playwright validation gate",
+        "phone-hosted Swissknife virtual desktop",
+        "desktop peer offload",
+        "Hallucinate App mediation",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "launch readiness receipt",
+        "cross-device e2e validation",
+        "Playwright launch replay",
+        "2026-06-26-mgw-538-launch-playwright-validation-gate.md",
         SWISSKNIFE_PLAYWRIGHT_COMMAND,
         HALLUCINATE_PLAYWRIGHT_COMMAND,
     ):
