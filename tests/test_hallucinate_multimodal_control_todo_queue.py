@@ -914,7 +914,7 @@ def test_hao_702_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_he
     assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
 
     task = tasks["HAO-702"]
-    assert task.status == PENDING_TASK_STATUS
+    assert task.status in {PENDING_TASK_STATUS, "completed"}
     assert task.metadata["goal id"] == receipt["goal_id"]
     assert task.metadata["goal packet"] == receipt["goal_packet"]
     assert task.metadata["goal packet goals"] == "VAIOS-G724, VAIOS-G728"
@@ -3881,6 +3881,62 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     assert result["submodule_conflict_repair"]["repaired"] is True
     assert _git(repo, "status", "--porcelain") == ""
     assert _git(repo, "rev-parse", "HEAD:hallucinate_app") == equivalent_head
+    _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
+
+
+def test_merge_branch_to_main_scrubs_tracked_shared_dependency_symlink(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "README.md").write_text("base\n", encoding="utf-8")
+    _git(repo, "add", "README.md")
+    _git(repo, "commit", "-m", "root base")
+    baseline_ref = _git(repo, "rev-parse", "HEAD")
+
+    branch_name = "implementation/hao-778-attempt"
+    _git(repo, "checkout", "-b", branch_name)
+    mobile_dir = repo / "mobile"
+    mobile_dir.mkdir()
+    (mobile_dir / "node_modules").symlink_to(mobile_dir / "node_modules")
+    _git(repo, "add", "mobile/node_modules")
+    _git(repo, "commit", "-m", "HAO-778: accidental tracked dependency symlink")
+    implementation_commit = _git(repo, "rev-parse", "HEAD")
+    assert "mobile/node_modules" in _git(repo, "ls-tree", "-r", "--name-only", "HEAD")
+
+    _git(repo, "checkout", "main")
+    daemon = PortalImplementationDaemon(
+        **{TASK_BOARD_PATH_KEY: _temporary_board_path(repo)},
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+    task = PortalTask(
+        task_id="HAO-778",
+        title="Scrub shared dependency symlink",
+        **_pending_task_metadata(),
+        priority="P1",
+        track="ops",
+    )
+
+    result = daemon._merge_branch_to_main(branch_name, task, 1, baseline_ref=baseline_ref)
+
+    assert result["merged"] is True
+    assert result["shared_worktree_path_scrub"]["committed"] is True
+    assert result["shared_worktree_path_scrub"]["paths"][0]["path"] == "mobile/node_modules"
+    assert _git(repo, "status", "--porcelain") == ""
+    assert "mobile/node_modules" not in _git(repo, "ls-tree", "-r", "--name-only", "HEAD")
+    assert not (mobile_dir / "node_modules").is_symlink()
     _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
 
 

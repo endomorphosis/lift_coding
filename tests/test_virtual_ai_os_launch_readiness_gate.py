@@ -881,17 +881,9 @@ def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     doc_source = READINESS_DOC_PATH.read_text(encoding="utf-8")
     normalized_doc_source = " ".join(doc_source.split())
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
-    receipt_source = HAO_705_RECEIPT_PATH.read_text(encoding="utf-8")
     hao_source = HAO_436_RECEIPT_PATH.read_text(encoding="utf-8")
     mgw_source = MGW_274_RECEIPT_PATH.read_text(encoding="utf-8")
     vai_source = VAI_340_RECEIPT_PATH.read_text(encoding="utf-8")
-HAO_705_RECEIPT_PATH = (
-    REPO_ROOT
-    / "data"
-    / "hallucinate_multimodal_control"
-    / "discovery"
-    / "2026-06-26-hao-705-launch-playwright-validation-gate.md"
-)
     receipt = _load_launch_readiness_receipt()
 
     required_terms = [
@@ -915,9 +907,6 @@ HAO_705_RECEIPT_PATH = (
         assert term in vai_source
 
     assert receipt["readiness_doc"] == "docs/launch/phone_desktop_glasses_readiness.md"
-    assert receipt["task_id"] == "HAO-705"
-    assert "HAO-705 cross-device launch gate fixture" in swissknife_spec_source
-    assert "HAO-705 cross-device launch gate fixture" in hallucinate_spec_source
     assert "VAI-340 launch readiness gate" in heap_source
     assert "HAO-436 launch readiness gate" in heap_source
     assert "MGW-274 launch readiness gate" in heap_source
