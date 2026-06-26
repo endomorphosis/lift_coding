@@ -594,4 +594,93 @@ describe('wearablesBridge wrapper', () => {
       targetConnectionState: 'ready',
     });
   });
+
+  test('replays expanded Meta glasses I/O states without credentials or hardware', async () => {
+    const {
+      META_WEARABLES_IO_STATES,
+      createMetaWearablesIoMockNativeModule,
+    } = require('../__fixtures__/metaWearablesIoStates');
+    const nativeModule = createMetaWearablesIoMockNativeModule(META_WEARABLES_IO_STATES.ready);
+
+    jest.doMock('expo-meta-wearables-dat', () => ({
+      __esModule: true,
+      default: nativeModule,
+    }));
+
+    const { getWearablesBridge, clearWearablesBridgeCache } = require('../wearablesBridge');
+    clearWearablesBridgeCache();
+
+    const bridge = await getWearablesBridge();
+    const diagnostics = await bridge.getDiagnostics();
+    const photo = await bridge.capturePhoto();
+    const video = await bridge.startVideoStream();
+
+    expect(diagnostics).toMatchObject({
+      hardwareFree: true,
+      credentialsRequired: false,
+      datPackageAccessRequired: false,
+      pairedGlassesRequired: false,
+      physicalHardwareRequired: false,
+      targetConnectionState: 'ready',
+      displayConnectionState: 'ready',
+      capabilities: expect.objectContaining({
+        photoCapture: true,
+        videoStream: true,
+        microphoneRoute: true,
+        speakerRoute: true,
+        headphoneRoute: true,
+        neuralBand: true,
+        captouch: true,
+        motionOrientation: true,
+        phoneGps: true,
+      }),
+      ioRoutes: expect.objectContaining({
+        microphone: expect.objectContaining({ readiness: 'ready' }),
+        speaker: expect.objectContaining({ readiness: 'ready' }),
+        headphone: expect.objectContaining({ readiness: 'ready' }),
+      }),
+      displayLifecycleStages: expect.arrayContaining(['session_started', 'widget_rendered', 'session_stopped']),
+      appBindings: expect.arrayContaining([
+        'camera.photo_capture.binding',
+        'display.output.binding',
+        'phone_gps.context.binding',
+      ]),
+      controlPlaneEnvelopes: expect.arrayContaining([
+        expect.objectContaining({ eventType: 'capability.ready', capability: 'camera.photo_capture' }),
+        expect.objectContaining({ eventType: 'display.lifecycle', capability: 'display.output' }),
+        expect.objectContaining({ eventType: 'route.recovered', capability: 'microphone.input' }),
+      ]),
+    });
+    expect(diagnostics.events.map((event) => event.eventType)).toEqual(expect.arrayContaining([
+      'io.camera.photo.captured',
+      'io.camera.video.ready',
+      'io.microphone.route.ready',
+      'io.speaker.route.ready',
+      'io.headphone.route.ready',
+      'io.display.lifecycle',
+      'io.neural_band.intent',
+      'io.captouch.intent',
+      'io.motion.orientation',
+      'io.phone_gps.context',
+    ]));
+    expect(photo).toMatchObject({
+      action: 'capture_photo',
+      supported: true,
+      mimeType: 'image/jpeg',
+    });
+    expect(video).toMatchObject({
+      action: 'start_video_stream',
+      supported: true,
+      streamState: 'ready',
+    });
+    expect(META_WEARABLES_IO_STATES).toMatchObject({
+      permissionDenied: { readiness: 'permission_denied' },
+      disconnected: { readiness: 'disconnected' },
+      unsupportedCapability: { readiness: 'unsupported' },
+      degradedCapability: { readiness: 'degraded' },
+      staleSession: { readiness: 'stale_session' },
+      routeLoss: { readiness: 'route_lost' },
+      recovery: { readiness: 'ready' },
+    });
+  });
 });
