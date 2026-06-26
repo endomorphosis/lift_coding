@@ -1539,7 +1539,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Submodules: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
 - Mission terms: hallucinate_app menus, Hallucinate App MCP dashboard, dashboard capability catalog, daemon health, tools/list, tools/call, ipfs_accelerate_py MCP server, ipfs_datasets_py MCP server, ipfs_kit_py MCP server, Swissknife applications, Playwright MCP dashboard interoperability
 - Goal: Hallucinate App menus and dashboards expose ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP server dashboards, daemon health, tools/list, and tools/call so Swissknife can test backend interoperability from the UI.
-- Evidence: hallucinate_app menus, Hallucinate App MCP dashboard, dashboard capability catalog, daemon health, tools/list, tools/call, ipfs_accelerate_py MCP server, ipfs_datasets_py MCP server, ipfs_kit_py MCP server, Swissknife applications, Playwright MCP dashboard interoperability
+- Evidence: hallucinate_app menus, Hallucinate App MCP dashboard, dashboard capability catalog, daemon health, tools/list, tools/call, ipfs_accelerate_py MCP server, ipfs_datasets_py MCP server, ipfs_kit_py MCP server, Swissknife applications, Playwright MCP dashboard interoperability, launch Playwright validation gate, data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md, hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json
 - Outputs: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
 - Refinement depth: 1
@@ -1548,6 +1548,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/launch/hallucinate-mcp-dashboard-capability-catalog
 - Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
 - Gap task: Create or repair the Hallucinate App dashboard/menu integration so it lists and calls each backend MCP server tool, then cover it with Playwright.
+- Launch Playwright validation gate: `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts` with VAI-517 receipt evidence in `data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md` and `hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json`.
+- MGW-533 proof: `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes `launch_objective_ids` for `VAIOS-G723`, `VAIOS-G724`, and packet sibling `VAIOS-G728`, plus a `launch_validation_gate` record naming `MGW-533`, the `launch Playwright validation gate`, and the two Hallucinate App Playwright specs. `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, `hallucinate_app/test/e2e/fixtures/mgw-533-mcp-dashboard-launch-gate.json`, `swissknife/scripts/test-mcp-dashboard-consumer.cjs`, and `data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-533-launch-playwright-validation-gate.md` assert the same catalog, backend packages, `tools/list`, `tools/call`, daemon health/catalog route, Swissknife consumer, and launch packet evidence.
 
 ## VAIOS-G725 Swissknife MCP++ server dashboard interoperability
 
@@ -1631,7 +1633,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Submodules: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
 - Mission terms: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications
 - Goal: Hallucinate App launches and monitors the ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py MCP daemons, exposes their health in dashboards, and hands capability records to Swissknife.
-- Evidence: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications
+- Evidence: Hallucinate App daemon health, daemon launcher, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, dashboard capability catalog, Swissknife applications, launch Playwright validation gate, data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md, hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json
 - Outputs: hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q
 - Refinement depth: 1
@@ -1640,6 +1642,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/launch/hallucinate-daemon-launch-orchestration
 - Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
 - Gap task: Make Hallucinate App own daemon launch and health reporting for the backend MCP servers, with UI and integration tests that Swissknife can exercise.
+- Launch Playwright validation gate: VAI-517 binds the shared goal packet `goal_packet/launch/hallucinate_app/44dceea6bc53` to `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`, including daemon health and Swissknife consumer receipt coverage in `hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json`.
+- MGW-533 packet proof: `hallucinate_app/test/e2e/fixtures/mgw-533-mcp-dashboard-launch-gate.json` requires `VAIOS-G728` in the same goal packet as `VAIOS-G724` and covers the `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` dashboard servers, daemon health path, dashboard capability catalog, and Swissknife handoff used by the Hallucinate App launch gate.
 
 ## VAIOS-G729 Objective heap active steering and validation repair
 
