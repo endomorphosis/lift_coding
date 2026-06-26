@@ -317,6 +317,11 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "xvfb-run" in runner_source
     assert "missing_xvfb_for_electron_playwright" in runner_source
     assert "HALLUCINATE_APP_E2E_DISABLE_XVFB" in runner_source
+    assert "noDisplayHeadlessGateSpecs" in runner_source
+    assert "canRunWithoutVirtualDisplay" in runner_source
+    assert "mcp-dashboard-interoperability.spec.ts" in runner_source
+    assert "mcp-feature-exposure.spec.ts" in runner_source
+    assert "multimodal-control-surface.spec.ts" in runner_source
     assert "repairable launch-environment blocker" in runner_source
     assert "allowsNoDisplaySpecSkip" not in runner_source
     assert "noDisplaySafeSpecs" not in runner_source
@@ -363,6 +368,8 @@ def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_run
     assert "xvfb-run" in runner_source
     assert "process.exit(78)" in runner_source
     assert "missing_xvfb_for_electron_playwright" in runner_source
+    assert "noDisplayHeadlessGateSpecs" in runner_source
+    assert "canRunWithoutVirtualDisplay" in runner_source
     assert "allowsNoDisplaySpecSkip" not in runner_source
     assert "MCP Dashboard Interoperability - VAIOS-G723" in dashboard_spec_source
     assert "headless backend gate" in dashboard_spec_source
