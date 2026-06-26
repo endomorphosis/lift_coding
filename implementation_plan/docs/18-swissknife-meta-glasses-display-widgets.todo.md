@@ -2646,3 +2646,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-544-mgw-536-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-536. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-544-mgw-536-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-536 from strategy blocked_tasks.
+
+## MGW-545 Resolve validation retry-budget failure for MGW-417
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-365, MGW-366, MGW-367, MGW-368
+- Outputs: mobile/src/native/metaWearablesIoBridge.js, mobile/src/native/__tests__/metaWearablesIoBridge.test.js, docs/meta-glasses-mobile-bridge-routes.md, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd mobile && npm test -- --runInBand src/native/__tests__/metaWearablesIoBridge.test.js
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-417. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-545-mgw-417-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-417 from strategy blocked_tasks.
