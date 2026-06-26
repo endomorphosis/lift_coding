@@ -2292,7 +2292,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-526 Make Meta glasses MCP dashboard validation use the headless-aware Hallucinate runner
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: validation
