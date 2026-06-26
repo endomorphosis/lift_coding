@@ -62,6 +62,13 @@ MGW_DISCOVERY_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "disc
 MGW_534_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
 )
+VAI_518_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-26-vai-518-launch-playwright-validation-gate.md"
+)
 HAO_701_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-26-hao-701-launch-playwright-validation-gate.md"
 HAO_702_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-26-hao-702-daemon-launch-health-gate.md"
@@ -871,6 +878,82 @@ def test_hao_701_packet_proof_aligns_hallucinate_backlog_with_objective_heap():
         assert term in g729_text
 
     for term in (
+        "camera",
+        "microphone",
+        "headphones",
+        "captouch",
+        "Neural Band",
+        "Bluetooth transport",
+        "Wi-Fi transport",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "mobile phone",
+        "Swissknife applications",
+        "Hallucinate App mediation",
+        "control plane",
+    ):
+        assert term in receipt_source
+        assert term in g727_text
+
+
+def test_vai_518_packet_proof_aligns_virtual_ai_os_backlog_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = VAI_518_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    tasks = {
+        task.task_id: task
+        for task in parse_task_file(
+            REPO_ROOT
+            / "implementation_plan"
+            / "docs"
+            / "19-virtual-ai-os-submodule-integration.todo.md",
+            "## VAI-",
+        )
+    }
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt["task_id"] == "VAI-518"
+    assert receipt["goal_id"] == "VAIOS-G727"
+    assert receipt["goal_packet"] == "goal_packet/launch/external/ec964340486b"
+    assert receipt["packet_goals"] == ["VAIOS-G727", "VAIOS-G729"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
+
+    task = tasks["VAI-518"]
+    assert task.status in {PENDING_TASK_STATUS, "completed"}
+    assert task.metadata["goal id"] == receipt["goal_id"]
+    assert task.metadata["goal packet"] == receipt["goal_packet"]
+    assert task.metadata["goal packet goals"] == "VAIOS-G727, VAIOS-G729"
+    assert task.metadata["missing evidence"] == receipt["evidence_term"]
+
+    g727_text = " ".join([*goals["VAIOS-G727"].fields.keys(), *goals["VAIOS-G727"].fields.values()])
+    g729_text = " ".join([*goals["VAIOS-G729"].fields.keys(), *goals["VAIOS-G729"].fields.values()])
+    for term in (
+        "VAI-518",
+        "MGW-534",
+        "HAO-701",
+        "VAI-520",
+        "goal_packet/launch/external/ec964340486b",
+        "launch Playwright validation gate",
+        "2026-06-26-vai-518-launch-playwright-validation-gate.md",
+        "2026-06-26-mgw-534-launch-playwright-validation-gate.md",
+        "2026-06-26-hao-701-launch-playwright-validation-gate.md",
+        "2026-06-26-vai-520-launch-playwright-validation-gate.md",
+    ):
+        assert term in receipt_source
+        assert term in g727_text
+    assert "vai_518_packet_proof" in g729_text
+
+    for term in (
+        "Meta glasses interface",
+        "Meta Wearables DAT",
         "camera",
         "microphone",
         "headphones",
