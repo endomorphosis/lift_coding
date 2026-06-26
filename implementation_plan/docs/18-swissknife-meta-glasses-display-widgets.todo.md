@@ -1035,7 +1035,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-423 Add native DAT feature gates and physical validation checklist for expanded I/O
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
