@@ -2341,3 +2341,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-528-dependency-guardrail.md
 - Acceptance: Dependency guardrail filed this because MGW-412 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-528-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## MGW-529 Resolve validation retry-budget failure for MGW-369
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-364, MGW-365, MGW-366
+- Outputs: swissknife/src/services/meta-glasses-input-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-input-adapter.test.ts, swissknife/docs/meta-glasses-input-app-descriptors.md, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-input-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-369. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-529-mgw-369-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-369 from strategy blocked_tasks.
