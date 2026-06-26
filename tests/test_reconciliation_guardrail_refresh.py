@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shlex
+import subprocess
 import sys
 from pathlib import Path
 
@@ -10,6 +11,17 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 if str(IPFS_ACCELERATE_ROOT) not in sys.path:
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+
+
+def _git(cwd: Path, *args: str) -> str:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=cwd,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    return result.stdout.strip()
 
 
 def test_existing_main_checkout_guardrail_does_not_churn_fingerprint(tmp_path):
@@ -145,3 +157,81 @@ def test_existing_preflight_guardrail_does_not_churn_rescue_branch_fingerprint(t
     assert findings == []
     assert board.read_text(encoding="utf-8") == before_board
     assert discovery_path.read_text(encoding="utf-8") == before_discovery
+
+
+def test_reconciliation_guardrail_todo_conflict_repair_keeps_main_variant(tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.merge_conflict_repair import (
+        resolve_reconciliation_guardrail_todo_conflicts,
+    )
+
+    repo = tmp_path / "repo"
+    board = repo / "implementation_plan" / "docs" / "launch.todo.md"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    board.parent.mkdir(parents=True)
+    board.write_text(
+        "\n".join(
+            (
+                "# Launch board",
+                "",
+                "## VAI-200 Resolve dirty main checkout blocking 4 worktree merges",
+                "",
+                "- Status: completed",
+                "- Completion: manual",
+                "- Priority: P1",
+                "- Track: ops",
+                "- Fingerprint: base-fingerprint",
+                "- Dedupe key: reconciliation_guardrail:main_checkout_dirty",
+                "- Depends on:",
+                "- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/launch.todo.md",
+                "- Validation: test -f data/virtual_ai_os/discovery/guardrail.md",
+                "- Acceptance: Reconciliation guardrail filed this because 4 branch or worktree cleanup candidates are blocked by main_checkout_dirty.",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    _git(repo, "add", "implementation_plan/docs/launch.todo.md")
+    _git(repo, "commit", "-m", "base board")
+
+    _git(repo, "checkout", "-b", "branch-variant")
+    board.write_text(
+        board.read_text(encoding="utf-8")
+        .replace("blocking 4 worktree merges", "blocking 6 worktree merges")
+        .replace("base-fingerprint", "branch-fingerprint")
+        .replace("because 4 branch", "because 6 branch"),
+        encoding="utf-8",
+    )
+    _git(repo, "commit", "-am", "branch guardrail variant")
+
+    _git(repo, "checkout", "main")
+    board.write_text(
+        board.read_text(encoding="utf-8")
+        .replace("blocking 4 worktree merges", "blocking 8 worktree merges")
+        .replace("base-fingerprint", "main-fingerprint")
+        .replace("because 4 branch", "because 8 branch"),
+        encoding="utf-8",
+    )
+    _git(repo, "commit", "-am", "main guardrail variant")
+    merge = subprocess.run(
+        ["git", "merge", "--no-ff", "--no-edit", "branch-variant"],
+        cwd=repo,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert merge.returncode != 0
+    assert "UU implementation_plan/docs/launch.todo.md" in _git(repo, "status", "--porcelain")
+
+    repairs = resolve_reconciliation_guardrail_todo_conflicts(repo_root=repo)
+
+    assert repairs[0]["resolved"] is True
+    assert "UU implementation_plan/docs/launch.todo.md" not in _git(repo, "status", "--porcelain")
+    source = board.read_text(encoding="utf-8")
+    assert "blocking 8 worktree merges" in source
+    assert "main-fingerprint" in source
+    assert "branch-fingerprint" not in source
+    assert "<<<<<<<" not in source

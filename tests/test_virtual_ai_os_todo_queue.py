@@ -1151,6 +1151,52 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
     assert len(active_interop_keys) == len(set(active_interop_keys))
 
 
+def test_objective_interoperability_seed_skips_self_loop_dependency_symlink(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+    from ipfs_accelerate_py.agent_supervisor.objective_tracker import append_interoperability_goals
+
+    repo_root = tmp_path / "repo"
+    mobile = repo_root / "mobile"
+    swissknife = repo_root / "swissknife"
+    mobile.mkdir(parents=True)
+    swissknife.mkdir()
+    (mobile / "package.json").write_text('{"name":"mobile"}\n', encoding="utf-8")
+    (swissknife / "package.json").write_text('{"name":"swissknife"}\n', encoding="utf-8")
+    loop = mobile / "node_modules"
+    loop.symlink_to(loop, target_is_directory=True)
+
+    objective_path = repo_root / "objective.md"
+    objective_path.write_text(
+        "\n".join(
+            [
+                "# Objective Heap",
+                "",
+                "## VAIOS-G001 Launch root",
+                "- Status: active",
+                "- Goal: prove the mobile Swissknife launch slice",
+                "- Evidence: root objective",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    result = append_interoperability_goals(
+        objective_path,
+        repo_root=repo_root,
+        component_paths=("mobile", "swissknife"),
+        max_goals=1,
+        goal_prefix="VAIOS-G",
+    )
+
+    assert result.appended_goal_ids == ["VAIOS-G002"]
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(objective_path.read_text(encoding="utf-8"))}
+    assert goals["VAIOS-G002"].fields["interoperability_pair"] == "mobile, swissknife"
+    assert "mobile/package.json" in goals["VAIOS-G002"].fields["package_manifests"]
+    assert "node_modules" not in goals["VAIOS-G002"].fields["package_manifests"]
+
+
 def test_virtual_ai_os_launch_tasks_are_not_blocked_by_recursive_submodule_hygiene():
     tasks = {task.task_id: task for task in _load_tasks()}
 
