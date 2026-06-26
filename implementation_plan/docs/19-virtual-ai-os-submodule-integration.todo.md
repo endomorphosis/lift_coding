@@ -4255,3 +4255,14 @@ cadence remains parseable and resumable.
 - Candidate kind: validation_gate
 - Todo vector key: 12be0e10facbf533
 - Acceptance: Objective scan filed this gap for VAIOS-G726. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-26-vai-522-objective-gap-4ca32c914d33.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## VAI-523 Resolve implementation retry-budget failure for VAI-518
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py, data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-523-vai-518-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-518. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-523-vai-518-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-518 from strategy blocked_tasks.
