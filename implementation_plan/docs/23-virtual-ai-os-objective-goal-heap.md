@@ -1590,15 +1590,16 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Submodules: mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit
 - Mission terms: phone-hosted Swissknife virtual desktop, desktop peer offload, mobile phone, Hallucinate App mediation, IPFS, libp2p, MCP++, launch readiness receipt, cross-device e2e validation, Playwright launch replay
 - Goal: A phone-hosted Swissknife virtual desktop can discover a desktop peer, offload compute, route Hallucinate App mediation through IPFS/libp2p/MCP++, and produce a launch readiness receipt.
-- Evidence: phone-hosted Swissknife virtual desktop, desktop peer offload, mobile phone, Hallucinate App mediation, IPFS, libp2p, MCP++, launch readiness receipt, cross-device e2e validation, Playwright launch replay
+- Evidence: phone-hosted Swissknife virtual desktop, desktop peer offload, mobile phone, Hallucinate App mediation, IPFS, libp2p, MCP++, launch readiness receipt, cross-device e2e validation, Playwright launch replay, launch Playwright validation gate, data/hallucinate_multimodal_control/discovery/2026-06-26-hao-705-launch-playwright-validation-gate.md, hallucinate_app/test/e2e/fixtures/hao-705-cross-device-launch-gate.json, swissknife/test/e2e/fixtures/hao-705-cross-device-launch-gate.json, swissknife/test/e2e/fixtures/vai-502-cross-device-playwright-replay.json
 - Outputs: mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, tests/test_virtual_ai_os_launch_readiness_gate.py
-- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Refinement depth: 1
 - Embedding query: phone hosted Swissknife virtual desktop desktop peer offload mobile IPFS libp2p MCP++ launch readiness receipt Playwright
 - AST query: mobile, swissknife, hallucinate_app, desktop peer offload, launch readiness, Playwright
 - Parallel lane: objective/launch/cross-device-virtual-desktop-offload-replay
 - Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
 - Gap task: Build the deterministic cross-device launch replay and receipt path that proves phone-to-desktop offload works through the planned control plane.
+- HAO-705 proof: `data/hallucinate_multimodal_control/discovery/2026-06-26-hao-705-launch-playwright-validation-gate.md` closes the VAIOS-G726 launch Playwright validation gate by tying the existing `swissknife/test/e2e/fixtures/vai-502-cross-device-playwright-replay.json` phone-hosted command, desktop peer offload, phone-local fallback, and Meta glasses render receipts to mirrored Playwright fixtures in `hallucinate_app/test/e2e/fixtures/hao-705-cross-device-launch-gate.json` and `swissknife/test/e2e/fixtures/hao-705-cross-device-launch-gate.json`. `tests/test_virtual_ai_os_launch_readiness_gate.py`, `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts`, and `hallucinate_app/test/e2e/multimodal-control-surface.spec.ts` assert the same `launch Playwright validation gate`, IPFS, libp2p, MCP++, Hallucinate App mediation, launch readiness receipt, cross-device e2e validation, and Playwright launch replay evidence.
 
 ## VAIOS-G727 Meta glasses control-plane input routing
 

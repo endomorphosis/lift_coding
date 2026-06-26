@@ -76,6 +76,13 @@ HAO_701_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-26-hao-701-launch-playwright-validation-gate.md"
 )
+HAO_705_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-26-hao-705-launch-playwright-validation-gate.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
@@ -94,6 +101,15 @@ HALLUCINATE_PACKAGE_PATH = REPO_ROOT / "hallucinate_app" / "package.json"
 HALLUCINATE_RUNNER_PATH = REPO_ROOT / "hallucinate_app" / "scripts" / "run_playwright_test.mjs"
 HALLUCINATE_SPEC_PATH = (
     REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "multimodal-control-surface.spec.ts"
+)
+HAO_705_HALLUCINATE_FIXTURE_PATH = (
+    REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "fixtures" / "hao-705-cross-device-launch-gate.json"
+)
+HAO_705_SWISSKNIFE_FIXTURE_PATH = (
+    REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "hao-705-cross-device-launch-gate.json"
+)
+VAI_502_CROSS_DEVICE_REPLAY_PATH = (
+    REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "vai-502-cross-device-playwright-replay.json"
 )
 
 PYTHON_GATE_COMMAND = (
@@ -562,6 +578,115 @@ def test_hao_701_meta_glasses_input_routing_has_hallucinate_owned_gate():
     ):
         assert required_term in receipt_source
         assert required_term in heap_source
+
+
+def test_hao_705_cross_device_offload_replay_has_launch_playwright_gate():
+    receipt_source = HAO_705_RECEIPT_PATH.read_text(encoding="utf-8")
+    receipt = _load_receipt(HAO_705_RECEIPT_PATH, "## Gate Fixture")
+    hallucinate_fixture = json.loads(HAO_705_HALLUCINATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    swissknife_fixture = json.loads(HAO_705_SWISSKNIFE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    replay = json.loads(VAI_502_CROSS_DEVICE_REPLAY_PATH.read_text(encoding="utf-8"))
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    swissknife_spec_source = SWISSKNIFE_SPEC_PATH.read_text(encoding="utf-8")
+    hallucinate_spec_source = HALLUCINATE_SPEC_PATH.read_text(encoding="utf-8")
+
+    assert hallucinate_fixture == swissknife_fixture
+    assert receipt["schema"] == "hao_cross_device_launch_playwright_gate_v1"
+    assert receipt["task_id"] == "HAO-705"
+    assert receipt["goal_id"] == "VAIOS-G726"
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["missing_evidence_source"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-06-26-hao-705-objective-gap-4ca32c914d33.md"
+    )
+    assert receipt["lineage_id"] == "VAIOS-G726:cross-device-virtual-desktop-offload-launch-replay"
+    assert receipt["python_gate"]["command"] == PYTHON_GATE_COMMAND
+    assert {gate["command"] for gate in receipt["playwright_gates"]} == {
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    }
+    assert receipt["validation_command"] == (
+        f"{PYTHON_GATE_COMMAND} && "
+        "(test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && "
+        "(test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)"
+    )
+    assert receipt["playwright_fixture"] == (
+        "hallucinate_app/test/e2e/fixtures/hao-705-cross-device-launch-gate.json"
+    )
+    assert receipt["mirrored_swissknife_fixture"] == (
+        "swissknife/test/e2e/fixtures/hao-705-cross-device-launch-gate.json"
+    )
+
+    assert hallucinate_fixture["schema"] == receipt["schema"]
+    assert hallucinate_fixture["task_id"] == receipt["task_id"]
+    assert hallucinate_fixture["goal_id"] == receipt["goal_id"]
+    assert hallucinate_fixture["evidence_term"] == receipt["evidence_term"]
+    assert hallucinate_fixture["source_gap_receipt"] == receipt["missing_evidence_source"]
+    assert hallucinate_fixture["launch_gate_receipt"] == receipt["receipt_path"]
+    assert hallucinate_fixture["playwright_commands"] == {
+        "python": PYTHON_GATE_COMMAND,
+        "swissknife": SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        "hallucinate_app": HALLUCINATE_PLAYWRIGHT_COMMAND,
+    }
+    assert set(hallucinate_fixture["required_backends"]) == {
+        "ipfs_kit_py",
+        "ipfs_datasets_py",
+        "ipfs_accelerate_py",
+    }
+    assert set(hallucinate_fixture["pass_fail_receipts"].values()) == {"passed"}
+    assert hallucinate_fixture["supervisor_alignment"] == receipt["supervisor_alignment"]
+
+    assert replay["schema"] == "cross_device_virtual_desktop_playwright_replay_v1"
+    assert replay["phone_hosted_execution"]["mode"] == (
+        hallucinate_fixture["replay_assertions"]["phone_hosted_mode"]
+    )
+    assert replay["phone_hosted_execution"]["control_plane_command"] == (
+        hallucinate_fixture["replay_assertions"]["control_plane_command"]
+    )
+    assert replay["desktop_peer_offload"]["first_attempt"]["placement"] == (
+        hallucinate_fixture["replay_assertions"]["selected_runtime"]
+    )
+    assert replay["desktop_peer_offload"]["fallback"]["placement"] == (
+        hallucinate_fixture["replay_assertions"]["fallback_runtime"]
+    )
+    assert replay["desktop_peer_offload"]["first_attempt"]["receipt_id"] == (
+        hallucinate_fixture["replay_assertions"]["desktop_peer_receipt"]
+    )
+    assert replay["desktop_peer_offload"]["fallback"]["receipt_id"] == (
+        hallucinate_fixture["replay_assertions"]["phone_fallback_receipt"]
+    )
+    assert replay["meta_glasses_status_output"]["render_receipt_id"] == (
+        hallucinate_fixture["replay_assertions"]["meta_glasses_render_receipt"]
+    )
+    assert replay["lineage_id"] == (
+        hallucinate_fixture["replay_assertions"]["launch_readiness_lineage"]
+    )
+
+    for required_term in (
+        "HAO-705",
+        "VAIOS-G726",
+        "launch Playwright validation gate",
+        "phone-hosted Swissknife virtual desktop",
+        "desktop peer offload",
+        "mobile phone",
+        "Hallucinate App mediation",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "launch readiness receipt",
+        "cross-device e2e validation",
+        "Playwright launch replay",
+        "2026-06-26-hao-705-launch-playwright-validation-gate.md",
+        "hao-705-cross-device-launch-gate.json",
+        "vai-502-cross-device-playwright-replay.json",
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    ):
+        assert required_term in receipt_source
+        assert required_term in heap_source
+
+    assert "HAO-705 cross-device launch gate fixture" in swissknife_spec_source
+    assert "HAO-705 cross-device launch gate fixture" in hallucinate_spec_source
 
 
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
