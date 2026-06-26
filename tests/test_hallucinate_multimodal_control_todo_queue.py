@@ -2201,6 +2201,69 @@ def test_implementation_daemon_falls_back_when_submodule_gitlink_ref_is_missing(
     assert "submodule_gitlink_ref_missing" in (repo / "events.jsonl").read_text(encoding="utf-8")
 
 
+def test_implementation_daemon_cleans_partial_worktree_after_setup_failure(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+        PortalTaskState,
+    )
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    (repo / "README.md").write_text("base\n", encoding="utf-8")
+    _git(repo, "add", "README.md")
+    _git(repo, "commit", "-m", "base")
+
+    board = _temporary_board_path(repo)
+    board.write_text("# Temporary Board\n", encoding="utf-8")
+    daemon = PortalImplementationDaemon(
+        **_implementation_daemon_paths(repo),
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+        use_ephemeral_worktree=True,
+        worktree_root=repo / "worktrees",
+        worktree_submodule_paths=(),
+        implementation_log_dir=repo / "logs",
+    )
+
+    def fail_after_partial_checkout(worktree_path: Path, branch_name: str, *, task: PortalTask) -> str:
+        _git(repo, "worktree", "add", "-b", branch_name, str(worktree_path), "HEAD")
+        (worktree_path / "partial.txt").write_text("partial checkout\n", encoding="utf-8")
+        raise RuntimeError("No space left on device")
+
+    daemon._create_seeded_worktree = fail_after_partial_checkout  # type: ignore[method-assign]
+
+    task = PortalTask(
+        "HAO-999",
+        "Exercise setup cleanup",
+        PENDING_TASK_STATUS,
+        "manual",
+        "P1",
+        "ops",
+    )
+    result = daemon._run_implementation_in_ephemeral_worktree(
+        task=task,
+        state=PortalTaskState(),
+        attempt=1,
+        started_at="2026-06-26T00:00:00+00:00",
+        log_path=repo / "logs" / "hao-999-attempt-1.log",
+        prompt="Do the work.",
+    )
+
+    assert result["returncode"] == 1
+    assert result["cleanup_result"]["cleaned"] is True
+    assert not Path(result["worktree_path"]).exists()
+    assert not _git(repo, "branch", "--list", result["branch"])
+    events = (repo / "events.jsonl").read_text(encoding="utf-8")
+    assert "failed_setup_worktree_cleanup" in events
+    assert "implementation_exception" in events
+
+
 def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     supervisor = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
     daemon = _load_script_module("hallucinate_multimodal_control_todo_daemon")
