@@ -217,6 +217,60 @@ def test_objective_task_janitor_keeps_launch_playwright_gate_repairs_on_mission(
     assert result["validation_gate_goal_ids"] == ["VAIOS-G729"]
 
 
+def test_objective_task_janitor_keeps_active_launch_playwright_gate_visible_with_open_work():
+    ObjectiveGoal, PortalTask, _schema, reconcile = _imports()
+    goals = [
+        ObjectiveGoal(
+            "VAIOS-G729",
+            "Objective heap active steering and validation repair",
+            {
+                "status": "active",
+                "fib_priority": "1",
+                "priority": "P0",
+                "track": "launch",
+                "goal": (
+                    "The supervisor actively manages the objective heap and repairs failed "
+                    "validation results including Playwright launch replays."
+                ),
+            },
+        )
+    ]
+    tasks = [
+        PortalTask(
+            "VAI-520",
+            "Close virtual AI OS launch objective gap",
+            _task_status("to", "do"),
+            "manual",
+            "P0",
+            "launch",
+            metadata={"goal id": "VAIOS-G729"},
+            validation=[
+                "PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py -q"
+            ],
+            acceptance="Objective scan filed this gap for VAIOS-G729.",
+        )
+    ]
+
+    result = reconcile(goals=goals, tasks=tasks, strategy={}, now="2026-06-26T00:00:00+00:00")
+    updated = result["strategy"]
+
+    assert updated["objective_task_janitor_reopen_goal_ids"] == []
+    assert updated["objective_task_janitor_force_goal_ids"] == []
+    assert updated["objective_task_janitor_validation_gate_goal_ids"] == ["VAIOS-G729"]
+    assert updated["objective_task_janitor_launch_playwright_validation_gate"] == {
+        "evidence_term": "launch Playwright validation gate",
+        "goal_ids": ["VAIOS-G729"],
+        "validation_command": (
+            "(test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && "
+            "(test ! -f hallucinate_app/package.json || "
+            "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)"
+        ),
+        "active": True,
+    }
+    assert result["open_goal_ids"] == ["VAIOS-G729"]
+    assert result["validation_gate_goal_ids"] == ["VAIOS-G729"]
+
+
 def test_backlog_refill_treats_nonselectable_ready_tasks_as_drained(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import should_refill_backlog
