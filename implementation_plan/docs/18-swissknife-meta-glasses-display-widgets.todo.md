@@ -1024,7 +1024,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-422 Add Playwright E2E coverage for expanded Meta glasses I/O in Swissknife apps
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: quality
