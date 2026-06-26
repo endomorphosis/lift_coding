@@ -21,8 +21,12 @@
     "display_attached",
     "display_ready",
     "display_content_sent",
+    "display_video_player_ready",
+    "display_content_replaced",
+    "camera_stream_ready",
     "camera_stream_started",
-    "camera_photo_captured"
+    "camera_photo_captured",
+    "camera_stream_backpressure"
   ],
   "required_input_terms": [
     "ArrowLeft",
@@ -32,6 +36,10 @@
     "swipe_forward",
     "motion.orientation",
     "phone_gps.context"
+  ],
+  "required_audio_routes": [
+    "bluetooth-hfp-input",
+    "bluetooth-a2dp-output"
   ],
   "required_failure_modes": [
     "permission_denial",
@@ -43,5 +51,12 @@
     "backpressure",
     "local_storage_limit",
     "recovery"
-  ]
+  ],
+  "fixture_contract": {
+    "dat_display_access": "v0.7 session and display content lifecycle shape",
+    "dat_camera_access": "v0.7 stream/photo state shape",
+    "web_apps": "Arrow/Enter, Neural Band, captouch, motion/orientation, phone GPS, and local storage mocks",
+    "audio": "Bluetooth profile route readiness mocks",
+    "recovery": "structured denial, unsupported, update-required, route-loss, backpressure, and recovery states"
+  }
 }
