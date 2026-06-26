@@ -414,7 +414,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-370 Route expanded Meta glasses I/O through the Swissknife control plane
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: runtime
