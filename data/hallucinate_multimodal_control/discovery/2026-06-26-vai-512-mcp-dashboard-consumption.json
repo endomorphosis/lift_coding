@@ -1,0 +1,76 @@
+{
+  "schema": "vai_512_mcp_dashboard_consumption_evidence_v1",
+  "task_id": "VAI-512",
+  "hardware_required": false,
+  "source_catalog_schema": "hallucinate_app.mcp_dashboard_capability_catalog.v1",
+  "daemons": [
+    {
+      "daemon_id": "ipfs-kit",
+      "server_package": "ipfs_kit_py",
+      "endpoint": "http://127.0.0.1:8004",
+      "menu_dashboard_url": "http://127.0.0.1:8004/dashboard",
+      "tools_list_url": "http://127.0.0.1:8004/mcp/tools/list",
+      "tools_call_url": "http://127.0.0.1:8004/mcp/tools/call",
+      "safe_probe_tool": "ipfs_status",
+      "control_surface_mediation_contract": "control_surface_contract:mcp-daemon:ipfs-kit"
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "server_package": "ipfs_datasets_py",
+      "endpoint": "http://127.0.0.1:3002",
+      "menu_dashboard_url": "http://127.0.0.1:8899/mcp",
+      "tools_list_url": "http://127.0.0.1:3002/datasets/list",
+      "tools_call_url": "http://127.0.0.1:3002/datasets/load",
+      "safe_probe_tool": "datasets_list",
+      "control_surface_mediation_contract": "control_surface_contract:mcp-daemon:ipfs-datasets"
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "server_package": "ipfs_accelerate_py",
+      "endpoint": "http://127.0.0.1:3003",
+      "menu_dashboard_url": "http://127.0.0.1:3003/dashboard",
+      "tools_list_url": "http://127.0.0.1:3003/models/list",
+      "tools_call_url": "http://127.0.0.1:3003/inference",
+      "safe_probe_tool": "hardware_profile",
+      "control_surface_mediation_contract": "control_surface_contract:mcp-daemon:ipfs-accelerate"
+    }
+  ],
+  "mediated_operations": [
+    {
+      "daemon_id": "ipfs-kit",
+      "operation": "tools/list",
+      "policy_decision_id": "decision:9588f92ad11638ff",
+      "mediation_receipt_id": "receipt:f0bf779827790935"
+    },
+    {
+      "daemon_id": "ipfs-kit",
+      "operation": "tools/call",
+      "policy_decision_id": "decision:daf4fee3c9bf3daa",
+      "mediation_receipt_id": "receipt:defd5d0743d62296"
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "operation": "tools/list",
+      "policy_decision_id": "decision:71408877955a3689",
+      "mediation_receipt_id": "receipt:2706f0102288a179"
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "operation": "tools/call",
+      "policy_decision_id": "decision:17dc125e0e8c8c69",
+      "mediation_receipt_id": "receipt:fcd46e26e4533f26"
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "operation": "tools/list",
+      "policy_decision_id": "decision:f7134dc875fd3eb8",
+      "mediation_receipt_id": "receipt:5f6a654a9370352b"
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "operation": "tools/call",
+      "policy_decision_id": "decision:33dafecd0bf20214",
+      "mediation_receipt_id": "receipt:28430e56184b62be"
+    }
+  ]
+}
