@@ -1,7 +1,7 @@
 # HAO-310 Reconciliation Guardrail
 
 Date: 2026-06-26
-Fingerprint: 7c61dcb0c3ebff858208009d241cf27baa5c7dde
+Fingerprint: 2330cfef3dd78a488102184cfc0e2bd401e93993
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
 Candidate count: 1
@@ -18,7 +18,7 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `implementation/hao-680-attempt-5-1782433758` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-5-1782433758` status: ` m hallucinate_app`
+- `rescue/worktree/rescue-worktree-rescue-worktree-implementation-hao-680-attempt-5-1782433758-08574fc1b978-a9fa97a-cdb7f2b0f7ae` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-5-1782433758` status: ` m hallucinate_app`
   - Name status:
     - `M	hallucinate_app`
   - Diff stat:
@@ -93,7 +93,7 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "7c61dcb0c3ebff858208009d241cf27baa5c7dde",
+  "fingerprint": "2330cfef3dd78a488102184cfc0e2bd401e93993",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -103,7 +103,7 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/hao-680-attempt-5-1782433758"
+    "rescue/worktree/rescue-worktree-rescue-worktree-implementation-hao-680-attempt-5-1782433758-08574fc1b978-a9fa97a-cdb7f2b0f7ae"
   ],
   "sample_count": 1,
   "sample_status_paths": [
