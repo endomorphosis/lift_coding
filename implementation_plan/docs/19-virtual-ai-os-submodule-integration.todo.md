@@ -1728,7 +1728,11 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
+<<<<<<< HEAD
 - Fingerprint: c390db588680f5573943782dd4ac9ded4d5a3938
+=======
+- Fingerprint: 06342af5d5246a142910be6fd2839204c0c3c131
+>>>>>>> implementation/vai-512-attempt-12-1782436353
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
@@ -1736,18 +1740,30 @@ cadence remains parseable and resumable.
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-202-reconciliation-a2e3e24315da.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_worktree_cleanup_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+<<<<<<< HEAD
 ## VAI-203 Resolve 5 preflight-conflicting backlogged worktree merges
+=======
+## VAI-203 Resolve 4 preflight-conflicting backlogged worktree merges
+>>>>>>> implementation/vai-512-attempt-12-1782436353
 
 - Status: blocked
 - Completion: manual
 - Priority: P1
 - Track: ops
+<<<<<<< HEAD
 - Fingerprint: 19f60bb10e8f6f0da6d81ab09be47ad5148600c4
+=======
+- Fingerprint: 2dbb7f945c9cb77a01c346663b1d3342d5368b92
+>>>>>>> implementation/vai-512-attempt-12-1782436353
 - Dedupe key: reconciliation_guardrail:preflight_merge_conflict
 - Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md
+<<<<<<< HEAD
 - Acceptance: Reconciliation guardrail filed this because 5 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+=======
+- Acceptance: Reconciliation guardrail filed this because 4 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-203-reconciliation-19f9d53ba349.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+>>>>>>> implementation/vai-512-attempt-12-1782436353
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_worktree_cleanup_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
 ## VAI-204 Resolve dependency guardrail for VAI-200
