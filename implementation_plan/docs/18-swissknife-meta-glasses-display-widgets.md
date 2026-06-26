@@ -546,7 +546,9 @@ Second-wave MGW task split:
 - `MGW-421` creates a Swissknife demo app that exercises camera, audio, display, Neural Band/captouch, motion/GPS, and control-plane handoff through mocks.
 - `MGW-422` adds Playwright app-level tests for the mocked expanded I/O surface and visible control-plane receipt evidence.
 - `MGW-423` adds native DAT feature gates and a physical validation checklist for camera, display, Bluetooth audio routes, release channels, firmware/app update states, and package credentials.
-- `MGW-424` aggregates launch readiness evidence so the supervisor can prioritize implementation tasks that move Swissknife apps closer to usable Meta glasses interaction methods.
+- `MGW-424` aggregates launch readiness evidence in `data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-424-expanded-io-launch-priorities.md` so the supervisor can prioritize implementation tasks that move Swissknife applications closer to usable Meta glasses interaction methods.
+
+MGW-424 supervisor priority rule: prefer implementation tasks that make Swissknife applications use Meta glasses interaction methods through app-facing contracts, deterministic mocks, privacy and policy checks, control-plane routes, IPFS/libp2p/MCP++ bridge receipts, and Playwright validation for camera, microphone, speaker/headphone, display, Meta Neural Band, captouch, motion/orientation, and phone GPS. Deprioritize generic code-annotation cleanup whenever open P0/P1 expanded-I/O work still lacks contracts, mocks, tests, control-plane route coverage, IPFS/libp2p/MCP++ receipt evidence, or launch-readiness evidence.
 
 Exit criteria:
 
