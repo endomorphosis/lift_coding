@@ -3931,7 +3931,7 @@ cadence remains parseable and resumable.
 
 ## VAI-511 Add objective-heap seed coverage for VAI/MGW/HAO supervisor lanes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: validation
