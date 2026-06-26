@@ -2147,6 +2147,60 @@ def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
     assert not (parent / "ipfs_datasets_py").exists()
 
 
+def test_implementation_daemon_falls_back_when_submodule_gitlink_ref_is_missing(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+
+    repo = tmp_path / "repo"
+    source = repo / "ipfs_datasets_py"
+    source.mkdir(parents=True)
+    _git(source, "init")
+    _git(source, "checkout", "-b", "main")
+    _git(source, "config", "user.name", "Test User")
+    _git(source, "config", "user.email", "test@example.invalid")
+    (source / "README.md").write_text("source\n", encoding="utf-8")
+    _git(source, "add", "README.md")
+    _git(source, "commit", "-m", "source base")
+    source_head = _git(source, "rev-parse", "HEAD")
+
+    worktree = tmp_path / "implementation-worktree"
+    worktree.mkdir()
+    _git(worktree, "init")
+    _git(worktree, "checkout", "-b", "main")
+    _git(worktree, "config", "user.name", "Test User")
+    _git(worktree, "config", "user.email", "test@example.invalid")
+    (worktree / ".gitmodules").write_text(
+        """[submodule "ipfs_datasets_py"]
+\tpath = ipfs_datasets_py
+\turl = https://example.invalid/ipfs_datasets_py.git
+""",
+        encoding="utf-8",
+    )
+    _git(worktree, "add", ".gitmodules")
+    _git(
+        worktree,
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "160000,0123456789abcdef0123456789abcdef01234567,ipfs_datasets_py",
+    )
+    _git(worktree, "commit", "-m", "record stale gitlink")
+
+    daemon = PortalImplementationDaemon(
+        **_implementation_daemon_paths(repo),
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+
+    assert daemon._create_local_submodule_worktree(
+        worktree,
+        "ipfs_datasets_py",
+        branch_name="implementation/hao-test",
+    )
+    assert _git(worktree / "ipfs_datasets_py", "rev-parse", "HEAD") == source_head
+    assert "submodule_gitlink_ref_missing" in (repo / "events.jsonl").read_text(encoding="utf-8")
+
+
 def test_hallucinate_supervisor_repairs_stale_runtime_markers(tmp_path):
     supervisor = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
     daemon = _load_script_module("hallucinate_multimodal_control_todo_daemon")
