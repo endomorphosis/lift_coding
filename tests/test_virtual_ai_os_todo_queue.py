@@ -723,6 +723,14 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "implementation_multi_supervisor_env_defaults(" in source
     assert "implementation_supervisor_namespace_track_configs(" in source
     assert "agent_supervisor_namespace_paths(" not in source
+    for script_name in (
+        "virtual_ai_os_todo_supervisor.py",
+        "meta_glasses_display_todo_supervisor.py",
+        "hallucinate_multimodal_control_todo_supervisor.py",
+    ):
+        supervisor_source = (SCRIPTS_DIR / script_name).read_text(encoding="utf-8")
+        assert "reconcile generated supervisor outputs" not in supervisor_source
+        assert "checkpoint launch todo/objective outputs" in supervisor_source
     assert '"PREFER_COPILOT_MERGE_RESOLVER": "1"' not in source
     assert runner_module.MULTI_SUPERVISOR_ENV_DEFAULTS == implementation_multi_supervisor_env_defaults(
         prefer_copilot_merge_resolver=False,
