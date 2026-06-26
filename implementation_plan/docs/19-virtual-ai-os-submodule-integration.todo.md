@@ -3903,7 +3903,7 @@ cadence remains parseable and resumable.
 
 ## VAI-510 Reconcile the VAIOS-G723 dashboard launch branch into main
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
