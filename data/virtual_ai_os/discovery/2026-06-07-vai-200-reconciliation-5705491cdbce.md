@@ -1,7 +1,7 @@
 # VAI-200 Reconciliation Guardrail
 
 Date: 2026-06-26
-Fingerprint: 495929ed92f83792c61118b26d2f72dff9797cc8
+Fingerprint: 2fb4857806870da115dbb427b45d498cd5e614a2
 Kind: main_checkout_dirty
 Reason: main_checkout_dirty
 Candidate count: 5
@@ -10,33 +10,32 @@ Track: ops
 
 ## Main Checkout Status
 
-- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-- ` M tests/test_hallucinate_multimodal_control_todo_queue.py`
-- ` M tests/test_meta_glasses_display_todo_queue.py`
+- ` M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
+- ` M hallucinate_app`
 
 ## Main Checkout Evidence
 
-- Path categories: `modified=3`
+- Path categories: `modified=2`
 - Status paths:
-  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `tests/test_hallucinate_multimodal_control_todo_queue.py`
-  - `tests/test_meta_glasses_display_todo_queue.py`
+  - `data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
+  - `hallucinate_app`
 - Name status:
-  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md`
-  - `M	tests/test_hallucinate_multimodal_control_todo_queue.py`
-  - `M	tests/test_meta_glasses_display_todo_queue.py`
+  - `M	data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md`
+  - `M	hallucinate_app`
 - Diff stat:
-  - `...26-06-07-hao-309-reconciliation-c05f71151a70.md | 44 +++++++---------------`
-  - ` ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-`
-  - ` tests/test_meta_glasses_display_todo_queue.py      |  2 +-`
-  - ` 3 files changed, 16 insertions(+), 32 deletions(-)`
+  - `...26-06-07-hao-311-reconciliation-534cc45af3d6.md | 55 +++++++++++++++++-----`
+  - ` hallucinate_app                                    |  2 +-`
+  - ` 2 files changed, 44 insertions(+), 13 deletions(-)`
+- Submodule summary:
+  - `* hallucinate_app b4765e5...dbf45b1 (1):`
+  - `  > Merge commit 'b6ce5a8bfdf0b0cbf3f3f84af16912bd69f3cf31'`
 
 ## Sample Branches Or Worktrees
 
 - `implementation/vai-503-attempt-1-1782421864` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864`
 - `rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-510-attempt-1-1782424223`
 - `implementation/vai-511-attempt-1-1782424223` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-511-attempt-1-1782424223`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--2e6055528829` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--3b317ba602c6` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
 - `implementation/vai-514-attempt-1-1782427150` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-514-attempt-1-1782427150`
 
 ## Why This Blocks Progress
@@ -101,24 +100,23 @@ Work surface: `5` candidates, `5` sampled records.
   "candidate_count": 5,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:main_checkout_dirty",
-  "fingerprint": "495929ed92f83792c61118b26d2f72dff9797cc8",
+  "fingerprint": "2fb4857806870da115dbb427b45d498cd5e614a2",
   "kind": "main_checkout_dirty",
   "main_dirty_evidence": {
-    "diff_stat": "...26-06-07-hao-309-reconciliation-c05f71151a70.md | 44 +++++++---------------\n ...st_hallucinate_multimodal_control_todo_queue.py |  2 +-\n tests/test_meta_glasses_display_todo_queue.py      |  2 +-\n 3 files changed, 16 insertions(+), 32 deletions(-)",
-    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md\nM\ttests/test_hallucinate_multimodal_control_todo_queue.py\nM\ttests/test_meta_glasses_display_todo_queue.py",
+    "diff_stat": "...26-06-07-hao-311-reconciliation-534cc45af3d6.md | 55 +++++++++++++++++-----\n hallucinate_app                                    |  2 +-\n 2 files changed, 44 insertions(+), 13 deletions(-)",
+    "name_status": "M\tdata/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md\nM\thallucinate_app",
     "path_categories": {
-      "modified": 3
+      "modified": 2
     },
     "status_paths": [
-      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      "tests/test_hallucinate_multimodal_control_todo_queue.py",
-      "tests/test_meta_glasses_display_todo_queue.py"
+      "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      "hallucinate_app"
     ],
     "status_short": [
-      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-      " M tests/test_hallucinate_multimodal_control_todo_queue.py",
-      " M tests/test_meta_glasses_display_todo_queue.py"
-    ]
+      " M data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+      " M hallucinate_app"
+    ],
+    "submodule_summary": "* hallucinate_app b4765e5...dbf45b1 (1):\n  > Merge commit 'b6ce5a8bfdf0b0cbf3f3f84af16912bd69f3cf31'"
   },
   "reason": "main_checkout_dirty",
   "safety_constraints": [
@@ -130,14 +128,13 @@ Work surface: `5` candidates, `5` sampled records.
     "implementation/vai-503-attempt-1-1782421864",
     "rescue/worktree/implementation-vai-510-attempt-1-1782424223-476e51405bcb",
     "implementation/vai-511-attempt-1-1782424223",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--2e6055528829",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--3b317ba602c6",
     "implementation/vai-514-attempt-1-1782427150"
   ],
   "sample_count": 5,
   "sample_status_paths": [
-    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-309-reconciliation-c05f71151a70.md",
-    "tests/test_hallucinate_multimodal_control_todo_queue.py",
-    "tests/test_meta_glasses_display_todo_queue.py"
+    "data/hallucinate_multimodal_control/discovery/2026-06-07-hao-311-reconciliation-534cc45af3d6.md",
+    "hallucinate_app"
   ],
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-1-1782421864",
