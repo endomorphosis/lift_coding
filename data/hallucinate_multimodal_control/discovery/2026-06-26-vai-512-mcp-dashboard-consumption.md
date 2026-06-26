@@ -16,6 +16,20 @@ surface for dashboard tools end to end:
   catalog fixture and rejects duplicate catalog schemas or dashboard-only
   mocks.
 
+Attempt 15 keeps the fixture aligned with the live Hallucinate daemon manager
+catalog for the shared interoperability surface: VAI-512 provenance,
+dashboard-only mock rejection, `tools/list`, `tools/call`, safe probes,
+control-surface receipt requirements, MCP++ descriptor evidence, and
+dashboard receipt consumer refs.
+
+Headless validation result:
+
+- `mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`: 5
+  backend tests passed, Electron UI tests skipped due missing display server.
+- `swissknife test:e2e:mcp`: passed with three backend packages and six
+  dashboard MCP operations.
+- `multimodal-control-surface.spec.ts`: 4 tests passed.
+
 Fixture:
 
 ```text
@@ -29,4 +43,3 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 npm --prefix swissknife run test:e2e:mcp
 npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 ```
-
