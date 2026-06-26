@@ -359,7 +359,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-365 Add hardware-free mocks for expanded Meta glasses I/O
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: quality
