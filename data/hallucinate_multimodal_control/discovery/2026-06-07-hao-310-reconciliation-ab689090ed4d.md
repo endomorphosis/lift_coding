@@ -1,7 +1,7 @@
 # HAO-310 Reconciliation Guardrail
 
-Date: 2026-06-25
-Fingerprint: 190e23b151652108033a92592695f14d170d6c5a
+Date: 2026-06-26
+Fingerprint: 7c61dcb0c3ebff858208009d241cf27baa5c7dde
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
 Candidate count: 1
@@ -18,16 +18,12 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `implementation/hao-680-attempt-1-1782423241` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-1-1782423241` status: ` m hallucinate_app;  M implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md; ?? data/hallucinate_multimodal_control/discovery/2026-06-25-hao-680-dashboard-receipts.md`
+- `implementation/hao-680-attempt-5-1782433758` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-5-1782433758` status: ` m hallucinate_app`
   - Name status:
     - `M	hallucinate_app`
-    - `M	implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
   - Diff stat:
-    - `hallucinate_app                                                     | 0`
-    - ` .../docs/19-virtual-ai-os-submodule-integration.todo.md             | 6 ++++--`
-    - ` 2 files changed, 4 insertions(+), 2 deletions(-)`
-  - Untracked paths:
-    - `data/hallucinate_multimodal_control/discovery/2026-06-25-hao-680-dashboard-receipts.md`
+    - `hallucinate_app | 0`
+    - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
 
 ## Why This Blocks Progress
 
@@ -97,7 +93,7 @@ Work surface: `1` candidates, `1` sampled records.
   "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "190e23b151652108033a92592695f14d170d6c5a",
+  "fingerprint": "7c61dcb0c3ebff858208009d241cf27baa5c7dde",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -107,16 +103,14 @@ Work surface: `1` candidates, `1` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "implementation/hao-680-attempt-1-1782423241"
+    "implementation/hao-680-attempt-5-1782433758"
   ],
   "sample_count": 1,
   "sample_status_paths": [
-    "hallucinate_app",
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-25-hao-680-dashboard-receipts.md"
+    "hallucinate_app"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-1-1782423241"
+    "/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-5-1782433758"
   ],
   "success_signals": [
     "candidate_count_decreases",
