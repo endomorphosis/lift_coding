@@ -40,3 +40,29 @@ The TypeScript validator in `swissknife/src/services/meta-glasses-io-transport.t
 - claim bridge-provided libp2p without local peer, remote peer, and session IDs.
 
 This keeps raw device transport separate from IPFS/libp2p/MCP++ semantics while still allowing the bridge to publish content-addressed, receipt-bearing MCP++ envelopes.
+
+## MGW-420 Compatibility Proof Matrix
+
+The bridge-envelope proof is split across the Python integration test and the Swissknife MCP++ Jest conformance test:
+
+- `tests/integration/test_meta_glasses_io_bridge_envelope.py` builds hardware-free camera, microphone audio, Neural Band, captouch, motion/orientation, phone GPS, and display envelopes. Each accepted envelope carries IPFS-style `sha256:` CIDs, app binding IDs, route decision IDs, MCP++ tool/event/policy receipts, policy decisions, latency and backpressure metadata, payload limits, redaction metadata, and fallback-ready route state.
+- `swissknife/test/mcp-plus-plus/meta-glasses-io-conformance.test.ts` routes those surfaces through the Swissknife control-plane router and proves the routed decisions preserve payload CIDs, libp2p peer/session IDs when the bridge provides libp2p, MCP++ receipt CIDs, policy handoff CIDs, replay keys, privacy redaction, and app binding IDs.
+
+The positive proof covers these app-layer flows:
+
+- Camera capture: Wi-Fi/display-webapp bridge, IPFS payload reference, libp2p session metadata, MCP++ capture and control-route receipts.
+- Audio capture and playback routes: phone-app Bluetooth bridge, no raw Bluetooth claim, content-reference redaction, MCP++ audio receipts.
+- Neural Band and captouch input: display-webapp bridge, normalized intent routing, route receipts, replay keys, and metadata-only payload references.
+- Motion/orientation and phone GPS context: privacy-filtered or metadata-only context descriptors without raw sensor samples, precise latitude, or longitude.
+- Display output: mock widget/display payload CID, browser bridge route, route decision receipt, and unsupported-route fallback.
+
+The deterministic failure proof covers:
+
+- malformed envelopes with invalid CIDs or invalid profile/identity/route metadata;
+- missing policy decisions or missing MCP++ tool, event, envelope, or policy receipts;
+- unauthorized relays, including bridge-provided libp2p without peer/session IDs and denied policy handoffs;
+- claims that raw Bluetooth or raw Wi-Fi is itself IPFS, libp2p, or MCP++;
+- payload-limit violations when content CID count exceeds the envelope limit;
+- replayed control-plane events, hard backpressure, stale or unsupported route readiness, and denied policy outcomes.
+
+Raw Bluetooth and Wi-Fi remain transport facts. IPFS, libp2p, and MCP++ remain bridge-provided app-layer facts with explicit receipts and policy decisions.
