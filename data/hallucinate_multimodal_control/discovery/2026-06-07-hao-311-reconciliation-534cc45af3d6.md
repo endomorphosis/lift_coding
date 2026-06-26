@@ -1,7 +1,7 @@
 # HAO-311 Reconciliation Guardrail
 
 Date: 2026-06-26
-Fingerprint: bcbfefdd0ee93e5b29f2abede303488e3c3d9de3
+Fingerprint: 1565b64cf8a3e1cca5693e563b0d05c3440cc358
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
 Candidate count: 6
@@ -21,10 +21,10 @@ Track: ops
 - `implementation/hao-678-attempt-10-1782427644` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-678-attempt-10-1782427644`
   - Conflict paths:
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--48d95f853a73` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-678-attempt-8-1782426388`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--210701ac49eb` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-678-attempt-8-1782426388`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--457c744894e2` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-1-1782423241`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--a4b24f584b4b` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-1-1782423241`
   - Conflict paths:
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
 - `implementation/hao-680-attempt-4-1782430900` at `/home/barberb/lift_coding/data/hallucinate_multimodal_control/worktrees/hao-680-attempt-4-1782430900`
@@ -115,7 +115,7 @@ Work surface: `6` candidates, `6` sampled records.
     "swissknife": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "bcbfefdd0ee93e5b29f2abede303488e3c3d9de3",
+  "fingerprint": "1565b64cf8a3e1cca5693e563b0d05c3440cc358",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -126,8 +126,8 @@ Work surface: `6` candidates, `6` sampled records.
   ],
   "sample_branches": [
     "implementation/hao-678-attempt-10-1782427644",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--48d95f853a73",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--457c744894e2",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--210701ac49eb",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--a4b24f584b4b",
     "implementation/hao-680-attempt-4-1782430900",
     "implementation/hao-687-attempt-1-1782422501",
     "implementation/hao-698-attempt-1-1782430237"
