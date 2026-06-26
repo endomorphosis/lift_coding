@@ -4288,3 +4288,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-525-vai-520-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-520. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-525-vai-520-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-520 from strategy blocked_tasks.
+
+## VAI-526 Resolve implementation retry-budget failure for VAI-517
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts, data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-526-vai-517-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-517. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-526-vai-517-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-517 from strategy blocked_tasks.
