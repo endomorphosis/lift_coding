@@ -2352,3 +2352,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: swissknife/src/services/meta-glasses-input-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-input-adapter.test.ts, swissknife/docs/meta-glasses-input-app-descriptors.md, data/meta_glasses_display_widgets/state/discovery
 - Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-input-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-369. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-529-mgw-369-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-369 from strategy blocked_tasks.
+
+## MGW-530 Resolve validation retry-budget failure for MGW-368
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: MGW-364, MGW-365, MGW-366
+- Outputs: swissknife/src/services/meta-glasses-audio-adapter.ts, swissknife/test/mcp-plus-plus/meta-glasses-audio-adapter.test.ts, swissknife/docs/meta-glasses-audio-app-descriptors.md, data/meta_glasses_display_widgets/state/discovery
+- Validation: cd swissknife && npx -y -p typescript tsc --noEmit --ignoreConfig --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext --target ES2022 --typeRoots /usr/share/nodejs/@types --types node src/services/meta-glasses-audio-adapter.ts src/services/meta-glasses-io-profile.ts src/services/meta-glasses-io-transport.ts
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-368. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-530-mgw-368-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-368 from strategy blocked_tasks.
