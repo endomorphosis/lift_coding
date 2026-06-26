@@ -69,6 +69,13 @@ MGW_534_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
 )
+HAO_701_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-26-hao-701-launch-playwright-validation-gate.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
@@ -477,6 +484,84 @@ def test_mgw_534_meta_glasses_input_routing_has_launch_playwright_gate():
     assert "opens every SwissKnife desktop app" in swissknife_spec_source
     assert "remote-meta-glasses" in hallucinate_spec_source
     assert "mobile-orb-publish-glasses-event" in hallucinate_spec_source
+
+
+def test_hao_701_meta_glasses_input_routing_has_hallucinate_owned_gate():
+    receipt_source = HAO_701_RECEIPT_PATH.read_text(encoding="utf-8")
+    receipt = _load_receipt(HAO_701_RECEIPT_PATH, "## Gate Fixture")
+    fixture = json.loads(SWISSKNIFE_CONTROL_PLANE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    hallucinate_spec_source = HALLUCINATE_SPEC_PATH.read_text(encoding="utf-8")
+
+    assert receipt["schema"] == "hao_launch_playwright_validation_gate_v1"
+    assert receipt["task_id"] == "HAO-701"
+    assert receipt["goal_id"] == "VAIOS-G727"
+    assert receipt["goal_packet"] == "goal_packet/launch/external/ec964340486b"
+    assert receipt["packet_goals"] == ["VAIOS-G727", "VAIOS-G729"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["shared_packet_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
+    )
+    assert {gate["command"] for gate in receipt["playwright_gates"]} == {
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    }
+    assert receipt["supervisor_alignment"] == {
+        "objective_heap_goal": "VAIOS-G727",
+        "packet_sibling_goal": "VAIOS-G729",
+        "backlog_task": "HAO-701",
+        "shared_packet_task": "MGW-534",
+        "keeps_supervisor_fed_backlog_aligned": True,
+    }
+
+    assert set(receipt["required_inputs"]) == {
+        "camera",
+        "microphone",
+        "headphones",
+        "captouch",
+        "Neural Band",
+    }
+    assert set(receipt["required_inputs"]).issubset({event["device"] for event in fixture["events"]})
+    assert receipt["required_transports"] == [
+        "Bluetooth transport",
+        "Wi-Fi transport",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+    ]
+    assert receipt["mobile_edges"] == [
+        "external/meta-wearables-dat-android",
+        "external/meta-wearables-dat-ios",
+        "mobile",
+    ]
+    assert receipt["route"] == [
+        "Meta glasses interface",
+        "Meta Wearables DAT",
+        "mobile phone",
+        "Swissknife applications",
+        "Hallucinate App mediation",
+        "control plane",
+    ]
+
+    for gate in receipt["playwright_gates"]:
+        if gate["surface"] == "hallucinate_app":
+            for term in gate["route_terms"]:
+                assert term in hallucinate_spec_source
+
+    for required_term in (
+        "HAO-701",
+        "MGW-534",
+        "VAIOS-G727",
+        "VAIOS-G729",
+        "launch Playwright validation gate",
+        "2026-06-26-hao-701-launch-playwright-validation-gate.md",
+        "swissknife/test/e2e/fixtures/mgw-519-meta-glasses-control-plane.json",
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    ):
+        assert required_term in receipt_source
+        assert required_term in heap_source
 
 
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
