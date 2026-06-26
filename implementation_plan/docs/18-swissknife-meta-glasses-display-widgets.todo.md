@@ -915,7 +915,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: f598929e25ceff74221be0dd59760f785b40280c
+- Fingerprint: a682e5701a7e9255f5b80e2f796da779d1a057e2
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
@@ -2308,7 +2308,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Fingerprint: ba85019112fcd19d0b366424013f495205e76e5b
+- Fingerprint: a77eba7df32c8299d7d4ab9472cef5ba6c3a0b5b
 - Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
