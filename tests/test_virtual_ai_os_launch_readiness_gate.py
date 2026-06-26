@@ -76,6 +76,13 @@ MGW_538_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-26-mgw-538-launch-playwright-validation-gate.md"
 )
+VAI_522_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-26-vai-522-launch-playwright-validation-gate.md"
+)
 HAO_701_RECEIPT_PATH = (
     REPO_ROOT
     / "data"
@@ -661,6 +668,83 @@ def test_mgw_538_cross_device_offload_replay_has_launch_playwright_gate():
         "launch readiness receipt",
         "cross-device e2e validation",
         "Playwright launch replay",
+        "2026-06-26-mgw-538-launch-playwright-validation-gate.md",
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    ):
+        assert required_term in receipt_source
+        assert required_term in heap_source
+
+
+def test_vai_522_cross_device_offload_replay_has_launch_playwright_gate():
+    receipt_source = VAI_522_RECEIPT_PATH.read_text(encoding="utf-8")
+    receipt = _load_receipt(VAI_522_RECEIPT_PATH, "## Gate Fixture")
+    shared_receipt = _load_receipt(MGW_538_RECEIPT_PATH, "## Gate Fixture")
+    replay = _json_block_after(
+        VAI_339_REPLAY_PATH.read_text(encoding="utf-8"),
+        "## Deterministic Launch Replay Gate",
+    )
+    hao_675 = json.loads(HAO_675_REPLAY_FIXTURE_PATH.read_text(encoding="utf-8"))
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+
+    assert receipt["schema"] == "vai_cross_device_offload_launch_playwright_gate_v1"
+    assert receipt["task_id"] == "VAI-522"
+    assert receipt["goal_id"] == "VAIOS-G726"
+    assert receipt["bundle"] == "objective/launch/cross-device-virtual-desktop-offload-replay"
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["missing_evidence_source"] == (
+        "data/virtual_ai_os/discovery/2026-06-26-vai-522-objective-gap-4ca32c914d33.md"
+    )
+    assert receipt["shared_validation_gate"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-06-26-mgw-538-launch-playwright-validation-gate.md"
+    )
+    assert receipt["python_gate"]["command"] == PYTHON_GATE_COMMAND
+    assert {gate["command"] for gate in receipt["playwright_gates"]} == {
+        SWISSKNIFE_PLAYWRIGHT_COMMAND,
+        HALLUCINATE_PLAYWRIGHT_COMMAND,
+    }
+    assert receipt["launch_packet_command"] == shared_receipt["launch_packet_command"]
+    assert receipt["source_replay_receipts"] == shared_receipt["source_replay_receipts"]
+    assert receipt["route"] == shared_receipt["route"]
+    assert receipt["join_keys"] == shared_receipt["join_keys"]
+    assert receipt["placement_policy"] == shared_receipt["placement_policy"]
+    assert receipt["required_receipt_chain"] == shared_receipt["required_receipt_chain"]
+    assert receipt["required_receipt_chain"] == [
+        item["receipt"] for item in replay["receipt_chain"]
+    ]
+    assert receipt["supervisor_alignment"] == {
+        "objective_heap_goal": "VAIOS-G726",
+        "backlog_task": "VAI-522",
+        "shared_backlog_task": "MGW-538",
+        "merge_family": "objective/VAIOS-G726",
+        "merge_role": "validation_gate",
+        "keeps_supervisor_fed_backlog_aligned": True,
+    }
+    assert receipt["placement_policy"]["selected_runtime"] == (
+        replay["placement_policy"]["selected_runtime"]
+    )
+    assert receipt["placement_policy"]["fallback_runtime"] == (
+        replay["placement_policy"]["fallback_runtime"]
+    )
+    assert hao_675["pass_fail_receipts"]["desktop_peer_offload"] == "passed"
+    assert hao_675["pass_fail_receipts"]["production_launch_readiness"] == "passed"
+
+    for required_term in (
+        "VAI-522",
+        "MGW-538",
+        "VAIOS-G726",
+        "launch Playwright validation gate",
+        "phone-hosted Swissknife virtual desktop",
+        "desktop peer offload",
+        "Hallucinate App mediation",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "launch readiness receipt",
+        "cross-device e2e validation",
+        "Playwright launch replay",
+        "2026-06-26-vai-522-launch-playwright-validation-gate.md",
         "2026-06-26-mgw-538-launch-playwright-validation-gate.md",
         SWISSKNIFE_PLAYWRIGHT_COMMAND,
         HALLUCINATE_PLAYWRIGHT_COMMAND,
