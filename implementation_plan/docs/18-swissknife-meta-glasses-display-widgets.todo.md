@@ -2326,3 +2326,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-527-reconciliation-f77180faeb9c.md
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by unsupported_status. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-527-reconciliation-f77180faeb9c.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## MGW-528 Resolve dependency guardrail for MGW-412
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-528-dependency-guardrail.md
+- Acceptance: Dependency guardrail filed this because MGW-412 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-528-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
