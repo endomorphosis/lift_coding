@@ -1,10 +1,10 @@
 # VAI-202 Reconciliation Guardrail
 
 Date: 2026-06-26
-Fingerprint: 364bd44921446da49ec5c3d17ec3d5303baa432b
+Fingerprint: 06342af5d5246a142910be6fd2839204c0c3c131
 Kind: dirty_backlogged_worktree
 Reason: unsupported_status
-Candidate count: 2
+Candidate count: 1
 Priority: P1
 Track: ops
 
@@ -18,25 +18,12 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--cc09eca52d16` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956` status: ` m swissknife`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--4981aed5a228` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956` status: ` m swissknife`
   - Name status:
     - `M	swissknife`
   - Diff stat:
     - `swissknife | 0`
     - ` 1 file changed, 0 insertions(+), 0 deletions(-)`
-- `implementation/vai-512-attempt-12-1782434708` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782434708` status: ` m hallucinate_app;  M implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md;  m swissknife; ?? data/hallucinate_multimodal_control/discovery/2026-06-26-hao-vai-512-mcp-dashboard-consumption.md; ?? data/virtual_ai_os/discovery/2026-06-26-vai-512-mcp-dashboard-consumption.md`
-  - Name status:
-    - `M	hallucinate_app`
-    - `M	implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
-    - `M	swissknife`
-  - Diff stat:
-    - `hallucinate_app                                       |  0`
-    - ` ...18-swissknife-meta-glasses-display-widgets.todo.md | 19 ++++++++++++++++---`
-    - ` swissknife                                            |  0`
-    - ` 3 files changed, 16 insertions(+), 3 deletions(-)`
-  - Untracked paths:
-    - `data/hallucinate_multimodal_control/discovery/2026-06-26-hao-vai-512-mcp-dashboard-consumption.md`
-    - `data/virtual_ai_os/discovery/2026-06-26-vai-512-mcp-dashboard-consumption.md`
 
 ## Why This Blocks Progress
 
@@ -55,7 +42,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `2` candidates, `2` sampled records.
+Work surface: `1` candidates, `1` sampled records.
 
 ### Suggested Actions
 
@@ -103,10 +90,10 @@ Work surface: `2` candidates, `2` sampled records.
       "scope": "worktree_root"
     }
   ],
-  "candidate_count": 2,
+  "candidate_count": 1,
   "conflict_path_counts": {},
   "dedupe_key": "reconciliation_guardrail:dirty_backlogged_worktree:unsupported_status",
-  "fingerprint": "364bd44921446da49ec5c3d17ec3d5303baa432b",
+  "fingerprint": "06342af5d5246a142910be6fd2839204c0c3c131",
   "kind": "dirty_backlogged_worktree",
   "main_dirty_evidence": {},
   "reason": "unsupported_status",
@@ -116,20 +103,14 @@ Work surface: `2` candidates, `2` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--cc09eca52d16",
-    "implementation/vai-512-attempt-12-1782434708"
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--4981aed5a228"
   ],
-  "sample_count": 2,
+  "sample_count": 1,
   "sample_status_paths": [
-    "swissknife",
-    "hallucinate_app",
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-vai-512-mcp-dashboard-consumption.md",
-    "data/virtual_ai_os/discovery/2026-06-26-vai-512-mcp-dashboard-consumption.md"
+    "swissknife"
   ],
   "sample_worktrees": [
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782434708"
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-508-attempt-1-1782422956"
   ],
   "success_signals": [
     "candidate_count_decreases",
