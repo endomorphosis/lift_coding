@@ -4083,8 +4083,8 @@ cadence remains parseable and resumable.
 
 ## VAI-518 Close virtual AI OS launch objective gap: Meta glasses control-plane input routing
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-26: merged the VAI-518 launch Playwright validation gate and VAIOS-G727/VAIOS-G729 control-plane input routing evidence through `05fce1c93`.
 - Priority: P0
 - Track: launch
 - Depends on: 
