@@ -392,7 +392,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-368 Expose microphone and speaker/headphone audio routes to Swissknife apps
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
