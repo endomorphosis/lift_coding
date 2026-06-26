@@ -27,6 +27,13 @@ VAI_501_DISCOVERY_PATH = (
     / "discovery"
     / "2026-06-24-vai-501-swissknife-virtual-desktop-launch-readiness-matrix.md"
 )
+VAI_503_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-25-vai-503-mcp-dashboard-interoperability-gate.md"
+)
 INTEGRATION_PLAN_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -1343,6 +1350,51 @@ def test_virtual_ai_os_codebase_scan_skips_generated_discovery_domains(tmp_path)
         "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
         "tests/test_meta_glasses_display_todo_queue.py",
     } <= set(supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES)
+
+
+def test_vai_503_mcp_dashboard_interoperability_gate_closes_objective_gap():
+    source = VAI_503_DISCOVERY_PATH.read_text(encoding="utf-8")
+    packet = _json_block_after(source, "## DashboardInteroperabilityGate")
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_registry_source = (
+        REPO_ROOT / "swissknife" / "src" / "services" / "swissknife-mcp-capability-registry.ts"
+    ).read_text(encoding="utf-8")
+
+    assert packet["task_id"] == "VAI-503"
+    assert packet["goal_id"] == "VAIOS-G723"
+    assert packet["evidence_term"] == "launch Playwright validation gate"
+    assert packet["playwright_spec"] == "hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts"
+    assert packet["swissknife_consumers"]["ipfs_kit_py_port"] == 8004
+    assert packet["supervisor_follow_up_subtasks"] == [
+        "HAO-678",
+        "HAO-679",
+        "HAO-680",
+        "HAO-681",
+        "HAO-682",
+        "HAO-683",
+    ]
+
+    for term in (
+        "catalog normalization",
+        "dashboard UI wiring",
+        "mediated tool-call receipts",
+        "Swissknife consumers",
+        "Playwright coverage",
+        "supervisor-generated follow-up subtasks",
+    ):
+        assert term in source
+        assert term in playwright_source
+
+    assert "data/virtual_ai_os/discovery/2026-06-25-vai-503-mcp-dashboard-interoperability-gate.md" in heap_source
+    assert "launch Playwright validation gate" in heap_source
+    assert "mcp-dashboard-interoperability.spec.ts" in readiness_source
+    assert "port: 8004" in swissknife_registry_source
 
 
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
