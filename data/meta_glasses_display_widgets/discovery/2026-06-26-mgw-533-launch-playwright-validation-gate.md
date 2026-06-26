@@ -29,7 +29,7 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 
 - `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes `launch_objective_ids` and `launch_validation_gate` for `MGW-533`, `VAIOS-G724`, and `VAIOS-G728`.
 - `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` asserts the catalog lineage from the Electron dashboard surface.
-- `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` asserts the headless catalog fixture, the MGW-533 launch gate receipt, `tools/list`, `tools/call`, daemon health/catalog routing, and Swissknife consumer output.
+- `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` asserts the headless catalog fixture, the MGW-533 launch gate receipt, the original MGW-533 objective-gap discovery note, the VAIOS-G724 objective heap proof, `tools/list`, `tools/call`, daemon health/catalog routing, and Swissknife consumer output.
 - `hallucinate_app/test/e2e/fixtures/mgw-533-mcp-dashboard-launch-gate.json` records the launch readiness receipt for the objective gap.
 - `swissknife/scripts/test-mcp-dashboard-consumer.cjs` verifies Swissknife consumes the same catalog lineage, backend packages, and operations.
 - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md` records the MGW-533 proof on `VAIOS-G724` and the shared packet proof on `VAIOS-G728`.
