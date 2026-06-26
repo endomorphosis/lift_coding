@@ -47,3 +47,10 @@ Swissknife applications consume MCP++ compatible control-plane contracts from Ha
 ## Suggested Handling
 
 Run and repair the launch readiness validation gate until the phone, desktop, Swissknife, Hallucinate App, and Meta glasses Playwright checks pass.
+
+## Closure Evidence
+
+- `swissknife/test/e2e/mcp-dashboard.spec.ts` is the MGW-537 launch Playwright validation gate for `VAIOS-G725`.
+- `swissknife/test/e2e/fixtures/mgw-537-mcp-dashboard-launch-gate.json` records the launch readiness receipt, required evidence terms, required backend packages, `tools/list`, `tools/call`, MCP++ descriptor/profile receipt fields, and the control-plane route.
+- `npm --prefix swissknife run test:e2e:mcp` now runs the Playwright spec before the existing Swissknife dashboard consumer script.
+- `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md` records this proof on `VAIOS-G725` so supervisor-fed backlog repair remains aligned with the objective heap.
