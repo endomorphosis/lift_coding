@@ -2318,8 +2318,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-528 Resolve dependency guardrail for MGW-412
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-26: verified the MGW-411 blocked-reason metadata is separated from the MGW-412 heading, leaving a single MGW-412 task id with no real dependencies.
 - Priority: P1
 - Track: ops
 - Depends on:
