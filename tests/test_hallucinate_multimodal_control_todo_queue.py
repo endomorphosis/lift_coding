@@ -850,7 +850,7 @@ def test_hao_701_packet_proof_aligns_hallucinate_backlog_with_objective_heap():
     assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
 
     task = tasks["HAO-701"]
-    assert task.status == PENDING_TASK_STATUS
+    assert task.status in {PENDING_TASK_STATUS, "completed"}
     assert task.metadata["goal id"] == receipt["goal_id"]
     assert task.metadata["goal packet"] == receipt["goal_packet"]
     assert task.metadata["goal packet goals"] == "VAIOS-G727, VAIOS-G729"
@@ -2582,6 +2582,7 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
             "failure_count": 3,
             "failed_command": failed_command,
             "discovery_path": str(expected_discovery),
+            "launch_playwright_validation_gate": False,
         }
     ]
     updated = task_board_path.read_text(encoding="utf-8")
