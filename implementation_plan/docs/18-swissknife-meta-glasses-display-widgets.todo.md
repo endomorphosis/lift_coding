@@ -962,7 +962,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-415 Build Meta glasses I/O fixture corpus from DAT and Web Apps samples
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: quality
