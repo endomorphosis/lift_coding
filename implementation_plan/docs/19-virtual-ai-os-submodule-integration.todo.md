@@ -4034,3 +4034,14 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/state/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-515-dependency-guardrail.md
 - Acceptance: Dependency guardrail filed this because VAI-203 has missing, self-referential, cyclic, or duplicate task-id metadata. Use the evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-515-dependency-guardrail.md to repair the todo board metadata or add the missing prerequisite task, then verify the original task can become ready once its real dependencies complete.
+
+## VAI-516 Resolve implementation retry-budget failure for VAI-512
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: VAI-501, VAI-502
+- Outputs: hallucinate_app, swissknife, tests, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery, data/virtual_ai_os/state/discovery
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-516-vai-512-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-512. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-516-vai-512-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-512 from strategy blocked_tasks.
