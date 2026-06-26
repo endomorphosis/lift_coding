@@ -29,6 +29,34 @@ Use this checklist to validate DAT display behavior on physical display-capable 
 - [ ] CI/default bridge-only APK gate passes with `cd mobile/android && ./gradlew :app:assembleDebug -PmetaWearablesDatAndroidEnabled=false`
 - [ ] Test account has required permissions for app onboarding and display access
 
+## Native DAT Display Feature Gates
+
+Native DAT display remains optional and disabled by default until every gate
+below passes for the exact Android DAT v0.7 or iOS DAT v0.7 build, release
+channel, phone, account, and display-capable glasses under test.
+
+| Gate | Required evidence | Blocked behavior |
+|---|---|---|
+| Package credentials | Meta Wearables DAT package credentials resolve native dependencies and the SDK-linked build is intentional. | Keep Android `-PmetaWearablesDatAndroidEnabled=false` or iOS SDK-unlinked fallback; report `dat_sdk_unlinked` or `dat_native_display_unavailable`. |
+| Developer Mode or release channel | Developer Mode is enabled for development runs, or the app is installed from an approved release channel. | Keep native display off and use mobile-card or Web Apps HTTPS fallback. |
+| App registration | App ID, package/bundle ID, DAM metadata, and Display Web App registration match the test account. | Report `dam_disabled`, registration mismatch, or app-model unavailable state. |
+| Firmware/app update state | Glasses firmware, Meta AI app, and glasses DAT app have no pending update prompts. | Report `firmware_update_required` or `dat_app_update_required` with required action metadata. |
+| Paired display-capable hardware | The phone is paired to display-capable glasses and the display target is selected. | Report `target_required` or `display_capability_missing`; keep native display off. |
+| Capability checks | Runtime diagnostics confirm DAT SDK target `0.7.0` or newer, `displaySdkLinked`, DAM enabled, and display capability. | Report `sdk_version_unsupported`, `display_sdk_unlinked`, or structured unsupported fallback. |
+
+Feature gate decision:
+- [ ] Android native DAT display is enabled only after package credentials,
+      Developer Mode or release channel, app registration, firmware/app update
+      state, paired display-capable hardware, and capability checks pass
+- [ ] iOS native DAT display is enabled only after package credentials,
+      Developer Mode or release channel, app registration, firmware/app update
+      state, paired display-capable hardware, `MWDATCore`, `MWDATDisplay`, DAM,
+      DAT v0.7+, and capability checks pass
+- [ ] Display Web Apps HTTPS deployment and mobile-card fallback remain usable
+      whenever any native DAT display feature gate fails
+- [ ] Fallback evidence records `renderPath`, `reason`, `requiredAction` when
+      available, privacy review state, and rollback decision
+
 ## A) Simulator Trace Parity Gate
 
 - [ ] Simulator fixture name is recorded
