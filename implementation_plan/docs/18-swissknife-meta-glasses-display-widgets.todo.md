@@ -1002,7 +1002,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-420 Prove IPFS/libp2p/MCP++ bridge-envelope compatibility
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: transport
