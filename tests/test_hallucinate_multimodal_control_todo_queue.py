@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -2271,6 +2272,45 @@ def test_implementation_daemon_branch_changed_paths_use_merge_base(tmp_path):
     )
 
     assert daemon._branch_changed_paths("implementation/task") == {"feature.txt"}
+
+
+def test_validation_runner_strips_unsupported_typescript_ignore_config(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    daemon = PortalImplementationDaemon(
+        **_implementation_daemon_paths(repo),
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+        implementation_timeout=10,
+    )
+    task = PortalTask(
+        task_id="HAO-998",
+        title="Validate stale TypeScript flag",
+        **_pending_task_metadata(),
+        priority="P1",
+        track="ops",
+        validation=[
+            "python3 -c \"import sys; sys.exit(42 if '--ignoreConfig' in sys.argv else 0)\" "
+            "tsc --ignoreConfig"
+        ],
+    )
+
+    log_path = repo / "validation.log"
+    result = daemon._run_validation_commands(repo, task, log_path)
+
+    assert result["passed"] is True
+    assert result["results"][0]["raw_command"].endswith("tsc --ignoreConfig")
+    assert not re.search(r"(^|[\s;&|])--ignoreConfig(?=$|[\s;&|])", result["results"][0]["command"])
+    assert (
+        "[validation normalized] removed unsupported TypeScript flag --ignoreConfig"
+        in log_path.read_text(encoding="utf-8")
+    )
 
 
 def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_path):
