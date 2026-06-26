@@ -3122,12 +3122,31 @@ def test_objective_goal_completion_waits_for_open_task_board_work(tmp_path):
 """,
         encoding="utf-8",
     )
+    mgw_todo_path = repo / "mgw.todo.md"
+    mgw_todo_path.write_text(
+        f"""# Temporary MGW Board
+
+## MGW-001 Prove dashboard glasses control surface
+
+{_pending_status_board_line()}
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Goal id: VAIOS-G001
+- Depends on:
+- Outputs: docs/dashboard-proof.md
+- Validation: true
+- Acceptance: Keep VAIOS-G001 open while MGW launch work is still pending.
+""",
+        encoding="utf-8",
+    )
 
     open_result = reconcile_objective_goal_completion(
         repo_root=repo,
         objective_path=objective_path,
         todo_path=todo_path,
         task_header_prefix="HAO-",
+        todo_boards=[(mgw_todo_path, "MGW-")],
     )
 
     assert open_result.completed_goal_ids == []
@@ -3141,11 +3160,32 @@ def test_objective_goal_completion_waits_for_open_task_board_work(tmp_path):
         ),
         encoding="utf-8",
     )
+    still_open_result = reconcile_objective_goal_completion(
+        repo_root=repo,
+        objective_path=objective_path,
+        todo_path=todo_path,
+        task_header_prefix="HAO-",
+        todo_boards=[(mgw_todo_path, "MGW-")],
+    )
+
+    assert still_open_result.completed_goal_ids == []
+    assert still_open_result.validation_results["VAIOS-G001"]["reason"] == "open_todo_tasks"
+    assert str(mgw_todo_path) in still_open_result.validation_results["VAIOS-G001"]["todo_boards"]
+    assert parse_goal_heap(objective_path.read_text(encoding="utf-8"))[0].status == "active"
+
+    mgw_todo_path.write_text(
+        mgw_todo_path.read_text(encoding="utf-8").replace(
+            _pending_status_board_line(),
+            "- Status: completed",
+        ),
+        encoding="utf-8",
+    )
     closed_result = reconcile_objective_goal_completion(
         repo_root=repo,
         objective_path=objective_path,
         todo_path=todo_path,
         task_header_prefix="HAO-",
+        todo_boards=[(mgw_todo_path, "MGW-")],
     )
 
     assert closed_result.completed_goal_ids == ["VAIOS-G001"]

@@ -788,6 +788,11 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert common_arg_values.count("--objective-interoperability-component-path") == len(
         runner_module.VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS
     )
+    assert common_arg_values.count("--objective-goal-completion-todo-board") == len(
+        runner_module.VAI_MGW_HAO_GOAL_COMPLETION_BOARD_SPECS
+    )
+    for board_spec in runner_module.VAI_MGW_HAO_GOAL_COMPLETION_BOARD_SPECS:
+        assert board_spec in common_arg_values
     for component_path in (
         "mobile",
         "swissknife",
@@ -934,6 +939,9 @@ def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_
     objective = ObjectiveRefillDefaults(
         seed_interoperability_goals=True,
         objective_interoperability_component_paths=("swissknife", "hallucinate_app"),
+        objective_goal_completion_todo_boards=(
+            "hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md::HAO-",
+        ),
         objective_max_interoperability_goals=12,
     )
 
@@ -947,6 +955,8 @@ def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_
     assert args.count("--objective-interoperability-component-path") == 2
     assert args[args.index("--objective-interoperability-component-path") + 1] == "swissknife"
     assert "hallucinate_app" in args
+    assert "--objective-goal-completion-todo-board" in args
+    assert "hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md::HAO-" in args
     assert "--objective-max-interoperability-goals" in args
     assert args[args.index("--objective-max-interoperability-goals") + 1] == "12"
 

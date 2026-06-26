@@ -84,6 +84,18 @@ VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_ARGS = tuple(
     for item in ("--objective-interoperability-component-path", path)
 )
 
+VAI_MGW_HAO_GOAL_COMPLETION_BOARD_SPECS = (
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md::VAI-",
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md::MGW-",
+    "hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md::HAO-",
+)
+
+VAI_MGW_HAO_GOAL_COMPLETION_BOARD_ARGS = tuple(
+    item
+    for spec in VAI_MGW_HAO_GOAL_COMPLETION_BOARD_SPECS
+    for item in ("--objective-goal-completion-todo-board", spec)
+)
+
 VAI_MGW_HAO_LAUNCH_MISSION_TERMS = (
     "phone-hosted Swissknife virtual desktop",
     "desktop peer offload",
@@ -173,6 +185,7 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "--objective-refill-scan",
     "--objective-seed-interoperability-goals",
     *VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_ARGS,
+    *VAI_MGW_HAO_GOAL_COMPLETION_BOARD_ARGS,
     "--objective-task-janitor-max-deprioritized-tasks",
     "500",
     *VAI_MGW_HAO_LAUNCH_MISSION_ARGS,
