@@ -1,10 +1,10 @@
 # VAI-203 Reconciliation Guardrail
 
 Date: 2026-06-26
-Fingerprint: 2dbb7f945c9cb77a01c346663b1d3342d5368b92
+Fingerprint: 19f60bb10e8f6f0da6d81ab09be47ad5148600c4
 Kind: preflight_merge_conflict
 Reason: preflight_merge_conflict
-Candidate count: 4
+Candidate count: 5
 Priority: P1
 Track: ops
 
@@ -18,18 +18,24 @@ Track: ops
 
 ## Sample Branches Or Worktrees
 
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-vai-503-attempt-2-5c0f3198fbef` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-2-1782433690`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--aafa7f1903af` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-2-1782433690`
   - Conflict paths:
     - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-vai-512-attempt-1-2b796b1067f5` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782433437`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--7979f6ceb663` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782433437`
   - Conflict paths:
     - `tree.`
     - `hallucinate_app`
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
     - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
-- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--973897644384` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881`
+- `rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--93342c6279a9` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782435836`
   - Conflict paths:
     - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`
+- `implementation/vai-512-attempt-12-1782436353` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782436353`
+  - Conflict paths:
+    - `hallucinate_app`
+    - `implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md`
+    - `swissknife`
 - `implementation/vai-514-attempt-1-1782427150` at `/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-514-attempt-1-1782427150`
   - Conflict paths:
     - `hallucinate_app`
@@ -52,7 +58,7 @@ worktree cleanup skip count decreases.
 
 ## Reconciliation Plan
 
-Work surface: `4` candidates, `4` sampled records.
+Work surface: `5` candidates, `5` sampled records.
 
 ### Suggested Actions
 
@@ -100,17 +106,17 @@ Work surface: `4` candidates, `4` sampled records.
       "scope": "backlogged_worktrees"
     }
   ],
-  "candidate_count": 4,
+  "candidate_count": 5,
   "conflict_path_counts": {
-    "hallucinate_app": 2,
-    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 2,
-    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 1,
+    "hallucinate_app": 3,
+    "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md": 3,
+    "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md": 2,
     "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md": 1,
-    "swissknife": 1,
+    "swissknife": 2,
     "tree.": 1
   },
   "dedupe_key": "reconciliation_guardrail:preflight_merge_conflict",
-  "fingerprint": "2dbb7f945c9cb77a01c346663b1d3342d5368b92",
+  "fingerprint": "19f60bb10e8f6f0da6d81ab09be47ad5148600c4",
   "kind": "preflight_merge_conflict",
   "main_dirty_evidence": {},
   "reason": "preflight_merge_conflict",
@@ -120,12 +126,13 @@ Work surface: `4` candidates, `4` sampled records.
     "Keep todo, objective, discovery, and strategy files parseable after reconciliation."
   ],
   "sample_branches": [
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-vai-503-attempt-2-5c0f3198fbef",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-implementation-vai-512-attempt-1-2b796b1067f5",
-    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--973897644384",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--aafa7f1903af",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--7979f6ceb663",
+    "rescue/worktree/rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree-rescue-worktree--93342c6279a9",
+    "implementation/vai-512-attempt-12-1782436353",
     "implementation/vai-514-attempt-1-1782427150"
   ],
-  "sample_count": 4,
+  "sample_count": 5,
   "sample_status_paths": [
     "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
     "tree.",
@@ -137,7 +144,8 @@ Work surface: `4` candidates, `4` sampled records.
   "sample_worktrees": [
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-503-attempt-2-1782433690",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782433437",
-    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-3-1782425881",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782435836",
+    "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-512-attempt-12-1782436353",
     "/home/barberb/lift_coding/data/virtual_ai_os/worktrees/vai-514-attempt-1-1782427150"
   ],
   "success_signals": [
@@ -150,8 +158,8 @@ Work surface: `4` candidates, `4` sampled records.
     "hallucinate_app",
     "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
     "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
-    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
     "swissknife",
+    "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
     "tree."
   ]
 }
