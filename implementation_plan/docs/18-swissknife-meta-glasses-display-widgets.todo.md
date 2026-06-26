@@ -403,7 +403,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-369 Expose Neural Band, captouch, motion, and GPS inputs to Swissknife apps
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
