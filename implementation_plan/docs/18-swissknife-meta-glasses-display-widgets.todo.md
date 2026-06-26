@@ -2582,7 +2582,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-539 Resolve implementation retry-budget failure for MGW-537
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2593,7 +2593,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-540 Resolve implementation retry-budget failure for MGW-538
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2604,7 +2604,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-541 Resolve implementation retry-budget failure for MGW-533
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2615,7 +2615,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-542 Resolve implementation retry-budget failure for MGW-534
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2626,7 +2626,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-543 Resolve implementation retry-budget failure for MGW-535
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2637,7 +2637,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-544 Resolve implementation retry-budget failure for MGW-536
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops

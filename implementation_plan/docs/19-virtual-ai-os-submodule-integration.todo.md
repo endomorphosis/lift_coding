@@ -4258,7 +4258,7 @@ cadence remains parseable and resumable.
 
 ## VAI-523 Resolve implementation retry-budget failure for VAI-518
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4269,7 +4269,7 @@ cadence remains parseable and resumable.
 
 ## VAI-524 Resolve implementation retry-budget failure for VAI-521
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4280,7 +4280,7 @@ cadence remains parseable and resumable.
 
 ## VAI-525 Resolve implementation retry-budget failure for VAI-520
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4291,7 +4291,7 @@ cadence remains parseable and resumable.
 
 ## VAI-526 Resolve implementation retry-budget failure for VAI-517
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4302,7 +4302,7 @@ cadence remains parseable and resumable.
 
 ## VAI-527 Resolve implementation retry-budget failure for VAI-522
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4313,7 +4313,7 @@ cadence remains parseable and resumable.
 
 ## VAI-528 Resolve implementation retry-budget failure for VAI-519
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
