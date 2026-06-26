@@ -49,3 +49,10 @@ npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 - dashboard capability catalog
 - Swissknife applications
 - launch Playwright validation gate
+
+## Attempt 5 Validation
+
+- `PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q` passed with 68 tests and one `audioop` deprecation warning.
+- `npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts` passed with 2 Playwright tests.
+- `npm --prefix swissknife run test:e2e:meta-glasses` passed with 2 Playwright tests.
+- `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts` passed with 4 Playwright tests.
