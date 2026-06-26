@@ -4223,7 +4223,7 @@ cadence remains parseable and resumable.
 
 ## VAI-522 Close virtual AI OS launch objective gap: Cross-device virtual desktop offload launch replay
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
