@@ -303,7 +303,9 @@ def test_launch_validation_retry_repair_preserves_playwright_gate(tmp_path):
     updated_strategy = json.loads(strategy.read_text(encoding="utf-8"))
     assert findings[0]["source_task_id"] == "MGW-536"
     assert findings[0]["launch_playwright_validation_gate"] is True
+    assert findings[0]["discovery_path"].endswith("-mgw-537-mgw-536-retry-budget.md")
     assert "launch Playwright validation gate" in updated_board
     assert "npm --prefix swissknife run test:e2e:meta-glasses" in updated_board
     assert "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts" in updated_board
+    assert "For launch tasks, this repair validation preserves the launch Playwright validation gate." in updated_board
     assert updated_strategy["blocked_tasks"] == ["MGW-536"]

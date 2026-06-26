@@ -203,7 +203,18 @@ def test_objective_task_janitor_keeps_launch_playwright_gate_repairs_on_mission(
     assert updated["deprioritized_tasks"] == []
     assert updated["objective_task_janitor_reopen_goal_ids"] == ["VAIOS-G729"]
     assert updated["objective_task_janitor_force_goal_ids"] == ["VAIOS-G729"]
+    assert updated["objective_task_janitor_validation_gate_goal_ids"] == ["VAIOS-G729"]
+    launch_gate = updated["objective_task_janitor_launch_playwright_validation_gate"]
+    assert launch_gate["active"] is True
+    assert launch_gate["evidence_term"] == "launch Playwright validation gate"
+    assert launch_gate["goal_ids"] == ["VAIOS-G729"]
+    assert "npm --prefix swissknife run test:e2e:meta-glasses" in launch_gate["validation_command"]
+    assert (
+        "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
+        in launch_gate["validation_command"]
+    )
     assert "launch playwright validation gate" in updated["objective_task_janitor_mission_terms"]
+    assert result["validation_gate_goal_ids"] == ["VAIOS-G729"]
 
 
 def test_backlog_refill_treats_nonselectable_ready_tasks_as_drained(tmp_path):
