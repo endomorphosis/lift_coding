@@ -969,7 +969,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-417 Define mobile bridge route contracts for camera, audio, and display
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
