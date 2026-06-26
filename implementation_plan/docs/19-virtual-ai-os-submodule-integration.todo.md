@@ -4188,7 +4188,7 @@ cadence remains parseable and resumable.
 
 ## VAI-521 Close virtual AI OS launch objective gap: Swissknife MCP++ server dashboard interoperability
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
