@@ -909,18 +909,30 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-411-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+<<<<<<< HEAD
 ## MGW-412 Resolve dirty main checkout blocking 8 worktree merges
+=======
+## MGW-412 Resolve dirty main checkout blocking 6 worktree merges
+>>>>>>> implementation/mgw-525-attempt-1-1782436831
 
 - Status: completed
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
+<<<<<<< HEAD
 - Fingerprint: fc6de32c518a2bb8b8666dc3f28f1821a650525b
+=======
+- Fingerprint: cc2b816293e34407e46aaca08004f3f14df77daf
+>>>>>>> implementation/mgw-525-attempt-1-1782436831
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md
+<<<<<<< HEAD
 - Acceptance: Reconciliation guardrail filed this because 8 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+=======
+- Acceptance: Reconciliation guardrail filed this because 6 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+>>>>>>> implementation/mgw-525-attempt-1-1782436831
 
 ## MGW-413 Refresh official Meta glasses I/O source matrix
 
@@ -2265,8 +2277,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-525 Resolve validation retry-budget failure for MGW-524
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-26: verified the MGW-524 retry-budget blocker is resolved by the Hallucinate App headless-aware MCP dashboard Playwright gate; the required validation command passes without a display server and MGW-524 is absent from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
 - Depends on: 
