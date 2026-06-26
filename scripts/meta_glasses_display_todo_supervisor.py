@@ -141,7 +141,9 @@ _meta_glasses_display_objective_defaults = build_namespace_objective_refill_defa
     objective_interoperability_focus=META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS,
     objective_interoperability_component_paths=META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS,
     objective_max_interoperability_goals=12,
+    objective_max_launch_readiness_goals=8,
     seed_interoperability_goals=True,
+    seed_launch_readiness_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 _meta_glasses_display_codebase_defaults = build_namespace_codebase_refill_defaults_factory(

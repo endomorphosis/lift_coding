@@ -797,8 +797,11 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert common_arg_values[common_arg_values.index("--objective-max-refinement-depth") + 1] == "2"
     assert "--objective-max-interoperability-goals" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-max-interoperability-goals") + 1] == "12"
+    assert "--objective-max-launch-readiness-goals" in common_arg_values
+    assert common_arg_values[common_arg_values.index("--objective-max-launch-readiness-goals") + 1] == "8"
     assert "--objective-refill-scan" in common_arg_values
     assert "--objective-seed-interoperability-goals" in common_arg_values
+    assert "--objective-seed-launch-readiness-goals" in common_arg_values
     assert "--no-objective-goal-completion-reconcile" not in common_arg_values
     assert common_arg_values.count("--objective-interoperability-component-path") == len(
         runner_module.VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS
@@ -953,11 +956,13 @@ def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_
     )
     objective = ObjectiveRefillDefaults(
         seed_interoperability_goals=True,
+        seed_launch_readiness_goals=True,
         objective_interoperability_component_paths=("swissknife", "hallucinate_app"),
         objective_goal_completion_todo_boards=(
             "hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md::HAO-",
         ),
         objective_max_interoperability_goals=12,
+        objective_max_launch_readiness_goals=8,
     )
 
     args = apply_portal_implementation_supervisor_defaults(
@@ -967,6 +972,7 @@ def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_
     )
 
     assert "--objective-seed-interoperability-goals" in args
+    assert "--objective-seed-launch-readiness-goals" in args
     assert args.count("--objective-interoperability-component-path") == 2
     assert args[args.index("--objective-interoperability-component-path") + 1] == "swissknife"
     assert "hallucinate_app" in args
@@ -974,6 +980,8 @@ def test_objective_refill_defaults_forward_interoperability_component_paths(tmp_
     assert "hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md::HAO-" in args
     assert "--objective-max-interoperability-goals" in args
     assert args[args.index("--objective-max-interoperability-goals") + 1] == "12"
+    assert "--objective-max-launch-readiness-goals" in args
+    assert args[args.index("--objective-max-launch-readiness-goals") + 1] == "8"
 
 
 def test_virtual_ai_os_component_repo_bootstrap_contract_is_documented(tmp_path):
@@ -1089,7 +1097,7 @@ def test_virtual_ai_os_objective_heap_prioritizes_launch_slice():
         if goals_by_id[goal_id].status in {"active", "to" + "do", "open"}
     ]
 
-    assert len(active_goals) <= 16
+    assert len(active_goals) <= 22
     assert all(goals_by_id[goal_id].status == "completed" for goal_id in completed_launch_ids)
     assert goals_by_id["VAIOS-G697"].status in {"active", "completed"}
     if goals_by_id["VAIOS-G697"].status == "completed":
@@ -1197,6 +1205,73 @@ def test_objective_interoperability_seed_skips_self_loop_dependency_symlink(tmp_
     assert "node_modules" not in goals["VAIOS-G002"].fields["package_manifests"]
 
 
+def test_objective_launch_readiness_seed_adds_high_value_dashboard_and_device_goals(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+    from ipfs_accelerate_py.agent_supervisor.objective_tracker import append_launch_readiness_goals
+
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    objective_path = repo_root / "objective.md"
+    objective_path.write_text(
+        "\n".join(
+            [
+                "# Objective Heap",
+                "",
+                "## VAIOS-G001 Launch root",
+                "- Status: active",
+                "- Goal: prove the mobile Swissknife launch slice",
+                "- Evidence: root objective",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    result = append_launch_readiness_goals(
+        objective_path,
+        repo_root=repo_root,
+        max_goals=8,
+        goal_prefix="VAIOS-G",
+    )
+
+    assert result.appended_goal_ids == [
+        "VAIOS-G002",
+        "VAIOS-G003",
+        "VAIOS-G004",
+        "VAIOS-G005",
+        "VAIOS-G006",
+        "VAIOS-G007",
+    ]
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(objective_path.read_text(encoding="utf-8"))}
+    seeded = [goals[goal_id] for goal_id in result.appended_goal_ids]
+    assert all(goal.fields["track"] == "launch" for goal in seeded)
+    assert all(goal.fields["priority"] == "P0" for goal in seeded)
+    assert all(goal.fields["goal_kind"] == "launch_readiness" for goal in seeded)
+    combined_goal_text = "\n".join(goal.fields["goal"] for goal in seeded).lower()
+    for term in (
+        "hallucinate app",
+        "swissknife",
+        "mcp++",
+        "tools/list",
+        "tools/call",
+        "meta glasses",
+        "control plane",
+    ):
+        assert term in combined_goal_text
+    assert "mcp-dashboard-interoperability.spec.ts" in goals["VAIOS-G002"].fields["validation"]
+    assert "tests/test_hallucinate_multimodal_control_todo_queue.py" in goals["VAIOS-G005"].fields["validation"]
+    assert "tests/test_virtual_ai_os_launch_readiness_gate.py" in goals["VAIOS-G005"].fields["validation"]
+
+    second_result = append_launch_readiness_goals(
+        objective_path,
+        repo_root=repo_root,
+        max_goals=8,
+        goal_prefix="VAIOS-G",
+    )
+    assert second_result.appended_goal_ids == []
+
+
 def test_virtual_ai_os_launch_tasks_are_not_blocked_by_recursive_submodule_hygiene():
     tasks = {task.task_id: task for task in _load_tasks()}
 
@@ -1296,6 +1371,7 @@ def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatc
     flag_index = args.index("--objective-surplus-findings-per-goal")
     assert args[flag_index + 1] == str(supervisor_module.OBJECTIVE_SURPLUS_FINDINGS_PER_GOAL)
     assert "--objective-seed-interoperability-goals" in args
+    assert "--objective-seed-launch-readiness-goals" in args
     focus_values = [
         args[index + 1]
         for index, arg in enumerate(args)
@@ -1310,6 +1386,8 @@ def test_virtual_ai_os_supervisor_defaults_to_surplus_objective_todos(monkeypatc
     assert component_values == list(supervisor_module.VIRTUAL_AI_OS_INTEROPERABILITY_COMPONENT_PATHS)
     max_interop_index = args.index("--objective-max-interoperability-goals")
     assert args[max_interop_index + 1] == "12"
+    max_launch_index = args.index("--objective-max-launch-readiness-goals")
+    assert args[max_launch_index + 1] == "8"
     codebase_min_index = args.index("--codebase-scan-min-open-tasks")
     codebase_max_index = args.index("--codebase-scan-max-findings")
     assert args[codebase_min_index + 1] == "8"

@@ -164,6 +164,71 @@ def test_objective_task_janitor_records_configured_mission_terms():
     assert updated["objective_task_janitor_mission_terms"] == ["edge compositor handshake"]
 
 
+def test_backlog_refill_treats_nonselectable_ready_tasks_as_drained(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import should_refill_backlog
+
+    todo_text = """# Board
+
+## VAI-001 Ready but owned by another shard
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: dashboard
+- Validation: true
+- Acceptance: Launch work.
+
+## VAI-002 Waiting dependency
+
+- Status: waiting
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: VAI-001
+- Outputs: dashboard
+- Validation: true
+- Acceptance: Launch work.
+"""
+    state_path = tmp_path / "state.json"
+    state_path.write_text(
+        json.dumps(
+            {
+                "task_count": 2,
+                "completed_count": 1,
+                "blocked_count": 0,
+                "ready_count": 1,
+                "eligible_ready_count": 0,
+                "selectable_ready_count": 0,
+                "waiting_count": 1,
+                "task_statuses": {
+                    "VAI-001": "todo",
+                    "VAI-002": "waiting",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    should_scan, mode, current_open, task_count = should_refill_backlog(
+        todo_text=todo_text,
+        state_path=state_path,
+        strategy={},
+        last_scan_key="last_objective_goal_scan_at",
+        last_drained_scan_task_count_key="last_drained_objective_goal_scan_task_count",
+        task_prefix="VAI-",
+        min_open_tasks=0,
+        cooldown_seconds=3600,
+    )
+
+    assert should_scan is True
+    assert mode == "runnable_drained_exhaustive"
+    assert current_open == 2
+    assert task_count == 2
+
+
 def test_objective_task_janitor_deprioritizes_off_mission_codebase_scan_backlog():
     _ObjectiveGoal, PortalTask, schema, reconcile = _imports()
     tasks = [

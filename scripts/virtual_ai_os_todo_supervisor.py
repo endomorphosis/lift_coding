@@ -140,7 +140,9 @@ _virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_fa
     objective_interoperability_focus=VIRTUAL_AI_OS_INTEROPERABILITY_FOCUS,
     objective_interoperability_component_paths=VIRTUAL_AI_OS_INTEROPERABILITY_COMPONENT_PATHS,
     objective_max_interoperability_goals=12,
+    objective_max_launch_readiness_goals=8,
     seed_interoperability_goals=True,
+    seed_launch_readiness_goals=True,
     **OBJECTIVE_REFILL_SETTINGS.objective_refill_kwargs(),
 )
 

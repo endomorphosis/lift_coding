@@ -64,6 +64,7 @@ REFILL_DEFAULTS = {
     # guardrails, not by generic source-annotation sweeps.
     "codebase_scan_max_findings": "0",
     "objective_max_interoperability_goals": "12",
+    "objective_max_launch_readiness_goals": "8",
 }
 
 VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_PATHS = (
@@ -182,8 +183,11 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "2",
     "--objective-max-interoperability-goals",
     REFILL_DEFAULTS["objective_max_interoperability_goals"],
+    "--objective-max-launch-readiness-goals",
+    REFILL_DEFAULTS["objective_max_launch_readiness_goals"],
     "--objective-refill-scan",
     "--objective-seed-interoperability-goals",
+    "--objective-seed-launch-readiness-goals",
     *VAI_MGW_HAO_INTEROPERABILITY_COMPONENT_ARGS,
     *VAI_MGW_HAO_GOAL_COMPLETION_BOARD_ARGS,
     "--objective-task-janitor-max-deprioritized-tasks",

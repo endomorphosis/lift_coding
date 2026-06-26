@@ -103,7 +103,9 @@ _hallucinate_objective_defaults = build_namespace_objective_refill_defaults_fact
     objective_interoperability_focus=HALLUCINATE_INTEROPERABILITY_FOCUS,
     objective_interoperability_component_paths=HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS,
     objective_max_interoperability_goals=12,
+    objective_max_launch_readiness_goals=8,
     seed_interoperability_goals=True,
+    seed_launch_readiness_goals=True,
     # scanner-resolved: HAO-195 - stale line-302 explicit flag wiring is now
     # owned by the shared objective defaults factory used by this supervisor.
     # scanner-resolved: HAO-232 - the shared factory owns the objective-surplus
