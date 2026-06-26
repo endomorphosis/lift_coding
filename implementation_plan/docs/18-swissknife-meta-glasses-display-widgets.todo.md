@@ -980,7 +980,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-418 Add Web Apps input adapter for Neural Band, captouch, motion, and GPS
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
