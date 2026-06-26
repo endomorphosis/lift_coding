@@ -909,18 +909,18 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-411-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
-## MGW-412 Resolve dirty main checkout blocking 5 worktree merges
+## MGW-412 Resolve dirty main checkout blocking 4 worktree merges
 
 - Status: completed
 - Completion: manual 2026-06-24: merged the useful MGW-010 Android DAT display readiness changes into main, preserved the newer MGW-413+ expanded-I/O task split, and pruned the stopped-run implementation worktrees so cleanup no longer blocks launch steering.
 - Priority: P1
 - Track: ops
-- Fingerprint: 20ad277ca60f339ae5f60421f90071cd78e0eb8a
+- Fingerprint: 4e7931d936aa13de931274975dcd25b180a8a8a3
 - Dedupe key: reconciliation_guardrail:main_checkout_dirty
 - Depends on:
 - Outputs: data/meta_glasses_display_widgets/state/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md
-- Acceptance: Reconciliation guardrail filed this because 5 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Acceptance: Reconciliation guardrail filed this because 4 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-23-mgw-412-reconciliation-454d98962911.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
 
 ## MGW-413 Refresh official Meta glasses I/O source matrix
 
@@ -2230,7 +2230,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-524 Close objective gap: Hallucinate MCP dashboard interoperability console
 
-- Status: todo
+- Status: blocked
 - Completion: manual
 - Priority: P0
 - Track: launch
@@ -2263,6 +2263,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Todo vector key: 423c5c08373fafe1
 - Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-25-mgw-524-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
 
+- Blocked reason: Retired by objective-task janitor during launch steering because goal_completed.
 ## MGW-525 Resolve validation retry-budget failure for MGW-524
 
 - Status: todo
@@ -2276,7 +2277,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-526 Make Meta glasses MCP dashboard validation use the headless-aware Hallucinate runner
 
-- Status: todo
+- Status: blocked
 - Completion: manual
 - Priority: P0
 - Track: validation
@@ -2301,3 +2302,4 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Work scope: launch_validation_environment
 - Candidate kind: validation_gate
 - Acceptance: Ensure MGW launch validation inherits the headless-aware Hallucinate Playwright runner so Meta glasses camera/microphone/headphones/neural-band control-plane tests fail only for real contract gaps, while missing DISPLAY/Xvfb is recorded as a repairable launch-environment blocker.
+- Blocked reason: Retired by objective-task janitor during launch steering because goal_completed.
