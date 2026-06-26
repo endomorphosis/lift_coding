@@ -62,6 +62,7 @@ MGW_DISCOVERY_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "disc
 MGW_534_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
 )
+HAO_701_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-26-hao-701-launch-playwright-validation-gate.md"
 
 
 def _load_script_module(name: str):
@@ -809,6 +810,66 @@ def test_mgw_534_packet_proof_aligns_vaios_g727_and_g729_launch_gate():
         "libp2p",
         "MCP++",
         "Swissknife applications",
+        "control plane",
+    ):
+        assert term in receipt_source
+        assert term in g727_text
+
+
+def test_hao_701_packet_proof_aligns_hallucinate_backlog_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = HAO_701_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    tasks = {task.task_id: task for task in _load_tasks()}
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt["task_id"] == "HAO-701"
+    assert receipt["goal_id"] == "VAIOS-G727"
+    assert receipt["goal_packet"] == "goal_packet/launch/external/ec964340486b"
+    assert receipt["packet_goals"] == ["VAIOS-G727", "VAIOS-G729"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
+
+    task = tasks["HAO-701"]
+    assert task.status == PENDING_TASK_STATUS
+    assert task.metadata["goal id"] == receipt["goal_id"]
+    assert task.metadata["goal packet"] == receipt["goal_packet"]
+    assert task.metadata["goal packet goals"] == "VAIOS-G727, VAIOS-G729"
+    assert task.metadata["missing evidence"] == receipt["evidence_term"]
+
+    g727_text = " ".join([*goals["VAIOS-G727"].fields.keys(), *goals["VAIOS-G727"].fields.values()])
+    g729_text = " ".join([*goals["VAIOS-G729"].fields.keys(), *goals["VAIOS-G729"].fields.values()])
+    for term in (
+        "HAO-701",
+        "MGW-534",
+        "goal_packet/launch/external/ec964340486b",
+        "launch Playwright validation gate",
+        "2026-06-26-hao-701-launch-playwright-validation-gate.md",
+        "2026-06-26-mgw-534-launch-playwright-validation-gate.md",
+    ):
+        assert term in receipt_source
+        assert term in g727_text
+        assert term in g729_text
+
+    for term in (
+        "camera",
+        "microphone",
+        "headphones",
+        "captouch",
+        "Neural Band",
+        "Bluetooth transport",
+        "Wi-Fi transport",
+        "IPFS",
+        "libp2p",
+        "MCP++",
+        "mobile phone",
+        "Swissknife applications",
+        "Hallucinate App mediation",
         "control plane",
     ):
         assert term in receipt_source
