@@ -1013,7 +1013,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-421 Add Swissknife demo app for expanded Meta glasses interaction methods
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
