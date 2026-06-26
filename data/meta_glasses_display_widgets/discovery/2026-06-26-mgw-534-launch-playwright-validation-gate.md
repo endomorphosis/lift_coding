@@ -99,3 +99,9 @@ Wearables DAT sessions on Android and iOS.
   remote-meta-glasses control-surface route in Hallucinate App mediation.
 - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md` records the
   MGW-534 proof for VAIOS-G727 and the shared packet proof for VAIOS-G729.
+
+## Validation
+
+- 2026-06-26: `PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_launch_readiness_gate.py -q` passed with 76 tests.
+- 2026-06-26: `npm --prefix swissknife run test:e2e:meta-glasses` passed with 2 Playwright tests.
+- 2026-06-26: `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts` passed with 4 Playwright tests.
