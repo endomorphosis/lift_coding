@@ -55,6 +55,13 @@ MGW_274_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-23-mgw-274-launch-readiness-gate.md"
 )
+MGW_526_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "meta_glasses_display_widgets"
+    / "discovery"
+    / "2026-06-26-mgw-526-headless-aware-hallucinate-runner.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
@@ -74,6 +81,10 @@ PYTHON_GATE_COMMAND = (
 SWISSKNIFE_PLAYWRIGHT_COMMAND = "npm --prefix swissknife run test:e2e:meta-glasses"
 HALLUCINATE_PLAYWRIGHT_COMMAND = (
     "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
+)
+HALLUCINATE_MCP_DASHBOARD_COMMAND = (
+    "npm --prefix hallucinate_app run test:e2e -- "
+    "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts"
 )
 
 
@@ -306,6 +317,9 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "xvfb-run" in runner_source
     assert "missing_xvfb_for_electron_playwright" in runner_source
     assert "HALLUCINATE_APP_E2E_DISABLE_XVFB" in runner_source
+    assert "repairable launch-environment blocker" in runner_source
+    assert "allowsNoDisplaySpecSkip" not in runner_source
+    assert "noDisplaySafeSpecs" not in runner_source
 
     for client in ("voice", "gesture", "mouse", "agent", "remote-meta-glasses"):
         assert client in spec_source
@@ -316,6 +330,45 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
         "interaction_envelope",
     ):
         assert receipt_term in spec_source
+
+
+def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_runner():
+    package = json.loads(HALLUCINATE_PACKAGE_PATH.read_text(encoding="utf-8"))
+    runner_source = HALLUCINATE_RUNNER_PATH.read_text(encoding="utf-8")
+    dashboard_spec_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    exposure_spec_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-feature-exposure.spec.ts"
+    ).read_text(encoding="utf-8")
+    receipt_source = MGW_526_RECEIPT_PATH.read_text(encoding="utf-8")
+    normalized_receipt_source = " ".join(receipt_source.split())
+
+    assert package["scripts"]["test:e2e"] == "node scripts/run_playwright_test.mjs test"
+    assert HALLUCINATE_MCP_DASHBOARD_COMMAND in receipt_source
+    for term in (
+        "Meta glasses MCP dashboard validation",
+        "headless-aware Hallucinate Playwright runner",
+        "camera",
+        "microphone",
+        "headphones",
+        "neural-band",
+        "control-plane",
+        "missing_xvfb_for_electron_playwright",
+        "repairable launch-environment blocker",
+        "exit 78",
+    ):
+        assert term in normalized_receipt_source
+
+    assert "xvfb-run" in runner_source
+    assert "process.exit(78)" in runner_source
+    assert "missing_xvfb_for_electron_playwright" in runner_source
+    assert "allowsNoDisplaySpecSkip" not in runner_source
+    assert "MCP Dashboard Interoperability - VAIOS-G723" in dashboard_spec_source
+    assert "headless backend gate" in dashboard_spec_source
+    assert "control_surface_route" in dashboard_spec_source
+    assert "dashboard capability catalog" in exposure_spec_source
+    assert "VAIOS-G723" in exposure_spec_source
 
 
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
