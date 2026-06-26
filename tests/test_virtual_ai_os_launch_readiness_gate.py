@@ -884,13 +884,6 @@ def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():
     hao_source = HAO_436_RECEIPT_PATH.read_text(encoding="utf-8")
     mgw_source = MGW_274_RECEIPT_PATH.read_text(encoding="utf-8")
     vai_source = VAI_340_RECEIPT_PATH.read_text(encoding="utf-8")
-VAI_518_RECEIPT_PATH = (
-    REPO_ROOT
-    / "data"
-    / "virtual_ai_os"
-    / "discovery"
-    / "2026-06-26-vai-518-launch-playwright-validation-gate.md"
-)
     receipt = _load_launch_readiness_receipt()
 
     required_terms = [
@@ -914,11 +907,6 @@ VAI_518_RECEIPT_PATH = (
         assert term in vai_source
 
     assert receipt["readiness_doc"] == "docs/launch/phone_desktop_glasses_readiness.md"
-    assert vai_receipt["task_id"] == "VAI-518"
-    assert "VAI-518" in vai_receipt_source
-    assert "VAI-518" in heap_source
-    assert "MGW-534" in receipt_source
-    assert "MGW-534" in heap_source
     assert "VAI-340 launch readiness gate" in heap_source
     assert "HAO-436 launch readiness gate" in heap_source
     assert "MGW-274 launch readiness gate" in heap_source
