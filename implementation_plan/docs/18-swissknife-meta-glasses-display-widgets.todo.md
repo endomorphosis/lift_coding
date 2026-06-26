@@ -381,7 +381,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-367 Expose camera capture and video stream descriptors to Swissknife apps
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
