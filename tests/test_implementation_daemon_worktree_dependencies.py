@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -95,3 +96,60 @@ def test_launch_js_node_modules_are_ephemeral_commit_paths():
     ):
         assert relative in module.SHARED_WORKTREE_PATHS
         assert relative in module.EPHEMERAL_WORKTREE_PATHS
+
+
+def test_submodule_worktree_add_retries_invalid_gitlink_ref(tmp_path, monkeypatch):
+    module = _daemon_module()
+
+    repo_root = tmp_path / "repo"
+    source = repo_root / "external" / "ipfs_accelerate" / "ipfs_datasets_py"
+    worktree_path = tmp_path / "worktree"
+    source.mkdir(parents=True)
+    worktree_path.mkdir()
+
+    subprocess.run(["git", "init"], cwd=source, check=True, capture_output=True)
+    subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=source, check=True)
+    subprocess.run(["git", "config", "user.name", "Test User"], cwd=source, check=True)
+    (source / "README.md").write_text("source\n", encoding="utf-8")
+    subprocess.run(["git", "add", "README.md"], cwd=source, check=True)
+    subprocess.run(["git", "commit", "-m", "source"], cwd=source, check=True, capture_output=True)
+
+    daemon = module.PortalImplementationDaemon(
+        todo_path=tmp_path / "todo.md",
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo_root,
+    )
+    bad_ref = "65d07e486d423b1349b6d26d865db46af3075179"
+    calls = []
+    events = []
+
+    monkeypatch.setattr(daemon, "_submodule_gitlink_ref", lambda _worktree, _relative: bad_ref)
+    monkeypatch.setattr(
+        daemon,
+        "_git_ref_exists_in_repo",
+        lambda _cwd, ref: ref == bad_ref,
+    )
+    monkeypatch.setattr(daemon, "_record_event", lambda event, payload: events.append((event, payload)))
+
+    def fake_run_git(command, *, cwd):
+        calls.append((tuple(command), Path(cwd)))
+        if tuple(command[-1:]) == (bad_ref,):
+            raise RuntimeError(f"git worktree add failed: fatal: invalid reference: {bad_ref}")
+        return type("Result", (), {"stdout": ""})()
+
+    monkeypatch.setattr(daemon, "_run_git", fake_run_git)
+
+    created = daemon._create_local_submodule_worktree(
+        worktree_path,
+        "ipfs_datasets_py",
+        branch_name="implementation/mgw-368-attempt-26",
+        source_relative="external/ipfs_accelerate/ipfs_datasets_py",
+    )
+
+    assert created is True
+    assert calls[0][0][-1] == bad_ref
+    assert calls[1][0][-1] != bad_ref
+    assert events[0][0] == "submodule_worktree_base_ref_retried"
+    assert events[0][1]["bad_ref"] == bad_ref
