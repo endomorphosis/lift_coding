@@ -22,6 +22,16 @@ Complete this template for each staged rollout checkpoint. Store the completed c
 - iPhone DAT build state: (SDK-unlinked fallback / SDK-linked native / bridge-only)
 - `MWDATCore` linked: (yes/no)
 - `MWDATDisplay` linked: (yes/no)
+- Expanded Meta glasses I/O run ID:
+- Meta glasses I/O profile version:
+- Meta glasses I/O launch readiness aggregate:
+  `docs/meta-glasses-io-launch-readiness.md`
+- Camera route tested: (native DAT / mock only / unavailable)
+- Microphone route tested: (Bluetooth HFP / mock only / unavailable)
+- Speaker/headphone route tested: (Bluetooth A2DP / mock only / unavailable)
+- Meta Neural Band route tested: (display Web App / mock only / unavailable)
+- Captouch route tested: (display Web App / mock only / unavailable)
+- Motion/GPS route tested: (display Web App + phone OS / mock only / unavailable)
 
 ## Environment And Flags
 
@@ -74,6 +84,18 @@ Rollback command or config change:
   - Firmware update prompt absent:
   - Meta AI app Web App launch succeeds:
   - iPhone Bluetooth audio route verified:
+- Expanded Meta glasses I/O readiness:
+  - Camera permission prompt and capture path verified:
+  - Microphone permission and Bluetooth route verified:
+  - Speaker/headphone Bluetooth route verified:
+  - Meta Neural Band input verified:
+  - Captouch input verified:
+  - Motion/orientation input verified:
+  - Phone GPS permission/context verified:
+  - Control plane receipt lineage verified:
+  - IPFS content CIDs recorded for allowed payload refs:
+  - libp2p peer/session IDs recorded when bridge provided them:
+  - MCP++ receipts recorded for allow, fallback, denial, and error paths:
 
 ## Simulator Trace Parity
 
@@ -106,6 +128,44 @@ Capture the desktop simulator export before the real iPhone run, then compare th
 | `clearDisplay` |  |  |  |  |
 | `playDisplayVideo` |  |  |  |  |
 | `resetDisplaySession` |  |  |  |  |
+
+## Expanded Meta Glasses I/O Results
+
+Record one row per capability. Do not paste raw camera frames, raw microphone
+audio, private display content, precise GPS, or raw Meta Neural Band/captouch
+telemetry into this template; use redacted content references and status codes.
+
+| Capability | Route observed | Permission state | Control plane route | IPFS CID / payload ref | libp2p session | MCP++ receipt | Fallback/result | Notes |
+|---|---|---|---|---|---|---|---|---|
+| Camera photo capture |  |  |  |  |  |  |  |  |
+| Camera video capture/stream |  |  |  |  |  |  |  |  |
+| Microphone input |  |  |  |  |  |  |  |  |
+| Speaker output |  |  |  |  |  |  |  |  |
+| Headphone output |  |  |  |  |  |  |  |  |
+| Display output |  |  |  |  |  |  |  |  |
+| Meta Neural Band input |  |  |  |  |  |  |  |  |
+| Captouch input |  |  |  |  |  |  |  |  |
+| Motion/orientation |  |  |  |  |  |  |  |  |
+| Phone GPS context |  |  |  |  |  |  |  |  |
+
+## Control Plane And Conformance Snapshot
+
+- Meta glasses I/O conformance command:
+  - Command: `PYTHONPATH=./src pytest tests/test_meta_glasses_io_mcpplusplus_contract.py`
+  - Status: (pass/fail/not run)
+  - Notes:
+- Swissknife MCP++ conformance command:
+  - Command: `cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-conformance.test.ts --config=config/jest/jest.config.cjs --runInBand`
+  - Status: (pass/fail/not run)
+  - Notes:
+- Swissknife Playwright command:
+  - Command: `cd swissknife && npx playwright test test/e2e/meta-glasses-io-apps.spec.ts --config=playwright.config.ts`
+  - Status: (pass/fail/not run)
+  - Notes:
+- Control-plane route decisions reviewed:
+- IPFS/libp2p/MCP++ envelope boundary reviewed:
+- `raw_transport_is_ipfs_libp2p_or_mcp=false` confirmed where applicable:
+- Hardware-free fixture parity reviewed:
 
 ## iPhone Native DAT Result Payloads
 
@@ -152,6 +212,17 @@ Capture the `/v1/metrics` display widget section before and after the checkpoint
 | Stale display session |  | Session reset is offered and no stale widget remains visible. |  |  |
 | Missing release-channel access |  | Operator sees actionable diagnostics; backend rollback remains available. |  |  |
 | Missing DAT packages |  | Bridge-only build continues; native path stays disabled. |  |  |
+| Missing DAT credentials |  | Native DAT camera/display routes stay disabled; mock or bridge-only path continues with package or release-channel unavailable evidence. |  |  |
+| Unsupported camera route |  | Structured unsupported response; no raw camera payload emitted; mobile-card or text fallback selected when allowed. |  |  |
+| Camera permission denied |  | MCP++ policy-denial receipt; capture is not started and no IPFS camera CID is created. |  |  |
+| Microphone permission denied |  | MCP++ policy-denial receipt; no raw microphone audio or transcript leaves the adapter. |  |  |
+| Unavailable microphone route |  | `route_lost`, `route_unavailable`, or degraded route evidence; fallback avoids raw-audio leakage. |  |  |
+| Unavailable speaker/headphone route |  | Playback route reports unavailable/degraded and falls back to phone, display text, mobile-card, or no-audio mode by policy. |  |  |
+| Meta Neural Band unavailable |  | Display Web App or mock route reports unsupported/unavailable; app uses D-pad, mobile, or no-input fallback. |  |  |
+| Captouch unavailable |  | Display Web App or mock route reports unsupported/unavailable; app uses D-pad, mobile, or no-input fallback. |  |  |
+| Motion/orientation unavailable |  | Sensor route reports unsupported/unavailable or stale; app lowers sample rate or disables motion behavior. |  |  |
+| Phone GPS permission denied |  | Location context is withheld; coarse/no-location fallback is used and denial receipt is recorded. |  |  |
+| Unauthorized control-plane handoff |  | MCP++ policy-denial receipt; ORB/tool dispatch is blocked and replay key is preserved. |  |  |
 | Descriptor validation failure |  | Widget action is denied before render and denial is observable. |  |  |
 | Policy denial |  | No render action is emitted when trusted descriptors are required. |  |  |
 | Bridge error |  | Error is counted and payload/logs contain a non-private status code. |  |  |
@@ -177,6 +248,13 @@ Capture the `/v1/metrics` display widget section before and after the checkpoint
 - Firmware / Meta AI app update behavior:
 - Native DAT Android behavior:
 - Native DAT iOS behavior:
+- Camera route behavior:
+- Microphone route behavior:
+- Speaker/headphone route behavior:
+- Meta Neural Band behavior:
+- Captouch behavior:
+- Motion/orientation and phone GPS behavior:
+- Control plane / IPFS / libp2p / MCP++ behavior:
 
 ## Rollback Validation
 
@@ -197,6 +275,10 @@ Capture the `/v1/metrics` display widget section before and after the checkpoint
 - [ ] Glasses firmware and Meta AI app version screenshot/note
 - [ ] DisplayAccess lifecycle log excerpt
 - [ ] Action result payload logs
+- [ ] Expanded Meta glasses I/O capability result table
+- [ ] Meta glasses I/O control-plane route and MCP++ receipt snapshot
+- [ ] IPFS/libp2p bridge envelope evidence, redacted
+- [ ] Playwright and conformance command output
 - [ ] `/v1/metrics` snapshots
 - [ ] Backend config snapshot
 - [ ] Mobile/backend logs for failures, status codes only where possible
