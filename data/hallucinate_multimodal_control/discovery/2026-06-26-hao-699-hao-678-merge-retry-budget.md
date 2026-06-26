@@ -23,3 +23,17 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Resolution
+
+- Recovered the intended HAO-678 submodule implementation commit from
+  `implementation/hao-678-attempt-12-1782437056-submodule-hallucinate_app`.
+- Applied it to the active `hallucinate_app` repository as commit `8d53d08`
+  (`HAO-678: Wire all IPFS MCP dashboards to daemon health and catalog-backed
+  tool surfaces`).
+- The repeated blocker was `main_checkout_dirty_conflict` on
+  `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md`,
+  not a semantic source conflict, so `ipfs-accelerate-agent-merge-resolver
+  --events-path ... --apply` was not run.
+- Marked HAO-699 completed in the Hallucinate App todo so HAO-678 can be
+  released from the strategy `blocked_tasks` list.
