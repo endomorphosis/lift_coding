@@ -2752,7 +2752,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-550 Close objective gap: Hallucinate App MCP dashboard capability catalog
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
