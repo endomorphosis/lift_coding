@@ -118,6 +118,13 @@ HAO_VAI_513_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-27-vai-513-playwright-validation-environment.md"
 )
+HAO_682_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-25-hao-682-mcp-dashboard-launch-readiness.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
@@ -145,6 +152,12 @@ HAO_705_HALLUCINATE_FIXTURE_PATH = (
 )
 HAO_705_SWISSKNIFE_FIXTURE_PATH = (
     REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "hao-705-cross-device-launch-gate.json"
+)
+HAO_682_HALLUCINATE_FIXTURE_PATH = (
+    REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "fixtures" / "hao-682-mcp-dashboard-launch-readiness.json"
+)
+HAO_682_SWISSKNIFE_FIXTURE_PATH = (
+    REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "hao-682-mcp-dashboard-launch-readiness.json"
 )
 VAI_502_CROSS_DEVICE_REPLAY_PATH = (
     REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "vai-502-cross-device-playwright-replay.json"
@@ -1040,6 +1053,70 @@ def test_hao_705_cross_device_offload_replay_has_launch_playwright_gate():
 
     assert "HAO-705 cross-device launch gate fixture" in swissknife_spec_source
     assert "HAO-705 cross-device launch gate fixture" in hallucinate_spec_source
+
+
+def test_hao_682_dashboard_interoperability_receipt_aggregates_one_lineage():
+    receipt_source = HAO_682_RECEIPT_PATH.read_text(encoding="utf-8")
+    readiness_source = READINESS_DOC_PATH.read_text(encoding="utf-8")
+    receipt = _load_receipt(HAO_682_RECEIPT_PATH, "## Receipt")
+    hallucinate_fixture = json.loads(HAO_682_HALLUCINATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    swissknife_fixture = json.loads(HAO_682_SWISSKNIFE_FIXTURE_PATH.read_text(encoding="utf-8"))
+
+    assert receipt["schema"] == "launch_readiness_receipt_v1"
+    assert receipt["task_id"] == "HAO-682"
+    assert receipt["goal_id"] == "VAIOS-G723"
+    assert receipt["evidence_term"] == "dashboard interoperability launch-readiness receipt"
+    assert receipt["session_id"] == "vaios-g723-hallucinate-mcp-dashboard-session"
+    assert receipt["daemon_lineage_id"] == "vaios-g723-daemon-lineage-ipfs-kit-datasets-accelerate"
+    assert receipt["swissknife_fixture"] == "swissknife/test/e2e/fixtures/hao-682-mcp-dashboard-launch-readiness.json"
+    assert hallucinate_fixture["session_id"] == receipt["session_id"]
+    assert hallucinate_fixture["daemon_lineage_id"] == receipt["daemon_lineage_id"]
+    assert hallucinate_fixture["pass_together_rule"] == receipt["pass_together_rule"]
+    assert swissknife_fixture["source_fixture"] == receipt["hallucinate_fixture"]
+    assert swissknife_fixture["session_trace"]["session_id"] == receipt["session_id"]
+    assert swissknife_fixture["session_trace"]["daemon_lineage_id"] == receipt["daemon_lineage_id"]
+
+    pass_together = receipt["pass_together_rule"]
+    assert pass_together["same_session_id"] == receipt["session_id"]
+    assert pass_together["same_daemon_lineage_id"] == receipt["daemon_lineage_id"]
+    for required_gate in (
+        "requires_hallucinate_app_menu_navigation",
+        "requires_dashboard_catalog",
+        "requires_daemon_health",
+        "requires_mcpplusplus_telemetry",
+        "requires_dashboard_tools_list",
+        "requires_dashboard_tools_call",
+        "requires_swissknife_consumption",
+        "requires_playwright_pass_fail_receipts",
+    ):
+        assert pass_together[required_gate] is True
+
+    servers = {server["server_package"]: server for server in receipt["dashboard_servers"]}
+    assert set(servers) == {"ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"}
+    for server in servers.values():
+        assert server["daemon_lineage_id"] == receipt["daemon_lineage_id"]
+        assert server["tools_list_probe"]["operation"] == "tools/list"
+        assert server["tools_call_probe"]["operation"] == "tools/call"
+        assert server["tools_call_probe"]["mutation"] is False
+        assert "Swissknife" in server["swissknife_consumer"]
+
+    assert {item["receipt_id"] for item in receipt["playwright_receipts"]} == {
+        "hao-682-hallucinate-playwright-pass-fail",
+        "hao-682-swissknife-playwright-pass-fail",
+    }
+    for required_term in (
+        "HAO-682",
+        "dashboard interoperability launch-readiness receipt",
+        "tools/list",
+        "tools/call",
+        "MCP++ telemetry",
+        "Swissknife consumption",
+        "Playwright pass/fail receipts",
+        "vaios-g723-hallucinate-mcp-dashboard-session",
+        "vaios-g723-daemon-lineage-ipfs-kit-datasets-accelerate",
+    ):
+        assert required_term in receipt_source
+        assert required_term in readiness_source
 
 
 def test_readiness_doc_and_heap_name_the_same_launch_validation_gate():

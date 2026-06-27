@@ -20,6 +20,9 @@ receipt proves each product-critical hop with deterministic Playwright coverage.
 - Replay base: `data/virtual_ai_os/discovery/2026-06-23-vai-339-launch-replay-gate.md`
 - Python guard: `tests/test_virtual_ai_os_launch_readiness_gate.py`
 - Hallucinate MCP dashboard interoperability command: `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`
+- HAO-682 dashboard interoperability launch-readiness receipt: `data/hallucinate_multimodal_control/discovery/2026-06-25-hao-682-mcp-dashboard-launch-readiness.md`
+- HAO-682 Hallucinate App fixture: `hallucinate_app/test/e2e/fixtures/hao-682-mcp-dashboard-launch-readiness.json`
+- HAO-682 Swissknife fixture: `swissknife/test/e2e/fixtures/hao-682-mcp-dashboard-launch-readiness.json`
 - Swissknife Playwright command: `npm --prefix swissknife run test:e2e:meta-glasses`
 - Hallucinate App Playwright command: `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts`
 
@@ -97,8 +100,20 @@ The dashboard gate must prove the shared dashboard capability catalog for
 `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`, the menu and
 dashboard UI wiring, mediated `tools/list` and safe `tools/call` receipts,
 MCP++ telemetry, Swissknife consumer coverage, and supervisor-generated
-follow-up subtasks for any dashboard or backend validation failure. The
-executable gate is:
+follow-up subtasks for any dashboard or backend validation failure.
+
+HAO-682 is the aggregate dashboard interoperability launch-readiness receipt for
+this gate. It binds Hallucinate App menu navigation, dashboard catalog reads,
+daemon health, MCP++ telemetry, dashboard `tools/list` probes, dashboard
+`tools/call` probes, Swissknife consumption, and Playwright pass/fail receipts
+to the single session
+`vaios-g723-hallucinate-mcp-dashboard-session` and the daemon lineage
+`vaios-g723-daemon-lineage-ipfs-kit-datasets-accelerate`. VAIOS-G723 cannot
+close from a dashboard-only pass or a Swissknife-only pass; both receipts must
+share that session and daemon lineage before the launch-readiness packet can
+advance to `launch_ready`.
+
+The executable gate is:
 
 ```bash
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
