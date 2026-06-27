@@ -2738,3 +2738,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-546. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-548-mgw-546-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-546 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
+
+## MGW-549 Resolve validation retry-budget failure for MGW-547
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-547. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-549-mgw-547-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-547 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
