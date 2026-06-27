@@ -4429,7 +4429,7 @@ cadence remains parseable and resumable.
 
 ## VAI-532 Resolve validation retry-budget failure for VAI-530
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
