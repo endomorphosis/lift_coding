@@ -8,6 +8,7 @@ Hardware-free Playwright and Swissknife validation now share one Hallucinate App
 dashboard capability catalog fixture:
 
 - `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`
+- `hallucinate_app/test/e2e/fixtures/vai-512-hallucinate-swissknife-mcp-dashboard-consumption.json`
 - Catalog schema: `hallucinate_app.mcp_dashboard_capability_catalog.v1`
 - Catalog source: `hallucinate_app.node.mcp_daemon_manager.getDashboardCapabilityCatalog`
 - Backends: `ipfs_kit_py`, `ipfs_datasets_py`, `ipfs_accelerate_py`
@@ -19,6 +20,16 @@ daemon manager catalog shape and then runs the Swissknife consumer validator
 against the same fixture. Swissknife asserts that all three backend packages
 consume the catalog without duplicate catalog schemas and with
 `dashboard_only_mock: false`.
+
+Attempt 16 adds the missing Hallucinate dashboard to Swissknife MCP consumer
+launch receipt. The Hallucinate interoperability spec and Swissknife MCP
+Playwright spec both load the same Hallucinate-owned receipt fixture, verify
+the VAI-512/VAIOS-G723 lineage, assert the three dashboard MCP backends,
+require all six mediated `tools/list` and `tools/call` operations, keep the
+shared `mcp_server_invocation_receipt_v1` consumer receipt schema, and reject
+dashboard-only mocks or duplicate catalog schemas. The Swissknife standalone
+consumer validator also reads the receipt during `npm --prefix swissknife run
+test:e2e:mcp`, so the same evidence is exercised by both applications.
 
 Attempt 15 validation evidence:
 

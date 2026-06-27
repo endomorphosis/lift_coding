@@ -15,12 +15,23 @@ surface for dashboard tools end to end:
 - `swissknife/scripts/test-mcp-dashboard-consumer.cjs` consumes the same
   catalog fixture and rejects duplicate catalog schemas or dashboard-only
   mocks.
+- `hallucinate_app/test/e2e/fixtures/vai-512-hallucinate-swissknife-mcp-dashboard-consumption.json`
+  is the shared Hallucinate dashboard to Swissknife MCP consumer launch receipt.
 
 Attempt 15 keeps the fixture aligned with the live Hallucinate daemon manager
 catalog for the shared interoperability surface: VAI-512 provenance,
 dashboard-only mock rejection, `tools/list`, `tools/call`, safe probes,
 control-surface receipt requirements, MCP++ descriptor evidence, and
 dashboard receipt consumer refs.
+
+Attempt 16 binds the missing receipt evidence directly into both application
+validators. Hallucinate `mcp-dashboard-interoperability.spec.ts` runs the
+Swissknife MCP consumer command and checks the VAI-512 receipt against the
+returned package and operation payload. Swissknife `mcp-dashboard.spec.ts` and
+`scripts/test-mcp-dashboard-consumer.cjs` read the same Hallucinate-owned
+receipt and assert VAIOS-G723 lineage, all three dashboard MCP backends,
+`tools/list`, `tools/call`, control-plane mediation fields, one catalog schema,
+and no dashboard-only mocks.
 
 Headless validation result:
 
