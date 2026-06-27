@@ -426,6 +426,11 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "noDisplayHeadlessGateSpecs" not in runner_source
     assert "canRunWithoutVirtualDisplay" not in runner_source
     assert "headless-compatible launch gate specs" not in runner_source
+    assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
+    assert "isNoDisplayRunnableRequest" in runner_source
+    assert "mcp-feature-exposure.spec.ts" in runner_source
+    assert "mcp-dashboard-interoperability.spec.ts" in runner_source
+    assert "multimodal-control-surface.spec.ts" in runner_source
 
     for client in ("voice", "gesture", "mouse", "agent", "remote-meta-glasses"):
         assert client in spec_source
@@ -475,10 +480,13 @@ def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_run
     assert "noDisplayHeadlessGateSpecs" not in runner_source
     assert "canRunWithoutVirtualDisplay" not in runner_source
     assert "allowsNoDisplaySpecSkip" not in runner_source
+    assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
+    assert "isNoDisplayRunnableRequest" in runner_source
     assert "MCP Dashboard Interoperability - VAIOS-G723" in dashboard_spec_source
     assert "headless backend gate" in dashboard_spec_source
     assert "control_surface_route" in dashboard_spec_source
     assert "dashboard capability catalog" in exposure_spec_source
+    assert "MCP Feature Exposure - headless backend gate" in exposure_spec_source
     assert "VAIOS-G723" in exposure_spec_source
 
 
