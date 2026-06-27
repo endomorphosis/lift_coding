@@ -104,6 +104,20 @@ HAO_705_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-26-hao-705-launch-playwright-validation-gate.md"
 )
+VAI_513_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-27-vai-513-playwright-validation-environment.md"
+)
+HAO_VAI_513_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-27-vai-513-playwright-validation-environment.md"
+)
 SWISSKNIFE_PACKAGE_PATH = REPO_ROOT / "swissknife" / "package.json"
 SWISSKNIFE_RUNNER_PATH = REPO_ROOT / "swissknife" / "scripts" / "run_playwright_test.mjs"
 SWISSKNIFE_PLAYWRIGHT_CONFIG_PATH = (
@@ -387,17 +401,18 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "ensureE2EDependencies" in runner_source
     assert "runPlaywright(args)" in runner_source
     assert "xvfb-run" in runner_source
+    assert "commandExists('xvfb-run')" in runner_source
+    assert "usesXvfb: true" in runner_source
     assert "missing_xvfb_for_electron_playwright" in runner_source
     assert "HALLUCINATE_APP_E2E_DISABLE_XVFB" in runner_source
-    assert "noDisplayHeadlessGateSpecs" in runner_source
-    assert "canRunWithoutVirtualDisplay" in runner_source
-    assert "daemon-launch-health.spec.ts" in runner_source
-    assert "mcp-dashboard-interoperability.spec.ts" in runner_source
-    assert "mcp-feature-exposure.spec.ts" in runner_source
-    assert "multimodal-control-surface.spec.ts" in runner_source
+    assert "ensureE2EDependencies();" in runner_source
     assert "repairable launch-environment blocker" in runner_source
+    assert "No graphical display detected; running Hallucinate Electron Playwright tests under xvfb-run." in runner_source
     assert "allowsNoDisplaySpecSkip" not in runner_source
     assert "noDisplaySafeSpecs" not in runner_source
+    assert "noDisplayHeadlessGateSpecs" not in runner_source
+    assert "canRunWithoutVirtualDisplay" not in runner_source
+    assert "headless-compatible launch gate specs" not in runner_source
 
     for client in ("voice", "gesture", "mouse", "agent", "remote-meta-glasses"):
         assert client in spec_source
@@ -439,16 +454,61 @@ def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_run
         assert term in normalized_receipt_source
 
     assert "xvfb-run" in runner_source
+    assert "commandExists('xvfb-run')" in runner_source
+    assert "usesXvfb: true" in runner_source
     assert "process.exit(78)" in runner_source
     assert "missing_xvfb_for_electron_playwright" in runner_source
-    assert "noDisplayHeadlessGateSpecs" in runner_source
-    assert "canRunWithoutVirtualDisplay" in runner_source
+    assert "No graphical display detected; running Hallucinate Electron Playwright tests under xvfb-run." in runner_source
+    assert "noDisplayHeadlessGateSpecs" not in runner_source
+    assert "canRunWithoutVirtualDisplay" not in runner_source
     assert "allowsNoDisplaySpecSkip" not in runner_source
     assert "MCP Dashboard Interoperability - VAIOS-G723" in dashboard_spec_source
     assert "headless backend gate" in dashboard_spec_source
     assert "control_surface_route" in dashboard_spec_source
     assert "dashboard capability catalog" in exposure_spec_source
     assert "VAIOS-G723" in exposure_spec_source
+
+
+def test_vai_513_prevents_skipped_electron_coverage_from_satisfying_vaios_g723():
+    runner_source = HALLUCINATE_RUNNER_PATH.read_text(encoding="utf-8")
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    vai_receipt_source = VAI_513_RECEIPT_PATH.read_text(encoding="utf-8")
+    hao_receipt_source = HAO_VAI_513_RECEIPT_PATH.read_text(encoding="utf-8")
+    vai_receipt = _load_receipt(VAI_513_RECEIPT_PATH, "## Validation Environment Gate")
+    hao_receipt = _load_receipt(HAO_VAI_513_RECEIPT_PATH, "## Validation Environment Gate")
+
+    assert vai_receipt == hao_receipt
+    assert vai_receipt["schema"] == "playwright_validation_environment_gate_v1"
+    assert vai_receipt["task_id"] == "VAI-513"
+    assert vai_receipt["goal_id"] == "VAIOS-G723"
+    assert vai_receipt["merge_key"] == "vaios-g723-playwright-validation-environment"
+    assert vai_receipt["missing_evidence"] == (
+        "non-skipped Hallucinate Electron Playwright launch gate on headless supervisor hosts"
+    )
+    assert vai_receipt["missing_display_diagnostic"] == "missing_xvfb_for_electron_playwright"
+    assert vai_receipt["missing_display_exit_code"] == 78
+    assert vai_receipt["runner_requirements"] == {
+        "uses_xvfb_run_when_present": True,
+        "reports_missing_xvfb_when_absent": True,
+        "allows_no_display_electron_skip_to_satisfy_gate": False,
+    }
+    assert vai_receipt["supervisor_focus"] == (
+        "fix_validation_environment_before_production_ready"
+    )
+    assert "run_playwright_test.mjs --help" in vai_receipt["validation_commands"][1]
+    assert "missing_xvfb_for_electron_playwright" in runner_source
+    assert "headless-compatible launch gate specs" not in runner_source
+
+    for required_term in (
+        "VAI-513",
+        "missing_xvfb_for_electron_playwright",
+        "non-skipped Hallucinate Electron Playwright launch gate on headless supervisor hosts",
+        "fix_validation_environment_before_production_ready",
+        "validation environment repair",
+    ):
+        assert required_term in vai_receipt_source
+        assert required_term in hao_receipt_source
+        assert required_term in heap_source
 
 
 def test_mgw_534_meta_glasses_input_routing_has_launch_playwright_gate():
