@@ -8,6 +8,14 @@ follow-up: catalog normalization, dashboard UI wiring, mediated tool-call receip
 Swissknife consumers, Playwright coverage, and supervisor-generated follow-up
 subtasks if any dashboard or backend validation fails.
 
+Attempt 1 adds the HAO-679-specific interoperability receipt fixture at
+`hallucinate_app/test/e2e/fixtures/hao-679-mcp-dashboard-interoperability.json`.
+The Playwright matrix now includes both menu paths required for launch readiness:
+`Dashboards -> IPFS * Dashboard` loads the catalog-backed app dashboard, and
+`MCP Servers -> <backend> MCP -> Open Web Dashboard` opens the live dashboard URL
+advertised in the shared catalog for `ipfs_kit_py`, `ipfs_datasets_py`, and
+`ipfs_accelerate_py`.
+
 ## Gate Fixture
 
 ```json
