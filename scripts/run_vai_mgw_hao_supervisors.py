@@ -57,7 +57,7 @@ MERGE_CLEANUP_DEFAULTS = {
 
 REFILL_DEFAULTS = {
     "objective_scan_min_open_tasks": "20",
-    "objective_scan_max_findings": "6",
+    "objective_scan_max_findings": "12",
     "objective_surplus_findings_per_goal": "2",
     "codebase_scan_min_open_tasks": "8",
     # The launch runner should be fed by the objective heap and validation

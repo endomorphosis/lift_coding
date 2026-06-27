@@ -869,7 +869,7 @@ def test_vai_mgw_hao_runner_delegates_reusable_supervisor_wiring():
     assert "--objective-scan-min-open-tasks" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-scan-min-open-tasks") + 1] == "20"
     assert "--objective-scan-max-findings" in common_arg_values
-    assert common_arg_values[common_arg_values.index("--objective-scan-max-findings") + 1] == "6"
+    assert common_arg_values[common_arg_values.index("--objective-scan-max-findings") + 1] == "12"
     assert "--objective-surplus-findings-per-goal" in common_arg_values
     assert common_arg_values[common_arg_values.index("--objective-surplus-findings-per-goal") + 1] == "2"
     parsed_launcher_args = build_arg_parser().parse_args(launcher_args)

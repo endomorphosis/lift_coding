@@ -553,6 +553,61 @@ def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
     assert updated_strategy["last_objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]
 
 
+def test_forced_launch_validation_gap_ignores_seen_fingerprint(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import (
+        ObjectiveGoal,
+        objective_fingerprint,
+        objective_goal_validation_gap_terms,
+        scan_objective_gaps,
+    )
+
+    objective_path = tmp_path / "objective.md"
+    objective_path.write_text(
+        "\n".join(
+            (
+                "# Goals",
+                "",
+                "## VAIOS-G724 Hallucinate App MCP dashboard capability catalog",
+                "- Status: active",
+                "- Fib priority: 1",
+                "- Track: launch",
+                "- Priority: P0",
+                "- Goal: Prove Hallucinate App MCP dashboards expose tools/list and tools/call to Swissknife.",
+                "- Validation: true",
+            )
+        ),
+        encoding="utf-8",
+    )
+    goal = ObjectiveGoal(
+        "VAIOS-G724",
+        "Hallucinate App MCP dashboard capability catalog",
+        {
+            "status": "active",
+            "fib_priority": "1",
+            "track": "launch",
+            "priority": "P0",
+            "goal": "Prove Hallucinate App MCP dashboards expose tools/list and tools/call to Swissknife.",
+            "validation": "true",
+        },
+    )
+    validation_terms = objective_goal_validation_gap_terms(goal)
+    seen_fingerprint = objective_fingerprint(goal, validation_terms)
+
+    findings = scan_objective_gaps(
+        tmp_path,
+        objective_path=objective_path,
+        max_findings=1,
+        seen_fingerprints=[seen_fingerprint],
+        force_goal_ids=["VAIOS-G724"],
+    )
+
+    assert len(findings) == 1
+    assert findings[0].goal_id == "VAIOS-G724"
+    assert findings[0].candidate_kind == "validation_gate"
+    assert findings[0].missing_evidence == validation_terms
+
+
 def test_refill_backlog_treats_zero_eligible_ready_as_runnable_drained(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import should_refill_backlog
