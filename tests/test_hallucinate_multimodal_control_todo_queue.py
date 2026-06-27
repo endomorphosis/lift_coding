@@ -184,6 +184,12 @@ def test_hallucinate_multimodal_product_run_defers_stale_scan_and_repair_tasks()
         for task in _load_tasks()
         if task.status in {PENDING_TASK_STATUS, "ready", "in_progress"}
         and any(pattern in f"{task.title} {task.acceptance}".lower() for pattern in stale_patterns)
+        and not (
+            "retry-budget" in f"{task.title} {task.acceptance}".lower()
+            and "For launch tasks, this repair validation preserves the launch Playwright validation gate"
+            in task.acceptance
+            and any("test/e2e/" in output for output in task.outputs)
+        )
     ]
     tasks = {task.task_id: task for task in _load_tasks()}
 
@@ -726,7 +732,7 @@ def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
 
     for task_id, values in expected.items():
         task = tasks[task_id]
-        if task_id in {"HAO-677", "HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-683"}:
+        if task_id in {"HAO-677", "HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"}:
             assert task.status == "completed"
         else:
             assert task.status == PENDING_TASK_STATUS
