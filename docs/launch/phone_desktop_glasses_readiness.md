@@ -73,6 +73,14 @@ checks the Hallucinate App dashboard capability catalog, backend service catalog
 daemon health wiring, MCP++ telemetry, `tools/list`, `tools/call`, safe probes,
 and `control_surface` mediation receipts that Swissknife consumes.
 
+MGW-548 repairs the MGW-546 retry-budget blocker by allowing this command to
+run its backend/static Playwright coverage on no-display supervisor hosts when
+the selected specs are `mcp-feature-exposure.spec.ts`,
+`mcp-dashboard-interoperability.spec.ts`, or
+`multimodal-control-surface.spec.ts`. Electron UI coverage still requires
+`DISPLAY`, `WAYLAND_DISPLAY`, or `xvfb-run`; Electron-only requests keep the
+`missing_xvfb_for_electron_playwright` diagnostic.
+
 The `LaunchReadinessGate` remains open until the Python guard, Hallucinate MCP
 dashboard interoperability gate, Swissknife Playwright replay, and Hallucinate
 App Playwright mediation command all pass for the same receipt lineage. Only
@@ -101,6 +109,11 @@ The dashboard gate must prove the shared dashboard capability catalog for
 dashboard UI wiring, mediated `tools/list` and safe `tools/call` receipts,
 MCP++ telemetry, Swissknife consumer coverage, and supervisor-generated
 follow-up subtasks for any dashboard or backend validation failure.
+
+The MGW-548 repair receipt is
+`data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-548-validation-retry-budget-repair.md`.
+It keeps the launch Playwright validation gate executable on headless
+supervisor hosts instead of burning retry budget on the environment preflight.
 
 HAO-682 is the aggregate dashboard interoperability launch-readiness receipt for
 this gate. It binds Hallucinate App menu navigation, dashboard catalog reads,
