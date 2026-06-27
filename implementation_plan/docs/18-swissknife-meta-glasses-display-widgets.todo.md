@@ -2819,3 +2819,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Candidate kind: validation_gate
 - Todo vector key: e514497464ba6ea4
 - Acceptance: Objective scan filed this gap for VAIOS-G728. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap. This task is part of goal_packet/launch/hallucinate_app/44dceea6bc53; when practical, make one cohesive change that advances the packet goals (VAIOS-G724, VAIOS-G728) and covers the shared packet evidence without expanding the prompt. Refine the objective heap if the gap needs smaller child goals.
+
+## MGW-552 Resolve validation retry-budget failure for MGW-551
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/meta_glasses_display_widgets/state/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-551. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-552-mgw-551-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-551 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
