@@ -3987,7 +3987,7 @@ cadence remains parseable and resumable.
 
 ## VAI-513 Keep VAIOS-G723 Playwright gates from passing via skipped Electron coverage
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: validation
