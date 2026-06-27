@@ -2727,3 +2727,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Candidate kind: validation_gate
 - Todo vector key: 423c5c08373fafe1
 - Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-547-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+
+## MGW-548 Resolve validation retry-budget failure for MGW-546
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-546. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-548-mgw-546-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-546 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
