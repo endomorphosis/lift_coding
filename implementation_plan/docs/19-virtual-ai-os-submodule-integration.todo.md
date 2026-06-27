@@ -3959,7 +3959,7 @@ cadence remains parseable and resumable.
 
 ## VAI-512 Prove Hallucinate and Swissknife can consume MCP dashboard tools end to end
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: validation
