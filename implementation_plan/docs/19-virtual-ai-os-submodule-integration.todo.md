@@ -4850,8 +4850,8 @@ cadence remains parseable and resumable.
 
 ## VAI-541 Resolve merge retry-budget failure for VAI-538
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-28: resolved the dirty `hallucinate_app` main checkout merge blocker by preserving both HAO retry-budget todo edits, merging the semantic dashboard/daemon gitlink conflicts, and committing the combined submodule merge as `64d59f8ddf23e2d57ea2f4c268803f2ea41601ed`.
 - Priority: P1
 - Track: ops
 - Depends on: 
