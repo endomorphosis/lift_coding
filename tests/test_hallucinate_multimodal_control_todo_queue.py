@@ -151,6 +151,24 @@ VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-542-mcp-dashboard-launch-gate.json"
 )
+VAI_543_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-543-mcp-dashboard-launch-gate.json"
+)
+VAI_543_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
+)
+VAI_543_HALLUCINATE_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
+)
 
 
 def _load_script_module(name: str):
@@ -1324,6 +1342,50 @@ def test_hao_722_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723()
     for term in (
         "HAO-724",
         "VAI-542",
+        "launch Playwright validation gate",
+        "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
+        "supervisor-generated follow-up work for VAIOS-G723",
+    ):
+        assert term in receipt_source
+        assert term in heap_source
+
+
+def test_vai_543_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    vai_receipt_source = VAI_543_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt_source = VAI_543_HALLUCINATE_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    fixture = json.loads(VAI_543_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g723_text = " ".join([*goals["VAIOS-G723"].fields.keys(), *goals["VAIOS-G723"].fields.values()])
+
+    assert fixture["schema"] == "mcp_dashboard_interoperability_gate_v1"
+    assert fixture["task_id"] == "VAI-543"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["hallucinate_launch_gate_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["child_goals"] == [
+        "VAIOS-G723-C1 Catalog normalization",
+        "VAIOS-G723-C2 Dashboard UI wiring",
+        "VAIOS-G723-C3 Mediated tool-call receipts",
+        "VAIOS-G723-C4 Swissknife consumers",
+        "VAIOS-G723-C5 Playwright coverage",
+        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
+    ]
+    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+
+    for term in fixture["required_evidence"]:
+        assert term in vai_receipt_source
+        assert term in receipt_source
+        assert term in g723_text
+
+    for term in (
+        "VAI-543",
         "launch Playwright validation gate",
         "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
         "supervisor-generated follow-up work for VAIOS-G723",
