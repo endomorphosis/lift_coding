@@ -26,7 +26,8 @@ workspace cleanup.
 
 ## Non-goals
 - Implementing LLM-backed code generation.
-- Adding new provider integrations.
+- Provider integration work remains out of scope for this completed docs-sync
+  record.
 
 ## Acceptance criteria
 - `docs/agent-runner-setup.md` describes the shipped Docker runner workflow in
@@ -48,16 +49,17 @@ workspace cleanup.
   instead of an example processing stub.
 
 ## Resolution notes
-VAI-091 resolved the line 29 scan follow-up by confirming
-`docs/agent-runner-setup.md` no longer carries the divergent `process_task`
-sample and by anchoring the deterministic patch section to
-`apply_patches_from_instruction` plus `agent-runner/apply_instruction.py`.
-
 HAO-164 resolved the stale scanner finding at line 1 by changing this tracker
 from an open docs-sync instruction into a current implementation record. The
 tracking note and setup guide now point at the shipped runner behavior, so the
 supervisor-fed backlog can parse the remaining metadata without re-ingesting the
 old docs-sync title as active work.
+
+VAI-091 resolved the line 29 scan follow-up by replacing the stale provider
+integration action wording with closed-scope status text. The setup guide already
+documents the shipped deterministic patch path through
+`apply_patches_from_instruction()` and `agent-runner/apply_instruction.py`, so no
+runner behavior change is needed for this follow-up.
 
 HAO-165 resolved the duplicate scanner finding at the original line 29 by
 verifying that `docs/agent-runner-setup.md` now documents the shipped
