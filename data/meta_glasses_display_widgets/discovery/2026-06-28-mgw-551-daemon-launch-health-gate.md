@@ -19,7 +19,18 @@ explicit receipt for this objective-gap task.
 ```json
 {
   "schema": "meta_glasses_display_widgets.daemon_launch_health_gate_v1",
+  "receipt_schema": "launch_readiness_receipt_v1",
   "task_id": "MGW-551",
+  "vai_task_id": "VAI-519",
+  "vai_task_ids": [
+    "VAI-519",
+    "VAI-530"
+  ],
+  "backlog_task_id": "HAO-702",
+  "backlog_task_ids": [
+    "HAO-702",
+    "HAO-713"
+  ],
   "shared_packet_task_id": "MGW-535",
   "goal_id": "VAIOS-G728",
   "goal_packet": "goal_packet/launch/hallucinate_app/44dceea6bc53",
@@ -28,6 +39,32 @@ explicit receipt for this objective-gap task.
     "VAIOS-G728"
   ],
   "evidence_term": "launch Playwright validation gate",
+  "launch_key": "hallucinate-daemon-launch-orchestration",
+  "gate_state": "gate_open_until_playwright_passes",
+  "discovery_receipts": [
+    "data/virtual_ai_os/discovery/2026-06-26-vai-519-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-06-27-vai-530-daemon-launch-health-gate.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md"
+  ],
+  "objective_gap_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
+  "objective_gap_receipts": [
+    "data/virtual_ai_os/discovery/2026-06-26-vai-519-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-06-27-vai-530-objective-gap-b023c8de5b69.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
+  ],
+  "supervisor_gap_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
+  "supervisor_gap_receipts": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-objective-gap-b023c8de5b69.md"
+  ],
+  "hallucinate_backlog_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-daemon-launch-health-gate.md",
+  "hallucinate_backlog_receipts": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-daemon-launch-health-gate.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md"
+  ],
+  "launch_gate_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md",
+  "receipt_fixture": "hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json",
   "missing_evidence_source": "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
   "receipt_path": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md",
   "shared_packet_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
@@ -47,16 +84,16 @@ explicit receipt for this objective-gap task.
       "launch Playwright validation gate"
     ]
   },
+  "validation_commands": [
+    "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q",
+    "npm --prefix swissknife run test:e2e:meta-glasses",
+    "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts",
+    "npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts"
+  ],
   "playwright_specs": [
     "hallucinate_app/test/e2e/daemon-launch-health.spec.ts",
     "hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts",
     "hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts"
-  ],
-  "validation_commands": [
-    "npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
-    "npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
-    "npm --prefix swissknife run test:e2e:meta-glasses",
-    "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
   ],
   "required_backends": [
     "ipfs_kit_py",
@@ -128,7 +165,14 @@ explicit receipt for this objective-gap task.
     "shared_packet_task": "MGW-535",
     "keeps_supervisor_fed_backlog_aligned": true
   },
-  "launch_packet_command": "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)"
+  "headless_safe_gate": {
+    "runner": "hallucinate_app/scripts/run_playwright_test.mjs",
+    "static_spec": "daemon-launch-health.spec.ts",
+    "diagnostic_avoided": "missing_xvfb_for_electron_playwright",
+    "reason": "The daemon launch gate reads manager and receipt fixtures only, so it can run on supervisor hosts without Electron UI display coverage."
+  },
+  "launch_packet_command": "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)",
+  "failure_rule": "Any daemon launch, health, dashboard catalog, Swissknife handoff, or Playwright validation failure remains supervisor-generated follow-up work for VAIOS-G728."
 }
 ```
 
@@ -141,6 +185,10 @@ explicit receipt for this objective-gap task.
   `hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json`
   against the manager gate, backend package list, daemon health paths,
   Playwright launch command, and Swissknife handoff records.
+- `hallucinate_app/scripts/run_playwright_test.mjs` treats
+  `daemon-launch-health.spec.ts` as a headless-safe static launch gate, so the
+  supervisor can run the MGW-551 Playwright evidence without requiring xvfb or
+  an Electron display.
 - The gate covers Hallucinate App daemon health, daemon launcher, MCP server,
   MCP dashboard, `ipfs_accelerate_py`, `ipfs_datasets_py`, `ipfs_kit_py`,
   dashboard capability catalog, Swissknife applications, and launch Playwright
