@@ -464,9 +464,13 @@ cadence remains parseable and resumable.
 
 ## VAI-089 Resolve code annotation in tracking/PR-083-android-expo-glasses-audio-wav-playback.md:7
 
+- Status: completed
+
 ## VAI-090 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:1
 
 ## VAI-091 Resolve code annotation in tracking/PR-090-agent-runner-docs-sync.md:29
+
+- Status: completed
 
 ## VAI-092 Resolve code annotation in work/PR-046-expo-dev-client-native-glasses.md:14
 
