@@ -45,7 +45,7 @@ import logging
 import time
 from typing import Any
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Body, HTTPException, status
 from pydantic import BaseModel, Field
 
 from handsfree.ipfs_accelerate_adapters import (
