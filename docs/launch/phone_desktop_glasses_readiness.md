@@ -285,6 +285,17 @@ normalization; dashboard UI wiring; mediated tool-call receipts; Swissknife
 consumers; Playwright coverage; supervisor-generated follow-up subtasks;
 launch Playwright validation gate.
 
+MGW-555 is the Meta glasses display widgets launch Playwright validation gate
+for the VAIOS-G724 Hallucinate App MCP dashboard capability catalog:
+`data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-555-launch-playwright-validation-gate.md`.
+Its fixture,
+`hallucinate_app/test/e2e/fixtures/mgw-555-mcp-dashboard-launch-gate.json`,
+records `gate_closed_by_playwright_validation` for
+`mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts` and keeps
+the packet sibling `VAIOS-G728`, Swissknife `test:e2e:meta-glasses`, and
+Hallucinate multimodal control-surface gates attached to the dashboard
+capability catalog.
+
 VAI-542 is the matching Hallucinate MCP dashboard interoperability console gate
 for HAO-724:
 `data/virtual_ai_os/discovery/2026-06-28-vai-542-mcp-dashboard-launch-gate.md`
