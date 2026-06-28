@@ -332,9 +332,13 @@ cadence remains parseable and resumable.
 
 ## VAI-028 Resolve merge retry-budget failure for VAI-020
 
+- Status: completed
+
 ## VAI-029 Resolve merge retry-budget failure for VAI-021
 
 ## VAI-030 Resolve merge retry-budget failure for VAI-022
+
+- Status: completed
 
 ## VAI-031 Resolve merge retry-budget failure for VAI-026
 
@@ -356,11 +360,19 @@ cadence remains parseable and resumable.
 
 ## VAI-038 Replace placeholder runtime path in src/handsfree/ipfs_kit_adapters.py:147
 
+- Status: completed
+
 ## VAI-039 Replace placeholder runtime path in src/handsfree/ipfs_kit_adapters.py:178
+
+- Status: completed
 
 ## VAI-040 Replace placeholder runtime path in src/handsfree/ipfs_kit_adapters.py:186
 
+- Status: completed
+
 ## VAI-041 Review swallowed exception path in src/handsfree/ipfs_kit_adapters.py:194
+
+- Status: completed
 
 ## VAI-042 Replace placeholder runtime path in src/handsfree/ocr/stub_provider.py:38
 
@@ -369,6 +381,8 @@ cadence remains parseable and resumable.
 ## VAI-044 Review swallowed exception path in src/handsfree/sessions.py:229
 
 ## VAI-045 Replace placeholder runtime path in src/handsfree/stt/stub_provider.py:42
+
+- Status: completed
 
 ## VAI-046 Review swallowed exception path in src/handsfree/transport/libp2p_bluetooth.py:1244
 
@@ -1191,7 +1205,7 @@ cadence remains parseable and resumable.
 
 ## VAI-154 Resolve implementation retry-budget failure for VAI-152
 
-- Status: blocked
+- Status: completed
 - Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Completion: manual
 - Priority: P1
@@ -1770,7 +1784,7 @@ cadence remains parseable and resumable.
 
 ## VAI-202 Resolve 1 dirty backlogged worktrees blocked by unsupported_status
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -1785,7 +1799,7 @@ cadence remains parseable and resumable.
 
 ## VAI-203 Resolve 5 preflight-conflicting backlogged worktree merges
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
