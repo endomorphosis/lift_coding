@@ -254,6 +254,145 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
         integration_test_ids=("tests/test_virtual_ai_os_capability_registry.py",),
         legacy_capability_ids=("storage", "ipfs.content.add_bytes", "ipfs.content.read_ai_output"),
     ),
+    "ipfs_add_content": AICapabilityRegistryEntry(
+        capability_id="ipfs_add_content",
+        owner_repo="endomorphosis/ipfs_kit_py",
+        provider_name="ipfs_kit_mcp",
+        server_family="ipfs_kit",
+        title="IPFS Add Content",
+        description=(
+            "Add content to IPFS through ipfs_kit_py, returning a content-addressed CID. "
+            "Supports both file and bytes input with optional pinning."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.DIRECT_IMPORT,
+            CapabilityExecutionMode.MCP_REMOTE,
+        ),
+        default_execution_mode=CapabilityExecutionMode.DIRECT_IMPORT,
+        fallback_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_WRITE,
+        input_schema_ref="handsfree.capability.ipfs_add_content.input",
+        result_schema_ref="handsfree.capability.ipfs_add_content.result",
+        voice_formatter="handsfree.ai.formatters:format_ipfs_add_content_summary",
+        follow_up_action_builder="handsfree.ai.follow_up_actions:build_ipfs_add_content_actions",
+        artifact_output=("cid", "size", "receipt_ref"),
+        display_summary_fields=("summary", "cid", "size"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_ipfs_add_content",
+        integration_test_ids=(
+            "tests/test_virtual_ai_os_capability_registry.py",
+            "tests/integration/test_ipfs_backend_integration.py",
+        ),
+        legacy_capability_ids=(
+            "ipfs_add_content",
+            "ipfs.kit.add",
+            "ipfs.content.add",
+            "storage.add_content",
+        ),
+    ),
+    "ipfs_get_content": AICapabilityRegistryEntry(
+        capability_id="ipfs_get_content",
+        owner_repo="endomorphosis/ipfs_kit_py",
+        provider_name="ipfs_kit_mcp",
+        server_family="ipfs_kit",
+        title="IPFS Get Content",
+        description=(
+            "Retrieve content from IPFS by CID through ipfs_kit_py. "
+            "Falls back to ipfs_datasets_py routers when kit is unavailable."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.DIRECT_IMPORT,
+            CapabilityExecutionMode.MCP_REMOTE,
+        ),
+        default_execution_mode=CapabilityExecutionMode.DIRECT_IMPORT,
+        fallback_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_READ,
+        input_schema_ref="handsfree.capability.ipfs_get_content.input",
+        result_schema_ref="handsfree.capability.ipfs_get_content.result",
+        voice_formatter="handsfree.ai.formatters:format_ipfs_get_content_summary",
+        follow_up_action_builder="handsfree.ai.follow_up_actions:build_ipfs_get_content_actions",
+        artifact_output=("cid", "data_size", "content_type"),
+        display_summary_fields=("summary", "cid", "data_size"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_ipfs_get_content",
+        integration_test_ids=(
+            "tests/test_virtual_ai_os_capability_registry.py",
+            "tests/integration/test_ipfs_backend_integration.py",
+        ),
+        legacy_capability_ids=(
+            "ipfs_get_content",
+            "ipfs.kit.cat",
+            "ipfs.content.get",
+            "storage.get_content",
+        ),
+    ),
+    "hardware_profile": AICapabilityRegistryEntry(
+        capability_id="hardware_profile",
+        owner_repo="endomorphosis/ipfs_accelerate_py",
+        provider_name="ipfs_accelerate_mcp",
+        server_family="ipfs_accelerate",
+        title="Hardware Profile",
+        description=(
+            "Discover available hardware acceleration capabilities through "
+            "ipfs_accelerate_py including WebNN, WebGPU, and CUDA support."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.DIRECT_IMPORT,
+            CapabilityExecutionMode.MCP_REMOTE,
+        ),
+        default_execution_mode=CapabilityExecutionMode.DIRECT_IMPORT,
+        fallback_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_READ,
+        input_schema_ref="handsfree.capability.hardware_profile.input",
+        result_schema_ref="handsfree.capability.hardware_profile.result",
+        voice_formatter="handsfree.ai.formatters:format_hardware_profile_summary",
+        follow_up_action_builder="handsfree.ai.follow_up_actions:build_hardware_profile_actions",
+        artifact_output=("capabilities", "device_count", "accelerators"),
+        display_summary_fields=("summary", "device_count", "capabilities"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_hardware_profile",
+        integration_test_ids=(
+            "tests/test_virtual_ai_os_capability_registry.py",
+            "tests/integration/test_ipfs_backend_integration.py",
+        ),
+        legacy_capability_ids=(
+            "hardware_profile",
+            "compute.hardware_profile",
+            "ipfs.accelerate.capabilities",
+        ),
+    ),
+    "inference": AICapabilityRegistryEntry(
+        capability_id="inference",
+        owner_repo="endomorphosis/ipfs_accelerate_py",
+        provider_name="ipfs_accelerate_mcp",
+        server_family="ipfs_accelerate",
+        title="Model Inference",
+        description=(
+            "Run model inference through ipfs_accelerate_py with hardware-optimized "
+            "execution. Supports text generation, embeddings, and custom model pipelines."
+        ),
+        execution_modes=(
+            CapabilityExecutionMode.DIRECT_IMPORT,
+            CapabilityExecutionMode.MCP_REMOTE,
+            CapabilityExecutionMode.ORCHESTRATED,
+        ),
+        default_execution_mode=CapabilityExecutionMode.MCP_REMOTE,
+        fallback_execution_mode=CapabilityExecutionMode.DIRECT_IMPORT,
+        confirmation_policy=CapabilityConfirmationPolicy.SAFE_WRITE,
+        input_schema_ref="handsfree.capability.inference.input",
+        result_schema_ref="handsfree.capability.inference.result",
+        voice_formatter="handsfree.ai.formatters:format_inference_summary",
+        follow_up_action_builder="handsfree.ai.follow_up_actions:build_inference_actions",
+        artifact_output=("result", "model_name", "run_id", "receipt_cid"),
+        display_summary_fields=("summary", "model_name", "status"),
+        voice_display_summary_formatter_ref="handsfree.capability_summaries:format_inference",
+        integration_test_ids=(
+            "tests/test_virtual_ai_os_capability_registry.py",
+            "tests/integration/test_ipfs_backend_integration.py",
+        ),
+        legacy_capability_ids=(
+            "inference",
+            "compute.run_inference",
+            "ipfs.accelerate.run_model",
+        ),
+    ),
     "llm_generation": AICapabilityRegistryEntry(
         capability_id="llm_generation",
         owner_repo="handsfree",
