@@ -122,8 +122,9 @@ and
 The dashboard gate must prove the shared dashboard capability catalog for
 `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`, the menu and
 dashboard UI wiring, mediated `tools/list` and safe `tools/call` receipts,
-MCP++ telemetry, Swissknife consumer coverage, and supervisor-generated
-follow-up subtasks for any dashboard or backend validation failure.
+MCP++ telemetry, Swissknife consumer coverage, `control_surface receipts`, and
+supervisor-generated follow-up subtasks for any dashboard or backend validation
+failure.
 
 The HAO-714/VAI-531 catalog field
 `dashboard_interoperability_validation_gate` preserves the child-goal evidence
