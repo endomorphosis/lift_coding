@@ -150,6 +150,10 @@ dashboard UI wiring, mediated tool-call receipts, Swissknife consumers,
 Playwright coverage, and supervisor-generated follow-up subtasks. The matching
 fixture is
 `hallucinate_app/test/e2e/fixtures/vai-531-mcp-dashboard-interoperability-gate.json`.
+The same VAI-531/HAO-714 gate preserves daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, and `control_surface receipts` as required
+runtime evidence before Swissknife or downstream launch flows consume the
+dashboard catalog.
 
 The MGW-548 repair receipt is
 `data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-548-validation-retry-budget-repair.md`.
