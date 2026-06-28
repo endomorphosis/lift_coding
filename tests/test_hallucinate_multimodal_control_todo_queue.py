@@ -1215,6 +1215,8 @@ def test_hao_719_and_hao_721_daemon_launch_gates_align_with_objective_heap():
         assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
         assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
         assert receipt["evidence_term"] == "launch Playwright validation gate"
+        assert receipt["objective_gap_receipt"].endswith(gap_name)
+        assert receipt["objective_gap_receipt"] in receipt["objective_gap_receipts"]
 
         assert task.status in {PENDING_TASK_STATUS, "completed"}
         assert task.metadata["goal id"] == receipt["goal_id"]
