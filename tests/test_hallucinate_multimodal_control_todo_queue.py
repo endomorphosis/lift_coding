@@ -80,6 +80,9 @@ HAO_713_DAEMON_LAUNCH_GATE_PATH = (
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
+MGW_551_DAEMON_LAUNCH_GATE_PATH = (
+    MGW_DISCOVERY_ROOT / "2026-06-28-mgw-551-daemon-launch-health-gate.md"
+)
 DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -95,6 +98,14 @@ HAO_713_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "hao-713-daemon-launch-health-gate.json"
+)
+MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "mgw-551-daemon-launch-health-gate.json"
 )
 
 
@@ -1132,6 +1143,72 @@ def test_hao_713_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_he
     ):
         assert term in receipt_source
         assert term in mgw_receipt_source
+        assert term in g728_text
+
+
+def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = MGW_551_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    shared_mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    shared_fixture = json.loads(DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    mgw_fixture = json.loads(MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt == mgw_fixture
+    assert receipt["schema"] == "meta_glasses_display_widgets.daemon_launch_health_gate_v1"
+    assert receipt["task_id"] == "MGW-551"
+    assert receipt["shared_packet_task_id"] == "MGW-535"
+    assert receipt["goal_id"] == "VAIOS-G728"
+    assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["missing_evidence_source"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
+    )
+    assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
+
+    assert shared_fixture["task_id"] == "MGW-535"
+    assert receipt["receipt_path"] in shared_fixture["discovery_receipts"]
+    assert receipt["missing_evidence_source"] in shared_fixture["objective_gap_receipts"]
+    assert shared_fixture["required_backends"] == receipt["required_backends"]
+    assert shared_fixture["daemon_health_paths"] == receipt["daemon_health_paths"]
+
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+    for term in (
+        "MGW-551",
+        "MGW-535",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "2026-06-28-mgw-551-daemon-launch-health-gate.md",
+        "mgw-551-daemon-launch-health-gate.json",
+        "daemon-launch-health.spec.ts",
+    ):
+        assert term in receipt_source
+        assert term in g728_text
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
+        assert term in shared_mgw_receipt_source
         assert term in g728_text
 
 
