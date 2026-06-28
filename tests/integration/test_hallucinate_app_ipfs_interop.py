@@ -428,3 +428,112 @@ class TestUnifiedFacadeCoherence:
         assert "embedding" in cap_ids
         assert "ipfs_pin" in cap_ids
         assert "storage" in cap_ids
+
+
+# --------------------------------------------------------------------------- #
+# Extended endpoint coverage tests
+# --------------------------------------------------------------------------- #
+
+
+class TestExtendedEndpointCoverage:
+    """Tests verifying the new endpoints (hardware_profile, list_models, list_datasets, inference)."""
+
+    def _get_router_paths(self):
+        """Import the router directly (bypass handlers/__init__.py which triggers pydantic v2)."""
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "ipfs_integration",
+            str(Path(__file__).resolve().parents[2] / "src" / "handsfree" / "handlers" / "ipfs_integration.py"),
+        )
+        mod = importlib.util.module_from_spec(spec)
+        try:
+            spec.loader.exec_module(mod)
+        except ImportError:
+            pytest.skip("Cannot import ipfs_integration (missing pydantic/fastapi)")
+        return [route.path for route in mod.router.routes]
+
+    @pytest.mark.skipif(not _PYDANTIC_V2_AVAILABLE, reason="Requires pydantic v2")
+    def test_ipfs_integration_router_has_hardware_profile(self):
+        """The /v1/ipfs/hardware_profile endpoint exists in the router."""
+        paths = self._get_router_paths()
+        assert "/hardware_profile" in paths
+
+    @pytest.mark.skipif(not _PYDANTIC_V2_AVAILABLE, reason="Requires pydantic v2")
+    def test_ipfs_integration_router_has_list_models(self):
+        """The /v1/ipfs/list_models endpoint exists in the router."""
+        paths = self._get_router_paths()
+        assert "/list_models" in paths
+
+    @pytest.mark.skipif(not _PYDANTIC_V2_AVAILABLE, reason="Requires pydantic v2")
+    def test_ipfs_integration_router_has_list_datasets(self):
+        """The /v1/ipfs/list_datasets endpoint exists in the router."""
+        paths = self._get_router_paths()
+        assert "/list_datasets" in paths
+
+    @pytest.mark.skipif(not _PYDANTIC_V2_AVAILABLE, reason="Requires pydantic v2")
+    def test_ipfs_integration_router_has_inference(self):
+        """The /v1/ipfs/inference endpoint exists in the router."""
+        paths = self._get_router_paths()
+        assert "/inference" in paths
+
+    @pytest.mark.skipif(not _PYDANTIC_V2_AVAILABLE, reason="Requires pydantic v2")
+    def test_total_endpoint_count_is_13(self):
+        """Router should have 13 endpoints (9 original + 4 new)."""
+        paths = self._get_router_paths()
+        assert len(paths) >= 13, f"Expected >=13 endpoints, got {len(paths)}: {paths}"
+
+    def test_ipc_handler_file_declares_extended_channels(self):
+        """ipfs_ipc_handlers.js includes the new IPC channels."""
+        ipc_file = Path(__file__).resolve().parents[2] / "hallucinate_app" / "hallucinate_app" / "node" / "ipfs_ipc_handlers.js"
+        if not ipc_file.exists():
+            pytest.skip("hallucinate_app submodule not available")
+
+        content = ipc_file.read_text()
+        for channel in ["HARDWARE_PROFILE", "LIST_MODELS", "LIST_DATASETS", "INFERENCE"]:
+            assert channel in content, f"Missing IPC channel: {channel}"
+
+    def test_preload_exposes_extended_api(self):
+        """preload.cjs exposes the new IPFS API methods."""
+        preload = Path(__file__).resolve().parents[2] / "hallucinate_app" / "preload.cjs"
+        if not preload.exists():
+            pytest.skip("hallucinate_app submodule not available")
+
+        content = preload.read_text()
+        for method in ["hardwareProfile", "listModels", "listDatasets", "inference"]:
+            assert method in content, f"Missing preload method: {method}"
+
+    def test_swissknife_datasets_command_exists(self):
+        """SwissKnife has a datasets-command.ts file."""
+        cmd_file = Path(__file__).resolve().parents[2] / "swissknife" / "src" / "commands" / "datasets-command.ts"
+        if not cmd_file.exists():
+            pytest.skip("swissknife submodule not available")
+
+        content = cmd_file.read_text()
+        assert "DatasetsCommand" in content
+        assert "embed" in content
+        assert "listDatasets" in content
+
+    def test_swissknife_accelerate_command_exists(self):
+        """SwissKnife has an accelerate-command.ts file."""
+        cmd_file = Path(__file__).resolve().parents[2] / "swissknife" / "src" / "commands" / "accelerate-command.ts"
+        if not cmd_file.exists():
+            pytest.skip("swissknife submodule not available")
+
+        content = cmd_file.read_text()
+        assert "AccelerateCommand" in content
+        assert "hardwareProfile" in content
+        assert "inference" in content
+
+    def test_handsfree_backend_bridge_exists(self):
+        """SwissKnife has a handsfree-backend-bridge.ts that routes ORB capabilities."""
+        bridge_file = Path(__file__).resolve().parents[2] / "swissknife" / "src" / "integration" / "ipfs" / "handsfree-backend-bridge.ts"
+        if not bridge_file.exists():
+            pytest.skip("swissknife submodule not available")
+
+        content = bridge_file.read_text()
+        assert "HandsfreeBackendBridge" in content
+        assert "routeORBCapability" in content
+        # Must map all key operations
+        for op in ["ipfs_add", "ipfs_cat", "embed", "hardware_profile", "inference", "list_datasets"]:
+            assert op in content, f"Missing ORB route mapping: {op}"

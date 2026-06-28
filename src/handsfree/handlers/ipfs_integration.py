@@ -384,3 +384,109 @@ async def ipfs_capabilities_endpoint() -> dict[str, Any]:
         return {"ok": False, "capabilities": None, "error": str(exc)}
     except Exception as exc:
         return {"ok": False, "capabilities": None, "error": str(exc)}
+
+
+# --------------------------------------------------------------------------- #
+# Extended endpoints: hardware_profile, list_models, list_datasets, inference
+# --------------------------------------------------------------------------- #
+
+
+class IPFSInferenceRequest(BaseModel):
+    """Request to run model inference via ipfs_accelerate."""
+
+    model_name: str = Field(..., description="Model to run inference with")
+    inputs: Any = Field(..., description="Model inputs (text, dict, or list)")
+    parameters: dict[str, Any] = Field(default_factory=dict, description="Extra params")
+
+
+class IPFSListDatasetsRequest(BaseModel):
+    """Request to list/search available datasets."""
+
+    query: str | None = Field(default=None, description="Search query")
+    limit: int = Field(default=20, description="Max results")
+
+
+@router.get("/hardware_profile")
+async def ipfs_hardware_profile_endpoint() -> dict[str, Any]:
+    """Return detailed hardware profile from ipfs_accelerate."""
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        caps = accel.get_capabilities(detail=True)
+        # Extract hardware-specific info
+        profile = {
+            "ok": True,
+            "gpu": caps.get("gpu") or caps.get("device"),
+            "vram": caps.get("vram") or caps.get("memory"),
+            "backends": caps.get("backends") or caps.get("supported_backends") or [],
+            "quantization_formats": caps.get("quantization_formats") or [],
+            "compute_capability": caps.get("compute_capability"),
+            "cpu_count": caps.get("cpu_count"),
+            "platform": caps.get("platform"),
+            "raw": caps,
+        }
+        return profile
+    except IPFSAccelerateUnavailableError as exc:
+        return {"ok": False, "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.get("/list_models")
+async def ipfs_list_models_endpoint() -> dict[str, Any]:
+    """List available models from ipfs_accelerate backend."""
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        # Try various methods the adapter might expose
+        if hasattr(accel, "list_models"):
+            models = accel.list_models()
+        elif hasattr(accel, "get_capabilities"):
+            caps = accel.get_capabilities(detail=True)
+            models = caps.get("models") or caps.get("loaded_models") or []
+        else:
+            models = []
+        return {"ok": True, "models": models}
+    except IPFSAccelerateUnavailableError as exc:
+        return {"ok": False, "models": [], "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "models": [], "error": str(exc)}
+
+
+@router.post("/list_datasets")
+async def ipfs_list_datasets_endpoint(
+    req: IPFSListDatasetsRequest,
+) -> dict[str, Any]:
+    """List/search available datasets from ipfs_datasets backend."""
+    try:
+        ipfs_be = get_ipfs_router()
+        # Try to get dataset list from the backend
+        if hasattr(ipfs_be, "list_datasets"):
+            datasets = ipfs_be.list_datasets(query=req.query, limit=req.limit)
+        elif hasattr(ipfs_be, "search"):
+            datasets = ipfs_be.search(req.query or "", limit=req.limit)
+        else:
+            # Minimal fallback: report that backend is available but listing not supported
+            datasets = []
+        return {"ok": True, "datasets": datasets, "query": req.query}
+    except IPFSDatasetsRouterUnavailableError as exc:
+        return {"ok": False, "datasets": [], "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "datasets": [], "error": str(exc)}
+
+
+@router.post("/inference")
+async def ipfs_inference_endpoint(req: IPFSInferenceRequest) -> dict[str, Any]:
+    """Run inference via ipfs_accelerate (direct model execution)."""
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        result = accel.run_model(req.model_name, req.inputs, **req.parameters)
+        return {"ok": True, "model": req.model_name, "result": result}
+    except IPFSAccelerateUnavailableError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Accelerate backend unavailable: {exc}",
+        ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Inference failed: {exc}",
+        ) from exc
