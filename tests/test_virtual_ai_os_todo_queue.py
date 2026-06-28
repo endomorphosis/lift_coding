@@ -34,6 +34,13 @@ VAI_503_DISCOVERY_PATH = (
     / "discovery"
     / "2026-06-25-vai-503-mcp-dashboard-interoperability-gate.md"
 )
+VAI_531_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-27-vai-531-mcp-dashboard-interoperability-gate.md"
+)
 INTEGRATION_PLAN_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -1527,6 +1534,97 @@ def test_vai_503_mcp_dashboard_interoperability_gate_closes_objective_gap():
     assert "launch Playwright validation gate" in heap_source
     assert "mcp-dashboard-interoperability.spec.ts" in readiness_source
     assert "port: 8004" in swissknife_registry_source
+
+
+def test_vai_531_mcp_dashboard_interoperability_gate_closes_objective_gap():
+    source = VAI_531_DISCOVERY_PATH.read_text(encoding="utf-8")
+    gap_source = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-06-27-vai-531-objective-gap-7ea369464239.md"
+    ).read_text(encoding="utf-8")
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    hallucinate_source = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-06-27-hao-714-mcp-dashboard-interoperability-gate.md"
+    ).read_text(encoding="utf-8")
+    fixture = json.loads(
+        (
+            REPO_ROOT
+            / "hallucinate_app"
+            / "test"
+            / "e2e"
+            / "fixtures"
+            / "vai-531-mcp-dashboard-interoperability-gate.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert fixture["task_id"] == "VAI-531"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert (
+        fixture["source_gap_receipt"]
+        == "data/virtual_ai_os/discovery/2026-06-27-vai-531-objective-gap-7ea369464239.md"
+    )
+    assert (
+        fixture["launch_gate_receipt"]
+        == "data/virtual_ai_os/discovery/2026-06-27-vai-531-mcp-dashboard-interoperability-gate.md"
+    )
+    assert (
+        fixture["hallucinate_backlog_receipt"]
+        == "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-714-mcp-dashboard-interoperability-gate.md"
+    )
+    assert fixture["child_goals"] == [
+        "VAIOS-G723-C1 Catalog normalization",
+        "VAIOS-G723-C2 Dashboard UI wiring",
+        "VAIOS-G723-C3 Mediated tool-call receipts",
+        "VAIOS-G723-C4 Swissknife consumers",
+        "VAIOS-G723-C5 Playwright coverage",
+        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
+    ]
+
+    for term in (
+        "Hallucinate MCP dashboard interoperability console",
+        "dashboard capability catalog",
+        "daemon health",
+        "tools/list",
+        "tools/call",
+        "Swissknife",
+        "launch Playwright validation gate",
+    ):
+        assert term in gap_source
+
+    for term in (
+        "catalog normalization",
+        "dashboard UI wiring",
+        "mediated tool-call receipts",
+        "Swissknife consumers",
+        "Playwright coverage",
+        "supervisor-generated follow-up subtasks",
+        "launch Playwright validation gate",
+        "ipfs_kit_py",
+        "ipfs_datasets_py",
+        "ipfs_accelerate_py",
+    ):
+        assert term in source
+        assert term in hallucinate_source
+        assert term in heap_source
+        assert term in readiness_source
+
+    assert (
+        "npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts"
+        in fixture["validation_commands"]
+    )
+    assert "npm --prefix swissknife run test:e2e:mcp" in fixture["validation_commands"]
+    assert "hallucinate_app/test/e2e/fixtures/vai-531-mcp-dashboard-interoperability-gate.json" in heap_source
 
 
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
