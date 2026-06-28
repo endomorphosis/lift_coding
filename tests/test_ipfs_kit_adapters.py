@@ -1,8 +1,15 @@
-"""Tests for optional ipfs_kit_py adapters."""
+"""Tests for optional ipfs_kit_py adapters.
+
+These tests verify the adapter correctly wraps the real ipfs_kit_py API:
+- ipfs_kit_py.ipfs_kit.ipfs_kit.create(role="leecher") for the main class
+- .ipfs_add(path), .ipfs_cat(cid), .ipfs_pin_add(cid), .ipfs_pin_rm(cid)
+- ipfs_kit_py.backend_config.get_backend_statuses() for health checks
+"""
 
 import json
 import sys
 from types import ModuleType
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -26,374 +33,170 @@ def test_fallback_kit_adapter_when_dependency_missing(monkeypatch):
         adapter.pin("bafy123")
 
 
-def test_delegates_to_kit_module(monkeypatch):
-    """Kit adapter should delegate to ipfs_kit_py."""
-    module = ModuleType("ipfs_kit_py")
+def test_unavailable_adapter_get_backend_statuses():
+    """Unavailable adapter should return empty dict for backend statuses."""
+    from handsfree.ipfs_kit_adapters import _UnavailableIPFSKitAdapter
 
-    def pin(cid, **kwargs):
-        return {"ok": True, "cid": cid, "options": kwargs}
-
-    def unpin(cid, **kwargs):
-        return {"ok": True, "cid": cid, "options": kwargs}
-
-    def resolve(cid, **kwargs):
-        return {"cid": cid, "resolved": True, "options": kwargs}
-
-    def package_dataset(items, **kwargs):
-        return {"count": len(items), "options": kwargs}
-
-    module.pin = pin
-    module.unpin = unpin
-    module.resolve = resolve
-    module.package_dataset = package_dataset
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    assert adapter.pin("bafy123") == {"ok": True, "cid": "bafy123", "options": {}}
-    assert adapter.unpin("bafy123") == {"ok": True, "cid": "bafy123", "options": {}}
-    assert adapter.resolve("bafy123") == {"cid": "bafy123", "resolved": True, "options": {}}
-    assert adapter.package_dataset([{"cid": "bafy123"}]) == {"count": 1, "options": {}}
+    adapter = _UnavailableIPFSKitAdapter()
+    assert adapter.get_backend_statuses() == {}
 
 
-def test_delegates_to_canonical_ipfs_backend(monkeypatch):
-    """Kit adapter should use the canonical backend module for pin operations."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+def test_module_adapter_delegates_to_ipfs_kit_class():
+    """Kit adapter should use ipfs_kit_py.ipfs_kit.ipfs_kit class methods."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
 
-    class FakeBackend:
-        def pin_add(self, cid, **kwargs):
-            return {"backend": "pin_add", "cid": cid, "options": kwargs}
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
 
-        def pin_rm(self, cid, **kwargs):
-            return {"backend": "pin_rm", "cid": cid, "options": kwargs}
+    # Mock the ipfs_kit class
+    mock_kit_instance = MagicMock()
+    mock_kit_instance.ipfs_cat.return_value = b"hello world"
+    mock_kit_instance.ipfs_pin_add.return_value = {"Pins": ["bafy123"]}
+    mock_kit_instance.ipfs_pin_rm.return_value = {"Pins": ["bafy123"]}
 
-    backend_module.get_instance = lambda: FakeBackend()
+    mock_kit_cls = MagicMock()
+    mock_kit_cls.create.return_value = mock_kit_instance
+    mock_kit_module = MagicMock()
+    mock_kit_module.ipfs_kit = mock_kit_cls
 
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
+    with patch("importlib.import_module", return_value=mock_kit_module):
+        # cat delegates to ipfs_cat
+        result = adapter.cat("bafy123")
+        assert result == b"hello world"
+        mock_kit_instance.ipfs_cat.assert_called_once_with("bafy123")
 
-    adapter = get_ipfs_kit_adapter()
+        # pin delegates to ipfs_pin_add
+        result = adapter.pin("bafy123")
+        mock_kit_instance.ipfs_pin_add.assert_called_once_with("bafy123")
 
-    assert adapter.pin("bafy123") == {
-        "backend": "pin_add",
-        "cid": "bafy123",
-        "options": {},
-    }
-    assert adapter.unpin("bafy123") == {
-        "backend": "pin_rm",
-        "cid": "bafy123",
-        "options": {},
-    }
-
-
-def test_content_operations_fall_back_to_canonical_ipfs_backend(monkeypatch):
-    """Missing direct content helpers should use the canonical backend module."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    class FakeBackend:
-        def add_bytes(self, data, **kwargs):
-            return {"backend": "add_bytes", "data": data, "options": kwargs}
-
-        def cat(self, cid, **kwargs):
-            return {"backend": "cat", "cid": cid, "options": kwargs}
-
-    backend_module.get_instance = lambda: FakeBackend()
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    assert adapter.add_bytes(b"payload", pin=True) == {
-        "backend": "add_bytes",
-        "data": b"payload",
-        "options": {"pin": True},
-    }
-    assert adapter.cat("bafy123", timeout=10) == {
-        "backend": "cat",
-        "cid": "bafy123",
-        "options": {"timeout": 10},
-    }
+        # unpin delegates to ipfs_pin_rm
+        result = adapter.unpin("bafy123")
+        mock_kit_instance.ipfs_pin_rm.assert_called_once_with("bafy123")
 
 
-def test_cat_falls_back_to_backend_get(monkeypatch):
-    """Backends without cat should still support content reads through get."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+def test_module_adapter_add_bytes_uses_temp_file():
+    """add_bytes should write to temp file and call ipfs_add."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
 
-    class FakeBackend:
-        def get(self, cid, **kwargs):
-            return {"backend": "get", "cid": cid, "options": kwargs}
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
 
-    backend_module.get_instance = lambda: FakeBackend()
+    mock_kit_instance = MagicMock()
+    mock_kit_instance.ipfs_add.return_value = {"Hash": "QmNewCID", "Name": "file.bin"}
 
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
+    mock_kit_cls = MagicMock()
+    mock_kit_cls.create.return_value = mock_kit_instance
+    mock_kit_module = MagicMock()
+    mock_kit_module.ipfs_kit = mock_kit_cls
 
-    adapter = get_ipfs_kit_adapter()
+    with patch("importlib.import_module", return_value=mock_kit_module):
+        result = adapter.add_bytes(b"test payload")
+        assert result == {"Hash": "QmNewCID", "Name": "file.bin"}
+        mock_kit_instance.ipfs_add.assert_called_once()
+        # Verify path was passed (temp file)
+        call_args = mock_kit_instance.ipfs_add.call_args
+        assert call_args[0][0].endswith(".bin")
 
-    assert adapter.cat("bafy123", timeout=10) == {
-        "backend": "get",
-        "cid": "bafy123",
-        "options": {"timeout": 10},
-    }
+
+def test_module_adapter_resolve_tries_multiple_methods():
+    """resolve should try ipfs_resolve, ipfs_dag_get, then fall back to ipfs_cat."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
+
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
+
+    mock_kit_instance = MagicMock(spec=[])  # no methods by default
+    mock_kit_instance.ipfs_cat = MagicMock(return_value=b"data")
+    # Simulate no ipfs_resolve or ipfs_dag_get
+
+    mock_kit_cls = MagicMock()
+    mock_kit_cls.create.return_value = mock_kit_instance
+    mock_kit_module = MagicMock()
+    mock_kit_module.ipfs_kit = mock_kit_cls
+
+    with patch("importlib.import_module", return_value=mock_kit_module):
+        result = adapter.resolve("bafy123")
+        assert result == {"cid": "bafy123", "size": 4}
 
 
-def test_resolve_falls_back_to_canonical_backend(monkeypatch):
-    """Missing direct resolve helper should use canonical backend name resolution."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
+def test_module_adapter_package_dataset_stores_manifest():
+    """package_dataset should serialize and store a manifest via add_bytes."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
 
-    class FakeBackend:
-        def name_resolve(self, cid, **kwargs):
-            return {"backend": "name_resolve", "cid": cid, "options": kwargs}
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
 
-    backend_module.get_instance = lambda: FakeBackend()
+    mock_kit_instance = MagicMock()
+    mock_kit_instance.ipfs_add.return_value = {"Hash": "QmManifestCID"}
 
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
+    mock_kit_cls = MagicMock()
+    mock_kit_cls.create.return_value = mock_kit_instance
+    mock_kit_module = MagicMock()
+    mock_kit_module.ipfs_kit = mock_kit_cls
 
-    adapter = get_ipfs_kit_adapter()
+    with patch("importlib.import_module", return_value=mock_kit_module):
+        result = adapter.package_dataset(
+            [{"cid": "bafy123"}], metadata={"name": "test"}
+        )
+        assert result == {"Hash": "QmManifestCID"}
+        mock_kit_instance.ipfs_add.assert_called_once()
 
-    assert adapter.resolve("k51name", recursive=False) == {
-        "backend": "name_resolve",
-        "cid": "k51name",
-        "options": {"recursive": False},
+
+def test_module_adapter_get_backend_statuses():
+    """get_backend_statuses should delegate to ipfs_kit_py.backend_config."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
+
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
+
+    mock_config = MagicMock()
+    mock_config.get_backend_statuses.return_value = {
+        "kubo": {"exists": True, "enabled": True, "has_credentials": True}
     }
 
+    with patch("importlib.import_module", return_value=mock_config):
+        result = adapter.get_backend_statuses()
+        assert result == {"kubo": {"exists": True, "enabled": True, "has_credentials": True}}
 
-def test_resolve_falls_back_to_backend_client_object_stat(monkeypatch):
-    """CID metadata resolution should use backend client object-stat support."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
 
-    class FakeClient:
-        def ipfs_object_stat(self, cid, **kwargs):
-            return {"client": "ipfs_object_stat", "cid": cid, "options": kwargs}
+def test_kit_create_failure_falls_back_to_constructor():
+    """If create() fails, adapter should try direct construction."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
 
-    class FakeBackend:
-        client = FakeClient()
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
 
-    backend_module.get_instance = lambda: FakeBackend()
+    mock_kit_instance = MagicMock()
+    mock_kit_instance.ipfs_cat.return_value = b"fallback"
 
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
+    mock_kit_cls = MagicMock()
+    mock_kit_cls.create.side_effect = Exception("create failed")
+    mock_kit_cls.return_value = mock_kit_instance
 
-    adapter = get_ipfs_kit_adapter()
+    mock_kit_module = MagicMock()
+    mock_kit_module.ipfs_kit = mock_kit_cls
 
-    assert adapter.resolve("bafy123", timeout=5) == {
-        "client": "ipfs_object_stat",
-        "cid": "bafy123",
-        "options": {"timeout": 5},
-    }
+    with patch("importlib.import_module", return_value=mock_kit_module):
+        result = adapter.cat("bafy123")
+        assert result == b"fallback"
+        mock_kit_cls.assert_called_once_with(metadata={"role": "leecher"})
 
 
-def test_resolve_falls_back_to_high_level_api(monkeypatch):
-    """Resolve should use the documented high-level API when backend has no resolver."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-    high_level_module = ModuleType("ipfs_kit_py.high_level_api")
+def test_kit_all_init_paths_fail_raises_unavailable():
+    """If both create() and constructor fail, should raise IPFSKitUnavailableError."""
+    from handsfree.ipfs_kit_adapters import _IPFSKitModuleAdapter
 
-    class FakeBackend:
-        pass
+    mock_root = MagicMock()
+    adapter = _IPFSKitModuleAdapter(mock_root)
 
-    class FakeSimpleAPI:
-        def resolve(self, cid, **kwargs):
-            return {"api": "simple", "cid": cid, "options": kwargs}
+    mock_kit_cls = MagicMock()
+    mock_kit_cls.create.side_effect = Exception("create failed")
+    mock_kit_cls.side_effect = Exception("init failed")
 
-    backend_module.get_instance = lambda: FakeBackend()
-    high_level_module.IPFSSimpleAPI = FakeSimpleAPI
+    mock_kit_module = MagicMock()
+    mock_kit_module.ipfs_kit = mock_kit_cls
 
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.high_level_api", high_level_module)
-    reset_ipfs_kit_adapter_cache()
+    with patch("importlib.import_module", return_value=mock_kit_module):
+        with pytest.raises(IPFSKitUnavailableError, match="failed to initialize"):
+            adapter.cat("bafy123")
 
-    adapter = get_ipfs_kit_adapter()
-
-    assert adapter.resolve("k51name", timeout=5) == {
-        "api": "simple",
-        "cid": "k51name",
-        "options": {"timeout": 5},
-    }
-
-
-def test_package_dataset_falls_back_to_backend_json_manifest(monkeypatch):
-    """Missing package helper should store a manifest through backend JSON support."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    class FakeBackend:
-        def add_json(self, manifest, **kwargs):
-            return {"backend": "add_json", "manifest": manifest, "options": kwargs}
-
-    backend_module.get_instance = lambda: FakeBackend()
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    assert adapter.package_dataset(
-        [{"cid": "bafy123"}],
-        metadata={"name": "demo"},
-        pin=True,
-    ) == {
-        "backend": "add_json",
-        "manifest": {
-            "schema": adapters.PACKAGE_DATASET_MANIFEST_SCHEMA,
-            "items": [{"cid": "bafy123"}],
-            "metadata": {"name": "demo"},
-        },
-        "options": {"pin": True},
-    }
-
-
-def test_package_dataset_falls_back_to_backend_bytes_manifest(monkeypatch):
-    """Backends without JSON support should receive deterministic manifest bytes."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    class FakeBackend:
-        def add_bytes(self, data, **kwargs):
-            return {"backend": "add_bytes", "data": data, "options": kwargs}
-
-    backend_module.get_instance = lambda: FakeBackend()
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-    result = adapter.package_dataset([{"cid": "bafy123"}], wrap=True)
-
-    assert result["backend"] == "add_bytes"
-    assert json.loads(result["data"].decode("utf-8")) == {
-        "schema": adapters.PACKAGE_DATASET_MANIFEST_SCHEMA,
-        "items": [{"cid": "bafy123"}],
-    }
-    assert result["options"] == {"wrap": True}
-
-
-def test_missing_backend_factory_raises_unavailable_error(monkeypatch):
-    """Missing canonical backend factory should use the adapter unavailable error."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    with pytest.raises(
-        IPFSKitUnavailableError,
-        match="ipfs_kit_py.ipfs_backend.get_instance is unavailable",
-    ):
-        adapter.pin("bafy123")
-
-
-def test_add_bytes_without_backend_helpers_raises_unavailable_error(monkeypatch):
-    """Missing backend content helpers should use the adapter unavailable error."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    class FakeBackend:
-        pass
-
-    backend_module.get_instance = lambda: FakeBackend()
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    with pytest.raises(
-        IPFSKitUnavailableError,
-        match="backend exposes neither add_bytes nor add_str",
-    ):
-        adapter.add_bytes(b"payload")
-
-
-def test_cat_without_backend_helpers_raises_unavailable_error(monkeypatch):
-    """Missing backend read helpers should use the adapter unavailable error."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    class FakeBackend:
-        pass
-
-    backend_module.get_instance = lambda: FakeBackend()
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    with pytest.raises(
-        IPFSKitUnavailableError,
-        match="backend exposes neither cat nor get",
-    ):
-        adapter.cat("bafy123")
-
-
-def test_backend_factory_errors_are_not_swallowed(monkeypatch):
-    """Backend construction failures should surface with their original cause."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    def get_instance():
-        raise RuntimeError("backend init failed")
-
-    backend_module.get_instance = get_instance
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py.ipfs_backend", backend_module)
-    reset_ipfs_kit_adapter_cache()
-
-    adapter = get_ipfs_kit_adapter()
-
-    with pytest.raises(RuntimeError, match="backend init failed"):
-        adapter.pin("bafy123")
-
-
-def test_direct_callable_import_errors_are_not_swallowed(monkeypatch):
-    """Broken installed direct-import surfaces should fail before backend fallback."""
-    root_module = ModuleType("ipfs_kit_py")
-    backend_module = ModuleType("ipfs_kit_py.ipfs_backend")
-
-    class FakeBackend:
-        def pin_add(self, cid, **kwargs):
-            return {"backend": "pin_add", "cid": cid, "options": kwargs}
-
-    backend_module.get_instance = lambda: FakeBackend()
-
-    monkeypatch.setitem(sys.modules, "ipfs_kit_py", root_module)
-    reset_ipfs_kit_adapter_cache()
-    adapter = get_ipfs_kit_adapter()
-
-    original_import_module = adapters.importlib.import_module
-
-    def import_module(module_name):
-        if module_name == "ipfs_kit_py":
-            raise RuntimeError("direct import failed")
-        if module_name == "ipfs_kit_py.ipfs_backend":
-            return backend_module
-        return original_import_module(module_name)
-
-    monkeypatch.setattr(adapters.importlib, "import_module", import_module)
-
-    with pytest.raises(RuntimeError, match="direct import failed"):
-        adapter.pin("bafy123")

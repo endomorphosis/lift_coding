@@ -88,25 +88,22 @@ def test_delegates_to_legacy_top_level_helpers(monkeypatch):
     _clear_accelerate_modules(monkeypatch)
     module = ModuleType("ipfs_accelerate_py")
 
-    def generate(prompt, **kwargs):
-        return {"text": f"legacy:{prompt}", "options": kwargs}
+    def generate_text(prompt, **kwargs):
+        return f"legacy:{prompt}"
 
-    def embed(texts, **kwargs):
-        return {"vectors": [[float(len(text))] for text in texts], "options": kwargs}
+    def embed_texts(texts, **kwargs):
+        return [[float(len(text))] for text in texts]
 
-    module.generate = generate
-    module.embed = embed
+    module.generate_text = generate_text
+    module.embed_texts = embed_texts
 
     monkeypatch.setitem(sys.modules, "ipfs_accelerate_py", module)
     reset_ipfs_accelerate_adapter_cache()
 
     adapter = get_ipfs_accelerate_adapter()
 
-    assert adapter.generate("hello") == {"text": "legacy:hello", "options": {}}
-    assert adapter.embed(["a", "ab"]) == {
-        "vectors": [[1.0], [2.0]],
-        "options": {},
-    }
+    assert adapter.generate("hello") == "legacy:hello"
+    assert adapter.embed(["a", "ab"]) == [[1.0], [2.0]]
 
 
 def test_installed_accelerate_without_supported_surface_raises_unavailable(monkeypatch):

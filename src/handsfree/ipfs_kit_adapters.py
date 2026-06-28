@@ -1,9 +1,14 @@
 """Optional adapters for endomorphosis/ipfs_kit_py.
 
-Prefer canonical package modules over top-level shortcuts. The upstream package
-has a broad surface area, so this adapter intentionally probes a small set of
-validated import paths first and falls back to older top-level helpers only
-when they are explicitly available.
+The upstream package exposes its main class at ``ipfs_kit_py.ipfs_kit.ipfs_kit``
+with methods like ``.ipfs_add()``, ``.ipfs_cat()``, ``.ipfs_pin_add()``, and
+``.ipfs_pin_rm()``.  Backend configuration is via
+``ipfs_kit_py.backend_config.initialize_backend_config()`` and
+``get_backend_statuses()``.
+
+This adapter wraps those real interfaces behind a stable protocol so the rest of
+the handsfree codebase can call IPFS operations without caring whether ipfs_kit_py
+is installed.
 """
 
 from __future__ import annotations
@@ -11,8 +16,10 @@ from __future__ import annotations
 import importlib
 import json
 import logging
+import tempfile
 from collections.abc import Callable
 from functools import lru_cache
+from pathlib import Path
 from typing import Any, NoReturn, Protocol
 
 logger = logging.getLogger(__name__)
@@ -47,6 +54,35 @@ class IPFSKitAdapter(Protocol):
         """Package a content bundle or dataset manifest."""
         ...
 
+    def get_backend_statuses(self) -> dict[str, Any]:
+        """Return current backend availability/health map."""
+        ...
+
+    # Extended methods matching actual ipfs_kit_py MCP server tools
+    def list_pins(self, **kwargs: Any) -> Any:
+        """List all pinned CIDs."""
+        ...
+
+    def stat(self, cid: str, **kwargs: Any) -> Any:
+        """Get object statistics for a CID."""
+        ...
+
+    def dag_get(self, cid: str, **kwargs: Any) -> Any:
+        """Get a DAG node by CID."""
+        ...
+
+    def dag_put(self, data: Any, **kwargs: Any) -> Any:
+        """Store a DAG node, return CID."""
+        ...
+
+    def name_publish(self, cid: str, **kwargs: Any) -> Any:
+        """Publish CID to IPNS."""
+        ...
+
+    def name_resolve(self, name: str, **kwargs: Any) -> Any:
+        """Resolve an IPNS name to CID."""
+        ...
+
 
 class IPFSKitUnavailableError(RuntimeError):
     """Raised when ipfs_kit_py is missing or has no usable adapter surface."""
@@ -76,76 +112,47 @@ class _UnavailableIPFSKitAdapter:
     def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> NoReturn:
         self._raise("package_dataset")
 
+    def get_backend_statuses(self) -> dict[str, Any]:
+        return {}
+
 
 class _IPFSKitModuleAdapter:
+    """Adapter that wraps the real ipfs_kit_py.ipfs_kit.ipfs_kit class."""
+
     def __init__(self, root_module: Any) -> None:
         self._root_module = root_module
+        self._kit_instance: Any | None = None
 
-    def _resolve_backend_callable(
-        self,
-        backend: Any,
-        *paths: tuple[str, ...],
-    ) -> Callable[..., Any] | None:
-        for root in (backend, getattr(backend, "client", None)):
-            if root is None:
-                continue
-            for path in paths:
-                candidate = root
-                for attr_name in path:
-                    candidate = getattr(candidate, attr_name, None)
-                    if candidate is None:
-                        break
-                if callable(candidate):
-                    return candidate
-        return None
+    def _get_kit_instance(self) -> Any:
+        """Get or create the ipfs_kit singleton (leecher role, no auto-start)."""
+        if self._kit_instance is not None:
+            return self._kit_instance
 
-    def _resolve_callable(self, *targets: tuple[str, str]) -> Callable[..., Any] | None:
-        for module_name, attr_name in targets:
-            try:
-                module = importlib.import_module(module_name)
-            except ModuleNotFoundError as exc:
-                root_package = module_name.partition(".")[0]
-                if exc.name not in {root_package, module_name}:
-                    raise
-                logger.debug(
-                    "Optional kit callable module unavailable for %s.%s: %s",
-                    module_name,
-                    attr_name,
-                    exc,
-                )
-                continue
-            candidate = getattr(module, attr_name, None)
-            if callable(candidate):
-                return candidate
-        return None
-
-    def _get_backend(self) -> Any:
-        module_name = "ipfs_kit_py.ipfs_backend"
+        # Try ipfs_kit_py.ipfs_kit.ipfs_kit.create() first
         try:
-            module = importlib.import_module(module_name)
-        except ModuleNotFoundError as exc:
-            if exc.name not in {"ipfs_kit_py", module_name}:
-                raise
-            logger.debug("Optional kit backend unavailable for %s: %s", module_name, exc)
-        else:
-            factory = getattr(module, "get_instance", None)
-            if callable(factory):
-                return factory()
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py.ipfs_backend.get_instance is unavailable"
-        )
+            kit_module = importlib.import_module("ipfs_kit_py.ipfs_kit")
+            kit_cls = getattr(kit_module, "ipfs_kit", None)
+            if kit_cls is not None:
+                self._kit_instance = kit_cls.create(
+                    role="leecher", auto_start_daemons=False
+                )
+                return self._kit_instance
+        except Exception as exc:
+            logger.debug("ipfs_kit_py.ipfs_kit.ipfs_kit.create() failed: %s", exc)
 
-    def _get_high_level_api(self) -> Any | None:
-        api_factory = self._resolve_callable(
-            ("ipfs_kit_py.high_level_api", "IPFSSimpleAPI")
+        # Fallback: try instantiation with metadata dict
+        try:
+            kit_module = importlib.import_module("ipfs_kit_py.ipfs_kit")
+            kit_cls = getattr(kit_module, "ipfs_kit", None)
+            if kit_cls is not None:
+                self._kit_instance = kit_cls(metadata={"role": "leecher"})
+                return self._kit_instance
+        except Exception as exc:
+            logger.debug("ipfs_kit_py.ipfs_kit.ipfs_kit() fallback failed: %s", exc)
+
+        raise IPFSKitUnavailableError(
+            "ipfs_kit_py.ipfs_kit.ipfs_kit is unavailable or failed to initialize"
         )
-        if api_factory is None:
-            return None
-        api = api_factory()
-        if getattr(api, "available", True) is False:
-            logger.debug("Optional kit high-level API is unavailable")
-            return None
-        return api
 
     def _dataset_manifest(
         self,
@@ -160,195 +167,134 @@ class _IPFSKitModuleAdapter:
             manifest["metadata"] = metadata
         return manifest
 
-    def _store_dataset_manifest(
-        self,
-        target: Any,
-        manifest: dict[str, Any],
-        **kwargs: Any,
-    ) -> Any:
-        add_json = getattr(target, "add_json", None)
-        if callable(add_json):
-            return add_json(manifest, **kwargs)
+    def add_bytes(self, data: bytes, **kwargs: Any) -> Any:
+        """Write bytes to a temp file and call ipfs_add on the kit instance."""
+        kit = self._get_kit_instance()
+
+        # The real API is ipfs_add(file_path) - write to temp file
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".bin") as f:
+            f.write(data)
+            tmp_path = f.name
+
+        try:
+            result = kit.ipfs_add(tmp_path, **kwargs)
+            return result
+        finally:
+            try:
+                Path(tmp_path).unlink(missing_ok=True)
+            except Exception:
+                pass
+
+    def cat(self, cid: str, **kwargs: Any) -> Any:
+        """Read content by CID via ipfs_cat."""
+        kit = self._get_kit_instance()
+        return kit.ipfs_cat(cid, **kwargs)
+
+    def pin(self, cid: str, **kwargs: Any) -> Any:
+        """Pin content by CID."""
+        kit = self._get_kit_instance()
+        return kit.ipfs_pin_add(cid, **kwargs)
+
+    def unpin(self, cid: str, **kwargs: Any) -> Any:
+        """Unpin content by CID."""
+        kit = self._get_kit_instance()
+        return kit.ipfs_pin_rm(cid, **kwargs)
+
+    def resolve(self, cid: str, **kwargs: Any) -> Any:
+        """Resolve CID metadata. Falls back to ipfs_cat if no dedicated resolver."""
+        kit = self._get_kit_instance()
+
+        # Try dedicated resolve methods
+        for method_name in ("ipfs_resolve", "ipfs_dag_get", "ipfs_object_stat"):
+            resolver = getattr(kit, method_name, None)
+            if callable(resolver):
+                try:
+                    return resolver(cid, **kwargs)
+                except Exception:
+                    continue
+
+        # Fallback: return basic metadata from cat
+        try:
+            content = kit.ipfs_cat(cid, **kwargs)
+            return {"cid": cid, "size": len(content) if content else 0}
+        except Exception as exc:
+            raise IPFSKitUnavailableError(
+                f"ipfs_kit_py resolve failed for CID {cid}: {exc}"
+            ) from exc
+
+    def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
+        """Package a dataset manifest and store it via IPFS add."""
+        storage_options = dict(kwargs)
+        metadata = storage_options.pop("metadata", None)
+        manifest = self._dataset_manifest(items, metadata)
 
         payload = json.dumps(
             manifest,
             ensure_ascii=True,
             sort_keys=True,
             separators=(",", ":"),
-        )
-        add_bytes = getattr(target, "add_bytes", None)
-        if callable(add_bytes):
-            return add_bytes(payload.encode("utf-8"), **kwargs)
+        ).encode("utf-8")
 
-        add_str = getattr(target, "add_str", None)
-        if callable(add_str):
-            return add_str(payload, **kwargs)
+        return self.add_bytes(payload, **storage_options)
 
-        add = getattr(target, "add", None)
-        if callable(add):
-            return add(payload.encode("utf-8"), **kwargs)
-
-        return None
-
-    def add_bytes(self, data: bytes, **kwargs: Any) -> Any:
-        add_fn = self._resolve_callable(("ipfs_kit_py", "add_bytes"))
+    def get_backend_statuses(self) -> dict[str, Any]:
+        """Return backend health from ipfs_kit_py.backend_config."""
         try:
-            if add_fn is not None:
-                return add_fn(data, **kwargs)
-        except NotImplementedError as exc:
-            logger.debug("ipfs_kit_py.add_bytes direct callable unavailable: %s", exc)
-        backend = self._get_backend()
-        add_bytes = getattr(backend, "add_bytes", None)
-        if callable(add_bytes):
-            return add_bytes(data, **kwargs)
-        add_str = getattr(backend, "add_str", None)
-        if callable(add_str):
-            return add_str(data.decode("utf-8", errors="replace"), **kwargs)
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py add_bytes is unavailable: backend exposes neither "
-            "add_bytes nor add_str"
-        )
+            backend_config = importlib.import_module("ipfs_kit_py.backend_config")
+            get_statuses = getattr(backend_config, "get_backend_statuses", None)
+            if callable(get_statuses):
+                return get_statuses()
+        except Exception as exc:
+            logger.debug("ipfs_kit_py.backend_config.get_backend_statuses failed: %s", exc)
+        return {}
 
-    def cat(self, cid: str, **kwargs: Any) -> Any:
-        cat_fn = self._resolve_callable(("ipfs_kit_py", "cat"))
-        try:
-            if cat_fn is not None:
-                return cat_fn(cid, **kwargs)
-        except NotImplementedError as exc:
-            logger.debug("ipfs_kit_py.cat direct callable unavailable: %s", exc)
-        backend = self._get_backend()
-        cat_fn = self._resolve_backend_callable(backend, ("cat",), ("get",))
-        if cat_fn is not None:
-            return cat_fn(cid, **kwargs)
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py cat is unavailable: backend exposes neither cat nor get"
-        )
+    def list_pins(self, **kwargs: Any) -> Any:
+        """List all pinned CIDs."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_pin_ls", None) or getattr(kit, "ipfs_pin_list", None)
+        if callable(fn):
+            return fn(**kwargs)
+        return {"pins": []}
 
-    def pin(self, cid: str, **kwargs: Any) -> Any:
-        pin_fn = self._resolve_callable(("ipfs_kit_py", "pin"))
-        try:
-            if pin_fn is not None:
-                return pin_fn(cid, **kwargs)
-        except NotImplementedError as exc:
-            logger.debug("ipfs_kit_py.pin direct callable unavailable: %s", exc)
-        backend = self._get_backend()
-        return backend.pin_add(cid, **kwargs)
+    def stat(self, cid: str, **kwargs: Any) -> Any:
+        """Get object statistics for a CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_object_stat", None) or getattr(kit, "ipfs_stat", None)
+        if callable(fn):
+            return fn(cid, **kwargs)
+        return {"cid": cid, "stat": None}
 
-    def unpin(self, cid: str, **kwargs: Any) -> Any:
-        unpin_fn = self._resolve_callable(("ipfs_kit_py", "unpin"))
-        try:
-            if unpin_fn is not None:
-                return unpin_fn(cid, **kwargs)
-        except NotImplementedError as exc:
-            logger.debug("ipfs_kit_py.unpin direct callable unavailable: %s", exc)
-        backend = self._get_backend()
-        return backend.pin_rm(cid, **kwargs)
+    def dag_get(self, cid: str, **kwargs: Any) -> Any:
+        """Get a DAG node by CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_dag_get", None)
+        if callable(fn):
+            return fn(cid, **kwargs)
+        return {"cid": cid, "dag": None}
 
-    def resolve(self, cid: str, **kwargs: Any) -> Any:
-        resolve_fn = self._resolve_callable(("ipfs_kit_py", "resolve"))
-        try:
-            if resolve_fn is not None:
-                return resolve_fn(cid, **kwargs)
-        except NotImplementedError as exc:
-            logger.debug("ipfs_kit_py.resolve direct callable unavailable: %s", exc)
-        try:
-            backend = self._get_backend()
-        except IPFSKitUnavailableError as exc:
-            logger.debug("ipfs_kit_py resolve backend unavailable: %s", exc)
-        else:
-            backend_resolve = self._resolve_backend_callable(
-                backend,
-                ("resolve",),
-                ("dag_resolve",),
-                ("ipfs_dag_resolve",),
-                ("ipfs_object_stat",),
-                ("object_stat",),
-                ("object", "stat"),
-                ("dag_get",),
-                ("ipfs_dag_get",),
-                ("dag", "get"),
-                ("name_resolve",),
-                ("ipfs_name_resolve",),
-                ("name", "resolve"),
-            )
-            if backend_resolve is not None:
-                return backend_resolve(cid, **kwargs)
-        try:
-            simple_api = self._get_simple_api()
-        except IPFSKitUnavailableError as exc:
-            raise IPFSKitUnavailableError(
-                "ipfs_kit_py resolve is unavailable: backend exposes no CID, DAG, "
-                "or name resolver, and IPFSSimpleAPI is unavailable"
-            ) from exc
-        simple_resolve = getattr(simple_api, "resolve", None)
-        if callable(simple_resolve):
-            return simple_resolve(cid, **kwargs)
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py resolve is unavailable: backend exposes no CID, DAG, "
-            "or name resolver, and IPFSSimpleAPI exposes no resolve"
-        )
+    def dag_put(self, data: Any, **kwargs: Any) -> Any:
+        """Store a DAG node, return CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_dag_put", None)
+        if callable(fn):
+            return fn(data, **kwargs)
+        raise IPFSKitUnavailableError("ipfs_dag_put not available on kit instance")
 
-    def _get_simple_api(self) -> Any:
-        module_name = "ipfs_kit_py.high_level_api"
-        try:
-            module = importlib.import_module(module_name)
-        except ModuleNotFoundError as exc:
-            if exc.name not in {"ipfs_kit_py", module_name}:
-                raise
-            logger.debug(
-                "Optional kit high-level API unavailable for %s: %s",
-                module_name,
-                exc,
-            )
-        else:
-            factory = getattr(module, "IPFSSimpleAPI", None)
-            if callable(factory):
-                return factory()
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py.high_level_api.IPFSSimpleAPI is unavailable"
-        )
+    def name_publish(self, cid: str, **kwargs: Any) -> Any:
+        """Publish CID to IPNS."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_name_publish", None)
+        if callable(fn):
+            return fn(cid, **kwargs)
+        raise IPFSKitUnavailableError("ipfs_name_publish not available on kit instance")
 
-    def package_dataset(self, items: list[dict[str, Any]], **kwargs: Any) -> Any:
-        package_fn = getattr(self._root_module, "package_dataset", None)
-        try:
-            if callable(package_fn):
-                return package_fn(items, **kwargs)
-        except NotImplementedError as exc:
-            logger.debug(
-                "ipfs_kit_py.package_dataset direct callable unavailable: %s",
-                exc,
-            )
-
-        storage_options = dict(kwargs)
-        metadata = storage_options.pop("metadata", None)
-        manifest = self._dataset_manifest(items, metadata)
-
-        api = self._get_high_level_api()
-        if api is not None:
-            api_package_fn = getattr(api, "package_dataset", None)
-            try:
-                if callable(api_package_fn):
-                    return api_package_fn(items, **kwargs)
-            except NotImplementedError as exc:
-                logger.debug(
-                    "ipfs_kit_py.high_level_api.package_dataset unavailable: %s",
-                    exc,
-                )
-            result = self._store_dataset_manifest(api, manifest, **storage_options)
-            if result is not None:
-                return result
-
-        backend = self._get_backend()
-        backend_package_fn = getattr(backend, "package_dataset", None)
-        if callable(backend_package_fn):
-            return backend_package_fn(items, **kwargs)
-        result = self._store_dataset_manifest(backend, manifest, **storage_options)
-        if result is not None:
-            return result
-        raise IPFSKitUnavailableError(
-            "ipfs_kit_py package_dataset is unavailable: backend exposes neither "
-            "package_dataset, add_json, add_bytes, add_str nor add"
-        )
+    def name_resolve(self, name: str, **kwargs: Any) -> Any:
+        """Resolve an IPNS name to CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_name_resolve", None)
+        if callable(fn):
+            return fn(name, **kwargs)
+        raise IPFSKitUnavailableError("ipfs_name_resolve not available on kit instance")
 
 
 def _import_kit_module() -> Any | None:
