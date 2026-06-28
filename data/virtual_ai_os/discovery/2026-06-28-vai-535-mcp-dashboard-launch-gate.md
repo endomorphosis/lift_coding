@@ -66,9 +66,32 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 - Playwright MCP dashboard interoperability
 - launch Playwright validation gate
 
+## Validation Run
+
+On 2026-06-28, the focused dashboard gate passed in this worktree:
+
+```text
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+```
+
+Result: 20 passed, 33 display-only Electron UI tests skipped because no
+`DISPLAY` or `WAYLAND_DISPLAY` was available; the headless backend gate covered
+the VAI-535 catalog, daemon health, `tools/list`, `tools/call`, Swissknife
+handoff, objective gap, and heap assertions.
+
+The full launch packet command also passed:
+
+```text
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+```
+
+Result: Hallucinate dashboard gate 20 passed and 33 skipped, Swissknife
+Meta-glasses gate 3 passed, and Hallucinate multimodal control surface gate 5
+passed.
+
 ## Gate State
 
-The gate remains open until the launch runner passes the focused dashboard gate
-and the full packet command. Any missing catalog, daemon health, MCP tool
-operation, Swissknife handoff, or Playwright proof remains supervisor-fed launch
-work for `VAIOS-G724` and `VAIOS-G728`.
+Validated for the available supervisor host capability on 2026-06-28. Any
+future missing catalog, daemon health, MCP tool operation, Swissknife handoff,
+or Playwright proof remains supervisor-fed launch work for `VAIOS-G724` and
+`VAIOS-G728`.
