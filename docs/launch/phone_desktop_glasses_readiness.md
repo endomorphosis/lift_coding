@@ -277,6 +277,15 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 dashboard catalog before Swissknife, phone, desktop, or glasses launch flows
 consume those backend capabilities.
 
+VAI-542 is the matching Hallucinate MCP dashboard interoperability console gate
+for HAO-724:
+`data/virtual_ai_os/discovery/2026-06-28-vai-542-mcp-dashboard-launch-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-28-hao-724-mcp-dashboard-launch-gate.md`.
+It keeps `mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`,
+the shared dashboard capability catalog, Swissknife consumers, and
+supervisor-generated follow-up work for `VAIOS-G723` aligned.
+
 The executable gate is:
 
 ```bash
