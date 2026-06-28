@@ -4013,6 +4013,57 @@ def test_submodule_gitlink_conflict_repair_accepts_equivalent_task_head(tmp_path
     _git(repo, "merge-base", "--is-ancestor", implementation_commit, "HEAD")
 
 
+def test_submodule_gitlink_resolution_accepts_reachable_current_head_when_theirs_missing(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    repo = tmp_path / "repo"
+    app = repo / "hallucinate_app"
+    app.mkdir(parents=True)
+    _git(repo, "init")
+    _git(repo, "checkout", "-b", "main")
+    _git(repo, "config", "user.name", "Test User")
+    _git(repo, "config", "user.email", "test@example.invalid")
+    _git(app, "init")
+    _git(app, "checkout", "-b", "main")
+    _git(app, "config", "user.name", "Test User")
+    _git(app, "config", "user.email", "test@example.invalid")
+    (app / "README.md").write_text("base\n", encoding="utf-8")
+    _git(app, "add", "README.md")
+    _git(app, "commit", "-m", "app base")
+    reachable_head = _git(app, "rev-parse", "HEAD")
+
+    daemon = PortalImplementationDaemon(
+        **{TASK_BOARD_PATH_KEY: _temporary_board_path(repo)},
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+    )
+    task = PortalTask(
+        task_id="HAO-778",
+        title="Repair missing submodule gitlink target",
+        **_pending_task_metadata(),
+        priority="P1",
+        track="ops",
+    )
+
+    selected = daemon._select_submodule_gitlink_resolution(
+        "hallucinate_app",
+        {
+            "2": reachable_head,
+            "3": "0123456789abcdef0123456789abcdef01234567",
+        },
+        task=task,
+    )
+
+    assert selected == reachable_head
+
+
 def test_merge_branch_to_main_scrubs_tracked_shared_dependency_symlink(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
