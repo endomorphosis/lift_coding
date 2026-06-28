@@ -80,6 +80,16 @@ MGW-547 receipt, catalog normalization, dashboard UI wiring, mediated tool-call
 receipts, Swissknife consumers, Playwright coverage, and
 supervisor-generated follow-up subtasks before the gate can close.
 
+MGW-547 attempt 7 records the current gate receipts in
+`data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-7-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-7-launch-playwright-validation-gate.md`.
+Those receipts keep the launch Playwright validation gate tied to catalog
+normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife
+consumers, Playwright coverage, supervisor-generated follow-up subtasks,
+`tools/list`, and `tools/call` for `ipfs_kit_py`, `ipfs_datasets_py`, and
+`ipfs_accelerate_py`.
+
 MGW-546 attempt 7 keeps the same dashboard launch gate aligned with the
 supervisor-fed objective heap through
 `data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-546-attempt-7-launch-playwright-validation-gate.md`
