@@ -112,6 +112,13 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
         throw new Error('readiness descriptor did not declare mobile ORB binding endpoint');
 >>>>>>> implementation/vai-017-attempt-2-1781246428
       }}
+      const readiness = simulator.buildReadinessDescriptor(fixture);
+      if (readiness.simulator_artifacts.descriptor_cid !== fixture.descriptor_cid) {{
+        throw new Error('readiness descriptor did not preserve simulator descriptor CID');
+      }}
+      if (!readiness.simulator_artifacts.mobile_orb.endpoints.includes('/v1/mobile/orb/bind_service')) {{
+        throw new Error('readiness descriptor did not declare mobile ORB binding endpoint');
+      }}
     """
     subprocess.run(["node", "-e", script], check=True, cwd=REPO_ROOT)
 
