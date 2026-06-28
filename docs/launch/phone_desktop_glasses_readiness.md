@@ -73,6 +73,13 @@ checks the Hallucinate App dashboard capability catalog, backend service catalog
 daemon health wiring, MCP++ telemetry, `tools/list`, `tools/call`, safe probes,
 and `control_surface` mediation receipts that Swissknife consumes.
 
+MGW-547 adds the current `VAIOS-G723` objective-gap receipt to that gate. The
+Hallucinate App catalog now exposes `MGW-547` in `launch_validation_gates`, and
+`hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` asserts the
+MGW-547 receipt, catalog normalization, dashboard UI wiring, mediated tool-call
+receipts, Swissknife consumers, Playwright coverage, and
+supervisor-generated follow-up subtasks before the gate can close.
+
 MGW-548 repairs the MGW-546 retry-budget blocker by allowing this command to
 run its backend/static Playwright coverage on no-display supervisor hosts when
 the selected specs are `mcp-feature-exposure.spec.ts`,
