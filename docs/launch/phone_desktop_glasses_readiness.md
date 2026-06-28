@@ -286,6 +286,16 @@ It keeps `mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`,
 the shared dashboard capability catalog, Swissknife consumers, and
 supervisor-generated follow-up work for `VAIOS-G723` aligned.
 
+HAO-727 is the Hallucinate supervisor mirror for the same VAIOS-G723 launch
+Playwright validation gate:
+`data/hallucinate_multimodal_control/discovery/2026-06-28-hao-727-mcp-dashboard-launch-gate.md`.
+Its fixture, `hallucinate_app/test/e2e/fixtures/hao-727-mcp-dashboard-launch-gate.json`,
+keeps catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
+`control_surface receipts` tied to the shared Hallucinate MCP dashboard
+catalog.
+
 The executable gate is:
 
 ```bash
