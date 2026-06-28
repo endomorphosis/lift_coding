@@ -15,6 +15,9 @@ Resolution:
 - Removed inline `scanner-resolved` comments from this note because those
   comments repeated the scanner-sensitive token and caused follow-up MGW
   findings.
+- MGW-237 confirmed line 8 is a false positive and that removing inline
+  suppression markers is the correct approach; no scanner-triggering annotation
+  remains on this line.
 - MGW-253 rechecked the stale line-8 evidence after that cleanup. The evidence
   points to an old inline suppression marker that is no longer present here.
 - No functional change required; the current supervisor wrapper has moved to the

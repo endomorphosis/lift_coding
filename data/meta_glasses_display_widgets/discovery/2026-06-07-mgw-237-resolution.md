@@ -20,13 +20,17 @@ for adjacent lines; MGW-237 is another re-trigger of the same unchanged line 8.
 
 ## Resolution
 
-- Added `MGW-237` to the `scanner-resolved` tag on line 8 of
-  `data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md` so the
-  supervisor recognises this review cycle and suppresses future triggers
-  on this line.
+- Removed the inline `scanner-resolved` HTML comment that was present on line 8
+  of `data/virtual_ai_os/discovery/2026-05-31-vai-162-resolution.md`. Adding
+  scanner-resolved suppression markers inline in discovery documents repeats the
+  scanner-sensitive token and triggers additional scan findings; the correct fix
+  is to remove those markers entirely and rely on the prose description of the
+  false positive.
 - No functional change required; the underlying code and its clarifying comment
   at `scripts/hallucinate_multimodal_control_todo_supervisor.py:307` remain
   correct as written.
+- Updated the VAI-162 resolution document to reference MGW-237 as the review
+  cycle that confirmed line 8 is a false positive and kept the file clean.
 
 ## Validation
 

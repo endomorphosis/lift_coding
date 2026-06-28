@@ -52,7 +52,7 @@ Before migrating the display surface into native iPhone DAT, validate the browse
 
 ### Static Package
 
-The Web App export is a no-build static directory:
+The Web App source is a no-build static directory:
 
 ```text
 dev/meta-rayban-display-simulator/webapp/
@@ -68,20 +68,31 @@ dev/meta-rayban-display-simulator/webapp/
 
 `readiness.json` is the source of truth for the hosted URL, 600x600 viewport, D-pad focus metadata, PNG icon metadata, and the native iPhone DAT migration gate.
 
+Package it with the final public HTTPS URL before hosting:
+
+```bash
+PYTHONPATH=./src python3 scripts/package_display_webapp.py \
+  --deployment-url https://<host>/<path>/ \
+  --output-dir build/meta-rayban-display-webapp \
+  --zip build/meta-rayban-display-webapp.zip
+```
+
+The package output includes `package-manifest.json` with file hashes and the validated `readiness.json` rewritten for the hosted URL.
+
 ### Host Over HTTPS
 
-1. Deploy the contents of `dev/meta-rayban-display-simulator/webapp/` to a static host such as GitHub Pages, Netlify, or Vercel.
+1. Deploy the contents of `build/meta-rayban-display-webapp/` to a static host such as GitHub Pages, Netlify, or Vercel.
 2. Use a publicly available HTTPS URL; local tunnels, private IPs, and authenticated preview URLs are not acceptable for glasses loading.
 3. Verify these URLs return HTTP 200 without login:
    - `https://<host>/<path>/index.html`
    - `https://<host>/<path>/manifest.webmanifest`
    - `https://<host>/<path>/readiness.json`
-4. Update `deployment_url` in the hosted `readiness.json` to the final HTTPS `index.html` URL or directory URL used by the glasses.
+4. Confirm `deployment_url` in the hosted `readiness.json` matches the final HTTPS `index.html` URL or directory URL used by the glasses.
 5. Run:
 
 ```bash
 PYTHONPATH=./src python3 scripts/lint_display_webapp_readiness.py \
-  dev/meta-rayban-display-simulator/webapp/readiness.json
+  build/meta-rayban-display-webapp/readiness.json
 ```
 
 ### Add to Meta AI App Web Apps
