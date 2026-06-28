@@ -283,8 +283,19 @@ for HAO-724:
 and
 `data/hallucinate_multimodal_control/discovery/2026-06-28-hao-724-mcp-dashboard-launch-gate.md`.
 It keeps `mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`,
-the shared dashboard capability catalog, Swissknife consumers, and
+the shared dashboard capability catalog, catalog normalization, dashboard UI
+wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, and
 supervisor-generated follow-up work for `VAIOS-G723` aligned.
+
+VAI-543 readiness coverage preserves the exact dashboard evidence terms checked
+by the launch gate: Hallucinate App menus, Hallucinate App MCP dashboard,
+dashboard capability catalog, backend service catalog, daemon health, MCP++
+telemetry, tools/list, tools/call, control_surface receipts, Swissknife applications,
+catalog normalization, dashboard UI wiring, mediated tool-call
+receipts, Swissknife consumers, Playwright coverage, supervisor-generated
+follow-up subtasks, and launch Playwright validation gate.
 
 The executable gate is:
 

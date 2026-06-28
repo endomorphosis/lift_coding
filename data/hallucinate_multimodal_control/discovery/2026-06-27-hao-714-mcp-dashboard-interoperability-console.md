@@ -54,6 +54,11 @@ objective heap stay aligned for VAIOS-G723.
     "Swissknife consumers",
     "Playwright coverage",
     "supervisor-generated follow-up subtasks",
+    "daemon health",
+    "MCP++ telemetry",
+    "tools/list",
+    "tools/call",
+    "control_surface receipts",
     "launch Playwright validation gate"
   ],
   "child_goals": [
