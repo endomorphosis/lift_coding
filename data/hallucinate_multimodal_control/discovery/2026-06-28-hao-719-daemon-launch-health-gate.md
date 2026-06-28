@@ -52,7 +52,8 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "data/virtual_ai_os/discovery/2026-06-26-vai-519-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-06-27-vai-530-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-06-28-vai-536-objective-gap-b023c8de5b69.md",
-    "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
+    "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md"
   ],
   "supervisor_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md",
   "supervisor_gap_receipts": [
