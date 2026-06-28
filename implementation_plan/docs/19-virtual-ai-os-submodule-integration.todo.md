@@ -4931,7 +4931,7 @@ cadence remains parseable and resumable.
 
 ## VAI-544 Resolve merge retry-budget failure for VAI-046
 
-- Status: todo
+- Status: blocked
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4942,7 +4942,7 @@ cadence remains parseable and resumable.
 
 ## VAI-545 Resolve merge retry-budget failure for VAI-107
 
-- Status: todo
+- Status: blocked
 - Completion: manual
 - Priority: P1
 - Track: ops
