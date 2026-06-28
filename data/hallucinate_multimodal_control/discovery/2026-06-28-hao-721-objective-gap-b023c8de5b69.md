@@ -32,7 +32,7 @@ Hallucinate App launches and monitors the ipfs_accelerate_py, ipfs_datasets_py, 
 
 ## Present Evidence
 
-- Hallucinate App daemon health: dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), mobile/App.js (ast)
+- Hallucinate App daemon health: dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/launch/phone_desktop_glasses_readiness.md (embedding:0.30)
 - daemon launcher: mobile/src/screens/SettingsScreen.js (ast), tests/test_hallucinate_multimodal_control_todo_queue.py (exact), Mcp-Plus-Plus/tests-ts/coverage/prettify.js (ast)
 - MCP server: docs/DOCUMENTATION_INDEX.md (exact), docs/planning/CODEBASE_INVENTORY.md (exact), docs/planning/DOCUMENTATION_GAP_ANALYSIS.md (exact)
 - MCP dashboard: docs/launch/phone_desktop_glasses_readiness.md (exact), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (exact), mobile/src/screens/SettingsScreen.js (ast)
@@ -49,9 +49,11 @@ Hallucinate App launches and monitors the ipfs_accelerate_py, ipfs_datasets_py, 
 - data/virtual_ai_os/discovery/2026-06-27-vai-530-daemon-launch-health-gate.md: data/virtual_ai_os/discovery/2026-06-27-vai-530-daemon-launch-health-gate.md (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
 - hallucinate_app/test/e2e/fixtures/vai-530-daemon-launch-health-gate.json: hallucinate_app/test/e2e/fixtures/vai-530-daemon-launch-health-gate.json (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
 - data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md: data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md (path), config/display_webapp_readiness.meta_glasses_widget.example.json (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
-- data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md: data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md (path), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (embedding:0.54)
+- data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md: data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md (path), config/display_webapp_readiness.meta_glasses_widget.example.json (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast)
+- data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md: data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md (path), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (embedding:0.56)
 - hallucinate_app/test/e2e/daemon-launch-health.spec.ts: hallucinate_app/test/e2e/daemon-launch-health.spec.ts (path), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/webapp/app.js (ast)
 - hallucinate_app/test/e2e/fixtures/mgw-535-daemon-launch-health-gate.json: hallucinate_app/test/e2e/fixtures/mgw-535-daemon-launch-health-gate.json (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
+- hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json: hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
 - hallucinate_app/test/e2e/fixtures/hao-713-daemon-launch-health-gate.json: hallucinate_app/test/e2e/fixtures/hao-713-daemon-launch-health-gate.json (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
 
 ## Suggested Handling
