@@ -109,6 +109,15 @@ consumers, Playwright coverage, supervisor-generated follow-up subtasks,
 `tools/list`, `tools/call`, daemon health, MCP++ telemetry, and
 `control_surface` receipts tied to `VAIOS-G723`.
 
+MGW-547 attempt 10 refreshes the active launch Playwright validation gate in
+`data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-10-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-10-launch-playwright-validation-gate.md`.
+The Hallucinate App catalog exposes attempt 10 through the `MGW-547`
+`launch_validation_gates` entry, and Swissknife consumer validation asserts the
+same receipt paths before downstream dashboard interoperability evidence can
+close.
+
 MGW-546 attempt 7 keeps the same dashboard launch gate aligned with the
 supervisor-fed objective heap through
 `data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-546-attempt-7-launch-playwright-validation-gate.md`
