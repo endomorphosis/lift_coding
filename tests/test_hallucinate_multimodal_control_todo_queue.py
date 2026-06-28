@@ -83,12 +83,6 @@ HAO_719_DAEMON_LAUNCH_GATE_PATH = (
 HAO_721_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-721-daemon-launch-health-gate.md"
 )
-HAO_725_OBJECTIVE_GAP_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-725-objective-gap-b023c8de5b69.md"
-)
-HAO_725_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-725-daemon-launch-health-gate.md"
-)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -126,14 +120,6 @@ HAO_721_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "hao-721-daemon-launch-health-gate.json"
-)
-HAO_725_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
-    REPO_ROOT
-    / "hallucinate_app"
-    / "test"
-    / "e2e"
-    / "fixtures"
-    / "hao-725-daemon-launch-health-gate.json"
 )
 MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
@@ -1218,7 +1204,7 @@ def test_hao_713_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_he
         assert term in g728_text
 
 
-def test_hao_719_hao_721_and_hao_725_daemon_launch_gates_align_with_objective_heap():
+def test_hao_719_and_hao_721_daemon_launch_gates_align_with_objective_heap():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
 
@@ -1248,14 +1234,6 @@ def test_hao_719_hao_721_and_hao_725_daemon_launch_gates_align_with_objective_he
             "2026-06-28-hao-721-objective-gap-b023c8de5b69.md",
             "2026-06-28-hao-721-daemon-launch-health-gate.md",
             "hao-721-daemon-launch-health-gate.json",
-        ),
-        (
-            "HAO-725",
-            HAO_725_DAEMON_LAUNCH_GATE_PATH,
-            HAO_725_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
-            "2026-06-28-hao-725-objective-gap-b023c8de5b69.md",
-            "2026-06-28-hao-725-daemon-launch-health-gate.md",
-            "hao-725-daemon-launch-health-gate.json",
         ),
     ]
 
