@@ -99,6 +99,16 @@ The Hallucinate App catalog exposes those attempt receipts through the
 Playwright interoperability specs keep the supervisor-fed backlog aligned with
 the VAIOS-G723 objective heap.
 
+MGW-547 attempt 9 refreshes that same launch Playwright validation gate in
+`data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-9-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-9-launch-playwright-validation-gate.md`.
+The catalog, Playwright specs, and Swissknife consumer receipt keep catalog
+normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife
+consumers, Playwright coverage, supervisor-generated follow-up subtasks,
+`tools/list`, `tools/call`, daemon health, MCP++ telemetry, and
+`control_surface` receipts tied to `VAIOS-G723`.
+
 MGW-546 attempt 7 keeps the same dashboard launch gate aligned with the
 supervisor-fed objective heap through
 `data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-546-attempt-7-launch-playwright-validation-gate.md`
