@@ -23,3 +23,16 @@ The accelerator backlog refinery classified this as backlog work instead of
 allowing another implementation attempt to loop on the same failure. The source
 task is added to the strategy `blocked_tasks` list and the follow-up task below
 is appended for normal daemon parsing.
+
+## Repair
+
+The repeated HAO-300 merge attempts failed because the main checkout was dirty,
+not because of unresolved semantic conflict markers. The HAO-300 implementation
+intent is carried forward in the owning file by keeping `_json_safe()` hook
+failures recoverable while preserving traceback logging for the `to_dict()`
+fallback. A focused regression test now covers that path beside the existing
+`as_dict()` fallback test.
+
+No `ipfs-accelerate-agent-merge-resolver --apply` run was needed because the
+recorded merge reason was `main_checkout_dirty_conflict`, not a semantic
+conflict requiring resolver synthesis.
