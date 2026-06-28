@@ -74,6 +74,9 @@ HAO_701_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-26-hao-701-launch-playwrigh
 HAO_702_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-26-hao-702-daemon-launch-health-gate.md"
 )
+HAO_713_DAEMON_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-27-hao-713-daemon-launch-health-gate.md"
+)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -84,6 +87,14 @@ DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "mgw-535-daemon-launch-health-gate.json"
+)
+HAO_713_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-713-daemon-launch-health-gate.json"
 )
 
 
@@ -1028,6 +1039,78 @@ def test_hao_702_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_he
         "launch Playwright validation gate",
         "2026-06-26-hao-702-daemon-launch-health-gate.md",
         "2026-06-26-mgw-535-daemon-launch-health-gate.md",
+        "daemon-launch-health.spec.ts",
+    ):
+        assert term in receipt_source
+        assert term in g728_text
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
+        assert term in mgw_receipt_source
+        assert term in g728_text
+
+
+def test_hao_713_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = HAO_713_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    shared_fixture = json.loads(DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    hao_fixture = json.loads(HAO_713_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    tasks = {task.task_id: task for task in _load_tasks()}
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt == hao_fixture
+    assert receipt["schema"] == "hao_daemon_launch_health_gate_v1"
+    assert receipt["task_id"] == "HAO-713"
+    assert receipt["shared_packet_task_id"] == "MGW-535"
+    assert receipt["goal_id"] == "VAIOS-G728"
+    assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
+
+    task = tasks["HAO-713"]
+    assert task.status in {PENDING_TASK_STATUS, "completed"}
+    assert task.metadata["goal id"] == receipt["goal_id"]
+    assert task.metadata["goal packet"] == receipt["goal_packet"]
+    assert task.metadata["goal packet goals"] == "VAIOS-G724, VAIOS-G728"
+    assert task.metadata["missing evidence"] == receipt["evidence_term"]
+
+    assert shared_fixture["task_id"] == "MGW-535"
+    assert "HAO-713" in shared_fixture["backlog_task_ids"]
+    assert receipt["missing_evidence_source"] in shared_fixture["supervisor_gap_receipts"]
+    assert receipt["receipt_path"] in shared_fixture["hallucinate_backlog_receipts"]
+    assert shared_fixture["required_backends"] == receipt["required_backends"]
+    assert shared_fixture["daemon_health_paths"] == receipt["daemon_health_paths"]
+
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+    for term in (
+        "HAO-713",
+        "MGW-535",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "2026-06-27-hao-713-daemon-launch-health-gate.md",
+        "hao-713-daemon-launch-health-gate.json",
         "daemon-launch-health.spec.ts",
     ):
         assert term in receipt_source
