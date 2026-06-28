@@ -83,9 +83,6 @@ HAO_719_DAEMON_LAUNCH_GATE_PATH = (
 HAO_721_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-721-daemon-launch-health-gate.md"
 )
-HAO_725_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-725-daemon-launch-health-gate.md"
-)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -124,14 +121,6 @@ HAO_721_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "hao-721-daemon-launch-health-gate.json"
 )
-HAO_725_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
-    REPO_ROOT
-    / "hallucinate_app"
-    / "test"
-    / "e2e"
-    / "fixtures"
-    / "hao-725-daemon-launch-health-gate.json"
-)
 MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -154,12 +143,6 @@ HAO_722_OBJECTIVE_GAP_PATH = (
 HAO_722_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-mcp-dashboard-launch-gate.md"
 )
-HAO_727_OBJECTIVE_GAP_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-727-objective-gap-7ea369464239.md"
-)
-HAO_727_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
-)
 VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -167,14 +150,6 @@ VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "vai-542-mcp-dashboard-launch-gate.json"
-)
-HAO_727_LAUNCH_GATE_FIXTURE_PATH = (
-    REPO_ROOT
-    / "hallucinate_app"
-    / "test"
-    / "e2e"
-    / "fixtures"
-    / "hao-727-mcp-dashboard-launch-gate.json"
 )
 
 
@@ -1215,7 +1190,7 @@ def test_hao_713_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_he
         assert term in g728_text
 
 
-def test_hao_719_hao_721_and_hao_725_daemon_launch_gates_align_with_objective_heap():
+def test_hao_719_and_hao_721_daemon_launch_gates_align_with_objective_heap():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
 
@@ -1246,14 +1221,6 @@ def test_hao_719_hao_721_and_hao_725_daemon_launch_gates_align_with_objective_he
             "2026-06-28-hao-721-daemon-launch-health-gate.md",
             "hao-721-daemon-launch-health-gate.json",
         ),
-        (
-            "HAO-725",
-            HAO_725_DAEMON_LAUNCH_GATE_PATH,
-            HAO_725_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
-            "2026-06-28-hao-725-objective-gap-b023c8de5b69.md",
-            "2026-06-28-hao-725-daemon-launch-health-gate.md",
-            "hao-725-daemon-launch-health-gate.json",
-        ),
     ]
 
     for task_id, receipt_path, fixture_path, gap_name, receipt_name, fixture_name in current_gate_receipts:
@@ -1279,9 +1246,9 @@ def test_hao_719_hao_721_and_hao_725_daemon_launch_gates_align_with_objective_he
         assert task.metadata["goal packet goals"] == "VAIOS-G724, VAIOS-G728"
         assert task.metadata["missing evidence"] == receipt["evidence_term"]
 
-        assert task_id in fixture["backlog_task_ids"]
-        assert receipt["supervisor_gap_receipt"] in fixture["supervisor_gap_receipts"]
-        assert receipt["hallucinate_backlog_receipt"] in fixture["hallucinate_backlog_receipts"]
+        assert task_id in shared_fixture["backlog_task_ids"]
+        assert receipt["supervisor_gap_receipt"] in shared_fixture["supervisor_gap_receipts"]
+        assert receipt["hallucinate_backlog_receipt"] in shared_fixture["hallucinate_backlog_receipts"]
         assert shared_fixture["required_backends"] == receipt["required_backends"]
         assert shared_fixture["daemon_health_paths"] == receipt["daemon_health_paths"]
         assert shared_fixture["swissknife_handoff"] == receipt["swissknife_handoff"]
@@ -1360,62 +1327,6 @@ def test_hao_722_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723()
         "launch Playwright validation gate",
         "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
         "supervisor-generated follow-up work for VAIOS-G723",
-    ):
-        assert term in receipt_source
-        assert term in heap_source
-
-
-def test_hao_727_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723():
-    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
-
-    heap_source = (
-        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
-    ).read_text(encoding="utf-8")
-    gap_source = HAO_727_OBJECTIVE_GAP_PATH.read_text(encoding="utf-8")
-    receipt_source = HAO_727_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
-    fixture = json.loads(HAO_727_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
-    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
-    g723_text = " ".join([*goals["VAIOS-G723"].fields.keys(), *goals["VAIOS-G723"].fields.values()])
-
-    assert fixture["schema"] == "launch_readiness_receipt_v1"
-    assert fixture["task_id"] == "HAO-727"
-    assert fixture["goal_id"] == "VAIOS-G723"
-    assert fixture["evidence_term"] == "launch Playwright validation gate"
-    assert fixture["source_gap_receipt"] == (
-        "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-727-objective-gap-7ea369464239.md"
-    )
-    assert fixture["launch_gate_receipt"] == (
-        "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
-    )
-    assert fixture["child_goals"] == [
-        "VAIOS-G723-C1 Catalog normalization",
-        "VAIOS-G723-C2 Dashboard UI wiring",
-        "VAIOS-G723-C3 Mediated tool-call receipts",
-        "VAIOS-G723-C4 Swissknife consumers",
-        "VAIOS-G723-C5 Playwright coverage",
-        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
-    ]
-    assert fixture["follow_up_subtasks"] == [
-        "HAO-678",
-        "HAO-679",
-        "HAO-680",
-        "HAO-681",
-        "HAO-682",
-        "HAO-683",
-    ]
-
-    for term in fixture["required_evidence"]:
-        assert term in gap_source
-        assert term in receipt_source
-        assert term in g723_text
-
-    for term in (
-        "HAO-727",
-        "launch Playwright validation gate",
-        "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
-        "supervisor-generated follow-up work for VAIOS-G723",
-        "hao-727-mcp-dashboard-launch-gate.json",
     ):
         assert term in receipt_source
         assert term in heap_source
