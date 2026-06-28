@@ -77,6 +77,9 @@ HAO_702_DAEMON_LAUNCH_GATE_PATH = (
 HAO_713_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-27-hao-713-daemon-launch-health-gate.md"
 )
+HAO_714_INTEROPERABILITY_CONSOLE_PATH = (
+    DISCOVERY_ROOT / "2026-06-27-hao-714-mcp-dashboard-interoperability-console.md"
+)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -95,6 +98,14 @@ HAO_713_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "hao-713-daemon-launch-health-gate.json"
+)
+HAO_714_INTEROPERABILITY_CONSOLE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-714-mcp-dashboard-interoperability-console.json"
 )
 
 
@@ -801,6 +812,60 @@ def test_vaios_g723_keeps_hallucinate_mcp_dashboard_work_ahead_of_broad_interop(
         "Playwright",
     ):
         assert term in combined_goal_text
+
+
+def test_hao_714_interoperability_console_receipt_closes_vaios_g723_launch_gate():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    receipt_source = HAO_714_INTEROPERABILITY_CONSOLE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    fixture = json.loads(HAO_714_INTEROPERABILITY_CONSOLE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    tasks = {task.task_id: task for task in _load_tasks()}
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt == fixture
+    assert receipt["task_id"] == "HAO-714"
+    assert receipt["goal_id"] == "VAIOS-G723"
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["source_gap_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-714-objective-gap-7ea369464239.md"
+    )
+    assert receipt["launch_gate_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-714-mcp-dashboard-interoperability-console.md"
+    )
+    assert receipt["packet_goal_ids"] == ["VAIOS-G723", "VAIOS-G724", "VAIOS-G728"]
+    assert tasks["HAO-714"].metadata["goal id"] == "VAIOS-G723"
+    assert tasks["HAO-714"].metadata["missing evidence"] == "launch Playwright validation gate"
+
+    goal_text = " ".join([*goals["VAIOS-G723"].fields.keys(), *goals["VAIOS-G723"].fields.values()])
+    for term in (
+        "catalog normalization",
+        "dashboard UI wiring",
+        "mediated tool-call receipts",
+        "Swissknife consumers",
+        "Playwright coverage",
+        "supervisor-generated follow-up subtasks",
+        "launch Playwright validation gate",
+        "hao-714-mcp-dashboard-interoperability-console",
+    ):
+        assert term in receipt_source
+        assert term in goal_text
+        assert term in playwright_source
+
+    assert "HAO-714 proof" in heap_source
+    assert "HAO-714" in readiness_source
+    assert "dashboard backend or backend validation failure" in readiness_source
+    assert "npm --prefix swissknife run test:e2e:mcp" in receipt["validation_commands"]
 
 
 def test_mgw_534_packet_proof_aligns_vaios_g727_and_g729_launch_gate():

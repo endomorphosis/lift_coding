@@ -126,6 +126,24 @@ close from a dashboard-only pass or a Swissknife-only pass; both receipts must
 share that session and daemon lineage before the launch-readiness packet can
 advance to `launch_ready`.
 
+HAO-714 is the Hallucinate MCP dashboard interoperability console receipt for
+VAIOS-G723:
+`data/hallucinate_multimodal_control/discovery/2026-06-27-hao-714-mcp-dashboard-interoperability-console.md`.
+Its Playwright fixture,
+`hallucinate_app/test/e2e/fixtures/hao-714-mcp-dashboard-interoperability-console.json`,
+keeps the launch Playwright validation gate tied to catalog normalization,
+dashboard UI wiring, mediated tool-call receipts, Swissknife consumers,
+Playwright coverage, and supervisor-generated follow-up subtasks for any
+dashboard backend or backend validation failure.
+
+MGW-546 is the mirrored launch Playwright validation gate for this same
+dashboard console:
+`data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-546-launch-playwright-validation-gate.md`.
+Its fixture, `hallucinate_app/test/e2e/fixtures/mgw-546-mcp-dashboard-launch-gate.json`,
+keeps the MGW objective gap aligned with the HAO/VAI dashboard catalog,
+mediated `tools/list`, mediated `tools/call`, Swissknife consumer, and
+Playwright coverage receipts.
+
 The executable gate is:
 
 ```bash

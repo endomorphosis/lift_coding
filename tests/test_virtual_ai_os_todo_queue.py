@@ -34,6 +34,21 @@ VAI_503_DISCOVERY_PATH = (
     / "discovery"
     / "2026-06-25-vai-503-mcp-dashboard-interoperability-gate.md"
 )
+HAO_714_INTEROPERABILITY_CONSOLE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "hallucinate_multimodal_control"
+    / "discovery"
+    / "2026-06-27-hao-714-mcp-dashboard-interoperability-console.md"
+)
+HAO_714_INTEROPERABILITY_CONSOLE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-714-mcp-dashboard-interoperability-console.json"
+)
 INTEGRATION_PLAN_PATH = (
     REPO_ROOT
     / "implementation_plan"
@@ -1527,6 +1542,57 @@ def test_vai_503_mcp_dashboard_interoperability_gate_closes_objective_gap():
     assert "launch Playwright validation gate" in heap_source
     assert "mcp-dashboard-interoperability.spec.ts" in readiness_source
     assert "port: 8004" in swissknife_registry_source
+
+
+def test_hao_714_interoperability_console_keeps_vaios_g723_heap_and_backlog_aligned():
+    source = HAO_714_INTEROPERABILITY_CONSOLE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(source, "## Gate Fixture")
+    fixture = json.loads(HAO_714_INTEROPERABILITY_CONSOLE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+
+    assert receipt == fixture
+    assert receipt["task_id"] == "HAO-714"
+    assert receipt["goal_id"] == "VAIOS-G723"
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["source_gap_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-714-objective-gap-7ea369464239.md"
+    )
+    assert receipt["playwright_specs"] == [
+        "hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts",
+        "hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts",
+    ]
+    assert receipt["supervisor_follow_up_subtasks"] == [
+        "HAO-678",
+        "HAO-679",
+        "HAO-680",
+        "HAO-681",
+        "HAO-682",
+        "HAO-683",
+    ]
+
+    for term in (
+        "catalog normalization",
+        "dashboard UI wiring",
+        "mediated tool-call receipts",
+        "Swissknife consumers",
+        "Playwright coverage",
+        "supervisor-generated follow-up subtasks",
+        "launch Playwright validation gate",
+    ):
+        assert term in source
+        assert term in heap_source
+        assert term in playwright_source
+
+    assert "HAO-714 proof" in heap_source
+    assert "2026-06-27-hao-714-mcp-dashboard-interoperability-console.md" in heap_source
+    assert "hao-714-mcp-dashboard-interoperability-console.json" in heap_source
+    assert "HAO-714 is the Hallucinate MCP dashboard interoperability console receipt" in readiness_source
 
 
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():

@@ -4440,7 +4440,8 @@ cadence remains parseable and resumable.
 
 ## VAI-533 Resolve validation retry-budget failure for VAI-531
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale retry-budget maintenance is deferred during the product launch-readiness run.
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4451,7 +4452,8 @@ cadence remains parseable and resumable.
 
 ## VAI-534 Resolve merge retry-budget failure for VAI-529
 
-- Status: todo
+- Status: blocked
+- Blocked reason: stale retry-budget maintenance is deferred during the product launch-readiness run.
 - Completion: manual
 - Priority: P1
 - Track: ops
