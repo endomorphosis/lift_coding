@@ -48,6 +48,21 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 - supervisor-generated follow-up subtasks
 - launch Playwright validation gate
 
+## Dashboard Catalog Evidence Terms
+
+- hallucinate_app menus
+- Hallucinate App MCP dashboard
+- dashboard capability catalog
+- daemon health
+- tools/list
+- tools/call
+- ipfs_accelerate_py MCP server
+- ipfs_datasets_py MCP server
+- ipfs_kit_py MCP server
+- Swissknife applications
+- Playwright MCP dashboard interoperability
+- launch Playwright validation gate
+
 ## Child Goals
 
 - VAIOS-G723-C1 Catalog normalization

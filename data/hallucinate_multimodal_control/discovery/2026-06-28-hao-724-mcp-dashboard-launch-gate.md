@@ -30,6 +30,17 @@ by the Virtual AI OS objective heap.
 
 ## Covered Terms
 
+- hallucinate_app menus
+- Hallucinate App MCP dashboard
+- dashboard capability catalog
+- daemon health
+- tools/list
+- tools/call
+- ipfs_accelerate_py MCP server
+- ipfs_datasets_py MCP server
+- ipfs_kit_py MCP server
+- Swissknife applications
+- Playwright MCP dashboard interoperability
 - catalog normalization
 - dashboard UI wiring
 - mediated tool-call receipts
