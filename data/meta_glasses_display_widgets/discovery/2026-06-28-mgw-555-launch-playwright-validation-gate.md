@@ -10,7 +10,10 @@ Source gap: data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-555-objec
 
 ## Gate
 
-MGW-555 keeps the Meta glasses dashboard objective scan aligned with the
+MGW-555 closes the current supervisor-filed objective gap for the Hallucinate
+App MCP dashboard capability catalog by binding the gap receipt to the existing
+Hallucinate App Playwright dashboard gate and the shared Swissknife catalog
+consumer. It keeps the Meta glasses dashboard objective scan aligned with the
 shared Hallucinate App MCP dashboard capability catalog gate consumed by
 Swissknife and Virtual AI OS.
 
@@ -26,6 +29,26 @@ The full launch packet command remains:
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 ```
 
+## Evidence
+
+- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes
+  `MGW-555` in `launch_validation_gates` with `VAIOS-G724`, packet sibling
+  `VAIOS-G728`, the MGW-555 objective gap receipt, and this launch gate receipt.
+- `hallucinate_app/test/e2e/fixtures/mgw-555-mcp-dashboard-launch-gate.json`
+  records the required backend packages, `tools/list`, `tools/call`, daemon
+  health paths, dashboard capability catalog, Swissknife applications, and the
+  launch Playwright validation gate command.
+- `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` and
+  `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` assert the
+  MGW-555 launch gate from both the Electron-exposed catalog and the headless
+  manager catalog.
+- `swissknife/scripts/test-mcp-dashboard-consumer.cjs` verifies the same
+  MGW-555 catalog gate before Swissknife consumes the Hallucinate App dashboard
+  capability catalog.
+- `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md` records
+  the MGW-555 proof under `VAIOS-G724` and keeps the supervisor-fed backlog
+  aligned with `VAIOS-G728`.
+
 ## Covered Terms
 
 - hallucinate_app menus
@@ -40,19 +63,6 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 - Swissknife applications
 - Playwright MCP dashboard interoperability
 - launch Playwright validation gate
-
-## Evidence
-
-- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes the
-  `MGW-555` launch gate in the shared dashboard capability catalog.
-- `hallucinate_app/test/e2e/fixtures/mgw-555-mcp-dashboard-launch-gate.json`
-  records the matching launch readiness receipt for `VAIOS-G724` and packet
-  sibling `VAIOS-G728`.
-- `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`,
-  `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, and
-  `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert the gate against
-  the live catalog, `tools/list`, `tools/call`, daemon health paths, and the
-  three IPFS MCP package dashboards.
 
 ## Gate State
 
