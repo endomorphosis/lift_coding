@@ -203,7 +203,9 @@ cd lift_coding
 
 # 2. Initialize the reviewed component submodules
 git submodule sync --recursive
-git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate external/ipfs_kit swissknife
+git submodule update --init --recursive external/ipfs_datasets external/ipfs_accelerate swissknife
+git submodule update --init external/ipfs_kit
+git -C external/ipfs_kit submodule status
 
 # 3. Bootstrap Python dependencies for the root repo
 make deps
