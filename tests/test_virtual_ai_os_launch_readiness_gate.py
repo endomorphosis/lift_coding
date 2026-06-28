@@ -118,6 +118,14 @@ HAO_VAI_513_RECEIPT_PATH = (
     / "discovery"
     / "2026-06-27-vai-513-playwright-validation-environment.md"
 )
+VAI_533_REPAIR_RECEIPT_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "state"
+    / "discovery"
+    / "2026-06-28-vai-533-validation-retry-budget-repair.md"
+)
 HAO_682_RECEIPT_PATH = (
     REPO_ROOT
     / "data"
@@ -428,6 +436,7 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "headless-compatible launch gate specs" not in runner_source
     assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
     assert "isNoDisplayRunnableRequest" in runner_source
+    assert "no-display runnable launch gate specs" in runner_source
     assert "mcp-feature-exposure.spec.ts" in runner_source
     assert "mcp-dashboard-interoperability.spec.ts" in runner_source
     assert "multimodal-control-surface.spec.ts" in runner_source
@@ -482,6 +491,7 @@ def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_run
     assert "allowsNoDisplaySpecSkip" not in runner_source
     assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
     assert "isNoDisplayRunnableRequest" in runner_source
+    assert "no-display runnable launch gate specs" in runner_source
     assert "MCP Dashboard Interoperability - VAIOS-G723" in dashboard_spec_source
     assert "headless backend gate" in dashboard_spec_source
     assert "control_surface_route" in dashboard_spec_source
@@ -519,6 +529,8 @@ def test_vai_513_prevents_skipped_electron_coverage_from_satisfying_vaios_g723()
     assert "run_playwright_test.mjs --help" in vai_receipt["validation_commands"][1]
     assert "missing_xvfb_for_electron_playwright" in runner_source
     assert "headless-compatible launch gate specs" not in runner_source
+    assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
+    assert "isNoDisplayRunnableRequest" in runner_source
 
     for required_term in (
         "VAI-513",
@@ -530,6 +542,32 @@ def test_vai_513_prevents_skipped_electron_coverage_from_satisfying_vaios_g723()
         assert required_term in vai_receipt_source
         assert required_term in hao_receipt_source
         assert required_term in heap_source
+
+
+def test_vai_533_repairs_vai_531_retry_budget_with_no_display_runnable_gate():
+    runner_source = HALLUCINATE_RUNNER_PATH.read_text(encoding="utf-8")
+    heap_source = HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = READINESS_DOC_PATH.read_text(encoding="utf-8")
+    receipt_source = VAI_533_REPAIR_RECEIPT_PATH.read_text(encoding="utf-8")
+
+    for term in (
+        "VAI-533",
+        "VAI-531",
+        "NO_DISPLAY_RUNNABLE_SPEC_FILES",
+        "isNoDisplayRunnableRequest",
+        "mcp-feature-exposure.spec.ts",
+        "mcp-dashboard-interoperability.spec.ts",
+        "multimodal-control-surface.spec.ts",
+        "missing_xvfb_for_electron_playwright",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
+
+    assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
+    assert "isNoDisplayRunnableRequest" in runner_source
+    assert "no-display runnable launch gate specs" in runner_source
+    assert "data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md" in heap_source
+    assert "data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md" in readiness_source
 
 
 def test_mgw_534_meta_glasses_input_routing_has_launch_playwright_gate():

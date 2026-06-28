@@ -81,6 +81,12 @@ the selected specs are `mcp-feature-exposure.spec.ts`,
 `DISPLAY`, `WAYLAND_DISPLAY`, or `xvfb-run`; Electron-only requests keep the
 `missing_xvfb_for_electron_playwright` diagnostic.
 
+VAI-533 applies the same no-display runnable Playwright runner repair to the
+VAI-531 retry-budget blocker. Its receipt is
+`data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md`,
+and it keeps the Hallucinate MCP dashboard interoperability command executable
+on headless supervisor hosts without weakening Electron UI coverage.
+
 The `LaunchReadinessGate` remains open until the Python guard, Hallucinate MCP
 dashboard interoperability gate, Swissknife Playwright replay, and Hallucinate
 App Playwright mediation command all pass for the same receipt lineage. Only
@@ -114,6 +120,11 @@ The MGW-548 repair receipt is
 `data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-548-validation-retry-budget-repair.md`.
 It keeps the launch Playwright validation gate executable on headless
 supervisor hosts instead of burning retry budget on the environment preflight.
+
+The VAI-533 repair receipt is
+`data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md`.
+It releases the VAI-531 dashboard interoperability validation from the same
+retry-budget loop while preserving the launch Playwright validation gate.
 
 MGW-546 records the VAIOS-G723 launch Playwright validation gate for catalog
 normalization, dashboard UI wiring, mediated `tools/list` and `tools/call`

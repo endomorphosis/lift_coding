@@ -38,6 +38,10 @@ data/hallucinate_multimodal_control/receipts/*
 data/virtual_ai_os/*
 !data/virtual_ai_os/discovery/
 !data/virtual_ai_os/discovery/**
+!data/virtual_ai_os/state/
+data/virtual_ai_os/state/*
+!data/virtual_ai_os/state/discovery/
+!data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md
 .tools
 # Dev audio uploads (don't commit test audio files)
 dev/audio/
