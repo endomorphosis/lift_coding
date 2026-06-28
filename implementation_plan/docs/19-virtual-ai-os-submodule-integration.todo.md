@@ -261,7 +261,7 @@ cadence remains parseable and resumable.
 
 ## VAI-021 Resolve nested submodule hygiene for ipfs_kit recursive bootstrap
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4440,7 +4440,7 @@ cadence remains parseable and resumable.
 
 ## VAI-533 Resolve validation retry-budget failure for VAI-531
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
