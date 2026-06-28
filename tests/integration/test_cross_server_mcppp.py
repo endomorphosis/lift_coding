@@ -116,6 +116,20 @@ class TestProfileBInterop:
         d = envelope.to_dict()
         assert "intent" in d and "decision" in d and "receipt" in d
 
+    def test_cross_repo_cid_equivalence(self):
+        """Same artifact must cross-verify between repos despite prefix format."""
+        from ipfs_datasets_py.mcp_server.cid_artifacts import artifact_cid
+        from ipfs_datasets_py.mcp_server.interface_descriptor import cids_equivalent
+        mod = _load_acc_module("cid_ucan", "cid_ucan.py")
+        data = {"query": "hello", "n": 1}
+        acc_cid = mod.compute_cid(data)
+        ds_cid = str(artifact_cid(data))
+        # Different surface formats...
+        assert acc_cid.startswith("bafy") and ds_cid.startswith("sha256:")
+        # ...but cross-verify identically from either side
+        assert mod.cids_equivalent(acc_cid, ds_cid)
+        assert cids_equivalent(acc_cid, ds_cid)
+
 
 class TestProfileCInterop:
     """Profile C: UCAN delegation chains are compatible across repos."""
