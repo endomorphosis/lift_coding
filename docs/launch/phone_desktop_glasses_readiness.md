@@ -97,10 +97,12 @@ VAI-010, HAO-430, and VAI-339 replay receipts remain development evidence.
 
 ## Hallucinate MCP Dashboard Gate
 
-`VAI-503` extends the launch Playwright validation gate for `VAIOS-G723` with
-the Hallucinate App MCP dashboard interoperability console. The gate evidence is
-recorded in
-`data/virtual_ai_os/discovery/2026-06-26-vai-503-launch-playwright-validation-gate.md`
+`VAI-503` and `HAO-714` extend the launch Playwright validation gate for
+`VAIOS-G723` with the Hallucinate App MCP dashboard interoperability console.
+The gate evidence is recorded in
+`data/virtual_ai_os/discovery/2026-06-25-vai-503-mcp-dashboard-interoperability-gate.md`,
+`data/virtual_ai_os/discovery/2026-06-27-vai-531-mcp-dashboard-interoperability-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-06-27-hao-714-mcp-dashboard-interoperability-gate.md`,
 and
 `data/hallucinate_multimodal_control/discovery/2026-06-25-hao-682-mcp-dashboard-launch-readiness.md`.
 
@@ -109,6 +111,14 @@ The dashboard gate must prove the shared dashboard capability catalog for
 dashboard UI wiring, mediated `tools/list` and safe `tools/call` receipts,
 MCP++ telemetry, Swissknife consumer coverage, and supervisor-generated
 follow-up subtasks for any dashboard or backend validation failure.
+
+The HAO-714/VAI-531 catalog field
+`dashboard_interoperability_validation_gate` preserves the child-goal evidence
+terms directly in the runtime dashboard catalog: catalog normalization,
+dashboard UI wiring, mediated tool-call receipts, Swissknife consumers,
+Playwright coverage, and supervisor-generated follow-up subtasks. The matching
+fixture is
+`hallucinate_app/test/e2e/fixtures/vai-531-mcp-dashboard-interoperability-gate.json`.
 
 The MGW-548 repair receipt is
 `data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-548-validation-retry-budget-repair.md`.
