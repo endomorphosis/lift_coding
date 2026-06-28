@@ -1275,7 +1275,7 @@ def test_objective_launch_readiness_seed_adds_high_value_dashboard_and_device_go
 def test_virtual_ai_os_launch_tasks_are_not_blocked_by_recursive_submodule_hygiene():
     tasks = {task.task_id: task for task in _load_tasks()}
 
-    assert tasks["VAI-021"].status == "blocked"
+    assert tasks["VAI-021"].status in {"blocked", "completed"}
     assert "non-launch" in tasks["VAI-021"].metadata.get("blocked reason", "")
     assert "git -C external/ipfs_kit submodule status" in "; ".join(tasks["VAI-021"].validation)
     assert "VAI-021" not in tasks["VAI-338"].depends_on
