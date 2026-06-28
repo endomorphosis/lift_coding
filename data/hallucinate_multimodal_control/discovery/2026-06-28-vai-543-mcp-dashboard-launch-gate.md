@@ -45,4 +45,4 @@ The shared fixture
 preserves child goals for catalog normalization, dashboard UI wiring, mediated
 tool-call receipts, Swissknife consumers, Playwright coverage, and
 supervisor-generated follow-up subtasks. Any dashboard or backend validation
-failure remains supervisor-generated follow-up work for `VAIOS-G723`.
+failure remains supervisor-generated follow-up work for VAIOS-G723.
