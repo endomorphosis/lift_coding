@@ -31,12 +31,20 @@ and safe `tools/call` routes consumed by Swissknife applications.
 
 ## Covered Terms
 
+- catalog normalization
+- dashboard UI wiring
+- mediated tool-call receipts
+- Swissknife consumers
+- Playwright coverage
+- supervisor-generated follow-up subtasks
 - hallucinate_app menus
 - Hallucinate App MCP dashboard
 - dashboard capability catalog
 - daemon health
+- MCP++ telemetry
 - tools/list
 - tools/call
+- control_surface receipts
 - ipfs_accelerate_py MCP server
 - ipfs_datasets_py MCP server
 - ipfs_kit_py MCP server
@@ -53,7 +61,9 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 ```
 
 The HAO-724 fixture also keeps packet sibling `VAIOS-G728` in scope through the
-daemon health requirement for every dashboard server. Any missing catalog,
+daemon health requirement for every dashboard server. VAI-542 is the Virtual AI
+OS source gate for this Hallucinate supervisor mirror. Any missing catalog,
 daemon health, `tools/list`, `tools/call`, Swissknife consumer, Playwright MCP
 dashboard interoperability, or packet sibling proof remains supervisor-fed
-launch work for `VAIOS-G724` and `VAIOS-G728`.
+launch work for `VAIOS-G724` and `VAIOS-G728`; dashboard failures remain
+supervisor-generated follow-up work for VAIOS-G723.
