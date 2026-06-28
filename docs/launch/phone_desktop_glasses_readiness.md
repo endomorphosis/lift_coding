@@ -118,6 +118,17 @@ The Hallucinate App catalog exposes attempt 10 through the `MGW-547`
 same receipt paths before downstream dashboard interoperability evidence can
 close.
 
+MGW-547 attempt 11 refreshes the active launch Playwright validation gate in
+`data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-11-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-11-launch-playwright-validation-gate.md`.
+The Hallucinate App catalog exposes attempt 11 through the `MGW-547`
+`launch_validation_gates` entry, keeping catalog normalization, dashboard UI
+wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, `tools/list`, `tools/call`, daemon
+health, MCP++ telemetry, and `control_surface receipts` aligned with the
+`VAIOS-G723` objective heap.
+
 MGW-546 attempt 7 keeps the same dashboard launch gate aligned with the
 supervisor-fed objective heap through
 `data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-546-attempt-7-launch-playwright-validation-gate.md`
