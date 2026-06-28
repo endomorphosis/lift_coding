@@ -52,6 +52,14 @@ test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-g
 test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 ```
 
+## Attempt 2 Validation
+
+The 2026-06-28 attempt-2 replay passed the full HAO-724 validation chain:
+
+- `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`: 25 passed, 33 display-dependent Electron tests skipped on the headless host.
+- `npm --prefix swissknife run test:e2e:meta-glasses`: 4 passed.
+- `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts`: 5 passed.
+
 The HAO-724 fixture also keeps packet sibling `VAIOS-G728` in scope through the
 daemon health requirement for every dashboard server. Any missing catalog,
 daemon health, `tools/list`, `tools/call`, Swissknife consumer, Playwright MCP
