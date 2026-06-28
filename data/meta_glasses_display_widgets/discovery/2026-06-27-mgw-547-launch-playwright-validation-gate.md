@@ -29,6 +29,7 @@ npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json |
 - `hallucinate_app/test/e2e/fixtures/mgw-547-mcp-dashboard-launch-gate.json` records the `launch_readiness_receipt_v1` for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks.
 - `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` asserts the MGW-547 gap receipt, this launch receipt, the Hallucinate backlog receipt, the objective heap proof, the readiness doc, the dashboard capability catalog, daemon health, `tools/list`, `tools/call`, and the three backend packages.
 - `swissknife/scripts/test-mcp-dashboard-consumer.cjs` verifies Swissknife consumes the same dashboard catalog gate entry.
+- Attempt 11 receipts, `data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-11-launch-playwright-validation-gate.md` and `data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-11-launch-playwright-validation-gate.md`, are exposed from that same `MGW-547` catalog gate entry so the supervisor-fed backlog remains aligned with the objective heap.
 
 ## Covered Terms
 
