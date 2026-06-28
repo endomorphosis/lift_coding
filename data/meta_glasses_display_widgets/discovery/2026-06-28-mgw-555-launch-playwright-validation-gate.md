@@ -69,25 +69,3 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 Any missing catalog entry, daemon health route, MCP tool operation, Swissknife
 handoff, or Playwright proof remains launch work for `VAIOS-G724` and packet
 sibling `VAIOS-G728`.
-
-## Attempt 1 Validation
-
-The 2026-06-28 attempt-1 launch packet validation passed from the MGW-555
-worktree:
-
-```text
-npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
-```
-
-Results:
-
-- Hallucinate App MCP dashboard gate: 24 passed, 33 display-dependent Electron
-  tests skipped by the existing no-display headless gate.
-- Swissknife Meta glasses gate: 4 passed.
-- Hallucinate App multimodal control surface gate: 5 passed.
-
-This run preserves the `launch Playwright validation gate` evidence for
-`MGW-555`, `VAIOS-G724`, and packet sibling `VAIOS-G728` across the dashboard
-capability catalog, daemon health, `tools/list`, `tools/call`, Swissknife
-consumer refs, Playwright interoperability specs, and the `ipfs_kit_py`,
-`ipfs_datasets_py`, and `ipfs_accelerate_py` MCP dashboard packages.

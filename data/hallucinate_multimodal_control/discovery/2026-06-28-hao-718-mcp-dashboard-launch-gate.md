@@ -120,14 +120,3 @@ The run preserved the live `HAO-718` launch validation catalog entry, the
 `launch Playwright validation gate`, packet sibling `VAIOS-G728`, daemon
 health paths, `tools/list`, `tools/call`, all three IPFS MCP package dashboard
 records, and the Swissknife consumer proof.
-
-Attempt 8 validation on 2026-06-28 passed the full packet command from the
-HAO-718 worktree. The focused Hallucinate dashboard gate completed with 24
-passing headless backend tests and 33 display-dependent Electron UI skips, the
-Swissknife meta-glasses gate completed with 4 passing tests, and the
-Hallucinate multimodal control surface gate completed with 5 passing tests.
-The run revalidated the live `HAO-718` `launch_validation_gates` entry, the
-`launch Playwright validation gate`, packet sibling `VAIOS-G728`, dashboard
-capability catalog, daemon health paths, `tools/list`, `tools/call`,
-`ipfs_kit_py`, `ipfs_datasets_py`, `ipfs_accelerate_py`, Swissknife consumer
-refs, and both Hallucinate App Playwright interoperability specs.

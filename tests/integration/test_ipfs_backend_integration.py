@@ -357,6 +357,46 @@ class TestIPFSIntegrationAPI:
         resp = client.post("/v1/ipfs/generate", json={"prompt": "hello"})
         assert resp.status_code in (200, 503)
 
+    def test_embed_falls_back_to_accelerate_when_datasets_unavailable(self, client):
+        from handsfree.ipfs_datasets_routers import IPFSDatasetsRouterUnavailableError
+
+        accelerate = MagicMock()
+        accelerate.embed.return_value = [[0.1, 0.2, 0.3]]
+
+        with patch(
+            "handsfree.handlers.ipfs_integration.get_embeddings_router",
+            side_effect=IPFSDatasetsRouterUnavailableError("datasets unavailable"),
+        ), patch(
+            "handsfree.handlers.ipfs_integration.get_ipfs_accelerate_adapter",
+            return_value=accelerate,
+        ):
+            resp = client.post("/v1/ipfs/embed", json={"texts": ["hello world"]})
+
+        assert resp.status_code == 200
+        payload = resp.json()
+        assert payload["provider_used"] == "accelerate"
+        assert payload["embeddings"] == [[0.1, 0.2, 0.3]]
+
+    def test_generate_falls_back_to_accelerate_when_datasets_unavailable(self, client):
+        from handsfree.ipfs_datasets_routers import IPFSDatasetsRouterUnavailableError
+
+        accelerate = MagicMock()
+        accelerate.generate.return_value = "accelerated output"
+
+        with patch(
+            "handsfree.handlers.ipfs_integration.get_llm_router",
+            side_effect=IPFSDatasetsRouterUnavailableError("llm unavailable"),
+        ), patch(
+            "handsfree.handlers.ipfs_integration.get_ipfs_accelerate_adapter",
+            return_value=accelerate,
+        ):
+            resp = client.post("/v1/ipfs/generate", json={"prompt": "hello"})
+
+        assert resp.status_code == 200
+        payload = resp.json()
+        assert payload["provider_used"] == "accelerate"
+        assert payload["text"] == "accelerated output"
+
 
 # --------------------------------------------------------------------------- #
 # End-to-end interoperability proof

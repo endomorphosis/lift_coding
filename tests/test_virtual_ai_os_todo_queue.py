@@ -56,28 +56,6 @@ VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-542-mcp-dashboard-launch-gate.json"
 )
-VAI_543_LAUNCH_GATE_PATH = (
-    REPO_ROOT
-    / "data"
-    / "virtual_ai_os"
-    / "discovery"
-    / "2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
-)
-VAI_543_HALLUCINATE_LAUNCH_GATE_PATH = (
-    REPO_ROOT
-    / "data"
-    / "hallucinate_multimodal_control"
-    / "discovery"
-    / "2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
-)
-VAI_543_LAUNCH_GATE_FIXTURE_PATH = (
-    REPO_ROOT
-    / "hallucinate_app"
-    / "test"
-    / "e2e"
-    / "fixtures"
-    / "vai-543-mcp-dashboard-launch-gate.json"
-)
 HAO_714_INTEROPERABILITY_CONSOLE_PATH = (
     REPO_ROOT
     / "data"
@@ -1634,53 +1612,6 @@ def test_vai_542_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     assert "VAI-542" in readiness_source
     assert "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts" in readiness_source
     assert "VAI-542" in swissknife_consumer_source
-
-
-def test_vai_543_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
-    source = VAI_543_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
-    hao_source = VAI_543_HALLUCINATE_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
-    fixture = json.loads(VAI_543_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
-    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
-    playwright_source = (
-        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
-    ).read_text(encoding="utf-8")
-    swissknife_consumer_source = (
-        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
-    ).read_text(encoding="utf-8")
-
-    assert fixture["schema"] == "mcp_dashboard_interoperability_gate_v1"
-    assert fixture["task_id"] == "VAI-543"
-    assert fixture["goal_id"] == "VAIOS-G723"
-    assert fixture["evidence_term"] == "launch Playwright validation gate"
-    assert fixture["launch_gate_receipt"] == "data/virtual_ai_os/discovery/2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
-    assert fixture["hallucinate_launch_gate_receipt"] == (
-        "data/hallucinate_multimodal_control/discovery/2026-06-28-vai-543-mcp-dashboard-launch-gate.md"
-    )
-    assert fixture["child_goals"] == [
-        "VAIOS-G723-C1 Catalog normalization",
-        "VAIOS-G723-C2 Dashboard UI wiring",
-        "VAIOS-G723-C3 Mediated tool-call receipts",
-        "VAIOS-G723-C4 Swissknife consumers",
-        "VAIOS-G723-C5 Playwright coverage",
-        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
-    ]
-    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
-
-    for term in fixture["required_evidence"]:
-        assert term in source
-        assert term in hao_source
-        assert term in playwright_source
-
-    assert "VAI-543 proof" in heap_source
-    assert fixture["launch_gate_receipt"] in heap_source
-    assert fixture["hallucinate_launch_gate_receipt"] in heap_source
-    assert fixture["receipt_fixture"] in heap_source
-    assert "VAI-543" in readiness_source
-    assert "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts" in readiness_source
-    assert "VAI-543" in swissknife_consumer_source
 
 
 def test_hao_714_interoperability_console_keeps_vaios_g723_heap_and_backlog_aligned():

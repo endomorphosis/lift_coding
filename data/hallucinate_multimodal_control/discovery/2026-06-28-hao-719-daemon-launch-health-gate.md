@@ -29,8 +29,7 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "HAO-702",
     "HAO-713",
     "HAO-719",
-    "HAO-721",
-    "HAO-725"
+    "HAO-721"
   ],
   "shared_packet_task_id": "MGW-535",
   "goal_id": "VAIOS-G728",
@@ -67,16 +66,14 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-objective-gap-b023c8de5b69.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-objective-gap-b023c8de5b69.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-objective-gap-b023c8de5b69.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-objective-gap-b023c8de5b69.md"
   ],
   "hallucinate_backlog_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md",
   "hallucinate_backlog_receipts": [
     "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-daemon-launch-health-gate.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-daemon-launch-health-gate.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-daemon-launch-health-gate.md"
   ],
   "launch_gate_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md",
   "receipt_fixture": "hallucinate_app/test/e2e/fixtures/hao-719-daemon-launch-health-gate.json",

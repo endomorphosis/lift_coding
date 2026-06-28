@@ -252,9 +252,8 @@ Its Playwright fixture,
 `hallucinate_app/test/e2e/fixtures/hao-714-mcp-dashboard-interoperability-console.json`,
 keeps the launch Playwright validation gate tied to catalog normalization,
 dashboard UI wiring, mediated tool-call receipts, Swissknife consumers,
-Playwright coverage, supervisor-generated follow-up subtasks, daemon health,
-MCP++ telemetry, `tools/list`, `tools/call`, and `control_surface receipts`
-for any dashboard backend or backend validation failure.
+Playwright coverage, and supervisor-generated follow-up subtasks for any
+dashboard backend or backend validation failure.
 
 MGW-546 is the mirrored launch Playwright validation gate for this same
 dashboard console:
@@ -271,12 +270,12 @@ Its Hallucinate supervisor mirror is
 `data/hallucinate_multimodal_control/discovery/2026-06-28-vai-543-mcp-dashboard-launch-gate.md`,
 and its fixture is
 `hallucinate_app/test/e2e/fixtures/vai-543-mcp-dashboard-launch-gate.json`.
-The gate keeps Hallucinate App menus, catalog normalization, dashboard UI
-wiring, mediated tool-call receipts, Swissknife applications, Swissknife
-consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon
-health, MCP++ telemetry, `tools/list`, `tools/call`, and `control_surface
-receipts` tied to the shared dashboard catalog before Swissknife, phone,
-desktop, or glasses launch flows consume those backend capabilities.
+The gate keeps catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, and `control_surface receipts` tied to the shared
+dashboard catalog before Swissknife, phone, desktop, or glasses launch flows
+consume those backend capabilities.
 
 VAI-542 is the matching Hallucinate MCP dashboard interoperability console gate
 for HAO-724:

@@ -350,49 +350,87 @@ async def ipfs_resolve_endpoint(req: IPFSResolveRequest) -> dict[str, Any]:
 async def ipfs_embed_endpoint(req: IPFSEmbedRequest) -> IPFSEmbedResponse:
     """Generate embeddings via ipfs_datasets or ipfs_accelerate routers."""
     provider_used = req.provider or "datasets"
+    datasets_error: str | None = None
+    accelerate_error: str | None = None
 
     if provider_used == "accelerate":
         try:
             accel = get_ipfs_accelerate_adapter()
             vectors = accel.embed(req.texts, model_name=req.model_name)
             return IPFSEmbedResponse(embeddings=vectors, provider_used="accelerate")
-        except IPFSAccelerateUnavailableError:
-            # Fall through to datasets
+        except Exception as exc:
+            accelerate_error = str(exc)
+            # Fall through to datasets for compatibility
             provider_used = "datasets"
 
     try:
         embeddings_router = get_embeddings_router()
         vectors = embeddings_router.embed_texts(req.texts, model_name=req.model_name)
         return IPFSEmbedResponse(embeddings=vectors, provider_used="datasets")
-    except IPFSDatasetsRouterUnavailableError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"No embeddings provider available: {exc}",
-        ) from exc
+    except Exception as exc:
+        datasets_error = str(exc)
+
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        vectors = accel.embed(req.texts, model_name=req.model_name)
+        return IPFSEmbedResponse(embeddings=vectors, provider_used="accelerate")
+    except Exception as exc:
+        accelerate_error = str(exc)
+
+    detail = "No embeddings provider available"
+    if datasets_error or accelerate_error:
+        detail = (
+            f"No embeddings provider available: datasets_error={datasets_error}; "
+            f"accelerate_error={accelerate_error}"
+        )
+
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail=detail,
+    )
 
 
 @router.post("/generate", response_model=IPFSGenerateResponse)
 async def ipfs_generate_endpoint(req: IPFSGenerateRequest) -> IPFSGenerateResponse:
     """Generate text via LLM router (ipfs_datasets or ipfs_accelerate)."""
     provider_used = req.provider or "datasets"
+    datasets_error: str | None = None
+    accelerate_error: str | None = None
 
     if provider_used == "accelerate":
         try:
             accel = get_ipfs_accelerate_adapter()
             text = accel.generate(req.prompt, model_name=req.model_name)
             return IPFSGenerateResponse(text=str(text), provider_used="accelerate")
-        except IPFSAccelerateUnavailableError:
+        except Exception as exc:
+            accelerate_error = str(exc)
             provider_used = "datasets"
 
     try:
         llm = get_llm_router()
         text = llm.generate_text(req.prompt, model_name=req.model_name)
         return IPFSGenerateResponse(text=str(text), provider_used="datasets")
-    except IPFSDatasetsRouterUnavailableError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail=f"No LLM provider available: {exc}",
-        ) from exc
+    except Exception as exc:
+        datasets_error = str(exc)
+
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        text = accel.generate(req.prompt, model_name=req.model_name)
+        return IPFSGenerateResponse(text=str(text), provider_used="accelerate")
+    except Exception as exc:
+        accelerate_error = str(exc)
+
+    detail = "No LLM provider available"
+    if datasets_error or accelerate_error:
+        detail = (
+            f"No LLM provider available: datasets_error={datasets_error}; "
+            f"accelerate_error={accelerate_error}"
+        )
+
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail=detail,
+    )
 
 
 @router.get("/capabilities")

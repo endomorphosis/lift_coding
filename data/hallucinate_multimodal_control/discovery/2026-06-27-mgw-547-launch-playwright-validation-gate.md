@@ -12,9 +12,6 @@ by Meta glasses and Swissknife validation.
 
 The gate covers catalog normalization, dashboard UI wiring, mediated tool-call receipts,
 Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks.
-The shared dashboard capability catalog also exposes the active MGW-547 attempt
-11 receipts so Swissknife consumers, Hallucinate dashboard tests, and the
-supervisor-fed objective heap all use the same gate lineage.
 It remains open until `mcp-feature-exposure.spec.ts` and
 `mcp-dashboard-interoperability.spec.ts` prove the shared dashboard capability
 catalog, backend service catalog, daemon health, MCP++ telemetry, `tools/list`,
