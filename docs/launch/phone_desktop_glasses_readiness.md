@@ -263,6 +263,20 @@ keeps the MGW objective gap aligned with the HAO/VAI dashboard catalog,
 mediated `tools/list`, mediated `tools/call`, Swissknife consumer, and
 Playwright coverage receipts.
 
+VAI-543 is the current Virtual AI OS launch Playwright validation gate for the
+same VAIOS-G723 dashboard interoperability console:
+`data/virtual_ai_os/discovery/2026-06-28-vai-543-mcp-dashboard-launch-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-06-28-vai-543-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/vai-543-mcp-dashboard-launch-gate.json`.
+The gate keeps catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, and `control_surface receipts` tied to the shared
+dashboard catalog before Swissknife, phone, desktop, or glasses launch flows
+consume those backend capabilities.
+
 The executable gate is:
 
 ```bash
