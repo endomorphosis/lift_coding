@@ -131,6 +131,15 @@ MGW-549 repairs the MGW-547 retry-budget blocker by refreshing stale HAO-682,
 MGW-546, and HAO-712 launch-gate evidence while preserving the same
 Hallucinate MCP dashboard Playwright command.
 
+HAO-718 attempt 5 keeps the VAIOS-G724 dashboard capability catalog aligned
+with the same launch Playwright validation gate. The live Hallucinate App
+catalog, the Swissknife catalog consumer, and
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` all
+expose the `HAO-718` gate entry for
+`data/hallucinate_multimodal_control/discovery/2026-06-28-hao-718-mcp-dashboard-launch-gate.md`,
+covering daemon health, `tools/list`, `tools/call`, Swissknife consumers, and
+the `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` dashboards.
+
 The `LaunchReadinessGate` remains open until the Python guard, Hallucinate MCP
 dashboard interoperability gate, Swissknife Playwright replay, and Hallucinate
 App Playwright mediation command all pass for the same receipt lineage. Only
