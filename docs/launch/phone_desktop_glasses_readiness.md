@@ -115,6 +115,16 @@ The MGW-548 repair receipt is
 It keeps the launch Playwright validation gate executable on headless
 supervisor hosts instead of burning retry budget on the environment preflight.
 
+MGW-546 is the `VAIOS-G723` launch Playwright validation gate receipt for the
+same dashboard console. The paired receipts
+`data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-546-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-27-mgw-546-launch-playwright-validation-gate.md`
+bind `hallucinate_app/test/e2e/fixtures/mgw-546-mcp-dashboard-launch-gate.json`
+to catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, and supervisor-generated follow-up
+subtasks.
+
 HAO-682 is the aggregate dashboard interoperability launch-readiness receipt for
 this gate. It binds Hallucinate App menu navigation, dashboard catalog reads,
 daemon health, MCP++ telemetry, dashboard `tools/list` probes, dashboard
