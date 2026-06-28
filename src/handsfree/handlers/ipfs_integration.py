@@ -27,6 +27,15 @@ Endpoints:
     POST /v1/ipfs/search_models   - Search available AI models
     GET  /v1/ipfs/metrics         - Performance metrics
     GET  /v1/ipfs/endpoints       - List inference endpoints
+    POST /v1/ipfs/vector/index    - Index content into vector store
+    POST /v1/ipfs/vector/search   - Search vector store
+    POST /v1/ipfs/vector/metadata - Get vector store metadata
+    POST /v1/ipfs/search/semantic - Semantic search across content
+    POST /v1/ipfs/search/similarity - Find similar items
+    POST /v1/ipfs/search/faceted  - Faceted search with filters
+    POST /v1/ipfs/scrape/url      - Scrape content from URL
+    POST /v1/ipfs/scrape/batch    - Scrape multiple URLs
+    POST /v1/ipfs/workflow/execute - Execute workflow step
 """
 
 from __future__ import annotations
@@ -648,3 +657,158 @@ async def ipfs_endpoints_endpoint() -> dict[str, Any]:
         return {"ok": False, "endpoints": [], "error": str(exc)}
     except Exception as exc:
         return {"ok": False, "endpoints": [], "error": str(exc)}
+
+
+# --- Extended Tool Coverage: Vector Store, Search, Web Scraping ---
+
+@router.post("/vector/index")
+async def vector_index_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Index content into the vector store."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.vector_store_tools.native_vector_store_tools import vector_index
+        result = await vector_index(
+            content=body.get("content", ""),
+            metadata=body.get("metadata", {}),
+            collection=body.get("collection", "default"),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "vector_store_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/vector/search")
+async def vector_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Search the vector store."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.vector_store_tools.native_vector_store_tools import vector_retrieval
+        result = await vector_retrieval(
+            query=body.get("query", ""),
+            collection=body.get("collection", "default"),
+            top_k=body.get("top_k", 10),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "vector_store_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/vector/metadata")
+async def vector_metadata_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Get vector store metadata."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.vector_store_tools.native_vector_store_tools import vector_metadata
+        result = await vector_metadata(
+            collection=body.get("collection", "default"),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "vector_store_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/search/semantic")
+async def semantic_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Perform semantic search across indexed content."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.search_tools.native_search_tools import semantic_search
+        result = await semantic_search(
+            query=body.get("query", ""),
+            top_k=body.get("top_k", 10),
+            filters=body.get("filters", {}),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "search_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/search/similarity")
+async def similarity_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Find similar items by content or embedding."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.search_tools.native_search_tools import similarity_search
+        result = await similarity_search(
+            query=body.get("query", ""),
+            threshold=body.get("threshold", 0.7),
+            max_results=body.get("max_results", 20),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "search_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/search/faceted")
+async def faceted_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Perform faceted search with filters and aggregations."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.search_tools.native_search_tools import faceted_search
+        result = await faceted_search(
+            query=body.get("query", ""),
+            facets=body.get("facets", []),
+            filters=body.get("filters", {}),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "search_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/scrape/url")
+async def scrape_url_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Scrape content from a URL."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.web_scraping_tools.native_web_scraping_tools import scrape_url_tool
+        result = await scrape_url_tool(
+            url=body.get("url", ""),
+            extract_text=body.get("extract_text", True),
+            extract_links=body.get("extract_links", False),
+            extract_images=body.get("extract_images", False),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "web_scraping_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/scrape/batch")
+async def scrape_batch_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Scrape content from multiple URLs."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.web_scraping_tools.native_web_scraping_tools import scrape_multiple_urls_tool
+        result = await scrape_multiple_urls_tool(
+            urls=body.get("urls", []),
+            extract_text=body.get("extract_text", True),
+        )
+        return {"ok": True, "result": result}
+    except ImportError:
+        return {"ok": False, "error": "web_scraping_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/workflow/execute")
+async def workflow_execute_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+    """Execute a workflow step or pipeline."""
+    try:
+        from ipfs_accelerate_py.mcp_server.tools.workflow_tools.native_workflow_tools_category import (
+            execute_workflow_step,
+        )
+        result = await execute_workflow_step(
+            workflow_id=body.get("workflow_id", ""),
+            step=body.get("step", ""),
+            params=body.get("params", {}),
+        )
+        return {"ok": True, "result": result}
+    except (ImportError, AttributeError):
+        return {"ok": False, "error": "workflow_tools not available"}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
