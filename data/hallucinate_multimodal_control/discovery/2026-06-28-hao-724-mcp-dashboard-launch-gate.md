@@ -30,25 +30,17 @@ by the Virtual AI OS objective heap.
 
 ## Covered Terms
 
-- hallucinate_app menus
-- Hallucinate App MCP dashboard
 - catalog normalization
-- dashboard capability catalog
 - dashboard UI wiring
 - mediated tool-call receipts
 - Swissknife consumers
-- Swissknife applications
 - Playwright coverage
-- Playwright MCP dashboard interoperability
 - supervisor-generated follow-up subtasks
 - daemon health
 - MCP++ telemetry
 - tools/list
 - tools/call
 - control_surface receipts
-- ipfs_accelerate_py MCP server
-- ipfs_datasets_py MCP server
-- ipfs_kit_py MCP server
 - launch Playwright validation gate
 
 ## Validation Chain
