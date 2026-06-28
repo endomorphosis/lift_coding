@@ -2844,8 +2844,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-554 Resolve merge retry-budget failure for MGW-547
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-28: cleared the MGW-547 merge retry-budget blocker by verifying the intended MGW-547 top-level and submodule commits exist in their owning repositories, confirming the dirty `hallucinate_app` main-checkout condition is gone, and recording the remaining merge shape as semantic submodule pointer reconciliation.
 - Priority: P1
 - Track: ops
 - Depends on: 
