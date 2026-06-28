@@ -72,7 +72,7 @@ Attempt 2 revalidated the full launch packet gate on 2026-06-28:
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 ```
 
-The run passed with 25 focused Hallucinate dashboard tests passing and 33
+The run passed with 26 focused Hallucinate dashboard tests passing and 33
 display-dependent Electron cases skipped on this no-display supervisor host,
-then 3 Swissknife Meta glasses tests and 5 Hallucinate multimodal
+then 4 Swissknife Meta glasses tests and 5 Hallucinate multimodal
 control-surface tests passing.
