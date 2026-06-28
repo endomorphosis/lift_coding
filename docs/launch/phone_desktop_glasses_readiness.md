@@ -277,6 +277,14 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 dashboard catalog before Swissknife, phone, desktop, or glasses launch flows
 consume those backend capabilities.
 
+VAI-543 readiness coverage preserves these exact dashboard evidence terms:
+Hallucinate App menus; Hallucinate App MCP dashboard; dashboard capability
+catalog; backend service catalog; daemon health; MCP++ telemetry; tools/list;
+tools/call; control_surface receipts; Swissknife applications; catalog
+normalization; dashboard UI wiring; mediated tool-call receipts; Swissknife
+consumers; Playwright coverage; supervisor-generated follow-up subtasks;
+launch Playwright validation gate.
+
 VAI-542 is the matching Hallucinate MCP dashboard interoperability console gate
 for HAO-724:
 `data/virtual_ai_os/discovery/2026-06-28-vai-542-mcp-dashboard-launch-gate.md`
@@ -295,6 +303,12 @@ Swissknife consumers, Playwright coverage, supervisor-generated follow-up
 subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
 `control_surface receipts` tied to the shared Hallucinate MCP dashboard
 catalog.
+It also preserves the packet-level catalog terms `hallucinate_app menus`,
+Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
+`tools/list`, `tools/call`, `ipfs_accelerate_py MCP server`,
+`ipfs_datasets_py MCP server`, `ipfs_kit_py MCP server`, Swissknife
+applications, Playwright MCP dashboard interoperability, and launch Playwright
+validation gate.
 
 The executable gate is:
 
