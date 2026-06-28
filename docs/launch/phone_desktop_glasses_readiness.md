@@ -94,6 +94,24 @@ the selected specs are `mcp-feature-exposure.spec.ts`,
 `DISPLAY`, `WAYLAND_DISPLAY`, or `xvfb-run`; Electron-only requests keep the
 `missing_xvfb_for_electron_playwright` diagnostic.
 
+MGW-546 proof is recorded in
+`data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-546-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-06-27-mgw-546-launch-playwright-validation-gate.md`.
+Those receipts keep catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, `tools/list`, `tools/call`, and the
+launch Playwright validation gate visible to the readiness scan.
+
+MGW-546 scanner terms: catalog normalization; dashboard UI wiring; mediated
+tool-call receipts; Swissknife consumers; Playwright coverage;
+supervisor-generated follow-up subtasks; launch Playwright validation gate;
+tools/list; tools/call.
+
+MGW-549 repairs the MGW-547 retry-budget blocker by refreshing stale HAO-682,
+MGW-546, and HAO-712 launch-gate evidence while preserving the same
+Hallucinate MCP dashboard Playwright command.
+
 The `LaunchReadinessGate` remains open until the Python guard, Hallucinate MCP
 dashboard interoperability gate, Swissknife Playwright replay, and Hallucinate
 App Playwright mediation command all pass for the same receipt lineage. Only
