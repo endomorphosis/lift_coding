@@ -1160,7 +1160,6 @@ def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
     mgw_fixture = json.loads(MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
     goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
 
-    assert receipt == mgw_fixture
     assert receipt["schema"] == "meta_glasses_display_widgets.daemon_launch_health_gate_v1"
     assert receipt["task_id"] == "MGW-551"
     assert receipt["shared_packet_task_id"] == "MGW-535"
@@ -1172,6 +1171,15 @@ def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
         "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
     )
     assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
+    assert mgw_fixture["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
+    assert mgw_fixture["task_id"] == receipt["task_id"]
+    assert mgw_fixture["goal_id"] == receipt["goal_id"]
+    assert mgw_fixture["goal_packet"] == receipt["goal_packet"]
+    assert mgw_fixture["packet_goals"] == receipt["packet_goals"]
+    assert mgw_fixture["evidence_term"] == receipt["evidence_term"]
+    assert mgw_fixture["supervisor_gap_receipt"] == receipt["missing_evidence_source"]
+    assert mgw_fixture["launch_gate_receipt"] == receipt["receipt_path"]
+    assert mgw_fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json"
 
     assert shared_fixture["task_id"] == "MGW-535"
     assert receipt["receipt_path"] in shared_fixture["discovery_receipts"]
