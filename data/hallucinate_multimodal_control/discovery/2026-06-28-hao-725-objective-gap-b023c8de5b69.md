@@ -40,7 +40,7 @@ Hallucinate App launches and monitors the ipfs_accelerate_py, ipfs_datasets_py, 
 - ipfs_datasets_py: CONFIGURATION.md (exact), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/CONFIGURATION.md (exact)
 - ipfs_kit_py: CONFIGURATION.md (exact), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/CONFIGURATION.md (exact)
 - dashboard capability catalog: dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (exact)
-- Swissknife applications: dev/meta-rayban-display-simulator/webapp/app.js (ast), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (exact), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md (exact)
+- Swissknife applications: dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (exact)
 - launch Playwright validation gate: dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact)
 - data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md: data/virtual_ai_os/discovery/2026-06-26-vai-517-mcp-dashboard-launch-readiness.md (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
 - hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json: hallucinate_app/test/e2e/fixtures/vai-517-mcp-dashboard-launch-readiness.json (path), agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast)
