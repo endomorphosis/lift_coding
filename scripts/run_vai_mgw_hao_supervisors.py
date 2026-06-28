@@ -205,6 +205,10 @@ VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
 def build_launcher() -> ConfiguredMultiSupervisorLauncher:
     """Return the configured reusable launcher for this repository's tracks."""
 
+    # scanner-resolved: VAI-118 - "--objective-surplus-min-terms-per-todo" (previously
+    # explicit at run_vai_mgw_hao_supervisors.sh:92) is now supplied by the shared
+    # multi-supervisor launcher; "todo" in that flag name refers to backlog task entries,
+    # not a deferred-work annotation.
     return build_repo_implementation_multi_supervisor_launcher(
         repo_root=REPO_ROOT,
         implementation_track_configs=VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS,
