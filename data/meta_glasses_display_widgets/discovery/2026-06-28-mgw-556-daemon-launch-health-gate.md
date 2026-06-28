@@ -10,9 +10,9 @@ Source gap: data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objec
 
 MGW-556 closes the current Meta glasses supervisor-filed objective gap for
 Hallucinate App daemon launch orchestration. The receipt binds the gap to the
-shared MGW-535 daemon launch gate while preserving the packet sibling evidence
-for VAIOS-G724, Swissknife handoff records, and the launch Playwright
-validation gate.
+shared MGW-535 daemon launch gate while preserving packet sibling evidence for
+VAIOS-G724, Swissknife handoff records, and the launch Playwright validation
+gate.
 
 ## Gate Fixture
 
