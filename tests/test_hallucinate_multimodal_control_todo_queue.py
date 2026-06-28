@@ -89,6 +89,9 @@ MGW_535_DAEMON_LAUNCH_GATE_PATH = (
 MGW_551_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-28-mgw-551-daemon-launch-health-gate.md"
 )
+MGW_556_DAEMON_LAUNCH_GATE_PATH = (
+    MGW_DISCOVERY_ROOT / "2026-06-28-mgw-556-daemon-launch-health-gate.md"
+)
 DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -128,6 +131,28 @@ MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "mgw-551-daemon-launch-health-gate.json"
+)
+MGW_556_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "mgw-556-daemon-launch-health-gate.json"
+)
+HAO_722_OBJECTIVE_GAP_PATH = (
+    DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
+)
+HAO_722_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-28-hao-724-mcp-dashboard-launch-gate.md"
+)
+VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-542-mcp-dashboard-launch-gate.json"
 )
 
 
@@ -1263,6 +1288,53 @@ def test_hao_719_and_hao_721_daemon_launch_gates_align_with_objective_heap():
         assert term in g728_text
 
 
+def test_hao_722_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    gap_source = HAO_722_OBJECTIVE_GAP_PATH.read_text(encoding="utf-8")
+    receipt_source = HAO_722_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    fixture = json.loads(VAI_542_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g723_text = " ".join([*goals["VAIOS-G723"].fields.keys(), *goals["VAIOS-G723"].fields.values()])
+
+    assert fixture["task_id"] == "VAI-542"
+    assert fixture["backlog_task_id"] == "HAO-724"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["hallucinate_gap_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-724-objective-gap-7ea369464239.md"
+    )
+    assert fixture["hallucinate_launch_gate_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-724-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["child_goals"] == [
+        "VAIOS-G723-C1 Catalog normalization",
+        "VAIOS-G723-C2 Dashboard UI wiring",
+        "VAIOS-G723-C3 Mediated tool-call receipts",
+        "VAIOS-G723-C4 Swissknife consumers",
+        "VAIOS-G723-C5 Playwright coverage",
+        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
+    ]
+
+    for term in fixture["required_evidence"]:
+        assert term in gap_source
+        assert term in receipt_source
+        assert term in g723_text
+
+    for term in (
+        "HAO-724",
+        "VAI-542",
+        "launch Playwright validation gate",
+        "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
+        "supervisor-generated follow-up work for VAIOS-G723",
+    ):
+        assert term in receipt_source
+        assert term in heap_source
+
+
 def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
@@ -1334,6 +1406,84 @@ def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
     ):
         assert term in receipt_source
         assert term in shared_mgw_receipt_source
+        assert term in g728_text
+
+
+def test_mgw_556_daemon_launch_gate_aligns_current_gap_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = MGW_556_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    mgw_fixture = json.loads(MGW_556_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt["schema"] == "meta_glasses_display_widgets.daemon_launch_health_gate_v1"
+    assert receipt["task_id"] == "MGW-556"
+    assert receipt["shared_packet_task_id"] == "MGW-535"
+    assert receipt["goal_id"] == "VAIOS-G728"
+    assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["missing_evidence_source"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objective-gap-b023c8de5b69.md"
+    )
+    assert receipt["receipt_path"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-daemon-launch-health-gate.md"
+    )
+    assert receipt["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-556-daemon-launch-health-gate.json"
+    assert receipt["supervisor_alignment"]["keeps_supervisor_fed_backlog_aligned"] is True
+    assert receipt["swissknife_handoff_asserted"] is True
+
+    assert mgw_fixture["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
+    assert mgw_fixture["task_id"] == receipt["task_id"]
+    assert mgw_fixture["shared_packet_task_id"] == receipt["shared_packet_task_id"]
+    assert mgw_fixture["goal_id"] == receipt["goal_id"]
+    assert mgw_fixture["goal_packet"] == receipt["goal_packet"]
+    assert mgw_fixture["packet_goals"] == receipt["packet_goals"]
+    assert mgw_fixture["evidence_term"] == receipt["evidence_term"]
+    assert mgw_fixture["objective_gap_receipt"] == receipt["missing_evidence_source"]
+    assert mgw_fixture["supervisor_gap_receipt"] == receipt["missing_evidence_source"]
+    assert mgw_fixture["launch_gate_receipt"] == receipt["receipt_path"]
+    assert mgw_fixture["receipt_fixture"] == receipt["receipt_fixture"]
+    assert receipt["receipt_path"] in mgw_fixture["discovery_receipts"]
+    assert receipt["missing_evidence_source"] in mgw_fixture["objective_gap_receipts"]
+    assert mgw_fixture["required_backends"] == receipt["required_backends"]
+    assert all(entry["swissknife_consumer"].startswith("Swissknife") for entry in mgw_fixture["swissknife_handoff"])
+
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+    for term in (
+        "MGW-556",
+        "MGW-535",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "2026-06-28-mgw-556-daemon-launch-health-gate.md",
+        "mgw-556-daemon-launch-health-gate.json",
+        "daemon-launch-health.spec.ts",
+        "test:e2e:meta-glasses",
+    ):
+        assert term in receipt_source
+        assert term in g728_text
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
         assert term in g728_text
 
 
