@@ -77,6 +77,12 @@ HAO_702_DAEMON_LAUNCH_GATE_PATH = (
 HAO_713_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-27-hao-713-daemon-launch-health-gate.md"
 )
+HAO_719_DAEMON_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-28-hao-719-daemon-launch-health-gate.md"
+)
+HAO_721_DAEMON_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-28-hao-721-daemon-launch-health-gate.md"
+)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -98,6 +104,22 @@ HAO_713_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "hao-713-daemon-launch-health-gate.json"
+)
+HAO_719_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-719-daemon-launch-health-gate.json"
+)
+HAO_721_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-721-daemon-launch-health-gate.json"
 )
 MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
@@ -1143,6 +1165,99 @@ def test_hao_713_daemon_launch_gate_aligns_hallucinate_backlog_with_objective_he
     ):
         assert term in receipt_source
         assert term in mgw_receipt_source
+        assert term in g728_text
+
+
+def test_hao_719_and_hao_721_daemon_launch_gates_align_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    shared_mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    shared_fixture = json.loads(DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    tasks = {task.task_id: task for task in _load_tasks()}
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+
+    current_gate_receipts = [
+        (
+            "HAO-719",
+            HAO_719_DAEMON_LAUNCH_GATE_PATH,
+            HAO_719_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+            "2026-06-28-hao-719-objective-gap-b023c8de5b69.md",
+            "2026-06-28-hao-719-daemon-launch-health-gate.md",
+            "hao-719-daemon-launch-health-gate.json",
+        ),
+        (
+            "HAO-721",
+            HAO_721_DAEMON_LAUNCH_GATE_PATH,
+            HAO_721_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+            "2026-06-28-hao-721-objective-gap-b023c8de5b69.md",
+            "2026-06-28-hao-721-daemon-launch-health-gate.md",
+            "hao-721-daemon-launch-health-gate.json",
+        ),
+    ]
+
+    for task_id, receipt_path, fixture_path, gap_name, receipt_name, fixture_name in current_gate_receipts:
+        receipt_source = receipt_path.read_text(encoding="utf-8")
+        receipt = _json_block_after(receipt_source, "## Gate Fixture")
+        fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        task = tasks[task_id]
+
+        assert receipt == fixture
+        assert receipt["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
+        assert receipt["task_id"] == task_id
+        assert receipt["shared_packet_task_id"] == "MGW-535"
+        assert receipt["goal_id"] == "VAIOS-G728"
+        assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+        assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+        assert receipt["evidence_term"] == "launch Playwright validation gate"
+
+        assert task.status in {PENDING_TASK_STATUS, "completed"}
+        assert task.metadata["goal id"] == receipt["goal_id"]
+        assert task.metadata["goal packet"] == receipt["goal_packet"]
+        assert task.metadata["goal packet goals"] == "VAIOS-G724, VAIOS-G728"
+        assert task.metadata["missing evidence"] == receipt["evidence_term"]
+
+        assert task_id in shared_fixture["backlog_task_ids"]
+        assert receipt["supervisor_gap_receipt"] in shared_fixture["supervisor_gap_receipts"]
+        assert receipt["hallucinate_backlog_receipt"] in shared_fixture["hallucinate_backlog_receipts"]
+        assert shared_fixture["required_backends"] == receipt["required_backends"]
+        assert shared_fixture["daemon_health_paths"] == receipt["daemon_health_paths"]
+        assert shared_fixture["swissknife_handoff"] == receipt["swissknife_handoff"]
+
+        for term in (
+            task_id,
+            "MGW-535",
+            "goal_packet/launch/hallucinate_app/44dceea6bc53",
+            "launch Playwright validation gate",
+            gap_name,
+            receipt_name,
+            fixture_name,
+            "daemon-launch-health.spec.ts",
+        ):
+            assert term in receipt_source
+            assert term in g728_text
+
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in shared_mgw_receipt_source
         assert term in g728_text
 
 
