@@ -234,6 +234,10 @@ app = FastAPI(
     description="API for hands-free developer assistant",
 )
 
+# Register IPFS integration router
+from handsfree.handlers.ipfs_integration import router as ipfs_router  # noqa: E402
+app.include_router(ipfs_router)
+
 # Database connection (initialized lazily)
 _db_conn = None
 
