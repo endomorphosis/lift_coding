@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -153,3 +154,67 @@ def test_submodule_worktree_add_retries_invalid_gitlink_ref(tmp_path, monkeypatc
     assert calls[1][0][-1] != bad_ref
     assert events[0][0] == "submodule_worktree_base_ref_retried"
     assert events[0][1]["bad_ref"] == bad_ref
+
+
+def test_missing_validation_worktree_is_recorded_without_implementation_exception(tmp_path, monkeypatch):
+    module = _daemon_module()
+
+    repo_root = tmp_path / "repo"
+    worktree_root = tmp_path / "worktrees"
+    repo_root.mkdir()
+    events = []
+
+    daemon = module.PortalImplementationDaemon(
+        todo_path=tmp_path / "todo.md",
+        state_path=tmp_path / "state.json",
+        strategy_path=tmp_path / "strategy.json",
+        events_path=tmp_path / "events.jsonl",
+        repo_root=repo_root,
+        worktree_root=worktree_root,
+    )
+    monkeypatch.setattr(daemon, "_record_event", lambda event, payload: events.append((event, payload)))
+    monkeypatch.setattr(
+        daemon,
+        "_build_implementation_command",
+        lambda _worktree: [
+            sys.executable,
+            "-c",
+            "import os, shutil; shutil.rmtree(os.getcwd())",
+        ],
+    )
+
+    def create_seeded_worktree(worktree_path, _branch_name, *, task):
+        worktree_path.mkdir(parents=True)
+        return "baseline"
+
+    monkeypatch.setattr(daemon, "_create_seeded_worktree", create_seeded_worktree)
+    monkeypatch.setattr(daemon, "_git_ref_exists", lambda _branch_name: False)
+    monkeypatch.setattr(daemon, "_worktree_path_registered_in_repo", lambda _cwd, _worktree: False)
+    monkeypatch.setattr(time, "time", lambda: 1782661704)
+
+    task = module.PortalTask(
+        task_id="MGW-547",
+        title="Close objective gap",
+        status="todo",
+        completion="manual",
+        priority="P0",
+        track="launch",
+        validation=["true"],
+    )
+    state = module.PortalTaskState()
+
+    result = daemon._run_implementation_in_ephemeral_worktree(
+        task=task,
+        state=state,
+        attempt=8,
+        started_at=module.utc_now(),
+        log_path=tmp_path / "implementation.log",
+        prompt="implement",
+    )
+
+    assert result["returncode"] == 1
+    assert result["validation_result"]["reason"] == "validation_workspace_missing"
+    assert result["cleanup_result"]["cleaned"] is True
+    assert "failed_preservation_result" not in result or not result["failed_preservation_result"]
+    assert any(event == "validation_workspace_missing" for event, _payload in events)
+    assert not any(event == "implementation_exception" for event, _payload in events)
