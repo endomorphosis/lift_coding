@@ -4440,7 +4440,7 @@ cadence remains parseable and resumable.
 
 ## VAI-533 Resolve validation retry-budget failure for VAI-531
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
