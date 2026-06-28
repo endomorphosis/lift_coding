@@ -129,6 +129,14 @@ MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "mgw-551-daemon-launch-health-gate.json"
 )
+MGW_556_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "mgw-556-daemon-launch-health-gate.json"
+)
 HAO_722_OBJECTIVE_GAP_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
 )
