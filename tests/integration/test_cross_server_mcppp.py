@@ -10,6 +10,7 @@ MCP++ protocol behavior across all 5 profiles:
 """
 
 import pytest
+import re
 import time
 import sys
 import os
@@ -75,7 +76,7 @@ class TestProfileAInterop:
             name="test-accelerate", version="1.0.0",
             methods=[mod.MethodDescriptor(name="infer", description="Run inference")],
         )
-        assert iface.cid.startswith("bafy")
+        assert re.match(r"^b[a-z2-7]{58}$", iface.cid)  # real CIDv1 base32
         d = iface.to_dict()
         assert d["name"] == "test-accelerate"
         assert len(d["methods"]) == 1
@@ -112,21 +113,25 @@ class TestProfileBInterop:
             method="infer", params={"model": "bert"}, executor_fn=mock_exec,
         )
         assert envelope.receipt.success
-        assert envelope.cid.startswith("bafy")
+        assert re.match(r"^b[a-z2-7]{58}$", envelope.cid)  # real CIDv1 base32
         d = envelope.to_dict()
         assert "intent" in d and "decision" in d and "receipt" in d
 
     def test_cross_repo_cid_equivalence(self):
-        """Same artifact must cross-verify between repos despite prefix format."""
+        """Same artifact must yield identical, spec-conformant CIDs in both repos."""
+        import re
         from ipfs_datasets_py.mcp_server.cid_artifacts import artifact_cid
         from ipfs_datasets_py.mcp_server.interface_descriptor import cids_equivalent
         mod = _load_acc_module("cid_ucan", "cid_ucan.py")
+        cid_pat = re.compile(r"^(Qm[1-9A-HJ-NP-Za-km-z]{44}|baf[a-z0-9]{56})$")
         data = {"query": "hello", "n": 1}
         acc_cid = mod.compute_cid(data)
         ds_cid = str(artifact_cid(data))
-        # Different surface formats...
-        assert acc_cid.startswith("bafy") and ds_cid.startswith("sha256:")
-        # ...but cross-verify identically from either side
+        # Both conform to the canonical MCP++ CID regex...
+        assert cid_pat.match(acc_cid), acc_cid
+        assert cid_pat.match(ds_cid), ds_cid
+        # ...and are byte-identical for identical content (true interop)
+        assert acc_cid == ds_cid
         assert mod.cids_equivalent(acc_cid, ds_cid)
         assert cids_equivalent(acc_cid, ds_cid)
 
