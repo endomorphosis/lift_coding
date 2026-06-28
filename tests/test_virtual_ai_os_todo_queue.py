@@ -1595,6 +1595,63 @@ def test_hao_714_interoperability_console_keeps_vaios_g723_heap_and_backlog_alig
     assert "HAO-714 is the Hallucinate MCP dashboard interoperability console receipt" in readiness_source
 
 
+def test_mgw_547_attempt_8_keeps_dashboard_launch_gate_aligned():
+    meta_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "meta_glasses_display_widgets"
+        / "discovery"
+        / "2026-06-28-mgw-547-attempt-8-launch-playwright-validation-gate.md"
+    )
+    hallucinate_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-06-28-mgw-547-attempt-8-launch-playwright-validation-gate.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "mgw-547-mcp-dashboard-launch-gate.json"
+    )
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    meta_receipt = meta_receipt_path.read_text(encoding="utf-8")
+    hallucinate_receipt = hallucinate_receipt_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+
+    assert fixture["task_id"] == "MGW-547"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["attempt"] == 8
+    assert fixture["attempt_receipts"] == [
+        "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-8-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-8-launch-playwright-validation-gate.md",
+    ]
+
+    for source in (meta_receipt, hallucinate_receipt, heap_source, readiness_source):
+        for term in (
+            "catalog normalization",
+            "dashboard UI wiring",
+            "mediated tool-call receipts",
+            "Swissknife consumers",
+            "Playwright coverage",
+            "supervisor-generated follow-up subtasks",
+            "launch Playwright validation gate",
+            "tools/list",
+            "tools/call",
+        ):
+            assert term in source
+
+    assert "MGW-547 attempt 8 proof" in heap_source
+    assert "2026-06-28-mgw-547-attempt-8-launch-playwright-validation-gate.md" in readiness_source
+
+
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
