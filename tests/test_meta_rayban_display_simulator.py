@@ -92,6 +92,7 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
       if (result.widgetId !== fixture.widget_id || result.supported !== false) {{
         throw new Error('bridge result did not preserve widget metadata');
       }}
+<<<<<<< HEAD
       if (disabledResult.requiredAction !== 'enable_display_capability') {{
         throw new Error('disabled state is not represented in bridge results');
       }}
@@ -100,6 +101,14 @@ def test_simulator_js_validates_fixture_and_builds_bridge_result() -> None:
       }}
       if (envelope.raw_payload.widget_cid !== fixture.widget_cid) {{
         throw new Error('interaction envelope did not preserve widget refs');
+=======
+      const readiness = simulator.buildReadinessDescriptor(fixture);
+      if (readiness.simulator_artifacts.descriptor_cid !== fixture.descriptor_cid) {{
+        throw new Error('readiness descriptor did not preserve simulator descriptor CID');
+      }}
+      if (!readiness.simulator_artifacts.mobile_orb.endpoints.includes('/v1/mobile/orb/bind_service')) {{
+        throw new Error('readiness descriptor did not declare mobile ORB binding endpoint');
+>>>>>>> implementation/vai-017-attempt-2-1781246428
       }}
     """
     subprocess.run(["node", "-e", script], check=True, cwd=REPO_ROOT)
@@ -163,6 +172,8 @@ def test_webapp_preview_is_fixed_600x600_and_dpad_operable() -> None:
         "/v1/mobile/orb/invoke_service",
         "/v1/mobile/orb/dispatch_glasses_response",
         "display_action",
+        "SIMULATOR_ARTIFACTS",
+        "simulator_artifacts",
         "TASK_SERVICE_DESCRIPTOR",
         "mcp++/profile-a-idl",
         "ORB_SUBSCRIPTIONS_STORAGE_KEY",
@@ -179,6 +190,19 @@ def test_webapp_preview_readiness_descriptor_passes_linter() -> None:
 
     assert result["ready"] is True
     assert result["failure_ids"] == []
+    widget_id = readiness["widgets"][0]["widget_id"]
+    widget_check_id = (
+        f"widget_{widget_id.replace('.', '_').replace('-', '_').replace('@', '_').lower()}"
+        "_simulator_mobile_orb_artifacts"
+    )
+    assert (
+        widget_check_id in {check["id"] for check in result["checks"]}
+    )
+    assert readiness["simulator_artifacts"]["descriptor_cid"] == readiness["widgets"][0]["descriptor_cid"]
+    assert (
+        readiness["simulator_artifacts"]["mobile_orb"]["parent_receipt_cid"]
+        == readiness["widgets"][0]["orb_receipt_cid"]
+    )
     assert readiness["widgets"][0]["browser_preview"]["renderer"].endswith("webapp/app.js")
 
 
