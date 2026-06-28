@@ -1,12 +1,12 @@
 """Tests for agent service."""
 
 import pytest
+from test_mcp_ipfs_provider import _FakeMCPClient
 
-from handsfree.agents.service import AgentService
 from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
+from handsfree.agents.service import AgentService
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import get_agent_tasks, update_agent_task_state
-from test_mcp_ipfs_provider import _FakeMCPClient
 
 
 @pytest.fixture
@@ -314,7 +314,7 @@ class TestNotifications:
         self, agent_service, db_conn, test_user_id
     ):
         """Completion notifications should mention when local execution fell back to remote."""
-        from handsfree.db.agent_tasks import create_agent_task, get_agent_tasks
+        from handsfree.db.agent_tasks import create_agent_task
         from handsfree.db.notifications import list_notifications
 
         task = create_agent_task(
@@ -564,10 +564,11 @@ class TestNotifications:
         self, db_conn, test_user_id, monkeypatch
     ):
         """Completed MCP tasks should notify with stored result preview/output."""
+        from test_mcp_ipfs_provider import _FakeMCPClient
+
         from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
         from handsfree.agents.service import AgentService
         from handsfree.db.notifications import list_notifications
-        from test_mcp_ipfs_provider import _FakeMCPClient
 
         monkeypatch.setenv("HANDSFREE_AGENT_ENABLE_IPFS_DATASETS_MCP", "true")
         fake_provider = IPFSDatasetsMCPAgentProvider(client=_FakeMCPClient())

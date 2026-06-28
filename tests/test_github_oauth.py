@@ -30,6 +30,7 @@ def auth_headers():
     """Create authentication headers for dev mode."""
     # Use FIXTURE_USER_ID from handsfree.auth for consistent testing
     from handsfree.auth import FIXTURE_USER_ID
+
     return {"X-User-ID": FIXTURE_USER_ID}
 
 
@@ -50,7 +51,7 @@ class TestGitHubOAuthStart:
         assert "state" in data
         assert data["state"] is not None
         assert len(data["state"]) > 20  # State should be a reasonably long random string
-        
+
         # Check that state is included in the authorize URL
         assert "https://github.com/login/oauth/authorize" in data["authorize_url"]
         assert "client_id=test_client_id" in data["authorize_url"]
@@ -115,7 +116,7 @@ class TestGitHubOAuthCallback:
         )
         assert start_response.status_code == 200
         state_token = start_response.json()["state"]
-        
+
         # Mock GitHub OAuth token exchange response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -165,7 +166,7 @@ class TestGitHubOAuthCallback:
             headers=auth_headers,
         )
         state_token = start_response.json()["state"]
-        
+
         response = client.get(
             f"/v1/github/oauth/callback?state={state_token}",
             headers=auth_headers,
@@ -214,7 +215,7 @@ class TestGitHubOAuthCallback:
             headers=auth_headers,
         )
         state_token = start_response.json()["state"]
-        
+
         # Mock GitHub OAuth token exchange response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -261,7 +262,7 @@ class TestGitHubOAuthCallback:
             headers=auth_headers,
         )
         state_token = start_response.json()["state"]
-        
+
         # Mock GitHub OAuth error response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -296,7 +297,7 @@ class TestGitHubOAuthCallback:
             headers=auth_headers,
         )
         state_token = start_response.json()["state"]
-        
+
         # Mock HTTP error
         mock_response = Mock()
         mock_response.status_code = 500
@@ -328,7 +329,7 @@ class TestGitHubOAuthCallback:
             headers=auth_headers,
         )
         state_token = start_response.json()["state"]
-        
+
         # Mock successful GitHub response
         mock_response = Mock()
         mock_response.status_code = 200
@@ -361,7 +362,7 @@ class TestGitHubOAuthCallback:
             headers=auth_headers,
         )
         state_token = start_response.json()["state"]
-        
+
         # Clear OAuth env vars
         monkeypatch.delenv("GITHUB_OAUTH_CLIENT_ID", raising=False)
         monkeypatch.delenv("GITHUB_OAUTH_CLIENT_SECRET", raising=False)
@@ -400,7 +401,7 @@ class TestOAuthIntegration:
         start_data = start_response.json()
         authorize_url = start_data["authorize_url"]
         state_token = start_data["state"]
-        
+
         assert "github.com/login/oauth/authorize" in authorize_url
         assert state_token is not None
         assert f"state={state_token}" in authorize_url

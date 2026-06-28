@@ -36,8 +36,7 @@ class TransportProvider(Protocol):
 class MessageHandler(Protocol):
     """Callback type for inbound peer messages."""
 
-    def __call__(self, peer_id: str, payload: bytes) -> None:
-        ...
+    def __call__(self, peer_id: str, payload: bytes) -> None: ...
 
 
 def get_transport_provider() -> TransportProvider:

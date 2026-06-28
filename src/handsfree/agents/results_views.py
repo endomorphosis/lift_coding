@@ -63,9 +63,7 @@ def resolve_result_query(
     if view:
         view_config = RESULT_VIEWS.get(view)
         if view_config is None:
-            raise ValueError(
-                f"view must be one of: {', '.join(supported_result_views())}"
-            )
+            raise ValueError(f"view must be one of: {', '.join(supported_result_views())}")
         preset = preset or view_config.get("preset")
         latest_only = latest_only or bool(view_config.get("latest_only"))
         if sort == "updated_at":
@@ -76,9 +74,7 @@ def resolve_result_query(
     if preset:
         preset_config = RESULT_PRESETS.get(preset)
         if preset_config is None:
-            raise ValueError(
-                f"preset must be one of: {', '.join(supported_result_presets())}"
-            )
+            raise ValueError(f"preset must be one of: {', '.join(supported_result_presets())}")
         provider = provider or preset_config.get("provider")
         capability = capability or preset_config.get("capability")
 

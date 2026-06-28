@@ -7,7 +7,7 @@ from handsfree.models import PrivacyMode
 def test_profile_config_has_privacy_mode():
     """Test that ProfileConfig includes privacy_mode field."""
     config = ProfileConfig.for_profile(Profile.DEFAULT)
-    assert hasattr(config, 'privacy_mode')
+    assert hasattr(config, "privacy_mode")
     assert isinstance(config.privacy_mode, PrivacyMode)
 
 
@@ -21,7 +21,7 @@ def test_all_profiles_default_to_strict():
         Profile.RELAXED,
         Profile.DEFAULT,
     ]
-    
+
     for profile in profiles:
         config = ProfileConfig.for_profile(profile)
         assert config.privacy_mode == PrivacyMode.STRICT, (
@@ -78,7 +78,7 @@ def test_profile_config_custom_privacy_mode():
         detail_level="moderate",
         privacy_mode=PrivacyMode.BALANCED,
     )
-    
+
     assert config.privacy_mode == PrivacyMode.BALANCED
 
 
@@ -95,5 +95,5 @@ def test_profile_config_debug_privacy_mode():
         detail_level="detailed",
         privacy_mode=PrivacyMode.DEBUG,
     )
-    
+
     assert config.privacy_mode == PrivacyMode.DEBUG

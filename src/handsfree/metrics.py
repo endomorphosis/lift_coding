@@ -180,21 +180,11 @@ class MetricsCollector:
                     "count": len(self.command_latencies),
                 },
                 "display_widget_metrics": {
-                    "render_success_total": sum(
-                        self.display_widget_render_success_counts.values()
-                    ),
-                    "render_success_counts": dict(
-                        self.display_widget_render_success_counts
-                    ),
-                    "policy_denial_total": sum(
-                        self.display_widget_policy_denial_counts.values()
-                    ),
-                    "policy_denial_counts": dict(
-                        self.display_widget_policy_denial_counts
-                    ),
-                    "bridge_error_total": sum(
-                        self.display_widget_bridge_error_counts.values()
-                    ),
+                    "render_success_total": sum(self.display_widget_render_success_counts.values()),
+                    "render_success_counts": dict(self.display_widget_render_success_counts),
+                    "policy_denial_total": sum(self.display_widget_policy_denial_counts.values()),
+                    "policy_denial_counts": dict(self.display_widget_policy_denial_counts),
+                    "bridge_error_total": sum(self.display_widget_bridge_error_counts.values()),
                     "bridge_error_counts": dict(self.display_widget_bridge_error_counts),
                     "render_latency_ms": {
                         "p50": display_widget_latency_p50,

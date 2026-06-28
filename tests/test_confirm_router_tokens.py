@@ -49,12 +49,14 @@ class TestConfirmRouterTokens:
         data = confirm_response.json()
         assert data["status"] == "ok"
         assert data["intent"]["name"] == "request_review.confirmed"
-        
+
         # Should NOT contain "(Fixture response)" text anymore
         assert "(Fixture response)" not in data["spoken_text"]
-        
+
         # Should mention the action was executed
-        assert "review requested" in data["spoken_text"].lower() and ("alice" in data["spoken_text"].lower() or "reviewer" in data["spoken_text"].lower())
+        assert "review requested" in data["spoken_text"].lower() and (
+            "alice" in data["spoken_text"].lower() or "reviewer" in data["spoken_text"].lower()
+        )
 
     def test_confirm_pr_request_review_router_token_cli_fixture(
         self, monkeypatch: pytest.MonkeyPatch
@@ -118,16 +120,14 @@ class TestConfirmRouterTokens:
         data = confirm_response.json()
         assert data["status"] == "ok"
         assert data["intent"]["name"] == "merge.confirmed"
-        
+
         # Should NOT contain "(Fixture response)" text
         assert "(Fixture response)" not in data["spoken_text"]
-        
+
         # Should mention merge action
         assert "merged" in data["spoken_text"].lower()
 
-    def test_confirm_pr_merge_router_token_cli_fixture(
-        self, monkeypatch: pytest.MonkeyPatch
-    ):
+    def test_confirm_pr_merge_router_token_cli_fixture(self, monkeypatch: pytest.MonkeyPatch):
         """Test router-token merge confirmation via CLI fixture mode."""
         monkeypatch.setenv("HANDSFREE_CLI_FIXTURE_MODE", "true")
         monkeypatch.setenv("HANDSFREE_GH_CLI_ENABLED", "true")
@@ -185,18 +185,21 @@ class TestConfirmRouterTokens:
 
         assert confirm_response.status_code == 200
         data = confirm_response.json()
-        
+
         # Agent service should be available (DB initialized in tests)
         # If not available, should get a clear error, not "(Fixture response)"
         assert "(Fixture response)" not in data["spoken_text"]
-        
+
         # Should either succeed with task creation or fail with clear error
         if data["status"] == "ok":
             assert data["intent"]["name"] == "agent.delegate.confirmed"
             assert "task" in data["spoken_text"].lower() or "created" in data["spoken_text"].lower()
         else:
             # If it fails, should be due to service availability, not fixture mode
-            assert "not available" in data["spoken_text"].lower() or "required" in data["spoken_text"].lower()
+            assert (
+                "not available" in data["spoken_text"].lower()
+                or "required" in data["spoken_text"].lower()
+            )
 
     def test_confirm_router_token_with_idempotency(self):
         """Test that idempotency works for router token confirmations."""
@@ -310,19 +313,19 @@ class TestConfirmRouterTokens:
 
             if cmd_response.status_code == 200:
                 cmd_data = cmd_response.json()
-                
+
                 # Check command response for PR-005 references
                 assert "PR-005" not in cmd_data["spoken_text"]
-                
+
                 if cmd_data["status"] == "needs_confirmation":
                     token = cmd_data["pending_action"]["token"]
-                    
+
                     # Confirm and check confirmation response
                     confirm_response = client.post(
                         "/v1/commands/confirm",
                         json={"token": token},
                     )
-                    
+
                     if confirm_response.status_code == 200:
                         confirm_data = confirm_response.json()
                         assert "PR-005" not in confirm_data["spoken_text"]

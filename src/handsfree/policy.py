@@ -6,7 +6,7 @@ based on repository policies.
 
 from dataclasses import dataclass
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 
 import duckdb
 
@@ -14,7 +14,7 @@ from handsfree.db.repo_policies import RepoPolicy, get_default_policy, get_repo_
 from handsfree.policy_config import get_policy_config
 
 
-class PolicyDecision(str, Enum):
+class PolicyDecision(StrEnum):
     """Policy decision enum."""
 
     ALLOW = "allow"

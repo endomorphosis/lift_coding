@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import hashlib
 import re
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import Any, Callable
-
+from typing import Any
 
 try:  # pragma: no cover - optional integration surface
     from ipfs_datasets_py.logic.api import compile_nl_to_policy
@@ -29,7 +29,7 @@ STRICT_TEMPLATE_EXAMPLES = (
 
 
 def _stable_policy_id(text: str, profile: str) -> str:
-    digest = hashlib.sha256(f"{profile}\n{text.strip().lower()}".encode("utf-8")).hexdigest()[:16]
+    digest = hashlib.sha256(f"{profile}\n{text.strip().lower()}".encode()).hexdigest()[:16]
     return f"control-surface-policy-{digest}"
 
 
@@ -130,7 +130,9 @@ class CompiledControlSurfacePolicy:
             payload["fallback"] = {
                 "success": bool(getattr(self.fallback_result, "success", False)),
                 "errors": [str(item) for item in getattr(self.fallback_result, "errors", []) or []],
-                "warnings": [str(item) for item in getattr(self.fallback_result, "warnings", []) or []],
+                "warnings": [
+                    str(item) for item in getattr(self.fallback_result, "warnings", []) or []
+                ],
                 "metadata": dict(getattr(self.fallback_result, "metadata", {}) or {}),
             }
         return payload
@@ -213,7 +215,9 @@ class StrictTemplateControlSurfacePolicyCompiler:
                 if logic_warning:
                     warnings.append(logic_warning)
                 if logic_result is not None:
-                    metadata["compile_nl_to_policy"] = _summarize_optional_logic_result(logic_result)
+                    metadata["compile_nl_to_policy"] = _summarize_optional_logic_result(
+                        logic_result
+                    )
 
             return CompiledControlSurfacePolicy(
                 policy_id=resolved_policy_id,
@@ -241,7 +245,9 @@ class StrictTemplateControlSurfacePolicyCompiler:
             },
         )
 
-    def _compile_canonical_sentence(self, sentence: str, *, policy_id: str) -> tuple[Any | None, str]:
+    def _compile_canonical_sentence(
+        self, sentence: str, *, policy_id: str
+    ) -> tuple[Any | None, str]:
         if compile_nl_to_policy is None:
             return None, "ipfs_datasets_py.logic.api.compile_nl_to_policy unavailable"
         try:
@@ -288,7 +294,9 @@ class StrictTemplateControlSurfacePolicyCompiler:
         )
 
     @staticmethod
-    def _build_require_confirmation_rule(source_text: str, match: re.Match[str]) -> TemplatePolicyRule:
+    def _build_require_confirmation_rule(
+        source_text: str, match: re.Match[str]
+    ) -> TemplatePolicyRule:
         method = _canonical_token(match.group("method"))
         return TemplatePolicyRule(
             template_id="require_confirmation_before_method",
@@ -301,7 +309,9 @@ class StrictTemplateControlSurfacePolicyCompiler:
         )
 
     @staticmethod
-    def _build_agent_confirmation_rule(source_text: str, match: re.Match[str]) -> TemplatePolicyRule:
+    def _build_agent_confirmation_rule(
+        source_text: str, match: re.Match[str]
+    ) -> TemplatePolicyRule:
         method = _canonical_token(match.group("method"))
         return TemplatePolicyRule(
             template_id="never_let_agents_method_unless_yes",
@@ -349,7 +359,9 @@ class ControlSurfacePolicyCompiler:
             },
         )
 
-    def compile_freeform(self, text: str, *, policy_id: str | None = None) -> CompiledControlSurfacePolicy:
+    def compile_freeform(
+        self, text: str, *, policy_id: str | None = None
+    ) -> CompiledControlSurfacePolicy:
         source_text = _clean_value(text)
         resolved_policy_id = policy_id or _stable_policy_id(source_text, GENERAL_NL_PROFILE)
         compiler = self.fallback_compiler
@@ -360,12 +372,16 @@ class ControlSurfacePolicyCompiler:
                     profile=GENERAL_NL_PROFILE,
                     source_text=source_text,
                     success=False,
-                    errors=("NLUCANPolicyCompiler unavailable for freeform control-surface policy.",),
+                    errors=(
+                        "NLUCANPolicyCompiler unavailable for freeform control-surface policy.",
+                    ),
                 )
             compiler = NLUCANPolicyCompiler(policy_id=resolved_policy_id, default_actor="user")
 
         try:
-            result, explanation = compiler.compile_explain([source_text], policy_id=resolved_policy_id)
+            result, explanation = compiler.compile_explain(
+                [source_text], policy_id=resolved_policy_id
+            )
         except AttributeError:
             try:
                 result = compiler.compile([source_text], policy_id=resolved_policy_id)
@@ -400,7 +416,9 @@ class ControlSurfacePolicyCompiler:
         )
 
 
-def compile_user_policy_template(text: str, *, policy_id: str | None = None) -> CompiledControlSurfacePolicy:
+def compile_user_policy_template(
+    text: str, *, policy_id: str | None = None
+) -> CompiledControlSurfacePolicy:
     """Compile only the deterministic strict-template profile."""
 
     return StrictTemplateControlSurfacePolicyCompiler().compile(text, policy_id=policy_id)
@@ -414,5 +432,6 @@ def compile_control_surface_policy(
 ) -> CompiledControlSurfacePolicy:
     """Compile a user-authored multimodal control policy with strict templates first."""
 
-    return ControlSurfacePolicyCompiler(allow_fallback=allow_fallback).compile(text, policy_id=policy_id)
-
+    return ControlSurfacePolicyCompiler(allow_fallback=allow_fallback).compile(
+        text, policy_id=policy_id
+    )

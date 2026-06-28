@@ -10,11 +10,9 @@ from pathlib import Path
 from jsonschema import Draft202012Validator, ValidationError
 from referencing import Registry, Resource
 
-
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from hallucinate_app.control_surface_intents import normalize_interaction
-
 
 HALLUCINATE_ROOT = Path(__file__).resolve().parents[3]
 CONTRACT_DIR = HALLUCINATE_ROOT / "swissknife" / "contracts"
@@ -34,8 +32,7 @@ class TestControlSurfaceSchemas(unittest.TestCase):
             for name, filename in SCHEMA_FILES.items()
         }
         cls.registry = Registry().with_resources(
-            (schema["$id"], Resource.from_contents(schema))
-            for schema in cls.schemas.values()
+            (schema["$id"], Resource.from_contents(schema)) for schema in cls.schemas.values()
         )
 
     def _validator(self, schema_name: str) -> Draft202012Validator:
@@ -276,8 +273,12 @@ class TestControlSurfaceSchemas(unittest.TestCase):
         self._validator("policy_decision").validate(decision)
         self._validator("mediation_receipt").validate(receipt)
 
-        self.assertEqual(receipt["policy_decision"]["compiled_policy_cid"], "bafy-policy-quiet-hours")
-        self.assertEqual(receipt["interaction_envelope"]["interaction_id"], receipt["interaction_id"])
+        self.assertEqual(
+            receipt["policy_decision"]["compiled_policy_cid"], "bafy-policy-quiet-hours"
+        )
+        self.assertEqual(
+            receipt["interaction_envelope"]["interaction_id"], receipt["interaction_id"]
+        )
 
     def test_missing_compiled_policy_binding_is_rejected(self) -> None:
         contract = self._sample_contract()

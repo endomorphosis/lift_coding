@@ -13,7 +13,7 @@ class ActorIdentity:
     delegation_chain: list[str] = field(default_factory=list)
 
     @classmethod
-    def from_mapping(cls, payload: dict[str, Any] | None) -> "ActorIdentity":
+    def from_mapping(cls, payload: dict[str, Any] | None) -> ActorIdentity:
         data = payload or {}
         return cls(
             type=str(data.get("type") or "user"),
@@ -41,7 +41,7 @@ class RuntimeContext:
     device_context: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
-    def from_mapping(cls, payload: dict[str, Any] | None) -> "RuntimeContext":
+    def from_mapping(cls, payload: dict[str, Any] | None) -> RuntimeContext:
         data = payload or {}
         return cls(
             local_time=str(data.get("local_time") or ""),

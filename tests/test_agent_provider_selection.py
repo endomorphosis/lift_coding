@@ -152,8 +152,8 @@ class TestProviderSelection:
 
         # Create task without specifying provider
         service = AgentService(db_conn)
-        
-        with patch('handsfree.agents.service.get_provider', return_value=mock_provider):
+
+        with patch("handsfree.agents.service.get_provider", return_value=mock_provider):
             result = service.delegate(
                 user_id="test-user",
                 instruction="test task",

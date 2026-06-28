@@ -1,6 +1,10 @@
 """Tests for MCP result envelope normalization."""
 
-from handsfree.mcp import build_result_envelope, build_result_envelope_from_invocation, envelope_to_trace
+from handsfree.mcp import (
+    build_result_envelope,
+    build_result_envelope_from_invocation,
+    envelope_to_trace,
+)
 from handsfree.mcp.models import MCPToolInvocationResult
 
 

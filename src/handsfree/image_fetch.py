@@ -148,12 +148,12 @@ def fetch_image_data(uri: str) -> bytes:
                 data = file_path.read_bytes()
             except OSError as read_err:
                 raise RuntimeError("Cannot read image file") from read_err
-            
+
             if len(data) > max_size:
                 raise RuntimeError(
                     f"Local image size {len(data)} bytes exceeds maximum "
                     f"allowed size of {max_size} bytes"
-                )
+                ) from e
             return data
 
         if file_size > max_size:

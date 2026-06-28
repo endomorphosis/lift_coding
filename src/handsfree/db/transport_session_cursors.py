@@ -65,7 +65,11 @@ def store_transport_session_cursor(
             cursor.resume_token,
             json.dumps(list(cursor.capabilities), separators=(",", ":"), sort_keys=True),
             datetime.fromtimestamp(
-                (cursor.updated_at_ms if cursor.updated_at_ms is not None else int(datetime.now(UTC).timestamp() * 1000))
+                (
+                    cursor.updated_at_ms
+                    if cursor.updated_at_ms is not None
+                    else int(datetime.now(UTC).timestamp() * 1000)
+                )
                 / 1000,
                 tz=UTC,
             ),

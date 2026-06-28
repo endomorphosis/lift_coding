@@ -19,12 +19,14 @@ _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (  # noqa: E402
     ActionContractSyncSpec,
     JavaScriptActionContractConfig,
     PythonActionContractConfig,
     build_action_contract_sync_runner_from_spec,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_repo_script_bootstrap,  # noqa: E402
 )
 
 _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)

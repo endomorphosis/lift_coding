@@ -9,8 +9,8 @@ from handsfree.models import (
     AICapabilityExecuteResponse,
     AICopilotOutput,
     AIFailureAnalysisOutput,
-    AISimilarFailuresOutput,
     AIRAGSummaryOutput,
+    AISimilarFailuresOutput,
     AIStoredOutputRead,
 )
 

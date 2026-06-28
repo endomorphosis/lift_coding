@@ -28,9 +28,7 @@ from handsfree.metrics import get_metrics_collector  # noqa: E402
 from handsfree.models import MetaGlassesDisplayWidgetMobileActionPayload  # noqa: E402
 
 SPEC_PATH = (
-    Path(__file__).resolve().parents[1]
-    / "spec"
-    / "meta_glasses_display_widget_orb_interface.json"
+    Path(__file__).resolve().parents[1] / "spec" / "meta_glasses_display_widget_orb_interface.json"
 )
 
 MANIFEST = {

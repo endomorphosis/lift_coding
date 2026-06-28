@@ -2,7 +2,6 @@
 
 import os
 import uuid
-from datetime import UTC, datetime
 from unittest.mock import patch
 
 import pytest
@@ -349,7 +348,7 @@ def test_run_loop_sleeps_between_iterations(enable_runner):
 def test_run_once_error_handling(mock_db, enable_runner):
     """Test run_once handles errors gracefully."""
     # Create a task
-    task = create_agent_task(
+    create_agent_task(
         conn=mock_db,
         user_id="test-user",
         provider="test-provider",

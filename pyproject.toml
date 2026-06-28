@@ -20,7 +20,10 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
-ignore = ["E402"]  # Allow module-level imports not at top (needed for pytest.importorskip)
+ignore = [
+	"E402",  # Allow module-level imports not at top (needed for pytest.importorskip)
+	"E501",  # Preserve existing long literals/docs without large non-functional churn.
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -2,12 +2,12 @@
 
 import re
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 from handsfree.models import PrivacyMode
 
 
-class Profile(str, Enum):
+class Profile(StrEnum):
     """User context profiles affecting response verbosity and confirmation strictness."""
 
     WORKOUT = "workout"

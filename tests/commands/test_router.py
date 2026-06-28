@@ -259,17 +259,15 @@ class TestPRIntents:
     ) -> None:
         """Test pr.summarize with workout profile."""
         intent = parser.parse("summarize pr 456")
-        response = router.route(intent, Profile.WORKOUT)
+        router.route(intent, Profile.WORKOUT)
 
         # Workout should have shorter summary
 
 
-class TestAIIntents:
+class TestAIExecutionIntents:
     """Test AI intent routing."""
 
-    def test_ai_summarize_diff(
-        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
-    ) -> None:
+    def test_ai_summarize_diff(self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch) -> None:
         """Router should handle ai.summarize_diff through Copilot CLI fixtures."""
         intent = parser.parse("summarize diff for pr 123")
         router = CommandRouter(PendingActionManager())
@@ -282,9 +280,7 @@ class TestAIIntents:
         assert response["debug"]["capability_id"] == "copilot.pr.diff_summary"
         assert response["debug"]["execution_mode"] == "fixture"
 
-    def test_ai_rag_summary(
-        self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
-    ) -> None:
+    def test_ai_rag_summary(self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch) -> None:
         """Router should handle ai.rag_summary through the shared AI executor."""
         intent = parser.parse("rag summary for pr 123 on openai/example")
         router = CommandRouter(PendingActionManager())
@@ -390,7 +386,9 @@ class TestAIIntents:
         assert response["status"] == "ok"
         assert response["debug"]["capability_id"] == "github.pr.accelerated_summary"
         assert response["debug"]["policy_resolution"]["requested_workflow"] == "pr_rag_summary"
-        assert response["debug"]["policy_resolution"]["resolved_workflow"] == "accelerated_pr_summary"
+        assert (
+            response["debug"]["policy_resolution"]["resolved_workflow"] == "accelerated_pr_summary"
+        )
         assert response["debug"]["policy_resolution"]["policy_applied"] is True
 
     def test_ai_rag_summary_can_select_accelerated_backend_from_phrase(
@@ -738,7 +736,10 @@ class TestAIIntents:
         assert response["spoken_text"] == "Accelerated failure analysis"
         assert response["debug"]["capability_id"] == "github.check.accelerated_failure_explain"
         assert response["debug"]["policy_resolution"]["requested_workflow"] == "failure_rag_explain"
-        assert response["debug"]["policy_resolution"]["resolved_workflow"] == "accelerated_failure_explain"
+        assert (
+            response["debug"]["policy_resolution"]["resolved_workflow"]
+            == "accelerated_failure_explain"
+        )
         assert response["debug"]["policy_resolution"]["policy_applied"] is True
 
     def test_ai_explain_failure_can_select_accelerated_backend_and_persist(
@@ -1023,7 +1024,9 @@ class TestAIIntents:
 
         monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
 
-        router.route(parser.parse("summarize pr 123"), Profile.DEFAULT, session_id="similar-session")
+        router.route(
+            parser.parse("summarize pr 123"), Profile.DEFAULT, session_id="similar-session"
+        )
         response = router.route(
             parser.parse("find similar failures"),
             Profile.DEFAULT,
@@ -1104,7 +1107,9 @@ class TestAIIntents:
                 }
             },
         )
-        intent = parser.parse("find similar workflow CI Linux failures for pr 125 on openai/example")
+        intent = parser.parse(
+            "find similar workflow CI Linux failures for pr 125 on openai/example"
+        )
         router = CommandRouter(PendingActionManager(), db_conn=db_conn, github_provider=object())
 
         class StubExecution:

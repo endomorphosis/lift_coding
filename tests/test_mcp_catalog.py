@@ -24,22 +24,40 @@ class TestMCPCatalog:
         assert capabilities["ipfs_cat"].execution_modes == ("direct_import", "mcp_remote")
 
     def test_resolve_provider_capability_uses_explicit_or_inferred_value(self):
-        assert resolve_provider_capability("ipfs_datasets_mcp", "dataset_discovery") == "dataset_discovery"
-        assert resolve_provider_capability(
-            "ipfs_datasets_mcp",
-            instruction="find legal datasets about labor law",
-        ) == "dataset_discovery"
+        assert (
+            resolve_provider_capability("ipfs_datasets_mcp", "dataset_discovery")
+            == "dataset_discovery"
+        )
+        assert (
+            resolve_provider_capability(
+                "ipfs_datasets_mcp",
+                instruction="find legal datasets about labor law",
+            )
+            == "dataset_discovery"
+        )
         assert resolve_provider_capability("ipfs_datasets_mcp", "ipfs_pin") is None
 
     def test_resolve_capability_execution_mode_prefers_supported_mode(self):
-        assert resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_pin", "direct_import") == "direct_import"
-        assert resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_pin", "api_live") == "mcp_remote"
+        assert (
+            resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_pin", "direct_import")
+            == "direct_import"
+        )
+        assert (
+            resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_pin", "api_live")
+            == "mcp_remote"
+        )
 
     def test_resolve_capability_execution_mode_respects_remote_only_policy(self, monkeypatch):
         monkeypatch.setenv("HANDSFREE_MCP_IPFS_KIT_ALLOW_DIRECT_EXECUTION", "false")
 
-        assert resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_pin", "direct_import") == "mcp_remote"
-        assert resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_add", "direct_import") == "mcp_remote"
+        assert (
+            resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_pin", "direct_import")
+            == "mcp_remote"
+        )
+        assert (
+            resolve_capability_execution_mode("ipfs_kit_mcp", "ipfs_add", "direct_import")
+            == "mcp_remote"
+        )
 
     def test_get_capability_descriptor_returns_canonical_metadata(self):
         descriptor = get_capability_descriptor("agentic_fetch")

@@ -265,8 +265,18 @@ def _notification_result_action_items(
     if cid:
         items.extend(
             [
-                {"id": "read_cid", "label": "Read CID", "phrase": "read the cid", "params": {"cid": cid}},
-                {"id": "share_cid", "label": "Share CID", "phrase": "share that cid", "params": {"cid": cid}},
+                {
+                    "id": "read_cid",
+                    "label": "Read CID",
+                    "phrase": "read the cid",
+                    "params": {"cid": cid},
+                },
+                {
+                    "id": "share_cid",
+                    "label": "Share CID",
+                    "phrase": "share that cid",
+                    "params": {"cid": cid},
+                },
                 {"id": "pin_result", "label": "Pin", "phrase": "pin that", "params": {"cid": cid}},
                 {
                     "id": "pin_result_local",
@@ -303,7 +313,9 @@ def _notification_result_action_items(
             ]
         )
         items.extend(save_mode_items)
-        items.append({"id": "unpin_result", "label": "Unpin", "phrase": "unpin that", "params": {"cid": cid}})
+        items.append(
+            {"id": "unpin_result", "label": "Unpin", "phrase": "unpin that", "params": {"cid": cid}}
+        )
     else:
         items.extend(save_mode_items)
     normalized_capability = (capability or "").strip().lower()
@@ -404,7 +416,9 @@ def build_notification_card(
         metadata.get("follow_up_actions")
         if isinstance(metadata.get("follow_up_actions"), list) and metadata.get("follow_up_actions")
         else _notification_result_action_items(
-            metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
+            metadata.get("mcp_capability")
+            if isinstance(metadata.get("mcp_capability"), str)
+            else None,
             deep_link,
         )
     )
@@ -417,7 +431,9 @@ def build_notification_card(
         "action_items": _append_local_wearables_actions(action_items, workflow),
         "actions": _append_local_wearables_action_phrases(
             _notification_result_actions(
-                metadata.get("mcp_capability") if isinstance(metadata.get("mcp_capability"), str) else None,
+                metadata.get("mcp_capability")
+                if isinstance(metadata.get("mcp_capability"), str)
+                else None,
                 deep_link,
             ),
             workflow,

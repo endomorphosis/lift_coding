@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
-from typing import Any
-
 
 MCPExecutionMode = str
 
@@ -221,8 +219,7 @@ _ALIASES = {
 }
 
 _SERVER_FAMILY_TO_PROVIDER = {
-    descriptor.server_family: descriptor.provider_name
-    for descriptor in _PROVIDERS.values()
+    descriptor.server_family: descriptor.provider_name for descriptor in _PROVIDERS.values()
 }
 
 _SERVER_FAMILY_ENV_PREFIX = {
@@ -338,7 +335,9 @@ def resolve_capability_execution_mode(
 
     allowed_modes = descriptor.execution_modes
     if not _allow_direct_execution(provider_name):
-        allowed_modes = tuple(mode for mode in descriptor.execution_modes if mode != "direct_import")
+        allowed_modes = tuple(
+            mode for mode in descriptor.execution_modes if mode != "direct_import"
+        )
     if not allowed_modes:
         return None
 

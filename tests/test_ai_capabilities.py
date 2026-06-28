@@ -3,9 +3,9 @@
 import json
 
 from handsfree.ai import (
-    AICapabilityResult,
-    AICapabilityRequest,
     AIBackendFamily,
+    AICapabilityRequest,
+    AICapabilityResult,
     AIExecutionMode,
     AIRequestContext,
     execute_ai_capability,
@@ -77,7 +77,9 @@ def test_execute_ai_request_normalizes_workflow_name(monkeypatch):
             output={"spoken_text": "ok"},
         )
 
-    monkeypatch.setattr("handsfree.ai.capabilities.execute_ai_capability", stub_execute_ai_capability)
+    monkeypatch.setattr(
+        "handsfree.ai.capabilities.execute_ai_capability", stub_execute_ai_capability
+    )
 
     result = execute_ai_request(
         AICapabilityRequest(
@@ -106,7 +108,9 @@ def test_execute_ai_request_normalizes_check_name(monkeypatch):
             output={"spoken_text": "ok"},
         )
 
-    monkeypatch.setattr("handsfree.ai.capabilities.execute_ai_capability", stub_execute_ai_capability)
+    monkeypatch.setattr(
+        "handsfree.ai.capabilities.execute_ai_capability", stub_execute_ai_capability
+    )
 
     result = execute_ai_request(
         AICapabilityRequest(
@@ -623,7 +627,10 @@ def test_execute_github_failure_rag_explain_includes_similar_failures(monkeypatc
     assert len(result.output["related_failures"]) == 1
     assert result.output["related_failures"][0]["pr_number"] == 101
     assert "similar to a prior" in result.output["spoken_text"].lower()
-    assert result.output["trace"]["steps"]["retrieval"]["steps"]["github_checks"]["provider"] == "github_provider"
+    assert (
+        result.output["trace"]["steps"]["retrieval"]["steps"]["github_checks"]["provider"]
+        == "github_provider"
+    )
 
 
 def test_execute_github_failure_rag_explain_can_load_history_from_cids(monkeypatch):

@@ -47,8 +47,9 @@ def test_build_mobile_orb_bind_service_artifacts_include_orb_binding_metadata() 
     assert policy_decision["outcome"] == "allow"
     assert binding_record["control_surface_contract_ref"].startswith("control_surface_contract:")
     assert binding_record["interaction_envelope"]["normalized_intent"]["method"] == "bind_service"
-    assert binding_record["normalized_intent"] == (
-        binding_record["interaction_envelope"]["normalized_intent"]
+    assert (
+        binding_record["normalized_intent"]
+        == (binding_record["interaction_envelope"]["normalized_intent"])
     )
     assert binding_record["mediation_receipt"]["policy_decision"] == policy_decision
     assert binding_record["orb_binding"]["handle"] == binding_handle
@@ -153,9 +154,11 @@ def test_build_mobile_orb_register_artifacts_preserve_interface_cids() -> None:
         transport_preferences=["local", "mcp-server"],
     )
 
-    edge_session_id, control_surface_contract_ref, edge_session = build_mobile_orb_register_artifacts(
-        request=request,
-        registered_at="2026-05-23T00:00:00Z",
+    edge_session_id, control_surface_contract_ref, edge_session = (
+        build_mobile_orb_register_artifacts(
+            request=request,
+            registered_at="2026-05-23T00:00:00Z",
+        )
     )
 
     assert edge_session_id.startswith("sha256:mobile-orb-edge:")

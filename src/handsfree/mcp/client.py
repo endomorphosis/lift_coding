@@ -92,9 +92,13 @@ class MCPClient:
         return MCPToolInvocationResult(
             request_id=str(response.get("id")) if "id" in response else None,
             run_id=result.get("run_id"),
-            status=str(result.get("status", "completed" if not result.get("run_id") else "running")),
+            status=str(
+                result.get("status", "completed" if not result.get("run_id") else "running")
+            ),
             tool_name=str(result.get("tool_name", tool_name)),
-            output=result.get("output", normalized_output) if isinstance(result, dict) else normalized_output,
+            output=result.get("output", normalized_output)
+            if isinstance(result, dict)
+            else normalized_output,
             raw_response=response,
             content=content if isinstance(content, list) else [],
         )
@@ -318,7 +322,9 @@ class MCPClient:
             if response.get("id") == expected_id:
                 return response
             if "method" in response and "id" not in response:
-                logger.debug("Ignoring MCP notification from %s: %s", self.config.server_family, response)
+                logger.debug(
+                    "Ignoring MCP notification from %s: %s", self.config.server_family, response
+                )
                 continue
 
     def _read_stdio_message(self, process: subprocess.Popen[str]) -> dict[str, Any]:
@@ -364,9 +370,7 @@ class MCPClient:
 
         body = process.stdout.read(length)
         if len(body) != length:
-            raise MCPClientError(
-                f"Incomplete MCP stdio response from {self.config.server_family}"
-            )
+            raise MCPClientError(f"Incomplete MCP stdio response from {self.config.server_family}")
 
         try:
             return json.loads(body)

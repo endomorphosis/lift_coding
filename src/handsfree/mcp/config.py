@@ -64,7 +64,9 @@ def get_mcp_server_config(server_family: str) -> MCPServerConfig:
         timeout_s=timeout_s,
         poll_interval_s=poll_interval_s,
         enabled=True,
-        tool_name=(os.getenv(f"{prefix}_TOOL_NAME", _DEFAULT_TOOL_NAME[server_family]).strip() or None),
+        tool_name=(
+            os.getenv(f"{prefix}_TOOL_NAME", _DEFAULT_TOOL_NAME[server_family]).strip() or None
+        ),
         rpc_path=os.getenv(f"{prefix}_RPC_PATH", os.getenv("HANDSFREE_MCP_RPC_PATH", "/mcp")),
         protocol_version=os.getenv(
             "HANDSFREE_MCP_PROTOCOL_VERSION",
@@ -81,13 +83,11 @@ def get_mcp_server_config(server_family: str) -> MCPServerConfig:
         transport=os.getenv(
             f"{prefix}_TRANSPORT",
             os.getenv("HANDSFREE_MCP_TRANSPORT", "http"),
-        ).strip().lower(),
+        )
+        .strip()
+        .lower(),
         command=os.getenv(f"{prefix}_COMMAND"),
-        args=[
-            part
-            for part in os.getenv(f"{prefix}_ARGS", "").split(" ")
-            if part.strip()
-        ],
+        args=[part for part in os.getenv(f"{prefix}_ARGS", "").split(" ") if part.strip()],
         preferred_execution_mode=(
             os.getenv(f"{prefix}_PREFERRED_EXECUTION_MODE", "").strip().lower() or None
         ),

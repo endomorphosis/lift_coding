@@ -1,13 +1,13 @@
 """Pydantic models aligned with spec/openapi.yaml."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
 
-class Profile(str, Enum):
+class Profile(StrEnum):
     """Profile enum."""
 
     WORKOUT = "workout"
@@ -16,7 +16,7 @@ class Profile(str, Enum):
     DEFAULT = "default"
 
 
-class PrivacyMode(str, Enum):
+class PrivacyMode(StrEnum):
     """Privacy mode enum for controlling data exposure in responses."""
 
     STRICT = "strict"  # No images, no code snippets, summaries only
@@ -31,7 +31,7 @@ class TextInput(BaseModel):
     text: str = Field(..., max_length=2000)
 
 
-class AudioFormat(str, Enum):
+class AudioFormat(StrEnum):
     """Audio format enum."""
 
     WAV = "wav"
@@ -124,7 +124,7 @@ class PendingAction(BaseModel):
     summary: str
 
 
-class MetaGlassesDisplayWidgetAction(str, Enum):
+class MetaGlassesDisplayWidgetAction(StrEnum):
     """Backend-visible display widget action names for mobile dispatch."""
 
     RENDER = "render"
@@ -137,7 +137,7 @@ class MetaGlassesDisplayWidgetAction(str, Enum):
     SUBSCRIBE_UPDATES = "subscribe_updates"
 
 
-class MetaGlassesDisplayWidgetOperation(str, Enum):
+class MetaGlassesDisplayWidgetOperation(StrEnum):
     """Swissknife ORB display widget operations accepted by HandsFree."""
 
     RENDER_WIDGET = "render_widget"
@@ -151,7 +151,7 @@ class MetaGlassesDisplayWidgetOperation(str, Enum):
     SUBSCRIBE_UPDATES = "subscribe_updates"
 
 
-class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
+class MetaGlassesDisplayWidgetMobileActionType(StrEnum):
     """Client-local mobile action IDs for display widget operations."""
 
     RENDER = "mobile_render_display_widget"
@@ -164,7 +164,7 @@ class MetaGlassesDisplayWidgetMobileActionType(str, Enum):
     SUBSCRIBE_UPDATES = "mobile_subscribe_display_widget_updates"
 
 
-class MetaGlassesDisplayWidgetFocusDirection(str, Enum):
+class MetaGlassesDisplayWidgetFocusDirection(StrEnum):
     """Display widget focus movement direction."""
 
     NEXT = "next"
@@ -392,7 +392,9 @@ class MetaGlassesMobileOrbInvokeServiceResponse(MetaGlassesMobileOrbControlSurfa
     spoken_text: str | None = None
 
 
-class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(MetaGlassesMobileOrbControlSurfaceArtifacts):
+class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(
+    MetaGlassesMobileOrbControlSurfaceArtifacts
+):
     """Subscribe to updates from a bound service."""
 
     binding_handle: str = Field(..., min_length=1)
@@ -402,7 +404,9 @@ class MetaGlassesMobileOrbSubscribeServiceUpdatesRequest(MetaGlassesMobileOrbCon
     correlation_id: str = Field(..., min_length=1)
 
 
-class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(MetaGlassesMobileOrbControlSurfaceArtifacts):
+class MetaGlassesMobileOrbSubscribeServiceUpdatesResponse(
+    MetaGlassesMobileOrbControlSurfaceArtifacts
+):
     """Stream subscription registration result."""
 
     subscription_id: str
@@ -416,7 +420,9 @@ class MetaGlassesMobileOrbDispatchResponseRequest(MetaGlassesMobileOrbControlSur
 
     edge_session_id: str = Field(..., min_length=1)
     result: dict[str, Any] = Field(default_factory=dict)
-    render_targets: list[Literal["display_widget", "display_webapp", "audio", "mobile_card", "notification"]]
+    render_targets: list[
+        Literal["display_widget", "display_webapp", "audio", "mobile_card", "notification"]
+    ]
     fallback: dict[str, Any] | None = None
     correlation_id: str = Field(..., min_length=1)
     parent_receipt_cids: list[str] = Field(default_factory=list)
@@ -493,7 +499,7 @@ class DebugInfo(BaseModel):
     profile_metadata: dict[str, Any] | None = None  # Optional profile info (speech_rate, etc.)
 
 
-class CommandStatus(str, Enum):
+class CommandStatus(StrEnum):
     """Command status."""
 
     OK = "ok"
@@ -566,8 +572,7 @@ class CommandResponse(BaseModel):
                         }
                     ],
                 },
-            }
-            ,
+            },
             "examples": [
                 {
                     "status": "ok",
@@ -817,7 +822,7 @@ class ConfirmRequest(BaseModel):
     idempotency_key: str | None = None
 
 
-class InboxItemType(str, Enum):
+class InboxItemType(StrEnum):
     """Inbox item type."""
 
     PR = "pr"
@@ -863,7 +868,7 @@ class RerunChecksRequest(BaseModel):
     idempotency_key: str | None = None
 
 
-class MergeMethod(str, Enum):
+class MergeMethod(StrEnum):
     """Merge method."""
 
     MERGE = "merge"
@@ -909,7 +914,7 @@ class AICapabilityContext(BaseModel):
     session_id: str | None = None
 
 
-class AIWorkflow(str, Enum):
+class AIWorkflow(StrEnum):
     """Higher-level AI workflow aliases for API callers."""
 
     COPILOT_EXPLAIN_PR = "copilot_explain_pr"
@@ -924,14 +929,14 @@ class AIWorkflow(str, Enum):
     ACCELERATE_GENERATE_AND_STORE = "accelerate_generate_and_store"
 
 
-class AISummaryBackend(str, Enum):
+class AISummaryBackend(StrEnum):
     """Backend selection for PR summary workflows."""
 
     DEFAULT = "default"
     ACCELERATED = "accelerated"
 
 
-class AIFailureAnalysisBackend(str, Enum):
+class AIFailureAnalysisBackend(StrEnum):
     """Backend selection for failure analysis workflows."""
 
     DEFAULT = "default"
@@ -1066,22 +1071,28 @@ class AICapabilityExecuteRequest(BaseModel):
         resolved_capability_id = self.resolve_capability_id()
         context = self.normalized_context()
 
-        if resolved_capability_id in {
-            "copilot.pr.explain",
-            "copilot.pr.diff_summary",
-            "copilot.pr.failure_explain",
-            "github.pr.rag_summary",
-            "github.pr.accelerated_summary",
-            "github.check.failure_rag_explain",
-            "github.check.accelerated_failure_explain",
-            "github.check.find_similar_failures",
-        } and context.pr_number is None:
+        if (
+            resolved_capability_id
+            in {
+                "copilot.pr.explain",
+                "copilot.pr.diff_summary",
+                "copilot.pr.failure_explain",
+                "github.pr.rag_summary",
+                "github.pr.accelerated_summary",
+                "github.check.failure_rag_explain",
+                "github.check.accelerated_failure_explain",
+                "github.check.find_similar_failures",
+            }
+            and context.pr_number is None
+        ):
             raise ValueError(f"{resolved_capability_id} requires context.pr_number")
 
         if resolved_capability_id == "ipfs.accelerate.generate_and_store":
             prompt = self.inputs.get("prompt") or self.options.get("prompt")
             if not prompt:
-                raise ValueError("ipfs.accelerate.generate_and_store requires inputs.prompt or options.prompt")
+                raise ValueError(
+                    "ipfs.accelerate.generate_and_store requires inputs.prompt or options.prompt"
+                )
 
         if resolved_capability_id == "ipfs.content.read_ai_output":
             cid = self.inputs.get("cid") or self.options.get("cid")
@@ -2221,7 +2232,7 @@ class Notification(BaseModel):
                             "id": "read_cid",
                             "label": "Read Receipt",
                             "phrase": "read the wearables receipt",
-                        }
+                        },
                     ],
                 },
             }
@@ -2286,7 +2297,7 @@ class NotificationsListResponse(BaseModel):
                                     "id": "read_cid",
                                     "label": "Read Receipt",
                                     "phrase": "read the wearables receipt",
-                                }
+                                },
                             ],
                         },
                     }

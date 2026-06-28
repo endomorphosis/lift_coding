@@ -147,7 +147,10 @@ def process_direct_action_request_detailed(
     if not request.execution_action_type:
         raise HTTPException(
             status_code=500,
-            detail={"error": "misconfigured_action", "message": "Direct execution is not configured"},
+            detail={
+                "error": "misconfigured_action",
+                "message": "Direct execution is not configured",
+            },
         )
 
     result = execute_direct_action(
@@ -187,7 +190,10 @@ def process_direct_action_request(
         return detailed.action_result
     raise HTTPException(
         status_code=500,
-        detail={"error": "invalid_action_result", "message": "Action processing produced no result"},
+        detail={
+            "error": "invalid_action_result",
+            "message": "Action processing produced no result",
+        },
     )
 
 

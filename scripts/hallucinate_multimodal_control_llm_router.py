@@ -5,17 +5,17 @@ from __future__ import annotations
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
-from ipfs_accelerate_py.agent_supervisor.wrapper_utils import build_repo_script_bootstrap  # noqa: E402
 from ipfs_accelerate_py.agent_supervisor.task_proposal_router import (  # noqa: E402
     TaskProposalRouteSpec,
     build_repo_task_proposal_route_runner_from_spec,
 )
-
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_repo_script_bootstrap,  # noqa: E402
+)
 
 _SCRIPT_BOOTSTRAP = build_repo_script_bootstrap(__file__)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root

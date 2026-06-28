@@ -14,7 +14,11 @@ from typing import Any
 
 from handsfree.agent_providers import (
     CopilotAgentProvider as _CopilotAgentProvider,
+)
+from handsfree.agent_providers import (
     CustomAgentProvider as _CustomAgentProvider,
+)
+from handsfree.agent_providers import (
     get_provider as _get_canonical_provider,
 )
 from handsfree.db.agent_tasks import AgentTask

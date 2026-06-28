@@ -39,8 +39,8 @@ from handsfree.transport.libp2p_bluetooth import (
     PeerEnvelope,
     decode_transport_envelope,
     encode_chat_message_payload,
-    encode_transport_message,
     encode_transport_envelope,
+    encode_transport_message,
 )
 
 

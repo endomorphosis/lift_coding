@@ -767,7 +767,7 @@ class TestGCPSecretManager:
         mock_secret2.name = "projects/test-project/secrets/handsfree-secret2"
         mock_secret3 = Mock()
         mock_secret3.name = "projects/test-project/secrets/other-secret3"
-        
+
         mock_secrets = [mock_secret1, mock_secret2, mock_secret3]
         mock_client.list_secrets.return_value = mock_secrets
 
@@ -793,7 +793,7 @@ class TestGCPSecretManager:
         mock_secret2.name = "projects/test-project/secrets/handsfree-github-token-2"
         mock_secret3 = Mock()
         mock_secret3.name = "projects/test-project/secrets/handsfree-slack-token-1"
-        
+
         mock_secrets = [mock_secret1, mock_secret2, mock_secret3]
         mock_client.list_secrets.return_value = mock_secrets
 

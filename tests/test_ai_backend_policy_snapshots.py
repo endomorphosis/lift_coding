@@ -1,7 +1,7 @@
 """Tests for persisted AI backend-policy snapshots."""
 
-from datetime import UTC, datetime
 import uuid
+from datetime import UTC, datetime
 
 import pytest
 
@@ -67,7 +67,10 @@ def test_store_and_read_ai_backend_policy_snapshot(db_conn, monkeypatch):
     assert stored[0].reused is False
     assert stored[0].remap_counts == {"pr_rag_summary->accelerated_pr_summary": 1}
     assert stored[0].top_remaps[0]["remap_key"] == "pr_rag_summary->accelerated_pr_summary"
-    assert stored[0].top_capabilities["remapped"][0]["capability_id"] == "github.pr.accelerated_summary"
+    assert (
+        stored[0].top_capabilities["remapped"][0]["capability_id"]
+        == "github.pr.accelerated_summary"
+    )
 
 
 def test_get_ai_backend_policy_snapshots_orders_newest_first(db_conn):
@@ -196,7 +199,7 @@ def test_store_ai_backend_policy_snapshot_honors_env_pruning(db_conn, monkeypatc
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
     monkeypatch.setattr(GhCliTokenProvider, "get_token", lambda self: None)
 
-    for i in range(3):
+    for _i in range(3):
         write_action_log(
             db_conn,
             user_id=user_id,

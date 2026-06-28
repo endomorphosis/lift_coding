@@ -29,10 +29,9 @@ _httpx = None
 
 def _is_live_mode_requested() -> bool:
     """Check whether live GitHub access was explicitly requested."""
-    return (
-        os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live"
-        or os.getenv("GITHUB_LIVE_MODE", "").lower() in ("true", "1", "yes")
-    )
+    return os.getenv("HANDS_FREE_GITHUB_MODE", "").lower() == "live" or os.getenv(
+        "GITHUB_LIVE_MODE", ""
+    ).lower() in ("true", "1", "yes")
 
 
 def resolve_github_auth_source() -> str:

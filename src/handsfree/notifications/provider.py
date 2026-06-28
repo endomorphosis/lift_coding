@@ -639,7 +639,11 @@ class ExpoPushProvider(NotificationDeliveryProvider):
         Returns:
             Dictionary with delivery result (stub returns success).
         """
-        token_preview = subscription_endpoint[:20] + "..." if len(subscription_endpoint) > 20 else subscription_endpoint
+        token_preview = (
+            subscription_endpoint[:20] + "..."
+            if len(subscription_endpoint) > 20
+            else subscription_endpoint
+        )
 
         if self.mode != "real":
             logger.info(
@@ -696,7 +700,7 @@ class ExpoPushProvider(NotificationDeliveryProvider):
                 try:
                     result = resp.json()
                     data = result.get("data", {})
-                    
+
                     # Check if the push ticket indicates success
                     status = data.get("status")
                     if status == "ok":
@@ -704,7 +708,8 @@ class ExpoPushProvider(NotificationDeliveryProvider):
                         return {
                             "ok": True,
                             "message": f"Expo notification sent (status: {resp.status_code})",
-                            "delivery_id": ticket_id or f"expo-{hash((subscription_endpoint, str(notification_data)))}",
+                            "delivery_id": ticket_id
+                            or f"expo-{hash((subscription_endpoint, str(notification_data)))}",
                         }
                     else:
                         # Expo returned an error in the ticket
@@ -722,7 +727,9 @@ class ExpoPushProvider(NotificationDeliveryProvider):
                             "delivery_id": None,
                         }
                 except Exception as e:
-                    logger.warning("Failed to parse Expo response for token %s: %s", token_preview, e)
+                    logger.warning(
+                        "Failed to parse Expo response for token %s: %s", token_preview, e
+                    )
                     return {
                         "ok": True,  # HTTP success, assume sent
                         "message": f"Expo notification sent (status: {resp.status_code})",
@@ -927,7 +934,7 @@ def get_provider_for_platform(platform: str) -> NotificationDeliveryProvider | N
     if platform == "expo":
         access_token = os.getenv("HANDSFREE_EXPO_ACCESS_TOKEN", "")
         expo_mode = os.getenv("HANDSFREE_EXPO_MODE", "stub").lower()
-        
+
         # Expo access token is optional (used for higher rate limits)
         return ExpoPushProvider(
             access_token=access_token if access_token else None,
