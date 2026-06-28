@@ -44,6 +44,31 @@ class IPFSAccelerateAdapter(Protocol):
         """Return runtime status including available backends."""
         ...
 
+    # Extended methods matching actual MCP tool registrations
+    def get_hardware_info(self, **kwargs: Any) -> Any:
+        """Detailed hardware inventory (GPU, VRAM, compute capability)."""
+        ...
+
+    def search_models(self, query: str, **kwargs: Any) -> Any:
+        """Search available models by query string."""
+        ...
+
+    def get_model_details(self, model_name: str, **kwargs: Any) -> Any:
+        """Get detailed info about a specific model."""
+        ...
+
+    def list_models(self, **kwargs: Any) -> Any:
+        """List all loaded/available models."""
+        ...
+
+    def get_endpoints(self, **kwargs: Any) -> Any:
+        """List configured inference endpoints."""
+        ...
+
+    def get_performance_metrics(self, **kwargs: Any) -> Any:
+        """Get server performance/telemetry metrics."""
+        ...
+
 
 class IPFSAccelerateUnavailableError(RuntimeError):
     """Raised when ipfs_accelerate_py is missing or has no usable adapter surface."""
@@ -186,6 +211,81 @@ class _IPFSAccelerateModuleAdapter:
             self._root_module, "embeddings_router_available", False
         )
         return result
+
+    def get_hardware_info(self, **kwargs: Any) -> Any:
+        """Detailed hardware inventory from MCP hardware tools."""
+        instance = self._get_instance()
+        if instance is not None:
+            fn = getattr(instance, "get_hardware_info", None)
+            if callable(fn):
+                return fn(**kwargs)
+        # Fallback: derive from capabilities
+        caps = self.get_capabilities(**kwargs)
+        return {
+            "gpu": caps.get("gpu") or caps.get("device"),
+            "vram": caps.get("vram") or caps.get("memory"),
+            "compute_capability": caps.get("compute_capability"),
+            "cpu_count": caps.get("cpu_count"),
+            "backends": caps.get("backends") or caps.get("supported_backends") or [],
+            "quantization_formats": caps.get("quantization_formats") or [],
+            "platform": caps.get("platform"),
+        }
+
+    def search_models(self, query: str, **kwargs: Any) -> Any:
+        """Search models via MCP model tools."""
+        instance = self._get_instance()
+        if instance is not None:
+            fn = getattr(instance, "search_models", None)
+            if callable(fn):
+                return fn(query, **kwargs)
+        # Try direct module function
+        try:
+            mod = importlib.import_module("ipfs_accelerate_py.mcp.tools.models")
+            fn = getattr(mod, "search_models", None)
+            if callable(fn):
+                return fn(query=query, **kwargs)
+        except Exception:
+            pass
+        return {"models": [], "query": query}
+
+    def get_model_details(self, model_name: str, **kwargs: Any) -> Any:
+        """Get model details via MCP model tools."""
+        instance = self._get_instance()
+        if instance is not None:
+            fn = getattr(instance, "get_model_details", None)
+            if callable(fn):
+                return fn(model_name, **kwargs)
+        return {"model_name": model_name, "details": None}
+
+    def list_models(self, **kwargs: Any) -> Any:
+        """List available models."""
+        instance = self._get_instance()
+        if instance is not None:
+            fn = getattr(instance, "list_models", None) or getattr(
+                instance, "get_model_list", None
+            )
+            if callable(fn):
+                return fn(**kwargs)
+        caps = self.get_capabilities()
+        return caps.get("models") or caps.get("loaded_models") or []
+
+    def get_endpoints(self, **kwargs: Any) -> Any:
+        """List configured inference endpoints."""
+        instance = self._get_instance()
+        if instance is not None:
+            fn = getattr(instance, "get_endpoints", None)
+            if callable(fn):
+                return fn(**kwargs)
+        return {"endpoints": []}
+
+    def get_performance_metrics(self, **kwargs: Any) -> Any:
+        """Get server performance/telemetry metrics."""
+        instance = self._get_instance()
+        if instance is not None:
+            fn = getattr(instance, "get_performance_metrics", None)
+            if callable(fn):
+                return fn(**kwargs)
+        return {"metrics": {}}
 
 
 def _import_accelerate_module() -> Any | None:

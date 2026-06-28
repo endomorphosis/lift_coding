@@ -174,3 +174,90 @@ def reset_ipfs_datasets_router_caches() -> None:
     get_embeddings_router.cache_clear()
     get_ipfs_router.cache_clear()
     get_llm_router.cache_clear()
+    get_datasets_router.cache_clear()
+
+
+# --------------------------------------------------------------------------- #
+# Extended: Dataset operations router (search, list, vector store)
+# --------------------------------------------------------------------------- #
+
+
+class DatasetsRouter(Protocol):
+    """Dataset operations router interface (load, list, search)."""
+
+    def list_datasets(self, **kwargs: Any) -> list[Any]:
+        """List available datasets."""
+        ...
+
+    def load_dataset(self, name: str, **kwargs: Any) -> Any:
+        """Load a dataset by name or CID."""
+        ...
+
+    def search_datasets(self, query: str, **kwargs: Any) -> list[Any]:
+        """Search datasets by query."""
+        ...
+
+
+class _UnavailableDatasetsRouter(_UnavailableRouter):
+    def __init__(self) -> None:
+        super().__init__("datasets_router")
+
+    def list_datasets(self, **kwargs: Any) -> NoReturn:
+        self._raise("list_datasets")
+
+    def load_dataset(self, name: str, **kwargs: Any) -> NoReturn:
+        self._raise("load_dataset")
+
+    def search_datasets(self, query: str, **kwargs: Any) -> NoReturn:
+        self._raise("search_datasets")
+
+
+class _DatasetsRouterAdapter:
+    """Adapter wrapping the ipfs_datasets_py dataset tools."""
+
+    def __init__(self, module: Any) -> None:
+        self._module = module
+
+    def list_datasets(self, **kwargs: Any) -> list[Any]:
+        fn = getattr(self._module, "list_datasets", None)
+        if callable(fn):
+            return fn(**kwargs)
+        # Fallback: try tool registry
+        try:
+            from ipfs_datasets_py.mcp_server.tool_registry import get_tool_registry
+            registry = get_tool_registry()
+            fn = registry.get("list_datasets")
+            if callable(fn):
+                return fn(**kwargs)
+        except Exception:
+            pass
+        return []
+
+    def load_dataset(self, name: str, **kwargs: Any) -> Any:
+        fn = getattr(self._module, "load_dataset", None)
+        if callable(fn):
+            return fn(name, **kwargs)
+        return {"name": name, "status": "not_loaded"}
+
+    def search_datasets(self, query: str, **kwargs: Any) -> list[Any]:
+        fn = getattr(self._module, "search_datasets", None) or getattr(
+            self._module, "search", None
+        )
+        if callable(fn):
+            return fn(query, **kwargs)
+        return []
+
+
+@lru_cache(maxsize=1)
+def get_datasets_router() -> DatasetsRouter:
+    """Get datasets operations router with safe fallback."""
+    # Try multiple possible module paths
+    for module_name in [
+        "ipfs_datasets_py.datasets_router",
+        "ipfs_datasets_py.mcp_server.tools.dataset_tools.dataset_tools",
+        "ipfs_datasets_py.ipfs_datasets",
+    ]:
+        module = _import_router_module(module_name)
+        if module is not None:
+            return _DatasetsRouterAdapter(module)
+    return _UnavailableDatasetsRouter()

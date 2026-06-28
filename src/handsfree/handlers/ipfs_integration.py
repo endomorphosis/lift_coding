@@ -14,6 +14,19 @@ Endpoints:
     POST /v1/ipfs/embed           - Generate embeddings via ipfs_datasets/accelerate
     POST /v1/ipfs/generate        - Generate text via LLM router
     GET  /v1/ipfs/capabilities    - List accelerate hardware capabilities
+    GET  /v1/ipfs/hardware_profile - Detailed hardware profile
+    GET  /v1/ipfs/list_models     - List available models
+    POST /v1/ipfs/list_datasets   - List/search datasets
+    POST /v1/ipfs/inference       - Direct model inference
+    GET  /v1/ipfs/list_pins       - List pinned CIDs
+    POST /v1/ipfs/stat            - Object statistics for CID
+    POST /v1/ipfs/dag/get         - Get DAG node by CID
+    POST /v1/ipfs/dag/put         - Store DAG node
+    POST /v1/ipfs/name/publish    - Publish CID to IPNS
+    POST /v1/ipfs/name/resolve    - Resolve IPNS name
+    POST /v1/ipfs/search_models   - Search available AI models
+    GET  /v1/ipfs/metrics         - Performance metrics
+    GET  /v1/ipfs/endpoints       - List inference endpoints
 """
 
 from __future__ import annotations
@@ -490,3 +503,148 @@ async def ipfs_inference_endpoint(req: IPFSInferenceRequest) -> dict[str, Any]:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Inference failed: {exc}",
         ) from exc
+
+
+# --------------------------------------------------------------------------- #
+# Extended endpoints: DAG, name, pins, search_models, metrics
+# --------------------------------------------------------------------------- #
+
+
+class IPFSDAGRequest(BaseModel):
+    """Request for DAG operations."""
+
+    cid: str = Field(..., description="CID for DAG get")
+
+
+class IPFSDAGPutRequest(BaseModel):
+    """Request to put a DAG node."""
+
+    data: Any = Field(..., description="DAG node data (dict/JSON)")
+
+
+class IPFSNameRequest(BaseModel):
+    """Request for IPNS name operations."""
+
+    value: str = Field(..., description="CID to publish or name to resolve")
+
+
+class IPFSSearchModelsRequest(BaseModel):
+    """Request to search available models."""
+
+    query: str = Field(default="", description="Search query")
+
+
+@router.get("/list_pins")
+async def ipfs_list_pins_endpoint() -> dict[str, Any]:
+    """List all pinned CIDs."""
+    try:
+        kit = get_ipfs_kit_adapter()
+        pins = kit.list_pins()
+        return {"ok": True, "pins": pins}
+    except IPFSKitUnavailableError as exc:
+        return {"ok": False, "pins": [], "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "pins": [], "error": str(exc)}
+
+
+@router.post("/stat")
+async def ipfs_stat_endpoint(req: IPFSDAGRequest) -> dict[str, Any]:
+    """Get object statistics for a CID."""
+    try:
+        kit = get_ipfs_kit_adapter()
+        stat = kit.stat(req.cid)
+        return {"ok": True, "cid": req.cid, "stat": stat}
+    except IPFSKitUnavailableError as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/dag/get")
+async def ipfs_dag_get_endpoint(req: IPFSDAGRequest) -> dict[str, Any]:
+    """Get a DAG node by CID."""
+    try:
+        kit = get_ipfs_kit_adapter()
+        dag = kit.dag_get(req.cid)
+        return {"ok": True, "cid": req.cid, "dag": dag}
+    except IPFSKitUnavailableError as exc:
+        return {"ok": False, "error": str(exc)}
+
+
+@router.post("/dag/put")
+async def ipfs_dag_put_endpoint(req: IPFSDAGPutRequest) -> dict[str, Any]:
+    """Store a DAG node, return CID."""
+    try:
+        kit = get_ipfs_kit_adapter()
+        result = kit.dag_put(req.data)
+        return {"ok": True, "result": result}
+    except IPFSKitUnavailableError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=str(exc),
+        ) from exc
+
+
+@router.post("/name/publish")
+async def ipfs_name_publish_endpoint(req: IPFSNameRequest) -> dict[str, Any]:
+    """Publish a CID to IPNS."""
+    try:
+        kit = get_ipfs_kit_adapter()
+        result = kit.name_publish(req.value)
+        return {"ok": True, "result": result}
+    except IPFSKitUnavailableError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=str(exc),
+        ) from exc
+
+
+@router.post("/name/resolve")
+async def ipfs_name_resolve_endpoint(req: IPFSNameRequest) -> dict[str, Any]:
+    """Resolve an IPNS name to a CID."""
+    try:
+        kit = get_ipfs_kit_adapter()
+        result = kit.name_resolve(req.value)
+        return {"ok": True, "result": result}
+    except IPFSKitUnavailableError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=str(exc),
+        ) from exc
+
+
+@router.post("/search_models")
+async def ipfs_search_models_endpoint(req: IPFSSearchModelsRequest) -> dict[str, Any]:
+    """Search available AI models via accelerate backend."""
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        results = accel.search_models(req.query)
+        return {"ok": True, "results": results}
+    except IPFSAccelerateUnavailableError as exc:
+        return {"ok": False, "results": [], "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "results": [], "error": str(exc)}
+
+
+@router.get("/metrics")
+async def ipfs_metrics_endpoint() -> dict[str, Any]:
+    """Get performance metrics from accelerate backend."""
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        metrics = accel.get_performance_metrics()
+        return {"ok": True, "metrics": metrics}
+    except IPFSAccelerateUnavailableError as exc:
+        return {"ok": False, "metrics": {}, "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "metrics": {}, "error": str(exc)}
+
+
+@router.get("/endpoints")
+async def ipfs_endpoints_endpoint() -> dict[str, Any]:
+    """List configured inference endpoints."""
+    try:
+        accel = get_ipfs_accelerate_adapter()
+        endpoints = accel.get_endpoints()
+        return {"ok": True, "endpoints": endpoints}
+    except IPFSAccelerateUnavailableError as exc:
+        return {"ok": False, "endpoints": [], "error": str(exc)}
+    except Exception as exc:
+        return {"ok": False, "endpoints": [], "error": str(exc)}

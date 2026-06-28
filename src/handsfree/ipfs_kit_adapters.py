@@ -58,6 +58,31 @@ class IPFSKitAdapter(Protocol):
         """Return current backend availability/health map."""
         ...
 
+    # Extended methods matching actual ipfs_kit_py MCP server tools
+    def list_pins(self, **kwargs: Any) -> Any:
+        """List all pinned CIDs."""
+        ...
+
+    def stat(self, cid: str, **kwargs: Any) -> Any:
+        """Get object statistics for a CID."""
+        ...
+
+    def dag_get(self, cid: str, **kwargs: Any) -> Any:
+        """Get a DAG node by CID."""
+        ...
+
+    def dag_put(self, data: Any, **kwargs: Any) -> Any:
+        """Store a DAG node, return CID."""
+        ...
+
+    def name_publish(self, cid: str, **kwargs: Any) -> Any:
+        """Publish CID to IPNS."""
+        ...
+
+    def name_resolve(self, name: str, **kwargs: Any) -> Any:
+        """Resolve an IPNS name to CID."""
+        ...
+
 
 class IPFSKitUnavailableError(RuntimeError):
     """Raised when ipfs_kit_py is missing or has no usable adapter surface."""
@@ -222,6 +247,54 @@ class _IPFSKitModuleAdapter:
         except Exception as exc:
             logger.debug("ipfs_kit_py.backend_config.get_backend_statuses failed: %s", exc)
         return {}
+
+    def list_pins(self, **kwargs: Any) -> Any:
+        """List all pinned CIDs."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_pin_ls", None) or getattr(kit, "ipfs_pin_list", None)
+        if callable(fn):
+            return fn(**kwargs)
+        return {"pins": []}
+
+    def stat(self, cid: str, **kwargs: Any) -> Any:
+        """Get object statistics for a CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_object_stat", None) or getattr(kit, "ipfs_stat", None)
+        if callable(fn):
+            return fn(cid, **kwargs)
+        return {"cid": cid, "stat": None}
+
+    def dag_get(self, cid: str, **kwargs: Any) -> Any:
+        """Get a DAG node by CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_dag_get", None)
+        if callable(fn):
+            return fn(cid, **kwargs)
+        return {"cid": cid, "dag": None}
+
+    def dag_put(self, data: Any, **kwargs: Any) -> Any:
+        """Store a DAG node, return CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_dag_put", None)
+        if callable(fn):
+            return fn(data, **kwargs)
+        raise IPFSKitUnavailableError("ipfs_dag_put not available on kit instance")
+
+    def name_publish(self, cid: str, **kwargs: Any) -> Any:
+        """Publish CID to IPNS."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_name_publish", None)
+        if callable(fn):
+            return fn(cid, **kwargs)
+        raise IPFSKitUnavailableError("ipfs_name_publish not available on kit instance")
+
+    def name_resolve(self, name: str, **kwargs: Any) -> Any:
+        """Resolve an IPNS name to CID."""
+        kit = self._get_kit_instance()
+        fn = getattr(kit, "ipfs_name_resolve", None)
+        if callable(fn):
+            return fn(name, **kwargs)
+        raise IPFSKitUnavailableError("ipfs_name_resolve not available on kit instance")
 
 
 def _import_kit_module() -> Any | None:
