@@ -4942,7 +4942,7 @@ cadence remains parseable and resumable.
 
 ## VAI-545 Resolve merge retry-budget failure for VAI-107
 
-- Status: blocked
+- Status: todo
 - Completion: manual
 - Priority: P1
 - Track: ops
