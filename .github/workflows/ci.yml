@@ -34,9 +34,9 @@ jobs:
 
       - name: MCP++ dashboard sync guard
         run: |
-          git submodule update --init external/ipfs_kit swissknife || true
+          git submodule update --init external/ipfs_kit swissknife external/ipfs_accelerate external/ipfs_datasets || true
           pip install anyio trio pytest
-          pytest tests/integration/test_mcp_kit_dashboard_sync.py tests/integration/test_mcp_kit_dag_interop.py tests/integration/test_mcp_kit_ucan_interop.py -q
+          pytest tests/integration/test_mcp_kit_dashboard_sync.py tests/integration/test_mcp_kit_dag_interop.py tests/integration/test_mcp_kit_ucan_interop.py tests/integration/test_mcp_threeway_ucan_interop.py -q
 
       - name: Validate display webapp readiness
         run: python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json
