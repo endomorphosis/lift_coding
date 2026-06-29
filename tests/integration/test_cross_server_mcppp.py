@@ -334,3 +334,20 @@ class TestSpecConformance:
         DAGEvent.model_validate({"event_cid": c, "event_type": "envelope",
                                  "parents": [], "timestamp": "2026-06-28T00:00:00Z",
                                  "payload": {"intent_cid": c, "receipt_cid": c}})
+
+    def test_delegation_wire_shapes_conform(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import Delegation
+        c = "bafkreifxone36h5jwjwulvkf27le3lmwon7jz65tzo27luipw55q7tcevu"
+        # accelerate-style: full-name fields, single proof_cid, signed
+        Delegation.model_validate({"cid": c, "issuer": "did:key:zAlice",
+                                   "audience": "did:key:zBob",
+                                   "capabilities": [{"resource": "mcp://tool/infer", "ability": "invoke"}],
+                                   "expiry": 1782680000, "proof_cid": c, "signature": "s"})
+        # datasets-style: full-name fields, proof bundle CID
+        Delegation.model_validate({"cid": c, "issuer": "did:key:zAlice",
+                                   "audience": "did:key:zBob",
+                                   "capabilities": [{"resource": "mcp://tool/search", "ability": "invoke"}],
+                                   "expiry": 1782680000, "proof_cid": c})
