@@ -3006,8 +3006,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-560 Resolve merge retry-budget failure for MGW-559
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-06-29: verified MGW-559 attempt 6 is merged in the superproject at `d438f06b`, repaired the original `external/ipfs_accelerate` dirty-checkout blocker by committing the owning submodule at `546dfdcd` and the superproject gitlink at `f8f0f42f`, synchronized the `hallucinate_app` launch-gate fixtures at `68d4f60`, and recorded that no semantic `ipfs-accelerate-agent-merge-resolver --apply` run was required because the retry-budget evidence was `main_checkout_dirty_conflict`.
 - Priority: P1
 - Track: ops
 - Depends on: 
