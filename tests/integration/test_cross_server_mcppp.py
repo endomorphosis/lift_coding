@@ -351,3 +351,17 @@ class TestSpecConformance:
                                    "audience": "did:key:zBob",
                                    "capabilities": [{"resource": "mcp://tool/search", "ability": "invoke"}],
                                    "expiry": 1782680000, "proof_cid": c})
+
+    def test_p2p_message_wire_conforms(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import P2PMessage as SpecP2P
+        # Decode both servers' real wire bytes and validate the JSON body vs spec.
+        import json as _json
+        from ipfs_datasets_py.mcp_server.p2p_libp2p_transport import P2PMessage as DsMsg
+        acc = _load_acc_module("p2p_transport", "p2p_transport.py")
+        for Msg in (DsMsg, acc.P2PMessage):
+            enc = Msg(msg_type="request", method="infer", params={"m": "bert"}, msg_id="1").encode()
+            body = _json.loads(enc[4:])  # strip 4-byte length prefix
+            SpecP2P.model_validate(body)  # raises if non-conformant
