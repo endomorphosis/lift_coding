@@ -32,6 +32,12 @@ jobs:
       - name: Test
         run: make test
 
+      - name: MCP++ dashboard sync guard
+        run: |
+          git submodule update --init external/ipfs_kit swissknife || true
+          pip install anyio trio pytest
+          pytest tests/integration/test_mcp_kit_dashboard_sync.py -q
+
       - name: Validate display webapp readiness
         run: python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json
 
