@@ -149,6 +149,9 @@ HAO_727_OBJECTIVE_GAP_PATH = (
 HAO_727_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
 )
+HAO_728_RETRY_BUDGET_REPAIR_PATH = (
+    DISCOVERY_ROOT / "2026-06-29-hao-728-hao-727-merge-retry-budget.md"
+)
 VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -2828,6 +2831,34 @@ def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     assert len(tasks) >= 14
     assert all(task.priority in {"P0", "P1", "P2", "P3"} for task in tasks)
     assert all(task.track for task in tasks)
+
+
+def test_hao_728_releases_hao_727_merge_retry_budget_blocker():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    task = tasks["HAO-728"]
+    repair_source = HAO_728_RETRY_BUDGET_REPAIR_PATH.read_text(encoding="utf-8")
+
+    assert task.status == "completed"
+    assert task.priority == "P1"
+    assert task.track == "ops"
+    assert "HAO-727" in task.title
+    assert HAO_728_RETRY_BUDGET_REPAIR_PATH.parent.relative_to(REPO_ROOT).as_posix() in task.outputs
+    assert "main_checkout_dirty_conflict" in task.metadata["completion"]
+    assert "3d32e4a6" in task.metadata["completion"]
+    assert "0bc501af" in task.metadata["completion"]
+
+    for required in (
+        "Owning implementation repositories",
+        "93855a23daa6965658b5e9a28d3691eb34ab365b",
+        "a28e1e2b41555666df7618e1c5791101e5a629bf",
+        "3d32e4a6d79bde6d0b9047efc8365c5e7ce8796e",
+        "0bc501af64f38a6aa0137292389d4b7660a7c69d",
+        "ce45ec9a3e726d58a9ea8697380c23aa39bfb0ab",
+        "main_checkout_dirty_conflict",
+        "not a semantic source conflict",
+        "release HAO-727 from `blocked_tasks`",
+    ):
+        assert required in repair_source
 
 
 def test_hallucinate_multimodal_todo_dependencies_are_declared_tasks():

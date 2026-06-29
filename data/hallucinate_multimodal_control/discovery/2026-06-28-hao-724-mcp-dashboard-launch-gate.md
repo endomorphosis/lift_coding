@@ -17,6 +17,10 @@ by `hallucinate_app.node.mcp_daemon_manager.getDashboardCapabilityCatalog`, the
 Hallucinate App Playwright dashboard specs, the Swissknife catalog consumer, and
 the packet sibling daemon launch objective `VAIOS-G728`.
 
+This is the Hallucinate backlog mirror for the VAI-542 VAIOS-G723 dashboard
+interoperability gate; any missing catalog, dashboard UI, mediated receipt,
+Swissknife consumer, or Playwright evidence remains supervisor-generated follow-up work for VAIOS-G723.
+
 The focused dashboard gate is:
 
 ```text
@@ -50,13 +54,21 @@ catalog assert:
 - Hallucinate App MCP dashboard
 - dashboard capability catalog
 - daemon health
+- MCP++ telemetry
 - tools/list
 - tools/call
+- control_surface receipts
 - ipfs_accelerate_py MCP server
 - ipfs_datasets_py MCP server
 - ipfs_kit_py MCP server
 - Swissknife applications
 - Playwright MCP dashboard interoperability
+- catalog normalization
+- dashboard UI wiring
+- mediated tool-call receipts
+- Swissknife consumers
+- Playwright coverage
+- supervisor-generated follow-up subtasks
 - launch Playwright validation gate
 
 ## Dashboard Servers
