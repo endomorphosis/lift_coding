@@ -4942,8 +4942,9 @@ cadence remains parseable and resumable.
 
 ## VAI-545 Resolve merge retry-budget failure for VAI-107
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Priority: P1
 - Track: ops
 - Depends on: 
