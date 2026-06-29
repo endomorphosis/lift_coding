@@ -286,3 +286,36 @@ class TestDispatchPipeline:
         pipeline = make_full_pipeline()
         result = pipeline.run({"tool": "", "actor": "alice"})
         assert result.allowed is False
+
+
+class TestSpecConformance:
+    """Both servers' Profile A descriptors validate against the canonical
+    Mcp-Plus-Plus spec so third parties can interoperate."""
+
+    @staticmethod
+    def _spec_model():
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import InterfaceDescriptor as Spec
+        return Spec
+
+    def test_accelerate_descriptor_conforms_to_spec(self):
+        Spec = self._spec_model()
+        mod = _load_acc_module("interface_descriptor", "interface_descriptor.py")
+        iface = mod.InterfaceDescriptor(
+            name="conf", namespace="acc", version="1.0.0",
+            methods=[mod.MethodDescriptor(name="infer")], tags=["ml"],
+        )
+        Spec(**iface.to_dict())  # raises if non-conformant
+
+    def test_datasets_descriptor_conforms_to_spec(self):
+        Spec = self._spec_model()
+        from ipfs_datasets_py.mcp_server.interface_descriptor import (
+            InterfaceDescriptor, MethodSignature,
+        )
+        iface = InterfaceDescriptor(
+            name="conf", namespace="ds", version="1.0.0",
+            methods=[MethodSignature(name="load")],
+        )
+        Spec(**iface.to_dict())  # raises if non-conformant
