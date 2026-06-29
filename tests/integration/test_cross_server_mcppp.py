@@ -390,3 +390,21 @@ class TestSpecConformance:
         # Codes both servers emit on JSON-RPC error paths.
         for code in (-32600, -32601, -32603, -32000):
             assert code in canonical, f"server error code {code} not in spec ErrorCode"
+
+    def test_execute_receipt_conforms(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import ExecutionReceipt
+        from validators.cid_artifacts import CIDExecutionValidator
+        c = "bafkreifxone36h5jwjwulvkf27le3lmwon7jz65tzo27luipw55q7tcevu"
+        rv = CIDExecutionValidator()
+        # accelerate-style wire receipt (now includes output_cid) + datasets-style
+        for receipt in (
+            {"cid": c, "receipt_cid": c, "output_cid": c, "result": {"x": 1},
+             "success": True, "error": None, "duration_ms": 3.2},
+            {"receipt_cid": c, "output_cid": c, "success": True,
+             "error": None, "duration_ms": 1.0},
+        ):
+            ExecutionReceipt.model_validate(receipt)
+            assert rv.validate_execution_receipt(receipt).is_valid
