@@ -365,3 +365,18 @@ class TestSpecConformance:
             enc = Msg(msg_type="request", method="infer", params={"m": "bert"}, msg_id="1").encode()
             body = _json.loads(enc[4:])  # strip 4-byte length prefix
             SpecP2P.model_validate(body)  # raises if non-conformant
+
+    def test_initialize_result_conforms(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import InitializeResult
+        # De-facto handshake result emitted by both servers + SwissKnife.
+        for name in ("ipfs-datasets-mcppp", "ipfs-accelerate-mcppp"):
+            InitializeResult.model_validate({
+                "protocolVersion": "2024-11-05",
+                "capabilities": {"tools": {"listChanged": True},
+                                 "experimental": {"mcp++/profile-a": True,
+                                                  "mcp++/policy": True}},
+                "serverInfo": {"name": name, "version": "1.0.0"},
+            })
