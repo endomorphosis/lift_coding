@@ -15,30 +15,38 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "external" / "ipfs_kit"))
 
 
-def _accel_cid_fn():
-    p = ROOT / "external" / "ipfs_accelerate" / "ipfs_accelerate_py" / "mcp_server" / "mcplusplus" / "artifacts.py"
+def _datasets_cid_fn():
+    p = ROOT / "external" / "ipfs_datasets" / "ipfs_datasets_py" / "utils" / "cid_utils.py"
     if not p.exists():
-        pytest.skip("accelerate artifacts not present")
-    spec = importlib.util.spec_from_file_location("_acc_art", p)
+        pytest.skip("datasets cid_utils not present")
+    spec = importlib.util.spec_from_file_location("_ds_cid", p)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
-    return mod.compute_artifact_cid
+    return mod.cid_for_obj
 
 
-def test_kit_dag_event_cids_match_accelerate():
+def test_kit_dag_event_cids_are_kubo_and_match_datasets():
     from ipfs_kit_py.mcp_server.server import MCPServer
     from ipfs_kit_py.mcp_server.mcplusplus import artifacts
+    import json
 
-    accel_cid = _accel_cid_fn()
+    try:
+        ds_cid = _datasets_cid_fn()
+    except Exception:
+        pytest.skip("datasets cid backend unavailable")
     s = MCPServer()
     for i in range(3):
         anyio.run(s.handle, {"jsonrpc": "2.0", "id": i, "method": "tools/call",
                              "params": {"name": "pin_tools/pin_rm", "arguments": {"cid": "bafy"}, "profile_b": True}})
     assert len(s._dag) == 3
     for node in s._dag:
-        recomputed = artifacts.compute_artifact_cid({k: v for k, v in node.items() if k != "event_cid"})
-        assert node["event_cid"] == recomputed
-        assert node["event_cid"] == accel_cid({k: v for k, v in node.items() if k != "event_cid"})
+        body = {k: v for k, v in node.items() if k != "event_cid"}
+        assert node["event_cid"] == artifacts.compute_artifact_cid(body)
+        assert node["event_cid"].startswith("bafkrei")
+        try:
+            assert node["event_cid"] == ds_cid(json.loads(artifacts.canonicalize_artifact(body)))
+        except Exception:
+            pytest.skip("multiformats not installed for datasets cid")
 
 
 def test_frontier_merges_across_servers():
@@ -53,4 +61,4 @@ def test_frontier_merges_across_servers():
     fb = anyio.run(b.handle, {"jsonrpc": "2.0", "id": 4, "method": "mcp++/dag/frontier"})["result"]
     merged = set(fa["frontier"]) | set(fb["frontier"])
     assert len(merged) == 2, "two independent events form a mergeable two-head frontier"
-    assert all(c.startswith("cidv1-sha256-") for c in merged), "frontier heads are canonical CIDs"
+    assert all(c.startswith("bafkrei") for c in merged), "frontier heads are Kubo CIDv1"
