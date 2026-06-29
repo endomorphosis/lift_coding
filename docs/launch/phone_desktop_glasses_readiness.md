@@ -310,6 +310,15 @@ Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
 applications, Playwright MCP dashboard interoperability, and launch Playwright
 validation gate.
 
+HAO-727 attempt 3 records a fresh validation receipt at
+`data/hallucinate_multimodal_control/discovery/2026-06-29-hao-727-attempt-3-validation.md`.
+That receipt confirms the backlog/objective queue tests, Hallucinate
+daemon-manager catalog check, Hallucinate MCP dashboard backend Playwright
+gate, no-display Playwright runner contract, Swissknife MCP dashboard consumer
+gate, Swissknife Meta glasses gate, and Hallucinate multimodal
+`control_surface` gate passed while preserving supervisor-generated follow-up
+subtasks for any future dashboard or backend validation failure.
+
 MGW-558 is the current Meta glasses objective-gap mirror for the same
 VAIOS-G723 Hallucinate MCP dashboard interoperability console:
 `data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-558-launch-playwright-validation-gate.md`.
