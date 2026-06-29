@@ -40,7 +40,9 @@ def test_kit_dag_event_cids_are_kubo_and_match_datasets():
                              "params": {"name": "pin_tools/pin_rm", "arguments": {"cid": "bafy"}, "profile_b": True}})
     assert len(s._dag) == 3
     for node in s._dag:
-        body = {k: v for k, v in node.items() if k != "event_cid"}
+        # event_cid content-addresses the event payload; event_cid + timestamp
+        # are node annotations (timestamp added for spec DAG conformance).
+        body = {k: v for k, v in node.items() if k not in ("event_cid", "timestamp")}
         assert node["event_cid"] == artifacts.compute_artifact_cid(body)
         assert node["event_cid"].startswith("bafkrei")
         try:

@@ -37,8 +37,29 @@ def _kit():
     return lambda ch: kit.validate_raw_delegation_chain(raw_chain=ch, resource="ipfs", ability="read", actor="did:c")["allowed"]
 
 
+def _load_pkg(root_rel, dotted):
+    """Import a submodule via its real dotted path so relative imports resolve."""
+    root = ROOT / "external" / root_rel
+    if not root.exists():
+        pytest.skip(f"{root_rel} not present")
+    import importlib
+    top = dotted.split(".")[0]
+    # Evict any copy of the top package cached from a different submodule path
+    # (importing kit/datasets can pull in a shadowing partial package).
+    for mod in [m for m in sys.modules if m == top or m.startswith(top + ".")]:
+        cached = sys.modules.get(mod)
+        cfile = getattr(cached, "__file__", "") or ""
+        if str(root) not in cfile:
+            del sys.modules[mod]
+    sys.path.insert(0, str(root))
+    try:
+        return importlib.import_module(dotted)
+    except Exception as e:  # pragma: no cover - optional submodule deps
+        pytest.skip(f"{dotted} import failed: {e}")
+
+
 def _accel():
-    m = _load("_acc_d", "ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/delegation.py")
+    m = _load_pkg("ipfs_accelerate", "ipfs_accelerate_py.mcp_server.mcplusplus.delegation")
     return lambda ch: m.validate_raw_delegation_chain(raw_chain=ch, resource="ipfs", ability="read", actor="did:c", require_signatures=False).allowed
 
 

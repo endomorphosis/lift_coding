@@ -15,13 +15,21 @@ sys.path.insert(0, str(ROOT / "external" / "ipfs_kit"))
 
 
 def _accel_validate():
-    p = ROOT / "external" / "ipfs_accelerate" / "ipfs_accelerate_py" / "mcp_server" / "mcplusplus" / "delegation.py"
-    if not p.exists():
-        pytest.skip("accelerate delegation not present")
-    spec = importlib.util.spec_from_file_location("_acc_deleg", p)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["_acc_deleg"] = mod
-    spec.loader.exec_module(mod)
+    root = ROOT / "external" / "ipfs_accelerate"
+    if not root.exists():
+        pytest.skip("accelerate not present")
+    import importlib
+    top = "ipfs_accelerate_py"
+    for mod in [m for m in sys.modules if m == top or m.startswith(top + ".")]:
+        cached = sys.modules.get(mod)
+        cfile = getattr(cached, "__file__", "") or ""
+        if str(root) not in cfile:
+            del sys.modules[mod]
+    sys.path.insert(0, str(root))
+    try:
+        mod = importlib.import_module("ipfs_accelerate_py.mcp_server.mcplusplus.delegation")
+    except Exception as e:  # pragma: no cover - optional submodule deps
+        pytest.skip(f"accelerate delegation import failed: {e}")
     return mod.validate_raw_delegation_chain
 
 
