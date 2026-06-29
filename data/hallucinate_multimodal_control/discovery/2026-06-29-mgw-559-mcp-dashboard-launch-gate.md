@@ -30,6 +30,18 @@ test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-g
 test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 ```
 
+## Attempt 6 Validation Result
+
+Executed on 2026-06-29 in the MGW-559 attempt-6 worktree:
+
+- `PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q` passed with 122 tests.
+- `npm --prefix hallucinate_app run test:daemon-manager` passed and confirmed the shared dashboard capability catalog for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`.
+- `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts` passed with the headless backend launch gate assertions; Electron UI cases were skipped because this host has no display server.
+- `cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)` passed by exercising the expected `missing_xvfb_for_electron_playwright` no-display contract.
+- `npm --prefix swissknife run test:e2e:mcp` passed and reported MGW-558 and MGW-559 as the Meta glasses launch task IDs consumed by Swissknife.
+- `npm --prefix swissknife run test:e2e:meta-glasses` passed, including the MGW-559 daemon launch handoff fixture.
+- `npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts` passed and preserved the mediated `control_surface` failure-closed receipts.
+
 ## Covered Terms
 
 - Hallucinate App menus
