@@ -2844,16 +2844,15 @@ def test_hao_728_releases_hao_727_merge_retry_budget_blocker():
     assert "HAO-727" in task.title
     assert HAO_728_RETRY_BUDGET_REPAIR_PATH.parent.relative_to(REPO_ROOT).as_posix() in task.outputs
     assert "main_checkout_dirty_conflict" in task.metadata["completion"]
-    assert "3d32e4a6" in task.metadata["completion"]
-    assert "0bc501af" in task.metadata["completion"]
+    assert "3d32e4ae" in task.metadata["completion"]
+    assert "0bc501a" in task.metadata["completion"]
 
     for required in (
         "Owning implementation repositories",
-        "93855a23daa6965658b5e9a28d3691eb34ab365b",
+        "2a0a6ecc9a089740d273895a083a98a1503da093",
         "a28e1e2b41555666df7618e1c5791101e5a629bf",
-        "3d32e4a6d79bde6d0b9047efc8365c5e7ce8796e",
-        "0bc501af64f38a6aa0137292389d4b7660a7c69d",
-        "ce45ec9a3e726d58a9ea8697380c23aa39bfb0ab",
+        "3d32e4aee89be027e45e76896cf6ee04225b3e51",
+        "0bc501a882d80446394497606e330a29e49f4267",
         "main_checkout_dirty_conflict",
         "not a semantic source conflict",
         "release HAO-727 from `blocked_tasks`",

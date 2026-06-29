@@ -27,16 +27,17 @@ is appended for normal daemon parsing.
 ## Repair
 
 - Owning implementation repositories:
-  - `hallucinate_app` at `93855a23daa6965658b5e9a28d3691eb34ab365b`.
+  - `hallucinate_app` at `2a0a6ecc9a089740d273895a083a98a1503da093`.
   - `swissknife` at `a28e1e2b41555666df7618e1c5791101e5a629bf`.
 - HAO-727 implementation commits verified in the owning repositories:
-  - `hallucinate_app` commit `3d32e4a6d79bde6d0b9047efc8365c5e7ce8796e`
+  - `hallucinate_app` commit `3d32e4aee89be027e45e76896cf6ee04225b3e51`
     records the Hallucinate MCP dashboard interoperability console gate.
-  - `swissknife` commit `0bc501af64f38a6aa0137292389d4b7660a7c69d`
+  - `swissknife` commit `0bc501a882d80446394497606e330a29e49f4267`
     records the Swissknife MCP dashboard consumer alignment.
 - HAO-728 completion metadata is committed in `hallucinate_app` commit
-  `ce45ec9a3e726d58a9ea8697380c23aa39bfb0ab`, which descends from the
-  HAO-727 and HAO-724 launch-gate commits above.
+  `2a0a6ecc9a089740d273895a083a98a1503da093`, which descends from the
+  HAO-727 launch-gate commit above and preserves the current HAO-726 todo
+  completion metadata on the same branch.
 - The current superproject gitlinks already point at descendants containing the
   HAO-727 implementation commits, so no semantic source merge is required for
   the HAO-727 dashboard/catalog/test changes.
