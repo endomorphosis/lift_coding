@@ -408,3 +408,13 @@ class TestSpecConformance:
         ):
             ExecutionReceipt.model_validate(receipt)
             assert rv.validate_execution_receipt(receipt).is_valid
+
+    def test_policy_decision_wire_conforms(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import PolicyDecision
+        # mcp++/policy/evaluate result from both servers: {decision, obligations, allowed}
+        PolicyDecision.model_validate({"decision": "allow", "obligations": [], "allowed": True})
+        PolicyDecision.model_validate({"decision": "deny", "obligations": [
+            {"type": "log", "target": "audit"}], "allowed": False})
