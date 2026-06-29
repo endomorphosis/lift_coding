@@ -325,6 +325,21 @@ follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`,
 `tools/call`, and `control_surface receipts` before downstream phone, desktop,
 or Meta glasses flows consume the Python MCP backends.
 
+MGW-559 refreshes that same VAIOS-G723 launch Playwright validation gate for
+the current objective-gap scan:
+`data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-559-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-06-29-mgw-559-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-559-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate assert the MGW-559 launch Playwright validation gate
+for catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
+`control_surface receipts`. Any dashboard or backend validation failure remains
+supervisor-generated follow-up work for `VAIOS-G723`.
+
 The executable gate is:
 
 ```bash
