@@ -1,13 +1,13 @@
-# HAO-719 Daemon Launch Health Gate
+# HAO-725 Daemon Launch Health Gate
 
 Date: 2026-06-28
-Task: HAO-719
+Task: HAO-725
 Goal id: VAIOS-G728
 Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
 Packet goals: VAIOS-G724, VAIOS-G728
 Evidence term: launch Playwright validation gate
 
-HAO-719 closes the current Hallucinate App daemon launch orchestration objective gap by binding the `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` daemon launch plan to the replayable Hallucinate App Playwright gate. The proof reuses the shared MGW-535 packet gate so VAIOS-G724 and VAIOS-G728 stay aligned while the supervisor-fed HAO backlog has a current receipt for the 2026-06-28 gap scan.
+HAO-725 closes the Hallucinate App daemon launch orchestration objective gap by binding the `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` daemon launch plan to the replayable Hallucinate App Playwright gate. The proof keeps the supervisor-fed backlog aligned with the VAIOS-G724/VAIOS-G728 packet and records the Swissknife handoff that consumes the daemon health and dashboard capability catalog evidence.
 
 ## Gate Fixture
 
@@ -15,7 +15,7 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
 {
   "schema": "hallucinate_app.daemon_launch_validation_gate.v1",
   "receipt_schema": "launch_readiness_receipt_v1",
-  "task_id": "HAO-719",
+  "task_id": "HAO-725",
   "vai_task_id": "VAI-519",
   "vai_task_ids": [
     "VAI-519",
@@ -50,10 +50,9 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "data/virtual_ai_os/discovery/2026-06-28-vai-540-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md"
   ],
-  "objective_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md",
+  "objective_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-objective-gap-b023c8de5b69.md",
   "objective_gap_receipts": [
     "data/virtual_ai_os/discovery/2026-06-26-vai-519-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-06-27-vai-530-objective-gap-b023c8de5b69.md",
@@ -61,10 +60,9 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "data/virtual_ai_os/discovery/2026-06-28-vai-538-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-06-28-vai-540-objective-gap-b023c8de5b69.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-objective-gap-b023c8de5b69.md",
-    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md"
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-objective-gap-b023c8de5b69.md"
   ],
-  "supervisor_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md",
+  "supervisor_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-objective-gap-b023c8de5b69.md",
   "supervisor_gap_receipts": [
     "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-objective-gap-b023c8de5b69.md",
@@ -72,7 +70,7 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-objective-gap-b023c8de5b69.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-objective-gap-b023c8de5b69.md"
   ],
-  "hallucinate_backlog_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md",
+  "hallucinate_backlog_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md",
   "hallucinate_backlog_receipts": [
     "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-daemon-launch-health-gate.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md",
@@ -80,13 +78,13 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-daemon-launch-health-gate.md",
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md"
   ],
-  "launch_gate_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md",
-  "receipt_fixture": "hallucinate_app/test/e2e/fixtures/hao-719-daemon-launch-health-gate.json",
+  "launch_gate_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md",
+  "receipt_fixture": "hallucinate_app/test/e2e/fixtures/hao-725-daemon-launch-health-gate.json",
   "validation_commands": [
     "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q",
+    "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
     "test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses",
-    "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts",
-    "npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts"
+    "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
   ],
   "playwright_specs": [
     "hallucinate_app/test/e2e/daemon-launch-health.spec.ts",
@@ -162,8 +160,8 @@ HAO-719 closes the current Hallucinate App daemon launch orchestration objective
 
 ## Evidence
 
-- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes HAO-719 through `backlog_task_ids`, `supervisor_gap_receipts`, `hallucinate_backlog_receipts`, and `getDaemonLaunchValidationGates()` while preserving the shared MGW-535 daemon launch validation gate.
-- `hallucinate_app/test/e2e/daemon-launch-health.spec.ts` asserts the HAO-719 fixture against the manager gate, daemon health paths, MCP RPC paths, backend packages, dashboard catalog coverage, and Swissknife handoff records.
-- `hallucinate_app/test/e2e/fixtures/hao-719-daemon-launch-health-gate.json` mirrors this receipt for Playwright and supervisor replay.
-- `data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md` is covered by the launch Playwright validation gate and remains aligned with `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
-- Attempt 2 validation on 2026-06-28 passed `PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q` and `npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts`, preserving the launch Playwright validation gate evidence for HAO-719 without changing backlog completion metadata.
+- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes HAO-725 through `backlog_task_ids`, `supervisor_gap_receipts`, `hallucinate_backlog_receipts`, `getLaunchPlan()`, and `getDaemonLaunchValidationGates()` while preserving the shared MGW-535 daemon launch validation gate.
+- `hallucinate_app/test/e2e/daemon-launch-health.spec.ts` asserts the HAO-725 fixture against the live manager gate, daemon health paths, MCP RPC paths, backend packages, dashboard capability catalog coverage, and Swissknife handoff records.
+- `hallucinate_app/test/e2e/fixtures/hao-725-daemon-launch-health-gate.json` mirrors this receipt for Playwright and supervisor replay.
+- `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts` asserts the same HAO-725 Swissknife backend handoff records during `test:e2e:meta-glasses`.
+- `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md` lists this gate as VAIOS-G728 evidence and keeps the packet sibling VAIOS-G724 aligned.

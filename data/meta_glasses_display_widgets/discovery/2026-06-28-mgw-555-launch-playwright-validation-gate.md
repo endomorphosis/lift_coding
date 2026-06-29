@@ -7,6 +7,7 @@ Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
 Packet goals: VAIOS-G724, VAIOS-G728
 Evidence term: launch Playwright validation gate
 Source gap: data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-555-objective-gap-3e00ad2a0074.md
+Gate state: gate_closed_by_playwright_validation
 
 ## Gate
 
@@ -29,11 +30,18 @@ The full launch packet command remains:
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 ```
 
+This receipt is the closed MGW-555 launch Playwright validation gate contract:
+the dashboard catalog fixture carries `gate_closed_by_playwright_validation`,
+the Hallucinate App specs assert that state from the live manager, and
+Swissknife rejects the catalog if the MGW-555 gate loses the packet sibling
+`VAIOS-G728` validation commands.
+
 ## Evidence
 
 - `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes
   `MGW-555` in `launch_validation_gates` with `VAIOS-G724`, packet sibling
-  `VAIOS-G728`, the MGW-555 objective gap receipt, and this launch gate receipt.
+  `VAIOS-G728`, `gate_closed_by_playwright_validation`, the MGW-555 objective
+  gap receipt, and this launch gate receipt.
 - `hallucinate_app/test/e2e/fixtures/mgw-555-mcp-dashboard-launch-gate.json`
   records the required backend packages, `tools/list`, `tools/call`, daemon
   health paths, dashboard capability catalog, Swissknife applications, and the
@@ -66,6 +74,7 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 
 ## Gate State
 
-Any missing catalog entry, daemon health route, MCP tool operation, Swissknife
-handoff, or Playwright proof remains launch work for `VAIOS-G724` and packet
-sibling `VAIOS-G728`.
+The MGW-555 gate is closed only while all catalog entries, daemon health routes,
+MCP tool operations, Swissknife handoffs, and Playwright proofs remain present
+for `VAIOS-G724` and packet sibling `VAIOS-G728`. Any regression in those
+terms reopens supervisor-fed launch work.

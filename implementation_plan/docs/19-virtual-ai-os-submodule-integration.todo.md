@@ -4780,7 +4780,7 @@ cadence remains parseable and resumable.
 
 ## VAI-539 Close objective gap: Hallucinate App MCP dashboard capability catalog
 
-- Status: blocked
+- Status: todo
 - Completion: manual
 - Priority: P0
 - Track: launch
@@ -4861,7 +4861,7 @@ cadence remains parseable and resumable.
 
 ## VAI-542 Close objective gap: Hallucinate MCP dashboard interoperability console
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
@@ -4931,7 +4931,7 @@ cadence remains parseable and resumable.
 
 ## VAI-544 Resolve merge retry-budget failure for VAI-046
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -4942,11 +4942,23 @@ cadence remains parseable and resumable.
 
 ## VAI-545 Resolve merge retry-budget failure for VAI-107
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Priority: P1
 - Track: ops
 - Depends on: 
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-28-vai-545-vai-107-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-107. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-28-vai-545-vai-107-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-107 from strategy blocked_tasks.
+
+## VAI-546 Resolve merge retry-budget failure for VAI-543
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-29-vai-546-vai-543-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-543. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-29-vai-546-vai-543-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-543 from strategy blocked_tasks.

@@ -2695,7 +2695,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-547 Close objective gap: Hallucinate MCP dashboard interoperability console
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
@@ -2890,7 +2890,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-556 Close objective gap: Hallucinate App daemon launch orchestration
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
@@ -2933,3 +2933,84 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-557-mgw-547-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-547. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-557-mgw-547-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-547 from strategy blocked_tasks.
+
+## MGW-558 Close objective gap: Hallucinate MCP dashboard interoperability console
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-mcp-dashboard
+- Bundle shard: data/meta_glasses_display_widgets/objective_bundles/objective-launch-hallucinate-mcp-dashboard.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G697
+- Graph depth: 1
+- Parallel lane: hallucinate-mcp-dashboard
+- Conflict policy: keep Hallucinate App dashboard, daemon manager, and Swissknife catalog edits additive; preserve one shared catalog and one receipt schema when resolving parallel UI/test changes
+- Goal id: VAIOS-G723
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App menus dashboards MCP dashboard capability catalog daemon health tools/list tools/call ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py Swissknife MCP++ Playwright launch interoperability
+- AST query: MenuGenerator, mcpServers, dashboardMcpServers, getLaunchPlan, getDashboardCapabilityCatalog, mcp_daemon_manager, mcp-feature-exposure, mcp-dashboard-interoperability, ControlSurfaceInvocationGate
+- Surplus group: objective/VAIOS-G723
+- Merge key: 3997b2fdaa13d4a4
+- Merge family: objective/VAIOS-G723
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate
+- Goal packet: 
+- Goal packet role: 
+- Goal packet goals: 
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: 423c5c08373fafe1
+- Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-558-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+
+## MGW-559 Close objective gap: Hallucinate MCP dashboard interoperability console
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-mcp-dashboard
+- Bundle shard: data/meta_glasses_display_widgets/objective_bundles/objective-launch-hallucinate-mcp-dashboard.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G697
+- Graph depth: 1
+- Parallel lane: hallucinate-mcp-dashboard
+- Conflict policy: keep Hallucinate App dashboard, daemon manager, and Swissknife catalog edits additive; preserve one shared catalog and one receipt schema when resolving parallel UI/test changes
+- Goal id: VAIOS-G723
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App menus dashboards MCP dashboard capability catalog daemon health tools/list tools/call ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py Swissknife MCP++ Playwright launch interoperability
+- AST query: MenuGenerator, mcpServers, dashboardMcpServers, getLaunchPlan, getDashboardCapabilityCatalog, mcp_daemon_manager, mcp-feature-exposure, mcp-dashboard-interoperability, ControlSurfaceInvocationGate
+- Surplus group: objective/VAIOS-G723
+- Merge key: 3997b2fdaa13d4a4
+- Merge family: objective/VAIOS-G723
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate
+- Goal packet: 
+- Goal packet role: 
+- Goal packet goals: 
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: 423c5c08373fafe1
+- Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-559-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+
+## MGW-560 Resolve merge retry-budget failure for MGW-559
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-560-mgw-559-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-559. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-560-mgw-559-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-559 from strategy blocked_tasks.

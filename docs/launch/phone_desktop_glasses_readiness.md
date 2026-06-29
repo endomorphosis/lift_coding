@@ -277,6 +277,14 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 dashboard catalog before Swissknife, phone, desktop, or glasses launch flows
 consume those backend capabilities.
 
+VAI-543 readiness coverage preserves these exact dashboard evidence terms:
+Hallucinate App menus; Hallucinate App MCP dashboard; dashboard capability
+catalog; backend service catalog; daemon health; MCP++ telemetry; tools/list;
+tools/call; control_surface receipts; Swissknife applications; catalog
+normalization; dashboard UI wiring; mediated tool-call receipts; Swissknife
+consumers; Playwright coverage; supervisor-generated follow-up subtasks;
+launch Playwright validation gate.
+
 VAI-542 is the matching Hallucinate MCP dashboard interoperability console gate
 for HAO-724:
 `data/virtual_ai_os/discovery/2026-06-28-vai-542-mcp-dashboard-launch-gate.md`
@@ -295,6 +303,49 @@ Swissknife consumers, Playwright coverage, supervisor-generated follow-up
 subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
 `control_surface receipts` tied to the shared Hallucinate MCP dashboard
 catalog.
+It also preserves the packet-level catalog terms `hallucinate_app menus`,
+Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
+`tools/list`, `tools/call`, `ipfs_accelerate_py MCP server`,
+`ipfs_datasets_py MCP server`, `ipfs_kit_py MCP server`, Swissknife
+applications, Playwright MCP dashboard interoperability, and launch Playwright
+validation gate.
+
+MGW-558 is the current Meta glasses objective-gap mirror for the same
+VAIOS-G723 Hallucinate MCP dashboard interoperability console:
+`data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-558-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-06-29-mgw-558-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-558-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate now assert the MGW-558 launch Playwright validation
+gate for catalog normalization, dashboard UI wiring, mediated tool-call
+receipts, Swissknife consumers, Playwright coverage, supervisor-generated
+follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`,
+`tools/call`, and `control_surface receipts` before downstream phone, desktop,
+or Meta glasses flows consume the Python MCP backends.
+
+MGW-559 refreshes that same VAIOS-G723 launch Playwright validation gate for
+the current objective-gap scan:
+`data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-559-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-06-29-mgw-559-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-559-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate assert the MGW-559 launch Playwright validation gate
+for catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
+`control_surface receipts`. Any dashboard or backend validation failure remains
+supervisor-generated follow-up work for `VAIOS-G723`.
+
+Attempt 6 validation on 2026-06-29 passed the backlog/objective queue tests,
+Hallucinate daemon-manager catalog check, Hallucinate MCP dashboard backend
+Playwright gate, no-display Playwright runner contract, Swissknife MCP
+dashboard consumer gate, Swissknife Meta glasses gate, and Hallucinate
+multimodal `control_surface` gate. Electron UI dashboard cases remained
+correctly skipped on this host because no graphical display server was present.
 
 The executable gate is:
 
