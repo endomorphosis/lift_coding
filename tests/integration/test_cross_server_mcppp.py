@@ -380,3 +380,13 @@ class TestSpecConformance:
                                                   "mcp++/policy": True}},
                 "serverInfo": {"name": name, "version": "1.0.0"},
             })
+
+    def test_error_codes_canonical(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import ErrorCode
+        canonical = {e.value for e in ErrorCode}
+        # Codes both servers emit on JSON-RPC error paths.
+        for code in (-32600, -32601, -32603, -32000):
+            assert code in canonical, f"server error code {code} not in spec ErrorCode"
