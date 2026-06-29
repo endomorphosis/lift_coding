@@ -319,3 +319,18 @@ class TestSpecConformance:
             methods=[MethodSignature(name="load")],
         )
         Spec(**iface.to_dict())  # raises if non-conformant
+
+    def test_dag_event_wire_shapes_conform(self):
+        spec_dir = os.path.join(_ext_dir, "Mcp-Plus-Plus", "tests-py")
+        if spec_dir not in sys.path:
+            sys.path.insert(0, spec_dir)
+        from validators.models import DAGEvent
+        c = "bafkreifxone36h5jwjwulvkf27le3lmwon7jz65tzo27luipw55q7tcevu"
+        # accelerate-style: epoch float timestamp, generic payload
+        DAGEvent.model_validate({"event_cid": c, "event_type": "envelope",
+                                 "parents": [], "timestamp": 1782680000.0,
+                                 "payload": {"method": "infer"}})
+        # datasets-style: ISO timestamp, CID-bundle payload
+        DAGEvent.model_validate({"event_cid": c, "event_type": "envelope",
+                                 "parents": [], "timestamp": "2026-06-28T00:00:00Z",
+                                 "payload": {"intent_cid": c, "receipt_cid": c}})
