@@ -320,12 +320,15 @@ gate, Swissknife Meta glasses gate, and Hallucinate multimodal
 subtasks for any future dashboard or backend validation failure.
 
 HAO-728 releases the HAO-727 merge retry-budget blocker with
-`data/hallucinate_multimodal_control/discovery/2026-06-29-hao-728-hao-727-merge-retry-budget.md`.
+`data/hallucinate_multimodal_control/discovery/2026-06-30-hao-728-hao-727-merge-retry-budget.md`.
 The recorded failure mode was a dirty `hallucinate_app` submodule checkout, not
 a semantic dashboard conflict, so no merge resolver application was required.
-The repaired submodule pointer preserves the HAO-727 Hallucinate App and
-Swissknife dashboard implementation commits while marking the repair complete
-in the Hallucinate todo metadata.
+The repaired submodule pointer preserves the HAO-727 Hallucinate App
+implementation through `hallucinate_app` commit
+`d87ef76975d83a59c9a62a65bbcda3d138c908cd`, keeps the Swissknife dashboard
+consumer implementation at `0bc501a882d80446394497606e330a29e49f4267`, and
+marks the June 30 repair complete in the Hallucinate todo metadata at
+`67ae7396866a8c1c0602f0f069f50dd115f96804`.
 
 MGW-558 is the current Meta glasses objective-gap mirror for the same
 VAIOS-G723 Hallucinate MCP dashboard interoperability console:
