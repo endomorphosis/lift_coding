@@ -78,3 +78,30 @@ The launch Playwright validation gate remains the HAO-724 ownership boundary:
 ```text
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
 ```
+
+## Repair Completion
+
+- Current `hallucinate_app` head:
+  `47274ae2f5c88290182fe24260e9ce2de3ba27dd`
+- Current `swissknife` head:
+  `a28e1e2b41555666df7618e1c5791101e5a629bf`
+- Current external package heads:
+  `external/ipfs_accelerate` at
+  `87e51a7b532d81b6eac7f8ccb9d097e62009c1d6`,
+  `external/ipfs_datasets` at
+  `2b742d60c32df44ecf1dea70d76d004ccb3fb6fe`, and
+  `external/ipfs_kit` at
+  `8a36ec16fa4b2b9e712eebcb00da78433984174c`.
+- HAO-726 is marked completed in the Hallucinate todo metadata in
+  `hallucinate_app` commit `47274ae2f5c88290182fe24260e9ce2de3ba27dd`, so
+  the supervisor can release HAO-724 from `blocked_tasks`.
+- Merge resolver: not run. The captured blocker was `main_checkout_dirty`,
+  with no conflicted source files or resolver events path, so
+  `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` was not
+  applicable for this repair.
+- Repair validation on 2026-06-30:
+  `test -f /home/barberb/lift_coding/data/hallucinate_multimodal_control/discovery/2026-06-28-hao-726-hao-724-merge-retry-budget.md`
+  passed, and
+  `npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts`
+  passed with 29 headless backend tests passing and 33 display-dependent
+  Electron tests skipped.

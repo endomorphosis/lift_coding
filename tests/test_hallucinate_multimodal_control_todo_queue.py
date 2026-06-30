@@ -149,6 +149,9 @@ HAO_727_OBJECTIVE_GAP_PATH = (
 HAO_727_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
 )
+HAO_728_RETRY_BUDGET_REPAIR_PATH = (
+    DISCOVERY_ROOT / "2026-06-30-hao-728-hao-727-merge-retry-budget.md"
+)
 VAI_542_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -1509,6 +1512,110 @@ def test_mgw_559_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in hallucinate_receipt
 
 
+def test_mgw_561_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_vaios_g723():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    meta_receipt_path = (
+        MGW_DISCOVERY_ROOT / "2026-06-30-mgw-561-launch-playwright-validation-gate.md"
+    )
+    hallucinate_receipt_path = (
+        DISCOVERY_ROOT / "2026-06-30-mgw-561-mcp-dashboard-launch-gate.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "mgw-561-mcp-dashboard-launch-gate.json"
+    )
+    objective_gap_path = (
+        MGW_DISCOVERY_ROOT / "2026-06-30-mgw-561-objective-gap-7ea369464239.md"
+    )
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    meta_receipt = meta_receipt_path.read_text(encoding="utf-8")
+    hallucinate_receipt = hallucinate_receipt_path.read_text(encoding="utf-8")
+    objective_gap = objective_gap_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g723_text = " ".join([*goals["VAIOS-G723"].fields.keys(), *goals["VAIOS-G723"].fields.values()])
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "MGW-561"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["source_gap_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-06-30-mgw-561-objective-gap-7ea369464239.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-06-30-mgw-561-launch-playwright-validation-gate.md"
+    )
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-06-30-mgw-561-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json"
+    assert fixture["child_goals"] == [
+        "VAIOS-G723-C1 Catalog normalization",
+        "VAIOS-G723-C2 Dashboard UI wiring",
+        "VAIOS-G723-C3 Mediated tool-call receipts",
+        "VAIOS-G723-C4 Swissknife consumers",
+        "VAIOS-G723-C5 Playwright coverage",
+        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
+    ]
+    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+    assert fixture["supervisor_follow_up_subtasks"] == fixture["follow_up_subtasks"]
+
+    for term in fixture["required_evidence"]:
+        assert term in meta_receipt
+        assert term in hallucinate_receipt
+        assert term in g723_text
+        assert term in readiness_source
+        assert term in playwright_source
+
+    for term in (
+        "Hallucinate App MCP dashboard",
+        "dashboard capability catalog",
+        "daemon health",
+        "tools/list",
+        "tools/call",
+        "ipfs_accelerate_py MCP server",
+        "ipfs_datasets_py MCP server",
+        "ipfs_kit_py MCP server",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in objective_gap
+
+    for term in (
+        "MGW-561",
+        "launch Playwright validation gate",
+        "mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
+        "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json",
+    ):
+        assert term in meta_receipt
+        assert term in hallucinate_receipt
+        assert term in heap_source
+        assert term in readiness_source
+
+    assert "MGW-561" in swissknife_consumer_source
+    assert "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json" in swissknife_consumer_source
+    assert "MGW-561 proof" in heap_source
+    assert "supervisor-generated follow-up work for `VAIOS-G723`" in meta_receipt
+    assert "supervisor-generated follow-up work for `VAIOS-G723`" in hallucinate_receipt
+
+
 def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
@@ -2828,6 +2935,35 @@ def test_hallucinate_multimodal_todo_board_is_daemon_parseable():
     assert len(tasks) >= 14
     assert all(task.priority in {"P0", "P1", "P2", "P3"} for task in tasks)
     assert all(task.track for task in tasks)
+
+
+def test_hao_728_releases_hao_727_merge_retry_budget_blocker():
+    tasks = {task.task_id: task for task in _load_tasks()}
+    task = tasks["HAO-728"]
+    repair_source = HAO_728_RETRY_BUDGET_REPAIR_PATH.read_text(encoding="utf-8")
+
+    assert task.status == "completed"
+    assert task.priority == "P1"
+    assert task.track == "ops"
+    assert "HAO-727" in task.title
+    assert HAO_728_RETRY_BUDGET_REPAIR_PATH.parent.relative_to(REPO_ROOT).as_posix() in task.outputs
+    assert "main_checkout_dirty_conflict" in task.metadata["completion"]
+    assert "d87ef769" in task.metadata["completion"]
+    assert "3d32e4ae" in task.metadata["completion"]
+    assert "0bc501a" in task.metadata["completion"]
+
+    for required in (
+        "Owning implementation repositories",
+        "67ae7396866a8c1c0602f0f069f50dd115f96804",
+        "a28e1e2b41555666df7618e1c5791101e5a629bf",
+        "d87ef76975d83a59c9a62a65bbcda3d138c908cd",
+        "3d32e4aee89be027e45e76896cf6ee04225b3e51",
+        "0bc501a882d80446394497606e330a29e49f4267",
+        "main_checkout_dirty_conflict",
+        "not a semantic source conflict",
+        "release HAO-727 from `blocked_tasks`",
+    ):
+        assert required in repair_source
 
 
 def test_hallucinate_multimodal_todo_dependencies_are_declared_tasks():

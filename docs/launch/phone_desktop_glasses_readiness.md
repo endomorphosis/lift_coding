@@ -310,6 +310,38 @@ Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
 applications, Playwright MCP dashboard interoperability, and launch Playwright
 validation gate.
 
+HAO-727 attempt 3 records a fresh validation receipt at
+`data/hallucinate_multimodal_control/discovery/2026-06-29-hao-727-attempt-3-validation.md`.
+That receipt confirms the backlog/objective queue tests, Hallucinate
+daemon-manager catalog check, Hallucinate MCP dashboard backend Playwright
+gate, no-display Playwright runner contract, Swissknife MCP dashboard consumer
+gate, Swissknife Meta glasses gate, and Hallucinate multimodal
+`control_surface` gate passed while preserving supervisor-generated follow-up
+subtasks for any future dashboard or backend validation failure.
+
+HAO-727 attempt 5 records the current validation receipt at
+`data/hallucinate_multimodal_control/discovery/2026-06-30-hao-727-attempt-5-validation.md`.
+The Hallucinate App catalog exposes that receipt through the `HAO-727`
+`launch_validation_gates` entry, and
+`hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` plus
+`swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert the same
+attempt-5 pointer before the dashboard launch gate can close. This keeps
+catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
+`control_surface receipts` tied to the VAIOS-G723 objective heap.
+
+HAO-728 releases the HAO-727 merge retry-budget blocker with
+`data/hallucinate_multimodal_control/discovery/2026-06-30-hao-728-hao-727-merge-retry-budget.md`.
+The recorded failure mode was a dirty `hallucinate_app` submodule checkout, not
+a semantic dashboard conflict, so no merge resolver application was required.
+The repaired submodule pointer preserves the HAO-727 Hallucinate App
+implementation through `hallucinate_app` commit
+`d87ef76975d83a59c9a62a65bbcda3d138c908cd`, keeps the Swissknife dashboard
+consumer implementation at `0bc501a882d80446394497606e330a29e49f4267`, and
+marks the June 30 repair complete in the Hallucinate todo metadata at
+`67ae7396866a8c1c0602f0f069f50dd115f96804`.
+
 MGW-558 is the current Meta glasses objective-gap mirror for the same
 VAIOS-G723 Hallucinate MCP dashboard interoperability console:
 `data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-558-launch-playwright-validation-gate.md`.
@@ -346,6 +378,21 @@ Playwright gate, no-display Playwright runner contract, Swissknife MCP
 dashboard consumer gate, Swissknife Meta glasses gate, and Hallucinate
 multimodal `control_surface` gate. Electron UI dashboard cases remained
 correctly skipped on this host because no graphical display server was present.
+
+MGW-561 refreshes the same VAIOS-G723 launch Playwright validation gate for the
+June 30 objective-gap scan:
+`data/meta_glasses_display_widgets/discovery/2026-06-30-mgw-561-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-06-30-mgw-561-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate assert the MGW-561 launch Playwright validation gate
+for catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
+`control_surface receipts`. Any dashboard or backend validation failure remains
+supervisor-generated follow-up work for `VAIOS-G723`.
 
 The executable gate is:
 

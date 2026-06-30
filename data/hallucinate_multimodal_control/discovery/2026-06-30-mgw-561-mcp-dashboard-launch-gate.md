@@ -1,15 +1,16 @@
-# HAO-727 MCP Dashboard Launch Gate
+# MGW-561 MCP Dashboard Launch Gate
 
-Date: 2026-06-28
-Task: HAO-727
+Date: 2026-06-30
+Task: MGW-561
 Goal id: VAIOS-G723
 Evidence term: launch Playwright validation gate
-Source gap: data/hallucinate_multimodal_control/discovery/2026-06-28-hao-727-objective-gap-7ea369464239.md
+Source gap: data/meta_glasses_display_widgets/discovery/2026-06-30-mgw-561-objective-gap-7ea369464239.md
+Meta launch gate: data/meta_glasses_display_widgets/discovery/2026-06-30-mgw-561-launch-playwright-validation-gate.md
 
-HAO-727 keeps the Hallucinate supervisor-fed backlog aligned with the
-VAIOS-G723 Hallucinate MCP dashboard interoperability console. The shared
-dashboard capability catalog remains the source consumed by Swissknife
-applications and by the Virtual AI OS launch readiness gate.
+This Hallucinate supervisor mirror keeps the MGW-561 objective gap aligned with
+the VAIOS-G723 Hallucinate MCP dashboard interoperability console. The shared
+dashboard capability catalog remains the source consumed by Hallucinate App
+dashboards, Swissknife applications, and downstream launch-readiness gates.
 
 The executable launch Playwright validation gate is:
 
@@ -23,10 +24,27 @@ The full validation chain remains:
 PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q
 npm --prefix hallucinate_app run test:daemon-manager
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)
 npm --prefix swissknife run test:e2e:mcp
 test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses
 test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 ```
+
+## Attempt 1 Validation Contract
+
+MGW-561 attempt 1 keeps the Hallucinate backlog, Meta glasses backlog, and
+VAIOS-G723 objective heap aligned through one launch readiness receipt:
+
+- `hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json`
+  is the shared `launch_readiness_receipt_v1` fixture.
+- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes the
+  same MGW-561 launch gate through the dashboard capability catalog.
+- `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`,
+  `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, and
+  `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert catalog
+  normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife
+  consumers, Playwright coverage, daemon health, MCP++ telemetry, `tools/list`,
+  `tools/call`, and `control_surface receipts`.
 
 ## Covered Terms
 
@@ -48,21 +66,6 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 - supervisor-generated follow-up subtasks
 - launch Playwright validation gate
 
-## Dashboard Catalog Evidence Terms
-
-- hallucinate_app menus
-- Hallucinate App MCP dashboard
-- dashboard capability catalog
-- daemon health
-- tools/list
-- tools/call
-- ipfs_accelerate_py MCP server
-- ipfs_datasets_py MCP server
-- ipfs_kit_py MCP server
-- Swissknife applications
-- Playwright MCP dashboard interoperability
-- launch Playwright validation gate
-
 ## Child Goals
 
 - VAIOS-G723-C1 Catalog normalization
@@ -71,21 +74,6 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 - VAIOS-G723-C4 Swissknife consumers
 - VAIOS-G723-C5 Playwright coverage
 - VAIOS-G723-C6 Supervisor-generated follow-up subtasks
-
-## Evidence
-
-- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes the
-  HAO-727 launch gate in the shared dashboard capability catalog.
-- `hallucinate_app/test/e2e/fixtures/hao-727-mcp-dashboard-launch-gate.json`
-  records the matching launch readiness receipt.
-- `data/hallucinate_multimodal_control/discovery/2026-06-30-hao-727-attempt-5-validation.md`
-  records the current attempt-5 validation results and is exposed through the
-  HAO-727 `launch_validation_gates` catalog entry.
-- `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`,
-  `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, and
-  `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert the gate against
-  the live catalog, `tools/list`, `tools/call`, daemon health paths, mediated
-  receipts, and the three IPFS MCP package dashboards.
 
 Any dashboard catalog, UI wiring, mediated `tools/list`, mediated `tools/call`,
 Swissknife consumer, backend validation, or Playwright failure remains
