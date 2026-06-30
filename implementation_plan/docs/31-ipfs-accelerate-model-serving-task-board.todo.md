@@ -6,20 +6,26 @@ Scope: `external/ipfs_accelerate/ipfs_accelerate_py` model server, containerizer
 ## Milestone A: Canonical Runtime And Surface Freeze
 
 ### A1. Lock canonical serving entrypoints
-- [ ] Declare `hf_model_server/server.py` and `unified_inference_service.py` as the authoritative model-serving runtime
-- [ ] Declare `inference_backend_manager.py` as the authoritative endpoint multiplexer
-- [ ] Declare `docker_executor.py` as the authoritative local containerizer
-- [ ] Declare `p2p_tasks/orchestrator.py` and `workflow_manager.py` as the authoritative orchestration path
-- [ ] Mark `ipfs_accelerate_py_legacy.py`, `backup/`, `archive/`, `reorganization_backup*`, and mirrored nested submodules as non-canonical
+- [x] Declare `hf_model_server/server.py` and `unified_inference_service.py` as the authoritative model-serving runtime
+- [x] Declare `inference_backend_manager.py` as the authoritative endpoint multiplexer
+- [x] Declare `docker_executor.py` as the authoritative local containerizer
+- [x] Declare `p2p_tasks/orchestrator.py` and `workflow_manager.py` as the authoritative orchestration path
+- [x] Mark `ipfs_accelerate_py_legacy.py`, `backup/`, `archive/`, `reorganization_backup*`, and mirrored nested submodules as non-canonical
+
+Progress note:
+- Added canonical surface and exclusion declarations in `implementation_plan/docs/33-ipfs-accelerate-serving-integration-contract-2026-06-30.md`.
 
 Definition of done:
 - Contributors have one runtime path per subsystem
 - Backup and mirrored trees are excluded from production planning and release gates
 
 ### A2. Publish serving integration contract
-- [ ] Standardize one execution record shape for model registration, model load, inference start, inference completion, inference failure, workflow dispatch, and container completion
-- [ ] Standardize required fields for model artifact metadata, inference run metadata, backend registry entries, and orchestration lineage
-- [ ] Document required call order into `ipfs_kit_py` and `ipfs_datasets_py`
+- [x] Standardize one execution record shape for model registration, model load, inference start, inference completion, inference failure, workflow dispatch, and container completion
+- [x] Standardize required fields for model artifact metadata, inference run metadata, backend registry entries, and orchestration lineage
+- [x] Document required call order into `ipfs_kit_py` and `ipfs_datasets_py`
+
+Progress note:
+- Published contract spec in `implementation_plan/docs/33-ipfs-accelerate-serving-integration-contract-2026-06-30.md` and added enforcement coverage in `external/ipfs_accelerate/test/api/test_serving_integration_contract_doc.py`.
 
 Definition of done:
 - Contract is written down and referenced by tests
