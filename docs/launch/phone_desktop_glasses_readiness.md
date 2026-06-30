@@ -319,6 +319,18 @@ gate, Swissknife Meta glasses gate, and Hallucinate multimodal
 `control_surface` gate passed while preserving supervisor-generated follow-up
 subtasks for any future dashboard or backend validation failure.
 
+HAO-727 attempt 5 records the current validation receipt at
+`data/hallucinate_multimodal_control/discovery/2026-06-30-hao-727-attempt-5-validation.md`.
+The Hallucinate App catalog exposes that receipt through the `HAO-727`
+`launch_validation_gates` entry, and
+`hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` plus
+`swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert the same
+attempt-5 pointer before the dashboard launch gate can close. This keeps
+catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, and
+`control_surface receipts` tied to the VAIOS-G723 objective heap.
+
 HAO-728 releases the HAO-727 merge retry-budget blocker with
 `data/hallucinate_multimodal_control/discovery/2026-06-30-hao-728-hao-727-merge-retry-budget.md`.
 The recorded failure mode was a dirty `hallucinate_app` submodule checkout, not
