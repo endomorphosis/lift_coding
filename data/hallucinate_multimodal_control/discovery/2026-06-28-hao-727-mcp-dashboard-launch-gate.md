@@ -78,6 +78,9 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
   HAO-727 launch gate in the shared dashboard capability catalog.
 - `hallucinate_app/test/e2e/fixtures/hao-727-mcp-dashboard-launch-gate.json`
   records the matching launch readiness receipt.
+- `data/hallucinate_multimodal_control/discovery/2026-06-30-hao-727-attempt-5-validation.md`
+  records the current attempt-5 validation results and is exposed through the
+  HAO-727 `launch_validation_gates` catalog entry.
 - `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`,
   `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, and
   `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert the gate against
