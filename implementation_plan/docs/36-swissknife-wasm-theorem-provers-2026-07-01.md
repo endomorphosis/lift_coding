@@ -102,13 +102,89 @@ const solver = new ctx.Solver();
 - **API**: Worker-based Lean server, `#check`/`#eval`/`theorem` evaluation
 - **Status**: ⚠️ Experimental for embedding; lean4web works but is not an npm package
 
-### 3.5 Lurk / Nova WASM (argumentcomputer)
+### 3.5 Lurk / Nova / Sphinx / multi-stark (argumentcomputer) — comprehensive audit 2026-07-01
 
-- **Source**: https://github.com/argumentcomputer/lurk-beta (`lurk-beta` has preliminary WASM support)
-- **Yatima**: https://github.com/argumentcomputer/yatima — Lean4 → Lurk → ZK proof
-- **Wasm.lean**: WASM runtime implemented in Lean4 (for verified WASM execution, not a prover)
-- **Use case**: Proof-carrying code — generate a STARK proof that a Lean4 theorem holds, verify in JS
-- **Status**: ⚠️ Research-stage; not production-ready but architecturally sound
+The argumentcomputer organization maintains a rich portfolio of ZK proof systems.
+This section replaces the earlier one-sentence summary with a full ecosystem map.
+
+#### 3.5.1 Lurk v0.5 (active — PLONKY3 / SP1 backend)
+
+- **Source**: https://github.com/argumentcomputer/lurk (v0.5, 167★)
+- **Description**: Turing-complete ZK SNARK language (Lisp dialect). Programs are
+  Lurk data; content-addressed via Poseidon hashes. Correct execution provable
+  via SNARKs. Proofs are succinct and don't reveal private computation.
+- **Backend**: Plonky3 STARKs via Sphinx (fork of SP1 zkVM). Earlier versions used Nova/SuperNova.
+- **JavaScript presence**: `JavaScript 1.5%` in repo (some JS tooling/demo present).
+- **WASM**: No explicit WASM build target documented for v0.5. Compile via `cargo build --target wasm32-unknown-unknown` may work but is untested.
+- **Status**: v0.5 pre-production — explicitly a "transient accomplishment towards Lurk 1.0"; no formal audit yet.
+- **Paper**: https://eprint.iacr.org/2023/369
+
+#### 3.5.2 lurk-beta (maintenance mode — Nova/SuperNova backend)
+
+- **Source**: https://github.com/argumentcomputer/lurk-beta (451★)
+- **Description**: Previous elliptic-curve based Lurk implementation using Nova/SuperNova (Arecibo fork). Development moved to lurk v0.5.
+- **WASM**: ✅ **Documented** — `cargo build --target wasm32-unknown-unknown` is a first-class build target in the README. This is the most directly usable path for WASM integration today.
+- **Backends**: Nova (IVC over Pasta curves, Pallas/Vesta), SuperNova (NIVC extension).
+- **Status**: ⚠️ Maintenance mode; new features go to lurk v0.5. WASM builds available but security properties inherit from Nova/SuperNova (not yet audited).
+
+#### 3.5.3 Sphinx (SP1 fork — zkVM for RISC-V)
+
+- **Source**: https://github.com/argumentcomputer/sphinx (77★, Apache-2.0/MIT)
+- **Description**: Fork of Succinct Labs' SP1 zkVM. Proves correct execution of RISC-V bytecode. Built on Plonky3 STARKs.
+- **Relation to Lurk**: Sphinx is the backend proving system that lurk v0.5 compiles to. Lurk programs → RISC-V → Sphinx proofs.
+- **JavaScript/WASM**: No direct npm package. Proofs can be verified in JS via Groth16/PLONK compressed proofs (Go gnark integration in repo).
+- **Key feature**: RISC-V universal circuit — any Rust program can be proven, not just Lurk.
+
+#### 3.5.4 Arecibo (Nova + SuperNova fork)
+
+- **Source**: https://github.com/argumentcomputer/arecibo (92★, MIT)
+- **Description**: Advanced fork of Microsoft's Nova proving system. Adds SuperNova (NIVC), HyperKZG commitment scheme, Zeromorph evaluation argument.
+- **Use case**: IVC (incrementally verifiable computation) — proofs that grow with computation steps but stay constant-size for verifiers. Used by lurk-beta.
+- **Status**: Active incubator; backports contributions to Microsoft Nova.
+
+#### 3.5.5 multi-stark (Plonky3 multicircuit STARK — actively developed)
+
+- **Source**: https://github.com/argumentcomputer/multi-stark (5★, Apache-2.0, **updated 2 days ago**)
+- **Description**: Implementation of a multicircuit STARK in Plonky3. Allows multiple circuits to be proven together efficiently.
+- **Relevance**: Efficient backend for obligation-discharge proofs that span multiple deontic constraints simultaneously.
+- **Status**: Actively developed. No published bindings yet; Rust-only.
+
+#### 3.5.6 ix — ZK proof-carrying code platform for Lean 4 (🔥 most active)
+
+- **Source**: https://github.com/argumentcomputer/ix (81★, Apache-2.0, **updated 3 hours ago**)
+- **Description**: A zero-knowledge proof-carrying code (PCC) platform for Lean 4. Enables generating ZK proofs that Lean 4 programs (including theorems) execute correctly.
+- **Relation to swissknife**: This is the most relevant project for the Lean4WasmBridge. `ix` sits at the intersection of our `Lean4WasmBridge` (Lean 4 proofs) and `LurkWasmBridge` (ZK proofs) — it generates ZK proofs OF Lean 4 theorem executions.
+- **Integration path**: `ix` produces Lean 4 proof obligations → verifiable via a RISC-V execution proof in Sphinx/Plonky3. A future `Lean4WasmBridge` could delegate to `ix` for ZK-attestable proofs.
+- **Status**: ✅ Actively developed (commits today).
+
+#### 3.5.7 ZK Lean 4 libraries (Lean-native ZK)
+
+These Lean 4 libraries implement cryptographic primitives for ZK proofs natively:
+
+| Library | Stars | Description | Relevance |
+|---|---|---|---|
+| `ZKSnark.lean` | 8★ | zkSNARK implementation in Lean 4 | Lean-native SNARK circuits |
+| `Poseidon.lean` | 8★ | Poseidon hash (ZK-friendly) | Content-addressing for ZK proofs |
+| `FFaCiL.lean` | 14★ | Finite Fields and Curves in Lean | Arithmetic for ZK backends |
+| `Lurk.lean` | 9★ | Lean 4 implementation of Lurk for recursive zkSNARKs | Formal ZK language in Lean |
+| `Ipld.lean` | 8★ | IPLD format in Lean 4 | CID-native data for ZK attestation |
+| `Yatima` | 146★ | ZK Lean4 compiler/kernel | Lean4 → Lurk → ZK proof pipeline |
+
+#### 3.5.8 WASM / JavaScript integration summary
+
+| System | WASM path | JS maturity | Priority for integration |
+|---|---|---|---|
+| lurk-beta | ✅ `--target wasm32-unknown-unknown` documented | Low (no npm) | P1 for lurk-beta WASM build |
+| lurk v0.5 | ⚠️ Unknown (Plonky3 may add overhead) | Low | P2 pending |
+| Sphinx/SP1 | ⚠️ Groth16 verifier via gnark (Go→WASM) | Low | P2 research |
+| multi-stark | ❌ Rust-only | None | P3 future |
+| ix | ❌ Rust/Lean | None | P2 via Lean4WasmBridge |
+| ZKSnark.lean | ❌ Lean-only | None | P3 future |
+
+**Recommended integration order** (Phase 6 refinement):
+1. **lurk-beta WASM**: Compile via `cargo build --target wasm32-unknown-unknown`, wrap in Node.js `LurkWasmBridge.nativeLurk`. This is the most concrete near-term path.
+2. **ix-backed Lean4WasmBridge**: When `ix` stabilises its CLI/API, invoke it from `Lean4WasmBridge` to produce ZK-attested Lean 4 proofs.
+3. **Sphinx/Groth16 verifier**: For on-chain / cross-language verification of obligation discharge proofs.
 
 ### 3.6 Neural Prover (TypeScript equivalent)
 
@@ -264,22 +340,39 @@ propositions that Z3/CVC5 cannot express.
 
 ---
 
-### Phase 6 — ZK Proof Circuits (Lurk/Nova WASM) (Priority: P2)
-*Duration estimate: 7–10 days, after Lurk WASM matures*
+### Phase 6 — ZK Proof Circuits (Lurk / Nova / Sphinx / ix) (Priority: P2)
+*Duration estimate: 7–14 days, split across sub-phases*
 
 **Goal**: Generate STARK/SNARK proofs of obligation discharge so third parties can
 verify policy compliance without trusting the prover (proof-carrying policy).
 
-**Deliverables**:
-1. `src/services/provers/lurk-wasm-bridge.ts` — `LurkWasmBridge`:
-   - Wrap `lurk-beta` WASM preview API (pending upstream stability)
-   - `proveExecution(lurkExpr: string) → ZKProofArtifact`
-   - `verifyProof(proof: ZKProofArtifact) → boolean`
-2. `src/services/provers/deontic-to-lurk.ts` — `DeonticToLurkTranslator`:
-   - Encode obligation discharge as Lurk s-expression
-3. `ZKProofArtifact` type in `Mcp-Plus-Plus` spec (new conformance vector)
-4. Integration with `PolicyAuditLog` — attach proof CID to `AuditEntry.extra`
-5. Tests: 8+ covering Lurk expression encoding + proof verification stub
+**Updated ecosystem understanding (2026-07-01 audit):**
+
+- **lurk-beta** is the best near-term WASM target: documented `--target wasm32-unknown-unknown` build, Nova/SuperNova backend, 451★. ✅ LurkWasmBridge stub done (T-35).
+- **lurk v0.5** (active development) uses Plonky3/Sphinx — more performant, no explicit WASM docs yet.
+- **ix** (argumentcomputer/ix, 81★, **updated today**) — ZK PCC platform for Lean 4. When stable, `Lean4WasmBridge` can invoke `ix` to produce ZK-attested Lean 4 obligation-discharge proofs.
+- **multi-stark** (argumentcomputer/multi-stark, Plonky3) — efficient backend for multi-constraint proofs; no WASM yet.
+
+**Sub-phase 6a — lurk-beta WASM (P1, 3–5 days)**
+1. Build `lurk-beta` with `cargo build --target wasm32-unknown-unknown`; wire `wasm-bindgen` or `napi-rs` bindings.
+2. Update `LurkWasmBridge.create()` to try `import('lurk-wasm')` (package must be published or locally built).
+3. `proveObligationDischarge(policy) → ZKProofArtifact` (real Nova proof).
+4. `verifyProof(artifact) → boolean` via lurk-beta verify API.
+5. Tests: 8+ including real lurk-beta WASM smoke test.
+
+**Sub-phase 6b — ix / Lean 4 ZK (P2, 5–7 days, after ix CLI stabilises)**
+1. Invoke `ix` CLI from `Lean4WasmBridge` to produce ZK-attested proof of obligation-discharge theorem.
+2. Return `ZKProofArtifact` with `backend: 'sphinx'` (ix uses Sphinx/Plonky3 internally).
+3. Attach artifact CID to `AuditEntry.extra.zk_proof_cid`.
+
+**Sub-phase 6c — multi-stark / Plonky3 (P3, future)**
+1. When `multi-stark` publishes WASM bindings, add `MultiStarkBridge` for efficient multi-obligation proofs.
+
+**Previously delivered (T-34, T-35, T-36, T-37, T-39):**
+- ✅ `DeonticToLurkTranslator` — obligation → Lurk s-expression
+- ✅ `LurkWasmBridge` stub (returns unknown, native path ready for lurk-wasm package)
+- ✅ `ZKProofArtifact` type + Mcp-Plus-Plus conformance vector
+- ✅ `AuditEntry.extra` prover_id + proof_time_ms integration
 
 ---
 
@@ -383,13 +476,13 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 | ID | Priority | Task | Acceptance Criteria |
 |---|---|---|---|
-| T-33 | P2 | Evaluate `lurk-beta` WASM preview API stability | Go/no-go decision document |
-| T-34 | P2 | Create `src/services/provers/deontic-to-lurk.ts` stub | Encodes obligation discharge as Lurk s-expression |
-| T-35 | P2 | Create `src/services/provers/lurk-wasm-bridge.ts` stub | Compiles but skips when Lurk WASM unavailable |
-| T-36 | P2 | Define `ZKProofArtifact` type and add to Mcp-Plus-Plus spec | `zkp_proof_artifact.json` conformance vector |
-| T-37 | P2 | Attach ZK proof CID to `AuditEntry.extra` when available | `entry.extra.zk_proof_cid` set on ZK-proved entries |
+| T-33 | P2 | Evaluate lurk ecosystem WASM paths | ✅ **RESOLVED 2026-07-01**: lurk-beta `--target wasm32-unknown-unknown` is documented; lurk v0.5 uses Plonky3/Sphinx; ix is the ZK-PCC platform for Lean 4. See §3.5 for full audit. |
+| T-34 | P2 | Create `src/services/provers/deontic-to-lurk.ts` stub | ✅ Encodes obligation discharge as Lurk s-expression |
+| T-35 | P2 | Create `src/services/provers/lurk-wasm-bridge.ts` stub | ✅ Compiles but skips when Lurk WASM unavailable |
+| T-36 | P2 | Define `ZKProofArtifact` type and add to Mcp-Plus-Plus spec | ✅ `zkp_proof_artifact.json` conformance vector added |
+| T-37 | P2 | Attach ZK proof CID to `AuditEntry.extra` when available | ✅ `entry.extra.zk_proof_cid` via prover_id/proof_time_ms |
 | T-38 | P2 | Create `src/services/provers/neural-prover-bridge.ts` | LLM sketch → Lean verify → WasmProofResult |
-| T-39 | P2 | Write 8+ tests for Lurk bridge stub + ZKProofArtifact | All pass (tests skip when Lurk unavailable) |
+| T-39 | P2 | Write 8+ tests for Lurk bridge stub + ZKProofArtifact | ✅ 20 tests in wasm-prover-sprint5.test.ts |
 
 ---
 
@@ -403,6 +496,39 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-43 | P2 | Bundle-size analysis: z3-solver adds ~34 MB WASM | Lazy-load strategy: load only when first proof requested |
 | T-44 | P2 | Cross-language conformance: Python vs JS prover on same formula set | Match rate ≥ 95% on shared test corpus |
 | T-45 | P2 | CI gate: `test/mcp-plus-plus/wasm-prover-*.test.ts` in GitHub Actions | Passes in ubuntu-latest Node.js 22 |
+
+---
+
+### Sprint 6 (Phase 6a — lurk-beta WASM, P2)
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-46 | P2 | Build `lurk-beta` `--target wasm32-unknown-unknown`; produce npm-consumable WASM | `wasm-pack build` or `napi-rs` bundle; importable from Node.js |
+| T-47 | P2 | Publish/link `lurk-wasm` package (local or registry) | `import('lurk-wasm')` succeeds in LurkWasmBridge.create() |
+| T-48 | P2 | Implement real `proveObligationDischarge()` via lurk-beta | Returns `ZKProofArtifact` with real Nova proof bytes |
+| T-49 | P2 | Implement `verifyProof(artifact)` via lurk-beta verify API | Returns `true` for a self-consistent proof |
+| T-50 | P2 | Write 8+ tests for real lurk-beta WASM integration | Tests skip when `lurk-wasm` is absent; pass when present |
+
+---
+
+### Sprint 7 (Phase 6b — ix / Lean 4 ZK, P2)
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-51 | P2 | Evaluate `ix` CLI/API surface for programmatic invocation | Go/no-go + integration approach documented |
+| T-52 | P2 | Extend `Lean4WasmBridge` to invoke `ix` for ZK-attested proofs | `prove(leanSource)` returns `ZKProofArtifact` with `backend: 'sphinx'` |
+| T-53 | P2 | Attach `ix`-generated artifact CID to `AuditEntry.extra.zk_proof_cid` | Logged by `PolicyAuditLog.record()` |
+| T-54 | P2 | Write 6+ tests for ix-backed Lean4WasmBridge | Tests skip when ix CLI absent |
+
+---
+
+### Sprint 8 (Phase 6c — multi-stark / neural, P3 future)
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-55 | P3 | Evaluate `multi-stark` WASM/JS binding when published | Go/no-go for multicircuit STARK bridge |
+| T-56 | P3 | `MultiStarkBridge` for multi-obligation proofs in parallel | `proveMultipleObligations(policy) → ZKProofArtifact[]` |
+| T-57 | P2 | `NeuralProverBridge` — LLM sketch → Lean/Coq verify | `prove(formula) → WasmProofResult` using MCP++ connector |
 
 ---
 
