@@ -484,7 +484,7 @@ Evaluate whether a lean subprocess (`lean --server`) is simpler for Node.js.
 
 ### 11.2 Findings (source-cited)
 
-**F1 — `ProofReason` is missing `'unsat'`; `isDecided()` fails to type-check (BLOCKER).**
+**F1 — `ProofReason` is missing `'unsat'`; `isDecided()` fails to type-check (BLOCKER — ✅ RESOLVED 2026-07-01, swissknife `583bf5d`).**
 `prover-types.ts` declares `ProofReason = 'proved' | 'refuted' | 'sat' | 'unknown' | 'timeout' | 'error'`, but `isDecided()` (line 63) compares `r.reason === 'unsat'`. Because `'unsat'` is not in the union, `tsc` reports:
 ```
 src/services/provers/prover-types.ts(63,83): error TS2367: This comparison appears to
@@ -497,6 +497,7 @@ This is a genuine parity gap, not a stray typo: the Python reference emits `reas
 export type ProofReason =
   | 'proved' | 'refuted' | 'sat' | 'unsat' | 'unknown' | 'timeout' | 'error';
 ```
+**Resolution:** applied as swissknife `583bf5d` — `'unsat'` inserted between `'sat'` and `'unknown'` in the `ProofReason` union. A scoped `tsc --noEmit` now reports no `TS2367` for `prover-types.ts` (only the pre-existing `TS6305` dist-staleness notice, which is repo-wide build-artifact noise unrelated to this source). The test's `as ProofReason[]` cast was left in place — it is owned by the concurrent implementer and is now merely redundant, not load-bearing.
 
 **F2 — `ProverStrategy` is missing `MOST_CAPABLE` (and `AUTO`) — needed by the in-flight CVC5 work.**
 Python `ProverStrategy` (prover_router.py:31–37) = `AUTO, FASTEST, MOST_CAPABLE, PARALLEL, SEQUENTIAL`. The port (`prover-types.ts:83`) = `'FASTEST' | 'PARALLEL' | 'SEQUENTIAL' | 'REMOTE'`. Adding `'REMOTE'` for local-first is reasonable, but `MOST_CAPABLE` is dropped — and task **T-16** ("Wire CVC5 into router … Available as MOST_CAPABLE fallback") and §2.1 both depend on it. Recommend widening to `'AUTO' | 'FASTEST' | 'MOST_CAPABLE' | 'PARALLEL' | 'SEQUENTIAL' | 'REMOTE'` so the CVC5 router being written now has a strategy to select the more-capable SMT backend.
@@ -510,4 +511,4 @@ Python `FormulaType` (formula_analyzer.py:23–31) = `PURE_FOL, MODAL, TEMPORAL,
 
 ### 11.3 Recommendation
 
-F1 is a build-breaker for a clean `tsc` and should land with Sprint 2 (the `as ProofReason[]` cast in the test can then be dropped). F2 unblocks the CVC5 routing currently being written. F3/F4 are documentation/robustness follow-ups. None require reworking the committed Phase 1 design — they are additive corrections to the type surface and the plan's path references.
+F1 is a build-breaker for a clean `tsc` — **now resolved** (swissknife `583bf5d`); the `as ProofReason[]` cast in the test can be dropped whenever the implementer next touches it. F2 unblocks the CVC5 routing currently being written and remains open. F3/F4 are documentation/robustness follow-ups. None require reworking the committed Phase 1 design — they are additive corrections to the type surface and the plan's path references.
