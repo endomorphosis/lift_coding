@@ -1,0 +1,67 @@
+{
+  "report_type": "ipfs_accelerate_model_serving_readiness",
+  "generated_on": "2026-06-30",
+  "go_no_go": "go",
+  "contract_gates": [
+    {
+      "name": "backend_manager_result_recording",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_readiness_contracts.py::test_readiness_backend_manager_result_recording"
+    },
+    {
+      "name": "model_registry_roundtrip",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_readiness_contracts.py::test_readiness_model_registry_roundtrip"
+    },
+    {
+      "name": "peer_capability_registry_roundtrip",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_readiness_contracts.py::test_readiness_peer_capability_registry_roundtrip"
+    },
+    {
+      "name": "container_envelope_parity",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_readiness_contracts.py::test_readiness_container_envelopes"
+    },
+    {
+      "name": "worker_orchestrator_lineage",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_readiness_contracts.py::test_readiness_worker_orchestrator_lineage_and_routing"
+    }
+  ],
+  "benchmark_gates": [
+    {
+      "name": "backend_throughput",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_benchmark_contracts.py::test_benchmark_backend_throughput"
+    },
+    {
+      "name": "persistence_latency",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_benchmark_contracts.py::test_benchmark_model_persistence_latency"
+    },
+    {
+      "name": "failover_reselection_latency",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_benchmark_contracts.py::test_benchmark_failover_reselection_latency"
+    },
+    {
+      "name": "backlog_drain_time",
+      "status": "pass",
+      "test": "external/ipfs_accelerate/test/api/test_serving_benchmark_contracts.py::test_benchmark_backlog_drain_latency"
+    }
+  ],
+  "storage_indexing_coverage": {
+    "inference_results": true,
+    "model_artifacts": true
+  },
+  "evidence_artifacts": [
+    "external/ipfs_accelerate/test/api/test_serving_readiness_contracts.py",
+    "external/ipfs_accelerate/test/api/test_serving_benchmark_contracts.py",
+    "implementation_plan/docs/31-ipfs-accelerate-model-serving-task-board.todo.md"
+  ],
+  "notes": [
+    "H1 readiness contracts and H2 benchmark contracts both passed in the local validation run.",
+    "The report covers the canonical persistence, provenance, routing, and queue-drain seams used by ipfs_accelerate_py."
+  ]
+}
