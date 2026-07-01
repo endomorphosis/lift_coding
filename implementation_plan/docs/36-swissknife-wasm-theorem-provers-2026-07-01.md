@@ -687,3 +687,31 @@ swissknife `main` by **merging** the diverged auto-doc commit `fd9d2c4` into the
 (a rebase would rewrite `83cf9db6` and re-dangle the parent), then bump the parent gitlink;
 (2) make the auto-push push submodules recursively **before** the parent gitlink commit
 (`git push --recurse-submodules=on-demand`) so the cascade cannot recur.
+
+### 11.5 Behavioral verification — Sprint 5 landed; prover test suite green (2026-07-01, later still)
+
+The implementer subsequently landed **Sprint 5** (swissknife `a32ace9` — Lurk/ZK proof-carrying
+stub, `AuditEntry.prover_id`, prover CLI) and the MCP++ spec bump (`3bdf6c3`). The audit above
+verified *shapes* against the Python reference; this section adds *behavioral* confirmation by
+running the suite:
+
+```
+npx jest test/mcp-plus-plus/wasm-prover --config=config/jest/jest.config.cjs
+→ Test Suites: 4 passed, 4 total
+  Tests:       3 skipped, 98 passed, 101 total   (~194s)
+```
+
+- 4 suites cover Sprints 1–5: `wasm-prover.test.ts` (Z3 + ProofCache + hub routing),
+  `-sprint2` (CVC5 / SMT-LIB2 serializer / Phase-8 local pre-check),
+  `-sprint3-4` (Coq + Lean 4 deontic translators), `-sprint5` (Lurk stub + `prover_id`).
+- The **3 skipped** tests are the live Z3 WASM path (34 MB artifact), gated behind
+  `Z3_WASM_LIVE=1` — expected to skip in CI/offline runs.
+- **F1 regression check passes:** the `parses "unsat" response` and CVC5 /
+  `checkPolicyConsistencyRemote` cases are green, confirming the `ProofReason += 'unsat'` fix
+  (`583bf5d`) integrated cleanly and broke nothing.
+
+Net: the local-prover stack (Z3, CVC5, Coq, Lean 4, Lurk stub) is implemented **and passing**,
+with parity to the Python `external_provers` reference confirmed at both the shape and behavior
+level. Remaining open items are the two repository-integrity follow-ups in §11.4 (swissknife
+`main` merge-reconcile + recursive submodule push), which are integration-plumbing, not prover
+correctness.
