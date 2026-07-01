@@ -349,16 +349,16 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 | ID | Priority | Task | Acceptance Criteria |
 |---|---|---|---|
-| T-13 | P1 | Create `src/services/provers/smt2-serializer.ts` | `policyToSMT2(policy) → string` round-trips to Z3 |
-| T-14 | P1 | Create `src/services/provers/cvc5-wasm-bridge.ts` (SMT-LIB2 mode) | Accepts SMT-LIB2 string, returns sat/unsat |
-| T-15 | P1 | Evaluate `@isl-lang/solver-z3-wasm` as CVC5 compatibility shim | Decision: use as CVC5 stand-in or build cvc5-wasm from source |
-| T-16 | P1 | Wire CVC5 into `WasmProverHub` router | Available as MOST_CAPABLE fallback |
-| T-17 | P1 | Write 10+ tests for SMT-LIB2 serializer + CVC5 bridge | All pass |
-| T-18 | P1 | Evaluate `jscoq` npm package for Node.js embedding | Decision: use jsCoq worker or build lighter Coq subprocess |
-| T-19 | P1 | Create `src/services/provers/deontic-to-coq.ts` | Translates `PolicyFormulaSet` to valid Coq `Theorem` |
-| T-20 | P1 | Create `src/services/provers/coq-jscoq-bridge.ts` | `prove(coqScript, timeoutMs) → WasmProofResult` |
-| T-21 | P1 | Wire CoqBridge into router for higher_order formulas | FormulaClassifier routes correctly |
-| T-22 | P1 | Write 10+ tests for Coq bridge + translator | All pass |
+| T-13 | P1 | Create `src/services/provers/smt2-serializer.ts` | ✅ `policyToSMT2(policy) → string` round-trips to Z3 |
+| T-14 | P1 | Create `src/services/provers/cvc5-wasm-bridge.ts` (SMT-LIB2 mode) | ✅ Accepts SMT-LIB2 string, returns sat/unsat |
+| T-15 | P1 | Evaluate `@isl-lang/solver-z3-wasm` as CVC5 compatibility shim | ✅ Decision: use Z3 SMT-LIB2 shim (z3-solver has same QF_UF) |
+| T-16 | P1 | Wire CVC5 into `WasmProverHub` router | ✅ Available as fallback when Z3 WASM unavailable |
+| T-17 | P1 | Write 10+ tests for SMT-LIB2 serializer + CVC5 bridge | ✅ 23 tests in wasm-prover-sprint2.test.ts |
+| T-18 | P1 | Evaluate `jscoq` npm package for Node.js embedding | ✅ Decision: subprocess coqc + static analysis (jscoq browser-only) |
+| T-19 | P1 | Create `src/services/provers/deontic-to-coq.ts` | ✅ Translates `PolicyFormulaSet` to valid Coq `Theorem` |
+| T-20 | P1 | Create `src/services/provers/coq-jscoq-bridge.ts` | ✅ `prove(coqScript, timeoutMs) → WasmProofResult` |
+| T-21 | P1 | Wire CoqBridge into router for higher_order formulas | ✅ _tryCoqOrLean4() fallback in WasmProverHub |
+| T-22 | P1 | Write 10+ tests for Coq bridge + translator | ✅ 13 tests in wasm-prover-sprint3-4.test.ts |
 
 ---
 
@@ -366,13 +366,13 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 | ID | Priority | Task | Acceptance Criteria |
 |---|---|---|---|
-| T-23 | P1 | Evaluate lean4web worker embedding in Node.js environment | Decision: usable or not; alternative Lean subprocess |
-| T-24 | P1 | Create `src/services/provers/deontic-to-lean4.ts` | Translates `PolicyFormulaSet` to Lean 4 `theorem` |
-| T-25 | P1 | Create `src/services/provers/lean4-wasm-bridge.ts` | `prove(leanSource) → WasmProofResult` |
-| T-26 | P1 | Wire Lean4Bridge into router for higher_order formulas | Available as alternative to Coq |
-| T-27 | P1 | Write 10+ tests for Lean 4 bridge + translator | All pass |
-| T-28 | P0 | Full integration: update `mcp-remote-deontic-engine.ts` | Local-first → remote-fallback when local unknown/timeout |
-| T-29 | P0 | New factory: `createLocalFirstDeonticORBEvaluator(hub, remote)` | ORB uses local Z3 for simple, remote for hard proofs |
+| T-23 | P1 | Evaluate lean4web worker embedding in Node.js environment | ✅ Decision: subprocess lean/lake (lean4web browser-only) |
+| T-24 | P1 | Create `src/services/provers/deontic-to-lean4.ts` | ✅ Translates `PolicyFormulaSet` to Lean 4 `theorem` |
+| T-25 | P1 | Create `src/services/provers/lean4-wasm-bridge.ts` | ✅ `prove(leanSource) → WasmProofResult` |
+| T-26 | P1 | Wire Lean4Bridge into router for higher_order formulas | ✅ Available as alternative to Coq in _tryCoqOrLean4() |
+| T-27 | P1 | Write 10+ tests for Lean 4 bridge + translator | ✅ 13 tests in wasm-prover-sprint3-4.test.ts |
+| T-28 | P0 | Full integration: update `mcp-remote-deontic-engine.ts` | ✅ Local-first → remote-fallback when local unknown/timeout |
+| T-29 | P0 | New factory: `createLocalFirstDeonticORBEvaluator(hub, remoteEngine)` | ✅ ORB uses local Z3 for simple, remote for hard proofs |
 | T-30 | P0 | Update `mcp++ conformance` output with prover capabilities | Shows which WASM provers are loaded |
 | T-31 | P0 | Write 15+ integration tests for local-first evaluation | All pass, 492+ total swissknife tests |
 | T-32 | P0 | Performance regression test: latency budget | Simple deontic check < 100ms locally (vs ~300ms+ remote) |
