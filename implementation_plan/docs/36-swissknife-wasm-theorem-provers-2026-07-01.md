@@ -462,3 +462,52 @@ Evaluate whether a lean subprocess (`lean --server`) is simpler for Node.js.
 6. Latency for a simple deontic consistency check is < 200ms after first WASM load.
 7. `mcp++ conformance` output includes a `Provers: z3-wasm (loaded)` line.
 8. `WasmProofResult` schema added to `Mcp-Plus-Plus/tests-ts/src/models.ts` with conformance vector.
+
+---
+
+## 11. Implementation Status & Python-Reference Parity Audit (2026-07-01)
+
+> Concurrent-review pass. Sprint 1 (Phase 1) has landed and Sprint 2 / Phase 8
+> are in flight. The findings below come from auditing the committed/in-flight
+> TypeScript port against the Python reference this document names as the source
+> of truth. Line numbers are as of this audit.
+
+### 11.1 Implementation status snapshot
+
+| Item | State | Evidence |
+|---|---|---|
+| Phase 1 prover layer | **Committed** (swissknife `3bb99e1`) | `provers/{prover-types,mcp-proof-cache,z3-wasm-bridge}.ts`, `mcp-wasm-prover-hub.ts`, `test/mcp-plus-plus/wasm-prover.test.ts`, `z3-solver@^4.16.0` in `package.json` |
+| Phase 8 local-first wiring | **In progress** (uncommitted) | `mcp-remote-deontic-engine.ts` — `checkPolicyConsistencyRemote(policy, engine, localHub?)` now runs a Z3 WASM pre-check before the remote round-trip; `RemoteConsistencyResult.localProver` added |
+| Sprint 2 (CVC5 + SMT-LIB2) | **In progress** (uncommitted) | new `provers/cvc5-wasm-bridge.ts`, `provers/smt2-serializer.ts`, `test/mcp-plus-plus/wasm-prover-sprint2.test.ts` |
+| Remote fallback tool | **Present in source** | `ipfs_datasets_py/.../logic_tools/tdfol_prove_tool.py` exists; live MCP servers (18077–18079) were **down** at audit time, so end-to-end fallback was not runtime-verified this pass |
+| All 8 referenced Python provers | **Confirmed to exist** | `logic/external_provers/{smt/z3_prover_bridge,smt/cvc5_prover_bridge,interactive/coq_prover_bridge,interactive/lean_prover_bridge,neural/symbolicai_prover_bridge,prover_router,proof_cache,formula_analyzer}.py` |
+
+### 11.2 Findings (source-cited)
+
+**F1 — `ProofReason` is missing `'unsat'`; `isDecided()` fails to type-check (BLOCKER).**
+`prover-types.ts` declares `ProofReason = 'proved' | 'refuted' | 'sat' | 'unknown' | 'timeout' | 'error'`, but `isDecided()` (line 63) compares `r.reason === 'unsat'`. Because `'unsat'` is not in the union, `tsc` reports:
+```
+src/services/provers/prover-types.ts(63,83): error TS2367: This comparison appears to
+be unintentional because the types '"unknown" | "timeout" | "error"' and '"unsat"' have no overlap.
+```
+`wasm-prover.test.ts` masks this by casting `['proved','refuted','sat','unsat'] as ProofReason[]`.
+This is a genuine parity gap, not a stray typo: the Python reference emits `reason="unsat"` (e.g. `smt/z3_prover_bridge.py`, 3 occurrences) and its `Z3ProofResult` docstring lists the reason vocabulary as `sat/unsat/unknown/timeout/error` (z3_prover_bridge.py:91). The port renamed the "valid/negation-unsat" case to `'proved'`/`'refuted'` but left `'unsat'` referenced.
+**Fix (1 line, keeps the existing test green and restores Python parity):**
+```ts
+export type ProofReason =
+  | 'proved' | 'refuted' | 'sat' | 'unsat' | 'unknown' | 'timeout' | 'error';
+```
+
+**F2 — `ProverStrategy` is missing `MOST_CAPABLE` (and `AUTO`) — needed by the in-flight CVC5 work.**
+Python `ProverStrategy` (prover_router.py:31–37) = `AUTO, FASTEST, MOST_CAPABLE, PARALLEL, SEQUENTIAL`. The port (`prover-types.ts:83`) = `'FASTEST' | 'PARALLEL' | 'SEQUENTIAL' | 'REMOTE'`. Adding `'REMOTE'` for local-first is reasonable, but `MOST_CAPABLE` is dropped — and task **T-16** ("Wire CVC5 into router … Available as MOST_CAPABLE fallback") and §2.1 both depend on it. Recommend widening to `'AUTO' | 'FASTEST' | 'MOST_CAPABLE' | 'PARALLEL' | 'SEQUENTIAL' | 'REMOTE'` so the CVC5 router being written now has a strategy to select the more-capable SMT backend.
+
+**F3 — `FormulaClass` collapses Python's `FormulaType` (informational).**
+Python `FormulaType` (formula_analyzer.py:23–31) = `PURE_FOL, MODAL, TEMPORAL, MIXED_MODAL, PROPOSITIONAL`. The port `FormulaClass` = `propositional | fol | temporal | higher_order`. `MODAL`/`MIXED_MODAL` have no direct port and `higher_order` has no Python `FormulaType` counterpart (it maps loosely to `FormulaComplexity`). Acceptable simplification for routing, but deontic `P/F/O` formulas are `MODAL` in the reference — worth a comment so the classifier's temporal-vs-modal routing intent stays clear.
+
+**F4 — File-location / spec-path drift vs this plan (housekeeping).**
+- `ProofCache` shipped at `src/services/provers/mcp-proof-cache.ts`, whereas §6/§10 name `src/services/mcp-proof-cache.ts`. Harmless, but update the acceptance criteria to the real path.
+- Acceptance criterion §10.8 / **T-11** target `Mcp-Plus-Plus/tests-ts/src/models.ts` does not exist in this repo; the MCP++ spec/conformance surface here lives under `swissknife/docs/mcp-plus-plus/` (e.g. `CONFORMANCE_MATRIX.md`). Redefine T-11's target accordingly before scheduling it.
+
+### 11.3 Recommendation
+
+F1 is a build-breaker for a clean `tsc` and should land with Sprint 2 (the `as ProofReason[]` cast in the test can then be dropped). F2 unblocks the CVC5 routing currently being written. F3/F4 are documentation/robustness follow-ups. None require reworking the committed Phase 1 design — they are additive corrections to the type surface and the plan's path references.
