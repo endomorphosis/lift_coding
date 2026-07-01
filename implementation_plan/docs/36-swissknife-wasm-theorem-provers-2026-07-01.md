@@ -477,8 +477,11 @@ Evaluate whether a lean subprocess (`lean --server`) is simpler for Node.js.
 | Item | State | Evidence |
 |---|---|---|
 | Phase 1 prover layer | **Committed** (swissknife `3bb99e1`) | `provers/{prover-types,mcp-proof-cache,z3-wasm-bridge}.ts`, `mcp-wasm-prover-hub.ts`, `test/mcp-plus-plus/wasm-prover.test.ts`, `z3-solver@^4.16.0` in `package.json` |
-| Phase 8 local-first wiring | **In progress** (uncommitted) | `mcp-remote-deontic-engine.ts` — `checkPolicyConsistencyRemote(policy, engine, localHub?)` now runs a Z3 WASM pre-check before the remote round-trip; `RemoteConsistencyResult.localProver` added |
-| Sprint 2 (CVC5 + SMT-LIB2) | **In progress** (uncommitted) | new `provers/cvc5-wasm-bridge.ts`, `provers/smt2-serializer.ts`, `test/mcp-plus-plus/wasm-prover-sprint2.test.ts` |
+| Phase 8 local-first wiring | **Committed** (swissknife `83cf9db`) | `mcp-remote-deontic-engine.ts` — `checkPolicyConsistencyRemote(policy, engine, localHub?)` runs a Z3 WASM pre-check before the remote round-trip; `RemoteConsistencyResult.localProver` added |
+| Sprint 2 (CVC5 + SMT-LIB2) | **Committed** (swissknife `83cf9db`) | `provers/cvc5-wasm-bridge.ts`, `provers/smt2-serializer.ts`, `test/mcp-plus-plus/wasm-prover-sprint2.test.ts` |
+| Sprint 3+4 (Coq + Lean 4) | **Committed** (swissknife `ba030f5`) | `provers/{coq-jscoq-bridge,lean4-wasm-bridge,deontic-to-coq,deontic-to-lean4}.ts`, `test/mcp-plus-plus/wasm-prover-sprint3-4.test.ts` |
+| F1 fix (`ProofReason` + `'unsat'`) | **Committed** (swissknife `583bf5d`) | resolves TS2367 in `isDecided()` — see F1 |
+| MCP++ spec schema (`WasmProofResult`) | **Committed** (Mcp-Plus-Plus `dacb456`) | `tests-ts/src/models.ts` (475 lines): `WasmProofResultSchema`, `ProofReasonSchema` (7 values incl. `unsat`), `WasmProverIdSchema` + conformance vector + 9 tests |
 | Remote fallback tool | **Present in source** | `ipfs_datasets_py/.../logic_tools/tdfol_prove_tool.py` exists; live MCP servers (18077–18079) were **down** at audit time, so end-to-end fallback was not runtime-verified this pass |
 | All 8 referenced Python provers | **Confirmed to exist** | `logic/external_provers/{smt/z3_prover_bridge,smt/cvc5_prover_bridge,interactive/coq_prover_bridge,interactive/lean_prover_bridge,neural/symbolicai_prover_bridge,prover_router,proof_cache,formula_analyzer}.py` |
 
@@ -499,7 +502,7 @@ export type ProofReason =
 ```
 **Resolution:** applied as swissknife `583bf5d` — `'unsat'` inserted between `'sat'` and `'unknown'` in the `ProofReason` union. A scoped `tsc --noEmit` now reports no `TS2367` for `prover-types.ts` (only the pre-existing `TS6305` dist-staleness notice, which is repo-wide build-artifact noise unrelated to this source). The test's `as ProofReason[]` cast was left in place — it is owned by the concurrent implementer and is now merely redundant, not load-bearing.
 
-**F2 — `ProverStrategy` is missing `MOST_CAPABLE` (and `AUTO`) — needed by the in-flight CVC5 work.**
+**F2 — `ProverStrategy` is missing `MOST_CAPABLE` (and `AUTO`) (⚠️ REASSESSED 2026-07-01 → see §11.4: obviated by the shipped router design; no code change recommended).**
 Python `ProverStrategy` (prover_router.py:31–37) = `AUTO, FASTEST, MOST_CAPABLE, PARALLEL, SEQUENTIAL`. The port (`prover-types.ts:83`) = `'FASTEST' | 'PARALLEL' | 'SEQUENTIAL' | 'REMOTE'`. Adding `'REMOTE'` for local-first is reasonable, but `MOST_CAPABLE` is dropped — and task **T-16** ("Wire CVC5 into router … Available as MOST_CAPABLE fallback") and §2.1 both depend on it. Recommend widening to `'AUTO' | 'FASTEST' | 'MOST_CAPABLE' | 'PARALLEL' | 'SEQUENTIAL' | 'REMOTE'` so the CVC5 router being written now has a strategy to select the more-capable SMT backend.
 
 **F3 — `FormulaClass` collapses Python's `FormulaType` (informational).**
@@ -507,8 +510,54 @@ Python `FormulaType` (formula_analyzer.py:23–31) = `PURE_FOL, MODAL, TEMPORAL,
 
 **F4 — File-location / spec-path drift vs this plan (housekeeping).**
 - `ProofCache` shipped at `src/services/provers/mcp-proof-cache.ts`, whereas §6/§10 name `src/services/mcp-proof-cache.ts`. Harmless, but update the acceptance criteria to the real path.
-- Acceptance criterion §10.8 / **T-11** target `Mcp-Plus-Plus/tests-ts/src/models.ts` does not exist in this repo; the MCP++ spec/conformance surface here lives under `swissknife/docs/mcp-plus-plus/` (e.g. `CONFORMANCE_MATRIX.md`). Redefine T-11's target accordingly before scheduling it.
+- Acceptance criterion §10.8 / **T-11** target `Mcp-Plus-Plus/tests-ts/src/models.ts` **now exists** (created in Mcp-Plus-Plus `dacb456`, 475 lines — `WasmProofResultSchema` etc.); this bullet is resolved. The broader MCP++ spec/conformance surface here also lives under `swissknife/docs/mcp-plus-plus/` (e.g. `CONFORMANCE_MATRIX.md`).
 
 ### 11.3 Recommendation
 
 F1 is a build-breaker for a clean `tsc` — **now resolved** (swissknife `583bf5d`); the `as ProofReason[]` cast in the test can be dropped whenever the implementer next touches it. F2 unblocks the CVC5 routing currently being written and remains open. F3/F4 are documentation/robustness follow-ups. None require reworking the committed Phase 1 design — they are additive corrections to the type surface and the plan's path references.
+
+### 11.4 Progress update — Sprints 2–4 landed; findings re-statused (2026-07-01, later)
+
+Since the initial audit above, the implementer committed the rest of the local-prover
+stack. Verified state on branch `merge/hallucinate-backend-into-main`:
+
+| Sprint / item | swissknife commit | Files |
+|---|---|---|
+| Sprint 1 (Z3 + ProofCache) | `3bb99e1` | `provers/{prover-types,mcp-proof-cache,z3-wasm-bridge}.ts`, `mcp-wasm-prover-hub.ts` |
+| Sprint 2 (CVC5 + SMT-LIB2 + Phase 8 remote wiring) | `83cf9db` | `provers/{cvc5-wasm-bridge,smt2-serializer}.ts`, `mcp-remote-deontic-engine.ts` |
+| Deontic Interface Broker | `a3dc230` | broker + types |
+| **F1 fix** (`ProofReason` + `'unsat'`) | `583bf5d` | `provers/prover-types.ts` |
+| Sprint 3+4 (Coq + Lean 4 + translators) | `ba030f5` | `provers/{coq-jscoq-bridge,lean4-wasm-bridge,deontic-to-coq,deontic-to-lean4}.ts` |
+
+**Finding re-status:**
+- **F1 — RESOLVED** (`583bf5d`). Independently corroborated by the MCP++ spec commit
+  `dacb456`, whose `ProofReasonSchema` enumerates exactly the 7 canonical values
+  `proved/refuted/sat/unsat/unknown/timeout/error`.
+- **F2 — OBVIATED by the shipped design (no change recommended).** The original finding
+  assumed T-16 would select CVC5 via a `MOST_CAPABLE` *strategy* value. The delivered
+  `WasmProverHub.checkPolicyConsistency` instead routes by **formula class + prover
+  availability**: `classifyPolicy()` sends `temporal`/`higher_order` to the remote engine,
+  `propositional`/`fol` to Z3, with **CVC5 as an availability fallback** inside `_tryZ3`
+  (used when Z3 WASM is absent) and Coq/Lean 4 as interactive fallbacks when Z3/CVC5 return
+  `unknown`/`error`. No code path consumes `MOST_CAPABLE`/`AUTO`, so adding them to the
+  union would be dead members. Keep `ProverStrategy = 'FASTEST' | 'PARALLEL' | 'SEQUENTIAL'
+  | 'REMOTE'` as-is; only add the Python names if a future strategy-driven selector is
+  actually wired. (Downgraded from "blocker/needed" to "informational parity note.")
+- **F3 — unchanged** (informational). The hub's `classifyPolicy()` still collapses Python's
+  `FormulaType`; deontic `P/F/O` map through `propositional`/`fol`, and modal/temporal are
+  routed remote-only — acceptable for local routing.
+- **F4 — RESOLVED** (models.ts now exists, `dacb456`). ProofCache path note stands.
+
+**Repository-integrity note (out of band, same session).** When verifying push-safety
+against origin, the parent `merge/hallucinate-backend-into-main` had already been pushed to
+`origin/main` (commit `0e325cf5`) with submodule gitlinks that were **not present on the
+submodules' own origins** — a 3-level dangling cascade (`swissknife 83cf9db6`,
+`Mcp-Plus-Plus dacb456`, `hallucinate_app dca450f` → nested `ipfs_accelerate_py 3612fe34`,
+`ipfs_datasets_py f59cb5c5`), which breaks `git clone --recurse-submodules`. All were healed
+non-destructively (fast-forward pushes to each submodule's `main`; swissknife published to a
+new branch `heal/wasm-prover-integration` because its `main` had diverged from the prover
+line at merge-base `844a19a`). Two follow-ups remain for the implementer: (1) reconcile
+swissknife `main` by **merging** the diverged auto-doc commit `fd9d2c4` into the prover line
+(a rebase would rewrite `83cf9db6` and re-dangle the parent), then bump the parent gitlink;
+(2) make the auto-push push submodules recursively **before** the parent gitlink commit
+(`git push --recurse-submodules=on-demand`) so the cascade cannot recur.
