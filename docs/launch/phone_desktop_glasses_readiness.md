@@ -411,6 +411,23 @@ subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
 backend validation failure remains supervisor-generated follow-up work for
 `VAIOS-G723`.
 
+MGW-563 refreshes that same VAIOS-G723 launch Playwright validation gate for
+the current July 1 objective-gap scan:
+`data/meta_glasses_display_widgets/discovery/2026-07-01-mgw-563-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-07-01-mgw-563-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-563-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App menus, Hallucinate App
+MCP dashboard, backend service catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate assert the MGW-563 launch Playwright validation gate
+for catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
+`control_surface receipts`, and Swissknife applications. Any dashboard or
+backend validation failure remains supervisor-generated follow-up work for
+`VAIOS-G723`.
+
 The executable gate is:
 
 ```bash
