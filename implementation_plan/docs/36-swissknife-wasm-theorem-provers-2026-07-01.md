@@ -1352,6 +1352,20 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-231 | P3 | Create `src/services/french-parser.ts` | `FrenchPatternMatcher` (match/matchByType); `FrenchParser` (parse/extractClauses); `getFrenchVerbConjugations()`/`getFrenchArticles()`/`getFrenchNegationPatterns()`/`getFrenchDeonticKeywords()` | ✅ DONE |
 | T-232 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint51.test.ts` | ✅ DONE — 57 tests (all pass) |
 
+---
+
+### Sprint 52 (Phase 52 — Spanish Parser + CEC Fluents + CEC Types + ZKP Trace, P3) 🆕
+
+> **Previously untracked gap:** `CEC/nl/spanish_parser.py` (578L), `CEC/native/fluents.py` (520L), `CEC/native/types.py` (480L), `zkp/provekit/trace.py` (566L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-233 | P3 | Create `src/services/spanish-parser.ts` | `SpanishPatternMatcher` (match/matchByType); `SpanishParser` (parse/extractClauses); `getSpanishVerbConjugations()`/`getSpanishArticles()`/`getSpanishDeonticKeywords()` | ✅ DONE |
+| T-234 | P3 | Create `src/services/cec-fluents.ts` | `FluentType` enum; `PersistenceRule` enum; `Fluent` (name/type/persistenceRule/initialValue); `FluentManager` (addFluent/setState/getState/getHoldsAt/transition) | ✅ DONE |
+| T-235 | P3 | Create `src/services/cec-types.ts` | TS interfaces for all typed dicts: `FormulaDict`, `ProofResultDict`, `ConversionResultDict`, `NamespaceExport`, `GrammarConfig`, `ProverConfig`; `Formula` and `Term` protocols as interfaces | ✅ DONE |
+| T-236 | P3 | Create `src/services/zkp-trace.ts` | `TDFOLTraceNotDerivableError`, `TDFOLTraceBoundExceededError`, `TDFOLTraceSchemaError`; `TDFOLTraceStep`; `TDFOLTraceWitness`; `buildTdfolV1TraceWitness(axioms, theorem)/validateTdfolV1TraceWitness(witness)` | ✅ DONE |
+| T-237 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint52.test.ts` | ✅ DONE — 40 tests (all pass) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
