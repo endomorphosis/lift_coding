@@ -117,6 +117,7 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 |---|---|---|---|
 | `logic/deontic/analyzer.py` | `DeonticAnalyzer`: regex NL→deontic statement extraction, conflict detection (direct/conditional/jurisdictional/temporal), Jaccard word-similarity | Sprint 12 | P2 |
 | `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 | P2 |
+| `logic/fol/converter.py` | `FOLConverter`: regex NL→FOL (predicate extraction, quantifiers, operators, `build_fol_formula()`, TPTP/Prolog formatting) | Sprint 14 | P2 |
 | `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 | P2 |
 | `logic/bridge/external_prover_router.py` | `ExternalProverRouterBridgeAdapter`: route TDFOL formulas through the external prover router | Sprint 13 | P2 |
 | `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 14+ | P3 |
@@ -284,13 +285,14 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **ZKP simulated prover** | ✅ `zkp/zkp_prover.py` (289 lines) + `zkp_verifier.py` (313 lines) | ✅ `ZkpSimulatedProver` (hash-based, NOT real Groth16) | **CLOSED** — Sprint 11 |
 | **Deontic Analyzer** | ✅ `deontic/analyzer.py` (503 lines) — regex NL→deontic + conflict detection | ✅ `DeonticTextAnalyzer` (`src/services/deontic/`) | **CLOSED** — Sprint 12 (T-72–T-75) |
 | **Deontic Knowledge Base** | ✅ `deontic/knowledge_base.py` (245 lines) — `DeonticKnowledgeBase`, temporal intervals, rule inference | ✅ `DeonticKnowledgeBase` (`src/services/deontic/`) | **CLOSED** — Sprint 12 |
-| **Extended TDFOL inference rules** | ✅ `TDFOL/inference_rules/` — 50+ rules across 5 files (temporal/deontic/temporal_deontic/propositional/fol) | ⚠️ Only 10 base rules in `TdfolProverBridge` | **OPEN** — Sprint 13 P2 |
-| **Prover Router Bridge** | ✅ `bridge/external_prover_router.py` (1442 lines) — text → TDFOL formulas → prover router → ProofGateResult | ❌ Not implemented | **OPEN** — Sprint 13 P2 |
-| **Modal frame logic bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) | ❌ Not implemented | **OPEN** — Sprint 14 P2 |
+| **Extended TDFOL inference rules** | ✅ `TDFOL/inference_rules/` — 50+ rules across 5 files (temporal/deontic/temporal_deontic/propositional/fol) | ✅ `ExtendedTdfolProverBridge` (14 extra rules) + `ProverRouterBridgeAdapter` | **CLOSED** — Sprint 13 (T-76–T-79) |
+| **Prover Router Bridge** | ✅ `bridge/external_prover_router.py` (1442 lines) — text → TDFOL formulas → prover router → ProofGateResult | ✅ `ProverRouterBridgeAdapter` (`src/services/bridge/`) | **CLOSED** — Sprint 13 |
+| **FOL Text Converter** | ✅ `fol/converter.py` (497 lines) + `fol/utils/fol_parser.py` (233 lines) + `predicate_extractor.py` (76 lines) + `logic_formatter.py` (218 lines) | ❌ Not implemented | **OPEN** — Sprint 14 P2 |
+| **Modal Frame Logic Bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) — legal text → modal IR | ❌ Not implemented | **OPEN** — Sprint 14 P2 |
 | **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 15+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 12):** All formula classes handled locally; ZKP→UCAN done; Deontic Analyzer+KB done. Remaining: extended TDFOL rule set (S4/S5 + propositional + temporal-deontic combined, Sprint 13) + ProverRouterBridgeAdapter (Sprint 13) + modal frame logic (Sprint 14).
+**Current status (post Sprint 13):** All formula classes handled locally; ZKP→UCAN done; Deontic Analyzer+KB done; Extended TDFOL rules + ProverRouterBridge done. Remaining: FOL text converter + modal bridge (Sprint 14) + Deontic IR (Sprint 15+).
 
 ---
 
@@ -692,6 +694,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-77 | P2 | `ExtendedTdfolProverBridge` subclass with full rule set | ✅ DONE | Pre-saturates KB with 14 extended rules before delegating to base TdfolProverBridge; `extendedRuleNames()` |
 | T-78 | P2 | Create `src/services/bridge/prover-router-bridge.ts` — `ProverRouterBridgeAdapter` | ✅ DONE | `evaluate(formulas[]) → ProofGateResult` (valid_count/failure_ratio/details/status); `checkConsistency(formulas[]) → ProofGateResult` (O+F conflict detection) |
 | T-79 | P2 | Write 10+ tests for extended rules + bridge | ✅ DONE | `wasm-prover-sprint13.test.ts` — 19 tests (all pass): extended rules (13), bridge (6) |
+
+---
+
+### Sprint 14 (Phase 14 — FOL Text Converter + Modal Frame Bridge, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `logic/fol/` (2032L total) + `bridge/modal_frame_logic.py` (691L). Both regex-based.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-80 | P2 | Create `src/services/fol/fol-text-converter.ts` — NL→FOL converter | ✅ DONE | `extractPredicates()`, `parseQuantifiers()`, `parseLogicalOperators()`, `buildFolFormula()`, `formatAsProlog()`, `formatAsTptp()`; `FolTextConverter.convert() → FolConversionResult`; `convertBatch()` |
+| T-81 | P2 | Create `src/services/bridge/modal-frame-bridge.ts` — `ModalFrameBridge` | ✅ DONE | `evaluate(text) → ModalBridgeResult {status, modal_ir (fol_formula/prolog/tptp/deontic_statements/conflicts/confidence), proof_gate}`; uses DeonticTextAnalyzer + FolTextConverter + ProverRouterBridgeAdapter |
+| T-82 | P2 | Wire `FolTextConverter` into `mcp++` subcommand | ✅ DONE | `mcp++ deontic fol <text>` → JSON `{formula, prolog, tptp, confidence, quantifiers, predicates}` |
+| T-83 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint14.test.ts` — 25 tests (all pass): extractPredicates (5), parseQuantifiers (4), parseLogicalOps (4), buildFolFormula+convert (5), ModalFrameBridge (5), mcp++ fol (2) |
 
 ## 8. Prover Capability Matrix
 
