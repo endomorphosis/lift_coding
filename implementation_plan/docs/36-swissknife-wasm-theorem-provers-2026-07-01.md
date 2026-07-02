@@ -115,20 +115,19 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 
 | Directory | Description | Sprint | Priority |
 |---|---|---|---|
-| `logic/deontic/analyzer.py` | `DeonticAnalyzer`: regex NL→deontic statement extraction, conflict detection (direct/conditional/jurisdictional/temporal), Jaccard word-similarity | Sprint 12 | P2 |
-| `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 | P2 |
-| `logic/fol/converter.py` | `FOLConverter`: regex NL→FOL (predicate extraction, quantifiers, operators, `build_fol_formula()`, TPTP/Prolog formatting) | Sprint 14 | P2 |
-| `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 | P2 |
-| `logic/flogic_optimizer.py` | `FLogicSemanticOptimizer`: cosine similarity scoring + F-logic consistency checking for round-trip quality | Sprint 15 | P2 |
-| `logic/ml_confidence.py` | `MLConfidenceScorer`: heuristic confidence scoring (fallback from XGBoost/LightGBM; pure math) | Sprint 15 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 16+ | P3 |
-| `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 16+ | P3 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 14+ | P3 |
-| `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 14+ | P3 |
-| `logic/fol/` | FOL utilities (`text_to_fol.py`, `converter.py`) | Sprint 14+ | P3 |
-| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 15+ | P3 |
-| `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 16+ | P3 |
-| `logic/flogic/` | F-logic (frame logic) | Sprint 16+ | P3 |
+| `logic/deontic/analyzer.py` | `DeonticAnalyzer`: regex NL→deontic statement extraction, conflict detection (direct/conditional/jurisdictional/temporal), Jaccard word-similarity | Sprint 12 ✅ | P2 |
+| `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 ✅ | P2 |
+| `logic/deontic/graph.py` | `DeonticGraph`: typed graph (nodes/rules/conflicts), `detect_conflicts()`, `assess_rules()`, `source_gap_summary()`, `export_reasoning_rows()`, `to_dict()` | Sprint 16 | P2 |
+| `logic/deontic/support_map.py` | `SupportFact`, `SupportMapEntry`, `SupportMapBuilder.build(graph)` | Sprint 16 | P2 |
+| `logic/fol/converter.py` | `FOLConverter`: regex NL→FOL (predicate extraction, quantifiers, operators, `build_fol_formula()`, TPTP/Prolog formatting) | Sprint 14 ✅ | P2 |
+| `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 ✅ | P2 |
+| `logic/flogic_optimizer.py` | `FLogicSemanticOptimizer`: cosine similarity scoring + F-logic consistency checking for round-trip quality | Sprint 15 ✅ | P2 |
+| `logic/ml_confidence.py` | `MLConfidenceScorer`: heuristic confidence scoring (fallback from XGBoost/LightGBM; pure math) | Sprint 15 ✅ | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 17+ | P3 |
+| `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 17+ | P3 |
+| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 17+ | P3 |
+| `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 18+ | P3 |
+| `logic/flogic/` | F-logic (frame logic) | Sprint 18+ | P3 |
 
 ---
 
@@ -292,12 +291,14 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Prover Router Bridge** | ✅ `bridge/external_prover_router.py` (1442 lines) — text → TDFOL formulas → prover router → ProofGateResult | ✅ `ProverRouterBridgeAdapter` (`src/services/bridge/`) | **CLOSED** — Sprint 13 |
 | **FOL Text Converter** | ✅ `fol/converter.py` (497 lines) + `fol/utils/fol_parser.py` (233 lines) + `predicate_extractor.py` (76 lines) + `logic_formatter.py` (218 lines) | ✅ `FolTextConverter` (`src/services/fol/`) + `mcp++ deontic fol` | **CLOSED** — Sprint 14 (T-80–T-83) |
 | **Modal Frame Logic Bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) — legal text → modal IR | ✅ `ModalFrameBridge` (`src/services/bridge/`) | **CLOSED** — Sprint 14 |
-| **FLogic Semantic Optimizer** | ✅ `flogic_optimizer.py` (673 lines) — cosine similarity + F-logic ontology consistency | ❌ Not implemented | **OPEN** — Sprint 15 P2 |
-| **ML Confidence Scorer** | ✅ `ml_confidence.py` (437 lines) — heuristic confidence for FOL conversion | ❌ Not implemented | **OPEN** — Sprint 15 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 16+ P3 |
+| **FLogic Semantic Optimizer** | ✅ `flogic_optimizer.py` (673 lines) — cosine similarity + F-logic ontology consistency | ✅ `FLogicSemanticOptimizer` + `cosineSimilarity()` (`src/services/fol/`) | **CLOSED** — Sprint 15 (T-84–T-87) |
+| **ML Confidence Scorer** | ✅ `ml_confidence.py` (437 lines) — heuristic confidence for FOL conversion | ✅ `MLConfidenceScorer` + `FeatureExtractor` wired into `FolTextConverter` | **CLOSED** — Sprint 15 |
+| **Deontic Graph** | ✅ `deontic/graph.py` (573 lines) — typed node/rule graph with `detect_conflicts()`, `assess_rules()` | ❌ Not implemented | **OPEN** — Sprint 16 P2 |
+| **Support Map** | ✅ `deontic/support_map.py` (167 lines) — `SupportFact`, `SupportMapEntry`, `SupportMapBuilder` | ❌ Not implemented | **OPEN** — Sprint 16 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 17+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 14):** All formula classes handled locally; complete NL→FOL pipeline with `FolTextConverter` + `ModalFrameBridge`; ZKP→UCAN done; Deontic Analyzer+KB done. Remaining: semantic quality scoring (`FLogicSemanticOptimizer` + `MLConfidenceScorer`, Sprint 15) + Deontic IR (Sprint 16+ P3).
+**Current status (post Sprint 15):** Complete NL→FOL pipeline; semantic round-trip quality scoring; ZKP→UCAN; Deontic Analyzer+KB+Graph (pending); all local prover classes. Remaining: Deontic Graph (Sprint 16 P2) + Deontic IR formula_builder (Sprint 17+ P3).
 
 ---
 
@@ -725,6 +726,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-85 | P2 | Create `src/services/fol/ml-confidence-scorer.ts` — heuristic FOL confidence scorer | ✅ DONE | `FeatureExtractor.extractFeatures()` → 17 numeric features; `MLConfidenceScorer.predictConfidence()` — exact heuristic match to Python `_heuristic_confidence()` |
 | T-86 | P2 | Wire `MLConfidenceScorer` into `FolTextConverter.convert()` | ✅ DONE | Lazy dynamic import; fallback to original heuristic when unavailable |
 | T-87 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint15.test.ts` — 20 tests (all pass): cosineSimilarity (6), FLogicSemanticOptimizer (7), MLConfidenceScorer (4), FolTextConverter (3) |
+
+---
+
+### Sprint 16 (Phase 16 — Deontic Graph + Support Map, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `deontic/graph.py` (573L) + `deontic/support_map.py` (167L). Pure data structures.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-88 | P2 | Create `src/services/deontic/deontic-graph.ts` — typed deontic graph | ✅ DONE | `DeonticNodeType`/`DeonticModality`/`DeonticNode`/`DeonticRule`/`DeonticConflict`; `DeonticGraph.addNode()/addRule()/activeRules()/detectConflicts()/assessRules()/sourceGapSummary()/summary()/toDict()/fromDict()` |
+| T-89 | P2 | Create `src/services/deontic/deontic-graph-builder.ts` — graph builder | ✅ DONE | `DeonticGraphBuilder.fromStatements(stmts, conflicts?) → DeonticGraph`; actor+action nodes; conflicted statements → inactive rules |
+| T-90 | P2 | Create `src/services/deontic/support-map.ts` — support map builder | ✅ DONE | `SupportFact`/`SupportMapEntry`/`SupportMapBuilder.build(graph) → SupportMapEntry[]`; `buildSummary(graph) → modality counts` |
+| T-91 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint16.test.ts` — 19 tests (all pass): DeonticGraph (12), DeonticGraphBuilder (3), SupportMapBuilder (4) |
 
 ## 8. Prover Capability Matrix
 
