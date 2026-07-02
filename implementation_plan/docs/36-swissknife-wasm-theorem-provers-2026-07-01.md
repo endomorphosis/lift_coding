@@ -119,14 +119,16 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 ✅ | P2 |
 | `logic/deontic/graph.py` | `DeonticGraph`: typed graph (nodes/rules/conflicts), `detect_conflicts()`, `assess_rules()`, `source_gap_summary()`, `export_reasoning_rows()`, `to_dict()` | Sprint 16 ✅ | P2 |
 | `logic/deontic/support_map.py` | `SupportFact`, `SupportMapEntry`, `SupportMapBuilder.build(graph)` | Sprint 16 ✅ | P2 |
-| `logic/deontic/ir.py` | `LegalNormIR`: typed IR (modality/actor/action/conditions/temporal/penalties + quality fields) | Sprint 17 | P2 |
-| `logic/deontic/decoder.py` | `decode_legal_norm_ir(norm)`: deterministic text renderer from `LegalNormIR` slots | Sprint 17 | P2 |
+| `logic/deontic/ir.py` | `LegalNormIR`: typed IR (modality/actor/action/conditions/temporal/penalties + quality fields) | Sprint 17 ✅ | P2 |
+| `logic/deontic/decoder.py` | `decode_legal_norm_ir(norm)`: deterministic text renderer from `LegalNormIR` slots | Sprint 17 ✅ | P2 |
 | `logic/fol/converter.py` | `FOLConverter`: regex NL→FOL (predicate extraction, quantifiers, operators, `build_fol_formula()`, TPTP/Prolog formatting) | Sprint 14 ✅ | P2 |
 | `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 ✅ | P2 |
 | `logic/flogic_optimizer.py` | `FLogicSemanticOptimizer`: cosine similarity scoring + F-logic consistency checking for round-trip quality | Sprint 15 ✅ | P2 |
 | `logic/ml_confidence.py` | `MLConfidenceScorer`: heuristic confidence scoring (fallback from XGBoost/LightGBM; pure math) | Sprint 15 ✅ | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 18+ | P3 |
-| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 18+ | P3 |
+| `logic/deontic/utils/deontic_parser.py` | `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | Sprint 18 | P2 |
+| `logic/deontic/prover_syntax.py` | `ProverTargetSyntaxRecord`, `ProverSyntaxReport`, `build_prover_syntax_records_from_ir()` | Sprint 18 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 19+ | P3 |
+| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 19+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -296,12 +298,14 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **ML Confidence Scorer** | ✅ `ml_confidence.py` (437 lines) — heuristic confidence for FOL conversion | ✅ `MLConfidenceScorer` + `FeatureExtractor` wired into `FolTextConverter` | **CLOSED** — Sprint 15 |
 | **Deontic Graph** | ✅ `deontic/graph.py` (573 lines) — typed node/rule graph with `detect_conflicts()`, `assess_rules()` | ✅ `DeonticGraph` + `DeonticGraphBuilder` + `SupportMapBuilder` | **CLOSED** — Sprint 16 (T-88–T-91) |
 | **Support Map** | ✅ `deontic/support_map.py` (167 lines) — `SupportFact`, `SupportMapEntry`, `SupportMapBuilder` | ✅ `SupportMapBuilder` (`src/services/deontic/`) | **CLOSED** — Sprint 16 |
-| **LegalNormIR** | ✅ `deontic/ir.py` (2720 lines) — `LegalNormIR` typed IR dataclass (modality/actor/action/conditions/temporal/penalties) | ❌ Not implemented | **OPEN** — Sprint 17 P2 |
-| **LegalNorm Decoder** | ✅ `deontic/decoder.py` (932 lines) — `decode_legal_norm_ir()` deterministic text renderer | ❌ Not implemented | **OPEN** — Sprint 17 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 18+ P3 |
+| **LegalNormIR** | ✅ `deontic/ir.py` (2720 lines) — `LegalNormIR` typed IR dataclass (modality/actor/action/conditions/temporal/penalties) | ✅ `LegalNormIR` + `buildLegalNormIR()` + `emptySpan()/emptyQuality()` | **CLOSED** — Sprint 17 (T-92–T-95) |
+| **LegalNorm Decoder** | ✅ `deontic/decoder.py` (932 lines) — deterministic text renderer | ✅ `decodeLegalNormIR()` + `decodedPhraseSlotTextMap()` + `LegalNormBuilder` | **CLOSED** — Sprint 17 |
+| **Deontic Parser Utils** | ✅ `deontic/utils/deontic_parser.py` (5589 lines) — `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | ❌ Not implemented | **OPEN** — Sprint 18 P2 |
+| **Prover Syntax Builder** | ✅ `deontic/prover_syntax.py` (1652 lines) — `ProverTargetSyntaxRecord`, `validate_ir_with_provers()`, `build_prover_syntax_records_from_ir()` | ❌ Not implemented | **OPEN** — Sprint 18 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 19+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 16):** Complete NL→FOL pipeline; semantic scoring; ZKP→UCAN; DeonticGraph+KB+Analyzer; all local provers. Remaining: LegalNormIR + Decoder (Sprint 17 P2) + formula_builder (Sprint 18+ P3).
+**Current status (post Sprint 17):** Complete NL→FOL→LegalNormIR→decoded pipeline; all provers local; ZKP→UCAN; DeonticGraph+KB. Remaining: parser utils + prover syntax (Sprint 18 P2) + formula_builder (Sprint 19+ P3).
 
 ---
 
@@ -755,6 +759,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-93 | P2 | Create `src/services/deontic/legal-norm-decoder.ts` — `decodeLegalNormIR()` renderer | ✅ DONE | `DecodedPhrase`/`DecodedLegalText`; template rendering O/P/F/DEF/APP/EXEMPT/LIFE/penalty; `decodedPhraseSlotTextMap()` |
 | T-94 | P2 | Create `src/services/deontic/legal-norm-builder.ts` — builder from analyzer output | ✅ DONE | `LegalNormBuilder.fromStatement(stmt) → LegalNormIR`; `fromStatements(stmts[]) → LegalNormIR[]` |
 | T-95 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint17.test.ts` — 18 tests (all pass): types (5), decoder (9), builder (4) |
+
+---
+
+### Sprint 18 (Phase 18 — Deontic Parser Utils + Prover Syntax Builder, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `deontic/utils/deontic_parser.py` (5589L) pure-function utilities + `prover_syntax.py` (1652L).
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-96 | P2 | Create `src/services/deontic/deontic-parser-utils.ts` — parser utility functions | ✅ DONE | `classifyModal()`; `classifyLegalEntity()` (7 entity types); `normalizePredicate()`; `extractActionRecipient()`; `scoreScaffoldQuality()` |
+| T-97 | P2 | Create `src/services/deontic/normative-conflict-detector.ts` — conflict detector | ✅ DONE | `identifyObligations() → {obligations,permissions,prohibitions,conditionalNorms,temporalNorms}`; `detectNormativeConflicts() → NormConflict[]` (direct/permission/conditional/temporal) |
+| T-98 | P2 | Create `src/services/deontic/prover-syntax-builder.ts` — prover syntax builder | ✅ DONE | `ProverSyntaxBuilder.buildSyntaxReport(norm) → ProverSyntaxReport` with records for z3-smt2/dcec/tdfol/lean4/prolog targets; `buildBatch()` |
+| T-99 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint18.test.ts` — 30 tests (all pass): classifyModal (6), classifyLegalEntity (6), utils (4), scoreQuality (2), identifyObligs (2), detectConflicts (3), ProverSyntaxBuilder (7) |
 
 ## 8. Prover Capability Matrix
 
