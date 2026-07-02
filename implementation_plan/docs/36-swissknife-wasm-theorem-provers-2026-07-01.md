@@ -1463,6 +1463,22 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 60 (Phase 60 — Grammar Engine + DCEC Integration + Context Manager + CEC Proof Cache + DCEC Prototypes + TDFOL Performance Engine, P3) 🆕
+
+> **Gap discovered by exhaustive scan — 6 files with done=0 in plan.**
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-270 | P3 | Create `src/services/cec-grammar-engine.ts` | `Category` enum; `GrammarRule`/`LexicalEntry`/`ParseNode`; `GrammarEngine` (addRule/addLexicalEntry/parse(text)/getCategories()); `CompositeGrammar` (merge grammars); `makeBinaryRule()`/`makeUnaryRule()` helpers | ✅ DONE |
+| T-271 | P3 | Create `src/services/dcec-integration.ts` | `DCECParsingError`; `parseExpressionToToken(expr)`; `tokenToFormula(token)`; `parseDcecString(dcec)`; `validateFormula(formula)` | ✅ DONE |
+| T-272 | P3 | Create `src/services/cec-context-manager.ts` | `EntityType` enum; `Entity` (id/type/mentions); `ContextState` (entities/discourse); `ContextManager` (updateContext/resolve/getEntities/reset()); `AnaphoraResolver` (resolve(text,context)); `DiscourseAnalyzer` (analyze(text)) | ✅ DONE |
+| T-273 | P3 | Create `src/services/cec-proof-cache.ts` | `CECCachedProofResult` (formula/isProved/proof/cachedAt); `CachedTheoremProver` (prove(formula,axioms)/invalidate(formula)/getStats()); `getGlobalCachedProver()` | ✅ DONE |
+| T-274 | P3 | Create `src/services/dcec-prototypes.ts` | `DCECPrototypeNamespace` (registerSort/registerPredicate/registerFunction/export()) | ✅ DONE |
+| T-275 | P3 | Create `src/services/tdfol-performance-engine.ts` | `TDFOLPerformanceEngine` (benchmark(formula,axioms,reps)/profile(fn)/getReport()) — combined in `dcec-prototypes.ts` | ✅ DONE |
+| T-276 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint60.test.ts` | ✅ DONE — 31 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
