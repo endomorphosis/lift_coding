@@ -4896,7 +4896,7 @@ cadence remains parseable and resumable.
 
 ## VAI-543 Close objective gap: Hallucinate MCP dashboard interoperability console
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
