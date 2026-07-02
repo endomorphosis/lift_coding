@@ -104,7 +104,7 @@ explicit receipt for this objective-gap task.
     {
       "daemon_id": "ipfs-kit",
       "server_package": "ipfs_kit_py",
-      "endpoint": "http://127.0.0.1:8004",
+      "endpoint": "http://127.0.0.1:8014",
       "health_path": "/api/mcp/status",
       "rpc_path": "/mcp/tools/call",
       "startup_order": 10
