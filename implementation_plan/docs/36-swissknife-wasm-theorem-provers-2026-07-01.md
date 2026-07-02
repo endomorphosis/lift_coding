@@ -145,7 +145,10 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/TDFOL/tdfol_parser.py` | `parse_tdfol(str)` → TDFOL `Formula` AST; `TDFOLLexer`/`TDFOLParser` | Sprint 24 ✅ | P2 |
 | `logic/TDFOL/modal_tableaux.py` | `ModalLogicType` (K/T/D/S4/S5); `World`/`TableauxBranch`/`ModalTableaux.prove()` | Sprint 24 ✅ | P2 |
 | `logic/TDFOL/performance_profiler.py` | `ProfilingStats`, `BenchmarkResult`, `PerformanceProfiler` | Sprint 24 ✅ | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 25+ | P3 |
+| `logic/TDFOL/countermodels.py` + `countermodel_visualizer.py` | `KripkeStructure` (worlds/accessibility/valuation), `CountermodelVisualizer` (ASCII rendering) | Sprint 25 ✅ | P2 |
+| `logic/TDFOL/tdfol_prover.py` | `TDFOLProver.prove()`, TDFOL inference rules (temporal/deontic necessitation/distribution) | Sprint 25 ✅ | P2 |
+| `logic/TDFOL/performance_dashboard.py` | `ProofMetrics`, `TimeSeriesMetric`, `AggregatedStats`, `PerformanceDashboard` | Sprint 25 ✅ | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 26+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -337,10 +340,13 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **TDFOL Parser** | ✅ `TDFOL/tdfol_parser.py` (818L) — `TDFOLLexer`/`TDFOLParser`, `parse_tdfol(str) → Formula` | ✅ `tdfol-parser.ts` (`TDFOLLexer`+recursive-descent parser; `parseTdfol`/`parseTdfolSafe`) | **CLOSED** — Sprint 24 (T-120) |
 | **Modal Tableaux** | ✅ `TDFOL/modal_tableaux.py` (711L) — `ModalLogicType` (K/T/D/S4/S5), `World`, `TableauxBranch`, `ModalTableaux.prove()` | ✅ `modal-tableaux.ts` (`ModalLogicType`/`World`/`TableauxBranch`/`ModalTableaux`/`proveModalFormula`) | **CLOSED** — Sprint 24 (T-121) |
 | **Performance Profiler** | ✅ `TDFOL/performance_profiler.py` (1411L) — `ProfilingStats`, `BenchmarkResult`, `PerformanceProfiler` | ✅ `performance-profiler.ts` (`ProfilingStats`/`PerformanceProfiler`/`ProfileBlock`/`benchmarkProviders`) | **CLOSED** — Sprint 24 (T-122) |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 25+ P3 |
+| **Kripke Structure + Countermodel Visualizer** | ✅ `TDFOL/countermodel_visualizer.py` (1102L) + `countermodels.py` — `KripkeStructure`, `CountermodelVisualizer` (ASCII/HTML) | ✅ `kripke-structure.ts` (`KripkeStructure`/`CountermodelVisualizer.renderAscii`/`createVisualizer`) | **CLOSED** — Sprint 25 (T-124) |
+| **TDFOL Prover** | ✅ `TDFOL/tdfol_prover.py` (640L) — `TDFOLProver.prove()`, TDFOL inference rules | ✅ `tdfol-prover.ts` (8 rules + axiom/theorem lookup + forward-chaining + tableaux fallback) | **CLOSED** — Sprint 25 (T-125) |
+| **Performance Dashboard** | ✅ `TDFOL/performance_dashboard.py` (1314L) — `ProofMetrics`, `AggregatedStats`, `PerformanceDashboard` | ✅ `performance-dashboard.ts` (`MetricType`/`ProofMetrics`/`AggregatedStats`/`PerformanceDashboard`) | **CLOSED** — Sprint 25 (T-126) |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 26+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 23):** 23+ modules; TDFOL AST hierarchy + proof tree + dependency graph; all provers local; ZKP→UCAN; full NL→prover pipeline + monitoring + public API. Remaining: TDFOL parser + modal tableaux + performance profiler (Sprint 24 P2) + formula_builder (Sprint 25+ P3).
+**Current status (post Sprint 25):** 25+ modules; complete TDFOL stack (parser/prover/KB/proof-tree/dep-graph/modal-tableaux/kripke-structure/countermodel-viz/perf-profiler/perf-dashboard); all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: formula_builder (Sprint 26+).
 
 ---
 
@@ -885,6 +891,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-121 | P2 | Create `src/services/modal-tableaux.ts` — modal tableaux prover | ✅ DONE | `ModalLogicType` (K/T/D/S4/S5); `World.hasContradiction()`; `TableauxBranch` (addWorld/createFreshWorld/clone/addAccessibility/boxHistory); `ModalTableaux.prove()` — α/β-rules, □/◊ expansion, reflexivity (T/S4/S5), box-history propagation (S4/S5); `proveModalFormula()` |
 | T-122 | P2 | Create `src/services/performance-profiler.ts` — performance profiler | ✅ DONE | `ProfilingStats` (mean/median/min/max/stdDev/opsPerSec/samples); `PerformanceProfiler.profile()/profileAsync()/formatReport(TEXT\|JSON)`; `benchmarkProviders()`, `ProfileBlock.stop()/elapsed` |
 | T-123 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint24.test.ts` — 45 tests (all pass): parseTdfol (17), parseTdfolSafe (3), World (5), TableauxBranch (5), ModalTableaux (6), PerformanceProfiler (6), benchmarkProviders (1), ProfileBlock (2) |
+
+---
+
+### Sprint 25 (Phase 25 — Kripke Structure + TDFOL Prover + Performance Dashboard, P2) ✅ DONE (2026-07-01)
+
+> **Gap:** `countermodels.py` + `countermodel_visualizer.py` (1102L) — `KripkeStructure`, `CountermodelVisualizer`; `tdfol_prover.py` (640L) — `TDFOLProver.prove()`; `performance_dashboard.py` (1314L) — `ProofMetrics`/`AggregatedStats`/`PerformanceDashboard`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-124 | P2 | Create `src/services/kripke-structure.ts` — Kripke structure + countermodel visualizer | ✅ DONE | `KripkeStructure` (addWorld/addAccessibility/setAtomTrue/isAtomTrue/totalRelations/toDict/toJson); `CountermodelVisualizer.renderAscii('expanded'\|'compact')` with box-drawing chars; `createVisualizer()` factory |
+| T-125 | P2 | Create `src/services/tdfol-prover.ts` — TDFOL theorem prover | ✅ DONE | `TDFOLInferenceRule` interface; 8 rules: Temporal/DeonticNecessitation, Temporal/DeonticDistribution, TemporalTRule, DeonticDRule, ProhibitionElimination, PermissionIntroduction; `TDFOLProver.prove()` — axiom lookup → forward-chaining → `ModalTableaux` fallback; `defaultTdfolRules()` |
+| T-126 | P2 | Create `src/services/performance-dashboard.ts` — performance dashboard | ✅ DONE | `MetricType` enum; `ProofMetrics`/`makeProofMetrics`; `AggregatedStats` (p95/p99 percentiles/strategyStats); `PerformanceDashboard.record()/getAggregatedStats()/getTimeSeries()/exportJson()/reset()`; `getGlobalDashboard()/resetGlobalDashboard()` |
+| T-127 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint25.test.ts` — 30 tests (all pass): KripkeStructure (7), CountermodelVisualizer (6), TDFOLProver (8), PerformanceDashboard (9) |
 
 ## 8. Prover Capability Matrix
 
