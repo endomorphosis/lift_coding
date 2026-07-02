@@ -177,6 +177,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/converters/deontic_logic_core.py` | `DeonticOperator`/`LogicConnective`/`TemporalOperator`/`LegalAgent`/`DeonticFormula`/`DeonticRuleSet` (extended core types) | Sprint 35 ✅ | P3 |
 | `logic/integration/caching/ipld_logic_storage.py` | `LogicProvenanceChain`, `LogicIPLDNode`, `LogicIPLDStorage`, `LogicProvenanceTracker` | Sprint 35 ✅ | P3 |
 | `logic/integration/reasoning/deontological_reasoning.py` | `DeonticExtractor`, `DeontologicalReasoningEngine` | Sprint 35 ✅ | P3 |
+| `logic/integration/caching/ipfs_proof_cache.py` | `IPFSCachedProof`, `IPFSProofCache` (IPFS-backed distributed proof cache) | Sprint 36 ✅ | P3 |
+| `logic/integration/domain/medical_theorem_framework.py` | `MedicalTheoremType`, `MedicalEntity`, `TemporalConstraint`, `MedicalTheorem`, `MedicalTheoremGenerator` | Sprint 36 ✅ | P3 |
+| `logic/integration/bridges/tdfol_cec_bridge.py` | `TDFOLCECBridge`, `EnhancedTDFOLProver`, `create_enhanced_prover()` | Sprint 36 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -400,9 +403,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Deontic Logic Core (Extended)** | ✅ `integration/converters/deontic_logic_core.py` (514L) — `DeonticOperator` (O/P/F/S/R/L/POW/IMM), `LogicConnective`, `TemporalOperator`, `LegalAgent`, `DeonticRuleSet` | ✅ `deontic-logic-core.ts` (`DeonticOperatorExt`/`LogicConnective`/`TemporalOperatorExt`; `LegalAgent`; `DeonticRuleSetExt.query/search/obligations`) | **CLOSED** — Sprint 35 (T-162) |
 | **IPLD Logic Storage** | ✅ `integration/caching/ipld_logic_storage.py` (489L) — `LogicProvenanceChain`, `LogicIPLDNode`, `LogicIPLDStorage`, `LogicProvenanceTracker` | ✅ `ipld-logic-storage.ts` (`LogicIPLDNode.addTranslation()`; `LogicIPLDStorage.findByDocument()`; `LogicProvenanceTracker`; CID generation) | **CLOSED** — Sprint 35 (T-163) |
 | **Deontological Reasoning Engine** | ✅ `integration/reasoning/deontological_reasoning.py` (482L) — `DeonticExtractor`, `DeontologicalReasoningEngine` | ✅ `deontological-reasoning.ts` (`DeonticExtractor.extractStatements/countByOperator`; `DeontologicalReasoningEngine.reason/detectConflicts/generateExplanation/analyzeText`) | **CLOSED** — Sprint 35 (T-164) |
+| **IPFS Proof Cache** | ✅ `integration/caching/ipfs_proof_cache.py` (457L) — `IPFSCachedProof`, `IPFSProofCache` | ✅ `ipfs-proof-cache.ts` (`IPFSCachedProof.computeCid/isExpired/toDict`; `IPFSProofCache.set/get/pin/unpin/getStats`; `getGlobalIPFSCache()`) | **CLOSED** — Sprint 36 (T-166) |
+| **Medical Theorem Framework** | ✅ `integration/domain/medical_theorem_framework.py` (426L) — `MedicalTheoremType`, `MedicalEntity`, `MedicalTheoremGenerator` | ✅ `medical-theorem-framework.ts` (`MedicalTheoremType`/`ConfidenceLevel`; `MedicalTheorem.toFormula/toDict`; `MedicalTheoremGenerator.generateFromText/validateTheorem/generateBatch`) | **CLOSED** — Sprint 36 (T-167) |
+| **TDFOL-CEC Bridge** | ✅ `integration/bridges/tdfol_cec_bridge.py` (435L) — `TDFOLCECBridge`, `EnhancedTDFOLProver` | ✅ `tdfol-cec-bridge.ts` (`TDFOLCECBridge.prove` (axiom/forward/CEC); `EnhancedTDFOLProver.prove/proveBatch/useKB/proofId`; `createEnhancedProver()`) | **CLOSED** — Sprint 36 (T-168) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 35):** 35+ modules; deontic core (8 ops) + IPLD provenance storage + deontological reasoning engine; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 36):** 36+ modules; IPFS proof cache + medical theorems + TDFOL-CEC bridge; deontic core + IPLD storage + deontological reasoning; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1088,6 +1094,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-163 | P3 | Create `src/services/ipld-logic-storage.ts` | ✅ DONE | `makeProvenanceChain()/toDict()`; `LogicIPLDNode` (SHA-256 CID + `addTranslation()`); `LogicIPLDStorage.addNode/getNode/listNodes/findByDocument`; `LogicProvenanceTracker.trackFormula/getProvenance`; `createLogicStorageWithProvenance()` |
 | T-164 | P3 | Create `src/services/deontological-reasoning.ts` | ✅ DONE | `DeonticStatement` (O/P/F/R/L + conditions + toDict()); `DeonticExtractor.extractStatements(text, docId)/countByOperator()`; `ConflictReport`; `DeontologicalReasoningEngine.reason/detectConflicts/generateExplanation/analyzeText(text, docId, query?)` |
 | T-165 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint35.test.ts` — 32 tests (all pass) |
+
+---
+
+### Sprint 36 (Phase 36 — IPFS Proof Cache + Medical Theorem Framework + TDFOL-CEC Bridge, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/caching/ipfs_proof_cache.py` (457L) — `IPFSCachedProof`/`IPFSProofCache`; `integration/domain/medical_theorem_framework.py` (426L) — `MedicalTheoremType`/`MedicalEntity`/`MedicalTheorem`/`MedicalTheoremGenerator`; `integration/bridges/tdfol_cec_bridge.py` (435L) — `TDFOLCECBridge`/`EnhancedTDFOLProver`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-166 | P3 | Create `src/services/ipfs-proof-cache.ts` | ✅ DONE | `IPFSCachedProof` (computeCid/isExpired/toDict); `IPFSProofCache.set/get/has/pin/unpin/clearExpired/getStats/clear`; `getGlobalIPFSCache()/resetGlobalIPFSCache()` |
+| T-167 | P3 | Create `src/services/medical-theorem-framework.ts` | ✅ DONE | `MedicalTheoremType` (6 types)/`ConfidenceLevel` (5 levels); `MedicalEntity`/`TemporalConstraint`; `MedicalTheorem.toFormula()/toDict()`; `MedicalTheoremGenerator.generateFromText/validateTheorem/generateBatch`; `FuzzyLogicValidator.validate()` |
+| T-168 | P3 | Create `src/services/tdfol-cec-bridge.ts` | ✅ DONE | `TDFOLCECBridge` (3 default axioms; prove via axiom_lookup/forward_chain/CEC delegation); `EnhancedTDFOLProver.prove/proveBatch/useKB/proofId()`; `createEnhancedProver()` |
+| T-169 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint36.test.ts` — 33 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
