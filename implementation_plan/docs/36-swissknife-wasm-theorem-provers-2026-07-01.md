@@ -171,6 +171,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/converters/deontic_logic_converter.py` | `ConversionContext`, `ConversionResult`, `DeonticLogicConverter.convert()` | Sprint 33 ✅ | P3 |
 | `logic/integration/symbolic/symbolic_logic_primitives.py` | `LogicalStructure`, `LogicPrimitives`, `createLogicSymbol()`, `getAvailablePrimitives()` | Sprint 33 ✅ | P3 |
 | `logic/integration/domain/symbolic_contracts.py` | `FOLInput`, `FOLOutput`, `ValidationContext`, `FOLSyntaxValidator` | Sprint 33 ✅ | P3 |
+| `logic/integration/converters/modal_logic_extension.py` | `ModalFormula`, `LogicClassification`, `AdvancedLogicConverter`, `convertToModal()`, `detectLogicType()` | Sprint 34 ✅ | P3 |
+| `logic/integration/domain/document_consistency_checker.py` | `DocumentAnalysis`, `DebugReport`, `DocumentConsistencyChecker` | Sprint 34 ✅ | P3 |
+| `logic/integration/domain/temporal_deontic_rag_store.py` | `TheoremMetadata`, `ConsistencyResult`, `TemporalDeonticRAGStore` | Sprint 34 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -388,9 +391,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Deontic Logic Converter** | ✅ `integration/converters/deontic_logic_converter.py` (739L) — `ConversionContext`, `ConversionResult`, `DeonticLogicConverter.convert()` | ✅ `deontic-logic-converter.ts` (`ConversionContext`/`ConversionResult.toDict()`/`DeonticLogicConverter.convert/convertEntities`) | **CLOSED** — Sprint 33 (T-154) |
 | **Symbolic Logic Primitives** | ✅ `integration/symbolic/symbolic_logic_primitives.py` (594L) — `LogicalStructure`, `LogicPrimitives`, `createLogicSymbol()` | ✅ `symbolic-logic-primitives.ts` (13 `AVAILABLE_PRIMITIVES`; `analyzeLogicalStructure()`; `createLogicSymbol().apply/toFol()`) | **CLOSED** — Sprint 33 (T-155) |
 | **Symbolic Contracts (FOL Validator)** | ✅ `integration/domain/symbolic_contracts.py` (840L) — `FOLInput`, `FOLOutput`, `FOLSyntaxValidator` | ✅ `fol-syntax-validator.ts` (`validateFolInput()`; `FOLOutput.isValid/toDict()`; `FOLSyntaxValidator.validate/convert()`) | **CLOSED** — Sprint 33 (T-156) |
+| **Modal Logic Extension** | ✅ `integration/converters/modal_logic_extension.py` (531L) — `ModalFormula`, `LogicClassification`, `AdvancedLogicConverter`, `convertToModal()` | ✅ `modal-logic-extension.ts` (`AdvancedLogicConverter.toModal/classify/convertBatch`; `convertToModal()`; `detectLogicType()`) | **CLOSED** — Sprint 34 (T-158) |
+| **Document Consistency Checker** | ✅ `integration/domain/document_consistency_checker.py` (538L) — `DocumentAnalysis`, `DebugReport`, `DocumentConsistencyChecker` | ✅ `document-consistency-checker.ts` (`DocumentAnalysis.toDict()`; `DebugReport.addIssue/finalize/toDict()`; `DocumentConsistencyChecker.analyze/generateDebugReport`) | **CLOSED** — Sprint 34 (T-159) |
+| **Temporal Deontic RAG Store** | ✅ `integration/domain/temporal_deontic_rag_store.py` (520L) — `TheoremMetadata`, `ConsistencyResult`, `TemporalDeonticRAGStore` | ✅ `temporal-deontic-rag-store.ts` (`TheoremMetadata`; `ConsistencyResult.toDict()`; `TemporalDeonticRAGStore.addTheorem/findRelevant/checkConsistency/makeTheoremFromFormula`) | **CLOSED** — Sprint 34 (T-160) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 33):** 33+ modules; deontic converter + symbolic primitives + FOL validator; query engine + domain knowledge + grammar bridge; complete bridge+TDFOL+ZKP stack. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 34):** 34+ modules; modal logic extension + document consistency + temporal RAG store; complete integration layer; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1050,6 +1056,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-155 | P3 | Create `src/services/symbolic-logic-primitives.ts` | ✅ DONE | `LogicalStructure`; `analyzeLogicalStructure()` (Unicode-aware ∀/∃/∧/∨/¬/→/◊/□); 13 `AVAILABLE_PRIMITIVES` (and/or/not/implies/iff/forall/exists/equals/O/P/F/□/◊); `createLogicSymbol().apply(primitive)/toFol(format)` |
 | T-156 | P3 | Create `src/services/fol-syntax-validator.ts` | ✅ DONE | `FOLInput`/`validateFolInput()` (confidence/format validation); `FOLOutput.isValid/toDict()`; `ValidationContext`/`makeValidationContext()`; `FOLSyntaxValidator.validate()` (parenthesis balance/depth/free-var) + `.convert()` |
 | T-157 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint33.test.ts` — 37 tests (all pass) |
+
+---
+
+### Sprint 34 (Phase 34 — Modal Logic Extension + Document Consistency Checker + Temporal Deontic RAG Store, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/converters/modal_logic_extension.py` (531L) — `ModalFormula`/`LogicClassification`/`AdvancedLogicConverter`/`convertToModal()`; `integration/domain/document_consistency_checker.py` (538L) — `DocumentAnalysis`/`DebugReport`/`DocumentConsistencyChecker`; `integration/domain/temporal_deontic_rag_store.py` (520L) — `TheoremMetadata`/`ConsistencyResult`/`TemporalDeonticRAGStore`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-158 | P3 | Create `src/services/modal-logic-extension.ts` | ✅ DONE | `ModalFormula`/`LogicClassification`; `AdvancedLogicConverter.toModal/classify/convertBatch()`; `convertToModal(text)/detectLogicType(text)` — classify as deontic/temporal/epistemic/alethic via pattern matching |
+| T-159 | P3 | Create `src/services/document-consistency-checker.ts` | ✅ DONE | `DocumentAnalysis` (extractedFormulas/consistencyResult/issuesFound/toDict()); `DebugReport` (addIssue/finalize/toDict()); `DocumentConsistencyChecker.analyze(text, docId?)/generateDebugReport(analysis)` |
+| T-160 | P3 | Create `src/services/temporal-deontic-rag-store.ts` | ✅ DONE | `TheoremMetadata` (theoremId/formula/temporalScope/jurisdiction/precedentStrength/toDict()); `ConsistencyResult.toDict()`; `TemporalDeonticRAGStore` (addTheorem/removeTheorem/findRelevant/checkConsistency/`makeTheoremFromFormula()` factory) |
+| T-161 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint34.test.ts` — 27 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
