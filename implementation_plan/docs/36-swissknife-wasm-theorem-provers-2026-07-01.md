@@ -277,14 +277,14 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | ZK proof CID in audit | ✅ `zkp/statement.py` content-addressed artifact | ✅ `AuditEntry.extra.zk_proof_cid` via `PolicyAuditLog.record()` | **CLOSED** — Sprint 7b T-53 |
 | Neural prover | ✅ `symbolicai_prover_bridge.py` (LLM sketch + verify) | ✅ `NeuralProverBridge` (LLM sketch → Lean4/Coq local verify) | **CLOSED** — Sprint 6 (T-38/T-57) |
 | **DCEC / CEC layer** | ✅ `CEC/` — `dcec_core`, `prover_core`, `cec_framework`, `shadow_prover_wrapper`, `talos_wrapper` | ✅ `DcecProverBridge` (forward-chaining, 5 rules: MP/Simp/DeonticProhibEquiv/ObligImpliesPermit/ForbiddenToNotOblig) | **CLOSED** — Sprint 9 (T-58–T-62) |
-| **TDFOL engine** | ✅ `TDFOL/` — `tdfol_core`, `tdfol_prover` (640 lines), `tdfol_parser`, `tdfol_inference_rules`, `modal_tableaux`, `strategies/` | ❌ **Not implemented** (`temporal` formulas → remote only) | **OPEN** — Sprint 10 (T-63–T-67; closes temporal remote fallback) |
-| **Deontic IR / Knowledge Base** | ✅ `deontic/formula_builder.py` (7019 lines), `knowledge_base.py`, `ir.py` | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 11+ P3 |
-| **UCAN-ZKP bridge** | ✅ `zkp/ucan_zkp_bridge.py` | ❌ Not implemented | **OPEN** — Sprint 12+ P2 |
+| **TDFOL engine** | ✅ `TDFOL/` — `tdfol_core`, `tdfol_prover` (640 lines), `tdfol_parser`, `tdfol_inference_rules`, `modal_tableaux`, `strategies/` | ✅ `TdfolProverBridge` (10 LTL+SDL rules; closes temporal remote fallback) | **CLOSED** — Sprint 10 (T-63–T-67) |
+| **UCAN-ZKP bridge** | ✅ `zkp/ucan_zkp_bridge.py` (592 lines) — `ZKPToUCANBridge`, `ZKPCapabilityEvidence` caveat | ❌ Not implemented | **OPEN** — Sprint 11 P2 |
+| **ZKP simulated prover** | ✅ `zkp/zkp_prover.py` (289 lines) + `zkp_verifier.py` (313 lines) | ❌ Only `LurkWasmBridge` stub (real ZKP) | **OPEN** — Sprint 11 P2 |
+| **Modal frame logic bridge** | ✅ `bridge/modal_frame_logic.py` — K/T/D/S4/S5 frame semantics adapter | ❌ Not implemented | **OPEN** — Sprint 12 P2 |
+| **Deontic IR / Knowledge Base** | ✅ `deontic/formula_builder.py` (7019 lines), `knowledge_base.py`, `ir.py` | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 13+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Key remaining gap:** The `temporal` formula class still forces a remote TDFOL call for every
-policy with `policy.temporal` or obligation deadlines. Sprint 10 adds `TdfolProverBridge` with
-LTL (□/◊/◯/U/S) + SDL (D axiom) inference rules to handle this locally.
+**Current status (post Sprint 10):** All formula classes (propositional/fol/modal_deontic/temporal) are handled locally. Only `higher_order` (>20 rules) with no local Coq/Lean4 binary falls to remote — and even that now tries `_tryCoqOrLean4()` first. The remaining open work is the ZKP attestation layer (UCAN-ZKP bridge) and modal frame logic adapter.
 
 ---
 
@@ -644,15 +644,30 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-66 | P2 | Wire `TdfolProverBridge` into `WasmProverHub` for `temporal` + fix `higher_order` | ✅ DONE | `temporal` → TdfolProverBridge (closes last mandatory remote fallback); `higher_order` → `_tryCoqOrLean4()` before remote; `proverStatus().tdfol_native = true` |
 | T-67 | P2 | Write 10+ tests for TDFOL prover bridge | ✅ DONE | `wasm-prover-sprint10.test.ts` — 26 tests (all pass): T-63 types (8), T-64 rules (10), T-65 translator (4), T-66 hub routing (2) |
 
+---
+
+### Sprint 11 (Phase 11 — UCAN-ZKP Bridge, P2) ✅ DONE (2026-07-03)
+
+> **Gap from §4:** `ipfs_datasets_py/logic/zkp/ucan_zkp_bridge.py` (592 lines) provides
+> `ZKPToUCANBridge` — converts ZKP proof artifacts into UCAN capability evidence caveats.
+> Sprint 11 adds `ZkpUcanBridge` + `ZkpSimulatedProver` to swissknife's `src/services/zkp/`.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-68 | P2 | Create `src/services/zkp/zkp-types.ts` — ZKP UCAN type system | ✅ DONE | `ZkpCapabilityEvidence` (type/proof_hash/theorem_cid/verifier_id/public_inputs/is_simulation); `ZkpBridgeResult`; `ZkpSimulatedProof`; `ZkpVerifierId` union |
+| T-69 | P2 | Create `src/services/zkp/zkp-simulated-prover.ts` — simulated ZKP prover | ✅ DONE | `ZkpSimulatedProver.prove(statement, axioms?) → ZkpSimulatedProof`; SHA-256 proof hash; <500B proof_b64; `verify(proof) → boolean`; `computeStatementCid()` |
+| T-70 | P2 | Create `src/services/zkp/zkp-ucan-bridge.ts` — `ZkpUcanBridge` | ✅ DONE | `proofToCaveat(ZKProofArtifact) → ZkpCapabilityEvidence` (is_simulation:false); `proveAndDelegate()` with real prover injection + simulation fallback; backend→verifier_id mapping |
+| T-71 | P2 | Write 10+ tests for ZKP-UCAN bridge | ✅ DONE | `wasm-prover-sprint11.test.ts` — 19 tests (all pass): T-68 types (4), T-69 simulated prover (8), T-70 bridge (7) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
 |---|---|---|---|---|---|
 | Propositional deontic | Z3 | ✅ Z3 WASM | ✅ | ✅ | ✅ |
 | First-order (∀, ∃) | Z3/CVC5 | ✅ Z3 WASM | ✅ | ✅ | ✅ |
-| Linear temporal (◊, □) | Z3/TDFOL native | ❌ (remote fallback) | ❌ (remote) | partial | partial |
-| Deontic modal (P/F/O) | TDFOL tableaux | ✅ Z3 encoding | ✅ | ✅ Coq | ✅ Lean |
-| Higher-order (λ, Π) | Lean 4 / Coq | ❌ (remote) | ❌ | ✅ Coq | ✅ Lean 4 |
+| Linear temporal (◊, □) | Z3/TDFOL native | ✅ TdfolProverBridge (Sprint 10) | ✅ | partial | partial |
+| Deontic modal (P/F/O) | TDFOL tableaux | ✅ DcecProverBridge (Sprint 9) | ✅ | ✅ Coq | ✅ Lean |
+| Higher-order (λ, Π) | Lean 4 / Coq | ✅ _tryCoqOrLean4() (Sprint 10) | ❌ | ✅ Coq | ✅ Lean 4 |
 | Inductive types | Coq | ❌ | ❌ | ✅ Coq | ✅ Lean 4 |
 | ZK proof-carrying | Lurk/Sphinx | ❌ | ❌ | ❌ | ❌ (Phase 6) |
 
