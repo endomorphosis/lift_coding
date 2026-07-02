@@ -174,6 +174,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/converters/modal_logic_extension.py` | `ModalFormula`, `LogicClassification`, `AdvancedLogicConverter`, `convertToModal()`, `detectLogicType()` | Sprint 34 ✅ | P3 |
 | `logic/integration/domain/document_consistency_checker.py` | `DocumentAnalysis`, `DebugReport`, `DocumentConsistencyChecker` | Sprint 34 ✅ | P3 |
 | `logic/integration/domain/temporal_deontic_rag_store.py` | `TheoremMetadata`, `ConsistencyResult`, `TemporalDeonticRAGStore` | Sprint 34 ✅ | P3 |
+| `logic/integration/converters/deontic_logic_core.py` | `DeonticOperator`/`LogicConnective`/`TemporalOperator`/`LegalAgent`/`DeonticFormula`/`DeonticRuleSet` (extended core types) | Sprint 35 ✅ | P3 |
+| `logic/integration/caching/ipld_logic_storage.py` | `LogicProvenanceChain`, `LogicIPLDNode`, `LogicIPLDStorage`, `LogicProvenanceTracker` | Sprint 35 ✅ | P3 |
+| `logic/integration/reasoning/deontological_reasoning.py` | `DeonticExtractor`, `DeontologicalReasoningEngine` | Sprint 35 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -394,9 +397,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Modal Logic Extension** | ✅ `integration/converters/modal_logic_extension.py` (531L) — `ModalFormula`, `LogicClassification`, `AdvancedLogicConverter`, `convertToModal()` | ✅ `modal-logic-extension.ts` (`AdvancedLogicConverter.toModal/classify/convertBatch`; `convertToModal()`; `detectLogicType()`) | **CLOSED** — Sprint 34 (T-158) |
 | **Document Consistency Checker** | ✅ `integration/domain/document_consistency_checker.py` (538L) — `DocumentAnalysis`, `DebugReport`, `DocumentConsistencyChecker` | ✅ `document-consistency-checker.ts` (`DocumentAnalysis.toDict()`; `DebugReport.addIssue/finalize/toDict()`; `DocumentConsistencyChecker.analyze/generateDebugReport`) | **CLOSED** — Sprint 34 (T-159) |
 | **Temporal Deontic RAG Store** | ✅ `integration/domain/temporal_deontic_rag_store.py` (520L) — `TheoremMetadata`, `ConsistencyResult`, `TemporalDeonticRAGStore` | ✅ `temporal-deontic-rag-store.ts` (`TheoremMetadata`; `ConsistencyResult.toDict()`; `TemporalDeonticRAGStore.addTheorem/findRelevant/checkConsistency/makeTheoremFromFormula`) | **CLOSED** — Sprint 34 (T-160) |
+| **Deontic Logic Core (Extended)** | ✅ `integration/converters/deontic_logic_core.py` (514L) — `DeonticOperator` (O/P/F/S/R/L/POW/IMM), `LogicConnective`, `TemporalOperator`, `LegalAgent`, `DeonticRuleSet` | ✅ `deontic-logic-core.ts` (`DeonticOperatorExt`/`LogicConnective`/`TemporalOperatorExt`; `LegalAgent`; `DeonticRuleSetExt.query/search/obligations`) | **CLOSED** — Sprint 35 (T-162) |
+| **IPLD Logic Storage** | ✅ `integration/caching/ipld_logic_storage.py` (489L) — `LogicProvenanceChain`, `LogicIPLDNode`, `LogicIPLDStorage`, `LogicProvenanceTracker` | ✅ `ipld-logic-storage.ts` (`LogicIPLDNode.addTranslation()`; `LogicIPLDStorage.findByDocument()`; `LogicProvenanceTracker`; CID generation) | **CLOSED** — Sprint 35 (T-163) |
+| **Deontological Reasoning Engine** | ✅ `integration/reasoning/deontological_reasoning.py` (482L) — `DeonticExtractor`, `DeontologicalReasoningEngine` | ✅ `deontological-reasoning.ts` (`DeonticExtractor.extractStatements/countByOperator`; `DeontologicalReasoningEngine.reason/detectConflicts/generateExplanation/analyzeText`) | **CLOSED** — Sprint 35 (T-164) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 34):** 34+ modules; modal logic extension + document consistency + temporal RAG store; complete integration layer; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 35):** 35+ modules; deontic core (8 ops) + IPLD provenance storage + deontological reasoning engine; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1069,6 +1075,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-159 | P3 | Create `src/services/document-consistency-checker.ts` | ✅ DONE | `DocumentAnalysis` (extractedFormulas/consistencyResult/issuesFound/toDict()); `DebugReport` (addIssue/finalize/toDict()); `DocumentConsistencyChecker.analyze(text, docId?)/generateDebugReport(analysis)` |
 | T-160 | P3 | Create `src/services/temporal-deontic-rag-store.ts` | ✅ DONE | `TheoremMetadata` (theoremId/formula/temporalScope/jurisdiction/precedentStrength/toDict()); `ConsistencyResult.toDict()`; `TemporalDeonticRAGStore` (addTheorem/removeTheorem/findRelevant/checkConsistency/`makeTheoremFromFormula()` factory) |
 | T-161 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint34.test.ts` — 27 tests (all pass) |
+
+---
+
+### Sprint 35 (Phase 35 — Deontic Logic Core + IPLD Logic Storage + Deontological Reasoning, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/converters/deontic_logic_core.py` (514L) — extended `DeonticOperator`/`LegalAgent`/`DeonticRuleSet`; `integration/caching/ipld_logic_storage.py` (489L) — `LogicProvenanceChain`/`LogicIPLDNode`/`LogicIPLDStorage`; `integration/reasoning/deontological_reasoning.py` (482L) — `DeonticExtractor`/`DeontologicalReasoningEngine`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-162 | P3 | Create `src/services/deontic-logic-core.ts` | ✅ DONE | `DeonticOperatorExt` (8: O/P/F/S/R/L/POW/IMM); `LogicConnective`/`TemporalOperatorExt`; `makeLegalAgent()`; `makeExtFormula().toString()/toDict()`; `DeonticRuleSetExt.addFormula/query/search/obligations/permissions/prohibitions/toDict()` |
+| T-163 | P3 | Create `src/services/ipld-logic-storage.ts` | ✅ DONE | `makeProvenanceChain()/toDict()`; `LogicIPLDNode` (SHA-256 CID + `addTranslation()`); `LogicIPLDStorage.addNode/getNode/listNodes/findByDocument`; `LogicProvenanceTracker.trackFormula/getProvenance`; `createLogicStorageWithProvenance()` |
+| T-164 | P3 | Create `src/services/deontological-reasoning.ts` | ✅ DONE | `DeonticStatement` (O/P/F/R/L + conditions + toDict()); `DeonticExtractor.extractStatements(text, docId)/countByOperator()`; `ConflictReport`; `DeontologicalReasoningEngine.reason/detectConflicts/generateExplanation/analyzeText(text, docId, query?)` |
+| T-165 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint35.test.ts` — 32 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
