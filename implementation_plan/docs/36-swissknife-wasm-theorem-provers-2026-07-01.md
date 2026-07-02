@@ -189,6 +189,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/symbolic/neurosymbolic/reasoning_coordinator.py` | `ReasoningStrategy`, `CoordinatedResult`, `NeuralSymbolicCoordinator` | Sprint 39 ✅ | P3 |
 | `logic/integration/reasoning/_deontic_conflict_mixin.py` | `ConflictDetector`, `DeonticConflictMixin` | Sprint 39 ✅ | P3 |
 | `logic/integration/interactive/interactive_fol_constructor.py` | `InteractiveFOLConstructor` | Sprint 39 ✅ | P3 |
+| `logic/integration/symbolic/neurosymbolic/embedding_prover.py` | `EmbeddingEnhancedProver` (computeSimilarity/prove/retrieveSimilar) | Sprint 40 ✅ | P3 |
+| `logic/integration/reasoning/_prover_backend_mixin.py` | `ProverBackendMixin` (Z3/Lean4/Coq execution + consistency check) | Sprint 40 ✅ | P3 |
+| `logic/integration/bridges/symbolic_fol_bridge.py` | `LogicalComponents`, `FOLConversionResult`, `SymbolicFOLBridge` | Sprint 40 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -424,9 +427,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Reasoning Coordinator** | ✅ `symbolic/neurosymbolic/reasoning_coordinator.py` (351L) — `ReasoningStrategy`, `CoordinatedResult`, `NeuralSymbolicCoordinator` | ✅ `reasoning-coordinator.ts` (`ReasoningStrategy` (4); `CoordinatedResult.toDict()`; `NeuralSymbolicCoordinator.coordinate(AUTO/SYMBOLIC/NEURAL/HYBRID)`) | **CLOSED** — Sprint 39 (T-178) |
 | **Deontic Conflict Detector** | ✅ `reasoning/_deontic_conflict_mixin.py` (304L) — `ConflictDetector`, `DeonticConflictMixin` | ✅ `deontic-conflict-detector.ts` (`DeonticConflictType` (6); `ConflictDetector.detectConflicts/summarize`; `DeonticConflictMixin.wouldConflict/conflictScore`) | **CLOSED** — Sprint 39 (T-179) |
 | **Interactive FOL Constructor** | ✅ `interactive/interactive_fol_constructor.py` (848L) — `InteractiveFOLConstructor` | ✅ `interactive-fol-constructor.ts` (`InteractiveFOLConstructor.addStatement/buildFormula/checkConsistency/getSession/reset/exportFormulas`) | **CLOSED** — Sprint 39 (T-180) |
+| **Embedding Enhanced Prover** | ✅ `symbolic/neurosymbolic/embedding_prover.py` (240L) — `EmbeddingEnhancedProver` | ✅ `embedding-prover.ts` (`cosineSimilarity()`; `EmbeddingEnhancedProver.computeSimilarity/prove(exact+similarity)/retrieveSimilar/cacheSize`) | **CLOSED** — Sprint 40 (T-182) |
+| **Prover Backend Mixin** | ✅ `reasoning/_prover_backend_mixin.py` (527L) — `ProverBackendMixin` | ✅ `prover-backend-mixin.ts` (`generateDeonticSMT2Axioms()`; `ProverBackendMixin.executeZ3/Lean4/Coq Proof/checkConsistency`) | **CLOSED** — Sprint 40 (T-183) |
+| **Symbolic FOL Bridge** | ✅ `bridges/symbolic_fol_bridge.py` (764L) — `LogicalComponents`, `FOLConversionResult`, `SymbolicFOLBridge` | ✅ `symbolic-fol-bridge.ts` (`LogicalComponents` (dict-like); `SymbolicFOLBridge.extractComponents/convert/validate`) | **CLOSED** — Sprint 40 (T-184) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 39):** 39+ modules; reasoning coordinator + deontic conflict detector + interactive FOL; GraphRAG + hybrid confidence + base prover bridge; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 40):** 40+ modules; embedding prover + prover backend mixin + symbolic FOL bridge; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1164,6 +1170,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-179 | P3 | Create `src/services/deontic-conflict-detector.ts` | ✅ DONE | `DeonticConflictType` (6 types); `DeonticConflict` (conflictType/severity/explanation/suggestedResolution); `ConflictDetector.detectConflicts(stmts[])/summarize()`; `DeonticConflictMixin.wouldConflict/conflictScore()` |
 | T-180 | P3 | Create `src/services/interactive-fol-constructor.ts` | ✅ DONE | `StatementAnalysis`/`FOLConstructorSession` (sessionId/domain/statements/formulas/consistencyScore); `InteractiveFOLConstructor.addStatement(text)/buildFormula(∧|∨|→)/checkConsistency()/getSession()/reset()/exportFormulas()` |
 | T-181 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint39.test.ts` — 29 tests (all pass) |
+
+---
+
+### Sprint 40 (Phase 40 — Embedding Prover + Prover Backend Mixin + Symbolic FOL Bridge, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `symbolic/neurosymbolic/embedding_prover.py` (240L) — `EmbeddingEnhancedProver`; `reasoning/_prover_backend_mixin.py` (527L) — `ProverBackendMixin`; `bridges/symbolic_fol_bridge.py` (764L) — `LogicalComponents`/`FOLConversionResult`/`SymbolicFOLBridge`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-182 | P3 | Create `src/services/embedding-prover.ts` | ✅ DONE | `cosineSimilarity(a,b)`; `EmbeddingEnhancedProver.computeSimilarity/prove(exact_match+similarity_match threshold)/retrieveSimilar(query,corpus,topK)/cacheSize/clearCache`; hash-based embedding (no ML deps) |
+| T-183 | P3 | Create `src/services/prover-backend-mixin.ts` | ✅ DONE | `generateDeonticSMT2Axioms()` (declarations+axioms+combined SMT-LIB2); `ProverBackendMixin.executeZ3Proof/executeLean4Proof/executeCoqProof/checkConsistency()` — simulated backends |
+| T-184 | P3 | Create `src/services/symbolic-fol-bridge.ts` | ✅ DONE | `LogicalComponents` (quantifiers/predicates/entities/connectives; dict-like `get/keys/items/toDict`); `SymbolicFOLBridge.extractComponents(text)/convert(text)/validate(formula)` (parenthesis balance check) |
+| T-185 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint40.test.ts` — 30 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
