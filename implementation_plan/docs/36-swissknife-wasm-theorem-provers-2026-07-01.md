@@ -1510,6 +1510,20 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 63 (Phase 63 — ErgoAI Wrapper + FLogic ZKP + Prometheus Metrics + Base Parser + Error Handling + NL Context, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-290 | P3 | Create `src/services/flogic-ergoai-wrapper.ts` | `ErgoAIConfig`; `ErgoAIWrapper` (query/queryBatch/isAvailable/getStats); `findErgoBinary()/lazyInstallErgo()` | ✅ DONE |
+| T-291 | P3 | Create `src/services/flogic-zkp-integration.ts` | `FLogicProvingMethod` enum; `ZKPFLogicResult`; `ZKPFLogicProver` (prove/getStats) — combined in `flogic-ergoai-wrapper.ts` | ✅ DONE |
+| T-292 | P3 | Create `src/services/metrics-prometheus.ts` | `CircuitBreakerState` enum; `CallMetrics`; `PrometheusMetricsCollector` (record/getMetrics/format/reset); `getPrometheusCollector()` — in `cec-sprint63-utils.ts` | ✅ DONE |
+| T-293 | P3 | Create `src/services/cec-base-parser.ts` | `ParseResult`; abstract `BaseParser`; `getParser(language)` — in `cec-sprint63-utils.ts` | ✅ DONE |
+| T-294 | P3 | Create `src/services/cec-error-handling.ts` | `handleProofError/handleParseError/withErrorContext/safeCall/formatErrorMessage/validateNotNull` — in `cec-sprint63-utils.ts` | ✅ DONE |
+| T-295 | P3 | Create `src/services/tdfol-nl-context.ts` | `NLContext/makeTDFOLEntity/ContextResolver` — in `cec-sprint63-utils.ts` | ✅ DONE |
+| T-296 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint63.test.ts` | ✅ DONE — 41 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
