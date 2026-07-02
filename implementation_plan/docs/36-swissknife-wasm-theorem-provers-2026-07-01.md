@@ -490,12 +490,12 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 | ID | Priority | Task | Acceptance Criteria |
 |---|---|---|---|
-| T-40 | P1 | Add `prover_id` and `proof_time_ms` to `AuditEntry` extra payload | Logged by `PolicyAuditLog.record()` |
-| T-41 | P1 | Update `CONFORMANCE_MATRIX.md` as each prover is added | Matrix stays current after each sprint |
-| T-42 | P1 | Add WASM prover health to `mcp++ status` output | Shows which provers are loaded / healthy |
-| T-43 | P2 | Bundle-size analysis: z3-solver adds ~34 MB WASM | Lazy-load strategy: load only when first proof requested |
-| T-44 | P2 | Cross-language conformance: Python vs JS prover on same formula set | Match rate ≥ 95% on shared test corpus |
-| T-45 | P2 | CI gate: `test/mcp-plus-plus/wasm-prover-*.test.ts` in GitHub Actions | Passes in ubuntu-latest Node.js 22 |
+| T-40 | P1 | Add `prover_id` and `proof_time_ms` to `AuditEntry` extra payload | ✅ Logged by `PolicyAuditLog.record()` |
+| T-41 | P1 | Update `CONFORMANCE_MATRIX.md` as each prover is added | ✅ Matrix updated through Sprint 5 |
+| T-42 | P1 | Add WASM prover health to `mcp++ status` output | ✅ Shows loaded provers + cache stats |
+| T-43 | P2 | Bundle-size analysis: z3-solver adds ~34 MB WASM | ✅ `Z3WasmBridge.createDeferred()` — lazy-load on first proof request; `WasmProverHub.create()` uses it |
+| T-44 | P2 | Cross-language conformance: Python vs JS prover on same formula set | ✅ `wasm-prover-conformance.test.ts` — 5 SAT + 1 conflict policies from ipfs_datasets_py corpus; live Z3 gated by `Z3_WASM_LIVE=1` |
+| T-45 | P2 | CI gate: `test/mcp-plus-plus/wasm-prover-*.test.ts` in GitHub Actions | ✅ `.github/workflows/wasm-prover-gates.yml` — ubuntu-latest + Node.js 22, 5 job stages |
 
 ---
 
