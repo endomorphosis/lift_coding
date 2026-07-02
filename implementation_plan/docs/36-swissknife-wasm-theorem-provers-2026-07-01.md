@@ -130,9 +130,13 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/monitoring.py` | `LogicMonitor`: operation tracking, metrics (counter/gauge/histogram), `track_operation()`, `get_metrics()`, health checks | Sprint 19 ✅ | P2 |
 | `logic/submodule_registry.py` | `LogicSubmoduleSpec`, `logic_submodule_specs()`, `logic_integration_manifest()` | Sprint 19 ✅ | P2 |
 | `logic/batch_processing.py` | `BatchResult`, async/parallel batch formula evaluation | Sprint 19 ✅ | P2 |
-| `logic/api.py` | Public API facade: `I18NConflictReport`, `compileNlToPolicy()`, `evaluateNlPolicy()` | Sprint 20 | P2 |
-| `logic/e2e_validation.py` | `E2EValidator`, `ValidationResult`: end-to-end pipeline validation | Sprint 20 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 21+ | P3 |
+| `logic/api.py` | Public API facade: `I18NConflictReport`, `compileNlToPolicy()`, `evaluateNlPolicy()` | Sprint 20 ✅ | P2 |
+| `logic/e2e_validation.py` | `E2EValidator`, `ValidationResult`: end-to-end pipeline validation | Sprint 20 ✅ | P2 |
+| `logic/types/` | Shared type system: `DeonticOperator`, `TemporalOperator`, `LegalAgent`, `TemporalCondition`, `LegalContext`, `DeonticFormula`, `DeonticRuleSet`, `FOLFormula`, `FOLConversionResult` | Sprint 21 | P2 |
+| `logic/common/validators.py` | `validate_formula_string()`, `validate_axiom_list()`, `validate_logic_system()`, `validate_timeout_ms()` | Sprint 21 | P2 |
+| `logic/common/bounded_cache.py` | `CacheEntry[T]`, `BoundedCache[T]` (generic LRU eviction cache) | Sprint 21 | P2 |
+| `logic/TDFOL/nl/` | `parse_natural_language(text)` → TDFOL formulas (NL→TDFOL pipeline) | Sprint 21 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 22+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -309,13 +313,16 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Logic Monitor** | ✅ `monitoring.py` (452 lines) — `LogicMonitor`, operation tracking, metrics | ✅ `LogicMonitor` (`src/services/logic-monitor.ts`) | **CLOSED** — Sprint 19 (T-100–T-103) |
 | **Submodule Registry** | ✅ `submodule_registry.py` (614 lines) — `LogicSubmoduleSpec`, `logic_integration_manifest()` | ✅ `SubmoduleRegistry` + `getIntegrationManifest()` | **CLOSED** — Sprint 19 |
 | **Batch Processor** | ✅ `batch_processing.py` (389 lines) — `BatchResult`, async batch formula evaluation | ✅ `BatchProcessor` (`src/services/batch-processor.ts`) | **CLOSED** — Sprint 19 |
-| **I18N Conflict Report** | ✅ `api.py` (723 lines) — `I18NConflictReport` (multi-language conflict detection report) | ❌ Not implemented | **OPEN** — Sprint 20 P2 |
-| **E2E Validator** | ✅ `e2e_validation.py` (691 lines) — `E2EValidator`, `ValidationResult` | ❌ Not implemented | **OPEN** — Sprint 20 P2 |
-| **Logic Public API** | ✅ `api.py` (723 lines) — top-level `LogicPublicApi` facade, `compileNlToPolicy()`, `evaluateNlPolicy()` | ❌ Not implemented | **OPEN** — Sprint 20 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 21+ P3 |
+| **I18N Conflict Report** | ✅ `api.py` (723 lines) — `I18NConflictReport` (multi-language conflict detection report) | ✅ `I18NConflictReport` + `detectMultilingualConflicts()` | **CLOSED** — Sprint 20 (T-104–T-107) |
+| **E2E Validator** | ✅ `e2e_validation.py` (691 lines) — `E2EValidator`, `ValidationResult` | ✅ `E2EValidator.run() → ValidationSummary` (7 test suites) | **CLOSED** — Sprint 20 |
+| **Logic Public API** | ✅ `api.py` (723 lines) — top-level `LogicPublicApi` facade, `compileNlToPolicy()`, `evaluateNlPolicy()` | ✅ `LogicPublicApi`: `analyzeText()`, `analyzeTexts()`, `detectMultilingualConflicts()` | **CLOSED** — Sprint 20 |
+| **Logic Types** | ✅ `types/deontic_types.py` (296L) + `fol_types.py` (121L) + `common_types.py` (119L) + `proof_types.py` (26L) | ❌ Not implemented | **OPEN** — Sprint 21 P2 |
+| **Common Validators + BoundedCache** | ✅ `common/validators.py` (277L) + `common/bounded_cache.py` (233L) | ❌ Not implemented | **OPEN** — Sprint 21 P2 |
+| **TDFOL NL API** | ✅ `TDFOL/nl/tdfol_nl_api.py` — `parse_natural_language(text)` → TDFOL formulas | ❌ Not implemented | **OPEN** — Sprint 21 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 22+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 19):** 19 modules across Sprints 1–19; all provers local; ZKP→UCAN; full NL→FOL→LegalNormIR→prover pipeline; monitoring + registry + batch. Remaining: I18N conflict + E2E validator + PublicApi facade (Sprint 20 P2) + formula_builder (Sprint 21+ P3).
+**Current status (post Sprint 20):** 20+ modules across Sprints 1–20; all provers local; ZKP→UCAN; NL→FOL→LegalNormIR→prover pipeline + I18N + E2E + LogicPublicApi facade. Remaining: Logic Types + Common utils + TDFOL NL API (Sprint 21 P2) + formula_builder (Sprint 22+ P3).
 
 ---
 
@@ -808,6 +815,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-105 | P2 | Create `src/services/e2e-validator.ts` | ✅ DONE | `ValidationResult`; `E2EValidator.run() → ValidationSummary`; 7 test suites |
 | T-106 | P2 | Create `src/services/logic-public-api.ts` | ✅ DONE | `LogicPublicApi`: compileNlToPolicy()/evaluateNlPolicy()/analyzeText()/detectMultilingualConflicts()/getSubmoduleSpecs()/getIntegrationManifest()/analyzeTexts() |
 | T-107 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint20.test.ts` — 16 tests (all pass): I18NConflictReport (5), E2EValidator (3), LogicPublicApi (8) |
+
+---
+
+### Sprint 21 (Phase 21 — Logic Types + Common Validators + TDFOL NL API, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `logic/types/` (923L) + `logic/common/validators.py` (277L) + `bounded_cache.py` (233L) + `TDFOL/nl/tdfol_nl_api.py`.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-108 | P2 | Create `src/services/logic-types.ts` — shared logic type system | ✅ DONE | `DeonticOperator`/`TemporalOperator` enums + labels; `LegalAgent`/`TemporalCondition`/`LegalContext`; `DeonticFormula` (toFolString/formulaId); `DeonticRuleSet` (checkConsistency/findByOperator); `FOLFormula`/`ProofResult` |
+| T-109 | P2 | Create `src/services/logic-validators.ts` — validators + BoundedCache | ✅ DONE | `validateFormulaString/AxiomList/LogicSystem/TimeoutMs`; `BoundedCache<T>` (LRU eviction/TTL/stats) |
+| T-110 | P2 | Create `src/services/tdfol-nl-api.ts` — NL→TDFOL parser API | ✅ DONE | `parseNaturalLanguage(text, opts?) → NLParseResult`; `GeneratedFormula` (formula_string/operator/entity/action); O/P/F extraction via DeonticTextAnalyzer; `parse_natural_language` alias |
+| T-111 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint21.test.ts` — 32 tests (all pass): DeonticFormula (6), DeonticRuleSet (4), validators (13), BoundedCache (5), TDFOL NL API (8) |
 
 ## 8. Prover Capability Matrix
 
