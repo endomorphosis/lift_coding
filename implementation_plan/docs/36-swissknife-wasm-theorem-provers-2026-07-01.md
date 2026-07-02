@@ -183,6 +183,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/symbolic/neurosymbolic_api.py` | `ReasoningCapabilities`, `NeurosymbolicReasoner` (add_knowledge/prove/parse) | Sprint 37 ✅ | P3 |
 | `logic/integration/proof_cache.py` | `CachedProof`, `ProofCache` (get/set/invalidate/stats), `get_global_cache()` | Sprint 37 ✅ | P3 |
 | `logic/integration/cec_bridge.py` | `UnifiedProofResult`, `CECBridge` (prove/prove_with_cec/prove_batch) | Sprint 37 ✅ | P3 |
+| `logic/integration/symbolic/neurosymbolic_graphrag.py` | `PipelineResult`, `NeurosymbolicGraphRAG` | Sprint 38 ✅ | P3 |
+| `logic/integration/symbolic/neurosymbolic/hybrid_confidence.py` | `ConfidenceSource`, `ConfidenceBreakdown`, `HybridConfidenceScorer` | Sprint 38 ✅ | P3 |
+| `logic/integration/bridges/base_prover_bridge.py` | `BridgeCapability`, `BridgeMetadata`, `BaseProverBridge`, `BridgeRegistry`, `get_bridge_registry()` | Sprint 38 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -412,9 +415,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Neurosymbolic API** | ✅ `integration/symbolic/neurosymbolic_api.py` (414L) — `ReasoningCapabilities`, `NeurosymbolicReasoner` | ✅ `neurosymbolic-api.ts` (`ReasoningCapabilities`/127 rules/5 modal provers; `NeurosymbolicReasoner.addKnowledge/prove/explain/getStats`; `getReasoner()`) | **CLOSED** — Sprint 37 (T-170) |
 | **Base Proof Cache** | ✅ `integration/proof_cache.py` (350L) — `CachedProof`, `ProofCache` | ✅ `proof-cache-base.ts` (`CachedProof.isExpired/hitCount/toDict`; `ProofCache.set/get/has/invalidate/clearExpired/flush/getStats`; `getGlobalCache()`) | **CLOSED** — Sprint 37 (T-171) |
 | **CEC Bridge** | ✅ `integration/cec_bridge.py` (349L) — `UnifiedProofResult`, `CECBridge` | ✅ `cec-bridge.ts` (`UnifiedProofResult`; `CECBridge.prove(CEC→Z3)/proveWithCEC/proveBatch/getStats`) | **CLOSED** — Sprint 37 (T-172) |
+| **Neurosymbolic GraphRAG** | ✅ `integration/symbolic/neurosymbolic_graphrag.py` (374L) — `PipelineResult`, `NeurosymbolicGraphRAG` | ✅ `neurosymbolic-graphrag.ts` (`PipelineResult.toDict()`; `NeurosymbolicGraphRAG.ingest/query/prove/getStats`) | **CLOSED** — Sprint 38 (T-174) |
+| **Hybrid Confidence Scorer** | ✅ `integration/symbolic/neurosymbolic/hybrid_confidence.py` (341L) — `ConfidenceSource`, `ConfidenceBreakdown`, `HybridConfidenceScorer` | ✅ `hybrid-confidence.ts` (`ConfidenceSource`/`ConfidenceBreakdown.dominantSource/toDict`; `HybridConfidenceScorer.score/scoreFromResult/explain`) | **CLOSED** — Sprint 38 (T-175) |
+| **Base Prover Bridge** | ✅ `integration/bridges/base_prover_bridge.py` (318L) — `BridgeCapability`, `BridgeMetadata`, `BaseProverBridge`, `BridgeRegistry` | ✅ `base-prover-bridge.ts` (`BridgeCapability` (5); abstract `BaseProverBridge`; `BridgeRegistry.register/get/list/getByCap`; `StubProverBridge`; `getBridgeRegistry()`) | **CLOSED** — Sprint 38 (T-176) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 37):** 37+ modules; neurosymbolic API + base proof cache + CEC bridge; IPFS proof cache + medical theorems + TDFOL-CEC; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 38):** 38+ modules; GraphRAG pipeline + hybrid confidence + base prover bridge; neurosymbolic + proof cache + CEC bridge; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1126,6 +1132,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-171 | P3 | Create `src/services/proof-cache-base.ts` | ✅ DONE | `CachedProof` (hitCount/isExpired()/toDict()); `ProofCache` (set/get/has/invalidate/clearExpired/flush/getStats; LRU eviction at maxSize); `getGlobalCache(maxSize,ttl)/resetGlobalCache()` |
 | T-172 | P3 | Create `src/services/cec-bridge.ts` | ✅ DONE | `UnifiedProofResult` (isProved/isValid/proverUsed/status/confidence); `CECBridge.prove()` (CEC→Z3 fallback)/`proveWithCEC()`/`proveBatch()`/`getStats()` |
 | T-173 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint37.test.ts` — 29 tests (all pass) |
+
+---
+
+### Sprint 38 (Phase 38 — Neurosymbolic GraphRAG + Hybrid Confidence + Base Prover Bridge, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/symbolic/neurosymbolic_graphrag.py` (374L) — `PipelineResult`/`NeurosymbolicGraphRAG`; `integration/symbolic/neurosymbolic/hybrid_confidence.py` (341L) — `ConfidenceSource`/`ConfidenceBreakdown`/`HybridConfidenceScorer`; `integration/bridges/base_prover_bridge.py` (318L) — `BridgeCapability`/`BridgeMetadata`/`BaseProverBridge`/`BridgeRegistry`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-174 | P3 | Create `src/services/neurosymbolic-graphrag.ts` | ✅ DONE | `PipelineResult` (docId/formulas/entities/provenTheorems/knowledgeGraphStats/toDict()); `NeurosymbolicGraphRAG.ingest(text,docId?)/query(q)/prove(formula)/getStats()` |
+| T-175 | P3 | Create `src/services/hybrid-confidence.ts` | ✅ DONE | `ConfidenceSource` (4 values); `ConfidenceBreakdown.dominantSource/toDict()`; `HybridConfidenceScorer.score(symbolic,neural,structural)/scoreFromResult(result)/explain(breakdown)` |
+| T-176 | P3 | Create `src/services/base-prover-bridge.ts` | ✅ DONE | `BridgeCapability` (5 caps); `BridgeMetadata`; abstract `BaseProverBridge.prove/toTargetFormat/fromTargetFormat/proveBatch/hasCapability()`; `BridgeRegistry.register/get/list/getByCap/getAllMetadata/size`; `StubProverBridge`; `getBridgeRegistry()/resetBridgeRegistry()` |
+| T-177 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint38.test.ts` — 30 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
