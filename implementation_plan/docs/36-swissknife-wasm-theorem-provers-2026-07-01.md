@@ -1434,6 +1434,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 58 (Phase 58 — Modal Autoencoder Loop + CEC ZKP Integration + DCEC Core Types, P3) 🆕
+
+> **Gap found by exhaustive name scan:** `modal/autoencoder_loop.py` (776L), `CEC/native/cec_zkp_integration.py` (574L), `CEC/native/dcec_core.py` (1452L — key enums/types only).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-259 | P3 | Create `src/services/modal-autoencoder-loop.ts` | `ModalAutoencoderLoopConfig`; `FrameLogicPatchValidation` (isValid/errors); `ModalAutoencoderLoopResult` (modalIr/residuals/patchValidations/confidence); `LegalModalAutoencoderLoop` (run(text)/runBatch(texts)/getStats()) | ✅ DONE |
+| T-260 | P3 | Create `src/services/cec-zkp-integration.ts` | `ProvingMethod` enum (STANDARD/ZKP/HYBRID); `UnifiedCECProofResult` (isProved/method/zkpProof/proofTime/confidence); `ZKPCECProver` (prove(formula,axioms)/verifyZkp(proof,formula)/getStats()); `createHybridProver()` | ✅ DONE |
+| T-261 | P3 | Create `src/services/dcec-core-types.ts` | `DeonticOperator`/`CognitiveOperator`/`LogicalConnective`/`TemporalOperator` enums; `Sort`/`Variable`/`Function`/`Predicate` type interfaces | ✅ DONE |
+| T-262 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint58.test.ts` | ✅ DONE — 49 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
