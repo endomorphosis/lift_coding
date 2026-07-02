@@ -180,6 +180,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/caching/ipfs_proof_cache.py` | `IPFSCachedProof`, `IPFSProofCache` (IPFS-backed distributed proof cache) | Sprint 36 ✅ | P3 |
 | `logic/integration/domain/medical_theorem_framework.py` | `MedicalTheoremType`, `MedicalEntity`, `TemporalConstraint`, `MedicalTheorem`, `MedicalTheoremGenerator` | Sprint 36 ✅ | P3 |
 | `logic/integration/bridges/tdfol_cec_bridge.py` | `TDFOLCECBridge`, `EnhancedTDFOLProver`, `create_enhanced_prover()` | Sprint 36 ✅ | P3 |
+| `logic/integration/symbolic/neurosymbolic_api.py` | `ReasoningCapabilities`, `NeurosymbolicReasoner` (add_knowledge/prove/parse) | Sprint 37 ✅ | P3 |
+| `logic/integration/proof_cache.py` | `CachedProof`, `ProofCache` (get/set/invalidate/stats), `get_global_cache()` | Sprint 37 ✅ | P3 |
+| `logic/integration/cec_bridge.py` | `UnifiedProofResult`, `CECBridge` (prove/prove_with_cec/prove_batch) | Sprint 37 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -406,9 +409,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **IPFS Proof Cache** | ✅ `integration/caching/ipfs_proof_cache.py` (457L) — `IPFSCachedProof`, `IPFSProofCache` | ✅ `ipfs-proof-cache.ts` (`IPFSCachedProof.computeCid/isExpired/toDict`; `IPFSProofCache.set/get/pin/unpin/getStats`; `getGlobalIPFSCache()`) | **CLOSED** — Sprint 36 (T-166) |
 | **Medical Theorem Framework** | ✅ `integration/domain/medical_theorem_framework.py` (426L) — `MedicalTheoremType`, `MedicalEntity`, `MedicalTheoremGenerator` | ✅ `medical-theorem-framework.ts` (`MedicalTheoremType`/`ConfidenceLevel`; `MedicalTheorem.toFormula/toDict`; `MedicalTheoremGenerator.generateFromText/validateTheorem/generateBatch`) | **CLOSED** — Sprint 36 (T-167) |
 | **TDFOL-CEC Bridge** | ✅ `integration/bridges/tdfol_cec_bridge.py` (435L) — `TDFOLCECBridge`, `EnhancedTDFOLProver` | ✅ `tdfol-cec-bridge.ts` (`TDFOLCECBridge.prove` (axiom/forward/CEC); `EnhancedTDFOLProver.prove/proveBatch/useKB/proofId`; `createEnhancedProver()`) | **CLOSED** — Sprint 36 (T-168) |
+| **Neurosymbolic API** | ✅ `integration/symbolic/neurosymbolic_api.py` (414L) — `ReasoningCapabilities`, `NeurosymbolicReasoner` | ✅ `neurosymbolic-api.ts` (`ReasoningCapabilities`/127 rules/5 modal provers; `NeurosymbolicReasoner.addKnowledge/prove/explain/getStats`; `getReasoner()`) | **CLOSED** — Sprint 37 (T-170) |
+| **Base Proof Cache** | ✅ `integration/proof_cache.py` (350L) — `CachedProof`, `ProofCache` | ✅ `proof-cache-base.ts` (`CachedProof.isExpired/hitCount/toDict`; `ProofCache.set/get/has/invalidate/clearExpired/flush/getStats`; `getGlobalCache()`) | **CLOSED** — Sprint 37 (T-171) |
+| **CEC Bridge** | ✅ `integration/cec_bridge.py` (349L) — `UnifiedProofResult`, `CECBridge` | ✅ `cec-bridge.ts` (`UnifiedProofResult`; `CECBridge.prove(CEC→Z3)/proveWithCEC/proveBatch/getStats`) | **CLOSED** — Sprint 37 (T-172) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 36):** 36+ modules; IPFS proof cache + medical theorems + TDFOL-CEC bridge; deontic core + IPLD storage + deontological reasoning; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 37):** 37+ modules; neurosymbolic API + base proof cache + CEC bridge; IPFS proof cache + medical theorems + TDFOL-CEC; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1107,6 +1113,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-167 | P3 | Create `src/services/medical-theorem-framework.ts` | ✅ DONE | `MedicalTheoremType` (6 types)/`ConfidenceLevel` (5 levels); `MedicalEntity`/`TemporalConstraint`; `MedicalTheorem.toFormula()/toDict()`; `MedicalTheoremGenerator.generateFromText/validateTheorem/generateBatch`; `FuzzyLogicValidator.validate()` |
 | T-168 | P3 | Create `src/services/tdfol-cec-bridge.ts` | ✅ DONE | `TDFOLCECBridge` (3 default axioms; prove via axiom_lookup/forward_chain/CEC delegation); `EnhancedTDFOLProver.prove/proveBatch/useKB/proofId()`; `createEnhancedProver()` |
 | T-169 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint36.test.ts` — 33 tests (all pass) |
+
+---
+
+### Sprint 37 (Phase 37 — Neurosymbolic API + Base Proof Cache + CEC Bridge, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/symbolic/neurosymbolic_api.py` (414L) — `ReasoningCapabilities`/`NeurosymbolicReasoner`; `integration/proof_cache.py` (350L) — `CachedProof`/`ProofCache`/`get_global_cache()`; `integration/cec_bridge.py` (349L) — `UnifiedProofResult`/`CECBridge`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-170 | P3 | Create `src/services/neurosymbolic-api.ts` | ✅ DONE | `ReasoningCapabilities` (127 rules, 5 modal provers); `NeurosymbolicReasoner.addKnowledge/prove(KB lookup+modus ponens)/parse/explain/listKnowledge/getStats`; `getReasoner()/resetReasoner()` |
+| T-171 | P3 | Create `src/services/proof-cache-base.ts` | ✅ DONE | `CachedProof` (hitCount/isExpired()/toDict()); `ProofCache` (set/get/has/invalidate/clearExpired/flush/getStats; LRU eviction at maxSize); `getGlobalCache(maxSize,ttl)/resetGlobalCache()` |
+| T-172 | P3 | Create `src/services/cec-bridge.ts` | ✅ DONE | `UnifiedProofResult` (isProved/isValid/proverUsed/status/confidence); `CECBridge.prove()` (CEC→Z3 fallback)/`proveWithCEC()`/`proveBatch()`/`getStats()` |
+| T-173 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint37.test.ts` — 29 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
