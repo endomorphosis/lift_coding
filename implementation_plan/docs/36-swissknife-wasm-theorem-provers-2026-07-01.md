@@ -119,7 +119,10 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 | P2 |
 | `logic/fol/converter.py` | `FOLConverter`: regex NL→FOL (predicate extraction, quantifiers, operators, `build_fol_formula()`, TPTP/Prolog formatting) | Sprint 14 | P2 |
 | `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 | P2 |
-| `logic/bridge/external_prover_router.py` | `ExternalProverRouterBridgeAdapter`: route TDFOL formulas through the external prover router | Sprint 13 | P2 |
+| `logic/flogic_optimizer.py` | `FLogicSemanticOptimizer`: cosine similarity scoring + F-logic consistency checking for round-trip quality | Sprint 15 | P2 |
+| `logic/ml_confidence.py` | `MLConfidenceScorer`: heuristic confidence scoring (fallback from XGBoost/LightGBM; pure math) | Sprint 15 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 16+ | P3 |
+| `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 16+ | P3 |
 | `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 14+ | P3 |
 | `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 14+ | P3 |
 | `logic/fol/` | FOL utilities (`text_to_fol.py`, `converter.py`) | Sprint 14+ | P3 |
@@ -287,12 +290,14 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Deontic Knowledge Base** | ✅ `deontic/knowledge_base.py` (245 lines) — `DeonticKnowledgeBase`, temporal intervals, rule inference | ✅ `DeonticKnowledgeBase` (`src/services/deontic/`) | **CLOSED** — Sprint 12 |
 | **Extended TDFOL inference rules** | ✅ `TDFOL/inference_rules/` — 50+ rules across 5 files (temporal/deontic/temporal_deontic/propositional/fol) | ✅ `ExtendedTdfolProverBridge` (14 extra rules) + `ProverRouterBridgeAdapter` | **CLOSED** — Sprint 13 (T-76–T-79) |
 | **Prover Router Bridge** | ✅ `bridge/external_prover_router.py` (1442 lines) — text → TDFOL formulas → prover router → ProofGateResult | ✅ `ProverRouterBridgeAdapter` (`src/services/bridge/`) | **CLOSED** — Sprint 13 |
-| **FOL Text Converter** | ✅ `fol/converter.py` (497 lines) + `fol/utils/fol_parser.py` (233 lines) + `predicate_extractor.py` (76 lines) + `logic_formatter.py` (218 lines) | ❌ Not implemented | **OPEN** — Sprint 14 P2 |
-| **Modal Frame Logic Bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) — legal text → modal IR | ❌ Not implemented | **OPEN** — Sprint 14 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 15+ P3 |
+| **FOL Text Converter** | ✅ `fol/converter.py` (497 lines) + `fol/utils/fol_parser.py` (233 lines) + `predicate_extractor.py` (76 lines) + `logic_formatter.py` (218 lines) | ✅ `FolTextConverter` (`src/services/fol/`) + `mcp++ deontic fol` | **CLOSED** — Sprint 14 (T-80–T-83) |
+| **Modal Frame Logic Bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) — legal text → modal IR | ✅ `ModalFrameBridge` (`src/services/bridge/`) | **CLOSED** — Sprint 14 |
+| **FLogic Semantic Optimizer** | ✅ `flogic_optimizer.py` (673 lines) — cosine similarity + F-logic ontology consistency | ❌ Not implemented | **OPEN** — Sprint 15 P2 |
+| **ML Confidence Scorer** | ✅ `ml_confidence.py` (437 lines) — heuristic confidence for FOL conversion | ❌ Not implemented | **OPEN** — Sprint 15 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 16+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 13):** All formula classes handled locally; ZKP→UCAN done; Deontic Analyzer+KB done; Extended TDFOL rules + ProverRouterBridge done. Remaining: FOL text converter + modal bridge (Sprint 14) + Deontic IR (Sprint 15+).
+**Current status (post Sprint 14):** All formula classes handled locally; complete NL→FOL pipeline with `FolTextConverter` + `ModalFrameBridge`; ZKP→UCAN done; Deontic Analyzer+KB done. Remaining: semantic quality scoring (`FLogicSemanticOptimizer` + `MLConfidenceScorer`, Sprint 15) + Deontic IR (Sprint 16+ P3).
 
 ---
 
@@ -707,6 +712,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-81 | P2 | Create `src/services/bridge/modal-frame-bridge.ts` — `ModalFrameBridge` | ✅ DONE | `evaluate(text) → ModalBridgeResult {status, modal_ir (fol_formula/prolog/tptp/deontic_statements/conflicts/confidence), proof_gate}`; uses DeonticTextAnalyzer + FolTextConverter + ProverRouterBridgeAdapter |
 | T-82 | P2 | Wire `FolTextConverter` into `mcp++` subcommand | ✅ DONE | `mcp++ deontic fol <text>` → JSON `{formula, prolog, tptp, confidence, quantifiers, predicates}` |
 | T-83 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint14.test.ts` — 25 tests (all pass): extractPredicates (5), parseQuantifiers (4), parseLogicalOps (4), buildFolFormula+convert (5), ModalFrameBridge (5), mcp++ fol (2) |
+
+---
+
+### Sprint 15 (Phase 15 — FLogic Semantic Optimizer + ML Confidence Scorer, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `flogic_optimizer.py` (673L) + `ml_confidence.py` (437L). Both pure-math, no ML deps.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-84 | P2 | Create `src/services/fol/flogic-semantic-optimizer.ts` — semantic round-trip quality scorer | ✅ DONE | `cosineSimilarity(a,b)`; `FLogicSemanticOptimizer.evaluate(src,dec,srcEmb,decEmb,triples?) → FLogicOptimizerResult`; `addOntologyClass()`; `batchSimilarity()` |
+| T-85 | P2 | Create `src/services/fol/ml-confidence-scorer.ts` — heuristic FOL confidence scorer | ✅ DONE | `FeatureExtractor.extractFeatures()` → 17 numeric features; `MLConfidenceScorer.predictConfidence()` — exact heuristic match to Python `_heuristic_confidence()` |
+| T-86 | P2 | Wire `MLConfidenceScorer` into `FolTextConverter.convert()` | ✅ DONE | Lazy dynamic import; fallback to original heuristic when unavailable |
+| T-87 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint15.test.ts` — 20 tests (all pass): cosineSimilarity (6), FLogicSemanticOptimizer (7), MLConfidenceScorer (4), FolTextConverter (3) |
 
 ## 8. Prover Capability Matrix
 
