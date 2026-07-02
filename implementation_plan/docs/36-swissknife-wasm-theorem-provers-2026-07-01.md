@@ -1590,6 +1590,18 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 70 (Phase 70 — Close deferred TODOs in acceleration service layer, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-321 | P3 | Implement deferred TODOs in `src/services/resource-pool.ts` | ✅ DONE — Pre-allocation in `initialize(preAllocate?)`; queue-based wait (configurable `acquireTimeoutMs`); `checkResourceHealth()`/`getPoolStats()` fault-tolerance; `setInterval.unref()` |
+| T-322 | P3 | Implement deferred TODOs in `src/services/model-streamer.ts` | ✅ DONE — `ExecutionEngine` interface replaces `any`; `generateTokenStream()` dispatches to real engine with adaptive-batch + KV-cache hints |
+| T-323 | P3 | Implement deferred TODOs in `src/services/hardware-abstraction.ts` | ✅ DONE — `selectOptimalBackend()` uses capability matching; `executeModel()` dispatches to WebGPU/WebNN/WASM/CPU backends |
+| T-324 | P3 | Implement deferred TODOs in `src/services/browser-acceleration.ts` | ✅ DONE — `initialize()` calls `hardwareAbstraction.initialize()`; `selectOptimalBackend()` and `getOptimizationHints()` added |
+| T-325 | P3 | Write 10+ tests | ✅ DONE — 21 tests (all pass) in `test/mcp-plus-plus/wasm-prover-sprint70.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
