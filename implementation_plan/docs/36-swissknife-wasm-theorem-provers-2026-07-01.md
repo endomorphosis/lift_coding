@@ -158,6 +158,10 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/bridge/multiview.py` | `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()` | Sprint 28 ✅ | P3 |
 | `logic/modal/synthesis.py` | `ModalProgramSynthesisHint`, `ModalResidualRepairRoute`, `RESIDUAL_REPAIR_ROUTES`, `route_autoencoder_residual()`, `residual_signature_for_hint()` | Sprint 29 ✅ | P3 |
 | `logic/modal/kg_bridge.py` | `flogic_triples_to_graph_data()`, `modal_ir_to_neo4j_graph_data()`, `FLogicOntology`, `flogic_triples_to_ontology()` | Sprint 29 ✅ | P3 |
+| `logic/zkp/circuits.py` | `decode_simulated_proof_layout()`, `build_proof_attestation_view()`, `attestation_view_matches_proof()` | Sprint 30 ✅ | P3 |
+| `logic/integration/ucan_policy_bridge.py` | `UCANPolicyBridge`, `BridgeCompileResult`, `BridgeEvaluationResult`, `SignedPolicyResult`, `compile_and_evaluate()` | Sprint 30 ✅ | P3 |
+| `logic/zkp/eth_integration.py` | `EthereumConfig`, `ProofVerificationResult`, `GasEstimate`, `EthereumProofClient`, `ProofSubmissionPipeline` | Sprint 30 ✅ | P3 |
+| `logic/phase7_4_benchmarks.py` | `PerformanceMetrics`, `Phase7_4Benchmarks` | Sprint 30 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -362,9 +366,13 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Multiview Aggregator** | ✅ `bridge/multiview.py` (4040L) — `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()` | ✅ `bridge-multiview.ts` (`evaluateLegalIRMultiview`/`toTrainingTarget`/merged doc) | **CLOSED** — Sprint 28 (T-136) |
 | **Modal KG Bridge** | ✅ `modal/kg_bridge.py` (1062L) — `flogic_triples_to_graph_data()`, `modal_ir_to_neo4j_graph_data()`, `FLogicOntology` | ✅ `modal-kg-bridge.ts` (`flogicTriplesToGraphData`/`flogicTriplesToOntology`/`modalIrToNeo4jGraphData`/Neo4j labels) | **CLOSED** — Sprint 29 (T-139) |
 | **Modal Synthesis** | ✅ `modal/synthesis.py` (947L) — `ModalProgramSynthesisHint`, `ModalResidualRepairRoute`, `RESIDUAL_REPAIR_ROUTES`, `route_autoencoder_residual()` | ✅ `modal-synthesis.ts` (9 routes + `routeAutoencoderResidual`/`residualSignatureForHint`/`synthesisHintFromRoute`) | **CLOSED** — Sprint 29 (T-140) |
+| **ZKP Circuit Utilities** | ✅ `zkp/circuits.py` (1328L) — `decode_simulated_proof_layout()`, `build_proof_attestation_view()`, `attestation_view_matches_proof()` | ✅ `zkp-circuits.ts` (`decodeSimulatedProofLayout`/`buildProofAttestationView`/`attestationViewMatchesProof`/`compilerGuidanceRefFromMetadata`) | **CLOSED** — Sprint 30 (T-142) |
+| **UCAN Policy Bridge** | ✅ `integration/ucan_policy_bridge.py` (657L) — `UCANPolicyBridge`, `BridgeCompileResult`, `BridgeEvaluationResult`, `compile_and_evaluate()` | ✅ `ucan-policy-bridge.ts` (`UCANPolicyBridge.compileNl/evaluate/sign`; `BridgeCompileResult`/`BridgeEvaluationResult`; `compileAndEvaluate()`) | **CLOSED** — Sprint 30 (T-143) |
+| **Ethereum ZKP Integration** | ✅ `zkp/eth_integration.py` (593L) — `EthereumConfig`, `ProofVerificationResult`, `EthereumProofClient` | ✅ `zkp-eth-integration.ts` (`EthereumConfig`/`ProofVerificationResult`/`GasEstimate`/`EthereumProofClient` stub/`ProofSubmissionPipeline`) | **CLOSED** — Sprint 30 (T-144) |
+| **Phase 7.4 Benchmarks** | ✅ `phase7_4_benchmarks.py` (637L) — `PerformanceMetrics`, `Phase7_4Benchmarks` | ✅ `zkp-eth-integration.ts` (combined: `PerformanceMetrics.summary()`/`Phase7_4Benchmarks.runAllBenchmarks()`) | **CLOSED** — Sprint 30 (T-144) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 29):** 29+ modules; modal KG bridge + synthesis; complete bridge layer + multiview; complete TDFOL stack + deontic formula builder; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: modal/codec (12843L) + modal/decompiler (9621L) — very large, deferred.
+**Current status (post Sprint 30):** 30+ modules; ZKP circuits + UCAN policy bridge + Ethereum integration + Phase 7.4 benchmarks; complete bridge layer + multiview; complete TDFOL stack; all provers local. Remaining deferred: modal/codec (12843L) + modal/decompiler (9621L).
 
 ---
 
@@ -972,6 +980,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-139 | P3 | Create `src/services/modal-kg-bridge.ts` — modal KG bridge | ✅ DONE | `NodeData`/`RelationshipData`/`GraphData`; `FLogicFrame.toErgoString()`/`FLogicOntology`; `flogicTriplesToGraphData()` (Neo4j labels: LegalModalDocument/ModalFormula/ModalOperator etc.); `flogicTriplesToOntology()` (isa/scalar/set methods); `modalIrToNeo4jGraphData()`; `flogicOntologyToDict()` |
 | T-140 | P3 | Create `src/services/modal-synthesis.ts` — modal synthesis + residual repair | ✅ DONE | `ModalResidualRepairRoute`; `RESIDUAL_REPAIR_ROUTES` (9 routes); `routeAutoencoderResidual(lossName, focus?)` (direct lookup + focus-hint fallback); `ModalProgramSynthesisHint.toDict()`; `residualSignatureForHint()` (SHA-256, 24-char hex); `synthesisHintFromRoute()` |
 | T-141 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint29.test.ts` — 28 tests (all pass): flogicTriplesToGraphData (8), flogicTriplesToOntology (5), modalIrToNeo4jGraphData (2), flogicOntologyToDict (1), RESIDUAL_REPAIR_ROUTES (2), routeAutoencoderResidual (5), ModalProgramSynthesisHint (2), residualSignatureForHint (2), synthesisHintFromRoute (1) |
+
+---
+
+### Sprint 30 (Phase 30 — ZKP Circuits + UCAN Policy Bridge + Ethereum + Phase 7.4 Benchmarks, P3) ✅ DONE (2026-07-01)
+
+> **Gap:** `zkp/circuits.py` (1328L) — proof attestation view; `integration/ucan_policy_bridge.py` (657L) — `UCANPolicyBridge`; `zkp/eth_integration.py` (593L) — `EthereumConfig`/`ProofVerificationResult`; `phase7_4_benchmarks.py` (637L) — `PerformanceMetrics`/`Phase7_4Benchmarks`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-142 | P3 | Create `src/services/zkp-circuits.ts` | ✅ DONE | `decodeSimulatedProofLayout()` (SIMZKP/1 magic + 256B layout); `buildProofAttestationView()` (SHA-256 attestationRef + proofDigest + circuitRef + publicInputsCommitment); `attestationViewMatchesProof()`; `compilerGuidanceRefFromMetadata()` |
+| T-143 | P3 | Create `src/services/ucan-policy-bridge.ts` | ✅ DONE | `BridgeCompileResult` (success/policyCid/delegationTokens/denialCount/errors); `BridgeEvaluationResult` (decision/allowed/obligations); `SignedPolicyResult`; `UCANPolicyBridge.compileNl()/evaluate()/sign()`; `compileAndEvaluate()`; `getUCANPolicyBridge()` |
+| T-144 | P3 | Create `src/services/zkp-eth-integration.ts` | ✅ DONE | `EthereumConfig`/`makeEthereumConfig()`; `ProofVerificationResult`; `GasEstimate`; `EthereumProofClient.estimateGas()/verifyProof()` (stubs); `ProofSubmissionPipeline.submit()`; `PerformanceMetrics.summary()`; `Phase7_4Benchmarks.runAllBenchmarks() → BenchmarkSuite` |
+| T-145 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint30.test.ts` — 33 tests (all pass): ZKP circuits (14), UCANPolicyBridge (9+2), EthereumProofClient (2), PerformanceMetrics (2), Phase7_4Benchmarks (2) |
 
 ## 8. Prover Capability Matrix
 
