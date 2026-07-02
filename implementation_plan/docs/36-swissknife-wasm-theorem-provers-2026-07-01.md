@@ -1324,6 +1324,34 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-221 | P3 | Create `src/services/fol-converter.ts` | `FOLFormula` (type/content/subformulas); `FOLConverter` (toTDFOL(fol)/toDeontic(fol)/toNL(fol)/validate(fol)) | ✅ DONE — in `logic-converters.ts` |
 | T-222 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint49.test.ts` | ✅ DONE — 41 tests (all pass) |
 
+---
+
+### Sprint 50 (Phase 50 — Modal Tableaux + Formula Cache + Z3 Adapter + CEC Framework, P3) 🆕
+
+> **Previously untracked gap:** `CEC/native/modal_tableaux.py` (603L), `CEC/optimization/formula_cache.py` (527L), `CEC/provers/z3_adapter.py` (546L), `CEC/cec_framework.py` (492L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-223 | P3 | Create `src/services/cec-modal-tableaux.ts` | `NodeStatus` enum; `TableauNode` (formulas/world/status/addFormula()/isContradictory()/close()); `ModalTableau` (root/logic/isClosed()/newWorld()); `TableauProver` (prove(goal,assumptions)/getStats()); `ResolutionProver` (prove()/resolveWith()); `createTableauProver()`/`createResolutionProver()` | ✅ DONE |
+| T-224 | P3 | Create `src/services/formula-cache.ts` | `CacheEntry` (key/value/accessedAt/access()); `FormulaInterningCache` (intern/getStats()); `LRUCache<K,V>` (get/set/delete/clear/size/maxSize); `ProofResultCache`; `ParseResultCache`; `CacheManager` (getCache(name)/clearAll()/getStats()) | ✅ DONE |
+| T-225 | P3 | Create `src/services/z3-adapter.ts` | `ProofStatus` (VALID/INVALID/SATISFIABLE/UNSATISFIABLE/UNKNOWN/ERROR/TIMEOUT); `Z3ProofResult` (status/isValid/proofTime/errorMessage); `Z3Adapter` (prove(formula)/check(formula)/isValid(formula)/isSatisfiable(formula)/getStats()); `checkZ3Installation()`/`getZ3Version()` | ✅ DONE |
+| T-226 | P3 | Create `src/services/cec-framework.ts` | `ReasoningMode` enum; `FrameworkConfig`; `ReasoningTask`; `CECFramework` (initialize()/convertNaturalLanguage(text)/reason(text)/getStats()) | ✅ DONE |
+| T-227 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint50.test.ts` | ✅ DONE — 52 tests (all pass) |
+
+---
+
+### Sprint 51 (Phase 51 — Advanced CEC Inference Rules + Deontic Rules + Event Calculus + French Parser, P3) 🆕
+
+> **Previously untracked gap:** `CEC/native/advanced_inference.py` (573L), `TDFOL/inference_rules/deontic.py` (478L), `CEC/native/event_calculus.py` (549L), `CEC/nl/french_parser.py` (600L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-228 | P3 | Create `src/services/cec-advanced-inference.ts` | 10 inference rule classes: `ModalKAxiom`, `ModalTAxiom`, `ModalS4Axiom`, `ModalNecessitation`, `TemporalInduction`, `FrameAxiom`, `DeonticDRule`, `DeonticPermissionObligation`, `DeonticDistribution`, `KnowledgeObligation`; each implements `name/canApply(formulas)/apply(formulas)` | ✅ DONE |
+| T-229 | P3 | Create `src/services/deontic-inference-rules.ts` | 10 TDFOL deontic rule classes: `DeonticKAxiomRule`, `DeonticDAxiomRule`, `ProhibitionEquivalenceRule`, `PermissionNegationRule`, `ObligationConsistencyRule`, `PermissionIntroductionRule`, `DeonticNecessitationRule`, `ProhibitionFromObligationRule`, `ObligationWeakeningRule`, `PermissionStrengtheningRule`; `ALL_DEONTIC_RULES` registry | ✅ DONE |
+| T-230 | P3 | Create `src/services/event-calculus.ts` | `Event` (name/parameters/toString()); `Fluent` (name/parameters/toString()); `TimePoint` (value/comparisons); `EventCalculus` (happens/initiates/terminates/holdsAt/add\_axiom/query) | ✅ DONE |
+| T-231 | P3 | Create `src/services/french-parser.ts` | `FrenchPatternMatcher` (match/matchByType); `FrenchParser` (parse/extractClauses); `getFrenchVerbConjugations()`/`getFrenchArticles()`/`getFrenchNegationPatterns()`/`getFrenchDeonticKeywords()` | ✅ DONE |
+| T-232 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint51.test.ts` | ✅ DONE — 57 tests (all pass) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
