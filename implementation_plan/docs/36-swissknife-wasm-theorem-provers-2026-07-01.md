@@ -1447,6 +1447,22 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 59 (Phase 59 — FLogic Proof Cache + NL UCAN Compiler + Domain Vocab + NL Converter + Shadow Prover Wrapper + ZKP UCAN Bridge, P3) 🆕
+
+> **Gap discovered by exhaustive name scan — 6 files with refs=0 or done=0.**
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-263 | P3 | Create `src/services/flogic-proof-cache.ts` | `FLogicCachedQueryResult` (query/result/cacheKey/timestamp); `FLogicProofCache` (get/set/clear/stats) wrapping LRU; `getCachedWrapper()` factory | ✅ DONE |
+| T-264 | P3 | Create `src/services/nl-ucan-policy-compiler.ts` | `NLUCANCompilerResult` (text/ucans/capabilities/confidence); `NLUCANPolicyCompiler` (compile(text)/compileBatch(texts)/getStats()); `compileNlToUcanPolicy(text)` | ✅ DONE |
+| T-265 | P3 | Create `src/services/domain-vocabulary.ts` | `DomainTerm` (term/synonyms/domain); `DomainVocabulary` abstract interface; `LegalVocabulary`/`MedicalVocabulary`/`TechnicalVocabulary` concretes; `DomainVocabularyManager` (register/lookup/expand) | ✅ DONE |
+| T-266 | P3 | Create `src/services/cec-nl-converter.ts` | `ConversionResult` (formula/confidence/method); `NaturalLanguageConverter` (convert(text)/convertBatch(texts)/getStats()); `createEnhancedNlConverter()` | ✅ DONE |
+| T-267 | P3 | Create `src/services/shadow-prover-wrapper.ts` | `ProverStatus` enum; `ProofTask` (formula/axioms/timeout/taskId); `ShadowProverWrapper` (submit(task)/getResult(taskId)/getStats()) | ✅ DONE |
+| T-268 | P3 | Create `src/services/zkp-ucan-bridge.ts` | `ZKPCapabilityEvidence` (proof/capabilities/agentDid); `BridgeResult` (success/ucans/evidence); `ZKPToUCANBridge` (bridge(zkpProof,capabilities)/verify(evidence)/getStats()); `getZkpUcanBridge()` | ✅ DONE |
+| T-269 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint59.test.ts` | ✅ DONE — 36 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
