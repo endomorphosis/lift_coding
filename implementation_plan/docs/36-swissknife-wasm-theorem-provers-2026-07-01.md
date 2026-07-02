@@ -168,6 +168,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/domain/deontic_query_engine.py` | `QueryType`, `QueryResult`, `ComplianceResult`, `LogicConflict`, `DeonticQueryEngine` | Sprint 32 ✅ | P3 |
 | `logic/integration/domain/legal_domain_knowledge.py` | `LegalPattern`, `AgentPattern`, `LegalDomainKnowledge` | Sprint 32 ✅ | P3 |
 | `logic/integration/bridges/tdfol_grammar_bridge.py` | `TDFOLGrammarBridge`, `NaturalLanguageTDFOLInterface`, `parse_nl()`, `explain_formula()` | Sprint 32 ✅ | P3 |
+| `logic/integration/converters/deontic_logic_converter.py` | `ConversionContext`, `ConversionResult`, `DeonticLogicConverter.convert()` | Sprint 33 ✅ | P3 |
+| `logic/integration/symbolic/symbolic_logic_primitives.py` | `LogicalStructure`, `LogicPrimitives`, `createLogicSymbol()`, `getAvailablePrimitives()` | Sprint 33 ✅ | P3 |
+| `logic/integration/domain/symbolic_contracts.py` | `FOLInput`, `FOLOutput`, `ValidationContext`, `FOLSyntaxValidator` | Sprint 33 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -382,9 +385,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Deontic Query Engine** | ✅ `integration/domain/deontic_query_engine.py` (794L) — `QueryType`, `QueryResult`, `ComplianceResult`, `DeonticQueryEngine` | ✅ `deontic-query-engine.ts` (`QueryType`/`QueryResult`/`ComplianceResult`/`LogicConflict`/`DeonticQueryEngine.query/checkCompliance/detectConflicts`) | **CLOSED** — Sprint 32 (T-150) |
 | **Legal Domain Knowledge** | ✅ `integration/domain/legal_domain_knowledge.py` (647L) — `LegalPattern`, `AgentPattern`, `LegalDomainKnowledge` | ✅ `legal-domain-knowledge.ts` (`LegalPattern.match()`/`AgentPattern.match()`/`LegalDomainKnowledge.extractConcepts/identifyAgents/patternsForDomain`) | **CLOSED** — Sprint 32 (T-151) |
 | **TDFOL Grammar Bridge** | ✅ `integration/bridges/tdfol_grammar_bridge.py` (669L) — `TDFOLGrammarBridge`, `NaturalLanguageTDFOLInterface`, `parse_nl()` | ✅ `tdfol-grammar-bridge.ts` (`TDFOLGrammarBridge.parse/explain`/`NaturalLanguageTDFOLInterface`/`parseNl()`/`explainFormula()`) | **CLOSED** — Sprint 32 (T-152) |
+| **Deontic Logic Converter** | ✅ `integration/converters/deontic_logic_converter.py` (739L) — `ConversionContext`, `ConversionResult`, `DeonticLogicConverter.convert()` | ✅ `deontic-logic-converter.ts` (`ConversionContext`/`ConversionResult.toDict()`/`DeonticLogicConverter.convert/convertEntities`) | **CLOSED** — Sprint 33 (T-154) |
+| **Symbolic Logic Primitives** | ✅ `integration/symbolic/symbolic_logic_primitives.py` (594L) — `LogicalStructure`, `LogicPrimitives`, `createLogicSymbol()` | ✅ `symbolic-logic-primitives.ts` (13 `AVAILABLE_PRIMITIVES`; `analyzeLogicalStructure()`; `createLogicSymbol().apply/toFol()`) | **CLOSED** — Sprint 33 (T-155) |
+| **Symbolic Contracts (FOL Validator)** | ✅ `integration/domain/symbolic_contracts.py` (840L) — `FOLInput`, `FOLOutput`, `FOLSyntaxValidator` | ✅ `fol-syntax-validator.ts` (`validateFolInput()`; `FOLOutput.isValid/toDict()`; `FOLSyntaxValidator.validate/convert()`) | **CLOSED** — Sprint 33 (T-156) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 32):** 32+ modules; deontic query engine + legal domain knowledge + TDFOL grammar bridge; logic verifier + multi-target translator + legal symbolic analyzer; complete bridge+TDFOL+ZKP stack. Remaining deferred: modal/codec (12843L) + modal/decompiler (9621L).
+**Current status (post Sprint 33):** 33+ modules; deontic converter + symbolic primitives + FOL validator; query engine + domain knowledge + grammar bridge; complete bridge+TDFOL+ZKP stack. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1031,6 +1037,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-151 | P3 | Create `src/services/legal-domain-knowledge.ts` | ✅ DONE | `LegalConceptType`/`DeonticOperatorKind` enums; `LegalPattern.match()`/`AgentPattern.match()`; `LegalDomainKnowledge` with obligation/permission/prohibition/agent/temporal patterns; `extractConcepts(text)/identifyAgents(text)/patternsForDomain(domain)/getPatterns()` |
 | T-152 | P3 | Create `src/services/tdfol-grammar-bridge.ts` | ✅ DONE | `TDFOLGrammarBridge.parse(text) → Formula\ \| null`/`.explain(formula)`/`.parseAll(texts[])`; `NaturalLanguageTDFOLInterface.parseNl/explainFormula`; `parseNl()`+`explainFormula()` convenience exports |
 | T-153 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint32.test.ts` — 29 tests (all pass) |
+
+---
+
+### Sprint 33 (Phase 33 — Deontic Logic Converter + Symbolic Primitives + FOL Validator, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/converters/deontic_logic_converter.py` (739L) — `ConversionContext`/`ConversionResult`/`DeonticLogicConverter`; `integration/symbolic/symbolic_logic_primitives.py` (594L) — `LogicalStructure`/`LogicPrimitives`; `integration/domain/symbolic_contracts.py` (840L) — `FOLInput`/`FOLOutput`/`FOLSyntaxValidator`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-154 | P3 | Create `src/services/deontic-logic-converter.ts` | ✅ DONE | `ConversionContext`/`makeConversionContext()`/`toDict()`; `ConversionResult` (success/statistics/toDict()); `DeonticLogicConverter.convert(text, ctx?)` (O/P/F heuristic + agent/action/condition extraction) + `.convertEntities(entities[])` |
+| T-155 | P3 | Create `src/services/symbolic-logic-primitives.ts` | ✅ DONE | `LogicalStructure`; `analyzeLogicalStructure()` (Unicode-aware ∀/∃/∧/∨/¬/→/◊/□); 13 `AVAILABLE_PRIMITIVES` (and/or/not/implies/iff/forall/exists/equals/O/P/F/□/◊); `createLogicSymbol().apply(primitive)/toFol(format)` |
+| T-156 | P3 | Create `src/services/fol-syntax-validator.ts` | ✅ DONE | `FOLInput`/`validateFolInput()` (confidence/format validation); `FOLOutput.isValid/toDict()`; `ValidationContext`/`makeValidationContext()`; `FOLSyntaxValidator.validate()` (parenthesis balance/depth/free-var) + `.convert()` |
+| T-157 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint33.test.ts` — 37 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
