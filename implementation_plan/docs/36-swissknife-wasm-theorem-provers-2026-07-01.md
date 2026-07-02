@@ -1538,6 +1538,25 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Verification Utils + Grammar Loader + DCEC Cleaning + Deontic Reasoning Utils + ZKP Witness Manager + E-Prover Adapter, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-304 | P3 | Create `src/services/sprint65-storage-parsers.ts` | ✅ DONE — `IPFSProofStorage` (store/retrieve/list/delete/getDefaultProofStorage()); `TPTPFormula`/`TPTPParser`/`ProblemParser` (parse(text)/parseFile(path)); `GrammarConfig`/`GrammarLoader` (load/get/getGrammarLoader()) |
+| T-305 | P3 | Create `src/services/sprint65-utils.ts` | ✅ DONE — `getBasicAxioms()`/`getBasicProofRules()`/`validateFormulaSyntax(formula)`/`parseProofSteps(text)`/`areContradictory(f1,f2)`; `stripWhitespace()`/`stripComments()`/`consolidateParens()`/`checkParens()`/`getMatchingCloseParen()`; `DeonticPatterns`/`extractKeywords(text)`/`calculateTextSimilarity(a,b)`/`areEntitiesSimilar(e1,e2)`/`areActionsSimilar(a1,a2)`; `WitnessManager` (generateWitness/verifyWitness/getStats()); `EProverProofResult`/`EProverAdapter` (prove/isAvailable/getStats()); `checkEproverInstallation()` |
+| T-306 | P3 | Write 10+ tests | ✅ DONE — 47 tests (all pass) in `test/mcp-plus-plus/wasm-prover-sprint65.test.ts` |
+
+---
+
+### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-304 | P3 | Create `src/services/sprint65-modules.ts` (combined) | All 8 modules: `IPFSProofStorage`; `TPTPParser`/`ProblemParser`; `getBasicAxioms()`/`validateFormulaSyntax()`/`areContradictory()`; `GrammarLoader`; DCEC string cleaning fns; `WitnessManager`; `EProverAdapter`; `DeonticPatterns`/`calculateTextSimilarity()`/`areEntitiesSimilar()` |
+| T-305 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint65.test.ts` |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
