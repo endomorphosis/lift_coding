@@ -1602,6 +1602,15 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 71 (Phase 71 — WebGPU Optimizer + MCP Client resource type, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-326 | P3 | Close deferred TODOs in `src/services/webgpu-optimizer.ts` | ✅ DONE — `GPUDevice`/`GPUShaderModule`/`GPUCompilationInfo` stubs replace `any`; `getCompilationInfo()` error-checking enabled; browser-specific WGSL patches; `createQuantizationPipeline()`; `optimizeComputePipelineDescriptor()`; `getCacheSize()` |
+| T-327 | P3 | Add `resource` type support to `runCommand()` in `src/services/mcpClient.ts` | ✅ DONE — resource-type messages mapped to text blocks with URI; `// TODO: Support type == resource` removed |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
