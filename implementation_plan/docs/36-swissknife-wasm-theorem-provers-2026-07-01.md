@@ -1580,6 +1580,16 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 69 (Phase 69 — EVM Harness + sprint63 false-positive audit, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-318 | P3 | Add `packPublicInputsUint256()` + `validateUint256Array()` to `src/services/sprint68-eth-bridge.ts` | ✅ DONE — evm_harness.py (49L) ported: `packPublicInputsUint256()`/`validateUint256Array()` |
+| T-319 | P3 | Audit sprint63 false positives (metrics_prometheus, base_parser, tdfol_nl_context) | ✅ DONE — confirmed already ported in `cec-sprint63-utils.ts` as `PrometheusMetricsCollector`/`BaseParser`/`NLContext`/`ContextResolver` |
+| T-320 | P3 | Remaining small files (api_server, unixfs_integration, phase7_complete_integration, enhanced_graphrag_integration) | ✅ DONE — confirmed as server bootstrap / lazy-load shims with no standalone library APIs |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
