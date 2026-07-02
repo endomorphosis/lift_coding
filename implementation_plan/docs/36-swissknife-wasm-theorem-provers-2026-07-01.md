@@ -162,6 +162,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/ucan_policy_bridge.py` | `UCANPolicyBridge`, `BridgeCompileResult`, `BridgeEvaluationResult`, `SignedPolicyResult`, `compile_and_evaluate()` | Sprint 30 ✅ | P3 |
 | `logic/zkp/eth_integration.py` | `EthereumConfig`, `ProofVerificationResult`, `GasEstimate`, `EthereumProofClient`, `ProofSubmissionPipeline` | Sprint 30 ✅ | P3 |
 | `logic/phase7_4_benchmarks.py` | `PerformanceMetrics`, `Phase7_4Benchmarks` | Sprint 30 ✅ | P3 |
+| `logic/integration/reasoning/logic_verification.py` | `LogicVerifier`, `LogicAxiom`, `ProofResult` — symbolic formula verification | Sprint 31 ✅ | P3 |
+| `logic/integration/converters/logic_translation_core.py` | `LogicTranslationTarget`, `TranslationResult`, `AbstractLogicFormula`, `LeanTranslator`, `CoqTranslator`, `SMTTranslator` | Sprint 31 ✅ | P3 |
+| `logic/integration/domain/legal_symbolic_analyzer.py` | `LegalAnalysisResult`, `DeonticProposition`, `LegalEntity`, `LegalSymbolicAnalyzer` | Sprint 31 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -370,9 +373,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **UCAN Policy Bridge** | ✅ `integration/ucan_policy_bridge.py` (657L) — `UCANPolicyBridge`, `BridgeCompileResult`, `BridgeEvaluationResult`, `compile_and_evaluate()` | ✅ `ucan-policy-bridge.ts` (`UCANPolicyBridge.compileNl/evaluate/sign`; `BridgeCompileResult`/`BridgeEvaluationResult`; `compileAndEvaluate()`) | **CLOSED** — Sprint 30 (T-143) |
 | **Ethereum ZKP Integration** | ✅ `zkp/eth_integration.py` (593L) — `EthereumConfig`, `ProofVerificationResult`, `EthereumProofClient` | ✅ `zkp-eth-integration.ts` (`EthereumConfig`/`ProofVerificationResult`/`GasEstimate`/`EthereumProofClient` stub/`ProofSubmissionPipeline`) | **CLOSED** — Sprint 30 (T-144) |
 | **Phase 7.4 Benchmarks** | ✅ `phase7_4_benchmarks.py` (637L) — `PerformanceMetrics`, `Phase7_4Benchmarks` | ✅ `zkp-eth-integration.ts` (combined: `PerformanceMetrics.summary()`/`Phase7_4Benchmarks.runAllBenchmarks()`) | **CLOSED** — Sprint 30 (T-144) |
+| **Logic Verifier** | ✅ `integration/reasoning/logic_verification.py` (743L) — `LogicVerifier`, `LogicAxiom`, `ProofResult` | ✅ `logic-verifier.ts` (`LogicAxiom`/`ProofResult`/`LogicVerifier.verifyFormula/proveWithAxioms/checkConsistency/checkEntailment`) | **CLOSED** — Sprint 31 (T-146) |
+| **Logic Translation Core** | ✅ `integration/converters/logic_translation_core.py` (718L) — `LogicTranslationTarget`, `TranslationResult`, `LeanTranslator`, `CoqTranslator`, `SMTTranslator` | ✅ `logic-translation-core.ts` (`LeanTranslator`/`CoqTranslator`/`SMTTranslator`/`translateFormula()`) | **CLOSED** — Sprint 31 (T-147) |
+| **Legal Symbolic Analyzer** | ✅ `integration/domain/legal_symbolic_analyzer.py` (699L) — `LegalAnalysisResult`, `DeonticProposition`, `LegalEntity`, `LegalSymbolicAnalyzer` | ✅ `legal-symbolic-analyzer.ts` (heuristic analysis: domain/deontic/entities/temporal; `LegalReasoningEngine`) | **CLOSED** — Sprint 31 (T-148) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 30):** 30+ modules; ZKP circuits + UCAN policy bridge + Ethereum integration + Phase 7.4 benchmarks; complete bridge layer + multiview; complete TDFOL stack; all provers local. Remaining deferred: modal/codec (12843L) + modal/decompiler (9621L).
+**Current status (post Sprint 31):** 31+ modules; logic verifier + multi-target translator + legal symbolic analyzer; complete bridge+TDFOL+ZKP stack; all provers local. Remaining deferred: modal/codec (12843L) + modal/decompiler (9621L).
 
 ---
 
@@ -993,6 +999,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-143 | P3 | Create `src/services/ucan-policy-bridge.ts` | ✅ DONE | `BridgeCompileResult` (success/policyCid/delegationTokens/denialCount/errors); `BridgeEvaluationResult` (decision/allowed/obligations); `SignedPolicyResult`; `UCANPolicyBridge.compileNl()/evaluate()/sign()`; `compileAndEvaluate()`; `getUCANPolicyBridge()` |
 | T-144 | P3 | Create `src/services/zkp-eth-integration.ts` | ✅ DONE | `EthereumConfig`/`makeEthereumConfig()`; `ProofVerificationResult`; `GasEstimate`; `EthereumProofClient.estimateGas()/verifyProof()` (stubs); `ProofSubmissionPipeline.submit()`; `PerformanceMetrics.summary()`; `Phase7_4Benchmarks.runAllBenchmarks() → BenchmarkSuite` |
 | T-145 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint30.test.ts` — 33 tests (all pass): ZKP circuits (14), UCANPolicyBridge (9+2), EthereumProofClient (2), PerformanceMetrics (2), Phase7_4Benchmarks (2) |
+
+---
+
+### Sprint 31 (Phase 31 — Logic Verifier + Translation Core + Legal Symbolic Analyzer, P3) ✅ DONE (2026-07-01)
+
+> **Gap:** `integration/reasoning/logic_verification.py` (743L) — `LogicVerifier`; `integration/converters/logic_translation_core.py` (718L) — `TranslationResult`/`LeanTranslator`/`CoqTranslator`/`SMTTranslator`; `integration/domain/legal_symbolic_analyzer.py` (699L) — `LegalSymbolicAnalyzer`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-146 | P3 | Create `src/services/logic-verifier.ts` | ✅ DONE | `VerificationResult` enum; `LogicAxiom`/`makeAxiom()`; `ProofStep`/`ProofResult`/`ConsistencyCheck`/`EntailmentResult`; `LogicVerifier` (6 built-in axioms + `addAxiom/verifyFormula/proveWithAxioms/checkConsistency/checkEntailment/proofCache`) |
+| T-147 | P3 | Create `src/services/logic-translation-core.ts` | ✅ DONE | `LogicTranslationTarget` (LEAN4/COQ/SMT_LIB2/PROLOG/TDFOL); `TranslationResult.toDict()`; `AbstractLogicFormula` (`makeAtomicFormula`/`makeCompoundFormula`); `LeanTranslator` (O→Obligatory/P→Permitted); `CoqTranslator` (∧→/\\); `SMTTranslator` (check-sat); `translateFormula()` |
+| T-148 | P3 | Create `src/services/legal-symbolic-analyzer.ts` | ✅ DONE | `LegalDomain`/`DeonticOperator` enums; `LegalAnalysisResult`/`DeonticProposition`/`LegalEntity`/`TemporalCondition`; `LegalSymbolicAnalyzer.analyze()` (domain/deontic/entity/temporal heuristics); `LegalReasoningEngine.reason()`; `createLegalAnalyzer/createLegalReasoningEngine()` |
+| T-149 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint31.test.ts` — 35 tests (all pass): LogicVerifier (10), LeanTranslator (6), CoqTranslator (2), SMTTranslator (2), translateFormula (3), LegalSymbolicAnalyzer (8), LegalReasoningEngine (2) |
 
 ## 8. Prover Capability Matrix
 
