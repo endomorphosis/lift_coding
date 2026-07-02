@@ -1569,6 +1569,17 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 68 (Phase 68 — Prover Wrappers + Ethereum Bridge + Utility Types, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-314 | P3 | Create `src/services/sprint68-prover-wrappers.ts` | ✅ DONE — `ProofResult` enum/`ProofAttempt`/`TalosWrapper`; `ConversionResult`/`EngDCECWrapper`; `DCECStatement`/`DCECLibraryWrapper`; `ZKPVerifier` |
+| T-315 | P3 | Create `src/services/sprint68-eth-bridge.ts` | ✅ DONE — `normalizeBytes32Hex()`/`RegisterVKPayload`/`buildRegisterVkPayload()`; `OnchainClient`/`ProverBackend`/`OnchainPipelineResult`/`runOffchainToOnchainPipeline()`; `ContractArtifact`/`loadContractArtifact()`; `hashTextToFieldSha256()`/`packPublicInputsForEvm()` |
+| T-316 | P3 | Create `src/services/sprint68-utils-types.ts` | ✅ DONE — `StatementRecord`/`SessionMetadata`; `BridgeCapability`/`ConversionStatus`/`BridgeMetadata`/`BridgeConfig`/`ProverRecommendation`; `validateText()`/`validateFormula()`/`InputValidator`; `LogicTranslationTarget`/`TranslationResult`/`AbstractLogicFormula`; `TDFOLProofResult`/`getGlobalProofCache()`/`clearGlobalProofCache()` |
+| T-317 | P3 | Write 10+ tests | ✅ DONE — 47 tests (all pass) in `test/mcp-plus-plus/wasm-prover-sprint68.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
