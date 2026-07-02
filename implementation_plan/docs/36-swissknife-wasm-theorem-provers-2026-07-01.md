@@ -77,10 +77,52 @@ in the Python reference, **not previously captured in this plan**:
 | `CEC/native/temporal.py` | Temporal calculus (event holds-at, initiates, terminates) |
 | `CEC/native/cec_proof_cache.py` | CEC-specific proof cache (separate from `external_provers/proof_cache.py`) |
 
-**Relevance to swissknife:** The DCEC layer handles **temporal-deontic formulas** that the existing
-`external_provers/` stack routes to the remote engine. Adding a native TypeScript `DcecProverBridge`
-would close the `temporal` / `modal_deontic` gap in `WasmProverHub`'s `FormulaClassifier`, eliminating
-the last category of mandatory remote fallback.
+**Relevance to swissknife:** The DCEC layer handles **modal-deontic formulas** (O/P/F with
+no temporal window). ✅ **Closed in Sprint 9** by `DcecProverBridge`.
+
+### 2.5 TDFOL Engine (ipfs_datasets_py/logic/TDFOL/) — **Gap discovered 2026-07-03**
+
+The core **Temporal Deontic First-Order Logic (TDFOL)** engine that backs the `tdfol_prove`
+remote MCP tool — **not previously in scope**:
+
+| File | Description |
+|---|---|
+| `TDFOL/tdfol_core.py` | TDFOL formula type system: `TemporalOperator` (ALWAYS/EVENTUALLY/NEXT/UNTIL/SINCE/RELEASE), `DeonticOperator`, `BinaryTemporalFormula`, `UnaryFormula`, `QuantifiedFormula`, `TDFOLKnowledgeBase` |
+| `TDFOL/tdfol_prover.py` | 640-line TDFOL prover: `TDFOLProver` orchestrating ForwardChaining + ModalTableaux + CECDelegate strategies; 10 built-in rules (see below) |
+| `TDFOL/tdfol_parser.py` | 818-line TDFOL formula parser (s-expression + FOL notation) |
+| `TDFOL/tdfol_inference_rules.py` | TDFOL-specific inference rules extending the CEC 87-rule set |
+| `TDFOL/modal_tableaux.py` | Modal tableaux for K, T, D, S4, S5 modal logics |
+| `TDFOL/strategies/` | `ForwardChainingStrategy`, `ModalTableauxStrategy`, `CECDelegateStrategy`, `StrategySelector` |
+| `TDFOL/tdfol_dcec_parser.py` | DCEC↔TDFOL translation layer |
+
+**TDFOL inference rules** (from `tdfol_prover.py`):
+- `TemporalNecessitationRule` — introduce □φ
+- `TemporalDistributionRule` — K axiom: □(φ→ψ), □φ ⊢ □ψ
+- `TemporalTRule` — T axiom: □φ ⊢ φ (always implies now)
+- `TemporalEventuallyIntroduction` — φ ⊢ ◊φ
+- `DeonticNecessitationRule` — introduce O(φ)
+- `DeonticDistributionRule` — K axiom for deontic: O(φ→ψ), O(φ) ⊢ O(ψ)
+- `DeonticDRule` — SDL D axiom: O(φ) ⊢ P(φ)
+- `PermissionIntroduction` — φ ⊢ P(φ)
+- `ProhibitionElimination` — F(φ) ⊢ ¬P(φ) (prohibition → not permitted)
+- `UntilUnfoldingRule` — φ U ψ ⊢ ψ ∨ (φ ∧ ◯(φ U ψ))
+
+**Relevance to swissknife:** TDFOL handles the `temporal` formula class that currently falls
+back to the remote Python engine for every policy with `policy.temporal` or obligation deadlines.
+Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fallback.
+
+### 2.6 Additional Logic Layers (ipfs_datasets_py/logic/) — **Scope for Sprint 11+**
+
+| Directory | Description | Priority |
+|---|---|---|
+| `logic/deontic/` | Rich deontic IR: `formula_builder.py` (7019 lines), `knowledge_base.py`, `ir.py`, `graph.py`, `analyzer.py`, `converter.py` | P3 |
+| `logic/bridge/` | Logic bridge layer: `cec_dcec.py`, `fol_tdfol.py`, `modal_frame_logic.py`, `zkp_attestation.py`, `external_prover_router.py` | P2 |
+| `logic/fol/` | First-order logic utilities | P3 |
+| `logic/modal/` | Modal logic (K/T/D/S4/S5) | P2 |
+| `logic/zkp/` | ZKP full stack: `zkp_prover.py`, `zkp_verifier.py`, `circuits.py`, `ucan_zkp_bridge.py`, `groth16`, `provekit`, Ethereum integration | P2 (UCAN-ZKP); P3 (Ethereum) |
+| `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | P3 |
+| `logic/flogic/` | F-logic (frame logic) | P3 |
+| `logic/integration/` | Integration bridges and converters across logic frameworks | P3 |
 
 ---
 
@@ -234,12 +276,15 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | ZK circuits (Lurk/Nova) | ✅ `zkp/` (Circom/Plonky3 + Lurk) | ⚠️ `LurkWasmBridge` stub; `proveWithIx()` for Lean4 ZK (backend: sphinx) | **PARTIAL** — real lurk-beta WASM pending (T-46–T-50) |
 | ZK proof CID in audit | ✅ `zkp/statement.py` content-addressed artifact | ✅ `AuditEntry.extra.zk_proof_cid` via `PolicyAuditLog.record()` | **CLOSED** — Sprint 7b T-53 |
 | Neural prover | ✅ `symbolicai_prover_bridge.py` (LLM sketch + verify) | ✅ `NeuralProverBridge` (LLM sketch → Lean4/Coq local verify) | **CLOSED** — Sprint 6 (T-38/T-57) |
-| **DCEC / CEC layer** | ✅ `CEC/` — `dcec_core`, `prover_core`, `cec_framework`, `shadow_prover_wrapper`, `talos_wrapper` | ❌ **Not implemented** | **OPEN** — Sprint 9 (T-58–T-62; closes temporal/modal fallback) |
-| Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as fallback |
+| **DCEC / CEC layer** | ✅ `CEC/` — `dcec_core`, `prover_core`, `cec_framework`, `shadow_prover_wrapper`, `talos_wrapper` | ✅ `DcecProverBridge` (forward-chaining, 5 rules: MP/Simp/DeonticProhibEquiv/ObligImpliesPermit/ForbiddenToNotOblig) | **CLOSED** — Sprint 9 (T-58–T-62) |
+| **TDFOL engine** | ✅ `TDFOL/` — `tdfol_core`, `tdfol_prover` (640 lines), `tdfol_parser`, `tdfol_inference_rules`, `modal_tableaux`, `strategies/` | ❌ **Not implemented** (`temporal` formulas → remote only) | **OPEN** — Sprint 10 (T-63–T-67; closes temporal remote fallback) |
+| **Deontic IR / Knowledge Base** | ✅ `deontic/formula_builder.py` (7019 lines), `knowledge_base.py`, `ir.py` | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 11+ P3 |
+| **UCAN-ZKP bridge** | ✅ `zkp/ucan_zkp_bridge.py` | ❌ Not implemented | **OPEN** — Sprint 12+ P2 |
+| Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Key remaining gap:** The `temporal` and `modal_deontic` formula classes in `WasmProverHub` still
-fall back to the remote Python TDFOL engine. Adding `DcecProverBridge` (Sprint 9) will handle these
-locally using a native TypeScript DCEC proof engine, eliminating the last mandatory remote dependency.
+**Key remaining gap:** The `temporal` formula class still forces a remote TDFOL call for every
+policy with `policy.temporal` or obligation deadlines. Sprint 10 adds `TdfolProverBridge` with
+LTL (□/◊/◯/U/S) + SDL (D axiom) inference rules to handle this locally.
 
 ---
 
@@ -583,6 +628,21 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-62 | P2 | Write 10+ tests for DCEC prover bridge + translator | ✅ DONE | `wasm-prover-sprint9.test.ts` — 27 tests (all pass): T-58 types (9), T-59 inference rules (10), T-60 translator (5), T-61 hub routing (3) |
 
 ---
+
+### Sprint 10 (Phase 10 — TDFOL Native Prover, P2) ✅ DONE (2026-07-03)
+
+> **Discovered gap 2026-07-03:** `ipfs_datasets_py/logic/TDFOL/` contains a full Temporal
+> Deontic FOL engine (640-line prover, 818-line parser, 10 inference rules including LTL □/◊/◯/U
+> + SDL D axiom) that backs `tdfol_prove`. Sprint 10 closes the `temporal` remote fallback with
+> a native TypeScript `TdfolProverBridge`. After Sprint 10, ALL formula classes are handled locally.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-63 | P2 | Create `src/services/provers/tdfol-types.ts` — TDFOL formula type system | ✅ DONE | `LtlUnaryOperator` (ALWAYS/EVENTUALLY/NEXT), `LtlBinaryOperator` (UNTIL/SINCE/RELEASE), `TdfolFormula = DCECFormula \| LtlUnaryFormula \| LtlBinaryFormula`; `serializeTdfol()`; constructor helpers |
+| T-64 | P2 | Create `src/services/provers/tdfol-prover-bridge.ts` — TDFOL forward-chaining engine | ✅ DONE | 10 rules: TemporalT (□φ⊢φ), TemporalDistribution (K: □(φ→ψ),□φ⊢□ψ), TemporalEventually (φ⊢◊φ), UntilUnfolding, DeonticD (O⊢P), DeonticDistribution, ProhibitionElimination (F⊢¬P), DeonticProhibEquiv, TdfolModusPonens; `checkPolicyConsistency()` |
+| T-65 | P2 | Create `src/services/provers/policy-to-tdfol.ts` — temporal policy → TDFOL KB | ✅ DONE | temporal window → □(perm/proh/obl); obligation deadline → ◊O(…); plain policy → bare atoms |
+| T-66 | P2 | Wire `TdfolProverBridge` into `WasmProverHub` for `temporal` + fix `higher_order` | ✅ DONE | `temporal` → TdfolProverBridge (closes last mandatory remote fallback); `higher_order` → `_tryCoqOrLean4()` before remote; `proverStatus().tdfol_native = true` |
+| T-67 | P2 | Write 10+ tests for TDFOL prover bridge | ✅ DONE | `wasm-prover-sprint10.test.ts` — 26 tests (all pass): T-63 types (8), T-64 rules (10), T-65 translator (4), T-66 hub routing (2) |
 
 ## 8. Prover Capability Matrix
 
