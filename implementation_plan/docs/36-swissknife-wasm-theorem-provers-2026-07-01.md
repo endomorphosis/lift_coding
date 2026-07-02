@@ -454,7 +454,7 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Modal IR Decompiler** | ✅ `modal/decompiler.py` (9621L) — `DecodedModalPhrase`, `DecodedModalText`, `decode_modal_ir_document()`, `modal_formula_to_text()` | ✅ `modal-ir-decompiler.ts` (`DecodedModalPhrase/DecodedModalText.toDict()`; `decodeModalIRDocument()`; `modalFormulaToText()` (O/P/F/□/◊); `modalTextTokenSimilarity()` (Jaccard)) | **CLOSED** — Sprint 44 (T-199) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 44 — COMPLETE):** 44+ modules; modal logic codec + modal IR decompiler; ALL Python modules ported. The entire ipfs\_datasets\_py/logic/ stack now has TypeScript equivalents in swissknife. 88 test suites / 1628 passing.
+**Current status (post Sprint 44):** 44+ modules; modal logic codec + modal IR decompiler ported. **CORRECTION: review of all Python files reveals additional untracked modules.** Remaining P3: TDFOL/performance\_metrics + TDFOL/zkp\_integration + external\_provers/formula\_analyzer (Sprint 45); plus many smaller files in TDFOL/nl/, CEC/nl/, CEC/native/, zkp/backends/.
 
 ---
 
@@ -1256,6 +1256,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-198 | P3 | Create `src/services/modal-logic-codec.ts` | ✅ DONE | `makeCodecConfig()` (embeddingDimensions>=1 validation); `ModalLogicCodecResult` (targetFamily/sourceEmbedding/decodedEmbedding/losses/totalLoss/kgTriples/toDict()); `DeterministicModalLogicCodec.encode(text)/encodeBatch(texts)` — simulated (deontic/temporal/epistemic/alethic detection + cosine loss) |
 | T-199 | P3 | Create `src/services/modal-ir-decompiler.ts` | ✅ DONE | `DecodedModalPhrase.toDict()`; `DecodedModalText` (reconstructionSimilarity/modalSpanCoverage/formulas/toDict()); `decodeModalIRDocument(doc) → DecodedModalText`; `modalFormulaToText()` (O/P/F/□/◊ pattern converters); `modalTextTokenSimilarity()` (Jaccard token overlap) |
 | T-200 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint44.test.ts` — 30 tests (all pass) |
+
+---
+
+### Sprint 45 (Phase 45 — TDFOL Performance Metrics + ZKP Integration + Formula Analyzer, P3) 🆕
+
+> **Previously untracked gap:** `TDFOL/performance_metrics.py` (620L) — `TimingResult`/`MemoryResult`/`StatisticalSummary`/`MetricsCollector`; `TDFOL/zkp_integration.py` (633L) — `UnifiedProofResult`/`ZKPTDFOLProver`; `external_provers/formula_analyzer.py` (645L) — `FormulaType`/`FormulaComplexity`/`FormulaAnalysis`/`FormulaAnalyzer`.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-201 | P3 | Create `src/services/tdfol-performance-metrics.ts` | `TimingResult` (operationName/durationMs/success); `MemoryResult` (peakMb/averageMb); `StatisticalSummary` (mean/median/stdDev/p95/min/max); `MetricsCollector` (record/getStats/getSummary/reset); `getGlobalCollector()/resetGlobalCollector()` | ✅ DONE |
+| T-202 | P3 | Create `src/services/tdfol-zkp-integration.ts` | `UnifiedProofResult` (isProved/proofData/verificationKey/circuitId/confidence); `ZKPTDFOLProver` (prove(formula)/verify(proof,vk)/generateWitness()/getStats) | ✅ DONE |
+| T-203 | P3 | Create `src/services/formula-analyzer.ts` | `FormulaType` (DEONTIC/TEMPORAL/MODAL/FOL/PROPOSITIONAL/UNKNOWN); `FormulaComplexity` (SIMPLE/MODERATE/COMPLEX/VERY_COMPLEX); `FormulaAnalysis` (formulaType/complexity/operators/quantifiers/depth/confidence/toDict()); `FormulaAnalyzer.analyze(formula)/classifyType(formula)/measureComplexity(formula)` | ✅ DONE |
+| T-204 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint45.test.ts` | ✅ DONE — 40 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
