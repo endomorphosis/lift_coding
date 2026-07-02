@@ -1558,6 +1558,17 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 67 (Phase 67 — Groth16 Backup + CEC Delegate + Expansion Rules + NLP Types + Crypto Utils, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-310 | P3 | Create `src/services/sprint67-groth16-cec.ts` | ✅ DONE — `Groth16Backend`/`R1CSCircuit`/`ProvingKey`/`VerifyingKey`; `CECDelegateStrategy`; `AndExpansionRule`/`OrExpansionRule`/`ImpliesExpansionRule`/`IffExpansionRule`/`NotExpansionRule`/`getAllExpansionRules()`/`selectExpansionRule()` |
+| T-311 | P3 | Create `src/services/sprint67-nlp-types.ts` | ✅ DONE — `getPortugueseDeonticKeywords()`/`PortugueseClause`/`PortugueseParser`; `DeonticModality`/`ConflictType`/`DeonticStatement`/`DeonticConflict`; `FLogicStatus`/`FLogicFrame`/`FLogicClass`/`FLogicQuery`/`FLogicOntology` |
+| T-312 | P3 | Create `src/services/sprint67-crypto-utils.ts` | ✅ DONE — `normalizeText()`/`canonicalizeTheorem()`/`hashTheorem()`/`theoremHashHex()`; `isModuleAvailable()`/`importOptionalModule()`/`FeatureDetector`; `RateLimiter`/`getRateLimiter()`/`rateLimit()`; `VKRegistry`/`VKRegistryEntry`/`computeVkHash()`; `HornAxiom`/`parseTdfolV1Axiom()`/`evaluateTdfolV1Holds()`/`deriveTdfolV1Trace()` |
+| T-313 | P3 | Write 10+ tests | ✅ DONE — 56 tests (all pass) in `test/mcp-plus-plus/wasm-prover-sprint67.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
