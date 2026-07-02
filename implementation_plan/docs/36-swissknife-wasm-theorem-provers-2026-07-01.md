@@ -58,6 +58,30 @@ class Z3ProofResult:
 - `provekit/` — Lurk/Nova/SP1/Sphinx proof artifact generation and verification
 - `statement.py` — ZK statement encoding for deontic norms
 
+### 2.4 CEC / DCEC Layer (ipfs_datasets_py/logic/CEC/) — **Gap discovered 2026-07-03**
+
+A full Cognitive Event Calculus (CEC) / Deontic Cognitive Event Calculus (DCEC) layer exists
+in the Python reference, **not previously captured in this plan**:
+
+| File | Description |
+|---|---|
+| `CEC/native/dcec_core.py` | DCEC formula types: `DeonticOperator` (O/P/F/S/R/L/POW/IMM), `CognitiveOperator` (B/K/I/D), `TemporalFormula`, `QuantifiedFormula`, `AtomicFormula`, `ConnectiveFormula` |
+| `CEC/native/prover_core.py` | Native Python DCEC proof engine: `ModusPonens`, `Simplification`, `DeonticProhibition` (F↔O¬), `DeonticPermission` (P↔¬O¬), tableau-based saturation, forward chaining |
+| `CEC/native/prover_core_extended_rules.py` | Extended deontic inference rules: `DeonticObligation` transfer, `TemporalPersistence`, etc. |
+| `CEC/cec_framework.py` | `CECFramework` orchestrator — NL→DCEC→proof pipeline |
+| `CEC/shadow_prover_wrapper.py` | `ShadowProverWrapper` — modal logic (K/S4/S5) + cognitive calculus; native-first, Java fallback |
+| `CEC/talos_wrapper.py` | `TalosWrapper` — SPASS-backed first-order prover |
+| `CEC/eng_dcec_wrapper.py` | `EngDCECWrapper` — English → DCEC via Grammatical Framework |
+| `CEC/dcec_wrapper.py` | `DCECLibraryWrapper` — DCEC_Library Python 2 submodule compatibility layer |
+| `CEC/native/dcec_parsing.py` | DCEC formula parser (s-expression + prefix notation) |
+| `CEC/native/temporal.py` | Temporal calculus (event holds-at, initiates, terminates) |
+| `CEC/native/cec_proof_cache.py` | CEC-specific proof cache (separate from `external_provers/proof_cache.py`) |
+
+**Relevance to swissknife:** The DCEC layer handles **temporal-deontic formulas** that the existing
+`external_provers/` stack routes to the remote engine. Adding a native TypeScript `DcecProverBridge`
+would close the `temporal` / `modal_deontic` gap in `WasmProverHub`'s `FormulaClassifier`, eliminating
+the last category of mandatory remote fallback.
+
 ---
 
 ## 3. Available JavaScript / WASM Prover Equivalents
@@ -195,18 +219,27 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 
 ## 4. Gap Analysis vs Python Reference
 
-| Feature | Python | SwissKnife (current) | Gap |
+> **Last updated: 2026-07-03 (post Sprint 7b).** Table reflects committed swissknife state.
+> Rows marked ✅ are closed; rows marked ⚠️ are partial; ❌ are open.
+
+| Feature | Python Reference | SwissKnife (current) | Status |
 |---|---|---|---|
-| Z3 SMT solving | ✅ Full (z3-python) | ❌ Remote only | HIGH — z3-solver npm exists |
-| CVC5 SMT solving | ✅ Full (cvc5-python) | ❌ Remote only | MED — SMT-LIB2 API usable |
-| Coq proof checking | ✅ Full (coqc subprocess) | ❌ None | MED — jscoq embedding |
-| Lean 4 checking | ✅ Full (lake subprocess) | ❌ None | MED — lean4web |
-| Proof cache | ✅ proof_cache.py | ❌ None | HIGH — pure TypeScript |
-| ProverRouter | ✅ PARALLEL / FASTEST | ❌ None | HIGH — pure TypeScript |
-| FormulaAnalyzer | ✅ Complexity-based routing | ❌ None | MED — heuristic |
-| ZK circuits (Lurk) | ✅ zkp/ (Circom/Plonky3) | ❌ None | LOW — research-stage |
-| Neural prover | ✅ SymbolicAI | ❌ None | LOW — MCP++ LLM call |
-| Remote fallback | N/A | ✅ mcp-remote-deontic-engine | Keep as fallback |
+| Z3 SMT solving | ✅ `z3_prover_bridge.py` | ✅ `Z3WasmBridge` (z3-solver npm, lazy-load 34 MB) | **CLOSED** — Sprints 1, 7 |
+| CVC5 SMT solving | ✅ `cvc5_prover_bridge.py` | ✅ `Cvc5WasmBridge` (SMT-LIB2 shim via Z3 WASM) | **CLOSED** — Sprint 2 |
+| Coq proof checking | ✅ `coq_prover_bridge.py` | ✅ `CoqJsCoqBridge` (subprocess coqc + static path) | **CLOSED** — Sprint 3+4 |
+| Lean 4 checking | ✅ `lean_prover_bridge.py` | ✅ `Lean4WasmBridge` (subprocess lean/lake) + `proveWithIx()` ZK path | **CLOSED** — Sprint 3+4 + 7b |
+| Proof cache | ✅ `proof_cache.py` | ✅ `ProofCache` (sha256, ring-buffer, JSONL sink) | **CLOSED** — Sprint 1 |
+| ProverRouter | ✅ `prover_router.py` (FASTEST/PARALLEL/SEQUENTIAL) | ✅ `WasmProverHub` (FASTEST/PARALLEL/SEQUENTIAL/REMOTE routing) | **CLOSED** — Sprints 1–3 |
+| FormulaAnalyzer | ✅ `formula_analyzer.py` | ✅ `FormulaClassifier` (propositional/fol/temporal/higher_order) | **CLOSED** — Sprint 2 |
+| ZK circuits (Lurk/Nova) | ✅ `zkp/` (Circom/Plonky3 + Lurk) | ⚠️ `LurkWasmBridge` stub; `proveWithIx()` for Lean4 ZK (backend: sphinx) | **PARTIAL** — real lurk-beta WASM pending (T-46–T-50) |
+| ZK proof CID in audit | ✅ `zkp/statement.py` content-addressed artifact | ✅ `AuditEntry.extra.zk_proof_cid` via `PolicyAuditLog.record()` | **CLOSED** — Sprint 7b T-53 |
+| Neural prover | ✅ `symbolicai_prover_bridge.py` (LLM sketch + verify) | ✅ `NeuralProverBridge` (LLM sketch → Lean4/Coq local verify) | **CLOSED** — Sprint 6 (T-38/T-57) |
+| **DCEC / CEC layer** | ✅ `CEC/` — `dcec_core`, `prover_core`, `cec_framework`, `shadow_prover_wrapper`, `talos_wrapper` | ❌ **Not implemented** | **OPEN** — Sprint 9 (T-58–T-62; closes temporal/modal fallback) |
+| Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as fallback |
+
+**Key remaining gap:** The `temporal` and `modal_deontic` formula classes in `WasmProverHub` still
+fall back to the remote Python TDFOL engine. Adding `DcecProverBridge` (Sprint 9) will handle these
+locally using a native TypeScript DCEC proof engine, eliminating the last mandatory remote dependency.
 
 ---
 
@@ -218,15 +251,17 @@ swissknife MCP++ deontic layer
 ├── PolicyEngine (existing, local JS)
 │   └── permits / prohibitions / obligations (no deep logic)
 │
-├── WasmProverHub (NEW — src/services/mcp-wasm-prover-hub.ts)
-│   ├── ProofCache (NEW — sha256-keyed, TTL, optional IPFS pin)
-│   ├── ProverRouter (NEW — FASTEST / PARALLEL / SEQUENTIAL)
-│   │   ├── Z3WasmBridge (Phase 1 — z3-solver npm)
-│   │   ├── Cvc5WasmBridge (Phase 2 — SMT-LIB2 text protocol)
-│   │   ├── CoqWasmBridge (Phase 3 — jscoq worker)
-│   │   ├── LeanWasmBridge (Phase 4 — lean4web worker)
-│   │   └── LurkWasmBridge (Phase 6 — ZK proof-carrying code)
-│   └── FormulaClassifier (Phase 2 — complexity heuristic)
+├── WasmProverHub (src/services/mcp-wasm-prover-hub.ts) ✅
+│   ├── ProofCache (sha256-keyed, ring-buffer, JSONL sink) ✅
+│   ├── ProverRouter (FASTEST / PARALLEL / SEQUENTIAL / REMOTE) ✅
+│   │   ├── Z3WasmBridge (Phase 1 — z3-solver npm, lazy-load) ✅
+│   │   ├── Cvc5WasmBridge (Phase 2 — SMT-LIB2 shim) ✅
+│   │   ├── CoqJsCoqBridge (Phase 3 — subprocess coqc) ✅
+│   │   ├── Lean4WasmBridge (Phase 4 — subprocess lean + ix ZK) ✅
+│   │   ├── LurkWasmBridge (Phase 6 — ZK, stub pending lurk-beta WASM) ⚠️
+│   │   ├── NeuralProverBridge (Phase 7 — LLM sketch + local verify) ✅
+│   │   └── DcecProverBridge (Phase 9 — native DCEC proof engine) 🆕
+│   └── FormulaClassifier (Phase 2 — propositional/fol/temporal/higher_order) ✅
 │
 ├── RemoteDeonticEngine (existing, keep as fallback)
 │   └── delegates to ipfs_datasets_py tdfol_prove when local fails
@@ -481,7 +516,7 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-35 | P2 | Create `src/services/provers/lurk-wasm-bridge.ts` stub | ✅ Compiles but skips when Lurk WASM unavailable |
 | T-36 | P2 | Define `ZKProofArtifact` type and add to Mcp-Plus-Plus spec | ✅ `zkp_proof_artifact.json` conformance vector added |
 | T-37 | P2 | Attach ZK proof CID to `AuditEntry.extra` when available | ✅ `entry.extra.zk_proof_cid` via prover_id/proof_time_ms |
-| T-38 | P2 | Create `src/services/provers/neural-prover-bridge.ts` | LLM sketch → Lean verify → WasmProofResult |
+| T-38 | P2 | Create `src/services/provers/neural-prover-bridge.ts` | ✅ DONE (Sprint 6, `c0f85d8`) — LLM prompt builder, prefix parser (lean4:/coq:/refuted:/unknown:), Lean4/Coq local verify, `WasmProofResult` |
 | T-39 | P2 | Write 8+ tests for Lurk bridge stub + ZKProofArtifact | ✅ 20 tests in wasm-prover-sprint5.test.ts |
 
 ---
@@ -528,7 +563,24 @@ a local-first policy that falls back to remote only when local provers timeout/f
 |---|---|---|---|
 | T-55 | P3 | Evaluate `multi-stark` WASM/JS binding when published | Go/no-go for multicircuit STARK bridge |
 | T-56 | P3 | `MultiStarkBridge` for multi-obligation proofs in parallel | `proveMultipleObligations(policy) → ZKProofArtifact[]` |
-| T-57 | P2 | `NeuralProverBridge` — LLM sketch → Lean/Coq verify | `prove(formula) → WasmProofResult` using MCP++ connector |
+| T-57 | P2 | `NeuralProverBridge` — LLM sketch → Lean/Coq verify | ✅ DONE (Sprint 6, `c0f85d8`) — same as T-38; `wasm-prover-sprint6.test.ts` (27 tests pass) |
+
+---
+
+### Sprint 9 (Phase 9 — DCEC/CEC Native Prover, P2) ✅ DONE (2026-07-03)
+
+> **Discovered gap 2026-07-03:** `ipfs_datasets_py/logic/CEC/` contains a full DCEC layer
+> (dcec_core, prover_core, cec_framework, shadow_prover_wrapper) with **no TypeScript equivalent**.
+> This sprint adds a native TypeScript DCEC proof engine, closing the `temporal`/`modal_deontic`
+> remote fallback.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-58 | P2 | Create `src/services/provers/dcec-types.ts` — DCEC formula type system | ✅ DONE | `DeonticOperator` (O/P/F/S/R/L/POW/IMM), `CognitiveOperator` (B/K/I/D), `TemporalFormula`, `ConnectiveFormula`, `QuantifiedFormula`, `DCECFormula` union; `serializeFormula()`, constructor helpers |
+| T-59 | P2 | Create `src/services/provers/dcec-prover-bridge.ts` — native TypeScript DCEC proof engine | ✅ DONE | `DcecProverBridge.prove(kb, goal, timeoutMs) → WasmProofResult`; 5 rules: ModusPonens, Simplification, DeonticProhibEquiv (F↔O¬), ObligImpliesPermit (O⊢P), ForbiddenToNotOblig; forward-chaining saturation; conflict detection |
+| T-60 | P2 | Create `src/services/provers/policy-to-dcec.ts` — policy → DCEC translator | ✅ DONE | `PolicyToDcecTranslator.translate(policy) → DCECFormula[]` — permissions→P(), prohibitions→F(), obligations→O(), temporal→HOLDS_AT(…,now) |
+| T-61 | P2 | Wire `DcecProverBridge` into `WasmProverHub` for `modal_deontic` formulas | ✅ DONE | `FormulaClass += 'modal_deontic'`; hub routes obligations/prohibitions (≤20 rules) to DCEC; `proverStatus().dcec_native = true`; `mcp++ provers` shows dcec-native |
+| T-62 | P2 | Write 10+ tests for DCEC prover bridge + translator | ✅ DONE | `wasm-prover-sprint9.test.ts` — 27 tests (all pass): T-58 types (9), T-59 inference rules (10), T-60 translator (5), T-61 hub routing (3) |
 
 ---
 
@@ -715,3 +767,28 @@ with parity to the Python `external_provers` reference confirmed at both the sha
 level. Remaining open items are the two repository-integrity follow-ups in §11.4 (swissknife
 `main` merge-reconcile + recursive submodule push), which are integration-plumbing, not prover
 correctness.
+
+### 11.6 Status update — Sprint 6/7/7b landed; DCEC gap discovered (2026-07-03)
+
+Since §11.5, the following sprints landed (all committed to swissknife + parent repo bumped):
+
+| Sprint | Commit | Scope | Test delta |
+|---|---|---|---|
+| Sprint 6 | `c0f85d8` | `NeuralProverBridge` (T-38/T-57): LLM sketch → local Lean4/Coq verify; `wasm-prover-sprint6.test.ts` (27 tests) | +27 |
+| Sprint 7 | `c9b0181` | `Z3WasmBridge.createDeferred()` lazy-load (T-43); `wasm-prover-conformance.test.ts` cross-language (T-44); `.github/workflows/wasm-prover-gates.yml` CI gate (T-45) | +9 |
+| Sprint 7b | `1602630` | `proveWithIx()`+`findIxCli()`+`ixBuildInstructions()` in `Lean4WasmBridge` (T-52); `AuditEntry.extra.zk_proof_cid` (T-53); `mcp++ provers` CLI (Sprint 7b); `wasm-prover-sprint7b.test.ts` (13 tests: 12 pass/1 skipped) | +13 |
+
+**Full suite post-Sprint 7b:** `52/52 suites, 624/635 passing (11 skipped live-binary), 0 failing`.
+
+**Open items (as of 2026-07-03):**
+- `temporal` and `modal_deontic` formula classes still fall back to remote TDFOL → **Sprint 9 (T-58–T-62)** closes this with native `DcecProverBridge`.
+- Lurk-beta real WASM (T-46–T-50) — blocked on building lurk-beta `--target wasm32-unknown-unknown`.
+- multi-stark WASM bindings (T-55/T-56) — P3, waiting for upstream publication.
+- Repository integrity: swissknife `main` merge-reconcile + `git push --recurse-submodules=on-demand` (§11.4 follow-ups) — still pending.
+
+**Gap discovery:** Audit of `external/ipfs_datasets/ipfs_datasets_py/logic/CEC/` revealed an entire
+DCEC/CEC prover layer not previously in scope — `dcec_core.py`, `prover_core.py` (649 lines, native
+Python forward-chaining theorem prover with `ModusPonens`, `Simplification`, `DeonticProhibition`,
+`DeonticPermission` inference rules), `cec_framework.py` (orchestration), `shadow_prover_wrapper.py`
+(modal logic K/S4/S5). See §2.4 for the full inventory. Sprint 9 adds `DcecProverBridge` to close
+this gap.
