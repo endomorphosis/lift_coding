@@ -154,7 +154,8 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/bridge/fol_tdfol.py` | `FolTdfolBridgeAdapter.encode(text)` → TDFOL formulas + frame logic + graph data | Sprint 27 ✅ | P2 |
 | `logic/bridge/deontic_norms.py` | `DeonticNormsBridgeAdapter.encode(text)` → deontic IR + frame records + prover syntax | Sprint 27 ✅ | P2 |
 | `logic/bridge/cec_dcec.py` | `CecDcecBridgeAdapter.encode(text)` → DCEC event formulas + frame logic + graph data | Sprint 27 ✅ | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 27+ | P3 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 28 ✅ (partial — `build_deontic_formula_from_ir`) | P3 |
+| `logic/bridge/multiview.py` | `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()` | Sprint 28 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -355,10 +356,11 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **FOL/TDFOL Bridge** | ✅ `bridge/fol_tdfol.py` (2136L) — `FolTdfolBridgeAdapter.encode(text)` | ✅ `fol-tdfol-bridge.ts` (tdfol_formulas/frame_logic/neo4j_graph_data; formula_type classification) | **CLOSED** — Sprint 27 (T-132) |
 | **Deontic Norms Bridge** | ✅ `bridge/deontic_norms.py` (2497L) — `DeonticNormsBridgeAdapter.encode(text)` | ✅ `deontic-norms-bridge.ts` (deontic_ir/prover_formulas/frame_logic/neo4j_graph_data; O/P/F detection) | **CLOSED** — Sprint 27 (T-133) |
 | **CEC/DCEC Bridge** | ✅ `bridge/cec_dcec.py` (3671L) — `CecDcecBridgeAdapter.encode(text)` | ✅ `cec-dcec-bridge.ts` (cec_formulas/frame_logic/neo4j_graph_data; Happens/HoldsAt/Initiates/Terminates) | **CLOSED** — Sprint 27 (T-134) |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 27+ P3 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ✅ `deontic-formula-builder.ts` (`normalizePredicateName`/`canonicalModalityOperator`/`buildDeonticFormulaFromIR`/O/P/F/DEF/PURP/APP/EXEMPT/LIFE) | **CLOSED** — Sprint 28 (T-137, partial) |
+| **Multiview Aggregator** | ✅ `bridge/multiview.py` (4040L) — `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()` | ✅ `bridge-multiview.ts` (`evaluateLegalIRMultiview`/`toTrainingTarget`/merged doc) | **CLOSED** — Sprint 28 (T-136) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 27):** 27+ modules; complete bridge layer (all 6 adapters: modal_frame_logic/deontic_norms/fol_tdfol/cec_dcec/external_prover_router/zkp_attestation + shared types/registry); complete TDFOL stack; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: multiview aggregator + formula_builder (Sprint 28+).
+**Current status (post Sprint 28):** 28+ modules; complete bridge layer + multiview aggregator; complete TDFOL stack + deontic formula builder; all provers local; ZKP→UCAN; full NL→prover pipeline. All P2 items CLOSED. Remaining P3: modal/compiler + modal/codec (very large, deferred).
 
 ---
 
@@ -942,6 +944,18 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-133 | P2 | Create `src/services/deontic-norms-bridge.ts` — deontic norms bridge adapter | ✅ DONE | `DeonticNormsBridgeAdapter.encode(text)/evaluate()`; `DeonticNormRecord` (O/P/F detection; subject/action/prover_syntax); 4 views (deontic_ir/prover_formulas/frame_logic/neo4j_graph_data) |
 | T-134 | P2 | Create `src/services/cec-dcec-bridge.ts` — CEC/DCEC bridge adapter | ✅ DONE | `CecDcecBridgeAdapter.encode(text)/evaluate()`; `DcecRecord` (Happens/HoldsAt/Initiates/Terminates; cec_formula rendering); 3 views |
 | T-135 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint27.test.ts` — 25 tests (all pass): FolTdfolBridgeAdapter (8), DeonticNormsBridgeAdapter (8), CecDcecBridgeAdapter (9) |
+
+---
+
+### Sprint 28 (Phase 28 — Multiview Aggregator + Deontic Formula Builder, P3) ✅ DONE (2026-07-01)
+
+> **Gap:** `bridge/multiview.py` (4040L) — `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()`; `deontic/formula_builder.py` (7019L) — `build_deontic_formula_from_ir(norm) → str`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-136 | P3 | Create `src/services/bridge-multiview.ts` — multiview aggregator | ✅ DONE | `MultiViewLegalIRReport` (attemptedCount/acceptedCount/acceptanceRate/failures/toDict()); `LegalIRTrainingTarget` (totalLoss/adapterLosses/viewDistribution/toDict()); `evaluateLegalIRMultiview(text, adapters[])` — runs all adapters, merges views into unified doc; `toTrainingTarget()` |
+| T-137 | P3 | Create `src/services/deontic-formula-builder.ts` — deontic formula from IR | ✅ DONE | `normalizePredicateName()` (stop-word filter + PascalCase); `canonicalModalityOperator()` (CANONICAL_MODALITY_OPS + NORM_TYPE_MAP + TEXTUAL_MAP); `buildDeonticFormulaFromIR()` (O/P/F/DEF/PURP/APP/EXEMPT/LIFE); `buildDeonticFormulasFromIRList()` |
+| T-138 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint28.test.ts` — 33 tests (all pass): normalizePredicateName (6), canonicalModalityOperator (8), buildDeonticFormulaFromIR (9), buildDeonticFormulasFromIRList (1), evaluateLegalIRMultiview (6), toTrainingTarget (3) |
 
 ## 8. Prover Capability Matrix
 
