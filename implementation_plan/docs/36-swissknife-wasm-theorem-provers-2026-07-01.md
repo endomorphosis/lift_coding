@@ -186,6 +186,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/symbolic/neurosymbolic_graphrag.py` | `PipelineResult`, `NeurosymbolicGraphRAG` | Sprint 38 ✅ | P3 |
 | `logic/integration/symbolic/neurosymbolic/hybrid_confidence.py` | `ConfidenceSource`, `ConfidenceBreakdown`, `HybridConfidenceScorer` | Sprint 38 ✅ | P3 |
 | `logic/integration/bridges/base_prover_bridge.py` | `BridgeCapability`, `BridgeMetadata`, `BaseProverBridge`, `BridgeRegistry`, `get_bridge_registry()` | Sprint 38 ✅ | P3 |
+| `logic/integration/symbolic/neurosymbolic/reasoning_coordinator.py` | `ReasoningStrategy`, `CoordinatedResult`, `NeuralSymbolicCoordinator` | Sprint 39 ✅ | P3 |
+| `logic/integration/reasoning/_deontic_conflict_mixin.py` | `ConflictDetector`, `DeonticConflictMixin` | Sprint 39 ✅ | P3 |
+| `logic/integration/interactive/interactive_fol_constructor.py` | `InteractiveFOLConstructor` | Sprint 39 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -418,9 +421,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Neurosymbolic GraphRAG** | ✅ `integration/symbolic/neurosymbolic_graphrag.py` (374L) — `PipelineResult`, `NeurosymbolicGraphRAG` | ✅ `neurosymbolic-graphrag.ts` (`PipelineResult.toDict()`; `NeurosymbolicGraphRAG.ingest/query/prove/getStats`) | **CLOSED** — Sprint 38 (T-174) |
 | **Hybrid Confidence Scorer** | ✅ `integration/symbolic/neurosymbolic/hybrid_confidence.py` (341L) — `ConfidenceSource`, `ConfidenceBreakdown`, `HybridConfidenceScorer` | ✅ `hybrid-confidence.ts` (`ConfidenceSource`/`ConfidenceBreakdown.dominantSource/toDict`; `HybridConfidenceScorer.score/scoreFromResult/explain`) | **CLOSED** — Sprint 38 (T-175) |
 | **Base Prover Bridge** | ✅ `integration/bridges/base_prover_bridge.py` (318L) — `BridgeCapability`, `BridgeMetadata`, `BaseProverBridge`, `BridgeRegistry` | ✅ `base-prover-bridge.ts` (`BridgeCapability` (5); abstract `BaseProverBridge`; `BridgeRegistry.register/get/list/getByCap`; `StubProverBridge`; `getBridgeRegistry()`) | **CLOSED** — Sprint 38 (T-176) |
+| **Reasoning Coordinator** | ✅ `symbolic/neurosymbolic/reasoning_coordinator.py` (351L) — `ReasoningStrategy`, `CoordinatedResult`, `NeuralSymbolicCoordinator` | ✅ `reasoning-coordinator.ts` (`ReasoningStrategy` (4); `CoordinatedResult.toDict()`; `NeuralSymbolicCoordinator.coordinate(AUTO/SYMBOLIC/NEURAL/HYBRID)`) | **CLOSED** — Sprint 39 (T-178) |
+| **Deontic Conflict Detector** | ✅ `reasoning/_deontic_conflict_mixin.py` (304L) — `ConflictDetector`, `DeonticConflictMixin` | ✅ `deontic-conflict-detector.ts` (`DeonticConflictType` (6); `ConflictDetector.detectConflicts/summarize`; `DeonticConflictMixin.wouldConflict/conflictScore`) | **CLOSED** — Sprint 39 (T-179) |
+| **Interactive FOL Constructor** | ✅ `interactive/interactive_fol_constructor.py` (848L) — `InteractiveFOLConstructor` | ✅ `interactive-fol-constructor.ts` (`InteractiveFOLConstructor.addStatement/buildFormula/checkConsistency/getSession/reset/exportFormulas`) | **CLOSED** — Sprint 39 (T-180) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 38):** 38+ modules; GraphRAG pipeline + hybrid confidence + base prover bridge; neurosymbolic + proof cache + CEC bridge; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 39):** 39+ modules; reasoning coordinator + deontic conflict detector + interactive FOL; GraphRAG + hybrid confidence + base prover bridge; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1145,6 +1151,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-175 | P3 | Create `src/services/hybrid-confidence.ts` | ✅ DONE | `ConfidenceSource` (4 values); `ConfidenceBreakdown.dominantSource/toDict()`; `HybridConfidenceScorer.score(symbolic,neural,structural)/scoreFromResult(result)/explain(breakdown)` |
 | T-176 | P3 | Create `src/services/base-prover-bridge.ts` | ✅ DONE | `BridgeCapability` (5 caps); `BridgeMetadata`; abstract `BaseProverBridge.prove/toTargetFormat/fromTargetFormat/proveBatch/hasCapability()`; `BridgeRegistry.register/get/list/getByCap/getAllMetadata/size`; `StubProverBridge`; `getBridgeRegistry()/resetBridgeRegistry()` |
 | T-177 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint38.test.ts` — 30 tests (all pass) |
+
+---
+
+### Sprint 39 (Phase 39 — Reasoning Coordinator + Deontic Conflict Detector + Interactive FOL Constructor, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `symbolic/neurosymbolic/reasoning_coordinator.py` (351L) — `ReasoningStrategy`/`CoordinatedResult`/`NeuralSymbolicCoordinator`; `reasoning/_deontic_conflict_mixin.py` (304L) — `ConflictDetector`/`DeonticConflictMixin`; `interactive/interactive_fol_constructor.py` (848L) — `InteractiveFOLConstructor`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-178 | P3 | Create `src/services/reasoning-coordinator.ts` | ✅ DONE | `ReasoningStrategy` (4); `CoordinatedResult` (isProved/confidence/symbolicConfidence/neuralConfidence/strategyUsed/reasoningPath/proofSteps/toDict()); `NeuralSymbolicCoordinator.coordinate(formula, strategy?)` — auto-selects symbolic/neural/hybrid; `getStats()` |
+| T-179 | P3 | Create `src/services/deontic-conflict-detector.ts` | ✅ DONE | `DeonticConflictType` (6 types); `DeonticConflict` (conflictType/severity/explanation/suggestedResolution); `ConflictDetector.detectConflicts(stmts[])/summarize()`; `DeonticConflictMixin.wouldConflict/conflictScore()` |
+| T-180 | P3 | Create `src/services/interactive-fol-constructor.ts` | ✅ DONE | `StatementAnalysis`/`FOLConstructorSession` (sessionId/domain/statements/formulas/consistencyScore); `InteractiveFOLConstructor.addStatement(text)/buildFormula(∧|∨|→)/checkConsistency()/getSession()/reset()/exportFormulas()` |
+| T-181 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint39.test.ts` — 29 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
