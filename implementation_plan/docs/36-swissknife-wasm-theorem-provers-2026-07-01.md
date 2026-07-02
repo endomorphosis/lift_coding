@@ -1421,6 +1421,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 57 (Phase 57 — CEC Prover Core + Extended Rules + Specialized Rules + Prover Manager, P3) 🆕
+
+> **Gap discovered by exhaustive scan:** `CEC/native/prover_core.py` (649L) + `CEC/native/prover_core_extended_rules.py` (1116L) + `CEC/native/inference_rules/specialized.py` (456L) + `CEC/provers/prover_manager.py` (444L) — none had TS equivalents.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-255 | P3 | Create `src/services/cec-prover-core.ts` | 34 inference rules (8 core + 26 extended); `ProofResult` enum; `ALL_CEC_RULES` registry; `findApplicableCECRules()` | ✅ DONE |
+| T-256 | P3 | Create `src/services/cec-specialized-rules.ts` | 5 specialized propositional rules; `ALL_SPECIALIZED_RULES`; `findApplicableSpecializedRules()` | ✅ DONE |
+| T-257 | P3 | Create `src/services/cec-prover-manager.ts` | `ProverType`/`ProverStrategyKind` enums; `ProverConfig`; `UnifiedProofResult`; `ProverManager` (prove/proveParallel/selectBest/register/getStats) | ✅ DONE |
+| T-258 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint57.test.ts` | ✅ DONE — 35 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
