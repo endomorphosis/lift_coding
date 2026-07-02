@@ -117,7 +117,7 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 |---|---|---|---|
 | `logic/deontic/analyzer.py` | `DeonticAnalyzer`: regex NL→deontic statement extraction, conflict detection (direct/conditional/jurisdictional/temporal), Jaccard word-similarity | Sprint 12 | P2 |
 | `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 | P2 |
-| `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 13 | P2 |
+| `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 | P2 |
 | `logic/bridge/external_prover_router.py` | `ExternalProverRouterBridgeAdapter`: route TDFOL formulas through the external prover router | Sprint 13 | P2 |
 | `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 14+ | P3 |
 | `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 14+ | P3 |
@@ -282,13 +282,15 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **TDFOL engine** | ✅ `TDFOL/` — `tdfol_core`, `tdfol_prover` (640 lines), `tdfol_parser`, `tdfol_inference_rules`, `modal_tableaux`, `strategies/` | ✅ `TdfolProverBridge` (10 LTL+SDL rules; closes temporal remote fallback) | **CLOSED** — Sprint 10 (T-63–T-67) |
 | **UCAN-ZKP bridge** | ✅ `zkp/ucan_zkp_bridge.py` (592 lines) — `ZKPToUCANBridge`, `ZKPCapabilityEvidence` caveat | ✅ `ZkpUcanBridge` + `ZkpSimulatedProver` (`src/services/zkp/`) | **CLOSED** — Sprint 11 (T-68–T-71) |
 | **ZKP simulated prover** | ✅ `zkp/zkp_prover.py` (289 lines) + `zkp_verifier.py` (313 lines) | ✅ `ZkpSimulatedProver` (hash-based, NOT real Groth16) | **CLOSED** — Sprint 11 |
-| **Deontic Analyzer** | ✅ `deontic/analyzer.py` (503 lines) — regex NL→deontic + conflict detection | ❌ Not implemented | **OPEN** — Sprint 12 P2 |
-| **Deontic Knowledge Base** | ✅ `deontic/knowledge_base.py` (245 lines) — `DeonticKnowledgeBase`, temporal intervals, rule inference | ❌ Not implemented | **OPEN** — Sprint 12 P2 |
-| **Modal frame logic bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) | ❌ Not implemented | **OPEN** — Sprint 13 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 14+ P3 |
+| **Deontic Analyzer** | ✅ `deontic/analyzer.py` (503 lines) — regex NL→deontic + conflict detection | ✅ `DeonticTextAnalyzer` (`src/services/deontic/`) | **CLOSED** — Sprint 12 (T-72–T-75) |
+| **Deontic Knowledge Base** | ✅ `deontic/knowledge_base.py` (245 lines) — `DeonticKnowledgeBase`, temporal intervals, rule inference | ✅ `DeonticKnowledgeBase` (`src/services/deontic/`) | **CLOSED** — Sprint 12 |
+| **Extended TDFOL inference rules** | ✅ `TDFOL/inference_rules/` — 50+ rules across 5 files (temporal/deontic/temporal_deontic/propositional/fol) | ⚠️ Only 10 base rules in `TdfolProverBridge` | **OPEN** — Sprint 13 P2 |
+| **Prover Router Bridge** | ✅ `bridge/external_prover_router.py` (1442 lines) — text → TDFOL formulas → prover router → ProofGateResult | ❌ Not implemented | **OPEN** — Sprint 13 P2 |
+| **Modal frame logic bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) | ❌ Not implemented | **OPEN** — Sprint 14 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 15+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 11):** All formula classes (propositional/fol/modal_deontic/temporal) are handled locally. ZKP→UCAN bridge complete. Remaining: Deontic Analyzer (NL→formal deontic extraction, Sprint 12) + Deontic Knowledge Base (temporal rule inference, Sprint 12) + modal frame logic bridge (Sprint 13).
+**Current status (post Sprint 12):** All formula classes handled locally; ZKP→UCAN done; Deontic Analyzer+KB done. Remaining: extended TDFOL rule set (S4/S5 + propositional + temporal-deontic combined, Sprint 13) + ProverRouterBridgeAdapter (Sprint 13) + modal frame logic (Sprint 14).
 
 ---
 
@@ -676,6 +678,20 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-73 | P2 | Create `src/services/deontic/deontic-knowledge-base.ts` — temporal deontic KB | ✅ DONE | `TimeInterval`/`Party`/`DeonticAction`/`Proposition` (Pred/And/Or/Not/Implies); `DeonticKnowledgeBase.addStatement()/addRule()/addFact()/inferStatements()/checkCompliance()` |
 | T-74 | P2 | Wire `DeonticTextAnalyzer` into `mcp++` tool chain | ✅ DONE | `mcp++ deontic analyze <text>` → JSON `{statements, conflicts, statistics}`; usage help when no text |
 | T-75 | P2 | Write 10+ tests for deontic analyzer + KB | ✅ DONE | `wasm-prover-sprint12.test.ts` — 28 tests (all pass): extraction (8), conflicts (7), stats (2), KB (8), mcp++ (2), Proposition (1) |
+
+---
+
+### Sprint 13 (Phase 13 — Extended TDFOL Rules + ProverRouterBridge, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `TDFOL/inference_rules/` (50+ rules) adds S4/S5 modal axioms, propositional extras,
+> deontic extensions, and 9 temporal-deontic combined rules beyond Sprint 10's 10 base rules.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-76 | P2 | Create `src/services/provers/tdfol-extended-rules.ts` — 14 additional inference rules | ✅ DONE | ModusTollens, HypotheticalSyllogism, DisjunctiveSyllogism, DoubleNegationElim, TemporalS4 (□φ⊢□□φ), TemporalS5 (◊φ⊢□◊φ), ObligationWeakening, PermissionProhibitionDuality, DeonticDetachment, TemporalObligationPersistence, DeonticTemporalIntroduction, AlwaysPermission, ObligationEventually, FutureObligationPersistence |
+| T-77 | P2 | `ExtendedTdfolProverBridge` subclass with full rule set | ✅ DONE | Pre-saturates KB with 14 extended rules before delegating to base TdfolProverBridge; `extendedRuleNames()` |
+| T-78 | P2 | Create `src/services/bridge/prover-router-bridge.ts` — `ProverRouterBridgeAdapter` | ✅ DONE | `evaluate(formulas[]) → ProofGateResult` (valid_count/failure_ratio/details/status); `checkConsistency(formulas[]) → ProofGateResult` (O+F conflict detection) |
+| T-79 | P2 | Write 10+ tests for extended rules + bridge | ✅ DONE | `wasm-prover-sprint13.test.ts` — 19 tests (all pass): extended rules (13), bridge (6) |
 
 ## 8. Prover Capability Matrix
 
