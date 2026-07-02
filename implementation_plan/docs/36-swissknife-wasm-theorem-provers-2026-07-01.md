@@ -1524,6 +1524,20 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 64 (Phase 64 — TDFOL Forward Chaining Strategy + NL Preprocessor + Ambiguity Resolver + Semantic Normalizer + Text to FOL + Legal Text to Deontic, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-297 | P3 | Create `src/services/tdfol-forward-chaining.ts` | `ForwardChainingStrategy` (prove/getStats) — combined in `sprint64-modules.ts` | ✅ DONE |
+| T-298 | P3 | Create `src/services/tdfol-nl-preprocessor.ts` | `ProcessedDocument`; `preprocess(text)` — combined in `sprint64-modules.ts` | ✅ DONE |
+| T-299 | P3 | Create `src/services/cec-ambiguity-resolver.ts` | `AmbiguityResolver`/`SemanticDisambiguator`/`StatisticalDisambiguator` — combined in `sprint64-modules.ts` | ✅ DONE |
+| T-300 | P3 | Create `src/services/flogic-semantic-normalizer.ts` | `SemanticNormalizer`/`getGlobalNormalizer()` — combined in `sprint64-modules.ts` | ✅ DONE |
+| T-301 | P3 | Create `src/services/fol-text-to-fol.ts` | `convertTextToFol`/`extractTextFromDataset`/`getQuantifierDistribution` — combined in `sprint64-modules.ts` | ✅ DONE |
+| T-302 | P3 | Create `src/services/deontic-legal-text.ts` | `legalTextToDeontic`/`extractLegalTextFromDataset`/`convertResultToLegacyFormat` — combined in `sprint64-modules.ts` | ✅ DONE |
+| T-303 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint64.test.ts` | ✅ DONE — 28 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
