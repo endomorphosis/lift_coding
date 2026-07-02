@@ -1479,6 +1479,21 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 61 (Phase 61 — OTel Integration + Syntax Tree + Language Detector + DCEC Namespace + NL Policy Compiler, P3) 🆕
+
+> **5 newly discovered untracked files (refs=0 in plan).**
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-277 | P3 | Create `src/services/otel-integration.ts` | `SpanStatus`/`EventType` enums; `SpanEvent`/`Span` (start/end/addEvent/setAttribute/toDict()); `Trace` (addSpan/getSpan); `OTelTracer` (startSpan/endSpan/getTrace/getStats()); `setupOtelTracer(serviceName)` | ✅ DONE |
+| T-278 | P3 | Create `src/services/cec-syntax-tree.ts` | `NodeType` enum; `SyntaxNode` (type/value/children/addChild/findByType()/toDict()); `SyntaxTree` (root/insert/find/traverse) | ✅ DONE |
+| T-279 | P3 | Create `src/services/cec-language-detector.ts` | `Language` enum (EN/DE/FR/ES/…); `LanguageDetector` (detect(text)/detectBatch(texts)/getConfidence(text,lang)) | ✅ DONE |
+| T-280 | P3 | Create `src/services/cec-dcec-namespace.ts` | `DCECNamespace` (addSort/addPredicate/addFunction/addConstant/lookup/export()); `DCECContainer` (getNamespace/merge/toDict()) | ✅ DONE |
+| T-281 | P3 | Create `src/services/cec-nl-policy-compiler.ts` | `CompilationResult` (clauses/formula/confidence/errors); `compileDcecToClause(formula)`; `NLToPolicyCompiler` (compile(text)/compileBatch(texts)/getStats()) — combined in `cec-dcec-namespace.ts` | ✅ DONE |
+| T-282 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint61.test.ts` | ✅ DONE — 38 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
