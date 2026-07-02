@@ -1380,6 +1380,33 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-241 | P3 | Create `src/services/llm-circuit-breaker.ts` | `CircuitState` enum (CLOSED/OPEN/HALF_OPEN); `CircuitBreakerMetrics` (totalCalls/failedCalls/failureRate/lastFailureTime); `CircuitBreakerOpenError`; `LLMCircuitBreaker` (call(fn)/getState()/getMetrics()/reset()); `getCircuitBreaker(name)/resetAllCircuitBreakers()/getAllStats()` | ✅ DONE |
 | T-242 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint53.test.ts` | ✅ DONE — 50 tests (all pass) |
 
+---
+
+### Sprint 54 (Phase 54 — Grammar NL Policy Compiler + TDFOL NL Generator + DCEC Parsing + ZKP Form Circuit, P3) 🆕
+
+> **Previously untracked gap:** `CEC/nl/grammar_nl_policy_compiler.py` (491L), `TDFOL/nl/tdfol_nl_generator.py` (482L), `CEC/native/dcec_parsing.py` (454L), `zkp/form_circuit.py` (481L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-243 | P3 | Create `src/services/grammar-nl-policy-compiler.ts` | `GrammarCompilationResult` (text/clauses/policyCid/warnings/success/prohibitionClauses/permissionClauses/obligationClauses/toDict()); `GrammarNLPolicyCompiler` (compile(text)/compileBatch(texts)/getStats()); `grammarCompileNlToPolicy(text)` | ✅ DONE |
+| T-244 | P3 | Create `src/services/tdfol-nl-generator.ts` | `GeneratedFormula` (formula/patternMatch/confidence/formulaString/entities/alternatives); `FormulaGenerator` (generateFromMatches(matches)/generateFromText(text)/getStats()) | ✅ DONE |
+| T-245 | P3 | Create `src/services/dcec-parsing.ts` | `ParseToken` (funcName/args/depthOf()/widthOf()/createSExpression()/createFExpression()); `removeComments(expr)`/`functorizSymbols(expr)`/`replaceSynonyms(args)`/`prefixLogicalFunctions(expr)`/`prefixEmdas(expr)` | ✅ DONE |
+| T-246 | P3 | Create `src/services/zkp-form-circuit.ts` | `FormCompletionCircuit` (formId/formTemplateHash/ruleSetHash/verdictsHash/fromRuleSetAndReport()/build()/getPublicInputsDict()); `FormCompletionCertificate` (circuitRef/proofHash/publicInputs/timestamp); `generateFormCertificate(circuit,fieldValues)/verifyFormCertificate(certificate)` | ✅ DONE |
+| T-247 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint54.test.ts` | ✅ DONE — 40 tests (all pass) |
+
+---
+
+### Sprint 55 (Phase 55 — SMT Prover Bridges + ZKP Backends, P3) 🆕
+
+> **Previously untracked gap:** `external_provers/smt/z3_prover_bridge.py` (578L), `external_provers/smt/cvc5_prover_bridge.py` (526L), `zkp/backends/groth16_ffi.py` (613L) + `zkp/backends/provekit_ffi.py` (559L) — combined as a single ZKP backends file.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-248 | P3 | Create `src/services/z3-prover-bridge.ts` | `Z3ProofResult` (isValid/isSat/isUnsat/model/reason/proofTime/isProved()); `Z3ProverBridge` (prove(formula,axioms,timeout)/check(formula)/isAvailable()/getStats()); `proveWithZ3(formula,axioms,timeout)` | ✅ DONE |
+| T-249 | P3 | Create `src/services/cvc5-prover-bridge.ts` | `CVC5ProofResult` (isValid/isSat/isUnsat/proof/reason/proofTime/isProved()); `CVC5ProverBridge` (prove(formula,axioms,timeout)/check(formula)/isAvailable()/getStats()) | ✅ DONE |
+| T-250 | P3 | Create `src/services/zkp-backends.ts` | `ZKPBackendProtocol` (generateProof/verifyProof); `Groth16Proof` (proofData/publicInputs/metadata/toDict()/fromDict()); `Groth16Backend` (generateProof/verifyProof/isAvailable()/getStats()); `Groth16BackendFallback`; `ProveKitFFI` (stub — requires Rust binary) | ✅ DONE |
+| T-251 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint55.test.ts` | ✅ DONE — 35 tests (all pass) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
