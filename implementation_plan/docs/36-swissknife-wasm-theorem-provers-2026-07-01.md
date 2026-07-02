@@ -198,6 +198,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/bridges/external_provers.py` | `ProverStatus`, `ProverResult`, `VampireProver`, `EProver`, `ProverRegistry`, `get_prover_registry()` | Sprint 42 ✅ | P3 |
 | `logic/integration/domain/caselaw_bulk_processor.py` | `CaselawDocument`, `ProcessingStats`, `BulkProcessingConfig`, `CaselawBulkProcessor` | Sprint 42 ✅ | P3 |
 | `logic/integration/reasoning/proof_execution_engine_types.py` | `ProofStatus`, `ProofResult` (proof execution types) | Sprint 42 ✅ | P3 |
+| `logic/integration/__init__.py` | `enable_symbolicai()`, `SYMBOLIC_AI_AVAILABLE`, lazy re-export of all integration symbols | Sprint 43 ✅ | P3 |
+| `logic/integration/interactive/_fol_constructor_io.py` | `FOLConstructorIOMixin` (exportSession/importSession/saveToFile/loadFromFile) | Sprint 43 ✅ | P3 |
+| `logic/integration/bridges/prover_installer.py` | `PlatformInstallProfile`, `detect_platform_install_profile()`, `install_component()` | Sprint 43 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -442,9 +445,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **External Provers** | ✅ `bridges/external_provers.py` (610L) — `ProverStatus`, `ProverResult`, `VampireProver`, `EProver`, `ProverRegistry` | ✅ `external-provers.ts` (`ProverStatus` (6); `VampireProver`/`EProver` stubs; `ProverRegistry.register/get/list/getBestFor/prove`; `getProverRegistry()`) | **CLOSED** — Sprint 42 (T-190) |
 | **Caselaw Bulk Processor** | ✅ `domain/caselaw_bulk_processor.py` (757L) — `CaselawDocument`, `ProcessingStats`, `BulkProcessingConfig`, `CaselawBulkProcessor` | ✅ `caselaw-bulk-processor.ts` (`makeCaselawDocument`; `ProcessingStats.toDict/reset`; `CaselawBulkProcessor.process/processBatch/getStats/reset`; `createBulkProcessor()`) | **CLOSED** — Sprint 42 (T-191) |
 | **Proof Execution Engine Types** | ✅ `reasoning/proof_execution_engine_types.py` (100L) — `ProofStatus`, `ProofResult` (engine types) | ✅ `proof-execution-engine-types.ts` (`ProofStatus` (5); `ProofResult.isProved/failed/toDict()`; `makeProofResult()`) | **CLOSED** — Sprint 42 (T-192) |
+| **Integration Package Init** | ✅ `integration/__init__.py` (334L) — `enable_symbolicai()`, `SYMBOLIC_AI_AVAILABLE`, lazy re-exports | ✅ `integration-init.ts` (`SYMBOLIC_AI_AVAILABLE`; `enableSymbolicAI()/resetSymbolicAI()`; `IntegrationCapabilities` (8 flags); `getIntegrationStatus()/hasCapability()`) | **CLOSED** — Sprint 43 (T-194) |
+| **FOL Constructor IO Mixin** | ✅ `interactive/_fol_constructor_io.py` (299L) — `FOLConstructorIOMixin` (exportSession/importSession/saveToFile) | ✅ `fol-constructor-io-mixin.ts` (`exportSession(json|fol|prolog|tptp)/importSession/convertFormula/serializeSession/deserializeSession`) | **CLOSED** — Sprint 43 (T-195) |
+| **Prover Installer** | ✅ `bridges/prover_installer.py` (867L) — `PlatformInstallProfile`, `detect_platform_install_profile()`, `install_component()` | ✅ `prover-installer.ts` (`PlatformInstallProfile`; `detectPlatformInstallProfile()`; `installComponent(name,profile?,dryRun?)/installComponents()/listKnownComponents()`) | **CLOSED** — Sprint 43 (T-196) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 42):** 42+ modules; external provers + caselaw processor + proof engine types; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 43):** 43+ modules; integration init + FOL constructor I/O + prover installer; ALL integration layer modules complete. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1221,6 +1227,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-191 | P3 | Create `src/services/caselaw-bulk-processor.ts` | ✅ DONE | `CaselawDocument`/`makeCaselawDocument()`; `ProcessingStats` (processingTimeMs/successRate/toDict/reset); `BulkProcessingConfig`/`makeDefaultConfig()`; `CaselawBulkProcessor.process/processBatch/getStats/reset`; `createBulkProcessor()` |
 | T-192 | P3 | Create `src/services/proof-execution-engine-types.ts` | ✅ DONE | `ProofStatus` (5: SUCCESS/FAILURE/TIMEOUT/ERROR/UNSUPPORTED); `ProofResult` (prover/statement/status/proof/timeMs/statistics/isProved/failed/toDict()); `makeProofResult()` |
 | T-193 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint42.test.ts` — 28 tests (all pass) |
+
+---
+
+### Sprint 43 (Phase 43 — Integration Init + FOL Constructor IO + Prover Installer, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `integration/__init__.py` (334L) — `enable_symbolicai()`/`SYMBOLIC_AI_AVAILABLE`; `interactive/_fol_constructor_io.py` (299L) — `FOLConstructorIOMixin`; `bridges/prover_installer.py` (867L) — `PlatformInstallProfile`/`detect_platform_install_profile()`/`install_component()`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-194 | P3 | Create `src/services/integration-init.ts` | ✅ DONE | `SYMBOLIC_AI_AVAILABLE`/`enableSymbolicAI()/resetSymbolicAI()`; `IntegrationCapabilities` (8: tdfolProver/cecEngine/modalLogic/embeddingRetrieval/interactiveFOL/ipfsCache/etc.); `getIntegrationStatus() → IntegrationStatus`; `hasCapability(name)` |
+| T-195 | P3 | Create `src/services/fol-constructor-io-mixin.ts` | ✅ DONE | `FOLConstructorIOMixin.exportSession(session,format?)` (json|fol|prolog|tptp); `importSession(data)/convertFormula(formula,format)/serializeSession()/deserializeSession(json)`; FOL→Prolog/TPTP converters |
+| T-196 | P3 | Create `src/services/prover-installer.ts` | ✅ DONE | `PlatformInstallProfile` (system/arch/packageManager/canInstallSystemPackages); `detectPlatformInstallProfile()`; `installComponent(name,profile?,dryRun?)/installComponents()/listKnownComponents()` — 6 components: z3/vampire/eprover/lean4/coq/cvc5 |
+| T-197 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint43.test.ts` — 28 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
