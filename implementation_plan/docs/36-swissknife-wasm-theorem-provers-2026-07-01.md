@@ -148,7 +148,10 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/TDFOL/countermodels.py` + `countermodel_visualizer.py` | `KripkeStructure` (worlds/accessibility/valuation), `CountermodelVisualizer` (ASCII rendering) | Sprint 25 ✅ | P2 |
 | `logic/TDFOL/tdfol_prover.py` | `TDFOLProver.prove()`, TDFOL inference rules (temporal/deontic necessitation/distribution) | Sprint 25 ✅ | P2 |
 | `logic/TDFOL/performance_dashboard.py` | `ProofMetrics`, `TimeSeriesMetric`, `AggregatedStats`, `PerformanceDashboard` | Sprint 25 ✅ | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 26+ | P3 |
+| `logic/bridge/types.py` | `LogicIRView`, `LegalIRDocument` (canonical hash), `RoundTripMetrics` (fromLossMapping/totalLoss), `GraphProjectionResult`, `BridgeEvaluationReport` | Sprint 26 ✅ | P2 |
+| `logic/bridge/registry.py` | `LogicBridgeSpec`, `logicBridgeSpecs()`, `logicBridgeManifest()`, `loadLogicBridgeAdapter()`, `bridgeNameForComponent()` | Sprint 26 ✅ | P2 |
+| `logic/bridge/zkp_attestation.py` | `ZkpAttestationBridgeAdapter.encode(text) → (LegalIRDocument, context)` | Sprint 26 ✅ | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 27+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -343,10 +346,13 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Kripke Structure + Countermodel Visualizer** | ✅ `TDFOL/countermodel_visualizer.py` (1102L) + `countermodels.py` — `KripkeStructure`, `CountermodelVisualizer` (ASCII/HTML) | ✅ `kripke-structure.ts` (`KripkeStructure`/`CountermodelVisualizer.renderAscii`/`createVisualizer`) | **CLOSED** — Sprint 25 (T-124) |
 | **TDFOL Prover** | ✅ `TDFOL/tdfol_prover.py` (640L) — `TDFOLProver.prove()`, TDFOL inference rules | ✅ `tdfol-prover.ts` (8 rules + axiom/theorem lookup + forward-chaining + tableaux fallback) | **CLOSED** — Sprint 25 (T-125) |
 | **Performance Dashboard** | ✅ `TDFOL/performance_dashboard.py` (1314L) — `ProofMetrics`, `AggregatedStats`, `PerformanceDashboard` | ✅ `performance-dashboard.ts` (`MetricType`/`ProofMetrics`/`AggregatedStats`/`PerformanceDashboard`) | **CLOSED** — Sprint 25 (T-126) |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 26+ P3 |
+| **Bridge Shared Types** | ✅ `bridge/types.py` (413L) — `LogicIRView`, `LegalIRDocument`, `RoundTripMetrics`, `GraphProjectionResult`, `BridgeEvaluationReport` | ✅ `bridge-types.ts` (`LogicIRView`/`LegalIRDocument.canonicalHash()`/`RoundTripMetrics.fromLossMapping`/`ProofGateResult.disabled()`/`BridgeEvaluationReport`) | **CLOSED** — Sprint 26 (T-128) |
+| **Bridge Registry** | ✅ `bridge/registry.py` (285L) — `LogicBridgeSpec`, `logic_bridge_specs()`, `logic_bridge_manifest()`, `load_logic_bridge_adapter()` | ✅ `bridge-registry.ts` (6 specs + `logicBridgeSpecs/Manifest/bridgeNameForComponent`) | **CLOSED** — Sprint 26 (T-129) |
+| **ZKP Attestation Bridge** | ✅ `bridge/zkp_attestation.py` (762L) — `ZkpAttestationBridgeAdapter.encode(text)` | ✅ `zkp-attestation-bridge.ts` (encode/evaluate; 4 views; simulated attestation records) | **CLOSED** — Sprint 26 (T-130) |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 27+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 25):** 25+ modules; complete TDFOL stack (parser/prover/KB/proof-tree/dep-graph/modal-tableaux/kripke-structure/countermodel-viz/perf-profiler/perf-dashboard); all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: formula_builder (Sprint 26+).
+**Current status (post Sprint 26):** 26+ modules; complete bridge layer (shared types/registry/ZKP attestation); complete TDFOL stack; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: formula_builder (Sprint 27+).
 
 ---
 
@@ -904,6 +910,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-125 | P2 | Create `src/services/tdfol-prover.ts` — TDFOL theorem prover | ✅ DONE | `TDFOLInferenceRule` interface; 8 rules: Temporal/DeonticNecessitation, Temporal/DeonticDistribution, TemporalTRule, DeonticDRule, ProhibitionElimination, PermissionIntroduction; `TDFOLProver.prove()` — axiom lookup → forward-chaining → `ModalTableaux` fallback; `defaultTdfolRules()` |
 | T-126 | P2 | Create `src/services/performance-dashboard.ts` — performance dashboard | ✅ DONE | `MetricType` enum; `ProofMetrics`/`makeProofMetrics`; `AggregatedStats` (p95/p99 percentiles/strategyStats); `PerformanceDashboard.record()/getAggregatedStats()/getTimeSeries()/exportJson()/reset()`; `getGlobalDashboard()/resetGlobalDashboard()` |
 | T-127 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint25.test.ts` — 30 tests (all pass): KripkeStructure (7), CountermodelVisualizer (6), TDFOLProver (8), PerformanceDashboard (9) |
+
+---
+
+### Sprint 26 (Phase 26 — Bridge Shared Types + Registry + ZKP Attestation Bridge, P2) ✅ DONE (2026-07-01)
+
+> **Gap:** `bridge/types.py` (413L) — `LogicIRView`, `LegalIRDocument`, `RoundTripMetrics`, `ProofGateResult`, `GraphProjectionResult`, `BridgeEvaluationReport`; `bridge/registry.py` (285L) — `LogicBridgeSpec`, 6 registered bridges, `logicBridgeSpecs/Manifest/loadAdapter`; `bridge/zkp_attestation.py` (762L) — `ZkpAttestationBridgeAdapter.encode()`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-128 | P2 | Create `src/services/bridge-types.ts` — bridge shared types | ✅ DONE | `LogicIRView`/`LegalIRDocument` (canonicalHash/toJson); `RoundTripMetrics.fromLossMapping()/totalLoss()`; `ProofGateResult` (compiles/failureRatio/disabled()); `GraphProjectionResult`; `BridgeEvaluationReport` |
+| T-129 | P2 | Create `src/services/bridge-registry.ts` — bridge adapter registry | ✅ DONE | `LogicBridgeSpec` + `SPECS` (6 bridges); `logicBridgeSpecs(implementedOnly?)`; `logicBridgeSpec(name)`; `logicBridgeManifest()` (bridge_count/roles/target_components); `bridgeNameForComponent(target)` |
+| T-130 | P2 | Create `src/services/zkp-attestation-bridge.ts` — ZKP attestation bridge | ✅ DONE | `ZkpAttestationBridgeAdapter.encode(text, opts) → {doc, context}` — 4 views (zkp_attestations/zkp_public_inputs/frame_logic/neo4j_graph_data); per-formula attestation records; `.evaluate()` → `BridgeEvaluationReport` |
+| T-131 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint26.test.ts` — 36 tests (all pass): LogicIRView (2), LegalIRDocument (7), RoundTripMetrics (4), ProofGateResult (4), logicBridgeSpecs (3), logicBridgeSpec (2), logicBridgeManifest (3), bridgeNameForComponent (4), ZkpAttestationBridgeAdapter (7) |
 
 ## 8. Prover Capability Matrix
 
