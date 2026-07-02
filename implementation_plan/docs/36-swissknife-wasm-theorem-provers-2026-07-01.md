@@ -1270,6 +1270,32 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-203 | P3 | Create `src/services/formula-analyzer.ts` | `FormulaType` (DEONTIC/TEMPORAL/MODAL/FOL/PROPOSITIONAL/UNKNOWN); `FormulaComplexity` (SIMPLE/MODERATE/COMPLEX/VERY_COMPLEX); `FormulaAnalysis` (formulaType/complexity/operators/quantifiers/depth/confidence/toDict()); `FormulaAnalyzer.analyze(formula)/classifyType(formula)/measureComplexity(formula)` | ✅ DONE |
 | T-204 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint45.test.ts` | ✅ DONE — 40 tests (all pass) |
 
+---
+
+### Sprint 46 (Phase 46 — ShadowProver + Temporal Inference Rules + ProverRouter, P3) 🆕
+
+> **Previously untracked gap:** `CEC/native/shadow_prover.py` (716L) — `ModalLogic/ProofStatus/ProofStep/ProofTree/ProblemFile/ShadowProver/KProver`; `TDFOL/inference_rules/temporal.py` (648L) — 15+ LTL axiom rule classes; `external_provers/prover_router.py` (1008L) — `ProverStrategy/RouterProofResult/ProverRouter`.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-205 | P3 | Create `src/services/shadow-prover.ts` | `ModalLogic` enum (K/T/S4/S5/D/LP); `ProofStatus` (SUCCESS/FAILURE/TIMEOUT/ERROR); `ProofStep` (ruleName/premises/conclusion); `ProofTree` (goal/steps/status/logic/isSuccessful()/getDepth()); `ProblemFile`; `ShadowProver` abstract; `KProver` concrete impl | ✅ DONE |
+| T-206 | P3 | Create `src/services/temporal-inference-rules.ts` | 15+ rules: `TemporalKAxiomRule`, `TemporalTAxiomRule`, `TemporalS4AxiomRule`, `TemporalS5AxiomRule`, `EventuallyIntroductionRule`, `AlwaysNecessitationRule`, `UntilUnfoldingRule`, `UntilInductionRule`, `EventuallyExpansionRule`, `AlwaysDistributionRule`, `AlwaysEventuallyExpansionRule`, `EventuallyAlwaysContractionRule`, `UntilReleaseDualityRule`, `WeakUntilExpansionRule`, `NextDistributionRule`; each implements `canApply()`/`apply()`/`name`/`description` | ✅ DONE |
+| T-207 | P3 | Create `src/services/prover-router.ts` | `ProverStrategy` enum (AUTO/FASTEST/MOST_CAPABLE/PARALLEL/SEQUENTIAL); `RouterProofResult` (isProved/proverUsed/proofTime/allResults/strategyUsed/reason); `ProverRouter` (prove(formula, strategy)/proveParallel()/selectBest()/getAvailableProvers()/getStats()) | ✅ DONE |
+| T-208 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint46.test.ts` | ✅ DONE — 48 tests (all pass) |
+
+---
+
+### Sprint 47 (Phase 47 — TDFOL NL Patterns + NL Policy Conflict Detector + LLM Prompt Builder, P3) 🆕
+
+> **Previously untracked gap:** `TDFOL/nl/tdfol_nl_patterns.py` (826L) — `PatternType/Pattern/PatternMatch/PatternMatcher`; `CEC/nl/nl_policy_conflict_detector.py` (794L) — `PolicyConflict/NLPolicyConflictDetector`; `TDFOL/nl/llm.py` (724L) — `LLMParseResult/LLMResponseCache/build_conversion_prompt()`.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-209 | P3 | Create `src/services/tdfol-nl-patterns.ts` | `PatternType` enum; `Pattern` (name/type/textPattern/description/examples); `PatternMatch` (pattern/span/text/entities/confidence); `PatternMatcher` (match(text)/matchAll(texts)/getPatterns()/addPattern()) — regex-based (spaCy not ported) | ✅ DONE |
+| T-210 | P3 | Create `src/services/nl-policy-conflict-detector.ts` | `PolicyConflict` (conflictType/action/resource/actors/clauseTypes/description/toDict()); `NLPolicyConflictDetector` (detect(clauses)/detectAndWarn(clauses)); `detectConflicts()` module-level convenience fn | ✅ DONE |
+| T-211 | P3 | Create `src/services/tdfol-nl-llm.ts` | `LLMParseResult` (formula/confidence/method/alternatives/errors); `LLMResponseCache` (get/set/clear/size); `buildConversionPrompt(text)/buildValidationPrompt(formula)/buildErrorCorrectionPrompt(formula, errors)/getOperatorHintsForText(text)` | ✅ DONE |
+| T-212 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint47.test.ts` | ✅ DONE — 43 tests (all pass) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
