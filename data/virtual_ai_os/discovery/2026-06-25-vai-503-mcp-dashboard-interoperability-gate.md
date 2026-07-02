@@ -25,7 +25,7 @@ supervisor-generated follow-up subtasks for `ipfs_kit_py`,
   "catalog_source": "hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js",
   "catalog_schema": "hallucinate_app.mcp_dashboard_capability_catalog.v1",
   "catalog_normalization": [
-    "ipfs_kit_py endpoint http://127.0.0.1:8004",
+    "ipfs_kit_py endpoint http://127.0.0.1:8014",
     "ipfs_datasets_py native dashboard catalog http://127.0.0.1:8899/api/hallucinate/dashboard-catalog",
     "ipfs_accelerate_py MCP++ profile mcp++/profile-e-mcp-p2p"
   ],
@@ -49,7 +49,7 @@ supervisor-generated follow-up subtasks for `ipfs_kit_py`,
   },
   "swissknife_consumers": {
     "source": "swissknife/src/services/swissknife-mcp-capability-registry.ts",
-    "ipfs_kit_py_port": 8004,
+    "ipfs_kit_py_port": 8014,
     "shared_receipt_schema": "mcp_server_invocation_receipt_v1",
     "consumer_test": "swissknife/test/mcp-plus-plus/ipfs-ui-descriptors.test.ts"
   },

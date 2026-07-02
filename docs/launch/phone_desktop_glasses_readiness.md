@@ -428,6 +428,20 @@ subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
 backend validation failure remains supervisor-generated follow-up work for
 `VAIOS-G723`.
 
+MGW-563 attempt 3 records the current July 2 validation pass in
+`data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-563-attempt-3-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-02-mgw-563-attempt-3-validation.md`.
+The run passed the backlog/objective queue tests, Hallucinate daemon-manager
+catalog test, Hallucinate MCP dashboard backend Playwright gate, no-display
+Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife
+Meta glasses gate, and Hallucinate multimodal `control_surface` gate while
+preserving the MGW-563 catalog entry for catalog normalization, dashboard UI
+wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
+applications for `VAIOS-G723`.
+
 The executable gate is:
 
 ```bash
