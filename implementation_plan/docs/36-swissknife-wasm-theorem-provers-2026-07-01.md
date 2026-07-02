@@ -192,6 +192,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/symbolic/neurosymbolic/embedding_prover.py` | `EmbeddingEnhancedProver` (computeSimilarity/prove/retrieveSimilar) | Sprint 40 ✅ | P3 |
 | `logic/integration/reasoning/_prover_backend_mixin.py` | `ProverBackendMixin` (Z3/Lean4/Coq execution + consistency check) | Sprint 40 ✅ | P3 |
 | `logic/integration/bridges/symbolic_fol_bridge.py` | `LogicalComponents`, `FOLConversionResult`, `SymbolicFOLBridge` | Sprint 40 ✅ | P3 |
+| `logic/integration/bridges/tdfol_shadowprover_bridge.py` | `ModalLogicType`, `TDFOLShadowProverBridge`, `ModalAwareTDFOLProver` | Sprint 41 ✅ | P3 |
+| `logic/integration/reasoning/_logic_verifier_backends_mixin.py` | `LogicVerifierBackendsMixin` (consistency check + fallback backends) | Sprint 41 ✅ | P3 |
+| `logic/integration/reasoning/proof_execution_engine_utils.py` | `createProofEngine()`, `proveFormula()`, `proveWithAllProvers()`, `checkConsistency()`, `getLeanTemplate()` | Sprint 41 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -430,9 +433,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Embedding Enhanced Prover** | ✅ `symbolic/neurosymbolic/embedding_prover.py` (240L) — `EmbeddingEnhancedProver` | ✅ `embedding-prover.ts` (`cosineSimilarity()`; `EmbeddingEnhancedProver.computeSimilarity/prove(exact+similarity)/retrieveSimilar/cacheSize`) | **CLOSED** — Sprint 40 (T-182) |
 | **Prover Backend Mixin** | ✅ `reasoning/_prover_backend_mixin.py` (527L) — `ProverBackendMixin` | ✅ `prover-backend-mixin.ts` (`generateDeonticSMT2Axioms()`; `ProverBackendMixin.executeZ3/Lean4/Coq Proof/checkConsistency`) | **CLOSED** — Sprint 40 (T-183) |
 | **Symbolic FOL Bridge** | ✅ `bridges/symbolic_fol_bridge.py` (764L) — `LogicalComponents`, `FOLConversionResult`, `SymbolicFOLBridge` | ✅ `symbolic-fol-bridge.ts` (`LogicalComponents` (dict-like); `SymbolicFOLBridge.extractComponents/convert/validate`) | **CLOSED** — Sprint 40 (T-184) |
+| **TDFOL ShadowProver Bridge** | ✅ `bridges/tdfol_shadowprover_bridge.py` (596L) — `ModalLogicType`, `TDFOLShadowProverBridge`, `ModalAwareTDFOLProver` | ✅ `tdfol-shadowprover-bridge.ts` (`ModalLogicType` (5); `TDFOLShadowProverBridge extends BaseProverBridge`; `ModalAwareTDFOLProver.proveModal/proveInSystem/proveInAllSystems`) | **CLOSED** — Sprint 41 (T-186) |
+| **Logic Verifier Backends Mixin** | ✅ `reasoning/_logic_verifier_backends_mixin.py` (293L) — `LogicVerifierBackendsMixin` | ✅ `logic-verifier-backends-mixin.ts` (`checkConsistencyFallback/Symbolic/findConflictingPairs`) | **CLOSED** — Sprint 41 (T-187) |
+| **Proof Execution Engine Utils** | ✅ `reasoning/proof_execution_engine_utils.py` (206L) — `createProofEngine()`, `proveFormula()`, `proveWithAllProvers()`, `getLeanTemplate()` | ✅ `proof-execution-engine-utils.ts` (`ProofEngine.prove/proveAll/checkConsistency`; utils; Lean4 D-axiom template) | **CLOSED** — Sprint 41 (T-188) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 40):** 40+ modules; embedding prover + prover backend mixin + symbolic FOL bridge; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 41):** 41+ modules; TDFOL ShadowProver bridge + logic verifier backends + proof engine utils; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1183,6 +1189,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-183 | P3 | Create `src/services/prover-backend-mixin.ts` | ✅ DONE | `generateDeonticSMT2Axioms()` (declarations+axioms+combined SMT-LIB2); `ProverBackendMixin.executeZ3Proof/executeLean4Proof/executeCoqProof/checkConsistency()` — simulated backends |
 | T-184 | P3 | Create `src/services/symbolic-fol-bridge.ts` | ✅ DONE | `LogicalComponents` (quantifiers/predicates/entities/connectives; dict-like `get/keys/items/toDict`); `SymbolicFOLBridge.extractComponents(text)/convert(text)/validate(formula)` (parenthesis balance check) |
 | T-185 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint40.test.ts` — 30 tests (all pass) |
+
+---
+
+### Sprint 41 (Phase 41 — TDFOL ShadowProver Bridge + Logic Verifier Backends + Proof Engine Utils, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `bridges/tdfol_shadowprover_bridge.py` (596L) — `ModalLogicType`/`TDFOLShadowProverBridge`/`ModalAwareTDFOLProver`; `reasoning/_logic_verifier_backends_mixin.py` (293L) — `LogicVerifierBackendsMixin`; `reasoning/proof_execution_engine_utils.py` (206L) — `createProofEngine()`/`proveFormula()`/`proveWithAllProvers()`/`getLeanTemplate()`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-186 | P3 | Create `src/services/tdfol-shadowprover-bridge.ts` | ✅ DONE | `ModalLogicType` (K/T/S4/S5/D); `TDFOLShadowProverBridge extends BaseProverBridge` (O/P/F→Obligatory/Permitted/Forbidden); `ModalAwareTDFOLProver.proveModal(auto)/proveInSystem/proveInAllSystems()`; `createModalAwareProver()` |
+| T-187 | P3 | Create `src/services/logic-verifier-backends-mixin.ts` | ✅ DONE | `ConsistencyCheckResult`; `LogicVerifierBackendsMixin.checkConsistencyFallback/checkConsistencySymbolic/findConflictingPairs/checkConsistency()` — O/F and φ/¬φ conflict detection |
+| T-188 | P3 | Create `src/services/proof-execution-engine-utils.ts` | ✅ DONE | `ProofEngine.prove(prover)/proveAll/checkConsistency`; `createProofEngine()/proveFormula()/proveWithAllProvers()/checkConsistency()/getLeanTemplate()` — Lean 4 D-axiom template |
+| T-189 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint41.test.ts` — 26 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
