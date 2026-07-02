@@ -1366,6 +1366,20 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-236 | P3 | Create `src/services/zkp-trace.ts` | `TDFOLTraceNotDerivableError`, `TDFOLTraceBoundExceededError`, `TDFOLTraceSchemaError`; `TDFOLTraceStep`; `TDFOLTraceWitness`; `buildTdfolV1TraceWitness(axioms, theorem)/validateTdfolV1TraceWitness(witness)` | ✅ DONE |
 | T-237 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint52.test.ts` | ✅ DONE — 40 tests (all pass) |
 
+---
+
+### Sprint 53 (Phase 53 — Cognitive Inference Rules + Lemma Generation + Proof Strategies + Monitoring, P3) 🆕
+
+> **Previously untracked gap:** `CEC/native/inference_rules/cognitive.py` (569L), `CEC/native/lemma_generation.py` (501L), `CEC/native/proof_strategies.py` (458L), `monitoring.py` (452L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-238 | P3 | Create `src/services/cognitive-inference-rules.ts` | 10 cognitive inference rule classes: `BeliefDistribution`, `KnowledgeImpliesBelief`, `BeliefMonotonicity`, `IntentionCommitment`, `BeliefConjunction`, `KnowledgeDistribution`, `IntentionMeansEnd`, `PerceptionImpliesKnowledge`, `BeliefNegation`, `KnowledgeConjunction`; `ALL_COGNITIVE_RULES` registry | ✅ DONE |
+| T-239 | P3 | Create `src/services/lemma-generation.ts` | `LemmaType` enum; `Lemma` (type/statement/premises/confidence); `LemmaCache` (add/get/contains/clear); `LemmaGenerator` (generateFormulaLemmas/generateKBLemmas/getStats); `createLemmaGenerator()` | ✅ DONE |
+| T-240 | P3 | Create `src/services/proof-strategies.ts` | `StrategyType` enum; abstract `ProofStrategy` (prove(goal, assumptions)/getStats); `ForwardChainingStrategy`; `BackwardChainingStrategy`; `BidirectionalStrategy`; `HybridStrategy`; `getStrategy(type, maxSteps)` | ✅ DONE |
+| T-241 | P3 | Create `src/services/llm-circuit-breaker.ts` | `CircuitState` enum (CLOSED/OPEN/HALF_OPEN); `CircuitBreakerMetrics` (totalCalls/failedCalls/failureRate/lastFailureTime); `CircuitBreakerOpenError`; `LLMCircuitBreaker` (call(fn)/getState()/getMetrics()/reset()); `getCircuitBreaker(name)/resetAllCircuitBreakers()/getAllStats()` | ✅ DONE |
+| T-242 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint53.test.ts` | ✅ DONE — 50 tests (all pass) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
