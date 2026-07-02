@@ -127,11 +127,12 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/ml_confidence.py` | `MLConfidenceScorer`: heuristic confidence scoring (fallback from XGBoost/LightGBM; pure math) | Sprint 15 ✅ | P2 |
 | `logic/deontic/utils/deontic_parser.py` | `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | Sprint 18 ✅ | P2 |
 | `logic/deontic/prover_syntax.py` | `ProverTargetSyntaxRecord`, `ProverSyntaxReport`, `build_prover_syntax_records_from_ir()` | Sprint 18 ✅ | P2 |
-| `logic/monitoring.py` | `LogicMonitor`: operation tracking, metrics (counter/gauge/histogram), `track_operation()`, `get_metrics()`, health checks | Sprint 19 | P2 |
-| `logic/submodule_registry.py` | `LogicSubmoduleSpec`, `logic_submodule_specs()`, `logic_integration_manifest()` | Sprint 19 | P2 |
-| `logic/batch_processing.py` | `BatchResult`, async/parallel batch formula evaluation | Sprint 19 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 20+ | P3 |
-| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 20+ | P3 |
+| `logic/monitoring.py` | `LogicMonitor`: operation tracking, metrics (counter/gauge/histogram), `track_operation()`, `get_metrics()`, health checks | Sprint 19 ✅ | P2 |
+| `logic/submodule_registry.py` | `LogicSubmoduleSpec`, `logic_submodule_specs()`, `logic_integration_manifest()` | Sprint 19 ✅ | P2 |
+| `logic/batch_processing.py` | `BatchResult`, async/parallel batch formula evaluation | Sprint 19 ✅ | P2 |
+| `logic/api.py` | Public API facade: `I18NConflictReport`, `compileNlToPolicy()`, `evaluateNlPolicy()` | Sprint 20 | P2 |
+| `logic/e2e_validation.py` | `E2EValidator`, `ValidationResult`: end-to-end pipeline validation | Sprint 20 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 21+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -305,13 +306,16 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **LegalNorm Decoder** | ✅ `deontic/decoder.py` (932 lines) — deterministic text renderer | ✅ `decodeLegalNormIR()` + `decodedPhraseSlotTextMap()` + `LegalNormBuilder` | **CLOSED** — Sprint 17 |
 | **Deontic Parser Utils** | ✅ `deontic/utils/deontic_parser.py` (5589 lines) — `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | ✅ `DeonticParserUtils` + `NormativeConflictDetector` | **CLOSED** — Sprint 18 (T-96–T-99) |
 | **Prover Syntax Builder** | ✅ `deontic/prover_syntax.py` (1652 lines) — `ProverTargetSyntaxRecord`, `validate_ir_with_provers()`, `build_prover_syntax_records_from_ir()` | ✅ `ProverSyntaxBuilder` (z3-smt2/dcec/tdfol/lean4/prolog) | **CLOSED** — Sprint 18 |
-| **Logic Monitor** | ✅ `monitoring.py` (452 lines) — `LogicMonitor`, operation tracking, metrics | ❌ Not implemented | **OPEN** — Sprint 19 P2 |
-| **Submodule Registry** | ✅ `submodule_registry.py` (614 lines) — `LogicSubmoduleSpec`, `logic_integration_manifest()` | ❌ Not implemented | **OPEN** — Sprint 19 P2 |
-| **Batch Processor** | ✅ `batch_processing.py` (389 lines) — `BatchResult`, async batch formula evaluation | ❌ Not implemented | **OPEN** — Sprint 19 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 20+ P3 |
+| **Logic Monitor** | ✅ `monitoring.py` (452 lines) — `LogicMonitor`, operation tracking, metrics | ✅ `LogicMonitor` (`src/services/logic-monitor.ts`) | **CLOSED** — Sprint 19 (T-100–T-103) |
+| **Submodule Registry** | ✅ `submodule_registry.py` (614 lines) — `LogicSubmoduleSpec`, `logic_integration_manifest()` | ✅ `SubmoduleRegistry` + `getIntegrationManifest()` | **CLOSED** — Sprint 19 |
+| **Batch Processor** | ✅ `batch_processing.py` (389 lines) — `BatchResult`, async batch formula evaluation | ✅ `BatchProcessor` (`src/services/batch-processor.ts`) | **CLOSED** — Sprint 19 |
+| **I18N Conflict Report** | ✅ `api.py` (723 lines) — `I18NConflictReport` (multi-language conflict detection report) | ❌ Not implemented | **OPEN** — Sprint 20 P2 |
+| **E2E Validator** | ✅ `e2e_validation.py` (691 lines) — `E2EValidator`, `ValidationResult` | ❌ Not implemented | **OPEN** — Sprint 20 P2 |
+| **Logic Public API** | ✅ `api.py` (723 lines) — top-level `LogicPublicApi` facade, `compileNlToPolicy()`, `evaluateNlPolicy()` | ❌ Not implemented | **OPEN** — Sprint 20 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 21+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 18):** Complete NL→FOL→LegalNormIR→decoded pipeline; all provers local (propositional/fol/modal_deontic/temporal/higher_order); ZKP→UCAN; Deontic Graph+KB+Analyzer+ParserUtils+ProverSyntax. Remaining: monitoring + submodule registry + batch processor (Sprint 19 P2) + formula_builder (Sprint 20+ P3).
+**Current status (post Sprint 19):** 19 modules across Sprints 1–19; all provers local; ZKP→UCAN; full NL→FOL→LegalNormIR→prover pipeline; monitoring + registry + batch. Remaining: I18N conflict + E2E validator + PublicApi facade (Sprint 20 P2) + formula_builder (Sprint 21+ P3).
 
 ---
 
@@ -791,6 +795,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-101 | P2 | Create `src/services/submodule-registry.ts` — logic submodule registry | ✅ DONE | `LogicSubmoduleSpec`; registry of 19 modules (Sprints 1–18); `getSubmoduleSpecs()`, `getSubmoduleSpec(name)`, `getSubmoduleNames(filter?)`, `getIntegrationManifest()` |
 | T-102 | P2 | Create `src/services/batch-processor.ts` — batch formula evaluator | ✅ DONE | `BatchResult<T>` + `successRate()`; `BatchProcessor.process(items,fn,opts?)` (concurrency/timeout/onProgress); `processSerial()` |
 | T-103 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint19.test.ts` — 24 tests (all pass): LogicMonitor (9), Registry (8), BatchProcessor (7) |
+
+---
+
+### Sprint 20 (Phase 20 — I18N Conflict + E2E Validator + Logic Public API, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `api.py` (723L) + `e2e_validation.py` (691L). Sprint 20 = final integration layer.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-104 | P2 | Create `src/services/i18n-conflict-report.ts` | ✅ DONE | `I18NConflictReport`: totalConflicts/languagesWithConflicts/mostConflictedLanguage()/leastConflictedLanguage()/conflictDensity()/hasConflicts()/toDict(); `detectMultilingualConflicts()` |
+| T-105 | P2 | Create `src/services/e2e-validator.ts` | ✅ DONE | `ValidationResult`; `E2EValidator.run() → ValidationSummary`; 7 test suites |
+| T-106 | P2 | Create `src/services/logic-public-api.ts` | ✅ DONE | `LogicPublicApi`: compileNlToPolicy()/evaluateNlPolicy()/analyzeText()/detectMultilingualConflicts()/getSubmoduleSpecs()/getIntegrationManifest()/analyzeTexts() |
+| T-107 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint20.test.ts` — 16 tests (all pass): I18NConflictReport (5), E2EValidator (3), LogicPublicApi (8) |
 
 ## 8. Prover Capability Matrix
 
