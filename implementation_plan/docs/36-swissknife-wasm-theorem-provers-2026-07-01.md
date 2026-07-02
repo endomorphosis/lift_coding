@@ -125,10 +125,13 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 14 ✅ | P2 |
 | `logic/flogic_optimizer.py` | `FLogicSemanticOptimizer`: cosine similarity scoring + F-logic consistency checking for round-trip quality | Sprint 15 ✅ | P2 |
 | `logic/ml_confidence.py` | `MLConfidenceScorer`: heuristic confidence scoring (fallback from XGBoost/LightGBM; pure math) | Sprint 15 ✅ | P2 |
-| `logic/deontic/utils/deontic_parser.py` | `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | Sprint 18 | P2 |
-| `logic/deontic/prover_syntax.py` | `ProverTargetSyntaxRecord`, `ProverSyntaxReport`, `build_prover_syntax_records_from_ir()` | Sprint 18 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 19+ | P3 |
-| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 19+ | P3 |
+| `logic/deontic/utils/deontic_parser.py` | `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | Sprint 18 ✅ | P2 |
+| `logic/deontic/prover_syntax.py` | `ProverTargetSyntaxRecord`, `ProverSyntaxReport`, `build_prover_syntax_records_from_ir()` | Sprint 18 ✅ | P2 |
+| `logic/monitoring.py` | `LogicMonitor`: operation tracking, metrics (counter/gauge/histogram), `track_operation()`, `get_metrics()`, health checks | Sprint 19 | P2 |
+| `logic/submodule_registry.py` | `LogicSubmoduleSpec`, `logic_submodule_specs()`, `logic_integration_manifest()` | Sprint 19 | P2 |
+| `logic/batch_processing.py` | `BatchResult`, async/parallel batch formula evaluation | Sprint 19 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 20+ | P3 |
+| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 20+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -300,12 +303,15 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Support Map** | ✅ `deontic/support_map.py` (167 lines) — `SupportFact`, `SupportMapEntry`, `SupportMapBuilder` | ✅ `SupportMapBuilder` (`src/services/deontic/`) | **CLOSED** — Sprint 16 |
 | **LegalNormIR** | ✅ `deontic/ir.py` (2720 lines) — `LegalNormIR` typed IR dataclass (modality/actor/action/conditions/temporal/penalties) | ✅ `LegalNormIR` + `buildLegalNormIR()` + `emptySpan()/emptyQuality()` | **CLOSED** — Sprint 17 (T-92–T-95) |
 | **LegalNorm Decoder** | ✅ `deontic/decoder.py` (932 lines) — deterministic text renderer | ✅ `decodeLegalNormIR()` + `decodedPhraseSlotTextMap()` + `LegalNormBuilder` | **CLOSED** — Sprint 17 |
-| **Deontic Parser Utils** | ✅ `deontic/utils/deontic_parser.py` (5589 lines) — `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | ❌ Not implemented | **OPEN** — Sprint 18 P2 |
-| **Prover Syntax Builder** | ✅ `deontic/prover_syntax.py` (1652 lines) — `ProverTargetSyntaxRecord`, `validate_ir_with_provers()`, `build_prover_syntax_records_from_ir()` | ❌ Not implemented | **OPEN** — Sprint 18 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 19+ P3 |
+| **Deontic Parser Utils** | ✅ `deontic/utils/deontic_parser.py` (5589 lines) — `classify_modal()`, `classify_legal_entity()`, `identify_obligations()`, `detect_normative_conflicts()`, `score_scaffold_quality()` | ✅ `DeonticParserUtils` + `NormativeConflictDetector` | **CLOSED** — Sprint 18 (T-96–T-99) |
+| **Prover Syntax Builder** | ✅ `deontic/prover_syntax.py` (1652 lines) — `ProverTargetSyntaxRecord`, `validate_ir_with_provers()`, `build_prover_syntax_records_from_ir()` | ✅ `ProverSyntaxBuilder` (z3-smt2/dcec/tdfol/lean4/prolog) | **CLOSED** — Sprint 18 |
+| **Logic Monitor** | ✅ `monitoring.py` (452 lines) — `LogicMonitor`, operation tracking, metrics | ❌ Not implemented | **OPEN** — Sprint 19 P2 |
+| **Submodule Registry** | ✅ `submodule_registry.py` (614 lines) — `LogicSubmoduleSpec`, `logic_integration_manifest()` | ❌ Not implemented | **OPEN** — Sprint 19 P2 |
+| **Batch Processor** | ✅ `batch_processing.py` (389 lines) — `BatchResult`, async batch formula evaluation | ❌ Not implemented | **OPEN** — Sprint 19 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 20+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 17):** Complete NL→FOL→LegalNormIR→decoded pipeline; all provers local; ZKP→UCAN; DeonticGraph+KB. Remaining: parser utils + prover syntax (Sprint 18 P2) + formula_builder (Sprint 19+ P3).
+**Current status (post Sprint 18):** Complete NL→FOL→LegalNormIR→decoded pipeline; all provers local (propositional/fol/modal_deontic/temporal/higher_order); ZKP→UCAN; Deontic Graph+KB+Analyzer+ParserUtils+ProverSyntax. Remaining: monitoring + submodule registry + batch processor (Sprint 19 P2) + formula_builder (Sprint 20+ P3).
 
 ---
 
@@ -772,6 +778,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-97 | P2 | Create `src/services/deontic/normative-conflict-detector.ts` — conflict detector | ✅ DONE | `identifyObligations() → {obligations,permissions,prohibitions,conditionalNorms,temporalNorms}`; `detectNormativeConflicts() → NormConflict[]` (direct/permission/conditional/temporal) |
 | T-98 | P2 | Create `src/services/deontic/prover-syntax-builder.ts` — prover syntax builder | ✅ DONE | `ProverSyntaxBuilder.buildSyntaxReport(norm) → ProverSyntaxReport` with records for z3-smt2/dcec/tdfol/lean4/prolog targets; `buildBatch()` |
 | T-99 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint18.test.ts` — 30 tests (all pass): classifyModal (6), classifyLegalEntity (6), utils (4), scoreQuality (2), identifyObligs (2), detectConflicts (3), ProverSyntaxBuilder (7) |
+
+---
+
+### Sprint 19 (Phase 19 — Logic Monitor + Submodule Registry + Batch Processor, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `monitoring.py` (452L) + `submodule_registry.py` (614L) + `batch_processing.py` (389L).
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-100 | P2 | Create `src/services/logic-monitor.ts` — operation tracking + metrics | ✅ DONE | `LogicMonitor.trackOperation(op,fn)`, `trackSync()`, `recordError()`, `getMetrics() → MetricsSnapshot`, `getHealthStatus() → {healthy/degraded/unhealthy}`, `resetMetrics()`, singleton |
+| T-101 | P2 | Create `src/services/submodule-registry.ts` — logic submodule registry | ✅ DONE | `LogicSubmoduleSpec`; registry of 19 modules (Sprints 1–18); `getSubmoduleSpecs()`, `getSubmoduleSpec(name)`, `getSubmoduleNames(filter?)`, `getIntegrationManifest()` |
+| T-102 | P2 | Create `src/services/batch-processor.ts` — batch formula evaluator | ✅ DONE | `BatchResult<T>` + `successRate()`; `BatchProcessor.process(items,fn,opts?)` (concurrency/timeout/onProgress); `processSerial()` |
+| T-103 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint19.test.ts` — 24 tests (all pass): LogicMonitor (9), Registry (8), BatchProcessor (7) |
 
 ## 8. Prover Capability Matrix
 
