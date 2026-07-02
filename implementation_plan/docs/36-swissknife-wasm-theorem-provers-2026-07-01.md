@@ -139,10 +139,13 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/TDFOL/exceptions.py` | TDFOL exception hierarchy: `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | Sprint 22 ✅ | P2 |
 | `logic/TDFOL/tdfol_optimization.py` | `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | Sprint 22 ✅ | P2 |
 | `logic/TDFOL/security_validator.py` | Formula input security validation (injection/overflow protection) | Sprint 22 ✅ | P2 |
-| `logic/TDFOL/tdfol_core.py` | TDFOL core type hierarchy: `TDFOLNode`, `Term`/`Variable`/`Constant`, `Formula`/`Predicate`/`BinaryFormula`/`UnaryFormula`/`QuantifiedFormula`, `TDFOLKnowledgeBase` | Sprint 23 | P2 |
-| `logic/TDFOL/proof_tree_visualizer.py` | `ProofTreeNode` (formula/rule/justification/children), `ProofTree`, ASCII rendering | Sprint 23 | P2 |
-| `logic/TDFOL/formula_dependency_graph.py` | `FormulaDependencyGraph` (addNode/addEdge/topologicalSort/detectCycles/findProofChain) | Sprint 23 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 24+ | P3 |
+| `logic/TDFOL/tdfol_core.py` | TDFOL core type hierarchy: `TDFOLNode`, `Term`/`Variable`/`Constant`, `Formula`/`Predicate`/`BinaryFormula`/`UnaryFormula`/`QuantifiedFormula`, `TDFOLKnowledgeBase` | Sprint 23 ✅ | P2 |
+| `logic/TDFOL/proof_tree_visualizer.py` | `ProofTreeNode` (formula/rule/justification/children), `ProofTree`, ASCII rendering | Sprint 23 ✅ | P2 |
+| `logic/TDFOL/formula_dependency_graph.py` | `FormulaDependencyGraph` (addNode/addEdge/topologicalSort/detectCycles/findProofChain) | Sprint 23 ✅ | P2 |
+| `logic/TDFOL/tdfol_parser.py` | `parse_tdfol(str)` → TDFOL `Formula` AST; `TDFOLLexer`/`TDFOLParser` | Sprint 24 ✅ | P2 |
+| `logic/TDFOL/modal_tableaux.py` | `ModalLogicType` (K/T/D/S4/S5); `World`/`TableauxBranch`/`ModalTableaux.prove()` | Sprint 24 ✅ | P2 |
+| `logic/TDFOL/performance_profiler.py` | `ProfilingStats`, `BenchmarkResult`, `PerformanceProfiler` | Sprint 24 ✅ | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 25+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -328,13 +331,16 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **TDFOL Exception Hierarchy** | ✅ `TDFOL/exceptions.py` (684L) — `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | ✅ `tdfol-exceptions.ts` (9 classes + type guards) | **CLOSED** — Sprint 22 (T-112–T-115) |
 | **TDFOL Optimization** | ✅ `TDFOL/tdfol_optimization.py` (539L) — `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | ✅ `tdfol-optimization.ts` | **CLOSED** — Sprint 22 |
 | **TDFOL Security Validator** | ✅ `TDFOL/security_validator.py` (777L) — formula input validation | ✅ `tdfol-security-validator.ts` | **CLOSED** — Sprint 22 |
-| **TDFOL Core Types** | ✅ `TDFOL/tdfol_core.py` (826L) — `TDFOLNode`, `Term`/`Variable`/`Constant`, `Formula`/`Predicate`/`BinaryFormula`/`UnaryFormula`/`QuantifiedFormula` | ❌ Not implemented | **OPEN** — Sprint 23 P2 |
-| **Proof Tree Visualizer** | ✅ `TDFOL/proof_tree_visualizer.py` (999L) — `ProofTreeNode`, `ProofTree`, ASCII rendering | ❌ Not implemented | **OPEN** — Sprint 23 P2 |
-| **Formula Dependency Graph** | ✅ `TDFOL/formula_dependency_graph.py` (889L) — `FormulaDependencyGraph`, cycle detection | ❌ Not implemented | **OPEN** — Sprint 23 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 24+ P3 |
+| **TDFOL Core Types** | ✅ `TDFOL/tdfol_core.py` (826L) — `TDFOLNode`, `Term`/`Variable`/`Constant`, `Formula`/`Predicate`/`BinaryFormula`/`UnaryFormula`/`QuantifiedFormula` | ✅ `tdfol-core.ts` (9 node types + `TDFOLKnowledgeBase`) | **CLOSED** — Sprint 23 (T-116–T-119) |
+| **Proof Tree Visualizer** | ✅ `TDFOL/proof_tree_visualizer.py` (999L) — `ProofTreeNode`, `ProofTree`, ASCII rendering | ✅ `proof-tree.ts` (ProofTree + ASCII + ProofTreeBuilder) | **CLOSED** — Sprint 23 |
+| **Formula Dependency Graph** | ✅ `TDFOL/formula_dependency_graph.py` (889L) — `FormulaDependencyGraph`, cycle detection | ✅ `formula-dependency-graph.ts` (topologicalSort/detectCycles/findProofChain) | **CLOSED** — Sprint 23 |
+| **TDFOL Parser** | ✅ `TDFOL/tdfol_parser.py` (818L) — `TDFOLLexer`/`TDFOLParser`, `parse_tdfol(str) → Formula` | ✅ `tdfol-parser.ts` (`TDFOLLexer`+recursive-descent parser; `parseTdfol`/`parseTdfolSafe`) | **CLOSED** — Sprint 24 (T-120) |
+| **Modal Tableaux** | ✅ `TDFOL/modal_tableaux.py` (711L) — `ModalLogicType` (K/T/D/S4/S5), `World`, `TableauxBranch`, `ModalTableaux.prove()` | ✅ `modal-tableaux.ts` (`ModalLogicType`/`World`/`TableauxBranch`/`ModalTableaux`/`proveModalFormula`) | **CLOSED** — Sprint 24 (T-121) |
+| **Performance Profiler** | ✅ `TDFOL/performance_profiler.py` (1411L) — `ProfilingStats`, `BenchmarkResult`, `PerformanceProfiler` | ✅ `performance-profiler.ts` (`ProfilingStats`/`PerformanceProfiler`/`ProfileBlock`/`benchmarkProviders`) | **CLOSED** — Sprint 24 (T-122) |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 25+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 22):** 22+ modules; complete TDFOL production hardening (exceptions/optimization/security); all provers local; ZKP→UCAN; full NL→prover pipeline + monitoring + public API facade. Remaining: TDFOL core types + proof tree + formula dependency (Sprint 23 P2) + formula_builder (Sprint 24+ P3).
+**Current status (post Sprint 23):** 23+ modules; TDFOL AST hierarchy + proof tree + dependency graph; all provers local; ZKP→UCAN; full NL→prover pipeline + monitoring + public API. Remaining: TDFOL parser + modal tableaux + performance profiler (Sprint 24 P2) + formula_builder (Sprint 25+ P3).
 
 ---
 
@@ -866,6 +872,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-117 | P2 | Create `src/services/proof-tree.ts` — proof tree + ASCII rendering | ✅ DONE | `ProofTreeNode`/`ProofTree` (allNodes/leaves/findByFormula/toAscii); `ProofTreeBuilder.fromProofResult()`; ASCII box-drawing renderer |
 | T-118 | P2 | Create `src/services/formula-dependency-graph.ts` — formula dependency analysis | ✅ DONE | `FormulaDependencyGraph` (topologicalSort/detectCycles/findProofChain/getTransitiveDeps) |
 | T-119 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint23.test.ts` — 24 tests (all pass): TDFOL types (10), ProofTree (7), DependencyGraph (7) |
+
+---
+
+### Sprint 24 (Phase 24 — TDFOL Parser + Modal Tableaux + Performance Profiler, P2) 🆕
+
+> **Gap:** `tdfol_parser.py` (818L) — `parse_tdfol(str) → Formula`; `modal_tableaux.py` (711L) — `ModalLogicType`/`World`/`TableauxBranch`/`ModalTableaux.prove()`; `performance_profiler.py` (1411L) — `ProfilingStats`/`BenchmarkResult`/`PerformanceProfiler`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-120 | P2 | Create `src/services/tdfol-parser.ts` — TDFOL formula text parser | ✅ DONE | `parseTdfol(text)→Formula`, `parseTdfolSafe(text)→Formula\|null`; TDFOLLexer (multi/single-char tokens, single-letter modal ops, ISO date literals); recursive-descent TDFOLParser (iff/implies/or/and/not/quantified/modal/atomic precedence); deontic O/P/F, temporal □/◊/X/U/S/W/R, prefix `(→ p q)` and infix `(p U q)` notation |
+| T-121 | P2 | Create `src/services/modal-tableaux.ts` — modal tableaux prover | ✅ DONE | `ModalLogicType` (K/T/D/S4/S5); `World.hasContradiction()`; `TableauxBranch` (addWorld/createFreshWorld/clone/addAccessibility/boxHistory); `ModalTableaux.prove()` — α/β-rules, □/◊ expansion, reflexivity (T/S4/S5), box-history propagation (S4/S5); `proveModalFormula()` |
+| T-122 | P2 | Create `src/services/performance-profiler.ts` — performance profiler | ✅ DONE | `ProfilingStats` (mean/median/min/max/stdDev/opsPerSec/samples); `PerformanceProfiler.profile()/profileAsync()/formatReport(TEXT\|JSON)`; `benchmarkProviders()`, `ProfileBlock.stop()/elapsed` |
+| T-123 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint24.test.ts` — 45 tests (all pass): parseTdfol (17), parseTdfolSafe (3), World (5), TableauxBranch (5), ModalTableaux (6), PerformanceProfiler (6), benchmarkProviders (1), ProfileBlock (2) |
 
 ## 8. Prover Capability Matrix
 
