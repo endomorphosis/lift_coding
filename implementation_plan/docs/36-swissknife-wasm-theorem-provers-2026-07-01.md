@@ -136,10 +136,13 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/common/validators.py` | `validate_formula_string()`, `validate_axiom_list()`, `validate_logic_system()`, `validate_timeout_ms()` | Sprint 21 ✅ | P2 |
 | `logic/common/bounded_cache.py` | `CacheEntry[T]`, `BoundedCache[T]` (generic LRU eviction cache) | Sprint 21 ✅ | P2 |
 | `logic/TDFOL/nl/` | `parse_natural_language(text)` → TDFOL formulas (NL→TDFOL pipeline) | Sprint 21 ✅ | P2 |
-| `logic/TDFOL/exceptions.py` | TDFOL exception hierarchy: `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | Sprint 22 | P2 |
-| `logic/TDFOL/tdfol_optimization.py` | `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | Sprint 22 | P2 |
-| `logic/TDFOL/security_validator.py` | Formula input security validation (injection/overflow protection) | Sprint 22 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 23+ | P3 |
+| `logic/TDFOL/exceptions.py` | TDFOL exception hierarchy: `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | Sprint 22 ✅ | P2 |
+| `logic/TDFOL/tdfol_optimization.py` | `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | Sprint 22 ✅ | P2 |
+| `logic/TDFOL/security_validator.py` | Formula input security validation (injection/overflow protection) | Sprint 22 ✅ | P2 |
+| `logic/TDFOL/tdfol_core.py` | TDFOL core type hierarchy: `TDFOLNode`, `Term`/`Variable`/`Constant`, `Formula`/`Predicate`/`BinaryFormula`/`UnaryFormula`/`QuantifiedFormula`, `TDFOLKnowledgeBase` | Sprint 23 | P2 |
+| `logic/TDFOL/proof_tree_visualizer.py` | `ProofTreeNode` (formula/rule/justification/children), `ProofTree`, ASCII rendering | Sprint 23 | P2 |
+| `logic/TDFOL/formula_dependency_graph.py` | `FormulaDependencyGraph` (addNode/addEdge/topologicalSort/detectCycles/findProofChain) | Sprint 23 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 24+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -322,13 +325,16 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Logic Types** | ✅ `types/deontic_types.py` (296L) + `fol_types.py` (121L) + `common_types.py` (119L) + `proof_types.py` (26L) | ✅ `logic-types.ts` (`DeonticFormula`/`DeonticRuleSet`/`FOLFormula`/`ProofResult`) | **CLOSED** — Sprint 21 (T-108–T-111) |
 | **Common Validators + BoundedCache** | ✅ `common/validators.py` (277L) + `common/bounded_cache.py` (233L) | ✅ `logic-validators.ts` (validators + `BoundedCache<T>`) | **CLOSED** — Sprint 21 |
 | **TDFOL NL API** | ✅ `TDFOL/nl/tdfol_nl_api.py` — `parse_natural_language(text)` → TDFOL formulas | ✅ `tdfol-nl-api.ts` + `parse_natural_language()` alias | **CLOSED** — Sprint 21 |
-| **TDFOL Exception Hierarchy** | ✅ `TDFOL/exceptions.py` (684L) — `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | ❌ Not implemented | **OPEN** — Sprint 22 P2 |
-| **TDFOL Optimization** | ✅ `TDFOL/tdfol_optimization.py` (539L) — `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | ❌ Not implemented | **OPEN** — Sprint 22 P2 |
-| **TDFOL Security Validator** | ✅ `TDFOL/security_validator.py` (777L) — formula input validation | ❌ Not implemented | **OPEN** — Sprint 22 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 23+ P3 |
+| **TDFOL Exception Hierarchy** | ✅ `TDFOL/exceptions.py` (684L) — `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | ✅ `tdfol-exceptions.ts` (9 classes + type guards) | **CLOSED** — Sprint 22 (T-112–T-115) |
+| **TDFOL Optimization** | ✅ `TDFOL/tdfol_optimization.py` (539L) — `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | ✅ `tdfol-optimization.ts` | **CLOSED** — Sprint 22 |
+| **TDFOL Security Validator** | ✅ `TDFOL/security_validator.py` (777L) — formula input validation | ✅ `tdfol-security-validator.ts` | **CLOSED** — Sprint 22 |
+| **TDFOL Core Types** | ✅ `TDFOL/tdfol_core.py` (826L) — `TDFOLNode`, `Term`/`Variable`/`Constant`, `Formula`/`Predicate`/`BinaryFormula`/`UnaryFormula`/`QuantifiedFormula` | ❌ Not implemented | **OPEN** — Sprint 23 P2 |
+| **Proof Tree Visualizer** | ✅ `TDFOL/proof_tree_visualizer.py` (999L) — `ProofTreeNode`, `ProofTree`, ASCII rendering | ❌ Not implemented | **OPEN** — Sprint 23 P2 |
+| **Formula Dependency Graph** | ✅ `TDFOL/formula_dependency_graph.py` (889L) — `FormulaDependencyGraph`, cycle detection | ❌ Not implemented | **OPEN** — Sprint 23 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 24+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 21):** 21+ modules across Sprints 1–21; complete logic type system; NL→TDFOL pipeline; all provers local; ZKP→UCAN; full NL→LegalNormIR→prover-syntax pipeline + monitoring + registry + batch + public API. Remaining: TDFOL exceptions + optimization + security (Sprint 22 P2) + formula_builder (Sprint 23+ P3).
+**Current status (post Sprint 22):** 22+ modules; complete TDFOL production hardening (exceptions/optimization/security); all provers local; ZKP→UCAN; full NL→prover pipeline + monitoring + public API facade. Remaining: TDFOL core types + proof tree + formula dependency (Sprint 23 P2) + formula_builder (Sprint 24+ P3).
 
 ---
 
@@ -847,6 +853,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-113 | P2 | Create `src/services/tdfol-optimization.ts` — optimised prover layer | ✅ DONE | `IndexedKB` (addFormula/lookupByPredicate/lookupByOperator/getStats); `OptimizedProver` (BoundedCache + ExtendedTdfolProverBridge); `ProvingStrategy`; `createOptimizedProver()` |
 | T-114 | P2 | Create `src/services/tdfol-security-validator.ts` — input security validator | ✅ DONE | `SecurityValidator.validateFormula/validateKb` (size/depth/blocklist/operator-count checks); `SecurityConfig`; `createValidator(level)`; `validateFormula()` |
 | T-115 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint22.test.ts` — 24 tests (all pass): exceptions (10), IndexedKB+OptimizedProver (6), security (8) |
+
+---
+
+### Sprint 23 (Phase 23 — TDFOL Core Types + Proof Tree + Formula Dependency Graph, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `tdfol_core.py` (826L) + `proof_tree_visualizer.py` (999L) + `formula_dependency_graph.py` (889L).
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-116 | P2 | Create `src/services/tdfol-core.ts` — TDFOL core type hierarchy | ✅ DONE | Enums + TDFOLNode; Term/Variable/Constant/FunctionApp; Formula/Predicate/Binary/Unary/Quantified/Deontic/Temporal; constructor helpers; `TDFOLKnowledgeBase` |
+| T-117 | P2 | Create `src/services/proof-tree.ts` — proof tree + ASCII rendering | ✅ DONE | `ProofTreeNode`/`ProofTree` (allNodes/leaves/findByFormula/toAscii); `ProofTreeBuilder.fromProofResult()`; ASCII box-drawing renderer |
+| T-118 | P2 | Create `src/services/formula-dependency-graph.ts` — formula dependency analysis | ✅ DONE | `FormulaDependencyGraph` (topologicalSort/detectCycles/findProofChain/getTransitiveDeps) |
+| T-119 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint23.test.ts` — 24 tests (all pass): TDFOL types (10), ProofTree (7), DependencyGraph (7) |
 
 ## 8. Prover Capability Matrix
 
