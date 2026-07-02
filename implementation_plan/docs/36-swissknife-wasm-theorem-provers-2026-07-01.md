@@ -111,18 +111,20 @@ remote MCP tool — **not previously in scope**:
 back to the remote Python engine for every policy with `policy.temporal` or obligation deadlines.
 Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fallback.
 
-### 2.6 Additional Logic Layers (ipfs_datasets_py/logic/) — **Scope for Sprint 11+**
+### 2.6 Additional Logic Layers (ipfs_datasets_py/logic/) — **Scope for Sprint 12+**
 
-| Directory | Description | Priority |
-|---|---|---|
-| `logic/deontic/` | Rich deontic IR: `formula_builder.py` (7019 lines), `knowledge_base.py`, `ir.py`, `graph.py`, `analyzer.py`, `converter.py` | P3 |
-| `logic/bridge/` | Logic bridge layer: `cec_dcec.py`, `fol_tdfol.py`, `modal_frame_logic.py`, `zkp_attestation.py`, `external_prover_router.py` | P2 |
-| `logic/fol/` | First-order logic utilities | P3 |
-| `logic/modal/` | Modal logic (K/T/D/S4/S5) | P2 |
-| `logic/zkp/` | ZKP full stack: `zkp_prover.py`, `zkp_verifier.py`, `circuits.py`, `ucan_zkp_bridge.py`, `groth16`, `provekit`, Ethereum integration | P2 (UCAN-ZKP); P3 (Ethereum) |
-| `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | P3 |
-| `logic/flogic/` | F-logic (frame logic) | P3 |
-| `logic/integration/` | Integration bridges and converters across logic frameworks | P3 |
+| Directory | Description | Sprint | Priority |
+|---|---|---|---|
+| `logic/deontic/analyzer.py` | `DeonticAnalyzer`: regex NL→deontic statement extraction, conflict detection (direct/conditional/jurisdictional/temporal), Jaccard word-similarity | Sprint 12 | P2 |
+| `logic/deontic/knowledge_base.py` | `DeonticKnowledgeBase`: temporal KB with `TimeInterval`, `Party`, `Action`, `Proposition`, rule inference, `checkCompliance()` | Sprint 12 | P2 |
+| `logic/bridge/modal_frame_logic.py` | `ModalFrameLogicBridgeAdapter`: encode legal text → modal IR, graph-project, proof-gate | Sprint 13 | P2 |
+| `logic/bridge/external_prover_router.py` | `ExternalProverRouterBridgeAdapter`: route TDFOL formulas through the external prover router | Sprint 13 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 14+ | P3 |
+| `logic/deontic/ir.py` | Deontic IR intermediate representation (2720 lines) | Sprint 14+ | P3 |
+| `logic/fol/` | FOL utilities (`text_to_fol.py`, `converter.py`) | Sprint 14+ | P3 |
+| `logic/modal/` | Modal logic codec/compiler/synthesis | Sprint 15+ | P3 |
+| `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 16+ | P3 |
+| `logic/flogic/` | F-logic (frame logic) | Sprint 16+ | P3 |
 
 ---
 
@@ -278,13 +280,15 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | Neural prover | ✅ `symbolicai_prover_bridge.py` (LLM sketch + verify) | ✅ `NeuralProverBridge` (LLM sketch → Lean4/Coq local verify) | **CLOSED** — Sprint 6 (T-38/T-57) |
 | **DCEC / CEC layer** | ✅ `CEC/` — `dcec_core`, `prover_core`, `cec_framework`, `shadow_prover_wrapper`, `talos_wrapper` | ✅ `DcecProverBridge` (forward-chaining, 5 rules: MP/Simp/DeonticProhibEquiv/ObligImpliesPermit/ForbiddenToNotOblig) | **CLOSED** — Sprint 9 (T-58–T-62) |
 | **TDFOL engine** | ✅ `TDFOL/` — `tdfol_core`, `tdfol_prover` (640 lines), `tdfol_parser`, `tdfol_inference_rules`, `modal_tableaux`, `strategies/` | ✅ `TdfolProverBridge` (10 LTL+SDL rules; closes temporal remote fallback) | **CLOSED** — Sprint 10 (T-63–T-67) |
-| **UCAN-ZKP bridge** | ✅ `zkp/ucan_zkp_bridge.py` (592 lines) — `ZKPToUCANBridge`, `ZKPCapabilityEvidence` caveat | ❌ Not implemented | **OPEN** — Sprint 11 P2 |
-| **ZKP simulated prover** | ✅ `zkp/zkp_prover.py` (289 lines) + `zkp_verifier.py` (313 lines) | ❌ Only `LurkWasmBridge` stub (real ZKP) | **OPEN** — Sprint 11 P2 |
-| **Modal frame logic bridge** | ✅ `bridge/modal_frame_logic.py` — K/T/D/S4/S5 frame semantics adapter | ❌ Not implemented | **OPEN** — Sprint 12 P2 |
-| **Deontic IR / Knowledge Base** | ✅ `deontic/formula_builder.py` (7019 lines), `knowledge_base.py`, `ir.py` | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 13+ P3 |
+| **UCAN-ZKP bridge** | ✅ `zkp/ucan_zkp_bridge.py` (592 lines) — `ZKPToUCANBridge`, `ZKPCapabilityEvidence` caveat | ✅ `ZkpUcanBridge` + `ZkpSimulatedProver` (`src/services/zkp/`) | **CLOSED** — Sprint 11 (T-68–T-71) |
+| **ZKP simulated prover** | ✅ `zkp/zkp_prover.py` (289 lines) + `zkp_verifier.py` (313 lines) | ✅ `ZkpSimulatedProver` (hash-based, NOT real Groth16) | **CLOSED** — Sprint 11 |
+| **Deontic Analyzer** | ✅ `deontic/analyzer.py` (503 lines) — regex NL→deontic + conflict detection | ❌ Not implemented | **OPEN** — Sprint 12 P2 |
+| **Deontic Knowledge Base** | ✅ `deontic/knowledge_base.py` (245 lines) — `DeonticKnowledgeBase`, temporal intervals, rule inference | ❌ Not implemented | **OPEN** — Sprint 12 P2 |
+| **Modal frame logic bridge** | ✅ `bridge/modal_frame_logic.py` (691 lines) | ❌ Not implemented | **OPEN** — Sprint 13 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines), `ir.py` (2720 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 14+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 10):** All formula classes (propositional/fol/modal_deontic/temporal) are handled locally. Only `higher_order` (>20 rules) with no local Coq/Lean4 binary falls to remote — and even that now tries `_tryCoqOrLean4()` first. The remaining open work is the ZKP attestation layer (UCAN-ZKP bridge) and modal frame logic adapter.
+**Current status (post Sprint 11):** All formula classes (propositional/fol/modal_deontic/temporal) are handled locally. ZKP→UCAN bridge complete. Remaining: Deontic Analyzer (NL→formal deontic extraction, Sprint 12) + Deontic Knowledge Base (temporal rule inference, Sprint 12) + modal frame logic bridge (Sprint 13).
 
 ---
 
@@ -658,6 +662,20 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-69 | P2 | Create `src/services/zkp/zkp-simulated-prover.ts` — simulated ZKP prover | ✅ DONE | `ZkpSimulatedProver.prove(statement, axioms?) → ZkpSimulatedProof`; SHA-256 proof hash; <500B proof_b64; `verify(proof) → boolean`; `computeStatementCid()` |
 | T-70 | P2 | Create `src/services/zkp/zkp-ucan-bridge.ts` — `ZkpUcanBridge` | ✅ DONE | `proofToCaveat(ZKProofArtifact) → ZkpCapabilityEvidence` (is_simulation:false); `proveAndDelegate()` with real prover injection + simulation fallback; backend→verifier_id mapping |
 | T-71 | P2 | Write 10+ tests for ZKP-UCAN bridge | ✅ DONE | `wasm-prover-sprint11.test.ts` — 19 tests (all pass): T-68 types (4), T-69 simulated prover (8), T-70 bridge (7) |
+
+---
+
+### Sprint 12 (Phase 12 — Deontic Analyzer + Knowledge Base, P2) ✅ DONE (2026-07-03)
+
+> **Gap from §2.6:** `deontic/analyzer.py` (503 lines) + `deontic/knowledge_base.py` (245 lines).
+> Sprint 12 adds regex-based NL→deontic extraction and a typed temporal KB with rule inference.
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-72 | P2 | Create `src/services/deontic/deontic-text-analyzer.ts` — NL deontic statement extractor | ✅ DONE | 9 regex patterns; `extractStatements()`; `detectConflicts()` (direct/conditional/jurisdictional/temporal); Jaccard `actionsAreSimilar()`; `organizeByEntity()`; `calculateStatistics()` |
+| T-73 | P2 | Create `src/services/deontic/deontic-knowledge-base.ts` — temporal deontic KB | ✅ DONE | `TimeInterval`/`Party`/`DeonticAction`/`Proposition` (Pred/And/Or/Not/Implies); `DeonticKnowledgeBase.addStatement()/addRule()/addFact()/inferStatements()/checkCompliance()` |
+| T-74 | P2 | Wire `DeonticTextAnalyzer` into `mcp++` tool chain | ✅ DONE | `mcp++ deontic analyze <text>` → JSON `{statements, conflicts, statistics}`; usage help when no text |
+| T-75 | P2 | Write 10+ tests for deontic analyzer + KB | ✅ DONE | `wasm-prover-sprint12.test.ts` — 28 tests (all pass): extraction (8), conflicts (7), stats (2), KB (8), mcp++ (2), Proposition (1) |
 
 ## 8. Prover Capability Matrix
 
