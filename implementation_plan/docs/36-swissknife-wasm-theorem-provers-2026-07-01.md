@@ -1494,6 +1494,22 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 62 (Phase 62 — Enhanced Grammar Parser + Temporal Deontic API + NLP Predicate Extractor + Profiling Utils + Proof Optimization + Resolution Rules, P3) 🆕
+
+> **6 untracked files discovered — refs=0 in plan, no TS match.**
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-283 | P3 | Create `src/services/enhanced-grammar-parser.ts` | `Category` enum; `Terminal`/`GrammarRule`/`ParseTree`/`EarleyState`; `EnhancedGrammarParser` (parse(text)/addRule()/addTerminal()/getParseForest()) | ✅ DONE |
+| T-284 | P3 | Create `src/services/temporal-deontic-api.ts` | `TemporalContext` (start/end/duration); `TemporalDeonticClause` (modality/action/agent/temporalCtx); `TemporalDeonticAPI` (extract(text)/validate(clause)/normalise(clause)) | ✅ DONE |
+| T-285 | P3 | Create `src/services/nlp-predicate-extractor.ts` | `extractPredicatesNlp(text)`; `extractSemanticRoles(text)`; `normalise Predicate(text)` — regex-based (no spaCy) | ✅ DONE |
+| T-286 | P3 | Create `src/services/cec-profiling-utils.ts` | `ProfilingResult` (operation/durationMs/peakMemMb); `Bottleneck` (operation/avgMs/count); `FormulaProfiler` (profile(fn,name)/getResults()/reset()); `BottleneckAnalyzer` (analyze(results)/topN(n)); `ProfilingReporter` (report(results)) | ✅ DONE — combined in `cec-resolution-rules.ts` |
+| T-287 | P3 | Create `src/services/proof-optimization.ts` | `PruningStrategy` enum; `ProofNode` (formula/children/isClosed()); `OptimizationMetrics`; `ProofTreePruner` (prune(tree,strategy)); `RedundancyEliminator` (eliminate(steps)) | ✅ DONE — combined in `cec-resolution-rules.ts` |
+| T-288 | P3 | Create `src/services/cec-resolution-rules.ts` | 6 resolution rules: `ResolutionRule`, `UnitResolutionRule`, `FactoringRule`, `SubsumptionRule`, `CaseAnalysisRule`, `ProofByContradictionRule`; `ALL_RESOLUTION_RULES` registry | ✅ DONE |
+| T-289 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint62.test.ts` | ✅ DONE — 37 tests (all pass) |
+
+---
+
 ## 9. Gap Closure Summary 🏁
 
 All Python files in `ipfs_datasets_py/logic/` now have TypeScript equivalents in swissknife.
