@@ -151,6 +151,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/bridge/types.py` | `LogicIRView`, `LegalIRDocument` (canonical hash), `RoundTripMetrics` (fromLossMapping/totalLoss), `GraphProjectionResult`, `BridgeEvaluationReport` | Sprint 26 ✅ | P2 |
 | `logic/bridge/registry.py` | `LogicBridgeSpec`, `logicBridgeSpecs()`, `logicBridgeManifest()`, `loadLogicBridgeAdapter()`, `bridgeNameForComponent()` | Sprint 26 ✅ | P2 |
 | `logic/bridge/zkp_attestation.py` | `ZkpAttestationBridgeAdapter.encode(text) → (LegalIRDocument, context)` | Sprint 26 ✅ | P2 |
+| `logic/bridge/fol_tdfol.py` | `FolTdfolBridgeAdapter.encode(text)` → TDFOL formulas + frame logic + graph data | Sprint 27 ✅ | P2 |
+| `logic/bridge/deontic_norms.py` | `DeonticNormsBridgeAdapter.encode(text)` → deontic IR + frame records + prover syntax | Sprint 27 ✅ | P2 |
+| `logic/bridge/cec_dcec.py` | `CecDcecBridgeAdapter.encode(text)` → DCEC event formulas + frame logic + graph data | Sprint 27 ✅ | P2 |
 | `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 27+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
@@ -349,10 +352,13 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **Bridge Shared Types** | ✅ `bridge/types.py` (413L) — `LogicIRView`, `LegalIRDocument`, `RoundTripMetrics`, `GraphProjectionResult`, `BridgeEvaluationReport` | ✅ `bridge-types.ts` (`LogicIRView`/`LegalIRDocument.canonicalHash()`/`RoundTripMetrics.fromLossMapping`/`ProofGateResult.disabled()`/`BridgeEvaluationReport`) | **CLOSED** — Sprint 26 (T-128) |
 | **Bridge Registry** | ✅ `bridge/registry.py` (285L) — `LogicBridgeSpec`, `logic_bridge_specs()`, `logic_bridge_manifest()`, `load_logic_bridge_adapter()` | ✅ `bridge-registry.ts` (6 specs + `logicBridgeSpecs/Manifest/bridgeNameForComponent`) | **CLOSED** — Sprint 26 (T-129) |
 | **ZKP Attestation Bridge** | ✅ `bridge/zkp_attestation.py` (762L) — `ZkpAttestationBridgeAdapter.encode(text)` | ✅ `zkp-attestation-bridge.ts` (encode/evaluate; 4 views; simulated attestation records) | **CLOSED** — Sprint 26 (T-130) |
+| **FOL/TDFOL Bridge** | ✅ `bridge/fol_tdfol.py` (2136L) — `FolTdfolBridgeAdapter.encode(text)` | ✅ `fol-tdfol-bridge.ts` (tdfol_formulas/frame_logic/neo4j_graph_data; formula_type classification) | **CLOSED** — Sprint 27 (T-132) |
+| **Deontic Norms Bridge** | ✅ `bridge/deontic_norms.py` (2497L) — `DeonticNormsBridgeAdapter.encode(text)` | ✅ `deontic-norms-bridge.ts` (deontic_ir/prover_formulas/frame_logic/neo4j_graph_data; O/P/F detection) | **CLOSED** — Sprint 27 (T-133) |
+| **CEC/DCEC Bridge** | ✅ `bridge/cec_dcec.py` (3671L) — `CecDcecBridgeAdapter.encode(text)` | ✅ `cec-dcec-bridge.ts` (cec_formulas/frame_logic/neo4j_graph_data; Happens/HoldsAt/Initiates/Terminates) | **CLOSED** — Sprint 27 (T-134) |
 | **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 27+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 26):** 26+ modules; complete bridge layer (shared types/registry/ZKP attestation); complete TDFOL stack; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: formula_builder (Sprint 27+).
+**Current status (post Sprint 27):** 27+ modules; complete bridge layer (all 6 adapters: modal_frame_logic/deontic_norms/fol_tdfol/cec_dcec/external_prover_router/zkp_attestation + shared types/registry); complete TDFOL stack; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: multiview aggregator + formula_builder (Sprint 28+).
 
 ---
 
@@ -923,6 +929,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-129 | P2 | Create `src/services/bridge-registry.ts` — bridge adapter registry | ✅ DONE | `LogicBridgeSpec` + `SPECS` (6 bridges); `logicBridgeSpecs(implementedOnly?)`; `logicBridgeSpec(name)`; `logicBridgeManifest()` (bridge_count/roles/target_components); `bridgeNameForComponent(target)` |
 | T-130 | P2 | Create `src/services/zkp-attestation-bridge.ts` — ZKP attestation bridge | ✅ DONE | `ZkpAttestationBridgeAdapter.encode(text, opts) → {doc, context}` — 4 views (zkp_attestations/zkp_public_inputs/frame_logic/neo4j_graph_data); per-formula attestation records; `.evaluate()` → `BridgeEvaluationReport` |
 | T-131 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint26.test.ts` — 36 tests (all pass): LogicIRView (2), LegalIRDocument (7), RoundTripMetrics (4), ProofGateResult (4), logicBridgeSpecs (3), logicBridgeSpec (2), logicBridgeManifest (3), bridgeNameForComponent (4), ZkpAttestationBridgeAdapter (7) |
+
+---
+
+### Sprint 27 (Phase 27 — FOL/TDFOL Bridge + Deontic Norms Bridge + CEC/DCEC Bridge, P2) ✅ DONE (2026-07-01)
+
+> **Gap:** `bridge/fol_tdfol.py` (2136L) — `FolTdfolBridgeAdapter`; `bridge/deontic_norms.py` (2497L) — `DeonticNormsBridgeAdapter`; `bridge/cec_dcec.py` (3671L) — `CecDcecBridgeAdapter`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-132 | P2 | Create `src/services/fol-tdfol-bridge.ts` — FOL/TDFOL bridge adapter | ✅ DONE | `FolTdfolBridgeAdapter.encode(text)/evaluate()`; `TdfolFormulaRecord` (formula/predicates/source_id/formula_type); 3 views; formula_type classification (temporal/deontic/fol/propositional) |
+| T-133 | P2 | Create `src/services/deontic-norms-bridge.ts` — deontic norms bridge adapter | ✅ DONE | `DeonticNormsBridgeAdapter.encode(text)/evaluate()`; `DeonticNormRecord` (O/P/F detection; subject/action/prover_syntax); 4 views (deontic_ir/prover_formulas/frame_logic/neo4j_graph_data) |
+| T-134 | P2 | Create `src/services/cec-dcec-bridge.ts` — CEC/DCEC bridge adapter | ✅ DONE | `CecDcecBridgeAdapter.encode(text)/evaluate()`; `DcecRecord` (Happens/HoldsAt/Initiates/Terminates; cec_formula rendering); 3 views |
+| T-135 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint27.test.ts` — 25 tests (all pass): FolTdfolBridgeAdapter (8), DeonticNormsBridgeAdapter (8), CecDcecBridgeAdapter (9) |
 
 ## 8. Prover Capability Matrix
 
