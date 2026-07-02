@@ -1548,6 +1548,16 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 66 (Phase 66 — DCEC Types + TPTP Utils + DCEC-to-UCAN Bridge + Strategy Selector + Vampire Adapter + Utility Monitor + Lazy Installer, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-307 | P3 | Create `src/services/sprint66-dcec-types.ts` | ✅ DONE — `DeonticOperator`/`CognitiveOperator`/`LogicalConnective`/`TemporalOperator` enums; `Sort`/`Variable`/`Function`/`Predicate` types; `formulaToTPTP()`/`createTPTPProblem()`/`TPTPConverter`; `DenyCapability`/`DCECToUCANMapping`/`DCECToUCANBridge`/`BridgeResult` |
+| T-308 | P3 | Create `src/services/sprint66-prover-utils.ts` | ✅ DONE — `StrategySelector`; `VampireProofResult`/`VampireAdapter`/`checkVampireInstallation()`; `UtilityMonitor`/`trackPerformance()`/`withCaching()`/`getGlobalStats()`/`clearGlobalCache()`/`resetGlobalStats()`; `normalizePoverName()`/`findExecutable()`/`lazyInstallProver()`/`isLazyInstallEnabled()` |
+| T-309 | P3 | Write 10+ tests | ✅ DONE — 39 tests (all pass) in `test/mcp-plus-plus/wasm-prover-sprint66.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
