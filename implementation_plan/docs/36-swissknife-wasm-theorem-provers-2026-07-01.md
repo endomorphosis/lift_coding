@@ -156,6 +156,8 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/bridge/cec_dcec.py` | `CecDcecBridgeAdapter.encode(text)` → DCEC event formulas + frame logic + graph data | Sprint 27 ✅ | P2 |
 | `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 28 ✅ (partial — `build_deontic_formula_from_ir`) | P3 |
 | `logic/bridge/multiview.py` | `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()` | Sprint 28 ✅ | P3 |
+| `logic/modal/synthesis.py` | `ModalProgramSynthesisHint`, `ModalResidualRepairRoute`, `RESIDUAL_REPAIR_ROUTES`, `route_autoencoder_residual()`, `residual_signature_for_hint()` | Sprint 29 ✅ | P3 |
+| `logic/modal/kg_bridge.py` | `flogic_triples_to_graph_data()`, `modal_ir_to_neo4j_graph_data()`, `FLogicOntology`, `flogic_triples_to_ontology()` | Sprint 29 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -358,16 +360,18 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **CEC/DCEC Bridge** | ✅ `bridge/cec_dcec.py` (3671L) — `CecDcecBridgeAdapter.encode(text)` | ✅ `cec-dcec-bridge.ts` (cec_formulas/frame_logic/neo4j_graph_data; Happens/HoldsAt/Initiates/Terminates) | **CLOSED** — Sprint 27 (T-134) |
 | **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ✅ `deontic-formula-builder.ts` (`normalizePredicateName`/`canonicalModalityOperator`/`buildDeonticFormulaFromIR`/O/P/F/DEF/PURP/APP/EXEMPT/LIFE) | **CLOSED** — Sprint 28 (T-137, partial) |
 | **Multiview Aggregator** | ✅ `bridge/multiview.py` (4040L) — `MultiViewLegalIRReport`, `LegalIRTrainingTarget`, `evaluate_legal_ir_multiview()` | ✅ `bridge-multiview.ts` (`evaluateLegalIRMultiview`/`toTrainingTarget`/merged doc) | **CLOSED** — Sprint 28 (T-136) |
+| **Modal KG Bridge** | ✅ `modal/kg_bridge.py` (1062L) — `flogic_triples_to_graph_data()`, `modal_ir_to_neo4j_graph_data()`, `FLogicOntology` | ✅ `modal-kg-bridge.ts` (`flogicTriplesToGraphData`/`flogicTriplesToOntology`/`modalIrToNeo4jGraphData`/Neo4j labels) | **CLOSED** — Sprint 29 (T-139) |
+| **Modal Synthesis** | ✅ `modal/synthesis.py` (947L) — `ModalProgramSynthesisHint`, `ModalResidualRepairRoute`, `RESIDUAL_REPAIR_ROUTES`, `route_autoencoder_residual()` | ✅ `modal-synthesis.ts` (9 routes + `routeAutoencoderResidual`/`residualSignatureForHint`/`synthesisHintFromRoute`) | **CLOSED** — Sprint 29 (T-140) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 28):** 28+ modules; complete bridge layer + multiview aggregator; complete TDFOL stack + deontic formula builder; all provers local; ZKP→UCAN; full NL→prover pipeline. All P2 items CLOSED. Remaining P3: modal/compiler + modal/codec (very large, deferred).
+**Current status (post Sprint 29):** 29+ modules; modal KG bridge + synthesis; complete bridge layer + multiview; complete TDFOL stack + deontic formula builder; all provers local; ZKP→UCAN; full NL→prover pipeline. Remaining P3: modal/codec (12843L) + modal/decompiler (9621L) — very large, deferred.
 
 ---
 
 ## 5. Target Architecture
 
 ```
-swissknife MCP++ deontic layer
+swissknife MCP++ deontic layer  
 │
 ├── PolicyEngine (existing, local JS)
 │   └── permits / prohibitions / obligations (no deep logic)
@@ -956,6 +960,18 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-136 | P3 | Create `src/services/bridge-multiview.ts` — multiview aggregator | ✅ DONE | `MultiViewLegalIRReport` (attemptedCount/acceptedCount/acceptanceRate/failures/toDict()); `LegalIRTrainingTarget` (totalLoss/adapterLosses/viewDistribution/toDict()); `evaluateLegalIRMultiview(text, adapters[])` — runs all adapters, merges views into unified doc; `toTrainingTarget()` |
 | T-137 | P3 | Create `src/services/deontic-formula-builder.ts` — deontic formula from IR | ✅ DONE | `normalizePredicateName()` (stop-word filter + PascalCase); `canonicalModalityOperator()` (CANONICAL_MODALITY_OPS + NORM_TYPE_MAP + TEXTUAL_MAP); `buildDeonticFormulaFromIR()` (O/P/F/DEF/PURP/APP/EXEMPT/LIFE); `buildDeonticFormulasFromIRList()` |
 | T-138 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint28.test.ts` — 33 tests (all pass): normalizePredicateName (6), canonicalModalityOperator (8), buildDeonticFormulaFromIR (9), buildDeonticFormulasFromIRList (1), evaluateLegalIRMultiview (6), toTrainingTarget (3) |
+
+---
+
+### Sprint 29 (Phase 29 — Modal KG Bridge + Modal Synthesis, P3) ✅ DONE (2026-07-01)
+
+> **Gap:** `modal/kg_bridge.py` (1062L) — `flogicTriplesToGraphData()`, `FLogicOntology`, `flogicTriplesToOntology()`; `modal/synthesis.py` (947L) — `ModalProgramSynthesisHint`, `ModalResidualRepairRoute`, `RESIDUAL_REPAIR_ROUTES`, `routeAutoencoderResidual()`, `residualSignatureForHint()`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-139 | P3 | Create `src/services/modal-kg-bridge.ts` — modal KG bridge | ✅ DONE | `NodeData`/`RelationshipData`/`GraphData`; `FLogicFrame.toErgoString()`/`FLogicOntology`; `flogicTriplesToGraphData()` (Neo4j labels: LegalModalDocument/ModalFormula/ModalOperator etc.); `flogicTriplesToOntology()` (isa/scalar/set methods); `modalIrToNeo4jGraphData()`; `flogicOntologyToDict()` |
+| T-140 | P3 | Create `src/services/modal-synthesis.ts` — modal synthesis + residual repair | ✅ DONE | `ModalResidualRepairRoute`; `RESIDUAL_REPAIR_ROUTES` (9 routes); `routeAutoencoderResidual(lossName, focus?)` (direct lookup + focus-hint fallback); `ModalProgramSynthesisHint.toDict()`; `residualSignatureForHint()` (SHA-256, 24-char hex); `synthesisHintFromRoute()` |
+| T-141 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint29.test.ts` — 28 tests (all pass): flogicTriplesToGraphData (8), flogicTriplesToOntology (5), modalIrToNeo4jGraphData (2), flogicOntologyToDict (1), RESIDUAL_REPAIR_ROUTES (2), routeAutoencoderResidual (5), ModalProgramSynthesisHint (2), residualSignatureForHint (2), synthesisHintFromRoute (1) |
 
 ## 8. Prover Capability Matrix
 
