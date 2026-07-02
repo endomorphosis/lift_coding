@@ -195,6 +195,9 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/integration/bridges/tdfol_shadowprover_bridge.py` | `ModalLogicType`, `TDFOLShadowProverBridge`, `ModalAwareTDFOLProver` | Sprint 41 ✅ | P3 |
 | `logic/integration/reasoning/_logic_verifier_backends_mixin.py` | `LogicVerifierBackendsMixin` (consistency check + fallback backends) | Sprint 41 ✅ | P3 |
 | `logic/integration/reasoning/proof_execution_engine_utils.py` | `createProofEngine()`, `proveFormula()`, `proveWithAllProvers()`, `checkConsistency()`, `getLeanTemplate()` | Sprint 41 ✅ | P3 |
+| `logic/integration/bridges/external_provers.py` | `ProverStatus`, `ProverResult`, `VampireProver`, `EProver`, `ProverRegistry`, `get_prover_registry()` | Sprint 42 ✅ | P3 |
+| `logic/integration/domain/caselaw_bulk_processor.py` | `CaselawDocument`, `ProcessingStats`, `BulkProcessingConfig`, `CaselawBulkProcessor` | Sprint 42 ✅ | P3 |
+| `logic/integration/reasoning/proof_execution_engine_types.py` | `ProofStatus`, `ProofResult` (proof execution types) | Sprint 42 ✅ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -436,9 +439,12 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **TDFOL ShadowProver Bridge** | ✅ `bridges/tdfol_shadowprover_bridge.py` (596L) — `ModalLogicType`, `TDFOLShadowProverBridge`, `ModalAwareTDFOLProver` | ✅ `tdfol-shadowprover-bridge.ts` (`ModalLogicType` (5); `TDFOLShadowProverBridge extends BaseProverBridge`; `ModalAwareTDFOLProver.proveModal/proveInSystem/proveInAllSystems`) | **CLOSED** — Sprint 41 (T-186) |
 | **Logic Verifier Backends Mixin** | ✅ `reasoning/_logic_verifier_backends_mixin.py` (293L) — `LogicVerifierBackendsMixin` | ✅ `logic-verifier-backends-mixin.ts` (`checkConsistencyFallback/Symbolic/findConflictingPairs`) | **CLOSED** — Sprint 41 (T-187) |
 | **Proof Execution Engine Utils** | ✅ `reasoning/proof_execution_engine_utils.py` (206L) — `createProofEngine()`, `proveFormula()`, `proveWithAllProvers()`, `getLeanTemplate()` | ✅ `proof-execution-engine-utils.ts` (`ProofEngine.prove/proveAll/checkConsistency`; utils; Lean4 D-axiom template) | **CLOSED** — Sprint 41 (T-188) |
+| **External Provers** | ✅ `bridges/external_provers.py` (610L) — `ProverStatus`, `ProverResult`, `VampireProver`, `EProver`, `ProverRegistry` | ✅ `external-provers.ts` (`ProverStatus` (6); `VampireProver`/`EProver` stubs; `ProverRegistry.register/get/list/getBestFor/prove`; `getProverRegistry()`) | **CLOSED** — Sprint 42 (T-190) |
+| **Caselaw Bulk Processor** | ✅ `domain/caselaw_bulk_processor.py` (757L) — `CaselawDocument`, `ProcessingStats`, `BulkProcessingConfig`, `CaselawBulkProcessor` | ✅ `caselaw-bulk-processor.ts` (`makeCaselawDocument`; `ProcessingStats.toDict/reset`; `CaselawBulkProcessor.process/processBatch/getStats/reset`; `createBulkProcessor()`) | **CLOSED** — Sprint 42 (T-191) |
+| **Proof Execution Engine Types** | ✅ `reasoning/proof_execution_engine_types.py` (100L) — `ProofStatus`, `ProofResult` (engine types) | ✅ `proof-execution-engine-types.ts` (`ProofStatus` (5); `ProofResult.isProved/failed/toDict()`; `makeProofResult()`) | **CLOSED** — Sprint 42 (T-192) |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 41):** 41+ modules; TDFOL ShadowProver bridge + logic verifier backends + proof engine utils; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
+**Current status (post Sprint 42):** 42+ modules; external provers + caselaw processor + proof engine types; complete integration layer. Remaining deferred: modal/codec + modal/decompiler (very large).
 
 ---
 
@@ -1202,6 +1208,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-187 | P3 | Create `src/services/logic-verifier-backends-mixin.ts` | ✅ DONE | `ConsistencyCheckResult`; `LogicVerifierBackendsMixin.checkConsistencyFallback/checkConsistencySymbolic/findConflictingPairs/checkConsistency()` — O/F and φ/¬φ conflict detection |
 | T-188 | P3 | Create `src/services/proof-execution-engine-utils.ts` | ✅ DONE | `ProofEngine.prove(prover)/proveAll/checkConsistency`; `createProofEngine()/proveFormula()/proveWithAllProvers()/checkConsistency()/getLeanTemplate()` — Lean 4 D-axiom template |
 | T-189 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint41.test.ts` — 26 tests (all pass) |
+
+---
+
+### Sprint 42 (Phase 42 — External Provers + Caselaw Bulk Processor + Proof Execution Engine Types, P3) ✅ DONE (2026-07-02)
+
+> **Gap:** `bridges/external_provers.py` (610L) — `ProverStatus`/`ProverResult`/`VampireProver`/`EProver`/`ProverRegistry`; `domain/caselaw_bulk_processor.py` (757L) — `CaselawDocument`/`ProcessingStats`/`BulkProcessingConfig`/`CaselawBulkProcessor`; `reasoning/proof_execution_engine_types.py` (100L) — `ProofStatus`/`ProofResult`.
+
+| ID | Priority | Task | Status | Notes |
+|---|---|---|---|---|
+| T-190 | P3 | Create `src/services/external-provers.ts` | ✅ DONE | `ProverStatus` (6: THEOREM/SAT/UNSAT/UNKNOWN/TIMEOUT/ERROR); `VampireProver`/`EProver` (`isAvailable()/prove()` stubs with simulated results); `ProverRegistry.register/get/list/getBestFor/prove/size`; `getProverRegistry()/resetProverRegistry()` |
+| T-191 | P3 | Create `src/services/caselaw-bulk-processor.ts` | ✅ DONE | `CaselawDocument`/`makeCaselawDocument()`; `ProcessingStats` (processingTimeMs/successRate/toDict/reset); `BulkProcessingConfig`/`makeDefaultConfig()`; `CaselawBulkProcessor.process/processBatch/getStats/reset`; `createBulkProcessor()` |
+| T-192 | P3 | Create `src/services/proof-execution-engine-types.ts` | ✅ DONE | `ProofStatus` (5: SUCCESS/FAILURE/TIMEOUT/ERROR/UNSUPPORTED); `ProofResult` (prover/statement/status/proof/timeMs/statistics/isProved/failed/toDict()); `makeProofResult()` |
+| T-193 | P3 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint42.test.ts` — 28 tests (all pass) |
 
 ## 8. Prover Capability Matrix
 
