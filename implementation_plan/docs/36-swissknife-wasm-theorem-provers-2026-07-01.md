@@ -1296,6 +1296,34 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-211 | P3 | Create `src/services/tdfol-nl-llm.ts` | `LLMParseResult` (formula/confidence/method/alternatives/errors); `LLMResponseCache` (get/set/clear/size); `buildConversionPrompt(text)/buildValidationPrompt(formula)/buildErrorCorrectionPrompt(formula, errors)/getOperatorHintsForText(text)` | ✅ DONE |
 | T-212 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint47.test.ts` | ✅ DONE — 43 tests (all pass) |
 
+---
+
+### Sprint 48 (Phase 48 — DCEC English Grammar + Proof Explainer + Deontic Analyzer + Structured Logging, P3) 🆕
+
+> **Previously untracked gap (Sprint 48):** `CEC/native/dcec_english_grammar.py` (661L), `TDFOL/proof_explainer.py` (577L), `deontic/analyzer.py` (503L), `observability/structured_logging.py` (527L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-213 | P3 | Create `src/services/dcec-english-grammar.ts` | `LexicalCategory` enum; `LexicalEntry` (word/category/semantics); `GrammarRule` (name/pattern/semantics); `DCECEnglishGrammar` (lookupWord/parsePhrase/getEnglishForFormula()/getFormulasForEnglish()); `createDcecGrammar()` factory | ✅ DONE |
+| T-214 | P3 | Create `src/services/proof-explainer.ts` | `ProofType` (FORWARD_CHAINING/BACKWARD_CHAINING/MODAL_TABLEAUX/ZKP); `ExplanationLevel` (BRIEF/NORMAL/DETAILED/VERBOSE); `ProofStep`/`ProofExplanation`; `ProofExplainer` (explainProof()/explainZkpProof()/generateSummary()); `explainProof()` / `explainZkpProof()` module-level fns | ✅ DONE |
+| T-215 | P3 | Create `src/services/deontic-analyzer.ts` | `DeonticAnalyzer` (extractDeonticStatements(corpus)/detectDeonticConflicts(statements)/groupByEntity(statements)/getStatistics(statements)) with DEONTIC_PATTERNS regex catalogue | ✅ DONE |
+| T-216 | P3 | Create `src/services/structured-logging.ts` | `LogField` enum; `EventType` enum; `LogContext` (interface/get/set/clear); `getLogger(name)/structuredLog(level, event, message, fields)` | ✅ DONE |
+| T-217 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint48.test.ts` | ✅ DONE — 47 tests (all pass) |
+
+---
+
+### Sprint 49 (Phase 49 — German Parser + Deontic Converter + TDFOL Converter + FOL Converter, P3) 🆕
+
+> **Previously untracked gap (Sprint 49):** `CEC/nl/german_parser.py` (636L), `deontic/converter.py` (612L), `TDFOL/tdfol_converter.py` (528L), `fol/converter.py` (497L).
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-218 | P3 | Create `src/services/german-parser.ts` | `GermanPatternMatcher` (match(text)/matchByType()); `GermanParser` (parse(text)/extractClauses()); `getGermanVerbConjugations()`/`getGermanDeonticKeywords()` module-level data fns | ✅ DONE |
+| T-219 | P3 | Create `src/services/deontic-converter.ts` | `DeonticConversionResult` (formulaString/ir/confidence); `DeonticConverter` (convert(nlText)/convertBatch(texts)/getStats()) | ✅ DONE — in `logic-converters.ts` |
+| T-220 | P3 | Create `src/services/tdfol-converter.ts` | `TDFOLConversionResult` (tdfol/confidence/errors); `TDFOLConverter` (fromNL(text)/fromDeontic(ir)/fromFOL(fol)/validate(formula)) | ✅ DONE — in `logic-converters.ts` |
+| T-221 | P3 | Create `src/services/fol-converter.ts` | `FOLFormula` (type/content/subformulas); `FOLConverter` (toTDFOL(fol)/toDeontic(fol)/toNL(fol)/validate(fol)) | ✅ DONE — in `logic-converters.ts` |
+| T-222 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint49.test.ts` | ✅ DONE — 41 tests (all pass) |
+
 ## 8. Prover Capability Matrix
 
 | Formula Class | Python Reference | Phase 1 (Z3 WASM) | Phase 3 (CVC5) | Phase 4 (Coq) | Phase 5 (Lean 4) |
