@@ -132,11 +132,14 @@ Adding `TdfolProverBridge` (Sprint 10) would close the last mandatory remote fal
 | `logic/batch_processing.py` | `BatchResult`, async/parallel batch formula evaluation | Sprint 19 ✅ | P2 |
 | `logic/api.py` | Public API facade: `I18NConflictReport`, `compileNlToPolicy()`, `evaluateNlPolicy()` | Sprint 20 ✅ | P2 |
 | `logic/e2e_validation.py` | `E2EValidator`, `ValidationResult`: end-to-end pipeline validation | Sprint 20 ✅ | P2 |
-| `logic/types/` | Shared type system: `DeonticOperator`, `TemporalOperator`, `LegalAgent`, `TemporalCondition`, `LegalContext`, `DeonticFormula`, `DeonticRuleSet`, `FOLFormula`, `FOLConversionResult` | Sprint 21 | P2 |
-| `logic/common/validators.py` | `validate_formula_string()`, `validate_axiom_list()`, `validate_logic_system()`, `validate_timeout_ms()` | Sprint 21 | P2 |
-| `logic/common/bounded_cache.py` | `CacheEntry[T]`, `BoundedCache[T]` (generic LRU eviction cache) | Sprint 21 | P2 |
-| `logic/TDFOL/nl/` | `parse_natural_language(text)` → TDFOL formulas (NL→TDFOL pipeline) | Sprint 21 | P2 |
-| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 22+ | P3 |
+| `logic/types/` | Shared type system: `DeonticOperator`, `TemporalOperator`, `LegalAgent`, `TemporalCondition`, `LegalContext`, `DeonticFormula`, `DeonticRuleSet`, `FOLFormula`, `FOLConversionResult` | Sprint 21 ✅ | P2 |
+| `logic/common/validators.py` | `validate_formula_string()`, `validate_axiom_list()`, `validate_logic_system()`, `validate_timeout_ms()` | Sprint 21 ✅ | P2 |
+| `logic/common/bounded_cache.py` | `CacheEntry[T]`, `BoundedCache[T]` (generic LRU eviction cache) | Sprint 21 ✅ | P2 |
+| `logic/TDFOL/nl/` | `parse_natural_language(text)` → TDFOL formulas (NL→TDFOL pipeline) | Sprint 21 ✅ | P2 |
+| `logic/TDFOL/exceptions.py` | TDFOL exception hierarchy: `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | Sprint 22 | P2 |
+| `logic/TDFOL/tdfol_optimization.py` | `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | Sprint 22 | P2 |
+| `logic/TDFOL/security_validator.py` | Formula input security validation (injection/overflow protection) | Sprint 22 | P2 |
+| `logic/deontic/formula_builder.py` | Rich deontic formula builder (7019 lines) | Sprint 23+ | P3 |
 | `logic/ErgoAI/` | ErgoAI/Erlog Datalog integration | Sprint 19+ | P3 |
 | `logic/flogic/` | F-logic (frame logic) | Sprint 19+ | P3 |
 
@@ -316,13 +319,16 @@ These Lean 4 libraries implement cryptographic primitives for ZK proofs natively
 | **I18N Conflict Report** | ✅ `api.py` (723 lines) — `I18NConflictReport` (multi-language conflict detection report) | ✅ `I18NConflictReport` + `detectMultilingualConflicts()` | **CLOSED** — Sprint 20 (T-104–T-107) |
 | **E2E Validator** | ✅ `e2e_validation.py` (691 lines) — `E2EValidator`, `ValidationResult` | ✅ `E2EValidator.run() → ValidationSummary` (7 test suites) | **CLOSED** — Sprint 20 |
 | **Logic Public API** | ✅ `api.py` (723 lines) — top-level `LogicPublicApi` facade, `compileNlToPolicy()`, `evaluateNlPolicy()` | ✅ `LogicPublicApi`: `analyzeText()`, `analyzeTexts()`, `detectMultilingualConflicts()` | **CLOSED** — Sprint 20 |
-| **Logic Types** | ✅ `types/deontic_types.py` (296L) + `fol_types.py` (121L) + `common_types.py` (119L) + `proof_types.py` (26L) | ❌ Not implemented | **OPEN** — Sprint 21 P2 |
-| **Common Validators + BoundedCache** | ✅ `common/validators.py` (277L) + `common/bounded_cache.py` (233L) | ❌ Not implemented | **OPEN** — Sprint 21 P2 |
-| **TDFOL NL API** | ✅ `TDFOL/nl/tdfol_nl_api.py` — `parse_natural_language(text)` → TDFOL formulas | ❌ Not implemented | **OPEN** — Sprint 21 P2 |
-| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 22+ P3 |
+| **Logic Types** | ✅ `types/deontic_types.py` (296L) + `fol_types.py` (121L) + `common_types.py` (119L) + `proof_types.py` (26L) | ✅ `logic-types.ts` (`DeonticFormula`/`DeonticRuleSet`/`FOLFormula`/`ProofResult`) | **CLOSED** — Sprint 21 (T-108–T-111) |
+| **Common Validators + BoundedCache** | ✅ `common/validators.py` (277L) + `common/bounded_cache.py` (233L) | ✅ `logic-validators.ts` (validators + `BoundedCache<T>`) | **CLOSED** — Sprint 21 |
+| **TDFOL NL API** | ✅ `TDFOL/nl/tdfol_nl_api.py` — `parse_natural_language(text)` → TDFOL formulas | ✅ `tdfol-nl-api.ts` + `parse_natural_language()` alias | **CLOSED** — Sprint 21 |
+| **TDFOL Exception Hierarchy** | ✅ `TDFOL/exceptions.py` (684L) — `TDFOLError`/`ParseError`/`ProofError`/`ZKPProofError`/`InferenceError`/`CacheError` | ❌ Not implemented | **OPEN** — Sprint 22 P2 |
+| **TDFOL Optimization** | ✅ `TDFOL/tdfol_optimization.py` (539L) — `ProvingStrategy`, `IndexedKB`, `OptimizationStats`, `OptimizedProver` | ❌ Not implemented | **OPEN** — Sprint 22 P2 |
+| **TDFOL Security Validator** | ✅ `TDFOL/security_validator.py` (777L) — formula input validation | ❌ Not implemented | **OPEN** — Sprint 22 P2 |
+| **Deontic IR / formula_builder** | ✅ `deontic/formula_builder.py` (7019 lines) | ⚠️ Only `Policy` type | **PARTIAL** — Sprint 23+ P3 |
 | Remote fallback | N/A | ✅ `mcp-remote-deontic-engine.ts` | Keep as last-resort fallback |
 
-**Current status (post Sprint 20):** 20+ modules across Sprints 1–20; all provers local; ZKP→UCAN; NL→FOL→LegalNormIR→prover pipeline + I18N + E2E + LogicPublicApi facade. Remaining: Logic Types + Common utils + TDFOL NL API (Sprint 21 P2) + formula_builder (Sprint 22+ P3).
+**Current status (post Sprint 21):** 21+ modules across Sprints 1–21; complete logic type system; NL→TDFOL pipeline; all provers local; ZKP→UCAN; full NL→LegalNormIR→prover-syntax pipeline + monitoring + registry + batch + public API. Remaining: TDFOL exceptions + optimization + security (Sprint 22 P2) + formula_builder (Sprint 23+ P3).
 
 ---
 
@@ -828,6 +834,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 | T-109 | P2 | Create `src/services/logic-validators.ts` — validators + BoundedCache | ✅ DONE | `validateFormulaString/AxiomList/LogicSystem/TimeoutMs`; `BoundedCache<T>` (LRU eviction/TTL/stats) |
 | T-110 | P2 | Create `src/services/tdfol-nl-api.ts` — NL→TDFOL parser API | ✅ DONE | `parseNaturalLanguage(text, opts?) → NLParseResult`; `GeneratedFormula` (formula_string/operator/entity/action); O/P/F extraction via DeonticTextAnalyzer; `parse_natural_language` alias |
 | T-111 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint21.test.ts` — 32 tests (all pass): DeonticFormula (6), DeonticRuleSet (4), validators (13), BoundedCache (5), TDFOL NL API (8) |
+
+---
+
+### Sprint 22 (Phase 22 — TDFOL Exceptions + Optimization + Security, P2) ✅ DONE (2026-07-03)
+
+> **Gap:** `TDFOL/exceptions.py` (684L) + `tdfol_optimization.py` (539L) + `security_validator.py` (777L).
+
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-112 | P2 | Create `src/services/tdfol-exceptions.ts` — TDFOL exception hierarchy | ✅ DONE | `TDFOLError`/`ParseError`/`ProofError`/`ProofTimeoutError`/`ProofNotFoundError`/`ZKPProofError`/`ConversionError`/`InferenceError`/`NLProcessingError`/`PatternMatchError`/`CacheError`; type guards |
+| T-113 | P2 | Create `src/services/tdfol-optimization.ts` — optimised prover layer | ✅ DONE | `IndexedKB` (addFormula/lookupByPredicate/lookupByOperator/getStats); `OptimizedProver` (BoundedCache + ExtendedTdfolProverBridge); `ProvingStrategy`; `createOptimizedProver()` |
+| T-114 | P2 | Create `src/services/tdfol-security-validator.ts` — input security validator | ✅ DONE | `SecurityValidator.validateFormula/validateKb` (size/depth/blocklist/operator-count checks); `SecurityConfig`; `createValidator(level)`; `validateFormula()` |
+| T-115 | P2 | Write 10+ tests | ✅ DONE | `wasm-prover-sprint22.test.ts` — 24 tests (all pass): exceptions (10), IndexedKB+OptimizedProver (6), security (8) |
 
 ## 8. Prover Capability Matrix
 
