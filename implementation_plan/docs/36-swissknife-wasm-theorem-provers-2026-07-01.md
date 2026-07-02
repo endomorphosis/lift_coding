@@ -511,14 +511,14 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
-### Sprint 7 (Phase 6b — ix / Lean 4 ZK, P2)
+### Sprint 7b (Phase 6b — ix / Lean 4 ZK, P2) ✅ DONE (2026-07-03)
 
-| ID | Priority | Task | Acceptance Criteria |
-|---|---|---|---|
-| T-51 | P2 | Evaluate `ix` CLI/API surface for programmatic invocation | Go/no-go + integration approach documented |
-| T-52 | P2 | Extend `Lean4WasmBridge` to invoke `ix` for ZK-attested proofs | `prove(leanSource)` returns `ZKProofArtifact` with `backend: 'sphinx'` |
-| T-53 | P2 | Attach `ix`-generated artifact CID to `AuditEntry.extra.zk_proof_cid` | Logged by `PolicyAuditLog.record()` |
-| T-54 | P2 | Write 6+ tests for ix-backed Lean4WasmBridge | Tests skip when ix CLI absent |
+| ID | Priority | Task | Status | Acceptance Criteria |
+|---|---|---|---|---|
+| T-51 | P2 | Evaluate `ix` CLI/API surface for programmatic invocation | ✅ DONE | Go/no-go: subprocess viable; WASM not feasible. 2-step: `ix compile` → `.ixe`, then SP1 execute. Requires lake+Lean4+Rust+32GB RAM. |
+| T-52 | P2 | Extend `Lean4WasmBridge` to invoke `ix` for ZK-attested proofs | ✅ DONE | `findIxCli()`, `proveWithIx()` → `ZKProofArtifact{backend:'sphinx'}`, `ixBuildInstructions()` |
+| T-53 | P2 | Attach `ix`-generated artifact CID to `AuditEntry.extra.zk_proof_cid` | ✅ DONE | `PolicyAuditLog.record()` accepts & persists `zk_proof_cid` to JSONL |
+| T-54 | P2 | Write 6+ tests for ix-backed Lean4WasmBridge | ✅ DONE | 13 tests (12 pass, 1 skipped live-ix); plus provers CLI tests |
 
 ---
 
