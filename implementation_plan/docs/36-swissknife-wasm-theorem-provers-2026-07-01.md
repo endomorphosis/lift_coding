@@ -1611,6 +1611,18 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 72 (Phase 72 — CacheManager + ExecutionEngine + FAISSIndex + DataLake deferred TODOs, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-328 | P3 | Implement deferred TODOs in `src/storage/cache/cache-manager.ts` | ✅ DONE — LRU eviction (`maxSize`), periodic TTL sweep (`setInterval.unref()`), `getStats()` with hit/miss tracking |
+| T-329 | P3 | Implement deferred TODOs in `src/core/execution.ts` | ✅ DONE — `HardwareBackend`/`WebGPUOptimizer` typed imports, `ModelData`/`TensorData` types, `executeWebGPU/WebNN/WASM/CPU()` stubs |
+| T-330 | P3 | Implement deferred TODOs in `src/vector/faiss-index.ts` | ✅ DONE — L2/cosine/innerproduct metrics; update-on-duplicate semantics; removed all `any` |
+| T-331 | P3 | Implement deferred TODOs in `src/connectors/data-lake.ts` | ✅ DONE — `GraphRAGDatabaseContract` interface; `connect/disconnect` state; `partitionForQuery`; `getPartitionData()` |
+| T-332 | P3 | Write 10+ tests | ✅ DONE — 24 tests in `test/mcp-plus-plus/wasm-prover-sprint72.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
