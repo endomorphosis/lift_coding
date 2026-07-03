@@ -498,6 +498,17 @@ dashboard capability catalog exposes the VAI-563 gate for `ipfs_kit_py`,
 `ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated
 follow-up subtasks if any dashboard or backend validation fails.
 
+VAI-563 attempt 2 records the current July 3 validation pass in
+`data/virtual_ai_os/discovery/2026-07-03-vai-563-attempt-2-launch-playwright-validation-gate.md`
+with a Hallucinate mirror at
+`data/hallucinate_multimodal_control/discovery/2026-07-03-vai-563-attempt-2-validation.md`.
+Attempt 1's evidence was audited against the live code and confirmed real, so
+attempt 2 only bumps the `VAI-563` launch-validation-gate `attempt` counter to
+`2`, points `attempt_receipts` at the new pair of files, and regenerates the
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`
+catalog fixture so it stays byte-for-byte consistent with the Hallucinate
+manager output.
+
 The executable gate is:
 
 ```bash
