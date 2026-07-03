@@ -1648,6 +1648,21 @@ Replaces the placeholder `extractSimpleEntities()` regex heuristic with a full s
 
 ---
 
+### Sprint 75 (Phase 75 — Logger + Quantization + Tensor + Goose MCP + Swarm Inference + IPLD Graph, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-342 | P3 | Close deferred TODOs in `src/utils/logger.ts` | ✅ DONE — `LogLevel` enum (DEBUG/INFO/WARN/ERROR/NONE); `setLevel()`/`addTransport()`; `LOG_LEVEL` env var; log-level filtering |
+| T-343 | P3 | Close deferred TODOs in `src/utils/quantization.ts` | ✅ DONE — `quantizeTensor()` (int8 symmetric + uint8 asymmetric); `dequantizeTensor()` inverse |
+| T-344 | P3 | Close deferred TODOs in `src/ml/tensor/tensor.ts` | ✅ DONE — shape validation; `reshape()`/`slice()`/`add()`/`multiply()`/`scale()`/`transpose()`/`matmul()`/`clamp()` |
+| T-345 | P3 | Close deferred TODOs in `src/integration/bridges/goose-mcp.ts` | ✅ DONE — real HTTP fetch + `AbortController` timeout in `initialize()` and `call()`; graceful mock fallback |
+| T-346 | P3 | Close deferred TODOs in `src/inference/swarm-inference.ts` | ✅ DONE — typed `InferenceTask`/`TaskResult`; capability-aware load-balanced task assignment; fault-tolerance retry; type-polymorphic aggregation; provenance array |
+| T-347 | P3 | Close deferred TODOs in `src/graph/ipld-knowledge-graph.ts` | ✅ DONE — `IPFSClientLike` typed interfaces; `crypto.randomUUID()` node IDs; `dag-cbor` codec options; `evictFromCache()`/`updateNode()` |
+| T-348 | P3 | Fix LRU timestamp collision in `src/storage/cache/cache-manager.ts` | ✅ DONE — monotonic counter replaces `Date.now()` for `lastAccessed` |
+| T-349 | P3 | Write 10+ tests | ✅ DONE — 33 tests in `test/mcp-plus-plus/wasm-prover-sprint75.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
