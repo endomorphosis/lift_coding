@@ -1893,3 +1893,78 @@ Python forward-chaining theorem prover with `ModusPonens`, `Simplification`, `De
 `DeonticPermission` inference rules), `cec_framework.py` (orchestration), `shadow_prover_wrapper.py`
 (modal logic K/S4/S5). See §2.4 for the full inventory. Sprint 9 adds `DcecProverBridge` to close
 this gap.
+
+### 11.7 Independent verification at Sprint 75 + Python-reference parity audit (2026-07-03)
+
+Independent (concurrent-reviewer) verification pass covering two dimensions the
+prior §11.x notes had not: a full **behavioral** run of the prover test suite, and
+a **source-level parity audit** of the TypeScript port against the Python
+source-of-truth (`ipfs_datasets_py/logic/`).
+
+**Behavioral — full prover jest suite (71 suites):** `npx jest
+test/mcp-plus-plus/wasm-prover --config=config/jest/jest.config.cjs` →
+**2253 passed / 2 failed / 11 skipped** (254 s; 11 skipped = live Z3 gated by
+`Z3_WASM_LIVE=1`). Both failures diagnosed to root cause; **neither is a functional
+regression**:
+- **`wasm-prover-sprint72.test.ts` (LRU eviction) — FLAKY, now FIXED.** Passed
+  3/3 in isolation; failed only under full-suite timing pressure. Root cause:
+  `cache-manager.ts` used `Date.now()` (1 ms resolution) for `lastAccessed`, and
+  `evictLRU()` breaks ties in insertion order, so under load `get('a')`/`set('b')`
+  shared a millisecond and evicted the wrong entry. **Sprint 75 (`ed70d39`) fixes
+  it exactly as recommended** — a monotonic `accessCounter` (`cache-manager.ts:20`,
+  incremented in `get()`:48 and `set()`:61) replaces the timestamp, so ties are
+  impossible. Re-verified green at Sprint 75.
+- **`wasm-prover-sprint3-4.test.ts:303-314` (temporal policy) — STALE TEST,
+  DETERMINISTIC, still red.** Asserts `reason==='unknown'` + `meta.skipped===
+  'remote-only'`, but `mcp-wasm-prover-hub.ts:184-191` now routes
+  `formulaClass==='temporal'` to `this.tdfol.checkPolicyConsistency` (Sprint 10
+  TDFOL), which decides locally. The test predates TDFOL and was never updated;
+  behavior legitimately **improved** (temporal is now locally provable). Fix =
+  update the assertion to accept the locally-decided result (it is no longer
+  remote-only). **This supersedes §11.6's "0 failing" line** — one deterministic
+  stale-assertion test remains red at Sprint 75.
+
+**Parity audit — TS port vs Python `logic/` reference (4 parallel source audits):**
+
+| Domain | Python reference | Overall verdict |
+|---|---|---|
+| SMT / interactive / neural provers | `external_provers/{smt,interactive,neural}` | Faithful **subset** — implemented paths sound; PARTIAL/DIVERGENT on API breadth |
+| TDFOL (types, rules, NL) | `TDFOL/`, `nl/` | PARTIAL — core grammar/vocab faithful; ~58% of inference rules, strategy framework, `substitute()` absent |
+| DCEC / CEC + deontic core | `CEC/native/`, `deontic/` | PARTIAL/DIVERGENT — subsystems present; 3 competing TS type files; action-similarity + tableaux incomplete |
+| Modal / legal / temporal domain | `modal/`, `integration/domain/` | PARTIAL — 2 modules DIVERGENT (RAG store, temporal_deontic_api); embeddings/SymbolicAI dropped |
+
+**Framing:** the port is a deliberately-scoped, pragmatic **subset** aimed at the
+SwissKnife deontic **policy-consistency** use case (Rounds 50–53). For that use
+case it is sound (2253 tests green; F1 `'unsat'` fix regression-clean). It is **not**
+a 1:1 general-purpose theorem-prover port — many advanced Python capabilities are
+intentionally simplified (embeddings→keyword overlap, spaCy→regex, SymbolicAI/neural
+confidence dropped, full TDFOL-AST→SMT→SMT2 shim without quantifiers) or deferred
+(~42% of TDFOL inference rules, S5 tableaux symmetry axiom, propositional tableaux
+α/β rules). Those **local-prover** gaps are functionally covered at runtime because
+hard/temporal proofs are **delegated to the Python engine** over the Round-51
+`RemoteDeonticEngine` (MCP++ libp2p), which is the authoritative prover.
+
+**Cross-language interop hazards (the findings that DO matter, because Rounds 50–53
+wire TS⇄Python over MCP++ and a shared IPFS proof cache):** these break
+round-tripping/serialization even though each side is internally consistent —
+- **Result field + unit drift:** `proof_time` (Python, **seconds**) vs
+  `proof_time_ms` (TS, **ms**) — 1000× mismatch; `ProofResult`
+  `is_valid/conclusion/method_used/time_taken` vs `proved/formula/method/timeMs`.
+- **Deontic field name:** `DeonticFormula.action` (TS) vs `.proposition` (Python) —
+  cross-cutting through query-engine + RAG store + any JSON serialization.
+- **Agent notation:** Python `O[alice](φ)` vs TS `O(φ,alice)` — incompatible KB
+  string forms.
+- **Symbol codepoint:** EVENTUALLY `◊` U+25CA (Python) vs `◇` U+25C7 (TS) — string
+  compare fails on any temporal formula.
+- **Proof-cache key:** Python keys on `{formula, axioms, prover_name, prover_config}`;
+  TS hub keys on `canonicalPolicyKey(policy)` only (excludes axioms + prover
+  identity) — a shared cache would mis-key.
+- **Missing enum members** (corroborate §11.2 F2/F3): `ProverStrategy`
+  AUTO/MOST_CAPABLE, `FormulaType` MODAL/ARITHMETIC, `FormulaComplexity` (absent),
+  `ProofStatus` DISPROVED/UNKNOWN/UNPROVABLE, `LegalDomain` (9 values), several
+  `ConflictType` categories.
+
+None of these block the shipped policy-consistency path; they are the reconciliation
+backlog for anyone relying on byte-level Python⇄TS proof/KB/cache interchange. Full
+per-module MATCH/PARTIAL/MISSING/DIVERGENT tables (≈50 findings, all source-cited)
+were produced by the four audits and are summarized above.
