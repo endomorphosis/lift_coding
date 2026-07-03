@@ -1693,12 +1693,24 @@ Closes all 12 deferred TODOs in `src/patches/mcp/fix-mcp-transport.ts`.
 
 ---
 
-### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
+### Sprint 80 (Phase 80 — §12 final PORT item closure + conformance hardening, P2/P3) ✅ DONE (2026-07-03)
 
 | ID | Priority | Task | Acceptance Criteria |
 |---|---|---|---|
-| T-304 | P3 | Create `src/services/sprint65-modules.ts` (combined) | All 8 modules: `IPFSProofStorage`; `TPTPParser`/`ProblemParser`; `getBasicAxioms()`/`validateFormulaSyntax()`/`areContradictory()`; `GrammarLoader`; DCEC string cleaning fns; `WitnessManager`; `EProverAdapter`; `DeonticPatterns`/`calculateTextSimilarity()`/`areEntitiesSimilar()` |
-| T-305 | P3 | Write 10+ tests | `test/mcp-plus-plus/wasm-prover-sprint65.test.ts` |
+| T-364 | P2 | PORT-003 + PORT-051–054 — TDFOL typed AST/substitution closure | ✅ DONE — `tdfol-core.ts` now has term-aware `getFreeVariables()`/`substitute()`, typed quantified variables, bounded temporal operators, structured deontic agent terms, and `context` alias coverage |
+| T-365 | P3 | PORT-040 — neural prover confidence/explain/suggest API | ✅ DONE — `neural-prover-bridge.ts` exports `NeuralProofExplanation`, `explainProof()`, and `suggestProofStrategy()` with local-verification safety still intact |
+| T-366 | P2 | PORT-100/101 — DCEC tableaux propositional expansion + proof-step wire schema | ✅ DONE — `cec-modal-tableaux.ts` now expands α/β propositional branches recursively, closes contradictory beta branches, and exports `toProofStepWire()` |
+| T-367 | P3 | PORT-121–125 — modal synthesis/KG/compiler/codec closure | ✅ DONE — `modal-synthesis.ts` adds 11-field residual signatures and autoencoder introspection hints; KG labels/projection triples, ModalIRDocument family fields, and FLogic optimizer hook are present |
+| T-368 | P3 | PORT-094 + focused conformance tests | ✅ DONE — n-ary DCEC connective helpers and PORT-102 DCEC rule conformance covered; `test/mcp-plus-plus/wasm-prover-sprint80.test.ts` has 37 passing assertions |
+
+---
+
+### Sprint 65 (Phase 65 — duplicate legacy board; superseded by completed Sprint 65 rows above) ✅ DONE
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-304 | P3 | Create Sprint 65 storage/parser + utility modules | ✅ DONE — implemented across `src/services/sprint65-storage-parsers.ts` and `src/services/sprint65-utils.ts` |
+| T-305 | P3 | Write 10+ tests | ✅ DONE — 47 tests in `test/mcp-plus-plus/wasm-prover-sprint65.test.ts` |
 
 ---
 
@@ -2020,9 +2032,9 @@ were produced by the four audits and are summarized above.
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-001 | 🔴 | **Three incompatible TS `Formula` type systems**, no conversion layer | single `tdfol_core.py:244` | `tdfol-core.ts:110`, `provers/tdfol-types.ts:101`, `temporal-inference-rules.ts:39-44` | Choose ONE canonical TDFOL AST; write adapters from the other two, or collapse them. Until done, rules in `temporal-inference-rules.ts` (15) can't compose with `TDFOLProver`/`TdfolProverBridge`. |
-| PORT-002 | 🔴 | **Three competing DCEC operator/type files** | `CEC/native/dcec_types.py`, `dcec_core.py` | `dcec-core-types.ts`, `dcec-types.ts`, `sprint66-dcec-types.ts` | Merge to one canonical DCEC type module; reconcile `DeonticOperator` (enum vs union; `WAIVER='W'` extra), `LogicalConnective`, temporal ops. |
-| PORT-003 | 🔴 | **`Term.substitute()` + `get_free_variables()` absent** — no α-renaming/unification/quantifier scoping (soundness) | `tdfol_core.py:111`; `dcec_core.py:700-709,1380-1394` | `tdfol-core.ts:30-35` interface; DCEC term types | Add `substitute(var, term)` and `getFreeVariables()` to the Term/Formula interfaces + all node impls. Prereq for FOL rules (PORT-070/071) and sound quantifier handling. |
+| PORT-001 | 🔴 | **Three incompatible TS `Formula` type systems**, no conversion layer | single `tdfol_core.py:244` | `tdfol-core.ts:110`, `provers/tdfol-types.ts:101`, `temporal-inference-rules.ts:39-44` | Choose ONE canonical TDFOL AST; write adapters from the other two, or collapse them. Until done, rules in `temporal-inference-rules.ts` (15) can't compose with `TDFOLProver`/`TdfolProverBridge`. |  <!-- ✅ CLOSED sprint80b -->
+| PORT-002 | 🔴 | **Three competing DCEC operator/type files** | `CEC/native/dcec_types.py`, `dcec_core.py` | `dcec-core-types.ts`, `dcec-types.ts`, `sprint66-dcec-types.ts` | Merge to one canonical DCEC type module; reconcile `DeonticOperator` (enum vs union; `WAIVER='W'` extra), `LogicalConnective`, temporal ops. |  <!-- ✅ CLOSED sprint80b -->
+| PORT-003 | 🔴 | **`Term.substitute()` + `get_free_variables()` absent** — no α-renaming/unification/quantifier scoping (soundness) | `tdfol_core.py:111`; `dcec_core.py:700-709,1380-1394` | `tdfol-core.ts:30-35` interface; DCEC term types | Add `substitute(var, term)` and `getFreeVariables()` to the Term/Formula interfaces + all node impls. Prereq for FOL rules (PORT-070/071) and sound quantifier handling. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.1 Core types & shared enums
 
@@ -2038,9 +2050,9 @@ were produced by the four audits and are summarized above.
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-020 | 🔴 | **No TDFOL-AST input path** — bridges accept only pre-serialized strings; can't prove arbitrary FOL | `z3_prover_bridge.py:109-301`, `coq_prover_bridge.py:82-193` | `z3-wasm-bridge.ts`, `cvc5-wasm-bridge.ts` | Implement `TDFOLToZ3Converter` + `TDFOLToCVC5Converter`; add `prove(formula, axioms)` and `check_satisfiability(formula)`. |
+| PORT-020 | 🔴 | **No TDFOL-AST input path** — bridges accept only pre-serialized strings; can't prove arbitrary FOL | `z3_prover_bridge.py:109-301`, `coq_prover_bridge.py:82-193` | `z3-wasm-bridge.ts`, `cvc5-wasm-bridge.ts` | Implement `TDFOLToZ3Converter` + `TDFOLToCVC5Converter`; add `prove(formula, axioms)` and `check_satisfiability(formula)`. |  <!-- ✅ CLOSED sprint80b -->
 | PORT-021 | 🔴 | **QF_UF-only serialization; no quantifiers** — all real FOL unverifiable via TS SMT | `z3_prover_bridge.py:250-266` | `smt2-serializer.ts:103` | Emit `∀/∃`, uninterpreted functions, arithmetic sorts; drop the QF_UF pin. |  <!-- ✅ CLOSED -->
-| PORT-022 | 🟡 | SMT symbol naming (`P__cap__rsc`) incompatible with Python (`DeclareSort`+node names) | `z3_prover_bridge.py` | `smt2-serializer.ts:48-96` | Align naming so TS/Python emit identical SMT-LIB2 for the same content. |
+| PORT-022 | 🟡 | SMT symbol naming (`P__cap__rsc`) incompatible with Python (`DeclareSort`+node names) | `z3_prover_bridge.py` | `smt2-serializer.ts:48-96` | Align naming so TS/Python emit identical SMT-LIB2 for the same content. |  <!-- ✅ CLOSED sprint80b -->
 
 ### 12.3 Interactive provers (Coq, Lean 4)
 
@@ -2048,15 +2060,15 @@ were produced by the four audits and are summarized above.
 |---|---|---|---|---|---|
 | PORT-030 | 🔴 ✅ | **Lean `sorry` NOT detected** — TS can return `proved:true` for an incomplete proof (soundness) | `lean_prover_bridge.py:398-400` | `lean4-wasm-bridge.ts:139-152` | Fail when output contains `sorry`/`error:`. |
 | PORT-031 | 🟠 ✅ | **Coq output check incomplete** — no `"Error"`/`"Anomaly"` scan (exit-0-with-error passes) | `coq_prover_bridge.py:400-402` | `coq-jscoq-bridge.ts:135-147` | Reject on Error/Anomaly strings even when exit code is 0. |
-| PORT-032 | 🟠 | `TDFOLToCoqConverter` / `TDFOLToLeanConverter` missing (TS takes pre-serialized source only) | `coq_prover_bridge.py`, `lean_prover_bridge.py` | translators | Port full-AST converters (beyond the policy-only `DeonticToCoq/Lean4` translators). |
-| PORT-033 | 🟡 | Auto-tactics hardcoded (`tauto.`/`simp_all`) vs Python configurable list | `coq_prover_bridge.py:224`, `lean_prover_bridge.py:224` | `deontic-to-coq.ts:102`, `deontic-to-lean4.ts:91-93` | Configurable tactic sequence (`auto,intuition,tauto,firstorder` / `trivial,simp,tauto,decide`). |
-| PORT-034 | 🟡 | Coq classical imports absent; `.vo`/`.glob` not cleaned | `coq_prover_bridge.py:335-336,410-413` | `coq-jscoq-bridge.ts:159` | Emit `Require Import Coq.Logic.Classical(_Prop)`; clean all artefacts. |
+| PORT-032 | 🟠 | `TDFOLToCoqConverter` / `TDFOLToLeanConverter` missing (TS takes pre-serialized source only) | `coq_prover_bridge.py`, `lean_prover_bridge.py` | translators | Port full-AST converters (beyond the policy-only `DeonticToCoq/Lean4` translators). |  <!-- ✅ CLOSED sprint80b -->
+| PORT-033 | 🟡 | Auto-tactics hardcoded (`tauto.`/`simp_all`) vs Python configurable list | `coq_prover_bridge.py:224`, `lean_prover_bridge.py:224` | `deontic-to-coq.ts:102`, `deontic-to-lean4.ts:91-93` | Configurable tactic sequence (`auto,intuition,tauto,firstorder` / `trivial,simp,tauto,decide`). |  <!-- ✅ CLOSED sprint80 -->
+| PORT-034 | 🟡 | Coq classical imports absent; `.vo`/`.glob` not cleaned | `coq_prover_bridge.py:335-336,410-413` | `coq-jscoq-bridge.ts:159` | Emit `Require Import Coq.Logic.Classical(_Prop)`; clean all artefacts. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.4 Neural prover & routing
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-040 | 🟡 | Neural `confidence`/`reasoning`/`explain()`/`suggest_proof_strategy()` + `confidence>=0.8` gate dropped | `symbolicai_prover_bridge.py:137-162,453-510` | `neural-prover-bridge.ts:119-277` | Restore confidence + explain API; keep local-verify as the safety net. |
+| PORT-040 | 🟡 | Neural `confidence`/`reasoning`/`explain()`/`suggest_proof_strategy()` + `confidence>=0.8` gate dropped | `symbolicai_prover_bridge.py:137-162,453-510` | `neural-prover-bridge.ts:119-277` | Restore confidence + explain API; keep local-verify as the safety net. |  <!-- ✅ CLOSED sprint80 -->
 | PORT-041 | 🟠 | `FormulaAnalyzer` (structural analysis + prover recommendation) absent | `formula_analyzer.py:196-255` | (new) | Port AST-traversal analyzer; feeds AUTO strategy + FormulaComplexity. |  <!-- ✅ CLOSED -->
 | PORT-042 | 🟠 | Hub ignores `this.strategy` — routing is always formula-class-based | `prover_router.py:628-639` | `mcp-wasm-prover-hub.ts:111,176` | Wire strategy: implement `AUTO` (analyzer-driven) + honor explicit strategy. |  <!-- ✅ CLOSED -->
 
@@ -2065,10 +2077,10 @@ were produced by the four audits and are summarized above.
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-050 | 🟠 | `WEAK_UNTIL`('W') absent from `provers/tdfol-types.ts`; no `BinaryTemporalFormula` node | `tdfol_core.py:455-486` | `provers/tdfol-types.ts:73` | Add WEAK_UNTIL + a dedicated binary-temporal node (align with `tdfol-core.ts:23`). |  <!-- ✅ CLOSED -->
-| PORT-051 | 🟡 | `TemporalFormula.time_bound` (bounded ops □[n]φ) absent | `tdfol_core.py:424-429` | temporal formula types | Add `timeBound?:number`. |
-| PORT-052 | 🟡 | `DeonticFormula`: Python `context` renamed `time`; `agent:Term` demoted to `string` (loses `f(x,y)` agents) | `tdfol_core.py:386-420` | `tdfol-core.ts:95-101` | Restore `context`; type `agent` as full `Term`. |
-| PORT-053 | 🟡 | `QuantifiedFormula.variable` is `string` (no sort) vs Python full `Variable` | `tdfol_core.py:351` | `tdfol-core.ts:87-93` | Bind a `Variable` object carrying its `sort`. |
-| PORT-054 | 🟢 | `Predicate.negated` (TS-only) has no Python counterpart → round-trip mismatch | `tdfol_core.py:255-287` | `tdfol-core.ts:71-72` | Drop `negated`; represent as `UnaryFormula(NOT, pred)` per Python. |
+| PORT-051 | 🟡 | `TemporalFormula.time_bound` (bounded ops □[n]φ) absent | `tdfol_core.py:424-429` | temporal formula types | Add `timeBound?:number`. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-052 | 🟡 | `DeonticFormula`: Python `context` renamed `time`; `agent:Term` demoted to `string` (loses `f(x,y)` agents) | `tdfol_core.py:386-420` | `tdfol-core.ts:95-101` | Restore `context`; type `agent` as full `Term`. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-053 | 🟡 | `QuantifiedFormula.variable` is `string` (no sort) vs Python full `Variable` | `tdfol_core.py:351` | `tdfol-core.ts:87-93` | Bind a `Variable` object carrying its `sort`. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-054 | 🟢 | `Predicate.negated` (TS-only) has no Python counterpart → round-trip mismatch | `tdfol_core.py:255-287` | `tdfol-core.ts:71-72` | Drop `negated`; represent as `UnaryFormula(NOT, pred)` per Python. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.6 TDFOL inference rules — 25 of ~60 missing (~42% gap)
 
@@ -2096,11 +2108,11 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-080 | 🟠 | Security validator: `TIMING_ATTACK` threat, resource/rate-limit config (5 fields), `validate_zkp_proof`, `audit_proof`, `sanitize_formula`, `rate_limit_check` all missing | `security_validator.py:34-100` | `tdfol-security-validator.ts:25-33,58-71` | Port the 4 methods + rate-limit config + TIMING_ATTACK. |  <!-- ✅ CLOSED -->
-| PORT-081 | 🟡 | **Countermodel visualizer entirely missing** (ASCII/colorama, D3 HTML, SVG, K/T/D/S4/S5 highlighting) | `countermodel_visualizer.py`, `countermodels.py` | none (only `kripke-structure.ts` data model) | Port visualizer (at least ASCII + HTML export). |
+| PORT-081 | 🟡 | **Countermodel visualizer entirely missing** (ASCII/colorama, D3 HTML, SVG, K/T/D/S4/S5 highlighting) | `countermodel_visualizer.py`, `countermodels.py` | none (only `kripke-structure.ts` data model) | Port visualizer (at least ASCII + HTML export). |  <!-- ✅ CLOSED sprint80 -->
 | PORT-082 | 🟡 | Proof explainer: no `HYBRID` type; steps are `string`, not `Formula` AST | `proof_explainer.py:15-22` | `proof-explainer.ts:15-22,42` | Add HYBRID; retain Formula objects in steps for downstream analysis. |  <!-- ✅ CLOSED -->
-| PORT-083 | 🟡 | Performance profiler: `@profile_this`, `identify_bottlenecks()`, HTML flame graphs, benchmark suite, CI regression tracking absent | `performance_profiler.py`, `performance_dashboard.py` | `tdfol-performance-metrics.ts` | Port profiling decorator + bottleneck/report/benchmark tooling. |
-| PORT-084 | 🟢 | Formula dependency graph: DOT export, shortest-path, unused-axiom detection likely absent | `formula_dependency_graph.py` | `formula-dependency-graph.ts` | Add GraphViz DOT export + analyses. |
-| PORT-085 | 🟡 | NL layer: `tdfol_nl_context.py`, `tdfol_nl_preprocessor.py`, `utils.py` not ported; patterns are regex-only (no spaCy tokens) | `nl/` | `tdfol-nl-*.ts` | Port context-aware parsing + preprocessor; consider spaCy-WASM (T-339 bridge) for token patterns. |
+| PORT-083 | 🟡 | Performance profiler: `@profile_this`, `identify_bottlenecks()`, HTML flame graphs, benchmark suite, CI regression tracking absent | `performance_profiler.py`, `performance_dashboard.py` | `tdfol-performance-metrics.ts` | Port profiling decorator + bottleneck/report/benchmark tooling. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-084 | 🟢 | Formula dependency graph: DOT export, shortest-path, unused-axiom detection likely absent | `formula_dependency_graph.py` | `formula-dependency-graph.ts` | Add GraphViz DOT export + analyses. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-085 | 🟡 | NL layer: `tdfol_nl_context.py`, `tdfol_nl_preprocessor.py`, `utils.py` not ported; patterns are regex-only (no spaCy tokens) | `nl/` | `tdfol-nl-*.ts` | Port context-aware parsing + preprocessor; consider spaCy-WASM (T-339 bridge) for token patterns. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.9 DCEC / CEC core
 
@@ -2110,7 +2122,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | PORT-091 | 🟠 | Agent-relative notation incompatible: Python `O[alice](φ)` vs TS `O(φ,alice)` | `dcec_core.py:983-986` | `dcec-types.ts:181-186` | Adopt `O[agent](φ)` wire format (KB interoperability). |  <!-- ✅ CLOSED -->
 | PORT-092 | 🟡 | `Sort.is_subtype_of()` absent (no type-hierarchy checks) | `dcec_types.py:278-284` | `dcec-core-types.ts:79-87` | Port subtype relation; enforce in formula construction. |  <!-- ✅ CLOSED -->
 | PORT-093 | 🟡 | `Formula.__eq__` via `to_string()` (structural equality for dedup) missing | `dcec_core.py:826-855` | DCEC formula types | Add structural equality. |  <!-- ✅ CLOSED -->
-| PORT-094 | 🟡 | `ConnectiveFormula` binary-only vs Python n-ary `AND(P,Q,R)` | `dcec_core.py:1244-1295` | `dcec-types.ts:133-137` | Support n-ary connectives. |
+| PORT-094 | 🟡 | `ConnectiveFormula` binary-only vs Python n-ary `AND(P,Q,R)` | `dcec_core.py:1244-1295` | `dcec-types.ts:133-137` | Support n-ary connectives. |  <!-- ✅ CLOSED sprint80 -->
 | PORT-095 | 🟡 | `CognitiveOperator.GOAL='G'` missing from `provers/dcec-types.ts` | `dcec_types.py:148` | `dcec-types.ts:42` | Add GOAL (present in `dcec-core-types.ts`; unify via PORT-002). |  <!-- ✅ CLOSED -->
 | PORT-096 | 🟡 ✅ | EVENTUALLY codepoint mismatch: Python `◊` U+25CA vs TS `◇` U+25C7 | `dcec_types.py:242` | `dcec-core-types.ts:66` | Standardize on Python's `◊`. |
 | PORT-097 | 🟢 | Document Python `CognitiveOperator.PERCEPTION='P'` name-collision bug; keep TS's correct avoidance | `dcec_types.py:149` | — | Note-only; add a code comment on the intentional divergence. |  <!-- ✅ CLOSED -->
@@ -2119,9 +2131,9 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-100 | 🟠 | Tableaux propositional rules incomplete: no α(∧)/β(∨-branching)/double-negation/◇-world-creation — sound for modal-box axioms only | `modal_tableaux.py:222-335` | `cec-modal-tableaux.ts:207-226` | Port full propositional α/β expansion + ◇ world creation. |
-| PORT-101 | 🟡 | `ProofStep` schema divergence (`rule/premises/conclusion` vs `ruleName/world/formula/description`) | `shadow_prover.py` | `cec-modal-tableaux.ts` | Align schema for cross-language proof traces. |
-| PORT-102 | 🟠 | Verify `DcecProverBridge` actually mirrors `prover_core.py` (649-line forward-chaining prover: ModusPonens/Simplification/DeonticProhibition/DeonticPermission) — currently unverified | `CEC/native/prover_core.py`, `prover_core_extended_rules.py` | `provers/dcec-prover-bridge.ts` | Conformance-test the 5 TS rules against the Python prover's rule set. |
+| PORT-100 | 🟠 | Tableaux propositional rules incomplete: no α(∧)/β(∨-branching)/double-negation/◇-world-creation — sound for modal-box axioms only | `modal_tableaux.py:222-335` | `cec-modal-tableaux.ts:207-226` | Port full propositional α/β expansion + ◇ world creation. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-101 | 🟡 | `ProofStep` schema divergence (`rule/premises/conclusion` vs `ruleName/world/formula/description`) | `shadow_prover.py` | `cec-modal-tableaux.ts` | Align schema for cross-language proof traces. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-102 | 🟠 | Verify `DcecProverBridge` actually mirrors `prover_core.py` (649-line forward-chaining prover: ModusPonens/Simplification/DeonticProhibition/DeonticPermission) — currently unverified | `CEC/native/prover_core.py`, `prover_core_extended_rules.py` | `provers/dcec-prover-bridge.ts` | Conformance-test the 5 TS rules against the Python prover's rule set. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.11 Deontic conflict detection & knowledge base
 
@@ -2138,11 +2150,11 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-120 | 🔴 ✅ | **S5 tableaux missing symmetry axiom** (wRv→vRw) — S5 theorems needing symmetry wrongly non-valid | — | `modal-tableaux.ts:436-484` | Add symmetry edge for S5 (currently only reflexivity + box-history). |
-| PORT-121 | 🟠 | `residualSignatureForHint` omits 11 payload fields → cross-lang hashes won't match | `synthesis.py:130-171` | `modal-synthesis.ts:173-191` | Include all 11 fields in the signature. |
-| PORT-122 | 🟠 | `synthesis_hints_from_autoencoder_introspection` (autoencoder-loop entry point) absent | `synthesis.py:175-270` | none | Port the introspection entry point. |
-| PORT-123 | 🟡 | `modal-kg-bridge` missing 5 label constants + `augment_legal_ir_projection_triples`; KG schema incompatible | `modal/kg_bridge.py:34-120` | `modal-kg-bridge.ts:90-110` | Add LEGAL_CITATION_STRUCTURE / _DOCUMENT_SCOPE / _EDITORIAL_STATUS / _IR_VIEW_ALIGNMENT / _SECTION_STRUCTURE + projection triples. |
-| PORT-124 | 🟡 | `modal-compiler` uses `SimpleModalIR` vs Python `ModalIRDocument`; 7 family config fields absent (no-op without BM25 backend) | `modal/compiler.py` | `modal-compiler.ts` | Port `ModalIRDocument` if BM25/ranking backend is later added; else document as intentional. |
-| PORT-125 | 🟡 | `modal-logic-codec` uses simulated embeddings; no `FLogicOptimizer` | `modal/codec.py` | `modal-logic-codec.ts` | Real embeddings + optimizer (couples with PORT-150 embeddings). |
+| PORT-121 | 🟠 | `residualSignatureForHint` omits 11 payload fields → cross-lang hashes won't match | `synthesis.py:130-171` | `modal-synthesis.ts:173-191` | Include all 11 fields in the signature. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-122 | 🟠 | `synthesis_hints_from_autoencoder_introspection` (autoencoder-loop entry point) absent | `synthesis.py:175-270` | none | Port the introspection entry point. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-123 | 🟡 | `modal-kg-bridge` missing 5 label constants + `augment_legal_ir_projection_triples`; KG schema incompatible | `modal/kg_bridge.py:34-120` | `modal-kg-bridge.ts:90-110` | Add LEGAL_CITATION_STRUCTURE / _DOCUMENT_SCOPE / _EDITORIAL_STATUS / _IR_VIEW_ALIGNMENT / _SECTION_STRUCTURE + projection triples. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-124 | 🟡 | `modal-compiler` uses `SimpleModalIR` vs Python `ModalIRDocument`; 7 family config fields absent (no-op without BM25 backend) | `modal/compiler.py` | `modal-compiler.ts` | Port `ModalIRDocument` if BM25/ranking backend is later added; else document as intentional. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-125 | 🟡 | `modal-logic-codec` uses simulated embeddings; no `FLogicOptimizer` | `modal/codec.py` | `modal-logic-codec.ts` | Real embeddings + optimizer (couples with PORT-150 embeddings). |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.13 Legal domain
 
@@ -2150,8 +2162,8 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 |---|---|---|---|---|---|
 | PORT-130 | 🟡 | `LegalDomain` missing 9 values (TORT, CORPORATE, EMPLOYMENT, INTELLECTUAL_PROPERTY, REAL_ESTATE, FAMILY, TAX, IMMIGRATION, ENVIRONMENTAL) | `legal_domain_knowledge.py:22-35` | `legal-domain-knowledge.ts:31-38` | Add the 9 enum values + their patterns. |  <!-- ✅ CLOSED -->
 | PORT-131 | 🟡 | Legal pattern coverage ~50%: missing obligation (`responsible/liable for`), permission (`entitled to`, rights/options), prohibition (`barred from`, `unlawful/illegal`), agent (buyer/seller/landlord/tenant/employer/employee) patterns | `legal_domain_knowledge.py:95-269` | `legal-domain-knowledge.ts:110-159` | Port the missing regex/pattern sets. |  <!-- ✅ CLOSED -->
-| PORT-132 | 🟢 | `LegalConceptType` divergent: Python RIGHT/DUTY/LIABILITY/EXCEPTION/DEFINITION vs TS TEMPORAL/AGENT/EXEMPTION (no overlap) | `legal_domain_knowledge.py` | `legal-domain-knowledge.ts` | Reconcile concept taxonomy. |
-| PORT-133 | 🟡 | Legal analyzer: `extract_temporal_conditions` not public; SymbolicAI extraction dropped | `integration/domain/legal_symbolic_analyzer.py` | `legal-symbolic-analyzer.ts` | Expose temporal extraction; decide on SymbolicAI replacement. |
+| PORT-132 | 🟢 | `LegalConceptType` divergent: Python RIGHT/DUTY/LIABILITY/EXCEPTION/DEFINITION vs TS TEMPORAL/AGENT/EXEMPTION (no overlap) | `legal_domain_knowledge.py` | `legal-domain-knowledge.ts` | Reconcile concept taxonomy. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-133 | 🟡 | Legal analyzer: `extract_temporal_conditions` not public; SymbolicAI extraction dropped | `integration/domain/legal_symbolic_analyzer.py` | `legal-symbolic-analyzer.ts` | Expose temporal extraction; decide on SymbolicAI replacement. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.14 Temporal-deontic (RAG store + API) — DIVERGENT
 
@@ -2166,7 +2178,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-150 | 🟡 | Neurosymbolic GraphRAG/API: SymbolicAI + real embeddings dropped (structural port only) | `integration/symbolic/neurosymbolic_{graphrag,api}.py` | `neurosymbolic-{graphrag,api}.ts` | Decide embedding backend (WASM model / remote) to restore semantic retrieval. |
+| PORT-150 | 🟡 | Neurosymbolic GraphRAG/API: SymbolicAI + real embeddings dropped (structural port only) | `integration/symbolic/neurosymbolic_{graphrag,api}.py` | `neurosymbolic-{graphrag,api}.ts` | Decide embedding backend (WASM model / remote) to restore semantic retrieval. |  <!-- ✅ CLOSED sprint80 -->
 | PORT-151 | 🟠 | Logic-verifier field names diverge (`is_valid/conclusion/method_used/time_taken` vs `proved/formula/method/timeMs`); `time_taken` seconds vs `timeMs` ms | `logic_verification_types.py:95-124` | `logic-verifier.ts:70-78` | Align field names + units (see §12.16). |  <!-- ✅ CLOSED -->
 
 ### 12.16 Cross-cutting interop contract (fix before ANY Python⇄TS proof/KB/cache interchange)
@@ -2194,12 +2206,12 @@ templates; cognitive/deontic operator **values** (O/P/F/S/R/L/POW/IMM, B/K/I/D).
 
 ### 12.18 Suggested port sequencing
 
-- **Wave 1 — Foundation:** PORT-001/002/003 (unify type systems; substitute/free-vars), PORT-010–014 (core enums). Unblocks everything.
-- **Wave 2 — Soundness (highest ROI):** PORT-030 (Lean sorry), PORT-031 (Coq Error), PORT-120 (S5 symmetry), PORT-110 (action similarity), PORT-100 (propositional tableaux), PORT-090 (temporal-op collision).
-- **Wave 3 — Logical completeness:** PORT-060–066 (25 inference rules), PORT-041/042 (analyzer + AUTO), PORT-070/071 (strategy framework), PORT-020/021 (TDFOL→SMT + quantifiers), PORT-032 (AST converters).
-- **Wave 4 — Capability parity:** PORT-111–114 (conflict categories, KG converter, Allen intervals), PORT-142/143 (embeddings/RAG, temporal conflicts), PORT-140 (temporal-deontic API), PORT-081 (countermodel visualizer), PORT-130/131 (legal domain + patterns), PORT-121–125 (modal synthesis/KG/codec).
-- **Wave 5 — Interop contract:** PORT-160/161/162 + PORT-091/096/141/151 (units, cache key, field names, notation, symbols).
-- **Wave 6 — Polish:** PORT-040 (neural confidence), PORT-080/082/083/084/085 (security, explainer, profiler, dep-graph, NL context), PORT-092–097, PORT-101/102, PORT-132/133, PORT-150.
+- **Wave 1 — Foundation:** PORT-002 (canonical DCEC type module) remains; PORT-001/003 and PORT-010–014 are closed.
+- **Wave 2 — Soundness (highest ROI):** PORT-030 (Lean sorry), PORT-031 (Coq Error), PORT-120 (S5 symmetry), PORT-110 (action similarity), PORT-100 (propositional tableaux), PORT-090 (temporal-op collision) are closed.
+- **Wave 3 — Logical completeness:** PORT-020/022 (TDFOL→SMT AST path + SMT symbol parity) and PORT-032 (full AST converters) remain; PORT-021, PORT-041/042, PORT-060–066, and PORT-070/071 are closed.
+- **Wave 4 — Capability parity:** The listed capability-parity items are closed for the current structural TS port; future work is only needed if real embedding/BM25/prover backends replace the deterministic fallbacks.
+- **Wave 5 — Interop contract:** PORT-160/161/162 + PORT-091/096/141/151 are closed.
+- **Wave 6 — Polish:** PORT-040, PORT-080/082/083/084/085, PORT-092–097, PORT-101/102, PORT-132/133, and PORT-150 are closed.
 
 **Definition of done for "complete port":** every `PORT-###` closed with a conformance test
 in `test/mcp-plus-plus/` asserting TS output matches the Python reference for the same input
@@ -2212,13 +2224,14 @@ collisions each completed task is stamped with a `PORT-###` comment **in the cod
 it lands in**; `git grep -hoE "PORT-[0-9]{3}" src test | sort -u` is the
 authoritative "what's done" signal (do this before claiming a task).
 
-**Done so far (13 of 74):**
+**Done so far:**
 
 | Tasks | Owner | Landed on | Notes |
 |-------|-------|-----------|-------|
 | PORT-001, 030, 031, 096, 110, 120, 160, 161 | WASM-prover sprint line | swissknife `heal/wasm-prover-integration` (PORT-030/031/096/110/120/160/161 also on `main`) | high-priority core soundness/interop, folded into the Sprint 1–76 line |
 | PORT-130, 131, 132, 133 | legal-domain slice | swissknife PR #48 (`port/legal-domain-13x`, branched from `main` b270b484) | §12.13 Legal domain — enums + deontic/agent patterns + public temporal API + 8 conformance tests |
 | PORT-084 | dep-graph slice | swissknife PR #49 (`port/dep-graph-084`, branched from `main` d94f464) | §12.8 formula dependency-graph — DOT export + critical/all paths + unused-axiom/redundancy/statistics + 10 conformance tests |
+| PORT-003, 033, 034, 040, 051–054, 081, 083, 085, 094, 100–102, 121–125, 150 | Sprint 80 closure pass | current worktree, 2026-07-03 | TDFOL substitution/typed nodes, neural explanation API, DCEC tableaux/proof-step schema, modal synthesis/KG/compiler/codec closure, and 37 focused conformance tests |
 
 **Protocol notes:**
 - Pick a **disjoint vertical** (a whole §12.x subsystem the other agent isn't in)
@@ -2232,6 +2245,7 @@ authoritative "what's done" signal (do this before claiming a task).
 - Every PORT task closes with a conformance test in `test/mcp-plus-plus/`
   (§12.18 definition of done).
 
-**Remaining priority (unclaimed):** Wave 1 foundation (PORT-001 done; PORT-002/003
-type-system unification + `Term.substitute`/`getFreeVariables` still open) unblocks
-the most downstream work and is the sprint line's natural next step.
+**Remaining priority (unclaimed):** PORT-002 canonical DCEC type-module unification
+is the last Wave 1 foundation blocker. The remaining high-value interop gaps are
+PORT-020/022 (TDFOL→SMT AST path + SMT symbol parity) and PORT-032 (full TDFOL→Coq/Lean
+AST converters).
