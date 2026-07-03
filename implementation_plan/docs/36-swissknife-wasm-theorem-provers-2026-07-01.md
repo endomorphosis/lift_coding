@@ -1663,6 +1663,20 @@ Replaces the placeholder `extractSimpleEntities()` regex heuristic with a full s
 
 ---
 
+### Sprint 76 (Phase 76 — MCP Multi-Protocol Transport (WebSocket/libp2p/WebRTC/HTTPS), P3) 🆕
+
+Closes all 12 deferred TODOs in `src/patches/mcp/fix-mcp-transport.ts`.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-350 | P3 | Implement `WebSocketTransport.connect()` | ✅ DONE — uses global `WebSocket` (browser) or dynamic `require('ws')` (Node.js); typed `WebSocketLike` interface; `onopen`/`onmessage`/`onclose`/`onerror`; reconnect on close when `options.reconnect=true` |
+| T-351 | P3 | Implement `Libp2pTransport` typed properties + connect/disconnect/send | ✅ DONE — `libp2pNode`/`stream` typed fields; dynamic `@libp2p/core` import with graceful stub fallback; length-prefixed stream write; clean stream/node stop on disconnect |
+| T-352 | P3 | Implement `WebRTCTransport` typed properties + connect/disconnect/send | ✅ DONE — `RTCPeerConnection`/`RTCDataChannel` typed fields; browser `RTCPeerConnection` or stub when unavailable; data channel `onopen`/`onclose`/`onmessage`; real `send()` when channel open |
+| T-353 | P3 | Implement `HttpsTransport.send()`/`request()` | ✅ DONE — `fetch` POST with `AbortController` timeout; JSON parse response; `Authorization` header from `credentials.apiKey` |
+| T-354 | P3 | Write 10+ tests | ✅ DONE — 25 tests in `test/mcp-plus-plus/wasm-prover-sprint76.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
