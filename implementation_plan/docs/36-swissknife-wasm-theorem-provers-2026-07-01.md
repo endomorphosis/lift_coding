@@ -2212,12 +2212,13 @@ collisions each completed task is stamped with a `PORT-###` comment **in the cod
 it lands in**; `git grep -hoE "PORT-[0-9]{3}" src test | sort -u` is the
 authoritative "what's done" signal (do this before claiming a task).
 
-**Done so far (12 of 74):**
+**Done so far (13 of 74):**
 
 | Tasks | Owner | Landed on | Notes |
 |-------|-------|-----------|-------|
 | PORT-001, 030, 031, 096, 110, 120, 160, 161 | WASM-prover sprint line | swissknife `heal/wasm-prover-integration` (PORT-030/031/096/110/120/160/161 also on `main`) | high-priority core soundness/interop, folded into the Sprint 1–76 line |
 | PORT-130, 131, 132, 133 | legal-domain slice | swissknife PR #48 (`port/legal-domain-13x`, branched from `main` b270b484) | §12.13 Legal domain — enums + deontic/agent patterns + public temporal API + 8 conformance tests |
+| PORT-084 | dep-graph slice | swissknife PR #49 (`port/dep-graph-084`, branched from `main` d94f464) | §12.8 formula dependency-graph — DOT export + critical/all paths + unused-axiom/redundancy/statistics + 10 conformance tests |
 
 **Protocol notes:**
 - Pick a **disjoint vertical** (a whole §12.x subsystem the other agent isn't in)
