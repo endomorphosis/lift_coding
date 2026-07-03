@@ -473,6 +473,26 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
 applications for `VAIOS-G723`.
 
+MGW-566 attempt 3 records the current July 3 validation pass in
+`data/meta_glasses_display_widgets/discovery/2026-07-03-mgw-566-attempt-3-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-03-mgw-566-attempt-3-validation.md`.
+The run passed the backlog/objective queue tests, Hallucinate daemon-manager
+catalog test, Hallucinate MCP dashboard backend Playwright gate, no-display
+Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife
+Meta glasses gate, and Hallucinate multimodal `control_surface` gate while
+preserving the MGW-566 catalog entry for catalog normalization, dashboard UI
+wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
+applications for `VAIOS-G723`. Attempt 3 bumps the `MGW-566`
+launch-validation-gate `attempt` counter to `3`, points `attempt_receipts` at
+this pair of files, regenerates the
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` catalog
+fixture so it stays byte-for-byte consistent with the Hallucinate manager
+output, and updates `swissknife/scripts/test-mcp-dashboard-consumer.cjs` to
+assert the attempt-3 receipt paths for Swissknife consumers.
+
 VAI-563 repairs the fixture drift that separated
 `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`,
 `hallucinate_app/test/e2e/fixtures/hao-719-daemon-launch-health-gate.json`, and
@@ -497,6 +517,17 @@ fixture is
 dashboard capability catalog exposes the VAI-563 gate for `ipfs_kit_py`,
 `ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated
 follow-up subtasks if any dashboard or backend validation fails.
+
+VAI-563 attempt 2 records the current July 3 validation pass in
+`data/virtual_ai_os/discovery/2026-07-03-vai-563-attempt-2-launch-playwright-validation-gate.md`
+with a Hallucinate mirror at
+`data/hallucinate_multimodal_control/discovery/2026-07-03-vai-563-attempt-2-validation.md`.
+Attempt 1's evidence was audited against the live code and confirmed real, so
+attempt 2 only bumps the `VAI-563` launch-validation-gate `attempt` counter to
+`2`, points `attempt_receipts` at the new pair of files, and regenerates the
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`
+catalog fixture so it stays byte-for-byte consistent with the Hallucinate
+manager output.
 
 The executable gate is:
 
