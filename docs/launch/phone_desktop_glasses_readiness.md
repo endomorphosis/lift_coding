@@ -473,6 +473,31 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
 applications for `VAIOS-G723`.
 
+VAI-563 repairs the fixture drift that separated
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`,
+`hallucinate_app/test/e2e/fixtures/hao-719-daemon-launch-health-gate.json`, and
+`hallucinate_app/test/e2e/fixtures/hao-721-daemon-launch-health-gate.json` from
+the live dashboard capability catalog and daemon launch health receipts after
+the `MGW-566` merge and the `VAI-557` discovery-receipt append, and adds the
+missing `data/hallucinate_multimodal_control/discovery/2026-07-02-mgw-566-attempt-2-validation.md`
+Hallucinate mirror so the MGW-566 launch Playwright gate test can read it.
+`data/virtual_ai_os/discovery/2026-07-03-vai-563-mcp-dashboard-launch-gate.md`
+and `data/hallucinate_multimodal_control/discovery/2026-07-03-vai-563-mcp-dashboard-launch-gate.md`
+bind the current July 3 VAI-563 objective gap
+(`data/virtual_ai_os/discovery/2026-07-03-vai-563-objective-gap-7ea369464239.md`)
+to the `VAIOS-G723` launch Playwright validation gate, catalog normalization,
+dashboard UI wiring, mediated tool-call receipts, Swissknife consumers,
+Playwright coverage, and supervisor-generated follow-up subtasks. The shared
+fixture is
+`hallucinate_app/test/e2e/fixtures/vai-563-mcp-dashboard-launch-gate.json`.
+`hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`,
+`hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`,
+`hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, and
+`swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared
+dashboard capability catalog exposes the VAI-563 gate for `ipfs_kit_py`,
+`ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated
+follow-up subtasks if any dashboard or backend validation fails.
+
 The executable gate is:
 
 ```bash
