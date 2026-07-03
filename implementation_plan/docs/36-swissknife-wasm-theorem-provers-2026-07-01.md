@@ -1677,6 +1677,22 @@ Closes all 12 deferred TODOs in `src/patches/mcp/fix-mcp-transport.ts`.
 
 ---
 
+### Sprint 77 (Phase 77 — §12 Wave 1+2: Soundness + Interop Fixes from PORT Catalog, P2) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-355 | P2 | PORT-001 (partial) — modal-tableaux handles `TemporalFormulaTDFOL` | ✅ DONE — `needsExpansion()` and `expandFormula()` now dispatch on `kind=temporal` + `operator` field (tdfol-core type), bridging the three-type-system mismatch |
+| T-356 | P2 | PORT-030 — Lean `sorry` detection | ✅ DONE — `lean4-wasm-bridge.ts`: capture stdout; return `proved:false` when output contains `sorry`/`error:` even on exit-0 |
+| T-357 | P2 | PORT-031 — Coq Error/Anomaly output check | ✅ DONE — `coq-jscoq-bridge.ts`: scan coqc output for `Error`/`Anomaly` strings; return `proved:false` even when exit code is 0 |
+| T-358 | P2 | PORT-096 — EVENTUALLY codepoint `◊` (U+25CA) standardized | ✅ DONE — all `◇` (U+25C7) occurrences replaced with `◊` across 10 files; sprint58 test updated |
+| T-359 | P2 | PORT-110 — `actionsAreSimilar()` Jaccard word>3 filter | ✅ DONE — `deontic-text-analyzer.ts`: filter changed from `Boolean` to `word.length > 3`, matching Python reference exactly |
+| T-360 | P2 | PORT-120 — S5 symmetry axiom | ✅ DONE — `modal-tableaux.ts`: when `◊` creates new world in S5, add reverse accessibility edge `vRw` |
+| T-361 | P2 | PORT-160 — proof_time wire-format (ms↔s) | ✅ DONE — `mcp-proof-cache.ts`: `toWireFormat()` converts `proof_time_ms→proof_time(s)`; `fromWireFormat()` inverse |
+| T-362 | P2 | PORT-161 — proof-cache key includes axioms + prover identity | ✅ DONE — `formulaHash(formula, {axioms, proverName, proverConfig})` hashes all components; axioms sorted for determinism |
+| T-363 | P2 | Write 10+ tests | ✅ DONE — 23 tests in `test/mcp-plus-plus/wasm-prover-sprint77.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
@@ -2030,8 +2046,8 @@ were produced by the four audits and are summarized above.
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-030 | 🔴 | **Lean `sorry` NOT detected** — TS can return `proved:true` for an incomplete proof (soundness) | `lean_prover_bridge.py:398-400` | `lean4-wasm-bridge.ts:139-152` | Fail when output contains `sorry`/`error:`. |
-| PORT-031 | 🟠 | **Coq output check incomplete** — no `"Error"`/`"Anomaly"` scan (exit-0-with-error passes) | `coq_prover_bridge.py:400-402` | `coq-jscoq-bridge.ts:135-147` | Reject on Error/Anomaly strings even when exit code is 0. |
+| PORT-030 | 🔴 ✅ | **Lean `sorry` NOT detected** — TS can return `proved:true` for an incomplete proof (soundness) | `lean_prover_bridge.py:398-400` | `lean4-wasm-bridge.ts:139-152` | Fail when output contains `sorry`/`error:`. |
+| PORT-031 | 🟠 ✅ | **Coq output check incomplete** — no `"Error"`/`"Anomaly"` scan (exit-0-with-error passes) | `coq_prover_bridge.py:400-402` | `coq-jscoq-bridge.ts:135-147` | Reject on Error/Anomaly strings even when exit code is 0. |
 | PORT-032 | 🟠 | `TDFOLToCoqConverter` / `TDFOLToLeanConverter` missing (TS takes pre-serialized source only) | `coq_prover_bridge.py`, `lean_prover_bridge.py` | translators | Port full-AST converters (beyond the policy-only `DeonticToCoq/Lean4` translators). |
 | PORT-033 | 🟡 | Auto-tactics hardcoded (`tauto.`/`simp_all`) vs Python configurable list | `coq_prover_bridge.py:224`, `lean_prover_bridge.py:224` | `deontic-to-coq.ts:102`, `deontic-to-lean4.ts:91-93` | Configurable tactic sequence (`auto,intuition,tauto,firstorder` / `trivial,simp,tauto,decide`). |
 | PORT-034 | 🟡 | Coq classical imports absent; `.vo`/`.glob` not cleaned | `coq_prover_bridge.py:335-336,410-413` | `coq-jscoq-bridge.ts:159` | Emit `Require Import Coq.Logic.Classical(_Prop)`; clean all artefacts. |
@@ -2096,7 +2112,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | PORT-093 | 🟡 | `Formula.__eq__` via `to_string()` (structural equality for dedup) missing | `dcec_core.py:826-855` | DCEC formula types | Add structural equality. |
 | PORT-094 | 🟡 | `ConnectiveFormula` binary-only vs Python n-ary `AND(P,Q,R)` | `dcec_core.py:1244-1295` | `dcec-types.ts:133-137` | Support n-ary connectives. |
 | PORT-095 | 🟡 | `CognitiveOperator.GOAL='G'` missing from `provers/dcec-types.ts` | `dcec_types.py:148` | `dcec-types.ts:42` | Add GOAL (present in `dcec-core-types.ts`; unify via PORT-002). |
-| PORT-096 | 🟡 | EVENTUALLY codepoint mismatch: Python `◊` U+25CA vs TS `◇` U+25C7 | `dcec_types.py:242` | `dcec-core-types.ts:66` | Standardize on Python's `◊`. |
+| PORT-096 | 🟡 ✅ | EVENTUALLY codepoint mismatch: Python `◊` U+25CA vs TS `◇` U+25C7 | `dcec_types.py:242` | `dcec-core-types.ts:66` | Standardize on Python's `◊`. |
 | PORT-097 | 🟢 | Document Python `CognitiveOperator.PERCEPTION='P'` name-collision bug; keep TS's correct avoidance | `dcec_types.py:149` | — | Note-only; add a code comment on the intentional divergence. |
 
 ### 12.10 DCEC tableaux / native prover
@@ -2111,7 +2127,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-110 | 🔴 | **Action-similarity algorithm fundamentally different**: Python Jaccard word-overlap (thr 0.7, words>3 chars) vs TS first-15-char prefix → different conflict sets | `_deontic_conflict_mixin.py:120-128` | `deontic-conflict-detector.ts:58-60` | Replace prefix compare with Jaccard word-overlap + 0.7 threshold. |
+| PORT-110 | 🔴 ✅ | **Action-similarity algorithm fundamentally different**: Python Jaccard word-overlap (thr 0.7, words>3 chars) vs TS first-15-char prefix → different conflict sets | `_deontic_conflict_mixin.py:120-128` | `deontic-conflict-detector.ts:58-60` | Replace prefix compare with Jaccard word-overlap + 0.7 threshold. |
 | PORT-111 | 🟠 | Conflict categories missing: `CONDITIONAL_CONFLICT`, `JURISDICTIONAL`, `TEMPORAL`, `HIERARCHICAL` | `_deontic_conflict_mixin.py:93-116`, `deontological_reasoning_types.py:56-63` | `deontic-conflict-detector.ts:105-129` | Add the 4 detection paths. |
 | PORT-112 | 🟡 | `_generate_entity_reports()` + `_generate_analysis_recommendations()` absent | `_deontic_conflict_mixin.py:220-263,279-304` | (new) | Port per-entity breakdown + recommendations. |
 | PORT-113 | 🟡 | `DeonticLogicConverter.convert_knowledge_graph_to_logic()` missing (TS is regex-only) | `converters/deontic_logic_converter.py:155-234` | `deontic-logic-converter.ts:148-208` | Port KG→deontic-formula conversion (structured GraphRAG entities + domain classification). |
@@ -2121,7 +2137,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-120 | 🔴 | **S5 tableaux missing symmetry axiom** (wRv→vRw) — S5 theorems needing symmetry wrongly non-valid | — | `modal-tableaux.ts:436-484` | Add symmetry edge for S5 (currently only reflexivity + box-history). |
+| PORT-120 | 🔴 ✅ | **S5 tableaux missing symmetry axiom** (wRv→vRw) — S5 theorems needing symmetry wrongly non-valid | — | `modal-tableaux.ts:436-484` | Add symmetry edge for S5 (currently only reflexivity + box-history). |
 | PORT-121 | 🟠 | `residualSignatureForHint` omits 11 payload fields → cross-lang hashes won't match | `synthesis.py:130-171` | `modal-synthesis.ts:173-191` | Include all 11 fields in the signature. |
 | PORT-122 | 🟠 | `synthesis_hints_from_autoencoder_introspection` (autoencoder-loop entry point) absent | `synthesis.py:175-270` | none | Port the introspection entry point. |
 | PORT-123 | 🟡 | `modal-kg-bridge` missing 5 label constants + `augment_legal_ir_projection_triples`; KG schema incompatible | `modal/kg_bridge.py:34-120` | `modal-kg-bridge.ts:90-110` | Add LEGAL_CITATION_STRUCTURE / _DOCUMENT_SCOPE / _EDITORIAL_STATUS / _IR_VIEW_ALIGNMENT / _SECTION_STRUCTURE + projection triples. |
@@ -2159,8 +2175,8 @@ These do not block the shipped TS-only path, but each silently breaks round-trip
 
 | ID | Pri | Hazard | Fix |
 |---|---|---|---|
-| PORT-160 | 🟠 | `proof_time` (Python, **seconds**) vs `proof_time_ms` (TS, **ms**) — 1000× off; cache TTL units also differ | Standardize on one unit across the wire; convert at boundaries. |
-| PORT-161 | 🟠 | Proof-cache key: Python `sha256{formula,axioms,prover_name,prover_config}` vs TS `sha256(canonicalPolicyKey)` (omits axioms + prover id) → mis-keying in a shared IPFS cache | Include axioms + prover identity in the TS cache key. |
+| PORT-160 | 🟠 ✅ | `proof_time` (Python, **seconds**) vs `proof_time_ms` (TS, **ms**) — 1000× off; cache TTL units also differ | Standardize on one unit across the wire; convert at boundaries. |
+| PORT-161 | 🟠 ✅ | Proof-cache key: Python `sha256{formula,axioms,prover_name,prover_config}` vs TS `sha256(canonicalPolicyKey)` (omits axioms + prover id) → mis-keying in a shared IPFS cache | Include axioms + prover identity in the TS cache key. |
 | PORT-162 | 🟡 | `LogicConflict.severity`: Python `critical/warning/info` vs TS `high/medium/low` | Pick one vocabulary. |
 | — | — | (Also: PORT-091 agent notation, PORT-096 EVENTUALLY codepoint, PORT-141 field name — listed above; all part of the same serialization contract.) | |
 
