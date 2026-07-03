@@ -2028,18 +2028,18 @@ were produced by the four audits and are summarized above.
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-010 | 🟠 | `ProofReason` overload: TS `'refuted'` conflates logical refutation + prover failure; Python separates `"failed"` | `coq_prover_bridge.py:294-310` | `coq-jscoq-bridge.ts:148-158` | Add distinct `'failed'` reason; reserve `'refuted'` for genuine unsat. |
-| PORT-011 | 🟠 | `ProverStrategy` missing `AUTO`, `MOST_CAPABLE` (TS only FASTEST/PARALLEL/SEQUENTIAL/REMOTE) | `prover_router.py:628-639` | `prover-types.ts` strategy union | Add enum members + implement selection (see PORT-060). |
-| PORT-012 | 🟠 | `FormulaType`/`FormulaClass` missing `MODAL` (non-deontic), `ARITHMETIC`; merges PURE_FOL/QUANTIFIED and DEONTIC/MIXED_MODAL | Python `FormulaType` | `mcp-wasm-prover-hub.ts` `classifyPolicy` | Split merged classes; add MODAL + ARITHMETIC classification. |
-| PORT-013 | 🟠 | `FormulaComplexity` enum + scorer entirely absent | `formula_analyzer.py:196-255` | (new) | Port complexity 0–100 scoring (quantifier depth, nesting, operator count). Feeds AUTO strategy. |
-| PORT-014 | 🟡 | `ProofStatus` missing `DISPROVED`, `UNKNOWN`, `UNPROVABLE` | `tdfol_core.py:546-559` | `tdfol-prover.ts:35-40` | Add the three status values + propagate through provers. |
+| PORT-010 | 🟠 | `ProofReason` overload: TS `'refuted'` conflates logical refutation + prover failure; Python separates `"failed"` | `coq_prover_bridge.py:294-310` | `coq-jscoq-bridge.ts:148-158` | Add distinct `'failed'` reason; reserve `'refuted'` for genuine unsat. |  <!-- ✅ CLOSED -->
+| PORT-011 | 🟠 | `ProverStrategy` missing `AUTO`, `MOST_CAPABLE` (TS only FASTEST/PARALLEL/SEQUENTIAL/REMOTE) | `prover_router.py:628-639` | `prover-types.ts` strategy union | Add enum members + implement selection (see PORT-060). |  <!-- ✅ CLOSED -->
+| PORT-012 | 🟠 | `FormulaType`/`FormulaClass` missing `MODAL` (non-deontic), `ARITHMETIC`; merges PURE_FOL/QUANTIFIED and DEONTIC/MIXED_MODAL | Python `FormulaType` | `mcp-wasm-prover-hub.ts` `classifyPolicy` | Split merged classes; add MODAL + ARITHMETIC classification. |  <!-- ✅ CLOSED -->
+| PORT-013 | 🟠 | `FormulaComplexity` enum + scorer entirely absent | `formula_analyzer.py:196-255` | (new) | Port complexity 0–100 scoring (quantifier depth, nesting, operator count). Feeds AUTO strategy. |  <!-- ✅ CLOSED -->
+| PORT-014 | 🟡 | `ProofStatus` missing `DISPROVED`, `UNKNOWN`, `UNPROVABLE` | `tdfol_core.py:546-559` | `tdfol-prover.ts:35-40` | Add the three status values + propagate through provers. |  <!-- ✅ CLOSED -->
 
 ### 12.2 SMT bridges (Z3, CVC5)
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-020 | 🔴 | **No TDFOL-AST input path** — bridges accept only pre-serialized strings; can't prove arbitrary FOL | `z3_prover_bridge.py:109-301`, `coq_prover_bridge.py:82-193` | `z3-wasm-bridge.ts`, `cvc5-wasm-bridge.ts` | Implement `TDFOLToZ3Converter` + `TDFOLToCVC5Converter`; add `prove(formula, axioms)` and `check_satisfiability(formula)`. |
-| PORT-021 | 🔴 | **QF_UF-only serialization; no quantifiers** — all real FOL unverifiable via TS SMT | `z3_prover_bridge.py:250-266` | `smt2-serializer.ts:103` | Emit `∀/∃`, uninterpreted functions, arithmetic sorts; drop the QF_UF pin. |
+| PORT-021 | 🔴 | **QF_UF-only serialization; no quantifiers** — all real FOL unverifiable via TS SMT | `z3_prover_bridge.py:250-266` | `smt2-serializer.ts:103` | Emit `∀/∃`, uninterpreted functions, arithmetic sorts; drop the QF_UF pin. |  <!-- ✅ CLOSED -->
 | PORT-022 | 🟡 | SMT symbol naming (`P__cap__rsc`) incompatible with Python (`DeclareSort`+node names) | `z3_prover_bridge.py` | `smt2-serializer.ts:48-96` | Align naming so TS/Python emit identical SMT-LIB2 for the same content. |
 
 ### 12.3 Interactive provers (Coq, Lean 4)
@@ -2057,14 +2057,14 @@ were produced by the four audits and are summarized above.
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-040 | 🟡 | Neural `confidence`/`reasoning`/`explain()`/`suggest_proof_strategy()` + `confidence>=0.8` gate dropped | `symbolicai_prover_bridge.py:137-162,453-510` | `neural-prover-bridge.ts:119-277` | Restore confidence + explain API; keep local-verify as the safety net. |
-| PORT-041 | 🟠 | `FormulaAnalyzer` (structural analysis + prover recommendation) absent | `formula_analyzer.py:196-255` | (new) | Port AST-traversal analyzer; feeds AUTO strategy + FormulaComplexity. |
-| PORT-042 | 🟠 | Hub ignores `this.strategy` — routing is always formula-class-based | `prover_router.py:628-639` | `mcp-wasm-prover-hub.ts:111,176` | Wire strategy: implement `AUTO` (analyzer-driven) + honor explicit strategy. |
+| PORT-041 | 🟠 | `FormulaAnalyzer` (structural analysis + prover recommendation) absent | `formula_analyzer.py:196-255` | (new) | Port AST-traversal analyzer; feeds AUTO strategy + FormulaComplexity. |  <!-- ✅ CLOSED -->
+| PORT-042 | 🟠 | Hub ignores `this.strategy` — routing is always formula-class-based | `prover_router.py:628-639` | `mcp-wasm-prover-hub.ts:111,176` | Wire strategy: implement `AUTO` (analyzer-driven) + honor explicit strategy. |  <!-- ✅ CLOSED -->
 
 ### 12.5 TDFOL AST & operators
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-050 | 🟠 | `WEAK_UNTIL`('W') absent from `provers/tdfol-types.ts`; no `BinaryTemporalFormula` node | `tdfol_core.py:455-486` | `provers/tdfol-types.ts:73` | Add WEAK_UNTIL + a dedicated binary-temporal node (align with `tdfol-core.ts:23`). |
+| PORT-050 | 🟠 | `WEAK_UNTIL`('W') absent from `provers/tdfol-types.ts`; no `BinaryTemporalFormula` node | `tdfol_core.py:455-486` | `provers/tdfol-types.ts:73` | Add WEAK_UNTIL + a dedicated binary-temporal node (align with `tdfol-core.ts:23`). |  <!-- ✅ CLOSED -->
 | PORT-051 | 🟡 | `TemporalFormula.time_bound` (bounded ops □[n]φ) absent | `tdfol_core.py:424-429` | temporal formula types | Add `timeBound?:number`. |
 | PORT-052 | 🟡 | `DeonticFormula`: Python `context` renamed `time`; `agent:Term` demoted to `string` (loses `f(x,y)` agents) | `tdfol_core.py:386-420` | `tdfol-core.ts:95-101` | Restore `context`; type `agent` as full `Term`. |
 | PORT-053 | 🟡 | `QuantifiedFormula.variable` is `string` (no sort) vs Python full `Variable` | `tdfol_core.py:351` | `tdfol-core.ts:87-93` | Bind a `Variable` object carrying its `sort`. |
@@ -2076,28 +2076,28 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Missing rules | Why it matters |
 |---|---|---|---|
-| PORT-060 | 🟠 | `ContraryToDutyRule` | CTD / Chisholm-paradox deontic reasoning |
-| PORT-061 | 🟠 | `UniversalInstantiationRule`, `ExistentialGeneralizationRule` | FOL quantifier completeness (needs PORT-003) |
-| PORT-062 | 🟠 | `ContrapositionRule`, `DeMorganAndRule`, `DeMorganOrRule`, `DoubleNegationIntroductionRule` | Propositional completeness |
-| PORT-063 | 🟠 | `ConjunctionIntroductionRule`, `ConjunctionEliminationLeft/RightRule`, `DisjunctionIntroductionLeftRule` | Propositional intro/elim completeness |
-| PORT-064 | 🟠 | `TemporalInductionRule`, `UntilInductionStepRule`, `ReleaseCoinductionRule` | Completeness for □/until/release over inductive steps |
-| PORT-065 | 🟡 | `EventuallyForbiddenRule`, `EventuallyAggregationRule`, `EventuallyDistributionRule`, `AlwaysObligationDistributionRule` | Temporal-deontic interaction |
-| PORT-066 | 🟡 | `PermissionStrengtheningRule`, `PermissionNegationRule`, `PermissionTemporalWeakeningRule`, `ObligationConsistencyRule`, `ObligationPermissionImplicationRule`, `ProhibitionContrapositionRule`, `UntilObligationRule` | Permission/obligation algebra |
+| PORT-060 | 🟠 | `ContraryToDutyRule` | CTD / Chisholm-paradox deontic reasoning |  <!-- ✅ CLOSED -->
+| PORT-061 | 🟠 | `UniversalInstantiationRule`, `ExistentialGeneralizationRule` | FOL quantifier completeness (needs PORT-003) |  <!-- ✅ CLOSED -->
+| PORT-062 | 🟠 | `ContrapositionRule`, `DeMorganAndRule`, `DeMorganOrRule`, `DoubleNegationIntroductionRule` | Propositional completeness |  <!-- ✅ CLOSED -->
+| PORT-063 | 🟠 | `ConjunctionIntroductionRule`, `ConjunctionEliminationLeft/RightRule`, `DisjunctionIntroductionLeftRule` | Propositional intro/elim completeness |  <!-- ✅ CLOSED -->
+| PORT-064 | 🟠 | `TemporalInductionRule`, `UntilInductionStepRule`, `ReleaseCoinductionRule` | Completeness for □/until/release over inductive steps |  <!-- ✅ CLOSED -->
+| PORT-065 | 🟡 | `EventuallyForbiddenRule`, `EventuallyAggregationRule`, `EventuallyDistributionRule`, `AlwaysObligationDistributionRule` | Temporal-deontic interaction |  <!-- ✅ CLOSED -->
+| PORT-066 | 🟡 | `PermissionStrengtheningRule`, `PermissionNegationRule`, `PermissionTemporalWeakeningRule`, `ObligationConsistencyRule`, `ObligationPermissionImplicationRule`, `ProhibitionContrapositionRule`, `UntilObligationRule` | Permission/obligation algebra |  <!-- ✅ CLOSED -->
 
 ### 12.7 TDFOL proof-strategy framework (DIVERGENT — not ported)
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-070 | 🟠 | No `StrategyType`/`ProverStrategy` ABC/`StrategySelector` — the 3 TS strategy analogues aren't plugged into `TDFOLProver` | `strategies/base.py`, `strategy_selector.py:17-256` | `tdfol-prover.ts:270-351` | Port the pluggable strategy framework (`can_handle/prove/get_priority/estimate_cost`) + selector (`select_strategy/select_multiple`). |
-| PORT-071 | 🟡 | Modal-system auto-selection (deontic→D, nested temporal→S4, default→K) missing | `strategies/modal_tableaux.py:212-247` | `tdfol-prover.ts` | Port `_select_modal_logic_type()` heuristics. |
+| PORT-070 | 🟠 | No `StrategyType`/`ProverStrategy` ABC/`StrategySelector` — the 3 TS strategy analogues aren't plugged into `TDFOLProver` | `strategies/base.py`, `strategy_selector.py:17-256` | `tdfol-prover.ts:270-351` | Port the pluggable strategy framework (`can_handle/prove/get_priority/estimate_cost`) + selector (`select_strategy/select_multiple`). |  <!-- ✅ CLOSED -->
+| PORT-071 | 🟡 | Modal-system auto-selection (deontic→D, nested temporal→S4, default→K) missing | `strategies/modal_tableaux.py:212-247` | `tdfol-prover.ts` | Port `_select_modal_logic_type()` heuristics. |  <!-- ✅ CLOSED -->
 
 ### 12.8 TDFOL supporting features
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-080 | 🟠 | Security validator: `TIMING_ATTACK` threat, resource/rate-limit config (5 fields), `validate_zkp_proof`, `audit_proof`, `sanitize_formula`, `rate_limit_check` all missing | `security_validator.py:34-100` | `tdfol-security-validator.ts:25-33,58-71` | Port the 4 methods + rate-limit config + TIMING_ATTACK. |
+| PORT-080 | 🟠 | Security validator: `TIMING_ATTACK` threat, resource/rate-limit config (5 fields), `validate_zkp_proof`, `audit_proof`, `sanitize_formula`, `rate_limit_check` all missing | `security_validator.py:34-100` | `tdfol-security-validator.ts:25-33,58-71` | Port the 4 methods + rate-limit config + TIMING_ATTACK. |  <!-- ✅ CLOSED -->
 | PORT-081 | 🟡 | **Countermodel visualizer entirely missing** (ASCII/colorama, D3 HTML, SVG, K/T/D/S4/S5 highlighting) | `countermodel_visualizer.py`, `countermodels.py` | none (only `kripke-structure.ts` data model) | Port visualizer (at least ASCII + HTML export). |
-| PORT-082 | 🟡 | Proof explainer: no `HYBRID` type; steps are `string`, not `Formula` AST | `proof_explainer.py:15-22` | `proof-explainer.ts:15-22,42` | Add HYBRID; retain Formula objects in steps for downstream analysis. |
+| PORT-082 | 🟡 | Proof explainer: no `HYBRID` type; steps are `string`, not `Formula` AST | `proof_explainer.py:15-22` | `proof-explainer.ts:15-22,42` | Add HYBRID; retain Formula objects in steps for downstream analysis. |  <!-- ✅ CLOSED -->
 | PORT-083 | 🟡 | Performance profiler: `@profile_this`, `identify_bottlenecks()`, HTML flame graphs, benchmark suite, CI regression tracking absent | `performance_profiler.py`, `performance_dashboard.py` | `tdfol-performance-metrics.ts` | Port profiling decorator + bottleneck/report/benchmark tooling. |
 | PORT-084 | 🟢 | Formula dependency graph: DOT export, shortest-path, unused-axiom detection likely absent | `formula_dependency_graph.py` | `formula-dependency-graph.ts` | Add GraphViz DOT export + analyses. |
 | PORT-085 | 🟡 | NL layer: `tdfol_nl_context.py`, `tdfol_nl_preprocessor.py`, `utils.py` not ported; patterns are regex-only (no spaCy tokens) | `nl/` | `tdfol-nl-*.ts` | Port context-aware parsing + preprocessor; consider spaCy-WASM (T-339 bridge) for token patterns. |
@@ -2106,14 +2106,14 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-090 | 🔴 | **`TemporalOperator` semantic collision**: TS `provers/dcec-types.ts` uses Event-Calculus predicates (HOLDS_AT/INITIATES/…) where Python means LTL (□/◊/X/U/S) | `dcec_types.py:208-247` | `dcec-types.ts:55` | Separate EC predicates from LTL temporal operators; don't overload one type. |
-| PORT-091 | 🟠 | Agent-relative notation incompatible: Python `O[alice](φ)` vs TS `O(φ,alice)` | `dcec_core.py:983-986` | `dcec-types.ts:181-186` | Adopt `O[agent](φ)` wire format (KB interoperability). |
-| PORT-092 | 🟡 | `Sort.is_subtype_of()` absent (no type-hierarchy checks) | `dcec_types.py:278-284` | `dcec-core-types.ts:79-87` | Port subtype relation; enforce in formula construction. |
-| PORT-093 | 🟡 | `Formula.__eq__` via `to_string()` (structural equality for dedup) missing | `dcec_core.py:826-855` | DCEC formula types | Add structural equality. |
+| PORT-090 | 🔴 | **`TemporalOperator` semantic collision**: TS `provers/dcec-types.ts` uses Event-Calculus predicates (HOLDS_AT/INITIATES/…) where Python means LTL (□/◊/X/U/S) | `dcec_types.py:208-247` | `dcec-types.ts:55` | Separate EC predicates from LTL temporal operators; don't overload one type. |  <!-- ✅ CLOSED -->
+| PORT-091 | 🟠 | Agent-relative notation incompatible: Python `O[alice](φ)` vs TS `O(φ,alice)` | `dcec_core.py:983-986` | `dcec-types.ts:181-186` | Adopt `O[agent](φ)` wire format (KB interoperability). |  <!-- ✅ CLOSED -->
+| PORT-092 | 🟡 | `Sort.is_subtype_of()` absent (no type-hierarchy checks) | `dcec_types.py:278-284` | `dcec-core-types.ts:79-87` | Port subtype relation; enforce in formula construction. |  <!-- ✅ CLOSED -->
+| PORT-093 | 🟡 | `Formula.__eq__` via `to_string()` (structural equality for dedup) missing | `dcec_core.py:826-855` | DCEC formula types | Add structural equality. |  <!-- ✅ CLOSED -->
 | PORT-094 | 🟡 | `ConnectiveFormula` binary-only vs Python n-ary `AND(P,Q,R)` | `dcec_core.py:1244-1295` | `dcec-types.ts:133-137` | Support n-ary connectives. |
-| PORT-095 | 🟡 | `CognitiveOperator.GOAL='G'` missing from `provers/dcec-types.ts` | `dcec_types.py:148` | `dcec-types.ts:42` | Add GOAL (present in `dcec-core-types.ts`; unify via PORT-002). |
+| PORT-095 | 🟡 | `CognitiveOperator.GOAL='G'` missing from `provers/dcec-types.ts` | `dcec_types.py:148` | `dcec-types.ts:42` | Add GOAL (present in `dcec-core-types.ts`; unify via PORT-002). |  <!-- ✅ CLOSED -->
 | PORT-096 | 🟡 ✅ | EVENTUALLY codepoint mismatch: Python `◊` U+25CA vs TS `◇` U+25C7 | `dcec_types.py:242` | `dcec-core-types.ts:66` | Standardize on Python's `◊`. |
-| PORT-097 | 🟢 | Document Python `CognitiveOperator.PERCEPTION='P'` name-collision bug; keep TS's correct avoidance | `dcec_types.py:149` | — | Note-only; add a code comment on the intentional divergence. |
+| PORT-097 | 🟢 | Document Python `CognitiveOperator.PERCEPTION='P'` name-collision bug; keep TS's correct avoidance | `dcec_types.py:149` | — | Note-only; add a code comment on the intentional divergence. |  <!-- ✅ CLOSED -->
 
 ### 12.10 DCEC tableaux / native prover
 
@@ -2128,10 +2128,10 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-110 | 🔴 ✅ | **Action-similarity algorithm fundamentally different**: Python Jaccard word-overlap (thr 0.7, words>3 chars) vs TS first-15-char prefix → different conflict sets | `_deontic_conflict_mixin.py:120-128` | `deontic-conflict-detector.ts:58-60` | Replace prefix compare with Jaccard word-overlap + 0.7 threshold. |
-| PORT-111 | 🟠 | Conflict categories missing: `CONDITIONAL_CONFLICT`, `JURISDICTIONAL`, `TEMPORAL`, `HIERARCHICAL` | `_deontic_conflict_mixin.py:93-116`, `deontological_reasoning_types.py:56-63` | `deontic-conflict-detector.ts:105-129` | Add the 4 detection paths. |
-| PORT-112 | 🟡 | `_generate_entity_reports()` + `_generate_analysis_recommendations()` absent | `_deontic_conflict_mixin.py:220-263,279-304` | (new) | Port per-entity breakdown + recommendations. |
-| PORT-113 | 🟡 | `DeonticLogicConverter.convert_knowledge_graph_to_logic()` missing (TS is regex-only) | `converters/deontic_logic_converter.py:155-234` | `deontic-logic-converter.ts:148-208` | Port KG→deontic-formula conversion (structured GraphRAG entities + domain classification). |
-| PORT-114 | 🟡 | `KnowledgeTemporalOperator` (Allen's intervals: BEFORE/AFTER/DURING/OVERLAPS/…) + `TimeInterval` arithmetic missing | `deontic/knowledge_base.py:19-58` | (new) | Port interval algebra for norm-duration reasoning. |
+| PORT-111 | 🟠 | Conflict categories missing: `CONDITIONAL_CONFLICT`, `JURISDICTIONAL`, `TEMPORAL`, `HIERARCHICAL` | `_deontic_conflict_mixin.py:93-116`, `deontological_reasoning_types.py:56-63` | `deontic-conflict-detector.ts:105-129` | Add the 4 detection paths. |  <!-- ✅ CLOSED -->
+| PORT-112 | 🟡 | `_generate_entity_reports()` + `_generate_analysis_recommendations()` absent | `_deontic_conflict_mixin.py:220-263,279-304` | (new) | Port per-entity breakdown + recommendations. |  <!-- ✅ CLOSED -->
+| PORT-113 | 🟡 | `DeonticLogicConverter.convert_knowledge_graph_to_logic()` missing (TS is regex-only) | `converters/deontic_logic_converter.py:155-234` | `deontic-logic-converter.ts:148-208` | Port KG→deontic-formula conversion (structured GraphRAG entities + domain classification). |  <!-- ✅ CLOSED -->
+| PORT-114 | 🟡 | `KnowledgeTemporalOperator` (Allen's intervals: BEFORE/AFTER/DURING/OVERLAPS/…) + `TimeInterval` arithmetic missing | `deontic/knowledge_base.py:19-58` | (new) | Port interval algebra for norm-duration reasoning. |  <!-- ✅ CLOSED -->
 
 ### 12.12 Modal logic (frames, tableaux, compiler, synthesis, KG, codec)
 
@@ -2148,8 +2148,8 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-130 | 🟡 | `LegalDomain` missing 9 values (TORT, CORPORATE, EMPLOYMENT, INTELLECTUAL_PROPERTY, REAL_ESTATE, FAMILY, TAX, IMMIGRATION, ENVIRONMENTAL) | `legal_domain_knowledge.py:22-35` | `legal-domain-knowledge.ts:31-38` | Add the 9 enum values + their patterns. |
-| PORT-131 | 🟡 | Legal pattern coverage ~50%: missing obligation (`responsible/liable for`), permission (`entitled to`, rights/options), prohibition (`barred from`, `unlawful/illegal`), agent (buyer/seller/landlord/tenant/employer/employee) patterns | `legal_domain_knowledge.py:95-269` | `legal-domain-knowledge.ts:110-159` | Port the missing regex/pattern sets. |
+| PORT-130 | 🟡 | `LegalDomain` missing 9 values (TORT, CORPORATE, EMPLOYMENT, INTELLECTUAL_PROPERTY, REAL_ESTATE, FAMILY, TAX, IMMIGRATION, ENVIRONMENTAL) | `legal_domain_knowledge.py:22-35` | `legal-domain-knowledge.ts:31-38` | Add the 9 enum values + their patterns. |  <!-- ✅ CLOSED -->
+| PORT-131 | 🟡 | Legal pattern coverage ~50%: missing obligation (`responsible/liable for`), permission (`entitled to`, rights/options), prohibition (`barred from`, `unlawful/illegal`), agent (buyer/seller/landlord/tenant/employer/employee) patterns | `legal_domain_knowledge.py:95-269` | `legal-domain-knowledge.ts:110-159` | Port the missing regex/pattern sets. |  <!-- ✅ CLOSED -->
 | PORT-132 | 🟢 | `LegalConceptType` divergent: Python RIGHT/DUTY/LIABILITY/EXCEPTION/DEFINITION vs TS TEMPORAL/AGENT/EXEMPTION (no overlap) | `legal_domain_knowledge.py` | `legal-domain-knowledge.ts` | Reconcile concept taxonomy. |
 | PORT-133 | 🟡 | Legal analyzer: `extract_temporal_conditions` not public; SymbolicAI extraction dropped | `integration/domain/legal_symbolic_analyzer.py` | `legal-symbolic-analyzer.ts` | Expose temporal extraction; decide on SymbolicAI replacement. |
 
@@ -2157,17 +2157,17 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |
-| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |
-| PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |
-| PORT-143 | 🟠 | `ConsistencyResult` missing `temporal_conflicts` (Python returns logical + temporal; TS only logical) | `temporal_deontic_rag_store.py:65-72` | `temporal-deontic-rag-store.ts:94-124` | Add temporal-conflict list + temporal index. |
+| PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |  <!-- ✅ CLOSED -->
+| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ✅ CLOSED -->
+| PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |  <!-- ✅ CLOSED -->
+| PORT-143 | 🟠 | `ConsistencyResult` missing `temporal_conflicts` (Python returns logical + temporal; TS only logical) | `temporal_deontic_rag_store.py:65-72` | `temporal-deontic-rag-store.ts:94-124` | Add temporal-conflict list + temporal index. |  <!-- ✅ CLOSED -->
 
 ### 12.15 Neurosymbolic & logic verifier
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-150 | 🟡 | Neurosymbolic GraphRAG/API: SymbolicAI + real embeddings dropped (structural port only) | `integration/symbolic/neurosymbolic_{graphrag,api}.py` | `neurosymbolic-{graphrag,api}.ts` | Decide embedding backend (WASM model / remote) to restore semantic retrieval. |
-| PORT-151 | 🟠 | Logic-verifier field names diverge (`is_valid/conclusion/method_used/time_taken` vs `proved/formula/method/timeMs`); `time_taken` seconds vs `timeMs` ms | `logic_verification_types.py:95-124` | `logic-verifier.ts:70-78` | Align field names + units (see §12.16). |
+| PORT-151 | 🟠 | Logic-verifier field names diverge (`is_valid/conclusion/method_used/time_taken` vs `proved/formula/method/timeMs`); `time_taken` seconds vs `timeMs` ms | `logic_verification_types.py:95-124` | `logic-verifier.ts:70-78` | Align field names + units (see §12.16). |  <!-- ✅ CLOSED -->
 
 ### 12.16 Cross-cutting interop contract (fix before ANY Python⇄TS proof/KB/cache interchange)
 
@@ -2177,7 +2177,7 @@ These do not block the shipped TS-only path, but each silently breaks round-trip
 |---|---|---|---|
 | PORT-160 | 🟠 ✅ | `proof_time` (Python, **seconds**) vs `proof_time_ms` (TS, **ms**) — 1000× off; cache TTL units also differ | Standardize on one unit across the wire; convert at boundaries. |
 | PORT-161 | 🟠 ✅ | Proof-cache key: Python `sha256{formula,axioms,prover_name,prover_config}` vs TS `sha256(canonicalPolicyKey)` (omits axioms + prover id) → mis-keying in a shared IPFS cache | Include axioms + prover identity in the TS cache key. |
-| PORT-162 | 🟡 | `LogicConflict.severity`: Python `critical/warning/info` vs TS `high/medium/low` | Pick one vocabulary. |
+| PORT-162 | 🟡 | `LogicConflict.severity`: Python `critical/warning/info` vs TS `high/medium/low` | Pick one vocabulary. |  <!-- ✅ CLOSED -->
 | — | — | (Also: PORT-091 agent notation, PORT-096 EVENTUALLY codepoint, PORT-141 field name — listed above; all part of the same serialization contract.) | |
 
 ### 12.17 Already faithful — DO NOT re-port (avoid wasted effort)
