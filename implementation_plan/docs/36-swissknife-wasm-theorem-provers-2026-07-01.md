@@ -2204,3 +2204,33 @@ templates; cognitive/deontic operator **values** (O/P/F/S/R/L/POW/IMM, B/K/I/D).
 **Definition of done for "complete port":** every `PORT-###` closed with a conformance test
 in `test/mcp-plus-plus/` asserting TS output matches the Python reference for the same input
 (extends the existing `wasm-prover-conformance.test.ts`, T-44).
+
+### 12.19 Port coordination ledger (multi-agent, 2026-07-01)
+
+Two agents execute this §12 backlog against ONE shared worktree/branch. To avoid
+collisions each completed task is stamped with a `PORT-###` comment **in the code
+it lands in**; `git grep -hoE "PORT-[0-9]{3}" src test | sort -u` is the
+authoritative "what's done" signal (do this before claiming a task).
+
+**Done so far (12 of 74):**
+
+| Tasks | Owner | Landed on | Notes |
+|-------|-------|-----------|-------|
+| PORT-001, 030, 031, 096, 110, 120, 160, 161 | WASM-prover sprint line | swissknife `heal/wasm-prover-integration` (PORT-030/031/096/110/120/160/161 also on `main`) | high-priority core soundness/interop, folded into the Sprint 1–76 line |
+| PORT-130, 131, 132, 133 | legal-domain slice | swissknife PR #48 (`port/legal-domain-13x`, branched from `main` b270b484) | §12.13 Legal domain — enums + deontic/agent patterns + public temporal API + 8 conformance tests |
+
+**Protocol notes:**
+- Pick a **disjoint vertical** (a whole §12.x subsystem the other agent isn't in)
+  rather than interleaving edits in shared files. Legal (§12.13), visualizer
+  (§12.9), profiler, and NL context were cold and safe; the core type-system and
+  prover-router files are the sprint line's hot surface — coordinate before
+  touching.
+- For self-contained slices, work in an **isolated `git worktree`** (own index,
+  shared object store) and ship as a PR against swissknife `main`, so the shared
+  checkout is never staged/reset by the port work.
+- Every PORT task closes with a conformance test in `test/mcp-plus-plus/`
+  (§12.18 definition of done).
+
+**Remaining priority (unclaimed):** Wave 1 foundation (PORT-001 done; PORT-002/003
+type-system unification + `Term.substitute`/`getFreeVariables` still open) unblocks
+the most downstream work and is the sprint line's natural next step.
