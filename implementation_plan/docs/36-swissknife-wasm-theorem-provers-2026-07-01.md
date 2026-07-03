@@ -1636,6 +1636,18 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 74 (Phase 74 — spaCy-WASM NLP bridge, sedbytes/spacy-wasm integration, P3) 🆕
+
+Replaces the placeholder `extractSimpleEntities()` regex heuristic with a full spaCy 3.4 + Pyodide WASM pipeline matching the Python `_extract_predicates_spacy()` reference in `ipfs_datasets_py/logic/fol/utils/nlp_predicate_extractor.py`.
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-339 | P3 | Create `src/services/spacy-wasm-nlp.ts` | ✅ DONE — `SpacyWasmNlp` class: lazy Pyodide init, micropip install of spaCy 3.4 WASM packages from `sedbytes/spacy-wasm`, `extract(text)→SpacyPredicates` (nouns/verbs/adjs/entities/relations); `regexFallbackExtract()` for offline/test; `extractPredicatesNlp()` convenience export; env-var config (`SPACY_WASM_PACKAGES_BASE_URL`, `SPACY_WASM_DISABLE`) |
+| T-340 | P3 | Wire `SpacyWasmNlp` into `src/inference/graph-rag-database.ts` | ✅ DONE — `GraphRAGDatabase` accepts `spacyNlp?: SpacyWasmNlp` in constructor; `addDocument()` uses `spacyNlp.extract()` with typed `SpacyEntity` graph edges instead of regex heuristic |
+| T-341 | P3 | Write 10+ tests | ✅ DONE — 18 tests in `test/mcp-plus-plus/wasm-prover-sprint74.test.ts` (Pyodide falls back gracefully to regex in test env, all 18 pass) |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
