@@ -1705,6 +1705,17 @@ Closes all 12 deferred TODOs in `src/patches/mcp/fix-mcp-transport.ts`.
 
 ---
 
+### Sprint 81 (Phase 81 — §12 remaining foundation + full AST converter closure, P2) ✅ DONE (2026-07-03)
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-369 | P2 | PORT-002 — canonical DCEC type-module unification | ✅ DONE — `dcec-core-types.ts` is the canonical manifest source; `WAIVER`, cognitive aliases, `BICONDITIONAL`, normalization helpers, and `sprint66-dcec-types.ts` compatibility facade are present |
+| T-370 | P2 | PORT-020/022 — TDFOL AST → SMT-LIB2 path + Python-style symbol parity | ✅ DONE — `TDFOLToZ3Converter` accepts `Formula` ASTs, emits sorts/declarations/quantifiers/deontic-agent/temporal SMT-LIB2, and `TDFOLToCVC5Converter` shares the same path; policy SMT serializer accepts current and legacy formula-set fields |
+| T-371 | P2 | PORT-032 — full TDFOL AST → Coq/Lean converter paths | ✅ DONE — `TDFOLToCoqConverter` and `TDFOLToLean4Converter` emit typed sort/predicate/function declarations plus quantified theorem bodies from TDFOL AST inputs; Lean path re-exports the full converter |
+| T-372 | P2 | Focused conformance tests | ✅ DONE — `test/mcp-plus-plus/wasm-prover-sprint81.test.ts` covers canonical DCEC manifest/aliases, SMT-LIB2 AST conversion and symbol naming, CVC5 parity, and Coq/Lean AST theorem generation |
+
+---
+
 ### Sprint 65 (Phase 65 — duplicate legacy board; superseded by completed Sprint 65 rows above) ✅ DONE
 
 | ID | Priority | Task | Acceptance Criteria |
@@ -2033,7 +2044,7 @@ were produced by the four audits and are summarized above.
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-001 | 🔴 | **Three incompatible TS `Formula` type systems**, no conversion layer | single `tdfol_core.py:244` | `tdfol-core.ts:110`, `provers/tdfol-types.ts:101`, `temporal-inference-rules.ts:39-44` | Choose ONE canonical TDFOL AST; write adapters from the other two, or collapse them. Until done, rules in `temporal-inference-rules.ts` (15) can't compose with `TDFOLProver`/`TdfolProverBridge`. |  <!-- ✅ CLOSED sprint80b -->
-| PORT-002 | 🔴 | **Three competing DCEC operator/type files** | `CEC/native/dcec_types.py`, `dcec_core.py` | `dcec-core-types.ts`, `dcec-types.ts`, `sprint66-dcec-types.ts` | Merge to one canonical DCEC type module; reconcile `DeonticOperator` (enum vs union; `WAIVER='W'` extra), `LogicalConnective`, temporal ops. |  <!-- ✅ CLOSED sprint80b -->
+| PORT-002 | 🔴 | **Three competing DCEC operator/type files** | `CEC/native/dcec_types.py`, `dcec_core.py` | `dcec-core-types.ts`, `dcec-types.ts`, `sprint66-dcec-types.ts` | Merge to one canonical DCEC type module; reconcile `DeonticOperator` (enum vs union; `WAIVER='W'` extra), `LogicalConnective`, temporal ops. |  <!-- ✅ CLOSED sprint81 -->
 | PORT-003 | 🔴 | **`Term.substitute()` + `get_free_variables()` absent** — no α-renaming/unification/quantifier scoping (soundness) | `tdfol_core.py:111`; `dcec_core.py:700-709,1380-1394` | `tdfol-core.ts:30-35` interface; DCEC term types | Add `substitute(var, term)` and `getFreeVariables()` to the Term/Formula interfaces + all node impls. Prereq for FOL rules (PORT-070/071) and sound quantifier handling. |  <!-- ✅ CLOSED sprint80 -->
 
 ### 12.1 Core types & shared enums
@@ -2050,9 +2061,9 @@ were produced by the four audits and are summarized above.
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-020 | 🔴 | **No TDFOL-AST input path** — bridges accept only pre-serialized strings; can't prove arbitrary FOL | `z3_prover_bridge.py:109-301`, `coq_prover_bridge.py:82-193` | `z3-wasm-bridge.ts`, `cvc5-wasm-bridge.ts` | Implement `TDFOLToZ3Converter` + `TDFOLToCVC5Converter`; add `prove(formula, axioms)` and `check_satisfiability(formula)`. |  <!-- ✅ CLOSED sprint80b -->
+| PORT-020 | 🔴 | **No TDFOL-AST input path** — bridges accept only pre-serialized strings; can't prove arbitrary FOL | `z3_prover_bridge.py:109-301`, `coq_prover_bridge.py:82-193` | `z3-wasm-bridge.ts`, `cvc5-wasm-bridge.ts` | Implement `TDFOLToZ3Converter` + `TDFOLToCVC5Converter`; add `prove(formula, axioms)` and `check_satisfiability(formula)`. |  <!-- ✅ CLOSED sprint81 -->
 | PORT-021 | 🔴 | **QF_UF-only serialization; no quantifiers** — all real FOL unverifiable via TS SMT | `z3_prover_bridge.py:250-266` | `smt2-serializer.ts:103` | Emit `∀/∃`, uninterpreted functions, arithmetic sorts; drop the QF_UF pin. |  <!-- ✅ CLOSED -->
-| PORT-022 | 🟡 | SMT symbol naming (`P__cap__rsc`) incompatible with Python (`DeclareSort`+node names) | `z3_prover_bridge.py` | `smt2-serializer.ts:48-96` | Align naming so TS/Python emit identical SMT-LIB2 for the same content. |  <!-- ✅ CLOSED sprint80b -->
+| PORT-022 | 🟡 | SMT symbol naming (`P__cap__rsc`) incompatible with Python (`DeclareSort`+node names) | `z3_prover_bridge.py` | `smt2-serializer.ts:48-96` | Align naming so TS/Python emit identical SMT-LIB2 for the same content. |  <!-- ✅ CLOSED sprint81 -->
 
 ### 12.3 Interactive provers (Coq, Lean 4)
 
@@ -2060,7 +2071,7 @@ were produced by the four audits and are summarized above.
 |---|---|---|---|---|---|
 | PORT-030 | 🔴 ✅ | **Lean `sorry` NOT detected** — TS can return `proved:true` for an incomplete proof (soundness) | `lean_prover_bridge.py:398-400` | `lean4-wasm-bridge.ts:139-152` | Fail when output contains `sorry`/`error:`. |
 | PORT-031 | 🟠 ✅ | **Coq output check incomplete** — no `"Error"`/`"Anomaly"` scan (exit-0-with-error passes) | `coq_prover_bridge.py:400-402` | `coq-jscoq-bridge.ts:135-147` | Reject on Error/Anomaly strings even when exit code is 0. |
-| PORT-032 | 🟠 | `TDFOLToCoqConverter` / `TDFOLToLeanConverter` missing (TS takes pre-serialized source only) | `coq_prover_bridge.py`, `lean_prover_bridge.py` | translators | Port full-AST converters (beyond the policy-only `DeonticToCoq/Lean4` translators). |  <!-- ✅ CLOSED sprint80b -->
+| PORT-032 | 🟠 | `TDFOLToCoqConverter` / `TDFOLToLeanConverter` missing (TS takes pre-serialized source only) | `coq_prover_bridge.py`, `lean_prover_bridge.py` | translators | Port full-AST converters (beyond the policy-only `DeonticToCoq/Lean4` translators). |  <!-- ✅ CLOSED sprint81 -->
 | PORT-033 | 🟡 | Auto-tactics hardcoded (`tauto.`/`simp_all`) vs Python configurable list | `coq_prover_bridge.py:224`, `lean_prover_bridge.py:224` | `deontic-to-coq.ts:102`, `deontic-to-lean4.ts:91-93` | Configurable tactic sequence (`auto,intuition,tauto,firstorder` / `trivial,simp,tauto,decide`). |  <!-- ✅ CLOSED sprint80 -->
 | PORT-034 | 🟡 | Coq classical imports absent; `.vo`/`.glob` not cleaned | `coq_prover_bridge.py:335-336,410-413` | `coq-jscoq-bridge.ts:159` | Emit `Require Import Coq.Logic.Classical(_Prop)`; clean all artefacts. |  <!-- ✅ CLOSED sprint80 -->
 
@@ -2206,9 +2217,9 @@ templates; cognitive/deontic operator **values** (O/P/F/S/R/L/POW/IMM, B/K/I/D).
 
 ### 12.18 Suggested port sequencing
 
-- **Wave 1 — Foundation:** PORT-002 (canonical DCEC type module) remains; PORT-001/003 and PORT-010–014 are closed.
+- **Wave 1 — Foundation:** PORT-001/002/003 and PORT-010–014 are closed.
 - **Wave 2 — Soundness (highest ROI):** PORT-030 (Lean sorry), PORT-031 (Coq Error), PORT-120 (S5 symmetry), PORT-110 (action similarity), PORT-100 (propositional tableaux), PORT-090 (temporal-op collision) are closed.
-- **Wave 3 — Logical completeness:** PORT-020/022 (TDFOL→SMT AST path + SMT symbol parity) and PORT-032 (full AST converters) remain; PORT-021, PORT-041/042, PORT-060–066, and PORT-070/071 are closed.
+- **Wave 3 — Logical completeness:** PORT-020/021/022, PORT-032, PORT-041/042, PORT-060–066, and PORT-070/071 are closed.
 - **Wave 4 — Capability parity:** The listed capability-parity items are closed for the current structural TS port; future work is only needed if real embedding/BM25/prover backends replace the deterministic fallbacks.
 - **Wave 5 — Interop contract:** PORT-160/161/162 + PORT-091/096/141/151 are closed.
 - **Wave 6 — Polish:** PORT-040, PORT-080/082/083/084/085, PORT-092–097, PORT-101/102, PORT-132/133, and PORT-150 are closed.
@@ -2232,6 +2243,7 @@ authoritative "what's done" signal (do this before claiming a task).
 | PORT-130, 131, 132, 133 | legal-domain slice | swissknife PR #48 (`port/legal-domain-13x`, branched from `main` b270b484) | §12.13 Legal domain — enums + deontic/agent patterns + public temporal API + 8 conformance tests |
 | PORT-084 | dep-graph slice | swissknife PR #49 (`port/dep-graph-084`, branched from `main` d94f464) | §12.8 formula dependency-graph — DOT export + critical/all paths + unused-axiom/redundancy/statistics + 10 conformance tests |
 | PORT-003, 033, 034, 040, 051–054, 081, 083, 085, 094, 100–102, 121–125, 150 | Sprint 80 closure pass | current worktree, 2026-07-03 | TDFOL substitution/typed nodes, neural explanation API, DCEC tableaux/proof-step schema, modal synthesis/KG/compiler/codec closure, and 37 focused conformance tests |
+| PORT-002, 020, 022, 032 | Sprint 81 closure pass | current worktree, 2026-07-03 | canonical DCEC manifest/facade, TDFOL AST→SMT-LIB2 Z3/CVC5 converters, Python-style SMT naming, full AST→Coq/Lean converters, and 8 focused conformance tests |
 
 **Protocol notes:**
 - Pick a **disjoint vertical** (a whole §12.x subsystem the other agent isn't in)
@@ -2245,7 +2257,183 @@ authoritative "what's done" signal (do this before claiming a task).
 - Every PORT task closes with a conformance test in `test/mcp-plus-plus/`
   (§12.18 definition of done).
 
-**Remaining priority (unclaimed):** PORT-002 canonical DCEC type-module unification
-is the last Wave 1 foundation blocker. The remaining high-value interop gaps are
-PORT-020/022 (TDFOL→SMT AST path + SMT symbol parity) and PORT-032 (full TDFOL→Coq/Lean
-AST converters).
+**Remaining priority (unclaimed):** no §12 PORT gaps in this taskboard remain unclaimed after
+Sprint 81. Future work should focus on backend depth and operational parity: real solver
+embeddings where deterministic fallbacks exist, richer native WASM prover integrations,
+and any fresh Python⇄TS conformance drift found by new audits.
+
+---
+
+## 12.20 Full-submodule coverage audit (2026-07-03) — complete port backlog for `ipfs_datasets_py/logic`
+
+§12.1–§12.18 catalogued the gaps the Sprint 1–81 prover work surfaced (PORT-001–162,
+now largely closed). That backlog was scoped to the **deontic policy-consistency proving**
+path. This section is the **complete sweep of the entire `ipfs_datasets_py/logic/`
+submodule** so the team can port it *in full* to TypeScript — every module that still
+needs work, not just the ones the prover use-case touched.
+
+**Scope of the submodule:** 341 `.py` files / ~186K lines. After excluding vendored
+external engines, demos/examples/benchmarks, `api_server`, test suites, and deprecated
+re-export shims (see §12.20.1), **286 portable modules** remain. Of these, roughly **196
+are tracked/ported** by §12.1–18 + §12.17 (already-faithful), **~29 have a TS counterpart
+but no conformance test** (§12.20.3), and **~61 carry a real gap** (PARTIAL/MISSING), of
+which the material ones are itemised below as **PORT-170 … PORT-208**.
+
+**Method:** a programmatic Python→TS presence map (name + semantic matching) followed by
+four parallel deep read-only audits — CEC (native/nl/provers), TDFOL/FOL/flogic,
+ZKP, and deontic/security/observability/common — each classifying every module
+PORTED 🟢 / PARTIAL 🟠🟡 / MISSING 🔴 with source citations. Priority legend as elsewhere:
+🔴 critical, 🟠 high, 🟡 medium, 🟢 low.
+
+### 12.20.0 Coverage summary by subsystem
+
+| Subsystem | Portable modules | State | Headline gap |
+|---|---|---|---|
+| CEC native + nl + provers | ~40 | PARTIAL | ATP adapters (E/Vampire) are stubs; TPTP/problem parser, ambiguity resolver, Portuguese parser MISSING |
+| TDFOL (core/rules/strategies) | ~28 | mostly PORTED | strategy router (cec_delegate, modal_tableaux, cost model), performance engine, expansion-rule module residual |
+| FOL + flogic | ~12 | PARTIAL | `flogic_zkp_integration` MISSING; logic_formatter MISSING; converter ML/NLP layer + Prolog/TPTP export residual |
+| ZKP (backends + provekit + onchain) | ~20 | **ported by LOC, ~0% operational** | real proving is stubbed → **TS emits SIMULATED proofs only**; witness manager / verifier / setup / VK registry MISSING |
+| Deontic (ir/decoder/metrics/prover_syntax) | ~13 | PARTIAL | `ir.py` 2834L→166L (~94% of slot detail dropped); `metrics.py` (Phase-8 QA) MISSING |
+| integration/reasoning | ~8 | PARTIAL | main `ProofExecutionEngine` class MISSING (only -types/-utils in TS) |
+| Security | ~3 | PARTIAL | validation/rate-limit/audit scattered, no unified modules |
+| Observability | ~3 | PARTIAL | otel + structured-logging PORTED; **Prometheus exporter MISSING** |
+| common + types | ~10 | PARTIAL | feature_detection + utility_monitor MISSING; caches fragmented; type modules scattered |
+
+### 12.20.1 Out-of-scope / vendored — **DO NOT port**
+
+Documenting these so nobody wastes a sprint on them:
+
+- **Vendored external prover engines** — `CEC/ShadowProver`, `CEC/Talos`,
+  `CEC/DCEC_Library`, `CEC/Eng-DCEC`, `ErgoAI/`. In this checkout these are empty
+  stubs / third-party engines reached at **runtime via MCP++ delegation** (Round-51
+  `RemoteDeonticEngine`), never re-implemented in TS.
+- **Non-library** — `demos/`, `examples/`, `benchmarks/`, `api_server.py`, `tests/`.
+- **Deprecated shims** — `integrations/enhanced_graphrag_integration.py`,
+  `integrations/unixfs_integration.py`, `integrations/phase7_complete_integration.py`
+  (thin re-exports of `processors.*`); the target already exists in TS
+  (`neurosymbolic-graphrag.ts`) or is not needed.
+
+### 12.20.2 New port backlog (PORT-170 … PORT-207)
+
+**Cluster A — external / classical ATP integration (real subprocess adapters + TPTP/Prolog)**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-170 | 🔴 | E prover adapter is a **stub** — cannot actually invoke E | `CEC/native/provers/e_prover_adapter.py` (263L) | `external-provers.ts` (stub) | Real adapter: build TPTP input, spawn/bind E (WASM or subprocess), parse SZS status/proof. |
+| PORT-171 | 🔴 | Vampire adapter is a **stub** | `CEC/native/provers/vampire_adapter.py` (239L) | `external-provers.ts` (stub) | Real adapter as PORT-170 for Vampire; wire as the `MOST_CAPABLE`/heavy-FOL fallback. |
+| PORT-172 | 🔴 | **No TPTP emit or parse** — blocks PORT-170/171 | `CEC/native/provers/tptp_utils.py` (259L), `CEC/native/problem_parser.py` (346L) | none | Port `formula_to_tptp` / `create_tptp_problem` + a TPTP problem parser (SZS, `fof/cnf` roles). |
+| PORT-173 | 🟠 | FOL → **Prolog / TPTP export** formatters absent | `fol/utils/fol_parser.py` `convert_to_prolog()`, `convert_to_tptp()` | `fol/fol-text-converter.ts`, `tdfol-parser.ts` | Add prefix-notation Prolog + TPTP CNF emitters for SICStus/SWI/Vampire/CVC5 interop. |
+
+**Cluster B — CEC native residuals**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-174 | 🔴 | **Parse-ambiguity resolution MISSING** | `CEC/native/ambiguity_resolver.py` (323L) | none | Port `AmbiguityResolver`/`DisambiguationStrategy`/`ParseScore` — ranks competing parses; needed for robust NL→DCEC. |
+| PORT-175 | 🟠 | Cleaning utilities inline, not reusable | `CEC/native/dcec_cleaning.py` | inline in `dcec-parsing.ts` | Extract the normalisation/cleaning helpers into a dedicated exported module. |
+| PORT-176 | 🟠 | No reusable error-handling decorators | `CEC/native/error_handling.py` | inline | Port the decorator/handler set so parse/prove paths share consistent error envelopes. |
+| PORT-177 | 🟡 | Grammar is hardcoded (no external loader) | `CEC/native/grammar_loader.py` | hardcoded in parser | Add a YAML/JSON grammar loader so grammars are data, not code. |
+| PORT-178 | 🟡 | Modal axiom rules not individually named | `CEC/native/inference_rules/modal.py` (axioms 4/5/B/D) | `inference` rules set | Expose named modal axiom rule classes (K/T/4/5/B/D) for router selection + tests. |
+
+**Cluster C — multilingual NL (CEC/nl)**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-179 | 🔴 | **Portuguese parser MISSING** (only remaining language) | `CEC/nl/portuguese_parser.py` (181L) | `french-parser.ts`, `german-parser.ts`, `spanish-parser.ts` exist | Port `portuguese-parser.ts` mirroring the fr/de/es ports (deontic verb tables, agents). |
+| PORT-180 | 🟠 | NL→DCEC policy compiler partial | `CEC/nl/nl_to_policy_compiler.py` | partial | Port the `NLToDCECCompiler` end-to-end pipeline (sentence → DCEC policy) fully. |
+| PORT-181 | 🟡 | No shared `BaseParser`/`ParseResult` ABC | `CEC/nl/base_parser.py` | per-language files | Extract a common base so all language parsers share one contract. |
+
+**Cluster D — TDFOL strategy + performance residuals**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-182 | 🟠 | `CECDelegateStrategy` / `CECProverRouter` not wired to external provers | `TDFOL/strategies/cec_delegate.py` (216L) | `proof-strategies.ts` (enum ref only) | Port the delegating strategy + router so TDFOL can hand hard goals to E/Vampire/CEC. |
+| PORT-183 | 🟠 | `ModalTableauxStrategy` + cost-based selection missing | `TDFOL/strategies/modal_tableaux.py` (355L), `strategy_selector.py` (256L) | `proof-strategies.ts`, `sprint66-prover-utils.ts` | Add the modal-tableaux strategy class + a cost-estimation `StrategySelector` (not just the Vampire-scoped cost). |
+| PORT-184 | 🟠 | Performance **engine** wrapper absent | `TDFOL/tdfol_performance_engine.py` (427L) | `tdfol-performance-metrics.ts` (collection only) | Port the aggregator engine over the existing metrics (percentiles, per-strategy stats, reports). |
+| PORT-185 | 🟡 | Expansion rules not a discrete module | `TDFOL/expansion_rules.py` (209L) | implicit in `tdfol-extended-rules.ts` | Port `And/Or/Implies/Negation/Temporal` expansion as a named, individually-testable module. |
+
+**Cluster E — NL preprocessing (reconciles PORT-085)**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-186 | 🔴 | PORT-085 closed the api/generator/llm/patterns layer but **coreference + entity preprocessing remain regex-only** | `TDFOL/nl/tdfol_nl_context.py` (~100L), `tdfol_nl_preprocessor.py` (~200L) | `tdfol-nl-api.ts` (skeleton); no context/coreference engine | Port `Entity`/`Context` (aliases, mentions, reference resolution) + the preprocessing pipeline (sentence split, POS/temporal normalisation). Downgrade to keyword/regex is documented but blocks faithful NL→TDFOL. |
+
+**Cluster F — FOL / F-logic**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-187 | 🟠 | `FOLConverter` ML scoring / NLP / monitoring dropped | `fol/converter.py` (497L) | `fol/fol-text-converter.ts` (basic) | Port confidence/ML scoring, NLP enrichment, and the perf-monitoring hooks. |
+| PORT-188 | 🟡 | **Formula formatter MISSING** | `fol/utils/logic_formatter.py` (218L) | none | Port `format_formula`/`normalize_formula`/`to_latex`/`to_unicode`. |
+| PORT-189 | 🟠 | Predicate/deontic extraction heuristics incomplete | `fol/utils/predicate_extractor.py` (76L), `deontic_parser.py` (234L) | `fol/fol-text-converter.ts`, `deontic-inference-rules.ts` | Complete the extraction heuristics + operator-precedence / nested deontic parsing. |
+| PORT-190 | 🔴 | **F-logic ZKP integration MISSING** | `flogic/flogic_zkp_integration.py` (372L) | none | Port `prove_with_zkp()`/`verify_proof()` + frame-logic→circuit transpile (`flogic-zkp-integration.ts`). |
+| PORT-191 | 🟠 | Semantic normaliser partial | `flogic/semantic_normalizer.py` (322L) | `flogic-semantic-optimizer.ts` | Port the full normalisation rule set (beyond optimisation). |
+
+**Cluster G — ZKP real proving backends (ported by LOC, not operational)**
+
+> Headline: the TS ZKP stack mirrors Python's *shape* (~92% by line count) but
+> `zkp-backends.ts` `Groth16Backend.generateProof()` unconditionally returns a
+> **simulated** proof, and `ProveKitFFI.generateProof()` throws "not yet bound".
+> **No real proof is produced today.** Reaching real proving is ~800 LOC across:
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-192 | 🔴 | Groth16 backend is a **simulated fallback** | `zkp/backends/groth16.py`, `groth16_ffi.py` | `zkp-backends.ts` (~line 113) | Spawn/bind the real Groth16 prover (Rust binary / WASM), parse the proof + public inputs; remove the sim fallback on the real path. |
+| PORT-193 | 🔴 | ProveKit backend **throws** (unbound) | `zkp/backends/provekit.py`, `provekit_ffi.py`, `provekit/*` | `zkp-backends.ts` `ProveKitFFI` (~line 205) | Bind the ProveKit CLI/FFI; produce + verify real ProveKit proofs. |
+| PORT-194 | 🔴 | `circuit_v2` inputs incomplete — no TDFOL_v1 trace/commitment | `zkp/canonicalization.py`, `legal_theorem_semantics.py` | `canonicalization.ts`, `legal-theorem-semantics.ts` | Port the TDFOL_v1 axiom-set accumulator commitment + `derive_tdfol_v1_trace` (forward-chaining) that the real circuit needs. |
+| PORT-195 | 🔴 | Witness / verifier / setup / VK registry **MISSING** | `zkp/witness_manager.py` (264L), `zkp_verifier.py` (313L), `setup_artifacts.py` (79L), `vk_registry.py` (155L) | none | Port witness orchestration, the verifier wrapper, proving/verifying-key setup artefacts, and the VK registry. |
+| PORT-196 | 🟠 | On-chain path partial/stubbed | `zkp/onchain_pipeline.py`, `evm_harness.py`, `evm_public_inputs.py`, `eth_integration.py`, `eth_contract_artifacts.py`, `eth_vk_registry_payloads.py` | partial | Port real EVM submission, ABI/public-input encoding, contract artefacts, and on-chain VK registry payloads. |
+
+**Cluster H — deontic IR & QA metrics**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-197 | 🔴 | **`LegalNormIR` ~94% stripped** (2834L→166L) — breaks Python⇄TS round-trip | `deontic/ir.py` (2834L) | `deontic/legal-norm-ir.ts` (166L) | Restore the 40+ slot types: modality/actor/action/condition/temporal bounds/modifiers, **provenance**, support-map, and Phase-8 required fields. |
+| PORT-198 | 🟡 | Decoder provenance audit-trail dropped | `deontic/decoder.py` (932L) | `deontic/legal-norm-decoder.ts` (404L) | Port the phrase-level provenance/audit trail. |
+| PORT-199 | 🔴 | **Phase-8 parser QA metrics MISSING** | `deontic/metrics.py` (363L) | none | Port `summarize_phase8_parser_metrics()` + metric builders/quality reports (blind observability on legal parsing without it). |
+| PORT-200 | 🟡 | Prover-syntax target coverage incomplete | `deontic/prover_syntax.py` (1652L) | `deontic/prover-syntax-builder.ts` (236L) | Port the full `ProverSyntaxValidator` + all target-syntax mappings. |
+
+**Cluster I — proof execution engine**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-201 | 🔴 | **Main `ProofExecutionEngine` class MISSING** — only types + utils in TS | `integration/reasoning/proof_execution_engine.py` (975L) | `proof-execution-engine-types.ts`, `-utils.ts` | Port the `execute()` engine (timeout handling, proof caching, multi-prover routing). NOTE: proving *does* work at runtime via `mcp-wasm-prover-hub.ts`; this is the missing generic engine abstraction, not "no proving." |
+
+**Cluster J — security / observability / common / types**
+
+| ID | Pri | Gap | Python source | TS target | Port task |
+|---|---|---|---|---|---|
+| PORT-202 | 🔴 | **Prometheus exporter MISSING** (0% coverage) | `observability/metrics_prometheus.py` (371L) | none | Port collectors/exporters (`prom-client` or equivalent). (`otel-integration.ts` + `structured-logging.ts` already faithful — do not re-port.) |
+| PORT-203 | 🟠 | Security modules scattered/partial | `security/input_validation.py` (96L), `rate_limiting.py` (159L), `audit_log.py` (242L) | `logic-validators.ts`, `mcp-p2p-session.ts`, `policy-audit-log.ts` | Consolidate into unified `InputValidator`, `RateLimiter`+decorator, and a generic `AuditLog` (policy-audit is a subset). |
+| PORT-204 | 🟠 | Runtime feature detection + perf monitor MISSING | `common/feature_detection.py` (180L), `common/utility_monitor.py` (231L) | none | Port `FeatureDetector`/`is_module_available` (graceful degradation) + `UtilityMonitor`/`track_performance`. |
+| PORT-205 | 🟡 | Cache API fragmented (3 files, no unified base) | `common/bounded_cache.py` (233L), `common/proof_cache.py` (801L) | `proof-cache-base.ts`, `flogic-proof-cache.ts`, `ipfs-proof-cache.ts` | Introduce a unified `BoundedCache` + one `ProofCache` abstract base the 3 variants extend. |
+| PORT-206 | 🟡 | Converter coverage incomplete | `common/converters.py` (394L) | `logic-converters.ts` | Port the remaining `convert_formula`/`normalize_syntax`/formatters. |
+| PORT-207 | 🟢 | Type modules scattered across service files | `types/{translation,common,deontic,fol}_types.py` | embedded across `*.ts` | (Cosmetic) consolidate into namespaced type modules for parity + discoverability. `types/proof_types.py` already sufficient. |
+
+### 12.20.3 Parity-audit backlog for already-ported-but-unaudited modules
+
+| ID | Pri | Task |
+|---|---|---|
+| PORT-208 | 🟡 | ~29 modules have a TS counterpart but **no dedicated conformance test** (e.g. `integration/bridges/*`, `integration/converters/*`, `integration/caching/*`, CEC fr/de/es parsers, `otel-integration.ts`, `structured-logging.ts`, `flogic-ergoai-wrapper.ts`, interactive-FOL). Add one conformance test each (per §12.18 DoD) to lock shape/behaviour parity and catch silent drift. |
+
+### 12.20.4 Reconciliations (tasks marked CLOSED but audit found residual)
+
+- **PORT-085 (NL layer, CLOSED sprint80)** — the closure covered `tdfol-nl-api.ts` /
+  `-generator` / `-llm` / `-patterns`, but `tdfol_nl_context.py` (coreference/`Context`)
+  and `tdfol_nl_preprocessor.py` (`Entity`/spaCy pipeline) are **not** ported. Tracked
+  forward as **PORT-186**; the TS path is regex/keyword-only.
+- Corroborates §11.2 **F2/F3** (missing `ProverStrategy` / `FormulaType` enum members):
+  the router works by formula-class + availability, so these are parity-completeness
+  items, not functional blockers.
+
+### 12.20.5 Pin/drift caveat (read before executing this backlog)
+
+This audit ran against the logic submodule's **working-tree checkout `4672e0b2`**, which
+is an *unrelated history* to the parent-pinned **`f59cb5c5`** (daemon `submodule
+update --remote` drift; see §12.19 / Round-62 cont. 20). Line numbers and a few paths
+above are relative to `4672e0b2`. **Before starting the port, pin the intended
+`ipfs_datasets_py` commit** (reconcile `4672e0b2` vs `f59cb5c5` with the daemon fleet) so
+the source-of-truth is stable; re-verify any 🔴 row whose file moved.
+
+**Backlog size:** §12.20 adds **PORT-170 … PORT-208 (39 tasks)** on top of the 74 of
+§12.1–18, for a full-submodule total of **113 PORT tasks**. Sequencing recommendation:
+fold these into the §12.18 waves — Cluster A/G/H/I (🔴 real capability + interop) first,
+then B/C/D/F residuals, then E/J observability, then PORT-207/208 polish + parity tests.
