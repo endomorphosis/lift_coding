@@ -442,6 +442,37 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
 applications for `VAIOS-G723`.
 
+MGW-566 refreshes that same VAIOS-G723 launch Playwright validation gate for
+the current July 2 objective-gap scan:
+`data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-566-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-07-02-mgw-566-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-566-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App menus, Hallucinate App
+MCP dashboard, backend service catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate assert the MGW-566 launch Playwright validation gate
+for catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
+`control_surface receipts`, and Swissknife applications. Any dashboard or
+backend validation failure remains supervisor-generated follow-up work for
+`VAIOS-G723`.
+
+MGW-566 attempt 2 records the current July 2 validation pass in
+`data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-566-attempt-2-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-02-mgw-566-attempt-2-validation.md`.
+The run passed the backlog/objective queue tests, Hallucinate daemon-manager
+catalog test, Hallucinate MCP dashboard backend Playwright gate, no-display
+Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife
+Meta glasses gate, and Hallucinate multimodal `control_surface` gate while
+preserving the MGW-566 catalog entry for catalog normalization, dashboard UI
+wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
+applications for `VAIOS-G723`.
+
 The executable gate is:
 
 ```bash
