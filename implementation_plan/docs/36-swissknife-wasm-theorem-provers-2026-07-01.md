@@ -1623,6 +1623,19 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 73 (Phase 73 — GraphRAG DB + WebNN Server + VFS + Delegator + IPFS Command, P3) 🆕
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-333 | P3 | Close deferred TODOs in `src/inference/graph-rag-database.ts` | ✅ DONE — Typed `GraphNode`/`GraphEdge`/`VectorStore`/`DocumentStore`/`EmbeddingModel` interfaces; in-memory impls; `extractSimpleEntities()`; `query()` with BFS graph traversal; `reindex()`/`documentCount()` |
+| T-334 | P3 | Close deferred TODOs in `src/inference/webnn-server.ts` | ✅ DONE — `Tensor`/`CompiledModel`/`Device`/`DeviceManager` typed interfaces; `attachRAGDatabase()`/`queryRAG()` GraphRAG integration |
+| T-335 | P3 | Close deferred TODOs in `src/storage/virtual-filesystem.ts` | ✅ DONE — read-only backend check; per-key cache invalidation in `delete()`; `mkdir()`/`stat()`/`move()`/`copy()` added |
+| T-336 | P3 | Close deferred TODOs in `src/tasks/delegation/delegator.ts` | ✅ DONE — `unregisterWorker()` re-delegates tasks; `handleHeartbeat()`/`startHeartbeatWatchdog()` added; `announceWorkerJoined()`/`notifyWorkerAssignment()` network stubs |
+| T-337 | P3 | Close deferred TODOs in `src/cli/commands/ipfsCommand.ts` | ✅ DONE — `addContent()`/`getContent()`/`pinContent()` use Kubo HTTP API with graceful fallback; `addTaskIntegration()` hooks program post-action |
+| T-338 | P3 | Write 10+ tests | ✅ DONE — 24 tests in `test/mcp-plus-plus/wasm-prover-sprint73.test.ts` |
+
+---
+
 ### Sprint 65 (Phase 65 — IPFS Proof Storage + Problem Parser + Logic Verification Utils + Grammar Loader + DCEC Cleaning + Witness Manager + E-Prover Adapter + Deontic Reasoning Utils, P3) 🆕
 
 | ID | Priority | Task | Acceptance Criteria |
