@@ -498,6 +498,37 @@ dashboard capability catalog exposes the VAI-563 gate for `ipfs_kit_py`,
 `ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated
 follow-up subtasks if any dashboard or backend validation fails.
 
+VAI-563 attempt 2 records the current July 3 validation pass in
+`data/virtual_ai_os/discovery/2026-07-03-vai-563-attempt-2-launch-playwright-validation-gate.md`
+with a Hallucinate mirror at
+`data/hallucinate_multimodal_control/discovery/2026-07-03-vai-563-attempt-2-validation.md`.
+Attempt 1's evidence was audited against the live code and confirmed real, so
+attempt 2 only bumps the `VAI-563` launch-validation-gate `attempt` counter to
+`2`, points `attempt_receipts` at the new pair of files, and regenerates the
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`
+catalog fixture so it stays byte-for-byte consistent with the Hallucinate
+manager output.
+
+VAI-566 adds a dedicated `VAI_566_LAUNCH_VALIDATION_GATE` entry to
+`DASHBOARD_LAUNCH_VALIDATION_GATES` in
+`hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, cloned from the
+`VAI-563` gate contract, and binds the current July 3 VAI-566 objective gap
+(`data/virtual_ai_os/discovery/2026-07-03-vai-566-objective-gap-7ea369464239.md`)
+to `data/virtual_ai_os/discovery/2026-07-03-vai-566-mcp-dashboard-launch-gate.md`
+and `data/hallucinate_multimodal_control/discovery/2026-07-03-vai-566-mcp-dashboard-launch-gate.md`.
+The shared fixture is
+`hallucinate_app/test/e2e/fixtures/vai-566-mcp-dashboard-launch-gate.json`, and
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` is
+regenerated from the live `getDashboardCapabilityCatalog()` output so it stays
+byte-for-byte consistent with the Hallucinate manager after the new gate is
+appended. `swissknife/scripts/test-mcp-dashboard-consumer.cjs` gains a
+`VAI-566` assertion block, and
+`tests/test_virtual_ai_os_todo_queue.py::test_vai_566_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned`
+proves the `VAIOS-G723` launch Playwright validation gate, catalog
+normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife
+consumers, Playwright coverage, and supervisor-generated follow-up subtasks
+stay aligned for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`.
+
 The executable gate is:
 
 ```bash
