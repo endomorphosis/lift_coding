@@ -57,13 +57,13 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
   sibling daemon launch receipt.
 - `hallucinate_app/test/e2e/fixtures/vai-640-mcp-dashboard-launch-gate.json`
   is generated from the runtime dashboard capability catalog and carries the
-  `launch Playwright validation gate`, `tools/list`, `tools/call`, daemon
-  health, and Swissknife consumer terms for all three IPFS MCP servers.
+  attempt-2 `launch Playwright validation gate`, `tools/list`, `tools/call`,
+  daemon health, and Swissknife consumer terms for all three IPFS MCP servers.
 - `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`,
   `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, and
   `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared
-  dashboard capability catalog includes the VAI-640 launch gate and the VAI-641
-  packet sibling daemon receipt.
+  dashboard capability catalog includes the VAI-640 launch gate, the attempt-2
+  validation receipt, and the VAI-641 packet sibling daemon receipt.
 - `hallucinate_app/test/e2e/fixtures/vai-641-daemon-launch-health-gate.json`
   keeps the packet sibling VAIOS-G728 daemon health, daemon launcher, MCP
   server, MCP dashboard, external backend, and Swissknife handoff evidence
