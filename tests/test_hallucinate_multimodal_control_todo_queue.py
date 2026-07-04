@@ -302,6 +302,13 @@ VAI_636_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-636-daemon-launch-health-gate.json"
 )
+VAI_636_ATTEMPT_1_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-636-attempt-1-launch-playwright-validation-gate.md"
+)
 HAO_722_OBJECTIVE_GAP_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
 )
@@ -2254,6 +2261,47 @@ def test_vai_636_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
         launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-636-daemon-launch-health-gate.md",
         receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-636-daemon-launch-health-gate.json",
     )
+
+
+def test_vai_636_attempt_1_launch_playwright_validation_gate_is_recorded_in_objective_heap():
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = VAI_636_ATTEMPT_1_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+
+    for term in (
+        "VAI-636 attempt 1 validation",
+        "2026-07-04-vai-636-attempt-1-launch-playwright-validation-gate.md",
+        "VAIOS-G728",
+        "VAIOS-G724",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "gate_closed_by_playwright_validation",
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "VAI-635",
+        "VAI-636",
+    ):
+        assert term in receipt_source
+        assert term in heap_source
+
+    for command in (
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q",
+        "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
+        "test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses",
+        "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts",
+    ):
+        assert command in receipt_source
 
 
 def test_vai_578_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate():
