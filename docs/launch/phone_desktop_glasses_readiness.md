@@ -1384,6 +1384,21 @@ Playwright validation gate visible to the readiness scan. Any dashboard or
 backend validation failure remains supervisor-generated follow-up work for
 VAIOS-G723.
 
+VAI-634 refreshes the same VAIOS-G723 Hallucinate MCP dashboard
+interoperability console gate using
+`data/virtual_ai_os/discovery/2026-07-04-vai-634-mcp-dashboard-launch-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-634-mcp-dashboard-launch-gate.md`,
+`data/virtual_ai_os/discovery/2026-07-04-vai-634-attempt-1-launch-playwright-validation-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-634-attempt-1-validation.md`,
+and `hallucinate_app/test/e2e/fixtures/vai-634-mcp-dashboard-launch-gate.json`.
+The VAI-634 proof and VAI-634 attempt 1 validation close
+`data/virtual_ai_os/discovery/2026-07-04-vai-634-objective-gap-7ea369464239.md`
+while keeping catalog normalization, dashboard UI wiring, mediated tool-call
+receipts, Swissknife consumers, Playwright coverage, supervisor-generated
+follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`,
+`tools/call`, `control_surface receipts`, Swissknife applications, and the
+launch Playwright validation gate visible to the readiness scan.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
