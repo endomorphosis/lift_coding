@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hallucinate-llc.local/swissknife/conformance-result.schema.json",
+  "title": "SwissKnife Logic Conformance Result",
+  "type": "object",
+  "required": ["schemaVersion", "runner", "generatedAt", "results"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "runner": { "enum": ["python-reference", "typescript-swissknife"] },
+    "generatedAt": { "type": "string" },
+    "submoduleCommit": { "type": "string" },
+    "engineVersions": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/result" }
+    }
+  },
+  "$defs": {
+    "result": {
+      "type": "object",
+      "required": [
+        "vectorId",
+        "subsystem",
+        "status",
+        "backendMode",
+        "proverId",
+        "durationMs"
+      ],
+      "properties": {
+        "vectorId": { "type": "string" },
+        "subsystem": { "type": "string" },
+        "status": { "type": "string" },
+        "reason": { "type": "string" },
+        "backendMode": { "enum": ["real", "simulated", "host-dependent"] },
+        "proverId": { "type": "string" },
+        "durationMs": { "type": "number", "minimum": 0 },
+        "modelHash": { "type": "string" },
+        "error": { "type": "string" },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

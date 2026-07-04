@@ -1,0 +1,43 @@
+name: Logic Conformance
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'Makefile'
+      - 'implementation_plan/conformance/**'
+      - 'swissknife/test/conformance/**'
+      - 'swissknife/src/services/**'
+      - 'external/ipfs_datasets/ipfs_datasets_py/logic/conformance/**'
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: swissknife/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install SwissKnife dependencies
+        working-directory: swissknife
+        run: npm ci
+
+      - name: Run conformance harness
+        run: make conformance
+
+      - name: Upload conformance artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: logic-conformance
+          path: conformance/
