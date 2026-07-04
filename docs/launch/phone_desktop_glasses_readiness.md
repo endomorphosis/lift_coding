@@ -1106,6 +1106,27 @@ Swissknife handoff records, and packet goals `VAIOS-G724` and `VAIOS-G728`.
 Any dashboard, daemon, Swissknife, or control_surface validation failure
 remains supervisor-generated follow-up work for the shared packet.
 
+VAI-606 closes the VAIOS-G723 Hallucinate MCP dashboard interoperability
+console gap by binding
+`data/virtual_ai_os/discovery/2026-07-04-vai-606-mcp-dashboard-launch-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-606-mcp-dashboard-launch-gate.md`
+to
+`hallucinate_app/test/e2e/fixtures/vai-606-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog exposes the `VAI-606` launch
+Playwright validation gate for Hallucinate App menus, Hallucinate App MCP
+dashboard, backend service catalog, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, `ipfs_accelerate_py
+MCP server`, `ipfs_datasets_py MCP server`, `ipfs_kit_py MCP server`,
+Swissknife applications, catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage, and
+supervisor-generated follow-up subtasks. The attempt-1 validation receipt
+`data/virtual_ai_os/discovery/2026-07-04-vai-606-attempt-1-launch-playwright-validation-gate.md`
+keeps the no-display `missing_xvfb_for_electron_playwright` runner contract
+separate from the backend dashboard Playwright gate, while
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-606-attempt-1-validation.md`
+keeps the Hallucinate multimodal `control_surface gate` aligned.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
