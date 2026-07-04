@@ -1562,7 +1562,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G723-C1 Catalog normalization
 
-- Status: todo
+- Status: completed
 - Parent: VAIOS-G723
 - Fib priority: 13
 - Track: launch
@@ -1578,10 +1578,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Outputs: hallucinate_app, swissknife, tests
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-dashboard-interoperability.spec.ts; npm --prefix swissknife run test:e2e:mcp
 - Gap task: Generate supervisor follow-up subtasks when catalog schema, launch gate entries, or fixture parity drifts.
+- Completed at: 2026-07-04T05:41:39.049061+00:00
+- Completion evidence: catalog normalization => docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/screens/CommandScreen.js (ast); dashboard capability catalog => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/push/examples/expo_receive_handler.ts (ast); `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/android/termux_github_dispatcher.py (ast); VAI-569 proof => implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast)
+- Completion validation: 0
 
 ## VAIOS-G723-C2 Dashboard UI wiring
 
-- Status: todo
+- Status: completed
 - Parent: VAIOS-G723
 - Fib priority: 13
 - Track: launch
@@ -1597,10 +1600,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Outputs: hallucinate_app, tests
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
 - Gap task: Generate supervisor follow-up subtasks when menu exposure, dashboard routing, or Playwright UI coverage fails.
+- Completed at: 2026-07-04T05:41:39.049061+00:00
+- Completion evidence: dashboard UI wiring => docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/screens/SettingsScreen.js (ast); Hallucinate App menus => dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/App.js (ast); Hallucinate App MCP dashboard => dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), docs/meta-glasses-io-launch-readiness.md (embedding:0.32); Playwright MCP dashboard interoperability => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/modules/expo-meta-wearables-dat/app.plugin.js (ast); VAI-569 proof => implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast)
+- Completion validation: 0
 
 ## VAIOS-G723-C3 Mediated tool-call receipts
 
-- Status: todo
+- Status: completed
 - Parent: VAIOS-G723
 - Fib priority: 13
 - Track: launch
@@ -1616,10 +1622,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Outputs: hallucinate_app, data/hallucinate_multimodal_control/discovery, tests
 - Validation: npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-dashboard-interoperability.spec.ts
 - Gap task: Generate supervisor follow-up subtasks when any dashboard backend lacks a mediated receipt, safe probe, or daemon health record.
+- Completed at: 2026-07-04T05:41:39.049061+00:00
+- Completion evidence: mediated tool-call receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); tools/list => CONFIGURATION.md (exact), docs/CONFIGURATION.md (exact), docs/launch/phone_desktop_glasses_readiness.md (exact); tools/call => CONFIGURATION.md (exact), docs/CONFIGURATION.md (exact), docs/launch/phone_desktop_glasses_readiness.md (exact); control_surface receipts => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), docs/launch/phone_desktop_glasses_readiness.md (exact); daemon health => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/src/screens/CommandScreen.js (ast); MCP++ telemetry => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/src/screens/CommandScreen.js (ast); VAI-569 proof => implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast)
+- Completion validation: 0
 
 ## VAIOS-G723-C4 Swissknife consumers
 
-- Status: todo
+- Status: completed
 - Parent: VAIOS-G723
 - Fib priority: 13
 - Track: launch
@@ -1635,10 +1644,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Outputs: swissknife, hallucinate_app, tests
 - Validation: npm --prefix swissknife run test:e2e:mcp
 - Gap task: Generate supervisor follow-up subtasks when Swissknife catalog parity, consumer plans, or backend handoff records fail.
+- Completed at: 2026-07-04T05:41:39.049061+00:00
+- Completion evidence: Swissknife consumers => docs/launch/phone_desktop_glasses_readiness.md (exact), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (ast), mobile/push/examples/expo_receive_handler.ts (ast); Swissknife applications => dev/meta-rayban-display-simulator/webapp/app.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md (exact); ipfs_kit_py MCP server => CONFIGURATION.md (embedding:0.33), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/CONFIGURATION.md (embedding:0.38); ipfs_datasets_py MCP server => CONFIGURATION.md (embedding:0.36), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/CONFIGURATION.md (embedding:0.42); ipfs_accelerate_py MCP server => CONFIGURATION.md (embedding:0.36), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/CONFIGURATION.md (embedding:0.44); VAI-569 proof => implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast)
+- Completion validation: 0
 
 ## VAIOS-G723-C5 Playwright coverage
 
-- Status: todo
+- Status: completed
 - Parent: VAIOS-G723
 - Fib priority: 13
 - Track: launch
@@ -1654,10 +1666,13 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Outputs: hallucinate_app, tests
 - Validation: cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)
 - Gap task: Generate supervisor follow-up subtasks when Playwright coverage is skipped unexpectedly or display-capable Electron validation is unavailable.
+- Completed at: 2026-07-04T05:41:39.049061+00:00
+- Completion evidence: Playwright coverage => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), docs/meta-glasses-io-launch-readiness.md (exact); launch Playwright validation gate => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), docs/launch/phone_desktop_glasses_readiness.md (exact); Playwright MCP dashboard interoperability => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/modules/expo-meta-wearables-dat/app.plugin.js (ast); missing_xvfb_for_electron_playwright => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/launch/phone_desktop_glasses_readiness.md (exact), mobile/modules/expo-meta-wearables-dat/app.plugin.js (ast); VAI-569 attempt 1 validation => dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), dev/meta-rayban-display-simulator/simulator.js (ast), docs/launch/phone_desktop_glasses_readiness.md (embedding:0.38)
+- Completion validation: 0
 
 ## VAIOS-G723-C6 Supervisor-generated follow-up subtasks
 
-- Status: todo
+- Status: completed
 - Parent: VAIOS-G723
 - Fib priority: 13
 - Track: launch
@@ -1673,6 +1688,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Outputs: implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q
 - Gap task: Generate supervisor follow-up subtasks for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, or backend validation failures.
+- Completed at: 2026-07-04T05:41:39.049061+00:00
+- Completion evidence: supervisor-generated follow-up subtasks => docs/launch/phone_desktop_glasses_readiness.md (exact), implementation_plan/docs/26-ipfs-kit-vfs-gap-analysis-and-improvement-plan.md (ast), implementation_plan/docs/29-ipfs-kit-vfs-readiness-improvement-plan-2026-06-29.md (ast); follow_up_subtasks => implementation_plan/docs/26-ipfs-kit-vfs-gap-analysis-and-improvement-plan.md (ast), implementation_plan/docs/29-ipfs-kit-vfs-readiness-improvement-plan-2026-06-29.md (ast), implementation_plan/docs/30-ipfs-accelerate-model-serving-readiness-plan-2026-06-29.md (ast); supervisor_follow_up_subtasks => docs/launch/phone_desktop_glasses_readiness.md (embedding:0.31), implementation_plan/docs/19-virtual-ai-os-submodule-integration.md (embedding:0.30), implementation_plan/docs/26-ipfs-kit-vfs-gap-analysis-and-improvement-plan.md (ast); failure_rule => agent-runner/apply_instruction.py (ast), agent-runner/runner.py (ast), mobile/push/examples/expo_receive_handler.ts (ast); VAI-569 proof => implementation_plan/docs/15-meta-wearables-dat-mcpplusplus-integration-roadmap.md (ast), mobile/push/examples/expo_receive_handler.ts (ast), mobile/src/native/glassesAudio.js (ast)
+- Completion validation: 0
 
 ## VAIOS-G724 Hallucinate App MCP dashboard capability catalog
 
