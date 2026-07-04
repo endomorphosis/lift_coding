@@ -817,6 +817,18 @@ a local-first policy that falls back to remote only when local provers timeout/f
 
 ---
 
+### Sprint 100 (§12.22 pure-TS residual closure, P2/P3) ✅ DONE (2026-07-03)
+
+| ID | Priority | Task | Acceptance Criteria |
+|---|---|---|---|
+| T-439 | P2 | Close PORT-220 logic config consolidation | ✅ DONE — `logic-config.ts` ports `ProverConfig`, `CacheConfig`, `SecurityConfig`, `MonitoringConfig`, `LoggingConfig`, `LogicConfig`, `loadConfig()`/global helpers, file loading, and env-over-file precedence |
+| T-440 | P2 | Close PORT-221 unified logic error taxonomy | ✅ DONE — `logic-errors.ts` adds `LogicError` + conversion/validation/proof/translation/bridge/configuration/deontic/modal/temporal subtypes; existing TDFOL and DCEC handled errors now inherit from `LogicError` |
+| T-441 | P3 | Close PORT-222 ZKP statement remainder | ✅ DONE — `zkp-statement.ts` adds strict/lenient circuit-ref parsing, `Statement`, `Witness`, and `ProofStatement` dictionary/field-element helpers |
+| T-442 | P3 | Close PORT-223 ProveKit public-input record builder | ✅ DONE — `zkp-provekit-public-inputs.ts` ports canonical record building, BN254 field projections, public-input envelopes, canonical hashes, and attestation enrichment |
+| T-443 | P2 | Add PORT-220–223 regression coverage | ✅ DONE — `wasm-prover-sprint100.test.ts` covers config precedence, error inheritance, statement round-trips, circuit-ref validation, and ProveKit public-input determinism |
+
+---
+
 ### Sprint 9 (Phase 9 — DCEC/CEC Native Prover, P2) ✅ DONE (2026-07-03)
 
 > **Discovered gap 2026-07-03:** `ipfs_datasets_py/logic/CEC/` contains a full DCEC layer
@@ -2834,7 +2846,7 @@ session artifacts and are re-runnable to regenerate the tally below.
 | Token / fuzzy | 44 | ported under a normalized rename |
 | Name-unmatched → **symbol-PORTED** | ~30 | consolidated into a differently-named TS file (verified by symbol presence) |
 | Name-unmatched → **N/A** | 10 | shim / demo / Python-host entrypoint (§12.22.3) |
-| Name-unmatched → **residual** | ~13 | host-native (PORT-209–213) + small pure-TS partials (PORT-220–223) |
+| Name-unmatched → **residual** | ~13 | host-native (PORT-209–213) + pure-TS partials now closed by Sprint 100 (PORT-220–223) |
 
 **Result: ≈290 / 295 portable modules (98%) have a real TypeScript realization; 0 modules
 are unclassified.**
@@ -2873,33 +2885,142 @@ by a distinctive symbol present in the TS tree:
 | `TDFOL/strategies/{cec_delegate,forward_chaining,strategy_selector}.py` | `tdfol-strategy-*.ts` | `CECDelegateStrategy`, `ForwardChainingStrategy`, `StrategySelector` |
 | `common/bounded_cache.py` | `formula-cache.ts` / cache utils | `BoundedCache` |
 
-### 12.22.5 Residual PARTIAL modules — the *only* remaining pure-TS port gaps (PORT-220–223)
+### 12.22.5 Closed pure-TS residual modules (PORT-220–223)
 
-These are the modules where symbol-triage found a **real, non-host-dependent** shortfall.
-Each is small, surgical, and on a **cold** surface (no overlap with the concurrent agent's
-active harness/prover files). They are the entire remaining backlog for a *complete*
-structural port; everything else is either ported (12.22.2/12.22.4) or a documented
-host-native residual (PORT-209–213, §12.20.6).
+These were the modules where symbol-triage found a **real, non-host-dependent** shortfall.
+Sprint 100 closes the entire pure-TS structural backlog; everything else is either ported
+(12.22.2/12.22.4) or a documented host-native residual (PORT-209–213, §12.20.6).
 
 | ID | Pri | Gap (exact missing symbols, verified) | Target |
 |---|---|---|---|
-| PORT-220 | 🟡 | **`config.py` consolidation.** TS has `ProverConfig` (`cec-types.ts`) but is missing `CacheConfig`, `MonitoringConfig`, `LoggingConfig`, and the aggregate root `LogicConfig` + `load_config()` precedence (env > file > default). Port a unified `logic-config.ts` mirroring the 5 dataclasses in `logic/config.py`. | `swissknife/src/services/logic-config.ts` |
-| PORT-221 | 🟡 | **`common/errors.py` unified taxonomy.** Python roots every error at `LogicError(Exception)`; the TS port roots at the TDFOL-scoped `TDFOLError` (`tdfol-exceptions.ts`) and is missing the submodule-wide base plus `TranslationError`, `BridgeError`, `ConfigurationError`, `DeonticError`, `ModalError`, `TemporalError`. Add `logic-errors.ts` with a `LogicError` base + the 6 missing subtypes and re-parent existing errors under it. | `swissknife/src/services/logic-errors.ts` |
-| PORT-222 | 🟢 | **`zkp/statement.py` remainder.** TS has `Statement`/`Witness` but is missing `ProofStatement` (the statement+witness+circuit bundle) and the `parse_circuit_ref()` helper. Add both to the TS zkp-statement module. | `swissknife/src/services/zkp-*statement*.ts` |
-| PORT-223 | 🟢 | **`zkp/provekit/public_inputs.py` pure-TS split.** The record builder (`build_provekit_public_input_record`, `field_element_from_hex_digest`, `field_element_from_text`) is pure field-arithmetic and portable **now**; only the binary spawn (`provekit/cli.py`, `backends/provekit_ffi.py`) is host-native and stays under **PORT-210**. Port the record builder. | `swissknife/src/services/zkp-provekit-public-inputs.ts` |
+| PORT-220 | 🟡 | ✅ DONE — **`config.py` consolidation.** `logic-config.ts` mirrors the Python config dataclasses, adds `LoggingConfig` compatibility, `LogicConfig`, `loadConfig()` / global helpers, JSON/simple-YAML file loading, and env-over-file precedence | `swissknife/src/services/logic-config.ts`; `wasm-prover-sprint100.test.ts` |
+| PORT-221 | 🟡 | ✅ DONE — **`common/errors.py` unified taxonomy.** `logic-errors.ts` adds `LogicError` base + missing subtypes; `TDFOLError` and `DCECHandledError` now inherit from `LogicError` | `swissknife/src/services/logic-errors.ts`; `tdfol-exceptions.ts`; `dcec-error-handling.ts`; `wasm-prover-sprint100.test.ts` |
+| PORT-222 | 🟢 | ✅ DONE — **`zkp/statement.py` remainder.** `zkp-statement.ts` adds `ProofStatement`, `parseCircuitRef()` / lenient parser / formatter, plus `Statement`/`Witness` dictionary and field-element helpers | `swissknife/src/services/zkp-statement.ts`; `wasm-prover-sprint100.test.ts` |
+| PORT-223 | 🟢 | ✅ DONE — **`zkp/provekit/public_inputs.py` pure-TS split.** `zkp-provekit-public-inputs.ts` ports the record builder, field-element projections, canonical JSON/hash, public-input envelopes, and attestation enrichment | `swissknife/src/services/zkp-provekit-public-inputs.ts`; `wasm-prover-sprint100.test.ts` |
 
 ### 12.22.6 Completeness certificate
 
 > **Every one of the 295 portable modules in `ipfs_datasets_py/logic` is now classified:**
-> **≈290 ported** (12.22.2 + 12.22.4), **10 explicit N/A** with a recorded reason (12.22.3),
-> **5 host-native residuals** (PORT-209–213, §12.20.6), and **4 small pure-TS partials**
-> (PORT-220–223, 12.22.5). **No module is unclassified or silently skipped.** Once
-> PORT-220–223 land and the PORT-209–213 host bindings are provisioned, the logic submodule
-> is *completely* ported, and the §12.21 differential harness (currently **80/80 MATCH,
-> 100% parity**) is the standing regression gate that keeps it that way.
+> **≈290 ported** (12.22.2 + 12.22.4 + Sprint 100), **10 explicit N/A** with a recorded
+> reason (12.22.3), **5 host-native residuals** (PORT-209–213, §12.20.6), and **0 pure-TS
+> partials remaining**. **No module is unclassified or silently skipped.** Once the
+> PORT-209–213 host bindings are provisioned, the logic submodule is completely ported in
+> operational terms, and the §12.21 differential harness (currently **80/80 MATCH, 100%
+> parity**) is the standing regression gate that keeps it that way.
 
 **Reproduce:** re-run `match_manifest.py` + `triage.py` (session artifacts) against the
 current checkouts to regenerate 12.22.2–12.22.5. The numbers above are pinned to
 `ipfs_datasets` `4672e0b2` and swissknife `47e9e19`; when the submodule pin is reconciled
 (`4672e0b2` vs `f59cb5c5`, §12.20.5) the manifest should be re-generated against the pinned
 commit.
+
+---
+
+## 12.23 Symbol-level completeness audit (2026-07-03) — from module-presence to symbol-depth
+
+**Why this section exists.** §12.22 proved every *module* has a TypeScript realization, but a
+filename match does not prove every **class/function inside** the module was ported. To
+*completely* port the submodule we need the deeper lens: for **every public symbol** in
+**every** must-port module, is that symbol present in the TS tree? This section runs that
+audit, and it changes the picture — **module-presence ≠ symbol-completeness**.
+
+### 12.23.1 Methodology
+
+```bash
+# archived in session artifacts: symbol_audit.py
+```
+- **Corpus:** tokenize all of `swissknife/src/**/*.ts` into an identifier set once
+  (**25,173** unique identifiers), then O(1) set-lookup per Python symbol.
+- **Symbols:** for each module, extract public `class` names and non-underscore top-level
+  `def` names (excluding `main`/`run`/`setup`). Match each against the TS identifier set in
+  four variants: snake, no-underscore, camelCase, PascalCase (case-insensitive fallback).
+- **Denominator:** 279 must-port modules (295 portable − 11 §12.22.3 N/A − 5 demo/example/
+  infra filenames: `demonstrate_*`, `example_*`, `quickstart_*`, and the new
+  `conformance/py_reference_runner.py`).
+- **Verification:** every cluster called out below was **re-checked** with a multi-variant
+  `grep` over `swissknife/src` (snake ∪ no-underscore ∪ camel ∪ Pascal) to eliminate
+  rename false-negatives before being labeled a gap.
+
+**Known false-negative mode (stated honestly):** Python favors *one small class per rule*;
+TS often consolidates these into a **data-driven rule table** or **class methods**. Such a
+symbol is behaviorally present but not a distinct TS identifier, so the audit flags it. The
+audit is therefore a **screening oracle**, not proof of behavioral absence — which is why the
+acceptance gate (PORT-234) resolves each flagged symbol to *ported*, *consolidated-into-X*,
+or *N/A*, rather than blindly porting.
+
+### 12.23.2 Aggregate result (279 must-port modules, 1,549 public symbols)
+
+| Symbol coverage | Modules | |
+|---|---:|---|
+| 100% | 161 | fully symbol-complete |
+| 80–99% | 22 | near-complete (minor remainders) |
+| 50–79% | 44 | partial |
+| <50% | 28 | largely unported internals |
+| no extractable public symbol | 24 | dataclass/constant-only modules (treated complete) |
+| **aggregate symbol coverage** | **1,103 / 1,549 = 71.2%** | |
+
+**Interpretation:** 161 + 24 = **185 modules are symbol-complete**; **72 modules (<80%)**
+carry the entire residual of **446 not-yet-individually-present symbols**. §12.22's
+module-level "≈290/295 ported" is correct *as a module count*; §12.23 refines it to a
+symbol count and localizes the remaining depth-of-port work to a well-defined 72-module set.
+
+### 12.23.3 Where the residual lives (72 sub-80% modules, by subpackage)
+
+| Subpackage | Modules <80% | Missing symbols | Character |
+|---|---:|---:|---|
+| `deontic` | 6 | 107 | legal-text parser + record/export builders (largest single residual) |
+| `CEC` | 17 | 78 | native inference-rule classes (modal/temporal/deontic) + exceptions |
+| `TDFOL` | 9 | 43 | countermodel extractor/visualizer, dcec parser, rule remainders |
+| `zkp` | 8 | 42 | circuit classes + ProveKit artifacts/cache/witness (some host-native) |
+| `fol` | 6 | 31 | `fol/utils` formatters, parsers, NLP predicate extraction |
+| `integration` | 8 | 23 | bridge installers, reasoning utils remainders |
+| `external_provers` | 4 | 9 | neural/lean bridges (**host-native — PORT-209 track**) |
+| `modal` | 2 | 6 | `codec.py` decode/target-family helpers |
+| `observability` | 1 | 6 | metrics remainder |
+| `(root)` | 4 | 10 | `batch_processing.py`, `api.py` remainders |
+| `security` | 1 | 4 | `audit_log.py` |
+| `common`/`flogic`/`types`/`bridge` | 6 | 8 | small remainders |
+
+### 12.23.4 Verified-genuine pure-TS gaps → new tasks PORT-224–233
+
+Each was confirmed absent by multi-variant grep (not a rename). Host-native items overlap
+PORT-209–213 and are **not** double-counted here.
+
+| ID | Pri | Gap (verified missing symbols) | Target |
+|---|---|---|---|
+| PORT-224 | 🟠 | **CEC native inference rules.** `CEC/native/inference_rules/{modal,temporal,deontic}.py` — classes `NecessityElimination/PossibilityIntroduction/NecessityDistribution/…`, `AlwaysImplication/EventuallyFromAlways/UntilWeakening/NextImplication/…`, `ObligationDistribution/PermissionFromNonObligation/…` absent as identifiers (only `Necessity` axiom fragments exist in `modal-axiom-rules.ts`). Port the rule classes into the TS CEC rule engine **or** map each to its `cec-specialized-rules.ts` consolidation. | `swissknife/src/services/cec-*-rules.ts` |
+| PORT-225 | 🟡 | **CEC native exception taxonomy.** `CEC/native/exceptions.py` — `CECError/ParsingError/ProvingError/NamespaceError/GrammarError/KnowledgeBaseError` absent. Re-parent under the §12.22.5 `LogicError` base (extends PORT-221). | `swissknife/src/services/logic-errors.ts` |
+| PORT-226 | 🟠 | **FOL text utilities.** `fol/utils/{logic_formatter,fol_parser,deontic_parser,nlp_predicate_extractor}.py` — `format_fol/convert_to_prolog_format/convert_to_tptp_format/parse_fol_to_json/extract_fol_metadata`, `parse_fol/validate_fol_syntax/convert_to_prolog/convert_to_tptp`, NLP predicate extraction. **No `fol/utils` TS equivalent exists** (TS has TDFOL parser + FOL validator, different concerns). | `swissknife/src/services/fol-utils/*.ts` |
+| PORT-227 | 🟠 | **Deontic legal-text engine (largest residual, 107 syms).** `deontic/utils/deontic_parser.py` — `extract_normative_elements/segment_legal_text/analyze_normative_sentence/build_canonical_citation/resolve_cross_references/extract_enforcement_links/…`; plus `deontic/{exports,formula_builder,metrics}.py` record/coverage builders. | `swissknife/src/services/deontic-*.ts` |
+| PORT-228 | 🟡 | **TDFOL countermodel + parser remainders.** `TDFOL/countermodels.py` — `CounterModelExtractor/extract_countermodel/visualize_countermodel/print_countermodel_ascii/save_countermodel_{dot,json}`; `TDFOL/tdfol_dcec_parser.py` — `DCECStringParser/parse_dcec/parse_dcec_safe`; `TDFOL/countermodel_visualizer.py` — `BoxChars/GraphLayout`. | `swissknife/src/services/kripke-structure.ts`, `tdfol-*.ts` |
+| PORT-229 | 🟡 | **ZKP circuit reconciliation.** `zkp/circuits.py` — `ZKPCircuit/CircuitGate/MVPCircuit/TDFOLv1DerivationCircuit/complete_zkp_attestation_record/…` absent as identifiers though `zkp-circuits.ts` exists (renamed structure). Reconcile 1:1 or map. | `swissknife/src/services/zkp-circuits.ts` |
+| PORT-230 | 🟡 | **ZKP ProveKit pure-TS infra.** `zkp/provekit/{artifacts,cache}.py` + `zkp/setup_artifacts.py` — `build_provekit_artifact_manifest/sha256_{file,directory}`, `build_provekit_proof_cache_key*/build_provekit_ipfs_payload`, `Groth16SetupArtifacts/store_groth16_setup_artifacts_in_ipfs`. Pure-TS (manifest/cache/IPFS payload); the FFI/CLI spawn stays **PORT-210**. | `swissknife/src/services/zkp-provekit-*.ts` |
+| PORT-231 | 🟡 | **Security audit log.** `security/audit_log.py` — `AuditLogger/get_audit_logger/log_proof_attempt/log_security_event` absent. | `swissknife/src/services/logic-audit-log.ts` |
+| PORT-232 | 🟢 | **Batch processing + API remainders.** `batch_processing.py` — `FOLBatchProcessor/ProofBatchProcessor/ChunkedBatchProcessor` (TS `batch-processor.ts` is a different generic processor); `api.py` — `evaluate_with_manager/compile_explain_iter`. | `swissknife/src/services/logic-batch-*.ts` |
+| PORT-233 | 🟢 | **Small cluster remainders.** `modal/codec.py` decode/target-family helpers; `observability/*` metrics remainder; `integration/bridges/prover_installer.py` `ensure_{cvc5,lean,coq,ergoai,symbolicai}` (host-native — coordinate with PORT-211/212); `flogic/ergoai_wrapper.py` `resolve_ergo_binary`. | various |
+
+### 12.23.5 PORT-234 — per-symbol reconciliation map (the acceptance gate)
+
+> **PORT-234 (🟠):** For each of the **72 sub-80% modules**, produce a machine-checkable
+> **symbol map** — every public Python symbol resolved to exactly one of: `ported → <ts symbol>`,
+> `consolidated → <ts file/table>`, or `N/A → <reason>` (demo/host-native/dead-code). Land it
+> as `implementation_plan/conformance/symbol-map.json` and add a CI check that re-runs
+> `symbol_audit.py` and fails if any *non-mapped* symbol appears. This converts the 71.2%
+> screening number into a **provable 100% symbol-level accounting** and is the true
+> definition-of-done for "completely port everything."
+
+### 12.23.6 Refined completeness certificate
+
+> **Module level (§12.22):** ≈290/295 modules ported — ✅ holds.
+> **Symbol level (§12.23):** 185/279 must-port modules are symbol-complete; **72 modules
+> carry 446 not-yet-individually-present symbols**, of which a verified subset are genuine
+> pure-TS gaps (PORT-224–233) and the remainder are candidate consolidations to be resolved
+> by the PORT-234 symbol map. Host-native symbols (external_provers bridges, provekit FFI,
+> simulated backend) remain on the PORT-209–213 track and are not double-counted.
+>
+> **The submodule is module-complete and 71% symbol-complete; PORT-224–234 close the
+> symbol-depth residual and, together with the §12.21 differential harness (80/80 MATCH),
+> constitute the full definition of a *complete* port.**
+
+**Reproduce:** `python3 symbol_audit.py` (session artifacts) against `ipfs_datasets`
+`4672e0b2` / swissknife `47e9e19`. Re-pin per §12.20.5 before treating the numbers as final.
