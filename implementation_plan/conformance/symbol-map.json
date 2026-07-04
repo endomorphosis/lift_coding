@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T04:48:58.765117+00:00",
+  "generatedAt": "2026-07-04T04:53:02.081098+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1385,
-    "consolidatedSymbols": 117,
+    "directPortedSymbols": 1391,
+    "consolidatedSymbols": 111,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 91.0,
+    "directCoveragePercent": 91.39,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 43,
-    "sub80SymbolCount": 300
+    "sub80ModuleCount": 42,
+    "sub80SymbolCount": 285
   },
   "modules": [
     {
@@ -16984,9 +16984,9 @@
         {
           "pythonSymbol": "JSONLogFormatter",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "JSONLogFormatter",
           "target": "swissknife/src/services/structured-logging.ts",
-          "reason": "Python helper is represented by the TypeScript observability service surface rather than a one-symbol-per-file port.",
           "variants": [
             "JSONLogFormatter"
           ]
@@ -17014,9 +17014,9 @@
         {
           "pythonSymbol": "LogPerformance",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "LogPerformance",
           "target": "swissknife/src/services/structured-logging.ts",
-          "reason": "Python helper is represented by the TypeScript observability service surface rather than a one-symbol-per-file port.",
           "variants": [
             "LogPerformance"
           ]
@@ -17037,9 +17037,9 @@
         {
           "pythonSymbol": "filter_logs",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "filter_logs",
           "target": "swissknife/src/services/structured-logging.ts",
-          "reason": "Python helper is represented by the TypeScript observability service surface rather than a one-symbol-per-file port.",
           "variants": [
             "filter_logs",
             "filterlogs",
@@ -17077,8 +17077,8 @@
           "pythonSymbol": "log_error",
           "kind": "function",
           "status": "ported",
-          "tsSymbol": "logError",
-          "target": "swissknife/src/services/claude.ts",
+          "tsSymbol": "log_error",
+          "target": "swissknife/src/services/structured-logging.ts",
           "variants": [
             "log_error",
             "logerror",
@@ -17091,7 +17091,7 @@
           "kind": "function",
           "status": "ported",
           "tsSymbol": "log_event",
-          "target": "swissknife/src/services/logic-audit-log.ts",
+          "target": "swissknife/src/services/structured-logging.ts",
           "variants": [
             "log_event",
             "logevent",
@@ -17102,9 +17102,9 @@
         {
           "pythonSymbol": "log_mcp_tool",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "log_mcp_tool",
           "target": "swissknife/src/services/structured-logging.ts",
-          "reason": "Python helper is represented by the TypeScript observability service surface rather than a one-symbol-per-file port.",
           "variants": [
             "log_mcp_tool",
             "logmcptool",
@@ -17115,9 +17115,9 @@
         {
           "pythonSymbol": "log_performance",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "log_performance",
           "target": "swissknife/src/services/structured-logging.ts",
-          "reason": "Python helper is represented by the TypeScript observability service surface rather than a one-symbol-per-file port.",
           "variants": [
             "log_performance",
             "logperformance",
@@ -17128,9 +17128,9 @@
         {
           "pythonSymbol": "parse_json_log_file",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parse_json_log_file",
           "target": "swissknife/src/services/structured-logging.ts",
-          "reason": "Python helper is represented by the TypeScript observability service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parse_json_log_file",
             "parsejsonlogfile",
@@ -17152,7 +17152,7 @@
           ]
         }
       ],
-      "coveragePercent": 60.0,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
