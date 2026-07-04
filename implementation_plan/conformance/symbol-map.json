@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T04:00:15.759815+00:00",
+  "generatedAt": "2026-07-04T04:31:27.963499+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1305,
-    "consolidatedSymbols": 197,
+    "directPortedSymbols": 1352,
+    "consolidatedSymbols": 150,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 85.74,
+    "directCoveragePercent": 88.83,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 52,
-    "sub80SymbolCount": 476
+    "sub80ModuleCount": 46,
+    "sub80SymbolCount": 393
   },
   "modules": [
     {
@@ -9702,9 +9702,9 @@
         {
           "pythonSymbol": "active_repair_details_from_parser_elements",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "active_repair_details_from_parser_elements",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "active_repair_details_from_parser_elements",
             "activerepairdetailsfromparserelements",
@@ -9715,9 +9715,9 @@
         {
           "pythonSymbol": "build_decoder_record_from_ir",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_decoder_record_from_ir",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_decoder_record_from_ir",
             "builddecoderrecordfromir",
@@ -9728,9 +9728,9 @@
         {
           "pythonSymbol": "build_decoder_records_from_irs",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_decoder_records_from_irs",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_decoder_records_from_irs",
             "builddecoderrecordsfromirs",
@@ -9741,9 +9741,9 @@
         {
           "pythonSymbol": "build_decoder_slot_grounding_audit_record",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_decoder_slot_grounding_audit_record",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_decoder_slot_grounding_audit_record",
             "builddecoderslotgroundingauditrecord",
@@ -9754,9 +9754,9 @@
         {
           "pythonSymbol": "build_decoder_slot_grounding_audit_record_from_ir",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_decoder_slot_grounding_audit_record_from_ir",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_decoder_slot_grounding_audit_record_from_ir",
             "builddecoderslotgroundingauditrecordfromir",
@@ -9767,9 +9767,9 @@
         {
           "pythonSymbol": "build_decoder_slot_grounding_audit_records_from_irs",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_decoder_slot_grounding_audit_records_from_irs",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_decoder_slot_grounding_audit_records_from_irs",
             "builddecoderslotgroundingauditrecordsfromirs",
@@ -9832,9 +9832,9 @@
         {
           "pythonSymbol": "build_ir_slot_provenance_audit_record",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_ir_slot_provenance_audit_record",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_ir_slot_provenance_audit_record",
             "buildirslotprovenanceauditrecord",
@@ -9845,9 +9845,9 @@
         {
           "pythonSymbol": "build_ir_slot_provenance_audit_records",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_ir_slot_provenance_audit_records",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_ir_slot_provenance_audit_records",
             "buildirslotprovenanceauditrecords",
@@ -9923,9 +9923,9 @@
         {
           "pythonSymbol": "build_prover_syntax_summary_record_from_ir",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_prover_syntax_summary_record_from_ir",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_prover_syntax_summary_record_from_ir",
             "buildproversyntaxsummaryrecordfromir",
@@ -9936,9 +9936,9 @@
         {
           "pythonSymbol": "build_prover_syntax_target_coverage_record",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_prover_syntax_target_coverage_record",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_prover_syntax_target_coverage_record",
             "buildproversyntaxtargetcoveragerecord",
@@ -9949,9 +9949,9 @@
         {
           "pythonSymbol": "build_prover_syntax_target_coverage_records_from_irs",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_prover_syntax_target_coverage_records_from_irs",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_prover_syntax_target_coverage_records_from_irs",
             "buildproversyntaxtargetcoveragerecordsfromirs",
@@ -9962,9 +9962,9 @@
         {
           "pythonSymbol": "build_reconstruction_slot_loss_record",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_reconstruction_slot_loss_record",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_reconstruction_slot_loss_record",
             "buildreconstructionslotlossrecord",
@@ -9975,9 +9975,9 @@
         {
           "pythonSymbol": "build_reconstruction_slot_loss_records",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_reconstruction_slot_loss_records",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_reconstruction_slot_loss_records",
             "buildreconstructionslotlossrecords",
@@ -10001,9 +10001,9 @@
         {
           "pythonSymbol": "normalize_repair_required_details_from_parser_elements",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "normalize_repair_required_details_from_parser_elements",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "normalize_repair_required_details_from_parser_elements",
             "normalizerepairrequireddetailsfromparserelements",
@@ -10014,9 +10014,9 @@
         {
           "pythonSymbol": "normalize_repair_required_evaluation",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "normalize_repair_required_evaluation",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "normalize_repair_required_evaluation",
             "normalizerepairrequiredevaluation",
@@ -10027,9 +10027,9 @@
         {
           "pythonSymbol": "parser_element_has_active_repair",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parser_element_has_active_repair",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parser_element_has_active_repair",
             "parserelementhasactiverepair",
@@ -10040,9 +10040,9 @@
         {
           "pythonSymbol": "parser_elements_for_metrics",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parser_elements_for_metrics",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parser_elements_for_metrics",
             "parserelementsformetrics",
@@ -10066,9 +10066,9 @@
         {
           "pythonSymbol": "parser_elements_to_ir_aligned_export_tables",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parser_elements_to_ir_aligned_export_tables",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parser_elements_to_ir_aligned_export_tables",
             "parserelementstoiralignedexporttables",
@@ -10079,9 +10079,9 @@
         {
           "pythonSymbol": "parser_elements_with_ir_export_readiness",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parser_elements_with_ir_export_readiness",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parser_elements_with_ir_export_readiness",
             "parserelementswithirexportreadiness",
@@ -10092,9 +10092,9 @@
         {
           "pythonSymbol": "summarize_active_repair_from_parser_elements",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_active_repair_from_parser_elements",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_active_repair_from_parser_elements",
             "summarizeactiverepairfromparserelements",
@@ -10105,9 +10105,9 @@
         {
           "pythonSymbol": "summarize_decoder_reconstruction_records",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_decoder_reconstruction_records",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_decoder_reconstruction_records",
             "summarizedecoderreconstructionrecords",
@@ -10118,9 +10118,9 @@
         {
           "pythonSymbol": "summarize_decoder_slot_grounding_audit_records",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_decoder_slot_grounding_audit_records",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_decoder_slot_grounding_audit_records",
             "summarizedecoderslotgroundingauditrecords",
@@ -10170,9 +10170,9 @@
         {
           "pythonSymbol": "summarize_prover_syntax_target_corpus_coverage",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_prover_syntax_target_corpus_coverage",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_prover_syntax_target_corpus_coverage",
             "summarizeproversyntaxtargetcorpuscoverage",
@@ -10196,9 +10196,9 @@
         {
           "pythonSymbol": "summarize_prover_target_quality_gates",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_prover_target_quality_gates",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_prover_target_quality_gates",
             "summarizeprovertargetqualitygates",
@@ -10209,9 +10209,9 @@
         {
           "pythonSymbol": "summarize_prover_target_role_matrix",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_prover_target_role_matrix",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_prover_target_role_matrix",
             "summarizeprovertargetrolematrix",
@@ -10222,9 +10222,9 @@
         {
           "pythonSymbol": "summarize_prover_target_semantic_families",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_prover_target_semantic_families",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_prover_target_semantic_families",
             "summarizeprovertargetsemanticfamilies",
@@ -10235,9 +10235,9 @@
         {
           "pythonSymbol": "summarize_reconstruction_slot_loss",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "summarize_reconstruction_slot_loss",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "summarize_reconstruction_slot_loss",
             "summarizereconstructionslotloss",
@@ -10248,9 +10248,9 @@
         {
           "pythonSymbol": "validate_export_tables",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "validate_export_tables",
           "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "validate_export_tables",
             "validateexporttables",
@@ -10259,7 +10259,7 @@
           ]
         }
       ],
-      "coveragePercent": 34.88,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -10551,9 +10551,9 @@
         {
           "pythonSymbol": "parser_warnings_require_decoder_validation",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parser_warnings_require_decoder_validation",
           "target": "swissknife/src/services/deontic/legal-norm-ir.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parser_warnings_require_decoder_validation",
             "parserwarningsrequiredecodervalidation",
@@ -10562,7 +10562,7 @@
           ]
         }
       ],
-      "coveragePercent": 87.5,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -10634,9 +10634,9 @@
         {
           "pythonSymbol": "KnowledgeDeonticModality",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "KnowledgeDeonticModality",
           "target": "swissknife/src/services/deontic/deontic-knowledge-base.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "KnowledgeDeonticModality"
           ]
@@ -10644,9 +10644,9 @@
         {
           "pythonSymbol": "KnowledgeLogicalOperator",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "KnowledgeLogicalOperator",
           "target": "swissknife/src/services/deontic/deontic-knowledge-base.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "KnowledgeLogicalOperator"
           ]
@@ -10654,9 +10654,9 @@
         {
           "pythonSymbol": "KnowledgeTemporalOperator",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "KnowledgeTemporalOperator",
           "target": "swissknife/src/services/deontic/deontic-knowledge-base.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "KnowledgeTemporalOperator"
           ]
@@ -10712,7 +10712,7 @@
           ]
         }
       ],
-      "coveragePercent": 78.57,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -13916,9 +13916,9 @@
         {
           "pythonSymbol": "demonstrate_deontic_conversion",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "demonstrate_deontic_conversion",
           "target": "swissknife/src/services/deontic-logic-converter.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "demonstrate_deontic_conversion",
             "demonstratedeonticconversion",
@@ -13927,7 +13927,7 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -13949,9 +13949,9 @@
         {
           "pythonSymbol": "DeonticLogicValidator",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "DeonticLogicValidator",
           "target": "swissknife/src/services/deontic-logic-core.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "DeonticLogicValidator"
           ]
@@ -14029,9 +14029,9 @@
         {
           "pythonSymbol": "create_obligation",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_obligation",
           "target": "swissknife/src/services/deontic-logic-core.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_obligation",
             "createobligation",
@@ -14042,9 +14042,9 @@
         {
           "pythonSymbol": "create_permission",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_permission",
           "target": "swissknife/src/services/deontic-logic-core.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_permission",
             "createpermission",
@@ -14055,9 +14055,9 @@
         {
           "pythonSymbol": "create_prohibition",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_prohibition",
           "target": "swissknife/src/services/deontic-logic-core.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_prohibition",
             "createprohibition",
@@ -14068,9 +14068,9 @@
         {
           "pythonSymbol": "demonstrate_deontic_logic",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "demonstrate_deontic_logic",
           "target": "swissknife/src/services/deontic-logic-core.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "demonstrate_deontic_logic",
             "demonstratedeonticlogic",
@@ -14079,7 +14079,7 @@
           ]
         }
       ],
-      "coveragePercent": 61.54,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -14260,9 +14260,9 @@
         {
           "pythonSymbol": "create_sample_theorem_corpus",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/logic-verifier.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "create_sample_theorem_corpus",
+          "target": "swissknife/src/services/temporal-deontic-api.ts",
           "variants": [
             "create_sample_theorem_corpus",
             "createsampletheoremcorpus",
@@ -14273,9 +14273,9 @@
         {
           "pythonSymbol": "demo_batch_processing",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/logic-verifier.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "demo_batch_processing",
+          "target": "swissknife/src/services/temporal-deontic-api.ts",
           "variants": [
             "demo_batch_processing",
             "demobatchprocessing",
@@ -14286,9 +14286,9 @@
         {
           "pythonSymbol": "demo_document_consistency_checking",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/logic-verifier.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "demo_document_consistency_checking",
+          "target": "swissknife/src/services/temporal-deontic-api.ts",
           "variants": [
             "demo_document_consistency_checking",
             "demodocumentconsistencychecking",
@@ -14299,9 +14299,9 @@
         {
           "pythonSymbol": "demo_rag_retrieval",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/logic-verifier.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "demo_rag_retrieval",
+          "target": "swissknife/src/services/temporal-deontic-api.ts",
           "variants": [
             "demo_rag_retrieval",
             "demoragretrieval",
@@ -14312,9 +14312,9 @@
         {
           "pythonSymbol": "print_debug_report",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/logic-verifier.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "print_debug_report",
+          "target": "swissknife/src/services/temporal-deontic-api.ts",
           "variants": [
             "print_debug_report",
             "printdebugreport",
@@ -14323,7 +14323,7 @@
           ]
         }
       ],
-      "coveragePercent": 0.0,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -14474,9 +14474,9 @@
         {
           "pythonSymbol": "query_legal_rules",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "query_legal_rules",
           "target": "swissknife/src/services/deontic-query-engine.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "query_legal_rules",
             "querylegalrules",
@@ -14485,7 +14485,7 @@
           ]
         }
       ],
-      "coveragePercent": 85.71,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -14885,9 +14885,9 @@
         {
           "pythonSymbol": "add_theorem_from_parameters",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "add_theorem_from_parameters",
           "target": "swissknife/src/services/temporal-deontic-api.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "add_theorem_from_parameters",
             "addtheoremfromparameters",
@@ -14898,9 +14898,9 @@
         {
           "pythonSymbol": "bulk_process_caselaw_from_parameters",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "bulk_process_caselaw_from_parameters",
           "target": "swissknife/src/services/temporal-deontic-api.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "bulk_process_caselaw_from_parameters",
             "bulkprocesscaselawfromparameters",
@@ -14924,9 +14924,9 @@
         {
           "pythonSymbol": "query_theorems_from_parameters",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "query_theorems_from_parameters",
           "target": "swissknife/src/services/temporal-deontic-api.ts",
-          "reason": "Python helper is represented by the TypeScript integration service surface rather than a one-symbol-per-file port.",
           "variants": [
             "query_theorems_from_parameters",
             "querytheoremsfromparameters",
@@ -14935,7 +14935,7 @@
           ]
         }
       ],
-      "coveragePercent": 25.0,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
