@@ -897,6 +897,35 @@ receipt handoffs remain visible to Swissknife applications. Any dashboard or
 backend validation failure remains supervisor-generated follow-up work for
 `VAIOS-G723`.
 
+VAI-591 refreshes the same Hallucinate MCP dashboard interoperability console
+for the current objective scan. It binds
+`data/virtual_ai_os/discovery/2026-07-04-vai-591-mcp-dashboard-launch-gate.md`
+to
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-591-mcp-dashboard-launch-gate.md`
+and
+`hallucinate_app/test/e2e/fixtures/vai-591-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog exposes the same `VAI-591` gate for
+catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
+`control_surface receipts`, backend service catalog, Hallucinate App menus,
+Hallucinate App MCP dashboard, dashboard capability catalog, Swissknife
+applications, and the `ipfs_kit_py`, `ipfs_datasets_py`, and
+`ipfs_accelerate_py` MCP servers.
+
+VAI-591 attempt 1 binds that gate to
+`data/virtual_ai_os/discovery/2026-07-04-vai-591-attempt-1-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-591-attempt-1-validation.md`.
+The receipt keeps the no-display runner diagnostic
+`missing_xvfb_for_electron_playwright` explicit while preserving the backend
+Playwright path, Swissknife MCP consumer path, Swissknife Meta glasses path,
+and Hallucinate multimodal `control_surface` gate. The Swissknife consumer plan
+also preserves `dashboard_receipt_consumer_refs`, so Hallucinate dashboard
+receipt handoffs remain visible to Swissknife applications. Any dashboard or
+backend validation failure remains supervisor-generated follow-up work for
+`VAIOS-G723`.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
