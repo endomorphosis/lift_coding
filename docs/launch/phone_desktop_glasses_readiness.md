@@ -1355,6 +1355,20 @@ The attempt keeps the no-display
 backend dashboard Playwright gate and keeps the Hallucinate multimodal
 `control_surface gate` aligned with `VAIOS-G723`.
 
+VAI-629 and VAI-630 close the paired VAIOS-G724/VAIOS-G728 Hallucinate App
+launch packet for `goal_packet/launch/hallucinate_app/44dceea6bc53`. The
+dashboard side is recorded in
+`data/virtual_ai_os/discovery/2026-07-04-vai-629-mcp-dashboard-launch-gate.md`
+and `hallucinate_app/test/e2e/fixtures/vai-629-mcp-dashboard-launch-gate.json`;
+the daemon side is recorded in
+`data/virtual_ai_os/discovery/2026-07-04-vai-630-daemon-launch-health-gate.md`
+and `hallucinate_app/test/e2e/fixtures/vai-630-daemon-launch-health-gate.json`.
+The launch Playwright validation gate now binds Hallucinate App daemon health,
+daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`, `ipfs_datasets_py`,
+`ipfs_accelerate_py`, external surfaces `external/ipfs_kit`,
+`external/ipfs_datasets`, `external/ipfs_accelerate`, dashboard capability
+catalog, Swissknife applications, and packet sibling handoff evidence.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the

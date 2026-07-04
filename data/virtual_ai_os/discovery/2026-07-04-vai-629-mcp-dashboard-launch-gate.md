@@ -15,7 +15,7 @@ VAI-629 closes the Hallucinate App MCP dashboard capability catalog objective
 gap by binding the scanner receipt to the shared dashboard capability catalog,
 the Hallucinate App dashboard Playwright gate, Swissknife catalog consumers,
 the external IPFS backend surfaces, and the VAI-630 packet sibling daemon
-objective gap for VAIOS-G728.
+launch receipt for VAIOS-G728.
 
 ```text
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
@@ -49,7 +49,7 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 
 - `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes
   `VAI-629` in `DASHBOARD_LAUNCH_VALIDATION_GATES` and points its packet
-  sibling at `data/virtual_ai_os/discovery/2026-07-04-vai-630-objective-gap-b023c8de5b69.md`.
+  sibling at `data/virtual_ai_os/discovery/2026-07-04-vai-630-daemon-launch-health-gate.md`.
 - `hallucinate_app/test/e2e/fixtures/vai-629-mcp-dashboard-launch-gate.json`
   records the matching `launch_readiness_receipt_v1` fixture for `VAIOS-G724`.
 - `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` is
@@ -64,7 +64,7 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 - `swissknife/scripts/test-mcp-dashboard-consumer.cjs` asserts that Swissknife
   consumers see the same VAI-629 launch gate, packet sibling `VAIOS-G728`,
   packet sibling task `VAI-630`, external backend surfaces, and packet sibling
-  daemon objective gap receipt.
+  daemon launch gate receipt.
 
 ## Gate State
 
