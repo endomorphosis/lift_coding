@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T04:53:02.081098+00:00",
+  "generatedAt": "2026-07-04T04:55:28.957637+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1391,
-    "consolidatedSymbols": 111,
+    "directPortedSymbols": 1396,
+    "consolidatedSymbols": 106,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 91.39,
+    "directCoveragePercent": 91.72,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 42,
-    "sub80SymbolCount": 285
+    "sub80ModuleCount": 41,
+    "sub80SymbolCount": 280
   },
   "modules": [
     {
@@ -6674,19 +6674,19 @@
     {
       "pythonModule": "TDFOL/nl/utils.py",
       "targetCandidates": [
+        "swissknife/src/services/tdfol-nl-utils.ts",
         "swissknife/src/services/cec-sprint63-utils.ts",
         "swissknife/src/services/deontic/deontic-parser-utils.ts",
         "swissknife/src/services/proof-execution-engine-utils.ts",
-        "swissknife/src/services/sprint65-utils.ts",
-        "swissknife/src/services/sprint66-prover-utils.ts"
+        "swissknife/src/services/sprint65-utils.ts"
       ],
       "symbols": [
         {
           "pythonSymbol": "create_cache_cid",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-sprint63-utils.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "create_cache_cid",
+          "target": "swissknife/src/services/tdfol-nl-utils.ts",
           "variants": [
             "create_cache_cid",
             "createcachecid",
@@ -6697,9 +6697,9 @@
         {
           "pythonSymbol": "load_spacy_model",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-sprint63-utils.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "load_spacy_model",
+          "target": "swissknife/src/services/tdfol-nl-utils.ts",
           "variants": [
             "load_spacy_model",
             "loadspacymodel",
@@ -6710,9 +6710,9 @@
         {
           "pythonSymbol": "parse_cid",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-sprint63-utils.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "parse_cid",
+          "target": "swissknife/src/services/tdfol-nl-utils.ts",
           "variants": [
             "parse_cid",
             "parsecid",
@@ -6723,9 +6723,9 @@
         {
           "pythonSymbol": "require_spacy",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-sprint63-utils.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "require_spacy",
+          "target": "swissknife/src/services/tdfol-nl-utils.ts",
           "variants": [
             "require_spacy",
             "requirespacy",
@@ -6736,9 +6736,9 @@
         {
           "pythonSymbol": "validate_cid",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-sprint63-utils.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "validate_cid",
+          "target": "swissknife/src/services/tdfol-nl-utils.ts",
           "variants": [
             "validate_cid",
             "validatecid",
@@ -6747,7 +6747,7 @@
           ]
         }
       ],
-      "coveragePercent": 0.0,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
