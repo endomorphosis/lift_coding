@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T04:46:14.103090+00:00",
+  "generatedAt": "2026-07-04T04:48:58.765117+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1378,
-    "consolidatedSymbols": 124,
+    "directPortedSymbols": 1385,
+    "consolidatedSymbols": 117,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 90.54,
+    "directCoveragePercent": 91.0,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 44,
-    "sub80SymbolCount": 316
+    "sub80ModuleCount": 43,
+    "sub80SymbolCount": 300
   },
   "modules": [
     {
@@ -196,9 +196,9 @@
         {
           "pythonSymbol": "ModalNecassitation",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "ModalNecassitation",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "ModalNecassitation"
           ]
@@ -236,9 +236,9 @@
         {
           "pythonSymbol": "TemporalObligation",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "TemporalObligation",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "TemporalObligation"
           ]
@@ -246,9 +246,9 @@
         {
           "pythonSymbol": "get_all_advanced_rules",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "get_all_advanced_rules",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "get_all_advanced_rules",
             "getalladvancedrules",
@@ -259,9 +259,9 @@
         {
           "pythonSymbol": "get_combined_rules",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "get_combined_rules",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "get_combined_rules",
             "getcombinedrules",
@@ -272,9 +272,9 @@
         {
           "pythonSymbol": "get_deontic_rules",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "get_deontic_rules",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "get_deontic_rules",
             "getdeonticrules",
@@ -285,9 +285,9 @@
         {
           "pythonSymbol": "get_modal_rules",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "get_modal_rules",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "get_modal_rules",
             "getmodalrules",
@@ -298,9 +298,9 @@
         {
           "pythonSymbol": "get_temporal_rules",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "get_temporal_rules",
           "target": "swissknife/src/services/cec-advanced-inference.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
           "variants": [
             "get_temporal_rules",
             "gettemporalrules",
@@ -309,7 +309,7 @@
           ]
         }
       ],
-      "coveragePercent": 56.25,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
