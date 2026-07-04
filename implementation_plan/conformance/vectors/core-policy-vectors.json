@@ -1,0 +1,812 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "prop-sat-001",
+      "subsystem": "propositional",
+      "description": "Empty policy is internally consistent.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-empty", "version": "1", "permissions": [], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "baseline"]
+    },
+    {
+      "id": "prop-sat-002",
+      "subsystem": "propositional",
+      "description": "Single concrete permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-read", "version": "1", "permissions": [{ "cap": "read", "rsc": "doc-a" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-003",
+      "subsystem": "propositional",
+      "description": "Two independent concrete permissions.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-two-perms", "version": "1", "permissions": [{ "cap": "read", "rsc": "doc-a" }, { "cap": "write", "rsc": "doc-b" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-004",
+      "subsystem": "propositional",
+      "description": "Concrete capability and resource with namespace.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-ns", "version": "1", "permissions": [{ "cap": "mcp++/invoke:browse", "rsc": "sha256:a" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-005",
+      "subsystem": "propositional",
+      "description": "Independent concrete read/index permissions.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-index", "version": "1", "permissions": [{ "cap": "read", "rsc": "index" }, { "cap": "list", "rsc": "index" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-006",
+      "subsystem": "propositional",
+      "description": "Permission over a CID-like resource.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-cid", "version": "1", "permissions": [{ "cap": "pin", "rsc": "bafybeigdyrzt" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-007",
+      "subsystem": "propositional",
+      "description": "Two disjoint concrete resources.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-disjoint", "version": "1", "permissions": [{ "cap": "read", "rsc": "file-a" }, { "cap": "read", "rsc": "file-b" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "independent"]
+    },
+    {
+      "id": "prop-sat-008",
+      "subsystem": "propositional",
+      "description": "Permission with dotted resource name.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-dotted", "version": "1", "permissions": [{ "cap": "query", "rsc": "dataset.v1" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-009",
+      "subsystem": "propositional",
+      "description": "Permission with hyphenated capability.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-hyphen", "version": "1", "permissions": [{ "cap": "sync-status", "rsc": "worker-1" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat"]
+    },
+    {
+      "id": "prop-sat-010",
+      "subsystem": "propositional",
+      "description": "Stable ordering case for cache-key parity.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "prop-order", "version": "1", "permissions": [{ "cap": "beta", "rsc": "r2" }, { "cap": "alpha", "rsc": "r1" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "order-invariant"]
+    },
+
+    {
+      "id": "fol-sat-001",
+      "subsystem": "fol",
+      "description": "Wildcard resource triggers FOL routing.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-wild-rsc", "version": "1", "permissions": [{ "cap": "read", "rsc": "*" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-002",
+      "subsystem": "fol",
+      "description": "Wildcard capability triggers FOL routing.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-wild-cap", "version": "1", "permissions": [{ "cap": "*", "rsc": "dataset" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-003",
+      "subsystem": "fol",
+      "description": "Full wildcard permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-all", "version": "1", "permissions": [{ "cap": "*", "rsc": "*" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-004",
+      "subsystem": "fol",
+      "description": "Wildcard mixed with concrete permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-mixed", "version": "1", "permissions": [{ "cap": "read", "rsc": "*" }, { "cap": "write", "rsc": "draft" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-005",
+      "subsystem": "fol",
+      "description": "Namespace wildcard resource.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-ns", "version": "1", "permissions": [{ "cap": "mcp++/invoke:read", "rsc": "*" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-006",
+      "subsystem": "fol",
+      "description": "Capability wildcard over CID.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-cid", "version": "1", "permissions": [{ "cap": "*", "rsc": "sha256:abc" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-007",
+      "subsystem": "fol",
+      "description": "Two wildcard resources.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-two", "version": "1", "permissions": [{ "cap": "read", "rsc": "*" }, { "cap": "list", "rsc": "*" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-008",
+      "subsystem": "fol",
+      "description": "Wildcard capability with dotted resource.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-dot", "version": "1", "permissions": [{ "cap": "*", "rsc": "tenant.dataset" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-009",
+      "subsystem": "fol",
+      "description": "Wildcard path prefix.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-path", "version": "1", "permissions": [{ "cap": "read", "rsc": "mcp++/tools/*" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "wildcard"]
+    },
+    {
+      "id": "fol-sat-010",
+      "subsystem": "fol",
+      "description": "Mixed wildcard ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "fol-order", "version": "1", "permissions": [{ "cap": "write", "rsc": "*" }, { "cap": "read", "rsc": "*" }], "prohibitions": [], "obligations": [] } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent" },
+      "timeoutMs": 5000,
+      "tags": ["sat", "order-invariant", "wildcard"]
+    },
+
+    {
+      "id": "temporal-sat-001",
+      "subsystem": "temporal",
+      "description": "Top-level active temporal window.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-window", "version": "1", "permissions": [{ "cap": "read", "rsc": "doc" }], "prohibitions": [], "obligations": [], "temporal": { "notBefore": 0, "notAfter": 4102444800 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "sat"]
+    },
+    {
+      "id": "temporal-sat-002",
+      "subsystem": "temporal",
+      "description": "Deadline obligation routes to TDFOL.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-deadline", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "file_report", "rsc": "court", "deadline": 86400 }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "obligation"]
+    },
+    {
+      "id": "temporal-sat-003",
+      "subsystem": "temporal",
+      "description": "Rate-limited temporal permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-rate", "version": "1", "permissions": [{ "cap": "invoke", "rsc": "tool", "temporal": { "maxInvocations": 5, "windowSeconds": 60 } }], "prohibitions": [], "obligations": [], "temporal": { "notBefore": 0 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "rate-limit"]
+    },
+    {
+      "id": "temporal-sat-004",
+      "subsystem": "temporal",
+      "description": "Temporal policy with disjoint prohibition.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-disjoint", "version": "1", "permissions": [{ "cap": "read", "rsc": "doc-a" }], "prohibitions": [{ "cap": "write", "rsc": "doc-b" }], "obligations": [], "temporal": { "notAfter": 4102444800 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "independent"]
+    },
+    {
+      "id": "temporal-sat-005",
+      "subsystem": "temporal",
+      "description": "Multiple deadline obligations.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-two-deadlines", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "audit_access", "deadline": 3600 }, { "description": "notify_owner", "deadline": 7200 }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "obligation"]
+    },
+    {
+      "id": "temporal-sat-006",
+      "subsystem": "temporal",
+      "description": "Temporal wildcard permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-wild", "version": "1", "permissions": [{ "cap": "*", "rsc": "*" }], "prohibitions": [], "obligations": [], "temporal": { "notBefore": 0, "notAfter": 4102444800 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "wildcard"]
+    },
+    {
+      "id": "temporal-sat-007",
+      "subsystem": "temporal",
+      "description": "Policy-level temporal with obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-obligation", "version": "1", "permissions": [{ "cap": "read", "rsc": "case" }], "prohibitions": [], "obligations": [{ "description": "retain_record", "rsc": "case" }], "temporal": { "notBefore": 0 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "deontic"]
+    },
+    {
+      "id": "temporal-sat-008",
+      "subsystem": "temporal",
+      "description": "Permission-level temporal constraint.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-permission-only", "version": "1", "permissions": [{ "cap": "read", "rsc": "brief", "temporal": { "notBefore": 0, "notAfter": 4102444800 } }], "prohibitions": [], "obligations": [], "temporal": { "notBefore": 0 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal"]
+    },
+    {
+      "id": "temporal-sat-009",
+      "subsystem": "temporal",
+      "description": "Temporal resource path case.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-path", "version": "1", "permissions": [{ "cap": "sync", "rsc": "tenant/*" }], "prohibitions": [], "obligations": [], "temporal": { "notAfter": 4102444800 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal"]
+    },
+    {
+      "id": "temporal-sat-010",
+      "subsystem": "temporal",
+      "description": "Temporal ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "temp-order", "version": "1", "permissions": [{ "cap": "beta", "rsc": "r2" }, { "cap": "alpha", "rsc": "r1" }], "prohibitions": [], "obligations": [{ "description": "notify", "deadline": 120 }], "temporal": { "notBefore": 0 } } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "order-invariant"]
+    },
+
+    {
+      "id": "deontic-sat-001",
+      "subsystem": "deontic",
+      "description": "Single obligation is consistent.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-obl", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "file_report", "rsc": "court" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "sat"]
+    },
+    {
+      "id": "deontic-refuted-002",
+      "subsystem": "deontic",
+      "description": "Obligation conflicts with matching prohibition.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "file", "rsc": "report" }], "obligations": [{ "description": "file_report", "rsc": "report" }] } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "unsat"]
+    },
+    {
+      "id": "deontic-sat-003",
+      "subsystem": "deontic",
+      "description": "Permission and obligation on same action are consistent.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-perm-obl", "version": "1", "permissions": [{ "cap": "submit", "rsc": "form" }], "prohibitions": [], "obligations": [{ "description": "submit_form", "rsc": "form" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "sat"]
+    },
+    {
+      "id": "deontic-sat-004",
+      "subsystem": "deontic",
+      "description": "Disjoint prohibition and obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-disjoint", "version": "1", "permissions": [], "prohibitions": [{ "cap": "delete", "rsc": "archive" }], "obligations": [{ "description": "retain_record", "rsc": "archive" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "independent"]
+    },
+    {
+      "id": "deontic-sat-005",
+      "subsystem": "deontic",
+      "description": "Two independent obligations.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-two", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "notify_owner" }, { "description": "log_access" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "sat"]
+    },
+    {
+      "id": "deontic-refuted-006",
+      "subsystem": "deontic",
+      "description": "Delete obligation conflicts with delete prohibition.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-delete-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "delete", "rsc": "logs" }], "obligations": [{ "description": "delete_logs", "rsc": "logs" }] } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "unsat"]
+    },
+    {
+      "id": "deontic-sat-007",
+      "subsystem": "deontic",
+      "description": "Audit obligation with unrelated prohibition.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-audit", "version": "1", "permissions": [{ "cap": "audit", "rsc": "trail" }], "prohibitions": [{ "cap": "publish", "rsc": "raw" }], "obligations": [{ "description": "audit_trail", "rsc": "trail" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "sat"]
+    },
+    {
+      "id": "deontic-sat-008",
+      "subsystem": "deontic",
+      "description": "Obligation with required capability.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-required-cap", "version": "1", "permissions": [{ "cap": "notify", "rsc": "owner" }], "prohibitions": [], "obligations": [{ "description": "notify_owner", "requiredCap": "notify", "rsc": "owner" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "sat"]
+    },
+    {
+      "id": "deontic-sat-009",
+      "subsystem": "deontic",
+      "description": "Hyphenated action obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-hyphen", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "sync-status", "rsc": "worker" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "sat"]
+    },
+    {
+      "id": "deontic-sat-010",
+      "subsystem": "deontic",
+      "description": "Obligation ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "deon-order", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "beta_task" }, { "description": "alpha_task" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "order-invariant"]
+    },
+
+    {
+      "id": "modal-sat-001",
+      "subsystem": "modal",
+      "description": "Modal-deontic permission only.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-perm", "version": "1", "permissions": [{ "cap": "read", "rsc": "contract" }], "prohibitions": [], "obligations": [{ "description": "acknowledge_contract" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "deontic"]
+    },
+    {
+      "id": "modal-refuted-002",
+      "subsystem": "modal",
+      "description": "Modal O/F conflict.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "sign", "rsc": "order" }], "obligations": [{ "description": "sign_order", "rsc": "order" }] } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "unsat"]
+    },
+    {
+      "id": "modal-sat-003",
+      "subsystem": "modal",
+      "description": "Modal permission with unrelated prohibition.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-disjoint", "version": "1", "permissions": [{ "cap": "view", "rsc": "record" }], "prohibitions": [{ "cap": "edit", "rsc": "record" }], "obligations": [] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "independent"]
+    },
+    {
+      "id": "modal-sat-004",
+      "subsystem": "modal",
+      "description": "Modal retention obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-retain", "version": "1", "permissions": [{ "cap": "retain", "rsc": "file" }], "prohibitions": [], "obligations": [{ "description": "retain_file", "rsc": "file" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "sat"]
+    },
+    {
+      "id": "modal-sat-005",
+      "subsystem": "modal",
+      "description": "Modal audit obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-audit", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "audit_access", "rsc": "audit" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "sat"]
+    },
+    {
+      "id": "modal-refuted-006",
+      "subsystem": "modal",
+      "description": "Modal publish conflict.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-publish-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "publish", "rsc": "notice" }], "obligations": [{ "description": "publish_notice", "rsc": "notice" }] } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "unsat"]
+    },
+    {
+      "id": "modal-sat-007",
+      "subsystem": "modal",
+      "description": "Modal dual-safe permission/prohibition on disjoint resources.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-dual-safe", "version": "1", "permissions": [{ "cap": "export", "rsc": "summary" }], "prohibitions": [{ "cap": "export", "rsc": "raw" }], "obligations": [] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "independent"]
+    },
+    {
+      "id": "modal-sat-008",
+      "subsystem": "modal",
+      "description": "Modal notice obligation with permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-notice", "version": "1", "permissions": [{ "cap": "notify", "rsc": "user" }], "prohibitions": [], "obligations": [{ "description": "notify_user", "rsc": "user" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "sat"]
+    },
+    {
+      "id": "modal-sat-009",
+      "subsystem": "modal",
+      "description": "Modal resource-specific permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-resource", "version": "1", "permissions": [{ "cap": "inspect", "rsc": "vault" }], "prohibitions": [], "obligations": [{ "description": "log_inspection", "rsc": "vault" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "sat"]
+    },
+    {
+      "id": "modal-sat-010",
+      "subsystem": "modal",
+      "description": "Modal ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "modal-order", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "zeta" }, { "description": "alpha" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["modal", "order-invariant"]
+    },
+
+    {
+      "id": "dcec-sat-001",
+      "subsystem": "dcec",
+      "description": "DCEC permission formula through policy route.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-perm", "version": "1", "permissions": [{ "cap": "read", "rsc": "evidence" }], "prohibitions": [], "obligations": [{ "description": "preserve_evidence" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "sat"]
+    },
+    {
+      "id": "dcec-refuted-002",
+      "subsystem": "dcec",
+      "description": "DCEC prohibition conflicts with same obligation atom.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "preserve", "rsc": "evidence" }], "obligations": [{ "description": "preserve_evidence", "rsc": "evidence" }] } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "unsat"]
+    },
+    {
+      "id": "dcec-sat-003",
+      "subsystem": "dcec",
+      "description": "DCEC obligation implies permission shape.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-obl", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "submit_tax", "rsc": "irs" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "sat"]
+    },
+    {
+      "id": "dcec-sat-004",
+      "subsystem": "dcec",
+      "description": "DCEC independent prohibition only.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-proh", "version": "1", "permissions": [], "prohibitions": [{ "cap": "delete", "rsc": "record" }], "obligations": [] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "sat"]
+    },
+    {
+      "id": "dcec-sat-005",
+      "subsystem": "dcec",
+      "description": "DCEC independent permission and obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-mixed", "version": "1", "permissions": [{ "cap": "read", "rsc": "file" }], "prohibitions": [], "obligations": [{ "description": "archive_file", "rsc": "file" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "sat"]
+    },
+    {
+      "id": "dcec-refuted-006",
+      "subsystem": "dcec",
+      "description": "DCEC archive conflict.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-archive-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "archive", "rsc": "file" }], "obligations": [{ "description": "archive_file", "rsc": "file" }] } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "unsat"]
+    },
+    {
+      "id": "dcec-sat-007",
+      "subsystem": "dcec",
+      "description": "DCEC two obligations.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-two", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "alpha_task" }, { "description": "beta_task" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "sat"]
+    },
+    {
+      "id": "dcec-sat-008",
+      "subsystem": "dcec",
+      "description": "DCEC required capability obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-required", "version": "1", "permissions": [{ "cap": "notify", "rsc": "agency" }], "prohibitions": [], "obligations": [{ "description": "notify_agency", "requiredCap": "notify", "rsc": "agency" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "sat"]
+    },
+    {
+      "id": "dcec-sat-009",
+      "subsystem": "dcec",
+      "description": "DCEC prohibition on unrelated resource.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-unrelated-proh", "version": "1", "permissions": [{ "cap": "read", "rsc": "public" }], "prohibitions": [{ "cap": "read", "rsc": "private" }], "obligations": [{ "description": "log_read", "rsc": "public" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "independent"]
+    },
+    {
+      "id": "dcec-sat-010",
+      "subsystem": "dcec",
+      "description": "DCEC ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "dcec-order", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "second" }, { "description": "first" }] } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["dcec", "order-invariant"]
+    },
+
+    {
+      "id": "legal-sat-001",
+      "subsystem": "legal-norm",
+      "description": "Legal duty to notify is consistent.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-notice", "version": "1", "permissions": [{ "cap": "notify", "rsc": "tenant" }], "prohibitions": [], "obligations": [{ "description": "notify_tenant", "rsc": "tenant" }] }, "legalNorm": { "domain": "real_estate", "modality": "obligation" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-refuted-002",
+      "subsystem": "legal-norm",
+      "description": "Legal order both requires and forbids same act.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "evict", "rsc": "tenant" }], "obligations": [{ "description": "evict_tenant", "rsc": "tenant" }] }, "legalNorm": { "domain": "housing", "modality": "conflict" } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "unsat"]
+    },
+    {
+      "id": "legal-sat-003",
+      "subsystem": "legal-norm",
+      "description": "Consumer disclosure obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-disclose", "version": "1", "permissions": [{ "cap": "disclose", "rsc": "fee" }], "prohibitions": [], "obligations": [{ "description": "disclose_fee", "rsc": "fee" }] }, "legalNorm": { "domain": "consumer", "modality": "obligation" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-sat-004",
+      "subsystem": "legal-norm",
+      "description": "Privacy prohibition without contradictory obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-privacy", "version": "1", "permissions": [], "prohibitions": [{ "cap": "share", "rsc": "pii" }], "obligations": [{ "description": "retain_consent", "rsc": "consent" }] }, "legalNorm": { "domain": "privacy", "modality": "prohibition" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-sat-005",
+      "subsystem": "legal-norm",
+      "description": "Employment notice obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-employment", "version": "1", "permissions": [{ "cap": "send", "rsc": "notice" }], "prohibitions": [], "obligations": [{ "description": "send_notice", "rsc": "notice" }] }, "legalNorm": { "domain": "employment", "modality": "obligation" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-refuted-006",
+      "subsystem": "legal-norm",
+      "description": "Tax filing contradiction.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-tax-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "file", "rsc": "return" }], "obligations": [{ "description": "file_return", "rsc": "return" }] }, "legalNorm": { "domain": "tax", "modality": "conflict" } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "unsat"]
+    },
+    {
+      "id": "legal-sat-007",
+      "subsystem": "legal-norm",
+      "description": "IP license permission with audit duty.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-ip", "version": "1", "permissions": [{ "cap": "license", "rsc": "work" }], "prohibitions": [], "obligations": [{ "description": "record_license", "rsc": "work" }] }, "legalNorm": { "domain": "intellectual_property", "modality": "permission" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-sat-008",
+      "subsystem": "legal-norm",
+      "description": "Environmental reporting duty.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-env", "version": "1", "permissions": [{ "cap": "report", "rsc": "emissions" }], "prohibitions": [], "obligations": [{ "description": "report_emissions", "rsc": "emissions" }] }, "legalNorm": { "domain": "environmental", "modality": "obligation" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-sat-009",
+      "subsystem": "legal-norm",
+      "description": "Corporate board minute retention.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-corp", "version": "1", "permissions": [{ "cap": "retain", "rsc": "minutes" }], "prohibitions": [], "obligations": [{ "description": "retain_minutes", "rsc": "minutes" }] }, "legalNorm": { "domain": "corporate", "modality": "obligation" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "sat"]
+    },
+    {
+      "id": "legal-sat-010",
+      "subsystem": "legal-norm",
+      "description": "Legal-norm ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "legal-order", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "second_notice" }, { "description": "first_notice" }] }, "legalNorm": { "domain": "civil", "modality": "obligation" } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "real" },
+      "timeoutMs": 5000,
+      "tags": ["legal", "order-invariant"]
+    },
+
+    {
+      "id": "zkp-sim-001",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement wrapper for a consistent permission.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-read", "version": "1", "permissions": [{ "cap": "read", "rsc": "private" }], "prohibitions": [], "obligations": [] }, "zkpStatement": { "circuit": "policy_consistency_v1", "privateAxioms": false } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated"]
+    },
+    {
+      "id": "zkp-sim-002",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement wrapper for an O/F conflict.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-conflict", "version": "1", "permissions": [], "prohibitions": [{ "cap": "prove", "rsc": "claim" }], "obligations": [{ "description": "prove_claim", "rsc": "claim" }] }, "zkpStatement": { "circuit": "policy_consistency_v1", "privateAxioms": true } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "unsat"]
+    },
+    {
+      "id": "zkp-sim-003",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement with deadline obligation.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-deadline", "version": "1", "permissions": [], "prohibitions": [], "obligations": [{ "description": "prove_membership", "deadline": 3600 }] }, "zkpStatement": { "circuit": "tdfol_trace_v1", "privateAxioms": true } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "temporal"]
+    },
+    {
+      "id": "zkp-sim-004",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for legal-norm proof.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-legal", "version": "1", "permissions": [{ "cap": "attest", "rsc": "norm" }], "prohibitions": [], "obligations": [{ "description": "attest_norm", "rsc": "norm" }] }, "zkpStatement": { "circuit": "legal_norm_v1", "privateAxioms": false } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "legal"]
+    },
+    {
+      "id": "zkp-sim-005",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for F-logic proof wrapper.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-flogic", "version": "1", "permissions": [{ "cap": "query", "rsc": "frame" }], "prohibitions": [], "obligations": [] }, "zkpStatement": { "circuit": "flogic_v1", "privateAxioms": false } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated"]
+    },
+    {
+      "id": "zkp-sim-006",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for on-chain verifier payload.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-onchain", "version": "1", "permissions": [{ "cap": "submit", "rsc": "evm" }], "prohibitions": [], "obligations": [{ "description": "submit_evm", "rsc": "evm" }] }, "zkpStatement": { "circuit": "groth16_policy_v1", "privateAxioms": false } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "onchain"]
+    },
+    {
+      "id": "zkp-sim-007",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for verifier rejection case.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-reject", "version": "1", "permissions": [], "prohibitions": [{ "cap": "mint", "rsc": "token" }], "obligations": [{ "description": "mint_token", "rsc": "token" }] }, "zkpStatement": { "circuit": "groth16_policy_v1", "privateAxioms": true } },
+      "expected": { "status": "refuted", "acceptableReasons": ["refuted", "unsat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "unsat"]
+    },
+    {
+      "id": "zkp-sim-008",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for VK registry update.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-vk", "version": "1", "permissions": [{ "cap": "register", "rsc": "vk" }], "prohibitions": [], "obligations": [{ "description": "register_vk", "rsc": "vk" }] }, "zkpStatement": { "circuit": "vk_registry_v1", "privateAxioms": false } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "vk"]
+    },
+    {
+      "id": "zkp-sim-009",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for private witness disclosure boundary.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-witness", "version": "1", "permissions": [{ "cap": "prove", "rsc": "witness" }], "prohibitions": [], "obligations": [{ "description": "prove_witness", "rsc": "witness" }] }, "zkpStatement": { "circuit": "witness_v1", "privateAxioms": true } },
+      "expected": { "status": "proved", "acceptableReasons": ["proved", "sat"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "privacy"]
+    },
+    {
+      "id": "zkp-sim-010",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement ordering invariant.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-order", "version": "1", "permissions": [{ "cap": "beta", "rsc": "r2" }, { "cap": "alpha", "rsc": "r1" }], "prohibitions": [], "obligations": [] }, "zkpStatement": { "circuit": "policy_consistency_v1", "privateAxioms": false } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "simulated" },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "order-invariant"]
+    }
+  ]
+}
