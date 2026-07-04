@@ -31,7 +31,8 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
     "VAI-555",
     "VAI-557",
     "VAI-565",
-    "VAI-568"
+    "VAI-568",
+    "VAI-574"
   ],
   "backlog_task_id": "HAO-702",
   "backlog_task_ids": [
@@ -61,6 +62,7 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
     "data/virtual_ai_os/discovery/2026-07-02-vai-557-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-03-vai-565-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-568-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-574-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md"
   ],
@@ -76,6 +78,7 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
     "data/virtual_ai_os/discovery/2026-07-02-vai-557-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-03-vai-565-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-568-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-574-objective-gap-b023c8de5b69.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
   ],
   "supervisor_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
