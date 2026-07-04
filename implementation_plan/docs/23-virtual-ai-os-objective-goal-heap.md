@@ -1546,6 +1546,8 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - VAI-563 attempt 2 validation: `data/virtual_ai_os/discovery/2026-07-03-vai-563-attempt-2-launch-playwright-validation-gate.md` and `data/hallucinate_multimodal_control/discovery/2026-07-03-vai-563-attempt-2-validation.md` re-verify the attempt 1 receipt against the live code (nothing was hallucinated: the `VAI_563_LAUNCH_VALIDATION_GATE` record, the `vai-563-mcp-dashboard-launch-gate.json` fixture, and the regenerated `hao-719`/`hao-721` fixtures were all confirmed present before this attempt) and record the passing backlog/objective queue tests, Hallucinate daemon-manager catalog check, Hallucinate MCP dashboard backend Playwright gate, no-display Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife Meta glasses gate, and Hallucinate multimodal `control_surface` gate. `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, and `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` expose and assert the attempt-2 receipt in the VAI-563 `launch_validation_gates` catalog entry while preserving catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife applications for `VAIOS-G723`.
 - VAI-566 proof: `data/virtual_ai_os/discovery/2026-07-03-vai-566-mcp-dashboard-launch-gate.md`, `data/hallucinate_multimodal_control/discovery/2026-07-03-vai-566-mcp-dashboard-launch-gate.md`, and `hallucinate_app/test/e2e/fixtures/vai-566-mcp-dashboard-launch-gate.json` bind the July 3 VAI-566 objective gap (`data/virtual_ai_os/discovery/2026-07-03-vai-566-objective-gap-7ea369464239.md`) to the `VAIOS-G723` launch Playwright validation gate, Hallucinate App menus, Hallucinate App MCP dashboard, dashboard capability catalog, backend service catalog, catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife applications. `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, and `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared dashboard capability catalog exposes the VAI-566 gate for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
 - VAI-566 attempt 2 validation: `data/virtual_ai_os/discovery/2026-07-03-vai-566-attempt-2-launch-playwright-validation-gate.md` and `data/hallucinate_multimodal_control/discovery/2026-07-03-vai-566-attempt-2-validation.md` record the passing backlog/objective queue tests, Hallucinate daemon-manager catalog check, Hallucinate MCP dashboard backend Playwright gate, no-display Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife Meta glasses gate, and Hallucinate multimodal `control_surface` gate. `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, and `swissknife/scripts/test-mcp-dashboard-consumer.cjs` expose and assert the attempt-2 receipt in the VAI-566 `launch_validation_gates` catalog entry while preserving catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife applications for `VAIOS-G723`.
+- VAI-569 proof: `data/virtual_ai_os/discovery/2026-07-04-vai-569-mcp-dashboard-launch-gate.md`, `data/hallucinate_multimodal_control/discovery/2026-07-04-vai-569-mcp-dashboard-launch-gate.md`, and `hallucinate_app/test/e2e/fixtures/vai-569-mcp-dashboard-launch-gate.json` bind the July 4 VAI-569 objective gap (`data/virtual_ai_os/discovery/2026-07-04-vai-569-objective-gap-7ea369464239.md`) to the `VAIOS-G723` launch Playwright validation gate, Hallucinate App menus, Hallucinate App MCP dashboard, dashboard capability catalog, backend service catalog, catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife applications. `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, and `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared dashboard capability catalog exposes the VAI-569 gate for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+- VAI-569 attempt 1 validation: `data/virtual_ai_os/discovery/2026-07-04-vai-569-attempt-1-launch-playwright-validation-gate.md` and `data/hallucinate_multimodal_control/discovery/2026-07-04-vai-569-attempt-1-validation.md` record the backlog/objective queue test command, Hallucinate daemon-manager catalog check, Hallucinate MCP dashboard backend Playwright gate, no-display Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife Meta glasses gate, and Hallucinate multimodal `control_surface` gate. `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, and `swissknife/scripts/test-mcp-dashboard-consumer.cjs` expose and assert the attempt-1 receipt in the VAI-569 `launch_validation_gates` catalog entry while preserving catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife applications for `VAIOS-G723`.
 - MGW-559 attempt 6 validation: the backlog/objective queue tests, Hallucinate daemon-manager catalog test, Hallucinate MCP dashboard backend Playwright gate, no-display Playwright runner contract, Swissknife MCP dashboard consumer gate, Swissknife Meta glasses gate, and Hallucinate multimodal `control_surface` gate passed on 2026-06-29. The no-display runner produced the expected `missing_xvfb_for_electron_playwright` contract path, so Electron UI coverage remains environment-gated rather than a dashboard interoperability failure.
 - MGW-560 merge repair proof: `data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-560-mgw-559-merge-retry-budget.md` records the retry-budget release for MGW-559. The source implementation is merged in the superproject at `d438f06b`, the original `external/ipfs_accelerate` dirty-checkout blocker is committed in the owning submodule at `546dfdcd`, the superproject gitlink repair is committed at `f8f0f42f`, and the `hallucinate_app` launch-gate fixture repair is committed at `68d4f60`; no semantic merge resolver `--apply` run was required because the failure mode was `main_checkout_dirty_conflict`.
 - MGW-547 attempt 7 proof: `data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-547-attempt-7-launch-playwright-validation-gate.md` and `data/hallucinate_multimodal_control/discovery/2026-06-28-mgw-547-attempt-7-launch-playwright-validation-gate.md` keep the supervisor-fed backlog aligned with the VAIOS-G723 objective heap and preserve supervisor-generated follow-up subtasks for any dashboard or backend validation failure.
@@ -1557,6 +1559,120 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - VAI-513 validation environment gate: `hallucinate_app/scripts/run_playwright_test.mjs` runs Hallucinate Electron Playwright tests under `xvfb-run` when it is present and exits 78 with `missing_xvfb_for_electron_playwright` when no display or virtual display is available. A no-display Electron skip cannot close the non-skipped Hallucinate Electron Playwright launch gate on headless supervisor hosts; the MCP dashboard and Swissknife interoperability path remains validation environment repair work under `fix_validation_environment_before_production_ready` until real Electron coverage runs.
 - VAI-550 proof: `data/virtual_ai_os/discovery/2026-07-02-vai-550-mcp-dashboard-launch-gate.md`, `data/hallucinate_multimodal_control/discovery/2026-07-02-vai-550-mcp-dashboard-launch-gate.md`, and `hallucinate_app/test/e2e/fixtures/vai-550-mcp-dashboard-launch-gate.json` bind the July 2 VAI-550 objective gap (`data/virtual_ai_os/discovery/2026-07-02-vai-550-objective-gap-7ea369464239.md`) to the `VAIOS-G723` launch Playwright validation gate, Hallucinate App menus, Hallucinate App MCP dashboard, dashboard capability catalog, backend service catalog, catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife applications. `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`, `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`, `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, and `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared dashboard capability catalog exposes the VAI-550 gate for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` and preserves supervisor-generated follow-up subtasks if any dashboard or backend validation fails. VAI-550 also repaired two merge-retry-budget follow-up tasks, `VAI-551` and `VAI-552`, that were blocking the shared `tests/test_virtual_ai_os_todo_queue.py` gate: both are marked `completed` in `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md` after confirming the `VAI-548`/`VAI-549` implementations are already committed in the `hallucinate_app` submodule's `main` branch (the retry failures were caused by an upstream history-squashing commit, not a real content conflict), releasing `VAI-548` and `VAI-549` from strategy `blocked_tasks`.
 - Gap task: Turn the Hallucinate App menus and dashboards into the high-value launch console that continuously verifies Python MCP server interoperability before Swissknife, phone, desktop offload, or Meta glasses flows depend on those backend capabilities.
+
+## VAIOS-G723-C1 Catalog normalization
+
+- Status: todo
+- Parent: VAIOS-G723
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard/catalog-normalization
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 2
+- Embedding query: catalog normalization dashboard capability catalog ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py launch Playwright validation gate
+- AST query: getDashboardCapabilityCatalog, DASHBOARD_CATALOG_SCHEMA, launch_validation_gates, vai-512-mcp-dashboard-catalog
+- Conflict policy: preserve one shared dashboard capability catalog and regenerate fixtures from `getDashboardCapabilityCatalog`.
+- Goal: Hallucinate App and Swissknife consume one normalized dashboard capability catalog for every MCP backend.
+- Evidence: catalog normalization, dashboard capability catalog, `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, VAI-569 proof
+- Outputs: hallucinate_app, swissknife, tests
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-dashboard-interoperability.spec.ts; npm --prefix swissknife run test:e2e:mcp
+- Gap task: Generate supervisor follow-up subtasks when catalog schema, launch gate entries, or fixture parity drifts.
+
+## VAIOS-G723-C2 Dashboard UI wiring
+
+- Status: todo
+- Parent: VAIOS-G723
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard/dashboard-ui-wiring
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 2
+- Embedding query: dashboard UI wiring Hallucinate App menus MCP dashboard Playwright interoperability
+- AST query: MenuGenerator, mcpServers, dashboardMcpServers, mcp-feature-exposure, mcp-dashboard-interoperability
+- Conflict policy: keep menu and dashboard entries additive and keep existing Electron display gating intact.
+- Goal: Operators can reach every MCP dashboard from Hallucinate App menus and dashboard surfaces before Swissknife consumes the catalog.
+- Evidence: dashboard UI wiring, Hallucinate App menus, Hallucinate App MCP dashboard, Playwright MCP dashboard interoperability, VAI-569 proof
+- Outputs: hallucinate_app, tests
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+- Gap task: Generate supervisor follow-up subtasks when menu exposure, dashboard routing, or Playwright UI coverage fails.
+
+## VAIOS-G723-C3 Mediated tool-call receipts
+
+- Status: todo
+- Parent: VAIOS-G723
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard/mediated-tool-call-receipts
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 2
+- Embedding query: mediated tool-call receipts tools/list tools/call control_surface receipts daemon health MCP++ telemetry
+- AST query: ControlSurfaceInvocationGate, tool_protocols, tools_list, tools_call, mediation_receipt
+- Conflict policy: preserve the shared `mcp_server_invocation_receipt_v1` receipt schema and fail closed on missing mediation.
+- Goal: Dashboard `tools/list` and safe `tools/call` invocations emit mediated receipts that include policy and control_surface lineage.
+- Evidence: mediated tool-call receipts, tools/list, tools/call, control_surface receipts, daemon health, MCP++ telemetry, VAI-569 proof
+- Outputs: hallucinate_app, data/hallucinate_multimodal_control/discovery, tests
+- Validation: npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-dashboard-interoperability.spec.ts
+- Gap task: Generate supervisor follow-up subtasks when any dashboard backend lacks a mediated receipt, safe probe, or daemon health record.
+
+## VAIOS-G723-C4 Swissknife consumers
+
+- Status: todo
+- Parent: VAIOS-G723
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard/swissknife-consumers
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 2
+- Embedding query: Swissknife consumers applications MCP dashboard capability registry ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py
+- AST query: swissknifeMCPCapabilityRegistry, buildSwissknifeMCPDashboardConsumerPlans, test-mcp-dashboard-consumer
+- Conflict policy: keep Swissknife consumers pointed at the Hallucinate App catalog instead of duplicating dashboard schema.
+- Goal: Swissknife applications consume the same dashboard catalog and receipt schema for storage, dataset, and compute MCP backends.
+- Evidence: Swissknife consumers, Swissknife applications, ipfs_kit_py MCP server, ipfs_datasets_py MCP server, ipfs_accelerate_py MCP server, VAI-569 proof
+- Outputs: swissknife, hallucinate_app, tests
+- Validation: npm --prefix swissknife run test:e2e:mcp
+- Gap task: Generate supervisor follow-up subtasks when Swissknife catalog parity, consumer plans, or backend handoff records fail.
+
+## VAIOS-G723-C5 Playwright coverage
+
+- Status: todo
+- Parent: VAIOS-G723
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard/playwright-coverage
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 2
+- Embedding query: Playwright coverage launch Playwright validation gate no-display runner missing_xvfb_for_electron_playwright
+- AST query: run_playwright_test, mcp-feature-exposure, mcp-dashboard-interoperability, multimodal-control-surface
+- Conflict policy: preserve no-display backend/static coverage while requiring display-capable Electron coverage to close UI-only gaps.
+- Goal: The launch Playwright validation gate runs backend/static dashboard specs on headless hosts and keeps Electron UI coverage explicit.
+- Evidence: Playwright coverage, launch Playwright validation gate, Playwright MCP dashboard interoperability, missing_xvfb_for_electron_playwright, VAI-569 attempt 1 validation
+- Outputs: hallucinate_app, tests
+- Validation: cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)
+- Gap task: Generate supervisor follow-up subtasks when Playwright coverage is skipped unexpectedly or display-capable Electron validation is unavailable.
+
+## VAIOS-G723-C6 Supervisor-generated follow-up subtasks
+
+- Status: todo
+- Parent: VAIOS-G723
+- Fib priority: 13
+- Track: launch
+- Priority: P0
+- Bundle: objective/launch/hallucinate-mcp-dashboard/supervisor-follow-ups
+- Parallel lane: hallucinate-mcp-dashboard
+- Refinement depth: 2
+- Embedding query: supervisor-generated follow-up subtasks objective heap dashboard backend validation fails
+- AST query: launch_validation_gates, follow_up_subtasks, supervisor_follow_up_subtasks, failure_rule
+- Conflict policy: keep follow-up task ids additive and tie every generated subtask back to VAIOS-G723.
+- Goal: Any dashboard or backend validation failure remains visible as supervisor-generated follow-up work instead of silently closing the objective gap.
+- Evidence: supervisor-generated follow-up subtasks, follow_up_subtasks, supervisor_follow_up_subtasks, failure_rule, VAI-569 proof
+- Outputs: implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, data/virtual_ai_os/discovery, data/hallucinate_multimodal_control/discovery
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q
+- Gap task: Generate supervisor follow-up subtasks for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, or backend validation failures.
 
 ## VAIOS-G724 Hallucinate App MCP dashboard capability catalog
 
