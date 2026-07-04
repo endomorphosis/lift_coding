@@ -980,6 +980,30 @@ and Hallucinate multimodal `control_surface` gate. Any dashboard or backend
 validation failure remains supervisor-generated follow-up work for
 `VAIOS-G723`.
 
+VAI-598 closes the VAIOS-G724 Hallucinate App MCP dashboard capability catalog
+gap for the `goal_packet/launch/hallucinate_app/44dceea6bc53` packet by
+binding
+`data/virtual_ai_os/discovery/2026-07-04-vai-598-mcp-dashboard-launch-gate.md`
+to
+`hallucinate_app/test/e2e/fixtures/vai-598-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog exposes the same `VAI-598` gate for
+hallucinate_app menus, Hallucinate App MCP dashboard, dashboard capability
+catalog, daemon health, `tools/list`, `tools/call`, `ipfs_accelerate_py MCP
+server`, `ipfs_datasets_py MCP server`, `ipfs_kit_py MCP server`, Swissknife
+applications, Playwright MCP dashboard interoperability, and the launch
+Playwright validation gate.
+
+VAI-599 closes the paired VAIOS-G728 daemon launch orchestration gap by binding
+`data/virtual_ai_os/discovery/2026-07-04-vai-599-daemon-launch-health-gate.md`
+to
+`hallucinate_app/test/e2e/fixtures/vai-599-daemon-launch-health-gate.json`.
+The packet now keeps the VAI-598 dashboard catalog gate aligned with daemon
+health paths, daemon launcher, MCP server, MCP dashboard, external surfaces
+`external/ipfs_kit`, `external/ipfs_datasets`, `external/ipfs_accelerate`,
+Swissknife handoff records, and packet goals `VAIOS-G724` and `VAIOS-G728`.
+Any dashboard, daemon, Swissknife, or control_surface validation failure
+remains supervisor-generated follow-up work for the shared packet.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
