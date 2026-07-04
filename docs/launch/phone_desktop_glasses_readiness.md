@@ -649,6 +649,32 @@ npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-da
 npm --prefix swissknife run test:e2e:mcp
 ```
 
+VAI-576 records the current July 4 Hallucinate App MCP dashboard capability
+catalog launch Playwright validation gate in
+`data/virtual_ai_os/discovery/2026-07-04-vai-576-mcp-dashboard-launch-gate.md`
+with the shared fixture
+`hallucinate_app/test/e2e/fixtures/vai-576-mcp-dashboard-launch-gate.json`.
+The live `getDashboardCapabilityCatalog` entry and
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` expose
+the same `VAI-576` gate for hallucinate_app menus, Hallucinate App MCP
+dashboard, dashboard capability catalog, daemon health, `tools/list`,
+`tools/call`, `ipfs_accelerate_py MCP server`, `ipfs_datasets_py MCP server`,
+`ipfs_kit_py MCP server`, Swissknife applications, Playwright MCP dashboard
+interoperability, and the launch Playwright validation gate. The receipt keeps
+`goal_packet/launch/hallucinate_app/44dceea6bc53`, packet goals `VAIOS-G724`
+and `VAIOS-G728`, and packet sibling daemon evidence from
+`data/virtual_ai_os/discovery/2026-07-04-vai-577-daemon-launch-health-gate.md`
+aligned so any missing catalog, daemon health, external backend handoff, or
+Swissknife consumer proof remains supervisor-fed launch work.
+
+The executable packet gate is:
+
+```bash
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses
+test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+```
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
