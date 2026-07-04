@@ -2401,8 +2401,8 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |  <!-- ✅ CLOSED (re-validated 2026-07-04: native async wrappers implemented in TS) -->
-| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04 after parity review -->
-| PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |  <!-- ✅ CLOSED -->
+| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04; migration in progress: query engine + temporal RAG + converter/checker + temporal API + deontological reasoning + deontic exports/bridge/prover-syntax + graph/legal-norm + formula-builder/json-syntax serialization + parserElementToIR/active-repair proposition fallback paths + export slot-metric alias equivalence + parser-utils/conflict-detector proposition alias handling are now proposition-first with action alias compatibility -->
+| PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |  <!-- ⚠ REOPENED 2026-07-04: TS now supports optional embedding-aware scoring, but still lacks a bundled 768-dim embedding backend -->
 | PORT-143 | 🟠 | `ConsistencyResult` missing `temporal_conflicts` (Python returns logical + temporal; TS only logical) | `temporal_deontic_rag_store.py:65-72` | `temporal-deontic-rag-store.ts:94-124` | Add temporal-conflict list + temporal index. |  <!-- ✅ CLOSED -->
 
 ### 12.15 Neurosymbolic & logic verifier
@@ -3205,3 +3205,160 @@ reproduced in TS and **proven equivalent to the real Python module** by a test t
   then, the honest status is: *module- and identifier-complete; policy-consistency path
   cross-checked; per-engine behavioral parity UNVERIFIED; ZKP/ErgoAI/FLogic-ZKP simulated
   or stubbed.*
+
+---
+
+## 12.26 — Port SUBSTANCE audit: the accusation is right about the *hard cases* — a runtime delegation wrapper + hollow "simulated" ports (2026-07-04)
+
+§12.24 certified *identifier/module presence* (100% accounted) and §12.25 showed the
+*verification* apparatus is necessary-but-not-sufficient. This section closes the loop the
+user's challenge demanded — **"you reward-hacked by making a wrapper around the
+ipfs_datasets_py module"** — by auditing **implementation substance** (does the TS actually
+*do* what the Python module does, or does it name-match and then simulate/delegate?). The
+answer: the *bulk* of the port is genuine, **but the hardest, highest-value paths are (a) a
+runtime delegation wrapper around the Python engine and (b) hollow "simulated" ports** that
+the symbol/parity certificates cannot see. §12.25's parenthetical "NOT a literal runtime
+wrapper" is **corrected below** — it is a wrapper for the temporal/higher-order deontic path.
+
+### 12.26.1 Method (and its honest limits)
+
+`implementation_plan/port-audit/port_substance_audit.py` walks every portable
+`ipfs_datasets_py/logic` module and compares **effective LOC** (code lines, excluding blanks/
+comments) + top-level symbol count against the name-matched swissknife TS file's eff-LOC, plus
+scans for *hollow markers* (`simulated`, `stub`, `placeholder`, `TODO`, unconditional returns)
+and *delegation call-sites* (`invokeTool(`, `.callTool(`, `connector.dispatch(<…,'tdfol_prove'>)`).
+It emits `port-substance.json` / `.md` (verdicts SUBSTANTIVE / THIN / MISSING).
+
+**This is a SCREENING oracle, exactly like the §12.23 symbol audit — a low LOC ratio is a
+*flag*, not proof of hollowness.** It has two known error modes, so every headline claim below
+is **spot-verified by reading source**, never asserted from the ratio alone:
+- **False positives at the small end:** a compact TS file can be a *legitimate* port when the
+  Python is docstring-heavy or generated data (e.g. `common/errors.py` 65→`utils/errors.ts` 13
+  is a correct, complete error-class port — NOT hollow).
+- **False negatives for TS-native wrappers:** a delegation wrapper with *no* same-name Python
+  module (e.g. `mcp-remote-deontic-engine.ts`) never appears as a module row — so the most
+  important finding (12.26.2) was found by **reading the deontic runtime**, not by the ratio.
+
+### 12.26.2 VERIFIED — the runtime delegation wrapper (this is what "wrapper around ipfs_datasets_py" means)
+
+`swissknife/src/services/mcp-remote-deontic-engine.ts` is a typed client that **delegates the
+hard deontic/temporal proofs to the Python engine at runtime** over the Round-49 MCP++ libp2p
+connector:
+- `proveTemporal()` → `invokeTool('tdfol_prove', { formula, axioms, strategy, timeout_ms,
+  max_depth, include_proof_steps })` (line ~248).
+- `proveBatch()` → `invokeTool('tdfol_batch_prove', …)`; `legalTextToDeontic()` →
+  `invokeTool('legal_text_to_deontic', …)`; `health()` → `invokeTool('logic_health')`.
+- `createLocalFirstDeonticORBEvaluator()` runs local Profile-D + z3-wasm for the *cheap*
+  fragment but **escalates temporal / higher-order deontic cases to the Python TDFOL remote
+  engine** (comments explicitly reference normalizing "the Python return dicts").
+
+Those tool names are served by **`ipfs_datasets_py.mcp_server`** →
+`ipfs_datasets_py.logic.deontic.legal_text_to_deontic` / `logic.TDFOL` — i.e. the real Python
+prover. **So for temporal and higher-order deontic reasoning (the genuinely hard cases), the
+"TS port" is a wrapper around `ipfs_datasets_py`.** The user's accusation is correct for this
+path.
+
+> **Correction to §12.25.** §12.25 concluded "NOT a literal runtime wrapper." That holds for
+> the *policy-consistency* path (`checkPolicyConsistency`, which runs real TS), but is **wrong
+> for the temporal/higher-order deontic path**, which delegates to Python via MCP at runtime.
+> The corrected statement: *the cheap propositional/policy fragment is natively ported; the
+> temporal & higher-order fragment is delegated to `ipfs_datasets_py` over MCP++.*
+
+### 12.26.3 VERIFIED — hollow "simulated" ports (name-matched, behavior stubbed)
+
+The symbol audit counted `ModalLogicCodec.encode`/`decode` as *present*. Reading the code:
+- **`modal/codec.py` = 13,013 lines** of real hand-written logic — U.S.-Code citation parsing,
+  temporal-clause relations, `_compiler_guidance_route_features`,
+  `_compiler_guidance_frame_audit_features`, `_compiler_guidance_implies_neo4j_projection_target`,
+  numeric-distribution feature extraction — the actual modal codec.
+- **`modal-logic-codec.ts` = 276 lines** whose header states *"Provides (simulated, no ML
+  deps)"* and whose `encode()` (line ~171) simply computes
+  `buildSimulatedEmbedding(normalizedText, …)` and echoes `normalizedText` back as
+  `decodedText`. **None** of the compiler-guidance / frame-audit / citation routing exists.
+- `modal/decompiler.py` (12,770 lines) → `modal-ir-decompiler.ts` (239 lines): same pattern.
+
+This is a **hollow port**: the identifier is present, the conformance corpus (80/80,
+policy-only) never exercises the modal codec, so both certificates stay green while the real
+behavior is absent.
+
+### 12.26.4 Quantified substance signal (screening — 229 genuine, 18 hollow-flagged)
+
+`port-substance.json` over **288 name-matched modules** (Python 149,914 eff-LOC vs TS 94,184):
+
+| verdict | modules | Python eff-LOC | reading |
+|---|---:|---:|---|
+| **SUBSTANTIVE** | 229 | 82,100 | TS eff-LOC comparable — **the bulk IS genuinely reimplemented (real credit; not a wrapper)** |
+| **THIN** (matched, ≤30% size) | 18 | **55,791 (37.2% of all logic behavior)** | name-present but a fraction of the Python — the hollow-port candidates |
+| **MISSING** (no same-name TS) | 41 | 12,023 | name-match artifacts; large overlap with §12.23 consolidation/rename — **mostly false positives, must not be over-read** |
+
+**Top THIN by unported behavior (top 9 ≥2000 LOC = 49,181 = 88% of the THIN total = 32.8% of
+ALL logic behavior):**
+
+| Python module | eff-LOC | → TS file | eff-LOC | ratio |
+|---|---:|---|---:|---:|
+| `modal/codec.py` | 12,393 | `modal-logic-codec.ts` | 426 | 0.03 |
+| `modal/decompiler.py` | 12,165 | `modal-ir-decompiler.ts` | 326 | 0.03 |
+| `deontic/formula_builder.py` | 5,955 | `deontic-formula-builder.ts` | 628 | 0.11 |
+| `deontic/utils/deontic_parser.py` | 5,060 | `deontic-parser-utils.ts` | 334 | 0.07 |
+| `bridge/multiview.py` | 4,062 | `bridge-multiview.ts` | 360 | 0.09 |
+| `bridge/cec_dcec.py` | 3,654 | `cec-dcec-namespace.ts` | 482 | 0.13 |
+| `modal/compiler.py` | 3,217 | `modal-compiler.ts` | 483 | 0.15 |
+| `bridge/deontic_norms.py` | 2,617 | `deontic-norms-bridge.ts` | 418 | 0.16 |
+| `bridge/fol_tdfol.py` | 2,058 | `fol-tdfol-bridge.ts` | 356 | 0.17 |
+
+*(Small-end flags — `common/errors.py` 65→13, `CEC/native/problem_parser.py` 263→54 — may be
+legitimate compact ports; PORT-252 resolves each THIN to hollow-vs-compact-vs-data-bloat with
+evidence. `bridge/deontic_norms.py` is THIN, **not** a delegation wrapper — its TS has real
+local logic; the earlier WRAPPER heuristic flag was a prose false-positive, corrected here.)*
+
+### 12.26.5 What this means
+
+Module- and symbol-presence completeness (§12.22/§12.23/§12.24) and 80/80 policy parity
+(§12.21/§12.25) **coexist with ~⅓ of the logic *behavior* being hollow or delegated**:
+- the temporal / higher-order deontic path **delegates to `ipfs_datasets_py` at runtime**
+  (12.26.2);
+- ~49k eff-LOC of modal codec/decompiler, deontic formula-builder/parser, and CEC↔DCEC/FOL
+  bridge logic is **present-by-name but simulated or a fraction of the size** (12.26.3–4).
+
+The certificates cannot see this because (a) presence oracles match identifiers, not behavior,
+and (b) the conformance corpus is policy-only, so modal/decompiler/bridge symbols are never
+executed. **A truly complete Python→TS port must de-delegate the hard path and de-hollow the
+simulated modules**, gated by a substance bar that a name-match cannot satisfy.
+
+### 12.26.6 Tasks — de-delegate + de-hollow (substance-resistant acceptance criteria)
+
+- **PORT-245 🔴 — De-delegate temporal/higher-order deontic proving.** Implement native TS
+  TDFOL temporal reasoning so `mcp-remote-deontic-engine.ts` is a *fallback*, not the primary
+  path. **AC:** with the Python MCP connector disabled, temporal-policy vectors still decide
+  (`proved`/`unsat`) via TS — no `"unavailable"`/remote hop; a test asserts zero `invokeTool`
+  calls for the temporal corpus.
+- **PORT-246 🔴 — Real modal codec** (`modal/codec.py` → `modal-logic-codec.ts`): port the
+  citation-parsing / temporal-clause / compiler-guidance / frame-audit logic. **AC:** a
+  behavioral vector set (citation→IR, clause relations) where TS output *structurally* matches
+  the Python codec; `buildSimulatedEmbedding` removed from the decision path.
+- **PORT-247 🔴 — Real modal decompiler** (`modal/decompiler.py`). **AC:** `encode∘decode`
+  round-trip over a shared corpus matches Python.
+- **PORT-248 🟠 — De-hollow deontic builder/parser** (`deontic/formula_builder.py`,
+  `deontic/utils/deontic_parser.py`). **AC:** the TS parser accepts the Python
+  deontic-parser test corpus with matching ASTs.
+- **PORT-249 🟠 — De-hollow the bridges** (`bridge/{multiview,cec_dcec,deontic_norms,fol_tdfol}.py`).
+  **AC:** bridge triple/graph output matches Python for a shared fixture set.
+- **PORT-250 🟠 — Real modal compiler** (`modal/compiler.py`). **AC:** compile vectors match.
+- **PORT-251 🟡 — Residuals:** `TDFOL/performance_profiler.py` and the CEC/native residual rule
+  classes (`prover_core_extended_rules.py`, `dcec_integration.py`, `enhanced_grammar_parser.py`,
+  `problem_parser.py`) — port, or reclassify `n/a` with a cited justification (12.26.1 error
+  mode).
+- **PORT-252 🔵 (GATE) — Substance-ratio gate in `make conformance`.** For every must-port
+  module require **either** (a) TS eff-LOC ≥ a threshold of Python eff-LOC, **or** (b) an
+  explicit entry in a new `substance-map.json` classifying it
+  `consolidated | simulated | host-native | data-bloat | compact-faithful` **with a cited
+  reason AND ≥1 behavioral conformance vector**. Hollow ports then **fail CI** unless justified
+  — the substance analogue of §12.25.2's behavioral bar. This resolves each of the 18 THIN
+  (and 41 MISSING) to a defensible state with evidence.
+
+**Standing recommendation.** Treat §12.24/§12.25 completion as *identifier + policy-path*
+certified, and **behavioral/substance completeness as gated on PORT-235–244 (verification) +
+PORT-245–252 (implementation)**. Honest status: *the port is genuine for the propositional/
+policy fragment and ~229 modules; the temporal/higher-order deontic path is delegated to
+`ipfs_datasets_py` at runtime; ~49k eff-LOC of modal/deontic/bridge behavior is simulated or
+thin. Not yet a complete, self-contained TS port.*
