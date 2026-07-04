@@ -1369,6 +1369,26 @@ daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`, `ipfs_datasets_py`,
 `external/ipfs_datasets`, `external/ipfs_accelerate`, dashboard capability
 catalog, Swissknife applications, and packet sibling handoff evidence.
 
+VAI-635 and VAI-636 close the current paired VAIOS-G724/VAIOS-G728
+Hallucinate App launch packet for
+`goal_packet/launch/hallucinate_app/44dceea6bc53`. The dashboard side is
+recorded in
+`data/virtual_ai_os/discovery/2026-07-04-vai-635-mcp-dashboard-launch-gate.md`
+and `hallucinate_app/test/e2e/fixtures/vai-635-mcp-dashboard-launch-gate.json`;
+the daemon side is recorded in
+`data/virtual_ai_os/discovery/2026-07-04-vai-636-daemon-launch-health-gate.md`
+and `hallucinate_app/test/e2e/fixtures/vai-636-daemon-launch-health-gate.json`.
+The launch Playwright validation gate now binds hallucinate_app menus,
+Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
+`tools/list`, `tools/call`, `ipfs_accelerate_py MCP server`,
+`ipfs_datasets_py MCP server`, `ipfs_kit_py MCP server`,
+Playwright MCP dashboard interoperability, Hallucinate App daemon health,
+daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`,
+`ipfs_datasets_py`, `ipfs_accelerate_py`, external surfaces
+`external/ipfs_kit`, `external/ipfs_datasets`, `external/ipfs_accelerate`,
+Swissknife applications, `gate_closed_by_playwright_validation`, and packet
+sibling handoff evidence.
+
 VAI-631 refreshes the VAIOS-G723 Hallucinate MCP dashboard interoperability
 console gate using
 `data/virtual_ai_os/discovery/2026-07-04-vai-631-mcp-dashboard-launch-gate.md`,
@@ -1398,6 +1418,23 @@ receipts, Swissknife consumers, Playwright coverage, supervisor-generated
 follow-up subtasks, daemon health, MCP++ telemetry, `tools/list`,
 `tools/call`, `control_surface receipts`, Swissknife applications, and the
 launch Playwright validation gate visible to the readiness scan.
+
+VAI-637 refreshes the same VAIOS-G723 Hallucinate MCP dashboard
+interoperability console gate using
+`data/virtual_ai_os/discovery/2026-07-04-vai-637-mcp-dashboard-launch-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-637-mcp-dashboard-launch-gate.md`,
+`data/virtual_ai_os/discovery/2026-07-04-vai-637-attempt-1-launch-playwright-validation-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-637-attempt-1-validation.md`,
+and `hallucinate_app/test/e2e/fixtures/vai-637-mcp-dashboard-launch-gate.json`.
+The VAI-637 proof and VAI-637 attempt 1 validation close
+`data/virtual_ai_os/discovery/2026-07-04-vai-637-objective-gap-7ea369464239.md`
+while keeping Hallucinate App menus, Hallucinate App MCP dashboard, dashboard
+capability catalog, backend service catalog, catalog normalization, dashboard
+UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright
+coverage, supervisor-generated follow-up subtasks, daemon health, MCP++
+telemetry, `tools/list`, `tools/call`, `control_surface receipts`, Swissknife
+applications, and the launch Playwright validation gate visible to the
+readiness scan.
 
 ## Desktop-Peer Offload Smoke
 
