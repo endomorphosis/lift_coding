@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T04:31:27.963499+00:00",
+  "generatedAt": "2026-07-04T04:38:38.095152+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1352,
-    "consolidatedSymbols": 150,
+    "directPortedSymbols": 1368,
+    "consolidatedSymbols": 134,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 88.83,
+    "directCoveragePercent": 89.88,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 46,
-    "sub80SymbolCount": 393
+    "sub80ModuleCount": 45,
+    "sub80SymbolCount": 355
   },
   "modules": [
     {
@@ -7624,9 +7624,9 @@
         {
           "pythonSymbol": "BinaryTemporalFormula",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "BinaryTemporalFormula",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "BinaryTemporalFormula"
           ]
@@ -7664,9 +7664,9 @@
         {
           "pythonSymbol": "ExpansionContext",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "ExpansionContext",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "ExpansionContext"
           ]
@@ -7674,9 +7674,9 @@
         {
           "pythonSymbol": "ExpansionResult",
           "kind": "class",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "ExpansionResult",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "ExpansionResult"
           ]
@@ -7864,9 +7864,9 @@
         {
           "pythonSymbol": "create_always",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_always",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_always",
             "createalways",
@@ -7877,9 +7877,9 @@
         {
           "pythonSymbol": "create_conjunction",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_conjunction",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_conjunction",
             "createconjunction",
@@ -7890,9 +7890,9 @@
         {
           "pythonSymbol": "create_disjunction",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_disjunction",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_disjunction",
             "createdisjunction",
@@ -7903,9 +7903,9 @@
         {
           "pythonSymbol": "create_eventually",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_eventually",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_eventually",
             "createeventually",
@@ -7916,9 +7916,9 @@
         {
           "pythonSymbol": "create_existential",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_existential",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_existential",
             "createexistential",
@@ -7929,9 +7929,9 @@
         {
           "pythonSymbol": "create_implication",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_implication",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_implication",
             "createimplication",
@@ -7942,9 +7942,9 @@
         {
           "pythonSymbol": "create_negation",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_negation",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_negation",
             "createnegation",
@@ -7955,9 +7955,9 @@
         {
           "pythonSymbol": "create_next",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_next",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_next",
             "createnext",
@@ -7968,9 +7968,9 @@
         {
           "pythonSymbol": "create_obligation",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_obligation",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_obligation",
             "createobligation",
@@ -7981,9 +7981,9 @@
         {
           "pythonSymbol": "create_permission",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_permission",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_permission",
             "createpermission",
@@ -7994,9 +7994,9 @@
         {
           "pythonSymbol": "create_prohibition",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_prohibition",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_prohibition",
             "createprohibition",
@@ -8007,9 +8007,9 @@
         {
           "pythonSymbol": "create_universal",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_universal",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_universal",
             "createuniversal",
@@ -8020,9 +8020,9 @@
         {
           "pythonSymbol": "create_until",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "create_until",
           "target": "swissknife/src/services/tdfol-core.ts",
-          "reason": "Python helper is represented by the TypeScript TDFOL service surface rather than a one-symbol-per-file port.",
           "variants": [
             "create_until",
             "createuntil",
@@ -8031,7 +8031,7 @@
           ]
         }
       ],
-      "coveragePercent": 57.89,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
