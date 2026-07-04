@@ -2326,6 +2326,89 @@ def test_vai_572_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     assert "VAI-572" in readiness_source
 
 
+def test_vai_573_mcp_dashboard_launch_gate_keeps_vaios_g724_packet_aligned():
+    launch_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-573-mcp-dashboard-launch-gate.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-573-mcp-dashboard-launch-gate.json"
+    )
+    catalog_fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-512-mcp-dashboard-catalog.json"
+    )
+    objective_gap_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-573-objective-gap-3e00ad2a0074.md"
+    )
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    launch_receipt = launch_receipt_path.read_text(encoding="utf-8")
+    objective_gap = objective_gap_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
+    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-573")
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "VAI-573"
+    assert fixture["goal_id"] == "VAIOS-G724"
+    assert fixture["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert fixture["packet_goal_ids"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["source_gap_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-573-objective-gap-3e00ad2a0074.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-573-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/vai-573-mcp-dashboard-launch-gate.json"
+    assert fixture["gate_state"] == "gate_closed_by_playwright_validation"
+    assert fixture["packet_sibling_goal_id"] == "VAIOS-G728"
+    assert fixture["packet_sibling_gate_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-568-daemon-launch-health-gate.md"
+    )
+    assert catalog_gate == fixture
+
+    for term in fixture["required_evidence"]:
+        assert term in objective_gap
+        assert term in launch_receipt
+        assert term in heap_source
+        assert term in readiness_source
+        assert term in playwright_source
+
+    for surface in ["external/ipfs_kit", "external/ipfs_datasets", "external/ipfs_accelerate"]:
+        assert surface in launch_receipt
+        assert surface in heap_source
+
+    assert "VAI-573 proof" in heap_source
+    assert fixture["receipt_fixture"] in swissknife_consumer_source
+    assert "VAI-573" in readiness_source
+
+
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file

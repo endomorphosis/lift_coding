@@ -596,6 +596,24 @@ and Hallucinate multimodal `control_surface` gate. Any dashboard or backend
 validation failure remains supervisor-generated follow-up work for
 `VAIOS-G723`.
 
+VAI-573 records the July 4 Hallucinate App MCP dashboard capability catalog
+launch Playwright validation gate in
+`data/virtual_ai_os/discovery/2026-07-04-vai-573-mcp-dashboard-launch-gate.md`
+with the shared fixture
+`hallucinate_app/test/e2e/fixtures/vai-573-mcp-dashboard-launch-gate.json`.
+The live `getDashboardCapabilityCatalog` entry and
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` expose
+the same `VAI-573` gate for hallucinate_app menus, Hallucinate App MCP
+dashboard, dashboard capability catalog, daemon health, `tools/list`,
+`tools/call`, `ipfs_accelerate_py MCP server`, `ipfs_datasets_py MCP server`,
+`ipfs_kit_py MCP server`, Swissknife applications, Playwright MCP dashboard
+interoperability, and the launch Playwright validation gate. The receipt keeps
+`goal_packet/launch/hallucinate_app/44dceea6bc53`, packet goals `VAIOS-G724`
+and `VAIOS-G728`, and packet sibling daemon evidence from
+`data/virtual_ai_os/discovery/2026-07-04-vai-568-daemon-launch-health-gate.md`
+aligned so any missing catalog, daemon health, external backend handoff, or
+Swissknife consumer proof remains supervisor-fed launch work.
+
 The executable gate is:
 
 ```bash
