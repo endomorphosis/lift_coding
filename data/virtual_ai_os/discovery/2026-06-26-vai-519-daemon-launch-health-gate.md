@@ -30,7 +30,9 @@ records, and the shared `launch Playwright validation gate` evidence term.
 ```json
 {
   "schema": "virtual_ai_os.daemon_launch_validation_gate.v1",
+  "receipt_schema": "launch_readiness_receipt_v1",
   "task_id": "VAI-519",
+  "daemon_gate_task_id": "MGW-535",
   "goal_id": "VAIOS-G728",
   "goal_packet": "goal_packet/launch/hallucinate_app/44dceea6bc53",
   "packet_goals": [
@@ -38,6 +40,14 @@ records, and the shared `launch Playwright validation gate` evidence term.
     "VAIOS-G728"
   ],
   "evidence_term": "launch Playwright validation gate",
+  "launch_key": "hallucinate-daemon-launch-orchestration",
+  "objective_gap_receipt": "data/virtual_ai_os/discovery/2026-06-26-vai-519-objective-gap-b023c8de5b69.md",
+  "validation_commands": [
+    "npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
+    "npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts",
+    "npm --prefix swissknife run test:e2e:meta-glasses",
+    "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
+  ],
   "playwright_specs": [
     "hallucinate_app/test/e2e/daemon-launch-health.spec.ts",
     "hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts",
@@ -48,12 +58,67 @@ records, and the shared `launch Playwright validation gate` evidence term.
     "ipfs_datasets_py",
     "ipfs_accelerate_py"
   ],
-  "validation_commands": [
-    "npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
-    "npm --prefix swissknife run test:e2e:meta-glasses",
-    "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
-  ]
+  "daemon_health_paths": [
+    {
+      "daemon_id": "ipfs-kit",
+      "server_package": "ipfs_kit_py",
+      "endpoint": "http://127.0.0.1:8014",
+      "health_path": "/api/mcp/status",
+      "rpc_path": "/mcp/tools/call",
+      "startup_order": 10
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "server_package": "ipfs_datasets_py",
+      "endpoint": "http://127.0.0.1:3002",
+      "health_path": "/health/ready",
+      "rpc_path": "/datasets/load",
+      "startup_order": 20
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "server_package": "ipfs_accelerate_py",
+      "endpoint": "http://127.0.0.1:3003",
+      "health_path": "/api/mcp/status",
+      "rpc_path": "/mcp",
+      "startup_order": 30
+    }
+  ],
+  "required_evidence": [
+    "Hallucinate App daemon health",
+    "daemon launcher",
+    "MCP server",
+    "MCP dashboard",
+    "ipfs_accelerate_py",
+    "ipfs_datasets_py",
+    "ipfs_kit_py",
+    "dashboard capability catalog",
+    "Swissknife applications",
+    "launch Playwright validation gate"
+  ],
+  "swissknife_handoff": [
+    {
+      "daemon_id": "ipfs-kit",
+      "server_package": "ipfs_kit_py",
+      "swissknife_consumer": "Swissknife IPFS storage, pin dashboard, and backend health surfaces",
+      "mediation_contract_ref": "control_surface_contract:mcp-daemon:ipfs-kit"
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "server_package": "ipfs_datasets_py",
+      "swissknife_consumer": "Swissknife dataset, content, index, provenance, and background task surfaces",
+      "mediation_contract_ref": "control_surface_contract:mcp-daemon:ipfs-datasets"
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "server_package": "ipfs_accelerate_py",
+      "swissknife_consumer": "Swissknife hardware profile, inference job, job status, and telemetry surfaces",
+      "mediation_contract_ref": "control_surface_contract:mcp-daemon:ipfs-accelerate"
+    }
+  ],
+  "failure_rule": "Any daemon launch, health, dashboard catalog, Swissknife handoff, or Playwright validation failure remains supervisor-generated follow-up work for VAIOS-G728."
 }
+
 ```
 
 Validation:

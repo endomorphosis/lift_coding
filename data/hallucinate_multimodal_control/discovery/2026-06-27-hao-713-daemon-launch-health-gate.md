@@ -150,6 +150,7 @@ launch packet while the supervisor-fed HAO backlog has its own receipt.
     "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-725-daemon-launch-health-gate.md"
   ]
 }
+
 ```
 
 ## Evidence
