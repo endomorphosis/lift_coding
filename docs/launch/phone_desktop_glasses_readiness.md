@@ -1369,6 +1369,21 @@ daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`, `ipfs_datasets_py`,
 `external/ipfs_datasets`, `external/ipfs_accelerate`, dashboard capability
 catalog, Swissknife applications, and packet sibling handoff evidence.
 
+VAI-631 refreshes the VAIOS-G723 Hallucinate MCP dashboard interoperability
+console gate using
+`data/virtual_ai_os/discovery/2026-07-04-vai-631-mcp-dashboard-launch-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-631-mcp-dashboard-launch-gate.md`,
+`data/virtual_ai_os/discovery/2026-07-04-vai-631-attempt-1-launch-playwright-validation-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-631-attempt-1-validation.md`,
+and `hallucinate_app/test/e2e/fixtures/vai-631-mcp-dashboard-launch-gate.json`.
+The receipt keeps catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, and the launch
+Playwright validation gate visible to the readiness scan. Any dashboard or
+backend validation failure remains supervisor-generated follow-up work for
+VAIOS-G723.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
