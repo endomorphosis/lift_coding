@@ -1246,6 +1246,23 @@ gate keeps the packet sibling aligned through daemon launcher health, MCP
 server/MCP dashboard receipts, Swissknife handoff coverage, and the
 supervisor-fed objective heap.
 
+VAI-623 and VAI-624 close the next scan of that same launch packet by binding
+`data/virtual_ai_os/discovery/2026-07-04-vai-623-mcp-dashboard-launch-gate.md`,
+`data/virtual_ai_os/discovery/2026-07-04-vai-624-daemon-launch-health-gate.md`,
+`hallucinate_app/test/e2e/fixtures/vai-623-mcp-dashboard-launch-gate.json`,
+and `hallucinate_app/test/e2e/fixtures/vai-624-daemon-launch-health-gate.json`
+to the `launch Playwright validation gate`. The shared dashboard capability
+catalog exposes the `VAI-623` gate for hallucinate_app menus, Hallucinate App
+MCP dashboard, dashboard capability catalog, daemon health, `tools/list`,
+`tools/call`, `ipfs_accelerate_py MCP server`, `ipfs_datasets_py MCP server`,
+`ipfs_kit_py MCP server`, Swissknife applications, Playwright MCP dashboard
+interoperability, `gate_closed_by_playwright_validation`, and external backend
+surfaces `external/ipfs_accelerate`, `external/ipfs_datasets`, and
+`external/ipfs_kit`. The paired VAI-624 daemon gate keeps the VAIOS-G724 and
+VAIOS-G728 packet siblings aligned through daemon launcher health, MCP
+server/MCP dashboard receipts, Swissknife handoff coverage, and the
+supervisor-fed objective heap.
+
 VAI-619 refreshes the VAIOS-G723 Hallucinate MCP dashboard interoperability
 console launch Playwright validation gate in
 `data/virtual_ai_os/discovery/2026-07-04-vai-619-mcp-dashboard-launch-gate.md`,
