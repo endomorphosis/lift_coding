@@ -42,7 +42,8 @@ gate.
     "VAI-593",
     "VAI-596",
     "VAI-599",
-    "VAI-602"
+    "VAI-602",
+    "VAI-605"
   ],
   "backlog_task_id": "HAO-702",
   "backlog_task_ids": [
@@ -82,6 +83,7 @@ gate.
     "data/virtual_ai_os/discovery/2026-07-04-vai-596-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-599-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-602-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-605-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-daemon-launch-health-gate.md"
@@ -108,6 +110,7 @@ gate.
     "data/virtual_ai_os/discovery/2026-07-04-vai-596-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-599-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-602-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-605-objective-gap-b023c8de5b69.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objective-gap-b023c8de5b69.md"
   ],
@@ -203,7 +206,6 @@ gate.
   ],
   "failure_rule": "Any daemon launch, health, dashboard catalog, Swissknife handoff, or Playwright validation failure remains supervisor-generated follow-up work for VAIOS-G728."
 }
-
 ```
 
 ## Evidence
