@@ -756,6 +756,33 @@ MCP server, MCP dashboard, `ipfs_accelerate_py`, `ipfs_datasets_py`,
 launch Playwright validation gate for the same VAIOS-G724/VAIOS-G728 packet as
 the VAI-582 dashboard capability catalog gate.
 
+VAI-585 records the current July 4 Hallucinate App MCP dashboard capability
+catalog launch Playwright validation gate in
+`data/virtual_ai_os/discovery/2026-07-04-vai-585-mcp-dashboard-launch-gate.md`
+with the shared fixture
+`hallucinate_app/test/e2e/fixtures/vai-585-mcp-dashboard-launch-gate.json`.
+The live `getDashboardCapabilityCatalog` entry and
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` expose
+the same `VAI-585` gate for hallucinate_app menus, Hallucinate App MCP
+dashboard, dashboard capability catalog, daemon health, `tools/list`,
+`tools/call`, `ipfs_accelerate_py MCP server`, `ipfs_datasets_py MCP server`,
+`ipfs_kit_py MCP server`, Swissknife applications, Playwright MCP dashboard
+interoperability, and the launch Playwright validation gate. The receipt keeps
+`goal_packet/launch/hallucinate_app/44dceea6bc53`, packet goals `VAIOS-G724`
+and `VAIOS-G728`, and packet sibling daemon evidence from
+`data/virtual_ai_os/discovery/2026-07-04-vai-586-daemon-launch-health-gate.md`
+aligned so any missing catalog, daemon health, external backend handoff, or
+Swissknife consumer proof remains supervisor-fed launch work.
+
+VAI-586 records the paired VAIOS-G728 daemon launch health gate in
+`data/virtual_ai_os/discovery/2026-07-04-vai-586-daemon-launch-health-gate.md`
+with `hallucinate_app/test/e2e/fixtures/vai-586-daemon-launch-health-gate.json`.
+The daemon launch fixture covers Hallucinate App daemon health, daemon launcher,
+MCP server, MCP dashboard, `ipfs_accelerate_py`, `ipfs_datasets_py`,
+`ipfs_kit_py`, dashboard capability catalog, Swissknife applications, and the
+launch Playwright validation gate for the same VAIOS-G724/VAIOS-G728 packet as
+the VAI-585 dashboard capability catalog gate.
+
 VAI-581 records the follow-on July 4 Hallucinate MCP dashboard interoperability
 console launch Playwright validation gate in
 `data/virtual_ai_os/discovery/2026-07-04-vai-581-mcp-dashboard-launch-gate.md`
