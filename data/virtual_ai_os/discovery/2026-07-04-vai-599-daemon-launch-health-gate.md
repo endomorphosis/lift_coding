@@ -62,6 +62,9 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 
 ## Gate State
 
-`gate_open_until_playwright_passes`. Any daemon launch, health, dashboard
-catalog, Swissknife handoff, or Playwright validation failure remains
-supervisor-generated follow-up work for VAIOS-G728 and packet sibling VAIOS-G724.
+`gate_closed_by_playwright_validation`. The VAI-599 fixture is generated from
+`MCPDaemonManager.getDaemonLaunchValidationGates()` and asserted by
+`hallucinate_app/test/e2e/daemon-launch-health.spec.ts`; any future daemon
+launch, health, dashboard catalog, Swissknife handoff, or Playwright validation
+failure remains supervisor-generated follow-up work for VAIOS-G728 and packet
+sibling VAIOS-G724.
