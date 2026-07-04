@@ -2331,7 +2331,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-070 | 🟠 | No `StrategyType`/`ProverStrategy` ABC/`StrategySelector` — the 3 TS strategy analogues aren't plugged into `TDFOLProver` | `strategies/base.py`, `strategy_selector.py:17-256` | `tdfol-prover.ts:270-351` | Port the pluggable strategy framework (`can_handle/prove/get_priority/estimate_cost`) + selector (`select_strategy/select_multiple`). |  <!-- ✅ CLOSED -->
+| PORT-070 | 🟠 | No `StrategyType`/`ProverStrategy` ABC/`StrategySelector` — the 3 TS strategy analogues aren't plugged into `TDFOLProver` | `strategies/base.py`, `strategy_selector.py:17-256` | `tdfol-prover.ts:270-351` | Port the pluggable strategy framework (`can_handle/prove/get_priority/estimate_cost`) + selector (`select_strategy/select_multiple`). |  <!-- ⚠ PARTIAL 2026-07-04: strategy selector exists but remains a simplified subset -->
 | PORT-071 | 🟡 | Modal-system auto-selection (deontic→D, nested temporal→S4, default→K) missing | `strategies/modal_tableaux.py:212-247` | `tdfol-prover.ts` | Port `_select_modal_logic_type()` heuristics. |  <!-- ✅ CLOSED -->
 
 ### 12.8 TDFOL supporting features
@@ -2400,8 +2400,8 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |  <!-- ✅ CLOSED -->
-| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ✅ CLOSED -->
+| PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |  <!-- ✅ CLOSED (re-validated 2026-07-04: native async wrappers implemented in TS) -->
+| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04 after parity review -->
 | PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |  <!-- ✅ CLOSED -->
 | PORT-143 | 🟠 | `ConsistencyResult` missing `temporal_conflicts` (Python returns logical + temporal; TS only logical) | `temporal_deontic_rag_store.py:65-72` | `temporal-deontic-rag-store.ts:94-124` | Add temporal-conflict list + temporal index. |  <!-- ✅ CLOSED -->
 
@@ -2409,7 +2409,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-150 | 🟡 | Neurosymbolic GraphRAG/API: SymbolicAI + real embeddings dropped (structural port only) | `integration/symbolic/neurosymbolic_{graphrag,api}.py` | `neurosymbolic-{graphrag,api}.ts` | Decide embedding backend (WASM model / remote) to restore semantic retrieval. |  <!-- ✅ CLOSED sprint80 -->
+| PORT-150 | 🟡 | Neurosymbolic GraphRAG/API: SymbolicAI + real embeddings dropped (structural port only) | `integration/symbolic/neurosymbolic_{graphrag,api}.py` | `neurosymbolic-{graphrag,api}.ts` | Decide embedding backend (WASM model / remote) to restore semantic retrieval. |  <!-- ⚠ REOPENED 2026-07-04: TS implementation is still heuristic (no real embedding backend) -->
 | PORT-151 | 🟠 | Logic-verifier field names diverge (`is_valid/conclusion/method_used/time_taken` vs `proved/formula/method/timeMs`); `time_taken` seconds vs `timeMs` ms | `logic_verification_types.py:95-124` | `logic-verifier.ts:70-78` | Align field names + units (see §12.16). |  <!-- ✅ CLOSED -->
 
 ### 12.16 Cross-cutting interop contract (fix before ANY Python⇄TS proof/KB/cache interchange)
@@ -2439,10 +2439,10 @@ templates; cognitive/deontic operator **values** (O/P/F/S/R/L/POW/IMM, B/K/I/D).
 
 - **Wave 1 — Foundation:** PORT-001/002/003 and PORT-010–014 are closed.
 - **Wave 2 — Soundness (highest ROI):** PORT-030 (Lean sorry), PORT-031 (Coq Error), PORT-120 (S5 symmetry), PORT-110 (action similarity), PORT-100 (propositional tableaux), PORT-090 (temporal-op collision) are closed.
-- **Wave 3 — Logical completeness:** PORT-020/021/022, PORT-032, PORT-041/042, PORT-060–066, and PORT-070/071 are closed.
+- **Wave 3 — Logical completeness:** PORT-020/021/022, PORT-032, PORT-041/042, and PORT-060–066 are closed; PORT-070/071 remain partial pending full strategy-selector parity.
 - **Wave 4 — Capability parity:** The listed capability-parity items are closed for the current structural TS port; future work is only needed if real embedding/BM25/prover backends replace the deterministic fallbacks.
-- **Wave 5 — Interop contract:** PORT-160/161/162 + PORT-091/096/141/151 are closed.
-- **Wave 6 — Polish:** PORT-040, PORT-080/082/083/084/085, PORT-092–097, PORT-101/102, PORT-132/133, and PORT-150 are closed.
+- **Wave 5 — Interop contract:** PORT-160/161/162 + PORT-091/096/151 are closed; PORT-141 is reopened and in active migration.
+- **Wave 6 — Polish:** PORT-040, PORT-080/082/083/084/085, PORT-092–097, PORT-101/102, and PORT-132/133 are closed; PORT-150 is reopened pending real embeddings.
 
 **Definition of done for "complete port":** every `PORT-###` closed with a conformance test
 in `test/mcp-plus-plus/` asserting TS output matches the Python reference for the same input
@@ -3096,3 +3096,112 @@ cross-check) → for a chosen sub-80% module, either add the 1:1 TS symbol (stat
 or keep `consolidated` with a current cited reason → add a §12.21 differential vector →
 `make conformance` must stay green (0 unmapped, no stale). The 100% accounting is already
 achieved and enforced; this loop only raises the *direct* figure.
+
+---
+
+### §12.25 — Fidelity gap: the completion certificates are necessary but NOT sufficient (2026-07-04)
+
+A skeptical re-audit (prompted by the concern that the port was "reward-hacked by
+wrapping ipfs_datasets_py") shows the §12.22/§12.23/§12.24 certificates measure the
+**wrong thing** for a *complete* port. They prove **identifier presence** (symbol-map)
+and **coarse policy-path agreement** (conformance) — not **behavioral equivalence** of
+the ported theorem-proving logic against the Python source. Several engines are also
+**simulated/stubbed** while still counted as "ported." This section documents the real
+gap and the un-hackable bar for "completely ported."
+
+**This is not a claim that the TS is a runtime wrapper around Python** — the TS
+conformance side genuinely runs TS (`npx tsx …ts-conformance-runner`) and the hub does
+route through TS-ported TDFOL/DCEC provers. The reward-hack is in the **verification and
+completeness apparatus**, which produces green "100%" numbers that do not constrain the
+port's behavior.
+
+#### 12.25.1 Evidence (file:line)
+
+1. **The parity oracle compares only a coarse status string.**
+   `implementation_plan/conformance/compare.mjs:27` — `MATCH iff pyResult.status ===
+   tsResult.status` (values `proved`/`sat`/`unsat`/`error`). No model, proof term,
+   derivation, normal form, or countermodel is compared. Two implementations that both
+   emit `"proved"` for a policy MATCH regardless of *how* or *whether* they actually reason.
+
+2. **All 80 conformance vectors are a single input type.**
+   `implementation_plan/conformance/vectors/core-policy-vectors.json` — 80/80 have
+   `inputType: "policy"`. The 8 "subsystems" (`dcec`, `modal`, `temporal`, `deontic`,
+   `fol`, `legal-norm`, `propositional`, `zkp-statement`) are **cosmetic labels on the
+   same UCAN-style policy object**, all routed through one function.
+   `swissknife/test/conformance/ts-conformance-runner.ts:176-182` dispatches only
+   `policy → checkPolicyConsistency` and `smt2 → proveSMT2`; everything else is
+   `unsupportedVectorResult`. No vector supplies a FOL formula, a Kripke frame, a temporal
+   trace, a DCEC proof obligation, a deontic conflict set, or a ZKP witness. The ~1522
+   ported symbols across CEC/TDFOL/fol/modal/deontic are **never exercised** by conformance.
+
+3. **The compared Python verdict comes from a bespoke heuristic, not the real modules.**
+   `external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py:125-166`
+   — the returned `status` is derived from `exact_permission_conflict()` /
+   `obligation_prohibition_conflict()` (a policy-conflict heuristic, self-labeled
+   `"pythonModuleMode": "module-backed-policy-runner"`). The real engines are invoked in
+   `run_python_prover_checks()` (lines 194-215: `TDFOLProver`, CEC `TheoremProver`, `z3`)
+   but each is wrapped in `try/except → "unavailable"` and stored only as **metadata** that
+   does not affect parity. **z3 is not even installed in this environment**
+   (`ModuleNotFoundError`), yet parity is still reported as 100% — proof that the real
+   provers do not constrain the result.
+
+4. **The oracle is loose even on the policy path.** Vectors accept
+   `expected.acceptableReasons: ["proved","sat"]` — a satisfiable/proved verdict is
+   accepted interchangeably, so a prover that always answers "sat" scores 100% on the
+   positive vectors.
+
+5. **Key engines are simulated/stubbed but counted as ported.**
+   - `swissknife/src/services/zkp-backends.ts:203-219` — `Groth16BackendFallback` returns
+     a **deterministic SHA-256 pseudo-proof** ("simulated — for testing only"); in pure-TS
+     runtime `Groth16Backend` falls back to it. The zkp-statement vectors literally expect
+     `backendMode: "simulated"` — i.e., the fake backend IS the specified behavior.
+   - `swissknife/src/services/flogic-ergoai-wrapper.ts` — `ErgoAIWrapper.query()` always
+     returns `'ErgoAI FFI not bound'`; `ZKPFLogicProver.prove()` in ZKP/HYBRID mode returns
+     `isProved: true` **unconditionally** (no proof is checked).
+   - Repo-wide, **21 logic/prover service files** contain a simulated/stubbed/always-return
+     core (`grep -lE "not bound|pseudo-proof|simulated — for testing|isProved: true"`).
+
+6. **Symbol-audit rewards presence, not behavior.** `symbol-map.json` marks 263 symbols
+   `consolidated` with a **prose reason string** and 20 `n/a`; `symbol_audit.py --check`
+   only verifies that `ported` identifiers still exist as tokens in `swissknife/src`. A
+   symbol can be `consolidated` (or even `ported`) while its behavior is stubbed — nothing
+   ties a symbol to a passing behavioral test.
+
+#### 12.25.2 What "completely ported" MUST mean (the un-hackable bar)
+
+A module is *completely ported* only when **every public behavior** it implements is
+reproduced in TS and **proven equivalent to the real Python module** by a test that:
+- feeds the engine its **native input** (formula / frame / trace / proof obligation /
+  norm set / ZKP witness) — not a policy stand-in;
+- compares the **full structured result** (decision + model/countermodel + proof term or
+  normal form), canonicalized and hashed — not a one-word status;
+- runs the **real `ipfs_datasets_py.logic` module** as the reference (required, not
+  optional; missing engine = hard failure, never silent "unavailable");
+- is **reached** by coverage instrumentation (a "ported" module never executed by any
+  vector does not count);
+- **survives mutation**: injecting a fault into the TS port must make the harness go red.
+
+#### 12.25.3 New tasks (PORT-235 … PORT-244) — behavioral parity, reward-hack-resistant
+
+| ID | Pri | Gap | Acceptance criteria (must resist gaming) |
+|---|---|---|---|
+| PORT-235 | 🔴 | Conformance corpus tests only policy objects; engines untested | Add per-engine vectors with **native input types**: `fol-formula`, `modal-kripke`, `temporal-trace`, `dcec-obligation`, `deontic-conflict`, `legal-norm-ir`, `zkp-witness`. ≥25 vectors/engine incl. negative/adversarial (expected `unsat`/countermodel). Extend `ts-conformance-runner` + `py_reference_runner` dispatch for each type. |
+| PORT-236 | 🔴 | Parity compares only `status` | `compare.mjs` compares a **canonicalized structured result** (decision + sorted model/countermodel + proof/derivation hash). Drop `acceptableReasons` breadth for decided cases: `proved` and `sat` are distinct outcomes and must match exactly. |
+| PORT-237 | 🔴 | Python reference is a heuristic; real modules decorative; z3 absent | `py_reference_runner` returns the verdict **from the real engine** for each native input (not the policy heuristic). `z3` (and each referenced engine) is a **hard dependency**; a missing engine fails the run. Pin + record engine versions. |
+| PORT-238 | 🔴 | ZKP is a simulated hash; `ZKPFLogicProver` always `isProved:true` | Either bind a **real** Groth16/ProveKit backend (host-native track, PORT-209–213) and make `prove()` gate `isProved` on an actually-verified proof, **or** reclassify all ZKP-proving symbols as `n/a: host-native` and **stop reporting zkp parity as passed**. No "simulated" backend may satisfy a parity vector. |
+| PORT-239 | 🟠 | ErgoAI/FLogic wrappers are always-fail stubs | Bind the real ErgoAI/ShadowProver binaries (host-native FFI) with a real spawn path, **or** reclassify as `n/a: host-native`. A stub that always returns failure/`true` may not be counted as a ported prover. |
+| PORT-240 | 🔴 | Mutation test only mutates inputs (both sides still agree) | Add **implementation mutation**: inject a fault into the TS port (e.g., flip a rule) and assert parity **drops** (harness has teeth). Also mutate expected outputs. A mutation that does not reduce parity is a coverage hole to fix. |
+| PORT-241 | 🟠 | `consolidated`/`ported` symbols have no behavioral proof | Every `consolidated` (and every non-trivial `ported`) entry in `symbol-map.json` must cite a **passing test id** that exercises the behavior. `symbol_audit.py --check` fails if the cited test is missing or the symbol has no covering vector. |
+| PORT-242 | 🟠 | No differential fuzz — wrappers/heuristics hide behind fixed vectors | Add a **differential fuzzer** per engine: generate random well-typed inputs, run TS and real Python, require agreement on the structured result. This is the direct disproof of "it's just a wrapper/heuristic." |
+| PORT-243 | 🟠 | "Ported" modules may never execute under conformance | Instrument TS coverage during `conformance-ts`. Any module claimed `ported`/`consolidated` that is **never executed** by a vector fails the gate. |
+| PORT-244 | 🟠 | Certificates conflate presence with fidelity | Re-scope §12.22/§12.23/§12.24 as **identifier + policy-path** certificates. Introduce a separate **behavioral-completeness** certificate gated on PORT-235–243 (structured parity ≥ threshold, mutation-validated, coverage-complete, real-module reference). |
+
+#### 12.25.4 Re-scoped status
+
+- §12.24's "100% accounted / gate green" remains true **at its own level** (identifiers
+  exist; two policy paths agree on a coarse verdict for 80 policies). It must no longer be
+  read as "the logic submodule is completely and faithfully ported."
+- **Completion is now gated on the behavioral bar (12.25.2) and PORT-235–244.** Until
+  then, the honest status is: *module- and identifier-complete; policy-consistency path
+  cross-checked; per-engine behavioral parity UNVERIFIED; ZKP/ErgoAI/FLogic-ZKP simulated
+  or stubbed.*
