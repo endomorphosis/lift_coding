@@ -100,7 +100,7 @@ HAO-725 closes the Hallucinate App daemon launch orchestration objective gap by 
     {
       "daemon_id": "ipfs-kit",
       "server_package": "ipfs_kit_py",
-      "endpoint": "http://127.0.0.1:8004",
+      "endpoint": "http://127.0.0.1:8014",
       "health_path": "/api/mcp/status",
       "rpc_path": "/mcp/tools/call",
       "startup_order": 10
@@ -156,6 +156,7 @@ HAO-725 closes the Hallucinate App daemon launch orchestration objective gap by 
   ],
   "failure_rule": "Any daemon launch, health, dashboard catalog, Swissknife handoff, or Playwright validation failure remains supervisor-generated follow-up work for VAIOS-G728."
 }
+
 ```
 
 ## Evidence

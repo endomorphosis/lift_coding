@@ -32,7 +32,16 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
     "VAI-557",
     "VAI-565",
     "VAI-568",
-    "VAI-574"
+    "VAI-574",
+    "VAI-577",
+    "VAI-580",
+    "VAI-583",
+    "VAI-586",
+    "VAI-589",
+    "VAI-593",
+    "VAI-596",
+    "VAI-599",
+    "VAI-602"
   ],
   "backlog_task_id": "HAO-702",
   "backlog_task_ids": [
@@ -63,6 +72,15 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
     "data/virtual_ai_os/discovery/2026-07-03-vai-565-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-568-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-574-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-577-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-580-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-583-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-586-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-589-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-593-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-596-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-599-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-602-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md"
   ],
@@ -79,6 +97,15 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
     "data/virtual_ai_os/discovery/2026-07-03-vai-565-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-568-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-574-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-577-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-580-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-583-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-586-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-589-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-593-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-596-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-599-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-602-objective-gap-b023c8de5b69.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
   ],
   "supervisor_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
@@ -173,6 +200,7 @@ Prior attempts: VAI-555 (attempts 1 and 2 both filed discovery receipts and a he
   ],
   "failure_rule": "Any daemon launch, health, dashboard catalog, Swissknife handoff, or Playwright validation failure remains supervisor-generated follow-up work for VAIOS-G728."
 }
+
 ```
 
 ## Gate
