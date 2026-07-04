@@ -1211,6 +1211,24 @@ separate from the backend dashboard Playwright gate, while
 `data/hallucinate_multimodal_control/discovery/2026-07-04-vai-616-attempt-1-validation.md`
 keeps the Hallucinate multimodal `control_surface gate` aligned.
 
+VAI-617 and VAI-618 close the VAIOS-G724/VAIOS-G728 Hallucinate App MCP
+dashboard capability catalog packet by binding
+`data/virtual_ai_os/discovery/2026-07-04-vai-617-mcp-dashboard-launch-gate.md`,
+`data/virtual_ai_os/discovery/2026-07-04-vai-618-daemon-launch-health-gate.md`,
+`hallucinate_app/test/e2e/fixtures/vai-617-mcp-dashboard-launch-gate.json`,
+and `hallucinate_app/test/e2e/fixtures/vai-618-daemon-launch-health-gate.json`
+to the same `launch Playwright validation gate`. The shared dashboard
+capability catalog exposes the `VAI-617` gate for hallucinate_app menus,
+Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
+`tools/list`, `tools/call`, `ipfs_accelerate_py MCP server`,
+`ipfs_datasets_py MCP server`, `ipfs_kit_py MCP server`, Swissknife
+applications, Playwright MCP dashboard interoperability, and external backend
+surfaces `external/ipfs_accelerate`, `external/ipfs_datasets`, and
+`external/ipfs_kit`. The paired VAI-618 daemon gate keeps the packet sibling
+aligned through daemon launcher health, MCP server/MCP dashboard receipts,
+Swissknife handoff coverage, and the supervisor-fed objective heap entries in
+`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
