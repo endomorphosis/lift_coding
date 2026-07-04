@@ -109,7 +109,8 @@ sibling VAIOS-G724.
     "VAI-608",
     "VAI-612",
     "VAI-615",
-    "VAI-618"
+    "VAI-618",
+    "VAI-621"
   ],
   "backlog_task_id": "HAO-702",
   "backlog_task_ids": [
@@ -154,6 +155,7 @@ sibling VAIOS-G724.
     "data/virtual_ai_os/discovery/2026-07-04-vai-612-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-615-daemon-launch-health-gate.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-618-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-621-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md"
   ],
@@ -184,6 +186,7 @@ sibling VAIOS-G724.
     "data/virtual_ai_os/discovery/2026-07-04-vai-612-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-615-objective-gap-b023c8de5b69.md",
     "data/virtual_ai_os/discovery/2026-07-04-vai-618-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-621-objective-gap-b023c8de5b69.md",
     "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md"
   ],
   "supervisor_gap_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
