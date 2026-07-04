@@ -1,0 +1,74 @@
+# VAI-629 MCP Dashboard Launch Gate
+
+Date: 2026-07-04
+Task: VAI-629
+Goal id: VAIOS-G724
+Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
+Packet goals: VAIOS-G724, VAIOS-G728
+Evidence term: launch Playwright validation gate
+Source gap: data/virtual_ai_os/discovery/2026-07-04-vai-629-objective-gap-3e00ad2a0074.md
+Gate state: gate_closed_by_playwright_validation
+
+## Gate
+
+VAI-629 closes the Hallucinate App MCP dashboard capability catalog objective
+gap by binding the scanner receipt to the shared dashboard capability catalog,
+the Hallucinate App dashboard Playwright gate, Swissknife catalog consumers,
+the external IPFS backend surfaces, and the VAI-630 packet sibling daemon
+objective gap for VAIOS-G728.
+
+```text
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
+test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses
+test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
+```
+
+## Covered Terms
+
+- hallucinate_app menus
+- Hallucinate App MCP dashboard
+- dashboard capability catalog
+- daemon health
+- tools/list
+- tools/call
+- ipfs_accelerate_py MCP server
+- ipfs_datasets_py MCP server
+- ipfs_kit_py MCP server
+- external/ipfs_accelerate
+- external/ipfs_datasets
+- external/ipfs_kit
+- Swissknife applications
+- Playwright MCP dashboard interoperability
+- launch Playwright validation gate
+- VAIOS-G724
+- VAIOS-G728
+- VAI-629
+- VAI-630
+
+## Evidence
+
+- `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes
+  `VAI-629` in `DASHBOARD_LAUNCH_VALIDATION_GATES` and points its packet
+  sibling at `data/virtual_ai_os/discovery/2026-07-04-vai-630-objective-gap-b023c8de5b69.md`.
+- `hallucinate_app/test/e2e/fixtures/vai-629-mcp-dashboard-launch-gate.json`
+  records the matching `launch_readiness_receipt_v1` fixture for `VAIOS-G724`.
+- `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json` is
+  regenerated from the live Hallucinate App catalog so Hallucinate App and
+  Swissknife consume one dashboard capability catalog.
+- `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` and
+  `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` assert the
+  catalog, dashboard routes, daemon health, `tools/list`, `tools/call`,
+  `ipfs_accelerate_py MCP server`, `ipfs_datasets_py MCP server`,
+  `ipfs_kit_py MCP server`, Swissknife applications, and Playwright MCP
+  dashboard interoperability.
+- `swissknife/scripts/test-mcp-dashboard-consumer.cjs` asserts that Swissknife
+  consumers see the same VAI-629 launch gate, packet sibling `VAIOS-G728`,
+  packet sibling task `VAI-630`, external backend surfaces, and packet sibling
+  daemon objective gap receipt.
+
+## Gate State
+
+`gate_closed_by_playwright_validation`. Any missing VAI-629 launch Playwright
+validation gate, catalog, daemon health, `tools/list`, `tools/call`,
+Swissknife consumer, external backend handoff, or VAI-630 packet sibling
+evidence remains supervisor-fed launch work for VAIOS-G724 and VAIOS-G728.
