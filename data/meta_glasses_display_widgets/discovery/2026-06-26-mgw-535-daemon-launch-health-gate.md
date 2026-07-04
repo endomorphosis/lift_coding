@@ -46,6 +46,9 @@ npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts
 - ipfs_accelerate_py
 - ipfs_datasets_py
 - ipfs_kit_py
+- external/ipfs_accelerate
+- external/ipfs_datasets
+- external/ipfs_kit
 - dashboard capability catalog
 - Swissknife applications
 - launch Playwright validation gate

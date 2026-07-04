@@ -18,9 +18,29 @@ gate.
 
 ```json
 {
-  "schema": "meta_glasses_display_widgets.daemon_launch_health_gate_v1",
+  "schema": "hallucinate_app.daemon_launch_validation_gate.v1",
   "receipt_schema": "launch_readiness_receipt_v1",
   "task_id": "MGW-556",
+  "vai_task_id": "VAI-519",
+  "vai_task_ids": [
+    "VAI-519",
+    "VAI-530",
+    "VAI-536",
+    "VAI-538",
+    "VAI-540",
+    "VAI-549",
+    "VAI-555",
+    "VAI-557",
+    "VAI-565",
+    "VAI-568"
+  ],
+  "backlog_task_id": "HAO-702",
+  "backlog_task_ids": [
+    "HAO-702",
+    "HAO-713",
+    "HAO-719",
+    "HAO-721"
+  ],
   "shared_packet_task_id": "MGW-535",
   "goal_id": "VAIOS-G728",
   "goal_packet": "goal_packet/launch/hallucinate_app/44dceea6bc53",
@@ -31,25 +51,52 @@ gate.
   "evidence_term": "launch Playwright validation gate",
   "launch_key": "hallucinate-daemon-launch-orchestration",
   "gate_state": "gate_open_until_playwright_passes",
-  "missing_evidence_source": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objective-gap-b023c8de5b69.md",
-  "receipt_path": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-daemon-launch-health-gate.md",
+  "discovery_receipts": [
+    "data/virtual_ai_os/discovery/2026-06-26-vai-519-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-06-27-vai-530-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-06-28-vai-536-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-06-28-vai-538-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-06-28-vai-540-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-02-vai-549-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-02-vai-555-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-02-vai-557-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-03-vai-565-daemon-launch-health-gate.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-568-daemon-launch-health-gate.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-26-mgw-535-daemon-launch-health-gate.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-551-daemon-launch-health-gate.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-daemon-launch-health-gate.md"
+  ],
+  "objective_gap_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objective-gap-b023c8de5b69.md",
+  "objective_gap_receipts": [
+    "data/virtual_ai_os/discovery/2026-06-26-vai-519-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-06-27-vai-530-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-06-28-vai-536-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-06-28-vai-538-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-06-28-vai-540-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-02-vai-549-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-02-vai-555-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-02-vai-557-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-03-vai-565-objective-gap-b023c8de5b69.md",
+    "data/virtual_ai_os/discovery/2026-07-04-vai-568-objective-gap-b023c8de5b69.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-27-mgw-551-objective-gap-b023c8de5b69.md",
+    "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objective-gap-b023c8de5b69.md"
+  ],
+  "supervisor_gap_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-objective-gap-b023c8de5b69.md",
+  "supervisor_gap_receipts": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-objective-gap-b023c8de5b69.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-objective-gap-b023c8de5b69.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-objective-gap-b023c8de5b69.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-objective-gap-b023c8de5b69.md"
+  ],
+  "hallucinate_backlog_receipt": "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-daemon-launch-health-gate.md",
+  "hallucinate_backlog_receipts": [
+    "data/hallucinate_multimodal_control/discovery/2026-06-26-hao-702-daemon-launch-health-gate.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-27-hao-713-daemon-launch-health-gate.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-719-daemon-launch-health-gate.md",
+    "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-721-daemon-launch-health-gate.md"
+  ],
+  "launch_gate_receipt": "data/meta_glasses_display_widgets/discovery/2026-06-28-mgw-556-daemon-launch-health-gate.md",
   "receipt_fixture": "hallucinate_app/test/e2e/fixtures/mgw-556-daemon-launch-health-gate.json",
-  "manager_gate_fixture": "hallucinate_app/test/e2e/fixtures/mgw-535-daemon-launch-health-gate.json",
-  "objective_heap": "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
-  "playwright_gate": {
-    "surface": "hallucinate_app",
-    "command": "npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
-    "spec": "hallucinate_app/test/e2e/daemon-launch-health.spec.ts",
-    "asserts": [
-      "Hallucinate App daemon health",
-      "daemon launcher",
-      "MCP server",
-      "MCP dashboard",
-      "dashboard capability catalog",
-      "Swissknife applications",
-      "launch Playwright validation gate"
-    ]
-  },
   "validation_commands": [
     "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q",
     "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts",
@@ -66,6 +113,32 @@ gate.
     "ipfs_datasets_py",
     "ipfs_accelerate_py"
   ],
+  "daemon_health_paths": [
+    {
+      "daemon_id": "ipfs-kit",
+      "server_package": "ipfs_kit_py",
+      "endpoint": "http://127.0.0.1:8014",
+      "health_path": "/api/mcp/status",
+      "rpc_path": "/mcp/tools/call",
+      "startup_order": 10
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "server_package": "ipfs_datasets_py",
+      "endpoint": "http://127.0.0.1:3002",
+      "health_path": "/health/ready",
+      "rpc_path": "/datasets/load",
+      "startup_order": 20
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "server_package": "ipfs_accelerate_py",
+      "endpoint": "http://127.0.0.1:3003",
+      "health_path": "/api/mcp/status",
+      "rpc_path": "/mcp",
+      "startup_order": 30
+    }
+  ],
   "required_evidence": [
     "Hallucinate App daemon health",
     "daemon launcher",
@@ -78,15 +151,26 @@ gate.
     "Swissknife applications",
     "launch Playwright validation gate"
   ],
-  "supervisor_alignment": {
-    "objective_heap_goal": "VAIOS-G728",
-    "packet_sibling_goal": "VAIOS-G724",
-    "backlog_task": "MGW-556",
-    "shared_packet_task": "MGW-535",
-    "keeps_supervisor_fed_backlog_aligned": true
-  },
-  "swissknife_handoff_asserted": true,
-  "launch_packet_command": "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)",
+  "swissknife_handoff": [
+    {
+      "daemon_id": "ipfs-kit",
+      "server_package": "ipfs_kit_py",
+      "swissknife_consumer": "Swissknife IPFS storage, pin dashboard, and backend health surfaces",
+      "mediation_contract_ref": "control_surface_contract:mcp-daemon:ipfs-kit"
+    },
+    {
+      "daemon_id": "ipfs-datasets",
+      "server_package": "ipfs_datasets_py",
+      "swissknife_consumer": "Swissknife dataset, content, index, provenance, and background task surfaces",
+      "mediation_contract_ref": "control_surface_contract:mcp-daemon:ipfs-datasets"
+    },
+    {
+      "daemon_id": "ipfs-accelerate",
+      "server_package": "ipfs_accelerate_py",
+      "swissknife_consumer": "Swissknife hardware profile, inference job, job status, and telemetry surfaces",
+      "mediation_contract_ref": "control_surface_contract:mcp-daemon:ipfs-accelerate"
+    }
+  ],
   "failure_rule": "Any daemon launch, health, dashboard catalog, Swissknife handoff, or Playwright validation failure remains supervisor-generated follow-up work for VAIOS-G728."
 }
 ```

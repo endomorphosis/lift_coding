@@ -152,6 +152,21 @@ VAI_565_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-565-daemon-launch-health-gate.json"
 )
+VAI_568_DAEMON_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-568-daemon-launch-health-gate.md"
+)
+VAI_568_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-568-daemon-launch-health-gate.json"
+)
 HAO_722_OBJECTIVE_GAP_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
 )
@@ -1874,6 +1889,84 @@ def test_vai_565_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
         "ipfs_accelerate_py",
         "ipfs_datasets_py",
         "ipfs_kit_py",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
+        assert term in shared_mgw_receipt_source
+        assert term in g728_text
+
+
+def test_vai_568_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = VAI_568_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    shared_mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    shared_fixture = json.loads(DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    vai_fixture = json.loads(VAI_568_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt == vai_fixture
+    assert receipt["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
+    assert receipt["receipt_schema"] == "launch_readiness_receipt_v1"
+    assert receipt["task_id"] == "VAI-568"
+    assert receipt["shared_packet_task_id"] == "MGW-535"
+    assert receipt["goal_id"] == "VAIOS-G728"
+    assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["objective_gap_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-568-objective-gap-b023c8de5b69.md"
+    )
+    assert receipt["launch_gate_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-568-daemon-launch-health-gate.md"
+    )
+    assert receipt["receipt_fixture"] == (
+        "hallucinate_app/test/e2e/fixtures/vai-568-daemon-launch-health-gate.json"
+    )
+
+    assert "VAI-568" in shared_fixture["vai_task_ids"]
+    assert receipt["launch_gate_receipt"] in shared_fixture["discovery_receipts"]
+    assert receipt["objective_gap_receipt"] in shared_fixture["objective_gap_receipts"]
+    assert shared_fixture["required_backends"] == receipt["required_backends"]
+    assert shared_fixture["daemon_health_paths"] == receipt["daemon_health_paths"]
+    assert shared_fixture["swissknife_handoff"] == receipt["swissknife_handoff"]
+
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+    for term in (
+        "VAI-568",
+        "VAI-567",
+        "MGW-535",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "2026-07-04-vai-568-objective-gap-b023c8de5b69.md",
+        "2026-07-04-vai-568-daemon-launch-health-gate.md",
+        "vai-568-daemon-launch-health-gate.json",
+        "daemon-launch-health.spec.ts",
+    ):
+        assert term in receipt_source
+        assert term in g728_text
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
         "dashboard capability catalog",
         "Swissknife applications",
         "launch Playwright validation gate",
