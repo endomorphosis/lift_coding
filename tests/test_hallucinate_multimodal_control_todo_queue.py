@@ -212,6 +212,21 @@ VAI_580_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-580-daemon-launch-health-gate.json"
 )
+VAI_615_DAEMON_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-615-daemon-launch-health-gate.md"
+)
+VAI_615_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-615-daemon-launch-health-gate.json"
+)
 HAO_722_OBJECTIVE_GAP_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
 )
@@ -2069,6 +2084,18 @@ def test_vai_580_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
         objective_gap_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-580-objective-gap-b023c8de5b69.md",
         launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-580-daemon-launch-health-gate.md",
         receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-580-daemon-launch-health-gate.json",
+    )
+
+
+def test_vai_615_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
+    _assert_vai_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap(
+        task_id="VAI-615",
+        packet_sibling_task_id="VAI-614",
+        receipt_path=VAI_615_DAEMON_LAUNCH_GATE_PATH,
+        fixture_path=VAI_615_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+        objective_gap_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-615-objective-gap-b023c8de5b69.md",
+        launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-615-daemon-launch-health-gate.md",
+        receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-615-daemon-launch-health-gate.json",
     )
 
 
