@@ -2119,6 +2119,105 @@ def test_mgw_547_attempt_11_keeps_dashboard_launch_gate_aligned():
     assert "2026-06-28-mgw-547-attempt-11-launch-playwright-validation-gate.md" in readiness_source
 
 
+def test_vai_566_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
+    launch_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-03-vai-566-mcp-dashboard-launch-gate.md"
+    )
+    hallucinate_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-07-03-vai-566-mcp-dashboard-launch-gate.md"
+    )
+    attempt_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-03-vai-566-attempt-2-launch-playwright-validation-gate.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-566-mcp-dashboard-launch-gate.json"
+    )
+    catalog_fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-512-mcp-dashboard-catalog.json"
+    )
+    objective_gap_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-03-vai-566-objective-gap-7ea369464239.md"
+    )
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    launch_receipt = launch_receipt_path.read_text(encoding="utf-8")
+    hallucinate_receipt = hallucinate_receipt_path.read_text(encoding="utf-8")
+    attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
+    objective_gap = objective_gap_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
+    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-566")
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "VAI-566"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["source_gap_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-03-vai-566-objective-gap-7ea369464239.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-03-vai-566-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-03-vai-566-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/vai-566-mcp-dashboard-launch-gate.json"
+    assert fixture["attempt"] == 2
+    assert fixture["attempt_receipts"] == [
+        "data/virtual_ai_os/discovery/2026-07-03-vai-566-attempt-2-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-03-vai-566-attempt-2-validation.md",
+    ]
+    assert catalog_gate == fixture
+
+    for term in fixture["required_evidence"]:
+        assert term in objective_gap
+        assert term in launch_receipt
+        assert term in hallucinate_receipt
+        assert term in attempt_receipt
+        assert term in heap_source
+        assert term in readiness_source
+        assert term in playwright_source
+
+    assert "VAI-566 proof" in heap_source
+    assert "VAI-566 attempt 2 validation" in heap_source
+    assert fixture["receipt_fixture"] in swissknife_consumer_source
+    assert "VAI-566" in readiness_source
+
+
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
