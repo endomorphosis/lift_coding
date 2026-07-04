@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T04:38:38.095152+00:00",
+  "generatedAt": "2026-07-04T04:46:14.103090+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1368,
-    "consolidatedSymbols": 134,
+    "directPortedSymbols": 1378,
+    "consolidatedSymbols": 124,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 89.88,
+    "directCoveragePercent": 90.54,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 45,
-    "sub80SymbolCount": 355
+    "sub80ModuleCount": 44,
+    "sub80SymbolCount": 316
   },
   "modules": [
     {
@@ -3114,9 +3114,9 @@
         {
           "pythonSymbol": "BinaryResolution",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "BinaryResolution",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "BinaryResolution"
           ]
@@ -3144,9 +3144,9 @@
         {
           "pythonSymbol": "CommonBeliefIntroduction",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "CommonBeliefIntroduction",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "CommonBeliefIntroduction"
           ]
@@ -3164,9 +3164,9 @@
         {
           "pythonSymbol": "CommonKnowledgeDistribution",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "CommonKnowledgeDistribution",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "CommonKnowledgeDistribution"
           ]
@@ -3204,9 +3204,9 @@
         {
           "pythonSymbol": "CommonKnowledgeNegation",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "CommonKnowledgeNegation",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "CommonKnowledgeNegation"
           ]
@@ -3304,9 +3304,9 @@
         {
           "pythonSymbol": "FixedPointInduction",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "FixedPointInduction",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "FixedPointInduction"
           ]
@@ -3344,9 +3344,9 @@
         {
           "pythonSymbol": "IntentionSideEffect",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "IntentionSideEffect",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "IntentionSideEffect"
           ]
@@ -3364,9 +3364,9 @@
         {
           "pythonSymbol": "ModalNecessionIntroduction",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "ModalNecessionIntroduction",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "ModalNecessionIntroduction"
           ]
@@ -3384,9 +3384,9 @@
         {
           "pythonSymbol": "MutualKnowledgeTransitivity",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "MutualKnowledgeTransitivity",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "MutualKnowledgeTransitivity"
           ]
@@ -3414,9 +3414,9 @@
         {
           "pythonSymbol": "PublicAnnouncementReduction",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "PublicAnnouncementReduction",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "PublicAnnouncementReduction"
           ]
@@ -3454,9 +3454,9 @@
         {
           "pythonSymbol": "TemporallyInducedCommonKnowledge",
           "kind": "class",
-          "status": "consolidated",
-          "target": "swissknife/src/services/cec-framework.ts",
-          "reason": "Python helper is represented by the TypeScript CEC service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "TemporallyInducedCommonKnowledge",
+          "target": "swissknife/src/services/cec-prover-core.ts",
           "variants": [
             "TemporallyInducedCommonKnowledge"
           ]
@@ -3482,7 +3482,7 @@
           ]
         }
       ],
-      "coveragePercent": 74.36,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
