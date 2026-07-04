@@ -5569,7 +5569,7 @@ cadence remains parseable and resumable.
 
 ## VAI-567 Close objective gap: Hallucinate App MCP dashboard capability catalog
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P0
 - Track: launch
