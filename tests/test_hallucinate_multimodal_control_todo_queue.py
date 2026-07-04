@@ -302,12 +302,34 @@ VAI_636_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-636-daemon-launch-health-gate.json"
 )
+VAI_639_DAEMON_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-639-daemon-launch-health-gate.md"
+)
+VAI_639_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-639-daemon-launch-health-gate.json"
+)
 VAI_636_ATTEMPT_1_LAUNCH_GATE_PATH = (
     REPO_ROOT
     / "data"
     / "virtual_ai_os"
     / "discovery"
     / "2026-07-04-vai-636-attempt-1-launch-playwright-validation-gate.md"
+)
+VAI_639_ATTEMPT_1_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-639-attempt-1-launch-playwright-validation-gate.md"
 )
 HAO_722_OBJECTIVE_GAP_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
@@ -2263,6 +2285,18 @@ def test_vai_636_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
     )
 
 
+def test_vai_639_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
+    _assert_vai_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap(
+        task_id="VAI-639",
+        packet_sibling_task_id="VAI-638",
+        receipt_path=VAI_639_DAEMON_LAUNCH_GATE_PATH,
+        fixture_path=VAI_639_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+        objective_gap_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-639-objective-gap-b023c8de5b69.md",
+        launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-639-daemon-launch-health-gate.md",
+        receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-639-daemon-launch-health-gate.json",
+    )
+
+
 def test_vai_636_attempt_1_launch_playwright_validation_gate_is_recorded_in_objective_heap():
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
@@ -2291,6 +2325,39 @@ def test_vai_636_attempt_1_launch_playwright_validation_gate_is_recorded_in_obje
         "Swissknife applications",
         "VAI-635",
         "VAI-636",
+    ):
+        assert term in receipt_source
+        assert term in heap_source
+
+
+def test_vai_639_attempt_1_launch_playwright_validation_gate_is_recorded_in_objective_heap():
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = VAI_639_ATTEMPT_1_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+
+    for term in (
+        "VAI-639 attempt 1 validation",
+        "2026-07-04-vai-639-attempt-1-launch-playwright-validation-gate.md",
+        "VAIOS-G728",
+        "VAIOS-G724",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "gate_closed_by_playwright_validation",
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "VAI-638",
+        "VAI-639",
     ):
         assert term in receipt_source
         assert term in heap_source
