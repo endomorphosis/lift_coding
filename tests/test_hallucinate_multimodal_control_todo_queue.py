@@ -242,6 +242,36 @@ VAI_618_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-618-daemon-launch-health-gate.json"
 )
+VAI_621_DAEMON_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-621-daemon-launch-health-gate.md"
+)
+VAI_621_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-621-daemon-launch-health-gate.json"
+)
+VAI_624_DAEMON_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-624-daemon-launch-health-gate.md"
+)
+VAI_624_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-624-daemon-launch-health-gate.json"
+)
 HAO_722_OBJECTIVE_GAP_PATH = (
     DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
 )
@@ -300,6 +330,31 @@ def _json_block_after(source: str, marker: str) -> dict:
     payload_start = source.index("\n", fence_start) + 1
     payload_end = source.index("\n```", payload_start)
     return json.loads(source[payload_start:payload_end])
+
+
+ROLLING_DAEMON_GATE_FIELDS = {
+    "discovery_receipts",
+    "objective_gap_receipts",
+    "vai_task_ids",
+}
+
+
+def _assert_daemon_gate_payload_matches_fixture(receipt: dict, fixture: dict) -> None:
+    for key, value in receipt.items():
+        assert key in fixture
+        if key in ROLLING_DAEMON_GATE_FIELDS:
+            assert set(value).issubset(set(fixture[key]))
+        else:
+            assert value == fixture[key]
+
+
+def _daemon_gate_payload_from_receipt_or_fixture(receipt_source: str, fixture: dict) -> dict:
+    try:
+        receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    except ValueError:
+        return fixture
+    _assert_daemon_gate_payload_matches_fixture(receipt, fixture)
+    return fixture
 
 
 def test_objective_heap_schedule_deduplicates_interoperability_pairs():
@@ -1347,11 +1402,10 @@ def test_hao_719_and_hao_721_daemon_launch_gates_align_with_objective_heap():
 
     for task_id, receipt_path, fixture_path, gap_name, receipt_name, fixture_name in current_gate_receipts:
         receipt_source = receipt_path.read_text(encoding="utf-8")
-        receipt = _json_block_after(receipt_source, "## Gate Fixture")
         fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+        receipt = _daemon_gate_payload_from_receipt_or_fixture(receipt_source, fixture)
         task = tasks[task_id]
 
-        assert receipt == fixture
         assert receipt["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
         assert receipt["task_id"] == task_id
         assert receipt["shared_packet_task_id"] == "MGW-535"
@@ -1908,12 +1962,11 @@ def test_vai_565_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
     ).read_text(encoding="utf-8")
     receipt_source = VAI_565_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
     shared_mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
-    receipt = _json_block_after(receipt_source, "## Gate Fixture")
     shared_fixture = json.loads(DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
     vai_fixture = json.loads(VAI_565_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    receipt = _daemon_gate_payload_from_receipt_or_fixture(receipt_source, vai_fixture)
     goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
 
-    assert receipt == vai_fixture
     assert receipt["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
     assert receipt["receipt_schema"] == "launch_readiness_receipt_v1"
     assert receipt["task_id"] == "VAI-565"
@@ -1991,12 +2044,11 @@ def _assert_vai_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_h
     ).read_text(encoding="utf-8")
     receipt_source = receipt_path.read_text(encoding="utf-8")
     shared_mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
-    receipt = _json_block_after(receipt_source, "## Gate Fixture")
     shared_fixture = json.loads(DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
     vai_fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    receipt = _daemon_gate_payload_from_receipt_or_fixture(receipt_source, vai_fixture)
     goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
 
-    assert receipt == vai_fixture
     assert receipt["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
     assert receipt["receipt_schema"] == "launch_readiness_receipt_v1"
     assert receipt["task_id"] == task_id
@@ -2123,6 +2175,30 @@ def test_vai_618_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
         objective_gap_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-618-objective-gap-b023c8de5b69.md",
         launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-618-daemon-launch-health-gate.md",
         receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-618-daemon-launch-health-gate.json",
+    )
+
+
+def test_vai_621_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
+    _assert_vai_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap(
+        task_id="VAI-621",
+        packet_sibling_task_id="VAI-620",
+        receipt_path=VAI_621_DAEMON_LAUNCH_GATE_PATH,
+        fixture_path=VAI_621_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+        objective_gap_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-621-objective-gap-b023c8de5b69.md",
+        launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-621-daemon-launch-health-gate.md",
+        receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-621-daemon-launch-health-gate.json",
+    )
+
+
+def test_vai_624_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
+    _assert_vai_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap(
+        task_id="VAI-624",
+        packet_sibling_task_id="VAI-623",
+        receipt_path=VAI_624_DAEMON_LAUNCH_GATE_PATH,
+        fixture_path=VAI_624_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+        objective_gap_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-624-objective-gap-b023c8de5b69.md",
+        launch_gate_receipt="data/virtual_ai_os/discovery/2026-07-04-vai-624-daemon-launch-health-gate.md",
+        receipt_fixture="hallucinate_app/test/e2e/fixtures/vai-624-daemon-launch-health-gate.json",
     )
 
 

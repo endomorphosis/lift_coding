@@ -16,6 +16,8 @@ dashboard capability catalog launch gate. The receipt binds daemon health,
 daemon launcher, MCP server, MCP dashboard, Swissknife handoff records,
 external IPFS backend surfaces, and the VAI-623 packet sibling to the daemon
 launch Playwright validation gate used by VAIOS-G724 and VAIOS-G728.
+The structured receipt uses the shared MGW-535 daemon launch packet gate as the
+cross-surface orchestration anchor.
 
 ```text
 PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q
@@ -54,6 +56,8 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
   records the generated VAI-owned daemon launch receipt, backend package list,
   Playwright specs, health/RPC paths, and Swissknife handoff records generated
   from `MCPDaemonManager`.
+- `data/virtual_ai_os/discovery/2026-07-04-vai-624-daemon-launch-health-gate.md`
+  is the VAI-owned discovery receipt for that structured fixture.
 - `hallucinate_app/test/e2e/fixtures/vai-623-mcp-dashboard-launch-gate.json`
   preserves `packet_sibling_task_id: VAI-624`,
   `packet_sibling_goal_id: VAIOS-G728`, and this receipt path.
@@ -63,6 +67,9 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
   `swissknife/test/e2e/meta-glasses-virtual-os.spec.ts` assert that the launch
   Playwright validation gate covers daemon health, backend handoff records, and
   the shared VAIOS-G724/VAIOS-G728 packet alignment.
+- `tests/test_hallucinate_multimodal_control_todo_queue.py` asserts the VAI-624
+  receipt, fixture, objective heap proof, and VAI-623 packet sibling stay
+  aligned for supervisor-fed backlog scans outside the Playwright runner.
 
 ## Gate State
 
