@@ -1332,6 +1332,29 @@ The attempt keeps the no-display
 backend dashboard Playwright gate and keeps the Hallucinate multimodal
 `control_surface gate` aligned with `VAIOS-G723`.
 
+VAI-628 closes the next VAIOS-G723 Hallucinate MCP dashboard interoperability
+console launch Playwright validation gate with
+`data/virtual_ai_os/discovery/2026-07-04-vai-628-mcp-dashboard-launch-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-628-mcp-dashboard-launch-gate.md`,
+and `hallucinate_app/test/e2e/fixtures/vai-628-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog exposes VAI-628 for Hallucinate App
+menus, Hallucinate App MCP dashboard, dashboard capability catalog, backend
+service catalog, catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, Swissknife
+applications, and the launch Playwright validation gate for `ipfs_kit_py`,
+`ipfs_datasets_py`, and `ipfs_accelerate_py`.
+
+VAI-628 attempt 1 binds that gate to
+`data/virtual_ai_os/discovery/2026-07-04-vai-628-attempt-1-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-04-vai-628-attempt-1-validation.md`.
+The attempt keeps the no-display
+`missing_xvfb_for_electron_playwright` runner contract separate from the
+backend dashboard Playwright gate and keeps the Hallucinate multimodal
+`control_surface gate` aligned with `VAIOS-G723`.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
