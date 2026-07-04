@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2026-07-03",
-  "generatedAt": "2026-07-04T03:48:52.963670+00:00",
+  "generatedAt": "2026-07-04T04:00:15.759815+00:00",
   "pythonRoot": "external/ipfs_datasets/ipfs_datasets_py/logic",
   "typescriptRoot": "swissknife/src/services",
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1299,
-    "consolidatedSymbols": 203,
+    "directPortedSymbols": 1305,
+    "consolidatedSymbols": 197,
     "naSymbols": 20,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 85.35,
+    "directCoveragePercent": 85.74,
     "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 54,
-    "sub80SymbolCount": 487
+    "sub80ModuleCount": 52,
+    "sub80SymbolCount": 476
   },
   "modules": [
     {
@@ -9910,9 +9910,9 @@
         {
           "pythonSymbol": "build_prover_syntax_records_from_ir",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/deontic-exports.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "build_prover_syntax_records_from_ir",
+          "target": "swissknife/src/services/deontic-formula-builder.ts",
           "variants": [
             "build_prover_syntax_records_from_ir",
             "buildproversyntaxrecordsfromir",
@@ -10259,7 +10259,7 @@
           ]
         }
       ],
-      "coveragePercent": 32.56,
+      "coveragePercent": 34.88,
       "accountedPercent": 100.0
     },
     {
@@ -10284,9 +10284,9 @@
         {
           "pythonSymbol": "build_deontic_formula_record_from_ir",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_deontic_formula_record_from_ir",
           "target": "swissknife/src/services/deontic-formula-builder.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_deontic_formula_record_from_ir",
             "builddeonticformularecordfromir",
@@ -10297,9 +10297,9 @@
         {
           "pythonSymbol": "build_deontic_formula_records_from_irs",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_deontic_formula_records_from_irs",
           "target": "swissknife/src/services/deontic-formula-builder.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_deontic_formula_records_from_irs",
             "builddeonticformularecordsfromirs",
@@ -10310,9 +10310,9 @@
         {
           "pythonSymbol": "build_prover_syntax_records_from_ir",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "build_prover_syntax_records_from_ir",
           "target": "swissknife/src/services/deontic-formula-builder.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "build_prover_syntax_records_from_ir",
             "buildproversyntaxrecordsfromir",
@@ -10349,9 +10349,9 @@
         {
           "pythonSymbol": "parser_element_to_formula_record",
           "kind": "function",
-          "status": "consolidated",
+          "status": "ported",
+          "tsSymbol": "parser_element_to_formula_record",
           "target": "swissknife/src/services/deontic-formula-builder.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
           "variants": [
             "parser_element_to_formula_record",
             "parserelementtoformularecord",
@@ -10360,7 +10360,7 @@
           ]
         }
       ],
-      "coveragePercent": 42.86,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
@@ -10818,9 +10818,9 @@
         {
           "pythonSymbol": "build_prover_syntax_records_from_ir",
           "kind": "function",
-          "status": "consolidated",
-          "target": "swissknife/src/services/deontic/prover-syntax-builder.ts",
-          "reason": "Python helper is represented by the TypeScript deontic service surface rather than a one-symbol-per-file port.",
+          "status": "ported",
+          "tsSymbol": "build_prover_syntax_records_from_ir",
+          "target": "swissknife/src/services/deontic-formula-builder.ts",
           "variants": [
             "build_prover_syntax_records_from_ir",
             "buildproversyntaxrecordsfromir",
@@ -10842,7 +10842,7 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
+      "coveragePercent": 100.0,
       "accountedPercent": 100.0
     },
     {
