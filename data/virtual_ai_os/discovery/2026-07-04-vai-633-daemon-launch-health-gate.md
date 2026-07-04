@@ -5,15 +5,18 @@ Task: VAI-633
 Goal id: VAIOS-G728
 Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
 Packet goals: VAIOS-G724, VAIOS-G728
+Shared packet task: MGW-535
 Evidence term: launch Playwright validation gate
 Source gap: data/virtual_ai_os/discovery/2026-07-04-vai-633-objective-gap-b023c8de5b69.md
+Launch gate receipt: data/virtual_ai_os/discovery/2026-07-04-vai-633-daemon-launch-health-gate.md
+Receipt fixture: hallucinate_app/test/e2e/fixtures/vai-633-daemon-launch-health-gate.json
 Gate state: gate_closed_by_playwright_validation
 
 ## Gate
 
-VAI-633 closes the VAIOS-G728 daemon launch orchestration gap and is the
-packet sibling for the VAI-632 Hallucinate App MCP dashboard capability catalog
-gate. The structured receipt in
+VAI-633 closes the VAIOS-G728 daemon launch orchestration gap, reuses the
+MGW-535 shared daemon launch gate, and is the packet sibling for the VAI-632
+Hallucinate App MCP dashboard capability catalog gate. The structured receipt in
 `hallucinate_app/test/e2e/fixtures/vai-633-daemon-launch-health-gate.json`
 binds Hallucinate App daemon health, daemon launcher, MCP server, MCP
 dashboard, Swissknife handoff records, external IPFS backend surfaces, and the
