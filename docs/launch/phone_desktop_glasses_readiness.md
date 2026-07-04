@@ -1389,6 +1389,26 @@ daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`,
 Swissknife applications, `gate_closed_by_playwright_validation`, and packet
 sibling handoff evidence.
 
+VAI-642 and VAI-643 close the paired VAIOS-G724/VAIOS-G728 Hallucinate App
+launch packet for
+`goal_packet/launch/hallucinate_app/44dceea6bc53`. The dashboard side is
+recorded in
+`data/virtual_ai_os/discovery/2026-07-04-vai-642-mcp-dashboard-launch-gate.md`
+and `hallucinate_app/test/e2e/fixtures/vai-642-mcp-dashboard-launch-gate.json`;
+the daemon side is recorded in
+`data/virtual_ai_os/discovery/2026-07-04-vai-643-daemon-launch-health-gate.md`
+and `hallucinate_app/test/e2e/fixtures/vai-643-daemon-launch-health-gate.json`.
+The attempt receipts
+`data/virtual_ai_os/discovery/2026-07-04-vai-642-attempt-1-launch-playwright-validation-gate.md`
+and
+`data/virtual_ai_os/discovery/2026-07-04-vai-643-attempt-1-launch-playwright-validation-gate.md`
+keep the launch Playwright validation gate bound to Hallucinate App daemon
+health, daemon launcher, MCP server, MCP dashboard, `tools/list`, `tools/call`,
+`ipfs_kit_py`, `ipfs_datasets_py`, `ipfs_accelerate_py`, external surfaces
+`external/ipfs_kit`, `external/ipfs_datasets`, `external/ipfs_accelerate`,
+dashboard capability catalog, Swissknife applications,
+`gate_closed_by_playwright_validation`, and packet sibling handoff evidence.
+
 VAI-631 refreshes the VAIOS-G723 Hallucinate MCP dashboard interoperability
 console gate using
 `data/virtual_ai_os/discovery/2026-07-04-vai-631-mcp-dashboard-launch-gate.md`,

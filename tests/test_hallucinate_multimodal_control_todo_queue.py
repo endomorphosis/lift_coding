@@ -317,6 +317,28 @@ VAI_639_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "fixtures"
     / "vai-639-daemon-launch-health-gate.json"
 )
+VAI_643_DAEMON_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-643-daemon-launch-health-gate.md"
+)
+VAI_643_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-643-daemon-launch-health-gate.json"
+)
+VAI_643_ATTEMPT_1_LAUNCH_GATE_PATH = (
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-07-04-vai-643-attempt-1-launch-playwright-validation-gate.md"
+)
 VAI_636_ATTEMPT_1_LAUNCH_GATE_PATH = (
     REPO_ROOT
     / "data"
@@ -2369,6 +2391,91 @@ def test_vai_639_attempt_1_launch_playwright_validation_gate_is_recorded_in_obje
         "test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts",
     ):
         assert command in receipt_source
+
+
+def test_vai_643_daemon_launch_gate_aligns_packet_receipts_with_objective_heap():
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = VAI_643_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    attempt_source = VAI_643_ATTEMPT_1_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    fixture = json.loads(VAI_643_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+
+    assert fixture["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
+    assert fixture["task_id"] == "VAI-643"
+    assert fixture["shared_packet_task_id"] == "MGW-535"
+    assert fixture["goal_id"] == "VAIOS-G728"
+    assert fixture["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert fixture["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["objective_gap_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-643-objective-gap-b023c8de5b69.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-643-daemon-launch-health-gate.md"
+    )
+    assert fixture["receipt_fixture"] == (
+        "hallucinate_app/test/e2e/fixtures/vai-643-daemon-launch-health-gate.json"
+    )
+    assert fixture["gate_state"] == "gate_closed_by_playwright_validation"
+    assert fixture["required_backends"] == ["ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"]
+    assert {entry["daemon_id"] for entry in fixture["daemon_health_paths"]} == {
+        "ipfs-kit",
+        "ipfs-datasets",
+        "ipfs-accelerate",
+    }
+    assert all("Swissknife" in entry["swissknife_consumer"] for entry in fixture["swissknife_handoff"])
+
+    for term in (
+        "VAI-642",
+        "VAI-643",
+        "VAI-642 proof",
+        "VAI-642 attempt 1 validation",
+        "VAI-643 daemon gate proof",
+        "VAI-643 attempt 1 validation",
+        "VAIOS-G728",
+        "VAIOS-G724",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "gate_closed_by_playwright_validation",
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "dashboard capability catalog",
+        "Swissknife applications",
+    ):
+        assert term in heap_source
+
+    for term in (
+        "VAI-642",
+        "VAI-643",
+        "VAIOS-G728",
+        "VAIOS-G724",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "gate_closed_by_playwright_validation",
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "dashboard capability catalog",
+        "Swissknife applications",
+    ):
+        assert term in receipt_source
+        assert term in attempt_source
 
 
 def test_vai_578_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate():
