@@ -2434,6 +2434,114 @@ def test_vai_575_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     assert "VAI-575" in readiness_source
 
 
+def test_vai_578_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
+    launch_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    )
+    hallucinate_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    )
+    attempt_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-578-attempt-1-launch-playwright-validation-gate.md"
+    )
+    hallucinate_attempt_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-07-04-vai-578-attempt-1-validation.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-578-mcp-dashboard-launch-gate.json"
+    )
+    catalog_fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-512-mcp-dashboard-catalog.json"
+    )
+    objective_gap_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-578-objective-gap-7ea369464239.md"
+    )
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    launch_receipt = launch_receipt_path.read_text(encoding="utf-8")
+    hallucinate_receipt = hallucinate_receipt_path.read_text(encoding="utf-8")
+    attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
+    hallucinate_attempt_receipt = hallucinate_attempt_receipt_path.read_text(encoding="utf-8")
+    objective_gap = objective_gap_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
+    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-578")
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "VAI-578"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["source_gap_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-578-objective-gap-7ea369464239.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/virtual_ai_os/discovery/2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/vai-578-mcp-dashboard-launch-gate.json"
+    assert fixture["attempt"] == 1
+    assert fixture["attempt_receipts"] == [
+        "data/virtual_ai_os/discovery/2026-07-04-vai-578-attempt-1-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-04-vai-578-attempt-1-validation.md",
+    ]
+    assert catalog_gate == fixture
+
+    for term in fixture["required_evidence"]:
+        assert term in objective_gap
+        assert term in launch_receipt
+        assert term in hallucinate_receipt
+        assert term in attempt_receipt
+        assert term in hallucinate_attempt_receipt
+        assert term in heap_source
+        assert term in readiness_source
+        assert term in playwright_source
+
+    assert "VAI-578 proof" in heap_source
+    assert "VAI-578 attempt 1 validation" in heap_source
+    assert fixture["receipt_fixture"] in swissknife_consumer_source
+    assert "VAI-578" in readiness_source
+
+
 def test_vai_573_mcp_dashboard_launch_gate_keeps_vaios_g724_packet_aligned():
     launch_receipt_path = (
         REPO_ROOT

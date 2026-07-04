@@ -2045,6 +2045,68 @@ def test_vai_577_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_
     )
 
 
+def test_vai_578_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate():
+    receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    attempt_receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-578-attempt-1-validation.md"
+    virtual_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-578-mcp-dashboard-launch-gate.json"
+    )
+    catalog_fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-512-mcp-dashboard-catalog.json"
+    )
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    receipt = receipt_path.read_text(encoding="utf-8")
+    attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
+    virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
+    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-578")
+
+    assert fixture["task_id"] == "VAI-578"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-04-vai-578-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["attempt_receipts"][1] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-04-vai-578-attempt-1-validation.md"
+    )
+    assert catalog_gate == fixture
+
+    for term in fixture["required_evidence"]:
+        assert term in receipt
+        assert term in attempt_receipt
+        assert term in virtual_receipt
+        assert term in heap_source
+        assert term in readiness_source
+
+    assert "control_surface gate" in attempt_receipt
+    assert "VAIOS-G723-C6 Supervisor-generated follow-up subtasks" in receipt
+    assert "VAI-578 proof" in heap_source
+    assert "VAI-578 attempt 1 validation" in heap_source
+
+
 def test_vaios_g723_validation_failure_can_generate_follow_up_task_and_subgoal(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import (
