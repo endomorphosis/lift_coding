@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "modal-temporal-operator-core-001",
+      "description": "Core operator symbol mapping, temporal prefix mapping, context phrase extraction, month cues, and edition-year handling.",
+      "symbols": ["O|", "[a]", "□", "◇", "O", "must comply", "K-agent", ""],
+      "operatorPairs": [
+        ["O|", "◇"],
+        ["[a]", "□"],
+        ["must comply", "Temporal+Eventually"],
+        ["", "□"]
+      ],
+      "prefixKeys": ["when", "only_after", "no_later_than", "not_later_than", "within", "upon", "unknown", ""],
+      "contextTexts": [
+        "On and after January 1, 2024, the effective date applies.",
+        "No later than fiscal year 2025, agencies shall report promptly.",
+        "Within 30 days after calendar years 2020 and 2021 editions.",
+        "The rule is timely for October deadlines.",
+        "The 2024 edition controls."
+      ],
+      "expectedCodec": {
+        "operatorFeatureKeys": ["o_pipe", "a_box", "box", "diamond", "o", "must_comply", "k_agent", ""],
+        "operatorPairFeatureKeys": ["o_pipe_to_diamond", "a_box_to_box", "must_comply_to_temporal_eventually", ""],
+        "temporalClausePrefixRelations": ["when", "after", "deadline", "deadline", "", "after", "", ""],
+        "temporalTransitionContextCues": [
+          ["on_and_after", "effective_date", "january", "effective", "date", "year"],
+          ["no_later_than", "fiscal_year", "fiscal", "year", "promptly"],
+          ["calendar_year", "day", "calendar", "year", "edition"],
+          ["timely", "october", "deadline"],
+          ["edition", "year", "edition_year"]
+        ]
+      },
+      "expectedDecompiler": {
+        "operatorFeatureKeys": ["o_pipe", "a_box", "box", "diamond", "o", "must_comply", "k_agent", ""],
+        "operatorPairFeatureKeys": ["o_pipe_to_diamond", "a_box_to_box", "must_comply_to_temporal_eventually", ""],
+        "temporalClausePrefixRelations": ["when", "after", "deadline", "deadline", "deadline", "after", "", ""],
+        "temporalTransitionContextCues": [
+          ["on_and_after", "effective_date", "effective", "date", "year"],
+          ["no_later_than", "fiscal_year", "fiscal", "year", "promptly"],
+          ["calendar_year", "day", "calendar", "year", "edition"],
+          ["timely", "deadline"],
+          ["edition", "year", "edition_year"]
+        ]
+      }
+    },
+    {
+      "id": "modal-temporal-operator-underscore-and-case-001",
+      "description": "Underscore normalization, uppercase prefix keys, phrase-order precedence, punctuation-safe operator tokenization, and codec-only month cues.",
+      "symbols": ["O|", "A.B", "◇", "unless?", "Temporal Eventually"],
+      "operatorPairs": [
+        ["A.B", "unless?"],
+        ["Temporal Eventually", "O|"]
+      ],
+      "prefixKeys": ["by", "before", "until", "after", "WITHIN", "Only_After"],
+      "contextTexts": [
+        "Effective_dates are promptly updated_not_later_than 2019 edition.",
+        "On or after the calendar month period, action is timely.",
+        "May reports are due by September 2026.",
+        "editions in 2020 remain effective."
+      ],
+      "expectedCodec": {
+        "operatorFeatureKeys": ["o_pipe", "a_b", "diamond", "unless", "temporal_eventually"],
+        "operatorPairFeatureKeys": ["a_b_to_unless", "temporal_eventually_to_o_pipe"],
+        "temporalClausePrefixRelations": ["deadline", "before", "until", "after", "", "after"],
+        "temporalTransitionContextCues": [
+          ["not_later_than", "effective_date", "effective", "date", "promptly", "edition", "year", "edition_year"],
+          ["on_or_after", "calendar", "month", "period", "timely"],
+          ["may", "september", "year"],
+          ["edition", "effective", "year"]
+        ]
+      },
+      "expectedDecompiler": {
+        "operatorFeatureKeys": ["o_pipe", "a_b", "diamond", "unless", "temporal_eventually"],
+        "operatorPairFeatureKeys": ["a_b_to_unless", "temporal_eventually_to_o_pipe"],
+        "temporalClausePrefixRelations": ["deadline", "before", "until", "after", "deadline", "after"],
+        "temporalTransitionContextCues": [
+          ["not_later_than", "effective_date", "effective", "date", "promptly", "edition", "year", "edition_year"],
+          ["on_or_after", "calendar", "month", "period", "timely"],
+          ["year"],
+          ["edition", "effective", "year"]
+        ]
+      }
+    },
+    {
+      "id": "modal-temporal-operator-empty-and-plural-001",
+      "description": "Empty paths, unmapped punctuation-only operators, plural normalization, duplicate year suppression, and source-specific month tables.",
+      "symbols": ["", "[]", "P&R", "□"],
+      "operatorPairs": [
+        ["[]", "□"],
+        ["P&R", "[a]"],
+        ["□", ""]
+      ],
+      "prefixKeys": ["", "upon", "calendar_year", "not_later_than"],
+      "contextTexts": [
+        "",
+        "No later than the fiscal years 2021 and 2022 editions.",
+        "January deadlines and February dates.",
+        "The 2024 edition controls."
+      ],
+      "expectedCodec": {
+        "operatorFeatureKeys": ["", "", "p_r", "box"],
+        "operatorPairFeatureKeys": ["", "p_r_to_a_box", ""],
+        "temporalClausePrefixRelations": ["", "after", "", "deadline"],
+        "temporalTransitionContextCues": [
+          [],
+          ["no_later_than", "fiscal_year", "fiscal", "year", "edition"],
+          ["january", "deadline", "february", "date"],
+          ["edition", "year", "edition_year"]
+        ]
+      },
+      "expectedDecompiler": {
+        "operatorFeatureKeys": ["", "", "p_r", "box"],
+        "operatorPairFeatureKeys": ["", "p_r_to_a_box", ""],
+        "temporalClausePrefixRelations": ["", "after", "", "deadline"],
+        "temporalTransitionContextCues": [
+          [],
+          ["no_later_than", "fiscal_year", "fiscal", "year", "edition"],
+          ["deadline", "date"],
+          ["edition", "year", "edition_year"]
+        ]
+      }
+    }
+  ]
+}

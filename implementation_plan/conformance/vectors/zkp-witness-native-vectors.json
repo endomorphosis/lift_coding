@@ -8,19 +8,28 @@
       "inputType": "zkpWitness",
       "input": {
         "zkpWitness": {
-          "claims": ["ownership"],
+          "claims": [
+            "ownership"
+          ],
           "witnessState": "invalid"
         }
       },
       "expected": {
         "status": "refuted",
-        "acceptableReasons": ["refuted"],
+        "acceptableReasons": [
+          "refuted"
+        ],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp", "witness", "invalid"]
+      "tags": [
+        "zkp",
+        "witness",
+        "invalid"
+      ]
     },
     {
       "id": "zkp-witness-proved-001",
@@ -29,19 +38,28 @@
       "inputType": "zkpWitness",
       "input": {
         "zkpWitness": {
-          "claims": ["membership"],
+          "claims": [
+            "membership"
+          ],
           "witnessState": "valid"
         }
       },
       "expected": {
         "status": "proved",
-        "acceptableReasons": ["proved"],
+        "acceptableReasons": [
+          "proved"
+        ],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp", "witness", "valid"]
+      "tags": [
+        "zkp",
+        "witness",
+        "valid"
+      ]
     },
     {
       "id": "zkp-witness-proved-002",
@@ -50,18 +68,27 @@
       "inputType": "zkpWitness",
       "input": {
         "zkpWitness": {
-          "claims": ["nullifier"]
+          "claims": [
+            "nullifier"
+          ]
         }
       },
       "expected": {
         "status": "proved",
-        "acceptableReasons": ["proved"],
+        "acceptableReasons": [
+          "proved"
+        ],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp", "witness", "claims"]
+      "tags": [
+        "zkp",
+        "witness",
+        "claims"
+      ]
     },
     {
       "id": "zkp-witness-unknown-001",
@@ -75,13 +102,20 @@
       },
       "expected": {
         "status": "unknown",
-        "acceptableReasons": ["unknown"],
+        "acceptableReasons": [
+          "unknown"
+        ],
         "strictStructuredParity": true,
         "decided": false,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp", "witness", "unknown"]
+      "tags": [
+        "zkp",
+        "witness",
+        "unknown"
+      ]
     }
   ]
 }

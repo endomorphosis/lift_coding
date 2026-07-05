@@ -6,15 +6,15 @@
   "summary": {
     "moduleCount": 256,
     "symbolCount": 1522,
-    "directPortedSymbols": 1396,
+    "directPortedSymbols": 1369,
     "consolidatedSymbols": 106,
-    "naSymbols": 20,
+    "naSymbols": 47,
     "accountedSymbols": 1522,
     "unmappedSymbols": 0,
-    "directCoveragePercent": 91.72,
-    "accountedCoveragePercent": 100.0,
-    "sub80ModuleCount": 41,
-    "sub80SymbolCount": 280
+    "directCoveragePercent": 89.95,
+    "accountedCoveragePercent": 100,
+    "sub80ModuleCount": 47,
+    "sub80SymbolCount": 301
   },
   "modules": [
     {
@@ -64,8 +64,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/dcec_wrapper.py",
@@ -94,8 +94,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/eng_dcec_wrapper.py",
@@ -124,8 +124,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/advanced_inference.py",
@@ -309,8 +309,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/ambiguity_resolver.py",
@@ -369,8 +369,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/cec_proof_cache.py",
@@ -412,8 +412,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/cec_zkp_integration.py",
@@ -465,8 +465,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/context_manager.py",
@@ -535,8 +535,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_cleaning.py",
@@ -637,7 +637,7 @@
         }
       ],
       "coveragePercent": 71.43,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_core.py",
@@ -886,8 +886,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_english_grammar.py",
@@ -919,8 +919,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_integration.py",
@@ -991,8 +991,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_namespace.py",
@@ -1021,8 +1021,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_parsing.py",
@@ -1106,8 +1106,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_prototypes.py",
@@ -1126,8 +1126,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/dcec_types.py",
@@ -1218,8 +1218,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/enhanced_grammar_parser.py",
@@ -1288,8 +1288,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/error_handling.py",
@@ -1402,8 +1402,8 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 75,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/event_calculus.py",
@@ -1452,8 +1452,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/exceptions.py",
@@ -1542,8 +1542,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/fluents.py",
@@ -1592,8 +1592,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/grammar_engine.py",
@@ -1688,8 +1688,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/grammar_loader.py",
@@ -1731,8 +1731,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/base.py",
@@ -1764,8 +1764,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/cognitive.py",
@@ -1905,7 +1905,7 @@
         }
       ],
       "coveragePercent": 76.92,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/deontic.py",
@@ -1984,8 +1984,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/modal.py",
@@ -2044,8 +2044,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/propositional.py",
@@ -2154,8 +2154,8 @@
           ]
         }
       ],
-      "coveragePercent": 70.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 70,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/resolution.py",
@@ -2224,8 +2224,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/specialized.py",
@@ -2325,7 +2325,7 @@
         }
       ],
       "coveragePercent": 55.56,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/inference_rules/temporal.py",
@@ -2484,8 +2484,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/lemma_generation.py",
@@ -2547,8 +2547,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/modal_tableaux.py",
@@ -2634,8 +2634,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/nl_converter.py",
@@ -2714,7 +2714,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/problem_parser.py",
@@ -2790,7 +2790,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/proof_optimization.py",
@@ -2870,7 +2870,7 @@
         }
       ],
       "coveragePercent": 71.43,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/proof_strategies.py",
@@ -2952,8 +2952,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/prover_core.py",
@@ -3082,8 +3082,8 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 75,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/prover_core_extended_rules.py",
@@ -3482,8 +3482,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/shadow_prover.py",
@@ -3641,7 +3641,7 @@
         }
       ],
       "coveragePercent": 57.14,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/syntax_tree.py",
@@ -3680,8 +3680,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/temporal.py",
@@ -3792,7 +3792,7 @@
         }
       ],
       "coveragePercent": 77.78,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/native/types.py",
@@ -3956,7 +3956,7 @@
         }
       ],
       "coveragePercent": 86.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/base_parser.py",
@@ -3998,8 +3998,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/dcec_to_ucan_bridge.py",
@@ -4048,8 +4048,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/domain_vocabularies/domain_vocab.py",
@@ -4118,8 +4118,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/french_parser.py",
@@ -4200,8 +4200,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/german_parser.py",
@@ -4295,8 +4295,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/grammar_nl_policy_compiler.py",
@@ -4338,8 +4338,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/language_detector.py",
@@ -4368,8 +4368,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/nl_policy_conflict_detector.py",
@@ -4447,8 +4447,8 @@
           ]
         }
       ],
-      "coveragePercent": 50.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 50,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/nl_to_policy_compiler.py",
@@ -4490,8 +4490,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/portuguese_parser.py",
@@ -4533,8 +4533,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/nl/spanish_parser.py",
@@ -4602,8 +4602,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/optimization/formula_cache.py",
@@ -4682,8 +4682,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/optimization/profiling_utils.py",
@@ -4755,8 +4755,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/provers/e_prover_adapter.py",
@@ -4798,8 +4798,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/provers/prover_manager.py",
@@ -4858,8 +4858,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/provers/tptp_utils.py",
@@ -4914,8 +4914,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/provers/vampire_adapter.py",
@@ -4957,8 +4957,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/provers/z3_adapter.py",
@@ -5023,8 +5023,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/shadow_prover_wrapper.py",
@@ -5064,8 +5064,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "CEC/talos_wrapper.py",
@@ -5104,8 +5104,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/countermodel_visualizer.py",
@@ -5157,8 +5157,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/countermodels.py",
@@ -5262,8 +5262,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/exceptions.py",
@@ -5382,8 +5382,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/expansion_rules.py",
@@ -5468,8 +5468,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/formula_dependency_graph.py",
@@ -5564,8 +5564,8 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 75,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/inference_rules/base.py",
@@ -5587,8 +5587,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/inference_rules/deontic.py",
@@ -5761,8 +5761,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/inference_rules/first_order.py",
@@ -5791,8 +5791,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/inference_rules/propositional.py",
@@ -5932,7 +5932,7 @@
         }
       ],
       "coveragePercent": 92.31,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/inference_rules/temporal.py",
@@ -6144,8 +6144,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/inference_rules/temporal_deontic.py",
@@ -6246,8 +6246,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/modal_tableaux.py",
@@ -6319,8 +6319,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/llm.py",
@@ -6413,7 +6413,7 @@
         }
       ],
       "coveragePercent": 85.71,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/tdfol_nl_api.py",
@@ -6478,8 +6478,8 @@
           ]
         }
       ],
-      "coveragePercent": 60.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 60,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/tdfol_nl_context.py",
@@ -6518,8 +6518,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/tdfol_nl_generator.py",
@@ -6548,8 +6548,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/tdfol_nl_patterns.py",
@@ -6598,8 +6598,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/tdfol_nl_preprocessor.py",
@@ -6669,7 +6669,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/nl/utils.py",
@@ -6747,8 +6747,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/p2p/ipfs_proof_storage.py",
@@ -6780,8 +6780,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/performance_dashboard.py",
@@ -6866,8 +6866,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/performance_metrics.py",
@@ -6942,8 +6942,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/performance_profiler.py",
@@ -7069,7 +7069,7 @@
         }
       ],
       "coveragePercent": 72.73,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/proof_explainer.py",
@@ -7165,7 +7165,7 @@
         }
       ],
       "coveragePercent": 87.5,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/proof_tree_visualizer.py",
@@ -7268,7 +7268,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/security_validator.py",
@@ -7386,8 +7386,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/strategies/base.py",
@@ -7419,8 +7419,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/strategies/cec_delegate.py",
@@ -7439,8 +7439,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/strategies/forward_chaining.py",
@@ -7459,8 +7459,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/strategies/modal_tableaux.py",
@@ -7480,8 +7480,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/strategies/strategy_selector.py",
@@ -7500,8 +7500,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_converter.py",
@@ -7602,8 +7602,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_core.py",
@@ -8031,8 +8031,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_dcec_parser.py",
@@ -8077,8 +8077,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_optimization.py",
@@ -8140,8 +8140,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_parser.py",
@@ -8217,8 +8217,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_performance_engine.py",
@@ -8237,8 +8237,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_proof_cache.py",
@@ -8283,8 +8283,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/tdfol_prover.py",
@@ -8404,8 +8404,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "TDFOL/zkp_integration.py",
@@ -8436,8 +8436,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "api.py",
@@ -8556,8 +8556,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "batch_processing.py",
@@ -8616,8 +8616,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/cec_dcec.py",
@@ -8637,8 +8637,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/deontic_norms.py",
@@ -8657,8 +8657,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/external_prover_router.py",
@@ -8677,8 +8677,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/fol_tdfol.py",
@@ -8710,8 +8710,8 @@
           ]
         }
       ],
-      "coveragePercent": 50.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 50,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/modal_frame_logic.py",
@@ -8730,8 +8730,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/multiview.py",
@@ -8773,8 +8773,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/registry.py",
@@ -8863,7 +8863,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/types.py",
@@ -8936,8 +8936,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "bridge/zkp_attestation.py",
@@ -8956,8 +8956,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/bounded_cache.py",
@@ -8986,8 +8986,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/converters.py",
@@ -9046,8 +9046,8 @@
           ]
         }
       ],
-      "coveragePercent": 60.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 60,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/errors.py",
@@ -9156,8 +9156,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/feature_detection.py",
@@ -9267,8 +9267,8 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 75,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/proof_cache.py",
@@ -9327,8 +9327,8 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 75,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/utility_monitor.py",
@@ -9412,8 +9412,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "common/validators.py",
@@ -9487,8 +9487,8 @@
           ]
         }
       ],
-      "coveragePercent": 80.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 80,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "config.py",
@@ -9586,8 +9586,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/analyzer.py",
@@ -9609,8 +9609,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/converter.py",
@@ -9633,8 +9633,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/decoder.py",
@@ -9690,8 +9690,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/exports.py",
@@ -10259,8 +10259,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/formula_builder.py",
@@ -10360,8 +10360,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/graph.py",
@@ -10453,8 +10453,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/ir.py",
@@ -10562,8 +10562,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/knowledge_base.py",
@@ -10712,8 +10712,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/legal_text_to_deontic.py",
@@ -10748,8 +10748,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/metrics.py",
@@ -10786,8 +10786,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/prover_syntax.py",
@@ -10842,8 +10842,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "deontic/utils/deontic_parser.py",
@@ -11788,8 +11788,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "e2e_validation.py",
@@ -11832,7 +11832,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/formula_analyzer.py",
@@ -11843,46 +11843,50 @@
         {
           "pythonSymbol": "FormulaAnalysis",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaAnalysis",
           "target": "swissknife/src/services/formula-analyzer.ts",
           "variants": [
             "FormulaAnalysis"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "FormulaAnalyzer",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaAnalyzer",
           "target": "swissknife/src/services/formula-analyzer.ts",
           "variants": [
             "FormulaAnalyzer"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "FormulaComplexity",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaComplexity",
           "target": "swissknife/src/services/formula-analyzer.ts",
           "variants": [
             "FormulaComplexity"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "FormulaType",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaType",
           "target": "swissknife/src/services/formula-analyzer.ts",
           "variants": [
             "FormulaType"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/interactive/coq_prover_bridge.py",
@@ -11903,26 +11907,28 @@
         {
           "pythonSymbol": "CoqProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "CoqProverBridge",
           "target": "swissknife/src/services/provers/coq-jscoq-bridge.ts",
           "variants": [
             "CoqProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "TDFOLToCoqConverter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "TDFOLToCoqConverter",
           "target": "swissknife/src/services/provers/deontic-to-coq.ts",
           "variants": [
             "TDFOLToCoqConverter"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/interactive/lean_prover_bridge.py",
@@ -11943,12 +11949,13 @@
         {
           "pythonSymbol": "LeanProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "LeanProverBridge",
           "target": "swissknife/src/services/provers/deontic-to-lean4.ts",
           "variants": [
             "LeanProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "TDFOLToLeanConverter",
@@ -11961,8 +11968,8 @@
           ]
         }
       ],
-      "coveragePercent": 33.33,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/lazy_installer.py",
@@ -11973,7 +11980,7 @@
         {
           "pythonSymbol": "find_executable",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "findExecutable",
           "target": "swissknife/src/services/sprint66-prover-utils.ts",
           "variants": [
@@ -11981,12 +11988,13 @@
             "findexecutable",
             "findExecutable",
             "FindExecutable"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "lazy_install_prover",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "lazyInstallProver",
           "target": "swissknife/src/services/sprint66-prover-utils.ts",
           "variants": [
@@ -11994,7 +12002,8 @@
             "lazyinstallprover",
             "lazyInstallProver",
             "LazyInstallProver"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "lazy_install_strict",
@@ -12025,7 +12034,7 @@
         {
           "pythonSymbol": "normalize_prover_name",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "normalizeProverName",
           "target": "swissknife/src/services/sprint66-prover-utils.ts",
           "variants": [
@@ -12033,7 +12042,8 @@
             "normalizeprovername",
             "normalizeProverName",
             "NormalizeProverName"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "prover_lazy_install_enabled",
@@ -12051,7 +12061,7 @@
         {
           "pythonSymbol": "reset_lazy_install_attempts",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "resetLazyInstallAttempts",
           "target": "swissknife/src/services/sprint66-prover-utils.ts",
           "variants": [
@@ -12059,11 +12069,12 @@
             "resetlazyinstallattempts",
             "resetLazyInstallAttempts",
             "ResetLazyInstallAttempts"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 57.14,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/monitoring.py",
@@ -12074,27 +12085,29 @@
         {
           "pythonSymbol": "Monitor",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "Monitor",
           "target": "swissknife/src/services/e2e-validator.ts",
           "variants": [
             "Monitor"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "ProofMetrics",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ProofMetrics",
           "target": "swissknife/src/services/performance-dashboard.ts",
           "variants": [
             "ProofMetrics"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "get_global_monitor",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "get_global_monitor",
           "target": "swissknife/src/services/logic-monitor.ts",
           "variants": [
@@ -12102,11 +12115,12 @@
             "getglobalmonitor",
             "getGlobalMonitor",
             "GetGlobalMonitor"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/neural/symbolicai_prover_bridge.py",
@@ -12148,8 +12162,8 @@
           ]
         }
       ],
-      "coveragePercent": 0.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/prover_router.py",
@@ -12161,42 +12175,46 @@
         {
           "pythonSymbol": "ProverRouter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ProverRouter",
           "target": "swissknife/src/services/prover-router.ts",
           "variants": [
             "ProverRouter"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "ProverStrategy",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ProverStrategy",
           "target": "swissknife/src/services/prover-router.ts",
           "variants": [
             "ProverStrategy"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "RouterProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "RouterProofResult",
           "target": "swissknife/src/services/prover-router.ts",
           "variants": [
             "RouterProofResult"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "SyntacticNativeFallbackProver",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "SyntacticNativeFallbackProver",
           "target": "swissknife/src/services/prover-router.ts",
           "variants": [
             "SyntacticNativeFallbackProver"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "SyntacticProofResult",
@@ -12209,8 +12227,8 @@
           ]
         }
       ],
-      "coveragePercent": 80.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/smt/cvc5_prover_bridge.py",
@@ -12221,36 +12239,39 @@
         {
           "pythonSymbol": "CVC5ProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "CVC5ProofResult",
           "target": "swissknife/src/services/cvc5-prover-bridge.ts",
           "variants": [
             "CVC5ProofResult"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "CVC5ProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "CVC5ProverBridge",
           "target": "swissknife/src/services/cvc5-prover-bridge.ts",
           "variants": [
             "CVC5ProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "TDFOLToCVC5Converter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "TDFOLToCVC5Converter",
           "target": "swissknife/src/services/cvc5-prover-bridge.ts",
           "variants": [
             "TDFOLToCVC5Converter"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "external_provers/smt/z3_prover_bridge.py",
@@ -12261,37 +12282,40 @@
         {
           "pythonSymbol": "TDFOLToZ3Converter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "TDFOLToZ3Converter",
           "target": "swissknife/src/services/z3-prover-bridge.ts",
           "variants": [
             "TDFOLToZ3Converter"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "Z3ProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "Z3ProofResult",
           "target": "swissknife/src/services/z3-prover-bridge.ts",
           "variants": [
             "Z3ProofResult"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "Z3ProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "Z3ProverBridge",
           "target": "swissknife/src/services/z3-prover-bridge.ts",
           "variants": [
             "Z3ProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "prove_with_z3",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "prove_with_z3",
           "target": "swissknife/src/services/z3-prover-bridge.ts",
           "variants": [
@@ -12299,11 +12323,12 @@
             "provewithz3",
             "proveWithZ3",
             "ProveWithZ3"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "flogic/ergoai_wrapper.py",
@@ -12315,17 +12340,18 @@
         {
           "pythonSymbol": "ErgoAIWrapper",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ErgoAIWrapper",
           "target": "swissknife/src/services/ergoai-wrapper.ts",
           "variants": [
             "ErgoAIWrapper"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         },
         {
           "pythonSymbol": "resolve_ergo_binary",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "resolve_ergo_binary",
           "target": "swissknife/src/services/ergoai-wrapper.ts",
           "variants": [
@@ -12333,11 +12359,12 @@
             "resolveergobinary",
             "resolveErgoBinary",
             "ResolveErgoBinary"
-          ]
+          ],
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port."
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "flogic/flogic_proof_cache.py",
@@ -12380,7 +12407,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "flogic/flogic_types.py",
@@ -12439,8 +12466,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "flogic/flogic_zkp_integration.py",
@@ -12479,8 +12506,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "flogic/semantic_normalizer.py",
@@ -12512,8 +12539,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "flogic_optimizer.py",
@@ -12562,8 +12589,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/converter.py",
@@ -12586,8 +12613,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/text_to_fol.py",
@@ -12675,7 +12702,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/utils/deontic_parser.py",
@@ -12827,8 +12854,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/utils/fol_parser.py",
@@ -12954,8 +12981,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/utils/logic_formatter.py",
@@ -13134,7 +13161,7 @@
         }
       ],
       "coveragePercent": 84.62,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/utils/nlp_predicate_extractor.py",
@@ -13208,8 +13235,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "fol/utils/predicate_extractor.py",
@@ -13271,8 +13298,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/base_prover_bridge.py",
@@ -13334,8 +13361,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/external_provers.py",
@@ -13407,8 +13434,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/prover_installer.py",
@@ -13518,8 +13545,8 @@
           ]
         }
       ],
-      "coveragePercent": 75.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 75,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/symbolic_fol_bridge.py",
@@ -13558,8 +13585,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/tdfol_cec_bridge.py",
@@ -13602,8 +13629,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/tdfol_grammar_bridge.py",
@@ -13658,8 +13685,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/bridges/tdfol_shadowprover_bridge.py",
@@ -13712,8 +13739,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/caching/ipfs_proof_cache.py",
@@ -13755,8 +13782,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/caching/ipld_logic_storage.py",
@@ -13818,8 +13845,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/caching/proof_cache.py",
@@ -13842,8 +13869,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/cec_bridge.py",
@@ -13874,8 +13901,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/converters/deontic_logic_converter.py",
@@ -13927,8 +13954,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/converters/deontic_logic_core.py",
@@ -14079,8 +14106,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/converters/logic_translation_core.py",
@@ -14173,7 +14200,7 @@
         }
       ],
       "coveragePercent": 87.5,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/converters/modal_logic_extension.py",
@@ -14249,7 +14276,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/demos/demo_temporal_deontic_rag.py",
@@ -14323,8 +14350,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/caselaw_bulk_processor.py",
@@ -14400,7 +14427,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/deontic_query_engine.py",
@@ -14485,8 +14512,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/document_consistency_checker.py",
@@ -14525,8 +14552,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/legal_domain_knowledge.py",
@@ -14599,7 +14626,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/legal_symbolic_analyzer.py",
@@ -14694,8 +14721,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/medical_theorem_framework.py",
@@ -14785,7 +14812,7 @@
         }
       ],
       "coveragePercent": 87.5,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/symbolic_contracts.py",
@@ -14874,7 +14901,7 @@
         }
       ],
       "coveragePercent": 71.43,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/temporal_deontic_api.py",
@@ -14935,8 +14962,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/domain/temporal_deontic_rag_store.py",
@@ -14975,8 +15002,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/interactive/_fol_constructor_io.py",
@@ -14995,8 +15022,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/interactive/interactive_fol_constructor.py",
@@ -15015,8 +15042,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/interactive/interactive_fol_types.py",
@@ -15045,8 +15072,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/interactive/interactive_fol_utils.py",
@@ -15081,8 +15108,8 @@
           ]
         }
       ],
-      "coveragePercent": 0.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/nl_ucan_policy_compiler.py",
@@ -15124,8 +15151,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/proof_cache.py",
@@ -15171,8 +15198,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/_deontic_conflict_mixin.py",
@@ -15201,8 +15228,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/_logic_verifier_backends_mixin.py",
@@ -15222,8 +15249,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/_prover_backend_mixin.py",
@@ -15283,8 +15310,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/deontological_reasoning.py",
@@ -15313,8 +15340,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/deontological_reasoning_types.py",
@@ -15363,8 +15390,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/deontological_reasoning_utils.py",
@@ -15488,7 +15515,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/logic_verification.py",
@@ -15507,8 +15534,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/logic_verification_types.py",
@@ -15577,8 +15604,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/logic_verification_utils.py",
@@ -15705,7 +15732,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/proof_execution_engine.py",
@@ -15767,8 +15794,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/proof_execution_engine_types.py",
@@ -15798,8 +15825,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/reasoning/proof_execution_engine_utils.py",
@@ -15928,8 +15955,8 @@
           ]
         }
       ],
-      "coveragePercent": 90.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 90,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/symbolic/neurosymbolic/embedding_prover.py",
@@ -15948,8 +15975,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/symbolic/neurosymbolic/hybrid_confidence.py",
@@ -15988,8 +16015,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/symbolic/neurosymbolic/reasoning_coordinator.py",
@@ -16028,8 +16055,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/symbolic/neurosymbolic_api.py",
@@ -16071,8 +16098,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/symbolic/neurosymbolic_graphrag.py",
@@ -16101,8 +16128,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/symbolic/symbolic_logic_primitives.py",
@@ -16170,8 +16197,8 @@
           ]
         }
       ],
-      "coveragePercent": 60.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 60,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "integration/ucan_policy_bridge.py",
@@ -16246,8 +16273,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "ml_confidence.py",
@@ -16287,7 +16314,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "modal/autoencoder_loop.py",
@@ -16349,8 +16376,8 @@
           ]
         }
       ],
-      "coveragePercent": 80.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 80,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "modal/codec.py",
@@ -16455,7 +16482,7 @@
         }
       ],
       "coveragePercent": 87.5,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "modal/compiler.py",
@@ -16508,8 +16535,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "modal/decompiler.py",
@@ -16591,7 +16618,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "modal/kg_bridge.py",
@@ -16679,7 +16706,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "modal/synthesis.py",
@@ -16761,7 +16788,7 @@
         }
       ],
       "coveragePercent": 83.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "monitoring.py",
@@ -16813,8 +16840,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "observability/metrics_prometheus.py",
@@ -16866,8 +16893,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "observability/otel_integration.py",
@@ -16963,7 +16990,7 @@
         }
       ],
       "coveragePercent": 87.5,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "observability/structured_logging.py",
@@ -17152,8 +17179,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "security/audit_log.py",
@@ -17211,8 +17238,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "security/input_validation.py",
@@ -17270,8 +17297,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "security/llm_circuit_breaker.py",
@@ -17359,8 +17386,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "security/rate_limiting.py",
@@ -17415,8 +17442,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "submodule_registry.py",
@@ -17527,8 +17554,8 @@
           ]
         }
       ],
-      "coveragePercent": 50.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 50,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "types/bridge_types.py",
@@ -17597,8 +17624,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "types/common_types.py",
@@ -17678,7 +17705,7 @@
         }
       ],
       "coveragePercent": 85.71,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "types/deontic_types.py",
@@ -17757,8 +17784,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "types/fol_types.py",
@@ -17828,7 +17855,7 @@
         }
       ],
       "coveragePercent": 66.67,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "types/translation_types.py",
@@ -17867,8 +17894,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/backends/groth16.py",
@@ -17887,8 +17914,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/backends/groth16_backup.py",
@@ -17937,8 +17964,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/backends/groth16_ffi.py",
@@ -17987,8 +18014,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/backends/provekit.py",
@@ -18010,8 +18037,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/backends/provekit_ffi.py",
@@ -18084,7 +18111,7 @@
         }
       ],
       "coveragePercent": 33.33,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/backends/simulated.py",
@@ -18103,8 +18130,8 @@
           ]
         }
       ],
-      "coveragePercent": 0.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/canonicalization.py",
@@ -18217,8 +18244,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/circuits.py",
@@ -18437,7 +18464,7 @@
         }
       ],
       "coveragePercent": 64.71,
-      "accountedPercent": 100.0
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/eth_contract_artifacts.py",
@@ -18482,8 +18509,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/eth_integration.py",
@@ -18542,8 +18569,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/eth_vk_registry_payloads.py",
@@ -18628,8 +18655,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/evm_harness.py",
@@ -18664,8 +18691,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/evm_public_inputs.py",
@@ -18713,8 +18740,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/form_circuit.py",
@@ -18769,8 +18796,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/legal_theorem_semantics.py",
@@ -18851,8 +18878,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/onchain_pipeline.py",
@@ -18904,8 +18931,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/provekit/artifacts.py",
@@ -19012,8 +19039,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/provekit/cache.py",
@@ -19074,8 +19101,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/provekit/public_inputs.py",
@@ -19133,8 +19160,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/provekit/trace.py",
@@ -19219,8 +19246,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/provekit/witness.py",
@@ -19304,8 +19331,8 @@
           ]
         }
       ],
-      "coveragePercent": 0.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 0,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/setup_artifacts.py",
@@ -19337,8 +19364,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/statement.py",
@@ -19416,8 +19443,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/ucan_zkp_bridge.py",
@@ -19469,8 +19496,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/vk_registry.py",
@@ -19513,8 +19540,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/witness_manager.py",
@@ -19533,8 +19560,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/zkp_prover.py",
@@ -19553,8 +19580,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     },
     {
       "pythonModule": "zkp/zkp_verifier.py",
@@ -19573,8 +19600,8 @@
           ]
         }
       ],
-      "coveragePercent": 100.0,
-      "accountedPercent": 100.0
+      "coveragePercent": 100,
+      "accountedPercent": 100
     }
   ]
 }

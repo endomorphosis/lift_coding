@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "2026-07-05",
+  "knownTestIds": [
+    "conformance-ts",
+    "conformance-py",
+    "conformance-compare",
+    "conformance-mutation-gate",
+    "conformance-differential-fuzz",
+    "conformance-temporal-native",
+    "conformance-ergo",
+    "conformance-ergo-entailment",
+    "conformance-ergo-entailment-crosslang",
+    "conformance-ergo-output-parse-crosslang",
+    "conformance-modal-codec-ir-crosslang",
+    "conformance-modal-codec-guidance-crosslang",
+    "conformance-modal-codec-citation-crosslang",
+    "conformance-modal-codec-temporal-operator-crosslang",
+    "conformance-modal-decompiler-crosslang",
+    "conformance-modal-decompiler-citation-crosslang",
+    "conformance-modal-decompiler-temporal-operator-crosslang",
+    "conformance-deontic-parser-utils-crosslang",
+    "conformance-deontic-parser-elements-crosslang",
+    "conformance-modal-compiler-family-token-crosslang",
+    "conformance-modal-compiler-serialization-crosslang",
+    "conformance-deontic-bridge-document-id-crosslang",
+    "conformance-deontic-bridge-normalized-text-crosslang",
+    "conformance-deontic-bridge-citation-crosslang",
+    "conformance-deontic-bridge-decoded-text-crosslang",
+    "conformance-deontic-bridge-guidance-crosslang",
+    "conformance-deontic-bridge-list-of-dicts-crosslang",
+    "conformance-deontic-bridge-target-names-crosslang",
+    "conformance-deontic-bridge-fill-empty-crosslang",
+    "conformance-deontic-bridge-rate-crosslang",
+    "conformance-deontic-bridge-guidance-target-gap-crosslang",
+    "conformance-deontic-bridge-guidance-normalization-crosslang",
+    "conformance-deontic-bridge-guidance-row-match-crosslang",
+    "conformance-deontic-bridge-guidance-evidence-rows-crosslang",
+    "conformance-deontic-bridge-guidance-frame-selection-crosslang",
+    "conformance-deontic-bridge-json-guidance-crosslang",
+    "conformance-deontic-bridge-guidance-route-crosslang"
+  ],
+  "moduleRules": [
+    {
+      "modulePrefix": "CEC/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["dcec", "deonticConflict", "modalKripke"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/dcec-prover-bridge.ts",
+        "swissknife/src/services/provers/policy-to-dcec.ts"
+      ]
+    },
+    {
+      "modulePrefix": "TDFOL/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["tdfol", "folFormula", "temporalTrace", "modalKripke", "smt2"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/tdfol-prover-bridge.ts",
+        "swissknife/src/services/provers/policy-to-tdfol.ts",
+        "swissknife/src/services/provers/smt2-serializer.ts"
+      ]
+    },
+    {
+      "modulePrefix": "fol/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["folFormula", "smt2"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/tdfol-prover-bridge.ts"
+      ]
+    },
+    {
+      "modulePrefix": "modal/",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-modal-codec-ir-crosslang", "conformance-modal-codec-guidance-crosslang", "conformance-modal-codec-citation-crosslang", "conformance-modal-codec-temporal-operator-crosslang", "conformance-modal-decompiler-crosslang", "conformance-modal-decompiler-citation-crosslang", "conformance-modal-decompiler-temporal-operator-crosslang", "conformance-modal-compiler-family-token-crosslang", "conformance-modal-compiler-serialization-crosslang"],
+      "coveringInputTypes": ["modalKripke", "smt2"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/tdfol-prover-bridge.ts",
+        "swissknife/src/services/provers/formula-classifier.ts"
+      ]
+    },
+    {
+      "modulePrefix": "deontic/",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-deontic-parser-elements-crosslang"],
+      "coveringInputTypes": ["deonticConflict", "legalNorm", "tdfol"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/deontic-to-coq.ts",
+        "swissknife/src/services/provers/deontic-to-lean4.ts",
+        "swissknife/src/services/provers/tdfol-prover-bridge.ts"
+      ]
+    },
+    {
+      "modulePrefix": "zkp/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["zkpStatement", "zkpWitness"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/neural-prover-bridge.ts"
+      ]
+    },
+    {
+      "modulePrefix": "external_provers/",
+      "testIds": ["conformance-ergo-entailment-crosslang", "conformance-ergo-output-parse-crosslang"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/coq-jscoq-bridge.ts",
+        "swissknife/src/services/provers/lean4-wasm-bridge.ts"
+      ]
+    },
+    {
+      "modulePrefix": "flogic",
+      "testIds": ["conformance-ergo-entailment-crosslang", "conformance-ergo-output-parse-crosslang"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "core",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/provers/coq-jscoq-bridge.ts"
+      ]
+    },
+    {
+      "modulePrefix": "bridge/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    },
+    {
+      "modulePrefix": "common/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["policy", "smt2"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    },
+    {
+      "modulePrefix": "integration/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    },
+    {
+      "modulePrefix": "security/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    },
+    {
+      "modulePrefix": "observability/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    },
+    {
+      "modulePrefix": "types/",
+      "testIds": ["conformance-ts", "conformance-compare"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    },
+    {
+      "modulePrefix": "",
+      "testIds": ["conformance-ts"],
+      "coveringInputTypes": ["policy"],
+      "coverageScope": "baseline",
+      "requiredExecutedTargets": [
+        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+      ]
+    }
+  ]
+}

@@ -106,6 +106,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     }
     const strictSimulatedExpectation = Boolean(
       strictSelfContainment
+      && !strictUnknownBridge
       && (
         simulatedObserved
         || (

@@ -8,19 +8,27 @@
       "inputType": "zkpStatement",
       "input": {
         "zkpStatement": {
-          "claims": ["age_over_18"],
+          "claims": [
+            "age_over_18"
+          ],
           "proofState": "invalid"
         }
       },
       "expected": {
         "status": "refuted",
-        "acceptableReasons": ["refuted"],
+        "acceptableReasons": [
+          "refuted"
+        ],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp-statement", "invalid"]
+      "tags": [
+        "zkp-statement",
+        "invalid"
+      ]
     },
     {
       "id": "zkpstatement-proved-001",
@@ -29,19 +37,27 @@
       "inputType": "zkpStatement",
       "input": {
         "zkpStatement": {
-          "claims": ["salary_above_threshold"],
+          "claims": [
+            "salary_above_threshold"
+          ],
           "proofState": "valid"
         }
       },
       "expected": {
         "status": "proved",
-        "acceptableReasons": ["proved"],
+        "acceptableReasons": [
+          "proved"
+        ],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp-statement", "valid"]
+      "tags": [
+        "zkp-statement",
+        "valid"
+      ]
     },
     {
       "id": "zkpstatement-proved-002",
@@ -50,19 +66,27 @@
       "inputType": "zkpStatement",
       "input": {
         "zkpStatement": {
-          "claims": ["membership_proof"],
+          "claims": [
+            "membership_proof"
+          ],
           "proofState": "unknown"
         }
       },
       "expected": {
         "status": "proved",
-        "acceptableReasons": ["proved"],
+        "acceptableReasons": [
+          "proved"
+        ],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp-statement", "claims"]
+      "tags": [
+        "zkp-statement",
+        "claims"
+      ]
     },
     {
       "id": "zkpstatement-unknown-001",
@@ -77,13 +101,19 @@
       },
       "expected": {
         "status": "unknown",
-        "acceptableReasons": ["unknown"],
+        "acceptableReasons": [
+          "unknown"
+        ],
         "strictStructuredParity": true,
         "decided": false,
-        "backendMode": "simulated"
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
       },
       "timeoutMs": 5000,
-      "tags": ["zkp-statement", "unknown"]
+      "tags": [
+        "zkp-statement",
+        "unknown"
+      ]
     }
   ]
 }

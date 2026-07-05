@@ -1,0 +1,376 @@
+{
+  "schemaVersion": "2026-07-05",
+  "description": "Explicit classifications for port-substance audit rows that are THIN, MISSING, WRAPPER, or HOLLOW. The gate requires exact module coverage and at least one known conformance test id per row.",
+  "allowedClassifications": [
+    "consolidated",
+    "compact-faithful",
+    "host-native",
+    "data-bloat",
+    "simulated"
+  ],
+  "entries": [
+    {
+      "module": "CEC/dcec_wrapper.py",
+      "classification": "consolidated",
+      "reason": "Python wrapper facade is represented by the native DCEC prover and policy-to-DCEC TS path rather than a same-name wrapper.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/eng_dcec_wrapper.py",
+      "classification": "consolidated",
+      "reason": "English DCEC wrapper behavior is consolidated into the TS DCEC parser/prover path and native DCEC vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/dcec_integration.py",
+      "classification": "compact-faithful",
+      "reason": "Integration facade is intentionally smaller in TS and delegates to local TS DCEC services, with DCEC native vectors covering the decision path.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/enhanced_grammar_parser.py",
+      "classification": "compact-faithful",
+      "reason": "The TS grammar parser keeps the deterministic parsing surface compact while DCEC and legal norm vectors exercise the consuming behavior.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/inference_rules/base.py",
+      "classification": "consolidated",
+      "reason": "Base inference rule abstractions are folded into TS DCEC prover data structures and rule evaluation helpers.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/inference_rules/propositional.py",
+      "classification": "consolidated",
+      "reason": "Propositional DCEC rule behavior is consolidated into TS DCEC prover execution instead of a same-name rule module.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/problem_parser.py",
+      "classification": "compact-faithful",
+      "reason": "Problem parsing is compact in TS and exercised through parser command and DCEC native conformance vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/proof_optimization.py",
+      "classification": "consolidated",
+      "reason": "Proof optimization is folded into TS proof/result normalization rather than a separate module boundary.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/native/prover_core_extended_rules.py",
+      "classification": "consolidated",
+      "reason": "Extended DCEC rules are represented inside the TS core command/prover path and checked by DCEC native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/nl/nl_to_policy_compiler.py",
+      "classification": "consolidated",
+      "reason": "NL policy compilation is split across TS grammar and policy compiler services; DCEC/legal norm vectors cover the generated policy behavior.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/provers/e_prover_adapter.py",
+      "classification": "host-native",
+      "reason": "E prover integration is an external host-native binary adapter, not a self-contained WASM/TS prover target.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/provers/vampire_adapter.py",
+      "classification": "host-native",
+      "reason": "Vampire integration is an external host-native binary adapter, not a self-contained WASM/TS prover target.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "CEC/talos_wrapper.py",
+      "classification": "host-native",
+      "reason": "Talos wrapper depends on an external prover runtime and is tracked as host-native rather than simulated TS parity.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "TDFOL/inference_rules/base.py",
+      "classification": "consolidated",
+      "reason": "TDFOL rule base abstractions are folded into the TS TDFOL bridge and policy-to-TDFOL serializer.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/inference_rules/first_order.py",
+      "classification": "consolidated",
+      "reason": "First-order TDFOL rule behavior is consolidated into the TS TDFOL bridge execution path.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/inference_rules/propositional.py",
+      "classification": "consolidated",
+      "reason": "Propositional TDFOL rules are represented in the TS TDFOL prover bridge rather than a same-name module.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/nl/llm.py",
+      "classification": "data-bloat",
+      "reason": "LLM-assisted NL behavior is non-deterministic integration glue and excluded from deterministic prover parity; deterministic TDFOL decisions are covered separately.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "TDFOL/performance_profiler.py",
+      "classification": "data-bloat",
+      "reason": "Profiling/reporting volume is not theorem-prover semantics; the TS profiler is compact while TDFOL decisions are covered by native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/strategies/base.py",
+      "classification": "consolidated",
+      "reason": "Strategy base classes are folded into TS prover strategy selection and bridge options.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/strategies/cec_delegate.py",
+      "classification": "consolidated",
+      "reason": "CEC delegation strategy is represented by TS DCEC/TDFOL bridge routing rather than a Python-shaped strategy module.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/strategies/strategy_selector.py",
+      "classification": "consolidated",
+      "reason": "Strategy selection is consolidated into TS bridge options and deterministic native TDFOL dispatch.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/tdfol_converter.py",
+      "classification": "consolidated",
+      "reason": "TDFOL conversion is implemented through TS policy-to-TDFOL and SMT2 serialization modules.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/tdfol_inference_rules.py",
+      "classification": "consolidated",
+      "reason": "TDFOL inference rules are consolidated into the TS TDFOL bridge decision engine.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "TDFOL/tdfol_proof_cache.py",
+      "classification": "consolidated",
+      "reason": "Proof cache behavior is represented by TS bridge-level result normalization and does not need a same-name port.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "api.py",
+      "classification": "consolidated",
+      "reason": "Python API facade is represented by SwissKnife prover hub entrypoints and conformance runners rather than a same-name TS file.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "api_server.py",
+      "classification": "data-bloat",
+      "reason": "Server wrapper is deployment glue outside prover semantics; prover behavior is tested through the TS hub and native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "benchmarks.py",
+      "classification": "data-bloat",
+      "reason": "Benchmark harness code is measurement scaffolding, not theorem-prover behavior; native vectors cover decisions.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "bridge/cec_dcec.py",
+      "classification": "compact-faithful",
+      "reason": "CEC-DCEC bridge behavior is compacted into TS namespace/bridge services and exercised by DCEC native conformance vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "bridge/deontic_norms.py",
+      "classification": "compact-faithful",
+      "reason": "Deontic-norm bridge helpers are compact TS implementations with dedicated cross-language parity slices for extraction, normalization, guidance, and row matching.",
+      "testIds": [
+        "conformance-deontic-bridge-document-id-crosslang",
+        "conformance-deontic-bridge-normalized-text-crosslang",
+        "conformance-deontic-bridge-citation-crosslang",
+        "conformance-deontic-bridge-guidance-route-crosslang"
+      ]
+    },
+    {
+      "module": "bridge/fol_tdfol.py",
+      "classification": "compact-faithful",
+      "reason": "FOL-to-TDFOL bridge behavior is compacted into TS bridge/serializer modules and exercised by FOL, TDFOL, and temporal native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "bridge/multiview.py",
+      "classification": "compact-faithful",
+      "reason": "Multiview bridge behavior is compact TS graph/view assembly covered through policy and bridge conformance vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "common/bounded_cache.py",
+      "classification": "consolidated",
+      "reason": "Bounded cache behavior is implemented through TS runtime cache/data structures rather than a same-name Python utility module.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "common/errors.py",
+      "classification": "compact-faithful",
+      "reason": "Python error-class module is docstring-heavy; TS error utilities are intentionally smaller and sufficient for conformance paths.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "deontic/formula_builder.py",
+      "classification": "compact-faithful",
+      "reason": "Deontic formula building is compacted into TS formula builder/prover syntax code and exercised by deontic/legal native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-deontic-parser-elements-crosslang"]
+    },
+    {
+      "module": "deontic/ir.py",
+      "classification": "consolidated",
+      "reason": "Deontic IR types are represented by TS formula, legal norm, and prover syntax data structures rather than a same-name module.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-deontic-parser-elements-crosslang"]
+    },
+    {
+      "module": "deontic/legal_text_to_deontic.py",
+      "classification": "consolidated",
+      "reason": "Legal-text conversion behavior is split across TS deontic parser and bridge services with parser and bridge parity gates.",
+      "testIds": ["conformance-deontic-parser-elements-crosslang", "conformance-deontic-bridge-normalized-text-crosslang"]
+    },
+    {
+      "module": "deontic/utils/deontic_parser.py",
+      "classification": "compact-faithful",
+      "reason": "Deontic parser utilities are compact TS implementations with cross-language utility and element extraction parity gates.",
+      "testIds": ["conformance-deontic-parser-utils-crosslang", "conformance-deontic-parser-elements-crosslang"]
+    },
+    {
+      "module": "e2e_validation.py",
+      "classification": "data-bloat",
+      "reason": "End-to-end validation harness is test scaffolding, not runtime theorem-prover behavior; conformance replaces it with executable parity gates.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "external_provers/lazy_installer.py",
+      "classification": "host-native",
+      "reason": "Lazy installer manages external prover binaries and is not counted as self-contained TS theorem-prover semantics.",
+      "testIds": ["conformance-ergo-entailment-crosslang", "conformance-ergo-output-parse-crosslang"]
+    },
+    {
+      "module": "fol/text_to_fol.py",
+      "classification": "consolidated",
+      "reason": "Text-to-FOL conversion is represented by TS policy/FOL/TDFOL conversion and native FOL vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "integration/bridges/prover_installer.py",
+      "classification": "host-native",
+      "reason": "Prover installer behavior is external binary management and not accepted as simulated prover parity.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "integration/domain/symbolic_contracts.py",
+      "classification": "consolidated",
+      "reason": "Symbolic contract domain objects are folded into TS policy/legal norm structures and bridge outputs.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "integration/nl_ucan_policy_compiler.py",
+      "classification": "compact-faithful",
+      "reason": "UCAN policy compilation is compacted into the TS NL UCAN compiler and exercised through policy/native conformance vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "integration/reasoning/_deontic_conflict_mixin.py",
+      "classification": "consolidated",
+      "reason": "Deontic conflict mixin behavior is integrated into TS TDFOL/deontic conflict decision logic.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+    },
+    {
+      "module": "integration/symbolic_contracts.py",
+      "classification": "consolidated",
+      "reason": "Thin compatibility re-export is represented by the consolidated TS symbolic contract structures.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "modal/codec.py",
+      "classification": "compact-faithful",
+      "reason": "Codec is still compact relative to Python, but deterministic IR, guidance, and citation helpers now have direct TS implementations with cross-language parity gates.",
+      "testIds": [
+        "conformance-modal-codec-ir-crosslang",
+        "conformance-modal-codec-guidance-crosslang",
+        "conformance-modal-codec-citation-crosslang"
+      ]
+    },
+    {
+      "module": "modal/compiler.py",
+      "classification": "compact-faithful",
+      "reason": "Compiler is compact relative to Python, with deterministic family-token and serialization behavior directly ported and cross-language gated.",
+      "testIds": ["conformance-modal-compiler-family-token-crosslang", "conformance-modal-compiler-serialization-crosslang"]
+    },
+    {
+      "module": "modal/decompiler.py",
+      "classification": "compact-faithful",
+      "reason": "Decompiler is compact relative to Python, with deterministic token/slot and citation helper behavior directly ported and cross-language gated.",
+      "testIds": ["conformance-modal-decompiler-crosslang", "conformance-modal-decompiler-citation-crosslang"]
+    },
+    {
+      "module": "phase7_4_benchmarks.py",
+      "classification": "data-bloat",
+      "reason": "Phase benchmark harness is measurement scaffolding, not prover semantics; native conformance vectors cover behavioral decisions.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "security/input_validation.py",
+      "classification": "consolidated",
+      "reason": "Input validation is folded into TS parser/hub boundaries and covered by adversarial native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "security/rate_limiting.py",
+      "classification": "data-bloat",
+      "reason": "Rate limiting is service policy, not theorem-prover semantics; prover behavior remains covered by native vectors.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "submodule_registry.py",
+      "classification": "data-bloat",
+      "reason": "Registry metadata is not prover semantics; compact TS registry behavior is sufficient for conformance surfaces.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/backends/groth16_backup.py",
+      "classification": "host-native",
+      "reason": "Groth16 backup backend is external cryptographic prover infrastructure and cannot be accepted as simulated TS parity.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/backends/groth16_ffi.py",
+      "classification": "host-native",
+      "reason": "Groth16 FFI is host-native cryptographic prover integration; simulated parity is excluded by the ZKP host-native gate.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/backends/provekit_ffi.py",
+      "classification": "host-native",
+      "reason": "ProveKit FFI is host-native cryptographic prover integration; simulated parity is excluded by the ZKP host-native gate.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/eth_contract_artifacts.py",
+      "classification": "host-native",
+      "reason": "Ethereum contract artifact handling belongs to host/native deployment integration, not self-contained theorem-prover semantics.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/evm_harness.py",
+      "classification": "host-native",
+      "reason": "EVM harness depends on host execution tooling and is not counted as simulated TS prover parity.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/evm_public_inputs.py",
+      "classification": "host-native",
+      "reason": "EVM public-input handling is host-native ZKP integration support and excluded from simulated prover parity.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    },
+    {
+      "module": "zkp/zkp_prover.py",
+      "classification": "host-native",
+      "reason": "ZKP proving requires real Groth16/ProveKit host-native backends; conformance excludes simulated ZKP parity from matches.",
+      "testIds": ["conformance-ts", "conformance-compare"]
+    }
+  ]
+}

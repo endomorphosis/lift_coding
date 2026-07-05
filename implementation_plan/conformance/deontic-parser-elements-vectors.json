@@ -7,9 +7,25 @@
       "expected": {
         "count": 1,
         "first": {
+          "norm_type": "obligation",
           "deontic_operator": "O",
           "subject": "contractor",
-          "action": "submit a report"
+          "action": "submit a report",
+          "conditions": [],
+          "temporal_constraints": [],
+          "exceptions": [],
+          "cross_references": [],
+          "parser_warnings": [],
+          "formal_terms": {
+            "actor_id": "contractor",
+            "actor_predicate": "Contractor",
+            "action_predicate": "SubmitReport",
+            "object_predicate": "Report",
+            "recipient_id": "unknown",
+            "norm_predicate": "Obligation",
+            "category_predicate": "FilingRequirement",
+            "defined_term_id": "unknown"
+          }
         }
       }
     },
@@ -19,9 +35,25 @@
       "expected": {
         "count": 1,
         "first": {
+          "norm_type": "permission",
           "deontic_operator": "P",
           "subject": "agency",
-          "action": "issue permits"
+          "action": "issue permits",
+          "conditions": [],
+          "temporal_constraints": [],
+          "exceptions": [],
+          "cross_references": [],
+          "parser_warnings": [],
+          "formal_terms": {
+            "actor_id": "agency",
+            "actor_predicate": "Agency",
+            "action_predicate": "IssuePermits",
+            "object_predicate": "Permits",
+            "recipient_id": "unknown",
+            "norm_predicate": "Permission",
+            "category_predicate": "PermitOrLicense",
+            "defined_term_id": "unknown"
+          }
         }
       }
     },
@@ -31,9 +63,137 @@
       "expected": {
         "count": 1,
         "first": {
+          "norm_type": "prohibition",
           "deontic_operator": "F",
           "subject": "person",
-          "action": "disclose records"
+          "action": "disclose records",
+          "conditions": [],
+          "temporal_constraints": [],
+          "exceptions": [],
+          "cross_references": [],
+          "parser_warnings": [],
+          "formal_terms": {
+            "actor_id": "person",
+            "actor_predicate": "Person",
+            "action_predicate": "DiscloseRecords",
+            "object_predicate": "Records",
+            "recipient_id": "unknown",
+            "norm_predicate": "Prohibition",
+            "category_predicate": "Norm",
+            "defined_term_id": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "id": "deontic-element-condition-001",
+      "text": "The contractor shall submit a report if the agency requests it.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "norm_type": "obligation",
+          "deontic_operator": "O",
+          "subject": "contractor",
+          "action": "submit a report",
+          "conditions": ["the agency requests it"],
+          "temporal_constraints": [],
+          "exceptions": [],
+          "cross_references": [],
+          "parser_warnings": [],
+          "formal_terms": {
+            "actor_id": "contractor",
+            "actor_predicate": "Contractor",
+            "action_predicate": "SubmitReport",
+            "object_predicate": "Report",
+            "recipient_id": "unknown",
+            "norm_predicate": "Obligation",
+            "category_predicate": "FilingRequirement",
+            "defined_term_id": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "id": "deontic-element-exception-001",
+      "text": "The agency may issue permits unless the applicant is suspended.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "norm_type": "permission",
+          "deontic_operator": "P",
+          "subject": "agency",
+          "action": "issue permits",
+          "conditions": [],
+          "temporal_constraints": [],
+          "exceptions": ["the applicant is suspended"],
+          "cross_references": [],
+          "parser_warnings": ["exception_requires_scope_review"],
+          "formal_terms": {
+            "actor_id": "agency",
+            "actor_predicate": "Agency",
+            "action_predicate": "IssuePermits",
+            "object_predicate": "Permits",
+            "recipient_id": "unknown",
+            "norm_predicate": "Permission",
+            "category_predicate": "PermitOrLicense",
+            "defined_term_id": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "id": "deontic-element-temporal-001",
+      "text": "A person shall not disclose records after January 1, 2025.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "norm_type": "prohibition",
+          "deontic_operator": "F",
+          "subject": "person",
+          "action": "disclose records",
+          "conditions": [],
+          "temporal_constraints": ["deadline:january 1"],
+          "exceptions": [],
+          "cross_references": [],
+          "parser_warnings": [],
+          "formal_terms": {
+            "actor_id": "person",
+            "actor_predicate": "Person",
+            "action_predicate": "DiscloseRecords",
+            "object_predicate": "Records",
+            "recipient_id": "unknown",
+            "norm_predicate": "Prohibition",
+            "category_predicate": "Norm",
+            "defined_term_id": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "id": "deontic-element-cross-reference-001",
+      "text": "The contractor shall submit a report under section 552.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "norm_type": "obligation",
+          "deontic_operator": "O",
+          "subject": "contractor",
+          "action": "submit a report",
+          "conditions": [],
+          "temporal_constraints": [],
+          "exceptions": [],
+          "cross_references": ["section:552"],
+          "parser_warnings": ["cross_reference_requires_resolution"],
+          "formal_terms": {
+            "actor_id": "contractor",
+            "actor_predicate": "Contractor",
+            "action_predicate": "SubmitReport",
+            "object_predicate": "Report",
+            "recipient_id": "unknown",
+            "norm_predicate": "Obligation",
+            "category_predicate": "FilingRequirement",
+            "defined_term_id": "unknown"
+          }
         }
       }
     }

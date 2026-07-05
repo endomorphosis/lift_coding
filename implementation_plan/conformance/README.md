@@ -43,7 +43,13 @@ SwissKnife theorem-prover parity harness.
   tolerance for non-excluded rows for each of those tags, required runtime
   vector id pinning (`--port239-required-vector-ids`, default
   `zkp-sim-005,zkp-sim-011,zkp-sim-012`) plus expected tag/shape checks for
-  those ids to prevent substitution or retagging gaming, and strict
+  those ids and expected vector-corpus fields (`backendMode: host-dependent`,
+  `excludeFromParityWhenSimulated: true`, `status: sat`, `decided: true`,
+  `acceptableReasons: [sat, proved]`) and canonical vector-hash pinning to
+  detect semantic drift, plus required source-file uniqueness/origin pinning
+  (`--port239-required-vectors-file`, default `core-policy-vectors.json`) to
+  prevent substitution or retagging
+  gaming, and strict
   structured artifact coverage for PORT-236.
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
@@ -104,7 +110,6 @@ deontic/modal/legal/ZKP-policy vectors, and live Python `z3` is used when the
 `z3` package is installed. If `z3` is absent, the result envelope records
 `z3_runtime: unavailable:*` and still emits the TDFOL/DCEC provenance under
 `metadata.pythonProverChecks`.
-
 Refresh the symbol reconciliation artifact after adding or removing public
 Python logic symbols:
 

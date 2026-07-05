@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -13,13 +13,14 @@ function main() {
   const outDir = resolve(root, args.outDir);
   mkdirSync(outDir, { recursive: true });
 
-  const pyBase = resolve(outDir, 'py-results.json');
-  const tsBase = resolve(outDir, 'ts-results.json');
+  const pyBase = resolve(outDir, 'py-mutation-baseline-results.json');
+  const tsBase = resolve(outDir, 'ts-mutation-baseline-results.json');
   const pyMut = resolve(outDir, 'py-mutated-results.json');
   const tsMut = resolve(outDir, 'ts-mutated-results.json');
+  const python = pythonBin(root);
 
   run(
-    `PYTHONPATH=${quote(join(root, 'external/ipfs_datasets'))} python3 ${quote(join(root, 'external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py'))} --vectors ${quote(vectorsDir)} --out ${quote(pyBase)}`,
+    `PYTHONPATH=${quote(join(root, 'external/ipfs_datasets'))} ${quote(python)} ${quote(join(root, 'external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py'))} --vectors ${quote(vectorsDir)} --out ${quote(pyBase)} --require-engines z3_runtime,tdfol_core,dcec_prover`,
     root,
     'Generate Python baseline conformance results',
   );
@@ -30,7 +31,7 @@ function main() {
   );
 
   run(
-    `PYTHONPATH=${quote(join(root, 'external/ipfs_datasets'))} python3 ${quote(join(root, 'external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py'))} --vectors ${quote(vectorsDir)} --out ${quote(pyMut)}`,
+    `PYTHONPATH=${quote(join(root, 'external/ipfs_datasets'))} ${quote(python)} ${quote(join(root, 'external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py'))} --vectors ${quote(vectorsDir)} --out ${quote(pyMut)} --require-engines z3_runtime,tdfol_core,dcec_prover`,
     root,
     'Generate Python reference for mutation check',
   );
@@ -131,6 +132,11 @@ function parseArgs(argv) {
     }
   }
   return args;
+}
+
+function pythonBin(root) {
+  const venvPython = join(root, '.venv/bin/python');
+  return existsSync(venvPython) ? venvPython : 'python3';
 }
 
 function run(command, cwd, label) {

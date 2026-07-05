@@ -39,13 +39,54 @@ def _normalize_subject(subject: str) -> str:
     return subject
 
 
-def _normalize_element(element: Dict[str, Any]) -> Dict[str, str]:
+def _normalize_values(values: Any) -> List[str]:
+    normalized: List[str] = []
+    for item in values or []:
+        if isinstance(item, dict):
+            item_type = _clean(item.get("type")).lower()
+            item_value = _clean(item.get("value")).lower()
+            if item_type and item_value:
+                normalized.append(f"{item_type}:{item_value}")
+                continue
+            text_value = _clean(item.get("normalized_text") or item.get("raw_text")).lower()
+            if text_value:
+                normalized.append(text_value)
+            continue
+        text_value = _clean(item).lower()
+        if text_value:
+            normalized.append(text_value)
+    return normalized
+
+
+def _selected_formal_terms(element: Dict[str, Any]) -> Dict[str, str]:
+    formal_terms = element.get("formal_terms") or {}
+    keys = [
+        "actor_id",
+        "actor_predicate",
+        "action_predicate",
+        "object_predicate",
+        "recipient_id",
+        "norm_predicate",
+        "category_predicate",
+        "defined_term_id",
+    ]
+    return {key: str(formal_terms.get(key) or "") for key in keys}
+
+
+def _normalize_element(element: Dict[str, Any]) -> Dict[str, Any]:
     subject = _normalize_subject(_first_slot(element.get("subject")))
     action = _normalize_action(_first_slot(element.get("action") or element.get("proposition")))
     return {
+        "norm_type": str(element.get("norm_type") or ""),
         "deontic_operator": str(element.get("deontic_operator") or ""),
         "subject": subject,
         "action": action,
+        "conditions": _normalize_values(element.get("conditions")),
+        "temporal_constraints": _normalize_values(element.get("temporal_constraints")),
+        "exceptions": _normalize_values(element.get("exceptions")),
+        "cross_references": _normalize_values(element.get("cross_references")),
+        "parser_warnings": sorted(str(item) for item in (element.get("parser_warnings") or [])),
+        "formal_terms": _selected_formal_terms(element),
     }
 
 

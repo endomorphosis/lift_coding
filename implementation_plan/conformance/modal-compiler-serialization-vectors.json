@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "2026-07-05",
+  "ambiguities": [
+    {
+      "id": "modal-compiler-ambiguity-default-001",
+      "ambiguityType": "missing_modal_formula",
+      "message": "No deterministic modal formula was produced for non-empty text.",
+      "candidateIds": [],
+      "severity": "review",
+      "metadata": {}
+    },
+    {
+      "id": "modal-compiler-ambiguity-frame-001",
+      "ambiguityType": "frame_selection",
+      "message": "Two frame candidates are within the configured score margin.",
+      "candidateIds": ["deontic", "temporal"],
+      "severity": "warning",
+      "metadata": {
+        "score_margin": 0.04,
+        "selected_frame": "deontic"
+      }
+    },
+    {
+      "id": "modal-compiler-ambiguity-policy-001",
+      "ambiguityType": "adaptive_family_policy",
+      "message": "Compiler policy requires target-family review.",
+      "candidateIds": ["dynamic"],
+      "severity": "requires_rule",
+      "metadata": {
+        "predicted_family": "conditional",
+        "target_family": "dynamic",
+        "priority": true
+      }
+    }
+  ]
+}

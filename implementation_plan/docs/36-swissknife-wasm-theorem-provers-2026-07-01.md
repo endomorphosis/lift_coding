@@ -3318,6 +3318,20 @@ reproduced in TS and **proven equivalent to the real Python module** by a test t
   certificate pass (`checks=14`), and TS coverage reconciliation pass
   (`coreRules=8`, `failureCount=0`).
 
+**2026-07-05 delta (PORT-240/PORT-257 artifact isolation):**
+- Hardened `implementation_plan/conformance/mutation_gate.mjs` so the mutation
+  gate uses the repo `.venv/bin/python` when available, passes the same required
+  Python engine flags as `conformance-py`, and writes mutation baselines to
+  dedicated `py-mutation-baseline-results.json` /
+  `ts-mutation-baseline-results.json` files instead of clobbering the main
+  `py-results.json` / `ts-results.json` artifacts used later by strict
+  self-containment.
+- Revalidated with full `make conformance` (green): parity report
+  `total=275`, `MATCH=243`, `HOST_NATIVE_EXCLUDED=32`, `MISMATCH=0`,
+  `SIMULATED_DEPENDENCY=0`; strict self-contained report `MATCH=275/275`;
+  mutation gate `mutationDrop=25`; differential fuzz `140/140`; behavioral
+  certificate `checks=40`; substance gate `violations=0`.
+
 **2026-07-05 delta (PORT-238 hard-reporting guardrail):**
 - Added host-native exclusion semantics in
   `implementation_plan/conformance/compare.mjs`:
@@ -3635,7 +3649,15 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `implementation_plan/conformance/deontic_parser_elements_py_runner.py`, and
   `test/conformance/deontic-parser-elements-crosslang-conformance.test.ts`
   (`conformance-deontic-parser-elements-crosslang`) for simple single-clause norms.
-  Full parser AST parity remains open.
+  **2026-07-05 AST hardening slice:** the element gate now covers seven
+  deterministic parser vectors and compares normalized AST fields instead of
+  only first-slot triples: `norm_type`, operator, subject/action, condition,
+  exception, temporal constraint, cross-reference, parser-warning, and selected
+  formal-term predicate outputs. TS extraction now directly mirrors Python's
+  leading article normalization, reference-tail action trimming,
+  unresolved-exception/reference warnings, plural permit/license frame
+  classification, and structured temporal/reference detail keys. Full parser
+  AST parity over the complete Python corpus remains open.
 - **PORT-249 🟠 — De-hollow the bridges** (`bridge/{multiview,cec_dcec,deontic_norms,fol_tdfol}.py`).
   **AC:** bridge triple/graph output matches Python for a shared fixture set.
   **2026-07-05 starter gate:** cross-language parity is now enforced for
