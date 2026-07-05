@@ -86,6 +86,14 @@ SwissKnife theorem-prover parity harness.
   modal operator feature key, operator-pair feature key, temporal prefix
   relation, and temporal context-cue helper parity against the Python modal
   codec.
+- `make conformance-modal-codec-stable-embedding-crosslang` gates PORT-246
+  Python-compatible `stable_mock_embedding` parity and asserts the TS codec
+  encode path uses that deterministic source embedding rather than the older
+  character-folding simulated embedding.
+- `make conformance-modal-decompiler-crosslang` gates PORT-247 decompiler
+  token-similarity, decoded phrase slot-map, structured `ModalIRFormula`
+  rendering, and decoded-document summary parity against the Python modal
+  decompiler.
 - `make conformance-modal-decompiler-citation-crosslang` gates PORT-247
   decompiler citation normalization and section/source-id helper parity against
   the Python modal decompiler.
@@ -93,9 +101,18 @@ SwissKnife theorem-prover parity harness.
   modal operator feature key, operator-pair feature key, temporal prefix
   relation, and temporal context-cue helper parity against the Python modal
   decompiler.
+- `make conformance-deontic-formula-builder-crosslang` gates PORT-248 parser
+  element to formula and source-grounded formula-record parity against Python
+  `deontic/formula_builder.py`.
 - `make conformance-modal-compiler-serialization-crosslang` gates PORT-250
   compiler config and ambiguity serialization parity against the Python modal
   compiler dataclasses.
+- `make conformance-modal-compiler-ambiguity-policy-crosslang` gates PORT-250
+  compiler ambiguity target, pair-classification, contested-zero-margin, and
+  margin-buffer helper parity against the Python modal compiler/registry.
+- `make conformance-modal-compiler-formula-ambiguity-crosslang` gates PORT-250
+  compiler formula-span ambiguity detection and ranking-share extraction parity
+  against the Python modal compiler.
 - `make conformance-deontic-bridge-frame-graph-crosslang` gates PORT-249
   deontic bridge frame-logic triples and Neo4j-compatible graph projection
   parity against the Python bridge/projection functions.

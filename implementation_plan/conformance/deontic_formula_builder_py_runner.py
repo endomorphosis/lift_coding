@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Python reference runner for deontic bridge fill/slot helpers."""
+"""Python reference runner for deontic formula builder parser-element vectors."""
 
 from __future__ import annotations
 
@@ -12,11 +12,35 @@ from typing import Any, Dict, List
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "external" / "ipfs_datasets"))
 
-from ipfs_datasets_py.logic.bridge.deontic_norms import (
-    _copy_slot_value,
-    _fill_empty_field,
-    _value_is_present,
+from ipfs_datasets_py.logic.deontic.formula_builder import (
+    parser_element_to_formula,
+    parser_element_to_formula_record,
 )
+
+
+RECORD_KEYS = [
+    "formula_id",
+    "source_id",
+    "canonical_citation",
+    "target_logic",
+    "formula",
+    "modality",
+    "norm_type",
+    "support_span",
+    "proof_ready",
+    "requires_validation",
+    "repair_required",
+    "blockers",
+    "parser_warnings",
+    "included_formula_slots",
+    "omitted_formula_slots",
+    "deterministic_resolution",
+    "schema_version",
+]
+
+
+def _selected_record(record: Dict[str, Any]) -> Dict[str, Any]:
+    return {key: record.get(key) for key in RECORD_KEYS}
 
 
 def main() -> int:
@@ -27,30 +51,17 @@ def main() -> int:
 
     vectors_path = Path(args.vectors)
     out_path = Path(args.out)
-
     payload = json.loads(vectors_path.read_text(encoding="utf-8"))
+
     rows: List[Dict[str, Any]] = []
-
     for vector in payload.get("vectors", []):
-        kind = vector.get("kind")
-        if kind == "value_is_present":
-            output: Any = _value_is_present(vector.get("value"))
-        elif kind == "copy_slot_value":
-            output = _copy_slot_value(vector.get("value"))
-        elif kind == "fill_empty_field":
-            target = dict(vector.get("target") or {})
-            source = dict(vector.get("source") or {})
-            key = str(vector.get("key") or "")
-            _fill_empty_field(target, source, key)
-            output = target
-        else:
-            output = None
-
+        element = dict(vector.get("element") or {})
+        record = parser_element_to_formula_record(element)
         rows.append(
             {
                 "id": vector["id"],
-                "kind": kind,
-                "output": output,
+                "formula": parser_element_to_formula(element),
+                "record": _selected_record(record),
             }
         )
 

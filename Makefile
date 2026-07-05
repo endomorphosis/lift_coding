@@ -1,7 +1,7 @@
 SHELL := /usr/bin/env bash
 
 .PHONY: deps fmt fmt-check lint test openapi-validate compose-up compose-down dev inotify-check inotify-apply conformance conformance-ts conformance-symbol-coverage conformance-py conformance-compare conformance-mutate conformance-symbols conformance-mutation-gate conformance-differential-fuzz conformance-self-containment conformance-self-containment-strict conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
-.PHONY: conformance-modal-codec-temporal-operator-crosslang conformance-modal-codec-guidance-summary-crosslang conformance-modal-decompiler-temporal-operator-crosslang conformance-deontic-bridge-frame-graph-crosslang conformance-bridge-frame-graph-crosslang conformance-multiview-merge-crosslang
+.PHONY: conformance-modal-codec-temporal-operator-crosslang conformance-modal-codec-guidance-summary-crosslang conformance-modal-codec-stable-embedding-crosslang conformance-modal-decompiler-temporal-operator-crosslang conformance-modal-compiler-ambiguity-policy-crosslang conformance-modal-compiler-formula-ambiguity-crosslang conformance-deontic-formula-builder-crosslang conformance-deontic-bridge-frame-graph-crosslang conformance-bridge-frame-graph-crosslang conformance-multiview-merge-crosslang
 
 ifeq ($(wildcard .venv/bin/python),.venv/bin/python)
 PYTHON ?= .venv/bin/python
@@ -33,6 +33,10 @@ test:
 conformance: conformance-symbols conformance-ts conformance-symbol-coverage conformance-py conformance-compare conformance-mutation-gate conformance-differential-fuzz conformance-self-containment conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
 conformance: conformance-modal-codec-temporal-operator-crosslang conformance-modal-decompiler-temporal-operator-crosslang
 conformance: conformance-modal-codec-guidance-summary-crosslang
+conformance: conformance-modal-codec-stable-embedding-crosslang
+conformance: conformance-modal-compiler-ambiguity-policy-crosslang
+conformance: conformance-modal-compiler-formula-ambiguity-crosslang
+conformance: conformance-deontic-formula-builder-crosslang
 conformance: conformance-deontic-bridge-frame-graph-crosslang
 conformance: conformance-bridge-frame-graph-crosslang
 conformance: conformance-multiview-merge-crosslang
@@ -84,6 +88,9 @@ conformance-modal-codec-temporal-operator-crosslang:
 conformance-modal-codec-guidance-summary-crosslang:
 	cd swissknife && npx jest test/conformance/modal-codec-guidance-summary-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
 
+conformance-modal-codec-stable-embedding-crosslang:
+	cd swissknife && npx jest test/conformance/modal-codec-stable-embedding-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
+
 conformance-modal-decompiler-crosslang:
 	cd swissknife && npx jest test/conformance/modal-decompiler-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
 
@@ -99,11 +106,20 @@ conformance-deontic-parser-utils-crosslang:
 conformance-deontic-parser-elements-crosslang:
 	cd swissknife && npx jest test/conformance/deontic-parser-elements-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
 
+conformance-deontic-formula-builder-crosslang:
+	cd swissknife && npx jest test/conformance/deontic-formula-builder-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
+
 conformance-modal-compiler-family-token-crosslang:
 	cd swissknife && npx jest test/conformance/modal-compiler-family-token-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
 
 conformance-modal-compiler-serialization-crosslang:
 	cd swissknife && npx jest test/conformance/modal-compiler-serialization-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
+
+conformance-modal-compiler-ambiguity-policy-crosslang:
+	cd swissknife && npx jest test/conformance/modal-compiler-ambiguity-policy-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
+
+conformance-modal-compiler-formula-ambiguity-crosslang:
+	cd swissknife && npx jest test/conformance/modal-compiler-formula-ambiguity-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand
 
 conformance-deontic-bridge-document-id-crosslang:
 	cd swissknife && npx jest test/conformance/deontic-bridge-document-id-crosslang-conformance.test.ts --config config/jest/jest.config.cjs --runInBand

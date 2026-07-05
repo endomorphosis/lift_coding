@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Python reference runner for deontic bridge fill/slot helpers."""
+"""Python reference runner for modal codec stable embedding vectors."""
 
 from __future__ import annotations
 
@@ -12,11 +12,7 @@ from typing import Any, Dict, List
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT / "external" / "ipfs_datasets"))
 
-from ipfs_datasets_py.logic.bridge.deontic_norms import (
-    _copy_slot_value,
-    _fill_empty_field,
-    _value_is_present,
-)
+from ipfs_datasets_py.logic.modal.codec import stable_mock_embedding
 
 
 def main() -> int:
@@ -27,30 +23,15 @@ def main() -> int:
 
     vectors_path = Path(args.vectors)
     out_path = Path(args.out)
-
     payload = json.loads(vectors_path.read_text(encoding="utf-8"))
+
     rows: List[Dict[str, Any]] = []
-
     for vector in payload.get("vectors", []):
-        kind = vector.get("kind")
-        if kind == "value_is_present":
-            output: Any = _value_is_present(vector.get("value"))
-        elif kind == "copy_slot_value":
-            output = _copy_slot_value(vector.get("value"))
-        elif kind == "fill_empty_field":
-            target = dict(vector.get("target") or {})
-            source = dict(vector.get("source") or {})
-            key = str(vector.get("key") or "")
-            _fill_empty_field(target, source, key)
-            output = target
-        else:
-            output = None
-
+        dimensions = int(vector.get("dimensions") or 8)
         rows.append(
             {
                 "id": vector["id"],
-                "kind": kind,
-                "output": output,
+                "embedding": stable_mock_embedding(str(vector.get("text") or ""), dimensions=dimensions),
             }
         )
 

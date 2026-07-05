@@ -6,7 +6,11 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+import sys
 from typing import Any, Dict, List
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "external" / "ipfs_datasets"))
 
 from ipfs_datasets_py.logic.bridge.deontic_norms import _normalized_text_from_deontic_rows
 

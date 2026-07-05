@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "2026-07-05",
+  "formulaDocuments": [
+    {
+      "id": "compiler-formula-ambiguity-multifamily-span-001",
+      "formulas": [
+        {
+          "formulaId": "f-deontic",
+          "operator": {
+            "family": "deontic",
+            "system": "SDL",
+            "symbol": "O"
+          },
+          "predicate": {
+            "name": "file_report",
+            "arguments": ["agent"]
+          },
+          "provenance": {
+            "sourceId": "doc-001",
+            "startChar": 0,
+            "endChar": 24
+          }
+        },
+        {
+          "formulaId": "f-temporal",
+          "operator": {
+            "family": "temporal",
+            "system": "LTL",
+            "symbol": "G"
+          },
+          "predicate": {
+            "name": "file_report",
+            "arguments": ["agent"]
+          },
+          "provenance": {
+            "sourceId": "doc-001",
+            "startChar": 0,
+            "endChar": 24
+          }
+        }
+      ]
+    },
+    {
+      "id": "compiler-formula-ambiguity-same-family-negative-001",
+      "formulas": [
+        {
+          "formulaId": "f-obl",
+          "operator": {
+            "family": "deontic",
+            "system": "SDL",
+            "symbol": "O"
+          },
+          "predicate": {
+            "name": "retain_record",
+            "arguments": ["agency"]
+          },
+          "provenance": {
+            "sourceId": "doc-002",
+            "startChar": 5,
+            "endChar": 44
+          }
+        },
+        {
+          "formulaId": "f-permit",
+          "operator": {
+            "family": "deontic",
+            "system": "SDL",
+            "symbol": "P"
+          },
+          "predicate": {
+            "name": "retain_record",
+            "arguments": ["agency"]
+          },
+          "provenance": {
+            "sourceId": "doc-002",
+            "startChar": 5,
+            "endChar": 44
+          }
+        }
+      ]
+    },
+    {
+      "id": "compiler-formula-ambiguity-distinct-spans-negative-001",
+      "formulas": [
+        {
+          "formulaId": "f-frame",
+          "operator": {
+            "family": "frame",
+            "system": "FrameLogic",
+            "symbol": "frame"
+          },
+          "predicate": {
+            "name": "define_term",
+            "arguments": ["covered_entity"]
+          },
+          "provenance": {
+            "sourceId": "doc-003",
+            "startChar": 0,
+            "endChar": 18
+          }
+        },
+        {
+          "formulaId": "f-dynamic",
+          "operator": {
+            "family": "dynamic",
+            "system": "PDL",
+            "symbol": "⟨α⟩"
+          },
+          "predicate": {
+            "name": "take_action",
+            "arguments": ["covered_entity"]
+          },
+          "provenance": {
+            "sourceId": "doc-003",
+            "startChar": 20,
+            "endChar": 49
+          }
+        }
+      ]
+    },
+    {
+      "id": "compiler-formula-ambiguity-sorted-candidates-001",
+      "formulas": [
+        {
+          "formulaId": "z-last",
+          "operator": {
+            "family": "temporal",
+            "system": "LTL",
+            "symbol": "F"
+          },
+          "predicate": {
+            "name": "notify",
+            "arguments": ["agency"]
+          },
+          "provenance": {
+            "sourceId": "doc-004",
+            "startChar": 9,
+            "endChar": 31
+          }
+        },
+        {
+          "formulaId": "a-first",
+          "operator": {
+            "family": "alethic",
+            "system": "K",
+            "symbol": "□"
+          },
+          "predicate": {
+            "name": "notify",
+            "arguments": ["agency"]
+          },
+          "provenance": {
+            "sourceId": "doc-004",
+            "startChar": 9,
+            "endChar": 31
+          }
+        }
+      ]
+    }
+  ],
+  "rankingShareCases": [
+    {
+      "id": "ranking-share-prefers-raw-001",
+      "candidate": {
+        "family": "deontic",
+        "share": 0.1,
+        "share_raw": 0.3456789
+      }
+    },
+    {
+      "id": "ranking-share-string-share-001",
+      "candidate": {
+        "family": "temporal",
+        "share": "0.625"
+      }
+    },
+    {
+      "id": "ranking-share-invalid-raw-does-not-fallback-001",
+      "candidate": {
+        "family": "frame",
+        "share": 0.75,
+        "share_raw": null
+      }
+    },
+    {
+      "id": "ranking-share-missing-001",
+      "candidate": {
+        "family": "dynamic"
+      }
+    }
+  ]
+}

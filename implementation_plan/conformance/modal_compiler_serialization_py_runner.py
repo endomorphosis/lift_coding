@@ -7,7 +7,11 @@ import argparse
 import json
 from dataclasses import asdict
 from pathlib import Path
+import sys
 from typing import Any, Dict
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "external" / "ipfs_datasets"))
 
 from ipfs_datasets_py.logic.modal.compiler import (
     ModalCompilationAmbiguity,
