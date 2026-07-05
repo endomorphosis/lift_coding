@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "ergo-entailment-direct-001",
+      "description": "Direct axiom entails formula",
+      "formula": "P",
+      "axioms": ["P"],
+      "expected": {
+        "isProved": true
+      }
+    },
+    {
+      "id": "ergo-entailment-modus-ponens-001",
+      "description": "Single-step implication closure",
+      "formula": "Q",
+      "axioms": ["P", "P→Q"],
+      "expected": {
+        "isProved": true
+      }
+    },
+    {
+      "id": "ergo-entailment-chain-001",
+      "description": "Multi-step implication closure",
+      "formula": "R",
+      "axioms": ["P", "P→Q", "Q→R"],
+      "expected": {
+        "isProved": true
+      }
+    },
+    {
+      "id": "ergo-entailment-unprovable-001",
+      "description": "Formula absent from closure remains unproved",
+      "formula": "Z",
+      "axioms": ["P", "P→Q", "Q→R"],
+      "expected": {
+        "isProved": false
+      }
+    },
+    {
+      "id": "ergo-entailment-missing-antecedent-001",
+      "description": "Implication without antecedent fact does not derive consequent",
+      "formula": "Q",
+      "axioms": ["P→Q"],
+      "expected": {
+        "isProved": false
+      }
+    }
+  ]
+}

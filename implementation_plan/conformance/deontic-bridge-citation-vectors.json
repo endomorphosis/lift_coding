@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "citation-empty-norms",
+      "norms": [],
+      "expected": null
+    },
+    {
+      "id": "citation-first-canonical",
+      "norms": [
+        { "canonical_citation": "18 U.S.C. 1030" }
+      ],
+      "expected": "18 U.S.C. 1030"
+    },
+    {
+      "id": "citation-prefers-first",
+      "norms": [
+        { "canonical_citation": "first:citation" },
+        { "canonical_citation": "second:citation" }
+      ],
+      "expected": "first:citation"
+    },
+    {
+      "id": "citation-missing-first",
+      "norms": [
+        { "canonical_citation": "" },
+        { "canonical_citation": "second:citation" }
+      ],
+      "expected": null
+    }
+  ]
+}

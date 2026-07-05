@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "target-view-direct",
+      "kind": "target_view",
+      "row": { "target_view": "deontic_ir" },
+      "expected": "deontic.ir"
+    },
+    {
+      "id": "target-view-bundle-fallback",
+      "kind": "target_view",
+      "row": { "bundle": { "predicted_view": "legal-ir-view:deontic.ir" } },
+      "expected": "legal-ir-view:deontic.ir"
+    },
+    {
+      "id": "target-view-empty",
+      "kind": "target_view",
+      "row": { "x": 1 },
+      "expected": ""
+    },
+    {
+      "id": "frame-symbol-clean",
+      "kind": "canonical_frame_symbol",
+      "value": "Deontic-IR: Frame#One!",
+      "expected": "deontic_ir_frameone"
+    },
+    {
+      "id": "frame-symbol-truncate",
+      "kind": "canonical_frame_symbol",
+      "value": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a",
+      "expected": "a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_a_"
+    },
+    {
+      "id": "normalized-guidance-text",
+      "kind": "normalized_guidance_text",
+      "value": "  Mixed   CASE\nText\tHere  ",
+      "expected": "mixed case text here"
+    }
+  ]
+}

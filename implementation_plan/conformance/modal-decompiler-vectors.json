@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "2026-07-05",
+  "similarityCases": [
+    {
+      "id": "decompiler-similarity-empty-001",
+      "left": "",
+      "right": "",
+      "expected": 1.0
+    },
+    {
+      "id": "decompiler-similarity-partial-001",
+      "left": "Alice must report by 5pm",
+      "right": "alice must report by 5 pm",
+      "expected": 0.727273
+    },
+    {
+      "id": "decompiler-similarity-apostrophe-001",
+      "left": "Contractor's duty",
+      "right": "contractor duty",
+      "expected": 0.5
+    }
+  ],
+  "slotMapCases": [
+    {
+      "id": "decompiler-slot-map-default-001",
+      "includeFixed": false,
+      "includeProvenanceOnly": true,
+      "decoded": {
+        "sourceId": "doc-1",
+        "text": "dummy",
+        "phrases": [
+          {
+            "text": "  Alice   ",
+            "slot": " actor ",
+            "fixed": false,
+            "provenanceOnly": false
+          },
+          {
+            "text": "Alice",
+            "slot": "actor",
+            "fixed": false,
+            "provenanceOnly": false
+          },
+          {
+            "text": "must report",
+            "slot": "predicate",
+            "fixed": true,
+            "provenanceOnly": false
+          },
+          {
+            "text": "section 101",
+            "slot": "citation",
+            "fixed": false,
+            "provenanceOnly": true
+          }
+        ]
+      },
+      "expected": {
+        "actor": [
+          "Alice"
+        ],
+        "citation": [
+          "section 101"
+        ]
+      }
+    },
+    {
+      "id": "decompiler-slot-map-no-prov-001",
+      "includeFixed": true,
+      "includeProvenanceOnly": false,
+      "decoded": {
+        "sourceId": "doc-2",
+        "text": "dummy",
+        "phrases": [
+          {
+            "text": "Bob",
+            "slot": "actor",
+            "fixed": false,
+            "provenanceOnly": false
+          },
+          {
+            "text": "must pay",
+            "slot": "predicate",
+            "fixed": true,
+            "provenanceOnly": false
+          },
+          {
+            "text": "section 202",
+            "slot": "citation",
+            "fixed": false,
+            "provenanceOnly": true
+          }
+        ]
+      },
+      "expected": {
+        "actor": [
+          "Bob"
+        ],
+        "predicate": [
+          "must pay"
+        ]
+      }
+    }
+  ]
+}

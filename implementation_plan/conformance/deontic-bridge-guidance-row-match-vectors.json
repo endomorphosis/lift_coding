@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "match-by-sample-id",
+      "row": { "sample_id": "doc-1" },
+      "context": { "document_id": "ctx-9", "source_text": "unused" },
+      "norm": { "document_id": "doc-1" },
+      "expected": true
+    },
+    {
+      "id": "match-by-citation",
+      "row": { "canonical_citation": "USC-100" },
+      "context": { "citation": "USC-100", "source_text": "unused" },
+      "norm": {},
+      "expected": true
+    },
+    {
+      "id": "match-by-preview-in-source",
+      "row": { "text_preview": "  Agent   must   pay  " },
+      "context": { "source_text": "The AGENT must pay within 30 days." },
+      "norm": {},
+      "expected": true
+    },
+    {
+      "id": "no-match",
+      "row": { "sample_id": "row-1", "citation": "CITE-A", "text": "foo bar" },
+      "context": { "document_id": "ctx-2", "citation": "CITE-B", "source_text": "different text" },
+      "norm": { "document_id": "norm-3", "citation": "CITE-C" },
+      "expected": false
+    }
+  ]
+}

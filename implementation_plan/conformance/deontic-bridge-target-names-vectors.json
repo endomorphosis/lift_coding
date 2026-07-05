@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "target-string",
+      "input": "deontic.ir",
+      "expectedListOfStrings": ["deontic.ir"],
+      "expectedNormalizedTargetNames": ["deontic.ir"]
+    },
+    {
+      "id": "target-list-with-whitespace-and-duplicates",
+      "input": [" deontic.ir ", "frame.logic", "deontic.ir", "", "  "],
+      "expectedListOfStrings": ["deontic.ir", "frame.logic", "deontic.ir"],
+      "expectedNormalizedTargetNames": ["deontic.ir", "frame.logic"]
+    },
+    {
+      "id": "target-mixed-list",
+      "input": ["graph", 7, null, true, "graph", " proof "],
+      "expectedListOfStrings": ["graph", "7", "None", "True", "graph", "proof"],
+      "expectedNormalizedTargetNames": ["graph", "7", "None", "True", "proof"]
+    },
+    {
+      "id": "target-null-input",
+      "input": null,
+      "expectedListOfStrings": [],
+      "expectedNormalizedTargetNames": []
+    },
+    {
+      "id": "target-object-input",
+      "input": { "a": 1 },
+      "expectedListOfStrings": ["a"],
+      "expectedNormalizedTargetNames": ["a"]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "collect-mapping-and-sort",
+      "guidance": {
+        "evidence": [
+          { "sample_id": "b", "evidence_rank": 10 },
+          { "sample_id": "a", "evidence_rank": 1 }
+        ]
+      },
+      "expected": [
+        { "collectionKey": "evidence", "row": { "sample_id": "a", "evidence_rank": 1 } },
+        { "collectionKey": "evidence", "row": { "sample_id": "b", "evidence_rank": 10 } }
+      ]
+    },
+    {
+      "id": "collect-json-string-array",
+      "guidance": {
+        "hint_evidence": "[{\"sample_id\":\"x\",\"rank\":2},{\"sample_id\":\"y\",\"rank\":1}]"
+      },
+      "expected": [
+        { "collectionKey": "hint_evidence", "row": { "sample_id": "y", "rank": 1 } },
+        { "collectionKey": "hint_evidence", "row": { "sample_id": "x", "rank": 2 } }
+      ]
+    },
+    {
+      "id": "collect-mixed-keys-order",
+      "guidance": {
+        "samples": { "sample_id": "s", "rank": 5 },
+        "guidance_evidence": { "sample_id": "g", "evidence_rank": 2 }
+      },
+      "expected": [
+        { "collectionKey": "guidance_evidence", "row": { "sample_id": "g", "evidence_rank": 2 } },
+        { "collectionKey": "samples", "row": { "sample_id": "s", "rank": 5 } }
+      ]
+    }
+  ]
+}

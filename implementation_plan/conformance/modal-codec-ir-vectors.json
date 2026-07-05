@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "modal-ir-empty-001",
+      "description": "Empty formula list uses hybrid family and empty text",
+      "modalIr": {
+        "formulas": []
+      },
+      "expected": {
+        "decodedText": "",
+        "targetFamily": "hybrid",
+        "targetFamilyDistribution": {
+          "hybrid": 1.0
+        }
+      }
+    },
+    {
+      "id": "modal-ir-single-deontic-001",
+      "description": "Single formula renders deterministic text and family",
+      "modalIr": {
+        "formulas": [
+          {
+            "operator": {
+              "symbol": "O",
+              "family": "deontic",
+              "system": "SDL"
+            },
+            "predicate": {
+              "name": "pay_tax",
+              "arguments": ["contractor"]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "decodedText": "O[deontic:SDL](pay_tax(contractor))",
+        "targetFamily": "deontic",
+        "targetFamilyDistribution": {
+          "deontic": 1.0
+        }
+      }
+    },
+    {
+      "id": "modal-ir-multi-family-001",
+      "description": "Multiple formulas produce semicolon text and sorted family distribution",
+      "modalIr": {
+        "formulas": [
+          {
+            "operator": {
+              "symbol": "K",
+              "family": "epistemic",
+              "system": "S5"
+            },
+            "predicate": {
+              "name": "knows",
+              "arguments": ["alice", "obligation"]
+            }
+          },
+          {
+            "operator": {
+              "symbol": "O",
+              "family": "deontic",
+              "system": "SDL"
+            },
+            "predicate": {
+              "name": "report",
+              "arguments": ["alice"]
+            }
+          },
+          {
+            "operator": {
+              "symbol": "G",
+              "family": "temporal",
+              "system": "LTL"
+            },
+            "predicate": {
+              "name": "retain_records",
+              "arguments": []
+            }
+          },
+          {
+            "operator": {
+              "symbol": "O",
+              "family": "deontic",
+              "system": "SDL"
+            },
+            "predicate": {
+              "name": "notify",
+              "arguments": ["supervisor", "incident"]
+            }
+          }
+        ]
+      },
+      "expected": {
+        "decodedText": "K[epistemic:S5](knows(alice, obligation)); O[deontic:SDL](report(alice)); G[temporal:LTL](retain_records); O[deontic:SDL](notify(supervisor, incident))",
+        "targetFamily": "epistemic",
+        "targetFamilyDistribution": {
+          "deontic": 0.5,
+          "epistemic": 0.25,
+          "temporal": 0.25
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "deontic-element-obligation-001",
+      "text": "The contractor shall submit a report.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "deontic_operator": "O",
+          "subject": "contractor",
+          "action": "submit a report"
+        }
+      }
+    },
+    {
+      "id": "deontic-element-permission-001",
+      "text": "The agency may issue permits.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "deontic_operator": "P",
+          "subject": "agency",
+          "action": "issue permits"
+        }
+      }
+    },
+    {
+      "id": "deontic-element-prohibition-001",
+      "text": "A person shall not disclose records.",
+      "expected": {
+        "count": 1,
+        "first": {
+          "deontic_operator": "F",
+          "subject": "person",
+          "action": "disclose records"
+        }
+      }
+    }
+  ]
+}

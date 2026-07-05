@@ -1,8 +1,8 @@
 {
   "summary": {
     "modules": 288,
-    "pyLocTotal": 149914,
-    "tsLocTotal": 94184,
+    "pyLocTotal": 153015,
+    "tsLocTotal": 94262,
     "verdicts": {
       "SUBSTANTIVE": 229,
       "MISSING": 41,
@@ -362,8 +362,8 @@
         "sk:services/deontic-analyzer.ts",
         "sk:services/deontic-norms-bridge.ts"
       ],
-      "tsLoc": 539,
-      "locRatio": 1.8,
+      "tsLoc": 556,
+      "locRatio": 1.86,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
@@ -964,8 +964,8 @@
         "sk:services/deontic-analyzer.ts",
         "sk:services/deontic-norms-bridge.ts"
       ],
-      "tsLoc": 539,
-      "locRatio": 1.67,
+      "tsLoc": 556,
+      "locRatio": 1.72,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
@@ -1471,7 +1471,7 @@
     },
     {
       "module": "bridge/cec_dcec.py",
-      "pyLoc": 3654,
+      "pyLoc": 3759,
       "pySymbols": 1,
       "tsFiles": [
         "sk:services/cec-dcec-namespace.ts",
@@ -1486,13 +1486,13 @@
     },
     {
       "module": "bridge/deontic_norms.py",
-      "pyLoc": 2617,
+      "pyLoc": 2708,
       "pySymbols": 1,
       "tsFiles": [
         "sk:services/deontic-norms-bridge.ts",
         "sk:services/deontic-norms-bridge.ts"
       ],
-      "tsLoc": 418,
+      "tsLoc": 424,
       "locRatio": 0.16,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
@@ -1500,21 +1500,21 @@
     },
     {
       "module": "bridge/external_prover_router.py",
-      "pyLoc": 1461,
+      "pyLoc": 1487,
       "pySymbols": 1,
       "tsFiles": [
         "sk:services/prover-router.ts",
         "sk:services/prover-router.ts"
       ],
       "tsLoc": 580,
-      "locRatio": 0.4,
+      "locRatio": 0.39,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
     },
     {
       "module": "bridge/fol_tdfol.py",
-      "pyLoc": 2058,
+      "pyLoc": 2076,
       "pySymbols": 2,
       "tsFiles": [
         "sk:services/fol-tdfol-bridge.ts",
@@ -1541,7 +1541,7 @@
     },
     {
       "module": "bridge/multiview.py",
-      "pyLoc": 4062,
+      "pyLoc": 4095,
       "pySymbols": 3,
       "tsFiles": [
         "sk:services/bridge-multiview.ts",
@@ -1555,7 +1555,7 @@
     },
     {
       "module": "bridge/registry.py",
-      "pyLoc": 259,
+      "pyLoc": 261,
       "pySymbols": 6,
       "tsFiles": [
         "sk:services/registry.ts",
@@ -1568,7 +1568,7 @@
         "sk:tasks/registry.ts"
       ],
       "tsLoc": 1126,
-      "locRatio": 4.35,
+      "locRatio": 4.31,
       "hollowMarkers": 12,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
@@ -1731,8 +1731,8 @@
         "sk:services/deontic-analyzer.ts",
         "sk:services/legal-symbolic-analyzer.ts"
       ],
-      "tsLoc": 527,
-      "locRatio": 1.31,
+      "tsLoc": 541,
+      "locRatio": 1.34,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
@@ -1783,14 +1783,14 @@
     },
     {
       "module": "deontic/formula_builder.py",
-      "pyLoc": 5955,
+      "pyLoc": 5984,
       "pySymbols": 7,
       "tsFiles": [
         "sk:services/deontic-formula-builder.ts",
         "sk:services/deontic-formula-builder.ts"
       ],
       "tsLoc": 628,
-      "locRatio": 0.11,
+      "locRatio": 0.1,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "THIN"
@@ -1810,7 +1810,7 @@
     },
     {
       "module": "deontic/ir.py",
-      "pyLoc": 2410,
+      "pyLoc": 2439,
       "pySymbols": 8,
       "tsFiles": [],
       "tsLoc": 0,
@@ -1861,13 +1861,13 @@
     },
     {
       "module": "deontic/prover_syntax.py",
-      "pyLoc": 1504,
+      "pyLoc": 1527,
       "pySymbols": 4,
       "tsFiles": [
         "sk:services/deontic/prover-syntax-builder.ts",
         "sk:services/deontic/prover-syntax-builder.ts"
       ],
-      "tsLoc": 696,
+      "tsLoc": 704,
       "locRatio": 0.46,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
@@ -1896,7 +1896,7 @@
         "sk:services/deontic/deontic-parser-utils.ts",
         "sk:commands/parser.ts"
       ],
-      "tsLoc": 334,
+      "tsLoc": 342,
       "locRatio": 0.07,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
@@ -2169,8 +2169,8 @@
         "sk:services/deontic/deontic-parser-utils.ts",
         "sk:commands/parser.ts"
       ],
-      "tsLoc": 334,
-      "locRatio": 1.81,
+      "tsLoc": 342,
+      "locRatio": 1.85,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
@@ -3268,7 +3268,7 @@
     },
     {
       "module": "modal/codec.py",
-      "pyLoc": 12393,
+      "pyLoc": 12482,
       "pySymbols": 8,
       "tsFiles": [
         "sk:services/modal-logic-codec.ts",
@@ -3282,7 +3282,7 @@
     },
     {
       "module": "modal/compiler.py",
-      "pyLoc": 3217,
+      "pyLoc": 3257,
       "pySymbols": 4,
       "tsFiles": [
         "sk:services/modal-compiler.ts",
@@ -3297,21 +3297,21 @@
     },
     {
       "module": "modal/decompiler.py",
-      "pyLoc": 12165,
+      "pyLoc": 14731,
       "pySymbols": 6,
       "tsFiles": [
         "sk:services/modal-ir-decompiler.ts",
         "sk:services/modal-ir-decompiler.ts"
       ],
       "tsLoc": 326,
-      "locRatio": 0.03,
+      "locRatio": 0.02,
       "hollowMarkers": 2,
       "delegationMarkers": 0,
       "verdict": "THIN"
     },
     {
       "module": "modal/kg_bridge.py",
-      "pyLoc": 1240,
+      "pyLoc": 1270,
       "pySymbols": 6,
       "tsFiles": [
         "sk:services/modal-kg-bridge.ts",
@@ -3319,7 +3319,7 @@
         "sk:commands/bridge.ts"
       ],
       "tsLoc": 721,
-      "locRatio": 0.58,
+      "locRatio": 0.57,
       "hollowMarkers": 1,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"
@@ -3656,14 +3656,14 @@
     },
     {
       "module": "zkp/circuits.py",
-      "pyLoc": 1178,
+      "pyLoc": 1198,
       "pySymbols": 17,
       "tsFiles": [
         "sk:services/zkp-circuits.ts",
         "sk:services/zkp-circuits.ts"
       ],
       "tsLoc": 738,
-      "locRatio": 0.63,
+      "locRatio": 0.62,
       "hollowMarkers": 0,
       "delegationMarkers": 0,
       "verdict": "SUBSTANTIVE"

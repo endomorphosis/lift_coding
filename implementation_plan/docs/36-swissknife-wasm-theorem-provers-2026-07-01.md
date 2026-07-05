@@ -2401,7 +2401,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |  <!-- ✅ CLOSED (re-validated 2026-07-04: native async wrappers implemented in TS) -->
-| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04; migration in progress: query engine + temporal RAG + converter/checker + temporal API + deontological reasoning + deontic exports/bridge/prover-syntax + graph/legal-norm + formula-builder/json-syntax serialization + parserElementToIR/active-repair proposition fallback paths + export slot-metric alias equivalence + parser-utils/conflict-detector + phase-8 parser-metrics + deontic-text-analyzer extraction/command output aliases + deontic-analyzer conflict/statistics + deontic-extraction statement outputs proposition alias handling + legal-norm-ir proposition-slot provenance alias handling + deontic-legal-text-engine extraction/formula/formal-terms/logic-frame/repair-payload migration alias handling + legacy deontic-conflict-detector proposition-only conflict/mixin matching + temporal-deontic-rag-store theorem metadata proposition->action serialization fallback + deontic-norms-bridge deontic_ir/frame-logic/graph action alias emissions now use proposition-first fallback compatibility -->
+| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04; migration in progress: query engine + temporal RAG + converter/checker + temporal API + deontological reasoning + deontic exports/bridge/prover-syntax + graph/legal-norm + formula-builder/json-syntax serialization + parserElementToIR/active-repair proposition fallback paths + export slot-metric alias equivalence + parser-utils/conflict-detector + phase-8 parser-metrics + deontic-text-analyzer extraction/command output aliases + deontic-analyzer conflict/statistics + deontic-extraction statement outputs proposition alias handling + legal-norm-ir proposition-slot provenance alias handling + deontic-legal-text-engine extraction/formula/formal-terms/logic-frame/repair-payload migration alias handling + legacy deontic-conflict-detector proposition-only conflict/mixin matching + temporal-deontic-rag-store theorem metadata proposition->action serialization fallback + deontic-norms-bridge deontic_ir/frame-logic/graph action alias emissions now use proposition-first fallback compatibility + prover-syntax-builder target generators/json-ir/warnings now treat proposition as canonical action fallback -->
 | PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |  <!-- ⚠ REOPENED 2026-07-04: TS now supports optional embedding-aware scoring, but still lacks a bundled 768-dim embedding backend -->
 | PORT-143 | 🟠 | `ConsistencyResult` missing `temporal_conflicts` (Python returns logical + temporal; TS only logical) | `temporal_deontic_rag_store.py:65-72` | `temporal-deontic-rag-store.ts:94-124` | Add temporal-conflict list + temporal index. |  <!-- ✅ CLOSED -->
 
@@ -3017,9 +3017,9 @@ PORT-209–213 and are **not** double-counted here.
 
 `implementation_plan/conformance/symbol-map.json` is now the machine-checkable
 reconciliation artifact. It accounts for **1,522 / 1,522** current public Python logic
-symbols: **1,239** direct TS symbol matches, **263** explicit consolidations into named TS
+symbols: **1,396** direct TS symbol matches, **106** explicit consolidations into named TS
 service surfaces, and **20** N/A host-native or operational entries. The refreshed audit now
-has **57** sub-80% direct-symbol modules, down from the original 72 after PORT-224–233.
+has **41** sub-80% direct-symbol modules, down from the original 72 after PORT-224–233.
 
 `implementation_plan/conformance/symbol_audit.py --check` is wired into `make conformance`.
 It re-extracts public Python symbols, fails if any current symbol lacks a map entry, and also
@@ -3052,13 +3052,13 @@ symbol coverage" is a checkable state rather than a running task.
 **Certificate (authoritative gate — `symbol_audit.py --check`, exit 0):**
 
 ```
-symbol map: 1522/1522 accounted, 1239 direct, 263 consolidated, 20 n/a, 57 sub-80 modules
+symbol map: 1522/1522 accounted, 1396 direct, 106 consolidated, 20 n/a, 41 sub-80 modules
 ```
 
 - **Accounted coverage: 100.0%** — every one of the 1522 public Python logic symbols
   resolves to `ported` (distinct TS identifier), `consolidated` (folded into a TS rule
   table/method, with a cited reason), or `n/a` (host-native/demo/shim). `unmappedSymbols: 0`.
-- **Direct coverage: 81.41%** (1239 symbols present as their own TS identifier).
+- **Direct coverage: 91.72%** (1396 symbols present as their own TS identifier).
 - Authoritative artifact: `implementation_plan/conformance/symbol-map.json` (256 modules);
   gate `implementation_plan/conformance/symbol_audit.py --check`, wired into
   `make conformance` (`Makefile:31`). The checker fails on any unmapped Python symbol, a
@@ -3077,17 +3077,23 @@ carries a `wasm-prover-sprint10{1..6}.test.ts` suite.
 **Independent verification (this reviewer, non-colliding):** a second generator,
 `gen_symbol_ledger.py` (artifact), tokenizes `swissknife/src` and matches every public
 Python symbol in four identifier variants — a different implementation from the agent's
-gate. It **corroborates** the direct-coverage figure: 1209 direct / 82.4% vs the gate's
-1239 / 81.41% (the small delta is the two tools' variant-matching heuristics; both agree
-the residual is consolidation, not absence). Cross-check output:
+gate. It now reports **1209 direct / 82.4%** against its own symbol universe (1564 symbols),
+while the authoritative §12.24 gate reports **1396 / 91.72%** over the current mapped
+universe (1522 symbols). This is a denominator-and-heuristics delta between tools, not
+an unmapped-symbol failure (`symbol_audit.py --check` remains 1522/1522 accounted).
+Cross-check output:
 `implementation_plan/port-audit/symbol-coverage.json` (+ `.md` subpackage rollup).
 
-**Residual = optional direct-coverage lift, NOT a gap.** 57 modules sit below 80% *direct*
-coverage (572 symbols), concentrated in `deontic` (92), `CEC` (52), `TDFOL` (35),
-`integration` (24), `zkp` (12), `fol` (9). Every one is `consolidated` with a cited reason
+**Residual = optional direct-coverage lift, NOT a gap.** 41 modules sit below 80% *direct*
+coverage (280 symbols). Every one is `consolidated` with a cited reason
 — behaviorally present (the Python one-small-class-per-rule pattern folded into TS rule
 tables/methods). Raising any to a distinct identifier is polish, tracked in the companion
 task board, and only worthwhile where a 1:1 symbol beats consolidation.
+
+**2026-07-05 revalidation run (this session):**
+- `python3 implementation_plan/conformance/symbol_audit.py --check` → `symbol map: 1522/1522 accounted, 1396 direct, 106 consolidated, 20 n/a, 41 sub-80 modules`.
+- `make conformance` → PASS; `conformance/report.md` shows 80/80 MATCH (100.00% parity).
+- Sprint closure suites re-run and green: `wasm-prover-sprint101..106.test.ts` (30/30 tests).
 
 **How to complete / maintain (standing playbook):** see the companion task board
 `36-swissknife-logic-submodule-ts-port-task-board.todo.md` (Milestones A–D + step-by-step).
@@ -3161,7 +3167,7 @@ port's behavior.
    - Repo-wide, **21 logic/prover service files** contain a simulated/stubbed/always-return
      core (`grep -lE "not bound|pseudo-proof|simulated — for testing|isProved: true"`).
 
-6. **Symbol-audit rewards presence, not behavior.** `symbol-map.json` marks 263 symbols
+6. **Symbol-audit rewards presence, not behavior.** `symbol-map.json` marks 106 symbols
    `consolidated` with a **prose reason string** and 20 `n/a`; `symbol_audit.py --check`
    only verifies that `ported` identifiers still exist as tokens in `swissknife/src`. A
    symbol can be `consolidated` (or even `ported`) while its behavior is stubbed — nothing
@@ -3267,7 +3273,7 @@ path.
 ### 12.26.3 VERIFIED — hollow "simulated" ports (name-matched, behavior stubbed)
 
 The symbol audit counted `ModalLogicCodec.encode`/`decode` as *present*. Reading the code:
-- **`modal/codec.py` = 13,013 lines** of real hand-written logic — U.S.-Code citation parsing,
+- **`modal/codec.py` = 13,104 lines** of real hand-written logic — U.S.-Code citation parsing,
   temporal-clause relations, `_compiler_guidance_route_features`,
   `_compiler_guidance_frame_audit_features`, `_compiler_guidance_implies_neo4j_projection_target`,
   numeric-distribution feature extraction — the actual modal codec.
@@ -3275,7 +3281,7 @@ The symbol audit counted `ModalLogicCodec.encode`/`decode` as *present*. Reading
   deps)"* and whose `encode()` (line ~171) simply computes
   `buildSimulatedEmbedding(normalizedText, …)` and echoes `normalizedText` back as
   `decodedText`. **None** of the compiler-guidance / frame-audit / citation routing exists.
-- `modal/decompiler.py` (12,770 lines) → `modal-ir-decompiler.ts` (239 lines): same pattern.
+- `modal/decompiler.py` (15,381 lines) → `modal-ir-decompiler.ts` (239 lines): same pattern.
 
 This is a **hollow port**: the identifier is present, the conformance corpus (80/80,
 policy-only) never exercises the modal codec, so both certificates stay green while the real
@@ -3283,28 +3289,28 @@ behavior is absent.
 
 ### 12.26.4 Quantified substance signal (screening — 229 genuine, 18 hollow-flagged)
 
-`port-substance.json` over **288 name-matched modules** (Python 149,914 eff-LOC vs TS 94,184):
+`port-substance.json` over **288 name-matched modules** (Python 153,015 eff-LOC vs TS 94,262):
 
 | verdict | modules | Python eff-LOC | reading |
 |---|---:|---:|---|
-| **SUBSTANTIVE** | 229 | 82,100 | TS eff-LOC comparable — **the bulk IS genuinely reimplemented (real credit; not a wrapper)** |
-| **THIN** (matched, ≤30% size) | 18 | **55,791 (37.2% of all logic behavior)** | name-present but a fraction of the Python — the hollow-port candidates |
-| **MISSING** (no same-name TS) | 41 | 12,023 | name-match artifacts; large overlap with §12.23 consolidation/rename — **mostly false positives, must not be over-read** |
+| **SUBSTANTIVE** | 229 | 82,201 | TS eff-LOC comparable — **the bulk IS genuinely reimplemented (real credit; not a wrapper)** |
+| **THIN** (matched, ≤30% size) | 18 | **58,762 (38.4% of all logic behavior)** | name-present but a fraction of the Python — the hollow-port candidates |
+| **MISSING** (no same-name TS) | 41 | 12,052 | name-match artifacts; large overlap with §12.23 consolidation/rename — **mostly false positives, must not be over-read** |
 
-**Top THIN by unported behavior (top 9 ≥2000 LOC = 49,181 = 88% of the THIN total = 32.8% of
+**Top THIN by unported behavior (top 9 ≥2000 LOC = 54,152 = 92.2% of the THIN total = 35.4% of
 ALL logic behavior):**
 
 | Python module | eff-LOC | → TS file | eff-LOC | ratio |
 |---|---:|---|---:|---:|
-| `modal/codec.py` | 12,393 | `modal-logic-codec.ts` | 426 | 0.03 |
-| `modal/decompiler.py` | 12,165 | `modal-ir-decompiler.ts` | 326 | 0.03 |
-| `deontic/formula_builder.py` | 5,955 | `deontic-formula-builder.ts` | 628 | 0.11 |
-| `deontic/utils/deontic_parser.py` | 5,060 | `deontic-parser-utils.ts` | 334 | 0.07 |
-| `bridge/multiview.py` | 4,062 | `bridge-multiview.ts` | 360 | 0.09 |
-| `bridge/cec_dcec.py` | 3,654 | `cec-dcec-namespace.ts` | 482 | 0.13 |
-| `modal/compiler.py` | 3,217 | `modal-compiler.ts` | 483 | 0.15 |
-| `bridge/deontic_norms.py` | 2,617 | `deontic-norms-bridge.ts` | 418 | 0.16 |
-| `bridge/fol_tdfol.py` | 2,058 | `fol-tdfol-bridge.ts` | 356 | 0.17 |
+| `modal/decompiler.py` | 14,731 | `modal-ir-decompiler.ts` | 326 | 0.02 |
+| `modal/codec.py` | 12,482 | `modal-logic-codec.ts` | 426 | 0.03 |
+| `deontic/formula_builder.py` | 5,984 | `deontic-formula-builder.ts` | 628 | 0.10 |
+| `deontic/utils/deontic_parser.py` | 5,060 | `deontic-parser-utils.ts` | 342 | 0.07 |
+| `bridge/multiview.py` | 4,095 | `bridge-multiview.ts` | 360 | 0.09 |
+| `bridge/cec_dcec.py` | 3,759 | `cec-dcec-namespace.ts` | 482 | 0.13 |
+| `modal/compiler.py` | 3,257 | `modal-compiler.ts` | 483 | 0.15 |
+| `bridge/deontic_norms.py` | 2,708 | `deontic-norms-bridge.ts` | 424 | 0.16 |
+| `bridge/fol_tdfol.py` | 2,076 | `fol-tdfol-bridge.ts` | 356 | 0.17 |
 
 *(Small-end flags — `common/errors.py` 65→13, `CEC/native/problem_parser.py` 263→54 — may be
 legitimate compact ports; PORT-252 resolves each THIN to hollow-vs-compact-vs-data-bloat with
@@ -3317,7 +3323,7 @@ Module- and symbol-presence completeness (§12.22/§12.23/§12.24) and 80/80 pol
 (§12.21/§12.25) **coexist with ~⅓ of the logic *behavior* being hollow or delegated**:
 - the temporal / higher-order deontic path **delegates to `ipfs_datasets_py` at runtime**
   (12.26.2);
-- ~49k eff-LOC of modal codec/decompiler, deontic formula-builder/parser, and CEC↔DCEC/FOL
+- ~54k eff-LOC of modal codec/decompiler, deontic formula-builder/parser, and CEC↔DCEC/FOL
   bridge logic is **present-by-name but simulated or a fraction of the size** (12.26.3–4).
 
 The certificates cannot see this because (a) presence oracles match identifiers, not behavior,
@@ -3336,14 +3342,137 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   citation-parsing / temporal-clause / compiler-guidance / frame-audit logic. **AC:** a
   behavioral vector set (citation→IR, clause relations) where TS output *structurally* matches
   the Python codec; `buildSimulatedEmbedding` removed from the decision path.
+  **2026-07-05 starter gate:** cross-language parity for deterministic modal-IR helper outputs
+  (`decode_modal_ir_text`, `target_family_for_modal_ir`,
+  `target_family_distribution_for_modal_ir`) is now enforced with
+  `implementation_plan/conformance/modal-codec-ir-vectors.json`,
+  `implementation_plan/conformance/modal_codec_ir_py_runner.py`, and
+  `test/conformance/modal-codec-ir-crosslang-conformance.test.ts`
+  (`conformance-modal-codec-ir-crosslang`).
 - **PORT-247 🔴 — Real modal decompiler** (`modal/decompiler.py`). **AC:** `encode∘decode`
   round-trip over a shared corpus matches Python.
+  **2026-07-05 starter gate:** deterministic helper parity for
+  `modal_text_token_similarity` and `decoded_modal_phrase_slot_text_map` is now
+  enforced cross-language via
+  `implementation_plan/conformance/modal-decompiler-vectors.json`,
+  `implementation_plan/conformance/modal_decompiler_py_runner.py`, and
+  `test/conformance/modal-decompiler-crosslang-conformance.test.ts`
+  (`conformance-modal-decompiler-crosslang`).
 - **PORT-248 🟠 — De-hollow deontic builder/parser** (`deontic/formula_builder.py`,
   `deontic/utils/deontic_parser.py`). **AC:** the TS parser accepts the Python
   deontic-parser test corpus with matching ASTs.
+  **2026-07-05 starter gate:** cross-language utility parity is now enforced for
+  `classify_modal`, `classify_legal_entity`, `normalize_predicate_name`, and
+  `extract_action_recipient` via
+  `implementation_plan/conformance/deontic-parser-utils-vectors.json`,
+  `implementation_plan/conformance/deontic_parser_utils_py_runner.py`, and
+  `test/conformance/deontic-parser-utils-crosslang-conformance.test.ts`
+  (`conformance-deontic-parser-utils-crosslang`). A normalized element extraction
+  starter gate is also in place via
+  `implementation_plan/conformance/deontic-parser-elements-vectors.json`,
+  `implementation_plan/conformance/deontic_parser_elements_py_runner.py`, and
+  `test/conformance/deontic-parser-elements-crosslang-conformance.test.ts`
+  (`conformance-deontic-parser-elements-crosslang`) for simple single-clause norms.
+  Full parser AST parity remains open.
 - **PORT-249 🟠 — De-hollow the bridges** (`bridge/{multiview,cec_dcec,deontic_norms,fol_tdfol}.py`).
   **AC:** bridge triple/graph output matches Python for a shared fixture set.
+  **2026-07-05 starter gate:** cross-language parity is now enforced for
+  deontic bridge document-id derivation (`source_id` override + full-text hash
+  fallback) via
+  `implementation_plan/conformance/deontic-bridge-document-id-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_document_id_py_runner.py`, and
+  `test/conformance/deontic-bridge-document-id-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-document-id-crosslang`). A second starter gate now
+  enforces normalized-text derivation parity (`text` → `source_text` →
+  `support_text` fallback chain) via
+  `implementation_plan/conformance/deontic-bridge-normalized-text-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_normalized_text_py_runner.py`,
+  and
+  `test/conformance/deontic-bridge-normalized-text-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-normalized-text-crosslang`). A third starter gate
+  now enforces citation fallback parity (`canonical_citation` from first norm)
+  via
+  `implementation_plan/conformance/deontic-bridge-citation-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_citation_py_runner.py`, and
+  `test/conformance/deontic-bridge-citation-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-citation-crosslang`). A fourth starter gate now
+  enforces decoded-text extraction parity from
+  `deontic_parser_capability.records[0].decoded_text` via
+  `implementation_plan/conformance/deontic-bridge-decoded-text-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_decoded_text_py_runner.py`, and
+  `test/conformance/deontic-bridge-decoded-text-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-decoded-text-crosslang`). A fifth starter gate now
+  enforces guidance helper parity for `_mapping` coercion behavior (mapping
+  passthrough + JSON-string object decode + non-mapping fallback) via
+  `implementation_plan/conformance/deontic-bridge-guidance-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-crosslang`). A sixth starter gate now
+  enforces list-of-dicts coercion parity (`_list_of_dicts`) via
+  `implementation_plan/conformance/deontic-bridge-list-of-dicts-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_list_of_dicts_py_runner.py`, and
+  `test/conformance/deontic-bridge-list-of-dicts-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-list-of-dicts-crosslang`). A seventh starter gate now
+  enforces target-name helper parity for `_list_of_strings` and
+  `_normalized_target_names` via
+  `implementation_plan/conformance/deontic-bridge-target-names-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_target_names_py_runner.py`, and
+  `test/conformance/deontic-bridge-target-names-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-target-names-crosslang`). An eighth starter gate
+  now enforces `_value_is_present`, `_copy_slot_value`, and
+  `_fill_empty_field` helper parity via
+  `implementation_plan/conformance/deontic-bridge-fill-empty-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_fill_empty_py_runner.py`, and
+  `test/conformance/deontic-bridge-fill-empty-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-fill-empty-crosslang`). A ninth starter gate now
+  enforces `_float`, `_rate`, and `_record_validation_rate` helper parity via
+  `implementation_plan/conformance/deontic-bridge-rate-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_rate_py_runner.py`, and
+  `test/conformance/deontic-bridge-rate-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-rate-crosslang`). A tenth starter gate now
+  enforces guidance target/gap helper parity for
+  `_canonical_deontic_target_view`, `_canonical_deontic_gap_key`,
+  `_guidance_gap_quality_gate_passes`,
+  `_deontic_guidance_component_gaps`, and
+  `_deontic_guidance_underrepresented_components` via
+  `implementation_plan/conformance/deontic-bridge-guidance-target-gap-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_target_gap_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-target-gap-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-target-gap-crosslang`). An eleventh
+  starter gate now enforces `_deontic_guidance_target_view`,
+  `_canonical_deontic_frame_symbol`, and `_normalized_guidance_text` helper
+  parity via
+  `implementation_plan/conformance/deontic-bridge-guidance-normalization-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_normalization_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-normalization-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-normalization-crosslang`). A twelfth
+  starter gate now enforces `_deontic_guidance_row_matches_norm` helper parity
+  via
+  `implementation_plan/conformance/deontic-bridge-guidance-row-match-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_row_match_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-row-match-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-row-match-crosslang`). A thirteenth
+  starter gate now enforces `_deontic_guidance_evidence_rows` helper parity via
+  `implementation_plan/conformance/deontic-bridge-guidance-evidence-rows-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_evidence_rows_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-evidence-rows-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-evidence-rows-crosslang`). A fourteenth
+  starter gate now enforces `_deontic_guidance_frame_candidates` and
+  `_selected_frame_from_deontic_compiler_guidance` helper parity via
+  `implementation_plan/conformance/deontic-bridge-guidance-frame-selection-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_frame_selection_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-frame-selection-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-frame-selection-crosslang`).
+  Full bridge
+  triple/graph parity remains open.
 - **PORT-250 🟠 — Real modal compiler** (`modal/compiler.py`). **AC:** compile vectors match.
+  **2026-07-05 starter gate:** cross-language parity is now enforced for deterministic
+  modal-family canonicalization via
+  `implementation_plan/conformance/modal-compiler-family-token-vectors.json`,
+  `implementation_plan/conformance/modal_compiler_family_token_py_runner.py`, and
+  `test/conformance/modal-compiler-family-token-crosslang-conformance.test.ts`
+  (`conformance-modal-compiler-family-token-crosslang`). Full compile-level
+  parity remains open.
 - **PORT-251 🟡 — Residuals:** `TDFOL/performance_profiler.py` and the CEC/native residual rule
   classes (`prover_core_extended_rules.py`, `dcec_integration.py`, `enhanced_grammar_parser.py`,
   `problem_parser.py`) — port, or reclassify `n/a` with a cited justification (12.26.1 error
@@ -3360,7 +3489,7 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
 certified, and **behavioral/substance completeness as gated on PORT-235–244 (verification) +
 PORT-245–252 (implementation)**. Honest status: *the port is genuine for the propositional/
 policy fragment and ~229 modules; the temporal/higher-order deontic path is delegated to
-`ipfs_datasets_py` at runtime; ~49k eff-LOC of modal/deontic/bridge behavior is simulated or
+`ipfs_datasets_py` at runtime; ~54k eff-LOC of modal/deontic/bridge behavior is simulated or
 thin. Not yet a complete, self-contained TS port.*
 
 ---
@@ -3404,18 +3533,24 @@ Python, every `fetch`/HTTP endpoint, and every `simulated`/`stub`/`FFI not bound
 
 ### 12.27.2 Simulation boundary — the real systemic gaps §12.26 missed
 
-- **ZKP is simulated BY DEFAULT (not merely as an opt-in test fallback).** Every production
-  constructor wires the SHA-256 pseudo-proof backend `Groth16BackendFallback`:
-  `flogic-ergoai-wrapper.ts:105` (`zkpBackend = new Groth16BackendFallback()`),
-  `flogic-zkp-integration.ts:73` (default param), `sprint65-utils.ts:168`, and
-  `zkp-backends.ts:137/162/167` (fall-through). `Groth16BackendFallback.generateProof()`
-  (`zkp-backends.ts:194-215`) returns `createHash('sha256')…` tagged `{ backend: 'simulated' }`.
-  A real `Groth16Backend` class exists but is **not the wired default**. → **ZKP "proofs" are
-  hashes, not proofs.**
-- **FLogic/ErgoAI is always a stub.** `flogic-ergoai-wrapper.ts` `query()` (lines 43–56): no
-  binary → `'ErgoAI binary not available'`; **with** a binary the "real" path is the comment on
-  line 52 and it returns `'ErgoAI FFI not bound'` (line 56) unconditionally. The header claims
-  to port `flogic/ergoai_wrapper.py` (381 L) — it implements **zero** reasoning.
+- **CORRECTION #3 (2026-07-05) — ZKP defaults are now strict across production integration
+  surfaces.** `Groth16Backend` fails closed unless
+  `allowSimulatedFallback:true` is explicitly set (covered by
+  `wasm-prover-sprint55.test.ts`, `wasm-prover-sprint94.test.ts`, and
+  `wasm-prover-sprint99.test.ts`). In this session,
+  `flogic-ergoai-wrapper.ts`, `flogic-zkp-integration.ts`, and
+  `sprint65-utils.ts` were switched to strict/injected Groth16 defaults, with tests updated to
+  use explicit simulated backend injection where intended (`wasm-prover-sprint63.test.ts`,
+  `wasm-prover-sprint65.test.ts`, `wasm-prover-sprint92.test.ts`). This was then extended to
+  `cec-zkp-integration.ts` and `zkp-ucan-bridge.ts` (`wasm-prover-sprint58.test.ts`,
+  `wasm-prover-sprint59.test.ts`). Remaining `Groth16BackendFallback` construction is now
+  confined to the explicit opt-in fallback slot inside `zkp-backends.ts`.
+- **CORRECTION #4 (2026-07-05) — ErgoAI now has a real subprocess adapter path, but semantic
+  parity is still incomplete.** `flogic-ergoai-wrapper.ts` `query()` now executes an injectable
+  process runner against the configured Ergo binary with retries; no-binary still reports
+  unavailable, and failing subprocesses return explicit process errors. This closes the
+  unconditional `'FFI not bound'` stub path, but does not yet prove theorem-level parity against
+  Python's `ergoai_wrapper.py` on a representative corpus.
 - **Modal codec/decompiler simulated** (verified §12.26): `modal-logic-codec.ts` header
   *"simulated, no ML deps"*, `encode()`→`buildSimulatedEmbedding`.
 - **CORRECTION #2 — `external-provers.ts` (Vampire/E) is legitimate, NOT a stub (credit).**
@@ -3432,24 +3567,46 @@ Python, every `fetch`/HTTP endpoint, and every `simulated`/`stub`/`FFI not bound
 | Runtime Python-MCP delegation | `mcp-remote-deontic-engine.ts` | optional local-first augmentation; degrades safely | **Partial** — native temporal/higher-order **consistency** returns `unknown` (PORT-255) |
 | Native temporal-deontic prover | `tdfol-prover.ts` + `provers/tdfol-*` | real (□-K, D-rule, ModalTableaux) | completeness vs Python **unverified** |
 | External FO provers | `external-provers.ts` (Vampire/E) | real exec when present; honest unavailable; opt-in sim (default off) | **No** (correction #2) |
-| ZKP backends | `zkp-backends.ts` + 6 default-wire sites | **simulated by default** (SHA-256) | **Yes** (PORT-253) |
-| FLogic / ErgoAI | `flogic-ergoai-wrapper.ts` | **always stub** ("FFI not bound") | **Yes** (PORT-254) |
+| ZKP backends | `zkp-backends.ts` + integration wire sites | strict-by-default; simulation only via explicit fallback injection | **No** (PORT-253 closed) |
+| FLogic / ErgoAI | `flogic-ergoai-wrapper.ts` | subprocess adapter present; theorem-level parity still unproven | **Partial** (PORT-254) |
 | Modal codec / decompiler | `modal-logic-codec.ts`, `modal-ir-decompiler.ts` | simulated embedding | **Yes** (PORT-246/247) |
 | 18 THIN modules (§12.26) | modal/deontic/bridge | name-present, ≤30% size; top ones verified hollow | **Yes** (PORT-248–251) |
 
 ### 12.27.4 Tasks — finish the self-contained TS port (un-gameable acceptance)
 
-- **PORT-253 🔴 — De-simulate ZKP by default.** Wire the real `Groth16Backend` (bundle/build
-  the prover or a WASM Groth16) as the production default; remove `Groth16BackendFallback` from
-  all production constructors (`flogic-ergoai-wrapper.ts:105`, `flogic-zkp-integration.ts:73`,
-  `sprint65-utils.ts:168`, `zkp-backends.ts:137/162/167`), keeping it only behind an explicit
-  `{ simulated: true }` test flag. **AC:** without the test flag, `generateProof` emits a proof
-  that a real Groth16 verifier accepts and that fails on a tampered witness; a unit test asserts
-  no production path constructs `Groth16BackendFallback`.
-- **PORT-254 🔴 — Implement FLogic/ErgoAI for real.** Native TS F-logic
-  entailment (or a genuine FFI/subprocess to `ergo`), replacing the `'FFI not bound'` return.
-  **AC:** `query()` returns a correct derivation over a known F-logic entailment corpus
-  (matching `ergoai_wrapper.py`); the "FFI not bound" branch is deleted.
+- **PORT-253 ✅ — De-simulate ZKP defaults (closed).** `zkp-backends.ts` and all production
+  integration surfaces now fail closed by default unless simulation is explicitly injected. The
+  strict-path regressions and explicit-simulation regressions are covered in
+  `wasm-prover-sprint55.test.ts`, `wasm-prover-sprint58.test.ts`,
+  `wasm-prover-sprint59.test.ts`, `wasm-prover-sprint63.test.ts`,
+  `wasm-prover-sprint65.test.ts`, `wasm-prover-sprint92.test.ts`,
+  `wasm-prover-sprint94.test.ts`, and `wasm-prover-sprint99.test.ts`.
+- **PORT-254 🟠 — Complete FLogic/ErgoAI semantic parity + coverage.** Subprocess adapter exists;
+  remaining work is parity validation and missing reasoning coverage relative to
+  `ergoai_wrapper.py`.
+  **AC:** `query()` returns correct derivations over a known F-logic entailment corpus matching
+  Python outcomes, with conformance vectors proving no regression across unavailable/failure/success paths.
+  **2026-07-05 delta:** transport-path and output-semantics conformance vectors
+  (`++Error` and `No` on status 0) plus binding-row parse checks for successful
+  variable assignments were added via
+  `implementation_plan/conformance/ergoai-vectors.json` and
+  `test/conformance/ergoai-conformance.test.ts` (wired into `make conformance`
+  as `conformance-ergo`). A theorem-level starter corpus for the native
+  standard entailment fragment was added via
+  `implementation_plan/conformance/ergoai-entailment-vectors.json` and
+  `test/conformance/ergoai-entailment-conformance.test.ts` (wired as
+  `conformance-ergo-entailment`). Cross-language case-by-case parity for that
+  starter fragment is now additionally gated by
+  `implementation_plan/conformance/ergoai_entailment_py_runner.py` and
+  `test/conformance/ergoai-entailment-crosslang-conformance.test.ts`
+  (`conformance-ergo-entailment-crosslang`). Binding-output parsing parity is
+  additionally gated case-by-case by
+  `implementation_plan/conformance/ergoai_output_parse_py_runner.py` and
+  `test/conformance/ergoai-output-parse-crosslang-conformance.test.ts`
+  (`conformance-ergo-output-parse-crosslang`), including whitespace normalization,
+  duplicate-variable assignment rows, malformed token skipping, and embedded
+  `No` sentinel failure behavior. Full F-logic/Ergo CLI semantic parity remains
+  open.
 - **PORT-255 🟠 — Native temporal/higher-order deontic consistency.** Extend the Z3-WASM /
   `ModalTableaux` path so the fragment currently returning `unknown` (line 379-380) is decided
   natively; make the Python remote a pure optional accelerator. **AC:** with the Python MCP

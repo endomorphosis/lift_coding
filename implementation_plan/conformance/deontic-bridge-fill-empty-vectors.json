@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "present-string-empty",
+      "kind": "value_is_present",
+      "value": "   ",
+      "expected": false
+    },
+    {
+      "id": "present-list-nonempty",
+      "kind": "value_is_present",
+      "value": [1],
+      "expected": true
+    },
+    {
+      "id": "present-object-empty",
+      "kind": "value_is_present",
+      "value": {},
+      "expected": false
+    },
+    {
+      "id": "copy-object",
+      "kind": "copy_slot_value",
+      "value": { "a": 1, "b": "x" },
+      "expected": { "a": 1, "b": "x" }
+    },
+    {
+      "id": "copy-list",
+      "kind": "copy_slot_value",
+      "value": ["a", 2],
+      "expected": ["a", 2]
+    },
+    {
+      "id": "fill-missing-from-source",
+      "kind": "fill_empty_field",
+      "target": {},
+      "source": { "slot": ["x", "y"] },
+      "key": "slot",
+      "expected": { "slot": ["x", "y"] }
+    },
+    {
+      "id": "fill-does-not-overwrite-present",
+      "kind": "fill_empty_field",
+      "target": { "slot": "keep" },
+      "source": { "slot": "replace" },
+      "key": "slot",
+      "expected": { "slot": "keep" }
+    },
+    {
+      "id": "fill-ignores-empty-source",
+      "kind": "fill_empty_field",
+      "target": { "slot": "   " },
+      "source": { "slot": "  " },
+      "key": "slot",
+      "expected": { "slot": "   " }
+    }
+  ]
+}
