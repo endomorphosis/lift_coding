@@ -113,6 +113,11 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-modal-compiler-formula-ambiguity-crosslang` gates PORT-250
   compiler formula-span ambiguity detection and ranking-share extraction parity
   against the Python modal compiler.
+- `make conformance-modal-compiler-regex-compile-crosslang` gates PORT-250
+  browser-safe regex/legal compile behavior against the Python legal modal
+  parser: ordered emitted modal families, normalized text, parser identity, and
+  missing-formula ambiguity behavior without requiring spaCy or the Python modal
+  compiler runtime.
 - `make conformance-deontic-bridge-frame-graph-crosslang` gates PORT-249
   deontic bridge frame-logic triples and Neo4j-compatible graph projection
   parity against the Python bridge/projection functions.
