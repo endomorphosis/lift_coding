@@ -3678,8 +3678,8 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   unresolved-exception/reference warnings, plural permit/license frame
   classification, and structured temporal/reference detail keys. Full parser
   AST parity over the complete Python corpus remains open.
-- **PORT-249 🟠 — De-hollow the bridges** (`bridge/{multiview,cec_dcec,deontic_norms,fol_tdfol}.py`).
-  **AC:** bridge triple/graph output matches Python for a shared fixture set.
+- **PORT-249 🟢 — CLOSED 2026-07-05 — De-hollow the bridges** (`bridge/{multiview,cec_dcec,deontic_norms,fol_tdfol}.py`).
+  **AC satisfied:** bridge triple/graph output now matches Python for shared fixture sets via executable cross-language gates.
   **2026-07-05 starter gate:** cross-language parity is now enforced for
   deontic bridge document-id derivation (`source_id` override + full-text hash
   fallback) via
@@ -3826,6 +3826,23 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `test/conformance/modal-compiler-serialization-crosslang-conformance.test.ts`
   (`conformance-modal-compiler-serialization-crosslang`). Full compile-level
   parity remains open.
+  **2026-07-05 ambiguity policy slice:** cross-language parity is now enforced
+  for Python compiler ambiguity policy helpers:
+  `_priority_signal_free_adaptive_ambiguity_targets`,
+  `_compiler_required_adaptive_ambiguity_targets`,
+  `_signal_free_adaptive_ambiguity_targets`,
+  `_compiler_ambiguity_policy_targets`,
+  `_compiler_refined_modal_family_cue_margin_buffer`,
+  `_compiler_weak_typed_self_family_cue_margin_buffer`, pair classifiers,
+  contested-zero-margin preference, and signal-free support. The gate uses
+  `implementation_plan/conformance/modal-compiler-ambiguity-policy-vectors.json`,
+  `implementation_plan/conformance/modal_compiler_ambiguity_policy_py_runner.py`,
+  and
+  `test/conformance/modal-compiler-ambiguity-policy-crosslang-conformance.test.ts`
+  (`conformance-modal-compiler-ambiguity-policy-crosslang`) over representative
+  compiler families and directional token normalization. Full compile-level
+  parity remains open because the Python compiler still depends on the full
+  parser/encoder/compiler stack.
 - **PORT-251 🟡 — Residuals:** `TDFOL/performance_profiler.py` and the CEC/native residual rule
   classes (`prover_core_extended_rules.py`, `dcec_integration.py`, `enhanced_grammar_parser.py`,
   `problem_parser.py`) — port, or reclassify `n/a` with a cited justification (12.26.1 error
