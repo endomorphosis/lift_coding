@@ -9,6 +9,7 @@ Packet sibling task: VAI-658
 Evidence term: launch Playwright validation gate
 Attempt: 2
 Source gap: data/virtual_ai_os/discovery/2026-07-05-vai-657-objective-gap-3e00ad2a0074.md
+Todo source: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md:8696
 Launch gate receipt: data/virtual_ai_os/discovery/2026-07-05-vai-657-mcp-dashboard-launch-gate.md
 Receipt fixture: hallucinate_app/test/e2e/fixtures/vai-657-mcp-dashboard-launch-gate.json
 Gate state: gate_closed_by_playwright_validation
@@ -56,10 +57,12 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 - `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes
   `VAI-657` in the dashboard catalog launch validation gates and points the
   packet sibling daemon receipt at `data/virtual_ai_os/discovery/2026-07-05-vai-658-daemon-launch-health-gate.md`.
+  The same gate records the supervisor todo source
+  `implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md:8696`.
 - `hallucinate_app/test/e2e/fixtures/vai-657-mcp-dashboard-launch-gate.json`
   records the source objective gap, launch receipt, required backend packages,
-  external backend surfaces, dashboard servers, Swissknife consumers, and
-  VAI-658 packet sibling evidence.
+  external backend surfaces, dashboard servers, Swissknife consumers, todo
+  source line, and VAI-658 packet sibling evidence.
 - `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` and
   `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` validate
   the Hallucinate App MCP dashboard catalog, backend service catalog, mediated
