@@ -7,6 +7,7 @@ Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
 Packet goals: VAIOS-G724, VAIOS-G728
 Packet sibling task: VAI-650
 Evidence term: launch Playwright validation gate
+Attempt: 2
 Source gap: data/virtual_ai_os/discovery/2026-07-05-vai-649-objective-gap-3e00ad2a0074.md
 Launch gate receipt: data/virtual_ai_os/discovery/2026-07-05-vai-649-mcp-dashboard-launch-gate.md
 Receipt fixture: hallucinate_app/test/e2e/fixtures/vai-649-mcp-dashboard-launch-gate.json
@@ -58,7 +59,8 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 - `hallucinate_app/test/e2e/fixtures/vai-649-mcp-dashboard-launch-gate.json`
   records the source objective gap, launch receipt, required backend packages,
   external backend surfaces, dashboard servers, Swissknife consumers, and
-  VAI-650 packet sibling evidence.
+  VAI-650 packet sibling evidence. The current attempt receipt is
+  `data/virtual_ai_os/discovery/2026-07-05-vai-649-attempt-2-launch-playwright-validation-gate.md`.
 - `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` and
   `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` validate
   the Hallucinate App MCP dashboard catalog, backend service catalog, mediated
