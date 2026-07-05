@@ -2331,7 +2331,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
-| PORT-070 | 🟠 | No `StrategyType`/`ProverStrategy` ABC/`StrategySelector` — the 3 TS strategy analogues aren't plugged into `TDFOLProver` | `strategies/base.py`, `strategy_selector.py:17-256` | `tdfol-prover.ts:270-351` | Port the pluggable strategy framework (`can_handle/prove/get_priority/estimate_cost`) + selector (`select_strategy/select_multiple`). |  <!-- ⚠ PARTIAL 2026-07-04: strategy selector exists but remains a simplified subset -->
+| PORT-070 | 🟢 | ✅ DONE — pluggable strategy framework is now wired into `TDFOLProver` with cost+priority selection and Python-compatible selector/strategy aliases (`can_handle`, `estimate_cost`, `get_priority`, `select_strategy`, `select_multiple`) | `strategies/base.py`, `strategy_selector.py:17-256` | `tdfol-prover.ts:270-351`, `tdfol-strategy-router.ts` | Keep strategy route ahead of forward-chaining/tableaux fallback and preserve deterministic fallback behavior when strategy attempts do not prove the goal. |  <!-- ✅ CLOSED 2026-07-05 -->
 | PORT-071 | 🟡 | Modal-system auto-selection (deontic→D, nested temporal→S4, default→K) missing | `strategies/modal_tableaux.py:212-247` | `tdfol-prover.ts` | Port `_select_modal_logic_type()` heuristics. |  <!-- ✅ CLOSED -->
 
 ### 12.8 TDFOL supporting features
