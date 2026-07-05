@@ -9,6 +9,7 @@ Packet goals: VAIOS-G724, VAIOS-G728
 Packet sibling task: VAI-658
 Evidence term: launch Playwright validation gate
 Gate state: gate_closed_by_playwright_validation
+Todo source: implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md:8696
 
 ## Validation Gate
 
@@ -24,6 +25,9 @@ specs `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` and
 `hallucinate_app/test/e2e/fixtures/vai-657-mcp-dashboard-launch-gate.json`,
 and the VAI-658 daemon launch sibling receipt
 `data/virtual_ai_os/discovery/2026-07-05-vai-658-daemon-launch-health-gate.md`.
+The structured gate also carries the supervisor todo source
+`implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md:8696`
+so the launch proof remains tied to the backlog line that reopened VAI-657.
 
 ```text
 npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
