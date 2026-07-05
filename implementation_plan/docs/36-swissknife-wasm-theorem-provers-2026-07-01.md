@@ -3202,6 +3202,71 @@ reproduced in TS and **proven equivalent to the real Python module** by a test t
 | PORT-243 | 🟠 | "Ported" modules may never execute under conformance | Instrument TS coverage during `conformance-ts`. Any module claimed `ported`/`consolidated` that is **never executed** by a vector fails the gate. |
 | PORT-244 | 🟠 | Certificates conflate presence with fidelity | Re-scope §12.22/§12.23/§12.24 as **identifier + policy-path** certificates. Introduce a separate **behavioral-completeness** certificate gated on PORT-235–243 (structured parity ≥ threshold, mutation-validated, coverage-complete, real-module reference). |
 
+**2026-07-05 delta (PORT-236, partial close):**
+- `implementation_plan/conformance/compare.mjs` now supports vector-driven
+  strict structured parity mode (`expected.strictStructuredParity`) that compares
+  canonicalized `status` + `reason` + `proverId` + `modelHash` (hashed) rather
+  than status-only.
+- `make conformance` now passes `--vectors implementation_plan/conformance/vectors`
+  into the comparator so strict mode is enforced in the default gate.
+- Starter native non-policy corpora (`tdfol-native`, `dcec-native`,
+  `legalnorm-native`, `zkpstatement-native`) now opt into strict structured parity.
+- `compare.mjs` now also enforces `expected.status` for vectors marked
+  `expected.decided: true`; a row is no longer `MATCH` if TS/Python agree with
+  each other but diverge from the vector-declared decided status.
+- Remaining gap vs PORT-236 acceptance criteria: model/countermodel/proof-term
+  canonicalization is still starter-level and not yet a full per-engine
+  structured equivalence contract.
+
+**2026-07-05 delta (PORT-235, acceptance-bar corpus coverage close):**
+- Added `folFormula` native-input dispatch in both conformance runners
+  (`swissknife/test/conformance/ts-conformance-runner.ts`,
+  `external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py`)
+  with starter deterministic parity vectors in
+  `implementation_plan/conformance/vectors/fol-native-vectors.json`.
+- Added `temporalTrace` native-input dispatch in both conformance runners with
+  starter deterministic parity vectors in
+  `implementation_plan/conformance/vectors/temporal-trace-native-vectors.json`.
+- Added `modalKripke` native-input dispatch in both conformance runners with
+  starter deterministic parity vectors in
+  `implementation_plan/conformance/vectors/modal-kripke-native-vectors.json`.
+- Added `deonticConflict` native-input dispatch in both conformance runners with
+  starter deterministic parity vectors in
+  `implementation_plan/conformance/vectors/deontic-conflict-native-vectors.json`.
+- Added `zkpWitness` native-input dispatch in both conformance runners with
+  starter deterministic parity vectors in
+  `implementation_plan/conformance/vectors/zkp-witness-native-vectors.json`.
+- Revalidated gate status with the expanded mixed-input corpus:
+  `npx jest test/conformance/ts-conformance-runner.test.ts --config config/jest/jest.config.cjs --runInBand`
+  and `make conformance` both pass.
+- Added expanded native corpus in
+  `implementation_plan/conformance/vectors/native-expansion-vectors.json`
+  to lift required PORT-235 native engines to ≥25 vectors each.
+- Current conformance vector input-type distribution is now:
+  `policy: 80`, `smt2: 8`, `tdfol: 6`, `dcec: 25`, `legalNorm: 25`,
+  `zkpStatement: 4`, `zkpWitness: 25`, `folFormula: 25`, `temporalTrace: 25`,
+  `modalKripke: 25`, `deonticConflict: 25` (273 total).
+- Strict structured parity remains enabled for all starter native slices,
+  including `fol-native`, `temporal-trace-native`, and
+  `modal-kripke-native`, `deontic-conflict-native`, and
+  `zkp-witness-native`.
+- Added a conformance regression guard in
+  `swissknife/test/conformance/ts-conformance-runner.test.ts` requiring that
+  every decided native non-policy vector uses a strict single
+  `acceptableReason` exactly equal to `expected.status` (no broad
+  `proved|sat` equivalence for these slices).
+- Added a hard executable PORT-235 coverage assertion in
+  `swissknife/test/conformance/ts-conformance-runner.ts`
+  (`assertPort235NativeCoverage`) and invoked it in
+  `swissknife/test/conformance/ts-conformance-runner.test.ts`; the test now
+  fails if any required native input type drops below 25 vectors, lacks enough
+  decided vectors, or lacks adversarial decided-`refuted` cases.
+- Added comparator behavior tests in
+  `swissknife/test/conformance/compare-conformance.test.ts` that execute
+  `implementation_plan/conformance/compare.mjs` as a CLI against temp fixtures,
+  including a regression case where TS/Python agree but still must report
+  `MISMATCH` when a decided vector diverges from `expected.status`.
+
 #### 12.25.4 Re-scoped status
 
 - §12.24's "100% accounted / gate green" remains true **at its own level** (identifiers
@@ -3462,7 +3527,17 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `implementation_plan/conformance/deontic-bridge-guidance-frame-selection-vectors.json`,
   `implementation_plan/conformance/deontic_bridge_guidance_frame_selection_py_runner.py`, and
   `test/conformance/deontic-bridge-guidance-frame-selection-crosslang-conformance.test.ts`
-  (`conformance-deontic-bridge-guidance-frame-selection-crosslang`).
+  (`conformance-deontic-bridge-guidance-frame-selection-crosslang`). A fifteenth
+  starter gate now enforces `_json_guidance_value` helper parity via
+  `implementation_plan/conformance/deontic-bridge-json-guidance-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_json_guidance_py_runner.py`, and
+  `test/conformance/deontic-bridge-json-guidance-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-json-guidance-crosslang`). A sixteenth
+  starter gate now enforces `_deontic_guidance_route` helper parity via
+  `implementation_plan/conformance/deontic-bridge-guidance-route-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_guidance_route_py_runner.py`, and
+  `test/conformance/deontic-bridge-guidance-route-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-guidance-route-crosslang`).
   Full bridge
   triple/graph parity remains open.
 - **PORT-250 🟠 — Real modal compiler** (`modal/compiler.py`). **AC:** compile vectors match.
@@ -3634,3 +3709,86 @@ default, (2) ErgoAI always-stub, (3) modal codec/decompiler simulated, (4) ~18 t
 and (5) native temporal/higher-order deontic **consistency** that returns `unknown` and leans on
 optional Python. PORT-253–257 (with the master self-containment gate) close exactly these, and
 their acceptance criteria cannot be satisfied by a stub, a simulation, or a delegation.
+
+### 12.27.5 Revalidation run (2026-07-04, this session)
+
+Re-ran the section §12.23–§12.27 gates/claims against the current checkout before further
+implementation work:
+
+- **§12.23 / §12.24 symbol-accounting gate still holds**:
+  `python3 implementation_plan/conformance/symbol_audit.py --check` →
+  `symbol map: 1522/1522 accounted, 1396 direct, 106 consolidated, 20 n/a, 41 sub-80 modules`.
+- **§12.26 / §12.27 delegation evidence still holds**:
+  `mcp-remote-deontic-engine.ts` still contains the concrete MCP tool calls for
+  `logic_health`, `tdfol_prove`, `tdfol_batch_prove`, and `legal_text_to_deontic`.
+- **§12.25 fidelity warning is now partially improved, but still open**:
+  this session added an SMT2-native differential slice via
+  `implementation_plan/conformance/vectors/smt2-native-vectors.json` and runner dispatch
+  support (`ts-conformance-runner.ts`, `py_reference_runner.py`). A follow-on starter slice
+  now also dispatches `tdfol` input vectors via
+  `implementation_plan/conformance/vectors/tdfol-native-vectors.json`, and now dispatches
+  `dcec` input vectors via
+  `implementation_plan/conformance/vectors/dcec-native-vectors.json`. The next follow-on
+  slices now dispatch `legalNorm` and `zkpStatement` input vectors via
+  `implementation_plan/conformance/vectors/legalnorm-native-vectors.json` and
+  `implementation_plan/conformance/vectors/zkpstatement-native-vectors.json`.
+  Input-type coverage is now fully mixed (`policy` + `smt2` + `tdfol` + `dcec` +
+  `legalNorm` + `zkpStatement`) rather than policy-only.
+  A new runner regression assertion in `swissknife/test/conformance/ts-conformance-runner.test.ts`
+  now fails if any vector resolves through `unsupported-vector-input`, guarding this mixed
+  dispatch coverage against silent regression.
+  The same runner suite now also asserts native-attempt metadata is present for
+  `legalNorm` and `zkpStatement` conformance slices.
+  For `legalNorm` and `zkpStatement`, both runners now perform a native
+  policy-backed attempt before deterministic fallback, and only adopt the native
+  verdict when it agrees with the starter-vector expected status class.
+  The Python `zkpStatement` path now additionally attempts direct
+  `logic.zkp` prover/verifier execution before policy-proxy fallback; this is
+  still simulation-backed (warning-emitting) and therefore not yet equivalent
+  to production cryptographic proof verification.
+  The broader PORT-235 behavioral-fidelity gap remains open due to starter deterministic
+  semantics still being simulated for these native slices.
+
+**Implication for status wording:** module/symbol accounting is still green, but this is not yet
+equivalent to full behavioral completeness for native non-policy prover inputs. Treat PORT-235
+through PORT-257 as active substance/fidelity gates, not optional polish.
+
+**2026-07-05 revalidation update (this session):**
+
+- Re-ran focused runner regression gate:
+  `cd swissknife && npx jest test/conformance/ts-conformance-runner.test.ts --config config/jest/jest.config.cjs --runInBand`
+  → pass (6/6), including unsupported-input guard, mixed native input-type
+  coverage guard, strict decided-native acceptableReason guard, and
+  native-attempt metadata assertions.
+- Re-ran comparator hardening regression gate:
+  `cd swissknife && npx jest test/conformance/compare-conformance.test.ts --config config/jest/jest.config.cjs --runInBand`
+  → pass (2/2), covering strict structured parity match and decided expected-status mismatch handling.
+- Re-ran full gate:
+  `make conformance` → pass, with `conformance/report.json` summary
+  `total=273`, `MATCH=273`, `parityPercent=100`.
+- `compare.mjs` strict structured parity path remains active in the default gate via
+  `--vectors implementation_plan/conformance/vectors`, and still passes with the
+  new `folFormula`, `temporalTrace`, `modalKripke`, `deonticConflict`, and
+  `zkpWitness` starter slices included.
+- Comparator hardening now includes decided-vector expected-status checks in
+  addition to TS-vs-Python matching; the same `make conformance` run remains
+  green at 273/273.
+- Fixed a differential-fuzz harness defect in
+  `implementation_plan/conformance/differential_fuzz.mjs` where generated
+  outputs were written into the same directory as vectors; vectors are now
+  isolated in a dedicated temp subdirectory so the runner ingests only corpus
+  files.
+- Typechecker/diagnostics check for touched files remains clean:
+  `swissknife/test/conformance/ts-conformance-runner.ts`,
+  `external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py`,
+  `implementation_plan/conformance/vectors/fol-native-vectors.json`,
+  `implementation_plan/conformance/vectors/temporal-trace-native-vectors.json`,
+  `implementation_plan/conformance/vectors/modal-kripke-native-vectors.json`,
+  `implementation_plan/conformance/vectors/deontic-conflict-native-vectors.json`,
+  `implementation_plan/conformance/vectors/zkp-witness-native-vectors.json`.
+
+**Current honest status:** PORT-235 now meets the corpus-size acceptance bar for
+the required native families (≥25 vectors each, including adversarial decided
+refutations) and is enforced by executable tests. The remaining gap is
+behavioral depth/fidelity rather than vector count: most native slices remain
+deterministic/simulation-backed, not full real-engine semantic parity.

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "zkp-witness-refuted-001",
+      "subsystem": "zkp-statement",
+      "description": "Invalid witness should refute.",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": ["ownership"],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "witness", "invalid"]
+    },
+    {
+      "id": "zkp-witness-proved-001",
+      "subsystem": "zkp-statement",
+      "description": "Valid witness should prove.",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": ["membership"],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "witness", "valid"]
+    },
+    {
+      "id": "zkp-witness-proved-002",
+      "subsystem": "zkp-statement",
+      "description": "Claims present with unspecified witness state returns starter proved verdict.",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": ["nullifier"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "witness", "claims"]
+    },
+    {
+      "id": "zkp-witness-unknown-001",
+      "subsystem": "zkp-statement",
+      "description": "Empty witness payload remains unknown.",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "witness", "unknown"]
+    }
+  ]
+}

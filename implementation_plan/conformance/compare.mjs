@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 export function loadResultEnvelope(path) {
   const payload = JSON.parse(readFileSync(path, 'utf8'));
@@ -11,26 +12,68 @@ export function loadResultEnvelope(path) {
   return payload;
 }
 
-export function compareResults(pythonEnvelope, tsEnvelope) {
+export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
   const py = indexByVectorId(pythonEnvelope.results ?? []);
   const ts = indexByVectorId(tsEnvelope.results ?? []);
+  const vectorExpectation = options.vectorExpectation ?? {};
   const vectorIds = [...new Set([...Object.keys(py), ...Object.keys(ts)])].sort();
   const rows = [];
 
   for (const vectorId of vectorIds) {
     const pyResult = py[vectorId];
     const tsResult = ts[vectorId];
+    const expectedStatus = vectorExpectation[vectorId]?.expectedStatus;
+    const decided = Boolean(vectorExpectation[vectorId]?.decided);
+    const strictStructuredParity = Boolean(vectorExpectation[vectorId]?.strictStructuredParity);
+    const structuredFields = Array.isArray(vectorExpectation[vectorId]?.structuredFields)
+      ? vectorExpectation[vectorId].structuredFields
+      : ['status', 'reason', 'proverId', 'modelHash'];
+
+    const expectedStatusMatch =
+      !decided
+      || !expectedStatus
+      || (
+        pyResult?.status === expectedStatus
+        && tsResult?.status === expectedStatus
+      );
+
+    const structured =
+      pyResult && tsResult
+        ? compareStructured(pyResult, tsResult, structuredFields)
+        : undefined;
+
     let outcome;
     if (pyResult && !tsResult) outcome = 'TS_ONLY_MISSING';
     else if (!pyResult && tsResult) outcome = 'PY_ONLY_MISSING';
     else if (pyResult.status === 'error' && tsResult.status === 'error') outcome = 'BOTH_ERROR';
-    else if (pyResult.status === tsResult.status) outcome = 'MATCH';
+    else if (
+      strictStructuredParity &&
+      pyResult.status === tsResult.status &&
+      expectedStatusMatch &&
+      structured?.match === true
+    ) {
+      outcome = 'MATCH';
+    } else if (
+      !strictStructuredParity &&
+      pyResult.status === tsResult.status &&
+      expectedStatusMatch
+    ) {
+      outcome = 'MATCH';
+    }
     else outcome = 'MISMATCH';
 
     rows.push({
       vectorId,
       subsystem: pyResult?.subsystem ?? tsResult?.subsystem ?? 'unknown',
       outcome,
+      strictStructuredParity,
+      structuredMatch: strictStructuredParity ? Boolean(structured?.match) : undefined,
+      structuredFields: strictStructuredParity ? structuredFields : undefined,
+      pythonStructuredHash: strictStructuredParity ? structured?.pythonHash : undefined,
+      tsStructuredHash: strictStructuredParity ? structured?.tsHash : undefined,
+      expectedStatus: expectedStatus ?? undefined,
+      decided,
+      expectedStatusMatch,
       pythonStatus: pyResult?.status ?? '<missing>',
       tsStatus: tsResult?.status ?? '<missing>',
       pythonBackendMode: pyResult?.backendMode ?? '<missing>',
@@ -95,7 +138,13 @@ export function renderMarkdownReport(comparison) {
     lines.push('| Vector | Subsystem | Outcome | Python | TypeScript | Note |');
     lines.push('|---|---|---|---|---|---|');
     for (const row of differences) {
-      const note = row.simulatedDivergence ? 'simulated backend divergence' : (row.pythonError ?? row.tsError ?? '');
+      const note = row.expectedStatusMatch === false
+        ? `expected-status mismatch (expected ${row.expectedStatus})`
+        : row.strictStructuredParity && row.structuredMatch === false
+          ? `strict structured mismatch (${(row.structuredFields ?? []).join(',')})`
+        : row.simulatedDivergence
+          ? 'simulated backend divergence'
+          : (row.pythonError ?? row.tsError ?? '');
       lines.push(`| ${row.vectorId} | ${row.subsystem} | ${row.outcome} | ${row.pythonStatus} (${row.pythonBackendMode}) | ${row.tsStatus} (${row.tsBackendMode}) | ${escapeTable(note)} |`);
     }
   }
@@ -143,16 +192,71 @@ function indexByVectorId(results) {
   return Object.fromEntries(results.map(result => [result.vectorId, result]));
 }
 
+function compareStructured(pyResult, tsResult, fields) {
+  const pySignature = structuredSignature(pyResult, fields);
+  const tsSignature = structuredSignature(tsResult, fields);
+  const pyText = JSON.stringify(pySignature);
+  const tsText = JSON.stringify(tsSignature);
+  return {
+    match: pyText === tsText,
+    pythonHash: digest(pyText),
+    tsHash: digest(tsText),
+  };
+}
+
+function structuredSignature(result, fields) {
+  const signature = {};
+  for (const field of fields) {
+    signature[field] = result?.[field] ?? null;
+  }
+  return signature;
+}
+
+function digest(text) {
+  return createHash('sha256').update(String(text ?? '')).digest('hex');
+}
+
+export function loadVectorExpectation(vectorsDir) {
+  const payload = {};
+  if (!vectorsDir) return payload;
+
+  const vectors = loadVectors(vectorsDir);
+  for (const vector of vectors) {
+    payload[vector.id] = {
+      strictStructuredParity: Boolean(vector?.expected?.strictStructuredParity),
+      expectedStatus: typeof vector?.expected?.status === 'string' ? vector.expected.status : undefined,
+      decided: vector?.expected?.decided === true,
+      structuredFields: Array.isArray(vector?.expected?.structuredFields)
+        ? vector.expected.structuredFields
+        : undefined,
+    };
+  }
+
+  return payload;
+}
+
+function loadVectors(vectorsDir) {
+  const files = readdirSync(resolve(vectorsDir)).filter(name => name.endsWith('.json')).sort();
+  const vectors = [];
+  for (const file of files) {
+    const corpus = JSON.parse(readFileSync(resolve(vectorsDir, file), 'utf8'));
+    if (!Array.isArray(corpus.vectors)) continue;
+    vectors.push(...corpus.vectors);
+  }
+  return vectors;
+}
+
 function escapeTable(value) {
   return String(value ?? '').replace(/\|/g, '\\|');
 }
 
 function parseArgs(argv) {
-  const args = { outDir: 'conformance', threshold: undefined };
+  const args = { outDir: 'conformance', threshold: undefined, vectors: undefined };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--python') args.python = argv[++i];
     else if (arg === '--ts') args.ts = argv[++i];
+    else if (arg === '--vectors') args.vectors = argv[++i];
     else if (arg === '--out-dir') args.outDir = argv[++i];
     else if (arg === '--threshold') args.threshold = Number(argv[++i]);
     else if (arg === '--help') printHelpAndExit(0);
@@ -166,6 +270,7 @@ function printHelpAndExit(code) {
   console.log(`Usage: node implementation_plan/conformance/compare.mjs --python py.json --ts ts.json [options]
 
 Options:
+  --vectors <dir>      Optional vectors directory for strict structured parity flags
   --out-dir <dir>      Output directory for report.json and report.md
   --threshold <pct>    Fail when parity percentage is below this value
 `);
@@ -175,7 +280,11 @@ Options:
 if (import.meta.url === `file://${process.argv[1]}`) {
   try {
     const args = parseArgs(process.argv.slice(2));
-    const comparison = compareResults(loadResultEnvelope(args.python), loadResultEnvelope(args.ts));
+    const comparison = compareResults(
+      loadResultEnvelope(args.python),
+      loadResultEnvelope(args.ts),
+      { vectorExpectation: loadVectorExpectation(args.vectors) },
+    );
     writeComparisonArtifacts(comparison, resolve(args.outDir));
     if (args.threshold !== undefined && comparison.summary.parityPercent < args.threshold) {
       console.error(`Parity ${comparison.summary.parityPercent.toFixed(2)}% is below threshold ${args.threshold}%`);

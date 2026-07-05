@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "legalnorm-refuted-001",
+      "subsystem": "legal-norm",
+      "description": "Negated query fact should refute.",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": ["derive:disclose_report"],
+          "facts": ["not:disclose_report"],
+          "query": "disclose_report"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["legal-norm", "contradiction"]
+    },
+    {
+      "id": "legalnorm-proved-001",
+      "subsystem": "legal-norm",
+      "description": "Fact directly supports query.",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": ["if:incident_reported=>derive:notify_dpo"],
+          "facts": ["notify_dpo"],
+          "query": "notify_dpo"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["legal-norm", "facts"]
+    },
+    {
+      "id": "legalnorm-proved-002",
+      "subsystem": "legal-norm",
+      "description": "Derived query marker in norms should prove.",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": ["derive:retain_audit_log"],
+          "facts": ["incident_reported"],
+          "query": "retain_audit_log"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["legal-norm", "derivation"]
+    },
+    {
+      "id": "legalnorm-unknown-001",
+      "subsystem": "legal-norm",
+      "description": "Empty legal norm payload should remain unknown.",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["legal-norm", "unknown"]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "modal-kripke-refuted-001",
+      "subsystem": "modal",
+      "description": "Contradictory atom assignment in frame should refute.",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": ["p", "!p"]
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["modal", "kripke", "contradiction"]
+    },
+    {
+      "id": "modal-kripke-proved-001",
+      "subsystem": "modal",
+      "description": "Query atom present in frame should prove.",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": ["p", "q", "r"],
+          "query": "q"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["modal", "kripke", "query"]
+    },
+    {
+      "id": "modal-kripke-proved-002",
+      "subsystem": "modal",
+      "description": "Non-empty consistent frame returns starter proved verdict.",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": ["accessible", "obligatory"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["modal", "kripke", "consistent"]
+    },
+    {
+      "id": "modal-kripke-unknown-001",
+      "subsystem": "modal",
+      "description": "Empty frame remains unknown.",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["modal", "kripke", "unknown"]
+    }
+  ]
+}

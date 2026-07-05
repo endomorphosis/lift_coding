@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "deontic-conflict-refuted-001",
+      "subsystem": "deontic",
+      "description": "Same atom obligated and prohibited should refute.",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": ["pay_tax"],
+          "prohibitions": ["pay_tax"]
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "conflict", "contradiction"]
+    },
+    {
+      "id": "deontic-conflict-proved-001",
+      "subsystem": "deontic",
+      "description": "Query present as non-prohibited obligation should prove.",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": ["report", "archive"],
+          "prohibitions": ["delete"],
+          "query": "report"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "conflict", "query"]
+    },
+    {
+      "id": "deontic-conflict-proved-002",
+      "subsystem": "deontic",
+      "description": "Consistent norms should return starter proved verdict.",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": ["notify"],
+          "prohibitions": ["conceal"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "conflict", "consistent"]
+    },
+    {
+      "id": "deontic-conflict-unknown-001",
+      "subsystem": "deontic",
+      "description": "Empty norm set remains unknown.",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["deontic", "conflict", "unknown"]
+    }
+  ]
+}

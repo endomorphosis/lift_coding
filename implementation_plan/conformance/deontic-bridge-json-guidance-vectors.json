@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "json-guidance-object",
+      "input": {"alpha": 1},
+      "expected": null
+    },
+    {
+      "id": "json-guidance-array-string",
+      "input": "[1, 2, 3]",
+      "expected": [1, 2, 3]
+    },
+    {
+      "id": "json-guidance-object-string",
+      "input": "{\"alpha\": 1, \"beta\": \"two\"}",
+      "expected": {"alpha": 1, "beta": "two"}
+    },
+    {
+      "id": "json-guidance-leading-whitespace",
+      "input": "   {\"k\": true}",
+      "expected": {"k": true}
+    },
+    {
+      "id": "json-guidance-non-json-string",
+      "input": "plain text",
+      "expected": null
+    },
+    {
+      "id": "json-guidance-invalid-json",
+      "input": "{oops}",
+      "expected": null
+    },
+    {
+      "id": "json-guidance-zero",
+      "input": 0,
+      "expected": null
+    },
+    {
+      "id": "json-guidance-false",
+      "input": false,
+      "expected": null
+    }
+  ]
+}
