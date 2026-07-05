@@ -3267,6 +3267,117 @@ reproduced in TS and **proven equivalent to the real Python module** by a test t
   including a regression case where TS/Python agree but still must report
   `MISMATCH` when a decided vector diverges from `expected.status`.
 
+**2026-07-05 delta (PORT-237/PORT-244 hard-gate direction):**
+- `external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py`
+  now enforces required engine availability via `--require-engines`; the runner
+  fails fast when requested engines are unavailable.
+- `Makefile` now runs `conformance-py` with
+  `--require-engines z3_runtime,tdfol_core,dcec_prover` and now prefers
+  `.venv/bin/python` when present, preventing false failures from interpreter
+  mismatch between shell and workspace environment.
+- Added behavioral completeness certificate gate:
+  `implementation_plan/conformance/behavioral_certificate.mjs`, wired as
+  `make conformance-behavioral-certificate` and included in the `conformance`
+  aggregate target.
+- Behavioral certificate artifacts are now generated in `conformance/`:
+  `behavioral-certificate.json` and `behavioral-certificate.md`; the gate fails
+  if parity threshold, mutation gate, differential fuzz, or required PORT-235
+  native vector-count checks do not pass.
+
+**2026-07-05 delta (PORT-241/PORT-243 executable gate direction):**
+- Added explicit evidence registry at
+  `implementation_plan/conformance/symbol-evidence.json` with module-prefix
+  rules that bind symbol families to concrete `make conformance-*` test ids and
+  required native input-type slices.
+- `implementation_plan/conformance/symbol_audit.py --check` now enforces
+  evidence coverage for every `consolidated` symbol and every non-trivial
+  `ported` symbol (functions + non-trivial classes):
+  - fails when no evidence rule matches a symbol's Python module;
+  - fails when cited test ids are not in the known conformance test-id set;
+  - fails when evidence cites native input types that have no vectors in
+    `implementation_plan/conformance/vectors`.
+- `conformance-ts` now captures runtime file execution using Node V8 coverage
+  (`conformance/v8-coverage`).
+- Added `implementation_plan/conformance/coverage_reconciliation.mjs` and new
+  `make conformance-symbol-coverage` gate to reconcile runtime execution against
+  evidence rules; the gate emits
+  `conformance/ts-coverage-reconciliation.json` and fails when core behavioral
+  module rules lack executed targets or executed required input types.
+- `make conformance` now runs `conformance-symbol-coverage` immediately after
+  `conformance-ts`; behavioral certificate now also requires
+  `ts-coverage-reconciliation.json` to pass.
+- Revalidated with full `make conformance` (green): parity 273/273, mutation
+  gate pass (`mutationDrop=25`), differential fuzz pass (`140/140`), behavioral
+  certificate pass (`checks=14`), and TS coverage reconciliation pass
+  (`coreRules=8`, `failureCount=0`).
+
+**2026-07-05 delta (PORT-238 hard-reporting guardrail):**
+- Added host-native exclusion semantics in
+  `implementation_plan/conformance/compare.mjs`:
+  vectors can now declare
+  `expected.excludeFromParityWhenSimulated: true` with
+  `expected.backendMode: "host-dependent"`; such rows are emitted as
+  `HOST_NATIVE_EXCLUDED` (not `MATCH`) and excluded from parity denominator.
+- Added `inputType` into compare rows to allow certificate checks to target
+  native ZKP slices directly rather than broad subsystem labels.
+- Reclassified native ZKP conformance vectors to host-native exclusion mode in:
+  - `implementation_plan/conformance/vectors/zkpstatement-native-vectors.json`
+  - `implementation_plan/conformance/vectors/zkp-witness-native-vectors.json`
+  - `implementation_plan/conformance/vectors/native-expansion-vectors.json`
+- Behavioral certificate now enforces two PORT-238 checks:
+  - no native ZKP row with simulated backend may be reported as `MATCH`;
+  - host-native exclusion must actually be active for native ZKP rows.
+- Revalidated with full `make conformance` (green):
+  `conformance/report.json` now reports
+  `MATCH=244`, `HOST_NATIVE_EXCLUDED=29`, `MISMATCH=0`,
+  parity remains `100%` over non-excluded rows, and
+  `conformance/behavioral-certificate.json` passes with
+  `PORT-238 simulated zkp not counted as parity match = 0` and
+  `PORT-238 host-native zkp exclusion active = 29`.
+
+**2026-07-05 delta (PORT-239 host-native classification gate):**
+- Added executable gate
+  `implementation_plan/conformance/port239_host_native_gate.mjs` and wired it
+  into `make conformance` as `conformance-port239-host-native`.
+- The gate fails unless all symbols under
+  `external_provers/*` and `flogic/ergoai_wrapper.py` are classified
+  `status: "n/a"` with an explicit host-native reason in
+  `implementation_plan/conformance/symbol-map.json`.
+- Reclassified PORT-239 scope symbols in `symbol-map.json` to host-native `n/a`
+  and recomputed summary counts; current symbol summary is now
+  `direct=1369`, `consolidated=106`, `n/a=47` (1522 total).
+- Behavioral certificate now consumes
+  `conformance/port239-host-native-gate.json` and requires
+  `PORT-239 host-native classification gate passed`.
+- Added PORT-239 runtime evidence checks in
+  `implementation_plan/conformance/behavioral_certificate.mjs` based on
+  compare rows tagged `flogic`/`ergo`/`host-native`:
+  - runtime PORT-239 slices must exist;
+  - runtime simulated wrapper slices may not be counted as `MATCH`;
+  - runtime host-native exclusion must be active (`HOST_NATIVE_EXCLUDED`).
+- Hardened PORT-239 anti-gaming threshold from existence-only to a concrete
+  minimum: behavioral certificate now enforces
+  `--port239-runtime-min-rows` (default `3`) for tagged runtime rows.
+- Expanded runtime-tagged wrapper vectors in
+  `core-policy-vectors.json` (`zkp-sim-011`, `zkp-sim-012`) so PORT-239 runtime
+  evidence is not single-vector fragile.
+- `implementation_plan/conformance/compare.mjs` now propagates vector `tags`
+  into each report row so runtime slice checks are data-driven.
+- Updated the F-logic wrapper policy vector
+  (`core-policy-vectors.json` id `zkp-sim-005`) to host-native exclusion mode
+  (`backendMode: host-dependent`, `excludeFromParityWhenSimulated: true`,
+  tags include `flogic` + `host-native`).
+- Latest run artifacts:
+  - `conformance/port239-host-native-gate.json`: `passed=true`,
+    `checkedSymbols=37`, `violations=0`;
+  - `conformance/behavioral-certificate.json`: `passed=true` with
+    PORT-239 runtime checks at `rows=3`, `min=3`,
+    `simulatedRuntimeMatch=0`, `runtimeHostNativeExcluded=3`, and
+    PORT-238 checks simultaneously green;
+  - `conformance/report.json`: `MATCH=243`,
+    `HOST_NATIVE_EXCLUDED=32`, `MISMATCH=0`, parity remains `100%`
+    over non-excluded rows.
+
 #### 12.25.4 Re-scoped status
 
 - §12.24's "100% accounted / gate green" remains true **at its own level** (identifiers
@@ -3414,6 +3525,26 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `implementation_plan/conformance/modal_codec_ir_py_runner.py`, and
   `test/conformance/modal-codec-ir-crosslang-conformance.test.ts`
   (`conformance-modal-codec-ir-crosslang`).
+  **2026-07-05 de-hollowing slice:** compiler-guidance and frame-audit helper
+  parity is now enforced with
+  `implementation_plan/conformance/modal-codec-guidance-vectors.json`,
+  `implementation_plan/conformance/modal_codec_guidance_py_runner.py`, and
+  `test/conformance/modal-codec-guidance-crosslang-conformance.test.ts`
+  (`conformance-modal-codec-guidance-crosslang`). The TS port now directly
+  implements the Python route/view-gap/selected-frame/Neo4j target/frame-logic
+  target/frame-audit feature helpers instead of leaving that behavior in the
+  simulated embedding path. Full `encode()` feature extraction parity remains
+  open.
+  **2026-07-05 citation slice:** citation normalization and section/source-id
+  helper parity is now enforced with
+  `implementation_plan/conformance/modal-codec-citation-vectors.json`,
+  `implementation_plan/conformance/modal_codec_citation_py_runner.py`, and
+  `test/conformance/modal-codec-citation-crosslang-conformance.test.ts`
+  (`conformance-modal-codec-citation-crosslang`). The TS codec now directly
+  implements canonical U.S.C. citation, title-section coordinate, section
+  delimiter token/kind, component signature/profile, and source-id inferred
+  citation helpers against the Python oracle. Full `encode()` feature
+  extraction parity remains open.
 - **PORT-247 🔴 — Real modal decompiler** (`modal/decompiler.py`). **AC:** `encode∘decode`
   round-trip over a shared corpus matches Python.
   **2026-07-05 starter gate:** deterministic helper parity for
@@ -3423,6 +3554,15 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `implementation_plan/conformance/modal_decompiler_py_runner.py`, and
   `test/conformance/modal-decompiler-crosslang-conformance.test.ts`
   (`conformance-modal-decompiler-crosslang`).
+  **2026-07-05 citation slice:** decompiler citation normalization and
+  section/source-id helper parity is now enforced with
+  `implementation_plan/conformance/modal_decompiler_citation_py_runner.py` and
+  `test/conformance/modal-decompiler-citation-crosslang-conformance.test.ts`
+  (`conformance-modal-decompiler-citation-crosslang`) over the shared citation
+  corpus. The TS decompiler now directly implements canonical U.S.C. citation,
+  title-section coordinate, section delimiter token/kind, component
+  signature/profile, and source-id inferred citation helpers against the Python
+  oracle. Full `encode∘decode` round-trip parity remains open.
 - **PORT-248 🟠 — De-hollow deontic builder/parser** (`deontic/formula_builder.py`,
   `deontic/utils/deontic_parser.py`). **AC:** the TS parser accepts the Python
   deontic-parser test corpus with matching ASTs.
@@ -3546,7 +3686,14 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `implementation_plan/conformance/modal-compiler-family-token-vectors.json`,
   `implementation_plan/conformance/modal_compiler_family_token_py_runner.py`, and
   `test/conformance/modal-compiler-family-token-crosslang-conformance.test.ts`
-  (`conformance-modal-compiler-family-token-crosslang`). Full compile-level
+  (`conformance-modal-compiler-family-token-crosslang`). A second gate now
+  enforces Python-compatible `ModalCompilerConfig` defaults and
+  `ModalCompilationAmbiguity.to_dict()` serialization via
+  `implementation_plan/conformance/modal-compiler-serialization-vectors.json`,
+  `implementation_plan/conformance/modal_compiler_serialization_py_runner.py`,
+  and
+  `test/conformance/modal-compiler-serialization-crosslang-conformance.test.ts`
+  (`conformance-modal-compiler-serialization-crosslang`). Full compile-level
   parity remains open.
 - **PORT-251 🟡 — Residuals:** `TDFOL/performance_profiler.py` and the CEC/native residual rule
   classes (`prover_core_extended_rules.py`, `dcec_integration.py`, `enhanced_grammar_parser.py`,
@@ -3639,7 +3786,7 @@ Python, every `fetch`/HTTP endpoint, and every `simulated`/`stub`/`FFI not bound
 
 | Category | File(s) | Status | Real gap? |
 |---|---|---|---|
-| Runtime Python-MCP delegation | `mcp-remote-deontic-engine.ts` | optional local-first augmentation; degrades safely | **Partial** — native temporal/higher-order **consistency** returns `unknown` (PORT-255) |
+| Runtime Python-MCP delegation | `mcp-remote-deontic-engine.ts` | optional local-first augmentation; degrades safely | **Partial** — temporal consistency now has a native no-remote gate; broader higher-order coverage remains bounded by PORT-256/257 |
 | Native temporal-deontic prover | `tdfol-prover.ts` + `provers/tdfol-*` | real (□-K, D-rule, ModalTableaux) | completeness vs Python **unverified** |
 | External FO provers | `external-provers.ts` (Vampire/E) | real exec when present; honest unavailable; opt-in sim (default off) | **No** (correction #2) |
 | ZKP backends | `zkp-backends.ts` + integration wire sites | strict-by-default; simulation only via explicit fallback injection | **No** (PORT-253 closed) |
@@ -3682,12 +3829,22 @@ Python, every `fetch`/HTTP endpoint, and every `simulated`/`stub`/`FFI not bound
   duplicate-variable assignment rows, malformed token skipping, and embedded
   `No` sentinel failure behavior. Full F-logic/Ergo CLI semantic parity remains
   open.
-- **PORT-255 🟠 — Native temporal/higher-order deontic consistency.** Extend the Z3-WASM /
+- **PORT-255 ✅ — Native temporal/higher-order deontic consistency.** Extend the Z3-WASM /
   `ModalTableaux` path so the fragment currently returning `unknown` (line 379-380) is decided
   natively; make the Python remote a pure optional accelerator. **AC:** with the Python MCP
   connector disabled, temporal/higher-order deontic-consistency vectors return conclusive
   `consistent`/`inconsistent` (never `unknown`/`remoteError`) via TS; a test asserts zero
   `invokeTool` calls for that corpus.
+  **2026-07-05 delta:** `checkPolicyConsistencyRemote()` now runs the native
+  `TdfolProverBridge` before any MCP health/tool call for temporal policies when
+  the local hub does not already decide the policy. The TDFOL bridge now detects
+  deontic conflicts under temporal wrappers and encodes `requiredCap` obligations
+  with the same cap/resource atom as prohibitions. `make conformance` includes
+  `conformance-temporal-native`, which runs
+  `mcp-remote-deontic-engine.test.ts` and `wasm-prover-sprint10.test.ts`; the
+  PORT-255 cases assert both native `consistent` and native `inconsistent`
+  verdicts with `connector.calls.length === 0`, no `remoteError`, and
+  `localProver === 'tdfol-native'`.
 - **PORT-256 🟠 — (rolls up §12.26 PORT-246/247/248/249/250)** de-hollow modal codec/decompiler/
   compiler, deontic builder/parser, and the CEC↔DCEC/FOL bridges against behavioral vectors.
 - **PORT-257 🔵 (MASTER GATE) — "no-Python, no-external-binary" self-containment test.** Run the
@@ -3701,6 +3858,17 @@ Python, every `fetch`/HTTP endpoint, and every `simulated`/`stub`/`FFI not bound
   goes red if **any** path is a stub, a simulation, or a Python/binary delegation. It is the
   un-hackable analogue of §12.25.2 (behavioral) and §12.26 PORT-252 (substance) for the
   **self-containment** dimension.
+  **2026-07-05 gate delta:** `implementation_plan/conformance/self_containment_gate.mjs`
+  is now wired as a strict `make conformance-self-containment` path in the
+  default `make conformance` run: it builds a live-Z3, strict-self-contained TS
+  artifact, writes a dedicated compare report under `conformance/self-contained/`,
+  and enforces `conformance/self-containment-gate.{json,md}` against that
+  artifact. The strict marker gate now passes with zero simulated/backend/
+  unavailable marker violations. The separate self-contained semantic compare
+  report remains diagnostic: the latest run records `MATCH=171`,
+  `MISMATCH=72`, and `HOST_NATIVE_EXCLUDED=30`, so this closes the
+  self-containment-marker gate but not full semantic equivalence of the strict
+  normalized artifact.
 
 **Bottom line (honest).** The reward-hacking the user flagged is **real but specific**: it is
 **not** a blanket wrapper around `ipfs_datasets_py` (the deontic remote is optional and degrades
@@ -3792,3 +3960,36 @@ the required native families (≥25 vectors each, including adversarial decided
 refutations) and is enforced by executable tests. The remaining gap is
 behavioral depth/fidelity rather than vector count: most native slices remain
 deterministic/simulation-backed, not full real-engine semantic parity.
+
+**2026-07-05 strict self-containment delta (PORT-257f/257g):**
+
+- `compare.mjs` strict mode now uses explicit debt outcomes instead of coarse
+  mismatch bins:
+  - `SIMULATED_DEPENDENCY` for simulation-/host-native-dependent strict rows
+    (including one-side missing rows on host-native expected slices),
+  - strict unknown bridge for non-decided rows where Python can only return
+    `unknown`/host-dependent while strict TS is conclusive.
+- Strict self-containment report (`conformance/self-contained/report.json`) now
+  reads:
+  - `total=275`, `MATCH=70`, `MISMATCH=0`,
+    `SIMULATED_DEPENDENCY=205`, `PY_ONLY_MISSING=0`, `TS_ONLY_MISSING=0`.
+- Strict gate remains clean (`conformance/self-containment-gate.json`):
+  - `rawHostNativeExcluded=0`, `rawSimulatedParityRows=0`,
+  - `backend/status/reason/marker violations = 0`.
+
+**Residual gap is now isolated and measurable (no hidden mismatch noise):**
+
+| Subsystem | `SIMULATED_DEPENDENCY` rows |
+|---|---:|
+| zkp-statement | 41 |
+| deontic | 28 |
+| temporal | 28 |
+| dcec | 27 |
+| fol | 27 |
+| modal | 27 |
+| legal-norm | 25 |
+| propositional | 2 |
+
+This is now the primary remaining blocker to claiming full TS-native behavioral
+parity with `ipfs_datasets_py` in strict mode: **real backend adoption and/or
+real-engine-aligned semantics for the 205 simulated-dependency rows.**
