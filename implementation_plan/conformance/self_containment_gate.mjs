@@ -12,11 +12,13 @@ function main() {
 
   const tsResults = loadJson(tsPath);
   const report = loadJson(reportPath);
-  const pyResults = loadJson(pyResultsPath);
+  const pyResults = strict ? loadJson(pyResultsPath) : null;
   const rows = Array.isArray(tsResults?.results) ? tsResults.results : [];
   const compareRows = Array.isArray(report?.rows) ? report.rows : [];
   const compareSummary = report?.summary ?? {};
-  const zkpRuntimeMode = String(pyResults?.engineVersions?.zkp_runtime_mode ?? '');
+  const zkpRuntimeMode = strict
+    ? String(pyResults?.engineVersions?.zkp_runtime_mode ?? '')
+    : '';
   const validZkpRuntimeModes = new Set([
     'policy-proxy-default',
     'simulated-runtime-enabled',
