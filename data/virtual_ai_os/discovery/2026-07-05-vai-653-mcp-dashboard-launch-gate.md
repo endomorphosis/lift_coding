@@ -7,7 +7,7 @@ Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
 Packet goals: VAIOS-G724, VAIOS-G728
 Packet sibling task: VAI-654
 Evidence term: launch Playwright validation gate
-Attempt: 1
+Attempt: 2
 Source gap: data/virtual_ai_os/discovery/2026-07-05-vai-653-objective-gap-3e00ad2a0074.md
 Launch gate receipt: data/virtual_ai_os/discovery/2026-07-05-vai-653-mcp-dashboard-launch-gate.md
 Receipt fixture: hallucinate_app/test/e2e/fixtures/vai-653-mcp-dashboard-launch-gate.json
