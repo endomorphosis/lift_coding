@@ -48,9 +48,15 @@ SwissKnife theorem-prover parity harness.
   `acceptableReasons: [sat, proved]`) and canonical vector-hash pinning to
   detect semantic drift, plus required source-file uniqueness/origin pinning
   (`--port239-required-vectors-file`, default `core-policy-vectors.json`) to
-  prevent substitution or retagging
-  gaming, and strict
-  structured artifact coverage for PORT-236.
+  prevent substitution or retagging; required runtime rows for those ids must
+  also retain the expected runtime split (Python `real`, TypeScript
+  `simulated`). This prevents exclusions from passing with all-real runtime
+  modes or other backend drift.
+  Strict
+  structured artifact coverage for PORT-236. It also requires
+  `conformance/py-results.json` to expose auditable
+  `engineVersions.zkp_runtime_mode` metadata
+  (`policy-proxy-default` or `simulated-runtime-enabled`).
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler

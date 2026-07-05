@@ -9,6 +9,7 @@ function main() {
   const vectorsDir = resolve(args.vectorsDir);
 
   const report = loadJson(resolve(outDir, 'report.json'));
+  const pyResults = loadJson(resolve(outDir, 'py-results.json'));
   const mutationGate = loadJson(resolve(outDir, 'mutation-gate.json'));
   const differentialFuzz = loadJson(resolve(outDir, 'differential-fuzz.json'));
   const tsCoverageReconciliation = loadJson(resolve(outDir, 'ts-coverage-reconciliation.json'));
@@ -34,9 +35,9 @@ function main() {
   const port239RowsById = new Map(port239RuntimeRows.map(row => [String(row?.vectorId ?? ''), row]));
   const requiredPort239VectorIds = args.port239RequiredVectorIds;
   const requiredPort239VectorExpectations = {
-    'zkp-sim-005': { tags: ['flogic', 'host-native'], inputType: 'policy', subsystem: 'zkp-statement', backendMode: 'host-dependent', excludeFromParityWhenSimulated: true, status: 'sat', decided: true, acceptableReasons: ['sat', 'proved'], expectedHash: 'e05f426ec6c10a66ec3b0ef1667c8ef07291b44a977ae35f9e08d7cab1316e53' },
-    'zkp-sim-011': { tags: ['ergo', 'host-native'], inputType: 'policy', subsystem: 'zkp-statement', backendMode: 'host-dependent', excludeFromParityWhenSimulated: true, status: 'sat', decided: true, acceptableReasons: ['sat', 'proved'], expectedHash: '6cf9842358a80aef35bcc9708d2c5ea2570e8506223ddf9a6a7614eb068f93e2' },
-    'zkp-sim-012': { tags: ['flogic', 'host-native'], inputType: 'policy', subsystem: 'zkp-statement', backendMode: 'host-dependent', excludeFromParityWhenSimulated: true, status: 'sat', decided: true, acceptableReasons: ['sat', 'proved'], expectedHash: '3c2eb813633f9fe0692ff6ad83609a7af4390cef44d1a1145ef264888f7e83f9' },
+    'zkp-sim-005': { tags: ['flogic', 'host-native'], inputType: 'policy', subsystem: 'zkp-statement', backendMode: 'host-dependent', excludeFromParityWhenSimulated: true, status: 'sat', decided: true, acceptableReasons: ['sat', 'proved'], expectedHash: 'e05f426ec6c10a66ec3b0ef1667c8ef07291b44a977ae35f9e08d7cab1316e53', requiredPyBackendMode: 'real', requiredTsBackendMode: 'simulated' },
+    'zkp-sim-011': { tags: ['ergo', 'host-native'], inputType: 'policy', subsystem: 'zkp-statement', backendMode: 'host-dependent', excludeFromParityWhenSimulated: true, status: 'sat', decided: true, acceptableReasons: ['sat', 'proved'], expectedHash: '6cf9842358a80aef35bcc9708d2c5ea2570e8506223ddf9a6a7614eb068f93e2', requiredPyBackendMode: 'real', requiredTsBackendMode: 'simulated' },
+    'zkp-sim-012': { tags: ['flogic', 'host-native'], inputType: 'policy', subsystem: 'zkp-statement', backendMode: 'host-dependent', excludeFromParityWhenSimulated: true, status: 'sat', decided: true, acceptableReasons: ['sat', 'proved'], expectedHash: '3c2eb813633f9fe0692ff6ad83609a7af4390cef44d1a1145ef264888f7e83f9', requiredPyBackendMode: 'real', requiredTsBackendMode: 'simulated' },
   };
   const expectedPort239VectorsFile = args.port239RequiredVectorsFile;
   const missingPort239RequiredVectorDefinitions = requiredPort239VectorIds.filter(vectorId => !vectorsById.has(vectorId));
@@ -62,6 +63,16 @@ function main() {
     if (!row || !expected) return false;
     return String(row?.inputType ?? '') !== expected.inputType
       || String(row?.subsystem ?? '') !== expected.subsystem;
+  });
+  const port239RequiredVectorBackendModeViolations = requiredPort239VectorIds.filter(vectorId => {
+    const row = port239RowsById.get(vectorId);
+    const expected = requiredPort239VectorExpectations[vectorId];
+    if (!row || (!expected?.requiredTsBackendMode && !expected?.requiredPyBackendMode)) return false;
+    const tsMismatch = expected?.requiredTsBackendMode
+      && String(row?.tsBackendMode ?? '').toLowerCase() !== String(expected.requiredTsBackendMode).toLowerCase();
+    const pyMismatch = expected?.requiredPyBackendMode
+      && String(row?.pythonBackendMode ?? '').toLowerCase() !== String(expected.requiredPyBackendMode).toLowerCase();
+    return Boolean(tsMismatch || pyMismatch);
   });
   const port239RequiredVectorDefinitionViolations = requiredPort239VectorIds.filter(vectorId => {
     const vector = vectorsById.get(vectorId);
@@ -144,6 +155,11 @@ function main() {
     return row?.outcome === 'MATCH' && (pyMode === 'simulated' || tsMode === 'simulated');
   }).length;
   const port239RuntimeHostNativeExcludedCount = port239RuntimeRows.filter(row => row?.outcome === 'HOST_NATIVE_EXCLUDED').length;
+  const zkpRuntimeMode = String(pyResults?.engineVersions?.zkp_runtime_mode ?? '');
+  const validZkpRuntimeModes = new Set([
+    'policy-proxy-default',
+    'simulated-runtime-enabled',
+  ]);
 
   const checks = [
     check('parity threshold', Number(report?.summary?.parityPercent ?? 0) >= args.parityThreshold, `parity=${Number(report?.summary?.parityPercent ?? 0).toFixed(2)} threshold=${args.parityThreshold}`),
@@ -164,6 +180,7 @@ function main() {
     check('PORT-239 required vector ids retain expected corpus fields', port239RequiredVectorDefinitionViolations.length === 0, `violations=${port239RequiredVectorDefinitionViolations.join(',') || 'none'}`),
     check('PORT-239 required vector ids retain expected canonical hashes', port239RequiredVectorHashViolations.length === 0, `violations=${port239RequiredVectorHashViolations.join(',') || 'none'}`),
     check('PORT-239 runtime required vector ids are host-native-excluded', port239RequiredVectorOutcomeViolations.length === 0, `violations=${port239RequiredVectorOutcomeViolations.join(',') || 'none'}`),
+    check('PORT-239 runtime required vector ids retain expected runtime backend modes', port239RequiredVectorBackendModeViolations.length === 0, `violations=${port239RequiredVectorBackendModeViolations.join(',') || 'none'}`),
     check('PORT-239 runtime required vector ids retain expected tags', port239RequiredVectorTagViolations.length === 0, `violations=${port239RequiredVectorTagViolations.join(',') || 'none'}`),
     check('PORT-239 runtime required vector ids retain expected shape', port239RequiredVectorShapeViolations.length === 0, `violations=${port239RequiredVectorShapeViolations.join(',') || 'none'}`),
     check('PORT-239 runtime flogic-tag minimum row count', port239RuntimeFlogicCount >= args.port239RuntimeFlogicMinRows, `rows=${port239RuntimeFlogicCount} min=${args.port239RuntimeFlogicMinRows}`),
@@ -179,6 +196,7 @@ function main() {
     check('PORT-239 runtime host-native exclusion active', port239RuntimeHostNativeExcludedCount > 0, `runtimeHostNativeExcluded=${port239RuntimeHostNativeExcludedCount}`),
     check('PORT-238 simulated zkp not counted as parity match', zkpSimulatedMatchCount === 0, `simulatedZkpMatch=${zkpSimulatedMatchCount}`),
     check('PORT-238 host-native zkp exclusion active', zkpHostNativeExcludedCount > 0, `hostNativeExcludedZkp=${zkpHostNativeExcludedCount}`),
+    check('PORT-257 py-results includes auditable zkp runtime mode', validZkpRuntimeModes.has(zkpRuntimeMode), `zkp_runtime_mode=${zkpRuntimeMode || '<missing>'}`),
     ...port235Checks(vectorStats),
   ];
 
@@ -220,6 +238,7 @@ function main() {
       port239RequiredVectorHashViolations,
       missingPort239RequiredVectorIds,
       port239RequiredVectorOutcomeViolations,
+      port239RequiredVectorBackendModeViolations,
       port239RequiredVectorTagViolations,
       port239RequiredVectorShapeViolations,
       port239RuntimeFlogicCount,
@@ -235,6 +254,7 @@ function main() {
       port239RuntimeHostNativeExcludedCount,
       zkpSimulatedMatchCount,
       zkpHostNativeExcludedCount,
+      zkpRuntimeMode,
       vectorInputCounts: vectorStats.byInputType,
       totalVectors: vectorStats.total,
     },
