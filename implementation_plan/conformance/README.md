@@ -25,6 +25,9 @@ SwissKnife theorem-prover parity harness.
 - `port239_host_native_gate.mjs` enforces PORT-239 host-native classification
   for `external_provers/*` and `flogic/ergoai_wrapper.py` symbols; it writes
   `conformance/port239-host-native-gate.json`.
+- `behavioral_certificate.mjs` now enforces a minimum number of PORT-239 runtime
+  evidence rows (default `--port239-runtime-min-rows 3`) derived from compare
+  rows tagged `flogic`/`ergo`/`host-native`.
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
@@ -42,8 +45,8 @@ SwissKnife theorem-prover parity harness.
   writes a dedicated strict compare report under `conformance/self-contained/`,
   and enforces the PORT-257 strict self-containment gate against that report.
   The strict compare stage disables host-native exclusions and treats simulated
-  backend parity rows as mismatches so residual dependency on simulated engines
-  stays visible as debt instead of being counted as parity. It also normalizes
+  backend/host-dependent expectation rows as `SIMULATED_DEPENDENCY` outcomes so residual dependency on
+  simulated engines stays visible as debt instead of being counted as parity, even when one side is missing. It also normalizes
   Python `unknown` host-dependent rows to match TS conclusive strict outputs when
   vectors are non-decided, preventing false-negative mismatches in strict mode.
 - `make conformance-self-containment-strict` evaluates the strict gate against the

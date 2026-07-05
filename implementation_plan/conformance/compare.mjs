@@ -90,11 +90,24 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     }
     else outcome = 'MISMATCH';
 
-    if (strictSelfContainment && simulatedObserved && outcome === 'MATCH') {
-      outcome = 'MISMATCH';
-    }
     if (strictUnknownBridge && outcome === 'MISMATCH') {
       outcome = 'MATCH';
+    }
+    const strictSimulatedExpectation = Boolean(
+      strictSelfContainment
+      && (
+        simulatedObserved
+        || (expectedBackendMode === 'host-dependent' && excludeFromParityWhenSimulated)
+      ),
+    );
+    const strictDependencyEligible = outcome === 'MATCH'
+      || outcome === 'MISMATCH'
+      || outcome === 'HOST_NATIVE_EXCLUDED'
+      || outcome === 'PY_ONLY_MISSING'
+      || outcome === 'TS_ONLY_MISSING';
+    const strictSimulatedDependency = Boolean(strictSimulatedExpectation && strictDependencyEligible);
+    if (strictSimulatedDependency) {
+      outcome = 'SIMULATED_DEPENDENCY';
     }
 
     rows.push({
@@ -103,6 +116,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       inputType: inputType ?? 'unknown',
       tags,
       outcome,
+      strictSimulatedDependency,
       strictStructuredParity,
       strictUnknownBridge,
       structuredMatch: strictStructuredParity ? Boolean(structured?.match) : undefined,
@@ -154,6 +168,7 @@ export function renderMarkdownReport(comparison) {
     `- Total vectors: ${comparison.summary.total}`,
     `- Match: ${comparison.summary.MATCH}`,
     `- Mismatch: ${comparison.summary.MISMATCH}`,
+    `- Simulated dependency: ${comparison.summary.SIMULATED_DEPENDENCY}`,
     `- Both error: ${comparison.summary.BOTH_ERROR}`,
     `- Python-only missing: ${comparison.summary.PY_ONLY_MISSING}`,
     `- TypeScript-only missing: ${comparison.summary.TS_ONLY_MISSING}`,
@@ -180,6 +195,8 @@ export function renderMarkdownReport(comparison) {
     for (const row of differences) {
       const note = row.expectedStatusMatch === false
         ? `expected-status mismatch (expected ${row.expectedStatus})`
+        : row.strictSimulatedDependency
+          ? 'strict simulated backend dependency'
         : row.strictStructuredParity && row.structuredMatch === false
           ? `strict structured mismatch (${(row.structuredFields ?? []).join(',')})`
         : row.simulatedDivergence
@@ -198,6 +215,7 @@ function summarize(rows) {
     total: rows.length,
     MATCH: 0,
     MISMATCH: 0,
+    SIMULATED_DEPENDENCY: 0,
     BOTH_ERROR: 0,
     PY_ONLY_MISSING: 0,
     TS_ONLY_MISSING: 0,
@@ -212,6 +230,7 @@ function summarize(rows) {
       total: 0,
       MATCH: 0,
       MISMATCH: 0,
+      SIMULATED_DEPENDENCY: 0,
       BOTH_ERROR: 0,
       PY_ONLY_MISSING: 0,
       TS_ONLY_MISSING: 0,
