@@ -34,7 +34,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     const strictStructuredParity = Boolean(vectorExpectation[vectorId]?.strictStructuredParity);
     const structuredFields = Array.isArray(vectorExpectation[vectorId]?.structuredFields)
       ? vectorExpectation[vectorId].structuredFields
-      : ['status', 'reason', 'proverId', 'modelHash'];
+      : ['status', 'reason', 'proverId', 'modelHash', 'countermodelHash', 'proofHash', 'derivationHash'];
     const simulatedObserved = Boolean(
       pyResult?.backendMode === 'simulated'
       || tsResult?.backendMode === 'simulated',
@@ -59,6 +59,10 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       pyResult && tsResult
         ? compareStructured(pyResult, tsResult, structuredFields)
         : undefined;
+    const structuredArtifacts =
+      strictStructuredParity && pyResult && tsResult
+        ? validateStructuredArtifacts(pyResult, tsResult, expectedStatus)
+        : undefined;
     const strictUnknownBridge = Boolean(
       strictSelfContainment
       && pyResult
@@ -67,6 +71,12 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       && ['proved', 'refuted', 'sat'].includes(String(tsResult.status ?? '').toLowerCase())
       && String(pyResult.backendMode ?? '').toLowerCase() === 'host-dependent'
       && expectedStatusMatch,
+    );
+    const bothRealBackends = Boolean(
+      pyResult
+      && tsResult
+      && String(pyResult.backendMode ?? '').toLowerCase() === 'real'
+      && String(tsResult.backendMode ?? '').toLowerCase() === 'real',
     );
 
     let outcome;
@@ -78,7 +88,8 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       strictStructuredParity &&
       pyResult.status === tsResult.status &&
       expectedStatusMatch &&
-      structured?.match === true
+      structured?.match === true &&
+      structuredArtifacts?.pass === true
     ) {
       outcome = 'MATCH';
     } else if (
@@ -97,7 +108,11 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       strictSelfContainment
       && (
         simulatedObserved
-        || (expectedBackendMode === 'host-dependent' && excludeFromParityWhenSimulated)
+        || (
+          expectedBackendMode === 'host-dependent'
+          && excludeFromParityWhenSimulated
+          && !bothRealBackends
+        )
       ),
     );
     const strictDependencyEligible = outcome === 'MATCH'
@@ -120,6 +135,8 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       strictStructuredParity,
       strictUnknownBridge,
       structuredMatch: strictStructuredParity ? Boolean(structured?.match) : undefined,
+      structuredArtifactMatch: strictStructuredParity ? Boolean(structuredArtifacts?.pass) : undefined,
+      structuredArtifactProblems: strictStructuredParity ? (structuredArtifacts?.problems ?? []) : undefined,
       structuredFields: strictStructuredParity ? structuredFields : undefined,
       pythonStructuredHash: strictStructuredParity ? structured?.pythonHash : undefined,
       tsStructuredHash: strictStructuredParity ? structured?.tsHash : undefined,
@@ -142,7 +159,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
 
   const summary = summarize(rows);
   return {
-    schemaVersion: '2026-07-03',
+    schemaVersion: '2026-07-05',
     generatedAt: new Date().toISOString(),
     pythonRunner: pythonEnvelope.runner ?? 'python-reference',
     tsRunner: tsEnvelope.runner ?? 'typescript-swissknife',
@@ -197,6 +214,8 @@ export function renderMarkdownReport(comparison) {
         ? `expected-status mismatch (expected ${row.expectedStatus})`
         : row.strictSimulatedDependency
           ? 'strict simulated backend dependency'
+        : row.strictStructuredParity && row.structuredArtifactMatch === false
+          ? `strict structured artifact missing (${(row.structuredArtifactProblems ?? []).join('; ')})`
         : row.strictStructuredParity && row.structuredMatch === false
           ? `strict structured mismatch (${(row.structuredFields ?? []).join(',')})`
         : row.simulatedDivergence
@@ -273,6 +292,41 @@ function structuredSignature(result, fields) {
     signature[field] = result?.[field] ?? null;
   }
   return signature;
+}
+
+function validateStructuredArtifacts(pyResult, tsResult, expectedStatus) {
+  const status = normalizeStatus(expectedStatus || pyResult?.status || tsResult?.status);
+  const problems = [];
+
+  if (status === 'proved') {
+    requireField(pyResult, 'python', 'proofHash', problems);
+    requireField(tsResult, 'typescript', 'proofHash', problems);
+    requireField(pyResult, 'python', 'derivationHash', problems);
+    requireField(tsResult, 'typescript', 'derivationHash', problems);
+  } else if (status === 'refuted') {
+    requireField(pyResult, 'python', 'countermodelHash', problems);
+    requireField(tsResult, 'typescript', 'countermodelHash', problems);
+    requireField(pyResult, 'python', 'derivationHash', problems);
+    requireField(tsResult, 'typescript', 'derivationHash', problems);
+  } else if (status === 'sat') {
+    requireField(pyResult, 'python', 'modelHash', problems);
+    requireField(tsResult, 'typescript', 'modelHash', problems);
+    requireField(pyResult, 'python', 'derivationHash', problems);
+    requireField(tsResult, 'typescript', 'derivationHash', problems);
+  }
+
+  return { pass: problems.length === 0, problems };
+}
+
+function requireField(result, side, field, problems) {
+  const value = result?.[field];
+  if (typeof value !== 'string' || value.trim().length === 0) {
+    problems.push(`${side}.${field}`);
+  }
+}
+
+function normalizeStatus(value) {
+  return String(value ?? '').trim().toLowerCase();
 }
 
 function digest(text) {

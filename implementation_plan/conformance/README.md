@@ -8,6 +8,11 @@ SwissKnife theorem-prover parity harness.
 - `vectors/` contains portable conformance vectors used by both runners.
 - `schema/` contains the JSON shape for vectors and runner results.
 - `compare.mjs` compares Python and TypeScript result JSON and writes a parity report.
+  Strict structured vectors compare `status`, `reason`, `proverId`,
+  `modelHash`, `countermodelHash`, `proofHash`, and `derivationHash`; decided
+  strict rows must carry the status-appropriate artifact (`modelHash` for
+  `sat`, `proofHash` for `proved`, `countermodelHash` for `refuted`) plus a
+  derivation hash or they are reported as mismatches.
   It also supports host-native exclusions so simulated-only slices (for example
   native ZKP vectors marked `excludeFromParityWhenSimulated`) are reported as
   `HOST_NATIVE_EXCLUDED` instead of `MATCH`.
@@ -27,7 +32,18 @@ SwissKnife theorem-prover parity harness.
   `conformance/port239-host-native-gate.json`.
 - `behavioral_certificate.mjs` now enforces a minimum number of PORT-239 runtime
   evidence rows (default `--port239-runtime-min-rows 3`) derived from compare
-  rows tagged `flogic`/`ergo`/`host-native`.
+  rows tagged `flogic`/`ergo`/`host-native`, plus per-tag minima
+  (`--port239-runtime-flogic-min-rows 2`,
+  `--port239-runtime-ergo-min-rows 1`,
+  `--port239-runtime-host-native-tag-min-rows 3`) and per-tag
+  `HOST_NATIVE_EXCLUDED` minima
+  (`--port239-runtime-flogic-excluded-min-rows 2`,
+  `--port239-runtime-ergo-excluded-min-rows 1`,
+  `--port239-runtime-host-native-tag-excluded-min-rows 3`), with zero
+  tolerance for non-excluded rows for each of those tags, required runtime
+  vector id pinning (`--port239-required-vector-ids`, default
+  `zkp-sim-005,zkp-sim-011,zkp-sim-012`) to prevent substitution gaming, and strict
+  structured artifact coverage for PORT-236.
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
@@ -46,7 +62,8 @@ SwissKnife theorem-prover parity harness.
   and enforces the PORT-257 strict self-containment gate against that report.
   The strict compare stage disables host-native exclusions and treats simulated
   backend/host-dependent expectation rows as `SIMULATED_DEPENDENCY` outcomes so residual dependency on
-  simulated engines stays visible as debt instead of being counted as parity, even when one side is missing. It also normalizes
+  simulated engines stays visible as debt instead of being counted as parity, even when one side is missing.
+  Host-dependent expected rows are only counted as dependency while at least one side is not `backendMode=real`. It also normalizes
   Python `unknown` host-dependent rows to match TS conclusive strict outputs when
   vectors are non-decided, preventing false-negative mismatches in strict mode.
   The strict gate additionally enforces zero unresolved compare rows
