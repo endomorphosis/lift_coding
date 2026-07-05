@@ -160,17 +160,41 @@ function main() {
     'policy-proxy-default',
     'simulated-runtime-enabled',
   ]);
+  const requiredFuzzInputTypes = Array.isArray(differentialFuzz?.requiredInputTypes)
+    ? differentialFuzz.requiredInputTypes.map(inputType => String(inputType))
+    : [];
+  const fuzzCasesPerEngine = Number(differentialFuzz?.casesPerEngine ?? 0);
+  const fuzzByInputType = differentialFuzz?.byInputType ?? {};
+  const fuzzCoverageViolations = requiredFuzzInputTypes.filter(inputType => {
+    const count = Number(fuzzByInputType[inputType] ?? 0);
+    return count < fuzzCasesPerEngine;
+  });
+  const mutationTargetedInputTypes = Array.isArray(mutationGate?.targetedInputTypes)
+    ? mutationGate.targetedInputTypes.map(inputType => String(inputType))
+    : [];
+  const mutationDropByInputType = mutationGate?.mutationDropByInputType ?? {};
+  const mutationTargetCoverageViolations = Array.isArray(mutationGate?.targetedCoverageViolations)
+    ? mutationGate.targetedCoverageViolations.map(inputType => String(inputType))
+    : mutationTargetedInputTypes.filter(inputType => Number(mutationDropByInputType[inputType] ?? 0) <= 0);
 
   const checks = [
     check('parity threshold', Number(report?.summary?.parityPercent ?? 0) >= args.parityThreshold, `parity=${Number(report?.summary?.parityPercent ?? 0).toFixed(2)} threshold=${args.parityThreshold}`),
     check('zero mismatches', Number(report?.summary?.MISMATCH ?? 0) === 0, `mismatch=${Number(report?.summary?.MISMATCH ?? 0)}`),
     check('mutation gate passed', mutationGate?.passed === true, `passed=${String(mutationGate?.passed)} mutationDrop=${Number(mutationGate?.mutationDrop ?? 0)}`),
     check('mutation reduced parity', Number(mutationGate?.mutationDrop ?? 0) > 0, `mutationDrop=${Number(mutationGate?.mutationDrop ?? 0)}`),
+    check('PORT-240 mutation impacts targeted native input types', mutationTargetedInputTypes.length > 0 && mutationTargetCoverageViolations.length === 0, `targets=${mutationTargetedInputTypes.join(',') || 'none'} violations=${mutationTargetCoverageViolations.join(',') || 'none'}`),
     check('differential fuzz mismatch-free', Number(differentialFuzz?.mismatch ?? 1) === 0, `mismatch=${Number(differentialFuzz?.mismatch ?? 1)} total=${Number(differentialFuzz?.total ?? 0)}`),
     check('differential fuzz non-empty', Number(differentialFuzz?.total ?? 0) > 0, `total=${Number(differentialFuzz?.total ?? 0)}`),
+    check('PORT-242 differential fuzz per-engine coverage', fuzzCoverageViolations.length === 0, `casesPerEngine=${fuzzCasesPerEngine} violations=${fuzzCoverageViolations.join(',') || 'none'}`),
     check('PORT-236 strict structured artifacts present', strictStructuredRows.length > 0 && strictStructuredArtifactProblemRows.length === 0, `strictRows=${strictStructuredRows.length} artifactProblems=${strictStructuredArtifactProblemRows.length}`),
     check('ts coverage reconciliation passed', tsCoverageReconciliation?.passed === true, `passed=${String(tsCoverageReconciliation?.passed)} failures=${Number(tsCoverageReconciliation?.summary?.failureCount ?? 0)}`),
-    check('self-containment gate executed', Number((selfContainmentGate?.checks ?? []).length) > 0, `passed=${String(selfContainmentGate?.passed)} violations=${Number(selfContainmentGate?.summary?.backendViolations ?? 0) + Number(selfContainmentGate?.summary?.statusViolations ?? 0) + Number(selfContainmentGate?.summary?.reasonViolations ?? 0) + Number(selfContainmentGate?.summary?.markerViolations ?? 0)}`),
+    check(
+      'self-containment gate passed in strict mode',
+      selfContainmentGate?.passed === true
+        && String(selfContainmentGate?.mode ?? '') === 'strict'
+        && Number((selfContainmentGate?.checks ?? []).length) > 0,
+      `mode=${String(selfContainmentGate?.mode ?? '<missing>')} passed=${String(selfContainmentGate?.passed)} checks=${Number((selfContainmentGate?.checks ?? []).length)}`,
+    ),
     check('PORT-239 host-native classification gate passed', port239HostNativeGate?.passed === true, `passed=${String(port239HostNativeGate?.passed)} violations=${Number(port239HostNativeGate?.summary?.violations ?? 0)}`),
     check('PORT-252 substance gate passed', portSubstanceGate?.passed === true, `passed=${String(portSubstanceGate?.passed)} flagged=${Number(portSubstanceGate?.summary?.flaggedModules ?? 0)} violations=${Number(portSubstanceGate?.summary?.violations ?? 0)}`),
     check('PORT-239 runtime vectors minimum row count', port239RuntimeRows.length >= args.port239RuntimeMinRows, `rows=${port239RuntimeRows.length} min=${args.port239RuntimeMinRows}`),
@@ -222,7 +246,14 @@ function main() {
     metrics: {
       conformanceSummary: report?.summary ?? {},
       mutationGate,
+      mutationTargetedInputTypes,
+      mutationDropByInputType,
+      mutationTargetCoverageViolations,
       differentialFuzz,
+      fuzzCasesPerEngine,
+      requiredFuzzInputTypes,
+      fuzzByInputType,
+      fuzzCoverageViolations,
       tsCoverageReconciliation,
       selfContainmentGate,
       port239HostNativeGate,
