@@ -60,7 +60,7 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
   records the source objective gap, launch receipt, required backend packages,
   external backend surfaces, dashboard servers, Swissknife consumers, and
   VAI-652 packet sibling evidence. The current attempt receipt is
-  `data/virtual_ai_os/discovery/2026-07-05-vai-651-attempt-1-launch-playwright-validation-gate.md`.
+  `data/virtual_ai_os/discovery/2026-07-05-vai-651-attempt-2-launch-playwright-validation-gate.md`.
 - `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts` and
   `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts` validate
   the Hallucinate App MCP dashboard catalog, backend service catalog, mediated
