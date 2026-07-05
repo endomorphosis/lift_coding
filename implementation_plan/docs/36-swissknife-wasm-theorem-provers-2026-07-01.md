@@ -2401,7 +2401,7 @@ Port to a single canonical rule module (post-PORT-001). Grouped by significance:
 | ID | Pri | Gap | Python source | TS target | Port task |
 |---|---|---|---|---|---|
 | PORT-140 | 🔴 | **`temporal-deontic-api.ts` is a different module** — Python has 4 async MCP wrappers; TS is an unrelated sync extraction class. MCP tools routing to `temporal_deontic_api.py` have no TS equivalent | `temporal_deontic_api.py:37-127` | `temporal-deontic-api.ts:47-100` | Port `check_document_consistency_from_parameters` + the 3 other async wrappers. |  <!-- ✅ CLOSED (re-validated 2026-07-04: native async wrappers implemented in TS) -->
-| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04; migration in progress: query engine + temporal RAG + converter/checker + temporal API + deontological reasoning + deontic exports/bridge/prover-syntax + graph/legal-norm + formula-builder/json-syntax serialization + parserElementToIR/active-repair proposition fallback paths + export slot-metric alias equivalence + parser-utils/conflict-detector proposition alias handling are now proposition-first with action alias compatibility -->
+| PORT-141 | 🔴 | **`DeonticFormula.action` (TS) vs `.proposition` (Python)** — cross-cutting field-name break through query-engine + RAG store + JSON | `deontic_logic_core.py` (via `deontic_query_engine.py:16`) | `deontic-query-engine.ts:43` | Rename `action`→`proposition` everywhere. |  <!-- ⚠ REOPENED 2026-07-04; migration in progress: query engine + temporal RAG + converter/checker + temporal API + deontological reasoning + deontic exports/bridge/prover-syntax + graph/legal-norm + formula-builder/json-syntax serialization + parserElementToIR/active-repair proposition fallback paths + export slot-metric alias equivalence + parser-utils/conflict-detector + phase-8 parser-metrics + deontic-text-analyzer extraction/command output aliases + deontic-analyzer conflict/statistics + deontic-extraction statement outputs proposition alias handling + legal-norm-ir proposition-slot provenance alias handling + deontic-legal-text-engine extraction/formula/formal-terms/logic-frame/repair-payload migration alias handling + legacy deontic-conflict-detector proposition-only conflict/mixin matching + temporal-deontic-rag-store theorem metadata proposition->action serialization fallback + deontic-norms-bridge deontic_ir/frame-logic/graph action alias emissions now use proposition-first fallback compatibility -->
 | PORT-142 | 🔴 | **`TheoremMetadata.embedding` absent** — Python retrieval is cosine over 768-dim embeddings; TS is keyword overlap → different results | `temporal_deontic_rag_store.py:44-45,199-244` | `temporal-deontic-rag-store.ts:34-88` | Add embeddings + cosine retrieval (shared with PORT-150). |  <!-- ⚠ REOPENED 2026-07-04: TS now supports optional embedding-aware scoring, but still lacks a bundled 768-dim embedding backend -->
 | PORT-143 | 🟠 | `ConsistencyResult` missing `temporal_conflicts` (Python returns logical + temporal; TS only logical) | `temporal_deontic_rag_store.py:65-72` | `temporal-deontic-rag-store.ts:94-124` | Add temporal-conflict list + temporal index. |  <!-- ✅ CLOSED -->
 
@@ -3362,3 +3362,118 @@ PORT-245–252 (implementation)**. Honest status: *the port is genuine for the p
 policy fragment and ~229 modules; the temporal/higher-order deontic path is delegated to
 `ipfs_datasets_py` at runtime; ~49k eff-LOC of modal/deontic/bridge behavior is simulated or
 thin. Not yet a complete, self-contained TS port.*
+
+---
+
+## 12.27 — Complete delegation & simulation boundary map (+ two honest corrections to §12.26) (2026-07-04)
+
+§12.26 found *a* wrapper and *some* hollow modules but, on a full sweep of the swissknife
+logic layer, it (a) **overstated** the deontic remote as a hard "wrapper," and (b) **missed**
+the two genuinely systemic simulation gaps (ZKP-by-default, ErgoAI-always-stub). This section
+maps the **entire** Python-delegation + simulation boundary so the port can be finished against
+a single, un-gameable acceptance bar (12.27.4 / PORT-257). Method: exhaustive grep of every
+`invokeTool`/`callTool`/`connector.dispatch` call-site, every `child_process`/`spawn` referencing
+Python, every `fetch`/HTTP endpoint, and every `simulated`/`stub`/`FFI not bound` core across
+`swissknife/src` — each hit then **read in source** (LOC/marker counts alone over-accuse).
+
+### 12.27.1 Delegation boundary — narrow, and OPTIONAL (correction #1 to §12.26)
+
+- **Runtime Python-MCP delegation exists in exactly one file:** `mcp-remote-deontic-engine.ts`
+  (`invokeTool('tdfol_prove' | 'tdfol_batch_prove' | 'legal_text_to_deontic' | 'logic_health')`),
+  served by `ipfs_datasets_py/mcp_server/tools/logic_tools/tdfol_prove_tool.py`. No other
+  logic-service file delegates to Python.
+- **No Python subprocess spawning in the logic layer.** The `spawn`/`python` strings are
+  *stub-intent comments* (e.g. `flogic-ergoai-wrapper.ts:52` `// Real implementation:
+  spawn(this.config.binaryPath, [formula])`), not live calls.
+- **HTTP `:8080`/`:8000` endpoints are the IPFS/handsfree backend** (`ipfs_kit_py`/
+  `ipfs_accelerate_py`), not the logic provers.
+- **CORRECTION #1 — the deontic remote is optional local-first augmentation, NOT a hard
+  wrapper.** `checkPolicyConsistencyRemote()` (lines 370–410): the local
+  `checkPolicyConsistency()` always runs; when a Z3-WASM `localHub` is present it decides
+  propositional/FOL policies **locally and returns without any network hop** (`remoteChecked:
+  false`); only temporal/higher-order formulas (for which Z3-WASM returns `unknown`) fall
+  through, and **when the remote engine is unavailable the code returns the local verdict with
+  `remoteError` — it degrades safely and never hard-requires Python** (line 404-409). A **native
+  TS temporal-deontic prover exists** (`tdfol-prover.ts`: `TemporalDistributionRule`/□-K-axiom,
+  D-rule, necessitation, `ModalTableaux` fallback). So §12.26's "the temporal/higher-order
+  deontic path IS a wrapper around ipfs_datasets_py" is **too strong**. The **accurate** gap:
+  *the native temporal/higher-order deontic-**consistency** path returns `unknown` for the hard
+  fragment and leans on optional Python augmentation for a conclusive verdict; with Python
+  absent it silently degrades to a local heuristic the code itself says "cannot express" those
+  conflicts (line 363).* That is an **incompleteness** gap, not a delegation-wrapper gap.
+
+### 12.27.2 Simulation boundary — the real systemic gaps §12.26 missed
+
+- **ZKP is simulated BY DEFAULT (not merely as an opt-in test fallback).** Every production
+  constructor wires the SHA-256 pseudo-proof backend `Groth16BackendFallback`:
+  `flogic-ergoai-wrapper.ts:105` (`zkpBackend = new Groth16BackendFallback()`),
+  `flogic-zkp-integration.ts:73` (default param), `sprint65-utils.ts:168`, and
+  `zkp-backends.ts:137/162/167` (fall-through). `Groth16BackendFallback.generateProof()`
+  (`zkp-backends.ts:194-215`) returns `createHash('sha256')…` tagged `{ backend: 'simulated' }`.
+  A real `Groth16Backend` class exists but is **not the wired default**. → **ZKP "proofs" are
+  hashes, not proofs.**
+- **FLogic/ErgoAI is always a stub.** `flogic-ergoai-wrapper.ts` `query()` (lines 43–56): no
+  binary → `'ErgoAI binary not available'`; **with** a binary the "real" path is the comment on
+  line 52 and it returns `'ErgoAI FFI not bound'` (line 56) unconditionally. The header claims
+  to port `flogic/ergoai_wrapper.py` (381 L) — it implements **zero** reasoning.
+- **Modal codec/decompiler simulated** (verified §12.26): `modal-logic-codec.ts` header
+  *"simulated, no ML deps"*, `encode()`→`buildSimulatedEmbedding`.
+- **CORRECTION #2 — `external-provers.ts` (Vampire/E) is legitimate, NOT a stub (credit).**
+  `VampireProver.prove()` (lines 95–121) runs the **real** binary via `runExternalProver(...)`
+  when `isAvailable()` (lines 97–106), returns an honest `unavailableResult` when absent, and
+  only produces a simulated verdict if the caller explicitly sets `allowSimulatedFallback`
+  (**default `false`**, line 88). The marker screen flagged it; the source is correct. Do not
+  count it as a gap.
+
+### 12.27.3 The complete boundary (read-verified)
+
+| Category | File(s) | Status | Real gap? |
+|---|---|---|---|
+| Runtime Python-MCP delegation | `mcp-remote-deontic-engine.ts` | optional local-first augmentation; degrades safely | **Partial** — native temporal/higher-order **consistency** returns `unknown` (PORT-255) |
+| Native temporal-deontic prover | `tdfol-prover.ts` + `provers/tdfol-*` | real (□-K, D-rule, ModalTableaux) | completeness vs Python **unverified** |
+| External FO provers | `external-provers.ts` (Vampire/E) | real exec when present; honest unavailable; opt-in sim (default off) | **No** (correction #2) |
+| ZKP backends | `zkp-backends.ts` + 6 default-wire sites | **simulated by default** (SHA-256) | **Yes** (PORT-253) |
+| FLogic / ErgoAI | `flogic-ergoai-wrapper.ts` | **always stub** ("FFI not bound") | **Yes** (PORT-254) |
+| Modal codec / decompiler | `modal-logic-codec.ts`, `modal-ir-decompiler.ts` | simulated embedding | **Yes** (PORT-246/247) |
+| 18 THIN modules (§12.26) | modal/deontic/bridge | name-present, ≤30% size; top ones verified hollow | **Yes** (PORT-248–251) |
+
+### 12.27.4 Tasks — finish the self-contained TS port (un-gameable acceptance)
+
+- **PORT-253 🔴 — De-simulate ZKP by default.** Wire the real `Groth16Backend` (bundle/build
+  the prover or a WASM Groth16) as the production default; remove `Groth16BackendFallback` from
+  all production constructors (`flogic-ergoai-wrapper.ts:105`, `flogic-zkp-integration.ts:73`,
+  `sprint65-utils.ts:168`, `zkp-backends.ts:137/162/167`), keeping it only behind an explicit
+  `{ simulated: true }` test flag. **AC:** without the test flag, `generateProof` emits a proof
+  that a real Groth16 verifier accepts and that fails on a tampered witness; a unit test asserts
+  no production path constructs `Groth16BackendFallback`.
+- **PORT-254 🔴 — Implement FLogic/ErgoAI for real.** Native TS F-logic
+  entailment (or a genuine FFI/subprocess to `ergo`), replacing the `'FFI not bound'` return.
+  **AC:** `query()` returns a correct derivation over a known F-logic entailment corpus
+  (matching `ergoai_wrapper.py`); the "FFI not bound" branch is deleted.
+- **PORT-255 🟠 — Native temporal/higher-order deontic consistency.** Extend the Z3-WASM /
+  `ModalTableaux` path so the fragment currently returning `unknown` (line 379-380) is decided
+  natively; make the Python remote a pure optional accelerator. **AC:** with the Python MCP
+  connector disabled, temporal/higher-order deontic-consistency vectors return conclusive
+  `consistent`/`inconsistent` (never `unknown`/`remoteError`) via TS; a test asserts zero
+  `invokeTool` calls for that corpus.
+- **PORT-256 🟠 — (rolls up §12.26 PORT-246/247/248/249/250)** de-hollow modal codec/decompiler/
+  compiler, deontic builder/parser, and the CEC↔DCEC/FOL bridges against behavioral vectors.
+- **PORT-257 🔵 (MASTER GATE) — "no-Python, no-external-binary" self-containment test.** Run the
+  **full** logic conformance suite under two enforced conditions simultaneously: (a) the Python
+  MCP connector **disabled/unregistered**, and (b) **every** external prover binary (`vampire`,
+  `eprover`, `z3`, `ergo`, Groth16 prover) **absent from PATH**. **AC — the port is "complete"
+  iff:** every subsystem still returns a real verdict (`proved`/`sat`/`unsat`/`consistent`/
+  `inconsistent`) and **zero** results carry any of `simulated: true`, `backend: 'simulated'`,
+  `'FFI not bound'`, `remoteError`, or `'unavailable'`. This single test operationalizes
+  "everything in the `ipfs_datasets_py` logic submodule is ported to self-contained TS" — it
+  goes red if **any** path is a stub, a simulation, or a Python/binary delegation. It is the
+  un-hackable analogue of §12.25.2 (behavioral) and §12.26 PORT-252 (substance) for the
+  **self-containment** dimension.
+
+**Bottom line (honest).** The reward-hacking the user flagged is **real but specific**: it is
+**not** a blanket wrapper around `ipfs_datasets_py` (the deontic remote is optional and degrades
+safely; Vampire/E are real; 229 modules are substantive). It **is** (1) ZKP simulated by
+default, (2) ErgoAI always-stub, (3) modal codec/decompiler simulated, (4) ~18 thin modules,
+and (5) native temporal/higher-order deontic **consistency** that returns `unknown` and leans on
+optional Python. PORT-253–257 (with the master self-containment gate) close exactly these, and
+their acceptance criteria cannot be satisfied by a stub, a simulation, or a delegation.
