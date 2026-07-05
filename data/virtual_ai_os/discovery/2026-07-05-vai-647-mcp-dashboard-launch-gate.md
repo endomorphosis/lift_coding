@@ -53,16 +53,16 @@ test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:
 
 - `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js` exposes
   `VAI-647` in `DASHBOARD_LAUNCH_VALIDATION_GATES` with the source gap,
-  launch receipt, fixture path, attempt-1 validation receipt, external backend
+  launch receipt, fixture path, attempt-2 validation receipt, external backend
   surfaces, and VAI-648 packet sibling daemon launch receipt.
 - `hallucinate_app/test/e2e/fixtures/vai-647-mcp-dashboard-launch-gate.json`
   is generated from the runtime dashboard capability catalog and carries the
-  attempt-1 `launch Playwright validation gate`, `tools/list`, `tools/call`,
+  attempt-2 `launch Playwright validation gate`, `tools/list`, `tools/call`,
   daemon health, and Swissknife consumer terms for all three IPFS MCP servers.
 - `hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`,
   `hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, and
   `swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared
-  dashboard capability catalog includes the VAI-647 launch gate, the attempt-1
+  dashboard capability catalog includes the VAI-647 launch gate, the attempt-2
   validation receipt, and the VAI-648 packet sibling daemon receipt.
 - `hallucinate_app/test/e2e/fixtures/vai-648-daemon-launch-health-gate.json`
   keeps the packet sibling VAIOS-G728 daemon health, daemon launcher, MCP
