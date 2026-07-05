@@ -11,6 +11,8 @@ SwissKnife theorem-prover parity harness.
   It also supports host-native exclusions so simulated-only slices (for example
   native ZKP vectors marked `excludeFromParityWhenSimulated`) are reported as
   `HOST_NATIVE_EXCLUDED` instead of `MATCH`.
+  Compare rows also carry vector `tags`, enabling certificate checks for
+  runtime slices such as PORT-239 (`flogic`/`ergo`/`host-native`).
 - `mutate.mjs` creates metamorphic vector variants for invariant testing.
 - `symbol-map.json` is the PORT-234 per-symbol reconciliation artifact.
 - `symbol-evidence.json` binds symbol families to concrete conformance test ids
@@ -41,7 +43,9 @@ SwissKnife theorem-prover parity harness.
   and enforces the PORT-257 strict self-containment gate against that report.
   The strict compare stage disables host-native exclusions and treats simulated
   backend parity rows as mismatches so residual dependency on simulated engines
-  stays visible as debt instead of being counted as parity.
+  stays visible as debt instead of being counted as parity. It also normalizes
+  Python `unknown` host-dependent rows to match TS conclusive strict outputs when
+  vectors are non-decided, preventing false-negative mismatches in strict mode.
 - `make conformance-self-containment-strict` evaluates the strict gate against the
   default `conformance/report.json` + `conformance/ts-results.json` artifacts.
 

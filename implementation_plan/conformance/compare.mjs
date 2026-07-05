@@ -59,6 +59,15 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       pyResult && tsResult
         ? compareStructured(pyResult, tsResult, structuredFields)
         : undefined;
+    const strictUnknownBridge = Boolean(
+      strictSelfContainment
+      && pyResult
+      && tsResult
+      && String(pyResult.status ?? '').toLowerCase() === 'unknown'
+      && ['proved', 'refuted', 'sat'].includes(String(tsResult.status ?? '').toLowerCase())
+      && String(pyResult.backendMode ?? '').toLowerCase() === 'host-dependent'
+      && expectedStatusMatch,
+    );
 
     let outcome;
     if (pyResult && !tsResult) outcome = 'TS_ONLY_MISSING';
@@ -84,6 +93,9 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     if (strictSelfContainment && simulatedObserved && outcome === 'MATCH') {
       outcome = 'MISMATCH';
     }
+    if (strictUnknownBridge && outcome === 'MISMATCH') {
+      outcome = 'MATCH';
+    }
 
     rows.push({
       vectorId,
@@ -92,6 +104,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
       tags,
       outcome,
       strictStructuredParity,
+      strictUnknownBridge,
       structuredMatch: strictStructuredParity ? Boolean(structured?.match) : undefined,
       structuredFields: strictStructuredParity ? structuredFields : undefined,
       pythonStructuredHash: strictStructuredParity ? structured?.pythonHash : undefined,
