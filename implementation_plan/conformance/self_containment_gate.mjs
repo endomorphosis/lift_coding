@@ -13,6 +13,7 @@ function main() {
   const report = loadJson(reportPath);
   const rows = Array.isArray(tsResults?.results) ? tsResults.results : [];
   const compareRows = Array.isArray(report?.rows) ? report.rows : [];
+  const compareSummary = report?.summary ?? {};
 
   const backendViolations = [];
   const statusViolations = [];
@@ -41,6 +42,9 @@ function main() {
   }
 
   const rawHostNativeExcluded = Number(report?.summary?.HOST_NATIVE_EXCLUDED ?? 0);
+  const compareMismatchRows = Number(compareSummary?.MISMATCH ?? 0);
+  const comparePyMissingRows = Number(compareSummary?.PY_ONLY_MISSING ?? 0);
+  const compareTsMissingRows = Number(compareSummary?.TS_ONLY_MISSING ?? 0);
   const rawSimulatedParityRows = compareRows.filter(row =>
     String(row?.outcome ?? '') === 'MATCH'
     && (
@@ -86,6 +90,15 @@ function main() {
       markerViolations.length === 0,
       summarize('metadataMarkers', markerViolations, 'marker'),
     ),
+    check(
+      'strict compare has no unresolved mismatch/missing rows',
+      strict
+        ? compareMismatchRows === 0 && comparePyMissingRows === 0 && compareTsMissingRows === 0
+        : true,
+      strict
+        ? `MISMATCH=${compareMismatchRows}; PY_ONLY_MISSING=${comparePyMissingRows}; TS_ONLY_MISSING=${compareTsMissingRows}`
+        : 'skipped outside strict mode',
+    ),
   ];
 
   const passed = checks.every(item => item.pass);
@@ -111,6 +124,14 @@ function main() {
       statusViolations: statusViolations.length,
       reasonViolations: reasonViolations.length,
       markerViolations: markerViolations.length,
+      ...(strict
+        ? {
+            compareMismatchRows,
+            comparePyMissingRows,
+            compareTsMissingRows,
+            compareSimulatedDependencyRows: Number(compareSummary?.SIMULATED_DEPENDENCY ?? 0),
+          }
+        : {}),
     },
   };
 

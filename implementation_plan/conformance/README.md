@@ -49,6 +49,9 @@ SwissKnife theorem-prover parity harness.
   simulated engines stays visible as debt instead of being counted as parity, even when one side is missing. It also normalizes
   Python `unknown` host-dependent rows to match TS conclusive strict outputs when
   vectors are non-decided, preventing false-negative mismatches in strict mode.
+  The strict gate additionally enforces zero unresolved compare rows
+  (`MISMATCH`, `PY_ONLY_MISSING`, `TS_ONLY_MISSING`) and reports
+  `SIMULATED_DEPENDENCY` as explicit residual debt telemetry.
 - `make conformance-self-containment-strict` evaluates the strict gate against the
   default `conformance/report.json` + `conformance/ts-results.json` artifacts.
 
