@@ -39,6 +39,9 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-self-containment` runs Python + strict TypeScript artifacts,
   writes a dedicated strict compare report under `conformance/self-contained/`,
   and enforces the PORT-257 strict self-containment gate against that report.
+  The strict compare stage disables host-native exclusions and treats simulated
+  backend parity rows as mismatches so residual dependency on simulated engines
+  stays visible as debt instead of being counted as parity.
 - `make conformance-self-containment-strict` evaluates the strict gate against the
   default `conformance/report.json` + `conformance/ts-results.json` artifacts.
 

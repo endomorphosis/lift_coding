@@ -149,7 +149,7 @@ conformance-differential-fuzz:
 
 conformance-self-containment: conformance-py
 	cd swissknife && SWISSKNIFE_CONFORMANCE_STRICT_SELF_CONTAINMENT=1 npx tsx test/conformance/ts-conformance-runner.cli.ts --live-z3 --strict-self-containment --vectors ../$(CONFORMANCE_DIR)/vectors --out ../$(CONFORMANCE_OUT)/ts-results-self-contained.json
-	node $(CONFORMANCE_DIR)/compare.mjs --python $(CONFORMANCE_OUT)/py-results.json --ts $(CONFORMANCE_OUT)/ts-results-self-contained.json --vectors $(CONFORMANCE_DIR)/vectors --out-dir $(CONFORMANCE_OUT)/self-contained
+	node $(CONFORMANCE_DIR)/compare.mjs --strict-self-containment --python $(CONFORMANCE_OUT)/py-results.json --ts $(CONFORMANCE_OUT)/ts-results-self-contained.json --vectors $(CONFORMANCE_DIR)/vectors --out-dir $(CONFORMANCE_OUT)/self-contained
 	node $(CONFORMANCE_DIR)/self_containment_gate.mjs --strict --out-dir $(CONFORMANCE_OUT) --ts-results $(CONFORMANCE_OUT)/ts-results-self-contained.json --report $(CONFORMANCE_OUT)/self-contained/report.json
 
 conformance-self-containment-strict:

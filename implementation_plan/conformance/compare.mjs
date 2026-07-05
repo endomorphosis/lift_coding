@@ -16,6 +16,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
   const py = indexByVectorId(pythonEnvelope.results ?? []);
   const ts = indexByVectorId(tsEnvelope.results ?? []);
   const vectorExpectation = options.vectorExpectation ?? {};
+  const strictSelfContainment = Boolean(options.strictSelfContainment);
   const vectorIds = [...new Set([...Object.keys(py), ...Object.keys(ts)])].sort();
   const rows = [];
 
@@ -24,10 +25,27 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     const tsResult = ts[vectorId];
     const expectedStatus = vectorExpectation[vectorId]?.expectedStatus;
     const decided = Boolean(vectorExpectation[vectorId]?.decided);
+    const inputType = vectorExpectation[vectorId]?.inputType;
+    const tags = Array.isArray(vectorExpectation[vectorId]?.tags)
+      ? vectorExpectation[vectorId].tags
+      : [];
+    const expectedBackendMode = vectorExpectation[vectorId]?.backendMode;
+    const excludeFromParityWhenSimulated = Boolean(vectorExpectation[vectorId]?.excludeFromParityWhenSimulated);
     const strictStructuredParity = Boolean(vectorExpectation[vectorId]?.strictStructuredParity);
     const structuredFields = Array.isArray(vectorExpectation[vectorId]?.structuredFields)
       ? vectorExpectation[vectorId].structuredFields
       : ['status', 'reason', 'proverId', 'modelHash'];
+    const simulatedObserved = Boolean(
+      pyResult?.backendMode === 'simulated'
+      || tsResult?.backendMode === 'simulated',
+    );
+    const hostNativeExcluded = Boolean(
+      !strictSelfContainment
+      && (
+      expectedBackendMode === 'host-dependent'
+      && excludeFromParityWhenSimulated
+      )
+    );
 
     const expectedStatusMatch =
       !decided
@@ -46,6 +64,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     if (pyResult && !tsResult) outcome = 'TS_ONLY_MISSING';
     else if (!pyResult && tsResult) outcome = 'PY_ONLY_MISSING';
     else if (pyResult.status === 'error' && tsResult.status === 'error') outcome = 'BOTH_ERROR';
+    else if (hostNativeExcluded) outcome = 'HOST_NATIVE_EXCLUDED';
     else if (
       strictStructuredParity &&
       pyResult.status === tsResult.status &&
@@ -62,9 +81,15 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
     }
     else outcome = 'MISMATCH';
 
+    if (strictSelfContainment && simulatedObserved && outcome === 'MATCH') {
+      outcome = 'MISMATCH';
+    }
+
     rows.push({
       vectorId,
       subsystem: pyResult?.subsystem ?? tsResult?.subsystem ?? 'unknown',
+      inputType: inputType ?? 'unknown',
+      tags,
       outcome,
       strictStructuredParity,
       structuredMatch: strictStructuredParity ? Boolean(structured?.match) : undefined,
@@ -82,6 +107,7 @@ export function compareResults(pythonEnvelope, tsEnvelope, options = {}) {
         outcome === 'MISMATCH' &&
         (pyResult?.backendMode === 'simulated' || tsResult?.backendMode === 'simulated'),
       ),
+      hostNativeExcluded,
       pythonError: pyResult?.error,
       tsError: tsResult?.error,
     });
@@ -118,6 +144,7 @@ export function renderMarkdownReport(comparison) {
     `- Both error: ${comparison.summary.BOTH_ERROR}`,
     `- Python-only missing: ${comparison.summary.PY_ONLY_MISSING}`,
     `- TypeScript-only missing: ${comparison.summary.TS_ONLY_MISSING}`,
+    `- Host-native excluded: ${comparison.summary.HOST_NATIVE_EXCLUDED}`,
     `- Parity: ${comparison.summary.parityPercent.toFixed(2)}%`,
     '',
     '## By Subsystem',
@@ -161,6 +188,7 @@ function summarize(rows) {
     BOTH_ERROR: 0,
     PY_ONLY_MISSING: 0,
     TS_ONLY_MISSING: 0,
+    HOST_NATIVE_EXCLUDED: 0,
     parityPercent: 0,
     bySubsystem: {},
   };
@@ -174,6 +202,7 @@ function summarize(rows) {
       BOTH_ERROR: 0,
       PY_ONLY_MISSING: 0,
       TS_ONLY_MISSING: 0,
+      HOST_NATIVE_EXCLUDED: 0,
       parityPercent: 0,
     };
     stats.total += 1;
@@ -181,9 +210,11 @@ function summarize(rows) {
     base.bySubsystem[row.subsystem] = stats;
   }
 
-  base.parityPercent = base.total === 0 ? 0 : (base.MATCH / base.total) * 100;
+  const effectiveTotal = Math.max(0, base.total - base.HOST_NATIVE_EXCLUDED);
+  base.parityPercent = effectiveTotal === 0 ? 0 : (base.MATCH / effectiveTotal) * 100;
   for (const stats of Object.values(base.bySubsystem)) {
-    stats.parityPercent = stats.total === 0 ? 0 : (stats.MATCH / stats.total) * 100;
+    const subsystemEffectiveTotal = Math.max(0, stats.total - stats.HOST_NATIVE_EXCLUDED);
+    stats.parityPercent = subsystemEffectiveTotal === 0 ? 0 : (stats.MATCH / subsystemEffectiveTotal) * 100;
   }
   return base;
 }
@@ -226,6 +257,10 @@ export function loadVectorExpectation(vectorsDir) {
       strictStructuredParity: Boolean(vector?.expected?.strictStructuredParity),
       expectedStatus: typeof vector?.expected?.status === 'string' ? vector.expected.status : undefined,
       decided: vector?.expected?.decided === true,
+      inputType: typeof vector?.inputType === 'string' ? vector.inputType : undefined,
+      tags: Array.isArray(vector?.tags) ? vector.tags.map(tag => String(tag)) : [],
+      backendMode: typeof vector?.expected?.backendMode === 'string' ? vector.expected.backendMode : undefined,
+      excludeFromParityWhenSimulated: vector?.expected?.excludeFromParityWhenSimulated === true,
       structuredFields: Array.isArray(vector?.expected?.structuredFields)
         ? vector.expected.structuredFields
         : undefined,
@@ -251,7 +286,12 @@ function escapeTable(value) {
 }
 
 function parseArgs(argv) {
-  const args = { outDir: 'conformance', threshold: undefined, vectors: undefined };
+  const args = {
+    outDir: 'conformance',
+    threshold: undefined,
+    vectors: undefined,
+    strictSelfContainment: false,
+  };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--python') args.python = argv[++i];
@@ -259,6 +299,7 @@ function parseArgs(argv) {
     else if (arg === '--vectors') args.vectors = argv[++i];
     else if (arg === '--out-dir') args.outDir = argv[++i];
     else if (arg === '--threshold') args.threshold = Number(argv[++i]);
+    else if (arg === '--strict-self-containment') args.strictSelfContainment = true;
     else if (arg === '--help') printHelpAndExit(0);
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -273,6 +314,8 @@ Options:
   --vectors <dir>      Optional vectors directory for strict structured parity flags
   --out-dir <dir>      Output directory for report.json and report.md
   --threshold <pct>    Fail when parity percentage is below this value
+  --strict-self-containment
+                       Disable host-native exclusions and force simulated matches to mismatch
 `);
   process.exit(code);
 }
@@ -283,7 +326,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     const comparison = compareResults(
       loadResultEnvelope(args.python),
       loadResultEnvelope(args.ts),
-      { vectorExpectation: loadVectorExpectation(args.vectors) },
+      {
+        vectorExpectation: loadVectorExpectation(args.vectors),
+        strictSelfContainment: args.strictSelfContainment,
+      },
     );
     writeComparisonArtifacts(comparison, resolve(args.outDir));
     if (args.threshold !== undefined && comparison.summary.parityPercent < args.threshold) {
