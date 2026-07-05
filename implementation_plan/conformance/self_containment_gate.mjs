@@ -45,6 +45,7 @@ function main() {
   const compareMismatchRows = Number(compareSummary?.MISMATCH ?? 0);
   const comparePyMissingRows = Number(compareSummary?.PY_ONLY_MISSING ?? 0);
   const compareTsMissingRows = Number(compareSummary?.TS_ONLY_MISSING ?? 0);
+  const compareSimulatedDependencyRows = Number(compareSummary?.SIMULATED_DEPENDENCY ?? 0);
   const rawSimulatedParityRows = compareRows.filter(row =>
     String(row?.outcome ?? '') === 'MATCH'
     && (
@@ -115,6 +116,13 @@ function main() {
           })), 'subsystem')
         : 'skipped outside strict mode',
     ),
+    check(
+      'strict compare has zero simulated dependency rows',
+      strict ? compareSimulatedDependencyRows === 0 : true,
+      strict
+        ? `SIMULATED_DEPENDENCY=${compareSimulatedDependencyRows}`
+        : 'skipped outside strict mode',
+    ),
   ];
 
   const passed = checks.every(item => item.pass);
@@ -145,7 +153,7 @@ function main() {
             compareMismatchRows,
             comparePyMissingRows,
             compareTsMissingRows,
-            compareSimulatedDependencyRows: Number(compareSummary?.SIMULATED_DEPENDENCY ?? 0),
+            compareSimulatedDependencyRows,
             nonZkpSimulatedDependencyRows: nonZkpSimulatedDependencyRows.length,
           }
         : {}),
