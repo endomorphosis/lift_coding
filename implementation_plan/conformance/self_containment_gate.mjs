@@ -7,13 +7,20 @@ function main() {
   const outDir = resolve(args.outDir);
   const tsPath = resolve(args.tsResults);
   const reportPath = resolve(args.reportPath);
+  const pyResultsPath = resolve(args.pyResultsPath);
   const strict = Boolean(args.strict);
 
   const tsResults = loadJson(tsPath);
   const report = loadJson(reportPath);
+  const pyResults = loadJson(pyResultsPath);
   const rows = Array.isArray(tsResults?.results) ? tsResults.results : [];
   const compareRows = Array.isArray(report?.rows) ? report.rows : [];
   const compareSummary = report?.summary ?? {};
+  const zkpRuntimeMode = String(pyResults?.engineVersions?.zkp_runtime_mode ?? '');
+  const validZkpRuntimeModes = new Set([
+    'policy-proxy-default',
+    'simulated-runtime-enabled',
+  ]);
 
   const backendViolations = [];
   const statusViolations = [];
@@ -123,6 +130,13 @@ function main() {
         ? `SIMULATED_DEPENDENCY=${compareSimulatedDependencyRows}`
         : 'skipped outside strict mode',
     ),
+    check(
+      'strict py-results includes auditable zkp runtime mode',
+      strict ? validZkpRuntimeModes.has(zkpRuntimeMode) : true,
+      strict
+        ? `zkp_runtime_mode=${zkpRuntimeMode || '<missing>'}`
+        : 'skipped outside strict mode',
+    ),
   ];
 
   const passed = checks.every(item => item.pass);
@@ -155,6 +169,7 @@ function main() {
             compareTsMissingRows,
             compareSimulatedDependencyRows,
             nonZkpSimulatedDependencyRows: nonZkpSimulatedDependencyRows.length,
+            zkpRuntimeMode: zkpRuntimeMode || '<missing>',
           }
         : {}),
     },
@@ -236,6 +251,7 @@ function parseArgs(argv) {
     outDir: 'conformance',
     tsResults: 'conformance/ts-results.json',
     reportPath: 'conformance/report.json',
+    pyResultsPath: 'conformance/py-results.json',
     strict: false,
   };
   for (let i = 0; i < argv.length; i += 1) {
@@ -243,6 +259,7 @@ function parseArgs(argv) {
     if (arg === '--out-dir') args.outDir = argv[++i];
     else if (arg === '--ts-results') args.tsResults = argv[++i];
     else if (arg === '--report') args.reportPath = argv[++i];
+    else if (arg === '--py-results') args.pyResultsPath = argv[++i];
     else if (arg === '--strict') args.strict = true;
     else if (arg === '--help') {
       printHelp();
@@ -255,7 +272,7 @@ function parseArgs(argv) {
 }
 
 function printHelp() {
-  console.log('Usage: node implementation_plan/conformance/self_containment_gate.mjs [--out-dir conformance] [--ts-results conformance/ts-results.json] [--report conformance/report.json] [--strict]');
+  console.log('Usage: node implementation_plan/conformance/self_containment_gate.mjs [--out-dir conformance] [--ts-results conformance/ts-results.json] [--report conformance/report.json] [--py-results conformance/py-results.json] [--strict]');
 }
 
 function escapeCell(value) {
