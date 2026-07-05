@@ -55,6 +55,12 @@ function main() {
     String(row?.outcome ?? '') === 'MATCH'
     && String(row?.tsBackendMode ?? '').toLowerCase() === 'simulated'
   ).length;
+  const simulatedDependencyRows = compareRows.filter(row =>
+    String(row?.outcome ?? '') === 'SIMULATED_DEPENDENCY'
+  );
+  const nonZkpSimulatedDependencyRows = simulatedDependencyRows.filter(row =>
+    String(row?.subsystem ?? '') !== 'zkp-statement'
+  );
 
   const hostNativeExcluded = strict ? 0 : rawHostNativeExcluded;
   const simulatedParityRows = strict ? simulatedTsParityRows : rawSimulatedParityRows;
@@ -99,6 +105,16 @@ function main() {
         ? `MISMATCH=${compareMismatchRows}; PY_ONLY_MISSING=${comparePyMissingRows}; TS_ONLY_MISSING=${compareTsMissingRows}`
         : 'skipped outside strict mode',
     ),
+    check(
+      'strict simulated dependency isolated to zkp-statement',
+      strict ? nonZkpSimulatedDependencyRows.length === 0 : true,
+      strict
+        ? summarize('nonZkpSimulatedDependencyRows', nonZkpSimulatedDependencyRows.map(row => ({
+            vectorId: String(row?.vectorId ?? '<unknown>'),
+            subsystem: String(row?.subsystem ?? '<unknown>'),
+          })), 'subsystem')
+        : 'skipped outside strict mode',
+    ),
   ];
 
   const passed = checks.every(item => item.pass);
@@ -130,6 +146,7 @@ function main() {
             comparePyMissingRows,
             compareTsMissingRows,
             compareSimulatedDependencyRows: Number(compareSummary?.SIMULATED_DEPENDENCY ?? 0),
+            nonZkpSimulatedDependencyRows: nonZkpSimulatedDependencyRows.length,
           }
         : {}),
     },

@@ -42,7 +42,8 @@ SwissKnife theorem-prover parity harness.
   `--port239-runtime-host-native-tag-excluded-min-rows 3`), with zero
   tolerance for non-excluded rows for each of those tags, required runtime
   vector id pinning (`--port239-required-vector-ids`, default
-  `zkp-sim-005,zkp-sim-011,zkp-sim-012`) to prevent substitution gaming, and strict
+  `zkp-sim-005,zkp-sim-011,zkp-sim-012`) plus expected tag/shape checks for
+  those ids to prevent substitution or retagging gaming, and strict
   structured artifact coverage for PORT-236.
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
@@ -51,9 +52,17 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-modal-codec-citation-crosslang` gates PORT-246 citation
   normalization and section/source-id helper parity against the Python modal
   codec.
+- `make conformance-modal-codec-temporal-operator-crosslang` gates PORT-246
+  modal operator feature key, operator-pair feature key, temporal prefix
+  relation, and temporal context-cue helper parity against the Python modal
+  codec.
 - `make conformance-modal-decompiler-citation-crosslang` gates PORT-247
   decompiler citation normalization and section/source-id helper parity against
   the Python modal decompiler.
+- `make conformance-modal-decompiler-temporal-operator-crosslang` gates PORT-247
+  modal operator feature key, operator-pair feature key, temporal prefix
+  relation, and temporal context-cue helper parity against the Python modal
+  decompiler.
 - `make conformance-modal-compiler-serialization-crosslang` gates PORT-250
   compiler config and ambiguity serialization parity against the Python modal
   compiler dataclasses.
@@ -65,10 +74,12 @@ SwissKnife theorem-prover parity harness.
   simulated engines stays visible as debt instead of being counted as parity, even when one side is missing.
   Host-dependent expected rows are only counted as dependency while at least one side is not `backendMode=real`. It also normalizes
   Python `unknown` host-dependent rows to match TS conclusive strict outputs when
-  vectors are non-decided, preventing false-negative mismatches in strict mode.
+  vectors are non-decided, preventing false-negative mismatches in strict mode;
+  those strict-unknown-bridge rows are not dependency-labeled.
   The strict gate additionally enforces zero unresolved compare rows
   (`MISMATCH`, `PY_ONLY_MISSING`, `TS_ONLY_MISSING`) and reports
-  `SIMULATED_DEPENDENCY` as explicit residual debt telemetry.
+  `SIMULATED_DEPENDENCY` as explicit residual debt telemetry, with a hard check
+  that any remaining dependency rows are confined to `zkp-statement`.
 - `make conformance-self-containment-strict` evaluates the strict gate against the
   default `conformance/report.json` + `conformance/ts-results.json` artifacts.
 
