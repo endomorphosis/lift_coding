@@ -19,6 +19,14 @@ SwissKnife theorem-prover parity harness.
   Compare rows also carry vector `tags`, enabling certificate checks for
   runtime slices such as PORT-239 (`flogic`/`ergo`/`host-native`).
 - `mutate.mjs` creates metamorphic vector variants for invariant testing.
+- `differential_fuzz.mjs` writes per-engine fuzz coverage telemetry in
+  `conformance/differential-fuzz.json`
+  (`requiredInputTypes`, `byInputType`, `casesPerEngine`) so PORT-242 can
+  enforce depth per native input type, not only global mismatch=0.
+- `mutation_gate.mjs` now reports mutation impact per native input type
+  (`mutationDropByInputType`) and fails if the configured targeted mutation
+  slice (`targetedInputTypes`, currently `folFormula` for `flip-fol`) does not
+  show positive impact.
 - `symbol-map.json` is the PORT-234 per-symbol reconciliation artifact.
 - `symbol-evidence.json` binds symbol families to concrete conformance test ids
   and native input slices for PORT-241/243 anti-gaming checks.
@@ -54,13 +62,23 @@ SwissKnife theorem-prover parity harness.
   modes or other backend drift.
   Strict
   structured artifact coverage for PORT-236. It also requires
+  PORT-242 differential fuzz per-engine coverage at `casesPerEngine` for each
+  required native input type.
+  PORT-240 now also requires mutation impact on targeted native input types,
+  not only global `mutationDrop > 0`.
+  It also requires
   `conformance/py-results.json` to expose auditable
   `engineVersions.zkp_runtime_mode` metadata
   (`policy-proxy-default` or `simulated-runtime-enabled`).
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
-  guidance and frame-audit helper parity against the Python modal codec.
+  guidance, guidance feature-string extraction, and frame-audit helper parity
+  against the Python modal codec.
+- `make conformance-modal-codec-guidance-summary-crosslang` gates PORT-246
+  compiler guidance summary, normalized numeric distribution, surface overlay,
+  source-grounding, overlay application, and source-copy reward-hack penalty
+  helper parity against the Python modal codec.
 - `make conformance-modal-codec-citation-crosslang` gates PORT-246 citation
   normalization and section/source-id helper parity against the Python modal
   codec.
@@ -78,6 +96,17 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-modal-compiler-serialization-crosslang` gates PORT-250
   compiler config and ambiguity serialization parity against the Python modal
   compiler dataclasses.
+- `make conformance-deontic-bridge-frame-graph-crosslang` gates PORT-249
+  deontic bridge frame-logic triples and Neo4j-compatible graph projection
+  parity against the Python bridge/projection functions.
+- `make conformance-bridge-frame-graph-crosslang` gates PORT-249 FOL/TDFOL and
+  CEC/DCEC bridge frame-logic triples plus Neo4j-compatible graph projection
+  parity against the Python bridge/projection functions.
+- `make conformance-multiview-merge-crosslang` gates PORT-249 Legal-IR
+  multiview document merge parity against Python
+  `bridge/multiview.py::_merge_reports_to_document`, including adapter-prefixed
+  view naming, per-view adapter metadata, frame-logic triple deduplication, and
+  aggregate multiview metadata.
 - `make conformance-self-containment` runs Python + strict TypeScript artifacts,
   writes a dedicated strict compare report under `conformance/self-contained/`,
   and enforces the PORT-257 strict self-containment gate against that report.
@@ -90,8 +119,9 @@ SwissKnife theorem-prover parity harness.
   those strict-unknown-bridge rows are not dependency-labeled.
   The strict gate additionally enforces zero unresolved compare rows
   (`MISMATCH`, `PY_ONLY_MISSING`, `TS_ONLY_MISSING`) and reports
-  `SIMULATED_DEPENDENCY` as explicit residual debt telemetry, with a hard check
-  that any remaining dependency rows are confined to `zkp-statement`.
+  `SIMULATED_DEPENDENCY` as explicit residual debt telemetry, with hard checks
+  that dependency rows are confined to `zkp-statement` and strict dependency
+  count is zero.
 - `make conformance-self-containment-strict` evaluates the strict gate against the
   default `conformance/report.json` + `conformance/ts-results.json` artifacts.
 

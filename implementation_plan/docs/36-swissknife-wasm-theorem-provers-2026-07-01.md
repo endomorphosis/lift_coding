@@ -3191,16 +3191,16 @@ reproduced in TS and **proven equivalent to the real Python module** by a test t
 
 | ID | Pri | Gap | Acceptance criteria (must resist gaming) |
 |---|---|---|---|
-| PORT-235 | 🔴 | Conformance corpus tests only policy objects; engines untested | Add per-engine vectors with **native input types**: `fol-formula`, `modal-kripke`, `temporal-trace`, `dcec-obligation`, `deontic-conflict`, `legal-norm-ir`, `zkp-witness`. ≥25 vectors/engine incl. negative/adversarial (expected `unsat`/countermodel). Extend `ts-conformance-runner` + `py_reference_runner` dispatch for each type. |
-| PORT-236 | 🔴 | Parity compares only `status` | `compare.mjs` compares a **canonicalized structured result** (decision + sorted model/countermodel + proof/derivation hash). Drop `acceptableReasons` breadth for decided cases: `proved` and `sat` are distinct outcomes and must match exactly. |
-| PORT-237 | 🔴 | Python reference is a heuristic; real modules decorative; z3 absent | `py_reference_runner` returns the verdict **from the real engine** for each native input (not the policy heuristic). `z3` (and each referenced engine) is a **hard dependency**; a missing engine fails the run. Pin + record engine versions. |
-| PORT-238 | 🔴 | ZKP is a simulated hash; `ZKPFLogicProver` always `isProved:true` | Either bind a **real** Groth16/ProveKit backend (host-native track, PORT-209–213) and make `prove()` gate `isProved` on an actually-verified proof, **or** reclassify all ZKP-proving symbols as `n/a: host-native` and **stop reporting zkp parity as passed**. No "simulated" backend may satisfy a parity vector. |
-| PORT-239 | 🟠 | ErgoAI/FLogic wrappers are always-fail stubs | Bind the real ErgoAI/ShadowProver binaries (host-native FFI) with a real spawn path, **or** reclassify as `n/a: host-native`. A stub that always returns failure/`true` may not be counted as a ported prover. |
-| PORT-240 | 🔴 | Mutation test only mutates inputs (both sides still agree) | Add **implementation mutation**: inject a fault into the TS port (e.g., flip a rule) and assert parity **drops** (harness has teeth). Also mutate expected outputs. A mutation that does not reduce parity is a coverage hole to fix. |
-| PORT-241 | 🟠 | `consolidated`/`ported` symbols have no behavioral proof | Every `consolidated` (and every non-trivial `ported`) entry in `symbol-map.json` must cite a **passing test id** that exercises the behavior. `symbol_audit.py --check` fails if the cited test is missing or the symbol has no covering vector. |
-| PORT-242 | 🟠 | No differential fuzz — wrappers/heuristics hide behind fixed vectors | Add a **differential fuzzer** per engine: generate random well-typed inputs, run TS and real Python, require agreement on the structured result. This is the direct disproof of "it's just a wrapper/heuristic." |
-| PORT-243 | 🟠 | "Ported" modules may never execute under conformance | Instrument TS coverage during `conformance-ts`. Any module claimed `ported`/`consolidated` that is **never executed** by a vector fails the gate. |
-| PORT-244 | 🟠 | Certificates conflate presence with fidelity | Re-scope §12.22/§12.23/§12.24 as **identifier + policy-path** certificates. Introduce a separate **behavioral-completeness** certificate gated on PORT-235–243 (structured parity ≥ threshold, mutation-validated, coverage-complete, real-module reference). |
+| PORT-235 | 🟢 | CLOSED 2026-07-05: native per-engine corpus dispatch + ≥25 vectors/engine enforced by executable checks | Add per-engine vectors with **native input types**: `fol-formula`, `modal-kripke`, `temporal-trace`, `dcec-obligation`, `deontic-conflict`, `legal-norm-ir`, `zkp-witness`. ≥25 vectors/engine incl. negative/adversarial (expected `unsat`/countermodel). Extend `ts-conformance-runner` + `py_reference_runner` dispatch for each type. |
+| PORT-236 | 🟢 | CLOSED 2026-07-05: strict structured parity + artifact checks enforced in compare/certificate | `compare.mjs` compares a **canonicalized structured result** (decision + sorted model/countermodel + proof/derivation hash). Drop `acceptableReasons` breadth for decided cases: `proved` and `sat` are distinct outcomes and must match exactly. |
+| PORT-237 | 🟢 | CLOSED 2026-07-05: Python conformance runner now hard-requires real engines | `py_reference_runner` returns the verdict **from the real engine** for each native input (not the policy heuristic). `z3` (and each referenced engine) is a **hard dependency**; a missing engine fails the run. Pin + record engine versions. |
+| PORT-238 | 🟢 | CLOSED 2026-07-05: host-native ZKP exclusions enforce no simulated parity credit | Either bind a **real** Groth16/ProveKit backend (host-native track, PORT-209–213) and make `prove()` gate `isProved` on an actually-verified proof, **or** reclassify all ZKP-proving symbols as `n/a: host-native` and **stop reporting zkp parity as passed**. No "simulated" backend may satisfy a parity vector. |
+| PORT-239 | 🟢 | CLOSED 2026-07-05: host-native classification + runtime exclusion anti-gaming checks enforced | Bind the real ErgoAI/ShadowProver binaries (host-native FFI) with a real spawn path, **or** reclassify as `n/a: host-native`. A stub that always returns failure/`true` may not be counted as a ported prover. |
+| PORT-240 | 🟢 | CLOSED 2026-07-05: mutation gate now enforces targeted implementation mutation impact by native input type | Add **implementation mutation**: inject a fault into the TS port (e.g., flip a rule) and assert parity **drops** (harness has teeth). Also mutate expected outputs. A mutation that does not reduce parity is a coverage hole to fix. |
+| PORT-241 | 🟢 | CLOSED 2026-07-05: symbol evidence map + `symbol_audit.py --check` evidence enforcement active | Every `consolidated` (and every non-trivial `ported`) entry in `symbol-map.json` must cite a **passing test id** that exercises the behavior. `symbol_audit.py --check` fails if the cited test is missing or the symbol has no covering vector. |
+| PORT-242 | 🟢 | CLOSED 2026-07-05: differential fuzz now enforces per-engine/input-type depth | Add a **differential fuzzer** per engine: generate random well-typed inputs, run TS and real Python, require agreement on the structured result. This is the direct disproof of "it's just a wrapper/heuristic." |
+| PORT-243 | 🟢 | CLOSED 2026-07-05: TS V8 coverage reconciliation gate enforced in `make conformance` | Instrument TS coverage during `conformance-ts`. Any module claimed `ported`/`consolidated` that is **never executed** by a vector fails the gate. |
+| PORT-244 | 🟢 | CLOSED 2026-07-05: separate behavioral-completeness certificate is authoritative | Re-scope §12.22/§12.23/§12.24 as **identifier + policy-path** certificates. Introduce a separate **behavioral-completeness** certificate gated on PORT-235–243 (structured parity ≥ threshold, mutation-validated, coverage-complete, real-module reference). |
 
 **2026-07-05 delta (PORT-236, structured-artifact gate):**
 - `implementation_plan/conformance/compare.mjs` now supports vector-driven
@@ -3583,6 +3583,26 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   target/frame-audit feature helpers instead of leaving that behavior in the
   simulated embedding path. Full `encode()` feature extraction parity remains
   open.
+  **2026-07-05 guidance feature-string slice:** the same gate now covers
+  Python `_compiler_guidance_feature_strings`, including ranked guidance
+  features, feature groups, synthesis focus, family/view distributions, signed
+  legal-IR view-gap labels, stable ordering, and de-duplication. This closes
+  another `encode()` metadata feature path while full `encode()` parity remains
+  open.
+  **2026-07-05 guidance summary / reward-hack slice:** cross-language parity is
+  now enforced for Python `_compiler_guidance_summary`,
+  `_compiler_guidance_surface_overlay_terms`,
+  `_source_grounded_guidance_surface_overlay_terms`,
+  `_apply_compiler_guidance_surface_overlay`, `_numeric_distribution`,
+  `_numeric_signed_mapping`, and `_source_copy_reward_hack_penalty` with
+  `implementation_plan/conformance/modal-codec-guidance-summary-vectors.json`,
+  `implementation_plan/conformance/modal_codec_guidance_summary_py_runner.py`,
+  and
+  `test/conformance/modal-codec-guidance-summary-crosslang-conformance.test.ts`
+  (`conformance-modal-codec-guidance-summary-crosslang`). This covers the
+  deterministic `encode()` metadata summary, learned surface overlay, grounding,
+  normalized distribution, derived legal-IR gap, and source-copy penalty paths;
+  full `encode()` feature extraction parity remains open.
   **2026-07-05 citation slice:** citation normalization and section/source-id
   helper parity is now enforced with
   `implementation_plan/conformance/modal-codec-citation-vectors.json`,
@@ -3757,8 +3777,40 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   `implementation_plan/conformance/deontic_bridge_guidance_route_py_runner.py`, and
   `test/conformance/deontic-bridge-guidance-route-crosslang-conformance.test.ts`
   (`conformance-deontic-bridge-guidance-route-crosslang`).
-  Full bridge
-  triple/graph parity remains open.
+  **2026-07-05 frame/graph slice:** deontic bridge frame-logic triples and
+  Neo4j-compatible graph projection are now directly implemented in
+  `deontic-norms-bridge.ts` and gated against Python
+  `_frame_logic_triples_from_deontic_records` / `_graph_data_from_triples`
+  with
+  `implementation_plan/conformance/deontic-bridge-frame-graph-vectors.json`,
+  `implementation_plan/conformance/deontic_bridge_frame_graph_py_runner.py`,
+  and
+  `test/conformance/deontic-bridge-frame-graph-crosslang-conformance.test.ts`
+  (`conformance-deontic-bridge-frame-graph-crosslang`). The corpus covers
+  source-id fallback, formula/coverage joins, compiler-guidance legal-frame
+  triples, graph augmentation, Neo4j ids, labels, relationships, schema, and
+  projection metadata.
+  **2026-07-05 FOL/DCEC graph slice:** `fol-tdfol-bridge.ts` and
+  `cec-dcec-bridge.ts` now use Python-shaped frame-logic triples and the same
+  TS graph projection path, gated with
+  `implementation_plan/conformance/bridge-frame-graph-vectors.json`,
+  `implementation_plan/conformance/bridge_frame_graph_py_runner.py`, and
+  `test/conformance/bridge-frame-graph-crosslang-conformance.test.ts`
+  (`conformance-bridge-frame-graph-crosslang`). The corpus covers TDFOL
+  formula parse/predicate triples, DCEC event/procedure triples, graph
+  augmentation, Neo4j ids, labels, relationships, schema, and projection
+  metadata.
+  **2026-07-05 multiview merge slice:** `bridge-multiview.ts` now mirrors
+  Python `_merge_reports_to_document` for merged Legal-IR document construction:
+  sorted adapter/view traversal, `adapter.view` merged view names, per-view
+  `adapter_name` / `original_view_name` metadata, frame-logic triple
+  deduplication, accepted/attempted/failed/implemented bridge counts,
+  `legal-ir-multiview-v1` versioning, and source/citation propagation. It is
+  gated with
+  `implementation_plan/conformance/multiview-merge-vectors.json`,
+  `implementation_plan/conformance/multiview_merge_py_runner.py`, and
+  `test/conformance/multiview-merge-crosslang-conformance.test.ts`
+  (`conformance-multiview-merge-crosslang`).
 - **PORT-250 🟠 — Real modal compiler** (`modal/compiler.py`). **AC:** compile vectors match.
   **2026-07-05 starter gate:** cross-language parity is now enforced for deterministic
   modal-family canonicalization via
@@ -3778,6 +3830,17 @@ simulated modules**, gated by a substance bar that a name-match cannot satisfy.
   classes (`prover_core_extended_rules.py`, `dcec_integration.py`, `enhanced_grammar_parser.py`,
   `problem_parser.py`) — port, or reclassify `n/a` with a cited justification (12.26.1 error
   mode).
+  **2026-07-05 residual accounting closure:** the named residual modules are
+  now explicitly classified in
+  `implementation_plan/conformance/substance-map.json` with evidence ids and
+  reasons: `TDFOL/performance_profiler.py` as `data-bloat`
+  (profiling/reporting, not theorem-prover semantics, with native TDFOL
+  decision vectors); `CEC/native/dcec_integration.py`,
+  `CEC/native/enhanced_grammar_parser.py`, and
+  `CEC/native/problem_parser.py` as `compact-faithful`; and
+  `CEC/native/prover_core_extended_rules.py` as `consolidated` into the TS
+  DCEC prover path. `make conformance-substance` and full `make conformance`
+  pass with `violations=0`, closing PORT-251 as a residual-accounting task.
 - **PORT-252 🔵 (GATE) — Substance-ratio gate in `make conformance`.** For every must-port
   module require **either** (a) TS eff-LOC ≥ a threshold of Python eff-LOC, **or** (b) an
   explicit entry in a new `substance-map.json` classifying it

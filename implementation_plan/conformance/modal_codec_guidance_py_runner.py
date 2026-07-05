@@ -19,6 +19,7 @@ def _evaluate(guidance: Dict[str, Any]) -> Dict[str, Any]:
         "frameLogicTargetRoutes": sorted(codec._compiler_guidance_frame_logic_target_routes(guidance)),
         "frameLogicTarget": codec._compiler_guidance_implies_frame_logic_target(guidance),
         "frameAuditFeatures": codec._compiler_guidance_frame_audit_features(guidance),
+        "featureStrings": codec._compiler_guidance_feature_strings(guidance),
     }
 
 

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "multiview-sorted-view-dedup-metadata",
+      "documentId": "multiview-doc-1",
+      "sourceText": "  The agency must file notice.   The court may review the record. ",
+      "source": "federal_register",
+      "citation": "42 USC 1983",
+      "bridgeNames": ["fol_tdfol", "deontic", "missing_bridge"],
+      "failures": {
+        "missing_bridge": "adapter unavailable"
+      },
+      "reports": [
+        {
+          "adapterName": "fol_tdfol",
+          "targetComponent": "TDFOL.prover",
+          "status": "ok",
+          "document": {
+            "documentId": "multiview-doc-1",
+            "sourceText": "The agency must file notice.",
+            "normalizedText": "fol normalized text wins",
+            "source": "federal_register",
+            "views": {
+              "tdfol_formulas": {
+                "format": "tdfol_formula_list",
+                "sourceComponent": "TDFOL.prover",
+                "payload": {
+                  "formula_records": [
+                    {
+                      "source_id": "fol-f1",
+                      "formula": "O(file_notice(agency))"
+                    }
+                  ]
+                },
+                "metadata": {
+                  "formula_count": 1
+                }
+              }
+            },
+            "frameLogicTriples": [
+              {
+                "subject": "multiview-doc-1",
+                "predicate": "type",
+                "object": "legal_document"
+              },
+              {
+                "subject": "fol-f1",
+                "predicate": "formula",
+                "object": "O(file_notice(agency))"
+              },
+              {
+                "subject": "fol-empty",
+                "predicate": "formula",
+                "object": ""
+              }
+            ],
+            "metadata": {
+              "bridge": "fol_tdfol"
+            }
+          },
+          "proofGate": {
+            "attemptedCount": 1,
+            "validCount": 1,
+            "verifiedBy": ["tdfol-parser"]
+          },
+          "graphProjection": {
+            "graphId": "multiview-doc-1:tdfol",
+            "neo4jCompatible": true,
+            "nodeCount": 2,
+            "relationshipCount": 1
+          }
+        },
+        {
+          "adapterName": "deontic",
+          "targetComponent": "deontic.ir",
+          "status": "ok",
+          "document": {
+            "documentId": "multiview-doc-1",
+            "sourceText": "The court may review the record.",
+            "normalizedText": "deontic normalized text",
+            "source": "federal_register",
+            "views": {
+              "z_view": {
+                "format": "deontic-json",
+                "sourceComponent": "deontic.ir",
+                "payload": {
+                  "norms": ["late view"]
+                },
+                "metadata": {
+                  "score": 0.7
+                }
+              },
+              "a_view": {
+                "format": "deontic-json",
+                "sourceComponent": "deontic.ir",
+                "payload": {
+                  "norms": ["early view"]
+                },
+                "metadata": {
+                  "score": 0.9
+                }
+              }
+            },
+            "frameLogicTriples": [
+              {
+                "subject": "multiview-doc-1",
+                "predicate": "type",
+                "object": "legal_document"
+              },
+              {
+                "subject": "deontic-n1",
+                "predicate": "type",
+                "object": "norm"
+              },
+              {
+                "subject": "deontic-n1",
+                "predicate": "type",
+                "object": "norm"
+              }
+            ],
+            "metadata": {
+              "bridge": "deontic"
+            }
+          },
+          "proofGate": {
+            "attemptedCount": 1,
+            "validCount": 1,
+            "verifiedBy": ["deontic-parser"]
+          },
+          "graphProjection": {
+            "graphId": "multiview-doc-1:deontic",
+            "neo4jCompatible": true,
+            "nodeCount": 1,
+            "relationshipCount": 0
+          }
+        }
+      ]
+    }
+  ]
+}

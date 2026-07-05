@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "modal-codec-guidance-summary-overlay-001",
+      "description": "Compiler guidance summary derives normalized distributions, ranked features, overlay terms, and source-copy penalty inputs.",
+      "guidance": {
+        "feature_groups": {
+          "decoder_surface": [
+            "decompiler-surface:force-lexeme:obligation:shall",
+            { "feature": "decompiler-surface:negation-placement:predicate:not" },
+            "decompiler-surface:scope-realizer:condition-prefix",
+            "decompiler-surface:force-polarity-template:force:negative_scope:conditioned_excepted_temporal",
+            "decompiler-surface:cue-surface-ir:permission"
+          ],
+          "contract": {
+            "primary": "legal-ir-view:modal.frame_logic",
+            "secondary": { "name": "legal-ir-view:deontic.ir" }
+          }
+        },
+        "ranked_guidance_features": [
+          {
+            "feature": "decompiler-surface:force-lexeme:obligation:shall",
+            "score": 1.25,
+            "embedding_weight_norm": 0.5,
+            "family_logit_magnitude": 0.125,
+            "legal_ir_view_logit_magnitude": 0.75
+          },
+          {
+            "name": "decompiler-surface:scope-realizer:exception-suffix",
+            "score": "0.3333333333333",
+            "embedding_weight_norm": "bad",
+            "family_logit_magnitude": 0.25,
+            "legal_ir_view_logit_magnitude": 0.125
+          }
+        ],
+        "decoded_embedding": [3, 4, "bad", 0.5],
+        "family_distribution": {
+          "deontic": 2,
+          "temporal": 1,
+          "ignored": -10
+        },
+        "legal_ir_predicted_view_distribution": {
+          "deontic.ir": 2,
+          "modal.frame_logic": -1
+        },
+        "legal_ir_target_view_distribution": {
+          "modal.frame_logic": 3,
+          "knowledge_graphs.neo4j_compat": 1
+        },
+        "legal_ir_view_metrics": {
+          "coverage": "0.3333333333333",
+          "bad": "not-a-number"
+        },
+        "synthesis_focus": ["repair_multiview_legal_ir_loss"],
+        "sample_id": "sample-42",
+        "sample_memory_used": true
+      },
+      "numericDistribution": {
+        "b": 3,
+        "a": 1,
+        "ignored": -8,
+        "zero": 0
+      },
+      "numericSignedMapping": {
+        "b": -0.25,
+        "a": 0.125,
+        "tiny": 1e-13,
+        "bad": "x"
+      },
+      "sourceText": "The agency shall not enforce unless a waiver applies when the deadline arrives. It may file.",
+      "structuralDecodedText": "agency enforce",
+      "sourceCopyPenalty": {
+        "sourceSpanCopyRatio": 0.8,
+        "textReconstructionSimilarity": 0.9,
+        "structuralTextSimilarity": 0.4
+      }
+    },
+    {
+      "id": "modal-codec-guidance-summary-prohibited-grounding-001",
+      "description": "Surface overlay normalization removes redundant not when prohibited is present and keeps source-grounded prohibition.",
+      "guidance": {
+        "feature_groups": {
+          "decoder_surface": [
+            "decompiler-surface:force-lexeme:prohibition:prohibited",
+            "decompiler-surface:negation-placement:predicate:not",
+            "decompiler-surface:scope-realizer:temporal-suffix"
+          ]
+        },
+        "family_distribution": {
+          "deontic": 1
+        }
+      },
+      "numericDistribution": {},
+      "numericSignedMapping": {},
+      "sourceText": "A licensee may not transfer the permit within 30 days.",
+      "structuralDecodedText": "licensee transfer",
+      "sourceCopyPenalty": {
+        "sourceSpanCopyRatio": 0.75,
+        "textReconstructionSimilarity": 0.25,
+        "structuralTextSimilarity": 0.5
+      }
+    }
+  ]
+}

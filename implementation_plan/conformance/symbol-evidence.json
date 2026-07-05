@@ -15,6 +15,7 @@
     "conformance-modal-codec-guidance-crosslang",
     "conformance-modal-codec-citation-crosslang",
     "conformance-modal-codec-temporal-operator-crosslang",
+    "conformance-modal-codec-guidance-summary-crosslang",
     "conformance-modal-decompiler-crosslang",
     "conformance-modal-decompiler-citation-crosslang",
     "conformance-modal-decompiler-temporal-operator-crosslang",
@@ -37,7 +38,10 @@
     "conformance-deontic-bridge-guidance-evidence-rows-crosslang",
     "conformance-deontic-bridge-guidance-frame-selection-crosslang",
     "conformance-deontic-bridge-json-guidance-crosslang",
-    "conformance-deontic-bridge-guidance-route-crosslang"
+    "conformance-deontic-bridge-guidance-route-crosslang",
+    "conformance-deontic-bridge-frame-graph-crosslang",
+    "conformance-bridge-frame-graph-crosslang",
+    "conformance-multiview-merge-crosslang"
   ],
   "moduleRules": [
     {
@@ -72,7 +76,7 @@
     },
     {
       "modulePrefix": "modal/",
-      "testIds": ["conformance-ts", "conformance-compare", "conformance-modal-codec-ir-crosslang", "conformance-modal-codec-guidance-crosslang", "conformance-modal-codec-citation-crosslang", "conformance-modal-codec-temporal-operator-crosslang", "conformance-modal-decompiler-crosslang", "conformance-modal-decompiler-citation-crosslang", "conformance-modal-decompiler-temporal-operator-crosslang", "conformance-modal-compiler-family-token-crosslang", "conformance-modal-compiler-serialization-crosslang"],
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-modal-codec-ir-crosslang", "conformance-modal-codec-guidance-crosslang", "conformance-modal-codec-citation-crosslang", "conformance-modal-codec-temporal-operator-crosslang", "conformance-modal-codec-guidance-summary-crosslang", "conformance-modal-decompiler-crosslang", "conformance-modal-decompiler-citation-crosslang", "conformance-modal-decompiler-temporal-operator-crosslang", "conformance-modal-compiler-family-token-crosslang", "conformance-modal-compiler-serialization-crosslang"],
       "coveringInputTypes": ["modalKripke", "smt2"],
       "coverageScope": "core",
       "requiredExecutedTargets": [
@@ -121,7 +125,7 @@
     },
     {
       "modulePrefix": "bridge/",
-      "testIds": ["conformance-ts", "conformance-compare"],
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-deontic-bridge-frame-graph-crosslang", "conformance-bridge-frame-graph-crosslang", "conformance-multiview-merge-crosslang"],
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [

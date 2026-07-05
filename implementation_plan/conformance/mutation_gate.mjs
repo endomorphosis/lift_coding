@@ -53,6 +53,11 @@ function main() {
   );
 
   const mutationDrop = baselineComparison.summary.MATCH - mutationComparison.summary.MATCH;
+  const baselineMatchByInputType = summarizeMatchesByInputType(baselineComparison.rows);
+  const mutatedMatchByInputType = summarizeMatchesByInputType(mutationComparison.rows);
+  const mutationDropByInputType = diffCounts(baselineMatchByInputType, mutatedMatchByInputType);
+  const targetedInputTypes = ['folFormula'];
+  const targetedCoverageViolations = targetedInputTypes.filter(inputType => Number(mutationDropByInputType[inputType] ?? 0) <= 0);
   writeComparisonArtifacts(mutationComparison, resolve(outDir, 'mutated-report'));
 
   if (!(mutationDrop > 0)) {
@@ -64,11 +69,17 @@ function main() {
   const gateSummary = {
     schemaVersion: '2026-07-05',
     generatedAt: new Date().toISOString(),
+    mutationType: 'flip-fol',
     baselineMatch: baselineComparison.summary.MATCH,
     mutatedMatch: mutationComparison.summary.MATCH,
     mutationDrop,
+    baselineMatchByInputType,
+    mutatedMatchByInputType,
+    mutationDropByInputType,
+    targetedInputTypes,
+    targetedCoverageViolations,
     expectedOutputMutationDrop,
-    passed: mutationDrop > 0 && expectedOutputMutationDrop > 0,
+    passed: mutationDrop > 0 && expectedOutputMutationDrop > 0 && targetedCoverageViolations.length === 0,
   };
   writeFileSync(resolve(outDir, 'mutation-gate.json'), JSON.stringify(gateSummary, null, 2) + '\n', 'utf8');
 
@@ -111,10 +122,30 @@ function loadVectorExpectation(vectorsDir) {
         strictStructuredParity: Boolean(vector?.expected?.strictStructuredParity),
         expectedStatus: typeof vector?.expected?.status === 'string' ? vector.expected.status : undefined,
         decided: vector?.expected?.decided === true,
+        inputType: String(vector?.inputType ?? 'unknown'),
       };
     }
   }
   return payload;
+}
+
+function summarizeMatchesByInputType(rows) {
+  const counts = {};
+  for (const row of rows ?? []) {
+    if (String(row?.outcome ?? '') !== 'MATCH') continue;
+    const inputType = String(row?.inputType ?? 'unknown');
+    counts[inputType] = Number(counts[inputType] ?? 0) + 1;
+  }
+  return counts;
+}
+
+function diffCounts(left, right) {
+  const keys = new Set([...Object.keys(left ?? {}), ...Object.keys(right ?? {})]);
+  const diff = {};
+  for (const key of keys) {
+    diff[key] = Number(left?.[key] ?? 0) - Number(right?.[key] ?? 0);
+  }
+  return diff;
 }
 
 function parseArgs(argv) {

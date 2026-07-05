@@ -35,6 +35,7 @@ function main() {
     const expectation = Object.fromEntries(vectors.map(vector => [vector.id, {
       strictStructuredParity: true,
       decided: false,
+      inputType: String(vector?.inputType ?? 'unknown'),
     }]));
 
     const comparison = compareResults(loadResultEnvelope(pyOut), loadResultEnvelope(tsOut), { vectorExpectation: expectation });
@@ -44,11 +45,20 @@ function main() {
       throw new Error(`Differential fuzz detected ${comparison.summary.MISMATCH} mismatches`);
     }
 
+    const requiredInputTypes = ['folFormula', 'temporalTrace', 'modalKripke', 'deonticConflict', 'dcec', 'legalNorm', 'zkpWitness'];
+    const byInputType = {};
+    for (const vector of vectors) {
+      const inputType = String(vector?.inputType ?? 'unknown');
+      byInputType[inputType] = Number(byInputType[inputType] ?? 0) + 1;
+    }
+
     const summary = {
       schemaVersion: '2026-07-05',
       generatedAt: new Date().toISOString(),
       seed: args.seed,
       casesPerEngine: args.casesPerEngine,
+      requiredInputTypes,
+      byInputType,
       total: comparison.summary.total,
       match: comparison.summary.MATCH,
       mismatch: comparison.summary.MISMATCH,

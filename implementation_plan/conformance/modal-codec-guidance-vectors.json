@@ -36,7 +36,8 @@
           "selected_ontology_frame:ContractFrame",
           "candidate_ontology_term:obligation",
           "flogic:statement_hint:audit_frame_logic_terms"
-        ]
+        ],
+        "featureStrings": []
       }
     },
     {
@@ -64,7 +65,8 @@
         "neo4jProjectionTarget": true,
         "frameLogicTargetRoutes": ["repair_flogic_ontology_constraints"],
         "frameLogicTarget": true,
-        "frameAuditFeatures": []
+        "frameAuditFeatures": [],
+        "featureStrings": []
       }
     },
     {
@@ -93,6 +95,72 @@
         "frameAuditFeatures": [
           "modal-family:frame",
           "flogic:statement_hint:improve_flogic_frame_alignment"
+        ],
+        "featureStrings": []
+      }
+    },
+    {
+      "id": "modal-codec-guidance-feature-strings-001",
+      "description": "Guidance summary feature strings preserve order, dedupe, and label signed view gaps.",
+      "guidance": {
+        "ranked_guidance_features": [
+          "modal-family:deontic",
+          { "feature": "predicate:file_notice" },
+          { "name": "selected-frame:ObligationFrame" },
+          "modal-family:deontic"
+        ],
+        "feature_groups": {
+          "scope": [
+            "condition-prefix:if",
+            { "feature": "exception-suffix:except" }
+          ],
+          "target": {
+            "primary": "legal-ir-view:modal.frame_logic",
+            "secondary": { "name": "legal-ir-view:deontic.ir" }
+          }
+        },
+        "synthesis_focus": ["repair_multiview_legal_ir_loss"],
+        "family_distribution": {
+          "deontic": 0.8,
+          "temporal": 0.2
+        },
+        "legal_ir_predicted_view_distribution": {
+          "deontic.ir": 0.7
+        },
+        "legal_ir_target_view_distribution": {
+          "modal.frame_logic": 0.6,
+          "knowledge_graphs.neo4j_compat": 0.4
+        },
+        "legal_ir_view_gap_distribution": {
+          "modal.frame_logic": 0.4,
+          "deontic.ir": -0.2,
+          "knowledge_graphs.neo4j_compat": 0
+        }
+      },
+      "expected": {
+        "routeFeatures": [],
+        "viewGapFeatures": [],
+        "neo4jProjectionTarget": false,
+        "frameLogicTargetRoutes": ["audit_frame_logic_terms"],
+        "frameLogicTarget": true,
+        "frameAuditFeatures": [],
+        "featureStrings": [
+          "modal-family:deontic",
+          "predicate:file_notice",
+          "selected-frame:ObligationFrame",
+          "condition-prefix:if",
+          "exception-suffix:except",
+          "legal-ir-view:modal.frame_logic",
+          "legal-ir-view:deontic.ir",
+          "repair_multiview_legal_ir_loss",
+          "family-distribution:deontic",
+          "family-distribution:temporal",
+          "legal-ir-predicted-view:deontic.ir",
+          "legal-ir-target-view:modal.frame_logic",
+          "legal-ir-target-view:knowledge_graphs.neo4j_compat",
+          "legal-ir-view-gap:underrepresented:modal.frame_logic",
+          "legal-ir-view-gap:overrepresented:deontic.ir",
+          "legal-ir-view-gap:overrepresented:knowledge_graphs.neo4j_compat"
         ]
       }
     }
