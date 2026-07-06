@@ -79,6 +79,13 @@ SwissKnife theorem-prover parity harness.
   graph of those browser-facing services and rejects static Node-host imports or
   Node crypto helpers (`createHash`, `Buffer.from`) anywhere on that reachable
   path.
+- `make conformance-zkp-real-browser` is an intentionally stricter red/green
+  audit for real browser ZKP proving. It requires a browser-compatible ZKP
+  dependency/artifact/backend and rejects production ZKP service paths that
+  consume deterministic simulated provers. This target is not part of the
+  default `make conformance` run because it is expected to fail until the
+  Groth16/ProveKit host-native adapters are replaced or supplemented by a real
+  TS/WASM proving backend.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
   guidance, guidance feature-string extraction, and frame-audit helper parity
   against the Python modal codec.
@@ -113,6 +120,11 @@ SwissKnife theorem-prover parity harness.
   `deontic/formula_builder.py`.
 - `make conformance-tdfol-native-crosslang` gates native `inputType: tdfol`
   vector parity between TS `TdfolProverBridge` and Python `TDFOLProver`.
+- `make conformance-zkp-real-browser` gates that browser-facing ZKP decision
+  paths do not rely on simulated proof consumers and that a real browser/WASM
+  proving backend footprint exists.
+- `make conformance-python-deprecation` gates Python deprecation posture for
+  default conformance wiring and browser-critical TS/WASM runtime surfaces.
 - `make conformance-modal-compiler-serialization-crosslang` gates PORT-250
   compiler config and ambiguity serialization parity against the Python modal
   compiler dataclasses.
