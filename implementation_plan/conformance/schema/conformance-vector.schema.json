@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hallucinate-llc.local/swissknife/conformance-vector.schema.json",
+  "title": "SwissKnife Logic Conformance Vector Corpus",
+  "type": "object",
+  "required": ["schemaVersion", "vectors"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "vectors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/vector" }
+    }
+  },
+  "$defs": {
+    "vector": {
+      "type": "object",
+      "required": ["id", "subsystem", "inputType", "input", "expected"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_.:-]+$" },
+        "subsystem": {
+          "enum": [
+            "propositional",
+            "fol",
+            "temporal",
+            "deontic",
+            "modal",
+            "dcec",
+            "legal-norm",
+            "zkp-statement"
+          ]
+        },
+        "description": { "type": "string" },
+        "inputType": { "enum": ["policy", "smt2", "dcec", "tdfol", "legalNorm", "zkpStatement"] },
+        "input": { "type": "object" },
+        "expected": {
+          "type": "object",
+          "required": ["status", "acceptableReasons"],
+          "properties": {
+            "status": { "type": "string" },
+            "acceptableReasons": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1
+            },
+            "decided": { "type": "boolean" },
+            "backendMode": { "enum": ["real", "simulated", "host-dependent"] }
+          },
+          "additionalProperties": true
+        },
+        "timeoutMs": { "type": "integer", "minimum": 1 },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "metamorphic": {
+          "type": "object",
+          "properties": {
+            "sourceVectorId": { "type": "string" },
+            "oracle": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
