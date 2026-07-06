@@ -35,6 +35,7 @@ function main() {
   const makefileNoComments = stripComments(makefile);
   const conformanceLine = findLine(makefileNoComments, /^conformance:.*$/m);
   const selfContainmentLine = findLine(makefileNoComments, /^conformance-self-containment:.*$/m);
+  const crosslangLine = findLine(makefileNoComments, /^conformance-crosslang:.*$/m);
 
   const browserPythonHits = BROWSER_CRITICAL_FILES
     .filter(path => existsSync(resolve(root, path)))
@@ -52,9 +53,21 @@ function main() {
       conformanceLine || '<missing conformance line>',
     ),
     check(
+      'default conformance target excludes cross-language compare dependency',
+      !/\bconformance-compare\b/.test(conformanceLine),
+      conformanceLine || '<missing conformance line>',
+    ),
+    check(
       'strict self-containment target excludes conformance-py prerequisite',
       !/\bconformance-py\b/.test(selfContainmentLine),
       selfContainmentLine || '<missing self-containment line>',
+    ),
+    check(
+      'cross-language target explicitly includes TS and Python compare prerequisites',
+      /\bconformance-ts\b/.test(crosslangLine)
+      && /\bconformance-py\b/.test(crosslangLine)
+      && /\bconformance-compare\b/.test(crosslangLine),
+      crosslangLine || '<missing conformance-crosslang line>',
     ),
     check(
       'browser-critical TS/WASM runtime paths have no Python execution hooks',

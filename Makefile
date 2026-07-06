@@ -46,7 +46,7 @@ conformance: conformance-tdfol-native-crosslang
 conformance: conformance-zkp-real-browser
 conformance: conformance-python-deprecation
 
-conformance-crosslang: conformance-py conformance-compare conformance-self-containment
+conformance-crosslang: conformance-ts conformance-py conformance-compare conformance-self-containment
 
 conformance-symbols:
 	$(PYTHON) $(CONFORMANCE_DIR)/symbol_audit.py --check
@@ -62,7 +62,7 @@ conformance-symbol-coverage:
 conformance-py:
 	PYTHONPATH=$(PWD)/external/ipfs_datasets $(PYTHON) external/ipfs_datasets/ipfs_datasets_py/logic/conformance/py_reference_runner.py --vectors $(CONFORMANCE_DIR)/vectors --out $(CONFORMANCE_OUT)/py-results.json --require-engines z3_runtime,tdfol_core,dcec_prover
 
-conformance-compare:
+conformance-compare: conformance-ts conformance-py
 	node $(CONFORMANCE_DIR)/compare.mjs --python $(CONFORMANCE_OUT)/py-results.json --ts $(CONFORMANCE_OUT)/ts-results.json --vectors $(CONFORMANCE_DIR)/vectors --out-dir $(CONFORMANCE_OUT) --threshold $(CONFORMANCE_THRESHOLD)
 
 conformance-temporal-native:
