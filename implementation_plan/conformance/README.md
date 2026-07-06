@@ -111,6 +111,8 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-deontic-formula-builder-crosslang` gates PORT-248 parser
   element to formula and source-grounded formula-record parity against Python
   `deontic/formula_builder.py`.
+- `make conformance-tdfol-native-crosslang` gates native `inputType: tdfol`
+  vector parity between TS `TdfolProverBridge` and Python `TDFOLProver`.
 - `make conformance-modal-compiler-serialization-crosslang` gates PORT-250
   compiler config and ambiguity serialization parity against the Python modal
   compiler dataclasses.
