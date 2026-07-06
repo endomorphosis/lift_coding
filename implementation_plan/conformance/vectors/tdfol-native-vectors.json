@@ -16,7 +16,7 @@
         "acceptableReasons": ["refuted"],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "real"
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "deontic", "contradiction"]
@@ -36,7 +36,7 @@
         "acceptableReasons": ["proved"],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "real"
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "deontic"]
@@ -57,7 +57,7 @@
         "acceptableReasons": ["proved"],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "real"
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "temporal"]
@@ -77,7 +77,7 @@
         "acceptableReasons": ["proved"],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "real"
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "modal"]
@@ -97,7 +97,7 @@
         "acceptableReasons": ["proved"],
         "strictStructuredParity": true,
         "decided": true,
-        "backendMode": "simulated"
+        "backendMode": "real"
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "dcec"]
@@ -117,7 +117,7 @@
         "acceptableReasons": ["unknown"],
         "strictStructuredParity": true,
         "decided": false,
-        "backendMode": "simulated"
+        "backendMode": "real"
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "unknown"]

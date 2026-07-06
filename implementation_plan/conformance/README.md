@@ -175,6 +175,9 @@ deontic/modal/legal/ZKP-policy vectors, and live Python `z3` is used when the
 `z3` package is installed. If `z3` is absent, the result envelope records
 `z3_runtime: unavailable:*` and still emits the TDFOL/DCEC provenance under
 `metadata.pythonProverChecks`.
+For `inputType: "tdfol"` vectors, both runners now dispatch through native
+TDFOL provers (TS `TdfolProverBridge` and Python `TDFOLProver` with parsed TDFOL
+formulas) rather than heuristic contradiction stubs.
 Refresh the symbol reconciliation artifact after adding or removing public
 Python logic symbols:
 
