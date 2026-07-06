@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "decoded-missing-view",
+      "document": { "views": {} },
+      "expected": ""
+    },
+    {
+      "id": "decoded-empty-records",
+      "document": {
+        "views": {
+          "deontic_parser_capability": {
+            "payload": { "records": [] }
+          }
+        }
+      },
+      "expected": ""
+    },
+    {
+      "id": "decoded-first-record-value",
+      "document": {
+        "views": {
+          "deontic_parser_capability": {
+            "payload": {
+              "records": [
+                { "decoded_text": "Decoded legal sentence" },
+                { "decoded_text": "Ignored second" }
+              ]
+            }
+          }
+        }
+      },
+      "expected": "Decoded legal sentence"
+    },
+    {
+      "id": "decoded-first-record-missing-key",
+      "document": {
+        "views": {
+          "deontic_parser_capability": {
+            "payload": {
+              "records": [
+                { "other": "value" }
+              ]
+            }
+          }
+        }
+      },
+      "expected": ""
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "tdfol-deontic-refuted-001",
+      "subsystem": "deontic",
+      "description": "Contradictory obligation/prohibition over same atom.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["O(pay_tax)", "F(pay_tax)"]
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "deontic", "contradiction"]
+    },
+    {
+      "id": "tdfol-deontic-proved-001",
+      "subsystem": "deontic",
+      "description": "Consistent deontic axiom set is accepted.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["O(report_incident)", "P(report_incident)"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "deontic"]
+    },
+    {
+      "id": "tdfol-temporal-proved-001",
+      "subsystem": "temporal",
+      "description": "Temporal formula present as explicit goal in KB.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["G(retain_records)", "P(retain_records)"],
+          "goal": "G(retain_records)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "temporal"]
+    },
+    {
+      "id": "tdfol-modal-proved-001",
+      "subsystem": "modal",
+      "description": "Modal/deontic mix with no explicit contradiction.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["P(access_casefile)", "O(access_casefile)"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "modal"]
+    },
+    {
+      "id": "tdfol-dcec-proved-001",
+      "subsystem": "dcec",
+      "description": "DCEC-labeled simple deontic axiom set starter case.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["O(perform_audit)"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "dcec"]
+    },
+    {
+      "id": "tdfol-temporal-unknown-001",
+      "subsystem": "temporal",
+      "description": "Empty TDFOL payload produces unknown starter verdict.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "unknown"]
+    },
+    {
+      "id": "tdfol-temporal-t-axiom-proved-001",
+      "subsystem": "temporal",
+      "description": "Temporal T axiom starter: G(phi) proves phi.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["G(retain_records)"],
+          "goal": "retain_records"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "temporal", "temporal-t-axiom"]
+    },
+    {
+      "id": "tdfol-goal-in-axioms-proved-002",
+      "subsystem": "temporal",
+      "description": "Starter native parity: explicit non-modal goal in axioms is proved.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["audit_logged", "G(access_granted)"],
+          "goal": "audit_logged"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "temporal", "goal-in-axioms"]
+    },
+    {
+      "id": "tdfol-goal-unknown-001",
+      "subsystem": "temporal",
+      "description": "Unrelated goal remains unknown in starter native corpus.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "unknown", "goal-miss"]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "float-number",
+      "kind": "float",
+      "value": 3.5,
+      "expected": 3.5
+    },
+    {
+      "id": "float-string-number",
+      "kind": "float",
+      "value": "4.25",
+      "expected": 4.25
+    },
+    {
+      "id": "float-invalid",
+      "kind": "float",
+      "value": "not-a-number",
+      "expected": 0.0
+    },
+    {
+      "id": "rate-normal",
+      "kind": "rate",
+      "numerator": 2,
+      "denominator": 4,
+      "expected": 0.5
+    },
+    {
+      "id": "rate-clamped-high",
+      "kind": "rate",
+      "numerator": 9,
+      "denominator": 3,
+      "expected": 1.0
+    },
+    {
+      "id": "rate-negative",
+      "kind": "rate",
+      "numerator": -1,
+      "denominator": 3,
+      "expected": 0.0
+    },
+    {
+      "id": "rate-zero-denominator",
+      "kind": "rate",
+      "numerator": 1,
+      "denominator": 0,
+      "expected": 0.0
+    },
+    {
+      "id": "record-validation-empty",
+      "kind": "record_validation_rate",
+      "records": [],
+      "expected": 0.0
+    },
+    {
+      "id": "record-validation-mixed",
+      "kind": "record_validation_rate",
+      "records": [
+        { "requires_validation": true },
+        { "requires_validation": false },
+        { "requires_validation": true },
+        {}
+      ],
+      "expected": 0.5
+    }
+  ]
+}

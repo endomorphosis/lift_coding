@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "frame-graph-guidance-coverage",
+      "documentId": "doc-bridge-1",
+      "graphId": "doc-bridge-1:deontic-flogic",
+      "graphMetadata": {
+        "deontic_norm_count": 1,
+        "source": "deontic_bridge_ir"
+      },
+      "norms": [
+        {
+          "source_id": "us-code-17-101-abcd1234",
+          "norm_type": "obligation",
+          "modality": "obligation",
+          "actor": "provider",
+          "action": "file notice",
+          "legal_frame": {
+            "selected_frame": "copyright_notice",
+            "selected_frame_source": "compiler_guidance.evidence.selected_frame",
+            "compiler_guidance_source": "repair_deontic_bridge_quality_gate",
+            "compiler_guidance_target_view": "deontic.ir",
+            "compiler_guidance_quality_gate": "pass",
+            "compiler_guidance_evidence_source": "samples",
+            "compiler_guidance_legal_ir_underrepresented_components": ["actor", "action"],
+            "compiler_guidance_legal_ir_component_gaps": {
+              "deontic.ir:actor": "missing",
+              "deontic.ir:action": "underrepresented"
+            }
+          }
+        }
+      ],
+      "formulaRecords": [
+        {
+          "source_id": "us-code-17-101-abcd1234",
+          "formula": "O(file_notice(provider))",
+          "target_logic": "deontic_temporal_fol",
+          "proof_ready": true
+        }
+      ],
+      "coverageRecords": [
+        {
+          "source_id": "us-code-17-101-abcd1234",
+          "coverage_summary": {
+            "semantic_family_summary": {
+              "semantic_formula_family": "deontic_temporal"
+            },
+            "passed_targets": ["frame_logic", "deontic_temporal_fol"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "frame-graph-fallback-source-and-partial-records",
+      "documentId": "doc-bridge-2",
+      "graphId": "doc-bridge-2:deontic-flogic",
+      "graphMetadata": {
+        "deontic_norm_count": 2,
+        "source": "deontic_bridge_ir"
+      },
+      "norms": [
+        {
+          "norm_type": "permission",
+          "modality": "permission",
+          "actor": "court",
+          "action": "extend deadline"
+        },
+        {
+          "source_id": "explicit-norm-2",
+          "norm_type": "prohibition",
+          "modality": "prohibition",
+          "actor": "agency",
+          "action": "disclose records",
+          "legal_frame": {
+            "selected_frame": "confidentiality_rule",
+            "selected_frame_source": "compiler_guidance.selected_frame",
+            "compiler_guidance_source": "repair_deontic_bridge_quality_gate",
+            "compiler_guidance_target_view": "knowledge_graphs.neo4j_compat",
+            "compiler_guidance_quality_gate": "passed",
+            "compiler_guidance_evidence_source": "hint_evidence",
+            "compiler_guidance_legal_ir_underrepresented_components": ["graph"],
+            "compiler_guidance_legal_ir_component_gaps": {
+              "knowledge_graphs.neo4j_compat:underrepresented": "true"
+            }
+          }
+        }
+      ],
+      "formulaRecords": [
+        {
+          "source_id": "explicit-norm-2",
+          "formula": "F(disclose_records(agency))",
+          "target_logic": "deontic_fol",
+          "proof_ready": false
+        }
+      ],
+      "coverageRecords": [
+        {
+          "source_id": "doc-bridge-2:norm:0",
+          "coverage_summary": {
+            "semantic_family_summary": {
+              "semantic_formula_family": "permission"
+            },
+            "passed_targets": ["fol"]
+          }
+        },
+        {
+          "source_id": "explicit-norm-2",
+          "coverage_summary": {
+            "semantic_family_summary": {
+              "semantic_formula_family": "prohibition"
+            },
+            "passed_targets": ["frame_logic"]
+          }
+        }
+      ]
+    }
+  ]
+}

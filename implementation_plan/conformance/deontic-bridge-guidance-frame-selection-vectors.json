@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "frame-candidates-ordering",
+      "kind": "frame_candidates",
+      "context": {
+        "document_id": "doc-1",
+        "citation": "CITE-1",
+        "guidance": {
+          "selected_frame": "top-level",
+          "hint_evidence": [
+            { "sample_id": "doc-1", "selected_frame_after": "matched-first", "evidence_rank": 2 },
+            { "sample_id": "other", "selected_frame": "unmatched-second", "evidence_rank": 1 }
+          ]
+        }
+      },
+      "norm": { "document_id": "doc-1" },
+      "expected": [
+        { "source": "hint_evidence.selected_frame_after", "value": "matched-first" },
+        { "source": "hint_evidence.selected_frame", "value": null },
+        { "source": "hint_evidence.frame_after", "value": null },
+        { "source": "hint_evidence.frame", "value": null },
+        { "source": "selected_frame_after", "value": null },
+        { "source": "selected_frame", "value": "top-level" },
+        { "source": "compiler_guidance_selected_frame", "value": null },
+        { "source": "frame_after", "value": null },
+        { "source": "frame", "value": null },
+        { "source": "hint_evidence.selected_frame_after", "value": null },
+        { "source": "hint_evidence.selected_frame", "value": "unmatched-second" },
+        { "source": "hint_evidence.frame_after", "value": null },
+        { "source": "hint_evidence.frame", "value": null }
+      ]
+    },
+    {
+      "id": "selected-frame-from-guidance",
+      "kind": "selected_frame",
+      "context": {
+        "route": "quality_gate",
+        "document_id": "doc-9",
+        "guidance": {
+          "evidence": [
+            { "sample_id": "doc-9", "selected_frame": "Deontic-IR/Main" }
+          ]
+        }
+      },
+      "norm": { "source_id": "doc-9" },
+      "expected": {
+        "selected_frame": "deontic_irmain",
+        "selected_frame_source": "compiler_guidance.evidence.selected_frame",
+        "compiler_guidance_source": "quality_gate"
+      }
+    }
+  ]
+}

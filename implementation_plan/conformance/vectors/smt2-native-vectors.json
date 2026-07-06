@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "smt2-prop-sat-001",
+      "subsystem": "propositional",
+      "description": "SMT2 constant true assertion is satisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(assert true)\n(check-sat)"
+      },
+      "expected": {
+        "status": "sat",
+        "acceptableReasons": ["sat"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "sat"]
+    },
+    {
+      "id": "smt2-prop-unsat-001",
+      "subsystem": "propositional",
+      "description": "SMT2 explicit false assertion is unsatisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(assert false)\n(check-sat)"
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "unsat"]
+    },
+    {
+      "id": "smt2-fol-unsat-001",
+      "subsystem": "fol",
+      "description": "Direct contradiction over one boolean symbol is unsatisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(declare-const p Bool)\n(assert p)\n(assert (not p))\n(check-sat)"
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "contradiction"]
+    },
+    {
+      "id": "smt2-fol-sat-001",
+      "subsystem": "fol",
+      "description": "Single positive assertion over one symbol is satisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(declare-const p Bool)\n(assert p)\n(check-sat)"
+      },
+      "expected": {
+        "status": "sat",
+        "acceptableReasons": ["sat"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "sat"]
+    },
+    {
+      "id": "smt2-temporal-sat-001",
+      "subsystem": "temporal",
+      "description": "SMT2 boolean assertion for temporal-labeled slice is satisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(declare-const withinWindow Bool)\n(assert withinWindow)\n(check-sat)"
+      },
+      "expected": {
+        "status": "sat",
+        "acceptableReasons": ["sat"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "temporal"]
+    },
+    {
+      "id": "smt2-deontic-unsat-001",
+      "subsystem": "deontic",
+      "description": "Contradiction for deontic-labeled atom is unsatisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(declare-const permit_read Bool)\n(assert permit_read)\n(assert (not permit_read))\n(check-sat)"
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "deontic", "contradiction"]
+    },
+    {
+      "id": "smt2-dcec-sat-001",
+      "subsystem": "dcec",
+      "description": "Simple dcec-labeled assertion is satisfiable.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(declare-const event_happens Bool)\n(assert event_happens)\n(check-sat)"
+      },
+      "expected": {
+        "status": "sat",
+        "acceptableReasons": ["sat"],
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "dcec"]
+    },
+    {
+      "id": "smt2-modal-unknown-001",
+      "subsystem": "modal",
+      "description": "No assertions leaves deterministic fallback undecided.",
+      "inputType": "smt2",
+      "input": {
+        "smt2": "(set-logic QF_BOOL)\n(check-sat)"
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["smt2", "unknown"]
+    }
+  ]
+}

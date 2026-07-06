@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    { "id": "family-token-empty", "input": "", "expected": "" },
+    { "id": "family-token-direct", "input": "deontic", "expected": "deontic" },
+    { "id": "family-token-arrow", "input": "policy->temporal", "expected": "temporal" },
+    { "id": "family-token-dot", "input": "ModalLogicFamily.EPISTEMIC", "expected": "epistemic" },
+    { "id": "family-token-colon", "input": "registry:alethic", "expected": "alethic" },
+    { "id": "family-token-slash-pipe", "input": "family/deontic|temporal", "expected": "temporal" },
+    { "id": "family-token-hyphen", "input": "Meta-Temporal", "expected": "meta_temporal" }
+  ]
+}

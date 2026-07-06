@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "docid-empty-norms-full-text-hash",
+      "text": "The agency shall publish the policy.",
+      "norms": [],
+      "expected": "deontic:4ed38ea2f453493d"
+    },
+    {
+      "id": "docid-source-id-overrides-hash",
+      "text": "A person may access records.",
+      "norms": [
+        { "source_id": "usc:5:552a" }
+      ],
+      "expected": "usc:5:552a"
+    },
+    {
+      "id": "docid-prefers-first-source-id",
+      "text": "Contractor must submit reports.",
+      "norms": [
+        { "source_id": "source:first" },
+        { "source_id": "source:second" }
+      ],
+      "expected": "source:first"
+    },
+    {
+      "id": "docid-ignores-empty-source-id",
+      "text": "The board shall not disclose secrets.",
+      "norms": [
+        { "source_id": "" }
+      ],
+      "expected": "deontic:79e9b12903c0494d"
+    }
+  ]
+}

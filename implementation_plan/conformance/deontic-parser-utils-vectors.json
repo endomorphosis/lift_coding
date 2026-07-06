@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "2026-07-05",
+  "modalCases": [
+    {
+      "id": "modal-prohibition-001",
+      "input": "shall not",
+      "expected": {
+        "modality": "prohibition",
+        "operator": "F"
+      }
+    },
+    {
+      "id": "modal-permission-001",
+      "input": "may",
+      "expected": {
+        "modality": "permission",
+        "operator": "P"
+      }
+    },
+    {
+      "id": "modal-obligation-default-001",
+      "input": "must",
+      "expected": {
+        "modality": "obligation",
+        "operator": "O"
+      }
+    }
+  ],
+  "entityCases": [
+    {
+      "id": "entity-government-001",
+      "input": "city agency",
+      "expected": "government_actor"
+    },
+    {
+      "id": "entity-organization-001",
+      "input": "corporation",
+      "expected": "organization"
+    },
+    {
+      "id": "entity-legal-person-001",
+      "input": "contractor",
+      "expected": "legal_person"
+    },
+    {
+      "id": "entity-unknown-001",
+      "input": "",
+      "expected": "unknown"
+    }
+  ],
+  "predicateCases": [
+    {
+      "id": "predicate-stopword-001",
+      "input": "the right of the people",
+      "expected": "RightPeople"
+    },
+    {
+      "id": "predicate-underscore-001",
+      "input": "due_process",
+      "expected": "DueProcess"
+    },
+    {
+      "id": "predicate-empty-001",
+      "input": "",
+      "expected": "P"
+    }
+  ],
+  "recipientCases": [
+    {
+      "id": "recipient-user-001",
+      "input": "report to the user",
+      "expected": "user"
+    },
+    {
+      "id": "recipient-skip-section-001",
+      "input": "submit to this section",
+      "expected": ""
+    },
+    {
+      "id": "recipient-for-beneficiary-001",
+      "input": "provide documents for the applicant",
+      "expected": "applicant"
+    }
+  ]
+}

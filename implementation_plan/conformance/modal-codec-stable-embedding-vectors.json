@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "modal-codec-stable-embedding-empty-001",
+      "text": "",
+      "dimensions": 8
+    },
+    {
+      "id": "modal-codec-stable-embedding-deontic-001",
+      "text": "The party must pay fees.",
+      "dimensions": 8
+    },
+    {
+      "id": "modal-codec-stable-embedding-symbolic-001",
+      "text": "O(Pay)",
+      "dimensions": 16
+    },
+    {
+      "id": "modal-codec-stable-embedding-temporal-001",
+      "text": "The obligation always holds until fulfilled.",
+      "dimensions": 8
+    }
+  ]
+}

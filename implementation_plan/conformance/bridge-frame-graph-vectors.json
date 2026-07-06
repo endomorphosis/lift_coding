@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "fol-tdfol-formula-graph",
+      "bridge": "fol_tdfol",
+      "documentId": "doc-tdfol-1",
+      "graphId": "doc-tdfol-1:tdfol-flogic",
+      "graphMetadata": {
+        "source": "tdfol_bridge_ir",
+        "tdfol_formula_count": 2,
+        "compiler_guidance_formula_count": 1,
+        "guidance_formula_count": 1
+      },
+      "formulaRecords": [
+        {
+          "source_id": "tdfol-formula-1",
+          "formula": "O(file_notice(provider))",
+          "proof_input": "O(file_notice(provider))",
+          "parse_ok": true,
+          "predicates": ["file_notice", "provider"]
+        },
+        {
+          "source_id": "tdfol-formula-2",
+          "formula": "F(disclose_records(agency))",
+          "proof_input": "F(disclose_records(agency))",
+          "parse_ok": false,
+          "predicates": ["disclose_records"]
+        }
+      ]
+    },
+    {
+      "id": "cec-dcec-event-procedure-graph",
+      "bridge": "cec_dcec",
+      "documentId": "doc-dcec-1",
+      "graphId": "doc-dcec-1:dcec-flogic",
+      "graphMetadata": {
+        "dcec_formula_count": 1,
+        "source": "cec_dcec_bridge_ir"
+      },
+      "records": [
+        {
+          "source_id": "dcec-record-1",
+          "actor": "agency",
+          "event": "issue_notice",
+          "formula": "O(issue_notice(agency))",
+          "modality": "obligation",
+          "valid": true,
+          "event_calculus_formula": "Happens(issue_notice,t0)",
+          "event_formula_syntax_valid": true,
+          "event_formula_source": "compiler_guidance.event",
+          "event_formula_fingerprint": "abc123def456",
+          "selected_frame": "notice_frame",
+          "selected_frame_source": "compiler_guidance.selected_frame",
+          "compiler_guidance_source": "repair_cec_dcec_bridge",
+          "procedure_event_records": [
+            {
+              "event_id": "dcec-record-1:procedure:serve_notice",
+              "event": "serve notice",
+              "event_symbol": "serve_notice",
+              "event_order": 1,
+              "relation": "before",
+              "anchor_event": "issue_notice",
+              "proof_role": "precondition"
+            },
+            {
+              "event": "publish notice",
+              "event_symbol": "publish_notice",
+              "event_order": 2,
+              "relation": "after",
+              "anchor_event": "serve_notice",
+              "proof_role": "completion"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

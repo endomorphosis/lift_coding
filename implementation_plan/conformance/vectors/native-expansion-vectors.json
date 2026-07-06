@@ -1,0 +1,4352 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "fol-exp-001",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 1",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f1",
+            "!f1"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-002",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 2",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f2",
+            "!f2"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-003",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 3",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f3",
+            "!f3"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-004",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 4",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f4",
+            "!f4"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-005",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 5",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f5",
+            "!f5"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-006",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 6",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f6",
+            "!f6"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-007",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 7",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f7",
+            "!f7"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "fol-exp-008",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 8",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f8",
+            "g8"
+          ],
+          "goal": "f8"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-009",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 9",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f9",
+            "g9"
+          ],
+          "goal": "f9"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-010",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 10",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f10",
+            "g10"
+          ],
+          "goal": "f10"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-011",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 11",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f11",
+            "g11"
+          ],
+          "goal": "f11"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-012",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 12",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f12",
+            "g12"
+          ],
+          "goal": "f12"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-013",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 13",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f13",
+            "g13"
+          ],
+          "goal": "f13"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-014",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 14",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [
+            "f14",
+            "g14"
+          ],
+          "goal": "f14"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "fol-exp-015",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 15",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "fol-exp-016",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 16",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "fol-exp-017",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 17",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "fol-exp-018",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 18",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "fol-exp-019",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 19",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "fol-exp-020",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 20",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "fol-exp-021",
+      "subsystem": "fol",
+      "description": "Expanded FOL native vector 21",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "fol",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-001",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 1",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t1",
+            "!t1"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-002",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 2",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t2",
+            "!t2"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-003",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 3",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t3",
+            "!t3"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-004",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 4",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t4",
+            "!t4"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-005",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 5",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t5",
+            "!t5"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-006",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 6",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t6",
+            "!t6"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-007",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 7",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t7",
+            "!t7"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "temporal-exp-008",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 8",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t8",
+            "e8"
+          ],
+          "query": "t8"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-009",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 9",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t9",
+            "e9"
+          ],
+          "query": "t9"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-010",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 10",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t10",
+            "e10"
+          ],
+          "query": "t10"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-011",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 11",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t11",
+            "e11"
+          ],
+          "query": "t11"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-012",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 12",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t12",
+            "e12"
+          ],
+          "query": "t12"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-013",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 13",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t13",
+            "e13"
+          ],
+          "query": "t13"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-014",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 14",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [
+            "t14",
+            "e14"
+          ],
+          "query": "t14"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "temporal-exp-015",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 15",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-016",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 16",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-017",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 17",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-018",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 18",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-019",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 19",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-020",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 20",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "temporal-exp-021",
+      "subsystem": "temporal",
+      "description": "Expanded temporal native vector 21",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "temporal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-001",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 1",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m1",
+            "!m1"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-002",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 2",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m2",
+            "!m2"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-003",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 3",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m3",
+            "!m3"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-004",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 4",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m4",
+            "!m4"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-005",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 5",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m5",
+            "!m5"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-006",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 6",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m6",
+            "!m6"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-007",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 7",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m7",
+            "!m7"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "modal-exp-008",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 8",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m8",
+            "w8"
+          ],
+          "query": "m8"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-009",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 9",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m9",
+            "w9"
+          ],
+          "query": "m9"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-010",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 10",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m10",
+            "w10"
+          ],
+          "query": "m10"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-011",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 11",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m11",
+            "w11"
+          ],
+          "query": "m11"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-012",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 12",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m12",
+            "w12"
+          ],
+          "query": "m12"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-013",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 13",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m13",
+            "w13"
+          ],
+          "query": "m13"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-014",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 14",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [
+            "m14",
+            "w14"
+          ],
+          "query": "m14"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "modal-exp-015",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 15",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-016",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 16",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-017",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 17",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-018",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 18",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-019",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 19",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-020",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 20",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "modal-exp-021",
+      "subsystem": "modal",
+      "description": "Expanded modal native vector 21",
+      "inputType": "modalKripke",
+      "input": {
+        "modalKripke": {
+          "worlds": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "modal",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-001",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 1",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d1"
+          ],
+          "prohibitions": [
+            "d1"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-002",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 2",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d2"
+          ],
+          "prohibitions": [
+            "d2"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-003",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 3",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d3"
+          ],
+          "prohibitions": [
+            "d3"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-004",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 4",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d4"
+          ],
+          "prohibitions": [
+            "d4"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-005",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 5",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d5"
+          ],
+          "prohibitions": [
+            "d5"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-006",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 6",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d6"
+          ],
+          "prohibitions": [
+            "d6"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-007",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 7",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d7"
+          ],
+          "prohibitions": [
+            "d7"
+          ],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "deontic-exp-008",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 8",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d8",
+            "o8"
+          ],
+          "prohibitions": [],
+          "query": "d8"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-009",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 9",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d9",
+            "o9"
+          ],
+          "prohibitions": [],
+          "query": "d9"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-010",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 10",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d10",
+            "o10"
+          ],
+          "prohibitions": [],
+          "query": "d10"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-011",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 11",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d11",
+            "o11"
+          ],
+          "prohibitions": [],
+          "query": "d11"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-012",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 12",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d12",
+            "o12"
+          ],
+          "prohibitions": [],
+          "query": "d12"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-013",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 13",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d13",
+            "o13"
+          ],
+          "prohibitions": [],
+          "query": "d13"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-014",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 14",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [
+            "d14",
+            "o14"
+          ],
+          "prohibitions": [],
+          "query": "d14"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "deontic-exp-015",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 15",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-016",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 16",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-017",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 17",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-018",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 18",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-019",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 19",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-020",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 20",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "deontic-exp-021",
+      "subsystem": "deontic",
+      "description": "Expanded deontic native vector 21",
+      "inputType": "deonticConflict",
+      "input": {
+        "deonticConflict": {
+          "obligations": [],
+          "prohibitions": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "deontic",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-001",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 1",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x1)",
+            "F(x1)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-002",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 2",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x2)",
+            "F(x2)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-003",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 3",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x3)",
+            "F(x3)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-004",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 4",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x4)",
+            "F(x4)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-005",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 5",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x5)",
+            "F(x5)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-006",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 6",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x6)",
+            "F(x6)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-007",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 7",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x7)",
+            "F(x7)"
+          ],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "dcec-exp-008",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 8",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x8)",
+            "A8"
+          ],
+          "goal": "O(x8)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-009",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 9",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x9)",
+            "A9"
+          ],
+          "goal": "O(x9)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-010",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 10",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x10)",
+            "A10"
+          ],
+          "goal": "O(x10)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-011",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 11",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x11)",
+            "A11"
+          ],
+          "goal": "O(x11)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-012",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 12",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x12)",
+            "A12"
+          ],
+          "goal": "O(x12)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-013",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 13",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x13)",
+            "A13"
+          ],
+          "goal": "O(x13)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-014",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 14",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [
+            "O(x14)",
+            "A14"
+          ],
+          "goal": "O(x14)"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "dcec-exp-015",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 15",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-016",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 16",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-017",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 17",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-018",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 18",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-019",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 19",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-020",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 20",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "dcec-exp-021",
+      "subsystem": "dcec",
+      "description": "Expanded DCEC native vector 21",
+      "inputType": "dcec",
+      "input": {
+        "dcec": {
+          "premises": [],
+          "goal": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "dcec",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-001",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 1",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n1"
+          ],
+          "facts": [
+            "not:n1"
+          ],
+          "query": "n1"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-002",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 2",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n2"
+          ],
+          "facts": [
+            "not:n2"
+          ],
+          "query": "n2"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-003",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 3",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n3"
+          ],
+          "facts": [
+            "not:n3"
+          ],
+          "query": "n3"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-004",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 4",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n4"
+          ],
+          "facts": [
+            "not:n4"
+          ],
+          "query": "n4"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-005",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 5",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n5"
+          ],
+          "facts": [
+            "not:n5"
+          ],
+          "query": "n5"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-006",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 6",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n6"
+          ],
+          "facts": [
+            "not:n6"
+          ],
+          "query": "n6"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-007",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 7",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n7"
+          ],
+          "facts": [
+            "not:n7"
+          ],
+          "query": "n7"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-008",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 8",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n8"
+          ],
+          "facts": [
+            "n8"
+          ],
+          "query": "n8"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-009",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 9",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n9"
+          ],
+          "facts": [
+            "n9"
+          ],
+          "query": "n9"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-010",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 10",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n10"
+          ],
+          "facts": [
+            "n10"
+          ],
+          "query": "n10"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-011",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 11",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n11"
+          ],
+          "facts": [
+            "n11"
+          ],
+          "query": "n11"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-012",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 12",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n12"
+          ],
+          "facts": [
+            "n12"
+          ],
+          "query": "n12"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-013",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 13",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n13"
+          ],
+          "facts": [
+            "n13"
+          ],
+          "query": "n13"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-014",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 14",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [
+            "derive:n14"
+          ],
+          "facts": [
+            "n14"
+          ],
+          "query": "n14"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-015",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 15",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-016",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 16",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-017",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 17",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-018",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 18",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-019",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 19",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-020",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 20",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "legalnorm-exp-021",
+      "subsystem": "legal-norm",
+      "description": "Expanded legal-norm native vector 21",
+      "inputType": "legalNorm",
+      "input": {
+        "legalNorm": {
+          "norms": [],
+          "facts": [],
+          "query": ""
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "legal-norm",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-001",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 1",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z1"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-002",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 2",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z2"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-003",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 3",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z3"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-004",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 4",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z4"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-005",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 5",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z5"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-006",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 6",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z6"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-007",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 7",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z7"
+          ],
+          "witnessState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "refuted"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-008",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 8",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z8"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-009",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 9",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z9"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-010",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 10",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z10"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-011",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 11",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z11"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-012",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 12",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z12"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-013",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 13",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z13"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-014",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 14",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": [
+            "z14"
+          ],
+          "witnessState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "proved"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-015",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 15",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-016",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 16",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-017",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 17",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-018",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 18",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-019",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 19",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-020",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 20",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    },
+    {
+      "id": "zkpwitness-exp-021",
+      "subsystem": "zkp-statement",
+      "description": "Expanded ZKP witness native vector 21",
+      "inputType": "zkpWitness",
+      "input": {
+        "zkpWitness": {
+          "claims": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp",
+        "witness",
+        "expansion",
+        "unknown"
+      ]
+    }
+  ]
+}

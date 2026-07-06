@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "normalized-empty-rows",
+      "rows": [],
+      "source_text": "Original source text.",
+      "expected": "Original source text."
+    },
+    {
+      "id": "normalized-prefers-text",
+      "rows": [
+        {
+          "text": "  Canonical row text  ",
+          "source_text": "Row source",
+          "support_text": "Row support"
+        }
+      ],
+      "source_text": "Fallback source",
+      "expected": "Canonical row text"
+    },
+    {
+      "id": "normalized-falls-to-source-text",
+      "rows": [
+        {
+          "text": "",
+          "source_text": "  Row source text  ",
+          "support_text": "Row support"
+        }
+      ],
+      "source_text": "Fallback source",
+      "expected": "Row source text"
+    },
+    {
+      "id": "normalized-falls-to-support-text",
+      "rows": [
+        {
+          "text": " ",
+          "source_text": " ",
+          "support_text": "  Row support text  "
+        }
+      ],
+      "source_text": "Fallback source",
+      "expected": "Row support text"
+    },
+    {
+      "id": "normalized-fallback-source",
+      "rows": [
+        {
+          "text": " ",
+          "source_text": " ",
+          "support_text": " "
+        }
+      ],
+      "source_text": "Fallback source text",
+      "expected": "Fallback source text"
+    }
+  ]
+}

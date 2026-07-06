@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "ergo-unavailable-001",
+      "description": "No binary configured should return unavailable error",
+      "query": "P(x)",
+      "config": {
+        "binaryPath": null,
+        "timeoutMs": 1000,
+        "maxRetries": 1
+      },
+      "runner": {
+        "mode": "unused"
+      },
+      "expected": {
+        "success": false,
+        "errorIncludes": "binary not available",
+        "attempts": 0
+      }
+    },
+    {
+      "id": "ergo-process-success-001",
+      "description": "Configured binary plus successful process runner should return a proof payload",
+      "query": "Q(x)",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 1
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "proved(Q)"
+      },
+      "expected": {
+        "success": true,
+        "result": "proved(Q)",
+        "bindings": [],
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-process-retry-001",
+      "description": "Transient process error should be retried up to maxRetries",
+      "query": "R(x)",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "retry-then-success",
+        "stderr": "temporary failure",
+        "stdout": "proved(R)"
+      },
+      "expected": {
+        "success": true,
+        "result": "proved(R)",
+        "bindings": [],
+        "attempts": 2
+      }
+    },
+    {
+      "id": "ergo-process-failure-001",
+      "description": "Persistent process error should surface after retries",
+      "query": "S(x)",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-fail",
+        "stderr": "hard failure"
+      },
+      "expected": {
+        "success": false,
+        "errorIncludes": "hard failure",
+        "attempts": 2
+      }
+    },
+    {
+      "id": "ergo-status-zero-error-marker-001",
+      "description": "Exit-code zero with ++Error output should be treated as a query failure",
+      "query": "T(x)",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "++Error: malformed query"
+      },
+      "expected": {
+        "success": false,
+        "errorIncludes": "++Error",
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-status-zero-no-answer-001",
+      "description": "Exit-code zero with No answer should be treated as an unsuccessful derivation",
+      "query": "U(x)",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "No"
+      },
+      "expected": {
+        "success": false,
+        "errorIncludes": "no solution",
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-status-zero-bindings-001",
+      "description": "Successful output with variable assignments should parse into binding rows",
+      "query": "?X : Dog",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "% comment line\n?X = rex, ?Y = Dog\n?X = fido, ?Y = Dog"
+      },
+      "expected": {
+        "success": true,
+        "result": "% comment line\n?X = rex, ?Y = Dog\n?X = fido, ?Y = Dog",
+        "bindings": [
+          {
+            "?X": "rex",
+            "?Y": "Dog"
+          },
+          {
+            "?X": "fido",
+            "?Y": "Dog"
+          }
+        ],
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-status-zero-bindings-whitespace-002",
+      "description": "Binding parser should normalize extra whitespace and ignore blank/comment lines",
+      "query": "?X : Dog",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "% prelude\n   ?X   =   rex  ,   ?Y = Dog\n\n?X = fido,   ?Y   =   Dog"
+      },
+      "expected": {
+        "success": true,
+        "result": "% prelude\n   ?X   =   rex  ,   ?Y = Dog\n\n?X = fido,   ?Y   =   Dog",
+        "bindings": [
+          {
+            "?X": "rex",
+            "?Y": "Dog"
+          },
+          {
+            "?X": "fido",
+            "?Y": "Dog"
+          }
+        ],
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-status-zero-bindings-duplicate-var-003",
+      "description": "Duplicate variable assignments on one row should keep the last assignment",
+      "query": "?X : Dog",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "?X = rex, ?X = rover, ?Y = Dog"
+      },
+      "expected": {
+        "success": true,
+        "result": "?X = rex, ?X = rover, ?Y = Dog",
+        "bindings": [
+          {
+            "?X": "rover",
+            "?Y": "Dog"
+          }
+        ],
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-status-zero-bindings-malformed-chunks-004",
+      "description": "Malformed or non-variable assignment chunks should be skipped",
+      "query": "?Z : Fact",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "token, X = nope, ?Z = zed, = broken, ?A = 1"
+      },
+      "expected": {
+        "success": true,
+        "result": "token, X = nope, ?Z = zed, = broken, ?A = 1",
+        "bindings": [
+          {
+            "?Z": "zed",
+            "?A": "1"
+          }
+        ],
+        "attempts": 1
+      }
+    },
+    {
+      "id": "ergo-status-zero-no-sentinel-block-005",
+      "description": "Embedded No sentinel in multiline output should fail closed",
+      "query": "?X : Dog",
+      "config": {
+        "binaryPath": "__FAKE_BINARY__",
+        "timeoutMs": 1000,
+        "maxRetries": 2
+      },
+      "runner": {
+        "mode": "always-success",
+        "stdout": "header\nNo\n?X = rex"
+      },
+      "expected": {
+        "success": false,
+        "errorIncludes": "no solution",
+        "attempts": 1
+      }
+    }
+  ]
+}

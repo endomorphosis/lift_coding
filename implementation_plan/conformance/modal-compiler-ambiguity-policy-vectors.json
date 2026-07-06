@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "compiler-policy-deontic-frame",
+      "predictedFamily": "deontic",
+      "targetFamily": "frame"
+    },
+    {
+      "id": "compiler-policy-frame-dynamic",
+      "predictedFamily": "frame",
+      "targetFamily": "dynamic"
+    },
+    {
+      "id": "compiler-policy-epistemic-self-contested",
+      "predictedFamily": "epistemic",
+      "targetFamily": "epistemic"
+    },
+    {
+      "id": "compiler-policy-alethic-dynamic-signal-free",
+      "predictedFamily": "alethic",
+      "targetFamily": "dynamic"
+    },
+    {
+      "id": "compiler-policy-directional-token",
+      "predictedFamily": "route.deontic->modal.frame",
+      "targetFamily": "source/temporal"
+    },
+    {
+      "id": "compiler-policy-unknown-negative",
+      "predictedFamily": "unknown_family",
+      "targetFamily": "deontic"
+    }
+  ]
+}

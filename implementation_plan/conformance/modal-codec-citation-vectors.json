@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "modal-codec-citation-simple-001",
+      "description": "Simple U.S.C. citation normalization, delimiter kind, component signature, and source-id inference.",
+      "title": "42",
+      "section": "1983.",
+      "delimiterSection": "1983",
+      "delimiterKinds": [".", "--", ".-", ";"],
+      "signatures": [
+        { "number": "552", "suffix": "a", "suffixKind": "alpha" },
+        { "number": "1701", "suffix": "q", "suffixKind": "other" },
+        { "number": "1983", "suffix": "", "suffixKind": "" }
+      ],
+      "profiles": [
+        { "componentCount": 1, "suffixComponentCount": 0, "isRange": false },
+        { "componentCount": 1, "suffixComponentCount": 1, "isRange": false },
+        { "componentCount": 2, "suffixComponentCount": 0, "isRange": true },
+        { "componentCount": 3, "suffixComponentCount": 1, "isRange": false }
+      ],
+      "sourceIds": [
+        "us-code-42-1983-0123456789abcdef",
+        "us-code-42-1983-0123456789abcdef",
+        "not-a-source-id"
+      ],
+      "expected": {
+        "canonical": "42 U.S.C. 1983",
+        "coordinate": "42:1983",
+        "delimiterTokens": [],
+        "delimiterKinds": ["dot", "hyphen", "mixed", "other"],
+        "signatures": ["N3A1", "N4O1", "N4"],
+        "profiles": ["single_numeric", "single_alphanumeric", "range", "compound_mixed"],
+        "sourceIdCitations": ["42 U.S.C. 1983", "42 U.S.C. 1983", ""],
+        "inferredCitations": ["42 U.S.C. 1983"]
+      }
+    },
+    {
+      "id": "modal-codec-citation-alphanumeric-001",
+      "description": "Alphanumeric section normalization preserves suffixes and delimiter token order.",
+      "title": "5",
+      "section": "552a:",
+      "delimiterSection": "552a-1.2",
+      "delimiterKinds": ["..", "---", "-."],
+      "signatures": [
+        { "number": "552", "suffix": "a", "suffixKind": "alpha" },
+        { "number": "7", "suffix": "IV", "suffixKind": "roman" }
+      ],
+      "profiles": [
+        { "componentCount": 2, "suffixComponentCount": 0, "isRange": false },
+        { "componentCount": 2, "suffixComponentCount": 2, "isRange": false }
+      ],
+      "sourceIds": ["us-code-5-552a-abcdef0123456789"],
+      "expected": {
+        "canonical": "5 U.S.C. 552a",
+        "coordinate": "5:552a",
+        "delimiterTokens": ["-", "."],
+        "delimiterKinds": ["dot", "hyphen", "mixed"],
+        "signatures": ["N3A1", "N1R2"],
+        "profiles": ["compound_numeric", "compound_alphanumeric"],
+        "sourceIdCitations": ["5 U.S.C. 552a"],
+        "inferredCitations": ["5 U.S.C. 552a"]
+      }
+    },
+    {
+      "id": "modal-codec-citation-empty-and-compound-001",
+      "description": "Empty title/section paths and compound delimiter runs stay structurally aligned.",
+      "title": "",
+      "section": "101..102--103;",
+      "delimiterSection": "101..102--103",
+      "delimiterKinds": ["", "abc", ".--"],
+      "signatures": [
+        { "number": "", "suffix": "", "suffixKind": "" },
+        { "number": "12", "suffix": "zz", "suffixKind": "custom" }
+      ],
+      "profiles": [
+        { "componentCount": 0, "suffixComponentCount": 0, "isRange": false },
+        { "componentCount": 4, "suffixComponentCount": 0, "isRange": false }
+      ],
+      "sourceIds": ["", "us-code-12-1701q-fedcba9876543210"],
+      "expected": {
+        "canonical": "",
+        "coordinate": "",
+        "delimiterTokens": ["..", "--"],
+        "delimiterKinds": ["", "other", "mixed"],
+        "signatures": ["N0", "N2O2"],
+        "profiles": ["", "compound_numeric"],
+        "sourceIdCitations": ["", "12 U.S.C. 1701q"],
+        "inferredCitations": ["12 U.S.C. 1701q"]
+      }
+    }
+  ]
+}

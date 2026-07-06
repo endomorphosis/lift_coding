@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "route-prefers-compiler-guidance-route",
+      "guidance": {
+        "compiler_guidance_route": "route-a",
+        "route": "route-b",
+        "action": "route-c"
+      },
+      "expected": "route-a"
+    },
+    {
+      "id": "route-falls-back-to-route",
+      "guidance": {
+        "compiler_guidance_route": "   ",
+        "route": "route-b",
+        "action": "route-c"
+      },
+      "expected": "route-b"
+    },
+    {
+      "id": "route-falls-back-to-action",
+      "guidance": {
+        "action": "route-c",
+        "target_component": "route-d"
+      },
+      "expected": "route-c"
+    },
+    {
+      "id": "route-falls-back-to-target-component",
+      "guidance": {
+        "target_component": "deontic.ir"
+      },
+      "expected": "deontic.ir"
+    },
+    {
+      "id": "route-falls-back-to-target",
+      "guidance": {
+        "target": "repair_deontic_bridge_quality_gate"
+      },
+      "expected": "repair_deontic_bridge_quality_gate"
+    },
+    {
+      "id": "route-falls-back-to-first-mapping-key",
+      "guidance": {
+        "compiler_guidance_todo_routes": {
+          "todo-route-1": true,
+          "todo-route-2": true
+        }
+      },
+      "expected": "todo-route-1"
+    },
+    {
+      "id": "route-ignores-array-routes",
+      "guidance": {
+        "compiler_guidance_todo_routes": ["todo-route-1", "todo-route-2"]
+      },
+      "expected": "repair_deontic_bridge_quality_gate"
+    },
+    {
+      "id": "route-default",
+      "guidance": {},
+      "expected": "repair_deontic_bridge_quality_gate"
+    }
+  ]
+}

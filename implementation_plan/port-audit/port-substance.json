@@ -1,0 +1,3958 @@
+{
+  "summary": {
+    "modules": 288,
+    "pyLocTotal": 153015,
+    "tsLocTotal": 94262,
+    "verdicts": {
+      "SUBSTANTIVE": 229,
+      "MISSING": 41,
+      "THIN": 18
+    }
+  },
+  "modules": [
+    {
+      "module": "CEC/cec_framework.py",
+      "pyLoc": 355,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/cec-framework.ts",
+        "sk:services/cec-framework.ts"
+      ],
+      "tsLoc": 244,
+      "locRatio": 0.69,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/dcec_wrapper.py",
+      "pyLoc": 257,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/eng_dcec_wrapper.py",
+      "pyLoc": 278,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/native/advanced_inference.py",
+      "pyLoc": 392,
+      "pySymbols": 16,
+      "tsFiles": [
+        "sk:services/cec-advanced-inference.ts",
+        "sk:services/cec-advanced-inference.ts"
+      ],
+      "tsLoc": 540,
+      "locRatio": 1.38,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/ambiguity_resolver.py",
+      "pyLoc": 235,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/ambiguity-resolver.ts",
+        "sk:services/ambiguity-resolver.ts"
+      ],
+      "tsLoc": 240,
+      "locRatio": 1.02,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/cec_proof_cache.py",
+      "pyLoc": 342,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/cec-proof-cache.ts",
+        "sk:services/cec-proof-cache.ts"
+      ],
+      "tsLoc": 180,
+      "locRatio": 0.53,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/cec_zkp_integration.py",
+      "pyLoc": 460,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/cec-zkp-integration.ts",
+        "sk:services/cec-zkp-integration.ts"
+      ],
+      "tsLoc": 272,
+      "locRatio": 0.59,
+      "hollowMarkers": 4,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/context_manager.py",
+      "pyLoc": 305,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/cec-context-manager.ts",
+        "sk:services/cec-context-manager.ts",
+        "sk:context.ts"
+      ],
+      "tsLoc": 318,
+      "locRatio": 1.04,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_cleaning.py",
+      "pyLoc": 221,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/dcec-cleaning.ts",
+        "sk:services/dcec-cleaning.ts"
+      ],
+      "tsLoc": 220,
+      "locRatio": 1.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_core.py",
+      "pyLoc": 1186,
+      "pySymbols": 19,
+      "tsFiles": [
+        "sk:services/dcec-core-types.ts",
+        "sk:services/dcec-core-types.ts",
+        "sk:commands/core.ts"
+      ],
+      "tsLoc": 589,
+      "locRatio": 0.5,
+      "hollowMarkers": 4,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_english_grammar.py",
+      "pyLoc": 518,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/dcec-english-grammar.ts",
+        "sk:services/dcec-english-grammar.ts"
+      ],
+      "tsLoc": 400,
+      "locRatio": 0.77,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_integration.py",
+      "pyLoc": 313,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/dcec-integration.ts",
+        "sk:services/dcec-integration.ts"
+      ],
+      "tsLoc": 64,
+      "locRatio": 0.2,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "CEC/native/dcec_namespace.py",
+      "pyLoc": 315,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/cec-dcec-namespace.ts",
+        "sk:services/cec-dcec-namespace.ts"
+      ],
+      "tsLoc": 280,
+      "locRatio": 0.89,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_parsing.py",
+      "pyLoc": 345,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/dcec-parsing.ts",
+        "sk:services/dcec-parsing.ts"
+      ],
+      "tsLoc": 274,
+      "locRatio": 0.79,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_prototypes.py",
+      "pyLoc": 334,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/dcec-prototypes.ts",
+        "sk:services/dcec-prototypes.ts"
+      ],
+      "tsLoc": 212,
+      "locRatio": 0.63,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/dcec_types.py",
+      "pyLoc": 312,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/provers/dcec-types.ts",
+        "sk:services/provers/dcec-types.ts"
+      ],
+      "tsLoc": 290,
+      "locRatio": 0.93,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/enhanced_grammar_parser.py",
+      "pyLoc": 310,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/enhanced-grammar-parser.ts",
+        "sk:services/enhanced-grammar-parser.ts"
+      ],
+      "tsLoc": 90,
+      "locRatio": 0.29,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "CEC/native/error_handling.py",
+      "pyLoc": 271,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/dcec-error-handling.ts",
+        "sk:services/dcec-error-handling.ts"
+      ],
+      "tsLoc": 212,
+      "locRatio": 0.78,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/event_calculus.py",
+      "pyLoc": 417,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/event-calculus.ts",
+        "sk:services/event-calculus.ts"
+      ],
+      "tsLoc": 210,
+      "locRatio": 0.5,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/exceptions.py",
+      "pyLoc": 265,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/tdfol-exceptions.ts",
+        "sk:services/tdfol-exceptions.ts"
+      ],
+      "tsLoc": 260,
+      "locRatio": 0.98,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/fluents.py",
+      "pyLoc": 407,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/cec-fluents.ts",
+        "sk:services/cec-fluents.ts"
+      ],
+      "tsLoc": 202,
+      "locRatio": 0.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/grammar_engine.py",
+      "pyLoc": 345,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/cec-grammar-engine.ts",
+        "sk:services/cec-grammar-engine.ts"
+      ],
+      "tsLoc": 152,
+      "locRatio": 0.44,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/grammar_loader.py",
+      "pyLoc": 231,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/grammar-loader.ts",
+        "sk:services/grammar-loader.ts"
+      ],
+      "tsLoc": 236,
+      "locRatio": 1.02,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/inference_rules/base.py",
+      "pyLoc": 70,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/native/inference_rules/cognitive.py",
+      "pyLoc": 452,
+      "pySymbols": 13,
+      "tsFiles": [
+        "sk:services/cognitive-inference-rules.ts",
+        "sk:services/cognitive-inference-rules.ts"
+      ],
+      "tsLoc": 456,
+      "locRatio": 1.01,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/inference_rules/deontic.py",
+      "pyLoc": 299,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/deontic-analyzer.ts",
+        "sk:services/deontic-analyzer.ts",
+        "sk:services/deontic-norms-bridge.ts"
+      ],
+      "tsLoc": 556,
+      "locRatio": 1.86,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/inference_rules/modal.py",
+      "pyLoc": 199,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/cec-modal-temporal-deontic-rules.ts",
+        "sk:services/cec-modal-temporal-deontic-rules.ts",
+        "sk:services/modal-compiler.ts"
+      ],
+      "tsLoc": 990,
+      "locRatio": 4.97,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/inference_rules/propositional.py",
+      "pyLoc": 270,
+      "pySymbols": 10,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/native/inference_rules/resolution.py",
+      "pyLoc": 316,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/cec-resolution-rules.ts",
+        "sk:services/cec-resolution-rules.ts"
+      ],
+      "tsLoc": 556,
+      "locRatio": 1.76,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/inference_rules/specialized.py",
+      "pyLoc": 385,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/cec-specialized-rules.ts",
+        "sk:services/cec-specialized-rules.ts"
+      ],
+      "tsLoc": 304,
+      "locRatio": 0.79,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/inference_rules/temporal.py",
+      "pyLoc": 381,
+      "pySymbols": 15,
+      "tsFiles": [
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/cec-modal-temporal-deontic-rules.ts"
+      ],
+      "tsLoc": 906,
+      "locRatio": 2.38,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/lemma_generation.py",
+      "pyLoc": 380,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/lemma-generation.ts",
+        "sk:services/lemma-generation.ts"
+      ],
+      "tsLoc": 250,
+      "locRatio": 0.66,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/modal_tableaux.py",
+      "pyLoc": 430,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/modal-tableaux.ts",
+        "sk:services/modal-tableaux.ts"
+      ],
+      "tsLoc": 760,
+      "locRatio": 1.77,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/nl_converter.py",
+      "pyLoc": 343,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/cec-nl-converter.ts",
+        "sk:services/cec-nl-converter.ts"
+      ],
+      "tsLoc": 148,
+      "locRatio": 0.43,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/problem_parser.py",
+      "pyLoc": 263,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:commands/parser.ts"
+      ],
+      "tsLoc": 54,
+      "locRatio": 0.21,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "CEC/native/proof_optimization.py",
+      "pyLoc": 294,
+      "pySymbols": 7,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/native/proof_strategies.py",
+      "pyLoc": 335,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/proof-strategies.ts",
+        "sk:services/proof-strategies.ts"
+      ],
+      "tsLoc": 326,
+      "locRatio": 0.97,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/prover_core.py",
+      "pyLoc": 533,
+      "pySymbols": 12,
+      "tsFiles": [
+        "sk:services/cec-prover-core.ts",
+        "sk:services/cec-prover-core.ts",
+        "sk:commands/core.ts"
+      ],
+      "tsLoc": 2023,
+      "locRatio": 3.8,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/prover_core_extended_rules.py",
+      "pyLoc": 821,
+      "pySymbols": 39,
+      "tsFiles": [
+        "sk:commands/core.ts"
+      ],
+      "tsLoc": 235,
+      "locRatio": 0.29,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "CEC/native/shadow_prover.py",
+      "pyLoc": 548,
+      "pySymbols": 14,
+      "tsFiles": [
+        "sk:services/shadow-prover.ts",
+        "sk:services/shadow-prover.ts"
+      ],
+      "tsLoc": 346,
+      "locRatio": 0.63,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/syntax_tree.py",
+      "pyLoc": 314,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/cec-syntax-tree.ts",
+        "sk:services/cec-syntax-tree.ts"
+      ],
+      "tsLoc": 126,
+      "locRatio": 0.4,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/temporal.py",
+      "pyLoc": 322,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/cec-modal-temporal-deontic-rules.ts"
+      ],
+      "tsLoc": 906,
+      "locRatio": 2.81,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/native/types.py",
+      "pyLoc": 336,
+      "pySymbols": 15,
+      "tsFiles": [
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 109,
+      "locRatio": 0.32,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/base_parser.py",
+      "pyLoc": 277,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/base-parser.ts",
+        "sk:services/base-parser.ts"
+      ],
+      "tsLoc": 284,
+      "locRatio": 1.03,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/dcec_to_ucan_bridge.py",
+      "pyLoc": 214,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:commands/bridge.ts"
+      ],
+      "tsLoc": 239,
+      "locRatio": 1.12,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/domain_vocabularies/domain_vocab.py",
+      "pyLoc": 372,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/domain-vocabulary.ts",
+        "sk:services/domain-vocabulary.ts",
+        "sk:types/ai.ts"
+      ],
+      "tsLoc": 326,
+      "locRatio": 0.88,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/french_parser.py",
+      "pyLoc": 451,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/french-parser.ts",
+        "sk:services/french-parser.ts"
+      ],
+      "tsLoc": 298,
+      "locRatio": 0.66,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/german_parser.py",
+      "pyLoc": 480,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/german-parser.ts",
+        "sk:services/german-parser.ts"
+      ],
+      "tsLoc": 366,
+      "locRatio": 0.76,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/grammar_nl_policy_compiler.py",
+      "pyLoc": 367,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/grammar-nl-policy-compiler.ts",
+        "sk:services/grammar-nl-policy-compiler.ts"
+      ],
+      "tsLoc": 222,
+      "locRatio": 0.6,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/language_detector.py",
+      "pyLoc": 320,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/cec-language-detector.ts",
+        "sk:services/cec-language-detector.ts"
+      ],
+      "tsLoc": 100,
+      "locRatio": 0.31,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/nl_policy_conflict_detector.py",
+      "pyLoc": 658,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/nl-policy-conflict-detector.ts",
+        "sk:services/nl-policy-conflict-detector.ts"
+      ],
+      "tsLoc": 324,
+      "locRatio": 0.49,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/nl_to_policy_compiler.py",
+      "pyLoc": 335,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/nl/portuguese_parser.py",
+      "pyLoc": 144,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/portuguese-parser.ts",
+        "sk:services/portuguese-parser.ts"
+      ],
+      "tsLoc": 354,
+      "locRatio": 2.46,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/nl/spanish_parser.py",
+      "pyLoc": 433,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/spanish-parser.ts",
+        "sk:services/spanish-parser.ts"
+      ],
+      "tsLoc": 260,
+      "locRatio": 0.6,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/optimization/formula_cache.py",
+      "pyLoc": 416,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/formula-cache.ts",
+        "sk:services/formula-cache.ts"
+      ],
+      "tsLoc": 320,
+      "locRatio": 0.77,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/optimization/profiling_utils.py",
+      "pyLoc": 324,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:components/permissions/utils.ts",
+        "sk:components/binary-feedback/utils.ts",
+        "sk:tools/BashTool/utils.ts"
+      ],
+      "tsLoc": 265,
+      "locRatio": 0.82,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/provers/e_prover_adapter.py",
+      "pyLoc": 218,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/provers/prover_manager.py",
+      "pyLoc": 363,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/cec-prover-manager.ts",
+        "sk:services/cec-prover-manager.ts",
+        "sk:utils/errors/manager.ts"
+      ],
+      "tsLoc": 627,
+      "locRatio": 1.73,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/provers/tptp_utils.py",
+      "pyLoc": 200,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:components/permissions/utils.ts",
+        "sk:components/binary-feedback/utils.ts",
+        "sk:tools/BashTool/utils.ts"
+      ],
+      "tsLoc": 265,
+      "locRatio": 1.32,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/provers/vampire_adapter.py",
+      "pyLoc": 199,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "CEC/provers/z3_adapter.py",
+      "pyLoc": 400,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/z3-adapter.ts",
+        "sk:services/z3-adapter.ts"
+      ],
+      "tsLoc": 288,
+      "locRatio": 0.72,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/shadow_prover_wrapper.py",
+      "pyLoc": 433,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/shadow-prover-wrapper.ts",
+        "sk:services/shadow-prover-wrapper.ts"
+      ],
+      "tsLoc": 148,
+      "locRatio": 0.34,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "CEC/talos_wrapper.py",
+      "pyLoc": 302,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/countermodel_visualizer.py",
+      "pyLoc": 895,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:utils/model.ts",
+        "sk:ai/models/model.ts",
+        "sk:commands/model.ts"
+      ],
+      "tsLoc": 405,
+      "locRatio": 0.45,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/countermodels.py",
+      "pyLoc": 303,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:utils/model.ts",
+        "sk:ai/models/model.ts",
+        "sk:commands/model.ts"
+      ],
+      "tsLoc": 405,
+      "locRatio": 1.34,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/exceptions.py",
+      "pyLoc": 563,
+      "pySymbols": 11,
+      "tsFiles": [
+        "sk:services/tdfol-exceptions.ts",
+        "sk:services/tdfol-exceptions.ts"
+      ],
+      "tsLoc": 260,
+      "locRatio": 0.46,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/expansion_rules.py",
+      "pyLoc": 153,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/tdfol-expansion-rules.ts",
+        "sk:services/tdfol-expansion-rules.ts"
+      ],
+      "tsLoc": 300,
+      "locRatio": 1.96,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/formula_dependency_graph.py",
+      "pyLoc": 657,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/formula-dependency-graph.ts",
+        "sk:services/formula-dependency-graph.ts"
+      ],
+      "tsLoc": 598,
+      "locRatio": 0.91,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/inference_rules/base.py",
+      "pyLoc": 80,
+      "pySymbols": 1,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/inference_rules/deontic.py",
+      "pyLoc": 323,
+      "pySymbols": 16,
+      "tsFiles": [
+        "sk:services/deontic-analyzer.ts",
+        "sk:services/deontic-analyzer.ts",
+        "sk:services/deontic-norms-bridge.ts"
+      ],
+      "tsLoc": 556,
+      "locRatio": 1.72,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/inference_rules/first_order.py",
+      "pyLoc": 54,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/inference_rules/propositional.py",
+      "pyLoc": 263,
+      "pySymbols": 13,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/inference_rules/temporal.py",
+      "pyLoc": 434,
+      "pySymbols": 20,
+      "tsFiles": [
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/cec-modal-temporal-deontic-rules.ts"
+      ],
+      "tsLoc": 906,
+      "locRatio": 2.09,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/inference_rules/temporal_deontic.py",
+      "pyLoc": 206,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/cec-modal-temporal-deontic-rules.ts"
+      ],
+      "tsLoc": 906,
+      "locRatio": 4.4,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/modal_tableaux.py",
+      "pyLoc": 563,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/modal-tableaux.ts",
+        "sk:services/modal-tableaux.ts"
+      ],
+      "tsLoc": 760,
+      "locRatio": 1.35,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/nl/llm.py",
+      "pyLoc": 541,
+      "pySymbols": 7,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/nl/tdfol_nl_api.py",
+      "pyLoc": 223,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/tdfol-nl-api.ts",
+        "sk:services/tdfol-nl-api.ts"
+      ],
+      "tsLoc": 204,
+      "locRatio": 0.91,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/nl/tdfol_nl_context.py",
+      "pyLoc": 258,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:context.ts",
+        "sk:commands/context.ts"
+      ],
+      "tsLoc": 227,
+      "locRatio": 0.88,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/nl/tdfol_nl_generator.py",
+      "pyLoc": 369,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/tdfol-nl-generator.ts",
+        "sk:services/tdfol-nl-generator.ts"
+      ],
+      "tsLoc": 210,
+      "locRatio": 0.57,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/nl/tdfol_nl_patterns.py",
+      "pyLoc": 745,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/tdfol-nl-patterns.ts",
+        "sk:services/tdfol-nl-patterns.ts"
+      ],
+      "tsLoc": 516,
+      "locRatio": 0.69,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/nl/tdfol_nl_preprocessor.py",
+      "pyLoc": 254,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/tdfol-nl-preprocessor.ts",
+        "sk:services/tdfol-nl-preprocessor.ts"
+      ],
+      "tsLoc": 364,
+      "locRatio": 1.43,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/nl/utils.py",
+      "pyLoc": 180,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:components/permissions/utils.ts",
+        "sk:components/binary-feedback/utils.ts",
+        "sk:tools/BashTool/utils.ts",
+        "sk:tools/FileEditTool/utils.ts"
+      ],
+      "tsLoc": 313,
+      "locRatio": 1.74,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/p2p/ipfs_proof_storage.py",
+      "pyLoc": 248,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:types/storage.ts"
+      ],
+      "tsLoc": 79,
+      "locRatio": 0.32,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/performance_dashboard.py",
+      "pyLoc": 1063,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/performance-dashboard.ts",
+        "sk:services/performance-dashboard.ts"
+      ],
+      "tsLoc": 338,
+      "locRatio": 0.32,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/performance_metrics.py",
+      "pyLoc": 463,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/tdfol-performance-metrics.ts",
+        "sk:services/tdfol-performance-metrics.ts"
+      ],
+      "tsLoc": 464,
+      "locRatio": 1.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/performance_profiler.py",
+      "pyLoc": 1128,
+      "pySymbols": 11,
+      "tsFiles": [
+        "sk:services/performance-profiler.ts",
+        "sk:services/performance-profiler.ts"
+      ],
+      "tsLoc": 322,
+      "locRatio": 0.29,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "TDFOL/proof_explainer.py",
+      "pyLoc": 477,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/proof-explainer.ts",
+        "sk:services/proof-explainer.ts"
+      ],
+      "tsLoc": 428,
+      "locRatio": 0.9,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/proof_tree_visualizer.py",
+      "pyLoc": 756,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/proof-tree.ts",
+        "sk:services/proof-tree.ts"
+      ],
+      "tsLoc": 322,
+      "locRatio": 0.43,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/security_validator.py",
+      "pyLoc": 572,
+      "pySymbols": 10,
+      "tsFiles": [
+        "sk:services/tdfol-security-validator.ts",
+        "sk:services/tdfol-security-validator.ts"
+      ],
+      "tsLoc": 340,
+      "locRatio": 0.59,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/strategies/base.py",
+      "pyLoc": 115,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/strategies/cec_delegate.py",
+      "pyLoc": 166,
+      "pySymbols": 1,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/strategies/forward_chaining.py",
+      "pyLoc": 260,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:types/ai.ts"
+      ],
+      "tsLoc": 150,
+      "locRatio": 0.58,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/strategies/modal_tableaux.py",
+      "pyLoc": 274,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/modal-tableaux.ts",
+        "sk:services/modal-tableaux.ts"
+      ],
+      "tsLoc": 760,
+      "locRatio": 2.77,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/strategies/strategy_selector.py",
+      "pyLoc": 192,
+      "pySymbols": 1,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/tdfol_converter.py",
+      "pyLoc": 378,
+      "pySymbols": 8,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/tdfol_core.py",
+      "pyLoc": 593,
+      "pySymbols": 38,
+      "tsFiles": [
+        "sk:services/tdfol-core.ts",
+        "sk:services/tdfol-core.ts"
+      ],
+      "tsLoc": 968,
+      "locRatio": 1.63,
+      "hollowMarkers": 4,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/tdfol_dcec_parser.py",
+      "pyLoc": 274,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/tdfol-dcec-parser.ts",
+        "sk:services/tdfol-dcec-parser.ts"
+      ],
+      "tsLoc": 304,
+      "locRatio": 1.11,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/tdfol_inference_rules.py",
+      "pyLoc": 68,
+      "pySymbols": 0,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/tdfol_optimization.py",
+      "pyLoc": 409,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/tdfol-optimization.ts",
+        "sk:services/tdfol-optimization.ts"
+      ],
+      "tsLoc": 252,
+      "locRatio": 0.62,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/tdfol_parser.py",
+      "pyLoc": 650,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/tdfol-parser.ts",
+        "sk:services/tdfol-parser.ts"
+      ],
+      "tsLoc": 934,
+      "locRatio": 1.44,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/tdfol_performance_engine.py",
+      "pyLoc": 396,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/tdfol-performance-engine.ts",
+        "sk:services/tdfol-performance-engine.ts"
+      ],
+      "tsLoc": 350,
+      "locRatio": 0.88,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/tdfol_proof_cache.py",
+      "pyLoc": 59,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "TDFOL/tdfol_prover.py",
+      "pyLoc": 484,
+      "pySymbols": 11,
+      "tsFiles": [
+        "sk:services/tdfol-prover.ts",
+        "sk:services/tdfol-prover.ts"
+      ],
+      "tsLoc": 514,
+      "locRatio": 1.06,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "TDFOL/zkp_integration.py",
+      "pyLoc": 500,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/flogic-zkp-integration.ts",
+        "sk:services/flogic-zkp-integration.ts",
+        "sk:services/tdfol-zkp-integration.ts"
+      ],
+      "tsLoc": 484,
+      "locRatio": 0.97,
+      "hollowMarkers": 3,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "api.py",
+      "pyLoc": 598,
+      "pySymbols": 4,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "api_server.py",
+      "pyLoc": 85,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "batch_processing.py",
+      "pyLoc": 313,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/logic-batch-processing.ts",
+        "sk:services/logic-batch-processing.ts"
+      ],
+      "tsLoc": 330,
+      "locRatio": 1.05,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "benchmarks.py",
+      "pyLoc": 307,
+      "pySymbols": 4,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "bridge/cec_dcec.py",
+      "pyLoc": 3759,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/cec-dcec-namespace.ts",
+        "sk:services/cec-dcec-namespace.ts",
+        "sk:services/cec-dcec-bridge.ts"
+      ],
+      "tsLoc": 482,
+      "locRatio": 0.13,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "bridge/deontic_norms.py",
+      "pyLoc": 2708,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/deontic-norms-bridge.ts",
+        "sk:services/deontic-norms-bridge.ts"
+      ],
+      "tsLoc": 424,
+      "locRatio": 0.16,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "bridge/external_prover_router.py",
+      "pyLoc": 1487,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/prover-router.ts",
+        "sk:services/prover-router.ts"
+      ],
+      "tsLoc": 580,
+      "locRatio": 0.39,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "bridge/fol_tdfol.py",
+      "pyLoc": 2076,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/fol-tdfol-bridge.ts",
+        "sk:services/fol-tdfol-bridge.ts"
+      ],
+      "tsLoc": 356,
+      "locRatio": 0.17,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "bridge/modal_frame_logic.py",
+      "pyLoc": 636,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:utils/log.ts"
+      ],
+      "tsLoc": 317,
+      "locRatio": 0.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "bridge/multiview.py",
+      "pyLoc": 4095,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/bridge-multiview.ts",
+        "sk:services/bridge-multiview.ts"
+      ],
+      "tsLoc": 360,
+      "locRatio": 0.09,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "bridge/registry.py",
+      "pyLoc": 261,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/registry.ts",
+        "sk:integration/registry.ts",
+        "sk:services/registry.ts",
+        "sk:ai/models/registry.ts",
+        "sk:commands/registry.ts",
+        "sk:models/registry.ts",
+        "sk:storage/registry.ts",
+        "sk:tasks/registry.ts"
+      ],
+      "tsLoc": 1126,
+      "locRatio": 4.31,
+      "hollowMarkers": 12,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "bridge/types.py",
+      "pyLoc": 351,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 109,
+      "locRatio": 0.31,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "bridge/zkp_attestation.py",
+      "pyLoc": 753,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/zkp-attestation-bridge.ts",
+        "sk:services/zkp-attestation-bridge.ts"
+      ],
+      "tsLoc": 440,
+      "locRatio": 0.58,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "cli.py",
+      "pyLoc": 129,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:cli.ts"
+      ],
+      "tsLoc": 222,
+      "locRatio": 1.72,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "common/bounded_cache.py",
+      "pyLoc": 181,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "common/converters.py",
+      "pyLoc": 308,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/logic-converters.ts",
+        "sk:services/logic-converters.ts"
+      ],
+      "tsLoc": 722,
+      "locRatio": 2.34,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "common/errors.py",
+      "pyLoc": 65,
+      "pySymbols": 10,
+      "tsFiles": [
+        "sk:utils/errors.ts"
+      ],
+      "tsLoc": 13,
+      "locRatio": 0.2,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "common/feature_detection.py",
+      "pyLoc": 129,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/feature-detection.ts",
+        "sk:services/feature-detection.ts"
+      ],
+      "tsLoc": 276,
+      "locRatio": 2.14,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "common/proof_cache.py",
+      "pyLoc": 655,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/proof-cache-base.ts",
+        "sk:services/proof-cache-base.ts",
+        "sk:services/flogic-proof-cache.ts"
+      ],
+      "tsLoc": 550,
+      "locRatio": 0.84,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "common/utility_monitor.py",
+      "pyLoc": 174,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/utility-monitor.ts",
+        "sk:services/utility-monitor.ts"
+      ],
+      "tsLoc": 366,
+      "locRatio": 2.1,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "common/validators.py",
+      "pyLoc": 225,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/logic-validators.ts",
+        "sk:services/logic-validators.ts"
+      ],
+      "tsLoc": 306,
+      "locRatio": 1.36,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "config.py",
+      "pyLoc": 251,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:utils/config.ts",
+        "sk:commands/config.ts"
+      ],
+      "tsLoc": 857,
+      "locRatio": 3.41,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/analyzer.py",
+      "pyLoc": 403,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/deontic-analyzer.ts",
+        "sk:services/deontic-analyzer.ts",
+        "sk:services/legal-symbolic-analyzer.ts"
+      ],
+      "tsLoc": 541,
+      "locRatio": 1.34,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/converter.py",
+      "pyLoc": 499,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/cec-nl-converter.ts",
+        "sk:services/cec-nl-converter.ts",
+        "sk:services/deontic-logic-converter.ts"
+      ],
+      "tsLoc": 355,
+      "locRatio": 0.71,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/decoder.py",
+      "pyLoc": 770,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/deontic/legal-norm-decoder.ts",
+        "sk:services/deontic/legal-norm-decoder.ts",
+        "sk:services/deontic/decoder-provenance.ts"
+      ],
+      "tsLoc": 741,
+      "locRatio": 0.96,
+      "hollowMarkers": 4,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/exports.py",
+      "pyLoc": 4502,
+      "pySymbols": 43,
+      "tsFiles": [
+        "sk:services/deontic-exports.ts",
+        "sk:services/deontic-exports.ts"
+      ],
+      "tsLoc": 2442,
+      "locRatio": 0.54,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/formula_builder.py",
+      "pyLoc": 5984,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/deontic-formula-builder.ts",
+        "sk:services/deontic-formula-builder.ts"
+      ],
+      "tsLoc": 628,
+      "locRatio": 0.1,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "deontic/graph.py",
+      "pyLoc": 489,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:ai/thinking/graph.ts"
+      ],
+      "tsLoc": 280,
+      "locRatio": 0.57,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/ir.py",
+      "pyLoc": 2439,
+      "pySymbols": 8,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "deontic/knowledge_base.py",
+      "pyLoc": 184,
+      "pySymbols": 14,
+      "tsFiles": [
+        "sk:services/deontic/deontic-knowledge-base.ts",
+        "sk:services/deontic/deontic-knowledge-base.ts"
+      ],
+      "tsLoc": 430,
+      "locRatio": 2.34,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/legal_text_to_deontic.py",
+      "pyLoc": 242,
+      "pySymbols": 1,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "deontic/metrics.py",
+      "pyLoc": 333,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/observability-metrics-prometheus.ts",
+        "sk:services/observability-metrics-prometheus.ts",
+        "sk:services/tdfol-performance-metrics.ts"
+      ],
+      "tsLoc": 594,
+      "locRatio": 1.78,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/prover_syntax.py",
+      "pyLoc": 1527,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/deontic/prover-syntax-builder.ts",
+        "sk:services/deontic/prover-syntax-builder.ts"
+      ],
+      "tsLoc": 704,
+      "locRatio": 0.46,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/support_map.py",
+      "pyLoc": 141,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/deontic/support-map.ts",
+        "sk:services/deontic/support-map.ts"
+      ],
+      "tsLoc": 158,
+      "locRatio": 1.12,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "deontic/utils/deontic_parser.py",
+      "pyLoc": 5060,
+      "pySymbols": 72,
+      "tsFiles": [
+        "sk:services/deontic/deontic-parser-utils.ts",
+        "sk:services/deontic/deontic-parser-utils.ts",
+        "sk:commands/parser.ts"
+      ],
+      "tsLoc": 342,
+      "locRatio": 0.07,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "e2e_validation.py",
+      "pyLoc": 524,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "external_provers/formula_analyzer.py",
+      "pyLoc": 539,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/formula-analyzer.ts",
+        "sk:services/formula-analyzer.ts"
+      ],
+      "tsLoc": 538,
+      "locRatio": 1.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/interactive/coq_prover_bridge.py",
+      "pyLoc": 323,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:commands/bridge.ts"
+      ],
+      "tsLoc": 239,
+      "locRatio": 0.74,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/interactive/lean_prover_bridge.py",
+      "pyLoc": 321,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:commands/bridge.ts"
+      ],
+      "tsLoc": 239,
+      "locRatio": 0.74,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/lazy_installer.py",
+      "pyLoc": 177,
+      "pySymbols": 7,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "external_provers/monitoring.py",
+      "pyLoc": 266,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:utils/performance/monitor.ts"
+      ],
+      "tsLoc": 128,
+      "locRatio": 0.48,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/neural/symbolicai_prover_bridge.py",
+      "pyLoc": 422,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:types/ai.ts",
+        "sk:commands/bridge.ts"
+      ],
+      "tsLoc": 389,
+      "locRatio": 0.92,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/proof_cache.py",
+      "pyLoc": 32,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/proof-cache-base.ts",
+        "sk:services/proof-cache-base.ts",
+        "sk:services/flogic-proof-cache.ts"
+      ],
+      "tsLoc": 550,
+      "locRatio": 17.19,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/prover_router.py",
+      "pyLoc": 861,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/prover-router.ts",
+        "sk:services/prover-router.ts"
+      ],
+      "tsLoc": 580,
+      "locRatio": 0.67,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/smt/cvc5_prover_bridge.py",
+      "pyLoc": 400,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/cvc5-prover-bridge.ts",
+        "sk:services/cvc5-prover-bridge.ts"
+      ],
+      "tsLoc": 168,
+      "locRatio": 0.42,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "external_provers/smt/z3_prover_bridge.py",
+      "pyLoc": 453,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/z3-prover-bridge.ts",
+        "sk:services/z3-prover-bridge.ts"
+      ],
+      "tsLoc": 532,
+      "locRatio": 1.17,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "flogic/ergoai_wrapper.py",
+      "pyLoc": 287,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/ergoai-wrapper.ts",
+        "sk:services/ergoai-wrapper.ts"
+      ],
+      "tsLoc": 90,
+      "locRatio": 0.31,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "flogic/flogic_proof_cache.py",
+      "pyLoc": 334,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/flogic-proof-cache.ts",
+        "sk:services/flogic-proof-cache.ts"
+      ],
+      "tsLoc": 124,
+      "locRatio": 0.37,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "flogic/flogic_types.py",
+      "pyLoc": 114,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/logic-types.ts",
+        "sk:services/logic-types.ts",
+        "sk:utils/log.ts"
+      ],
+      "tsLoc": 735,
+      "locRatio": 6.45,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "flogic/flogic_zkp_integration.py",
+      "pyLoc": 279,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/flogic-zkp-integration.ts",
+        "sk:services/flogic-zkp-integration.ts"
+      ],
+      "tsLoc": 272,
+      "locRatio": 0.97,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "flogic/semantic_normalizer.py",
+      "pyLoc": 212,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/flogic-semantic-normalizer.ts",
+        "sk:services/flogic-semantic-normalizer.ts"
+      ],
+      "tsLoc": 276,
+      "locRatio": 1.3,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "flogic_optimizer.py",
+      "pyLoc": 581,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:utils/log.ts",
+        "sk:ml/optimizers/optimizer.ts",
+        "sk:performance/optimizer.ts"
+      ],
+      "tsLoc": 386,
+      "locRatio": 0.66,
+      "hollowMarkers": 3,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "fol/converter.py",
+      "pyLoc": 385,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/cec-nl-converter.ts",
+        "sk:services/cec-nl-converter.ts",
+        "sk:services/deontic-logic-converter.ts"
+      ],
+      "tsLoc": 355,
+      "locRatio": 0.92,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "fol/text_to_fol.py",
+      "pyLoc": 256,
+      "pySymbols": 5,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "fol/utils/deontic_parser.py",
+      "pyLoc": 185,
+      "pySymbols": 11,
+      "tsFiles": [
+        "sk:services/deontic/deontic-parser-utils.ts",
+        "sk:services/deontic/deontic-parser-utils.ts",
+        "sk:commands/parser.ts"
+      ],
+      "tsLoc": 342,
+      "locRatio": 1.85,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "fol/utils/fol_parser.py",
+      "pyLoc": 182,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/fol-utils/fol-parser.ts",
+        "sk:services/fol-utils/fol-parser.ts"
+      ],
+      "tsLoc": 410,
+      "locRatio": 2.25,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "fol/utils/logic_formatter.py",
+      "pyLoc": 160,
+      "pySymbols": 13,
+      "tsFiles": [
+        "sk:services/fol/logic-formatter.ts",
+        "sk:services/fol-utils/logic-formatter.ts",
+        "sk:services/fol/logic-formatter.ts",
+        "sk:services/fol-utils/logic-formatter.ts"
+      ],
+      "tsLoc": 602,
+      "locRatio": 3.76,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "fol/utils/nlp_predicate_extractor.py",
+      "pyLoc": 296,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/nlp-predicate-extractor.ts",
+        "sk:services/fol-utils/nlp-predicate-extractor.ts",
+        "sk:services/nlp-predicate-extractor.ts",
+        "sk:services/fol-utils/nlp-predicate-extractor.ts"
+      ],
+      "tsLoc": 198,
+      "locRatio": 0.67,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "fol/utils/predicate_extractor.py",
+      "pyLoc": 54,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/nlp-predicate-extractor.ts",
+        "sk:services/fol-utils/nlp-predicate-extractor.ts",
+        "sk:services/nlp-predicate-extractor.ts"
+      ],
+      "tsLoc": 145,
+      "locRatio": 2.69,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/base_prover_bridge.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/base-prover-bridge.ts",
+        "sk:services/base-prover-bridge.ts"
+      ],
+      "tsLoc": 200,
+      "locRatio": 50.0,
+      "hollowMarkers": 14,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/bridges/base_prover_bridge.py",
+      "pyLoc": 244,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/base-prover-bridge.ts",
+        "sk:services/base-prover-bridge.ts"
+      ],
+      "tsLoc": 200,
+      "locRatio": 0.82,
+      "hollowMarkers": 14,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/bridges/external_provers.py",
+      "pyLoc": 478,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/external-provers.ts",
+        "sk:services/external-provers.ts"
+      ],
+      "tsLoc": 484,
+      "locRatio": 1.01,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/bridges/prover_installer.py",
+      "pyLoc": 729,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/prover-installer.ts",
+        "sk:services/prover-installer.ts"
+      ],
+      "tsLoc": 140,
+      "locRatio": 0.19,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "integration/bridges/symbolic_fol_bridge.py",
+      "pyLoc": 592,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/symbolic-fol-bridge.ts",
+        "sk:services/symbolic-fol-bridge.ts"
+      ],
+      "tsLoc": 262,
+      "locRatio": 0.44,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/bridges/tdfol_cec_bridge.py",
+      "pyLoc": 327,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/tdfol-cec-bridge.ts",
+        "sk:services/tdfol-cec-bridge.ts"
+      ],
+      "tsLoc": 238,
+      "locRatio": 0.73,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/bridges/tdfol_grammar_bridge.py",
+      "pyLoc": 504,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/tdfol-grammar-bridge.ts",
+        "sk:services/tdfol-grammar-bridge.ts"
+      ],
+      "tsLoc": 212,
+      "locRatio": 0.42,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/bridges/tdfol_shadowprover_bridge.py",
+      "pyLoc": 451,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/tdfol-shadowprover-bridge.ts",
+        "sk:services/tdfol-shadowprover-bridge.ts"
+      ],
+      "tsLoc": 208,
+      "locRatio": 0.46,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/caching/ipfs_proof_cache.py",
+      "pyLoc": 358,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/ipfs-proof-cache.ts",
+        "sk:services/ipfs-proof-cache.ts"
+      ],
+      "tsLoc": 278,
+      "locRatio": 0.78,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/caching/ipld_logic_storage.py",
+      "pyLoc": 376,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/ipld-logic-storage.ts",
+        "sk:services/ipld-logic-storage.ts"
+      ],
+      "tsLoc": 282,
+      "locRatio": 0.75,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/caching/proof_cache.py",
+      "pyLoc": 66,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/proof-cache-base.ts",
+        "sk:services/proof-cache-base.ts",
+        "sk:services/flogic-proof-cache.ts"
+      ],
+      "tsLoc": 550,
+      "locRatio": 8.33,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/cec_bridge.py",
+      "pyLoc": 295,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/cec-bridge.ts",
+        "sk:services/cec-bridge.ts"
+      ],
+      "tsLoc": 238,
+      "locRatio": 0.81,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/converters/deontic_logic_converter.py",
+      "pyLoc": 563,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/deontic-logic-converter.ts",
+        "sk:services/deontic-logic-converter.ts"
+      ],
+      "tsLoc": 414,
+      "locRatio": 0.74,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/converters/deontic_logic_core.py",
+      "pyLoc": 400,
+      "pySymbols": 13,
+      "tsFiles": [
+        "sk:services/deontic-logic-core.ts",
+        "sk:services/deontic-logic-core.ts"
+      ],
+      "tsLoc": 554,
+      "locRatio": 1.39,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/converters/logic_translation_core.py",
+      "pyLoc": 568,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/logic-translation-core.ts",
+        "sk:services/logic-translation-core.ts"
+      ],
+      "tsLoc": 366,
+      "locRatio": 0.64,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/converters/modal_logic_extension.py",
+      "pyLoc": 426,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/modal-logic-extension.ts",
+        "sk:services/modal-logic-extension.ts"
+      ],
+      "tsLoc": 204,
+      "locRatio": 0.48,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/converters/symbolic_fol_bridge.py",
+      "pyLoc": 8,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/symbolic-fol-bridge.ts",
+        "sk:services/symbolic-fol-bridge.ts"
+      ],
+      "tsLoc": 262,
+      "locRatio": 32.75,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/deontic_logic_converter.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/deontic-logic-converter.ts",
+        "sk:services/deontic-logic-converter.ts"
+      ],
+      "tsLoc": 414,
+      "locRatio": 103.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/deontic_logic_core.py",
+      "pyLoc": 5,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/deontic-logic-core.ts",
+        "sk:services/deontic-logic-core.ts"
+      ],
+      "tsLoc": 554,
+      "locRatio": 110.8,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/document_consistency_checker.py",
+      "pyLoc": 14,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/document-consistency-checker.ts",
+        "sk:services/document-consistency-checker.ts"
+      ],
+      "tsLoc": 408,
+      "locRatio": 29.14,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/caselaw_bulk_processor.py",
+      "pyLoc": 576,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/caselaw-bulk-processor.ts",
+        "sk:services/caselaw-bulk-processor.ts"
+      ],
+      "tsLoc": 326,
+      "locRatio": 0.57,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/deontic_query_engine.py",
+      "pyLoc": 619,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/deontic-query-engine.ts",
+        "sk:services/deontic-query-engine.ts"
+      ],
+      "tsLoc": 556,
+      "locRatio": 0.9,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/document_consistency_checker.py",
+      "pyLoc": 420,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/document-consistency-checker.ts",
+        "sk:services/document-consistency-checker.ts"
+      ],
+      "tsLoc": 408,
+      "locRatio": 0.97,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/legal_domain_knowledge.py",
+      "pyLoc": 537,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/legal-domain-knowledge.ts",
+        "sk:services/legal-domain-knowledge.ts"
+      ],
+      "tsLoc": 378,
+      "locRatio": 0.7,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/legal_symbolic_analyzer.py",
+      "pyLoc": 527,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/legal-symbolic-analyzer.ts",
+        "sk:services/legal-symbolic-analyzer.ts"
+      ],
+      "tsLoc": 394,
+      "locRatio": 0.75,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/medical_theorem_framework.py",
+      "pyLoc": 325,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/medical-theorem-framework.ts",
+        "sk:services/medical-theorem-framework.ts"
+      ],
+      "tsLoc": 328,
+      "locRatio": 1.01,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/symbolic_contracts.py",
+      "pyLoc": 642,
+      "pySymbols": 7,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "integration/domain/temporal_deontic_api.py",
+      "pyLoc": 344,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/temporal-deontic-api.ts",
+        "sk:services/temporal-deontic-api.ts"
+      ],
+      "tsLoc": 960,
+      "locRatio": 2.79,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/domain/temporal_deontic_rag_store.py",
+      "pyLoc": 392,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/temporal-deontic-rag-store.ts"
+      ],
+      "tsLoc": 504,
+      "locRatio": 1.29,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/interactive/_fol_constructor_io.py",
+      "pyLoc": 244,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/fol-constructor-io-mixin.ts",
+        "sk:services/fol-constructor-io-mixin.ts"
+      ],
+      "tsLoc": 222,
+      "locRatio": 0.91,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/interactive/interactive_fol_constructor.py",
+      "pyLoc": 663,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/interactive-fol-constructor.ts",
+        "sk:services/interactive-fol-constructor.ts"
+      ],
+      "tsLoc": 266,
+      "locRatio": 0.4,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/interactive/interactive_fol_types.py",
+      "pyLoc": 86,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 109,
+      "locRatio": 1.27,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/interactive/interactive_fol_utils.py",
+      "pyLoc": 78,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:components/permissions/utils.ts",
+        "sk:components/binary-feedback/utils.ts",
+        "sk:tools/BashTool/utils.ts"
+      ],
+      "tsLoc": 265,
+      "locRatio": 3.4,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/interactive_fol_constructor.py",
+      "pyLoc": 3,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/interactive-fol-constructor.ts",
+        "sk:services/interactive-fol-constructor.ts"
+      ],
+      "tsLoc": 266,
+      "locRatio": 88.67,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/logic_translation_core.py",
+      "pyLoc": 5,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/logic-translation-core.ts",
+        "sk:services/logic-translation-core.ts"
+      ],
+      "tsLoc": 366,
+      "locRatio": 73.2,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/logic_verification.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:utils/log.ts"
+      ],
+      "tsLoc": 317,
+      "locRatio": 79.25,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/logic_verification_types.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:utils/log.ts",
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 426,
+      "locRatio": 106.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/logic_verification_utils.py",
+      "pyLoc": 21,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:utils/log.ts",
+        "sk:components/permissions/utils.ts",
+        "sk:components/binary-feedback/utils.ts"
+      ],
+      "tsLoc": 532,
+      "locRatio": 25.33,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/modal_logic_extension.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/modal-logic-extension.ts",
+        "sk:services/modal-logic-extension.ts"
+      ],
+      "tsLoc": 204,
+      "locRatio": 51.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/neurosymbolic.py",
+      "pyLoc": 3,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/neurosymbolic-graphrag.ts",
+        "sk:services/neurosymbolic-graphrag.ts",
+        "sk:services/neurosymbolic-api.ts"
+      ],
+      "tsLoc": 395,
+      "locRatio": 131.67,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/neurosymbolic_graphrag.py",
+      "pyLoc": 3,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/neurosymbolic-graphrag.ts",
+        "sk:services/neurosymbolic-graphrag.ts"
+      ],
+      "tsLoc": 266,
+      "locRatio": 88.67,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/nl_ucan_policy_compiler.py",
+      "pyLoc": 410,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/nl-ucan-policy-compiler.ts",
+        "sk:services/nl-ucan-policy-compiler.ts"
+      ],
+      "tsLoc": 98,
+      "locRatio": 0.24,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "integration/proof_cache.py",
+      "pyLoc": 260,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/proof-cache-base.ts",
+        "sk:services/proof-cache-base.ts",
+        "sk:services/flogic-proof-cache.ts"
+      ],
+      "tsLoc": 550,
+      "locRatio": 2.12,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/_deontic_conflict_mixin.py",
+      "pyLoc": 245,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "integration/reasoning/_logic_verifier_backends_mixin.py",
+      "pyLoc": 227,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/logic-verifier-backends-mixin.ts",
+        "sk:services/logic-verifier-backends-mixin.ts"
+      ],
+      "tsLoc": 138,
+      "locRatio": 0.61,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/_prover_backend_mixin.py",
+      "pyLoc": 441,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/prover-backend-mixin.ts",
+        "sk:services/prover-backend-mixin.ts"
+      ],
+      "tsLoc": 190,
+      "locRatio": 0.43,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/deontological_reasoning.py",
+      "pyLoc": 370,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/deontological-reasoning.ts",
+        "sk:services/deontological-reasoning.ts"
+      ],
+      "tsLoc": 376,
+      "locRatio": 1.02,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/deontological_reasoning_types.py",
+      "pyLoc": 140,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/deontological-reasoning.ts",
+        "sk:services/deontological-reasoning.ts",
+        "sk:utils/log.ts"
+      ],
+      "tsLoc": 693,
+      "locRatio": 4.95,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/deontological_reasoning_utils.py",
+      "pyLoc": 216,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:services/deontological-reasoning.ts",
+        "sk:services/deontological-reasoning.ts",
+        "sk:utils/log.ts"
+      ],
+      "tsLoc": 693,
+      "locRatio": 3.21,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/logic_verification.py",
+      "pyLoc": 581,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:utils/log.ts"
+      ],
+      "tsLoc": 317,
+      "locRatio": 0.55,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/logic_verification_types.py",
+      "pyLoc": 163,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:utils/log.ts",
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 426,
+      "locRatio": 2.61,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/logic_verification_utils.py",
+      "pyLoc": 262,
+      "pySymbols": 9,
+      "tsFiles": [
+        "sk:utils/log.ts",
+        "sk:components/permissions/utils.ts",
+        "sk:components/binary-feedback/utils.ts"
+      ],
+      "tsLoc": 532,
+      "locRatio": 2.03,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/proof_execution_engine.py",
+      "pyLoc": 788,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/proof-execution-engine.ts",
+        "sk:services/proof-execution-engine.ts"
+      ],
+      "tsLoc": 632,
+      "locRatio": 0.8,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/proof_execution_engine_types.py",
+      "pyLoc": 83,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/proof-execution-engine-types.ts",
+        "sk:services/proof-execution-engine-types.ts"
+      ],
+      "tsLoc": 122,
+      "locRatio": 1.47,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/reasoning/proof_execution_engine_utils.py",
+      "pyLoc": 159,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/proof-execution-engine-utils.ts",
+        "sk:services/proof-execution-engine-utils.ts"
+      ],
+      "tsLoc": 214,
+      "locRatio": 1.35,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic/neurosymbolic/embedding_prover.py",
+      "pyLoc": 172,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/embedding-prover.ts",
+        "sk:services/embedding-prover.ts"
+      ],
+      "tsLoc": 162,
+      "locRatio": 0.94,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic/neurosymbolic/hybrid_confidence.py",
+      "pyLoc": 259,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/hybrid-confidence.ts",
+        "sk:services/hybrid-confidence.ts"
+      ],
+      "tsLoc": 236,
+      "locRatio": 0.91,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic/neurosymbolic/reasoning_coordinator.py",
+      "pyLoc": 277,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/reasoning-coordinator.ts",
+        "sk:services/reasoning-coordinator.ts"
+      ],
+      "tsLoc": 240,
+      "locRatio": 0.87,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic/neurosymbolic_api.py",
+      "pyLoc": 320,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/neurosymbolic-api.ts",
+        "sk:services/neurosymbolic-api.ts"
+      ],
+      "tsLoc": 258,
+      "locRatio": 0.81,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic/neurosymbolic_graphrag.py",
+      "pyLoc": 285,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/neurosymbolic-graphrag.ts",
+        "sk:services/neurosymbolic-graphrag.ts"
+      ],
+      "tsLoc": 266,
+      "locRatio": 0.93,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic/symbolic_logic_primitives.py",
+      "pyLoc": 468,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/symbolic-logic-primitives.ts",
+        "sk:services/symbolic-logic-primitives.ts"
+      ],
+      "tsLoc": 198,
+      "locRatio": 0.42,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic_contracts.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "integration/symbolic_fol_bridge.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/symbolic-fol-bridge.ts",
+        "sk:services/symbolic-fol-bridge.ts"
+      ],
+      "tsLoc": 262,
+      "locRatio": 65.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/symbolic_logic_primitives.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/symbolic-logic-primitives.ts",
+        "sk:services/symbolic-logic-primitives.ts"
+      ],
+      "tsLoc": 198,
+      "locRatio": 49.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/tdfol_cec_bridge.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/tdfol-cec-bridge.ts",
+        "sk:services/tdfol-cec-bridge.ts"
+      ],
+      "tsLoc": 238,
+      "locRatio": 59.5,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/tdfol_grammar_bridge.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/tdfol-grammar-bridge.ts",
+        "sk:services/tdfol-grammar-bridge.ts"
+      ],
+      "tsLoc": 212,
+      "locRatio": 53.0,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/tdfol_shadowprover_bridge.py",
+      "pyLoc": 4,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/tdfol-shadowprover-bridge.ts",
+        "sk:services/tdfol-shadowprover-bridge.ts"
+      ],
+      "tsLoc": 208,
+      "locRatio": 52.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/temporal_deontic_rag_store.py",
+      "pyLoc": 14,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:services/temporal-deontic-rag-store.ts",
+        "sk:services/temporal-deontic-rag-store.ts"
+      ],
+      "tsLoc": 504,
+      "locRatio": 36.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integration/ucan_policy_bridge.py",
+      "pyLoc": 544,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/ucan-policy-bridge.ts",
+        "sk:services/ucan-policy-bridge.ts"
+      ],
+      "tsLoc": 364,
+      "locRatio": 0.67,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integrations/enhanced_graphrag_integration.py",
+      "pyLoc": 31,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:ai/thinking/graph.ts",
+        "sk:commands/integration.ts"
+      ],
+      "tsLoc": 665,
+      "locRatio": 21.45,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integrations/phase7_complete_integration.py",
+      "pyLoc": 31,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:commands/integration.ts"
+      ],
+      "tsLoc": 385,
+      "locRatio": 12.42,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "integrations/unixfs_integration.py",
+      "pyLoc": 31,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:commands/integration.ts"
+      ],
+      "tsLoc": 385,
+      "locRatio": 12.42,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "ml_confidence.py",
+      "pyLoc": 344,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/fol/ml-confidence-scorer.ts",
+        "sk:services/fol/ml-confidence-scorer.ts"
+      ],
+      "tsLoc": 176,
+      "locRatio": 0.51,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "modal/autoencoder_loop.py",
+      "pyLoc": 697,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/modal-autoencoder-loop.ts",
+        "sk:services/modal-autoencoder-loop.ts"
+      ],
+      "tsLoc": 298,
+      "locRatio": 0.43,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "modal/codec.py",
+      "pyLoc": 12482,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/modal-logic-codec.ts",
+        "sk:services/modal-logic-codec.ts"
+      ],
+      "tsLoc": 426,
+      "locRatio": 0.03,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "modal/compiler.py",
+      "pyLoc": 3257,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/modal-compiler.ts",
+        "sk:services/modal-compiler.ts",
+        "sk:services/grammar-nl-policy-compiler.ts"
+      ],
+      "tsLoc": 483,
+      "locRatio": 0.15,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "modal/decompiler.py",
+      "pyLoc": 14731,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/modal-ir-decompiler.ts",
+        "sk:services/modal-ir-decompiler.ts"
+      ],
+      "tsLoc": 326,
+      "locRatio": 0.02,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "modal/kg_bridge.py",
+      "pyLoc": 1270,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/modal-kg-bridge.ts",
+        "sk:services/modal-kg-bridge.ts",
+        "sk:commands/bridge.ts"
+      ],
+      "tsLoc": 721,
+      "locRatio": 0.57,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "modal/synthesis.py",
+      "pyLoc": 872,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/modal-synthesis.ts",
+        "sk:services/modal-synthesis.ts"
+      ],
+      "tsLoc": 450,
+      "locRatio": 0.52,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "monitoring.py",
+      "pyLoc": 363,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:utils/performance/monitor.ts"
+      ],
+      "tsLoc": 128,
+      "locRatio": 0.35,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "observability/metrics_prometheus.py",
+      "pyLoc": 309,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/observability-metrics-prometheus.ts",
+        "sk:services/observability-metrics-prometheus.ts"
+      ],
+      "tsLoc": 362,
+      "locRatio": 1.17,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "observability/otel_integration.py",
+      "pyLoc": 364,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/otel-integration.ts",
+        "sk:services/otel-integration.ts"
+      ],
+      "tsLoc": 162,
+      "locRatio": 0.45,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "observability/structured_logging.py",
+      "pyLoc": 365,
+      "pySymbols": 15,
+      "tsFiles": [
+        "sk:services/structured-logging.ts",
+        "sk:services/structured-logging.ts"
+      ],
+      "tsLoc": 708,
+      "locRatio": 1.94,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "phase7_4_benchmarks.py",
+      "pyLoc": 488,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "security/audit_log.py",
+      "pyLoc": 200,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/logic-audit-log.ts",
+        "sk:services/logic-audit-log.ts",
+        "sk:services/policy-audit-log.ts"
+      ],
+      "tsLoc": 451,
+      "locRatio": 2.25,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "security/input_validation.py",
+      "pyLoc": 71,
+      "pySymbols": 4,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "security/llm_circuit_breaker.py",
+      "pyLoc": 367,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/llm-circuit-breaker.ts",
+        "sk:services/llm-circuit-breaker.ts"
+      ],
+      "tsLoc": 320,
+      "locRatio": 0.87,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "security/rate_limiting.py",
+      "pyLoc": 112,
+      "pySymbols": 4,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "submodule_registry.py",
+      "pyLoc": 571,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/submodule-registry.ts",
+        "sk:services/submodule-registry.ts"
+      ],
+      "tsLoc": 130,
+      "locRatio": 0.23,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "THIN"
+    },
+    {
+      "module": "types/bridge_types.py",
+      "pyLoc": 79,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/bridge-types.ts",
+        "sk:services/bridge-types.ts"
+      ],
+      "tsLoc": 656,
+      "locRatio": 8.3,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "types/common_types.py",
+      "pyLoc": 85,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:types/common.ts",
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 186,
+      "locRatio": 2.19,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "types/deontic_types.py",
+      "pyLoc": 248,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 109,
+      "locRatio": 0.44,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "types/fol_types.py",
+      "pyLoc": 96,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/provers/tdfol-types.ts",
+        "sk:services/provers/tdfol-types.ts",
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 245,
+      "locRatio": 2.55,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "types/proof_types.py",
+      "pyLoc": 20,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 109,
+      "locRatio": 5.45,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "types/translation_types.py",
+      "pyLoc": 72,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:ai/types.ts"
+      ],
+      "tsLoc": 109,
+      "locRatio": 1.51,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/backends/backend_protocol.py",
+      "pyLoc": 7,
+      "pySymbols": 0,
+      "tsFiles": [
+        "sk:storage/backend.ts"
+      ],
+      "tsLoc": 108,
+      "locRatio": 15.43,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/backends/groth16.py",
+      "pyLoc": 229,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/sprint67-groth16-cec.ts",
+        "sk:services/sprint67-groth16-cec.ts"
+      ],
+      "tsLoc": 272,
+      "locRatio": 1.19,
+      "hollowMarkers": 4,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/backends/groth16_backup.py",
+      "pyLoc": 162,
+      "pySymbols": 4,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/backends/groth16_ffi.py",
+      "pyLoc": 483,
+      "pySymbols": 4,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/backends/provekit.py",
+      "pyLoc": 274,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/zkp-provekit-cache.ts",
+        "sk:services/zkp-provekit-cache.ts",
+        "sk:services/zkp-provekit-public-inputs.ts"
+      ],
+      "tsLoc": 626,
+      "locRatio": 2.28,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/backends/provekit_ffi.py",
+      "pyLoc": 453,
+      "pySymbols": 6,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/backends/simulated.py",
+      "pyLoc": 234,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/zkp/zkp-simulated-prover.ts",
+        "sk:services/zkp/zkp-simulated-prover.ts"
+      ],
+      "tsLoc": 90,
+      "locRatio": 0.38,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/canonicalization.py",
+      "pyLoc": 118,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/canonicalization.ts",
+        "sk:services/canonicalization.ts"
+      ],
+      "tsLoc": 198,
+      "locRatio": 1.68,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/circuits.py",
+      "pyLoc": 1198,
+      "pySymbols": 17,
+      "tsFiles": [
+        "sk:services/zkp-circuits.ts",
+        "sk:services/zkp-circuits.ts"
+      ],
+      "tsLoc": 738,
+      "locRatio": 0.62,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/eth_contract_artifacts.py",
+      "pyLoc": 83,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/eth_integration.py",
+      "pyLoc": 486,
+      "pySymbols": 5,
+      "tsFiles": [
+        "sk:services/zkp-eth-integration.ts",
+        "sk:services/zkp-eth-integration.ts",
+        "sk:commands/integration.ts"
+      ],
+      "tsLoc": 727,
+      "locRatio": 1.5,
+      "hollowMarkers": 14,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/eth_vk_registry_payloads.py",
+      "pyLoc": 107,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/vk-registry.ts",
+        "sk:services/vk-registry.ts",
+        "sk:services/registry.ts"
+      ],
+      "tsLoc": 393,
+      "locRatio": 3.67,
+      "hollowMarkers": 3,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/evm_harness.py",
+      "pyLoc": 38,
+      "pySymbols": 2,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/evm_public_inputs.py",
+      "pyLoc": 81,
+      "pySymbols": 3,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/form_circuit.py",
+      "pyLoc": 375,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/zkp-form-circuit.ts",
+        "sk:services/zkp-form-circuit.ts"
+      ],
+      "tsLoc": 278,
+      "locRatio": 0.74,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/legal_theorem_semantics.py",
+      "pyLoc": 105,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/legal-theorem-semantics.ts",
+        "sk:services/legal-theorem-semantics.ts"
+      ],
+      "tsLoc": 190,
+      "locRatio": 1.81,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/onchain_pipeline.py",
+      "pyLoc": 92,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/zkp-onchain-pipeline.ts",
+        "sk:services/zkp-onchain-pipeline.ts",
+        "sk:types/ai.ts"
+      ],
+      "tsLoc": 508,
+      "locRatio": 5.52,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/provekit/artifacts.py",
+      "pyLoc": 322,
+      "pySymbols": 8,
+      "tsFiles": [
+        "sk:services/zkp-provekit-artifacts.ts",
+        "sk:services/zkp-provekit-artifacts.ts",
+        "sk:services/zkp-provekit-setup-artifacts.ts"
+      ],
+      "tsLoc": 882,
+      "locRatio": 2.74,
+      "hollowMarkers": 10,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/provekit/cache.py",
+      "pyLoc": 213,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/proof-cache-base.ts",
+        "sk:services/proof-cache-base.ts",
+        "sk:services/zkp-provekit-cache.ts"
+      ],
+      "tsLoc": 641,
+      "locRatio": 3.01,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/provekit/cli.py",
+      "pyLoc": 371,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:cli.ts"
+      ],
+      "tsLoc": 222,
+      "locRatio": 0.6,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/provekit/public_inputs.py",
+      "pyLoc": 312,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:services/zkp-provekit-public-inputs.ts",
+        "sk:services/zkp-provekit-public-inputs.ts"
+      ],
+      "tsLoc": 640,
+      "locRatio": 2.05,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/provekit/trace.py",
+      "pyLoc": 418,
+      "pySymbols": 7,
+      "tsFiles": [
+        "sk:services/zkp-trace.ts",
+        "sk:services/zkp-trace.ts"
+      ],
+      "tsLoc": 328,
+      "locRatio": 0.78,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/provekit/witness.py",
+      "pyLoc": 190,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/witness-manager.ts",
+        "sk:services/witness-manager.ts"
+      ],
+      "tsLoc": 204,
+      "locRatio": 1.07,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/setup_artifacts.py",
+      "pyLoc": 61,
+      "pySymbols": 2,
+      "tsFiles": [
+        "sk:services/setup-artifacts.ts",
+        "sk:services/setup-artifacts.ts"
+      ],
+      "tsLoc": 182,
+      "locRatio": 2.98,
+      "hollowMarkers": 2,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/statement.py",
+      "pyLoc": 181,
+      "pySymbols": 6,
+      "tsFiles": [
+        "sk:services/zkp-statement.ts",
+        "sk:services/zkp-statement.ts",
+        "sk:utils/state.ts"
+      ],
+      "tsLoc": 381,
+      "locRatio": 2.1,
+      "hollowMarkers": 14,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/ucan_zkp_bridge.py",
+      "pyLoc": 475,
+      "pySymbols": 4,
+      "tsFiles": [
+        "sk:commands/bridge.ts"
+      ],
+      "tsLoc": 239,
+      "locRatio": 0.5,
+      "hollowMarkers": 1,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/vk_registry.py",
+      "pyLoc": 120,
+      "pySymbols": 3,
+      "tsFiles": [
+        "sk:services/vk-registry.ts",
+        "sk:services/vk-registry.ts"
+      ],
+      "tsLoc": 186,
+      "locRatio": 1.55,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/witness_manager.py",
+      "pyLoc": 202,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/witness-manager.ts",
+        "sk:services/witness-manager.ts"
+      ],
+      "tsLoc": 204,
+      "locRatio": 1.01,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    },
+    {
+      "module": "zkp/zkp_prover.py",
+      "pyLoc": 242,
+      "pySymbols": 1,
+      "tsFiles": [],
+      "tsLoc": 0,
+      "locRatio": 0.0,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "MISSING"
+    },
+    {
+      "module": "zkp/zkp_verifier.py",
+      "pyLoc": 245,
+      "pySymbols": 1,
+      "tsFiles": [
+        "sk:services/zkp-verifier.ts",
+        "sk:services/zkp-verifier.ts"
+      ],
+      "tsLoc": 242,
+      "locRatio": 0.99,
+      "hollowMarkers": 0,
+      "delegationMarkers": 0,
+      "verdict": "SUBSTANTIVE"
+    }
+  ]
+}

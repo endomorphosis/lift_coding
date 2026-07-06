@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "modal-codec-guidance-direct-001",
+      "description": "Direct compact guidance routes, target component, selected-frame evidence, and frame-audit features.",
+      "guidance": {
+        "compiler_guidance_todo_routes": ["repair_multiview_legal_ir_graph_projection"],
+        "target_component": "knowledge_graphs.neo4j_compat",
+        "selected_frame": "ContractFrame",
+        "evidence": [
+          {
+            "route": "repair_flogic_ontology_constraints",
+            "selected_frame_after": "FLogicFrame"
+          }
+        ],
+        "frame_features": [
+          "selected_ontology_frame:ContractFrame",
+          { "feature": "candidate_ontology_term:obligation" }
+        ],
+        "pipeline_stage_focus": "audit_frame_logic_terms"
+      },
+      "expected": {
+        "routeFeatures": [
+          "compiler-guidance-route:repair_multiview_legal_ir_graph_projection",
+          "target-component:knowledge_graphs.neo4j_compat",
+          "selected_ontology_frame:ContractFrame",
+          "selected_ontology_frame:FLogicFrame",
+          "compiler-guidance-route:repair_flogic_ontology_constraints"
+        ],
+        "viewGapFeatures": [],
+        "neo4jProjectionTarget": true,
+        "frameLogicTargetRoutes": ["repair_flogic_ontology_constraints"],
+        "frameLogicTarget": true,
+        "frameAuditFeatures": [
+          "selected_ontology_frame:ContractFrame",
+          "candidate_ontology_term:obligation",
+          "flogic:statement_hint:audit_frame_logic_terms"
+        ],
+        "featureStrings": []
+      }
+    },
+    {
+      "id": "modal-codec-guidance-view-gaps-001",
+      "description": "LegalIR view gaps infer bridge repair routes and frame-logic target signal.",
+      "guidance": {
+        "compiler_guidance_legal_ir_view_gaps": {
+          "modal.frame_logic": { "count": 1, "quality_gate": "pass" },
+          "deontic.ir": { "count": 1, "quality_gate": "fail" },
+          "knowledge_graphs.neo4j_compat": 2
+        },
+        "compiler_guidance_feature_groups": {
+          "views": ["legal-ir-view:modal.frame_logic"]
+        }
+      },
+      "expected": {
+        "routeFeatures": [
+          "compiler-guidance-route:repair_multiview_legal_ir_graph_projection",
+          "compiler-guidance-route:repair_flogic_ontology_constraints"
+        ],
+        "viewGapFeatures": [
+          "legal-ir-view-gap:knowledge_graphs_neo4j_compat",
+          "legal-ir-view-gap:modal_frame_logic"
+        ],
+        "neo4jProjectionTarget": true,
+        "frameLogicTargetRoutes": ["repair_flogic_ontology_constraints"],
+        "frameLogicTarget": true,
+        "frameAuditFeatures": [],
+        "featureStrings": []
+      }
+    },
+    {
+      "id": "modal-codec-guidance-bundle-001",
+      "description": "JSON-string bundle contributes routes and target component; evidence contributes selected-frame and stage features.",
+      "guidance": {
+        "bundle": "{\"route\":\"repair_multiview_legal_ir_graph_projection\",\"target_component\":\"knowledge_graphs.neo4j_compat\"}",
+        "evidence": {
+          "failed_action": "audit_frame_logic_terms",
+          "selected_frame_before": "PriorFrame"
+        },
+        "top_family_features": ["modal-family:frame"],
+        "primary_pipeline_stage": "improve_flogic_frame_alignment"
+      },
+      "expected": {
+        "routeFeatures": [
+          "compiler-guidance-route:repair_multiview_legal_ir_graph_projection",
+          "target-component:knowledge_graphs.neo4j_compat",
+          "selected_ontology_frame:PriorFrame",
+          "compiler-guidance-route:audit_frame_logic_terms"
+        ],
+        "viewGapFeatures": [],
+        "neo4jProjectionTarget": true,
+        "frameLogicTargetRoutes": ["audit_frame_logic_terms"],
+        "frameLogicTarget": true,
+        "frameAuditFeatures": [
+          "modal-family:frame",
+          "flogic:statement_hint:improve_flogic_frame_alignment"
+        ],
+        "featureStrings": []
+      }
+    },
+    {
+      "id": "modal-codec-guidance-feature-strings-001",
+      "description": "Guidance summary feature strings preserve order, dedupe, and label signed view gaps.",
+      "guidance": {
+        "ranked_guidance_features": [
+          "modal-family:deontic",
+          { "feature": "predicate:file_notice" },
+          { "name": "selected-frame:ObligationFrame" },
+          "modal-family:deontic"
+        ],
+        "feature_groups": {
+          "scope": [
+            "condition-prefix:if",
+            { "feature": "exception-suffix:except" }
+          ],
+          "target": {
+            "primary": "legal-ir-view:modal.frame_logic",
+            "secondary": { "name": "legal-ir-view:deontic.ir" }
+          }
+        },
+        "synthesis_focus": ["repair_multiview_legal_ir_loss"],
+        "family_distribution": {
+          "deontic": 0.8,
+          "temporal": 0.2
+        },
+        "legal_ir_predicted_view_distribution": {
+          "deontic.ir": 0.7
+        },
+        "legal_ir_target_view_distribution": {
+          "modal.frame_logic": 0.6,
+          "knowledge_graphs.neo4j_compat": 0.4
+        },
+        "legal_ir_view_gap_distribution": {
+          "modal.frame_logic": 0.4,
+          "deontic.ir": -0.2,
+          "knowledge_graphs.neo4j_compat": 0
+        }
+      },
+      "expected": {
+        "routeFeatures": [],
+        "viewGapFeatures": [],
+        "neo4jProjectionTarget": false,
+        "frameLogicTargetRoutes": ["audit_frame_logic_terms"],
+        "frameLogicTarget": true,
+        "frameAuditFeatures": [],
+        "featureStrings": [
+          "modal-family:deontic",
+          "predicate:file_notice",
+          "selected-frame:ObligationFrame",
+          "condition-prefix:if",
+          "exception-suffix:except",
+          "legal-ir-view:modal.frame_logic",
+          "legal-ir-view:deontic.ir",
+          "repair_multiview_legal_ir_loss",
+          "family-distribution:deontic",
+          "family-distribution:temporal",
+          "legal-ir-predicted-view:deontic.ir",
+          "legal-ir-target-view:modal.frame_logic",
+          "legal-ir-target-view:knowledge_graphs.neo4j_compat",
+          "legal-ir-view-gap:underrepresented:modal.frame_logic",
+          "legal-ir-view-gap:overrepresented:deontic.ir",
+          "legal-ir-view-gap:overrepresented:knowledge_graphs.neo4j_compat"
+        ]
+      }
+    }
+  ]
+}

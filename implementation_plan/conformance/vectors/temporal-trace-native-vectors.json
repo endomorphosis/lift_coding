@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "temporal-trace-refuted-001",
+      "subsystem": "temporal",
+      "description": "Contradictory observed event and negation should refute.",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": ["arrived", "!arrived"]
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "trace", "contradiction"]
+    },
+    {
+      "id": "temporal-trace-proved-001",
+      "subsystem": "temporal",
+      "description": "Observed query event should prove.",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": ["ingest", "validate", "commit"],
+          "query": "validate"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "trace", "query"]
+    },
+    {
+      "id": "temporal-trace-proved-002",
+      "subsystem": "temporal",
+      "description": "Non-empty consistent trace returns starter proved verdict.",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": ["start", "checkpoint", "finish"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "trace", "consistent"]
+    },
+    {
+      "id": "temporal-trace-unknown-001",
+      "subsystem": "temporal",
+      "description": "Empty temporal trace remains unknown.",
+      "inputType": "temporalTrace",
+      "input": {
+        "temporalTrace": {
+          "events": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["temporal", "trace", "unknown"]
+    }
+  ]
+}

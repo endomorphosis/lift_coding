@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "canonical-target-alias",
+      "kind": "canonical_target_view",
+      "value": "deontic_ir",
+      "expected": "deontic.ir"
+    },
+    {
+      "id": "canonical-target-fallback",
+      "kind": "canonical_target_view",
+      "value": "custom-view",
+      "expected": "custom-view"
+    },
+    {
+      "id": "canonical-gap-key",
+      "kind": "canonical_gap_key",
+      "value": "deontic_ir:underrepresented",
+      "expected": "deontic.ir:underrepresented"
+    },
+    {
+      "id": "gap-quality-pass",
+      "kind": "gap_quality_gate",
+      "value": { "quality_gate": "passed" },
+      "expected": true
+    },
+    {
+      "id": "gap-quality-fail",
+      "kind": "gap_quality_gate",
+      "value": { "quality_gate": "blocked" },
+      "expected": false
+    },
+    {
+      "id": "component-gaps-merge-and-gate",
+      "kind": "component_gaps",
+      "row": {
+        "legal_ir_component_gaps": {
+          "deontic.ir:underrepresented": { "quality_gate": "pass", "score": 0.2 }
+        },
+        "compiler_guidance_legal_ir_view_gaps": {
+          "custom:missing": { "quality_gate": "ok" }
+        },
+        "compiler_guidance_attribution": {
+          "legal_ir_view_gaps": {
+            "attribution:underrepresented": { "quality_gate": "pass" },
+            "attribution:blocked": { "quality_gate": "fail" }
+          }
+        }
+      },
+      "expected": {
+        "deontic.ir:underrepresented": { "quality_gate": "pass", "score": 0.2 },
+        "custom:missing": { "quality_gate": "ok" },
+        "attribution:underrepresented": { "quality_gate": "pass" }
+      }
+    },
+    {
+      "id": "underrepresented-components",
+      "kind": "underrepresented_components",
+      "row": {
+        "legal_ir_underrepresented_components": ["deontic.ir", "frame.logic", "deontic.ir"],
+        "compiler_guidance_legal_ir_underrepresented_components": ["graph.data"],
+        "legal_ir_component_gaps": {
+          "deontic.ir:underrepresented": { "quality_gate": "pass" },
+          "extra.comp:underrepresented": { "quality_gate": "pass" }
+        }
+      },
+      "expected": ["deontic.ir", "frame.logic", "graph.data", "extra.comp"]
+    }
+  ]
+}

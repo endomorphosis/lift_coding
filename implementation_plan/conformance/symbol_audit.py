@@ -25,10 +25,23 @@ SCHEMA_VERSION = "2026-07-03"
 DEFAULT_PY_ROOT = pathlib.Path("external/ipfs_datasets/ipfs_datasets_py/logic")
 DEFAULT_TS_ROOT = pathlib.Path("swissknife/src/services")
 DEFAULT_MAP_PATH = pathlib.Path("implementation_plan/conformance/symbol-map.json")
+DEFAULT_EVIDENCE_MAP_PATH = pathlib.Path("implementation_plan/conformance/symbol-evidence.json")
+DEFAULT_VECTORS_DIR = pathlib.Path("implementation_plan/conformance/vectors")
 SYMBOL_RE = re.compile(r"^(?:async\s+def|def|class)\s+([A-Za-z_][A-Za-z0-9_]*)\b", re.MULTILINE)
 TS_IDENTIFIER_RE = re.compile(r"\b[A-Za-z_$][A-Za-z0-9_$]*\b")
 EXCLUDED_SYMBOLS = {"main", "run", "setup"}
 ALLOWED_STATUSES = {"ported", "consolidated", "n/a"}
+TRIVIAL_PORTED_SUFFIXES = (
+    "Error",
+    "Exception",
+    "Config",
+    "Settings",
+    "Options",
+    "Type",
+    "Enum",
+    "Result",
+    "State",
+)
 
 
 TARGET_OVERRIDES = {
@@ -113,6 +126,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--python-root", default=str(DEFAULT_PY_ROOT))
     parser.add_argument("--typescript-root", default=str(DEFAULT_TS_ROOT))
     parser.add_argument("--map", default=str(DEFAULT_MAP_PATH))
+    parser.add_argument("--evidence-map", default=str(DEFAULT_EVIDENCE_MAP_PATH))
+    parser.add_argument("--vectors-dir", default=str(DEFAULT_VECTORS_DIR))
     parser.add_argument("--write-map", action="store_true", help="write or refresh the reconciliation map")
     parser.add_argument("--check", action="store_true", help="validate the current checkout against the map")
     parser.add_argument("--summary", action="store_true", help="print the regenerated audit summary")
@@ -121,6 +136,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     py_root = pathlib.Path(args.python_root)
     ts_root = pathlib.Path(args.typescript_root)
     map_path = pathlib.Path(args.map)
+    evidence_map_path = pathlib.Path(args.evidence_map)
+    vectors_dir = pathlib.Path(args.vectors_dir)
     symbols = extract_python_symbols(py_root)
     ts_index = build_typescript_index(ts_root)
 
@@ -137,6 +154,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return 1
         symbol_map = load_json(map_path)
         failures = check_symbol_map(symbol_map, symbols, ts_index)
+        failures.extend(check_symbol_evidence(symbol_map, symbols, evidence_map_path, vectors_dir))
         if failures:
             print("symbol map check failed:", file=sys.stderr)
             for failure in failures[:50]:
@@ -317,6 +335,99 @@ def check_symbol_map(symbol_map: Dict[str, Any], symbols: Sequence[PythonSymbol]
     for stale_key in sorted(set(entries) - current_keys):
         failures.append(f"stale map entry for removed Python symbol {stale_key}")
     return failures
+
+
+def check_symbol_evidence(
+    symbol_map: Dict[str, Any],
+    symbols: Sequence[PythonSymbol],
+    evidence_map_path: pathlib.Path,
+    vectors_dir: pathlib.Path,
+) -> List[str]:
+    failures: List[str] = []
+    if not evidence_map_path.exists():
+        return [f"symbol evidence map is missing: {evidence_map_path}"]
+
+    evidence_map = load_json(evidence_map_path)
+    known_test_ids = set(evidence_map.get("knownTestIds", []))
+    rules = evidence_map.get("moduleRules", [])
+    if not known_test_ids:
+        failures.append(f"{evidence_map_path} must define non-empty knownTestIds")
+    if not rules:
+        failures.append(f"{evidence_map_path} must define non-empty moduleRules")
+        return failures
+
+    vectors_by_type = load_vectors_by_input_type(vectors_dir)
+    symbol_lookup = {symbol.key: symbol for symbol in symbols}
+    entries = index_existing_entries(symbol_map)
+
+    for key, entry in entries.items():
+        symbol = symbol_lookup.get(key)
+        if not symbol:
+            continue
+        status = entry.get("status")
+        if status == "n/a":
+            continue
+        if status == "ported" and not is_non_trivial_ported(entry):
+            continue
+
+        rule = resolve_module_rule(symbol.module, rules)
+        if not rule:
+            failures.append(f"{key} has no matching evidence rule")
+            continue
+
+        test_ids = list(rule.get("testIds") or [])
+        if not test_ids:
+            failures.append(f"{key} evidence rule must provide testIds")
+        for test_id in test_ids:
+            if test_id not in known_test_ids:
+                failures.append(f"{key} cites unknown test id {test_id!r}")
+
+        input_types = list(rule.get("coveringInputTypes") or [])
+        if not input_types:
+            failures.append(f"{key} evidence rule must provide coveringInputTypes")
+        for input_type in input_types:
+            vector_ids = vectors_by_type.get(str(input_type), set())
+            if not vector_ids:
+                failures.append(f"{key} evidence inputType {input_type!r} has no vectors in corpus")
+
+    return failures
+
+
+def load_vectors_by_input_type(vectors_dir: pathlib.Path) -> Dict[str, set[str]]:
+    by_type: Dict[str, set[str]] = {}
+    if not vectors_dir.exists():
+        return by_type
+    for path in sorted(vectors_dir.glob("*.json")):
+        payload = load_json(path)
+        for vector in payload.get("vectors", []):
+            input_type = str(vector.get("inputType", ""))
+            vector_id = str(vector.get("id", ""))
+            if not input_type or not vector_id:
+                continue
+            by_type.setdefault(input_type, set()).add(vector_id)
+    return by_type
+
+
+def resolve_module_rule(module: str, rules: Sequence[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    best: Optional[Dict[str, Any]] = None
+    best_len = -1
+    for rule in rules:
+        prefix = str(rule.get("modulePrefix", ""))
+        if prefix and not module.startswith(prefix):
+            continue
+        if len(prefix) > best_len:
+            best = rule
+            best_len = len(prefix)
+    return best
+
+
+def is_non_trivial_ported(entry: Dict[str, Any]) -> bool:
+    if entry.get("status") != "ported":
+        return False
+    if entry.get("kind") == "function":
+        return True
+    symbol = str(entry.get("pythonSymbol", ""))
+    return bool(symbol) and not symbol.endswith(TRIVIAL_PORTED_SUFFIXES)
 
 
 def index_existing_entries(symbol_map: Optional[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:

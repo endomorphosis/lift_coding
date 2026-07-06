@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "2026-07-05",
+  "similarityCases": [
+    {
+      "id": "decompiler-similarity-empty-001",
+      "left": "",
+      "right": "",
+      "expected": 1.0
+    },
+    {
+      "id": "decompiler-similarity-partial-001",
+      "left": "Alice must report by 5pm",
+      "right": "alice must report by 5 pm",
+      "expected": 0.727273
+    },
+    {
+      "id": "decompiler-similarity-apostrophe-001",
+      "left": "Contractor's duty",
+      "right": "contractor duty",
+      "expected": 0.5
+    }
+  ],
+  "slotMapCases": [
+    {
+      "id": "decompiler-slot-map-default-001",
+      "includeFixed": false,
+      "includeProvenanceOnly": true,
+      "decoded": {
+        "sourceId": "doc-1",
+        "text": "dummy",
+        "phrases": [
+          {
+            "text": "  Alice   ",
+            "slot": " actor ",
+            "fixed": false,
+            "provenanceOnly": false
+          },
+          {
+            "text": "Alice",
+            "slot": "actor",
+            "fixed": false,
+            "provenanceOnly": false
+          },
+          {
+            "text": "must report",
+            "slot": "predicate",
+            "fixed": true,
+            "provenanceOnly": false
+          },
+          {
+            "text": "section 101",
+            "slot": "citation",
+            "fixed": false,
+            "provenanceOnly": true
+          }
+        ]
+      },
+      "expected": {
+        "actor": [
+          "Alice"
+        ],
+        "citation": [
+          "section 101"
+        ]
+      }
+    },
+    {
+      "id": "decompiler-slot-map-no-prov-001",
+      "includeFixed": true,
+      "includeProvenanceOnly": false,
+      "decoded": {
+        "sourceId": "doc-2",
+        "text": "dummy",
+        "phrases": [
+          {
+            "text": "Bob",
+            "slot": "actor",
+            "fixed": false,
+            "provenanceOnly": false
+          },
+          {
+            "text": "must pay",
+            "slot": "predicate",
+            "fixed": true,
+            "provenanceOnly": false
+          },
+          {
+            "text": "section 202",
+            "slot": "citation",
+            "fixed": false,
+            "provenanceOnly": true
+          }
+        ]
+      },
+      "expected": {
+        "actor": [
+          "Bob"
+        ],
+        "predicate": [
+          "must pay"
+        ]
+      }
+    }
+  ],
+  "formulaRenderCases": [
+    {
+      "id": "decompiler-formula-render-deontic-001",
+      "formula": {
+        "formulaId": "f1",
+        "operator": {
+          "family": "deontic",
+          "system": "SDL",
+          "symbol": "O",
+          "label": "obligation"
+        },
+        "predicate": {
+          "name": "file_report",
+          "arguments": ["agency", "annual_report"],
+          "role": "action"
+        },
+        "provenance": {
+          "sourceId": "src-1",
+          "startChar": 0,
+          "endChar": 24,
+          "citation": "42 U.S.C. 1983"
+        }
+      },
+      "expected": "O[deontic:SDL](file_report(agency, annual_report))"
+    },
+    {
+      "id": "decompiler-formula-render-frame-no-args-001",
+      "formula": {
+        "formulaId": "f2",
+        "operator": {
+          "family": "frame",
+          "system": "FrameNet",
+          "symbol": "Frame",
+          "label": "framed as"
+        },
+        "predicate": {
+          "name": "notice_frame",
+          "arguments": [],
+          "role": "frame"
+        },
+        "provenance": {
+          "sourceId": "src-2",
+          "startChar": 10,
+          "endChar": 22
+        }
+      },
+      "expected": "Frame[frame:FrameNet](notice_frame)"
+    }
+  ],
+  "decodedDocumentCases": [
+    {
+      "id": "decompiler-decode-document-structured-001",
+      "document": {
+        "documentId": "doc-1",
+        "source": "corpus",
+        "normalizedText": "The agency must file annual report if requested unless exempt.",
+        "metadata": {
+          "parser_warnings": ["warn-one"]
+        },
+        "formulas": [
+          {
+            "formulaId": "f1",
+            "operator": {
+              "family": "deontic",
+              "system": "SDL",
+              "symbol": "O",
+              "label": "obligation"
+            },
+            "predicate": {
+              "name": "file_report",
+              "arguments": ["agency", "annual_report"],
+              "role": "action"
+            },
+            "provenance": {
+              "sourceId": "src-1",
+              "startChar": 4,
+              "endChar": 28,
+              "citation": "42 U.S.C. 1983"
+            },
+            "conditions": ["if requested"],
+            "exceptions": ["unless exempt"],
+            "metadata": {
+              "cue_start_char": 4,
+              "cue_end_char": 8
+            }
+          }
+        ]
+      },
+      "slotSubsetKeys": [
+        "source_context_span",
+        "modal_source_span",
+        "formula",
+        "operator",
+        "modal_operator",
+        "modal_family",
+        "modal_system",
+        "predicate",
+        "arguments",
+        "condition",
+        "exception"
+      ],
+      "expected": {
+        "source_id": "doc-1",
+        "text": "The agency must file annual report if requested unless exempt.",
+        "support_span": [4, 28],
+        "reconstruction_similarity": 1.0,
+        "modal_span_coverage": 0.387097,
+        "reconstruction_strategy": "provenance_span_reconstruction_v1",
+        "parser_warnings": ["warn-one"],
+        "missing_slots": [],
+        "formulas": ["O[deontic:SDL](file_report(agency, annual_report))"],
+        "slot_subset": {
+          "source_context_span": ["The", "report if requested unless exempt."],
+          "modal_source_span": ["agency must file annual"],
+          "formula": ["O[deontic:SDL](file_report(agency, annual_report))"],
+          "operator": ["obligatory"],
+          "modal_operator": ["O"],
+          "modal_family": ["deontic"],
+          "modal_system": ["SDL"],
+          "predicate": ["file report"],
+          "arguments": ["agency, annual_report"],
+          "condition": ["if requested"],
+          "exception": ["unless exempt"]
+        }
+      }
+    },
+    {
+      "id": "decompiler-decode-document-empty-formulas-001",
+      "document": {
+        "documentId": "doc-empty",
+        "source": "corpus",
+        "normalizedText": "No modal formulas were extracted.",
+        "metadata": {
+          "parser_warnings": ["missing-modal"]
+        },
+        "formulas": []
+      },
+      "slotSubsetKeys": ["source_context_span"],
+      "expected": {
+        "source_id": "doc-empty",
+        "text": "No modal formulas were extracted.",
+        "support_span": [0, 0],
+        "reconstruction_similarity": 1.0,
+        "modal_span_coverage": 0.0,
+        "reconstruction_strategy": "provenance_span_reconstruction_v1",
+        "parser_warnings": ["missing-modal"],
+        "missing_slots": ["formulas"],
+        "formulas": [],
+        "slot_subset": {
+          "source_context_span": ["No modal formulas were extracted."]
+        }
+      }
+    }
+  ]
+}

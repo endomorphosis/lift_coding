@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "fol-refuted-001",
+      "subsystem": "fol",
+      "description": "Direct symbol contradiction should refute.",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": ["p", "!p"]
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": ["refuted"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["fol", "contradiction"]
+    },
+    {
+      "id": "fol-proved-001",
+      "subsystem": "fol",
+      "description": "Goal present in premises should prove.",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": ["q", "r"],
+          "goal": "q"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["fol", "goal"]
+    },
+    {
+      "id": "fol-proved-002",
+      "subsystem": "fol",
+      "description": "Consistent non-empty premises return starter proved verdict.",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": ["a", "b"]
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["fol", "consistent"]
+    },
+    {
+      "id": "fol-unknown-001",
+      "subsystem": "fol",
+      "description": "Empty FOL payload should remain unknown.",
+      "inputType": "folFormula",
+      "input": {
+        "folFormula": {
+          "premises": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "simulated"
+      },
+      "timeoutMs": 5000,
+      "tags": ["fol", "unknown"]
+    }
+  ]
+}

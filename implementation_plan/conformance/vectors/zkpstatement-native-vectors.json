@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "2026-07-03",
+  "vectors": [
+    {
+      "id": "zkpstatement-refuted-001",
+      "subsystem": "zkp-statement",
+      "description": "Explicitly invalid proof state should refute.",
+      "inputType": "zkpStatement",
+      "input": {
+        "zkpStatement": {
+          "claims": [
+            "age_over_18"
+          ],
+          "proofState": "invalid"
+        }
+      },
+      "expected": {
+        "status": "refuted",
+        "acceptableReasons": [
+          "refuted"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp-statement",
+        "invalid"
+      ]
+    },
+    {
+      "id": "zkpstatement-proved-001",
+      "subsystem": "zkp-statement",
+      "description": "Valid proof state should prove.",
+      "inputType": "zkpStatement",
+      "input": {
+        "zkpStatement": {
+          "claims": [
+            "salary_above_threshold"
+          ],
+          "proofState": "valid"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp-statement",
+        "valid"
+      ]
+    },
+    {
+      "id": "zkpstatement-proved-002",
+      "subsystem": "zkp-statement",
+      "description": "Non-empty claims with unknown proof state return starter proved verdict.",
+      "inputType": "zkpStatement",
+      "input": {
+        "zkpStatement": {
+          "claims": [
+            "membership_proof"
+          ],
+          "proofState": "unknown"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": [
+          "proved"
+        ],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp-statement",
+        "claims"
+      ]
+    },
+    {
+      "id": "zkpstatement-unknown-001",
+      "subsystem": "zkp-statement",
+      "description": "Empty payload should remain unknown.",
+      "inputType": "zkpStatement",
+      "input": {
+        "zkpStatement": {
+          "claims": [],
+          "proofState": "unknown"
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": [
+          "unknown"
+        ],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "host-dependent",
+        "excludeFromParityWhenSimulated": true
+      },
+      "timeoutMs": 5000,
+      "tags": [
+        "zkp-statement",
+        "unknown"
+      ]
+    }
+  ]
+}

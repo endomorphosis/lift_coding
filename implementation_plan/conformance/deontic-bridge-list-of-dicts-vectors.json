@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "lod-empty-array",
+      "input": [],
+      "expected": []
+    },
+    {
+      "id": "lod-list-of-dicts",
+      "input": [
+        { "a": 1 },
+        { "b": "two" }
+      ],
+      "expected": [
+        { "a": 1 },
+        { "b": "two" }
+      ]
+    },
+    {
+      "id": "lod-mixed-list",
+      "input": [
+        { "a": 1 },
+        2,
+        "x",
+        null,
+        [1, 2],
+        { "b": "two" }
+      ],
+      "expected": [
+        { "a": 1 },
+        { "b": "two" }
+      ]
+    },
+    {
+      "id": "lod-string-input",
+      "input": "not-a-list",
+      "expected": []
+    },
+    {
+      "id": "lod-object-input",
+      "input": { "a": 1 },
+      "expected": []
+    }
+  ]
+}

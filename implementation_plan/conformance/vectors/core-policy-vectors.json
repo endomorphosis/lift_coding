@@ -754,9 +754,29 @@
       "description": "ZKP statement for F-logic proof wrapper.",
       "inputType": "policy",
       "input": { "policy": { "id": "zkp-flogic", "version": "1", "permissions": [{ "cap": "query", "rsc": "frame" }], "prohibitions": [], "obligations": [] }, "zkpStatement": { "circuit": "flogic_v1", "privateAxioms": false } },
-      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "simulated" },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent", "excludeFromParityWhenSimulated": true },
       "timeoutMs": 5000,
-      "tags": ["zkp", "simulated"]
+      "tags": ["zkp", "simulated", "flogic", "host-native"]
+    },
+    {
+      "id": "zkp-sim-011",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for ErgoAI bridge wrapper.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-ergo", "version": "1", "permissions": [{ "cap": "derive", "rsc": "ruleset" }], "prohibitions": [], "obligations": [] }, "zkpStatement": { "circuit": "ergoai_v1", "privateAxioms": false } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent", "excludeFromParityWhenSimulated": true },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "ergo", "host-native"]
+    },
+    {
+      "id": "zkp-sim-012",
+      "subsystem": "zkp-statement",
+      "description": "ZKP statement for F-logic external prover fallback wrapper.",
+      "inputType": "policy",
+      "input": { "policy": { "id": "zkp-flogic-fallback", "version": "1", "permissions": [{ "cap": "query", "rsc": "frame-fallback" }], "prohibitions": [], "obligations": [] }, "zkpStatement": { "circuit": "flogic_fallback_v1", "privateAxioms": true } },
+      "expected": { "status": "sat", "acceptableReasons": ["sat", "proved"], "decided": true, "backendMode": "host-dependent", "excludeFromParityWhenSimulated": true },
+      "timeoutMs": 5000,
+      "tags": ["zkp", "simulated", "flogic", "host-native"]
     },
     {
       "id": "zkp-sim-006",

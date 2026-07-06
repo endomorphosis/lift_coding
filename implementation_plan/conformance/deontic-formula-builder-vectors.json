@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "2026-07-05",
+  "vectors": [
+    {
+      "id": "deontic-formula-prohibition-parser-001",
+      "element": {
+        "source_id": "p1",
+        "canonical_citation": "sec 2",
+        "deontic_operator": "F",
+        "norm_type": "prohibition",
+        "subject": ["operator"],
+        "action": ["disclose records"],
+        "text": "The operator shall not disclose records.",
+        "support_text": "The operator shall not disclose records.",
+        "support_span": [0, 40],
+        "promotable_to_theorem": true
+      }
+    },
+    {
+      "id": "deontic-formula-proposition-fallback-parser-001",
+      "element": {
+        "source_id": "p2",
+        "canonical_citation": "sec 3",
+        "deontic_operator": "O",
+        "norm_type": "obligation",
+        "subject": ["agency"],
+        "proposition": ["publish reports"],
+        "text": "The agency must publish reports.",
+        "support_text": "The agency must publish reports.",
+        "support_span": [0, 35],
+        "promotable_to_theorem": true
+      }
+    },
+    {
+      "id": "deontic-formula-condition-parser-001",
+      "element": {
+        "source_id": "p3",
+        "canonical_citation": "sec 4",
+        "deontic_operator": "O",
+        "norm_type": "obligation",
+        "subject": ["contractor"],
+        "action": ["submit a report"],
+        "conditions": ["the agency requests it"],
+        "text": "The contractor shall submit a report if the agency requests it.",
+        "support_text": "The contractor shall submit a report if the agency requests it.",
+        "support_span": [0, 63],
+        "promotable_to_theorem": true
+      }
+    },
+    {
+      "id": "deontic-formula-exception-parser-001",
+      "element": {
+        "source_id": "p4",
+        "canonical_citation": "sec 5",
+        "deontic_operator": "P",
+        "norm_type": "permission",
+        "subject": ["agency"],
+        "action": ["issue permits"],
+        "exceptions": ["the applicant is suspended"],
+        "text": "The agency may issue permits unless the applicant is suspended.",
+        "support_text": "The agency may issue permits unless the applicant is suspended.",
+        "support_span": [0, 61],
+        "parser_warnings": ["exception_requires_scope_review"]
+      }
+    },
+    {
+      "id": "deontic-formula-applicability-parser-001",
+      "element": {
+        "source_id": "p5",
+        "canonical_citation": "sec 6",
+        "deontic_operator": "APP",
+        "norm_type": "applicability",
+        "subject": ["law"],
+        "action": ["applies to residents"],
+        "text": "This law applies to residents.",
+        "support_text": "This law applies to residents.",
+        "support_span": [0, 30],
+        "promotable_to_theorem": true
+      }
+    },
+    {
+      "id": "deontic-formula-exemption-parser-001",
+      "element": {
+        "source_id": "p6",
+        "canonical_citation": "sec 7",
+        "deontic_operator": "EXEMPT",
+        "norm_type": "exemption",
+        "subject": ["nonprofit"],
+        "action": ["exempt from tax"],
+        "text": "A nonprofit is exempt from tax.",
+        "support_text": "A nonprofit is exempt from tax.",
+        "support_span": [0, 32],
+        "promotable_to_theorem": true
+      }
+    },
+    {
+      "id": "deontic-formula-failure-prohibition-parser-001",
+      "element": {
+        "source_id": "p7",
+        "canonical_citation": "sec 8",
+        "deontic_operator": "F",
+        "norm_type": "prohibition",
+        "subject": ["operator"],
+        "action": ["fail to preserve records"],
+        "text": "The operator may not fail to preserve records.",
+        "support_text": "The operator may not fail to preserve records.",
+        "support_span": [0, 47],
+        "promotable_to_theorem": true
+      }
+    }
+  ]
+}
