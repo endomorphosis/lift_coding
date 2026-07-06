@@ -174,31 +174,34 @@
     {
       "module": "bridge/cec_dcec.py",
       "classification": "compact-faithful",
-      "reason": "CEC-DCEC bridge behavior is compacted into TS namespace/bridge services and exercised by DCEC native conformance vectors.",
-      "testIds": ["conformance-ts", "conformance-compare"]
+      "reason": "CEC-DCEC bridge behavior is compacted into TS namespace/bridge services and directly gated for frame-logic triples and graph projection against Python.",
+      "testIds": ["conformance-bridge-frame-graph-crosslang"]
     },
     {
       "module": "bridge/deontic_norms.py",
       "classification": "compact-faithful",
-      "reason": "Deontic-norm bridge helpers are compact TS implementations with dedicated cross-language parity slices for extraction, normalization, guidance, and row matching.",
+      "reason": "Deontic-norm bridge helpers are compact TS implementations with dedicated cross-language parity slices for extraction, normalization, guidance, row matching, frame-logic triples, and graph projection.",
       "testIds": [
         "conformance-deontic-bridge-document-id-crosslang",
         "conformance-deontic-bridge-normalized-text-crosslang",
         "conformance-deontic-bridge-citation-crosslang",
-        "conformance-deontic-bridge-guidance-route-crosslang"
+        "conformance-deontic-bridge-decoded-text-crosslang",
+        "conformance-deontic-bridge-guidance-crosslang",
+        "conformance-deontic-bridge-guidance-route-crosslang",
+        "conformance-deontic-bridge-frame-graph-crosslang"
       ]
     },
     {
       "module": "bridge/fol_tdfol.py",
       "classification": "compact-faithful",
-      "reason": "FOL-to-TDFOL bridge behavior is compacted into TS bridge/serializer modules and exercised by FOL, TDFOL, and temporal native vectors.",
-      "testIds": ["conformance-ts", "conformance-compare", "conformance-temporal-native"]
+      "reason": "FOL-to-TDFOL bridge behavior is compacted into TS bridge/serializer modules and directly gated for frame-logic triples and graph projection against Python.",
+      "testIds": ["conformance-bridge-frame-graph-crosslang"]
     },
     {
       "module": "bridge/multiview.py",
       "classification": "compact-faithful",
-      "reason": "Multiview bridge behavior is compact TS graph/view assembly covered through policy and bridge conformance vectors.",
-      "testIds": ["conformance-ts", "conformance-compare"]
+      "reason": "Multiview bridge behavior is compact TS graph/view assembly directly gated against Python for merged Legal-IR document construction.",
+      "testIds": ["conformance-multiview-merge-crosslang"]
     },
     {
       "module": "common/bounded_cache.py",
@@ -215,8 +218,8 @@
     {
       "module": "deontic/formula_builder.py",
       "classification": "compact-faithful",
-      "reason": "Deontic formula building is compacted into TS formula builder/prover syntax code and exercised by deontic/legal native vectors.",
-      "testIds": ["conformance-ts", "conformance-compare", "conformance-deontic-parser-elements-crosslang"]
+      "reason": "Deontic formula building is compacted into TS formula builder/prover syntax code with parser-element formula and source-grounded record parity gated against Python.",
+      "testIds": ["conformance-ts", "conformance-compare", "conformance-deontic-parser-elements-crosslang", "conformance-deontic-formula-builder-crosslang"]
     },
     {
       "module": "deontic/ir.py",
@@ -287,24 +290,27 @@
     {
       "module": "modal/codec.py",
       "classification": "compact-faithful",
-      "reason": "Codec is still compact relative to Python, but deterministic IR, guidance, and citation helpers now have direct TS implementations with cross-language parity gates.",
+      "reason": "Codec is still compact relative to Python, but deterministic IR, guidance, citation, temporal/operator, and stable embedding helpers now have direct TS implementations with cross-language parity gates.",
       "testIds": [
         "conformance-modal-codec-ir-crosslang",
         "conformance-modal-codec-guidance-crosslang",
-        "conformance-modal-codec-citation-crosslang"
+        "conformance-modal-codec-citation-crosslang",
+        "conformance-modal-codec-temporal-operator-crosslang",
+        "conformance-modal-codec-guidance-summary-crosslang",
+        "conformance-modal-codec-stable-embedding-crosslang"
       ]
     },
     {
       "module": "modal/compiler.py",
       "classification": "compact-faithful",
-      "reason": "Compiler is compact relative to Python, with deterministic family-token and serialization behavior directly ported and cross-language gated.",
-      "testIds": ["conformance-modal-compiler-family-token-crosslang", "conformance-modal-compiler-serialization-crosslang"]
+      "reason": "Compiler is compact relative to Python, with deterministic family-token, serialization, ambiguity-policy, formula-span ambiguity, ranking-share, and regex/legal compile behavior directly ported and cross-language gated.",
+      "testIds": ["conformance-modal-compiler-family-token-crosslang", "conformance-modal-compiler-serialization-crosslang", "conformance-modal-compiler-ambiguity-policy-crosslang", "conformance-modal-compiler-formula-ambiguity-crosslang", "conformance-modal-compiler-regex-compile-crosslang"]
     },
     {
       "module": "modal/decompiler.py",
       "classification": "compact-faithful",
-      "reason": "Decompiler is compact relative to Python, with deterministic token/slot and citation helper behavior directly ported and cross-language gated.",
-      "testIds": ["conformance-modal-decompiler-crosslang", "conformance-modal-decompiler-citation-crosslang"]
+      "reason": "Decompiler is compact relative to Python, with deterministic token/slot, citation, decoded-document, and temporal/operator helper behavior directly ported and cross-language gated.",
+      "testIds": ["conformance-modal-decompiler-crosslang", "conformance-modal-decompiler-citation-crosslang", "conformance-modal-decompiler-temporal-operator-crosslang"]
     },
     {
       "module": "phase7_4_benchmarks.py",

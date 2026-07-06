@@ -82,10 +82,15 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-zkp-real-browser` is an intentionally stricter red/green
   audit for real browser ZKP proving. It requires a browser-compatible ZKP
   dependency/artifact/backend and rejects production ZKP service paths that
-  consume deterministic simulated provers. This target is not part of the
-  default `make conformance` run because it is expected to fail until the
-  Groth16/ProveKit host-native adapters are replaced or supplemented by a real
-  TS/WASM proving backend.
+  consume deterministic simulated provers. This target is part of default
+  `make conformance`; it is satisfied by the browser Schnorr/Fiat-Shamir
+  backend plus the browser SnarkJS adapter surface, while host-native
+  Groth16/ProveKit adapters remain separately reported.
+- `make conformance-groth16-semantic-circuit` gates the committed
+  SnarkJS/Groth16 semantic circuit corpus for `deontic_discharge_v1`: manifest
+  hashes, positive proof generation/verification, invalid-witness rejection,
+  and tampered-public-signal rejection. This target is part of default
+  `make conformance` and runs without Python or native prover binaries.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
   guidance, guidance feature-string extraction, and frame-audit helper parity
   against the Python modal codec.

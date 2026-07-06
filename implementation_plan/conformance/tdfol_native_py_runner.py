@@ -53,6 +53,22 @@ def _run_native_tdfol(axioms: List[str], goal: str) -> Dict[str, Any]:
             "metadata": {"route": "deontic-contradiction", "simulated": False, "atom": overlap[0]},
         }
 
+    permission_goal = re.match(r"^P\((.+)\)$", goal)
+    if permission_goal:
+        permitted_atom = str(permission_goal.group(1) or "").strip()
+        if permitted_atom in obligations:
+            return {
+                "status": "proved",
+                "reason": "proved",
+                "proverId": "tdfol-native",
+                "metadata": {
+                    "route": "deontic-d-axiom",
+                    "simulated": False,
+                    "sourceRule": "DeonticDRule",
+                    "atom": permitted_atom,
+                },
+            }
+
     kb = TDFOLKnowledgeBase()
     parsed_axioms = [parse_tdfol(axiom) for axiom in axioms]
     for formula in parsed_axioms:
