@@ -75,7 +75,10 @@ SwissKnife theorem-prover parity harness.
 - `make conformance-browser-purity` gates PORT-257 browser import purity for
   the browser-facing prover surface: no static Node host imports, no
   child-process/filesystem/native crypto primitives, and no host-native runner
-  required at module import time.
+  required at module import time. It also scans the transitive local import
+  graph of those browser-facing services and rejects static Node-host imports or
+  Node crypto helpers (`createHash`, `Buffer.from`) anywhere on that reachable
+  path.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
   guidance, guidance feature-string extraction, and frame-audit helper parity
   against the Python modal codec.
