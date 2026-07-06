@@ -174,6 +174,13 @@ Run the local harness from the repository root:
 make conformance
 ```
 
+Cross-language Python-reference parity checks are now split into an explicit
+opt-in target:
+
+```bash
+make conformance-crosslang
+```
+
 By default, the TypeScript runner uses deterministic simulated Z3 behavior for
 propositional/FOL policy vectors so the harness is usable without the large Z3
 WASM artifact. Set `SWISSKNIFE_CONFORMANCE_LIVE_Z3=1` to require the live Z3

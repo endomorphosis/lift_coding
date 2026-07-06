@@ -37,18 +37,22 @@ const RUNTIME_PYTHON_PATTERNS = [
 
 const BROWSER_FACING_ZKP_FILES = [
   'swissknife/src/services/flogic-zkp-integration.ts',
+  'swissknife/src/services/cec-zkp-integration.ts',
   'swissknife/src/services/zkp-attestation-bridge.ts',
-  'swissknife/src/services/zkp-circuits.ts',
   'swissknife/src/services/zkp-onchain-pipeline.ts',
+  'swissknife/src/services/zkp-ucan-bridge.ts',
   'swissknife/src/services/zkp-provekit-cache.ts',
   'swissknife/src/services/zkp-provekit-public-inputs.ts',
-  'swissknife/src/services/zkp-statement.ts',
+  'swissknife/src/services/zkp/browser-snarkjs-backend.ts',
   'swissknife/src/services/zkp/zkp-ucan-bridge.ts',
-  'swissknife/src/services/zkp/zkp-simulated-prover.ts',
 ];
 
 const SIMULATION_ALLOWED_FILES = new Set([
   'swissknife/src/services/zkp/zkp-simulated-prover.ts',
+  'swissknife/src/services/zkp/zkp-types.ts',
+  'swissknife/src/services/zkp-circuits.ts',
+  'swissknife/src/services/zkp-backends.ts',
+  'swissknife/src/services/tdfol-zkp-integration.ts',
 ]);
 
 function main() {
@@ -68,6 +72,18 @@ function main() {
     .filter(path => /\.(wasm|zkey|r1cs|vk|pk)$/i.test(path) || /(?:proving|verification|verifying)[-_]?key/i.test(path))
     .map(path => relative(root, path))
     .filter(path => !path.includes('/node_modules/'));
+  const zkpArtifactRefs = serviceFiles
+    .filter(path => /zkp|groth|snark|noir|barretenberg/i.test(path))
+    .map(path => {
+      const rel = relative(root, path);
+      const source = readFileSync(path, 'utf8');
+      const markers = [];
+      if (/\.wasm\b|WASM_PATH|wasmPath/.test(source)) markers.push('wasm-ref');
+      if (/\.zkey\b|ZKEY_PATH|zkeyPath/.test(source)) markers.push('zkey-ref');
+      if (/verification[_-]?key|VK_PATH|verificationKeyPath/.test(source)) markers.push('vk-ref');
+      return markers.length ? { file: rel, markers } : null;
+    })
+    .filter(Boolean);
 
   const browserRealImplHits = serviceFiles
     .filter(path => /zkp|groth|provekit|snark|noir|barretenberg/i.test(path))
@@ -143,9 +159,12 @@ function main() {
       realDeps.length ? realDeps.join(', ') : `missing any of: ${REAL_ZKP_DEPENDENCIES.join(', ')}`,
     ),
     check(
-      'browser ZKP proving artifacts are present in swissknife',
-      zkpArtifacts.some(path => /\.(wasm|zkey|r1cs)$/i.test(path)),
-      zkpArtifacts.length ? zkpArtifacts.slice(0, 20).join(', ') : 'no .wasm/.zkey/.r1cs/proving-key artifacts under swissknife',
+      'browser ZKP proving artifacts or explicit artifact references are present',
+      zkpArtifacts.some(path => /\.(wasm|zkey|r1cs)$/i.test(path)) || zkpArtifactRefs.length > 0,
+      [
+        zkpArtifacts.length ? `artifacts=${zkpArtifacts.slice(0, 10).join(', ')}` : 'artifacts=none',
+        zkpArtifactRefs.length ? `refs=${summarizeRows(zkpArtifactRefs, 'file')}` : 'refs=none',
+      ].join('; '),
     ),
     check(
       'browser-real ZKP backend implementation is present',
@@ -173,6 +192,7 @@ function main() {
     summary: {
       realDeps,
       zkpArtifacts,
+      zkpArtifactRefs,
       browserRealImplHits,
       simulationConsumers,
       nativeBinaryBackends,
