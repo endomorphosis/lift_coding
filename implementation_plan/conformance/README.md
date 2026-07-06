@@ -72,6 +72,10 @@ SwissKnife theorem-prover parity harness.
   (`policy-proxy-default` or `simulated-runtime-enabled`).
 - `make conformance-temporal-native` gates PORT-255 no-remote temporal
   consistency behavior through native TS TDFOL tests.
+- `make conformance-browser-purity` gates PORT-257 browser import purity for
+  the browser-facing prover surface: no static Node host imports, no
+  child-process/filesystem/native crypto primitives, and no host-native runner
+  required at module import time.
 - `make conformance-modal-codec-guidance-crosslang` gates PORT-246 compiler
   guidance, guidance feature-string extraction, and frame-audit helper parity
   against the Python modal codec.
