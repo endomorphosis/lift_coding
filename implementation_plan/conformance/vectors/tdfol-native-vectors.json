@@ -121,6 +121,68 @@
       },
       "timeoutMs": 5000,
       "tags": ["tdfol", "unknown"]
+    },
+    {
+      "id": "tdfol-temporal-t-axiom-proved-001",
+      "subsystem": "temporal",
+      "description": "Temporal T axiom starter: G(phi) proves phi.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["G(retain_records)"],
+          "goal": "retain_records"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "temporal", "temporal-t-axiom"]
+    },
+    {
+      "id": "tdfol-goal-in-axioms-proved-002",
+      "subsystem": "temporal",
+      "description": "Starter native parity: explicit non-modal goal in axioms is proved.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": ["audit_logged", "G(access_granted)"],
+          "goal": "audit_logged"
+        }
+      },
+      "expected": {
+        "status": "proved",
+        "acceptableReasons": ["proved"],
+        "strictStructuredParity": true,
+        "decided": true,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "temporal", "goal-in-axioms"]
+    },
+    {
+      "id": "tdfol-goal-unknown-001",
+      "subsystem": "temporal",
+      "description": "Unrelated goal remains unknown in starter native corpus.",
+      "inputType": "tdfol",
+      "input": {
+        "tdfol": {
+          "axioms": []
+        }
+      },
+      "expected": {
+        "status": "unknown",
+        "acceptableReasons": ["unknown"],
+        "strictStructuredParity": true,
+        "decided": false,
+        "backendMode": "real"
+      },
+      "timeoutMs": 5000,
+      "tags": ["tdfol", "unknown", "goal-miss"]
     }
   ]
 }
