@@ -445,7 +445,7 @@ Acceptance target:
 
 ## SWR-019 Separate Web Worker and Node worker runtimes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/workers
