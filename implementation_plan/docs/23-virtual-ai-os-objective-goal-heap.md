@@ -1164,7 +1164,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G710 Interoperate external/meta-wearables-dat-android with external/ipfs_datasets
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3010
 - Track: interoperability
@@ -1183,12 +1183,16 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Evidence: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md, interface contract external/meta-wearables-dat-android external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md, external/meta-wearables-dat-android, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: python -m pytest tests/integration -q
+- HAO-738 proof: `src/handsfree/meta_wearables_dat_android_ipfs_datasets_interop.py` is the importable contract for `interface contract external/meta-wearables-dat-android external/ipfs_datasets`. It validates the Meta Wearables DAT Android Display/session descriptors, Android registration manifest, ipfs_datasets Bucket VFS schema/docs/demos, and router symbols, then emits a deterministic `sha256:` handoff receipt from `external/meta-wearables-dat-android` display events into `external/ipfs_datasets` Bucket VFS storage. `docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md` records the objective validation repair, and `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py` proves descriptor discovery, JSON Schema conformance, demo compile safety, content-addressed runtime handoff behavior, and heap/discovery alignment for HAO-738.
 - Refinement depth: 1
 - Embedding query: external/meta-wearables-dat-android external/ipfs_datasets interoperability integration test interface descriptor __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 boto3 bs4 cProfile
 - AST query: external/meta-wearables-dat-android, external/ipfs_datasets, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_datasets
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py => tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py (path), objective validation repair (exact), interface contract external/meta-wearables-dat-android external/ipfs_datasets (exact); docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md => docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md (path), objective validation repair (exact), HAO-738 (exact); src/handsfree/meta_wearables_dat_android_ipfs_datasets_interop.py => src/handsfree/meta_wearables_dat_android_ipfs_datasets_interop.py (path), MetaWearablesDATAndroidIPFSDatasetsHandoff (ast), build_meta_wearables_dat_android_ipfs_datasets_handoff (ast); external/meta-wearables-dat-android/.cursor/rules/display-access.mdc => external/meta-wearables-dat-android/.cursor/rules/display-access.mdc (path), Wearables.createSession (exact), sendContent (exact); external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py => external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py (path), bucket_export_car (exact), bucket_cross_query (exact)
+- Completion validation: python -m pytest tests/integration -q
 
 ## VAIOS-G711 Interoperate external/meta-wearables-dat-android with external/ipfs_kit
 
