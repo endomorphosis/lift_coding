@@ -45,3 +45,10 @@ Prove `external/meta-wearables-dat-android` interoperates with `external/ipfs_da
 ## Suggested Handling
 
 Run and repair the objective validation command until it passes, then record the evidence.
+
+## Repair Evidence
+
+- HAO-738 objective validation repair is covered by `src/handsfree/meta_wearables_dat_android_ipfs_datasets_interop.py`, which exposes the importable `MetaWearablesDATAndroidIPFSDatasetsHandoff` contract and `build_meta_wearables_dat_android_ipfs_datasets_handoff()` runtime handoff builder.
+- `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py` validates `interface contract external/meta-wearables-dat-android external/ipfs_datasets`, descriptor discovery, Bucket VFS schema/docs/demos, deterministic content addressing, and objective heap alignment.
+- `docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md` records the pair contract, handoff route, expected Bucket VFS operations, and validation command.
+- External evidence paths are now concrete for `external/meta-wearables-dat-android`, `external/ipfs_datasets`, `external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json`, `external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`, `external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py`, and `external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py`.
