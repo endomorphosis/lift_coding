@@ -1,7 +1,9 @@
 # Mobile / external/ipfs_accelerate Interop
 
-VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
-`objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+MGW-580 repairs the VAIOS-G719 objective validation gap re-filed under the
+Meta glasses display widgets backlog for the
+`objective/interoperability/mobile-external_ipfs_accelerate` bundle. VAI-672
+is the prior virtual_ai_os lineage record for the same handoff.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -63,12 +65,12 @@ exist and declare the expected tables/functions, loads the JavaScript
 descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
 objective validation repair is recorded in
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
-plus the attempt-six confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`
-and the attempt-seven confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md`
-and prior attempt-five confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md`,
+the MGW confirmation records
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md`
+and
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-4-validation-confirmation.md`,
+the prior VAI lineage record
+`data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`,
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).

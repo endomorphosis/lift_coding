@@ -1,7 +1,9 @@
 """Interop contract between the mobile client and ``external/ipfs_accelerate``.
 
-VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap that requires
-`mobile` to interoperate with `external/ipfs_accelerate` through importable
+MGW-580 repairs the VAIOS-G719 objective validation gap re-filed under the
+Meta glasses display widgets backlog. The older VAI-672 record is retained as
+lineage, but this module is the scanner-visible runtime contract for proving
+`mobile` interoperates with `external/ipfs_accelerate` through importable
 contracts, interface descriptors, runtime handoff behavior, and integration
 tests.
 

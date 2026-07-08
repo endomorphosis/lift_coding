@@ -1,4 +1,4 @@
-"""Mobile / external/ipfs_accelerate interoperability regression tests for VAI-672."""
+"""Mobile / external/ipfs_accelerate interoperability regression tests for MGW-580."""
 
 from __future__ import annotations
 
@@ -191,8 +191,21 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
     assert set(REQUIRED_TIME_SERIES_TABLES).issubset(
         set(descriptor["runtime_handoff"]["time_series_tables"])
     )
-    assert descriptor["validation"]["task_id"] == "VAI-672"
+    assert descriptor["validation"]["task_id"] == "MGW-580"
+    assert descriptor["validation"]["prior_task_id"] == "VAI-672"
     assert descriptor["validation"]["goal_id"] == GOAL_ID
+    assert descriptor["validation"]["objective_gap_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+    )
+    assert descriptor["validation"]["validation_repair_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["prior_validation_repair_ref"] == (
+        "data/virtual_ai_os/discovery/"
+        "2026-07-08-vai-672-objective-validation-repair.md"
+    )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
@@ -216,6 +229,8 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract mobile external/ipfs_accelerate"
     assert contract["goal_id"] == GOAL_ID
+    assert "MGW-580" in contract["objective_validation_repair"]
+    assert "VAI-672" in contract["objective_validation_repair"]
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -247,25 +262,21 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = (
         REPO_ROOT / "docs/integration/mobile-external_ipfs_accelerate.md"
     ).read_text(encoding="utf-8")
-    discovery = (
+    mgw_discovery = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    mgw_attempt_three = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    mgw_attempt_four = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-4-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    prior_vai_discovery = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
-    ).read_text(encoding="utf-8")
-    attempt_four = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-4-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    attempt_five = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    attempt_six = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    attempt_seven = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
@@ -273,6 +284,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
 
     required_terms = [
         "VAI-672",
+        "MGW-580",
         GOAL_ID,
         "objective/interoperability/mobile-external_ipfs_accelerate",
         "objective validation repair",
@@ -287,19 +299,33 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, attempt_four, attempt_five, attempt_six, attempt_seven, heap):
+    for content in (docs, mgw_discovery, mgw_attempt_three, mgw_attempt_four, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
 
-    attempt_six_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-6-validation-confirmation.md"
+    for term in (
+        GOAL_ID,
+        "objective validation repair",
+        "interface contract mobile external/ipfs_accelerate",
+        "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+    ):
+        assert term in prior_vai_discovery
+
+    mgw_repair_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
     )
-    attempt_seven_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
+    mgw_attempt_three_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-attempt-3-validation-confirmation.md"
     )
-    assert attempt_six_record in docs
-    assert attempt_six_record in heap
-    assert attempt_seven_record in docs
-    assert attempt_seven_record in heap
+    mgw_attempt_four_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-attempt-4-validation-confirmation.md"
+    )
+    assert mgw_repair_record in docs
+    assert mgw_repair_record in heap
+    assert mgw_attempt_three_record in docs
+    assert mgw_attempt_three_record in heap
+    assert mgw_attempt_four_record in docs
+    assert mgw_attempt_four_record in heap
