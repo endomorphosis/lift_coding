@@ -706,7 +706,7 @@ state observation.
 
 ## SWR-036 Create residual browser-compatibility follow-up board
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/follow-up
 - Fingerprint: 3317b0ecb15f399f6ec384d5d28cb716421738b7
