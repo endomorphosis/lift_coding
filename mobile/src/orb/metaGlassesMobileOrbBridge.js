@@ -13,6 +13,8 @@ import {
   SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
   IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
   IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
   descriptorRef,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -20,6 +22,10 @@ import {
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
+// VAI-674 / VAIOS-G707 objective validation repair:
+// advertise `interface contract hallucinate_app mobile` during mobile ORB
+// registration for objective/interoperability/hallucinate_app-mobile.
+// Scanner term: localInterfaceKey(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE).
 const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
 export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
   'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
@@ -1304,11 +1310,15 @@ export class MetaGlassesMobileOrbBridge {
     const ipfsAccelerateInteropInterfaceCid = localInterfaceKey(
       IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE
     );
+    const hallucinateAppInteropInterfaceCid = localInterfaceKey(
+      HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE
+    );
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
       swissknifeInteropInterfaceCid,
       ipfsAccelerateInteropInterfaceCid,
+      hallucinateAppInteropInterfaceCid,
     ];
     this.edgeSession = null;
     this.bindings = new Map();
@@ -1701,6 +1711,17 @@ export class MetaGlassesMobileOrbBridge {
                 this.localInterfaceCids[3]
               ),
               interop_descriptor: IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
+            },
+          ]
+          : []),
+        ...(this.localInterfaceCids[4]
+          ? [
+            {
+              ...descriptorRef(
+                HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+                this.localInterfaceCids[4]
+              ),
+              interop_descriptor: HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
             },
           ]
           : []),
