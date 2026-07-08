@@ -367,7 +367,7 @@ Acceptance target:
 
 ## SWR-013 Split CLI and process entrypoints from browser runtime
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/host-boundary
