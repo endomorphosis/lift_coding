@@ -31,8 +31,26 @@ Validation evidence lives in `tests/integration/test_swissknife_mobile_interop.p
 It loads the JavaScript descriptor exports, verifies the DAT method mapping,
 validates representative SwissKnife control-surface and interaction-envelope
 payloads, and asserts this objective validation repair is recorded in
-`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-validation-repair.md` and the
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md`,
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-validation-repair.md`, and the
 objective heap.
+
+MGW-569 attempt 1 objective validation repair records the current
+scanner-visible proof against the fresh objective gap fingerprint
+`d33307f93408e32451468150b5e7fe003eb0222d` in
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md`.
+The mobile descriptor carries
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md`
+as the MGW-specific validation repair ref, and the DAT display widget contract
+carries the same ref. This keeps the MGW-569 objective validation repair tied to
+`tests/integration/test_swissknife_mobile_interop.py`,
+`docs/integration/swissknife-mobile.md`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`,
+`swissknife/contracts/control_surface_contract.schema.json`, and
+`swissknife/contracts/interaction_envelope.schema.json` without splitting the
+shared VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705,
+and VAIOS-G706 packet into smaller child goals.
 
 HAO-730 re-ran the VAI-661 objective validation repair for VAIOS-G700 and the
 same `goal_packet/interoperability/swissknife/06921590135c` packet. The
