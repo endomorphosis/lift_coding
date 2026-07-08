@@ -34,6 +34,68 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'subscribe_updates',
 ];
 
+export const SWISSKNIFE_MOBILE_INTEROP_CONTRACT = {
+  id: 'interface contract swissknife mobile',
+  objective_goal_id: 'VAIOS-G700',
+  goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
+  packet_goals: [
+    'VAIOS-G700',
+    'VAIOS-G701',
+    'VAIOS-G702',
+    'VAIOS-G703',
+    'VAIOS-G704',
+    'VAIOS-G705',
+    'VAIOS-G706',
+  ],
+  version: '0.1.0',
+  schema_refs: {
+    control_surface_contract:
+      'swissknife/contracts/control_surface_contract.schema.json',
+    interaction_envelope: 'swissknife/contracts/interaction_envelope.schema.json',
+    policy_decision: 'swissknife/contracts/policy_decision.schema.json',
+    mediation_receipt: 'swissknife/contracts/mediation_receipt.schema.json',
+    mcp_plus_plus_compatibility_receipt:
+      'swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json',
+  },
+  agent_identity: {
+    required: true,
+    source: 'mobile edge session actor or delegated Swissknife agent',
+  },
+  allowed_surfaces: [
+    'mobile',
+    'native_display',
+    'display_webapp',
+    'mobile_card',
+    'notification',
+    'audio_summary',
+    'voice',
+    'gesture',
+    'agent',
+  ],
+  descriptors: [
+    {
+      role: 'mobile_orb_bridge',
+      local_interface_key: 'handsfree.meta_glasses.mobile.mobile_orb_bridge@0.1.0',
+      operations: MOBILE_ORB_BRIDGE_OPERATIONS,
+    },
+    {
+      role: 'display_widget_bridge',
+      local_interface_key:
+        'handsfree.meta_glasses.display.display_widget_bridge@0.1.0',
+      operations: DISPLAY_WIDGET_BRIDGE_OPERATIONS,
+    },
+  ],
+  handoff_artifacts: [
+    'control_surface_contract_ref',
+    'interaction_envelope',
+    'normalized_intent.arguments',
+    'normalized_intent.arguments_hash',
+    'normalized_intent.allowed_surfaces',
+    'policy_decision',
+    'mediation_receipt',
+  ],
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',
@@ -129,4 +191,23 @@ export function mcpServiceDescriptorRef(descriptor, interfaceCid = null, metadat
 
 export function localInterfaceKey(descriptor) {
   return `${descriptor.namespace}.${descriptor.name}@${descriptor.version}`;
+}
+
+export function swissknifeMobileInteropDescriptorRef(interfaceCids = {}) {
+  const mobileOrbBridge = {
+    ...descriptorRef(MOBILE_ORB_BRIDGE_INTERFACE, interfaceCids.mobile_orb_bridge),
+    operations: MOBILE_ORB_BRIDGE_OPERATIONS,
+  };
+  const displayWidgetBridge = {
+    ...descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE, interfaceCids.display_widget_bridge),
+    operations: DISPLAY_WIDGET_BRIDGE_OPERATIONS,
+  };
+  return {
+    ...SWISSKNIFE_MOBILE_INTEROP_CONTRACT,
+    descriptors: [
+      mobileOrbBridge,
+      displayWidgetBridge,
+      mcpServiceDescriptorRef(TASK_STATUS_SERVICE_INTERFACE, interfaceCids.task_status_service),
+    ],
+  };
 }

@@ -886,6 +886,10 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/swissknife-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `swissknife` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Objective validation repair: VAI-661 adds `tests/integration/test_swissknife_mobile_interop.py`, `docs/integration/swissknife-mobile.md`, and `data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-validation-repair.md` as scanner-visible evidence for `interface contract swissknife mobile`.
+- Repair evidence: `mobile/src/orb/metaGlassesOrbDescriptors.js` publishes `SWISSKNIFE_MOBILE_INTEROP_CONTRACT` and `swissknifeMobileInteropDescriptorRef()` with the shared packet goals VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706.
+- Repair evidence: `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js` publishes `SWISSKNIFE_DISPLAY_WIDGET_HANDOFF_CONTRACT`, `displayWidgetActionContractRef()`, and `buildSwissknifeDisplayWidgetHandoff()` for `control_surface_contract_ref`, `interaction_envelope`, `agent_identity`, `allowed_surfaces`, `arguments`, and `arguments_hash` handoff coverage.
+- Repair evidence: `swissknife/contracts/control_surface_contract.schema.json` accepts optional `interop_targets`; `swissknife/contracts/interaction_envelope.schema.json` accepts `normalized_intent.arguments_hash`, `normalized_intent.allowed_surfaces`, and `actor.agent_identity` so the mobile runtime handoff validates before `policy_decision`, `mediation_receipt`, and `mcp_plus_plus_compatibility_receipt` dispatch.
 
 ## VAIOS-G701 Interoperate swissknife with external/ipfs_accelerate
 
