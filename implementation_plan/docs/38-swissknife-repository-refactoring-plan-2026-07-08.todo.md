@@ -13,20 +13,26 @@ The immediate architectural foundation is already mostly in place under
 browser/host barrels exist for the key runtime areas, and MCP/libp2p browser
 runtime tests exist.
 
-Current known blockers from the latest local inspection:
+Current repository state from the synchronized refactor evidence:
 
-- `npm run services:audit` currently fails because five root-level service shim
-  files remain under `src/services`:
-  - `src/services/mcp-idl.ts`
-  - `src/services/mcp-ui-profile.ts`
-  - `src/services/meta-glasses-display-profile.ts`
-  - `src/services/meta-glasses-widget-compiler.ts`
-  - `src/services/swissknife-mcp-capability-registry.ts`
-- `npm run typecheck` currently exits non-zero only on the existing `TS6305`
-  declaration-output mismatch class; no non-`TS6305` diagnostics were present in
-  the filtered check.
-- Browser-facing service entrypoint scans did not show obvious `node:*`,
-  `child_process`, `Buffer.from`, or remote/Python bridge imports.
+- `npm run services:audit` is the strict service/source boundary gate. It fails
+  on unknown files, forbidden imports, legacy compatibility shims, and legacy
+  root import specifiers, and refreshes `swissknife/docs/service-boundary-audit.json`
+  plus the module-boundary freshness receipt.
+- The former MCP, IPFS, glasses, and app-surface service shims have been moved
+  into owned submodules under `src/services/mcp`, `src/services/ipfs`,
+  `src/services/glasses`, and `src/services/apps`.
+- Service boundaries are documented in
+  `swissknife/src/services/MODULE_BOUNDARIES.md`; repository-wide module
+  boundaries are documented in `swissknife/docs/source-module-boundaries.md`.
+- Evidence maintenance is documented in
+  `swissknife/docs/refactor-evidence-maintenance.md`. Release evidence
+  freshness is tracked in `swissknife/docs/release-evidence-freshness.md`.
+- The current generated service/source audit has 46 manifest modules, 0 unknown
+  files, 0 forbidden imports, 0 legacy compatibility shims, and 0 legacy root
+  import specifiers. It still reports 15 owned top-level source compatibility
+  files outside `src/services`; those are repository module debt, not service
+  shim debt.
 
 ## Refactoring Objective
 
@@ -328,7 +334,7 @@ Acceptance target:
 
 ## SWR-010 Keep refactor documentation and evidence current
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P3
 - Track: refactor/docs
@@ -337,7 +343,8 @@ Acceptance target:
 - Depends on: SWR-001
 - Outputs: implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md, swissknife/src/services/MODULE_BOUNDARIES.md, swissknife/docs
 - Validation: test -f implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md && cd swissknife && npm run services:audit
-- Acceptance: The refactoring plan, service boundary docs, task board statuses, validation commands, and evidence links remain synchronized with the current repository state after each milestone.
+- Evidence: swissknife/src/services/MODULE_BOUNDARIES.md, swissknife/docs/refactor-evidence-maintenance.md, swissknife/docs/service-boundary-audit.json, swissknife/docs/release-evidence-freshness.md
+- Acceptance: The refactoring plan, service boundary docs, task board statuses, validation commands, and evidence links remain synchronized with the current repository state after each milestone. The plan now records the current audit state instead of the obsolete five-shim blocker, `src/services/MODULE_BOUNDARIES.md` defines service ownership and maintenance rules, and `docs/refactor-evidence-maintenance.md` maps every refactor evidence artifact to its regeneration command.
 
 ## SWR-011 Build repository-wide browser compatibility inventory
 
