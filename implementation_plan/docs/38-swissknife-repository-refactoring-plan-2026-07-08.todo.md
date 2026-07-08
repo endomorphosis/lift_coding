@@ -432,7 +432,7 @@ Acceptance target:
 
 ## SWR-018 Make browser storage runtime explicit
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/storage-browser
