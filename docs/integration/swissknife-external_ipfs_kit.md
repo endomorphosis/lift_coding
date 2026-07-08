@@ -5,6 +5,16 @@ MGW-572 repairs the VAIOS-G703 objective validation gap for the shared
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
 
+VAI-664 re-verified this same VAIOS-G703 objective gap and found that the
+`swissknife` submodule's `src/services/mcp/ipfs-kit-mcp-schema-interop-descriptor.ts`
+had been dropped on disk by an unrelated later `swissknife` submodule
+commit; VAI-664's objective validation repair
+(`data/virtual_ai_os/discovery/2026-07-08-vai-664-objective-validation-repair.md`,
+underlying gap `data/virtual_ai_os/discovery/2026-07-08-vai-664-objective-gap-f463532ba4e3.md`)
+restores that file verbatim from the submodule's own `MGW-572` history so
+`tests/integration/test_swissknife_external_ipfs_kit_interop.py` passes
+again.
+
 The repaired `interface contract swissknife external/ipfs_kit` path is:
 
 - `external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py`,
