@@ -393,7 +393,7 @@ Acceptance target:
 
 ## SWR-015 Harden browser libp2p bootstrap and defaults
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/libp2p
