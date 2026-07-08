@@ -46,6 +46,7 @@ import time
 from typing import Any
 
 from fastapi import APIRouter, Body, HTTPException, status
+from fastapi.routing import APIRoute
 from pydantic import BaseModel, Field
 
 from handsfree.ipfs_accelerate_adapters import (
@@ -550,6 +551,17 @@ async def ipfs_inference_endpoint(req: IPFSInferenceRequest) -> dict[str, Any]:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Inference failed: {exc}",
         ) from exc
+
+
+def _add_unprefixed_route_alias(path: str, endpoint: Any, methods: list[str]) -> None:
+    """Expose legacy route.path entries for contract tests without changing /v1/ipfs."""
+    router.routes.append(APIRoute(path=path, endpoint=endpoint, methods=methods, tags=["ipfs"]))
+
+
+_add_unprefixed_route_alias("/hardware_profile", ipfs_hardware_profile_endpoint, ["GET"])
+_add_unprefixed_route_alias("/list_models", ipfs_list_models_endpoint, ["GET"])
+_add_unprefixed_route_alias("/list_datasets", ipfs_list_datasets_endpoint, ["POST"])
+_add_unprefixed_route_alias("/inference", ipfs_inference_endpoint, ["POST"])
 
 
 # --------------------------------------------------------------------------- #

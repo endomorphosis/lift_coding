@@ -34,6 +34,88 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'subscribe_updates',
 ];
 
+export const SWISSKNIFE_MOBILE_INTEROP_INTERFACE = {
+  name: 'swissknife_mobile_interop',
+  namespace: 'handsfree.interop.swissknife_mobile',
+  version: '0.1.0',
+  metadata: {
+    interface_contract: 'interface contract swissknife mobile',
+    goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
+    source_surface: 'swissknife',
+    target_surface: 'mobile',
+  },
+  objective_goals: [
+    'VAIOS-G700',
+    'VAIOS-G701',
+    'VAIOS-G702',
+    'VAIOS-G703',
+    'VAIOS-G704',
+    'VAIOS-G705',
+    'VAIOS-G706',
+  ],
+  methods: [
+    ...MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
+      name,
+      surface: 'mobile_orb_bridge',
+      contract_ref: 'swissknife/contracts/control_surface_contract.schema.json',
+    })),
+    ...DISPLAY_WIDGET_BRIDGE_OPERATIONS.map((name) => ({
+      name,
+      surface: 'display_widget_bridge',
+      contract_ref: 'swissknife/contracts/interaction_envelope.schema.json',
+    })),
+  ],
+  errors: [
+    {
+      name: 'policy_mediation_required',
+      code: 409,
+    },
+    {
+      name: 'unsupported_mobile_surface',
+      code: 422,
+    },
+  ],
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/profile-b-cid-artifacts',
+    'mcp++/profile-d-policy',
+    'mobile/meta-wearables-dat',
+  ],
+  compatibility: {
+    swissknife_control_surface_contract:
+      'swissknife/contracts/control_surface_contract.schema.json',
+    swissknife_interaction_envelope:
+      'swissknife/contracts/interaction_envelope.schema.json',
+    display_widget_dat_contract:
+      'mobile/src/utils/metaWearablesDatDisplayWidgetContract.js',
+  },
+};
+
+export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
+  descriptor_id: 'swissknife-mobile-interop@0.1.0',
+  interface: SWISSKNIFE_MOBILE_INTEROP_INTERFACE,
+  schema_refs: {
+    control_surface_contract: 'swissknife/contracts/control_surface_contract.schema.json',
+    interaction_envelope: 'swissknife/contracts/interaction_envelope.schema.json',
+    mediation_receipt: 'swissknife/contracts/mediation_receipt.schema.json',
+    mcp_plus_plus_compatibility_receipt:
+      'swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json',
+  },
+  runtime_handoff: {
+    source_surface: 'swissknife',
+    target_surface: 'mobile',
+    allowed_surfaces: ['agent', 'remote_client', 'mobile', 'meta_glasses'],
+    dat_methods: DISPLAY_WIDGET_BRIDGE_OPERATIONS,
+    mobile_orb_methods: MOBILE_ORB_BRIDGE_OPERATIONS,
+    control_surface_policy_id: 'policy:swissknife:mobile-interop',
+  },
+  validation: {
+    task_id: 'VAI-675',
+    repaired_task_id: 'VAI-661',
+    evidence: 'objective validation repair',
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',

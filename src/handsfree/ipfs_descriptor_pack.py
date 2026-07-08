@@ -153,8 +153,47 @@ def lookup_ipfs_descriptor(capability_id: str) -> IPFSDescriptorPackEntry | None
     return None
 
 
+class IPFSMCPToolManifest(list[dict[str, Any]]):
+    """MCP++ tool manifest that supports legacy dict-style metadata access."""
+
+    def __init__(
+        self,
+        *,
+        name: str,
+        version: str,
+        description: str,
+        tools: list[dict[str, Any]],
+    ) -> None:
+        super().__init__(tools)
+        self.name = name
+        self.version = version
+        self.description = description
+
+    def __getitem__(self, key: int | slice | str) -> Any:
+        if isinstance(key, str):
+            if key == "name":
+                return self.name
+            if key == "version":
+                return self.version
+            if key == "description":
+                return self.description
+            if key == "tools":
+                return list(self)
+            raise KeyError(key)
+        return super().__getitem__(key)
+
+    def as_dict(self) -> dict[str, Any]:
+        """Return the canonical MCP++ manifest envelope."""
+        return {
+            "name": self.name,
+            "version": self.version,
+            "description": self.description,
+            "tools": list(self),
+        }
+
+
 # MCP++ tool manifest format for the IPFS descriptor pack
-def get_ipfs_mcp_tool_manifest() -> dict[str, Any]:
+def get_ipfs_mcp_tool_manifest() -> IPFSMCPToolManifest:
     """Return the MCP++ tool manifest for IPFS operations.
 
     This is the format expected by the SwissKnife mcp-orb-capability-router
@@ -163,7 +202,8 @@ def get_ipfs_mcp_tool_manifest() -> dict[str, Any]:
     tools = []
     for entry in IPFS_DESCRIPTOR_PACK:
         tool: dict[str, Any] = {
-            "name": entry.descriptor_id,
+            "name": entry.descriptor_id.replace(".", "_"),
+            "descriptor_id": entry.descriptor_id,
             "description": entry.description,
             "inputSchema": {
                 "type": "object",
@@ -203,9 +243,9 @@ def get_ipfs_mcp_tool_manifest() -> dict[str, Any]:
                 tool["inputSchema"]["required"] = ["prompt"]
         tools.append(tool)
 
-    return {
-        "name": "ipfs-integration",
-        "version": "1.0.0",
-        "description": "IPFS Kit, Datasets, and Accelerate integration for the Virtual AI OS",
-        "tools": tools,
-    }
+    return IPFSMCPToolManifest(
+        name="ipfs-integration",
+        version="1.0.0",
+        description="IPFS Kit, Datasets, and Accelerate integration for the Virtual AI OS",
+        tools=tools,
+    )
