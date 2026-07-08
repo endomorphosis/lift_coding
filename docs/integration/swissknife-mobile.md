@@ -45,3 +45,25 @@ pointer changes) and recording the repair in
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-validation-repair.md`
 and the objective heap restores a clean `python -m pytest tests/integration -q`
 run.
+
+HAO-730 attempt 4 records the same scanner-visible proof against the fresh
+Hallucinate App objective gap fingerprint
+`d33307f93408e32451468150b5e7fe003eb0222d` in
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md`.
+The mobile descriptor now carries
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md`
+as the HAO-specific validation confirmation ref, and the DAT display widget
+contract carries the same ref. This keeps the HAO-730 objective validation
+repair tied to `tests/integration/test_swissknife_mobile_interop.py`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`,
+`swissknife/contracts/control_surface_contract.schema.json`, and
+`swissknife/contracts/interaction_envelope.schema.json` without splitting the
+shared VAIOS-G700..VAIOS-G706 packet into smaller child goals.
+
+HAO-749 then resolved the HAO-730 merge retry-budget guardrail. The blocker was
+`main_checkout_dirty_conflict` on `hallucinate_app`, not a semantic overlap in
+the SwissKnife/mobile contract files. The repair committed the nested
+`hallucinate_app/ipfs_accelerate_py` gitlink chain in the owning repositories
+and records the clean handoff in
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-749-hao-730-merge-retry-budget.md`.

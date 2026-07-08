@@ -112,8 +112,14 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
   validation: {
     task_id: 'MGW-569',
     repair_task_id: 'MGW-583',
+    hao_task_id: 'HAO-730',
+    hao_attempt: 4,
     objective_gap_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md',
+    hao_objective_gap_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md',
+    hao_validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md',
     retry_budget_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-retry-budget.md',
     evidence: 'objective validation repair',
