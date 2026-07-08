@@ -3877,3 +3877,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_datasets_interop.py, docs/integration/swissknife-external_ipfs_datasets.md, swissknife, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-586-mgw-571-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-571. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-586-mgw-571-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-571 from strategy blocked_tasks.
+
+## MGW-587 Resolve merge retry-budget failure for MGW-569
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-587-mgw-569-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-569. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-587-mgw-569-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-569 from strategy blocked_tasks.
