@@ -5,6 +5,7 @@ Goal: VAIOS-G719
 Bundle: objective/interoperability/mobile-external_ipfs_accelerate
 Merge key: 64e26db5b0fa2426
 Merge family: objective/VAIOS-G719
+Todo vector key: abd3dcae203fdb6b
 Source objective gap: data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md
 Prior repair record: data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md
 Prior repair record (VAI-672): data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md
@@ -50,6 +51,7 @@ evidence.
 Evidence term: objective validation repair.
 Evidence term: interface contract mobile external/ipfs_accelerate.
 Evidence term: VAIOS-G719.
+Evidence term: abd3dcae203fdb6b.
 
 ## Conclusion
 

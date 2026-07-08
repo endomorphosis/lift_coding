@@ -247,23 +247,39 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = (
         REPO_ROOT / "docs/integration/mobile-external_ipfs_accelerate.md"
     ).read_text(encoding="utf-8")
-    discovery = (
+    vai_discovery = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
-    attempt_four = (
+    mgw_gap = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+    ).read_text(encoding="utf-8")
+    mgw_repair = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    mgw_attempt_three = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    mgw_attempt_four = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-4-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    vai_attempt_four = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-4-validation-confirmation.md"
     ).read_text(encoding="utf-8")
-    attempt_five = (
+    vai_attempt_five = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md"
     ).read_text(encoding="utf-8")
-    attempt_six = (
+    vai_attempt_six = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md"
     ).read_text(encoding="utf-8")
-    attempt_seven = (
+    vai_attempt_seven = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     ).read_text(encoding="utf-8")
@@ -271,8 +287,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
 
-    required_terms = [
-        "VAI-672",
+    common_terms = [
         GOAL_ID,
         "objective/interoperability/mobile-external_ipfs_accelerate",
         "objective validation repair",
@@ -287,19 +302,77 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, attempt_four, attempt_five, attempt_six, attempt_seven, heap):
-        for term in required_terms:
+    for content in (
+        docs,
+        vai_discovery,
+        mgw_repair,
+        mgw_attempt_three,
+        mgw_attempt_four,
+        vai_attempt_four,
+        vai_attempt_five,
+        vai_attempt_six,
+        vai_attempt_seven,
+        heap,
+    ):
+        for term in common_terms:
             assert term in content, f"missing {term!r}"
 
-    attempt_six_record = (
+    for term in [
+        GOAL_ID,
+        "objective/interoperability/mobile-external_ipfs_accelerate",
+        "objective validation repair",
+        "interface contract mobile external/ipfs_accelerate",
+        "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+        "docs/integration/mobile-external_ipfs_accelerate.md",
+        "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
+        "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
+    ]:
+        assert term in mgw_gap, f"missing {term!r}"
+
+    for term in ["MGW-580", "c1edafa875e6"]:
+        assert term in mgw_gap, f"missing {term!r}"
+
+    mgw_terms = ["MGW-580", "c1edafa875e6", "abd3dcae203fdb6b", "64e26db5b0fa2426"]
+    for content in (docs, mgw_repair, mgw_attempt_three, mgw_attempt_four, heap):
+        for term in mgw_terms:
+            assert term in content, f"missing {term!r}"
+
+    vai_terms = ["VAI-672"]
+    for content in (
+        docs,
+        vai_discovery,
+        vai_attempt_four,
+        vai_attempt_five,
+        vai_attempt_six,
+        vai_attempt_seven,
+        heap,
+    ):
+        for term in vai_terms:
+            assert term in content, f"missing {term!r}"
+
+    mgw_repair_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
+    )
+    mgw_attempt_four_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-attempt-4-validation-confirmation.md"
+    )
+    vai_attempt_six_record = (
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-6-validation-confirmation.md"
     )
-    attempt_seven_record = (
+    vai_attempt_seven_record = (
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     )
-    assert attempt_six_record in docs
-    assert attempt_six_record in heap
-    assert attempt_seven_record in docs
-    assert attempt_seven_record in heap
+    for record in (
+        mgw_repair_record,
+        mgw_attempt_four_record,
+        vai_attempt_six_record,
+        vai_attempt_seven_record,
+    ):
+        assert record in docs
+        assert record in heap

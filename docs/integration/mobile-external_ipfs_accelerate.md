@@ -2,6 +2,8 @@
 
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
 `objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+MGW-580 re-validated the same objective validation repair for todo vector key
+`abd3dcae203fdb6b` and merge key `64e26db5b0fa2426`.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -62,13 +64,19 @@ verifies the DuckDB schema descriptors under `external/ipfs_accelerate`
 exist and declare the expected tables/functions, loads the JavaScript
 descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
-objective validation repair is recorded in
+objective validation repair is recorded in both supervisor-fed backlogs:
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
-plus the attempt-six confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`
-and the attempt-seven confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md`
-and prior attempt-five confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
+and
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md`.
+The MGW-580 validation gate also checks the source gap
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md`,
+the attempt-three confirmation
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md`,
+the attempt-four confirmation
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-4-validation-confirmation.md`,
+the virtual AI OS attempt-six/seven confirmations
+(`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`,
+and
+`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md`),
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
