@@ -110,9 +110,12 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_policy_id: 'policy:swissknife:mobile-interop',
   },
   validation: {
-    task_id: 'VAI-661',
+    task_id: 'MGW-569',
+    repair_task_id: 'MGW-583',
     objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
+      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md',
+    retry_budget_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-retry-budget.md',
     evidence: 'objective validation repair',
   },
 };

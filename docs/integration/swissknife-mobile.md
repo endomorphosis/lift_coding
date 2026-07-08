@@ -1,6 +1,6 @@
 # SwissKnife Mobile Interop
 
-VAI-661 closes the objective validation repair gap for VAIOS-G700 and the
+MGW-583 repairs the MGW-569 objective validation gap for VAIOS-G700 and the
 shared `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
@@ -31,5 +31,5 @@ Validation evidence lives in `tests/integration/test_swissknife_mobile_interop.p
 It loads the JavaScript descriptor exports, verifies the DAT method mapping,
 validates representative SwissKnife control-surface and interaction-envelope
 payloads, and asserts this objective validation repair is recorded in
-`data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md` and the
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-validation-repair.md` and the
 objective heap.

@@ -3715,8 +3715,8 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-583 Resolve validation retry-budget failure for MGW-569
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: restored the missing tracked MCP++ `validators` Python package used by integration conformance tests, retagged Swissknife/mobile validation evidence from copied VAI-661 paths to MGW-569/MGW-583, recorded the repair discovery packet, removed MGW-569 from strategy blocked_tasks, and verified `python -m pytest tests/integration -q` passes.
 - Priority: P1
 - Track: ops
 - Depends on: 
