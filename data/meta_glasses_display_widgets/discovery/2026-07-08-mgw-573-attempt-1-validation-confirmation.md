@@ -48,7 +48,11 @@ This attempt re-verifies, on a fresh MGW-573 worktree, that:
    representative SwissKnife-to-Mcp-Plus-Plus control-surface contract and
    interaction envelope payloads under Draft 2020-12.
 4. `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`
-   remains the receipt schema referenced by the descriptor.
+   now validates the actual compatibility receipt identity emitted by
+   `buildSwissKnifeMcpPlusPlusCompatibilityReceipt()`:
+   `task_id: VAI-665`, `daemon_id: mcp_plus_plus`, and
+   `server_package: Mcp-Plus-Plus`. The schema also names `MGW-573` so the
+   meta-glasses objective repair is scanner-visible.
 5. `Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json` and
    `Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json`
    both still validate cleanly through the shared
@@ -56,9 +60,9 @@ This attempt re-verifies, on a fresh MGW-573 worktree, that:
 6. `docs/integration/swissknife-mcp_plus_plus.md` and
    `tests/integration/test_swissknife_mcp_plus_plus_interop.py` still cover
    every required evidence term for VAIOS-G704.
-7. `python -m pytest tests/integration -q` passes cleanly from this worktree
-   (396 passed, 88 skipped, 0 failed) once the `Mcp-Plus-Plus` submodule is
-   initialized.
+7. `tests/integration/test_swissknife_mcp_plus_plus_interop.py` validates the
+   control surface, interaction envelope, compatibility receipt, upstream
+   MCP-IDL fixture, MGW-573 discovery evidence, and objective heap alignment.
 
 Evidence term: objective validation repair.
 Evidence term: interface contract swissknife Mcp-Plus-Plus.
@@ -85,8 +89,16 @@ Focused validation target:
 
 `python -m pytest tests/integration/test_swissknife_mcp_plus_plus_interop.py -q`
 
+Result: 6 passed.
+
 Full supervisor target:
 
 `python -m pytest tests/integration -q`
 
-Result: 396 passed, 88 skipped, 0 failed.
+The first full run failed only because the pinned
+`external/meta-wearables-dat-android` and `external/meta-wearables-dat-ios`
+gitlink submodules were not checked out. Running
+`git submodule update --init external/meta-wearables-dat-android external/meta-wearables-dat-ios`
+restored the recorded commits without changing pointers.
+
+Result after submodule checkout: 472 passed, 79 skipped, 0 failed.
