@@ -1,9 +1,11 @@
 # SwissKnife / external/meta-wearables-dat-ios Interop
 
-VAI-667 repairs the VAIOS-G706 objective validation gap for the shared
+HAO-736 repairs the VAIOS-G706 objective validation gap for the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
-VAIOS-G706.
+VAIOS-G706. VAI-667 first recorded this proof in the virtual_ai_os lane; this
+document is the hallucinate_multimodal_control lane objective validation repair
+for `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md`.
 
 The repaired `interface contract swissknife external/meta-wearables-dat-ios`
 path is:
@@ -58,7 +60,9 @@ path is:
   `swissknife/contracts/interaction_envelope.schema.json`,
   `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`, and
   `swissknife/contracts/mediation_receipt.schema.json` remain the shared
-  SwissKnife schemas advertised by the descriptor. The payloads preserve the
+  SwissKnife schemas advertised by the descriptor. The iOS compatibility
+  receipt uses `task_id: HAO-736`, `daemon_id: meta-wearables-dat-ios`, and
+  `server_package: meta_wearables_dat_ios`. The payloads preserve the
   scanner-visible `agent_identity`, `allowed_surfaces`, and `arguments_hash`
   norm refs.
 
@@ -88,7 +92,8 @@ It verifies the Display/session/permission descriptors and real DisplayAccess
 sample files under `external/meta-wearables-dat-ios`, exercises the Python
 discovery and handoff builder, statically inspects the SwissKnife TypeScript
 descriptor module for the expected exports and goal-packet metadata, validates
-representative SwissKnife control-surface and interaction-envelope payloads,
+representative SwissKnife control-surface, interaction-envelope, and MCP++
+compatibility receipt payloads,
 and asserts this objective validation repair is recorded in
-`data/virtual_ai_os/discovery/2026-07-08-vai-667-objective-validation-repair.md`
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-validation-repair.md`
 and `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
