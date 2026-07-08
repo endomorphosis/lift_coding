@@ -9323,8 +9323,8 @@ cadence remains parseable and resumable.
 
 ## VAI-677 Resolve merge retry-budget failure for VAI-662
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: Verified the VAI-662 implementation is already merged into main (superproject merge commit b6ff311913deeb85dce467ec82420878b254df40, parent 72ea7ff7 "VAI-662: Close objective gap: Interoperate swissknife with external/ipfs_accelerate", confirmed an ancestor of the current main tip via `git merge-base --is-ancestor`), with the owning `swissknife` submodule commit b4901e95595bb0848c39606fc51103640abae33a and the owning `external/ipfs_accelerate` submodule commit fe4ae45c86c8ca5b7ea87eee1a7cc6fc39d8fc61 verified as the current submodule pointers in both main and this repair worktree and no unresolved conflict markers in any of the listed outputs. `ipfs-accelerate-agent-merge-resolver --apply` was not required because no semantic conflict remained to resolve; the recorded `submodule_merge_failed` guardrail hits (attempts 1-3) preceded that successful merge. Recorded the repair resolution in the objective heap and confirmed `python -m pytest tests/integration/test_swissknife_external_ipfs_accelerate_interop.py -q` passes (7 passed) so VAI-662 can be released from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
 - Depends on: 
