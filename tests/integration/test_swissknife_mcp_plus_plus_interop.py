@@ -1,4 +1,4 @@
-"""SwissKnife/Mcp-Plus-Plus interoperability contract regression tests for VAI-665."""
+"""SwissKnife/Mcp-Plus-Plus interoperability contract regression tests for MGW-573."""
 
 from __future__ import annotations
 
@@ -183,6 +183,87 @@ def swissknife_mcp_plus_plus_interaction_envelope() -> dict:
     }
 
 
+def swissknife_mcp_plus_plus_compatibility_receipt() -> dict:
+    """Python mirror of buildSwissKnifeMcpPlusPlusCompatibilityReceipt()."""
+    return {
+        "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
+        "task_id": "VAI-665",
+        "session_id": "session:swissknife-mcp-plus-plus",
+        "correlation_id": "corr:swissknife-mcp-plus-plus",
+        "daemon_id": "mcp_plus_plus",
+        "server_package": "Mcp-Plus-Plus",
+        "swissknife_consumer": "swissknife.mcp_plus_plus.mcp-server",
+        "protocol_negotiation": {
+            "method": "initialize",
+            "protocol_version": "2026-07-08",
+            "client_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "server_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "negotiated_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "initialized": True,
+        },
+        "capability_descriptor": {
+            "descriptor_id": "swissknife-mcp-plus-plus-interop@0.1.0",
+            "interface_cid": "bafyswissknifemcpplusplusinterop000000001",
+            "name": "swissknife-mcp-plus-plus-interop",
+            "namespace": "com.swissknife.interop.mcp_plus_plus",
+            "version": "0.1.0",
+            "methods": sorted(MCP_PLUS_PLUS_INTEROP_OPERATIONS),
+            "requires": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/ucan",
+                "mcp++/deontic-policy",
+                "mcp++/event-dag",
+                "mcp++/p2p-transport",
+            ],
+            "compatibility_checked": True,
+            "compatibility_verdict": "compatible",
+            "event_streams": True,
+        },
+        "transport": {
+            "kind": "local",
+            "endpoint": "swissknife://mcp-plus-plus/interop",
+            "protocol_path": "swissknife/mcp++/mcp-plus-plus/interop",
+            "auth_present": True,
+            "redaction_profile": "mcp-plus-plus-session-minimal",
+        },
+        "tool_call": {
+            "tool_name": "mcpplusplus.execute_with_envelope",
+            "tool_category": "control",
+            "upstream_function": "MCPPlusPlus.executeWithEnvelope",
+            "jsonrpc_method": "tools/call",
+            "arguments_hash": "sha256:swissknife-mcp-plus-plus-execute-with-envelope",
+            "dispatch_allowed": True,
+            "upstream_status": "ok",
+        },
+        "policy_contract": {
+            "interaction_envelope_id": "interaction:swissknife-mcp-plus-plus:execute-with-envelope:1",
+            "policy_decision_id": "decision:swissknife-mcp-plus-plus:allow:1",
+            "policy_outcome": "allow",
+            "mediation_receipt_id": "receipt:swissknife-mcp-plus-plus:allow:1",
+            "control_surface_contract_ref": "swissknife/contracts/control_surface_contract.schema.json",
+        },
+        "receipt_lineage": {
+            "envelope_cid": "local:swissknife-mcp-plus-plus-envelope",
+            "decision_cid": "local:swissknife-mcp-plus-plus-decision",
+            "receipt_cid": "local:swissknife-mcp-plus-plus-receipt",
+            "tool_receipt_id": "tool-receipt:mcp-plus-plus-execute-with-envelope",
+        },
+        "lifecycle_events": [
+            {"event": "initialize", "at": "2026-07-08T00:00:00Z"},
+            {"event": "initialized", "at": "2026-07-08T00:00:01Z"},
+            {"event": "descriptor_refresh", "at": "2026-07-08T00:00:02Z"},
+            {"event": "policy_decision", "at": "2026-07-08T00:00:03Z"},
+            {
+                "event": "receipt_emitted",
+                "at": "2026-07-08T00:00:04Z",
+                "receipt_cid": "local:swissknife-mcp-plus-plus-receipt",
+            },
+        ],
+        "validated_at": "2026-07-08T00:00:05Z",
+    }
+
+
 def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     src = read_text("swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts")
 
@@ -230,6 +311,14 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_mcp_pl
     )
 
 
+def test_swissknife_mcp_plus_plus_compatibility_receipt_validates() -> None:
+    receipt_schema = read_json("swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json")
+
+    Draft202012Validator(receipt_schema).validate(
+        swissknife_mcp_plus_plus_compatibility_receipt()
+    )
+
+
 @pytest.fixture(scope="module")
 def mcp_idl_validator():
     if not MCP_PLUS_PLUS_TESTS_PY.is_dir():
@@ -273,11 +362,18 @@ def test_mcp_idl_descriptor_fixture_still_validates_with_shared_validator(mcp_id
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-mcp_plus_plus.md")
-    discovery = read_text("data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md")
-    gap = read_text("data/virtual_ai_os/discovery/2026-07-08-vai-665-objective-gap-57359897bf4f.md")
+    discovery = read_text(
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-573-attempt-1-validation-confirmation.md"
+    )
+    gap = read_text(
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-573-objective-gap-57359897bf4f.md"
+    )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
+        "MGW-573",
         "VAI-665",
         "VAIOS-G704",
         "goal_packet/interoperability/swissknife/06921590135c",
@@ -287,7 +383,9 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json",
         "Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md",
     ]
     for content in (docs, discovery, heap):
         for term in required_terms:
