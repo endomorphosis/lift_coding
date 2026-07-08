@@ -9,6 +9,11 @@ import {
 } from '../agentActions';
 import { getMetaWearablesDat } from '../../native/metaWearablesDat';
 import {
+  HALLUCINATE_APP_MOBILE_ACTION_ID,
+  HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT,
+  normalizeHallucinateAppMobilePayload,
+} from '../hallucinateAppMobileInterop';
+import {
   DISPLAY_WIDGET_ACTION_IDS,
   DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID,
   DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,
@@ -111,6 +116,53 @@ describe('agentActions helpers', () => {
       mobile_reset_display_widget_session: 'resetDisplayWidgetSession',
       mobile_play_display_widget_video: 'playDisplayWidgetVideo',
       mobile_subscribe_display_widget_updates: 'subscribeDisplayWidgetUpdates',
+    });
+  });
+
+  it('normalizes and dispatches Hallucinate App mobile search handoffs locally', async () => {
+    const navigate = jest.fn();
+    const actionItem = {
+      id: HALLUCINATE_APP_MOBILE_ACTION_ID,
+      params: {
+        mobile_payload: {
+          query: 'cid:QmDemo notes',
+          filter: { mimetype: 'text/plain' },
+          handoff: {
+            objective_id: 'VAIOS-G707',
+            ipfs_cids: ['QmDemo'],
+            edge_session_id: 'edge-session-1',
+            libp2p_peer_id: '12D3KooWMobile',
+          },
+        },
+      },
+    };
+
+    expect(normalizeHallucinateAppMobilePayload(actionItem)).toMatchObject({
+      type: HALLUCINATE_APP_MOBILE_ACTION_ID,
+      interface_contract: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT,
+      query: 'cid:QmDemo notes',
+      target_surface: 'mobile.results',
+      handoff: {
+        objective_id: 'VAIOS-G707',
+        ipfs_cids: ['QmDemo'],
+        edge_session_id: 'edge-session-1',
+        libp2p_peer_id: '12D3KooWMobile',
+      },
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem,
+      navigation: { navigate },
+    });
+
+    expect(outcome.handled).toBe(true);
+    expect(outcome.response.action).toBe('hallucinate_app_mobile_search');
+    expect(outcome.response.interface_contract).toBe(HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT);
+    expect(navigate).toHaveBeenCalledWith('Results', {
+      hallucinateAppSearch: expect.objectContaining({
+        query: 'cid:QmDemo notes',
+        interface_contract: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT,
+      }),
     });
   });
 

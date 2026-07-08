@@ -1,5 +1,9 @@
 import { sendActionCommand } from '../api/client';
 import { getMetaWearablesDat } from '../native/metaWearablesDat';
+import {
+  isHallucinateAppMobileActionId,
+  normalizeHallucinateAppMobilePayload,
+} from './hallucinateAppMobileInterop';
 import { isDisplayWidgetActionId } from './metaWearablesDatDisplayWidgetContract';
 
 export function buildPromptDraft(actionItem, card, valueOverride = undefined) {
@@ -131,6 +135,12 @@ function navigateToWearablesDiagnostics(navigation) {
   }
 }
 
+function navigateToHallucinateAppSearch(navigation, payload) {
+  if (navigation?.navigate) {
+    navigation.navigate('Results', { hallucinateAppSearch: payload });
+  }
+}
+
 function getDisplayWidgetActionPayload(actionItem) {
   const params = actionItem?.params || {};
   if (params.display_widget_action && typeof params.display_widget_action === 'object') {
@@ -234,6 +244,23 @@ async function executeLocalDisplayWidgetAction({ actionItem, navigation }) {
 }
 
 export async function executeLocalStructuredAction({ actionItem, navigation }) {
+  if (isHallucinateAppMobileActionId(actionItem?.id)) {
+    const payload = normalizeHallucinateAppMobilePayload(actionItem);
+    navigateToHallucinateAppSearch(navigation, payload);
+
+    return {
+      handled: true,
+      message: payload.query
+        ? `Opened Hallucinate App search on mobile: ${payload.query}`
+        : 'Opened Hallucinate App search on mobile.',
+      response: {
+        action: 'hallucinate_app_mobile_search',
+        interface_contract: payload.interface_contract,
+        mobile_payload: payload,
+      },
+    };
+  }
+
   if (actionItem?.id === 'mobile_open_wearables_diagnostics') {
     navigateToWearablesDiagnostics(navigation);
 

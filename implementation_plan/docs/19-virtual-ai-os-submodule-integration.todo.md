@@ -9185,8 +9185,8 @@ cadence remains parseable and resumable.
 
 ## VAI-671 Close objective gap: Interoperate hallucinate_app with mobile
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: VAI-673 supplied the VAIOS-G707 objective validation repair and resolved the retry-budget blocker with integration, docs, discovery, heap, Hallucinate App/mobile handoff, and DuckDB schema evidence.
 - Priority: P1
 - Track: interoperability
 - Depends on: 
@@ -9255,8 +9255,8 @@ cadence remains parseable and resumable.
 
 ## VAI-673 Resolve validation retry-budget failure for VAI-671
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: repaired the repeated VAI-671 validation failure by adding the Hallucinate App/mobile interop contract, runtime handoff, mobile dispatch, persistence schema, documentation, discovery evidence, and integration validation coverage.
 - Priority: P1
 - Track: ops
 - Depends on: 
