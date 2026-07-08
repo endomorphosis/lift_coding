@@ -3472,7 +3472,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-572 Close objective gap: Interoperate swissknife with external/ipfs_kit
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: interoperability
