@@ -8,6 +8,8 @@ import {
 } from '../utils/metaWearablesDatDisplayWidgetContract';
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
   MOBILE_ORB_BRIDGE_INTERFACE,
   SWISSKNIFE_MOBILE_INTEROP_INTERFACE,
   SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
@@ -1304,11 +1306,15 @@ export class MetaGlassesMobileOrbBridge {
     const ipfsAccelerateInteropInterfaceCid = localInterfaceKey(
       IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE
     );
+    const hallucinateAppMobileInteropInterfaceCid = localInterfaceKey(
+      HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE
+    );
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
       swissknifeInteropInterfaceCid,
       ipfsAccelerateInteropInterfaceCid,
+      hallucinateAppMobileInteropInterfaceCid,
     ];
     this.edgeSession = null;
     this.bindings = new Map();
@@ -1701,6 +1707,17 @@ export class MetaGlassesMobileOrbBridge {
                 this.localInterfaceCids[3]
               ),
               interop_descriptor: IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
+            },
+          ]
+          : []),
+        ...(this.localInterfaceCids[4]
+          ? [
+            {
+              ...descriptorRef(
+                HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+                this.localInterfaceCids[4]
+              ),
+              interop_descriptor: HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
             },
           ]
           : []),
