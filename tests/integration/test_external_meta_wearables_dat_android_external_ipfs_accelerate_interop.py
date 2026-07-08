@@ -1,4 +1,4 @@
-"""Meta Wearables DAT Android / external/ipfs_accelerate interop tests for HAO-737."""
+"""Meta Wearables DAT Android / external/ipfs_accelerate interop tests for MGW-576."""
 
 from __future__ import annotations
 
@@ -31,9 +31,9 @@ IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DISCOVERY_REPAIR = (
     REPO_ROOT
     / "data"
-    / "hallucinate_multimodal_control"
+    / "meta_glasses_display_widgets"
     / "discovery"
-    / "2026-07-08-hao-737-objective-validation-repair.md"
+    / "2026-07-08-mgw-576-objective-validation-repair.md"
 )
 
 
@@ -55,7 +55,7 @@ def test_expected_interop_artifacts_exist_on_disk() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
         "docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md",
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-737-objective-validation-repair.md",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-576-objective-validation-repair.md",
     ]
     for relative_path in expected_paths:
         assert (REPO_ROOT / relative_path).is_file(), f"missing {relative_path}"
@@ -85,7 +85,7 @@ def test_discover_meta_wearables_dat_android_contract_validates_descriptor() -> 
     contract = discover_meta_wearables_dat_android_contract(META_WEARABLES_DAT_ANDROID_ROOT)
 
     assert contract.interface_contract == INTERFACE_CONTRACT
-    assert contract.task_id == "HAO-737"
+    assert contract.task_id == "MGW-576"
     assert contract.goal_id == GOAL_ID == "VAIOS-G709"
     assert contract.goal_packet == GOAL_PACKET
     assert set(GOAL_PACKET_GOALS).issubset(set(contract.goal_packet_goals))
@@ -136,7 +136,7 @@ def test_build_meta_wearables_dat_android_ipfs_accelerate_handoff_is_determinist
 
     assert first.as_dict() == second.as_dict()
     assert first.interface_contract == INTERFACE_CONTRACT
-    assert first.task_id == "HAO-737"
+    assert first.task_id == "MGW-576"
     assert first.goal_id == GOAL_ID
     assert first.goal_packet == GOAL_PACKET
     assert set(first.goal_packet_goals) == set(GOAL_PACKET_GOALS)
@@ -196,7 +196,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     )
 
     required_terms = [
-        "HAO-737",
+        "MGW-576",
         "VAIOS-G709",
         "VAIOS-G710",
         "VAIOS-G711",
