@@ -575,7 +575,7 @@ Acceptance target:
 
 ## SWR-029 Wire browser bundle policy into release gates
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/release
