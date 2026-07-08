@@ -484,7 +484,7 @@ Acceptance target:
 
 ## SWR-022 Harden browser ZKP artifact loading and integrity
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/zkp-browser
