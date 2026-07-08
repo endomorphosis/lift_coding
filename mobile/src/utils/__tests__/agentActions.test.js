@@ -13,6 +13,7 @@ import {
   DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID,
   DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,
 } from '../metaWearablesDatDisplayWidgetContract';
+import { buildHallucinateAppMobileSearchAction } from '../hallucinateAppMobileInterop';
 
 describe('agentActions helpers', () => {
   beforeEach(() => {
@@ -156,6 +157,38 @@ describe('agentActions helpers', () => {
     });
     expect(getMetaWearablesDat).not.toHaveBeenCalled();
     expect(navigate).toHaveBeenCalledWith('Glasses');
+  });
+
+  it('opens hallucinate_app search handoffs locally on the Results surface', async () => {
+    const navigate = jest.fn();
+    const actionItem = buildHallucinateAppMobileSearchAction({
+      query: 'cid:QmDemo mobile',
+      filters: { mimetype: 'text/plain' },
+      requestId: 'vaios-g707-mobile',
+      cid: 'QmDemo',
+    });
+
+    const outcome = await executeLocalStructuredAction({
+      actionItem,
+      navigation: { navigate },
+    });
+
+    expect(outcome.handled).toBe(true);
+    expect(outcome.message).toBe('Opened Hallucinate App search on mobile: cid:QmDemo mobile');
+    expect(outcome.response.mobile_payload).toMatchObject({
+      type: 'mobile_hallucinate_app_search',
+      contract: 'handsfree.hallucinate_app/mobile-search-handoff@0.1.0',
+      request_id: 'vaios-g707-mobile',
+      query: 'cid:QmDemo mobile',
+      target_surface: 'mobile.results',
+    });
+    expect(navigate).toHaveBeenCalledWith('Results', {
+      hallucinateAppSearch: expect.objectContaining({
+        request_id: 'vaios-g707-mobile',
+        cid: 'QmDemo',
+      }),
+    });
+    expect(getMetaWearablesDat).not.toHaveBeenCalled();
   });
 
   it('renders wearables display test locally and navigates to diagnostics', async () => {

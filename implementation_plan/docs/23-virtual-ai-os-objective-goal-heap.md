@@ -1082,6 +1082,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/hallucinate_app-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Objective validation repair: VAI-671 adds `src/handsfree/hallucinate_app_mobile_interop.py`, `mobile/src/utils/hallucinateAppMobileInterop.js`, runtime `SearchInterface.launchMobileSearch` handoff events, the Hallucinate App test-interface mobile handoff panel, DuckDB `hallucinate_app_mobile_handoffs` receipt tables, `docs/integration/hallucinate_app-mobile.md`, and `tests/integration/test_hallucinate_app_mobile_interop.py` to prove the `handsfree.hallucinate_app/mobile-search-handoff@0.1.0` contract covers `hallucinate_app` to `mobile` search handoff behavior.
 
 ## VAIOS-G708 Interoperate external/meta-wearables-dat-android with mobile
 
