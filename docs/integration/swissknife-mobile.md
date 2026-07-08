@@ -44,8 +44,8 @@ The mobile descriptor carries
 as the MGW-specific validation repair ref. For this worktree, the descriptor
 and DAT display widget contract also carry
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md`
-so the supervisor can distinguish the current MGW-569 attempt 1 objective
-validation repair from earlier copied packet evidence. This keeps the MGW-569
+so the supervisor can distinguish the MGW-569 attempt 1 objective validation
+repair from earlier copied packet evidence. This keeps the MGW-569
 objective validation repair tied to
 `tests/integration/test_swissknife_mobile_interop.py`,
 `docs/integration/swissknife-mobile.md`,
@@ -55,6 +55,17 @@ objective validation repair tied to
 `swissknife/contracts/interaction_envelope.schema.json` without splitting the
 shared VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705,
 and VAIOS-G706 packet into smaller child goals.
+
+MGW-569 attempt 2 records this worktree's current objective validation repair in
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-2-1783554333-objective-validation-repair.md`.
+The mobile descriptor and DAT display widget contract now expose that attempt 2
+repair as the current MGW validation ref while retaining the attempt 1 and
+attempt 4 refs as historical proof. Both SwissKnife schemas carry the same
+attempt 2 worktree objective validation repair in `$comment`, and
+`tests/integration/test_swissknife_mobile_interop.py` asserts the descriptor,
+DAT contract, docs, discovery record, schemas, and objective heap all contain
+the scanner-visible `objective validation repair` and `interface contract
+swissknife mobile` terms for VAIOS-G700 through VAIOS-G706.
 
 HAO-730 re-ran the VAI-661 objective validation repair for VAIOS-G700 and the
 same `goal_packet/interoperability/swissknife/06921590135c` packet. The

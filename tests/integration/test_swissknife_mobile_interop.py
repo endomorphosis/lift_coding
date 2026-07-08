@@ -20,10 +20,18 @@ GOAL_PACKET_GOALS = {
     "VAIOS-G705",
     "VAIOS-G706",
 }
-WORKTREE_REPAIR_REF = (
+ATTEMPT_2_WORKTREE_REPAIR_REF = (
     "data/meta_glasses_display_widgets/discovery/"
-    "2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md"
+    "2026-07-08-mgw-569-attempt-2-1783554333-objective-validation-repair.md"
 )
+PREVIOUS_MGW_REPAIR_REFS = {
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-569-attempt-1-validation-repair.md",
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md",
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-569-attempt-4-validation-confirmation.md",
+}
 MOBILE_ORB_OPERATIONS = {
     "register_edge_capabilities",
     "publish_glasses_event",
@@ -270,13 +278,16 @@ def test_mobile_descriptor_exports_swissknife_interop_contract() -> None:
         set(descriptor["runtime_handoff"]["allowed_surfaces"])
     )
     assert descriptor["validation"]["task_id"] == "MGW-569"
-    assert descriptor["validation"]["mgw_attempt"] == 1
-    assert descriptor["validation"]["mgw_validation_repair_ref"] == (
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-569-attempt-1-validation-repair.md"
+    assert descriptor["validation"]["mgw_attempt"] == 2
+    assert descriptor["validation"]["mgw_validation_repair_ref"] == ATTEMPT_2_WORKTREE_REPAIR_REF
+    assert descriptor["validation"]["mgw_worktree"] == "mgw-569-attempt-2-1783554333"
+    assert (
+        descriptor["validation"]["mgw_worktree_validation_repair_ref"]
+        == ATTEMPT_2_WORKTREE_REPAIR_REF
     )
-    assert descriptor["validation"]["mgw_worktree"] == "mgw-569-attempt-1-1783553538"
-    assert descriptor["validation"]["mgw_worktree_validation_repair_ref"] == WORKTREE_REPAIR_REF
+    assert set(descriptor["validation"]["previous_mgw_validation_repair_refs"]) == (
+        PREVIOUS_MGW_REPAIR_REFS
+    )
     assert descriptor["validation"]["hao_task_id"] == "HAO-730"
     assert descriptor["validation"]["hao_attempt"] == 4
     assert descriptor["validation"]["hao_objective_gap_ref"] == (
@@ -307,13 +318,11 @@ def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods()
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract swissknife mobile"
     assert contract["mgw_task_id"] == "MGW-569"
-    assert contract["mgw_attempt"] == 1
-    assert contract["mgw_validation_repair_ref"] == (
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-569-attempt-1-validation-repair.md"
-    )
-    assert contract["mgw_worktree"] == "mgw-569-attempt-1-1783553538"
-    assert contract["mgw_worktree_validation_repair_ref"] == WORKTREE_REPAIR_REF
+    assert contract["mgw_attempt"] == 2
+    assert contract["mgw_validation_repair_ref"] == ATTEMPT_2_WORKTREE_REPAIR_REF
+    assert contract["mgw_worktree"] == "mgw-569-attempt-2-1783554333"
+    assert contract["mgw_worktree_validation_repair_ref"] == ATTEMPT_2_WORKTREE_REPAIR_REF
+    assert set(contract["previous_mgw_validation_repair_refs"]) == PREVIOUS_MGW_REPAIR_REFS
     assert contract["hao_task_id"] == "HAO-730"
     assert contract["hao_attempt"] == 4
     assert contract["hao_validation_confirmation_ref"] == (
@@ -357,7 +366,9 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md"
     ).read_text(encoding="utf-8")
-    worktree_repair = (REPO_ROOT / WORKTREE_REPAIR_REF).read_text(encoding="utf-8")
+    worktree_repair = (REPO_ROOT / ATTEMPT_2_WORKTREE_REPAIR_REF).read_text(
+        encoding="utf-8"
+    )
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
@@ -377,9 +388,9 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     for content in (docs, discovery, attempt_1_repair, worktree_repair, heap):
         for term in required_terms:
             assert term in content
-    assert WORKTREE_REPAIR_REF in docs
-    assert WORKTREE_REPAIR_REF in worktree_repair
-    assert WORKTREE_REPAIR_REF in heap
+    assert ATTEMPT_2_WORKTREE_REPAIR_REF in docs
+    assert ATTEMPT_2_WORKTREE_REPAIR_REF in worktree_repair
+    assert ATTEMPT_2_WORKTREE_REPAIR_REF in heap
     for content in (docs, discovery, heap):
         assert "MGW-583" in content
     for content in (docs, attempt_1_repair, heap):
@@ -436,9 +447,9 @@ def test_mgw_569_attempt_1_validation_repair_recorded() -> None:
         assert goal_id in heap
 
 
-def test_mgw_569_attempt_1_worktree_validation_repair_recorded() -> None:
+def test_mgw_569_attempt_2_worktree_validation_repair_recorded() -> None:
     """Lock this worktree repair to descriptors, docs, schemas, and heap."""
-    repair = (REPO_ROOT / WORKTREE_REPAIR_REF).read_text(encoding="utf-8")
+    repair = (REPO_ROOT / ATTEMPT_2_WORKTREE_REPAIR_REF).read_text(encoding="utf-8")
     docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
@@ -455,8 +466,8 @@ def test_mgw_569_attempt_1_worktree_validation_repair_recorded() -> None:
     )["SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT"]
 
     required_terms = [
-        "MGW-569 attempt 1 worktree objective validation repair",
-        "mgw-569-attempt-1-1783553538",
+        "MGW-569 attempt 2 worktree objective validation repair",
+        "mgw-569-attempt-2-1783554333",
         "d33307f93408e32451468150b5e7fe003eb0222d",
         "VAIOS-G700",
         "goal_packet/interoperability/swissknife/06921590135c",
@@ -468,17 +479,20 @@ def test_mgw_569_attempt_1_worktree_validation_repair_recorded() -> None:
         "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
-        WORKTREE_REPAIR_REF,
+        ATTEMPT_2_WORKTREE_REPAIR_REF,
     ]
     for term in required_terms:
         assert term in repair
         assert term in heap
 
-    assert WORKTREE_REPAIR_REF in docs
-    assert WORKTREE_REPAIR_REF in control_schema["$comment"]
-    assert WORKTREE_REPAIR_REF in envelope_schema["$comment"]
-    assert descriptor["validation"]["mgw_worktree_validation_repair_ref"] == WORKTREE_REPAIR_REF
-    assert contract["mgw_worktree_validation_repair_ref"] == WORKTREE_REPAIR_REF
+    assert ATTEMPT_2_WORKTREE_REPAIR_REF in docs
+    assert ATTEMPT_2_WORKTREE_REPAIR_REF in control_schema["$comment"]
+    assert ATTEMPT_2_WORKTREE_REPAIR_REF in envelope_schema["$comment"]
+    assert (
+        descriptor["validation"]["mgw_worktree_validation_repair_ref"]
+        == ATTEMPT_2_WORKTREE_REPAIR_REF
+    )
+    assert contract["mgw_worktree_validation_repair_ref"] == ATTEMPT_2_WORKTREE_REPAIR_REF
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in repair
