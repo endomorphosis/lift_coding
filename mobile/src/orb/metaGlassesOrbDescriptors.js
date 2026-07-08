@@ -221,6 +221,103 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
 };
 
+export const HALLUCINATE_APP_MOBILE_SEARCH_WIDGET_OPERATIONS = [
+  'render_content_search_results',
+  'update_content_search_results',
+  'open_content_search_result',
+  'sync_content_search_filter',
+];
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
+  name: 'hallucinate_app_mobile_interop',
+  namespace: 'handsfree.interop.hallucinate_app_mobile',
+  version: '0.1.0',
+  metadata: {
+    interface_contract: 'interface contract hallucinate_app mobile',
+    goal_id: 'VAIOS-G707',
+    source_surface: 'hallucinate_app',
+    target_surface: 'mobile',
+  },
+  objective_goals: ['VAIOS-G707'],
+  methods: [
+    ...MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
+      name,
+      surface: 'mobile_orb_bridge',
+      contract_ref:
+        'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    })),
+    ...HALLUCINATE_APP_MOBILE_SEARCH_WIDGET_OPERATIONS.map((name) => ({
+      name,
+      surface: 'display_widget_bridge',
+      contract_ref: 'mobile/src/utils/hallucinateAppSearchWidgetContract.js',
+    })),
+  ],
+  errors: [
+    {
+      name: 'search_handoff_rejected',
+      code: 409,
+    },
+    {
+      name: 'unsupported_mobile_surface',
+      code: 422,
+    },
+  ],
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/profile-b-cid-artifacts',
+    'mobile/meta-wearables-dat',
+  ],
+  compatibility: {
+    hallucinate_app_search_interface:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    hallucinate_app_test_interface:
+      'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    hallucinate_app_mobile_duckdb_receipts:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
+    hallucinate_app_mobile_benchmark_schema:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
+    mobile_search_widget_contract:
+      'mobile/src/utils/hallucinateAppSearchWidgetContract.js',
+  },
+};
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
+  descriptor_id: 'hallucinate-app-mobile-interop@0.1.0',
+  interface: HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  schema_refs: {
+    search_interface:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    test_interface: 'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    time_series_schema:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
+    benchmark_schema_script:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
+    search_widget_contract: 'mobile/src/utils/hallucinateAppSearchWidgetContract.js',
+  },
+  runtime_handoff: {
+    source_surface: 'hallucinate_app',
+    target_surface: 'mobile',
+    allowed_surfaces: ['remote_client', 'mobile', 'meta_glasses'],
+    mobile_orb_methods: MOBILE_ORB_BRIDGE_OPERATIONS,
+    search_widget_methods: HALLUCINATE_APP_MOBILE_SEARCH_WIDGET_OPERATIONS,
+    route: '/v1/mobile/orb/invoke_service',
+    operation: 'invoke_service',
+    time_series_table: 'hallucinate_app_mobile_interop_receipts',
+  },
+  validation: {
+    task_id: 'VAI-674',
+    repair_task_id: 'VAI-684',
+    goal_id: 'VAIOS-G707',
+    objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md',
+    retry_budget_ref:
+      'data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md',
+    validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-684-vai-674-validation-repair.md',
+    evidence: 'objective validation repair',
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',
