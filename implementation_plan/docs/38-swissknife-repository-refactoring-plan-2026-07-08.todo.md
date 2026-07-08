@@ -250,7 +250,7 @@ Acceptance target:
 
 ## SWR-004 Consolidate test lanes and scripts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/tests
