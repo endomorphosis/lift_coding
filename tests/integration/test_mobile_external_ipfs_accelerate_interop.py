@@ -251,6 +251,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
+    attempt_four = (
+        REPO_ROOT
+        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-4-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
@@ -265,11 +269,12 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "src/handsfree/mobile_ipfs_accelerate_interop.py",
         "mobile/src/orb/metaGlassesOrbDescriptors.js",
         "mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js",
+        "mobile/src/orb/metaGlassesMobileOrbBridge.js",
         "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
         "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, attempt_four, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
