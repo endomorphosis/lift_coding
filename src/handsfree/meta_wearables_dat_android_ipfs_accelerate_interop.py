@@ -1,6 +1,6 @@
 """Interop contract between Meta Wearables DAT Android and ``external/ipfs_accelerate``.
 
-HAO-737 repairs the VAIOS-G709 objective validation gap for the shared
+MGW-576 repairs the VAIOS-G709 objective validation gap for the shared
 ``goal_packet/interoperability/external/6595cbbfadb9`` packet covering
 VAIOS-G709, VAIOS-G710, and VAIOS-G711.
 
@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any
 
 INTERFACE_CONTRACT = "interface contract external/meta-wearables-dat-android external/ipfs_accelerate"
-TASK_ID = "HAO-737"
+TASK_ID = "MGW-576"
 GOAL_ID = "VAIOS-G709"
 GOAL_PACKET = "goal_packet/interoperability/external/6595cbbfadb9"
 GOAL_PACKET_GOALS = ("VAIOS-G709", "VAIOS-G710", "VAIOS-G711")
