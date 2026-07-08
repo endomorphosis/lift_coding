@@ -4004,3 +4004,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Candidate kind: validation_gate
 - Todo vector key: 423c5c08373fafe1
 - Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-591-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+
+## MGW-592 Resolve validation retry-budget failure for MGW-574
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py, docs/integration/swissknife-external_meta_wearables_dat_android.md, swissknife, external/meta-wearables-dat-android, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json, data/meta_glasses_display_widgets/state/discovery
+- Validation: python -m pytest tests/integration -q
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-574. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-07-08-mgw-592-mgw-574-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-574 from strategy blocked_tasks.
