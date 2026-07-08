@@ -670,7 +670,7 @@ state observation.
 
 ## SWR-033 Confirm browser bundle host-leakage and Pyodide policy
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/browser-policy
 - Fingerprint: 1da992e3dbcd271cfb4d1e376d5da6267922166a
