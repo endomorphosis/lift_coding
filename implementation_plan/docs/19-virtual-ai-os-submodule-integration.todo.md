@@ -9475,8 +9475,8 @@ cadence remains parseable and resumable.
 
 ## VAI-684 Resolve validation retry-budget failure for VAI-674
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: repaired the repeated VAI-674 validation failure by adding the Hallucinate App/mobile integration test, docs, discovery evidence, mobile descriptor registration, and mobile search widget contract for the `interface contract hallucinate_app mobile` objective validation repair.
 - Priority: P1
 - Track: ops
 - Depends on: 
