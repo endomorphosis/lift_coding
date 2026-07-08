@@ -34,6 +34,69 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'subscribe_updates',
 ];
 
+export const SWISSKNIFE_MOBILE_INTEROP_OPERATIONS = [
+  'register_edge_capabilities',
+  'render_widget',
+  'update_widget',
+  'clear_widget',
+  'focus_next',
+  'activate',
+  'dispatch_glasses_response',
+];
+
+export const SWISSKNIFE_MOBILE_INTEROP_INTERFACE = {
+  name: 'swissknife_mobile_interop',
+  namespace: 'handsfree.meta_glasses.interop',
+  version: '0.1.0',
+  specPath: 'docs/integration/swissknife-mobile.md',
+  contractRefs: {
+    control_surface_contract:
+      'https://hallucinate.app/contracts/control_surface_contract.schema.json',
+    interaction_envelope:
+      'https://hallucinate.app/contracts/interaction_envelope.schema.json',
+    mcp_plus_plus_compatibility_receipt:
+      'https://hallucinate.app/contracts/mcp_plus_plus_compatibility_receipt.schema.json',
+    mediation_receipt:
+      'https://hallucinate.app/contracts/mediation_receipt.schema.json',
+  },
+  surfaces: ['swissknife', 'mobile', 'meta_glasses_display'],
+  mobileContracts: ['handsfree.meta-glasses/display-widget-action@0.1.0'],
+  handoff: {
+    producer: 'swissknife',
+    edge_runtime: 'mobile',
+    control_surface_contract_ref: 'control_surface_contract',
+    interaction_envelope_schema_ref: 'interaction_envelope',
+    receipt_schema_ref: 'mediation_receipt',
+    transport_preferences: ['local', 'http', 'websocket', 'mcp-server'],
+  },
+  methods: SWISSKNIFE_MOBILE_INTEROP_OPERATIONS.map((name) => ({
+    name,
+    control_surface_contract_ref: 'control_surface_contract',
+    interaction_envelope_schema_ref: 'interaction_envelope',
+    receipt_schema_ref: 'mediation_receipt',
+  })),
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/receipts',
+    'control_surface_contract',
+    'interaction_envelope',
+  ],
+  compatibility: {
+    swissknife: {
+      contracts: [
+        'control_surface_contract',
+        'interaction_envelope',
+        'mcp_plus_plus_compatibility_receipt',
+        'mediation_receipt',
+      ],
+    },
+    mobile: {
+      contracts: ['display_widget_action'],
+      descriptors: ['mobile_orb_bridge', 'display_widget_bridge'],
+    },
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',
@@ -110,6 +173,18 @@ export function descriptorRef(descriptor, interfaceCid = null) {
   }
   if (descriptor.compatibility && typeof descriptor.compatibility === 'object') {
     ref.compatibility = descriptor.compatibility;
+  }
+  if (descriptor.contractRefs && typeof descriptor.contractRefs === 'object') {
+    ref.contract_refs = descriptor.contractRefs;
+  }
+  if (Array.isArray(descriptor.surfaces)) {
+    ref.surfaces = descriptor.surfaces;
+  }
+  if (Array.isArray(descriptor.mobileContracts)) {
+    ref.mobile_contracts = descriptor.mobileContracts;
+  }
+  if (descriptor.handoff && typeof descriptor.handoff === 'object') {
+    ref.handoff = descriptor.handoff;
   }
   const metadata = normalizeDescriptorMetadata(descriptor.metadata);
   if (metadata && Object.keys(metadata).length > 0) {

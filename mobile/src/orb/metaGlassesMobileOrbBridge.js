@@ -9,6 +9,7 @@ import {
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
   MOBILE_ORB_BRIDGE_INTERFACE,
+  SWISSKNIFE_MOBILE_INTEROP_INTERFACE,
   descriptorRef,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -16,8 +17,6 @@ import {
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
 export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
   'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
@@ -35,8 +34,6 @@ const CONTROL_SURFACE_SCHEMA_REFS = [
   'policy_decision',
   'mediation_receipt',
 ];
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const DAT_CAPABILITY_KEYS = [
   'session',
   'camera',
@@ -284,6 +281,19 @@ function isStaleBindingError(error) {
     message.includes('service binding not found') ||
     message.includes('untracked service binding')
   );
+}
+
+function edgeRegistrationDescriptorRefs(localInterfaceCids = []) {
+  const descriptors = [
+    descriptorRef(MOBILE_ORB_BRIDGE_INTERFACE, localInterfaceCids[0]),
+    descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE, localInterfaceCids[1]),
+  ];
+  if (localInterfaceCids[2]) {
+    descriptors.push(
+      descriptorRef(SWISSKNIFE_MOBILE_INTEROP_INTERFACE, localInterfaceCids[2])
+    );
+  }
+  return descriptors;
 }
 
 function normalizeCapabilities(input = {}) {
@@ -838,7 +848,7 @@ function mobileOrbCapabilityCounts(edgeSession, localInterfaceCids = []) {
   };
 }
 
-function collectDescriptorCids(records = []) {
+function collectDescriptorCidsFromRecords(records = []) {
   const values = [];
   records.filter(isObject).forEach((record) => {
     if (Array.isArray(record.accepted_interface_cids)) {
@@ -899,7 +909,7 @@ function collectPolicyCids(records = []) {
   return uniqueStrings(values);
 }
 
-function collectReceiptCids(records = []) {
+function collectReceiptCidsFromRecords(records = []) {
   const values = [];
   records.filter(isObject).forEach((record) => {
     values.push(record.receipt_cid);
@@ -1009,10 +1019,10 @@ function buildMobileOrbDiagnosticsContract({
     },
     backend_counts: backendCounts,
     backend_capability_counts: backendCounts,
-    descriptor_cids: collectDescriptorCids(records),
+    descriptor_cids: collectDescriptorCidsFromRecords(records),
     policy_cids: collectPolicyCids(records),
     binding_state: bindingState,
-    receipt_cids: collectReceiptCids(records),
+    receipt_cids: collectReceiptCidsFromRecords(records),
     fallback_reasons: collectFallbackReasons(records),
   };
 }
@@ -1303,6 +1313,7 @@ export class MetaGlassesMobileOrbBridge {
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
+      localInterfaceKey(SWISSKNIFE_MOBILE_INTEROP_INTERFACE),
     ];
     this.edgeSession = null;
     this.bindings = new Map();
@@ -1637,10 +1648,9 @@ export class MetaGlassesMobileOrbBridge {
       dat_capabilities: normalizeCapabilities(input.dat_capabilities || input.capabilities || input),
       local_interface_cids: input.local_interface_cids || this.localInterfaceCids,
       transport_preferences: input.transport_preferences || ['local', 'http', 'websocket', 'mcp-server'],
-      descriptors: input.descriptors || [
-        descriptorRef(MOBILE_ORB_BRIDGE_INTERFACE, this.localInterfaceCids[0]),
-        descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE, this.localInterfaceCids[1]),
-      ],
+      descriptors: input.descriptors || edgeRegistrationDescriptorRefs(
+        input.local_interface_cids || this.localInterfaceCids
+      ),
     });
     const previousEdgeSessionId = this.edgeSession?.edge_session_id || null;
     const response = await this.backend.registerEdgeCapabilities(payload);

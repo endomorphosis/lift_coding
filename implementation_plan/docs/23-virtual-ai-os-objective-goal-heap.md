@@ -861,7 +861,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G700 Interoperate swissknife with mobile
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -886,6 +886,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/swissknife-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `swissknife` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: MGW-569 objective validation repair => tests/integration/test_swissknife_mobile_interop.py validates the interface contract swissknife mobile handoff across `swissknife/contracts/control_surface_contract.schema.json`, `swissknife/contracts/interaction_envelope.schema.json`, `swissknife/contracts/policy_decision.schema.json`, `swissknife/contracts/mediation_receipt.schema.json`, and `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`; docs/integration/swissknife-mobile.md records the operator-facing contract; data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-validation-repair.md records the scanner repair; mobile/src/orb/metaGlassesOrbDescriptors.js exports `SWISSKNIFE_MOBILE_INTEROP_INTERFACE`; mobile/src/utils/metaWearablesDatDisplayWidgetContract.js exports `SWISSKNIFE_DISPLAY_WIDGET_HANDOFFS`; SwissKnife schema metadata names the VAIOS-G700 mobile descriptor and display-widget action contract.
+- Completion validation: python -m pytest tests/integration/test_swissknife_mobile_interop.py -q
 
 ## VAIOS-G701 Interoperate swissknife with external/ipfs_accelerate
 
