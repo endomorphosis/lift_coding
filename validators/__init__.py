@@ -3,6 +3,7 @@
 from .base_mcp import ValidationResult
 from .cid_artifacts import CIDExecutionValidator
 from .event_dag import EventDAGValidator
+from .mcp_idl import MCPIDLValidator
 from .models import DAGEvent, InterfaceDescriptor, MethodDescriptor
 
 __all__ = [
@@ -10,6 +11,7 @@ __all__ = [
     "DAGEvent",
     "EventDAGValidator",
     "InterfaceDescriptor",
+    "MCPIDLValidator",
     "MethodDescriptor",
     "ValidationResult",
 ]

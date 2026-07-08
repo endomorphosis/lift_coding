@@ -1,4 +1,4 @@
-"""SwissKnife/Mcp-Plus-Plus interoperability contract regression tests for VAI-665."""
+"""SwissKnife/Mcp-Plus-Plus interoperability contract regression tests for HAO-734."""
 
 from __future__ import annotations
 
@@ -183,6 +183,78 @@ def swissknife_mcp_plus_plus_interaction_envelope() -> dict:
     }
 
 
+def swissknife_mcp_plus_plus_compatibility_receipt() -> dict:
+    """Representative receipt for the HAO-734 SwissKnife/Mcp-Plus-Plus handoff."""
+    return {
+        "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
+        "task_id": "HAO-734",
+        "session_id": "session:swissknife-mcp-plus-plus:1",
+        "correlation_id": "corr:swissknife-mcp-plus-plus:execute-with-envelope:1",
+        "daemon_id": "swissknife",
+        "server_package": "Mcp-Plus-Plus",
+        "swissknife_consumer": "swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts",
+        "protocol_negotiation": {
+            "method": "initialize",
+            "protocol_version": "2024-11-05+mcp++",
+            "client_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "server_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "negotiated_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "initialized": True,
+        },
+        "capability_descriptor": {
+            "descriptor_id": "swissknife-mcp-plus-plus-interop@0.1.0",
+            "interface_cid": "bafyswissknifemcpplusplusinterop000000001",
+            "name": "swissknife-mcp-plus-plus-interop",
+            "namespace": "com.swissknife.interop.mcp_plus_plus",
+            "version": "0.1.0",
+            "methods": sorted(MCP_PLUS_PLUS_INTEROP_OPERATIONS),
+            "requires": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "compatibility_checked": True,
+            "compatibility_verdict": "compatible",
+            "event_streams": True,
+        },
+        "transport": {
+            "kind": "mcp-server",
+            "protocol_path": "swissknife://mcp-plus-plus/execute_with_envelope",
+            "auth_present": True,
+            "redaction_profile": "agent_identity",
+        },
+        "tool_call": {
+            "tool_name": "mcpplusplus.execute_with_envelope",
+            "tool_category": "interop",
+            "upstream_function": "executeWithEnvelope",
+            "jsonrpc_method": "tools/call",
+            "arguments_hash": "sha256:swissknife-mcp-plus-plus-execute-with-envelope",
+            "dispatch_allowed": True,
+            "upstream_status": "ok",
+        },
+        "policy_contract": {
+            "interaction_envelope_id": "interaction:swissknife-mcp-plus-plus:execute-with-envelope:1",
+            "policy_decision_id": "decision:swissknife-mcp-plus-plus:allow:1",
+            "policy_outcome": "allow",
+            "mediation_receipt_id": "receipt:swissknife-mcp-plus-plus:allow:1",
+            "control_surface_contract_ref": "swissknife/contracts/control_surface_contract.schema.json",
+        },
+        "receipt_lineage": {
+            "envelope_cid": "bafyswissknifemcpplusplusenvelope000000001",
+            "decision_cid": "bafyswissknifemcpplusplusdecision000000001",
+            "receipt_cid": "bafyswissknifemcpplusplusreceipt000000001",
+            "tool_receipt_id": "receipt:swissknife-mcp-plus-plus:allow:1",
+        },
+        "lifecycle_events": [
+            {"event": "initialize", "at": "2026-07-08T00:00:00Z", "status": "ok"},
+            {"event": "policy_decision", "at": "2026-07-08T00:00:01Z", "status": "allow"},
+            {
+                "event": "receipt_emitted",
+                "at": "2026-07-08T00:00:02Z",
+                "status": "ok",
+                "receipt_cid": "bafyswissknifemcpplusplusreceipt000000001",
+            },
+        ],
+        "validated_at": "2026-07-08T00:00:03Z",
+    }
+
+
 def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     src = read_text("swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts")
 
@@ -211,6 +283,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
         "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json"
         in src
     )
+    assert "HAO-734" in src
     assert "VAI-665" in src
     assert "VAIOS-G704" in src
     assert "agent_identity" in src
@@ -221,12 +294,18 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
 def test_swissknife_control_surface_and_interaction_envelope_validate_for_mcp_plus_plus() -> None:
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+    compatibility_receipt_schema = read_json(
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json"
+    )
 
     Draft202012Validator(control_schema).validate(
         swissknife_mcp_plus_plus_control_surface_payload()
     )
     Draft202012Validator(envelope_schema).validate(
         swissknife_mcp_plus_plus_interaction_envelope()
+    )
+    Draft202012Validator(compatibility_receipt_schema).validate(
+        swissknife_mcp_plus_plus_compatibility_receipt()
     )
 
 
@@ -244,7 +323,8 @@ def test_mcp_plus_plus_idl_validator_accepts_swissknife_interop_descriptor(mcp_i
     fixture = read_json(
         "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json"
     )
-    assert fixture["task_id"] == "VAI-665"
+    assert fixture["task_id"] == "HAO-734"
+    assert fixture["predecessor_task_id"] == "VAI-665"
     assert fixture["goal_id"] == "VAIOS-G704"
     assert fixture["goal_packet"] == "goal_packet/interoperability/swissknife/06921590135c"
     assert fixture["interface_contract"] == "interface contract swissknife Mcp-Plus-Plus"
@@ -273,12 +353,16 @@ def test_mcp_idl_descriptor_fixture_still_validates_with_shared_validator(mcp_id
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-mcp_plus_plus.md")
-    discovery = read_text("data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md")
-    gap = read_text("data/virtual_ai_os/discovery/2026-07-08-vai-665-objective-gap-57359897bf4f.md")
+    discovery = read_text(
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-734-attempt-3-validation-repair.md"
+    )
+    gap = read_text(
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-734-objective-gap-57359897bf4f.md"
+    )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "VAI-665",
+        "HAO-734",
         "VAIOS-G704",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
@@ -287,6 +371,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json",
         "Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json",
     ]
     for content in (docs, discovery, heap):
