@@ -754,7 +754,7 @@ state observation.
 
 ## SWR-040 Harden browser WASM asset, integrity, and isolation policy
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/wasm
 - Fingerprint: 947c1e63f0ad5ea7b55a99de20ef438f2e2441ec
