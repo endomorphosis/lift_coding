@@ -300,17 +300,17 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
   },
   validation: {
-    task_id: 'HAO-740',
-    repair_task_id: 'HAO-751',
+    task_id: 'VAI-674',
+    repair_task_id: 'VAI-684',
     goal_id: 'VAIOS-G707',
     objective_gap_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-objective-gap-7edb316279e5.md',
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md',
     validation_confirmation_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md',
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md',
     validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md',
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md',
     retry_budget_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md',
+      'data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md',
     evidence: 'objective validation repair',
   },
 };

@@ -1,4 +1,4 @@
-"""Hallucinate App / mobile interoperability regression tests for HAO-740."""
+"""Hallucinate App / mobile interoperability regression tests for VAI-674."""
 
 from __future__ import annotations
 
@@ -11,7 +11,18 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GOAL_ID = "VAIOS-G707"
+TASK_ID = "VAI-674"
+REPAIR_TASK_ID = "VAI-684"
 INTERFACE_CONTRACT = "interface contract hallucinate_app mobile"
+OBJECTIVE_GAP_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md"
+)
+VALIDATION_REPAIR_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md"
+)
+RETRY_BUDGET_REF = (
+    "data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md"
+)
 MOBILE_ORB_OPERATIONS = {
     "register_edge_capabilities",
     "publish_glasses_event",
@@ -139,15 +150,14 @@ def test_search_interface_exports_hallucinate_app_mobile_handoff_descriptor() ->
 
     assert descriptor["interface_contract"] == INTERFACE_CONTRACT
     assert descriptor["goal_id"] == GOAL_ID
-    assert descriptor["task_id"] == "HAO-740"
-    assert descriptor["repair_task_id"] == "HAO-751"
+    assert descriptor["task_id"] == TASK_ID
+    assert descriptor["repair_task_id"] == REPAIR_TASK_ID
+    assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
     assert descriptor["runtime_handoff"]["operation"] == "invoke_service"
     assert set(descriptor["runtime_handoff"]["required_artifacts"]) == REQUIRED_ARTIFACTS
-    assert (
-        descriptor["validation"]["validation_confirmation_ref"]
-        == "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
-    )
+    assert descriptor["validation"]["validation_confirmation_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["retry_budget_ref"] == RETRY_BUDGET_REF
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
     handoff = build_search_handoff(
@@ -193,14 +203,13 @@ def test_mobile_descriptor_exports_hallucinate_app_mobile_contract() -> None:
     assert descriptor["interface"]["name"] == "hallucinate_app_mobile_interop"
     assert descriptor["runtime_handoff"]["route"] == "/v1/mobile/orb/invoke_service"
     assert set(descriptor["runtime_handoff"]["required_artifacts"]) == REQUIRED_ARTIFACTS
-    assert descriptor["validation"]["task_id"] == "HAO-740"
-    assert descriptor["validation"]["repair_task_id"] == "HAO-751"
+    assert descriptor["validation"]["task_id"] == TASK_ID
+    assert descriptor["validation"]["repair_task_id"] == REPAIR_TASK_ID
     assert descriptor["validation"]["goal_id"] == GOAL_ID
-    assert (
-        descriptor["validation"]["validation_confirmation_ref"]
-        == "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
-    )
+    assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
+    assert descriptor["validation"]["validation_confirmation_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["retry_budget_ref"] == RETRY_BUDGET_REF
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
@@ -252,21 +261,15 @@ def test_hallucinate_app_duckdb_receipt_schema_records_mobile_interop() -> None:
     assert INTERFACE_CONTRACT in script
 
 
-def test_docs_discovery_and_heap_record_hao_740_validation_confirmation() -> None:
+def test_docs_discovery_and_heap_record_vai_674_validation_repair() -> None:
     docs = read_text("docs/integration/hallucinate_app-mobile.md")
-    discovery = read_text(
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-751-hao-740-validation-repair.md"
-    )
-    confirmation = read_text(
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
-    )
+    discovery = read_text(VALIDATION_REPAIR_REF)
+    objective_gap = read_text(OBJECTIVE_GAP_REF)
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "HAO-740",
-        "HAO-751",
+        TASK_ID,
+        REPAIR_TASK_ID,
         GOAL_ID,
         "objective/interoperability/hallucinate_app-mobile",
         "objective validation repair",
@@ -279,9 +282,18 @@ def test_docs_discovery_and_heap_record_hao_740_validation_confirmation() -> Non
         "mobile/src/orb/metaGlassesMobileOrbBridge.js",
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql",
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py",
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md",
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md",
+        OBJECTIVE_GAP_REF,
+        VALIDATION_REPAIR_REF,
+        RETRY_BUDGET_REF,
     ]
-    for content in (docs, discovery, confirmation, heap):
+    for content in (docs, discovery, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
+    for term in (
+        TASK_ID,
+        GOAL_ID,
+        "objective/interoperability/hallucinate_app-mobile",
+        "objective validation repair",
+        INTERFACE_CONTRACT,
+    ):
+        assert term in objective_gap, f"missing {term!r}"
