@@ -101,6 +101,9 @@ MGW_535_DAEMON_LAUNCH_GATE_PATH = (
 MGW_551_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-28-mgw-551-daemon-launch-health-gate.md"
 )
+MGW_590_DAEMON_LAUNCH_GATE_PATH = (
+    MGW_DISCOVERY_ROOT / "2026-07-08-mgw-590-daemon-launch-health-gate.md"
+)
 DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
@@ -172,6 +175,14 @@ MGW_556_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "mgw-556-daemon-launch-health-gate.json"
+)
+MGW_590_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "mgw-590-daemon-launch-health-gate.json"
 )
 VAI_565_DAEMON_LAUNCH_GATE_PATH = (
     REPO_ROOT
@@ -2236,6 +2247,102 @@ def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
         assert term in receipt_source
         assert term in shared_mgw_receipt_source
         assert term in g728_text
+
+
+def test_mgw_590_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    receipt_source = MGW_590_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    shared_mgw_receipt_source = MGW_535_DAEMON_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
+    receipt = _json_block_after(receipt_source, "## Gate Fixture")
+    mgw_fixture = json.loads(MGW_590_DAEMON_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+
+    assert receipt == mgw_fixture
+    assert receipt["schema"] == "hallucinate_app.daemon_launch_validation_gate.v1"
+    assert receipt["receipt_schema"] == "launch_readiness_receipt_v1"
+    assert receipt["task_id"] == "MGW-590"
+    assert receipt["shared_packet_task_id"] == "MGW-535"
+    assert receipt["goal_id"] == "VAIOS-G728"
+    assert receipt["goal_packet"] == "goal_packet/launch/hallucinate_app/44dceea6bc53"
+    assert receipt["packet_goals"] == ["VAIOS-G724", "VAIOS-G728"]
+    assert receipt["evidence_term"] == "launch Playwright validation gate"
+    assert receipt["gate_state"] == "gate_closed_by_playwright_validation"
+    assert receipt["objective_gap_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-590-objective-gap-b023c8de5b69.md"
+    )
+    assert receipt["launch_gate_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-590-daemon-launch-health-gate.md"
+    )
+    assert receipt["receipt_fixture"] == (
+        "hallucinate_app/test/e2e/fixtures/mgw-590-daemon-launch-health-gate.json"
+    )
+    assert receipt["todo_source"] == {
+        "file": "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+        "source_line": 3938,
+    }
+    assert receipt["packet_sibling_task_id"] == "MGW-589"
+    assert receipt["packet_sibling_goal_id"] == "VAIOS-G724"
+    assert receipt["packet_sibling_gap_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-589-objective-gap-3e00ad2a0074.md"
+    )
+    assert receipt["launch_gate_receipt"] in receipt["discovery_receipts"]
+    assert receipt["objective_gap_receipt"] in receipt["objective_gap_receipts"]
+
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+    for term in (
+        "MGW-590",
+        "MGW-589",
+        "MGW-535",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "2026-07-08-mgw-590-objective-gap-b023c8de5b69.md",
+        "2026-07-08-mgw-590-daemon-launch-health-gate.md",
+        "mgw-590-daemon-launch-health-gate.json",
+        "daemon-launch-health.spec.ts",
+        "test:e2e:meta-glasses",
+        "multimodal-control-surface.spec.ts",
+    ):
+        assert term in receipt_source
+        assert term in g728_text
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in receipt_source
+        assert term in g728_text
+    for term in (
+        "Hallucinate App daemon health",
+        "daemon launcher",
+        "MCP server",
+        "MCP dashboard",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "dashboard capability catalog",
+        "Swissknife applications",
+        "launch Playwright validation gate",
+    ):
+        assert term in shared_mgw_receipt_source
 
 
 def test_vai_565_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
