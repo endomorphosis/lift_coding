@@ -1,4 +1,4 @@
-"""SwissKnife/external/ipfs_kit interoperability regression tests for MGW-572."""
+"""SwissKnife/external/ipfs_kit interoperability regression tests for VAI-664."""
 
 from __future__ import annotations
 
@@ -287,7 +287,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/ipfs_kit/data/deprecations_report.schema.json" in src
     assert "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md" in src
     assert "external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto" in src
-    assert "MGW-572" in src
+    assert "VAI-664" in src
     assert "VAIOS-G703" in src
     assert "agent_identity" in src
     assert "allowed_surfaces" in src
@@ -305,17 +305,18 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_k
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_ipfs_kit.md")
     discovery = read_text(
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-572-objective-validation-repair.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-664-objective-validation-repair.md"
     )
     gap = read_text(
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-572-objective-gap-f463532ba4e3.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-664-objective-gap-f463532ba4e3.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "MGW-572",
+        "VAI-664",
         "VAIOS-G703",
         "goal_packet/interoperability/swissknife/06921590135c",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-664-objective-gap-f463532ba4e3.md",
         "objective validation repair",
         "interface contract swissknife external/ipfs_kit",
         "tests/integration/test_swissknife_external_ipfs_kit_interop.py",

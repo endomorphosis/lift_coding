@@ -1,6 +1,6 @@
 """Interop contract between SwissKnife and ``external/ipfs_kit``.
 
-MGW-572 repairs the VAIOS-G703 objective validation gap that requires
+VAI-664 repairs the VAIOS-G703 objective validation gap that requires
 `swissknife` to interoperate with `external/ipfs_kit` through importable
 contracts, interface descriptors, runtime handoff behavior, and integration
 tests. This is part of the shared
@@ -18,7 +18,7 @@ CLI/MCP interface summary
 ``bucket_*`` MCP tool surface, and a DAG-PB protobuf schema
 (``docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto``) describing the
 ``PBLink``/``PBNode`` MerkleDAG wire format. This module statically
-discovers those five descriptors (without importing `external/ipfs_kit`
+discovers those six descriptors (without importing `external/ipfs_kit`
 Python) and builds a deterministic ``SwissKnifeIPFSKitHandoff`` receipt that
 mirrors the
 ``swissknife/src/services/mcp/ipfs-kit-mcp-schema-interop-descriptor.ts``
