@@ -110,8 +110,9 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_policy_id: 'policy:swissknife:mobile-interop',
   },
   validation: {
-    task_id: 'VAI-675',
-    repaired_task_id: 'VAI-661',
+    task_id: 'VAI-661',
+    objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
     evidence: 'objective validation repair',
   },
 };
