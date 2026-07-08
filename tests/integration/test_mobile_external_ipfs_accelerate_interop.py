@@ -259,6 +259,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md"
     ).read_text(encoding="utf-8")
+    attempt_six = (
+        REPO_ROOT
+        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
@@ -279,6 +283,13 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, attempt_four, attempt_five, heap):
+    for content in (docs, discovery, attempt_four, attempt_five, attempt_six, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
+
+    attempt_six_record = (
+        "data/virtual_ai_os/discovery/"
+        "2026-07-08-vai-672-attempt-6-validation-confirmation.md"
+    )
+    assert attempt_six_record in docs
+    assert attempt_six_record in heap
