@@ -89,6 +89,9 @@ HAO_743_DAEMON_LAUNCH_GATE_PATH = (
 HAO_755_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-07-08-hao-755-daemon-launch-health-gate.md"
 )
+HAO_755_ATTEMPT_4_VALIDATION_PATH = (
+    DISCOVERY_ROOT / "2026-07-08-hao-755-attempt-4-validation.md"
+)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -1671,6 +1674,39 @@ def test_hao_daemon_launch_gates_align_with_objective_heap():
         ):
             assert term in receipt_source
             assert term in g728_text
+
+        if task_id == "HAO-755":
+            attempt_source = HAO_755_ATTEMPT_4_VALIDATION_PATH.read_text(encoding="utf-8")
+            for term in (
+                "HAO-755",
+                "Attempt: 4",
+                "VAIOS-G728",
+                "VAIOS-G724",
+                "goal_packet/launch/hallucinate_app/44dceea6bc53",
+                "launch Playwright validation gate",
+                "daemon-launch-health.spec.ts",
+                "multimodal-control-surface.spec.ts",
+                "test:e2e:meta-glasses",
+                "ipfs_accelerate_py",
+                "ipfs_datasets_py",
+                "ipfs_kit_py",
+            ):
+                assert term in attempt_source
+
+            for term in (
+                "hao_755_attempt_4_validation",
+                "2026-07-08-hao-755-attempt-4-validation.md",
+                "VAIOS-G728",
+                "VAIOS-G724",
+                "goal_packet/launch/hallucinate_app/44dceea6bc53",
+                "launch Playwright validation gate",
+                "daemon-launch-health.spec.ts",
+                "multimodal-control-surface.spec.ts",
+                "ipfs_accelerate_py",
+                "ipfs_datasets_py",
+                "ipfs_kit_py",
+            ):
+                assert term in g728_text
 
     assert "VAIOS-G728" in g724_text
     assert "VAIOS-G724" in g728_text
