@@ -1194,6 +1194,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_kit
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Completion evidence: objective validation repair => src/handsfree/meta_wearables_ipfs_kit_interop.py (interface contract, runtime handoff receipt), tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py (integration test, anyio, argparse, ast, atexit, binascii, collections, check_high_level_api_syntax), docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md (contract note), data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-validation-repair.md (supervisor evidence), external/meta-wearables-dat-android (gitlink initialized), external/ipfs_kit/data/deprecations_report.schema.json (schema), external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py (MCP schema repair), external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py (MCP schema repair), external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py (MCP schema repair)
 
 ## VAIOS-G712 Interoperate external/meta-wearables-dat-android with Mcp-Plus-Plus
 
