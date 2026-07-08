@@ -674,7 +674,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
 - Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:421. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-109-codebase-scan-dc01283308ea.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -685,7 +685,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
 - Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:433. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-110-codebase-scan-616298b7fd51.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -718,7 +718,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/node/menu_generator.js
 - Validation: test -f hallucinate_app/hallucinate_app/node/menu_generator.js
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/node/menu_generator.js:449. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-113-codebase-scan-924df9ad9af7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -729,7 +729,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:301. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-114-codebase-scan-7d52a8f929c8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -742,7 +742,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:303. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-115-codebase-scan-fbd7ce184cdf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -755,7 +755,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/meta_glasses_display_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/meta_glasses_display_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/meta_glasses_display_todo_supervisor.py:302. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-116-codebase-scan-e0ee641647d4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -768,7 +768,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/meta_glasses_display_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/meta_glasses_display_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/meta_glasses_display_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-117-codebase-scan-8461e40bbb4a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -781,7 +781,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/run_vai_mgw_hao_supervisors.sh
 - Validation: test -f scripts/run_vai_mgw_hao_supervisors.sh
 - Acceptance: Codebase scan filed this finding from scripts/run_vai_mgw_hao_supervisors.sh:92. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-118-codebase-scan-167e512adcc4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -794,7 +794,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:301. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-119-codebase-scan-5feefc7cd9b2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -805,7 +805,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:302. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-120-codebase-scan-d560bccc2eec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -816,7 +816,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-121-codebase-scan-87c3fb903dba.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -829,7 +829,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:305. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-122-codebase-scan-5e4f836c3e48.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -840,7 +840,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:161. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-123-codebase-scan-e7db865dfae5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -851,7 +851,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:301. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-124-codebase-scan-6a08fa66da0b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -862,7 +862,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/advanced_thread_pool_manager.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/advanced_thread_pool_manager.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/advanced_thread_pool_manager.py:1171. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-125-codebase-scan-74c66b0a97e9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -873,7 +873,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py:150. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-126-codebase-scan-befeb053e24b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -884,7 +884,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/auth_keystore_integration.py:376. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-127-codebase-scan-90f09626ab01.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -897,7 +897,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py:704. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-128-codebase-scan-64f0b11ab70e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -908,7 +908,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py:188. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-129-codebase-scan-77db10c9ffd2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -919,7 +919,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/duckdb_ipld_kit.py:810. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-130-codebase-scan-82006c12019b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -930,7 +930,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1102. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-131-codebase-scan-d54c9e83a2ed.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -941,7 +941,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1103. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-132-codebase-scan-d5b71515219e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -954,7 +954,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/github_issue_reporter.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/github_issue_reporter.py:369. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-133-codebase-scan-b701b80bf41c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -965,7 +965,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1110. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-134-codebase-scan-e115a28cef8a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -976,7 +976,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1111. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-135-codebase-scan-a2d26a7117fd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -987,7 +987,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1118. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-136-codebase-scan-32cf556b56c9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -998,7 +998,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:175. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-137-codebase-scan-8a2d973b6b52.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1009,7 +1009,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-06-24: preserved the orphaned implementation from `implementation/vai-138-attempt-2-1782267000`; `PlasmaManager.get()` now logs temp-file cleanup failures instead of silently swallowing `OSError`, and `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py` passes.
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_accelerate_server_mp.py:198. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-138-codebase-scan-bd5d75fcd4e5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1020,7 +1020,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1111. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-139-codebase-scan-17515b2de8e9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1033,7 +1033,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1112. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-140-codebase-scan-4de5dd15d666.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1046,7 +1046,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1119. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-141-codebase-scan-1cb37fc590f2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1059,7 +1059,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-06-24: preserved the orphaned implementation from `implementation/vai-142-attempt-2-1782269160`; `IPFSEmbeddingsPy.load_embeddings_from_ipfs()` now narrows temporary-file cleanup handling to logged `OSError` failures and removes the unconditional `raise e`; validation passed with `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py`.
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py:611. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-142-codebase-scan-cbf158a57c00.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1070,7 +1070,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-06-24: replaced the silent metadata temp-file unlink handler with `_unlink_temp_file(meta_file_path, "metadata")`; validation passed with `python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py`.
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_faiss_py.py:589. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-28-vai-143-codebase-scan-0c17756fc821.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1081,7 +1081,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1114. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-144-codebase-scan-a443e9f0cf9d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1092,7 +1092,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1115. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-145-codebase-scan-476c9d2eeaea.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1103,7 +1103,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1118. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-146-codebase-scan-cfe01394b5b6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1116,7 +1116,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py:1121. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-147-codebase-scan-f2f5d5fa5a3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1127,7 +1127,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit.py:336. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-148-codebase-scan-bc14c3b9ed8c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1138,7 +1138,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_kit_server.py:329. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-149-codebase-scan-c49ae8e3c5a8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1149,7 +1149,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:283. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-150-codebase-scan-46e73526b874.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1160,7 +1160,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:338. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-151-codebase-scan-96df5fcdd59e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1171,7 +1171,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py:454. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-152-codebase-scan-6ee96606c7a4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1182,7 +1182,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/js_bridge/pyarrow_content_index_bridge.py:752. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-153-codebase-scan-23aff914124b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1196,7 +1196,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-154-vai-152-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-152. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-154-vai-152-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-152 from strategy blocked_tasks.
@@ -1208,7 +1208,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-155-vai-154-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-154. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-155-vai-154-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-154 from strategy blocked_tasks.
@@ -1220,7 +1220,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-156-vai-155-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-155. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-156-vai-155-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-155 from strategy blocked_tasks.
@@ -1232,7 +1232,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-157-vai-156-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-156. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-30-vai-157-vai-156-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-156 from strategy blocked_tasks.
@@ -1243,7 +1243,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_model_manager.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-158-vai-157-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-157. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-158-vai-157-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-157 from strategy blocked_tasks.
@@ -1254,7 +1254,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-159-codebase-scan-9f8f16918698.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1267,7 +1267,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:305. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-160-codebase-scan-969bf9b8ee48.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1280,7 +1280,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:307. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-161-codebase-scan-06466d54cc2a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1293,7 +1293,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:308. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-162-codebase-scan-c0b8d370e688.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1306,7 +1306,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:17. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-163-codebase-scan-199c9802cce0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1319,7 +1319,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_daemon.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_daemon.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_daemon.py:47. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-164-codebase-scan-c4894982f031.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1332,7 +1332,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-165-codebase-scan-5c4a0f935809.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1343,7 +1343,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:307. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-166-codebase-scan-fc2b92d17414.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1356,7 +1356,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:19. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-167-codebase-scan-94c3b95fdec8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1369,7 +1369,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:44. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-168-codebase-scan-8164d3ed24f1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1382,7 +1382,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-169-codebase-scan-587479ca3454.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1393,7 +1393,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:307. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-170-codebase-scan-4da5e8f2f5fe.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1404,7 +1404,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:19. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-171-codebase-scan-c264d0ec0538.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1417,7 +1417,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:20. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-172-codebase-scan-153d93e5a828.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1428,7 +1428,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:169. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-173-codebase-scan-63f595be0a80.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1441,7 +1441,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:304. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-174-codebase-scan-c6a047779577.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1452,7 +1452,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/hallucinate_multimodal_control_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/hallucinate_multimodal_control_todo_supervisor.py:307. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-175-codebase-scan-776efef6a92f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1465,7 +1465,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:19. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-176-codebase-scan-7391f389eef1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1478,7 +1478,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:168. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-177-codebase-scan-3eea2ed69e5d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1491,7 +1491,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, scripts/virtual_ai_os_todo_supervisor.py
 - Validation: python3 -m py_compile scripts/virtual_ai_os_todo_supervisor.py
 - Acceptance: Codebase scan filed this finding from scripts/virtual_ai_os_todo_supervisor.py:169. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-178-codebase-scan-bdaa854064ba.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1502,7 +1502,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py:846. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-179-codebase-scan-f3621c11e0b8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1515,7 +1515,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py:925. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-180-codebase-scan-3b147db0b3ef.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1526,7 +1526,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/pyarrow_content_index.py:2570. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-181-codebase-scan-31c9794e4725.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1537,7 +1537,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/secure_duckdb_ipld_manager.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/secure_duckdb_ipld_manager.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/secure_duckdb_ipld_manager.py:1249. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-182-codebase-scan-cdfcf34f4b38.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1548,7 +1548,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:269. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-183-codebase-scan-44221032650b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1559,7 +1559,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:376. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-184-codebase-scan-ef3c5f5d40a6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1572,7 +1572,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:378. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-185-codebase-scan-f28f75a6b0eb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1583,7 +1583,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:380. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-186-codebase-scan-463570fd21dc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1594,7 +1594,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:389. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-187-codebase-scan-0b00a9870315.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1605,7 +1605,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:390. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-188-codebase-scan-c5f417bc9670.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1616,7 +1616,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_error_monitor.py:462. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-189-codebase-scan-851ad878de18.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1629,7 +1629,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/test/test_thread_pool_monitor.py:324. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-190-codebase-scan-ccb16b8cf977.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1642,7 +1642,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_integration.py:830. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-191-codebase-scan-0151f4bbf728.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1655,7 +1655,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/hallucinate_app/thread_pool_manager.py:1029. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-192-codebase-scan-15d4816ce8d3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1666,7 +1666,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:624. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-05-31-vai-193-codebase-scan-7fae0bf71f93.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1689,7 +1689,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ipfs_accelerate_py.py:1001. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-195-codebase-scan-ad6f0cf5772c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1700,7 +1700,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py
 - Validation: python3 -m py_compile hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/hallucinate_app/python/ucan_auth_py/ucan_auth_py/core/token.py:223. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-196-codebase-scan-c7eac77a4882.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1713,7 +1713,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1022. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-197-codebase-scan-c7debe50e8cb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1724,7 +1724,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1027. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-198-codebase-scan-e8f8f357776a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1735,7 +1735,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/control_surface_policy.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/control_surface_policy.py:1032. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-06-vai-199-codebase-scan-457c986ab6c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1837,7 +1837,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py
 - Validation: python3 -m py_compile hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py
 - Acceptance: Codebase scan filed this finding from hallucinate_app/python/hallucinate_app/ipfs_kit_bridge.py:793. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-207-codebase-scan-35009422e1fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1850,7 +1850,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/scripts/generate_workflow_list.py
 - Validation: python3 -m py_compile external/ipfs_kit/.github/scripts/generate_workflow_list.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/scripts/generate_workflow_list.py:36. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-208-codebase-scan-67e750fa2595.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1861,7 +1861,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Validation: python3 -c 'import pathlib, sys; p=pathlib.Path(sys.argv[1]); assert p.read_text(encoding="utf-8").strip()' external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/.github/workflows/auto-doc-maintenance.yml:120. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-209-codebase-scan-f5c0089e31da.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1872,7 +1872,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/add_pins_monkey_patch.py:39. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-210-codebase-scan-7e74c27a365d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1883,7 +1883,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
 - Validation: python3 -m py_compile external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
 - Acceptance: Codebase scan filed this finding from external/ipfs_kit/archive/applied_patches/advanced_filecoin.py:984. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-211-codebase-scan-f223d9e5d048.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1895,7 +1895,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, external/ipfs_kit/archive/applied_patches/advanced_filecoin.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-211. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-07-vai-212-vai-211-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-211 from strategy blocked_tasks.
@@ -1939,7 +1939,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-341-vai-052-implementation-retry-budget.md
 - Blocked reason: stale retry-budget maintenance is deferred during the product launch-readiness run.
@@ -1951,7 +1951,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/error_monitor.py, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-342-vai-141-implementation-retry-budget.md
 - Blocked reason: stale retry-budget maintenance is deferred during the product launch-readiness run.
@@ -1963,7 +1963,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/python/hallucinate_app/ipfs_embeddings_py/ipfs_embeddings_py.py, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-23-vai-343-vai-142-implementation-retry-budget.md
 - Blocked reason: stale retry-budget maintenance is deferred during the product launch-readiness run.
@@ -1975,7 +1975,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-344-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1986,7 +1986,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
 - Validation: test -f implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-345-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1999,7 +1999,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-346-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2012,7 +2012,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-347-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2025,7 +2025,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:216. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-348-codebase-scan-210b6a0bd043.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2038,7 +2038,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:239. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-349-codebase-scan-4dc1f7f08722.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2051,7 +2051,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:262. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-350-codebase-scan-0b738229dfc8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2064,7 +2064,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:377. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-351-codebase-scan-e052213700f2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2077,7 +2077,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:195. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-352-codebase-scan-1fcca8319846.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2088,7 +2088,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:400. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-353-codebase-scan-3516ce3866f4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2101,7 +2101,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:626. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-354-codebase-scan-8418bcea81da.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2114,7 +2114,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:649. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-355-codebase-scan-4c765d72a612.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2127,7 +2127,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:859. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-356-codebase-scan-309a8676f15b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2140,7 +2140,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:111. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-357-codebase-scan-e0331f362512.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2151,7 +2151,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:112. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-358-codebase-scan-c1801c64990f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2162,7 +2162,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:117. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-359-codebase-scan-3d0dc3c69a5f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2175,7 +2175,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:113. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-360-codebase-scan-dc304b98262d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2188,7 +2188,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:122. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-361-codebase-scan-24a8dfd921a5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2201,7 +2201,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:147. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-362-codebase-scan-d503a3e145f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2214,7 +2214,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:417. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-363-codebase-scan-d23bab9bfb8a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2227,7 +2227,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:440. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-364-codebase-scan-0a54dc1bdf97.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2238,7 +2238,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:101. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-365-codebase-scan-2f375dbd1119.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2249,7 +2249,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:114. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-366-codebase-scan-04bfc0065834.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2262,7 +2262,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:121. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-367-codebase-scan-76cb4c034940.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2275,7 +2275,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:435. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-368-codebase-scan-4e05798c3058.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2288,7 +2288,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:54. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-369-codebase-scan-1aa0d0120649.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2301,7 +2301,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:63. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-370-codebase-scan-5a3102335d9c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2314,7 +2314,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:110. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-371-codebase-scan-f5182b96f0db.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2327,7 +2327,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:67. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-372-codebase-scan-82c22eaf19e5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2338,7 +2338,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:114. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-373-codebase-scan-316b5ecc9e0a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2349,7 +2349,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:173. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-374-codebase-scan-f2142bd7e8ca.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2362,7 +2362,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:237. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-375-codebase-scan-09159eaa4473.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2375,7 +2375,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:288. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-376-codebase-scan-5f281694481a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2388,7 +2388,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:292. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-377-codebase-scan-465e51445a76.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2401,7 +2401,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:376. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-378-codebase-scan-5a569d75b7f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2414,7 +2414,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, tracking/PR-079-agent-runner-minimal.md
 - Validation: test -f tracking/PR-079-agent-runner-minimal.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:56. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-379-codebase-scan-0a3992f37e3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2427,7 +2427,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:122. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-380-codebase-scan-0dbc6e6537b4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2440,7 +2440,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-381-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2451,7 +2451,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:297. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-382-codebase-scan-c4e511c86ab6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2464,7 +2464,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:360. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-23-vai-383-codebase-scan-77ba3b1d763a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2477,7 +2477,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-384-codebase-scan-2d67c01d3acc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2488,7 +2488,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-385-codebase-scan-e90a6112f5fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2499,7 +2499,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-386-codebase-scan-849612e9edb6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2512,7 +2512,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-387-codebase-scan-d5e80576db69.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2525,7 +2525,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-388-codebase-scan-defbcedebe03.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2538,7 +2538,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-389-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2551,7 +2551,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-390-codebase-scan-dc52194613c1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2564,7 +2564,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-391-codebase-scan-4f33a0ad65fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2577,7 +2577,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-392-codebase-scan-66825794ba9f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2590,7 +2590,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-393-codebase-scan-c72286879ecc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2603,7 +2603,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-394-codebase-scan-dc36a218425f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2616,7 +2616,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-395-codebase-scan-025dd1a14a04.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2629,7 +2629,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-396-codebase-scan-dc52194613c1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2642,7 +2642,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-397-codebase-scan-4f33a0ad65fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2653,7 +2653,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-398-codebase-scan-66825794ba9f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2666,7 +2666,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-399-codebase-scan-da8f80493ff9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2679,7 +2679,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-400-codebase-scan-aba0d5c2673b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2692,7 +2692,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-401-codebase-scan-b71e1b7130ac.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2705,7 +2705,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-402-codebase-scan-ff96ed86fa8c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2718,7 +2718,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-403-codebase-scan-4f381d39a54c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2731,7 +2731,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-404-codebase-scan-fd706f9227d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2744,7 +2744,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-405-codebase-scan-da8f80493ff9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2757,7 +2757,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-406-codebase-scan-aba0d5c2673b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2770,7 +2770,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-407-codebase-scan-b71e1b7130ac.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2783,7 +2783,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-408-codebase-scan-067c64675c26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2796,7 +2796,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-409-codebase-scan-69a234bf9d55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2809,7 +2809,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-410-codebase-scan-07a35e081f65.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2822,7 +2822,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-411-codebase-scan-2907c83d600b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2835,7 +2835,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-412-codebase-scan-8162a1533a49.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2848,7 +2848,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-413-codebase-scan-f0debd6b16cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2861,7 +2861,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-414-codebase-scan-ff96ed86fa8c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2874,7 +2874,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-415-codebase-scan-4f381d39a54c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2887,7 +2887,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-416-codebase-scan-fd706f9227d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2900,7 +2900,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-417-codebase-scan-34218144f2c4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2913,7 +2913,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-418-codebase-scan-189bc4a84a14.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2926,7 +2926,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-419-codebase-scan-103085e1d7ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2939,7 +2939,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-420-codebase-scan-5bdd54dddcc6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2952,7 +2952,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-421-codebase-scan-8c17c2df11b1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2965,7 +2965,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-422-codebase-scan-593be57237f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2978,7 +2978,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-423-codebase-scan-067c64675c26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2991,7 +2991,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-424-codebase-scan-69a234bf9d55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3002,7 +3002,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-425-codebase-scan-07a35e081f65.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3015,7 +3015,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-426-codebase-scan-7ff199b75d27.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3028,7 +3028,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-427-codebase-scan-6ff7e98d2c3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3039,7 +3039,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-428-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3052,7 +3052,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-429-codebase-scan-87a1ababe545.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3063,7 +3063,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-430-codebase-scan-5f7907e8e561.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3076,7 +3076,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-431-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3089,7 +3089,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-432-codebase-scan-2907c83d600b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3102,7 +3102,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-433-codebase-scan-8162a1533a49.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3115,7 +3115,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-434-codebase-scan-f0debd6b16cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3128,7 +3128,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-435-codebase-scan-bfe30187a7bb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3139,7 +3139,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-436-codebase-scan-c2b12d295679.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3152,7 +3152,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-437-codebase-scan-ec18be8c273c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3165,7 +3165,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-438-codebase-scan-44d16881da6f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3176,7 +3176,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-439-codebase-scan-1067af266d5f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3187,7 +3187,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-440-codebase-scan-0d21592b7e59.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3200,7 +3200,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-441-codebase-scan-8017793e8291.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3211,7 +3211,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-442-codebase-scan-2e5c7623ea98.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3222,7 +3222,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-443-codebase-scan-da19273702c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3235,7 +3235,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-444-codebase-scan-34218144f2c4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3248,7 +3248,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-445-codebase-scan-189bc4a84a14.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3261,7 +3261,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-446-codebase-scan-103085e1d7ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3274,7 +3274,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-447-codebase-scan-5bdd54dddcc6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3285,7 +3285,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-448-codebase-scan-593be57237f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3296,7 +3296,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-449-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3309,7 +3309,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-450-codebase-scan-bb4ec37257b5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3322,7 +3322,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-451-codebase-scan-2104a536dfcc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3335,7 +3335,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-452-codebase-scan-f9289a36b91d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3348,7 +3348,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-453-codebase-scan-d4ed79ea4296.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3361,7 +3361,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-454-codebase-scan-b62d131629ca.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3374,7 +3374,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-455-codebase-scan-4e01ce3fd165.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3387,7 +3387,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-456-codebase-scan-5f7907e8e561.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3400,7 +3400,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-457-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3411,7 +3411,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-458-codebase-scan-c2b12d295679.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3424,7 +3424,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-459-codebase-scan-ec18be8c273c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3437,7 +3437,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-460-codebase-scan-0d21592b7e59.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3448,7 +3448,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-461-codebase-scan-8017793e8291.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3461,7 +3461,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-462-codebase-scan-8a46ed903a02.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3474,7 +3474,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-463-codebase-scan-ef24d56686d4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3487,7 +3487,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-464-codebase-scan-cbf59dd145d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3500,7 +3500,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-465-codebase-scan-da19273702c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3511,7 +3511,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-466-codebase-scan-2104a536dfcc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3522,7 +3522,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-467-codebase-scan-f9289a36b91d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3535,7 +3535,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-468-codebase-scan-95c78eeaccd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3548,7 +3548,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-469-codebase-scan-a9cbc076e898.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3559,7 +3559,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-470-codebase-scan-36a5165c924e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3572,7 +3572,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-471-codebase-scan-8a46ed903a02.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3585,7 +3585,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-472-codebase-scan-ef24d56686d4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3596,7 +3596,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-473-codebase-scan-cbf59dd145d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3609,7 +3609,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-474-codebase-scan-1d1434428e78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3620,7 +3620,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-475-codebase-scan-584127fea95e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3633,7 +3633,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-476-codebase-scan-b9d105999d3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3646,7 +3646,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-477-codebase-scan-95c78eeaccd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3659,7 +3659,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-478-codebase-scan-a9cbc076e898.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3672,7 +3672,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-479-codebase-scan-36a5165c924e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3685,7 +3685,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-480-codebase-scan-b9d105999d3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3698,7 +3698,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-481-codebase-scan-56bd19bf79e7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3711,7 +3711,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-482-codebase-scan-295167feddbd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3724,7 +3724,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-483-codebase-scan-56bd19bf79e7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3737,7 +3737,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-484-codebase-scan-295167feddbd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3750,7 +3750,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-485-codebase-scan-7e78f5b85c0d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3763,7 +3763,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-486-codebase-scan-4f239a29b61b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3774,7 +3774,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-487-codebase-scan-ca5abd94b6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3787,7 +3787,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-488-codebase-scan-8b3d8ba89074.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3800,7 +3800,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-489-codebase-scan-8b3d8ba89074.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3813,7 +3813,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-490-codebase-scan-81d13a160ddc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3826,7 +3826,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-491-codebase-scan-a4b2c5c5fec9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3839,7 +3839,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deta.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deta.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deta.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-492-codebase-scan-b3c6ff998da1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3852,7 +3852,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-493-codebase-scan-9a74b88e06cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3865,7 +3865,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-494-codebase-scan-669a61083619.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3878,7 +3878,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deit.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-495-codebase-scan-81d13a160ddc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3891,7 +3891,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-496-codebase-scan-a4b2c5c5fec9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3904,7 +3904,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deta.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deta.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deta.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-497-codebase-scan-b3c6ff998da1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3917,7 +3917,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-498-codebase-scan-e79c1d962235.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3930,7 +3930,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-499-codebase-scan-529279e8394e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3943,7 +3943,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-24-vai-500-codebase-scan-5481b197a30a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -3978,7 +3978,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3998,9 +3998,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -4013,7 +4013,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-504-codebase-scan-7e535b05d1d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -4024,7 +4024,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-505-codebase-scan-81177723e089.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -4037,7 +4037,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_electra.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_electra.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_electra.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-506-codebase-scan-4643a0f331bf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -4049,7 +4049,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-507-codebase-scan-669a61083619.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -4060,7 +4060,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-508-codebase-scan-529279e8394e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -4073,7 +4073,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-25-vai-509-codebase-scan-5481b197a30a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -4230,7 +4230,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -4265,7 +4265,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-06-26: merged the VAI-518 launch Playwright validation gate and VAIOS-G727/VAIOS-G729 control-plane input routing evidence through `05fce1c93`.
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_launch_readiness_gate.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/meta-glasses-control-plane-input-routing
@@ -4300,7 +4300,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -4335,7 +4335,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py
 - Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py tests/test_reconciliation_guardrail_refresh.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/objective-heap-autosteer-validation-repair
@@ -4370,7 +4370,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, swissknife, Mcp-Plus-Plus, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, swissknife/test/e2e/mcp-dashboard.spec.ts
 - Validation: npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/swissknife-mcp-plus-plus-server-dashboard-interop
@@ -4390,9 +4390,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -4405,7 +4405,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, tests/test_virtual_ai_os_launch_readiness_gate.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/cross-device-virtual-desktop-offload-replay
@@ -4425,9 +4425,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -4440,7 +4440,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-523-vai-518-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-518. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-523-vai-518-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-518 from strategy blocked_tasks.
@@ -4451,7 +4451,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, swissknife, Mcp-Plus-Plus, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, swissknife/test/e2e/mcp-dashboard.spec.ts, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-524-vai-521-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-521. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-524-vai-521-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-521 from strategy blocked_tasks.
@@ -4462,7 +4462,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-525-vai-520-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-520. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-525-vai-520-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-520 from strategy blocked_tasks.
@@ -4473,7 +4473,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-526-vai-517-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-517. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-526-vai-517-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-517 from strategy blocked_tasks.
@@ -4484,7 +4484,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, tests/test_virtual_ai_os_launch_readiness_gate.py, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-527-vai-522-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-522. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-527-vai-522-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-522 from strategy blocked_tasks.
@@ -4495,7 +4495,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-528-vai-519-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in VAI-519. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-26-vai-528-vai-519-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release VAI-519 from strategy blocked_tasks.
@@ -4506,7 +4506,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -4541,7 +4541,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -4576,7 +4576,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -4596,9 +4596,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -4611,7 +4611,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/virtual_ai_os/state/discovery
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-530. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-27-vai-532-vai-530-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-530 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
@@ -4622,7 +4622,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/virtual_ai_os/state/discovery
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-531. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-27-vai-533-vai-531-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-531 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
@@ -4633,7 +4633,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-28-vai-534-vai-529-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-529. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-28-vai-534-vai-529-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-529 from strategy blocked_tasks.
@@ -4644,7 +4644,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -4679,7 +4679,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -4714,7 +4714,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -4749,7 +4749,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -4784,7 +4784,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -4819,7 +4819,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -4854,7 +4854,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-06-28: resolved the dirty `hallucinate_app` main checkout merge blocker by preserving both HAO retry-budget todo edits, merging the semantic dashboard/daemon gitlink conflicts, and committing the combined submodule merge as `64d59f8ddf23e2d57ea2f4c268803f2ea41601ed`.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/virtual_ai_os/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-28-vai-541-vai-538-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-538. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-06-28-vai-541-vai-538-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-538 from strategy blocked_tasks.
@@ -4865,7 +4865,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -4885,9 +4885,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -4900,7 +4900,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -4920,9 +4920,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -4935,7 +4935,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-28-vai-544-vai-046-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-046. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-28-vai-544-vai-046-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-046 from strategy blocked_tasks.
@@ -4947,7 +4947,7 @@ cadence remains parseable and resumable.
 - Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, hallucinate_app/hallucinate_app/js_bridge/pyarrow_content_index_ws_server.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-28-vai-545-vai-107-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-107. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-28-vai-545-vai-107-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-107 from strategy blocked_tasks.
@@ -4958,7 +4958,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-29-vai-546-vai-543-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-543. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-29-vai-546-vai-543-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-543 from strategy blocked_tasks.
@@ -4969,7 +4969,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-30-vai-547-vai-539-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-539. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-06-30-vai-547-vai-539-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-539 from strategy blocked_tasks.
@@ -4980,7 +4980,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5015,7 +5015,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5050,7 +5050,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5070,9 +5070,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5085,7 +5085,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-02-vai-551-vai-548-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-548. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-02-vai-551-vai-548-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-548 from strategy blocked_tasks.
@@ -5096,7 +5096,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-02-vai-552-vai-549-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-549. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-02-vai-552-vai-549-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-549 from strategy blocked_tasks.
@@ -5107,7 +5107,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-02-vai-553-vai-550-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-550. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-02-vai-553-vai-550-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-550 from strategy blocked_tasks.
@@ -5118,7 +5118,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5153,7 +5153,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5188,7 +5188,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5223,7 +5223,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5258,7 +5258,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5293,7 +5293,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5328,7 +5328,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5348,9 +5348,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5363,7 +5363,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5398,7 +5398,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5433,7 +5433,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5453,9 +5453,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5468,7 +5468,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5503,7 +5503,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5538,7 +5538,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5558,9 +5558,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5573,7 +5573,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5608,7 +5608,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5643,7 +5643,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5663,9 +5663,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5678,7 +5678,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5713,7 +5713,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5748,7 +5748,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5768,9 +5768,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5783,7 +5783,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5818,7 +5818,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5853,7 +5853,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5873,9 +5873,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5888,7 +5888,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -5923,7 +5923,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -5958,7 +5958,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -5978,9 +5978,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -5993,7 +5993,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6028,7 +6028,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6063,7 +6063,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6083,9 +6083,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6098,7 +6098,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6133,7 +6133,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6168,7 +6168,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6188,9 +6188,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6203,7 +6203,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6238,7 +6238,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6273,7 +6273,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6293,9 +6293,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6308,7 +6308,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6343,7 +6343,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6378,7 +6378,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6398,9 +6398,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6413,7 +6413,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6433,9 +6433,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6448,7 +6448,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6483,7 +6483,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6518,7 +6518,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6538,9 +6538,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6553,7 +6553,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6588,7 +6588,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6623,7 +6623,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6643,9 +6643,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6658,7 +6658,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6693,7 +6693,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6728,7 +6728,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6748,9 +6748,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6763,7 +6763,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6798,7 +6798,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6833,7 +6833,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6853,9 +6853,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6868,7 +6868,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -6903,7 +6903,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -6938,7 +6938,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -6958,9 +6958,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -6973,7 +6973,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7008,7 +7008,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7043,7 +7043,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7063,9 +7063,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7078,7 +7078,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7098,9 +7098,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7113,7 +7113,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7148,7 +7148,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7183,7 +7183,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7203,9 +7203,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7218,7 +7218,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7253,7 +7253,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7288,7 +7288,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7308,9 +7308,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7323,7 +7323,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7358,7 +7358,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7393,7 +7393,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7413,9 +7413,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7428,7 +7428,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7463,7 +7463,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7498,7 +7498,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7518,9 +7518,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7533,7 +7533,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7568,7 +7568,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7603,7 +7603,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7623,9 +7623,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7638,7 +7638,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7673,7 +7673,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7708,7 +7708,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7728,9 +7728,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7743,7 +7743,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7778,7 +7778,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7813,7 +7813,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7833,9 +7833,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7848,7 +7848,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7883,7 +7883,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -7918,7 +7918,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -7938,9 +7938,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -7953,7 +7953,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -7988,7 +7988,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8023,7 +8023,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -8043,9 +8043,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -8058,7 +8058,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8093,7 +8093,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8128,7 +8128,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8163,7 +8163,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8198,7 +8198,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8233,7 +8233,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8268,7 +8268,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8303,7 +8303,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8338,7 +8338,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-04-vai-646-vai-644-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-644. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-04-vai-646-vai-644-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-644 from strategy blocked_tasks.
@@ -8349,7 +8349,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8384,7 +8384,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8419,7 +8419,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8454,7 +8454,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8489,7 +8489,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8524,7 +8524,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8559,7 +8559,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8594,7 +8594,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8629,7 +8629,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8664,7 +8664,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8699,7 +8699,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8734,7 +8734,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8769,7 +8769,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -8804,7 +8804,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -8839,7 +8839,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-mobile
@@ -8874,7 +8874,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_accelerate_interop.py, docs/integration/swissknife-external_ipfs_accelerate.md, swissknife, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_ipfs_accelerate
@@ -8909,7 +8909,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_datasets_interop.py, docs/integration/swissknife-external_ipfs_datasets.md, swissknife, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_ipfs_datasets
@@ -8944,7 +8944,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_kit_interop.py, docs/integration/swissknife-external_ipfs_kit.md, swissknife, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_ipfs_kit
@@ -8979,7 +8979,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mcp_plus_plus_interop.py, docs/integration/swissknife-mcp_plus_plus.md, swissknife, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-mcp_plus_plus
@@ -9014,7 +9014,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py, docs/integration/swissknife-external_meta_wearables_dat_android.md, swissknife, external/meta-wearables-dat-android, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_meta_wearables_dat_android
@@ -9049,7 +9049,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py, docs/integration/swissknife-external_meta_wearables_dat_ios.md, swissknife, external/meta-wearables-dat-ios, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_meta_wearables_dat_ios
@@ -9084,7 +9084,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md, external/meta-wearables-dat-android, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_accelerate
@@ -9120,7 +9120,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md, external/meta-wearables-dat-android, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_datasets
@@ -9156,7 +9156,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md, external/meta-wearables-dat-android, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_kit
@@ -9192,7 +9192,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: VAI-673 supplied the VAIOS-G707 objective validation repair and resolved the retry-budget blocker with integration, docs, discovery, heap, Hallucinate App/mobile handoff, and DuckDB schema evidence.
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/hallucinate_app-mobile
@@ -9212,9 +9212,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: objective_validation_repair
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -9227,7 +9227,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/mobile-external_ipfs_accelerate
@@ -9247,9 +9247,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: objective_validation_repair
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -9262,7 +9262,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: repaired the repeated VAI-671 validation failure by adding the Hallucinate App/mobile interop contract, runtime handoff, mobile dispatch, persistence schema, documentation, discovery evidence, and integration validation coverage.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
 - Validation: python -m pytest tests/integration -q
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-671. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-673-vai-671-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-671 from strategy blocked_tasks.
@@ -9273,7 +9273,7 @@ cadence remains parseable and resumable.
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/hallucinate_app-mobile
@@ -9293,9 +9293,9 @@ cadence remains parseable and resumable.
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: objective_validation_repair
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -9308,7 +9308,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: Repaired the VAI-661 validation blocker by adding SwissKnife/mobile interop descriptor, DAT display action contract, schema validation coverage, docs, discovery, objective heap evidence, and a focused integration test.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
 - Validation: python -m pytest tests/integration -q
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-661. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-675-vai-661-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-661 from strategy blocked_tasks.
@@ -9319,7 +9319,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: Verified the VAI-661 implementation is already merged into main (superproject commit e9de269e8068bf09d4b8375ff2800429a1aed872, swissknife submodule commit 23d7d4a6f0457a9185436e79b0c126182f0f5283) with no unresolved conflict markers; the recorded `submodule_merge_failed` guardrail hits preceded that successful merge. Recorded the repair resolution and confirmed `python -m pytest tests/integration -q` passes (403 passed, 88 skipped) so VAI-661 can be released from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-676-vai-661-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-661. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-676-vai-661-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-661 from strategy blocked_tasks.
@@ -9330,7 +9330,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: Verified the VAI-662 implementation is already merged into main (superproject merge commit b6ff311913deeb85dce467ec82420878b254df40, parent 72ea7ff7 "VAI-662: Close objective gap: Interoperate swissknife with external/ipfs_accelerate", confirmed an ancestor of the current main tip via `git merge-base --is-ancestor`), with the owning `swissknife` submodule commit b4901e95595bb0848c39606fc51103640abae33a and the owning `external/ipfs_accelerate` submodule commit fe4ae45c86c8ca5b7ea87eee1a7cc6fc39d8fc61 verified as the current submodule pointers in both main and this repair worktree and no unresolved conflict markers in any of the listed outputs. `ipfs-accelerate-agent-merge-resolver --apply` was not required because no semantic conflict remained to resolve; the recorded `submodule_merge_failed` guardrail hits (attempts 1-3) preceded that successful merge. Recorded the repair resolution in the objective heap and confirmed `python -m pytest tests/integration/test_swissknife_external_ipfs_accelerate_interop.py -q` passes (7 passed) so VAI-662 can be released from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_accelerate_interop.py, docs/integration/swissknife-external_ipfs_accelerate.md, swissknife, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-677-vai-662-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-662. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-677-vai-662-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-662 from strategy blocked_tasks.
@@ -9341,7 +9341,7 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: Verified the VAI-665 implementation is already merged into main (superproject merge commit 5d4f8e6a756e33987521da3ae11424d95abd8f3e, parent 2bb3ffdf "VAI-665: Close objective gap: Interoperate swissknife with Mcp-Plus-Plus", confirmed an ancestor of the current main tip via `git merge-base --is-ancestor`), with the owning `Mcp-Plus-Plus` submodule commit b8843522b0f6f657f795a23816956e745c421c5e verified as an exact pointer match between the VAI-665 merge commit, main, and this repair worktree, and the owning `swissknife` submodule commit 1aa4b6d109a54339513e5c7d85d62dafee95e3a3 (from the VAI-665 merge) confirmed as an ancestor of the current `swissknife` pointer b4901e95595bb0848c39606fc51103640abae33a (advanced further by the later VAI-662/HAO-731 merges, per `git -C swissknife merge-base --is-ancestor`) so the interop descriptor commit is preserved. No unresolved conflict markers (`<<<<<<<`/`=======`/`>>>>>>>`) remain in `tests/integration/test_swissknife_mcp_plus_plus_interop.py`, `docs/integration/swissknife-mcp_plus_plus.md`, `swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts`, `swissknife/contracts/control_surface_contract.schema.json`, `swissknife/contracts/interaction_envelope.schema.json`, `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`, `Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json`, or this objective heap document. `ipfs-accelerate-agent-merge-resolver --apply` was not required because no semantic conflict remained to resolve; the recorded `submodule_merge_failed` guardrail hits (attempts 1-3) preceded those already-successful merges. Recorded the repair resolution in the objective heap and confirmed `python -m pytest tests/integration/test_swissknife_mcp_plus_plus_interop.py -q` passes (5 passed) and `python -m pytest tests/integration -q` passes cleanly for everything in this task's scope (409 passed, 88 skipped, 1 unrelated pre-existing failure in `test_swissknife_external_ipfs_kit_interop.py` tied to a separate in-flight ipfs_kit interop task, reproduced identically on main before this repair) so VAI-665 can be released from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mcp_plus_plus_interop.py, docs/integration/swissknife-mcp_plus_plus.md, swissknife, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-678-vai-665-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-665. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-678-vai-665-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-665 from strategy blocked_tasks.
@@ -9352,7 +9352,112 @@ cadence remains parseable and resumable.
 - Completion: manual 2026-07-08: Verified the VAI-672 implementation is already merged into main (superproject merge commit d0d4fdb5, parent b91c25d3 "VAI-672: Close objective gap: Interoperate mobile with external/ipfs_accelerate", confirmed an ancestor of the current main tip via `git merge-base --is-ancestor`), with `mobile` present as a plain in-repo tree (not a submodule) carrying `mobile/src/orb/metaGlassesMobileOrbBridge.js`, `mobile/src/orb/metaGlassesOrbDescriptors.js`, and `mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js`, and the owning `external/ipfs_accelerate` submodule commit `c5069362390a745ced28c1c0dbd696115d2107bf` verified as an exact pointer match between `git ls-tree HEAD external/ipfs_accelerate` and `git submodule status external/ipfs_accelerate` in this repair worktree. No unresolved conflict markers (`<<<<<<<`/`=======`/`>>>>>>>`) remain in `tests/integration/test_mobile_external_ipfs_accelerate_interop.py`, `docs/integration/mobile-external_ipfs_accelerate.md`, `src/handsfree/mobile_ipfs_accelerate_interop.py`, `external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql`, `external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py`, `external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py`, `external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py`, or this objective heap document. `ipfs-accelerate-agent-merge-resolver --apply` was not required because no semantic conflict remained to resolve; the recorded `submodule_merge_failed` guardrail hits (attempts 1-3) preceded that already-successful merge. Recorded the repair resolution in the objective heap and confirmed `python -m pytest tests/integration/test_mobile_external_ipfs_accelerate_interop.py -q` passes (8 passed) and `python -m pytest tests/integration -q` passes cleanly for everything in this task's scope (409 passed, 88 skipped, 1 unrelated pre-existing failure in `test_swissknife_external_ipfs_kit_interop.py` tied to a separate in-flight ipfs_kit interop task (MGW-572), reproduced identically on main before this repair) so VAI-672 can be released from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: test -f /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-679-vai-672-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in VAI-672. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-679-vai-672-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release VAI-672 from strategy blocked_tasks.
+
+## VAI-680 Close objective gap: Hallucinate App MCP dashboard capability catalog
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
+- Bundle shard: data/virtual_ai_os/objective_bundles/objective-launch-hallucinate-mcp-dashboard-capability-catalog.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/launch/hallucinate-mcp-dashboard-capability-catalog
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Goal id: VAIOS-G724
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App MCP dashboard dashboard capability catalog tools/list tools/call ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Swissknife Playwright
+- AST query: hallucinate_app, swissknife, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, tools/list, tools/call, daemon health, MCP dashboard
+- Surplus group: objective/VAIOS-G724
+- Merge key: 9a625fd9f839651a
+- Merge family: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate; goal_subgoal_packet
+- Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Goal packet role: packet_anchor
+- Goal packet goals: VAIOS-G724, VAIOS-G728
+- Goal packet task count: 2
+- Goal packet work item count: 2
+- Candidate kind: validation_gate
+- Todo vector key: 573509f5885861c3
+- Acceptance: Objective scan filed this gap for VAIOS-G724. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-680-objective-gap-3e00ad2a0074.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap. This task is part of goal_packet/launch/hallucinate_app/44dceea6bc53; implement a complete, cohesive change that fully advances the packet goals (VAIOS-G724, VAIOS-G728) and covers all the shared packet evidence in one comprehensive pass. Refine the objective heap if the gap needs smaller child goals.
+
+## VAI-681 Close objective gap: Hallucinate App daemon launch orchestration
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-daemon-launch-orchestration
+- Bundle shard: data/virtual_ai_os/objective_bundles/objective-launch-hallucinate-daemon-launch-orchestration.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/launch/hallucinate-daemon-launch-orchestration
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Goal id: VAIOS-G728
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App daemon launch health MCP server dashboard ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Swissknife
+- AST query: hallucinate_app, daemon health, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py
+- Surplus group: objective/VAIOS-G728
+- Merge key: 7e544b4df4e28611
+- Merge family: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate; goal_subgoal_packet
+- Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Goal packet role: packet_member
+- Goal packet goals: VAIOS-G724, VAIOS-G728
+- Goal packet task count: 2
+- Goal packet work item count: 2
+- Candidate kind: validation_gate
+- Todo vector key: e514497464ba6ea4
+- Acceptance: Objective scan filed this gap for VAIOS-G728. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-681-objective-gap-b023c8de5b69.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap. This task is part of goal_packet/launch/hallucinate_app/44dceea6bc53; implement a complete, cohesive change that fully advances the packet goals (VAIOS-G724, VAIOS-G728) and covers all the shared packet evidence in one comprehensive pass. Refine the objective heap if the gap needs smaller child goals.
+
+## VAI-682 Close objective gap: Hallucinate MCP dashboard interoperability console
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-mcp-dashboard
+- Bundle shard: data/virtual_ai_os/objective_bundles/objective-launch-hallucinate-mcp-dashboard.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G697
+- Graph depth: 1
+- Parallel lane: hallucinate-mcp-dashboard
+- Conflict policy: keep Hallucinate App dashboard, daemon manager, and Swissknife catalog edits additive; preserve one shared catalog and one receipt schema when resolving parallel UI/test changes
+- Goal id: VAIOS-G723
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App menus dashboards MCP dashboard capability catalog daemon health tools/list tools/call ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py Swissknife MCP++ Playwright launch interoperability
+- AST query: MenuGenerator, mcpServers, dashboardMcpServers, getLaunchPlan, getDashboardCapabilityCatalog, mcp_daemon_manager, mcp-feature-exposure, mcp-dashboard-interoperability, ControlSurfaceInvocationGate
+- Surplus group: objective/VAIOS-G723
+- Merge key: 3997b2fdaa13d4a4
+- Merge family: objective/VAIOS-G723
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: 423c5c08373fafe1
+- Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-682-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.

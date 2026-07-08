@@ -239,7 +239,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-025-implementation-unknowns.md:22. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-020-codebase-scan-09a5288b833b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -250,7 +250,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md:24. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-021-codebase-scan-55c0165aa8e2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -263,7 +263,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md:25. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-022-codebase-scan-894285209757.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -274,7 +274,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-051-resolution.md:8. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-023-codebase-scan-5e7f9214abc2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -285,7 +285,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md
 - Validation: test -f data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-053-resolution.md:10. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-024-codebase-scan-5ebb02bc2f3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -463,7 +463,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-374-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -476,7 +476,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
 - Validation: test -f implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-375-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -489,7 +489,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-376-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -502,7 +502,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-377-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -515,7 +515,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Validation: test -f implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-378-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -528,7 +528,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
 - Validation: test -f implementation_plan/docs/19-virtual-ai-os-submodule-integration.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-379-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -541,7 +541,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-380-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -554,7 +554,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-381-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -567,7 +567,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:216. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-382-codebase-scan-210b6a0bd043.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -580,7 +580,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:239. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-383-codebase-scan-4dc1f7f08722.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -593,7 +593,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:262. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-384-codebase-scan-0b738229dfc8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -606,7 +606,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:377. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-385-codebase-scan-e052213700f2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -643,7 +643,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Validation: test -f implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:859. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-388-codebase-scan-309a8676f15b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -656,7 +656,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:113. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-389-codebase-scan-dc304b98262d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -669,7 +669,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:122. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-390-codebase-scan-24a8dfd921a5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -682,7 +682,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, src/handsfree/agents/runner.py
 - Validation: python3 -m py_compile src/handsfree/agents/runner.py
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:147. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-391-codebase-scan-d503a3e145f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -695,7 +695,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:417. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-392-codebase-scan-d23bab9bfb8a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -708,7 +708,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:438. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-393-codebase-scan-027afb1b5def.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -719,7 +719,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:101. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-394-codebase-scan-2f375dbd1119.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -732,7 +732,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:114. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-395-codebase-scan-04bfc0065834.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -745,7 +745,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:441. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-396-codebase-scan-fbeb6b584d7c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -758,7 +758,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_implementation_daemon_merge_lock_retry.py
 - Validation: python3 -m py_compile tests/test_implementation_daemon_merge_lock_retry.py
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:121. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-397-codebase-scan-76cb4c034940.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -771,7 +771,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_meta_glasses_display_todo_queue.py
 - Validation: python3 -m py_compile tests/test_meta_glasses_display_todo_queue.py
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:106. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-398-codebase-scan-66cf63fffa8e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -784,7 +784,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:49. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-399-codebase-scan-7359bf5ddb37.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -797,7 +797,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_agent_runner.py
 - Validation: python3 -m py_compile tests/test_agent_runner.py
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:435. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-400-codebase-scan-4e05798c3058.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -810,7 +810,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:54. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-401-codebase-scan-1aa0d0120649.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -821,7 +821,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:63. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-402-codebase-scan-5a3102335d9c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -834,7 +834,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:110. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-403-codebase-scan-f5182b96f0db.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -847,7 +847,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:173. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-404-codebase-scan-f2142bd7e8ca.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -860,7 +860,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:237. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-405-codebase-scan-09159eaa4473.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -873,7 +873,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:288. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-406-codebase-scan-5f281694481a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -886,7 +886,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:292. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-407-codebase-scan-465e51445a76.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -899,7 +899,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tests/test_supervisor_objective_task_janitor.py
 - Validation: python3 -m py_compile tests/test_supervisor_objective_task_janitor.py
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:376. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-408-codebase-scan-5a569d75b7f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -912,7 +912,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, tracking/PR-079-agent-runner-minimal.md
 - Validation: test -f tracking/PR-079-agent-runner-minimal.md
 - Acceptance: Codebase scan filed this finding from tracking/PR-079-agent-runner-minimal.md:56. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-409-codebase-scan-0a3992f37e3e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -923,7 +923,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:122. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-410-codebase-scan-0dbc6e6537b4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -936,7 +936,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: docs
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Validation: test -f swissknife/DESKTOP_VERIFICATION_REPORT.md
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:174. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-411-codebase-scan-e301b099e13e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1094,7 +1094,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-425-codebase-scan-2d67c01d3acc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1107,7 +1107,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-426-codebase-scan-e90a6112f5fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1120,7 +1120,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P3
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-427-codebase-scan-849612e9edb6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1133,7 +1133,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-428-codebase-scan-d5e80576db69.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1146,7 +1146,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-429-codebase-scan-defbcedebe03.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1159,7 +1159,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-430-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1172,7 +1172,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-431-codebase-scan-dc52194613c1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1185,7 +1185,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-432-codebase-scan-4f33a0ad65fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1198,7 +1198,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-433-codebase-scan-66825794ba9f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1211,7 +1211,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-434-codebase-scan-c72286879ecc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1224,7 +1224,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-435-codebase-scan-dc36a218425f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1235,7 +1235,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-436-codebase-scan-025dd1a14a04.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1248,7 +1248,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_inference.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_inference.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-437-codebase-scan-f47b62254b61.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1261,7 +1261,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_llm_inference.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_llm_inference.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_llm_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-438-codebase-scan-f38469457e95.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1274,7 +1274,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-439-codebase-scan-1e2d44aa227a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1287,7 +1287,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_browsers_comparison.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_browsers_comparison.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_browsers_comparison.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-440-codebase-scan-1d39953b62c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1300,7 +1300,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-441-codebase-scan-f7f312005529.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1313,7 +1313,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-442-codebase-scan-d636463c9d64.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1326,7 +1326,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-443-codebase-scan-da8f80493ff9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1339,7 +1339,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-444-codebase-scan-aba0d5c2673b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1352,7 +1352,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-445-codebase-scan-b71e1b7130ac.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1365,7 +1365,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-446-codebase-scan-ff96ed86fa8c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1378,7 +1378,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-447-codebase-scan-4f381d39a54c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1391,7 +1391,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-448-codebase-scan-fd706f9227d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1404,7 +1404,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-449-codebase-scan-067c64675c26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1417,7 +1417,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-450-codebase-scan-69a234bf9d55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1430,7 +1430,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-451-codebase-scan-07a35e081f65.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1443,7 +1443,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-452-codebase-scan-2907c83d600b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1456,7 +1456,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-453-codebase-scan-8162a1533a49.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1469,7 +1469,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-454-codebase-scan-f0debd6b16cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1482,7 +1482,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-455-codebase-scan-34218144f2c4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1495,7 +1495,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-456-codebase-scan-189bc4a84a14.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1508,7 +1508,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-457-codebase-scan-103085e1d7ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1521,7 +1521,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-458-codebase-scan-5bdd54dddcc6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1534,7 +1534,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-459-codebase-scan-8c17c2df11b1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1547,7 +1547,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-460-codebase-scan-593be57237f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1560,7 +1560,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-461-codebase-scan-7ff199b75d27.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1573,7 +1573,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-462-codebase-scan-6ff7e98d2c3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1586,7 +1586,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-463-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1599,7 +1599,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-464-codebase-scan-87a1ababe545.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1612,7 +1612,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-465-codebase-scan-5f7907e8e561.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1625,7 +1625,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-466-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1638,7 +1638,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-467-codebase-scan-bfe30187a7bb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1651,7 +1651,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-468-codebase-scan-c2b12d295679.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1664,7 +1664,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_generator.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-469-codebase-scan-ec18be8c273c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1677,7 +1677,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-470-codebase-scan-44d16881da6f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1690,7 +1690,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-471-codebase-scan-1067af266d5f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1703,7 +1703,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-472-codebase-scan-0d21592b7e59.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1716,7 +1716,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_align.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_align.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_align.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-473-codebase-scan-2b9fd9737a44.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1727,7 +1727,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-474-codebase-scan-8017793e8291.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1740,7 +1740,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-475-codebase-scan-2e5c7623ea98.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1753,7 +1753,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-476-codebase-scan-da19273702c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1766,7 +1766,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_big_bird.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_big_bird.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_big_bird.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-477-codebase-scan-89a91bb14b86.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1777,7 +1777,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-478-codebase-scan-bb4ec37257b5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1790,7 +1790,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-479-codebase-scan-2104a536dfcc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1803,7 +1803,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-480-codebase-scan-f9289a36b91d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1816,7 +1816,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-481-codebase-scan-d4ed79ea4296.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1829,7 +1829,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-482-codebase-scan-b62d131629ca.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1842,7 +1842,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_blip_2.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_blip_2.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blip_2.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-483-codebase-scan-e990af756aa3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1853,7 +1853,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bridgetower.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bridgetower.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bridgetower.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-484-codebase-scan-e6f79f4bc645.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1866,7 +1866,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_bros.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_bros.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bros.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-485-codebase-scan-15372f754d23.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1877,7 +1877,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-486-codebase-scan-4e01ce3fd165.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1890,7 +1890,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-487-codebase-scan-8a46ed903a02.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1903,7 +1903,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-488-codebase-scan-ef24d56686d4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1916,7 +1916,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-489-codebase-scan-cbf59dd145d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1929,7 +1929,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-490-codebase-scan-95c78eeaccd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1942,7 +1942,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_codegen.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_codegen.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_codegen.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-491-codebase-scan-95748755efba.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1955,7 +1955,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-492-codebase-scan-4f7f9fbe12a8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1968,7 +1968,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-493-codebase-scan-a9cbc076e898.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1981,7 +1981,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-494-codebase-scan-36a5165c924e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -1994,7 +1994,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-495-codebase-scan-1d1434428e78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2007,7 +2007,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cpmant.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cpmant.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cpmant.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-496-codebase-scan-2adda538b8c5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2020,7 +2020,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_ctrl.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_ctrl.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_ctrl.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-497-codebase-scan-4b1f305031f6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2031,7 +2031,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-498-codebase-scan-584127fea95e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2044,7 +2044,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dac.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dac.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dac.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-499-codebase-scan-77865dbd5032.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2057,7 +2057,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-500-codebase-scan-b9d105999d3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2070,7 +2070,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-501-codebase-scan-81637d10675d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2081,7 +2081,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-502-codebase-scan-56bd19bf79e7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2094,7 +2094,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-503-codebase-scan-295167feddbd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2107,7 +2107,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-504-codebase-scan-7e78f5b85c0d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2120,7 +2120,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-505-codebase-scan-4f239a29b61b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2133,7 +2133,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-506-codebase-scan-ca5abd94b6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2146,7 +2146,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-507-codebase-scan-7aec3a87b450.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2159,7 +2159,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-508-codebase-scan-8b3d8ba89074.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2172,7 +2172,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-9a74b88e06cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2185,7 +2185,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-669a61083619.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2198,7 +2198,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dinov2.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dinov2.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dinov2.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-511-codebase-scan-18950e1154bd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2209,7 +2209,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2222,7 +2222,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2235,7 +2235,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2248,7 +2248,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-515-codebase-scan-7e535b05d1d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2261,7 +2261,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-516-codebase-scan-81177723e089.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2274,7 +2274,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P2
 - Track: quality
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts
 - Validation: test -f swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-517-codebase-scan-7b300c0284ff.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
@@ -2353,7 +2353,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -2373,9 +2373,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -2388,7 +2388,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-26: verified the MGW-524 retry-budget blocker is resolved by the Hallucinate App headless-aware MCP dashboard Playwright gate; the required validation command passes without a display server and MGW-524 is absent from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-524. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-25-mgw-525-mgw-524-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-524 from strategy blocked_tasks.
@@ -2495,7 +2495,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -2530,7 +2530,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_launch_readiness_gate.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/meta-glasses-control-plane-input-routing
@@ -2565,7 +2565,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -2600,7 +2600,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py
 - Validation: PYTHONPATH=external/ipfs_accelerate pytest tests/test_supervisor_objective_task_janitor.py tests/test_reconciliation_guardrail_refresh.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/objective-heap-autosteer-validation-repair
@@ -2635,7 +2635,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, swissknife, Mcp-Plus-Plus, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, swissknife/test/e2e/mcp-dashboard.spec.ts
 - Validation: npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/swissknife-mcp-plus-plus-server-dashboard-interop
@@ -2655,9 +2655,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -2670,7 +2670,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, tests/test_virtual_ai_os_launch_readiness_gate.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_launch_readiness_gate.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/cross-device-virtual-desktop-offload-replay
@@ -2690,9 +2690,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -2705,7 +2705,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, swissknife, Mcp-Plus-Plus, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, swissknife/test/e2e/mcp-dashboard.spec.ts, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-539-mgw-537-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-537. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-539-mgw-537-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-537 from strategy blocked_tasks.
@@ -2716,7 +2716,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, mobile, swissknife, hallucinate_app, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, tests/test_virtual_ai_os_launch_readiness_gate.py, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-540-mgw-538-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-538. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-540-mgw-538-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-538 from strategy blocked_tasks.
@@ -2727,7 +2727,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-541-mgw-533-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-533. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-541-mgw-533-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-533 from strategy blocked_tasks.
@@ -2738,7 +2738,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/meta-wearables-dat-android, external/meta-wearables-dat-ios, mobile, swissknife, hallucinate_app, tests/test_hallucinate_multimodal_control_todo_queue.py, tests/test_virtual_ai_os_launch_readiness_gate.py, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-542-mgw-534-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-534. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-542-mgw-534-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-534 from strategy blocked_tasks.
@@ -2749,7 +2749,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-543-mgw-535-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-535. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-543-mgw-535-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-535 from strategy blocked_tasks.
@@ -2760,7 +2760,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor, tests/test_supervisor_objective_task_janitor.py, tests/test_reconciliation_guardrail_refresh.py, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-544-mgw-536-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-536. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-26-mgw-544-mgw-536-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-536 from strategy blocked_tasks.
@@ -2782,7 +2782,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -2802,9 +2802,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -2817,7 +2817,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -2837,9 +2837,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -2852,7 +2852,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-546. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-548-mgw-546-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-546 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
@@ -2863,7 +2863,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-547. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-549-mgw-547-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-547 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
@@ -2874,7 +2874,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -2909,7 +2909,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -2944,7 +2944,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/meta_glasses_display_widgets/state/discovery
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-551. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-27-mgw-552-mgw-551-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-551 from strategy blocked_tasks. For launch tasks, this repair validation preserves the launch Playwright validation gate.
@@ -2955,7 +2955,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-553-mgw-551-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-551. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-553-mgw-551-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-551 from strategy blocked_tasks.
@@ -2966,7 +2966,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-28: cleared the MGW-547 merge retry-budget blocker by verifying the intended MGW-547 top-level and submodule commits exist in their owning repositories, confirming the dirty `hallucinate_app` main-checkout condition is gone, and recording the remaining merge shape as semantic submodule pointer reconciliation.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-554-mgw-547-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-547. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-554-mgw-547-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-547 from strategy blocked_tasks.
@@ -2977,7 +2977,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -3012,7 +3012,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -3047,7 +3047,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests, data/meta_glasses_display_widgets/state/discovery
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-557-mgw-547-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in MGW-547. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/state/discovery/2026-06-28-mgw-557-mgw-547-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release MGW-547 from strategy blocked_tasks.
@@ -3058,7 +3058,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3078,9 +3078,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3093,7 +3093,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3113,9 +3113,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3128,7 +3128,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-06-29: verified MGW-559 attempt 6 is merged in the superproject at `d438f06b`, repaired the original `external/ipfs_accelerate` dirty-checkout blocker by committing the owning submodule at `546dfdcd` and the superproject gitlink at `f8f0f42f`, synchronized the `hallucinate_app` launch-gate fixtures at `68d4f60`, and recorded that no semantic `ipfs-accelerate-agent-merge-resolver --apply` run was required because the retry-budget evidence was `main_checkout_dirty_conflict`.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-560-mgw-559-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-559. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-29-mgw-560-mgw-559-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-559 from strategy blocked_tasks.
@@ -3139,7 +3139,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3159,9 +3159,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3174,7 +3174,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3194,9 +3194,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3209,7 +3209,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3229,9 +3229,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3244,7 +3244,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
@@ -3279,7 +3279,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-daemon-launch-orchestration
@@ -3314,7 +3314,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3334,9 +3334,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3349,7 +3349,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-567-mgw-564-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-564. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-567-mgw-564-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-564 from strategy blocked_tasks.
@@ -3360,7 +3360,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-568-mgw-566-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-566. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-02-mgw-568-mgw-566-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-566 from strategy blocked_tasks.
@@ -3371,7 +3371,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-mobile
@@ -3406,7 +3406,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_accelerate_interop.py, docs/integration/swissknife-external_ipfs_accelerate.md, swissknife, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_ipfs_accelerate
@@ -3441,7 +3441,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_datasets_interop.py, docs/integration/swissknife-external_ipfs_datasets.md, swissknife, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_ipfs_datasets
@@ -3476,7 +3476,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_kit_interop.py, docs/integration/swissknife-external_ipfs_kit.md, swissknife, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_ipfs_kit
@@ -3511,7 +3511,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mcp_plus_plus_interop.py, docs/integration/swissknife-mcp_plus_plus.md, swissknife, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-mcp_plus_plus
@@ -3546,7 +3546,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py, docs/integration/swissknife-external_meta_wearables_dat_android.md, swissknife, external/meta-wearables-dat-android, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_meta_wearables_dat_android
@@ -3581,7 +3581,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py, docs/integration/swissknife-external_meta_wearables_dat_ios.md, swissknife, external/meta-wearables-dat-ios, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json, swissknife/contracts/mediation_receipt.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/swissknife-external_meta_wearables_dat_ios
@@ -3616,7 +3616,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md, external/meta-wearables-dat-android, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_accelerate
@@ -3652,7 +3652,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md, external/meta-wearables-dat-android, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_datasets
@@ -3688,7 +3688,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md, external/meta-wearables-dat-android, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_kit
@@ -3724,7 +3724,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/hallucinate_app-mobile
@@ -3744,9 +3744,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: objective_validation_repair
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3759,7 +3759,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: interoperability
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: python -m pytest tests/integration -q
 - Bundle: objective/interoperability/mobile-external_ipfs_accelerate
@@ -3779,9 +3779,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: objective_validation_repair
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3794,7 +3794,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P0
 - Track: launch
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
 - Bundle: objective/launch/hallucinate-mcp-dashboard
@@ -3814,9 +3814,9 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Merge role: validation_gate
 - Work item count: 1
 - Work scope: launch_validation_gate
-- Goal packet: 
-- Goal packet role: 
-- Goal packet goals: 
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
 - Goal packet task count: 0
 - Goal packet work item count: 0
 - Candidate kind: validation_gate
@@ -3829,7 +3829,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
 - Validation: python -m pytest tests/integration -q
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-579. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-582-mgw-579-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-579 from strategy blocked_tasks.
@@ -3840,7 +3840,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual 2026-07-08: restored the missing external/Mcp-Plus-Plus Python validator package used by integration conformance tests, retagged Swissknife/mobile validation evidence from copied VAI-661 paths to MGW-569/MGW-583, recorded the repair discovery packet, removed MGW-569 from strategy blocked_tasks, and verified `python -m pytest tests/integration -q` passes.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
 - Validation: python -m pytest tests/integration -q
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in MGW-569. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release MGW-569 from strategy blocked_tasks.
@@ -3851,7 +3851,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-584-mgw-580-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-580. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-584-mgw-580-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-580 from strategy blocked_tasks.
@@ -3862,7 +3862,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md, external/meta-wearables-dat-android, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-585-mgw-576-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-576. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-585-mgw-576-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-576 from strategy blocked_tasks.
@@ -3873,7 +3873,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_datasets_interop.py, docs/integration/swissknife-external_ipfs_datasets.md, swissknife, external/ipfs_datasets, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py, external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-586-mgw-571-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-571. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-586-mgw-571-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-571 from strategy blocked_tasks.
@@ -3884,7 +3884,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-587-mgw-569-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-569. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-587-mgw-569-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-569 from strategy blocked_tasks.
@@ -3895,7 +3895,112 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Completion: manual
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mcp_plus_plus_interop.py, docs/integration/swissknife-mcp_plus_plus.md, swissknife, Mcp-Plus-Plus, Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-588-mgw-573-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-573. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-588-mgw-573-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-573 from strategy blocked_tasks.
+
+## MGW-589 Close objective gap: Hallucinate App MCP dashboard capability catalog
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts, hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts
+- Validation: npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-mcp-dashboard-capability-catalog
+- Bundle shard: data/meta_glasses_display_widgets/objective_bundles/objective-launch-hallucinate-mcp-dashboard-capability-catalog.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/launch/hallucinate-mcp-dashboard-capability-catalog
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Goal id: VAIOS-G724
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App MCP dashboard dashboard capability catalog tools/list tools/call ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Swissknife Playwright
+- AST query: hallucinate_app, swissknife, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py, tools/list, tools/call, daemon health, MCP dashboard
+- Surplus group: objective/VAIOS-G724
+- Merge key: 9a625fd9f839651a
+- Merge family: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate; goal_subgoal_packet
+- Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Goal packet role: packet_anchor
+- Goal packet goals: VAIOS-G724, VAIOS-G728
+- Goal packet task count: 2
+- Goal packet work item count: 2
+- Candidate kind: validation_gate
+- Todo vector key: 573509f5885861c3
+- Acceptance: Objective scan filed this gap for VAIOS-G724. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-589-objective-gap-3e00ad2a0074.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap. This task is part of goal_packet/launch/hallucinate_app/44dceea6bc53; implement a complete, cohesive change that fully advances the packet goals (VAIOS-G724, VAIOS-G728) and covers all the shared packet evidence in one comprehensive pass. Refine the objective heap if the gap needs smaller child goals.
+
+## MGW-590 Close objective gap: Hallucinate App daemon launch orchestration
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, hallucinate_app/test/e2e/daemon-launch-health.spec.ts
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py -q && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- daemon-launch-health.spec.ts) && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-daemon-launch-orchestration
+- Bundle shard: data/meta_glasses_display_widgets/objective_bundles/objective-launch-hallucinate-daemon-launch-orchestration.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/launch/hallucinate-daemon-launch-orchestration
+- Conflict policy: prefer launch-critical integration evidence; use the LLM merge resolver when dashboard, daemon, or mobile control-plane edits conflict
+- Goal id: VAIOS-G728
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App daemon launch health MCP server dashboard ipfs_accelerate_py ipfs_datasets_py ipfs_kit_py Swissknife
+- AST query: hallucinate_app, daemon health, MCP server, MCP dashboard, ipfs_accelerate_py, ipfs_datasets_py, ipfs_kit_py
+- Surplus group: objective/VAIOS-G728
+- Merge key: 7e544b4df4e28611
+- Merge family: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate; goal_subgoal_packet
+- Goal packet: goal_packet/launch/hallucinate_app/44dceea6bc53
+- Goal packet role: packet_member
+- Goal packet goals: VAIOS-G724, VAIOS-G728
+- Goal packet task count: 2
+- Goal packet work item count: 2
+- Candidate kind: validation_gate
+- Todo vector key: e514497464ba6ea4
+- Acceptance: Objective scan filed this gap for VAIOS-G728. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-590-objective-gap-b023c8de5b69.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap. This task is part of goal_packet/launch/hallucinate_app/44dceea6bc53; implement a complete, cohesive change that fully advances the packet goals (VAIOS-G724, VAIOS-G728) and covers all the shared packet evidence in one comprehensive pass. Refine the objective heap if the gap needs smaller child goals.
+
+## MGW-591 Close objective gap: Hallucinate MCP dashboard interoperability console
+
+- Status: todo
+- Completion: manual
+- Priority: P0
+- Track: launch
+- Depends on:
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, hallucinate_app, swissknife, docs/launch/phone_desktop_glasses_readiness.md, data/hallucinate_multimodal_control/discovery, tests
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_hallucinate_multimodal_control_todo_queue.py tests/test_virtual_ai_os_todo_queue.py -q; npm --prefix hallucinate_app run test:daemon-manager; npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts; cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78); npm --prefix swissknife run test:e2e:mcp && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+- Bundle: objective/launch/hallucinate-mcp-dashboard
+- Bundle shard: data/meta_glasses_display_widgets/objective_bundles/objective-launch-hallucinate-mcp-dashboard.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G697
+- Graph depth: 1
+- Parallel lane: hallucinate-mcp-dashboard
+- Conflict policy: keep Hallucinate App dashboard, daemon manager, and Swissknife catalog edits additive; preserve one shared catalog and one receipt schema when resolving parallel UI/test changes
+- Goal id: VAIOS-G723
+- Missing evidence: launch Playwright validation gate
+- Embedding query: Hallucinate App menus dashboards MCP dashboard capability catalog daemon health tools/list tools/call ipfs_kit_py ipfs_datasets_py ipfs_accelerate_py Swissknife MCP++ Playwright launch interoperability
+- AST query: MenuGenerator, mcpServers, dashboardMcpServers, getLaunchPlan, getDashboardCapabilityCatalog, mcp_daemon_manager, mcp-feature-exposure, mcp-dashboard-interoperability, ControlSurfaceInvocationGate
+- Surplus group: objective/VAIOS-G723
+- Merge key: 3997b2fdaa13d4a4
+- Merge family: objective/VAIOS-G723
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: launch_validation_gate
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: 423c5c08373fafe1
+- Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-591-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
