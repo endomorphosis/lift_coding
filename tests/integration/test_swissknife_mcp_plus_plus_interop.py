@@ -314,6 +314,11 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_mcp_pl
 def test_swissknife_mcp_plus_plus_compatibility_receipt_validates() -> None:
     receipt_schema = read_json("swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json")
 
+    assert "VAI-665" in receipt_schema["properties"]["task_id"]["enum"]
+    assert "MGW-573" in receipt_schema["properties"]["task_id"]["enum"]
+    assert "mcp_plus_plus" in receipt_schema["properties"]["daemon_id"]["enum"]
+    assert "Mcp-Plus-Plus" in receipt_schema["properties"]["server_package"]["enum"]
+
     Draft202012Validator(receipt_schema).validate(
         swissknife_mcp_plus_plus_compatibility_receipt()
     )
@@ -364,7 +369,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-mcp_plus_plus.md")
     discovery = read_text(
         "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-573-attempt-1-validation-confirmation.md"
+        "2026-07-08-mgw-573-attempt-2-validation-repair.md"
     )
     gap = read_text(
         "data/meta_glasses_display_widgets/discovery/"
@@ -385,7 +390,9 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "swissknife/contracts/interaction_envelope.schema.json",
         "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json",
         "Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json",
+        "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json",
         "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-2-validation-repair.md",
     ]
     for content in (docs, discovery, heap):
         for term in required_terms:
