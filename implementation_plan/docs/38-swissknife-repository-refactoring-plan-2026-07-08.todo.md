@@ -549,7 +549,7 @@ Acceptance target:
 
 ## SWR-027 Make MCP dashboard browser truth explicit
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/mcp-dashboard
