@@ -41,8 +41,12 @@ scanner-visible proof against the fresh objective gap fingerprint
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md`.
 The mobile descriptor carries
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md`
-as the MGW-specific validation repair ref, and the DAT display widget contract
-carries the same ref. This keeps the MGW-569 objective validation repair tied to
+as the MGW-specific validation repair ref. For this worktree, the descriptor
+and DAT display widget contract also carry
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md`
+so the supervisor can distinguish the current MGW-569 attempt 1 objective
+validation repair from earlier copied packet evidence. This keeps the MGW-569
+objective validation repair tied to
 `tests/integration/test_swissknife_mobile_interop.py`,
 `docs/integration/swissknife-mobile.md`,
 `mobile/src/orb/metaGlassesOrbDescriptors.js`,
