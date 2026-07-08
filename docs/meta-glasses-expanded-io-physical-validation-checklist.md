@@ -17,6 +17,47 @@ disabled unless every gate in this document passes with recorded evidence.
 - Fallback routes: mobile-card, display-webapp, bridge-only mocks, and no-audio
   fallback where policy requires it
 
+## SVD-021 SwissKnife ORB/IDL Gate Mapping
+
+For the SwissKnife virtual desktop rollout, this checklist is the physical
+counterpart to the hardware-free ORB/IDL handoff evidence in
+`swissknife/test-results/virtual-desktop-ipfs-mcp-orb/`.
+
+Required release links:
+
+- `release-evidence.md` for the current go/no-go state.
+- `glasses-handoff-report.json` for hardware-free native display,
+  display-webapp, mobile-card, notification, and audio-summary fallback replay.
+- `physical-rollout-readiness.md` for the SVD-021 physical decision record.
+- A completed copy of
+  `docs/meta-wearables-dat-display-rollout-evidence-template.md` for every
+  physical release-channel checkpoint.
+
+SVD-021 cannot pass on hardware-free evidence alone. A release-channel or
+Developer Mode physical run must prove firmware readiness, paired display
+hardware, native display lifecycle behavior, Web App fallback, Bluetooth audio
+route diagnostics, camera/media constraints, privacy review, rollback, and
+operator-visible fallback decisions.
+
+## SVD-039 All-Tools Physical Wave Status
+
+SVD-039 extends this checklist from representative SwissKnife apps to the full
+all-tools ORB/IDL and Meta glasses projection catalog. The current workspace
+run is blocked, not passed, because no paired physical Meta glasses device,
+native DAT release-channel build, package credential evidence, or on-device
+capture logs are present.
+
+Current blocked evidence:
+
+- `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md`
+- Hardware-free all-tools IDL and glasses coverage in
+  `all-tools-idl-coverage.json` and `all-tools-glasses-coverage.json`
+- Combined all-tools release decision in `all-tools-release-evidence.md`
+
+SVD-039 can be marked complete only after native DAT display, display-webapp,
+mobile-card, and audio-summary waves are run on real paired Meta glasses with
+receipts, screenshots or captures, lifecycle logs, and rollback evidence.
+
 ## A) Native DAT Feature Gates
 
 Native DAT camera, display, and Bluetooth audio route features are not required

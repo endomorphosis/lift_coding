@@ -312,7 +312,7 @@
     },
     {
       "name": "dispatch_glasses_response",
-      "description": "Convert a service result into phone-local render targets such as DAT display widget, Web App preview, audio summary, mobile card, or notification fallback.",
+      "description": "Convert a service result into phone-local render targets such as native DAT display, Web App preview, audio summary, mobile card, or notification fallback.",
       "inputSchema": {
         "type": "object",
         "required": ["edge_session_id", "result", "render_targets", "correlation_id"],
@@ -322,7 +322,7 @@
           "render_targets": {
             "type": "array",
             "items": {
-              "enum": ["display_widget", "display_webapp", "audio", "mobile_card", "notification"]
+              "enum": ["native_display", "display_widget", "display_webapp", "audio_summary", "audio", "mobile_card", "notification"]
             }
           },
           "fallback": { "type": "object" },
@@ -342,6 +342,36 @@
             "items": { "type": "object" }
           },
           "display_widget_action": { "type": "object" },
+          "fallback_selection": {
+            "type": "object",
+            "description": "Normalized render-target selection. Legacy display_widget and audio aliases are canonicalized to native_display and audio_summary.",
+            "properties": {
+              "requested_render_targets": {
+                "type": "array",
+                "items": {
+                  "enum": ["native_display", "display_widget", "display_webapp", "audio_summary", "audio", "mobile_card", "notification"]
+                }
+              },
+              "canonical_render_targets": {
+                "type": "array",
+                "items": {
+                  "enum": ["native_display", "display_webapp", "mobile_card", "notification", "audio_summary"]
+                }
+              },
+              "primary_render_target": {
+                "enum": ["native_display", "display_webapp", "mobile_card", "notification", "audio_summary"]
+              },
+              "selected_render_target": {
+                "enum": ["native_display", "display_webapp", "mobile_card", "notification", "audio_summary"]
+              },
+              "fallback_render_target": {
+                "type": ["string", "null"],
+                "enum": ["native_display", "display_webapp", "mobile_card", "notification", "audio_summary", null]
+              },
+              "selected_from": { "enum": ["primary", "fallback"] },
+              "fallback_reason": { "type": ["string", "null"] }
+            }
+          },
           "spoken_text": { "type": "string" },
           "receipt_cid": { "type": "string" },
           "control_surface_contract_ref": { "type": "string" },

@@ -2,6 +2,23 @@
 
 Complete this template for each staged rollout checkpoint. Store the completed copy with the release artifacts or link it from the release ticket; do not commit device screenshots or logs that contain private user content.
 
+## SVD-021 Artifact Links
+
+- Physical readiness record:
+  `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-rollout-readiness.md`
+- Release evidence:
+  `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.md`
+- Hardware-free handoff replay:
+  `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/glasses-handoff-report.json`
+- Physical checklist:
+  `docs/meta-glasses-expanded-io-physical-validation-checklist.md`
+
+The staged rollout is blocked until this template includes a physical
+release-channel or Developer Mode run for the exact firmware, Meta AI app,
+paired glasses, DAT package/linkage state, native display path, display-webapp
+fallback, Bluetooth audio route, camera/media constraints, privacy review, and
+rollback decision under test.
+
 ## Run Metadata
 
 - Date:

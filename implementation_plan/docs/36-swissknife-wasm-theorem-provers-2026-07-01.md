@@ -4413,3 +4413,36 @@ The focused gate checks manifest hashes, generates and verifies a positive
 Groth16 proof through the browser SnarkJS backend, rejects an invalid witness,
 and rejects tampered public signals. It runs without Python, subprocess
 wrappers, or native prover binaries.
+
+## 12.29 — Crypto-exchange security proof artifact consumer (2026-07-07)
+
+The `ipfs_datasets_py.logic.security_models.crypto_exchange` pipeline now has a
+SwissKnife-side browser consumer for proof reports and proof receipts. This is a
+bridge for wallet/exchange assurance artifacts, not a claim that SwissKnife can
+independently re-run or cryptographically authenticate every Python proof
+artifact in-browser yet.
+
+### 12.29.1 Result
+
+- Added `src/services/provers/crypto-exchange-proof-artifacts.ts`, a pure
+  TypeScript verifier for the Python `proof-report/v1` and `proof-receipt/v1`
+  shapes.
+- Exported the verifier from `src/services/provers/browser.ts` so MCP/WASM
+  surfaces can consume crypto-exchange assurance artifacts without importing
+  Python, Node filesystem APIs, or host-native runner wrappers.
+- The schema-only path checks report/receipt schema versions, proof status,
+  model and claim binding, deterministic or nondeterministic report CID binding,
+  explicit assumption acceptance, and receipt validity.
+- The proof-critical path intentionally fails closed until SwissKnife can
+  recompute the Python canonical artifact CIDs byte-for-byte or verify a trusted
+  signature over the report payload.
+
+### 12.29.2 Follow-up tasks
+
+| Task | Priority | Status | Notes |
+|---|---:|---|---|
+| PORT-263 | P1 | CLOSED | Browser-safe proof report/receipt schema verifier and receipt issuer |
+| PORT-264 | P1 | OPEN | Recompute Python canonical `deterministic_payload_cid` and `nondeterministic_report_cid` in TypeScript |
+| PORT-265 | P1 | OPEN | Verify trusted signatures over proof reports before proof-critical acceptance |
+| PORT-266 | P2 | OPEN | Add an MCP tool surface that accepts crypto-exchange proof reports and emits signed SwissKnife receipts |
+| PORT-267 | P2 | OPEN | Add conformance vectors using the generated `security_ir_artifacts/assurance-run` proof baseline |

@@ -4792,6 +4792,86 @@ def test_vai_634_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     assert task_id in readiness_source
 
 
+def test_swissknife_all_tools_supervisor_queue_is_resumable():
+    queue_path = REPO_ROOT / "data" / "swissknife_virtual_desktop" / "all_tools_supervisor_queue.json"
+    taskboard_path = (
+        REPO_ROOT
+        / "implementation_plan"
+        / "docs"
+        / "37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+    )
+    queue = json.loads(queue_path.read_text(encoding="utf-8"))
+    taskboard_source = taskboard_path.read_text(encoding="utf-8")
+
+    assert queue["schema"] == "swissknife.all_tools_supervisor_queue.v1"
+    assert queue["supervisor"]["id"] == "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools"
+    assert queue["supervisor"]["task_id_range"] == ["SVD-027", "SVD-050"]
+    assert queue["summary"]["task_count"] == 24
+    assert queue["summary"]["completed_task_ids"] == [
+        "SVD-027",
+        "SVD-028",
+        "SVD-029",
+        "SVD-030",
+        "SVD-031",
+        "SVD-032",
+        "SVD-033",
+        "SVD-034",
+        "SVD-035",
+        "SVD-036",
+        "SVD-037",
+        "SVD-038",
+        "SVD-040",
+        "SVD-041",
+        "SVD-042",
+        "SVD-043",
+        "SVD-048",
+        "SVD-049",
+    ]
+    assert queue["summary"]["ready_task_ids"] == ["SVD-044"]
+    assert queue["summary"]["waiting_task_ids"] == ["SVD-045", "SVD-047", "SVD-050"]
+    assert queue["summary"]["blocked_task_ids"] == ["SVD-039", "SVD-046"]
+    assert queue["summary"]["recommended_task_id"] == "SVD-044"
+    assert queue["resume_contract"]["evidence_churn_rule"].startswith("generated evidence artifacts")
+    assert queue["resume_contract"]["accelerate_boundary_rule"].startswith("downstream release gates")
+    assert "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.json" in queue["generated_evidence_globs"]
+
+    tasks = queue["tasks"]
+    for task_id in [f"SVD-{index:03d}" for index in range(27, 51)]:
+        assert task_id in tasks
+        assert f"## {task_id} " in taskboard_source
+        assert tasks[task_id]["validation"]
+        assert tasks[task_id]["outputs"]
+
+    for task_id in queue["summary"]["completed_task_ids"]:
+        task = tasks[task_id]
+        assert task["status"] == "completed"
+        assert task["evidence"]
+        for validation in task["validation"]:
+            assert validation
+
+    for task_id in queue["summary"]["ready_task_ids"]:
+        task = tasks[task_id]
+        assert task["status"] == "ready"
+        assert all(
+            dependency in tasks or dependency.startswith("SVD-0")
+            for dependency in task["depends_on"]
+        )
+
+    for task_id in queue["summary"]["blocked_task_ids"]:
+        task = tasks[task_id]
+        assert task["status"] == "blocked"
+        assert task["evidence"]
+
+    assert "SVD-034" in queue["dependency_graph"]["SVD-033"]
+    assert "SVD-038" in queue["dependency_graph"]["SVD-037"]
+    assert "SVD-044" in queue["dependency_graph"]["SVD-042"]
+    assert "SVD-047" in queue["dependency_graph"]["SVD-046"]
+    assert "SVD-049" in queue["dependency_graph"]["SVD-048"]
+    assert "SVD-050" in queue["dependency_graph"]["SVD-049"]
+    assert queue["dependency_graph"]["SVD-047"] == []
+    assert queue["dependency_graph"]["SVD-050"] == []
+
+
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file
