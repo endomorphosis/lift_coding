@@ -4,8 +4,10 @@ VAI-665 repairs the objective validation gap for `VAIOS-G704` and MGW-573
 re-confirms the same objective validation repair for the meta-glasses scanner
 gap in
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md`.
-Attempt 2 records the current executable repair in
-`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-2-validation-repair.md`.
+Attempt 3 records the current executable confirmation in
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-3-validation-confirmation.md`,
+superseding the earlier attempt 2 validation record without changing the
+contract shape.
 Both entries belong to the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
@@ -50,7 +52,7 @@ The repaired `interface contract swissknife Mcp-Plus-Plus` path is:
   compatibility receipt schema accepts the VAI-665 Mcp-Plus-Plus receipt
   identity (`task_id: VAI-665`, `daemon_id: mcp_plus_plus`,
   `server_package: Mcp-Plus-Plus`) used by the descriptor's receipt builder,
-  with MGW-573 attempt 2 covered as the scanner-visible meta-glasses repair
+  with MGW-573 attempt 3 covered as the scanner-visible meta-glasses repair
   task.
 - `Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json`
   mirrors the TypeScript descriptor as a plain MCP-IDL payload so the
@@ -80,7 +82,7 @@ Validation evidence lives in
    descriptor shapes remain mutually compatible.
 5. Asserts this objective validation repair is recorded in the MGW-573
    discovery evidence
-   `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-2-validation-repair.md`,
+   `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-3-validation-confirmation.md`,
    the source gap
    `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md`,
    and the objective heap
