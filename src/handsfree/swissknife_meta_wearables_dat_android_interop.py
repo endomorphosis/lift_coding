@@ -1,6 +1,6 @@
 """Interop contract between SwissKnife and ``external/meta-wearables-dat-android``.
 
-MGW-574 repairs the VAIOS-G705 objective validation gap that requires
+HAO-735 repairs the VAIOS-G705 objective validation gap that requires
 `swissknife` to interoperate with `external/meta-wearables-dat-android`
 through importable contracts, interface descriptors, runtime handoff
 behavior, and integration tests. This is part of the shared
