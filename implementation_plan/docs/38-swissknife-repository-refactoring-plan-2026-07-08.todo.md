@@ -742,7 +742,7 @@ state observation.
 
 ## SWR-039 Make libp2p browser defaults visible in app settings and MCP control
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/libp2p
 - Fingerprint: d8656e302ec5d43aa5acdfbe24746904f53797f3
