@@ -1,9 +1,9 @@
 # Hallucinate App / Mobile Interop
 
-HAO-740 attempt 4 records the direct objective validation repair for
-`VAIOS-G707` and `objective/interoperability/hallucinate_app-mobile`. HAO-751
-remains the retry-budget follow-up that first repaired the blocked validation
-loop.
+HAO-752 records the current objective validation repair for `VAIOS-G707` and
+`objective/interoperability/hallucinate_app-mobile`. It reuses and tightens the
+HAO-740 attempt 4 proof stack; HAO-751 remains the retry-budget follow-up that
+first repaired the blocked validation loop.
 
 The repaired `interface contract hallucinate_app mobile` path is:
 
@@ -61,4 +61,8 @@ The repair evidence is
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md`
 and
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md`.
-This is an `objective validation repair` for HAO-740 and HAO-751.
+The current HAO-752 objective gap is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-gap-7edb316279e5.md`;
+the current repair record is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-validation-repair.md`.
+This is an `objective validation repair` for HAO-740, HAO-751, and HAO-752.

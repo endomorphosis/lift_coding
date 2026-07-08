@@ -64,3 +64,24 @@ current strategy file at
 `/home/barberb/lift_coding/data/hallucinate_multimodal_control/state/hallucinate_multimodal_control_strategy.json`
 does not list `HAO-740` in `blocked_tasks`, so this repair task can be marked
 completed without an additional strategy-file edit.
+
+## HAO-752 Follow-up Alignment
+
+HAO-752 re-filed the same VAIOS-G707 objective gap fingerprint under
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-gap-7edb316279e5.md`.
+The current objective validation repair is recorded in
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-validation-repair.md`
+and preserves the same proof stack:
+`tests/integration/test_hallucinate_app_mobile_interop.py`,
+`docs/integration/hallucinate_app-mobile.md`,
+`hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`,
+`hallucinate_app/hallucinate_app/node/views/test_interface.html`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/orb/metaGlassesMobileOrbBridge.js`,
+`hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql`,
+and
+`hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py`.
+This keeps HAO-740, HAO-751, HAO-752, VAIOS-G707,
+`objective/interoperability/hallucinate_app-mobile`,
+`interface contract hallucinate_app mobile`, and
+`objective validation repair` aligned across the supervisor-fed backlog.

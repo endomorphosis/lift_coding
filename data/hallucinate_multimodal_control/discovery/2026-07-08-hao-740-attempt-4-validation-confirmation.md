@@ -81,3 +81,24 @@ Result after initializing the already-pinned submodules `Mcp-Plus-Plus`,
 This objective validation repair keeps the supervisor-fed backlog aligned with
 the objective heap for HAO-740, HAO-751, and VAIOS-G707. No smaller child goals
 are required because the Hallucinate App/mobile handoff proof is cohesive.
+
+## HAO-752 Follow-up Alignment
+
+HAO-752 re-confirms this same `objective validation repair` for VAIOS-G707 and
+`objective/interoperability/hallucinate_app-mobile` after the scanner re-filed
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-gap-7edb316279e5.md`.
+The current repair record is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-validation-repair.md`.
+The proof stack remains
+`tests/integration/test_hallucinate_app_mobile_interop.py`,
+`docs/integration/hallucinate_app-mobile.md`,
+`hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`,
+`hallucinate_app/hallucinate_app/node/views/test_interface.html`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/orb/metaGlassesMobileOrbBridge.js`,
+`hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql`,
+and
+`hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py`.
+This keeps HAO-740, HAO-751, HAO-752, `interface contract hallucinate_app mobile`,
+and `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md`
+scanner-visible without adding smaller child goals.
