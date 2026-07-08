@@ -77,6 +77,75 @@ export const TASK_STATUS_SERVICE_INTERFACE = {
   compatibility: {},
 };
 
+export const HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT = {
+  contract_id: 'interface contract hallucinate_app mobile',
+  name: 'hallucinate_app_mobile_orb_handoff',
+  namespace: 'handsfree.hallucinate_app.mobile',
+  version: '0.1.0',
+  source_surface: 'hallucinate_app',
+  target_surface: 'mobile',
+  control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
+  runtime_routes: [
+    '/v1/mobile/orb/register_edge_capabilities',
+    '/v1/mobile/orb/publish_glasses_event',
+    '/v1/mobile/orb/bind_service',
+    '/v1/mobile/orb/invoke_service',
+    '/v1/mobile/orb/dispatch_glasses_response',
+    '/v1/mobile/orb/diagnostics',
+  ],
+  descriptor_paths: [
+    'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    'mobile/src/orb/metaGlassesOrbDescriptors.js',
+  ],
+  artifact_refs: [
+    'interaction_envelope',
+    'policy_decision',
+    'mediation_receipt',
+    'mobile_orb_bridge',
+  ],
+};
+
+export const HALLUCINATE_APP_MOBILE_HANDOFF_INTERFACE = {
+  name: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.name,
+  namespace: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.namespace,
+  version: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.version,
+  metadata: {
+    contract_id: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.contract_id,
+    source_surface: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.source_surface,
+    target_surface: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.target_surface,
+    control_surface_contract_ref:
+      HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.control_surface_contract_ref,
+  },
+  methods: [
+    {
+      name: 'register_edge_capabilities',
+      inputSchema: { type: 'object', required: ['edge_id', 'platform'] },
+      outputSchema: { type: 'object', required: ['edge_session_id', 'mediation_receipt'] },
+    },
+    {
+      name: 'invoke_service',
+      inputSchema: { type: 'object', required: ['binding_handle', 'operation'] },
+      outputSchema: { type: 'object', required: ['ok', 'receipt_cid', 'service_result'] },
+    },
+    {
+      name: 'dispatch_glasses_response',
+      inputSchema: { type: 'object', required: ['edge_session_id', 'result'] },
+      outputSchema: { type: 'object', required: ['receipt_cid', 'dispatched_actions'] },
+    },
+  ],
+  requires: [
+    'control_surface_contract',
+    'interaction_envelope',
+    'policy_decision',
+    'mediation_receipt',
+  ],
+  compatibility: {
+    mobile_orb_bridge: MOBILE_ORB_BRIDGE_INTERFACE.name,
+    display_widget_bridge: DISPLAY_WIDGET_BRIDGE_INTERFACE.name,
+  },
+};
+
 function normalizeDescriptorMetadata(metadata = {}) {
   if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) {
     return null;
@@ -129,4 +198,12 @@ export function mcpServiceDescriptorRef(descriptor, interfaceCid = null, metadat
 
 export function localInterfaceKey(descriptor) {
   return `${descriptor.namespace}.${descriptor.name}@${descriptor.version}`;
+}
+
+export function hallucinateAppMobileInteropDescriptorRef(interfaceCid = null) {
+  return mcpServiceDescriptorRef(
+    HALLUCINATE_APP_MOBILE_HANDOFF_INTERFACE,
+    interfaceCid,
+    HALLUCINATE_APP_MOBILE_HANDOFF_INTERFACE.metadata
+  );
 }

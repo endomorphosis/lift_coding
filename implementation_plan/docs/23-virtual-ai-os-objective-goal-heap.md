@@ -1057,7 +1057,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G707 Interoperate hallucinate_app with mobile
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3007
 - Track: interoperability
@@ -1081,6 +1081,10 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - AST query: hallucinate_app, mobile, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, both, boto3, bs4
 - Parallel lane: objective/interoperability/hallucinate_app-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- HAO-740 proof: `tests/integration/test_hallucinate_app_mobile_interop.py` validates the importable `interface contract hallucinate_app mobile` descriptor in `mobile/src/orb/metaGlassesOrbDescriptors.js`, the Hallucinate App desktop search handoff in `hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`, the operator probe in `hallucinate_app/hallucinate_app/node/views/test_interface.html`, the runtime mobile ORB register/bind/invoke/dispatch artifact builders, and the DuckDB `hallucinate_app_mobile_interop_receipts` evidence path. `docs/integration/hallucinate_app-mobile.md` records the mobile ORB routes, control-surface artifacts, and validation command for supervisor scans.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: tests/integration/test_hallucinate_app_mobile_interop.py => tests/integration/test_hallucinate_app_mobile_interop.py (path), docs/integration/hallucinate_app-mobile.md (exact), mobile/src/orb/metaGlassesOrbDescriptors.js (ast); docs/integration/hallucinate_app-mobile.md => docs/integration/hallucinate_app-mobile.md (path), tests/integration/test_hallucinate_app_mobile_interop.py (ast); interface contract hallucinate_app mobile => mobile/src/orb/metaGlassesOrbDescriptors.js (exact), hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js (exact), hallucinate_app/hallucinate_app/node/views/test_interface.html (exact); hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js => hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js (path), tests/integration/test_hallucinate_app_mobile_interop.py (ast); hallucinate_app/hallucinate_app/node/views/test_interface.html => hallucinate_app/hallucinate_app/node/views/test_interface.html (path), tests/integration/test_hallucinate_app_mobile_interop.py (ast); hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql => hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql (path), tests/integration/test_hallucinate_app_mobile_interop.py (ast); hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py => hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py (path), tests/integration/test_hallucinate_app_mobile_interop.py (ast)
+- Completion validation: python3 -m pytest tests/integration/test_hallucinate_app_mobile_interop.py -q
 - Gap task: Create one larger integration work item proving `hallucinate_app` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
 
 ## VAIOS-G708 Interoperate external/meta-wearables-dat-android with mobile
