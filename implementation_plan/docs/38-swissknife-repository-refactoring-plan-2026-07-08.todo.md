@@ -380,7 +380,7 @@ Acceptance target:
 
 ## SWR-014 Enforce UI import boundaries for browser surfaces
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/ui-browser
