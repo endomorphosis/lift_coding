@@ -341,7 +341,7 @@ Acceptance target:
 
 ## SWR-011 Build repository-wide browser compatibility inventory
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/browser-inventory
