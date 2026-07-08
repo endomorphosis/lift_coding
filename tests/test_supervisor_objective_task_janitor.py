@@ -134,6 +134,76 @@ def test_objective_task_janitor_releases_owned_blocks_when_goal_has_open_work():
     assert result["open_goal_ids"] == ["VAIOS-G697"]
 
 
+def test_objective_task_janitor_reviews_blocked_tasks_for_unblock_or_removal():
+    ObjectiveGoal, PortalTask, schema, reconcile = _imports()
+    goals = [
+        ObjectiveGoal(
+            "VAIOS-G697",
+            "Production launch readiness gate",
+            {
+                "status": "active",
+                "fib_priority": "1",
+                "priority": "P0",
+                "track": "launch",
+                "goal": "Phone-hosted Swissknife virtual desktop with desktop offload and Meta glasses terminal.",
+            },
+        ),
+        ObjectiveGoal(
+            "VAIOS-G111",
+            "Completed scanner churn",
+            {"status": "completed", "fib_priority": "8", "priority": "P3", "track": "ops"},
+        ),
+    ]
+    tasks = [
+        PortalTask(
+            "VAI-003",
+            "Launch gate implementation",
+            "blocked",
+            "manual",
+            "P0",
+            "launch",
+            metadata={"goal id": "VAIOS-G697"},
+        ),
+        PortalTask(
+            "VAI-004",
+            "Completed generated task",
+            "blocked",
+            "manual",
+            "P2",
+            "ops",
+            metadata={"goal id": "VAIOS-G111"},
+        ),
+        PortalTask(
+            "VAI-005",
+            "Human blocked integration",
+            "blocked",
+            "manual",
+            "P0",
+            "launch",
+            metadata={"goal id": "VAIOS-G697"},
+        ),
+    ]
+    strategy = {
+        "blocked_tasks": ["VAI-003", "VAI-004", "VAI-005"],
+        "objective_task_janitor_receipts": [
+            {"schema": schema, "action": "block", "task_id": "VAI-003"},
+            {"schema": schema, "action": "block", "task_id": "VAI-004"},
+        ],
+    }
+
+    result = reconcile(goals=goals, tasks=tasks, strategy=strategy, now="2026-06-23T00:00:00+00:00")
+    updated = result["strategy"]
+
+    assert result["changed"]
+    assert result["unblocked_task_ids"] == ["VAI-003"]
+    assert result["removed_task_ids"] == ["VAI-004"]
+    assert updated["blocked_tasks"] == ["VAI-005"]
+    assert updated["objective_task_janitor_last_run_summary"]["unblocked_count"] == 1
+    assert updated["objective_task_janitor_last_run_summary"]["removed_count"] == 1
+    assert [receipt["action"] for receipt in result["receipts"]] == ["unblock", "remove"]
+    assert result["open_goal_ids"] == ["VAIOS-G697"]
+
+
 def test_objective_task_janitor_reopens_goal_when_only_open_work_is_strategy_blocked():
     ObjectiveGoal, PortalTask, _schema, reconcile = _imports()
     goals = [
@@ -797,6 +867,72 @@ def test_supervisor_materializes_janitor_deprioritization_as_blocked_task(tmp_pa
     assert updated_strategy["deprioritized_tasks"] == ["VAI-001"]
     assert "- Status: blocked" in updated_todo
     assert "- Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task" in updated_todo
+
+
+def test_supervisor_materializes_janitor_unblock_and_remove_reviews(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        mark_task_statuses_in_todo_text,
+        task_id_prefix,
+    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    state_dir = tmp_path / "state"
+    state_dir.mkdir()
+    todo_path = tmp_path / "vai.todo.md"
+    strategy_path = state_dir / "virtual_ai_os_strategy.json"
+    todo_path.write_text(
+        "\n".join(
+            (
+                "# VAI",
+                "",
+                "## VAI-101 Launch gate implementation",
+                _task_status_line("blocked"),
+                "- Blocked reason: Deferred by objective-task janitor during launch steering because old_state.",
+                "",
+                "## VAI-102 Completed generated task",
+                _task_status_line("blocked"),
+                "- Blocked reason: Retired by objective-task janitor during launch steering because old_state.",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    strategy_path.write_text(json.dumps({}), encoding="utf-8")
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=todo_path,
+            state_path=state_dir / "virtual_ai_os_task_state.json",
+            strategy_path=strategy_path,
+            events_path=state_dir / "virtual_ai_os_supervisor_events.jsonl",
+            state_dir=state_dir,
+            task_prefix="## VAI-",
+            state_prefix="virtual_ai_os",
+            repo_root=tmp_path,
+        )
+    )
+
+    materialized = supervisor._materialize_objective_task_janitor_retirements(
+        {
+            "receipts": [
+                {"schema": "test", "action": "unblock", "task_id": "VAI-101"},
+                {"schema": "test", "action": "remove", "task_id": "VAI-102"},
+            ]
+        },
+        mark_task_statuses_in_todo_text=mark_task_statuses_in_todo_text,
+        task_id_prefix=task_id_prefix,
+    )
+    updated_todo = todo_path.read_text(encoding="utf-8")
+
+    assert materialized["unblocked_task_ids"] == ["VAI-101"]
+    assert materialized["removed_task_ids"] == ["VAI-102"]
+    assert materialized["removed_reason_task_ids"] == ["VAI-101", "VAI-102"]
+    assert "## VAI-101 Launch gate implementation\n- Status: todo" in updated_todo
+    assert "## VAI-102 Completed generated task\n- Status: completed" in updated_todo
+    assert "- Blocked reason:" not in updated_todo
 
 
 def test_supervisor_run_forever_defers_refill_before_daemon_loop(tmp_path):
