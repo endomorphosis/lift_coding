@@ -471,7 +471,7 @@ Acceptance target:
 
 ## SWR-021 Make Pyodide optional and sandboxed, never default runtime
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/browser-safety
