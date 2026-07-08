@@ -52,6 +52,22 @@ carries the same ref. This keeps the MGW-569 objective validation repair tied to
 shared VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705,
 and VAIOS-G706 packet into smaller child goals.
 
+MGW-569 attempt 2 objective validation repair re-confirms the same
+scanner-visible proof in
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-2-validation-confirmation.md`.
+The mobile descriptor and DAT display widget action contract carry that
+attempt-2 validation confirmation ref, while
+`swissknife/contracts/control_surface_contract.schema.json` and
+`swissknife/contracts/interaction_envelope.schema.json` record the matching
+schema comment evidence. This keeps `tests/integration/test_swissknife_mobile_interop.py`,
+`docs/integration/swissknife-mobile.md`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`,
+`mobile/src/orb/metaGlassesMobileOrbBridge.js`,
+`swissknife/contracts/control_surface_contract.schema.json`, and
+`swissknife/contracts/interaction_envelope.schema.json` aligned with the
+supervisor-fed objective heap for VAIOS-G700 through VAIOS-G706.
+
 HAO-730 re-ran the VAI-661 objective validation repair for VAIOS-G700 and the
 same `goal_packet/interoperability/swissknife/06921590135c` packet. The
 contracts and descriptors above were unchanged; the only outstanding gap was
