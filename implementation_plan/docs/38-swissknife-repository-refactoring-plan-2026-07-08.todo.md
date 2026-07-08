@@ -289,7 +289,7 @@ Acceptance target:
 
 ## SWR-007 Extend module-boundary discipline beyond services
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/repo-modules
