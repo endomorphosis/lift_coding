@@ -13,6 +13,9 @@ import {
   SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
   IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
   IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
+  HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
   descriptorRef,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -1304,11 +1307,15 @@ export class MetaGlassesMobileOrbBridge {
     const ipfsAccelerateInteropInterfaceCid = localInterfaceKey(
       IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE
     );
+    const hallucinateAppInteropInterfaceCid = localInterfaceKey(
+      HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE
+    );
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
       swissknifeInteropInterfaceCid,
       ipfsAccelerateInteropInterfaceCid,
+      hallucinateAppInteropInterfaceCid,
     ];
     this.edgeSession = null;
     this.bindings = new Map();
@@ -1704,6 +1711,17 @@ export class MetaGlassesMobileOrbBridge {
             },
           ]
           : []),
+        ...(this.localInterfaceCids[4]
+          ? [
+            {
+              ...descriptorRef(
+                HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+                this.localInterfaceCids[4]
+              ),
+              interop_descriptor: HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
+            },
+          ]
+          : []),
       ],
     });
     const previousEdgeSessionId = this.edgeSession?.edge_session_id || null;
@@ -2083,6 +2101,58 @@ export class MetaGlassesMobileOrbBridge {
       payload,
       response: normalizedResponse,
       localResults,
+    };
+  }
+
+  /**
+   * Runtime handoff for VAIOS-G707 (`interface contract hallucinate_app mobile`).
+   *
+   * Consumes the normalized envelope produced by the Hallucinate App desktop
+   * search surface (`buildHallucinateAppMobileSearchHandoff()` in
+   * `hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`),
+   * invokes the mobile ORB bridge's `invoke_service` operation, and dispatches
+   * the result back to the requested mobile render target (defaulting to
+   * `mobile_card`). This proves the two surfaces interoperate through a real
+   * runtime call rather than just shared schema/contract text.
+   */
+  async handleHallucinateAppMobileSearchHandoff(handoffEnvelope = {}, options = {}) {
+    if (handoffEnvelope.contract_id !== HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.contract_id) {
+      throw new Error(
+        `Unsupported hallucinate_app mobile handoff contract: ${handoffEnvelope.contract_id}`
+      );
+    }
+    this.requireEdgeSession();
+    const normalizedIntent = handoffEnvelope.normalized_intent || {};
+    const payload = handoffEnvelope.payload || {};
+    const bindingHandle =
+      options.binding_handle ||
+      `local:binding:hallucinate-app-mobile-search-${handoffEnvelope.correlation_id || this.eventLog.length}`;
+
+    const invocation = await this.invokeService(
+      bindingHandle,
+      normalizedIntent.method || 'invoke_service',
+      normalizedIntent.arguments || payload,
+      {
+        correlation_id: handoffEnvelope.correlation_id,
+        allow_untracked_binding: true,
+        glasses_context: {
+          source_surface: handoffEnvelope.source_surface || HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT.source_surface,
+        },
+      }
+    );
+
+    const dispatch = await this.dispatchGlassesResponse({
+      result: invocation.response.service_result || invocation.response,
+      renderTargets: [payload.result_target || 'mobile_card'],
+      correlationId: handoffEnvelope.correlation_id,
+      parentReceiptCids: [invocation.response.receipt_cid].filter(Boolean),
+    });
+
+    return {
+      contract_id: handoffEnvelope.contract_id,
+      handoff: handoffEnvelope,
+      invocation,
+      dispatch,
     };
   }
 
