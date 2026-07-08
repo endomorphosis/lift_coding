@@ -1114,7 +1114,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G709 Interoperate external/meta-wearables-dat-android with external/ipfs_accelerate
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3009
 - Track: interoperability
@@ -1139,10 +1139,14 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_accelerate
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- HAO-739 proof: `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py` uses the shared Android DAT handoff envelope from `external/meta-wearables-dat-android/python/meta_wearables_dat_android/ipfs_kit_handoff.py` and verifies the wearable latency, memory, and power payload projects onto `external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql` plus the schema maintenance scripts. `docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md` records the interface contract external/meta-wearables-dat-android external/ipfs_accelerate and objective validation repair terms for packet goal VAIOS-G709.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md, external/meta-wearables-dat-android/python/meta_wearables_dat_android/ipfs_kit_handoff.py, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md
+- Completion validation: python -m pytest tests/integration -q
 
 ## VAIOS-G710 Interoperate external/meta-wearables-dat-android with external/ipfs_datasets
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3010
 - Track: interoperability
@@ -1167,10 +1171,14 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_datasets
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- HAO-739 proof: `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py` uses the shared Android DAT handoff envelope from `external/meta-wearables-dat-android/python/meta_wearables_dat_android/ipfs_kit_handoff.py` and verifies wearable dataset samples project into dataset records while `external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json`, `external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`, and the bucket demos provide the dataset-side VFS descriptors. `docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md` records the interface contract external/meta-wearables-dat-android external/ipfs_datasets and objective validation repair terms for packet goal VAIOS-G710.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md, external/meta-wearables-dat-android/python/meta_wearables_dat_android/ipfs_kit_handoff.py, external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json, data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md
+- Completion validation: python -m pytest tests/integration -q
 
 ## VAIOS-G711 Interoperate external/meta-wearables-dat-android with external/ipfs_kit
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3011
 - Track: interoperability
@@ -1195,6 +1203,10 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_kit
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- HAO-739 proof: `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py` imports the Android DAT producer contract from `external/meta-wearables-dat-android/python/meta_wearables_dat_android/ipfs_kit_handoff.py`, imports the ipfs_kit consumer from `external/ipfs_kit/ipfs_kit_py/meta_wearables_android_interop.py`, converts a wearable display event into an MCP `tools/call` request, and verifies deterministic CIDv1 `dag-json` receipt generation. The test also validates `external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py`, `external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py`, `external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py`, `external/ipfs_kit/data/deprecations_report.schema.json`, `external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`, and `external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto`. `docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md` records the interface contract external/meta-wearables-dat-android external/ipfs_kit and objective validation repair terms for packet goal VAIOS-G711.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md, external/meta-wearables-dat-android/contracts/ipfs_kit_handoff.schema.json, external/ipfs_kit/ipfs_kit_py/meta_wearables_android_interop.py, external/ipfs_kit/data/deprecations_report.schema.json, data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md
+- Completion validation: python -m pytest tests/integration -q
 
 ## VAIOS-G712 Interoperate external/meta-wearables-dat-android with Mcp-Plus-Plus
 
