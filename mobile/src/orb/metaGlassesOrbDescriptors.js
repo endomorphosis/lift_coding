@@ -221,6 +221,99 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
 };
 
+export const HALLUCINATE_APP_MOBILE_INTEROP_OPERATIONS = [
+  'content_browser_search_handoff',
+  'render_mobile_result_card',
+  'dispatch_glasses_response_receipt',
+];
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
+  name: 'hallucinate_app_mobile_interop',
+  namespace: 'handsfree.interop.hallucinate_app_mobile',
+  version: '0.1.0',
+  metadata: {
+    interface_contract: 'interface contract hallucinate_app mobile',
+    goal_id: 'VAIOS-G707',
+    source_surface: 'hallucinate_app',
+    target_surface: 'mobile',
+  },
+  objective_goals: ['VAIOS-G707'],
+  methods: [
+    ...MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
+      name,
+      surface: 'mobile_orb_bridge',
+      contract_ref:
+        'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    })),
+    ...HALLUCINATE_APP_MOBILE_INTEROP_OPERATIONS.map((name) => ({
+      name,
+      surface: 'hallucinate_app_mobile_interop',
+      contract_ref:
+        'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    })),
+  ],
+  errors: [
+    {
+      name: 'mobile_orb_edge_unregistered',
+      code: 409,
+    },
+    {
+      name: 'unsupported_hallucinate_app_handoff',
+      code: 422,
+    },
+  ],
+  requires: [
+    'hallucinate_app/content-browser-search',
+    'mobile/meta-glasses-orb-bridge',
+    'control_surface_contract:hallucinate-app:remote-client',
+  ],
+  compatibility: {
+    hallucinate_app_search_interface:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    hallucinate_app_test_interface:
+      'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    hallucinate_app_mobile_interop_receipts:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
+    hallucinate_app_benchmark_schema_script:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
+    mobile_orb_bridge: 'mobile/src/orb/metaGlassesMobileOrbBridge.js',
+  },
+};
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
+  descriptor_id: 'hallucinate-app-mobile-interop@0.1.0',
+  interface: HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  schema_refs: {
+    search_interface:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    test_interface_fixture: 'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    time_series_schema:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
+    benchmark_schema_script:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
+    mobile_orb_bridge: 'mobile/src/orb/metaGlassesMobileOrbBridge.js',
+  },
+  runtime_handoff: {
+    source_surface: 'hallucinate_app',
+    target_surface: 'mobile',
+    event_name: 'hallucinate-app:mobile-interop-handoff',
+    allowed_surfaces: ['remote_client', 'mobile', 'meta_glasses'],
+    mobile_orb_methods: MOBILE_ORB_BRIDGE_OPERATIONS,
+    hallucinate_app_methods: HALLUCINATE_APP_MOBILE_INTEROP_OPERATIONS,
+    receipt_table: 'hallucinate_app_mobile_interop_receipts',
+    control_surface_policy_id: 'policy:hallucinate-app:mobile-interop',
+  },
+  validation: {
+    task_id: 'MGW-579',
+    goal_id: 'VAIOS-G707',
+    objective_gap_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-579-objective-gap-7edb316279e5.md',
+    validation_repair_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-579-objective-validation-repair.md',
+    evidence: 'objective validation repair',
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',
