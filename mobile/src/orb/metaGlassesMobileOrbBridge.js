@@ -13,6 +13,8 @@ import {
   SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
   IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
   IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
   descriptorRef,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -1300,6 +1302,9 @@ export class MetaGlassesMobileOrbBridge {
     this.edgeId = options.edgeId || DEFAULT_EDGE_ID;
     this.platform = options.platform || 'simulator';
     this.device = options.device || {};
+    const hallucinateAppInteropInterfaceCid = localInterfaceKey(
+      HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE
+    );
     const swissknifeInteropInterfaceCid = localInterfaceKey(SWISSKNIFE_MOBILE_INTEROP_INTERFACE);
     const ipfsAccelerateInteropInterfaceCid = localInterfaceKey(
       IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE
@@ -1307,6 +1312,7 @@ export class MetaGlassesMobileOrbBridge {
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
+      hallucinateAppInteropInterfaceCid,
       swissknifeInteropInterfaceCid,
       ipfsAccelerateInteropInterfaceCid,
     ];
@@ -1688,17 +1694,25 @@ export class MetaGlassesMobileOrbBridge {
         ...(this.localInterfaceCids[2]
           ? [
             {
-              ...descriptorRef(SWISSKNIFE_MOBILE_INTEROP_INTERFACE, this.localInterfaceCids[2]),
-              interop_descriptor: SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
+              ...descriptorRef(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE, this.localInterfaceCids[2]),
+              interop_descriptor: HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR,
             },
           ]
           : []),
         ...(this.localInterfaceCids[3]
           ? [
             {
+              ...descriptorRef(SWISSKNIFE_MOBILE_INTEROP_INTERFACE, this.localInterfaceCids[3]),
+              interop_descriptor: SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
+            },
+          ]
+          : []),
+        ...(this.localInterfaceCids[4]
+          ? [
+            {
               ...descriptorRef(
                 IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
-                this.localInterfaceCids[3]
+                this.localInterfaceCids[4]
               ),
               interop_descriptor: IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
             },
