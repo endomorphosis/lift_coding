@@ -163,7 +163,7 @@ VAI_MGW_HAO_IMPLEMENTATION_TRACK_CONFIGS = implementation_supervisor_namespace_t
 VAI_MGW_HAO_RECONCILIATION_COMMON_ARGS = (
     "--retry-budget-commit-outputs",
     "--dependency-guardrail-commit-outputs",
-    "--auto-commit-generated-dirty",
+    "--no-generated-dirty-submodule-gitlinks",
     "--worktree-reconciliation-max-merges",
     MERGE_CLEANUP_DEFAULTS["worktree_reconciliation_max_merges"],
     "--merge-reconciliation-max-merges",

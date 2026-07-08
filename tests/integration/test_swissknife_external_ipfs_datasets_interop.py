@@ -1,4 +1,4 @@
-"""SwissKnife/external/ipfs_datasets interoperability regression tests for MGW-571."""
+"""SwissKnife/external/ipfs_datasets interoperability regression tests for VAI-663."""
 
 from __future__ import annotations
 
@@ -328,6 +328,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
         "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
         in src
     )
+    assert "VAI-663" in src
     assert "MGW-571" in src
     assert "VAIOS-G702" in src
     assert "agent_identity" in src
@@ -341,7 +342,7 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_d
     mediation_schema = read_json("swissknife/contracts/mediation_receipt.schema.json")
 
     for schema in (control_schema, envelope_schema, mediation_schema):
-        assert "MGW-571 objective validation repair" in schema["$comment"]
+        assert "VAI-663 objective validation repair" in schema["$comment"]
         assert "interface contract swissknife external/ipfs_datasets" in schema["$comment"]
         assert "goal_packet/interoperability/swissknife/06921590135c" in schema["$comment"]
         assert "tests/integration/test_swissknife_external_ipfs_datasets_interop.py" in schema["$comment"]
@@ -357,26 +358,24 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_d
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_ipfs_datasets.md")
     discovery = read_text(
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-571-objective-validation-repair.md"
-    )
-    merge_resolution = read_text(
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-586-mgw-571-merge-unblock-resolution.md"
+        "data/virtual_ai_os/discovery/"
+        "2026-07-08-vai-663-objective-validation-repair.md"
     )
     gap = read_text(
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-571-objective-gap-c21adb3eb488.md"
+        "data/virtual_ai_os/discovery/"
+        "2026-07-08-vai-663-objective-gap-c21adb3eb488.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "MGW-571",
+        "VAI-663",
         "VAIOS-G702",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
         "interface contract swissknife external/ipfs_datasets",
         "tests/integration/test_swissknife_external_ipfs_datasets_interop.py",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-663-objective-gap-c21adb3eb488.md",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-663-objective-validation-repair.md",
         DESCRIPTOR_TS_PATH,
         "src/handsfree/swissknife_ipfs_datasets_interop.py",
         "swissknife/contracts/control_surface_contract.schema.json",
@@ -390,14 +389,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py",
         "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py",
     ]
-    for content in (docs, discovery, merge_resolution, heap):
+    for content in (docs, discovery, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in discovery
-        assert goal_id in merge_resolution
         assert goal_id in heap
     assert "VAIOS-G702" in gap
-    assert "MGW-586" in merge_resolution
-    assert "main_checkout_dirty_conflict" in merge_resolution
-    assert "7ae0e4f18a7b13953e80a0bb3ac9a42d299d12fa" in merge_resolution

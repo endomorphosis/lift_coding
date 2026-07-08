@@ -1,6 +1,6 @@
 """Interop contract between SwissKnife and ``external/ipfs_datasets``.
 
-MGW-571 repairs the VAIOS-G702 objective validation gap that requires
+VAI-663 repairs the VAIOS-G702 objective validation gap that requires
 `swissknife` to interoperate with `external/ipfs_datasets` through importable
 contracts, interface descriptors, runtime handoff behavior, and integration
 tests. This is part of the shared

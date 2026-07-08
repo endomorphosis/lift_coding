@@ -1,6 +1,6 @@
 # SwissKnife / external/ipfs_datasets Interop
 
-MGW-571 repairs the VAIOS-G702 objective validation gap for the shared
+VAI-663 repairs the VAIOS-G702 objective validation gap for the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
@@ -81,6 +81,11 @@ SwissKnife TypeScript descriptor module for the expected exports and
 goal-packet metadata, validates representative SwissKnife control-surface and
 interaction-envelope payloads, and asserts this objective validation repair is
 recorded in
-`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-571-objective-validation-repair.md`
+`data/virtual_ai_os/discovery/2026-07-08-vai-663-objective-validation-repair.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
+
+The earlier MGW-571 proof remains valid historical evidence for the same
+fingerprint, but VAI-663 is the Virtual AI OS supervisor-fed backlog record
+that closes the current objective gap filed at
+`data/virtual_ai_os/discovery/2026-07-08-vai-663-objective-gap-c21adb3eb488.md`.
