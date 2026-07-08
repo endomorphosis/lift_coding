@@ -121,3 +121,21 @@ The run passed with 29 focused Hallucinate dashboard tests passing and 33
 display-dependent Electron cases skipped on this no-display supervisor host,
 7 Swissknife Meta glasses tests passing, and 5 Hallucinate multimodal
 control-surface tests passing.
+
+## Attempt 8 Validation
+
+Attempt 8 revalidated the full launch packet gate on 2026-07-08:
+
+```text
+npm --prefix hallucinate_app run test:e2e -- mcp-feature-exposure.spec.ts mcp-dashboard-interoperability.spec.ts && (test ! -f swissknife/package.json || npm --prefix swissknife run test:e2e:meta-glasses) && (test ! -f hallucinate_app/package.json || npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts)
+```
+
+The run passed with 98 headless Hallucinate MCP dashboard tests passing and 33
+display-dependent Electron cases skipped, 36 Swissknife Meta glasses tests
+passing, and 5 Hallucinate multimodal `control_surface` tests passing. The
+Hallucinate dashboard interoperability gate now invokes the Swissknife
+catalog-consumer Playwright spec and `swissknife/scripts/test-mcp-dashboard-consumer.cjs`
+directly, keeping the shared catalog/Swissknife application proof deterministic
+on supervisor hosts that do not launch live MCP backends while leaving
+`swissknife/test/e2e/live-ipfs-mcp-critical-flows.spec.ts` as the dedicated live
+backend receipt gate.
