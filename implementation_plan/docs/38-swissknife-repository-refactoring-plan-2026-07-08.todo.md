@@ -510,7 +510,7 @@ Acceptance target:
 
 ## SWR-024 Add repository module-boundary audit
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/repo-modules
