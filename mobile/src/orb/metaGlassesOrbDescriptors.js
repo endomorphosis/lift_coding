@@ -77,6 +77,131 @@ export const TASK_STATUS_SERVICE_INTERFACE = {
   compatibility: {},
 };
 
+export const HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT =
+  'interface contract hallucinate_app mobile';
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
+  name: 'hallucinate_app_mobile_content_browser',
+  namespace: 'handsfree.hallucinate_app.mobile',
+  version: '0.1.0',
+  objective_id: 'VAIOS-G707',
+  contract: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT,
+  source_surface: 'hallucinate_app',
+  target_surface: 'mobile',
+  methods: [
+    {
+      name: 'ingest_content_search',
+      inputSchema: {
+        type: 'object',
+        required: ['query', 'filter'],
+        properties: {
+          query: { type: 'string' },
+          filter: { type: 'object' },
+          result_limit: { type: ['integer', 'null'] },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          accepted: { type: 'boolean' },
+          route: { type: 'string' },
+        },
+      },
+    },
+    {
+      name: 'apply_content_filter',
+      inputSchema: {
+        type: 'object',
+        required: ['filter'],
+        properties: {
+          filter: { type: 'object' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          accepted: { type: 'boolean' },
+        },
+      },
+    },
+    {
+      name: 'open_module_test_interface',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          module_id: { type: 'string' },
+          environment: { type: 'string' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          accepted: { type: 'boolean' },
+        },
+      },
+    },
+    {
+      name: 'record_benchmark_timeseries_sample',
+      inputSchema: {
+        type: 'object',
+        required: ['event_id', 'metric_name', 'metric_value'],
+        properties: {
+          event_id: { type: 'string' },
+          metric_name: { type: 'string' },
+          metric_value: { type: 'number' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          recorded: { type: 'boolean' },
+        },
+      },
+    },
+  ],
+  requires: [
+    'content-browser/search-interface',
+    'hallucinate_app/node/views/test_interface.html',
+    'duckdb/time_series_schema',
+  ],
+  compatibility: {
+    mobile_route: 'mobile://hallucinate_app/content-browser/search',
+    storage_table: 'hallucinate_app_mobile_interop_events',
+  },
+};
+
+const HALLUCINATE_APP_MOBILE_INTEROP_METHOD_SET = new Set(
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE.methods.map((method) => method.name)
+);
+
+export function buildHallucinateAppMobileInteropReceipt(handoff = {}) {
+  const action = HALLUCINATE_APP_MOBILE_INTEROP_METHOD_SET.has(handoff.action)
+    ? handoff.action
+    : 'ingest_content_search';
+  const descriptor = descriptorRef(
+    HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+    localInterfaceKey(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE)
+  );
+  return {
+    contract: HALLUCINATE_APP_MOBILE_INTEROP_CONTRACT,
+    objective_id: 'VAIOS-G707',
+    source: handoff.source || 'hallucinate_app',
+    target: handoff.target || 'mobile',
+    accepted: handoff.target === undefined || handoff.target === 'mobile',
+    action,
+    descriptor,
+    query: typeof handoff.query === 'string' ? handoff.query : '',
+    filter:
+      handoff.filter && typeof handoff.filter === 'object' && !Array.isArray(handoff.filter)
+        ? handoff.filter
+        : {},
+    mobile_route:
+      handoff.mobile_payload?.route ||
+      HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE.compatibility.mobile_route,
+    received_at: handoff.timestamp || new Date().toISOString(),
+  };
+}
+
 function normalizeDescriptorMetadata(metadata = {}) {
   if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) {
     return null;
