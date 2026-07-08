@@ -9464,8 +9464,8 @@ cadence remains parseable and resumable.
 
 ## VAI-683 Resolve validation retry-budget failure for VAI-664
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: repaired the repeated VAI-664 validation retry-budget failure by confirming the `interface contract swissknife external/ipfs_kit` proof stack, recording VAI-683/VAI-664 repair evidence in `data/virtual_ai_os/discovery` and `data/virtual_ai_os/state/discovery`, restoring uninitialized sibling gitlinks at their recorded commits, and validating `python -m pytest tests/integration -q` cleanly.
 - Priority: P1
 - Track: ops
 - Depends on: 
