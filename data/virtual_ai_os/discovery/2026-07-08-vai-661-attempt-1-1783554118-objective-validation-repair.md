@@ -1,0 +1,79 @@
+# VAI-661 Attempt 1 Objective Validation Repair
+
+Date: 2026-07-08
+Task: VAI-661
+Attempt: 1
+Worktree: vai-661-attempt-1-1783554118
+Goal: VAIOS-G700
+Goal packet: goal_packet/interoperability/swissknife/06921590135c
+Goal packet role: packet_anchor
+Goal packet goals: VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, VAIOS-G706
+Source objective gap: data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md
+Objective gap fingerprint: d33307f93408e32451468150b5e7fe003eb0222d
+Canonical repair: data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md
+Repair record: data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md
+
+## Objective Validation Repair
+
+VAI-661 attempt 1 objective validation repair.
+
+This attempt makes the VAI-661 proof first-class in the Virtual AI OS evidence
+namespace. The `interface contract swissknife mobile` path is implemented and
+validated through importable mobile descriptors, SwissKnife JSON schemas,
+runtime handoff wiring, documentation, and an integration regression test.
+
+Evidence term: objective validation repair.
+Evidence term: interface contract swissknife mobile.
+Evidence term: agent identity.
+Evidence term: agent_identity.
+Evidence term: allowed surfaces.
+Evidence term: allowed_surfaces.
+Evidence term: arguments hash.
+Evidence term: arguments_hash.
+
+## Covered Outputs
+
+- `tests/integration/test_swissknife_mobile_interop.py`
+- `docs/integration/swissknife-mobile.md`
+- `mobile/src/orb/metaGlassesOrbDescriptors.js`
+- `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`
+- `mobile/src/orb/metaGlassesMobileOrbBridge.js`
+- `swissknife/contracts/control_surface_contract.schema.json`
+- `swissknife/contracts/interaction_envelope.schema.json`
+- `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+
+## Runtime Handoff
+
+`mobile/src/orb/metaGlassesOrbDescriptors.js` exports
+`SWISSKNIFE_MOBILE_INTEROP_INTERFACE` and
+`SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR`. The descriptor binds SwissKnife as the
+source surface, mobile as the target surface, the shared goal packet as the
+objective scope, and the control surface and interaction envelope schemas as
+the policy-mediated contract refs.
+
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js` exports
+`SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT`. That contract maps SwissKnife
+display widget action ids to mobile ORB operations and Meta Wearables DAT
+methods, so the mobile runtime can execute display widget handoffs without
+importing SwissKnife runtime code.
+
+`mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the SwissKnife/mobile
+descriptor during edge capability registration. `swissknife/contracts/control_surface_contract.schema.json`
+and `swissknife/contracts/interaction_envelope.schema.json` validate the
+representative control surface and normalized interaction payloads used by the
+integration test.
+
+## Validation
+
+Focused validation target:
+
+`python -m pytest tests/integration/test_swissknife_mobile_interop.py -q`
+
+Full supervisor target:
+
+`python -m pytest tests/integration -q`
+
+No smaller child goals are required for this repair. The same cohesive proof
+advances VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704,
+VAIOS-G705, and VAIOS-G706 for
+`goal_packet/interoperability/swissknife/06921590135c`.

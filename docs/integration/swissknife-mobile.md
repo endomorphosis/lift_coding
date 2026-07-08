@@ -1,5 +1,29 @@
 # SwissKnife Mobile Interop
 
+VAI-661 attempt 1 records the current objective validation repair for
+VAIOS-G700 and the shared `goal_packet/interoperability/swissknife/06921590135c`
+packet covering VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704,
+VAIOS-G705, and VAIOS-G706. The source objective gap is
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md`;
+the canonical repair record is
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md`; and
+this worktree's attempt-specific repair is
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md`.
+
+The VAI-661 proof stack is `tests/integration/test_swissknife_mobile_interop.py`,
+`docs/integration/swissknife-mobile.md`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`,
+`mobile/src/orb/metaGlassesMobileOrbBridge.js`,
+`swissknife/contracts/control_surface_contract.schema.json`, and
+`swissknife/contracts/interaction_envelope.schema.json`. The mobile descriptor
+exports `SWISSKNIFE_MOBILE_INTEROP_INTERFACE` and
+`SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR` with VAI-661 validation refs. The DAT
+display widget action contract maps SwissKnife actions to mobile ORB operations
+and Meta Wearables DAT methods, while the SwissKnife schemas preserve the
+scanner-visible `agent_identity`, `allowed_surfaces`, and `arguments_hash`
+policy evidence terms.
+
 MGW-583 repairs the MGW-569 objective validation gap for VAIOS-G700 and the
 shared `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
