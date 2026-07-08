@@ -1629,6 +1629,79 @@ def test_vai_542_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     assert "VAI-542" in swissknife_consumer_source
 
 
+def test_mgw_591_dashboard_launch_gate_keeps_vaios_g723_aligned():
+    meta_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "meta_glasses_display_widgets"
+        / "discovery"
+        / "2026-07-08-mgw-591-launch-playwright-validation-gate.md"
+    )
+    hallucinate_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-07-08-mgw-591-mcp-dashboard-launch-gate.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "mgw-591-mcp-dashboard-launch-gate.json"
+    )
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    meta_receipt = meta_receipt_path.read_text(encoding="utf-8")
+    hallucinate_receipt = hallucinate_receipt_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "MGW-591"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["launch_gate_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-591-launch-playwright-validation-gate.md"
+    )
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-591-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-591-mcp-dashboard-launch-gate.json"
+    assert fixture["child_goals"] == [
+        "VAIOS-G723-C1 Catalog normalization",
+        "VAIOS-G723-C2 Dashboard UI wiring",
+        "VAIOS-G723-C3 Mediated tool-call receipts",
+        "VAIOS-G723-C4 Swissknife consumers",
+        "VAIOS-G723-C5 Playwright coverage",
+        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
+    ]
+    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+
+    for term in fixture["required_evidence"]:
+        assert term in meta_receipt
+        assert term in hallucinate_receipt
+        assert term in heap_source
+        assert term in readiness_source
+        assert term in playwright_source
+
+    assert "MGW-591 proof" in heap_source
+    assert fixture["launch_gate_receipt"] in heap_source
+    assert fixture["hallucinate_backlog_receipt"] in heap_source
+    assert fixture["receipt_fixture"] in heap_source
+    assert "MGW-591" in readiness_source
+    assert fixture["receipt_fixture"] in swissknife_consumer_source
+
+
 def test_hao_727_dashboard_launch_gate_keeps_vaios_g723_aligned():
     source = HAO_727_LAUNCH_GATE_PATH.read_text(encoding="utf-8")
     fixture = json.loads(HAO_727_LAUNCH_GATE_FIXTURE_PATH.read_text(encoding="utf-8"))

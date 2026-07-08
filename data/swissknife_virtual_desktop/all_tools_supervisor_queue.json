@@ -1,0 +1,499 @@
+{
+  "schema": "swissknife.all_tools_supervisor_queue.v1",
+  "generated_at": "2026-07-08T00:00:00Z",
+  "supervisor": {
+    "id": "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools",
+    "task_id_range": [
+      "SVD-027",
+      "SVD-050"
+    ],
+    "taskboard": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+  },
+  "summary": {
+    "task_count": 24,
+    "completed_task_ids": [
+      "SVD-027",
+      "SVD-028",
+      "SVD-029",
+      "SVD-030",
+      "SVD-031",
+      "SVD-032",
+      "SVD-033",
+      "SVD-034",
+      "SVD-035",
+      "SVD-036",
+      "SVD-037",
+      "SVD-038",
+      "SVD-040",
+      "SVD-041",
+      "SVD-042",
+      "SVD-043",
+      "SVD-048",
+      "SVD-049"
+    ],
+    "ready_task_ids": [
+      "SVD-044"
+    ],
+    "waiting_task_ids": [
+      "SVD-045",
+      "SVD-047",
+      "SVD-050"
+    ],
+    "blocked_task_ids": [
+      "SVD-039",
+      "SVD-046"
+    ],
+    "recommended_task_id": "SVD-044"
+  },
+  "resume_contract": {
+    "evidence_churn_rule": "generated evidence artifacts under swissknife/test-results/virtual-desktop-ipfs-mcp-orb may be refreshed by supervisors without changing source task intent",
+    "accelerate_boundary_rule": "downstream release gates remain owned by the Swissknife all-tools supervisor and must not rewrite external/ipfs_accelerate runtime code from this queue artifact"
+  },
+  "generated_evidence_globs": [
+    "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.json"
+  ],
+  "dependency_graph": {
+    "SVD-027": [],
+    "SVD-028": [],
+    "SVD-029": [],
+    "SVD-030": [],
+    "SVD-031": [],
+    "SVD-032": [],
+    "SVD-033": [
+      "SVD-034"
+    ],
+    "SVD-034": [],
+    "SVD-035": [],
+    "SVD-036": [],
+    "SVD-037": [
+      "SVD-038"
+    ],
+    "SVD-038": [],
+    "SVD-039": [],
+    "SVD-040": [],
+    "SVD-041": [],
+    "SVD-042": [
+      "SVD-044"
+    ],
+    "SVD-043": [],
+    "SVD-044": [],
+    "SVD-045": [],
+    "SVD-046": [
+      "SVD-047"
+    ],
+    "SVD-047": [],
+    "SVD-048": [
+      "SVD-049"
+    ],
+    "SVD-049": [
+      "SVD-050"
+    ],
+    "SVD-050": []
+  },
+  "tasks": {
+    "SVD-027": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-027-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-027-receipt.json"
+      ]
+    },
+    "SVD-028": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-028-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-028-receipt.json"
+      ]
+    },
+    "SVD-029": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-029-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-029-receipt.json"
+      ]
+    },
+    "SVD-030": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-030-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-030-receipt.json"
+      ]
+    },
+    "SVD-031": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-031-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-031-receipt.json"
+      ]
+    },
+    "SVD-032": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-032-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-032-receipt.json"
+      ]
+    },
+    "SVD-033": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-033-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-033-receipt.json"
+      ]
+    },
+    "SVD-034": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-034-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-034-receipt.json"
+      ]
+    },
+    "SVD-035": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-035-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-035-receipt.json"
+      ]
+    },
+    "SVD-036": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-036-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-036-receipt.json"
+      ]
+    },
+    "SVD-037": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-037-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-037-receipt.json"
+      ]
+    },
+    "SVD-038": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-038-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-038-receipt.json"
+      ]
+    },
+    "SVD-039": {
+      "status": "blocked",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-039-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-039-receipt.json"
+      ]
+    },
+    "SVD-040": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-040-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-040-receipt.json"
+      ]
+    },
+    "SVD-041": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-041-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-041-receipt.json"
+      ]
+    },
+    "SVD-042": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-042-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-042-receipt.json"
+      ]
+    },
+    "SVD-043": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-043-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-043-receipt.json"
+      ]
+    },
+    "SVD-044": {
+      "status": "ready",
+      "depends_on": [
+        "SVD-042"
+      ],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-044-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": []
+    },
+    "SVD-045": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-044"
+      ],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-045-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": []
+    },
+    "SVD-046": {
+      "status": "blocked",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-046-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-046-receipt.json"
+      ]
+    },
+    "SVD-047": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-046"
+      ],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-047-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": []
+    },
+    "SVD-048": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-048-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-048-receipt.json"
+      ]
+    },
+    "SVD-049": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-049-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-049-receipt.json"
+      ]
+    },
+    "SVD-050": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-049"
+      ],
+      "outputs": [
+        "swissknife",
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-050-receipt.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:mcp",
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": []
+    }
+  }
+}
