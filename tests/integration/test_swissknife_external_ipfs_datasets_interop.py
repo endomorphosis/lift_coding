@@ -336,6 +336,13 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
 def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_datasets() -> None:
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+    mediation_schema = read_json("swissknife/contracts/mediation_receipt.schema.json")
+
+    for schema in (control_schema, envelope_schema, mediation_schema):
+        assert "MGW-571 objective validation repair" in schema["$comment"]
+        assert "interface contract swissknife external/ipfs_datasets" in schema["$comment"]
+        assert "goal_packet/interoperability/swissknife/06921590135c" in schema["$comment"]
+        assert "tests/integration/test_swissknife_external_ipfs_datasets_interop.py" in schema["$comment"]
 
     Draft202012Validator(control_schema).validate(
         swissknife_ipfs_datasets_control_surface_payload()
@@ -350,6 +357,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     discovery = read_text(
         "data/meta_glasses_display_widgets/discovery/"
         "2026-07-08-mgw-571-objective-validation-repair.md"
+    )
+    merge_resolution = read_text(
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-586-mgw-571-merge-unblock-resolution.md"
     )
     gap = read_text(
         "data/meta_glasses_display_widgets/discovery/"
@@ -368,6 +379,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "src/handsfree/swissknife_ipfs_datasets_interop.py",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
+        "swissknife/contracts/mediation_receipt.schema.json",
         "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json",
         (
             "external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/"
@@ -376,10 +388,14 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py",
         "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py",
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, merge_resolution, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in discovery
+        assert goal_id in merge_resolution
         assert goal_id in heap
     assert "VAIOS-G702" in gap
+    assert "MGW-586" in merge_resolution
+    assert "main_checkout_dirty_conflict" in merge_resolution
+    assert "7ae0e4f18a7b13953e80a0bb3ac9a42d299d12fa" in merge_resolution
