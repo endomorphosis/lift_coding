@@ -9185,8 +9185,8 @@ cadence remains parseable and resumable.
 
 ## VAI-671 Close objective gap: Interoperate hallucinate_app with mobile
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: VAI-673 supplied the VAIOS-G707 objective validation repair and resolved the retry-budget blocker with integration, docs, discovery, heap, Hallucinate App/mobile handoff, and DuckDB schema evidence.
 - Priority: P1
 - Track: interoperability
 - Depends on: 
@@ -9255,11 +9255,46 @@ cadence remains parseable and resumable.
 
 ## VAI-673 Resolve validation retry-budget failure for VAI-671
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: repaired the repeated VAI-671 validation failure by adding the Hallucinate App/mobile interop contract, runtime handoff, mobile dispatch, persistence schema, documentation, discovery evidence, and integration validation coverage.
 - Priority: P1
 - Track: ops
 - Depends on: 
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
 - Validation: python -m pytest tests/integration -q
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-671. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-673-vai-671-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-671 from strategy blocked_tasks.
+
+## VAI-674 Close objective gap: Interoperate hallucinate_app with mobile
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: interoperability
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
+- Validation: python -m pytest tests/integration -q
+- Bundle: objective/interoperability/hallucinate_app-mobile
+- Bundle shard: data/virtual_ai_os/objective_bundles/objective-interoperability-hallucinate_app-mobile.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/interoperability/hallucinate_app-mobile
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Goal id: VAIOS-G707
+- Missing evidence: objective validation repair
+- Embedding query: hallucinate_app mobile interoperability integration test interface descriptor __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 both boto3 bs4
+- AST query: hallucinate_app, mobile, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, both, boto3, bs4
+- Surplus group: objective/VAIOS-G707
+- Merge key: dce12a84320c8baf
+- Merge family: objective/VAIOS-G707
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: objective_validation_repair
+- Goal packet: 
+- Goal packet role: 
+- Goal packet goals: 
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: c28bf5e5280df451
+- Acceptance: Objective scan filed this gap for VAIOS-G707. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (objective validation repair), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
