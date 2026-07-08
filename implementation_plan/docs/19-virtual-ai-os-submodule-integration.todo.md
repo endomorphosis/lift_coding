@@ -9252,3 +9252,14 @@ cadence remains parseable and resumable.
 - Candidate kind: validation_gate
 - Todo vector key: abd3dcae203fdb6b
 - Acceptance: Objective scan filed this gap for VAIOS-G719. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (objective validation repair), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## VAI-673 Resolve validation retry-budget failure for VAI-671
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
+- Validation: python -m pytest tests/integration -q
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-671. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-673-vai-671-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-671 from strategy blocked_tasks.
