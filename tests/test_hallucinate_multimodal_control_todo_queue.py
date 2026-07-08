@@ -86,6 +86,9 @@ HAO_721_DAEMON_LAUNCH_GATE_PATH = (
 HAO_743_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-07-08-hao-743-daemon-launch-health-gate.md"
 )
+HAO_755_DAEMON_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-07-08-hao-755-daemon-launch-health-gate.md"
+)
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -131,6 +134,14 @@ HAO_743_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     / "e2e"
     / "fixtures"
     / "hao-743-daemon-launch-health-gate.json"
+)
+HAO_755_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-755-daemon-launch-health-gate.json"
 )
 MGW_551_DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
@@ -1608,6 +1619,14 @@ def test_hao_daemon_launch_gates_align_with_objective_heap():
             "2026-07-08-hao-743-objective-gap-b023c8de5b69.md",
             "2026-07-08-hao-743-daemon-launch-health-gate.md",
             "hao-743-daemon-launch-health-gate.json",
+        ),
+        (
+            "HAO-755",
+            HAO_755_DAEMON_LAUNCH_GATE_PATH,
+            HAO_755_DAEMON_LAUNCH_GATE_FIXTURE_PATH,
+            "2026-07-08-hao-755-objective-gap-b023c8de5b69.md",
+            "2026-07-08-hao-755-daemon-launch-health-gate.md",
+            "hao-755-daemon-launch-health-gate.json",
         ),
     ]
 
