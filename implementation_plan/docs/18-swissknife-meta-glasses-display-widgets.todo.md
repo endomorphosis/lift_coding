@@ -256,6 +256,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from data/hallucinate_multimodal_control/discovery/2026-05-25-hao-041-validation-unblock.md:24. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-05-25-mgw-021-codebase-scan-55c0165aa8e2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-022 Resolve code annotation in data/hallucinate_multimodal_control/discovery/2026-05-25-hao-044-hao-042-merge-unblock.md:25
 
 - Status: completed
@@ -468,6 +469,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-374-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-375 Resolve code annotation in implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267
 
 - Status: blocked
@@ -480,6 +482,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-375-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-376 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74
 
 - Status: blocked
@@ -492,6 +495,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-376-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-377 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192
 
 - Status: blocked
@@ -504,6 +508,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-377-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-378 Resolve code annotation in implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194
 
 - Status: blocked
@@ -516,6 +521,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.md:194. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-378-codebase-scan-4c9f09d4fb78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-379 Resolve code annotation in implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267
 
 - Status: blocked
@@ -528,6 +534,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/19-virtual-ai-os-submodule-integration.md:267. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-379-codebase-scan-7898b4efd7d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-380 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74
 
 - Status: blocked
@@ -540,6 +547,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:74. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-380-codebase-scan-a303db6c8c70.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-381 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192
 
 - Status: blocked
@@ -552,6 +560,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:192. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-381-codebase-scan-4c7fbc7a7cb1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-382 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:216
 
 - Status: blocked
@@ -564,6 +573,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:216. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-382-codebase-scan-210b6a0bd043.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-383 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:239
 
 - Status: blocked
@@ -576,6 +586,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:239. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-383-codebase-scan-4dc1f7f08722.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-384 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:262
 
 - Status: blocked
@@ -588,6 +599,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:262. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-384-codebase-scan-0b738229dfc8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-385 Resolve code annotation in implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:377
 
 - Status: blocked
@@ -600,6 +612,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:377. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-385-codebase-scan-e052213700f2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-386 Resolve merge retry-budget failure for MGW-363
 
 - Status: completed
@@ -636,6 +649,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md:859. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-388-codebase-scan-309a8676f15b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-389 Resolve code annotation in src/handsfree/agents/runner.py:113
 
 - Status: blocked
@@ -648,6 +662,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:113. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-389-codebase-scan-dc304b98262d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-390 Resolve code annotation in src/handsfree/agents/runner.py:122
 
 - Status: blocked
@@ -660,6 +675,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:122. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-390-codebase-scan-24a8dfd921a5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-391 Resolve code annotation in src/handsfree/agents/runner.py:147
 
 - Status: blocked
@@ -672,6 +688,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from src/handsfree/agents/runner.py:147. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-391-codebase-scan-d503a3e145f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-392 Resolve code annotation in tests/test_agent_runner.py:417
 
 - Status: blocked
@@ -684,6 +701,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:417. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-392-codebase-scan-d23bab9bfb8a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-393 Resolve code annotation in tests/test_agent_runner.py:438
 
 - Status: completed
@@ -707,6 +725,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:101. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-394-codebase-scan-2f375dbd1119.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-395 Resolve code annotation in tests/test_implementation_daemon_merge_lock_retry.py:114
 
 - Status: blocked
@@ -719,6 +738,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:114. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-395-codebase-scan-04bfc0065834.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-396 Resolve code annotation in tests/test_agent_runner.py:441
 
 - Status: blocked
@@ -731,6 +751,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:441. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-396-codebase-scan-fbeb6b584d7c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-397 Resolve code annotation in tests/test_implementation_daemon_merge_lock_retry.py:121
 
 - Status: blocked
@@ -743,6 +764,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_implementation_daemon_merge_lock_retry.py:121. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-397-codebase-scan-76cb4c034940.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-398 Resolve code annotation in tests/test_meta_glasses_display_todo_queue.py:106
 
 - Status: blocked
@@ -755,6 +777,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_meta_glasses_display_todo_queue.py:106. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-398-codebase-scan-66cf63fffa8e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-399 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:49
 
 - Status: blocked
@@ -767,6 +790,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:49. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-399-codebase-scan-7359bf5ddb37.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-400 Resolve code annotation in tests/test_agent_runner.py:435
 
 - Status: blocked
@@ -779,6 +803,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_agent_runner.py:435. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-400-codebase-scan-4e05798c3058.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-401 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:54
 
 - Status: completed
@@ -802,6 +827,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:63. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-402-codebase-scan-5a3102335d9c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-403 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:110
 
 - Status: blocked
@@ -814,6 +840,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:110. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-403-codebase-scan-f5182b96f0db.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-404 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:173
 
 - Status: blocked
@@ -826,6 +853,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:173. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-404-codebase-scan-f2142bd7e8ca.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-405 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:237
 
 - Status: blocked
@@ -838,6 +866,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:237. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-405-codebase-scan-09159eaa4473.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-406 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:288
 
 - Status: blocked
@@ -850,6 +879,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:288. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-406-codebase-scan-5f281694481a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-407 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:292
 
 - Status: blocked
@@ -862,6 +892,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:292. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-407-codebase-scan-465e51445a76.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-408 Resolve code annotation in tests/test_supervisor_objective_task_janitor.py:376
 
 - Status: blocked
@@ -874,6 +905,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from tests/test_supervisor_objective_task_janitor.py:376. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-408-codebase-scan-5a569d75b7f7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-409 Resolve code annotation in tracking/PR-079-agent-runner-minimal.md:56
 
 - Status: completed
@@ -897,6 +929,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/DESKTOP_VERIFICATION_REPORT.md:122. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-23-mgw-410-codebase-scan-0dbc6e6537b4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-411 Resolve code annotation in swissknife/DESKTOP_VERIFICATION_REPORT.md:174
 
 - Status: blocked
@@ -1067,6 +1100,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:573. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-425-codebase-scan-2d67c01d3acc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-426 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574
 
 - Status: blocked
@@ -1079,6 +1113,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:574. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-426-codebase-scan-e90a6112f5fa.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-427 Resolve code annotation in swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575
 
 - Status: blocked
@@ -1091,6 +1126,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/src/p2p/network-manager.ts:575. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-427-codebase-scan-849612e9edb6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-428 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts:1
 
 - Status: blocked
@@ -1103,6 +1139,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_fault_tolerant_cross_browser_model_sharding.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-428-codebase-scan-d5e80576db69.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-429 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts:1
 
 - Status: blocked
@@ -1115,6 +1152,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_firefox_webgpu_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-429-codebase-scan-defbcedebe03.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-430 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1
 
 - Status: blocked
@@ -1127,6 +1165,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-430-codebase-scan-ee57d2a45b3b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-431 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1
 
 - Status: blocked
@@ -1139,6 +1178,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_accelerate_with_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-431-codebase-scan-dc52194613c1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-432 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1
 
 - Status: blocked
@@ -1151,6 +1191,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_ipfs_with_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-432-codebase-scan-4f33a0ad65fb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-433 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1
 
 - Status: blocked
@@ -1163,6 +1204,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-433-codebase-scan-66825794ba9f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-434 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts:1
 
 - Status: blocked
@@ -1175,6 +1217,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-434-codebase-scan-c72286879ecc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-435 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_fallback.ts:1
 
 - Status: completed
@@ -1198,6 +1241,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-436-codebase-scan-025dd1a14a04.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-437 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_inference.ts:1
 
 - Status: blocked
@@ -1210,6 +1254,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-437-codebase-scan-f47b62254b61.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-438 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_llm_inference.ts:1
 
 - Status: blocked
@@ -1222,6 +1267,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_llm_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-438-codebase-scan-f38469457e95.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-439 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts:1
 
 - Status: blocked
@@ -1234,6 +1280,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-439-codebase-scan-1e2d44aa227a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-440 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_browsers_comparison.ts:1
 
 - Status: blocked
@@ -1246,6 +1293,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_browsers_comparison.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-440-codebase-scan-1d39953b62c2.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-441 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_shaders.ts:1
 
 - Status: blocked
@@ -1258,6 +1306,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-441-codebase-scan-f7f312005529.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-442 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts:1
 
 - Status: blocked
@@ -1270,6 +1319,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-442-codebase-scan-d636463c9d64.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-443 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts:1
 
 - Status: blocked
@@ -1282,6 +1332,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_kv_cache_optimization.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-443-codebase-scan-da8f80493ff9.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-444 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts:1
 
 - Status: blocked
@@ -1294,6 +1345,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_low_latency.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-444-codebase-scan-aba0d5c2673b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-445 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts:1
 
 - Status: blocked
@@ -1306,6 +1358,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-445-codebase-scan-b71e1b7130ac.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-446 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts:1
 
 - Status: blocked
@@ -1318,6 +1371,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_transformer_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-446-codebase-scan-ff96ed86fa8c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-447 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts:1
 
 - Status: blocked
@@ -1330,6 +1384,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_video_compute_shaders.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-447-codebase-scan-4f381d39a54c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-448 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts:1
 
 - Status: blocked
@@ -1342,6 +1397,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-448-codebase-scan-fd706f9227d1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-449 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1
 
 - Status: blocked
@@ -1354,6 +1410,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_cross_browser.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-449-codebase-scan-067c64675c26.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-450 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1
 
 - Status: blocked
@@ -1366,6 +1423,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_implementation.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-450-codebase-scan-69a234bf9d55.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-451 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1
 
 - Status: blocked
@@ -1378,6 +1436,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-451-codebase-scan-07a35e081f65.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-452 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts:1
 
 - Status: blocked
@@ -1390,6 +1449,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_integration.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-452-codebase-scan-2907c83d600b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-453 Resolve code annotation in swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts:1
 
 - Status: blocked
@@ -1402,6 +1462,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/browser/test_webnn_webgpu_simplified.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-453-codebase-scan-8162a1533a49.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-454 Resolve code annotation in swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts:1
 
 - Status: blocked
@@ -1414,6 +1475,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_benchmark.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-454-codebase-scan-f0debd6b16cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-455 Resolve code annotation in swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1
 
 - Status: blocked
@@ -1426,6 +1488,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_predictive_performance_system.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-455-codebase-scan-34218144f2c4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-456 Resolve code annotation in swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1
 
 - Status: blocked
@@ -1438,6 +1501,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/performance/test_time_series_performance.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-456-codebase-scan-189bc4a84a14.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-457 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1
 
 - Status: blocked
@@ -1450,6 +1514,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_active_learning.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-457-codebase-scan-103085e1d7ec.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-458 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1
 
 - Status: blocked
@@ -1462,6 +1527,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_all_models.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-458-codebase-scan-5bdd54dddcc6.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-459 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts:1
 
 - Status: blocked
@@ -1474,6 +1540,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_automated_hardware_compatibility.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-459-codebase-scan-8c17c2df11b1.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-460 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1
 
 - Status: blocked
@@ -1486,6 +1553,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-460-codebase-scan-593be57237f0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-461 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts:1
 
 - Status: blocked
@@ -1498,6 +1566,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_generator_minimal.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-461-codebase-scan-7ff199b75d27.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-462 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts:1
 
 - Status: blocked
@@ -1510,6 +1579,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_batch_inference.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-462-codebase-scan-6ff7e98d2c3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-463 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1
 
 - Status: blocked
@@ -1522,6 +1592,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-463-codebase-scan-2fc84a992650.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-464 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1
 
 - Status: blocked
@@ -1534,6 +1605,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_comprehensive_hardware_coverage.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-464-codebase-scan-87a1ababe545.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-465 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1
 
 - Status: blocked
@@ -1546,6 +1618,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cross_platform_4bit.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-465-codebase-scan-5f7907e8e561.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-466 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1
 
 - Status: blocked
@@ -1558,6 +1631,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_cuda_debug.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-466-codebase-scan-ca6a1281e07b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-467 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts:1
 
 - Status: blocked
@@ -1570,6 +1644,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_default_embed.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-467-codebase-scan-bfe30187a7bb.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-468 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1
 
 - Status: blocked
@@ -1582,6 +1657,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_enhanced_openvino.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-468-codebase-scan-c2b12d295679.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-469 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1
 
 - Status: blocked
@@ -1594,6 +1670,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_generator.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-469-codebase-scan-ec18be8c273c.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-470 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts:1
 
 - Status: blocked
@@ -1606,6 +1683,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hardware_selection.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-470-codebase-scan-44d16881da6f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-471 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts:1
 
 - Status: blocked
@@ -1618,6 +1696,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___help.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-471-codebase-scan-1067af266d5f.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-472 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts:1
 
 - Status: blocked
@@ -1630,6 +1709,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf___model.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-472-codebase-scan-0d21592b7e59.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-473 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_align.ts:1
 
 - Status: completed
@@ -1653,6 +1733,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_autoformer.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-474-codebase-scan-8017793e8291.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-475 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts:1
 
 - Status: blocked
@@ -1665,6 +1746,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_backslash.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-475-codebase-scan-2e5c7623ea98.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-476 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts:1
 
 - Status: blocked
@@ -1677,6 +1759,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bark.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-476-codebase-scan-da19273702c3.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-477 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_big_bird.ts:1
 
 - Status: completed
@@ -1700,6 +1783,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bigbird_pegasus.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-478-codebase-scan-bb4ec37257b5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-479 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1
 
 - Status: blocked
@@ -1712,6 +1796,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bit.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-479-codebase-scan-2104a536dfcc.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-480 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1
 
 - Status: blocked
@@ -1724,6 +1809,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-480-codebase-scan-f9289a36b91d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-481 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts:1
 
 - Status: blocked
@@ -1736,6 +1822,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-481-codebase-scan-d4ed79ea4296.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-482 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts:1
 
 - Status: blocked
@@ -1748,6 +1835,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_blip2.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-482-codebase-scan-b62d131629ca.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-483 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_blip_2.ts:1
 
 - Status: completed
@@ -1771,6 +1859,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_bridgetower.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-484-codebase-scan-e6f79f4bc645.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-485 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_bros.ts:1
 
 - Status: completed
@@ -1794,6 +1883,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_canine.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-486-codebase-scan-4e01ce3fd165.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-487 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1
 
 - Status: blocked
@@ -1806,6 +1896,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_chameleon.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-487-codebase-scan-8a46ed903a02.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-488 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1
 
 - Status: blocked
@@ -1818,6 +1909,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_claude3_haiku.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-488-codebase-scan-ef24d56686d4.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-489 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1
 
 - Status: blocked
@@ -1830,6 +1922,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_clvp.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-489-codebase-scan-cbf59dd145d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-490 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1
 
 - Status: blocked
@@ -1842,6 +1935,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cm3.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-490-codebase-scan-95c78eeaccd0.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-491 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_codegen.ts:1
 
 - Status: blocked
@@ -1854,6 +1948,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_codegen.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-491-codebase-scan-95748755efba.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-492 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts:1
 
 - Status: blocked
@@ -1866,6 +1961,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-492-codebase-scan-4f7f9fbe12a8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-493 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1
 
 - Status: blocked
@@ -1878,6 +1974,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cohere.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-493-codebase-scan-a9cbc076e898.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-494 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1
 
 - Status: blocked
@@ -1890,6 +1987,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_command_r.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-494-codebase-scan-36a5165c924e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-495 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts:1
 
 - Status: blocked
@@ -1902,6 +2000,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_convnext.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-495-codebase-scan-1d1434428e78.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-496 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_cpmant.ts:1
 
 - Status: blocked
@@ -1914,6 +2013,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cpmant.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-496-codebase-scan-2adda538b8c5.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-497 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_ctrl.ts:1
 
 - Status: completed
@@ -1937,6 +2037,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_cvt.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-498-codebase-scan-584127fea95e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-499 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dac.ts:1
 
 - Status: blocked
@@ -1949,6 +2050,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dac.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-499-codebase-scan-77865dbd5032.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-500 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts:1
 
 - Status: blocked
@@ -1961,6 +2063,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_data2vec_text.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-500-codebase-scan-b9d105999d3a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-501 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx.ts:1
 
 - Status: completed
@@ -1984,6 +2087,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dbrx_instruct.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-502-codebase-scan-56bd19bf79e7.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-503 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts:1
 
 - Status: blocked
@@ -1996,6 +2100,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_decision_transformer.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-503-codebase-scan-295167feddbd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-504 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1
 
 - Status: blocked
@@ -2008,6 +2113,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-504-codebase-scan-7e78f5b85c0d.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-505 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1
 
 - Status: blocked
@@ -2020,6 +2126,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_coder.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-505-codebase-scan-4f239a29b61b.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-506 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts:1
 
 - Status: blocked
@@ -2032,6 +2139,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-506-codebase-scan-ca5abd94b6cd.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-507 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1.ts:1
 
 - Status: blocked
@@ -2044,6 +2152,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-507-codebase-scan-7aec3a87b450.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-508 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts:1
 
 - Status: blocked
@@ -2056,6 +2165,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_deepseek_r1_distil.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-508-codebase-scan-8b3d8ba89074.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-509 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts:1
 
 - Status: blocked
@@ -2068,6 +2178,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dinat.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-509-codebase-scan-9a74b88e06cf.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-510 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts:1
 
 - Status: blocked
@@ -2080,6 +2191,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dino.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-510-codebase-scan-669a61083619.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-511 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dinov2.ts:1
 
 - Status: completed
@@ -2103,6 +2215,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-512-codebase-scan-e79c1d962235.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-513 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts:1
 
 - Status: blocked
@@ -2115,6 +2228,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-513-codebase-scan-529279e8394e.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-514 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1
 
 - Status: blocked
@@ -2127,6 +2241,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpr.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-514-codebase-scan-5481b197a30a.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-515 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts:1
 
 - Status: blocked
@@ -2139,6 +2254,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_dpt.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-515-codebase-scan-7e535b05d1d8.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-516 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts:1
 
 - Status: blocked
@@ -2151,6 +2267,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-516-codebase-scan-81177723e089.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-517 Resolve code annotation in swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts:1
 
 - Status: blocked
@@ -2163,6 +2280,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Acceptance: Codebase scan filed this finding from swissknife/ipfs_accelerate_js/test/unit/test_hf_efficientnet.ts:1. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-06-24-mgw-517-codebase-scan-7b300c0284ff.md, fix the bug or improvement, add or update focused validation when appropriate, and keep the supervisor-fed backlog parseable.
 
 - Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task; this keeps lanes focused on Swissknife, Hallucinate App, MCP++, Meta glasses, and Playwright launch readiness.
+
 ## MGW-518 Define Meta glasses multimodal IO transport contracts for Swissknife
 
 - Status: completed
@@ -3716,7 +3834,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 ## MGW-583 Resolve validation retry-budget failure for MGW-569
 
 - Status: completed
-- Completion: manual 2026-07-08: restored the missing tracked MCP++ `validators` Python package used by integration conformance tests, retagged Swissknife/mobile validation evidence from copied VAI-661 paths to MGW-569/MGW-583, recorded the repair discovery packet, removed MGW-569 from strategy blocked_tasks, and verified `python -m pytest tests/integration -q` passes.
+- Completion: manual 2026-07-08: restored the missing external/Mcp-Plus-Plus Python validator package used by integration conformance tests, retagged Swissknife/mobile validation evidence from copied VAI-661 paths to MGW-569/MGW-583, recorded the repair discovery packet, removed MGW-569 from strategy blocked_tasks, and verified `python -m pytest tests/integration -q` passes.
 - Priority: P1
 - Track: ops
 - Depends on: 
