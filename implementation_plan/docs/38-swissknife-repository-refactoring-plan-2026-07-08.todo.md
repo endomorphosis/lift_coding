@@ -730,7 +730,7 @@ state observation.
 
 ## SWR-038 Enforce browser dependency allowlist and Node builtin denylist
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/dependencies
 - Fingerprint: b029fded8f0e250a4f49337b8f4954c86bb52e66
