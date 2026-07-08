@@ -267,6 +267,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     ).read_text(encoding="utf-8")
+    mgw_attempt_two = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-2-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
@@ -287,10 +291,23 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, attempt_four, attempt_five, attempt_six, attempt_seven, heap):
+    for content in (
+        docs,
+        discovery,
+        attempt_four,
+        attempt_five,
+        attempt_six,
+        attempt_seven,
+        mgw_attempt_two,
+        heap,
+    ):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
 
+    mgw_attempt_two_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-attempt-2-validation-confirmation.md"
+    )
     attempt_six_record = (
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-6-validation-confirmation.md"
@@ -299,6 +316,8 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     )
+    assert mgw_attempt_two_record in docs
+    assert mgw_attempt_two_record in heap
     assert attempt_six_record in docs
     assert attempt_six_record in heap
     assert attempt_seven_record in docs
