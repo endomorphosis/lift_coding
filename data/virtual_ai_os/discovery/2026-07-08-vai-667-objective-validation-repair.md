@@ -32,7 +32,10 @@ VAIOS-G706 objective gap for the shared
   Display descriptor through `registerSwissKnifeMetaWearablesDATIOSDisplayInterop()` /
   `createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATIOSInterop()`, and
   provides `buildSwissKnifeMetaWearablesDATIOSControlSurfaceContract()` /
-  `buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope()` payload builders.
+  `buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope()` payload builders,
+  plus `buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt()`
+  with `task_id: VAI-667`, `daemon_id: meta-wearables-dat-ios`, and
+  `server_package: meta_wearables_dat_ios`.
 - `src/handsfree/swissknife_meta_wearables_dat_ios_interop.py` statically
   discovers `external/meta-wearables-dat-ios/.cursor/rules/display-access.mdc`,
   `external/meta-wearables-dat-ios/.cursor/rules/session-lifecycle.mdc`,
@@ -49,7 +52,9 @@ VAIOS-G706 objective gap for the shared
   `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`, and
   `swissknife/contracts/mediation_receipt.schema.json` are the shared schemas
   advertised by the descriptor. The representative payloads preserve
-  `agent_identity`, `allowed_surfaces`, and `arguments_hash` norm refs.
+  `agent_identity`, `allowed_surfaces`, and `arguments_hash` norm refs, and
+  the MCP++ compatibility receipt schema accepts the VAI-667 iOS receipt while
+  preserving sibling packet task ids.
 - `tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py`
   verifies descriptor discovery, deterministic handoff behavior, SwissKnife
   descriptor exports, schema validation, and objective heap/discovery
