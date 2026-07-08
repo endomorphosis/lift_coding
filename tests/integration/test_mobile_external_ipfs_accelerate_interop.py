@@ -1,4 +1,4 @@
-"""Mobile / external/ipfs_accelerate interoperability regression tests for VAI-672."""
+"""Mobile / external/ipfs_accelerate interoperability regression tests for VAI-686."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from handsfree.mobile_ipfs_accelerate_interop import (  # noqa: E402
 )
 
 GOAL_ID = "VAIOS-G719"
+VALIDATION_TASK_IDS = {"VAI-672", "VAI-686"}
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 
 MOBILE_ORB_OPERATIONS = {
@@ -192,6 +193,7 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
         set(descriptor["runtime_handoff"]["time_series_tables"])
     )
     assert descriptor["validation"]["task_id"] == "VAI-672"
+    assert "VAI-686" in descriptor["validation"]["validation_gate_tasks"]
     assert descriptor["validation"]["goal_id"] == GOAL_ID
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
@@ -216,6 +218,8 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract mobile external/ipfs_accelerate"
     assert contract["goal_id"] == GOAL_ID
+    assert "VAI-672" in contract["objective_validation_repair"]
+    assert "VAI-686" in contract["objective_validation_repair"]
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -271,12 +275,15 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md"
     ).read_text(encoding="utf-8")
+    vai686_repair = (
+        REPO_ROOT
+        / "data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
 
     required_terms = [
-        "VAI-672",
         GOAL_ID,
         "objective/interoperability/mobile-external_ipfs_accelerate",
         "objective validation repair",
@@ -301,6 +308,13 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         attempt_eight,
         heap,
     ):
+        assert "VAI-672" in content, "missing 'VAI-672'"
+        for term in required_terms:
+            assert term in content, f"missing {term!r}"
+
+    for content in (docs, vai686_repair, heap):
+        for task_id in sorted(VALIDATION_TASK_IDS):
+            assert task_id in content, f"missing {task_id!r}"
         for term in required_terms:
             assert term in content, f"missing {term!r}"
 
@@ -316,9 +330,15 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-8-validation-confirmation.md"
     )
+    vai686_repair_record = (
+        "data/virtual_ai_os/discovery/"
+        "2026-07-08-vai-686-objective-validation-repair.md"
+    )
     assert attempt_six_record in docs
     assert attempt_six_record in heap
     assert attempt_seven_record in docs
     assert attempt_seven_record in heap
     assert attempt_eight_record in docs
     assert attempt_eight_record in heap
+    assert vai686_repair_record in docs
+    assert vai686_repair_record in heap

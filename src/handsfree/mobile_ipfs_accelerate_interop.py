@@ -3,7 +3,8 @@
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap that requires
 `mobile` to interoperate with `external/ipfs_accelerate` through importable
 contracts, interface descriptors, runtime handoff behavior, and integration
-tests.
+tests. VAI-686 revalidates that proof stack for the current supervisor-fed
+objective validation repair gate.
 
 `external/ipfs_accelerate` cannot be imported directly by the mobile React
 Native client, so this module normalizes its DuckDB benchmark/time-series

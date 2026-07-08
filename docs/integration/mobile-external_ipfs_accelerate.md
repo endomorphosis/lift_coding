@@ -1,7 +1,9 @@
 # Mobile / external/ipfs_accelerate Interop
 
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
-`objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+`objective/interoperability/mobile-external_ipfs_accelerate` bundle. VAI-686
+revalidates the same VAIOS-G719 proof stack for the supervisor-fed objective
+validation repair gate.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -28,7 +30,8 @@ The repaired `interface contract mobile external/ipfs_accelerate` path is:
   `IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE` and
   `IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR`, binding the mobile ORB bridge
   and benchmark widget operations to the `external/ipfs_accelerate` DuckDB
-  schema refs.
+  schema refs. The descriptor keeps VAI-672 as the baseline repair and names
+  VAI-686 in `validation_gate_tasks` for the current validation gate.
 - `mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js` exports
   `IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT`, mapping benchmark
   widget action ids to mobile ORB operations, Meta Wearables DAT-style
@@ -70,6 +73,8 @@ and the attempt-seven confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md`
 and the attempt-eight confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md`
+and the VAI-686 validation repair record
+`data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md`
 and prior attempt-five confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
 and the objective heap

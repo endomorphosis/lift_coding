@@ -215,11 +215,14 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
   validation: {
     task_id: 'VAI-672',
+    validation_gate_tasks: ['VAI-672', 'VAI-686'],
     goal_id: 'VAIOS-G719',
     objective_gap_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
     validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
+    current_validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md',
     evidence: 'objective validation repair',
   },
 };
