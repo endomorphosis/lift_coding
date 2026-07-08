@@ -315,7 +315,7 @@ Acceptance target:
 
 ## SWR-009 Wire CI and release readiness gates
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/ci
@@ -323,8 +323,8 @@ Acceptance target:
 - Dedupe key: swissknife_refactor:ci_release_gates
 - Depends on: SWR-001, SWR-003, SWR-004, SWR-008
 - Outputs: swissknife/package.json, swissknife/.github, swissknife/scripts, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
-- Validation: cd swissknife && npm run services:audit && npm run typecheck && npm run test:fast && npm run test:browser-compat && npm run build:web
-- Acceptance: Release candidates cannot pass with service-boundary drift, browser-host leakage, typecheck failure, missing browser compatibility tests, or stale MCP/glasses evidence.
+- Validation: cd swissknife && npm run services:audit && npm run typecheck && npm run test:fast && npm run test:browser-compat && npm run build:web (all pass; `npm run release:gate` orchestrates the same gates plus MCP/glasses evidence and writes docs/release-readiness-report.{json,md})
+- Acceptance: Release candidates cannot pass with service-boundary drift, browser-host leakage, typecheck failure, missing browser compatibility tests, or stale MCP/glasses evidence. Added `services:audit` (fails on unknown/forbidden/legacy-shim/legacy-root-import drift), fixed a `tsconfig.host.json` TS6053 path regression left over from the SWR-006 service moves so `npm run typecheck` is green again, added `evidence:mcp-glasses`/`evidence:dashboard-consumer` gates that re-validate glasses manifest and MCP dashboard capability coverage against live source instead of trusting stale fixtures, added `scripts/release-readiness-gate.mjs` (`npm run release:gate`) as a single orchestrator used by `preversion`/`prepublishOnly`/`release:prepare`, and added `.github/workflows/release-readiness-gates.yml` wiring all gates as required CI jobs plus an aggregate blocking job.
 
 ## SWR-010 Keep refactor documentation and evidence current
 
