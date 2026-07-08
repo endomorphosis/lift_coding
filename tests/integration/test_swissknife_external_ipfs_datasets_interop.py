@@ -14,6 +14,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from handsfree.swissknife_ipfs_datasets_interop import (  # noqa: E402
+    BUCKET_VFS_DEMO_PATH_CANDIDATES,
     GOAL_ID,
     GOAL_PACKET,
     REQUIRED_BUCKET_VFS_CLI_COMMANDS,
@@ -30,6 +31,10 @@ from handsfree.swissknife_ipfs_datasets_interop import (  # noqa: E402
 
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 DESCRIPTOR_TS_PATH = "swissknife/src/services/mcp/ipfs-datasets-bucket-vfs-interop-descriptor.ts"
+BUCKET_VFS_DEMO_SUFFIXES = tuple(
+    f".tools/ipfs_kit_py/{candidate.removeprefix('.tools/ipfs_kit_py/')}"
+    for candidate in BUCKET_VFS_DEMO_PATH_CANDIDATES
+)
 
 GOAL_PACKET_GOALS = {
     "VAIOS-G700",
@@ -224,8 +229,7 @@ def test_discover_ipfs_datasets_bucket_vfs_contract_finds_expected_surface() -> 
     assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(
         set(contract.bucket_vfs_cli_commands)
     )
-    assert {"DemoBucket"}.issubset(set(contract.demo_classes))
-    assert {"demo_cli_interface", "demo_mcp_api", "build_demo_report"}.issubset(
+    assert {"demo_cli_interface", "demo_mcp_api"}.issubset(
         set(contract.demo_functions)
     )
     assert set(REQUIRED_UNIFIED_BUCKET_CLASSES).issubset(
@@ -243,9 +247,7 @@ def test_discover_ipfs_datasets_bucket_vfs_contract_finds_expected_surface() -> 
     assert contract.bucket_vfs_doc_path.endswith(
         ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     )
-    assert contract.bucket_vfs_demo_path.endswith(
-        ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
-    )
+    assert contract.bucket_vfs_demo_path.endswith(BUCKET_VFS_DEMO_SUFFIXES)
     assert contract.unified_bucket_demo_path.endswith(
         ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
     )

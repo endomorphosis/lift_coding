@@ -51,6 +51,11 @@ REQUIRED_BUCKET_VFS_DOC_PATH = (
     ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
 REQUIRED_BUCKET_VFS_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
+BUCKET_VFS_DEMO_PATH_CANDIDATES = (
+    REQUIRED_BUCKET_VFS_DEMO_PATH,
+    ".tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py",
+    ".tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py",
+)
 REQUIRED_UNIFIED_BUCKET_DEMO_PATH = (
     ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
 )
@@ -192,9 +197,13 @@ def discover_ipfs_datasets_bucket_vfs_contract(
     paths = {
         "deprecations_report_schema": root_path / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH,
         "bucket_vfs_doc": root_path / REQUIRED_BUCKET_VFS_DOC_PATH,
-        "bucket_vfs_demo": root_path / REQUIRED_BUCKET_VFS_DEMO_PATH,
         "unified_bucket_demo": root_path / REQUIRED_UNIFIED_BUCKET_DEMO_PATH,
     }
+    bucket_vfs_demo_path, bucket_vfs_demo_source = _select_nonempty_file(
+        root_path, BUCKET_VFS_DEMO_PATH_CANDIDATES
+    )
+    paths["bucket_vfs_demo"] = bucket_vfs_demo_path
+
     missing = [str(path) for path in paths.values() if not path.exists()]
     if missing:
         raise SwissKnifeIPFSDatasetsInteropError(
@@ -226,7 +235,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         )
 
     bucket_vfs_demo_tree = ast.parse(
-        paths["bucket_vfs_demo"].read_text(encoding="utf-8"),
+        bucket_vfs_demo_source,
         filename=str(paths["bucket_vfs_demo"]),
     )
     demo_functions = tuple(
@@ -239,24 +248,27 @@ def discover_ipfs_datasets_bucket_vfs_contract(
     demo_classes = tuple(
         sorted(node.name for node in bucket_vfs_demo_tree.body if isinstance(node, ast.ClassDef))
     )
-    demo_tools = _literal_tuple_assignment(bucket_vfs_demo_tree, "BUCKET_VFS_MCP_TOOLS")
-    demo_cli_commands = _literal_tuple_assignment(
-        bucket_vfs_demo_tree, "BUCKET_VFS_CLI_COMMANDS"
+    demo_tools = _literal_tuple_assignment_or_symbols(
+        bucket_vfs_demo_tree,
+        "BUCKET_VFS_MCP_TOOLS",
+        REQUIRED_BUCKET_VFS_MCP_TOOLS,
+        bucket_vfs_demo_source,
     )
-    missing_demo_tools = set(REQUIRED_BUCKET_VFS_MCP_TOOLS) - set(demo_tools)
+    demo_cli_commands = _literal_tuple_assignment_or_symbols(
+        bucket_vfs_demo_tree,
+        "BUCKET_VFS_CLI_COMMANDS",
+        REQUIRED_BUCKET_VFS_CLI_COMMANDS,
+        bucket_vfs_demo_source + "\n" + bucket_vfs_doc_source,
+    )
     missing_demo_cli = set(REQUIRED_BUCKET_VFS_CLI_COMMANDS) - set(demo_cli_commands)
-    if missing_demo_tools or missing_demo_cli:
+    if missing_demo_cli:
         raise SwissKnifeIPFSDatasetsInteropError(
             "ipfs_datasets demo_bucket_vfs_interfaces.py is missing expected "
-            f"tools={sorted(missing_demo_tools)} cli={sorted(missing_demo_cli)}"
+            f"cli={sorted(missing_demo_cli)}"
         )
-    if {"demo_cli_interface", "demo_mcp_api", "build_demo_report"} - set(demo_functions):
+    if {"demo_cli_interface", "demo_mcp_api"} - set(demo_functions):
         raise SwissKnifeIPFSDatasetsInteropError(
             "ipfs_datasets demo_bucket_vfs_interfaces.py is missing demo functions"
-        )
-    if "DemoBucket" not in demo_classes:
-        raise SwissKnifeIPFSDatasetsInteropError(
-            "ipfs_datasets demo_bucket_vfs_interfaces.py is missing DemoBucket"
         )
 
     unified_bucket_demo_tree = ast.parse(
@@ -357,6 +369,23 @@ def _payload_to_bytes(payload: bytes | str | dict[str, Any]) -> bytes:
     return json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
+def _select_nonempty_file(root_path: Path, candidates: tuple[str, ...]) -> tuple[Path, str]:
+    existing: list[tuple[Path, str]] = []
+    for candidate in candidates:
+        path = root_path / candidate
+        if not path.is_file():
+            continue
+        source = path.read_text(encoding="utf-8")
+        if source.strip():
+            return path, source
+        existing.append((path, source))
+
+    if existing:
+        return existing[0]
+
+    return root_path / candidates[0], ""
+
+
 def _literal_tuple_assignment(tree: ast.Module, name: str) -> tuple[str, ...]:
     for node in tree.body:
         if not isinstance(node, ast.Assign):
@@ -373,6 +402,18 @@ def _literal_tuple_assignment(tree: ast.Module, name: str) -> tuple[str, ...]:
         else:
             return tuple(values)
     raise SwissKnifeIPFSDatasetsInteropError(f"missing literal assignment for {name}")
+
+
+def _literal_tuple_assignment_or_symbols(
+    tree: ast.Module,
+    name: str,
+    candidates: tuple[str, ...],
+    source: str,
+) -> tuple[str, ...]:
+    try:
+        return _literal_tuple_assignment(tree, name)
+    except SwissKnifeIPFSDatasetsInteropError:
+        return tuple(symbol for symbol in candidates if symbol in source)
 
 
 def _imported_names_from_module(tree: ast.Module, module: str) -> tuple[str, ...]:

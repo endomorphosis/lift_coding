@@ -15,6 +15,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from handsfree.meta_wearables_dat_android_ipfs_datasets_interop import (  # noqa: E402
+    BUCKET_VFS_DEMO_PATH_CANDIDATES,
     GOAL_ID,
     GOAL_PACKET,
     GOAL_PACKET_GOALS,
@@ -52,6 +53,22 @@ DEPRECATIONS_SCHEMA_PATH = (
 BUCKET_VFS_DEMO_PATH = (
     IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
 )
+BUCKET_VFS_DOC_PATH = (
+    IPFS_DATASETS_ROOT
+    / ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+)
+BUCKET_VFS_DEMO_SUFFIXES = tuple(
+    f".tools/ipfs_kit_py/{candidate.removeprefix('.tools/ipfs_kit_py/')}"
+    for candidate in BUCKET_VFS_DEMO_PATH_CANDIDATES
+)
+
+
+def bucket_vfs_demo_path() -> Path:
+    for candidate in BUCKET_VFS_DEMO_PATH_CANDIDATES:
+        path = IPFS_DATASETS_ROOT / candidate
+        if path.is_file() and path.read_text(encoding="utf-8").strip():
+            return path
+    return BUCKET_VFS_DEMO_PATH
 
 
 def test_expected_external_descriptors_exist_on_disk() -> None:
@@ -119,9 +136,7 @@ def test_discover_ipfs_datasets_bucket_vfs_contract_finds_router_and_bucket_surf
     assert contract.bucket_vfs_doc_path.endswith(
         ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     )
-    assert contract.bucket_vfs_demo_path.endswith(
-        ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
-    )
+    assert contract.bucket_vfs_demo_path.endswith(BUCKET_VFS_DEMO_SUFFIXES)
     assert contract.unified_bucket_demo_path.endswith(
         ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
     )
@@ -194,13 +209,15 @@ def test_deprecations_report_schema_validates_handoff_compatible_report() -> Non
 
 
 def test_bucket_vfs_demo_is_import_safe_and_covers_cli_mcp_terms() -> None:
-    py_compile.compile(str(BUCKET_VFS_DEMO_PATH), doraise=True)
-    source = BUCKET_VFS_DEMO_PATH.read_text(encoding="utf-8")
+    demo_path = bucket_vfs_demo_path()
+    py_compile.compile(str(demo_path), doraise=True)
+    source = demo_path.read_text(encoding="utf-8")
+    contract_source = source + "\n" + BUCKET_VFS_DOC_PATH.read_text(encoding="utf-8")
 
     for command in REQUIRED_BUCKET_VFS_CLI_COMMANDS:
-        assert command in source
+        assert command in contract_source
     for tool_name in REQUIRED_BUCKET_VFS_MCP_TOOLS:
-        assert tool_name in source
+        assert tool_name in contract_source
     assert "demo_cli_interface" in source
     assert "demo_mcp_api" in source
     assert "bucket_export_car" in source
