@@ -694,7 +694,7 @@ state observation.
 
 ## SWR-035 Prepare SwissKnife main-branch merge package
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/integration
 - Fingerprint: 5d6420059d17255f49ac839c28fe98e5b48ff936
