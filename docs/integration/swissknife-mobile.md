@@ -33,3 +33,15 @@ validates representative SwissKnife control-surface and interaction-envelope
 payloads, and asserts this objective validation repair is recorded in
 `data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md` and the
 objective heap.
+
+HAO-730 re-ran the VAI-661 objective validation repair for VAIOS-G700 and the
+same `goal_packet/interoperability/swissknife/06921590135c` packet. The
+contracts and descriptors above were unchanged; the only outstanding gap was
+that the `Mcp-Plus-Plus` and `external/ipfs_kit` git submodules were not
+checked out in the validation worktree, which made unrelated
+`tests/integration` modules fail to import. Initializing those submodules
+(`git submodule update --init Mcp-Plus-Plus external/ipfs_kit`, no gitlink
+pointer changes) and recording the repair in
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-validation-repair.md`
+and the objective heap restores a clean `python -m pytest tests/integration -q`
+run.
