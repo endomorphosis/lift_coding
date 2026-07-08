@@ -36,10 +36,7 @@ MULTI_SUPERVISOR_ENV_DEFAULTS = {
     **implementation_multi_supervisor_env_defaults(
         prefer_copilot_merge_resolver=False,
     ),
-    "IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK": os.environ.get(
-        "IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK",
-        "2",
-    ),
+    "IMPLEMENTATION_SUPERVISOR_LANES_PER_TRACK": "2",
 }
 
 
