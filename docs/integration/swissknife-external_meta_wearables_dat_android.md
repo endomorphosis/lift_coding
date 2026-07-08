@@ -90,8 +90,9 @@ API symbols/states/keys/permissions/icons/styles, exercises the Python
 `swissknife_meta_wearables_dat_android_interop` discovery and handoff
 builder, statically inspects the SwissKnife TypeScript descriptor module for
 the expected exports/goal-packet metadata, validates representative
-SwissKnife control-surface and interaction-envelope payloads, and asserts
-this objective validation repair is recorded in
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-735-validation-repair.md`
+SwissKnife control-surface, interaction-envelope, and MCP++ compatibility
+receipt payloads, and asserts this objective validation repair is recorded in
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-735-validation-repair.md`,
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-574-objective-validation-repair.md`,
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
