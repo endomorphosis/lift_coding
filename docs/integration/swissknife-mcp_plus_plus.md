@@ -40,7 +40,10 @@ The repaired `interface contract swissknife Mcp-Plus-Plus` path is:
 - `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`,
   `swissknife/contracts/mediation_receipt.schema.json`, and
   `swissknife/contracts/policy_decision.schema.json` remain the receipt and
-  decision schema refs advertised by the descriptor's `schema_refs`.
+  decision schema refs advertised by the descriptor's `schema_refs`. The
+  compatibility receipt schema accepts the VAI-665 Mcp-Plus-Plus receipt
+  identity (`task_id: VAI-665`, `daemon_id: mcp-plus-plus`,
+  `server_package: mcp_plus_plus`) used by the descriptor's receipt builder.
 - `Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json`
   mirrors the TypeScript descriptor as a plain MCP-IDL payload so the
   upstream Python validator has a real, committed SwissKnife-authored fixture
