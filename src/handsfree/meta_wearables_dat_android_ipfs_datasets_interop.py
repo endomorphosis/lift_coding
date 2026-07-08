@@ -65,6 +65,11 @@ REQUIRED_BUCKET_VFS_DOC_PATH = (
     ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
 REQUIRED_BUCKET_VFS_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
+BUCKET_VFS_DEMO_PATH_CANDIDATES = (
+    REQUIRED_BUCKET_VFS_DEMO_PATH,
+    ".tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py",
+    ".tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py",
+)
 REQUIRED_UNIFIED_BUCKET_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
 REQUIRED_SCHEMA_COLUMN_OPTIMIZATION_EXAMPLE_PATH = (
     ".tools/ipfs_kit_py/examples/schema_column_optimization_example.py"
@@ -333,7 +338,9 @@ def discover_ipfs_datasets_bucket_vfs_contract(
     ipfs_kit_tool_root = root_path / IPFS_KIT_TOOL_ROOT
     deprecations_report_schema_path = root_path / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH
     bucket_vfs_doc_path = root_path / REQUIRED_BUCKET_VFS_DOC_PATH
-    bucket_vfs_demo_path = root_path / REQUIRED_BUCKET_VFS_DEMO_PATH
+    bucket_vfs_demo_path, bucket_vfs_demo_source = _select_nonempty_file(
+        root_path, BUCKET_VFS_DEMO_PATH_CANDIDATES
+    )
     unified_bucket_demo_path = root_path / REQUIRED_UNIFIED_BUCKET_DEMO_PATH
     schema_column_optimization_example_path = (
         root_path / REQUIRED_SCHEMA_COLUMN_OPTIMIZATION_EXAMPLE_PATH
@@ -388,7 +395,6 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         "ipfs_datasets Bucket VFS implementation summary",
     )
 
-    bucket_vfs_demo_source = bucket_vfs_demo_path.read_text(encoding="utf-8")
     _require_symbols(
         bucket_vfs_demo_source,
         ("demo_cli_interface", "demo_mcp_api", "bucket_export_car", "bucket_cross_query"),
@@ -570,3 +576,20 @@ def _payload_to_bytes(payload: bytes | str | dict[str, Any]) -> bytes:
     if isinstance(payload, str):
         return payload.encode("utf-8")
     return json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def _select_nonempty_file(root_path: Path, candidates: tuple[str, ...]) -> tuple[Path, str]:
+    existing: list[tuple[Path, str]] = []
+    for candidate in candidates:
+        path = root_path / candidate
+        if not path.is_file():
+            continue
+        source = path.read_text(encoding="utf-8")
+        if source.strip():
+            return path, source
+        existing.append((path, source))
+
+    if existing:
+        return existing[0]
+
+    return root_path / candidates[0], ""
