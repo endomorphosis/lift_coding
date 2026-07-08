@@ -3852,3 +3852,14 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 - Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
 - Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-584-mgw-580-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-580. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-584-mgw-580-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-580 from strategy blocked_tasks.
+
+## MGW-585 Resolve merge retry-budget failure for MGW-576
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/meta_glasses_display_widgets/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md, external/meta-wearables-dat-android, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: test -f /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-585-mgw-576-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in MGW-576. Use evidence in /home/barberb/lift_coding/data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-585-mgw-576-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release MGW-576 from strategy blocked_tasks.
