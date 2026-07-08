@@ -212,6 +212,43 @@ Acceptance target:
 - A release candidate cannot pass with service-boundary drift, browser-host
   leakage, typecheck failure, or missing MCP/glasses evidence.
 
+## Supervisor Usage
+
+The SwissKnife refactor backlog is parseable by the `ipfs_accelerate_py`
+implementation supervisor with explicit SWR task and state prefixes. Use the
+bounded parse/supervision check before any autonomous implementation run:
+
+```bash
+python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor \
+  --once \
+  --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md \
+  --state-dir tmp/swissknife_refactor_supervisor/state \
+  --task-prefix '## SWR-' \
+  --state-prefix swissknife_refactor \
+  --no-implement \
+  --no-ephemeral-worktree \
+  --no-worktree-reconciliation \
+  --no-retry-budget-guardrail \
+  --no-dependency-guardrail \
+  --no-reconciliation-guardrail
+```
+
+This mode is intentionally read-mostly for backlog parsing and supervisor state
+refresh. It may update supervisor state files under
+`tmp/swissknife_refactor_supervisor/state`, including
+`swissknife_refactor_task_state.json`, `swissknife_refactor_strategy.json`,
+`swissknife_refactor_supervisor_status.json`, `task_queue.json`, event logs,
+and `gc_state.json`; it must not launch implementation agents or make
+autonomous code edits because `--no-implement` is present. Operational details,
+state file meanings, known daemon `git gc` behavior, and escalation rules are
+documented in `swissknife/docs/supervisor-refactor-runbook.md`.
+
+Run implementation mode only after a bounded check is green and only with the
+same `--todo-path`, `--task-prefix`, `--state-prefix`, and `--state-dir`
+values. Avoid running a bounded check against the same state directory while a
+long-running `--implement` supervisor is active unless the purpose is explicit
+state observation.
+
 # Agent Todos
 
 ## SWR-001 Restore strict service-boundary audit
@@ -595,7 +632,7 @@ Acceptance target:
 
 ## SWR-030 Harden supervisor usage for SwissKnife refactor tasks
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/supervisor
@@ -604,4 +641,5 @@ Acceptance target:
 - Depends on: SWR-010
 - Outputs: tmp/swissknife_refactor_supervisor/state, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md, swissknife/docs/supervisor-refactor-runbook.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Evidence: `tmp/swissknife_refactor_supervisor/state` records bounded supervisor state; `swissknife/docs/supervisor-refactor-runbook.md` documents invocation, state files, daemon `git gc` behavior, and escalation rules.
 - Acceptance: SwissKnife refactor tasks can be parsed and supervised in bounded `--once --no-implement` mode without autonomous code edits; state paths, invocation flags, known daemon `git gc` behavior, and safe escalation rules are documented.
