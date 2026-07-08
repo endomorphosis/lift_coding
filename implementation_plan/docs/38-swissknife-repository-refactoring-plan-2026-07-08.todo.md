@@ -302,7 +302,7 @@ Acceptance target:
 
 ## SWR-008 Clean browser dependencies and bundle budgets
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/dependencies
