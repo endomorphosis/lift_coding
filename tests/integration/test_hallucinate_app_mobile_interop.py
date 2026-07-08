@@ -141,10 +141,17 @@ def test_search_interface_exports_hallucinate_app_mobile_handoff_descriptor() ->
     assert descriptor["goal_id"] == GOAL_ID
     assert descriptor["task_id"] == "HAO-740"
     assert descriptor["repair_task_id"] == "HAO-751"
+    assert descriptor["companion_task_id"] == "HAO-752"
+    assert descriptor["validation_attempt"] == 5
     assert descriptor["runtime_handoff"]["operation"] == "invoke_service"
     assert set(descriptor["runtime_handoff"]["required_artifacts"]) == REQUIRED_ARTIFACTS
     assert (
         descriptor["validation"]["validation_confirmation_ref"]
+        == "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-740-attempt-5-validation-confirmation.md"
+    )
+    assert (
+        descriptor["validation"]["previous_validation_confirmation_ref"]
         == "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
     )
@@ -195,9 +202,16 @@ def test_mobile_descriptor_exports_hallucinate_app_mobile_contract() -> None:
     assert set(descriptor["runtime_handoff"]["required_artifacts"]) == REQUIRED_ARTIFACTS
     assert descriptor["validation"]["task_id"] == "HAO-740"
     assert descriptor["validation"]["repair_task_id"] == "HAO-751"
+    assert descriptor["validation"]["companion_task_id"] == "HAO-752"
+    assert descriptor["validation"]["validation_attempt"] == 5
     assert descriptor["validation"]["goal_id"] == GOAL_ID
     assert (
         descriptor["validation"]["validation_confirmation_ref"]
+        == "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-740-attempt-5-validation-confirmation.md"
+    )
+    assert (
+        descriptor["validation"]["previous_validation_confirmation_ref"]
         == "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
     )
@@ -223,6 +237,9 @@ def test_test_interface_html_exposes_machine_readable_fixture() -> None:
     assert '"source_surface": "hallucinate_app"' in html
     assert '"target_surface": "mobile"' in html
     assert '"/v1/mobile/orb/invoke_service"' in html
+    assert '"validation_attempt": 5' in html
+    assert "2026-07-08-hao-740-attempt-5-validation-confirmation.md" in html
+    assert "2026-07-08-hao-752-objective-gap-7edb316279e5.md" in html
     for artifact in REQUIRED_ARTIFACTS:
         assert artifact in html
 
@@ -256,17 +273,18 @@ def test_docs_discovery_and_heap_record_hao_740_validation_confirmation() -> Non
     docs = read_text("docs/integration/hallucinate_app-mobile.md")
     discovery = read_text(
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-751-hao-740-validation-repair.md"
+        "2026-07-08-hao-740-attempt-5-validation-confirmation.md"
     )
     confirmation = read_text(
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
+        "2026-07-08-hao-740-attempt-5-validation-confirmation.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
         "HAO-740",
         "HAO-751",
+        "HAO-752",
         GOAL_ID,
         "objective/interoperability/hallucinate_app-mobile",
         "objective validation repair",
@@ -279,8 +297,10 @@ def test_docs_discovery_and_heap_record_hao_740_validation_confirmation() -> Non
         "mobile/src/orb/metaGlassesMobileOrbBridge.js",
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql",
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-5-validation-confirmation.md",
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md",
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-gap-7edb316279e5.md",
     ]
     for content in (docs, discovery, confirmation, heap):
         for term in required_terms:

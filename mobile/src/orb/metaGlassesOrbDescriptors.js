@@ -302,10 +302,16 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
   validation: {
     task_id: 'HAO-740',
     repair_task_id: 'HAO-751',
+    companion_task_id: 'HAO-752',
+    validation_attempt: 5,
     goal_id: 'VAIOS-G707',
     objective_gap_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-objective-gap-7edb316279e5.md',
+    companion_objective_gap_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-gap-7edb316279e5.md',
     validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-5-validation-confirmation.md',
+    previous_validation_confirmation_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md',
     validation_repair_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md',

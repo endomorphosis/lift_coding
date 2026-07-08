@@ -1,9 +1,10 @@
 # Hallucinate App / Mobile Interop
 
-HAO-740 attempt 4 records the direct objective validation repair for
+HAO-740 attempt 5 records the current objective validation repair for
 `VAIOS-G707` and `objective/interoperability/hallucinate_app-mobile`. HAO-751
 remains the retry-budget follow-up that first repaired the blocked validation
-loop.
+loop, and HAO-752 is the companion validation-gate task emitted from the same
+objective gap fingerprint.
 
 The repaired `interface contract hallucinate_app mobile` path is:
 
@@ -11,7 +12,9 @@ The repaired `interface contract hallucinate_app mobile` path is:
   exports `HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR` and
   `buildHallucinateAppMobileSearchHandoff()`. The builder emits a normalized
   `invoke_service` handoff with `interaction_envelope`, `policy_decision`, and
-  `mediation_receipt` artifact requirements.
+  `mediation_receipt` artifact requirements. The descriptor carries the HAO-740
+  attempt 5 validation confirmation, the HAO-752 companion objective gap, and
+  the earlier HAO-751 retry-budget repair references.
 - `mobile/src/orb/metaGlassesOrbDescriptors.js` exports
   `HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE` and
   `HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR`, binding Hallucinate App desktop
@@ -57,8 +60,12 @@ This document is `docs/integration/hallucinate_app-mobile.md`.
 
 The retry-budget source is
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md`.
-The repair evidence is
+The current attempt 5 validation confirmation is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-5-validation-confirmation.md`.
+The companion objective gap is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-752-objective-gap-7edb316279e5.md`.
+The prior repair evidence is
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md`
 and
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md`.
-This is an `objective validation repair` for HAO-740 and HAO-751.
+This is an `objective validation repair` for HAO-740, HAO-751, and HAO-752.
