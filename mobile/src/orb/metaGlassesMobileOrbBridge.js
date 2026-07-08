@@ -16,8 +16,6 @@ import {
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
 export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
   'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
@@ -35,8 +33,6 @@ const CONTROL_SURFACE_SCHEMA_REFS = [
   'policy_decision',
   'mediation_receipt',
 ];
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const DAT_CAPABILITY_KEYS = [
   'session',
   'camera',
@@ -966,13 +962,14 @@ function mobileOrbBindingState(edgeSession, bindings = [], subscriptions = []) {
   };
 }
 
-function buildMobileOrbDiagnosticsContract({
+export function buildMobileOrbDiagnosticsContract({
   edgeSession = null,
   localInterfaceCids = [],
   bindings = [],
   subscriptions = [],
   events = [],
   diagnosticRecords = [],
+  operationReceipts = [],
 } = {}) {
   const backendCounts = {
     edge_sessions: edgeSession?.edge_session_id ? 1 : 0,
@@ -984,6 +981,7 @@ function buildMobileOrbDiagnosticsContract({
       (record) => record?.source === 'dispatch_glasses_response'
     ).length,
     revocations: diagnosticRecords.filter((record) => record?.source === 'revoke_binding').length,
+    operation_receipts: operationReceipts.length,
   };
   const records = [
     edgeSession,
@@ -992,6 +990,7 @@ function buildMobileOrbDiagnosticsContract({
     ...subscriptions,
     ...events,
     ...diagnosticRecords,
+    ...operationReceipts,
   ].filter(isObject);
   const bindingState = mobileOrbBindingState(edgeSession, bindings, subscriptions);
 
@@ -1389,7 +1388,7 @@ export class MetaGlassesMobileOrbBridge {
         receipt_cid: receipt.receipt_cid,
       }));
 
-    return {
+    const diagnostics = {
       contract: MOBILE_ORB_DIAGNOSTICS_CONTRACT,
       source: 'mobile',
       mode: diagnosticsMode(this.edgeSession?.platform || this.platform),
@@ -1434,10 +1433,15 @@ export class MetaGlassesMobileOrbBridge {
       operation_receipts_count: operationReceipts.length,
       operation_receipts: operationReceipts,
     };
+
     const diagnosticsContract = buildMobileOrbDiagnosticsContract({
-      ...diagnostics,
-      edge_session: this.edgeSession,
-      backend_kind: 'local',
+      edgeSession: this.edgeSession,
+      localInterfaceCids: diagnostics.local_interface_cids,
+      bindings,
+      subscriptions,
+      events,
+      diagnosticRecords,
+      operationReceipts,
     });
     return {
       ...diagnostics,

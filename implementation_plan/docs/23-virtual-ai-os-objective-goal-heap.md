@@ -861,7 +861,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G700 Interoperate swissknife with mobile
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -886,6 +886,10 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/swissknife-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `swissknife` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- VAI-661 proof: `tests/integration/test_swissknife_mobile_interop.py` validates concrete Swissknife-mobile `control_surface_contract` and `interaction_envelope` payloads against `swissknife/contracts/control_surface_contract.schema.json` and `swissknife/contracts/interaction_envelope.schema.json`; `mobile/src/orb/metaGlassesOrbDescriptors.js` exports `SWISSKNIFE_MOBILE_INTEROP_CONTRACT` with the scanner-visible `interface contract swissknife mobile` evidence term, shared schema refs, and ORB handoff operations; `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js` records the display-widget action to ORB operation to native DAT method mapping; `docs/integration/swissknife-mobile.md` and `data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-validation-repair.md` record the objective validation repair for VAIOS-G700 while keeping pair-specific edits isolated from the shared swissknife packet.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, interface contract swissknife mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json, data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-validation-repair.md
+- Completion validation: python -m pytest tests/integration/test_swissknife_mobile_interop.py -q
 
 ## VAIOS-G701 Interoperate swissknife with external/ipfs_accelerate
 

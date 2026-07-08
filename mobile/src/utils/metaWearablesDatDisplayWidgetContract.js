@@ -1,6 +1,26 @@
 export const DISPLAY_WIDGET_ACTION_CONTRACT =
   'handsfree.meta-glasses/display-widget-action@0.1.0';
 
+export const SWISSKNIFE_MOBILE_DISPLAY_WIDGET_INTEROP_CONTRACT = {
+  contract_id: 'interface contract swissknife mobile',
+  version: '0.1.0',
+  producer: 'swissknife',
+  consumer: 'mobile',
+  mobile_contract: DISPLAY_WIDGET_ACTION_CONTRACT,
+  schema_refs: [
+    'control_surface_contract',
+    'interaction_envelope',
+    'policy_decision',
+    'mediation_receipt',
+  ],
+  runtime_handoff: {
+    action_id_field: 'type',
+    orb_operation_field: 'operation',
+    native_dat_method_field: 'method',
+    response_receipt_field: 'orb_receipt_cid',
+  },
+};
+
 export const DISPLAY_WIDGET_ACTION_IDS = [
   'mobile_render_display_widget',
   'mobile_update_display_widget',
@@ -49,4 +69,14 @@ const DISPLAY_WIDGET_ACTION_ID_SET = new Set(DISPLAY_WIDGET_ACTION_IDS);
 
 export function isDisplayWidgetActionId(actionId) {
   return DISPLAY_WIDGET_ACTION_ID_SET.has(actionId);
+}
+
+export function displayWidgetInteropDescriptor() {
+  return {
+    ...SWISSKNIFE_MOBILE_DISPLAY_WIDGET_INTEROP_CONTRACT,
+    action_ids: DISPLAY_WIDGET_ACTION_IDS,
+    action_by_action_id: DISPLAY_WIDGET_ACTION_BY_ACTION_ID,
+    orb_operation_by_action_id: DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,
+    dat_method_by_action_id: DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID,
+  };
 }

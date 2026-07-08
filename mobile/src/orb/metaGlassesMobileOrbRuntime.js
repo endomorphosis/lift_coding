@@ -134,7 +134,17 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
       edge_session_persistence: Boolean(edgeSessionStore),
       orb_state_persistence: Boolean(orbStateStore),
     };
-    const diagnosticsContract = buildMobileOrbDiagnosticsContract(diagnostics);
+    const diagnosticsContract =
+      diagnostics.diagnostics_contract ||
+      buildMobileOrbDiagnosticsContract({
+        edgeSession: bridge.getEdgeSession(),
+        localInterfaceCids: diagnostics.local_interface_cids || localInterfaceCids,
+        bindings: diagnostics.bindings || [],
+        subscriptions: diagnostics.subscriptions || [],
+        events: diagnostics.events || [],
+        diagnosticRecords: diagnostics.operation_receipts || [],
+        operationReceipts: diagnostics.operation_receipts || [],
+      });
     return {
       ...diagnostics,
       diagnostics_contract: diagnosticsContract,

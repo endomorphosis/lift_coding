@@ -1,8 +1,42 @@
+export const SWISSKNIFE_MOBILE_INTERFACE_CONTRACT_ID =
+  'interface contract swissknife mobile';
+
+export const SWISSKNIFE_MOBILE_CONTROL_SURFACE_SCHEMA_REFS = [
+  'control_surface_contract',
+  'interaction_envelope',
+  'policy_decision',
+  'mediation_receipt',
+];
+
+export const SWISSKNIFE_MOBILE_INTEROP_CONTRACT = {
+  contract_id: SWISSKNIFE_MOBILE_INTERFACE_CONTRACT_ID,
+  version: '0.1.0',
+  producer: 'swissknife',
+  consumer: 'mobile',
+  descriptor_role: 'mobile_remote_client_control_surface',
+  schema_refs: SWISSKNIFE_MOBILE_CONTROL_SURFACE_SCHEMA_REFS,
+  runtime_handoff: {
+    registration_operation: 'register_edge_capabilities',
+    event_operation: 'publish_glasses_event',
+    invocation_operation: 'invoke_service',
+    response_operation: 'dispatch_glasses_response',
+    display_widget_interface: 'display_widget_bridge',
+  },
+  required_artifacts: [
+    'mobile/src/orb/metaGlassesOrbDescriptors.js',
+    'mobile/src/utils/metaWearablesDatDisplayWidgetContract.js',
+    'swissknife/contracts/control_surface_contract.schema.json',
+    'swissknife/contracts/interaction_envelope.schema.json',
+  ],
+};
+
 export const MOBILE_ORB_BRIDGE_INTERFACE = {
   name: 'mobile_orb_bridge',
   namespace: 'handsfree.meta_glasses.mobile',
   version: '0.1.0',
   specPath: 'spec/meta_glasses_mobile_orb_bridge_interface.json',
+  interop_contract: SWISSKNIFE_MOBILE_INTEROP_CONTRACT,
+  control_surface_schema_refs: SWISSKNIFE_MOBILE_CONTROL_SURFACE_SCHEMA_REFS,
 };
 
 export const MOBILE_ORB_BRIDGE_OPERATIONS = [
@@ -20,6 +54,8 @@ export const DISPLAY_WIDGET_BRIDGE_INTERFACE = {
   namespace: 'handsfree.meta_glasses.display',
   version: '0.1.0',
   specPath: 'spec/meta_glasses_display_widget_orb_interface.json',
+  interop_contract: SWISSKNIFE_MOBILE_INTEROP_CONTRACT,
+  control_surface_schema_refs: SWISSKNIFE_MOBILE_CONTROL_SURFACE_SCHEMA_REFS,
 };
 
 export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
@@ -110,6 +146,12 @@ export function descriptorRef(descriptor, interfaceCid = null) {
   }
   if (descriptor.compatibility && typeof descriptor.compatibility === 'object') {
     ref.compatibility = descriptor.compatibility;
+  }
+  if (descriptor.interop_contract && typeof descriptor.interop_contract === 'object') {
+    ref.interop_contract = descriptor.interop_contract;
+  }
+  if (Array.isArray(descriptor.control_surface_schema_refs)) {
+    ref.control_surface_schema_refs = descriptor.control_surface_schema_refs;
   }
   const metadata = normalizeDescriptorMetadata(descriptor.metadata);
   if (metadata && Object.keys(metadata).length > 0) {
