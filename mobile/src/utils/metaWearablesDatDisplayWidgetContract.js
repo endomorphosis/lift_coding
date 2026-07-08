@@ -55,6 +55,9 @@ export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
   mgw_attempt: 1,
   mgw_validation_repair_ref:
     'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md',
+  mgw_worktree: 'mgw-569-attempt-1-1783553538',
+  mgw_worktree_validation_repair_ref:
+    'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md',
   hao_task_id: 'HAO-730',
   hao_attempt: 4,
   hao_objective_gap_ref:

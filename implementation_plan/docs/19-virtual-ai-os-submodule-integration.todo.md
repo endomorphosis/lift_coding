@@ -9223,7 +9223,7 @@ cadence remains parseable and resumable.
 
 ## VAI-672 Close objective gap: Interoperate mobile with external/ipfs_accelerate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: interoperability
@@ -9464,8 +9464,8 @@ cadence remains parseable and resumable.
 
 ## VAI-683 Resolve validation retry-budget failure for VAI-664
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: repaired the repeated VAI-664 validation retry-budget failure by confirming the `interface contract swissknife external/ipfs_kit` proof stack, recording VAI-683/VAI-664 repair evidence in `data/virtual_ai_os/discovery` and `data/virtual_ai_os/state/discovery`, restoring uninitialized sibling gitlinks at their recorded commits, and validating `python -m pytest tests/integration -q` cleanly.
 - Priority: P1
 - Track: ops
 - Depends on: 
@@ -9483,3 +9483,73 @@ cadence remains parseable and resumable.
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py, data/virtual_ai_os/state/discovery
 - Validation: python -m pytest tests/integration -q
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-674. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-674 from strategy blocked_tasks.
+
+## VAI-685 Close objective gap: Interoperate hallucinate_app with mobile
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: interoperability
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_hallucinate_app_mobile_interop.py, docs/integration/hallucinate_app-mobile.md, hallucinate_app, mobile, hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js, hallucinate_app/hallucinate_app/node/views/test_interface.html, hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql, hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py
+- Validation: python -m pytest tests/integration -q
+- Bundle: objective/interoperability/hallucinate_app-mobile
+- Bundle shard: data/virtual_ai_os/objective_bundles/objective-interoperability-hallucinate_app-mobile.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/interoperability/hallucinate_app-mobile
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Goal id: VAIOS-G707
+- Missing evidence: objective validation repair
+- Embedding query: hallucinate_app mobile interoperability integration test interface descriptor __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 both boto3 bs4
+- AST query: hallucinate_app, mobile, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, both, boto3, bs4
+- Surplus group: objective/VAIOS-G707
+- Merge key: dce12a84320c8baf
+- Merge family: objective/VAIOS-G707
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: objective_validation_repair
+- Goal packet: 
+- Goal packet role: 
+- Goal packet goals: 
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: c28bf5e5280df451
+- Acceptance: Objective scan filed this gap for VAIOS-G707. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-gap-7edb316279e5.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (objective validation repair), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## VAI-686 Close objective gap: Interoperate mobile with external/ipfs_accelerate
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: interoperability
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_mobile_external_ipfs_accelerate_interop.py, docs/integration/mobile-external_ipfs_accelerate.md, mobile, external/ipfs_accelerate, external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql, external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py, external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py
+- Validation: python -m pytest tests/integration -q
+- Bundle: objective/interoperability/mobile-external_ipfs_accelerate
+- Bundle shard: data/virtual_ai_os/objective_bundles/objective-interoperability-mobile-external_ipfs_accelerate.todo.md
+- Bundle strategy: explicit
+- Graph parents: VAIOS-G000
+- Graph depth: 1
+- Parallel lane: objective/interoperability/mobile-external_ipfs_accelerate
+- Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Goal id: VAIOS-G719
+- Missing evidence: objective validation repair
+- Embedding query: mobile external/ipfs_accelerate interoperability integration test interface descriptor __future__ _jsonnet abc anyio argparse ast asyncio atexit base64 boto3 bs4 cProfile
+- AST query: mobile, external/ipfs_accelerate, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile
+- Surplus group: objective/VAIOS-G719
+- Merge key: 64e26db5b0fa2426
+- Merge family: objective/VAIOS-G719
+- Merge role: validation_gate
+- Work item count: 1
+- Work scope: objective_validation_repair
+- Goal packet: 
+- Goal packet role: 
+- Goal packet goals: 
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Candidate kind: validation_gate
+- Todo vector key: abd3dcae203fdb6b
+- Acceptance: Objective scan filed this gap for VAIOS-G719. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-gap-c1edafa875e6.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (objective validation repair), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
