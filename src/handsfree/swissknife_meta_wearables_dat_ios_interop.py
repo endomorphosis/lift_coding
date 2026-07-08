@@ -1,13 +1,13 @@
 """Interop contract between SwissKnife and ``external/meta-wearables-dat-ios``.
 
-HAO-736 repairs the VAIOS-G706 objective validation gap that requires
+MGW-575 repairs the VAIOS-G706 objective validation gap that requires
 ``swissknife`` to interoperate with ``external/meta-wearables-dat-ios`` through
 importable contracts, interface descriptors, runtime handoff behavior, and
 integration tests. This is part of the shared
 ``goal_packet/interoperability/swissknife/06921590135c`` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
-VAIOS-G706. VAI-667 first recorded the virtual_ai_os lane proof; HAO-736 records
-the hallucinate_multimodal_control lane objective validation repair.
+VAIOS-G706. VAI-667 first recorded the virtual_ai_os lane proof; MGW-575 records
+the meta_glasses_display_widgets lane objective validation repair.
 
 The iOS DAT submodule ships agent-facing Display, session lifecycle, and
 registration/permission rules plus a real ``samples/DisplayAccess`` Swift app.
