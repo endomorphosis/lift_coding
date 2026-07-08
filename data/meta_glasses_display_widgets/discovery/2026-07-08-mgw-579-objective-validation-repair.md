@@ -53,5 +53,24 @@ passed with 10 tests.
 `external/meta-wearables-dat-android` and `external/meta-wearables-dat-ios`
 submodule working trees were not checked out. Running
 `git submodule update --init external/meta-wearables-dat-android external/meta-wearables-dat-ios`
-restored those descriptor files without changing gitlink pointers; the full
-integration suite then passed with 461 passed and 89 skipped.
+restored those descriptor files without changing gitlink pointers.
+
+The full `python -m pytest tests/integration -q` run in this worktree still
+shows pre-existing, unrelated failures (66 failed, 340 passed, 96 skipped, 49
+errors) because the `swissknife` submodule is pinned to
+`1fb753e829e42e647e30d50bab91d92dc6c9ac62`
+(`heads/implementation/hao-748-attempt-1-1783542126-submodule-swissknife`), a
+WIP branch from a different in-flight task that is missing files such as
+`swissknife/src/services/mcp-plus-plus.ts`,
+`swissknife/web/src/browser-main.ts`,
+`swissknife/src/services/meta-glasses-mobile-bridge.ts`,
+`swissknife/src/services/meta-glasses-display-orb-adapter.ts`,
+`swissknife/src/services/meta-glasses-widget-compiler.ts`, and
+`swissknife/src/services/ipfs-interface-registry.ts`. None of the failing
+tests touch `hallucinate_app`, `mobile`, or any file changed by this repair;
+`tests/integration/test_hallucinate_app_mobile_interop.py` and every other
+Hallucinate App/mobile/IPFS-Accelerate interop test pass cleanly both in
+isolation and as part of the full run. This blocker is identical in shape to
+the SwissKnife gitlink issues resolved by earlier HAO-748/MGW-583 validation
+repairs and is out of scope for VAIOS-G707; it should be tracked and repaired
+by whichever task owns the SwissKnife submodule pointer.
