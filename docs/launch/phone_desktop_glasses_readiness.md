@@ -310,6 +310,21 @@ Hallucinate App MCP dashboard, dashboard capability catalog, daemon health,
 applications, Playwright MCP dashboard interoperability, and launch Playwright
 validation gate.
 
+HAO-729 proof: HAO-729 is the current Hallucinate supervisor launch Playwright validation gate
+for the VAIOS-G723 dashboard interoperability console:
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-729-mcp-dashboard-launch-gate.md`.
+Its fixture, `hallucinate_app/test/e2e/fixtures/hao-729-mcp-dashboard-launch-gate.json`,
+is exposed in `launch_validation_gates` with `gate_closed_by_playwright_validation`
+and the headless-safe runner command
+`cd hallucinate_app && (env -u DISPLAY -u WAYLAND_DISPLAY HALLUCINATE_APP_E2E_NO_BOOTSTRAP=true node scripts/run_playwright_test.mjs --help || test $? -eq 78)`.
+The receipt keeps catalog normalization, dashboard UI wiring, mediated
+tool-call receipts, Swissknife consumers, Playwright coverage,
+supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, and `control_surface receipts` tied to the shared
+Hallucinate MCP dashboard catalog for `ipfs_kit_py`, `ipfs_datasets_py`, and
+`ipfs_accelerate_py`. Any dashboard or backend validation failure remains
+supervisor-generated follow-up work for `VAIOS-G723`.
+
 HAO-727 attempt 3 records a fresh validation receipt at
 `data/hallucinate_multimodal_control/discovery/2026-06-29-hao-727-attempt-3-validation.md`.
 That receipt confirms the backlog/objective queue tests, Hallucinate
