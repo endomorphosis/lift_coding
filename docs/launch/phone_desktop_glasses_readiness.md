@@ -1436,6 +1436,23 @@ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, Swissknife
 applications, and the launch Playwright validation gate visible to the
 readiness scan.
 
+VAI-682 refreshes the same VAIOS-G723 Hallucinate MCP dashboard
+interoperability console gate using
+`data/virtual_ai_os/discovery/2026-07-08-vai-682-mcp-dashboard-launch-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-mcp-dashboard-launch-gate.md`,
+`data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-1-launch-playwright-validation-gate.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-1-validation.md`,
+and `hallucinate_app/test/e2e/fixtures/vai-682-mcp-dashboard-launch-gate.json`.
+The VAI-682 proof and VAI-682 attempt 1 validation close
+`data/virtual_ai_os/discovery/2026-07-08-vai-682-objective-gap-7ea369464239.md`
+while keeping Hallucinate App menus, Hallucinate App MCP dashboard, dashboard
+capability catalog, backend service catalog, catalog normalization, dashboard
+UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright
+coverage, supervisor-generated follow-up subtasks, daemon health, MCP++
+telemetry, `tools/list`, `tools/call`, `control_surface receipts`, Swissknife
+applications, and the launch Playwright validation gate visible to the
+readiness scan.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the

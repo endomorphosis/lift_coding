@@ -16,6 +16,9 @@ dist/
 .env.*
 !.env.example.demo
 data/*
+!data/swissknife_virtual_desktop/
+data/swissknife_virtual_desktop/*
+!data/swissknife_virtual_desktop/all_tools_supervisor_queue.json
 !data/meta_glasses_display_widgets/
 data/meta_glasses_display_widgets/*
 !data/meta_glasses_display_widgets/discovery/

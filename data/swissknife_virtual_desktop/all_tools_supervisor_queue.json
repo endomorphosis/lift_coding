@@ -1,0 +1,105 @@
+{
+  "schema": "swissknife.all_tools_supervisor_queue.v1",
+  "supervisor": {
+    "id": "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools",
+    "task_id_range": [
+      "SVD-027",
+      "SVD-050"
+    ]
+  },
+  "summary": {
+    "task_count": 24,
+    "completed_task_ids": [
+      "SVD-027",
+      "SVD-028",
+      "SVD-029",
+      "SVD-030",
+      "SVD-031",
+      "SVD-032",
+      "SVD-033",
+      "SVD-034",
+      "SVD-035",
+      "SVD-036",
+      "SVD-037",
+      "SVD-038",
+      "SVD-040",
+      "SVD-041",
+      "SVD-042",
+      "SVD-043",
+      "SVD-048",
+      "SVD-049"
+    ],
+    "ready_task_ids": [
+      "SVD-044"
+    ],
+    "waiting_task_ids": [
+      "SVD-045",
+      "SVD-047",
+      "SVD-050"
+    ],
+    "blocked_task_ids": [
+      "SVD-039",
+      "SVD-046"
+    ],
+    "recommended_task_id": "SVD-044"
+  },
+  "resume_contract": {
+    "evidence_churn_rule": "generated evidence artifacts may be refreshed by the supervisor queue when validation reruns",
+    "accelerate_boundary_rule": "downstream release gates remain owned by their source packages until the supervisor queue promotes them"
+  },
+  "generated_evidence_globs": [
+    "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.json"
+  ],
+  "tasks": {
+    "SVD-027": {"status": "completed", "depends_on": [], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-027.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-028": {"status": "completed", "depends_on": ["SVD-027"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-028.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-029": {"status": "completed", "depends_on": ["SVD-028"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-029.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-030": {"status": "completed", "depends_on": ["SVD-029"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-030.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-031": {"status": "completed", "depends_on": ["SVD-030"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-031.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-032": {"status": "completed", "depends_on": ["SVD-031"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-032.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-033": {"status": "completed", "depends_on": ["SVD-032"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-033.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-034": {"status": "completed", "depends_on": ["SVD-033"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-034.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-035": {"status": "completed", "depends_on": ["SVD-034"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-035.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-036": {"status": "completed", "depends_on": ["SVD-035"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-036.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-037": {"status": "completed", "depends_on": ["SVD-036"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-037.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-038": {"status": "completed", "depends_on": ["SVD-037"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-038.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-039": {"status": "blocked", "depends_on": ["SVD-038"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-039.json"], "validation": ["test:e2e:mcp"], "evidence": ["blocked: upstream MCP orb validation unavailable"]},
+    "SVD-040": {"status": "completed", "depends_on": ["SVD-039"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-040.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-041": {"status": "completed", "depends_on": ["SVD-040"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-041.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-042": {"status": "completed", "depends_on": ["SVD-041"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-042.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-043": {"status": "completed", "depends_on": ["SVD-042"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-043.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-044": {"status": "ready", "depends_on": ["SVD-042", "SVD-043"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-044.json"], "validation": ["test:e2e:mcp"], "evidence": ["ready"]},
+    "SVD-045": {"status": "waiting", "depends_on": ["SVD-044"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-045.json"], "validation": ["test:e2e:mcp"], "evidence": ["waiting"]},
+    "SVD-046": {"status": "blocked", "depends_on": ["SVD-045"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-046.json"], "validation": ["test:e2e:mcp"], "evidence": ["blocked: meta glasses backend handoff unavailable"]},
+    "SVD-047": {"status": "waiting", "depends_on": ["SVD-046"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-047.json"], "validation": ["test:e2e:mcp"], "evidence": ["waiting"]},
+    "SVD-048": {"status": "completed", "depends_on": ["SVD-047"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-048.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-049": {"status": "completed", "depends_on": ["SVD-048"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-049.json"], "validation": ["test:e2e:mcp"], "evidence": ["completed"]},
+    "SVD-050": {"status": "waiting", "depends_on": ["SVD-049"], "outputs": ["swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-050.json"], "validation": ["test:e2e:mcp"], "evidence": ["waiting"]}
+  },
+  "dependency_graph": {
+    "SVD-027": [],
+    "SVD-028": [],
+    "SVD-029": [],
+    "SVD-030": [],
+    "SVD-031": [],
+    "SVD-032": [],
+    "SVD-033": ["SVD-034"],
+    "SVD-034": [],
+    "SVD-035": [],
+    "SVD-036": [],
+    "SVD-037": ["SVD-038"],
+    "SVD-038": [],
+    "SVD-039": [],
+    "SVD-040": [],
+    "SVD-041": [],
+    "SVD-042": ["SVD-044"],
+    "SVD-043": [],
+    "SVD-044": [],
+    "SVD-045": [],
+    "SVD-046": ["SVD-047"],
+    "SVD-047": [],
+    "SVD-048": ["SVD-049"],
+    "SVD-049": ["SVD-050"],
+    "SVD-050": []
+  }
+}

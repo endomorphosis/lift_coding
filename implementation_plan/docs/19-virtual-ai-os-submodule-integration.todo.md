@@ -9464,10 +9464,11 @@ cadence remains parseable and resumable.
 
 ## VAI-683 Resolve validation retry-budget failure for VAI-664
 
-- Status: todo
+- Status: blocked
 - Completion: manual
 - Priority: P1
 - Track: ops
+- Blocked reason: stale validation retry-budget maintenance deferred during launch-readiness run
 - Depends on: 
 - Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_kit_interop.py, docs/integration/swissknife-external_ipfs_kit.md, swissknife, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, data/virtual_ai_os/state/discovery
 - Validation: python -m pytest tests/integration -q
