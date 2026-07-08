@@ -34,6 +34,84 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'subscribe_updates',
 ];
 
+export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
+  name: 'hallucinate_app_mobile_interop',
+  namespace: 'handsfree.meta_glasses.mobile',
+  version: '0.1.0',
+  specPath: 'spec/hallucinate_app_mobile_interop_interface.json',
+  metadata: {
+    source_application: 'hallucinate_app',
+    event_name: 'hallucinate-app:mobile-interop-handoff',
+    contract: 'interface contract hallucinate_app mobile',
+    persistence_table: 'hallucinate_app_mobile_interop_events',
+  },
+  methods: [
+    {
+      name: 'accept_handoff',
+      inputSchema: {
+        type: 'object',
+        required: ['contract', 'source', 'action', 'query', 'filter', 'route', 'timestamp'],
+        properties: {
+          contract: { const: 'interface contract hallucinate_app mobile' },
+          source: { const: 'hallucinate_app.content_browser.search_interface' },
+          action: { enum: ['search', 'filter', 'clear'] },
+          query: { type: 'string' },
+          filter: { type: 'object' },
+          route: { type: 'object' },
+          timestamp: { type: 'string', format: 'date-time' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          accepted: { type: 'boolean' },
+          receipt_cid: { type: 'string' },
+          display_widget_action: { type: 'object' },
+        },
+      },
+    },
+    {
+      name: 'acknowledge_handoff',
+      inputSchema: {
+        type: 'object',
+        required: ['receipt_cid', 'edge_session_id'],
+        properties: {
+          receipt_cid: { type: 'string' },
+          edge_session_id: { type: 'string' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        properties: {
+          acknowledged: { type: 'boolean' },
+          stored_in: { const: 'hallucinate_app_mobile_interop_events' },
+        },
+      },
+    },
+  ],
+  errors: [
+    {
+      name: 'invalid_hallucinate_app_mobile_handoff',
+      code: 422,
+    },
+  ],
+  requires: [
+    'mobile_orb_bridge',
+    'display_widget_bridge',
+    'mcp++/profile-a-idl',
+    'mcp++/receipts',
+  ],
+  compatibility: {
+    hallucinate_app_event: 'hallucinate-app:mobile-interop-handoff',
+    dashboard_descriptor: 'HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR',
+  },
+};
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_OPERATIONS = [
+  'accept_handoff',
+  'acknowledge_handoff',
+];
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',

@@ -7,6 +7,7 @@ import { metaGlassesOrbEdgeSessionStore } from './metaGlassesOrbEdgeSession';
 import { metaGlassesOrbStateStore } from './metaGlassesOrbStateStore';
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
   MOBILE_ORB_BRIDGE_INTERFACE,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -75,6 +76,7 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
   const localInterfaceCids = options.localInterfaceCids || [
     localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
     localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
+    localInterfaceKey(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE),
   ];
   const bridge = createMetaGlassesMobileOrbBridge({
     ...options,
