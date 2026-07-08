@@ -1,12 +1,14 @@
 """Interop contract between SwissKnife and ``external/ipfs_kit``.
 
-MGW-572 repairs the VAIOS-G703 objective validation gap that requires
+VAI-664 repairs the VAIOS-G703 objective validation gap that requires
 `swissknife` to interoperate with `external/ipfs_kit` through importable
 contracts, interface descriptors, runtime handoff behavior, and integration
 tests. This is part of the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
-VAIOS-G706.
+VAIOS-G706. The same fingerprint was previously recorded by MGW-572, and
+this module keeps that implementation while adding the VAI-664 supervisor
+evidence path under ``data/virtual_ai_os/discovery``.
 
 `external/ipfs_kit` ships three MCP-settings-schema repair scripts
 (``archive/archive_clutter/fix_scripts/fix_mcp_schema.py``,
