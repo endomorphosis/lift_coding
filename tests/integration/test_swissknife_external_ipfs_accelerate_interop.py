@@ -1,4 +1,4 @@
-"""SwissKnife/external/ipfs_accelerate interoperability regression tests for VAI-662."""
+"""SwissKnife/external/ipfs_accelerate interoperability regression tests for MGW-570."""
 
 from __future__ import annotations
 
@@ -276,6 +276,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py" in src
+    assert "MGW-570" in src
     assert "VAI-662" in src
     assert "VAIOS-G701" in src
     assert "agent_identity" in src
@@ -286,6 +287,12 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
 def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_accelerate() -> None:
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+
+    for schema in (control_schema, envelope_schema):
+        assert "MGW-570 objective validation repair" in schema["$comment"]
+        assert "interface contract swissknife external/ipfs_accelerate" in schema["$comment"]
+        assert "goal_packet/interoperability/swissknife/06921590135c" in schema["$comment"]
+        assert "tests/integration/test_swissknife_external_ipfs_accelerate_interop.py" in schema["$comment"]
 
     Draft202012Validator(control_schema).validate(
         swissknife_ipfs_accelerate_control_surface_payload()
@@ -298,15 +305,17 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_a
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_ipfs_accelerate.md")
     discovery = read_text(
-        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md"
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-570-objective-validation-repair.md"
     )
     gap = read_text(
-        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md"
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-570-objective-gap-2394e45d2012.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "VAI-662",
+        "MGW-570",
         "VAIOS-G701",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
