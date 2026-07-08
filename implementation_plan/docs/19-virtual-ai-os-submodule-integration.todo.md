@@ -9298,3 +9298,14 @@ cadence remains parseable and resumable.
 - Candidate kind: validation_gate
 - Todo vector key: c28bf5e5280df451
 - Acceptance: Objective scan filed this gap for VAIOS-G707. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (objective validation repair), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## VAI-675 Resolve validation retry-budget failure for VAI-661
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_mobile_interop.py, docs/integration/swissknife-mobile.md, swissknife, mobile, mobile/src/orb/metaGlassesOrbDescriptors.js, mobile/src/utils/metaWearablesDatDisplayWidgetContract.js, swissknife/contracts/control_surface_contract.schema.json, swissknife/contracts/interaction_envelope.schema.json
+- Validation: python -m pytest tests/integration -q
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-661. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-675-vai-661-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-661 from strategy blocked_tasks.
