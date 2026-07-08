@@ -419,7 +419,7 @@ Acceptance target:
 
 ## SWR-017 Define browser IPFS transport strategy
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/ipfs-browser
