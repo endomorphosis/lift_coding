@@ -120,6 +120,101 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
   },
 };
 
+export const IPFS_ACCELERATE_BENCHMARK_WIDGET_OPERATIONS = [
+  'render_performance_benchmark_widget',
+  'update_performance_benchmark_widget',
+  'clear_performance_benchmark_widget',
+  'refresh_performance_benchmark_metrics',
+];
+
+export const IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE = {
+  name: 'ipfs_accelerate_mobile_interop',
+  namespace: 'handsfree.interop.ipfs_accelerate_mobile',
+  version: '0.1.0',
+  metadata: {
+    interface_contract: 'interface contract mobile external/ipfs_accelerate',
+    goal_id: 'VAIOS-G719',
+    source_surface: 'external/ipfs_accelerate',
+    target_surface: 'mobile',
+  },
+  objective_goals: ['VAIOS-G719'],
+  methods: [
+    ...MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
+      name,
+      surface: 'mobile_orb_bridge',
+      contract_ref: 'external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql',
+    })),
+    ...IPFS_ACCELERATE_BENCHMARK_WIDGET_OPERATIONS.map((name) => ({
+      name,
+      surface: 'display_widget_bridge',
+      contract_ref: 'mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js',
+    })),
+  ],
+  errors: [
+    {
+      name: 'benchmark_schema_unavailable',
+      code: 409,
+    },
+    {
+      name: 'unsupported_mobile_surface',
+      code: 422,
+    },
+  ],
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/profile-b-cid-artifacts',
+    'mobile/meta-wearables-dat',
+  ],
+  compatibility: {
+    ipfs_accelerate_time_series_schema:
+      'external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql',
+    ipfs_accelerate_benchmark_schema_script:
+      'external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py',
+    ipfs_accelerate_check_database_schema:
+      'external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py',
+    ipfs_accelerate_check_db_schema:
+      'external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py',
+    mobile_benchmark_widget_contract:
+      'mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js',
+  },
+};
+
+export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
+  descriptor_id: 'ipfs-accelerate-mobile-interop@0.1.0',
+  interface: IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
+  schema_refs: {
+    time_series_schema: 'external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql',
+    benchmark_schema_script:
+      'external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py',
+    check_database_schema:
+      'external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py',
+    check_db_schema: 'external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py',
+    benchmark_widget_contract: 'mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js',
+  },
+  runtime_handoff: {
+    source_surface: 'external/ipfs_accelerate',
+    target_surface: 'mobile',
+    allowed_surfaces: ['agent', 'mcp_server', 'mobile', 'meta_glasses'],
+    dat_methods: IPFS_ACCELERATE_BENCHMARK_WIDGET_OPERATIONS,
+    mobile_orb_methods: MOBILE_ORB_BRIDGE_OPERATIONS,
+    time_series_tables: [
+      'performance_baselines',
+      'performance_regressions',
+      'performance_trends',
+      'regression_notifications',
+    ],
+  },
+  validation: {
+    task_id: 'VAI-672',
+    goal_id: 'VAIOS-G719',
+    objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
+    validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
+    evidence: 'objective validation repair',
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',
