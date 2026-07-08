@@ -9,6 +9,7 @@ Merge key: dce12a84320c8baf
 Merge family: objective/VAIOS-G707
 Source objective gap: data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md
 Validation repair evidence: data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md
+Attempt 2 confirmation: data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-2-validation-confirmation.md
 Retry-budget evidence: data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md
 
 ## Objective Validation Repair
@@ -47,7 +48,9 @@ requirements.
 `HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE` and
 `HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR`. The descriptor records task
 `VAI-674`, repair task `VAI-684`, goal `VAIOS-G707`, the source objective gap,
-this validation repair record, and the retry-budget evidence.
+this validation repair record, the attempt 2 confirmation at
+`data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-2-validation-confirmation.md`,
+and the retry-budget evidence.
 
 `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the Hallucinate App
 descriptor during `register_edge_capabilities` next to the mobile ORB, display

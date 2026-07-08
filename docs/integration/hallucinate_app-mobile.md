@@ -59,6 +59,10 @@ The source gap is
 `data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md`.
 The VAI-674 objective validation repair evidence is
 `data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md`.
+Attempt 2 re-validates the same proof stack in
+`data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-2-validation-confirmation.md`,
+and both Hallucinate App and mobile descriptors carry that confirmation as
+`attempt_2_validation_confirmation_ref`.
 The VAI-684 retry-budget record is
 `data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md`.
 No smaller child goals are required because the same integration test, runtime
