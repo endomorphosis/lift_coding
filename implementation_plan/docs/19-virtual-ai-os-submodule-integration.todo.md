@@ -9301,8 +9301,8 @@ cadence remains parseable and resumable.
 
 ## VAI-675 Resolve validation retry-budget failure for VAI-661
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: Repaired the VAI-661 validation blocker by adding SwissKnife/mobile interop descriptor, DAT display action contract, schema validation coverage, docs, discovery, objective heap evidence, and a focused integration test.
 - Priority: P1
 - Track: ops
 - Depends on: 
