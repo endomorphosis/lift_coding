@@ -562,7 +562,7 @@ Acceptance target:
 
 ## SWR-028 Add browser libp2p Playwright evidence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/libp2p-evidence
