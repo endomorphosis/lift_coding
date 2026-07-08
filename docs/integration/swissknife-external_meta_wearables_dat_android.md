@@ -1,6 +1,6 @@
 # SwissKnife / external/meta-wearables-dat-android Interop
 
-HAO-735 repairs the VAIOS-G705 objective validation gap for the shared
+MGW-574 repairs the VAIOS-G705 objective validation gap for the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
@@ -92,7 +92,7 @@ builder, statically inspects the SwissKnife TypeScript descriptor module for
 the expected exports/goal-packet metadata, validates representative
 SwissKnife control-surface, interaction-envelope, and MCP++ compatibility
 receipt payloads, and asserts this objective validation repair is recorded in
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-735-validation-repair.md`,
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-574-objective-validation-repair.md`,
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-574-attempt-6-validation-confirmation.md`,
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).

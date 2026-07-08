@@ -1,4 +1,4 @@
-"""SwissKnife/external/meta-wearables-dat-android interoperability regression tests for HAO-735."""
+"""SwissKnife/external/meta-wearables-dat-android interoperability tests for MGW-574."""
 
 from __future__ import annotations
 
@@ -312,6 +312,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
         "external/meta-wearables-dat-android/samples/DisplayAccess/app/src/main/AndroidManifest.xml"
         in src
     )
+    assert "MGW-574" in src
     assert "HAO-735" in src
     assert "VAIOS-G705" in src
     assert "agent_identity" in src
@@ -336,20 +337,20 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_w
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_meta_wearables_dat_android.md")
     discovery = read_text(
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-735-validation-repair.md"
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-574-objective-validation-repair.md"
     )
-    attempt_3_confirmation = read_text(
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-735-attempt-3-validation-confirmation.md"
+    attempt_6_confirmation = read_text(
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-574-attempt-6-validation-confirmation.md"
     )
     gap = read_text(
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-735-objective-gap-73dd061c433c.md"
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-574-objective-gap-73dd061c433c.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "HAO-735",
+        "MGW-574",
         "VAIOS-G705",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
@@ -363,11 +364,11 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/meta-wearables-dat-android/.cursor/rules/session-lifecycle.mdc",
         "external/meta-wearables-dat-android/.cursor/rules/permissions-registration.mdc",
     ]
-    for content in (docs, discovery, attempt_3_confirmation, heap):
+    for content in (docs, discovery, attempt_6_confirmation, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in discovery
-        assert goal_id in attempt_3_confirmation
+        assert goal_id in attempt_6_confirmation
         assert goal_id in heap
     assert "VAIOS-G705" in gap
