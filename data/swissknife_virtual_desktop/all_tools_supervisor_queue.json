@@ -1,0 +1,582 @@
+{
+  "schema": "swissknife.all_tools_supervisor_queue.v1",
+  "supervisor": {
+    "id": "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools",
+    "task_id_range": [
+      "SVD-027",
+      "SVD-050"
+    ],
+    "taskboard": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+  },
+  "summary": {
+    "task_count": 24,
+    "completed_task_ids": [
+      "SVD-027",
+      "SVD-028",
+      "SVD-029",
+      "SVD-030",
+      "SVD-031",
+      "SVD-032",
+      "SVD-033",
+      "SVD-034",
+      "SVD-035",
+      "SVD-036",
+      "SVD-037",
+      "SVD-038",
+      "SVD-040",
+      "SVD-041",
+      "SVD-042",
+      "SVD-043",
+      "SVD-048",
+      "SVD-049"
+    ],
+    "ready_task_ids": [
+      "SVD-044"
+    ],
+    "waiting_task_ids": [
+      "SVD-045",
+      "SVD-047",
+      "SVD-050"
+    ],
+    "blocked_task_ids": [
+      "SVD-039",
+      "SVD-046"
+    ],
+    "recommended_task_id": "SVD-044"
+  },
+  "resume_contract": {
+    "evidence_churn_rule": "generated evidence artifacts under swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ are authoritative for the current run even when ignored by git and must not be treated as source implementation churn.",
+    "accelerate_boundary_rule": "downstream release gates must not mark an app, ORB/IDL, glasses, or release task complete while SVD-031 records the accelerate compatibility endpoint as insufficient for that task's required surface.",
+    "resumable_when": "a task's validation command exits 0 and its expected evidence file exists.",
+    "blocked_when": "a task's dependency evidence is missing, the live MCP service boundary is unavailable, or physical Meta glasses hardware is required."
+  },
+  "generated_evidence_globs": [
+    "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.json",
+    "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.md"
+  ],
+  "tasks": {
+    "SVD-027": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-018",
+        "SVD-024",
+        "SVD-026"
+      ],
+      "outputs": [
+        "swissknife/scripts/capture-ipfs-mcp-all-tools-ledger.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-ledger.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-ledger.md"
+      ],
+      "validation": [
+        "cd swissknife && node --check scripts/capture-ipfs-mcp-all-tools-ledger.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs"
+      ],
+      "evidence": "Validation passed with the accepted all-tools ledger for ipfs_kit_py, ipfs_datasets_py, ipfs_accelerate_py, and static descriptor packs."
+    },
+    "SVD-028": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-014",
+        "SVD-027"
+      ],
+      "outputs": [
+        "swissknife/src/services/apps/all-tools-policy-classifier.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-policy-matrix.json",
+        "swissknife/docs/applications/all-mcp-tools-policy.md"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-policy-classifier.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed with every ledger row classified for policy, receipt, fallback, owner, exposure, and glasses gating."
+    },
+    "SVD-029": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-005",
+        "SVD-006",
+        "SVD-027",
+        "SVD-028"
+      ],
+      "outputs": [
+        "swissknife/src/services/apps/all-tools-app-binding-matrix.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-app-bindings.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-app-bindings.md"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-app-binding-matrix.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed with every ledger row mapped to app capabilities or a deliberate non-app disposition."
+    },
+    "SVD-030": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-005",
+        "SVD-019",
+        "SVD-027",
+        "SVD-029"
+      ],
+      "outputs": [
+        "swissknife/test/mcp-plus-plus/all-tools-execution-fixtures.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-execution-report.json"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-execution-fixtures.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed with dry-run execution fixtures and denied envelopes for every app-routable or guarded tool."
+    },
+    "SVD-031": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-024",
+        "SVD-027"
+      ],
+      "outputs": [
+        "swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-endpoint-decision.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs"
+      ],
+      "evidence": "Accepted the configured ipfs_accelerate_py endpoint as a bounded compatibility bridge until SVD-044 normalizes the full adapter surface."
+    },
+    "SVD-032": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-029",
+        "SVD-030"
+      ],
+      "outputs": [
+        "swissknife/web/js/apps/*",
+        "swissknife/test/e2e/all-tools-app-family-coverage.spec.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-app-family-coverage.json"
+      ],
+      "validation": [
+        "cd swissknife && PLAYWRIGHT_SKIP_WEB_SERVER=1 npx playwright test test/e2e/all-tools-app-family-coverage.spec.ts -c build-tools/configs/playwright.config.ts"
+      ],
+      "evidence": "Validation passed with visible ready, running, success, degraded, blocked, and fallback states for all app families."
+    },
+    "SVD-033": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-009",
+        "SVD-027",
+        "SVD-029",
+        "SVD-030"
+      ],
+      "outputs": [
+        "swissknife/src/services/apps/all-tools-composite-workflows.ts",
+        "swissknife/test/mcp-plus-plus/all-tools-composite-workflows.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-composite-workflows.json"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-composite-workflows.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed for all required cross-service workflow families with typed steps, cleanup behavior, event-DAG lineage, and glasses fallbacks."
+    },
+    "SVD-034": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-008",
+        "SVD-027",
+        "SVD-029",
+        "SVD-033"
+      ],
+      "outputs": [
+        "swissknife/src/services/all-tools-idl-generator.ts",
+        "swissknife/test/mcp-plus-plus/all-tools-idl-generator.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-idl-coverage.json"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-idl-generator.test.ts test/mcp-plus-plus/mcp-orb-capability-router.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed with deterministic ORB/IDL descriptors for every app-routable tool and composite workflow."
+    },
+    "SVD-035": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-015",
+        "SVD-016",
+        "SVD-017",
+        "SVD-029",
+        "SVD-034"
+      ],
+      "outputs": [
+        "swissknife/src/services/all-tools-glasses-projection.ts",
+        "swissknife/test/mcp-plus-plus/all-tools-glasses-projection.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-glasses-coverage.json"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-glasses-projection.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed with Meta glasses projections and hardware-free replay frames for every app-visible family."
+    },
+    "SVD-036": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-028",
+        "SVD-030",
+        "SVD-034",
+        "SVD-035"
+      ],
+      "outputs": [
+        "swissknife/src/services/apps/all-tools-release-policy-gates.ts",
+        "swissknife/test/mcp-plus-plus/all-tools-release-policy-gates.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-policy-release-gate.json"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-release-policy-gates.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ],
+      "evidence": "Validation passed; the release policy gate remains no-go on the accepted SVD-031 accelerate adapter boundary."
+    },
+    "SVD-037": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-027",
+        "SVD-028",
+        "SVD-029",
+        "SVD-030"
+      ],
+      "outputs": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json"
+      ],
+      "validation": [
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py"
+      ],
+      "evidence": "Added the resumable all-tools supervisor queue with task metadata, dependency graph, validation commands, generated evidence globs, and resume contract."
+    },
+    "SVD-038": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-027",
+        "SVD-028",
+        "SVD-029",
+        "SVD-030",
+        "SVD-034",
+        "SVD-035",
+        "SVD-036"
+      ],
+      "outputs": [
+        "swissknife/scripts/build-virtual-desktop-release-evidence.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs"
+      ],
+      "evidence": "Validation passed; release evidence remains NO-GO on the SVD-031 bounded ipfs_accelerate_py adapter boundary."
+    },
+    "SVD-039": {
+      "status": "blocked",
+      "depends_on": [
+        "SVD-021",
+        "SVD-035",
+        "SVD-036",
+        "SVD-038"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md",
+        "docs/meta-glasses-expanded-io-physical-validation-checklist.md"
+      ],
+      "validation": [
+        "rg -n \"physical-all-tools|SVD-039|native DAT|display-webapp|mobile-card|audio-summary\" docs swissknife/test-results/virtual-desktop-ipfs-mcp-orb"
+      ],
+      "evidence": "Blocked pending paired physical Meta glasses hardware, native DAT release-channel build, package credentials, firmware evidence, and on-device capture logs."
+    },
+    "SVD-040": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-038"
+      ],
+      "outputs": [
+        "data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md"
+      ],
+      "validation": [
+        "rg -n \"SVD-040|no-new-unknowns|all-tools|discovered\" data/swissknife_virtual_desktop/discovery implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+      ],
+      "evidence": "No new unknown all-tools integration class was discovered beyond the known accelerate adapter boundary and physical hardware block."
+    },
+    "SVD-041": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-038",
+        "SVD-040"
+      ],
+      "outputs": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json",
+        "tests/test_virtual_ai_os_todo_queue.py"
+      ],
+      "validation": [
+        "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py"
+      ],
+      "evidence": "Appended SVD-041 through SVD-047 as phase two, with SVD-044 ready and physical Meta glasses work blocked on real hardware evidence."
+    },
+    "SVD-042": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-029",
+        "SVD-032",
+        "SVD-034",
+        "SVD-035",
+        "SVD-038"
+      ],
+      "outputs": [
+        "swissknife/scripts/build-all-tools-capability-matrix.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/capability-matrix.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/capability-matrix.md"
+      ],
+      "validation": [
+        "cd swissknife && node --check scripts/build-all-tools-capability-matrix.cjs && node scripts/build-all-tools-capability-matrix.cjs && node scripts/build-virtual-desktop-release-evidence.cjs"
+      ],
+      "evidence": "Validation passed with the all-app all-tools capability matrix and regenerated release evidence."
+    },
+    "SVD-043": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-018",
+        "SVD-038"
+      ],
+      "outputs": [
+        "swissknife/test/e2e/validate-all-applications.test.ts",
+        "swissknife/scripts/validate-virtual-desktop-manifest.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/manifest-drift.json"
+      ],
+      "validation": [
+        "cd swissknife && node --check scripts/validate-virtual-desktop-manifest.cjs && node scripts/validate-virtual-desktop-manifest.cjs && npx tsc --noEmit --pretty false --allowJs false --skipLibCheck --moduleResolution node --module commonjs --target es2020 --types node,playwright test/e2e/validate-all-applications.test.ts"
+      ],
+      "evidence": "Validation passed after reconciling legacy Playwright selectors with the canonical application manifest."
+    },
+    "SVD-044": {
+      "status": "ready",
+      "depends_on": [
+        "SVD-031",
+        "SVD-036",
+        "SVD-038",
+        "SVD-042"
+      ],
+      "outputs": [
+        "swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs",
+        "swissknife/src/services/apps/all-tools-release-policy-gates.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && npx jest test/mcp-plus-plus/all-tools-release-policy-gates.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ]
+    },
+    "SVD-045": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-034",
+        "SVD-035",
+        "SVD-042",
+        "SVD-044"
+      ],
+      "outputs": [
+        "swissknife/test/mcp-plus-plus/all-tools-glasses-handoff-packets.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-glasses-handoff-packets.json"
+      ],
+      "validation": [
+        "cd swissknife && npx jest test/mcp-plus-plus/all-tools-glasses-handoff-packets.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ]
+    },
+    "SVD-046": {
+      "status": "blocked",
+      "depends_on": [
+        "SVD-039",
+        "SVD-045"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md",
+        "docs/meta-glasses-expanded-io-physical-validation-checklist.md"
+      ],
+      "validation": [
+        "rg -n \"paired physical|native DAT|display-webapp|mobile-card|audio-summary|firmware|receipt\" swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md docs/meta-glasses-expanded-io-physical-validation-checklist.md"
+      ],
+      "evidence": "Blocked pending real paired Meta glasses evidence for native DAT display, display-webapp, mobile-card fallback, audio, rollback, firmware, and receipts."
+    },
+    "SVD-047": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-044",
+        "SVD-045",
+        "SVD-046"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md",
+        "data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/build-all-tools-capability-matrix.cjs && node scripts/build-virtual-desktop-release-evidence.cjs && rg -n \"Decision: \\*\\*GO\\*\\*|Decision: \\*\\*NO-GO\\*\\*|Blockers\" test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md"
+      ]
+    },
+    "SVD-048": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-041",
+        "SVD-042",
+        "SVD-043"
+      ],
+      "outputs": [
+        "swissknife/scripts/all-tools-evidence-lib.cjs",
+        "swissknife/scripts/capture-ipfs-mcp-service-evidence.cjs",
+        "swissknife/scripts/capture-ipfs-mcp-all-tools-ledger.cjs",
+        "swissknife/scripts/capture-ipfs-accelerate-adapter-coverage.cjs",
+        "swissknife/scripts/build-all-tools-capability-matrix.cjs",
+        "swissknife/scripts/build-virtual-desktop-release-evidence.cjs",
+        "swissknife/scripts/validate-virtual-desktop-manifest.cjs",
+        "swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs"
+      ],
+      "validation": [
+        "cd swissknife && node --check scripts/all-tools-evidence-lib.cjs && node --check scripts/capture-ipfs-mcp-service-evidence.cjs && node --check scripts/capture-ipfs-mcp-all-tools-ledger.cjs && node --check scripts/capture-ipfs-accelerate-adapter-coverage.cjs && node --check scripts/build-all-tools-capability-matrix.cjs && node --check scripts/build-virtual-desktop-release-evidence.cjs && node --check scripts/validate-virtual-desktop-manifest.cjs && node --check scripts/start-ipfs-accelerate-mcp-compat.cjs"
+      ],
+      "evidence": "Validation passed with restored all-tools evidence scripts available in the current checkout."
+    },
+    "SVD-049": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-031",
+        "SVD-048"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/service-health.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/descriptor-discovery.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-ledger.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/capture-ipfs-accelerate-adapter-coverage.cjs && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && node scripts/validate-virtual-desktop-manifest.cjs && node scripts/build-all-tools-capability-matrix.cjs && node scripts/build-virtual-desktop-release-evidence.cjs"
+      ],
+      "evidence": "Captured current live service and adapter evidence; release evidence remains NO-GO with the accelerate adapter boundary blocker."
+    },
+    "SVD-050": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-044",
+        "SVD-049"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-policy-release-gate.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/capture-ipfs-accelerate-adapter-coverage.cjs && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && npx jest test/mcp-plus-plus/all-tools-release-policy-gates.test.ts --config=config/jest/jest.config.cjs --runInBand"
+      ]
+    }
+  },
+  "dependency_graph": {
+    "SVD-027": [
+      "SVD-028",
+      "SVD-029",
+      "SVD-030",
+      "SVD-031",
+      "SVD-033",
+      "SVD-034",
+      "SVD-037",
+      "SVD-038"
+    ],
+    "SVD-028": [
+      "SVD-029",
+      "SVD-036",
+      "SVD-037",
+      "SVD-038"
+    ],
+    "SVD-029": [
+      "SVD-030",
+      "SVD-032",
+      "SVD-033",
+      "SVD-034",
+      "SVD-035",
+      "SVD-037",
+      "SVD-038",
+      "SVD-042"
+    ],
+    "SVD-030": [
+      "SVD-032",
+      "SVD-033",
+      "SVD-036",
+      "SVD-037",
+      "SVD-038"
+    ],
+    "SVD-031": [
+      "SVD-044",
+      "SVD-049"
+    ],
+    "SVD-032": [
+      "SVD-042"
+    ],
+    "SVD-033": [
+      "SVD-034"
+    ],
+    "SVD-034": [
+      "SVD-035",
+      "SVD-036",
+      "SVD-038",
+      "SVD-042",
+      "SVD-045"
+    ],
+    "SVD-035": [
+      "SVD-036",
+      "SVD-038",
+      "SVD-039",
+      "SVD-042",
+      "SVD-045"
+    ],
+    "SVD-036": [
+      "SVD-038",
+      "SVD-039",
+      "SVD-044"
+    ],
+    "SVD-037": [
+      "SVD-038"
+    ],
+    "SVD-038": [
+      "SVD-039",
+      "SVD-040",
+      "SVD-041",
+      "SVD-042",
+      "SVD-043",
+      "SVD-044"
+    ],
+    "SVD-039": [
+      "SVD-046"
+    ],
+    "SVD-040": [
+      "SVD-041"
+    ],
+    "SVD-041": [
+      "SVD-048"
+    ],
+    "SVD-042": [
+      "SVD-044",
+      "SVD-045",
+      "SVD-048"
+    ],
+    "SVD-043": [
+      "SVD-048"
+    ],
+    "SVD-044": [
+      "SVD-045",
+      "SVD-047",
+      "SVD-050"
+    ],
+    "SVD-045": [
+      "SVD-046",
+      "SVD-047"
+    ],
+    "SVD-046": [
+      "SVD-047"
+    ],
+    "SVD-047": [],
+    "SVD-048": [
+      "SVD-049"
+    ],
+    "SVD-049": [
+      "SVD-050"
+    ],
+    "SVD-050": []
+  }
+}
