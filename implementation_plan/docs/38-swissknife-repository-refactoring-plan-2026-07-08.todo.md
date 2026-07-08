@@ -682,7 +682,7 @@ state observation.
 
 ## SWR-034 Refresh browser libp2p Playwright evidence
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/libp2p
 - Fingerprint: e0cf988bf0c32c65268b8a2bcb369866f4442d1c
