@@ -305,7 +305,10 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_k
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_ipfs_kit.md")
     discovery = read_text(
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-572-objective-validation-repair.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-683-vai-664-validation-repair.md"
+    )
+    state_discovery = read_text(
+        "data/virtual_ai_os/state/discovery/2026-07-08-vai-683-vai-664-validation-repair.md"
     )
     gap = read_text(
         "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-572-objective-gap-f463532ba4e3.md"
@@ -314,9 +317,12 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
 
     required_terms = [
         "MGW-572",
+        "VAI-683",
+        "VAI-664",
         "VAIOS-G703",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
+        "validation retry-budget failure",
         "interface contract swissknife external/ipfs_kit",
         "tests/integration/test_swissknife_external_ipfs_kit_interop.py",
         DESCRIPTOR_TS_PATH,
@@ -328,7 +334,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py",
         "external/ipfs_kit/data/deprecations_report.schema.json",
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, state_discovery, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
