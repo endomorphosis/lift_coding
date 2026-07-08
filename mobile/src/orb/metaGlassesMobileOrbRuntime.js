@@ -7,6 +7,7 @@ import { metaGlassesOrbEdgeSessionStore } from './metaGlassesOrbEdgeSession';
 import { metaGlassesOrbStateStore } from './metaGlassesOrbStateStore';
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
   MOBILE_ORB_BRIDGE_INTERFACE,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -75,6 +76,7 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
   const localInterfaceCids = options.localInterfaceCids || [
     localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
     localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
+    localInterfaceKey(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE),
   ];
   const bridge = createMetaGlassesMobileOrbBridge({
     ...options,
@@ -130,6 +132,7 @@ export function createMetaGlassesMobileOrbRuntime(options = {}) {
       ...bridge.getDiagnostics(),
       mobile_orb_interface_cid: localInterfaceCids[0],
       display_widget_interface_cid: localInterfaceCids[1],
+      hallucinate_app_mobile_interop_interface_cid: localInterfaceCids[2],
       backend_kind: options.backend ? 'injected' : 'api',
       edge_session_persistence: Boolean(edgeSessionStore),
       orb_state_persistence: Boolean(orbStateStore),
