@@ -52,8 +52,11 @@ path is:
   `createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATIOSInterop()` to
   register the descriptor on a live `MCPPlusPlus` runtime registry, and
   `buildSwissKnifeMetaWearablesDATIOSControlSurfaceContract()` /
-  `buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope()` to build
-  representative control-surface and interaction-envelope payloads.
+  `buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope()` /
+  `buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt()` /
+  `buildSwissKnifeMetaWearablesDATIOSMediationReceipt()` to build
+  representative control-surface, interaction-envelope, MCP++ compatibility,
+  and mediation-receipt payloads.
 - `swissknife/contracts/control_surface_contract.schema.json`,
   `swissknife/contracts/interaction_envelope.schema.json`,
   `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`, and

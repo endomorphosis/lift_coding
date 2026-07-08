@@ -31,8 +31,10 @@ VAIOS-G706 objective gap for the shared
   `SWISSKNIFE_META_WEARABLES_DAT_IOS_INTEROP_DESCRIPTOR`, registers the iOS DAT
   Display descriptor through `registerSwissKnifeMetaWearablesDATIOSDisplayInterop()` /
   `createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATIOSInterop()`, and
-  provides `buildSwissKnifeMetaWearablesDATIOSControlSurfaceContract()` /
-  `buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope()` payload builders.
+  provides `buildSwissKnifeMetaWearablesDATIOSControlSurfaceContract()`,
+  `buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope()`,
+  `buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt()`, and
+  `buildSwissKnifeMetaWearablesDATIOSMediationReceipt()` payload builders.
 - `src/handsfree/swissknife_meta_wearables_dat_ios_interop.py` statically
   discovers `external/meta-wearables-dat-ios/.cursor/rules/display-access.mdc`,
   `external/meta-wearables-dat-ios/.cursor/rules/session-lifecycle.mdc`,
@@ -59,10 +61,23 @@ VAIOS-G706 objective gap for the shared
 
 ## Validation
 
-Command: `python -m pytest tests/integration -q`
+Focused target:
 
-Result: see task validation output for pass/skip/fail counts recorded at merge
-time.
+`python -m pytest tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py -q` - 7 passed.
+
+Full supervisor target:
+
+`python -m pytest tests/integration -q` - currently blocked by pre-existing
+checked-out `swissknife` drift outside the VAIOS-G706 proof stack: legacy
+outer-harness paths such as `swissknife/src/services/mcp-plus-plus.ts` and
+sibling descriptors such as
+`swissknife/src/services/mcp/ipfs-accelerate-duckdb-interop-descriptor.ts`,
+`swissknife/src/services/mcp/ipfs-datasets-bucket-vfs-interop-descriptor.ts`,
+`swissknife/src/services/mcp/ipfs-kit-mcp-schema-interop-descriptor.ts`, and
+`swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts` are absent in
+the current `swissknife` gitlink checkout. The VAI-667 focused gate passes
+after initializing the pinned `external/meta-wearables-dat-ios` gitlink at
+`2b5695d16a710f3d2d7341f88570b86d01723d50` with no pointer change.
 
 This objective validation repair keeps VAIOS-G700, VAIOS-G701, VAIOS-G702,
 VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706 aligned with the
