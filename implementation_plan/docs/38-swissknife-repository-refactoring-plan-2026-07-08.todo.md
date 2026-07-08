@@ -658,7 +658,7 @@ state observation.
 
 ## SWR-032 Re-run clean release-readiness gate and archive output
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/release
 - Fingerprint: b52f536feb96b75b970e01d0bc770f4269b20c3e
@@ -715,3 +715,111 @@ state observation.
 - Outputs: implementation_plan/docs/39-swissknife-browser-compatibility-followups-2026-07-08.todo.md, swissknife/docs/browser-compatibility-inventory.md, swissknife/docs/service-boundary-audit.json
 - Validation: test -f implementation_plan/docs/39-swissknife-browser-compatibility-followups-2026-07-08.todo.md && cd swissknife && node scripts/audit-browser-compat.mjs --report docs/browser-compatibility-inventory.md && node scripts/audit-source-modules.mjs --fail-on-unknown --fail-on-forbidden
 - Acceptance: A new follow-up board exists only for concrete residual `host-only` or `unknown` browser inventory items, with one task per actionable module family; completed SWR work is not duplicated, and every follow-up has validation and browser-compatibility acceptance criteria.
+
+## SWR-037 Audit package exports and browser entry conditions
+
+- Status: todo
+- Priority: P1
+- Track: refactor/package-browser-api
+- Fingerprint: 3a531cd7e771c4f08d3631b1bb5d6f942d9cbad2
+- Dedupe key: swissknife_refactor:package_exports_browser_conditions
+- Depends on: SWR-035, SWR-036
+- Outputs: swissknife/package.json, swissknife/docs/browser-public-api.md, swissknife/scripts/audit-package-browser-exports.mjs
+- Validation: cd swissknife && node scripts/audit-package-browser-exports.mjs --fail-on-host-leakage --report docs/browser-public-api.md && npm run typecheck:browser
+- Acceptance: Public browser exports resolve only to browser-safe TS/WASM modules; host-only exports are explicitly marked host/runtime-specific; `package.json` browser/import conditions cannot expose Node filesystem, subprocess, Python, native binary, or terminal modules to browser consumers.
+
+## SWR-038 Enforce browser dependency allowlist and Node builtin denylist
+
+- Status: todo
+- Priority: P1
+- Track: refactor/dependencies
+- Fingerprint: b029fded8f0e250a4f49337b8f4954c86bb52e66
+- Dedupe key: swissknife_refactor:browser_dependency_allowlist
+- Depends on: SWR-032, SWR-033, SWR-037
+- Outputs: swissknife/docs/browser-dependency-policy.md, swissknife/scripts/audit-browser-dependencies.mjs, swissknife/package.json
+- Validation: cd swissknife && node scripts/audit-browser-dependencies.mjs --fail-on-node-builtins --fail-on-unapproved-polyfills --report docs/browser-dependency-policy.md && npm run build:web
+- Acceptance: Browser builds have a documented dependency allowlist, no accidental Node builtin imports, no unapproved browser polyfills, and clear ownership for libp2p, snarkjs/WASM, IPFS, storage, and UI dependencies.
+
+## SWR-039 Make libp2p browser defaults visible in app settings and MCP control
+
+- Status: todo
+- Priority: P1
+- Track: refactor/libp2p
+- Fingerprint: d8656e302ec5d43aa5acdfbe24746904f53797f3
+- Dedupe key: swissknife_refactor:libp2p_browser_defaults_ui
+- Depends on: SWR-015, SWR-027, SWR-034
+- Outputs: swissknife/web/js/apps/mcp-control.js, swissknife/web/js/apps/p2p-network.js, swissknife/src/services/mcp/libp2p-browser-runtime.ts, swissknife/docs/ipfs-browser-transport.md
+- Validation: cd swissknife && npm run build:web && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.libp2p-browser.config.ts
+- Acceptance: Browser UI and MCP control surfaces show real libp2p browser transport status by default, including WebRTC, WebSockets, circuit relay v2, Identify, Noise, Yamux, and GossipSub; unavailable packages are shown as capability gaps, not hidden fallbacks or fake transports.
+
+## SWR-040 Harden browser WASM asset, integrity, and isolation policy
+
+- Status: todo
+- Priority: P1
+- Track: refactor/wasm
+- Fingerprint: 947c1e63f0ad5ea7b55a99de20ef438f2e2441ec
+- Dedupe key: swissknife_refactor:browser_wasm_integrity_isolation
+- Depends on: SWR-005, SWR-022, SWR-033
+- Outputs: swissknife/docs/browser-wasm-asset-policy.md, swissknife/docs/browser-zkp-artifacts.md, swissknife/src/services/zkp/artifacts, swissknife/scripts/audit-browser-wasm-assets.mjs
+- Validation: cd swissknife && node scripts/audit-browser-wasm-assets.mjs --fail-on-missing-integrity --report docs/browser-wasm-asset-policy.md && npm run test:run -- test/mcp-plus-plus/wasm-prover-browser-zkp-real.test.ts test/mcp-plus-plus/wasm-prover-browser-groth16-semantic.test.ts
+- Acceptance: Browser WASM assets used by theorem proving, ZKP, and optional NLP/inference paths have deterministic resolution, integrity metadata, cache policy, and documented COOP/COEP/CSP requirements where needed; simulated proof assets remain test-only.
+
+## SWR-041 Add browser deployment policy for CSP, workers, storage, and offline mode
+
+- Status: todo
+- Priority: P2
+- Track: refactor/browser-deployment
+- Fingerprint: acb8db980d9cb88a8bcde5e5d780f97de3fcb67e
+- Dedupe key: swissknife_refactor:browser_deployment_policy
+- Depends on: SWR-018, SWR-019, SWR-033, SWR-040
+- Outputs: swissknife/docs/browser-deployment-policy.md, swissknife/scripts/audit-browser-deployment-policy.mjs, swissknife/build-tools/configs/vite.web.config.ts
+- Validation: cd swissknife && node scripts/audit-browser-deployment-policy.mjs --report docs/browser-deployment-policy.md && npm run build:web && npm run test:browser-compat
+- Acceptance: Browser deployment requirements for CSP, worker creation, storage APIs, OPFS/IndexedDB/cache storage, WASM isolation, and offline behavior are documented and audited; host-only worker and storage paths cannot enter browser deployment bundles.
+
+## SWR-042 Remediate residual browser inventory host-only and unknown items
+
+- Status: todo
+- Priority: P1
+- Track: refactor/browser-inventory
+- Fingerprint: 55ca9a9299dc0cff5d92eab5978750568d1e956a
+- Dedupe key: swissknife_refactor:residual_host_unknown_remediation
+- Depends on: SWR-036, SWR-037, SWR-038, SWR-041
+- Outputs: swissknife/docs/browser-compatibility-inventory.md, implementation_plan/docs/39-swissknife-browser-compatibility-followups-2026-07-08.todo.md, swissknife/src/platform, swissknife/src/services
+- Validation: cd swissknife && node scripts/audit-browser-compat.mjs --report docs/browser-compatibility-inventory.md --json docs/browser-compatibility-inventory.json && node scripts/audit-source-modules.mjs --fail-on-unknown --fail-on-forbidden && npm run build:web
+- Acceptance: Each residual `host-only` or `unknown` browser inventory item is either remediated, moved behind an explicit host boundary, or represented in the follow-up board with a concrete owner, import-chain evidence, and validation command.
+
+## SWR-043 Add browser smoke matrix across desktop, mobile, and constrained capabilities
+
+- Status: todo
+- Priority: P2
+- Track: refactor/e2e
+- Fingerprint: b0b83a7632ac2d810fd94ddc6549a76b808f6888
+- Dedupe key: swissknife_refactor:browser_smoke_matrix
+- Depends on: SWR-028, SWR-034, SWR-039, SWR-042
+- Outputs: swissknife/test/e2e/browser-smoke-matrix.spec.ts, swissknife/docs/browser-smoke-matrix-evidence.md, swissknife/build-tools/configs/playwright.browser-smoke.config.ts
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.browser-smoke.config.ts
+- Acceptance: Playwright evidence covers desktop and mobile viewport startup, MCP dashboard, libp2p-capable and libp2p-constrained capability states, storage availability, worker availability, and browser-safe app lazy loading without host-module leakage.
+
+## SWR-044 Wire phase-11 browser hardening into release readiness
+
+- Status: todo
+- Priority: P1
+- Track: refactor/release
+- Fingerprint: f50803f4ba49799d1c883541021d367fc1055671
+- Dedupe key: swissknife_refactor:phase11_release_readiness
+- Depends on: SWR-037, SWR-038, SWR-040, SWR-041, SWR-043
+- Outputs: swissknife/scripts/release-readiness-gate.mjs, swissknife/docs/release-browser-gates.md, swissknife/.github/workflows/release-readiness-gates.yml
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: Release readiness fails on package export browser leakage, browser dependency allowlist drift, missing WASM integrity metadata, missing deployment policy evidence, stale browser smoke evidence, host leakage, default Pyodide, or stale libp2p evidence.
+
+## SWR-045 Perform final SwissKnife merge dry-run and residual-risk signoff
+
+- Status: todo
+- Priority: P1
+- Track: refactor/integration
+- Fingerprint: dff3b9b093c005b7ab7c0a8249f6317af8e0371f
+- Dedupe key: swissknife_refactor:final_merge_dry_run_signoff
+- Depends on: SWR-035, SWR-042, SWR-044
+- Outputs: swissknife/docs/refactor-merge-package.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && test -f docs/refactor-final-signoff.md && npm run release:readiness && git status --short && git log --oneline -30
+- Acceptance: Final signoff documents the merge dry-run result, exact commits to merge, release-readiness output, residual browser-compatibility risks, and rollback plan; no unrelated root-repo changes are included in the SwissKnife merge package without explicit operator approval.
