@@ -2,6 +2,14 @@
   "name": "display_widget_bridge",
   "namespace": "handsfree.meta_glasses.display",
   "version": "0.1.0",
+  "interop_contract": "interface contract swissknife mobile",
+  "action_contract": "handsfree.meta-glasses/display-widget-action@0.1.0",
+  "schema_refs": [
+    "control_surface_contract",
+    "interaction_envelope",
+    "mcp_plus_plus_compatibility_receipt",
+    "mediation_receipt"
+  ],
   "methods": [
     {
       "name": "render_widget",

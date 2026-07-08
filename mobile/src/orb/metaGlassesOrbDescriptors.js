@@ -3,6 +3,13 @@ export const MOBILE_ORB_BRIDGE_INTERFACE = {
   namespace: 'handsfree.meta_glasses.mobile',
   version: '0.1.0',
   specPath: 'spec/meta_glasses_mobile_orb_bridge_interface.json',
+  interop_contract: 'interface contract swissknife mobile',
+  schema_refs: [
+    'control_surface_contract',
+    'interaction_envelope',
+    'mcp_plus_plus_compatibility_receipt',
+    'mediation_receipt',
+  ],
 };
 
 export const MOBILE_ORB_BRIDGE_OPERATIONS = [
@@ -20,6 +27,14 @@ export const DISPLAY_WIDGET_BRIDGE_INTERFACE = {
   namespace: 'handsfree.meta_glasses.display',
   version: '0.1.0',
   specPath: 'spec/meta_glasses_display_widget_orb_interface.json',
+  interop_contract: 'interface contract swissknife mobile',
+  action_contract: 'handsfree.meta-glasses/display-widget-action@0.1.0',
+  schema_refs: [
+    'control_surface_contract',
+    'interaction_envelope',
+    'mcp_plus_plus_compatibility_receipt',
+    'mediation_receipt',
+  ],
 };
 
 export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
@@ -33,6 +48,41 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'play_video',
   'subscribe_updates',
 ];
+
+export const SWISSKNIFE_MOBILE_INTEROP_INTERFACE = {
+  name: 'swissknife_mobile_display_widget_interop',
+  namespace: 'handsfree.interop.swissknife_mobile',
+  version: '0.1.0',
+  interop_contract: 'interface contract swissknife mobile',
+  producer: 'swissknife',
+  consumer: 'mobile',
+  mobile_surface: 'meta-wearables-dat',
+  swissknife_surface: 'meta-glasses-display-orb',
+  descriptors: [
+    MOBILE_ORB_BRIDGE_INTERFACE,
+    DISPLAY_WIDGET_BRIDGE_INTERFACE,
+  ],
+  operations: DISPLAY_WIDGET_BRIDGE_OPERATIONS,
+  required_payload_fields: [
+    'contract',
+    'interop_contract',
+    'type',
+    'operation',
+    'dat_method',
+    'widget_id',
+    'interface_cid',
+    'orb_receipt_cid',
+    'control_surface_contract_ref',
+    'interaction_envelope',
+    'mediation_receipt',
+  ],
+  schema_refs: [
+    'control_surface_contract',
+    'interaction_envelope',
+    'mcp_plus_plus_compatibility_receipt',
+    'mediation_receipt',
+  ],
+};
 
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
@@ -110,6 +160,18 @@ export function descriptorRef(descriptor, interfaceCid = null) {
   }
   if (descriptor.compatibility && typeof descriptor.compatibility === 'object') {
     ref.compatibility = descriptor.compatibility;
+  }
+  if (descriptor.interop_contract) {
+    ref.interop_contract = descriptor.interop_contract;
+  }
+  if (descriptor.action_contract) {
+    ref.action_contract = descriptor.action_contract;
+  }
+  if (Array.isArray(descriptor.schema_refs)) {
+    ref.schema_refs = descriptor.schema_refs;
+  }
+  if (Array.isArray(descriptor.operations)) {
+    ref.operations = descriptor.operations;
   }
   const metadata = normalizeDescriptorMetadata(descriptor.metadata);
   if (metadata && Object.keys(metadata).length > 0) {

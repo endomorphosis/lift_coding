@@ -861,7 +861,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G700 Interoperate swissknife with mobile
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -886,6 +886,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/swissknife-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `swissknife` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Completed at: 2026-07-08T00:00:00+00:00
+- MGW-569 objective validation repair: `tests/integration/test_swissknife_mobile_interop.py`, `docs/integration/swissknife-mobile.md`, and `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-validation-repair.md` prove the `interface contract swissknife mobile` handoff. `mobile/src/orb/metaGlassesOrbDescriptors.js` exports `SWISSKNIFE_MOBILE_INTEROP_INTERFACE`, `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js` exports `normalizeSwissKnifeMobileDisplayWidgetAction`, `swissknife/src/services/glasses/meta-glasses-display-orb-adapter.ts` emits the shared display-widget action contract, `control_surface_contract_ref`, `interaction_envelope_ref`, and schema refs, and `swissknife/src/services/glasses/meta-glasses-mobile-orb-bridge.ts` advertises the interop contract in descriptor `data_contracts`. The repair also keeps the shared swissknife packet evidence aligned for VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706 by validating `control_surface_contract`, `interaction_envelope`, `mcp_plus_plus_compatibility_receipt`, and `mediation_receipt` coverage.
+- Completion validation: python -m pytest tests/integration/test_swissknife_mobile_interop.py -q
 
 ## VAIOS-G701 Interoperate swissknife with external/ipfs_accelerate
 

@@ -16,8 +16,6 @@ import {
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
 export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
   'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
@@ -35,8 +33,6 @@ const CONTROL_SURFACE_SCHEMA_REFS = [
   'policy_decision',
   'mediation_receipt',
 ];
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const DAT_CAPABILITY_KEYS = [
   'session',
   'camera',
@@ -116,97 +112,6 @@ function collectControlSurfacePolicyCids(record = {}) {
     );
   });
   return uniqueStrings(values);
-}
-
-function collectDescriptorCids(record = {}) {
-  const values = [
-    record.service_interface_cid,
-    record.descriptor_cid,
-    record.interface_cid,
-    record.orb_binding?.interface_cid,
-    record.orb_binding?.descriptor_cid,
-    record.orb_binding?.transport_binding?.metadata?.descriptor_cid,
-    record.display_widget_action?.descriptor_cid,
-    record.display_widget_action?.interface_cid,
-  ];
-  values.push(...arrayOrEmpty(record.accepted_interface_cids));
-  values.push(...arrayOrEmpty(record.local_interface_cids));
-  arrayOrEmpty(record.descriptors).forEach((descriptor) => {
-    if (!isObject(descriptor)) {
-      return;
-    }
-    values.push(descriptor.interface_cid, descriptor.descriptor_cid, descriptor.schemaHash);
-  });
-  return uniqueStrings(values);
-}
-
-function collectReceiptCids(record = {}) {
-  const values = [
-    record.receipt_cid,
-    record.orb_receipt_cid,
-    record.mediation_receipt?.receipt_id,
-    record.display_widget_action?.orb_receipt_cid,
-    record.display_widget_action?.receipt_cid,
-  ];
-  values.push(...arrayOrEmpty(record.parent_receipt_cids));
-  values.push(...arrayOrEmpty(record.output_refs));
-  arrayOrEmpty(record.follow_up_actions).forEach((actionItem) => {
-    if (!isObject(actionItem)) {
-      return;
-    }
-    const mobilePayload = actionItem.mobile_payload;
-    const displayAction = actionItem.params?.display_widget_action;
-    values.push(
-      mobilePayload?.orb_receipt_cid,
-      mobilePayload?.receipt_cid,
-      displayAction?.orb_receipt_cid,
-      displayAction?.receipt_cid
-    );
-  });
-  return uniqueStrings(values);
-}
-
-function fallbackReason(fallback = {}) {
-  if (!isObject(fallback)) {
-    return null;
-  }
-  return (
-    fallback.reason ||
-    fallback.message ||
-    fallback.error ||
-    fallback.render_path ||
-    null
-  );
-}
-
-function collectFallbackDetails(record = {}) {
-  const candidates = [
-    ['record', record.fallback],
-    ['display_widget_action', record.display_widget_action?.fallback],
-  ];
-  arrayOrEmpty(record.follow_up_actions).forEach((actionItem) => {
-    if (!isObject(actionItem)) {
-      return;
-    }
-    candidates.push(
-      ['follow_up_mobile_payload', actionItem.mobile_payload?.fallback],
-      ['follow_up_display_action', actionItem.params?.display_widget_action?.fallback]
-    );
-  });
-  return candidates
-    .map(([source, fallback]) => {
-      const reason = fallbackReason(fallback);
-      if (!reason) {
-        return null;
-      }
-      return {
-        source,
-        reason,
-        render_path: fallback.render_path,
-        message: fallback.message,
-      };
-    })
-    .filter(Boolean);
 }
 
 function capabilityCounts(edgeSession) {
