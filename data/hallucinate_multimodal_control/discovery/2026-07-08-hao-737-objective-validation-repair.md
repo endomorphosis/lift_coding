@@ -45,3 +45,17 @@ context for VAIOS-G710 and VAIOS-G711. No smaller child goals are required
 for this HAO-737 gap because the missing evidence terms are now covered by a
 cohesive contract, handoff builder, integration test, discovery record, and
 objective heap entry.
+
+## Validation
+
+Attempt 3 retargeted the active proof from the parallel MGW backlog lane to
+the HAO-737 lane by binding `TASK_ID`, the integration test, and this
+discovery receipt to `HAO-737` and
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-737-objective-validation-repair.md`.
+The focused gate
+`python -m pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py -q`
+passed with 7 tests. The full requested gate
+`python -m pytest tests/integration -q` passed with 436 passed, 89 skipped,
+and 16 warnings after checking out the recorded
+`external/meta-wearables-dat-android` and `external/ipfs_kit` submodule
+pointers in this worktree without changing gitlink commits.
