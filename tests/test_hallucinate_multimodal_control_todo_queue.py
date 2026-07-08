@@ -7174,3 +7174,95 @@ def test_daemon_constructor_fixtures_hide_scanner_visible_task_board_path():
     )
 
     assert flagged_constructor_arg not in Path(__file__).read_text(encoding="utf-8")
+
+
+def test_mgw_581_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    meta_receipt_path = (
+        MGW_DISCOVERY_ROOT / "2026-07-08-mgw-581-launch-playwright-validation-gate.md"
+    )
+    receipt_path = DISCOVERY_ROOT / "2026-07-08-mgw-581-mcp-dashboard-launch-gate.md"
+    attempt_receipt_path = DISCOVERY_ROOT / "2026-07-08-mgw-581-attempt-1-validation.md"
+    meta_attempt_path = (
+        MGW_DISCOVERY_ROOT / "2026-07-08-mgw-581-attempt-1-launch-playwright-validation-gate.md"
+    )
+    objective_gap_path = MGW_DISCOVERY_ROOT / "2026-07-08-mgw-581-objective-gap-7ea369464239.md"
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "mgw-581-mcp-dashboard-launch-gate.json"
+    )
+    catalog_fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-512-mcp-dashboard-catalog.json"
+    )
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    meta_receipt = meta_receipt_path.read_text(encoding="utf-8")
+    receipt = receipt_path.read_text(encoding="utf-8")
+    attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
+    meta_attempt = meta_attempt_path.read_text(encoding="utf-8")
+    objective_gap = objective_gap_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
+    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "MGW-581")
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g723_text = " ".join([*goals["VAIOS-G723"].fields.keys(), *goals["VAIOS-G723"].fields.values()])
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "MGW-581"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["source_gap_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-objective-gap-7ea369464239.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-launch-playwright-validation-gate.md"
+    )
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-581-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["attempt_receipts"] == [
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-attempt-1-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-581-attempt-1-validation.md",
+    ]
+    assert catalog_gate == fixture
+    assert fixture["supervisor_follow_up_subtasks"] == fixture["follow_up_subtasks"]
+
+    for term in fixture["required_evidence"]:
+        assert term in objective_gap
+        assert term in meta_receipt
+        assert term in receipt
+        assert term in attempt_receipt
+        assert term in meta_attempt
+        assert term in g723_text
+        assert term in readiness_source
+        assert term in playwright_source
+
+    assert "MGW-581 proof" in heap_source
+    assert "MGW-581 attempt 1 validation" in heap_source
+    assert "supervisor-generated follow-up work for `VAIOS-G723`" in meta_receipt
+    assert "supervisor-generated follow-up work for `VAIOS-G723`" in receipt
+    assert "missing_xvfb_for_electron_playwright" in meta_attempt
+    assert "control_surface gate" in attempt_receipt
+    assert "MGW-581" in readiness_source
+    assert "hallucinate_app/test/e2e/fixtures/mgw-581-mcp-dashboard-launch-gate.json" in swissknife_consumer_source

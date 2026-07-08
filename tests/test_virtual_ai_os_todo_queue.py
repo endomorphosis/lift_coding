@@ -4872,6 +4872,125 @@ def test_swissknife_all_tools_supervisor_queue_is_resumable():
     assert queue["dependency_graph"]["SVD-050"] == []
 
 
+def test_mgw_581_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
+    meta_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "meta_glasses_display_widgets"
+        / "discovery"
+        / "2026-07-08-mgw-581-launch-playwright-validation-gate.md"
+    )
+    hallucinate_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-07-08-mgw-581-mcp-dashboard-launch-gate.md"
+    )
+    attempt_receipt_path = (
+        REPO_ROOT
+        / "data"
+        / "meta_glasses_display_widgets"
+        / "discovery"
+        / "2026-07-08-mgw-581-attempt-1-launch-playwright-validation-gate.md"
+    )
+    hallucinate_attempt_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / "2026-07-08-mgw-581-attempt-1-validation.md"
+    )
+    objective_gap_path = (
+        REPO_ROOT
+        / "data"
+        / "meta_glasses_display_widgets"
+        / "discovery"
+        / "2026-07-08-mgw-581-objective-gap-7ea369464239.md"
+    )
+    fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "mgw-581-mcp-dashboard-launch-gate.json"
+    )
+    catalog_fixture_path = (
+        REPO_ROOT
+        / "hallucinate_app"
+        / "test"
+        / "e2e"
+        / "fixtures"
+        / "vai-512-mcp-dashboard-catalog.json"
+    )
+    heap_source = OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8")
+    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
+        encoding="utf-8"
+    )
+    playwright_source = (
+        REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
+    ).read_text(encoding="utf-8")
+    swissknife_consumer_source = (
+        REPO_ROOT / "swissknife" / "scripts" / "test-mcp-dashboard-consumer.cjs"
+    ).read_text(encoding="utf-8")
+    meta_receipt = meta_receipt_path.read_text(encoding="utf-8")
+    hallucinate_receipt = hallucinate_receipt_path.read_text(encoding="utf-8")
+    attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
+    hallucinate_attempt = hallucinate_attempt_path.read_text(encoding="utf-8")
+    objective_gap = objective_gap_path.read_text(encoding="utf-8")
+    fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
+    catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
+    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "MGW-581")
+
+    assert fixture["schema"] == "launch_readiness_receipt_v1"
+    assert fixture["task_id"] == "MGW-581"
+    assert fixture["goal_id"] == "VAIOS-G723"
+    assert fixture["evidence_term"] == "launch Playwright validation gate"
+    assert fixture["source_gap_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-objective-gap-7ea369464239.md"
+    )
+    assert fixture["launch_gate_receipt"] == (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-launch-playwright-validation-gate.md"
+    )
+    assert fixture["hallucinate_backlog_receipt"] == (
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-581-mcp-dashboard-launch-gate.md"
+    )
+    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-581-mcp-dashboard-launch-gate.json"
+    assert fixture["attempt"] == 1
+    assert fixture["attempt_receipts"] == [
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-attempt-1-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-581-attempt-1-validation.md",
+    ]
+    assert catalog_gate == fixture
+
+    for term in fixture["required_evidence"]:
+        assert term in objective_gap
+        assert term in meta_receipt
+        assert term in hallucinate_receipt
+        assert term in attempt_receipt
+        assert term in hallucinate_attempt
+        assert term in heap_source
+        assert term in readiness_source
+        assert term in playwright_source
+
+    assert fixture["child_goals"] == [
+        "VAIOS-G723-C1 Catalog normalization",
+        "VAIOS-G723-C2 Dashboard UI wiring",
+        "VAIOS-G723-C3 Mediated tool-call receipts",
+        "VAIOS-G723-C4 Swissknife consumers",
+        "VAIOS-G723-C5 Playwright coverage",
+        "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
+    ]
+    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+    assert "missing_xvfb_for_electron_playwright" in attempt_receipt
+    assert "control_surface gate" in hallucinate_attempt
+    assert "MGW-581 proof" in heap_source
+    assert "MGW-581 attempt 1 validation" in heap_source
+    assert "MGW-581" in readiness_source
+    assert fixture["receipt_fixture"] in swissknife_consumer_source
+
+
 def test_virtual_ai_os_queue_tests_do_not_emit_static_followup_findings():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.backlog_refinery import scan_findings_in_file

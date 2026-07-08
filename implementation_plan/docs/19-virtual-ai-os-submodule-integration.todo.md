@@ -9464,8 +9464,9 @@ cadence remains parseable and resumable.
 
 ## VAI-683 Resolve validation retry-budget failure for VAI-664
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Blocked reason: stale non-launch retry-budget maintenance deferred during launch-readiness run
 - Priority: P1
 - Track: ops
 - Depends on: 

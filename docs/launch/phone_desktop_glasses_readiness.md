@@ -473,6 +473,39 @@ supervisor-generated follow-up subtasks, daemon health, MCP++ telemetry,
 `tools/list`, `tools/call`, `control_surface receipts`, and Swissknife
 applications for `VAIOS-G723`.
 
+MGW-581 refreshes that same VAIOS-G723 launch Playwright validation gate for
+the current July 8 objective-gap scan:
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-launch-playwright-validation-gate.md`.
+Its Hallucinate supervisor mirror is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-581-mcp-dashboard-launch-gate.md`,
+and its fixture is
+`hallucinate_app/test/e2e/fixtures/mgw-581-mcp-dashboard-launch-gate.json`.
+The shared dashboard capability catalog, Hallucinate App menus, Hallucinate App
+MCP dashboard, backend service catalog, Hallucinate App Playwright specs, and
+Swissknife consumer gate assert the MGW-581 launch Playwright validation gate
+for catalog normalization, dashboard UI wiring, mediated tool-call receipts,
+Swissknife consumers, Playwright coverage, supervisor-generated follow-up
+subtasks, daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
+`control_surface receipts`, and Swissknife applications. Any dashboard or
+backend validation failure remains supervisor-generated follow-up work for
+`VAIOS-G723`.
+
+MGW-581 attempt 1 records the current July 8 validation packet in
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-581-attempt-1-launch-playwright-validation-gate.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-08-mgw-581-attempt-1-validation.md`.
+The packet preserves the backlog/objective queue tests, Hallucinate
+daemon-manager catalog test, Hallucinate MCP dashboard backend Playwright gate,
+no-display Playwright runner contract, Swissknife MCP dashboard consumer gate,
+Swissknife Meta glasses gate, and Hallucinate multimodal `control_surface` gate
+while keeping the MGW-581 catalog entry tied to `VAIOS-G723-C1 Catalog
+normalization`, `VAIOS-G723-C2 Dashboard UI wiring`, `VAIOS-G723-C3 Mediated
+tool-call receipts`, `VAIOS-G723-C4 Swissknife consumers`, `VAIOS-G723-C5
+Playwright coverage`, and `VAIOS-G723-C6 Supervisor-generated follow-up
+subtasks`. No-display supervisors may still surface
+`missing_xvfb_for_electron_playwright` for Electron-only UI cases; the backend
+dashboard Playwright gate remains executable.
+
 VAI-563 repairs the fixture drift that separated
 `hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`,
 `hallucinate_app/test/e2e/fixtures/hao-719-daemon-launch-health-gate.json`, and
