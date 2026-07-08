@@ -339,6 +339,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-735-validation-repair.md"
     )
+    attempt_3_confirmation = read_text(
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-735-attempt-3-validation-confirmation.md"
+    )
     gap = read_text(
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-735-objective-gap-73dd061c433c.md"
     )
@@ -359,10 +363,11 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/meta-wearables-dat-android/.cursor/rules/session-lifecycle.mdc",
         "external/meta-wearables-dat-android/.cursor/rules/permissions-registration.mdc",
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, attempt_3_confirmation, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in discovery
+        assert goal_id in attempt_3_confirmation
         assert goal_id in heap
     assert "VAIOS-G705" in gap
