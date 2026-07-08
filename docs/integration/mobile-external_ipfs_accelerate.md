@@ -1,7 +1,11 @@
 # Mobile / external/ipfs_accelerate Interop
 
-VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
-`objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+MGW-580 re-validates the VAI-672/VAIOS-G719 objective validation repair
+covering the `objective/interoperability/mobile-external_ipfs_accelerate`
+bundle. The source objective gap for this backlog pass is
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md`.
+This contract note lives at
+`docs/integration/mobile-external_ipfs_accelerate.md`.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -23,12 +27,19 @@ The repaired `interface contract mobile external/ipfs_accelerate` path is:
   Python), verifies the required time-series tables and schema-check
   functions are present, and builds a deterministic
   `MobileIPFSAccelerateHandoff` receipt routed through the existing IPFS
-  descriptor pack's `ipfs.capabilities` endpoint.
+  descriptor pack's `ipfs.capabilities` endpoint. The receipt carries the
+  source task `VAI-672`, repair task `MGW-580`, objective bundle
+  `objective/interoperability/mobile-external_ipfs_accelerate`, and the
+  MGW-580 objective-gap and validation-repair discovery refs.
 - `mobile/src/orb/metaGlassesOrbDescriptors.js` exports
   `IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE` and
   `IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR`, binding the mobile ORB bridge
   and benchmark widget operations to the `external/ipfs_accelerate` DuckDB
-  schema refs.
+  schema refs. Its validation block records both the original `VAI-672`
+  closure and the `MGW-580` meta-glasses repair records:
+  `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md`
+  and
+  `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md`.
 - `mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js` exports
   `IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT`, mapping benchmark
   widget action ids to mobile ORB operations, Meta Wearables DAT-style
@@ -62,8 +73,14 @@ verifies the DuckDB schema descriptors under `external/ipfs_accelerate`
 exist and declare the expected tables/functions, loads the JavaScript
 descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
-objective validation repair is recorded in
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
+objective validation repair is recorded in the MGW-580 source gap
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md`,
+the MGW-580 repair record
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md`,
+the MGW-580 attempt-three confirmation record
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md`,
+the original VAI-672 repair record
+`data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`,
 plus the attempt-six confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`
 and the attempt-seven confirmation record

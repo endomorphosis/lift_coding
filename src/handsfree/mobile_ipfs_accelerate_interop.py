@@ -1,9 +1,9 @@
 """Interop contract between the mobile client and ``external/ipfs_accelerate``.
 
-VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap that requires
-`mobile` to interoperate with `external/ipfs_accelerate` through importable
-contracts, interface descriptors, runtime handoff behavior, and integration
-tests.
+MGW-580 re-validates the VAI-672/VAIOS-G719 objective validation gap that
+requires `mobile` to interoperate with `external/ipfs_accelerate` through
+importable contracts, interface descriptors, runtime handoff behavior, and
+integration tests.
 
 `external/ipfs_accelerate` cannot be imported directly by the mobile React
 Native client, so this module normalizes its DuckDB benchmark/time-series
@@ -27,6 +27,17 @@ from handsfree.ipfs_descriptor_pack import get_ipfs_descriptor_pack_as_dicts
 
 INTERFACE_CONTRACT = "interface contract mobile external/ipfs_accelerate"
 GOAL_ID = "VAIOS-G719"
+SOURCE_TASK_ID = "VAI-672"
+REPAIR_TASK_ID = "MGW-580"
+OBJECTIVE_BUNDLE = "objective/interoperability/mobile-external_ipfs_accelerate"
+MGW_OBJECTIVE_GAP_REF = (
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+)
+MGW_VALIDATION_REPAIR_REF = (
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-580-objective-validation-repair.md"
+)
 
 #: DuckDB benchmark tables that the time-series schema extension is expected
 #: to define. These are the tables the mobile benchmark widget can query.
@@ -73,10 +84,15 @@ class MobileIPFSAccelerateHandoff:
     target_repository: str
     interface_contract: str
     goal_id: str
+    source_task_id: str
+    repair_task_id: str
+    objective_bundle: str
     capability: str
     route: str
     endpoint_path: str
     method: str
+    objective_gap_ref: str
+    validation_repair_ref: str
     content_cid: str
     payload_sha256: str
     payload_size_bytes: int
@@ -216,10 +232,15 @@ def build_mobile_benchmark_widget_handoff(
         target_repository="mobile",
         interface_contract=INTERFACE_CONTRACT,
         goal_id=GOAL_ID,
+        source_task_id=SOURCE_TASK_ID,
+        repair_task_id=REPAIR_TASK_ID,
+        objective_bundle=OBJECTIVE_BUNDLE,
         capability=capability,
         route="ipfs-accelerate-benchmark-to-mobile-widget",
         endpoint_path=descriptor["endpoint_path"],
         method=descriptor["method"],
+        objective_gap_ref=MGW_OBJECTIVE_GAP_REF,
+        validation_repair_ref=MGW_VALIDATION_REPAIR_REF,
         content_cid=f"sha256:{digest}",
         payload_sha256=digest,
         payload_size_bytes=len(payload_bytes),

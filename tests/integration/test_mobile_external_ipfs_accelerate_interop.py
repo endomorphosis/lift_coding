@@ -14,8 +14,12 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from handsfree.mobile_ipfs_accelerate_interop import (  # noqa: E402
+    INTERFACE_CONTRACT,
+    OBJECTIVE_BUNDLE,
     REQUIRED_MOBILE_WIDGET_ACTIONS,
     REQUIRED_TIME_SERIES_TABLES,
+    REPAIR_TASK_ID,
+    SOURCE_TASK_ID,
     MobileIPFSAccelerateInteropError,
     build_mobile_benchmark_widget_handoff,
     discover_ipfs_accelerate_duckdb_contract,
@@ -131,10 +135,21 @@ def test_build_mobile_benchmark_widget_handoff_is_deterministic() -> None:
     second = build_mobile_benchmark_widget_handoff(IPFS_ACCELERATE_ROOT)
 
     assert first.as_dict() == second.as_dict()
-    assert first.interface_contract == "interface contract mobile external/ipfs_accelerate"
+    assert first.interface_contract == INTERFACE_CONTRACT
     assert first.goal_id == GOAL_ID
+    assert first.source_task_id == SOURCE_TASK_ID == "VAI-672"
+    assert first.repair_task_id == REPAIR_TASK_ID == "MGW-580"
+    assert first.objective_bundle == OBJECTIVE_BUNDLE
     assert first.source_repository == "external/ipfs_accelerate"
     assert first.target_repository == "mobile"
+    assert first.objective_gap_ref == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+    )
+    assert first.validation_repair_ref == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
+    )
     assert first.content_cid.startswith("sha256:")
     assert first.content_cid == f"sha256:{first.payload_sha256}"
     assert first.payload_size_bytes > 0
@@ -160,7 +175,7 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
 
     assert (
         interface["metadata"]["interface_contract"]
-        == "interface contract mobile external/ipfs_accelerate"
+        == INTERFACE_CONTRACT
     )
     assert interface["metadata"]["goal_id"] == GOAL_ID
     assert GOAL_ID in interface["objective_goals"]
@@ -192,7 +207,21 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
         set(descriptor["runtime_handoff"]["time_series_tables"])
     )
     assert descriptor["validation"]["task_id"] == "VAI-672"
+    assert descriptor["validation"]["repair_task_id"] == "MGW-580"
     assert descriptor["validation"]["goal_id"] == GOAL_ID
+    assert descriptor["validation"]["objective_bundle"] == OBJECTIVE_BUNDLE
+    assert descriptor["validation"]["mgw_objective_gap_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+    )
+    assert descriptor["validation"]["mgw_validation_repair_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["mgw_attempt_3_confirmation_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-attempt-3-validation-confirmation.md"
+    )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
@@ -214,8 +243,19 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert action_ids == set(REQUIRED_MOBILE_WIDGET_ACTIONS)
     assert contract["producer"] == "external/ipfs_accelerate"
     assert contract["consumer"] == "mobile"
-    assert contract["interface_contract"] == "interface contract mobile external/ipfs_accelerate"
+    assert contract["interface_contract"] == INTERFACE_CONTRACT
     assert contract["goal_id"] == GOAL_ID
+    assert contract["source_task_id"] == "VAI-672"
+    assert contract["repair_task_id"] == "MGW-580"
+    assert contract["objective_bundle"] == OBJECTIVE_BUNDLE
+    assert contract["objective_gap_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+    )
+    assert contract["validation_repair_ref"] == (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
+    )
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -249,7 +289,18 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     ).read_text(encoding="utf-8")
     discovery = (
         REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
+        / "data/meta_glasses_display_widgets/discovery/"
+        / "2026-07-08-mgw-580-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    source_gap = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/"
+        / "2026-07-08-mgw-580-objective-gap-c1edafa875e6.md"
+    ).read_text(encoding="utf-8")
+    attempt_three = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/"
+        / "2026-07-08-mgw-580-attempt-3-validation-confirmation.md"
     ).read_text(encoding="utf-8")
     attempt_four = (
         REPO_ROOT
@@ -274,10 +325,11 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     required_terms = [
         "VAI-672",
         GOAL_ID,
-        "objective/interoperability/mobile-external_ipfs_accelerate",
+        OBJECTIVE_BUNDLE,
         "objective validation repair",
-        "interface contract mobile external/ipfs_accelerate",
+        INTERFACE_CONTRACT,
         "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+        "docs/integration/mobile-external_ipfs_accelerate.md",
         "src/handsfree/mobile_ipfs_accelerate_interop.py",
         "mobile/src/orb/metaGlassesOrbDescriptors.js",
         "mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js",
@@ -287,9 +339,39 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, attempt_four, attempt_five, attempt_six, attempt_seven, heap):
+    for content in (
+        docs,
+        discovery,
+        attempt_three,
+        attempt_four,
+        attempt_five,
+        attempt_six,
+        attempt_seven,
+        heap,
+    ):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
+
+    mgw_required_terms = [
+        "MGW-580",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md",
+    ]
+    for content in (docs, discovery, attempt_three, heap):
+        for term in mgw_required_terms:
+            assert term in content, f"missing {term!r}"
+
+    for term in (
+        "MGW-580 Objective Goal Gap",
+        "Source objective gap",
+        "Missing Evidence",
+        "objective validation repair",
+        INTERFACE_CONTRACT,
+        OBJECTIVE_BUNDLE,
+        GOAL_ID,
+    ):
+        assert term in source_gap or term in discovery
 
     attempt_six_record = (
         "data/virtual_ai_os/discovery/"
@@ -299,7 +381,19 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     )
+    mgw_repair_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-objective-validation-repair.md"
+    )
+    mgw_attempt_three_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-08-mgw-580-attempt-3-validation-confirmation.md"
+    )
     assert attempt_six_record in docs
     assert attempt_six_record in heap
     assert attempt_seven_record in docs
     assert attempt_seven_record in heap
+    assert mgw_repair_record in docs
+    assert mgw_repair_record in heap
+    assert mgw_attempt_three_record in docs
+    assert mgw_attempt_three_record in heap

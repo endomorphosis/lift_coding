@@ -7,8 +7,10 @@ Bundle: objective/interoperability/mobile-external_ipfs_accelerate
 Merge key: 64e26db5b0fa2426
 Merge family: objective/VAIOS-G719
 Source objective gap: data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-gap-c1edafa875e6.md
+This repair record: data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md
 Prior repair record: data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md
 Prior confirmation record: data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-2-validation-confirmation.md
+Attempt 3 confirmation record: data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md
 
 ## Summary
 
@@ -41,6 +43,7 @@ Evidence term: VAIOS-G719.
 - `external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py`
 - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
 - `data/meta_glasses_display_widgets/discovery` (this directory)
+- `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-3-validation-confirmation.md`
 
 ## Validation Evidence
 
