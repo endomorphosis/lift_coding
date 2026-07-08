@@ -1,7 +1,10 @@
 # SwissKnife Mcp-Plus-Plus Interop
 
-VAI-665 repairs the objective validation gap for `VAIOS-G704` and the shared
-`goal_packet/interoperability/swissknife/06921590135c` packet covering
+MGW-573 records the Meta glasses display widgets lane for the VAI-665
+objective validation repair of `VAIOS-G704` and the shared
+`goal_packet/interoperability/swissknife/06921590135c` packet. MGW-588 repairs
+the retry-budget blocker that prevented MGW-573 from merging after repeated
+dirty-main-checkout failures. The packet covers
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
 
@@ -16,7 +19,8 @@ The repaired `interface contract swissknife Mcp-Plus-Plus` path is:
   `mcpplusplus.check_compatibility`, `mcpplusplus.create_p2p_session`), and
   `SWISSKNIFE_MCP_PLUS_PLUS_INTEROP_DESCRIPTOR`, which binds that interface to
   SwissKnife's policy-mediation schema refs and to the objective-heap
-  validation lineage (task id, goal id, gap, and repair references).
+  validation lineage (MGW-573 task id, VAI-665 source id, goal id, gap,
+  retry-budget, and repair references).
 - `registerSwissKnifeMcpPlusPlusInterop()` and
   `createMCPPlusPlusClientWithSwissKnifeInterop()` register the interop
   descriptor on a live `MCPPlusPlus` runtime instance (the same
@@ -64,9 +68,18 @@ Validation evidence lives in
    generic `mcp_idl_descriptor.json` fixture, proving the two repositories'
    descriptor shapes remain mutually compatible.
 4. Asserts this objective validation repair is recorded in
-   `data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md` and
-   the objective heap
+   `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-validation-repair.md`,
+   `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md`,
+   `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-588-mgw-573-merge-retry-budget.md`,
+   and the objective heap
    (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
+
+The MGW-588 retry-budget repair does not run
+`ipfs-accelerate-agent-merge-resolver --events-path ... --apply` because the
+recorded blocker is `main_checkout_dirty_conflict`, not a semantic file
+conflict. The unrelated dirty main-checkout paths were `external/ipfs_datasets`
+and `hallucinate_app`; the SwissKnife and Mcp-Plus-Plus evidence files remain
+merge-clean and belong to their respective repositories.
 
 ## Validation
 
