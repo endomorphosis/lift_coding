@@ -34,6 +34,84 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'subscribe_updates',
 ];
 
+export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
+  name: 'hallucinate_app_mobile_interop',
+  namespace: 'handsfree.interop.hallucinate_app_mobile',
+  version: '0.1.0',
+  specPath: 'spec/hallucinate_app_mobile_interop_interface.json',
+  metadata: {
+    provider_name: 'hallucinate_app',
+    server_family: 'hallucinate_app',
+    tool_name: 'mobile_orb_handoff',
+  },
+  methods: [
+    {
+      name: 'register_mobile_edge',
+      inputSchema: {
+        type: 'object',
+        required: ['edge_session_id', 'local_interface_cids'],
+        properties: {
+          edge_session_id: { type: 'string' },
+          local_interface_cids: {
+            type: 'array',
+            items: { type: 'string' },
+          },
+          dat_capabilities: { type: 'object' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        required: ['accepted_interface_cids', 'mediation_receipt'],
+        properties: {
+          accepted_interface_cids: {
+            type: 'array',
+            items: { type: 'string' },
+          },
+          mediation_receipt: { type: 'object' },
+        },
+      },
+    },
+    {
+      name: 'dispatch_content_search',
+      inputSchema: {
+        type: 'object',
+        required: ['query', 'edge_session_id', 'correlation_id'],
+        properties: {
+          query: { type: 'string' },
+          filters: { type: 'object' },
+          edge_session_id: { type: 'string' },
+          correlation_id: { type: 'string' },
+          handoff: { type: 'object' },
+        },
+      },
+      outputSchema: {
+        type: 'object',
+        required: ['receipt_cid', 'mediation_receipt'],
+        properties: {
+          receipt_cid: { type: 'string' },
+          mediation_receipt: { type: 'object' },
+          result_refs: {
+            type: 'array',
+            items: { type: 'string' },
+          },
+        },
+      },
+    },
+  ],
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/profile-b-cid-artifacts',
+    'mcp++/receipts',
+    'hallucinate_app/control-surface-mediation',
+    'mobile/meta-glasses-orb-bridge',
+  ],
+  compatibility: {
+    objective_id: 'VAIOS-G707',
+    pair: ['hallucinate_app', 'mobile'],
+    runtime_handoff: 'content-search-to-mobile-orb',
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',

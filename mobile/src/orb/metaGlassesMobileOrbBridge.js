@@ -8,6 +8,7 @@ import {
 } from '../utils/metaWearablesDatDisplayWidgetContract';
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
+  HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
   MOBILE_ORB_BRIDGE_INTERFACE,
   descriptorRef,
   localInterfaceKey,
@@ -16,8 +17,6 @@ import {
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
 export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
   'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
@@ -35,8 +34,6 @@ const CONTROL_SURFACE_SCHEMA_REFS = [
   'policy_decision',
   'mediation_receipt',
 ];
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const DAT_CAPABILITY_KEYS = [
   'session',
   'camera',
@@ -87,6 +84,13 @@ function uniqueStrings(values) {
 
 function arrayOrEmpty(value) {
   return Array.isArray(value) ? value : [];
+}
+
+function nestedString(record, ...path) {
+  const value = path.reduce((current, key) => (
+    isObject(current) ? current[key] : undefined
+  ), record);
+  return typeof value === 'string' && value.length > 0 ? value : undefined;
 }
 
 function collectControlSurfacePolicyCids(record = {}) {
@@ -838,7 +842,7 @@ function mobileOrbCapabilityCounts(edgeSession, localInterfaceCids = []) {
   };
 }
 
-function collectDescriptorCids(records = []) {
+function collectAggregateDescriptorCids(records = []) {
   const values = [];
   records.filter(isObject).forEach((record) => {
     if (Array.isArray(record.accepted_interface_cids)) {
@@ -899,7 +903,7 @@ function collectPolicyCids(records = []) {
   return uniqueStrings(values);
 }
 
-function collectReceiptCids(records = []) {
+function collectAggregateReceiptCids(records = []) {
   const values = [];
   records.filter(isObject).forEach((record) => {
     values.push(record.receipt_cid);
@@ -1009,10 +1013,10 @@ function buildMobileOrbDiagnosticsContract({
     },
     backend_counts: backendCounts,
     backend_capability_counts: backendCounts,
-    descriptor_cids: collectDescriptorCids(records),
+    descriptor_cids: collectAggregateDescriptorCids(records),
     policy_cids: collectPolicyCids(records),
     binding_state: bindingState,
-    receipt_cids: collectReceiptCids(records),
+    receipt_cids: collectAggregateReceiptCids(records),
     fallback_reasons: collectFallbackReasons(records),
   };
 }
@@ -1303,12 +1307,14 @@ export class MetaGlassesMobileOrbBridge {
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
+      localInterfaceKey(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE),
     ];
     this.edgeSession = null;
     this.bindings = new Map();
     this.subscriptions = new Map();
     this.eventLog = [];
     this.receiptLog = [];
+    this.operationReceipts = [];
   }
 
   getEdgeSession() {
@@ -1359,6 +1365,10 @@ export class MetaGlassesMobileOrbBridge {
     const receiptCids = uniqueStrings(diagnosticRecords.flatMap(collectReceiptCids));
     const fallbackDetails = diagnosticRecords.flatMap(collectFallbackDetails);
     const capabilitySummary = capabilityCounts(this.edgeSession);
+    const bindings = Array.from(this.bindings.values());
+    const subscriptions = Array.from(this.subscriptions.values());
+    const events = [...this.eventLog];
+    const operationReceipts = [...this.operationReceipts];
     const bindingState = Array.from(this.bindings.entries()).map(([
       bindingHandle,
       binding,
@@ -1433,22 +1443,6 @@ export class MetaGlassesMobileOrbBridge {
         null,
       operation_receipts_count: operationReceipts.length,
       operation_receipts: operationReceipts,
-    };
-    const diagnosticsContract = buildMobileOrbDiagnosticsContract({
-      ...diagnostics,
-      edge_session: this.edgeSession,
-      backend_kind: 'local',
-    });
-    return {
-      ...diagnostics,
-      diagnostics_contract: diagnosticsContract,
-      capability_counts: diagnosticsContract.capability_counts,
-      backend_capability_counts: diagnosticsContract.backend_capability_counts,
-      descriptor_cids: diagnosticsContract.descriptor_cids,
-      policy_cids: diagnosticsContract.policy_cids,
-      binding_state: diagnosticsContract.binding_state,
-      receipt_cids: diagnosticsContract.receipt_cids,
-      fallback_reasons: diagnosticsContract.fallback_reasons,
     };
   }
 
@@ -1640,6 +1634,7 @@ export class MetaGlassesMobileOrbBridge {
       descriptors: input.descriptors || [
         descriptorRef(MOBILE_ORB_BRIDGE_INTERFACE, this.localInterfaceCids[0]),
         descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE, this.localInterfaceCids[1]),
+        descriptorRef(HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE, this.localInterfaceCids[2]),
       ],
     });
     const previousEdgeSessionId = this.edgeSession?.edge_session_id || null;
