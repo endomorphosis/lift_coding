@@ -766,7 +766,7 @@ state observation.
 
 ## SWR-041 Add browser deployment policy for CSP, workers, storage, and offline mode
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/browser-deployment
 - Fingerprint: acb8db980d9cb88a8bcde5e5d780f97de3fcb67e
