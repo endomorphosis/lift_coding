@@ -9312,8 +9312,8 @@ cadence remains parseable and resumable.
 
 ## VAI-676 Resolve merge retry-budget failure for VAI-661
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-08: Verified the VAI-661 implementation is already merged into main (superproject commit e9de269e8068bf09d4b8375ff2800429a1aed872, swissknife submodule commit 23d7d4a6f0457a9185436e79b0c126182f0f5283) with no unresolved conflict markers; the recorded `submodule_merge_failed` guardrail hits preceded that successful merge. Recorded the repair resolution and confirmed `python -m pytest tests/integration -q` passes (403 passed, 88 skipped) so VAI-661 can be released from strategy blocked_tasks.
 - Priority: P1
 - Track: ops
 - Depends on: 
