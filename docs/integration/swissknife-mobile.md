@@ -67,3 +67,15 @@ the SwissKnife/mobile contract files. The repair committed the nested
 `hallucinate_app/ipfs_accelerate_py` gitlink chain in the owning repositories
 and records the clean handoff in
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-749-hao-730-merge-retry-budget.md`.
+
+VAI-661 attempt 4 records the current Virtual AI OS objective validation repair
+against `data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md`.
+The scanner-visible confirmation is
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-4-validation-confirmation.md`;
+it ties `tests/integration/test_swissknife_mobile_interop.py`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`,
+`swissknife/contracts/control_surface_contract.schema.json`, and
+`swissknife/contracts/interaction_envelope.schema.json` to the
+`interface contract swissknife mobile` proof for VAIOS-G700 and the shared
+VAIOS-G700..VAIOS-G706 packet without adding smaller child goals.

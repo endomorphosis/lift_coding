@@ -110,6 +110,12 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_policy_id: 'policy:swissknife:mobile-interop',
   },
   validation: {
+    vai_task_id: 'VAI-661',
+    vai_attempt: 4,
+    vai_objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
+    vai_validation_confirmation_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-4-validation-confirmation.md',
     task_id: 'MGW-569',
     repair_task_id: 'MGW-583',
     hao_task_id: 'HAO-730',

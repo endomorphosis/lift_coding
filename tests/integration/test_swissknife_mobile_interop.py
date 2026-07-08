@@ -1,4 +1,4 @@
-"""SwissKnife/mobile interoperability contract regression tests for HAO-730."""
+"""SwissKnife/mobile interoperability contract regression tests for VAI-661."""
 
 from __future__ import annotations
 
@@ -11,6 +11,13 @@ from jsonschema import Draft202012Validator
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+VAI_OBJECTIVE_GAP_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
+)
+VAI_ATTEMPT_4_CONFIRMATION_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-4-validation-confirmation.md"
+)
+OBJECTIVE_GAP_FINGERPRINT = "d33307f93408e32451468150b5e7fe003eb0222d"
 GOAL_PACKET_GOALS = {
     "VAIOS-G700",
     "VAIOS-G701",
@@ -265,6 +272,12 @@ def test_mobile_descriptor_exports_swissknife_interop_contract() -> None:
     assert {"agent", "remote_client"}.issubset(
         set(descriptor["runtime_handoff"]["allowed_surfaces"])
     )
+    assert descriptor["validation"]["vai_task_id"] == "VAI-661"
+    assert descriptor["validation"]["vai_attempt"] == 4
+    assert descriptor["validation"]["vai_objective_gap_ref"] == VAI_OBJECTIVE_GAP_REF
+    assert descriptor["validation"]["vai_validation_confirmation_ref"] == (
+        VAI_ATTEMPT_4_CONFIRMATION_REF
+    )
     assert descriptor["validation"]["hao_task_id"] == "HAO-730"
     assert descriptor["validation"]["hao_attempt"] == 4
     assert descriptor["validation"]["hao_objective_gap_ref"] == (
@@ -294,6 +307,10 @@ def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods()
     assert contract["producer"] == "swissknife"
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract swissknife mobile"
+    assert contract["vai_task_id"] == "VAI-661"
+    assert contract["vai_attempt"] == 4
+    assert contract["vai_objective_gap_ref"] == VAI_OBJECTIVE_GAP_REF
+    assert contract["vai_validation_confirmation_ref"] == VAI_ATTEMPT_4_CONFIRMATION_REF
     assert contract["hao_task_id"] == "HAO-730"
     assert contract["hao_attempt"] == 4
     assert contract["hao_validation_confirmation_ref"] == (
@@ -443,6 +460,54 @@ def test_hao_730_attempt_4_validation_confirmation_recorded() -> None:
     assert "HAO-730 attempt 4" in docs
     assert "HAO-730 attempt 4 objective validation repair" in control_schema["$comment"]
     assert "HAO-730 attempt 4 objective validation repair" in envelope_schema["$comment"]
+
+    for goal_id in GOAL_PACKET_GOALS:
+        assert goal_id in confirmation
+        assert goal_id in heap
+
+
+def test_vai_661_attempt_4_validation_confirmation_recorded() -> None:
+    """Lock the current VAI-661 attempt-4 evidence to the objective heap."""
+    gap = (REPO_ROOT / VAI_OBJECTIVE_GAP_REF).read_text(encoding="utf-8")
+    confirmation = (REPO_ROOT / VAI_ATTEMPT_4_CONFIRMATION_REF).read_text(
+        encoding="utf-8"
+    )
+    docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
+    heap = (
+        REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
+    envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+
+    required_terms = [
+        "VAI-661",
+        OBJECTIVE_GAP_FINGERPRINT,
+        "VAIOS-G700",
+        "goal_packet/interoperability/swissknife/06921590135c",
+        "objective validation repair",
+        "interface contract swissknife mobile",
+        "agent_identity",
+        "allowed_surfaces",
+        "arguments_hash",
+        "tests/integration/test_swissknife_mobile_interop.py",
+        "docs/integration/swissknife-mobile.md",
+        "mobile/src/orb/metaGlassesOrbDescriptors.js",
+        "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
+        "swissknife/contracts/control_surface_contract.schema.json",
+        "swissknife/contracts/interaction_envelope.schema.json",
+        VAI_OBJECTIVE_GAP_REF,
+        VAI_ATTEMPT_4_CONFIRMATION_REF,
+    ]
+    for term in required_terms:
+        assert term in confirmation
+        assert term in heap
+
+    assert "Attempt: 4" in confirmation
+    assert "attempt 4 objective validation repair" in heap
+    assert OBJECTIVE_GAP_FINGERPRINT in gap
+    assert "VAI-661 attempt 4" in docs
+    assert "VAI-661 attempt 4 objective validation repair" in control_schema["$comment"]
+    assert "VAI-661 attempt 4 objective validation repair" in envelope_schema["$comment"]
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in confirmation
