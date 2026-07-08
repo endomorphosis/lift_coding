@@ -1,9 +1,9 @@
 # SwissKnife Mobile Interop
 
-VAI-675 repairs the VAI-661 retry-budget validation blocker for VAIOS-G700 and
-the shared `goal_packet/interoperability/swissknife/06921590135c` packet
-covering VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704,
-VAIOS-G705, and VAIOS-G706.
+VAI-661 closes the objective validation repair gap for VAIOS-G700 and the
+shared `goal_packet/interoperability/swissknife/06921590135c` packet covering
+VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
+VAIOS-G706.
 
 The repaired `interface contract swissknife mobile` path is:
 
@@ -12,6 +12,10 @@ The repaired `interface contract swissknife mobile` path is:
   actions.
 - `swissknife/contracts/interaction_envelope.schema.json` defines the normalized
   handoff envelope for SwissKnife remote-client and agent events.
+- The policy fields preserve the scanner-visible `agent_identity`,
+  `allowed_surfaces`, and `arguments_hash` terms as the agent identity,
+  allowed surfaces, and arguments hash checks that mediate SwissKnife calls
+  before mobile execution.
 - `mobile/src/orb/metaGlassesOrbDescriptors.js` exports
   `SWISSKNIFE_MOBILE_INTEROP_INTERFACE` and
   `SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR`, binding the mobile ORB bridge and DAT
@@ -26,5 +30,6 @@ The repaired `interface contract swissknife mobile` path is:
 Validation evidence lives in `tests/integration/test_swissknife_mobile_interop.py`.
 It loads the JavaScript descriptor exports, verifies the DAT method mapping,
 validates representative SwissKnife control-surface and interaction-envelope
-payloads, and asserts this objective validation repair is recorded in discovery
-and the objective heap.
+payloads, and asserts this objective validation repair is recorded in
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md` and the
+objective heap.

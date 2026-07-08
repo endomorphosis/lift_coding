@@ -886,7 +886,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/swissknife-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `swissknife` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
-- VAI-675 objective validation repair: `data/virtual_ai_os/discovery/2026-07-08-vai-675-vai-661-validation-repair.md`, `tests/integration/test_swissknife_mobile_interop.py`, and `docs/integration/swissknife-mobile.md` repair the VAI-661 retry-budget blocker for `goal_packet/interoperability/swissknife/06921590135c` and prove the `interface contract swissknife mobile` handoff. `mobile/src/orb/metaGlassesOrbDescriptors.js` exports `SWISSKNIFE_MOBILE_INTEROP_INTERFACE`, `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js` exports `SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT`, `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the descriptor during edge capability registration, and `swissknife/contracts/control_surface_contract.schema.json` plus `swissknife/contracts/interaction_envelope.schema.json` validate the SwissKnife-to-mobile control surface. This keeps VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706 aligned without adding smaller child goals.
+- VAI-661 objective validation repair: `data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md`, `tests/integration/test_swissknife_mobile_interop.py`, and `docs/integration/swissknife-mobile.md` close the VAIOS-G700 scanner gap for `goal_packet/interoperability/swissknife/06921590135c` and prove the `interface contract swissknife mobile` handoff. `mobile/src/orb/metaGlassesOrbDescriptors.js` exports `SWISSKNIFE_MOBILE_INTEROP_INTERFACE`, `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js` exports `SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT`, `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the descriptor during edge capability registration, and `swissknife/contracts/control_surface_contract.schema.json` plus `swissknife/contracts/interaction_envelope.schema.json` validate the SwissKnife-to-mobile control surface. This keeps VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706 aligned without adding smaller child goals.
 
 ## VAIOS-G701 Interoperate swissknife with external/ipfs_accelerate
 
@@ -1087,7 +1087,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G708 Interoperate external/meta-wearables-dat-android with mobile
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3008
 - Track: interoperability
@@ -1112,6 +1112,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Completed at: 2026-07-08T07:43:34.841430+00:00
+- Completion evidence: tests/integration/test_external_meta_wearables_dat_android_mobile_interop.py => .github/workflows/ci.yml (embedding:0.63), ARCHITECTURE.md (ast), CONTRIBUTING.md (ast); docs/integration/external_meta_wearables_dat_android-mobile.md => ARCHITECTURE.md (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/ARCHITECTURE.md (ast); interface contract external/meta-wearables-dat-android mobile => ARCHITECTURE.md (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast), docs/ARCHITECTURE.md (ast); mobile/src/orb/metaGlassesOrbDescriptors.js => mobile/src/orb/metaGlassesOrbDescriptors.js (path), ARCHITECTURE.md (ast), dev/meta-rayban-display-simulator/webapp/readiness.json (ast); mobile/src/utils/metaWearablesDatDisplayWidgetContract.js => mobile/src/utils/metaWearablesDatDisplayWidgetContract.js (path), ARCHITECTURE.md (ast), dev/meta-rayban-display-simulator/fixtures/task-progress.json (ast); mobile/src/orb/__tests__/metaGlassesMobileOrbApiBackend.test.js => mobile/src/orb/__tests__/metaGlassesMobileOrbApiBackend.test.js (path), ARCHITECTURE.md (ast), CONTRIBUTING.md (ast); mobile/src/orb/__tests__/metaGlassesMobileOrbBridge.test.js => mobile/src/orb/__tests__/metaGlassesMobileOrbBridge.test.js (path), ARCHITECTURE.md (ast), CONTRIBUTING.md (ast); mobile/src/orb/__tests__/metaGlassesMobileOrbRuntime.test.js => mobile/src/orb/__tests__/metaGlassesMobileOrbRuntime.test.js (path), ARCHITECTURE.md (ast), CONTRIBUTING.md (ast); mobile/src/orb/__tests__/metaGlassesOrbEdgeSession.test.js => mobile/src/orb/__tests__/metaGlassesOrbEdgeSession.test.js (path), ARCHITECTURE.md (ast), CONTRIBUTING.md (ast)
+- Completion validation: 0
 
 ## VAIOS-G709 Interoperate external/meta-wearables-dat-android with external/ipfs_accelerate
 
