@@ -523,7 +523,7 @@ Acceptance target:
 
 ## SWR-025 Decompose typecheck into browser-safe lanes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/typescript
