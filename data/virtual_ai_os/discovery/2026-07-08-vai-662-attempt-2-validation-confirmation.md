@@ -19,8 +19,11 @@ in `data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.m
 that the `interface contract swissknife external/ipfs_accelerate` handoff
 proof for VAIOS-G701 and the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet remains fully
-implemented and scanner-visible. No source changes were required beyond this
-confirmation record and the accompanying objective heap entry.
+implemented and scanner-visible. This attempt also keeps the pair-specific
+proof stack in the VAI namespace after a sibling HAO validation pass: the
+Python adapter, SwissKnife MCP++ descriptor, docs, and integration test now
+name `VAI-662` and the `data/virtual_ai_os/discovery` objective-gap and
+validation-repair records directly.
 
 Evidence term: objective validation repair.
 Evidence term: interface contract swissknife external/ipfs_accelerate.
@@ -31,7 +34,7 @@ Evidence term: allowed_surfaces.
 Evidence term: arguments hash.
 Evidence term: arguments_hash.
 
-Confirmed outputs (unchanged, already present and passing):
+Confirmed outputs:
 
 - `tests/integration/test_swissknife_external_ipfs_accelerate_interop.py`
 - `docs/integration/swissknife-external_ipfs_accelerate.md`
@@ -65,7 +68,15 @@ Focused validation target:
 
 Full supervisor target:
 
-`python -m pytest tests/integration -q` — 403 passed, 88 skipped, 0 failed.
+`python -m pytest tests/integration -q` initially failed only because the
+shared packet gitlinks `external/meta-wearables-dat-android` and
+`external/meta-wearables-dat-ios` were not checked out in this worktree.
+Running
+`git submodule update --init external/meta-wearables-dat-android external/meta-wearables-dat-ios`
+restored the already-pinned commits `4e56e1864a5e78194bababc3a68775c4196cbed0`
+and `2b5695d16a710f3d2d7341f88570b86d01723d50` with no gitlink pointer
+changes, after which `python -m pytest tests/integration -q` passed cleanly:
+472 passed, 79 skipped, 0 failed, 16 warnings.
 
 This objective validation repair keeps VAIOS-G700, VAIOS-G701, VAIOS-G702,
 VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706 aligned with the

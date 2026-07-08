@@ -1,4 +1,4 @@
-"""SwissKnife/external/ipfs_accelerate interoperability regression tests for HAO-731."""
+"""SwissKnife/external/ipfs_accelerate interoperability regression tests for VAI-662."""
 
 from __future__ import annotations
 
@@ -276,8 +276,16 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py" in src
-    assert "HAO-731" in src
+    assert "VAI-662" in src
     assert "VAIOS-G701" in src
+    assert (
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md"
+        in src
+    )
+    assert (
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md"
+        in src
+    )
     assert "agent_identity" in src
     assert "allowed_surfaces" in src
     assert "arguments_hash" in src
@@ -298,15 +306,15 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_a
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_ipfs_accelerate.md")
     discovery = read_text(
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-731-validation-repair.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md"
     )
     gap = read_text(
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-731-objective-gap-2394e45d2012.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "HAO-731",
+        "VAI-662",
         "VAIOS-G701",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
@@ -328,3 +336,5 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         assert goal_id in discovery
         assert goal_id in heap
     assert "VAIOS-G701" in gap
+    assert "objective validation repair" in gap
+    assert "interface contract swissknife external/ipfs_accelerate" in gap
