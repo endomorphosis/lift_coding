@@ -9461,3 +9461,14 @@ cadence remains parseable and resumable.
 - Candidate kind: validation_gate
 - Todo vector key: 423c5c08373fafe1
 - Acceptance: Objective scan filed this gap for VAIOS-G723. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/discovery/2026-07-08-vai-682-objective-gap-7ea369464239.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (launch Playwright validation gate), and keep the supervisor-fed backlog aligned with the objective heap.  Add child goals for catalog normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife consumers, Playwright coverage, and supervisor-generated follow-up subtasks if any dashboard or backend validation fails.
+
+## VAI-683 Resolve validation retry-budget failure for VAI-664
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/virtual_ai_os/discovery, implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md, tests/integration/test_swissknife_external_ipfs_kit_interop.py, docs/integration/swissknife-external_ipfs_kit.md, swissknife, external/ipfs_kit, external/ipfs_kit/archive/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/archive_clutter/fix_scripts/fix_mcp_schema.py, external/ipfs_kit/backup/patches/fixes/fix_mcp_schema.py, external/ipfs_kit/data/deprecations_report.schema.json, data/virtual_ai_os/state/discovery
+- Validation: python -m pytest tests/integration -q
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in VAI-664. Use evidence in /home/barberb/lift_coding/data/virtual_ai_os/state/discovery/2026-07-08-vai-683-vai-664-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release VAI-664 from strategy blocked_tasks.
