@@ -1,6 +1,6 @@
 # Meta Wearables DAT Android / external/ipfs_accelerate Interop
 
-HAO-737 repairs the VAIOS-G709 objective validation gap for the shared
+MGW-576 repairs the VAIOS-G709 objective validation gap for the shared
 `goal_packet/interoperability/external/6595cbbfadb9` packet covering
 VAIOS-G709, VAIOS-G710, and VAIOS-G711.
 
@@ -57,7 +57,7 @@ surface, verifies the DAT benchmark method mapping to the expected
 `external/ipfs_accelerate` tables, verifies the DuckDB schema descriptors
 under `external/ipfs_accelerate`, exercises the Python discovery and handoff
 builder, and asserts this objective validation repair is recorded in
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-737-objective-validation-repair.md`
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-576-objective-validation-repair.md`
 with this contract note at
 `docs/integration/external_meta_wearables_dat_android-external_ipfs_accelerate.md`,
 and the objective heap
