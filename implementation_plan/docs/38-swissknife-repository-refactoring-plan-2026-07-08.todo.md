@@ -276,7 +276,7 @@ Acceptance target:
 
 ## SWR-006 Clarify apps, glasses, IPFS, and MCP ownership
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/product-surfaces
