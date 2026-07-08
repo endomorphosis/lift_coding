@@ -1138,6 +1138,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - AST query: external/meta-wearables-dat-android, external/ipfs_accelerate, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_accelerate
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Goal packet repair note: HAO-739 records shared packet evidence for `goal_packet/interoperability/external/6595cbbfadb9` in `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md`, so VAIOS-G709, VAIOS-G710, and VAIOS-G711 stay aligned while each pair keeps its isolated integration proof.
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_accelerate` can be used together, including a test, a contract note, and any adapter code needed by the objective.
 
 ## VAIOS-G710 Interoperate external/meta-wearables-dat-android with external/ipfs_datasets
@@ -1166,6 +1167,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - AST query: external/meta-wearables-dat-android, external/ipfs_datasets, interface contract, integration test, __future__, _jsonnet, abc, anyio, argparse, ast, asyncio, atexit, base64, boto3, bs4, cProfile
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_datasets
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- Goal packet repair note: HAO-739 records shared packet evidence for `goal_packet/interoperability/external/6595cbbfadb9` in `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md`, so VAIOS-G709, VAIOS-G710, and VAIOS-G711 stay aligned while each pair keeps its isolated integration proof.
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_datasets` can be used together, including a test, a contract note, and any adapter code needed by the objective.
 
 ## VAIOS-G711 Interoperate external/meta-wearables-dat-android with external/ipfs_kit
@@ -1194,6 +1196,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - AST query: external/meta-wearables-dat-android, external/ipfs_kit, interface contract, integration test, __future__, aiofiles, aiohttp, anyio, argparse, ast, atexit, binascii, boto3, botocore, check_high_level_api_syntax, collections
 - Parallel lane: objective/interoperability/external_meta_wearables_dat_android-external_ipfs_kit
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
+- HAO-739 objective validation repair: `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py`, `docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md`, and `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md` prove the `interface contract external/meta-wearables-dat-android external/ipfs_kit` handoff. `external/meta-wearables-dat-android/contracts/ipfs_kit_wearable_handoff.json` binds the DAT-native wearable payload to `external/ipfs_kit/data/deprecations_report.schema.json`, the three `fix_mcp_schema.py` repair paths expose `normalize_mcp_servers`, `check_high_level_api_syntax`, and `fix_mcp_schema`, and `external/ipfs_kit/ipfs_kit_py/mcp_server/server.py` emits MCP++ Profile-B receipts plus Profile-E DAG frontier evidence for wearable display acknowledgements. No smaller child goals are needed for this validation gap.
 - Gap task: Create one larger integration work item proving `external/meta-wearables-dat-android` and `external/ipfs_kit` can be used together, including a test, a contract note, and any adapter code needed by the objective.
 
 ## VAIOS-G712 Interoperate external/meta-wearables-dat-android with Mcp-Plus-Plus
