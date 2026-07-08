@@ -1,9 +1,15 @@
 # SwissKnife Mcp-Plus-Plus Interop
 
-VAI-665 repairs the objective validation gap for `VAIOS-G704` and the shared
+MGW-573 (preserving the earlier VAI-665 implementation lineage) repairs the
+objective validation gap for `VAIOS-G704` and the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
+
+The meta-glasses backlog repair is recorded in
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-validation-repair.md`
+against the objective gap
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md`.
 
 The repaired `interface contract swissknife Mcp-Plus-Plus` path is:
 
@@ -16,7 +22,8 @@ The repaired `interface contract swissknife Mcp-Plus-Plus` path is:
   `mcpplusplus.check_compatibility`, `mcpplusplus.create_p2p_session`), and
   `SWISSKNIFE_MCP_PLUS_PLUS_INTEROP_DESCRIPTOR`, which binds that interface to
   SwissKnife's policy-mediation schema refs and to the objective-heap
-  validation lineage (task id, goal id, gap, and repair references).
+  validation lineage (`MGW-573`, source task `VAI-665`, goal id, gap, and
+  repair references).
 - `registerSwissKnifeMcpPlusPlusInterop()` and
   `createMCPPlusPlusClientWithSwissKnifeInterop()` register the interop
   descriptor on a live `MCPPlusPlus` runtime instance (the same
@@ -64,8 +71,8 @@ Validation evidence lives in
    generic `mcp_idl_descriptor.json` fixture, proving the two repositories'
    descriptor shapes remain mutually compatible.
 4. Asserts this objective validation repair is recorded in
-   `data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md` and
-   the objective heap
+   `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-validation-repair.md`
+   and the objective heap
    (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
 
 ## Validation
