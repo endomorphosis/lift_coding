@@ -354,7 +354,7 @@ Acceptance target:
 
 ## SWR-012 Add top-level source module ownership manifest
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/repo-modules
