@@ -51,7 +51,7 @@ export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
   consumer: 'mobile',
   interface_contract: 'interface contract swissknife mobile',
   goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
-  objective_validation_repair: 'VAI-661 objective validation repair',
+  objective_validation_repair: 'MGW-583 repairs MGW-569 objective validation repair',
   action_ids: DISPLAY_WIDGET_ACTION_IDS,
   action_by_action_id: DISPLAY_WIDGET_ACTION_BY_ACTION_ID,
   operation_by_action_id: DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,

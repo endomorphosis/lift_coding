@@ -1,4 +1,4 @@
-"""SwissKnife/mobile interoperability contract regression tests for VAI-661."""
+"""SwissKnife/mobile interoperability contract regression tests for MGW-569."""
 
 from __future__ import annotations
 
@@ -315,14 +315,15 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
     discovery = (
         REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md"
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-validation-repair.md"
     ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
 
     required_terms = [
-        "VAI-661",
+        "MGW-569",
+        "MGW-583",
         "VAIOS-G700",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
