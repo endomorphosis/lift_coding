@@ -134,6 +134,42 @@ def test_objective_task_janitor_releases_owned_blocks_when_goal_has_open_work():
     assert result["open_goal_ids"] == ["VAIOS-G697"]
 
 
+def test_objective_task_janitor_reopens_goal_when_only_open_work_is_strategy_blocked():
+    ObjectiveGoal, PortalTask, _schema, reconcile = _imports()
+    goals = [
+        ObjectiveGoal(
+            "VAIOS-G697",
+            "Production launch readiness gate",
+            {
+                "status": "active",
+                "fib_priority": "1",
+                "priority": "P0",
+                "track": "launch",
+                "goal": "Phone-hosted Swissknife virtual desktop with desktop offload and Meta glasses terminal.",
+            },
+        )
+    ]
+    tasks = [
+        PortalTask(
+            "VAI-003",
+            "Launch gate implementation",
+            _task_status("to", "do"),
+            "manual",
+            "P0",
+            "launch",
+            metadata={"goal id": "VAIOS-G697"},
+        )
+    ]
+    strategy = {"blocked_tasks": ["VAI-003"]}
+
+    result = reconcile(goals=goals, tasks=tasks, strategy=strategy, now="2026-06-23T00:00:00+00:00")
+    updated = result["strategy"]
+
+    assert updated["objective_task_janitor_reopen_goal_ids"] == ["VAIOS-G697"]
+    assert updated["objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]
+    assert result["open_goal_ids"] == []
+
+
 def test_objective_task_janitor_records_configured_mission_terms():
     ObjectiveGoal, PortalTask, _schema, reconcile = _imports()
     goals = [
