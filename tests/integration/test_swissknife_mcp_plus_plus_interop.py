@@ -183,6 +183,112 @@ def swissknife_mcp_plus_plus_interaction_envelope() -> dict:
     }
 
 
+def swissknife_mcp_plus_plus_compatibility_receipt() -> dict:
+    """Python mirror of buildSwissKnifeMcpPlusPlusCompatibilityReceipt()."""
+    return {
+        "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
+        "task_id": "VAI-665",
+        "session_id": "session:swissknife-mcp-plus-plus",
+        "correlation_id": "corr:swissknife-mcp-plus-plus",
+        "daemon_id": "mcp-plus-plus",
+        "server_package": "mcp_plus_plus",
+        "swissknife_consumer": "swissknife.mcp_plus_plus.mcp-server",
+        "protocol_negotiation": {
+            "method": "initialize",
+            "protocol_version": "2026-07-08",
+            "client_profiles": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/ucan",
+                "mcp++/deontic-policy",
+                "mcp++/event-dag",
+                "mcp++/p2p-transport",
+            ],
+            "server_profiles": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/ucan",
+                "mcp++/deontic-policy",
+                "mcp++/event-dag",
+                "mcp++/p2p-transport",
+            ],
+            "negotiated_profiles": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/ucan",
+                "mcp++/deontic-policy",
+                "mcp++/event-dag",
+                "mcp++/p2p-transport",
+            ],
+            "initialized": True,
+        },
+        "capability_descriptor": {
+            "descriptor_id": "swissknife-mcp-plus-plus-interop@0.1.0",
+            "interface_cid": "bafyswissknifemcpplusplusinterop000000001",
+            "name": "swissknife-mcp-plus-plus-interop",
+            "namespace": "com.swissknife.interop.mcp_plus_plus",
+            "version": "0.1.0",
+            "methods": sorted(MCP_PLUS_PLUS_INTEROP_OPERATIONS),
+            "requires": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/ucan",
+                "mcp++/deontic-policy",
+                "mcp++/event-dag",
+                "mcp++/p2p-transport",
+            ],
+            "compatibility_checked": True,
+            "compatibility_verdict": "compatible",
+            "event_streams": True,
+        },
+        "transport": {
+            "kind": "local",
+            "endpoint": "swissknife://mcp-plus-plus/interop",
+            "protocol_path": "swissknife/mcp++/mcp-plus-plus",
+            "auth_present": True,
+            "redaction_profile": "mcp-plus-plus-minimal",
+        },
+        "tool_call": {
+            "tool_name": "mcpplusplus.execute_with_envelope",
+            "tool_category": "mcpplusplus",
+            "upstream_function": "MCPPlusPlus.executeWithEnvelope",
+            "jsonrpc_method": "tools/call",
+            "arguments_hash": "sha256:swissknife-mcp-plus-plus-execute-with-envelope",
+            "dispatch_allowed": True,
+            "upstream_status": "ok",
+        },
+        "policy_contract": {
+            "interaction_envelope_id": (
+                "interaction:swissknife-mcp-plus-plus:execute-with-envelope:1"
+            ),
+            "policy_decision_id": "decision:swissknife-mcp-plus-plus:allow:1",
+            "policy_outcome": "allow",
+            "mediation_receipt_id": "receipt:swissknife-mcp-plus-plus:allow:1",
+            "control_surface_contract_ref": (
+                "swissknife/contracts/control_surface_contract.schema.json"
+            ),
+        },
+        "receipt_lineage": {
+            "envelope_cid": "local:swissknife-mcp-plus-plus-envelope",
+            "decision_cid": "local:swissknife-mcp-plus-plus-decision",
+            "receipt_cid": "local:swissknife-mcp-plus-plus-receipt",
+            "tool_receipt_id": "tool-receipt:mcpplusplus-execute-with-envelope",
+        },
+        "lifecycle_events": [
+            {"event": "initialize", "at": "2026-07-08T00:00:00Z"},
+            {"event": "initialized", "at": "2026-07-08T00:00:01Z"},
+            {"event": "descriptor_refresh", "at": "2026-07-08T00:00:02Z"},
+            {"event": "policy_decision", "at": "2026-07-08T00:00:03Z"},
+            {
+                "event": "receipt_emitted",
+                "at": "2026-07-08T00:00:04Z",
+                "receipt_cid": "local:swissknife-mcp-plus-plus-receipt",
+            },
+        ],
+        "validated_at": "2026-07-08T00:00:05Z",
+    }
+
+
 def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     src = read_text("swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts")
 
@@ -195,6 +301,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "export function toMcpIdlValidatorDescriptor" in src
     assert "export function buildSwissKnifeMcpPlusPlusControlSurfaceContract" in src
     assert "export function buildSwissKnifeMcpPlusPlusInteractionEnvelope" in src
+    assert "export function buildSwissKnifeMcpPlusPlusCompatibilityReceipt" in src
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in src
@@ -221,12 +328,18 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
 def test_swissknife_control_surface_and_interaction_envelope_validate_for_mcp_plus_plus() -> None:
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+    receipt_schema = read_json(
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json"
+    )
 
     Draft202012Validator(control_schema).validate(
         swissknife_mcp_plus_plus_control_surface_payload()
     )
     Draft202012Validator(envelope_schema).validate(
         swissknife_mcp_plus_plus_interaction_envelope()
+    )
+    Draft202012Validator(receipt_schema).validate(
+        swissknife_mcp_plus_plus_compatibility_receipt()
     )
 
 
