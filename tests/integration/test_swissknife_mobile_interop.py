@@ -340,3 +340,46 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in discovery
         assert goal_id in heap
+
+
+def test_attempt_4_validation_confirmation_recorded() -> None:
+    """MGW-569 attempt 4 re-filed the same objective gap under a fresh
+    fingerprint; this confirms the repair evidence stays tied to that
+    fingerprint and to the objective heap instead of drifting out of sync."""
+    gap = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md"
+    ).read_text(encoding="utf-8")
+    confirmation = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-4-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    heap = (
+        REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+
+    assert "d33307f93408e32451468150b5e7fe003eb0222d" in gap
+    assert "d33307f93408e32451468150b5e7fe003eb0222d" in confirmation
+
+    required_terms = [
+        "MGW-569",
+        "VAIOS-G700",
+        "goal_packet/interoperability/swissknife/06921590135c",
+        "objective validation repair",
+        "interface contract swissknife mobile",
+        "tests/integration/test_swissknife_mobile_interop.py",
+        "mobile/src/orb/metaGlassesOrbDescriptors.js",
+        "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
+        "swissknife/contracts/control_surface_contract.schema.json",
+        "swissknife/contracts/interaction_envelope.schema.json",
+    ]
+    for term in required_terms:
+        assert term in confirmation
+
+    assert (
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-4-validation-confirmation.md"
+        in heap
+    )
+    for goal_id in GOAL_PACKET_GOALS:
+        assert goal_id in confirmation
+        assert goal_id in heap
