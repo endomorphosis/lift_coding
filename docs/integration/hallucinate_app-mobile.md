@@ -1,9 +1,9 @@
 # Hallucinate App / Mobile Interop
 
-HAO-740 attempt 4 records the direct objective validation repair for
-`VAIOS-G707` and `objective/interoperability/hallucinate_app-mobile`. HAO-751
-remains the retry-budget follow-up that first repaired the blocked validation
-loop.
+VAI-674 records the direct objective validation repair for `VAIOS-G707` and
+`objective/interoperability/hallucinate_app-mobile`. VAI-684 is the
+retry-budget follow-up that confirmed the same repair path after repeated
+validation failures.
 
 The repaired `interface contract hallucinate_app mobile` path is:
 
@@ -52,13 +52,15 @@ Validation evidence lives in
 `tests/integration/test_hallucinate_app_mobile_interop.py`. It verifies the
 Hallucinate App search descriptor and handoff builder, the mobile descriptor
 exports, mobile ORB bridge advertisement, the HTML fixture, the DuckDB receipt
-schema/script evidence, and the objective heap/discovery repair records.
-This document is `docs/integration/hallucinate_app-mobile.md`.
+schema/script evidence, and the objective heap/discovery repair records. This
+document is `docs/integration/hallucinate_app-mobile.md`.
 
-The retry-budget source is
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md`.
-The repair evidence is
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md`
-and
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md`.
-This is an `objective validation repair` for HAO-740 and HAO-751.
+The source gap is
+`data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md`.
+The VAI-674 objective validation repair evidence is
+`data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md`.
+The VAI-684 retry-budget record is
+`data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md`.
+No smaller child goals are required because the same integration test, runtime
+handoff descriptors, documentation, and DuckDB receipt schema cover the missing
+`objective validation repair` evidence for `VAIOS-G707`.
