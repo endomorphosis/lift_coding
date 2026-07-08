@@ -138,6 +138,18 @@ def build_swissknife_surface_metadata() -> dict[str, Any]:
         "orb_descriptor_pack_module": binding.orb_plane.descriptor_pack_module,
         "orb_descriptor_pack_export": binding.orb_plane.descriptor_pack_export,
         "orb_transport_kinds": binding.orb_plane.transport_kinds,
+        "orb_capability_ids": binding.orb_plane.capability_ids,
+        "orb_plane": {
+            "surface_id": binding.orb_plane.surface_id,
+            "handler_namespace": binding.orb_plane.handler_namespace,
+            "router_module": binding.orb_plane.router_module,
+            "descriptor_pack_module": binding.orb_plane.descriptor_pack_module,
+            "descriptor_pack_export": binding.orb_plane.descriptor_pack_export,
+            "transport_kinds": binding.orb_plane.transport_kinds,
+            "capability_ids": binding.orb_plane.capability_ids,
+            "source_refs": binding.orb_plane.source_refs,
+            "metadata": dict(binding.orb_plane.metadata),
+        },
         "fallback_surface_ids": binding.virtual_ui.fallback_surface_ids,
     }
 

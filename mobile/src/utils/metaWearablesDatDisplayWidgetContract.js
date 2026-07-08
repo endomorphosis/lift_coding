@@ -45,6 +45,23 @@ export const DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID = {
   mobile_subscribe_display_widget_updates: 'subscribeDisplayWidgetUpdates',
 };
 
+export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
+  contract: DISPLAY_WIDGET_ACTION_CONTRACT,
+  producer: 'swissknife',
+  consumer: 'mobile',
+  interface_contract: 'interface contract swissknife mobile',
+  goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
+  objective_validation_repair: 'VAI-675 repairs VAI-661 retry-budget validation',
+  action_ids: DISPLAY_WIDGET_ACTION_IDS,
+  action_by_action_id: DISPLAY_WIDGET_ACTION_BY_ACTION_ID,
+  operation_by_action_id: DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,
+  dat_method_by_action_id: DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID,
+  schema_refs: {
+    control_surface_contract: 'swissknife/contracts/control_surface_contract.schema.json',
+    interaction_envelope: 'swissknife/contracts/interaction_envelope.schema.json',
+  },
+};
+
 const DISPLAY_WIDGET_ACTION_ID_SET = new Set(DISPLAY_WIDGET_ACTION_IDS);
 
 export function isDisplayWidgetActionId(actionId) {
