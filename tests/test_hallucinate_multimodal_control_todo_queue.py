@@ -781,7 +781,7 @@ def test_hao_674_integrates_mcp_launch_contracts_with_swissknife_control_surface
         encoding="utf-8"
     )
     registry_source = (
-        REPO_ROOT / "swissknife" / "src" / "services" / "swissknife-mcp-capability-registry.ts"
+        REPO_ROOT / "swissknife" / "src" / "services" / "apps" / "swissknife-mcp-capability-registry.ts"
     ).read_text(encoding="utf-8")
     discovery_source = MCP_LAUNCH_CONTRACT_INTEGRATION_PATH.read_text(encoding="utf-8")
     fixture = _json_block_after(discovery_source, "## Integration Fixture")
