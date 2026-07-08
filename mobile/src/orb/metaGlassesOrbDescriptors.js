@@ -77,6 +77,93 @@ export const TASK_STATUS_SERVICE_INTERFACE = {
   compatibility: {},
 };
 
+export const SWISSKNIFE_MOBILE_INTEROP_INTERFACE = {
+  name: 'swissknife_mobile_interop',
+  namespace: 'handsfree.swissknife.mobile',
+  version: '0.1.0',
+  specPath: 'docs/integration/swissknife-mobile.md',
+  control_surface_contract_ref: 'swissknife/contracts/control_surface_contract.schema.json',
+  interaction_envelope_schema_ref: 'swissknife/contracts/interaction_envelope.schema.json',
+  mediation_receipt_schema_ref: 'swissknife/contracts/mediation_receipt.schema.json',
+  mcp_plus_plus_compatibility_receipt_schema_ref:
+    'swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json',
+  goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
+  objective_goals: [
+    'VAIOS-G700',
+    'VAIOS-G701',
+    'VAIOS-G702',
+    'VAIOS-G703',
+    'VAIOS-G704',
+    'VAIOS-G705',
+    'VAIOS-G706',
+  ],
+  methods: [
+    { name: 'register_edge_capabilities', surface: 'mobile_orb_bridge' },
+    { name: 'publish_glasses_event', surface: 'mobile_orb_bridge' },
+    { name: 'bind_service', surface: 'mobile_orb_bridge' },
+    { name: 'invoke_service', surface: 'mobile_orb_bridge' },
+    { name: 'subscribe_service_updates', surface: 'mobile_orb_bridge' },
+    { name: 'dispatch_glasses_response', surface: 'mobile_orb_bridge' },
+    { name: 'revoke_binding', surface: 'mobile_orb_bridge' },
+    { name: 'render_widget', surface: 'display_widget_bridge' },
+    { name: 'update_widget', surface: 'display_widget_bridge' },
+    { name: 'clear_widget', surface: 'display_widget_bridge' },
+    { name: 'focus_next', surface: 'display_widget_bridge' },
+    { name: 'focus_previous', surface: 'display_widget_bridge' },
+    { name: 'activate', surface: 'display_widget_bridge' },
+    { name: 'reset_session', surface: 'display_widget_bridge' },
+    { name: 'play_video', surface: 'display_widget_bridge' },
+    { name: 'subscribe_updates', surface: 'display_widget_bridge' },
+  ],
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/profile-b-cid-artifacts',
+    'mcp++/receipts',
+    'control_surface_contract',
+    'interaction_envelope',
+    'mediation_receipt',
+  ],
+  compatibility: {
+    compatible_with: [
+      'handsfree.meta_glasses.mobile.mobile_orb_bridge@0.1.0',
+      'handsfree.meta_glasses.display.display_widget_bridge@0.1.0',
+    ],
+  },
+  metadata: {
+    owner: 'swissknife',
+    consumer: 'mobile',
+    interface_contract: 'interface contract swissknife mobile',
+    objective_validation_repair: 'VAI-661',
+  },
+};
+
+export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
+  interface: SWISSKNIFE_MOBILE_INTEROP_INTERFACE,
+  local_interfaces: [
+    descriptorRef(MOBILE_ORB_BRIDGE_INTERFACE),
+    descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE),
+  ],
+  schema_refs: {
+    control_surface_contract:
+      SWISSKNIFE_MOBILE_INTEROP_INTERFACE.control_surface_contract_ref,
+    interaction_envelope:
+      SWISSKNIFE_MOBILE_INTEROP_INTERFACE.interaction_envelope_schema_ref,
+    mediation_receipt:
+      SWISSKNIFE_MOBILE_INTEROP_INTERFACE.mediation_receipt_schema_ref,
+    mcp_plus_plus_compatibility_receipt:
+      SWISSKNIFE_MOBILE_INTEROP_INTERFACE
+        .mcp_plus_plus_compatibility_receipt_schema_ref,
+  },
+  runtime_handoff: {
+    source_surface: 'swissknife',
+    target_surface: 'mobile',
+    edge_descriptor: 'mobile/src/orb/metaGlassesOrbDescriptors.js',
+    widget_contract:
+      'mobile/src/utils/metaWearablesDatDisplayWidgetContract.js',
+    allowed_surfaces: ['agent', 'remote_client', 'gesture', 'voice'],
+  },
+};
+
 function normalizeDescriptorMetadata(metadata = {}) {
   if (!metadata || typeof metadata !== 'object' || Array.isArray(metadata)) {
     return null;

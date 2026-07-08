@@ -506,7 +506,7 @@ describe('MetaGlassesMobileOrbBridge', () => {
       expect.arrayContaining(['sha256:task-service', 'sha256:display'])
     );
     expect(diagnostics.policy_cids).toContain(
-      'local:hallucinate-app:remote-client-transport'
+      'local:swissknife:mobile-interop'
     );
     expect(diagnostics.receipt_cids).toEqual(
       expect.arrayContaining([
@@ -553,7 +553,7 @@ describe('MetaGlassesMobileOrbBridge', () => {
           remote_client_policy_contract: false,
         }),
       },
-      control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
+      control_surface_contract_ref: 'swissknife/contracts/control_surface_contract.schema.json',
       normalized_intent: expect.objectContaining({
         method: 'update_widget',
       }),

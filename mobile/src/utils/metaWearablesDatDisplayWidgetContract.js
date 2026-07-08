@@ -45,6 +45,19 @@ export const DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID = {
   mobile_subscribe_display_widget_updates: 'subscribeDisplayWidgetUpdates',
 };
 
+export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
+  contract: DISPLAY_WIDGET_ACTION_CONTRACT,
+  producer: 'swissknife',
+  consumer: 'mobile',
+  interface_contract: 'interface contract swissknife mobile',
+  control_surface_contract_ref: 'swissknife/contracts/control_surface_contract.schema.json',
+  interaction_envelope_schema_ref: 'swissknife/contracts/interaction_envelope.schema.json',
+  operation_by_action_id: DISPLAY_WIDGET_ORB_OPERATION_BY_ACTION_ID,
+  dat_method_by_action_id: DISPLAY_WIDGET_DAT_METHOD_BY_ACTION_ID,
+  action_ids: DISPLAY_WIDGET_ACTION_IDS,
+  objective_validation_repair: 'VAI-661',
+};
+
 const DISPLAY_WIDGET_ACTION_ID_SET = new Set(DISPLAY_WIDGET_ACTION_IDS);
 
 export function isDisplayWidgetActionId(actionId) {

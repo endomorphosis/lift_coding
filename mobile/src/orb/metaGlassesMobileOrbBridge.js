@@ -9,6 +9,7 @@ import {
 import {
   DISPLAY_WIDGET_BRIDGE_INTERFACE,
   MOBILE_ORB_BRIDGE_INTERFACE,
+  SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
   descriptorRef,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -16,27 +17,24 @@ import {
 const DEFAULT_EDGE_ID = 'handsfree-mobile-orb-edge';
 const DEFAULT_EDGE_SESSION_ID = 'local:edge-session:handsfree-mobile-orb-edge';
 const DEFAULT_SERVICE_BINDING = 'local:binding:handsfree-service';
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
-const CONTROL_SURFACE_CONTRACT_REF = 'control_surface_contract:hallucinate-app:remote-client';
 export const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
   'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
+const CONTROL_SURFACE_CONTRACT_REF =
+  SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR.schema_refs.control_surface_contract;
 const CONTROL_SURFACE_POLICY_BUNDLE_REF = {
-  policy_id: 'policy:hallucinate-app:remote-client-transport',
-  policy_cid: 'local:hallucinate-app:remote-client-transport',
+  policy_id: 'policy:swissknife:mobile-interop',
+  policy_cid: 'local:swissknife:mobile-interop',
   version: '0.1.0',
-  scope: 'remote-client-transport',
+  scope: 'swissknife-mobile-interop',
   source: 'system_default',
 };
-const CONTROL_SURFACE_COMPILED_POLICY_CID = 'local:hallucinate-app:remote-client-transport';
+const CONTROL_SURFACE_COMPILED_POLICY_CID = 'local:swissknife:mobile-interop';
 const CONTROL_SURFACE_SCHEMA_REFS = [
   'control_surface_contract',
   'interaction_envelope',
   'policy_decision',
   'mediation_receipt',
 ];
-const MOBILE_ORB_DIAGNOSTICS_CONTRACT =
-  'handsfree.meta-glasses/mobile-orb-diagnostics@0.1.0';
 const DAT_CAPABILITY_KEYS = [
   'session',
   'camera',
@@ -118,7 +116,7 @@ function collectControlSurfacePolicyCids(record = {}) {
   return uniqueStrings(values);
 }
 
-function collectDescriptorCids(record = {}) {
+function collectRecordDescriptorCids(record = {}) {
   const values = [
     record.service_interface_cid,
     record.descriptor_cid,
@@ -140,7 +138,7 @@ function collectDescriptorCids(record = {}) {
   return uniqueStrings(values);
 }
 
-function collectReceiptCids(record = {}) {
+function collectRecordReceiptCids(record = {}) {
   const values = [
     record.receipt_cid,
     record.orb_receipt_cid,
@@ -1353,10 +1351,10 @@ export class MetaGlassesMobileOrbBridge {
     ].filter(isObject);
     const descriptorCids = uniqueStrings([
       ...this.localInterfaceCids,
-      ...diagnosticRecords.flatMap(collectDescriptorCids),
+      ...diagnosticRecords.flatMap(collectRecordDescriptorCids),
     ]);
     const policyCids = uniqueStrings(diagnosticRecords.flatMap(collectControlSurfacePolicyCids));
-    const receiptCids = uniqueStrings(diagnosticRecords.flatMap(collectReceiptCids));
+    const receiptCids = uniqueStrings(diagnosticRecords.flatMap(collectRecordReceiptCids));
     const fallbackDetails = diagnosticRecords.flatMap(collectFallbackDetails);
     const capabilitySummary = capabilityCounts(this.edgeSession);
     const bindingState = Array.from(this.bindings.entries()).map(([
