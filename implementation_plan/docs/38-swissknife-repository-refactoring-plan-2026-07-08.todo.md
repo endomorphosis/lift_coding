@@ -406,7 +406,7 @@ Acceptance target:
 
 ## SWR-016 Track libp2p and browser bundle budgets
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/libp2p
