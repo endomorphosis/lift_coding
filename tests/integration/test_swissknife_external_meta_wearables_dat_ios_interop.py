@@ -1,4 +1,4 @@
-"""SwissKnife/external/meta-wearables-dat-ios interoperability regression tests for VAI-667."""
+"""SwissKnife/external/meta-wearables-dat-ios interoperability regression tests for HAO-736."""
 
 from __future__ import annotations
 
@@ -204,6 +204,80 @@ def swissknife_meta_wearables_dat_ios_interaction_envelope() -> dict:
     }
 
 
+def swissknife_meta_wearables_dat_ios_mcppp_compatibility_receipt() -> dict:
+    """Python mirror of buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt()."""
+    return {
+        "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
+        "task_id": "HAO-736",
+        "session_id": "session:swissknife-meta-wearables-dat-ios-display",
+        "correlation_id": "corr:swissknife-meta-wearables-dat-ios-display",
+        "daemon_id": "meta-wearables-dat-ios",
+        "server_package": "meta_wearables_dat_ios",
+        "swissknife_consumer": "swissknife.meta_wearables_dat_ios.display-service",
+        "protocol_negotiation": {
+            "method": "initialize",
+            "protocol_version": "2026-07-08",
+            "client_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "server_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "negotiated_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "initialized": True,
+        },
+        "capability_descriptor": {
+            "descriptor_id": "swissknife-meta-wearables-dat-ios-display-interop@0.1.0",
+            "interface_cid": "bafyswissknifemetawearablesdatiosdisplay0001",
+            "name": "swissknife-meta-wearables-dat-ios-display-interop",
+            "namespace": "com.swissknife.interop.meta_wearables_dat_ios.display",
+            "version": "0.1.0",
+            "methods": list(REQUIRED_SWISSKNIFE_META_WEARABLES_DAT_IOS_OPERATIONS),
+            "requires": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "compatibility_checked": True,
+            "compatibility_verdict": "compatible",
+            "event_streams": True,
+        },
+        "transport": {
+            "kind": "local",
+            "endpoint": "swissknife://meta-wearables-dat-ios/display",
+            "protocol_path": "swissknife/mcp++/meta-wearables-dat-ios/display",
+            "auth_present": True,
+            "redaction_profile": "display-session-minimal",
+        },
+        "tool_call": {
+            "tool_name": "meta_wearables_dat_ios.display.send",
+            "tool_category": "display",
+            "upstream_function": "Display.send",
+            "jsonrpc_method": "tools/call",
+            "arguments_hash": "sha256:swissknife-meta-wearables-dat-ios-send-display-view",
+            "dispatch_allowed": True,
+            "upstream_status": "ok",
+        },
+        "policy_contract": {
+            "interaction_envelope_id": "interaction:swissknife-meta-wearables-dat-ios:send-display-view:1",
+            "policy_decision_id": "decision:swissknife-meta-wearables-dat-ios:allow:1",
+            "policy_outcome": "allow",
+            "mediation_receipt_id": "receipt:swissknife-meta-wearables-dat-ios:allow:1",
+            "control_surface_contract_ref": "swissknife/contracts/control_surface_contract.schema.json",
+        },
+        "receipt_lineage": {
+            "envelope_cid": "local:swissknife-meta-wearables-dat-ios-envelope",
+            "decision_cid": "local:swissknife-meta-wearables-dat-ios-decision",
+            "receipt_cid": "local:swissknife-meta-wearables-dat-ios-receipt",
+            "tool_receipt_id": "tool-receipt:meta-wearables-dat-ios-display-send",
+        },
+        "lifecycle_events": [
+            {"event": "initialize", "at": "2026-07-08T00:00:00Z"},
+            {"event": "initialized", "at": "2026-07-08T00:00:01Z"},
+            {"event": "descriptor_refresh", "at": "2026-07-08T00:00:02Z"},
+            {"event": "policy_decision", "at": "2026-07-08T00:00:03Z"},
+            {
+                "event": "receipt_emitted",
+                "at": "2026-07-08T00:00:04Z",
+                "receipt_cid": "local:swissknife-meta-wearables-dat-ios-receipt",
+            },
+        ],
+        "validated_at": "2026-07-08T00:00:05Z",
+    }
+
+
 def test_meta_wearables_dat_ios_display_descriptors_exist_on_disk() -> None:
     expected_paths = [
         "external/meta-wearables-dat-ios/.cursor/rules/display-access.mdc",
@@ -285,6 +359,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "export function createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATIOSInterop" in src
     assert "export function buildSwissKnifeMetaWearablesDATIOSControlSurfaceContract" in src
     assert "export function buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope" in src
+    assert "export function buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt" in src
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in src
@@ -311,6 +386,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/meta-wearables-dat-ios/.cursor/rules/session-lifecycle.mdc" in src
     assert "external/meta-wearables-dat-ios/.cursor/rules/permissions-registration.mdc" in src
     assert "external/meta-wearables-dat-ios/samples/DisplayAccess/DisplayAccess/Info.plist" in src
+    assert "HAO-736" in src
     assert "VAI-667" in src
     assert "VAIOS-G706" in src
     assert "agent_identity" in src
@@ -321,6 +397,9 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
 def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_wearables_dat_ios() -> None:
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+    compatibility_schema = read_json(
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json"
+    )
 
     Draft202012Validator(control_schema).validate(
         swissknife_meta_wearables_dat_ios_control_surface_payload()
@@ -328,18 +407,23 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_w
     Draft202012Validator(envelope_schema).validate(
         swissknife_meta_wearables_dat_ios_interaction_envelope()
     )
+    Draft202012Validator(compatibility_schema).validate(
+        swissknife_meta_wearables_dat_ios_mcppp_compatibility_receipt()
+    )
 
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_meta_wearables_dat_ios.md")
     discovery = read_text(
-        "data/virtual_ai_os/discovery/2026-07-08-vai-667-objective-validation-repair.md"
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-validation-repair.md"
     )
-    gap = read_text("data/virtual_ai_os/discovery/2026-07-08-vai-667-objective-gap-d6bdae3a60cc.md")
+    gap = read_text(
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md"
+    )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "VAI-667",
+        "HAO-736",
         "VAIOS-G706",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
