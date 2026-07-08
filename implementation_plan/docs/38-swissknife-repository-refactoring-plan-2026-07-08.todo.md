@@ -536,7 +536,7 @@ Acceptance target:
 
 ## SWR-026 Clean legacy web JavaScript from active type/build lanes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/web-legacy
