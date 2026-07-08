@@ -64,5 +64,7 @@ descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
 objective validation repair is recorded in
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
+plus the attempt-five confirmation record
+`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
