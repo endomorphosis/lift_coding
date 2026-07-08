@@ -718,7 +718,7 @@ state observation.
 
 ## SWR-037 Audit package exports and browser entry conditions
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/package-browser-api
 - Fingerprint: 3a531cd7e771c4f08d3631b1bb5d6f942d9cbad2
