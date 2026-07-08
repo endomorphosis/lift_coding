@@ -1,4 +1,4 @@
-"""SwissKnife/mobile interoperability contract regression tests for MGW-569."""
+"""SwissKnife/mobile interoperability contract regression tests for HAO-730."""
 
 from __future__ import annotations
 
@@ -265,6 +265,16 @@ def test_mobile_descriptor_exports_swissknife_interop_contract() -> None:
     assert {"agent", "remote_client"}.issubset(
         set(descriptor["runtime_handoff"]["allowed_surfaces"])
     )
+    assert descriptor["validation"]["hao_task_id"] == "HAO-730"
+    assert descriptor["validation"]["hao_attempt"] == 4
+    assert descriptor["validation"]["hao_objective_gap_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-730-objective-gap-d33307f93408.md"
+    )
+    assert descriptor["validation"]["hao_validation_confirmation_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-730-attempt-4-validation-confirmation.md"
+    )
 
 
 def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods() -> None:
@@ -284,6 +294,12 @@ def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods()
     assert contract["producer"] == "swissknife"
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract swissknife mobile"
+    assert contract["hao_task_id"] == "HAO-730"
+    assert contract["hao_attempt"] == 4
+    assert contract["hao_validation_confirmation_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-730-attempt-4-validation-confirmation.md"
+    )
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -380,6 +396,54 @@ def test_attempt_4_validation_confirmation_recorded() -> None:
         "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-4-validation-confirmation.md"
         in heap
     )
+    for goal_id in GOAL_PACKET_GOALS:
+        assert goal_id in confirmation
+        assert goal_id in heap
+
+
+def test_hao_730_attempt_4_validation_confirmation_recorded() -> None:
+    """Lock the exact HAO-730 attempt-4 evidence to the objective heap."""
+    gap = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md"
+    ).read_text(encoding="utf-8")
+    confirmation = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
+    heap = (
+        REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
+    envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+
+    required_terms = [
+        "HAO-730",
+        "d33307f93408e32451468150b5e7fe003eb0222d",
+        "VAIOS-G700",
+        "goal_packet/interoperability/swissknife/06921590135c",
+        "objective validation repair",
+        "interface contract swissknife mobile",
+        "tests/integration/test_swissknife_mobile_interop.py",
+        "docs/integration/swissknife-mobile.md",
+        "mobile/src/orb/metaGlassesOrbDescriptors.js",
+        "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
+        "swissknife/contracts/control_surface_contract.schema.json",
+        "swissknife/contracts/interaction_envelope.schema.json",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md",
+    ]
+    for term in required_terms:
+        assert term in confirmation
+        assert term in heap
+
+    assert "Attempt: 4" in confirmation
+    assert "attempt 4 objective validation repair" in heap
+    assert "d33307f93408e32451468150b5e7fe003eb0222d" in gap
+    assert "HAO-730 attempt 4" in docs
+    assert "HAO-730 attempt 4 objective validation repair" in control_schema["$comment"]
+    assert "HAO-730 attempt 4 objective validation repair" in envelope_schema["$comment"]
+
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in confirmation
         assert goal_id in heap

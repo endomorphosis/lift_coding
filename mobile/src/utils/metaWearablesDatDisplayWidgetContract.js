@@ -51,6 +51,12 @@ export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
   consumer: 'mobile',
   interface_contract: 'interface contract swissknife mobile',
   goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
+  hao_task_id: 'HAO-730',
+  hao_attempt: 4,
+  hao_objective_gap_ref:
+    'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md',
+  hao_validation_confirmation_ref:
+    'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md',
   objective_validation_repair: 'MGW-583 repairs MGW-569 objective validation repair',
   action_ids: DISPLAY_WIDGET_ACTION_IDS,
   action_by_action_id: DISPLAY_WIDGET_ACTION_BY_ACTION_ID,
