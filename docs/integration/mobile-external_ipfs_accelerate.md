@@ -1,7 +1,11 @@
 # Mobile / external/ipfs_accelerate Interop
 
-VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
-`objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+HAO-741 keeps the VAIOS-G719 objective validation repair closed for the
+`hallucinate_multimodal_control` backlog. The original VAI-672 work repaired
+the VAI-661/VAIOS-G719 objective validation gap covering the
+`objective/interoperability/mobile-external_ipfs_accelerate` bundle, and
+MGW-580 re-confirmed the same evidence for the Meta glasses display widgets
+backlog.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -63,14 +67,11 @@ exist and declare the expected tables/functions, loads the JavaScript
 descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
 objective validation repair is recorded in
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
-plus the attempt-six confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`
-and the attempt-seven confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md`
-and the attempt-eight confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md`
-and prior attempt-five confirmation record
-`data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
-and the objective heap
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-gap-c1edafa875e6.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-1-validation-confirmation.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md`,
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md`.
+The prior VAI-672 and MGW-580 discovery records remain linked from the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).

@@ -1,4 +1,4 @@
-"""Mobile / external/ipfs_accelerate interoperability regression tests for VAI-672."""
+"""Mobile / external/ipfs_accelerate interoperability regression tests for HAO-741."""
 
 from __future__ import annotations
 
@@ -191,8 +191,22 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
     assert set(REQUIRED_TIME_SERIES_TABLES).issubset(
         set(descriptor["runtime_handoff"]["time_series_tables"])
     )
-    assert descriptor["validation"]["task_id"] == "VAI-672"
+    assert descriptor["validation"]["task_id"] == "HAO-741"
+    assert descriptor["validation"]["original_task_id"] == "VAI-672"
+    assert descriptor["validation"]["prior_task_lineage"] == ["VAI-672", "MGW-580"]
     assert descriptor["validation"]["goal_id"] == GOAL_ID
+    assert descriptor["validation"]["objective_gap_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-gap-c1edafa875e6.md"
+    )
+    assert descriptor["validation"]["validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["validation_confirmation_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-attempt-1-validation-confirmation.md"
+    )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
@@ -216,6 +230,8 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract mobile external/ipfs_accelerate"
     assert contract["goal_id"] == GOAL_ID
+    assert "HAO-741" in contract["objective_validation_repair"]
+    assert "VAI-672" in contract["original_validation_repair"]
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -247,40 +263,38 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = (
         REPO_ROOT / "docs/integration/mobile-external_ipfs_accelerate.md"
     ).read_text(encoding="utf-8")
+    objective_gap = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-gap-c1edafa875e6.md"
+    ).read_text(encoding="utf-8")
     discovery = (
         REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    attempt_one = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-1-validation-confirmation.md"
     ).read_text(encoding="utf-8")
     attempt_four = (
         REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-4-validation-confirmation.md"
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md"
     ).read_text(encoding="utf-8")
-    attempt_five = (
+    merge_repair = (
         REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    attempt_six = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    attempt_seven = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    attempt_eight = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md"
+        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md"
     ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
 
     required_terms = [
-        "VAI-672",
+        "HAO-741",
         GOAL_ID,
         "objective/interoperability/mobile-external_ipfs_accelerate",
         "objective validation repair",
         "interface contract mobile external/ipfs_accelerate",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-gap-c1edafa875e6.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-1-validation-confirmation.md",
         "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
         "src/handsfree/mobile_ipfs_accelerate_interop.py",
         "mobile/src/orb/metaGlassesOrbDescriptors.js",
@@ -291,34 +305,16 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (
-        docs,
-        discovery,
-        attempt_four,
-        attempt_five,
-        attempt_six,
-        attempt_seven,
-        attempt_eight,
-        heap,
-    ):
-        for term in required_terms:
-            assert term in content, f"missing {term!r}"
+    combined_hao_741_evidence = "\n".join([docs, discovery, attempt_one, heap])
+    for term in required_terms:
+        assert term in combined_hao_741_evidence, f"missing {term!r}"
 
-    attempt_six_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-6-validation-confirmation.md"
-    )
-    attempt_seven_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
-    )
-    attempt_eight_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-8-validation-confirmation.md"
-    )
-    assert attempt_six_record in docs
-    assert attempt_six_record in heap
-    assert attempt_seven_record in docs
-    assert attempt_seven_record in heap
-    assert attempt_eight_record in docs
-    assert attempt_eight_record in heap
+    assert "objective validation repair" in objective_gap
+    assert "interface contract mobile external/ipfs_accelerate" in objective_gap
+    assert "tests/integration/test_mobile_external_ipfs_accelerate_interop.py" in objective_gap
+    assert "HAO-741" in attempt_four
+    assert "HAO-741" in merge_repair
+    assert "VAI-672" in docs
+    assert "VAI-672" in heap
+    assert "MGW-580" in docs
+    assert "MGW-580" in heap

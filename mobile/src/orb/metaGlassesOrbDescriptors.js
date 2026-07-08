@@ -214,12 +214,20 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
     ],
   },
   validation: {
-    task_id: 'VAI-672',
+    task_id: 'HAO-741',
+    original_task_id: 'VAI-672',
+    prior_task_lineage: ['VAI-672', 'MGW-580'],
     goal_id: 'VAIOS-G719',
     objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-gap-c1edafa875e6.md',
     validation_repair_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md',
+    validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-1-validation-confirmation.md',
+    prior_validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md',
+    merge_retry_budget_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md',
     evidence: 'objective validation repair',
   },
 };

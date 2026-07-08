@@ -35,7 +35,9 @@ export const IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT = {
   consumer: 'mobile',
   interface_contract: 'interface contract mobile external/ipfs_accelerate',
   goal_id: 'VAIOS-G719',
-  objective_validation_repair: 'VAI-672 repairs the VAIOS-G719 objective validation repair',
+  objective_validation_repair:
+    'HAO-741 preserves the VAIOS-G719 objective validation repair for mobile external/ipfs_accelerate',
+  original_validation_repair: 'VAI-672 implemented the VAIOS-G719 mobile external/ipfs_accelerate contract',
   action_ids: BENCHMARK_WIDGET_ACTION_IDS,
   operation_by_action_id: BENCHMARK_WIDGET_ORB_OPERATION_BY_ACTION_ID,
   dat_method_by_action_id: BENCHMARK_WIDGET_DAT_METHOD_BY_ACTION_ID,
