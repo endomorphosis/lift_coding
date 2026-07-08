@@ -70,5 +70,7 @@ and the attempt-seven confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md`
 and prior attempt-five confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
+and the MGW-580 attempt-five confirmation record
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-attempt-5-validation-confirmation.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
