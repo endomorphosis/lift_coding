@@ -11,6 +11,8 @@ import {
   MOBILE_ORB_BRIDGE_INTERFACE,
   SWISSKNIFE_MOBILE_INTEROP_INTERFACE,
   SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
+  IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
+  IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
   descriptorRef,
   localInterfaceKey,
 } from './metaGlassesOrbDescriptors';
@@ -1299,10 +1301,14 @@ export class MetaGlassesMobileOrbBridge {
     this.platform = options.platform || 'simulator';
     this.device = options.device || {};
     const swissknifeInteropInterfaceCid = localInterfaceKey(SWISSKNIFE_MOBILE_INTEROP_INTERFACE);
+    const ipfsAccelerateInteropInterfaceCid = localInterfaceKey(
+      IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE
+    );
     this.localInterfaceCids = options.localInterfaceCids || [
       localInterfaceKey(MOBILE_ORB_BRIDGE_INTERFACE),
       localInterfaceKey(DISPLAY_WIDGET_BRIDGE_INTERFACE),
       swissknifeInteropInterfaceCid,
+      ipfsAccelerateInteropInterfaceCid,
     ];
     this.edgeSession = null;
     this.bindings = new Map();
@@ -1684,6 +1690,17 @@ export class MetaGlassesMobileOrbBridge {
             {
               ...descriptorRef(SWISSKNIFE_MOBILE_INTEROP_INTERFACE, this.localInterfaceCids[2]),
               interop_descriptor: SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR,
+            },
+          ]
+          : []),
+        ...(this.localInterfaceCids[3]
+          ? [
+            {
+              ...descriptorRef(
+                IPFS_ACCELERATE_MOBILE_INTEROP_INTERFACE,
+                this.localInterfaceCids[3]
+              ),
+              interop_descriptor: IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR,
             },
           ]
           : []),
