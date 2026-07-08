@@ -643,3 +643,75 @@ state observation.
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Evidence: `tmp/swissknife_refactor_supervisor/state` records bounded supervisor state; `swissknife/docs/supervisor-refactor-runbook.md` documents invocation, state files, daemon `git gc` behavior, and escalation rules.
 - Acceptance: SwissKnife refactor tasks can be parsed and supervised in bounded `--once --no-implement` mode without autonomous code edits; state paths, invocation flags, known daemon `git gc` behavior, and safe escalation rules are documented.
+
+## SWR-031 Review completed SwissKnife refactor commit set
+
+- Status: completed
+- Priority: P1
+- Track: refactor/integration
+- Fingerprint: 8cf5183f0cf30e1c95d0ec8138d760efaedb67a3
+- Dedupe key: swissknife_refactor:review_completed_commit_set
+- Depends on: SWR-029, SWR-030
+- Outputs: swissknife/docs/refactor-integration-review.md
+- Validation: cd swissknife && test -f docs/refactor-integration-review.md && rg -n "Browser runtime|libp2p|Module boundaries|ZKP|IPFS|Storage|Workers|Release gates" docs/refactor-integration-review.md
+- Acceptance: The completed refactor work is grouped by domain with concrete commit/file evidence, review risks, and recommended integration order; the review distinguishes committed SwissKnife changes from unrelated root-repo dirt.
+
+## SWR-032 Re-run clean release-readiness gate and archive output
+
+- Status: todo
+- Priority: P1
+- Track: refactor/release
+- Fingerprint: b52f536feb96b75b970e01d0bc770f4269b20c3e
+- Dedupe key: swissknife_refactor:clean_release_gate_archive
+- Depends on: SWR-029, SWR-031
+- Outputs: swissknife/docs/release-readiness-report.md, swissknife/docs/release-readiness-report.json, swissknife/docs/refactor-release-gate-output.md
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: The documented release-readiness gate runs from a clean shell, archives command output and generated reports, and fails if any required service/source audit, browser typecheck, browser compatibility test, web build, bundle audit, or evidence freshness check fails.
+
+## SWR-033 Confirm browser bundle host-leakage and Pyodide policy
+
+- Status: todo
+- Priority: P1
+- Track: refactor/browser-policy
+- Fingerprint: 1da992e3dbcd271cfb4d1e376d5da6267922166a
+- Dedupe key: swissknife_refactor:bundle_host_pyodide_policy
+- Depends on: SWR-016, SWR-021, SWR-032
+- Outputs: swissknife/docs/browser-bundle-budget.md, swissknife/docs/browser-python-policy.md, swissknife/docs/refactor-release-gate-output.md
+- Validation: cd swissknife && npm run build:web && node scripts/audit-web-bundle.mjs --dist dist --report docs/browser-bundle-budget.md --json docs/browser-bundle-budget.json --fail-on-host-leakage --fail-on-default-pyodide
+- Acceptance: Browser bundle evidence explicitly records zero host leakage and zero default Pyodide runtime exposure; any remaining Python/Pyodide references are documented as optional, sandboxed, or test/evidence-only and are not default browser execution paths.
+
+## SWR-034 Refresh browser libp2p Playwright evidence
+
+- Status: todo
+- Priority: P1
+- Track: refactor/libp2p
+- Fingerprint: e0cf988bf0c32c65268b8a2bcb369866f4442d1c
+- Dedupe key: swissknife_refactor:libp2p_playwright_evidence_refresh
+- Depends on: SWR-015, SWR-028, SWR-032
+- Outputs: swissknife/docs/browser-libp2p-evidence.md, swissknife/docs/browser-libp2p-evidence.fingerprint.json, swissknife/test/e2e, swissknife/build-tools/configs/playwright.libp2p-browser.config.ts
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.libp2p-browser.config.ts
+- Acceptance: Browser libp2p evidence is fresh, includes the real browser runtime path, confirms libp2p is enabled by default for browser transport surfaces, and records whether WebRTC, WebSockets, circuit relay v2, Identify, Noise, Yamux, and GossipSub are configured or explicitly unavailable.
+
+## SWR-035 Prepare SwissKnife main-branch merge package
+
+- Status: todo
+- Priority: P1
+- Track: refactor/integration
+- Fingerprint: 5d6420059d17255f49ac839c28fe98e5b48ff936
+- Dedupe key: swissknife_refactor:main_branch_merge_package
+- Depends on: SWR-031, SWR-032, SWR-033, SWR-034
+- Outputs: swissknife/docs/refactor-merge-package.md
+- Validation: cd swissknife && test -f docs/refactor-merge-package.md && git status --short && git log --oneline -20
+- Acceptance: The merge package identifies the target branch, current SwissKnife HEAD, refactor commits, validation evidence, residual risks, and exact recommended merge commands; it must not rewrite history or merge unrelated root-repo changes without explicit operator approval.
+
+## SWR-036 Create residual browser-compatibility follow-up board
+
+- Status: todo
+- Priority: P2
+- Track: refactor/follow-up
+- Fingerprint: 3317b0ecb15f399f6ec384d5d28cb716421738b7
+- Dedupe key: swissknife_refactor:residual_browser_compat_followup_board
+- Depends on: SWR-011, SWR-024, SWR-033, SWR-035
+- Outputs: implementation_plan/docs/39-swissknife-browser-compatibility-followups-2026-07-08.todo.md, swissknife/docs/browser-compatibility-inventory.md, swissknife/docs/service-boundary-audit.json
+- Validation: test -f implementation_plan/docs/39-swissknife-browser-compatibility-followups-2026-07-08.todo.md && cd swissknife && node scripts/audit-browser-compat.mjs --report docs/browser-compatibility-inventory.md && node scripts/audit-source-modules.mjs --fail-on-unknown --fail-on-forbidden
+- Acceptance: A new follow-up board exists only for concrete residual `host-only` or `unknown` browser inventory items, with one task per actionable module family; completed SWR work is not duplicated, and every follow-up has validation and browser-compatibility acceptance criteria.
