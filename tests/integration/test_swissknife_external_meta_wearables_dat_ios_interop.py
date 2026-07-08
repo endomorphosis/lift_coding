@@ -1,4 +1,4 @@
-"""SwissKnife/external/meta-wearables-dat-ios interoperability regression tests for VAI-667."""
+"""SwissKnife/external/meta-wearables-dat-ios interoperability regression tests for HAO-736."""
 
 from __future__ import annotations
 
@@ -311,7 +311,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/meta-wearables-dat-ios/.cursor/rules/session-lifecycle.mdc" in src
     assert "external/meta-wearables-dat-ios/.cursor/rules/permissions-registration.mdc" in src
     assert "external/meta-wearables-dat-ios/samples/DisplayAccess/DisplayAccess/Info.plist" in src
-    assert "VAI-667" in src
+    assert "HAO-736" in src
     assert "VAIOS-G706" in src
     assert "agent_identity" in src
     assert "allowed_surfaces" in src
@@ -333,13 +333,15 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_w
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_meta_wearables_dat_ios.md")
     discovery = read_text(
-        "data/virtual_ai_os/discovery/2026-07-08-vai-667-objective-validation-repair.md"
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-validation-repair.md"
     )
-    gap = read_text("data/virtual_ai_os/discovery/2026-07-08-vai-667-objective-gap-d6bdae3a60cc.md")
+    gap = read_text(
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md"
+    )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "VAI-667",
+        "HAO-736",
         "VAIOS-G706",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
