@@ -497,7 +497,7 @@ Acceptance target:
 
 ## SWR-023 Normalize app manifests and lazy imports for the web bundle
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P2
 - Track: refactor/apps-browser
