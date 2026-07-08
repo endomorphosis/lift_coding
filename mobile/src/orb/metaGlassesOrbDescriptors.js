@@ -5,6 +5,29 @@ export const MOBILE_ORB_BRIDGE_INTERFACE = {
   specPath: 'spec/meta_glasses_mobile_orb_bridge_interface.json',
 };
 
+export const MOBILE_ORB_SWISSKNIFE_INTEROP_CONTRACT =
+  'handsfree.meta-glasses/swissknife-mobile-interop@0.1.0';
+
+export const MOBILE_ORB_CONTROL_SURFACE_CONTRACT_REF =
+  'control_surface_contract:hallucinate-app:remote-client';
+
+export const MOBILE_ORB_CONTROL_SURFACE_ARTIFACT_FIELDS = [
+  'control_surface_contract_ref',
+  'interaction_envelope',
+  'normalized_intent',
+  'policy_decision',
+  'mediation_receipt',
+];
+
+export const MOBILE_ORB_ALLOWED_SURFACES = [
+  'mobile',
+  'meta_glasses',
+  'simulator',
+  'display_widget',
+  'display_webapp',
+  'audio_summary',
+];
+
 export const MOBILE_ORB_BRIDGE_OPERATIONS = [
   'register_edge_capabilities',
   'publish_glasses_event',
@@ -33,6 +56,16 @@ export const DISPLAY_WIDGET_BRIDGE_OPERATIONS = [
   'play_video',
   'subscribe_updates',
 ];
+
+export const MOBILE_ORB_RUNTIME_HANDOFF = {
+  register: 'register_edge_capabilities',
+  event: 'publish_glasses_event',
+  bind: 'bind_service',
+  invoke: 'invoke_service',
+  subscribe: 'subscribe_service_updates',
+  dispatch: 'dispatch_glasses_response',
+  revoke: 'revoke_binding',
+};
 
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
@@ -129,4 +162,23 @@ export function mcpServiceDescriptorRef(descriptor, interfaceCid = null, metadat
 
 export function localInterfaceKey(descriptor) {
   return `${descriptor.namespace}.${descriptor.name}@${descriptor.version}`;
+}
+
+export function swissknifeMobileInteropDescriptorBundle({
+  mobileInterfaceCid = null,
+  displayInterfaceCid = null,
+  serviceDescriptors = [],
+} = {}) {
+  return {
+    contract: MOBILE_ORB_SWISSKNIFE_INTEROP_CONTRACT,
+    control_surface_contract_ref: MOBILE_ORB_CONTROL_SURFACE_CONTRACT_REF,
+    allowed_surfaces: [...MOBILE_ORB_ALLOWED_SURFACES],
+    control_surface_artifacts: [...MOBILE_ORB_CONTROL_SURFACE_ARTIFACT_FIELDS],
+    runtime_handoff: { ...MOBILE_ORB_RUNTIME_HANDOFF },
+    descriptors: [
+      descriptorRef(MOBILE_ORB_BRIDGE_INTERFACE, mobileInterfaceCid),
+      descriptorRef(DISPLAY_WIDGET_BRIDGE_INTERFACE, displayInterfaceCid),
+      ...serviceDescriptors.map((descriptor) => mcpServiceDescriptorRef(descriptor)),
+    ],
+  };
 }

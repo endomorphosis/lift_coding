@@ -148,6 +148,11 @@ def _intent_from_payload(operation: str, payload: dict[str, Any], surface: str) 
 def _normalized_intent(operation: str, payload: dict[str, Any], surface: str) -> dict[str, Any]:
     existing = payload.get("normalized_intent")
     if isinstance(existing, dict) and existing.get("method") and existing.get("target_ref"):
+        arguments = (
+            existing.get("arguments")
+            if isinstance(existing.get("arguments"), dict)
+            else payload
+        )
         return {
             "intent": str(existing.get("intent") or f"{surface}.{operation}"),
             "method": str(existing.get("method") or operation),
@@ -155,9 +160,9 @@ def _normalized_intent(operation: str, payload: dict[str, Any], surface: str) ->
                 existing.get("target_ref")
                 or f"handsfree.meta_glasses.mobile.mobile_orb_bridge.{operation}"
             ),
-            "arguments": existing.get("arguments")
-            if isinstance(existing.get("arguments"), dict)
-            else payload,
+            "arguments": arguments,
+            "arguments_hash": _first_nonempty_string(existing.get("arguments_hash"))
+            or _local_sha256_cid("arguments", arguments),
             "confidence": float(existing.get("confidence") or 1.0),
         }
 
@@ -166,6 +171,7 @@ def _normalized_intent(operation: str, payload: dict[str, Any], surface: str) ->
         "method": operation,
         "target_ref": f"handsfree.meta_glasses.mobile.mobile_orb_bridge.{operation}",
         "arguments": payload,
+        "arguments_hash": _local_sha256_cid("arguments", payload),
         "confidence": 1.0,
     }
 

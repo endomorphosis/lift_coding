@@ -861,7 +861,7 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 
 ## VAIOS-G700 Interoperate swissknife with mobile
 
-- Status: active
+- Status: completed
 - Parent: VAIOS-G000
 - Fib priority: 3000
 - Track: interoperability
@@ -886,6 +886,9 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 - Parallel lane: objective/interoperability/swissknife-mobile
 - Conflict policy: keep pair-specific integration edits isolated; use the LLM merge resolver for conflicts
 - Gap task: Create one larger integration work item proving `swissknife` and `mobile` can be used together, including a test, a contract note, and any adapter code needed by the objective.
+- Completed at: 2026-07-08T00:00:00+00:00
+- Completion evidence: `tests/integration/test_swissknife_mobile_interop.py` validates mobile descriptor exports against `spec/meta_glasses_mobile_orb_bridge_interface.json` and `spec/meta_glasses_display_widget_orb_interface.json`, validates `swissknife/contracts/control_surface_contract.schema.json` with the `mobile_remote_client_handoff` block, and exercises the backend mobile ORB register/bind/invoke runtime handoff through a schema-valid `interaction_envelope` with `normalized_intent.arguments_hash`. `docs/integration/swissknife-mobile.md` records the interface contract swissknife mobile evidence term. `mobile/src/orb/metaGlassesOrbDescriptors.js`, `mobile/src/utils/metaWearablesDatDisplayWidgetContract.js`, `swissknife/contracts/control_surface_contract.schema.json`, and `swissknife/contracts/interaction_envelope.schema.json` expose the pair-level contract artifacts.
+- Completion validation: python -m pytest tests/integration/test_swissknife_mobile_interop.py -q
 
 ## VAIOS-G701 Interoperate swissknife with external/ipfs_accelerate
 

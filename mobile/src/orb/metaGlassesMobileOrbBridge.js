@@ -383,15 +383,18 @@ function canonicalOutcome(value) {
 
 function normalizedIntent(operation, payload = {}, surface = 'mobile') {
   if (isObject(payload.normalized_intent) && payload.normalized_intent.method) {
+    const intentArguments = isObject(payload.normalized_intent.arguments)
+      ? payload.normalized_intent.arguments
+      : payload;
     return {
       intent: payload.normalized_intent.intent || `${surface}.${operation}`,
       method: payload.normalized_intent.method || operation,
       target_ref:
         payload.normalized_intent.target_ref ||
         `handsfree.meta_glasses.mobile.mobile_orb_bridge.${operation}`,
-      arguments: isObject(payload.normalized_intent.arguments)
-        ? payload.normalized_intent.arguments
-        : payload,
+      arguments: intentArguments,
+      arguments_hash:
+        payload.normalized_intent.arguments_hash || localCid('arguments', intentArguments),
       confidence: Number(payload.normalized_intent.confidence || 1),
     };
   }
@@ -408,6 +411,7 @@ function normalizedIntent(operation, payload = {}, surface = 'mobile') {
     method: operation,
     target_ref: `handsfree.meta_glasses.mobile.mobile_orb_bridge.${operation}`,
     arguments: payload,
+    arguments_hash: localCid('arguments', payload),
     confidence: 1,
   };
 }

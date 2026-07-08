@@ -2,7 +2,25 @@
   "name": "mobile_orb_bridge",
   "namespace": "handsfree.meta_glasses.mobile",
   "version": "0.1.0",
+  "interop_contract": "handsfree.meta-glasses/swissknife-mobile-interop@0.1.0",
   "control_surface_contract_ref": "control_surface_contract:hallucinate-app:remote-client",
+  "allowed_surfaces": [
+    "mobile",
+    "meta_glasses",
+    "simulator",
+    "display_widget",
+    "display_webapp",
+    "audio_summary"
+  ],
+  "runtime_handoff": {
+    "register": "register_edge_capabilities",
+    "event": "publish_glasses_event",
+    "bind": "bind_service",
+    "invoke": "invoke_service",
+    "subscribe": "subscribe_service_updates",
+    "dispatch": "dispatch_glasses_response",
+    "revoke": "revoke_binding"
+  },
   "canonical_control_surface_artifacts": {
     "description": "Remote clients transport the canonical Hallucinate App control-surface artifacts. They do not define or authorize a separate mobile policy contract.",
     "fields": [
@@ -29,6 +47,14 @@
       "receipt_cids",
       "fallback_reasons",
       "fallback_details"
+    ],
+    "required": [
+      "backend_capability_counts",
+      "descriptor_cids",
+      "policy_cids",
+      "binding_state",
+      "receipt_cids",
+      "fallback_reasons"
     ],
     "source_values": ["mobile", "backend"],
     "mode_values": ["simulator", "physical_device", "mixed", "unknown"],
