@@ -85,22 +85,17 @@ repairs above:
 
 ## Covered Terms
 
-- Hallucinate App menus
+- hallucinate_app menus
 - Hallucinate App MCP dashboard
 - dashboard capability catalog
-- backend service catalog
 - daemon health
-- MCP++ telemetry
 - tools/list
 - tools/call
-- control_surface receipts
+- ipfs_accelerate_py MCP server
+- ipfs_datasets_py MCP server
+- ipfs_kit_py MCP server
 - Swissknife applications
-- catalog normalization
-- dashboard UI wiring
-- mediated tool-call receipts
-- Swissknife consumers
-- Playwright coverage
-- supervisor-generated follow-up subtasks
+- Playwright MCP dashboard interoperability
 - launch Playwright validation gate
 
 ## Child Goals

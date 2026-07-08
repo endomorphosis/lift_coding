@@ -495,13 +495,11 @@ browser-loadable mirror at `swissknife/web/js/libp2p-browser-runtime.js` so
 `swissknife/web/js/apps/mcp-control.js` and
 `swissknife/web/js/apps/p2p-network.js` stop failing to load under the
 static SwissKnife desktop web bundle. The shared dashboard capability
-catalog, Hallucinate App menus, Hallucinate App MCP dashboard, backend
-service catalog, Hallucinate App Playwright specs, and Swissknife consumer
-gate assert the MGW-591 launch Playwright validation gate for catalog
-normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife
-consumers, Playwright coverage, supervisor-generated follow-up subtasks,
-daemon health, MCP++ telemetry, `tools/list`, `tools/call`,
-`control_surface receipts`, and Swissknife applications. Any dashboard or
+catalog, hallucinate_app menus, Hallucinate App MCP dashboard, daemon
+health, `tools/list`, `tools/call`, ipfs_accelerate_py MCP server,
+ipfs_datasets_py MCP server, ipfs_kit_py MCP server, Swissknife
+applications, and Playwright MCP dashboard interoperability assert the
+MGW-591 launch Playwright validation gate. Any dashboard or
 backend validation failure remains supervisor-generated follow-up work for
 `VAIOS-G723`.
 
