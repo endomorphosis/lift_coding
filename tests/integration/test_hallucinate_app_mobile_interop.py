@@ -1,4 +1,4 @@
-"""Hallucinate App / mobile interoperability regression tests for HAO-751."""
+"""Hallucinate App / mobile interoperability regression tests for HAO-740."""
 
 from __future__ import annotations
 
@@ -143,6 +143,11 @@ def test_search_interface_exports_hallucinate_app_mobile_handoff_descriptor() ->
     assert descriptor["repair_task_id"] == "HAO-751"
     assert descriptor["runtime_handoff"]["operation"] == "invoke_service"
     assert set(descriptor["runtime_handoff"]["required_artifacts"]) == REQUIRED_ARTIFACTS
+    assert (
+        descriptor["validation"]["validation_confirmation_ref"]
+        == "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
+    )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
     handoff = build_search_handoff(
@@ -191,6 +196,11 @@ def test_mobile_descriptor_exports_hallucinate_app_mobile_contract() -> None:
     assert descriptor["validation"]["task_id"] == "HAO-740"
     assert descriptor["validation"]["repair_task_id"] == "HAO-751"
     assert descriptor["validation"]["goal_id"] == GOAL_ID
+    assert (
+        descriptor["validation"]["validation_confirmation_ref"]
+        == "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
+    )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
@@ -242,11 +252,15 @@ def test_hallucinate_app_duckdb_receipt_schema_records_mobile_interop() -> None:
     assert INTERFACE_CONTRACT in script
 
 
-def test_docs_discovery_and_heap_record_retry_budget_repair() -> None:
+def test_docs_discovery_and_heap_record_hao_740_validation_confirmation() -> None:
     docs = read_text("docs/integration/hallucinate_app-mobile.md")
     discovery = read_text(
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-751-hao-740-validation-repair.md"
+    )
+    confirmation = read_text(
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-740-attempt-4-validation-confirmation.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
@@ -265,8 +279,9 @@ def test_docs_discovery_and_heap_record_retry_budget_repair() -> None:
         "mobile/src/orb/metaGlassesMobileOrbBridge.js",
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql",
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md",
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md",
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, confirmation, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"

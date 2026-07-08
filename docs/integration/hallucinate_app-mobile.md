@@ -1,7 +1,9 @@
 # Hallucinate App / Mobile Interop
 
-HAO-751 repairs the HAO-740 retry-budget blocker for `VAIOS-G707` and
-`objective/interoperability/hallucinate_app-mobile`.
+HAO-740 attempt 4 records the direct objective validation repair for
+`VAIOS-G707` and `objective/interoperability/hallucinate_app-mobile`. HAO-751
+remains the retry-budget follow-up that first repaired the blocked validation
+loop.
 
 The repaired `interface contract hallucinate_app mobile` path is:
 
@@ -56,5 +58,7 @@ This document is `docs/integration/hallucinate_app-mobile.md`.
 The retry-budget source is
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md`.
 The repair evidence is
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md`
+and
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md`.
 This is an `objective validation repair` for HAO-740 and HAO-751.

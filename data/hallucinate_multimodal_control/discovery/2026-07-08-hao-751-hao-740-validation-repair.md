@@ -9,6 +9,8 @@ Retry-budget evidence:
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md`
 Objective gap:
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-objective-gap-7edb316279e5.md`
+HAO-740 attempt 4 confirmation:
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md`
 
 ## Repair Summary
 
@@ -30,6 +32,7 @@ The repaired proof stack is:
 - `hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql`
 - `hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py`
 - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-attempt-4-validation-confirmation.md`
 
 ## Contract
 
