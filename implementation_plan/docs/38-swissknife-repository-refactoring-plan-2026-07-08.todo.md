@@ -458,7 +458,7 @@ Acceptance target:
 
 ## SWR-020 Split model/provider adapters by browser and host capability
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: refactor/models
