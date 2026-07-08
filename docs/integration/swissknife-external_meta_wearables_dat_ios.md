@@ -1,6 +1,6 @@
 # SwissKnife / external/meta-wearables-dat-ios Interop
 
-VAI-667 repairs the VAIOS-G706 objective validation gap for the shared
+HAO-736 / VAI-667 repairs the VAIOS-G706 objective validation gap for the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
@@ -58,9 +58,10 @@ path is:
   `swissknife/contracts/interaction_envelope.schema.json`,
   `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`, and
   `swissknife/contracts/mediation_receipt.schema.json` remain the shared
-  SwissKnife schemas advertised by the descriptor. The payloads preserve the
-  scanner-visible `agent_identity`, `allowed_surfaces`, and `arguments_hash`
-  norm refs.
+  SwissKnife schemas advertised by the descriptor. The iOS MCP++ compatibility
+  receipt is accepted under `HAO-736` with `meta-wearables-dat-ios` /
+  `meta_wearables_dat_ios`, and the payloads preserve the scanner-visible
+  `agent_identity`, `allowed_surfaces`, and `arguments_hash` norm refs.
 
 ## Runtime Handoff
 
@@ -74,7 +75,11 @@ path is:
    `swissknife.meta_wearables_dat_ios.display-service` control surface,
    mediated by the
    `policy:swissknife:meta-wearables-dat-ios-display-interop` policy bundle.
-3. `build_swissknife_meta_wearables_dat_ios_handoff()` builds a deterministic,
+3. `buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt()` emits
+   the MCP++ negotiation receipt for `meta_wearables_dat_ios.display.send`,
+   linked to `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`
+   and the same mediation/control-surface contract refs.
+4. `build_swissknife_meta_wearables_dat_ios_handoff()` builds a deterministic,
    content-addressed receipt (`sha256:` content CID) for the Display-session
    handoff by re-deriving the iOS DAT `DeviceSession` state set, Info.plist
    keys, background modes, Display DSL view types, icon names, and button
@@ -90,5 +95,5 @@ discovery and handoff builder, statically inspects the SwissKnife TypeScript
 descriptor module for the expected exports and goal-packet metadata, validates
 representative SwissKnife control-surface and interaction-envelope payloads,
 and asserts this objective validation repair is recorded in
-`data/virtual_ai_os/discovery/2026-07-08-vai-667-objective-validation-repair.md`
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-validation-repair.md`
 and `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
