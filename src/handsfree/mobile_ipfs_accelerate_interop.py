@@ -1,9 +1,9 @@
 """Interop contract between the mobile client and ``external/ipfs_accelerate``.
 
-VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap that requires
-`mobile` to interoperate with `external/ipfs_accelerate` through importable
-contracts, interface descriptors, runtime handoff behavior, and integration
-tests.
+VAI-672 implements, and VAI-686 re-validates, the VAIOS-G719 objective
+validation gap that requires `mobile` to interoperate with
+`external/ipfs_accelerate` through importable contracts, interface descriptors,
+runtime handoff behavior, and integration tests.
 
 `external/ipfs_accelerate` cannot be imported directly by the mobile React
 Native client, so this module normalizes its DuckDB benchmark/time-series
