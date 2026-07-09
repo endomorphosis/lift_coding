@@ -3,7 +3,7 @@
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
 `objective/interoperability/mobile-external_ipfs_accelerate` bundle. MGW-596
 revalidates that objective validation repair for the current
-meta_glasses_display_widgets supervisor gate, and HAO-741 attempt 3 records
+meta_glasses_display_widgets supervisor gate, and HAO-741 attempt 4 records
 the active hallucinate_multimodal_control validation-gate repair for the same
 objective gap fingerprint `c1edafa875e6`.
 
@@ -41,9 +41,10 @@ The repaired `interface contract mobile external/ipfs_accelerate` path is:
 - `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the interop
   descriptor during edge capability registration and keeps diagnostics
   parseable after the contract wiring.
-- `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md`
-  is the active HAO-741 attempt-3 validation repair record; attempt 1,
-  attempt 2, attempt 4, and HAO-748 remain preserved as lineage evidence.
+- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-4-objective-validation-repair.md`
+  is the active HAO-741 attempt-4 validation repair record; attempt 1,
+  attempt 2, attempt 3, the attempt-4 confirmation, and HAO-748 remain
+  preserved as lineage evidence.
 
 ## Runtime handoff
 
@@ -86,7 +87,7 @@ and the HAO-741 repair records
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-1-objective-validation-repair.md`,
-and
-`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-2-objective-validation-repair.md`
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-2-objective-validation-repair.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-4-objective-validation-repair.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
