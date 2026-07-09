@@ -6,6 +6,7 @@ Goal: VAIOS-G704
 Goal packet: goal_packet/interoperability/swissknife/06921590135c
 Goal packet goals: VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, VAIOS-G706
 Source objective gap: data/virtual_ai_os/discovery/2026-07-08-vai-665-objective-gap-57359897bf4f.md
+Canonical repair: data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md
 
 ## Objective Validation Repair
 

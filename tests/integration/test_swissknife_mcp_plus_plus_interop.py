@@ -11,6 +11,23 @@ from jsonschema import Draft202012Validator
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MCP_PLUS_PLUS_TESTS_PY = REPO_ROOT / "Mcp-Plus-Plus" / "tests-py"
+GOAL_PACKET = "goal_packet/interoperability/swissknife/06921590135c"
+OBJECTIVE_GAP_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-665-objective-gap-57359897bf4f.md"
+)
+VALIDATION_REPAIR_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md"
+ATTEMPT_REPAIR_REF = (
+    "data/virtual_ai_os/discovery/"
+    "2026-07-09-vai-665-attempt-1-1783556406-objective-validation-repair.md"
+)
+MGW_OBJECTIVE_GAP_REF = (
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-573-objective-gap-57359897bf4f.md"
+)
+MGW_VALIDATION_REPAIR_REF = (
+    "data/meta_glasses_display_widgets/discovery/"
+    "2026-07-08-mgw-573-attempt-2-validation-repair.md"
+)
 
 GOAL_PACKET_GOALS = {
     "VAIOS-G700",
@@ -367,21 +384,17 @@ def test_mcp_idl_descriptor_fixture_still_validates_with_shared_validator(mcp_id
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-mcp_plus_plus.md")
-    discovery = read_text(
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-573-attempt-2-validation-repair.md"
-    )
-    gap = read_text(
-        "data/meta_glasses_display_widgets/discovery/"
-        "2026-07-08-mgw-573-objective-gap-57359897bf4f.md"
-    )
+    objective_gap = read_text(OBJECTIVE_GAP_REF)
+    repair = read_text(VALIDATION_REPAIR_REF)
+    attempt_repair = read_text(ATTEMPT_REPAIR_REF)
+    mgw_discovery = read_text(MGW_VALIDATION_REPAIR_REF)
+    mgw_gap = read_text(MGW_OBJECTIVE_GAP_REF)
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
-    required_terms = [
-        "MGW-573",
+    vai_required_terms = [
         "VAI-665",
         "VAIOS-G704",
-        "goal_packet/interoperability/swissknife/06921590135c",
+        GOAL_PACKET,
         "objective validation repair",
         "interface contract swissknife Mcp-Plus-Plus",
         "tests/integration/test_swissknife_mcp_plus_plus_interop.py",
@@ -391,13 +404,35 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json",
         "Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json",
         "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json",
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md",
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-2-validation-repair.md",
+        OBJECTIVE_GAP_REF,
+        VALIDATION_REPAIR_REF,
+        ATTEMPT_REPAIR_REF,
     ]
-    for content in (docs, discovery, heap):
-        for term in required_terms:
+    for content in (docs, attempt_repair, heap):
+        for term in vai_required_terms:
             assert term in content, f"missing {term!r}"
+
+    canonical_repair_terms = [term for term in vai_required_terms if term != ATTEMPT_REPAIR_REF]
+    for term in canonical_repair_terms:
+        assert term in repair, f"missing {term!r}"
+
+    mgw_required_terms = [
+        "MGW-573",
+        "VAIOS-G704",
+        GOAL_PACKET,
+        "objective validation repair",
+        "interface contract swissknife Mcp-Plus-Plus",
+        MGW_OBJECTIVE_GAP_REF,
+        MGW_VALIDATION_REPAIR_REF,
+    ]
+    for content in (docs, mgw_discovery, heap):
+        for term in mgw_required_terms:
+            assert term in content, f"missing {term!r}"
+
     for goal_id in GOAL_PACKET_GOALS:
-        assert goal_id in discovery
+        assert goal_id in repair
+        assert goal_id in attempt_repair
+        assert goal_id in mgw_discovery
         assert goal_id in heap
-    assert "VAIOS-G704" in gap
+    assert "Fingerprint: 57359897bf4f09a4611570e9941629d83b5f0acd" in objective_gap
+    assert "VAIOS-G704" in mgw_gap

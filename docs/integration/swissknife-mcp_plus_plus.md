@@ -1,8 +1,13 @@
 # SwissKnife Mcp-Plus-Plus Interop
 
-VAI-665 repairs the objective validation gap for `VAIOS-G704` and MGW-573
-re-confirms the same objective validation repair for the meta-glasses scanner
-gap in
+VAI-665 repairs the objective validation gap for `VAIOS-G704` recorded in
+`data/virtual_ai_os/discovery/2026-07-08-vai-665-objective-gap-57359897bf4f.md`.
+The canonical VAI repair is
+`data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md`, and
+this worktree records the current attempt proof in
+`data/virtual_ai_os/discovery/2026-07-09-vai-665-attempt-1-1783556406-objective-validation-repair.md`.
+MGW-573 re-confirms the same objective validation repair for the meta-glasses
+scanner gap in
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md`.
 Attempt 2 records the current executable repair in
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-2-validation-repair.md`.
@@ -78,8 +83,14 @@ Validation evidence lives in
    SwissKnife-authored interop descriptor fixture and the pre-existing
    generic `mcp_idl_descriptor.json` fixture, proving the two repositories'
    descriptor shapes remain mutually compatible.
-5. Asserts this objective validation repair is recorded in the MGW-573
-   discovery evidence
+5. Asserts this objective validation repair is recorded in the VAI discovery
+   evidence
+   `data/virtual_ai_os/discovery/2026-07-08-vai-665-validation-repair.md`,
+   the current attempt evidence
+   `data/virtual_ai_os/discovery/2026-07-09-vai-665-attempt-1-1783556406-objective-validation-repair.md`,
+   the source VAI gap
+   `data/virtual_ai_os/discovery/2026-07-08-vai-665-objective-gap-57359897bf4f.md`,
+   the MGW-573 discovery evidence
    `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-attempt-2-validation-repair.md`,
    the source gap
    `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-573-objective-gap-57359897bf4f.md`,
