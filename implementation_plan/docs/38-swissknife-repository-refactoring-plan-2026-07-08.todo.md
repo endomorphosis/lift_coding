@@ -1099,7 +1099,7 @@ Current duplicate-risk scan:
 
 ## SWR-067 Prove browser ZKP paths use real TS/WASM proof backends by default
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/zkp
 - Dedupe key: swissknife_refactor:browser_zkp_real_backend_regression_gate
