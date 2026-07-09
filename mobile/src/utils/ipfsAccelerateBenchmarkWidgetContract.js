@@ -36,10 +36,10 @@ export const IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT = {
   interface_contract: 'interface contract mobile external/ipfs_accelerate',
   goal_id: 'VAIOS-G719',
   objective_validation_repair:
-    'VAI-672, VAI-686, MGW-596, HAO-741 attempt 7, and HAO-758 repair the VAIOS-G719 objective validation repair',
+    'VAI-672, VAI-686, MGW-596, HAO-741 attempt 7, and HAO-758 attempt 3 repair the VAIOS-G719 objective validation repair',
   active_validation_repair_task_id: 'HAO-758',
   active_validation_repair_ref:
-    'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md',
+    'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md',
   validation_repair_refs: [
     'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
     'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md',
@@ -53,6 +53,7 @@ export const IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT = {
     'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-7-objective-validation-repair.md',
     'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md',
     'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md',
+    'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md',
   ],
   action_ids: BENCHMARK_WIDGET_ACTION_IDS,
   operation_by_action_id: BENCHMARK_WIDGET_ORB_OPERATION_BY_ACTION_ID,

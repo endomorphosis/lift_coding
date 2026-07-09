@@ -252,13 +252,15 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
     active_objective_gap_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-gap-c1edafa875e6.md',
     active_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md',
     hao_758_objective_gap_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-gap-c1edafa875e6.md',
     hao_758_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md',
     hao_758_attempt_1_validation_repair_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md',
+    hao_758_attempt_2_validation_repair_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md',
     hao_741_validation_repair_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md',
     hao_741_attempt_3_validation_repair_ref:
