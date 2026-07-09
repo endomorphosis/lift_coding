@@ -838,7 +838,7 @@ state observation.
 
 ## SWR-047 Add browser libp2p bootstrap and relay matrix
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/libp2p
 - Fingerprint: a931c507f55e54d2ae94df29ab0b6e73f5b59c6d
