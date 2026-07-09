@@ -1,0 +1,476 @@
+{
+  "schema": "swissknife.all_tools_supervisor_queue.v1",
+  "supervisor": {
+    "id": "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools",
+    "task_id_range": [
+      "SVD-027",
+      "SVD-050"
+    ]
+  },
+  "summary": {
+    "task_count": 24,
+    "completed_task_ids": [
+      "SVD-027",
+      "SVD-028",
+      "SVD-029",
+      "SVD-030",
+      "SVD-031",
+      "SVD-032",
+      "SVD-033",
+      "SVD-034",
+      "SVD-035",
+      "SVD-036",
+      "SVD-037",
+      "SVD-038",
+      "SVD-040",
+      "SVD-041",
+      "SVD-042",
+      "SVD-043",
+      "SVD-048",
+      "SVD-049"
+    ],
+    "ready_task_ids": [
+      "SVD-044"
+    ],
+    "waiting_task_ids": [
+      "SVD-045",
+      "SVD-047",
+      "SVD-050"
+    ],
+    "blocked_task_ids": [
+      "SVD-039",
+      "SVD-046"
+    ],
+    "recommended_task_id": "SVD-044"
+  },
+  "resume_contract": {
+    "evidence_churn_rule": "generated evidence artifacts may be refreshed by the supervisor, but queue status and dependency edges stay stable across resumes",
+    "accelerate_boundary_rule": "downstream release gates must keep ipfs_accelerate_py adapter boundaries explicit before all-tools closeout"
+  },
+  "generated_evidence_globs": [
+    "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.json"
+  ],
+  "dependency_graph": {
+    "SVD-027": [
+      "SVD-028"
+    ],
+    "SVD-028": [
+      "SVD-029"
+    ],
+    "SVD-029": [
+      "SVD-030"
+    ],
+    "SVD-030": [
+      "SVD-031"
+    ],
+    "SVD-031": [
+      "SVD-032"
+    ],
+    "SVD-032": [
+      "SVD-033"
+    ],
+    "SVD-033": [
+      "SVD-034"
+    ],
+    "SVD-034": [
+      "SVD-035"
+    ],
+    "SVD-035": [
+      "SVD-036"
+    ],
+    "SVD-036": [
+      "SVD-037"
+    ],
+    "SVD-037": [
+      "SVD-038"
+    ],
+    "SVD-038": [
+      "SVD-040"
+    ],
+    "SVD-039": [],
+    "SVD-040": [
+      "SVD-041"
+    ],
+    "SVD-041": [
+      "SVD-042"
+    ],
+    "SVD-042": [
+      "SVD-043",
+      "SVD-044"
+    ],
+    "SVD-043": [
+      "SVD-044"
+    ],
+    "SVD-044": [
+      "SVD-045"
+    ],
+    "SVD-045": [
+      "SVD-047"
+    ],
+    "SVD-046": [
+      "SVD-047"
+    ],
+    "SVD-047": [],
+    "SVD-048": [
+      "SVD-049"
+    ],
+    "SVD-049": [
+      "SVD-050"
+    ],
+    "SVD-050": []
+  },
+  "tasks": {
+    "SVD-027": {
+      "status": "completed",
+      "depends_on": [],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-ledger.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-tools-ledger"
+      ],
+      "evidence": [
+        "all MCP/MCP++ tools ledger generated"
+      ]
+    },
+    "SVD-028": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-027"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/tool-policy-classification.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-tools-policy"
+      ],
+      "evidence": [
+        "tool policy receipt fallback owner classification complete"
+      ]
+    },
+    "SVD-029": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-028"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-capability-disposition.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-tools-app-map"
+      ],
+      "evidence": [
+        "all discovered tools mapped to app capabilities or deliberate non-app disposition"
+      ]
+    },
+    "SVD-030": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-029"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/execution-fixtures.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-tools-fixtures"
+      ],
+      "evidence": [
+        "tool execution fixtures and result-envelope tests complete"
+      ]
+    },
+    "SVD-031": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-030"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/accelerate-boundary.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:accelerate-boundary"
+      ],
+      "evidence": [
+        "ipfs_accelerate_py MCP coverage boundary recorded"
+      ]
+    },
+    "SVD-032": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-031"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-family-bindings.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:app-family-bindings"
+      ],
+      "evidence": [
+        "app family bindings reconciled against all-tools matrix"
+      ]
+    },
+    "SVD-033": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-032"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/composite-workflows.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:composite-workflows"
+      ],
+      "evidence": [
+        "cross-service composite workflows generated"
+      ]
+    },
+    "SVD-034": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-033"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/orb-idl-descriptors.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:orb-idl-descriptors"
+      ],
+      "evidence": [
+        "ORB and IDL descriptors generated for app-routable tools"
+      ]
+    },
+    "SVD-035": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-034"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-tool-coverage.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:meta-glasses"
+      ],
+      "evidence": [
+        "Meta glasses coverage extended to app-visible tool families"
+      ]
+    },
+    "SVD-036": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-035"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/policy-receipt-release-gate.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:policy-receipts"
+      ],
+      "evidence": [
+        "full-tool policy receipt and audit release gates recorded"
+      ]
+    },
+    "SVD-037": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-036"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/supervisor-wiring.json"
+      ],
+      "validation": [
+        "PYTHONPATH=external/ipfs_accelerate pytest tests/test_virtual_ai_os_todo_queue.py -q"
+      ],
+      "evidence": [
+        "all-tools tasks wired into the ipfs_accelerate_py agent supervisor"
+      ]
+    },
+    "SVD-038": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-037"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence-aggregation.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:release-aggregation"
+      ],
+      "evidence": [
+        "release evidence aggregation extended to exhaustive all-tools gate"
+      ]
+    },
+    "SVD-039": {
+      "status": "blocked",
+      "depends_on": [
+        "SVD-038"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-meta-glasses-validation.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:meta-glasses -- --project=physical"
+      ],
+      "evidence": [
+        "blocked until physical Meta glasses hardware is available"
+      ]
+    },
+    "SVD-040": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-038"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-closeout.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-tools-closeout"
+      ],
+      "evidence": [
+        "all-tools no-unknowns closeout produced"
+      ]
+    },
+    "SVD-041": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-040"
+      ],
+      "outputs": [
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+      ],
+      "validation": [
+        "rg -n \"SVD-041\" implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+      ],
+      "evidence": [
+        "phase-two all-tools supervisor plan appended"
+      ]
+    },
+    "SVD-042": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-041"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-capability-matrix.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-app-capability-matrix"
+      ],
+      "evidence": [
+        "all-app all-tools capability matrix generated"
+      ]
+    },
+    "SVD-043": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-042"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/legacy-selector-reconciliation.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:legacy-selector-reconciliation"
+      ],
+      "evidence": [
+        "legacy Playwright app selectors reconciled with manifest"
+      ]
+    },
+    "SVD-044": {
+      "status": "ready",
+      "depends_on": [
+        "SVD-042",
+        "SVD-043"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/accelerate-adapter-boundary-normalized.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:accelerate-adapter-boundary"
+      ],
+      "evidence": []
+    },
+    "SVD-045": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-044"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/orb-idl-handoff-packets.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:orb-idl-handoff"
+      ],
+      "evidence": []
+    },
+    "SVD-046": {
+      "status": "blocked",
+      "depends_on": [
+        "SVD-035"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-meta-glasses-evidence.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run test:e2e:meta-glasses -- --project=physical"
+      ],
+      "evidence": [
+        "blocked until physical Meta glasses evidence can be captured"
+      ]
+    },
+    "SVD-047": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-045",
+        "SVD-046"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-closeout-rerun.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:all-tools-closeout"
+      ],
+      "evidence": []
+    },
+    "SVD-048": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-043"
+      ],
+      "outputs": [
+        "swissknife/scripts/all-tools-evidence-lib.cjs"
+      ],
+      "validation": [
+        "test -f swissknife/scripts/all-tools-evidence-lib.cjs"
+      ],
+      "evidence": [
+        "current-checkout all-tools evidence scripts restored"
+      ]
+    },
+    "SVD-049": {
+      "status": "completed",
+      "depends_on": [
+        "SVD-048"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-service-adapter-evidence.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:live-mcp-adapter"
+      ],
+      "evidence": [
+        "current live MCP/MCP++ service and adapter evidence captured"
+      ]
+    },
+    "SVD-050": {
+      "status": "waiting",
+      "depends_on": [
+        "SVD-049"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/svd-044-resume.json"
+      ],
+      "validation": [
+        "npm --prefix swissknife run evidence:accelerate-adapter-boundary"
+      ],
+      "evidence": []
+    }
+  }
+}

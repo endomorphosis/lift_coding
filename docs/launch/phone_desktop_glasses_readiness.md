@@ -1436,6 +1436,25 @@ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, Swissknife
 applications, and the launch Playwright validation gate visible to the
 readiness scan.
 
+HAO-750 records the July 8 Hallucinate supervisor launch validation gate for
+the VAIOS-G723 Hallucinate MCP dashboard interoperability console in
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-750-mcp-dashboard-launch-gate.md`
+and `hallucinate_app/test/e2e/fixtures/hao-750-mcp-dashboard-launch-gate.json`.
+The gate is emitted by
+`hallucinate_app.node.mcp_daemon_manager.getDashboardCapabilityCatalog` and is
+consumed by `swissknife/scripts/test-mcp-dashboard-consumer.cjs`, so the same
+dashboard capability catalog and receipt schema cover `ipfs_kit_py`,
+`ipfs_datasets_py`, `ipfs_accelerate_py`, Hallucinate App menus, Hallucinate
+App MCP dashboard, backend service catalog, daemon health, MCP++ telemetry,
+`tools/list`, `tools/call`, `control_surface receipts`, Swissknife
+applications, catalog normalization, dashboard UI wiring, mediated tool-call
+receipts, Swissknife consumers, Playwright coverage, supervisor-generated
+follow-up subtasks, and the launch Playwright validation gate. HAO-750 keeps
+child goals for catalog normalization, dashboard UI wiring, mediated tool-call
+receipts, Swissknife consumers, Playwright coverage, and supervisor-generated
+follow-up subtasks attached to the shared VAIOS-G723 objective heap until the
+Playwright gate closes.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
