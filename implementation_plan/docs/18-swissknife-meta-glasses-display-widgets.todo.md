@@ -3755,7 +3755,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-580 Close objective gap: Interoperate mobile with external/ipfs_accelerate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: interoperability
