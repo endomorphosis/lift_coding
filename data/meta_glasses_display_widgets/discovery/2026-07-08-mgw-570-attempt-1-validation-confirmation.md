@@ -22,8 +22,9 @@ This re-verifies, on the MGW-570 worktree, that the `interface contract
 swissknife external/ipfs_accelerate` handoff for `VAIOS-G701` and the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet (covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
-VAIOS-G706) remains fully implemented from the earlier VAI-662 objective
-validation repair, closing the `objective validation repair` gap recorded in
+VAIOS-G706) remains fully implemented and is now recorded in the canonical
+MGW-570 objective validation repair, closing the `objective validation repair`
+gap recorded in
 `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-gap-2394e45d2012.md`.
 
 ## Evidence Confirmed
@@ -42,8 +43,9 @@ validation repair, closing the `objective validation repair` gap recorded in
   `swissknife/contracts/control_surface_contract.schema.json` and
   `swissknife/contracts/interaction_envelope.schema.json` payloads for this
   pair, and asserts the repair is recorded in
-  `docs/integration/swissknife-external_ipfs_accelerate.md`, the VAI-662
-  discovery records, and the objective heap.
+  `docs/integration/swissknife-external_ipfs_accelerate.md`,
+  `data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-validation-repair.md`,
+  and the objective heap.
 - The `external/ipfs_accelerate` gitlink submodule was already checked out
   in this worktree at `fe4ae45c86c8ca5b7ea87eee1a7cc6fc39d8fc61` (no gitlink
   pointer change); the `Mcp-Plus-Plus` and `external/ipfs_kit` gitlink
@@ -66,8 +68,10 @@ validation repair, closing the `objective validation repair` gap recorded in
 
 ## Validation
 
-`python -m pytest tests/integration -q` passes cleanly (403 passed, 88
-skipped, 0 failed).
+`python -m pytest tests/integration -q` passes cleanly in this worktree after
+initializing the missing sibling gitlink checkouts for
+`external/meta-wearables-dat-android` and `external/meta-wearables-dat-ios`
+at their pinned commits (464 passed, 82 skipped, 16 warnings).
 
 This objective validation repair keeps VAIOS-G700, VAIOS-G701, VAIOS-G702,
 VAIOS-G703, VAIOS-G704, VAIOS-G705, and VAIOS-G706 aligned with the
