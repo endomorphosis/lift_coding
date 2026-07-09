@@ -104,6 +104,9 @@ MGW_551_DAEMON_LAUNCH_GATE_PATH = (
 MGW_590_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-07-08-mgw-590-daemon-launch-health-gate.md"
 )
+MGW_590_ATTEMPT_4_VALIDATION_PATH = (
+    MGW_DISCOVERY_ROOT / "2026-07-09-mgw-590-attempt-4-validation.md"
+)
 DAEMON_LAUNCH_GATE_FIXTURE_PATH = (
     REPO_ROOT
     / "hallucinate_app"
