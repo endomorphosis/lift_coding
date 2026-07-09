@@ -2,13 +2,14 @@
 
 Date: 2026-07-08
 Task: VAI-670
+Backlog task: HAO-739
 Goal: VAIOS-G711
 Packet: goal_packet/interoperability/external/6595cbbfadb9
 Packet goals: VAIOS-G709, VAIOS-G710, VAIOS-G711
 Gap source: data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-gap-853e023f8d1d.md
 Evidence: objective validation repair
 
-VAI-670 repairs the VAIOS-G711 objective gap for:
+HAO-739/VAI-670 repairs the VAIOS-G711 objective gap for:
 
 interface contract external/meta-wearables-dat-android external/ipfs_kit
 
@@ -82,6 +83,7 @@ The deterministic receipt covers `meta_wearables_dat_android.session.start`,
 The objective validation repair is recorded in:
 
 - `docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md`
 - `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`
 - `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py`
 
