@@ -958,7 +958,7 @@ state observation.
 
 ## SWR-057 Add browser performance budget and startup regression gate
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/performance
 - Fingerprint: 48bb45d5a06440f05f4c49e4837e83f63ad9599c
