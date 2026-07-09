@@ -285,6 +285,8 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
       'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-gap-c1edafa875e6.md',
     mgw_596_validation_repair_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md',
+    vai_672_attempt_9_validation_confirmation_ref:
+      'data/virtual_ai_os/discovery/2026-07-09-vai-672-attempt-9-validation-confirmation.md',
     evidence: 'objective validation repair',
   },
 };
