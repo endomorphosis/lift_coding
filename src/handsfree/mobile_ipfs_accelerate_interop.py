@@ -1,6 +1,7 @@
 """Interop contract between the mobile client and ``external/ipfs_accelerate``.
 
-VAI-672 implements, VAI-686/MGW-596 re-validate, and HAO-741 keeps aligned the
+VAI-672 implements, VAI-686/MGW-596 re-validate, HAO-741 keeps aligned, and
+HAO-758 actively repairs the
 VAIOS-G719 objective validation gap that requires `mobile` to interoperate with
 `external/ipfs_accelerate` through importable contracts, interface descriptors,
 runtime handoff behavior, and integration tests.

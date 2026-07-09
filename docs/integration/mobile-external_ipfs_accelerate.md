@@ -4,8 +4,10 @@ VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
 `objective/interoperability/mobile-external_ipfs_accelerate` bundle. MGW-596
 revalidates that objective validation repair for the current
 meta_glasses_display_widgets supervisor gate, and HAO-741 attempt 7 records
-the active hallucinate_multimodal_control validation-gate repair for the same
-objective gap fingerprint `c1edafa875e6`.
+prior hallucinate_multimodal_control validation-gate repair lineage for the
+same objective gap fingerprint `c1edafa875e6`. HAO-758 is the active
+hallucinate_multimodal_control objective validation repair for the re-filed
+VAIOS-G719 gate.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -41,10 +43,10 @@ The repaired `interface contract mobile external/ipfs_accelerate` path is:
 - `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the interop
   descriptor during edge capability registration and keeps diagnostics
   parseable after the contract wiring.
-- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-7-objective-validation-repair.md`
-  is the active HAO-741 attempt-7 validation repair record; attempt 1,
-  attempt 2, attempt 3, attempt 4, attempt 5, attempt 6, the attempt-4
-  confirmation, and HAO-748 remain preserved as lineage evidence.
+- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md`
+  is the active HAO-758 validation repair record; HAO-741 attempt 1,
+  attempt 2, attempt 3, attempt 4, attempt 5, attempt 6, attempt 7, the
+  attempt-4 confirmation, and HAO-748 remain preserved as lineage evidence.
 
 ## Runtime handoff
 
@@ -92,6 +94,7 @@ and the HAO-741 repair records
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-5-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-6-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-7-objective-validation-repair.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
