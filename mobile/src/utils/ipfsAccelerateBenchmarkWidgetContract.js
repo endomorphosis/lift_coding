@@ -44,6 +44,7 @@ export const IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT = {
     'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md',
     'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md',
     'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-1-objective-validation-repair.md',
+    'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-2-objective-validation-repair.md',
   ],
   action_ids: BENCHMARK_WIDGET_ACTION_IDS,
   operation_by_action_id: BENCHMARK_WIDGET_ORB_OPERATION_BY_ACTION_ID,
