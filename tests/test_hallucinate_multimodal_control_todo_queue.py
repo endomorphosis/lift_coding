@@ -3986,6 +3986,7 @@ def test_hallucinate_vai_631_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
 def test_hallucinate_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     receipt_path = DISCOVERY_ROOT / "2026-07-08-vai-682-mcp-dashboard-launch-gate.md"
     attempt_receipt_path = DISCOVERY_ROOT / "2026-07-08-vai-682-attempt-1-validation.md"
+    attempt2_receipt_path = DISCOVERY_ROOT / "2026-07-08-vai-682-attempt-2-validation.md"
     virtual_receipt_path = (
         REPO_ROOT
         / "data"
@@ -4017,6 +4018,7 @@ def test_hallucinate_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     )
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
+    attempt2_receipt = attempt2_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
@@ -4027,23 +4029,29 @@ def test_hallucinate_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     assert fixture["hallucinate_backlog_receipt"] == (
         "data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-mcp-dashboard-launch-gate.md"
     )
-    assert fixture["attempt"] == 1
-    assert fixture["attempt_receipts"][1] == (
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-1-validation.md"
-    )
+    assert fixture["attempt"] == 2
+    assert fixture["attempt_receipts"] == [
+        "data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-1-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-1-validation.md",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-2-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-2-validation.md",
+    ]
     assert catalog_gate == fixture
 
     for term in fixture["required_evidence"]:
         assert term in receipt
         assert term in attempt_receipt
+        assert term in attempt2_receipt
         assert term in virtual_receipt
         assert term in heap_source
         assert term in readiness_source
 
     assert "control_surface gate" in attempt_receipt
+    assert "control_surface gate" in attempt2_receipt
     assert "VAIOS-G723-C6 Supervisor-generated follow-up subtasks" in receipt
     assert "VAI-682 proof" in heap_source
     assert "VAI-682 attempt 1 validation" in heap_source
+    assert "VAI-682 attempt 2 validation" in heap_source
 
 
 def test_vaios_g723_validation_failure_can_generate_follow_up_task_and_subgoal(tmp_path):

@@ -50,3 +50,9 @@ The control_surface gate is exercised by
 `hallucinate_app/test/e2e/multimodal-control-surface.spec.ts` after the
 dashboard gate proves mediated tools/list, mediated tools/call, Swissknife
 consumers, and backend validation.
+
+Attempt receipts:
+- `data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-1-launch-playwright-validation-gate.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-1-validation.md`
+- `data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-2-launch-playwright-validation-gate.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-2-validation.md`

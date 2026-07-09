@@ -4805,6 +4805,13 @@ def test_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
         / "discovery"
         / f"2026-07-08-{slug}-attempt-1-launch-playwright-validation-gate.md"
     )
+    attempt2_path = (
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / f"2026-07-08-{slug}-attempt-2-launch-playwright-validation-gate.md"
+    )
     hallucinate_path = (
         REPO_ROOT
         / "data"
@@ -4818,6 +4825,13 @@ def test_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
         / "hallucinate_multimodal_control"
         / "discovery"
         / f"2026-07-08-{slug}-attempt-1-validation.md"
+    )
+    hallucinate_attempt2_path = (
+        REPO_ROOT
+        / "data"
+        / "hallucinate_multimodal_control"
+        / "discovery"
+        / f"2026-07-08-{slug}-attempt-2-validation.md"
     )
     objective_gap_path = (
         REPO_ROOT
@@ -4844,8 +4858,10 @@ def test_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     ).read_text(encoding="utf-8")
     launch_receipt = launch_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_path.read_text(encoding="utf-8")
+    attempt2_receipt = attempt2_path.read_text(encoding="utf-8")
     hallucinate_receipt = hallucinate_path.read_text(encoding="utf-8")
     hallucinate_attempt_receipt = hallucinate_attempt_path.read_text(encoding="utf-8")
+    hallucinate_attempt2_receipt = hallucinate_attempt2_path.read_text(encoding="utf-8")
     objective_gap = objective_gap_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
@@ -4867,7 +4883,10 @@ def test_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     assert fixture["attempt_receipts"] == [
         "data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-1-launch-playwright-validation-gate.md",
         "data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-1-validation.md",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-682-attempt-2-launch-playwright-validation-gate.md",
+        "data/hallucinate_multimodal_control/discovery/2026-07-08-vai-682-attempt-2-validation.md",
     ]
+    assert fixture["attempt"] == 2
     assert catalog_gate == fixture
 
     for term in (
@@ -4887,17 +4906,22 @@ def test_vai_682_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned():
     for term in fixture["required_evidence"]:
         assert term in launch_receipt
         assert term in attempt_receipt
+        assert term in attempt2_receipt
         assert term in hallucinate_receipt
         assert term in hallucinate_attempt_receipt
+        assert term in hallucinate_attempt2_receipt
         assert term in heap_source
         assert term in readiness_source
         assert term in playwright_source
 
     assert "missing_xvfb_for_electron_playwright" in attempt_receipt
+    assert "attempt 2" in attempt2_receipt
     assert "control_surface gate" in hallucinate_attempt_receipt
+    assert "control_surface gate" in hallucinate_attempt2_receipt
     assert "VAIOS-G723-C6 Supervisor-generated follow-up subtasks" in launch_receipt
     assert "VAI-682 proof" in heap_source
     assert "VAI-682 attempt 1 validation" in heap_source
+    assert "VAI-682 attempt 2 validation" in heap_source
     assert fixture["receipt_fixture"] in swissknife_consumer_source
     assert "vai682LaunchGateReceipt" in swissknife_consumer_source
     assert task_id in readiness_source
