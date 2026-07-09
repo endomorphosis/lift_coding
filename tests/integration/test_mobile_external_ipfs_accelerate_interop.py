@@ -200,7 +200,7 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
     )
     assert descriptor["validation"]["active_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-09-hao-758-objective-validation-repair.md"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
     )
     assert "HAO-741" in descriptor["validation"]["validation_repair_tasks"]
     assert "HAO-758" in descriptor["validation"]["validation_repair_tasks"]
@@ -210,6 +210,10 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
         "2026-07-09-hao-758-objective-gap-c1edafa875e6.md"
     )
     assert descriptor["validation"]["hao_758_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_758_attempt_1_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-objective-validation-repair.md"
     )
@@ -271,7 +275,7 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["active_validation_repair_task_id"] == "HAO-758"
     assert contract["active_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-09-hao-758-objective-validation-repair.md"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
     )
     assert (
         "data/hallucinate_multimodal_control/discovery/"
@@ -288,6 +292,10 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert (
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
     ) in contract["validation_repair_refs"]
     assert (
         "data/hallucinate_multimodal_control/discovery/"
@@ -397,6 +405,11 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
+    hao_758_attempt_two_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
     attempt_four = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-4-validation-confirmation.md"
@@ -505,6 +518,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-objective-validation-repair.md"
     )
+    hao_758_attempt_two_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
+    )
     assert hao_741_repair_record in docs
     assert hao_741_repair_record in heap
     assert hao_741_repair_record in hao_741_repair
@@ -530,6 +547,9 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     assert hao_758_repair_record in docs
     assert hao_758_repair_record in heap
     assert hao_758_repair_record in hao_758_repair
+    assert hao_758_attempt_two_record in docs
+    assert hao_758_attempt_two_record in heap
+    assert hao_758_attempt_two_record in hao_758_attempt_two_repair
 
     mgw_596_terms = [
         "MGW-596",
@@ -616,6 +636,6 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, hao_758_gap, hao_758_repair, heap):
+    for content in (docs, hao_758_gap, hao_758_repair, hao_758_attempt_two_repair, heap):
         for term in hao_758_terms:
             assert term in content, f"missing {term!r}"
