@@ -238,8 +238,8 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
   validation: {
     task_id: 'VAI-672',
-    active_validation_repair_task_id: 'MGW-596',
-    validation_repair_tasks: ['VAI-672', 'VAI-686', 'MGW-596'],
+    active_validation_repair_task_id: 'HAO-741',
+    validation_repair_tasks: ['VAI-672', 'VAI-686', 'MGW-596', 'HAO-741', 'HAO-748'],
     goal_id: 'VAIOS-G719',
     objective_gap_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
@@ -250,8 +250,18 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
     vai_686_validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md',
     active_objective_gap_ref:
-      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-gap-c1edafa875e6.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-gap-c1edafa875e6.md',
     active_validation_repair_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-1-objective-validation-repair.md',
+    hao_741_validation_repair_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md',
+    hao_741_attempt_4_validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md',
+    hao_748_merge_retry_budget_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md',
+    mgw_596_objective_gap_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-gap-c1edafa875e6.md',
+    mgw_596_validation_repair_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md',
     evidence: 'objective validation repair',
   },
