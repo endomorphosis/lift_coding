@@ -1,6 +1,6 @@
 # SwissKnife Mobile Interop
 
-VAI-661 attempt 1 records the current objective validation repair for
+VAI-661 attempt 1 recorded the initial objective validation repair for
 VAIOS-G700 and the shared `goal_packet/interoperability/swissknife/06921590135c`
 packet covering VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704,
 VAIOS-G705, and VAIOS-G706. The source objective gap is
@@ -9,6 +9,14 @@ the canonical repair record is
 `data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md`; and
 this worktree's attempt-specific repair is
 `data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md`.
+
+VAI-661 attempt 2 in worktree `vai-661-attempt-2-1783555088` refreshes that
+same objective validation repair without replacing the prior evidence. The
+attempt-specific repair record is
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-2-1783555088-objective-validation-repair.md`.
+The mobile descriptor and DAT display widget action contract now carry this
+attempt-2 repair as their current validation ref while preserving attempts 1,
+6, 7, and 8 as prior validation refs.
 
 The VAI-661 proof stack is `tests/integration/test_swissknife_mobile_interop.py`,
 `docs/integration/swissknife-mobile.md`,
@@ -113,3 +121,19 @@ the SwissKnife/mobile contract files. The repair committed the nested
 `hallucinate_app/ipfs_accelerate_py` gitlink chain in the owning repositories
 and records the clean handoff in
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-749-hao-730-merge-retry-budget.md`.
+
+VAI-661 attempt 2 keeps the supervisor-fed objective heap aligned by recording
+`objective validation repair`, `interface contract swissknife mobile`,
+`agent_identity`, `allowed_surfaces`, and `arguments_hash` in the discovery
+record, this integration note, the mobile descriptor exports, the DAT action
+contract, and the SwissKnife schema comments. `tests/integration/test_swissknife_mobile_interop.py`
+loads the JavaScript exports, validates representative JSON payloads against
+the SwissKnife schemas, checks `mobile/src/orb/metaGlassesMobileOrbBridge.js`
+still advertises `SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR` during edge capability
+registration, and asserts this attempt-2 repair is recorded in
+`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
+For this attempt, `python -m pytest tests/integration/test_swissknife_mobile_interop.py -q`
+passes with 5 tests. The full `python -m pytest tests/integration -q` target
+passes after initializing the already-pinned
+`external/meta-wearables-dat-android` and `external/meta-wearables-dat-ios`
+gitlink worktrees.

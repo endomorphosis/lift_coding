@@ -7,7 +7,7 @@ Goal packet: goal_packet/interoperability/swissknife/06921590135c
 Goal packet goals: VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, VAIOS-G706
 Source objective gap: data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md
 Repair record: data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md
-Current attempt repair: data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md
+Current attempt repair: data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-2-1783555088-objective-validation-repair.md
 
 ## Objective Validation Repair
 
@@ -50,6 +50,11 @@ widget action ids to mobile ORB operations and Meta Wearables DAT methods.
 descriptor during edge capability registration so the mobile edge session can
 bind SwissKnife display and response operations without importing SwissKnife
 runtime code.
+
+VAI-661 attempt 2 updates the current worktree validation reference to
+`data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-2-1783555088-objective-validation-repair.md`
+while preserving the earlier attempt-1 and confirmation records as prior
+validation refs on the mobile descriptor and DAT display widget contract.
 
 ## Validation
 

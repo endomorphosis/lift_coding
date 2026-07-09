@@ -27,8 +27,15 @@ OBJECTIVE_GAP_REF = (
 VALIDATION_REPAIR_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md"
 ATTEMPT_REPAIR_REF = (
     "data/virtual_ai_os/discovery/"
-    "2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md"
+    "2026-07-08-vai-661-attempt-2-1783555088-objective-validation-repair.md"
 )
+PRIOR_ATTEMPT_REPAIR_REFS = {
+    "data/virtual_ai_os/discovery/"
+    "2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md",
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-6-validation-confirmation.md",
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-7-validation-confirmation.md",
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-8-validation-confirmation.md",
+}
 MOBILE_ORB_OPERATIONS = {
     "register_edge_capabilities",
     "publish_glasses_event",
@@ -276,10 +283,12 @@ def test_mobile_descriptor_exports_vai_661_swissknife_interop_contract() -> None
         set(descriptor["runtime_handoff"]["allowed_surfaces"])
     )
     assert descriptor["validation"]["task_id"] == "VAI-661"
-    assert descriptor["validation"]["attempt"] == 1
+    assert descriptor["validation"]["attempt"] == 2
+    assert descriptor["validation"]["worktree"] == "vai-661-attempt-2-1783555088"
     assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
     assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
     assert descriptor["validation"]["attempt_validation_repair_ref"] == ATTEMPT_REPAIR_REF
+    assert set(descriptor["validation"]["prior_validation_repair_refs"]) == PRIOR_ATTEMPT_REPAIR_REFS
     assert set(descriptor["validation"]["objective_goals"]) == GOAL_PACKET_GOALS
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
@@ -303,10 +312,12 @@ def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods()
     assert contract["interface_contract"] == "interface contract swissknife mobile"
     assert contract["goal_packet"] == GOAL_PACKET
     assert contract["task_id"] == "VAI-661"
-    assert contract["attempt"] == 1
+    assert contract["attempt"] == 2
+    assert contract["worktree"] == "vai-661-attempt-2-1783555088"
     assert contract["objective_gap_ref"] == OBJECTIVE_GAP_REF
     assert contract["validation_repair_ref"] == VALIDATION_REPAIR_REF
     assert contract["attempt_validation_repair_ref"] == ATTEMPT_REPAIR_REF
+    assert set(contract["prior_validation_repair_refs"]) == PRIOR_ATTEMPT_REPAIR_REFS
     assert set(contract["objective_goals"]) == GOAL_PACKET_GOALS
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
@@ -325,7 +336,7 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_mobile
     Draft202012Validator(envelope_schema).validate(swissknife_mobile_interaction_envelope())
 
     for schema in (control_schema, envelope_schema):
-        assert "VAI-661 attempt 1 objective validation repair" in schema["$comment"]
+        assert "VAI-661 attempt 2 objective validation repair" in schema["$comment"]
         assert ATTEMPT_REPAIR_REF in schema["$comment"]
         assert OBJECTIVE_GAP_REF in schema["$comment"]
         assert "agent_identity" in schema["$comment"]
@@ -368,15 +379,16 @@ def test_docs_discovery_and_heap_record_vai_661_objective_validation_repair() ->
         OBJECTIVE_GAP_REF,
         VALIDATION_REPAIR_REF,
         ATTEMPT_REPAIR_REF,
+        "vai-661-attempt-2-1783555088",
     ]
     for content in (docs, repair, attempt_repair, heap):
         for term in required_terms:
             assert term in content
 
     assert "Fingerprint: d33307f93408e32451468150b5e7fe003eb0222d" in gap
-    assert "VAI-661 attempt 1 objective validation repair" in attempt_repair
-    assert "Attempt: 1" in attempt_repair
-    assert "attempt 1 objective validation repair" in heap
+    assert "VAI-661 attempt 2 objective validation repair" in attempt_repair
+    assert "Attempt: 2" in attempt_repair
+    assert "attempt 2 objective validation repair" in heap
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in repair

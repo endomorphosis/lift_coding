@@ -111,13 +111,20 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
   },
   validation: {
     task_id: 'VAI-661',
-    attempt: 1,
+    attempt: 2,
+    worktree: 'vai-661-attempt-2-1783555088',
     objective_gap_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
     validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md',
     attempt_validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-2-1783555088-objective-validation-repair.md',
+    prior_validation_repair_refs: [
       'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md',
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-6-validation-confirmation.md',
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-7-validation-confirmation.md',
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-8-validation-confirmation.md',
+    ],
     objective_goal: 'VAIOS-G700',
     objective_goals: [
       'VAIOS-G700',

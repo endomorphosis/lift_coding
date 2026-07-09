@@ -52,7 +52,8 @@ export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
   interface_contract: 'interface contract swissknife mobile',
   goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
   task_id: 'VAI-661',
-  attempt: 1,
+  attempt: 2,
+  worktree: 'vai-661-attempt-2-1783555088',
   objective_goal: 'VAIOS-G700',
   objective_goals: [
     'VAIOS-G700',
@@ -68,7 +69,13 @@ export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
   validation_repair_ref:
     'data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md',
   attempt_validation_repair_ref:
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-2-1783555088-objective-validation-repair.md',
+  prior_validation_repair_refs: [
     'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md',
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-6-validation-confirmation.md',
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-7-validation-confirmation.md',
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-8-validation-confirmation.md',
+  ],
   task_board: 'virtual_ai_os',
   mgw_task_id: 'MGW-569',
   mgw_attempt: 1,
