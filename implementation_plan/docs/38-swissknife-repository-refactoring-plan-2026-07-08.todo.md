@@ -886,7 +886,7 @@ state observation.
 
 ## SWR-051 Add browser API contract tests for MCP, IPFS, storage, workers, and ZKP
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/browser-contracts
 - Fingerprint: 94adef36bb31510610ebc7ed88201f1182419828
