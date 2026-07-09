@@ -946,7 +946,7 @@ state observation.
 
 ## SWR-056 Add browser error taxonomy and user-visible capability states
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/browser-ux
 - Fingerprint: f51ad49723495d2ae311ce3b8a2e19fed19ce9b4
