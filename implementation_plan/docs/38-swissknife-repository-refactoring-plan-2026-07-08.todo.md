@@ -826,7 +826,7 @@ state observation.
 
 ## SWR-046 Add browser package-consumer fixture
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/package-browser-api
 - Fingerprint: 7c7d3ff03ed3c507f8731b9d90c252798b3439b6
