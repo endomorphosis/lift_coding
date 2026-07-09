@@ -58,8 +58,11 @@ META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS = (
     "external/ipfs_accelerate",
     "external/ipfs_datasets",
     "external/ipfs_kit",
+    "external/meta-wearables-dat-android",
+    "external/meta-wearables-dat-ios",
     "hallucinate_app",
     "swissknife",
+    "Mcp-Plus-Plus",
 )
 META_DISPLAY_WORKTREE_SUBMODULE_PATHS = META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
 
