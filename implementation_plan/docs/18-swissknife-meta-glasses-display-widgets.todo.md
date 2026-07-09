@@ -3507,7 +3507,7 @@ To allow autonomous implementation in isolated worktrees, pass `--implement` to 
 
 ## MGW-573 Close objective gap: Interoperate swissknife with Mcp-Plus-Plus
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: interoperability
