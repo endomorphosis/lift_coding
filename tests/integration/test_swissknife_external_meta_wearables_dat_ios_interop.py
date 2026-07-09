@@ -1,4 +1,4 @@
-"""SwissKnife/external/meta-wearables-dat-ios interoperability regression tests for HAO-736."""
+"""SwissKnife/external/meta-wearables-dat-ios interoperability regression tests for MGW-575."""
 
 from __future__ import annotations
 
@@ -208,7 +208,7 @@ def swissknife_meta_wearables_dat_ios_mcppp_compatibility_receipt() -> dict:
     """Python mirror of buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt()."""
     return {
         "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
-        "task_id": "HAO-736",
+        "task_id": "MGW-575",
         "session_id": "session:swissknife-meta-wearables-dat-ios-display",
         "correlation_id": "corr:swissknife-meta-wearables-dat-ios-display",
         "daemon_id": "meta-wearables-dat-ios",
@@ -386,7 +386,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/meta-wearables-dat-ios/.cursor/rules/session-lifecycle.mdc" in src
     assert "external/meta-wearables-dat-ios/.cursor/rules/permissions-registration.mdc" in src
     assert "external/meta-wearables-dat-ios/samples/DisplayAccess/DisplayAccess/Info.plist" in src
-    assert "HAO-736" in src
+    assert "MGW-575" in src
     assert "VAI-667" in src
     assert "VAIOS-G706" in src
     assert "agent_identity" in src
@@ -415,15 +415,17 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_w
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_meta_wearables_dat_ios.md")
     discovery = read_text(
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-validation-repair.md"
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-575-objective-validation-repair.md"
     )
     gap = read_text(
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md"
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-575-objective-gap-d6bdae3a60cc.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "HAO-736",
+        "MGW-575",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-575-objective-gap-d6bdae3a60cc.md",
+        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-575-objective-validation-repair.md",
         "VAIOS-G706",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
