@@ -70,5 +70,7 @@ iOS edits isolated.
 - Focused gate: `python -m pytest tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py -q`
 - Full gate: `python -m pytest tests/integration -q`
 
-The daemon records final pass/skip counts when it runs the full validation
-gate for this worktree.
+Local full gate result for this repair worktree: `464 passed, 82 skipped, 16
+warnings in 66.77s`. The warnings are pre-existing dependency and deprecation
+warnings from optional integration surfaces; no HAO-736 validation failures were
+reported.
