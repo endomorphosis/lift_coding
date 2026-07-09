@@ -99,6 +99,9 @@ bootstrap in `tests/conftest.py`.
   test output without aborting the entire session (which is what turns an
   unrelated infra hiccup into a false implementation/validation failure that
   the retry-budget guardrail then has to escalate).
+- Keeps the advisory `external/.*.bootstrap.lock` files out of git status, so
+  validating this repair does not leave generated lock artifacts that can
+  confuse the daemon's dirty-worktree checks.
 
 This does not change any test outcomes today (`python -m pytest tests/integration -q`
 still reports 464 passed, 82 skipped, 0 failed both before and after the
