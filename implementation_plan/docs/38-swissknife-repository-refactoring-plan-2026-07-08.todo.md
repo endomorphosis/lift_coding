@@ -790,7 +790,7 @@ state observation.
 
 ## SWR-043 Add browser smoke matrix across desktop, mobile, and constrained capabilities
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/e2e
 - Fingerprint: b0b83a7632ac2d810fd94ddc6549a76b808f6888
@@ -907,3 +907,99 @@ state observation.
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/release-readiness-report.md, swissknife/docs/browser-compatibility-inventory.md
 - Validation: cd swissknife && npm run release:readiness && node scripts/audit-browser-compat.mjs --report docs/browser-compatibility-inventory.md && git status --short
 - Acceptance: The final release-candidate gate proves the browser build is host-leak-free, libp2p is browser-enabled by default with evidence, Python/Pyodide are non-default optional/sandboxed paths, WASM/ZKP assets are integrity-audited, browser package exports are safe, and residual risks are documented before merge.
+
+## SWR-053 Add browser import-map and CDN packaging policy
+
+- Status: todo
+- Priority: P2
+- Track: refactor/browser-distribution
+- Fingerprint: 2f706282c5f8f4e985345e189104ba1f60792748
+- Dedupe key: swissknife_refactor:browser_import_map_cdn_packaging
+- Depends on: SWR-046, SWR-052
+- Outputs: swissknife/docs/browser-distribution-policy.md, swissknife/scripts/audit-browser-distribution.mjs, swissknife/package.json
+- Validation: cd swissknife && node scripts/audit-browser-distribution.mjs --report docs/browser-distribution-policy.md && npm run build:web
+- Acceptance: Browser distribution policy documents import-map/CDN consumption, ESM entrypoints, asset base paths, WASM artifact paths, libp2p package expectations, and host-only exclusions; generated browser artifacts can be hosted statically without Node server assumptions.
+
+## SWR-054 Add browser dependency upgrade and lockfile drift gate
+
+- Status: todo
+- Priority: P2
+- Track: refactor/dependencies
+- Fingerprint: b18a8614f136f89ef99a5deceaa70a6193798e43
+- Dedupe key: swissknife_refactor:browser_dependency_upgrade_lockfile_gate
+- Depends on: SWR-038, SWR-052
+- Outputs: swissknife/docs/browser-dependency-policy.md, swissknife/scripts/audit-browser-lockfile.mjs, swissknife/package-lock.json
+- Validation: cd swissknife && node scripts/audit-browser-lockfile.mjs --report docs/browser-dependency-policy.md && npm run build:web
+- Acceptance: Browser-critical dependencies such as libp2p, WebRTC/WebSockets transports, snarkjs/WASM tooling, IPFS/browser storage packages, Vite, Playwright, and Vitest have explicit lockfile drift checks and documented upgrade review criteria.
+
+## SWR-055 Add real-device browser test checklist and evidence template
+
+- Status: todo
+- Priority: P2
+- Track: refactor/evidence
+- Fingerprint: 602b2e3a51c967e810f069e38f495d5f5a9b3b8a
+- Dedupe key: swissknife_refactor:real_device_browser_evidence_template
+- Depends on: SWR-043, SWR-047, SWR-052
+- Outputs: swissknife/docs/browser-real-device-checklist.md, swissknife/docs/browser-smoke-matrix-evidence.md
+- Validation: cd swissknife && test -f docs/browser-real-device-checklist.md && rg -n "Chrome|Firefox|Safari|Android|iOS|WebRTC|IndexedDB|WASM|libp2p" docs/browser-real-device-checklist.md
+- Acceptance: Real-device validation has an explicit checklist for desktop Chrome/Firefox/Safari, Android, iOS/iPadOS, constrained storage, WebRTC availability, WASM/ZKP execution, libp2p capability gaps, offline behavior, and screenshot/evidence capture.
+
+## SWR-056 Add browser error taxonomy and user-visible capability states
+
+- Status: todo
+- Priority: P1
+- Track: refactor/browser-ux
+- Fingerprint: f51ad49723495d2ae311ce3b8a2e19fed19ce9b4
+- Dedupe key: swissknife_refactor:browser_error_taxonomy_capability_states
+- Depends on: SWR-039, SWR-050, SWR-051
+- Outputs: swissknife/docs/browser-capability-error-taxonomy.md, swissknife/src/platform/browser.ts, swissknife/web/js
+- Validation: cd swissknife && node scripts/audit-browser-observability.mjs --report docs/browser-observability-policy.md && npm run build:web
+- Acceptance: Browser users see explicit capability states for unavailable libp2p transports, blocked storage APIs, missing cross-origin isolation, missing WASM artifacts, unavailable ZKP backends, and host-only actions; errors do not imply Python/native fallback in browser mode.
+
+## SWR-057 Add browser performance budget and startup regression gate
+
+- Status: todo
+- Priority: P2
+- Track: refactor/performance
+- Fingerprint: 48bb45d5a06440f05f4c49e4837e83f63ad9599c
+- Dedupe key: swissknife_refactor:browser_performance_budget_startup_gate
+- Depends on: SWR-016, SWR-043, SWR-052
+- Outputs: swissknife/docs/browser-performance-budget.md, swissknife/scripts/audit-browser-performance-budget.mjs, swissknife/docs/browser-bundle-budget.md
+- Validation: cd swissknife && node scripts/audit-browser-performance-budget.mjs --report docs/browser-performance-budget.md && npm run build:web
+- Acceptance: Browser startup, lazy-app chunks, libp2p chunks, WASM/ZKP assets, and total gzip/raw bundle budgets are documented and audited; regressions require an explicit budget update with evidence.
+
+## SWR-058 Add browser rollback and feature-flag safety plan
+
+- Status: todo
+- Priority: P2
+- Track: refactor/release
+- Fingerprint: d45ef2c9401bdca46c0428e47e2ff43461efb2fa
+- Dedupe key: swissknife_refactor:browser_rollback_feature_flag_plan
+- Depends on: SWR-045, SWR-052, SWR-056
+- Outputs: swissknife/docs/browser-release-rollback-plan.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && test -f docs/browser-release-rollback-plan.md && rg -n "rollback|feature flag|libp2p|WASM|storage|MCP|ZKP" docs/browser-release-rollback-plan.md
+- Acceptance: The browser release has documented rollback steps and feature-flag controls for libp2p browser defaulting, MCP dashboard remote modes, optional Pyodide/sandbox features, WASM/ZKP backends, storage providers, and offline/cache behavior.
+
+## SWR-059 Add browser architecture decision records
+
+- Status: todo
+- Priority: P3
+- Track: refactor/docs
+- Fingerprint: 3f3f946c9784d4769924656ea4ad0127ec5e639e
+- Dedupe key: swissknife_refactor:browser_architecture_decision_records
+- Depends on: SWR-041, SWR-049, SWR-052
+- Outputs: swissknife/docs/adr/browser-runtime-boundaries.md, swissknife/docs/adr/browser-libp2p-defaults.md, swissknife/docs/adr/browser-wasm-zkp-policy.md
+- Validation: cd swissknife && test -f docs/adr/browser-runtime-boundaries.md && test -f docs/adr/browser-libp2p-defaults.md && test -f docs/adr/browser-wasm-zkp-policy.md
+- Acceptance: ADRs capture the permanent decisions for browser/host boundaries, libp2p browser defaults and capability gaps, WASM/ZKP integrity and simulation policy, and why Python/native wrappers are excluded from browser runtime paths.
+
+## SWR-060 Final supervisor closeout and handoff report
+
+- Status: todo
+- Priority: P1
+- Track: refactor/supervisor
+- Fingerprint: 69d64dbb72b34fc3938789f4a3dbd7a6d477b784
+- Dedupe key: swissknife_refactor:final_supervisor_closeout_handoff
+- Depends on: SWR-052, SWR-053, SWR-054, SWR-055, SWR-056, SWR-057, SWR-058, SWR-059
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: Final closeout report records task completion counts, validation evidence, generated follow-up boards, merge-readiness state, supervisor state paths, and any remaining browser-compatibility risks; no active SWR tasks remain unaccounted for.
