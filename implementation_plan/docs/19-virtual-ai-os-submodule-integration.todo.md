@@ -8905,7 +8905,7 @@ cadence remains parseable and resumable.
 
 ## VAI-663 Close objective gap: Interoperate swissknife with external/ipfs_datasets
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: interoperability
