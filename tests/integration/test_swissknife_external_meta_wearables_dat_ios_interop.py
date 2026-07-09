@@ -417,6 +417,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     discovery = read_text(
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-validation-repair.md"
     )
+    attempt_2_confirmation = read_text(
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-736-attempt-2-validation-confirmation.md"
+    )
     gap = read_text(
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md"
     )
@@ -429,6 +433,8 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "objective validation repair",
         "interface contract swissknife external/meta-wearables-dat-ios",
         "tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py",
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-736-attempt-2-validation-confirmation.md",
         DESCRIPTOR_TS_PATH,
         "src/handsfree/swissknife_meta_wearables_dat_ios_interop.py",
         "swissknife/contracts/control_surface_contract.schema.json",
@@ -440,10 +446,11 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/meta-wearables-dat-ios/.cursor/rules/permissions-registration.mdc",
         "external/meta-wearables-dat-ios/samples/DisplayAccess/DisplayAccess/Info.plist",
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, attempt_2_confirmation, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in discovery
+        assert goal_id in attempt_2_confirmation
         assert goal_id in heap
     assert "VAIOS-G706" in gap
