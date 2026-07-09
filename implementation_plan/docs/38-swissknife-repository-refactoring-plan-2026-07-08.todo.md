@@ -970,7 +970,7 @@ state observation.
 
 ## SWR-058 Add browser rollback and feature-flag safety plan
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/release
 - Fingerprint: d45ef2c9401bdca46c0428e47e2ff43461efb2fa
