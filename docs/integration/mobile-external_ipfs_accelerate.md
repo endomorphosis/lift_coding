@@ -3,7 +3,9 @@
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
 `objective/interoperability/mobile-external_ipfs_accelerate` bundle. MGW-596
 revalidates that objective validation repair for the current
-meta_glasses_display_widgets supervisor gate.
+meta_glasses_display_widgets supervisor gate, and HAO-741 records the
+hallucinate_multimodal_control validation-gate repair for the same objective
+gap fingerprint `c1edafa875e6`.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -64,7 +66,8 @@ verifies the DuckDB schema descriptors under `external/ipfs_accelerate`
 exist and declare the expected tables/functions, loads the JavaScript
 descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
-objective validation repair is recorded in
+objective validation repair is recorded in this integration note
+(`docs/integration/mobile-external_ipfs_accelerate.md`),
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
 and the MGW-596 repair record
 `data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md`
@@ -76,5 +79,10 @@ and the attempt-eight confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md`
 and prior attempt-five confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-5-validation-confirmation.md`
+and the HAO-741 repair records
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md`,
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-1-objective-validation-repair.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
