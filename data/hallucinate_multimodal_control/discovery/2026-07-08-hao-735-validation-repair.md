@@ -49,7 +49,8 @@ and the shared `goal_packet/interoperability/swissknife/06921590135c` packet.
 - `tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py`
   validates descriptor presence, static discovery, deterministic handoff
   receipts, TypeScript descriptor exports, and representative
-  control-surface/interaction-envelope payloads.
+  control-surface, interaction-envelope, and MCP++ compatibility receipt
+  payloads.
 - `docs/integration/swissknife-external_meta_wearables_dat_android.md` records
   the operator-facing contract note for this interop pair.
 
@@ -61,6 +62,6 @@ Android edits isolated.
 ## Validation
 
 - `python -m pytest tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py -q`
-  passed: 7 passed.
-- `python -m pytest tests/integration -q` passed: 448 passed, 86 skipped, 16
+  passed: 8 passed.
+- `python -m pytest tests/integration -q` passed: 470 passed, 79 skipped, 18
   warnings.

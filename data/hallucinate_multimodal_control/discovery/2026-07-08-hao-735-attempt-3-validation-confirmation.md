@@ -25,8 +25,9 @@ scanner-visible SwissKnife-to-`external/meta-wearables-dat-android` proof stack:
 
 - `tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py`
   validates descriptor presence, static discovery, deterministic runtime
-  handoff receipts, TypeScript descriptor exports, and representative
-  control-surface/interaction-envelope payloads.
+  handoff receipts, TypeScript descriptor exports, representative
+  control-surface/interaction-envelope payloads, and the HAO-735 MCP++
+  compatibility receipt payload.
 - `docs/integration/swissknife-external_meta_wearables_dat_android.md` records
   the operator-facing contract note for the pair.
 - `src/handsfree/swissknife_meta_wearables_dat_android_interop.py` discovers
@@ -58,8 +59,8 @@ commits: `Mcp-Plus-Plus` at `b8843522b0f6f657f795a23816956e745c421c5e`,
 ## Validation
 
 - `python -m pytest tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py -q`
-  passed: 7 passed.
-- `python -m pytest tests/integration -q` passed: 448 passed, 86 skipped, 16
+  passed: 8 passed.
+- `python -m pytest tests/integration -q` passed: 470 passed, 79 skipped, 18
   warnings.
 
 This objective validation repair keeps VAIOS-G700, VAIOS-G701, VAIOS-G702,

@@ -197,6 +197,80 @@ def swissknife_meta_wearables_dat_android_interaction_envelope() -> dict:
     }
 
 
+def swissknife_meta_wearables_dat_android_mcppp_compatibility_receipt() -> dict:
+    """Python mirror of buildSwissKnifeMetaWearablesDATAndroidMCPPlusPlusCompatibilityReceipt()."""
+    return {
+        "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
+        "task_id": "HAO-735",
+        "session_id": "session:swissknife-meta-wearables-dat-android-display",
+        "correlation_id": "corr:swissknife-meta-wearables-dat-android-display",
+        "daemon_id": "meta-wearables-dat-android",
+        "server_package": "meta_wearables_dat_android",
+        "swissknife_consumer": "swissknife.meta_wearables_dat_android.display-service",
+        "protocol_negotiation": {
+            "method": "initialize",
+            "protocol_version": "2026-07-08",
+            "client_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "server_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "negotiated_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "initialized": True,
+        },
+        "capability_descriptor": {
+            "descriptor_id": "swissknife-meta-wearables-dat-android-display-interop@0.1.0",
+            "interface_cid": "bafyswissknifemetawearablesdatandroiddisplay0001",
+            "name": "swissknife-meta-wearables-dat-android-display-interop",
+            "namespace": "com.swissknife.interop.meta_wearables_dat_android.display",
+            "version": "0.1.0",
+            "methods": list(REQUIRED_SWISSKNIFE_META_WEARABLES_DAT_ANDROID_OPERATIONS),
+            "requires": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+            "compatibility_checked": True,
+            "compatibility_verdict": "compatible",
+            "event_streams": True,
+        },
+        "transport": {
+            "kind": "local",
+            "endpoint": "swissknife://meta-wearables-dat-android/display",
+            "protocol_path": "swissknife/mcp++/meta-wearables-dat-android/display",
+            "auth_present": True,
+            "redaction_profile": "display-session-minimal",
+        },
+        "tool_call": {
+            "tool_name": "meta_wearables_dat_android.display.send_content",
+            "tool_category": "display",
+            "upstream_function": "Display.sendContent",
+            "jsonrpc_method": "tools/call",
+            "arguments_hash": "sha256:swissknife-meta-wearables-dat-android-send-content",
+            "dispatch_allowed": True,
+            "upstream_status": "ok",
+        },
+        "policy_contract": {
+            "interaction_envelope_id": "interaction:swissknife-meta-wearables-dat-android:send-content:1",
+            "policy_decision_id": "decision:swissknife-meta-wearables-dat-android:allow:1",
+            "policy_outcome": "allow",
+            "mediation_receipt_id": "receipt:swissknife-meta-wearables-dat-android:allow:1",
+            "control_surface_contract_ref": "swissknife/contracts/control_surface_contract.schema.json",
+        },
+        "receipt_lineage": {
+            "envelope_cid": "local:swissknife-meta-wearables-dat-android-envelope",
+            "decision_cid": "local:swissknife-meta-wearables-dat-android-decision",
+            "receipt_cid": "local:swissknife-meta-wearables-dat-android-receipt",
+            "tool_receipt_id": "tool-receipt:meta-wearables-dat-android-display-send-content",
+        },
+        "lifecycle_events": [
+            {"event": "initialize", "at": "2026-07-08T00:00:00Z"},
+            {"event": "initialized", "at": "2026-07-08T00:00:01Z"},
+            {"event": "descriptor_refresh", "at": "2026-07-08T00:00:02Z"},
+            {"event": "policy_decision", "at": "2026-07-08T00:00:03Z"},
+            {
+                "event": "receipt_emitted",
+                "at": "2026-07-08T00:00:04Z",
+                "receipt_cid": "local:swissknife-meta-wearables-dat-android-receipt",
+            },
+        ],
+        "validated_at": "2026-07-08T00:00:05Z",
+    }
+
+
 def test_meta_wearables_dat_android_display_descriptors_exist_on_disk() -> None:
     expected_paths = [
         "external/meta-wearables-dat-android/.cursor/rules/display-access.mdc",
@@ -279,6 +353,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     )
     assert "export function buildSwissKnifeMetaWearablesDATAndroidControlSurfaceContract" in src
     assert "export function buildSwissKnifeMetaWearablesDATAndroidInteractionEnvelope" in src
+    assert "export function buildSwissKnifeMetaWearablesDATAndroidMCPPlusPlusCompatibilityReceipt" in src
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in src
@@ -324,6 +399,9 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_w
 ):
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
+    compatibility_schema = read_json(
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json"
+    )
 
     Draft202012Validator(control_schema).validate(
         swissknife_meta_wearables_dat_android_control_surface_payload()
@@ -331,6 +409,24 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_w
     Draft202012Validator(envelope_schema).validate(
         swissknife_meta_wearables_dat_android_interaction_envelope()
     )
+    Draft202012Validator(compatibility_schema).validate(
+        swissknife_meta_wearables_dat_android_mcppp_compatibility_receipt()
+    )
+
+
+def test_swissknife_shared_contract_schemas_record_hao_735_evidence() -> None:
+    schema_paths = [
+        "swissknife/contracts/control_surface_contract.schema.json",
+        "swissknife/contracts/interaction_envelope.schema.json",
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json",
+        "swissknife/contracts/mediation_receipt.schema.json",
+    ]
+    for schema_path in schema_paths:
+        schema = read_json(schema_path)
+        comment = schema.get("$comment", "")
+        assert "HAO-735 objective validation repair" in comment, schema_path
+        assert "interface contract swissknife external/meta-wearables-dat-android" in comment
+        assert "tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py" in comment
 
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
