@@ -6,6 +6,7 @@ Goal id: VAIOS-G701
 Goal title: Interoperate swissknife with external/ipfs_accelerate
 Objective heap: implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md
 Objective gap ref: data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md
+Validation repair ref: data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md
 Fingerprint: 2394e45d201289c2cb5e4010d66f32ba11dabcec
 Priority: P1
 Track: interoperability
@@ -35,7 +36,12 @@ VAIOS-G706).
   `registerSwissKnifeIPFSAccelerateDuckDBInterop()`,
   `createMCPPlusPlusClientWithSwissKnifeIPFSAccelerateInterop()`,
   `buildSwissKnifeIPFSAccelerateControlSurfaceContract()`, and
-  `buildSwissKnifeIPFSAccelerateInteractionEnvelope()`.
+  `buildSwissKnifeIPFSAccelerateInteractionEnvelope()`. It also exports
+  `buildSwissKnifeIPFSAccelerateMCPPlusPlusCompatibilityReceipt()` so the
+  MCP++ initialize negotiation, descriptor refresh, policy decision, and
+  `accelerate.duckdb.get_performance_results` dispatch lineage are captured
+  under `task_id: VAI-662`, `daemon_id: ipfs_accelerate`, and
+  `server_package: ipfs_accelerate_py`.
 - `src/handsfree/swissknife_ipfs_accelerate_interop.py` statically discovers
   `external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql`,
   `external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py`,
@@ -49,6 +55,9 @@ VAIOS-G706).
   representative SwissKnife-to-`external/ipfs_accelerate` control surface
   and interaction envelope payloads (preserving the scanner-visible
   `agent_identity`, `allowed_surfaces`, and `arguments_hash` norm refs).
+  `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`
+  validates the VAI-662 MCP++ compatibility receipt for the same runtime
+  handoff.
 - `tests/integration/test_swissknife_external_ipfs_accelerate_interop.py`
   is the proof stack: it verifies the DuckDB schema descriptors exist and
   declare the expected tables/functions, exercises the Python discovery and

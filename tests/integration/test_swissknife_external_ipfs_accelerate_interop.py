@@ -1,4 +1,4 @@
-"""SwissKnife/external/ipfs_accelerate interoperability regression tests for MGW-570."""
+"""SwissKnife/external/ipfs_accelerate interoperability regression tests for VAI-662."""
 
 from __future__ import annotations
 
@@ -192,6 +192,100 @@ def swissknife_ipfs_accelerate_interaction_envelope() -> dict:
     }
 
 
+def swissknife_ipfs_accelerate_mcp_plus_plus_compatibility_receipt() -> dict:
+    """Python mirror of buildSwissKnifeIPFSAccelerateMCPPlusPlusCompatibilityReceipt()."""
+    return {
+        "receipt_schema": "mcp_plus_plus_compatibility_receipt_v1",
+        "task_id": "VAI-662",
+        "session_id": "session:swissknife-ipfs-accelerate-duckdb",
+        "correlation_id": "corr:swissknife-ipfs-accelerate-duckdb",
+        "daemon_id": "ipfs_accelerate",
+        "server_package": "ipfs_accelerate_py",
+        "swissknife_consumer": "swissknife.ipfs_accelerate.data-service",
+        "protocol_negotiation": {
+            "method": "initialize",
+            "protocol_version": "2026-07-08",
+            "client_profiles": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/deontic-policy",
+            ],
+            "server_profiles": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/deontic-policy",
+            ],
+            "negotiated_profiles": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/deontic-policy",
+            ],
+            "initialized": True,
+        },
+        "capability_descriptor": {
+            "descriptor_id": "swissknife-ipfs-accelerate-duckdb-interop@0.1.0",
+            "interface_cid": "bafyswissknifeipfsaccelerateduckdb00000001",
+            "name": "swissknife-ipfs-accelerate-duckdb-interop",
+            "namespace": "com.swissknife.interop.ipfs_accelerate.duckdb",
+            "version": "0.1.0",
+            "methods": list(REQUIRED_SWISSKNIFE_DUCKDB_OPERATIONS),
+            "requires": [
+                "mcp++/mcp-idl",
+                "mcp++/cid-envelope",
+                "mcp++/deontic-policy",
+            ],
+            "compatibility_checked": True,
+            "compatibility_verdict": "compatible",
+            "event_streams": True,
+        },
+        "transport": {
+            "kind": "local",
+            "endpoint": "swissknife://ipfs-accelerate/duckdb",
+            "protocol_path": "swissknife/mcp++/ipfs-accelerate/duckdb",
+            "auth_present": True,
+            "redaction_profile": "benchmark-session-minimal",
+        },
+        "tool_call": {
+            "tool_name": "accelerate.duckdb.get_performance_results",
+            "tool_category": "data",
+            "upstream_function": "DuckDB.getPerformanceResults",
+            "jsonrpc_method": "tools/call",
+            "arguments_hash": "sha256:swissknife-ipfs-accelerate-get-performance-results",
+            "dispatch_allowed": True,
+            "upstream_status": "ok",
+        },
+        "policy_contract": {
+            "interaction_envelope_id": (
+                "interaction:swissknife-ipfs-accelerate:get-performance-results:1"
+            ),
+            "policy_decision_id": "decision:swissknife-ipfs-accelerate:allow:1",
+            "policy_outcome": "allow",
+            "mediation_receipt_id": "receipt:swissknife-ipfs-accelerate:allow:1",
+            "control_surface_contract_ref": (
+                "swissknife/contracts/control_surface_contract.schema.json"
+            ),
+        },
+        "receipt_lineage": {
+            "envelope_cid": "local:swissknife-ipfs-accelerate-envelope",
+            "decision_cid": "local:swissknife-ipfs-accelerate-decision",
+            "receipt_cid": "local:swissknife-ipfs-accelerate-receipt",
+            "tool_receipt_id": "tool-receipt:ipfs-accelerate-duckdb-get-performance-results",
+        },
+        "lifecycle_events": [
+            {"event": "initialize", "at": "2026-07-08T00:00:00Z"},
+            {"event": "initialized", "at": "2026-07-08T00:00:01Z"},
+            {"event": "descriptor_refresh", "at": "2026-07-08T00:00:02Z"},
+            {"event": "policy_decision", "at": "2026-07-08T00:00:03Z"},
+            {
+                "event": "receipt_emitted",
+                "at": "2026-07-08T00:00:04Z",
+                "receipt_cid": "local:swissknife-ipfs-accelerate-receipt",
+            },
+        ],
+        "validated_at": "2026-07-08T00:00:05Z",
+    }
+
+
 def test_ipfs_accelerate_duckdb_schema_descriptors_exist_on_disk() -> None:
     expected_paths = [
         "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
@@ -276,7 +370,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py" in src
-    assert "MGW-570" in src
+    assert "VAI-662" in src
     assert "VAIOS-G701" in src
     assert "agent_identity" in src
     assert "allowed_surfaces" in src
@@ -295,29 +389,42 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_a
     )
 
 
+def test_swissknife_ipfs_accelerate_mcp_plus_plus_compatibility_receipt_validates() -> None:
+    receipt_schema = read_json("swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json")
+
+    assert "VAI-662" in receipt_schema["properties"]["task_id"]["enum"]
+    assert "ipfs_accelerate" in receipt_schema["properties"]["daemon_id"]["enum"]
+    assert "ipfs_accelerate_py" in receipt_schema["properties"]["server_package"]["enum"]
+
+    Draft202012Validator(receipt_schema).validate(
+        swissknife_ipfs_accelerate_mcp_plus_plus_compatibility_receipt()
+    )
+
+
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = read_text("docs/integration/swissknife-external_ipfs_accelerate.md")
     discovery = read_text(
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-validation-repair.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md"
     )
     gap = read_text(
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-gap-2394e45d2012.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md"
     )
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
     required_terms = [
-        "MGW-570",
+        "VAI-662",
         "VAIOS-G701",
         "goal_packet/interoperability/swissknife/06921590135c",
         "objective validation repair",
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-gap-2394e45d2012.md",
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-validation-repair.md",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md",
+        "data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md",
         "interface contract swissknife external/ipfs_accelerate",
         "tests/integration/test_swissknife_external_ipfs_accelerate_interop.py",
         DESCRIPTOR_TS_PATH,
         "src/handsfree/swissknife_ipfs_accelerate_interop.py",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json",
         "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
         "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",

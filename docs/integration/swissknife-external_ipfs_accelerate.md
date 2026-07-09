@@ -1,6 +1,6 @@
 # SwissKnife / external/ipfs_accelerate Interop
 
-MGW-570 repairs the VAIOS-G701 objective validation gap for the shared
+VAI-662 repairs the VAIOS-G701 objective validation gap for the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
@@ -37,14 +37,18 @@ is:
   pre-built `IPFS_ACCELERATE_INTERFACE`, and
   `buildSwissKnifeIPFSAccelerateControlSurfaceContract()` /
   `buildSwissKnifeIPFSAccelerateInteractionEnvelope()` to build representative
-  control-surface and interaction-envelope payloads.
+  control-surface and interaction-envelope payloads. The descriptor also
+  exports `buildSwissKnifeIPFSAccelerateMCPPlusPlusCompatibilityReceipt()` so
+  the MCP++ runtime handoff has a schema-validated VAI-662 receipt.
 - `swissknife/contracts/control_surface_contract.schema.json` and
   `swissknife/contracts/interaction_envelope.schema.json` validate those
   SwissKnife-to-`external/ipfs_accelerate` control surface and interaction
   envelope payloads (preserving the scanner-visible `agent_identity`,
   `allowed_surfaces`, and `arguments_hash` norm refs), and
-  `swissknife/contracts/mediation_receipt.schema.json` remains the receipt
-  schema ref advertised by the descriptor.
+  `swissknife/contracts/mediation_receipt.schema.json` remains the mediation
+  receipt schema ref advertised by the descriptor. The runtime compatibility
+  receipt is validated by
+  `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json`.
 
 ## Runtime handoff
 
@@ -64,6 +68,11 @@ is:
    benchmark-schema handoff via `build_swissknife_duckdb_handoff()`, which
    statically re-derives the same time-series table set and required
    `accelerate.duckdb.*` operations advertised by the TypeScript descriptor.
+4. `buildSwissKnifeIPFSAccelerateMCPPlusPlusCompatibilityReceipt()` records
+   the MCP++ initialize negotiation, descriptor refresh, policy decision, and
+   `accelerate.duckdb.get_performance_results` dispatch lineage under
+   `task_id: VAI-662`, `daemon_id: ipfs_accelerate`, and
+   `server_package: ipfs_accelerate_py`.
 
 ## Validation evidence
 
@@ -76,8 +85,8 @@ inspects the SwissKnife TypeScript descriptor module for the expected
 exports/goal-packet metadata, validates representative SwissKnife
 control-surface and interaction-envelope payloads, and asserts this
 objective validation repair is recorded in
-`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-validation-repair.md`
+`data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-validation-repair.md`
 against
-`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-570-objective-gap-2394e45d2012.md`
+`data/virtual_ai_os/discovery/2026-07-08-vai-662-objective-gap-2394e45d2012.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
