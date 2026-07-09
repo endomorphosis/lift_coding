@@ -75,6 +75,20 @@ the first non-empty Bucket VFS demo candidate while continuing to validate the
 complete CLI/MCP surface against
 `BUCKET_VFS_INTERFACES_COMPLETE.md`.
 
+For HAO-741, this HAO-748 merge retry-budget receipt is lineage evidence for
+the VAIOS-G719 objective validation repair in
+`objective/interoperability/mobile-external_ipfs_accelerate`. It preserves the
+scanner-visible `interface contract mobile external/ipfs_accelerate` proof
+stack across `tests/integration/test_mobile_external_ipfs_accelerate_interop.py`,
+`docs/integration/mobile-external_ipfs_accelerate.md`,
+`src/handsfree/mobile_ipfs_accelerate_interop.py`,
+`mobile/src/orb/metaGlassesOrbDescriptors.js`,
+`mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js`,
+`external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql`,
+`external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py`,
+`external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py`, and
+`external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py`.
+
 ## Validation
 
 - `test -f /home/barberb/lift_coding/data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md`
