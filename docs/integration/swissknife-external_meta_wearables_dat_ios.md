@@ -102,8 +102,8 @@ and the attempt-3 confirmation in
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-736-attempt-3-validation-confirmation.md`
 and `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
 
-The HAO-758 merge retry-budget repair is recorded in
-`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-hao-736-merge-retry-budget.md`.
+The HAO-757 merge retry-budget repair is recorded in
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-757-hao-736-merge-retry-budget.md`.
 It resolves the recorded `submodule_merge_failed` handoff and verifies that
 top-level HAO-736 commit
 `203c9c72959a444fb46a44d31789a0f268df91d6` is reachable from merge commit
