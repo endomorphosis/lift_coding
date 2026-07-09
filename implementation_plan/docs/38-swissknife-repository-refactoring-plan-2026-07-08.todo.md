@@ -1183,7 +1183,7 @@ Fresh scan inputs:
 
 ## SWR-072 Remove restored root service duplicates and retarget imports
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: refactor/services
 - Dedupe key: swissknife_refactor:remove_restored_root_service_duplicates
