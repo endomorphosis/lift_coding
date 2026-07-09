@@ -1249,7 +1249,7 @@ Fresh scan inputs:
 
 ## SWR-078 Re-verify browser ZKP uses real TS/WASM paths after service cleanup
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/zkp
 - Dedupe key: swissknife_refactor:post_dedup_real_zkp_browser_gate
