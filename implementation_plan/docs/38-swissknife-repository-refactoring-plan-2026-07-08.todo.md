@@ -1216,7 +1216,7 @@ Fresh scan inputs:
 
 ## SWR-075 Reconcile web JavaScript libp2p runtime with canonical TypeScript services
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/libp2p
 - Dedupe key: swissknife_refactor:web_js_libp2p_runtime_reconciliation
