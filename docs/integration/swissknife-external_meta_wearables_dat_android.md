@@ -1,6 +1,6 @@
 # SwissKnife / external/meta-wearables-dat-android Interop
 
-HAO-735 repairs the VAIOS-G705 objective validation gap for the shared
+VAI-666 repairs the VAIOS-G705 objective validation gap for the shared
 `goal_packet/interoperability/swissknife/06921590135c` packet covering
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
@@ -49,6 +49,12 @@ path is:
   `buildSwissKnifeMetaWearablesDATAndroidControlSurfaceContract()` /
   `buildSwissKnifeMetaWearablesDATAndroidInteractionEnvelope()` to build
   representative control-surface and interaction-envelope payloads.
+- `swissknife/src/services/mcp/meta-wearables-dat-android-display-interop-descriptor.ts`
+  also exports `buildSwissKnifeMetaWearablesDATAndroidMCPPlusPlusCompatibilityReceipt()`,
+  whose `VAI-666` receipt validates against
+  `swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json` and
+  links the policy-mediated invocation to
+  `swissknife/contracts/mediation_receipt.schema.json`.
 - `swissknife/contracts/control_surface_contract.schema.json` and
   `swissknife/contracts/interaction_envelope.schema.json` validate those
   SwissKnife-to-`external/meta-wearables-dat-android` control surface and
@@ -92,7 +98,6 @@ builder, statically inspects the SwissKnife TypeScript descriptor module for
 the expected exports/goal-packet metadata, validates representative
 SwissKnife control-surface, interaction-envelope, and MCP++ compatibility
 receipt payloads, and asserts this objective validation repair is recorded in
-`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-735-validation-repair.md`,
-`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-574-objective-validation-repair.md`,
+`data/virtual_ai_os/discovery/2026-07-08-vai-666-objective-validation-repair.md`,
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
