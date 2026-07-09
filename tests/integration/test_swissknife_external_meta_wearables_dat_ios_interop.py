@@ -425,6 +425,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-736-attempt-3-validation-confirmation.md"
     )
+    merge_retry_repair = read_text(
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-hao-736-merge-retry-budget.md"
+    )
     gap = read_text(
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md"
     )
@@ -461,3 +465,18 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         assert goal_id in attempt_3_confirmation
         assert goal_id in heap
     assert "VAIOS-G706" in gap
+
+    repair_terms = [
+        "HAO-758",
+        "HAO-736",
+        "submodule_merge_failed",
+        "203c9c72959a444fb46a44d31789a0f268df91d6",
+        "846b52020a676bb82fd6cefac2d8f5d3b770052b",
+        "f4b40fc4d18ea4a7736508a6230430efcbe3c219",
+        "b34fadb6edb66e834ea3dff9a463fb2b175feef5",
+        "ipfs-accelerate-agent-merge-resolver --events-path ... --apply",
+        "blocked_tasks",
+    ]
+    for content in (docs, merge_retry_repair, heap):
+        for term in repair_terms:
+            assert term in content, f"missing HAO-758 repair term {term!r}"

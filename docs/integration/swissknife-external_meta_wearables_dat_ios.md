@@ -101,3 +101,15 @@ with the attempt-2 confirmation in
 and the attempt-3 confirmation in
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-736-attempt-3-validation-confirmation.md`
 and `implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`.
+
+The HAO-758 merge retry-budget repair is recorded in
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-hao-736-merge-retry-budget.md`.
+It resolves the recorded `submodule_merge_failed` handoff and verifies that
+top-level HAO-736 commit
+`203c9c72959a444fb46a44d31789a0f268df91d6` is reachable from merge commit
+`846b52020a676bb82fd6cefac2d8f5d3b770052b`, and that SwissKnife commit
+`f4b40fc4d18ea4a7736508a6230430efcbe3c219` is reachable from current
+SwissKnife gitlink `b34fadb6edb66e834ea3dff9a463fb2b175feef5`. No semantic
+conflict or unmerged path remained, so
+`ipfs-accelerate-agent-merge-resolver --events-path ... --apply` was not
+applicable for this repair; HAO-736 is released from lane 1 `blocked_tasks`.
