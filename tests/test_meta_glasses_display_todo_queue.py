@@ -248,6 +248,17 @@ def test_meta_glasses_supervisor_wrapper_uses_active_accelerate_runner(monkeypat
     assert "swissknife/docs/validation/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert supervisor_module.DAEMON_SCRIPT_PATH.name == "meta_glasses_display_todo_daemon.py"
     assert "swissknife" in supervisor_module.META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
+    # Regression guard for MGW-592: every interoperability component path that
+    # integration tests depend on must also be auto-initialized for new
+    # worktrees, otherwise `python -m pytest tests/integration -q` fails with
+    # "descriptors missing" errors for submodules that were never checked out.
+    for interop_component_path in (
+        "external/meta-wearables-dat-android",
+        "external/meta-wearables-dat-ios",
+        "Mcp-Plus-Plus",
+    ):
+        assert interop_component_path in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS
+        assert interop_component_path in supervisor_module.META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
     assert (
         daemon_module.META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
         == supervisor_module.META_GLASSES_DISPLAY_WORKTREE_SUBMODULE_PATHS
