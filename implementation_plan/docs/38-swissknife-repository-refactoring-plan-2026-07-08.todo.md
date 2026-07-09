@@ -898,7 +898,7 @@ state observation.
 
 ## SWR-052 Final browser compatibility release candidate gate
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/release
 - Fingerprint: d6a1cfca1cdb32b1a340ac0e6c47345a61cc4a32
