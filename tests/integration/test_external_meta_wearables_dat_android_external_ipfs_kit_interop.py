@@ -50,6 +50,11 @@ HAO_DISCOVERY_PATH = (
     / "data/hallucinate_multimodal_control/discovery/"
     "2026-07-08-hao-739-objective-validation-repair.md"
 )
+HAO_ATTEMPT_6_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data/hallucinate_multimodal_control/discovery/"
+    "2026-07-09-hao-739-attempt-6-objective-validation-repair.md"
+)
 GAP_PATH = (
     REPO_ROOT
     / "data/hallucinate_multimodal_control/discovery/"
@@ -85,6 +90,10 @@ def test_expected_external_descriptors_exist_on_disk() -> None:
             "data/hallucinate_multimodal_control/discovery/"
             "2026-07-08-hao-739-objective-validation-repair.md"
         ),
+        (
+            "data/hallucinate_multimodal_control/discovery/"
+            "2026-07-09-hao-739-attempt-6-objective-validation-repair.md"
+        ),
     ]
     for relative_path in expected_paths:
         assert (REPO_ROOT / relative_path).is_file(), f"missing {relative_path}"
@@ -119,6 +128,7 @@ def test_discover_ipfs_kit_bucket_vfs_contract_finds_mcp_and_ipld_surface() -> N
     )
     assert set(REQUIRED_BUCKET_TYPES) == set(contract.bucket_types)
     assert set(REQUIRED_VFS_STRUCTURE_TYPES) == set(contract.vfs_structure_types)
+    assert set(contract.bucket_types).isdisjoint(set(contract.vfs_structure_types))
     assert set(REQUIRED_DAG_PB_MESSAGES) == set(contract.dag_pb_messages)
     for relative_path in REQUIRED_FIX_MCP_SCHEMA_PATHS:
         assert any(path.endswith(relative_path) for path in contract.fix_mcp_schema_paths)
@@ -245,6 +255,9 @@ def test_docs_discovery_gap_and_heap_record_objective_validation_repair() -> Non
     doc_source = DOC_PATH.read_text(encoding="utf-8")
     discovery_source = DISCOVERY_PATH.read_text(encoding="utf-8")
     hao_discovery_source = HAO_DISCOVERY_PATH.read_text(encoding="utf-8")
+    hao_attempt_6_discovery_source = HAO_ATTEMPT_6_DISCOVERY_PATH.read_text(
+        encoding="utf-8"
+    )
     gap_source = GAP_PATH.read_text(encoding="utf-8")
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
 
@@ -268,14 +281,23 @@ def test_docs_discovery_gap_and_heap_record_objective_validation_repair() -> Non
         "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md",
         "external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto",
     ]
-    for source in (doc_source, discovery_source, hao_discovery_source, heap_source):
+    for source in (
+        doc_source,
+        discovery_source,
+        hao_discovery_source,
+        hao_attempt_6_discovery_source,
+        heap_source,
+    ):
         for term in required_terms:
             assert term in source, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in hao_discovery_source
+        assert goal_id in hao_attempt_6_discovery_source
         assert goal_id in discovery_source
         assert goal_id in heap_source
     assert "VAIOS-G711" in gap_source
     assert "objective validation repair" in gap_source
     assert "Status: completed" in heap_source
     assert "Completion validation: python -m pytest tests/integration -q" in heap_source
+    assert "2026-07-09-hao-739-attempt-6-objective-validation-repair.md" in doc_source
+    assert "2026-07-09-hao-739-attempt-6-objective-validation-repair.md" in heap_source
