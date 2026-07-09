@@ -814,7 +814,7 @@ state observation.
 
 ## SWR-045 Perform final SwissKnife merge dry-run and residual-risk signoff
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/integration
 - Fingerprint: dff3b9b093c005b7ab7c0a8249f6317af8e0371f
