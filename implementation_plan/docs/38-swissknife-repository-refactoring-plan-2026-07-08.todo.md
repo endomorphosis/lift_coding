@@ -934,7 +934,7 @@ state observation.
 
 ## SWR-055 Add real-device browser test checklist and evidence template
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/evidence
 - Fingerprint: 602b2e3a51c967e810f069e38f495d5f5a9b3b8a
