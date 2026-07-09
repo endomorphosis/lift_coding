@@ -802,7 +802,7 @@ state observation.
 
 ## SWR-044 Wire phase-11 browser hardening into release readiness
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/release
 - Fingerprint: f50803f4ba49799d1c883541021d367fc1055671
