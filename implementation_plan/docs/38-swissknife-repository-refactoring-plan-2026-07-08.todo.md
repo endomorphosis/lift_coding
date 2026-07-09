@@ -1077,7 +1077,7 @@ Current duplicate-risk scan:
 
 ## SWR-065 Make browser libp2p the default in web-facing service consumers
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/libp2p
 - Dedupe key: swissknife_refactor:libp2p_browser_default_consumers
