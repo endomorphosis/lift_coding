@@ -874,7 +874,7 @@ state observation.
 
 ## SWR-050 Add browser observability without host leakage
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/observability
 - Fingerprint: 54e483ab7c968ed4399aa4e6d5d682c9dd5d6a0e
