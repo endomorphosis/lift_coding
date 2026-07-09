@@ -2348,6 +2348,56 @@ def test_mgw_590_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
         assert term in shared_mgw_receipt_source
 
 
+def test_mgw_590_attempt_4_validation_keeps_launch_playwright_gate_aligned():
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
+    attempt_source = MGW_590_ATTEMPT_4_VALIDATION_PATH.read_text(encoding="utf-8")
+    goals = {goal.goal_id: goal for goal in parse_goal_heap(heap_source)}
+    g724_text = " ".join([*goals["VAIOS-G724"].fields.keys(), *goals["VAIOS-G724"].fields.values()])
+    g728_text = " ".join([*goals["VAIOS-G728"].fields.keys(), *goals["VAIOS-G728"].fields.values()])
+
+    for term in (
+        "MGW-590",
+        "Attempt: 4",
+        "VAIOS-G728",
+        "VAIOS-G724",
+        "MGW-589",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "gate_closed_by_playwright_validation",
+        "daemon-launch-health.spec.ts",
+        "multimodal-control-surface.spec.ts",
+        "test:e2e:meta-glasses",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md:3938",
+    ):
+        assert term in attempt_source
+
+    for term in (
+        "mgw_590_attempt_4_validation",
+        "2026-07-09-mgw-590-attempt-4-validation.md",
+        "VAIOS-G728",
+        "VAIOS-G724",
+        "MGW-589",
+        "goal_packet/launch/hallucinate_app/44dceea6bc53",
+        "launch Playwright validation gate",
+        "gate_closed_by_playwright_validation",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+    ):
+        assert term in g728_text
+
+    assert "VAIOS-G728" in g724_text
+    assert "VAIOS-G724" in g728_text
+
+
 def test_vai_565_daemon_launch_gate_aligns_virtual_ai_os_backlog_with_objective_heap():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
