@@ -1238,7 +1238,7 @@ Fresh scan inputs:
 
 ## SWR-077 Refresh browser inventory and no-host-leakage evidence after cleanup
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/security
 - Dedupe key: swissknife_refactor:post_dedup_browser_inventory_no_host_leakage
