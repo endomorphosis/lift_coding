@@ -92,6 +92,9 @@ HAO_745_DAEMON_LAUNCH_GATE_PATH = (
 HAO_755_DAEMON_LAUNCH_GATE_PATH = (
     DISCOVERY_ROOT / "2026-07-08-hao-755-daemon-launch-health-gate.md"
 )
+HAO_745_ATTEMPT_5_VALIDATION_PATH = (
+    DISCOVERY_ROOT / "2026-07-09-hao-745-attempt-5-validation.md"
+)
 HAO_755_ATTEMPT_4_VALIDATION_PATH = (
     DISCOVERY_ROOT / "2026-07-08-hao-755-attempt-4-validation.md"
 )
@@ -1704,6 +1707,57 @@ def test_hao_daemon_launch_gates_align_with_objective_heap():
         ):
             assert term in receipt_source
             assert term in g728_text
+
+        if task_id == "HAO-745":
+            attempt_source = HAO_745_ATTEMPT_5_VALIDATION_PATH.read_text(encoding="utf-8")
+            assert receipt["gate_state"] == "gate_closed_by_playwright_validation"
+            assert receipt["attempt"] == 5
+            assert receipt["attempt_receipt"].endswith("2026-07-09-hao-745-attempt-5-validation.md")
+            assert receipt["attempt_receipts"] == [receipt["attempt_receipt"]]
+            assert receipt["packet_sibling_task_id"] == "HAO-744"
+            assert receipt["packet_sibling_goal_id"] == "VAIOS-G724"
+            assert receipt["launch_playwright_validation_gate_coverage"]["status"] == "closed"
+            assert receipt["launch_playwright_validation_gate_coverage"]["missing"] == []
+            assert receipt["launch_playwright_validation_gate_coverage"][
+                "swissknife_handoff_verified"
+            ] is True
+            for term in (
+                "HAO-745",
+                "Attempt: 5",
+                "VAIOS-G728",
+                "VAIOS-G724",
+                "goal_packet/launch/hallucinate_app/44dceea6bc53",
+                "launch Playwright validation gate",
+                "gate_closed_by_playwright_validation",
+                "daemon-launch-health.spec.ts",
+                "multimodal-control-surface.spec.ts",
+                "test:e2e:meta-glasses",
+                "ipfs_accelerate_py",
+                "ipfs_datasets_py",
+                "ipfs_kit_py",
+                "external/ipfs_accelerate",
+                "external/ipfs_datasets",
+                "external/ipfs_kit",
+            ):
+                assert term in attempt_source
+
+            for term in (
+                "hao_745_attempt_5_validation",
+                "2026-07-09-hao-745-attempt-5-validation.md",
+                "gate_closed_by_playwright_validation",
+                "HAO-744",
+                "VAIOS-G728",
+                "VAIOS-G724",
+                "goal_packet/launch/hallucinate_app/44dceea6bc53",
+                "launch Playwright validation gate",
+                "daemon-launch-health.spec.ts",
+                "multimodal-control-surface.spec.ts",
+                "test:e2e:meta-glasses",
+                "ipfs_accelerate_py",
+                "ipfs_datasets_py",
+                "ipfs_kit_py",
+            ):
+                assert term in g728_text
 
         if task_id == "HAO-755":
             attempt_source = HAO_755_ATTEMPT_4_VALIDATION_PATH.read_text(encoding="utf-8")
