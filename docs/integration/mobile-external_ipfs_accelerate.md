@@ -3,8 +3,8 @@
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
 `objective/interoperability/mobile-external_ipfs_accelerate` bundle. MGW-596
 revalidates that objective validation repair for the current
-meta_glasses_display_widgets supervisor gate, and HAO-741 attempt 2 records
-the hallucinate_multimodal_control validation-gate repair for the same
+meta_glasses_display_widgets supervisor gate, and HAO-741 attempt 3 records
+the active hallucinate_multimodal_control validation-gate repair for the same
 objective gap fingerprint `c1edafa875e6`.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
@@ -41,6 +41,9 @@ The repaired `interface contract mobile external/ipfs_accelerate` path is:
 - `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the interop
   descriptor during edge capability registration and keeps diagnostics
   parseable after the contract wiring.
+- `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md`
+  is the active HAO-741 attempt-3 validation repair record; attempt 1,
+  attempt 2, attempt 4, and HAO-748 remain preserved as lineage evidence.
 
 ## Runtime handoff
 

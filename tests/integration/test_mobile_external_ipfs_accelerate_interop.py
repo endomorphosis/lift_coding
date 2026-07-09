@@ -200,11 +200,15 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
     )
     assert descriptor["validation"]["active_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+        "2026-07-08-hao-741-objective-validation-repair.md"
     )
     assert "HAO-741" in descriptor["validation"]["validation_repair_tasks"]
     assert "MGW-596" in descriptor["validation"]["validation_repair_tasks"]
     assert descriptor["validation"]["hao_741_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_3_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-741-objective-validation-repair.md"
     )
@@ -240,6 +244,14 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["interface_contract"] == "interface contract mobile external/ipfs_accelerate"
     assert contract["goal_id"] == GOAL_ID
     assert contract["active_validation_repair_task_id"] == "HAO-741"
+    assert contract["active_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    )
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
     assert (
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
@@ -395,6 +407,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     )
     assert hao_741_repair_record in docs
     assert hao_741_repair_record in heap
+    assert hao_741_repair_record in hao_741_repair
     assert hao_741_attempt_one_record in docs
     assert hao_741_attempt_one_record in heap
     assert hao_741_attempt_two_record in docs
