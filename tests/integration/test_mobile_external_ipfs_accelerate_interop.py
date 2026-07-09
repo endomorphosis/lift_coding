@@ -200,7 +200,7 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
     )
     assert descriptor["validation"]["active_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-741-objective-validation-repair.md"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
     )
     assert "HAO-741" in descriptor["validation"]["validation_repair_tasks"]
     assert "MGW-596" in descriptor["validation"]["validation_repair_tasks"]
@@ -219,6 +219,10 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
     assert descriptor["validation"]["hao_741_attempt_2_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_4_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
     )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
@@ -246,11 +250,11 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["active_validation_repair_task_id"] == "HAO-741"
     assert contract["active_validation_repair_ref"] == (
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-741-objective-validation-repair.md"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
     )
     assert (
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-741-objective-validation-repair.md"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
     ) in contract["validation_repair_refs"]
     assert (
         "data/hallucinate_multimodal_control/discovery/"
@@ -320,6 +324,11 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_four_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     attempt_four = (
         REPO_ROOT
@@ -405,6 +414,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
     )
+    hao_741_attempt_four_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
+    )
     assert hao_741_repair_record in docs
     assert hao_741_repair_record in heap
     assert hao_741_repair_record in hao_741_repair
@@ -412,6 +425,9 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     assert hao_741_attempt_one_record in heap
     assert hao_741_attempt_two_record in docs
     assert hao_741_attempt_two_record in heap
+    assert hao_741_attempt_four_record in docs
+    assert hao_741_attempt_four_record in heap
+    assert hao_741_attempt_four_record in hao_741_attempt_four_repair
 
     mgw_596_terms = [
         "MGW-596",
@@ -457,6 +473,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         hao_741_repair,
         hao_741_attempt_one_repair,
         hao_741_attempt_two_repair,
+        hao_741_attempt_four_repair,
         heap,
     ):
         for term in hao_741_terms:
