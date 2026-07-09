@@ -427,7 +427,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     )
     merge_retry_repair = read_text(
         "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-09-hao-758-hao-736-merge-retry-budget.md"
+        "2026-07-09-hao-757-hao-736-merge-retry-budget.md"
     )
     gap = read_text(
         "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-736-objective-gap-d6bdae3a60cc.md"
@@ -467,7 +467,7 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     assert "VAIOS-G706" in gap
 
     repair_terms = [
-        "HAO-758",
+        "HAO-757",
         "HAO-736",
         "submodule_merge_failed",
         "203c9c72959a444fb46a44d31789a0f268df91d6",
@@ -479,4 +479,4 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     ]
     for content in (docs, merge_retry_repair, heap):
         for term in repair_terms:
-            assert term in content, f"missing HAO-758 repair term {term!r}"
+            assert term in content, f"missing HAO-757 repair term {term!r}"
