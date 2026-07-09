@@ -29,8 +29,9 @@ because `hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`,
 `launch Playwright validation gate` for Hallucinate App daemon health,
 daemon launcher, MCP server, MCP dashboard, `ipfs_kit_py`, `ipfs_datasets_py`,
 `ipfs_accelerate_py`, external surfaces `external/ipfs_kit`,
-`external/ipfs_datasets`, and `external/ipfs_accelerate`, dashboard
-capability catalog, and Swissknife applications.
+`external/ipfs_datasets`, and `external/ipfs_accelerate`, the shared
+"dashboard capability catalog", and Swissknife applications. The gate state
+remains `gate_closed_by_playwright_validation` for this fresh worktree run.
 
 ## Evidence Stack
 
