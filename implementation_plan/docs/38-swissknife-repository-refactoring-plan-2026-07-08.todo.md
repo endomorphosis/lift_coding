@@ -778,7 +778,7 @@ state observation.
 
 ## SWR-042 Remediate residual browser inventory host-only and unknown items
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/browser-inventory
 - Fingerprint: 55ca9a9299dc0cff5d92eab5978750568d1e956a
@@ -823,3 +823,87 @@ state observation.
 - Outputs: swissknife/docs/refactor-merge-package.md, swissknife/docs/refactor-final-signoff.md
 - Validation: cd swissknife && test -f docs/refactor-final-signoff.md && npm run release:readiness && git status --short && git log --oneline -30
 - Acceptance: Final signoff documents the merge dry-run result, exact commits to merge, release-readiness output, residual browser-compatibility risks, and rollback plan; no unrelated root-repo changes are included in the SwissKnife merge package without explicit operator approval.
+
+## SWR-046 Add browser package-consumer fixture
+
+- Status: todo
+- Priority: P1
+- Track: refactor/package-browser-api
+- Fingerprint: 7c7d3ff03ed3c507f8731b9d90c252798b3439b6
+- Dedupe key: swissknife_refactor:browser_package_consumer_fixture
+- Depends on: SWR-037, SWR-044
+- Outputs: swissknife/test/browser/package-consumer-fixture, swissknife/docs/browser-public-api.md, swissknife/scripts/test-browser-package-consumer.mjs
+- Validation: cd swissknife && node scripts/test-browser-package-consumer.mjs && npm run build:web
+- Acceptance: A minimal browser-only consumer can import the published browser/API surface without Node builtins, filesystem, subprocess, Python, native binary, terminal UI, or host-only SDK dependencies; failures produce concrete import-chain evidence.
+
+## SWR-047 Add browser libp2p bootstrap and relay matrix
+
+- Status: todo
+- Priority: P1
+- Track: refactor/libp2p
+- Fingerprint: a931c507f55e54d2ae94df29ab0b6e73f5b59c6d
+- Dedupe key: swissknife_refactor:browser_libp2p_bootstrap_relay_matrix
+- Depends on: SWR-034, SWR-039, SWR-043
+- Outputs: swissknife/docs/browser-libp2p-bootstrap-matrix.md, swissknife/test/e2e/libp2p-bootstrap-matrix.spec.ts, swissknife/src/services/mcp/libp2p-browser-runtime.ts
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.libp2p-browser.config.ts --grep "bootstrap|relay|capability"
+- Acceptance: Browser libp2p evidence covers default bootstrap behavior, relay-only fallback, WebRTC unavailable mode, WebSocket-only mode, GossipSub availability, and explicit capability-gap reporting without simulated transports.
+
+## SWR-048 Add service worker and offline cache compatibility gate
+
+- Status: todo
+- Priority: P2
+- Track: refactor/browser-deployment
+- Fingerprint: 98424b6635af1d51036ff045f5705070498c8f3f
+- Dedupe key: swissknife_refactor:service_worker_offline_cache_gate
+- Depends on: SWR-041, SWR-043
+- Outputs: swissknife/docs/browser-offline-cache-policy.md, swissknife/test/e2e/browser-offline-cache.spec.ts, swissknife/scripts/audit-browser-offline-cache.mjs
+- Validation: cd swissknife && node scripts/audit-browser-offline-cache.mjs --report docs/browser-offline-cache-policy.md && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.browser-smoke.config.ts --grep "offline|cache|service worker"
+- Acceptance: Offline/cache behavior is explicit for the browser build; service worker, Cache Storage, IndexedDB, OPFS, WASM artifacts, and libp2p bootstrap assets are either cached safely or documented as online-only with user-visible capability state.
+
+## SWR-049 Add browser security headers and cross-origin isolation evidence
+
+- Status: todo
+- Priority: P1
+- Track: refactor/browser-security
+- Fingerprint: 17d72bd7d7f0c55d375a7c3533c172831c4764a0
+- Dedupe key: swissknife_refactor:browser_security_headers_isolation
+- Depends on: SWR-040, SWR-041, SWR-048
+- Outputs: swissknife/docs/browser-security-isolation.md, swissknife/scripts/audit-browser-security-headers.mjs, swissknife/build-tools/configs
+- Validation: cd swissknife && node scripts/audit-browser-security-headers.mjs --report docs/browser-security-isolation.md && npm run build:web
+- Acceptance: The browser deployment plan documents and validates CSP, COOP, COEP, CORP, worker-src, connect-src for libp2p/WebSocket/gateway traffic, WASM execution requirements, and secure fallback behavior when cross-origin isolation is unavailable.
+
+## SWR-050 Add browser observability without host leakage
+
+- Status: todo
+- Priority: P2
+- Track: refactor/observability
+- Fingerprint: 54e483ab7c968ed4399aa4e6d5d682c9dd5d6a0e
+- Dedupe key: swissknife_refactor:browser_observability_no_host_leakage
+- Depends on: SWR-038, SWR-043, SWR-049
+- Outputs: swissknife/docs/browser-observability-policy.md, swissknife/src/platform/browser.ts, swissknife/scripts/audit-browser-observability.mjs
+- Validation: cd swissknife && node scripts/audit-browser-observability.mjs --report docs/browser-observability-policy.md && npm run build:web && node scripts/audit-web-bundle.mjs --fail-on-host-leakage
+- Acceptance: Browser diagnostics expose libp2p, IPFS, storage, worker, WASM, and ZKP capability states using browser-safe telemetry only; no Node OpenTelemetry/Sentry server SDK, filesystem logs, process metrics, or host exporters enter browser bundles.
+
+## SWR-051 Add browser API contract tests for MCP, IPFS, storage, workers, and ZKP
+
+- Status: todo
+- Priority: P1
+- Track: refactor/browser-contracts
+- Fingerprint: 94adef36bb31510610ebc7ed88201f1182419828
+- Dedupe key: swissknife_refactor:browser_api_contract_tests
+- Depends on: SWR-042, SWR-046, SWR-047, SWR-050
+- Outputs: swissknife/test/browser/browser-api-contracts.test.ts, swissknife/docs/browser-api-contracts.md
+- Validation: cd swissknife && npm run test:browser-compat && npm run test:run -- test/browser/browser-api-contracts.test.ts
+- Acceptance: Browser API contract tests exercise MCP transport status, IPFS browser adapters, storage browser adapters, Web Worker adapters, real WASM/ZKP availability, and explicit unavailable states for host-only capabilities.
+
+## SWR-052 Final browser compatibility release candidate gate
+
+- Status: todo
+- Priority: P1
+- Track: refactor/release
+- Fingerprint: d6a1cfca1cdb32b1a340ac0e6c47345a61cc4a32
+- Dedupe key: swissknife_refactor:final_browser_compat_release_candidate_gate
+- Depends on: SWR-045, SWR-046, SWR-047, SWR-048, SWR-049, SWR-050, SWR-051
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/release-readiness-report.md, swissknife/docs/browser-compatibility-inventory.md
+- Validation: cd swissknife && npm run release:readiness && node scripts/audit-browser-compat.mjs --report docs/browser-compatibility-inventory.md && git status --short
+- Acceptance: The final release-candidate gate proves the browser build is host-leak-free, libp2p is browser-enabled by default with evidence, Python/Pyodide are non-default optional/sandboxed paths, WASM/ZKP assets are integrity-audited, browser package exports are safe, and residual risks are documented before merge.
