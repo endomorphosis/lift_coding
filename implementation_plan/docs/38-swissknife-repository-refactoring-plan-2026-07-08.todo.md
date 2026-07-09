@@ -1194,7 +1194,7 @@ Fresh scan inputs:
 
 ## SWR-073 Rename legacy sprint service files into descriptive module-owned files
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: refactor/services
 - Dedupe key: swissknife_refactor:remove_sprint_named_services_regression
