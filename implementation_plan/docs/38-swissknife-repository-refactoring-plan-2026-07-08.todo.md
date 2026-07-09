@@ -1205,7 +1205,7 @@ Fresh scan inputs:
 
 ## SWR-074 Canonicalize logic language and deontic NLP service ownership
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: refactor/logic
 - Dedupe key: swissknife_refactor:logic_language_deontic_nlp_ownership
