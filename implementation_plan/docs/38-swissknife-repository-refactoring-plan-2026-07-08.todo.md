@@ -1004,3 +1004,139 @@ state observation.
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail (passes on 2026-07-09; `stuck: False`, `active_task_id: SWR-060`, `completed_count: 59`, `blocked_task_ids: []` while this closeout attempt was still active)
 - Closeout: `swissknife/docs/refactor-final-signoff.md` records the SWR task accounting, validation evidence for SWR-052 through SWR-059, generated follow-up board state, merge-readiness state, supervisor state paths, and residual browser-compatibility risks. `swissknife/docs/supervisor-refactor-runbook.md` records the bounded parse command, expected final task-count interpretation, state review commands, follow-up board handling, and merge handoff checklist.
 - Acceptance: Final closeout report records task completion counts, validation evidence, generated follow-up boards, merge-readiness state, supervisor state paths, and any remaining browser-compatibility risks; no active SWR tasks remain unaccounted for. All SWR tasks in this board are now accounted for as completed in durable task metadata.
+
+## Phase 13: Service De-Duplication And Browser Runtime Hardening
+
+This phase reopens the supervisor queue after the SWR-060 closeout because the
+working tree may contain restored or parallel service files. Start with service
+duplicate cleanup, then continue the repository refactor with browser/libp2p as
+the default runtime target. The browser contract remains: no Python wrapper,
+native subprocess, Node-only builtin, simulated ZKP fallback, or host-only
+libp2p path may be used by default from browser entrypoints.
+
+Current duplicate-risk scan:
+
+- No byte-identical duplicates were found under `swissknife/src/services`.
+- Duplicate basenames requiring ownership decisions:
+  - `logic-formatter.ts`: `src/services/fol-utils` and `src/services/fol`.
+  - `nlp-predicate-extractor.ts`: `src/services/fol-utils` and root `src/services`.
+  - `spacy-wasm-nlp.ts`: root shim and `src/services/integrations`.
+  - `zkp-ucan-bridge.ts`: root implementation and `src/services/zkp`.
+  - `index.ts`: intentional per-module barrels unless audit proves otherwise.
+- Legacy sprint-named service files requiring descriptive module-owned names:
+  `cec-sprint63-utils.ts`, `sprint64-modules.ts`,
+  `sprint65-storage-parsers.ts`, `sprint65-utils.ts`,
+  `sprint66-dcec-types.ts`, `sprint66-prover-utils.ts`,
+  `sprint67-crypto-utils.ts`, `sprint67-groth16-cec.ts`,
+  `sprint67-nlp-types.ts`, `sprint68-eth-bridge.ts`,
+  `sprint68-prover-wrappers.ts`, and `sprint68-utils-types.ts`.
+
+## SWR-061 Audit and remediate restored duplicate service files
+
+- Status: completed
+- Priority: P0
+- Track: refactor/services
+- Dedupe key: swissknife_refactor:service_duplicate_remediation
+- Depends on: SWR-060
+- Outputs: swissknife/docs/services-duplicate-file-audit.md, swissknife/docs/service-boundary-audit.json, swissknife/src/module-ownership.json
+- Validation: cd swissknife && npm run services:audit
+- Acceptance: Produce a durable duplicate-file audit that distinguishes intentional module barrels from accidental restored files; consolidate or remove accidental root service duplicates; update imports to canonical module-owned paths; preserve compatibility only where explicitly documented as a temporary deprecation bridge; keep the service audit strict with no unknown files, no forbidden imports, and no legacy root import specifiers.
+
+## SWR-062 Rename legacy sprint service files into descriptive owned modules
+
+- Status: pending
+- Priority: P0
+- Track: refactor/services
+- Dedupe key: swissknife_refactor:rename_legacy_sprint_services
+- Depends on: SWR-061
+- Outputs: swissknife/docs/services-sprint-rename-map.md, swissknife/src/services/MODULE_BOUNDARIES.md, swissknife/src/module-ownership.json
+- Validation: cd swissknife && npm run services:audit && ! find src/services -type f -name '*sprint*' | grep .
+- Acceptance: Replace sprint-number filenames with descriptive module-owned names, update all imports and tests, document the rename map for reviewers, and avoid long-lived sprint compatibility shims unless an external public import is proven and recorded with an explicit deprecation date.
+
+## SWR-063 Define canonical service public APIs after duplicate cleanup
+
+- Status: pending
+- Priority: P0
+- Track: refactor/services
+- Dedupe key: swissknife_refactor:canonical_service_public_apis
+- Depends on: SWR-061, SWR-062
+- Outputs: swissknife/docs/source-module-boundaries.md, swissknife/src/services/MODULE_BOUNDARIES.md, swissknife/src/module-ownership.json
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services
+- Acceptance: Each service family exposes one canonical browser-safe or environment-neutral public API barrel; root-level service imports are either removed or documented as host-only/deprecated; internal helpers stay within their owning module; cross-module imports go through documented public APIs.
+
+## SWR-064 Re-run browser compatibility inventory after service de-duplication
+
+- Status: pending
+- Priority: P0
+- Track: browser/refactor
+- Dedupe key: swissknife_refactor:post_duplicate_browser_inventory
+- Depends on: SWR-063
+- Outputs: swissknife/docs/browser-compatibility-inventory.md, swissknife/docs/browser-compatibility-report.json, swissknife/docs/browser-compatibility-inventory.json
+- Validation: cd swissknife && npm run browser:compat:inventory
+- Acceptance: Refresh the browser compatibility inventory after the service cleanup and prove that canonical service paths are classified correctly as browser-safe, host-only, optional sandbox, or test-only; any remaining unknown service item must have a follow-up task or a failing gate.
+
+## SWR-065 Make browser libp2p the default in web-facing service consumers
+
+- Status: pending
+- Priority: P0
+- Track: browser/libp2p
+- Dedupe key: swissknife_refactor:libp2p_browser_default_consumers
+- Depends on: SWR-063, SWR-064
+- Outputs: swissknife/src/services/mcp/libp2p-browser-runtime.ts, swissknife/web/js/apps/p2p-network.js, swissknife/web/js/apps/mcp-control.js, swissknife/docs/browser-smoke-matrix-evidence.md
+- Validation: cd swissknife && npm run test:browser-smoke
+- Acceptance: Web-facing MCP, P2P, and control-surface consumers instantiate the browser libp2p runtime by default where capability is available; unsupported capabilities surface typed browser capability states instead of silently falling back to host/native transports.
+
+## SWR-066 Enforce post-cleanup browser no-host-leakage gates
+
+- Status: pending
+- Priority: P0
+- Track: browser/security
+- Dedupe key: swissknife_refactor:post_cleanup_browser_no_host_leakage
+- Depends on: SWR-064, SWR-065
+- Outputs: swissknife/docs/browser-bundle-budget.md, swissknife/docs/browser-bundle-budget.json, swissknife/docs/browser-dependency-policy.md
+- Validation: cd swissknife && npm run audit:web-bundle && npm run audit:browser-lockfile
+- Acceptance: Browser bundles and dependency gates fail on accidental Node builtin imports, subprocess/filesystem bindings, Python wrapper paths, native prover shims, or host libp2p transports in browser entrypoints.
+
+## SWR-067 Prove browser ZKP paths use real TS/WASM proof backends by default
+
+- Status: pending
+- Priority: P0
+- Track: browser/zkp
+- Dedupe key: swissknife_refactor:browser_zkp_real_backend_regression_gate
+- Depends on: SWR-063, SWR-066
+- Outputs: swissknife/docs/browser-wasm-zkp-policy.md, swissknife/docs/browser-api-contracts.md, swissknife/test/browser/browser-api-contracts.test.ts
+- Validation: cd swissknife && npm run test:browser-api-contracts
+- Acceptance: Browser ZKP service contracts exercise real TS/WASM proof generation and verification by default; simulated/test-only provers are explicitly named, opt-in, and rejected by the default browser API contract gate.
+
+## SWR-068 Add browser package-consumer regression for canonical service APIs
+
+- Status: pending
+- Priority: P1
+- Track: browser/packaging
+- Dedupe key: swissknife_refactor:browser_package_consumer_canonical_services
+- Depends on: SWR-063, SWR-066, SWR-067
+- Outputs: swissknife/test/browser-compat/browser-entrypoints.test.js, swissknife/docs/browser-distribution-policy.md, swissknife/package.json
+- Validation: cd swissknife && npm run test:browser-entrypoints
+- Acceptance: A browser-like package consumer can import canonical service APIs, MCP/libp2p browser runtime, IPFS browser runtime, worker-safe helpers, and ZKP browser APIs without resolving host-only modules or Python/native wrapper code.
+
+## SWR-069 Refresh release readiness after service duplicate cleanup
+
+- Status: pending
+- Priority: P1
+- Track: release
+- Dedupe key: swissknife_refactor:post_duplicate_release_readiness
+- Depends on: SWR-064, SWR-065, SWR-066, SWR-067, SWR-068
+- Outputs: swissknife/docs/release-readiness-report.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: Release-readiness evidence is regenerated after duplicate cleanup and records service-boundary status, browser/libp2p default status, browser no-host-leakage status, ZKP real-backend status, and residual risks with no untracked active SWR tasks.
+
+## SWR-070 Supervisor handoff for the reopened service/browser refactor phase
+
+- Status: pending
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_13_supervisor_handoff
+- Depends on: SWR-061, SWR-062, SWR-063, SWR-064, SWR-065, SWR-066, SWR-067, SWR-068, SWR-069
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: The supervisor handoff records the reopened Phase 13 task accounting, evidence paths, validation commands, active process/state paths, and any remaining browser compatibility or service duplicate risks; no Phase 13 task remains unaccounted for.
