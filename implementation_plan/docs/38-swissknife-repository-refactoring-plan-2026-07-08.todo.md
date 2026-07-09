@@ -1044,7 +1044,7 @@ Current duplicate-risk scan:
 
 ## SWR-062 Rename legacy sprint service files into descriptive owned modules
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: refactor/services
 - Dedupe key: swissknife_refactor:rename_legacy_sprint_services
