@@ -1110,7 +1110,7 @@ Current duplicate-risk scan:
 
 ## SWR-068 Add browser package-consumer regression for canonical service APIs
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: browser/packaging
 - Dedupe key: swissknife_refactor:browser_package_consumer_canonical_services
