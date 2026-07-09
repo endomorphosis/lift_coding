@@ -1121,7 +1121,7 @@ Current duplicate-risk scan:
 
 ## SWR-069 Refresh release readiness after service duplicate cleanup
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: release
 - Dedupe key: swissknife_refactor:post_duplicate_release_readiness
