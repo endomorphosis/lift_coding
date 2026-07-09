@@ -353,18 +353,29 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
   },
   validation: {
-    task_id: 'VAI-674',
-    repair_task_id: 'VAI-684',
+    task_id: 'HAO-740',
+    repair_task_id: 'HAO-740',
+    related_repair_task_id: 'HAO-751',
     goal_id: 'VAIOS-G707',
     objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-objective-gap-7edb316279e5.md',
     validation_confirmation_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-740-attempt-1-objective-validation-repair.md',
     validation_repair_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-740-attempt-1-objective-validation-repair.md',
     attempt_validation_confirmation_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md',
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-740-attempt-1-objective-validation-repair.md',
     retry_budget_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md',
+    related_validation_repair_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md',
+    legacy_vai_objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md',
+    legacy_vai_validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md',
+    legacy_vai_attempt_validation_confirmation_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md',
+    legacy_vai_retry_budget_ref:
       'data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md',
     evidence: 'objective validation repair',
   },
