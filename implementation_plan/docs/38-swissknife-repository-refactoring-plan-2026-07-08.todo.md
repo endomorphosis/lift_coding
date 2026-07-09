@@ -922,7 +922,7 @@ state observation.
 
 ## SWR-054 Add browser dependency upgrade and lockfile drift gate
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/dependencies
 - Fingerprint: b18a8614f136f89ef99a5deceaa70a6193798e43
