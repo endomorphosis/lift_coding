@@ -994,12 +994,13 @@ state observation.
 
 ## SWR-060 Final supervisor closeout and handoff report
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/supervisor
 - Fingerprint: 69d64dbb72b34fc3938789f4a3dbd7a6d477b784
 - Dedupe key: swissknife_refactor:final_supervisor_closeout_handoff
 - Depends on: SWR-052, SWR-053, SWR-054, SWR-055, SWR-056, SWR-057, SWR-058, SWR-059
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
-- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
-- Acceptance: Final closeout report records task completion counts, validation evidence, generated follow-up boards, merge-readiness state, supervisor state paths, and any remaining browser-compatibility risks; no active SWR tasks remain unaccounted for.
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail (passes on 2026-07-09; `stuck: False`, `active_task_id: SWR-060`, `completed_count: 59`, `blocked_task_ids: []` while this closeout attempt was still active)
+- Closeout: `swissknife/docs/refactor-final-signoff.md` records the SWR task accounting, validation evidence for SWR-052 through SWR-059, generated follow-up board state, merge-readiness state, supervisor state paths, and residual browser-compatibility risks. `swissknife/docs/supervisor-refactor-runbook.md` records the bounded parse command, expected final task-count interpretation, state review commands, follow-up board handling, and merge handoff checklist.
+- Acceptance: Final closeout report records task completion counts, validation evidence, generated follow-up boards, merge-readiness state, supervisor state paths, and any remaining browser-compatibility risks; no active SWR tasks remain unaccounted for. All SWR tasks in this board are now accounted for as completed in durable task metadata.
