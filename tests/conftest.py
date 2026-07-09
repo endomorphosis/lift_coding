@@ -1,10 +1,12 @@
 """pytest configuration for HandsFree tests."""
 
 import contextlib
+import hashlib
 import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import uuid
 import warnings
@@ -60,11 +62,41 @@ def _path_has_files(path: Path) -> bool:
 # *entire* test session (not just the tests that needed the submodule),
 # which is indistinguishable from a real implementation/validation failure
 # to the retry-budget guardrail. The knobs below make the bootstrap retry
-# transient failures, time-box each attempt, and never let a bootstrap
-# failure abort collection.
+# transient failures, time-box each attempt, serialize concurrent attempts
+# without leaving untracked lock files in ``external/``, and never let a
+# bootstrap failure abort collection.
 _SUBMODULE_BOOTSTRAP_ATTEMPTS = int(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_ATTEMPTS", "3"))
 _SUBMODULE_BOOTSTRAP_RETRY_SECONDS = float(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_RETRY_SECONDS", "0.5"))
 _SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS = float(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS", "120"))
+
+
+def _repo_git_dir(repo_root: Path) -> Path | None:
+    git_path = repo_root / ".git"
+    if git_path.is_dir():
+        return git_path
+    if git_path.is_file():
+        try:
+            marker = git_path.read_text(encoding="utf-8").strip()
+        except OSError:
+            return None
+        prefix = "gitdir: "
+        if marker.startswith(prefix):
+            git_dir = Path(marker[len(prefix) :])
+            if not git_dir.is_absolute():
+                git_dir = repo_root / git_dir
+            return git_dir
+    return None
+
+
+def _submodule_bootstrap_lock_path(target: Path) -> Path:
+    repo_root = Path(__file__).resolve().parents[1]
+    git_dir = _repo_git_dir(repo_root)
+    if git_dir is not None:
+        lock_root = git_dir / "handsfree-submodule-bootstrap-locks"
+    else:
+        repo_digest = hashlib.sha256(str(repo_root).encode("utf-8")).hexdigest()[:16]
+        lock_root = Path(tempfile.gettempdir()) / "handsfree-submodule-bootstrap-locks" / repo_digest
+    return lock_root / f"{target.name}.lock"
 
 
 @contextlib.contextmanager
@@ -82,7 +114,7 @@ def _submodule_bootstrap_lock(target: Path):
         yield
         return
 
-    lock_path = target.parent / f".{target.name}.bootstrap.lock"
+    lock_path = _submodule_bootstrap_lock_path(target)
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     lock_file = open(lock_path, "a+")
     try:
