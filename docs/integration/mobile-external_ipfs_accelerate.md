@@ -43,9 +43,10 @@ The repaired `interface contract mobile external/ipfs_accelerate` path is:
 - `mobile/src/orb/metaGlassesMobileOrbBridge.js` advertises the interop
   descriptor during edge capability registration and keeps diagnostics
   parseable after the contract wiring.
-- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md`
-  is the active HAO-758 attempt-2 validation repair record;
+- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md`
+  is the active HAO-758 attempt-3 validation repair record;
   `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md`,
+  `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md`,
   HAO-741 attempt 1, attempt 2, attempt 3, attempt 4, attempt 5, attempt 6,
   attempt 7, the attempt-4 confirmation, and HAO-748 remain preserved as
   lineage evidence.
@@ -98,6 +99,7 @@ and the HAO-741 repair records
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-7-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md`,
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md`,
 `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md`
 and the objective heap
 (`implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md`).
