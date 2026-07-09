@@ -237,18 +237,29 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
     ],
   },
   validation: {
-    task_id: 'VAI-672',
-    active_validation_repair_task_id: 'VAI-686',
-    validation_repair_tasks: ['VAI-672', 'VAI-686'],
+    task_id: 'MGW-595',
+    implementation_task_id: 'VAI-672',
+    active_validation_repair_task_id: 'MGW-595',
+    validation_repair_tasks: ['VAI-672', 'VAI-686', 'MGW-580', 'MGW-595'],
     goal_id: 'VAIOS-G719',
     objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-gap-c1edafa875e6.md',
     validation_repair_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-validation-repair.md',
+    vai_672_objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
+    vai_672_validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
     vai_686_objective_gap_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-gap-c1edafa875e6.md',
     vai_686_validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md',
+    mgw_580_validation_repair_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md',
+    mgw_595_objective_gap_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-gap-c1edafa875e6.md',
+    mgw_595_validation_repair_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-validation-repair.md',
     evidence: 'objective validation repair',
   },
 };

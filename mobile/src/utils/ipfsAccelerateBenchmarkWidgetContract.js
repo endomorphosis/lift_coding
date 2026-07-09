@@ -36,11 +36,15 @@ export const IPFS_ACCELERATE_BENCHMARK_WIDGET_ACTION_CONTRACT = {
   interface_contract: 'interface contract mobile external/ipfs_accelerate',
   goal_id: 'VAIOS-G719',
   objective_validation_repair:
-    'VAI-672 and VAI-686 repair the VAIOS-G719 objective validation repair',
-  active_validation_repair_task_id: 'VAI-686',
+    'MGW-595 re-validates the VAIOS-G719 objective validation repair for the meta_glasses_display_widgets backlog',
+  active_validation_repair_task_id: 'MGW-595',
+  source_objective_gap_ref:
+    'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-gap-c1edafa875e6.md',
   validation_repair_refs: [
     'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
     'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md',
+    'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md',
+    'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-validation-repair.md',
   ],
   action_ids: BENCHMARK_WIDGET_ACTION_IDS,
   operation_by_action_id: BENCHMARK_WIDGET_ORB_OPERATION_BY_ACTION_ID,

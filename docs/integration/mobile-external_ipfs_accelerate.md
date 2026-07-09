@@ -1,8 +1,10 @@
 # Mobile / external/ipfs_accelerate Interop
 
-VAI-672 implemented the VAIOS-G719 objective validation repair and VAI-686
-re-validates that repair for the active backlog gate covering the
-`objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+VAI-672 implemented the VAIOS-G719 objective validation repair, VAI-686 and
+MGW-580 re-validated that repair for earlier backlog gates, and MGW-595 is the
+active validation repair for the `meta_glasses_display_widgets` backlog gate
+covering the `objective/interoperability/mobile-external_ipfs_accelerate`
+bundle.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -63,9 +65,15 @@ verifies the DuckDB schema descriptors under `external/ipfs_accelerate`
 exist and declare the expected tables/functions, loads the JavaScript
 descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
-objective validation repair is recorded in
+objective validation repair is recorded in the active MGW-595 source gap
+`data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-gap-c1edafa875e6.md`,
+the active MGW-595 repair record
+`data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-validation-repair.md`,
+the prior MGW-580 repair record
+`data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-580-objective-validation-repair.md`,
+the original VAI-672 repair record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
-and the VAI-686 active validation repair record
+and the VAI-686 validation repair record
 `data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md`
 from source gap
 `data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-gap-c1edafa875e6.md`
