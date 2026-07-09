@@ -15,6 +15,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from handsfree.meta_wearables_dat_android_ipfs_kit_interop import (  # noqa: E402
+    BACKLOG_TASK_ID,
     GOAL_ID,
     GOAL_PACKET,
     GOAL_PACKET_GOALS,
@@ -44,9 +45,15 @@ DISCOVERY_PATH = (
     REPO_ROOT
     / "data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-validation-repair.md"
 )
+HAO_DISCOVERY_PATH = (
+    REPO_ROOT
+    / "data/hallucinate_multimodal_control/discovery/"
+    "2026-07-08-hao-739-objective-validation-repair.md"
+)
 GAP_PATH = (
     REPO_ROOT
-    / "data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-gap-853e023f8d1d.md"
+    / "data/hallucinate_multimodal_control/discovery/"
+    "2026-07-08-hao-739-objective-gap-853e023f8d1d.md"
 )
 HEAP_PATH = REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
 DOC_PATH = REPO_ROOT / "docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md"
@@ -74,6 +81,10 @@ def test_expected_external_descriptors_exist_on_disk() -> None:
         "src/handsfree/meta_wearables_dat_android_ipfs_kit_interop.py",
         "docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md",
         "data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-validation-repair.md",
+        (
+            "data/hallucinate_multimodal_control/discovery/"
+            "2026-07-08-hao-739-objective-validation-repair.md"
+        ),
     ]
     for relative_path in expected_paths:
         assert (REPO_ROOT / relative_path).is_file(), f"missing {relative_path}"
@@ -153,6 +164,7 @@ def test_build_handoff_is_deterministic_and_content_addressed() -> None:
     assert first.as_dict() == second.as_dict()
     assert first.interface_contract == INTERFACE_CONTRACT
     assert first.task_id == "VAI-670"
+    assert BACKLOG_TASK_ID == "HAO-739"
     assert first.goal_id == GOAL_ID == "VAIOS-G711"
     assert first.goal_packet == GOAL_PACKET
     assert set(first.goal_packet_goals) == set(GOAL_PACKET_GOALS)
@@ -232,10 +244,12 @@ def test_ipfs_kit_descriptor_scripts_and_sources_are_import_safe() -> None:
 def test_docs_discovery_gap_and_heap_record_objective_validation_repair() -> None:
     doc_source = DOC_PATH.read_text(encoding="utf-8")
     discovery_source = DISCOVERY_PATH.read_text(encoding="utf-8")
+    hao_discovery_source = HAO_DISCOVERY_PATH.read_text(encoding="utf-8")
     gap_source = GAP_PATH.read_text(encoding="utf-8")
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
 
     required_terms = [
+        BACKLOG_TASK_ID,
         "VAI-670",
         "VAIOS-G711",
         "VAIOS-G709",
@@ -254,12 +268,14 @@ def test_docs_discovery_gap_and_heap_record_objective_validation_repair() -> Non
         "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md",
         "external/ipfs_kit/docs/py-ipld-dag-pb/ipld_dag_pb/dag-pb.proto",
     ]
-    for source in (doc_source, discovery_source, heap_source):
+    for source in (doc_source, discovery_source, hao_discovery_source, heap_source):
         for term in required_terms:
             assert term in source, f"missing {term!r}"
     for goal_id in GOAL_PACKET_GOALS:
+        assert goal_id in hao_discovery_source
         assert goal_id in discovery_source
         assert goal_id in heap_source
     assert "VAIOS-G711" in gap_source
+    assert "objective validation repair" in gap_source
     assert "Status: completed" in heap_source
     assert "Completion validation: python -m pytest tests/integration -q" in heap_source

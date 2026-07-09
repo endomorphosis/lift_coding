@@ -1,6 +1,6 @@
 """Interop contract for ``external/meta-wearables-dat-android`` and ``external/ipfs_kit``.
 
-VAI-670 repairs the VAIOS-G711 objective validation gap by proving that the
+HAO-739/VAI-670 repairs the VAIOS-G711 objective validation gap by proving that the
 Meta Wearables DAT Android Display/session surface can hand glasses display
 events to the ipfs_kit Bucket VFS, MCP schema, deprecations-report, and DAG-PB
 surfaces. The proof is static and deterministic: it validates source-tree
@@ -19,6 +19,7 @@ from typing import Any
 
 INTERFACE_CONTRACT = "interface contract external/meta-wearables-dat-android external/ipfs_kit"
 TASK_ID = "VAI-670"
+BACKLOG_TASK_ID = "HAO-739"
 GOAL_ID = "VAIOS-G711"
 GOAL_PACKET = "goal_packet/interoperability/external/6595cbbfadb9"
 GOAL_PACKET_GOALS = ("VAIOS-G709", "VAIOS-G710", "VAIOS-G711")
