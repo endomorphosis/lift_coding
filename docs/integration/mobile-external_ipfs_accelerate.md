@@ -1,7 +1,9 @@
 # Mobile / external/ipfs_accelerate Interop
 
 VAI-672 repairs the VAI-661/VAIOS-G719 objective validation gap covering the
-`objective/interoperability/mobile-external_ipfs_accelerate` bundle.
+`objective/interoperability/mobile-external_ipfs_accelerate` bundle. MGW-596
+revalidates that objective validation repair for the current
+meta_glasses_display_widgets supervisor gate.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
 
@@ -64,6 +66,8 @@ descriptor exports, verifies the benchmark widget action mapping, exercises
 the Python `mobile_ipfs_accelerate_interop` handoff builder, and asserts this
 objective validation repair is recorded in
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md`
+and the MGW-596 repair record
+`data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md`
 plus the attempt-six confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`
 and the attempt-seven confirmation record

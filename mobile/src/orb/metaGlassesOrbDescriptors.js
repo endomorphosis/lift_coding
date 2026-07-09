@@ -238,11 +238,17 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
   validation: {
     task_id: 'VAI-672',
+    active_validation_repair_task_id: 'MGW-596',
     goal_id: 'VAIOS-G719',
     objective_gap_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
     validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
+    active_objective_gap_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-gap-c1edafa875e6.md',
+    active_validation_repair_ref:
+      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md',
+    validation_repair_tasks: ['VAI-672', 'MGW-580', 'MGW-594', 'MGW-595', 'MGW-596'],
     evidence: 'objective validation repair',
   },
 };
