@@ -20,6 +20,9 @@ OBJECTIVE_GAP_REF = (
 VALIDATION_REPAIR_REF = (
     "data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md"
 )
+ATTEMPT_VALIDATION_CONFIRMATION_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md"
+)
 RETRY_BUDGET_REF = (
     "data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md"
 )
@@ -155,8 +158,12 @@ def test_search_interface_exports_hallucinate_app_mobile_handoff_descriptor() ->
     assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
     assert descriptor["runtime_handoff"]["operation"] == "invoke_service"
     assert set(descriptor["runtime_handoff"]["required_artifacts"]) == REQUIRED_ARTIFACTS
-    assert descriptor["validation"]["validation_confirmation_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["validation_confirmation_ref"] == ATTEMPT_VALIDATION_CONFIRMATION_REF
     assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
+    assert (
+        descriptor["validation"]["attempt_validation_confirmation_ref"]
+        == ATTEMPT_VALIDATION_CONFIRMATION_REF
+    )
     assert descriptor["validation"]["retry_budget_ref"] == RETRY_BUDGET_REF
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
@@ -207,8 +214,12 @@ def test_mobile_descriptor_exports_hallucinate_app_mobile_contract() -> None:
     assert descriptor["validation"]["repair_task_id"] == REPAIR_TASK_ID
     assert descriptor["validation"]["goal_id"] == GOAL_ID
     assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
-    assert descriptor["validation"]["validation_confirmation_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["validation_confirmation_ref"] == ATTEMPT_VALIDATION_CONFIRMATION_REF
     assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
+    assert (
+        descriptor["validation"]["attempt_validation_confirmation_ref"]
+        == ATTEMPT_VALIDATION_CONFIRMATION_REF
+    )
     assert descriptor["validation"]["retry_budget_ref"] == RETRY_BUDGET_REF
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
@@ -264,6 +275,7 @@ def test_hallucinate_app_duckdb_receipt_schema_records_mobile_interop() -> None:
 def test_docs_discovery_and_heap_record_vai_674_validation_repair() -> None:
     docs = read_text("docs/integration/hallucinate_app-mobile.md")
     discovery = read_text(VALIDATION_REPAIR_REF)
+    attempt_discovery = read_text(ATTEMPT_VALIDATION_CONFIRMATION_REF)
     objective_gap = read_text(OBJECTIVE_GAP_REF)
     heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
 
@@ -284,9 +296,10 @@ def test_docs_discovery_and_heap_record_vai_674_validation_repair() -> None:
         "hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py",
         OBJECTIVE_GAP_REF,
         VALIDATION_REPAIR_REF,
+        ATTEMPT_VALIDATION_CONFIRMATION_REF,
         RETRY_BUDGET_REF,
     ]
-    for content in (docs, discovery, heap):
+    for content in (docs, discovery, attempt_discovery, heap):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
     for term in (

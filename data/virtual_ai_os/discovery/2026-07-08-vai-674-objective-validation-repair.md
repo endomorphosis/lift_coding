@@ -9,6 +9,7 @@ Merge key: dce12a84320c8baf
 Merge family: objective/VAIOS-G707
 Source objective gap: data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md
 Validation repair evidence: data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md
+Attempt validation confirmation: data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md
 Retry-budget evidence: data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md
 
 ## Objective Validation Repair
@@ -79,3 +80,20 @@ No smaller child goals are required: this objective validation repair covers
 the Hallucinate App descriptor, mobile descriptor, runtime handoff behavior,
 HTML fixture, receipt persistence schema, docs, discovery evidence, and heap
 alignment for `objective/interoperability/hallucinate_app-mobile`.
+
+## Attempt 8 Confirmation
+
+`data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md`
+re-verifies the same `VAIOS-G707` objective validation repair for task
+`VAI-674` and repair task `VAI-684`. The attempt-8 confirmation keeps the
+supervisor-fed backlog aligned with the objective heap while preserving the
+same proof stack:
+
+- `tests/integration/test_hallucinate_app_mobile_interop.py`
+- `docs/integration/hallucinate_app-mobile.md`
+- `hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`
+- `hallucinate_app/hallucinate_app/node/views/test_interface.html`
+- `mobile/src/orb/metaGlassesOrbDescriptors.js`
+- `mobile/src/orb/metaGlassesMobileOrbBridge.js`
+- `hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql`
+- `hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py`
