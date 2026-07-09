@@ -59,6 +59,8 @@ The source gap is
 `data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md`.
 The VAI-674 objective validation repair evidence is
 `data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md`.
+The VAI-674 attempt-8 validation confirmation is
+`data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md`.
 The VAI-684 retry-budget record is
 `data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md`.
 No smaller child goals are required because the same integration test, runtime
