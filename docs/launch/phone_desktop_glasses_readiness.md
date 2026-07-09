@@ -1436,6 +1436,32 @@ telemetry, `tools/list`, `tools/call`, `control_surface receipts`, Swissknife
 applications, and the launch Playwright validation gate visible to the
 readiness scan.
 
+HAO-750 closes the current VAIOS-G723 Hallucinate MCP dashboard
+interoperability console objective gap using
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-750-objective-gap-7ea369464239.md`
+and
+`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-750-mcp-dashboard-launch-gate.md`.
+Its fixture,
+`hallucinate_app/test/e2e/fixtures/hao-750-mcp-dashboard-launch-gate.json`, is
+exposed through the shared dashboard capability catalog's `HAO-750`
+`launch_validation_gates` entry in
+`hallucinate_app/test/e2e/fixtures/vai-512-mcp-dashboard-catalog.json`, keeping
+Hallucinate App menus, Hallucinate App MCP dashboard, dashboard capability
+catalog, backend service catalog, daemon health, MCP++ telemetry, `tools/list`,
+`tools/call`, `control_surface receipts`, Swissknife applications, catalog
+normalization, dashboard UI wiring, mediated tool-call receipts, Swissknife
+consumers, Playwright coverage, supervisor-generated follow-up subtasks, and
+the launch Playwright validation gate tied to `VAIOS-G723`.
+`hallucinate_app/hallucinate_app/node/mcp_daemon_manager.js`,
+`hallucinate_app/test/e2e/mcp-feature-exposure.spec.ts`,
+`hallucinate_app/test/e2e/mcp-dashboard-interoperability.spec.ts`, and
+`swissknife/scripts/test-mcp-dashboard-consumer.cjs` assert that the shared
+dashboard capability catalog exposes the HAO-750 gate for `ipfs_kit_py`,
+`ipfs_datasets_py`, and `ipfs_accelerate_py`. Any dashboard catalog, UI wiring,
+mediated `tools/list`, mediated `tools/call`, Swissknife consumer, backend
+validation, or Playwright failure remains supervisor-generated follow-up work
+for `VAIOS-G723`.
+
 ## Desktop-Peer Offload Smoke
 
 `HAO-438` supplies the desktop-peer offload smoke receipt required by the
