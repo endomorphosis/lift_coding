@@ -1,7 +1,8 @@
 # Mobile / external/ipfs_accelerate Interop
 
-VAI-672 implemented the VAIOS-G719 objective validation repair and VAI-686
-re-validates that repair for the active backlog gate covering the
+VAI-672 implemented the VAIOS-G719 objective validation repair, VAI-686
+re-validates that repair, and MGW-595 records the current
+meta-glasses backlog gate covering the
 `objective/interoperability/mobile-external_ipfs_accelerate` bundle.
 
 The repaired `interface contract mobile external/ipfs_accelerate` path is:
@@ -69,6 +70,10 @@ and the VAI-686 active validation repair record
 `data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md`
 from source gap
 `data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-gap-c1edafa875e6.md`
+plus the MGW-595 objective gap
+`data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-gap-c1edafa875e6.md`
+and MGW-595 objective validation repair
+`data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-595-objective-validation-repair.md`
 plus the attempt-six confirmation record
 `data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md`
 and the attempt-seven confirmation record
