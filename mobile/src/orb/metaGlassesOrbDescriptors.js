@@ -128,8 +128,16 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
       'VAIOS-G705',
       'VAIOS-G706',
     ],
-    evidence: 'objective validation repair',
     task_board: 'virtual_ai_os',
+    active_task_id: 'HAO-730',
+    active_attempt: 2,
+    active_task_board: 'hallucinate_multimodal_control',
+    active_objective_gap_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md',
+    active_validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-2-validation-confirmation.md',
+    active_validation_repair_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-730-attempt-2-objective-validation-repair.md',
     legacy_task_id: 'MGW-569',
     mgw_attempt: 1,
     mgw_validation_repair_ref:
