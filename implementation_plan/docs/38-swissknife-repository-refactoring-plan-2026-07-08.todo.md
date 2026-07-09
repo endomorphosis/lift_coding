@@ -862,7 +862,7 @@ state observation.
 
 ## SWR-049 Add browser security headers and cross-origin isolation evidence
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: refactor/browser-security
 - Fingerprint: 17d72bd7d7f0c55d375a7c3533c172831c4764a0
