@@ -910,7 +910,7 @@ state observation.
 
 ## SWR-053 Add browser import-map and CDN packaging policy
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/browser-distribution
 - Fingerprint: 2f706282c5f8f4e985345e189104ba1f60792748
