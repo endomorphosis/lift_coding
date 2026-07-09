@@ -1066,7 +1066,7 @@ Current duplicate-risk scan:
 
 ## SWR-064 Re-run browser compatibility inventory after service de-duplication
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/refactor
 - Dedupe key: swissknife_refactor:post_duplicate_browser_inventory
