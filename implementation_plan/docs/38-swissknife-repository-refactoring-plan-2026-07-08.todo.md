@@ -982,7 +982,7 @@ state observation.
 
 ## SWR-059 Add browser architecture decision records
 
-- Status: todo
+- Status: completed
 - Priority: P3
 - Track: refactor/docs
 - Fingerprint: 3f3f946c9784d4769924656ea4ad0127ec5e639e
