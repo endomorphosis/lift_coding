@@ -1088,7 +1088,7 @@ Current duplicate-risk scan:
 
 ## SWR-066 Enforce post-cleanup browser no-host-leakage gates
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/security
 - Dedupe key: swissknife_refactor:post_cleanup_browser_no_host_leakage
