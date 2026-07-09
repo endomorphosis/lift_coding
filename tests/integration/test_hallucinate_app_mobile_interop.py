@@ -13,6 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 GOAL_ID = "VAIOS-G707"
 TASK_ID = "VAI-674"
 REPAIR_TASK_ID = "VAI-684"
+RELATED_TASK_ID = "VAI-685"
 INTERFACE_CONTRACT = "interface contract hallucinate_app mobile"
 OBJECTIVE_GAP_REF = (
     "data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md"
@@ -22,6 +23,12 @@ VALIDATION_REPAIR_REF = (
 )
 RETRY_BUDGET_REF = (
     "data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md"
+)
+VAI_685_OBJECTIVE_GAP_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-gap-7edb316279e5.md"
+)
+VAI_685_VALIDATION_REPAIR_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-validation-repair.md"
 )
 MOBILE_ORB_OPERATIONS = {
     "register_edge_capabilities",
@@ -159,6 +166,15 @@ def test_search_interface_exports_hallucinate_app_mobile_handoff_descriptor() ->
     assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
     assert descriptor["validation"]["retry_budget_ref"] == RETRY_BUDGET_REF
     assert descriptor["validation"]["evidence"] == "objective validation repair"
+    assert RELATED_TASK_ID in descriptor["validation"]["related_task_ids"]
+    assert (
+        descriptor["validation"]["vai_685_objective_gap_ref"]
+        == VAI_685_OBJECTIVE_GAP_REF
+    )
+    assert (
+        descriptor["validation"]["vai_685_validation_ref"]
+        == VAI_685_VALIDATION_REPAIR_REF
+    )
 
     handoff = build_search_handoff(
         "vector search",
@@ -211,6 +227,15 @@ def test_mobile_descriptor_exports_hallucinate_app_mobile_contract() -> None:
     assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
     assert descriptor["validation"]["retry_budget_ref"] == RETRY_BUDGET_REF
     assert descriptor["validation"]["evidence"] == "objective validation repair"
+    assert RELATED_TASK_ID in descriptor["validation"]["related_task_ids"]
+    assert (
+        descriptor["validation"]["vai_685_objective_gap_ref"]
+        == VAI_685_OBJECTIVE_GAP_REF
+    )
+    assert (
+        descriptor["validation"]["vai_685_validation_ref"]
+        == VAI_685_VALIDATION_REPAIR_REF
+    )
 
 
 def test_mobile_orb_bridge_advertises_hallucinate_app_descriptor() -> None:
@@ -297,3 +322,43 @@ def test_docs_discovery_and_heap_record_vai_674_validation_repair() -> None:
         INTERFACE_CONTRACT,
     ):
         assert term in objective_gap, f"missing {term!r}"
+
+
+def test_docs_discovery_and_heap_record_vai_685_validation_repair() -> None:
+    """VAI-685 re-observed the same VAIOS-G707 gap as VAI-674 and must be
+    recorded in the discovery evidence, docs, and objective heap without
+    duplicating the runtime handoff implementation."""
+    docs = read_text("docs/integration/hallucinate_app-mobile.md")
+    vai_685_gap = read_text(VAI_685_OBJECTIVE_GAP_REF)
+    vai_685_repair = read_text(VAI_685_VALIDATION_REPAIR_REF)
+    heap = read_text("implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md")
+
+    required_terms = [
+        RELATED_TASK_ID,
+        TASK_ID,
+        GOAL_ID,
+        "objective/interoperability/hallucinate_app-mobile",
+        "objective validation repair",
+        INTERFACE_CONTRACT,
+        "tests/integration/test_hallucinate_app_mobile_interop.py",
+        "docs/integration/hallucinate_app-mobile.md",
+    ]
+    for content in (docs, heap):
+        for term in required_terms:
+            assert term in content, f"missing {term!r}"
+
+    for term in (
+        RELATED_TASK_ID,
+        GOAL_ID,
+        "objective/interoperability/hallucinate_app-mobile",
+        "objective validation repair",
+        INTERFACE_CONTRACT,
+    ):
+        assert term in vai_685_gap, f"missing {term!r} in vai-685 gap"
+        assert term in vai_685_repair, f"missing {term!r} in vai-685 repair"
+
+    assert TASK_ID in vai_685_gap
+    assert TASK_ID in vai_685_repair
+    assert REPAIR_TASK_ID in vai_685_repair
+    assert VAI_685_OBJECTIVE_GAP_REF in vai_685_repair
+    assert RETRY_BUDGET_REF in vai_685_repair

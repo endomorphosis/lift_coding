@@ -3,7 +3,14 @@
 VAI-674 records the direct objective validation repair for `VAIOS-G707` and
 `objective/interoperability/hallucinate_app-mobile`. VAI-684 is the
 retry-budget follow-up that confirmed the same repair path after repeated
-validation failures.
+validation failures. VAI-685 re-observed the identical `VAIOS-G707` objective
+gap (scanner fingerprint `7edb316279e5a093e45d963b421d143361ec8d50`) while
+VAI-674 was still in flight and records an additional objective validation
+repair confirmation referencing the same proof stack instead of duplicating
+the runtime handoff implementation. See
+`data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-gap-7edb316279e5.md`
+and
+`data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-validation-repair.md`.
 
 The repaired `interface contract hallucinate_app mobile` path is:
 
@@ -61,6 +68,10 @@ The VAI-674 objective validation repair evidence is
 `data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md`.
 The VAI-684 retry-budget record is
 `data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md`.
+The VAI-685 objective gap record is
+`data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-gap-7edb316279e5.md`
+and its objective validation repair record is
+`data/virtual_ai_os/discovery/2026-07-08-vai-685-objective-validation-repair.md`.
 No smaller child goals are required because the same integration test, runtime
 handoff descriptors, documentation, and DuckDB receipt schema cover the missing
 `objective validation repair` evidence for `VAIOS-G707`.
