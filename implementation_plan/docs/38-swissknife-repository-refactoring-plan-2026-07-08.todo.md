@@ -1227,7 +1227,7 @@ Fresh scan inputs:
 
 ## SWR-076 Add browser runtime package fixture for service de-duplication regressions
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/packaging
 - Dedupe key: swissknife_refactor:browser_fixture_service_dedup_regressions
