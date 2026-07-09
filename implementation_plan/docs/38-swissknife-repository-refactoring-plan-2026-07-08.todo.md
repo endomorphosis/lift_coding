@@ -1132,11 +1132,13 @@ Current duplicate-risk scan:
 
 ## SWR-070 Supervisor handoff for the reopened service/browser refactor phase
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: refactor/supervisor
 - Dedupe key: swissknife_refactor:phase_13_supervisor_handoff
 - Depends on: SWR-061, SWR-062, SWR-063, SWR-064, SWR-065, SWR-066, SWR-067, SWR-068, SWR-069
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Evidence: `swissknife/docs/refactor-final-signoff.md` records Phase 13 accounting for SWR-061 through SWR-070, evidence paths, validation commands, live supervisor PID/state/log paths, and residual browser/service risks. `swissknife/docs/supervisor-refactor-runbook.md` records the bounded parse command, Phase 13 closeout checklist, active state inspection commands, per-task validation matrix, and handoff rules for a live `--implement` supervisor. Runtime receipts are under `tmp/swissknife_refactor_supervisor/state`, including `swissknife_refactor_task_state.json`, `swissknife_refactor_supervisor_status.json`, `swissknife_refactor_events.jsonl`, and `implementation_logs/swr-061-attempt-1.log` through `implementation_logs/swr-070-attempt-1.log`.
+- Handoff: At the SWR-070 handoff snapshot, SWR-061 through SWR-069 were completed with passing supervisor validation receipts, SWR-070 was the only active ready task, waiting and blocked task counts were zero, and no reopened Phase 13 task was unaccounted for. The final SWR-070 status transition remains owned by the implementation supervisor after validation.
 - Acceptance: The supervisor handoff records the reopened Phase 13 task accounting, evidence paths, validation commands, active process/state paths, and any remaining browser compatibility or service duplicate risks; no Phase 13 task remains unaccounted for.
