@@ -10,6 +10,7 @@ Merge family: objective/VAIOS-G707
 Source objective gap: data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md
 Validation repair evidence: data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md
 Attempt validation confirmation: data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md
+Current attempt validation confirmation: data/virtual_ai_os/discovery/2026-07-09-vai-674-attempt-10-validation-confirmation.md
 Retry-budget evidence: data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md
 
 ## Objective Validation Repair
@@ -97,3 +98,16 @@ same proof stack:
 - `mobile/src/orb/metaGlassesMobileOrbBridge.js`
 - `hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql`
 - `hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py`
+
+## Attempt 10 Confirmation
+
+`data/virtual_ai_os/discovery/2026-07-09-vai-674-attempt-10-validation-confirmation.md`
+re-verifies the same `VAIOS-G707` objective validation repair for task
+`VAI-674` on the current attempt-10 worktree. The active Hallucinate App and
+mobile descriptors now point their `validation_confirmation_ref` and
+`attempt_validation_confirmation_ref` fields at the attempt-10 confirmation
+while preserving this canonical repair record, the original objective gap, the
+prior attempt-8 confirmation, and the VAI-684 retry-budget evidence. Focused
+validation passed (`python -m pytest tests/integration/test_hallucinate_app_mobile_interop.py -q`:
+6 passed), and the full supervisor target passed
+(`python -m pytest tests/integration -q`: 469 passed, 79 skipped, 16 warnings).

@@ -21,7 +21,7 @@ VALIDATION_REPAIR_REF = (
     "data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md"
 )
 ATTEMPT_VALIDATION_CONFIRMATION_REF = (
-    "data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md"
+    "data/virtual_ai_os/discovery/2026-07-09-vai-674-attempt-10-validation-confirmation.md"
 )
 RETRY_BUDGET_REF = (
     "data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md"
@@ -240,6 +240,13 @@ def test_test_interface_html_exposes_machine_readable_fixture() -> None:
 
     assert 'id="hallucinate-app-mobile-interop-contract"' in html
     assert f'"contract_id": "{INTERFACE_CONTRACT}"' in html
+    assert f'"goal_id": "{GOAL_ID}"' in html
+    assert f'"task_id": "{TASK_ID}"' in html
+    assert f'"repair_task_id": "{REPAIR_TASK_ID}"' in html
+    assert '"evidence": "objective validation repair"' in html
+    assert VALIDATION_REPAIR_REF in html
+    assert ATTEMPT_VALIDATION_CONFIRMATION_REF in html
+    assert RETRY_BUDGET_REF in html
     assert '"source_surface": "hallucinate_app"' in html
     assert '"target_surface": "mobile"' in html
     assert '"/v1/mobile/orb/invoke_service"' in html
@@ -269,6 +276,11 @@ def test_hallucinate_app_duckdb_receipt_schema_records_mobile_interop() -> None:
     assert "HALLUCINATE_APP_MOBILE_INTEROP_TABLE" in script
     assert "HALLUCINATE_APP_MOBILE_INTEROP_ROUTES" in script
     assert "HALLUCINATE_APP_MOBILE_INTEROP_ARTIFACT_REFS" in script
+    assert "HALLUCINATE_APP_MOBILE_INTEROP_OBJECTIVE_VALIDATION_REPAIR_REF" in script
+    assert "objective validation repair" in schema
+    assert "objective validation repair" in script
+    assert ATTEMPT_VALIDATION_CONFIRMATION_REF in schema
+    assert ATTEMPT_VALIDATION_CONFIRMATION_REF in script
     assert INTERFACE_CONTRACT in script
 
 
