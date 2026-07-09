@@ -850,7 +850,7 @@ state observation.
 
 ## SWR-048 Add service worker and offline cache compatibility gate
 
-- Status: todo
+- Status: completed
 - Priority: P2
 - Track: refactor/browser-deployment
 - Fingerprint: 98424b6635af1d51036ff045f5705070498c8f3f
