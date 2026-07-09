@@ -1055,7 +1055,7 @@ Current duplicate-risk scan:
 
 ## SWR-063 Define canonical service public APIs after duplicate cleanup
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: refactor/services
 - Dedupe key: swissknife_refactor:canonical_service_public_apis
