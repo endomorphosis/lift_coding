@@ -1350,7 +1350,7 @@ Fresh scan inputs:
 
 ## SWR-084 Expand all-tools bindings from three generated app families to every intended virtual desktop app
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/apps
 - Dedupe key: swissknife_refactor:all_virtual_desktop_app_tool_binding_coverage
