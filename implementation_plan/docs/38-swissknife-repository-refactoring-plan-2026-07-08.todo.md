@@ -1503,7 +1503,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-097 Keep Meta glasses and ORB/IDL evidence simulator-driven
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: glasses/browser
 - Dedupe key: swissknife_refactor:meta_glasses_simulator_browser_safe_orb_idl
