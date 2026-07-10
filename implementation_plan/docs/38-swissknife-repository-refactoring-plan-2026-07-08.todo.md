@@ -1571,7 +1571,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-101 Prove complete MCP and MCP++/libp2p catalog reachability
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: mcp/catalog
 - Dedupe key: swissknife_refactor:complete_mcp_mcp_plus_plus_libp2p_catalog_reachability
