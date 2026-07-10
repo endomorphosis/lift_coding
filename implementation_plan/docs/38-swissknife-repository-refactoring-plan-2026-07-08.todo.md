@@ -1604,7 +1604,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-104 Define browser-safe agent-supervisor gateway capabilities
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: supervisor/contracts
 - Dedupe key: swissknife_refactor:agent_supervisor_browser_safe_gateway_contract
