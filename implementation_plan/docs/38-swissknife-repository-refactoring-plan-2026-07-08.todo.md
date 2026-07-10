@@ -1437,7 +1437,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-091 Lock browser package exports and default browser entrypoints
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/packaging
 - Dedupe key: swissknife_refactor:browser_exports_default_entrypoint_lock
