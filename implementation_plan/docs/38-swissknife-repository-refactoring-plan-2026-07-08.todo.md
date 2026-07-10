@@ -1648,7 +1648,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-108 Extend ORB/IDL contracts for the complete desktop and Supervisor Console
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: orb/idl
 - Dedupe key: swissknife_refactor:complete_desktop_orb_idl_and_supervisor_console
