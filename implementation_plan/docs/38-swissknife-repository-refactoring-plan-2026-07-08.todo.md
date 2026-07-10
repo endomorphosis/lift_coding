@@ -1448,7 +1448,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-092 Keep libp2p enabled by default in browser-safe runtime paths
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/libp2p
 - Dedupe key: swissknife_refactor:libp2p_browser_default_runtime_real_modules
