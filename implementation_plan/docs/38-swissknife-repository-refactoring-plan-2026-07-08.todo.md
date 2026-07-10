@@ -1339,7 +1339,7 @@ Fresh scan inputs:
 
 ## SWR-083 Promote the hierarchical MCP evidence report into the release gate
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release/evidence
 - Dedupe key: swissknife_refactor:hierarchical_mcp_release_gate
