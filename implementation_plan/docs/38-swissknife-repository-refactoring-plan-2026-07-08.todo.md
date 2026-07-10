@@ -1670,7 +1670,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-110 Gate complete desktop, all-tools, and simulator evidence in release readiness
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release/evidence
 - Dedupe key: swissknife_refactor:complete_desktop_all_tools_supervisor_simulator_release_gate
