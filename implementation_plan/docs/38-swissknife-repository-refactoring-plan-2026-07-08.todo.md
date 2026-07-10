@@ -1492,7 +1492,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-096 Prove all tool-backed virtual desktop apps remain browser-compatible
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: virtual-desktop/browser
 - Dedupe key: swissknife_refactor:tool_backed_virtual_desktop_browser_compatibility
