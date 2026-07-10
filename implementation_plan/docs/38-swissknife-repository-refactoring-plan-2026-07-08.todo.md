@@ -1582,7 +1582,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-102 Generate exhaustive per-app UI/UX workflow scenarios
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/e2e
 - Dedupe key: swissknife_refactor:per_app_backend_ui_ux_workflow_matrix
