@@ -1481,7 +1481,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-095 Add a browser/service duplicate regression sentinel to release readiness
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release/gates
 - Dedupe key: swissknife_refactor:duplicate_service_browser_release_sentinel
