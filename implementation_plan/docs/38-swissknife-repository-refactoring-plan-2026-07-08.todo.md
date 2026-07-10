@@ -1626,7 +1626,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-106 Add governed prompt steering for goals, subgoals, and tasks
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: supervisor/policy
 - Dedupe key: swissknife_refactor:governed_prompt_steering_goal_subgoal_taskboard
