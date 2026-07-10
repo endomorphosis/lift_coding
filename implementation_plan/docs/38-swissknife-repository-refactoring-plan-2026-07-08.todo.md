@@ -1637,7 +1637,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-107 Verify the Supervisor Console against all three IPFS server families
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: supervisor/integration
 - Dedupe key: swissknife_refactor:agent_supervisor_console_three_server_integration
