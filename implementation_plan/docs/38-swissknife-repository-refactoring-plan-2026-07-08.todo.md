@@ -1514,7 +1514,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-098 Preserve ipfs_accelerate_py supervisor/adapter evidence without hiding browser constraints
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: mcp/supervisor
 - Dedupe key: swissknife_refactor:ipfs_accelerate_supervisor_adapter_browser_boundary_evidence
