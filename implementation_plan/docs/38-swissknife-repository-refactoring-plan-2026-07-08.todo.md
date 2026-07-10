@@ -1560,7 +1560,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-100 Freeze the exhaustive app-to-backend capability contract
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/contracts
 - Dedupe key: swissknife_refactor:exhaustive_app_backend_capability_contract
