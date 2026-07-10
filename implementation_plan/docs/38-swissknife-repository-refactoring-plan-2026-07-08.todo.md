@@ -1383,7 +1383,7 @@ Fresh scan inputs:
 
 ## SWR-087 Preserve accelerate compatibility adapter readiness and PID evidence
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: mcp/accelerate
 - Dedupe key: swissknife_refactor:accelerate_compat_adapter_process_evidence
