@@ -1790,7 +1790,7 @@ before app-contract reconciliation continues.
 
 ## SWR-119 Remove restored duplicate service copies and retarget imports to canonical modules
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: services/ownership
 - Dedupe key: swissknife_refactor:restored_service_duplicate_removal_and_import_retargeting
