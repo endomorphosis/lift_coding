@@ -1328,7 +1328,7 @@ Fresh scan inputs:
 
 ## SWR-082 Add normalized category/name aliasing for datasets hierarchical dispatch
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: mcp/hierarchy
 - Dedupe key: swissknife_refactor:ipfs_datasets_hierarchy_name_aliases
