@@ -1593,7 +1593,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-103 Make the virtual desktop app matrix a release-blocking gate
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release/virtual-desktop
 - Dedupe key: swissknife_refactor:complete_app_matrix_release_gate
