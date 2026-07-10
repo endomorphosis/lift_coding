@@ -1470,7 +1470,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-094 Verify real browser ZKP and WASM paths after containment cleanup
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/zkp
 - Dedupe key: swissknife_refactor:real_browser_zkp_wasm_after_containment
