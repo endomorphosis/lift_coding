@@ -1372,7 +1372,7 @@ Fresh scan inputs:
 
 ## SWR-086 Use the Meta glasses simulator for ORB/IDL handoff evidence
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: glasses/simulator
 - Dedupe key: swissknife_refactor:meta_glasses_simulator_orb_idl_handoff
