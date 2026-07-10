@@ -1361,7 +1361,7 @@ Fresh scan inputs:
 
 ## SWR-085 Add end-to-end UI/UX smoke coverage for tool-backed virtual desktop apps
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/e2e
 - Dedupe key: swissknife_refactor:tool_backed_virtual_desktop_ui_smoke
