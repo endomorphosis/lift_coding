@@ -1459,7 +1459,7 @@ imports remain reachable from browser-facing entrypoints.
 
 ## SWR-093 Split host-only adapters from browser-safe service contracts
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/host-boundary
 - Dedupe key: swissknife_refactor:host_only_adapter_contract_split
@@ -1533,3 +1533,159 @@ imports remain reachable from browser-facing entrypoints.
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/release-readiness-report.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Acceptance: Phase 16 closeout records duplicate-service cleanup evidence, module ownership gate evidence, browser exports evidence, browser-default libp2p evidence, host-boundary evidence, real ZKP/WASM evidence, all-app browser smoke evidence, Meta glasses simulator evidence, adapter/supervisor process evidence, release-readiness status, active supervisor PID/state/log paths, and residual merge risks.
+
+## Phase 17: Exhaustive Virtual Desktop Backend Closure And Agent Supervisor Console
+
+This phase turns the existing desktop-wide evidence work into an operational
+contract. It covers every registered SwissKnife virtual-desktop app, the full
+live tool catalogs of `ipfs_kit_py`, `ipfs_datasets_py`, and
+`ipfs_accelerate_py`, both MCP and MCP++/libp2p discovery routes, and the
+ORB/IDL handoff contract used by the Meta glasses simulator.
+
+"All tools" is enforced as a catalog and policy guarantee, rather than by
+blindly invoking every side-effectful tool. Every discovered descriptor must
+have a typed owner, schema, availability state, policy class, and safe
+verification route. Read-only tools require live receipt evidence; mutating,
+credential, and host-only tools require schema/discovery evidence plus a
+controlled confirmation, dry-run, or fixture route. No tool may be silently
+lost behind a representative app sample.
+
+The new `agent-supervisor` virtual-desktop application is a browser-safe
+operations console. It exposes the `ipfs_accelerate_py` supervisor's goals,
+subgoals, queue, taskboard links, receipts, and bounded prompt steering through
+typed remote capabilities. It must never import Python, read local supervisor
+state files, or spawn processes from browser code. Its backend integration also
+uses `ipfs_kit_py` for immutable evidence/receipt storage and
+`ipfs_datasets_py` for searchable task, goal, and run-history indexes.
+
+## SWR-100 Freeze the exhaustive app-to-backend capability contract
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/contracts
+- Dedupe key: swissknife_refactor:exhaustive_app_backend_capability_contract
+- Depends on: SWR-085, SWR-096
+- Outputs: swissknife/src/services/apps/virtual-desktop-app-manifest.ts, swissknife/contracts/swissknife_virtual_desktop_app_manifest.schema.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-backend-contract.json, swissknife/docs/virtual-desktop-all-tools-app-coverage.md
+- Validation: cd swissknife && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && node scripts/build-all-tools-capability-matrix.cjs && npm run test:e2e:mcp
+- Acceptance: Every registered desktop app, generated app, legacy alias, and the new `agent-supervisor` app has one canonical ID, launch owner, backend capability set, ORB/IDL state, glasses strategy, and success/fallback/error UX scenario. Each backend capability identifies `ipfs_kit_py`, `ipfs_datasets_py`, or `ipfs_accelerate_py`, its MCP and MCP++ transport eligibility, policy class, and receipt strategy. Apps that intentionally use no remote tool have an explicit local-only rationale; no app or descriptor is omitted because it is not one of the generic generated app families.
+
+## SWR-101 Prove complete MCP and MCP++/libp2p catalog reachability
+
+- Status: pending
+- Priority: P0
+- Track: mcp/catalog
+- Dedupe key: swissknife_refactor:complete_mcp_mcp_plus_plus_libp2p_catalog_reachability
+- Depends on: SWR-100
+- Outputs: swissknife/scripts/capture-mcp-live-probe-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/mcp-plus-plus-libp2p-catalog.json, swissknife/docs/mcp-all-tool-catalog-evidence.md
+- Validation: cd swissknife && node scripts/capture-mcp-live-probe-evidence.cjs && node scripts/capture-hierarchical-mcp-tools-evidence.cjs && npm run evidence:libp2p-browser
+- Acceptance: SwissKnife records live discovery for every configured `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` descriptor through MCP and, where advertised, MCP++/libp2p. Each descriptor is reconciled by normalized name and schema to an app or global operations surface, or marked direct-only/host-only with a reason. Read-only tools have live dispatch receipts; mutating, credential, and destructive tools have policy-gated dry-run, fixture, or confirmation-route evidence. The evidence fails on a missing server, missing hierarchical facade, unexplained catalog delta, or unreachable advertised libp2p endpoint.
+
+## SWR-102 Generate exhaustive per-app UI/UX workflow scenarios
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/e2e
+- Dedupe key: swissknife_refactor:per_app_backend_ui_ux_workflow_matrix
+- Depends on: SWR-100, SWR-101
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-workflow-matrix.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots, swissknife/docs/virtual-desktop-tool-ui-smoke-evidence.md
+- Validation: cd swissknife && npm run test:e2e:mcp && npm run evidence:mcp-glasses
+- Acceptance: Every canonical desktop app has an executable UI workflow with launch, intended backend action or local-only rationale, visible loading/success/fallback/error states, keyboard and pointer accessibility checks, receipt or controlled-fixture evidence, and a screenshot. Tool-backed workflows cover all three server families across their owning apps and route complete tool catalogs through MCP Control, Terminal, or the Supervisor Console without hiding unavailable capability states.
+
+## SWR-103 Make the virtual desktop app matrix a release-blocking gate
+
+- Status: pending
+- Priority: P0
+- Track: release/virtual-desktop
+- Dedupe key: swissknife_refactor:complete_app_matrix_release_gate
+- Depends on: SWR-102
+- Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-evidence-freshness.md
+- Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && npm run release:readiness
+- Acceptance: Release readiness fails if an app lacks a canonical backend contract, UI/UX workflow, screenshot, success/fallback/error state, ORB/IDL projection, or required server/tool catalog reconciliation. The gate reports exact missing app IDs, capability IDs, servers, tool classes, and simulator modalities; aggregate counts alone cannot pass it.
+
+## SWR-104 Define browser-safe agent-supervisor gateway capabilities
+
+- Status: pending
+- Priority: P0
+- Track: supervisor/contracts
+- Dedupe key: swissknife_refactor:agent_supervisor_browser_safe_gateway_contract
+- Depends on: SWR-093, SWR-100, SWR-101
+- Outputs: swissknife/src/services/mcp, swissknife/src/shared, swissknife/contracts/agent-supervisor-console.schema.json, swissknife/docs/agent-supervisor-console-security-model.md
+- Validation: cd swissknife && npm run typecheck:services && npm run test:browser-compat && npm run audit:bundle-host-leakage
+- Acceptance: A typed, browser-safe gateway defines read capabilities for supervisor health, queue, goals, subgoals, taskboard links, logs, and receipts; governed write capabilities for prompt steering and task-control requests; and typed unavailable/denied states. `ipfs_accelerate_py` owns supervisor state and governed actions, `ipfs_kit_py` owns immutable evidence/receipt persistence, and `ipfs_datasets_py` owns searchable task/goal/run-history indexes. Browser bundles contain no Python imports, filesystem reads, subprocess calls, or direct implementation-supervisor invocation.
+
+## SWR-105 Build the Agent Supervisor virtual-desktop application
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/supervisor-console
+- Dedupe key: swissknife_refactor:agent_supervisor_virtual_desktop_application
+- Depends on: SWR-104
+- Outputs: swissknife/web/js/apps/agent-supervisor.js, swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js, swissknife/src/services/apps/virtual-desktop-app-manifest.ts, swissknife/test/e2e
+- Validation: cd swissknife && npm run build:web && npm run test:e2e:mcp && npm run test:browser-compat
+- Acceptance: The virtual desktop exposes an `agent-supervisor` application with a goals/subgoals tree, taskboard-linked queue, active-task and receipt views, server and MCP++/libp2p health, and compact cross-links to the app/backend contract. It has stable desktop and narrow viewport layouts, keyboard navigation, loading/empty/error states, no nested card clutter, and no browser access to host-only supervisor internals.
+
+## SWR-106 Add governed prompt steering for goals, subgoals, and tasks
+
+- Status: pending
+- Priority: P0
+- Track: supervisor/policy
+- Dedupe key: swissknife_refactor:governed_prompt_steering_goal_subgoal_taskboard
+- Depends on: SWR-104, SWR-105
+- Outputs: swissknife/src/services/mcp, swissknife/web/js/apps/agent-supervisor.js, swissknife/test/mcp-plus-plus, swissknife/docs/agent-supervisor-console-security-model.md
+- Validation: cd swissknife && npm run test:fast -- test/mcp-plus-plus && npm run test:e2e:mcp
+- Acceptance: A user can select a goal, subgoal, or taskboard task; draft a steering prompt; review normalized target, policy class, affected tasks, and planned MCP action; explicitly confirm submission; and receive a correlation ID and immutable receipt. Prompt content is size-bounded, redacted in logs where required, never treated as shell input, and cannot bypass task dependencies, branch protections, confirmation policy, or the supervisor's execution budget.
+
+## SWR-107 Verify the Supervisor Console against all three IPFS server families
+
+- Status: pending
+- Priority: P0
+- Track: supervisor/integration
+- Dedupe key: swissknife_refactor:agent_supervisor_console_three_server_integration
+- Depends on: SWR-101, SWR-105, SWR-106
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-console-e2e.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-console-receipts.json, swissknife/docs/agent-supervisor-console-evidence.md
+- Validation: cd swissknife && node scripts/capture-mcp-live-probe-evidence.cjs && npm run test:e2e:mcp && npm run evidence:mcp-glasses
+- Acceptance: End-to-end tests prove the console reads live supervisor/taskboard state through `ipfs_accelerate_py`, stores or resolves an evidence receipt through `ipfs_kit_py`, and searches the corresponding indexed goal/task/run record through `ipfs_datasets_py`. Success, server-unavailable, denied, stale-state, and transport-fallback paths are visible and produce correlated evidence without requiring a destructive supervisor action.
+
+## SWR-108 Extend ORB/IDL contracts for the complete desktop and Supervisor Console
+
+- Status: pending
+- Priority: P0
+- Track: orb/idl
+- Dedupe key: swissknife_refactor:complete_desktop_orb_idl_and_supervisor_console
+- Depends on: SWR-100, SWR-107
+- Outputs: swissknife/src/services/glasses, swissknife/contracts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/orb-idl-complete-coverage.json, swissknife/docs/orb-idl-virtual-desktop-contract.md
+- Validation: cd swissknife && npm run evidence:mcp-glasses && npm run typecheck:services
+- Acceptance: Every canonical app, including `agent-supervisor`, has a validated ORB/IDL descriptor with explicit display, camera, speaker, microphone, input, action-policy, and fallback semantics. The console's glasses projection is read-only for status and receipts by default; any steering request requires the same confirmed policy path as desktop. Missing or unsupported modalities produce typed fallback descriptors rather than omitted fields or fabricated hardware availability.
+
+## SWR-109 Run Meta glasses simulator modality and handoff workflows
+
+- Status: pending
+- Priority: P0
+- Track: glasses/simulator
+- Dedupe key: swissknife_refactor:meta_glasses_simulator_full_modality_handoff
+- Depends on: SWR-103, SWR-108
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-simulator-modalities.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/glasses-screenshots, swissknife/docs/meta-glasses-simulator-evidence.md
+- Validation: cd swissknife && npm run test:e2e:meta-glasses && npm run evidence:mcp-glasses
+- Acceptance: The configured Meta glasses simulator is launched and exercised for each handoff profile. Evidence covers display rendering, camera permission/grant/denial and fallback, speaker/audio policy and state, microphone permission/transcript/denial behavior, touch/voice input mapping, and desktop-to-simulator handoff receipts. The test harness records simulator/device profile identity and fails if it substitutes a physical-desktop pairing assumption for simulator evidence.
+
+## SWR-110 Gate complete desktop, all-tools, and simulator evidence in release readiness
+
+- Status: pending
+- Priority: P0
+- Track: release/evidence
+- Dedupe key: swissknife_refactor:complete_desktop_all_tools_supervisor_simulator_release_gate
+- Depends on: SWR-103, SWR-107, SWR-109
+- Outputs: swissknife/scripts/release-readiness-gate.mjs, swissknife/docs/release-readiness-report.json, swissknife/docs/release-readiness-report.md, swissknife/docs/release-evidence-freshness.json
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: The final release gate requires fresh, internally consistent evidence for every app, all three MCP servers, MCP++/libp2p discovery where advertised, per-tool policy classification, app UI/UX workflows, Agent Supervisor Console integration, ORB/IDL coverage, and the Meta glasses simulator's display/camera/speaker/microphone workflows. It reports `NO_GO` with concrete missing evidence paths and must not downgrade missing coverage to warnings.
+
+## SWR-111 Phase 17 supervisor closeout and operational handoff
+
+- Status: pending
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_17_complete_desktop_supervisor_console_closeout
+- Depends on: SWR-100, SWR-101, SWR-102, SWR-103, SWR-104, SWR-105, SWR-106, SWR-107, SWR-108, SWR-109, SWR-110
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, swissknife/docs/agent-supervisor-console-evidence.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: Closeout records every task's evidence, explicit policy decisions for non-invoked side-effectful tools, all-app workflow status, three-server and libp2p availability, Supervisor Console receipt chain, ORB/IDL coverage, Meta glasses simulator modality evidence, active supervisor PID/state/log paths, final release decision, and any residual external simulator or server prerequisites.
