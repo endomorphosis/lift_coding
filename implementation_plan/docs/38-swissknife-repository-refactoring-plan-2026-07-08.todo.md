@@ -1691,4 +1691,154 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, swissknife/docs/agent-supervisor-console-evidence.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Acceptance: Closeout records every task's evidence, explicit policy decisions for non-invoked side-effectful tools, all-app workflow status, three-server and libp2p availability, Supervisor Console receipt chain, ORB/IDL coverage, Meta glasses simulator modality evidence, active supervisor PID/state/log paths, final release decision, and any residual external simulator or server prerequisites.
+
+## Phase 18: Evidence Contract Reconciliation And Exhaustive Behavior Replay
+
+Phase 17 completed the functional desktop, all-tool, Supervisor Console, and
+Meta glasses simulator work. A post-closeout audit found that some declared
+output paths are not materialized even though equivalent evidence exists, and
+the legacy virtual-desktop release generator currently throws while rendering
+blocker text. This phase repairs those evidence-contract defects and reruns the
+complete behavior proof. It does not weaken a release gate or substitute an
+aggregate count for per-app evidence.
+
+## SWR-112 Repair the virtual-desktop release evidence generator and canonical output
+
+- Status: completed
+- Priority: P0
+- Track: release/evidence
+- Dedupe key: swissknife_refactor:virtual_desktop_release_generator_contract_repair
+- Depends on: SWR-111
+- Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.md
+- Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node -e "const e=require('./test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json'); if (!['go','no_go'].includes(e.decision)) process.exit(1); console.log(e.decision)"
+- Acceptance: The release-evidence builder renders every blocker safely, writes both canonical JSON and Markdown output, consumes current app, tool, ORB/IDL, glasses, and live-service evidence, and exits non-zero only for an actual `no_go` decision. Missing helpers, stale output paths, and renderer exceptions are test failures rather than silent release bypasses.
+
+## SWR-113 Reconcile the canonical app contract with per-app behavior evidence
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/contracts
+- Dedupe key: swissknife_refactor:app_contract_behavior_evidence_reconciliation
+- Depends on: SWR-112, SWR-118
+- Outputs: swissknife/contracts/swissknife_virtual_desktop_app_manifest.schema.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-backend-contract.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-workflow-matrix.json, swissknife/docs/virtual-desktop-all-tools-app-coverage.md
+- Validation: cd swissknife && npm run test:e2e:mcp && node scripts/build-virtual-desktop-release-evidence.cjs
+- Acceptance: Every canonical app has a materialized backend-contract record and an executable behavior record. Each behavior record identifies launch path, primary action or local-only rationale, assigned backend capabilities across `ipfs_accelerate_py`, `ipfs_kit_py`, and `ipfs_datasets_py`, success/fallback/error/denied states, keyboard and pointer checks, screenshot, receipt or fixture, ORB/IDL descriptor, and glasses strategy. The artifact fails if any app is represented only by a UI screenshot or aggregate count.
+
+## SWR-114 Materialize the Agent Supervisor Console as a canonical desktop app module
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/supervisor-console
+- Dedupe key: swissknife_refactor:agent_supervisor_console_canonical_module_contract
+- Depends on: SWR-113
+- Outputs: swissknife/web/js/apps/agent-supervisor.js, swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js, swissknife/contracts/agent-supervisor-console.schema.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-console-e2e.json
+- Validation: cd swissknife && npm run build:web && npm run test:e2e:mcp && npm run test:browser-compat
+- Acceptance: The Supervisor Console is a discoverable application module rather than an implicit desktop-inline implementation. It exposes goal/subgoal/taskboard navigation, typed server health, receipt lookup, searchable task/run evidence, and confirmed prompt steering through browser-safe gateway contracts. Its E2E evidence proves all three service families, success/denied/stale/fallback paths, and prevents direct Python, filesystem, subprocess, or implementation-supervisor execution from browser code.
+
+## SWR-115 Normalize Meta glasses simulator modality evidence and artifact names
+
+- Status: pending
+- Priority: P0
+- Track: glasses/simulator
+- Dedupe key: swissknife_refactor:meta_glasses_simulator_modality_evidence_contract
+- Depends on: SWR-113, SWR-114
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-simulator-modalities.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/glasses-simulator-handoff.json, swissknife/docs/meta-glasses-simulator-evidence.md
+- Validation: cd swissknife && npm run test:e2e:meta-glasses && npm run evidence:mcp-glasses && node scripts/build-virtual-desktop-release-evidence.cjs
+- Acceptance: A canonical modality artifact is generated from simulator evidence and reconciles with the handoff artifact. It records all canonical apps' display, camera, speaker, microphone, and input policy states; permission grant/deny/fallback; ORB/IDL interface references; screenshots; and desktop/mobile handoff receipts. It explicitly rejects physical-glasses pairing as a release prerequisite.
+
+## SWR-116 Run the exhaustive behavior and evidence release gate from clean outputs
+
+- Status: pending
+- Priority: P0
+- Track: release/evidence
+- Dedupe key: swissknife_refactor:exhaustive_behavior_evidence_clean_release_gate
+- Depends on: SWR-112, SWR-113, SWR-114, SWR-115
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-readiness-report.json, swissknife/docs/release-readiness-report.md, swissknife/docs/release-evidence-freshness.json
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: The release gate starts from regenerated canonical artifacts and reports `GO` only when every app behavior record, three-server MCP/MCP++ catalog, policy disposition, Supervisor Console route, ORB/IDL descriptor, and Meta glasses simulator modality record is current and internally consistent. Any missing declared output, renderer exception, stale evidence, or output-path alias mismatch is a `NO_GO` blocker with the exact path listed.
+
+## SWR-117 Phase 18 supervisor closeout and evidence-contract handoff
+
+- Status: pending
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_18_evidence_contract_behavior_closeout
+- Depends on: SWR-112, SWR-113, SWR-114, SWR-115, SWR-116
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: Closeout lists the canonical artifact paths, their freshness, per-app behavior coverage, three-server/MCP++ reachability, Supervisor Console behavior and receipt proof, ORB/IDL and simulator modality evidence, release decision, supervisor process state, and any remaining external preconditions. It must not mark a task complete when an output named in its own contract is absent.
 - Evidence: Phase 17 operational handoff captured in `swissknife/docs/refactor-final-signoff.md`, `swissknife/docs/supervisor-refactor-runbook.md`, and `swissknife/docs/agent-supervisor-console-evidence.md` on 2026-07-10. SWR-100 through SWR-110 are completed in the task board and recorded in the closeout evidence ledger; SWR-111 remains daemon-owned for the final completion status update. The closeout records the 45-app backend contract, 822 all-tool bindings, explicit non-invocation policy for confirmation-required side-effectful tools, all-app workflow coverage with pointer launch, keyboard launch, screenshots, receipts or fixtures, and loading/success/fallback/error states for 45/45 apps. Three-server evidence records `ipfs_accelerate_py` at `http://127.0.0.1:3003/mcp` with 122 flat and 122 hierarchical tools, `ipfs_kit_py` at `http://127.0.0.1:8014/mcp` with 208 flat and 204 hierarchical tools, and `ipfs_datasets_py` at `http://127.0.0.1:3002/mcp` with 340 flat and 150 hierarchical tools. MCP++/libp2p reachability records advertised protocol `/mcp+p2p/1.0.0`, peer ID `12D3KooWHjvjTKfDyZ7bRrcd9qex2B33rvzneW1rsdoUaDivzMku`, 108 tools, `get_server_status`, and `p2p_taskqueue_status`. Supervisor Console evidence records 7/7 required paths and receipts across success, receipt resolution, indexed search, server unavailable, denied steering, stale state, and transport fallback. ORB/IDL coverage records 45 apps, 45 descriptors, 225 modality entries, 45 interface CIDs, 225 typed fallbacks, and read-only Supervisor Console status/receipt projection by default. Meta glasses simulator evidence records hardware-free `playwright-meta-glasses-simulator` coverage for display, camera, microphone, speaker, touch, voice, four handoff profiles, three handoff paths, and four physical-device degradation receipts. Active process evidence records supervisor PID 513718, managed implementation daemon PID 514824, accelerate adapter PID 1655556, state path `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_task_state.json`, supervisor status path `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_supervisor_status.json`, daemon log `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_implementation_daemon_20260710T062625Z.log`, and SWR-111 implementation log `tmp/swissknife_refactor_supervisor/state/implementation_logs/swr-111-attempt-1.log`. Release readiness reports 13/13 gates passed, 0 failed gates, 0 blockers, 9 explicit non-blocking warnings, and final release decision `GO`; residual prerequisites for live refresh are the three MCP servers, the accelerate adapter/upstream pair, advertised MCP++/libp2p reachability, and the Playwright Meta glasses simulator profile.
+
+## Phase 19: Restored Service Duplicate Remediation And Browser Closure
+
+Phase 19 responds to a fresh source-tree audit that found 249 duplicate non-index
+basenames under `src/services`. These are restored root/module copies, not intentional
+barrel files: they obscure canonical ownership, can silently change import resolution,
+and invalidate prior browser-boundary evidence. The duplicate cleanup must complete
+before app-contract reconciliation continues.
+
+## SWR-118 Inventory and classify every restored duplicate service implementation
+
+- Status: pending
+- Priority: P0
+- Track: services/ownership
+- Dedupe key: swissknife_refactor:restored_service_duplicate_inventory_and_canonical_ownership
+- Depends on: SWR-111
+- Outputs: swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/restored-service-duplicate-inventory.md, swissknife/src/module-ownership.json
+- Validation: cd swissknife && node scripts/audit-source-modules.mjs --json docs/service-boundary-audit.json; test "$(node -e "const r=require('./docs/service-boundary-audit.json'); console.log(r.serviceDuplicateBasenames ?? r.summary?.serviceDuplicateBasenames ?? -1)")" -gt 0
+- Acceptance: The inventory contains every duplicate basename with all paths, content hashes, importers, canonical module owner, disposition (`remove-restored-copy`, `move-and-retarget`, or explicitly approved multi-entrypoint), and browser/runtime classification. It rejects broad exemptions, treats non-index basename duplicates as failures by default, and identifies root files restored after the prior Phase 16 cleanup.
+
+## SWR-119 Remove restored duplicate service copies and retarget imports to canonical modules
+
+- Status: pending
+- Priority: P0
+- Track: services/ownership
+- Dedupe key: swissknife_refactor:restored_service_duplicate_removal_and_import_retargeting
+- Depends on: SWR-118
+- Outputs: swissknife/src/services, swissknife/src/module-ownership.json, swissknife/docs/restored-service-duplicate-inventory.json
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:fast -- test/architecture/source-module-boundaries.test.js
+- Acceptance: Every restored duplicate is removed or moved to its declared canonical owner; all active imports use module-owned paths; duplicate non-index service basenames return to zero; no compatibility re-export preserves a root duplicate; and TypeScript plus architecture tests pass without suppressing ownership failures.
+
+## SWR-120 Make service duplicate prevention content-aware and merge-resistant
+
+- Status: pending
+- Priority: P0
+- Track: services/architecture
+- Dedupe key: swissknife_refactor:content_aware_service_duplicate_merge_sentinel
+- Depends on: SWR-119
+- Outputs: swissknife/scripts/audit-source-modules.mjs, swissknife/test/architecture/source-module-boundaries.test.js, swissknife/docs/service-boundary-audit.json
+- Validation: cd swissknife && npm run services:audit && npm run release:readiness
+- Acceptance: The ownership audit fails with a compact actionable report for any restored duplicate implementation, distinguishes approved index barrels from shadow copies, tracks canonical ownership and content hash, and is invoked by release readiness. A fixture proving a restored root copy is rejected is part of the architecture test suite.
+
+## SWR-121 Rebuild browser import closure and default libp2p evidence after duplicate removal
+
+- Status: pending
+- Priority: P0
+- Track: browser/libp2p
+- Dedupe key: swissknife_refactor:post_duplicate_browser_import_closure_and_libp2p_default
+- Depends on: SWR-119, SWR-120
+- Outputs: swissknife/docs/browser-compatibility-inventory.md, swissknife/docs/browser-libp2p-evidence.md, swissknife/docs/browser-bundle-budget.json, swissknife/docs/browser-bundle-budget.md
+- Validation: cd swissknife && npm run build:web && npm run test:browser-compat && npm run evidence:libp2p-browser && npm run audit:bundle-host-leakage
+- Acceptance: The regenerated browser graph has no host-only or duplicate-service imports reachable from browser entries; browser libp2p remains enabled by default with real browser transports; no direct Python, filesystem, subprocess, native prover, or adapter process surface reaches the bundle; and browser bundle-budget evidence is fresh.
+
+## SWR-122 Re-run canonical desktop and release evidence from the duplicate-free tree
+
+- Status: pending
+- Priority: P0
+- Track: release/evidence
+- Dedupe key: swissknife_refactor:duplicate_free_desktop_and_release_evidence_rebaseline
+- Depends on: SWR-116, SWR-121
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-readiness-report.json, swissknife/docs/release-readiness-report.md, swissknife/docs/release-evidence-freshness.json
+- Validation: cd swissknife && npm run test:e2e:mcp && npm run test:e2e:meta-glasses && npm run evidence:mcp-glasses && npm run release:readiness
+- Acceptance: The release report is regenerated from the duplicate-free tree and reports current app, three-server, MCP++/libp2p, Supervisor Console, ORB/IDL, and simulator evidence. Missing, stale, aliased, or renderer-broken artifacts are blockers; a GO decision requires zero duplicate service basenames and fresh browser bundle evidence.
+
+## SWR-123 Phase 19 duplicate-remediation and browser closure handoff
+
+- Status: pending
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_19_duplicate_remediation_browser_closure_handoff
+- Depends on: SWR-117, SWR-118, SWR-119, SWR-120, SWR-121, SWR-122
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: The handoff records the duplicate inventory before/after counts, canonical ownership decisions, import retargeting evidence, architecture guard results, browser import-closure and libp2p-default evidence, regenerated release result, task accounting, and live supervisor state. It does not claim completion while any duplicate implementation or stale required evidence remains.
