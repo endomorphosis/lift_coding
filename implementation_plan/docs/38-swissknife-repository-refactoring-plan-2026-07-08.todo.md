@@ -1402,3 +1402,134 @@ Fresh scan inputs:
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Acceptance: Phase 15 closeout records task accounting, live hierarchy counts, any remaining direct-only descriptor decisions, all-app binding coverage, UI/UX smoke evidence, Meta glasses simulator evidence, accelerate adapter process evidence, and the final `GO`/`NO_GO` release status.
+
+## Phase 16 — browser-first module containment and duplicate-regression closure
+
+Phase 16 exists because duplicate/root service files can be restored by merges or
+supervisor reconciliation even after the module refactor appears complete. The
+first task in this phase is intentionally a P0 duplicate-service cleanup gate; no
+new browser/libp2p surface should be treated as release-ready while duplicate
+service basenames, sprint-named service files, Python wrappers, or host-only
+imports remain reachable from browser-facing entrypoints.
+
+## SWR-089 Remove restored duplicate service files and sprint-named service regressions
+
+- Status: completed
+- Priority: P0
+- Track: services/module-boundary
+- Dedupe key: swissknife_refactor:restored_duplicate_service_files_and_sprint_name_regression
+- Depends on: SWR-084
+- Outputs: swissknife/src/services, swissknife/scripts/audit-source-modules.mjs, swissknife/docs/service-boundary-audit.json
+- Validation: cd swissknife && find src/services -type f -printf '%f\t%p\n' | awk -F '\t' '{count[$1]++; paths[$1]=paths[$1] "\n" $2} END {for (name in count) if (count[name] > 1 && name !~ /^index\./) print name paths[name]}' | tee /tmp/swr-089-duplicate-services.txt && test ! -s /tmp/swr-089-duplicate-services.txt && ! find src/services -maxdepth 2 -type f | grep -E '(^|/)cec-sprint[0-9]|(^|/)sprint[0-9]' && npm run services:audit
+- Acceptance: The restored root duplicates `src/services/nlp-predicate-extractor.ts`, `src/services/spacy-wasm-nlp.ts`, and `src/services/zkp-ucan-bridge.ts` are removed or replaced by canonical module-owned implementations; all `src/services/sprint*` and `src/services/cec-sprint*` files are renamed to durable module names; imports and tests point at canonical paths; `services:audit` fails on future duplicate service basenames and legacy sprint service filenames.
+- Evidence: 2026-07-09 restored duplicate cleanup completed manually after pausing the stale SwissKnife `SWR-085` worker. Raw duplicate-basename scan returned no rows, sprint-file scan returned no rows, `npm run services:audit` passed with `serviceDuplicateBasenames: 0` and `legacySprintServiceFiles: 0`, and `npm run typecheck:services` passed.
+
+## SWR-090 Make module ownership the single source of truth for service containment
+
+- Status: completed
+- Priority: P0
+- Track: services/ownership
+- Dedupe key: swissknife_refactor:module_ownership_single_source_service_containment
+- Depends on: SWR-089
+- Outputs: swissknife/src/module-ownership.json, swissknife/docs/source-module-boundaries.md, swissknife/test/architecture/source-module-boundaries.test.js
+- Validation: cd swissknife && npm run audit:module-boundary && npm run services:audit
+- Acceptance: Every service-facing source file is owned by exactly one module family, compatibility root files are explicitly inventoried or removed, and the architecture test/audit pair rejects new root service wrappers, unowned service files, forbidden service imports, and browser-unsafe ownership drift.
+
+## SWR-091 Lock browser package exports and default browser entrypoints
+
+- Status: pending
+- Priority: P0
+- Track: browser/packaging
+- Dedupe key: swissknife_refactor:browser_exports_default_entrypoint_lock
+- Depends on: SWR-089, SWR-090
+- Outputs: swissknife/package.json, swissknife/test/browser-compat, swissknife/docs/browser-distribution-policy.md
+- Validation: cd swissknife && npm run test:browser-compat && npm run build:web
+- Acceptance: Browser package consumers resolve browser-safe exports for MCP, libp2p, IPFS, storage, workers, logic-language, deontic NLP, and ZKP APIs without pulling Node builtins, Python wrappers, subprocess adapters, native prover shims, or root duplicate service files.
+
+## SWR-092 Keep libp2p enabled by default in browser-safe runtime paths
+
+- Status: pending
+- Priority: P0
+- Track: browser/libp2p
+- Dedupe key: swissknife_refactor:libp2p_browser_default_runtime_real_modules
+- Depends on: SWR-091
+- Outputs: swissknife/src/services/mcp/libp2p-browser-runtime.ts, swissknife/web/js/apps/mcp-control.js, swissknife/web/js/apps/p2p-network.js, swissknife/docs/browser-libp2p-evidence.md
+- Validation: cd swissknife && npm run evidence:libp2p-browser && npm run audit:bundle-host-leakage
+- Acceptance: Browser libp2p remains enabled by default using real browser-capable libp2p modules; missing optional packages are reported as typed capability gaps instead of silent fallbacks; MCP Control and P2P Network render live default-status/gap evidence; bundle audit records host leakage 0 and default Pyodide 0.
+
+## SWR-093 Split host-only adapters from browser-safe service contracts
+
+- Status: pending
+- Priority: P0
+- Track: browser/host-boundary
+- Dedupe key: swissknife_refactor:host_only_adapter_contract_split
+- Depends on: SWR-090, SWR-091
+- Outputs: swissknife/src/services, swissknife/src/shared, swissknife/docs/browser-compatibility-inventory.md
+- Validation: cd swissknife && npm run browser:compat:inventory && npm run audit:bundle-host-leakage && npm run typecheck:services
+- Acceptance: Browser-facing code imports shared contracts or browser implementations only; host-only filesystem, subprocess, Python, native prover, Electron, and daemon adapters live behind explicit host modules and cannot be reached transitively from browser entrypoints.
+
+## SWR-094 Verify real browser ZKP and WASM paths after containment cleanup
+
+- Status: pending
+- Priority: P0
+- Track: browser/zkp
+- Dedupe key: swissknife_refactor:real_browser_zkp_wasm_after_containment
+- Depends on: SWR-089, SWR-093
+- Outputs: swissknife/src/services/zkp, swissknife/src/services/zkp-browser-schnorr.ts, swissknife/docs/browser-wasm-zkp-policy.md, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && npm run test:browser-compat && npm run test:fast -- test/mcp-plus-plus/wasm-prover-browser-purity.test.ts
+- Acceptance: Browser ZKP proof generation and verification use real TypeScript/WASM-backed paths by default; simulated or test-only proof paths are opt-in, visibly named, and rejected by browser-purity tests unless a test fixture explicitly requests simulation.
+
+## SWR-095 Add a browser/service duplicate regression sentinel to release readiness
+
+- Status: pending
+- Priority: P0
+- Track: release/gates
+- Dedupe key: swissknife_refactor:duplicate_service_browser_release_sentinel
+- Depends on: SWR-089, SWR-091, SWR-092, SWR-093, SWR-094
+- Outputs: swissknife/scripts/release-readiness-gate.mjs, swissknife/docs/release-readiness-report.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: Release readiness fails if duplicate service basenames, sprint-named services, root duplicate wrappers, browser-host leakage, default Pyodide exposure, stale browser/libp2p evidence, or browser-ZKP simulation drift are present; skipped gates must include an explicit reason and cannot hide browser-safety failures.
+
+## SWR-096 Prove all tool-backed virtual desktop apps remain browser-compatible
+
+- Status: pending
+- Priority: P1
+- Track: virtual-desktop/browser
+- Dedupe key: swissknife_refactor:tool_backed_virtual_desktop_browser_compatibility
+- Depends on: SWR-085, SWR-091, SWR-092, SWR-093
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb, swissknife/docs/virtual-desktop-tool-ui-smoke-evidence.md, swissknife/web/js
+- Validation: cd swissknife && npm run test:e2e:mcp && npm run evidence:mcp-glasses && npm run audit:bundle-host-leakage
+- Acceptance: Every tool-backed app renders a browser-safe success/fallback/error UI path and records a receipt or screenshot; no app smoke path requires Node builtins, Python wrappers, host subprocesses, physical glasses, or unavailable native adapters in the browser.
+
+## SWR-097 Keep Meta glasses and ORB/IDL evidence simulator-driven
+
+- Status: pending
+- Priority: P1
+- Track: glasses/browser
+- Dedupe key: swissknife_refactor:meta_glasses_simulator_browser_safe_orb_idl
+- Depends on: SWR-086, SWR-092, SWR-096
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/glasses-simulator-handoff.json, swissknife/docs/meta-glasses-simulator-evidence.md, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && npm run test:e2e:meta-glasses && npm run evidence:mcp-glasses
+- Acceptance: ORB/IDL handoff evidence uses simulator-visible display/audio/camera/microphone policy states; browser paths remain hardware-free, and physical-device-only features degrade through explicit simulator/desktop handoff receipts.
+
+## SWR-098 Preserve ipfs_accelerate_py supervisor/adapter evidence without hiding browser constraints
+
+- Status: pending
+- Priority: P1
+- Track: mcp/supervisor
+- Dedupe key: swissknife_refactor:ipfs_accelerate_supervisor_adapter_browser_boundary_evidence
+- Depends on: SWR-087, SWR-093, SWR-095
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-compat.pid, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json, swissknife/docs/ipfs-accelerate-compat-adapter-runbook.md
+- Validation: cd swissknife && node scripts/capture-ipfs-accelerate-adapter-coverage.cjs && npm run evidence:mcp-glasses && npm run audit:bundle-host-leakage
+- Acceptance: The supervisor-managed compatibility adapter is restartable and verified with PID/listener/tool coverage evidence, while browser bundles continue to expose only browser-safe descriptors and never execute the Python adapter directly.
+
+## SWR-099 Phase 16 supervisor closeout and merge-readiness report
+
+- Status: pending
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_16_browser_module_supervisor_closeout
+- Depends on: SWR-089, SWR-090, SWR-091, SWR-092, SWR-093, SWR-094, SWR-095, SWR-096, SWR-097, SWR-098
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/release-readiness-report.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: Phase 16 closeout records duplicate-service cleanup evidence, module ownership gate evidence, browser exports evidence, browser-default libp2p evidence, host-boundary evidence, real ZKP/WASM evidence, all-app browser smoke evidence, Meta glasses simulator evidence, adapter/supervisor process evidence, release-readiness status, active supervisor PID/state/log paths, and residual merge risks.
