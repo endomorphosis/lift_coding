@@ -1779,13 +1779,13 @@ before app-contract reconciliation continues.
 
 ## SWR-118 Inventory and classify every restored duplicate service implementation
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: services/ownership
 - Dedupe key: swissknife_refactor:restored_service_duplicate_inventory_and_canonical_ownership
 - Depends on: SWR-111
 - Outputs: swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/restored-service-duplicate-inventory.md, swissknife/src/module-ownership.json
-- Validation: cd swissknife && node scripts/audit-source-modules.mjs --json docs/service-boundary-audit.json; test "$(node -e "const r=require('./docs/service-boundary-audit.json'); console.log(r.serviceDuplicateBasenames ?? r.summary?.serviceDuplicateBasenames ?? -1)")" -gt 0
+- Validation: cd swissknife && node scripts/audit-source-modules.mjs --json docs/service-boundary-audit.json && node -e 'process.exit((require("./docs/service-boundary-audit.json").serviceDuplicateBasenames ?? 0) > 0 ? 0 : 1)'
 - Acceptance: The inventory contains every duplicate basename with all paths, content hashes, importers, canonical module owner, disposition (`remove-restored-copy`, `move-and-retarget`, or explicitly approved multi-entrypoint), and browser/runtime classification. It rejects broad exemptions, treats non-index basename duplicates as failures by default, and identifies root files restored after the prior Phase 16 cleanup.
 
 ## SWR-119 Remove restored duplicate service copies and retarget imports to canonical modules
