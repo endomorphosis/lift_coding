@@ -1615,7 +1615,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-105 Build the Agent Supervisor virtual-desktop application
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/supervisor-console
 - Dedupe key: swissknife_refactor:agent_supervisor_virtual_desktop_application
