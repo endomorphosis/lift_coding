@@ -1394,7 +1394,7 @@ Fresh scan inputs:
 
 ## SWR-088 Supervisor closeout for exhaustive MCP hierarchy and app coverage
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: refactor/supervisor
 - Dedupe key: swissknife_refactor:phase_15_supervisor_closeout
@@ -1402,6 +1402,7 @@ Fresh scan inputs:
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Acceptance: Phase 15 closeout records task accounting, live hierarchy counts, any remaining direct-only descriptor decisions, all-app binding coverage, UI/UX smoke evidence, Meta glasses simulator evidence, accelerate adapter process evidence, and the final `GO`/`NO_GO` release status.
+- Evidence: Phase 15 closeout captured in `swissknife/docs/refactor-final-signoff.md` and `swissknife/docs/supervisor-refactor-runbook.md` on 2026-07-10. Task board accounting showed 110 SWR tasks, 108 completed, 2 pending, 0 blocked, with SWR-081 through SWR-087 complete and SWR-088 active for this closeout. Live hierarchy evidence reported 3/3 services available, 3/3 full facades, 670 flat tools, 476 hierarchical tools, 220 explicit direct-only descriptors, 12 descriptors removed from the app-visible ledger, 0 unexplained flat hierarchy gaps, and representative dispatch 3/3; the remaining hierarchy warning is 2 non-blocking `ipfs_accelerate_py` normalized alias probe failures. All-app coverage reported 45 apps, 30 tool-backed apps, 11 manifest-only apps, 4 not-applicable apps, 822 backend capabilities, 665 app-visible capabilities, 49 desktop/mobile-only capabilities, 108 supervisor-only capabilities, and 0 missing concrete bindings. UI smoke evidence covered 30 tool-backed apps with success/fallback/error receipts and the workflow matrix covered all 45 apps with pointer launch, keyboard launch, screenshots, and receipt or controlled-fixture evidence. Meta glasses evidence is simulator-driven with `physical_glasses_required=false` and `direct_desktop_pairing_required=false`. Accelerate adapter evidence reported `decision=go`, 11/11 required aliases mapped, facade tools 4/4, restart readiness true, PID file matching the live `127.0.0.1:3003` listener, and browser direct adapter execution disallowed. Release readiness reported 13/13 gates passed, 0 failed gates, 0 blockers, and final release decision `GO`.
 
 ## Phase 16 — browser-first module containment and duplicate-regression closure
 
