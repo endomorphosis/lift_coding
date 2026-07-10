@@ -1260,7 +1260,7 @@ Fresh scan inputs:
 
 ## SWR-079 Run release-readiness and merge-hygiene report for Phase 14
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: release
 - Dedupe key: swissknife_refactor:phase_14_release_readiness_merge_hygiene
@@ -1268,10 +1268,11 @@ Fresh scan inputs:
 - Outputs: swissknife/docs/release-readiness-report.md, swissknife/docs/release-readiness-report.json, swissknife/docs/refactor-final-signoff.md
 - Validation: cd swissknife && npm run release:readiness
 - Acceptance: Release readiness records duplicate-service gate status, sprint-file removal status, browser-default libp2p evidence, no-host-leakage evidence, real browser ZKP evidence, dirty worktree summary, and merge risks.
+- Evidence: 2026-07-09 `cd swissknife && npm run release:readiness` completed with `overallStatus: passed`; the persisted report records 9 passed, 0 failed, and 2 skipped gates after separately refreshed build evidence. `docs/service-boundary-audit.json` recorded `serviceDuplicateBasenames: 0` and `legacySprintServiceFiles: 0`; `npm run build:web` recorded host leakage 0 and default Pyodide 0; browser/libp2p Playwright freshness was regenerated and fresh.
 
 ## SWR-080 Supervisor closeout for Phase 14 regression-proofing
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: refactor/supervisor
 - Dedupe key: swissknife_refactor:phase_14_supervisor_closeout
@@ -1279,3 +1280,125 @@ Fresh scan inputs:
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Acceptance: Phase 14 closeout records task accounting, validation evidence, supervisor state paths, duplicate-regression gates, browser/libp2p runtime evidence, real ZKP evidence, and residual risks; no Phase 14 task remains unaccounted for.
+- Evidence: 2026-07-09 Phase 14 closeout recorded after service duplicate cleanup, descriptive service renames, browser libp2p default-status runtime export repair, release-readiness pass, and regenerated browser/libp2p evidence. Supervisor state path remains `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_task_state.json`; no implement-mode supervisor is left running after cleanup.
+
+## Phase 15: Exhaustive MCP Hierarchy And Virtual Desktop Tool Closure
+
+This phase tracks the remaining issues found by the live MCP hierarchy diagnosis
+after the release evidence returned to `GO`. The configured SwissKnife endpoints
+are reachable and representative dispatch works, but the taskboard must now close
+the difference between "visible as flat descriptors" and "fully routable through
+the hierarchical MCP++ facade", then prove every virtual desktop app has an
+intentional backend and ORB/glasses simulator route.
+
+Fresh scan inputs:
+
+- `test-results/virtual-desktop-ipfs-mcp-orb/hierarchical-tools-evidence.json`
+  reports all three configured services available with the full facade present:
+  `tools_list_categories`, `tools_list_tools`, `tools_get_schema`, and
+  `tools_dispatch`.
+- The live configured tool surface is 553 tools across `ipfs_kit_py`,
+  `ipfs_datasets_py`, and the `ipfs_accelerate_py` compatibility adapter; the
+  all-tools ledger records 661 tools when the real-local accelerate source
+  surface is included.
+- `ipfs_datasets_py` remains the open hierarchy gap: 336 flat non-meta
+  descriptors, 131 category-listed hierarchical entries, a 205 aggregate count
+  gap, and a stricter normalized-name gap currently reported as 236 descriptors.
+  Examples include direct/root policy and compliance tools such as
+  `policy_list`, `interface_list`, and `compliance_list_rules`, plus legacy
+  category-qualified descriptors such as `admin_tools.admin_tools` and
+  `development_tools.github_cli_tools`.
+- The current all-tools matrix proves 38 virtual desktop apps, 553 app-visible
+  tools, 104 ORB/IDL descriptors, and 104 glasses projections, but only three
+  app ids currently own generated all-tools bindings: `ipfs-explorer`,
+  `mcp-control`, and `model-browser`.
+- The Meta glasses validation lane must use simulator evidence rather than
+  assuming a desktop can pair directly to physical glasses.
+
+## SWR-081 Close the ipfs_datasets_py flat-to-hierarchical catalog gap
+
+- Status: completed
+- Priority: P0
+- Track: mcp/hierarchy
+- Dedupe key: swissknife_refactor:ipfs_datasets_flat_hierarchy_gap_closure
+- Depends on: SWR-080
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/hierarchical-tools-evidence.json, swissknife/docs/ipfs-datasets-hierarchical-tool-gap.md
+- Validation: cd swissknife && node scripts/capture-hierarchical-mcp-tools-evidence.cjs
+- Acceptance: Every live `ipfs_datasets_py` non-meta flat descriptor is either listed through `tools_list_categories` plus `tools_list_tools`, explicitly marked as direct-only with a documented reason and policy class, or removed from the SwissKnife app-visible ledger; the hierarchy evidence reports zero unexplained flat/direct descriptor gaps for `ipfs_datasets_py`.
+
+## SWR-082 Add normalized category/name aliasing for datasets hierarchical dispatch
+
+- Status: pending
+- Priority: P0
+- Track: mcp/hierarchy
+- Dedupe key: swissknife_refactor:ipfs_datasets_hierarchy_name_aliases
+- Depends on: SWR-081
+- Outputs: swissknife/scripts/capture-hierarchical-mcp-tools-evidence.cjs, swissknife/src/services/mcp, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && node scripts/capture-hierarchical-mcp-tools-evidence.cjs && npm run evidence:mcp-glasses
+- Acceptance: Hierarchical routing accepts and validates canonical, category-qualified, and underscore-qualified tool names where the server exposes equivalent descriptors; representative examples such as `bespoke_tools.system_status`, `bespoke_tools/system_status`, and direct root policy/compliance tools either dispatch successfully or produce a typed direct-only response with receipt evidence.
+
+## SWR-083 Promote the hierarchical MCP evidence report into the release gate
+
+- Status: pending
+- Priority: P0
+- Track: release/evidence
+- Dedupe key: swissknife_refactor:hierarchical_mcp_release_gate
+- Depends on: SWR-081, SWR-082
+- Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-readiness-report.md
+- Validation: cd swissknife && node scripts/capture-hierarchical-mcp-tools-evidence.cjs && node scripts/build-virtual-desktop-release-evidence.cjs && npm run release:readiness
+- Acceptance: The virtual-desktop release gate consumes `hierarchical-tools-evidence.json`, fails on missing facade meta-tools or failed representative dispatch, and records any remaining direct-only descriptors as explicit warnings or blockers rather than silent pass-through.
+
+## SWR-084 Expand all-tools bindings from three generated app families to every intended virtual desktop app
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/apps
+- Dedupe key: swissknife_refactor:all_virtual_desktop_app_tool_binding_coverage
+- Depends on: SWR-083
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-app-bindings.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/capability-matrix.json, swissknife/docs/virtual-desktop-all-tools-app-coverage.md
+- Validation: cd swissknife && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && node scripts/build-all-tools-capability-matrix.cjs
+- Acceptance: Every virtual desktop app has an intentional MCP backend binding state: concrete app-owned tool bindings where the app should use `ipfs_kit_py`, `ipfs_datasets_py`, or `ipfs_accelerate_py`, or an explicit `manifest_only`/`not_applicable` rationale where the app is deliberately not tool-backed. The matrix must distinguish app-visible, desktop/mobile-only, and supervisor-only capabilities without hiding unbound apps behind the three generic generated app ids.
+
+## SWR-085 Add end-to-end UI/UX smoke coverage for tool-backed virtual desktop apps
+
+- Status: pending
+- Priority: P0
+- Track: virtual-desktop/e2e
+- Dedupe key: swissknife_refactor:tool_backed_virtual_desktop_ui_smoke
+- Depends on: SWR-084
+- Outputs: swissknife/test/mcp-plus-plus, swissknife/docs/virtual-desktop-tool-ui-smoke-evidence.md, swissknife/test-results/virtual-desktop-ipfs-mcp-orb
+- Validation: cd swissknife && npm run test:e2e:mcp && npm run evidence:mcp-glasses
+- Acceptance: Each app with MCP-backed capabilities has at least one UI path that opens the app, renders the relevant control state, handles success/fallback/error states, and records a receipt or screenshot artifact proving the app uses the intended backend without breaking the desktop UX.
+
+## SWR-086 Use the Meta glasses simulator for ORB/IDL handoff evidence
+
+- Status: pending
+- Priority: P0
+- Track: glasses/simulator
+- Dedupe key: swissknife_refactor:meta_glasses_simulator_orb_idl_handoff
+- Depends on: SWR-084, SWR-085
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/glasses-simulator-handoff.json, swissknife/docs/meta-glasses-simulator-evidence.md, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && npm run test:e2e:meta-glasses && npm run evidence:mcp-glasses
+- Acceptance: Meta glasses handoff validation uses simulator-driven evidence for display, camera, speaker, and microphone capabilities; no task assumes direct desktop pairing to physical glasses. ORB/IDL projections must prove simulator-visible display states, audio/microphone capability policy states, camera permission/fallback states, and desktop/mobile handoff behavior.
+
+## SWR-087 Preserve accelerate compatibility adapter readiness and PID evidence
+
+- Status: pending
+- Priority: P1
+- Track: mcp/accelerate
+- Dedupe key: swissknife_refactor:accelerate_compat_adapter_process_evidence
+- Depends on: SWR-083
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-compat.pid, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json, swissknife/docs/ipfs-accelerate-compat-adapter-runbook.md
+- Validation: cd swissknife && node scripts/capture-ipfs-accelerate-adapter-coverage.cjs && ss -ltnp | grep ':3003'
+- Acceptance: The configured `ipfs_accelerate_py` compatibility adapter remains restartable and verifiable, exposes the full hierarchical facade, maps normalized required aliases to real upstream tools, and records PID/listener evidence so future supervisor runs do not mistake stale process state for a live adapter.
+
+## SWR-088 Supervisor closeout for exhaustive MCP hierarchy and app coverage
+
+- Status: pending
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_15_supervisor_closeout
+- Depends on: SWR-081, SWR-082, SWR-083, SWR-084, SWR-085, SWR-086, SWR-087
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: Phase 15 closeout records task accounting, live hierarchy counts, any remaining direct-only descriptor decisions, all-app binding coverage, UI/UX smoke evidence, Meta glasses simulator evidence, accelerate adapter process evidence, and the final `GO`/`NO_GO` release status.
