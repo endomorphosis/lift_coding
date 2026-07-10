@@ -1659,7 +1659,7 @@ uses `ipfs_kit_py` for immutable evidence/receipt storage and
 
 ## SWR-109 Run Meta glasses simulator modality and handoff workflows
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: glasses/simulator
 - Dedupe key: swissknife_refactor:meta_glasses_simulator_full_modality_handoff
