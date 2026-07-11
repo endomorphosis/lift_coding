@@ -1737,7 +1737,7 @@ aggregate count for per-app evidence.
 
 ## SWR-115 Normalize Meta glasses simulator modality evidence and artifact names
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: glasses/simulator
 - Dedupe key: swissknife_refactor:meta_glasses_simulator_modality_evidence_contract
