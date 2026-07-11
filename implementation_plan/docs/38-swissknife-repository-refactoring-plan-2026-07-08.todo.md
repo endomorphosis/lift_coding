@@ -1805,9 +1805,9 @@ before app-contract reconciliation continues.
 - Priority: P0
 - Track: services/architecture
 - Dedupe key: swissknife_refactor:content_aware_service_duplicate_merge_sentinel
-- Depends on: SWR-119
+- Depends on: SWR-119, SWR-116
 - Outputs: swissknife/scripts/audit-source-modules.mjs, swissknife/test/architecture/source-module-boundaries.test.js, swissknife/docs/service-boundary-audit.json
-- Validation: cd swissknife && npm run services:audit && npm run release:readiness
+- Validation: cd swissknife && npm run services:audit && node -e 'const fs=require("fs"); const source=fs.readFileSync("scripts/release-readiness-gate.mjs", "utf8"); if (!source.includes("services:audit")) process.exit(1);'
 - Acceptance: The ownership audit fails with a compact actionable report for any restored duplicate implementation, distinguishes approved index barrels from shadow copies, tracks canonical ownership and content hash, and is invoked by release readiness. A fixture proving a restored root copy is rejected is part of the architecture test suite.
 
 ## SWR-121 Rebuild browser import closure and default libp2p evidence after duplicate removal

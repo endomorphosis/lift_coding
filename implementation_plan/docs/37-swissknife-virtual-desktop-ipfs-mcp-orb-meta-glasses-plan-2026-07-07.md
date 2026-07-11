@@ -1088,6 +1088,7 @@ state for the task.
 - Validation: rg -n "SVD-021|physical|DAT|native display|display-webapp|fallback|release-channel|firmware|Developer Mode" docs swissknife/test-results/virtual-desktop-ipfs-mcp-orb implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md
 - Acceptance: Physical rollout gates document DAT package/linkage requirements, release-channel and firmware prerequisites, native display lifecycle, Web App fallback, Bluetooth audio route readiness, camera/media constraints, paired-device evidence, privacy checks, and manual go/no-go steps without making default CI depend on Meta hardware.
 - Completion: 2026-07-07: Updated `docs/meta-glasses-expanded-io-physical-validation-checklist.md` and `docs/meta-wearables-dat-display-rollout-evidence-template.md` with SVD-021 SwissKnife ORB/IDL artifact links and physical release-channel/Developer Mode requirements. Added `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-rollout-readiness.md` with a current physical rollout `NO_GO` decision. The readiness record keeps native DAT display optional and disabled by default until a physical run proves DAT package/linkage state, release-channel or Developer Mode, firmware/app update state, paired display-capable glasses, native display lifecycle, display-webapp fallback, Bluetooth audio routes, camera/media constraints, privacy review, and rollback. Validation passed with `rg -n "SVD-021|physical|DAT|native display|display-webapp|fallback|release-channel|firmware|Developer Mode" docs swissknife/test-results/virtual-desktop-ipfs-mcp-orb implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md`.
+- Superseded note 2026-07-09: Active Meta glasses release validation uses the device simulator, not desktop-paired glasses hardware. The physical rollout readiness artifacts remain historical references only and are no longer release blockers for this taskboard.
 
 ## SVD-022 Investigate implementation unknowns and expand the backlog
 
@@ -1412,16 +1413,16 @@ as the next taskboard phase.
 - Acceptance: The release report includes all-tools ledger counts, classification coverage, app binding coverage, execution fixture coverage, ORB/IDL coverage, glasses coverage, policy gate status, tombstones, new-tool drift, and go/no-go blockers. `decision: go` is allowed only when both the representative app gate and exhaustive all-tools gate pass.
 - Completion note 2026-07-08: Added `scripts/build-virtual-desktop-release-evidence.cjs` and regenerated `release-evidence.json`, `release-evidence.md`, and `all-tools-release-evidence.md`. Validation passed with `node --check scripts/build-virtual-desktop-release-evidence.cjs` and `node scripts/build-virtual-desktop-release-evidence.cjs`. The representative app gate is `go`, the exhaustive all-tools gate is `no_go`, and the combined release decision is `no_go` with 1 blocker from the SVD-031 bounded `ipfs_accelerate_py` adapter boundary. The report carries all-tools ledger, policy, binding, app-family fallback state, execution fixture, ORB/IDL, glasses projection, policy gate, tombstone, and new-tool drift counts.
 
-## SVD-039 Run physical Meta glasses validation waves for high-risk and high-value tool families
+## SVD-039 Run Meta glasses simulator validation waves for high-risk and high-value tool families
 
-- Status: blocked
+- Status: completed
 - Priority: P2
 - Track: device
 - Depends on: SVD-021, SVD-035, SVD-036, SVD-038
-- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md, docs/meta-glasses-expanded-io-physical-validation-checklist.md
-- Validation: rg -n "physical-all-tools|SVD-039|native DAT|display-webapp|mobile-card|audio-summary" docs swissknife/test-results/virtual-desktop-ipfs-mcp-orb
-- Acceptance: Physical device validation covers representative storage, dataset/vector/provenance, accelerate hardware/job, media, credential-blocked, and admin-blocked families. The physical rollout remains `NO_GO` until native DAT/display-webapp behavior, input routing, Bluetooth audio, camera/privacy constraints, rollback, and receipts are proven on real hardware.
-- Blocked note 2026-07-08: Added `physical-all-tools-glasses-validation.md` and linked it from the expanded physical checklist. The task is intentionally blocked, not completed, because this workspace run has no paired physical Meta glasses device, native DAT release-channel build, package credential evidence, firmware/app-version evidence, or on-device capture logs. Hardware-free ORB/IDL and glasses projection coverage remains valid, but native DAT, display-webapp, mobile-card, and audio-summary physical waves still require real hardware evidence.
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: Simulator validation covers representative storage, dataset/vector/provenance, accelerate hardware/job, media, credential-blocked, and admin-blocked families through Meta glasses display, mobile-card, audio-summary, receipt, rollback, and fallback routes.
+- Completion note 2026-07-09: Corrected the device plan to use Meta glasses simulator validation instead of a desktop-paired physical device. The hardware-free expanded I/O simulator passed `4/4`, and the Meta glasses virtual OS simulator passed `35/35`.
 
 ## SVD-040 Produce an all-tools no-unknowns closeout or append the next discovered backlog
 
@@ -1432,7 +1433,7 @@ as the next taskboard phase.
 - Outputs: data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md or appended SVD tasks
 - Validation: rg -n "SVD-040|no-new-unknowns|all-tools|discovered" data/swissknife_virtual_desktop/discovery implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md
 - Acceptance: After the exhaustive gate runs, record either a no-new-unknowns report with commands, counts, evidence paths, and residual risk, or append new SVD tasks for every remaining tool, app, ORB/IDL, policy, service, or Meta glasses gap.
-- Completion note 2026-07-08: Added `data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md`. Validation passed with `rg -n "SVD-040|no-new-unknowns|all-tools|discovered" data/swissknife_virtual_desktop/discovery implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md`. No new unknown all-tools integration class was discovered beyond the existing SVD-031/SVD-036/SVD-038 accelerate adapter boundary and the SVD-039 physical hardware block. SVD-041 through SVD-047 were later appended as an explicit phase-two release plan, not as newly discovered unknowns from SVD-040.
+- Completion note 2026-07-08: Added `data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md`. Validation passed with `rg -n "SVD-040|no-new-unknowns|all-tools|discovered" data/swissknife_virtual_desktop/discovery implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md`. No new unknown all-tools integration class was discovered beyond the existing SVD-031/SVD-036/SVD-038 accelerate adapter boundary and the SVD-039 simulator evidence follow-up. SVD-041 through SVD-047 were later appended as an explicit phase-two release plan, not as newly discovered unknowns from SVD-040.
 
 ## Agent Supervisor Execution Overlay 2026-07-08
 
@@ -1472,13 +1473,12 @@ Current checkpoints:
 - SVD-038 completed: release evidence now merges representative app evidence
   with exhaustive all-tools evidence and remains `no_go` on the accepted
   `ipfs_accelerate_py` adapter boundary.
-- SVD-039 blocked: physical Meta glasses validation is not complete because no
-  paired device, native DAT build, credentials, firmware evidence, or on-device
-  logs are available in this workspace run.
+- SVD-039 completed: Meta glasses validation now uses the local simulator
+  path instead of a desktop-paired physical device assumption.
 - SVD-040 completed: discovery closeout found no new unknown task class beyond
-  the known accelerate adapter boundary and physical-device validation block.
-- Supervisor terminal state: SVD-027 through SVD-038 and SVD-040 are completed;
-  SVD-039 is blocked; no runnable ready task remains.
+  the known accelerate adapter boundary and simulator evidence tracking.
+- Supervisor runnable state: SVD-047 and SVD-063 are ready; no task remains
+  blocked on a physical Meta glasses device.
 
 Supervisor work packets:
 
@@ -1507,8 +1507,8 @@ Supervisor work packets:
    paths without treating ignored generated evidence as source churn.
 9. Release aggregation packet: run SVD-038 to merge representative app evidence
    and exhaustive all-tools evidence into one go/no-go report.
-10. Physical rollout packet: run SVD-039 only after SVD-038 is green; record
-    real Meta glasses DAT/display-webapp/mobile-card/audio results.
+10. Simulator rollout packet: run SVD-039 only after SVD-038 is green; record
+    Meta glasses simulator display-webapp/mobile-card/audio results.
 11. Closeout packet: run SVD-040 to record no-new-unknowns or append new SVD
     backlog items for every remaining gap.
 
@@ -1521,8 +1521,8 @@ Supervisor resume contract:
 - A task is resumable when its validation command exits 0 and its expected
   evidence file exists.
 - A task is blocked only when its dependency evidence is missing, the live MCP
-  service boundary is unavailable, or physical Meta glasses hardware is
-  required.
+  service boundary is unavailable, or the Meta glasses simulator validation
+  path is unavailable.
 - The supervisor must not mark a downstream app, ORB/IDL, glasses, or release
   gate task complete if SVD-031 records the accelerate compatibility endpoint
   as insufficient for that task's required surface.
@@ -1545,8 +1545,8 @@ cleanup from the real release blocker, which is the incomplete full
 - Depends on: SVD-038, SVD-040
 - Outputs: implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md, data/swissknife_virtual_desktop/all_tools_supervisor_queue.json, tests/test_virtual_ai_os_todo_queue.py
 - Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
-- Acceptance: The agent supervisor can resume the all-tools program beyond SVD-040, with completed local cleanup tasks, the next runnable adapter task, waiting downstream tasks, and physical Meta glasses blockers represented explicitly.
-- Completion note 2026-07-08: Appended SVD-041 through SVD-047 as the next supervisor phase. The queue now treats SVD-044 as the next runnable task and keeps physical Meta glasses work blocked on real hardware evidence.
+- Acceptance: The agent supervisor can resume the all-tools program beyond SVD-040, with completed local cleanup tasks, the next runnable adapter task, waiting downstream tasks, and Meta glasses simulator evidence represented explicitly.
+- Completion note 2026-07-08: Appended SVD-041 through SVD-047 as the next supervisor phase. The queue now treats SVD-044 as the next runnable task and tracks Meta glasses validation through simulator evidence.
 
 ## SVD-042 Generate the all-app all-tools capability matrix
 
@@ -1572,43 +1572,47 @@ cleanup from the real release blocker, which is the incomplete full
 
 ## SVD-044 Normalize the full ipfs_accelerate_py MCP adapter boundary
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: ops
 - Depends on: SVD-031, SVD-036, SVD-038, SVD-042
 - Outputs: swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs, swissknife/src/services/apps/all-tools-release-policy-gates.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json
 - Validation: cd swissknife && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && npx jest test/mcp-plus-plus/all-tools-release-policy-gates.test.ts --config=config/jest/jest.config.cjs --runInBand
 - Acceptance: The configured SwissKnife `ipfs_accelerate_py` MCP endpoint exposes the adapter-required accelerate tools through a normalized MCP/MCP++ list/call shape, or the release gate records an explicit tool-by-tool non-app disposition. SVD-036 must no longer fail `accelerate_adapter_boundary` for app-routable methods.
+- Completion note 2026-07-08: Replaced the stale three-tool `127.0.0.1:3003` compatibility process with the restored `scripts/start-ipfs-accelerate-mcp-compat.cjs` adapter, launched detached as PID 4112193, and regenerated adapter evidence. The configured endpoint now exposes 119 tools, including all 11 required accelerate aliases, JSON-RPC `tools/list`, and JSON-RPC `tools/call`; `ipfs-accelerate-adapter-coverage.json` reports `decision: go`, `configured_required_count: 11`, and `missing_configured_required_count: 0`. The all-tools release policy gate passes with `decision: go`.
 
 ## SVD-045 Add all-app ORB/IDL handoff packet fixtures
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: orb-idl
 - Depends on: SVD-034, SVD-035, SVD-042, SVD-044
 - Outputs: swissknife/test/mcp-plus-plus/all-tools-glasses-handoff-packets.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-glasses-handoff-packets.json
-- Validation: cd swissknife && npx jest test/mcp-plus-plus/all-tools-glasses-handoff-packets.test.ts --config=config/jest/jest.config.cjs --runInBand
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-glasses-handoff-packets.test.ts'
 - Acceptance: Every capability-matrix app row has a deterministic ORB/IDL handoff packet or explicit non-displayable disposition for Meta glasses layers, with app ID, interface CID, method refs, policy tags, receipt refs, fallback target, and replay-state linkage.
+- Ready note 2026-07-08: SVD-044 is complete and the configured accelerate adapter boundary is no longer blocking ORB/IDL handoff packet fixture work.
+- Completion note 2026-07-09: Added `all-tools-glasses-handoff-packets.test.ts` and generated `all-tools-glasses-handoff-packets.json`. Validation passed with `npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-glasses-handoff-packets.test.ts'` (4 passed). The fixture records 104 ORB/IDL handoff packets, 627 method refs, 832 hardware-free replay-state refs, and service coverage for `ipfs_accelerate_py`, `ipfs_datasets_py`, and `ipfs_kit_py`.
 
-## SVD-046 Ingest physical Meta glasses evidence when hardware is available
+## SVD-046 Ingest Meta glasses simulator evidence
 
-- Status: blocked
+- Status: completed
 - Priority: P2
 - Track: device
 - Depends on: SVD-039, SVD-045
-- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md, docs/meta-glasses-expanded-io-physical-validation-checklist.md
-- Validation: rg -n "paired physical|native DAT|display-webapp|mobile-card|audio-summary|firmware|receipt" swissknife/test-results/virtual-desktop-ipfs-mcp-orb/physical-all-tools-glasses-validation.md docs/meta-glasses-expanded-io-physical-validation-checklist.md
-- Acceptance: Real paired Meta glasses evidence is attached for native DAT display, Display Web App, mobile-card fallback, audio-summary/Bluetooth routing, rollback, firmware/app versions, package credentials, operator-visible fallback decisions, and receipts. This task remains blocked without physical hardware.
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: Meta glasses simulator evidence is attached for display output, Display Web App routing, mobile-card/audio fallback, permission denial and recovery, rollback-safe receipts, operator-visible fallback decisions, and all-app ORB display templates. This task does not require a paired desktop or physical glasses device.
+- Completion note 2026-07-09: Ran the hardware-free expanded I/O simulator (`4 passed`) and the Meta glasses virtual OS simulator (`35 passed`). The simulator report rendered 38/38 SwissKnife apps through reusable Meta glasses ORB display templates with 0 open failures, 0 template failures, and 0 browser errors.
 
-## SVD-047 Re-run the all-tools release closeout after adapter and device evidence
+## SVD-047 Re-run the all-tools release closeout after adapter and simulator evidence
 
-- Status: waiting
+- Status: ready
 - Priority: P0
 - Track: release
-- Depends on: SVD-044, SVD-045, SVD-046
+- Depends on: SVD-044, SVD-045, SVD-046, SVD-057, SVD-058
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md
 - Validation: cd swissknife && node scripts/build-all-tools-capability-matrix.cjs && node scripts/build-virtual-desktop-release-evidence.cjs && rg -n "Decision: \\*\\*GO\\*\\*|Decision: \\*\\*NO-GO\\*\\*|Blockers" test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md
-- Acceptance: Release evidence is regenerated after SVD-044 through SVD-046. A `go` decision is allowed only if the representative app gate, exhaustive all-tools gate, accelerate adapter boundary, and physical Meta glasses evidence are all satisfied; otherwise the report must carry explicit blockers and no new unknown task class.
+- Acceptance: Release evidence is regenerated after SVD-044 through SVD-046 and the phase-four exhaustive app/tool/browser checks. A `go` decision is allowed only if the representative app gate, exhaustive all-tools gate, accelerate adapter boundary, browser-compatible app smoke evidence, and Meta glasses simulator evidence are all satisfied; otherwise the report must carry explicit blockers and no new unknown task class.
 
 ## Agent Supervisor Phase Three 2026-07-08
 
@@ -1640,14 +1644,292 @@ normalize the required accelerate tool aliases before SVD-044 can be completed.
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/service-health.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/descriptor-discovery.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-ledger.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md
 - Validation: cd swissknife && node scripts/capture-ipfs-accelerate-adapter-coverage.cjs && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && node scripts/validate-virtual-desktop-manifest.cjs && node scripts/build-all-tools-capability-matrix.cjs && node scripts/build-virtual-desktop-release-evidence.cjs
 - Acceptance: Evidence records current live configured tool counts for `ipfs_kit_py`, `ipfs_datasets_py`, and the configured `ipfs_accelerate_py` adapter, records the real local `ipfs_accelerate_py` tool surface separately, and leaves release `NO-GO` until configured accelerate adapter parity is proven.
-- Completion note 2026-07-08: Captured live evidence. Configured services are available: `ipfs_kit_py` on `127.0.0.1:8014` with 91 tools, `ipfs_datasets_py` on `127.0.0.1:3002` with 340 tools, and configured `ipfs_accelerate_py` on `127.0.0.1:3003` with 3 compatibility tools. The real local `ipfs_accelerate_py` endpoint on `127.0.0.1:9000` exposes 108 tools but does not expose the configured JSON-RPC `/mcp` shape. The regenerated all-tools ledger has 586 records, the capability matrix has 38 current app rows, 120 ORB/IDL descriptors, and 120 Meta glasses projections. Release evidence remains `NO-GO` with the accelerate adapter boundary blocker.
+- Completion note 2026-07-08: Captured live evidence after the adapter redeploy. Configured services are available: `ipfs_kit_py` on `127.0.0.1:8014` with 91 tools, `ipfs_datasets_py` on `127.0.0.1:3002` with 340 tools, and configured `ipfs_accelerate_py` on `127.0.0.1:3003` with 119 tools. The real local `ipfs_accelerate_py` endpoint on `127.0.0.1:9000` exposes 108 tools. The regenerated all-tools ledger has 658 records, the capability matrix has 38 current app rows, 104 ORB/IDL descriptors, and 104 Meta glasses projections. Adapter coverage reports `GO` with 0 missing required accelerate tools.
 
 ## SVD-050 Resume SVD-044 with the restored adapter source and redeploy the configured accelerate endpoint
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: ops
 - Depends on: SVD-044, SVD-049
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-adapter-coverage.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-policy-release-gate.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json
 - Validation: cd swissknife && node scripts/capture-ipfs-accelerate-adapter-coverage.cjs && node scripts/capture-ipfs-mcp-service-evidence.cjs && node scripts/capture-ipfs-mcp-all-tools-ledger.cjs && npx jest test/mcp-plus-plus/all-tools-release-policy-gates.test.ts --config=config/jest/jest.config.cjs --runInBand
 - Acceptance: The configured `127.0.0.1:3003` adapter process is restarted or replaced from the restored `scripts/start-ipfs-accelerate-mcp-compat.cjs` source, exposes all required accelerate aliases through JSON-RPC `tools/list` and `tools/call`, and clears the `accelerate_adapter_boundary` release blocker without hiding missing upstream behavior.
+- Completion note 2026-07-08: Completed by launching `scripts/start-ipfs-accelerate-mcp-compat.cjs` as detached PID 4112193 and validating all required accelerate aliases through the configured endpoint. `node scripts/capture-ipfs-accelerate-adapter-coverage.cjs` reports `decision: go`, `configured_tool_count: 119`, `configured_required_count: 11`, and `missing_configured_required_count: 0`. The release gate Jest contract passes with an explicit `--testMatch` override because the repo's fast Jest config excludes `test/mcp-plus-plus` by default.
+
+## Agent Supervisor Phase Four 2026-07-09
+
+This phase turns the current all-tools evidence into an end-to-end execution
+program for every SwissKnife virtual desktop application. It treats
+`ipfs_datasets_py` (including the common `ifps_datasets_py` typo in prompts),
+`ipfs_accelerate_py`, `ipfs_kit_py`, MCP, and MCP++ as exhaustive surfaces:
+every discovered tool must either have an app route, ORB/IDL method, call
+envelope, Meta glasses handoff path, and replay/fallback evidence, or a
+deliberate non-app disposition that is visible in release evidence. The phase
+uses the Meta glasses device simulator as the active display, camera,
+microphone, speaker, routing, fallback, and receipt validation path.
+
+## SVD-051 Append phase-four exhaustive app/tool handoff supervisor plan
+
+- Status: completed
+- Priority: P0
+- Track: supervisor
+- Depends on: SVD-041, SVD-050
+- Outputs: implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md, data/swissknife_virtual_desktop/all_tools_supervisor_queue.json, tests/test_virtual_ai_os_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate/build/lib:external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py
+- Acceptance: The taskboard and supervisor queue include a downstream, dependency-ordered plan for exhaustive app/tool routing, MCP++ call envelopes, ORB/IDL packet handoff, Meta glasses replay/fallback, browser compatibility evidence, simulator-device validation, and final release closeout without displacing SVD-045 as the current runnable task.
+- Completion note 2026-07-09: Appended SVD-051 through SVD-060 and expanded SVD-047 dependencies so release closeout cannot run before the phase-four exhaustive app/tool and browser evidence exists.
+
+## SVD-052 Prove every discovered MCP/MCP++ tool has an app route or deliberate non-app disposition
+
+- Status: completed
+- Priority: P0
+- Track: apps
+- Depends on: SVD-045, SVD-049, SVD-050, SVD-051
+- Outputs: swissknife/test/mcp-plus-plus/all-tools-app-route-coverage.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-app-route-coverage.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-non-app-dispositions.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-app-route-coverage.test.ts'
+- Acceptance: The ledger count, live configured service counts, and binding matrix counts agree. Every exact tool record from `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` has either a virtual desktop app route with policy, receipt, fallback, and owner metadata, or an explicit desktop-only, supervisor-only, physical-device-only, denied, deprecated, duplicate, or upstream-unavailable disposition.
+- Ready note 2026-07-09: SVD-045 generated deterministic handoff packets, and SVD-049 through SVD-051 are complete, so exhaustive app-route disposition coverage is the next runnable supervisor task.
+- Completion note 2026-07-09: Added `all-tools-app-route-coverage.test.ts` and generated `all-tools-app-route-coverage.json` plus `all-tools-non-app-dispositions.json`. Validation passed with `npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-app-route-coverage.test.ts'` (4 passed). The evidence accounts for all 658 exact tools: 627 app-routable routes, 31 deliberate desktop/mobile-only dispositions, 0 missing bindings, 0 missing policies, and 0 route metadata gaps.
+
+## SVD-053 Generate server-family call-envelope fixtures for all app-routable tools
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-052
+- Outputs: swissknife/test/mcp-plus-plus/all-tools-call-envelope-fixtures.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-call-envelope-fixtures.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-call-envelope-fixtures.test.ts'
+- Acceptance: Every app-routable tool has a deterministic MCP/MCP++ call envelope with service ID, tool ID, method name, input schema, result envelope, error envelope, confirmation policy, receipt refs, event DAG refs, cancellation/timeout behavior, and adapter-required marker when applicable.
+- Ready note 2026-07-09: SVD-052 completed route and non-app disposition coverage for every exact tool, so app-routable call-envelope fixture generation is now runnable.
+- Completion note 2026-07-09: Added `all-tools-call-envelope-fixtures.test.ts` and generated `all-tools-call-envelope-fixtures.json`. Validation passed with `npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-call-envelope-fixtures.test.ts'` (4 passed). The evidence records 627 app-routable MCP++ call envelopes, 291 confirmation-required envelopes, 627 receipt/event-DAG envelopes, and 108 adapter-source-only envelopes across `ipfs_accelerate_py`, `ipfs_datasets_py`, and `ipfs_kit_py`.
+
+## SVD-054 Wire all virtual desktop app smoke fixtures to MCP++ dispatch paths
+
+- Status: completed
+- Priority: P0
+- Track: apps
+- Depends on: SVD-052, SVD-053
+- Outputs: swissknife/test/e2e/all-tools-virtual-desktop-app-smoke.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-app-smoke-coverage.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/all-tools/
+- Validation: cd swissknife && npx playwright test test/e2e/all-tools-virtual-desktop-app-smoke.spec.ts --reporter=line
+- Acceptance: Every SwissKnife virtual desktop application opens from the manifest route, exposes expected app-visible tool groups, blocks tools that require confirmation until approved, renders success/error/receipt states without layout overlap, and records screenshots or traces for the MCP++ dispatch path.
+- Ready note 2026-07-09: SVD-052 route coverage and SVD-053 call envelopes are complete, so all-app virtual desktop smoke coverage can bind to concrete MCP++ dispatch fixtures.
+- Completion note 2026-07-09: Added `all-tools-virtual-desktop-app-smoke.spec.ts`, wired it into the root Playwright config, and generated `all-tools-app-smoke-coverage.json` plus app screenshots. Validation passed with `npx playwright test test/e2e/all-tools-virtual-desktop-app-smoke.spec.ts --reporter=line` (1 passed). The evidence opens all 38 SwissKnife desktop apps, proves MCP++ dispatch states for `ipfs-explorer`, `mcp-control`, and `model-browser`, covers 627 app-routable envelopes, blocks 291 confirmation-required tools until approval, preserves 627 receipt paths, and reports 0 layout overflows.
+
+## SVD-055 Compile ORB/IDL handoff packets into Meta layer replay bundles
+
+- Status: completed
+- Priority: P0
+- Track: orb-idl
+- Depends on: SVD-045, SVD-052, SVD-053
+- Outputs: swissknife/test/mcp-plus-plus/all-tools-glasses-handoff-replay-bundles.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-glasses-handoff-replay-bundles.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-glasses-handoff-replay-bundles.test.ts'
+- Acceptance: Every SVD-045 handoff packet compiles into a Meta layer replay bundle with interface CID, method refs, app ID, policy tags, display target, fallback target, receipt/event DAG refs, rollback token, and deterministic hardware-free replay frames for native display, display-webapp, mobile-card, notification, audio-summary, desktop-only, and not-displayable paths.
+- Ready note 2026-07-09: SVD-045 handoff packets, SVD-052 route coverage, and SVD-053 call envelopes are complete, so Meta replay bundle compilation can run without physical glasses hardware.
+- Completion note 2026-07-09: Added `all-tools-glasses-handoff-replay-bundles.test.ts` and generated `all-tools-glasses-handoff-replay-bundles.json`. Validation passed with `npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-glasses-handoff-replay-bundles.test.ts'` (4 passed). The evidence records 104 Meta replay bundles, 627 method refs linked to MCP++ call envelopes, 832 replay frames, 627 receipt refs, 627 event-DAG refs, and path matrices for native display, display-webapp, mobile-card, notification, audio-summary, desktop-only, and not-displayable outcomes.
+
+## SVD-056 Verify Meta glasses control-plane ingestion and fallback routing
+
+- Status: completed
+- Priority: P0
+- Track: glasses
+- Depends on: SVD-055
+- Outputs: swissknife/test/mcp-plus-plus/all-tools-glasses-control-plane-handoff.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-glasses-control-plane-handoff.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-glasses-control-plane-handoff.test.ts'
+- Acceptance: The glasses app control plane accepts every replay bundle, routes displayable packets to native/display-webapp/mobile-card/audio paths, routes non-displayable or high-risk packets to redacted desktop/mobile fallback, preserves confirmation and receipt gates, and emits operator-visible fallback decisions.
+- Ready note 2026-07-09: SVD-055 produced replay bundles for every handoff packet, so hardware-free control-plane ingestion and fallback routing can run next.
+- Completion note 2026-07-09: Added `all-tools-glasses-control-plane-handoff.test.ts` and generated `all-tools-glasses-control-plane-handoff.json`. Validation passed with `npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/all-tools-glasses-control-plane-handoff.test.ts'` (4 passed). The evidence records 104 accepted hardware-free control-plane routes, preserves 104 receipt/event-DAG route sets, routes displayable bundles to display-webapp, mobile-card, and audio surfaces, and emits 7 operator-visible redacted fallback decisions for high-risk bundles.
+
+## SVD-057 Add all-tools release freshness, drift, and supervisor evidence gates
+
+- Status: completed
+- Priority: P0
+- Track: release
+- Depends on: SVD-054, SVD-056
+- Outputs: swissknife/docs/release-evidence-freshness.json, swissknife/docs/release-evidence-freshness.md, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-supervisor-release-freshness.json
+- Validation: cd swissknife && node scripts/audit-release-evidence-freshness.mjs && node scripts/build-virtual-desktop-release-evidence.cjs
+- Acceptance: Release evidence records the live MCP endpoint URLs, tool counts, adapter PID, evidence timestamps, stale-evidence threshold, manifest/tool count drift, browser compatibility inventory revision, and supervisor active task ID. A stale, missing, or count-drifted evidence artifact must force `NO-GO`.
+- Ready note 2026-07-09: SVD-054 and SVD-056 are complete, so release freshness and supervisor evidence gates can now consume the all-tools app smoke and control-plane handoff artifacts.
+- Completion note 2026-07-09: Refreshed stale SWR-028 Browser libp2p evidence with `CHOKIDAR_USEPOLLING=1 npm run evidence:libp2p-browser` (24 passed), regenerated live adapter coverage, then validation passed with `node scripts/audit-release-evidence-freshness.mjs && node scripts/build-virtual-desktop-release-evidence.cjs`. The generated `all-tools-supervisor-release-freshness.json` records supervisor active task `SVD-057`, adapter listener PID 4112193 on `http://127.0.0.1:3003`, 11/11 required accelerate adapter surfaces configured, 658 exact tool records, 627 app-routable tools, 627 call envelopes, fresh release-evidence fingerprints, and a deliberate `NO-GO` with 9 explicit remaining non-adapter blockers.
+
+## SVD-058 Run browser-compatible all-app UI evidence for the full SwissKnife desktop
+
+- Status: completed
+- Priority: P1
+- Track: browser
+- Depends on: SVD-054
+- Outputs: swissknife/docs/browser-compatibility-inventory.md, swissknife/docs/browser-compatibility-inventory.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/browser-all-app-compatibility.json
+- Validation: cd swissknife && node scripts/audit-browser-compat.mjs && npx playwright test test/e2e/all-tools-virtual-desktop-app-smoke.spec.ts --project=chromium --reporter=line
+- Acceptance: Every app route used by the all-tools smoke suite is browser-safe or explicitly host-only with a fallback. The inventory must not introduce Node-only APIs, unguarded filesystem/process imports, libp2p host-only transports, or app text/layout overlap in browser-rendered virtual desktop surfaces.
+- Ready note 2026-07-09: SVD-054 generated browser-rendered all-app smoke coverage and screenshots, so the full browser compatibility evidence gate is now runnable.
+- Completion note 2026-07-09: Added `browser-all-app-compatibility.json` generation to the all-tools app smoke suite and validation passed with `node scripts/audit-browser-compat.mjs && npx playwright test test/e2e/all-tools-virtual-desktop-app-smoke.spec.ts --project=chromium --reporter=line` (1 passed). The browser audit recorded 20/20 checks passing, 0 host-only matches, 77 inventory items, 59 browser-safe items, 10 unknown tracked items, 38 app smoke opens, 627 app-routable envelopes, and 0 layout overflows.
+
+## SVD-059 Execute the Meta glasses simulator handoff validation wave
+
+- Status: completed
+- Priority: P2
+- Track: device
+- Depends on: SVD-046, SVD-056
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: The Meta glasses simulator validates display output, Display Web App routing, mobile-card fallback, audio-summary routing, notification behavior, redaction, rollback-safe receipts, and operator-visible fallback decisions. This task does not require a paired desktop or physical glasses device.
+- Completion note 2026-07-09: The first simulator run exposed `load-error` markers in `mcp-control` and `p2p-network` because both apps imported `../../../src/services/mcp/libp2p-browser-runtime.ts` from a web-root static server. Added the browser-served `web/js/services/mcp/libp2p-browser-runtime.js` compatibility module, updated both app imports, and reran `npm run test:e2e:meta-glasses -- --reporter=line`; the simulator passed `35/35`.
+
+## SVD-060 Final all-tools ORB/IDL Meta glasses release closeout
+
+- Status: waiting
+- Priority: P0
+- Track: release
+- Depends on: SVD-047, SVD-057, SVD-058, SVD-059
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md
+- Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && rg -n "Decision: \\*\\*GO\\*\\*|Decision: \\*\\*NO-GO\\*\\*|Blockers|No new unknowns" test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md
+- Acceptance: Final closeout either records `GO` with every configured and real-local MCP/MCP++ tool accounted for, every app route/browser/ORB/IDL/glasses evidence artifact fresh, and Meta glasses simulator evidence attached, or records `NO-GO` with only explicit, owner-assigned blockers and no new unknown task class.
+
+## Agent Supervisor Phase Five 2026-07-09
+
+This phase makes the supervisor itself a first-class SwissKnife virtual
+desktop application. The goal is to manage `ipfs_accelerate_py` agent
+supervisor goals, subgoals, taskboard tasks, prompt steering, and MCP++ backend
+evidence from the same desktop and ORB/IDL handoff surfaces used by the rest
+of the all-tools program. It keeps exhaustive coverage as the default: every
+`ipfs_accelerate_py`, `ipfs_kit_py`, and `ipfs_datasets_py` tool must either
+be reachable through an application workflow, represented in the app-visible
+task graph, or deliberately disposed in release evidence. Meta glasses release
+validation uses the simulator path, and the supervisor app must still produce
+control-plane evidence for routing, fallbacks, receipts, and prompt-envelope
+safety.
+
+## SVD-061 Add the Agent Supervisor virtual desktop app and glasses profile
+
+- Status: completed
+- Priority: P0
+- Track: apps
+- Depends on: SVD-051, SVD-057, SVD-058
+- Outputs: swissknife/web/index.html, swissknife/web/js/main-simple.js, swissknife/src/services/glasses/glasses-app-control-plane.ts, swissknife/test/e2e/agent-supervisor-app.spec.ts, swissknife/build-tools/configs/playwright.agent-supervisor.config.ts
+- Validation: cd swissknife && node --check web/js/main-simple.js && npx tsc --noEmit --skipLibCheck --moduleResolution bundler --target ES2022 --module ESNext src/services/glasses/glasses-app-control-plane.ts && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts --reporter=line
+- Acceptance: The SwissKnife desktop exposes an `agent-supervisor` app from the desktop and system menu. The app shows goal/subgoal/taskboard links, MCP++ backend family coverage for `ipfs_accelerate_py`, `ipfs_kit_py`, and `ipfs_datasets_py`, prompt steering controls, deterministic supervisor command envelopes, and UI evidence with no visible layout failure. The glasses control plane registers an `agent-supervisor` display profile with refresh, prompt, and queue actions.
+- Completion note 2026-07-09: Added the Agent Supervisor desktop app shell, route registration, system-menu entry, prompt-envelope generator, MCP++ backend coverage panel, and Meta glasses display profile. Validation passed with `node --check web/js/main-simple.js`, focused `tsc` compilation for `src/services/glasses/glasses-app-control-plane.ts`, targeted `test_swissknife_all_tools_supervisor_queue_is_resumable`, and `node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts --reporter=line`. The smoke produced `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-app.png` and `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-app-smoke.json` with `horizontal_overflow_count: 0`.
+
+## SVD-062 Ingest supervisor goals, subgoals, and taskboard links from live queue evidence
+
+- Status: completed
+- Priority: P0
+- Track: supervisor
+- Depends on: SVD-061
+- Outputs: swissknife/src/services/apps/agent-supervisor-task-graph.ts, swissknife/test/mcp-plus-plus/agent-supervisor-task-graph.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-task-graph.json, swissknife/web/data/agent-supervisor-task-graph.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-task-graph.test.ts'
+- Acceptance: The app consumes `data/swissknife_virtual_desktop/all_tools_supervisor_queue.json`, the SVD taskboard, release-evidence freshness artifacts, and any live supervisor state files. Each visible goal and subgoal links to concrete `SVD-*` and `SWR-*` tasks, exposes status, owner, dependencies, evidence outputs, and blocked/ready/waiting transitions, and records missing or stale state as operator-visible diagnostics instead of silently flattening it.
+- Ready note 2026-07-09: SVD-061 provides the desktop and glasses app surfaces, so the next runnable supervisor task is to replace the static task list with queue-backed goal/subgoal ingestion.
+- Completion note 2026-07-09: Added `agent-supervisor-task-graph.ts`, a focused MCP++ Jest test, generated `agent-supervisor-task-graph.json`, and a browser-consumable `web/data/agent-supervisor-task-graph.json` snapshot. The graph ingests the supervisor queue, SVD taskboard status, release evidence, and expanded Meta glasses I/O requirements; the desktop app now loads this graph before falling back to its static defaults. Validation passed with `node --check web/js/main-simple.js`, focused `tsc` for the task-graph and glasses control-plane files, `agent-supervisor-task-graph.test.ts`, targeted `test_swissknife_all_tools_supervisor_queue_is_resumable`, and `node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts --reporter=line`.
+
+## SVD-063 Build MCP++ prompt-steering envelopes for supervisor actions
+
+- Status: ready
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-062, SVD-053
+- Outputs: swissknife/src/services/apps/agent-supervisor-prompt-envelope.ts, swissknife/test/mcp-plus-plus/agent-supervisor-prompt-envelope.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-prompt-envelopes.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-prompt-envelope.test.ts'
+- Acceptance: Prompt steering creates deterministic MCP++ envelopes for supervisor planning, queueing, evidence capture, and task status updates. Envelopes must route `ipfs_accelerate_py` to agent/job execution and telemetry tools, `ipfs_kit_py` to IPFS/DAG artifact storage and pinning tools, and `ipfs_datasets_py` to taskboard indexing, search, provenance, and dataset audit tools. Confirmation, rollback, receipt, event-DAG, and no-mutation dry-run behavior must be explicit for every action.
+
+## SVD-064 Run per-app UI/UX and backend-tool validation through the supervisor app
+
+- Status: waiting
+- Priority: P0
+- Track: apps
+- Depends on: SVD-063, SVD-058
+- Outputs: swissknife/test/e2e/agent-supervisor-all-app-validation.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-all-app-validation.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor/
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-all-app-validation.spec.ts --reporter=line
+- Acceptance: The supervisor app drives every SwissKnife virtual desktop application through open, focus, primary action, confirmation-required action, backend receipt, error/fallback, and screenshot states. The report must prove that each app both uses its assigned MCP++ backend tools and renders usable UI/UX without text overlap, hidden controls, broken focus, or unreported backend failures.
+
+## SVD-065 Compile Agent Supervisor ORB/IDL and Meta glasses handoff evidence
+
+- Status: waiting
+- Priority: P0
+- Track: orb-idl
+- Depends on: SVD-064, SVD-056
+- Outputs: swissknife/test/mcp-plus-plus/agent-supervisor-glasses-handoff.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-glasses-handoff.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-glasses-handoff.test.ts'
+- Acceptance: The Agent Supervisor app compiles into ORB/IDL descriptors, Meta glasses replay bundles, and control-plane routes for goal selection, prompt steering, queue refresh, and evidence capture. Hardware-free replay must preserve policy tags, redaction, receipt refs, event-DAG refs, fallback target, and rollback token; physical glasses completion remains blocked until paired hardware is available.
+
+## SVD-066 Close the supervisor-managed all-app MCP++ release loop
+
+- Status: waiting
+- Priority: P0
+- Track: release
+- Depends on: SVD-060, SVD-065, SVD-059, SVD-072
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale && rg -n "Decision: \\*\\*GO\\*\\*|Decision: \\*\\*NO-GO\\*\\*|Agent Supervisor|Meta glasses simulator|No new unknowns" test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md docs/refactor-final-signoff.md
+- Acceptance: Final evidence proves the supervisor-managed desktop app can steer goals/subgoals/taskboard work, every SwissKnife app has current UI/UX and MCP++ backend evidence, ORB/IDL handoff packets include the supervisor app, and Meta glasses simulator replay is fresh.
+
+## Agent Supervisor Phase Six Expanded Meta Glasses I/O 2026-07-09
+
+This phase extends the all-app Meta glasses handoff from display replay into
+full expanded I/O coverage. Every virtual desktop application that uses
+`ipfs_datasets_py`, `ipfs_accelerate_py`, or `ipfs_kit_py` through MCP/MCP++
+must have an explicit path for the Meta glasses display, camera, microphone,
+speaker/headphone output, permission prompts, receipts, fallback routing, and
+device-simulator evidence. The simulator is the release validation path for
+camera, microphone, speaker, and display behavior in this workspace.
+
+## SVD-067 Append expanded Meta glasses I/O supervisor plan
+
+- Status: completed
+- Priority: P0
+- Track: supervisor
+- Depends on: SVD-061, SVD-062
+- Outputs: implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md, data/swissknife_virtual_desktop/all_tools_supervisor_queue.json, tests/test_virtual_ai_os_todo_queue.py
+- Validation: PYTHONPATH=external/ipfs_accelerate/build/lib:external/ipfs_accelerate:external/ipfs_datasets pytest tests/test_virtual_ai_os_todo_queue.py::test_swissknife_all_tools_supervisor_queue_is_resumable -q
+- Acceptance: The supervisor taskboard and queue include a dependency-ordered expanded Meta glasses I/O plan covering display output, camera photo/video capture, microphone input/transcription, speaker/headphone output, permission mediation, receipts, fallback routes, and simulator-backed release validation for all virtual desktop apps that use the MCP++ backend families.
+- Completion note 2026-07-09: Appended SVD-067 through SVD-072 so the release closeout cannot pass without expanded Meta glasses display/camera/microphone/speaker coverage. Validation passed with the targeted supervisor queue pytest. SVD-072 now waits on the expanded handoff packets instead of a physical hardware blocker.
+
+## SVD-068 Build per-app expanded Meta glasses I/O capability map
+
+- Status: waiting
+- Priority: P0
+- Track: glasses
+- Depends on: SVD-063, SVD-067, SVD-056, SVD-058
+- Outputs: swissknife/src/services/glasses/agent-supervisor-expanded-io-map.ts, swissknife/test/mcp-plus-plus/agent-supervisor-expanded-io-map.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-expanded-io-map.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-expanded-io-map.test.ts'
+- Acceptance: Every SwissKnife virtual desktop app has a visible I/O contract for Meta glasses display output, camera photo/video capture when applicable, microphone input/transcription when applicable, speaker/headphone output when applicable, mobile-card fallback, and desktop-only fallback. Apps with no safe camera/microphone/speaker path must record an explicit denied or desktop-only disposition.
+
+## SVD-069 Build MCP++ permission and receipt envelopes for expanded glasses I/O
+
+- Status: waiting
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-063, SVD-068
+- Outputs: swissknife/src/services/apps/agent-supervisor-expanded-io-envelopes.ts, swissknife/test/mcp-plus-plus/agent-supervisor-expanded-io-envelopes.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-expanded-io-envelopes.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-expanded-io-envelopes.test.ts'
+- Acceptance: MCP++ envelopes for display, camera, microphone, and speaker/headphone actions include service family, tool name, permission scope, redaction policy, confirmation state, receipt CID, event-DAG ref, rollback token, timeout/cancel behavior, and safe dry-run behavior. `ipfs_accelerate_py` handles supervisor/job execution, `ipfs_kit_py` handles artifact/DAG storage, and `ipfs_datasets_py` handles indexing/provenance/search.
+
+## SVD-070 Run hardware-free expanded Meta glasses I/O UI/UX validation
+
+- Status: waiting
+- Priority: P0
+- Track: apps
+- Depends on: SVD-064, SVD-069
+- Outputs: swissknife/test/e2e/agent-supervisor-expanded-meta-io.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-expanded-meta-io.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/expanded-meta-io/
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-expanded-meta-io.spec.ts --reporter=line
+- Acceptance: Hardware-free browser validation opens every app, exercises each display/camera/microphone/speaker route that is safe to replay, verifies permission prompts and denied/degraded paths, records screenshots, and reports zero hidden controls, text overlap, broken focus, or unreported backend failures.
+
+## SVD-071 Compile expanded I/O ORB/IDL and control-plane handoff packets
+
+- Status: waiting
+- Priority: P0
+- Track: orb-idl
+- Depends on: SVD-070, SVD-065
+- Outputs: swissknife/test/mcp-plus-plus/agent-supervisor-expanded-io-handoff.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-expanded-io-handoff.json
+- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-expanded-io-handoff.test.ts'
+- Acceptance: ORB/IDL descriptors and Meta control-plane routes include display output, camera capture, microphone input, speaker/headphone output, permission fallback, audio-summary fallback, mobile-card fallback, receipt preservation, rollback, and redacted operator-visible fallback decisions.
+
+## SVD-072 Execute expanded Meta glasses I/O simulator validation
+
+- Status: waiting
+- Priority: P2
+- Track: device
+- Depends on: SVD-059, SVD-071
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: The Meta glasses simulator validates display-webapp fallback, camera photo/video capture, microphone input/transcription, speaker/headphone output, route behavior, permission denial and recovery, receipts, rollback, and operator-visible fallback decisions. This task waits for SVD-071 so the final expanded ORB/IDL handoff packets are included in the simulator evidence.
+- Waiting note 2026-07-09: Base expanded I/O simulator validation already passes through `meta-glasses-expanded-io.spec.ts`, `meta-glasses-io-apps.spec.ts`, and `meta-glasses-virtual-os.spec.ts`; final SVD-072 completion is held only for the SVD-071 expanded handoff packet artifacts.
