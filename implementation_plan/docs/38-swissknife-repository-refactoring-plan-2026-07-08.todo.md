@@ -1715,7 +1715,7 @@ aggregate count for per-app evidence.
 
 ## SWR-113 Reconcile the canonical app contract with per-app behavior evidence
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/contracts
 - Dedupe key: swissknife_refactor:app_contract_behavior_evidence_reconciliation
