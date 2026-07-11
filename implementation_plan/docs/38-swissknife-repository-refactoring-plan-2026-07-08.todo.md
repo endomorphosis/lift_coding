@@ -1726,7 +1726,7 @@ aggregate count for per-app evidence.
 
 ## SWR-114 Materialize the Agent Supervisor Console as a canonical desktop app module
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: virtual-desktop/supervisor-console
 - Dedupe key: swissknife_refactor:agent_supervisor_console_canonical_module_contract
