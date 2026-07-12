@@ -1801,7 +1801,7 @@ before app-contract reconciliation continues.
 
 ## SWR-120 Make service duplicate prevention content-aware and merge-resistant
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: services/architecture
 - Dedupe key: swissknife_refactor:content_aware_service_duplicate_merge_sentinel
