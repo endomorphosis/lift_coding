@@ -441,7 +441,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-090 Benchmark throughput, fairness, and fault recovery
 
-- Status: waiting
+- Status: completed
 - Priority: P1
 - Track: performance
 - Depends on: SVD-089
