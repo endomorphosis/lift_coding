@@ -87,7 +87,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   invalid hashes, leaked inline secrets, and unsupported schema versions.
 
 ## IROH-003 Define capability and conformance matrices
-- Status: pending
+- Status: completed
 - Depends on: IROH-002
 - Work: Map every required fsspec/VFS operation (`ls`, `info`, `open`, ranged
   read, write, `mkdir`, `rm`, `cp`, `mv`, `find`, `glob`, `exists`, sync) to
