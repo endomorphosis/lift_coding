@@ -407,7 +407,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-087 Add SwissKnife Profile G connector and Agent Supervisor UI
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: desktop
 - Depends on: SVD-083, SVD-084, SVD-085, SVD-086
