@@ -363,7 +363,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-083 Implement canonical goal/task/risk/lease codecs and vectors
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: shared-runtime
 - Depends on: SVD-082
