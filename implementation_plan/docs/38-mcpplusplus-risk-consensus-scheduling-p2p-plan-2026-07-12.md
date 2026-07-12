@@ -430,7 +430,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-089 Prove three-peer claim, conflict, takeover, and reconciliation
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: integration
 - Depends on: SVD-087, SVD-088
