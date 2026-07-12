@@ -1823,7 +1823,7 @@ before app-contract reconciliation continues.
 
 ## SWR-122 Re-run canonical desktop and release evidence from the duplicate-free tree
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release/evidence
 - Dedupe key: swissknife_refactor:duplicate_free_desktop_and_release_evidence_rebaseline
