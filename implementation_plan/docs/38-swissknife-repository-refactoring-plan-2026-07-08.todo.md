@@ -1812,7 +1812,7 @@ before app-contract reconciliation continues.
 
 ## SWR-121 Rebuild browser import closure and default libp2p evidence after duplicate removal
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: browser/libp2p
 - Dedupe key: swissknife_refactor:post_duplicate_browser_import_closure_and_libp2p_default
