@@ -76,7 +76,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   supported platforms.
 
 ## IROH-002 Freeze the filesystem and backend contract
-- Status: pending
+- Status: completed
 - Depends on: IROH-001
 - Work: Specify URL grammar, namespace identifiers, hashes, tickets, manifest
   schema, path normalization, error codes, sync/async behavior, consistency,
