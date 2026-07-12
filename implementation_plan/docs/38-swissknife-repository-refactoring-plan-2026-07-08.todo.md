@@ -1748,7 +1748,7 @@ aggregate count for per-app evidence.
 
 ## SWR-116 Run the exhaustive behavior and evidence release gate from clean outputs
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release/evidence
 - Dedupe key: swissknife_refactor:exhaustive_behavior_evidence_clean_release_gate
