@@ -374,7 +374,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-084 Add datasets-backed goal decomposition and scheduling attestations
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: datasets
 - Depends on: SVD-082, SVD-083
