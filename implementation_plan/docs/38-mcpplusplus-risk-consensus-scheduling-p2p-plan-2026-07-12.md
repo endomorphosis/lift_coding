@@ -396,7 +396,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-086 Implement IPFS Kit durable coordination storage and recovery
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: storage
 - Depends on: SVD-083
