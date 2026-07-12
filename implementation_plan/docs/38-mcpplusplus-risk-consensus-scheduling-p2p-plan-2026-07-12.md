@@ -452,7 +452,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-091 Add release gate, documentation, and Meta glasses summaries
 
-- Status: waiting
+- Status: completed
 - Priority: P1
 - Track: release
 - Depends on: SVD-089, SVD-090
