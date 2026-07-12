@@ -385,7 +385,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-085 Adapt accelerator agent supervisor and daemon lanes to leases
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: accelerator
 - Depends on: SVD-083, SVD-084
