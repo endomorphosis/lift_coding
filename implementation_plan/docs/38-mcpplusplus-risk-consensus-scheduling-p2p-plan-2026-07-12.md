@@ -419,7 +419,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-088 Expose Profile G through all MCP++ HTTP and libp2p services
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: transport
 - Depends on: SVD-084, SVD-085, SVD-086
