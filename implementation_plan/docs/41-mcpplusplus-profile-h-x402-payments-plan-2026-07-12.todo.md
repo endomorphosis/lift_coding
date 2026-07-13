@@ -595,7 +595,7 @@ Supervisor operating rules:
 
 ## XPH-112 Add observability, operations, and incident recovery
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: operations
 - Depends on: XPH-109
