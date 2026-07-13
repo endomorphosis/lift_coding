@@ -1835,7 +1835,7 @@ safety.
 
 ## SVD-064 Run per-app UI/UX and backend-tool validation through the supervisor app
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-063, SVD-058
