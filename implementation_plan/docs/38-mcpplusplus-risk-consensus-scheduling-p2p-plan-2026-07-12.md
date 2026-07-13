@@ -498,3 +498,58 @@ work, bypassing policy, or hiding duplicate execution.
   release, resolve, and reconcile a task with CID-persisted lease artifacts;
   a missing provider returns `G_PROVIDER_UNAVAILABLE` without falsely granting
   work; and HTTP/libp2p return the same results.
+- Completion note 2026-07-12: Named Profile G **Distributed Goal Coordination,
+  Risk, Neighborhood Consensus, and Scheduling** while preserving the stable
+  `mcp++/risk-scheduling` key. The composed provider now uses datasets for
+  formal logic/Profile D, accelerate for fenced leases, IPFS Kit for CID
+  persistence, and SwissKnife for TypeScript client validation. The focused
+  accelerator suite proves a valid Profile C delegation plus Profile D decision
+  through claim, renew, resolve, reconcile, and release; it also proves that a
+  missing persistence provider fails closed. Live HTTP probes return
+  `-32042 G_AUTHORITY_DENIED` for an unauthorised claim on all three endpoints,
+  and refreshed SwissKnife libp2p evidence v4 is `go`: all three transports
+  preserve that same denial code, expose all 23 operations, and report the
+  complete provider chain without HTTP fallback.
+
+## SVD-094 Make Profile G coordination state inspectable in the virtual desktop
+
+- Status: completed
+- Priority: P0
+- Track: desktop, accelerator, test evidence
+- Depends on: SVD-085, SVD-087, SVD-093
+- Outputs: a composed `schedule/status` read model, frontier lease provenance,
+  browser gateway normalization for durable coordination records, and the
+  Agent Supervisor Coordination view with provider/fallback diagnostics.
+- Acceptance: An operator can identify the negotiated Profile G name, owner
+  chain, DuckDB/CID persistence condition, provider selection attempts,
+  neighborhood evidence, proposal CID, lease state, claimant DID, logical
+  epoch, fencing token, expiry, claim-resolution CID, task-receipt CID, and
+  bounded risk evidence without issuing a mutation. The app's Playwright suite
+  is included in the standard desktop test selection and runs from a
+  self-contained static-server fixture.
+- Completion note 2026-07-12: `ipfs_accelerate_py` now combines datasets
+  schedule state with its durable DuckDB lease ledger and receipt references
+  for `mcp++/schedule/status`, and enriches the frontier without changing
+  canonical proposal bytes. SwissKnife preserves direct status objects,
+  bounds per-task fanout to 50, accepts immutable claim/resolution CIDs as
+  governed-action evidence, and renders the resulting provenance in the
+  Agent Supervisor Coordination tab. Focused suites passed: accelerator
+  Profile G transport (8), browser connector/client (7), Agent Supervisor
+  Playwright (5), and the MCP++ Explorer Playwright test (1).
+
+## SVD-095 Add Merkle-clock assignment and Event-DAG peer convergence
+
+- Status: completed
+- Priority: P0
+- Track: scheduling, libp2p, storage, desktop
+- Depends on: SVD-085, SVD-086, SVD-088, SVD-093, SVD-094
+- Outputs: an IPFS Kit-owned canonical Profile G Merkle-clock/ranking module,
+  accelerator DuckDB coordination observations and assignments, authenticated
+  reconciliation of peer snapshots, and a SwissKnife Profile E Event-DAG
+  convergence helper used before distributed task claims.
+- Acceptance: A merged clock deterministically ranks fresh, policy-eligible
+  candidate peers using capacity, risk, and a clock-derived tie-break; a claim
+  is rejected when it contradicts a non-expired assignment; expired leases or
+  stale peer heartbeats make an assignment eligible for takeover; and a
+  SwissKnife libp2p client can converge causal Event-DAG events across the
+  three backend services before sending the resulting snapshot to reconcile.
