@@ -481,7 +481,7 @@ Supervisor operating rules:
 
 ## XPH-104 Add paid capabilities to ipfs_kit_py
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: ipfs-kit
 - Depends on: XPH-103
