@@ -1880,7 +1880,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-126 Make module ownership an executable dependency and public-API contract
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: services/architecture
 - Dedupe key: swissknife_refactor:executable_service_module_ownership_contract
