@@ -2096,7 +2096,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-093 Capture a live all-profile capability matrix for SwissKnife and the three backends
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: integration
 - Depends on: SVD-092
