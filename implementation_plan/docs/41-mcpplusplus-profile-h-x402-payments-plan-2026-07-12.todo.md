@@ -438,7 +438,7 @@ Supervisor operating rules:
 
 ## XPH-101 Specify Profile H, composition rules, and threat model
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: specification
 - Depends on: XPH-100
