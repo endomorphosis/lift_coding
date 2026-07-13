@@ -110,7 +110,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   truncated download, unsupported architecture, and non-executable result fail.
 
 ## IROH-005 Add explicit install, inspect, update, and rollback commands
-- Status: pending
+- Status: completed
 - Depends on: IROH-004
 - Work: Add CLI commands with `--version`, `--check`, `--dry-run`, explicit
   prerelease opt-in, update locking, retained previous version, and rollback.
