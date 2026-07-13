@@ -509,7 +509,7 @@ Supervisor operating rules:
 
 ## XPH-106 Add paid capabilities to ipfs_datasets_py
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: ipfs-datasets
 - Depends on: XPH-103
