@@ -241,7 +241,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 5 - VFS, Buckets, Backend Manager, And Sync
 
 ## IROH-017 Make Iroh a validated named storage backend
-- Status: pending
+- Status: completed
 - Depends on: IROH-007, IROH-013
 - Work: Extend backend configuration/manager APIs with type registry and schema
   validation for Iroh. Persist endpoint/namespace/policies and credential refs;
