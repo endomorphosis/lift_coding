@@ -235,7 +235,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   rename/copy dedupe, recursive deletion, retries, and restart recovery.
 
 ## IROH-016 Add async and performance behavior
-- Status: pending
+- Status: completed
 - Depends on: IROH-014, IROH-015
 - Work: Provide fsspec async methods backed by AnyIO-compatible boundaries,
   bounded concurrency, connection reuse, read-ahead/range cache, multipart-like
