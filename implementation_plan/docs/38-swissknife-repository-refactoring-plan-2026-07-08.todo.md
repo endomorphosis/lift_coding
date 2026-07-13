@@ -1843,3 +1843,125 @@ before app-contract reconciliation continues.
 - Validation: python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
 - Acceptance: The handoff records the duplicate inventory before/after counts, canonical ownership decisions, import retargeting evidence, architecture guard results, browser import-closure and libp2p-default evidence, regenerated release result, task accounting, and live supervisor state. It does not claim completion while any duplicate implementation or stale required evidence remains.
 - Evidence: Phase 19 duplicate-remediation and browser-closure handoff captured in `swissknife/docs/refactor-final-signoff.md` and `swissknife/docs/supervisor-refactor-runbook.md` on 2026-07-12. SWR-117 through SWR-122 are completed in the task board and recorded in the Phase 19 evidence ledger; SWR-123 remains daemon-owned for the final completion status update. Duplicate inventory reports 0 duplicate non-index basenames under `src/services` after Phase 19 remediation, down from the 249 restored duplicates that triggered the Phase 19 audit (`swissknife/docs/restored-service-duplicate-inventory.json`, `swissknife/docs/service-boundary-audit.json`); the only remaining duplicate content hashes (2) are explicitly approved, content-hash-locked multi-entrypoints with named canonical owners (`src/services/logic/fol/fol-output-formatters.ts` and `src/services/logic/bridges/logic-bridges-browser.ts`), and 0 policy violations or broad exemptions remain. Commit `6651a7279b1799b8629fcf5e95caaf07cb8accbc` removed 229 restored duplicate files from `src/services` and retargeted imports; `docs/restored-service-duplicate-inventory.json` records `totalImporters: 0` against the remaining duplicate set and `npm run typecheck:services` passes. Architecture guard evidence records `npm run services:audit` passing with 0 unknown files, 0 forbidden imports, 0 ownership conflicts, 0 browser-unsafe imports, 0 restored-service-duplicate policy violations, 0 legacy compatibility shims, and 0 legacy sprint service files, plus `test/architecture/source-module-boundaries.test.js` passing 21/21 tests including the fixture that rejects a restored root service implementation by canonical owner and content hash; `scripts/release-readiness-gate.mjs` invokes `services:audit` as a standing `services-audit` gate. Browser import-closure evidence records 0 host-only or duplicate-service imports reachable from browser entries, browser libp2p enabled by default with real (non-simulated) browser transports, the SWR-121 Playwright refresh at 2026-07-12T00:24:02Z passing 36/36 tests, and fresh browser bundle-budget evidence. Canonical artifact freshness records four evidence groups (`libp2p-browser-playwright`, `browser-bundle-budget`, `module-boundary-audit`, `virtual-desktop-release-evidence`) all `fresh` with matching fingerprints at 2026-07-12T00:55:13.857Z, generated after the SWR-119 duplicate-removal commit. The regenerated release result reports `decision: "go"`, `blocker_count: 0`, `warning_count: 8`, `duplicateServiceBasenames.duplicateBasenameCount: 0`, and release readiness of 16/16 gates passed, 0 failed gates, 0 blockers, and final release decision `GO`. Active process evidence records supervisor PID 788382, managed implementation daemon PID 789938, run ID `20260711T214707Z`, state path `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_task_state.json`, supervisor status path `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_supervisor_status.json`, daemon log `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_implementation_daemon_20260711T214707Z.log`, and SWR-123 implementation log `tmp/swissknife_refactor_supervisor/state/implementation_logs/swr-123-attempt-1.log`; task accounting shows 123 SWR tasks, 122 completed, 1 ready (`SWR-123`), 0 waiting, and 0 blocked. Residual prerequisites for live refresh are the three MCP servers, the accelerate adapter/upstream pair, advertised MCP++/libp2p reachability, and the Playwright Meta glasses simulator profile; none is hidden or downgraded to an assumption.
+
+## Phase 20: Source Integrity, Module Containment, And Browser-Native Runtime Closure
+
+Phase 19 proved that restored duplicate service basenames can be eliminated, but a
+subsequent checkout audit found unresolved Git conflict blocks in source, evidence
+generators, browser libp2p test code, and generated release artifacts. Those blocks
+make the previous release report non-authoritative even though the duplicate count is
+zero. Phase 20 first restores a parseable, semantically reconciled source baseline,
+then completes the remaining structural refactor by enforcing module-owned service
+entrypoints, browser capability boundaries, real browser libp2p interoperability, and
+real TypeScript or WebAssembly proof execution. Python services may remain remote MCP
+providers, but no browser bundle may execute, embed, or silently simulate them.
+
+## SWR-124 Repair active source and evidence merge conflicts before further refactoring
+
+- Status: completed
+- Priority: P0
+- Track: source-integrity
+- Dedupe key: swissknife_refactor:active_source_and_evidence_merge_conflict_repair
+- Depends on: SWR-123
+- Outputs: swissknife/src/module-ownership.json, swissknife/scripts/release-readiness-gate.mjs, swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/scripts/capture-hierarchical-mcp-tools-evidence.cjs, swissknife/scripts/capture-mcp-live-probe-evidence.cjs, swissknife/test/e2e/fixtures/libp2p-browser-harness/harness.ts, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json, swissknife/docs/service-boundary-audit.json
+- Validation: cd swissknife && ! rg -n '^(<<<<<<<|=======|>>>>>>>)' src/module-ownership.json scripts/release-readiness-gate.mjs scripts/build-virtual-desktop-release-evidence.cjs scripts/capture-hierarchical-mcp-tools-evidence.cjs scripts/capture-mcp-live-probe-evidence.cjs test/e2e/fixtures/libp2p-browser-harness/harness.ts && node -e '["src/module-ownership.json","docs/release-readiness-report.json","docs/release-evidence-freshness.json","docs/service-boundary-audit.json"].forEach(p=>JSON.parse(require("fs").readFileSync(p,"utf8")))'
+- Acceptance: Every active conflict is resolved by preserving the stronger behavior from both branches when both remain applicable. Source conflict blocks are absent, every canonical JSON artifact parses, generator inputs and outputs agree on schema fields, and regenerated evidence replaces stale hand-merged reports. This task must identify and repair active source, test, and generated artifacts rather than merely hiding conflict markers in an archive or choosing a branch wholesale.
+
+## SWR-125 Move remaining root service implementations behind owned service-family entrypoints
+
+- Status: waiting
+- Priority: P0
+- Track: services/ownership
+- Dedupe key: swissknife_refactor:root_service_implementation_module_containment
+- Depends on: SWR-124
+- Outputs: swissknife/src/services/deontic, swissknife/src/services/logic, swissknife/src/services/proof-engine, swissknife/src/services/provers, swissknife/src/services/zkp, swissknife/src/module-ownership.json, swissknife/test/architecture/source-module-boundaries.test.js
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:fast -- test/architecture/source-module-boundaries.test.js
+- Acceptance: Root `src/services/*.ts` implementation files are moved to the owning service family and imported through declared public entrypoints. The root contains only intentional barrels or universally named contracts that are explicitly documented in `module-ownership.json`; no compatibility copy or duplicate implementation remains. Architecture tests reject a newly restored root implementation even when its basename is unique.
+
+## SWR-126 Make module ownership an executable dependency and public-API contract
+
+- Status: waiting
+- Priority: P0
+- Track: services/architecture
+- Dedupe key: swissknife_refactor:executable_service_module_ownership_contract
+- Depends on: SWR-125
+- Outputs: swissknife/src/module-ownership.json, swissknife/scripts/audit-source-modules.mjs, swissknife/docs/service-module-dependency-graph.json, swissknife/docs/service-module-public-api.md, swissknife/test/architecture/source-module-boundaries.test.js
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:fast -- test/architecture/source-module-boundaries.test.js
+- Acceptance: The ownership manifest enumerates each service family's public entrypoints, private implementation paths, allowed dependency directions, runtime classification, and browser-safe entrypoint when applicable. The audit emits a machine-readable dependency graph and fails for undocumented deep imports, cross-family ownership violations, unclassified files, or reintroduced root implementations. It does not whitelist a path merely because current tests import it.
+
+## SWR-127 Close browser app capability boundaries and eliminate unknown executable runtime paths
+
+- Status: waiting
+- Priority: P0
+- Track: browser/runtime
+- Dedupe key: swissknife_refactor:browser_capability_boundary_unknown_runtime_closure
+- Depends on: SWR-124, SWR-126
+- Outputs: swissknife/web/js/core/app-capability-gateway.js, swissknife/web/js/apps/mcp-control.js, swissknife/scripts/audit-browser-compat.mjs, swissknife/docs/browser-compatibility-inventory.md, swissknife/test/browser-compat
+- Validation: cd swissknife && npm run build:web && npm run test:browser-compat && npm run audit:bundle-host-leakage
+- Acceptance: Every browser-reachable operation is classified as in-browser, typed remote MCP capability, user-mediated host handoff, or intentionally unavailable. Browser code has no executable Python, Pyodide, filesystem, subprocess, native-binary, or implementation-supervisor path. Textual labels describing remote Python services are permitted only when the code path is a typed remote capability and never executes a shell command. The compatibility inventory contains no unknown executable path and records a concrete import or gateway chain for each browser app.
+
+## SWR-128 Prove default-enabled libp2p interoperability in real browser contexts
+
+- Status: waiting
+- Priority: P0
+- Track: browser/libp2p
+- Dedupe key: swissknife_refactor:real_browser_libp2p_interoperability_default_enabled
+- Depends on: SWR-124, SWR-126
+- Outputs: swissknife/src/services/mcp/libp2p-browser-runtime.ts, swissknife/test/e2e/fixtures/libp2p-browser-harness, swissknife/test/e2e/libp2p-browser.spec.ts, swissknife/docs/browser-libp2p-evidence.md, swissknife/test-results/libp2p-browser
+- Validation: cd swissknife && npm run test:e2e:libp2p-browser && npm run evidence:libp2p-browser && npm run audit:bundle-host-leakage
+- Acceptance: Two browser contexts create real libp2p nodes with browser-supported transports and complete a signed request and response over a negotiated protocol. The default configuration remains enabled and exercises actual package constructors, peer identities, transport dialing, protocol handlers, and teardown. Relay or connectivity failures are recorded as real typed failures, never converted into synthetic peers, fabricated transport status, or success receipts. Desktop and mobile Playwright projects both produce evidence.
+
+## SWR-129 Make browser proof and ZKP entrypoints real TypeScript or WebAssembly execution paths
+
+- Status: waiting
+- Priority: P0
+- Track: browser/wasm-proofs
+- Dedupe key: swissknife_refactor:real_ts_wasm_browser_proof_and_zkp_execution
+- Depends on: SWR-124, SWR-126
+- Outputs: swissknife/src/services/proof-engine/proof-engine-browser.ts, swissknife/src/services/provers/provers-browser.ts, swissknife/src/services/zkp/browser-zkp.ts, swissknife/src/services/zkp/browser-snarkjs-backend.ts, swissknife/test/browser-proof-runtime, swissknife/docs/browser-proof-runtime-evidence.md
+- Validation: cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run audit:bundle-host-leakage
+- Acceptance: Each browser-exported theorem-prover and ZKP entrypoint either verifies a real fixture using TypeScript or WebAssembly or reports a typed unavailable backend before proof generation. Tests verify genuine proof or verification artifacts, negative proofs, malformed inputs, and browser worker failure handling. Simulated prover modules, Python reference runners, host-native bindings, and mock success results are test-only and cannot be selected by the browser default path.
+
+## SWR-130 Exercise every browser app through its owned capability and runtime state matrix
+
+- Status: waiting
+- Priority: P0
+- Track: browser/e2e
+- Dedupe key: swissknife_refactor:all_browser_apps_owned_capability_state_matrix
+- Depends on: SWR-127, SWR-128, SWR-129
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-browser-runtime-matrix.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/browser-capability-receipts.json, swissknife/docs/browser-app-runtime-coverage.md
+- Validation: cd swissknife && npm run build:web && npm run test:e2e:mcp && npm run test:browser-compat && npm run test:e2e:libp2p-browser
+- Acceptance: Each canonical desktop and browser app has a real launch record, owned capability declaration, and evidence for success plus its applicable denied, unavailable, offline, or fallback state. Browser-local features run locally, remote features use typed browser-safe gateways, and host-only features expose explicit unavailable or handoff states. Aggregate counts cannot replace an app-level record.
+
+## SWR-131 Rebuild all release evidence from a conflict-free source tree and require freshness coherence
+
+- Status: waiting
+- Priority: P0
+- Track: release/evidence
+- Dedupe key: swissknife_refactor:conflict_free_browser_module_release_evidence_rebuild
+- Depends on: SWR-124, SWR-130
+- Outputs: swissknife/docs/service-boundary-audit.json, swissknife/docs/browser-bundle-budget.json, swissknife/docs/browser-libp2p-evidence.fingerprint.json, swissknife/docs/release-evidence-freshness.json, swissknife/docs/release-readiness-report.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json
+- Validation: cd swissknife && npm run services:audit && npm run evidence:libp2p-browser && npm run audit:bundle-host-leakage && npm run release:readiness
+- Acceptance: Release readiness is regenerated from current source and reports a decision only after every prerequisite artifact parses, carries a current fingerprint, and has no conflict marker. A GO requires zero duplicate service basenames, zero unknown executable browser paths, real browser libp2p evidence, real browser proof evidence, and no host-only import reachable from web entries. Missing or stale evidence produces a concrete NO_GO blocker.
+
+## SWR-132 Enforce a non-destructive shared-checkout supervisor contract
+
+- Status: waiting
+- Priority: P0
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:shared_checkout_supervisor_non_destructive_contract
+- Depends on: SWR-124
+- Outputs: swissknife/docs/supervisor-refactor-runbook.md, swissknife/docs/supervisor-shared-checkout-safety.md, tmp/swissknife_refactor_supervisor/state/swissknife_refactor_supervisor_status.json
+- Validation: IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS=0 python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor --once --todo-path implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md --state-dir tmp/swissknife_refactor_supervisor/state --task-prefix '## SWR-' --state-prefix swissknife_refactor --no-implement --no-ephemeral-worktree --no-worktree-reconciliation --no-retry-budget-guardrail --no-dependency-guardrail --no-reconciliation-guardrail
+- Acceptance: The runbook records the exact process command, state files, and environment needed for a supervisor to operate in this shared checkout without `git checkout --force`, forced submodule updates, resets, or cleanup of user work. It distinguishes this SwissKnife loop from other repository loops and includes a live status check. Work execution is paused rather than destructively repaired when an overlapping checkout is dirty.
+
+## SWR-133 Phase 20 refactor, browser-runtime, and supervisor handoff
+
+- Status: waiting
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_20_source_integrity_browser_native_handoff
+- Depends on: SWR-125, SWR-126, SWR-127, SWR-128, SWR-129, SWR-130, SWR-131, SWR-132
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, swissknife/docs/browser-compatibility-inventory.md, swissknife/docs/browser-libp2p-evidence.md, swissknife/docs/browser-proof-runtime-evidence.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: The handoff records every resolved conflict, module ownership move, browser capability decision, libp2p interoperability receipt, TS or WASM proof result, release decision, and live supervisor state. It reports an explicit NO_GO with paths for any incomplete browser, libp2p, proof, or evidence condition and cannot claim completion from historical artifacts.
