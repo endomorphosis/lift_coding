@@ -205,7 +205,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 4 - Fsspec Implementation
 
 ## IROH-013 Build and register `IrohFileSystem`
-- Status: pending
+- Status: completed
 - Depends on: IROH-003, IROH-010, IROH-011
 - Work: Implement a dedicated fsspec filesystem and buffered file classes for
   `iroh` and immutable `iroh+blob` protocols. Register through package entry
