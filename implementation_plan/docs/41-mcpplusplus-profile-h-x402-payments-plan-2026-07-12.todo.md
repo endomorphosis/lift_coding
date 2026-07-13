@@ -538,7 +538,7 @@ Supervisor operating rules:
 
 ## XPH-108 Build Wallet, MCP++ Explorer, and Agent Supervisor payment UX
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: swissknife-ui
 - Depends on: XPH-107
