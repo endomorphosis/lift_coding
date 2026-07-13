@@ -1869,7 +1869,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-125 Move remaining root service implementations behind owned service-family entrypoints
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: services/ownership
 - Dedupe key: swissknife_refactor:root_service_implementation_module_containment
