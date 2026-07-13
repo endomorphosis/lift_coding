@@ -523,7 +523,7 @@ Supervisor operating rules:
 
 ## XPH-107 Implement SwissKnife Profile H client and isolated wallet broker
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: swissknife-wallet
 - Depends on: XPH-102
