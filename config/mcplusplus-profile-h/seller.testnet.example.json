@@ -1,0 +1,34 @@
+{
+  "schema": "mcp++/profile-h/seller-config@1.0",
+  "profile": "mcp++/x402-payments",
+  "profileVersion": "1.0",
+  "x402Version": 2,
+  "mode": "testnet",
+  "enabled": true,
+  "mainnetEnabled": false,
+  "seller": {
+    "name": "example-seller",
+    "did": "did:web:seller.test.invalid",
+    "accountAlias": "profile-h-seller-base-sepolia"
+  },
+  "catalogPath": "config/mcplusplus-profile-h/pricing.testnet.example.json",
+  "facilitator": {
+    "url": "https://facilitator.test.invalid",
+    "timeoutSeconds": 10,
+    "allowedHosts": ["facilitator.test.invalid"]
+  },
+  "quoteLifetimeSeconds": 60,
+  "ledger": {
+    "path": "var/lib/mcplusplus/profile-h/testnet-ledger.duckdb",
+    "receiptStore": "var/lib/mcplusplus/profile-h/testnet-receipts",
+    "redaction": "commitment-only"
+  },
+  "policy": {
+    "unlistedOperations": "free",
+    "requireDomainAuthorization": true,
+    "emergencyPause": false
+  },
+  "batchSettlement": {
+    "enabled": false
+  }
+}

@@ -73,6 +73,15 @@ This index helps you find the right documentation for your needs, whether you're
 
 ## 📚 By Topic
 
+### MCP++ Profile H x402 payments
+
+- [Buyer guide](mcplusplus-profile-h-buyer-guide.md) — SwissKnife wallet-provider, approval, budget, receipt, and reconciliation workflow.
+- [Seller guide](mcplusplus-profile-h-seller-guide.md) — testnet catalog, runtime, API, metering, and effect-boundary integration.
+- [Operator guide](mcplusplus-profile-h-operator-guide.md) — raw-key-free testnet rollout and exact/upto/batch/mainnet status matrix.
+- [Migration and rollback](mcplusplus-profile-h-migration-rollback.md) — x402 v2 migration and settlement-safe rollback.
+- [Incident recovery](mcplusplus-profile-h-incident-recovery.md) and [release gate](mcplusplus-profile-h-release-gate.md).
+- [Machine-readable closeout manifest](../data/mcplusplus_profile_h/closeout-manifest.json) and [testnet configuration examples](../config/mcplusplus-profile-h/).
+
 ### Setup & Installation
 
 | Document | Description | Audience |

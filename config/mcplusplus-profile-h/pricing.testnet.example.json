@@ -1,0 +1,40 @@
+{
+  "schema": "mcp++/profile-h/pricing-catalog@1.0",
+  "catalogVersion": "2026-07-12.testnet.1",
+  "network": "eip155:84532",
+  "asset": {
+    "symbol": "USDC",
+    "contract": "0x0000000000000000000000000000000000000001",
+    "decimals": 6
+  },
+  "payToAccountAlias": "profile-h-seller-base-sepolia",
+  "capabilities": [
+    {
+      "operation": "tool:pin.add",
+      "pricingMode": "exact",
+      "amountAtomic": "25000",
+      "settlement": "immediate",
+      "enabled": true
+    },
+    {
+      "operation": "tool:dataset.query",
+      "pricingMode": "upto",
+      "maximumAmountAtomic": "500000",
+      "meter": {
+        "unit": "rows_scanned",
+        "version": "1.0",
+        "quantum": "1000",
+        "rounding": "ceil",
+        "pricePerQuantumAtomic": "1000"
+      },
+      "settlement": "after-signed-usage",
+      "enabled": true
+    },
+    {
+      "operation": "tool:inference.batch",
+      "pricingMode": "batch",
+      "enabled": false,
+      "disabledReason": "Batch settlement has not passed deployment and independent security-review enablement controls."
+    }
+  ]
+}

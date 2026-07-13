@@ -685,3 +685,29 @@ Supervisor operating rules:
 - Outputs: signed kit catalog, protected storage/pin/retrieval fixtures, tmp/mcpplusplus_profile_h_supervisor/discovery
 - Validation: python -m pytest -q hallucinate_app/ipfs_kit_py/tests/mcplusplus_profile_h
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in XPH-104. Use evidence in tmp/mcpplusplus_profile_h_supervisor/discovery/2026-07-13-xph-116-xph-104-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release XPH-104 from strategy blocked_tasks.
+
+## XPH-117 Wire Profile H Sellers Through SwissKnife HTTP and libp2p Adapters
+
+- Status: in_progress
+- Priority: P0
+- Track: integration-remediation
+- Depends on: XPH-104, XPH-105, XPH-106, XPH-107
+- Outputs: configuration-gated compatibility-adapter bridge, Profile E/libp2p
+  negotiation and forwarding, core TypeScript connector methods, endpoint
+  configuration guide, controlled-seller HTTP/libp2p evidence, and refreshed
+  live-adapter evidence.
+- Validation: `npx vitest run test/mcp-plus-plus/profile-h-adapter.test.ts test/mcp-plus-plus/mcp-p2p-session.test.ts`; `python -m pytest -q --rootdir=external/ipfs_kit external/ipfs_kit/tests/mcplusplus_profile_h`; `python -m pytest -q --rootdir=external/ipfs_datasets external/ipfs_datasets/tests/mcplusplus_profile_h`; `python -m pytest -q --rootdir=external/ipfs_accelerate external/ipfs_accelerate/tests/mcplusplus_profile_h`.
+- Acceptance: Each configured compatibility adapter advertises
+  `mcp++/x402-payments` only after a real seller endpoint reports a complete,
+  durable Profile H control plane for both HTTP and libp2p. SwissKnife can
+  retrieve its profile/catalog and run quote, verify, settle, receipt,
+  entitlement, usage, refund, and reconciliation operations across both
+  transports. Unconfigured or fixture-only sellers return a typed unavailable
+  diagnostic and remain unadvertised; local-test facilitators are visibly
+  labeled and never represented as upstream x402 settlement.
+- Progress: The adapter, TypeScript connector, and Profile E bridge are wired
+  and covered by a controlled local-test HTTP seller. The active three live
+  adapters have no configured Profile H seller endpoint, so they correctly do
+  not yet advertise Profile H. Native service listeners that expose the complete
+  control plane and real paid tool routes remain required before this task can
+  be completed.

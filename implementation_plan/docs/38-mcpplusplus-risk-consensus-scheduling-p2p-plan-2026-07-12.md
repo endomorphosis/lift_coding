@@ -586,3 +586,54 @@ work, bypassing policy, or hiding duplicate execution.
   signed capability record is missing, expired, for a different DID, lacks the
   task interface/resource class, or cannot reach the task input. The assigned
   peer and its evidence are deterministically persisted with the task.
+- Completion evidence 2026-07-12: IPFS Kit derives immutable TaskSpec
+  requirements and rejects every missing, unverified, expired, DID-mismatched,
+  interface-mismatched, resource-mismatched, or input-unreachable record.
+  Accelerate rematerializes each candidate through the datasets-owned signed
+  NeighborhoodRecord provider before ranking, persists the selected fit and
+  evidence in DuckDB, and rechecks it at placement time. Focused suites passed:
+  IPFS Kit coordination/storage/transport (22), accelerator Profile G plus
+  lease coordination (20), and SwissKnife connector/convergence (6). Fresh
+  HTTP metadata from all three adapters reports
+  `verified-neighborhood-record-v1`; the SwissKnife libp2p connector probe is
+  GO across all three services with 579 unique callable tools.
+
+## SVD-097 Expose Profiles A-H task dispatch in the SwissKnife virtual desktop
+
+- Status: completed
+- Priority: P0
+- Track: apps, mcp
+- Depends on: SVD-087, SVD-088, SVD-096
+- Outputs: `swissknife/web/js/core/mcp-plus-plus-desktop-client.js`,
+  `swissknife/web/js/core/app-capability-gateway.js`,
+  `swissknife/web/js/apps/mcp-plus-plus-explorer.js`,
+  `swissknife/web/js/apps/agent-supervisor.js`, and focused browser tests.
+- Validation: `cd swissknife && npx vitest run
+  test/mcp-plus-plus/browser-desktop-client.test.ts --reporter=verbose && npx
+  playwright test test/e2e/mcp-plus-plus-live-explorer.spec.ts
+  test/e2e/agent-supervisor-console.spec.ts --workers=1 --reporter=line`.
+- Acceptance: The desktop negotiates Profiles A-H, exposes the typed protocol
+  operations and their live availability, routes app capabilities through the
+  MCP++ `tools/call` surface, and requires an explicit confirmation plus
+  Profile A-G evidence before claiming a Profile G task. Paid tasks additionally
+  require live Profile H negotiation and an approved Wallet payment context;
+  they must be visibly unavailable instead of falling back to a simulated
+  payment.
+- Completion evidence 2026-07-12: Added typed Profile H payment discovery,
+  quote, verification, settlement, receipt, entitlement, usage, refund, and
+  reconciliation operations to the browser client. The MCP++ Explorer now
+  presents A-H negotiation and a governed task-dispatch panel that performs
+  immutable task, IDL, artifact, peer, Event-DAG, schedule, and payment
+  preflight before sending `mcp++/schedule/claim`. The generic browser app
+  gateway now sends remote dataset and accelerator operations to their
+  configured MCP++ service instead of treating them as unsupported. The Agent
+  Supervisor health view displays each backend's negotiated A-H profile set.
+  Focused validation passed: 5 browser-client tests, 1 Explorer end-to-end
+  task-dispatch test, and 5 Agent Supervisor end-to-end scenarios. The current
+  compatibility adapters do not advertise `mcp++/x402-payments`, so the desktop
+  correctly prevents paid dispatch until the Profile H adapter bridge and
+  Wallet payment context are available. A read-only live probe on 2026-07-12
+  found all three services healthy with A-G negotiated and 579 total tools
+  (`ipfs_kit_py` 153, `ipfs_datasets_py` 304, `ipfs_accelerate_py` 122); each
+  explicitly returned `Unsupported method mcp++/payments/profile` and
+  `Unsupported method mcp++/payments/catalog`.

@@ -1933,3 +1933,115 @@ camera, microphone, speaker, and display behavior in this workspace.
 - Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
 - Acceptance: The Meta glasses simulator validates display-webapp fallback, camera photo/video capture, microphone input/transcription, speaker/headphone output, route behavior, permission denial and recovery, receipts, rollback, and operator-visible fallback decisions. This task waits for SVD-071 so the final expanded ORB/IDL handoff packets are included in the simulator evidence.
 - Waiting note 2026-07-09: Base expanded I/O simulator validation already passes through `meta-glasses-expanded-io.spec.ts`, `meta-glasses-io-apps.spec.ts`, and `meta-glasses-virtual-os.spec.ts`; final SVD-072 completion is held only for the SVD-071 expanded handoff packet artifacts.
+
+## SVD-073 Establish the shared Profile F Groth16 multi-party ceremony contract
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-053
+- Outputs: `Mcp-Plus-Plus/docs/spec/groth16-mpc-ceremony.md`, `Mcp-Plus-Plus/tests-py/fixtures/valid/profile_f_groth16_mpc_ceremony.json`, `swissknife/src/services/zkp/multi-party-ceremony.ts`, `swissknife/scripts/zkp-mpc-ceremony.mjs`, `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/ceremony.py`
+- Validation: `cd swissknife && npm run test:run -- test/mcp-plus-plus/multi-party-ceremony.test.ts test/mcp-plus-plus/multi-party-ceremony-cli.test.ts test/mcp-plus-plus/multi-party-ceremony-connector.test.ts`; `cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_mpc_ceremony.py -q`
+- Acceptance: SwissKnife uses a local, interactive `snarkjs` multi-party ceremony workflow that never transmits contributor entropy. SwissKnife and `ipfs_datasets_py` independently validate the same public Profile F transcript, derive the same deterministic ceremony CID, require a two-DID quorum and continuous artifact hashes, and reject legacy single-RNG Arkworks setup when a deployment requires MPC ceremony evidence.
+- Completion note 2026-07-11: Added the common `mcp++/groth16-mpc-ceremony@1` specification and fixture, pure TypeScript and Python validators, the read-only `mcp++/zk/ceremony/validate` datasets JSON-RPC method, SwissKnife connector support, and fail-closed Arkworks policy. Focused validation passed: 6 Vitest tests and 6 Python tests. Profile E binding is deliberately tracked separately by SVD-074; it is not claimed as live until the datasets libp2p dispatcher routes the method.
+
+## SVD-074 Bind Profile F ceremony validation to the `ipfs_datasets_py` Profile E dispatcher
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-073
+- Outputs: `external/ipfs_datasets/ipfs_datasets_py/mcp_server/p2p_libp2p_transport.py`, `external/ipfs_datasets/tests/mcp/integration/test_profile_f_ceremony_p2p.py`, `swissknife/test/mcp-plus-plus/multi-party-ceremony-libp2p.test.ts`, `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/profile-f-ceremony-libp2p.json`
+- Validation: `cd swissknife && npm run test:run -- test/mcp-plus-plus/multi-party-ceremony-libp2p.test.ts`; `cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/mcp/integration/test_profile_f_ceremony_p2p.py -q`; start a local datasets Profile E node and connect with `node --import tsx` using `MCPPPServerConnector`.
+- Acceptance: A SwissKnife Profile E session can negotiate Profile F with `ipfs_datasets_py`, invoke the read-only ceremony validator over `/mcp+p2p/1.0.0`, and receive the same verdict and ceremony CID as the HTTP JSON-RPC endpoint. The transport test must reject malformed frames and must never transport entropy, proving keys, or toxic waste.
+- Completion note 2026-07-11: Repaired the py-libp2p/multiformats compatibility boundary and host lifecycle, bound persistent length-prefixed JSON-RPC dispatch to the datasets Profile E stream, and added fragmented-frame, oversize-frame, and real-node lifecycle tests. A live datasets node published `/ip4/127.0.0.1/tcp/33479/p2p/16Uiu2HAm16RksmxgrLqDhzzgn8dBmyxmtdC55DaCyCJpw9XXfBtC`; SwissKnife connected with its real libp2p connector, negotiated `mcp++/event-dag`, and received `valid: true`, `production_eligible: true`, and ceremony CID `sha256:645338f97ee9f1d17529c4be2b88f928b8bc4c19d906172f0ba0d269780f04b8`. Focused validation passed with 7 Vitest tests and 10 Python tests.
+
+## SVD-075 Add strict Arkworks MPC ceremony admission for production proof operations
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-074
+- Outputs: `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/ceremony.py`, `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16.py`, `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/backends/groth16_ffi.py`, `external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py`, `Mcp-Plus-Plus/docs/spec/groth16-mpc-ceremony.md`
+- Validation: `cd swissknife && npm run test:run -- test/mcp-plus-plus/multi-party-ceremony.test.ts test/mcp-plus-plus/multi-party-ceremony-cli.test.ts test/mcp-plus-plus/multi-party-ceremony-connector.test.ts test/mcp-plus-plus/multi-party-ceremony-libp2p.test.ts`; `cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_mpc_ceremony.py tests/mcp/integration/test_profile_f_ceremony_p2p.py -q`
+- Acceptance: With `IPFS_DATASETS_REQUIRE_MPC_CEREMONY=1`, proof operations accept only an externally generated `arkworks-canonical` ceremony manifest whose complete transcript uses `arkworks-mpc-verifier`, whose circuit ID matches the requested circuit version, and whose proving-key and verification-key hashes match the exact local artifacts consumed by the Rust backend. The bundled single-RNG `setup` and `ensure_setup` paths remain unavailable in this mode.
+- Completion note 2026-07-11: Implemented a strict Arkworks admission gate, local canonical artifact-path resolution, optional key-format validation across TypeScript and Python, and explicit setup rejection. The gate binds both local proving and verification keys to the public transcript. Focused validation passed with 8 Vitest and 14 Python tests. This admits verified external artifacts only; it does not claim that the bundled Rust setup performs MPC.
+
+## SVD-076 Implement and independently verify a genuine Arkworks multi-party setup transform
+
+- Status: ready
+- Priority: P0
+- Track: crypto
+- Depends on: SVD-075
+- Outputs: `external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/`, `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/ceremony.py`, `external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py`, `Mcp-Plus-Plus/docs/spec/groth16-mpc-ceremony.md`
+- Validation: `cd external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend && cargo test --release mpc_ceremony`; `cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_mpc_ceremony.py -q`
+- Acceptance: Replace the single-RNG setup-only implementation with an audited Arkworks-compatible multi-party contribution transform that preserves participant-held entropy, emits reproducible public transcript evidence, independently verifies every contribution, exports canonical proving and verification keys, and demonstrates that malformed, reordered, duplicate-participant, stale-key, and unverifiable contributions are rejected. It must bind the final key and circuit version to the Profile F event-DAG compaction verifier without sending toxic waste over MCP, HTTP, or MCP+p2p.
+
+## SVD-077 Append Profile D execution-policy conformity plan
+
+- Status: completed
+- Priority: P0
+- Track: supervisor
+- Depends on: SVD-074
+- Outputs: `implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md`, `data/swissknife_virtual_desktop/all_tools_supervisor_queue.json`, `tests/test_virtual_ai_os_todo_queue.py`
+- Validation: `PYTHONPATH=external/ipfs_accelerate/build/lib:external/ipfs_accelerate:external/ipfs_datasets python3 -m pytest tests/test_virtual_ai_os_todo_queue.py::test_swissknife_all_tools_supervisor_queue_is_resumable -q`
+- Acceptance: The supervisor queue distinguishes the common Profile D policy contract, package-export integration for accelerator and IPFS Kit, live HTTP/libp2p endpoint parity, and a dedicated policy-evaluation ZKP circuit. No digest or statement may be recorded as a zero-knowledge proof before a circuit verifies it.
+- Completion note 2026-07-11: Added SVD-077 through SVD-081 with separate evidence requirements for TypeScript local reasoning, datasets MCP transport, Python backend delegation, live three-service endpoint proof, and ZKP circuit work.
+
+## SVD-078 Implement canonical Profile D evaluation in SwissKnife and ipfs_datasets_py
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-077
+- Outputs: `swissknife/src/services/mcp/ipld-cid.ts`, `swissknife/src/services/mcp/profile-d-policy.ts`, `swissknife/src/services/mcp/mcp-plus-plus-connector.ts`, `external/ipfs_datasets/ipfs_datasets_py/logic/ipld_cid.py`, `external/ipfs_datasets/ipfs_datasets_py/logic/profile_d_policy.py`, `external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py`, `external/ipfs_datasets/ipfs_datasets_py/mcp_server/p2p_libp2p_transport.py`
+- Validation: `cd swissknife && npm run test:run -- test/mcp-plus-plus/profile-d-policy.test.ts`; `cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/test_profile_d_policy.py tests/mcp/integration/test_profile_d_policy_p2p.py tests/mcp/integration/test_profile_f_ceremony_p2p.py -q`
+- Acceptance: SwissKnife evaluates explicit or plain-text Profile D policies using its own pure TypeScript logic. `ipfs_datasets_py` evaluates the same execution input over its package export, HTTP JSON-RPC, and Profile E framing; it content-addresses policy and decision artifacts, compiles recognized plain text to DCEC/formal logic, denies missing or mismatched scoped resources, and returns a ZKP-ready statement that explicitly has `zero_knowledge: false` until a dedicated circuit exists.
+- Completion note 2026-07-12: Added the TypeScript evaluator and connector request contract, a hermetic canonical datasets evaluator, FastAPI and native `/mcp+p2p/1.0.0` JSON-RPC handlers, prefix scope matching, and Profile D draft clarification. Policy, intent, decision, formal-logic, and statement artifacts are CIDv1 `dag-json` with `sha2-256`; no legacy digest is accepted as a proof. Focused validation passed with 5 TypeScript Profile D tests, 10 datasets Profile D tests, and 4 native Profile E/Profile F framing tests.
+
+## SVD-079 Route ipfs_accelerate_py and ipfs_kit_py policy gates through the datasets package export
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-078
+- Outputs: `external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/policy_engine.py`, `external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/server.py`, `external/ipfs_kit/ipfs_kit_py/mcp/profile_d_policy.py`, `external/ipfs_kit/ipfs_kit_py/direct_mcp_server.py`
+- Validation: `cd external/ipfs_accelerate && PYTHONPATH=../ipfs_datasets:. python3 -m pytest ipfs_accelerate_py/mcp/tests/test_mcp_server_mcplusplus_policy.py -q`; `cd external/ipfs_kit && PYTHONPATH=../ipfs_datasets:. python3 -m pytest tests/test_profile_d_policy.py -q`
+- Acceptance: Accelerator execution enforcement and IPFS Kit's direct MCP policy method use the canonical datasets package export when it is available, preserve policy and decision CIDs plus formal-logic provenance in their receipts, and fail closed if the profile policy evaluator is unavailable. Editable checkouts must resolve the canonical package despite the accelerator's legacy vendored compatibility namespace.
+- Completion note 2026-07-12: Added the canonical-package resolver for accelerator, bridged its enforcement decisions to Profile D evidence, added IPFS Kit's package-export bridge and direct MCP method, and covered both paths with 10 accelerator and 2 IPFS Kit focused Python tests.
+
+## SVD-080 Prove Profile D HTTP and libp2p endpoint parity across all three backend servers
+
+- Status: completed
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-079
+- Outputs: `swissknife/scripts/capture-profile-d-transport-evidence.cjs`, `swissknife/scripts/capture-profile-d-transport-evidence-probe.mts`, `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/profile-d-policy-http-libp2p.json`, `external/ipfs_accelerate/ipfs_accelerate_py/mcp/tests/test_mcp_server_mcplusplus_policy.py`, `external/ipfs_kit/tests/test_profile_d_policy.py`
+- Validation: `cd swissknife && node scripts/capture-profile-d-transport-evidence.cjs`; `cd external/ipfs_accelerate && PYTHONPATH=../ipfs_datasets:. python3 -m pytest ipfs_accelerate_py/mcp/tests/test_mcp_server_mcplusplus_policy.py ipfs_accelerate_py/mcp/tests/test_profile_d_transport.py -q`; `cd external/ipfs_kit && PYTHONPATH=../ipfs_datasets:. python3 -m pytest tests/test_profile_d_policy.py -q`
+- Acceptance: SwissKnife receives identical verdicts, obligations, policy CIDs, decision CIDs, formal-logic commitments, and statement-only ZKP metadata from `ipfs_datasets_py`, `ipfs_accelerate_py`, and `ipfs_kit_py` over HTTP and libp2p. Any unavailable policy route must be reported as unavailable or deny; it must never silently allow execution.
+- Completion note 2026-07-12: `capture-profile-d-transport-evidence.cjs` delegates to the direct SwissKnife connector probe against all three live compatibility adapters and their `/mcp+p2p/1.0.0` peers. The generated v2 evidence is `go` for five deterministic vectors per service: allow, prohibition, obligation, expired permission, and mismatched resource scope. HTTP and libp2p returned identical verdicts, obligations, policy, decision, intent, and formal-logic CIDs, plus statement-only certificate metadata (`zero_knowledge: false`, `proof: null`). Every required artifact is parsed as CIDv1 `dag-json` with a `sha2-256` multihash, persisted by Helia, and independently retrieved and verified through both transports.
+
+## SVD-081 Build a dedicated Profile D policy-evaluation ZKP circuit and verifier
+
+- Status: ready
+- Priority: P0
+- Track: crypto
+- Depends on: SVD-078, SVD-076
+- Outputs: `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/`, `swissknife/src/services/zkp/`, `Mcp-Plus-Plus/docs/spec/temporal-deontic-policy.md`, `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/profile-d-policy-zkp.json`
+- Validation: Compile and verify allow, deny, obligation, temporal-window, and scoped-resource witness vectors with the dedicated circuit; reject a certificate whose public policy, decision, intent, or formal-logic commitment does not match the evaluated policy result.
+- Acceptance: A verified zero-knowledge certificate proves the public Profile D decision commitments without revealing the private policy text or private context. The implementation must remain explicitly statement-only when the circuit, trusted setup, or verification key is not production-admitted.
+
+## SVD-082 through SVD-091 Add distributed risk, neighborhood coordination, and scheduling
+
+- Status: in_progress
+- Priority: P0
+- Track: supervisor, mcp, transport, performance
+- Depends on: SVD-080
+- Plan: `implementation_plan/docs/38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md`
+- Acceptance: The four-service implementation defines and proves an optional,
+  CID-native MCP++ scheduling extension for goal/subgoal-derived work, risk
+  assessments, neighborhood attestation, deterministic task claims and leases,
+  P2P recovery, fairness, and throughput. It must preserve Profile C UCAN and
+  Profile D policy enforcement, Profile F provenance/compaction, and HTTP/
+  libp2p semantic parity. The workboard begins with SVD-082 and ends with
+  three-peer fault-injection, performance, and release-gate evidence in SVD-091.

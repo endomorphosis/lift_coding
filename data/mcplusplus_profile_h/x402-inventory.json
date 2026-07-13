@@ -1,0 +1,808 @@
+{
+  "schema_version": 1,
+  "task_id": "XPH-100",
+  "title": "Inventory x402 and paid-access integration seams",
+  "generated_at": "2026-07-12T00:00:00Z",
+  "behavior_change": false,
+  "scope": {
+    "canonical_components": [
+      "Mcp-Plus-Plus",
+      "ipfs_kit_py",
+      "ipfs_accelerate_py",
+      "ipfs_datasets_py",
+      "swissknife"
+    ],
+    "source_revisions": {
+      "Mcp-Plus-Plus": "cfd49a9a50a1782db0ac1e8515fe87c3a4d808db",
+      "ipfs_kit_py": "97d7ae6711ff4c7b9b70fd1a16a4fc8c7ef3bf5b",
+      "ipfs_accelerate_py": "6d2f6668aff308ec8f4eb888f0cfe758fd34e371",
+      "ipfs_datasets_py": "0251bb7bbc1498a789f5fe4bb5c6f45460e1b6fa",
+      "swissknife": "6651a7279b1799b8629fcf5e95caaf07cb8accbc",
+      "hallucinate_app": "c7ea0380d47be06195d8bc29c30df87e9577a20b"
+    },
+    "canonical_source_roots": {
+      "ipfs_kit_py": "external/ipfs_kit",
+      "ipfs_accelerate_py": "external/ipfs_accelerate",
+      "ipfs_datasets_py": "external/ipfs_datasets",
+      "swissknife": "swissknife",
+      "Mcp-Plus-Plus": "Mcp-Plus-Plus"
+    },
+    "mirror_policy": "external package roots are canonical for this inventory; hallucinate_app and nested copies are recorded as mirrors and must receive the same eventual shared runtime integration, not independent payment logic",
+    "transport_coverage_rule": "Inventory every independently reachable MCP++ HTTP or /mcp+p2p/1.0.0 execution boundary, including alternate runtimes and SwissKnife buyer paths; framing-only layers are recorded where they can carry Profile H objects, while stdio, gRPC compatibility, discovery/pubsub, health, and read-only metadata endpoints are not paid dispatchers.",
+    "discovery_queries": [
+      "rg -n 'mcp\\+p2p|mcpplusplus|mcp_plus_plus' <component roots>",
+      "rg -n -i 'x402|wallet|facilitator|receipt|ledger|duckdb|sqlite' <component roots>",
+      "rg -n 'tools/call|dispatch|initialize|capabilities.*experimental' <MCP server roots>",
+      "rg -n -i 'x402' package.json package-lock.json pnpm-lock.yaml pyproject.toml requirements*.txt uv.lock"
+    ]
+  },
+  "upstream_x402": {
+    "protocol_version": 2,
+    "version_policy": "accept x402Version 2 only for the first Profile H release; reject v1 payloads and headers; SDK patch/minor upgrades require conformance-vector review and lockfile updates",
+    "normative_http": {
+      "unpaid_status": 402,
+      "headers": {
+        "requirements": "PAYMENT-REQUIRED",
+        "authorization": "PAYMENT-SIGNATURE",
+        "settlement": "PAYMENT-RESPONSE"
+      },
+      "encoding": "base64-encoded JSON",
+      "legacy_headers_forbidden": [
+        "X-PAYMENT",
+        "X-PAYMENT-RESPONSE"
+      ]
+    },
+    "pinned_specification": {
+      "repository": "https://github.com/x402-foundation/x402",
+      "commit": "0a604079aca7b5a45a2e1620ba444e13982646c8",
+      "document": "https://github.com/x402-foundation/x402/blob/0a604079aca7b5a45a2e1620ba444e13982646c8/specs/x402-specification-v2.md",
+      "http_transport": "https://github.com/x402-foundation/x402/tree/0a604079aca7b5a45a2e1620ba444e13982646c8/specs/transports-v2",
+      "reviewed_at": "2026-07-12"
+    },
+    "primary_references": [
+      {
+        "kind": "specification",
+        "url": "https://github.com/x402-foundation/x402/blob/0a604079aca7b5a45a2e1620ba444e13982646c8/specs/x402-specification-v2.md",
+        "pin": "git commit 0a604079aca7b5a45a2e1620ba444e13982646c8"
+      },
+      {
+        "kind": "http-v2",
+        "url": "https://docs.x402.org/core-concepts/http-402",
+        "pin": "reviewed 2026-07-12; normative implementation remains commit-pinned"
+      },
+      {
+        "kind": "v1-to-v2-migration",
+        "url": "https://docs.x402.org/guides/migration-v1-to-v2",
+        "pin": "reviewed 2026-07-12"
+      },
+      {
+        "kind": "official-mcp-integration",
+        "url": "https://docs.x402.org/guides/mcp-server-with-x402",
+        "pin": "reviewed 2026-07-12"
+      }
+    ]
+  },
+  "dependency_version_matrix": [
+    {
+      "component": "ipfs_kit_py",
+      "ecosystem": "Python",
+      "manifests_scanned": ["external/ipfs_kit/pyproject.toml", "external/ipfs_kit/requirements.txt", "external/ipfs_kit/setup.py", "external/ipfs_kit/package.json"],
+      "existing_x402_dependency": null,
+      "status": "absent",
+      "candidate": "x402[fastapi,evm]==2.15.0",
+      "candidate_pin": "pypi-x402@v2.15.0 / commit 2aa22d3e6a38547a8232737599d9f519c9ac5533",
+      "registry": "https://pypi.org/project/x402/2.15.0/",
+      "integrity": {"wheel_sha256": "06f59422d5ca30736964ce911980fe3288ed72ab90b14789a42738fd5e99b794", "sdist_sha256": "25579a7fcf2bd00ce56e47de052d4460d5a83621a12170fcf1d863066b3ec71a"},
+      "action_owner": "XPH-103/XPH-104",
+      "note": "Do not add until the shared seller adapter and conformance vectors exist."
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "ecosystem": "Python",
+      "manifests_scanned": ["external/ipfs_accelerate/pyproject.toml", "external/ipfs_accelerate/requirements.txt", "external/ipfs_accelerate/ipfs_accelerate_py/requirements.txt", "external/ipfs_accelerate/setup.py"],
+      "existing_x402_dependency": null,
+      "status": "absent",
+      "candidate": "x402[fastapi,evm]==2.15.0",
+      "candidate_pin": "pypi-x402@v2.15.0 / commit 2aa22d3e6a38547a8232737599d9f519c9ac5533",
+      "registry": "https://pypi.org/project/x402/2.15.0/",
+      "integrity": {"wheel_sha256": "06f59422d5ca30736964ce911980fe3288ed72ab90b14789a42738fd5e99b794", "sdist_sha256": "25579a7fcf2bd00ce56e47de052d4460d5a83621a12170fcf1d863066b3ec71a"},
+      "action_owner": "XPH-103/XPH-105",
+      "note": "Use the same Python adapter/version as both other sellers."
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "ecosystem": "Python",
+      "manifests_scanned": ["external/ipfs_datasets/pyproject.toml", "external/ipfs_datasets/requirements.txt", "external/ipfs_datasets/setup.py"],
+      "existing_x402_dependency": null,
+      "status": "absent",
+      "candidate": "x402[fastapi,evm]==2.15.0",
+      "candidate_pin": "pypi-x402@v2.15.0 / commit 2aa22d3e6a38547a8232737599d9f519c9ac5533",
+      "registry": "https://pypi.org/project/x402/2.15.0/",
+      "integrity": {"wheel_sha256": "06f59422d5ca30736964ce911980fe3288ed72ab90b14789a42738fd5e99b794", "sdist_sha256": "25579a7fcf2bd00ce56e47de052d4460d5a83621a12170fcf1d863066b3ec71a"},
+      "action_owner": "XPH-103/XPH-106",
+      "note": "The existing FastAPI dependency is an integration seam, not payment support."
+    },
+    {
+      "component": "swissknife",
+      "ecosystem": "npm",
+      "manifests_scanned": ["swissknife/package.json", "swissknife/package-lock.json", "swissknife/pnpm-lock.yaml", "swissknife/yarn.lock", "swissknife/web/package.json", "swissknife/web/package-lock.json"],
+      "existing_x402_dependency": null,
+      "status": "absent",
+      "candidate": "@x402/core@2.18.0 and @x402/mcp@2.18.0",
+      "candidate_pin": "npm tags npm-@x402/core@v2.18.0 (87c761b8e8ecb02b00da68b64bf9eaea19501977) and npm-@x402/mcp@v2.18.0 (c6c28eff299e0443480b59be3059cb1469798f40)",
+      "registry": "https://www.npmjs.com/package/@x402/mcp/v/2.18.0",
+      "integrity": {
+        "@x402/core": "sha512-3LB5m0Yx7C38ks8jDqTGYPZ2FnLzlH9pTlGvE8er2ujS1ri12sXXvWwnmYsmh3ZkXSDbV3BKU8oRKULatPp0Hg==",
+        "@x402/mcp": "sha512-nv1cGgF3Af8T3sf5x7G/6NsaPiCRgutt+qedIcTkJkxQ0eHf7e1WbL0dhndcIi496l+ubJIHCFwg44DYPMzfHA=="
+      },
+      "action_owner": "XPH-107",
+      "note": "The deprecated unscoped x402 v1 package must not be installed."
+    }
+  ],
+  "dispatchers": [
+    {
+      "id": "kit-jsonrpc-core",
+      "component": "ipfs_kit_py",
+      "transport": "http",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/server.py",
+      "symbols": ["MCPServer.handle", "MCPServer._route", "create_http_app"],
+      "operations": ["initialize", "tools/list", "tools/call", "mcp++/*", "POST JSON-RPC"],
+      "side_effect_boundary": "HierarchicalToolManager.dispatch",
+      "payment_insertion": "after UCAN/Profile D/domain authorization and immediately before HierarchicalToolManager.dispatch; create_http_app maps payment_required to HTTP 402 v2 headers",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "kit-fastmcp-tools",
+      "component": "ipfs_kit_py",
+      "transport": "http",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/fastmcp_app.py",
+      "symbols": ["register_fastmcp", "build_app", "_handler"],
+      "operations": ["registered hierarchical MCP tools"],
+      "side_effect_boundary": "HierarchicalToolManager.dispatch",
+      "payment_insertion": "shared tool-dispatch guard, not per generated FastMCP handler",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "kit-libp2p-stream",
+      "component": "ipfs_kit_py",
+      "transport": "libp2p",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/p2p_transport.py",
+      "symbols": ["PROTOCOL_ID", "handle_stream_message", "serve_p2p"],
+      "operations": ["/mcp+p2p/1.0.0 JSON-RPC"],
+      "side_effect_boundary": "shared MCPServer.handle callback",
+      "payment_insertion": "decoded Profile H payment_context enters MCPServer._route; return typed H_PAYMENT_REQUIRED rather than HTTP headers",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "kit-profile-g",
+      "component": "ipfs_kit_py",
+      "transport": "shared",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/profile_g_transport.py",
+      "symbols": ["ProfileGDispatcher.dispatch", "get_dispatcher"],
+      "operations": ["mcp++/goals/*", "mcp++/tasks/*", "mcp++/risk/*", "mcp++/schedule/*"],
+      "side_effect_boundary": "Profile G provider/persistence dispatch",
+      "payment_insertion": "shared policy engine before mutation dispatch; workers receive entitlement CID only",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-fastmcp-core",
+      "component": "ipfs_accelerate_py",
+      "transport": "http",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/server.py",
+      "symbols": ["create_server", "_attach_unified_bootstrap", "tools_dispatch"],
+      "operations": ["FastMCP tools/call", "tools_dispatch", "flat registered tools"],
+      "side_effect_boundary": "HierarchicalToolManager.dispatch at tools_dispatch",
+      "payment_insertion": "after existing input, UCAN, policy and risk checks and before manager.dispatch/reservation/job submission",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-fastapi-mount",
+      "component": "ipfs_accelerate_py",
+      "transport": "http",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/fastapi_service.py",
+      "symbols": ["create_fastapi_app", "_profile_g_rest"],
+      "operations": ["mounted MCP JSON-RPC", "/mcp/policy/evaluate", "/mcp/{profile_g_path}"],
+      "side_effect_boundary": "mounted FastMCP server and ProfileGDispatcher.dispatch",
+      "payment_insertion": "ASGI x402 mapper delegates all commercial decisions to shared policy guard",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-libp2p-facade",
+      "component": "ipfs_accelerate_py",
+      "transport": "libp2p",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcp_p2p_transport.py",
+      "symbols": ["handle_mcp_p2p_stream", "PROTOCOL_MCP_P2P_V1"],
+      "operations": ["/mcp+p2p/1.0.0 framed JSON-RPC"],
+      "side_effect_boundary": "p2p_tasks.mcp_p2p.handle_mcp_p2p_stream registry dispatch",
+      "payment_insertion": "canonical registry dispatcher consumes payment_context before tool call",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-libp2p-canonical",
+      "component": "ipfs_accelerate_py",
+      "transport": "libp2p",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/mcp_p2p.py",
+      "symbols": ["handle_mcp_p2p_stream", "read_u32_framed_json", "write_u32_framed_json"],
+      "operations": ["initialize", "tools/list", "tools/call"],
+      "side_effect_boundary": "tool registry dispatch",
+      "payment_insertion": "transport-neutral paid dispatch guard used by HTTP and libp2p",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-profile-g",
+      "component": "ipfs_accelerate_py",
+      "transport": "shared",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/profile_g_transport.py",
+      "symbols": ["ProfileGTransportDispatcher.dispatch", "get_profile_g_dispatcher"],
+      "operations": ["mcp++/goals/*", "mcp++/tasks/*", "mcp++/risk/*", "mcp++/schedule/*"],
+      "side_effect_boundary": "ProfileGProvider dispatch and lease store",
+      "payment_insertion": "check paid entitlement before resource reservation, claim, execution, or premium queue admission",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-trio-http",
+      "component": "ipfs_accelerate_py",
+      "transport": "http",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/trio/server.py",
+      "symbols": ["TrioMCPServer._handle_jsonrpc", "TrioMCPServer._dispatch_jsonrpc", "TrioMCPServer.run"],
+      "operations": ["POST /mcp JSON-RPC", "tools/call", "mcp++/execute", "REST /mcp/execute", "UCAN delegate/revoke", "policy evaluate/register", "p2p/call", "DAG and discovery/event reads"],
+      "side_effect_boundary": "TrioMCPServer._dispatch_jsonrpc tool invocation and REST execute/delegation/policy/P2P route handlers",
+      "payment_insertion": "one shared route-aware paid-dispatch guard after schema, UCAN and deontic authorization and before priced JSON-RPC or REST side effects; keep security/control and public discovery operations explicitly free; HTTP adapter emits x402 v2 402 headers",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "accelerate-trio-libp2p",
+      "component": "ipfs_accelerate_py",
+      "transport": "libp2p",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p_transport.py",
+      "symbols": ["MCPp2pNode._handle_stream", "MCPp2pNode.set_tool_handler", "MCP_P2P_PROTOCOL"],
+      "operations": ["/mcp+p2p/1.0.0 method dispatch through TrioMCPServer's registered handler"],
+      "side_effect_boundary": "MCPp2pNode._tool_handler callback configured by TrioMCPServer",
+      "payment_insertion": "the same TrioMCPServer paid-dispatch guard consumes typed payment context before tool execution; the node only frames and propagates the request",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-fastapi-jsonrpc",
+      "component": "ipfs_datasets_py",
+      "transport": "http",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["mcp_jsonrpc_handler", "mcp_tools_call_rest", "_dispatch_hierarchical_flat_tool"],
+      "operations": ["POST /mcp", "POST /mcp/tools/call", "tools/call", "mcp++/*"],
+      "side_effect_boundary": "registered tool callable or hierarchical dispatch",
+      "payment_insertion": "after license/tenant/field/policy checks and before callable or hierarchical dispatch; preserve same guard for both aliases",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-fastapi-envelope",
+      "component": "ipfs_datasets_py",
+      "transport": "http",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["mcp_execute_with_envelope", "mcp_jsonrpc_handler"],
+      "operations": ["mcp++/execute", "CID envelope execution"],
+      "side_effect_boundary": "envelope tool execution",
+      "payment_insertion": "bind quote and payment to canonical envelope/request commitment before execution",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-rest-tool-execute",
+      "component": "ipfs_datasets_py",
+      "transport": "http",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["execute_tool", "_dispatch_hierarchical_flat_tool"],
+      "operations": ["POST /tools/execute/{tool_name}", "registered and hierarchical MCP tool execution"],
+      "side_effect_boundary": "registered tool callable or hierarchical tools_dispatch",
+      "payment_insertion": "reuse the datasets shared policy/payment guard before both registered and hierarchical calls so this legacy authenticated alias cannot bypass paid access",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-mcplusplus-rest",
+      "component": "ipfs_datasets_py",
+      "transport": "http",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["mcp_execute_with_envelope", "p2p_call_remote_tool", "_profile_g_rest_result"],
+      "operations": ["/mcp/execute", "UCAN delegate/validate", "policy/evaluate", "p2p/call", "Profile G goals/tasks/risk/neighborhood/schedule", "DAG ZK prove/verify", "read-only MCP++ metadata"],
+      "side_effect_boundary": "envelope tool execution, remote peer call, ProfileGService.dispatch, and proof generation",
+      "payment_insertion": "one route-aware datasets guard after license, tenant, row/field, UCAN and policy authorization and before priced execution, remote work, Profile G mutation, or proof generation; discovery, validation, authorization administration and required recovery reads remain explicitly free",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-libp2p-dispatch",
+      "component": "ipfs_datasets_py",
+      "transport": "libp2p",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/p2p_libp2p_transport.py",
+      "symbols": ["dispatch_profile_e_jsonrpc_request", "MCP_P2P_PROTOCOL"],
+      "operations": ["initialize", "tools/list", "mcp++/policy/evaluate", "mcp++/zk/*", "mcp++/risk-scheduling"],
+      "side_effect_boundary": "native libp2p operation dispatch",
+      "payment_insertion": "decoded payment_context passes through shared datasets policy engine before protected dispatch",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-libp2p-framing",
+      "component": "ipfs_datasets_py",
+      "transport": "libp2p",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcp_p2p_transport.py",
+      "symbols": ["LengthPrefixFramer", "P2PSessionConfig", "MCP_P2P_PROTOCOL_ID"],
+      "operations": ["/mcp+p2p/1.0.0 framing/session"],
+      "side_effect_boundary": "carriage-only; delegates to dispatcher",
+      "payment_insertion": "no economic policy in framer; preserve typed Profile H objects unchanged",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "datasets-profile-g",
+      "component": "ipfs_datasets_py",
+      "transport": "shared",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/profile_g_service.py",
+      "symbols": ["ProfileGService.dispatch", "get_profile_g_service"],
+      "operations": ["mcp++/goals/*", "mcp++/tasks/*", "mcp++/risk/*", "mcp++/schedule/*"],
+      "side_effect_boundary": "logic Profile G provider",
+      "payment_insertion": "entitlement-aware guard before paid GraphRAG/index/task mutations",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-http-jsonrpc",
+      "component": "swissknife",
+      "transport": "http",
+      "path": "swissknife/src/services/mcp/mcp-plus-plus-connector.ts",
+      "symbols": ["MCPPPServerConnector.jsonRpc", "MCPPPServerConnector.callTool", "MCPPPServerConnector.connectHttp"],
+      "operations": ["initialize", "tools/list", "tools/call", "mcp++/*"],
+      "side_effect_boundary": "globalThis.fetch JSON-RPC request",
+      "payment_insertion": "ProfileHPaymentClient wraps one request/402/approval/sign/retry cycle and retains settlement/execution receipts",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-libp2p-jsonrpc",
+      "component": "swissknife",
+      "transport": "libp2p",
+      "path": "swissknife/src/services/mcp/mcp-plus-plus-connector.ts",
+      "symbols": ["MCPPPServerConnector.connectLibp2p", "MCPPPServerConnector.jsonRpc", "MCPPPServerConnector.useSession"],
+      "operations": ["normal JSON-RPC over MCPp2pSession"],
+      "side_effect_boundary": "MCPp2pSession.sendRequest",
+      "payment_insertion": "handle H_PAYMENT_REQUIRED, obtain approval/signature outside agent context, retry with payment_context.payload",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-libp2p-session",
+      "component": "swissknife",
+      "transport": "libp2p",
+      "path": "swissknife/src/services/mcp/mcp-p2p-session.ts",
+      "symbols": ["MCPp2pSession.sendRequest", "MCPp2pSession._dispatch", "negotiateCapabilities"],
+      "operations": ["/mcp+p2p/1.0.0 handshake, request/reply dispatch"],
+      "side_effect_boundary": "session request resolver",
+      "payment_insertion": "add Profile H capability and typed error/context handling without exposing signer material",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-local-orb",
+      "component": "swissknife",
+      "transport": "local",
+      "path": "swissknife/src/services/mcp/mcp-plus-plus.ts",
+      "symbols": ["MCPPlusPlus.execute", "MCPPlusPlus.dispatchToBackend"],
+      "operations": ["local interface method to backend REST mapping"],
+      "side_effect_boundary": "dispatchToBackend fetch",
+      "payment_insertion": "route paid operations through the same Profile H client and approval policy; never let agents call a signer directly",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-host-sdk-client",
+      "component": "swissknife",
+      "transport": "http",
+      "path": "swissknife/src/services/mcp/host/mcpClient.ts",
+      "symbols": ["connectToServer", "callMCPTool", "client.callTool"],
+      "operations": ["production CLI MCP SDK SSE tool calls with optional MCP++ envelopes, Event DAG entries, and execution receipts"],
+      "side_effect_boundary": "MCP SDK Client.callTool used by the production CLI tool registry",
+      "payment_insertion": "wrap the production host Client.callTool path with the isolated Profile H approval/wallet broker before a paid retry; bind the resulting settlement receipt to the existing execution envelope and receipt",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-versioned-sdk-client",
+      "component": "swissknife",
+      "transport": "http",
+      "path": "swissknife/src/services/mcp/host/mcp-versioned-client.ts",
+      "symbols": ["getVersionedMCPTools", "client.callTool", "trafficManager.getClientForRequest"],
+      "operations": ["version-aware production CLI MCP SDK tool calls over traffic-managed connected clients"],
+      "side_effect_boundary": "direct MCP SDK Client.callTool after version selection and traffic routing",
+      "payment_insertion": "use the same wrapped Profile H-aware connected client as the ordinary host tool path so version and traffic routing cannot bypass payment approval or receipt persistence",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-sdk-client",
+      "component": "swissknife",
+      "transport": "http",
+      "path": "swissknife/src/services/mcp/mcp-mcpClient.ts",
+      "symbols": ["callMCPTool", "client.callTool", "connectToServer"],
+      "operations": ["official MCP SDK Streamable HTTP/SSE tool calls with optional MCP++ envelopes and receipts"],
+      "side_effect_boundary": "MCP SDK Client.callTool",
+      "payment_insertion": "route paid HTTP calls through the isolated Profile H buyer policy/wallet broker before retry; preserve envelope and execution-receipt linkage",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-generic-http",
+      "component": "swissknife",
+      "transport": "http",
+      "path": "swissknife/src/services/mcp/mcp-transport.ts",
+      "symbols": ["HttpsTransport.request", "MCPClient.sendRequest"],
+      "operations": ["generic HTTPS MCP JSON-RPC request"],
+      "side_effect_boundary": "HttpsTransport.request fetch",
+      "payment_insertion": "central Profile H HTTP response decoder and wallet broker before MCPClient retries; do not add signer state to the transport",
+      "current_payment_enforcement": false
+    },
+    {
+      "id": "swissknife-generic-libp2p",
+      "component": "swissknife",
+      "transport": "libp2p",
+      "path": "swissknife/src/services/mcp/mcp-transport.ts",
+      "symbols": ["Libp2pTransport", "MCPClient.sendRequest", "connectLibp2pMcpSession"],
+      "operations": ["generic MCPClient request over /mcp+p2p/1.0.0 session"],
+      "side_effect_boundary": "MCPp2pSession request dispatch",
+      "payment_insertion": "central Profile H typed-error handler invokes the same isolated approval/wallet broker used by MCPPPServerConnector",
+      "current_payment_enforcement": false
+    }
+  ],
+  "capability_descriptors": [
+    {
+      "component": "Mcp-Plus-Plus",
+      "path": "Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md",
+      "symbols": ["capabilities.experimental", "Profile E"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-101"
+    },
+    {
+      "component": "ipfs_kit_py",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/server.py",
+      "symbols": ["MCPServer._route initialize", "_interface_descriptors"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-104"
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/server.py",
+      "symbols": ["get_unified_supported_profiles", "load_idl_tools"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-105"
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/trio/server.py",
+      "symbols": ["TrioMCPServer._dispatch_jsonrpc", "capabilities", "experimental"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-105"
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/mcp_p2p.py",
+      "symbols": ["handle_mcp_p2p_stream", "get_unified_supported_profiles"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-105"
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["mcp_jsonrpc_handler initialize", "mcp_discover"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-106"
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/p2p_libp2p_transport.py",
+      "symbols": ["dispatch_profile_e_jsonrpc_request", "mcpPlusPlusProfiles", "experimental"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-106"
+    },
+    {
+      "component": "swissknife",
+      "path": "swissknife/src/services/mcp/mcp-p2p-session.ts",
+      "symbols": ["MCP_PLUS_PLUS_PROFILES", "MCP_PLUS_PLUS_EXPERIMENTAL_CAPABILITIES", "negotiateCapabilities"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-107"
+    },
+    {
+      "component": "swissknife",
+      "path": "swissknife/src/services/mcp/mcp-plus-plus-connector.ts",
+      "symbols": ["MCPPPServerConnector.connectHttp", "extractProfiles"],
+      "current_profile_h": false,
+      "required_change_owner": "XPH-107"
+    }
+  ],
+  "wallet_client_seams": [
+    {
+      "component": "swissknife",
+      "kind": "buyer transport",
+      "path": "swissknife/src/services/mcp/mcp-plus-plus-connector.ts",
+      "symbols": ["MCPPPServerConnector.jsonRpc", "callTool", "MCPPPMultiServerConnector"],
+      "current_state": "HTTP and libp2p calls share JSON-RPC construction but have no 402/payment retry path"
+    },
+    {
+      "component": "swissknife",
+      "kind": "primary CLI MCP SDK buyer transport",
+      "path": "swissknife/src/services/mcp/host/mcpClient.ts",
+      "symbols": ["connectToServer", "callMCPTool", "client.callTool"],
+      "current_state": "The production CLI imports this host client for SSE/stdio MCP calls and already builds MCP++ envelopes, Event DAG entries, and receipts, but it has no x402 approval, signature, settlement, or retry path"
+    },
+    {
+      "component": "swissknife",
+      "kind": "version-aware buyer router",
+      "path": "swissknife/src/services/mcp/host/mcp-versioned-client.ts",
+      "symbols": ["getVersionedMCPTools", "client.callTool", "trafficManager.getClientForRequest"],
+      "current_state": "Version selection and traffic management invoke Client.callTool directly; the selected client must be Profile H wrapped so this independently reachable CLI path cannot bypass spend approval"
+    },
+    {
+      "component": "swissknife",
+      "kind": "alternate MCP SDK buyer transport",
+      "path": "swissknife/src/services/mcp/mcp-mcpClient.ts",
+      "symbols": ["connectToServer", "callMCPTool", "client.callTool"],
+      "current_state": "Official SDK stdio/SSE/Streamable HTTP calls can build MCP++ envelopes and receipts but have no x402 payment approval or retry path"
+    },
+    {
+      "component": "swissknife",
+      "kind": "generic buyer transport",
+      "path": "swissknife/src/services/mcp/mcp-transport.ts",
+      "symbols": ["MCPClient.sendRequest", "HttpsTransport.request", "Libp2pTransport"],
+      "current_state": "Generic HTTPS and libp2p clients are independently callable and must delegate paid retries to the same isolated wallet broker"
+    },
+    {
+      "component": "swissknife",
+      "kind": "signing isolation precedent",
+      "path": "swissknife/src/auth/did-keystore.ts",
+      "symbols": ["DIDKeystore", "sign"],
+      "current_state": "Ed25519 DID keys only; must not be repurposed as an x402 wallet or exposed to renderer/agent code"
+    },
+    {
+      "component": "swissknife",
+      "kind": "receipt/CID precedent",
+      "path": "swissknife/src/services/mcp/mcp-envelope.ts",
+      "symbols": ["buildReceipt", "computeReceiptCID"],
+      "current_state": "execution receipts exist, but no payment/settlement receipt model or encrypted sensitive store exists"
+    },
+    {
+      "component": "swissknife",
+      "kind": "wallet provider",
+      "path": null,
+      "symbols": [],
+      "current_state": "missing: no WalletConnect, hardware/external wallet, x402 signer broker, balance/network check, payment approval, or spend-policy interface"
+    }
+  ],
+  "seller_configuration_paths": [
+    {
+      "component": "ipfs_kit_py",
+      "existing_paths": ["external/ipfs_kit/pyproject.toml", "external/ipfs_kit/ipfs_kit_py/mcp_server/server.py"],
+      "existing_pattern": "package dependencies plus MCP server environment/runtime construction",
+      "x402_configuration_present": false,
+      "required_seam": "disabled/testnet/mainnet settings, signed catalog, seller address per CAIP-2 network, facilitator allowlist, ledger path, quote/replay bounds, emergency pause"
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "existing_paths": ["external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/configs.py", "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/fastapi_config.py", "external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/trio/server.py"],
+      "existing_pattern": "dataclass/from_env unified MCP settings plus the separate TrioMCPServer ServerConfig runtime",
+      "x402_configuration_present": false,
+      "required_seam": "extend unified settings; mainnet validation must fail closed and Profile G workers receive entitlement CIDs, never signing authority"
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "existing_paths": ["external/ipfs_datasets/ipfs_datasets_py/mcp_server/configs.py", "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py"],
+      "existing_pattern": "MCPServerConfig/environment plus FastAPI application state",
+      "x402_configuration_present": false,
+      "required_seam": "seller/catalog/facilitator/ledger settings separated from dataset license, tenant, row and field authorization"
+    }
+  ],
+  "durable_stores": [
+    {
+      "component": "ipfs_kit_py",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/coordination_storage.py",
+      "symbols": ["DurableCoordinationStore", "coordination.duckdb"],
+      "backend": "DuckDB plus content-addressed artifacts",
+      "reuse": "transaction/locking and immutable artifact persistence precedent; add a separate payment ledger/index schema",
+      "payment_ready": false
+    },
+    {
+      "component": "ipfs_kit_py",
+      "path": "external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/event_dag.py",
+      "symbols": ["EventDAGStore"],
+      "backend": "Profile F content-addressed event store",
+      "reuse": "payment lineage events and redacted artifact CIDs; not sufficient as the atomic replay/settlement ledger",
+      "payment_ready": false
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/artifacts.py",
+      "symbols": ["ArtifactStore"],
+      "backend": "memory or JSON selected by IPFS_MCP_SERVER_ARTIFACT_STORE_BACKEND/PATH",
+      "reuse": "CID artifact persistence; memory mode is forbidden for paid dispatch",
+      "payment_ready": false
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/profile_g_provider.py",
+      "symbols": ["IPFS_ACCELERATE_PROFILE_G_DUCKDB", "leases.duckdb"],
+      "backend": "DuckDB lease/coordination provider",
+      "reuse": "fencing and recovery precedent; payment state must be separately constrained and reconciled",
+      "payment_ready": false
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["MCPPP_STORAGE_DIR"],
+      "backend": "filesystem/IPFS-backed MCP++ state",
+      "reuse": "immutable artifact storage root; add a durable settlement/entitlement/replay index",
+      "payment_ready": false
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/dag_compaction.py",
+      "symbols": ["COLD_TIER_DIR"],
+      "backend": "Profile F cold-tier filesystem",
+      "reuse": "archive redacted payment events only; not an authorization ledger",
+      "payment_ready": false
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/policy_audit_log.py",
+      "symbols": ["PolicyAuditLog", "log_path"],
+      "backend": "optional append-only JSONL policy-decision audit file",
+      "reuse": "link authorization decisions to payment/execution correlation IDs after redaction; append-only logging is not an atomic replay or settlement ledger",
+      "payment_ready": false
+    },
+    {
+      "component": "swissknife",
+      "path": "swissknife/scripts/mcpplusplus-artifact-store.cjs",
+      "symbols": ["MCP++ artifact cache"],
+      "backend": "atomic local artifact cache plus Kubo/Helia publication",
+      "reuse": "receipt artifact/CID storage after redaction; sensitive payment metadata needs encryption and wallet-bound access",
+      "payment_ready": false
+    },
+    {
+      "component": "swissknife",
+      "path": "swissknife/src/services/mcp/mcp-mcpClient.ts",
+      "symbols": ["buildReceipt", "computeReceiptCID", "ipfs.addContent"],
+      "backend": "best-effort IPFS receipt pinning",
+      "reuse": "link execution output to settlement/access receipt; best-effort pinning alone is not durable payment recovery",
+      "payment_ready": false
+    }
+  ],
+  "protected_operation_families": [
+    {
+      "component": "ipfs_kit_py",
+      "families": ["storage", "pinning", "retrieval", "bandwidth", "replication", "filesystem mutation", "premium durability"],
+      "dispatch_seams": ["kit-jsonrpc-core", "kit-fastmcp-tools", "kit-profile-g"],
+      "authorization_that_payment_must_not_bypass": ["UCAN resource scope", "Profile D policy", "private CID/namespace access", "retention and quota constraints"]
+    },
+    {
+      "component": "ipfs_accelerate_py",
+      "families": ["model inference", "accelerator time", "batch jobs", "agent-supervisor work", "premium queues", "resource reservations", "scheduled task execution"],
+      "dispatch_seams": ["accelerate-fastmcp-core", "accelerate-profile-g", "accelerate-trio-http", "accelerate-trio-libp2p"],
+      "authorization_that_payment_must_not_bypass": ["UCAN", "Profile D policy", "risk/safety admission", "capacity and lease fencing", "operator execution limits"]
+    },
+    {
+      "component": "ipfs_datasets_py",
+      "families": ["dataset queries", "restricted derived artifacts", "GraphRAG/index work", "transformations", "provenance reports", "premium API features"],
+      "dispatch_seams": ["datasets-fastapi-jsonrpc", "datasets-fastapi-envelope", "datasets-rest-tool-execute", "datasets-mcplusplus-rest", "datasets-profile-g", "datasets-libp2p-dispatch"],
+      "authorization_that_payment_must_not_bypass": ["dataset license", "tenant policy", "row/field controls", "privacy policy", "dataset/version/query derivation scope"]
+    }
+  ],
+  "non_mcplusplus_execution_surfaces": [
+    {
+      "id": "accelerate-legacy-fastapi-rollback",
+      "component": "ipfs_accelerate_py",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/mcp/server.py",
+      "symbols": ["MCPServerWrapper", "_execute_tool", "IPFS_MCP_FORCE_LEGACY_ROLLBACK"],
+      "surface": "rollback-only FastAPI POST /tool/{tool_name} and /tools/{tool_name} execution",
+      "reason_not_dispatcher": "compatibility MCP facade without MCP++ capability negotiation; unified MCP++ is the default runtime",
+      "in_mcplusplus_dispatcher_count": false,
+      "profile_h_disposition": "XPH-105 must either apply the same seller guard before _execute_tool or disable this rollback runtime whenever paid catalogs are enabled."
+    },
+    {
+      "id": "datasets-deprecated-flask-tools",
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/simple_server.py",
+      "symbols": ["SimpleIPFSDatasetsMCPServer", "call_tool", "start_simple_server"],
+      "surface": "deprecated Flask POST /tools/<tool_name> compatibility route",
+      "reason_not_dispatcher": "deprecated pre-MCP++ server with no MCP++ negotiation or envelope support",
+      "in_mcplusplus_dispatcher_count": false,
+      "profile_h_disposition": "XPH-106 must disable this route when paid access is enabled or place it behind the shared seller guard so it cannot bypass catalog pricing."
+    },
+    {
+      "id": "datasets-direct-product-rest",
+      "component": "ipfs_datasets_py",
+      "path": "external/ipfs_datasets/ipfs_datasets_py/mcp_server/fastapi_service.py",
+      "symbols": ["generate_embeddings_api", "semantic_search", "process_dataset"],
+      "surface": "authenticated non-MCP++ embeddings, search, analysis, dataset, vector, workflow, IPFS, audit, and cache REST routes",
+      "reason_not_dispatcher": "product REST operations do not negotiate or carry MCP++ messages even though they share the FastAPI process",
+      "in_mcplusplus_dispatcher_count": false,
+      "profile_h_disposition": "XPH-106 must include any priced direct route in the same operation catalog and route-aware HTTP payment middleware, after license/tenant/data authorization and before side effects."
+    }
+  ],
+  "mirrors": [
+    {
+      "canonical": "external/ipfs_kit/ipfs_kit_py/mcp_server",
+      "copies": [
+        "hallucinate_app/ipfs_kit_py/ipfs_kit_py/mcp_server",
+        "external/ipfs_accelerate/ipfs_kit_py/ipfs_kit_py/mcp_server",
+        "external/ipfs_accelerate/ipfs_datasets_py/ipfs_kit_py/ipfs_kit_py/mcp_server"
+      ],
+      "rule": "integrate through the shared package and sync mechanism; do not fork Profile H behavior"
+    },
+    {
+      "canonical": "external/ipfs_accelerate/ipfs_accelerate_py",
+      "copies": ["external/ipfs_accelerate/ipfs_datasets_py/ipfs_accelerate_py/ipfs_accelerate_py"],
+      "rule": "nested vendor copy must be updated by dependency synchronization"
+    },
+    {
+      "canonical": "external/ipfs_datasets/ipfs_datasets_py/mcp_server",
+      "copies": ["external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/mcp_server"],
+      "rule": "nested vendor copy must be updated by dependency synchronization"
+    },
+    {
+      "canonical": "swissknife",
+      "copies": ["hallucinate_app/swissknife"],
+      "rule": "top-level SwissKnife is the implementation source; embedded copy is synchronized, not independently modified"
+    }
+  ],
+  "gaps": [
+    {
+      "code": "XPH-GAP-001",
+      "severity": "blocking",
+      "components": ["ipfs_kit_py", "ipfs_accelerate_py", "ipfs_datasets_py", "swissknife"],
+      "gap": "No x402 v2 SDK is declared or locked.",
+      "required_owner": "XPH-103/XPH-107"
+    },
+    {
+      "code": "XPH-GAP-002",
+      "severity": "blocking",
+      "components": ["ipfs_kit_py", "ipfs_accelerate_py", "ipfs_datasets_py"],
+      "gap": "No shared PaymentPolicyEngine, price catalog, verifier/facilitator adapter, HTTP 402 mapper, or libp2p payment_context codec exists.",
+      "required_owner": "XPH-101/XPH-102/XPH-103"
+    },
+    {
+      "code": "XPH-GAP-003",
+      "severity": "blocking",
+      "components": ["ipfs_kit_py", "ipfs_accelerate_py", "ipfs_datasets_py"],
+      "gap": "Existing artifact/coordination stores do not implement an atomic quote-verification-settlement-consumption-execution ledger or payment replay constraints.",
+      "required_owner": "XPH-103"
+    },
+    {
+      "code": "XPH-GAP-004",
+      "severity": "blocking",
+      "components": ["swissknife"],
+      "gap": "No isolated x402 wallet provider, approval UI, spend policy, balance/network validation, encrypted receipt store, or HTTP/libp2p paid retry exists.",
+      "required_owner": "XPH-107/XPH-108"
+    },
+    {
+      "code": "XPH-GAP-005",
+      "severity": "blocking",
+      "components": ["Mcp-Plus-Plus", "ipfs_kit_py", "ipfs_accelerate_py", "ipfs_datasets_py", "swissknife"],
+      "gap": "mcp++/x402-payments is not specified, advertised, requested, or negotiated; it must remain unadvertised until XPH-104 through XPH-109 pass.",
+      "required_owner": "XPH-101/XPH-104/XPH-105/XPH-106/XPH-107/XPH-109"
+    },
+    {
+      "code": "XPH-GAP-006",
+      "severity": "blocking",
+      "components": ["ipfs_kit_py", "ipfs_accelerate_py", "ipfs_datasets_py"],
+      "gap": "Seller enable mode, signed catalog, seller/network/assets, facilitator trust, quote bounds, durable ledger and emergency-pause configuration are absent.",
+      "required_owner": "XPH-103/XPH-104/XPH-105/XPH-106"
+    },
+    {
+      "code": "XPH-GAP-007",
+      "severity": "high",
+      "components": ["ipfs_kit_py", "ipfs_accelerate_py", "ipfs_datasets_py", "swissknife"],
+      "gap": "No cross-transport conformance proof establishes equivalent decoded x402 objects and access decisions between HTTP and /mcp+p2p/1.0.0.",
+      "required_owner": "XPH-102/XPH-109"
+    },
+    {
+      "code": "XPH-GAP-008",
+      "severity": "high",
+      "components": ["all"],
+      "gap": "Vendored mirrors create drift risk; Profile H must be implemented once in shared runtime packages and mirror synchronization verified.",
+      "required_owner": "XPH-103 through XPH-109"
+    }
+  ],
+  "conclusion": {
+    "runtime_x402_present": false,
+    "profile_h_advertised": false,
+    "mainnet_ready": false,
+    "recommended_first_enforcement_points": {
+      "ipfs_kit_py": "MCPServer._route immediately before HierarchicalToolManager.dispatch",
+      "ipfs_accelerate_py": "tools_dispatch immediately before HierarchicalToolManager.dispatch",
+      "ipfs_datasets_py": "shared guard used by mcp_jsonrpc_handler, mcp_tools_call_rest, envelope and libp2p dispatch",
+      "swissknife": "MCPPPServerConnector.jsonRpc with an isolated wallet-provider broker"
+    }
+  }
+}

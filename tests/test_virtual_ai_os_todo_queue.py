@@ -4805,8 +4805,8 @@ def test_swissknife_all_tools_supervisor_queue_is_resumable():
 
     assert queue["schema"] == "swissknife.all_tools_supervisor_queue.v1"
     assert queue["supervisor"]["id"] == "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools"
-    assert queue["supervisor"]["task_id_range"] == ["SVD-027", "SVD-072"]
-    assert queue["summary"]["task_count"] == 46
+    assert queue["supervisor"]["task_id_range"] == ["SVD-027", "SVD-081"]
+    assert queue["summary"]["task_count"] == 55
     assert queue["summary"]["completed_task_ids"] == [
         "SVD-027",
         "SVD-028",
@@ -4843,8 +4843,20 @@ def test_swissknife_all_tools_supervisor_queue_is_resumable():
             "SVD-061",
             "SVD-062",
             "SVD-067",
+            "SVD-073",
+            "SVD-074",
+            "SVD-075",
+            "SVD-077",
+            "SVD-078",
+            "SVD-079",
+            "SVD-080",
         ]
-    assert queue["summary"]["ready_task_ids"] == ["SVD-047", "SVD-063"]
+    assert queue["summary"]["ready_task_ids"] == [
+        "SVD-047",
+        "SVD-063",
+        "SVD-076",
+        "SVD-081",
+    ]
     assert queue["summary"]["waiting_task_ids"] == [
         "SVD-060",
         "SVD-064",
@@ -4863,7 +4875,7 @@ def test_swissknife_all_tools_supervisor_queue_is_resumable():
     assert "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/*.json" in queue["generated_evidence_globs"]
 
     tasks = queue["tasks"]
-    for task_id in [f"SVD-{index:03d}" for index in range(27, 73)]:
+    for task_id in [f"SVD-{index:03d}" for index in range(27, 82)]:
         assert task_id in tasks
         assert f"## {task_id} " in taskboard_source
         assert tasks[task_id]["validation"]
@@ -4916,6 +4928,15 @@ def test_swissknife_all_tools_supervisor_queue_is_resumable():
     assert queue["dependency_graph"]["SVD-070"] == ["SVD-071"]
     assert queue["dependency_graph"]["SVD-071"] == ["SVD-072"]
     assert queue["dependency_graph"]["SVD-072"] == ["SVD-066"]
+    assert queue["dependency_graph"]["SVD-073"] == ["SVD-074"]
+    assert queue["dependency_graph"]["SVD-074"] == ["SVD-075", "SVD-077"]
+    assert queue["dependency_graph"]["SVD-075"] == ["SVD-076"]
+    assert queue["dependency_graph"]["SVD-076"] == ["SVD-081"]
+    assert queue["dependency_graph"]["SVD-077"] == ["SVD-078"]
+    assert queue["dependency_graph"]["SVD-078"] == ["SVD-079", "SVD-081"]
+    assert queue["dependency_graph"]["SVD-079"] == ["SVD-080"]
+    assert queue["dependency_graph"]["SVD-080"] == []
+    assert queue["dependency_graph"]["SVD-081"] == []
     assert queue["dependency_graph"]["SVD-066"] == []
 
 

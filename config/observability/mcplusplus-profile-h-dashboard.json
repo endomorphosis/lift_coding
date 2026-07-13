@@ -1,0 +1,14 @@
+{
+  "schema": "mcp++/profile-h/operations-dashboard@1.0",
+  "title": "MCP++ Profile H payment operations",
+  "privacy": "aggregate-only-no-identifiers-or-protected-content",
+  "variables": ["seller", "stage", "outcome", "reason_code"],
+  "panels": [
+    {"title": "Lifecycle failures", "type": "timeseries", "metric": "mcplusplus_profile_h_events_total", "groupBy": ["stage", "seller", "reason_code"]},
+    {"title": "Stage latency", "type": "timeseries", "metric": "mcplusplus_profile_h_stage_latency_ms", "groupBy": ["stage", "seller"]},
+    {"title": "Facilitator readiness", "type": "status", "probe": "profile-h-facilitator"},
+    {"title": "Ledger integrity and recovery queue", "type": "status", "probe": "profile-h-ledger"},
+    {"title": "Kill switches", "type": "status", "source": "kill-switches"}
+  ]
+}
+

@@ -1,0 +1,34 @@
+{
+  "schema": "mcp++/profile-h/swissknife-buyer-config@1.0",
+  "profile": "mcp++/x402-payments",
+  "profileVersion": "1.0",
+  "x402Version": 2,
+  "mode": "testnet",
+  "enabled": true,
+  "mainnetEnabled": false,
+  "walletProvider": {
+    "type": "os-keychain",
+    "accountAlias": "swissknife-profile-h-base-sepolia",
+    "network": "eip155:84532"
+  },
+  "policy": {
+    "paused": false,
+    "autopay": false,
+    "allowedSellers": ["did:web:seller.test.invalid"],
+    "allowedCapabilities": ["tool:pin.add", "tool:dataset.query"],
+    "allowedPayees": ["profile-h-seller-base-sepolia"],
+    "allowedNetworks": ["eip155:84532"],
+    "allowedAssets": ["0x0000000000000000000000000000000000000001"],
+    "perRequestAtomic": {"0x0000000000000000000000000000000000000001": "500000"},
+    "sessionAtomic": {"0x0000000000000000000000000000000000000001": "2000000"},
+    "dailyAtomic": {"0x0000000000000000000000000000000000000001": "5000000"},
+    "maxQuoteAgeSeconds": 60
+  },
+  "receiptStore": {
+    "provider": "encrypted-indexeddb",
+    "namespace": "profile-h-testnet"
+  },
+  "batchSettlement": {
+    "enabled": false
+  }
+}

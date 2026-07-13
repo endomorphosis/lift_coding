@@ -16,6 +16,9 @@ dist/
 .env.*
 !.env.example.demo
 data/*
+!data/mcplusplus_profile_h/
+data/mcplusplus_profile_h/*
+!data/mcplusplus_profile_h/x402-inventory.json
 !data/meta_glasses_display_widgets/
 data/meta_glasses_display_widgets/*
 !data/meta_glasses_display_widgets/discovery/

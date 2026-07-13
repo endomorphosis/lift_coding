@@ -1,0 +1,11 @@
+{
+  "schema": "mcp++/profile-h/alert-rules@1.0",
+  "rules": [
+    {"name": "ProfileHFacilitatorUnavailable", "severity": "critical", "for": "2m", "condition": "facilitator_ready == 0", "action": "pause-new-spend-and-reconcile"},
+    {"name": "ProfileHLedgerIntegrity", "severity": "critical", "for": "0m", "condition": "ledger_integrity != 1", "action": "global-pause-preserve-ledger"},
+    {"name": "ProfileHSettlementFailures", "severity": "warning", "for": "5m", "condition": "settlement_failure_rate > 0.05", "action": "seller-pause-and-facilitator-check"},
+    {"name": "ProfileHRecoveryBacklog", "severity": "warning", "for": "15m", "condition": "pending_reconciliation > 0", "action": "run-reconciliation"},
+    {"name": "ProfileHExecutionFailures", "severity": "warning", "for": "5m", "condition": "execution_failure_rate > 0.05", "action": "pause-new-work-preserve-refunds"}
+  ]
+}
+
