@@ -1824,13 +1824,14 @@ safety.
 
 ## SVD-063 Build MCP++ prompt-steering envelopes for supervisor actions
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-062, SVD-053
-- Outputs: swissknife/src/services/apps/agent-supervisor-prompt-envelope.ts, swissknife/test/mcp-plus-plus/agent-supervisor-prompt-envelope.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-prompt-envelopes.json
-- Validation: cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-prompt-envelope.test.ts'
+- Outputs: swissknife/src/services/apps/agent-supervisor-prompt-envelope.ts, swissknife/test/mcp-plus-plus/agent-supervisor-prompt-envelope.test.ts, swissknife/scripts/build-agent-supervisor-prompt-envelope-evidence.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-prompt-envelopes.json
+- Validation: cd swissknife && npx tsc --noEmit --pretty false --skipLibCheck --moduleResolution bundler --target ES2022 --module ESNext src/services/apps/agent-supervisor-prompt-envelope.ts && npm run test:run -- test/mcp-plus-plus/agent-supervisor-prompt-envelope.test.ts test/mcp-plus-plus/agent-supervisor-prompt-steering.test.ts && npx tsx scripts/build-agent-supervisor-prompt-envelope-evidence.ts
 - Acceptance: Prompt steering creates deterministic MCP++ envelopes for supervisor planning, queueing, evidence capture, and task status updates. Envelopes must route `ipfs_accelerate_py` to agent/job execution and telemetry tools, `ipfs_kit_py` to IPFS/DAG artifact storage and pinning tools, and `ipfs_datasets_py` to taskboard indexing, search, provenance, and dataset audit tools. Confirmation, rollback, receipt, event-DAG, and no-mutation dry-run behavior must be explicit for every action.
+- Completion note 2026-07-13: Added a pure TypeScript prompt-envelope builder and validator. It emits a deterministic, redacted three-authority plan: governed `ipfs_accelerate_py` steering, `ipfs_kit_py` event-DAG/receipt persistence, and `ipfs_datasets_py` taskboard indexing. It denies policy bypasses before actions are planned, commits prompt content without exposing it to logs or UI projections, and records explicit dry-run, confirmation, receipt, event-DAG, and rollback rules. Focused validation passed with 9 Vitest assertions, standalone TypeScript compilation, and an evidence artifact with all three owners.
 
 ## SVD-064 Run per-app UI/UX and backend-tool validation through the supervisor app
 
@@ -2045,3 +2046,140 @@ camera, microphone, speaker, and display behavior in this workspace.
   Profile D policy enforcement, Profile F provenance/compaction, and HTTP/
   libp2p semantic parity. The workboard begins with SVD-082 and ends with
   three-peer fault-injection, performance, and release-gate evidence in SVD-091.
+
+## Comprehensive Virtual Desktop Backend And Meta Simulator Phase 2026-07-13
+
+This phase turns the earlier inventory and representative proof into a current,
+reproducible delivery program for every SwissKnife virtual desktop application.
+It is deliberately ordered around real runtime authority instead of static
+descriptor claims:
+
+1. Rebuild one canonical app, tool, descriptor, route, and evidence graph from
+   the taskboard and live services. The browser consumes only mediated MCP/MCP++
+   results; it never reads host state files or starts supervisor processes.
+2. Prove all three backend families independently over HTTP and libp2p,
+   including profiles A through H where each profile is applicable. A missing
+   backend method, descriptor, peer identity, receipt, or transport is a
+   visible unavailable state, not a synthetic success.
+3. Bind every app behavior to concrete tool intents, policy/confirmation rules,
+   receipt/event-DAG requirements, fallback behavior, and an owner. No tool is
+   considered integrated only because it appears in a static ledger.
+4. Exercise every app through its real user workflow: launch, focus, primary
+   read action, governed write or denied path, progress/result rendering,
+   receipt visibility, service loss/recovery, keyboard focus, responsive layout,
+   and screenshot/console/network evidence.
+5. Compile the same app behavior through ORB/IDL and replay it in the Meta
+   device simulator. The required modalities are display, camera,
+   microphone/transcription, speakers/headphones, permissions, rollback, and
+   display-webapp/mobile-card/notification/audio-summary fallback. Physical
+   hardware remains a separate rollout gate and is not treated as desktop
+   pairing.
+6. Use the Agent Supervisor application as the operator surface for goals,
+   subgoals, taskboard links, redacted prompt steering, receipts, run history,
+   and dispatch diagnostics. `ipfs_accelerate_py` remains the state/action
+   authority, `ipfs_kit_py` the immutable receipt/event authority, and
+   `ipfs_datasets_py` the search/provenance authority.
+
+Completion requires fresh evidence from actual service probes and simulator
+replays, plus a release decision that names every unavailable capability. It
+does not permit a broad all-tools or all-app claim from cached JSON alone.
+
+## SVD-092 Synchronize the all-tools supervisor queue and Agent Supervisor task graph
+
+- Status: completed
+- Priority: P0
+- Track: launch
+- Depends on: SVD-063, SVD-080
+- Outputs: data/swissknife_virtual_desktop/all_tools_supervisor_queue.json, swissknife/src/services/apps/agent-supervisor-task-graph.ts, swissknife/test/mcp-plus-plus/agent-supervisor-task-graph.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-task-graph.json, swissknife/web/data/agent-supervisor-task-graph.json
+- Validation: PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 -m pytest tests/test_virtual_ai_os_todo_queue.py::test_swissknife_all_tools_supervisor_queue_is_resumable -q && cd swissknife && npm run test:run -- test/mcp-plus-plus/agent-supervisor-task-graph.test.ts
+- Acceptance: Regenerate the machine-readable queue from all SVD tasks through this phase; preserve dependency and evidence provenance; make the desktop snapshot show current ready, waiting, active, completed, failed, and stale states. The task graph must link each visible goal and subgoal to concrete taskboard sections and must identify stale state rather than replaying old counts.
+
+## SVD-093 Capture a live all-profile capability matrix for SwissKnife and the three backends
+
+- Status: waiting
+- Priority: P0
+- Track: integration
+- Depends on: SVD-092
+- Outputs: swissknife/scripts/capture-all-profile-service-matrix.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-profile-service-matrix.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-profile-service-matrix.md
+- Validation: cd swissknife && node scripts/capture-all-profile-service-matrix.cjs
+- Acceptance: Probe `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py` independently through configured HTTP and libp2p routes. Record supported, unavailable, and denied surfaces for MCP++ profiles A through H; descriptor/interface CIDs; UCAN DIDs; tool counts and schemas; policy, event-DAG, risk/scheduling, and payment capability states; plus exact transport fallback decisions. Static-only entries may remain in the ledger but cannot be reported as live.
+
+## SVD-094 Expose Agent Supervisor read, receipt, search, and governed-action methods through backend MCP++ routes
+
+- Status: waiting
+- Priority: P0
+- Track: mcp
+- Depends on: SVD-092, SVD-093
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/, external/ipfs_kit/ipfs_kit_py/mcp_server/, external/ipfs_datasets/ipfs_datasets_py/mcp_server/, swissknife/src/services/mcp/agent-supervisor-console-gateway.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-live-backend-contract.json
+- Validation: cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts test/mcp-plus-plus/agent-supervisor-prompt-steering.test.ts && node scripts/capture-all-profile-service-matrix.cjs
+- Acceptance: HTTP and libp2p expose the console contract's health, queue, goals, subgoals, taskboard links, redacted logs, receipt resolution, run-history search, prompt-steering review/request, and task-control review/request operations with their declared owner. Browser access stays mediated. Governed actions require policy, confirmation, dependency, budget, receipt, and event-DAG checks; dry runs perform no mutation.
+
+## SVD-095 Bind every SwissKnife application behavior to live backend-tool intents and safe fallbacks
+
+- Status: waiting
+- Priority: P0
+- Track: apps
+- Depends on: SVD-093, SVD-094
+- Outputs: swissknife/src/services/apps/all-app-live-tool-contract.ts, swissknife/test/mcp-plus-plus/all-app-live-tool-contract.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-tool-contract.json
+- Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-live-tool-contract.test.ts && node scripts/capture-all-profile-service-matrix.cjs
+- Acceptance: Every manifest app lists its concrete read, write, background-job, media, device, and supervisor tool intents; expected HTTP/libp2p transport; policy and confirmation requirements; receipt/event-DAG expectations; and a visible degraded or denied route. The contract rejects app behavior that reaches only a placeholder, fixture, descriptor stub, or inaccessible backend tool.
+
+## SVD-096 Execute all-app backend behavior workflows and user-visible recovery paths
+
+- Status: waiting
+- Priority: P0
+- Track: quality
+- Depends on: SVD-095
+- Outputs: swissknife/test/e2e/all-app-live-backend-behavior.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-backend-behavior.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/live-backend/
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.config.ts test/e2e/all-app-live-backend-behavior.spec.ts --reporter=line
+- Acceptance: Each app is tested through launch, navigation/focus, primary backend operation, progress/result display, receipt/event-DAG display, confirmation or denial, backend unavailability, recovery, and close/reopen. Reports include actual tool ID, owner, transport, correlation ID, screenshots, browser console errors, failed requests, and explicit skips for tools that cannot run against an isolated test fixture.
+
+## SVD-097 Validate Agent Supervisor task dispatch, goals/subgoals, and prompt steering from the desktop application
+
+- Status: waiting
+- Priority: P0
+- Track: supervisor
+- Depends on: SVD-092, SVD-094, SVD-096
+- Outputs: swissknife/test/e2e/agent-supervisor-all-app-validation.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-all-app-validation.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor/
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-all-app-validation.spec.ts --reporter=line
+- Acceptance: The Supervisor Console retrieves live state from all three owners, links goals/subgoals to taskboard tasks, submits redacted dry-run and confirmed prompt-steering reviews, shows policy/receipt/event-DAG outcomes, and dispatches the all-app validation wave without direct file/process access. UI validation reports zero hidden controls, text overlap, broken focus, or unreported backend failure.
+
+## SVD-098 Compile current all-app ORB/IDL handoff packets for display and expanded I/O
+
+- Status: waiting
+- Priority: P0
+- Track: orb-idl
+- Depends on: SVD-095, SVD-097
+- Outputs: swissknife/test/mcp-plus-plus/all-app-live-orb-idl-handoff.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-orb-idl-handoff.json
+- Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-live-orb-idl-handoff.test.ts
+- Acceptance: All tested app actions, including the Supervisor Console, compile to deterministic ORB/IDL handoff packets containing interface CID, action/method ID, capability profile, owner, permission state, correlation ID, receipt/event-DAG refs, rollback behavior, modality constraints, and fallback selection. Packet generation fails for a route whose live backend contract has no matching descriptor.
+
+## SVD-099 Replay all display, camera, microphone, speaker, and fallback packets in the Meta device simulator
+
+- Status: waiting
+- Priority: P0
+- Track: device
+- Depends on: SVD-098
+- Outputs: swissknife/test/e2e/all-app-meta-device-simulator.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-meta-device-simulator.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/meta-device-simulator/
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts test/e2e/all-app-meta-device-simulator.spec.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: The Meta device simulator replays safe display, camera, microphone/transcription, speaker/headphone, permission, denial, rollback, and fallback flows for every applicable app. It verifies bounded layouts, focus/activation, receipt preservation, audio/mobile fallback, and visible operator decisions. Hardware pairing is neither required nor claimed.
+
+## SVD-100 Prove HTTP/libp2p peer interoperability and all-tool discovery from the SwissKnife client
+
+- Status: waiting
+- Priority: P0
+- Track: transport
+- Depends on: SVD-093, SVD-094, SVD-096
+- Outputs: swissknife/scripts/capture-swissknife-all-tools-peer-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json
+- Validation: cd swissknife && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
+- Acceptance: SwissKnife independently discovers and invokes approved tool fixtures from each backend through HTTP and libp2p; verifies remote UCAN DID identity, negotiated profiles, descriptor CIDs, CID retrieval, event-DAG visibility, and transport parity. The proof must distinguish unreachable, unsupported, denied, static-only, and executed tools and must never infer availability from a count alone.
+
+## SVD-101 Aggregate freshness-aware release evidence and close only named gaps
+
+- Status: waiting
+- Priority: P0
+- Track: release
+- Depends on: SVD-096, SVD-097, SVD-099, SVD-100
+- Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale
+- Acceptance: The release report includes current app/tool behavior, service/profile/transport matrices, Supervisor Console behavior, ORB/IDL packets, Meta simulator modalities, screenshots, receipts, event-DAG evidence, and all explicit unavailable/blocked cases. `GO` is allowed only when each required app/tool/modality has a passing current proof or a consciously approved non-release disposition; otherwise it remains `NO_GO` with named task IDs.
