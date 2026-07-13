@@ -688,7 +688,7 @@ Supervisor operating rules:
 
 ## XPH-117 Wire Profile H Sellers Through SwissKnife HTTP and libp2p Adapters
 
-- Status: in_progress
+- Status: completed
 - Priority: P0
 - Track: integration-remediation
 - Depends on: XPH-104, XPH-105, XPH-106, XPH-107
@@ -696,7 +696,7 @@ Supervisor operating rules:
   negotiation and forwarding, core TypeScript connector methods, endpoint
   configuration guide, controlled-seller HTTP/libp2p evidence, and refreshed
   live-adapter evidence.
-- Validation: `npx vitest run test/mcp-plus-plus/profile-h-adapter.test.ts test/mcp-plus-plus/mcp-p2p-session.test.ts`; `python -m pytest -q --rootdir=external/ipfs_kit external/ipfs_kit/tests/mcplusplus_profile_h`; `python -m pytest -q --rootdir=external/ipfs_datasets external/ipfs_datasets/tests/mcplusplus_profile_h`; `python -m pytest -q --rootdir=external/ipfs_accelerate external/ipfs_accelerate/tests/mcplusplus_profile_h`.
+- Validation: npx vitest run test/mcp-plus-plus/profile-h-adapter.test.ts test/mcp-plus-plus/mcp-p2p-session.test.ts; python -m pytest -q --rootdir=external/ipfs_kit external/ipfs_kit/tests/mcplusplus_profile_h; python -m pytest -q --rootdir=external/ipfs_datasets external/ipfs_datasets/tests/mcplusplus_profile_h; python -m pytest -q --rootdir=external/ipfs_accelerate external/ipfs_accelerate/tests/mcplusplus_profile_h
 - Acceptance: Each configured compatibility adapter advertises
   `mcp++/x402-payments` only after a real seller endpoint reports a complete,
   durable Profile H control plane for both HTTP and libp2p. SwissKnife can
@@ -711,3 +711,14 @@ Supervisor operating rules:
   not yet advertise Profile H. Native service listeners that expose the complete
   control plane and real paid tool routes remain required before this task can
   be completed.
+
+## XPH-118 Resolve validation retry-budget failure for XPH-117
+
+- Status: completed
+- Completion: manual 2026-07-12: removed shell-active Markdown backticks from the XPH-117 and XPH-118 validation metadata so the supervisor executes Vitest directly instead of treating its output as command substitution; confirmed the explicit Vitest imports and the configuration-gated HTTP/Profile E bridge with all 59 targeted tests passing.
+- Priority: P1
+- Track: ops
+- Depends on: XPH-104, XPH-105, XPH-106, XPH-107
+- Outputs: configuration-gated compatibility-adapter bridge, Profile E/libp2p, tmp/mcpplusplus_profile_h_supervisor/discovery
+- Validation: npx vitest run test/mcp-plus-plus/profile-h-adapter.test.ts test/mcp-plus-plus/mcp-p2p-session.test.ts
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in XPH-117. Use evidence in tmp/mcpplusplus_profile_h_supervisor/discovery/2026-07-13-xph-118-xph-117-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release XPH-117 from strategy blocked_tasks.
