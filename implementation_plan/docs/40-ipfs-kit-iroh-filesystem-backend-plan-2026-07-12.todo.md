@@ -225,7 +225,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   trees, missing paths, immutable blob URLs, cold peer fetch, and offline cache.
 
 ## IROH-015 Complete mutation and transaction semantics
-- Status: pending
+- Status: completed
 - Depends on: IROH-013
 - Work: Implement staged `_open` writes, `pipe_file`, `put_file`, mkdir, rm,
   copy, move, overwrite/exclusive modes, recursive behavior, and transaction
