@@ -553,3 +553,36 @@ work, bypassing policy, or hiding duplicate execution.
   stale peer heartbeats make an assignment eligible for takeover; and a
   SwissKnife libp2p client can converge causal Event-DAG events across the
   three backend services before sending the resulting snapshot to reconcile.
+- Completion note 2026-07-12: IPFS Kit now owns the canonical
+  `mcp++/profile-g/merkle-clock@1` codec, merge, capacity/risk ranking, and
+  `task-assignment@1` CID artifact kind. Accelerator persists peer counters,
+  heartbeats, frontier observations, assignments, and claim/renew/release/
+  receipt/timeout lifecycle events in DuckDB; it rejects claims that contradict
+  a fresh selected peer and lets a stale selected-peer heartbeat fence the
+  incumbent. Reconciliation verifies the snapshot CID, binds the verified
+  issuer DID to a counter in its own clock, requires supplied Event-DAG
+  evidence to cover every advertised frontier, persists the assignment through
+  IPFS Kit before recording it locally, and retains Profile C/D authorization.
+  SwissKnife now causally orders and replicates missing Event-DAG nodes over
+  Profile E before requesting reconciliation and refuses to claim if any peer
+  changes an event CID or fails convergence. Focused suites passed: IPFS Kit
+  coordination/storage/Profile G (14), accelerator Profile G and lease
+  lifecycle (19), and SwissKnife Profile G connector/convergence (6).
+  Live HTTP metadata from all three adapters reports the clock and CID
+  persistence; live libp2p convergence merged 268 events, appending 173 to
+  Kit, 174 to Datasets, and 189 to Accelerate. A second 512-event pass appended
+  zero nodes on every peer, proving convergence is idempotent.
+
+## SVD-096 Require verified peer capability records before Profile G assignment
+
+- Status: completed
+- Priority: P0
+- Track: scheduling, neighborhood consensus, policy
+- Depends on: SVD-095
+- Outputs: task-derived interface, resource-class, and reachable-input
+  requirements; verified `NeighborhoodRecord` materialization; and assignment
+  evidence that records the capability fit used for placement.
+- Acceptance: A peer cannot be ranked solely on capacity or risk when its
+  signed capability record is missing, expired, for a different DID, lacks the
+  task interface/resource class, or cannot reach the task input. The assigned
+  peer and its evidence are deterministically persisted with the task.
