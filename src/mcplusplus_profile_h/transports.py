@@ -43,7 +43,6 @@ class ProfileHTransportAdapter:
             return self._error(request_id, -32070, str(error), {
                 "code": error.code,
                 "retryable": error.retryable,
-                **dict(error.data),
             })
         return {"jsonrpc": "2.0", "id": request_id, "result": result}
 
