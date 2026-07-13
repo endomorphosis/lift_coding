@@ -1845,7 +1845,7 @@ safety.
 
 ## SVD-065 Compile Agent Supervisor ORB/IDL and Meta glasses handoff evidence
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: orb-idl
 - Depends on: SVD-064, SVD-056
