@@ -1913,7 +1913,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-129 Make browser proof and ZKP entrypoints real TypeScript or WebAssembly execution paths
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/wasm-proofs
 - Dedupe key: swissknife_refactor:real_ts_wasm_browser_proof_and_zkp_execution
