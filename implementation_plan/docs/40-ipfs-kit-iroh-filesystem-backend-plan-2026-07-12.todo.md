@@ -121,7 +121,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   refusal, rollback, PATH-independent invocation, and `bash -lc` discovery.
 
 ## IROH-006 Introduce a versioned runtime client boundary
-- Status: pending
+- Status: completed
 - Depends on: IROH-001, IROH-002
 - Work: Define typed Python request/results and adapters for sidecar RPC and
   diagnostic CLI. Centralize timeout, cancellation, JSON parsing, capability
