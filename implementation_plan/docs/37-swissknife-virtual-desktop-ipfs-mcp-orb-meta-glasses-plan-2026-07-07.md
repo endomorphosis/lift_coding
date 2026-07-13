@@ -2034,7 +2034,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-082 through SVD-091 Add distributed risk, neighborhood coordination, and scheduling
 
-- Status: in_progress
+- Status: completed
 - Priority: P0
 - Track: supervisor, mcp, transport, performance
 - Depends on: SVD-080
