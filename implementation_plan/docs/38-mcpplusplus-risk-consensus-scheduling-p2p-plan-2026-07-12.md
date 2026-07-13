@@ -1,4 +1,4 @@
-# MCP++ Risk, Neighborhood Coordination, and Distributed Scheduling Plan
+# MCP++ Distributed Goal Coordination, Risk, Neighborhood Consensus, and Scheduling Plan
 
 Status: proposed implementation plan
 Created: 2026-07-12
@@ -37,8 +37,9 @@ requirement. The local draft has stronger Profile F retention semantics than
 the public branch, but the risk/scheduling chapter is still only a short
 conceptual note.
 
-This plan preserves that design boundary. The extension is **Profile G: Risk,
-Neighborhood Coordination, and Scheduling** with capability key
+This plan preserves that design boundary. The extension is **Profile G:
+Distributed Goal Coordination, Risk, Neighborhood Consensus, and Scheduling**
+with capability key
 `mcp++/risk-scheduling`. No service may advertise the key until its models,
 JSON-RPC/REST bindings, HTTP/libp2p proof, and cross-language vectors are
 complete.
@@ -460,3 +461,40 @@ work, bypassing policy, or hiding duplicate execution.
   virtual-desktop screenshots, and read-only Meta glasses summary handoff.
 - Acceptance: Release evidence demonstrates cross-transport, multi-peer
   behavior and makes every degraded, denied, or conflicted state observable.
+
+## SVD-092 Migrate Profile G derived persistence to DuckDB
+
+- Status: completed
+- Priority: P0
+- Track: storage, supervisor, transport
+- Depends on: SVD-084, SVD-085, SVD-086, SVD-088
+- Outputs: DuckDB-backed datasets risk evidence/idempotency store, accelerator
+  lease ledger, IPFS Kit coordination index, Swissknife Profile G adapter
+  configuration, and libp2p connector evidence.
+- Acceptance: The Profile G stores use DuckDB files and `BIGINT` protocol time
+  fields; accelerator daemon lanes serialize short-lived writers with a file
+  lock; immutable CID blocks remain authoritative; and Swissknife can read
+  `persistence.engine: "duckdb"` plus all 23 Profile G methods from each
+  backend through HTTP and libp2p without fallback.
+- Completion note 2026-07-12: Replaced the Profile G SQLite stores with DuckDB,
+  moved the Swissknife provider state to `coordination.duckdb`, and updated the
+  Profile E client handshake to negotiate `mcp++/risk-scheduling`. Focused
+  Python suites passed for datasets (10), accelerator leases (7), and IPFS Kit
+  coordination storage (7). Live Swissknife libp2p connector evidence passed
+  for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`; each reports
+  `persistence.engine: "duckdb"` and 23 Profile G methods.
+
+## SVD-093 Compose canonical Profile G providers without duplicated specialist logic
+
+- Status: completed
+- Priority: P0
+- Track: protocol, policy, persistence
+- Depends on: SVD-082, SVD-084, SVD-085, SVD-086, SVD-092
+- Outputs: named Profile G metadata, an explicit provider chain, accelerator
+  lease routing, IPFS Kit CID persistence, and package/CLI/MCP++ provider
+  fallback diagnostics.
+- Acceptance: Every endpoint reports the Profile G name and owner chain; a
+  valid Profile C delegation plus Profile D decision can create, claim, renew,
+  release, resolve, and reconcile a task with CID-persisted lease artifacts;
+  a missing provider returns `G_PROVIDER_UNAVAILABLE` without falsely granting
+  work; and HTTP/libp2p return the same results.
