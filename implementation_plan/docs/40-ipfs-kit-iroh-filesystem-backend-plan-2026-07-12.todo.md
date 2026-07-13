@@ -176,7 +176,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   ingest, corrupt payload, disconnect/resume, disk-full, and cancellation.
 
 ## IROH-011 Implement the versioned directory manifest store
-- Status: pending
+- Status: completed
 - Depends on: IROH-002, IROH-010
 - Work: Store normalized entries (path, kind, blob hash, size, mode subset,
   mtime, metadata, revision, parent revision, tombstone) and publish with
