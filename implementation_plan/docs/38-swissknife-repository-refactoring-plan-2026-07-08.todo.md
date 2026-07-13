@@ -1946,7 +1946,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-132 Enforce a non-destructive shared-checkout supervisor contract
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: refactor/supervisor
 - Dedupe key: swissknife_refactor:shared_checkout_supervisor_non_destructive_contract
