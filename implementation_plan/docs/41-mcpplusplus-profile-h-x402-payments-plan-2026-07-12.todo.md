@@ -625,7 +625,7 @@ Supervisor operating rules:
 
 ## XPH-114 Publish documentation and supervisor closeout evidence
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: documentation
 - Depends on: XPH-110, XPH-111, XPH-113
