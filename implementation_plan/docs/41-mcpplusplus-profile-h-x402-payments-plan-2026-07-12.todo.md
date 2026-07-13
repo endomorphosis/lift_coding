@@ -466,7 +466,7 @@ Supervisor operating rules:
 
 ## XPH-103 Implement shared Python seller runtime and durable ledger
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: seller-runtime
 - Depends on: XPH-102
