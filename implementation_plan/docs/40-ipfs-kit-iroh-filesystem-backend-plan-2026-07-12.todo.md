@@ -143,7 +143,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   collide silently, inline secrets are rejected, and migrations are atomic.
 
 ## IROH-008 Implement real service lifecycle management
-- Status: pending
+- Status: completed
 - Depends on: IROH-005, IROH-007
 - Work: Create an `IrohService` for the canonical async registry with
   start/stop/restart/status, PID ownership, stale-PID recovery, readiness probe,
