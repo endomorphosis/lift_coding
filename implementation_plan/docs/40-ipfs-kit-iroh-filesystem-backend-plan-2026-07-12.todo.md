@@ -76,7 +76,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   supported platforms.
 
 ## IROH-002 Freeze the filesystem and backend contract
-- Status: completed
+- Status: pending
 - Depends on: IROH-001
 - Work: Specify URL grammar, namespace identifiers, hashes, tickets, manifest
   schema, path normalization, error codes, sync/async behavior, consistency,
@@ -87,7 +87,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   invalid hashes, leaked inline secrets, and unsupported schema versions.
 
 ## IROH-003 Define capability and conformance matrices
-- Status: completed
+- Status: pending
 - Depends on: IROH-002
 - Work: Map every required fsspec/VFS operation (`ls`, `info`, `open`, ranged
   read, write, `mkdir`, `rm`, `cp`, `mv`, `find`, `glob`, `exists`, sync) to
@@ -99,7 +99,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 1 - Binary Supply Chain And Runtime Adapter
 
 ## IROH-004 Implement a secure Iroh binary installer
-- Status: completed
+- Status: pending
 - Depends on: IROH-001
 - Work: Add platform/architecture detection, pinned downloads, digest and
   signature verification where upstream provides it, atomic extraction,
@@ -110,7 +110,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   truncated download, unsupported architecture, and non-executable result fail.
 
 ## IROH-005 Add explicit install, inspect, update, and rollback commands
-- Status: completed
+- Status: pending
 - Depends on: IROH-004
 - Work: Add CLI commands with `--version`, `--check`, `--dry-run`, explicit
   prerelease opt-in, update locking, retained previous version, and rollback.
@@ -121,7 +121,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   refusal, rollback, PATH-independent invocation, and `bash -lc` discovery.
 
 ## IROH-006 Introduce a versioned runtime client boundary
-- Status: completed
+- Status: pending
 - Depends on: IROH-001, IROH-002
 - Work: Define typed Python request/results and adapters for sidecar RPC and
   diagnostic CLI. Centralize timeout, cancellation, JSON parsing, capability
@@ -133,7 +133,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 2 - Managed Iroh Service
 
 ## IROH-007 Implement Iroh service configuration and state layout
-- Status: completed
+- Status: pending
 - Depends on: IROH-002, IROH-006
 - Work: Define data directory, endpoint bind, relay/discovery policy, RPC
   endpoint, node identity reference, resource limits, log/receipt paths, and
@@ -143,7 +143,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   collide silently, inline secrets are rejected, and migrations are atomic.
 
 ## IROH-008 Implement real service lifecycle management
-- Status: completed
+- Status: pending
 - Depends on: IROH-005, IROH-007
 - Work: Create an `IrohService` for the canonical async registry with
   start/stop/restart/status, PID ownership, stale-PID recovery, readiness probe,
@@ -154,7 +154,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   start, orphan, wrong PID, port conflict, crash loop, restart, and shutdown.
 
 ## IROH-009 Add health, diagnostics, and observability
-- Status: completed
+- Status: pending
 - Depends on: IROH-008
 - Work: Report readiness separately from liveness, node ID, version, uptime,
   relay/direct connectivity, storage usage, peers, transfer counts/bytes,
@@ -166,7 +166,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 3 - Native Iroh Storage And Manifest Layer
 
 ## IROH-010 Implement blob ingest, fetch, range, and export primitives
-- Status: completed
+- Status: pending
 - Depends on: IROH-006, IROH-008
 - Work: Stream files without full memory buffering; support expected-hash
   verification, progress/cancellation, resumable transfer when upstream permits,
@@ -176,7 +176,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   ingest, corrupt payload, disconnect/resume, disk-full, and cancellation.
 
 ## IROH-011 Implement the versioned directory manifest store
-- Status: completed
+- Status: pending
 - Depends on: IROH-002, IROH-010
 - Work: Store normalized entries (path, kind, blob hash, size, mode subset,
   mtime, metadata, revision, parent revision, tombstone) and publish with
@@ -188,7 +188,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   writers, conflict detection, tombstones, corrupt heads, and old-schema read.
 
 ## IROH-012 Add reference tracking and safe garbage collection
-- Status: completed
+- Status: pending
 - Depends on: IROH-011
 - Work: Track references across namespaces/revisions; expose mark/sweep dry-run,
   retention windows, leases for active readers/writers, quotas, and repair.
@@ -199,7 +199,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 4 - Fsspec Implementation
 
 ## IROH-013 Build and register `IrohFileSystem`
-- Status: completed
+- Status: pending
 - Depends on: IROH-003, IROH-010, IROH-011
 - Work: Implement a dedicated fsspec filesystem and buffered file classes for
   `iroh` and immutable `iroh+blob` protocols. Register through package entry
@@ -210,7 +210,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   isolation, external fsspec, and vendored fallback all pass.
 
 ## IROH-014 Complete read/list/discovery semantics
-- Status: completed
+- Status: pending
 - Depends on: IROH-013
 - Work: Implement `ls/detail`, `info`, `exists`, `isfile`, `isdir`, `find`,
   `walk`, `glob`, `cat`, `cat_file` ranges, `get_file`, and streaming `_open`.
@@ -219,7 +219,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   trees, missing paths, immutable blob URLs, cold peer fetch, and offline cache.
 
 ## IROH-015 Complete mutation and transaction semantics
-- Status: completed
+- Status: pending
 - Depends on: IROH-013
 - Work: Implement staged `_open` writes, `pipe_file`, `put_file`, mkdir, rm,
   copy, move, overwrite/exclusive modes, recursive behavior, and transaction
@@ -229,7 +229,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   rename/copy dedupe, recursive deletion, retries, and restart recovery.
 
 ## IROH-016 Add async and performance behavior
-- Status: completed
+- Status: pending
 - Depends on: IROH-014, IROH-015
 - Work: Provide fsspec async methods backed by AnyIO-compatible boundaries,
   bounded concurrency, connection reuse, read-ahead/range cache, multipart-like
@@ -241,7 +241,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 5 - VFS, Buckets, Backend Manager, And Sync
 
 ## IROH-017 Make Iroh a validated named storage backend
-- Status: completed
+- Status: pending
 - Depends on: IROH-007, IROH-013
 - Work: Extend backend configuration/manager APIs with type registry and schema
   validation for Iroh. Persist endpoint/namespace/policies and credential refs;
@@ -251,7 +251,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   secret redaction, invalid configs, and legacy config compatibility.
 
 ## IROH-018 Mount Iroh in the canonical virtual filesystem
-- Status: completed
+- Status: pending
 - Depends on: IROH-014, IROH-015, IROH-017
 - Work: Route `backend=iroh` and `iroh://` mounts through the canonical VFS,
   preserving operation envelopes, lineage, mount isolation, path policies,
