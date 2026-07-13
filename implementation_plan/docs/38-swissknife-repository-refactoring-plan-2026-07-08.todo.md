@@ -1935,7 +1935,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-131 Rebuild all release evidence from a conflict-free source tree and require freshness coherence
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release/evidence
 - Dedupe key: swissknife_refactor:conflict_free_browser_module_release_evidence_rebuild
