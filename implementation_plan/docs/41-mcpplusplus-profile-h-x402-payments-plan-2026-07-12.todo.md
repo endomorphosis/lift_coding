@@ -487,7 +487,7 @@ Supervisor operating rules:
 - Depends on: XPH-103
 - Outputs: signed kit catalog, protected storage/pin/retrieval fixtures,
   quota/retention entitlements, HTTP/libp2p handlers, restart/recovery evidence.
-- Validation: pytest -q hallucinate_app/ipfs_kit_py/tests/mcplusplus_profile_h
+- Validation: python -m pytest -q hallucinate_app/ipfs_kit_py/tests/mcplusplus_profile_h
 - Acceptance: Configured kit operations return correct x402 requirements,
   reject unpaid/invalid/replayed requests before mutation, enforce CID/namespace
   and quota scopes, settle once, recover receipts after restart, and preserve
@@ -677,11 +677,11 @@ Supervisor operating rules:
 
 ## XPH-116 Resolve validation retry-budget failure for XPH-104
 
-- Status: todo
-- Completion: manual
+- Status: completed
+- Completion: manual 2026-07-13: replaced the stale standalone pytest launcher with the active Python environment's pytest module, preserved the signed kit catalog and protected operation fixtures, and validated all 13 Profile H ipfs_kit tests so the supervisor can release XPH-104.
 - Priority: P1
 - Track: ops
 - Depends on: XPH-103
 - Outputs: signed kit catalog, protected storage/pin/retrieval fixtures, tmp/mcpplusplus_profile_h_supervisor/discovery
-- Validation: pytest -q hallucinate_app/ipfs_kit_py/tests/mcplusplus_profile_h
+- Validation: python -m pytest -q hallucinate_app/ipfs_kit_py/tests/mcplusplus_profile_h
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in XPH-104. Use evidence in tmp/mcpplusplus_profile_h_supervisor/discovery/2026-07-13-xph-116-xph-104-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release XPH-104 from strategy blocked_tasks.
