@@ -61,6 +61,9 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 6. Secrets (node key, write capability, tickets) never enter backend YAML,
    logs, metrics, process arguments, or VFS lineage. Config stores secret
    references resolved through the existing credential facilities.
+7. Durable structured metadata, reference tracking, GC journals, quotas,
+   reconciliation state, and analytical indexes use DuckDB. SQLite is not an
+   approved Iroh backend dependency or persistence format.
 
 ## Phase 0 - Discovery, Contracts, And Version Pin
 
@@ -192,6 +195,9 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 - Depends on: IROH-011
 - Work: Track references across namespaces/revisions; expose mark/sweep dry-run,
   retention windows, leases for active readers/writers, quotas, and repair.
+- Persistence: Use DuckDB transactions and DuckDB-native schemas for the
+  reference index, leases, quotas, GC runs/actions, and recovery journal. Do not
+  import `sqlite3`, create SQLite files, or retain a SQLite compatibility path.
 - Outputs: `ipfs_kit_py/iroh/gc.py`, auditable GC receipt
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_iroh_gc.py
   during GC is recoverable; default policy never destroys newly unreferenced data.

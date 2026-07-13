@@ -195,7 +195,11 @@ def build_service(case: SellerCase, state: Path, facilitator: Any) -> Any:
         service, config, tier = accelerator
         value = config(**common, tiers={"interactive-cpu": tier("50", unit="inference",
                        operations=("inference/run",), models=("text-small",), hardware=("cpu",))})
-    return service(value, state, facilitator, clock_ms=lambda: FIXED_NOW_MS)
+    # The deterministic mock is evidence-only. Keep it visibly distinct from
+    # an operator-configured x402 facilitator so a local gate can never be
+    # mistaken for upstream testnet or mainnet settlement support.
+    control_mode = "local-test" if isinstance(facilitator, MockFacilitator) else None
+    return service(value, state, facilitator, clock_ms=lambda: FIXED_NOW_MS, control_mode=control_mode)
 
 
 def _context(case: SellerCase, transport: str, suffix: str = "paid", *, authorized: bool = True) -> RequestContext:

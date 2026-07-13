@@ -1966,3 +1966,115 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 - Validation: cd swissknife && npm run release:readiness
 - Acceptance: The handoff records every resolved conflict, module ownership move, browser capability decision, libp2p interoperability receipt, TS or WASM proof result, release decision, and live supervisor state. It reports an explicit NO_GO with paths for any incomplete browser, libp2p, proof, or evidence condition and cannot claim completion from historical artifacts.
 - Evidence: The current-attempt Phase 20 handoff was regenerated from 2026-07-13T14:34:45.300Z through 2026-07-13T14:42:12.260Z and is recorded in `swissknife/docs/refactor-final-signoff.md`; historical signoffs are explicitly excluded as inputs. It accounts for all 21 conflict-resolved paths and all 12 root-to-service ownership moves, with `swissknife/docs/service-boundary-audit.json` reporting 57 modules and 0 root service violations, ownership conflicts, undocumented deep imports, dependency violations, or duplicate service basenames. `swissknife/docs/browser-compatibility-inventory.md` records 88 inventory items and 158 explicitly classified operations (`in-browser` 36, `typed-remote-mcp` 116, `user-mediated-host-handoff` 4, `intentionally-unavailable` 2), with 0 unknown executable paths, host executable paths, or boundary violations. `swissknife/docs/browser-libp2p-evidence.md` records fresh desktop Chromium and mobile Pixel 5 real-browser receipts using isolated requester/responder contexts, `/noise`, `/yamux/1.0.0`, protocol `/swissknife/mcp/signed-request-response/1.0.0`, verified request/response signatures, typed dial failures, and no synthetic peers, transports, or success receipts. `swissknife/docs/browser-proof-runtime-evidence.md` records run `714f6b1f-18c6-42f5-944a-46318d8c3dfc`, 40/40 assertions, TypeScript truth-table execution, browser Schnorr WASM instantiation/self-test, generated and verified proof, rejected negative/malformed/tampered inputs, typed worker failure, and no simulated, Python, or native substitute. All six current-source fingerprint groups are fresh. `cd swissknife && npm run release:readiness` passed 15/15 gates with 0 failed, 0 skipped, 0 blockers, and release decision `GO`; missing, invalid, stale, or failing browser, libp2p, proof, bundle, or aggregate evidence instead produces path-bearing `NO_GO` blockers. The live supervisor observation records status `running`, supervisor PID 964267, managed daemon PID 1980578, run `20260713T115646Z`, SWR-133 attempt 1 in phase `implementing`, and board counts 132 completed / 1 ready / 0 waiting / 0 blocked at `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_supervisor_status.json` and `tmp/swissknife_refactor_supervisor/state/swissknife_refactor_task_state.json`; task completion metadata remains daemon-owned.
+
+## Phase 21: Checkout Recovery, Reproducible Browser Proof, And Single-Writer Integration
+
+Phase 20 recorded a completed state, but the current SwissKnife checkout subsequently
+regressed to a conflict-bearing snapshot while the board remained complete. The first
+priority is therefore recovery correctness: task status must reflect the source tree
+that will actually ship. This phase introduces source and evidence provenance, a
+single-writer checkout contract across overlapping supervisor lanes, and a clean
+reproduction gate. Only after that baseline is recoverable and committed do the
+cross-browser libp2p and TypeScript or WebAssembly proof checks become release claims.
+Remote Python services remain permitted only behind typed MCP calls. Browser bundles
+must remain independent of Python, Node host APIs, native prover bindings, and mock
+success paths.
+
+## SWR-134 Reconcile board completion claims with the current SwissKnife checkout
+
+- Status: ready
+- Priority: P0
+- Track: recovery/provenance
+- Dedupe key: swissknife_refactor:current_checkout_vs_completed_board_reconciliation
+- Depends on: SWR-133
+- Outputs: swissknife/docs/phase-21-checkout-reconciliation.json, swissknife/docs/phase-21-checkout-reconciliation.md, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && node -e '["src/module-ownership.json","docs/release-readiness-report.json","docs/release-evidence-freshness.json","docs/service-boundary-audit.json"].forEach(p=>JSON.parse(require("fs").readFileSync(p,"utf8")))'
+- Acceptance: The reconciliation records current HEAD, parent gitlink, worktree status, all active conflict paths, task-output provenance, reachable recovery commits or stashes, and the exact divergence from Phase 20 claims. It marks any claim without current-source proof as invalid and creates explicit recovery work instead of treating a historical board status as evidence.
+
+## SWR-135 Establish a non-destructive single-writer lease for every SwissKnife supervisor lane
+
+- Status: waiting
+- Priority: P0
+- Track: supervisor/integration
+- Dedupe key: swissknife_refactor:single_writer_checkout_lease_and_reset_free_supervision
+- Depends on: SWR-134
+- Outputs: swissknife/scripts/swissknife-checkout-lease.mjs, swissknife/docs/supervisor-shared-checkout-safety.md, swissknife/docs/supervisor-lane-inventory.json, tmp/swissknife_refactor_supervisor/state/swissknife_refactor_supervisor_status.json
+- Validation: cd swissknife && node scripts/swissknife-checkout-lease.mjs --check && node -e 'process.exit(require("fs").existsSync("docs/supervisor-lane-inventory.json") ? 0 : 1)'
+- Acceptance: Every known SwissKnife supervisor lane uses one lease namespace, records its PID and board, and refuses implementation when another lane owns the checkout. The documented launch command sets `IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS=0`; no lane may force checkout, reset, update, stash, or rewrite a dirty SwissKnife submodule. A stale lease can be reclaimed only after process identity verification.
+
+## SWR-136 Recover and commit a conflict-free Phase 20 baseline with source-to-evidence provenance
+
+- Status: waiting
+- Priority: P0
+- Track: recovery/source
+- Dedupe key: swissknife_refactor:recover_conflict_free_phase_20_committed_baseline
+- Depends on: SWR-134, SWR-135
+- Outputs: swissknife/src/module-ownership.json, swissknife/scripts/release-readiness-gate.mjs, swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/docs/phase-21-recovery-provenance.json, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json
+- Validation: cd swissknife && ! rg -n '^(<<<<<<<|=======|>>>>>>>)' src scripts test docs -g '!archived/**' && npm run services:audit && npm run release:readiness
+- Acceptance: Recovery uses identified commits, stashes, or a documented replay to restore the current source changes. The recovered baseline is committed in SwissKnife and its parent gitlink is committed in the shared checkout before evidence is accepted. Every regenerated report contains the recovered source commit and input fingerprints. Conflict-marker removal without restored behavior, uncommitted source changes, or a stale parent gitlink fails this task.
+
+## SWR-137 Revalidate service containment and browser import closure from the recovered baseline
+
+- Status: waiting
+- Priority: P0
+- Track: services/browser-boundaries
+- Dedupe key: swissknife_refactor:recovered_baseline_service_and_browser_boundary_revalidation
+- Depends on: SWR-136
+- Outputs: swissknife/docs/service-boundary-audit.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/browser-compatibility-inventory.json, swissknife/docs/browser-compatibility-inventory.md
+- Validation: cd swissknife && npm run services:audit && npm run typecheck && npm run build:web && npm run test:browser-compat && npm run audit:bundle-host-leakage
+- Acceptance: The recovered tree has zero non-index duplicate service basenames, zero root service implementation violations, zero undocumented deep imports, zero browser-reachable host-only imports, and zero unknown executable browser paths. The audit fixtures prove that restored duplicates, root implementations, and Node or Python execution edges fail the gate.
+
+## SWR-138 Exercise default browser libp2p interoperability across Chromium, Firefox, and WebKit
+
+- Status: waiting
+- Priority: P0
+- Track: browser/libp2p
+- Dedupe key: swissknife_refactor:three_engine_real_browser_libp2p_interoperability
+- Depends on: SWR-136, SWR-137
+- Outputs: swissknife/build-tools/configs/playwright.libp2p-browser.config.ts, swissknife/test/e2e/libp2p-browser.spec.ts, swissknife/test/e2e/fixtures/libp2p-browser-harness/relay-server.mjs, swissknife/test-results/libp2p-browser, swissknife/docs/browser-libp2p-evidence.md
+- Validation: cd swissknife && npm run test:e2e:libp2p-browser && npm run evidence:libp2p-browser && npm run audit:bundle-host-leakage
+- Acceptance: Chromium, Firefox, and WebKit each run two isolated browser contexts that construct real default-enabled libp2p nodes, connect through the local real relay where required, negotiate Noise and Yamux, exchange a signed request and response over the registered protocol, and tear down cleanly. Missing capability, blocked permission, relay loss, and timeout cases retain typed failure receipts. No synthetic peer, status-only mock, scripted success response, or host transport can satisfy the interoperability assertion.
+
+## SWR-139 Prove browser theorem and ZKP execution across supported engines without simulated defaults
+
+- Status: waiting
+- Priority: P0
+- Track: browser/wasm-proofs
+- Dedupe key: swissknife_refactor:cross_engine_real_ts_wasm_proof_and_zkp_execution
+- Depends on: SWR-136, SWR-137
+- Outputs: swissknife/test/browser-proof-runtime, swissknife/test-results/browser-proof-runtime, swissknife/docs/browser-proof-runtime-evidence.json, swissknife/docs/browser-proof-runtime-evidence.md
+- Validation: cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run audit:bundle-host-leakage
+- Acceptance: Chromium, Firefox, and WebKit execute TypeScript theorem checks and instantiate the browser WASM ZKP backend. Evidence includes generated and verified proof artifacts, negative and tampered proofs, malformed inputs, worker failures, deterministic public inputs, and backend selection records. Browser defaults cannot select a Python runner, host-native binding, simulated prover, or fabricated proof result.
+
+## SWR-140 Verify all browser application states with offline and remote-capability isolation
+
+- Status: waiting
+- Priority: P0
+- Track: browser/apps
+- Dedupe key: swissknife_refactor:browser_app_offline_remote_capability_isolation
+- Depends on: SWR-137, SWR-138, SWR-139
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-browser-runtime-matrix.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/browser-capability-receipts.json, swissknife/docs/browser-app-runtime-coverage.md
+- Validation: cd swissknife && npm run build:web && npm run test:browser-compat && npm run test:e2e:mcp
+- Acceptance: Each app records browser-local success, offline behavior, denied permission, typed remote MCP unavailable behavior, and recovery when applicable. Browser-local functionality remains usable without service processes. Remote-only capability requests are typed, policy-gated, and cannot cause browser filesystem, shell, Python, or supervisor execution.
+
+## SWR-141 Produce a hermetic clean-checkout release reproduction and provenance attestation
+
+- Status: waiting
+- Priority: P0
+- Track: release/reproducibility
+- Dedupe key: swissknife_refactor:hermetic_clean_checkout_release_reproduction
+- Depends on: SWR-136, SWR-138, SWR-139, SWR-140
+- Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json
+- Validation: cd swissknife && npm ci && npm run release:readiness
+- Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
+
+## SWR-142 Phase 21 recovery and reproducibility handoff
+
+- Status: waiting
+- Priority: P1
+- Track: refactor/supervisor
+- Dedupe key: swissknife_refactor:phase_21_checkout_recovery_reproducibility_handoff
+- Depends on: SWR-135, SWR-136, SWR-137, SWR-138, SWR-139, SWR-140, SWR-141
+- Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.

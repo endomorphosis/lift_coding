@@ -1,4 +1,4 @@
-# MCP++ Distributed Goal Coordination, Risk, Neighborhood Consensus, and Scheduling Plan
+# MCP++ Risk, Neighborhood Coordination, and Distributed Scheduling Plan
 
 Status: proposed implementation plan
 Created: 2026-07-12
@@ -37,9 +37,8 @@ requirement. The local draft has stronger Profile F retention semantics than
 the public branch, but the risk/scheduling chapter is still only a short
 conceptual note.
 
-This plan preserves that design boundary. The extension is **Profile G:
-Distributed Goal Coordination, Risk, Neighborhood Consensus, and Scheduling**
-with capability key
+This plan preserves that design boundary. The extension is **Profile G: Risk,
+Neighborhood Coordination, and Scheduling** with capability key
 `mcp++/risk-scheduling`. No service may advertise the key until its models,
 JSON-RPC/REST bindings, HTTP/libp2p proof, and cross-language vectors are
 complete.
@@ -453,7 +452,7 @@ work, bypassing policy, or hiding duplicate execution.
 
 ## SVD-091 Add release gate, documentation, and Meta glasses summaries
 
-- Status: completed
+- Status: waiting
 - Priority: P1
 - Track: release
 - Depends on: SVD-089, SVD-090
@@ -461,179 +460,3 @@ work, bypassing policy, or hiding duplicate execution.
   virtual-desktop screenshots, and read-only Meta glasses summary handoff.
 - Acceptance: Release evidence demonstrates cross-transport, multi-peer
   behavior and makes every degraded, denied, or conflicted state observable.
-
-## SVD-092 Migrate Profile G derived persistence to DuckDB
-
-- Status: completed
-- Priority: P0
-- Track: storage, supervisor, transport
-- Depends on: SVD-084, SVD-085, SVD-086, SVD-088
-- Outputs: DuckDB-backed datasets risk evidence/idempotency store, accelerator
-  lease ledger, IPFS Kit coordination index, Swissknife Profile G adapter
-  configuration, and libp2p connector evidence.
-- Acceptance: The Profile G stores use DuckDB files and `BIGINT` protocol time
-  fields; accelerator daemon lanes serialize short-lived writers with a file
-  lock; immutable CID blocks remain authoritative; and Swissknife can read
-  `persistence.engine: "duckdb"` plus all 23 Profile G methods from each
-  backend through HTTP and libp2p without fallback.
-- Completion note 2026-07-12: Replaced the Profile G SQLite stores with DuckDB,
-  moved the Swissknife provider state to `coordination.duckdb`, and updated the
-  Profile E client handshake to negotiate `mcp++/risk-scheduling`. Focused
-  Python suites passed for datasets (10), accelerator leases (7), and IPFS Kit
-  coordination storage (7). Live Swissknife libp2p connector evidence passed
-  for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`; each reports
-  `persistence.engine: "duckdb"` and 23 Profile G methods.
-
-## SVD-093 Compose canonical Profile G providers without duplicated specialist logic
-
-- Status: completed
-- Priority: P0
-- Track: protocol, policy, persistence
-- Depends on: SVD-082, SVD-084, SVD-085, SVD-086, SVD-092
-- Outputs: named Profile G metadata, an explicit provider chain, accelerator
-  lease routing, IPFS Kit CID persistence, and package/CLI/MCP++ provider
-  fallback diagnostics.
-- Acceptance: Every endpoint reports the Profile G name and owner chain; a
-  valid Profile C delegation plus Profile D decision can create, claim, renew,
-  release, resolve, and reconcile a task with CID-persisted lease artifacts;
-  a missing provider returns `G_PROVIDER_UNAVAILABLE` without falsely granting
-  work; and HTTP/libp2p return the same results.
-- Completion note 2026-07-12: Named Profile G **Distributed Goal Coordination,
-  Risk, Neighborhood Consensus, and Scheduling** while preserving the stable
-  `mcp++/risk-scheduling` key. The composed provider now uses datasets for
-  formal logic/Profile D, accelerate for fenced leases, IPFS Kit for CID
-  persistence, and SwissKnife for TypeScript client validation. The focused
-  accelerator suite proves a valid Profile C delegation plus Profile D decision
-  through claim, renew, resolve, reconcile, and release; it also proves that a
-  missing persistence provider fails closed. Live HTTP probes return
-  `-32042 G_AUTHORITY_DENIED` for an unauthorised claim on all three endpoints,
-  and refreshed SwissKnife libp2p evidence v4 is `go`: all three transports
-  preserve that same denial code, expose all 23 operations, and report the
-  complete provider chain without HTTP fallback.
-
-## SVD-094 Make Profile G coordination state inspectable in the virtual desktop
-
-- Status: completed
-- Priority: P0
-- Track: desktop, accelerator, test evidence
-- Depends on: SVD-085, SVD-087, SVD-093
-- Outputs: a composed `schedule/status` read model, frontier lease provenance,
-  browser gateway normalization for durable coordination records, and the
-  Agent Supervisor Coordination view with provider/fallback diagnostics.
-- Acceptance: An operator can identify the negotiated Profile G name, owner
-  chain, DuckDB/CID persistence condition, provider selection attempts,
-  neighborhood evidence, proposal CID, lease state, claimant DID, logical
-  epoch, fencing token, expiry, claim-resolution CID, task-receipt CID, and
-  bounded risk evidence without issuing a mutation. The app's Playwright suite
-  is included in the standard desktop test selection and runs from a
-  self-contained static-server fixture.
-- Completion note 2026-07-12: `ipfs_accelerate_py` now combines datasets
-  schedule state with its durable DuckDB lease ledger and receipt references
-  for `mcp++/schedule/status`, and enriches the frontier without changing
-  canonical proposal bytes. SwissKnife preserves direct status objects,
-  bounds per-task fanout to 50, accepts immutable claim/resolution CIDs as
-  governed-action evidence, and renders the resulting provenance in the
-  Agent Supervisor Coordination tab. Focused suites passed: accelerator
-  Profile G transport (8), browser connector/client (7), Agent Supervisor
-  Playwright (5), and the MCP++ Explorer Playwright test (1).
-
-## SVD-095 Add Merkle-clock assignment and Event-DAG peer convergence
-
-- Status: completed
-- Priority: P0
-- Track: scheduling, libp2p, storage, desktop
-- Depends on: SVD-085, SVD-086, SVD-088, SVD-093, SVD-094
-- Outputs: an IPFS Kit-owned canonical Profile G Merkle-clock/ranking module,
-  accelerator DuckDB coordination observations and assignments, authenticated
-  reconciliation of peer snapshots, and a SwissKnife Profile E Event-DAG
-  convergence helper used before distributed task claims.
-- Acceptance: A merged clock deterministically ranks fresh, policy-eligible
-  candidate peers using capacity, risk, and a clock-derived tie-break; a claim
-  is rejected when it contradicts a non-expired assignment; expired leases or
-  stale peer heartbeats make an assignment eligible for takeover; and a
-  SwissKnife libp2p client can converge causal Event-DAG events across the
-  three backend services before sending the resulting snapshot to reconcile.
-- Completion note 2026-07-12: IPFS Kit now owns the canonical
-  `mcp++/profile-g/merkle-clock@1` codec, merge, capacity/risk ranking, and
-  `task-assignment@1` CID artifact kind. Accelerator persists peer counters,
-  heartbeats, frontier observations, assignments, and claim/renew/release/
-  receipt/timeout lifecycle events in DuckDB; it rejects claims that contradict
-  a fresh selected peer and lets a stale selected-peer heartbeat fence the
-  incumbent. Reconciliation verifies the snapshot CID, binds the verified
-  issuer DID to a counter in its own clock, requires supplied Event-DAG
-  evidence to cover every advertised frontier, persists the assignment through
-  IPFS Kit before recording it locally, and retains Profile C/D authorization.
-  SwissKnife now causally orders and replicates missing Event-DAG nodes over
-  Profile E before requesting reconciliation and refuses to claim if any peer
-  changes an event CID or fails convergence. Focused suites passed: IPFS Kit
-  coordination/storage/Profile G (14), accelerator Profile G and lease
-  lifecycle (19), and SwissKnife Profile G connector/convergence (6).
-  Live HTTP metadata from all three adapters reports the clock and CID
-  persistence; live libp2p convergence merged 268 events, appending 173 to
-  Kit, 174 to Datasets, and 189 to Accelerate. A second 512-event pass appended
-  zero nodes on every peer, proving convergence is idempotent.
-
-## SVD-096 Require verified peer capability records before Profile G assignment
-
-- Status: completed
-- Priority: P0
-- Track: scheduling, neighborhood consensus, policy
-- Depends on: SVD-095
-- Outputs: task-derived interface, resource-class, and reachable-input
-  requirements; verified `NeighborhoodRecord` materialization; and assignment
-  evidence that records the capability fit used for placement.
-- Acceptance: A peer cannot be ranked solely on capacity or risk when its
-  signed capability record is missing, expired, for a different DID, lacks the
-  task interface/resource class, or cannot reach the task input. The assigned
-  peer and its evidence are deterministically persisted with the task.
-- Completion evidence 2026-07-12: IPFS Kit derives immutable TaskSpec
-  requirements and rejects every missing, unverified, expired, DID-mismatched,
-  interface-mismatched, resource-mismatched, or input-unreachable record.
-  Accelerate rematerializes each candidate through the datasets-owned signed
-  NeighborhoodRecord provider before ranking, persists the selected fit and
-  evidence in DuckDB, and rechecks it at placement time. Focused suites passed:
-  IPFS Kit coordination/storage/transport (22), accelerator Profile G plus
-  lease coordination (20), and SwissKnife connector/convergence (6). Fresh
-  HTTP metadata from all three adapters reports
-  `verified-neighborhood-record-v1`; the SwissKnife libp2p connector probe is
-  GO across all three services with 579 unique callable tools.
-
-## SVD-097 Expose Profiles A-H task dispatch in the SwissKnife virtual desktop
-
-- Status: completed
-- Priority: P0
-- Track: apps, mcp
-- Depends on: SVD-087, SVD-088, SVD-096
-- Outputs: `swissknife/web/js/core/mcp-plus-plus-desktop-client.js`,
-  `swissknife/web/js/core/app-capability-gateway.js`,
-  `swissknife/web/js/apps/mcp-plus-plus-explorer.js`,
-  `swissknife/web/js/apps/agent-supervisor.js`, and focused browser tests.
-- Validation: `cd swissknife && npx vitest run
-  test/mcp-plus-plus/browser-desktop-client.test.ts --reporter=verbose && npx
-  playwright test test/e2e/mcp-plus-plus-live-explorer.spec.ts
-  test/e2e/agent-supervisor-console.spec.ts --workers=1 --reporter=line`.
-- Acceptance: The desktop negotiates Profiles A-H, exposes the typed protocol
-  operations and their live availability, routes app capabilities through the
-  MCP++ `tools/call` surface, and requires an explicit confirmation plus
-  Profile A-G evidence before claiming a Profile G task. Paid tasks additionally
-  require live Profile H negotiation and an approved Wallet payment context;
-  they must be visibly unavailable instead of falling back to a simulated
-  payment.
-- Completion evidence 2026-07-12: Added typed Profile H payment discovery,
-  quote, verification, settlement, receipt, entitlement, usage, refund, and
-  reconciliation operations to the browser client. The MCP++ Explorer now
-  presents A-H negotiation and a governed task-dispatch panel that performs
-  immutable task, IDL, artifact, peer, Event-DAG, schedule, and payment
-  preflight before sending `mcp++/schedule/claim`. The generic browser app
-  gateway now sends remote dataset and accelerator operations to their
-  configured MCP++ service instead of treating them as unsupported. The Agent
-  Supervisor health view displays each backend's negotiated A-H profile set.
-  Focused validation passed: 5 browser-client tests, 1 Explorer end-to-end
-  task-dispatch test, and 5 Agent Supervisor end-to-end scenarios. The current
-  compatibility adapters do not advertise `mcp++/x402-payments`, so the desktop
-  correctly prevents paid dispatch until the Profile H adapter bridge and
-  Wallet payment context are available. A read-only live probe on 2026-07-12
-  found all three services healthy with A-G negotiated and 579 total tools
-  (`ipfs_kit_py` 153, `ipfs_datasets_py` 304, `ipfs_accelerate_py` 122); each
-  explicitly returned `Unsupported method mcp++/payments/profile` and
-  `Unsupported method mcp++/payments/catalog`.
