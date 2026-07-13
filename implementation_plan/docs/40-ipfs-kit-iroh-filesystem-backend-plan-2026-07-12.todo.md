@@ -99,7 +99,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 1 - Binary Supply Chain And Runtime Adapter
 
 ## IROH-004 Implement a secure Iroh binary installer
-- Status: pending
+- Status: completed
 - Depends on: IROH-001
 - Work: Add platform/architecture detection, pinned downloads, digest and
   signature verification where upstream provides it, atomic extraction,
