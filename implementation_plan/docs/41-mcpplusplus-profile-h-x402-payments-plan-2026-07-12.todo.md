@@ -610,7 +610,7 @@ Supervisor operating rules:
 
 ## XPH-113 Complete security, performance, and testnet soak gates
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: XPH-109, XPH-112
