@@ -2106,7 +2106,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-094 Expose Agent Supervisor read, receipt, search, and governed-action methods through backend MCP++ routes
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-092, SVD-093
