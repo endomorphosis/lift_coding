@@ -581,7 +581,7 @@ Supervisor operating rules:
 
 ## XPH-111 Evaluate and gate EVM batch settlement
 
-- Status: pending
+- Status: completed
 - Priority: P2
 - Track: batch-settlement
 - Depends on: XPH-110
