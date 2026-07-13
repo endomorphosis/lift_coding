@@ -133,7 +133,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 2 - Managed Iroh Service
 
 ## IROH-007 Implement Iroh service configuration and state layout
-- Status: pending
+- Status: completed
 - Depends on: IROH-002, IROH-006
 - Work: Define data directory, endpoint bind, relay/discovery policy, RPC
   endpoint, node identity reference, resource limits, log/receipt paths, and
