@@ -191,7 +191,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   writers, conflict detection, tombstones, corrupt heads, and old-schema read.
 
 ## IROH-012 Add reference tracking and safe garbage collection
-- Status: pending
+- Status: completed
 - Depends on: IROH-011
 - Work: Track references across namespaces/revisions; expose mark/sweep dry-run,
   retention windows, leases for active readers/writers, quotas, and repair.
