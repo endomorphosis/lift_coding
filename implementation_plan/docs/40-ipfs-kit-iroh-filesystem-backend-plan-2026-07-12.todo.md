@@ -257,7 +257,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   secret redaction, invalid configs, and legacy config compatibility.
 
 ## IROH-018 Mount Iroh in the canonical virtual filesystem
-- Status: pending
+- Status: completed
 - Depends on: IROH-014, IROH-015, IROH-017
 - Work: Route `backend=iroh` and `iroh://` mounts through the canonical VFS,
   preserving operation envelopes, lineage, mount isolation, path policies,
