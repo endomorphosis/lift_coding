@@ -423,7 +423,7 @@ Supervisor operating rules:
 
 ## XPH-100 Inventory x402 and paid-access integration seams
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: discovery
 - Depends on: none
@@ -670,7 +670,7 @@ Supervisor operating rules:
 - Completion: manual 2026-07-13: repaired Markdown-backtick command substitution, preserved the verified dependency/version inventory, and validated the legacy already-parsed command path so the supervisor can release XPH-100.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on: none
 - Outputs: `data/mcplusplus_profile_h/x402-inventory.json`, dependency/version, tmp/mcpplusplus_profile_h_supervisor/discovery
 - Validation: python scripts/validate_mcplusplus_profile_h_inventory.py --report data/mcplusplus_profile_h/x402-inventory.json
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in XPH-100. Use evidence in tmp/mcpplusplus_profile_h_supervisor/discovery/2026-07-13-xph-115-xph-100-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release XPH-100 from strategy blocked_tasks.
