@@ -29,6 +29,7 @@ from .control_plane import (
     CommercialBinding, PROFILE_H, PROFILE_H_METHODS, PROFILE_H_VERSION, ProfileHControlPlane,
 )
 from .http import ProfileHHttpApp
+from .transports import ProfileHTransportAdapter
 from .operations import (
     BackupManager, KillSwitches, RedactedMetrics, alert_definitions,
     dashboard_definition, facilitator_health_probe,
@@ -56,5 +57,5 @@ __all__ = [
     "DepositIntent", "DepositStatus", "DuckDBVoucherLedger", "VoucherStatus",
     "evaluate_batch_enablement",
     "CommercialBinding", "PROFILE_H", "PROFILE_H_METHODS", "PROFILE_H_VERSION",
-    "ProfileHControlPlane", "ProfileHHttpApp",
+    "ProfileHControlPlane", "ProfileHHttpApp", "ProfileHTransportAdapter",
 ]

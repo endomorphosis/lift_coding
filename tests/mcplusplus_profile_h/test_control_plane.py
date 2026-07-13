@@ -12,6 +12,7 @@ from mcplusplus_profile_h import (
     PaymentPolicyEngine,
     PaymentRequirement,
     ProfileHControlPlane,
+    ProfileHTransportAdapter,
     SellerRuntime,
     SettlementResult,
     VerificationResult,
@@ -64,13 +65,23 @@ async def test_control_plane_exposes_complete_durable_lifecycle_without_executin
         mode="local-test",
         upstream_x402_http_conformance=False,
     )
+    transports = ProfileHTransportAdapter(control)
 
-    profile = await control.dispatch("mcp++/payments/profile")
+    profile_response = await transports.libp2p({
+        "jsonrpc": "2.0", "id": 1, "method": "mcp++/payments/profile", "params": {},
+    })
+    profile = profile_response["result"]
     assert profile["ready"] is True
     assert profile["transports"] == ["http", "libp2p"]
     assert profile["mode"] == "local-test"
     assert profile["upstreamX402HttpConformance"] is False
     assert profile["durability"]["ledger"] == "durable"
+    status, headers, http_catalog = await transports.http.handle(
+        "GET", "/mcp/payments/catalog",
+    )
+    assert status == 200
+    catalog_cid = http_catalog.get("signedCatalogCid") or http_catalog["catalogCid"]
+    assert headers["etag"] == f'"{catalog_cid}"'
 
     request_cid = cid_for({"request": 1})
     common = {
@@ -125,6 +136,20 @@ async def test_control_plane_exposes_complete_durable_lifecycle_without_executin
         "outcomes": [{"idempotencyKey": "request-1", "state": "settled"}],
     }
 
+    unsupported = await transports.libp2p({
+        "jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {},
+    })
+    assert unsupported["error"]["code"] == -32601
+
+    denied = await transports.libp2p({
+        "jsonrpc": "2.0", "id": 3, "method": "mcp++/payments/receipt/get", "params": {
+            "receiptCid": settled["receiptCid"],
+            "requestContext": {**common["requestContext"], "authorized": False},
+        },
+    })
+    assert denied["error"]["code"] == -32070
+    assert denied["error"]["data"]["code"] == "H_PAYMENT_POLICY_DENIED"
+
 
 @pytest.mark.asyncio
 async def test_http_binding_rejects_unknown_routes_before_seller_dispatch(tmp_path):
@@ -152,3 +177,21 @@ async def test_http_binding_rejects_unknown_routes_before_seller_dispatch(tmp_pa
     status, _, body = await control.handle_http("DELETE", "/mcp/payments/catalog")
     assert status == 404
     assert body["error"] == "H_METHOD_NOT_SUPPORTED"
+
+    status, _, body = await control.handle_http("GET", "/mcp/payments/receipts/baguqmissing", {
+        "requestCid": cid_for({"request": "query"}),
+        "idempotencyKey": "query-request",
+        "authorized": "false",
+        "policyAllowed": "true",
+        "attributes": '{"subject":"did:key:buyer"}',
+    })
+    assert status == 403
+    assert body["error"] == "H_PAYMENT_POLICY_DENIED"
+
+    status, _, body = await control.handle_http("GET", "/mcp/payments/receipts/baguqmissing", {
+        "requestCid": cid_for({"request": "query"}),
+        "idempotencyKey": "query-request",
+        "attributes": "not-json",
+    })
+    assert status == 409
+    assert body["error"] == "H_REQUEST_MISMATCH"

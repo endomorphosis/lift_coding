@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+import json
 from typing import Any
 
 from .canonical import commitment
@@ -176,15 +177,31 @@ class ProfileHControlPlane:
         request_cid = str(raw.get("requestCid", raw.get("request_cid", values.get("requestCid", values.get("request_cid", "")))))
         key = str(raw.get("idempotencyKey", raw.get("idempotency_key", values.get("idempotencyKey", values.get("idempotency_key", "")))))
         attributes = raw.get("attributes", values.get("attributes", {}))
+        if isinstance(attributes, str):
+            try:
+                attributes = json.loads(attributes)
+            except json.JSONDecodeError as error:
+                raise ProfileHError("H_REQUEST_MISMATCH", "attributes must be a JSON object") from error
         if not request_cid or not key or not isinstance(attributes, Mapping):
             raise ProfileHError("H_REQUEST_MISMATCH", "requestCid, idempotencyKey, and attributes are required")
         return RequestContext(
             request_cid, key,
-            bool(raw.get("authorized", values.get("authorized", True))),
-            bool(raw.get("policyAllowed", raw.get("policy_allowed", values.get("policyAllowed", True)))),
+            ProfileHControlPlane._boolean(raw.get("authorized", values.get("authorized", True)), "authorized"),
+            ProfileHControlPlane._boolean(
+                raw.get("policyAllowed", raw.get("policy_allowed", values.get("policyAllowed", True))),
+                "policyAllowed",
+            ),
             str(raw.get("entitlementCid")) if raw.get("entitlementCid") else None,
             dict(attributes),
         )
+
+    @staticmethod
+    def _boolean(value: Any, field: str) -> bool:
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str) and value.lower() in {"true", "false"}:
+            return value.lower() == "true"
+        raise ProfileHError("H_REQUEST_MISMATCH", f"{field} must be a boolean")
 
     @staticmethod
     def _payment(values: Mapping[str, Any], context: RequestContext) -> PaymentContext:
