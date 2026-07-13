@@ -1924,7 +1924,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-130 Exercise every browser app through its owned capability and runtime state matrix
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/e2e
 - Dedupe key: swissknife_refactor:all_browser_apps_owned_capability_state_matrix
