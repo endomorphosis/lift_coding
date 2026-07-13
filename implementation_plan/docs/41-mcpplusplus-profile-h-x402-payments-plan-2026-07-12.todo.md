@@ -553,7 +553,7 @@ Supervisor operating rules:
 
 ## XPH-109 Prove three-seller HTTP and libp2p interoperability
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: integration
 - Depends on: XPH-104, XPH-105, XPH-106, XPH-107, XPH-108
