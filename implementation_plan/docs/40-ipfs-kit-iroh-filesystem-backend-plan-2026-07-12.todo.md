@@ -210,7 +210,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   isolation, external fsspec, and vendored fallback all pass.
 
 ## IROH-014 Complete read/list/discovery semantics
-- Status: pending
+- Status: completed
 - Depends on: IROH-013
 - Work: Implement `ls/detail`, `info`, `exists`, `isfile`, `isdir`, `find`,
   `walk`, `glob`, `cat`, `cat_file` ranges, `get_file`, and streaming `_open`.
