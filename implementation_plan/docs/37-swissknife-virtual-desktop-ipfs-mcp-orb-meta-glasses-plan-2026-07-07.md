@@ -2116,7 +2116,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-095 Bind every SwissKnife application behavior to live backend-tool intents and safe fallbacks
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-093, SVD-094
