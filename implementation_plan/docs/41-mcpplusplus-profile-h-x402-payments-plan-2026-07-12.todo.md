@@ -567,7 +567,7 @@ Supervisor operating rules:
 
 ## XPH-110 Add metered upto payments and bounded entitlements
 
-- Status: pending
+- Status: completed
 - Priority: P1
 - Track: metering
 - Depends on: XPH-109
