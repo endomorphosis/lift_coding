@@ -1891,7 +1891,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-127 Close browser app capability boundaries and eliminate unknown executable runtime paths
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/runtime
 - Dedupe key: swissknife_refactor:browser_capability_boundary_unknown_runtime_closure
