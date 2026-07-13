@@ -154,7 +154,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   start, orphan, wrong PID, port conflict, crash loop, restart, and shutdown.
 
 ## IROH-009 Add health, diagnostics, and observability
-- Status: pending
+- Status: completed
 - Depends on: IROH-008
 - Work: Report readiness separately from liveness, node ID, version, uptime,
   relay/direct connectivity, storage usage, peers, transfer counts/bytes,
