@@ -1902,7 +1902,7 @@ providers, but no browser bundle may execute, embed, or silently simulate them.
 
 ## SWR-128 Prove default-enabled libp2p interoperability in real browser contexts
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/libp2p
 - Dedupe key: swissknife_refactor:real_browser_libp2p_interoperability_default_enabled
