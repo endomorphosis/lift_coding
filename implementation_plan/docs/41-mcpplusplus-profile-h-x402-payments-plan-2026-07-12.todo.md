@@ -495,7 +495,7 @@ Supervisor operating rules:
 
 ## XPH-105 Add paid capabilities to ipfs_accelerate_py
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: ipfs-accelerate
 - Depends on: XPH-103
@@ -674,3 +674,14 @@ Supervisor operating rules:
 - Outputs: `data/mcplusplus_profile_h/x402-inventory.json`, dependency/version, tmp/mcpplusplus_profile_h_supervisor/discovery
 - Validation: python scripts/validate_mcplusplus_profile_h_inventory.py --report data/mcplusplus_profile_h/x402-inventory.json
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in XPH-100. Use evidence in tmp/mcpplusplus_profile_h_supervisor/discovery/2026-07-13-xph-115-xph-100-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release XPH-100 from strategy blocked_tasks.
+
+## XPH-116 Resolve validation retry-budget failure for XPH-104
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: XPH-103
+- Outputs: signed kit catalog, protected storage/pin/retrieval fixtures, tmp/mcpplusplus_profile_h_supervisor/discovery
+- Validation: pytest -q hallucinate_app/ipfs_kit_py/tests/mcplusplus_profile_h
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in XPH-104. Use evidence in tmp/mcpplusplus_profile_h_supervisor/discovery/2026-07-13-xph-116-xph-104-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release XPH-104 from strategy blocked_tasks.
