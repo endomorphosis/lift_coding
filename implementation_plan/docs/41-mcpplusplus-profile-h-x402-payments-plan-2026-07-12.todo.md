@@ -453,7 +453,7 @@ Supervisor operating rules:
 
 ## XPH-102 Add canonical schemas, codecs, and conformance vectors
 
-- Status: pending
+- Status: completed
 - Priority: P0
 - Track: shared-runtime
 - Depends on: XPH-101
