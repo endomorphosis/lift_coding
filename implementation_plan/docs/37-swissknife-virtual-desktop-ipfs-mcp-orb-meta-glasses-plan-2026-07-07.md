@@ -2141,7 +2141,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-097 Validate Agent Supervisor task dispatch, goals/subgoals, and prompt steering from the desktop application
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: supervisor
 - Depends on: SVD-092, SVD-094, SVD-096
