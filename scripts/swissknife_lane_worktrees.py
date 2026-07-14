@@ -15,11 +15,15 @@ import fcntl
 import json
 import subprocess
 import sys
+from collections.abc import Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterator
 
+from swissknife_checkout_lease_guard import (
+    SwissKnifeLeaseGuardError,
+    require_swissknife_checkout_lease,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = REPO_ROOT / "tmp" / "swissknife_lane_worktrees"
@@ -54,6 +58,14 @@ class Lane:
 
 
 LANES = {name: Lane(name) for name in ("all-tools", "refactor")}
+INTEGRATION_BOARDS = {
+    "all-tools-integration": (
+        "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
+    ),
+    "refactor-integration": (
+        "implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md"
+    ),
+}
 
 
 class LaneError(RuntimeError):
@@ -132,6 +144,12 @@ def ensure_lane(lane: Lane, *, dry_run: bool) -> dict[str, str]:
         }
 
     configure_local_submodule_sources(lane)
+    if (lane.swissknife_path / ".git").exists() and not working_tree_clean(
+        lane.swissknife_path
+    ):
+        raise LaneError(
+            f"SwissKnife lane checkout is dirty; refusing submodule update: {lane.swissknife_path}"
+        )
     git(
         [
             "-c",
@@ -249,6 +267,12 @@ def run_validation_command(lane: Lane, command: str) -> None:
 
 
 def merge_lane(lane: Lane, *, validation_command: str, apply: bool) -> dict[str, object]:
+    if apply:
+        lease_lane = f"{lane.name}-integration"
+        require_swissknife_checkout_lease(
+            ["--implement"],
+            allowed_lanes={lease_lane: INTEGRATION_BOARDS[lease_lane]},
+        )
     if not validation_command.strip():
         raise LaneError("--validation-command is required so validation is serialized with the merge")
     with integration_lock():
@@ -323,7 +347,7 @@ def main() -> int:
         result = merge_lane(LANES[args.lane], validation_command=args.validation_command, apply=args.apply)
         print(json.dumps(result, indent=2))
         return 0
-    except LaneError as exc:
+    except (LaneError, SwissKnifeLeaseGuardError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
 
