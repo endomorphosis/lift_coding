@@ -110,7 +110,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_install_cli.py
 
 ## WALRUS-007 Create the typed publisher, aggregator, and CLI runtime boundary
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-002, WALRUS-003
 - Work: Normalize upload/status/read/delete responses, timeouts, retries,
   cancellation, version skew, endpoint capability detection, and redaction.
