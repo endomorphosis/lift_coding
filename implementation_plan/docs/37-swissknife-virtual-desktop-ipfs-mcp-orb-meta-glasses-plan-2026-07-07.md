@@ -2151,7 +2151,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-098 Compile current all-app ORB/IDL handoff packets for display and expanded I/O
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: orb-idl
 - Depends on: SVD-095, SVD-097
