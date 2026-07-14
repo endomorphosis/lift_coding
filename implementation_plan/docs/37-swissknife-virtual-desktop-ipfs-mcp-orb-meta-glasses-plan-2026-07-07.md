@@ -1975,13 +1975,15 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-076 Implement and independently verify a genuine Arkworks multi-party setup transform
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: crypto
 - Depends on: SVD-075
 - Outputs: `external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/`, `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/ceremony.py`, `external/ipfs_datasets/tests/unit_tests/logic/zkp/test_mpc_ceremony.py`, `Mcp-Plus-Plus/docs/spec/groth16-mpc-ceremony.md`
 - Validation: cd external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend && cargo test --release mpc_ceremony; cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_mpc_ceremony.py -q
 - Acceptance: Replace the single-RNG setup-only implementation with an audited Arkworks-compatible multi-party contribution transform that preserves participant-held entropy, emits reproducible public transcript evidence, independently verifies every contribution, exports canonical proving and verification keys, and demonstrates that malformed, reordered, duplicate-participant, stale-key, and unverifiable contributions are rejected. It must bind the final key and circuit version to the Profile F event-DAG compaction verifier without sending toxic waste over MCP, HTTP, or MCP+p2p.
+
+- Completion note 2026-07-14: Recovered the final Arkworks MPC ceremony transform from the isolated task worktree without its stale submodule pointers or unrelated taskboard merge conflict. The root-pinned integration passed `cargo test --release mpc_ceremony` (15 passed, 1 documented long-running audit ignored) and `PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_mpc_ceremony.py -q` (47 passed).
 
 ## SVD-077 Append Profile D execution-policy conformity plan
 
