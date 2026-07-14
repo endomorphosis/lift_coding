@@ -227,7 +227,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_recovery.py tests/test_walrus_multinode.py
 
 ## WALRUS-020 Add CI, packaging, distribution, and live opt-in gates
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-006, WALRUS-013, WALRUS-017, WALRUS-019
 - Work: Test supported Python/platform matrices, wheel/sdist contents, optional
   dependency isolation, offline fixtures, install smoke, and opt-in testnet
