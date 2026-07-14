@@ -309,7 +309,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   redaction, malformed tickets, and destructive confirmation tests pass.
 
 ## IROH-023 Document deployment and recovery
-- Status: pending
+- Status: completed
 - Depends on: IROH-009, IROH-020
 - Work: Document install/upgrade/rollback, ports/firewall/relay, backups of node
   identity and manifests, namespace sharing, outage modes, disaster recovery,
