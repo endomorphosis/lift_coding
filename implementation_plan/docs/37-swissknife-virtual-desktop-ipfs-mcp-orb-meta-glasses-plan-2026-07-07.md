@@ -2322,7 +2322,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Status: waiting
 - Priority: P0
 - Track: release
-- Depends on: SVD-101, SVD-102, SVD-106, SVD-109, SVD-111, SVD-112, SVD-113
+- Depends on: SVD-101, SVD-102, SVD-106, SVD-109, SVD-111, SVD-112, SVD-113, SVD-116
 - Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-readiness-report.json, swissknife/docs/release-readiness-report.md
 - Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale && node scripts/release-readiness-gate.mjs
 - Acceptance: The release generator rejects absent evidence inputs, stale timestamps, declared_no_tool_binding for tool_backed pairs, descriptor-only or fixture-only execution claims, and unclassified backend tools. Its report names each failing application, tool, owner, transport, modality, task ID, and remediation rather than reducing a failure to a coverage percentage.
@@ -2336,3 +2336,13 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/independent-all-app-release-replay.json, swissknife/docs/refactor-final-signoff.md
 - Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/release-readiness-gate.mjs && git diff --check
 - Acceptance: A clean independent replay confirms the full application catalog, all declared backend bindings, all-tools disposition catalog, Supervisor Console lifecycle, profiles A-H transport behavior, ORB/IDL handoffs, Meta simulator modalities, UI/UX gate, CID/event-DAG persistence, and release freshness. `GO` is emitted only for passing current evidence; otherwise the replay remains `NO_GO` with specific unfinished SVD task IDs.
+
+## SVD-116 Repair non-destructive supervisor merge reconciliation for nested submodules
+
+- Status: ready
+- Priority: P0
+- Track: ops
+- Depends on: SVD-100
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py, tmp/swissknife_all_tools_supervisor/state/submodule-merge-diagnostics.json
+- Validation: cd external/ipfs_accelerate && PYTHONPATH=. python3 -m pytest test/api/test_agent_supervisor_todo_daemon_port.py -q -k "submodule or merge_reconciliation or main_checkout_dirty"
+- Acceptance: A supervisor merge records each nested gitlink conflict with path, ours/theirs candidates, reachable merge bases, and selected commit; it resolves only a verified descendant or an explicit deterministic recovery ref, never a blind side selection. Generated nested-worktree directories such as external/ipfs_kit/tmp are preserved or moved to supervisor state and cannot indefinitely classify the main checkout as user-dirty. Failed reconciliation remains retryable with a structured diagnostic, while an unchanged unrelated submodule prevents neither a validated parent merge nor subsequent ready work.

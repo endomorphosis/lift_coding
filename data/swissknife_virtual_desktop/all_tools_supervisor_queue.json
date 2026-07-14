@@ -1,6 +1,6 @@
 {
   "schema": "swissknife.all_tools_supervisor_queue.v1",
-  "generated_at": "2026-07-14T07:52:07Z",
+  "generated_at": "2026-07-14T07:54:18Z",
   "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
   "taskboard_paths": [
     "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
@@ -10,13 +10,13 @@
     "id": "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools",
     "task_id_range": [
       "SVD-027",
-      "SVD-115"
+      "SVD-116"
     ],
     "parser_contract": "markdown_headers_with_key_value_metadata",
     "resume_state_artifact": "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json"
   },
   "summary": {
-    "task_count": 89,
+    "task_count": 90,
     "completed_count": 63,
     "completed_task_ids": [
       "SVD-027",
@@ -83,14 +83,15 @@
       "SVD-099",
       "SVD-100"
     ],
-    "ready_count": 6,
+    "ready_count": 7,
     "ready_task_ids": [
       "SVD-047",
       "SVD-068",
       "SVD-076",
       "SVD-091",
       "SVD-101",
-      "SVD-102"
+      "SVD-102",
+      "SVD-116"
     ],
     "waiting_count": 20,
     "waiting_task_ids": [
@@ -3615,7 +3616,8 @@
         "SVD-109",
         "SVD-111",
         "SVD-112",
-        "SVD-113"
+        "SVD-113",
+        "SVD-116"
       ],
       "outputs": [
         "swissknife/scripts/build-virtual-desktop-release-evidence.cjs",
@@ -3667,6 +3669,37 @@
         "evidence_outputs": [
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/independent-all-app-release-replay.json",
           "swissknife/docs/refactor-final-signoff.md"
+        ]
+      }
+    },
+    "SVD-116": {
+      "title": "Repair non-destructive supervisor merge reconciliation for nested submodules",
+      "status": "ready",
+      "priority": "P0",
+      "track": "ops",
+      "owner": "platform",
+      "depends_on": [
+        "SVD-100"
+      ],
+      "outputs": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py",
+        "tmp/swissknife_all_tools_supervisor/state/submodule-merge-diagnostics.json"
+      ],
+      "validation": [
+        "cd external/ipfs_accelerate && PYTHONPATH=. python3 -m pytest test/api/test_agent_supervisor_todo_daemon_port.py -q -k \"submodule or merge_reconciliation or main_checkout_dirty\""
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2340,
+        "taskboard_heading": "## SVD-116 Repair non-destructive supervisor merge reconciliation for nested submodules",
+        "taskboard_anchor": "#svd-116-repair-non-destructive-supervisor-merge-reconciliation-for-nested-submodules",
+        "status_field": "ready",
+        "evidence_outputs": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py",
+          "tmp/swissknife_all_tools_supervisor/state/submodule-merge-diagnostics.json"
         ]
       }
     }
@@ -3980,7 +4013,8 @@
     ],
     "SVD-100": [
       "SVD-101",
-      "SVD-102"
+      "SVD-102",
+      "SVD-116"
     ],
     "SVD-101": [
       "SVD-114"
@@ -4040,6 +4074,9 @@
     "SVD-114": [
       "SVD-115"
     ],
-    "SVD-115": []
+    "SVD-115": [],
+    "SVD-116": [
+      "SVD-114"
+    ]
   }
 }
