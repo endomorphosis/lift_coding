@@ -2199,7 +2199,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-102 Build a fresh all-app and all-tool live-binding gap ledger
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-100
