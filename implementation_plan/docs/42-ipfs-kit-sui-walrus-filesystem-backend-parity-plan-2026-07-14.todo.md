@@ -83,7 +83,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_filesystem_contract.py
 
 ## WALRUS-004 Publish the capability and Iroh-parity matrix
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-003
 - Work: Classify every fsspec, VFS, lifecycle, security, and operator operation
   as native, emulated, or unsupported, with stable failure behavior.
