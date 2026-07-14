@@ -218,7 +218,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_observability.py tests/test_walrus_performance.py
 
 ## WALRUS-019 Add recovery, reconciliation, and multinode interoperability
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-010, WALRUS-015, WALRUS-017
 - Work: Cover interrupted uploads, stale manifests, missing/expired blobs,
   DuckDB backup/restore, publisher failover, index rebuild, node exchange, and
