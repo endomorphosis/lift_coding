@@ -200,7 +200,7 @@ storage and epoch policy.
 ## Phase 4 - Production Hardening
 
 ## WALRUS-017 Implement credentials, authorization, and threat controls
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-008, WALRUS-012, WALRUS-016
 - Work: Add credential-provider integration, rotation, endpoint allowlists,
   TLS requirements, SSRF defenses, path validation, response limits, secret
