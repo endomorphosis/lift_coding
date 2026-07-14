@@ -330,7 +330,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   permissions, log scan, resource limits, and dependency/license audit pass.
 
 ## IROH-025 Run real multi-node interoperability tests
-- Status: pending
+- Status: completed
 - Depends on: IROH-016, IROH-020, IROH-024
 - Work: Test two or more isolated nodes over direct LAN, relay fallback, NAT-like
   container topology, interruption, version skew, key rotation, and large data.
