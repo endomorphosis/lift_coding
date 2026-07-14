@@ -2026,7 +2026,7 @@ success paths.
 - Priority: P0
 - Track: services/browser-boundaries
 - Dedupe key: swissknife_refactor:recovered_baseline_service_and_browser_boundary_revalidation
-- Depends on: SWR-136, SWR-145
+- Depends on: SWR-136, SWR-145, SWR-146
 - Outputs: swissknife/docs/service-boundary-audit.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/browser-compatibility-inventory.json, swissknife/docs/browser-compatibility-inventory.md
 - Validation: cd swissknife && npm run services:audit && npm run typecheck && npm run build:web && npm run test:browser-compat && npm run audit:bundle-host-leakage
 - Acceptance: The recovered tree has zero non-index duplicate service basenames, zero root service implementation violations, zero undocumented deep imports, zero browser-reachable host-only imports, and zero unknown executable browser paths. The audit fixtures prove that restored duplicates, root implementations, and Node or Python execution edges fail the gate.
@@ -2104,6 +2104,9 @@ bindings, or simulated proof and peer results. Libp2p stays enabled by default a
 must use real browser-supported transports. The browser proof surface must use real
 TypeScript or WebAssembly execution, with typed unavailability when a backend cannot
 run. Remote Python services are allowed only behind typed MCP capability boundaries.
+The supervisor and browser-validation launcher must also resolve a supported Node
+runtime explicitly; a stale PATH entry, an incompatible system Node fallback, or a
+host-specific binary path recorded as repository configuration is a failing state.
 
 ## SWR-143 Inventory restored service duplicates by basename, normalized content, and behavior
 
@@ -2137,3 +2140,14 @@ run. Remote Python services are allowed only behind typed MCP capability boundar
 - Outputs: swissknife/scripts/audit-source-modules.mjs, swissknife/src/module-ownership.json, swissknife/docs/service-boundary-audit.json, swissknife/test/architecture/source-module-boundaries.test.js, swissknife/docs/browser-compatibility-inventory.md
 - Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:browser-compat && npm run audit:bundle-host-leakage
 - Acceptance: The ownership audit fails for a restored or renamed executable duplicate, a root implementation without an explicit owner, undocumented deep imports, a browser export that reaches a host-only dependency, or an unapproved browser entrypoint with behavior equivalent to another module. Regression fixtures cover every repaired duplicate family. Browser-facing entries resolve through canonical public APIs and preserve default-enabled real libp2p configuration, typed remote MCP boundaries, and TS/WASM-only proof selection. SWR-137 through SWR-142 cannot pass from historical evidence or a path-only inventory.
+
+## SWR-146 Pin a portable browser-validation Node toolchain for supervisor lanes
+
+- Status: waiting
+- Priority: P0
+- Track: supervisor/browser-toolchain
+- Dedupe key: swissknife_refactor:portable_node_toolchain_for_browser_validation
+- Depends on: SWR-136
+- Outputs: swissknife/.nvmrc, swissknife/package.json, swissknife/scripts/verify-browser-toolchain.mjs, swissknife/docs/browser-validation-toolchain.md, scripts/swissknife_lane_worktrees.py
+- Validation: cd swissknife && node scripts/verify-browser-toolchain.mjs && npm run build:web && npm run test:browser-compat
+- Acceptance: Every lane and clean-checkout validator resolves a documented supported Node release before invoking npm, Vite, Playwright, libp2p, or browser proof commands, and the verification receipt records the resolved executable, semantic version, package-manager version, and lockfile fingerprint. The repository pins a portable version policy rather than a workstation path. An absent runtime, a stale PATH entry that falls back to an unsupported system Node, a shell-only fix, or a symlink whose directory name claims a different version fails the task. CI and lane startup share the same resolver and prove it accepts supported Node 20.19+ or newer compatible releases.
