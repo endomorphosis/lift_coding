@@ -1911,7 +1911,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-070 Run hardware-free expanded Meta glasses I/O UI/UX validation
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-064, SVD-069
