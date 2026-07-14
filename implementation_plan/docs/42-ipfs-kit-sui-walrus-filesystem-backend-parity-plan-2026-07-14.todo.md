@@ -209,7 +209,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_security.py
 
 ## WALRUS-018 Add observability, quotas, performance, and cost controls
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-009, WALRUS-015, WALRUS-017
 - Work: Add redacted structured logs/metrics/traces, health diagnostics,
   latency/throughput baselines, cache limits, per-epoch cost/expiry alarms,
