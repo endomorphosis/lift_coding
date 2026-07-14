@@ -182,7 +182,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_vfs_integration.py
 
 ## WALRUS-015 Add Walrus as a bucket storage and tiering target
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-014
 - Work: Support create/mount/import/export/sync/reconcile, epoch-aware renewal,
   placement policies, IPFS/Iroh/local migrations, receipts, and rollback.
