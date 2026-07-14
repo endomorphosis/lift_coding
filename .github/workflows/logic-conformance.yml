@@ -20,9 +20,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: 'swissknife/.nvmrc'
           cache: npm
           cache-dependency-path: swissknife/package-lock.json
+
+      - name: Verify SwissKnife browser-validation toolchain
+        working-directory: swissknife
+        run: node scripts/verify-browser-toolchain.mjs --receipt "${{ runner.temp }}/swissknife-browser-toolchain-logic-conformance.json"
 
       - uses: actions/setup-python@v5
         with:

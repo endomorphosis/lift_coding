@@ -2151,3 +2151,14 @@ host-specific binary path recorded as repository configuration is a failing stat
 - Outputs: swissknife/.nvmrc, swissknife/package.json, swissknife/scripts/verify-browser-toolchain.mjs, swissknife/docs/browser-validation-toolchain.md, scripts/swissknife_lane_worktrees.py
 - Validation: cd swissknife && node scripts/verify-browser-toolchain.mjs && npm run build:web && npm run test:browser-compat
 - Acceptance: Every lane and clean-checkout validator resolves a documented supported Node release before invoking npm, Vite, Playwright, libp2p, or browser proof commands, and the verification receipt records the resolved executable, semantic version, package-manager version, and lockfile fingerprint. The repository pins a portable version policy rather than a workstation path. An absent runtime, a stale PATH entry that falls back to an unsupported system Node, a shell-only fix, or a symlink whose directory name claims a different version fails the task. CI and lane startup share the same resolver and prove it accepts supported Node 20.19+ or newer compatible releases.
+
+## SWR-147 Resolve implementation retry-budget failure for SWR-143
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SWR-136
+- Outputs: swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/restored-service-duplicate-inventory.md, swissknife/src/module-ownership.json, swissknife/test/architecture/source-module-boundaries.test.js, tmp/swissknife_refactor_supervisor/discovery
+- Validation: test -f tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-147-swr-143-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SWR-143. Use evidence in tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-147-swr-143-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SWR-143 from strategy blocked_tasks.
