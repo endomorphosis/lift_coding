@@ -147,7 +147,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_metadata.py
 
 ## WALRUS-011 Implement read-side fsspec semantics
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-007, WALRUS-010
 - Work: Implement `info`, `exists`, `ls`, `find`, `glob`, `cat_file`, ranged
   reads, direct blob reads, cache validation, streaming, and sync/async paths.
