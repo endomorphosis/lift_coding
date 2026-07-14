@@ -350,7 +350,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   remains usable without Iroh; extras and binaries are reproducible.
 
 ## IROH-027 Stage rollout and release sign-off
-- Status: pending
+- Status: completed
 - Depends on: IROH-023, IROH-024, IROH-026
 - Work: Release behind `iroh.enabled=false`, then experimental opt-in, canary,
   and supported status. Define rollback, SLOs, compatibility window, migration,
