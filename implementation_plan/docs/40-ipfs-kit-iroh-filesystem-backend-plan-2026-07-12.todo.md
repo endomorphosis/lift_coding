@@ -299,7 +299,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   confirmations, and shell/path portability.
 
 ## IROH-022 Expose governed MCP and API operations
-- Status: pending
+- Status: completed
 - Depends on: IROH-021
 - Work: Add only implemented Iroh capabilities to the unified MCP server and
   storage API. Separate read/control/destructive permissions; validate inputs;
