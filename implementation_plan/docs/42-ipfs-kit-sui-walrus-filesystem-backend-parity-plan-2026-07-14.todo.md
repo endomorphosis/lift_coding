@@ -236,7 +236,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_packaging.py
 
 ## WALRUS-021 Produce release readiness evidence and close the parity audit
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-004, WALRUS-016, WALRUS-018, WALRUS-019, WALRUS-020
 - Work: Run the complete Walrus suite, verify every Iroh-equivalent category is
   implemented or explicitly inapplicable with rationale, publish rollback,
