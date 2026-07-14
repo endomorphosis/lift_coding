@@ -155,7 +155,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_fsspec_reads.py tests/test_walrus_fsspec_async.py
 
 ## WALRUS-012 Implement safe write and mutation semantics
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-010, WALRUS-011
 - Work: Add staged writes, `pipe_file`, upload, manifest CAS, mkdir markers,
   copy/move metadata transactions, tombstone/delete policy, abort cleanup,
