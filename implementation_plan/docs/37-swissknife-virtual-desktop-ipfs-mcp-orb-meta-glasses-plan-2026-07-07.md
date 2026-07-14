@@ -2339,7 +2339,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-116 Repair non-destructive supervisor merge reconciliation for nested submodules
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: ops
 - Depends on: SVD-100
