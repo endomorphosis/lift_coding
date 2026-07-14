@@ -1,6 +1,6 @@
 {
   "schema": "swissknife.all_tools_supervisor_queue.v1",
-  "generated_at": "2026-07-13T08:36:53Z",
+  "generated_at": "2026-07-14T07:52:07Z",
   "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
   "taskboard_paths": [
     "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
@@ -10,14 +10,14 @@
     "id": "ipfs_accelerate_py.agent_supervisor.swissknife_all_tools",
     "task_id_range": [
       "SVD-027",
-      "SVD-101"
+      "SVD-115"
     ],
     "parser_contract": "markdown_headers_with_key_value_metadata",
     "resume_state_artifact": "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json"
   },
   "summary": {
-    "task_count": 75,
-    "completed_count": 52,
+    "task_count": 89,
+    "completed_count": 63,
     "completed_task_ids": [
       "SVD-027",
       "SVD-028",
@@ -54,6 +54,8 @@
       "SVD-061",
       "SVD-062",
       "SVD-063",
+      "SVD-064",
+      "SVD-065",
       "SVD-067",
       "SVD-073",
       "SVD-074",
@@ -70,27 +72,8 @@
       "SVD-087",
       "SVD-088",
       "SVD-089",
-      "SVD-090"
-    ],
-    "ready_count": 6,
-    "ready_task_ids": [
-      "SVD-047",
-      "SVD-064",
-      "SVD-068",
-      "SVD-076",
-      "SVD-091",
-      "SVD-092"
-    ],
-    "waiting_count": 17,
-    "waiting_task_ids": [
-      "SVD-060",
-      "SVD-065",
-      "SVD-066",
-      "SVD-069",
-      "SVD-070",
-      "SVD-071",
-      "SVD-072",
-      "SVD-081",
+      "SVD-090",
+      "SVD-092",
       "SVD-093",
       "SVD-094",
       "SVD-095",
@@ -98,8 +81,39 @@
       "SVD-097",
       "SVD-098",
       "SVD-099",
-      "SVD-100",
-      "SVD-101"
+      "SVD-100"
+    ],
+    "ready_count": 6,
+    "ready_task_ids": [
+      "SVD-047",
+      "SVD-068",
+      "SVD-076",
+      "SVD-091",
+      "SVD-101",
+      "SVD-102"
+    ],
+    "waiting_count": 20,
+    "waiting_task_ids": [
+      "SVD-060",
+      "SVD-066",
+      "SVD-069",
+      "SVD-070",
+      "SVD-071",
+      "SVD-072",
+      "SVD-081",
+      "SVD-103",
+      "SVD-104",
+      "SVD-105",
+      "SVD-106",
+      "SVD-107",
+      "SVD-108",
+      "SVD-109",
+      "SVD-110",
+      "SVD-111",
+      "SVD-112",
+      "SVD-113",
+      "SVD-114",
+      "SVD-115"
     ],
     "active_count": 0,
     "active_task_ids": [],
@@ -109,7 +123,7 @@
     "stale_task_ids": [],
     "blocked_count": 0,
     "blocked_task_ids": [],
-    "recommended_task_id": "SVD-092"
+    "recommended_task_id": "SVD-047"
   },
   "generated_evidence_root": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb",
   "generated_evidence_globs": [
@@ -174,7 +188,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1284,
+        "taskboard_line": 1289,
         "taskboard_heading": "## SVD-027 Generate the all MCP/MCP++ tools ledger",
         "taskboard_anchor": "#svd-027-generate-the-all-mcpmcp-tools-ledger",
         "status_field": "completed",
@@ -212,7 +226,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1295,
+        "taskboard_line": 1300,
         "taskboard_heading": "## SVD-028 Classify every discovered tool by policy, receipt, fallback, and owner",
         "taskboard_anchor": "#svd-028-classify-every-discovered-tool-by-policy-receipt-fallback-and-owner",
         "status_field": "completed",
@@ -252,7 +266,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1306,
+        "taskboard_line": 1311,
         "taskboard_heading": "## SVD-029 Map every tool to app capabilities or a deliberate non-app disposition",
         "taskboard_anchor": "#svd-029-map-every-tool-to-app-capabilities-or-a-deliberate-non-app-disposition",
         "status_field": "completed",
@@ -290,7 +304,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1317,
+        "taskboard_line": 1322,
         "taskboard_heading": "## SVD-030 Build exhaustive tool execution fixtures and result-envelope tests",
         "taskboard_anchor": "#svd-030-build-exhaustive-tool-execution-fixtures-and-result-envelope-tests",
         "status_field": "completed",
@@ -328,7 +342,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1328,
+        "taskboard_line": 1333,
         "taskboard_heading": "## SVD-031 Replace the accelerate compatibility shim with full ipfs_accelerate_py MCP coverage or an explicit accepted boundary",
         "taskboard_anchor": "#svd-031-replace-the-accelerate-compatibility-shim-with-full-ipfsacceleratepy-mcp-coverage-or-an-explicit-accepted-boundary",
         "status_field": "completed",
@@ -366,7 +380,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1339,
+        "taskboard_line": 1344,
         "taskboard_heading": "## SVD-032 Refactor each app family against the all-tools binding matrix",
         "taskboard_anchor": "#svd-032-refactor-each-app-family-against-the-all-tools-binding-matrix",
         "status_field": "completed",
@@ -406,7 +420,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1350,
+        "taskboard_line": 1355,
         "taskboard_heading": "## SVD-033 Generate composite workflows that exercise cross-service tool chains",
         "taskboard_anchor": "#svd-033-generate-composite-workflows-that-exercise-cross-service-tool-chains",
         "status_field": "completed",
@@ -450,7 +464,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1361,
+        "taskboard_line": 1366,
         "taskboard_heading": "## SVD-034 Generate ORB/IDL descriptors for every app-routable tool and workflow",
         "taskboard_anchor": "#svd-034-generate-orbidl-descriptors-for-every-app-routable-tool-and-workflow",
         "status_field": "completed",
@@ -493,7 +507,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1372,
+        "taskboard_line": 1377,
         "taskboard_heading": "## SVD-035 Extend Meta glasses coverage to every app-visible tool family",
         "taskboard_anchor": "#svd-035-extend-meta-glasses-coverage-to-every-app-visible-tool-family",
         "status_field": "completed",
@@ -536,7 +550,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1383,
+        "taskboard_line": 1388,
         "taskboard_heading": "## SVD-036 Add full-tool policy receipt and audit release gates",
         "taskboard_anchor": "#svd-036-add-full-tool-policy-receipt-and-audit-release-gates",
         "status_field": "completed",
@@ -576,7 +590,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1394,
+        "taskboard_line": 1399,
         "taskboard_heading": "## SVD-037 Wire all-tools tasks into the ipfs_accelerate_py agent supervisor",
         "taskboard_anchor": "#svd-037-wire-all-tools-tasks-into-the-ipfsacceleratepy-agent-supervisor",
         "status_field": "completed",
@@ -624,7 +638,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1405,
+        "taskboard_line": 1410,
         "taskboard_heading": "## SVD-038 Extend release evidence aggregation to the exhaustive all-tools gate",
         "taskboard_anchor": "#svd-038-extend-release-evidence-aggregation-to-the-exhaustive-all-tools-gate",
         "status_field": "completed",
@@ -670,7 +684,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1416,
+        "taskboard_line": 1421,
         "taskboard_heading": "## SVD-039 Run Meta glasses simulator validation waves for high-risk and high-value tool families",
         "taskboard_anchor": "#svd-039-run-meta-glasses-simulator-validation-waves-for-high-risk-and-high-value-tool-families",
         "status_field": "completed",
@@ -708,7 +722,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1427,
+        "taskboard_line": 1432,
         "taskboard_heading": "## SVD-040 Produce an all-tools no-unknowns closeout or append the next discovered backlog",
         "taskboard_anchor": "#svd-040-produce-an-all-tools-no-unknowns-closeout-or-append-the-next-discovered-backlog",
         "status_field": "completed",
@@ -746,7 +760,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1540,
+        "taskboard_line": 1545,
         "taskboard_heading": "## SVD-041 Append phase-two all-tools supervisor plan",
         "taskboard_anchor": "#svd-041-append-phase-two-all-tools-supervisor-plan",
         "status_field": "completed",
@@ -790,7 +804,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1551,
+        "taskboard_line": 1556,
         "taskboard_heading": "## SVD-042 Generate the all-app all-tools capability matrix",
         "taskboard_anchor": "#svd-042-generate-the-all-app-all-tools-capability-matrix",
         "status_field": "completed",
@@ -828,7 +842,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1562,
+        "taskboard_line": 1567,
         "taskboard_heading": "## SVD-043 Reconcile legacy Playwright app selectors with the manifest",
         "taskboard_anchor": "#svd-043-reconcile-legacy-playwright-app-selectors-with-the-manifest",
         "status_field": "completed",
@@ -871,7 +885,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1573,
+        "taskboard_line": 1578,
         "taskboard_heading": "## SVD-044 Normalize the full ipfs_accelerate_py MCP adapter boundary",
         "taskboard_anchor": "#svd-044-normalize-the-full-ipfsacceleratepy-mcp-adapter-boundary",
         "status_field": "completed",
@@ -920,7 +934,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1584,
+        "taskboard_line": 1589,
         "taskboard_heading": "## SVD-045 Add all-app ORB/IDL handoff packet fixtures",
         "taskboard_anchor": "#svd-045-add-all-app-orbidl-handoff-packet-fixtures",
         "status_field": "completed",
@@ -957,7 +971,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1596,
+        "taskboard_line": 1601,
         "taskboard_heading": "## SVD-046 Ingest Meta glasses simulator evidence",
         "taskboard_anchor": "#svd-046-ingest-meta-glasses-simulator-evidence",
         "status_field": "completed",
@@ -991,7 +1005,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1607,
+        "taskboard_line": 1612,
         "taskboard_heading": "## SVD-047 Re-run the all-tools release closeout after adapter and simulator evidence",
         "taskboard_anchor": "#svd-047-re-run-the-all-tools-release-closeout-after-adapter-and-simulator-evidence",
         "status_field": "ready",
@@ -1032,7 +1046,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1627,
+        "taskboard_line": 1632,
         "taskboard_heading": "## SVD-048 Restore current-checkout all-tools evidence scripts",
         "taskboard_anchor": "#svd-048-restore-current-checkout-all-tools-evidence-scripts",
         "status_field": "completed",
@@ -1086,7 +1100,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1638,
+        "taskboard_line": 1643,
         "taskboard_heading": "## SVD-049 Capture current live MCP/MCP++ service and adapter evidence",
         "taskboard_anchor": "#svd-049-capture-current-live-mcpmcp-service-and-adapter-evidence",
         "status_field": "completed",
@@ -1128,7 +1142,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1649,
+        "taskboard_line": 1654,
         "taskboard_heading": "## SVD-050 Resume SVD-044 with the restored adapter source and redeploy the configured accelerate endpoint",
         "taskboard_anchor": "#svd-050-resume-svd-044-with-the-restored-adapter-source-and-redeploy-the-configured-accelerate-endpoint",
         "status_field": "completed",
@@ -1169,7 +1183,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1672,
+        "taskboard_line": 1677,
         "taskboard_heading": "## SVD-051 Append phase-four exhaustive app/tool handoff supervisor plan",
         "taskboard_anchor": "#svd-051-append-phase-four-exhaustive-apptool-handoff-supervisor-plan",
         "status_field": "completed",
@@ -1220,7 +1234,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1683,
+        "taskboard_line": 1688,
         "taskboard_heading": "## SVD-052 Prove every discovered MCP/MCP++ tool has an app route or deliberate non-app disposition",
         "taskboard_anchor": "#svd-052-prove-every-discovered-mcpmcp-tool-has-an-app-route-or-deliberate-non-app-disposition",
         "status_field": "completed",
@@ -1261,7 +1275,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1695,
+        "taskboard_line": 1700,
         "taskboard_heading": "## SVD-053 Generate server-family call-envelope fixtures for all app-routable tools",
         "taskboard_anchor": "#svd-053-generate-server-family-call-envelope-fixtures-for-all-app-routable-tools",
         "status_field": "completed",
@@ -1308,7 +1322,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1707,
+        "taskboard_line": 1712,
         "taskboard_heading": "## SVD-054 Wire all virtual desktop app smoke fixtures to MCP++ dispatch paths",
         "taskboard_anchor": "#svd-054-wire-all-virtual-desktop-app-smoke-fixtures-to-mcp-dispatch-paths",
         "status_field": "completed",
@@ -1348,7 +1362,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1719,
+        "taskboard_line": 1724,
         "taskboard_heading": "## SVD-055 Compile ORB/IDL handoff packets into Meta layer replay bundles",
         "taskboard_anchor": "#svd-055-compile-orbidl-handoff-packets-into-meta-layer-replay-bundles",
         "status_field": "completed",
@@ -1385,7 +1399,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1731,
+        "taskboard_line": 1736,
         "taskboard_heading": "## SVD-056 Verify Meta glasses control-plane ingestion and fallback routing",
         "taskboard_anchor": "#svd-056-verify-meta-glasses-control-plane-ingestion-and-fallback-routing",
         "status_field": "completed",
@@ -1432,7 +1446,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1743,
+        "taskboard_line": 1748,
         "taskboard_heading": "## SVD-057 Add all-tools release freshness, drift, and supervisor evidence gates",
         "taskboard_anchor": "#svd-057-add-all-tools-release-freshness-drift-and-supervisor-evidence-gates",
         "status_field": "completed",
@@ -1479,7 +1493,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1755,
+        "taskboard_line": 1760,
         "taskboard_heading": "## SVD-058 Run browser-compatible all-app UI evidence for the full SwissKnife desktop",
         "taskboard_anchor": "#svd-058-run-browser-compatible-all-app-ui-evidence-for-the-full-swissknife-desktop",
         "status_field": "completed",
@@ -1518,7 +1532,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1767,
+        "taskboard_line": 1772,
         "taskboard_heading": "## SVD-059 Execute the Meta glasses simulator handoff validation wave",
         "taskboard_anchor": "#svd-059-execute-the-meta-glasses-simulator-handoff-validation-wave",
         "status_field": "completed",
@@ -1551,7 +1565,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1778,
+        "taskboard_line": 1783,
         "taskboard_heading": "## SVD-060 Final all-tools ORB/IDL Meta glasses release closeout",
         "taskboard_anchor": "#svd-060-final-all-tools-orbidl-meta-glasses-release-closeout",
         "status_field": "waiting",
@@ -1600,7 +1614,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1802,
+        "taskboard_line": 1807,
         "taskboard_heading": "## SVD-061 Add the Agent Supervisor virtual desktop app and glasses profile",
         "taskboard_anchor": "#svd-061-add-the-agent-supervisor-virtual-desktop-app-and-glasses-profile",
         "status_field": "completed",
@@ -1649,7 +1663,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1813,
+        "taskboard_line": 1818,
         "taskboard_heading": "## SVD-062 Ingest supervisor goals, subgoals, and taskboard links from live queue evidence",
         "taskboard_anchor": "#svd-062-ingest-supervisor-goals-subgoals-and-taskboard-links-from-live-queue-evidence",
         "status_field": "completed",
@@ -1691,7 +1705,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1825,
+        "taskboard_line": 1830,
         "taskboard_heading": "## SVD-063 Build MCP++ prompt-steering envelopes for supervisor actions",
         "taskboard_anchor": "#svd-063-build-mcp-prompt-steering-envelopes-for-supervisor-actions",
         "status_field": "completed",
@@ -1705,7 +1719,7 @@
     },
     "SVD-064": {
       "title": "Run per-app UI/UX and backend-tool validation through the supervisor app",
-      "status": "ready",
+      "status": "completed",
       "priority": "P0",
       "track": "apps",
       "owner": "apps",
@@ -1721,13 +1735,20 @@
       "validation": [
         "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-all-app-validation.spec.ts --reporter=line"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/test/e2e/agent-supervisor-all-app-validation.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-all-app-validation.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor/"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1836,
+        "taskboard_line": 1841,
         "taskboard_heading": "## SVD-064 Run per-app UI/UX and backend-tool validation through the supervisor app",
         "taskboard_anchor": "#svd-064-run-per-app-uiux-and-backend-tool-validation-through-the-supervisor-app",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/test/e2e/agent-supervisor-all-app-validation.spec.ts",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-all-app-validation.json",
@@ -1737,7 +1758,7 @@
     },
     "SVD-065": {
       "title": "Compile Agent Supervisor ORB/IDL and Meta glasses handoff evidence",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "orb-idl",
       "owner": "glasses",
@@ -1752,13 +1773,19 @@
       "validation": [
         "cd swissknife && npx jest --config=config/jest/jest.config.cjs --runInBand --testMatch '**/test/mcp-plus-plus/agent-supervisor-glasses-handoff.test.ts'"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/test/mcp-plus-plus/agent-supervisor-glasses-handoff.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-glasses-handoff.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1846,
+        "taskboard_line": 1851,
         "taskboard_heading": "## SVD-065 Compile Agent Supervisor ORB/IDL and Meta glasses handoff evidence",
         "taskboard_anchor": "#svd-065-compile-agent-supervisor-orbidl-and-meta-glasses-handoff-evidence",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/test/mcp-plus-plus/agent-supervisor-glasses-handoff.test.ts",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-glasses-handoff.json"
@@ -1788,7 +1815,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1856,
+        "taskboard_line": 1861,
         "taskboard_heading": "## SVD-066 Close the supervisor-managed all-app MCP++ release loop",
         "taskboard_anchor": "#svd-066-close-the-supervisor-managed-all-app-mcp-release-loop",
         "status_field": "waiting",
@@ -1839,7 +1866,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1876,
+        "taskboard_line": 1881,
         "taskboard_heading": "## SVD-067 Append expanded Meta glasses I/O supervisor plan",
         "taskboard_anchor": "#svd-067-append-expanded-meta-glasses-io-supervisor-plan",
         "status_field": "completed",
@@ -1873,7 +1900,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1887,
+        "taskboard_line": 1892,
         "taskboard_heading": "## SVD-068 Build per-app expanded Meta glasses I/O capability map",
         "taskboard_anchor": "#svd-068-build-per-app-expanded-meta-glasses-io-capability-map",
         "status_field": "waiting",
@@ -1905,7 +1932,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1897,
+        "taskboard_line": 1902,
         "taskboard_heading": "## SVD-069 Build MCP++ permission and receipt envelopes for expanded glasses I/O",
         "taskboard_anchor": "#svd-069-build-mcp-permission-and-receipt-envelopes-for-expanded-glasses-io",
         "status_field": "waiting",
@@ -1937,7 +1964,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1907,
+        "taskboard_line": 1912,
         "taskboard_heading": "## SVD-070 Run hardware-free expanded Meta glasses I/O UI/UX validation",
         "taskboard_anchor": "#svd-070-run-hardware-free-expanded-meta-glasses-io-uiux-validation",
         "status_field": "waiting",
@@ -1968,7 +1995,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1917,
+        "taskboard_line": 1922,
         "taskboard_heading": "## SVD-071 Compile expanded I/O ORB/IDL and control-plane handoff packets",
         "taskboard_anchor": "#svd-071-compile-expanded-io-orbidl-and-control-plane-handoff-packets",
         "status_field": "waiting",
@@ -2010,7 +2037,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1927,
+        "taskboard_line": 1932,
         "taskboard_heading": "## SVD-072 Execute expanded Meta glasses I/O simulator validation",
         "taskboard_anchor": "#svd-072-execute-expanded-meta-glasses-io-simulator-validation",
         "status_field": "waiting",
@@ -2049,7 +2076,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1938,
+        "taskboard_line": 1943,
         "taskboard_heading": "## SVD-073 Establish the shared Profile F Groth16 multi-party ceremony contract",
         "taskboard_anchor": "#svd-073-establish-the-shared-profile-f-groth16-multi-party-ceremony-contract",
         "status_field": "completed",
@@ -2092,7 +2119,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1949,
+        "taskboard_line": 1954,
         "taskboard_heading": "## SVD-074 Bind Profile F ceremony validation to the `ipfs_datasets_py` Profile E dispatcher",
         "taskboard_anchor": "#svd-074-bind-profile-f-ceremony-validation-to-the-ipfsdatasetspy-profile-e-dispatcher",
         "status_field": "completed",
@@ -2132,7 +2159,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1960,
+        "taskboard_line": 1965,
         "taskboard_heading": "## SVD-075 Add strict Arkworks MPC ceremony admission for production proof operations",
         "taskboard_anchor": "#svd-075-add-strict-arkworks-mpc-ceremony-admission-for-production-proof-operations",
         "status_field": "completed",
@@ -2167,7 +2194,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1971,
+        "taskboard_line": 1976,
         "taskboard_heading": "## SVD-076 Implement and independently verify a genuine Arkworks multi-party setup transform",
         "taskboard_anchor": "#svd-076-implement-and-independently-verify-a-genuine-arkworks-multi-party-setup-transform",
         "status_field": "ready",
@@ -2201,7 +2228,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1981,
+        "taskboard_line": 1986,
         "taskboard_heading": "## SVD-077 Append Profile D execution-policy conformity plan",
         "taskboard_anchor": "#svd-077-append-profile-d-execution-policy-conformity-plan",
         "status_field": "completed",
@@ -2243,7 +2270,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 1992,
+        "taskboard_line": 1997,
         "taskboard_heading": "## SVD-078 Implement canonical Profile D evaluation in SwissKnife and ipfs_datasets_py",
         "taskboard_anchor": "#svd-078-implement-canonical-profile-d-evaluation-in-swissknife-and-ipfsdatasetspy",
         "status_field": "completed",
@@ -2284,7 +2311,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2003,
+        "taskboard_line": 2008,
         "taskboard_heading": "## SVD-079 Route ipfs_accelerate_py and ipfs_kit_py policy gates through the datasets package export",
         "taskboard_anchor": "#svd-079-route-ipfsacceleratepy-and-ipfskitpy-policy-gates-through-the-datasets-package-export",
         "status_field": "completed",
@@ -2339,7 +2366,7 @@
       },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2014,
+        "taskboard_line": 2019,
         "taskboard_heading": "## SVD-080 Prove Profile D HTTP and libp2p endpoint parity across all three backend servers",
         "taskboard_anchor": "#svd-080-prove-profile-d-http-and-libp2p-endpoint-parity-across-all-three-backend-servers",
         "status_field": "completed",
@@ -2375,7 +2402,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2025,
+        "taskboard_line": 2030,
         "taskboard_heading": "## SVD-081 Build a dedicated Profile D policy-evaluation ZKP circuit and verifier",
         "taskboard_anchor": "#svd-081-build-a-dedicated-profile-d-policy-evaluation-zkp-circuit-and-verifier",
         "status_field": "ready",
@@ -2808,7 +2835,7 @@
     },
     "SVD-092": {
       "title": "Synchronize the all-tools supervisor queue and Agent Supervisor task graph",
-      "status": "ready",
+      "status": "completed",
       "priority": "P0",
       "track": "launch",
       "owner": "launch",
@@ -2826,13 +2853,22 @@
       "validation": [
         "PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 -m pytest tests/test_virtual_ai_os_todo_queue.py::test_swissknife_all_tools_supervisor_queue_is_resumable -q && cd swissknife && npm run test:run -- test/mcp-plus-plus/agent-supervisor-task-graph.test.ts"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json",
+          "swissknife/src/services/apps/agent-supervisor-task-graph.ts",
+          "swissknife/test/mcp-plus-plus/agent-supervisor-task-graph.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-task-graph.json",
+          "swissknife/web/data/agent-supervisor-task-graph.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2087,
+        "taskboard_line": 2092,
         "taskboard_heading": "## SVD-092 Synchronize the all-tools supervisor queue and Agent Supervisor task graph",
         "taskboard_anchor": "#svd-092-synchronize-the-all-tools-supervisor-queue-and-agent-supervisor-task-graph",
-        "status_field": "ready",
+        "status_field": "completed",
         "evidence_outputs": [
           "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json",
           "swissknife/src/services/apps/agent-supervisor-task-graph.ts",
@@ -2844,7 +2880,7 @@
     },
     "SVD-093": {
       "title": "Capture a live all-profile capability matrix for SwissKnife and the three backends",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "integration",
       "owner": "integration",
@@ -2859,13 +2895,20 @@
       "validation": [
         "cd swissknife && node scripts/capture-all-profile-service-matrix.cjs"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/scripts/capture-all-profile-service-matrix.cjs",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-profile-service-matrix.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-profile-service-matrix.md"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2097,
+        "taskboard_line": 2102,
         "taskboard_heading": "## SVD-093 Capture a live all-profile capability matrix for SwissKnife and the three backends",
         "taskboard_anchor": "#svd-093-capture-a-live-all-profile-capability-matrix-for-swissknife-and-the-three-backends",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/scripts/capture-all-profile-service-matrix.cjs",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-profile-service-matrix.json",
@@ -2875,7 +2918,7 @@
     },
     "SVD-094": {
       "title": "Expose Agent Supervisor read, receipt, search, and governed-action methods through backend MCP++ routes",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "mcp",
       "owner": "mcp",
@@ -2893,13 +2936,22 @@
       "validation": [
         "cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts test/mcp-plus-plus/agent-supervisor-prompt-steering.test.ts && node scripts/capture-all-profile-service-matrix.cjs"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/",
+          "external/ipfs_kit/ipfs_kit_py/mcp_server/",
+          "external/ipfs_datasets/ipfs_datasets_py/mcp_server/",
+          "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-live-backend-contract.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2107,
+        "taskboard_line": 2112,
         "taskboard_heading": "## SVD-094 Expose Agent Supervisor read, receipt, search, and governed-action methods through backend MCP++ routes",
         "taskboard_anchor": "#svd-094-expose-agent-supervisor-read-receipt-search-and-governed-action-methods-through-backend-mcp-routes",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/",
           "external/ipfs_kit/ipfs_kit_py/mcp_server/",
@@ -2911,7 +2963,7 @@
     },
     "SVD-095": {
       "title": "Bind every SwissKnife application behavior to live backend-tool intents and safe fallbacks",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "apps",
       "owner": "apps",
@@ -2927,13 +2979,20 @@
       "validation": [
         "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-live-tool-contract.test.ts && node scripts/capture-all-profile-service-matrix.cjs"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/src/services/apps/all-app-live-tool-contract.ts",
+          "swissknife/test/mcp-plus-plus/all-app-live-tool-contract.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-tool-contract.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2117,
+        "taskboard_line": 2122,
         "taskboard_heading": "## SVD-095 Bind every SwissKnife application behavior to live backend-tool intents and safe fallbacks",
         "taskboard_anchor": "#svd-095-bind-every-swissknife-application-behavior-to-live-backend-tool-intents-and-safe-fallbacks",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/src/services/apps/all-app-live-tool-contract.ts",
           "swissknife/test/mcp-plus-plus/all-app-live-tool-contract.test.ts",
@@ -2943,7 +3002,7 @@
     },
     "SVD-096": {
       "title": "Execute all-app backend behavior workflows and user-visible recovery paths",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "quality",
       "owner": "quality",
@@ -2958,13 +3017,20 @@
       "validation": [
         "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.config.ts test/e2e/all-app-live-backend-behavior.spec.ts --reporter=line"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/test/e2e/all-app-live-backend-behavior.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-backend-behavior.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/live-backend/"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2127,
+        "taskboard_line": 2132,
         "taskboard_heading": "## SVD-096 Execute all-app backend behavior workflows and user-visible recovery paths",
         "taskboard_anchor": "#svd-096-execute-all-app-backend-behavior-workflows-and-user-visible-recovery-paths",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/test/e2e/all-app-live-backend-behavior.spec.ts",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-backend-behavior.json",
@@ -2974,7 +3040,7 @@
     },
     "SVD-097": {
       "title": "Validate Agent Supervisor task dispatch, goals/subgoals, and prompt steering from the desktop application",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "supervisor",
       "owner": "ipfs_accelerate_py",
@@ -2991,13 +3057,20 @@
       "validation": [
         "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-all-app-validation.spec.ts --reporter=line"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/test/e2e/agent-supervisor-all-app-validation.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-all-app-validation.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor/"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2137,
+        "taskboard_line": 2142,
         "taskboard_heading": "## SVD-097 Validate Agent Supervisor task dispatch, goals/subgoals, and prompt steering from the desktop application",
         "taskboard_anchor": "#svd-097-validate-agent-supervisor-task-dispatch-goalssubgoals-and-prompt-steering-from-the-desktop-application",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/test/e2e/agent-supervisor-all-app-validation.spec.ts",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-all-app-validation.json",
@@ -3007,7 +3080,7 @@
     },
     "SVD-098": {
       "title": "Compile current all-app ORB/IDL handoff packets for display and expanded I/O",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "orb-idl",
       "owner": "glasses",
@@ -3022,13 +3095,19 @@
       "validation": [
         "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-live-orb-idl-handoff.test.ts"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/test/mcp-plus-plus/all-app-live-orb-idl-handoff.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-orb-idl-handoff.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2147,
+        "taskboard_line": 2152,
         "taskboard_heading": "## SVD-098 Compile current all-app ORB/IDL handoff packets for display and expanded I/O",
         "taskboard_anchor": "#svd-098-compile-current-all-app-orbidl-handoff-packets-for-display-and-expanded-io",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/test/mcp-plus-plus/all-app-live-orb-idl-handoff.test.ts",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-orb-idl-handoff.json"
@@ -3037,7 +3116,7 @@
     },
     "SVD-099": {
       "title": "Replay all display, camera, microphone, speaker, and fallback packets in the Meta device simulator",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "device",
       "owner": "glasses",
@@ -3052,13 +3131,20 @@
       "validation": [
         "cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts test/e2e/all-app-meta-device-simulator.spec.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/test/e2e/all-app-meta-device-simulator.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-meta-device-simulator.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/meta-device-simulator/"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2157,
+        "taskboard_line": 2162,
         "taskboard_heading": "## SVD-099 Replay all display, camera, microphone, speaker, and fallback packets in the Meta device simulator",
         "taskboard_anchor": "#svd-099-replay-all-display-camera-microphone-speaker-and-fallback-packets-in-the-meta-device-simulator",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/test/e2e/all-app-meta-device-simulator.spec.ts",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-meta-device-simulator.json",
@@ -3068,7 +3154,7 @@
     },
     "SVD-100": {
       "title": "Prove HTTP/libp2p peer interoperability and all-tool discovery from the SwissKnife client",
-      "status": "waiting",
+      "status": "completed",
       "priority": "P0",
       "track": "transport",
       "owner": "mcp",
@@ -3084,13 +3170,19 @@
       "validation": [
         "cd swissknife && node scripts/capture-swissknife-all-tools-peer-evidence.cjs"
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "swissknife/scripts/capture-swissknife-all-tools-peer-evidence.cjs",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2167,
+        "taskboard_line": 2172,
         "taskboard_heading": "## SVD-100 Prove HTTP/libp2p peer interoperability and all-tool discovery from the SwissKnife client",
         "taskboard_anchor": "#svd-100-prove-httplibp2p-peer-interoperability-and-all-tool-discovery-from-the-swissknife-client",
-        "status_field": "waiting",
+        "status_field": "completed",
         "evidence_outputs": [
           "swissknife/scripts/capture-swissknife-all-tools-peer-evidence.cjs",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json"
@@ -3099,7 +3191,7 @@
     },
     "SVD-101": {
       "title": "Aggregate freshness-aware release evidence and close only named gaps",
-      "status": "waiting",
+      "status": "ready",
       "priority": "P0",
       "track": "release",
       "owner": "platform",
@@ -3121,7 +3213,7 @@
       "evidence": {},
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
-        "taskboard_line": 2177,
+        "taskboard_line": 2182,
         "taskboard_heading": "## SVD-101 Aggregate freshness-aware release evidence and close only named gaps",
         "taskboard_anchor": "#svd-101-aggregate-freshness-aware-release-evidence-and-close-only-named-gaps",
         "status_field": "waiting",
@@ -3129,6 +3221,451 @@
           "swissknife/scripts/build-virtual-desktop-release-evidence.cjs",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json",
           "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md",
+          "swissknife/docs/refactor-final-signoff.md"
+        ]
+      }
+    },
+    "SVD-102": {
+      "title": "Build a fresh all-app and all-tool live-binding gap ledger",
+      "status": "ready",
+      "priority": "P0",
+      "track": "release",
+      "owner": "platform",
+      "depends_on": [
+        "SVD-100"
+      ],
+      "outputs": [
+        "swissknife/scripts/build-all-app-live-binding-gap-ledger.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-binding-gap-ledger.json",
+        "swissknife/docs/all-app-live-binding-gap-ledger.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/build-all-app-live-binding-gap-ledger.cjs"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2200,
+        "taskboard_heading": "## SVD-102 Build a fresh all-app and all-tool live-binding gap ledger",
+        "taskboard_anchor": "#svd-102-build-a-fresh-all-app-and-all-tool-live-binding-gap-ledger",
+        "status_field": "ready",
+        "evidence_outputs": [
+          "swissknife/scripts/build-all-app-live-binding-gap-ledger.cjs",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-binding-gap-ledger.json",
+          "swissknife/docs/all-app-live-binding-gap-ledger.md"
+        ]
+      }
+    },
+    "SVD-103": {
+      "title": "Define an executable per-app backend disposition contract",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "apps",
+      "owner": "apps",
+      "depends_on": [
+        "SVD-102"
+      ],
+      "outputs": [
+        "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+        "swissknife/src/services/apps/all-app-executable-backend-contract.schema.json",
+        "swissknife/test/mcp-plus-plus/all-app-executable-backend-contract.test.ts"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-executable-backend-contract.test.ts"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2210,
+        "taskboard_heading": "## SVD-103 Define an executable per-app backend disposition contract",
+        "taskboard_anchor": "#svd-103-define-an-executable-per-app-backend-disposition-contract",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+          "swissknife/src/services/apps/all-app-executable-backend-contract.schema.json",
+          "swissknife/test/mcp-plus-plus/all-app-executable-backend-contract.test.ts"
+        ]
+      }
+    },
+    "SVD-104": {
+      "title": "Materialize browser-safe live bindings for declared backend pairs",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "apps",
+      "owner": "apps",
+      "depends_on": [
+        "SVD-102",
+        "SVD-103"
+      ],
+      "outputs": [
+        "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+        "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-tool-bindings.json"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-executable-backend-contract.test.ts test/browser/all-app-tool-gateway.test.ts"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2220,
+        "taskboard_heading": "## SVD-104 Materialize browser-safe live bindings for declared backend pairs",
+        "taskboard_anchor": "#svd-104-materialize-browser-safe-live-bindings-for-declared-backend-pairs",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+          "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-tool-bindings.json"
+        ]
+      }
+    },
+    "SVD-105": {
+      "title": "Map every backend tool to an app, diagnostic surface, or governed server-only disposition",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "mcp",
+      "owner": "mcp",
+      "depends_on": [
+        "SVD-102",
+        "SVD-104"
+      ],
+      "outputs": [
+        "swissknife/src/services/mcp/all-tools-disposition-catalog.ts",
+        "swissknife/test/mcp-plus-plus/all-tools-disposition-catalog.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-disposition-catalog.json"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-tools-disposition-catalog.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2230,
+        "taskboard_heading": "## SVD-105 Map every backend tool to an app, diagnostic surface, or governed server-only disposition",
+        "taskboard_anchor": "#svd-105-map-every-backend-tool-to-an-app-diagnostic-surface-or-governed-server-only-disposition",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/src/services/mcp/all-tools-disposition-catalog.ts",
+          "swissknife/test/mcp-plus-plus/all-tools-disposition-catalog.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-disposition-catalog.json"
+        ]
+      }
+    },
+    "SVD-106": {
+      "title": "Execute exhaustive all-app behavior, recovery, and UI evidence workflows",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "quality",
+      "owner": "quality",
+      "depends_on": [
+        "SVD-104",
+        "SVD-105"
+      ],
+      "outputs": [
+        "swissknife/test/e2e/all-app-live-behavior-proof.spec.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-behavior-proof.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/live-behavior-proof/"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.config.ts test/e2e/all-app-live-behavior-proof.spec.ts --reporter=line"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2240,
+        "taskboard_heading": "## SVD-106 Execute exhaustive all-app behavior, recovery, and UI evidence workflows",
+        "taskboard_anchor": "#svd-106-execute-exhaustive-all-app-behavior-recovery-and-ui-evidence-workflows",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test/e2e/all-app-live-behavior-proof.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-behavior-proof.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/live-behavior-proof/"
+        ]
+      }
+    },
+    "SVD-107": {
+      "title": "Complete the three-backend Agent Supervisor Console runtime",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "supervisor",
+      "owner": "ipfs_accelerate_py",
+      "depends_on": [
+        "SVD-103",
+        "SVD-104"
+      ],
+      "outputs": [
+        "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+        "swissknife/web/js/apps/agent-supervisor.js",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-three-backend-runtime.json"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts test/mcp-plus-plus/agent-supervisor-prompt-steering.test.ts && node scripts/capture-all-profile-service-matrix.cjs"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2250,
+        "taskboard_heading": "## SVD-107 Complete the three-backend Agent Supervisor Console runtime",
+        "taskboard_anchor": "#svd-107-complete-the-three-backend-agent-supervisor-console-runtime",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+          "swissknife/web/js/apps/agent-supervisor.js",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-three-backend-runtime.json"
+        ]
+      }
+    },
+    "SVD-108": {
+      "title": "Govern prompt steering and goal-to-task lifecycle from the desktop",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "supervisor",
+      "owner": "ipfs_accelerate_py",
+      "depends_on": [
+        "SVD-107"
+      ],
+      "outputs": [
+        "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-goal-task-lifecycle.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor-lifecycle/"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts --reporter=line"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2260,
+        "taskboard_heading": "## SVD-108 Govern prompt steering and goal-to-task lifecycle from the desktop",
+        "taskboard_anchor": "#svd-108-govern-prompt-steering-and-goal-to-task-lifecycle-from-the-desktop",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-goal-task-lifecycle.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor-lifecycle/"
+        ]
+      }
+    },
+    "SVD-109": {
+      "title": "Re-prove MCP++ Profiles A through H from each applicable desktop path",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "transport",
+      "owner": "mcp",
+      "depends_on": [
+        "SVD-104",
+        "SVD-107",
+        "SVD-108"
+      ],
+      "outputs": [
+        "swissknife/test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2270,
+        "taskboard_heading": "## SVD-109 Re-prove MCP++ Profiles A through H from each applicable desktop path",
+        "taskboard_anchor": "#svd-109-re-prove-mcp-profiles-a-through-h-from-each-applicable-desktop-path",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json"
+        ]
+      }
+    },
+    "SVD-110": {
+      "title": "Compile exhaustive ORB/IDL action handoff contracts",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "orb-idl",
+      "owner": "glasses",
+      "depends_on": [
+        "SVD-106",
+        "SVD-108",
+        "SVD-109"
+      ],
+      "outputs": [
+        "swissknife/test/mcp-plus-plus/all-app-orb-idl-action-handoff.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-orb-idl-action-handoff.json"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-orb-idl-action-handoff.test.ts"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2280,
+        "taskboard_heading": "## SVD-110 Compile exhaustive ORB/IDL action handoff contracts",
+        "taskboard_anchor": "#svd-110-compile-exhaustive-orbidl-action-handoff-contracts",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test/mcp-plus-plus/all-app-orb-idl-action-handoff.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-orb-idl-action-handoff.json"
+        ]
+      }
+    },
+    "SVD-111": {
+      "title": "Re-run Meta device-simulator modality, privacy, and fallback validation",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "device",
+      "owner": "glasses",
+      "depends_on": [
+        "SVD-110"
+      ],
+      "outputs": [
+        "swissknife/test/e2e/all-app-meta-device-simulator-proof.spec.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-meta-device-simulator-proof.json",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/meta-device-simulator-proof/"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts test/e2e/all-app-meta-device-simulator-proof.spec.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2290,
+        "taskboard_heading": "## SVD-111 Re-run Meta device-simulator modality, privacy, and fallback validation",
+        "taskboard_anchor": "#svd-111-re-run-meta-device-simulator-modality-privacy-and-fallback-validation",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test/e2e/all-app-meta-device-simulator-proof.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-meta-device-simulator-proof.json",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/meta-device-simulator-proof/"
+        ]
+      }
+    },
+    "SVD-112": {
+      "title": "Gate cross-viewport UI/UX, accessibility, and failure visibility",
+      "status": "waiting",
+      "priority": "P1",
+      "track": "quality",
+      "owner": "quality",
+      "depends_on": [
+        "SVD-106",
+        "SVD-107",
+        "SVD-111"
+      ],
+      "outputs": [
+        "swissknife/test/e2e/all-app-ui-ux-accessibility.spec.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-ui-ux-accessibility.json"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts test/e2e/all-app-ui-ux-accessibility.spec.ts --reporter=line"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2300,
+        "taskboard_heading": "## SVD-112 Gate cross-viewport UI/UX, accessibility, and failure visibility",
+        "taskboard_anchor": "#svd-112-gate-cross-viewport-uiux-accessibility-and-failure-visibility",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test/e2e/all-app-ui-ux-accessibility.spec.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-ui-ux-accessibility.json"
+        ]
+      }
+    },
+    "SVD-113": {
+      "title": "Persist and exchange supervisor dispatch artifacts through CIDs and event DAGs",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "storage",
+      "owner": "ipfs_kit_py",
+      "depends_on": [
+        "SVD-107",
+        "SVD-109"
+      ],
+      "outputs": [
+        "swissknife/src/services/storage/supervisor-dispatch-artifact-store.ts",
+        "swissknife/test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/supervisor-dispatch-artifact-store.json"
+      ],
+      "validation": [
+        "cd swissknife && npm run test:run -- test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2310,
+        "taskboard_heading": "## SVD-113 Persist and exchange supervisor dispatch artifacts through CIDs and event DAGs",
+        "taskboard_anchor": "#svd-113-persist-and-exchange-supervisor-dispatch-artifacts-through-cids-and-event-dags",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/src/services/storage/supervisor-dispatch-artifact-store.ts",
+          "swissknife/test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/supervisor-dispatch-artifact-store.json"
+        ]
+      }
+    },
+    "SVD-114": {
+      "title": "Rebuild freshness-aware release evidence without placeholder loopholes",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "release",
+      "owner": "platform",
+      "depends_on": [
+        "SVD-101",
+        "SVD-102",
+        "SVD-106",
+        "SVD-109",
+        "SVD-111",
+        "SVD-112",
+        "SVD-113"
+      ],
+      "outputs": [
+        "swissknife/scripts/build-virtual-desktop-release-evidence.cjs",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json",
+        "swissknife/docs/release-readiness-report.json",
+        "swissknife/docs/release-readiness-report.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale && node scripts/release-readiness-gate.mjs"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2320,
+        "taskboard_heading": "## SVD-114 Rebuild freshness-aware release evidence without placeholder loopholes",
+        "taskboard_anchor": "#svd-114-rebuild-freshness-aware-release-evidence-without-placeholder-loopholes",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/scripts/build-virtual-desktop-release-evidence.cjs",
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json",
+          "swissknife/docs/release-readiness-report.json",
+          "swissknife/docs/release-readiness-report.md"
+        ]
+      }
+    },
+    "SVD-115": {
+      "title": "Independently replay the all-app release closeout",
+      "status": "waiting",
+      "priority": "P0",
+      "track": "release",
+      "owner": "platform",
+      "depends_on": [
+        "SVD-114"
+      ],
+      "outputs": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/independent-all-app-release-replay.json",
+        "swissknife/docs/refactor-final-signoff.md"
+      ],
+      "validation": [
+        "cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/release-readiness-gate.mjs && git diff --check"
+      ],
+      "evidence": {},
+      "provenance": {
+        "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        "taskboard_line": 2330,
+        "taskboard_heading": "## SVD-115 Independently replay the all-app release closeout",
+        "taskboard_anchor": "#svd-115-independently-replay-the-all-app-release-closeout",
+        "status_field": "waiting",
+        "evidence_outputs": [
+          "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/independent-all-app-release-replay.json",
           "swissknife/docs/refactor-final-signoff.md"
         ]
       }
@@ -3442,8 +3979,67 @@
       "SVD-101"
     ],
     "SVD-100": [
-      "SVD-101"
+      "SVD-101",
+      "SVD-102"
     ],
-    "SVD-101": []
+    "SVD-101": [
+      "SVD-114"
+    ],
+    "SVD-102": [
+      "SVD-103",
+      "SVD-104",
+      "SVD-105",
+      "SVD-114"
+    ],
+    "SVD-103": [
+      "SVD-104",
+      "SVD-107"
+    ],
+    "SVD-104": [
+      "SVD-105",
+      "SVD-106",
+      "SVD-107",
+      "SVD-109"
+    ],
+    "SVD-105": [
+      "SVD-106"
+    ],
+    "SVD-106": [
+      "SVD-110",
+      "SVD-112",
+      "SVD-114"
+    ],
+    "SVD-107": [
+      "SVD-108",
+      "SVD-109",
+      "SVD-112",
+      "SVD-113"
+    ],
+    "SVD-108": [
+      "SVD-109",
+      "SVD-110"
+    ],
+    "SVD-109": [
+      "SVD-110",
+      "SVD-113",
+      "SVD-114"
+    ],
+    "SVD-110": [
+      "SVD-111"
+    ],
+    "SVD-111": [
+      "SVD-112",
+      "SVD-114"
+    ],
+    "SVD-112": [
+      "SVD-114"
+    ],
+    "SVD-113": [
+      "SVD-114"
+    ],
+    "SVD-114": [
+      "SVD-115"
+    ],
+    "SVD-115": []
   }
 }
