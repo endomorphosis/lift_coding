@@ -2121,7 +2121,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 
 ## SWR-144 Canonicalize restored service implementations and retarget every importer
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: services/ownership
 - Dedupe key: swissknife_refactor:restored_service_canonicalization_and_import_retargeting
@@ -2129,6 +2129,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 - Outputs: swissknife/src/services, swissknife/src/module-ownership.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/service-module-public-api.md
 - Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:fast -- test/architecture/source-module-boundaries.test.js
 - Acceptance: Each duplicate set has one canonical implementation in its owned service family. Imports use that family public API rather than a root or sibling shadow copy. Deontic, FOL, DCEC, proof-engine, and browser-runtime candidates are reconciled by behavior and tests, not filename. Deleted copies are not replaced by compatibility implementations; compatibility is limited to explicit barrel exports that contain no executable duplicate code. Existing public APIs retain documented migration paths and all changed importers compile.
+- Resolution: Reconciled into SwissKnife main at `81011f14`, preserving the existing integration history and the canonicalized SWR-144 implementation. The merged tree passed `services:audit`, `typecheck:services`, the 35-test source-module boundary suite, and the 16-test static browser-compatibility suite.
 
 ## SWR-145 Enforce merge-resistant service ownership and browser-safe public entrypoints
 
