@@ -2133,7 +2133,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 
 ## SWR-145 Enforce merge-resistant service ownership and browser-safe public entrypoints
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: services/browser-boundaries
 - Dedupe key: swissknife_refactor:merge_resistant_duplicate_guard_and_browser_public_api
@@ -2141,6 +2141,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 - Outputs: swissknife/scripts/audit-source-modules.mjs, swissknife/src/module-ownership.json, swissknife/docs/service-boundary-audit.json, swissknife/test/architecture/source-module-boundaries.test.js, swissknife/docs/browser-compatibility-inventory.md
 - Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:browser-compat && npm run audit:bundle-host-leakage
 - Acceptance: The ownership audit fails for a restored or renamed executable duplicate, a root implementation without an explicit owner, undocumented deep imports, a browser export that reaches a host-only dependency, or an unapproved browser entrypoint with behavior equivalent to another module. Regression fixtures cover every repaired duplicate family. Browser-facing entries resolve through canonical public APIs and preserve default-enabled real libp2p configuration, typed remote MCP boundaries, and TS/WASM-only proof selection. SWR-137 through SWR-142 cannot pass from historical evidence or a path-only inventory.
+- Resolution: Reconciled into SwissKnife main at `56a7ed5c`. The integration exposed an all-tools application deep import of the private glasses expanded-I/O implementation; it now uses the glasses public API. The dependency-link symlinks used by supervisor worktrees are explicitly ignored, preventing non-source checkout dirt from blocking merge reconciliation. The merged tree passed the ownership audit, host typecheck, 77 browser static/runtime tests, browser bundle host-leakage audit, and 45 source-module boundary tests.
 
 ## SWR-146 Pin a portable browser-validation Node toolchain for supervisor lanes
 
