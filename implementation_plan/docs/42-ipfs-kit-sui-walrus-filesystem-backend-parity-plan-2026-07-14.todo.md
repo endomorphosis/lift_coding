@@ -164,7 +164,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_fsspec_writes.py
 
 ## WALRUS-013 Register protocols and package extras without side effects
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-011
 - Work: Register installed and vendored fsspec paths, `walrus` and immutable
   blob URL forms, optional dependencies, lazy imports, and wheel/sdist metadata.
