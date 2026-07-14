@@ -2161,7 +2161,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-099 Replay all display, camera, microphone, speaker, and fallback packets in the Meta device simulator
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: device
 - Depends on: SVD-098
