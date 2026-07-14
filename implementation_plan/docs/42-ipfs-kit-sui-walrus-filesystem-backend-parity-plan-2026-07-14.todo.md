@@ -118,7 +118,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_runtime_client.py
 
 ## WALRUS-008 Implement service configuration and secure state layout
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-003, WALRUS-007
 - Work: Define client-only and managed publisher/aggregator modes, network,
   data/cache directories, ports, credential references, permissions, and
