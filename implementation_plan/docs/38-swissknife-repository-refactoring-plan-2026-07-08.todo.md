@@ -2011,7 +2011,7 @@ success paths.
 
 ## SWR-136 Recover and commit a conflict-free Phase 20 baseline with source-to-evidence provenance
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: recovery/source
 - Dedupe key: swissknife_refactor:recover_conflict_free_phase_20_committed_baseline
