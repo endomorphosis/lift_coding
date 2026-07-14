@@ -2026,7 +2026,7 @@ success paths.
 - Priority: P0
 - Track: services/browser-boundaries
 - Dedupe key: swissknife_refactor:recovered_baseline_service_and_browser_boundary_revalidation
-- Depends on: SWR-136
+- Depends on: SWR-136, SWR-145
 - Outputs: swissknife/docs/service-boundary-audit.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/browser-compatibility-inventory.json, swissknife/docs/browser-compatibility-inventory.md
 - Validation: cd swissknife && npm run services:audit && npm run typecheck && npm run build:web && npm run test:browser-compat && npm run audit:bundle-host-leakage
 - Acceptance: The recovered tree has zero non-index duplicate service basenames, zero root service implementation violations, zero undocumented deep imports, zero browser-reachable host-only imports, and zero unknown executable browser paths. The audit fixtures prove that restored duplicates, root implementations, and Node or Python execution edges fail the gate.
@@ -2085,3 +2085,55 @@ success paths.
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
 - Validation: cd swissknife && npm run release:readiness
 - Acceptance: The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
+
+## Phase 22: Restored Service Repair And Browser-Native Closure
+
+The recovered baseline must be treated as suspect until the service tree is scanned
+for basename, normalized-content, and behavioral duplicates. The initial audit has
+already found source-equal candidates spanning root service files and owned families
+such as deontic, FOL, DCEC, proof-engine, and browser entrypoints. Similar-looking
+browser entrypoints are not automatically duplicates: each must be explicitly
+classified as a canonical implementation, an intentional narrow entrypoint, or a
+restored shadow copy. The repair order is inventory, canonicalization, and a
+merge-resistant ownership gate. Only then may SWR-137 through SWR-142 make browser,
+libp2p, TS/WASM proof, all-app, and release claims.
+
+Browser requirements remain non-negotiable throughout this phase: browser exports
+must not execute Python, Node builtins, shell commands, filesystem APIs, native
+bindings, or simulated proof and peer results. Libp2p stays enabled by default and
+must use real browser-supported transports. The browser proof surface must use real
+TypeScript or WebAssembly execution, with typed unavailability when a backend cannot
+run. Remote Python services are allowed only behind typed MCP capability boundaries.
+
+## SWR-143 Inventory restored service duplicates by basename, normalized content, and behavior
+
+- Status: waiting
+- Priority: P0
+- Track: services/recovery
+- Dedupe key: swissknife_refactor:restored_service_duplicate_behavioral_inventory
+- Depends on: SWR-136
+- Outputs: swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/restored-service-duplicate-inventory.md, swissknife/src/module-ownership.json, swissknife/test/architecture/source-module-boundaries.test.js
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services
+- Acceptance: The inventory covers every executable source file under `src/services`, classifies basename collisions, normalized-content collisions, and behaviorally equivalent modules, and records hashes, importers, public entrypoints, runtime class, canonical owner, and disposition. It rejects a copy merely renamed to evade basename detection. Intentional multi-entrypoints require a named owner, distinct supported public contract, and a regression test; no blanket allowlist or documentation-only exemption is accepted.
+
+## SWR-144 Canonicalize restored service implementations and retarget every importer
+
+- Status: waiting
+- Priority: P0
+- Track: services/ownership
+- Dedupe key: swissknife_refactor:restored_service_canonicalization_and_import_retargeting
+- Depends on: SWR-143
+- Outputs: swissknife/src/services, swissknife/src/module-ownership.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/service-module-public-api.md
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:fast -- test/architecture/source-module-boundaries.test.js
+- Acceptance: Each duplicate set has one canonical implementation in its owned service family. Imports use that family public API rather than a root or sibling shadow copy. Deontic, FOL, DCEC, proof-engine, and browser-runtime candidates are reconciled by behavior and tests, not filename. Deleted copies are not replaced by compatibility implementations; compatibility is limited to explicit barrel exports that contain no executable duplicate code. Existing public APIs retain documented migration paths and all changed importers compile.
+
+## SWR-145 Enforce merge-resistant service ownership and browser-safe public entrypoints
+
+- Status: waiting
+- Priority: P0
+- Track: services/browser-boundaries
+- Dedupe key: swissknife_refactor:merge_resistant_duplicate_guard_and_browser_public_api
+- Depends on: SWR-144
+- Outputs: swissknife/scripts/audit-source-modules.mjs, swissknife/src/module-ownership.json, swissknife/docs/service-boundary-audit.json, swissknife/test/architecture/source-module-boundaries.test.js, swissknife/docs/browser-compatibility-inventory.md
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:browser-compat && npm run audit:bundle-host-leakage
+- Acceptance: The ownership audit fails for a restored or renamed executable duplicate, a root implementation without an explicit owner, undocumented deep imports, a browser export that reaches a host-only dependency, or an unapproved browser entrypoint with behavior equivalent to another module. Regression fixtures cover every repaired duplicate family. Browser-facing entries resolve through canonical public APIs and preserve default-enabled real libp2p configuration, typed remote MCP boundaries, and TS/WASM-only proof selection. SWR-137 through SWR-142 cannot pass from historical evidence or a path-only inventory.
