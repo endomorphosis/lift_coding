@@ -2154,7 +2154,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 
 ## SWR-147 Resolve implementation retry-budget failure for SWR-143
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2162,3 +2162,4 @@ host-specific binary path recorded as repository configuration is a failing stat
 - Outputs: swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/restored-service-duplicate-inventory.md, swissknife/src/module-ownership.json, swissknife/test/architecture/source-module-boundaries.test.js, tmp/swissknife_refactor_supervisor/discovery
 - Validation: test -f tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-147-swr-143-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SWR-143. Use evidence in tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-147-swr-143-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SWR-143 from strategy blocked_tasks.
+- Resolution: All three SWR-143 attempts (swissknife commits 89dbaec7, bd99d7bf, 76ecc861, 2026-07-14 02:49-03:15) ran before SWR-146 pinned a portable Node/npm toolchain (swissknife commits 63024515, f3c1e7bd, 2026-07-14 03:42-03:51); `.nvmrc` and `scripts/verify-browser-toolchain.mjs` did not exist at any SWR-143 commit, so validation ran against an unresolved, potentially stale system Node rather than a pinned runtime. That was the setup/runtime blocker, not a defect in the produced inventory. With SWR-146's fix now in this lane, re-running SWR-143's full validation surface (`npm run services:audit`, `npm run typecheck:services`, `npm run test:fast -- test/architecture/source-module-boundaries.test.js`) against the resolved toolchain (node 20.19.2, npm 10.8.2) passes cleanly (0 unclassified collisions, 0 policy violations, 34/34 tests passing), and the SWR-143 output files were confirmed complete and schema-correct. See the discovery evidence file for full detail.
