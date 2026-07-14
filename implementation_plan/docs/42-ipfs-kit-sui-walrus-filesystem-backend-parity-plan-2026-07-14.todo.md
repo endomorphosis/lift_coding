@@ -174,7 +174,7 @@ storage and epoch policy.
 ## Phase 3 - VFS, Buckets, And Operator Surfaces
 
 ## WALRUS-014 Add named backend registry and VFS mounting
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-008, WALRUS-012, WALRUS-013
 - Work: Add validated named Walrus backends and VFS mounts with explicit
   backend dispatch, capability reporting, no silent fallback, and lineage.
