@@ -60,6 +60,9 @@ conformance/
 !data/swissknife_virtual_desktop/
 data/swissknife_virtual_desktop/*
 !data/swissknife_virtual_desktop/all_tools_supervisor_queue.json
+!data/swissknife_virtual_desktop/discovery/
+data/swissknife_virtual_desktop/discovery/*
+!data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md
 # Dev audio uploads (don't commit test audio files)
 dev/audio/
 
