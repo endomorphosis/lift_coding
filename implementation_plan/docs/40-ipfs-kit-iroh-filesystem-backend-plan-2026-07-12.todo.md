@@ -340,7 +340,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   and bounded-resource assertions pass on Linux and macOS targets.
 
 ## IROH-026 Add CI and packaging gates
-- Status: pending
+- Status: completed
 - Depends on: IROH-005, IROH-013, IROH-025
 - Work: Add unit, fsspec conformance, async, service, installer, security,
   packaging, and opt-in multi-node lanes. Test Python 3.12/3.13, supported OS and
