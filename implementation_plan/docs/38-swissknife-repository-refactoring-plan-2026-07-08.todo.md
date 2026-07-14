@@ -2000,7 +2000,7 @@ success paths.
 
 ## SWR-135 Establish a non-destructive single-writer lease for every SwissKnife supervisor lane
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: supervisor/integration
 - Dedupe key: swissknife_refactor:single_writer_checkout_lease_and_reset_free_supervision
