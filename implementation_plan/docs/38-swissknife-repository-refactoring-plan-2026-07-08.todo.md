@@ -245,9 +245,16 @@ documented in `swissknife/docs/supervisor-refactor-runbook.md`.
 
 Run implementation mode only after a bounded check is green and only with the
 same `--todo-path`, `--task-prefix`, `--state-prefix`, and `--state-dir`
-values. Avoid running a bounded check against the same state directory while a
-long-running `--implement` supervisor is active unless the purpose is explicit
-state observation.
+values. SWR-135 requires every implementation launch that can write SwissKnife
+to be the foreground child of
+`swissknife/scripts/swissknife-checkout-lease.mjs --run`, with its lane/board
+registered in `swissknife/docs/supervisor-lane-inventory.json`, the outer
+environment set to `IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS=0`, and both
+`--no-ephemeral-worktree` and `--no-worktree-reconciliation`. The exact command
+is in `swissknife/docs/supervisor-shared-checkout-safety.md`; a direct
+`--implement` launch is prohibited. Avoid running a bounded check against the
+same state directory while a long-running `--implement` supervisor is active
+unless the purpose is explicit state observation.
 
 # Agent Todos
 

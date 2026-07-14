@@ -839,10 +839,15 @@ python3 scripts/virtual_ai_os_todo_supervisor.py \
   --once
 ```
 
-To run implementation agents, pass the same `--todo-path`, `--task-prefix`, and
-`--state-prefix` values with `--implement`. Prefer `--no-ephemeral-worktree`
-when the current dirty SwissKnife checkout state is the intended integration
-state for the task.
+The wrapper commands above are observation-only launch forms. Any
+implementation process that can write SwissKnife must instead run as the
+foreground child of `swissknife/scripts/swissknife-checkout-lease.mjs --run`
+with the registered `all-tools` lane, inherit
+`IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS=0`, and carry both
+`--no-ephemeral-worktree` and `--no-worktree-reconciliation`. The exact command
+and non-destructive dirty-checkout policy are in
+`swissknife/docs/supervisor-shared-checkout-safety.md`; adding `--implement`
+directly to either legacy command is prohibited.
 
 ## SVD-000 Bootstrap supervised SwissKnife virtual desktop backlog
 
