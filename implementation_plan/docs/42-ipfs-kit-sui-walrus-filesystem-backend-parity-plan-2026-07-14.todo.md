@@ -102,7 +102,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_install_walrus.py
 
 ## WALRUS-006 Add install, inspect, update, rollback, and PATH-safe CLI
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-005
 - Work: Provide explicit check/dry-run/update/rollback commands, retained prior
   versions, prerelease opt-in, redacted receipts, and `bash -lc` discovery.
