@@ -74,7 +74,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_compatibility.py
 
 ## WALRUS-003 Freeze filesystem, manifest, and backend contracts
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-002
 - Work: Specify URL grammar, blob/object IDs, namespaces, paths, manifest
   revisions, epoch policy, errors, consistency, permissions, and unsupported
