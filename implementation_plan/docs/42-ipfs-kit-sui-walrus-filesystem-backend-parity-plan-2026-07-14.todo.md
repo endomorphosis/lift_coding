@@ -190,7 +190,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_bucket_tiering.py
 
 ## WALRUS-016 Add CLI, Python API, MCP, and diagnostics parity
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-009, WALRUS-014
 - Work: Expose filesystem, backend, service, health, install, migration, and
   diagnostics operations with stable JSON, redaction, and noninteractive use.
