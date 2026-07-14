@@ -1,6 +1,6 @@
 {
   "schema": "swissknife.all_tools_supervisor_queue.v1",
-  "generated_at": "2026-07-14T07:54:18Z",
+  "generated_at": "2026-07-14T16:14:24Z",
   "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
   "taskboard_paths": [
     "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
@@ -17,7 +17,7 @@
   },
   "summary": {
     "task_count": 90,
-    "completed_count": 63,
+    "completed_count": 64,
     "completed_task_ids": [
       "SVD-027",
       "SVD-028",
@@ -81,17 +81,17 @@
       "SVD-097",
       "SVD-098",
       "SVD-099",
-      "SVD-100"
+      "SVD-100",
+      "SVD-116"
     ],
-    "ready_count": 7,
+    "ready_count": 6,
     "ready_task_ids": [
       "SVD-047",
       "SVD-068",
       "SVD-076",
       "SVD-091",
       "SVD-101",
-      "SVD-102",
-      "SVD-116"
+      "SVD-102"
     ],
     "waiting_count": 20,
     "waiting_task_ids": [
@@ -3674,7 +3674,7 @@
     },
     "SVD-116": {
       "title": "Repair non-destructive supervisor merge reconciliation for nested submodules",
-      "status": "ready",
+      "status": "completed",
       "priority": "P0",
       "track": "ops",
       "owner": "platform",
@@ -3689,13 +3689,20 @@
       "validation": [
         "cd external/ipfs_accelerate && PYTHONPATH=. python3 -m pytest test/api/test_agent_supervisor_todo_daemon_port.py -q -k \"submodule or merge_reconciliation or main_checkout_dirty\""
       ],
-      "evidence": {},
+      "evidence": {
+        "declaration": "taskboard_completed",
+        "declared_outputs": [
+          "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+          "external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py",
+          "tmp/swissknife_all_tools_supervisor/state/submodule-merge-diagnostics.json"
+        ]
+      },
       "provenance": {
         "taskboard_path": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
         "taskboard_line": 2340,
         "taskboard_heading": "## SVD-116 Repair non-destructive supervisor merge reconciliation for nested submodules",
         "taskboard_anchor": "#svd-116-repair-non-destructive-supervisor-merge-reconciliation-for-nested-submodules",
-        "status_field": "ready",
+        "status_field": "completed",
         "evidence_outputs": [
           "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
           "external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py",
