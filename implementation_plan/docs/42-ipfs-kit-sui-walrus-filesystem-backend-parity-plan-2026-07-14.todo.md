@@ -138,7 +138,7 @@ storage and epoch policy.
 ## Phase 2 - DuckDB Metadata And fsspec
 
 ## WALRUS-010 Replace the historical JSON index with transactional DuckDB
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-003, WALRUS-007
 - Work: Store logical paths, manifests, blob/object IDs, epochs, costs,
   references, tombstones, quotas, and journals in DuckDB with migrations,
