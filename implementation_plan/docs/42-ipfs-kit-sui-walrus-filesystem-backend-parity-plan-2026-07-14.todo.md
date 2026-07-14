@@ -127,7 +127,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_config.py
 
 ## WALRUS-009 Manage local Walrus services with real health verification
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-005, WALRUS-008
 - Work: Implement start/stop/restart/status, PID ownership, stale-PID repair,
   readiness probes, port-conflict detection, graceful shutdown, logs, and
