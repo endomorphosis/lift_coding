@@ -277,7 +277,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   quota rejection, duplicate content, and policy migration.
 
 ## IROH-020 Add explicit IPFS/Iroh synchronization
-- Status: pending
+- Status: completed
 - Depends on: IROH-018
 - Work: Implement local/IPFS/Iroh import/export and sync with hash-domain
   separation (`cid` versus `iroh_hash`), durable checkpoints, conflict policies,
