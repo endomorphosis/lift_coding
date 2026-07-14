@@ -2174,3 +2174,15 @@ host-specific binary path recorded as repository configuration is a failing stat
 - Outputs: swissknife/.nvmrc, swissknife/package.json, swissknife/scripts/verify-browser-toolchain.mjs, swissknife/docs/browser-validation-toolchain.md, scripts/swissknife_lane_worktrees.py, tmp/swissknife_refactor_supervisor/discovery
 - Validation: test -f tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-148-swr-146-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SWR-146. Use evidence in tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-148-swr-146-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SWR-146 from strategy blocked_tasks.
+
+## SWR-149 Resolve validation retry-budget failure for SWR-144
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SWR-143
+- Outputs: swissknife/src/services, swissknife/src/module-ownership.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/service-module-public-api.md, /home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure/tmp/swissknife_refactor_supervisor/discovery
+- Validation: cd swissknife && npm run services:audit && npm run typecheck:services && npm run test:fast -- test/architecture/source-module-boundaries.test.js
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SWR-144. Use evidence in /home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure/tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-149-swr-144-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SWR-144 from strategy blocked_tasks.
+- Resolution: All three SWR-144 implementations passed the service audit but daemon validation stopped at `typecheck:services` with `tsc: not found` because the refactor lane lacked `swissknife/node_modules`; the daemon can only propagate dependency links that exist at its lane root. `scripts/swissknife_lane_worktrees.py` now provisions and revalidates lane dependency links from the integration checkout, fails early with an actionable `npm ci` error when the required install is absent, and has regression coverage for stale, absent, and optional dependency paths. The validated SWR-144 rescue commit `499b160c` was recovered, its malformed MCP deontic UI shadow was removed in favor of the apps-owned canonical API, and the source audit now rejects unresolved merge markers. The completed outputs pass the full gate with zero audit violations, host typecheck success, and 35/35 architecture tests. The discovery receipt records the failure timeline, recovery, validation results, and release disposition.
