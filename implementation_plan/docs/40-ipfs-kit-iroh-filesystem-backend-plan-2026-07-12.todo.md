@@ -267,7 +267,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   pass; cross-backend copy IPFS/local/Iroh preserves bytes and lineage.
 
 ## IROH-019 Enable Iroh for virtual buckets and tiered storage
-- Status: pending
+- Status: completed
 - Depends on: IROH-018
 - Work: Permit Iroh backend bindings in bucket creation, replication targets,
   tier policies, placement selection, capacity reporting, and reconciliation.
