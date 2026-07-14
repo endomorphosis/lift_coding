@@ -1901,7 +1901,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-069 Build MCP++ permission and receipt envelopes for expanded glasses I/O
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-063, SVD-068
