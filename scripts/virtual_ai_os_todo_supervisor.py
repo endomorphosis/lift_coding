@@ -4,8 +4,13 @@
 from __future__ import annotations
 
 import logging
+import sys
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
+from swissknife_checkout_lease_guard import (
+    SwissKnifeLeaseGuardError,
+    require_swissknife_checkout_lease,
+)
 
 
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
@@ -182,8 +187,20 @@ ensure_virtual_ai_os_supervisor_running = _virtual_ai_os_supervisor_exports.ensu
 
 
 def main(argv: list[str] | None = None) -> None:
-    _virtual_ai_os_supervisor_runner.run(argv)
+    launch_args = list(sys.argv[1:] if argv is None else argv)
+    require_swissknife_checkout_lease(
+        launch_args,
+        allowed_lanes={
+            "virtual-ai-os": "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+            "swissknife-virtual-desktop-legacy": "implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md",
+        },
+    )
+    _virtual_ai_os_supervisor_runner.run(launch_args)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SwissKnifeLeaseGuardError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(78) from None

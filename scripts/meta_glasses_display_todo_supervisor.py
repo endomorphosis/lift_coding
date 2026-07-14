@@ -4,8 +4,13 @@
 from __future__ import annotations
 
 import logging
+import sys
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
+from swissknife_checkout_lease_guard import (
+    SwissKnifeLeaseGuardError,
+    require_swissknife_checkout_lease,
+)
 
 
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
@@ -191,8 +196,19 @@ ensure_meta_glasses_display_supervisor_running = (
 
 
 def main(argv: list[str] | None = None) -> None:
-    _meta_glasses_display_supervisor_runner.run(argv)
+    launch_args = list(sys.argv[1:] if argv is None else argv)
+    require_swissknife_checkout_lease(
+        launch_args,
+        allowed_lanes={
+            "meta-glasses-display": "implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md",
+        },
+    )
+    _meta_glasses_display_supervisor_runner.run(launch_args)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SwissKnifeLeaseGuardError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(78) from None

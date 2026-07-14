@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Run the lift-specific VAI/MGW/HAO supervisor tracks."""
+"""Describe the retired parallel VAI/MGW/HAO supervisor launcher.
+
+All three tracks can write SwissKnife. SWR-135 therefore requires their
+inventory commands to run one at a time under the single checkout lease; the
+old parallel launcher now fails closed instead of starting detached writers.
+"""
 
 from __future__ import annotations
 
@@ -237,10 +242,17 @@ def default_launch_args(argv: Sequence[str]) -> list[str]:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Run the configured VAI/MGW/HAO multi-supervisor CLI."""
+    """Refuse the pre-lease parallel launch surface."""
 
-    cli_args = sys.argv[1:] if argv is None else argv
-    return build_launcher().run_cli(default_launch_args(cli_args))
+    _ = sys.argv[1:] if argv is None else argv
+    print(
+        "error: parallel VAI/MGW/HAO implementation is disabled by SWR-135; "
+        "run exactly one audited lane command from "
+        "swissknife/docs/supervisor-lane-inventory.json under "
+        "swissknife-checkout-lease.mjs --run",
+        file=sys.stderr,
+    )
+    return 78
 
 
 if __name__ == "__main__":
