@@ -2181,7 +2181,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-101 Aggregate freshness-aware release evidence and close only named gaps
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-096, SVD-097, SVD-099, SVD-100
