@@ -1891,7 +1891,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-068 Build per-app expanded Meta glasses I/O capability map
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: glasses
 - Depends on: SVD-063, SVD-067, SVD-056, SVD-058
