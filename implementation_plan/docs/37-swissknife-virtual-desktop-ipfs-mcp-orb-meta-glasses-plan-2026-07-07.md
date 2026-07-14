@@ -2171,7 +2171,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-100 Prove HTTP/libp2p peer interoperability and all-tool discovery from the SwissKnife client
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: transport
 - Depends on: SVD-093, SVD-094, SVD-096
