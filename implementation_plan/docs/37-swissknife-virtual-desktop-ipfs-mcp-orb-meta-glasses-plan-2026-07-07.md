@@ -2126,7 +2126,7 @@ does not permit a broad all-tools or all-app claim from cached JSON alone.
 
 ## SVD-096 Execute all-app backend behavior workflows and user-visible recovery paths
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: quality
 - Depends on: SVD-095
