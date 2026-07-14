@@ -8,6 +8,10 @@
       "reachable_merge_bases",
       "selected_commit"
     ],
+    "failed_reconciliation_retryable": true,
+    "nested_conflict_paths_are_repository_relative": true,
+    "nested_recovery_policy": "recursive_isolated_worktree",
+    "checkpoint_policy": "retain_failures_until_each_nested_path_succeeds",
     "recovery_ref_namespace": "refs/agent-supervisor/submodule-merge-recovery/",
     "selection_policy": "verified_descendant_or_deterministic_recovery_ref",
     "task_id": "SVD-116"
