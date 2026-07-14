@@ -289,7 +289,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 6 - User Surfaces And Operations
 
 ## IROH-021 Expose safe CLI operations
-- Status: pending
+- Status: completed
 - Depends on: IROH-009, IROH-017, IROH-020
 - Work: Add binary, service, backend, namespace, blob, ticket, mount, sync, and
   GC commands with JSON output, confirmation for destructive work, dry-run,
