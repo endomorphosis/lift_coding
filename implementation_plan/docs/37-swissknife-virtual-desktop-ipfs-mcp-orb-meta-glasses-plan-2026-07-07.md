@@ -2209,7 +2209,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-103 Define an executable per-app backend disposition contract
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-102
