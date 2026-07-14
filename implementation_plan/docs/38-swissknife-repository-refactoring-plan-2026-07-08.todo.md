@@ -2110,7 +2110,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 
 ## SWR-143 Inventory restored service duplicates by basename, normalized content, and behavior
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: services/recovery
 - Dedupe key: swissknife_refactor:restored_service_duplicate_behavioral_inventory
