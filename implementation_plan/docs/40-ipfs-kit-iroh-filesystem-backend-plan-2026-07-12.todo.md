@@ -320,7 +320,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 7 - Security, Interoperability, CI, And Release
 
 ## IROH-024 Complete threat model and hardening
-- Status: pending
+- Status: completed
 - Depends on: IROH-002, IROH-008, IROH-011, IROH-022
 - Work: Threat-model malicious tickets/peers/manifests, path traversal, symlinks,
   decompression/archive attacks, key theft, replay, rollback, resource
