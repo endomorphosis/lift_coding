@@ -1921,7 +1921,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-071 Compile expanded I/O ORB/IDL and control-plane handoff packets
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: orb-idl
 - Depends on: SVD-070, SVD-065
