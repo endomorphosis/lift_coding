@@ -93,7 +93,7 @@ storage and epoch policy.
 ## Phase 1 - Binary, Runtime, And Service Lifecycle
 
 ## WALRUS-005 Implement secure Walrus binary install and verification
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-002
 - Work: Add supported platform detection, pinned asset selection, digest and
   signature verification where available, atomic user-local install, locking,
