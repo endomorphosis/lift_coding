@@ -2143,7 +2143,7 @@ host-specific binary path recorded as repository configuration is a failing stat
 
 ## SWR-146 Pin a portable browser-validation Node toolchain for supervisor lanes
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: supervisor/browser-toolchain
 - Dedupe key: swissknife_refactor:portable_node_toolchain_for_browser_validation
