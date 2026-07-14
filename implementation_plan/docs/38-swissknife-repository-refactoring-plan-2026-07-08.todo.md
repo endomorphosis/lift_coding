@@ -1982,7 +1982,7 @@ success paths.
 
 ## SWR-134 Reconcile board completion claims with the current SwissKnife checkout
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: recovery/provenance
 - Dedupe key: swissknife_refactor:current_checkout_vs_completed_board_reconciliation
