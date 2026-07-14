@@ -1611,7 +1611,7 @@ cleanup from the real release blocker, which is the incomplete full
 
 ## SVD-047 Re-run the all-tools release closeout after adapter and simulator evidence
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-044, SVD-045, SVD-046, SVD-057, SVD-058
