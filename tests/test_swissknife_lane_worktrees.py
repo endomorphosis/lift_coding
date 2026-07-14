@@ -43,6 +43,13 @@ def _lane_checkout(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> lanes.Lan
     return lane
 
 
+def _shared_dependencies(repo: Path) -> Path:
+    dependencies = repo / "swissknife" / "node_modules"
+    dependencies.mkdir(parents=True)
+    (dependencies / ".installed").write_text("ready\n", encoding="utf-8")
+    return dependencies
+
+
 def _successful_resolution(lane: lanes.Lane, name: str) -> lanes.BrowserToolchainResolution:
     receipt_path = lane.path / lanes.BROWSER_TOOLCHAIN_RECEIPT_DIR / f"{name}.json"
     return lanes.BrowserToolchainResolution(
@@ -148,6 +155,7 @@ def test_validation_verifies_before_running_in_a_non_login_shell(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     lane = _lane_checkout(tmp_path, monkeypatch)
+    _shared_dependencies(lanes.REPO_ROOT)
     events: list[str] = []
 
     def fake_verify(
@@ -179,6 +187,7 @@ def test_validation_command_cannot_run_after_toolchain_rejection(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     lane = _lane_checkout(tmp_path, monkeypatch)
+    _shared_dependencies(lanes.REPO_ROOT)
 
     def reject_toolchain(
         selected_lane: lanes.Lane, *, receipt_name: str
@@ -200,6 +209,7 @@ def test_lane_startup_runs_shared_toolchain_verifier(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     lane = _lane_checkout(tmp_path, monkeypatch)
+    shared_dependencies = _shared_dependencies(lanes.REPO_ROOT)
     (lane.path / ".git").mkdir()
     (lane.swissknife_path / ".git").mkdir()
     monkeypatch.setattr(lanes, "configure_local_submodule_sources", lambda selected_lane: None)
@@ -222,12 +232,42 @@ def test_lane_startup_runs_shared_toolchain_verifier(
     assert calls == [(lane, "lane-startup")]
     assert result["browser_toolchain_receipt"] == str(receipt.receipt_path)
     assert result["browser_toolchain"] == receipt.receipt
+    assert result["shared_dependency_paths"] == ["swissknife/node_modules"]
+    assert lane.swissknife_path.joinpath("node_modules").is_symlink()
+    assert lane.swissknife_path.joinpath("node_modules").resolve() == shared_dependencies.resolve()
+
+
+def test_lane_dependencies_replace_stale_targets_and_skip_missing_optional_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    lane = _lane_checkout(tmp_path, monkeypatch)
+    shared_dependencies = _shared_dependencies(lanes.REPO_ROOT)
+    stale_target = lane.swissknife_path / "node_modules"
+    stale_target.mkdir()
+    (stale_target / "stale").write_text("remove me\n", encoding="utf-8")
+
+    linked = lanes.link_shared_swissknife_dependencies(lane)
+
+    assert linked == ["swissknife/node_modules"]
+    assert stale_target.is_symlink()
+    assert stale_target.resolve() == shared_dependencies.resolve()
+    assert (stale_target / ".installed").read_text(encoding="utf-8") == "ready\n"
+
+
+def test_lane_startup_fails_early_when_required_dependencies_are_missing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    lane = _lane_checkout(tmp_path, monkeypatch)
+
+    with pytest.raises(lanes.LaneError, match="run npm ci"):
+        lanes.link_shared_swissknife_dependencies(lane)
 
 
 def test_merge_dry_run_requires_and_reports_toolchain_preflight(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     lane = _lane_checkout(tmp_path, monkeypatch)
+    _shared_dependencies(lanes.REPO_ROOT)
     receipt = _successful_resolution(lane, "clean-checkout-validation")
     calls: list[str] = []
     monkeypatch.setattr(lanes, "integration_lock", nullcontext)

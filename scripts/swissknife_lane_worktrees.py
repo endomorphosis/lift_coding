@@ -36,6 +36,11 @@ REQUIRED_SUBMODULES = ("swissknife", "external/ipfs_accelerate", "external/ipfs_
 BROWSER_TOOLCHAIN_VERIFIER = Path("scripts/verify-browser-toolchain.mjs")
 BROWSER_TOOLCHAIN_RECEIPT_DIR = Path("tmp/browser-validation-toolchain")
 BROWSER_TOOLCHAIN_RECEIPT_SCHEMA = "swissknife.browser-validation-toolchain.v1"
+SHARED_SWISSKNIFE_DEPENDENCY_PATHS = (
+    (Path("swissknife/node_modules"), True),
+    (Path("swissknife/web/node_modules"), False),
+    (Path("swissknife/ipfs_accelerate_js/node_modules"), False),
+)
 
 
 @dataclass(frozen=True)
@@ -249,6 +254,60 @@ def configure_local_submodule_sources(lane: Lane) -> None:
         git(["config", f"submodule.{relative}.url", str(source)], cwd=lane.path)
 
 
+def link_shared_swissknife_dependencies(lane: Lane) -> list[str]:
+    """Make integration-checkout dependencies available to a supervisor lane.
+
+    The implementation daemon creates task worktrees below a lane and links
+    their ``node_modules`` from the lane root.  Consequently, the lane itself
+    must expose the installed dependencies from the integration checkout.
+    Keep the links ephemeral: they are ignored build inputs, never repository
+    configuration or a workstation-specific tracked path.
+    """
+
+    linked: list[str] = []
+    for relative, required in SHARED_SWISSKNIFE_DEPENDENCY_PATHS:
+        source_path = REPO_ROOT / relative
+        try:
+            source = source_path.resolve(strict=True)
+        except (OSError, RuntimeError) as exc:
+            if required:
+                raise LaneError(
+                    "SwissKnife dependencies are unavailable in the integration checkout; "
+                    f"run npm ci in {REPO_ROOT / 'swissknife'} before starting a lane"
+                ) from exc
+            continue
+        if not source.is_dir():
+            if required:
+                raise LaneError(f"SwissKnife dependency path is not a directory: {source}")
+            continue
+
+        target = lane.path / relative
+        try:
+            target.relative_to(source)
+        except ValueError:
+            pass
+        else:
+            raise LaneError(f"refusing self-referential dependency link: {target} -> {source}")
+
+        if target.is_symlink():
+            try:
+                if target.resolve(strict=True) == source:
+                    linked.append(relative.as_posix())
+                    continue
+            except (OSError, RuntimeError):
+                pass
+            target.unlink()
+        elif target.exists():
+            if target.is_dir():
+                shutil.rmtree(target)
+            else:
+                target.unlink()
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.symlink_to(source, target_is_directory=True)
+        linked.append(relative.as_posix())
+    return linked
+
+
 def ensure_lane(lane: Lane, *, dry_run: bool) -> dict[str, object]:
     if lane.path.exists():
         if not (lane.path / ".git").exists():
@@ -298,6 +357,8 @@ def ensure_lane(lane: Lane, *, dry_run: bool) -> dict[str, object]:
     if not lane.swissknife_path.exists():
         raise LaneError(f"SwissKnife submodule was not initialized: {lane.swissknife_path}")
 
+    shared_dependency_paths = link_shared_swissknife_dependencies(lane)
+
     base_ref = git(["rev-parse", "HEAD"], cwd=lane.swissknife_path)
     branch_ref = f"refs/heads/{lane.swissknife_branch}"
     if git_ref_exists(branch_ref, cwd=lane.swissknife_path):
@@ -323,6 +384,7 @@ def ensure_lane(lane: Lane, *, dry_run: bool) -> dict[str, object]:
         "swissknife_head": git(["rev-parse", "HEAD"], cwd=lane.swissknife_path),
         "browser_toolchain_receipt": str(toolchain.receipt_path),
         "browser_toolchain": toolchain.receipt,
+        "shared_dependency_paths": shared_dependency_paths,
         "action": "ready",
     }
 
@@ -404,6 +466,7 @@ def run_validation_command(
     *,
     toolchain: BrowserToolchainResolution | None = None,
 ) -> BrowserToolchainResolution:
+    link_shared_swissknife_dependencies(lane)
     if toolchain is None:
         toolchain = verify_browser_toolchain(lane, receipt_name="clean-checkout-validation")
     environment = os.environ.copy()
