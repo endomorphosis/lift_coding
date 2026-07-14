@@ -66,7 +66,7 @@ storage and epoch policy.
 - Validation: cd external/ipfs_kit && python -m pytest -q tests/test_walrus_storage.py tests/test_walrus_fsspec.py
 
 ## WALRUS-002 Pin supported Walrus and Sui compatibility
-- Status: todo
+- Status: completed
 - Depends on: WALRUS-001
 - Work: Record supported CLI/service versions, networks, API shapes, platforms,
   release assets, checksums, licenses, epoch constraints, and upgrade bounds.
