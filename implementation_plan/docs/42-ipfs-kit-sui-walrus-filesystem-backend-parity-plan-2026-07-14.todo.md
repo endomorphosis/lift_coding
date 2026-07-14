@@ -57,7 +57,7 @@ storage and epoch policy.
 ## Phase 0 - Recovery, Compatibility, And Contracts
 
 ## WALRUS-001 Recover and inventory the historical Walrus implementation
-- Status: todo
+- Status: completed
 - Depends on: none
 - Work: Recover only Walrus-specific content from commits `a74c8e86` through
   `ed9ab23d`, adapt integrations to the current tree, and produce a parity
