@@ -2046,7 +2046,7 @@ success paths.
 
 ## SWR-139 Prove browser theorem and ZKP execution across supported engines without simulated defaults
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/wasm-proofs
 - Dedupe key: swissknife_refactor:cross_engine_real_ts_wasm_proof_and_zkp_execution
@@ -2054,6 +2054,7 @@ success paths.
 - Outputs: swissknife/test/browser-proof-runtime, swissknife/test-results/browser-proof-runtime, swissknife/docs/browser-proof-runtime-evidence.json, swissknife/docs/browser-proof-runtime-evidence.md
 - Validation: cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run audit:bundle-host-leakage
 - Acceptance: Chromium, Firefox, and WebKit execute TypeScript theorem checks and instantiate the browser WASM ZKP backend. Evidence includes generated and verified proof artifacts, negative and tampered proofs, malformed inputs, worker failures, deterministic public inputs, and backend selection records. Browser defaults cannot select a Python runner, host-native binding, simulated prover, or fabricated proof result.
+- Resolution: The three-engine proof suite now writes `test-results/browser-proof-runtime/observed-three-engine-runtime.json` only after Vitest reports a successful Chromium, Firefox, and WebKit run with internally consistent assertion totals. The receipt binds the current runtime config, test source, runner, and uncolored Vitest output with SHA-256 fingerprints; `test:browser-compat` runs this producer before its static contract. On the current integration, all engines completed 27 assertions each (81 total), including TypeScript theorem generation and independent verification plus browser-WASM Schnorr ZKP generation, verification, tamper rejection, malformed-input handling, and typed worker failures. `typecheck:browser`, `test:browser-compat`, and `audit:bundle-host-leakage` passed with zero host leakage. The implementation is committed as SwissKnife `eb151bde`.
 
 ## SWR-140 Verify all browser application states with offline and remote-capability isolation
 
