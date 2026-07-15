@@ -2058,7 +2058,7 @@ success paths.
 
 ## SWR-140 Verify all browser application states with offline and remote-capability isolation
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/apps
 - Dedupe key: swissknife_refactor:browser_app_offline_remote_capability_isolation
@@ -2066,6 +2066,7 @@ success paths.
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-browser-runtime-matrix.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/browser-capability-receipts.json, swissknife/docs/browser-app-runtime-coverage.md
 - Validation: cd swissknife && npm run build:web && npm run test:browser-compat && npm run test:e2e:mcp
 - Acceptance: Each app records browser-local success, offline behavior, denied permission, typed remote MCP unavailable behavior, and recovery when applicable. Browser-local functionality remains usable without service processes. Remote-only capability requests are typed, policy-gated, and cannot cause browser filesystem, shell, Python, or supervisor execution.
+- Resolution: Browser app isolation evidence now records 47 applications and 235 browser receipts. The repaired standalone gate runs the local Agent Supervisor browser suite while explicitly skipping only the unavailable cross-repository Hallucinate App dashboard consumer; it never fabricates the host integration. Browser-local governed prompt steering uses the in-browser, confirmation- and dependency-enforcing policy path, while every other unconfigured remote capability remains typed unavailable. `build:web`, three-engine `test:browser-compat` (81 proof assertions plus 67 runtime/static compatibility assertions), `test:e2e:mcp` (5 local browser tests passed; 7 cross-repository tests explicitly skipped), `lint:source-modules`, `audit:bundle-host-leakage`, and source-boundary tests passed. Source commit: `b4c32403`.
 
 ## SWR-141 Produce a hermetic clean-checkout release reproduction and provenance attestation
 
