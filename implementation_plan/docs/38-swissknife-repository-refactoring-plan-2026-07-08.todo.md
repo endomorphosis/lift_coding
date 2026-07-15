@@ -2022,7 +2022,7 @@ success paths.
 
 ## SWR-137 Revalidate service containment and browser import closure from the recovered baseline
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: services/browser-boundaries
 - Dedupe key: swissknife_refactor:recovered_baseline_service_and_browser_boundary_revalidation
@@ -2030,6 +2030,7 @@ success paths.
 - Outputs: swissknife/docs/service-boundary-audit.json, swissknife/docs/restored-service-duplicate-inventory.json, swissknife/docs/browser-compatibility-inventory.json, swissknife/docs/browser-compatibility-inventory.md
 - Validation: cd swissknife && npm run services:audit && npm run typecheck && npm run build:web && npm run test:browser-compat && npm run audit:bundle-host-leakage
 - Acceptance: The recovered tree has zero non-index duplicate service basenames, zero root service implementation violations, zero undocumented deep imports, zero browser-reachable host-only imports, and zero unknown executable browser paths. The audit fixtures prove that restored duplicates, root implementations, and Node or Python execution edges fail the gate.
+- Resolution: The validated implementation `870e2339` was manually reconciled with the concurrent SwissKnife mainline as merge `6343f5c6`, then recorded in the parent checkout as `adff46523`. The reconciliation repaired one all-tools regression by changing the glasses handoff to import the apps public barrel rather than a private apps implementation; the ownership fixtures now distinguish an export-only root index barrel from a forbidden root implementation and keep approved duplicate fixtures inside an owned service family. The merged tree passes `services:audit`, full browser and host `typecheck`, `build:web`, 22 static plus 59 runtime browser-compatibility tests, the 47-test source-module boundary suite, and `audit:bundle-host-leakage` with zero host leakage. The previous retry block was solely the shared `main` worktree topology, not a remaining source conflict.
 
 ## SWR-138 Exercise default browser libp2p interoperability across Chromium, Firefox, and WebKit
 
