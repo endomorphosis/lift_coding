@@ -2069,7 +2069,7 @@ success paths.
 
 ## SWR-141 Produce a hermetic clean-checkout release reproduction and provenance attestation
 
-- Status: waiting
+- Status: blocked
 - Priority: P0
 - Track: release/reproducibility
 - Dedupe key: swissknife_refactor:hermetic_clean_checkout_release_reproduction
@@ -2077,6 +2077,7 @@ success paths.
 - Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json
 - Validation: cd swissknife && npm ci && npm run release:readiness
 - Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
+- Blocker: The current `ipfs_datasets_py` compatibility endpoint advertises 146 read descriptors that route to non-callable module-file stems (for example `web_archive_tools.archive_is_integration`) while the actual module exports differently named functions (for example `archive_to_archive_is`). A fresh detached reproduction therefore receives real backend error envelopes, not a successful capability receipt. SWR-153 must make the advertised catalog and real handler registry agree before this task may be retried.
 
 ## SWR-142 Phase 21 recovery and reproducibility handoff
 
@@ -2203,3 +2204,34 @@ host-specific binary path recorded as repository configuration is a failing stat
 - Validation: test -f /home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure/tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-150-swr-137-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SWR-137. Use evidence in /home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure/tmp/swissknife_refactor_supervisor/discovery/2026-07-14-swr-150-swr-137-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SWR-137 from strategy blocked_tasks.
 - Resolution: The three failed retries were operational `main_branch_checked_out_elsewhere` deferrals against `/home/barberb/barberb/lift_coding`, not source or semantic conflicts. The fully validated SWR-137 implementation was already committed as SwissKnife `870e2339`; it merged cleanly with the current SwissKnife integration head `eedd170e` as `5e9fca74`, preserving concurrent SVD-070 changes. The merged source’s service and browser boundary evidence was regenerated and committed as `88faaaaf`, with zero root service implementation violations, zero unclassified duplicate sets, zero browser-reachable host-only imports, and zero unknown executable browser paths. No merge resolver was invoked because the three-way source merge had no conflicts; the discovery receipt records the applicable conditional resolver command and completed validation.
+
+## Phase 23: Remote Capability Contract Repair And Hermetic Reproduction Cleanup
+
+The browser bundle remains Python-free: remote Python services are allowed only behind
+typed MCP boundaries. That boundary must not advertise module filenames, generated
+catalog rows, or any other name that the live service cannot resolve to a callable
+handler. Clean-checkout release reproduction must also clean up only processes it
+created, so it cannot inherit evidence from a deleted worktree or disrupt another
+supervisor lane.
+
+## SWR-153 Reconcile advertised datasets MCP capabilities with real callable handlers
+
+- Status: ready
+- Priority: P0
+- Track: remote-capability/contracts
+- Dedupe key: swissknife_refactor:datasets_mcp_advertised_handler_contract_v2
+- Depends on: SWR-136, SWR-140
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/mcp_server/hierarchical_tool_manager.py, external/ipfs_datasets/tests/unit/mcp_server/test_hierarchical_tool_manager.py, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/capture-mcp-live-probe-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json
+- Validation: cd external/ipfs_datasets && pytest -q tests/unit/mcp_server/test_hierarchical_tool_manager.py; cd swissknife && npm run evidence:mcp-glasses && node -e "const x=require('./test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json'); if (x.decision !== 'go') throw new Error(x.blockers.join(' | '));"
+- Acceptance: The datasets MCP `tools/list`, `tools_list_tools`, `tools_get_schema`, and `tools_dispatch` surfaces advertise only names that resolve to the same imported callable. Module stems are never presented as callable tools unless that exact callable exists. A catalog-probe receipt verifies callable resolution and schema without claiming a side-effectful operation succeeded; a missing handler is a typed `capability_unavailable` result and is excluded from the advertised executable catalog. Each remaining browser-exposed read operation has either a real safe execution vector or an explicit input-required typed result bound to its schema. The evidence must fail for a fabricated catalog entry, mismatched module/function name, missing handler, or a Python process reachable from the browser bundle. No proxy success response, static allowlist, or downgraded error envelope can satisfy this task.
+
+## SWR-154 Make clean-checkout compatibility-adapter cleanup ownership-safe
+
+- Status: ready
+- Priority: P0
+- Track: release/reproducibility
+- Dedupe key: swissknife_refactor:owned_clean_checkout_adapter_lifecycle_v2
+- Depends on: SWR-136
+- Outputs: swissknife/scripts/ensure-ipfs-mcp-compat-adapters.cjs, swissknife/scripts/reproduce-release-attestation.mjs, swissknife/test/architecture/release-reproduction-adapter-lifecycle.test.js, swissknife/docs/release-reproduction-attestation.md
+- Validation: cd swissknife && npm run test:fast -- test/architecture/release-reproduction-adapter-lifecycle.test.js && npm run release:readiness
+- Acceptance: A clean detached reproduction starts compatibility adapters only when needed, records their PID and checkout identity, and terminates only adapters whose recorded PID, command, and working directory belong to that detached checkout before removing it. Two consecutive reproductions cannot reuse a listener from a deleted worktree. Cleanup must never terminate an adapter belonging to another worktree, lane, or user process. A failed gate still writes a truthful `NO_GO` attestation and leaves no owned listener behind. The test fixture proves both positive cleanup and foreign-process preservation.
