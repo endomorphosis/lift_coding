@@ -2248,14 +2248,15 @@ when a remote action cannot be run safely.
 
 ## SWR-155 Implement the static-only datasets and workflow capability semantics in TypeScript
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: browser/remote-capability-runtime
 - Dedupe key: swissknife_refactor:typescript_dataset_and_workflow_capability_semantics
 - Depends on: SWR-136, SWR-138, SWR-140, SWR-153
 - Outputs: swissknife/src/services/ipfs, swissknife/src/services/ipfs/browser.ts, swissknife/src/services/ipfs/api, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/all-tools-evidence-lib.cjs, swissknife/test/browser, swissknife/test/mcp-plus-plus
-- Validation: cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run test:run -- test/mcp-plus-plus/wasm-prover-browser-purity.test.ts test/mcp-plus-plus/all-tools-execution-fixtures.test.ts
+- Validation: In an isolated checkout with the owned datasets adapter on a unique port, capture the all-tools ledger against that endpoint, then run `cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run test:run -- test/mcp-plus-plus/wasm-prover-browser-purity.test.ts test/mcp-plus-plus/all-tools-execution-fixtures.test.ts`.
 - Acceptance: Implement the semantics represented by `load_index`, `check_task_status`, `get_task_status`, and `WorkflowCoordinator.submit_task` as owned TypeScript modules with explicit schemas, validation, state transitions, deterministic task/index identifiers, correlation IDs, progress events, and typed not-found or denied outcomes. A mutation submitted through the governed MCP boundary must be retrievable through the status operations and cannot be represented by a canned success response. Browser imports execute the TypeScript implementation or a declared WebAssembly dependency only; they cannot import Python, spawn a host process, call a native binding, or use a simulated success path. The compatibility adapters may be transport hosts, but they must delegate to the same tested TypeScript implementation rather than carrying a second handwritten semantic copy. Tests cover valid creation, idempotent replay, invalid input, unknown task/index, permission denial, and restart or persistence behavior.
+- Resolution: Implemented an owned browser-safe TypeScript runtime with deterministic IDs, correlation and progress events, authorization, idempotency, lifecycle transitions, and restartable persistence. The datasets MCP host now delegates directly to that runtime. Validation passed the browser typecheck, full browser compatibility gate, 80 selected prover/evidence tests, and an isolated MCP submit/status/denial lifecycle smoke test. The all-tools evidence fixture now uses real executable IDs and distinguishes side-effect receipt requirements instead of relying on stale static aliases.
 
 ## SWR-156 Advertise and prove every repaired capability through HTTP and browser libp2p
 
