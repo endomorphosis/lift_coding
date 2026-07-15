@@ -2290,3 +2290,17 @@ when a remote action cannot be run safely.
 - Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json, swissknife/docs/refactor-final-signoff.md
 - Validation: cd swissknife && npm ci && npm run release:readiness && node -e "const x=require('./docs/release-reproduction-attestation.json'); if(x.decision!=='GO') throw new Error(JSON.stringify(x.blockers ?? x));"
 - Acceptance: A newly created detached checkout from the committed integration revision completes the lockfile install, browser build, three-engine browser proof and libp2p evidence, exact remote-tool transport parity, and all virtual-desktop evidence producers with an attestation decision of `GO`. The output fingerprints are bound to committed source blobs and the detached checkout's own evidence. Any local dirt, parent-gitlink mismatch, unresolved merge marker, static-only capability, simulated proof or peer result, stale receipt, foreign listener, or missing screenshot remains a hard `NO_GO`; no Phase 24 document may override that result.
+
+## SWR-159 Resolve 3 preflight-conflicting backlogged worktree merges
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Fingerprint: 5bf13388eba91d25d3070c943b3eb31667d03a31
+- Dedupe key: reconciliation_guardrail:preflight_merge_conflict
+- Depends on:
+- Outputs: tmp/swissknife_refactor_supervisor/discovery, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: test -f tmp/swissknife_refactor_supervisor/discovery/2026-07-15-swr-159-reconciliation-5bf13388eba9.md
+- Acceptance: Reconciliation guardrail filed this because 3 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in tmp/swissknife_refactor_supervisor/discovery/2026-07-15-swr-159-reconciliation-5bf13388eba9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Resolution: Each dirty stale worktree was committed to its existing rescue branch before removal, preserving the datasets, compatibility evidence, and release-attestation changes at parent commits `012bc4eae`, `ec9aebcd0`, and `ccdb32cab`. The isolated reconciliation audit then reported `stale_count: 0`, `candidate_count: 0`, and `preflight_blocked_count: 0`; it skipped only the active SWR-156 implementation worktree. No stale rescue branch was merged into the integration lane.
