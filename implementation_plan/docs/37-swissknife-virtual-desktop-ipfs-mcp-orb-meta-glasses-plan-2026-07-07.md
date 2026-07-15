@@ -2299,7 +2299,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-111 Re-run Meta device-simulator modality, privacy, and fallback validation
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: device
 - Depends on: SVD-110
