@@ -2233,13 +2233,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-105 Map every backend tool to an app, diagnostic surface, or governed server-only disposition
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-102, SVD-104
 - Outputs: swissknife/src/services/mcp/all-tools-disposition-catalog.ts, swissknife/test/mcp-plus-plus/all-tools-disposition-catalog.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-disposition-catalog.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-tools-disposition-catalog.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
 - Acceptance: Every discovered tool from all three owners maps to a user-facing application operation, MCP Control or MCP++ Explorer diagnostic operation, or policy-reviewed server-only disposition. The catalog proves HTTP/libp2p reachability where approved and preserves unsupported, denied, and unavailable cases with owner and rationale.
+- Completion: 2026-07-15: Added the fail-closed all-tools disposition catalog and browser-safe validation. Updated the MCP++ runtime requirement to Node 22.19+ because Helia's locked libp2p HTTP transport requires it, and raised the connector's cold-backend budget to 30 seconds. Live SwissKnife HTTP and libp2p evidence passed for all three services: 433 exact tool observations, three approved fixtures executed over both transports, and zero probe blockers.
 
 ## SVD-106 Execute exhaustive all-app behavior, recovery, and UI evidence workflows
 
