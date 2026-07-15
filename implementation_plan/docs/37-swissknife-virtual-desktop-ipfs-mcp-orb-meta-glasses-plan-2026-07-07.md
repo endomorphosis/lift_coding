@@ -2222,13 +2222,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-104 Materialize browser-safe live bindings for declared backend pairs
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-102, SVD-103
 - Outputs: swissknife/src/services/apps/all-app-live-tool-bindings.ts, swissknife/src/services/mcp/all-app-tool-gateway.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-tool-bindings.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-executable-backend-contract.test.ts test/browser/all-app-tool-gateway.test.ts
 - Acceptance: Every tool_backed declared application/backend assignment invokes a browser-mediated HTTP or libp2p gateway with an observable request, response, correlation ID, policy outcome, and recovery path. No assignment remains declared_no_tool_binding, and no browser application directly reaches Python processes, host files, or backend credentials.
+- Completion: 2026-07-15: Added the browser-safe materialized binding catalog and mediated HTTP/libp2p gateway, including request, policy, response, and recovery observations. The gateway rejects credentials, host paths, and process handles before dispatch. Validation passed with 16 focused tests and the browser source-module audit.
 
 ## SVD-105 Map every backend tool to an app, diagnostic surface, or governed server-only disposition
 
