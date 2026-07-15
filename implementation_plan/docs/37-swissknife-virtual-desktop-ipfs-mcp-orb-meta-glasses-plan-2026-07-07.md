@@ -2378,7 +2378,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-119 Resolve merge retry-budget failure for SVD-107
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
