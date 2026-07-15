@@ -2401,3 +2401,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-072. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-120-svd-072-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-072 from strategy blocked_tasks.
 - Completion note 2026-07-15: Reproduced the clean-worktree retry blocker and removed two hidden assumptions in the default Playwright path: app-family coverage now materializes its own all-tools inputs, and read-only routes no longer simulate a confirmation requirement. The serialized SVD-072 evidence writer generated a valid 315-packet simulator `GO` report, while the Meta glasses virtual-OS suite generated the stable 45-app display report with zero open, template, or browser failures. Both required validation commands passed.
+
+## SVD-121 Resolve validation retry-budget failure for SVD-109
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-104, SVD-107, SVD-108
+- Outputs: swissknife/test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-109. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-121-svd-109-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-109 from strategy blocked_tasks.
