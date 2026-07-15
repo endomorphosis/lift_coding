@@ -2031,13 +2031,14 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-081 Build a dedicated Profile D policy-evaluation ZKP circuit and verifier
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: crypto
 - Depends on: SVD-078, SVD-076
 - Outputs: `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/`, `swissknife/src/services/zkp/`, `Mcp-Plus-Plus/docs/spec/temporal-deontic-policy.md`, `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/profile-d-policy-zkp.json`
 - Validation: cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_profile_d_policy_circuit.py -q && cd ../../swissknife && npm run test:run -- test/mcp-plus-plus/profile-d-policy.test.ts test/mcp-plus-plus/profile-d-policy-zkp.test.ts && npm run lint:source-modules
 - Acceptance: A verified zero-knowledge certificate proves the public Profile D decision commitments without revealing the private policy text or private context. The implementation must remain explicitly statement-only when the circuit, trusted setup, or verification key is not production-admitted.
+- Completion: 2026-07-14: Added the Profile D public-statement circuit, fail-closed verifier admission gates, SwissKnife browser/host certificate boundary, redacted evidence, and MCP++ wire contract. Validation passed with 11 Python tests, 10 TypeScript tests, and the source-module audit. The default remains statement-only; a certificate can be verified only with an admitted circuit, trusted setup, verification key, and cryptographic verifier.
 
 ## SVD-082 through SVD-091 Add distributed risk, neighborhood coordination, and scheduling
 
@@ -2221,27 +2222,29 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-104 Materialize browser-safe live bindings for declared backend pairs
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-102, SVD-103
 - Outputs: swissknife/src/services/apps/all-app-live-tool-bindings.ts, swissknife/src/services/mcp/all-app-tool-gateway.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-tool-bindings.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-executable-backend-contract.test.ts test/browser/all-app-tool-gateway.test.ts
 - Acceptance: Every tool_backed declared application/backend assignment invokes a browser-mediated HTTP or libp2p gateway with an observable request, response, correlation ID, policy outcome, and recovery path. No assignment remains declared_no_tool_binding, and no browser application directly reaches Python processes, host files, or backend credentials.
+- Completion: 2026-07-15: Added the browser-safe materialized binding catalog and mediated HTTP/libp2p gateway, including request, policy, response, and recovery observations. The gateway rejects credentials, host paths, and process handles before dispatch. Validation passed with 16 focused tests and the browser source-module audit.
 
 ## SVD-105 Map every backend tool to an app, diagnostic surface, or governed server-only disposition
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-102, SVD-104
 - Outputs: swissknife/src/services/mcp/all-tools-disposition-catalog.ts, swissknife/test/mcp-plus-plus/all-tools-disposition-catalog.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-disposition-catalog.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-tools-disposition-catalog.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
 - Acceptance: Every discovered tool from all three owners maps to a user-facing application operation, MCP Control or MCP++ Explorer diagnostic operation, or policy-reviewed server-only disposition. The catalog proves HTTP/libp2p reachability where approved and preserves unsupported, denied, and unavailable cases with owner and rationale.
+- Completion: 2026-07-15: Added the fail-closed all-tools disposition catalog and browser-safe validation. Updated the MCP++ runtime requirement to Node 22.19+ because Helia's locked libp2p HTTP transport requires it, and raised the connector's cold-backend budget to 30 seconds. Live SwissKnife HTTP and libp2p evidence passed for all three services: 433 exact tool observations, three approved fixtures executed over both transports, and zero probe blockers.
 
 ## SVD-106 Execute exhaustive all-app behavior, recovery, and UI evidence workflows
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: quality
 - Depends on: SVD-104, SVD-105

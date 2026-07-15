@@ -2034,7 +2034,7 @@ success paths.
 
 ## SWR-138 Exercise default browser libp2p interoperability across Chromium, Firefox, and WebKit
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: browser/libp2p
 - Dedupe key: swissknife_refactor:three_engine_real_browser_libp2p_interoperability
@@ -2042,6 +2042,7 @@ success paths.
 - Outputs: swissknife/build-tools/configs/playwright.libp2p-browser.config.ts, swissknife/test/e2e/libp2p-browser.spec.ts, swissknife/test/e2e/fixtures/libp2p-browser-harness/relay-server.mjs, swissknife/test-results/libp2p-browser, swissknife/docs/browser-libp2p-evidence.md
 - Validation: cd swissknife && npm run test:e2e:libp2p-browser && npm run evidence:libp2p-browser && npm run audit:bundle-host-leakage
 - Acceptance: Chromium, Firefox, and WebKit each run two isolated browser contexts that construct real default-enabled libp2p nodes, connect through the local real relay where required, negotiate Noise and Yamux, exchange a signed request and response over the registered protocol, and tear down cleanly. Missing capability, blocked permission, relay loss, and timeout cases retain typed failure receipts. No synthetic peer, status-only mock, scripted success response, or host transport can satisfy the interoperability assertion.
+- Resolution: The SWR-138 implementation was already present in the current SwissKnife integration ancestry. The original failed validation was solely due to missing Playwright engine binaries. After installing the branch-pinned Chromium, Firefox, and WebKit engines, the current integration completed the exact validation sequence: three real relay-backed signed exchanges passed across Chromium, Firefox, and WebKit twice (direct and evidence run), and `audit:bundle-host-leakage` reported zero host leakage. The refreshed libp2p fingerprint is committed as SwissKnife `81bd9144`.
 
 ## SWR-139 Prove browser theorem and ZKP execution across supported engines without simulated defaults
 
