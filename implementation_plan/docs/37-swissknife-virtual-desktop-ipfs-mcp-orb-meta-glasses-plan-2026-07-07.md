@@ -2288,13 +2288,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-110 Compile exhaustive ORB/IDL action handoff contracts
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: orb-idl
 - Depends on: SVD-106, SVD-108, SVD-109
 - Outputs: swissknife/test/mcp-plus-plus/all-app-orb-idl-action-handoff.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-orb-idl-action-handoff.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-orb-idl-action-handoff.test.ts
 - Acceptance: Every eligible application action compiles to a deterministic packet with interface CID, action ID, capability profile, peer DID, permission and consent state, modality constraints, correlation ID, tool/receipt/event-DAG references, rollback, and selected fallback. Packet compilation rejects missing live binding or invalid device capability conditions.
+- Completion: Merged the deterministic 105-packet compiler and reviewed evidence catalog. Focused validation passes with five tests.
 
 ## SVD-111 Re-run Meta device-simulator modality, privacy, and fallback validation
 
@@ -2318,13 +2319,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-113 Persist and exchange supervisor dispatch artifacts through CIDs and event DAGs
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: storage
 - Depends on: SVD-107, SVD-109
 - Outputs: swissknife/src/services/storage/supervisor-dispatch-artifact-store.ts, swissknife/test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/supervisor-dispatch-artifact-store.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts
 - Acceptance: Governed supervisor dispatches persist content-addressed, redacted goal/task/receipt/event-DAG checkpoints through the browser-safe Helia path and prove compatible retrieval through approved kit/Kubo peers. Storage, retrieval, compaction certificate references, retention, cache fallback, and unavailable-state behavior are explicit and policy governed.
+- Completion: Merged the browser-safe, fail-closed artifact store with redaction, approved-peer retrieval, cache fallback, and Event-DAG compaction references. Focused validation passes with five tests.
 
 ## SVD-114 Rebuild freshness-aware release evidence without placeholder loopholes
 
@@ -2405,7 +2407,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-121 Resolve validation retry-budget failure for SVD-109
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2413,10 +2415,11 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-109. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-121-svd-109-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-109 from strategy blocked_tasks.
+- Completion: The Profile A-H focused suite and fresh all-tools HTTP/libp2p capture both pass with `GO` evidence.
 
 ## SVD-122 Resolve merge retry-budget failure for SVD-113
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2424,3 +2427,16 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/src/services/storage/supervisor-dispatch-artifact-store.ts, swissknife/test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/supervisor-dispatch-artifact-store.json, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-122-svd-113-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-113. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-122-svd-113-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-113 from strategy blocked_tasks.
+- Completion: Verified the SVD-113 commit is merged in SwissKnife and its focused test passes.
+
+## SVD-123 Resolve merge retry-budget failure for SVD-110
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-106, SVD-108, SVD-109
+- Outputs: swissknife/test/mcp-plus-plus/all-app-orb-idl-action-handoff.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-orb-idl-action-handoff.json, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-123-svd-110-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-110. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-123-svd-110-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-110 from strategy blocked_tasks.
+- Completion: Verified the SVD-110 compiler and evidence catalog are merged in SwissKnife and its focused test passes.
