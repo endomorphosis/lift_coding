@@ -2440,3 +2440,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-123-svd-110-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-110. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-123-svd-110-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-110 from strategy blocked_tasks.
 - Completion: Verified the SVD-110 compiler and evidence catalog are merged in SwissKnife and its focused test passes.
+
+## SVD-124 Resolve merge retry-budget failure for SVD-066
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-060, SVD-065, SVD-059, SVD-072
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, swissknife/docs/refactor-final-signoff.md, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-124-svd-066-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-066. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-124-svd-066-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-066 from strategy blocked_tasks.
