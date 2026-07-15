@@ -1931,7 +1931,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 
 ## SVD-072 Execute expanded Meta glasses I/O simulator validation
 
-- Status: waiting
+- Status: completed
 - Priority: P2
 - Track: device
 - Depends on: SVD-059, SVD-071
