@@ -2235,3 +2235,56 @@ supervisor lane.
 - Outputs: swissknife/scripts/ensure-ipfs-mcp-compat-adapters.cjs, swissknife/scripts/reproduce-release-attestation.mjs, swissknife/test/architecture/release-reproduction-adapter-lifecycle.test.js, swissknife/docs/release-reproduction-attestation.md
 - Validation: cd swissknife && npm run test:fast -- test/architecture/release-reproduction-adapter-lifecycle.test.js
 - Acceptance: A clean detached reproduction starts compatibility adapters only when needed, records their PID and checkout identity, and terminates only adapters whose recorded PID, command, and working directory belong to that detached checkout before removing it. Two consecutive reproductions cannot reuse a listener from a deleted worktree. Cleanup must never terminate an adapter belonging to another worktree, lane, or user process. A failed gate still writes a truthful `NO_GO` attestation and leaves no owned listener behind. The test fixture proves both positive cleanup and foreign-process preservation.
+
+## Phase 24: Executable Remote Capability Parity And Release Evidence Production
+
+The recovered release path must not treat static descriptor rows or committed reports as
+runtime proof. Browser bundles remain Python-free. Remote services may be reached only
+through typed MCP/MCP++ capability boundaries, but those boundaries must be backed by
+real TypeScript implementations, must expose the same descriptor names through HTTP and
+browser-capable libp2p transports, and must preserve typed unavailable or denied states
+when a remote action cannot be run safely.
+
+## SWR-155 Implement the static-only datasets and workflow capability semantics in TypeScript
+
+- Status: ready
+- Priority: P0
+- Track: browser/remote-capability-runtime
+- Dedupe key: swissknife_refactor:typescript_dataset_and_workflow_capability_semantics
+- Depends on: SWR-136, SWR-138, SWR-140, SWR-153
+- Outputs: swissknife/src/services/ipfs, swissknife/src/services/ipfs/browser.ts, swissknife/src/services/ipfs/api, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/all-tools-evidence-lib.cjs, swissknife/test/browser, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run test:run -- test/mcp-plus-plus/wasm-prover-browser-purity.test.ts test/mcp-plus-plus/all-tools-execution-fixtures.test.ts
+- Acceptance: Implement the semantics represented by `load_index`, `check_task_status`, `get_task_status`, and `WorkflowCoordinator.submit_task` as owned TypeScript modules with explicit schemas, validation, state transitions, deterministic task/index identifiers, correlation IDs, progress events, and typed not-found or denied outcomes. A mutation submitted through the governed MCP boundary must be retrievable through the status operations and cannot be represented by a canned success response. Browser imports execute the TypeScript implementation or a declared WebAssembly dependency only; they cannot import Python, spawn a host process, call a native binding, or use a simulated success path. The compatibility adapters may be transport hosts, but they must delegate to the same tested TypeScript implementation rather than carrying a second handwritten semantic copy. Tests cover valid creation, idempotent replay, invalid input, unknown task/index, permission denial, and restart or persistence behavior.
+
+## SWR-156 Advertise and prove every repaired capability through HTTP and browser libp2p
+
+- Status: waiting
+- Priority: P0
+- Track: libp2p/remote-capability-parity
+- Dedupe key: swissknife_refactor:exact_tool_http_libp2p_parity_for_typescript_capabilities
+- Depends on: SWR-155
+- Outputs: swissknife/scripts/capture-swissknife-all-tools-peer-evidence.cjs, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/all-tools-evidence-lib.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && node scripts/capture-swissknife-all-tools-peer-evidence.cjs && node -e "const x=require('./test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json'); const names=['load_index','check_task_status','get_task_status','run_inference_job','submit_task']; const failed=x.tools.filter(t=>names.includes(t.name)&&['unreachable','unsupported','static-only'].includes(t.disposition)); if(failed.length) throw new Error(JSON.stringify(failed));"
+- Acceptance: HTTP and libp2p discovery expose identical exact names, schemas, descriptor CIDs, and UCAN-bound capability contracts for every repaired operation. The evidence records a real non-destructive index or task lifecycle fixture on both transports, CID retrieval, and event-DAG visibility. Mutating calls outside the narrowly approved fixture are explicitly discovered and typed denied, never hidden, static-only, or inferred from aggregate counts. The browser-facing libp2p client uses its default-enabled browser transport and does not fall back to Node sockets, Python, shell execution, or a fabricated peer receipt.
+
+## SWR-157 Produce the complete virtual-desktop evidence set inside the detached release checkout
+
+- Status: waiting
+- Priority: P0
+- Track: release/evidence-production
+- Dedupe key: swissknife_refactor:detached_checkout_virtual_desktop_evidence_producers
+- Depends on: SWR-141, SWR-156
+- Outputs: swissknife/scripts/ensure-virtual-desktop-release-evidence-prereqs.cjs, swissknife/scripts/release-readiness-gate.mjs, swissknife/package.json, swissknife/test/architecture, swissknife/test-results/virtual-desktop-ipfs-mcp-orb, swissknife/docs/release-reproduction-attestation.json
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: Before aggregation, the release command serially runs the real producers for the profile matrix, app backend behavior and screenshots, Supervisor Console evidence and screenshots, ORB/IDL handoff, Meta simulator and screenshots, all-tools smoke and route coverage, call-envelope fixtures, glasses control-plane and replay packets, peer interoperability, browser compatibility, and freshness receipts. Each producer runs in the detached checkout with its isolated adapter endpoints and owner token, writes evidence rooted in that checkout, and fails the release rather than accepting an absent, stale, copied, or report-only artifact. The orchestrator exposes command-level receipts, preserves the first concrete failure, cleans only release-owned processes, and does not weaken the aggregate validator or synthesize any evidence artifact.
+
+## SWR-158 Require a clean-checkout GO attestation for Phase 24 closure
+
+- Status: waiting
+- Priority: P0
+- Track: release/verification
+- Dedupe key: swissknife_refactor:phase24_clean_checkout_go_attestation
+- Depends on: SWR-157
+- Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && npm ci && npm run release:readiness && node -e "const x=require('./docs/release-reproduction-attestation.json'); if(x.decision!=='GO') throw new Error(JSON.stringify(x.blockers ?? x));"
+- Acceptance: A newly created detached checkout from the committed integration revision completes the lockfile install, browser build, three-engine browser proof and libp2p evidence, exact remote-tool transport parity, and all virtual-desktop evidence producers with an attestation decision of `GO`. The output fingerprints are bound to committed source blobs and the detached checkout's own evidence. Any local dirt, parent-gitlink mismatch, unresolved merge marker, static-only capability, simulated proof or peer result, stale receipt, foreign listener, or missing screenshot remains a hard `NO_GO`; no Phase 24 document may override that result.
