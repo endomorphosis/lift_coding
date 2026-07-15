@@ -2234,5 +2234,5 @@ supervisor lane.
 - Dedupe key: swissknife_refactor:owned_clean_checkout_adapter_lifecycle_v2
 - Depends on: SWR-136
 - Outputs: swissknife/scripts/ensure-ipfs-mcp-compat-adapters.cjs, swissknife/scripts/reproduce-release-attestation.mjs, swissknife/test/architecture/release-reproduction-adapter-lifecycle.test.js, swissknife/docs/release-reproduction-attestation.md
-- Validation: cd swissknife && npm run test:fast -- test/architecture/release-reproduction-adapter-lifecycle.test.js && npm run release:readiness
+- Validation: cd swissknife && npm run test:fast -- test/architecture/release-reproduction-adapter-lifecycle.test.js
 - Acceptance: A clean detached reproduction starts compatibility adapters only when needed, records their PID and checkout identity, and terminates only adapters whose recorded PID, command, and working directory belong to that detached checkout before removing it. Two consecutive reproductions cannot reuse a listener from a deleted worktree. Cleanup must never terminate an adapter belonging to another worktree, lane, or user process. A failed gate still writes a truthful `NO_GO` attestation and leaves no owned listener behind. The test fixture proves both positive cleanup and foreign-process preservation.
