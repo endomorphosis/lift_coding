@@ -191,7 +191,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   writers, conflict detection, tombstones, corrupt heads, and old-schema read.
 
 ## IROH-012 Add reference tracking and safe garbage collection
-- Status: pending
+- Status: completed
 - Depends on: IROH-011
 - Work: Track references across namespaces/revisions; expose mark/sweep dry-run,
   retention windows, leases for active readers/writers, quotas, and repair.
@@ -257,7 +257,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   secret redaction, invalid configs, and legacy config compatibility.
 
 ## IROH-018 Mount Iroh in the canonical virtual filesystem
-- Status: pending
+- Status: completed
 - Depends on: IROH-014, IROH-015, IROH-017
 - Work: Route `backend=iroh` and `iroh://` mounts through the canonical VFS,
   preserving operation envelopes, lineage, mount isolation, path policies,
@@ -267,7 +267,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   pass; cross-backend copy IPFS/local/Iroh preserves bytes and lineage.
 
 ## IROH-019 Enable Iroh for virtual buckets and tiered storage
-- Status: pending
+- Status: completed
 - Depends on: IROH-018
 - Work: Permit Iroh backend bindings in bucket creation, replication targets,
   tier policies, placement selection, capacity reporting, and reconciliation.
@@ -277,7 +277,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   quota rejection, duplicate content, and policy migration.
 
 ## IROH-020 Add explicit IPFS/Iroh synchronization
-- Status: pending
+- Status: completed
 - Depends on: IROH-018
 - Work: Implement local/IPFS/Iroh import/export and sync with hash-domain
   separation (`cid` versus `iroh_hash`), durable checkpoints, conflict policies,
@@ -289,7 +289,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 6 - User Surfaces And Operations
 
 ## IROH-021 Expose safe CLI operations
-- Status: pending
+- Status: completed
 - Depends on: IROH-009, IROH-017, IROH-020
 - Work: Add binary, service, backend, namespace, blob, ticket, mount, sync, and
   GC commands with JSON output, confirmation for destructive work, dry-run,
@@ -299,7 +299,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   confirmations, and shell/path portability.
 
 ## IROH-022 Expose governed MCP and API operations
-- Status: pending
+- Status: completed
 - Depends on: IROH-021
 - Work: Add only implemented Iroh capabilities to the unified MCP server and
   storage API. Separate read/control/destructive permissions; validate inputs;
@@ -309,7 +309,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   redaction, malformed tickets, and destructive confirmation tests pass.
 
 ## IROH-023 Document deployment and recovery
-- Status: pending
+- Status: completed
 - Depends on: IROH-009, IROH-020
 - Work: Document install/upgrade/rollback, ports/firewall/relay, backups of node
   identity and manifests, namespace sharing, outage modes, disaster recovery,
@@ -320,7 +320,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
 ## Phase 7 - Security, Interoperability, CI, And Release
 
 ## IROH-024 Complete threat model and hardening
-- Status: pending
+- Status: completed
 - Depends on: IROH-002, IROH-008, IROH-011, IROH-022
 - Work: Threat-model malicious tickets/peers/manifests, path traversal, symlinks,
   decompression/archive attacks, key theft, replay, rollback, resource
@@ -330,7 +330,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   permissions, log scan, resource limits, and dependency/license audit pass.
 
 ## IROH-025 Run real multi-node interoperability tests
-- Status: pending
+- Status: completed
 - Depends on: IROH-016, IROH-020, IROH-024
 - Work: Test two or more isolated nodes over direct LAN, relay fallback, NAT-like
   container topology, interruption, version skew, key rotation, and large data.
@@ -340,7 +340,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   and bounded-resource assertions pass on Linux and macOS targets.
 
 ## IROH-026 Add CI and packaging gates
-- Status: pending
+- Status: completed
 - Depends on: IROH-005, IROH-013, IROH-025
 - Work: Add unit, fsspec conformance, async, service, installer, security,
   packaging, and opt-in multi-node lanes. Test Python 3.12/3.13, supported OS and
@@ -350,7 +350,7 @@ revision atomically. Native Iroh hashes remain distinct from IPFS CIDs.
   remains usable without Iroh; extras and binaries are reproducible.
 
 ## IROH-027 Stage rollout and release sign-off
-- Status: pending
+- Status: completed
 - Depends on: IROH-023, IROH-024, IROH-026
 - Work: Release behind `iroh.enabled=false`, then experimental opt-in, canary,
   and supported status. Define rollback, SLOs, compatibility window, migration,

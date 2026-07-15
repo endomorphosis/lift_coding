@@ -214,8 +214,17 @@ make deps
 PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_daemon.py --once
 PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once
 
-# 5. Optional: create isolated worktrees for autonomous implementation
-PYTHONPATH=external/ipfs_datasets python3 scripts/virtual_ai_os_todo_supervisor.py --once --implement
+# 5. Optional: run implementation under the shared SwissKnife writer lease
+IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS=0 \
+node swissknife/scripts/swissknife-checkout-lease.mjs \
+  --run --lane virtual-ai-os \
+  --board implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md \
+  -- \
+  python3 scripts/virtual_ai_os_todo_supervisor.py \
+  --todo-path implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md \
+  --state-dir data/virtual_ai_os/state \
+  --task-prefix '## VAI-' --state-prefix virtual_ai_os \
+  --implement --no-ephemeral-worktree --no-worktree-reconciliation
 ```
 
 Bootstrap notes:
@@ -223,7 +232,9 @@ Bootstrap notes:
 - The virtual AI OS supervisor stores its state under `data/virtual_ai_os/state` by default.
 - Autonomous implementation worktrees are created under `data/virtual_ai_os/worktrees` by default.
 - You can override the backlog, state directory, or worktree root with `HANDSFREE_VAI_OS_TODO_PATH`, `HANDSFREE_VAI_OS_STATE_DIR`, and `HANDSFREE_VAI_OS_WORKTREE_ROOT`.
-- If `swissknife` or another submodule already has local changes, prefer a non-conflicting ready task before asking the supervisor to implement against that worktree.
+- If `swissknife` or another submodule already has local changes, pause on any
+  overlapping task. Never reset, stash, clean, force-checkout, or update the
+  dirty submodule for automation.
 - The current reviewed blocker is the unresolved canonical `mcp_plus_plus` upstream; keep that as a documented ops task instead of adding a broken submodule URL.
 
 See [implementation_plan/docs/19-virtual-ai-os-submodule-integration.md](../implementation_plan/docs/19-virtual-ai-os-submodule-integration.md) for the operating-model details and [CONFIGURATION.md](CONFIGURATION.md) for the bootstrap environment contract.
@@ -252,8 +263,17 @@ make deps
 PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_daemon.py --once
 PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once
 
-# 5. Optional: create isolated worktrees for autonomous implementation
-PYTHONPATH=external/ipfs_accelerate:external/ipfs_datasets python3 scripts/meta_glasses_display_todo_supervisor.py --once --implement
+# 5. Optional: run implementation under the shared SwissKnife writer lease
+IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS=0 \
+node swissknife/scripts/swissknife-checkout-lease.mjs \
+  --run --lane meta-glasses-display \
+  --board implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md \
+  -- \
+  python3 scripts/meta_glasses_display_todo_supervisor.py \
+  --todo-path implementation_plan/docs/18-swissknife-meta-glasses-display-widgets.todo.md \
+  --state-dir data/meta_glasses_display_widgets/state \
+  --task-prefix '## MGW-' --state-prefix meta_glasses_display \
+  --implement --no-ephemeral-worktree --no-worktree-reconciliation
 ```
 
 Bootstrap notes:

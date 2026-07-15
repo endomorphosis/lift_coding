@@ -29,7 +29,7 @@ PROFILE_G_TASKBOARD = (
     "38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md"
 )
 FIRST_TASK = 27
-LAST_TASK = 101
+LAST_TASK = 116
 
 
 @dataclass(frozen=True)
@@ -210,7 +210,10 @@ def build_queue(previous: dict[str, Any] | None = None) -> dict[str, Any]:
         summary[f"{state}_task_ids"] = ids_by_state[state]
     summary["blocked_count"] = 0
     summary["blocked_task_ids"] = []
-    summary["recommended_task_id"] = "SVD-092"
+    summary["recommended_task_id"] = next(
+        (task_id for task_id, task in tasks.items() if task["status"] == "ready"),
+        None,
+    )
 
     generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
     return {

@@ -7,6 +7,10 @@ import logging
 import sys
 
 from lift_ipfs_accelerate_bootstrap import bootstrap_ipfs_accelerate
+from swissknife_checkout_lease_guard import (
+    SwissKnifeLeaseGuardError,
+    require_swissknife_checkout_lease,
+)
 
 
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
@@ -180,8 +184,19 @@ def default_supervisor_args(argv: list[str] | None = None) -> list[str]:
 
 
 def main(argv: list[str] | None = None) -> None:
-    _hallucinate_supervisor_runner.run(default_supervisor_args(argv))
+    launch_args = list(sys.argv[1:] if argv is None else argv)
+    require_swissknife_checkout_lease(
+        launch_args,
+        allowed_lanes={
+            "hallucinate-multimodal-control": "hallucinate_app/docs/MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.todo.md",
+        },
+    )
+    _hallucinate_supervisor_runner.run(default_supervisor_args(launch_args))
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SwissKnifeLeaseGuardError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(78) from None
