@@ -2228,7 +2228,7 @@ supervisor lane.
 
 ## SWR-154 Make clean-checkout compatibility-adapter cleanup ownership-safe
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release/reproducibility
 - Dedupe key: swissknife_refactor:owned_clean_checkout_adapter_lifecycle_v2
