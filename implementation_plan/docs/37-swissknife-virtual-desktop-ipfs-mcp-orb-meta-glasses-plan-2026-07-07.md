@@ -2351,3 +2351,38 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py, tmp/swissknife_all_tools_supervisor/state/submodule-merge-diagnostics.json
 - Validation: cd external/ipfs_accelerate && PYTHONPATH=. python3 -m pytest test/api/test_agent_supervisor_todo_daemon_port.py -q -k "submodule or merge_reconciliation or main_checkout_dirty"
 - Acceptance: A supervisor merge records each nested gitlink conflict with path, ours/theirs candidates, reachable merge bases, and selected commit; it resolves only a verified descendant or an explicit deterministic recovery ref, never a blind side selection. Generated nested-worktree directories such as external/ipfs_kit/tmp are preserved or moved to supervisor state and cannot indefinitely classify the main checkout as user-dirty. Failed reconciliation remains retryable with a structured diagnostic, while an unchanged unrelated submodule prevents neither a validated parent merge nor subsequent ready work.
+
+## SVD-117 Resolve dirty main checkout blocking 3 worktree merges
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Fingerprint: 96547c2a4040fbf1ed29a75c7d24a852ade12e70
+- Dedupe key: reconciliation_guardrail:main_checkout_dirty
+- Depends on:
+- Outputs: tmp/swissknife_all_tools_supervisor/discovery, implementation_plan/docs/37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-117-reconciliation-96547c2a4040.md
+- Acceptance: Reconciliation guardrail filed this because 3 branch or worktree cleanup candidates are blocked by main_checkout_dirty. Use evidence and the machine-readable reconciliation plan in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-117-reconciliation-96547c2a4040.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## SVD-118 Resolve merge retry-budget failure for SVD-060
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-047, SVD-057, SVD-058, SVD-059
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, data/swissknife_virtual_desktop/discovery/all-tools-no-new-unknowns.md, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-118-svd-060-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-060. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-118-svd-060-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-060 from strategy blocked_tasks.
+
+## SVD-119 Resolve merge retry-budget failure for SVD-107
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-103, SVD-104
+- Outputs: swissknife/src/services/mcp/agent-supervisor-console-gateway.ts, swissknife/web/js/apps/agent-supervisor.js, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-three-backend-runtime.json, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-119-svd-107-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-107. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-119-svd-107-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-107 from strategy blocked_tasks.
