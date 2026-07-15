@@ -1782,7 +1782,7 @@ microphone, speaker, routing, fallback, and receipt validation path.
 
 ## SVD-060 Final all-tools ORB/IDL Meta glasses release closeout
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-047, SVD-057, SVD-058, SVD-059
@@ -1939,6 +1939,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 - Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
 - Acceptance: The Meta glasses simulator validates display-webapp fallback, camera photo/video capture, microphone input/transcription, speaker/headphone output, route behavior, permission denial and recovery, receipts, rollback, and operator-visible fallback decisions. This task waits for SVD-071 so the final expanded ORB/IDL handoff packets are included in the simulator evidence.
 - Waiting note 2026-07-09: Base expanded I/O simulator validation already passes through `meta-glasses-expanded-io.spec.ts`, `meta-glasses-io-apps.spec.ts`, and `meta-glasses-virtual-os.spec.ts`; final SVD-072 completion is held only for the SVD-071 expanded handoff packet artifacts.
+- Completion note 2026-07-15: Added expanded Meta glasses I/O simulator validation bound to the final SVD-071 handoff catalog, including display, camera, microphone, speaker/headphone, input, permission, denial/recovery, receipt, rollback, and redacted fallback replay coverage. The complete default Playwright suite and `npm run test:e2e:meta-glasses -- --reporter=line` passed with a single evidence writer to prevent shared-artifact races.
 
 ## SVD-073 Establish the shared Profile F Groth16 multi-party ceremony contract
 
