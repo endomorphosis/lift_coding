@@ -2387,3 +2387,15 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/src/services/mcp/agent-supervisor-console-gateway.ts, swissknife/web/js/apps/agent-supervisor.js, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-three-backend-runtime.json, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-119-svd-107-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-107. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-119-svd-107-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-107 from strategy blocked_tasks.
+
+## SVD-120 Resolve validation retry-budget failure for SVD-072
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-059, SVD-071
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-072. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-120-svd-072-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-072 from strategy blocked_tasks.
+- Completion note 2026-07-15: Reproduced the clean-worktree retry blocker and removed two hidden assumptions in the default Playwright path: app-family coverage now materializes its own all-tools inputs, and read-only routes no longer simulate a confirmation requirement. The serialized SVD-072 evidence writer generated a valid 315-packet simulator `GO` report, while the Meta glasses virtual-OS suite generated the stable 45-app display report with zero open, template, or browser failures. Both required validation commands passed.
