@@ -2217,7 +2217,7 @@ supervisor lane.
 
 ## SWR-153 Reconcile advertised datasets MCP capabilities with real callable handlers
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: remote-capability/contracts
 - Dedupe key: swissknife_refactor:datasets_mcp_advertised_handler_contract_v2
