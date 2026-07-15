@@ -2413,3 +2413,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-109. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-121-svd-109-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-109 from strategy blocked_tasks.
+
+## SVD-122 Resolve merge retry-budget failure for SVD-113
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-107, SVD-109
+- Outputs: swissknife/src/services/storage/supervisor-dispatch-artifact-store.ts, swissknife/test/mcp-plus-plus/supervisor-dispatch-artifact-store.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/supervisor-dispatch-artifact-store.json, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-122-svd-113-merge-retry-budget.md
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-113. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-122-svd-113-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-113 from strategy blocked_tasks.
