@@ -2036,7 +2036,7 @@ camera, microphone, speaker, and display behavior in this workspace.
 - Track: crypto
 - Depends on: SVD-078, SVD-076
 - Outputs: `external/ipfs_datasets/ipfs_datasets_py/logic/zkp/`, `swissknife/src/services/zkp/`, `Mcp-Plus-Plus/docs/spec/temporal-deontic-policy.md`, `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/profile-d-policy-zkp.json`
-- Validation: Compile and verify allow, deny, obligation, temporal-window, and scoped-resource witness vectors with the dedicated circuit; reject a certificate whose public policy, decision, intent, or formal-logic commitment does not match the evaluated policy result.
+- Validation: cd external/ipfs_datasets && PYTHONPATH=. python3 -m pytest tests/unit_tests/logic/zkp/test_profile_d_policy_circuit.py -q && cd ../../swissknife && npm run test:run -- test/mcp-plus-plus/profile-d-policy.test.ts test/mcp-plus-plus/profile-d-policy-zkp.test.ts && npm run lint:source-modules
 - Acceptance: A verified zero-knowledge certificate proves the public Profile D decision commitments without revealing the private policy text or private context. The implementation must remain explicitly statement-only when the circuit, trusted setup, or verification key is not production-admitted.
 
 ## SVD-082 through SVD-091 Add distributed risk, neighborhood coordination, and scheduling
