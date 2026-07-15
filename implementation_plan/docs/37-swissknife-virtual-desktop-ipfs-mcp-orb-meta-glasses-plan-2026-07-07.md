@@ -2244,7 +2244,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-106 Execute exhaustive all-app behavior, recovery, and UI evidence workflows
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: quality
 - Depends on: SVD-104, SVD-105
