@@ -2391,7 +2391,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-120 Resolve validation retry-budget failure for SVD-072
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2399,3 +2399,4 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-072. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-120-svd-072-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-072 from strategy blocked_tasks.
+- Completion note 2026-07-15: Reproduced the clean-worktree retry blocker and removed two hidden assumptions in the default Playwright path: app-family coverage now materializes its own all-tools inputs, and read-only routes no longer simulate a confirmation requirement. The serialized SVD-072 evidence writer generated a valid 315-packet simulator `GO` report, while the Meta glasses virtual-OS suite generated the stable 45-app display report with zero open, template, or browser failures. Both required validation commands passed.
