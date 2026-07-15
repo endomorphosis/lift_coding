@@ -2255,13 +2255,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-107 Complete the three-backend Agent Supervisor Console runtime
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: supervisor
 - Depends on: SVD-103, SVD-104
 - Outputs: swissknife/src/services/mcp/agent-supervisor-console-gateway.ts, swissknife/web/js/apps/agent-supervisor.js, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-three-backend-runtime.json
 - Validation: cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts test/mcp-plus-plus/agent-supervisor-prompt-steering.test.ts && node scripts/capture-all-profile-service-matrix.cjs
 - Acceptance: The desktop console reads goal, subgoal, queue, task-board, run-history, and receipt state from the accelerate supervisor; obtains policy and semantic-goal assistance from datasets; and persists/retrieves receipts, content references, and event-DAG checkpoints through kit or browser-safe Helia fallback. Each owner, transport, CID, policy result, and failure is visible without direct host access.
+- Completion note 2026-07-15: Integrated the previously stranded SVD-119 runtime safeguards. `agent-supervisor-console-gateway` and prompt-steering validation passed (13 tests), and the three-service, eight-profile, HTTP/libp2p service matrix reported `GO`.
 
 ## SVD-108 Govern prompt steering and goal-to-task lifecycle from the desktop
 
@@ -2387,3 +2388,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/src/services/mcp/agent-supervisor-console-gateway.ts, swissknife/web/js/apps/agent-supervisor.js, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-three-backend-runtime.json, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-119-svd-107-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-107. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-119-svd-107-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-107 from strategy blocked_tasks.
+
+## SVD-120 Resolve validation retry-budget failure for SVD-072
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-059, SVD-071
+- Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/meta-glasses-device-simulator-validation.json, swissknife/test-results/meta-glasses-virtual-os/2026-07-09T18-30-06-420Z/apps-meta-display-report.json, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c playwright.config.ts --reporter=line && npm run test:e2e:meta-glasses -- --reporter=line
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-072. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-120-svd-072-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-072 from strategy blocked_tasks.
