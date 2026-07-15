@@ -2277,13 +2277,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-109 Re-prove MCP++ Profiles A through H from each applicable desktop path
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: transport
 - Depends on: SVD-104, SVD-107, SVD-108
 - Outputs: swissknife/test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json
 - Validation: cd swissknife && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/capture-swissknife-all-tools-peer-evidence.cjs
 - Acceptance: Applicable desktop operations and the Supervisor Console independently verify HTTP and libp2p transport parity, UCAN DID peer identity, descriptor and receipt CIDs, policy proofs, event-DAG visibility/compaction evidence, scheduling and capability-aware delegation evidence, and payment or settlement policy when enabled. The report distinguishes executed, denied, unsupported, and unreachable paths.
+- Completion: Regenerated independent HTTP/libp2p peer evidence after restoring the Helia native binding, publishing the Profile F bridge announcement, and using capture-time DAG timestamps. The Profile A-H focused Vitest suite passes with the refreshed `GO` evidence.
 
 ## SVD-110 Compile exhaustive ORB/IDL action handoff contracts
 
