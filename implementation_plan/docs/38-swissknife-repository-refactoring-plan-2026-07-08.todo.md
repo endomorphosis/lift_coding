@@ -2077,6 +2077,7 @@ success paths.
 - Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json
 - Validation: cd swissknife && npm ci && npm run release:readiness
 - Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
+- Blocker: The current `ipfs_datasets_py` compatibility endpoint advertises 146 read descriptors that route to non-callable module-file stems (for example `web_archive_tools.archive_is_integration`) while the actual module exports differently named functions (for example `archive_to_archive_is`). A fresh detached reproduction therefore receives real backend error envelopes, not a successful capability receipt. SWR-153 must make the advertised catalog and real handler registry agree before this task may be retried.
 
 ## SWR-142 Phase 21 recovery and reproducibility handoff
 

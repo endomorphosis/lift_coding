@@ -2266,13 +2266,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-108 Govern prompt steering and goal-to-task lifecycle from the desktop
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: supervisor
 - Depends on: SVD-107
 - Outputs: swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-goal-task-lifecycle.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/agent-supervisor-lifecycle/
 - Validation: cd swissknife && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts --reporter=line
 - Acceptance: An operator can create or select a goal, inspect derived subgoals, link or create task-board tasks, submit a redacted prompt-steering dry run, review policy/budget/dependency effects, explicitly confirm a permitted mutation, and observe receipt/event-DAG outcomes. Denied, expired, and cancelled requests preserve the task graph and display a clear recovery action.
+- Completion note 2026-07-15: Merged the goal-to-task lifecycle console into the current SwissKnife integration head. Validation passed with `node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.agent-supervisor.config.ts test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts --reporter=line` (1 passed).
 
 ## SVD-109 Re-prove MCP++ Profiles A through H from each applicable desktop path
 
