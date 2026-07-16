@@ -2309,7 +2309,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-112 Gate cross-viewport UI/UX, accessibility, and failure visibility
 
-- Status: waiting
+- Status: completed
 - Priority: P1
 - Track: quality
 - Depends on: SVD-106, SVD-107, SVD-111
