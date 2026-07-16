@@ -1860,7 +1860,7 @@ safety.
 
 ## SVD-066 Close the supervisor-managed all-app MCP++ release loop
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-060, SVD-065, SVD-059, SVD-072
