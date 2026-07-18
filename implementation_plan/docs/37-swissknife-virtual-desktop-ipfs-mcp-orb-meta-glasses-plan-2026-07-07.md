@@ -2482,5 +2482,17 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Track: transport
 - Depends on: SVD-126, SVD-107, SVD-108
 - Outputs: `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json`, application-originated transport observations, and Profile A-H replay validation.
-- Validation: Run SVD-126's application workflow against each eligible HTTP/libp2p binding, then run `npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts` and the strict SVD-114 evidence builder.
+- Validation: `cd swissknife && npm run evidence:live-gateway && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/build-virtual-desktop-release-evidence.cjs`
 - Acceptance: The Profile A-H report is derived from actual application-originated calls rather than contract projections or peer fixtures. Each eligible operation retains transport-specific descriptor/receipt CIDs, UCAN DID verification, policy result, event-DAG provenance, compaction certificate, correlation ID, and recovery behavior. Profiles G and H remain explicitly unsupported unless their governed scheduling or settlement prerequisites are actually enabled.
+
+## SVD-128 Resolve validation retry-budget failure for SVD-127
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-126, SVD-107, SVD-108
+- Outputs: `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json`, application-originated transport observations, and Profile A-H replay validation., tmp/swissknife_all_tools_supervisor/discovery
+- Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-18-svd-128-svd-127-retry-budget.md
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-127. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-18-svd-128-svd-127-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-127 from strategy blocked_tasks.
+- Completion: 2026-07-18: Replaced SVD-127's prose validation instruction, whose apostrophe made the supervisor's `bash -lc` wrapper fail before validation, with an executable command chain. The canonical desktop replay completed with 101 persisted HTTP/libp2p executions; the Profile A-H focused suite passed (4/4) and regenerated a `GO` report with 22 dual-transport paths and 44 application-originated observations. The SVD-114 evidence builder completed successfully; its current `NO_GO` remains limited to the pre-existing SVD-106 blockers.
