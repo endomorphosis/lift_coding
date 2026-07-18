@@ -2333,7 +2333,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Status: waiting
 - Priority: P0
 - Track: release
-- Depends on: SVD-101, SVD-102, SVD-106, SVD-109, SVD-111, SVD-112, SVD-113, SVD-116
+- Depends on: SVD-101, SVD-102, SVD-106, SVD-109, SVD-111, SVD-112, SVD-113, SVD-116, SVD-126, SVD-127
 - Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-readiness-report.json, swissknife/docs/release-readiness-report.md
 - Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale && node scripts/release-readiness-gate.mjs
 - Acceptance: The release generator rejects absent evidence inputs, stale timestamps, declared_no_tool_binding for tool_backed pairs, descriptor-only or fixture-only execution claims, and unclassified backend tools. Its report names each failing application, tool, owner, transport, modality, task ID, and remediation rather than reducing a failure to a coverage percentage.
@@ -2463,3 +2463,23 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale && node scripts/release-readiness-gate.mjs
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-114. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-16-svd-125-svd-114-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-114 from strategy blocked_tasks.
 - Completion: Resolved committed conflict markers, reconciled strict gate parsing with current supervisor-managed evidence, isolated unowned compatibility endpoints, and regenerated passing release evidence/readiness reports.
+
+## SVD-126 Wire the virtual desktop to the mediated MCP++ execution gateway
+
+- Status: ready
+- Priority: P0
+- Track: apps
+- Depends on: SVD-100, SVD-104, SVD-105
+- Outputs: SwissKnife browser gateway bootstrap, same-origin `/mcp/tools/call` mediator, application-visible per-binding controls, and `test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-gateway-executions.json`
+- Validation: Start all three compatibility adapters and libp2p bridges, then run a Playwright workflow that invokes every materialized binding from its owning application surface through the same-origin mediator.
+- Acceptance: Every one of the 79 materialized bindings is initiated by a visible desktop application control, resolves its exact live owner/tool selection without browser exposure of backend URLs or credentials, records request/policy/response/recovery observations, and retains the correlation ID plus receipt/event-DAG references. Read operations use narrowly scoped non-mutating inputs; governed mutations remain confirmation or dry-run only.
+
+## SVD-127 Re-prove Profiles A-H from application-originated HTTP and libp2p executions
+
+- Status: waiting
+- Priority: P0
+- Track: transport
+- Depends on: SVD-126, SVD-107, SVD-108
+- Outputs: `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json`, application-originated transport observations, and Profile A-H replay validation.
+- Validation: Run SVD-126's application workflow against each eligible HTTP/libp2p binding, then run `npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts` and the strict SVD-114 evidence builder.
+- Acceptance: The Profile A-H report is derived from actual application-originated calls rather than contract projections or peer fixtures. Each eligible operation retains transport-specific descriptor/receipt CIDs, UCAN DID verification, policy result, event-DAG provenance, compaction certificate, correlation ID, and recovery behavior. Profiles G and H remain explicitly unsupported unless their governed scheduling or settlement prerequisites are actually enabled.
