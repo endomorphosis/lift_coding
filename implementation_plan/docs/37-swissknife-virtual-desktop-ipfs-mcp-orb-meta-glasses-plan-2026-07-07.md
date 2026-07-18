@@ -2451,3 +2451,15 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-tools-release-evidence.md, swissknife/docs/refactor-final-signoff.md, tmp/swissknife_all_tools_supervisor/discovery
 - Validation: test -f tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-124-svd-066-merge-retry-budget.md
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SVD-066. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-15-svd-124-svd-066-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SVD-066 from strategy blocked_tasks.
+
+## SVD-125 Resolve validation retry-budget failure for SVD-114
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SVD-101, SVD-102, SVD-106, SVD-109, SVD-111, SVD-112, SVD-113, SVD-116
+- Outputs: swissknife/scripts/build-virtual-desktop-release-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/release-evidence.json, swissknife/docs/release-readiness-report.json, swissknife/docs/release-readiness-report.md, tmp/swissknife_all_tools_supervisor/discovery
+- Validation: cd swissknife && node scripts/build-virtual-desktop-release-evidence.cjs && node scripts/audit-release-evidence-freshness.mjs --fail-on-stale && node scripts/release-readiness-gate.mjs
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SVD-114. Use evidence in tmp/swissknife_all_tools_supervisor/discovery/2026-07-16-svd-125-svd-114-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SVD-114 from strategy blocked_tasks.
+- Completion: Resolved committed conflict markers, reconciled strict gate parsing with current supervisor-managed evidence, isolated unowned compatibility endpoints, and regenerated passing release evidence/readiness reports.
