@@ -2466,13 +2466,14 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-126 Wire the virtual desktop to the mediated MCP++ execution gateway
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: apps
 - Depends on: SVD-100, SVD-104, SVD-105
 - Outputs: SwissKnife browser gateway bootstrap, same-origin `/mcp/tools/call` mediator, application-visible per-binding controls, and `test-results/virtual-desktop-ipfs-mcp-orb/all-app-live-gateway-executions.json`
-- Validation: Start all three compatibility adapters and libp2p bridges, then run a Playwright workflow that invokes every materialized binding from its owning application surface through the same-origin mediator.
+- Validation: `cd swissknife && npm run evidence:live-gateway`
 - Acceptance: Every one of the 79 materialized bindings is initiated by a visible desktop application control, resolves its exact live owner/tool selection without browser exposure of backend URLs or credentials, records request/policy/response/recovery observations, and retains the correlation ID plus receipt/event-DAG references. Read operations use narrowly scoped non-mutating inputs; governed mutations remain confirmation or dry-run only.
+- Completion: 2026-07-18: The canonical desktop browser exercised all 79 visible controls through same-origin `/mcp/tools/call`; all completed as adapter-enforced dry runs through the exact live HTTP tool selection for `ipfs_kit_py`, `ipfs_datasets_py`, and `ipfs_accelerate_py`. Every call produced persisted Helia receipt and event-DAG CIDs, with no backend URL or credential exposed to the browser. Validation: `cd swissknife && npm run evidence:live-gateway`.
 
 ## SVD-127 Re-prove Profiles A-H from application-originated HTTP and libp2p executions
 
