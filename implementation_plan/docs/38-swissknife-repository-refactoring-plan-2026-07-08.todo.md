@@ -2346,3 +2346,14 @@ when a remote action cannot be run safely.
 - Outputs: a committed SwissKnife integration branch, `swissknife/docs/refactor-final-signoff.md`, `swissknife/docs/release-readiness-report.json`, and a merge-reconciliation receipt identifying every integrated commit and rejected stale/recovery branch.
 - Validation: `cd swissknife && git diff --check && npm run release:readiness && node -e 'const report=require("./docs/release-readiness-report.json"); if(report.summary?.releaseDecision !== "GO" || report.summary?.failed !== 0) process.exit(1)'`.
 - Acceptance: Integrate only commits whose task status, source diff, and validation evidence agree with the current SwissKnife mainline. Superseded implementation attempts, diagnostic branches, and rescue/recovery branches remain preserved but are not blindly merged. Rebase or merge against current `origin/main`, resolve semantic conflicts in favor of the canonical module owner, validate the resulting source and evidence, commit the nested SwissKnife repository, and push a fast-forward-safe result to `origin/main`. The parent gitlink may advance only after that nested push succeeds. A failed validation or unresolved conflict must leave a concrete, truthful blocker receipt and must not push partial work.
+
+## SWR-163 Resolve validation retry-budget failure for SWR-160
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: `swissknife/scripts/lib/release-readiness-evidence-producers.mjs`, `swissknife/scripts/release-readiness-gate.mjs`, `swissknife/scripts/run-with-owned-port.mjs`, `swissknife/scripts/lib/pick-free-port.mjs`, `swissknife/build-tools/configs/playwright.live-behavior-proof.config.ts`, `swissknife/build-tools/configs/playwright.live-gateway.config.ts`, `swissknife/test/architecture/release-readiness-hermetic.test.ts`, and ownership documentation or audit coverage for those entrypoints., tmp/swissknife_refactor_integration_supervisor/discovery
+- Validation: `cd swissknife && npm run test:run -- test/architecture/release-readiness-hermetic.test.ts && npm run services:audit && npm run typecheck:services && npm run release:readiness`.
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SWR-160. Use evidence in tmp/swissknife_refactor_integration_supervisor/discovery/2026-07-19-swr-163-swr-160-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SWR-160 from strategy blocked_tasks.
