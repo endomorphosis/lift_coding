@@ -2349,7 +2349,7 @@ when a remote action cannot be run safely.
 
 ## SWR-163 Resolve validation retry-budget failure for SWR-160
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -2357,3 +2357,4 @@ when a remote action cannot be run safely.
 - Outputs: `swissknife/scripts/lib/release-readiness-evidence-producers.mjs`, `swissknife/scripts/release-readiness-gate.mjs`, `swissknife/scripts/run-with-owned-port.mjs`, `swissknife/scripts/lib/pick-free-port.mjs`, `swissknife/build-tools/configs/playwright.live-behavior-proof.config.ts`, `swissknife/build-tools/configs/playwright.live-gateway.config.ts`, `swissknife/test/architecture/release-readiness-hermetic.test.ts`, and ownership documentation or audit coverage for those entrypoints., tmp/swissknife_refactor_integration_supervisor/discovery
 - Validation: `cd swissknife && npm run test:run -- test/architecture/release-readiness-hermetic.test.ts && npm run services:audit && npm run typecheck:services && npm run release:readiness`.
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SWR-160. Use evidence in tmp/swissknife_refactor_integration_supervisor/discovery/2026-07-19-swr-163-swr-160-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SWR-160 from strategy blocked_tasks.
+- Resolution: Reused the retry-budget evidence and repaired the SWR-160 validation surface by promoting the release-readiness producer manifest to the single production source of truth for producer order, ownership, dependencies, artifact verification, and release-gate expansion. The gate now delegates producer entries to that manifest helper, the hermetic architecture test covers the production helper and owned-port behavior, and the ownership document records each script/config entrypoint. Local validation passed for the SWR-163 chain; `npm run release:readiness` exited successfully with all executable gates passing and a truthful SWR-141 pre-commit clean-checkout attestation of `NO_GO` because the daemon has not yet committed the nested SwissKnife candidate.
