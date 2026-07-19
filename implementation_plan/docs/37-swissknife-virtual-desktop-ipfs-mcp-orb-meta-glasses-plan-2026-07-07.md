@@ -2330,7 +2330,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-114 Rebuild freshness-aware release evidence without placeholder loopholes
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-101, SVD-102, SVD-106, SVD-109, SVD-111, SVD-112, SVD-113, SVD-116, SVD-126, SVD-127
