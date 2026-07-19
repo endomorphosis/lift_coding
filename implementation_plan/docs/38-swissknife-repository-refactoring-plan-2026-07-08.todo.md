@@ -260,8 +260,6 @@ unless the purpose is explicit state observation.
 
 ## SWR-001 Restore strict service-boundary audit
 
-## SWR-001 Restore strict service-boundary audit
-
 - Status: completed
 - Completion: automated
 - Priority: P1
@@ -2081,8 +2079,6 @@ success paths.
 - Validation: cd swissknife && npm ci && npm run test:fast -- test/architecture/release-reproduction-attestation.test.js && node --check scripts/reproduce-release-attestation.mjs
 - Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
 - Resolution: The attestation now fingerprints committed Git blobs, uses canonical hashes for self-referential outputs, isolates its adapter ports, and refuses to terminate an adapter unless its command, checkout, and release token prove ownership. The clean reproduction executes all gates and correctly returns `NO_GO` while the virtual-desktop aggregate evidence is incomplete. SWR-157 owns producing the missing evidence; SWR-158 owns the final clean-checkout `GO` decision.
-
-## SWR-142 Phase 21 recovery and reproducibility handoff
 
 ## SWR-142 Phase 21 recovery and reproducibility handoff
 
