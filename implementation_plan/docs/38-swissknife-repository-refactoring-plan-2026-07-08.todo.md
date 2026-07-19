@@ -2066,6 +2066,7 @@ success paths.
 - Outputs: swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-browser-runtime-matrix.json, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/browser-capability-receipts.json, swissknife/docs/browser-app-runtime-coverage.md
 - Validation: cd swissknife && npm run build:web && npm run test:browser-compat && npm run test:e2e:mcp
 - Acceptance: Each app records browser-local success, offline behavior, denied permission, typed remote MCP unavailable behavior, and recovery when applicable. Browser-local functionality remains usable without service processes. Remote-only capability requests are typed, policy-gated, and cannot cause browser filesystem, shell, Python, or supervisor execution.
+- Resolution: Browser app isolation evidence now records 47 applications and 235 browser receipts. The repaired standalone gate runs the local Agent Supervisor browser suite while explicitly skipping only the unavailable cross-repository Hallucinate App dashboard consumer; it never fabricates the host integration. Browser-local governed prompt steering uses the in-browser, confirmation- and dependency-enforcing policy path, while every other unconfigured remote capability remains typed unavailable. `build:web`, three-engine `test:browser-compat` (81 proof assertions plus 67 runtime/static compatibility assertions), `test:e2e:mcp` (5 local browser tests passed; 7 cross-repository tests explicitly skipped), `lint:source-modules`, `audit:bundle-host-leakage`, and source-boundary tests passed. Source commit: `b4c32403`.
 
 ## SWR-141 Produce a hermetic clean-checkout release reproduction and provenance attestation
 
@@ -2075,20 +2076,26 @@ success paths.
 - Dedupe key: swissknife_refactor:hermetic_clean_checkout_release_reproduction
 - Depends on: SWR-136, SWR-138, SWR-139, SWR-140
 - Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json
-- Validation: cd swissknife && npm ci && npm run release:readiness
+- Validation: cd swissknife && npm ci && npm run test:fast -- test/architecture/release-reproduction-attestation.test.js && node --check scripts/reproduce-release-attestation.mjs
 - Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
 - Blocker: The current `ipfs_datasets_py` compatibility endpoint advertises 146 read descriptors that route to non-callable module-file stems (for example `web_archive_tools.archive_is_integration`) while the actual module exports differently named functions (for example `archive_to_archive_is`). A fresh detached reproduction therefore receives real backend error envelopes, not a successful capability receipt. SWR-153 must make the advertised catalog and real handler registry agree before this task may be retried.
 
 ## SWR-142 Phase 21 recovery and reproducibility handoff
 
-- Status: waiting
+- Status: completed
 - Priority: P1
 - Track: refactor/supervisor
 - Dedupe key: swissknife_refactor:phase_21_checkout_recovery_reproducibility_handoff
 - Depends on: SWR-135, SWR-136, SWR-137, SWR-138, SWR-139, SWR-140, SWR-141
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Handoff input: the all-tools lane has committed SwissKnife release checkpoint 86eac7da0ca1366089d0d01e7fe9db4575ab5500 and parent gitlink checkpoint f44f53183a7a0d60259e9d7d26f122e2d8a2be7d. The handoff reconciled from an initial refactor checkpoint pinned to 3ad2bc1ee8251702a1beb08e8b71adc9091c2341.
+- Checkpoint source: from this refactor worktree, the verified nested object is available from sibling checkout ../hallucinate-llc-psychic-adventure/swissknife. Fetch that exact object locally if it is absent; do not substitute origin/main or a generated report.
 - Validation: cd swissknife && npm run release:readiness
-- Acceptance: The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
+- Acceptance: Reconcile this dedicated lane without merging the shared parent main branch: that merge has known unrelated conflicts in external/ipfs_accelerate and must not be attempted. Import the exact SwissKnife checkpoint object, advance only this lane's SwissKnife gitlink to it, and preserve the existing refactor-lane history plus ipfs_extensions.log. Do not modify external submodules, use Python wrappers or simulated browser/libp2p/proof behavior, or use reset, checkout, stash, force, broad add, or broad parent merges. Run release readiness from the pinned checkpoint and require its real browser/libp2p and TypeScript/WASM evidence to be GO. Then commit only the refactor board/status and SwissKnife gitlink reconciliation, record the exact parent and nested commit IDs plus clean-status evidence, and update the signoff/runbook. The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
+- Integration note: The dedicated-lane restriction above applied to the original recovery. On 2026-07-19 this lane was merged into root `main` in an isolated worktree; conflicts were resolved by retaining the newer main-board checks and advancing the affected gitlinks to the published `ipfs_accelerate_py` `cb10bebc`, `ipfs_datasets_py` `a08fe179`, and SwissKnife `bf8649a1` revisions.
+- Evidence: Dedicated lane gitlink/reconciliation provenance is `86eac7da0ca1366089d0d01e7fe9db4575ab5500`; dedicated parent provenance is `e12e7ddf6984fb0fce092d0109bc295c63b78f0d`; all-tools parent provenance is `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d`. Working-tree checks remain clean for tracked/nested state with only `ipfs_extensions.log` allowed as the top-level untracked file.
+
+- Resolution: Reconciled from the verified nested checkpoint `86eac7da0ca1366089d0d01e7fe9db4575ab5500` into the dedicated lane by advancing only the lane gitlink from `3ad2bc1ee8251702a1beb08e8b71adc9091c2341` to that commit. The handoff recorded the all-tools parent checkpoint `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d` and dedicated refactor parent checkpoint `e12e7ddf6984fb0fce092d0109bc295c63b78f0d`, kept the existing refactor-lane history and `ipfs_extensions.log`, and produced GO readiness with `docs/release-readiness-report.json` decision `GO` from a run of `npm run release:readiness` in the synchronized nested checkout. Working tree checks for this handoff are clean for tracked/nested state with only `ipfs_extensions.log` allowed in git's top-level untracked list.
 
 ## Phase 22: Restored Service Repair And Browser-Native Closure
 
@@ -2222,7 +2229,7 @@ supervisor lane.
 - Dedupe key: swissknife_refactor:datasets_mcp_advertised_handler_contract_v2
 - Depends on: SWR-136, SWR-140
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/mcp_server/hierarchical_tool_manager.py, external/ipfs_datasets/tests/unit/mcp_server/test_hierarchical_tool_manager.py, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/capture-mcp-live-probe-evidence.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json
-- Validation: cd external/ipfs_datasets && pytest -q tests/unit/mcp_server/test_hierarchical_tool_manager.py; cd swissknife && npm run evidence:mcp-glasses && node -e "const x=require('./test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json'); if (x.decision !== 'go') throw new Error(x.blockers.join(' | '));"
+- Validation: cd external/ipfs_datasets && pytest -q tests/unit/mcp_server/test_hierarchical_tool_manager.py; cd swissknife && node scripts/capture-mcp-live-probe-evidence.cjs && npm run evidence:mcp-glasses && node -e "const x=require('./test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json'); if (x.decision !== 'go') throw new Error(x.blockers.join(' | '));"
 - Acceptance: The datasets MCP `tools/list`, `tools_list_tools`, `tools_get_schema`, and `tools_dispatch` surfaces advertise only names that resolve to the same imported callable. Module stems are never presented as callable tools unless that exact callable exists. A catalog-probe receipt verifies callable resolution and schema without claiming a side-effectful operation succeeded; a missing handler is a typed `capability_unavailable` result and is excluded from the advertised executable catalog. Each remaining browser-exposed read operation has either a real safe execution vector or an explicit input-required typed result bound to its schema. The evidence must fail for a fabricated catalog entry, mismatched module/function name, missing handler, or a Python process reachable from the browser bundle. No proxy success response, static allowlist, or downgraded error envelope can satisfy this task.
 
 ## SWR-154 Make clean-checkout compatibility-adapter cleanup ownership-safe
@@ -2235,3 +2242,75 @@ supervisor lane.
 - Outputs: swissknife/scripts/ensure-ipfs-mcp-compat-adapters.cjs, swissknife/scripts/reproduce-release-attestation.mjs, swissknife/test/architecture/release-reproduction-adapter-lifecycle.test.js, swissknife/docs/release-reproduction-attestation.md
 - Validation: cd swissknife && npm run test:fast -- test/architecture/release-reproduction-adapter-lifecycle.test.js && npm run release:readiness
 - Acceptance: A clean detached reproduction starts compatibility adapters only when needed, records their PID and checkout identity, and terminates only adapters whose recorded PID, command, and working directory belong to that detached checkout before removing it. Two consecutive reproductions cannot reuse a listener from a deleted worktree. Cleanup must never terminate an adapter belonging to another worktree, lane, or user process. A failed gate still writes a truthful `NO_GO` attestation and leaves no owned listener behind. The test fixture proves both positive cleanup and foreign-process preservation.
+
+## Phase 24: Executable Remote Capability Parity And Release Evidence Production
+
+The recovered release path must not treat static descriptor rows or committed reports as
+runtime proof. Browser bundles remain Python-free. Remote services may be reached only
+through typed MCP/MCP++ capability boundaries, but those boundaries must be backed by
+real TypeScript implementations, must expose the same descriptor names through HTTP and
+browser-capable libp2p transports, and must preserve typed unavailable or denied states
+when a remote action cannot be run safely.
+
+## SWR-155 Implement the static-only datasets and workflow capability semantics in TypeScript
+
+- Status: completed
+- Priority: P0
+- Track: browser/remote-capability-runtime
+- Dedupe key: swissknife_refactor:typescript_dataset_and_workflow_capability_semantics
+- Depends on: SWR-136, SWR-138, SWR-140, SWR-153
+- Outputs: swissknife/src/services/ipfs, swissknife/src/services/ipfs/browser.ts, swissknife/src/services/ipfs/api, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/all-tools-evidence-lib.cjs, swissknife/test/browser, swissknife/test/mcp-plus-plus
+- Validation: In an isolated checkout with the owned datasets adapter on a unique port, capture the all-tools ledger against that endpoint, then run `cd swissknife && npm run typecheck:browser && npm run test:browser-compat && npm run test:run -- test/mcp-plus-plus/wasm-prover-browser-purity.test.ts test/mcp-plus-plus/all-tools-execution-fixtures.test.ts`.
+- Acceptance: Implement the semantics represented by `load_index`, `check_task_status`, `get_task_status`, and `WorkflowCoordinator.submit_task` as owned TypeScript modules with explicit schemas, validation, state transitions, deterministic task/index identifiers, correlation IDs, progress events, and typed not-found or denied outcomes. A mutation submitted through the governed MCP boundary must be retrievable through the status operations and cannot be represented by a canned success response. Browser imports execute the TypeScript implementation or a declared WebAssembly dependency only; they cannot import Python, spawn a host process, call a native binding, or use a simulated success path. The compatibility adapters may be transport hosts, but they must delegate to the same tested TypeScript implementation rather than carrying a second handwritten semantic copy. Tests cover valid creation, idempotent replay, invalid input, unknown task/index, permission denial, and restart or persistence behavior.
+- Resolution: Implemented an owned browser-safe TypeScript runtime with deterministic IDs, correlation and progress events, authorization, idempotency, lifecycle transitions, and restartable persistence. The datasets MCP host now delegates directly to that runtime. Validation passed the browser typecheck, full browser compatibility gate, 80 selected prover/evidence tests, and an isolated MCP submit/status/denial lifecycle smoke test. The all-tools evidence fixture now uses real executable IDs and distinguishes side-effect receipt requirements instead of relying on stale static aliases.
+
+## SWR-156 Advertise and prove every repaired capability through HTTP and browser libp2p
+
+- Status: completed
+- Completion: manual
+- Priority: P0
+- Track: libp2p/remote-capability-parity
+- Dedupe key: swissknife_refactor:exact_tool_http_libp2p_parity_for_typescript_capabilities
+- Depends on: SWR-155
+- Outputs: swissknife/scripts/capture-swissknife-all-tools-peer-evidence.cjs, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, swissknife/scripts/all-tools-evidence-lib.cjs, swissknife/test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json, swissknife/test/mcp-plus-plus
+- Validation: cd swissknife && node scripts/capture-swissknife-all-tools-peer-evidence.cjs && node -e "const x=require('./test-results/virtual-desktop-ipfs-mcp-orb/swissknife-all-tools-peer-evidence.json'); const names=['load_index','check_task_status','get_task_status','run_inference_job','submit_task']; const failed=x.tools.filter(t=>names.includes(t.name)&&['unreachable','unsupported','static-only'].includes(t.disposition)); if(failed.length) throw new Error(JSON.stringify(failed));"
+- Acceptance: HTTP and libp2p discovery expose identical exact names, schemas, descriptor CIDs, and UCAN-bound capability contracts for every repaired operation. The evidence records a real non-destructive index or task lifecycle fixture on both transports, CID retrieval, and event-DAG visibility. Mutating calls outside the narrowly approved fixture are explicitly discovered and typed denied, never hidden, static-only, or inferred from aggregate counts. The browser-facing libp2p client uses its default-enabled browser transport and does not fall back to Node sockets, Python, shell execution, or a fabricated peer receipt. The capture must connect to independently bootstrapped HTTP and browser-libp2p endpoints and derive the emitted tool records from their responses; hard-coded descriptor CIDs, schemas, UCAN contracts, transport success, lifecycle receipts, or an evidence-only test fixture are a failing implementation. The capture must retain the complete evidence contract rather than replacing it with a reduced discovery report: it must submit the approved `WorkflowCoordinator.submit_task` fixture through `mcp++/execute` after a live delegation, retrieve and verify each produced Profile-B artifact CID, and observe the resulting event in both history and provenance on HTTP and browser-libp2p. A discovery-only capture, a disposition reported as `denied` in place of the approved execution, or an evidence schema that omits these records is a failing implementation. The resulting `tools` array must contain exactly one HTTP and one libp2p observation for each of `load_index`, `check_task_status`, `get_task_status`, `run_inference_job`, and `submit_task`; removing a service, required name, transport, or descriptor to make the validator vacuously pass is a failing implementation. The capture process tree, including every bridge, proxy, and adapter it starts or reuses, must be TypeScript/JavaScript or browser/WASM code owned by this checkout; executing `ipfs_mcp_libp2p_bridge.py`, `python`, or an external Python service as transport or evidence infrastructure is a failing implementation.
+- Resolution: On 2026-07-18, `node scripts/capture-swissknife-all-tools-peer-evidence.cjs` produced a `go` receipt with exactly ten response-derived observations: each required capability appears once over HTTP and once over browser libp2p. Both live `WorkflowCoordinator.submit_task` fixtures used delegation and `mcp++/execute`, returned and verified Profile-B artifacts, and exposed the execution event through history and provenance. The capture process tree reports checkout-owned JavaScript hosts with no Python, shell, or Node-socket fallback.
+
+## SWR-157 Produce the complete virtual-desktop evidence set inside the detached release checkout
+
+- Status: completed
+- Priority: P0
+- Track: release/evidence-production
+- Dedupe key: swissknife_refactor:detached_checkout_virtual_desktop_evidence_producers
+- Depends on: SWR-141, SWR-156
+- Outputs: swissknife/scripts/ensure-virtual-desktop-release-evidence-prereqs.cjs, swissknife/scripts/release-readiness-gate.mjs, swissknife/package.json, swissknife/test/architecture, swissknife/test-results/virtual-desktop-ipfs-mcp-orb, swissknife/docs/release-reproduction-attestation.json
+- Validation: cd swissknife && npm run release:readiness
+- Acceptance: Before aggregation, the release command serially runs the real producers for the profile matrix, app backend behavior and screenshots, Supervisor Console evidence and screenshots, ORB/IDL handoff, Meta simulator and screenshots, all-tools smoke and route coverage, call-envelope fixtures, glasses control-plane and replay packets, peer interoperability, browser compatibility, and freshness receipts. Each producer runs in the detached checkout with its isolated adapter endpoints and owner token, writes evidence rooted in that checkout, and fails the release rather than accepting an absent, stale, copied, or report-only artifact. The orchestrator exposes command-level receipts, preserves the first concrete failure, cleans only release-owned processes, and does not weaken the aggregate validator or synthesize any evidence artifact.
+- Resolution: On 2026-07-18, a fresh detached release checkout at SwissKnife `3ad2bc1e` ran all 23 serial producers and recorded a `go` SWR-157 receipt. The receipt was bound to isolated loopback adapters on ports 27333-27335 and the release attestation recorded its SHA-256 `4bfabe9e4adf6c3435174fcb6a4692263ac7b1128bcaa23650dd4bf94f7b9952`. The release finalizer proved and terminated only its owned kit, datasets, and accelerate processes.
+
+## SWR-158 Require a clean-checkout GO attestation for Phase 24 closure
+
+- Status: completed
+- Priority: P0
+- Track: release/verification
+- Dedupe key: swissknife_refactor:phase24_clean_checkout_go_attestation
+- Depends on: SWR-157
+- Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json, swissknife/docs/refactor-final-signoff.md
+- Validation: cd swissknife && npm ci && npm run release:readiness && node -e "const x=require('./docs/release-reproduction-attestation.json'); if(x.decision!=='GO') throw new Error(JSON.stringify(x.blockers ?? x));"
+- Acceptance: A newly created detached checkout from the committed integration revision completes the lockfile install, browser build, three-engine browser proof and libp2p evidence, exact remote-tool transport parity, and all virtual-desktop evidence producers with an attestation decision of `GO`. The output fingerprints are bound to committed source blobs and the detached checkout's own evidence. Any local dirt, parent-gitlink mismatch, unresolved merge marker, static-only capability, simulated proof or peer result, stale receipt, foreign listener, or missing screenshot remains a hard `NO_GO`; no Phase 24 document may override that result.
+- Resolution: On 2026-07-18, `node scripts/reproduce-release-attestation.mjs` ran from a fresh clean parent at integration commit `4396dd112` and SwissKnife `3ad2bc1e`. Its detached child completed `npm ci`, three-engine browser libp2p evidence, all 13 release-readiness gates, and the SWR-157 producer run with `decision: GO` and no blockers. The copied attestation is available in `/tmp/swissknife-refactor-release-parent-order-dVPNyV/swissknife/docs/release-reproduction-attestation.json`; its owner-scoped adapters were cleaned before worktree removal.
+
+## SWR-159 Resolve 3 preflight-conflicting backlogged worktree merges
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Fingerprint: 5bf13388eba91d25d3070c943b3eb31667d03a31
+- Dedupe key: reconciliation_guardrail:preflight_merge_conflict
+- Depends on:
+- Outputs: tmp/swissknife_refactor_supervisor/discovery, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Validation: test -f tmp/swissknife_refactor_supervisor/discovery/2026-07-15-swr-159-reconciliation-5bf13388eba9.md
+- Acceptance: Reconciliation guardrail filed this because 3 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. Use evidence and the machine-readable reconciliation plan in tmp/swissknife_refactor_supervisor/discovery/2026-07-15-swr-159-reconciliation-5bf13388eba9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+- Resolution: Each dirty stale worktree was committed to its existing rescue branch before removal, preserving the datasets, compatibility evidence, and release-attestation changes at parent commits `012bc4eae`, `ec9aebcd0`, and `ccdb32cab`. The isolated reconciliation audit then reported `stale_count: 0`, `candidate_count: 0`, and `preflight_blocked_count: 0`; it skipped only the active SWR-156 implementation worktree. No stale rescue branch was merged into the integration lane.
