@@ -2477,12 +2477,13 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-127 Re-prove Profiles A-H from application-originated HTTP and libp2p executions
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: transport
 - Depends on: SVD-126, SVD-107, SVD-108
 - Outputs: `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/all-app-mcpplusplus-profile-interoperability.json`, application-originated transport observations, and Profile A-H replay validation.
-- Validation: `cd swissknife && npm run evidence:live-gateway && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/build-virtual-desktop-release-evidence.cjs`
+- Validation: cd swissknife && npm run evidence:live-gateway && npm run test:run -- test/mcp-plus-plus/all-app-mcpplusplus-profile-interoperability.test.ts && node scripts/build-virtual-desktop-release-evidence.cjs
+- Execution constraint: The supervisor validation owns this serial browser replay. Implementation agents must not launch parallel copies of `evidence:live-gateway` or `test:e2e:live-gateway`.
 - Acceptance: The Profile A-H report is derived from actual application-originated calls rather than contract projections or peer fixtures. Each eligible operation retains transport-specific descriptor/receipt CIDs, UCAN DID verification, policy result, event-DAG provenance, compaction certificate, correlation ID, and recovery behavior. Profiles G and H remain explicitly unsupported unless their governed scheduling or settlement prerequisites are actually enabled.
 
 ## SVD-128 Resolve validation retry-budget failure for SVD-127
