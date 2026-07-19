@@ -260,6 +260,8 @@ unless the purpose is explicit state observation.
 
 ## SWR-001 Restore strict service-boundary audit
 
+## SWR-142 Phase 21 recovery and reproducibility handoff
+
 - Status: completed
 - Completion: automated
 - Priority: P1
@@ -2091,7 +2093,7 @@ success paths.
 - Validation: cd swissknife && npm run release:readiness
 - Acceptance: Reconcile this dedicated lane without merging the shared parent main branch: that merge has known unrelated conflicts in external/ipfs_accelerate and must not be attempted. Import the exact SwissKnife checkpoint object, advance only this lane's SwissKnife gitlink to it, and preserve the existing refactor-lane history plus ipfs_extensions.log. Do not modify external submodules, use Python wrappers or simulated browser/libp2p/proof behavior, or use reset, checkout, stash, force, broad add, or broad parent merges. Run release readiness from the pinned checkpoint and require its real browser/libp2p and TypeScript/WASM evidence to be GO. Then commit only the refactor board/status and SwissKnife gitlink reconciliation, record the exact parent and nested commit IDs plus clean-status evidence, and update the signoff/runbook. The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
 
-- Resolution: Reconciled from the verified nested checkpoint `86eac7da0ca1366089d0d01e7fe9db4575ab5500` into the dedicated lane by advancing only the lane gitlink from `3ad2bc1ee8251702a1beb08e8b71adc9091c2341` to that commit. The handoff recorded the all-tools parent checkpoint `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d`, kept the existing refactor-lane history and `ipfs_extensions.log`, and produced GO readiness with `docs/release-readiness-report.json` decision `GO` from a run of `npm run release:readiness` in the synchronized nested checkout. Working tree checks for this handoff are clean for tracked/nested state with only `ipfs_extensions.log` allowed in git's top-level untracked list.
+- Resolution: Reconciled from the verified nested checkpoint `86eac7da0ca1366089d0d01e7fe9db4575ab5500` into the dedicated lane by advancing only the lane gitlink from `3ad2bc1ee8251702a1beb08e8b71adc9091c2341` to that commit. The handoff recorded the all-tools parent checkpoint `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d` and dedicated refactor parent checkpoint `e12e7ddf6984fb0fce092d0109bc295c63b78f0d`, kept the existing refactor-lane history and `ipfs_extensions.log`, and produced GO readiness with `docs/release-readiness-report.json` decision `GO` from a run of `npm run release:readiness` in the synchronized nested checkout. Working tree checks for this handoff are clean for tracked/nested state with only `ipfs_extensions.log` allowed in git's top-level untracked list.
 
 ## Phase 22: Restored Service Repair And Browser-Native Closure
 
