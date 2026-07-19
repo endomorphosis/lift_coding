@@ -2273,7 +2273,7 @@ when a remote action cannot be run safely.
 
 ## SWR-157 Produce the complete virtual-desktop evidence set inside the detached release checkout
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release/evidence-production
 - Dedupe key: swissknife_refactor:detached_checkout_virtual_desktop_evidence_producers
@@ -2281,10 +2281,11 @@ when a remote action cannot be run safely.
 - Outputs: swissknife/scripts/ensure-virtual-desktop-release-evidence-prereqs.cjs, swissknife/scripts/release-readiness-gate.mjs, swissknife/package.json, swissknife/test/architecture, swissknife/test-results/virtual-desktop-ipfs-mcp-orb, swissknife/docs/release-reproduction-attestation.json
 - Validation: cd swissknife && npm run release:readiness
 - Acceptance: Before aggregation, the release command serially runs the real producers for the profile matrix, app backend behavior and screenshots, Supervisor Console evidence and screenshots, ORB/IDL handoff, Meta simulator and screenshots, all-tools smoke and route coverage, call-envelope fixtures, glasses control-plane and replay packets, peer interoperability, browser compatibility, and freshness receipts. Each producer runs in the detached checkout with its isolated adapter endpoints and owner token, writes evidence rooted in that checkout, and fails the release rather than accepting an absent, stale, copied, or report-only artifact. The orchestrator exposes command-level receipts, preserves the first concrete failure, cleans only release-owned processes, and does not weaken the aggregate validator or synthesize any evidence artifact.
+- Resolution: On 2026-07-18, a fresh detached release checkout at SwissKnife `3ad2bc1e` ran all 23 serial producers and recorded a `go` SWR-157 receipt. The receipt was bound to isolated loopback adapters on ports 27333-27335 and the release attestation recorded its SHA-256 `4bfabe9e4adf6c3435174fcb6a4692263ac7b1128bcaa23650dd4bf94f7b9952`. The release finalizer proved and terminated only its owned kit, datasets, and accelerate processes.
 
 ## SWR-158 Require a clean-checkout GO attestation for Phase 24 closure
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release/verification
 - Dedupe key: swissknife_refactor:phase24_clean_checkout_go_attestation
@@ -2292,6 +2293,7 @@ when a remote action cannot be run safely.
 - Outputs: swissknife/docs/release-reproduction-attestation.json, swissknife/docs/release-reproduction-attestation.md, swissknife/docs/release-readiness-report.json, swissknife/docs/release-evidence-freshness.json, swissknife/docs/refactor-final-signoff.md
 - Validation: cd swissknife && npm ci && npm run release:readiness && node -e "const x=require('./docs/release-reproduction-attestation.json'); if(x.decision!=='GO') throw new Error(JSON.stringify(x.blockers ?? x));"
 - Acceptance: A newly created detached checkout from the committed integration revision completes the lockfile install, browser build, three-engine browser proof and libp2p evidence, exact remote-tool transport parity, and all virtual-desktop evidence producers with an attestation decision of `GO`. The output fingerprints are bound to committed source blobs and the detached checkout's own evidence. Any local dirt, parent-gitlink mismatch, unresolved merge marker, static-only capability, simulated proof or peer result, stale receipt, foreign listener, or missing screenshot remains a hard `NO_GO`; no Phase 24 document may override that result.
+- Resolution: On 2026-07-18, `node scripts/reproduce-release-attestation.mjs` ran from a fresh clean parent at integration commit `4396dd112` and SwissKnife `3ad2bc1e`. Its detached child completed `npm ci`, three-engine browser libp2p evidence, all 13 release-readiness gates, and the SWR-157 producer run with `decision: GO` and no blockers. The copied attestation is available in `/tmp/swissknife-refactor-release-parent-order-dVPNyV/swissknife/docs/release-reproduction-attestation.json`; its owner-scoped adapters were cleaned before worktree removal.
 
 ## SWR-159 Resolve 3 preflight-conflicting backlogged worktree merges
 
