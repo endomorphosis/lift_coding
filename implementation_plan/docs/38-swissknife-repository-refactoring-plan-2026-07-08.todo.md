@@ -2327,7 +2327,7 @@ when a remote action cannot be run safely.
 
 ## SWR-161 Extend duplicate, import-boundary, and browser-host audits for the post-SVD-131 release surface
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: services/browser-boundaries
 - Dedupe key: swissknife_refactor:post_svd131_release_surface_audit_v1
