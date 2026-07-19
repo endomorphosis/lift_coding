@@ -260,7 +260,7 @@ unless the purpose is explicit state observation.
 
 ## SWR-001 Restore strict service-boundary audit
 
-## SWR-142 Phase 21 recovery and reproducibility handoff
+## SWR-001 Restore strict service-boundary audit
 
 - Status: completed
 - Completion: automated
@@ -2082,6 +2082,10 @@ success paths.
 - Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
 - Resolution: The attestation now fingerprints committed Git blobs, uses canonical hashes for self-referential outputs, isolates its adapter ports, and refuses to terminate an adapter unless its command, checkout, and release token prove ownership. The clean reproduction executes all gates and correctly returns `NO_GO` while the virtual-desktop aggregate evidence is incomplete. SWR-157 owns producing the missing evidence; SWR-158 owns the final clean-checkout `GO` decision.
 
+## SWR-142 Phase 21 recovery and reproducibility handoff
+
+## SWR-142 Phase 21 recovery and reproducibility handoff
+
 - Status: completed
 - Priority: P1
 - Track: refactor/supervisor
@@ -2092,6 +2096,7 @@ success paths.
 - Checkpoint source: from this refactor worktree, the verified nested object is available from sibling checkout ../hallucinate-llc-psychic-adventure/swissknife. Fetch that exact object locally if it is absent; do not substitute origin/main or a generated report.
 - Validation: cd swissknife && npm run release:readiness
 - Acceptance: Reconcile this dedicated lane without merging the shared parent main branch: that merge has known unrelated conflicts in external/ipfs_accelerate and must not be attempted. Import the exact SwissKnife checkpoint object, advance only this lane's SwissKnife gitlink to it, and preserve the existing refactor-lane history plus ipfs_extensions.log. Do not modify external submodules, use Python wrappers or simulated browser/libp2p/proof behavior, or use reset, checkout, stash, force, broad add, or broad parent merges. Run release readiness from the pinned checkpoint and require its real browser/libp2p and TypeScript/WASM evidence to be GO. Then commit only the refactor board/status and SwissKnife gitlink reconciliation, record the exact parent and nested commit IDs plus clean-status evidence, and update the signoff/runbook. The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
+- Evidence: Dedicated lane gitlink/reconciliation provenance is `86eac7da0ca1366089d0d01e7fe9db4575ab5500`; dedicated parent provenance is `e12e7ddf6984fb0fce092d0109bc295c63b78f0d`; all-tools parent provenance is `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d`. Working-tree checks remain clean for tracked/nested state with only `ipfs_extensions.log` allowed as the top-level untracked file.
 
 - Resolution: Reconciled from the verified nested checkpoint `86eac7da0ca1366089d0d01e7fe9db4575ab5500` into the dedicated lane by advancing only the lane gitlink from `3ad2bc1ee8251702a1beb08e8b71adc9091c2341` to that commit. The handoff recorded the all-tools parent checkpoint `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d` and dedicated refactor parent checkpoint `e12e7ddf6984fb0fce092d0109bc295c63b78f0d`, kept the existing refactor-lane history and `ipfs_extensions.log`, and produced GO readiness with `docs/release-readiness-report.json` decision `GO` from a run of `npm run release:readiness` in the synchronized nested checkout. Working tree checks for this handoff are clean for tracked/nested state with only `ipfs_extensions.log` allowed in git's top-level untracked list.
 
