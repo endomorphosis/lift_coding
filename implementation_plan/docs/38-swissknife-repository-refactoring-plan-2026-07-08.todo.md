@@ -2080,16 +2080,18 @@ success paths.
 - Acceptance: A clean detached checkout at the committed recovered source revision installs dependencies from the lockfile, rebuilds browser assets, runs service and browser gates, regenerates all evidence, and produces matching source and evidence fingerprints. The attestation names commit, lockfile hash, tool versions, browser projects, libp2p transport receipts, proof receipts, output hashes, and release decision. Local uncommitted files, stale reports, or a parent gitlink mismatch make the result `NO_GO`.
 - Resolution: The attestation now fingerprints committed Git blobs, uses canonical hashes for self-referential outputs, isolates its adapter ports, and refuses to terminate an adapter unless its command, checkout, and release token prove ownership. The clean reproduction executes all gates and correctly returns `NO_GO` while the virtual-desktop aggregate evidence is incomplete. SWR-157 owns producing the missing evidence; SWR-158 owns the final clean-checkout `GO` decision.
 
-## SWR-142 Phase 21 recovery and reproducibility handoff
-
-- Status: waiting
+- Status: completed
 - Priority: P1
 - Track: refactor/supervisor
 - Dedupe key: swissknife_refactor:phase_21_checkout_recovery_reproducibility_handoff
 - Depends on: SWR-135, SWR-136, SWR-137, SWR-138, SWR-139, SWR-140, SWR-141
 - Outputs: swissknife/docs/refactor-final-signoff.md, swissknife/docs/supervisor-refactor-runbook.md, implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md
+- Handoff input: the all-tools lane has committed SwissKnife release checkpoint 86eac7da0ca1366089d0d01e7fe9db4575ab5500 and parent gitlink checkpoint f44f53183a7a0d60259e9d7d26f122e2d8a2be7d. The handoff reconciled from an initial refactor checkpoint pinned to 3ad2bc1ee8251702a1beb08e8b71adc9091c2341.
+- Checkpoint source: from this refactor worktree, the verified nested object is available from sibling checkout ../hallucinate-llc-psychic-adventure/swissknife. Fetch that exact object locally if it is absent; do not substitute origin/main or a generated report.
 - Validation: cd swissknife && npm run release:readiness
-- Acceptance: The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
+- Acceptance: Reconcile this dedicated lane without merging the shared parent main branch: that merge has known unrelated conflicts in external/ipfs_accelerate and must not be attempted. Import the exact SwissKnife checkpoint object, advance only this lane's SwissKnife gitlink to it, and preserve the existing refactor-lane history plus ipfs_extensions.log. Do not modify external submodules, use Python wrappers or simulated browser/libp2p/proof behavior, or use reset, checkout, stash, force, broad add, or broad parent merges. Run release readiness from the pinned checkpoint and require its real browser/libp2p and TypeScript/WASM evidence to be GO. Then commit only the refactor board/status and SwissKnife gitlink reconciliation, record the exact parent and nested commit IDs plus clean-status evidence, and update the signoff/runbook. The handoff proves current checkout and parent gitlink provenance, shows one active writer per lease, reports duplicate and conflict counts, records all browser-engine libp2p and TS or WASM proof receipts, and records the hermetic release result. It cannot mark the phase complete when the board, source tree, parent gitlink, or generated evidence disagree.
+
+- Resolution: Reconciled from the verified nested checkpoint `86eac7da0ca1366089d0d01e7fe9db4575ab5500` into the dedicated lane by advancing only the lane gitlink from `3ad2bc1ee8251702a1beb08e8b71adc9091c2341` to that commit. The handoff recorded the all-tools parent checkpoint `f44f53183a7a0d60259e9d7d26f122e2d8a2be7d`, kept the existing refactor-lane history and `ipfs_extensions.log`, and produced GO readiness with `docs/release-readiness-report.json` decision `GO` from a run of `npm run release:readiness` in the synchronized nested checkout. Working tree checks for this handoff are clean for tracked/nested state with only `ipfs_extensions.log` allowed in git's top-level untracked list.
 
 ## Phase 22: Restored Service Repair And Browser-Native Closure
 
