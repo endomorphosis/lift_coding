@@ -2340,7 +2340,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-115 Independently replay the all-app release closeout
 
-- Status: waiting
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-114
