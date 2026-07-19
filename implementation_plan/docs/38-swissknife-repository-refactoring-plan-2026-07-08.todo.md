@@ -2070,7 +2070,7 @@ success paths.
 
 ## SWR-141 Produce a hermetic clean-checkout release reproduction and provenance attestation
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release/reproducibility
 - Dedupe key: swissknife_refactor:hermetic_clean_checkout_release_reproduction
