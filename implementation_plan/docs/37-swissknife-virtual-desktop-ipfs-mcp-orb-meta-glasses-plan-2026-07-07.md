@@ -2523,7 +2523,7 @@ Meta validation targets Meta's device simulator, not unsupported desktop-to-glas
 
 ## SVD-131 Make release readiness a cold-start, one-pass browser/libp2p gate
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release/reproducibility
 - Depends on: SVD-130
