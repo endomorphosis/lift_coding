@@ -2316,7 +2316,7 @@ when a remote action cannot be run safely.
 - Resolution: Each dirty stale worktree was committed to its existing rescue branch before removal, preserving the datasets, compatibility evidence, and release-attestation changes at parent commits `012bc4eae`, `ec9aebcd0`, and `ccdb32cab`. The isolated reconciliation audit then reported `stale_count: 0`, `candidate_count: 0`, and `preflight_blocked_count: 0`; it skipped only the active SWR-156 implementation worktree. No stale rescue branch was merged into the integration lane.
 ## SWR-160 Refactor the SVD-131 cold-start release orchestration into stable ownership boundaries
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release/maintainability
 - Dedupe key: swissknife_refactor:svd131_release_orchestration_ownership_v1
