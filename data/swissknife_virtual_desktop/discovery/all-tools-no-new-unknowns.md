@@ -2,6 +2,4 @@
 
 Decision: **GO**
 
-## No new unknowns
-
-No new unknowns: every required release proof is represented by a named SVD receipt and all required proofs passed.
+Every blocking condition is enumerated in the SVD-114 release receipt with an owner and remediation.

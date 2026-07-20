@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -29,6 +31,79 @@ def _imports():
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTask
 
     return ObjectiveGoal, PortalTask, JANITOR_RECEIPT_SCHEMA, reconcile_objective_task_strategy
+
+
+def test_supervisor_does_not_recycle_quiet_validation_before_its_timeout(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTaskState
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    now = datetime.now(timezone.utc)
+    stale_log = tmp_path / "quiet-validation.log"
+    stale_log.write_text("validation started\n", encoding="utf-8")
+    log_timestamp = (now - timedelta(seconds=600)).timestamp()
+    os.utime(stale_log, (log_timestamp, log_timestamp))
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=tmp_path / "tasks.md",
+            state_path=tmp_path / "state.json",
+            strategy_path=tmp_path / "strategy.json",
+            events_path=tmp_path / "events.jsonl",
+            state_dir=tmp_path,
+            implementation_timeout=1800,
+            implementation_log_stall_seconds=300,
+            repo_root=tmp_path,
+        )
+    )
+    state = PortalTaskState(
+        active_task_id="SVD-127",
+        active_phase="validating",
+        implementation_in_progress=True,
+        last_implementation_task_id="SVD-127",
+        last_implementation_started_at=(now - timedelta(seconds=600)).isoformat(),
+        last_implementation_log_path=str(stale_log),
+    )
+
+    assert supervisor._implementation_log_stall_reason(state, now_ts=now.timestamp()) == ""
+
+    state.active_phase = "implementing"
+    assert "implementation log stalled" in supervisor._implementation_log_stall_reason(
+        state, now_ts=now.timestamp()
+    )
+
+    supervisor._active_validation_subprocess_exists = lambda: True  # type: ignore[method-assign]
+    assert supervisor._implementation_log_stall_reason(state, now_ts=now.timestamp()) == ""
+
+
+def test_supervisor_recognizes_direct_release_validation_subprocess(tmp_path, monkeypatch):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_supervisor
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
+        PortalImplementationSupervisor,
+        PortalSupervisorConfig,
+    )
+
+    supervisor = PortalImplementationSupervisor(
+        PortalSupervisorConfig(
+            todo_path=tmp_path / "tasks.md",
+            state_path=tmp_path / "state.json",
+            strategy_path=tmp_path / "strategy.json",
+            events_path=tmp_path / "events.jsonl",
+            state_dir=tmp_path,
+            repo_root=tmp_path,
+        )
+    )
+    supervisor._read_managed_daemon_pid = lambda: 123  # type: ignore[method-assign]
+    monkeypatch.setattr(
+        implementation_supervisor,
+        "descendant_processes",
+        lambda _pid: [{"cmdline": ["node", "scripts/release-readiness-gate.mjs"]}],
+    )
+
+    assert supervisor._active_validation_subprocess_exists()
 
 
 def test_objective_task_janitor_blocks_orphans_deprioritizes_noise_and_reopens_launch_goal():

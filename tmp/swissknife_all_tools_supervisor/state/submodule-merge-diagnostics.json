@@ -1,22 +1,450 @@
 {
-  "attempts": [],
-  "contract": {
-    "conflict_fields": [
-      "path",
-      "ours_candidate",
-      "theirs_candidate",
-      "reachable_merge_bases",
-      "selected_commit"
+  "attempts": [
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "05d491982bb878631d0581d7ea9d68a76779f393",
+          "ours_candidate": "33fd269c65d3add51c3c776490165016969e9e02",
+          "path": "external/ipfs_datasets/.tools/ipfs_kit_py",
+          "reachable_merge_bases": [
+            "33fd269c65d3add51c3c776490165016969e9e02"
+          ],
+          "reason": "theirs_verified_descendant_of_ours",
+          "recovery_ref": "",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "c875866d48eff84b618218180c665910ce80a336",
+          "selection_reason": "theirs_verified_descendant_of_ours",
+          "stages": {
+            "1": "05d491982bb878631d0581d7ea9d68a76779f393",
+            "2": "33fd269c65d3add51c3c776490165016969e9e02",
+            "3": "c875866d48eff84b618218180c665910ce80a336"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "c875866d48eff84b618218180c665910ce80a336"
+        }
+      ],
+      "reason": "committed_resolved_gitlinks",
+      "repaired": true,
+      "retryable": false,
+      "task_id": "SVD-101",
+      "timestamp": "2026-07-14T18:33:37.166532+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure/external/ipfs_datasets"
+    },
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "76ecc861b0c87444b5aaf6ef47eb6e0483240d59",
+          "ours_candidate": "81011f146a4268d97469a30ed20dabfb06bd73b4",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "76ecc861b0c87444b5aaf6ef47eb6e0483240d59"
+          ],
+          "reason": "recovery_merge_failed",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "",
+            "created": false,
+            "effective_merge_returncode": 1,
+            "merge_returncode": 1,
+            "merge_stderr": "",
+            "merge_stdout": "Auto-merging docs/release-evidence-freshness.json\nCONFLICT (content): Merge conflict in docs/release-evidence-freshness.json\nAuto-merging docs/release-evidence-freshness.md\nCONFLICT (content): Merge conflict in docs/release-evidence-freshness.md\nAutomatic merge failed; fix conflicts and then commit the result.\n",
+            "nested_gitlink_repair": {
+              "reason": "no_gitlink_conflicts",
+              "repaired": false
+            },
+            "reason": "recovery_merge_failed",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/d95fba51876d086805da998e",
+            "task_id": "SVD-047",
+            "update_ref_returncode": 1,
+            "update_ref_stderr": "merge did not complete",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/d95fba51876d086805da998e",
+          "repaired": false,
+          "selected_commit": "",
+          "selection_reason": "",
+          "stages": {
+            "1": "76ecc861b0c87444b5aaf6ef47eb6e0483240d59",
+            "2": "81011f146a4268d97469a30ed20dabfb06bd73b4",
+            "3": "a085a5e89d4d12e44b4705a462a9a1a5d44bd170"
+          },
+          "theirs_candidate": "a085a5e89d4d12e44b4705a462a9a1a5d44bd170"
+        }
+      ],
+      "reason": "unresolved_paths_remain",
+      "repaired": false,
+      "retryable": true,
+      "task_id": "SVD-047",
+      "timestamp": "2026-07-14T19:57:45.004024+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "76ecc861b0c87444b5aaf6ef47eb6e0483240d59",
+          "ours_candidate": "81011f146a4268d97469a30ed20dabfb06bd73b4",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "76ecc861b0c87444b5aaf6ef47eb6e0483240d59"
+          ],
+          "reason": "recovery_merge_failed",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "",
+            "created": false,
+            "effective_merge_returncode": 1,
+            "merge_returncode": 1,
+            "merge_stderr": "",
+            "merge_stdout": "Auto-merging docs/release-evidence-freshness.json\nCONFLICT (content): Merge conflict in docs/release-evidence-freshness.json\nAuto-merging docs/release-evidence-freshness.md\nCONFLICT (content): Merge conflict in docs/release-evidence-freshness.md\nAutomatic merge failed; fix conflicts and then commit the result.\n",
+            "nested_gitlink_repair": {
+              "reason": "no_gitlink_conflicts",
+              "repaired": false
+            },
+            "reason": "recovery_merge_failed",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/d95fba51876d086805da998e",
+            "task_id": "SVD-047",
+            "update_ref_returncode": 1,
+            "update_ref_stderr": "merge did not complete",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/d95fba51876d086805da998e",
+          "repaired": false,
+          "selected_commit": "",
+          "selection_reason": "",
+          "stages": {
+            "1": "76ecc861b0c87444b5aaf6ef47eb6e0483240d59",
+            "2": "81011f146a4268d97469a30ed20dabfb06bd73b4",
+            "3": "a085a5e89d4d12e44b4705a462a9a1a5d44bd170"
+          },
+          "theirs_candidate": "a085a5e89d4d12e44b4705a462a9a1a5d44bd170"
+        }
+      ],
+      "reason": "unresolved_paths_remain",
+      "repaired": false,
+      "retryable": true,
+      "task_id": "SVD-047",
+      "timestamp": "2026-07-14T19:58:56.499053+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "81011f146a4268d97469a30ed20dabfb06bd73b4",
+          "ours_candidate": "090528117054eb2f3a56815751bc22b5a437ac5d",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "81011f146a4268d97469a30ed20dabfb06bd73b4"
+          ],
+          "reason": "created_deterministic_recovery_ref",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "7fc14db1b7f5fe1aa5419f4b8ce2b9823ae653d3",
+            "created": true,
+            "effective_merge_returncode": 0,
+            "merge_returncode": 0,
+            "merge_stderr": "",
+            "merge_stdout": "Merge made by the 'ort' strategy.\n docs/refactor-final-signoff.md                     |  27 +-\n docs/release-evidence-freshness.json               |  65 ++---\n docs/release-evidence-freshness.md                 |  19 +-\n ...rtual-desktop-release-evidence.fingerprint.json |  42 ++-\n scripts/audit-release-evidence-freshness.mjs       |   6 +\n scripts/build-all-tools-capability-matrix.cjs      |  88 +++++-\n scripts/build-virtual-desktop-release-evidence.cjs | 317 ++++++++++++++++++++-\n 7 files changed, 484 insertions(+), 80 deletions(-)\n",
+            "reason": "recovery_ref_created",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/cad71e2bb3652ddc9bb4bbdb",
+            "task_id": "SVD-047",
+            "update_ref_returncode": 0,
+            "update_ref_stderr": "",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/cad71e2bb3652ddc9bb4bbdb",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "7fc14db1b7f5fe1aa5419f4b8ce2b9823ae653d3",
+          "selection_reason": "created_deterministic_recovery_ref",
+          "stages": {
+            "1": "81011f146a4268d97469a30ed20dabfb06bd73b4",
+            "2": "090528117054eb2f3a56815751bc22b5a437ac5d",
+            "3": "664ea49a02969a53b616445df52cade0a6e7850b"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "664ea49a02969a53b616445df52cade0a6e7850b"
+        }
+      ],
+      "reason": "committed_resolved_gitlinks",
+      "repaired": true,
+      "retryable": false,
+      "task_id": "SVD-047",
+      "timestamp": "2026-07-14T20:07:39.893482+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 2,
+      "conflicts": [
+        {
+          "base_candidate": "7fc14db1b7f5fe1aa5419f4b8ce2b9823ae653d3",
+          "ours_candidate": "6c35f52392b14b59dec19445471d0be4ce7aae63",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "7fc14db1b7f5fe1aa5419f4b8ce2b9823ae653d3"
+          ],
+          "reason": "created_deterministic_recovery_ref",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "e734ab83b3a1e0d59e66a7ce586c6514f7f03198",
+            "created": true,
+            "effective_merge_returncode": 0,
+            "merge_returncode": 0,
+            "merge_stderr": "",
+            "merge_stdout": "Merge made by the 'ort' strategy.\n ...all-app-executable-backend-contract.schema.json | 109 ++++++-\n .../apps/all-app-executable-backend-contract.ts    | 331 +++++++++++++++++++--\n .../all-app-executable-backend-contract.test.ts    | 110 ++++++-\n 3 files changed, 512 insertions(+), 38 deletions(-)\n",
+            "reason": "recovery_ref_created",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/8c0e3ef02ddac0c8291c0f86",
+            "task_id": "SVD-103",
+            "update_ref_returncode": 0,
+            "update_ref_stderr": "",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/8c0e3ef02ddac0c8291c0f86",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "e734ab83b3a1e0d59e66a7ce586c6514f7f03198",
+          "selection_reason": "created_deterministic_recovery_ref",
+          "stages": {
+            "1": "7fc14db1b7f5fe1aa5419f4b8ce2b9823ae653d3",
+            "2": "6c35f52392b14b59dec19445471d0be4ce7aae63",
+            "3": "54b4cbc786e4fe175209ab0b9ed2c8ad8de5e3f7"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "54b4cbc786e4fe175209ab0b9ed2c8ad8de5e3f7"
+        }
+      ],
+      "reason": "committed_resolved_gitlinks",
+      "repaired": true,
+      "retryable": false,
+      "task_id": "SVD-103",
+      "timestamp": "2026-07-14T20:21:06.075570+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "396d9409959f663883a8b5eb2bb570d9047fc3ff",
+          "ours_candidate": "3e6f05aecaf46ad11d6fab470b5564fc791d6adc",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "396d9409959f663883a8b5eb2bb570d9047fc3ff"
+          ],
+          "reason": "created_deterministic_recovery_ref",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "9e1af3161f8201b7902b1b6416545b6dfe78fca8",
+            "created": true,
+            "effective_merge_returncode": 0,
+            "merge_returncode": 0,
+            "merge_stderr": "",
+            "merge_stdout": "Merge made by the 'ort' strategy.\n .gitignore                                         |   1 +\n .../glasses/agent-supervisor-expanded-io-map.ts    | 567 +++++++++++++++++++++\n src/services/glasses/index.ts                      |   1 +\n .../agent-supervisor-expanded-io-map.test.ts       | 259 ++++++++++\n 4 files changed, 828 insertions(+)\n create mode 100644 src/services/glasses/agent-supervisor-expanded-io-map.ts\n create mode 100644 test/mcp-plus-plus/agent-supervisor-expanded-io-map.test.ts\n",
+            "reason": "recovery_ref_created",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/9fffe5a46fc07d4a5baa6376",
+            "task_id": "SVD-068",
+            "update_ref_returncode": 0,
+            "update_ref_stderr": "",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/9fffe5a46fc07d4a5baa6376",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "9e1af3161f8201b7902b1b6416545b6dfe78fca8",
+          "selection_reason": "created_deterministic_recovery_ref",
+          "stages": {
+            "1": "396d9409959f663883a8b5eb2bb570d9047fc3ff",
+            "2": "3e6f05aecaf46ad11d6fab470b5564fc791d6adc",
+            "3": "a78eb0d1a2b056ada4222a209b7d2740fd602ddb"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "a78eb0d1a2b056ada4222a209b7d2740fd602ddb"
+        }
+      ],
+      "reason": "committed_resolved_gitlinks",
+      "repaired": true,
+      "retryable": false,
+      "task_id": "SVD-068",
+      "timestamp": "2026-07-14T20:32:46.830454+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 7,
+      "conflicts": [
+        {
+          "base_candidate": "374f773748716b393bf8e45ce4f742aae5f2288e",
+          "ours_candidate": "56a7ed5c9b170e832b832ec3d650ecb58f68f1f1",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "374f773748716b393bf8e45ce4f742aae5f2288e"
+          ],
+          "reason": "created_deterministic_recovery_ref",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "eedd170e639cf5e8fecd91361892ebbd0460d969",
+            "created": true,
+            "effective_merge_returncode": 0,
+            "merge_returncode": 0,
+            "merge_stderr": "",
+            "merge_stdout": "Auto-merging .gitignore\nMerge made by the 'ort' strategy.\n .gitignore                                         |   3 +\n .../configs/playwright.agent-supervisor.config.ts  |   7 +-\n test/e2e/agent-supervisor-expanded-meta-io.spec.ts | 739 +++++++++++++++++++++\n 3 files changed, 747 insertions(+), 2 deletions(-)\n create mode 100644 test/e2e/agent-supervisor-expanded-meta-io.spec.ts\n",
+            "reason": "recovery_ref_created",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/c420ae7769a525c43036c7d9",
+            "task_id": "SVD-070",
+            "update_ref_returncode": 0,
+            "update_ref_stderr": "",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/c420ae7769a525c43036c7d9",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "eedd170e639cf5e8fecd91361892ebbd0460d969",
+          "selection_reason": "created_deterministic_recovery_ref",
+          "stages": {
+            "1": "374f773748716b393bf8e45ce4f742aae5f2288e",
+            "2": "56a7ed5c9b170e832b832ec3d650ecb58f68f1f1",
+            "3": "f77c5178947c3081026652787177e25b72f17ceb"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "f77c5178947c3081026652787177e25b72f17ceb"
+        }
+      ],
+      "reason": "committed_resolved_gitlinks",
+      "repaired": true,
+      "retryable": false,
+      "task_id": "SVD-070",
+      "timestamp": "2026-07-14T22:46:38.552281+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda",
+          "ours_candidate": "6390873af4d03b26fe4610ead1b67db286a4fbfc",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda"
+          ],
+          "reason": "created_deterministic_recovery_ref",
+          "recovery": {
+            "cleanup_returncode": 0,
+            "cleanup_stderr": "",
+            "commit": "29b317ffd1e6cff2fb80907aaf0afd7b406a02f0",
+            "created": true,
+            "effective_merge_returncode": 0,
+            "merge_returncode": 0,
+            "merge_stderr": "",
+            "merge_stdout": "Merge made by the 'ort' strategy.\n test/e2e/all-tools-app-family-coverage.spec.ts     | 44 +++++++++++++++++++++-\n .../all-tools-virtual-desktop-app-smoke.spec.ts    | 28 ++++++++++----\n 2 files changed, 62 insertions(+), 10 deletions(-)\n",
+            "reason": "recovery_ref_created",
+            "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/3dcfd5ec634fb70b1a3ad1f3",
+            "task_id": "SVD-120",
+            "update_ref_returncode": 0,
+            "update_ref_stderr": "",
+            "update_ref_stdout": ""
+          },
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/3dcfd5ec634fb70b1a3ad1f3",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "29b317ffd1e6cff2fb80907aaf0afd7b406a02f0",
+          "selection_reason": "created_deterministic_recovery_ref",
+          "stages": {
+            "1": "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda",
+            "2": "6390873af4d03b26fe4610ead1b67db286a4fbfc",
+            "3": "7b4983e6783c01d6ddfdf3b9688b617fa078fb27"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "7b4983e6783c01d6ddfdf3b9688b617fa078fb27"
+        }
+      ],
+      "reason": "unresolved_paths_remain",
+      "repaired": false,
+      "retryable": true,
+      "task_id": "SVD-120",
+      "timestamp": "2026-07-15T16:55:15.938853+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    },
+    {
+      "attempt": 1,
+      "conflicts": [
+        {
+          "base_candidate": "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda",
+          "ours_candidate": "6390873af4d03b26fe4610ead1b67db286a4fbfc",
+          "path": "swissknife",
+          "reachable_merge_bases": [
+            "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda"
+          ],
+          "reason": "validated_deterministic_recovery_ref",
+          "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/3dcfd5ec634fb70b1a3ad1f3",
+          "repaired": true,
+          "returncode": 0,
+          "selected_commit": "29b317ffd1e6cff2fb80907aaf0afd7b406a02f0",
+          "selection_reason": "validated_deterministic_recovery_ref",
+          "stages": {
+            "1": "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda",
+            "2": "6390873af4d03b26fe4610ead1b67db286a4fbfc",
+            "3": "7b4983e6783c01d6ddfdf3b9688b617fa078fb27"
+          },
+          "stderr": "",
+          "stdout": "",
+          "theirs_candidate": "7b4983e6783c01d6ddfdf3b9688b617fa078fb27"
+        }
+      ],
+      "reason": "unresolved_paths_remain",
+      "repaired": false,
+      "retryable": true,
+      "task_id": "SVD-120",
+      "timestamp": "2026-07-15T18:42:15.218937+00:00",
+      "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
+    }
+  ],
+  "latest": {
+    "attempt": 1,
+    "conflicts": [
+      {
+        "base_candidate": "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda",
+        "ours_candidate": "6390873af4d03b26fe4610ead1b67db286a4fbfc",
+        "path": "swissknife",
+        "reachable_merge_bases": [
+          "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda"
+        ],
+        "reason": "validated_deterministic_recovery_ref",
+        "recovery_ref": "refs/agent-supervisor/submodule-merge-recovery/swissknife/3dcfd5ec634fb70b1a3ad1f3",
+        "repaired": true,
+        "returncode": 0,
+        "selected_commit": "29b317ffd1e6cff2fb80907aaf0afd7b406a02f0",
+        "selection_reason": "validated_deterministic_recovery_ref",
+        "stages": {
+          "1": "1ba1bc28d5f996f1df9fb2b0dd7c615a15a3feda",
+          "2": "6390873af4d03b26fe4610ead1b67db286a4fbfc",
+          "3": "7b4983e6783c01d6ddfdf3b9688b617fa078fb27"
+        },
+        "stderr": "",
+        "stdout": "",
+        "theirs_candidate": "7b4983e6783c01d6ddfdf3b9688b617fa078fb27"
+      }
     ],
-    "failed_reconciliation_retryable": true,
-    "nested_conflict_paths_are_repository_relative": true,
-    "nested_recovery_policy": "recursive_isolated_worktree",
-    "checkpoint_policy": "retain_failures_until_each_nested_path_succeeds",
-    "recovery_ref_namespace": "refs/agent-supervisor/submodule-merge-recovery/",
-    "selection_policy": "verified_descendant_or_deterministic_recovery_ref",
-    "task_id": "SVD-116"
+    "reason": "unresolved_paths_remain",
+    "repaired": false,
+    "retryable": true,
+    "task_id": "SVD-120",
+    "timestamp": "2026-07-15T18:42:15.218937+00:00",
+    "workspace": "/home/barberb/barberb/copilot-worktrees/lift_coding/hallucinate-llc-psychic-adventure"
   },
-  "latest": null,
   "schema_version": 1,
-  "updated_at": ""
+  "updated_at": "2026-07-15T18:42:15.218937+00:00"
 }
