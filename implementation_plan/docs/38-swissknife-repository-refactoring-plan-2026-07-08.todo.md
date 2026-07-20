@@ -2338,7 +2338,7 @@ when a remote action cannot be run safely.
 
 ## SWR-162 Reconcile validated refactor-lane output into SwissKnife main without replaying stale task attempts
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: integration/maintenance
 - Dedupe key: swissknife_refactor:validated_refactor_main_reconciliation_v1
@@ -2346,6 +2346,7 @@ when a remote action cannot be run safely.
 - Outputs: a committed SwissKnife integration branch, `swissknife/docs/refactor-final-signoff.md`, `swissknife/docs/release-readiness-report.json`, and a merge-reconciliation receipt identifying every integrated commit and rejected stale/recovery branch.
 - Validation: cd swissknife && git diff --check && npm run release:readiness && node -e 'const report=require("./docs/release-readiness-report.json"); if(report.summary?.releaseDecision !== "GO" || report.summary?.failed !== 0) process.exit(1)'
 - Acceptance: Integrate only commits whose task status, source diff, and validation evidence agree with the current SwissKnife mainline. Superseded implementation attempts, diagnostic branches, and rescue/recovery branches remain preserved but are not blindly merged. Rebase or merge against current `origin/main`, resolve semantic conflicts in favor of the canonical module owner, validate the resulting source and evidence, commit the nested SwissKnife repository, and push a fast-forward-safe result to `origin/main`. The parent gitlink may advance only after that nested push succeeds. A failed validation or unresolved conflict must leave a concrete, truthful blocker receipt and must not push partial work.
+- Resolution: The validated refactor history was published to SwissKnife `origin/main` through `64a1c5a7f7e0fb203536f9c4904557760c40c4a2`, after `npm run release:readiness` completed 27/27 checks with `GO` and an independently detached clean-checkout replay also returned `GO`. The parent promotion branch rebased the eight scoped refactor commits onto current root `origin/main`, retained the newer upstream taskboard records, resolved the sole gitlink conflict to that published SwissKnife commit, and fast-forwarded root `origin/main` to `39eb8da8ac190439697bd69eca071ac7705a9908`. Recovery and diagnostic branches remain preserved and were not replayed into the result.
 
 ## SWR-163 Resolve validation retry-budget failure for SWR-160
 
