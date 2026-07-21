@@ -2967,7 +2967,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G051 with simulator replay bundle, privacy policy, display/camera/mic/speaker denial, analysis, and fallback proof.
 
 ## SVD-177 Improve ORB Auto-UI end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: orb
 - Depends on: SVD-133, SVD-134
