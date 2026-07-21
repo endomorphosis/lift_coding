@@ -2877,7 +2877,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G041 with live telemetry, diagnostic history, analysis, stale-data and alert state, and accessible summaries.
 
 ## SVD-167 Improve Neural Photoshop end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: creative
 - Depends on: SVD-133, SVD-134
