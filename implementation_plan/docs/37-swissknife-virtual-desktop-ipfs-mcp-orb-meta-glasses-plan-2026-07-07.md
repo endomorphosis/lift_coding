@@ -2940,7 +2940,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G048 with dataset CID, primary semantic/provenance operations, preparation job, schema/filter/error/progress UI, and receipts.
 
 ## SVD-174 Improve Accelerate Panel end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: ai
 - Depends on: SVD-133, SVD-134
