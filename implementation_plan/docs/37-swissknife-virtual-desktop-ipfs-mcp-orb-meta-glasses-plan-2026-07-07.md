@@ -2976,7 +2976,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G052 with generated artifact CIDs, intent/schema policy, execution preview, schema error, confirmation, and fallback renderer.
 
 ## SVD-178 Improve MCP++ Explorer end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-133, SVD-134
