@@ -2995,7 +2995,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 
 ## SVD-180 Gate all-app UI/UX, accessibility, and recovery quality
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: ux
 - Depends on: SVD-135, SVD-136, SVD-137, SVD-138, SVD-139, SVD-140, SVD-141, SVD-142, SVD-143, SVD-144, SVD-145, SVD-146, SVD-147, SVD-148, SVD-149, SVD-150, SVD-151, SVD-152, SVD-153, SVD-154, SVD-155, SVD-156, SVD-157, SVD-158, SVD-159, SVD-160, SVD-161, SVD-162, SVD-163, SVD-164, SVD-165, SVD-166, SVD-167, SVD-168, SVD-169, SVD-170, SVD-171, SVD-172, SVD-173, SVD-174, SVD-175, SVD-176, SVD-177, SVD-178, SVD-179
