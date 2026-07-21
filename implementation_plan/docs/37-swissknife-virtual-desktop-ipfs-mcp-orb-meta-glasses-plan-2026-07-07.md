@@ -2931,7 +2931,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G047 with explicit legacy alias behavior, pubsub/provenance, offline state, delivery failure, and migration path.
 
 ## SVD-173 Improve Datasets Browser end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: data
 - Depends on: SVD-133, SVD-134
