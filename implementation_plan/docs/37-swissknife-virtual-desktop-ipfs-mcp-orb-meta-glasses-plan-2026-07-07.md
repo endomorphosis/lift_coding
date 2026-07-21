@@ -2886,7 +2886,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G042 with source/result CIDs, prompt/model provenance, generation/edit progress, cancellation, denial, and comparison UI.
 
 ## SVD-168 Improve Cinema end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: creative
 - Depends on: SVD-133, SVD-134
