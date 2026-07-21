@@ -2805,7 +2805,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G033 with calculation CID/history, optional verified explanation, robust keypad/focus/error handling, and responsive layout.
 
 ## SVD-159 Improve Clock end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P2
 - Track: utility
 - Depends on: SVD-133, SVD-134
