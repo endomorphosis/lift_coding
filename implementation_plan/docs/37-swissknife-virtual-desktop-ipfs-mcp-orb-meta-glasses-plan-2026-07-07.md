@@ -2958,7 +2958,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G050 with descriptor CIDs, schema/policy explanation, compatibility fixture, invalid input, transport badges, and receipt drill-down.
 
 ## SVD-176 Improve Glasses Preview end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: glasses
 - Depends on: SVD-133, SVD-134
