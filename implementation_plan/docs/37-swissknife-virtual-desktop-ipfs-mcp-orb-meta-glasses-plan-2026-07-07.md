@@ -2823,7 +2823,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G035 with artifact-backed events, semantic search, reminders, conflict handling, and mobile summary.
 
 ## SVD-161 Improve PeerTube end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: media
 - Depends on: SVD-133, SVD-134
