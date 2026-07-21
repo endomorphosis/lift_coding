@@ -2922,7 +2922,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G046 while preserving the legacy workflow and adding artifact, metadata, optional render, save, and responsive fallback proof.
 
 ## SVD-172 Improve Legacy P2P Chat end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P2
 - Track: social
 - Depends on: SVD-133, SVD-134
