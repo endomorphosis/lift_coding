@@ -2841,7 +2841,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G037 with contact provenance, relationship policy, invitation/blocking state, freshness, and accessible empty state.
 
 ## SVD-163 Improve Image Viewer end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: media
 - Depends on: SVD-133, SVD-134
