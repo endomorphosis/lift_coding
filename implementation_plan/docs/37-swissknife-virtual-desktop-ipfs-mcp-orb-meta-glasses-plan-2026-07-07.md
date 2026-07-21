@@ -3005,7 +3005,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 
 ## SVD-181 Prove cross-service MCP++ workflows from all application paths
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-180
