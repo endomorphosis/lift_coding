@@ -2778,7 +2778,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G030 with pubsub/offline delivery, moderation context, receipt, audio fallback, and clear offline recovery.
 
 ## SVD-156 Improve Neural Network Designer end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: ai
 - Depends on: SVD-133, SVD-134
