@@ -2814,7 +2814,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G034 with timer receipt, reminder policy, scheduling state, permission recovery, and accurate compact UI.
 
 ## SVD-160 Improve Calendar end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: productivity
 - Depends on: SVD-133, SVD-134
