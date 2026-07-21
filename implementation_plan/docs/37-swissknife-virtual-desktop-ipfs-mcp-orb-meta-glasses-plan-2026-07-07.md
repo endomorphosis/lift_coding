@@ -2913,7 +2913,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G045 with asset provenance, assisted composition, render state, undo, failed audio backend, and compact controls.
 
 ## SVD-171 Improve Classic Music Studio end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P2
 - Track: creative
 - Depends on: SVD-133, SVD-134
