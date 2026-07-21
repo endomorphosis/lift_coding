@@ -2832,7 +2832,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G036 with CID playback, captions, diagnostics, buffering/missing-content recovery, and media fallback.
 
 ## SVD-162 Improve Friends List end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P2
 - Track: social
 - Depends on: SVD-133, SVD-134
