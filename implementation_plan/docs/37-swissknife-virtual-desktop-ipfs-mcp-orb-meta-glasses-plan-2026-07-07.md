@@ -2904,7 +2904,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G044 with session/sample CIDs, pattern context, optional assistance, compile/audio errors, and session restore.
 
 ## SVD-170 Improve Strudel AI DAW end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: creative
 - Depends on: SVD-133, SVD-134
