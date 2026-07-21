@@ -2859,7 +2859,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G039 with note CIDs, semantic search, provenance, summary, conflict recovery, and keyboard-safe editing.
 
 ## SVD-165 Improve Media Player end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: media
 - Depends on: SVD-133, SVD-134
