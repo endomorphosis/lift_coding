@@ -2796,7 +2796,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G032 with provenance, capacity queue, telemetry, cancellation confirmation, checkpoints, and resume recovery.
 
 ## SVD-158 Improve Calculator end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P2
 - Track: utility
 - Depends on: SVD-133, SVD-134
