@@ -2769,7 +2769,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Completed: 2026-07-20. Focused P2P Network app-improvement evidence passed for desktop and mobile with `p2p-network.json` regenerated and no recorded errors.
 
 ## SVD-155 Improve Unified P2P Chat end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: social
 - Depends on: SVD-133, SVD-134
