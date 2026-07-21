@@ -2949,7 +2949,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G049 with model artifacts, evaluation policy, primary execution, hardware fit, queue/log/cancel, and no-capacity recovery.
 
 ## SVD-175 Improve IDL Explorer end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: mcp
 - Depends on: SVD-133, SVD-134
