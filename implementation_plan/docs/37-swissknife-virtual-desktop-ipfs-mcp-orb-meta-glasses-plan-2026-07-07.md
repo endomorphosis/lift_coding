@@ -2985,7 +2985,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G053 with peer/event-DAG/policy/scheduling diagnostics, HTTP/libp2p distinction, DID identity, profile failure, and evidence drill-down.
 
 ## SVD-179 Improve Agent Supervisor end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: automation
 - Depends on: SVD-133, SVD-134
