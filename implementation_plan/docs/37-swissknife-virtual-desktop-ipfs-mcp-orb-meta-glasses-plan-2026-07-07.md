@@ -2868,7 +2868,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G040 with CID media, captions/metadata, diagnostics, seek/volume, missing codec, and background audio recovery.
 
 ## SVD-166 Improve System Monitor end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: system
 - Depends on: SVD-133, SVD-134
