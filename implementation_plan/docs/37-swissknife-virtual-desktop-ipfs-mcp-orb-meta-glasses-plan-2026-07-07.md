@@ -2850,7 +2850,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 - Acceptance: Deliver VDA-G038 with CID retrieval, metadata/OCR, optional enhancement job, zoom/pan, unsupported-format, and alt-text states.
 
 ## SVD-164 Improve Notes end-to-end workflow
-- Status: ready
+- Status: completed
 - Priority: P1
 - Track: productivity
 - Depends on: SVD-133, SVD-134
