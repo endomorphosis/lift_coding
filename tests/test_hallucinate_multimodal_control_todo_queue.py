@@ -50,6 +50,14 @@ PHONE_INGRESS_REHEARSAL_PATH = (
 MCP_LAUNCH_CONTRACT_INTEGRATION_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-674-mcp-launch-contract-integration.md"
 )
+SWISSKNIFE_MCP_CAPABILITY_REGISTRY_PATH = (
+    REPO_ROOT
+    / "swissknife"
+    / "src"
+    / "services"
+    / "apps"
+    / "swissknife-mcp-capability-registry.ts"
+)
 PLAYWRIGHT_LAUNCH_REPLAY_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-675-playwright-launch-replay.md"
 )
@@ -780,9 +788,7 @@ def test_hao_674_integrates_mcp_launch_contracts_with_swissknife_control_surface
     daemon_doc = (REPO_ROOT / "hallucinate_app" / "docs" / "MCP_DAEMON_ARCHITECTURE.md").read_text(
         encoding="utf-8"
     )
-    registry_source = (
-        REPO_ROOT / "swissknife" / "src" / "services" / "swissknife-mcp-capability-registry.ts"
-    ).read_text(encoding="utf-8")
+    registry_source = SWISSKNIFE_MCP_CAPABILITY_REGISTRY_PATH.read_text(encoding="utf-8")
     discovery_source = MCP_LAUNCH_CONTRACT_INTEGRATION_PATH.read_text(encoding="utf-8")
     fixture = _json_block_after(discovery_source, "## Integration Fixture")
     normalized_idl_source = " ".join(idl_source.split())
@@ -5284,6 +5290,46 @@ def test_validation_runner_strips_unsupported_typescript_ignore_config(tmp_path)
     assert not re.search(r"(^|[\s;&|])--ignoreConfig(?=$|[\s;&|])", result["results"][0]["command"])
     assert (
         "[validation normalized] removed unsupported TypeScript flag --ignoreConfig"
+        in log_path.read_text(encoding="utf-8")
+    )
+
+
+def test_validation_runner_unwraps_markdown_inline_code_commands(tmp_path):
+    sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    daemon = PortalImplementationDaemon(
+        **_implementation_daemon_paths(repo),
+        repo_root=repo,
+        task_header_prefix="## HAO-",
+        implementation_timeout=10,
+    )
+    task = PortalTask(
+        task_id="HAO-997",
+        title="Validate markdown command normalization",
+        **_pending_task_metadata(),
+        priority="P1",
+        track="ops",
+        validation=[
+            "`python3 -c \"from pathlib import Path; Path('validation-ok.txt').write_text('ok')\"`."
+        ],
+    )
+
+    log_path = repo / "validation.log"
+    result = daemon._run_validation_commands(repo, task, log_path)
+
+    assert result["passed"] is True
+    assert result["results"][0]["raw_command"].startswith("`python3")
+    assert result["results"][0]["command"].startswith("python3")
+    assert "`" not in result["results"][0]["command"]
+    assert (repo / "validation-ok.txt").read_text(encoding="utf-8") == "ok"
+    assert (
+        "[validation normalized] removed markdown inline-code wrapper from validation command"
         in log_path.read_text(encoding="utf-8")
     )
 

@@ -92,6 +92,14 @@ INTEGRATION_PLAN_PATH = (
     / "docs"
     / "19-virtual-ai-os-submodule-integration.md"
 )
+SWISSKNIFE_MCP_CAPABILITY_REGISTRY_PATH = (
+    REPO_ROOT
+    / "swissknife"
+    / "src"
+    / "services"
+    / "apps"
+    / "swissknife-mcp-capability-registry.ts"
+)
 
 
 # Assemble the task-board filename from neutral fragments so static follow-up
@@ -1546,9 +1554,7 @@ def test_vai_503_mcp_dashboard_interoperability_gate_closes_objective_gap():
     playwright_source = (
         REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
     ).read_text(encoding="utf-8")
-    swissknife_registry_source = (
-        REPO_ROOT / "swissknife" / "src" / "services" / "swissknife-mcp-capability-registry.ts"
-    ).read_text(encoding="utf-8")
+    swissknife_registry_source = SWISSKNIFE_MCP_CAPABILITY_REGISTRY_PATH.read_text(encoding="utf-8")
 
     assert packet["task_id"] == "VAI-503"
     assert packet["goal_id"] == "VAIOS-G723"

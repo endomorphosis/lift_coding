@@ -58,6 +58,39 @@ def test_existing_main_checkout_guardrail_does_not_churn_fingerprint(tmp_path):
     )
     strategy_path = tmp_path / "strategy.json"
     strategy_path.write_text(json.dumps({}), encoding="utf-8")
+    reconciliation_result = {
+        "attempted": True,
+        "main_checkout_dirty": True,
+        "candidate_count": 9,
+        "main_status_short": [" M src/launch_surface.py"],
+        "main_dirty_evidence": {
+            "status_short": [" M src/launch_surface.py"],
+            "status_paths": ["src/launch_surface.py"],
+        },
+        "candidates": [
+            {
+                "branch": "implementation/vai-512-attempt-1-submodule-swissknife",
+                "path": str(tmp_path / "worktrees" / "vai-512"),
+                "target_ref": "main",
+            }
+        ],
+    }
+
+    # The legacy fixture lacks the required machine-readable manifest. A
+    # single refresh repairs it; subsequent identical scans must be stable.
+    repaired = record_reconciliation_guardrail_findings(
+        todo_path=board,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        reconciliation_result=reconciliation_result,
+        cleanup_result={},
+        task_prefix="VAI-",
+        repo_root=tmp_path,
+    )
+
+    assert len(repaired) == 1
+    assert repaired[0]["refreshed"] is True
+    assert "## Machine Readable Manifest" in discovery_path.read_text(encoding="utf-8")
     before_board = board.read_text(encoding="utf-8")
     before_discovery = discovery_path.read_text(encoding="utf-8")
 
@@ -65,23 +98,7 @@ def test_existing_main_checkout_guardrail_does_not_churn_fingerprint(tmp_path):
         todo_path=board,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
-        reconciliation_result={
-            "attempted": True,
-            "main_checkout_dirty": True,
-            "candidate_count": 9,
-            "main_status_short": [" M src/launch_surface.py"],
-            "main_dirty_evidence": {
-                "status_short": [" M src/launch_surface.py"],
-                "status_paths": ["src/launch_surface.py"],
-            },
-            "candidates": [
-                {
-                    "branch": "implementation/vai-512-attempt-1-submodule-swissknife",
-                    "path": str(tmp_path / "worktrees" / "vai-512"),
-                    "target_ref": "main",
-                }
-            ],
-        },
+        reconciliation_result=reconciliation_result,
         cleanup_result={},
         task_prefix="VAI-",
         repo_root=tmp_path,
@@ -126,6 +143,36 @@ def test_existing_preflight_guardrail_does_not_churn_rescue_branch_fingerprint(t
     )
     strategy_path = tmp_path / "strategy.json"
     strategy_path.write_text(json.dumps({}), encoding="utf-8")
+    reconciliation_result = {
+        "attempted": True,
+        "processed": [
+            {
+                "branch": "rescue/worktree/rescue-worktree--newhash",
+                "path": str(tmp_path / "worktrees" / "hao-680"),
+                "preflight_result": {
+                    "mergeable": False,
+                    "conflict_paths": [
+                        "hallucinate_app",
+                        "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+                    ],
+                },
+            }
+        ],
+    }
+
+    repaired = record_reconciliation_guardrail_findings(
+        todo_path=board,
+        strategy_path=strategy_path,
+        discovery_dir=discovery_dir,
+        reconciliation_result=reconciliation_result,
+        cleanup_result={},
+        task_prefix="HAO-",
+        repo_root=tmp_path,
+    )
+
+    assert len(repaired) == 1
+    assert repaired[0]["refreshed"] is True
+    assert "## Machine Readable Manifest" in discovery_path.read_text(encoding="utf-8")
     before_board = board.read_text(encoding="utf-8")
     before_discovery = discovery_path.read_text(encoding="utf-8")
 
@@ -133,22 +180,7 @@ def test_existing_preflight_guardrail_does_not_churn_rescue_branch_fingerprint(t
         todo_path=board,
         strategy_path=strategy_path,
         discovery_dir=discovery_dir,
-        reconciliation_result={
-            "attempted": True,
-            "processed": [
-                {
-                    "branch": "rescue/worktree/rescue-worktree--newhash",
-                    "path": str(tmp_path / "worktrees" / "hao-680"),
-                    "preflight_result": {
-                        "mergeable": False,
-                        "conflict_paths": [
-                            "hallucinate_app",
-                            "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
-                        ],
-                    },
-                }
-            ],
-        },
+        reconciliation_result=reconciliation_result,
         cleanup_result={},
         task_prefix="HAO-",
         repo_root=tmp_path,
@@ -309,3 +341,73 @@ def test_launch_validation_retry_repair_preserves_playwright_gate(tmp_path):
     assert "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts" in updated_board
     assert "For launch tasks, this repair validation preserves the launch Playwright validation gate." in updated_board
     assert updated_strategy["blocked_tasks"] == ["MGW-536"]
+
+
+def test_retry_repair_generation_unwraps_markdown_failed_command(tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.backlog_refinery import (
+        record_retry_budget_findings,
+    )
+
+    board = tmp_path / "svd.todo.md"
+    events = tmp_path / "events.jsonl"
+    strategy = tmp_path / "strategy.json"
+    discovery = tmp_path / "discovery"
+    shell_command = "cd swissknife && npm run test:e2e:app-improvement -- --all"
+    markdown_command = f"`{shell_command}`."
+    board.write_text(
+        "\n".join(
+            (
+                "# SVD",
+                "",
+                "## SVD-133 Prove all app improvement harness",
+                "- Status: todo",
+                "- Completion: manual",
+                "- Priority: P0",
+                "- Track: app",
+                "- Depends on:",
+                "- Outputs: swissknife/test/e2e/virtual-desktop-all-app-improvement.spec.ts",
+                f"- Validation: {markdown_command}",
+                "- Acceptance: All app validation passes.",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    events.write_text(
+        "\n".join(
+            json.dumps(
+                {
+                    "type": "implementation_finished",
+                    "task_id": "SVD-133",
+                    "attempt": attempt,
+                    "validation_result": {
+                        "attempted": True,
+                        "passed": False,
+                        "failed_command": markdown_command,
+                    },
+                }
+            )
+            for attempt in (1, 2)
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    strategy.write_text(json.dumps({}), encoding="utf-8")
+
+    findings = record_retry_budget_findings(
+        todo_path=board,
+        events_path=events,
+        strategy_path=strategy,
+        discovery_dir=discovery,
+        task_header_prefix_value="## SVD-",
+        task_prefix="SVD-",
+        validation_retry_budget=2,
+        merge_retry_budget=0,
+        implementation_retry_budget=0,
+    )
+
+    updated_board = board.read_text(encoding="utf-8")
+    follow_up_block = updated_board.split("## SVD-134 Resolve validation retry-budget failure for SVD-133", 1)[1]
+    assert findings[0]["source_task_id"] == "SVD-133"
+    assert f"- Validation: {shell_command}" in follow_up_block
+    assert f"- Validation: {markdown_command}" not in follow_up_block

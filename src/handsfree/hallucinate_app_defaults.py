@@ -86,7 +86,7 @@ def get_hallucinate_app_dashboard_catalog_entry(server_family: str) -> dict:
     """Build a dashboard capability catalog entry for a server family.
 
     This matches the HallucinateDashboardCapabilityServer interface defined in
-    swissknife/src/services/swissknife-mcp-capability-registry.ts.
+    swissknife/src/services/apps/swissknife-mcp-capability-registry.ts.
     """
     configs = {
         "ipfs_kit": {
