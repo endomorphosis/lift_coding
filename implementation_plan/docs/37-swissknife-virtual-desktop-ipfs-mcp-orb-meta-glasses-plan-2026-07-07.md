@@ -3015,7 +3015,7 @@ This phase is governed by `implementation_plan/docs/43-swissknife-virtual-deskto
 
 ## SVD-182 Refresh all-app release evidence and close only verified gaps
 
-- Status: ready
+- Status: completed
 - Priority: P0
 - Track: release
 - Depends on: SVD-181
