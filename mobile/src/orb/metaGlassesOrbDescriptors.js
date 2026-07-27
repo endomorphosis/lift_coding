@@ -221,6 +221,89 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
 };
 
+/**
+ * Interop interface for VAI-684 / VAIOS-G707: proves that `hallucinate_app`
+ * interoperates with `mobile`. The Hallucinate App desktop search surface
+ * (`hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`)
+ * hands a search query off to the mobile ORB bridge through the shared
+ * `interface contract hallucinate_app mobile`.
+ */
+export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
+  name: 'hallucinate_app_mobile_interop',
+  namespace: 'handsfree.interop.hallucinate_app_mobile',
+  version: '0.1.0',
+  metadata: {
+    interface_contract: 'interface contract hallucinate_app mobile',
+    goal_id: 'VAIOS-G707',
+    source_surface: 'hallucinate_app',
+    target_surface: 'mobile',
+  },
+  objective_goals: ['VAIOS-G707'],
+  methods: MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
+    name,
+    surface: 'mobile_orb_bridge',
+    contract_ref:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+  })),
+  errors: [
+    {
+      name: 'search_contract_unavailable',
+      code: 409,
+    },
+    {
+      name: 'unsupported_mobile_surface',
+      code: 422,
+    },
+  ],
+  requires: [
+    'mcp++/profile-a-idl',
+    'mcp++/profile-b-cid-artifacts',
+    'mobile/meta-wearables-dat',
+  ],
+  compatibility: {
+    hallucinate_app_search_interface:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    hallucinate_app_test_interface:
+      'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    hallucinate_app_time_series_schema:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
+    hallucinate_app_benchmark_schema_script:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
+  },
+};
+
+export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
+  descriptor_id: 'hallucinate-app-mobile-interop@0.1.0',
+  interface: HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE,
+  schema_refs: {
+    search_interface:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+    test_interface: 'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    time_series_schema:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
+    benchmark_schema_script:
+      'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
+  },
+  runtime_handoff: {
+    source_surface: 'hallucinate_app',
+    target_surface: 'mobile',
+    allowed_surfaces: ['agent', 'remote_client', 'mobile', 'meta_glasses'],
+    mobile_orb_methods: MOBILE_ORB_BRIDGE_OPERATIONS,
+    route: '/v1/mobile/orb/invoke_service',
+    receipt_table: 'hallucinate_app_mobile_interop_receipts',
+    required_artifacts: ['interaction_envelope', 'policy_decision', 'mediation_receipt'],
+  },
+  validation: {
+    task_id: 'VAI-684',
+    goal_id: 'VAIOS-G707',
+    objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-09-vai-684-objective-gap-7edb316279e5.md',
+    objective_validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-09-vai-684-objective-validation-repair.md',
+    evidence: 'objective validation repair',
+  },
+};
+
 export const TASK_STATUS_SERVICE_INTERFACE = {
   name: 'task_status_service',
   namespace: 'handsfree.services.tasks',
