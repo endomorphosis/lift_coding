@@ -1,4 +1,4 @@
-"""SwissKnife/mobile interoperability contract regression tests for HAO-730."""
+"""SwissKnife/mobile interoperability contract regression tests for VAI-661."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+GOAL_PACKET = "goal_packet/interoperability/swissknife/06921590135c"
 GOAL_PACKET_GOALS = {
     "VAIOS-G700",
     "VAIOS-G701",
@@ -20,6 +21,14 @@ GOAL_PACKET_GOALS = {
     "VAIOS-G705",
     "VAIOS-G706",
 }
+OBJECTIVE_GAP_REF = (
+    "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
+)
+VALIDATION_REPAIR_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md"
+ATTEMPT_REPAIR_REF = (
+    "data/virtual_ai_os/discovery/"
+    "2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md"
+)
 MOBILE_ORB_OPERATIONS = {
     "register_edge_capabilities",
     "publish_glasses_event",
@@ -231,7 +240,7 @@ def swissknife_mobile_interaction_envelope() -> dict:
     }
 
 
-def test_mobile_descriptor_exports_swissknife_interop_contract() -> None:
+def test_mobile_descriptor_exports_vai_661_swissknife_interop_contract() -> None:
     exports = load_js_exports(
         "mobile/src/orb/metaGlassesOrbDescriptors.js",
         [
@@ -246,6 +255,7 @@ def test_mobile_descriptor_exports_swissknife_interop_contract() -> None:
     descriptor = exports["SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR"]
 
     assert interface["metadata"]["interface_contract"] == "interface contract swissknife mobile"
+    assert interface["metadata"]["goal_packet"] == GOAL_PACKET
     assert set(interface["objective_goals"]) == GOAL_PACKET_GOALS
     assert {method["name"] for method in interface["methods"]} == (
         MOBILE_ORB_OPERATIONS | DISPLAY_WIDGET_OPERATIONS
@@ -265,16 +275,13 @@ def test_mobile_descriptor_exports_swissknife_interop_contract() -> None:
     assert {"agent", "remote_client"}.issubset(
         set(descriptor["runtime_handoff"]["allowed_surfaces"])
     )
-    assert descriptor["validation"]["hao_task_id"] == "HAO-730"
-    assert descriptor["validation"]["hao_attempt"] == 4
-    assert descriptor["validation"]["hao_objective_gap_ref"] == (
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-730-objective-gap-d33307f93408.md"
-    )
-    assert descriptor["validation"]["hao_validation_confirmation_ref"] == (
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-730-attempt-4-validation-confirmation.md"
-    )
+    assert descriptor["validation"]["task_id"] == "VAI-661"
+    assert descriptor["validation"]["attempt"] == 1
+    assert descriptor["validation"]["objective_gap_ref"] == OBJECTIVE_GAP_REF
+    assert descriptor["validation"]["validation_repair_ref"] == VALIDATION_REPAIR_REF
+    assert descriptor["validation"]["attempt_validation_repair_ref"] == ATTEMPT_REPAIR_REF
+    assert set(descriptor["validation"]["objective_goals"]) == GOAL_PACKET_GOALS
+    assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
 def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods() -> None:
@@ -294,12 +301,13 @@ def test_mobile_display_widget_contract_maps_swissknife_actions_to_dat_methods()
     assert contract["producer"] == "swissknife"
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract swissknife mobile"
-    assert contract["hao_task_id"] == "HAO-730"
-    assert contract["hao_attempt"] == 4
-    assert contract["hao_validation_confirmation_ref"] == (
-        "data/hallucinate_multimodal_control/discovery/"
-        "2026-07-08-hao-730-attempt-4-validation-confirmation.md"
-    )
+    assert contract["goal_packet"] == GOAL_PACKET
+    assert contract["task_id"] == "VAI-661"
+    assert contract["attempt"] == 1
+    assert contract["objective_gap_ref"] == OBJECTIVE_GAP_REF
+    assert contract["validation_repair_ref"] == VALIDATION_REPAIR_REF
+    assert contract["attempt_validation_repair_ref"] == ATTEMPT_REPAIR_REF
+    assert set(contract["objective_goals"]) == GOAL_PACKET_GOALS
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -316,6 +324,14 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_mobile
     Draft202012Validator(control_schema).validate(swissknife_mobile_control_surface_payload())
     Draft202012Validator(envelope_schema).validate(swissknife_mobile_interaction_envelope())
 
+    for schema in (control_schema, envelope_schema):
+        assert "VAI-661 attempt 1 objective validation repair" in schema["$comment"]
+        assert ATTEMPT_REPAIR_REF in schema["$comment"]
+        assert OBJECTIVE_GAP_REF in schema["$comment"]
+        assert "agent_identity" in schema["$comment"]
+        assert "allowed_surfaces" in schema["$comment"]
+        assert "arguments_hash" in schema["$comment"]
+
 
 def test_mobile_orb_bridge_module_remains_parseable_after_contract_wiring() -> None:
     assert_module_is_valid_esm("mobile/src/orb/metaGlassesMobileOrbBridge.js")
@@ -327,123 +343,42 @@ def test_mobile_orb_bridge_module_remains_parseable_after_contract_wiring() -> N
     assert source.count("export const MOBILE_ORB_DIAGNOSTICS_CONTRACT") == 1
 
 
-def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
+def test_docs_discovery_and_heap_record_vai_661_objective_validation_repair() -> None:
     docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
-    discovery = (
-        REPO_ROOT
-        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-validation-repair.md"
-    ).read_text(encoding="utf-8")
+    gap = (REPO_ROOT / OBJECTIVE_GAP_REF).read_text(encoding="utf-8")
+    repair = (REPO_ROOT / VALIDATION_REPAIR_REF).read_text(encoding="utf-8")
+    attempt_repair = (REPO_ROOT / ATTEMPT_REPAIR_REF).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
 
     required_terms = [
-        "MGW-569",
-        "MGW-583",
+        "VAI-661",
         "VAIOS-G700",
-        "goal_packet/interoperability/swissknife/06921590135c",
-        "objective validation repair",
-        "interface contract swissknife mobile",
-        "tests/integration/test_swissknife_mobile_interop.py",
-        "mobile/src/orb/metaGlassesOrbDescriptors.js",
-        "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
-        "swissknife/contracts/control_surface_contract.schema.json",
-        "swissknife/contracts/interaction_envelope.schema.json",
-    ]
-    for content in (docs, discovery, heap):
-        for term in required_terms:
-            assert term in content
-    for goal_id in GOAL_PACKET_GOALS:
-        assert goal_id in discovery
-        assert goal_id in heap
-
-
-def test_attempt_4_validation_confirmation_recorded() -> None:
-    """MGW-569 attempt 4 re-filed the same objective gap under a fresh
-    fingerprint; this confirms the repair evidence stays tied to that
-    fingerprint and to the objective heap instead of drifting out of sync."""
-    gap = (
-        REPO_ROOT
-        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md"
-    ).read_text(encoding="utf-8")
-    confirmation = (
-        REPO_ROOT
-        / "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-4-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    heap = (
-        REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
-    ).read_text(encoding="utf-8")
-
-    assert "d33307f93408e32451468150b5e7fe003eb0222d" in gap
-    assert "d33307f93408e32451468150b5e7fe003eb0222d" in confirmation
-
-    required_terms = [
-        "MGW-569",
-        "VAIOS-G700",
-        "goal_packet/interoperability/swissknife/06921590135c",
-        "objective validation repair",
-        "interface contract swissknife mobile",
-        "tests/integration/test_swissknife_mobile_interop.py",
-        "mobile/src/orb/metaGlassesOrbDescriptors.js",
-        "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
-        "swissknife/contracts/control_surface_contract.schema.json",
-        "swissknife/contracts/interaction_envelope.schema.json",
-    ]
-    for term in required_terms:
-        assert term in confirmation
-
-    assert (
-        "data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-4-validation-confirmation.md"
-        in heap
-    )
-    for goal_id in GOAL_PACKET_GOALS:
-        assert goal_id in confirmation
-        assert goal_id in heap
-
-
-def test_hao_730_attempt_4_validation_confirmation_recorded() -> None:
-    """Lock the exact HAO-730 attempt-4 evidence to the objective heap."""
-    gap = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md"
-    ).read_text(encoding="utf-8")
-    confirmation = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md"
-    ).read_text(encoding="utf-8")
-    docs = (REPO_ROOT / "docs/integration/swissknife-mobile.md").read_text(encoding="utf-8")
-    heap = (
-        REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
-    ).read_text(encoding="utf-8")
-    control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
-    envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
-
-    required_terms = [
-        "HAO-730",
-        "d33307f93408e32451468150b5e7fe003eb0222d",
-        "VAIOS-G700",
-        "goal_packet/interoperability/swissknife/06921590135c",
+        GOAL_PACKET,
         "objective validation repair",
         "interface contract swissknife mobile",
         "tests/integration/test_swissknife_mobile_interop.py",
         "docs/integration/swissknife-mobile.md",
         "mobile/src/orb/metaGlassesOrbDescriptors.js",
         "mobile/src/utils/metaWearablesDatDisplayWidgetContract.js",
+        "mobile/src/orb/metaGlassesMobileOrbBridge.js",
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
-        "data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md",
+        OBJECTIVE_GAP_REF,
+        VALIDATION_REPAIR_REF,
+        ATTEMPT_REPAIR_REF,
     ]
-    for term in required_terms:
-        assert term in confirmation
-        assert term in heap
+    for content in (docs, repair, attempt_repair, heap):
+        for term in required_terms:
+            assert term in content
 
-    assert "Attempt: 4" in confirmation
-    assert "attempt 4 objective validation repair" in heap
-    assert "d33307f93408e32451468150b5e7fe003eb0222d" in gap
-    assert "HAO-730 attempt 4" in docs
-    assert "HAO-730 attempt 4 objective validation repair" in control_schema["$comment"]
-    assert "HAO-730 attempt 4 objective validation repair" in envelope_schema["$comment"]
+    assert "Fingerprint: d33307f93408e32451468150b5e7fe003eb0222d" in gap
+    assert "VAI-661 attempt 1 objective validation repair" in attempt_repair
+    assert "Attempt: 1" in attempt_repair
+    assert "attempt 1 objective validation repair" in heap
 
     for goal_id in GOAL_PACKET_GOALS:
-        assert goal_id in confirmation
+        assert goal_id in repair
+        assert goal_id in attempt_repair
         assert goal_id in heap

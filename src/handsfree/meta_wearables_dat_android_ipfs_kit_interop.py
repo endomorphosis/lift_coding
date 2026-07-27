@@ -1,6 +1,6 @@
 """Interop contract for ``external/meta-wearables-dat-android`` and ``external/ipfs_kit``.
 
-VAI-670 repairs the VAIOS-G711 objective validation gap by proving that the
+HAO-739/VAI-670 repairs the VAIOS-G711 objective validation gap by proving that the
 Meta Wearables DAT Android Display/session surface can hand glasses display
 events to the ipfs_kit Bucket VFS, MCP schema, deprecations-report, and DAG-PB
 surfaces. The proof is static and deterministic: it validates source-tree
@@ -19,6 +19,7 @@ from typing import Any
 
 INTERFACE_CONTRACT = "interface contract external/meta-wearables-dat-android external/ipfs_kit"
 TASK_ID = "VAI-670"
+BACKLOG_TASK_ID = "HAO-739"
 GOAL_ID = "VAIOS-G711"
 GOAL_PACKET = "goal_packet/interoperability/external/6595cbbfadb9"
 GOAL_PACKET_GOALS = ("VAIOS-G709", "VAIOS-G710", "VAIOS-G711")
@@ -422,8 +423,10 @@ def discover_ipfs_kit_bucket_vfs_contract(root: str | Path) -> IPFSKitBucketVFSC
     )
 
     bucket_vfs_manager_source = bucket_vfs_manager_path.read_text(encoding="utf-8")
-    discovered_bucket_types = tuple(
-        sorted(set(re.findall(r"^\s+([A-Z]+)\s*=", bucket_vfs_manager_source, flags=re.MULTILINE)))
+    discovered_bucket_types = _discover_enum_members(bucket_vfs_manager_source, "BucketType")
+    discovered_vfs_structure_types = _discover_enum_members(
+        bucket_vfs_manager_source,
+        "VFSStructureType",
     )
     _require_subset(
         REQUIRED_BUCKET_TYPES,
@@ -432,7 +435,7 @@ def discover_ipfs_kit_bucket_vfs_contract(root: str | Path) -> IPFSKitBucketVFSC
     )
     _require_subset(
         REQUIRED_VFS_STRUCTURE_TYPES,
-        discovered_bucket_types,
+        discovered_vfs_structure_types,
         "ipfs_kit VFSStructureType values",
     )
 
@@ -461,7 +464,7 @@ def discover_ipfs_kit_bucket_vfs_contract(root: str | Path) -> IPFSKitBucketVFSC
         bucket_vfs_cli_commands=discovered_cli_commands,
         bucket_types=tuple(symbol for symbol in REQUIRED_BUCKET_TYPES if symbol in discovered_bucket_types),
         vfs_structure_types=tuple(
-            symbol for symbol in REQUIRED_VFS_STRUCTURE_TYPES if symbol in discovered_bucket_types
+            symbol for symbol in REQUIRED_VFS_STRUCTURE_TYPES if symbol in discovered_vfs_structure_types
         ),
         dag_pb_messages=discovered_dag_pb_messages,
     )
@@ -562,6 +565,28 @@ def _require_subset(required: tuple[str, ...], discovered: tuple[Any, ...], labe
         raise MetaWearablesDATAndroidIPFSKitInteropError(
             f"{label} missing: {sorted(missing)}"
         )
+
+
+def _discover_enum_members(source: str, class_name: str) -> tuple[str, ...]:
+    class_header = re.compile(rf"^class\s+{re.escape(class_name)}\([^)]*\):")
+    in_class = False
+    members: set[str] = set()
+
+    for line in source.splitlines():
+        if not in_class:
+            in_class = class_header.match(line) is not None
+            continue
+        if line and not line.startswith((" ", "\t")):
+            break
+        member_match = re.match(r"^\s+([A-Z][A-Z0-9_]*)\s*=", line)
+        if member_match:
+            members.add(member_match.group(1))
+
+    if not in_class:
+        raise MetaWearablesDATAndroidIPFSKitInteropError(
+            f"ipfs_kit bucket_vfs_manager.py missing enum class {class_name}"
+        )
+    return tuple(sorted(members))
 
 
 def _payload_to_bytes(payload: bytes | str | dict[str, Any]) -> bytes:

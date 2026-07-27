@@ -1,6 +1,6 @@
 # external/meta-wearables-dat-android to external/ipfs_kit Interop
 
-Task: VAI-670
+Task: HAO-739 / VAI-670
 Goal: VAIOS-G711
 Packet: goal_packet/interoperability/external/6595cbbfadb9
 Evidence: objective validation repair
@@ -12,6 +12,9 @@ runtime handoff behavior, and an integration test:
 - `tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py`
 - `src/handsfree/meta_wearables_dat_android_ipfs_kit_interop.py`
 - `docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-739-attempt-6-objective-validation-repair.md`
+- `data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-validation-repair.md`
 - interface contract external/meta-wearables-dat-android external/ipfs_kit
 - `external/meta-wearables-dat-android/.cursor/rules/display-access.mdc`
 - `external/meta-wearables-dat-android/.cursor/rules/session-lifecycle.mdc`
@@ -63,6 +66,8 @@ The target surface is `external/ipfs_kit`. The validated descriptors prove:
   `bucket_get_info`, and `bucket_status`
 - CLI commands `create`, `list`, `delete`, `add-file`, `export`, and `query`
 - VFS structure types `UNIXFS`, `GRAPH`, `VECTOR`, and `HYBRID`
+- independent `BucketType` and `VFSStructureType` enum discovery from
+  `external/ipfs_kit/ipfs_kit_py/bucket_vfs_manager.py`
 - IPLD compatibility through DAG-PB messages `PBLink` and `PBNode`
 - analytics integration through the Bucket VFS interface summary
 
@@ -90,9 +95,10 @@ record through DAG-PB `PBLink`/`PBNode` messages.
 The integration test validates all descriptors on disk, compiles the three
 `fix_mcp_schema.py` scripts, checks the deprecations schema with `jsonschema`,
 builds the handoff twice to prove deterministic content addressing, and verifies
-the objective heap and discovery record include the VAI-670 objective validation
-repair evidence for VAIOS-G711 while preserving the shared packet context for
-VAIOS-G709 and VAIOS-G710.
+that Bucket VFS bucket types remain disjoint from VFS structure types. It also
+verifies the objective heap and discovery records include the HAO-739/VAI-670 objective
+validation repair evidence for VAIOS-G711 while preserving the shared packet
+context for VAIOS-G709 and VAIOS-G710.
 
 Validation command:
 

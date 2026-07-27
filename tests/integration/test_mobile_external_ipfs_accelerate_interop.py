@@ -1,4 +1,4 @@
-"""Mobile / external/ipfs_accelerate interoperability regression tests for VAI-672."""
+"""Mobile / external/ipfs_accelerate interoperability regression tests for VAIOS-G719."""
 
 from __future__ import annotations
 
@@ -192,7 +192,67 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
         set(descriptor["runtime_handoff"]["time_series_tables"])
     )
     assert descriptor["validation"]["task_id"] == "VAI-672"
+    assert descriptor["validation"]["active_validation_repair_task_id"] == "HAO-758"
     assert descriptor["validation"]["goal_id"] == GOAL_ID
+    assert descriptor["validation"]["active_objective_gap_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-gap-c1edafa875e6.md"
+    )
+    assert descriptor["validation"]["active_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
+    )
+    assert "HAO-741" in descriptor["validation"]["validation_repair_tasks"]
+    assert "HAO-758" in descriptor["validation"]["validation_repair_tasks"]
+    assert "MGW-596" in descriptor["validation"]["validation_repair_tasks"]
+    assert descriptor["validation"]["hao_758_objective_gap_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-gap-c1edafa875e6.md"
+    )
+    assert descriptor["validation"]["hao_758_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_758_attempt_1_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_758_attempt_2_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-2-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_3_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_1_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-1-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_2_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_4_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_5_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-5-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_6_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-6-objective-validation-repair.md"
+    )
+    assert descriptor["validation"]["hao_741_attempt_7_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-7-objective-validation-repair.md"
+    )
     assert descriptor["validation"]["evidence"] == "objective validation repair"
 
 
@@ -216,6 +276,39 @@ def test_mobile_benchmark_widget_contract_maps_actions_to_dat_methods_and_tables
     assert contract["consumer"] == "mobile"
     assert contract["interface_contract"] == "interface contract mobile external/ipfs_accelerate"
     assert contract["goal_id"] == GOAL_ID
+    assert contract["active_validation_repair_task_id"] == "HAO-758"
+    assert contract["active_validation_repair_ref"] == (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
+    )
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-5-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-6-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-7-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
+    assert (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+    ) in contract["validation_repair_refs"]
     assert set(contract["action_ids"]) == action_ids
     assert set(contract["operation_by_action_id"]) == action_ids
     assert set(contract["dat_method_by_action_id"]) == action_ids
@@ -251,6 +344,76 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
+    mgw_596_gap = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-09-mgw-596-objective-gap-c1edafa875e6.md"
+    ).read_text(encoding="utf-8")
+    mgw_596_repair = (
+        REPO_ROOT
+        / "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-09-mgw-596-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_gap = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-gap-c1edafa875e6.md"
+    ).read_text(encoding="utf-8")
+    hao_741_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_one_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-1-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_two_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_four_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_five_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-5-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_six_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-6-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_741_attempt_seven_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-7-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_748_merge_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-748-hao-741-merge-retry-budget.md"
+    ).read_text(encoding="utf-8")
+    hao_758_gap = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-gap-c1edafa875e6.md"
+    ).read_text(encoding="utf-8")
+    hao_758_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
+    hao_758_attempt_two_repair = (
+        REPO_ROOT
+        / "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
+    ).read_text(encoding="utf-8")
     attempt_four = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-4-validation-confirmation.md"
@@ -266,6 +429,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     attempt_seven = (
         REPO_ROOT
         / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md"
+    ).read_text(encoding="utf-8")
+    attempt_eight = (
+        REPO_ROOT
+        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md"
     ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
@@ -287,7 +454,16 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
         "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
     ]
-    for content in (docs, discovery, attempt_four, attempt_five, attempt_six, attempt_seven, heap):
+    for content in (
+        docs,
+        discovery,
+        attempt_four,
+        attempt_five,
+        attempt_six,
+        attempt_seven,
+        attempt_eight,
+        heap,
+    ):
         for term in required_terms:
             assert term in content, f"missing {term!r}"
 
@@ -299,7 +475,171 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "data/virtual_ai_os/discovery/"
         "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     )
+    attempt_eight_record = (
+        "data/virtual_ai_os/discovery/"
+        "2026-07-08-vai-672-attempt-8-validation-confirmation.md"
+    )
     assert attempt_six_record in docs
     assert attempt_six_record in heap
     assert attempt_seven_record in docs
     assert attempt_seven_record in heap
+    assert attempt_eight_record in docs
+    assert attempt_eight_record in heap
+
+    hao_741_repair_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-741-objective-validation-repair.md"
+    )
+    hao_741_attempt_one_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-1-objective-validation-repair.md"
+    )
+    hao_741_attempt_two_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
+    )
+    hao_741_attempt_four_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
+    )
+    hao_741_attempt_five_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-5-objective-validation-repair.md"
+    )
+    hao_741_attempt_six_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-6-objective-validation-repair.md"
+    )
+    hao_741_attempt_seven_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-741-attempt-7-objective-validation-repair.md"
+    )
+    hao_748_merge_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-08-hao-748-hao-741-merge-retry-budget.md"
+    )
+    hao_758_repair_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-objective-validation-repair.md"
+    )
+    hao_758_attempt_two_record = (
+        "data/hallucinate_multimodal_control/discovery/"
+        "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
+    )
+    assert hao_741_repair_record in docs
+    assert hao_741_repair_record in heap
+    assert hao_741_repair_record in hao_741_repair
+    assert hao_741_attempt_one_record in docs
+    assert hao_741_attempt_one_record in heap
+    assert hao_741_attempt_two_record in docs
+    assert hao_741_attempt_two_record in heap
+    assert hao_741_attempt_four_record in docs
+    assert hao_741_attempt_four_record in heap
+    assert hao_741_attempt_four_record in hao_741_attempt_four_repair
+    assert hao_741_attempt_five_record in docs
+    assert hao_741_attempt_five_record in heap
+    assert hao_741_attempt_five_record in hao_741_attempt_five_repair
+    assert hao_741_attempt_six_record in docs
+    assert hao_741_attempt_six_record in heap
+    assert hao_741_attempt_six_record in hao_741_attempt_six_repair
+    assert hao_741_attempt_seven_record in docs
+    assert hao_741_attempt_seven_record in heap
+    assert hao_741_attempt_seven_record in hao_741_attempt_seven_repair
+    assert hao_748_merge_record in docs
+    assert hao_748_merge_record in heap
+    assert hao_748_merge_record in hao_748_merge_repair
+    assert hao_758_repair_record in docs
+    assert hao_758_repair_record in heap
+    assert hao_758_repair_record in hao_758_repair
+    assert hao_758_attempt_two_record in docs
+    assert hao_758_attempt_two_record in heap
+    assert hao_758_attempt_two_record in hao_758_attempt_two_repair
+
+    mgw_596_terms = [
+        "MGW-596",
+        GOAL_ID,
+        "objective/interoperability/mobile-external_ipfs_accelerate",
+        "objective validation repair",
+        "interface contract mobile external/ipfs_accelerate",
+        "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+        "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
+        "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
+    ]
+    for content in (docs, mgw_596_gap, mgw_596_repair, heap):
+        for term in mgw_596_terms:
+            assert term in content, f"missing {term!r}"
+
+    mgw_596_repair_record = (
+        "data/meta_glasses_display_widgets/discovery/"
+        "2026-07-09-mgw-596-objective-validation-repair.md"
+    )
+    assert mgw_596_repair_record in docs
+    assert mgw_596_repair_record in heap
+
+    hao_741_terms = [
+        "HAO-741",
+        GOAL_ID,
+        "objective/interoperability/mobile-external_ipfs_accelerate",
+        "objective validation repair",
+        "interface contract mobile external/ipfs_accelerate",
+        "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+        "docs/integration/mobile-external_ipfs_accelerate.md",
+        "src/handsfree/mobile_ipfs_accelerate_interop.py",
+        "mobile/src/orb/metaGlassesOrbDescriptors.js",
+        "mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js",
+        "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
+        "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
+    ]
+    for content in (
+        docs,
+        hao_741_repair,
+        hao_741_attempt_one_repair,
+        hao_741_attempt_two_repair,
+        hao_741_attempt_four_repair,
+        hao_741_attempt_five_repair,
+        hao_741_attempt_six_repair,
+        hao_741_attempt_seven_repair,
+        hao_748_merge_repair,
+        heap,
+    ):
+        for term in hao_741_terms:
+            assert term in content, f"missing {term!r}"
+
+    for term in (
+        "HAO-741",
+        GOAL_ID,
+        "objective/interoperability/mobile-external_ipfs_accelerate",
+        "objective validation repair",
+        "interface contract mobile external/ipfs_accelerate",
+        "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+        "docs/integration/mobile-external_ipfs_accelerate.md",
+        "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
+        "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
+    ):
+        assert term in hao_741_gap, f"missing {term!r}"
+
+    hao_758_terms = [
+        "HAO-758",
+        GOAL_ID,
+        "objective/interoperability/mobile-external_ipfs_accelerate",
+        "objective validation repair",
+        "interface contract mobile external/ipfs_accelerate",
+        "tests/integration/test_mobile_external_ipfs_accelerate_interop.py",
+        "docs/integration/mobile-external_ipfs_accelerate.md",
+        "src/handsfree/mobile_ipfs_accelerate_interop.py",
+        "mobile/src/orb/metaGlassesOrbDescriptors.js",
+        "mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js",
+        "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql",
+        "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py",
+        "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
+    ]
+    for content in (docs, hao_758_gap, hao_758_repair, hao_758_attempt_two_repair, heap):
+        for term in hao_758_terms:
+            assert term in content, f"missing {term!r}"

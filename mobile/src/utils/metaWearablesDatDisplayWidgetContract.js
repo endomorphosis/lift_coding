@@ -51,6 +51,32 @@ export const SWISSKNIFE_DISPLAY_WIDGET_ACTION_CONTRACT = {
   consumer: 'mobile',
   interface_contract: 'interface contract swissknife mobile',
   goal_packet: 'goal_packet/interoperability/swissknife/06921590135c',
+  task_id: 'VAI-661',
+  attempt: 1,
+  objective_goal: 'VAIOS-G700',
+  objective_goals: [
+    'VAIOS-G700',
+    'VAIOS-G701',
+    'VAIOS-G702',
+    'VAIOS-G703',
+    'VAIOS-G704',
+    'VAIOS-G705',
+    'VAIOS-G706',
+  ],
+  objective_gap_ref:
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
+  validation_repair_ref:
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md',
+  attempt_validation_repair_ref:
+    'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md',
+  task_board: 'virtual_ai_os',
+  mgw_task_id: 'MGW-569',
+  mgw_attempt: 1,
+  mgw_validation_repair_ref:
+    'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md',
+  mgw_worktree: 'mgw-569-attempt-1-1783553538',
+  mgw_worktree_validation_repair_ref:
+    'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md',
   hao_task_id: 'HAO-730',
   hao_attempt: 4,
   hao_objective_gap_ref:

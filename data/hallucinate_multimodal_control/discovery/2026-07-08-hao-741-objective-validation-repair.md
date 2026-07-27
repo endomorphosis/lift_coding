@@ -64,6 +64,14 @@ re-filed for this `HAO-741` attempt 3 worktree was runtime, not code:
 - This discovery file itself carries the same required evidence terms so the
   regression test's discovery-file assertions pass independent of the
   original VAI-672 discovery record.
+- `mobile/src/orb/metaGlassesOrbDescriptors.js` and
+  `mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js` preserve this
+  attempt-3 record
+  (`data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md`)
+  as lineage while the active HAO-741 validation repair reference moves to
+  `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-4-objective-validation-repair.md`.
+  The attempt 1, attempt 2, attempt 4 confirmation, and HAO-748 lineage
+  records remain preserved.
 
 ## Validation
 
