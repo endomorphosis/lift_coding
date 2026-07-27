@@ -110,37 +110,11 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_policy_id: 'policy:swissknife:mobile-interop',
   },
   validation: {
-    task_id: 'VAI-661',
-    attempt: 1,
-    objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
-    validation_repair_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md',
-    attempt_validation_repair_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md',
-    objective_goal: 'VAIOS-G700',
-    objective_goals: [
-      'VAIOS-G700',
-      'VAIOS-G701',
-      'VAIOS-G702',
-      'VAIOS-G703',
-      'VAIOS-G704',
-      'VAIOS-G705',
-      'VAIOS-G706',
-    ],
-    evidence: 'objective validation repair',
-    task_board: 'virtual_ai_os',
-    legacy_task_id: 'MGW-569',
-    mgw_attempt: 1,
-    mgw_validation_repair_ref:
-      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-validation-repair.md',
-    mgw_worktree: 'mgw-569-attempt-1-1783553538',
-    mgw_worktree_validation_repair_ref:
-      'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-attempt-1-1783553538-objective-validation-repair.md',
+    task_id: 'MGW-569',
     repair_task_id: 'MGW-583',
     hao_task_id: 'HAO-730',
     hao_attempt: 4,
-    mgw_objective_gap_ref:
+    objective_gap_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md',
     hao_objective_gap_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md',
@@ -238,61 +212,22 @@ export const IPFS_ACCELERATE_MOBILE_INTEROP_DESCRIPTOR = {
   },
   validation: {
     task_id: 'VAI-672',
-    active_validation_repair_task_id: 'HAO-758',
-    validation_repair_tasks: ['VAI-672', 'VAI-686', 'MGW-596', 'HAO-741', 'HAO-748', 'HAO-758'],
     goal_id: 'VAIOS-G719',
     objective_gap_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-gap-c1edafa875e6.md',
     validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md',
-    vai_686_objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-gap-c1edafa875e6.md',
-    vai_686_validation_repair_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-686-objective-validation-repair.md',
-    active_objective_gap_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-gap-c1edafa875e6.md',
-    active_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md',
-    hao_758_objective_gap_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-gap-c1edafa875e6.md',
-    hao_758_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-3-objective-validation-repair.md',
-    hao_758_attempt_1_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-objective-validation-repair.md',
-    hao_758_attempt_2_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-758-attempt-2-objective-validation-repair.md',
-    hao_741_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md',
-    hao_741_attempt_3_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-objective-validation-repair.md',
-    hao_741_attempt_1_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-1-objective-validation-repair.md',
-    hao_741_attempt_2_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-2-objective-validation-repair.md',
-    hao_741_attempt_4_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-4-objective-validation-repair.md',
-    hao_741_attempt_5_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-5-objective-validation-repair.md',
-    hao_741_attempt_6_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-6-objective-validation-repair.md',
-    hao_741_attempt_7_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-741-attempt-7-objective-validation-repair.md',
-    hao_741_attempt_4_validation_confirmation_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-741-attempt-4-validation-confirmation.md',
-    hao_748_merge_retry_budget_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-748-hao-741-merge-retry-budget.md',
-    mgw_596_objective_gap_ref:
-      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-gap-c1edafa875e6.md',
-    mgw_596_validation_repair_ref:
-      'data/meta_glasses_display_widgets/discovery/2026-07-09-mgw-596-objective-validation-repair.md',
-    vai_672_attempt_9_validation_confirmation_ref:
-      'data/virtual_ai_os/discovery/2026-07-09-vai-672-attempt-9-validation-confirmation.md',
-    vai_672_attempt_10_validation_confirmation_ref:
-      'data/virtual_ai_os/discovery/2026-07-09-vai-672-attempt-10-validation-confirmation.md',
     evidence: 'objective validation repair',
   },
 };
 
+/**
+ * Interop interface for VAI-684 / VAIOS-G707: proves that `hallucinate_app`
+ * interoperates with `mobile`. The Hallucinate App desktop search surface
+ * (`hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js`)
+ * hands a search query off to the mobile ORB bridge through the shared
+ * `interface contract hallucinate_app mobile`.
+ */
 export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
   name: 'hallucinate_app_mobile_interop',
   namespace: 'handsfree.interop.hallucinate_app_mobile',
@@ -304,22 +239,15 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
     target_surface: 'mobile',
   },
   objective_goals: ['VAIOS-G707'],
-  methods: [
-    ...MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
-      name,
-      surface: 'mobile_orb_bridge',
-      contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
-    })),
-    {
-      name: 'content_browser_search_handoff',
-      surface: 'hallucinate_app_content_browser',
-      contract_ref:
-        'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
-    },
-  ],
+  methods: MOBILE_ORB_BRIDGE_OPERATIONS.map((name) => ({
+    name,
+    surface: 'mobile_orb_bridge',
+    contract_ref:
+      'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
+  })),
   errors: [
     {
-      name: 'policy_mediation_required',
+      name: 'search_contract_unavailable',
       code: 409,
     },
     {
@@ -330,17 +258,16 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE = {
   requires: [
     'mcp++/profile-a-idl',
     'mcp++/profile-b-cid-artifacts',
-    'mcp++/receipts',
     'mobile/meta-wearables-dat',
   ],
   compatibility: {
-    hallucinate_app_search_handoff:
+    hallucinate_app_search_interface:
       'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
-    hallucinate_app_test_fixture:
+    hallucinate_app_test_interface:
       'hallucinate_app/hallucinate_app/node/views/test_interface.html',
-    receipt_schema:
+    hallucinate_app_time_series_schema:
       'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
-    benchmark_schema_script:
+    hallucinate_app_benchmark_schema_script:
       'hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py',
   },
 };
@@ -351,8 +278,7 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
   schema_refs: {
     search_interface:
       'hallucinate_app/hallucinate_app/node/dashboard/content_browser/search_interface.js',
-    test_interface:
-      'hallucinate_app/hallucinate_app/node/views/test_interface.html',
+    test_interface: 'hallucinate_app/hallucinate_app/node/views/test_interface.html',
     time_series_schema:
       'hallucinate_app/ipfs_accelerate_py/data/duckdb/db_schema/time_series_schema.sql',
     benchmark_schema_script:
@@ -361,38 +287,19 @@ export const HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR = {
   runtime_handoff: {
     source_surface: 'hallucinate_app',
     target_surface: 'mobile',
-    allowed_surfaces: ['agent', 'desktop', 'remote_client', 'mobile', 'meta_glasses'],
-    route: '/v1/mobile/orb/invoke_service',
-    operation: 'invoke_service',
+    allowed_surfaces: ['agent', 'remote_client', 'mobile', 'meta_glasses'],
     mobile_orb_methods: MOBILE_ORB_BRIDGE_OPERATIONS,
+    route: '/v1/mobile/orb/invoke_service',
+    receipt_table: 'hallucinate_app_mobile_interop_receipts',
     required_artifacts: ['interaction_envelope', 'policy_decision', 'mediation_receipt'],
-    control_surface_contract_ref: 'control_surface_contract:hallucinate-app:remote-client',
   },
   validation: {
-    task_id: 'HAO-740',
-    repair_task_id: 'HAO-740',
-    related_repair_task_id: 'HAO-751',
+    task_id: 'VAI-684',
     goal_id: 'VAIOS-G707',
     objective_gap_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-740-objective-gap-7edb316279e5.md',
-    validation_confirmation_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-740-attempt-1-objective-validation-repair.md',
-    validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-740-attempt-1-objective-validation-repair.md',
-    attempt_validation_confirmation_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-740-attempt-1-objective-validation-repair.md',
-    retry_budget_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-retry-budget.md',
-    related_validation_repair_ref:
-      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-751-hao-740-validation-repair.md',
-    legacy_vai_objective_gap_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-gap-7edb316279e5.md',
-    legacy_vai_validation_repair_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-objective-validation-repair.md',
-    legacy_vai_attempt_validation_confirmation_ref:
-      'data/virtual_ai_os/discovery/2026-07-08-vai-674-attempt-8-validation-confirmation.md',
-    legacy_vai_retry_budget_ref:
-      'data/virtual_ai_os/state/discovery/2026-07-08-vai-684-vai-674-retry-budget.md',
+      'data/virtual_ai_os/discovery/2026-07-09-vai-684-objective-gap-7edb316279e5.md',
+    objective_validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-09-vai-684-objective-validation-repair.md',
     evidence: 'objective validation repair',
   },
 };
