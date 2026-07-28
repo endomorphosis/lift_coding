@@ -796,3 +796,14 @@ Normative:
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_catalog.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-28-sca-161-sca-040-retry-budget.md
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-040. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-28-sca-161-sca-040-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-040 from strategy blocked_tasks.
+
+## SCA-162 Resolve validation retry-budget failure for SCA-015
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-010
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-162-sca-015-retry-budget.md
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-015. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-162-sca-015-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-015 from strategy blocked_tasks.
