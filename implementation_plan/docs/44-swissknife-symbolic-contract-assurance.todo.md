@@ -807,3 +807,19 @@ Normative:
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-162-sca-015-retry-budget.md
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-015. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-162-sca-015-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-015 from strategy blocked_tasks.
+
+## SCA-163 Resolve dirty main checkout blocking 1 worktree merges
+
+- Status: blocked
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Blocked reason: operator_reconciliation_required
+- Priority: P1
+- Track: ops
+- Fingerprint: 9d07bd096ca9fcd86ac68453c056b8b53bbb1942
+- Dedupe key: reconciliation_guardrail:main_checkout_dirty
+- Depends on:
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-163-reconciliation-9d07bd096ca9.md
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by main_checkout_dirty. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-163-reconciliation-9d07bd096ca9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
