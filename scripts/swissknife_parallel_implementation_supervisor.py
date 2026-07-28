@@ -219,7 +219,6 @@ def _lane_command(
     lane_root = runtime_root / "parallel" / "lanes" / lane_name
     state_dir = lane_root / "state"
     worktree_root = runtime_root / "parallel" / "worktrees" / lane_name
-    merge_queue_dir = runtime_root / "parallel" / "merge_queue"
     wrapper = repo_root / "scripts/swissknife_leased_implementation_supervisor.py"
 
     command = [
@@ -246,8 +245,6 @@ def _lane_command(
         str(parallel["daemonIntervalSeconds"]),
         "--worktree-root",
         str(worktree_root),
-        "--merge-queue-dir",
-        str(merge_queue_dir),
         "--merge-target-branch",
         str(parallel["mergeTargetBranch"]),
         "--merge-reconciliation-max-merges",
