@@ -430,7 +430,7 @@ Normative:
 
 ## SCA-080 Seal the ZK threat model and attestation policy
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: zk-policy
 - Depends on: SCA-060
