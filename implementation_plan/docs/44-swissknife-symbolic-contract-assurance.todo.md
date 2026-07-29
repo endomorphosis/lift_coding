@@ -2723,3 +2723,49 @@ Normative:
 - Work item count: 1
 - Work scope: codebase_file_ast
 - Acceptance: Goal-scoped refill admitted this finding from external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2551 for SCA-G172. Use evidence in data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-209-codebase-scan-81554eb648a8.md, make only the smallest change required by that goal lineage, add or update focused validation when appropriate, and do not expand into adjacent cleanup.
+
+## SCA-210 Review swallowed exception path in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2554
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/discovery, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py
+- Validation: python3 -m py_compile external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py
+- Graph parents: SCA-G170, SCA-G040, SCA-G042, SCA-G168, SCA-G000, SCA-G010, SCA-G020, SCA-G167, SCA-G015, SCA-G100, SCA-G110, SCA-G111, SCA-G090, SCA-G091, SCA-G021, SCA-G101, SCA-G051, SCA-G061, SCA-G050, SCA-G060, SCA-G030, SCA-G041
+- Graph depth: 22
+- Goal id: SCA-G172
+- Goal lineage: SCA-G172, SCA-G170, SCA-G040, SCA-G042, SCA-G168, SCA-G000, SCA-G010, SCA-G020, SCA-G167, SCA-G015, SCA-G100, SCA-G110, SCA-G111, SCA-G090, SCA-G091, SCA-G021, SCA-G101, SCA-G051, SCA-G061, SCA-G050, SCA-G060, SCA-G030, SCA-G041
+- Goal registration: existing
+- Canonical task key: task/v1/c3be67ab2f0354af896e7ac65635d4e9b7d12f4133d244fdba6a3f38f78ede3b
+- Canonical task CID: baguqeerayo7gpkzpankk7clopldfmnou5g35cl2bgpjej7n2ni7tr54o3y5q
+- Semantic identity: c3be67ab2f0354af896e7ac65635d4e9b7d12f4133d244fdba6a3f38f78ede3b
+- Acceptance subset: Resolve swallowed_exception at external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2554
+- Preconditions: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py exists and the scan evidence remains applicable
+- Effects: resolve swallowed_exception in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py and pass focused validation
+- Evidence subset: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2554, data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-210-codebase-scan-b078ee596ea9.md
+- Resource class: cpu-small
+- Token class: small
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Resources: python, focused validation runner
+- Merge fate: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py
+- Rejection reasons: none
+- Missing evidence: Review swallowed exception path in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2554
+- Candidate kind: codebase_scan
+- Todo vector key: b078ee596ea99bfa
+- Bundle: codebase/runtime/external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-orchestrator_contract_extractor
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/codebase-runtime-external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-orchestrator_contract_extractor.todo.md
+- Bundle strategy: codebase_file_ast
+- Parallel lane: codebase/runtime/external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-orchestrator_contract_extractor
+- Conflict policy: serialize findings for the same file; allow independent file bundles to run concurrently
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py
+- AST symbols: __future__, __future__.annotations, __init__, __post_init__, _bool, _cid, _clean_path, _enum, _extract_swallowed_regex, _line_span_for_offset, _mapping, _nonneg_int, _optional_text, _parse_idempotence, _parse_invocation, _parse_receipt, _parse_source_span, _parse_surface, _parse_swallowed, _parse_transition, _positive_int, _sequence, _source_path, _source_sha256, _span, _state_for_kind, _text, _validate_catalog_consistency, _verified_cid, apply lifecycle transition, apply_lifecycle_transition, assert idempotence closed, assert lifecycle edges complete, assert mediation distinguished, assert swallowed failures visible, assert_idempotence_closed, assert_lifecycle_edges_complete, assert_mediation_distinguished, assert_swallowed_failures_visible, ast, bool, build orchestrator contract catalog, build_orchestrator_contract_catalog, cid, claimfamily, classify invocation path, classify_invocation_path, clean path, collections abc, collections abc iterable, collections abc mapping, collections abc sequence, collections.abc, collections.abc.iterable, collections.abc.mapping, collections.abc.sequence, content identity bridge, content identity bridge identify strict artifact, content_identity_bridge, content_identity_bridge.identify_strict_artifact, dataclasses, dataclasses dataclass, dataclasses field, dataclasses.dataclass, dataclasses.field, default orchestrator inventory, default_orchestrator_inventory, direct package paths, direct_package_paths, duplicateorchestratorerror, enum, enum enum, enum.enum, evaluate cancel idempotence, evaluate idempotence from source, evaluate result idempotence, evaluate retry idempotence, evaluate_cancel_idempotence, evaluate_idempotence_from_source, evaluate_result_idempotence
+- AST symbol scope: file
+- Merge key: codebase/runtime/external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-orchestrator_contract_extractor
+- Merge family: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py
+- Merge role: codebase_scan
+- Work item count: 1
+- Work scope: codebase_file_ast
+- Acceptance: Goal-scoped refill admitted this finding from external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2554 for SCA-G172. Use evidence in data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-210-codebase-scan-b078ee596ea9.md, make only the smallest change required by that goal lineage, add or update focused validation when appropriate, and do not expand into adjacent cleanup.
