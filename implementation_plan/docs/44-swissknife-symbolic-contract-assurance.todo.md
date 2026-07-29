@@ -641,7 +641,8 @@ Normative:
 
 ## SCA-120 Run the no-mutation baseline scan
 
-- Status: active
+- Status: completed
+- Completion: manual
 - Priority: P0
 - Track: baseline
 - Depends on: SCA-021, SCA-051, SCA-061, SCA-070, SCA-090, SCA-167, SCA-168
@@ -670,7 +671,7 @@ Normative:
 - Status: active
 - Priority: P0
 - Track: baseline-triage
-- Depends on: SCA-100, SCA-101, SCA-120
+- Depends on: SCA-100, SCA-101, SCA-200
 - Goal id: SCA-G120
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md, data/agent_supervisor/swissknife_contract_assurance/baseline/triage.json
 - Validation: python3 -m ipfs_accelerate_py.agent_supervisor.objectives.contract_mismatch_refinery --findings data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json --owner external/ipfs_accelerate --output data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md
@@ -696,7 +697,7 @@ Normative:
 - Status: active
 - Priority: P1
 - Track: continuous
-- Depends on: SCA-110, SCA-120
+- Depends on: SCA-110, SCA-200
 - Goal id: SCA-G130
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/state/invalidation.jsonl, data/agent_supervisor/swissknife_contract_assurance/state/refill_metrics.json, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_incremental.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_incremental.py -q
@@ -722,7 +723,7 @@ Normative:
 - Status: active
 - Priority: P1
 - Track: benchmark
-- Depends on: SCA-070, SCA-100, SCA-120
+- Depends on: SCA-070, SCA-100, SCA-200
 - Goal id: SCA-G140
 - Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py, data/agent_supervisor/swissknife_contract_assurance/benchmarks/report.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py -q
@@ -838,7 +839,7 @@ Normative:
 - Completion: manual
 - Priority: P1
 - Track: runtime
-- Depends on: 
+- Depends on:
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/discovery, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
 - Validation: python3 -m py_compile external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
 - Graph parents: SCA-G010, SCA-G000
@@ -964,7 +965,7 @@ Normative:
 
 ## SCA-170 Build the versioned runtime-component catalog
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: runtime-catalog
 - Depends on: SCA-040, SCA-042, SCA-167, SCA-168
@@ -1796,21 +1797,24 @@ Normative:
 
 ## SCA-190 Resolve implementation retry-budget failure for SCA-170
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
 - Depends on: SCA-040, SCA-042, SCA-167, SCA-168
 - Outputs: config/swissknife_runtime_contract_scope.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_component_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_component_catalog.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-190-sca-170-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-170. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-190-sca-170-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-170 from strategy blocked_tasks.
 
 ## SCA-191 Close objective gap: Orchestrator lifecycle contracts
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
+- Blocked reason: Superseded by the existing canonical orchestrator task SCA-172.
 - Priority: P0
 - Track: orchestrator
 - Depends on:
@@ -1872,10 +1876,11 @@ Normative:
 
 ## SCA-192 Close objective gap: Scheduler authority and concurrency contracts
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
+- Blocked reason: Superseded by the existing canonical scheduler task SCA-173.
 - Priority: P0
 - Track: scheduler
 - Depends on:
@@ -1937,10 +1942,11 @@ Normative:
 
 ## SCA-193 Close objective gap: Agent-supervisor control and goal/task contracts
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
+- Blocked reason: Superseded by the existing canonical supervisor-contract task SCA-174.
 - Priority: P0
 - Track: agent-supervisor
 - Depends on:
@@ -2002,10 +2008,11 @@ Normative:
 
 ## SCA-194 Close objective gap: Scale and context-budget benchmark
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
+- Blocked reason: Superseded by the existing canonical benchmark task SCA-140.
 - Priority: P1
 - Track: benchmark
 - Depends on:
@@ -2067,10 +2074,11 @@ Normative:
 
 ## SCA-195 Close objective gap: Continuous incremental refill
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
+- Blocked reason: Superseded by the existing canonical continuous-refill task SCA-130.
 - Priority: P1
 - Track: continuous
 - Depends on:
@@ -2132,10 +2140,11 @@ Normative:
 
 ## SCA-196 Close objective gap: Promotion, operations, and closeout
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
+- Blocked reason: Superseded by the existing canonical rollout task SCA-160.
 - Priority: P1
 - Track: rollout
 - Depends on:
@@ -2329,11 +2338,40 @@ Normative:
 
 ## SCA-199 Resolve implementation retry-budget failure for SCA-194
 
-- Status: todo
+- Status: blocked
 - Completion: manual
+- Is schedulable: false
+- Review only: false
+- Blocked reason: Source task SCA-194 is a terminal alias superseded by canonical task SCA-140.
 - Priority: P1
 - Track: ops
-- Depends on: 
+- Depends on:
 - Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py, data/agent_supervisor/swissknife_contract_assurance/benchmarks/report.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-199-sca-194-implementation-retry-budget.md
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-194. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-199-sca-194-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-194 from strategy blocked_tasks.
+
+## SCA-200 Materialize the complete symbolic contract baseline
+
+- Status: active
+- Priority: P0
+- Track: baseline-pipeline
+- Depends on: SCA-120, SCA-166, SCA-177
+- Goal id: SCA-G120
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_baseline.py, data/agent_supervisor/swissknife_contract_assurance/baseline/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_baseline.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/baseline-pipeline
+- Parallel lane: sca-baseline-pipeline
+- Resource class: cpu-proof-solver
+- Resource stage: analysis
+- Implementation timeout seconds: 21600
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_baseline.py, data/agent_supervisor/swissknife_contract_assurance/baseline/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md
+- Interfaces: RepositoryIndexer@1, RuntimeComponentCatalog@1, SymbolicContractGraph@1, McpInvocationTrace@1, ContractMismatchAnalyzer@1, ContractVulnerabilityRuleEngine@1
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Proposal artifact envelope: {"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1","paths":["external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py","external/ipfs_accelerate/scripts/index_repository_contracts.py","external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_baseline.py","data/agent_supervisor/swissknife_contract_assurance/baseline/coverage.json","data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json","data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md"],"max_file_bytes":4000000,"max_patch_bytes":8000000,"max_output_bytes":16000000}
+- Conflict policy: Consume the healthy repository index and reviewed runtime extractors; never turn missing graph, proof, or health evidence into an empty-success finding set.
+- Preconditions: Whole-tree analyzer health is within reviewed thresholds and cross-component proof surfaces are implemented.
+- Effects: Runs extraction, catalog normalization, mandatory graph closure, expected-versus-actual MCP++ tracing, proof/cache verification, mismatch classification, vulnerability rules, and bounded artifact publication over one exact snapshot.
+- Evidence subset: Current snapshot/index/AST roots, capability and policy roots, contract graph, claims, obligations, proof/cache/attestation receipts, counterexamples, and analyzer health
+- Acceptance: Every in-scope contract has proved, refuted, unknown, unsupported, or stale status; graph/proof/finding identities are CID-bound to one snapshot; unhealthy or incomplete stages withhold no-drift claims; coverage remains within the artifact envelope; runtime performs zero LLM calls.
