@@ -304,7 +304,7 @@ Normative:
 
 ## SCA-050 Compute exact MCP++ invocation reachability
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: invocation
 - Depends on: SCA-030, SCA-041, SCA-042
