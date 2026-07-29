@@ -2352,7 +2352,7 @@ Normative:
 
 ## SCA-200 Materialize the complete symbolic contract baseline
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: baseline-pipeline
 - Depends on: SCA-120, SCA-166, SCA-177
