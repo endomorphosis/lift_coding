@@ -2562,7 +2562,7 @@ Normative:
 
 ## SCA-205 Review swallowed exception path in external/ipfs_accelerate/test/api/test_agent_supervisor_orchestrator_contract_extractor.py:443
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: quality
