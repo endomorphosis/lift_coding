@@ -449,8 +449,8 @@ coverage, parser health, canaries, or provider capability is insufficient.
 | 8 | SCA-170, 171, 172, 173, 174 | Runtime manifest followed by four parallel component extractors |
 | 9 | SCA-175, 176, 177 | Runtime state-machine obligations, MCP++ reachability, and vulnerability rules |
 | 10 | SCA-200 | Complete graph/proof/cache/mismatch baseline after health recovery |
-| 11 | SCA-121, 130, 140, 178, 179, 213-221 | Exact datasets adapters, current multi-root index, proof/cache/ZK orchestration, immediate runtime-integrity repairs, and refill projection |
-| 12 | SCA-180, 181 | Healthy four-component runtime baseline and held-out evaluation after all evidence producers are wired |
+| 11 | SCA-121, 130, 140, 178, 179, 213-220, 222, 223 | Exact datasets adapters, current multi-root index, proof/cache/ZK orchestration, immediate runtime-integrity repairs, and refill projection |
+| 12 | SCA-180, 181, 221 | Healthy four-component runtime baseline, held-out evaluation, and proof-bound repair projection |
 | 13 | SCA-160 | Promotion and rollout closeout after runtime evidence |
 
 ## Success gates
