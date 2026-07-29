@@ -198,7 +198,7 @@ Normative:
 
 ## SCA-030 Project the typed contract graph and bounded GraphRAG view
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: graph
 - Depends on: SCA-021
