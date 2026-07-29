@@ -990,7 +990,7 @@ Normative:
 
 ## SCA-171 Extract model-server route and inference contracts
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: model-server
 - Depends on: SCA-170
