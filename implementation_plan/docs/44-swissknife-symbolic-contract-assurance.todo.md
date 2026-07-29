@@ -379,7 +379,7 @@ Normative:
 
 ## SCA-061 Route proofs and produce compact counterexamples
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: proving
 - Depends on: SCA-060
