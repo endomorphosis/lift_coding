@@ -939,7 +939,7 @@ Normative:
 
 ## SCA-168 Bind canonical SwissKnife snapshot authority
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: snapshot-authority
 - Depends on: SCA-010, SCA-167
@@ -1269,13 +1269,14 @@ Normative:
 
 ## SCA-182 Close objective gap: Runtime drift refinery and continuous refill
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: runtime-refill
-- Depends on:
+- Depends on: SCA-177, SCA-178, SCA-179
+- Blocked reason: Superseded by the existing canonical runtime drift, repair-board, and refill tasks SCA-177 through SCA-179.
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_contract_vulnerability_rules.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_mismatch_refinery.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_assurance_refill.py, data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_refill.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1334,13 +1335,14 @@ Normative:
 
 ## SCA-183 Close objective gap: Shadow baseline scan and triage
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: baseline
-- Depends on:
+- Depends on: SCA-120
+- Blocked reason: Superseded by the existing canonical baseline task SCA-120.
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/baseline/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md
 - Validation: python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline --shadow
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1399,13 +1401,14 @@ Normative:
 
 ## SCA-184 Close objective gap: Whole-tree analyzer health recovery
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: analyzer-health
-- Depends on:
+- Depends on: SCA-166
+- Blocked reason: Superseded by the existing canonical analyzer-health task SCA-166.
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_health.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_health.py, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_health.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1464,13 +1467,14 @@ Normative:
 
 ## SCA-185 Close objective gap: Canonical SwissKnife snapshot authority
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: snapshot-authority
-- Depends on:
+- Depends on: SCA-168
+- Blocked reason: Superseded by the existing canonical snapshot-authority task SCA-168.
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_authority.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_authority.py, data/agent_supervisor/swissknife_contract_assurance/state/snapshot_authority.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_authority.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1529,13 +1533,14 @@ Normative:
 
 ## SCA-186 Close objective gap: Versioned runtime-component contract catalog
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: runtime-catalog
-- Depends on:
+- Depends on: SCA-170
+- Blocked reason: Superseded by the existing canonical runtime-catalog task SCA-170.
 - Outputs: config/swissknife_runtime_contract_scope.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_component_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_component_catalog.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_component_catalog.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1594,13 +1599,14 @@ Normative:
 
 ## SCA-187 Close objective gap: Cross-component state-machine and MCP++ proofs
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: runtime-proof
-- Depends on:
+- Depends on: SCA-175, SCA-176
+- Blocked reason: Superseded by the existing canonical obligation and MCP++ mediation tasks SCA-175 and SCA-176.
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/runtime_contract_obligations.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_mcp_invocation_trace.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_proofs.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_proofs.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1724,13 +1730,14 @@ Normative:
 
 ## SCA-189 Close objective gap: Model-server route and inference contracts
 
-- Status: todo
+- Status: blocked
 - Completion: manual
-- Is schedulable: true
+- Is schedulable: false
 - Review only: false
 - Priority: P0
 - Track: model-server
-- Depends on:
+- Depends on: SCA-171
+- Blocked reason: Superseded by the existing canonical model-server contract task SCA-171.
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/model_server_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_model_server_contract_extractor.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_model_server_contract_extractor.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -1786,3 +1793,547 @@ Normative:
 - Candidate kind: aggregate
 - Todo vector key: 5e668de7414cf5f3
 - Acceptance: Objective scan filed this gap for SCA-G171. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-189-objective-gap-93ef74c93aa3.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV171MODEL), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-190 Resolve implementation retry-budget failure for SCA-170
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-040, SCA-042, SCA-167, SCA-168
+- Outputs: config/swissknife_runtime_contract_scope.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_component_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_component_catalog.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-190-sca-170-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-170. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-190-sca-170-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-170 from strategy blocked_tasks.
+
+## SCA-191 Close objective gap: Orchestrator lifecycle contracts
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: orchestrator
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_orchestrator_contract_extractor.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_orchestrator_contract_extractor.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-191-objective-gap-5e23aeb52447.md
+- Bundle: swissknife/contract-assurance/runtime-orchestrator
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-runtime-orchestrator.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G170
+- Graph depth: 18
+- Objective heap index: 29
+- Parallel lane: swissknife/contract-assurance/runtime-orchestrator
+- Conflict policy: Observed runtime traces are bounded observations; they do not close unmodeled transitions.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_orchestrator_contract_extractor.py
+- Changed paths:
+- AST symbols: SCAEV172ORCH
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G172
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/0c32af1fedbc14e41e373a867a7a8cc8a24e3fe2b04ab11f4c797b521de42547
+- Canonical task CID: baguqeerabqzk6h7nxqkoihrxhkdhu6umzcre4p7cwbflch2mpf5vehpeevdq
+- Semantic identity: objective-evidence-obligation/v1/c1198d75c921af127ff8edc64cd35386a4650f22c7ef3eccee2e5cdc616cbf7e
+- Acceptance subset: Every lifecycle edge has pre/post/error states and evidence spans, broad exception/silent-pass paths are visible, retry/cancel/result idempotence and receipt publication are proved, refuted, or unknown, direct package calls are distinguished from MCP++ mediation.
+- Preconditions: objective goal SCA-G172 is schedulable
+- Effects: satisfy evidence requirement: SCAEV172ORCH
+- Evidence subset: SCAEV172ORCH
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G172
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/c1198d75c921af127ff8edc64cd35386a4650f22c7ef3eccee2e5cdc616cbf7e
+- Missing evidence: SCAEV172ORCH
+- Embedding query: Extract task-orchestrator admission, ownership, dispatch, state transition, retry, cancellation, timeout, result, receipt, and failure contracts across P2P services, datasets adapters, MCP tools, and SwissKnife.
+- AST query: SCAEV172ORCH
+- Surplus group: objective/SCA-G172
+- Merge key: 5db57018c60265e4
+- Merge family: objective/SCA-G172
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 14b71f12926db728
+- Acceptance: Objective scan filed this gap for SCA-G172. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-191-objective-gap-5e23aeb52447.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV172ORCH), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-192 Close objective gap: Scheduler authority and concurrency contracts
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: scheduler
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/scheduler_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler_contract_extractor.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler_contract_extractor.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-192-objective-gap-dce4088f2698.md
+- Bundle: swissknife/contract-assurance/runtime-scheduler
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-runtime-scheduler.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G170
+- Graph depth: 18
+- Objective heap index: 30
+- Parallel lane: swissknife/contract-assurance/runtime-scheduler
+- Conflict policy: Do not infer equivalence from shared class or method names; concurrency claims bind the modeled bounds and scheduler version.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/scheduler_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler_contract_extractor.py
+- Changed paths:
+- AST symbols: SCAEV173SCHED
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G173
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/6ff8d5968d88f3a0afacf8fd319354b0336a389bb7b3bc402f74d361bcf28d6a
+- Canonical task CID: baguqeeran74nlfunrdz2bl5m7d6tde2uwazwuoe3w6z3yqbpotjwdphsrvva
+- Semantic identity: objective-evidence-obligation/v1/d2611f6900beb36fcf1624926cd9db769e8cc92e4cb9aa3709a9a8529f1c09d5
+- Acceptance subset: Deterministic, legacy workflow, MCP++ workflow/risk, and supervisor resource/provider schedulers are related by proved equivalence, explicit adapter, or contradiction, lease/fence dominates effects, bounded interleavings conserve tasks and terminal outcomes.
+- Preconditions: objective goal SCA-G173 is schedulable
+- Effects: satisfy evidence requirement: SCAEV173SCHED
+- Evidence subset: SCAEV173SCHED
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G173
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/d2611f6900beb36fcf1624926cd9db769e8cc92e4cb9aa3709a9a8529f1c09d5
+- Missing evidence: SCAEV173SCHED
+- Embedding query: Resolve scheduler authority and model deterministic ownership, clocks, queues, capacity, fairness, leases, fencing, backpressure, retry, cancellation, and crash recovery across every accelerator scheduler surface.
+- AST query: SCAEV173SCHED
+- Surplus group: objective/SCA-G173
+- Merge key: de2b5aeb03c3fcac
+- Merge family: objective/SCA-G173
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 8e0e852db03c20e6
+- Acceptance: Objective scan filed this gap for SCA-G173. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-192-objective-gap-dce4088f2698.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV173SCHED), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-193 Close objective gap: Agent-supervisor control and goal/task contracts
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: agent-supervisor
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/supervisor_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_contract_extractor.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_contract_extractor.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-193-objective-gap-15f69b5c871a.md
+- Bundle: swissknife/contract-assurance/runtime-agent-supervisor
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-runtime-agent-supervisor.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G170
+- Graph depth: 18
+- Objective heap index: 31
+- Parallel lane: swissknife/contract-assurance/runtime-agent-supervisor
+- Conflict policy: UI labels and generic backend ownership are not native-operation reachability; governed mutations require preview/permit/receipt paths.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/supervisor_contract_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_supervisor_contract_extractor.py
+- Changed paths:
+- AST symbols: SCAEV174SUP
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G174
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/1433c79e413bbfea719984bd507eb5bd417380cccbedc9378bf5a3d750575cba
+- Canonical task CID: baguqeeracqz4phsbho76u4mzqs6va7vvxvaxhagmzpw4sn4l6wr5oucxls5a
+- Semantic identity: objective-evidence-obligation/v1/f24f9bb6475be830d73d9e7437f69789cac4a61534cbd2242250f2396ed9c7f4
+- Acceptance subset: Each SwissKnife console capability maps to an exact native `agent_supervisor_*` operation, request/result schema, dispatcher/function identity, policy, and effect, generic workflow/data/storage proxy tools are refuted, goal completion requires child/evidence/health/exhaustion closure.
+- Preconditions: objective goal SCA-G174 is schedulable
+- Effects: satisfy evidence requirement: SCAEV174SUP
+- Evidence subset: SCAEV174SUP
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G174
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/f24f9bb6475be830d73d9e7437f69789cac4a61534cbd2242250f2396ed9c7f4
+- Missing evidence: SCAEV174SUP
+- Embedding query: Extract goal/subgoal/task, control-plane, lane, validation, proof, refill, implementation, merge, recovery, status, and completion contracts and map every SwissKnife supervisor capability to a native accelerator operation.
+- AST query: SCAEV174SUP
+- Surplus group: objective/SCA-G174
+- Merge key: cf1b311eb0adc5ce
+- Merge family: objective/SCA-G174
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: b2b985b636a32c68
+- Acceptance: Objective scan filed this gap for SCA-G174. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-193-objective-gap-15f69b5c871a.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV174SUP), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-194 Close objective gap: Scale and context-budget benchmark
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P1
+- Track: benchmark
+- Depends on:
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py, data/agent_supervisor/swissknife_contract_assurance/benchmarks/report.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-194-objective-gap-197624eff234.md
+- Bundle: swissknife/contract-assurance/benchmark
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-benchmark.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G021, SCA-G070, SCA-G100, SCA-G120
+- Graph depth: 13
+- Objective heap index: 35
+- Parallel lane: swissknife/contract-assurance/benchmark
+- Conflict policy: Benchmarks report measured capacity and never infer production concurrency from worker count.
+- Predicted files: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py, data/agent_supervisor/swissknife_contract_assurance/benchmarks/report.json
+- Changed paths:
+- AST symbols: SCAEV140BENCH
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G140
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/b461611ce6c7e94814f8f01f5256ea1d852fef2fb4a1819a4dff8afc0365c399
+- Canonical task CID: baguqeerawrqwchhgy7uuqfhy6apvevxkdwcs73zpwsqydgsn76fpya3fyomq
+- Semantic identity: objective-evidence-obligation/v1/3452288c3061ee223131bb9d3b636f5854da686f0564cf3cb088061afd2bf66f
+- Acceptance subset: Warm unchanged reuse >=95 percent, packet max <=8192 tokens and median target <=2048, 10x irrelevant corpus growth does not materially grow mandatory context, bounds and high-watermarks are recorded.
+- Preconditions: objective goal SCA-G140 is schedulable
+- Effects: satisfy evidence requirement: SCAEV140BENCH
+- Evidence subset: SCAEV140BENCH
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G140
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/3452288c3061ee223131bb9d3b636f5854da686f0564cf3cb088061afd2bf66f
+- Missing evidence: SCAEV140BENCH
+- Embedding query: Measure cold/warm/incremental scan, graph, proof, cache, storage, and prompt costs at SwissKnife scale and under irrelevant-corpus growth.
+- AST query: SCAEV140BENCH
+- Surplus group: objective/SCA-G140
+- Merge key: 54b1ead460268296
+- Merge family: objective/SCA-G140
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 403a863ae64ae446
+- Acceptance: Objective scan filed this gap for SCA-G140. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-194-objective-gap-197624eff234.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV140BENCH), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-195 Close objective gap: Continuous incremental refill
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P1
+- Track: continuous
+- Depends on:
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/state/invalidation.jsonl, data/agent_supervisor/swissknife_contract_assurance/state/refill_metrics.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_refill.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-195-objective-gap-d2d7972e4d78.md
+- Bundle: swissknife/contract-assurance/continuous
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-continuous.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G110, SCA-G120
+- Graph depth: 15
+- Objective heap index: 36
+- Parallel lane: swissknife/contract-assurance/continuous
+- Conflict policy: Preserve prior receipts as historical evidence while marking stale bindings explicitly.
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/state/invalidation.jsonl, data/agent_supervisor/swissknife_contract_assurance/state/refill_metrics.json
+- Changed paths:
+- AST symbols: SCAEV130REFILL
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G130
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/945b3e2881d22aefe2ea34fe901b4858aa9960568b8cd0c6db1623ab2d7588ef
+- Canonical task CID: baguqeerasrnt4keb2ivo7yxkgt7jag2ilcvjsycwrognbrw3cyr2wllvrdxq
+- Semantic identity: objective-evidence-obligation/v1/488f5ba0c64507e7b7b014d945616ac659ee701b691eca0a778064ccb77c933c
+- Acceptance subset: Controlled one-symbol edits invalidate all and only dependents, cooldown/dedupe/open-work bounds hold, unhealthy scans cannot certify exhaustion.
+- Preconditions: objective goal SCA-G130 is schedulable
+- Effects: satisfy evidence requirement: SCAEV130REFILL
+- Evidence subset: SCAEV130REFILL
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G130
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/488f5ba0c64507e7b7b014d945616ac659ee701b691eca0a778064ccb77c933c
+- Missing evidence: SCAEV130REFILL
+- Embedding query: Detect snapshot changes, update only changed index/proof closures, and refill bounded goal-backed tasks until no healthy current finding remains.
+- AST query: SCAEV130REFILL
+- Surplus group: objective/SCA-G130
+- Merge key: 8fe9305298cd3592
+- Merge family: objective/SCA-G130
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 7cca2df82b4fbe00
+- Acceptance: Objective scan filed this gap for SCA-G130. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-195-objective-gap-d2d7972e4d78.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV130REFILL), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-196 Close objective gap: Promotion, operations, and closeout
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P1
+- Track: rollout
+- Depends on:
+- Outputs: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md, data/agent_supervisor/swissknife_contract_assurance/completion_gate.json
+- Validation: test -f docs/launch/swissknife-symbolic-contract-supervisor-runbook.md && python3 -m json.tool data/agent_supervisor/swissknife_contract_assurance/completion_gate.json >/dev/null
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-196-objective-gap-a19b50a10098.md
+- Bundle: swissknife/contract-assurance/rollout
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-rollout.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G120, SCA-G130, SCA-G140, SCA-G150, SCA-G166, SCA-G167, SCA-G176
+- Graph depth: 21
+- Objective heap index: 37
+- Parallel lane: swissknife/contract-assurance/rollout
+- Conflict policy: Closeout requires current-tree evidence and cannot be inferred from an empty queue.
+- Predicted files: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md, data/agent_supervisor/swissknife_contract_assurance/completion_gate.json
+- Changed paths:
+- AST symbols: SCAEV160OPS
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G160
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/bd27305e27c47f8af6ffab498aa1dbbcfd5d528b003a4bd74f0e821e3fd0ec6d
+- Canonical task CID: baguqeeraxuttaxrhyr7yv5x7vneyvio3xt6v2uulaa5exv2pb2bb4p6q5rwq
+- Semantic identity: objective-evidence-obligation/v1/0667f777b00c4ebe6342b5282e81bc696ecbf87d9516485aa99666181ee3a005
+- Acceptance subset: Operators can verify PID/lease/health/current snapshot/backlog/cache/analyzer and four-component runtime-contract state, automatic mutation remains disabled until all promotion gates pass, rollback returns to shadow without losing evidence.
+- Preconditions: objective goal SCA-G160 is schedulable
+- Effects: satisfy evidence requirement: SCAEV160OPS
+- Evidence subset: SCAEV160OPS
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G160
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/0667f777b00c4ebe6342b5282e81bc696ecbf87d9516485aa99666181ee3a005
+- Missing evidence: SCAEV160OPS
+- Embedding query: Publish health/status/query/runbook surfaces, shadow-to-assist promotion gates, rollback, lease recovery, artifact retention, and objective exhaustion evidence.
+- AST query: SCAEV160OPS
+- Surplus group: objective/SCA-G160
+- Merge key: f266220232116771
+- Merge family: objective/SCA-G160
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 271f909a069babfc
+- Acceptance: Objective scan filed this gap for SCA-G160. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-196-objective-gap-a19b50a10098.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV160OPS), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-197 Review completion-evidence alignment for Proof-directed SwissKnife contract assurance
+
+- Status: blocked
+- Blocked reason: manual review required because no precise edit targets were authorized
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Priority: P0
+- Track: swissknife-contract-assurance
+- Depends on:
+- Outputs:
+- Validation: git diff --check; test -f implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md && python3 -m json.tool config/swissknife_symbolic_contract_assurance_supervisor.json >/dev/null && python3 -m json.tool config/swissknife_symbolic_contract_assurance_lane_inventory.json >/dev/null && python3 -m py_compile scripts/swissknife_parallel_implementation_supervisor.py
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-197-objective-gap-235654021c85.md
+- Bundle: swissknife/contract-assurance/root
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-root.todo.md
+- Bundle strategy: bounded_objective_generation
+- Graph parents: none
+- Graph depth: 1
+- Objective heap index: 0
+- Parallel lane: swissknife/contract-assurance/root
+- Conflict policy: prefer bundle-local changes; invoke the LLM merge resolver for semantic conflicts
+- Predicted files:
+- Changed paths:
+- AST symbols: completion-reconciliation, SCAEV000ROOT
+- Interfaces:
+- Submodules:
+- Generated artifacts: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/objective_generation.json
+- Allow concurrent with:
+- Goal id: SCA-G000
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/5a4c489cf44ef81ed6ed58f21a62af469b5825404a5bdd342581febb4c42cadc
+- Canonical task CID: baguqeeraljgerhhuj34b5vxnldzbuyvpi2nvqjkajjn52nbfqh7lwtcczloa
+- Semantic identity: objective-family/v1/f2798f83d0ede4b6956be3cb97e9b788a011922768c2f27f24c17298934b3d22
+- Acceptance subset: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Every child goal is completed or explicitly blocked with typed evidence, Reconcile the unverified completion decision with current evidence for: Proof-directed SwissKnife contract assurance, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Preconditions: objective goal SCA-G000 is schedulable
+- Effects: satisfy evidence requirement: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., satisfy evidence requirement: Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., satisfy evidence requirement: Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., satisfy evidence requirement: Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., satisfy evidence requirement: Produce completion evidence for: Every child goal is completed or explicitly blocked with typed evidence, satisfy evidence requirement: Reconcile the unverified completion decision with current evidence for: Proof-directed SwissKnife contract assurance, satisfy evidence requirement: Require an explicitly healthy analyzer that is safe for completion reasoning., satisfy evidence requirement: Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., satisfy evidence requirement: Task completion is provisional until every criterion has valid evidence.
+- Evidence subset: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Every child goal is completed or explicitly blocked with typed evidence, Reconcile the unverified completion decision with current evidence for: Proof-directed SwissKnife contract assurance, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: SCA-G000
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-family/v1/f2798f83d0ede4b6956be3cb97e9b788a011922768c2f27f24c17298934b3d22
+- Missing evidence: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Every child goal is completed or explicitly blocked with typed evidence, Reconcile the unverified completion decision with current evidence for: Proof-directed SwissKnife contract assurance, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Embedding query: completion reconciliation completion-evidence alignment SCAEV000ROOT
+- AST query: completion-reconciliation, SCAEV000ROOT
+- Surplus group: SCA-G000
+- Merge key: objective-family/v1/f2798f83d0ede4b6956be3cb97e9b788a011922768c2f27f24c17298934b3d22
+- Merge family: SCA-G000
+- Merge role: completion_gate_gap_manual_review
+- Work item count: 9
+- Work scope: bounded_objective_generation
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: generated_task
+- Todo vector key: f2798f83d0ede4b6
+- Acceptance: Objective scan filed this review gap for SCA-G000. Inspect the evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-197-objective-gap-235654021c85.md; either resolve the diagnostic without an implementation change or authorize precise repository-relative edit targets before changing the task status.
+
+## SCA-198 Review completion-evidence alignment for Canonical SwissKnife snapshot authority
+
+- Status: blocked
+- Blocked reason: manual review required because no precise edit targets were authorized
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Priority: P0
+- Track: snapshot-authority
+- Depends on:
+- Outputs:
+- Validation: git diff --check; python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_authority.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-198-objective-gap-ba60f80546e2.md
+- Bundle: swissknife/contract-assurance/snapshot-authority
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-snapshot-authority.todo.md
+- Bundle strategy: bounded_objective_generation
+- Graph parents: SCA-G010, SCA-G167
+- Graph depth: 1
+- Objective heap index: 0
+- Parallel lane: swissknife/contract-assurance/snapshot-authority
+- Conflict policy: prefer bundle-local changes; invoke the LLM merge resolver for semantic conflicts
+- Predicted files:
+- Changed paths:
+- AST symbols: completion-reconciliation, SCAEV168AUTH
+- Interfaces:
+- Submodules:
+- Generated artifacts: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/objective_generation.json
+- Allow concurrent with:
+- Goal id: SCA-G168
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/95c40719d7baf7666416e0db713830abb518e7aae5ab7ef4ae15e0cfa1b6f459
+- Canonical task CID: baguqeerasxcaogoxxl3wmzaw4dnxcobqvo2rrz5k4wvx55focxqm7inw6rmq
+- Semantic identity: objective-family/v1/b48b96ffb51d6ec69f56232298683c2fd29e0477308c6e6f267efc084dc64a51
+- Acceptance subset: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Origin, commit, tree, ancestry, dirty overlay, gitlink, and tracked-path population are CID-bound for each checkout, Reconcile the unverified completion decision with current evidence for: Canonical SwissKnife snapshot authority, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Preconditions: objective goal SCA-G168 is schedulable
+- Effects: satisfy evidence requirement: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., satisfy evidence requirement: Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., satisfy evidence requirement: Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., satisfy evidence requirement: Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., satisfy evidence requirement: Produce completion evidence for: Origin, commit, tree, ancestry, dirty overlay, gitlink, and tracked-path population are CID-bound for each checkout, satisfy evidence requirement: Reconcile the unverified completion decision with current evidence for: Canonical SwissKnife snapshot authority, satisfy evidence requirement: Require an explicitly healthy analyzer that is safe for completion reasoning., satisfy evidence requirement: Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., satisfy evidence requirement: Task completion is provisional until every criterion has valid evidence.
+- Evidence subset: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Origin, commit, tree, ancestry, dirty overlay, gitlink, and tracked-path population are CID-bound for each checkout, Reconcile the unverified completion decision with current evidence for: Canonical SwissKnife snapshot authority, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Resources: cpu-medium
+- Merge fate: SCA-G168
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-family/v1/b48b96ffb51d6ec69f56232298683c2fd29e0477308c6e6f267efc084dc64a51
+- Missing evidence: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Origin, commit, tree, ancestry, dirty overlay, gitlink, and tracked-path population are CID-bound for each checkout, Reconcile the unverified completion decision with current evidence for: Canonical SwissKnife snapshot authority, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Embedding query: completion reconciliation completion-evidence alignment SCAEV168AUTH
+- AST query: completion-reconciliation, SCAEV168AUTH
+- Surplus group: SCA-G168
+- Merge key: objective-family/v1/b48b96ffb51d6ec69f56232298683c2fd29e0477308c6e6f267efc084dc64a51
+- Merge family: SCA-G168
+- Merge role: completion_gate_gap_manual_review
+- Work item count: 9
+- Work scope: bounded_objective_generation
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: generated_task
+- Todo vector key: b48b96ffb51d6ec6
+- Acceptance: Objective scan filed this review gap for SCA-G168. Inspect the evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-198-objective-gap-ba60f80546e2.md; either resolve the diagnostic without an implementation change or authorize precise repository-relative edit targets before changing the task status.
+
+## SCA-199 Resolve implementation retry-budget failure for SCA-194
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py, data/agent_supervisor/swissknife_contract_assurance/benchmarks/report.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-199-sca-194-implementation-retry-budget.md
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-194. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-199-sca-194-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-194 from strategy blocked_tasks.
