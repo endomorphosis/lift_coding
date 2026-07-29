@@ -118,7 +118,9 @@ Normative:
 
 ## SCA-015 Implement the canonical multiformats and CID identity bridge
 
-- Status: active
+- Status: completed
+- Completion: automated
+- Completion evidence: 29 focused tests passed and the implementation was merged into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
 - Track: content-identity
 - Depends on: SCA-010
@@ -222,7 +224,9 @@ Normative:
 
 ## SCA-040 Define the reviewed MCP contract catalog
 
-- Status: active
+- Status: completed
+- Completion: automated
+- Completion evidence: 29 focused tests passed and the implementation was merged into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
 - Track: contracts
 - Depends on: SCA-010
@@ -788,8 +792,9 @@ Normative:
 
 ## SCA-161 Resolve validation retry-budget failure for SCA-040
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Catalog outputs were validated and merged through the isolated integration worktree on 2026-07-29
 - Priority: P1
 - Track: ops
 - Depends on: SCA-010
@@ -799,8 +804,9 @@ Normative:
 
 ## SCA-162 Resolve validation retry-budget failure for SCA-015
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Content-identity outputs were validated and merged through the isolated integration worktree on 2026-07-29
 - Priority: P1
 - Track: ops
 - Depends on: SCA-010
@@ -810,11 +816,9 @@ Normative:
 
 ## SCA-163 Resolve dirty main checkout blocking 1 worktree merges
 
-- Status: blocked
+- Status: completed
 - Completion: manual
-- Is schedulable: false
-- Review only: true
-- Blocked reason: operator_reconciliation_required
+- Completion evidence: Reconciliation now targets agent/swissknife-sca-parallel in an ephemeral worktree; unrelated dirty main content was preserved
 - Priority: P1
 - Track: ops
 - Fingerprint: 9d07bd096ca9fcd86ac68453c056b8b53bbb1942
@@ -823,3 +827,47 @@ Normative:
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-163-reconciliation-9d07bd096ca9.md
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by main_checkout_dirty. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-163-reconciliation-9d07bd096ca9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## SCA-164 Review swallowed exception path in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py:241
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: runtime
+- Depends on: 
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/discovery, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
+- Validation: python3 -m py_compile external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
+- Graph parents: SCA-G010, SCA-G000
+- Graph depth: 2
+- Goal id: SCA-G015
+- Goal lineage: SCA-G015, SCA-G010, SCA-G000
+- Goal registration: existing
+- Canonical task key: task/v1/d3c8c2794726bece22e9be3b090d3adb11816d0669a72d204ae7053579cd16e0
+- Canonical task CID: baguqeera2peme6khe27m4ixjxy5qsdj23miyc3igngts2ick44ctk6onc3qa
+- Semantic identity: d3c8c2794726bece22e9be3b090d3adb11816d0669a72d204ae7053579cd16e0
+- Acceptance subset: Resolve swallowed_exception at external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py:241
+- Preconditions: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py exists and the scan evidence remains applicable
+- Effects: resolve swallowed_exception in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py and pass focused validation
+- Evidence subset: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py:241, data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-164-codebase-scan-ff65e1bdaf7e.md
+- Resource class: cpu-small
+- Token class: small
+- Resources: python, focused validation runner
+- Merge fate: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
+- Rejection reasons: none
+- Missing evidence: Review swallowed exception path in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py:241
+- Candidate kind: codebase_scan
+- Todo vector key: ff65e1bdaf7e3033
+- Bundle: codebase/runtime/external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-content_identity_bridge
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/codebase-runtime-external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-content_identity_bridge.todo.md
+- Bundle strategy: codebase_file_ast
+- Parallel lane: codebase/runtime/external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-content_identity_bridge
+- Conflict policy: serialize findings for the same file; allow independent file bundles to run concurrently
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
+- AST symbols: __future__, __future__.annotations, __init__, _assert_not_digest_as_cid, _build_identity, _cache_module, _is_multiformats_failure, _provider_snapshot, _require_module, _sha256_digest_bytes, assert not digest as cid, build identity, cache module, cidvalidationerror, cidvalidationerror init, cidvalidationerror.__init__, collections abc, collections abc mapping, collections abc sequence, collections.abc, collections.abc.mapping, collections.abc.sequence, compare provider identities, compare_provider_identities, content identity probe, content_identity_probe, contentidentity, contentidentity hexdigest, contentidentity to dict, contentidentity.hexdigest, contentidentity.to_dict, contentidentityerror, contentidentityerror init, contentidentityerror.__init__, dataclasses, dataclasses dataclass, dataclasses field, dataclasses.dataclass, dataclasses.field, decode and verify cid, decode and verify identity, decode_and_verify_cid, decode_and_verify_identity, enum, enum enum, enum.enum, future, future annotations, hashlib, hexdigest, identify for profile, identify logic ir, identify strict artifact, identify strict artifact bytes, identify_for_profile, identify_logic_ir, identify_strict_artifact, identify_strict_artifact_bytes, importlib, init, is digest shaped, is multiformats failure, is_digest_shaped, multiformats, multiformats available, multiformats cid, multiformats multihash, multiformats.cid, multiformats.multihash, multiformats_available, multiformatsunavailableerror, multiformatsunavailableerror init, multiformatsunavailableerror.__init__, profilecontradiction, profilecontradiction to dict, profilecontradiction.to_dict, profilecontradictionkind, profiles are interchangeable, profiles_are_interchangeable, provider available
+- AST symbol scope: file
+- Merge key: codebase/runtime/external-ipfs_accelerate-ipfs_accelerate_py-agent_supervisor-analysis-content_identity_bridge
+- Merge family: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py
+- Merge role: codebase_scan
+- Work item count: 1
+- Work scope: codebase_file_ast
+- Acceptance: Goal-scoped refill admitted this finding from external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py:241 for SCA-G015. Use evidence in data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-164-codebase-scan-ff65e1bdaf7e.md, make only the smallest change required by that goal lineage, add or update focused validation when appropriate, and do not expand into adjacent cleanup.
