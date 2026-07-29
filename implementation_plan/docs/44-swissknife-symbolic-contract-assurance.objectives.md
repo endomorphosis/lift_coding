@@ -1056,10 +1056,10 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Bundle: swissknife/contract-assurance/authoritative-index
 - Goal: Replace stale compiler-unavailable evidence with one current snapshot-bound repository index and analyzer-health receipt produced by the real TypeScript 5.9.3 parser, while retaining every bounded parse failure as typed evidence.
 - Evidence: SCAEV022INDEX
-- Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json
+- Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py, implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py -q
 - Acceptance: Snapshot authority, coverage, AST index, repository index, parser/toolchain identity, and current manifest bind the same roots; every eligible path is success or a typed bounded failure; compiler-unavailable rows are not reused after the compiler identity changes; no provider or model call occurs.
-- Gap task: SCA-215, SCA-225, SCA-231
+- Gap task: SCA-215, SCA-225, SCA-231, SCA-232, SCA-233, SCA-234, SCA-235, SCA-236, SCA-237, SCA-512
 - Conflict policy: Do not lower health thresholds or relabel parse failures; stale index roots remain historical and cannot satisfy current completion.
 
 ## SCA-G031 Exact datasets GraphRAG and Cypher-AST binding

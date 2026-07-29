@@ -115,11 +115,12 @@ Build a content-addressed, proof-directed analysis loop that can:
 ## 2026-07-29 verified progress checkpoint
 
 Task implementation and outcome authority are deliberately reported
-separately. The expanded board contains 98 tasks: 68 implemented/completed, 17
-blocked, 3 dependency-labeled active, and 10 todo before the next supervisor
-restart. That is 69.4 percent implementation progress, not a claim that 69.4
-percent of the proof outcome is complete. No top-level goal is yet
-authoritatively complete.
+separately. The failure-index expansion contains 379 tasks: 70
+implemented/completed, 16 blocked, 3 dependency-labeled active, and 290 todo.
+The larger denominator reflects 281 new deterministic cluster, row, fan-in,
+and aggregate tasks rather than lost implementation. That is 18.5 percent
+implementation progress, not a claim that 18.5 percent of the proof outcome is
+complete. No top-level goal is yet authoritatively complete.
 
 Verified advances:
 
@@ -147,10 +148,16 @@ Verified advances:
 - A fresh diagnostic whole-tree scan accounted for 6,395 paths and 3,369
   parser-eligible paths with zero model calls. It reduced typed failures from
   the stale 3,109/3,369 baseline to 258/3,369 (7.66 percent), with 3,111
-  successful paths and 145 cache reuses. This is a substantial recovery but is
-  still unhealthy against the reviewed maximum of 10 failures and 1 percent.
-  Consequently invocation, proof, mismatch, and vulnerability authority
-  remains withheld.
+  successful paths. The retained artifact records 253 newly parsed and 3,116
+  reused eligible rows. This is a substantial recovery but is still unhealthy
+  against the reviewed maximum of 10 failures and 1 percent. Consequently
+  invocation, proof, mismatch, and vulnerability authority remains withheld.
+- The retained index and analyzer-health ledger now drive a generated,
+  content-addressed backlog. Six bounded repair clusters cover the actionable
+  path families; 258 zero-model row tasks preserve one-to-one failure
+  accountability; 16 hexadecimal fan-in gates bound dependency size; and one
+  aggregate fresh-scan gate proves exact set reconciliation before
+  publication. Blanket exclusion of contract-bearing test trees is forbidden.
 
 One attempted publication copied that unhealthy diagnostic index toward the
 authoritative paths. It was fenced, and the four resulting files were moved
@@ -164,9 +171,14 @@ The publication workflow is now split:
 1. `SCA-215` implements and tests the fail-closed writer.
 2. `SCA-231` deterministically classifies and repairs the remaining parser
    clusters without weakening thresholds.
-3. `SCA-229` enforces deterministic-only and authoritative completion receipts.
-4. `SCA-225` performs the foreground full scan and publication with zero model
+3. `SCA-232` through `SCA-237` perform bounded family repairs, while
+   `SCA-238` through `SCA-495` verify each exact failure row with zero model
    calls.
+4. `SCA-496` through `SCA-511` fan in the row receipts and `SCA-512` requires
+   a fresh exact-set and health-gate scan.
+5. `SCA-229` enforces deterministic-only and authoritative completion receipts.
+6. `SCA-225` performs the foreground full scan and publication with zero model
+   calls only after `SCA-512`.
 
 Scanning and extraction occur only in an isolated staging root. Publication
 requires explicit publish mode, `--require-healthy`, full extraction, exact
