@@ -741,7 +741,7 @@ Normative:
 
 ## SCA-150 Run adversarial and mutation evaluation
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: evaluation
 - Depends on: SCA-051, SCA-061, SCA-070, SCA-081, SCA-100
