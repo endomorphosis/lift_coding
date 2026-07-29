@@ -3210,7 +3210,7 @@ Normative:
 
 ## SCA-228 Wire bounded Grok implementation and independent Codex review receipts
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: provider-routing
 - Depends on: SCA-100, SCA-111, SCA-227
