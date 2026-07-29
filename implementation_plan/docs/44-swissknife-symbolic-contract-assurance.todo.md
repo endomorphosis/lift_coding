@@ -65,7 +65,7 @@ Normative:
 | 7 | 121, 130, 140, 150, 166, 167, 168 | Operational fan-out plus parser/provider and snapshot-authority recovery |
 | 8 | 170; then 171, 172, 173, 174 | Runtime catalog then four component extractors |
 | 9 | 175, 176, 177 | Runtime obligations, exact MCP++ traces, and vulnerability rules |
-| 10 | 178, 179, 213-221; then 180, 181; then 160 | Runtime refill, exact provider/index/proof wiring, integrity repairs, healthy baseline/evaluation, then closeout |
+| 10 | 178, 179, 213-220, 222, 223; then 180; then 181, 221; then 160 | Runtime refill, exact provider/index/proof wiring, integrity repairs, healthy baseline/evaluation/repair projection, then closeout |
 
 ## SCA-000 Seal the supervisor-native program
 
@@ -775,7 +775,7 @@ Normative:
 - Status: active
 - Priority: P1
 - Track: rollout
-- Depends on: SCA-111, SCA-130, SCA-140, SCA-150, SCA-166, SCA-167, SCA-181
+- Depends on: SCA-111, SCA-130, SCA-140, SCA-150, SCA-166, SCA-167, SCA-181, SCA-221
 - Goal id: SCA-G160
 - Outputs: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md, data/agent_supervisor/swissknife_contract_assurance/completion_gate.json
 - Validation: test -f docs/launch/swissknife-symbolic-contract-supervisor-runbook.md && python3 -m json.tool data/agent_supervisor/swissknife_contract_assurance/completion_gate.json >/dev/null
@@ -1226,7 +1226,7 @@ Normative:
 - Status: active
 - Priority: P0
 - Track: runtime-baseline
-- Depends on: SCA-166, SCA-176, SCA-177, SCA-179, SCA-213, SCA-214, SCA-215, SCA-216, SCA-217, SCA-218, SCA-219, SCA-220, SCA-221
+- Depends on: SCA-166, SCA-176, SCA-177, SCA-179, SCA-213, SCA-214, SCA-215, SCA-216, SCA-217, SCA-218, SCA-219, SCA-220, SCA-222, SCA-223
 - Goal id: SCA-G176
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/contracts.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/summary.md
 - Validation: python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components --shadow --require-healthy
@@ -2923,7 +2923,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: invocation-evidence
-- Depends on: SCA-041, SCA-042, SCA-051, SCA-170, SCA-175, SCA-176, SCA-213, SCA-216
+- Depends on: SCA-041, SCA-042, SCA-051, SCA-170, SCA-175, SCA-176, SCA-213, SCA-216, SCA-222
 - Goal id: SCA-G052
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_contract_evidence_compiler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_evidence_compiler.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_evidence_compiler.py -q
@@ -2973,7 +2973,7 @@ Normative:
 - Status: todo
 - Priority: P1
 - Track: zk-backend
-- Depends on: SCA-081, SCA-214, SCA-218, SCA-220
+- Depends on: SCA-081, SCA-214, SCA-218, SCA-220, SCA-223
 - Goal id: SCA-G082
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ipfs_datasets_zk_attestation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/proof_attestation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py -q
@@ -2992,6 +2992,56 @@ Normative:
 - Effects: Adds setup/prover/verifier identity binding, self-tests, threat-model enforcement, and typed unavailability.
 - Evidence subset: Setup/circuit/public-input/witness-policy/prover/verifier/proof/cache roots and negative canaries
 - Acceptance: Real positive/negative self-tests pass before attestation; verifier callback and setup identity are mandatory; only current verified-receipt predicates attest; unavailable/simulated backends emit non-attested typed status; no ZK result asserts unmodeled source correctness.
+
+## SCA-222 Restore canonical FastAPI MCP++ route reachability
+
+- Status: active
+- Priority: P0
+- Track: runtime-transport
+- Depends on: SCA-171, SCA-176
+- Goal id: SCA-G171
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/fastapi_service.py, external/ipfs_accelerate/test/mcp_server/test_fastapi_service.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/mcp_server/test_fastapi_service.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/runtime-transport
+- Parallel lane: sca-runtime-transport
+- Resource class: cpu-small
+- Resource stage: runtime
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/fastapi_service.py, external/ipfs_accelerate/test/mcp_server/test_fastapi_service.py
+- Interfaces: FastAPI, MCPPlusPlusServer, tools/list, tools/call
+- Context budget tokens: 2048
+- Provider role: codex-implement, grok-review
+- Conflict policy: Preserve Profile-G compatibility without registering a catch-all route ahead of canonical MCP++ endpoints.
+- Preconditions: SwissKnife connector route expectations and MCP++ server mount are indexed.
+- Effects: Makes request annotations resolvable and canonical list/call/JSON-RPC routes reachable through the intended server.
+- Evidence subset: ASGI route order, GET/POST request schemas, tools/list and tools/call results
+- Acceptance: FastAPI resolves `Request`; `/mcp/`, `/mcp/tools/list`, and `/mcp/tools/call` reach MCP++ rather than a Profile-G catch-all; GET/POST compatibility is explicit; ASGI tests reproduce SwissKnife list/call requests and invalid inputs fail closed.
+
+## SCA-223 Remove false simulated-Groth16 DAG proof acceptance
+
+- Status: active
+- Priority: P0
+- Track: proof-integrity
+- Depends on: SCA-080, SCA-081
+- Goal id: SCA-G080
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/dag_compaction.py, external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/tests/test_dag_compaction.py
+- Validation: python3 -m pytest external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/tests/test_dag_compaction.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/proof-integrity
+- Parallel lane: sca-proof-integrity
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/dag_compaction.py, external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/tests/test_dag_compaction.py
+- Interfaces: DAGCompactor, hash-commitment-v1, event_dag_zkp, ZK capability policy
+- Context budget tokens: 2048
+- Provider role: codex-implement, grok-review
+- Conflict policy: Reuse the datasets fail-closed semantics; never label a hash commitment simulated Groth16 or accept shape-only proof validation.
+- Preconditions: Existing datasets DAG compaction behavior is available as a conformance reference.
+- Effects: Separates non-ZK hash commitments from verifier-backed proofs and rejects forged 64-character strings.
+- Evidence subset: Proof kind, zero-knowledge flag, input/root binding, verifier result and adversarial proof fixtures
+- Acceptance: Fallback records are `hash-commitment-v1` with `zero_knowledge=false`; arbitrary 64-character garbage and replayed/wrong-root proofs fail; verifier-backed `event_dag_zkp` is accepted only after capability and verifier success; no simulated proof emits attested or verified authority.
 
 ## SCA-220 Prove exact CID, multiformats, and multihash conformance
 
@@ -3024,7 +3074,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: runtime-repair-projection
-- Depends on: SCA-101, SCA-177, SCA-178, SCA-179, SCA-218, SCA-219
+- Depends on: SCA-101, SCA-177, SCA-178, SCA-179, SCA-180, SCA-218, SCA-219
 - Goal id: SCA-G176
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_mismatch_refinery.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_assurance_refill.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_integrity_repair_projection.py, data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_integrity_triage.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_integrity_repair_projection.py -q
