@@ -1,0 +1,426 @@
+{
+  "artifact_profile": {
+    "canonicalization": "strict-dag-json-v1",
+    "cid_version": 1,
+    "multibase": "base32",
+    "multicodec": "dag-json",
+    "multihash": "sha2-256"
+  },
+  "capability_id": "datasets-content-identity",
+  "conformance": {
+    "agreement": {
+      "agreed": true,
+      "byte_length": 73,
+      "canonical_digest": "sha256:223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+      "cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq",
+      "codec": "dag-json",
+      "multibase": "base32",
+      "multihash": "sha2-256",
+      "payload_keys": [
+        "flag",
+        "items",
+        "nested",
+        "sca"
+      ],
+      "providers_compared": [
+        "ipfs_datasets_py.utils.cid_utils",
+        "ipfs_datasets_py.logic.ipld_cid",
+        "ipfs_datasets_py.logic.profile_g"
+      ],
+      "raw_digest": "223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+      "required": true
+    },
+    "blockers": [],
+    "multiformats_invoked": {
+      "multiformats.CID": true,
+      "multiformats.multihash": true,
+      "symbols": [
+        "CID",
+        "CID.decode",
+        "multihash.digest"
+      ]
+    },
+    "negative_vectors": [
+      {
+        "actual_outcome": "multihash_digest_mismatch",
+        "cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq",
+        "details": {
+          "failures": [
+            "multihash_digest_mismatch"
+          ]
+        },
+        "expected_outcome": "multihash_digest_mismatch",
+        "passed": true,
+        "polarity": "negative",
+        "profile": "strict-dag-json-v1",
+        "providers": [
+          "ipfs_datasets_py.utils.cid_utils",
+          "multiformats"
+        ],
+        "reason_codes": [
+          "multihash_digest_mismatch"
+        ],
+        "vector_id": "negative.altered_bytes_must_fail"
+      },
+      {
+        "actual_outcome": "multicodec_mismatch",
+        "cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq",
+        "codec": "dag-json",
+        "expected_outcome": "multicodec_mismatch",
+        "passed": true,
+        "polarity": "negative",
+        "profile": "strict-dag-json-v1",
+        "providers": [
+          "multiformats"
+        ],
+        "reason_codes": [
+          "multicodec_mismatch"
+        ],
+        "vector_id": "negative.codec_mismatch_must_fail"
+      },
+      {
+        "actual_outcome": "digest_labeled_as_cid",
+        "digest": "sha256:223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+        "expected_outcome": "digest_labeled_as_cid",
+        "passed": true,
+        "polarity": "negative",
+        "profile": "strict-dag-json-v1",
+        "providers": [
+          "multiformats"
+        ],
+        "reason_codes": [
+          "digest_labeled_as_cid"
+        ],
+        "vector_id": "negative.digest_labeled_as_cid_must_fail"
+      },
+      {
+        "actual_outcome": "profiles_not_interchangeable",
+        "details": {
+          "artifact_cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq",
+          "artifact_codec": "dag-json",
+          "ir_cid": "bafkreicchdg3iry23q6nuqywehnivzyxzpspfb45khxxvs655xvnkqawue",
+          "ir_codec": "raw"
+        },
+        "expected_outcome": "profiles_not_interchangeable",
+        "passed": true,
+        "polarity": "negative",
+        "profile": "strict-dag-json-v1!=ir-canonical-identity-v1",
+        "providers": [
+          "ipfs_datasets_py.utils.cid_utils",
+          "ipfs_datasets_py.logic.ir_core.identity"
+        ],
+        "reason_codes": [
+          "cross_profile_equality_forbidden"
+        ],
+        "vector_id": "negative.cross_profile_equality_forbidden"
+      }
+    ],
+    "passed": true,
+    "positive_vectors": [
+      {
+        "actual_outcome": "cid_verified",
+        "byte_length": 73,
+        "cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq",
+        "codec": "dag-json",
+        "details": {
+          "cid_match": true,
+          "decoded_raw_digest": "223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+          "digest_match": true,
+          "multiformats_cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq"
+        },
+        "digest": "sha256:223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+        "expected_outcome": "cid_verified",
+        "multibase": "base32",
+        "multihash": "sha2-256",
+        "passed": true,
+        "polarity": "positive",
+        "profile": "strict-dag-json-v1",
+        "providers": [
+          "ipfs_datasets_py.utils.cid_utils",
+          "multiformats"
+        ],
+        "raw_digest": "223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+        "reason_codes": [
+          "strict_dag_json_v1",
+          "multiformats_invoked"
+        ],
+        "vector_id": "positive.strict_dag_json_cidv1_base32_sha2_256"
+      },
+      {
+        "actual_outcome": "providers_agree",
+        "byte_length": 73,
+        "cid": "baguqeeraei7bhjttkklgl3erjkuuribyd6s7hf2gp57wcveyqnixuuqpvmfq",
+        "codec": "dag-json",
+        "details": {
+          "bytes_agree": true,
+          "cids_agree": true,
+          "digests_agree": true
+        },
+        "digest": "sha256:223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+        "expected_outcome": "providers_agree",
+        "multibase": "base32",
+        "multihash": "sha2-256",
+        "passed": true,
+        "polarity": "positive",
+        "profile": "strict-dag-json-v1",
+        "providers": [
+          "ipfs_datasets_py.utils.cid_utils",
+          "ipfs_datasets_py.logic.ipld_cid",
+          "ipfs_datasets_py.logic.profile_g"
+        ],
+        "raw_digest": "223e13a673529665ec914aa948a0381fa5f397467f7f61549883517a520fab0b",
+        "reason_codes": [
+          "provider_agreement"
+        ],
+        "vector_id": "positive.providers_agree_canonical_bytes_and_digest"
+      },
+      {
+        "actual_outcome": "cid_verified",
+        "byte_length": 251,
+        "cid": "bafkreicchdg3iry23q6nuqywehnivzyxzpspfb45khxxvs655xvnkqawue",
+        "codec": "raw",
+        "details": {
+          "domain": "sca-conformance"
+        },
+        "digest": "sha256:4238cdb4471adc3cda431621da8ae717cbe4f2879d51ef7acbddedead54016a1",
+        "expected_outcome": "cid_verified",
+        "multibase": "base32",
+        "multihash": "sha2-256",
+        "passed": true,
+        "polarity": "positive",
+        "profile": "ir-canonical-identity-v1",
+        "providers": [
+          "ipfs_datasets_py.logic.ir_core.identity",
+          "multiformats"
+        ],
+        "raw_digest": "4238cdb4471adc3cda431621da8ae717cbe4f2879d51ef7acbddedead54016a1",
+        "reason_codes": [
+          "ir_canonical_identity_v1"
+        ],
+        "vector_id": "positive.logic_ir_raw_codec_domain_separated"
+      }
+    ],
+    "reason_codes": [
+      "positive_strict_artifact_ok",
+      "provider_agreement_ok",
+      "positive_logic_ir_ok",
+      "negative_altered_bytes_ok",
+      "negative_codec_mismatch_ok",
+      "negative_digest_as_cid_ok",
+      "negative_cross_profile_ok",
+      "root_bindings_ok",
+      "conformance_passed"
+    ]
+  },
+  "content_identity_interface": "ContentIdentity@1",
+  "interface": "ContentIdentityBridge@1",
+  "logic_ir_profile": {
+    "canonicalization": "ir-canonical-identity-v1",
+    "cid_version": 1,
+    "multibase": "base32",
+    "multicodec": "raw",
+    "multihash": "sha2-256"
+  },
+  "model_calls": 0,
+  "passed": true,
+  "policies": {
+    "cid_required_operations_fail_closed": true,
+    "cross_profile_equality_allowed": false,
+    "decoded_multihash_must_match_canonical_bytes": true,
+    "digest_labeled_as_cid_allowed": false,
+    "missing_or_incompatible_provider": "typed_blocker",
+    "package_root_fallback_can_satisfy_exact_binding": false
+  },
+  "providers": [
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "ipfs_datasets_py.utils.cid_utils",
+      "module_file": "cid_utils.py",
+      "present_symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_dag_json",
+        "cid_for_bytes",
+        "validate_cid"
+      ],
+      "required_symbols": [
+        "canonical_dag_json_bytes",
+        "cid_for_dag_json",
+        "cid_for_bytes",
+        "validate_cid"
+      ],
+      "role": "strict_dag_json",
+      "source_digest": "sha256:b729828fbd3763b5a6aa2a6e16d3ed19e5094ed25c6ed83ae609bca76fe3437b",
+      "version": "0.2.0"
+    },
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "ipfs_datasets_py.logic.ipld_cid",
+      "module_file": "ipld_cid.py",
+      "present_symbols": [
+        "canonical_dag_json",
+        "dag_json_cid"
+      ],
+      "required_symbols": [
+        "canonical_dag_json",
+        "dag_json_cid"
+      ],
+      "role": "strict_dag_json_legacy_ascii",
+      "source_digest": "sha256:f7412767a163e2c48c819a08b8686a0fdfb4e864b163563ef76ade848149c232",
+      "version": "0.2.0"
+    },
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "ipfs_datasets_py.logic.profile_g",
+      "module_file": "profile_g.py",
+      "present_symbols": [
+        "canonical_profile_g_bytes",
+        "profile_g_cid"
+      ],
+      "required_symbols": [
+        "canonical_profile_g_bytes",
+        "profile_g_cid"
+      ],
+      "role": "strict_dag_json_profile_g",
+      "source_digest": "sha256:1a10d16054f3c6ebc070414520827144f87153518136ae7af5aeeb174ce48d5e",
+      "version": "0.2.0"
+    },
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "ipfs_datasets_py.logic.ir_core.identity",
+      "module_file": "identity.py",
+      "present_symbols": [
+        "canonical_identity"
+      ],
+      "required_symbols": [
+        "canonical_identity"
+      ],
+      "role": "logic_ir_raw",
+      "source_digest": "sha256:283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa",
+      "version": "0.2.0"
+    },
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "multiformats",
+      "module_file": "__init__.py",
+      "present_symbols": [
+        "CID",
+        "multihash"
+      ],
+      "required_symbols": [
+        "CID",
+        "multihash"
+      ],
+      "role": "multiformats_package",
+      "source_digest": "sha256:6402f73dfa7845c9e3a48ea4491e853c5b6a25bb9ce50ed75c5bc49f55134dad",
+      "version": "0.3.1"
+    },
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "multiformats.CID",
+      "module_file": "multiformats.cid",
+      "present_symbols": [
+        "CID.decode",
+        "CID"
+      ],
+      "required_symbols": [
+        "CID.decode"
+      ],
+      "role": "multiformats_cid",
+      "version": "0.3.1"
+    },
+    {
+      "available": true,
+      "compatible": true,
+      "missing_symbols": [],
+      "module": "multiformats.multihash",
+      "module_file": "multiformats.multihash",
+      "present_symbols": [
+        "multihash.digest",
+        "multihash.get"
+      ],
+      "required_symbols": [
+        "multihash.digest"
+      ],
+      "role": "multiformats_multihash",
+      "version": "0.3.1"
+    }
+  ],
+  "root_bindings": {
+    "bindings": {
+      "cache": {
+        "byte_length": 132,
+        "cid": "baguqeerau6hfss3fe6ffqfdu5xhax2xij6guf5qpxyxfwxf4ridq7hdc7w7a",
+        "digest": "sha256:a78e594b65278a581474edce0beae84f8d42f60fbe2e5b5cbc8a070f9c62fdbe",
+        "multibase": "base32",
+        "multicodec": "dag-json",
+        "multihash": "sha2-256",
+        "profile": "strict-dag-json-v1",
+        "validated": true
+      },
+      "graph": {
+        "byte_length": 132,
+        "cid": "baguqeerayanax7da3ynbzkgi2woq4miynxbixz4upabz4pwglkobzxik4w2q",
+        "digest": "sha256:c01a0bfc60de1a1ca8c8d59d0e31186dc28be79478039e3ec65a9c1cdd0ae5b5",
+        "multibase": "base32",
+        "multicodec": "dag-json",
+        "multihash": "sha2-256",
+        "profile": "strict-dag-json-v1",
+        "validated": true
+      },
+      "obligation": {
+        "byte_length": 142,
+        "cid": "baguqeeraz75lfkls75ecxadano7766owkyys7dnvoxj5aghwxkyzpytq4dqa",
+        "digest": "sha256:cffab2a972ff482b80606bbfff79d656312f8db575d3d018f6bab197e270e0e0",
+        "multibase": "base32",
+        "multicodec": "dag-json",
+        "multihash": "sha2-256",
+        "profile": "strict-dag-json-v1",
+        "validated": true
+      },
+      "packet": {
+        "byte_length": 134,
+        "cid": "baguqeera22wpiphh3i5fearlmsjmn5mbvigqtsa7fc56iotdn7uri4cuhfdq",
+        "digest": "sha256:d6acf43ce7da3a52022b6492c6f581aa0d09c81f28bbe43a636fe91470543947",
+        "multibase": "base32",
+        "multicodec": "dag-json",
+        "multihash": "sha2-256",
+        "profile": "strict-dag-json-v1",
+        "validated": true
+      },
+      "proof": {
+        "byte_length": 132,
+        "cid": "baguqeeralg5y4w35xnnlgngl6frcoqf56qbepihxnh63c6r3x5w5sye72slq",
+        "digest": "sha256:59bb8e5b7dbb5ab334cbf1622740bdf40247a0f769fdb17a3bbf6dd9609fd497",
+        "multibase": "base32",
+        "multicodec": "dag-json",
+        "multihash": "sha2-256",
+        "profile": "strict-dag-json-v1",
+        "validated": true
+      }
+    },
+    "distinct_cids": true,
+    "kinds": [
+      "graph",
+      "obligation",
+      "proof",
+      "cache",
+      "packet"
+    ],
+    "profile": "strict-dag-json-v1"
+  },
+  "schema": "ipfs_accelerate_py/agent-supervisor/datasets-content-identity@1",
+  "schema_version": 1,
+  "task_id": "SCA-220"
+}
