@@ -1,0 +1,829 @@
+{
+  "content_root": "content-root:sca-622-current",
+  "corpus_version": "sca-622-production-authority-v1",
+  "evaluated_at": "2026-07-29T21:00:00Z",
+  "evidence": {
+    "coverage": [
+      "primary-provider-index-current-root",
+      "actual-package-surfaces-no-synthesis",
+      "real-indexed-graphrag-not-canary",
+      "real-mcp-list-call-receipts",
+      "kernel-checked-prover-cache-receipts",
+      "optional-real-zk-capability-gated",
+      "exact-runtime-identity",
+      "scheduler-fence-regressions",
+      "fail-closed-unsupported-unknown-stale-partial",
+      "fail-closed-missing-synthesized-simulated-cross-root",
+      "focused-adapter-success-not-production-authority",
+      "zero-runtime-model-calls",
+      "bounded-deduplicated-repair-projection",
+      "exact-validation-and-reproof-commands",
+      "fail-closed-missing-synthesized-simulated-partial-stale-cross-root"
+    ],
+    "goal_id": "SCA-G182",
+    "requirement_ids": [
+      "SCAEV182E2E",
+      "SCAEV177COMPOSE"
+    ],
+    "task_id": "SCA-622"
+  },
+  "fail_closed_dispositions": [
+    "cross_root",
+    "focused_adapter_only",
+    "missing",
+    "partial",
+    "simulated",
+    "stale",
+    "synthesized",
+    "unavailable",
+    "unknown",
+    "unsupported"
+  ],
+  "goal_id": "SCA-G182",
+  "healthy_composition": {
+    "authority_granted": true,
+    "baseline_bridges": [
+      {
+        "baseline_stage": "repository_index",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "primary_provider_index",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "primary_provider_index"
+          },
+          "name": "repository_index",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "extraction",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "actual_package_surfaces",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "actual_package_surfaces"
+          },
+          "name": "extraction",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "graph",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "real_graphrag",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "real_graphrag"
+          },
+          "name": "graph",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "invocation_trace",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "mcp_list_call_receipts",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "mcp_list_call_receipts"
+          },
+          "name": "invocation_trace",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "proof_cache",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "kernel_prover_cache",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "kernel_prover_cache"
+          },
+          "name": "proof_cache",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "publish",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "runtime_identity",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "runtime_identity"
+          },
+          "name": "publish",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "mismatch",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "repair_projection",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "repair_projection"
+          },
+          "name": "mismatch",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      }
+    ],
+    "content_root": "content-root:sca-622-current",
+    "evidence": {
+      "coverage": [
+        "primary-provider-index-current-root",
+        "actual-package-surfaces-no-synthesis",
+        "real-indexed-graphrag-not-canary",
+        "real-mcp-list-call-receipts",
+        "kernel-checked-prover-cache-receipts",
+        "optional-real-zk-capability-gated",
+        "exact-runtime-identity",
+        "scheduler-fence-regressions",
+        "fail-closed-unsupported-unknown-stale-partial",
+        "fail-closed-missing-synthesized-simulated-cross-root",
+        "focused-adapter-success-not-production-authority",
+        "zero-runtime-model-calls",
+        "bounded-deduplicated-repair-projection",
+        "exact-validation-and-reproof-commands",
+        "fail-closed-missing-synthesized-simulated-partial-stale-cross-root"
+      ],
+      "goal_id": "SCA-G182",
+      "requirement_ids": [
+        "SCAEV182E2E",
+        "SCAEV177COMPOSE"
+      ],
+      "task_id": "SCA-622"
+    },
+    "interface": "ProductionContractComposition@1",
+    "isolation_audit": {
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "provider_call_count": 0
+    },
+    "optional_zk": {
+      "attested": false,
+      "blocks_composition": false,
+      "disposition": "unavailable",
+      "predicate": "",
+      "present": true,
+      "reason_codes": [
+        "real_zk_attestation:unavailable"
+      ]
+    },
+    "production_eligible": true,
+    "reason_codes": [],
+    "repair_tasks": [
+      {
+        "content_root": "content-root:sca-622-current",
+        "contract_id": "mcp.tools.call.list_models",
+        "mismatch_id": "mm-surface-route-absent",
+        "re_proof_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_prover.py -q -k list_models"
+        ],
+        "reason_codes": [
+          "actual_route_absent"
+        ],
+        "task_id": "repair:mcp.tools.call.list_models:mm-surface-route-absent",
+        "validation_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py -q"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "contract_id": "proof.kernel.reconstruct.tool_schema",
+        "mismatch_id": "mm-kernel-cache-stale-key",
+        "re_proof_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_code_proof_reproof.py -q"
+        ],
+        "reason_codes": [
+          "stale_cache_key"
+        ],
+        "task_id": "repair:proof.kernel.reconstruct.tool_schema:mm-kernel-cache-stale-key",
+        "validation_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_proof_cache.py -q"
+        ]
+      }
+    ],
+    "schema": "ipfs_accelerate_py/agent-supervisor/production-composition@1",
+    "stages": [
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:primary_provider_index"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "primary_provider_index",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:actual_package_surfaces"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "actual_package_surfaces",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:real_graphrag"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "real_graphrag",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:mcp_list_call_receipts"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "mcp_list_call_receipts",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:kernel_prover_cache"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "kernel_prover_cache",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:runtime_identity"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "runtime_identity",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "provenance": "production:scheduler_fence"
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "scheduler_fence",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "details": {
+          "entrypoint": "production",
+          "projection": "RuntimeContractMismatchRefinery",
+          "provenance": "production:repair_projection",
+          "require_tasks": false
+        },
+        "disposition": "current",
+        "focused_adapter_success": false,
+        "mandatory": true,
+        "name": "repair_projection",
+        "production_admissible": true,
+        "reason_codes": [
+          "current"
+        ]
+      },
+      {
+        "content_root": "",
+        "details": {
+          "entrypoint": "production",
+          "predicate": "",
+          "required": false
+        },
+        "disposition": "unavailable",
+        "focused_adapter_success": false,
+        "mandatory": false,
+        "name": "real_zk_attestation",
+        "production_admissible": false,
+        "reason_codes": [
+          "unavailable"
+        ]
+      }
+    ],
+    "version": "1"
+  },
+  "interface": "ProductionContractComposition@1",
+  "isolation_audit": {
+    "held_out_fixture_disclosed": true,
+    "llm_call_count": 0,
+    "model_call_count": 0,
+    "provider_call_count": 0
+  },
+  "mandatory_stages": [
+    "primary_provider_index",
+    "actual_package_surfaces",
+    "real_graphrag",
+    "mcp_list_call_receipts",
+    "kernel_prover_cache",
+    "runtime_identity",
+    "scheduler_fence",
+    "repair_projection"
+  ],
+  "optional_stages": [
+    "real_zk_attestation"
+  ],
+  "optional_zk_policy": {
+    "attested": false,
+    "blocks_composition": false,
+    "simulated_attested": false,
+    "simulated_blocks_composition": false,
+    "simulated_observation_authority": true
+  },
+  "passed": true,
+  "report_id": "sha256:0344be0d39b31e1cf7a2ebd63e1f60e5a42ecc4d019dcf51bbba849804fb2855",
+  "results": [
+    {
+      "authority_granted": true,
+      "case_id": "compose:healthy-current-root",
+      "expected_authority": true,
+      "fail_closed": false,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "none",
+      "production_eligible": true,
+      "provider_call_count": 0,
+      "reason_codes": [],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection",
+        "real_zk_attestation"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:missing-actual-surfaces",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "missing",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "actual_package_surfaces:missing"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:synthesized-surfaces",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "synthesized",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "actual_package_surfaces:synthesized",
+        "actual_package_surfaces:synthesized_from_expected"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": true,
+      "case_id": "compose:simulated-zk-non-attested",
+      "expected_authority": true,
+      "fail_closed": false,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "simulated",
+      "production_eligible": true,
+      "provider_call_count": 0,
+      "reason_codes": [],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection",
+        "real_zk_attestation"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:partial-prover-cache",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "partial",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "kernel_prover_cache:partial"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:stale-provider-index",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "stale",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "primary_provider_index:stale"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:cross-root-graphrag",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "cross_root",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "real_graphrag:cross_root",
+        "real_graphrag:cross_root_disposition"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:canary-graphrag",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "canary_graph",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "real_graphrag:canary_graph_not_production"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:focused-adapter-only",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "focused_adapter_only",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "primary_provider_index:focused_adapter_not_production",
+        "actual_package_surfaces:focused_adapter_not_production",
+        "real_graphrag:focused_adapter_not_production",
+        "mcp_list_call_receipts:focused_adapter_not_production",
+        "kernel_prover_cache:focused_adapter_not_production",
+        "runtime_identity:focused_adapter_not_production",
+        "scheduler_fence:focused_adapter_not_production",
+        "repair_projection:focused_adapter_not_production"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:nonzero-model-calls",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 1,
+      "mutation": "runtime_model_calls",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "runtime_model_calls_nonzero"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:missing-runtime-identity",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "missing",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "runtime_identity:missing"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:scheduler-fence-regression",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "partial",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "scheduler_fence:partial"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:simulated-mcp-calls",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "simulated",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "mcp_list_call_receipts:simulated",
+        "mcp_list_call_receipts:simulation_not_authoritative"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:unsupported-prover-cache",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "unsupported",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "kernel_prover_cache:unsupported"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:unknown-package-surfaces",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "unknown",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "actual_package_surfaces:unknown"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    }
+  ],
+  "safety_gates": {
+    "canary_graph_fails_closed": true,
+    "cross_root_fails_closed": true,
+    "focused_adapter_not_authority": true,
+    "missing_fails_closed": true,
+    "partial_fails_closed": true,
+    "repair_projection_deduped": true,
+    "repair_tasks_carry_reproof": true,
+    "repair_tasks_carry_validation": true,
+    "runtime_model_calls_fail_closed": true,
+    "simulated_mcp_fails_closed": true,
+    "stale_fails_closed": true,
+    "synthesized_fails_closed": true,
+    "unknown_fails_closed": true,
+    "unsupported_fails_closed": true
+  },
+  "schema": "ipfs_accelerate_py/agent-supervisor/production-composition@1",
+  "summary": {
+    "attack_case_count": 13,
+    "authority_granted": true,
+    "case_count": 15,
+    "false_authoritative_admission_count": 0,
+    "healthy_authority_ok": true,
+    "healthy_case_count": 2,
+    "isolation_clean": true,
+    "missed_fail_closed_count": 0,
+    "production_eligible": true,
+    "repair_task_count": 2,
+    "repair_tasks_deduplicated": true
+  },
+  "task_id": "SCA-622",
+  "version": "1"
+}
