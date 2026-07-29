@@ -1169,7 +1169,9 @@ Normative:
 
 ## SCA-178 Project runtime findings into the accelerator repair board
 
-- Status: active
+- Status: completed
+- Completion: manual
+- Completion evidence: RuntimeContractMismatchRefinery@1 is committed in ipfs_accelerate_py at 20c810a24 with ignored rescue-output preservation at 4674f1eaf; the focused 15-test suite and 432-test supervisor regression pass. The deterministic repair-board SHA256 is dc6a9948e9bba0ea904f9ef653866f5d33d3cfa9ad7c5a4671fcb05e6366baca and runtime-triage SHA256 is 16d43dd543b4e6be5129822aa0fc02070af95cc3a7ec0564c7677334e4ed9b79; generation made zero model, provider, or LLM calls.
 - Priority: P0
 - Track: runtime-triage
 - Depends on: SCA-100, SCA-101, SCA-121, SCA-177
