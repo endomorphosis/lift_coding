@@ -1144,7 +1144,7 @@ Normative:
 
 ## SCA-177 Add runtime drift and vulnerability rules
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: runtime-security
 - Depends on: SCA-091, SCA-175, SCA-176
