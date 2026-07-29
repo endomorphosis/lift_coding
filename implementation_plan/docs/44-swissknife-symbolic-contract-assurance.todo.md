@@ -456,7 +456,7 @@ Normative:
 
 ## SCA-081 Implement capability-checked proof receipt attestation
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: zk-attestation
 - Depends on: SCA-070, SCA-080
