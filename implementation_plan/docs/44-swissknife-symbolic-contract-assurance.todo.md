@@ -1068,7 +1068,7 @@ Normative:
 
 ## SCA-174 Extract native agent-supervisor control and goal/task contracts
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: agent-supervisor
 - Depends on: SCA-170
