@@ -1,0 +1,69 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/runtime-service-authority@1",
+  "service_id": "swissknife-mcp-runtime-v1",
+  "display_name": "SwissKnife MCP++ and model runtime services",
+  "version": "1",
+  "evidence_term": "SCAEV181MCPRUNTIME",
+  "modules": [
+    "ipfs_accelerate_py.mcp_server.mcplusplus.idl_registry",
+    "ipfs_accelerate_py.agent_supervisor.analysis.mcp_live_conformance"
+  ],
+  "endpoints": [
+    {
+      "id": "mcp-plus-plus-in-process",
+      "kind": "mcp",
+      "transport": "in_process",
+      "route_profile_id": "mcp-plus-plus-v1",
+      "operations": ["tools/list", "tools/call"],
+      "health_proves_identity": false
+    },
+    {
+      "id": "model-catalog-health",
+      "kind": "model",
+      "transport": "in_process",
+      "operation": "model_catalog_health",
+      "health_proves_identity": false
+    }
+  ],
+  "configuration": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/runtime-service-configuration@1",
+    "profile": "swissknife-mcp-runtime-v1",
+    "interpreter": "python3",
+    "environment_allowlist": [
+      "IPFS_ACCELERATE_AGENT_TASK_CHECKPOINT_DIR",
+      "PYTHONPATH",
+      "PATH",
+      "HOME",
+      "LANG",
+      "LC_ALL"
+    ],
+    "working_directory_policy": "repository_root",
+    "tls": {
+      "mode": "optional",
+      "require_pinned_roots": true
+    },
+    "cid": "bafkreidt6vhfch737mg4s4sm6o3jwb2e34zlpdnezyp7chkmc7rcgyoxvi"
+  },
+  "state": {
+    "schema": "ipfs_accelerate_py/agent-supervisor/runtime-service-state@1",
+    "state_schema": "ipfs_accelerate_py/agent-supervisor/snapshot-authority@1",
+    "state_relative_path": "data/agent_supervisor/swissknife_contract_assurance/state/snapshot_authority.json",
+    "db": {
+      "backend": "none",
+      "mixed_roots_allowed": false
+    },
+    "cid": "bafkreib4sf5uljbyjsoo4dm3r4hqkgtxfxhdck55sdduu7fstayaiu4rje"
+  },
+  "policies": {
+    "health_is_liveness_only": true,
+    "mixed_checkout_state_roots_allowed": false,
+    "mutate_user_units_without_install_apply": false,
+    "stale_service_code_satisfies_identity": false,
+    "pseudo_cid_allowed": false
+  },
+  "baseline_bindings": {
+    "idl_identity_profile": "mcp-idl-identity-v1",
+    "route_profile_id": "mcp-plus-plus-v1",
+    "snapshot_authority_path": "data/agent_supervisor/swissknife_contract_assurance/state/snapshot_authority.json"
+  }
+}
