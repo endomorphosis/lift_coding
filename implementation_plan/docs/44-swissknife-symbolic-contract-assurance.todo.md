@@ -3285,7 +3285,7 @@ Normative:
 
 ## SCA-231 Classify remaining parser failures into exact repair families
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: parser-health
 - Depends on: SCA-166, SCA-215, SCA-216
