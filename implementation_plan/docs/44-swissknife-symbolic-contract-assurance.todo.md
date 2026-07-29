@@ -3264,7 +3264,7 @@ Normative:
 - Status: todo
 - Priority: P1
 - Track: status-projection
-- Depends on: SCA-000, SCA-224, SCA-229
+- Depends on: SCA-000, SCA-224, SCA-229, SCA-615
 - Goal id: SCA-G160
 - Outputs: scripts/swissknife_parallel_implementation_supervisor.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_status_projection.py, data/agent_supervisor/swissknife_contract_assurance/parallel/parallel_supervisor_status.json, data/agent_supervisor/swissknife_contract_assurance/objective_graph.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_status_projection.py -q
@@ -3317,7 +3317,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229
+- Depends on: SCA-231, SCA-229, SCA-615
 - Goal id: SCA-G022
 - Outputs: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster UNIT --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
@@ -3347,7 +3347,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229
+- Depends on: SCA-231, SCA-229, SCA-615
 - Goal id: SCA-G022
 - Outputs: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster BROWSER --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
@@ -3377,7 +3377,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229
+- Depends on: SCA-231, SCA-229, SCA-615
 - Goal id: SCA-G022
 - Outputs: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster ACTIVEJS --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
@@ -3407,7 +3407,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229
+- Depends on: SCA-231, SCA-229, SCA-615
 - Goal id: SCA-G022
 - Outputs: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster PYTHON --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
@@ -3437,7 +3437,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229
+- Depends on: SCA-231, SCA-229, SCA-615
 - Goal id: SCA-G022
 - Outputs: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster STRUCTURED --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
@@ -3467,7 +3467,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229
+- Depends on: SCA-231, SCA-229, SCA-615
 - Goal id: SCA-G022
 - Outputs: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster LEGACY --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
@@ -13797,7 +13797,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: scheduler-recovery
-- Depends on: SCA-173, SCA-229
+- Depends on: SCA-173, SCA-229, SCA-615
 - Goal id: SCA-G178
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py -q -k "not leased_lane_signal_terminates_detached_descendants"
@@ -13872,7 +13872,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: production-provider-index
-- Depends on: SCA-216, SCA-229
+- Depends on: SCA-216, SCA-229, SCA-615
 - Goal id: SCA-G179
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_indexer.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py -q
@@ -14002,7 +14002,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: mcplusplus-identity
-- Depends on: SCA-220, SCA-229
+- Depends on: SCA-220, SCA-229, SCA-615
 - Goal id: SCA-G181
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py -q
@@ -14053,7 +14053,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: datasets-mcplusplus
-- Depends on: SCA-042, SCA-229
+- Depends on: SCA-042, SCA-229, SCA-615
 - Goal id: SCA-G181
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/bootstrap.py, external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/task_queue.py, external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/peer_registry.py, external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py
 - Validation: python3 -m pytest external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py -q
@@ -14155,7 +14155,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: production-authority
-- Depends on: SCA-181, SCA-221, SCA-225, SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613
+- Depends on: SCA-181, SCA-221, SCA-225, SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613, SCA-615
 - Goal id: SCA-G182
 - Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
@@ -14175,3 +14175,28 @@ Normative:
 - Effects: Publishes one content-addressed aggregate receipt for the exact end-to-end dependency closure and makes it a closeout prerequisite.
 - Evidence subset: Snapshot/coverage/AST/primary/provider/graph/surface/call/obligation/solver/kernel/cache/ZK-capability/finding/repair/runtime identities and zero-call receipt
 - Acceptance: Every mandatory stage binds the same current dependency closure; supported contracts end proved or refuted and unsupported semantics remain typed; simulated or unavailable ZK never attests; real ZK, if available, attests only the approved verified receipt; exact mismatches project bounded deduplicated repair tasks; missing/stale/partial/synthesized/cross-root evidence yields no authority; execution records zero model/provider/LLM calls.
+
+## SCA-615 Production-wire bounded Grok proposal and independent Codex review
+
+- Status: todo
+- Priority: P0
+- Track: production-provider-routing
+- Depends on: SCA-228, SCA-229
+- Goal id: SCA-G177
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-provider-route.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/production-provider-routing
+- Parallel lane: sca-production-provider-routing
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-provider-route.json
+- Interfaces: CodeEditPacket@1, ImplementationProviderRouter@1, ProviderExecutionReceipt@1, AuthoritativeCompletionGate
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Conflict policy: A lane assignment, raw provider exit code, unbounded prompt, implementer self-review, or admission boolean is not a provider-chain receipt and cannot satisfy authoritative completion.
+- Preconditions: The SCA-228 typed router and SCA-229 completion gate are present; this bootstrap repair receives independent operator/Codex review before its own completion.
+- Effects: Replaces the raw production model command for model-assisted tasks with a bounded content-addressed packet route through Grok proposal, supervisor admission, independent Codex review/repair, final admission, and the existing fenced writer/merge path.
+- Evidence subset: Task/snapshot/packet CID and bytes, Grok and Codex provider/session identities, proposal/review/admission IDs, exact changed paths, writer lease, implementation commit, final tree, token counts, fallback disposition
+- Acceptance: A production model-assisted task invokes only the typed packet route; Grok cannot self-review; Codex receives only the bounded proposal/evidence slice; the final applied patch and merge bind to the admitted review chain; absent/degraded/stale/cross-task receipts remain pending; deterministic-only tasks invoke no model; no provider receives the repository corpus.
