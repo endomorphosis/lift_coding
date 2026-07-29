@@ -172,7 +172,7 @@ Normative:
 
 ## SCA-021 Build the complete incremental SwissKnife index
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: ast-index
 - Depends on: SCA-020
