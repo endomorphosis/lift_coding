@@ -404,7 +404,7 @@ Normative:
 
 ## SCA-070 Integrate trust-aware proof caching and invalidation
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: proof-cache
 - Depends on: SCA-015, SCA-061
