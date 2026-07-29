@@ -871,3 +871,14 @@ Normative:
 - Work item count: 1
 - Work scope: codebase_file_ast
 - Acceptance: Goal-scoped refill admitted this finding from external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py:241 for SCA-G015. Use evidence in data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-164-codebase-scan-ff65e1bdaf7e.md, make only the smallest change required by that goal lineage, add or update focused validation when appropriate, and do not expand into adjacent cleanup.
+
+## SCA-165 Resolve validation retry-budget failure for SCA-120
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-021, SCA-051, SCA-061, SCA-070, SCA-090
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/baseline/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-165-sca-120-retry-budget.md
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-120. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-165-sca-120-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-120 from strategy blocked_tasks.
