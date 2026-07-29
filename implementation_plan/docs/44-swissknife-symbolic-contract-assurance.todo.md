@@ -1225,7 +1225,7 @@ Normative:
 - Depends on: SCA-166, SCA-176, SCA-177, SCA-179
 - Goal id: SCA-G176
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/contracts.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/summary.md
-- Validation: python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components --shadow
+- Validation: python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components --shadow --require-healthy
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/runtime-baseline
 - Parallel lane: sca-runtime-baseline
@@ -2686,8 +2686,9 @@ Normative:
 
 ## SCA-209 Review swallowed exception path in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2551
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Superseded after codebase-annotation-analyzer/v2 reparsed the current Python AST and found no executable swallowed_exception handler; the cited line is detector metadata, not an exception handler.
 - Priority: P1
 - Track: runtime
 - Depends on: 
