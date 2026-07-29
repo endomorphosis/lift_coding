@@ -612,7 +612,7 @@ Normative:
 
 ## SCA-111 Add bounded Grok implementation and Codex review routing
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: provider-routing
 - Depends on: SCA-100
