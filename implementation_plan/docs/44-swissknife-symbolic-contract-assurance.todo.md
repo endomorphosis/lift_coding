@@ -874,7 +874,7 @@ Normative:
 
 ## SCA-165 Resolve validation retry-budget failure for SCA-120
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
