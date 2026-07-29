@@ -278,7 +278,7 @@ Normative:
 
 ## SCA-042 Extract actual MCP surfaces from all Python packages
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: actual-contracts
 - Depends on: SCA-020, SCA-040
