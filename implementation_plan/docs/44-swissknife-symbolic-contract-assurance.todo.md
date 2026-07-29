@@ -2781,7 +2781,7 @@ Normative:
 
 - Status: completed
 - Completion: manual
-- Completion evidence: SCA-130 is integrated with sealed invalidation/refill artifacts; ipfs_accelerate commit b80f5d3d95a5b3e3efaede1748b2858af4d4d52c preserves provably nonoverlapping operator files while retaining fail-closed overlap checks; the complete 361-test todo-daemon port suite and focused contract-assurance suites pass.
+- Completion evidence: SCA-130 is integrated with sealed invalidation/refill artifacts; ipfs_accelerate commits b80f5d3d95a5b3e3efaede1748b2858af4d4d52c and cab62f1167fe7a2e318337201cd270f5907ebadf preserve nonoverlapping operator files and release completed retry repairs from strategy blocks while retaining fail-closed overlap checks; the complete 417-test supervisor regression group and focused contract-assurance suites pass.
 - Priority: P1
 - Track: ops
 - Depends on: SCA-110, SCA-200
