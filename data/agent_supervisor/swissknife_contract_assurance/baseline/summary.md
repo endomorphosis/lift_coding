@@ -38,3 +38,28 @@ The SCA-120 retry at parent `4204af6566d35631eab27ea8a5acde7d0f648ece` reran the
 - LLM, optional-provider promotion, source mutation, and backlog mutation counts remain zero.
 
 The retry does not rewrite the baseline JSON merely to bind a later supervisor merge: those artifacts intentionally remain committed to the captured parent/primary snapshot above.
+
+## Final repair validation
+
+Repair round 3 initialized the pinned `swissknife` gitlink and established a
+durable, identity-matched cache entry for the tracked symlink and the
+over-bound structured source. The exact validation command then completed
+with exit code 0 and published repository index
+`sca-repository-index:sha256:967c42e7987d8c0bbeac0173628c90c65426316893bd043ee29512bd27a6bcb0`
+for snapshot
+`sca-repository-snapshot:sha256:1bfd265e8f77ee187b9b9095ec863e1e8b91a97e46044d9633cc733cd4a0a10f`.
+
+That run disposed all 5,771 tracked paths and emitted 5,772 rows including one
+allowlisted overlay. All 3,070 parser-eligible paths received a terminal
+index outcome, but 2,830 were typed parse failures. The resulting parser
+failure ratio was 0.9218241042345277 against the reviewed maximum of 0.01;
+canaries passed, Git-root discovery was complete, and the analyzer health
+therefore remained `unhealthy` and unsafe for completion reasoning. The run
+made zero LLM calls and changed no tracked source or backlog state.
+
+The stock command's expanded repository-snapshot serialization is 3,822,303
+bytes, above both the 1,000,000-byte single-file admission limit and the
+2,000,000-byte patch limit. It is therefore retained only in the ignored
+durable index and does not replace this baseline's admitted 575,496-byte
+compact coverage commitment. No exhaustive, no-drift, or no-findings claim is
+made.
