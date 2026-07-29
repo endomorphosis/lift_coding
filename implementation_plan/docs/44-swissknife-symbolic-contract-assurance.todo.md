@@ -668,13 +668,13 @@ Normative:
 
 ## SCA-121 Triage baseline counterexamples into initial accelerator packets
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: baseline-triage
 - Depends on: SCA-100, SCA-101, SCA-200
 - Goal id: SCA-G120
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md, data/agent_supervisor/swissknife_contract_assurance/baseline/triage.json
-- Validation: python3 -m ipfs_accelerate_py.agent_supervisor.objectives.contract_mismatch_refinery --findings data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json --owner external/ipfs_accelerate --output data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md
+- Validation: python3 -m ipfs_accelerate_py.agent_supervisor.objectives.contract_mismatch_refinery --findings data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json --owner external/ipfs_accelerate --output data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md --triage-output data/agent_supervisor/swissknife_contract_assurance/baseline/triage.json --now-epoch 0
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/baseline-triage
 - Parallel lane: sca-triage
@@ -694,7 +694,7 @@ Normative:
 
 ## SCA-130 Implement continuous exact invalidation and refill
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: continuous
 - Depends on: SCA-110, SCA-200
@@ -720,7 +720,7 @@ Normative:
 
 ## SCA-140 Benchmark scale, cache reuse, and context size
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: benchmark
 - Depends on: SCA-070, SCA-100, SCA-200

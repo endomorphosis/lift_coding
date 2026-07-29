@@ -1,0 +1,30 @@
+{
+  "completion_authoritative": false,
+  "decisions": [
+    {
+      "detail": "explicitly unsupported analyzer finding is not implementation-ready: repository_index_missing",
+      "finding_id": "sha256:71b508d97dff8dd84c93b41d77efcb2913f51fdb6e771da8fb0e789aa9444382",
+      "reason_code": "unsupported_finding",
+      "task_id": ""
+    }
+  ],
+  "final_open_work": 0,
+  "generated_count": 0,
+  "initial_open_work": 0,
+  "interface": "ContractMismatchRefinery@1",
+  "last_refinery_epoch": 0,
+  "llm_call_count": 0,
+  "max_open_work": 48,
+  "model_call_count": 0,
+  "owner": "external/ipfs_accelerate",
+  "provider_call_count": 0,
+  "reason_counts": {
+    "unsupported_finding": 1
+  },
+  "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch-triage@1",
+  "snapshot_id": "sca-repository-snapshot:sha256:1bfd265e8f77ee187b9b9095ec863e1e8b91a97e46044d9633cc733cd4a0a10f",
+  "source_record_count": 1,
+  "source_records_id": "sha256:460ed6707a7c11b48b3af3b50e2556264104f28093e718ab5de993367ecc7c70",
+  "triage_id": "sha256:49e2b950cebc3af35cfcfe279e6f914f4e87338f54a7393db3863ea82ac8fa72",
+  "updated_count": 0
+}
