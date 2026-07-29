@@ -252,7 +252,7 @@ Normative:
 
 ## SCA-041 Extract SwissKnife expected MCP++ contracts
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: expected-contracts
 - Depends on: SCA-020, SCA-040
