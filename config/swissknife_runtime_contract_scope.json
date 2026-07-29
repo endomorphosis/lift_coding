@@ -1,0 +1,437 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/runtime-component-catalog@1",
+  "components": [
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/runtime-component-root@1",
+      "componentId": "model-server",
+      "displayName": "SwissKnife MCP model server",
+      "kind": "model_server",
+      "implementationSymbol": "startMCPServer",
+      "sourcePath": "src/entrypoints/mcp.ts",
+      "routeProfileId": "mcp-plus-plus-v1",
+      "authority": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-implementation-authority@1",
+        "kind": "primary",
+        "canonicalComponentId": "model-server",
+        "decision": "canonical_runtime_root",
+        "sourcePath": "src/entrypoints/mcp.ts",
+        "authorityCid": "baguqeera2lyapeagzhm3uelfkmwucsbmkcspdnnh3fgpx2b6druvnawhhwuq"
+      },
+      "rootCid": "baguqeera4h35ui4ydwqtyirobjdw6absorsetmkv7lwodfe3dv4ogewpx42q"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/runtime-component-root@1",
+      "componentId": "model-server-patched",
+      "displayName": "SwissKnife MCP compatibility entrypoint",
+      "kind": "model_server",
+      "implementationSymbol": "startMCPServer",
+      "sourcePath": "src/patches/mcp/fix-mcp-entrypoint.ts",
+      "routeProfileId": "mcp-plus-plus-v1",
+      "authority": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-implementation-authority@1",
+        "kind": "alternate",
+        "canonicalComponentId": "model-server",
+        "decision": "typescript_compatibility_patch",
+        "sourcePath": "src/patches/mcp/fix-mcp-entrypoint.ts",
+        "authorityCid": "baguqeerabcxrbumn4flxhhozrobgsgc6yti6dvh5rtdg6ucjoa6pepwjsaea"
+      },
+      "rootCid": "baguqeeradvjdzsuqbp3cljl2cs7tijqq5yigthdr7ruca5ten5ea4hmxzmha"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/runtime-component-root@1",
+      "componentId": "orchestrator",
+      "displayName": "SwissKnife MCP capability orchestrator",
+      "kind": "orchestrator",
+      "implementationSymbol": "MCPCapabilityRouter",
+      "sourcePath": "src/services/mcp/mcp-orb-capability-router.ts",
+      "routeProfileId": "mcp-plus-plus-v1",
+      "authority": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-implementation-authority@1",
+        "kind": "primary",
+        "canonicalComponentId": "orchestrator",
+        "decision": "canonical_runtime_root",
+        "sourcePath": "src/services/mcp/mcp-orb-capability-router.ts",
+        "authorityCid": "baguqeerab7jqcm5vy7bkvc44odfk73lniyahdkq32n6eebuj23qoavelgc7q"
+      },
+      "rootCid": "baguqeerartyg64nx4t2w6ralnjehslvpggvpdchbz2zqi5apd63gkohklsgq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/runtime-component-root@1",
+      "componentId": "scheduler",
+      "displayName": "SwissKnife MCP scheduler",
+      "kind": "scheduler",
+      "implementationSymbol": "MCPScheduler",
+      "sourcePath": "src/services/mcp/mcp-scheduler.ts",
+      "routeProfileId": "mcp-plus-plus-v1",
+      "authority": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-implementation-authority@1",
+        "kind": "primary",
+        "canonicalComponentId": "scheduler",
+        "decision": "canonical_runtime_root",
+        "sourcePath": "src/services/mcp/mcp-scheduler.ts",
+        "authorityCid": "baguqeeraykjij7ygd3kdur6ry5zg232osuu4wf43rfool5cffdew2twyqoya"
+      },
+      "rootCid": "baguqeerac5lmf4f5glztnx7rkhhm4jgz77lopddwkgkyj2trytmewwoyojwa"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/runtime-component-root@1",
+      "componentId": "supervisor",
+      "displayName": "SwissKnife MCP server supervisor",
+      "kind": "supervisor",
+      "implementationSymbol": "MCPServerController",
+      "sourcePath": "src/patches/mcp/mcp-server-controller.ts",
+      "routeProfileId": "mcp-plus-plus-v1",
+      "authority": {
+        "schema": "ipfs_accelerate_py/agent-supervisor/runtime-implementation-authority@1",
+        "kind": "primary",
+        "canonicalComponentId": "supervisor",
+        "decision": "canonical_runtime_root",
+        "sourcePath": "src/patches/mcp/mcp-server-controller.ts",
+        "authorityCid": "baguqeeraqjgnatj5mnzyrrzxhg6oe44jjgjekz3si5bk2anleanf2shiqvra"
+      },
+      "rootCid": "baguqeeray5ojzlnowg6jiefwcosylc5qxwcx56wwrcvfymei5lxeqqrxkn4q"
+    }
+  ],
+  "routeProfiles": [
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/runtime-route-profile@1",
+      "profileId": "mcp-plus-plus-v1",
+      "routes": [
+        {
+          "kind": "connector",
+          "transport": "typescript",
+          "selector": "MCPPPServerConnector",
+          "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts"
+        },
+        {
+          "kind": "launcher",
+          "transport": "stdio",
+          "selector": "startMCPServer",
+          "sourcePath": "src/entrypoints/mcp.ts"
+        },
+        {
+          "kind": "health",
+          "transport": "http",
+          "selector": "/health/ready",
+          "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts"
+        },
+        {
+          "kind": "list",
+          "transport": "json-rpc",
+          "selector": "tools/list",
+          "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts"
+        },
+        {
+          "kind": "call",
+          "transport": "json-rpc",
+          "selector": "tools/call",
+          "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts"
+        }
+      ],
+      "profileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za"
+    }
+  ],
+  "routes": [
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server:connector",
+      "componentId": "model-server",
+      "componentRootCid": "baguqeera4h35ui4ydwqtyirobjdw6absorsetmkv7lwodfe3dv4ogewpx42q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "connector",
+      "transport": "typescript",
+      "selector": "MCPPPServerConnector",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeraft6c4mfxxkpoevtdhb63gktfdomvuprrtqoivoxpxbft6m2774za"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server:launcher",
+      "componentId": "model-server",
+      "componentRootCid": "baguqeera4h35ui4ydwqtyirobjdw6absorsetmkv7lwodfe3dv4ogewpx42q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "launcher",
+      "transport": "stdio",
+      "selector": "startMCPServer",
+      "sourcePath": "src/entrypoints/mcp.ts",
+      "routeCid": "baguqeera5chg27wo5m2nc5oko3invqaavkkcdbmfgaxnen7lrmfrp32pq4ya"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server:health",
+      "componentId": "model-server",
+      "componentRootCid": "baguqeera4h35ui4ydwqtyirobjdw6absorsetmkv7lwodfe3dv4ogewpx42q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "health",
+      "transport": "http",
+      "selector": "/health/ready",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeerarlpypa7p7xh7o45ohtgxirjkd475n66sjjufwkuyyweaobc5ww2a"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server:list",
+      "componentId": "model-server",
+      "componentRootCid": "baguqeera4h35ui4ydwqtyirobjdw6absorsetmkv7lwodfe3dv4ogewpx42q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "list",
+      "transport": "json-rpc",
+      "selector": "tools/list",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeera32yehcwusjfsej75fgmtiwgaad3n7vqpy46by7if4pyruv4x4ppq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server:call",
+      "componentId": "model-server",
+      "componentRootCid": "baguqeera4h35ui4ydwqtyirobjdw6absorsetmkv7lwodfe3dv4ogewpx42q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "call",
+      "transport": "json-rpc",
+      "selector": "tools/call",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeradugyhkbdij3zwws32xyy2xt2lplt2iz2qet5eyxkpbua4yugpvva"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server-patched:connector",
+      "componentId": "model-server-patched",
+      "componentRootCid": "baguqeeradvjdzsuqbp3cljl2cs7tijqq5yigthdr7ruca5ten5ea4hmxzmha",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "connector",
+      "transport": "typescript",
+      "selector": "MCPPPServerConnector",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeerata6twbzodwu5hypy4vmlble4dnxa76clkybmwz2uurzvg2w2uwva"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server-patched:launcher",
+      "componentId": "model-server-patched",
+      "componentRootCid": "baguqeeradvjdzsuqbp3cljl2cs7tijqq5yigthdr7ruca5ten5ea4hmxzmha",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "launcher",
+      "transport": "stdio",
+      "selector": "startMCPServer",
+      "sourcePath": "src/entrypoints/mcp.ts",
+      "routeCid": "baguqeeraqfgu6nkszrtlwnn4ngbub6htfw4amoezqhmp6w6wal76ew4jpr3a"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server-patched:health",
+      "componentId": "model-server-patched",
+      "componentRootCid": "baguqeeradvjdzsuqbp3cljl2cs7tijqq5yigthdr7ruca5ten5ea4hmxzmha",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "health",
+      "transport": "http",
+      "selector": "/health/ready",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeratuofi6qrbgqb6ryvt3tkogb5koivjc3lyqgmjrulzfv6j3fwicea"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server-patched:list",
+      "componentId": "model-server-patched",
+      "componentRootCid": "baguqeeradvjdzsuqbp3cljl2cs7tijqq5yigthdr7ruca5ten5ea4hmxzmha",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "list",
+      "transport": "json-rpc",
+      "selector": "tools/list",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeera3a6rvmc56jeu55kbuxy5xgmzcvca2iedj5537h437wp4yvcm2aka"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "model-server-patched:call",
+      "componentId": "model-server-patched",
+      "componentRootCid": "baguqeeradvjdzsuqbp3cljl2cs7tijqq5yigthdr7ruca5ten5ea4hmxzmha",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "call",
+      "transport": "json-rpc",
+      "selector": "tools/call",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeraa6dhxuxawhfmioud4wwtmtox4dixg4qahsl777v7u4ixyo5osvoa"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "orchestrator:connector",
+      "componentId": "orchestrator",
+      "componentRootCid": "baguqeerartyg64nx4t2w6ralnjehslvpggvpdchbz2zqi5apd63gkohklsgq",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "connector",
+      "transport": "typescript",
+      "selector": "MCPPPServerConnector",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeerag3oyr4ntgf4fcnzctpsgg6txwy5qzkoymdkdklykgqpjvry3gizq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "orchestrator:launcher",
+      "componentId": "orchestrator",
+      "componentRootCid": "baguqeerartyg64nx4t2w6ralnjehslvpggvpdchbz2zqi5apd63gkohklsgq",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "launcher",
+      "transport": "stdio",
+      "selector": "startMCPServer",
+      "sourcePath": "src/entrypoints/mcp.ts",
+      "routeCid": "baguqeeraulm7arecw23gug6nco5oh2avue2ewtkn6fcijxj7k3jtue6nirca"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "orchestrator:health",
+      "componentId": "orchestrator",
+      "componentRootCid": "baguqeerartyg64nx4t2w6ralnjehslvpggvpdchbz2zqi5apd63gkohklsgq",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "health",
+      "transport": "http",
+      "selector": "/health/ready",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeraa4cf4doo42dmfrnmkdjftio4j2j564zi3avprkaezr6oemtjcoxq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "orchestrator:list",
+      "componentId": "orchestrator",
+      "componentRootCid": "baguqeerartyg64nx4t2w6ralnjehslvpggvpdchbz2zqi5apd63gkohklsgq",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "list",
+      "transport": "json-rpc",
+      "selector": "tools/list",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeracobdvl6cveecfpcfhqghgk2m2nv7qeyi2gfngmm3pchmj6gaqcrq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "orchestrator:call",
+      "componentId": "orchestrator",
+      "componentRootCid": "baguqeerartyg64nx4t2w6ralnjehslvpggvpdchbz2zqi5apd63gkohklsgq",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "call",
+      "transport": "json-rpc",
+      "selector": "tools/call",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeera6ciiuoftdz6tzzfuby3i4mgttvgccajq55zqftujjc4bkzyxoxna"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "scheduler:connector",
+      "componentId": "scheduler",
+      "componentRootCid": "baguqeerac5lmf4f5glztnx7rkhhm4jgz77lopddwkgkyj2trytmewwoyojwa",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "connector",
+      "transport": "typescript",
+      "selector": "MCPPPServerConnector",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeerazpiagx4df3odhlp2cgz7mbkgjwijnkc5ffoujuextaay2s4pheqq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "scheduler:launcher",
+      "componentId": "scheduler",
+      "componentRootCid": "baguqeerac5lmf4f5glztnx7rkhhm4jgz77lopddwkgkyj2trytmewwoyojwa",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "launcher",
+      "transport": "stdio",
+      "selector": "startMCPServer",
+      "sourcePath": "src/entrypoints/mcp.ts",
+      "routeCid": "baguqeeralvqm6s6oqu3va6a774b3oqxvcruznrt2tqmkaonzxh32yiedcrtq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "scheduler:health",
+      "componentId": "scheduler",
+      "componentRootCid": "baguqeerac5lmf4f5glztnx7rkhhm4jgz77lopddwkgkyj2trytmewwoyojwa",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "health",
+      "transport": "http",
+      "selector": "/health/ready",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeratwxfm4immdbu4n7gjauyswxoarvvyh6puxde25wd2n2wppqklcba"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "scheduler:list",
+      "componentId": "scheduler",
+      "componentRootCid": "baguqeerac5lmf4f5glztnx7rkhhm4jgz77lopddwkgkyj2trytmewwoyojwa",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "list",
+      "transport": "json-rpc",
+      "selector": "tools/list",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeera3k2cyq3yunf6d6uq2nlylzc35g5rrdqnzgk5vlxcq2udovfda7aq"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "scheduler:call",
+      "componentId": "scheduler",
+      "componentRootCid": "baguqeerac5lmf4f5glztnx7rkhhm4jgz77lopddwkgkyj2trytmewwoyojwa",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "call",
+      "transport": "json-rpc",
+      "selector": "tools/call",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeradskmq4vvzjkkgiindtzwod76fowy5fkmzfanh2sedtm4b5zyyeya"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "supervisor:connector",
+      "componentId": "supervisor",
+      "componentRootCid": "baguqeeray5ojzlnowg6jiefwcosylc5qxwcx56wwrcvfymei5lxeqqrxkn4q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "connector",
+      "transport": "typescript",
+      "selector": "MCPPPServerConnector",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeerap575wnplywkv3cj27fqiaputea4bmmtaccqr7aaenkqruo34pu2q"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "supervisor:launcher",
+      "componentId": "supervisor",
+      "componentRootCid": "baguqeeray5ojzlnowg6jiefwcosylc5qxwcx56wwrcvfymei5lxeqqrxkn4q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "launcher",
+      "transport": "stdio",
+      "selector": "startMCPServer",
+      "sourcePath": "src/entrypoints/mcp.ts",
+      "routeCid": "baguqeeracqjagzspkfdxdgxfnwozb42nbjun37dfpghj63ab663jit2tygga"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "supervisor:health",
+      "componentId": "supervisor",
+      "componentRootCid": "baguqeeray5ojzlnowg6jiefwcosylc5qxwcx56wwrcvfymei5lxeqqrxkn4q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "health",
+      "transport": "http",
+      "selector": "/health/ready",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeerapnqjdcwhhc7s2zv6kesoslcuxmwi4vhmksrpmvsbntsn7fpvm2ma"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "supervisor:list",
+      "componentId": "supervisor",
+      "componentRootCid": "baguqeeray5ojzlnowg6jiefwcosylc5qxwcx56wwrcvfymei5lxeqqrxkn4q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "list",
+      "transport": "json-rpc",
+      "selector": "tools/list",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeera4jmnbzlfgnhdiwjhk2okfm54czswcfmr6retcu3ffx4ocs2wi5ja"
+    },
+    {
+      "schema": "ipfs_accelerate_py/agent-supervisor/normalized-runtime-route@1",
+      "routeId": "supervisor:call",
+      "componentId": "supervisor",
+      "componentRootCid": "baguqeeray5ojzlnowg6jiefwcosylc5qxwcx56wwrcvfymei5lxeqqrxkn4q",
+      "routeProfileCid": "baguqeera5suawusmd757ejc7vmd6erktmd47orscjnk5yi2uh5csfs3a75za",
+      "kind": "call",
+      "transport": "json-rpc",
+      "selector": "tools/call",
+      "sourcePath": "src/services/mcp/mcp-plus-plus-connector.ts",
+      "routeCid": "baguqeeraqjr3q7bv3i6adv7zv4phjngude4bqbihvrftibc3i5qvuwmqmpoq"
+    }
+  ],
+  "catalogCid": "baguqeerai4hm3m6ec33zun7zklk3bi7qtjglnk77yfnra2fnurqq7qal2l2a"
+}

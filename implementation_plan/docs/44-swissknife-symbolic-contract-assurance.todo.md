@@ -668,13 +668,13 @@ Normative:
 
 ## SCA-121 Triage baseline counterexamples into initial accelerator packets
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: baseline-triage
 - Depends on: SCA-100, SCA-101, SCA-200
 - Goal id: SCA-G120
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md, data/agent_supervisor/swissknife_contract_assurance/baseline/triage.json
-- Validation: python3 -m ipfs_accelerate_py.agent_supervisor.objectives.contract_mismatch_refinery --findings data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json --owner external/ipfs_accelerate --output data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md
+- Validation: python3 -m ipfs_accelerate_py.agent_supervisor.objectives.contract_mismatch_refinery --findings data/agent_supervisor/swissknife_contract_assurance/baseline/contract_findings.json --owner external/ipfs_accelerate --output data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md --triage-output data/agent_supervisor/swissknife_contract_assurance/baseline/triage.json --now-epoch 0
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/baseline-triage
 - Parallel lane: sca-triage
@@ -694,7 +694,7 @@ Normative:
 
 ## SCA-130 Implement continuous exact invalidation and refill
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: continuous
 - Depends on: SCA-110, SCA-200
@@ -720,7 +720,7 @@ Normative:
 
 ## SCA-140 Benchmark scale, cache reuse, and context size
 
-- Status: active
+- Status: completed
 - Priority: P1
 - Track: benchmark
 - Depends on: SCA-070, SCA-100, SCA-200
@@ -2776,3 +2776,20 @@ Normative:
 - Work item count: 1
 - Work scope: codebase_file_ast
 - Acceptance: Goal-scoped refill admitted this finding from external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:2554 for SCA-G172. Use evidence in data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-29-sca-210-codebase-scan-b078ee596ea9.md, make only the smallest change required by that goal lineage, add or update focused validation when appropriate, and do not expand into adjacent cleanup.
+
+## SCA-211 Resolve merge retry-budget failure for SCA-130
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-110, SCA-200
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/state/invalidation.jsonl, data/agent_supervisor/swissknife_contract_assurance/state/refill_metrics.json, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_incremental.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-211-sca-130-merge-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 2048
+- Parallel lane: sca-continuous
+- Predicted files: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_incremental.py
+- Allow concurrent with: SCA-121, SCA-140, SCA-150
+- Conflict policy: Preserve historical receipts and mark stale; never delete evidence to manufacture clean state.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-130. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-211-sca-130-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-130 from strategy blocked_tasks.
