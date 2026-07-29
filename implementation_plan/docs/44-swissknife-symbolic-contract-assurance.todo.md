@@ -146,7 +146,7 @@ Normative:
 
 ## SCA-020 Add deterministic TypeScript and JavaScript AST extraction
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: ast
 - Depends on: SCA-015
