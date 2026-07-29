@@ -13774,3 +13774,19 @@ Normative:
 - Acceptance: Old row assignments are exact with no duplicate or unassigned failure; the fresh full index has complete dispositions, no parser failures at all, and ratio 0; execution records zero model/provider/LLM calls.
 
 <!-- END GENERATED SCA PARSER FAILURE BACKLOG V1 -->
+
+## SCA-513 Resolve 1 preflight-conflicting backlogged worktree merges
+
+- Status: blocked
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Blocked reason: operator_reconciliation_required
+- Priority: P1
+- Track: ops
+- Fingerprint: 8cbfd9cd6102ce262d574f59d32179286f148ba8
+- Dedupe key: reconciliation_guardrail:preflight_merge_conflict
+- Depends on:
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-513-reconciliation-8cbfd9cd6102.md
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-513-reconciliation-8cbfd9cd6102.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
