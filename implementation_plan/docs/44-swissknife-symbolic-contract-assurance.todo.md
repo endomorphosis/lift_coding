@@ -482,7 +482,7 @@ Normative:
 
 ## SCA-090 Build the deterministic contract mismatch analyzer
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: mismatches
 - Depends on: SCA-051, SCA-061
