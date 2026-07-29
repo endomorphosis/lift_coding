@@ -3185,7 +3185,7 @@ Normative:
 
 ## SCA-227 Serialize crash-fence reconciliation and narrow the maintenance lease
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: supervisor-safety
 - Depends on: SCA-224
