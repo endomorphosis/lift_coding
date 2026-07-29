@@ -2618,3 +2618,16 @@ Normative:
 - Provider role: grok-implement, codex-review
 - Context budget tokens: 2048
 - Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-203. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-206-sca-203-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-203 from strategy blocked_tasks.
+
+## SCA-207 Resolve validation retry-budget failure for SCA-204
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/discovery, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-29-sca-207-sca-204-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 2048
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-204. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-29-sca-207-sca-204-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-204 from strategy blocked_tasks.
