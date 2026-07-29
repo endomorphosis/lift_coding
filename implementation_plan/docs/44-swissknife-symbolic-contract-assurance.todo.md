@@ -1225,7 +1225,7 @@ Normative:
 - Depends on: SCA-166, SCA-176, SCA-177, SCA-179
 - Goal id: SCA-G176
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/coverage.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/contracts.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/findings.json, data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components/summary.md
-- Validation: python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components --shadow
+- Validation: python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components --shadow --require-healthy
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/runtime-baseline
 - Parallel lane: sca-runtime-baseline
