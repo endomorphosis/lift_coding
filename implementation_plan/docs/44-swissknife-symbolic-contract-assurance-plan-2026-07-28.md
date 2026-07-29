@@ -169,13 +169,15 @@ run succeeds.
 The publication workflow is now split:
 
 1. `SCA-215` implements and tests the fail-closed writer.
-2. `SCA-231` deterministically classifies and repairs the remaining parser
-   clusters without weakening thresholds.
+2. `SCA-231` deterministically classifies every retained failure into exact,
+   non-authoritative repair families; triage cannot satisfy resolution or
+   analyzer health.
 3. `SCA-232` through `SCA-237` perform bounded family repairs, while
    `SCA-238` through `SCA-495` verify each exact failure row with zero model
    calls.
-4. `SCA-496` through `SCA-511` fan in the row receipts and `SCA-512` requires
-   a fresh exact-set and health-gate scan.
+4. `SCA-496` through `SCA-511` fan in the row receipts and `SCA-512` invokes
+   the real indexer in an isolated output root, retains the fresh index, and
+   requires zero parser failures before publication.
 5. `SCA-229` enforces deterministic-only and authoritative completion receipts.
 6. `SCA-225` performs the foreground full scan and publication with zero model
    calls only after `SCA-512`.

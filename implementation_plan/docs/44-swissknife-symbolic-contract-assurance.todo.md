@@ -3283,7 +3283,7 @@ Normative:
 - Evidence subset: Board/objective content IDs, process/lease generations, lane heartbeats and projection timestamps
 - Acceptance: Current task/complete/blocked/ready counts match the board, the objective graph contains every current goal, active labels distinguish live workers from dependency-blocked tasks, and legacy dead-PID status cannot appear authoritative.
 
-## SCA-231 Classify and repair the remaining parser-failure clusters
+## SCA-231 Classify remaining parser failures into exact repair families
 
 - Status: todo
 - Priority: P0
@@ -3305,9 +3305,9 @@ Normative:
 - Runtime model calls: 0
 - Conflict policy: Cluster exact typed failures by parser identity/reason/path family; do not weaken the 10/0.01 budget, relabel malformed source as success, or silently exclude contract-bearing paths.
 - Preconditions: The diagnostic audit index `bd7cd357…` is retained with 258 typed failures among 3,369 eligible paths.
-- Effects: Separates genuine source defects, intentionally invalid fixtures, generated/vendor artifacts, unsupported syntax, and parser defects into reviewed dispositions or minimal analyzer repairs.
+- Effects: Produces exact non-authoritative triage for all 258 retained failures and the bounded repair-family manifest; exclusions do not satisfy resolution or analyzer health.
 - Evidence subset: Path/content/parser/toolchain/CAS/reason cluster identities and bounded representative fixtures
-- Acceptance: Every one of the 258 failures belongs to one deterministic content-addressed cluster; exclusions require an explicit reviewed policy and cannot hide MCP/runtime surfaces; parser repairs have positive/negative fixtures; a fresh full scan meets the reviewed health gate without changing its thresholds.
+- Acceptance: Every one of the 258 failures belongs to one deterministic content-addressed cluster exactly once; triage remains non-authoritative, cannot hide MCP/runtime surfaces, and cannot satisfy a repair task or the fresh health authority owned exclusively by SCA-512.
 
 <!-- BEGIN GENERATED SCA PARSER FAILURE BACKLOG V1 -->
 
@@ -3318,15 +3318,15 @@ Normative:
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229
 - Goal id: SCA-G022
-- Outputs: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/unit/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster UNIT --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/unit/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Outputs: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster UNIT --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/unit
 - Parallel lane: sca-parser-failure-unit
 - Resource class: cpu-large
 - Resource stage: repair
 - Implementation timeout seconds: 21600
-- Predicted files: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/unit/repository-index.json
+- Predicted files: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
 - Interfaces: ParserFailureBacklog@1, RepositoryIndexer@1
 - Context budget tokens: 2048
 - Provider role: grok-implement, codex-review
@@ -3334,11 +3334,12 @@ Normative:
 - Runtime model call maximum: 1
 - Failure family: UNIT
 - Failure count: 232
+- Repair strategy: one symbolic deterministic transform; no per-file prompting
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Preconditions: SCA-231 retains exact triage and SCA-229 enforces bounded provider/completion receipts.
-- Effects: Produces targeted source/analyzer repairs plus a deterministic fresh-index resolution receipt for this family.
+- Effects: Applies one deterministic family repair or regeneration transform, then produces a compact receipt from an isolated fresh repository scan.
 - Evidence subset: sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7, sca-repository-snapshot:sha256:d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb, family UNIT, 232 exact row handles
-- Acceptance: Repair or deterministically regenerate every retained unit-test path. Prefix exclusions are forbidden because these tests include scheduler and expected-behavior contract evidence.
+- Acceptance: Repair or deterministically regenerate every retained unit-test path. Prefix exclusions are forbidden because these tests include scheduler and expected-behavior contract evidence. Implement one deterministic family transform and batch-apply it; do not prompt once per file or retain the temporary full index.
 
 ## SCA-233 Repair converted browser-test parser failures
 
@@ -3347,15 +3348,15 @@ Normative:
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229
 - Goal id: SCA-G022
-- Outputs: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/browser/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster BROWSER --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/browser/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Outputs: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster BROWSER --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/browser
 - Parallel lane: sca-parser-failure-browser
 - Resource class: cpu-large
 - Resource stage: repair
 - Implementation timeout seconds: 21600
-- Predicted files: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/browser/repository-index.json
+- Predicted files: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
 - Interfaces: ParserFailureBacklog@1, RepositoryIndexer@1
 - Context budget tokens: 2048
 - Provider role: grok-implement, codex-review
@@ -3363,11 +3364,12 @@ Normative:
 - Runtime model call maximum: 1
 - Failure family: BROWSER
 - Failure count: 9
+- Repair strategy: one symbolic deterministic transform; no per-file prompting
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Preconditions: SCA-231 retains exact triage and SCA-229 enforces bounded provider/completion receipts.
-- Effects: Produces targeted source/analyzer repairs plus a deterministic fresh-index resolution receipt for this family.
+- Effects: Applies one deterministic family repair or regeneration transform, then produces a compact receipt from an isolated fresh repository scan.
 - Evidence subset: sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7, sca-repository-snapshot:sha256:d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb, family BROWSER, 9 exact row handles
-- Acceptance: Repair or deterministically regenerate all nine browser tests and retain their behavior assertions as indexed contract evidence.
+- Acceptance: Repair or deterministically regenerate all nine browser tests and retain their behavior assertions as indexed contract evidence. Implement one deterministic family transform and batch-apply it; do not prompt once per file or retain the temporary full index.
 
 ## SCA-234 Repair active JavaScript and content-routing parser failures
 
@@ -3376,15 +3378,15 @@ Normative:
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229
 - Goal id: SCA-G022
-- Outputs: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/activejs/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster ACTIVEJS --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/activejs/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Outputs: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster ACTIVEJS --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/activejs
 - Parallel lane: sca-parser-failure-active-js
 - Resource class: cpu-large
 - Resource stage: repair
 - Implementation timeout seconds: 21600
-- Predicted files: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/activejs/repository-index.json
+- Predicted files: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
 - Interfaces: ParserFailureBacklog@1, RepositoryIndexer@1
 - Context budget tokens: 2048
 - Provider role: grok-implement, codex-review
@@ -3392,11 +3394,12 @@ Normative:
 - Runtime model call maximum: 1
 - Failure family: ACTIVEJS
 - Failure count: 4
+- Repair strategy: one symbolic deterministic transform; no per-file prompting
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Preconditions: SCA-231 retains exact triage and SCA-229 enforces bounded provider/completion receipts.
-- Effects: Produces targeted source/analyzer repairs plus a deterministic fresh-index resolution receipt for this family.
+- Effects: Applies one deterministic family repair or regeneration transform, then produces a compact receipt from an isolated fresh repository scan.
 - Evidence subset: sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7, sca-repository-snapshot:sha256:d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb, family ACTIVEJS, 4 exact row handles
-- Acceptance: Use content/shebang-aware routing for the shell program and real parser success for the three JavaScript tests; the MCP client mock may not be excluded or treated as non-contract evidence.
+- Acceptance: Use content/shebang-aware routing for the shell program and real parser success for the three JavaScript tests; the MCP client mock may not be excluded or treated as non-contract evidence. Implement one deterministic family transform and batch-apply it; do not prompt once per file or retain the temporary full index.
 
 ## SCA-235 Repair Python failures and classify semantic-looking symlinks
 
@@ -3405,15 +3408,15 @@ Normative:
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229
 - Goal id: SCA-G022
-- Outputs: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/python/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster PYTHON --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/python/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Outputs: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster PYTHON --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/python
 - Parallel lane: sca-parser-failure-python
 - Resource class: cpu-large
 - Resource stage: repair
 - Implementation timeout seconds: 21600
-- Predicted files: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/python/repository-index.json
+- Predicted files: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
 - Interfaces: ParserFailureBacklog@1, RepositoryIndexer@1
 - Context budget tokens: 2048
 - Provider role: grok-implement, codex-review
@@ -3421,11 +3424,12 @@ Normative:
 - Runtime model call maximum: 1
 - Failure family: PYTHON
 - Failure count: 3
+- Repair strategy: one symbolic deterministic transform; no per-file prompting
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Preconditions: SCA-231 retains exact triage and SCA-229 enforces bounded provider/completion receipts.
-- Effects: Produces targeted source/analyzer repairs plus a deterministic fresh-index resolution receipt for this family.
+- Effects: Applies one deterministic family repair or regeneration transform, then produces a compact receipt from an isolated fresh repository scan.
 - Evidence subset: sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7, sca-repository-snapshot:sha256:d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb, family PYTHON, 3 exact row handles
-- Acceptance: Classify EntryKind.SYMLINK before suffix routing and add positive and negative fixtures for all ten semantic-looking symlinks; fix the two real indentation defects.
+- Acceptance: Classify EntryKind.SYMLINK before suffix routing and add positive and negative fixtures for all ten semantic-looking symlinks; fix the two real indentation defects. Implement one deterministic family transform and batch-apply it; do not prompt once per file or retain the temporary full index.
 
 ## SCA-236 Repair or explicitly type structured-data parser failures
 
@@ -3434,15 +3438,15 @@ Normative:
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229
 - Goal id: SCA-G022
-- Outputs: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/structured/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster STRUCTURED --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/structured/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
+- Outputs: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster STRUCTURED --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/structured
 - Parallel lane: sca-parser-failure-structured
 - Resource class: cpu-large
 - Resource stage: repair
 - Implementation timeout seconds: 21600
-- Predicted files: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/structured/repository-index.json
+- Predicted files: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
 - Interfaces: ParserFailureBacklog@1, RepositoryIndexer@1
 - Context budget tokens: 2048
 - Provider role: grok-implement, codex-review
@@ -3450,11 +3454,12 @@ Normative:
 - Runtime model call maximum: 1
 - Failure family: STRUCTURED
 - Failure count: 2
+- Repair strategy: one symbolic deterministic transform; no per-file prompting
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Preconditions: SCA-231 retains exact triage and SCA-229 enforces bounded provider/completion receipts.
-- Effects: Produces targeted source/analyzer repairs plus a deterministic fresh-index resolution receipt for this family.
+- Effects: Applies one deterministic family repair or regeneration transform, then produces a compact receipt from an isolated fresh repository scan.
 - Evidence subset: sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7, sca-repository-snapshot:sha256:d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb, family STRUCTURED, 2 exact row handles
-- Acceptance: Make the empty JSON valid and give the oversized generated AST a reviewed non-excluded typed disposition or a bounded parse path.
+- Acceptance: Make the empty JSON valid and give the oversized generated AST a reviewed non-excluded typed disposition or a bounded parse path. Implement one deterministic family transform and batch-apply it; do not prompt once per file or retain the temporary full index.
 
 ## SCA-237 Repair legacy-archive JavaScript parser failures
 
@@ -3463,15 +3468,15 @@ Normative:
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229
 - Goal id: SCA-G022
-- Outputs: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/legacy/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster LEGACY --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/legacy/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Outputs: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster LEGACY --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/legacy
 - Parallel lane: sca-parser-failure-legacy
 - Resource class: cpu-large
 - Resource stage: repair
 - Implementation timeout seconds: 21600
-- Predicted files: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/legacy/repository-index.json
+- Predicted files: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
 - Interfaces: ParserFailureBacklog@1, RepositoryIndexer@1
 - Context budget tokens: 2048
 - Provider role: grok-implement, codex-review
@@ -3479,11 +3484,12 @@ Normative:
 - Runtime model call maximum: 1
 - Failure family: LEGACY
 - Failure count: 8
+- Repair strategy: one symbolic deterministic transform; no per-file prompting
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Preconditions: SCA-231 retains exact triage and SCA-229 enforces bounded provider/completion receipts.
-- Effects: Produces targeted source/analyzer repairs plus a deterministic fresh-index resolution receipt for this family.
+- Effects: Applies one deterministic family repair or regeneration transform, then produces a compact receipt from an isolated fresh repository scan.
 - Evidence subset: sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7, sca-repository-snapshot:sha256:d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb, family LEGACY, 8 exact row handles
-- Acceptance: Repair all eight retained legacy files or record a reviewed per-path non-excluded disposition; no directory-wide exclusion.
+- Acceptance: Repair all eight retained legacy files or record a reviewed per-path non-excluded disposition; no directory-wide exclusion. Implement one deterministic family transform and batch-apply it; do not prompt once per file or retain the temporary full index.
 
 ## SCA-238 Verify parser-failure row 003c2dac02ac
 
@@ -3516,6 +3522,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3553,6 +3560,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3590,6 +3598,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3627,6 +3636,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9ae174e5acd0b6192030acce23692d8f0ce3758bb15ac6c7c7d98e82386326e3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3664,6 +3674,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5da5bd9d6525a009820611ffa66ca3b38df16d24e3ce5f78aa3dc4809221a409
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3701,6 +3712,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:2d0e180b465145f809b99cb137d3b0416d6996d737e0d09ca08eae502f85e25a
 - Official cluster id: failure-cluster:sha256:fcc0a83c85173140011f6301ccf317da546917ed0767328a18bcd17d93334d32
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3738,6 +3750,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:d197cf70cd50f9cff818ae9948afe962d925047c0675acc5753baa2b1d3a53f6
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3775,6 +3788,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3812,6 +3826,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3849,6 +3864,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6dc1184530d6fa76e8bc5357f6e92cf9a57083b4fb5ce738afb0806af773f5c1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3886,6 +3902,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:ce2fe6e8e5da854c9673732c9af81766a4d8f9a3f46728bb29bf45f02b875249
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3923,6 +3940,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9b2c3979be8d9f44f625af2121c3c13f98317d8ead8516bfb19110fe410108ea
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3960,6 +3978,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c30a034da034cff3c4380ce1c6944bdcfe27d6cc05723b3a5a347228c090edf7
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -3997,6 +4016,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:00de2900286027a0554d61d4af9d4c9258477ccaa509a9c0c81e9ddd6a513a4e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4034,6 +4054,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4071,6 +4092,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4108,6 +4130,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9b2c3979be8d9f44f625af2121c3c13f98317d8ead8516bfb19110fe410108ea
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4145,6 +4168,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:096995b94d21694e511a132ca322ca9f65d9f052abf589d2ca82544aca785c79
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4182,6 +4206,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5dbcb0153eb0f5800b27207c47ddfd7fc2b73b15e9b26d45d3f447265d91b83b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4219,6 +4244,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4256,6 +4282,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:b6e331f33daac359409b0be7bb5b1d5f3b90374873b155894b569be2c79cc336
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4293,6 +4320,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:dcbfd1c867df5009fd5a9873b4cd230fd17343a9e77063eed14bef55a81b9455
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4330,6 +4358,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:af30c3e9ba462d3326653786c3bcebfe54816476e746501e868a4623ab4099fa
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4367,6 +4396,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5dc846489f04bc6b4198ee38e96004673d37360f1937dd30f9fb6d41b855ae46
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4404,6 +4434,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5da5bd9d6525a009820611ffa66ca3b38df16d24e3ce5f78aa3dc4809221a409
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4441,6 +4472,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3a87c15385b0fcdea991fd90a112498550babbb9605e016b62fe48fe7a610293
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4478,6 +4510,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:996112e613e05dd962e880563a611ba5da99bbfc7bc7ae2e0dcbe7bac6161e64
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4515,6 +4548,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:12c912f2863b1ebcd67e23685cb353b1b95c20667264d1825d51659a791e445c
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4552,6 +4586,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4589,6 +4624,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4626,6 +4662,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1b4f062327cba64d79e65589ef7c0147dad77e31f71a8c99b4c9b799ee3d9926
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4663,6 +4700,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:914ac0e81ae8b5269c75c7fc9d38435bacc24a7b6af2ce92e36e64cf35815a6f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4700,6 +4738,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4737,6 +4776,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:83f36a32d7685ab0653eb2b6cebc564730d41e07d4863a830e5ea7318a651eee
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4774,6 +4814,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4811,6 +4852,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:b98174597c279f03f45cce26eb0d031dcc5a7fe4b5b5d6e23d69fd3834b451dc
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4848,6 +4890,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:27dee8877a330bacc210b5ed534ff52f2403b7cd7e5497801414e2fe66f9452d
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4885,6 +4928,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9ae174e5acd0b6192030acce23692d8f0ce3758bb15ac6c7c7d98e82386326e3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4922,6 +4966,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4959,6 +5004,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9940e9d09cdf6deea278d08c1839455930ba8bbdf3452a8dbd648528378b1b34
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -4996,6 +5042,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:68bdf010b29a763d572f9c2fa528a0d1969a546858604eaedfadb3d25b10333f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5033,6 +5080,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5070,6 +5118,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:83f36a32d7685ab0653eb2b6cebc564730d41e07d4863a830e5ea7318a651eee
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5107,6 +5156,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:06a7364dccee91036d39e6e9b64529269c6f863843deac5198794521b24f2798
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5144,6 +5194,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:53b5c23f681b135c877a41269f4015ef427e3d623afb0aa124a54373af285f45
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5181,6 +5232,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:a5fb4f2b20e666448a2c9f53542117c22174bdbdb68a9eb726f1ce1623f05b42
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5218,6 +5270,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:59fbf8c5871f0797cf9d2ebb0b5cbb7ed158f5a5ece13ebbcea49fe6e9ac0f4f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5255,6 +5308,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:80858ce6871b1d45d363060113d8113762614a5d798ba1088901844510c647e8
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5292,6 +5346,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:59311c03e7a4dfa4944b05da24578360b5b29602e73314e17378ad0f80bde708
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5329,6 +5384,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:58fb5926b6d4f5c3e92e2f2a5dfdc8e7386dd5d7414511e6c2a4f99e97a4a896
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5366,6 +5422,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:68bdf010b29a763d572f9c2fa528a0d1969a546858604eaedfadb3d25b10333f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5403,6 +5460,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5440,6 +5498,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5477,6 +5536,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5514,6 +5574,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5551,6 +5612,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:e8218bccef234b5206eda3dc9c0db26130a3b24c659a69808a61c398b7c20499
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5588,6 +5650,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5da5bd9d6525a009820611ffa66ca3b38df16d24e3ce5f78aa3dc4809221a409
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5625,6 +5688,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5e19c373f43e3ca1748e55b3de1cfd4cc2fc0805891838db412aadd51f94cec8
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5662,6 +5726,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6df92eb18e026d4c6b54e23198f603bec7690d3d415f3f4f1d663a74cf694880
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5699,6 +5764,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5da5bd9d6525a009820611ffa66ca3b38df16d24e3ce5f78aa3dc4809221a409
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5736,6 +5802,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:dd3c08f9872527ba938f5eb7bdb41c427797e5f24fb38dbd980f970919cdaf91
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5773,6 +5840,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:8eb35325a2e7ba63a6caf0a749ebd48cf3fb099b573b2d41eaf25c5a25a61d3f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5810,6 +5878,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:d0c94845f95cb61d3f1dda4cc2d02bf7d3a077105b8db57e492fb95b46bea994
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5847,6 +5916,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:d89f97f0e985bfde2ec60bc079089f58410a222042ca7b09d87f987fa75750ad
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5884,6 +5954,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c5524c40ade6eb010a2cdf4dc34966abfc6ce96693ba032027a595704817a411
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5921,6 +5992,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5958,6 +6030,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6b6cd2dffce4b06ac922559be664afe2b4e9c488ba86d553cb24f91af9f8a273
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -5995,6 +6068,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6032,6 +6106,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:955202c4df0aca9f435b350869381c8808df785b6e196f7856be88d880668fd1
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: reviewed_shell_nonsemantic
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6069,6 +6144,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:dbdd3e9809781c479d5e30134c6726c6d6784e5048942b014ad2659547e278c4
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6106,6 +6182,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6143,6 +6220,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6180,6 +6258,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6217,6 +6296,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3d956d2e75088221387cd9338ff7c175f952cb15681694db13c7d10978ca5cae
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6254,6 +6334,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6291,6 +6372,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:d8962aea85eed5afad343e2560f974189c05d6bd051ae7d8c0ed1e841cd354c8
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6328,6 +6410,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6365,6 +6448,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7148367701e69ee817f2dc00ec3aedaf76ede6c0098568f61aabd0d281a689f3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6402,6 +6486,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6439,6 +6524,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6476,6 +6562,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:af30c3e9ba462d3326653786c3bcebfe54816476e746501e868a4623ab4099fa
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6513,6 +6600,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6550,6 +6638,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:f39f7d1493a7c5f475fea726b5dff06f658427dce6939be78476846625728b08
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6587,6 +6676,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6624,6 +6714,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6661,6 +6752,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:ce983caf503d5a68be853701816c33b60ab65eb59c7843a5c42118a10c56c342
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6698,6 +6790,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:4762a78aee1cc02fa85ebf28ee7e10fec102d465cafb78c73ade66f833dcca96
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6735,6 +6828,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:befd810f0fbd462647692788a490308d556a586d3be4ddda9535439e563c54de
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6772,6 +6866,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6809,6 +6904,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6775f78e932bcf7b9fedc3da42fdee07373f62d6cfd4c4d8d43522b2bf01771b
 - Official cluster id: failure-cluster:sha256:8a2f6289d5a8a04d3402d4978c7906a9e4177288d7e18ba9fa64ba7c04ee73e2
+- Required resolution: reviewed_symlink_nonsemantic
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6846,6 +6942,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6883,6 +6980,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:8eb35325a2e7ba63a6caf0a749ebd48cf3fb099b573b2d41eaf25c5a25a61d3f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6920,6 +7018,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6957,6 +7056,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -6994,6 +7094,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7031,6 +7132,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:f80b99e371f49dada8bbc59755a38879f97a3fddfc9b1d46818155fd3fcaef0d
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7068,6 +7170,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6dc1184530d6fa76e8bc5357f6e92cf9a57083b4fb5ce738afb0806af773f5c1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7105,6 +7208,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7142,6 +7246,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:a0a5cc785ca441c02297b5c92ee738acf7befd2bc8e7c64d7c9cfe33cd8bd80f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7179,6 +7284,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:b98174597c279f03f45cce26eb0d031dcc5a7fe4b5b5d6e23d69fd3834b451dc
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7216,6 +7322,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:26c4f58b66bcb4744fd2919fb5e91d61653ea17e6d75f43b71d4bb2b573ea21f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7253,6 +7360,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:16ac38061bbc42e07e886bf373cd4574ce448d0a54820b4e286446341ba508a1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7290,6 +7398,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7327,6 +7436,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7364,6 +7474,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:44e39fbcd7ec71d533a3673dfecfacac3a748592a462ac99fe8cb5fe76332154
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7401,6 +7512,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:2a57e0e9a6991ce35a7fbe1744ae0d9015ff5e69582cb96728fb419f8da5fa02
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7438,6 +7550,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:cf5a8c4909fde2c20a2caaf87fc713d2a7e576646785113ab2a7fa6fece01045
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7475,6 +7588,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7512,6 +7626,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:77515f91c4589b311f73a0234e7d652a891c2ae3bb6a9b6437d905ec0afc5cbd
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7549,6 +7664,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:84489f35e2e93220937b45cf61d5d5a5ade19ccaea1610ea18513c7193d1a7e1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7586,6 +7702,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c1a5f06edd3e961d16753ff0dc3d8d49ee101a1949d4c91eaef140ea5c002315
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7623,6 +7740,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7660,6 +7778,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:4b2a7f447664df5e05b7387a2a6d4429d0a1829f1baf1103d9bc4e2709f6eb8b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7697,6 +7816,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:445bc156f682bd1d6661dd626c1bafc65d7a9afb27efa804691906ed31ef15a7
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7734,6 +7854,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:af30c3e9ba462d3326653786c3bcebfe54816476e746501e868a4623ab4099fa
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7771,6 +7892,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7808,6 +7930,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7845,6 +7968,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:af30c3e9ba462d3326653786c3bcebfe54816476e746501e868a4623ab4099fa
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7882,6 +8006,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7919,6 +8044,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:734601935cc30810f986c58d28ab661a53f5b2c74291a745144e56ffeeabd569
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7956,6 +8082,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:44e39fbcd7ec71d533a3673dfecfacac3a748592a462ac99fe8cb5fe76332154
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -7993,6 +8120,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:190a7aceca8467040228e6670dbbb6447dbf4f51974c20a2cac20dd75595930a
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8030,6 +8158,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8067,6 +8196,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3d956d2e75088221387cd9338ff7c175f952cb15681694db13c7d10978ca5cae
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8104,6 +8234,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c63ba2864515ac79ccbc1fa753972edde71ecfa73dd688242de28602d5b00dea
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8141,6 +8272,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8178,6 +8310,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8215,6 +8348,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8252,6 +8386,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:44e39fbcd7ec71d533a3673dfecfacac3a748592a462ac99fe8cb5fe76332154
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8289,6 +8424,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8326,6 +8462,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9eee72d465e4e06f282af96381bccb354b4955955f90262822784c573375bb0a
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8363,6 +8500,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3f69cab7f648d9e38f284575ec04d20f61016d5e7b7622202b84002171013255
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8400,6 +8538,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8437,6 +8576,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8474,6 +8614,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:d1a12ff7fd1acc2c07c50e7f9f17efb48dc75f752400655baabed23f126bcb74
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8511,6 +8652,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c1a5f06edd3e961d16753ff0dc3d8d49ee101a1949d4c91eaef140ea5c002315
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8548,6 +8690,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:40b1153d3a3372e79ab0fd1e14fb16e996e882db0fd656abefe23e2318c8d7c3
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8585,6 +8728,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8622,6 +8766,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:44e39fbcd7ec71d533a3673dfecfacac3a748592a462ac99fe8cb5fe76332154
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8659,6 +8804,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8696,6 +8842,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8733,6 +8880,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8770,6 +8918,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:04ce901dd9f4af6a61fd8a9e94804141b038ab3627683c75da7334fd66eda4e0
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8807,6 +8956,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8844,6 +8994,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:445bc156f682bd1d6661dd626c1bafc65d7a9afb27efa804691906ed31ef15a7
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8881,6 +9032,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8918,6 +9070,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6dc1184530d6fa76e8bc5357f6e92cf9a57083b4fb5ce738afb0806af773f5c1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8955,6 +9108,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -8992,6 +9146,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9029,6 +9184,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9066,6 +9222,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9103,6 +9260,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5da5bd9d6525a009820611ffa66ca3b38df16d24e3ce5f78aa3dc4809221a409
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9140,6 +9298,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7de48698dd33fd1118792beb8ffde3a6ae27be167f6c31d7734d0024c0badb45
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9177,6 +9336,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c407f48106560644cb871790965e8344c0e976857a9020f20b62ff4cfccea3d9
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9214,6 +9374,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:caccf9703f7068e9d1f56fb9c5fa5a415d5a58d81d9c4cd1394e74430582e06f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9251,6 +9412,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:615563676b6d7280ac62c702118b9093a2af74af2019e6cf58143c732bf39329
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9288,6 +9450,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3a6cda3fb98d866f8497f003db326ecb9ad1025a4e8442152b09301161f0eda9
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9325,6 +9488,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9362,6 +9526,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9399,6 +9564,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:dd25ab2ec774750c9c9fa34e2e405cf9e40d1d2bb597373ce2af2f7cdd154b76
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9436,6 +9602,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:08489137fd7a1b0f79f881956b3d89f5caa0cfa361324c9aace906590f8700c0
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9473,6 +9640,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:5da5bd9d6525a009820611ffa66ca3b38df16d24e3ce5f78aa3dc4809221a409
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9510,6 +9678,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9547,6 +9716,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:16ac38061bbc42e07e886bf373cd4574ce448d0a54820b4e286446341ba508a1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9584,6 +9754,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9621,6 +9792,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:ef69a2844d0f3cc7273b1d5d7a9c121ca14e610c915e6c4ab7c65608b26e2197
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9658,6 +9830,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9695,6 +9868,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9b2c3979be8d9f44f625af2121c3c13f98317d8ead8516bfb19110fe410108ea
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9732,6 +9906,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9ae174e5acd0b6192030acce23692d8f0ce3758bb15ac6c7c7d98e82386326e3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9769,6 +9944,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:013cd370c9d1d504db25f94643170b12b0799565d45aba0bdd71015a884eca94
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9806,6 +9982,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:16ac38061bbc42e07e886bf373cd4574ce448d0a54820b4e286446341ba508a1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9843,6 +10020,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9880,6 +10058,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:cf5a8c4909fde2c20a2caaf87fc713d2a7e576646785113ab2a7fa6fece01045
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9917,6 +10096,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1c8f26f4e703aaa3df3b1757866d3b403957dfbe1e06eea7849b7c4040c1fb1e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9954,6 +10134,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -9991,6 +10172,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:f80b99e371f49dada8bbc59755a38879f97a3fddfc9b1d46818155fd3fcaef0d
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10028,6 +10210,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:68369a3c9cbf0a9fa98ae45047b782a156683866a1f4b91580ec48698b9f9341
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10065,6 +10248,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10102,6 +10286,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:8f0388cf952a2fbdfb3366b7c8e398712afff8ebb0ca279ba9cfa5fc40a49f92
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10139,6 +10324,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:68bdf010b29a763d572f9c2fa528a0d1969a546858604eaedfadb3d25b10333f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10176,6 +10362,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:b98174597c279f03f45cce26eb0d031dcc5a7fe4b5b5d6e23d69fd3834b451dc
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10213,6 +10400,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10250,6 +10438,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10287,6 +10476,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:d27a3b961086cdfd7787f8315ab978422e03816c8dc2698743e8ab335ca7f724
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10324,6 +10514,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:b0d782a6f5f03bc5396fa3cbc0f22ffaf9b28e72588ce949989b0f060856d697
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10361,6 +10552,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:17c0cd528619f782b1cac82fb4bc28b808a416e7f211412ef454243531fc8cfb
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10398,6 +10590,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7f9a4d2c677bed8612d67ec8fc670cd158aca11ac86164814d78e063fb8fd85d
 - Official cluster id: failure-cluster:sha256:d0a1926eeeb6ba04d6de18dbf382dbd2edae6d54fb3f7b1abf335d77a0b51d02
+- Required resolution: indexed_structured_data
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10435,6 +10628,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10472,6 +10666,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:e547ac34b602328febcc9a2dcb1944cccc2f906d65d483cbc4cfdd228513032a
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10509,6 +10704,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10546,6 +10742,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:e783051352725729fa7a06cf54408ba372425b92d12bb83c986c36f60e880fa2
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10583,6 +10780,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:85fbcc3bd5bfdd5d6c9b87c2aac7ee11406c3733e9a689077330e1359ba3adee
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10620,6 +10818,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:98c75843208ada4839fa3f252029bab5d05d24079db2fd03b6c5975280812008
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10657,6 +10856,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:edbfb5dd80efa58cfbf69aa3ad8c5d32c544fce4df195ec20089cd901f847ff1
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10694,6 +10894,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:e2aca5d38f8c649f23c7faebf319864f68f6bd71ce4fa3dbd22fa0ae28a71971
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10731,6 +10932,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6dc1184530d6fa76e8bc5357f6e92cf9a57083b4fb5ce738afb0806af773f5c1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10768,6 +10970,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:98c6c7c232f608a50b8fe5ec1ed1d25aaadb5b0def7f7e443031d65cb8a22ba8
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10805,6 +11008,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:dd25ab2ec774750c9c9fa34e2e405cf9e40d1d2bb597373ce2af2f7cdd154b76
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10842,6 +11046,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db8d8b95c84a4ed85f5f4be056c75431536ce4d8d1665f51f2da34fe29d72069
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10879,6 +11084,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:afb2ef8a9e952e42f776cd7e12d25404593eea41258e6308af642c7ef93a1459
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10916,6 +11122,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:deb2062c4e2d1fa81e71942edbdad5a40cba449fb39aafb725c1a753b397fde1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10953,6 +11160,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:8eb35325a2e7ba63a6caf0a749ebd48cf3fb099b573b2d41eaf25c5a25a61d3f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -10990,6 +11198,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0f9da380c1ebbc82ba69b54d5d31b3528d19ddb206b4fda4596a45648cc6f553
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11027,6 +11236,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11064,6 +11274,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1f3856fae9a7778036f5cfdefc6f72ce311fd26685f70e6a84d3788c5b32035e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11101,6 +11312,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6dc1184530d6fa76e8bc5357f6e92cf9a57083b4fb5ce738afb0806af773f5c1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11138,6 +11350,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:4fe50cabe1e1f1ccdc85f40c014b9240431f662d3bfc7e615355d69062fd3bd1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11175,6 +11388,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:4224f1c0697d3d0b02a1617a909fa6dc205c86bde7af832b8f63a7fa00727a57
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11212,6 +11426,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:13750c526b8f353f6895cfd1826cc1972e5138f5d7afcdaf9955d937ffe06f7e
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11249,6 +11464,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:dec4cb84b56eb73531aa8fdb6600ae4762212ddf09504d60345d87ecf2abad28
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11286,6 +11502,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:8dd9766291ee309a64c5128ad1fdc36aab293ba228aa5c4fc6d32f5d55b19662
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11323,6 +11540,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:ce4e81603b38290ce0f23bac644e9928e3030186fa635dfeb918c1d132bcd209
 - Official cluster id: failure-cluster:sha256:fcc0a83c85173140011f6301ccf317da546917ed0767328a18bcd17d93334d32
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11360,6 +11578,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11397,6 +11616,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:790748ffe1c1cbc59a7ea72af9d2b93b154aca90980684d2b0aa3d6b076bffca
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11434,6 +11654,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:b29712a3540e993e864b8f48f2efd646220de1580e2160500457ada910457a72
 - Official cluster id: failure-cluster:sha256:5c0d21c3f718364d5a8177102a5c248daaa06057d0e6f3e25e6ec07c8b9fc1cf
+- Required resolution: indexed_or_reviewed_generated_data
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11471,6 +11692,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:db082ec3ce416d4c5ba0c75ab2fafacc18dce1fd9427e509197c6426582a2d31
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11508,6 +11730,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3975cc202246cca3c47bea343a29d4ea6d9c246121fe4ac5fd854263e4f7c316
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11545,6 +11768,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11582,6 +11806,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:75e3f32327f0dce0d322163afe7b27852311b29100e79129e4c2c3bf2c9e0ed0
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11619,6 +11844,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:f6e74a8eac4c2f05e45cbaf1457ba00852717532e26f99c7ca16ef099fda1578
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11656,6 +11882,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:ce4677d6238f3ae40008976dca56d302651ef095227bd81f3e6f212a8c6763ec
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11693,6 +11920,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11730,6 +11958,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9cd2422d0279867b3913a727184d13f11ab8880a3cac5137fb336ac2758a6fb3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11767,6 +11996,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11804,6 +12034,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fa38b969494ba15ac9016602f718b75469d92471e97449b44a4d94b7f1865bb9
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11841,6 +12072,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1a82e36145d67a98885e48706c6bc9400830a143f4845e700f614617a4ec698a
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11878,6 +12110,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c18c0ffef187672d495da03e197b124023ba96952922a56b310187706ffb833d
 - Official cluster id: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: indexed_or_reviewed_typed_disposition
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11915,6 +12148,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:86840837a719c54afa43d18a7bca090588808d9e66d7ebceecda9e49ab7ffe10
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11952,6 +12186,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:84489f35e2e93220937b45cf61d5d5a5ade19ccaea1610ea18513c7193d1a7e1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -11989,6 +12224,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12026,6 +12262,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:1c4e7d466f4d6338455c64e9d37b68a8b5d6a90766be2b7b32cef8bad5fd2df9
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12063,6 +12300,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12100,6 +12338,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:169fe042ded8b632d48a198e4d3e095d99fb6f91010e063acc28fffbb3ce9d6b
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12137,6 +12376,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7148367701e69ee817f2dc00ec3aedaf76ede6c0098568f61aabd0d281a689f3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12174,6 +12414,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:80858ce6871b1d45d363060113d8113762614a5d798ba1088901844510c647e8
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12211,6 +12452,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12248,6 +12490,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:579aa8d69aadc38039dcd0b4c258ff17cab1de97350316a9fe985007d63c755f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12285,6 +12528,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12322,6 +12566,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9ae174e5acd0b6192030acce23692d8f0ce3758bb15ac6c7c7d98e82386326e3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12359,6 +12604,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:a2719524d6380768ecfe673369a06a95048920aaf02e05ae313507cd6aa18722
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12396,6 +12642,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:9d35461e1233eb5392a2ed87392e1b441600b61c2b74f563b18417d203a5c96c
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12433,6 +12680,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:c63ba2864515ac79ccbc1fa753972edde71ecfa73dd688242de28602d5b00dea
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12470,6 +12718,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12507,6 +12756,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:7e65f16c7e73ff4e0c05c05efa56e58bf3381f16fe775bfcec2a336bd6f1d528
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12544,6 +12794,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:393b37fd73ba07b7cd7f2cf2cd4ec15e04945739509c5bbc834572e2e5db88a3
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12581,6 +12832,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:4c9036b2c27659016b41cc3c0d8ea6e696d4877e3bd283af5e24349accd7886a
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12618,6 +12870,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12655,6 +12908,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:cf5a8c4909fde2c20a2caaf87fc713d2a7e576646785113ab2a7fa6fece01045
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12692,6 +12946,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:8ad5e9950bc1f468ece723cd2fe9282a4e66ea6d3c2cc1b25dc54b426aee63a8
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12729,6 +12984,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:68bdf010b29a763d572f9c2fa528a0d1969a546858604eaedfadb3d25b10333f
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12766,6 +13022,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:f80b99e371f49dada8bbc59755a38879f97a3fddfc9b1d46818155fd3fcaef0d
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12803,6 +13060,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:3806ec73bd93824912ef675c1e2bbf6008382632d3fb540df2e5ef65b7f50fbc
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12840,6 +13098,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12877,6 +13136,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:fd7f49480e61772db46919e6c89a9fa8266c4dbded97cfe2df577288fe3cc483
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12914,6 +13174,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:52c38b844cd93593d9553e3c244e9ace36dfe63eaeaa66306ac8580a75100ed1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12951,6 +13212,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:0155ff0f6518649a4419ae4c0ee63c695d6ad9e5743f7601e421fae2e375af82
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -12988,6 +13250,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:6874cf5a5e15805440ff90ee3443e1efd4bf1a13d0863aea04f7a7748e388ccc
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -13025,6 +13288,7 @@ Normative:
 - Parser identity: sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284
 - Parser reason digest: sha256:46764c7a84638091d425aaf1dfca266ac10ffb42c77c3672df4f9186733326e1
 - Official cluster id: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: indexed_semantic_ast
 - Conflict policy: Write only this row's unique receipt; never edit source, reclassify another row, or invoke a model.
 - Preconditions: The family receipt binds a fresh index and an explicit non-failure transition for this exact row/path.
 - Effects: Projects one content-addressed family resolution into one small independently checkable row receipt.
@@ -13487,7 +13751,7 @@ Normative:
 - Depends on: SCA-496, SCA-497, SCA-498, SCA-499, SCA-500, SCA-501, SCA-502, SCA-503, SCA-504, SCA-505, SCA-506, SCA-507, SCA-508, SCA-509, SCA-510, SCA-511
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json
-- Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-all --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --gate-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-all --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --gate-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/parser-failure/aggregate
 - Parallel lane: sca-parser-failure-aggregate
@@ -13500,12 +13764,13 @@ Normative:
 - Provider role: deterministic-only
 - Runtime model calls: 0
 - Expected retained failure count: 258
-- Reviewed maximum parser failures: 10
+- Required fresh parser failures: 0
 - Reviewed maximum parser failure ratio: 0.01
+- Proposal artifact envelope: {"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1","paths":["data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json","data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json"],"max_file_bytes":8000000,"max_patch_bytes":16000000,"max_output_bytes":32000000}
 - Conflict policy: Run one full fresh deterministic scan; never consume copied authority, weaken thresholds, omit providers, or invoke a model.
 - Preconditions: All sixteen exact fan-in receipts are complete.
 - Effects: Binds the complete old failure set to current dispositions and gates authoritative publication on fresh analyzer health.
 - Evidence subset: 258 row receipts, 16 fan-in receipts, fresh snapshot/index/AST/parser/health identities
-- Acceptance: Old row assignments are exact with no duplicate or unassigned failure; the fresh full index has complete dispositions, no unexpected new failure, at most 10 failures and ratio at most 0.01; execution records zero model/provider/LLM calls.
+- Acceptance: Old row assignments are exact with no duplicate or unassigned failure; the fresh full index has complete dispositions, no parser failures at all, and ratio 0; execution records zero model/provider/LLM calls.
 
 <!-- END GENERATED SCA PARSER FAILURE BACKLOG V1 -->
