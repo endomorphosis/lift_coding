@@ -354,7 +354,7 @@ Normative:
 
 ## SCA-060 Compile contract claims into canonical logic obligations
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: logic-ir
 - Depends on: SCA-040, SCA-051
