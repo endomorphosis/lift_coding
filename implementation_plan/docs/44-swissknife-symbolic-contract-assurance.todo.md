@@ -1094,7 +1094,7 @@ Normative:
 
 ## SCA-175 Compile runtime state-machine obligations
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: runtime-proof
 - Depends on: SCA-060, SCA-061, SCA-171, SCA-172, SCA-173, SCA-174
