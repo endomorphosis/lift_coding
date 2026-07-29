@@ -1058,7 +1058,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Evidence: SCAEV022INDEX
 - Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py, implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py -q
-- Acceptance: Snapshot authority, coverage, AST index, repository index, parser/toolchain identity, and current manifest bind the same roots; every eligible path is success or a typed bounded failure; compiler-unavailable rows are not reused after the compiler identity changes; no provider or model call occurs.
+- Acceptance: Snapshot authority, coverage, AST index, repository index, parser/toolchain identity, and current manifest bind the same roots; SCA-512 reconciles all 258 retained failures exactly once and the resulting fresh index contains zero parser failures; compiler-unavailable rows are not reused after the compiler identity changes; no provider or model call occurs.
 - Gap task: SCA-215, SCA-225, SCA-231, SCA-232, SCA-233, SCA-234, SCA-235, SCA-236, SCA-237, SCA-512
 - Conflict policy: Do not lower health thresholds or relabel parse failures; stale index roots remain historical and cannot satisfy current completion.
 

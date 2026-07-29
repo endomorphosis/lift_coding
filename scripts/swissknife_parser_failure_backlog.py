@@ -11,7 +11,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import shutil
+import subprocess
 import sys
+import tempfile
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable, Mapping
@@ -67,6 +70,42 @@ TODO_DEFAULT = Path(
 RECEIPT_ROOT = (
     "data/agent_supervisor/swissknife_contract_assurance/parser-failures"
 )
+INDEXER_RELATIVE = Path(
+    "external/ipfs_accelerate/scripts/index_repository_contracts.py"
+)
+SCOPE_CONFIG_RELATIVE = Path("config/swissknife_symbolic_contract_scope.json")
+SEMANTIC_SUCCESS_STATUSES = frozenset({"indexed", "cache_hit"})
+TYPED_NONSEMANTIC_STATUSES = frozenset({"not_applicable", "unsupported"})
+REQUIRED_SEMANTIC_PATHS: Mapping[str, frozenset[str]] = {
+    "ACTIVEJS": frozenset(
+        {
+            "test/mocks/stubs/chai-stub.js",
+            "test/unit/cli/chat-command.test.js",
+            "test/utils/mockMCPClient.js",
+        }
+    ),
+    "PYTHON": frozenset(
+        {
+            "test/fixed_web_platform/cross_browser_model_sharding.py",
+            "test/web_platform_test_output/test_hf_bert.py",
+        }
+    ),
+    "STRUCTURED": frozenset({"benchmark-results/sample-baseline.json"}),
+}
+REVIEWED_NONSEMANTIC_PATHS: Mapping[str, frozenset[str]] = {
+    "ACTIVEJS": frozenset(
+        {"ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js"}
+    ),
+    "PYTHON": frozenset(
+        {"ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py"}
+    ),
+    "STRUCTURED": frozenset(
+        {
+            "docs/ast_exports/full_asts/python/swissknife_old/"
+            "ipfs_transformers.py.ast.json"
+        }
+    ),
+}
 
 
 class BacklogError(RuntimeError):
@@ -179,6 +218,24 @@ def _family(path: str) -> str:
     if path.startswith("web/legacy-archive/"):
         return "LEGACY"
     raise BacklogError(f"unclassified parser failure path: {path}")
+
+
+def _required_resolution(path: str, family: str) -> str:
+    if family in {"UNIT", "BROWSER"}:
+        return "indexed_semantic_ast"
+    if path in REQUIRED_SEMANTIC_PATHS.get(family, frozenset()):
+        return (
+            "indexed_structured_data"
+            if family == "STRUCTURED"
+            else "indexed_semantic_ast"
+        )
+    if path in REVIEWED_NONSEMANTIC_PATHS["ACTIVEJS"]:
+        return "reviewed_shell_nonsemantic"
+    if path in REVIEWED_NONSEMANTIC_PATHS["PYTHON"]:
+        return "reviewed_symlink_nonsemantic"
+    if path in REVIEWED_NONSEMANTIC_PATHS["STRUCTURED"]:
+        return "indexed_or_reviewed_generated_data"
+    return "indexed_or_reviewed_typed_disposition"
 
 
 CLUSTERS: tuple[dict[str, Any], ...] = (
@@ -402,6 +459,7 @@ def build_payload(index_path: Path, health_path: Path) -> dict[str, Any]:
             "overlay": row.get("overlay") is True,
             "git_status": str(row.get("git_status") or ""),
             "policy_rule": str(row.get("policy_rule") or ""),
+            "required_resolution": _required_resolution(path, family),
             "receipt_path": f"{RECEIPT_ROOT}/rows/{row_digest}.json",
             "fan_in_nibble": row_digest[0],
         }
@@ -450,9 +508,6 @@ def build_payload(index_path: Path, health_path: Path) -> dict[str, Any]:
                 "failure_count": len(members),
                 "row_task_ids": members,
                 "receipt_path": f"{RECEIPT_ROOT}/clusters/{family.lower()}.json",
-                "fresh_index_path": (
-                    f"{RECEIPT_ROOT}/fresh/{family.lower()}/repository-index.json"
-                ),
             }
         )
 
@@ -583,11 +638,10 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
     for cluster in payload["clusters"]:
         family = str(cluster["family"])
         receipt = str(cluster["receipt_path"])
-        fresh = str(cluster["fresh_index_path"])
-        predicted = [*cluster["source_scopes"], receipt, fresh]
+        predicted = [*cluster["source_scopes"], receipt]
         validation = (
-            f"python3 scripts/swissknife_parser_failure_backlog.py verify-cluster "
-            f"--manifest {manifest} --cluster {family} --fresh-index {fresh} "
+            f"python3 scripts/swissknife_parser_failure_backlog.py scan-cluster "
+            f"--manifest {manifest} --cluster {family} "
             f"--receipt-out {receipt}"
         )
         blocks.append(
@@ -612,6 +666,10 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
                     ("Runtime model call maximum", "1"),
                     ("Failure family", family),
                     ("Failure count", str(cluster["failure_count"])),
+                    (
+                        "Repair strategy",
+                        "one symbolic deterministic transform; no per-file prompting",
+                    ),
                 ),
                 conflict_policy=(
                     "Edit only the declared family/analyzer scope and its unique "
@@ -623,14 +681,19 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
                     "provider/completion receipts."
                 ),
                 effects=(
-                    "Produces targeted source/analyzer repairs plus a deterministic "
-                    "fresh-index resolution receipt for this family."
+                    "Applies one deterministic family repair or regeneration "
+                    "transform, then produces a compact receipt from an isolated "
+                    "fresh repository scan."
                 ),
                 evidence_subset=(
                     f"{INDEX_ID}, {SNAPSHOT_ID}, family {family}, "
                     f"{cluster['failure_count']} exact row handles"
                 ),
-                acceptance=str(cluster["acceptance"]),
+                acceptance=(
+                    str(cluster["acceptance"])
+                    + " Implement one deterministic family transform and batch-apply "
+                    "it; do not prompt once per file or retain the temporary full index."
+                ),
             )
         )
 
@@ -677,6 +740,7 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
                     ("Parser identity", str(row["parser_identity"])),
                     ("Parser reason digest", str(row["parser_reason_sha256"])),
                     ("Official cluster id", str(row["official_cluster_id"])),
+                    ("Required resolution", str(row["required_resolution"])),
                 ),
                 conflict_policy=(
                     "Write only this row's unique receipt; never edit source, "
@@ -749,7 +813,7 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
     aggregate_receipt = str(aggregate["receipt_path"])
     aggregate_fresh = str(aggregate["fresh_index_path"])
     validation = (
-        "python3 scripts/swissknife_parser_failure_backlog.py verify-all "
+        "python3 scripts/swissknife_parser_failure_backlog.py scan-all "
         f"--manifest {manifest} --gate-dir {RECEIPT_ROOT}/gates "
         f"--fresh-index {aggregate_fresh} --receipt-out {aggregate_receipt}"
     )
@@ -773,8 +837,24 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
             extra=(
                 ("Runtime model calls", "0"),
                 ("Expected retained failure count", "258"),
-                ("Reviewed maximum parser failures", "10"),
+                ("Required fresh parser failures", "0"),
                 ("Reviewed maximum parser failure ratio", "0.01"),
+                (
+                    "Proposal artifact envelope",
+                    json.dumps(
+                        {
+                            "schema": (
+                                "ipfs_accelerate_py/agent-supervisor/"
+                                "task-artifact-envelope@1"
+                            ),
+                            "paths": [aggregate_receipt, aggregate_fresh],
+                            "max_file_bytes": 8_000_000,
+                            "max_patch_bytes": 16_000_000,
+                            "max_output_bytes": 32_000_000,
+                        },
+                        separators=(",", ":"),
+                    ),
+                ),
             ),
             conflict_policy=(
                 "Run one full fresh deterministic scan; never consume copied "
@@ -792,8 +872,8 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
             acceptance=(
                 "Old row assignments are exact with no duplicate or unassigned "
                 "failure; the fresh full index has complete dispositions, no "
-                "unexpected new failure, at most 10 failures and ratio at most "
-                "0.01; execution records zero model/provider/LLM calls."
+                "parser failures at all, and ratio 0; execution records zero "
+                "model/provider/LLM calls."
             ),
         )
     )
@@ -828,6 +908,53 @@ def _replace_publication_dependency(board: str) -> str:
     return before + heading + section + (separator + tail if separator else "")
 
 
+def _replace_triage_authority(board: str) -> str:
+    old_heading = (
+        "## SCA-231 Classify and repair the remaining parser-failure clusters"
+    )
+    heading = (
+        "## SCA-231 Classify remaining parser failures into exact repair families"
+    )
+    if old_heading in board:
+        board = board.replace(old_heading, heading, 1)
+    if heading not in board:
+        raise BacklogError("taskboard lacks the SCA-231 triage task")
+    before, after = board.split(heading, 1)
+    section, separator, tail = after.partition("\n## SCA-")
+    old_effects = (
+        "- Effects: Separates genuine source defects, intentionally invalid "
+        "fixtures, generated/vendor artifacts, unsupported syntax, and parser "
+        "defects into reviewed dispositions or minimal analyzer repairs."
+    )
+    new_effects = (
+        "- Effects: Produces exact non-authoritative triage for all 258 retained "
+        "failures and the bounded repair-family manifest; exclusions do not "
+        "satisfy resolution or analyzer health."
+    )
+    old_acceptance = (
+        "- Acceptance: Every one of the 258 failures belongs to one deterministic "
+        "content-addressed cluster; exclusions require an explicit reviewed policy "
+        "and cannot hide MCP/runtime surfaces; parser repairs have positive/negative "
+        "fixtures; a fresh full scan meets the reviewed health gate without changing "
+        "its thresholds."
+    )
+    new_acceptance = (
+        "- Acceptance: Every one of the 258 failures belongs to one deterministic "
+        "content-addressed cluster exactly once; triage remains non-authoritative, "
+        "cannot hide MCP/runtime surfaces, and cannot satisfy a repair task or the "
+        "fresh health authority owned exclusively by SCA-512."
+    )
+    if old_effects in section:
+        section = section.replace(old_effects, new_effects, 1)
+    elif new_effects not in section:
+        raise BacklogError("SCA-231 effects have unexpected content")
+    if old_acceptance in section:
+        section = section.replace(old_acceptance, new_acceptance, 1)
+    elif new_acceptance not in section:
+        raise BacklogError("SCA-231 acceptance has unexpected content")
+    return before + heading + section + (separator + tail if separator else "")
+
+
 def materialize(
     *,
     index_path: Path,
@@ -841,6 +968,7 @@ def materialize(
     board = todo_path.read_text(encoding="utf-8")
     board = _replace_generated_section(board, section)
     board = _replace_publication_dependency(board)
+    board = _replace_triage_authority(board)
     _write_json(manifest_path, manifest)
     todo_path.write_text(board, encoding="utf-8")
     return manifest
@@ -877,6 +1005,15 @@ def check(
     )
     if expected_dependency not in publication or "SCA-231" in publication.splitlines()[4]:
         raise BacklogError("SCA-225 is not gated by SCA-512")
+    triage = board.split(
+        "## SCA-231 Classify remaining parser failures into exact repair families",
+        1,
+    )[1].split("\n## SCA-", 1)[0]
+    if (
+        "Produces exact non-authoritative triage" not in triage
+        or "fresh health authority owned exclusively by SCA-512" not in triage
+    ):
+        raise BacklogError("SCA-231 still claims repair or fresh-scan authority")
     task_ids = [
         item["task_id"]
         for item in expected["payload"]["clusters"]
@@ -923,11 +1060,88 @@ def _fresh_rows(path: Path) -> tuple[dict[str, Any], dict[str, Mapping[str, Any]
     return fresh, by_path
 
 
+def _is_semantic_success(row: Mapping[str, Any], family: str) -> bool:
+    status = str(row.get("parser_status") or "")
+    kind = str(row.get("disposition_kind") or "")
+    expected_kind = "structured_data" if family == "STRUCTURED" else "semantic_ast"
+    return status in SEMANTIC_SUCCESS_STATUSES and kind == expected_kind
+
+
+def _validate_resolution(
+    *,
+    family: str,
+    path: str,
+    required: str,
+    current: Mapping[str, Any],
+) -> None:
+    status = str(current.get("parser_status") or "")
+    kind = str(current.get("disposition_kind") or "")
+    policy = str(current.get("policy_rule") or "")
+    reason = str(current.get("reason_code") or "")
+    if status == "parse_failure" or kind == "parse_failure":
+        raise BacklogError(f"parser failure remains unresolved: {path}")
+    if kind == "excluded" or "skip_" in policy:
+        raise BacklogError(f"failure was hidden by exclusion: {path}")
+    if status == "deleted":
+        raise BacklogError(f"failure path was replaced by an unreviewed deletion: {path}")
+    if not status or not kind or not policy or not reason:
+        raise BacklogError(f"failure resolution is not explicitly typed: {path}")
+    expected_required = _required_resolution(path, family)
+    if required != expected_required:
+        raise BacklogError(
+            f"manifest resolution contract drifted for {path}: {required!r}"
+        )
+
+    if required in {"indexed_semantic_ast", "indexed_structured_data"}:
+        if not _is_semantic_success(current, family):
+            raise BacklogError(
+                f"contract-bearing source requires indexed semantic AST: {path}"
+            )
+        return
+
+    if required == "reviewed_shell_nonsemantic":
+        route_evidence = f"{policy} {reason}".casefold()
+        if (
+            status not in TYPED_NONSEMANTIC_STATUSES
+            or kind not in {"text_reference", "unsupported"}
+            or not any(marker in route_evidence for marker in ("shebang", "shell"))
+        ):
+            raise BacklogError(
+                f"shell source lacks an explicit content-aware disposition: {path}"
+            )
+        return
+
+    if required == "reviewed_symlink_nonsemantic":
+        if (
+            status not in TYPED_NONSEMANTIC_STATUSES
+            or kind != "text_reference"
+            or policy != "entry_kind:symlink"
+        ):
+            raise BacklogError(
+                f"semantic-looking symlink lacks entry_kind:symlink: {path}"
+            )
+        return
+
+    if required not in {
+        "indexed_or_reviewed_generated_data",
+        "indexed_or_reviewed_typed_disposition",
+    }:
+        raise BacklogError(f"unknown resolution contract for {path}: {required!r}")
+    if status not in SEMANTIC_SUCCESS_STATUSES | TYPED_NONSEMANTIC_STATUSES:
+        raise BacklogError(f"failure has an unsupported resolution status: {path}")
+    if status in SEMANTIC_SUCCESS_STATUSES and not _is_semantic_success(
+        current, family
+    ):
+        raise BacklogError(f"semantic resolution has the wrong AST kind: {path}")
+
+
 def verify_cluster(
     manifest_path: Path,
     family: str,
     fresh_index_path: Path,
     receipt_out: Path,
+    *,
+    scan_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     payload = _manifest_payload(manifest_path)
     family = family.upper()
@@ -947,17 +1161,17 @@ def verify_cluster(
             raise BacklogError(
                 f"{old['path']} disappeared without a typed rename/deletion receipt"
             )
+        path = str(old["path"])
+        required = str(old.get("required_resolution") or "")
+        _validate_resolution(
+            family=family,
+            path=path,
+            required=required,
+            current=current,
+        )
         status = str(current.get("parser_status") or "")
         kind = str(current.get("disposition_kind") or "")
         policy = str(current.get("policy_rule") or "")
-        if status == "parse_failure":
-            raise BacklogError(f"parser failure remains unresolved: {old['path']}")
-        if kind == "excluded" or "skip_" in policy:
-            raise BacklogError(f"failure was hidden by exclusion: {old['path']}")
-        if status != "success" and family in {"UNIT", "BROWSER"}:
-            raise BacklogError(
-                f"contract-bearing test requires parser success: {old['path']}"
-            )
         resolution_rows.append(
             {
                 "task_id": old["task_id"],
@@ -969,6 +1183,7 @@ def verify_cluster(
                 "fresh_parser_status": status,
                 "fresh_disposition_kind": kind,
                 "fresh_policy_rule": policy,
+                "required_resolution": required,
             }
         )
     fresh_bytes = fresh_index_path.read_bytes()
@@ -983,6 +1198,7 @@ def verify_cluster(
         "fresh_snapshot_id": str((fresh.get("snapshot") or {}).get("snapshot_id") or ""),
         "failure_count": len(resolution_rows),
         "resolutions": resolution_rows,
+        "scan_evidence": dict(scan_evidence or {}),
         "runtime_model_calls": 0,
     }
     receipt = _envelope(receipt_payload, schema=RECEIPT_SCHEMA)
@@ -1006,6 +1222,12 @@ def verify_row(
         raise BacklogError("cluster receipt is malformed")
     if cluster_receipt.get("content_identity") != _identity(dict(cluster_payload)):
         raise BacklogError("cluster receipt content identity does not verify")
+    if (
+        cluster_payload.get("source_manifest_digest") != _identity(payload)["digest"]
+        or cluster_payload.get("family") != row["actionable_family"]
+        or cluster_payload.get("runtime_model_calls") != 0
+    ):
+        raise BacklogError("cluster receipt authority does not match the row manifest")
     resolution = next(
         (
             item
@@ -1014,7 +1236,12 @@ def verify_row(
         ),
         None,
     )
-    if resolution is None or resolution.get("row_id") != row["row_id"]:
+    if (
+        resolution is None
+        or resolution.get("row_id") != row["row_id"]
+        or resolution.get("path") != row["path"]
+        or resolution.get("required_resolution") != row["required_resolution"]
+    ):
         raise BacklogError(f"cluster receipt does not resolve exact row {task_id}")
     receipt_payload = {
         "kind": "row",
@@ -1053,13 +1280,34 @@ def verify_gate(
             not isinstance(row_payload, Mapping)
             or row_payload.get("task_id") != row["task_id"]
             or row_payload.get("row_id") != row["row_id"]
+            or row_payload.get("path") != row["path"]
+            or row_payload.get("source_manifest_digest")
+            != _identity(payload)["digest"]
+            or row_payload.get("runtime_model_calls") != 0
             or envelope.get("content_identity") != _identity(dict(row_payload))
         ):
             raise BacklogError(f"invalid row receipt for {row['task_id']}")
+        resolution = row_payload.get("resolution")
+        if (
+            not isinstance(resolution, Mapping)
+            or resolution.get("task_id") != row["task_id"]
+            or resolution.get("row_id") != row["row_id"]
+            or resolution.get("path") != row["path"]
+            or resolution.get("required_resolution") != row["required_resolution"]
+        ):
+            raise BacklogError(
+                f"row receipt has invalid fresh resolution for {row['task_id']}"
+            )
         receipts.append(
             {
                 "task_id": row["task_id"],
                 "row_id": row["row_id"],
+                "path": row["path"],
+                "fresh_row_id": str(resolution.get("fresh_row_id") or ""),
+                "fresh_parser_status": str(
+                    resolution.get("fresh_parser_status") or ""
+                ),
+                "required_resolution": row["required_resolution"],
                 "receipt_digest": envelope["content_identity"]["digest"],
             }
         )
@@ -1083,23 +1331,33 @@ def verify_all(
     gate_dir: Path,
     fresh_index_path: Path,
     receipt_out: Path,
+    *,
+    scan_evidence: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     payload = _manifest_payload(manifest_path)
     gate_receipts: list[dict[str, Any]] = []
     assigned: list[str] = []
+    assigned_rows: list[Mapping[str, Any]] = []
     for gate in payload["gates"]:
         envelope = _read_object(gate_dir / f"{gate['nibble']}.json")
         gate_payload = envelope.get("payload")
         if (
             not isinstance(gate_payload, Mapping)
             or gate_payload.get("task_id") != gate["task_id"]
+            or gate_payload.get("nibble") != gate["nibble"]
+            or gate_payload.get("failure_count") != gate["failure_count"]
+            or gate_payload.get("runtime_model_calls") != 0
             or envelope.get("content_identity") != _identity(dict(gate_payload))
         ):
             raise BacklogError(f"invalid fan-in receipt for nibble {gate['nibble']}")
         rows = gate_payload.get("rows")
         if not isinstance(rows, list):
             raise BacklogError("fan-in receipt lacks rows")
-        assigned.extend(str(item.get("row_id") or "") for item in rows)
+        for item in rows:
+            if not isinstance(item, Mapping):
+                raise BacklogError("fan-in receipt contains a non-object row")
+            assigned.append(str(item.get("row_id") or ""))
+            assigned_rows.append(item)
         gate_receipts.append(
             {
                 "task_id": gate["task_id"],
@@ -1110,6 +1368,22 @@ def verify_all(
     expected = [str(item["row_id"]) for item in payload["rows"]]
     if len(assigned) != 258 or len(set(assigned)) != 258 or set(assigned) != set(expected):
         raise BacklogError("fan-in gates do not cover every retained row exactly once")
+    manifest_by_id = {
+        str(item["row_id"]): item for item in payload["rows"]
+    }
+    for item in assigned_rows:
+        retained = manifest_by_id[str(item["row_id"])]
+        if (
+            item.get("task_id") != retained["task_id"]
+            or item.get("path") != retained["path"]
+            or item.get("required_resolution")
+            != retained["required_resolution"]
+            or item.get("fresh_parser_status") == "parse_failure"
+            or item.get("receipt_digest") in {"", None}
+        ):
+            raise BacklogError(
+                f"fan-in row differs from manifest: {retained['task_id']}"
+            )
     fresh, _ = _fresh_rows(fresh_index_path)
     health = fresh.get("health")
     if not isinstance(health, Mapping):
@@ -1123,7 +1397,7 @@ def verify_all(
         or health.get("safe_for_completion_reasoning") is not True
         or int(thresholds.get("max_parser_failures", 999999)) > 10
         or float(thresholds.get("max_parser_failure_ratio", 1.0)) > 0.01
-        or float(metrics.get("parser_failure_ratio", 1.0)) > 0.01
+        or float(metrics.get("parser_failure_ratio", 1.0)) != 0.0
     ):
         raise BacklogError("fresh index does not meet the reviewed health gate")
     fresh_failure_count = sum(
@@ -1131,8 +1405,10 @@ def verify_all(
         for row in fresh["rows"]
         if isinstance(row, Mapping) and row.get("parser_status") == "parse_failure"
     )
-    if fresh_failure_count > 10:
-        raise BacklogError("fresh index exceeds the reviewed absolute failure budget")
+    if fresh_failure_count != 0:
+        raise BacklogError(
+            "fresh index contains a parser failure after exact reconciliation"
+        )
     receipt_payload = {
         "kind": "aggregate",
         "task_id": "SCA-512",
@@ -1148,11 +1424,176 @@ def verify_all(
         "fresh_failure_count": fresh_failure_count,
         "fresh_failure_ratio": metrics.get("parser_failure_ratio"),
         "health_status": health.get("status"),
+        "scan_evidence": dict(scan_evidence or {}),
         "runtime_model_calls": 0,
     }
     receipt = _envelope(receipt_payload, schema=RECEIPT_SCHEMA)
     _write_json(receipt_out, receipt)
     return receipt
+
+
+def _bounded_process_output(
+    value: str | bytes | None, *, limit: int = 4000
+) -> str:
+    if isinstance(value, bytes):
+        value = value.decode("utf-8", errors="replace")
+    text = (value or "").strip()
+    return text[-limit:]
+
+
+def _run_fresh_index_scan(
+    *,
+    repo_root: Path,
+    output_root: Path,
+    require_healthy: bool,
+) -> tuple[Path, dict[str, Any]]:
+    repo_root = repo_root.resolve()
+    indexer = repo_root / INDEXER_RELATIVE
+    scope_config = repo_root / SCOPE_CONFIG_RELATIVE
+    if not indexer.is_file():
+        raise BacklogError(f"repository indexer is unavailable: {indexer}")
+    if not scope_config.is_file():
+        raise BacklogError(f"symbolic contract scope is unavailable: {scope_config}")
+
+    output_root.mkdir(parents=True, exist_ok=False)
+    command = [
+        sys.executable,
+        str(indexer),
+        "--repo-root",
+        str(repo_root),
+        "--scope-config",
+        str(scope_config),
+        "--output-root",
+        str(output_root),
+        "--shadow",
+        "--allow-dirty",
+        "--skip-extraction",
+        "--max-parser-failures",
+        "10",
+        "--max-parser-failure-ratio",
+        "0.01",
+    ]
+    if require_healthy:
+        command.append("--require-healthy")
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=repo_root,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=27_000 if require_healthy else 20_400,
+        )
+    except subprocess.TimeoutExpired as exc:
+        timed_out_output = _bounded_process_output(exc.stdout)
+        timed_out_error = _bounded_process_output(exc.stderr)
+        raise BacklogError(
+            "fresh repository scan exceeded its deterministic timeout: "
+            + _bounded_process_output(timed_out_output + "\n" + timed_out_error)
+        ) from exc
+    if completed.returncode != 0:
+        detail = _bounded_process_output(
+            completed.stdout + "\n" + completed.stderr
+        )
+        raise BacklogError(
+            f"fresh repository scan failed with status {completed.returncode}: "
+            f"{detail}"
+        )
+
+    fresh_index_path = output_root / "repository-index.json"
+    summary_path = output_root / "summary.json"
+    fresh, _ = _fresh_rows(fresh_index_path)
+    health = fresh.get("health")
+    metrics = health.get("metrics") if isinstance(health, Mapping) else None
+    if not isinstance(metrics, Mapping) or (
+        metrics.get("canaries_passed") is not True
+        or metrics.get("canaries_present") is not True
+        or int(metrics.get("funnel_failure_count", -1)) != 0
+        or float(metrics.get("git_root_discovery_ratio", 0.0)) != 1.0
+    ):
+        raise BacklogError("fresh repository scan did not cover the complete input funnel")
+    summary = _read_object(summary_path)
+    call_counts = {
+        key: int(summary.get(key, -1))
+        for key in ("llm_call_count", "provider_call_count", "model_call_count")
+    }
+    if any(value != 0 for value in call_counts.values()):
+        raise BacklogError(
+            f"fresh repository scan reported nonzero or absent call counts: "
+            f"{call_counts}"
+        )
+    evidence = {
+        "schema": (
+            "ipfs_accelerate_py/agent-supervisor/"
+            "parser-failure-fresh-scan-evidence@1"
+        ),
+        "mode": "aggregate_healthy" if require_healthy else "cluster_shadow",
+        "indexer_path": INDEXER_RELATIVE.as_posix(),
+        "indexer_digest": "sha256:" + _sha256_bytes(indexer.read_bytes()),
+        "scope_config_path": SCOPE_CONFIG_RELATIVE.as_posix(),
+        "scope_config_digest": "sha256:"
+        + _sha256_bytes(scope_config.read_bytes()),
+        "flags": [
+            "--shadow",
+            "--allow-dirty",
+            "--skip-extraction",
+            "--max-parser-failures=10",
+            "--max-parser-failure-ratio=0.01",
+            *(["--require-healthy"] if require_healthy else []),
+        ],
+        "summary_digest": "sha256:" + _sha256_bytes(summary_path.read_bytes()),
+        **call_counts,
+    }
+    return fresh_index_path, evidence
+
+
+def scan_cluster(
+    manifest_path: Path,
+    family: str,
+    receipt_out: Path,
+    *,
+    repo_root: Path,
+) -> dict[str, Any]:
+    with tempfile.TemporaryDirectory(prefix="sca-parser-cluster-") as temporary:
+        fresh_index_path, evidence = _run_fresh_index_scan(
+            repo_root=repo_root,
+            output_root=Path(temporary) / "index",
+            require_healthy=False,
+        )
+        return verify_cluster(
+            manifest_path,
+            family,
+            fresh_index_path,
+            receipt_out,
+            scan_evidence=evidence,
+        )
+
+
+def scan_all(
+    manifest_path: Path,
+    gate_dir: Path,
+    fresh_index_path: Path,
+    receipt_out: Path,
+    *,
+    repo_root: Path,
+) -> dict[str, Any]:
+    with tempfile.TemporaryDirectory(prefix="sca-parser-aggregate-") as temporary:
+        temporary_index, evidence = _run_fresh_index_scan(
+            repo_root=repo_root,
+            output_root=Path(temporary) / "index",
+            require_healthy=True,
+        )
+        fresh_index_path.parent.mkdir(parents=True, exist_ok=True)
+        staged = fresh_index_path.with_name(f".{fresh_index_path.name}.tmp")
+        shutil.copyfile(temporary_index, staged)
+        staged.replace(fresh_index_path)
+    return verify_all(
+        manifest_path,
+        gate_dir,
+        fresh_index_path,
+        receipt_out,
+        scan_evidence=evidence,
+    )
 
 
 def _common_paths(parser: argparse.ArgumentParser) -> None:
@@ -1176,6 +1617,14 @@ def main(argv: list[str] | None = None) -> int:
     cluster_parser.add_argument("--fresh-index", type=Path, required=True)
     cluster_parser.add_argument("--receipt-out", type=Path, required=True)
 
+    scan_cluster_parser = subparsers.add_parser("scan-cluster")
+    scan_cluster_parser.add_argument(
+        "--manifest", type=Path, default=MANIFEST_DEFAULT
+    )
+    scan_cluster_parser.add_argument("--cluster", required=True)
+    scan_cluster_parser.add_argument("--receipt-out", type=Path, required=True)
+    scan_cluster_parser.add_argument("--repo-root", type=Path, default=Path("."))
+
     row_parser = subparsers.add_parser("verify-row")
     row_parser.add_argument("--manifest", type=Path, default=MANIFEST_DEFAULT)
     row_parser.add_argument("--task-id", required=True)
@@ -1193,6 +1642,13 @@ def main(argv: list[str] | None = None) -> int:
     all_parser.add_argument("--gate-dir", type=Path, required=True)
     all_parser.add_argument("--fresh-index", type=Path, required=True)
     all_parser.add_argument("--receipt-out", type=Path, required=True)
+
+    scan_all_parser = subparsers.add_parser("scan-all")
+    scan_all_parser.add_argument("--manifest", type=Path, default=MANIFEST_DEFAULT)
+    scan_all_parser.add_argument("--gate-dir", type=Path, required=True)
+    scan_all_parser.add_argument("--fresh-index", type=Path, required=True)
+    scan_all_parser.add_argument("--receipt-out", type=Path, required=True)
+    scan_all_parser.add_argument("--repo-root", type=Path, default=Path("."))
 
     args = parser.parse_args(argv)
     try:
@@ -1221,6 +1677,13 @@ def main(argv: list[str] | None = None) -> int:
             output = verify_cluster(
                 args.manifest, args.cluster, args.fresh_index, args.receipt_out
             )
+        elif args.command == "scan-cluster":
+            output = scan_cluster(
+                args.manifest,
+                args.cluster,
+                args.receipt_out,
+                repo_root=args.repo_root,
+            )
         elif args.command == "verify-row":
             output = verify_row(
                 args.manifest,
@@ -1232,9 +1695,17 @@ def main(argv: list[str] | None = None) -> int:
             output = verify_gate(
                 args.manifest, args.nibble, args.receipt_dir, args.receipt_out
             )
-        else:
+        elif args.command == "verify-all":
             output = verify_all(
                 args.manifest, args.gate_dir, args.fresh_index, args.receipt_out
+            )
+        else:
+            output = scan_all(
+                args.manifest,
+                args.gate_dir,
+                args.fresh_index,
+                args.receipt_out,
+                repo_root=args.repo_root,
             )
     except (BacklogError, OSError, ValueError, KeyError, TypeError) as exc:
         print(json.dumps({"ok": False, "error": str(exc)}, sort_keys=True))
