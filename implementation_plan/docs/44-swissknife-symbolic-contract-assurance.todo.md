@@ -118,7 +118,9 @@ Normative:
 
 ## SCA-015 Implement the canonical multiformats and CID identity bridge
 
-- Status: active
+- Status: completed
+- Completion: automated
+- Completion evidence: 29 focused tests passed and the implementation was merged into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
 - Track: content-identity
 - Depends on: SCA-010
@@ -222,7 +224,9 @@ Normative:
 
 ## SCA-040 Define the reviewed MCP contract catalog
 
-- Status: active
+- Status: completed
+- Completion: automated
+- Completion evidence: 29 focused tests passed and the implementation was merged into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
 - Track: contracts
 - Depends on: SCA-010
@@ -785,3 +789,41 @@ Normative:
 - Effects: Documents start/status/stop/reclaim/recovery/query/retention/rollback and defines shadow, assist, and automatic gates.
 - Evidence subset: Current PID/lease/health/snapshot/backlog/cache/analyzer/evaluation state
 - Acceptance: Operator can verify live supervisor and exact bindings; shadow is default; promotion requires zero false authority and complete health gates; rollback disables model mutation but retains evidence; goal exhaustion requires current healthy scan and child completion proofs.
+
+## SCA-161 Resolve validation retry-budget failure for SCA-040
+
+- Status: completed
+- Completion: manual
+- Completion evidence: Catalog outputs were validated and merged through the isolated integration worktree on 2026-07-29
+- Priority: P1
+- Track: ops
+- Depends on: SCA-010
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_catalog.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-28-sca-161-sca-040-retry-budget.md
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-040. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-28-sca-161-sca-040-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-040 from strategy blocked_tasks.
+
+## SCA-162 Resolve validation retry-budget failure for SCA-015
+
+- Status: completed
+- Completion: manual
+- Completion evidence: Content-identity outputs were validated and merged through the isolated integration worktree on 2026-07-29
+- Priority: P1
+- Track: ops
+- Depends on: SCA-010
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-162-sca-015-retry-budget.md
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in SCA-015. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-162-sca-015-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release SCA-015 from strategy blocked_tasks.
+
+## SCA-163 Resolve dirty main checkout blocking 1 worktree merges
+
+- Status: completed
+- Completion: manual
+- Completion evidence: Reconciliation now targets agent/swissknife-sca-parallel in an ephemeral worktree; unrelated dirty main content was preserved
+- Priority: P1
+- Track: ops
+- Fingerprint: 9d07bd096ca9fcd86ac68453c056b8b53bbb1942
+- Dedupe key: reconciliation_guardrail:main_checkout_dirty
+- Depends on:
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-163-reconciliation-9d07bd096ca9.md
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by main_checkout_dirty. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-28-sca-163-reconciliation-9d07bd096ca9.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
