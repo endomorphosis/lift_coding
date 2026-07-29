@@ -6,12 +6,14 @@ from __future__ import annotations
 import argparse
 import fcntl
 import json
+import math
 import os
 import signal
 import subprocess
 import sys
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -45,6 +47,11 @@ ALLOWED_PROVIDER_ENVIRONMENT = {
     "IPFS_ACCELERATE_AGENT_REQUIRE_TASK_EXECUTION_METADATA",
     "IPFS_ACCELERATE_AGENT_TODO_VECTOR_CONTEXT_TOKEN_BUDGET",
 }
+LANE_STATUS_STARTUP_GRACE_SECONDS = 300.0
+LANE_STATUS_MIN_STALE_SECONDS = 60.0
+LANE_STATUS_MAX_STALE_SECONDS = 300.0
+LANE_STATUS_HEARTBEAT_MULTIPLIER = 4.0
+LANE_FAILURE_EXIT_CODE = 1
 
 
 @dataclass
@@ -55,8 +62,10 @@ class Lane:
     command: list[str]
     provider: str
     environment: dict[str, str]
+    supervisor_status_path: Path
     process: subprocess.Popen[bytes] | None = None
     restarts: int = 0
+    spawned_at: float = 0.0
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -363,15 +372,92 @@ def _spawn_lane(lane: Lane, *, repo_root: Path) -> None:
             stdout=output,
             stderr=subprocess.STDOUT,
         )
+        lane.spawned_at = time.monotonic()
     finally:
         output.close()
 
 
-def _all_tasks_terminal(todo_path: Path, task_prefix: str) -> bool:
+def _all_tasks_completed(todo_path: Path, task_prefix: str) -> bool:
     tasks = parse_task_file(todo_path, task_prefix)
-    return bool(tasks) and all(
-        task.status in {"completed", "blocked"} for task in tasks
+    return bool(tasks) and all(task.status == "completed" for task in tasks)
+
+
+def _timestamp_epoch(value: Any) -> float | None:
+    if isinstance(value, (int, float)) and math.isfinite(float(value)):
+        return float(value)
+    if not isinstance(value, str) or not value.strip():
+        return None
+    normalized = value.strip()
+    if normalized.endswith("Z"):
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(normalized)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.timestamp()
+
+
+def _lane_status_failure(
+    lane: Lane,
+    *,
+    now_epoch: float | None = None,
+    now_monotonic: float | None = None,
+) -> str | None:
+    process = lane.process
+    if process is None or process.poll() is not None:
+        return None
+    monotonic_now = time.monotonic() if now_monotonic is None else now_monotonic
+    if (
+        lane.spawned_at > 0
+        and monotonic_now - lane.spawned_at
+        < LANE_STATUS_STARTUP_GRACE_SECONDS
+    ):
+        return None
+
+    try:
+        payload = _read_json(lane.supervisor_status_path)
+    except (OSError, ValueError) as exc:
+        return (
+            f"lane-{lane.index:02d} status unavailable after startup grace: "
+            f"{type(exc).__name__}: {exc}"
+        )
+
+    try:
+        status_pid = int(payload.get("supervisor_pid"))
+    except (TypeError, ValueError):
+        return f"lane-{lane.index:02d} status has no valid supervisor_pid"
+    if status_pid != process.pid:
+        return (
+            f"lane-{lane.index:02d} status belongs to pid {status_pid}, "
+            f"expected {process.pid}"
+        )
+
+    updated_at = _timestamp_epoch(payload.get("updated_at"))
+    if updated_at is None:
+        return f"lane-{lane.index:02d} status has no valid updated_at"
+    try:
+        heartbeat_seconds = float(payload.get("supervisor_heartbeat_seconds"))
+    except (TypeError, ValueError):
+        heartbeat_seconds = LANE_STATUS_MIN_STALE_SECONDS
+    if not math.isfinite(heartbeat_seconds) or heartbeat_seconds <= 0:
+        heartbeat_seconds = LANE_STATUS_MIN_STALE_SECONDS
+    stale_after = max(
+        LANE_STATUS_MIN_STALE_SECONDS,
+        min(
+            LANE_STATUS_MAX_STALE_SECONDS,
+            heartbeat_seconds * LANE_STATUS_HEARTBEAT_MULTIPLIER,
+        ),
     )
+    epoch_now = time.time() if now_epoch is None else now_epoch
+    age_seconds = epoch_now - updated_at
+    if age_seconds > stale_after:
+        return (
+            f"lane-{lane.index:02d} status heartbeat is stale by "
+            f"{age_seconds:.1f}s (limit {stale_after:.1f}s)"
+        )
+    return None
 
 
 def _status_payload(
@@ -379,6 +465,8 @@ def _status_payload(
     *,
     validation: dict[str, Any],
     stopping: bool,
+    stop_reason: str = "",
+    exit_code: int | None = None,
 ) -> dict[str, Any]:
     return {
         "schema": (
@@ -387,6 +475,8 @@ def _status_payload(
         "pid": os.getpid(),
         "process_group": os.getpgrp(),
         "stopping": stopping,
+        "stop_reason": stop_reason,
+        "exit_code": exit_code,
         "updated_at": time.time(),
         "validation": validation,
         "lanes": [
@@ -403,6 +493,7 @@ def _status_payload(
                 ),
                 "restarts": lane.restarts,
                 "state_dir": str(lane.state_dir),
+                "supervisor_status_path": str(lane.supervisor_status_path),
                 "log_path": str(lane.log_path),
             }
             for lane in lanes
@@ -510,49 +601,111 @@ def run(config_path: Path) -> int:
                 command=command,
                 provider=provider_assignments[index],
                 environment=dict(provider_environment),
+                supervisor_status_path=(
+                    state_dir
+                    / (
+                        f"{profile['statePrefix']}_{index:02d}"
+                        "_supervisor_status.json"
+                    )
+                ),
             )
         )
 
     stopping = False
+    stop_reason = ""
+    exit_code = 0
+    operator_signal: int | None = None
 
-    def request_stop(_signum: int, _frame: object) -> None:
-        nonlocal stopping
+    def request_stop(signum: int, _frame: object) -> None:
+        nonlocal operator_signal, stop_reason, stopping
+        operator_signal = signum
+        if not stopping:
+            stop_reason = f"operator_signal:{signal.Signals(signum).name}"
+            stopping = True
+
+    def fail(reason: str) -> None:
+        nonlocal exit_code, stop_reason, stopping
+        if operator_signal is not None:
+            return
+        exit_code = LANE_FAILURE_EXIT_CODE
+        stop_reason = reason
         stopping = True
+        print(f"parallel supervisor failure: {reason}", file=sys.stderr, flush=True)
 
     signal.signal(signal.SIGINT, request_stop)
     signal.signal(signal.SIGTERM, request_stop)
-    for lane in lanes:
-        _spawn_lane(lane, repo_root=repo_root)
 
     restart_limit = int(profile["bounds"]["maxRestarts"])
-    _write_json_atomic(
-        status_path,
-        _status_payload(lanes, validation=validation, stopping=False),
-    )
     try:
+        for lane in lanes:
+            if stopping:
+                break
+            try:
+                _spawn_lane(lane, repo_root=repo_root)
+            except Exception as exc:
+                if operator_signal is None:
+                    fail(
+                        f"lane-{lane.index:02d} initial launch failed: "
+                        f"{type(exc).__name__}: {exc}"
+                    )
+                break
+        _write_json_atomic(
+            status_path,
+            _status_payload(
+                lanes,
+                validation=validation,
+                stopping=stopping,
+                stop_reason=stop_reason,
+                exit_code=exit_code if stopping else None,
+            ),
+        )
         while not stopping:
-            if _all_tasks_terminal(todo_path, str(profile["taskPrefix"])):
+            if _all_tasks_completed(todo_path, str(profile["taskPrefix"])):
+                stop_reason = "backlog_completed"
                 stopping = True
                 break
             for lane in lanes:
+                if stopping:
+                    break
                 process = lane.process
                 if process is None or process.poll() is None:
                     continue
                 if lane.restarts >= restart_limit:
-                    stopping = True
+                    fail(
+                        f"lane-{lane.index:02d} exhausted restart budget "
+                        f"after exit {process.poll()}"
+                    )
                     break
                 lane.restarts += 1
                 time.sleep(min(5.0, float(lane.restarts)))
-                _spawn_lane(lane, repo_root=repo_root)
+                if stopping:
+                    break
+                try:
+                    _spawn_lane(lane, repo_root=repo_root)
+                except Exception as exc:
+                    fail(
+                        f"lane-{lane.index:02d} restart failed: "
+                        f"{type(exc).__name__}: {exc}"
+                    )
+                    break
+            if not stopping:
+                for lane in lanes:
+                    status_failure = _lane_status_failure(lane)
+                    if status_failure:
+                        fail(status_failure)
+                        break
             _write_json_atomic(
                 status_path,
                 _status_payload(
                     lanes,
                     validation=validation,
                     stopping=stopping,
+                    stop_reason=stop_reason,
+                    exit_code=exit_code if stopping else None,
                 ),
             )
-            time.sleep(2.0)
+            if not stopping:
+                time.sleep(2.0)
     finally:
         for lane in lanes:
             if lane.process is not None and lane.process.poll() is None:
@@ -570,11 +723,17 @@ def run(config_path: Path) -> int:
                 process.wait(timeout=5)
         _write_json_atomic(
             status_path,
-            _status_payload(lanes, validation=validation, stopping=True),
+            _status_payload(
+                lanes,
+                validation=validation,
+                stopping=True,
+                stop_reason=stop_reason,
+                exit_code=exit_code,
+            ),
         )
         fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
         lock_handle.close()
-    return 0
+    return exit_code
 
 
 def main() -> None:
