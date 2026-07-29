@@ -2378,7 +2378,7 @@ Normative:
 
 ## SCA-201 Review swallowed exception path in external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/orchestrator_contract_extractor.py:295
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: runtime
