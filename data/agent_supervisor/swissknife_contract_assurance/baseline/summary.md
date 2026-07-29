@@ -25,3 +25,16 @@ python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-ro
 ```
 
 The expected fail-closed result in this leased worktree is exit code 2 with `RepositoryPathEscapeError`. Against an initialized checkout at the same primary commit, the stock loader additionally exposes a tracked-symlink identity mismatch and a 21,537,678-byte structured source beyond the 16 MiB parser bound; these remain typed health blockers rather than permission to claim exhaustiveness.
+
+## Retry validation
+
+The SCA-120 retry at parent `4204af6566d35631eab27ea8a5acde7d0f648ece` reran the command above and reproduced exit code 2 with `RepositoryPathEscapeError` before any output write. Independent validation of the admitted artifacts confirmed:
+
+- all 5,771 tracked SwissKnife paths have one unique, clean disposition;
+- the snapshot, scope-policy, capability, coverage, contract, and finding commitments recompute exactly;
+- all 2,676 contracts use a declared terminal status;
+- partial health keeps exhaustive, no-drift, and no-findings claims false;
+- proof and cache work remain unstarted and unfinalized; and
+- LLM, optional-provider promotion, source mutation, and backlog mutation counts remain zero.
+
+The retry does not rewrite the baseline JSON merely to bind a later supervisor merge: those artifacts intentionally remain committed to the captured parent/primary snapshot above.
