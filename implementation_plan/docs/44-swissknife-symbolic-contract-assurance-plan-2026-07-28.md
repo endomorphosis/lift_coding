@@ -530,6 +530,9 @@ The following counterexamples are now explicit planned work:
   with an "actual surfaces complete" claim;
 - datasets MCP++ bootstrap, task-queue, peer-registry, and P2P capability
   declarations overstate reachable behavior;
+- the typed SCA-228 Grok proposal and independent Codex review adapter is not
+  invoked by the production implementation command, so a lane label or raw
+  provider exit code still lacks a packet/review/admission receipt;
 - structural traces do not execute and ingest real `tools/list` and
   `tools/call` receipts; and
 - the live MCP++ service is healthy but loads a mixed, stale checkout and
@@ -542,12 +545,14 @@ from a domain-layout merge, plus one retired leased-lane module path. The
 legacy P2P workflow scheduler test also has a stale import path. These are
 high-priority implementation defects, not merely extractor findings.
 
-Tasks SCA-600 through SCA-614 close these gaps. They first repair scheduler
+Tasks SCA-600 through SCA-615 close these gaps. They first repair scheduler
 and crash-fence concurrency semantics, then production-wire provider roots,
 actual MCP surfaces, real-graph GraphRAG, solver/ZK readiness, CID profiles,
 truthful datasets capabilities, live MCP++ call receipts, and exact service
-runtime identity. SCA-614 is a deterministic aggregate gate for the complete
-chain:
+runtime identity. SCA-615 closes the implementation-provider bootstrap gap;
+model-assisted repair tasks cannot proceed until it records the bounded Grok
+proposal and independent Codex review/admission chain. SCA-614 is a
+deterministic aggregate gate for the complete chain:
 
 ```text
 SwissKnife snapshot
@@ -591,7 +596,7 @@ coverage, parser health, canaries, or provider capability is insufficient.
 | 10 | SCA-200 | Complete graph/proof/cache/mismatch baseline after health recovery |
 | 11 | SCA-121, 130, 140, 178, 179, 213-220, 222, 223 | Exact datasets adapters, current multi-root index, proof/cache/ZK orchestration, immediate runtime-integrity repairs, and refill projection |
 | 12 | SCA-180, 181, 221 | Healthy four-component runtime baseline, held-out evaluation, and proof-bound repair projection |
-| 13 | SCA-600-613 | Audit-derived scheduler, provider-composition, MCP++, proof-readiness, and runtime-identity closure |
+| 13 | SCA-600-613, 615 | Audit-derived scheduler, provider-composition, production Grok/Codex routing, MCP++, proof-readiness, and runtime-identity closure |
 | 14 | SCA-614, 160 | End-to-end production-composition gate and rollout closeout |
 
 ## Success gates

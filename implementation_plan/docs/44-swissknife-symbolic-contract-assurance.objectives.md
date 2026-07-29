@@ -1192,7 +1192,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
 - Acceptance: The production entrypoint composes current primary/provider indexes, actual package surfaces, the real indexed GraphRAG graph, real MCP++ calls, kernel-checked prover/cache receipts, optional real-ZK receipt attestation, and exact runtime identity; scheduler and fence regressions pass; missing, synthesized, simulated, partial, stale, or cross-root stages fail closed.
-- Gap task: SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613, SCA-614
+- Gap task: SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613, SCA-614, SCA-615
 - Conflict policy: Focused adapter success is retained as capability evidence but cannot satisfy production authority without an end-to-end current-root receipt.
 
 ## SCA-G178 Scheduler and crash-fence semantic recovery
