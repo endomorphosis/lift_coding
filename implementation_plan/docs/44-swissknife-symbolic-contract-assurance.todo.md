@@ -2995,7 +2995,9 @@ Normative:
 
 ## SCA-222 Restore canonical FastAPI MCP++ route reachability
 
-- Status: active
+- Status: completed
+- Completion: manual
+- Completion evidence: FastAPI now resolves the Starlette `Request` annotation, exposes explicit MCP health/list/call/JSON-RPC routes ahead of the mounted server, and registers only finite Profile G compatibility routes so canonical MCP++ endpoints are not shadowed. The focused MCP route/server suite passes 5 tests, the combined route/compaction regression passes 19 tests, the real ASGI smoke path passes, and `py_compile` plus `git diff --check` pass.
 - Priority: P0
 - Track: runtime-transport
 - Depends on: SCA-171, SCA-176
@@ -3020,7 +3022,9 @@ Normative:
 
 ## SCA-223 Remove false simulated-Groth16 DAG proof acceptance
 
-- Status: active
+- Status: completed
+- Completion: manual
+- Completion evidence: DAG compaction now emits an explicit `hash-commitment-v1` with `zero_knowledge=false` unless the canonical `ipfs_datasets_py.mcp_server.event_dag_zkp` prover and verifier accept a certificate bound to verification-key metadata. Fresh verification rejects arbitrary 64-character values, metadata/archive tampering, and persisted `verified=true` overrides. The focused proof suite passes 14 tests, the combined route/compaction regression passes 19 tests, the complete MCP++ module suite passes 147 tests, and `py_compile` plus `git diff --check` pass.
 - Priority: P0
 - Track: proof-integrity
 - Depends on: SCA-080, SCA-081
