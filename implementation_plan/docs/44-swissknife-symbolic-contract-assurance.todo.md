@@ -508,7 +508,7 @@ Normative:
 
 ## SCA-091 Add bug and vulnerability classification rules
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: security-findings
 - Depends on: SCA-090
