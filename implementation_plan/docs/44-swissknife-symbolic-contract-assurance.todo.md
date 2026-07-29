@@ -3236,7 +3236,7 @@ Normative:
 
 ## SCA-229 Separate implementation merge from authoritative task acceptance
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: completion-authority
 - Depends on: SCA-228
