@@ -2796,3 +2796,19 @@ Normative:
 - Allow concurrent with: SCA-121, SCA-140, SCA-150
 - Conflict policy: Preserve historical receipts and mark stale; never delete evidence to manufacture clean state.
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-130. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-29-sca-211-sca-130-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-130 from strategy blocked_tasks.
+
+## SCA-212 Resolve merge retry-budget failure for SCA-179
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-110, SCA-167, SCA-178
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_assurance_refill.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_assurance_refill.py, data/agent_supervisor/swissknife_contract_assurance/state/runtime_refill_metrics.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-212-sca-179-merge-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: sca-runtime-refill
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_assurance_refill.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_assurance_refill.py, data/agent_supervisor/swissknife_contract_assurance/state/runtime_refill_metrics.json
+- Conflict policy: Refill only from admitted current evidence; preserve stale receipts, enforce cooldown/open-work/depth/breadth bounds, and never certify exhaustion from unhealthy analyzers.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-179. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-212-sca-179-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-179 from strategy blocked_tasks.
