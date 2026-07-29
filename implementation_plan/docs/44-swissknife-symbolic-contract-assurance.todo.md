@@ -2924,7 +2924,7 @@ Normative:
 
 ## SCA-217 Compile endpoint anchors and observed package contracts
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: invocation-evidence
 - Depends on: SCA-041, SCA-042, SCA-051, SCA-170, SCA-175, SCA-176, SCA-213, SCA-216, SCA-222
