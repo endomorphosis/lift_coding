@@ -1196,7 +1196,9 @@ Normative:
 
 ## SCA-179 Integrate runtime contract discovery into continuous refill
 
-- Status: active
+- Status: completed
+- Completion: automated
+- Completion evidence: 17 focused refill tests passed; commit 848bc2f7111e00f0d177a823504c30d4b3090e04 and its sealed zero-provider-call metrics were integrated into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
 - Track: runtime-refill
 - Depends on: SCA-110, SCA-167, SCA-178
@@ -2799,8 +2801,9 @@ Normative:
 
 ## SCA-212 Resolve merge retry-budget failure for SCA-179
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: The validated SCA-179 branch was merged through a clean isolated integration worktree on 2026-07-29, avoiding the occupied-main-worktree failure while preserving the dirty user checkout
 - Priority: P1
 - Track: ops
 - Depends on: SCA-110, SCA-167, SCA-178
