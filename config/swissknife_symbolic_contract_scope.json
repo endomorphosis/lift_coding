@@ -1,0 +1,167 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/swissknife-symbolic-contract-scope@1",
+  "schemaVersion": 1,
+  "scopeId": "swissknife-symbolic-contract-scope-v1",
+  "authority": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md",
+  "primaryRepository": "swissknife",
+  "primaryRoot": "swissknife",
+    "providerScopes": [
+        "external/ipfs_accelerate",
+        "external/ipfs_kit",
+        "external/ipfs_datasets",
+        "Mcp-Plus-Plus"
+    ],
+    "runtimeContractComponents": [
+        "model-server",
+        "orchestrator",
+        "scheduler",
+        "agent-supervisor"
+    ],
+  "workingTreeOverlay": {
+    "mode": "tracked_plus_allowlisted_untracked_source",
+    "allowDirtyAnalysis": true,
+    "allowlistedUntrackedSuffixes": [
+      ".cjs",
+      ".cts",
+      ".js",
+      ".json",
+      ".jsx",
+      ".md",
+      ".mjs",
+      ".mts",
+      ".py",
+      ".ts",
+      ".tsx",
+      ".yaml",
+      ".yml"
+    ],
+    "allowlistedUntrackedExactNames": [
+      ".eslintrc.cjs",
+      ".eslintrc.js",
+      ".eslintrc.json",
+      "package.json",
+      "tsconfig.base.json",
+      "tsconfig.json",
+      "vite.config.ts",
+      "vitest.config.ts"
+    ]
+  },
+  "skipPrefixes": [
+    ".git",
+    "node_modules",
+    "tmp",
+    "data/agent_supervisor",
+    "swissknife/node_modules",
+    "swissknife/playwright-report",
+    "swissknife/test-results",
+    "swissknife/.pytest_cache",
+    "hallucinate_app/node_modules"
+  ],
+  "skipDirectoryNames": [
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    "__pycache__",
+    "node_modules",
+    "playwright-report",
+    "test-results"
+  ],
+  "dependencyDirectoryNames": [
+    "node_modules"
+  ],
+  "dependencyLockFiles": [
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    "yarn.lock",
+    "Cargo.lock",
+    "poetry.lock",
+    "Pipfile.lock",
+    "go.sum",
+    "composer.lock"
+  ],
+  "dependencyManifestFiles": [
+    "package.json",
+    "Cargo.toml",
+    "pyproject.toml",
+    "Pipfile",
+    "go.mod",
+    "composer.json"
+  ],
+  "dispositionRules": {
+    "semanticExtensions": [
+      ".cjs",
+      ".cts",
+      ".js",
+      ".jsx",
+      ".mjs",
+      ".mts",
+      ".py",
+      ".ts",
+      ".tsx"
+    ],
+    "structuredExtensions": [
+      ".json",
+      ".jsonc",
+      ".toml",
+      ".yaml",
+      ".yml"
+    ],
+    "textExtensions": [
+      ".css",
+      ".html",
+      ".htm",
+      ".md",
+      ".mdx",
+      ".rst",
+      ".sh",
+      ".svg",
+      ".txt",
+      ".wgsl"
+    ],
+    "binaryExtensions": [
+      ".gif",
+      ".ico",
+      ".jpg",
+      ".jpeg",
+      ".mid",
+      ".musicxml",
+      ".png",
+      ".r1cs",
+      ".wasm",
+      ".zip",
+      ".zkey"
+    ],
+    "generatedSuffixes": [
+      ".map",
+      ".d.ts"
+    ],
+    "generatedPathParts": [
+      "dist",
+      "build",
+      "coverage",
+      "cleanup-archive",
+      "emergency-archive"
+    ]
+  },
+    "silentExclusionsAllowed": false,
+    "trackedCoverageRequired": 1.0,
+    "analyzerHealthPolicy": {
+        "semanticCoverageRequiredForContractPaths": 1.0,
+        "maximumParserFailureRatio": 0.01,
+        "perLanguageCanaryRequired": true,
+        "regexOnlyJsTsCountsAsSemanticAst": false,
+        "unhealthyBlocksNoDriftAndExhaustion": true
+    },
+  "contentIdentity": {
+    "pathDigest": "sha2-256",
+    "blobDigest": "sha2-256",
+    "snapshotIdentityPrefix": "sca-repository-snapshot"
+  },
+  "notes": [
+    "Every tracked SwissKnife path must receive exactly one coverage disposition.",
+    "node_modules and caches are dependency/toolchain metadata, not source authority.",
+    "Allowlisted untracked overlays affect snapshot identity when dirty-tree analysis is enabled.",
+    "Gitlinks are recorded with commit identities; their trees are not recursively indexed here."
+  ]
+}

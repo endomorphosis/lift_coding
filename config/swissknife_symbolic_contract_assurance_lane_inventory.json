@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "taskId": "SCA-000",
+  "authority": "scripts/swissknife_parallel_implementation_supervisor.py and the SCA supervisor profile",
+  "leaseNamespace": {
+    "name": "swissknife-supervisor-checkout-lease-v1",
+    "directory": "$SUPERPROJECT_COMMON_GIT_DIR/swissknife-checkout-lease-v1"
+  },
+  "canonicalLaneIds": [
+    "symbolic-contract-assurance"
+  ],
+  "lanes": [
+    {
+      "id": "symbolic-contract-assurance",
+      "kind": "integration",
+      "classification": "canonical_active_lane",
+      "board": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md",
+      "taskPrefix": "## SCA-",
+      "statePrefix": "swissknife_contract_assurance",
+      "stateDirectory": "data/agent_supervisor/swissknife_contract_assurance/parallel",
+      "implementationSurface": "scripts/swissknife_parallel_implementation_supervisor.py",
+      "leaseRequiredForImplementation": true,
+      "launch": {
+        "commandPolicy": "exact",
+        "environment": {
+          "IPFS_ACCELERATE_AGENT_MAX_DIRTY_ATTEMPTS": "0"
+        },
+        "requiredArguments": [
+          "--config"
+        ],
+        "command": [
+          "node",
+          "swissknife/scripts/swissknife-checkout-lease.mjs",
+          "--run",
+          "--checkout",
+          "swissknife",
+          "--inventory",
+          "config/swissknife_symbolic_contract_assurance_lane_inventory.json",
+          "--lane",
+          "symbolic-contract-assurance",
+          "--board",
+          "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md",
+          "--",
+          "python3",
+          "scripts/swissknife_parallel_implementation_supervisor.py",
+          "--config",
+          "config/swissknife_symbolic_contract_assurance_supervisor.json"
+        ]
+      }
+    }
+  ]
+}
