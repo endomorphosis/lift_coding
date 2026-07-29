@@ -112,6 +112,71 @@ Build a content-addressed, proof-directed analysis loop that can:
   This program uses a separate `SCA` namespace and state root so their evidence
   and retry histories are not rewritten.
 
+## 2026-07-29 verified progress checkpoint
+
+Task implementation and outcome authority are deliberately reported
+separately. The expanded board contains 98 tasks: 68 implemented/completed, 17
+blocked, 3 dependency-labeled active, and 10 todo before the next supervisor
+restart. That is 69.4 percent implementation progress, not a claim that 69.4
+percent of the proof outcome is complete. No top-level goal is yet
+authoritatively complete.
+
+Verified advances:
+
+- Exact real-module adapters now exercise datasets GraphRAG/Cypher AST,
+  logic/prover, CID, multiformats, and multihash entrypoints. Their combined
+  focused conformance group passes 29 tests; unavailable or reconstruction-
+  incomplete provers remain candidate/unsupported rather than proof.
+- Canonical MCP++ FastAPI list/call routes are reachable, and DAG compaction no
+  longer labels a hash commitment simulated Groth16. The complete MCP++ module
+  regression group passes 147 tests.
+- Four-lane cooldown and maintenance wakeups, global lease enforcement, live
+  PID handling, and unresolved crash-fence retention are fixed. The affected
+  supervisor safety group passes 113 tests plus two loop regressions.
+- Clean candidates that already satisfy their task now rerun declared
+  validation without a stale completion cache before status projection.
+  Provider-specific Grok/Codex windows, task token ceilings, and exact prompt
+  byte ceilings remain authoritative across module-load boundaries. The
+  reconciled program-analysis runtime and these local fixes pass the complete
+  388-test todo-daemon regression module.
+- Provider source roots are independently indexed instead of opaque Gitlinks.
+  Their content identities survive checkout relocation; symbol extraction is
+  exhaustive by default; disabled, truncated, unreadable, or unparsable
+  symbol inputs create typed partial-health contradictions and block exhaustive
+  parity.
+- A fresh diagnostic whole-tree scan accounted for 6,395 paths and 3,369
+  parser-eligible paths with zero model calls. It reduced typed failures from
+  the stale 3,109/3,369 baseline to 258/3,369 (7.66 percent), with 3,111
+  successful paths and 145 cache reuses. This is a substantial recovery but is
+  still unhealthy against the reviewed maximum of 10 failures and 1 percent.
+  Consequently invocation, proof, mismatch, and vulnerability authority
+  remains withheld.
+
+One attempted publication copied that unhealthy diagnostic index toward the
+authoritative paths. It was fenced, and the four resulting files were moved
+intact to
+`data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z`.
+The authoritative paths are intentionally absent until a healthy deterministic
+run succeeds.
+
+The publication workflow is now split:
+
+1. `SCA-215` implements and tests the fail-closed writer.
+2. `SCA-231` deterministically classifies and repairs the remaining parser
+   clusters without weakening thresholds.
+3. `SCA-229` enforces deterministic-only and authoritative completion receipts.
+4. `SCA-225` performs the foreground full scan and publication with zero model
+   calls.
+
+Scanning and extraction occur only in an isolated staging root. Publication
+requires explicit publish mode, `--require-healthy`, full extraction, exact
+TypeScript 5.9.3 identity, thresholds no weaker than 10/0.01, fresh matching
+snapshot/extraction receipts, complete provider-symbol accounting, and zero
+model/provider/LLM calls. Validated files are stored under one immutable
+content-addressed generation; a single atomic `authoritative` symlink swap is
+the commit point. An unhealthy, stale, interrupted, or fault-injected run
+cannot replace current authority.
+
 ## Scope contract
 
 ### Authoritative repository scope

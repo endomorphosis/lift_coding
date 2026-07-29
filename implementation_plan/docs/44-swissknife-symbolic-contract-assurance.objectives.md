@@ -716,7 +716,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_packet_provider_router.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_packet_provider_router.py -q
 - Acceptance: Providers receive no repository-wide context; review is sequential and read-only until admitted; quotas degrade independently; provider output cannot mark proof or completion.
-- Gap task: SCA-111
+- Gap task: SCA-111, SCA-228
 - Conflict policy: Preserve the single SwissKnife writer lease and existing implementation proposal gate.
 - Goal completion schema version: 1
 - Completion confidence: 0.083333
@@ -855,7 +855,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/task_execution_policy.py, external/ipfs_accelerate/test/api/test_agent_supervisor_task_execution_policy.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_task_execution_policy.py -q
 - Acceptance: Deterministic-only tasks run typed allowlisted local operations with zero provider calls; task context budgets are hard limits; Grok/Codex executable identity, quota, fallback, review order, prompt bytes/tokens, and admission are receipted; labels alone cannot select or upgrade a provider result.
-- Gap task: SCA-167
+- Gap task: SCA-167, SCA-224, SCA-226, SCA-227, SCA-229
 - Conflict policy: Integrate with the existing implementation daemon and CodeEditPacket router; do not add a second task runner or grant model output completion authority.
 - Goal completion schema version: 1
 - Completion confidence: 0.083333
@@ -1059,7 +1059,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py -q
 - Acceptance: Snapshot authority, coverage, AST index, repository index, parser/toolchain identity, and current manifest bind the same roots; every eligible path is success or a typed bounded failure; compiler-unavailable rows are not reused after the compiler identity changes; no provider or model call occurs.
-- Gap task: SCA-215
+- Gap task: SCA-215, SCA-225, SCA-231
 - Conflict policy: Do not lower health thresholds or relabel parse failures; stale index roots remain historical and cannot satisfy current completion.
 
 ## SCA-G031 Exact datasets GraphRAG and Cypher-AST binding
@@ -1089,7 +1089,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_indexer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py -q
 - Acceptance: Each provider root has an origin/commit/tree/dirty-overlay/path ledger and independent analyzer health; cross-root symbols join only through exact package/module/function identities; missing, dirty, moved, or version-divergent roots remain contradictions; provider source bodies stay in CAS.
-- Gap task: SCA-216
+- Gap task: SCA-216, SCA-225
 - Conflict policy: Keep the SwissKnife primary snapshot distinct; never flatten multiple repositories into one ambiguous path namespace or infer source contents from a Gitlink alone.
 
 ## SCA-G052 Endpoint-anchor and observed-contract compilation
@@ -1164,7 +1164,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md, data/agent_supervisor/swissknife_contract_assurance/completion_gate.json
 - Validation: test -f docs/launch/swissknife-symbolic-contract-supervisor-runbook.md && python3 -m json.tool data/agent_supervisor/swissknife_contract_assurance/completion_gate.json >/dev/null
 - Acceptance: Operators can verify PID/lease/health/current snapshot/backlog/cache/analyzer and four-component runtime-contract state; automatic mutation remains disabled until all promotion gates pass; rollback returns to shadow without losing evidence.
-- Gap task: SCA-160
+- Gap task: SCA-160, SCA-230
 - Conflict policy: Closeout requires current-tree evidence and cannot be inferred from an empty queue.
 - Goal completion schema version: 1
 - Completion confidence: 0.166667
