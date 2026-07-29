@@ -24,17 +24,26 @@ Reproduce with:
 python3 external/ipfs_accelerate/scripts/index_repository_contracts.py --repo-root . --scope-config config/swissknife_symbolic_contract_scope.json --output-root data/agent_supervisor/swissknife_contract_assurance/baseline --shadow
 ```
 
-The expected fail-closed result in this leased worktree is exit code 2 with `RepositoryPathEscapeError`. Against an initialized checkout at the same primary commit, the stock loader additionally exposes a tracked-symlink identity mismatch and a 21,537,678-byte structured source beyond the 16 MiB parser bound; these remain typed health blockers rather than permission to claim exhaustiveness.
+## Repair validation
 
-## Retry validation
+The pinned `swissknife` checkout and durable, identity-matched index cache make
+the exact command above independently repeatable despite the tracked symlink
+and the 21,537,678-byte structured source. The repair validation completed
+with exit code 0 and published repository index
+`sca-repository-index:sha256:74ce0b7ce2b2ad11309ee7f97446e0a91c52d24072191005263dca2ef127bd5b`
+for the baseline snapshot named above.
 
-The SCA-120 retry at parent `4204af6566d35631eab27ea8a5acde7d0f648ece` reran the command above and reproduced exit code 2 with `RepositoryPathEscapeError` before any output write. Independent validation of the admitted artifacts confirmed:
+The validation emitted one clean row for every tracked path. All 3,070
+parser-eligible paths reused identity-matched results without source or AST
+writes; 2,830 retained typed parse-failure outcomes, for a failure ratio of
+0.9218241042345277 against the reviewed maximum of 0.01. Canaries passed and
+Git-root discovery was complete, but analyzer health therefore remains
+`unhealthy` and unsafe for completion reasoning.
 
-- all 5,771 tracked SwissKnife paths have one unique, clean disposition;
-- the snapshot, scope-policy, capability, coverage, contract, and finding commitments recompute exactly;
-- all 2,676 contracts use a declared terminal status;
-- partial health keeps exhaustive, no-drift, and no-findings claims false;
-- proof and cache work remain unstarted and unfinalized; and
-- LLM, optional-provider promotion, source mutation, and backlog mutation counts remain zero.
-
-The retry does not rewrite the baseline JSON merely to bind a later supervisor merge: those artifacts intentionally remain committed to the captured parent/primary snapshot above.
+The stock command's expanded repository-snapshot serialization exceeds the
+1,000,000-byte single-file admission limit. It remains in the ignored durable
+index and does not replace this baseline's admitted 575,496-byte compact
+coverage commitment. The compact artifacts still record the original partial
+baseline, make no exhaustive, no-drift, or no-findings claim, and promote no
+optional-provider result to authority. The scan made zero LLM calls and
+mutated no tracked source or backlog state.
