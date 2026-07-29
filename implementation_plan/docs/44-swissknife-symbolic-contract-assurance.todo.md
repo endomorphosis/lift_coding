@@ -2819,7 +2819,7 @@ Normative:
 
 ## SCA-213 Bind exact ipfs_datasets GraphRAG and Cypher-AST modules
 
-- Status: completed
+- Status: todo
 - Priority: P0
 - Track: datasets-graph
 - Depends on: SCA-015, SCA-030
@@ -2844,7 +2844,7 @@ Normative:
 
 ## SCA-214 Bind exact ipfs_datasets logic and prover backends
 
-- Status: completed
+- Status: todo
 - Priority: P0
 - Track: datasets-logic
 - Depends on: SCA-015, SCA-060, SCA-061
@@ -3049,7 +3049,7 @@ Normative:
 
 ## SCA-220 Prove exact CID, multiformats, and multihash conformance
 
-- Status: completed
+- Status: todo
 - Priority: P0
 - Track: content-identity
 - Depends on: SCA-015
