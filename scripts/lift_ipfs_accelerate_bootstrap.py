@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+import os
 import sys
 from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
+
+
+PACKAGE_ROOT_ENV = "LIFT_IPFS_ACCELERATE_PACKAGE_ROOT"
 
 
 @dataclass(frozen=True)
@@ -36,7 +40,19 @@ def bootstrap_ipfs_accelerate(
     script_path = Path(script_file).resolve()
     script_repo_root = script_path.parents[1]
     script_dir = script_path.parent
-    package_root = script_repo_root / "external" / "ipfs_accelerate"
+    configured_package_root = os.environ.get(PACKAGE_ROOT_ENV, "").strip()
+    package_root = (
+        Path(configured_package_root).expanduser().resolve()
+        if configured_package_root
+        else script_repo_root / "external" / "ipfs_accelerate"
+    )
+    if configured_package_root and not (
+        package_root / "ipfs_accelerate_py" / "__init__.py"
+    ).is_file():
+        raise RuntimeError(
+            f"{PACKAGE_ROOT_ENV} does not contain ipfs_accelerate_py: "
+            f"{package_root}"
+        )
     paths: list[Path] = [package_root]
     if include_script_dir:
         paths.append(script_dir)
