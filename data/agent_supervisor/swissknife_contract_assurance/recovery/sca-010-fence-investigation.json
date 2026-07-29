@@ -1,0 +1,170 @@
+{
+  "schema": "sca-legacy-protected-path-investigation-v1",
+  "investigation_id": "sha256:ede255ce9c9923d50a4f91d42b22c221686e3b345c4dc3b3c749ef4b3b58e02b",
+  "investigated_at": "2026-07-29T18:04:41.600961Z",
+  "operator": {
+    "identity": "codex-session:swissknife-symbolic-assurance",
+    "authorization": "User-delegated investigation and unblocking of the SwissKnife symbolic assurance supervisor",
+    "signature_type": "identified-session-decision"
+  },
+  "decision": {
+    "action": "clear",
+    "status": "applied",
+    "applied_at": "2026-07-29T18:07:19.634767+00:00",
+    "reason": "The SCA-010 owner is dead, its workspace was the shared checkout, every protected path is clean, the recorded head is an ancestor of the reviewed head, and every digest change is attributable to committed supervisor-plan evolution.",
+    "requires_standard_clearance_receipt": true,
+    "preserve_incident_archive": true
+  },
+  "legacy_claim": {
+    "task_id": "SCA-010",
+    "attempt": 3,
+    "pid": 4109747,
+    "pid_status": "not_running",
+    "pid_checked_at": "2026-07-29T18:02:47Z",
+    "started_at": "2026-07-28T21:19:44.967449+00:00",
+    "workspace_path": "/home/barberb/lift_coding",
+    "ephemeral_worktree": false,
+    "canonical_task_cid": "baguqeeraxppheh6bdo63e6ykhxhap74bh7vi7ydtktxem4rjwvfnek6iknba",
+    "canonical_task_key": "task/v1/bbde721fc11bbdb27b0a3dce07ff813fea8fe07354ee467229b54ad22bc85342",
+    "lease_id": "f8e5a2d482257397ab51cac04499b0762099b5ac",
+    "active_snapshot_sha256": "83cf83cb41b68403271cc2b12748f9a2510b352379a8f3ef6b29eb9f3af9b3ca",
+    "implementation_lock_sha256": "f940712c61f6f8bde70fc38258ab8a108d162556e927fea89863de3d15100f31"
+  },
+  "archive": {
+    "active_snapshot": {
+      "path": "data/agent_supervisor/swissknife_contract_assurance/recovery/legacy-sca-010/implementation-protected-path-active.json",
+      "sha256": "83cf83cb41b68403271cc2b12748f9a2510b352379a8f3ef6b29eb9f3af9b3ca"
+    },
+    "implementation_lock": {
+      "path": "data/agent_supervisor/swissknife_contract_assurance/recovery/legacy-sca-010/implementation.lock",
+      "sha256": "f940712c61f6f8bde70fc38258ab8a108d162556e927fea89863de3d15100f31"
+    }
+  },
+  "repository_history": {
+    "recorded_head": "d4a085081d33c683a8f97054a5c5326bbd798549",
+    "reviewed_head": "f66f4138fa2b50cc9e82223b93eb149e0882f563",
+    "recorded_head_is_ancestor": true,
+    "protected_paths_clean": true,
+    "trusted_generator_policy": "Implementation Daemon completion/pointer commits and Accelerator Backlog Refinery generated-board commits are machine-trusted; all other protected-path commits require explicit operator approval.",
+    "approved_operator_commits": [
+      "8563aca86e8cf8db65838730bff91f95d8ecc8e8",
+      "d19497cc2912e0cad992cd2c4512132f0dedb94c",
+      "67f04f673c6f7b47bc6cbe23719c20d0adb62c30",
+      "3efa86c156bdbdd41a51755ca0667995ec79bf88",
+      "134f63fd1650e839cb9a9f256ee319d6e4c4b1b1",
+      "584583b2eeae70ac4f40c11e5bb4c43707e1c905",
+      "1cb1a9d5f92feb9177948fdbffee80ba2a308d90",
+      "94c42a5c718264e4a8f430b8a6040888daf77bbf",
+      "9059cb6aab9ac403cade75ff07599c42f4aeed1d",
+      "ffa4e3e4fdabb83b877b7ff8634e1205e604f4e0",
+      "66f47ed6848d9b0d48a99fcb570f12f7170198f9",
+      "ab9c4c9567106345a28960610119ea9c1c608a6f",
+      "62a4ffea8082b5e6699bd8595de627701f617b37",
+      "c76dac1f520bf8c4b1d547c5b7194246c3418378",
+      "15e3bac4cb9bd9b02dc509714cddccc0c95a97db",
+      "f66f4138fa2b50cc9e82223b93eb149e0882f563"
+    ]
+  },
+  "drifts": [
+    {
+      "path": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md",
+      "recorded_sha256": "0ec0e6891bc3c557c31665d9f4ef5cad42bb21f4b27de822073376da6c2344a3",
+      "current_sha256": "4122dab898958c54ddc4359edeeba828d40e1dddf20b3a1152201c3bfe29cd1e",
+      "current_git_blob_sha1": "6284da2b72d6628caa7454934d4ab39d8078d18d",
+      "current_size": 30826,
+      "git_status": "clean",
+      "classification": "authorized_committed_evolution",
+      "explanation": "The plan was expanded to bind the parallel supervisor runtime, exact symbolic providers, and fail-closed publication/refill gates.",
+      "provenance": {
+        "commit_count": 4,
+        "first_commit": "d19497cc2912e0cad992cd2c4512132f0dedb94c",
+        "last_commit": "f66f4138fa2b50cc9e82223b93eb149e0882f563",
+        "ordered_history_sha256": "e04e3020077272b65f3d73f9a69f6e1438c91dc85e55fb5b91908328a8554117"
+      }
+    },
+    {
+      "path": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.objectives.md",
+      "recorded_sha256": "178367110fb1458de2c9a6987139a4a3e6bd9ea90fdd85fbb897c42d588b54b5",
+      "current_sha256": "30127fad42283c320a33e39555c8be33cf176acdfad4e82cbfe1b9b908d8e4f3",
+      "current_git_blob_sha1": "28087ed4fffd5d07eae815f3bd237af39d8f9c2f",
+      "current_size": 210310,
+      "git_status": "clean",
+      "classification": "authorized_committed_evolution",
+      "explanation": "The objective graph was expanded with exact provider, runtime-integrity, analyzer-health, proof, and autonomous-refill criteria.",
+      "provenance": {
+        "commit_count": 3,
+        "first_commit": "d19497cc2912e0cad992cd2c4512132f0dedb94c",
+        "last_commit": "f66f4138fa2b50cc9e82223b93eb149e0882f563",
+        "ordered_history_sha256": "81c4d16e18129fa4fe467640395a18bfadc3bae7e75e0b5c1dc37930159f180e"
+      }
+    },
+    {
+      "path": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md",
+      "recorded_sha256": "20772f49ab40abab78156075dbe25380cbc0c01ff1dbd76749e301c529c0c0db",
+      "current_sha256": "c49eb72b48b91be3d484c2213df66434461b7e21cbd1f25a00b99ce134d7432b",
+      "current_git_blob_sha1": "9631f124a5dac748d355d9cb1508e36d961b21ca",
+      "current_size": 281213,
+      "git_status": "clean",
+      "classification": "authorized_committed_evolution",
+      "explanation": "The taskboard accumulated machine-owned completion transitions, refinery guardrail updates, operator-approved recovery tasks, and stricter symbolic publication work.",
+      "provenance": {
+        "commit_count": 63,
+        "first_commit": "1317bd551c7affa9db8f45c7ad554854a287d6a7",
+        "last_commit": "f66f4138fa2b50cc9e82223b93eb149e0882f563",
+        "ordered_history_sha256": "d19e7825ae1e293fd77211b4e4abbeeaed3fe86341c801b0b2a6d4924d8e9a16"
+      }
+    },
+    {
+      "path": "config/swissknife_symbolic_contract_assurance_supervisor.json",
+      "recorded_sha256": "531cc7c8e94dc1905189d55cfa6440cab7925dd2c8057432ce2bf10527c5ad73",
+      "current_sha256": "a7ba249b18a32d014b7b3dea38e839e236b56d0398703b884b31b4189d4f9651",
+      "current_git_blob_sha1": "14b4e52c192977ced04e7538a68412162f369d21",
+      "current_size": 11731,
+      "git_status": "clean",
+      "classification": "authorized_committed_evolution",
+      "explanation": "The supervisor configuration was intentionally extended for strict parallel shards, pinned runtime providers, bounded routing, and symbolic refill controls.",
+      "provenance": {
+        "commit_count": 4,
+        "first_commit": "d19497cc2912e0cad992cd2c4512132f0dedb94c",
+        "last_commit": "ab9c4c9567106345a28960610119ea9c1c608a6f",
+        "ordered_history_sha256": "64ebaeb4b40948b16d3b5aae8018a2fc5aa05d91e7bff7df3dca651be3aa7865"
+      }
+    },
+    {
+      "path": "config/swissknife_symbolic_contract_assurance_lane_inventory.json",
+      "recorded_sha256": "1531353bba129b8dd4752a2b68c8e0156ea612e269af2c1f0f3e58633f1ca88e",
+      "current_sha256": "3bb46ae26b7481f82d3c5bbd0c271d92fb560b5059a3e410e089615cb4502587",
+      "current_git_blob_sha1": "2d1ab1e6452f7ab951186cff27e478973f71bb20",
+      "current_size": 1802,
+      "git_status": "clean",
+      "classification": "authorized_committed_evolution",
+      "explanation": "The earlier inventory was replaced by the reviewed four-lane strict-shard inventory used by the current supervisor.",
+      "provenance": {
+        "commit_count": 1,
+        "first_commit": "d19497cc2912e0cad992cd2c4512132f0dedb94c",
+        "last_commit": "d19497cc2912e0cad992cd2c4512132f0dedb94c",
+        "ordered_history_sha256": "6b4b7f88e2ec0af81ae231099f72820c66c0b1da8edc6ba6ddca4a26b603ed74"
+      }
+    }
+  ],
+  "clearance_checks": {
+    "legacy_owner_dead": true,
+    "legacy_workspace_shared_checkout": true,
+    "history_fast_forward": true,
+    "all_protected_paths_clean": true,
+    "all_drift_classified": true,
+    "original_state_archived": true,
+    "automatic_deletion_used": false,
+    "active_snapshot_removed_by_standard_clearance": true,
+    "stale_lock_removed_by_standard_clearance": true
+  },
+  "standard_clearance": {
+    "schema": "implementation-protected-path-clearance-v1",
+    "clearance_id": "sha256:03dabcbed6d75d0a9731cfc8b3b2cd8808e2adf6d56a442816486c721617cb21",
+    "receipt_path": "data/agent_supervisor/swissknife_contract_assurance/state/implementation-protected-path-clearance-03dabcbed6d75d0a.json",
+    "receipt_sha256": "f0064d85881dc5c21c2d5013ca6a33985c14353573e4a82d63df9f74e33876db",
+    "reason": "operator_approved_shared_checkout_commits",
+    "stale_lock_cleared": true
+  },
+  "content_address_basis": "schema=sca-legacy-protected-path-investigation-v1|task=SCA-010|attempt=3|active_sha256=83cf83cb41b68403271cc2b12748f9a2510b352379a8f3ef6b29eb9f3af9b3ca|lock_sha256=f940712c61f6f8bde70fc38258ab8a108d162556e927fea89863de3d15100f31|before_head=d4a085081d33c683a8f97054a5c5326bbd798549|reviewed_head=f66f4138fa2b50cc9e82223b93eb149e0882f563|operator=codex-session:swissknife-symbolic-assurance|decision=clear"
+}
