@@ -2844,7 +2844,7 @@ Normative:
 
 ## SCA-214 Bind exact ipfs_datasets logic and prover backends
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: datasets-logic
 - Depends on: SCA-015, SCA-060, SCA-061
