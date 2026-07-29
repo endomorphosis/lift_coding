@@ -65,7 +65,7 @@ Normative:
 | 7 | 121, 130, 140, 150, 166, 167, 168 | Operational fan-out plus parser/provider and snapshot-authority recovery |
 | 8 | 170; then 171, 172, 173, 174 | Runtime catalog then four component extractors |
 | 9 | 175, 176, 177 | Runtime obligations, exact MCP++ traces, and vulnerability rules |
-| 10 | 178, 179, 213-220, 222, 223; then 180; then 181, 221; then 160 | Runtime refill, exact provider/index/proof wiring, integrity repairs, healthy baseline/evaluation/repair projection, then closeout |
+| 10 | 178, 179, 213-224; then 227, 228, 230, 231; then 229 and 225; then 180; then 181, 221; then 160 | Runtime refill, exact providers, integrity/supervisor repairs, healthy deterministic publication, proof/evaluation/repair projection, then closeout |
 
 ## SCA-000 Seal the supervisor-native program
 
@@ -2871,7 +2871,7 @@ Normative:
 
 - Status: completed
 - Completion: manual
-- Completion evidence: Commits 787df8c2b and 2e6065e6b add the handoff and then harden it so publication requires explicit healthy/full/deterministic mode, complete extraction receipts, a fresh matching snapshot, zero model/provider/LLM calls, no untyped or compiler-unavailable rows, immutable content-addressed generations, and one atomic generation-pointer swap. The unsafe SCA-215 attempt was fenced; its unhealthy 258-failure handoff was quarantined rather than accepted. Ten focused tests pass and the durable authoritative paths remain absent until a healthy run succeeds.
+- Completion evidence: Commits 787df8c2b, 2e6065e6b, and ce79da804 add the handoff, harden it, and restore the fail-closed publication boundary after rejecting a late unsafe candidate. Publication requires explicit healthy/full/deterministic mode, complete extraction receipts, a fresh matching snapshot, zero model/provider/LLM calls, no untyped or compiler-unavailable rows, immutable content-addressed generations, and one atomic generation-pointer swap. The unsafe SCA-215 attempt was fenced; its unhealthy 258-failure handoff was quarantined rather than accepted. Ten focused tests pass and the durable authoritative paths remain absent until a healthy run succeeds.
 - Priority: P0
 - Track: authoritative-index
 - Depends on: SCA-020, SCA-021, SCA-166, SCA-168
@@ -3239,7 +3239,7 @@ Normative:
 - Priority: P0
 - Track: completion-authority
 - Depends on: SCA-228
-- Goal id: SCA-G177
+- Goal id: SCA-G167
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py -q
 - Board namespace: swissknife-symbolic-contract-assurance-v1
@@ -3263,7 +3263,7 @@ Normative:
 - Status: todo
 - Priority: P1
 - Track: status-projection
-- Depends on: SCA-000, SCA-224
+- Depends on: SCA-000, SCA-224, SCA-229
 - Goal id: SCA-G160
 - Outputs: scripts/swissknife_parallel_implementation_supervisor.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_status_projection.py, data/agent_supervisor/swissknife_contract_assurance/parallel/parallel_supervisor_status.json, data/agent_supervisor/swissknife_contract_assurance/objective_graph.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_status_projection.py -q
