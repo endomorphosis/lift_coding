@@ -65,7 +65,7 @@ Normative:
 | 7 | 121, 130, 140, 150, 166, 167, 168 | Operational fan-out plus parser/provider and snapshot-authority recovery |
 | 8 | 170; then 171, 172, 173, 174 | Runtime catalog then four component extractors |
 | 9 | 175, 176, 177 | Runtime obligations, exact MCP++ traces, and vulnerability rules |
-| 10 | 178, 179, 213-224; then 227, 228, 230, 231; then 229 and 225; then 180; then 181, 221; then 160 | Runtime refill, exact providers, integrity/supervisor repairs, healthy deterministic publication, proof/evaluation/repair projection, then closeout |
+| 10 | 178, 179, 213-224; then 227, 228, 230, 231; then 232-237; then 238-495; then 496-512; then 229 and 225; then 180; then 181, 221; then 160 | Runtime refill, exact providers, integrity/supervisor repairs, exact parser-failure repair and deterministic reconciliation, healthy publication, proof/evaluation/repair projection, then closeout |
 
 ## SCA-000 Seal the supervisor-native program
 
@@ -3158,7 +3158,7 @@ Normative:
 
 ## SCA-226 Investigate and explicitly clear the legacy SCA-010 fence
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: operator-recovery
 - Depends on: SCA-224
