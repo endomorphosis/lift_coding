@@ -1,0 +1,64 @@
+{
+  "authority_root_cid": "baguqeerad5mpxyk7au4o6m2gkaj7jif6o3ubxm6yewp7q4bihdquh3fmdaxq",
+  "authority_source": "integration_gitlink",
+  "freshness_work": [],
+  "integration_checkout": {
+    "checkout_cid": "baguqeerahu3gjfetm5r2syy7dlidwvo2ejoul56nh64rz3irfx5zopz5a3xa",
+    "checkout_id": "integration",
+    "dirty": false,
+    "head_commit": "b9c0c4bcf7e2f0d6bb9a5297e8c9bfec69cd2fd4",
+    "head_tree": "3c5619dfb2dddca6aef41bd60f6baebed67317aa",
+    "index_state": {
+      "algorithm": "sha256",
+      "byte_length": 581670,
+      "cid": "baguqeerarsbr6m23ykecprpzxgfhfonyyl7tienys46zqggqtov3fjoxwq4q",
+      "domain": "integration:git-index",
+      "schema": "ipfs_accelerate_py/agent-supervisor/repository-state-digest@1",
+      "sha256": "f054add5a29f8788ea6c9976f28ce8d11fdf0c9533101f5bcb0344e3b9fe2871"
+    },
+    "present": true,
+    "repository_path": "integration",
+    "schema": "ipfs_accelerate_py/agent-supervisor/repository-checkout-binding@1",
+    "worktree_state": {
+      "algorithm": "sha256",
+      "byte_length": 16,
+      "cid": "baguqeerae5c36jyjw32qcbonnb26leoq73wh3q7vwbkgsgoqxdw7bxbinbfq",
+      "domain": "integration:worktree",
+      "schema": "ipfs_accelerate_py/agent-supervisor/repository-state-digest@1",
+      "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    }
+  },
+  "integration_gitlink": {
+    "commit": "b34fadb6edb66e834ea3dff9a463fb2b175feef5",
+    "path": "swissknife"
+  },
+  "program_commit": "b34fadb6edb66e834ea3dff9a463fb2b175feef5",
+  "reviewed_override": null,
+  "schema": "ipfs_accelerate_py/agent-supervisor/snapshot-authority@1",
+  "swissknife_checkout": {
+    "checkout_cid": "baguqeeragbrvemfeenhhwsbbw5fz2ywnthu4ufqydops7erilcydlqorsvpa",
+    "checkout_id": "swissknife",
+    "dirty": false,
+    "head_commit": "b34fadb6edb66e834ea3dff9a463fb2b175feef5",
+    "head_tree": "378b87bd963ada1e81443c5ee07ba599c607570c",
+    "index_state": {
+      "algorithm": "sha256",
+      "byte_length": 572324,
+      "cid": "baguqeeragqzhh36qvi6xnfqyfg6rakefduwwzrsb5xm4rr532ffh5wy2yyvq",
+      "domain": "swissknife:git-index",
+      "schema": "ipfs_accelerate_py/agent-supervisor/repository-state-digest@1",
+      "sha256": "edd6cf4b0325ad36eacb7a6629b75ea1ea1e96db6188395aa219e7973edbfbcf"
+    },
+    "present": true,
+    "repository_path": "swissknife",
+    "schema": "ipfs_accelerate_py/agent-supervisor/repository-checkout-binding@1",
+    "worktree_state": {
+      "algorithm": "sha256",
+      "byte_length": 16,
+      "cid": "baguqeerauveerxitgc6s2ntfnpphclmw6764ebmuw45wvsdvbjngbahnhduq",
+      "domain": "swissknife:worktree",
+      "schema": "ipfs_accelerate_py/agent-supervisor/repository-state-digest@1",
+      "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+    }
+  }
+}
