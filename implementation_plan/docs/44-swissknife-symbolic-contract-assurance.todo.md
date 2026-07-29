@@ -3241,7 +3241,7 @@ Normative:
 - Track: completion-authority
 - Depends on: SCA-228
 - Goal id: SCA-G167
-- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/authoritative_completion.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py -q
 - Board namespace: swissknife-symbolic-contract-assurance-v1
 - Bundle: swissknife/contract-assurance/completion-authority
@@ -3249,7 +3249,8 @@ Normative:
 - Resource class: cpu-medium
 - Resource stage: proof
 - Implementation timeout seconds: 14400
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/authoritative_completion.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py, external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py
+- Proposal artifact envelope: {"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1","paths":["external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py","external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/authoritative_completion.py","external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py","external/ipfs_accelerate/test/api/test_agent_supervisor_authoritative_task_completion.py","external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py"],"max_file_bytes":4000000,"max_patch_bytes":8000000,"max_output_bytes":16000000}
 - Interfaces: ImplementationReceipt, AuthoritativeCompletionGate, DeterministicOnlyPolicy
 - Context budget tokens: 3072
 - Provider role: grok-implement, codex-review
@@ -14192,6 +14193,7 @@ Normative:
 - Resource stage: implementation
 - Implementation timeout seconds: 14400
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-provider-route.json
+- Proposal artifact envelope: {"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1","paths":["external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py","external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py","external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py","data/agent_supervisor/swissknife_contract_assurance/evaluation/production-provider-route.json"],"max_file_bytes":4000000,"max_patch_bytes":8000000,"max_output_bytes":16000000}
 - Interfaces: CodeEditPacket@1, ImplementationProviderRouter@1, ProviderExecutionReceipt@1, AuthoritativeCompletionGate
 - Context budget tokens: 4096
 - Provider role: grok-implement, codex-review
