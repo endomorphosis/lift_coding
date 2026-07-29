@@ -586,7 +586,7 @@ Normative:
 
 ## SCA-110 Integrate contract analysis into supervisor refill
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: supervisor-runtime
 - Depends on: SCA-021, SCA-090, SCA-101
