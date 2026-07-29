@@ -890,7 +890,7 @@ Normative:
 
 ## SCA-166 Recover healthy whole-tree semantic coverage
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: analyzer-health
 - Depends on: SCA-020, SCA-021, SCA-120
