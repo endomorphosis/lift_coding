@@ -3135,7 +3135,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: authoritative-index-publication
-- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-231
+- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-512
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/generations, data/agent_supervisor/swissknife_contract_assurance/authoritative, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json, data/agent_supervisor/swissknife_contract_assurance/baseline/handoff.json, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json
 - Validation: test -L data/agent_supervisor/swissknife_contract_assurance/authoritative && python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py -q
@@ -3308,3 +3308,9449 @@ Normative:
 - Effects: Separates genuine source defects, intentionally invalid fixtures, generated/vendor artifacts, unsupported syntax, and parser defects into reviewed dispositions or minimal analyzer repairs.
 - Evidence subset: Path/content/parser/toolchain/CAS/reason cluster identities and bounded representative fixtures
 - Acceptance: Every one of the 258 failures belongs to one deterministic content-addressed cluster; exclusions require an explicit reviewed policy and cannot hide MCP/runtime surfaces; parser repairs have positive/negative fixtures; a fresh full scan meets the reviewed health gate without changing its thresholds.
+
+<!-- BEGIN GENERATED SWISSKNIFE PARSER FAILURE BACKLOG v1 -->
+
+The following tasks are a deterministic projection of `implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json`. Mutable task status is preserved on regeneration; identities, dependencies, scopes and acceptance contracts are not.
+
+## SCA-232 Repair TypeScript unit-test parser failures without blanket exclusion
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-231, SCA-229
+- Goal id: SCA-G022
+- Outputs: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-232
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/cluster-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Interfaces: ParserFailureClusterRepair@1, PolyglotASTHealthReport
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Failure family: UNIT
+- Failure row count: 232
+- LLM context budget bytes: 12288
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Touch only the declared family scope and its unique cluster receipt; preserve the reviewed health thresholds and retain contract-bearing evidence.
+- Preconditions: SCA-231 pins the retained 258-row population and SCA-229 keeps implementation evidence separate from acceptance.
+- Effects: Repairs or explicitly disposes the 232 UNIT rows and emits data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json family UNIT; repository index data/agent_supervisor/swissknife_contract_assurance/audit/current-index-20260729/repository-index.json; health report data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json
+- Acceptance: All 232 pinned rows receive per-path reviewed provenance and a fresh parser disposition. A directory-prefix or test-prefix blanket exclusion is forbidden because expected-behavior tests, including scheduler contracts, remain contract evidence.
+
+## SCA-233 Repair browser integration TypeScript parser failures
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-231, SCA-229
+- Goal id: SCA-G022
+- Outputs: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-233
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/cluster-browser
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Interfaces: ParserFailureClusterRepair@1, PolyglotASTHealthReport
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Failure family: BROWSER
+- Failure row count: 9
+- LLM context budget bytes: 12288
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Touch only the declared family scope and its unique cluster receipt; preserve the reviewed health thresholds and retain contract-bearing evidence.
+- Preconditions: SCA-231 pins the retained 258-row population and SCA-229 keeps implementation evidence separate from acceptance.
+- Effects: Repairs or explicitly disposes the 9 BROWSER rows and emits data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json family BROWSER; repository index data/agent_supervisor/swissknife_contract_assurance/audit/current-index-20260729/repository-index.json; health report data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json
+- Acceptance: All 9 browser rows parse or receive a narrowly reviewed typed disposition; browser/WebGPU/WebNN contract evidence remains visible to the repository index.
+
+## SCA-234 Repair active JavaScript and MCP test parser failures
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-231, SCA-229
+- Goal id: SCA-G022
+- Outputs: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-234
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/cluster-activejs
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Interfaces: ParserFailureClusterRepair@1, PolyglotASTHealthReport
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Failure family: ACTIVEJS
+- Failure row count: 4
+- LLM context budget bytes: 12288
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Touch only the declared family scope and its unique cluster receipt; preserve the reviewed health thresholds and retain contract-bearing evidence.
+- Preconditions: SCA-231 pins the retained 258-row population and SCA-229 keeps implementation evidence separate from acceptance.
+- Effects: Repairs or explicitly disposes the 4 ACTIVEJS rows and emits data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json family ACTIVEJS; repository index data/agent_supervisor/swissknife_contract_assurance/audit/current-index-20260729/repository-index.json; health report data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json
+- Acceptance: The three real JavaScript/MCP files (test/mocks/stubs/chai-stub.js, test/unit/cli/chat-command.test.js, and test/utils/mockMCPClient.js) must achieve real parser success. Only ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js may receive a reviewed nonsemantic shell-script disposition after its shebang/content identity is proved; no suffix-wide exclusion is admitted.
+
+## SCA-235 Repair Python failures and symlink classification order
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-231, SCA-229
+- Goal id: SCA-G022
+- Outputs: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-235
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/cluster-python
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py, swissknife/test/fixed_web_platform/cross_browser_model_sharding.py, swissknife/test/web_platform_test_output/test_hf_bert.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Interfaces: ParserFailureClusterRepair@1, PolyglotASTHealthReport
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Failure family: PYTHON
+- Failure row count: 3
+- LLM context budget bytes: 12288
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Touch only the declared family scope and its unique cluster receipt; preserve the reviewed health thresholds and retain contract-bearing evidence.
+- Preconditions: SCA-231 pins the retained 258-row population and SCA-229 keeps implementation evidence separate from acceptance.
+- Effects: Repairs or explicitly disposes the 3 PYTHON rows and emits data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json family PYTHON; repository index data/agent_supervisor/swissknife_contract_assurance/audit/current-index-20260729/repository-index.json; health report data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json
+- Acceptance: The two real Python files (test/fixed_web_platform/cross_browser_model_sharding.py and test/web_platform_test_output/test_hf_bert.py) must achieve Python AST parser success. Only ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py may receive a symlink disposition. Repository snapshot classification checks EntryKind.SYMLINK before suffix eligibility, with positive and negative regression fixtures and no false parser success.
+
+## SCA-236 Repair invalid and oversized structured-data parser failures
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-231, SCA-229
+- Goal id: SCA-G022
+- Outputs: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-236
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/cluster-structured
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: swissknife/benchmark-results/sample-baseline.json, swissknife/docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
+- Interfaces: ParserFailureClusterRepair@1, PolyglotASTHealthReport
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Failure family: STRUCTURED
+- Failure row count: 2
+- LLM context budget bytes: 12288
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Touch only the declared family scope and its unique cluster receipt; preserve the reviewed health thresholds and retain contract-bearing evidence.
+- Preconditions: SCA-231 pins the retained 258-row population and SCA-229 keeps implementation evidence separate from acceptance.
+- Effects: Repairs or explicitly disposes the 2 STRUCTURED rows and emits data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json family STRUCTURED; repository index data/agent_supervisor/swissknife_contract_assurance/audit/current-index-20260729/repository-index.json; health report data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json
+- Acceptance: The empty JSON and oversized generated AST export receive content-specific repairs or reviewed typed dispositions; JSON validity and size budgets are not weakened globally.
+
+## SCA-237 Classify legacy archive parser failures explicitly
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-231, SCA-229
+- Goal id: SCA-G022
+- Outputs: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-237
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/cluster-legacy
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-medium
+- Resource stage: implementation
+- Implementation timeout seconds: 14400
+- Predicted files: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Interfaces: ParserFailureClusterRepair@1, PolyglotASTHealthReport
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Failure family: LEGACY
+- Failure row count: 8
+- LLM context budget bytes: 12288
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Touch only the declared family scope and its unique cluster receipt; preserve the reviewed health thresholds and retain contract-bearing evidence.
+- Preconditions: SCA-231 pins the retained 258-row population and SCA-229 keeps implementation evidence separate from acceptance.
+- Effects: Repairs or explicitly disposes the 8 LEGACY rows and emits data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json family LEGACY; repository index data/agent_supervisor/swissknife_contract_assurance/audit/current-index-20260729/repository-index.json; health report data/agent_supervisor/swissknife_contract_assurance/audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json
+- Acceptance: All 8 legacy archive rows receive reviewed, content-addressed dispositions that are limited to the archive boundary and cannot hide current web, MCP, scheduler, or model-serving surfaces.
+
+## SCA-238 Verify parser failure 003c2dac02ac for ipfs_accelerate_js/test/unit/test_hf_prophetnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-238
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_prophetnet.ts
+- Failure content digest: sha256:8a929026d206587d2fab6833388ccdf0d9cf9bed456639f5f00b01000c30b7e9
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-239 Verify parser failure 0177f2686c81 for ipfs_accelerate_js/test/unit/test_hf_glpn.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-239
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_glpn.ts
+- Failure content digest: sha256:168dd0a0c79f7e584a63732aec708e6dcd72cd676528a11a8f82259ffc218c6f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-240 Verify parser failure 03f436b3595c for ipfs_accelerate_js/test/unit/test_hf_realm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-240
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_realm.ts
+- Failure content digest: sha256:0ab5d083c944f1b58ce1769f50a36b592004d4122d797768884f58f1948a2b36
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-241 Verify parser failure 048f0c2fbb11 for ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-241
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_autoformer.ts
+- Failure content digest: sha256:2e093a4d393581423898fd2d9a77c0b5b0c474dffde723250b3d0b2f776b5915
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-242 Verify parser failure 0598f4486334 for ipfs_accelerate_js/test/unit/test_hf_mobilenet_v1.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-242
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mobilenet_v1.ts
+- Failure content digest: sha256:6c00b299ce2e6d31d915f32505dbdf42d10dfdc3e220a0376a78bed806621c44
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-243 Verify parser failure 077ef3066dc7 for test/fixed_web_platform/cross_browser_model_sharding.py
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-235
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-243
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-python
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909
+- Failure family: PYTHON
+- Failure row id: sca-repository-index-row:sha256:077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909
+- Failure path: test/fixed_web_platform/cross_browser_model_sharding.py
+- Failure content digest: sha256:2e5c3b702d0372c8c7cb7a49662ef0cb3c60be10897392d2d003738a18ba0903
+- Official failure cluster: failure-cluster:sha256:fcc0a83c85173140011f6301ccf317da546917ed0767328a18bcd17d93334d32
+- Required resolution: python_ast_parser_success
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-235 emitted the reviewed PYTHON cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be successful Python AST output; exclusion, symlink routing, or another nonsemantic disposition does not satisfy this task. No model or provider call occurs.
+
+## SCA-244 Verify parser failure 078cf9ce7af9 for ipfs_accelerate_js/test/unit/test_multi_model_web_integration.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-244
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba
+- Failure path: ipfs_accelerate_js/test/unit/test_multi_model_web_integration.ts
+- Failure content digest: sha256:bf4157381b4d1ef15c3cf4ddecc91be4b0498f5f8631dacaef74d7f786d9e916
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-245 Verify parser failure 084c80473c4d for ipfs_accelerate_js/test/unit/test_hf_yolos.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-245
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_yolos.ts
+- Failure content digest: sha256:9bdfc7a16af5a29359f2ee97670c6f43f9eea2318651cf08c3fd1be7d05cffb8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-246 Verify parser failure 09107cd57d69 for ipfs_accelerate_js/test/unit/test_hf_pvt_v2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-246
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pvt_v2.ts
+- Failure content digest: sha256:33923aa01de4164ba54defab5680556e536319513a2f545b6a46eb0e69f9dd60
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-247 Verify parser failure 0b7826822749 for ipfs_accelerate_js/test/unit/test_hf_encoder_decoder.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-247
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_encoder_decoder.ts
+- Failure content digest: sha256:1e1198e5e5002602cd78824f9b92a0879306b52484d1e4383bc7dd2e9f37c970
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-248 Verify parser failure 0bb636160e60 for web/legacy-archive/src/browser-main-enhanced.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-248
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9
+- Failure path: web/legacy-archive/src/browser-main-enhanced.ts
+- Failure content digest: sha256:3da044f08937822ae557a0836ce3b1a220e192ecd1c3f3a572b6f41724682493
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-249 Verify parser failure 0bf29217cfa3 for ipfs_accelerate_js/test/unit/test_web_platform_integration.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-249
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93
+- Failure path: ipfs_accelerate_js/test/unit/test_web_platform_integration.ts
+- Failure content digest: sha256:ec6e6c5765ac34e19e1f391a880d10116e9ced15b15a129d0940b95eb53ee0a4
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-250 Verify parser failure 0c590bdcc62d for ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-250
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64
+- Failure path: ipfs_accelerate_js/test/browser/test_webgpu_compute_transfer_overlap.ts
+- Failure content digest: sha256:2f3ff658bb1c8c8b08680148977dc8387fed00cb65405112f7057b6663dd823a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-251 Verify parser failure 0d2f151f4b32 for ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-251
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c
+- Failure path: ipfs_accelerate_js/test/browser/test_real_webnn_webgpu_implementations.ts
+- Failure content digest: sha256:e5c6fbc7b1258f02c39be23759696b2dca2379b471e182fdab7a9ea492f30837
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-252 Verify parser failure 0d4294f6ee9c for ipfs_accelerate_js/test/unit/test_hf_vipllava.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-252
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_vipllava.ts
+- Failure content digest: sha256:3b4f42547365d61af2143d3728c802ac39750b2ca439b3d4fe88ffb29a0eab6b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-253 Verify parser failure 0e73fbbe1af9 for ipfs_accelerate_js/test/unit/test_hf_rag.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-253
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_rag.ts
+- Failure content digest: sha256:08860ecd1160b6edc323a5a156d8730fe6c5cc25ba868cbbb3b7b24c7b8a6d13
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-254 Verify parser failure 0eec7b222ffa for ipfs_accelerate_js/test/unit/test_unified_streaming.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-254
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f
+- Failure path: ipfs_accelerate_js/test/unit/test_unified_streaming.ts
+- Failure content digest: sha256:51cb0a647cfe0d452955e9f0c6bc5e505bf059f172cf17d65805c797b37b99fd
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-255 Verify parser failure 0fd5a5bdeace for ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-255
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a
+- Failure path: ipfs_accelerate_js/test/browser/test_safari_webgpu_support.ts
+- Failure content digest: sha256:7caccd6bd838a6fbc4427adc63bdc1273fce53834717fa1b18d5d289083095aa
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-256 Verify parser failure 0fe69720ea3b for ipfs_accelerate_js/test/browser/test_webgpu_parallel_model_loading.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-256
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3
+- Failure path: ipfs_accelerate_js/test/browser/test_webgpu_parallel_model_loading.ts
+- Failure content digest: sha256:c1897d670d1c155b468cd2f0716d4cd70743db40e82eff23045b1fae1d99ff6f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-257 Verify parser failure 122b7504b5b7 for ipfs_accelerate_js/test/unit/test_hf_pvt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-257
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pvt.ts
+- Failure content digest: sha256:f0d3de0db38fe8441f14326242c1cd62407e41449db60352c3e54948ca707acb
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-258 Verify parser failure 12360225071e for ipfs_accelerate_js/test/unit/test_qualcomm_integration.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-258
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20
+- Failure path: ipfs_accelerate_js/test/unit/test_qualcomm_integration.ts
+- Failure content digest: sha256:55dacbfc077d7654fbca9d8f2ca6a69fbaf71f0f1a9f83f6ffcc88b77d19045b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-259 Verify parser failure 1264f32f58a5 for ipfs_accelerate_js/test/unit/test_single_model_hardware.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-259
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74
+- Failure path: ipfs_accelerate_js/test/unit/test_single_model_hardware.ts
+- Failure content digest: sha256:3772fbf6c302da43cc568945706946b97be8832e06084bb5795cc8b7647e47ef
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-260 Verify parser failure 139e3932005e for ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-260
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_depth_anything.ts
+- Failure content digest: sha256:fbd94b8a876d506efbed1c6091fc3dc625af9fea1e09f3e25c8149975b3e9c92
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-261 Verify parser failure 150a3df0664e for ipfs_accelerate_js/test/unit/test_hf_seamless_m4t_v2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-261
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_seamless_m4t_v2.ts
+- Failure content digest: sha256:8fe39bd480a3d595f07f36ee2039816fb06b942005a5175ba30cb08be733b036
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-262 Verify parser failure 15ac6a85c475 for ipfs_accelerate_js/test/unit/test_hf_falcon_mamba.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-262
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_falcon_mamba.ts
+- Failure content digest: sha256:29fb29d352da13152f66d52973f5308747093843668ffcd55d2e983d57714705
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-263 Verify parser failure 15bf1ecf8014 for ipfs_accelerate_js/test/unit/test_scheduler.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-263
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f
+- Failure path: ipfs_accelerate_js/test/unit/test_scheduler.ts
+- Failure content digest: sha256:1de108a96f44d88c9dc359f2cda5401963a186d5fbc05725c3224173a329a232
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-264 Verify parser failure 169795f821ca for test/unit/cli/chat-command.test.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-234
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-264
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-activejs
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005
+- Failure family: ACTIVEJS
+- Failure row id: sca-repository-index-row:sha256:169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005
+- Failure path: test/unit/cli/chat-command.test.js
+- Failure content digest: sha256:e5af227e6897e4e8ce4a73b62005571556cb8ca7ef55b69ded243e4e4821ab83
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: real_javascript_parser_success
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-234 emitted the reviewed ACTIVEJS cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be successful output from the real JavaScript/TypeScript compiler parser; exclusion or a nonsemantic disposition does not satisfy this task. No model or provider call occurs.
+
+## SCA-265 Verify parser failure 17591a25c598 for ipfs_accelerate_js/test/unit/test_hf_qwen2_py.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-265
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen2_py.ts
+- Failure content digest: sha256:575bf46fbe26fc4e41839834845b33b6275ed5080d2a1d7025bb3b5013b7dbda
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-266 Verify parser failure 1778e060c331 for ipfs_accelerate_js/test/unit/test_hf_zamba.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-266
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_zamba.ts
+- Failure content digest: sha256:01a3c1e80877744686547935cd059edda087f8616c117fab96c16f1e8367c40f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-267 Verify parser failure 18ea2b2e7c25 for ipfs_accelerate_js/test/unit/test_hf_xglm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-267
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_xglm.ts
+- Failure content digest: sha256:9a06870053a4ebc9c72a4c1902b0a24ad29fd7ef3c48d3e13037f4064294fd24
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-268 Verify parser failure 19514c37db8a for ipfs_accelerate_js/test/unit/test_result_collector.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-268
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588
+- Failure path: ipfs_accelerate_js/test/unit/test_result_collector.ts
+- Failure content digest: sha256:e5c1d9e23cd8d01f9c4170ee5597b7d9c92c29ed14d276a959e2b76146de684f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-269 Verify parser failure 19c9ac006502 for ipfs_accelerate_js/test/unit/test_hf_time_series_transformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-269
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_time_series_transformer.ts
+- Failure content digest: sha256:9fd923ee52d180ad96e0e3d172bd1b9ed5d3f1cd154366cc608a3f12def43041
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-270 Verify parser failure 1ac7f72e7213 for ipfs_accelerate_js/test/unit/test_hf_siglip.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-270
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_siglip.ts
+- Failure content digest: sha256:67c9cc32711cf3f8ad3b09ca0b318907b3ca7d4adcbbc70622c158ae2ca0e4b8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-271 Verify parser failure 1adadde9c446 for ipfs_accelerate_js/test/unit/test_hf_phi.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-271
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_phi.ts
+- Failure content digest: sha256:95a4e93843cf0f072b9589e5716e65b28581698b5f10ac02363ed6e91f0717cb
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-272 Verify parser failure 1bdd09063deb for ipfs_accelerate_js/test/unit/test_hf_segformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-272
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_segformer.ts
+- Failure content digest: sha256:776de22ad617b91bc628082d441b1c6414dbda33f4324c03666d739150db2a71
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-273 Verify parser failure 1d3e7e3f28bf for ipfs_accelerate_js/test/unit/test_hf_rwkv.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-273
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_rwkv.ts
+- Failure content digest: sha256:5e8077198c9f568045acad9dc65fe0ef7e5b33c2a9d437871e13345352dccb3b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-274 Verify parser failure 1f0eb49ce1b4 for ipfs_accelerate_js/test/unit/test_hf_llava.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-274
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_llava.ts
+- Failure content digest: sha256:60fbc9a4287a0bd023b0c4c00ee2c8403afb2ffd037cf0ebe14db774c756f49b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-275 Verify parser failure 2088955a5a15 for ipfs_accelerate_js/test/unit/test_hf_pix2struct.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-275
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pix2struct.ts
+- Failure content digest: sha256:58dd23f5868e7ff6b84bdd77897b779dd728e2f6742959f8c6fb160d469e88f9
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-276 Verify parser failure 221c2bab15dd for ipfs_accelerate_js/test/unit/test_hf_xlm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-276
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_xlm.ts
+- Failure content digest: sha256:d7c34fd37b557587bab80ed23e81be6ae30581aff9401cbd492296203844df87
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-277 Verify parser failure 222bdf85b2bd for ipfs_accelerate_js/test/unit/test_hf_convnextv2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-277
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_convnextv2.ts
+- Failure content digest: sha256:9f9a27f281b94a9d38e6cdaff2d838daeed2504490a856b6a248773c5f8daf05
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-278 Verify parser failure 24096d493233 for ipfs_accelerate_js/test/unit/test_hf_patchtst.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-278
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_patchtst.ts
+- Failure content digest: sha256:53873fdd3b318f497a7e4723da5b9bec59fde78cf712d965aff214d7987ea5fb
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-279 Verify parser failure 248965dd4be4 for ipfs_accelerate_js/test/unit/test_hf_sew.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-279
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_sew.ts
+- Failure content digest: sha256:35e9d423fa3175e4c26ea557cdeadb8f0650cd444ff5261cdd401b11d53a4a24
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-280 Verify parser failure 2494639f9270 for ipfs_accelerate_js/test/unit/test_hf_opt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-280
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_opt.ts
+- Failure content digest: sha256:fb37836bec4fbd56a1ac79421605445f61bcfd9d162f63700d1f475c5fc357b3
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-281 Verify parser failure 24f7305b930c for ipfs_accelerate_js/test/unit/test_hf_starcoder2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-281
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_starcoder2.ts
+- Failure content digest: sha256:d620834619e513c2e2578609006957d17ea5e2522e7107d471b9df7dd5d9bf7a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-282 Verify parser failure 250a97471fe2 for ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-282
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625
+- Failure path: ipfs_accelerate_js/test/unit/test_comprehensive_hardware.ts
+- Failure content digest: sha256:d64c4a3492be8611c669b9486b2b5fd39e92ff5872837afb3b1201075a96fc11
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-283 Verify parser failure 2554e763c483 for ipfs_accelerate_js/test/unit/test_hf_upernet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-283
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_upernet.ts
+- Failure content digest: sha256:0c603b9f0e32cdff8e7a4c88e6f7955e47bf0ee1febc38dbeb7914655516280e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-284 Verify parser failure 26c3ff2e5d03 for ipfs_accelerate_js/test/unit/test_hf_led.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-284
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_led.ts
+- Failure content digest: sha256:eaac4dffc4a22749a9c2a9434ebe9e3a52078e24cc353a13536d854fbce6968c
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-285 Verify parser failure 27438a60efb2 for ipfs_accelerate_js/test/unit/test_hf_speech_to_text_2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-285
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_speech_to_text_2.ts
+- Failure content digest: sha256:2c5d6a59a67154531bf6007070a239f73afe7bfb2be57d86628ee366fde0bb01
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-286 Verify parser failure 2781ce3ca96c for web/legacy-archive/js/apps/vibecode-broken.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-286
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd
+- Failure path: web/legacy-archive/js/apps/vibecode-broken.js
+- Failure content digest: sha256:a63572de30d2a43596bce9b024484034d4c7598cac3a008b64ac22f8fb2c3c4e
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-287 Verify parser failure 2805459071d6 for ipfs_accelerate_js/test/unit/test_multimodal_optimization.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-287
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2
+- Failure path: ipfs_accelerate_js/test/unit/test_multimodal_optimization.ts
+- Failure content digest: sha256:68d9e63fb97c5cc748ddca689c4517a92f3aa250cc3b537c23e14fb9da144ce2
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-288 Verify parser failure 2847f89e839f for ipfs_accelerate_js/test/unit/test_hf_layoutlm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-288
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_layoutlm.ts
+- Failure content digest: sha256:fc07561e3c21cc4a659895690e659999aa9795b7a16b021797b571737b57ce72
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-289 Verify parser failure 2892d151b1a9 for ipfs_accelerate_js/test/unit/test_hf_git.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-289
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_git.ts
+- Failure content digest: sha256:bdbcde416b2c4cc63a331b91842d9cf72d7b27bdfe0c6d8e3ad63c22e744976b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-290 Verify parser failure 2b6a4457dc66 for ipfs_accelerate_js/test/unit/test_hf_granitemoe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-290
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_granitemoe.ts
+- Failure content digest: sha256:52444704f4a86aca0eb813bf49032c6ee88c0d70a6b35407b7a805a23b0fc811
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-291 Verify parser failure 2be5edfdde98 for ipfs_accelerate_js/test/unit/test_hf_marian.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-291
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_marian.ts
+- Failure content digest: sha256:4fa9e25558ce85afada3b1087c495354ae103e15545d2386a390dbe109d18af3
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-292 Verify parser failure 2bebca3f4ba9 for ipfs_accelerate_js/test/unit/test_hf_xmod.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-292
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_xmod.ts
+- Failure content digest: sha256:52cbbe2472d1045a5d7a3453b4e2f0c9d1b1abc757d8bd9f44fe09471be0c812
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-293 Verify parser failure 2d460815c8bc for ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-293
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7
+- Failure path: ipfs_accelerate_js/test/browser/test_ipfs_accelerate_webnn_webgpu.ts
+- Failure content digest: sha256:2777a3ea8931ec88f146e23d33b22140abe7118e1320f23a06f0d3e4a1d1b51f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-294 Verify parser failure 2d7899c5b2e8 for ipfs_accelerate_js/test/unit/test_hf_instructblip.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-294
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_instructblip.ts
+- Failure content digest: sha256:a5e88e3349c7b964a0498f1f50c51edce41e59bede1c075b9662ed788cd80e4a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-295 Verify parser failure 2e1ac6fa1454 for ipfs_accelerate_js/test/unit/test_onnx_verification.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-295
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918
+- Failure path: ipfs_accelerate_js/test/unit/test_onnx_verification.ts
+- Failure content digest: sha256:e1c994c8b86a1c32eba951ee758b1a9fceb2de393fb0e65e9f8fada0f03fe2b6
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-296 Verify parser failure 2e620f9b548f for ipfs_accelerate_js/test/unit/test_hf_switch_transformers.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-296
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_switch_transformers.ts
+- Failure content digest: sha256:796f41a31f662b7fa55284bf1bba1dd81d17e3e0f057a6c2c8b70f27e6bbd448
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-297 Verify parser failure 2fa25cc4d68f for ipfs_accelerate_js/test/unit/test_hf_mobilenet_v2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-297
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mobilenet_v2.ts
+- Failure content digest: sha256:bca920a236ca1a721f477a05d70b9e20414a76cfc34f60c21049aa9668e752df
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-298 Verify parser failure 2fbf4a7e58b9 for ipfs_accelerate_js/test/unit/test_qnn_support.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-298
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972
+- Failure path: ipfs_accelerate_js/test/unit/test_qnn_support.ts
+- Failure content digest: sha256:b146f0bd5bfca4bf0b5a119dc3e2294c59deac76db5984ea45faf58480f1889e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-299 Verify parser failure 30bd36c75117 for ipfs_accelerate_js/test/unit/test_hf_orca3.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-299
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_orca3.ts
+- Failure content digest: sha256:c412a4bb1f165e5aa94098cac466870991d147ec2144ac06f3fac8d35484f2f4
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-300 Verify parser failure 31bfdeded19e for ipfs_accelerate_js/test/unit/test_hf_trajectory_transformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-300
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_trajectory_transformer.ts
+- Failure content digest: sha256:eecff396ce25a5a7d8100e5b56e075dc46f02274c783f941e823393c7a771301
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-301 Verify parser failure 3287a95b6189 for ipfs_accelerate_js/test/unit/test_hf_mask2former.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-301
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mask2former.ts
+- Failure content digest: sha256:27e0c73098b4c3315d0385acc54350686a5df186f09054702be882ccb2a196c6
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-302 Verify parser failure 32aad07c0b9e for ipfs_accelerate_js/test/unit/test_multi_model_execution.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-302
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc
+- Failure path: ipfs_accelerate_js/test/unit/test_multi_model_execution.ts
+- Failure content digest: sha256:af3b42a6ef73600d1bdc00706d06f96566b0c080009fa194910274f222747402
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-303 Verify parser failure 3354cdb5f185 for ipfs_accelerate_js/test/unit/test_hf_cohere.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-303
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_cohere.ts
+- Failure content digest: sha256:3fd0ece78c903115f37b26b17de9e3e464f65e4cc4ab5cd053ac8532b004ced8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-304 Verify parser failure 337d2a86e5c4 for ipfs_accelerate_js/test/unit/test_unified_framework.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-304
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07
+- Failure path: ipfs_accelerate_js/test/unit/test_unified_framework.ts
+- Failure content digest: sha256:90f295d33ac199c6108e0313936cf8927dc2316a426a280dd310d54e3cc42568
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-305 Verify parser failure 34931ed29838 for ipfs_accelerate_js/test/unit/test_hf_hiera.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-305
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_hiera.ts
+- Failure content digest: sha256:72783192fda404ba719ac8d074bffb943d8e294370926ae64b543262bea67748
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-306 Verify parser failure 3729abbfd211 for ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-234
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-306
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-activejs
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b
+- Failure family: ACTIVEJS
+- Failure row id: sca-repository-index-row:sha256:3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b
+- Failure path: ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js
+- Failure content digest: sha256:cf5f706ce30f4f3b0a68a06231640ba5d57ca2141364bc6384e3d73a96d42423
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: reviewed_nonsemantic_shell_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-234 emitted the reviewed ACTIVEJS cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be a reviewed nonsemantic shell-script disposition bound to its shebang/content identity; it must not be reported as JavaScript parser success. No model or provider call occurs.
+
+## SCA-307 Verify parser failure 3744c6709a96 for web/legacy-archive/main.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-307
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e
+- Failure path: web/legacy-archive/main.ts
+- Failure content digest: sha256:de700bff0e2772aca675203e89725d6429b0c6cf16296cfe7f1bc79bef5f2470
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-308 Verify parser failure 3aa8ec153c93 for ipfs_accelerate_js/test/unit/test_hf_yoso.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-308
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_yoso.ts
+- Failure content digest: sha256:2d6a4fb61dcee32817c033d2fe865bbbe2da9a28b8ac071496b29392c63d2a36
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-309 Verify parser failure 3ab73ec63824 for ipfs_accelerate_js/test/unit/test_hf_lxmert.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-309
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_lxmert.ts
+- Failure content digest: sha256:9c6f0b88ffaa1dc904ef4e429f816aca53d87c19adf5b7565b506e6df41452fb
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-310 Verify parser failure 3b5871a75d58 for ipfs_accelerate_js/test/unit/test_hf_univnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-310
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_univnet.ts
+- Failure content digest: sha256:11cf58ef52df6455ee56b97ddb16b535647cf303d9cfe3e2bdc6d5c07f393804
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-311 Verify parser failure 3d1a81b9423a for ipfs_accelerate_js/test/unit/test_hf_mixtral.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-311
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mixtral.ts
+- Failure content digest: sha256:4b13802f0239598594f5bfc893df2ac20de3324e5f7be955b59b084f1e035fef
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-312 Verify parser failure 3d9892e7a0a2 for ipfs_accelerate_js/test/unit/test_hf_idefics.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-312
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_idefics.ts
+- Failure content digest: sha256:e817df60313b69ac4caf76da07890b2a09990d2d139bf1e1cbb07a69cff2db6b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-313 Verify parser failure 3ebbb8ad96db for ipfs_accelerate_js/test/unit/test_registry_fixer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-313
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9
+- Failure path: ipfs_accelerate_js/test/unit/test_registry_fixer.ts
+- Failure content digest: sha256:19f7ff0e7af33e9cf42ab19f2564caa2c5fc553314924ca2c24cd75570c73691
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-314 Verify parser failure 418bcd30c6be for ipfs_accelerate_js/test/unit/test_hf_mgp_str.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-314
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mgp_str.ts
+- Failure content digest: sha256:4705b73ab5608842ccfcd292eca8e588cb2a2594ca55a867d0d364df01ac41c8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-315 Verify parser failure 4392b0cb300d for ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-315
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32
+- Failure path: ipfs_accelerate_js/test/browser/test_webnn_minimal.ts
+- Failure content digest: sha256:5e1efadac0ffaa2f89ab5e8ebe2d23d8837707f43b384f417476a89863269ed5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-316 Verify parser failure 43a856bc480c for ipfs_accelerate_js/test/unit/test_hf_poolformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-316
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_poolformer.ts
+- Failure content digest: sha256:45e6adab5d439973e86a798f47f3950cc2163312c9cc9a7ed1e7ad2063c3dd1a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-317 Verify parser failure 4420af95d20d for ipfs_accelerate_js/test/unit/test_hf_owlv2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-317
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_owlv2.ts
+- Failure content digest: sha256:f5b0ed763960fbc3cf877ed2ee1934060acbbd1efc1486e3f717219df6b29e75
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-318 Verify parser failure 47196e5eb61f for ipfs_accelerate_js/test/unit/test_hf_xlm_prophetnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-318
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_xlm_prophetnet.ts
+- Failure content digest: sha256:7e0f5a847ecc26e1148a04fa3f1459a5bad9789762c039c49b32898b481c2115
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-319 Verify parser failure 472afb03a0df for ipfs_accelerate_js/test/unit/test_hf_funnel.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-319
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_funnel.ts
+- Failure content digest: sha256:9012cd3cf2a950c40750a9297f80022c20fecc2ea1e77fa5f33b7d1492a7edac
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-320 Verify parser failure 47916b3341ef for ipfs_accelerate_js/test/unit/test_model_update_pipeline.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-320
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98
+- Failure path: ipfs_accelerate_js/test/unit/test_model_update_pipeline.ts
+- Failure content digest: sha256:4afa99d8825bb2ec155214866335a396570fa97cf2a73072a467384dac18d9f2
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-321 Verify parser failure 4853e4bbc71a for ipfs_accelerate_js/test/unit/test_hf_ernie_m.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-321
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_ernie_m.ts
+- Failure content digest: sha256:1df511ed34e246e8589a7dfc0c3e693aeec8102b65ea05031c97a5efefbb11ac
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-322 Verify parser failure 4b7db65a4619 for ipfs_accelerate_js/test/unit/test_hf_regnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-322
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_regnet.ts
+- Failure content digest: sha256:b6d11d8cb44327d7896c32657e7d10c260b1b4559fbbf92c96b0edfeb431456d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-323 Verify parser failure 4ef2c4fc9151 for ipfs_accelerate_js/test/unit/test_qnn_detection.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-323
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d
+- Failure path: ipfs_accelerate_js/test/unit/test_qnn_detection.ts
+- Failure content digest: sha256:c6ae12a038148bdce03c8954ed7153f93f5d0bef46d775177a571a9ce4da9a0f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-324 Verify parser failure 50e808e482bd for ipfs_accelerate_js/test/unit/test_hf_qwen3.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-324
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen3.ts
+- Failure content digest: sha256:e95c5e0b83317825560db2faf026a6ed73e4b17ac5820c38c53a4ddeee811d30
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-325 Verify parser failure 51ebe5b267e0 for ipfs_accelerate_js/test/unit/test_openvino_backend.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-325
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19
+- Failure path: ipfs_accelerate_js/test/unit/test_openvino_backend.ts
+- Failure content digest: sha256:87fe843fdd77388469c9ebdc0036a7746f9a897fd6691deacd0a51bf39728d67
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-326 Verify parser failure 5296ac9e71ed for ipfs_accelerate_js/test/unit/test_hf_jetmoe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-326
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_jetmoe.ts
+- Failure content digest: sha256:400568e8cfddfe757ff43537b2db996994faa1677d2b2e29366063264dd44cfe
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-327 Verify parser failure 52e3072912ab for ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-235
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-327
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-python
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5
+- Failure family: PYTHON
+- Failure row id: sca-repository-index-row:sha256:52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5
+- Failure path: ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py
+- Failure content digest: sha256:bc48a7adeaca347b311c730bdcaa1b4024640c81d68dc116564573752758992e
+- Official failure cluster: failure-cluster:sha256:8a2f6289d5a8a04d3402d4978c7906a9e4177288d7e18ba9fa64ba7c04ee73e2
+- Required resolution: reviewed_symlink_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-235 emitted the reviewed PYTHON cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be a reviewed symlink disposition produced before suffix eligibility; parser success or a generic unsupported disposition does not satisfy this task. No model or provider call occurs.
+
+## SCA-328 Verify parser failure 53facdcbb538 for ipfs_accelerate_js/test/unit/test_hf_plbart.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-328
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_plbart.ts
+- Failure content digest: sha256:fceda8a76980185cf9988e1f6ea89513c9d3b8b06b9d183c21846f66ab502b25
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-329 Verify parser failure 551449139769 for ipfs_accelerate_js/test/unit/test_hf_mamba.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-329
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mamba.ts
+- Failure content digest: sha256:6ef2cbf7075589f7af30fe9bcfc826f8d31b745eead6571f871363436fe9161b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-330 Verify parser failure 5671fc7c9b4d for ipfs_accelerate_js/test/unit/test_hf_encodec.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-330
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_encodec.ts
+- Failure content digest: sha256:460e88bbfbd4a8caca0a864cb036448f97bfbf96ef710bfcbfa53020e6056a31
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-331 Verify parser failure 575edbd982f3 for ipfs_accelerate_js/test/unit/test_hf_imagebind.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-331
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_imagebind.ts
+- Failure content digest: sha256:6b88ca214158a5fda7e3fd8c4f0c3ff117928211a4985592a71e06d7792b19c2
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-332 Verify parser failure 578afdc4a624 for ipfs_accelerate_js/test/unit/test_hf_jamba.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-332
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_jamba.ts
+- Failure content digest: sha256:7af1ab529212fee62ba1f2091fc280dd1b4143ed64afa953966b6d2e33492efe
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-333 Verify parser failure 5908cb4e68e7 for ipfs_accelerate_js/test/unit/test_hf_timm_backbone.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-333
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_timm_backbone.ts
+- Failure content digest: sha256:6eb3dd9d7032934bb2c44353af7fa7d9abc069655759fd5d9745f9a94c201136
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-334 Verify parser failure 596f7f193aec for ipfs_accelerate_js/test/unit/test_hf_musicgen_melody.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-334
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_musicgen_melody.ts
+- Failure content digest: sha256:6cf8cb9dfb14d4b843f305a779a4fcf7d2482cc1d51299c321e873d388bc5fe6
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-335 Verify parser failure 59fbd8e810b4 for ipfs_accelerate_js/test/unit/test_hf_markuplm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-335
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_markuplm.ts
+- Failure content digest: sha256:cb24ff3be7b4dfb51b865b04a1544828ab1a84c9a205dd9d33c1adc850fe2e7b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-336 Verify parser failure 5a6a0d061ca2 for ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-336
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d
+- Failure path: ipfs_accelerate_js/test/browser/test_webgpu_4bit_model_coverage.ts
+- Failure content digest: sha256:f2a2473ec0d40d06b09b2e4dd854e6cd63a47293ac11a1a10122b793ef034e05
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-337 Verify parser failure 5b1e2baeb187 for ipfs_accelerate_js/test/unit/test_hf_phi3.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-337
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_phi3.ts
+- Failure content digest: sha256:a34bd1d008b429d8322102a2ef7d9d486157f19c8d886362730cefb0b2559b99
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-338 Verify parser failure 5c16ae8733c2 for ipfs_accelerate_js/test/unit/test_hf_wav2vec2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-338
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_wav2vec2.ts
+- Failure content digest: sha256:15aceb9b9a347551f8828f4ba73f17a651a45ed697f2354efa316ab9f200c0ca
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-339 Verify parser failure 5e11e0a22d56 for ipfs_accelerate_js/test/unit/test_hf_mega.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-339
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mega.ts
+- Failure content digest: sha256:c5ddc5c0631ace67292a04b5f7fa8b9bc8df926757a569faa5205400e3376d89
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-340 Verify parser failure 602f5dcf1d4a for ipfs_accelerate_js/test/unit/test_hf_roformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-340
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_roformer.ts
+- Failure content digest: sha256:9381c89bd7ccf3ddd925ca845a8725282feb9c93302d47c420bac1dc41c07239
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-341 Verify parser failure 61752bc4d7b1 for ipfs_accelerate_js/test/unit/test_hf_fsmt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-341
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_fsmt.ts
+- Failure content digest: sha256:47ad5fd3fa831907bf826b10c5135a7b8164309b906f80b46b4c4bdce2d8a15b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-342 Verify parser failure 6232e8d9361f for ipfs_accelerate_js/test/unit/test_hf_swiftformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-342
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_swiftformer.ts
+- Failure content digest: sha256:60cf51f98d50723b1dc359da5f814f2b49cf6992b0c6db9ee1f8771ede380588
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-343 Verify parser failure 62b9bec26182 for ipfs_accelerate_js/test/unit/test_ipfs_accelerate.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-343
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355
+- Failure path: ipfs_accelerate_js/test/unit/test_ipfs_accelerate.ts
+- Failure content digest: sha256:6e2d6eef7fffa6c3caf2a1d9089b7dd2e8593bf2c1429a51950b797fa74c3c18
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-344 Verify parser failure 6354badf69d3 for ipfs_accelerate_js/test/unit/test_hf_van.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-344
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_van.ts
+- Failure content digest: sha256:c26f687803449d8c9c88d1b73d61bf46c2b740eae16838c42168ef7fab59f42e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-345 Verify parser failure 6359622722ae for ipfs_accelerate_js/test/unit/test_hf_vilt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-345
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_vilt.ts
+- Failure content digest: sha256:9fe003fe4918890e7be18e6f53ecf658505d18eab174033c29e7506377ceedd1
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-346 Verify parser failure 63d84ee07415 for ipfs_accelerate_js/test/unit/test_hf_llava_next.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-346
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_llava_next.ts
+- Failure content digest: sha256:7a5b0008c392daa7798c0b68a6c38a5ba70bc6e3704016ebaba8dcbcf09866ba
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-347 Verify parser failure 653e8f556fff for ipfs_accelerate_js/test/unit/test_hf_focalnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-347
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_focalnet.ts
+- Failure content digest: sha256:4ac2fa621d8492c7bc3ce572b34fcfa5ca5920f4dab4f13b78c4450cd889ae75
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-348 Verify parser failure 65729ce3fa25 for ipfs_accelerate_js/test/unit/test_hf_resnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-348
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_resnet.ts
+- Failure content digest: sha256:4c841f7f6164778e298bf22142baaf3cea216d7031631dd87bec8d846f25bb9d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-349 Verify parser failure 670837bca6e8 for ipfs_accelerate_js/test/unit/test_hf_moshi.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-349
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_moshi.ts
+- Failure content digest: sha256:e7b132fa9f991637c7ac51849ebc219d5b5054c2560060e0466a4ce2929ef9ab
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-350 Verify parser failure 67e377e1b04b for ipfs_accelerate_js/test/unit/test_hf_falcon.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-350
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_falcon.ts
+- Failure content digest: sha256:6a53b160c0aa37cf8d4fe0cee5cbab9a85dc4601aec62f9ab066be504c3c9948
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-351 Verify parser failure 6963d3261cf9 for ipfs_accelerate_js/test/unit/test_visualization_standalone.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-351
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b
+- Failure path: ipfs_accelerate_js/test/unit/test_visualization_standalone.ts
+- Failure content digest: sha256:066edf790c3896f29f35f4aaf5992817da842134489bfc4fab417db811975a14
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-352 Verify parser failure 69a832d3a3a9 for ipfs_accelerate_js/test/unit/test_hf_speech_to_text.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-352
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_speech_to_text.ts
+- Failure content digest: sha256:729814a82d9136ad42c15e95b438606b838c26ff80241713c7a327429e9f3be5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-353 Verify parser failure 6cb26a004d99 for ipfs_accelerate_js/test/unit/test_hf_unispeech.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-353
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_unispeech.ts
+- Failure content digest: sha256:2ae92703a7a33477f3cf0ce3e5c75f77ca2b49f504c52750a5a3757e08bd4dd5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-354 Verify parser failure 6f1ae7df02b6 for ipfs_accelerate_js/test/unit/test_hf_lilt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-354
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_lilt.ts
+- Failure content digest: sha256:b0a9b938712860b7db8ae4dfa613b2d00c75fd754f03572da003983a4a60da70
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-355 Verify parser failure 6fa60992b39a for ipfs_accelerate_js/test/unit/test_hf_grounding_dino.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-355
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_grounding_dino.ts
+- Failure content digest: sha256:3823414ea656162ea33256d90336d1fa8ed7e2217b1663325a2d054a6b39857d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-356 Verify parser failure 71311136e6f8 for ipfs_accelerate_js/test/unit/test_hf_vqgan.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-356
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_vqgan.ts
+- Failure content digest: sha256:1e202f22ceeeeca161aa336a79ee9bd7a6888d4b05e1acf7b2774df09e897811
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-357 Verify parser failure 7185649d68c5 for ipfs_accelerate_js/test/unit/test_load_balancer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-357
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651
+- Failure path: ipfs_accelerate_js/test/unit/test_load_balancer.ts
+- Failure content digest: sha256:cc6df12c1bd7fa25518615bed23f149dbc56d6733c538af4bacd1977f177d312
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-358 Verify parser failure 72f0f1f6d690 for ipfs_accelerate_js/test/unit/test_hf_timesformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-358
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_timesformer.ts
+- Failure content digest: sha256:5dc8570cb3d2dff359bc13a9b14227b7b029a6c5006153edc90a5903f39ff335
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-359 Verify parser failure 73c24ad31244 for ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-359
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_blenderbot_small.ts
+- Failure content digest: sha256:6634d37a9806957a0f88116a4d2e8a2629407b7a584b40afc1884d362aec872d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-360 Verify parser failure 766d33aa8e4c for ipfs_accelerate_js/test/unit/test_hf_sew_d.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-360
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_sew_d.ts
+- Failure content digest: sha256:a71442e6d87863d9758d18ec361cde3b6e973c5217e6db60832f46381ad28f0e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-361 Verify parser failure 7779e9197739 for ipfs_accelerate_js/test/unit/test_hf_mistral.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-361
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mistral.ts
+- Failure content digest: sha256:b9423056c05efbad657508fdec1dda57fffb92bd456daab1031e82ef3b7ee226
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-362 Verify parser failure 785c7f145632 for ipfs_accelerate_js/test/unit/test_hf_table_transformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-362
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_table_transformer.ts
+- Failure content digest: sha256:365e2e0fb5ffe6e2e551a1c97fb417b00909ee40597be20705316881c9418dd0
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-363 Verify parser failure 7a4fb72eb776 for ipfs_accelerate_js/test/unit/test_hf_transfo_xl.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-363
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_transfo_xl.ts
+- Failure content digest: sha256:aaf25a24044fe9f22a59c710f344d62340e57bd59604fca73ddd39e9680c838e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-364 Verify parser failure 7b5ad72a69b6 for ipfs_accelerate_js/test/unit/test_hf_persimmon.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-364
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_persimmon.ts
+- Failure content digest: sha256:0953b97dbc74dac8b37f9e1b94caeb543dc0252b7b90d619ac270bd2e8aefabc
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-365 Verify parser failure 7c8e81583edb for ipfs_accelerate_js/test/unit/test_hf_swin2sr.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-365
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_swin2sr.ts
+- Failure content digest: sha256:2db63854a7b95fca74d3fc7b6826681a0a9fdcd8bd45d4319dc56e36d1ede89d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-366 Verify parser failure 7ed1e51831bb for ipfs_accelerate_js/test/unit/test_hf_video_llava.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-366
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_video_llava.ts
+- Failure content digest: sha256:ea74c63247e9209d90efe7214d194a2ab9d099dfc59f076cc949b7d3c28f77cd
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-367 Verify parser failure 829d7d7ceae3 for ipfs_accelerate_js/test/unit/test_hf_musicgen.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-367
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_musicgen.ts
+- Failure content digest: sha256:134899d6b2bc7bc503764feaa6f33d7d12c8c6710d5f8c67f77f9a7d21739b8d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-368 Verify parser failure 8499d81b2c60 for web/legacy-archive/src/browser-main.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-368
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b
+- Failure path: web/legacy-archive/src/browser-main.ts
+- Failure content digest: sha256:432e0670371ceb3c52c215a67f1446dcbdcafe676e363733d7021ca28a78a4b4
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-369 Verify parser failure 84f4fcdeeb9b for ipfs_accelerate_js/test/unit/test_hf_gemma3.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-369
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_gemma3.ts
+- Failure content digest: sha256:bac76de24c6a14a6cfc6a03921616070073dfc4e1c4918f72d50fc9674428009
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-370 Verify parser failure 854bf68cfadd for ipfs_accelerate_js/test/unit/test_hf_pixtral.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-370
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pixtral.ts
+- Failure content digest: sha256:38d190d0f9fcf7ee852d609db0e20d27ce44a961be0e5caab159dd4cd5a487dc
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-371 Verify parser failure 864e7d25fdb0 for ipfs_accelerate_js/test/unit/test_hf_tvlt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-371
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_tvlt.ts
+- Failure content digest: sha256:2cf1800211442cd30902cf928bbf158fb935091e2fe5d730de9f2c8829c0a37d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-372 Verify parser failure 86d1926d5e85 for ipfs_accelerate_js/test/unit/test_hf_patchtsmixer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-372
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_patchtsmixer.ts
+- Failure content digest: sha256:492a7dc3c7990d20347a3c89a512c3a59e10cb64129ba7af2b984d9577e5b8ee
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-373 Verify parser failure 871379cfe58b for ipfs_accelerate_js/test/unit/test_hf_canine.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-373
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_canine.ts
+- Failure content digest: sha256:e6d82ce4f31830ae8ef98d7671805cff0ae2cfdce552a735da20e99b0e2189a0
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-374 Verify parser failure 880e85d65fdd for test/utils/mockMCPClient.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-234
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-374
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-activejs
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991
+- Failure family: ACTIVEJS
+- Failure row id: sca-repository-index-row:sha256:880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991
+- Failure path: test/utils/mockMCPClient.js
+- Failure content digest: sha256:844e86940659957e02cdb8eddb14e2ed2d4ad8c15dcc0a2134399355be75a058
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: real_javascript_parser_success
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-234 emitted the reviewed ACTIVEJS cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be successful output from the real JavaScript/TypeScript compiler parser; exclusion or a nonsemantic disposition does not satisfy this task. No model or provider call occurs.
+
+## SCA-375 Verify parser failure 885c606c1555 for ipfs_accelerate_js/test/unit/test_hf_xlnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-375
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_xlnet.ts
+- Failure content digest: sha256:da22ab21e3d45357ed9919bd3f47cf721e5255fd6fa79317a367a1f7188592f1
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-376 Verify parser failure 88e49fed3372 for ipfs_accelerate_js/test/unit/test_hf_omdet_turbo.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-376
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_omdet_turbo.ts
+- Failure content digest: sha256:b259f5eb4dc7ccd91ae20e8f95905111f2bb2722eeeb9368b93078e1ec3cd91e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-377 Verify parser failure 8a5e4059d39a for ipfs_accelerate_js/test/unit/test_hf_mpt.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-377
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mpt.ts
+- Failure content digest: sha256:d79c3dafdf40280052f8bb0b6f32bb2262bd65dbfe55f45dfdcabb93cc5ffc42
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-378 Verify parser failure 8b2680a72f75 for ipfs_accelerate_js/test/unit/test_hf_mamba2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-378
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mamba2.ts
+- Failure content digest: sha256:604caf3d0d6a9798c39381903daa77ddf97d2646e643fdcc10bf1846114fc4ce
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-379 Verify parser failure 90c1ca1c9b73 for ipfs_accelerate_js/test/unit/test_hf_tvp.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-379
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_tvp.ts
+- Failure content digest: sha256:218488382623262d614641287fe5a4667114e8fc1e2a612e39b99d4ead3cf3aa
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-380 Verify parser failure 9201d729e599 for ipfs_accelerate_js/test/unit/test_hf_pegasus.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-380
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pegasus.ts
+- Failure content digest: sha256:21d207d2b99a9e9e21049eed33f18bddcc78f738e3d757a033d5811ec985fde4
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-381 Verify parser failure 9534e662baf2 for ipfs_accelerate_js/test/unit/test_hf_graphsage.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-381
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_graphsage.ts
+- Failure content digest: sha256:d35a0b8315e3b3b45e03efb42dd92caa008fcfa94d5487af269a12c286e3c25b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-382 Verify parser failure 9538436d8be0 for ipfs_accelerate_js/test/unit/test_visualization_direct.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-382
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489
+- Failure path: ipfs_accelerate_js/test/unit/test_visualization_direct.ts
+- Failure content digest: sha256:5ea59d39d2530af52e29fddc8f0a979db177016051e6eeb34a4476a2edeaa4b6
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-383 Verify parser failure 9762db2e4a5e for ipfs_accelerate_js/test/unit/test_hf_swin.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-383
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_swin.ts
+- Failure content digest: sha256:af7bf92201df1abe81bc2d804a3e900752603eb458a06183e69e7cca9859ecf8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-384 Verify parser failure 97a260a3307d for ipfs_accelerate_js/test/unit/test_hf_recurrent_gemma.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-384
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_recurrent_gemma.ts
+- Failure content digest: sha256:c90d46add9c5f8975d11b48faac47b90579452c1f120568a1f0d118568dd0d7d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-385 Verify parser failure 9a2fc4638b35 for ipfs_accelerate_js/test/unit/test_hf_splinter.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-385
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_splinter.ts
+- Failure content digest: sha256:acdfb97bac1538ab5d489a9f1bc0140b1573d9d78530ac6c323d43c9c65b02da
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-386 Verify parser failure 9acacfedf00a for ipfs_accelerate_js/test/unit/test_hf_paligemma.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-386
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_paligemma.ts
+- Failure content digest: sha256:cdff739cb652d650fa48595557c7b7d375dfb8c759f75db01b29dd4fb54108dc
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-387 Verify parser failure 9b559675d12d for ipfs_accelerate_js/test/unit/test_hf_pop2piano.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-387
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pop2piano.ts
+- Failure content digest: sha256:609fa66ac58e176e203dafebe2040d86bc47fd029e5cf097343cda1aee9df402
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-388 Verify parser failure 9ba2f8c62fb4 for ipfs_accelerate_js/test/unit/test_hf_nllb_moe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-388
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_nllb_moe.ts
+- Failure content digest: sha256:f3a97a40dcfc4f34403d98a934205fd9727ddb3915f02ac7b07167985c5ee558
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-389 Verify parser failure 9c4af84dbc5d for ipfs_accelerate_js/test/unit/test_hf_mistral_nemo.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-389
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mistral_nemo.ts
+- Failure content digest: sha256:975994d6198bd01fa1b6a03ee6acebb6164ef042e1503b221bd157f2d8449c7b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-390 Verify parser failure 9c52951039e8 for ipfs_accelerate_js/test/unit/test_hardware_backend.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-390
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb
+- Failure path: ipfs_accelerate_js/test/unit/test_hardware_backend.ts
+- Failure content digest: sha256:126310b3f8fc77c92895d4291fd631c22f10f9e499e4a02736f3a3cdb484fd5c
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-391 Verify parser failure 9d4da253d59d for ipfs_accelerate_js/test/unit/test_hf_mbart.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-391
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mbart.ts
+- Failure content digest: sha256:1983cd1b63deb1e7fdb2050d98a350c2f07fe1e40967a39718cbd25842ca0aac
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-392 Verify parser failure 9e8124419622 for ipfs_accelerate_js/test/unit/test_visualization.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-392
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90
+- Failure path: ipfs_accelerate_js/test/unit/test_visualization.ts
+- Failure content digest: sha256:b1d1c6ffd564c5ceb86db43af1ad30bb694a02f214f0046e5bbe42fe7183192e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-393 Verify parser failure a007b8b42d2d for ipfs_accelerate_js/test/unit/test_hf_wav2vec2_conformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-393
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_wav2vec2_conformer.ts
+- Failure content digest: sha256:ffdf7d74031b04322ca8618bf254daa47176ccb1a36f36278e9ea575ebec0141
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-394 Verify parser failure a00ce5fe8155 for ipfs_accelerate_js/test/unit/test_hf_qwen2_7b.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-394
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen2_7b.ts
+- Failure content digest: sha256:4888244b81a884bed2b5f43e6944d7b436cfdbb48f2e406af2083d29717decc8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-395 Verify parser failure a0506d17511b for ipfs_accelerate_js/test/unit/test_hf_fnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-395
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_fnet.ts
+- Failure content digest: sha256:9a071231efe69a916b55cb711ed1cbd39cba943f774c60f0771a55c7978cb7b0
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-396 Verify parser failure a061c9b2c343 for ipfs_accelerate_js/test/unit/test_hf_ulip.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-396
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_ulip.ts
+- Failure content digest: sha256:4711edca59fb30de482d673365a36f4915ccae18da6537bcd3761dae12ca3f2d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-397 Verify parser failure a06c24fec967 for ipfs_accelerate_js/test/unit/test_hf_swinv2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-397
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_swinv2.ts
+- Failure content digest: sha256:053f55d7188004f17690a8935500e0fb61963ca0b611360b12c61374613520bd
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-398 Verify parser failure a1eb895fad9e for web/legacy-archive/js/apps/strudel-grandma-broken.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-398
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808
+- Failure path: web/legacy-archive/js/apps/strudel-grandma-broken.js
+- Failure content digest: sha256:f30a6d91a9311e4e363447915ae143c4974a9c5fb0544fffc245033f47c9a517
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-399 Verify parser failure a4c39a37f0aa for ipfs_accelerate_js/test/unit/test_hf_seamless_m4t.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-399
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_seamless_m4t.ts
+- Failure content digest: sha256:fcad29c12bad1300c6a644980495ead748a5f37fb7a5172799f3d7d4b6e7edbe
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-400 Verify parser failure a5be4ef843fe for ipfs_accelerate_js/test/unit/test_hf_kosmos_2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-400
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_kosmos_2.ts
+- Failure content digest: sha256:c74de211988578ba6ab788a09b0c84a6d94d369273911e8524b3a7884036c6ce
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-401 Verify parser failure a79e35142045 for ipfs_accelerate_js/test/unit/test_hf_olmo.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-401
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_olmo.ts
+- Failure content digest: sha256:fc46cd842eb4b9a8aad5f2cefdf529ffed10d3d3e152a861efff09bf613920ba
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-402 Verify parser failure a7f93e4c4dc2 for ipfs_accelerate_js/test/unit/test_hf_pegasus_x.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-402
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_pegasus_x.ts
+- Failure content digest: sha256:cf35b818abc11fc42499512dd11dda2b916da97eeb07e2128087af6c850e2bbf
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-403 Verify parser failure a819a40fba86 for test/mocks/stubs/chai-stub.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-234
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-403
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-activejs
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6
+- Failure family: ACTIVEJS
+- Failure row id: sca-repository-index-row:sha256:a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6
+- Failure path: test/mocks/stubs/chai-stub.js
+- Failure content digest: sha256:803e0cc92fa8d1f4481f173d2ef1711e9e643c432d2a1ef7b2e3ac6a2d104486
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: real_javascript_parser_success
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-234 emitted the reviewed ACTIVEJS cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be successful output from the real JavaScript/TypeScript compiler parser; exclusion or a nonsemantic disposition does not satisfy this task. No model or provider call occurs.
+
+## SCA-404 Verify parser failure a892281a7c52 for ipfs_accelerate_js/test/unit/test_hf_m2m_100.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-404
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_m2m_100.ts
+- Failure content digest: sha256:cb31d3c24c15caeb7dbf87e5214346bc2c53505caf2532de218020899727cd55
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-405 Verify parser failure a8c43606d9e8 for ipfs_accelerate_js/test/unit/test_ipfs_web_integration.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-405
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4
+- Failure path: ipfs_accelerate_js/test/unit/test_ipfs_web_integration.ts
+- Failure content digest: sha256:2813946831e966f1c7341b5460d3188517e3c35142541b3ed048a54e32372dc0
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-406 Verify parser failure a99ef5ea5351 for ipfs_accelerate_js/test/unit/test_hf_longformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-406
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_longformer.ts
+- Failure content digest: sha256:ee73d6576e44dfe52cfc6040b001021ff8763db07ef627c00a261c5bb53a8226
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-407 Verify parser failure aa0d549356cb for ipfs_accelerate_js/test/unit/test_hf_codegen.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-407
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_codegen.ts
+- Failure content digest: sha256:c2e9f924d93d580280b3e70a385df534583f33d0e4cedadf1d9a068fa8568d1b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-408 Verify parser failure af69edbec3a9 for ipfs_accelerate_js/test/unit/test_hf_udop.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-408
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_udop.ts
+- Failure content digest: sha256:28ca3b652744e7237ec2fe48e40d042f24f8cd90631d75c1dc9bf8def5a86b81
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-409 Verify parser failure af9c42605452 for ipfs_accelerate_js/test/unit/test_hf_phimoe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-409
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_phimoe.ts
+- Failure content digest: sha256:ec1a58524d0c9879d42d969c113fb1d1e594162dd202f65a393e5b5ef72d2561
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-410 Verify parser failure afba14684005 for ipfs_accelerate_js/test/unit/test_hf_nat.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-410
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_nat.ts
+- Failure content digest: sha256:02e80acb9eeef168e5f26e07d2f2cf4fd3f453e40feb190763255e9d8b9e01fc
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-411 Verify parser failure b0c561456d25 for ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-411
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_cogvlm2.ts
+- Failure content digest: sha256:d016e6a4c247dd3fc2d49ecdf18934881eb28570f100f1e74a1f743b4cc5e995
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-412 Verify parser failure b19c9747c638 for ipfs_accelerate_js/test/unit/test_hf_luke.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-412
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_luke.ts
+- Failure content digest: sha256:20a89284c086dc86c8bc6cde7ac94afa1c96021cc37b74728069d7fff9c5a0e7
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-413 Verify parser failure b23d95a901e1 for ipfs_accelerate_js/test/unit/test_hf_unispeech_sat.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-413
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_unispeech_sat.ts
+- Failure content digest: sha256:615766a3ce45891d1110324fe2afa249be3ae7f8562b90509d892936eff938f0
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-414 Verify parser failure b3970d200cf5 for ipfs_accelerate_js/test/unit/test_hf_mistral_next.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-414
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mistral_next.ts
+- Failure content digest: sha256:95fa79824a5d2e78a07af110d8bbc60f3fc1fff74d1a7c97d4daef7529ecd739
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-415 Verify parser failure b768bc5f1168 for ipfs_accelerate_js/test/unit/test_hf_layoutlmv3.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-415
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_layoutlmv3.ts
+- Failure content digest: sha256:ab4cfe8d2e58b338afdfdd6417c8c506fddf42823f24248539fcf6f699645c40
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-416 Verify parser failure b7745037b59b for ipfs_accelerate_js/test/unit/test_hf_mpnet.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-416
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mpnet.ts
+- Failure content digest: sha256:13e82afa9f0a7107ae56f608b42123f486cfb8e83f7ea86758594b3f62049f73
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-417 Verify parser failure b85658d1ee92 for ipfs_accelerate_js/test/unit/test_hf_videomae.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-417
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_videomae.ts
+- Failure content digest: sha256:a3182a574c3714675ad22d65d97741eb17ba1201343114b35dd4fb379ad03bd3
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-418 Verify parser failure ba45058cff41 for ipfs_accelerate_js/test/unit/test_hf_phi4.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-418
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_phi4.ts
+- Failure content digest: sha256:221eb25bd32013d1c237a26ae6a3dff0d41347e388de401776320b01db53c571
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-419 Verify parser failure ba9e5a83dace for ipfs_accelerate_js/test/unit/test_hf_qwen3_moe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-419
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen3_moe.ts
+- Failure content digest: sha256:f9a7e9ea6b645be084e58c26fb2e819f0ae068ed098f019d1b8a5f25b30dc9d5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-420 Verify parser failure bae80e74e57c for ipfs_accelerate_js/test/unit/test_hf_qwen2_moe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-420
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen2_moe.ts
+- Failure content digest: sha256:40d7cdd2bcaa4233faf2b51d2d4d6f8a2ca2102b3d03da3d10fa8ae8a0d46eae
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-421 Verify parser failure bbb29f5bdfc2 for ipfs_accelerate_js/test/unit/test_hf_tapas.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-421
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_tapas.ts
+- Failure content digest: sha256:83924b4039ec85d1a97b89778cde53387ea03ec85f38e8c5e0569420f58a16d5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-422 Verify parser failure bd9dcd72aa4f for ipfs_accelerate_js/test/unit/test_web_platform_optimizations.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-422
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2
+- Failure path: ipfs_accelerate_js/test/unit/test_web_platform_optimizations.ts
+- Failure content digest: sha256:b234d2da553ec1930ce40c10c32a418d260952889ff0437f41b1802a8bb6167d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-423 Verify parser failure be266be52595 for ipfs_accelerate_js/test/unit/test_hf_dpr.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-423
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_dpr.ts
+- Failure content digest: sha256:b840ada6d4b4de263b4fd77131e59435b3159c0a247f7cce22dfbd7932b33c07
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-424 Verify parser failure be643d0d59d5 for benchmark-results/sample-baseline.json
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-236
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-424
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-structured
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644
+- Failure family: STRUCTURED
+- Failure row id: sca-repository-index-row:sha256:be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644
+- Failure path: benchmark-results/sample-baseline.json
+- Failure content digest: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+- Official failure cluster: failure-cluster:sha256:d0a1926eeeb6ba04d6de18dbf382dbd2edae6d54fb3f7b1abf335d77a0b51d02
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-236 emitted the reviewed STRUCTURED cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-425 Verify parser failure becb3908f0b9 for ipfs_accelerate_js/test/unit/test_hf_ernie.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-425
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_ernie.ts
+- Failure content digest: sha256:1c80e48d3216c397595b00458e20f013dc5cf3f3b04038c42aed337975d12173
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-426 Verify parser failure c1531a4cf34d for ipfs_accelerate_js/test/unit/test_hf_fuyu.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-426
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_fuyu.ts
+- Failure content digest: sha256:a24559537db26fde988575cc875b99d72fc4f116a1274499f6b075046b3710ec
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-427 Verify parser failure c1b43a7f8245 for ipfs_accelerate_js/test/unit/test_hf_trocr.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-427
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_trocr.ts
+- Failure content digest: sha256:2031acdd8cbae5d808110799e34b235aa6236bbed54c13e3762ac34c7cddb3e4
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-428 Verify parser failure c22331d25665 for ipfs_accelerate_js/test/unit/test_real_web_implementation.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-428
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7
+- Failure path: ipfs_accelerate_js/test/unit/test_real_web_implementation.ts
+- Failure content digest: sha256:518e256c68ca653665f6fab4821410b014480ebb9de2f1a040986f1716fda1a5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-429 Verify parser failure c3737219a8e4 for ipfs_accelerate_js/test/unit/test_integration.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-429
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be
+- Failure path: ipfs_accelerate_js/test/unit/test_integration.ts
+- Failure content digest: sha256:0456252ef7f1467c00a672dcd1c7e1d82166938ba39d60611fdf1d17b755e7d6
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-430 Verify parser failure c4a1d1ef47b8 for ipfs_accelerate_js/test/unit/test_hf_perceiver.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-430
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_perceiver.ts
+- Failure content digest: sha256:7d60f1c314aa94bf44cdab4602ab92dd69fb985e180894ebbfdbda3636a24d1a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-431 Verify parser failure c4e4b2c58987 for web/legacy-archive/js/apps/strudel-broken.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-431
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839
+- Failure path: web/legacy-archive/js/apps/strudel-broken.js
+- Failure content digest: sha256:b896596fd31a65a26749074f0c960592cd7e0c9df32bc94c66fae8e652ae5dfe
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-432 Verify parser failure c4f6532c4850 for ipfs_accelerate_js/test/unit/test_hf_stablelm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-432
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_stablelm.ts
+- Failure content digest: sha256:9b14ea6480d601e8d81d13ec9b6d0ea818af47f9cee606aebb5872bce8511b9a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-433 Verify parser failure c5ce378fa84f for ipfs_accelerate_js/test/unit/test_hf_maskformer_swin.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-433
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_maskformer_swin.ts
+- Failure content digest: sha256:55abefc0536795eca82505d6b7a234e40cebceec4a3c864ac90ff2e4a5e3c303
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-434 Verify parser failure c6c1a631905b for ipfs_accelerate_js/test/unit/test_streaming_pipeline.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-434
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8
+- Failure path: ipfs_accelerate_js/test/unit/test_streaming_pipeline.ts
+- Failure content digest: sha256:0d1f20924d3423abb735fef4e0764858a91b2fb9af2bdd3c0574787c37805ea2
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-435 Verify parser failure c96b34e92ef1 for ipfs_accelerate_js/test/unit/test_hf_nougat.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-435
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_nougat.ts
+- Failure content digest: sha256:3822ee476adf6d92722eea1b786e275057ee70686d16b9ba823d61c1ed3623ef
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-436 Verify parser failure c9fccebd5f36 for ipfs_accelerate_js/test/unit/test_hf_electra.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-436
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_electra.ts
+- Failure content digest: sha256:e529b41845ad8610c23812ba7558eb64697d74615131c4f93948b55014f5dbc3
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-437 Verify parser failure ca19dbbae400 for ipfs_accelerate_js/test/unit/test_hf_speech_encoder_decoder.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-437
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_speech_encoder_decoder.ts
+- Failure content digest: sha256:5e97dd31334f81ab70106349cb9dd703b5573a040aabf9676237267e05587ce9
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-438 Verify parser failure caab0f56e25a for ipfs_accelerate_js/test/unit/test_generator.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-438
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f
+- Failure path: ipfs_accelerate_js/test/unit/test_generator.ts
+- Failure content digest: sha256:cb51b5d94d67827e1b5eab509c0bf4c85dcab86abcb2f1f47720c6f3b66613a7
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-439 Verify parser failure cad18a421123 for ipfs_accelerate_js/test/unit/test_hf_gemma.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-439
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_gemma.ts
+- Failure content digest: sha256:9a99433914a94634a051b8c5cca79c0853f2539212edaff77f7c6a17d63d06af
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-440 Verify parser failure cb6497d68891 for ipfs_accelerate_js/test/unit/test_hf_oneformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-440
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_oneformer.ts
+- Failure content digest: sha256:ecb6d923864f0534ef3187fdf7e4cdbcc154e0187753346a1ea8db69f941869a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-441 Verify parser failure cc244846e0d0 for ipfs_accelerate_js/test/unit/test_hf_clvp.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-441
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_clvp.ts
+- Failure content digest: sha256:f176e1771b926c01d5de09c94a0d1bc38c21e2e743ba934a5418f6697fc58805
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-442 Verify parser failure cc6ae910be0b for ipfs_accelerate_js/test/unit/test_hf_gemma2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-442
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_gemma2.ts
+- Failure content digest: sha256:e902ea419773af0202bd60fbae38b05ba7ef9fa589e94329471f0cfef04a2d29
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-443 Verify parser failure cdd0d1c4e47b for ipfs_accelerate_js/test/unit/test_hf_optimized_model.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-443
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_optimized_model.ts
+- Failure content digest: sha256:9125d268b2fe374a95bd1fa225c19211b7203ab657f9c0684ce8d643d215609d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-444 Verify parser failure d11f67a5b35c for ipfs_accelerate_js/test/unit/test_power_efficient_deployment.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-444
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e
+- Failure path: ipfs_accelerate_js/test/unit/test_power_efficient_deployment.ts
+- Failure content digest: sha256:4d3e6ba471dbb2219af1c196b8a8518c6d4154096ea1fe4ebaf181d11075dd44
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-445 Verify parser failure d186d85a3159 for ipfs_accelerate_js/test/unit/test_hf_qwen2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-445
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen2.ts
+- Failure content digest: sha256:ea74e4de0065223d7a27d2346966e6c6e5ffb31ccc548d682c1e8de0e743430a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-446 Verify parser failure d1c1b08e94e7 for ipfs_accelerate_js/test/unit/test_samsung_support.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-446
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8
+- Failure path: ipfs_accelerate_js/test/unit/test_samsung_support.ts
+- Failure content digest: sha256:5a7a78d70a939ed91afdd5bdb321e6fb3b3b6e4981defdff4326636792e76c4f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-447 Verify parser failure d21127a11f8d for ipfs_accelerate_js/test/unit/test_simplified.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-447
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984
+- Failure path: ipfs_accelerate_js/test/unit/test_simplified.ts
+- Failure content digest: sha256:b5b235ca8df011f9fcd7d73b243124134e44f41e5ddc8ddc7af05bf83e0c516f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-448 Verify parser failure d28e9352cfc4 for web/legacy-archive/js/apps/settings-backup.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-448
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de
+- Failure path: web/legacy-archive/js/apps/settings-backup.js
+- Failure content digest: sha256:49dd63c755f9a0cdcb433a4f01c81fe2aeae245dae1e5dbf28d6892773e45e01
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-449 Verify parser failure d37389514ee7 for test/web_platform_test_output/test_hf_bert.py
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-235
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-449
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-python
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c
+- Failure family: PYTHON
+- Failure row id: sca-repository-index-row:sha256:d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c
+- Failure path: test/web_platform_test_output/test_hf_bert.py
+- Failure content digest: sha256:4f499dea58cf89c9a97b0e8d9acee9bfbc6e9c9542356ab277f16d9c1cd50f35
+- Official failure cluster: failure-cluster:sha256:fcc0a83c85173140011f6301ccf317da546917ed0767328a18bcd17d93334d32
+- Required resolution: python_ast_parser_success
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-235 emitted the reviewed PYTHON cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be successful Python AST output; exclusion, symlink routing, or another nonsemantic disposition does not satisfy this task. No model or provider call occurs.
+
+## SCA-450 Verify parser failure d4999fac77f8 for ipfs_accelerate_js/test/unit/test_hf_mvp.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-450
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mvp.ts
+- Failure content digest: sha256:45ab39c2df4a7fa757d3c9053ddeaf4f536013987d27e16a9d86fefa1ae0e5be
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-451 Verify parser failure d6685ad8f6de for ipfs_accelerate_js/test/unit/test_hf_fastspeech2_conformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-451
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_fastspeech2_conformer.ts
+- Failure content digest: sha256:eafdb3629727dcde30215ce5e3f360d42cca7394db31e2c82ff650623480fbcf
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-452 Verify parser failure d737c546428f for docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-236
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-452
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-structured
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634
+- Failure family: STRUCTURED
+- Failure row id: sca-repository-index-row:sha256:d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634
+- Failure path: docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json
+- Failure content digest: sha256:8a48375a43d3b29828dadba2054a543bfc76d59d4daa3e2294ce60fbbc91a63f
+- Official failure cluster: failure-cluster:sha256:5c0d21c3f718364d5a8177102a5c248daaa06057d0e6f3e25e6ec07c8b9fc1cf
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-236 emitted the reviewed STRUCTURED cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-453 Verify parser failure d9ccf41ae2a0 for ipfs_accelerate_js/test/unit/test_hf_granite.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-453
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_granite.ts
+- Failure content digest: sha256:e250c33e7fc5438675f7170cf180e77a98132a64d275a49d08dc3e7d21a976e9
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-454 Verify parser failure db210e7650cf for ipfs_accelerate_js/test/unit/test_hf_jukebox.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-454
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_jukebox.ts
+- Failure content digest: sha256:ed5f0c6a10d318c8e6aa09b3251ebb545f0752f5767330ddf2eada8f4b221731
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-455 Verify parser failure dbc4466ba10b for ipfs_accelerate_js/test/unit/test_hf_qwen2_vl.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-455
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen2_vl.ts
+- Failure content digest: sha256:3ace2701eb72e9197eb94f1cf70ef088650f40c7c935288c14e354f012bbfcac
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-456 Verify parser failure dcc65d7b548c for ipfs_accelerate_js/test/unit/test_hf_idefics2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-456
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_idefics2.ts
+- Failure content digest: sha256:a2c7ebea932a4675d9ab72dd4461c1a86bc1f4a21ceb187beed2c400b7a48f83
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-457 Verify parser failure dd4017d68b34 for ipfs_accelerate_js/test/unit/test_openvino_simple.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-457
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e
+- Failure path: ipfs_accelerate_js/test/unit/test_openvino_simple.ts
+- Failure content digest: sha256:3ada9e6acf9078f55318bf715b37b83496a99818e6c9499ae2e53a2094b0c90a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-458 Verify parser failure e1178b6459d5 for ipfs_accelerate_js/test/unit/test_model_integration.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-458
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943
+- Failure path: ipfs_accelerate_js/test/unit/test_model_integration.ts
+- Failure content digest: sha256:5757296e308930ff8c0e9ffd70b93f0da1602463e49188a22aba3ad4e09720e7
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-459 Verify parser failure e19674b415ee for ipfs_accelerate_js/test/unit/test_hf_olmoe.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-459
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_olmoe.ts
+- Failure content digest: sha256:38465e23adf47b19dd5fe4b8fcfc3dd177f53961f44716b1e84c988ac3be7205
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-460 Verify parser failure e3e8cb469e07 for ipfs_accelerate_js/test/unit/test_ipfs_accelerate_new.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-460
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366
+- Failure path: ipfs_accelerate_js/test/unit/test_ipfs_accelerate_new.ts
+- Failure content digest: sha256:3b7fbd62d99dcfef04958d0bc5a9a6d7e6ec3eab238bd94479f8c91ad165fbe9
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-461 Verify parser failure e49cc902f442 for ipfs_accelerate_js/test/unit/test_hf_sam.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-461
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_sam.ts
+- Failure content digest: sha256:9bbeacfd09027650cef9964fea8c8bef9cbdc2417746eef55ac069904deef2ee
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-462 Verify parser failure e4c0fac564b0 for ipfs_accelerate_js/test/unit/test_hf_flan.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-462
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_flan.ts
+- Failure content digest: sha256:d064104da6700408b652e171699567f184f4eb7bd5ff76c84a174c8d96ac27e9
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-463 Verify parser failure e53cf02f4ff9 for ipfs_accelerate_js/test/unit/test_hf_layoutlmv2.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-463
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_layoutlmv2.ts
+- Failure content digest: sha256:2feec93b0dfd617295014c5792b4226726c654b8c3e11eaeb40b00cffaf4f4f8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-464 Verify parser failure e56f3b0a4e7e for web/legacy-archive/js/apps/neural-network-designer-old.js
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-237
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-464
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-legacy
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29
+- Failure family: LEGACY
+- Failure row id: sca-repository-index-row:sha256:e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29
+- Failure path: web/legacy-archive/js/apps/neural-network-designer-old.js
+- Failure content digest: sha256:b6ef9850e3c536a025d6974aeaf13fe2f7a19e5e3e30ebea6ed232be92a71f22
+- Official failure cluster: failure-cluster:sha256:25fac5b7ced2f152e0fc6a4400c134738b39ee33bdb5db45b443498836fbac71
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-237 emitted the reviewed LEGACY cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-465 Verify parser failure e570b78c943d for ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-465
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b
+- Failure path: ipfs_accelerate_js/test/browser/test_webgpu_shader_precompilation.ts
+- Failure content digest: sha256:db1f8ec3b100b9bb2ed0e6f09518ddb0c3b2f59e84855729e9e09386b523259e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-466 Verify parser failure e5a1964969c3 for ipfs_accelerate_js/test/unit/test_hf_nemotron.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-466
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_nemotron.ts
+- Failure content digest: sha256:f7fb8b72eed41fd840576ebb414fb18764979b6e263bf29444316a120af5bcdb
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-467 Verify parser failure e72ad693b78a for ipfs_accelerate_js/test/unit/test_hf_maskformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-467
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_maskformer.ts
+- Failure content digest: sha256:bf4b5a86c4a680a38d4a0508c04d42dac4d3e221f00f2352dcb3fa0a86427130
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-468 Verify parser failure e77b925c0cf8 for ipfs_accelerate_js/test/unit/test_hf_zoedepth.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-468
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_zoedepth.ts
+- Failure content digest: sha256:889553de2bdcbd35ddfbd81dbb8952fe25f7eb402987a301dcfa939121d61c5d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-469 Verify parser failure e78e16aecdf7 for ipfs_accelerate_js/test/unit/test_hf_idefics3.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-469
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_idefics3.ts
+- Failure content digest: sha256:a87c8a99aa4be028e951c480132137804338785013eade7b8848343c885e2ce8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-470 Verify parser failure e82305ec923a for ipfs_accelerate_js/test/unit/test_hf_mimi.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-470
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mimi.ts
+- Failure content digest: sha256:58be049e00e3e12ca8773478ec238ccd82a90e56fb1e85dd8af2b2115966178d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-471 Verify parser failure e9d412255046 for ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-233
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-471
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-browser
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd
+- Failure family: BROWSER
+- Failure row id: sca-repository-index-row:sha256:e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd
+- Failure path: ipfs_accelerate_js/test/browser/test_webgpu_webnn_bridge.ts
+- Failure content digest: sha256:4809d2105497c7659391a511867c28a4e5ea5a229674731aca85013e9657a4cc
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-233 emitted the reviewed BROWSER cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-472 Verify parser failure eac1ea73671f for ipfs_accelerate_js/test/unit/test_hf_llava_next_video.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-472
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_llava_next_video.ts
+- Failure content digest: sha256:3097d8f3095e52527a40988600d6e8747e3ece9726270e678f1e82e66f7c0751
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-473 Verify parser failure eb2a00a9d15b for ipfs_accelerate_js/test/unit/test_hf_flava.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-473
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_flava.ts
+- Failure content digest: sha256:390ca9ba984ea0b08e36cd7c42d65d9ef4efc6b87d7a1a9aa83634729f55bf89
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-474 Verify parser failure ec97b77a94bd for ipfs_accelerate_js/test/unit/test_llava_models.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-474
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98
+- Failure path: ipfs_accelerate_js/test/unit/test_llava_models.ts
+- Failure content digest: sha256:ac1a11a7df680199d89a2dd0c86d0b283b758969fefc978c345d605d3ba6f0b8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-475 Verify parser failure ed8794319a8c for ipfs_accelerate_js/test/unit/test_hf_superpoint.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-475
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_superpoint.ts
+- Failure content digest: sha256:3e29ef3c8d539285944d7598baaa1bc2a1e6f610ca791fc544965ed8c57ee94e
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-476 Verify parser failure ee934c4d2bcb for ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-476
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_donut_swin.ts
+- Failure content digest: sha256:ef77d5be39a0a8f1aa1f2e9feaaf33dfc9a97157507aacd2914d19bce0f428a8
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-477 Verify parser failure ef299aeac381 for ipfs_accelerate_js/test/unit/test_hf_beit.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-477
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_beit.ts
+- Failure content digest: sha256:057c656dc8b3dde4740a1f933d0e1793e8ddf5dccb665dea27a8849461ded52c
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-478 Verify parser failure f077a2c905f7 for ipfs_accelerate_js/test/unit/test_hf_wav2vec2_base.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-478
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_wav2vec2_base.ts
+- Failure content digest: sha256:5e8d212a1d4ebcc828c6c4a26d81bc786cafa0c22a2a08b721071dd7d8ce5b97
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-479 Verify parser failure f0d7c3b345d0 for ipfs_accelerate_js/test/unit/test_hf_instructblipvideo.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-479
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_instructblipvideo.ts
+- Failure content digest: sha256:104aea78f778d78e4de8564e4fc53e6559cb567f6cecdedce2032f4d5b42fed0
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-480 Verify parser failure f0eb8e5977c3 for ipfs_accelerate_js/test/unit/test_hf_nezha.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-480
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_nezha.ts
+- Failure content digest: sha256:dee45e11bbcf4330ae1a86a8087e461d330a63e11f4aa15a072b72c3e1d680a2
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-481 Verify parser failure f11c9100e1fa for ipfs_accelerate_js/test/unit/test_hf_mra.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-481
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mra.ts
+- Failure content digest: sha256:8d0e6d1f689f3d1bf94230f925c5688dec8e6b247e1f57954fdd6e405f5a115f
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-482 Verify parser failure f204ff5a2ab4 for ipfs_accelerate_js/test/unit/test_mediatek_support.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-482
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd
+- Failure path: ipfs_accelerate_js/test/unit/test_mediatek_support.ts
+- Failure content digest: sha256:8429ffabe09d52d6d731457f5e2341f1e9e099fda2bc141629248e60fc35dec2
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-483 Verify parser failure f4c91f47a2a7 for ipfs_accelerate_js/test/unit/test_hf_command_r.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-483
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_command_r.ts
+- Failure content digest: sha256:ff5c662ed42b750d7c288409dd2ee4907bf6b7f3c2e055ec1dc5effc4dfb47a5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-484 Verify parser failure f53b2672d857 for ipfs_accelerate_js/test/unit/test_hf_wavlm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-484
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_wavlm.ts
+- Failure content digest: sha256:c2e1df66401390135b6ab9e28f9045c9041f4b42177fe4f8337d552e0228a55b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-485 Verify parser failure f6c112435997 for ipfs_accelerate_js/test/unit/test_hf_glm.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-485
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_glm.ts
+- Failure content digest: sha256:d96410288726884e489901ba760eee077a92997159859ac8538e757e721ec74a
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-486 Verify parser failure f711bbcfdbf5 for ipfs_accelerate_js/test/unit/test_real_web_implementations.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-486
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad
+- Failure path: ipfs_accelerate_js/test/unit/test_real_web_implementations.ts
+- Failure content digest: sha256:6f72da52c53b66563939611a77d04645e0c03e0950cb2ef33bc8786ea7169749
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-487 Verify parser failure f765bbb40b6f for ipfs_accelerate_js/test/unit/test_hf_informer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-487
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_informer.ts
+- Failure content digest: sha256:a238b269c62cedceffb8bd36726a949d02fb4fc42edecfc67931652a8db8c1e5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-488 Verify parser failure f7d9f67920d2 for ipfs_accelerate_js/test/unit/test_hf_nystromformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-488
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_nystromformer.ts
+- Failure content digest: sha256:d009d296272996ef3dd026dda480b18d57573bb382732ee8ea5d6b879c45dd9d
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-489 Verify parser failure f8ca836b23bc for ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-489
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_blenderbot.ts
+- Failure content digest: sha256:18d312e080949fd7c047fa614a986e903e04fd20f058aebc6d67177788a48d21
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-490 Verify parser failure fa787dc3bde2 for ipfs_accelerate_js/test/unit/test_hf_reformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-490
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_reformer.ts
+- Failure content digest: sha256:5af1993a5ab757c299a27bafe8e215329f7580cb0beea712dd5bdd377ce223d5
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-491 Verify parser failure fd0641947bdb for ipfs_accelerate_js/test/unit/test_hf_graphormer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-491
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_graphormer.ts
+- Failure content digest: sha256:eb3da7398900b97a42be0c435e0b057366b5f89cf14dcccd4f80091bb4d45aad
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-492 Verify parser failure fd1a1a0332df for ipfs_accelerate_js/test/unit/test_hf_qwen3_vl.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-492
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_qwen3_vl.ts
+- Failure content digest: sha256:93bcdb78552aaa67dff08b19a897d0493b10e156b49363492e046be0d4114feb
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-493 Verify parser failure fd364177eb71 for ipfs_accelerate_js/test/unit/test_hf_mctct.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-493
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_mctct.ts
+- Failure content digest: sha256:75c35de8af7360163187083c0a057242f2b9ef418c53188ad9bbf032802b4769
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-494 Verify parser failure fe73e0e2ff74 for ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-494
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3
+- Failure path: ipfs_accelerate_js/test/unit/test_hf_efficientformer.ts
+- Failure content digest: sha256:e68afbf8f6bfe2d5238e55d8644efab953629c6dbca4100d4e9551ecf6c2130b
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-495 Verify parser failure fe92ba266817 for ipfs_accelerate_js/test/unit/test_ovms.ts
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-232
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-495
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/row-unit
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb.json
+- Interfaces: ParserFailureRowVerification@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Dedupe key: parser-failure/v1/sca-repository-index-row:sha256:fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb
+- Failure family: UNIT
+- Failure row id: sca-repository-index-row:sha256:fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb
+- Failure path: ipfs_accelerate_js/test/unit/test_ovms.ts
+- Failure content digest: sha256:73df46607f6ea4623e66bc4a11d81b770fb714ab64ae123b9df95a5e50e6ad85
+- Official failure cluster: failure-cluster:sha256:7d5b42330d52b3893c633e921b7774d504762bd2a1210184bc7f100991a76a40
+- Required resolution: parser_success_or_reviewed_typed_disposition
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read only the pinned row and its cluster receipt; emit only this row's unique receipt and never invoke a model.
+- Preconditions: SCA-232 emitted the reviewed UNIT cluster repair receipt.
+- Effects: Records the exact fresh disposition for one pinned path/content/parser tuple without source mutation.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json row sca-repository-index-row:sha256:fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb; cluster receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Acceptance: A deterministic receipt binds the pinned row ID, path, content digest, source/AST references, parser identity, cluster receipt, and fresh index identity. The fresh row must be parser success or the exact family-approved typed disposition. No model or provider call occurs.
+
+## SCA-496 Fan in parser-failure row receipts for digest nibble 0
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-238, SCA-239, SCA-240, SCA-241, SCA-242, SCA-243, SCA-244, SCA-245, SCA-246, SCA-247, SCA-248, SCA-249, SCA-250, SCA-251, SCA-252, SCA-253, SCA-254, SCA-255, SCA-256
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/0.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-496
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/0.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 0
+- Leaf count: 19
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 19 row receipts assigned to nibble 0 are authoritative.
+- Effects: Proves exact set equality for the 19 row IDs whose full digest begins with 0.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 0 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-497 Fan in parser-failure row receipts for digest nibble 1
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-257, SCA-258, SCA-259, SCA-260, SCA-261, SCA-262, SCA-263, SCA-264, SCA-265, SCA-266, SCA-267, SCA-268, SCA-269, SCA-270, SCA-271, SCA-272, SCA-273, SCA-274
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/1.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-497
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/1.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 1
+- Leaf count: 18
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 18 row receipts assigned to nibble 1 are authoritative.
+- Effects: Proves exact set equality for the 18 row IDs whose full digest begins with 1.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 1 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-498 Fan in parser-failure row receipts for digest nibble 2
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-275, SCA-276, SCA-277, SCA-278, SCA-279, SCA-280, SCA-281, SCA-282, SCA-283, SCA-284, SCA-285, SCA-286, SCA-287, SCA-288, SCA-289, SCA-290, SCA-291, SCA-292, SCA-293, SCA-294, SCA-295, SCA-296, SCA-297, SCA-298
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/2.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-498
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/2.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 2
+- Leaf count: 24
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 24 row receipts assigned to nibble 2 are authoritative.
+- Effects: Proves exact set equality for the 24 row IDs whose full digest begins with 2.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 2 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-499 Fan in parser-failure row receipts for digest nibble 3
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-299, SCA-300, SCA-301, SCA-302, SCA-303, SCA-304, SCA-305, SCA-306, SCA-307, SCA-308, SCA-309, SCA-310, SCA-311, SCA-312, SCA-313
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/3.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-499
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/3.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 3
+- Leaf count: 15
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 15 row receipts assigned to nibble 3 are authoritative.
+- Effects: Proves exact set equality for the 15 row IDs whose full digest begins with 3.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 3 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-500 Fan in parser-failure row receipts for digest nibble 4
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-314, SCA-315, SCA-316, SCA-317, SCA-318, SCA-319, SCA-320, SCA-321, SCA-322, SCA-323
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/4.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-500
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/4.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 4
+- Leaf count: 10
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 10 row receipts assigned to nibble 4 are authoritative.
+- Effects: Proves exact set equality for the 10 row IDs whose full digest begins with 4.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 4 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-501 Fan in parser-failure row receipts for digest nibble 5
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-324, SCA-325, SCA-326, SCA-327, SCA-328, SCA-329, SCA-330, SCA-331, SCA-332, SCA-333, SCA-334, SCA-335, SCA-336, SCA-337, SCA-338, SCA-339
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/5.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-501
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/5.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 5
+- Leaf count: 16
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 16 row receipts assigned to nibble 5 are authoritative.
+- Effects: Proves exact set equality for the 16 row IDs whose full digest begins with 5.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 5 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-502 Fan in parser-failure row receipts for digest nibble 6
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-340, SCA-341, SCA-342, SCA-343, SCA-344, SCA-345, SCA-346, SCA-347, SCA-348, SCA-349, SCA-350, SCA-351, SCA-352, SCA-353, SCA-354, SCA-355
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/6.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-502
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/6.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 6
+- Leaf count: 16
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 16 row receipts assigned to nibble 6 are authoritative.
+- Effects: Proves exact set equality for the 16 row IDs whose full digest begins with 6.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 6 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-503 Fan in parser-failure row receipts for digest nibble 7
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-356, SCA-357, SCA-358, SCA-359, SCA-360, SCA-361, SCA-362, SCA-363, SCA-364, SCA-365, SCA-366
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/7.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-503
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/7.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 7
+- Leaf count: 11
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 11 row receipts assigned to nibble 7 are authoritative.
+- Effects: Proves exact set equality for the 11 row IDs whose full digest begins with 7.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 7 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-504 Fan in parser-failure row receipts for digest nibble 8
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-367, SCA-368, SCA-369, SCA-370, SCA-371, SCA-372, SCA-373, SCA-374, SCA-375, SCA-376, SCA-377, SCA-378
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/8.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-504
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/8.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 8
+- Leaf count: 12
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 12 row receipts assigned to nibble 8 are authoritative.
+- Effects: Proves exact set equality for the 12 row IDs whose full digest begins with 8.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 8 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-505 Fan in parser-failure row receipts for digest nibble 9
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-379, SCA-380, SCA-381, SCA-382, SCA-383, SCA-384, SCA-385, SCA-386, SCA-387, SCA-388, SCA-389, SCA-390, SCA-391, SCA-392
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/9.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-505
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/9.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: 9
+- Leaf count: 14
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 14 row receipts assigned to nibble 9 are authoritative.
+- Effects: Proves exact set equality for the 14 row IDs whose full digest begins with 9.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate 9 and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-506 Fan in parser-failure row receipts for digest nibble A
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-393, SCA-394, SCA-395, SCA-396, SCA-397, SCA-398, SCA-399, SCA-400, SCA-401, SCA-402, SCA-403, SCA-404, SCA-405, SCA-406, SCA-407, SCA-408, SCA-409, SCA-410
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/a.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-506
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/a.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: A
+- Leaf count: 18
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 18 row receipts assigned to nibble A are authoritative.
+- Effects: Proves exact set equality for the 18 row IDs whose full digest begins with A.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate A and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-507 Fan in parser-failure row receipts for digest nibble B
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-411, SCA-412, SCA-413, SCA-414, SCA-415, SCA-416, SCA-417, SCA-418, SCA-419, SCA-420, SCA-421, SCA-422, SCA-423, SCA-424, SCA-425
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/b.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-507
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/b.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: B
+- Leaf count: 15
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 15 row receipts assigned to nibble B are authoritative.
+- Effects: Proves exact set equality for the 15 row IDs whose full digest begins with B.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate B and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-508 Fan in parser-failure row receipts for digest nibble C
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-426, SCA-427, SCA-428, SCA-429, SCA-430, SCA-431, SCA-432, SCA-433, SCA-434, SCA-435, SCA-436, SCA-437, SCA-438, SCA-439, SCA-440, SCA-441, SCA-442, SCA-443
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/c.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-508
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/c.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: C
+- Leaf count: 18
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 18 row receipts assigned to nibble C are authoritative.
+- Effects: Proves exact set equality for the 18 row IDs whose full digest begins with C.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate C and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-509 Fan in parser-failure row receipts for digest nibble D
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-444, SCA-445, SCA-446, SCA-447, SCA-448, SCA-449, SCA-450, SCA-451, SCA-452, SCA-453, SCA-454, SCA-455, SCA-456, SCA-457
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/d.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-509
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-01
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/d.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: D
+- Leaf count: 14
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 14 row receipts assigned to nibble D are authoritative.
+- Effects: Proves exact set equality for the 14 row IDs whose full digest begins with D.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate D and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-510 Fan in parser-failure row receipts for digest nibble E
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-458, SCA-459, SCA-460, SCA-461, SCA-462, SCA-463, SCA-464, SCA-465, SCA-466, SCA-467, SCA-468, SCA-469, SCA-470, SCA-471, SCA-472, SCA-473, SCA-474, SCA-475, SCA-476, SCA-477
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/e.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-510
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-02
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/e.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: E
+- Leaf count: 20
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 20 row receipts assigned to nibble E are authoritative.
+- Effects: Proves exact set equality for the 20 row IDs whose full digest begins with E.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate E and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-511 Fan in parser-failure row receipts for digest nibble F
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-478, SCA-479, SCA-480, SCA-481, SCA-482, SCA-483, SCA-484, SCA-485, SCA-486, SCA-487, SCA-488, SCA-489, SCA-490, SCA-491, SCA-492, SCA-493, SCA-494, SCA-495
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/f.json
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-511
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/nibble-gate
+- Parallel lane: sca-parser-failure-lane-03
+- Resource class: cpu-small
+- Resource stage: proof
+- Implementation timeout seconds: 1800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/f.json
+- Interfaces: ParserFailureNibbleGate@1, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Digest nibble: F
+- Leaf count: 18
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Read exactly the assigned first-nibble row receipts and emit only this gate receipt; never inspect source or call a model.
+- Preconditions: All 18 row receipts assigned to nibble F are authoritative.
+- Effects: Proves exact set equality for the 18 row IDs whose full digest begins with F.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json nibble gate F and its exact leaf task list
+- Acceptance: The gate receipt contains every and only the manifest rows assigned to this first digest nibble, has no duplicate row/content identity, and records zero model calls.
+
+## SCA-512 Prove exact 258-row closure and fresh parser health
+
+- Status: todo
+- Priority: P0
+- Track: parser-health
+- Depends on: SCA-496, SCA-497, SCA-498, SCA-499, SCA-500, SCA-501, SCA-502, SCA-503, SCA-504, SCA-505, SCA-506, SCA-507, SCA-508, SCA-509, SCA-510, SCA-511
+- Goal id: SCA-G022
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh-full-index
+- Validation: python3 scripts/swissknife_parser_failure_backlog.py check --task-id SCA-512
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/parser-failures/aggregate-gate
+- Parallel lane: sca-parser-failure-lane-00
+- Resource class: cpu-large
+- Resource stage: proof
+- Implementation timeout seconds: 28800
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh-full-index
+- Interfaces: ParserFailureAggregateGate@1, PolyglotASTHealthReport, ContentAddressedReceipt
+- Context budget tokens: 0
+- Provider role: deterministic-only
+- Failure row count: 258
+- Nibble gate count: 16
+- Fresh full index output: data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh-full-index
+- Runtime model calls: 0
+- Manifest: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json
+- Conflict policy: Materialize a fresh full repository index in the declared output root with reviewed thresholds; never assume or copy an existing output, reuse the retained audit as the result, skip extraction, weaken the 10/0.01 gate, or call a model.
+- Preconditions: All 16 first-nibble gates prove exact, disjoint row sets covering the manifest population.
+- Effects: Proves exact set equality for all 258 retained failures and materializes and binds their closure to one fresh full repository index and analyzer-health receipt.
+- Evidence subset: implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json; 16 nibble gate receipts; fresh repository index, AST index, snapshot and analyzer health
+- Acceptance: The 16 gates are disjoint and union to exactly the 258 manifest row IDs; SCA-512 itself creates the declared fresh full index from source with no pre-existing-output shortcut. Every fresh parser failure must be an explicitly retained bounded-failure row named by an authoritative row receipt, the complete fresh failure set must equal that receipted set, and every new, unreceipted, or out-of-manifest parser failure fails the gate even when aggregate count and ratio remain at most 10 and 0.01. Every prior path has a current typed disposition, identities decode and rehash exactly, and the execution receipt proves zero model or provider calls.
+
+<!-- END GENERATED SWISSKNIFE PARSER FAILURE BACKLOG v1 -->
