@@ -3049,7 +3049,7 @@ Normative:
 
 ## SCA-220 Prove exact CID, multiformats, and multihash conformance
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: content-identity
 - Depends on: SCA-015
