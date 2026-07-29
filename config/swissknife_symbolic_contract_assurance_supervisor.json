@@ -198,6 +198,7 @@
     "enabled": true,
     "laneCount": 4,
     "scheduler": "deterministic_task_shards",
+    "strictTaskSharding": true,
     "isolation": "ephemeral_git_worktree_per_task",
     "mergeQueue": "shared_serial",
     "mergeTargetBranch": "agent/swissknife-sca-parallel",

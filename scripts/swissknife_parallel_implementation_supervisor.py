@@ -275,6 +275,8 @@ def _lane_command(
         "--task-shard-index",
         str(lane_index),
     ]
+    if bool(parallel.get("strictTaskSharding", False)):
+        command.append("--strict-task-sharding")
     _append_repeated(
         command,
         "--worktree-submodule-path",
@@ -473,6 +475,9 @@ def run(config_path: Path) -> int:
     validation = _taskboard_validation(
         todo_path,
         str(profile["taskPrefix"]),
+    )
+    validation["strict_task_sharding"] = bool(
+        parallel.get("strictTaskSharding", False)
     )
     validation["provider_lane_assignments"] = list(provider_assignments)
     validation["provider_environment_keys"] = sorted(provider_environment)
