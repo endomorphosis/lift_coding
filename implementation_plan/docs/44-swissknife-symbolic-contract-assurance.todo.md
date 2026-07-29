@@ -329,7 +329,7 @@ Normative:
 
 ## SCA-051 Analyze schema, argument, result, policy, transport, and failure parity
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: parity
 - Depends on: SCA-050
