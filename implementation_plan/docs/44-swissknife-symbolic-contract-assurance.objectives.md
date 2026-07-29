@@ -67,6 +67,12 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 |   |-- SCA-G174  Agent-supervisor control and goal/task contracts
 |   |-- SCA-G175  Cross-component state-machine and MCP++ proofs
 |   `-- SCA-G176  Runtime drift refinery and continuous refill
+|-- SCA-G177  Audit-derived production-composition closure
+|   |-- SCA-G178  Scheduler and crash-fence semantic recovery
+|   |-- SCA-G179  Production multi-root graph and surface composition
+|   |-- SCA-G180  Solver, proof-cache, and real-ZK readiness
+|   |-- SCA-G181  MCP++ capability, CID, transport, and runtime identity
+|   `-- SCA-G182  End-to-end production authority gate
 `-- SCA-G160  Promotion, operations, and closeout
 ```
 
@@ -1155,7 +1161,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 ## SCA-G160 Promotion, operations, and closeout
 
 - Status: active
-- Parent: SCA-G120, SCA-G130, SCA-G140, SCA-G150, SCA-G166, SCA-G167, SCA-G176
+- Parent: SCA-G120, SCA-G130, SCA-G140, SCA-G150, SCA-G166, SCA-G167, SCA-G176, SCA-G182
 - Priority: P1
 - Track: rollout
 - Bundle: swissknife/contract-assurance/rollout
@@ -1164,7 +1170,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md, data/agent_supervisor/swissknife_contract_assurance/completion_gate.json
 - Validation: test -f docs/launch/swissknife-symbolic-contract-supervisor-runbook.md && python3 -m json.tool data/agent_supervisor/swissknife_contract_assurance/completion_gate.json >/dev/null
 - Acceptance: Operators can verify PID/lease/health/current snapshot/backlog/cache/analyzer and four-component runtime-contract state; automatic mutation remains disabled until all promotion gates pass; rollback returns to shadow without losing evidence.
-- Gap task: SCA-160, SCA-230
+- Gap task: SCA-160, SCA-230, SCA-614
 - Conflict policy: Closeout requires current-tree evidence and cannot be inferred from an empty queue.
 - Goal completion schema version: 1
 - Completion confidence: 0.166667
@@ -1173,3 +1179,93 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
 - Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
 - Reopen reasons: []
+
+## SCA-G177 Audit-derived production-composition closure
+
+- Status: active
+- Parent: SCA-G000, SCA-G043, SCA-G052, SCA-G071, SCA-G082, SCA-G173, SCA-G176
+- Priority: P0
+- Track: production-composition
+- Bundle: swissknife/contract-assurance/production-composition
+- Goal: Close independently reproduced gaps between focused adapter tests and the production scan, graph, MCP++, proof/cache, ZK-capability, scheduler, and runtime-service composition.
+- Evidence: SCAEV177COMPOSE
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
+- Acceptance: The production entrypoint composes current primary/provider indexes, actual package surfaces, the real indexed GraphRAG graph, real MCP++ calls, kernel-checked prover/cache receipts, optional real-ZK receipt attestation, and exact runtime identity; scheduler and fence regressions pass; missing, synthesized, simulated, partial, stale, or cross-root stages fail closed.
+- Gap task: SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613, SCA-614
+- Conflict policy: Focused adapter success is retained as capability evidence but cannot satisfy production authority without an end-to-end current-root receipt.
+
+## SCA-G178 Scheduler and crash-fence semantic recovery
+
+- Status: active
+- Parent: SCA-G173, SCA-G174, SCA-G177
+- Priority: P0
+- Track: scheduler-recovery
+- Bundle: swissknife/contract-assurance/scheduler-recovery
+- Goal: Restore derived-index refresh, stale-input fencing, restart ownership, receipt-bound settlement, capacity accounting, lane reaping, canonical process paths, and a shared crash-fence maintenance epoch.
+- Evidence: SCAEV178SCHEDRECOVERY
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py -q
+- Acceptance: All 40 canonical scheduler tests and all protected-path tests pass; restart/interleaving tests conserve claims and capacity; the canonical leased-lane module owns process-tree termination; maintenance cannot begin between reconciliation revalidation and mutation without changing the bound epoch.
+- Gap task: SCA-600, SCA-601, SCA-602
+- Conflict policy: Restore reviewed semantics on canonical domain paths; do not weaken or delete tests to fit the partially merged implementation.
+
+## SCA-G179 Production multi-root graph and surface composition
+
+- Status: active
+- Parent: SCA-G031, SCA-G043, SCA-G052, SCA-G177
+- Priority: P0
+- Track: production-index-graph
+- Bundle: swissknife/contract-assurance/production-index-graph
+- Goal: Make the production baseline index every configured provider source root, require extracted actual MCP surfaces, project the real SwissKnife contract graph into datasets GraphRAG, and emit a typed provider-health backlog.
+- Evidence: SCAEV179INDEXGRAPH
+- Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py external/ipfs_accelerate/test/api/test_agent_supervisor_real_graph_graphrag.py external/ipfs_accelerate/test/api/test_agent_supervisor_provider_surface_health.py -q
+- Acceptance: The CLI and baseline consume independent current provider roots and exact extracted surfaces; absent actual routes cannot be synthesized; GraphRAG queries a bounded snapshot of the real indexed graph; every unresolved registration or provider parse failure is typed and blocks exhaustive parity.
+- Gap task: SCA-603, SCA-604, SCA-605, SCA-609
+- Conflict policy: Keep provider namespaces and graph authority distinct; GraphRAG is retrieval-only and Cypher AST remains syntax-only.
+
+## SCA-G180 Solver, proof-cache, and real-ZK readiness
+
+- Status: active
+- Parent: SCA-G062, SCA-G071, SCA-G082, SCA-G177
+- Priority: P0
+- Track: proof-readiness
+- Bundle: swissknife/contract-assurance/proof-readiness
+- Goal: Capability-probe datasets solvers and ProveKit setup artifacts, then production-compose supported obligations through kernel reconstruction and the sole trust-aware proof cache.
+- Evidence: SCAEV180PROOFREADY
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/provekit_setup.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_solver_readiness.py external/ipfs_accelerate/test/api/test_agent_supervisor_provekit_setup.py -q
+- Acceptance: DCEC, Z3, TDFOL, CEC, Hammer, and ProveKit availability is exact and reproducible; unavailable backends are unsupported; solver output is non-authoritative until kernel reconstruction; real ZK requires executable/setup/circuit/verifier identities and negative self-tests and attests only an approved verified-receipt predicate.
+- Gap task: SCA-606, SCA-607, SCA-218, SCA-219
+- Conflict policy: Do not install tools implicitly during authoritative execution, promote SAT to proof, or label simulated/hash-commitment ZK as attested.
+
+## SCA-G181 MCP++ capability, CID, transport, and runtime identity
+
+- Status: active
+- Parent: SCA-G015, SCA-G051, SCA-G052, SCA-G170, SCA-G177
+- Priority: P0
+- Track: mcplusplus-runtime-identity
+- Bundle: swissknife/contract-assurance/mcplusplus-runtime-identity
+- Goal: Normalize MCP++ IDL identity, make datasets capabilities truthful, implement list/call transport parity, ingest real invocation receipts, and pin live model/MCP services to a content-addressed runtime identity.
+- Evidence: SCAEV181MCPRUNTIME
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_live_conformance.py, config/swissknife_runtime_service_authority.json, data/agent_supervisor/swissknife_contract_assurance/runtime/service-identity.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_live_conformance.py external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py -q
+- Acceptance: Every advertised capability has a reachable exact implementation; IDL identities are decodable profile-tagged CIDs; P2P exposes list/call parity; invocation receipts bind request/schema/handler/effect/transport identities; startup receipts bind loaded module paths, commit/tree, configuration CID, and state CID to the baseline authority.
+- Gap task: SCA-608, SCA-610, SCA-611, SCA-612, SCA-613
+- Conflict policy: Health proves liveness only; mixed checkout/state roots, pseudo-CIDs, empty transports, TODO responses, and expected-only descriptors cannot prove runtime identity or reachability.
+
+## SCA-G182 End-to-end production authority gate
+
+- Status: active
+- Parent: SCA-G177, SCA-G178, SCA-G179, SCA-G180, SCA-G181
+- Priority: P0
+- Track: production-authority
+- Bundle: swissknife/contract-assurance/production-authority
+- Goal: Execute one deterministic current-root composition from full scan through provider sources, actual MCP++ calls, formal proof/cache terminal states, optional real-ZK receipt attestation, and bounded repair projection.
+- Evidence: SCAEV182E2E
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
+- Acceptance: One receipt binds every stage to exact content roots and records zero runtime model calls; mandatory unsupported/unknown/stale/partial stages prevent authority; real ZK is optional and capability-gated; proved contract mismatches project into deduplicated bounded repair tasks with exact validation and re-proof commands.
+- Gap task: SCA-614
+- Conflict policy: This is an aggregate verifier, not a second analyzer or cache; it cannot repair, synthesize, or relabel missing evidence.

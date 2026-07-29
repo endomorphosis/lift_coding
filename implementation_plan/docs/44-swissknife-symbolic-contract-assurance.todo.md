@@ -66,6 +66,7 @@ Normative:
 | 8 | 170; then 171, 172, 173, 174 | Runtime catalog then four component extractors |
 | 9 | 175, 176, 177 | Runtime obligations, exact MCP++ traces, and vulnerability rules |
 | 10 | 178, 179, 213-224; then 227, 228, 230, 231; then 232-237; then 238-495; then 496-512; then 229 and 225; then 180; then 181, 221; then 160 | Runtime refill, exact providers, integrity/supervisor repairs, exact parser-failure repair and deterministic reconciliation, healthy publication, proof/evaluation/repair projection, then closeout |
+| 11 | 600-613; then 614; then 160 | Audit-derived scheduler/fence recovery, production provider/GraphRAG/MCP++/proof/runtime composition, aggregate authority, then closeout |
 
 ## SCA-000 Seal the supervisor-native program
 
@@ -775,7 +776,7 @@ Normative:
 - Status: active
 - Priority: P1
 - Track: rollout
-- Depends on: SCA-111, SCA-130, SCA-140, SCA-150, SCA-166, SCA-167, SCA-181, SCA-221
+- Depends on: SCA-111, SCA-130, SCA-140, SCA-150, SCA-166, SCA-167, SCA-181, SCA-221, SCA-614
 - Goal id: SCA-G160
 - Outputs: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md, data/agent_supervisor/swissknife_contract_assurance/completion_gate.json
 - Validation: test -f docs/launch/swissknife-symbolic-contract-supervisor-runbook.md && python3 -m json.tool data/agent_supervisor/swissknife_contract_assurance/completion_gate.json >/dev/null
@@ -2952,7 +2953,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: proof-orchestration
-- Depends on: SCA-070, SCA-090, SCA-214, SCA-217, SCA-220, SCA-225
+- Depends on: SCA-070, SCA-090, SCA-214, SCA-217, SCA-220, SCA-225, SCA-604, SCA-605, SCA-606, SCA-612
 - Goal id: SCA-G071
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_proof_pipeline.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_proof_pipeline.py -q
@@ -2977,7 +2978,7 @@ Normative:
 - Status: todo
 - Priority: P1
 - Track: zk-backend
-- Depends on: SCA-081, SCA-214, SCA-218, SCA-220, SCA-223
+- Depends on: SCA-081, SCA-214, SCA-218, SCA-220, SCA-223, SCA-607
 - Goal id: SCA-G082
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ipfs_datasets_zk_attestation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/proof_attestation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py -q
@@ -3135,7 +3136,7 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: authoritative-index-publication
-- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-512
+- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-512, SCA-609
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/generations, data/agent_supervisor/swissknife_contract_assurance/authoritative, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json, data/agent_supervisor/swissknife_contract_assurance/baseline/handoff.json, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json
 - Validation: test -L data/agent_supervisor/swissknife_contract_assurance/authoritative && python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py -q
@@ -13790,3 +13791,387 @@ Normative:
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-513-reconciliation-8cbfd9cd6102.md
 - Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-513-reconciliation-8cbfd9cd6102.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## SCA-600 Restore dropped canonical scheduler semantics
+
+- Status: todo
+- Priority: P0
+- Track: scheduler-recovery
+- Depends on: SCA-173, SCA-229
+- Goal id: SCA-G178
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py -q -k "not leased_lane_signal_terminates_detached_descendants"
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/scheduler-recovery
+- Parallel lane: sca-scheduler-recovery
+- Resource class: cpu-medium
+- Resource stage: runtime
+- Implementation timeout seconds: 21600
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py
+- Interfaces: DynamicBundleScheduler, BundleLaneLauncher, LeaseCoordinator
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Conflict policy: Recover the reviewed domain-layout behavior onto canonical modules; do not delete, weaken, xfail, or rewrite acceptance tests to match the partial merge.
+- Preconditions: Authoritative task-completion gates are available and the 12-failure scheduler receipt is retained.
+- Effects: Restores derived-index refresh/fail-closed behavior, stale-input binding, restart ownership, predecessor fencing, receipt-bound settlement, capacity accounting, and idle-lane reaping.
+- Evidence subset: Merge d93cb5b78 and reviewed source hunks from 1c4ae39, 91eb0519, 20cc0036, 2382b3ca, f071c406, ace7dbcc, 3d8a4616, 203c4182, ea94edfa
+- Acceptance: The 39 scheduler tests other than the separately drifted leased-lane module-path test pass; the eleven reproduced semantic failures pass without weakening lease, receipt, freshness, capacity, or settlement invariants.
+
+## SCA-601 Repair canonical leased-lane and legacy P2P scheduler test paths
+
+- Status: todo
+- Priority: P1
+- Track: scheduler-compatibility
+- Depends on: SCA-600
+- Goal id: SCA-G178
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py, external/ipfs_accelerate/test/test_p2p_workflow_scheduler.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py external/ipfs_accelerate/test/test_p2p_workflow_scheduler.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/scheduler-compatibility
+- Parallel lane: sca-scheduler-compatibility
+- Resource class: cpu-small
+- Resource stage: quality
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py, external/ipfs_accelerate/test/test_p2p_workflow_scheduler.py
+- Interfaces: ipfs_accelerate_py.agent_supervisor.merge.leased_lane, P2PWorkflowScheduler
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Conflict policy: Point tests at canonical package modules and preserve process-tree assertions; do not add aliases that revive retired runtime authority.
+- Preconditions: Canonical scheduler behavior is restored.
+- Effects: Removes test-only module/import drift and validates the real production paths.
+- Evidence subset: Retired flat leased-lane module path and incorrect legacy P2P sys.path/top-level import
+- Acceptance: All 40 canonical scheduler tests and all 27 P2P workflow scheduler tests collect and pass against package-qualified production modules.
+
+## SCA-602 Bind crash reconciliation and maintenance to one shared epoch
+
+- Status: todo
+- Priority: P1
+- Track: supervisor-fence
+- Depends on: SCA-227, SCA-229, SCA-601
+- Goal id: SCA-G178
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/checkout_lock.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/crash-fence-epoch
+- Parallel lane: sca-crash-fence-epoch
+- Resource class: cpu-small
+- Resource stage: runtime
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/checkout_lock.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py
+- Interfaces: CheckoutMaintenanceLease, CrashFenceReconciler, ProtectedPathGeneration
+- Context budget tokens: 3072
+- Provider role: grok-implement, codex-review
+- Conflict policy: Preserve the SCA-227 bounded lease and fail-closed malformed-state behavior; do not widen lock hold time around the repository scan.
+- Preconditions: Serialized reconciliation and authoritative completion are present.
+- Effects: Binds the protected-path scan, incident/claim generation, maintenance reader/writer state, and mutation to one revalidated epoch.
+- Evidence subset: Interleaving where maintenance begins after reconciliation revalidation but before mutation
+- Acceptance: A deterministic interleaving test proves that any intervening task claim, protected-path generation, or maintenance owner changes the epoch and forces retry before mutation; stale/malformed epochs fail closed.
+
+## SCA-603 Production-wire multi-root provider indexing
+
+- Status: todo
+- Priority: P0
+- Track: production-provider-index
+- Depends on: SCA-216, SCA-229
+- Goal id: SCA-G179
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_indexer.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/production-provider-index
+- Parallel lane: sca-production-provider-index
+- Resource class: cpu-large
+- Resource stage: analysis
+- Implementation timeout seconds: 21600
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_indexer.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py
+- Interfaces: build_multi_root_repository_index, RepositoryIndexer, ProviderIndex
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: Preserve independent repository namespaces and identities; never flatten provider roots into the primary path namespace or infer source from Gitlinks.
+- Preconditions: Exact provider root configuration and source-index capability exist.
+- Effects: Makes the production CLI and baseline build and retain current accelerator, kit, and datasets source indexes alongside the SwissKnife primary index.
+- Evidence subset: Primary root plus configured provider origin/commit/tree/overlay/path/symbol/parser-health ledgers
+- Acceptance: A production CLI invocation scans the primary root and all three provider roots, records independent content identities and health, emits nonempty symbol indexes when healthy, and fails authority on missing, dirty, stale, partial, or version-divergent providers with zero model calls.
+
+## SCA-604 Require extracted actual package surfaces
+
+- Status: todo
+- Priority: P0
+- Track: actual-surface-composition
+- Depends on: SCA-217, SCA-603
+- Goal id: SCA-G179
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_contract_evidence_compiler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/actual-package-surfaces
+- Parallel lane: sca-actual-package-surfaces
+- Resource class: cpu-medium
+- Resource stage: analysis
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_contract_evidence_compiler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py
+- Interfaces: RuntimeContractEvidenceCompiler, PythonMcpSurfaceExtractor, ContractAssuranceBaseline
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: An expected descriptor, matching name, test, or documentation cannot synthesize an observed actual route or registration.
+- Preconditions: Production provider indexes are current.
+- Effects: Passes exact extracted accelerator/kit/datasets MCP surfaces into the evidence compiler and makes missing actual evidence a typed blocking result.
+- Evidence subset: Package/module/function/registration/schema/transport provenance and provider content roots
+- Acceptance: Every observed contract originates from an extracted actual surface with exact provenance; omitted `package_surfaces` fails closed; no expected descriptor can manufacture actual completeness; direct and MCP++ paths remain distinct.
+
+## SCA-605 Query the real indexed SwissKnife graph through datasets GraphRAG
+
+- Status: todo
+- Priority: P0
+- Track: production-graphrag
+- Depends on: SCA-213, SCA-604
+- Goal id: SCA-G179
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_analysis_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/test/api/test_agent_supervisor_real_graph_graphrag.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_real_graph_graphrag.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/production-graphrag
+- Parallel lane: sca-production-graphrag
+- Resource class: cpu-medium
+- Resource stage: retrieval
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_analysis_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/test/api/test_agent_supervisor_real_graph_graphrag.py
+- Interfaces: IntentGraphRetriever, GraphSnapshot, SymbolicContractGraph
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: GraphRAG is bounded retrieval-only context and Cypher AST is syntax-only; neither can assert proof or replace indexed graph authority.
+- Preconditions: Exact datasets GraphRAG capability and current primary/provider graph inputs exist.
+- Effects: Projects the current real contract graph into the exact datasets `GraphSnapshot`, queries it with bounded requests, and retains request/result/root identities.
+- Evidence subset: Current repository/AST/contract graph roots, bounded request, returned node/edge identities, exact datasets module/version
+- Acceptance: Production exact mode queries the real graph rather than fixed canary nodes; results are members of the bound graph root and capped by policy; missing/incompatible datasets APIs fail exact mode; zero model calls occur.
+
+## SCA-606 Make datasets solver readiness explicit and fail closed
+
+- Status: todo
+- Priority: P0
+- Track: proof-readiness
+- Depends on: SCA-214, SCA-604
+- Goal id: SCA-G180
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_logic_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_solver_readiness.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_solver_readiness.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/solver-readiness
+- Parallel lane: sca-solver-readiness
+- Resource class: cpu-proof-solver
+- Resource stage: proof
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_logic_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_solver_readiness.py
+- Interfaces: DCEC, Z3, TDFOL, CEC, Hammer, McpContractProver
+- Context budget tokens: 3072
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: Do not lazily install tools during authoritative execution and do not promote solver SAT, model, or capability labels into proof.
+- Preconditions: Exact datasets logic adapters exist.
+- Effects: Emits deterministic module/tool/version/self-test/reconstruction capability receipts and registers only supported backends.
+- Evidence subset: Backend import/executable/version/configuration/self-test/kernel-reconstruction identities
+- Acceptance: Missing DCECContainer, unavailable Z3, and any other degraded backend report typed unsupported status and `proof_success=false`; supported candidates become authoritative only after approved kernel reconstruction; readiness identities enter proof-cache keys.
+
+## SCA-607 Gate ProveKit on exact executable, setup, circuit, and verifier identity
+
+- Status: todo
+- Priority: P1
+- Track: zk-readiness
+- Depends on: SCA-223, SCA-229, SCA-606
+- Goal id: SCA-G180
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/provekit_setup.py, external/ipfs_accelerate/test/api/test_agent_supervisor_provekit_setup.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_provekit_setup.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/provekit-readiness
+- Parallel lane: sca-provekit-readiness
+- Resource class: cpu-proof-solver
+- Resource stage: proof
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/provekit_setup.py, external/ipfs_accelerate/test/api/test_agent_supervisor_provekit_setup.py
+- Interfaces: ProveKit, Groth16, ProofAttestation
+- Context budget tokens: 3072
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: Simulated ZK and hash commitments remain non-attested; real ZK cannot claim arbitrary function-call or source-code correctness.
+- Preconditions: False simulated-Groth16 authority is removed and solver readiness is explicit.
+- Effects: Adds a capability/setup receipt and positive/negative self-test gate consumed by the real datasets ZK task.
+- Evidence subset: Executable digest/version, setup/circuit/verifier/prover identities, public-input schema, witness policy, positive and negative canaries
+- Acceptance: Absent `provekit-cli` or setup artifacts emits typed unavailable status; configured identities are content-addressed; verifier and negative tests are mandatory; only an already kernel-verified approved receipt predicate is eligible for attestation.
+
+## SCA-608 Normalize MCP++ IDL identities as decodable profile-tagged CIDs
+
+- Status: todo
+- Priority: P0
+- Track: mcplusplus-identity
+- Depends on: SCA-220, SCA-229
+- Goal id: SCA-G181
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/mcplusplus-idl-identity
+- Parallel lane: sca-mcplusplus-idl-identity
+- Resource class: cpu-small
+- Resource stage: identity
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py
+- Interfaces: multiformats.CID, multiformats.multihash, ContentIdentityProfile
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Conflict policy: Do not relabel digest-shaped strings as CIDs or silently equate accelerator, kit, and datasets codec/canonicalization profiles.
+- Preconditions: Exact datasets content-identity conformance passes.
+- Effects: Replaces `cidv1-sha256-<hex>` pseudo-identities with decodable CIDv1 plus an explicit shared IDL identity profile.
+- Evidence subset: Exact canonical IDL bytes, codec/base/multihash/profile metadata, accelerator/kit/datasets conformance vectors
+- Acceptance: Every IDL CID decodes, its multihash digest equals the retained canonical bytes, profile metadata is explicit, cross-package differences become typed contradictions, and malformed/pseudo-CIDs fail validation.
+
+## SCA-609 Emit a content-addressed provider surface health backlog
+
+- Status: todo
+- Priority: P0
+- Track: provider-surface-health
+- Depends on: SCA-603, SCA-604
+- Goal id: SCA-G179
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, external/ipfs_accelerate/test/api/test_agent_supervisor_provider_surface_health.py, data/agent_supervisor/swissknife_contract_assurance/provider-surface-health/backlog.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_provider_surface_health.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/provider-surface-health
+- Parallel lane: sca-provider-surface-health
+- Resource class: cpu-medium
+- Resource stage: analysis
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, external/ipfs_accelerate/test/api/test_agent_supervisor_provider_surface_health.py, data/agent_supervisor/swissknife_contract_assurance/provider-surface-health/backlog.json
+- Interfaces: PythonMcpSurfaceExtractor, AnalyzerHealth, CodeEditPacket
+- Context budget tokens: 2048
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: Every unresolved registration and parser failure remains typed evidence; do not hide it with exclusions, caps, expected descriptors, or an "actual surfaces complete" label.
+- Preconditions: Production provider roots and actual-surface requirements are wired.
+- Effects: Converts provider parser/unresolved-registration rows into deduplicated content-addressed repair families and bounded expansion handles.
+- Evidence subset: Cold-scan package/root/path/symbol/parser/registration/reason identities
+- Acceptance: Reproduces and accounts for all current unresolved/provider-parse rows, blocks exhaustive parity while any mandatory surface is unresolved, emits no per-file prompts, and makes unchanged rescans zero-model and duplicate-free.
+
+## SCA-610 Make datasets MCP++ capability reporting truthful
+
+- Status: todo
+- Priority: P0
+- Track: datasets-mcplusplus
+- Depends on: SCA-042, SCA-229
+- Goal id: SCA-G181
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/bootstrap.py, external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/task_queue.py, external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/peer_registry.py, external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py
+- Validation: python3 -m pytest external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/datasets-mcplusplus-capabilities
+- Parallel lane: sca-datasets-mcplusplus-capabilities
+- Resource class: cpu-medium
+- Resource stage: runtime
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/bootstrap.py, external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/task_queue.py, external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/peer_registry.py, external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_capability_truthfulness.py
+- Interfaces: MCPPlusPlusBootstrap, TaskQueue, PeerRegistry
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Conflict policy: An importable wrapper, TODO response, empty uninitialized registry, or obsolete symbol cannot advertise a reachable capability.
+- Preconditions: Exact datasets source checkout is available.
+- Effects: Either implements exact bootstrap/task-queue/peer-registry paths or reports typed unavailable capability with actionable reason codes.
+- Evidence subset: Import/module/version/constructor/registration/request/result/error/effect identities and negative canaries
+- Acceptance: Capability flags equal real self-tested reachability; bootstrap no longer returns success for unimplemented work; task queue uses current symbols; peer registry instantiates durable state or reports unavailable; error paths fail closed.
+
+## SCA-611 Implement datasets P2P MCP++ tools/list and tools/call parity
+
+- Status: todo
+- Priority: P0
+- Track: datasets-mcplusplus-transport
+- Depends on: SCA-610
+- Goal id: SCA-G181
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/p2p_libp2p_transport.py, external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_p2p_tool_parity.py
+- Validation: python3 -m pytest external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_p2p_tool_parity.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/datasets-mcplusplus-transport
+- Parallel lane: sca-datasets-mcplusplus-transport
+- Resource class: cpu-medium
+- Resource stage: runtime
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcplusplus/p2p_libp2p_transport.py, external/ipfs_datasets/tests/unit/mcp_server/test_mcplusplus_p2p_tool_parity.py
+- Interfaces: MCP tools/list, MCP tools/call, LibP2PTransport
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Conflict policy: Advertised profiles cannot coexist with an empty tool list or missing call path; network observations alone do not prove handler effects.
+- Preconditions: Datasets capability reporting is truthful.
+- Effects: Provides bounded list/call request/result/error parity over the datasets P2P transport with exact registry and handler identity.
+- Evidence subset: Profile negotiation, peer/transport/session, registry/tool/schema/handler/effect and error identities
+- Acceptance: `tools/list` returns the exact registered bounded catalog, `tools/call` dispatches one validated registered tool, unknown/schema-invalid calls fail closed, and direct versus P2P effects are traceable.
+
+## SCA-612 Execute and ingest real MCP++ list/call conformance receipts
+
+- Status: todo
+- Priority: P0
+- Track: mcplusplus-live-conformance
+- Depends on: SCA-222, SCA-229, SCA-604, SCA-608, SCA-611
+- Goal id: SCA-G181
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_live_conformance.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_live_conformance.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/mcp-live-conformance.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_live_conformance.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/mcplusplus-live-conformance
+- Parallel lane: sca-mcplusplus-live-conformance
+- Resource class: cpu-medium
+- Resource stage: evaluation
+- Implementation timeout seconds: 14400
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_live_conformance.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_live_conformance.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/mcp-live-conformance.json
+- Interfaces: MCP tools/list, MCP tools/call, RuntimeMcpInvocationTrace, PythonMcpSurfaceExtractor
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: Structural traces remain structural; only capability-bound in-process or live calls create invocation receipts, and bounded observations do not prove unmodeled behavior.
+- Preconditions: Actual surfaces, normalized IDL identities, canonical FastAPI routes, and datasets P2P parity are available.
+- Effects: Executes representative safe list/call/error paths for accelerator, kit, and datasets and ingests exact receipts into runtime evidence.
+- Evidence subset: Request/schema/tool/transport/route/dispatcher/function/effect/result/error/package/root identities
+- Acceptance: At least one safe exact call per mandatory package path reaches its indexed handler and yields a current receipt; invalid/unknown calls fail closed; direct-call substitutions cannot satisfy MCP++ mediation; zero model calls occur.
+
+## SCA-613 Pin live model and MCP services to a content-addressed runtime identity
+
+- Status: todo
+- Priority: P0
+- Track: runtime-service-identity
+- Depends on: SCA-227, SCA-229, SCA-612
+- Goal id: SCA-G181
+- Outputs: config/swissknife_runtime_service_authority.json, scripts/install_swissknife_runtime_services.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_service_identity.py, data/agent_supervisor/swissknife_contract_assurance/runtime/service-identity.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_service_identity.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/runtime-service-identity
+- Parallel lane: sca-runtime-service-identity
+- Resource class: cpu-small
+- Resource stage: operations
+- Implementation timeout seconds: 10800
+- Predicted files: config/swissknife_runtime_service_authority.json, scripts/install_swissknife_runtime_services.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_service_identity.py, data/agent_supervisor/swissknife_contract_assurance/runtime/service-identity.json
+- Interfaces: SystemdUserService, RuntimeServiceIdentity@1, ContentIdentity@1
+- Context budget tokens: 3072
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: Health is liveness only; do not mutate user service units without an explicit install/apply action and a rollback receipt.
+- Preconditions: Live MCP conformance and authoritative package runtime are available.
+- Effects: Generates a reviewed service authority manifest/installer and startup identity receipt that eliminate mixed working-directory, PYTHONPATH, interpreter, configuration, DB, TLS, and state roots.
+- Evidence subset: Loaded module realpaths/digests, package origin/commit/tree, interpreter, arguments/environment allowlist, configuration CID, state schema/CID, endpoint identity
+- Acceptance: Dry-run and installed configurations are deterministic and reversible; startup refuses mixed/stale roots; MCP++ and model health receipts bind the exact package authority consumed by the baseline; stale service code cannot satisfy contract identity.
+
+## SCA-614 Prove the complete production composition or fail closed
+
+- Status: todo
+- Priority: P0
+- Track: production-authority
+- Depends on: SCA-181, SCA-221, SCA-225, SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613
+- Goal id: SCA-G182
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/production-authority
+- Parallel lane: sca-production-authority
+- Resource class: cpu-proof-solver
+- Resource stage: evaluation
+- Implementation timeout seconds: 28800
+- Predicted files: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
+- Interfaces: RepositoryIndexer, ProviderIndex, IntentGraphRetriever, MCP tools/list, MCP tools/call, McpContractProver, TrustAwareProofCache, ProofAttestation, RuntimeContractMismatchRefinery
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Runtime model calls: 0
+- Conflict policy: This aggregate reads and verifies existing evidence only; it cannot create missing stages, synthesize actual behavior, repair inputs, or establish a second proof/cache authority.
+- Preconditions: Healthy authoritative index, repaired scheduler/fence semantics, production provider/graph/surface wiring, live MCP++ receipts, proof/cache terminal states, ZK capability status, runtime identity, held-out evaluation, and repair projection are current.
+- Effects: Publishes one content-addressed aggregate receipt for the exact end-to-end dependency closure and makes it a closeout prerequisite.
+- Evidence subset: Snapshot/coverage/AST/primary/provider/graph/surface/call/obligation/solver/kernel/cache/ZK-capability/finding/repair/runtime identities and zero-call receipt
+- Acceptance: Every mandatory stage binds the same current dependency closure; supported contracts end proved or refuted and unsupported semantics remain typed; simulated or unavailable ZK never attests; real ZK, if available, attests only the approved verified receipt; exact mismatches project bounded deduplicated repair tasks; missing/stale/partial/synthesized/cross-root evidence yields no authority; execution records zero model/provider/LLM calls.

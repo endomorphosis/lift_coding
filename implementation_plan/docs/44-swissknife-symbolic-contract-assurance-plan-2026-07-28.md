@@ -501,6 +501,67 @@ Generated patches remain proposals. Validation, re-proof, protected-path
 checks, task dependencies, retry budgets, and current-snapshot completion
 evidence decide admission.
 
+## Audit-derived production-composition closure
+
+The 2026-07-29 authority audit found that several completed adapter tasks are
+valid as focused capability work but do not yet establish a production
+composition. Their completion receipts remain historical evidence; they do
+not satisfy the new production-composition goal or authorize a clean
+cross-package conclusion.
+
+The following counterexamples are now explicit planned work:
+
+- the primary baseline entrypoint indexes only the primary repository even
+  though a real multi-root provider index API exists;
+- actual package surfaces are not passed into the runtime evidence compiler,
+  and a missing actual route can be synthesized from an expected descriptor;
+- the exact datasets GraphRAG adapter exercises a detached canary graph rather
+  than the indexed SwissKnife graph, and exact mode is not the production
+  default;
+- datasets logic adapters are capability-tested but not composed through
+  `McpContractProver`, kernel reconstruction, and
+  `TrustAwareProofCache`; DCEC and Z3 are currently unavailable;
+- ProveKit has no configured executable/setup/artifact identity, so real ZK
+  remains typed unavailable and simulated ZK remains non-attested;
+- the accelerator IDL registry emits digest-shaped pseudo-CIDs while kit and
+  datasets emit decodable CIDs under different profiles;
+- cold provider extraction currently reports unresolved registrations and
+  parser failures, which must produce a health backlog rather than coexist
+  with an "actual surfaces complete" claim;
+- datasets MCP++ bootstrap, task-queue, peer-registry, and P2P capability
+  declarations overstate reachable behavior;
+- structural traces do not execute and ingest real `tools/list` and
+  `tools/call` receipts; and
+- the live MCP++ service is healthy but loads a mixed, stale checkout and
+  state layout, so liveness is not runtime contract identity.
+
+The scheduler audit independently reproduced 12 failures in
+`test_agent_supervisor_scheduler.py`: eleven dropped derived-index,
+stale-input, restart-ownership, settlement, capacity, and reaping behaviors
+from a domain-layout merge, plus one retired leased-lane module path. The
+legacy P2P workflow scheduler test also has a stale import path. These are
+high-priority implementation defects, not merely extractor findings.
+
+Tasks SCA-600 through SCA-614 close these gaps. They first repair scheduler
+and crash-fence concurrency semantics, then production-wire provider roots,
+actual MCP surfaces, real-graph GraphRAG, solver/ZK readiness, CID profiles,
+truthful datasets capabilities, live MCP++ call receipts, and exact service
+runtime identity. SCA-614 is a deterministic aggregate gate for the complete
+chain:
+
+```text
+SwissKnife snapshot
+  -> primary plus provider source indexes
+  -> actual MCP++ list/call receipts
+  -> obligations and kernel-checked prover results
+  -> TrustAwareProofCache
+  -> optional real-ZK receipt attestation
+  -> bounded mismatch repair projection
+```
+
+The aggregate must fail closed when any mandatory stage is stale, partial,
+simulated, synthesized, unavailable, or bound to a different content root.
+
 ## Refill policy
 
 Objective refill runs when open work falls below the configured threshold.
@@ -530,7 +591,8 @@ coverage, parser health, canaries, or provider capability is insufficient.
 | 10 | SCA-200 | Complete graph/proof/cache/mismatch baseline after health recovery |
 | 11 | SCA-121, 130, 140, 178, 179, 213-220, 222, 223 | Exact datasets adapters, current multi-root index, proof/cache/ZK orchestration, immediate runtime-integrity repairs, and refill projection |
 | 12 | SCA-180, 181, 221 | Healthy four-component runtime baseline, held-out evaluation, and proof-bound repair projection |
-| 13 | SCA-160 | Promotion and rollout closeout after runtime evidence |
+| 13 | SCA-600-613 | Audit-derived scheduler, provider-composition, MCP++, proof-readiness, and runtime-identity closure |
+| 14 | SCA-614, 160 | End-to-end production-composition gate and rollout closeout |
 
 ## Success gates
 
@@ -566,6 +628,17 @@ coverage, parser health, canaries, or provider capability is insufficient.
 - Every model-server, orchestrator, scheduler, and supervisor operation has a
   versioned terminal contract state, including duplicate/legacy paths and the
   exact MCP++ mediation result.
+- The production entrypoint indexes the primary and all configured provider
+  roots, consumes extracted actual package surfaces, queries the real indexed
+  graph through the exact datasets GraphRAG API, and ingests real MCP++
+  `tools/list`/`tools/call` receipts; adapter-only canaries cannot satisfy this
+  gate.
+- All scheduler derived-index, stale-input, restart-ownership, settlement,
+  capacity, reaping, and process-tree regressions pass on the canonical domain
+  module paths.
+- Every live model/MCP service publishes a startup identity receipt binding
+  loaded module paths, commit/tree, configuration CID, and state CID to the
+  authority consumed by the contract baseline.
 - Every deterministic-only task has a receipt proving zero provider calls;
   every provider task records its selected provider, bounded packet size,
   fallback/review chain, and admission result.
