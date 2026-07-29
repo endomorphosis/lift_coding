@@ -1016,7 +1016,7 @@ Normative:
 
 ## SCA-172 Extract orchestrator lifecycle contracts
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: orchestrator
 - Depends on: SCA-170
