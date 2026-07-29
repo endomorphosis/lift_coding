@@ -534,7 +534,7 @@ Normative:
 
 ## SCA-100 Materialize minimal contract-directed edit packets
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: packets
 - Depends on: SCA-090, SCA-091
