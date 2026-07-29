@@ -75,6 +75,45 @@
     "realZk": "attested_only_under_approved_policy",
     "llmOutput": "proposal_only"
   },
+  "symbolicProviders": {
+    "graphRag": {
+      "module": "ipfs_datasets_py.logic.intent_ir.graphrag.retrieval",
+      "entrypoint": "IntentGraphRetriever",
+      "authority": "context_only",
+      "exactCapabilityReceiptRequired": true
+    },
+    "graphQueryAst": {
+      "module": "ipfs_datasets_py.knowledge_graphs.cypher.ast",
+      "parserModule": "ipfs_datasets_py.knowledge_graphs.cypher.parser",
+      "entrypoint": "QueryNode",
+      "authority": "syntax_only",
+      "exactCapabilityReceiptRequired": true
+    },
+    "logic": {
+      "modules": [
+        "ipfs_datasets_py.logic.ir_core",
+        "ipfs_datasets_py.logic.TDFOL",
+        "ipfs_datasets_py.logic.CEC",
+        "ipfs_datasets_py.logic.external_provers.smt",
+        "ipfs_datasets_py.logic.hammers"
+      ],
+      "adapterConformanceRequired": true,
+      "fixtureOnlyBackendsAccepted": false
+    },
+    "contentIdentity": {
+      "modules": [
+        "ipfs_datasets_py.utils.cid_utils",
+        "ipfs_datasets_py.logic.ir_core.identity",
+        "ipfs_datasets_py.logic.ipld_cid",
+        "ipfs_datasets_py.logic.profile_g",
+        "multiformats.CID",
+        "multiformats.multihash"
+      ],
+      "decodedMultihashMustMatchCanonicalBytes": true
+    },
+    "missingOrIncompatibleProvider": "typed_blocker",
+    "packageRootFallbackCanSatisfyExactBinding": false
+  },
   "contentIdentity": {
     "artifactProfile": {
       "canonicalization": "strict-dag-json-v1",
