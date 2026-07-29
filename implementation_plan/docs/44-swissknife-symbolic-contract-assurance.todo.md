@@ -560,7 +560,7 @@ Normative:
 
 ## SCA-101 Emit the generated ipfs_accelerate_py bug and vulnerability board
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: task-refinery
 - Depends on: SCA-100
