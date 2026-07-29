@@ -2819,7 +2819,7 @@ Normative:
 
 ## SCA-213 Bind exact ipfs_datasets GraphRAG and Cypher-AST modules
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: datasets-graph
 - Depends on: SCA-015, SCA-030
