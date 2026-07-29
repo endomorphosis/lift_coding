@@ -1042,7 +1042,7 @@ Normative:
 
 ## SCA-173 Resolve scheduler authority and concurrency contracts
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: scheduler
 - Depends on: SCA-170
