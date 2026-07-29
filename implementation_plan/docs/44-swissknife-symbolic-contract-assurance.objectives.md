@@ -28,18 +28,25 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 |-- SCA-G010  Exact snapshot, scope, and coverage accounting
 |   `-- SCA-G015  Canonical multiformats and CID identity bridge
 |-- SCA-G020  Polyglot AST extraction
-|   `-- SCA-G021  Whole-tree incremental index
+|   |-- SCA-G021  Whole-tree incremental index
+|   `-- SCA-G022  Current authoritative index publication
 |-- SCA-G030  Typed call/effect/contract graph and bounded GraphRAG
+|   `-- SCA-G031  Exact datasets GraphRAG and Cypher-AST binding
 |-- SCA-G040  Reviewed contract authority catalog
 |   |-- SCA-G041  SwissKnife expected-contract extraction
-|   `-- SCA-G042  Python package actual-surface extraction
+|   |-- SCA-G042  Python package actual-surface extraction
+|   `-- SCA-G043  Multi-root provider source index
 |-- SCA-G050  MCP++ invocation reachability
-|   `-- SCA-G051  Discovery, execution, transport, and failure parity
+|   |-- SCA-G051  Discovery, execution, transport, and failure parity
+|   `-- SCA-G052  Endpoint-anchor and observed-contract compilation
 |-- SCA-G060  Logic IR and contract obligations
-|   `-- SCA-G061  Solver routing and counterexamples
+|   |-- SCA-G061  Solver routing and counterexamples
+|   `-- SCA-G062  Exact datasets logic and prover binding
 |-- SCA-G070  Trust-aware proof cache and exact invalidation
+|   `-- SCA-G071  End-to-end proof/cache orchestration
 |-- SCA-G080  ZK threat model and capability policy
-|   `-- SCA-G081  Receipt attestation adapter
+|   |-- SCA-G081  Receipt attestation adapter
+|   `-- SCA-G082  Real datasets ZK receipt backend
 |-- SCA-G090  Contract mismatch analyzer
 |   `-- SCA-G091  Bug and vulnerability classification
 |-- SCA-G100  Minimal CodeEditPacket materialization
@@ -162,7 +169,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py -q
 - Acceptance: Strict DAG-JSON artifacts use lowercase base32 CIDv1/dag-json/sha2-256; logic IR uses its separately declared domain-separated raw-codec profile; decoded multihash equals the SHA-256 digest of the exact retained canonical bytes; profile differences among cid_utils, ir_core.identity, ipld_cid, and profile_g remain explicit contradictions; unavailable multiformats support fails closed and no fallback digest is labeled CID.
-- Gap task: SCA-015
+- Gap task: SCA-015, SCA-220
 - Conflict policy: Reuse datasets canonical identity APIs behind a lazy accelerator bridge; never change identity profile or canonicalization implicitly and never create a second proof-cache authority.
 - Goal completion schema version: 1
 - Completion confidence: 0.083333
@@ -1030,7 +1037,7 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_contract_vulnerability_rules.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_mismatch_refinery.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/runtime_contract_assurance_refill.py, data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_refill.py -q
 - Acceptance: Route mismatch, policy bypass, direct dispatch, schema confusion, stale replay, lease/fence violation, duplicate/lost work, mock/degraded evidence, false release GO, and provider-context bypass have typed rules; one current counterexample cluster yields one bounded task; fixes close only after current-tree reindex and re-proof.
-- Gap task: SCA-177, SCA-178, SCA-179, SCA-180, SCA-181
+- Gap task: SCA-177, SCA-178, SCA-179, SCA-180, SCA-181, SCA-221
 - Conflict policy: Security severity and exploitability remain separate from proof state; heuristics can nominate work but cannot label a vulnerability proved.
 - Goal completion schema version: 1
 - Completion confidence: 0.083333
@@ -1039,6 +1046,111 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 - Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
 - Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
 - Reopen reasons: []
+
+## SCA-G022 Current authoritative index publication
+
+- Status: active
+- Parent: SCA-G021, SCA-G166, SCA-G168
+- Priority: P0
+- Track: authoritative-index
+- Bundle: swissknife/contract-assurance/authoritative-index
+- Goal: Replace stale compiler-unavailable evidence with one current snapshot-bound repository index and analyzer-health receipt produced by the real TypeScript 5.9.3 parser, while retaining every bounded parse failure as typed evidence.
+- Evidence: SCAEV022INDEX
+- Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py -q
+- Acceptance: Snapshot authority, coverage, AST index, repository index, parser/toolchain identity, and current manifest bind the same roots; every eligible path is success or a typed bounded failure; compiler-unavailable rows are not reused after the compiler identity changes; no provider or model call occurs.
+- Gap task: SCA-215
+- Conflict policy: Do not lower health thresholds or relabel parse failures; stale index roots remain historical and cannot satisfy current completion.
+
+## SCA-G031 Exact datasets GraphRAG and Cypher-AST binding
+
+- Status: active
+- Parent: SCA-G015, SCA-G030
+- Priority: P0
+- Track: datasets-graph
+- Bundle: swissknife/contract-assurance/datasets-graph
+- Goal: Bind bounded candidate retrieval and graph-query syntax to the exact `ipfs_datasets_py.logic.intent_ir.graphrag.retrieval` and `ipfs_datasets_py.knowledge_graphs.cypher.ast`/`parser` APIs instead of assuming the package root implements the adapter protocol.
+- Evidence: SCAEV031DATASETSGRAPH
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_analysis_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_symbolic_bridge.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_symbolic_bridge.py -q
+- Acceptance: Real modules, signatures, versions, package tree, graph roots, bounds, and result identities are capability-receipted; a real-module canary returns context-only candidates; Cypher AST is syntax-only; package-root fallback, fixture-only backends, and local lexical fallback cannot claim exact datasets use or proof authority.
+- Gap task: SCA-213
+- Conflict policy: Retain lazy imports and deterministic local availability, but fail the exact-provider gate on missing or incompatible datasets modules.
+
+## SCA-G043 Multi-root provider source index
+
+- Status: active
+- Parent: SCA-G010, SCA-G042, SCA-G168
+- Priority: P0
+- Track: provider-index
+- Bundle: swissknife/contract-assurance/provider-index
+- Goal: Scan and index the configured source trees for `ipfs_accelerate_py`, `ipfs_kit_py`, and `ipfs_datasets_py` as content-addressed provider roots instead of treating their Gitlinks as opaque identities.
+- Evidence: SCAEV043MULTIROOT
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_indexer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py -q
+- Acceptance: Each provider root has an origin/commit/tree/dirty-overlay/path ledger and independent analyzer health; cross-root symbols join only through exact package/module/function identities; missing, dirty, moved, or version-divergent roots remain contradictions; provider source bodies stay in CAS.
+- Gap task: SCA-216
+- Conflict policy: Keep the SwissKnife primary snapshot distinct; never flatten multiple repositories into one ambiguous path namespace or infer source contents from a Gitlink alone.
+
+## SCA-G052 Endpoint-anchor and observed-contract compilation
+
+- Status: active
+- Parent: SCA-G041, SCA-G042, SCA-G051, SCA-G170, SCA-G175
+- Priority: P0
+- Track: invocation-evidence
+- Bundle: swissknife/contract-assurance/invocation-evidence
+- Goal: Compile reviewed SwissKnife endpoints, MCP++ discovery/call transports, package registrations, schemas, and observed actual contracts into exact tracer anchors and analyzer inputs for the baseline.
+- Evidence: SCAEV052ANCHORS
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/runtime_contract_evidence_compiler.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_evidence_compiler.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_runtime_contract_evidence_compiler.py -q
+- Acceptance: Healthy indexed catalogs deterministically emit nonempty endpoint anchors and observed contracts for every reviewed runtime operation; traces distinguish direct package calls from the mandatory MCP++ route; missing or ambiguous anchors yield typed unknowns rather than a withheld empty-success stage.
+- Gap task: SCA-217
+- Conflict policy: Only reviewed catalog and indexed source facts become anchors; runtime observations and matching names cannot synthesize registrations or mediation.
+
+## SCA-G062 Exact datasets logic and prover binding
+
+- Status: active
+- Parent: SCA-G015, SCA-G060, SCA-G061
+- Priority: P0
+- Track: datasets-logic
+- Bundle: swissknife/contract-assurance/datasets-logic
+- Goal: Adapt the real datasets IR, TDFOL, CEC, SMT, and Hammer signatures into the accelerator obligation/prover interfaces and register only capability-probed, reconstruction-compatible backends.
+- Evidence: SCAEV062DATASETSLOGIC
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_logic_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_prover.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_logic_conformance.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_logic_conformance.py -q
+- Acceptance: Real-module conformance exercises actual signatures rather than injected fixtures; IR and premise selection retain canonical identities; SMT/TDFOL/CEC outputs are candidates until trusted reconstruction; unregistered or unavailable backends are unsupported, never silently local-success.
+- Gap task: SCA-214
+- Conflict policy: Do not fork datasets logic IR or treat SAT/model output as a proof; capability labels alone cannot register a backend.
+
+## SCA-G071 End-to-end proof/cache orchestration
+
+- Status: active
+- Parent: SCA-G052, SCA-G060, SCA-G061, SCA-G062, SCA-G070, SCA-G090
+- Priority: P0
+- Track: proof-orchestration
+- Bundle: swissknife/contract-assurance/proof-orchestration
+- Goal: Wire current obligations through `McpContractProver`, kernel verification, `TrustAwareProofCache`, mismatch analysis, and vulnerability refinement in the baseline instead of stopping after object construction.
+- Evidence: SCAEV071PROOFCACHE
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_proof_pipeline.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_proof_pipeline.py -q
+- Acceptance: Every supported reviewed operation reaches a terminal proved/refuted/unknown/unsupported/stale state; proof receipts and cache hits revalidate exact snapshot, graph, policy, solver, kernel, and toolchain roots; counterexamples flow into mismatch/vulnerability records; missing evidence withholds downstream authority.
+- Gap task: SCA-218
+- Conflict policy: `TrustAwareProofCache` remains the sole proof-receipt cache and no analyzer, test, trace, provider, or solver candidate bypasses kernel policy.
+
+## SCA-G082 Real datasets ZK receipt backend
+
+- Status: active
+- Parent: SCA-G071, SCA-G080, SCA-G081
+- Priority: P1
+- Track: zk-backend
+- Bundle: swissknife/contract-assurance/zk-backend
+- Goal: Bind an available datasets Groth16/ProveKit backend to the approved verified-receipt predicate with setup identity, self-tests, verifier callback, and explicit threat-model gating.
+- Evidence: SCAEV082REALZK
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ipfs_datasets_zk_attestation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/proof_attestation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py -q
+- Acceptance: Real setup/prover/verifier identities and current proof/cache roots are bound; positive and negative self-tests pass; only the approved already-verified receipt predicate can attest; unavailable or simulated backends emit non-attested typed status and block real-ZK claims.
+- Gap task: SCA-219
+- Conflict policy: ZK attests receipt possession/membership or approved private predicates, not source-code correctness or unverified function-call behavior.
 
 ## SCA-G160 Promotion, operations, and closeout
 

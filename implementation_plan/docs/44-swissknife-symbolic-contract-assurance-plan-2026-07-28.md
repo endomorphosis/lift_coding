@@ -89,6 +89,17 @@ Build a content-addressed, proof-directed analysis loop that can:
   does not provide a ready-made repository-wide interprocedural contract
   analyzer. Its legacy proof and CID variants are not interchangeable trust
   roots. The accelerator must own the policy bridge and conformance tests.
+- The existing accelerator datasets adapters declare AST/GraphRAG and logic
+  capabilities against the `ipfs_datasets_py` package root, but that root does
+  not expose the adapter method signatures. Real-module probes therefore
+  terminate as `no_supported_operations`, while fixture backends pass. Exact
+  module bindings and real-API conformance are required before the datasets
+  provider can count as used.
+- The published baseline still binds an older unhealthy repository index:
+  3,104 JavaScript/TypeScript paths report `compiler_unavailable`, even though
+  the authoritative SwissKnife checkout now contains TypeScript 5.9.3 and a
+  direct parser canary succeeds. A current snapshot-bound index must replace
+  the stale artifact before any proof or no-drift conclusion.
 - MCP++ descriptors, event receipts, and an optional dispatch pipeline exist,
   but the primary hierarchical `tools_dispatch` path can invoke handlers
   directly. A trace or descriptor match is not proof that the mandatory
@@ -310,7 +321,10 @@ Keep `ASTBlobRecord` as the compact path-independent interchange record.
 Add deterministic TypeScript/JavaScript/TSX/JSX extraction through the local
 TypeScript compiler API, with bounded parsing and no model calls. Add adapters
 for Python and structured schemas. Store source bodies in CAS, not in index
-rows or prompts.
+rows or prompts. The source parser remains supervisor-owned; the exact
+`ipfs_datasets_py.knowledge_graphs.cypher.ast` and `.parser` modules validate
+only bounded graph-query ASTs and never substitute for source-language
+parsing.
 
 ### 4. Graph and retrieval
 
@@ -318,7 +332,12 @@ Project AST and schema facts into `CodeEvidenceGraph` and the datasets
 knowledge-graph representation. Store content IDs and provenance on every node
 and edge. Use BM25/vector/GraphRAG only for candidate seeds; complete required
 call, contract, policy, and implementation dependencies with deterministic
-closure.
+closure. Bind provider-backed retrieval directly to
+`ipfs_datasets_py.logic.intent_ir.graphrag.retrieval.IntentGraphRetriever`;
+the package root is not an accepted implicit backend. Capability receipts bind
+the exact module, package tree, graph root, bounds, and non-authoritative
+status. Missing or signature-incompatible providers are typed blockers rather
+than silent local-provider success.
 
 ### 5. MCP++ contract extraction
 
@@ -430,8 +449,9 @@ coverage, parser health, canaries, or provider capability is insufficient.
 | 8 | SCA-170, 171, 172, 173, 174 | Runtime manifest followed by four parallel component extractors |
 | 9 | SCA-175, 176, 177 | Runtime state-machine obligations, MCP++ reachability, and vulnerability rules |
 | 10 | SCA-200 | Complete graph/proof/cache/mismatch baseline after health recovery |
-| 11 | SCA-121, 130, 140, 178, 179, 180, 181 | Repair/refill projection, benchmark, healthy runtime baseline, and held-out evaluation |
-| 12 | SCA-160 | Promotion and rollout closeout after runtime evidence |
+| 11 | SCA-121, 130, 140, 178, 179, 213-221 | Exact datasets adapters, current multi-root index, proof/cache/ZK orchestration, immediate runtime-integrity repairs, and refill projection |
+| 12 | SCA-180, 181 | Healthy four-component runtime baseline and held-out evaluation after all evidence producers are wired |
+| 13 | SCA-160 | Promotion and rollout closeout after runtime evidence |
 
 ## Success gates
 
@@ -447,6 +467,13 @@ coverage, parser health, canaries, or provider capability is insufficient.
   `reachable`, `refuted`, `ambiguous`, `unsupported`, or `not_measured`.
 - Zero GraphRAG, model, test, static observation, or simulated-ZK result is
   promoted to kernel or attested authority.
+- Real-module conformance proves that the configured datasets GraphRAG,
+  Cypher-AST, logic, CID, multiformats, and multihash entrypoints were invoked;
+  a fixture backend, package-root fallback, or capability label alone cannot
+  satisfy this gate.
+- The current authoritative snapshot, coverage ledger, repository index,
+  analyzer-health receipt, invocation trace, obligations, proof-cache root,
+  and findings all bind the same content-addressed dependency closure.
 - Warm unchanged scans avoid reparsing and re-proving at least 95 percent of
   unchanged blobs/obligations.
 - A one-symbol change invalidates all and only the transitive dependent
