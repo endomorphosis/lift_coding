@@ -711,7 +711,7 @@ Normative:
 - Predicted files: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_incremental.py
 - Interfaces: ProofScopeIndex, AnalysisASTIndex, ContractAssuranceRefill
 - Context budget tokens: 2048
-- Provider role: deterministic-only
+- Provider role: grok-implement, codex-review
 - Conflict policy: Preserve historical receipts and mark stale; never delete evidence to manufacture clean state.
 - Preconditions: Baseline and durable state roots valid.
 - Effects: Updates changed blobs and reverse dependency closure, re-proves affected claims, updates finding/task lifecycle, and records metrics.
@@ -737,7 +737,7 @@ Normative:
 - Predicted files: external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_benchmark.py, data/agent_supervisor/swissknife_contract_assurance/benchmarks/report.json
 - Interfaces: ContractAssuranceBenchmark@1
 - Context budget tokens: 2048
-- Provider role: deterministic-only
+- Provider role: grok-implement, codex-review
 - Conflict policy: Report observed resource envelope; do not promote concurrency from synthetic counts.
 - Preconditions: Baseline artifacts and packet fixtures available.
 - Effects: Measures cold/warm/incremental parse, graph, proof, cache, bytes, RSS, process count, and packet tokens.
