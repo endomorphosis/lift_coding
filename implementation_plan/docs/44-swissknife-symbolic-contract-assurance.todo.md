@@ -2779,8 +2779,9 @@ Normative:
 
 ## SCA-211 Resolve merge retry-budget failure for SCA-130
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: SCA-130 is integrated with sealed invalidation/refill artifacts; ipfs_accelerate commit b80f5d3d95a5b3e3efaede1748b2858af4d4d52c preserves provably nonoverlapping operator files while retaining fail-closed overlap checks; the complete 361-test todo-daemon port suite and focused contract-assurance suites pass.
 - Priority: P1
 - Track: ops
 - Depends on: SCA-110, SCA-200
