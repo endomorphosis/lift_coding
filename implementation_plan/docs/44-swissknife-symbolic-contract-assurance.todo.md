@@ -1119,7 +1119,7 @@ Normative:
 
 ## SCA-176 Prove exact cross-component MCP++ mediation
 
-- Status: active
+- Status: completed
 - Priority: P0
 - Track: runtime-invocation
 - Depends on: SCA-050, SCA-051, SCA-175
