@@ -31,6 +31,17 @@ BOARD_PATH = (
     "44-swissknife-symbolic-contract-assurance.todo.md"
 )
 ALLOWED_LANES = {LANE_ID: BOARD_PATH}
+IMPLEMENTATION_PROVIDER_ENV = "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"
+ALLOWED_PROVIDER_ASSIGNMENTS = {"auto", "grok", "codex"}
+ALLOWED_PROVIDER_ENVIRONMENT = {
+    "IPFS_ACCELERATE_AGENT_CODEX_CONTEXT_WINDOW",
+    "IPFS_ACCELERATE_AGENT_CODEX_MAX_THREADS",
+    "IPFS_ACCELERATE_AGENT_CODEX_MAX_DEPTH",
+    "IPFS_ACCELERATE_AGENT_DISABLE_SUBAGENTS",
+    "IPFS_ACCELERATE_AGENT_GROK_BIN",
+    "IPFS_ACCELERATE_AGENT_REQUIRE_TASK_EXECUTION_METADATA",
+    "IPFS_ACCELERATE_AGENT_TODO_VECTOR_CONTEXT_TOKEN_BUDGET",
+}
 
 
 @dataclass
@@ -39,6 +50,8 @@ class Lane:
     state_dir: Path
     log_path: Path
     command: list[str]
+    provider: str
+    environment: dict[str, str]
     process: subprocess.Popen[bytes] | None = None
     restarts: int = 0
 
@@ -121,12 +134,13 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
         ancestors[task_id] = result
         return result
 
+    terminal_statuses = {"completed", "blocked"}
     missing_parallel_metadata: list[str] = []
     paths_by_task: dict[str, list[str]] = {}
     for task in tasks:
         metadata = task.metadata
         predicted = _csv(metadata.get("predicted files", ""))
-        if task.status != "completed" and (
+        if task.status not in terminal_statuses and (
             not metadata.get("parallel lane") or not predicted
         ):
             missing_parallel_metadata.append(task.task_id)
@@ -143,7 +157,11 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
         )
 
     unordered_overlaps: list[dict[str, Any]] = []
-    task_ids = sorted(by_id)
+    task_ids = sorted(
+        task.task_id
+        for task in tasks
+        if task.status not in terminal_statuses
+    )
     for offset, left_id in enumerate(task_ids):
         for right_id in task_ids[offset + 1 :]:
             if (
@@ -329,10 +347,13 @@ def _spawn_lane(lane: Lane, *, repo_root: Path) -> None:
     lane.log_path.parent.mkdir(parents=True, exist_ok=True)
     output = lane.log_path.open("ab")
     try:
+        environment = os.environ.copy()
+        environment.update(lane.environment)
+        environment[IMPLEMENTATION_PROVIDER_ENV] = lane.provider
         lane.process = subprocess.Popen(
             lane.command,
             cwd=repo_root,
-            env=os.environ.copy(),
+            env=environment,
             stdin=subprocess.DEVNULL,
             stdout=output,
             stderr=subprocess.STDOUT,
@@ -367,6 +388,7 @@ def _status_payload(
             {
                 "index": lane.index,
                 "pid": lane.process.pid if lane.process is not None else 0,
+                "provider": lane.provider,
                 "running": (
                     lane.process is not None
                     and lane.process.poll() is None
@@ -395,6 +417,38 @@ def run(config_path: Path) -> int:
     lane_count = int(parallel["laneCount"])
     if lane_count < 2 or lane_count > 8:
         raise ValueError("parallel laneCount must be in [2, 8]")
+    providers = profile.get("providers")
+    if not isinstance(providers, dict):
+        raise ValueError("providers must be a JSON object")
+    assignments = providers.get("laneAssignments")
+    if not isinstance(assignments, list) or len(assignments) != lane_count:
+        raise ValueError(
+            "providers.laneAssignments must contain exactly laneCount entries"
+        )
+    provider_assignments = [str(item).strip().lower() for item in assignments]
+    unsupported_assignments = sorted(
+        set(provider_assignments) - ALLOWED_PROVIDER_ASSIGNMENTS
+    )
+    if unsupported_assignments:
+        raise ValueError(
+            "unsupported provider lane assignments: "
+            + ", ".join(unsupported_assignments)
+        )
+    configured_environment = providers.get("commonEnvironment", {})
+    if not isinstance(configured_environment, dict):
+        raise ValueError("providers.commonEnvironment must be a JSON object")
+    unknown_environment = sorted(
+        set(configured_environment) - ALLOWED_PROVIDER_ENVIRONMENT
+    )
+    if unknown_environment:
+        raise ValueError(
+            "providers.commonEnvironment contains non-allowlisted keys: "
+            + ", ".join(unknown_environment)
+        )
+    provider_environment = {
+        str(key): str(value)
+        for key, value in configured_environment.items()
+    }
 
     require_swissknife_checkout_lease(
         ["--implement"],
@@ -417,6 +471,8 @@ def run(config_path: Path) -> int:
         todo_path,
         str(profile["taskPrefix"]),
     )
+    validation["provider_lane_assignments"] = list(provider_assignments)
+    validation["provider_environment_keys"] = sorted(provider_environment)
     parallel_root = runtime_root / "parallel"
     parallel_root.mkdir(parents=True, exist_ok=True)
     status_path = parallel_root / "parallel_supervisor_status.json"
@@ -444,6 +500,8 @@ def run(config_path: Path) -> int:
                     parallel_root / "logs" / f"lane-{index:02d}.log"
                 ),
                 command=command,
+                provider=provider_assignments[index],
+                environment=dict(provider_environment),
             )
         )
 

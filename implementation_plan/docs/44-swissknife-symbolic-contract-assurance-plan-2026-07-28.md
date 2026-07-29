@@ -43,6 +43,10 @@ Build a content-addressed, proof-directed analysis loop that can:
 8. Refill goals and tasks from new static-analysis evidence while preserving
    bounded work, deduplication, leases, dependency guardrails, and exact
    invalidation.
+9. Treat the drifted model server, orchestrator, scheduler, and agent
+   supervisor as explicit versioned runtime components, prove their lifecycle
+   and cross-component MCP++ contracts, and project their current
+   counterexamples into the accelerator repair board.
 
 ## Current-state findings
 
@@ -70,6 +74,29 @@ Build a content-addressed, proof-directed analysis loop that can:
   evidence. The scan must prove that declared tools reach real package
   registrations through the expected MCP++ path; a matching name or document
   is not sufficient.
+- The current whole-tree shadow evidence disposes all 6,395 tracked paths but
+  remains unsafe for completion reasoning: 3,109 of 3,369 parser-eligible
+  paths retain typed parse failures. The warm repeat reused all 3,369 parser
+  records. Coverage accounting and content-addressed reuse are present, but
+  semantic coverage is not healthy enough to assert no drift.
+- A separate host checkout of SwissKnife is newer than the integration
+  superproject's pinned `swissknife` gitlink and has a different tracked-file
+  population. `SCA-168` records their origins/commits/ancestry and makes one
+  reviewed snapshot authority explicit; evidence from the two trees is never
+  silently mixed.
+- The datasets package has strong CID/IR identity, bounded GraphRAG, hammer
+  receipt/cache, SMT/ATP, and availability-gated ZK building blocks, but it
+  does not provide a ready-made repository-wide interprocedural contract
+  analyzer. Its legacy proof and CID variants are not interchangeable trust
+  roots. The accelerator must own the policy bridge and conformance tests.
+- MCP++ descriptors, event receipts, and an optional dispatch pipeline exist,
+  but the primary hierarchical `tools_dispatch` path can invoke handlers
+  directly. A trace or descriptor match is not proof that the mandatory
+  policy/schema pipeline mediated the call.
+- The launch profile names Grok Build and Codex roles, while the recovered
+  runtime selected one provider for broad implementation prompts and even
+  invoked a model for `deterministic-only` work. Provider labels and per-task
+  context budgets must become enforced runtime policy, not documentation.
 - Existing SVD and SWR boards are historical implementation/release programs.
   This program uses a separate `SCA` namespace and state root so their evidence
   and retry histories are not rewritten.
@@ -125,6 +152,29 @@ dispatch, policy, transport, and implementation surfaces in:
 The provider repositories do not need an unrelated whole-tree semantic index
 to prove a SwissKnife invocation contract. Their exact in-scope path manifest
 and Git identities are part of each receipt.
+
+### Runtime-component scope
+
+The runtime drift catalog has four named component roots:
+
+- `model-server`: the Hugging Face server, MCP AI-model facades, native model
+  tools, model loading/cache, batching/queueing, auth, health, and transport
+  schemas;
+- `orchestrator`: P2P task orchestration, lifecycle orchestration, dispatch,
+  cancellation, retry, ownership, and result publication;
+- `scheduler`: deterministic/P2P workflow scheduling, MCP++ workflow and risk
+  schedulers, supervisor resource/provider schedulers, leases, fencing,
+  capacity, fairness, and backpressure; and
+- `agent-supervisor`: objective/goal/subgoal/task materialization, task
+  sources, control plane, lane lifecycle, durable state, refill, validation,
+  proof admission, implementation, and merge reconciliation.
+
+Each component records canonical and compatibility entrypoints separately.
+Duplicate servers, schedulers, registries, or control paths are contradictions
+unless a reviewed adapter contract proves their version and semantics. The
+catalog also binds the corresponding SwissKnife descriptors/connectors and the
+actual package registrations in `ipfs_accelerate_py`, `ipfs_kit_py`, and
+`ipfs_datasets_py`.
 
 ## Authority model
 
@@ -201,6 +251,29 @@ The reviewed property catalog must support at least:
   roots that affect it.
 - `NoDynamicAuthority`: unresolved dynamic dispatch, unknown schema, truncated
   mandatory closure, or provider degradation cannot be reported as proved.
+- `CanonicalImplementationSelected`: every public runtime operation resolves
+  to one reviewed canonical implementation or an explicit versioned adapter;
+  shadow copies and unreviewed fallbacks are refuted.
+- `LifecycleStateMachineConforms`: model, job, task, lease, lane, goal,
+  subgoal, and scheduler transitions respect versioned preconditions,
+  terminal states, cancellation, timeout, retry, and recovery semantics.
+- `LeaseFenceBeforeEffect`: current lease ownership and fencing-token
+  validation dominate every distributed or repository-mutating effect.
+- `QueueAccountingConserved`: admission, reservation, running, retry,
+  completion, cancellation, and failure transitions neither lose nor
+  duplicate work under the modeled concurrency bounds.
+- `ModelSelectionPreserved`: model identity, revision, hardware/backend,
+  capability, generation parameters, cache identity, and result provenance
+  survive SwissKnife, MCP++, model-server, and package boundaries.
+- `GoalTaskClosure`: every active supervisor goal/subgoal has bounded
+  satisfiable work or typed blocked evidence; task completion cannot imply
+  goal completion without current acceptance, analyzer-health, and exhaustion
+  receipts.
+- `DeterministicOnlyMeansNoModel`: a task marked deterministic-only executes
+  only an allowlisted typed local operation and records a zero-model receipt.
+- `ProviderContextBounded`: Grok and Codex receive only a current
+  counterexample/edit packet within the task hard limit; provider choice,
+  fallback, review order, quota, and redaction are recorded.
 
 Semantic product behavior that is not represented by a reviewed formal model
 remains `unsupported` or `not_measured`; structural proof does not imply full
@@ -253,6 +326,12 @@ Extract SwissKnife descriptors, registries, generated app bindings, connector
 methods, direct fetches, compatibility routes, and tests. Extract the actual
 MCP registrations and schemas from the three Python packages. Normalize both
 sides into one versioned `McpContractCatalog` and retain source precedence.
+
+Build a separate `RuntimeComponentCatalog` over the model server,
+orchestrator, scheduler, and supervisor. It inventories canonical and legacy
+entrypoints, schemas, state machines, persistence roots, policy checks,
+transports, dispatch adapters, duplicate implementations, and the exact
+SwissKnife/MCP++ route expected to reach each operation.
 
 ### 6. Symbolic obligations
 
@@ -311,10 +390,14 @@ one shared merge queue serializes integration into the reviewed parallel
 branch. Only the primary shard performs objective/codebase refill and
 taskboard maintenance.
 
-Grok Build is the primary implementation provider and Codex is the
-fallback/review provider. No provider receives the repository corpus. Model
-invocation begins only after a deterministic task exists and uses
-obligation-first context.
+During bootstrap, shards have explicit Grok or Codex provider identities so
+the declared provider does not silently resolve to another executable.
+`SCA-167` then makes task metadata authoritative: deterministic-only work uses
+a typed local runner with zero model calls; implementable
+`CodeEditPacket` work routes first to Grok Build and then to an independent,
+bounded Codex review/repair step. No provider receives the repository corpus.
+Model invocation begins only after a deterministic mismatch packet exists and
+uses obligation-first context.
 
 Generated patches remain proposals. Validation, re-proof, protected-path
 checks, task dependencies, retry budgets, and current-snapshot completion
@@ -342,8 +425,13 @@ coverage, parser health, canaries, or provider capability is insufficient.
 | 3 | SCA-050, 051, 060, 061, 080 | Invocation/logic chain fans out to prover and ZK policy |
 | 4 | SCA-070, 081, 090, 091 | Cache/attestation and mismatch/security branches overlap |
 | 5 | SCA-100, 101, 110, 111 | Packets, refinery, runtime, and providers converge |
-| 6 | SCA-120 | End-to-end shadow baseline |
-| 7 | SCA-121, 130, 140, 150, 160 | Four-way operational fan-out, then rollout closeout |
+| 6 | SCA-120 | Exhaustive health-gated repository baseline |
+| 7 | SCA-150, 166, 167, 168 | Parser/provider recovery, evaluation, and snapshot-authority reconciliation |
+| 8 | SCA-170, 171, 172, 173, 174 | Runtime manifest followed by four parallel component extractors |
+| 9 | SCA-175, 176, 177 | Runtime state-machine obligations, MCP++ reachability, and vulnerability rules |
+| 10 | SCA-200 | Complete graph/proof/cache/mismatch baseline after health recovery |
+| 11 | SCA-121, 130, 140, 178, 179, 180, 181 | Repair/refill projection, benchmark, healthy runtime baseline, and held-out evaluation |
+| 12 | SCA-160 | Promotion and rollout closeout after runtime evidence |
 
 ## Success gates
 
@@ -352,7 +440,9 @@ coverage, parser health, canaries, or provider capability is insufficient.
   its decoded multihash equals the digest of the exact retained canonical
   bytes, and cross-profile identities are never conflated.
 - 100 percent of supported source files are indexed or carry a typed parse
-  failure; no silent parser drop.
+  failure; no silent parser drop. Promotion additionally requires parser
+  health within the reviewed per-language threshold or explicit unsupported
+  coverage that cannot hide an in-scope contract surface.
 - All canonical SwissKnife MCP tool declarations join to exactly one of
   `reachable`, `refuted`, `ambiguous`, `unsupported`, or `not_measured`.
 - Zero GraphRAG, model, test, static observation, or simulated-ZK result is
@@ -367,6 +457,12 @@ coverage, parser health, canaries, or provider capability is insufficient.
   with zero false authoritative admissions.
 - Every generated repair task reproduces on its source snapshot and closes
   only after current-tree validation and re-proof.
+- Every model-server, orchestrator, scheduler, and supervisor operation has a
+  versioned terminal contract state, including duplicate/legacy paths and the
+  exact MCP++ mediation result.
+- Every deterministic-only task has a receipt proving zero provider calls;
+  every provider task records its selected provider, bounded packet size,
+  fallback/review chain, and admission result.
 - The four-shard coordinator remains healthy, lease-protected, refill-bounded,
   conflict-checked, and restartable from per-lane durable state.
 

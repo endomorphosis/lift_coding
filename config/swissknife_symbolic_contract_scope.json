@@ -5,12 +5,18 @@
   "authority": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md",
   "primaryRepository": "swissknife",
   "primaryRoot": "swissknife",
-  "providerScopes": [
-    "external/ipfs_accelerate",
-    "external/ipfs_kit",
-    "external/ipfs_datasets",
-    "Mcp-Plus-Plus"
-  ],
+    "providerScopes": [
+        "external/ipfs_accelerate",
+        "external/ipfs_kit",
+        "external/ipfs_datasets",
+        "Mcp-Plus-Plus"
+    ],
+    "runtimeContractComponents": [
+        "model-server",
+        "orchestrator",
+        "scheduler",
+        "agent-supervisor"
+    ],
   "workingTreeOverlay": {
     "mode": "tracked_plus_allowlisted_untracked_source",
     "allowDirtyAnalysis": true,
@@ -138,8 +144,15 @@
       "emergency-archive"
     ]
   },
-  "silentExclusionsAllowed": false,
-  "trackedCoverageRequired": 1.0,
+    "silentExclusionsAllowed": false,
+    "trackedCoverageRequired": 1.0,
+    "analyzerHealthPolicy": {
+        "semanticCoverageRequiredForContractPaths": 1.0,
+        "maximumParserFailureRatio": 0.01,
+        "perLanguageCanaryRequired": true,
+        "regexOnlyJsTsCountsAsSemanticAst": false,
+        "unhealthyBlocksNoDriftAndExhaustion": true
+    },
   "contentIdentity": {
     "pathDigest": "sha2-256",
     "blobDigest": "sha2-256",
