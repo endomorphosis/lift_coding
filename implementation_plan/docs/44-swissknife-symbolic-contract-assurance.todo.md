@@ -14211,7 +14211,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: production-index-graph
-- Depends on:
+- Depends on: SCA-218, SCA-225, SCA-603, SCA-604, SCA-605, SCA-609, SCA-625
 - Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_multi_root_index.py external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py external/ipfs_accelerate/test/api/test_agent_supervisor_real_graph_graphrag.py external/ipfs_accelerate/test/api/test_agent_supervisor_provider_surface_health.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14278,7 +14278,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: mcplusplus-runtime-identity
-- Depends on:
+- Depends on: SCA-613
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_live_conformance.py, config/swissknife_runtime_service_authority.json, data/agent_supervisor/swissknife_contract_assurance/runtime/service-identity.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_live_conformance.py external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14345,7 +14345,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: proof-orchestration
-- Depends on:
+- Depends on: SCA-218, SCA-603, SCA-604, SCA-605, SCA-616
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_proof_pipeline.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_proof_pipeline.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14412,7 +14412,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: scheduler-recovery
-- Depends on:
+- Depends on: SCA-602
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14479,7 +14479,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: production-composition
-- Depends on:
+- Depends on: SCA-614
 - Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14546,7 +14546,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: proof-readiness
-- Depends on:
+- Depends on: SCA-607
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/solver_readiness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/provekit_setup.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_solver_readiness.py external/ipfs_accelerate/test/api/test_agent_supervisor_provekit_setup.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14613,7 +14613,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: production-authority
-- Depends on:
+- Depends on: SCA-620
 - Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14680,7 +14680,7 @@ Normative:
 - Review only: false
 - Priority: P1
 - Track: zk-backend
-- Depends on:
+- Depends on: SCA-219
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/ipfs_datasets_zk_attestation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/proof_attestation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_zk_attestation.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14747,7 +14747,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: swissknife-contract-assurance
-- Depends on:
+- Depends on: SCA-230
 - Outputs: implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.objectives.md, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md, config/swissknife_symbolic_contract_assurance_supervisor.json, config/swissknife_symbolic_contract_assurance_lane_inventory.json, scripts/swissknife_parallel_implementation_supervisor.py
 - Validation: test -f implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md && python3 -m json.tool config/swissknife_symbolic_contract_assurance_supervisor.json >/dev/null && python3 -m json.tool config/swissknife_symbolic_contract_assurance_lane_inventory.json >/dev/null && python3 -m py_compile scripts/swissknife_parallel_implementation_supervisor.py
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14814,7 +14814,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: provider-index
-- Depends on:
+- Depends on: SCA-225, SCA-235, SCA-603
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_indexer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14881,7 +14881,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: datasets-graph
-- Depends on:
+- Depends on: SCA-605
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_analysis_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_symbolic_bridge.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_symbolic_bridge.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14948,7 +14948,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: datasets-logic
-- Depends on:
+- Depends on: SCA-606
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_logic_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_prover.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_logic_conformance.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_logic_conformance.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -15216,7 +15216,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: proving
-- Depends on:
+- Depends on: SCA-627
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_prover.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_prover.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_prover.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
