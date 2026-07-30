@@ -16353,7 +16353,7 @@ Normative:
 
 ## SCA-656 Resolve implementation retry-budget failure for SCA-653
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
