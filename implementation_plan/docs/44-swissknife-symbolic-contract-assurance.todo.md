@@ -14179,7 +14179,9 @@ Normative:
 
 ## SCA-615 Production-wire bounded Grok proposal and independent Codex review
 
-- Status: todo
+- Status: completed
+- Completion: manual
+- Completion evidence: Managed branch commit 302ed98e2b421975946cfc8226c4556d5dd02991 pins accelerator runtime 9945851183ad4235f1e93a4d213ce1faa2339f95, which retains the bounded Grok proposal and independent Codex MCP++ review route. The production route suite passes 24 tests with one expected isolated-layout artifact skip, and the checked-in production-provider-route evaluation satisfies every acceptance flag on 2026-07-30.
 - Priority: P0
 - Track: production-provider-routing
 - Depends on: SCA-228, SCA-229
@@ -14607,8 +14609,9 @@ Normative:
 
 ## SCA-622 Close objective gap: End-to-end production authority gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Superproject merge d81dfcf4f498eae6b59fde858c7bef5a1297ddcb binds accelerator fbf0ea9d1a2a2e9e4831e3b1a39de2bb1540861f and sealed report sha256:0344be0d39b31e1cf7a2ebd63e1f60e5a42ecc4d019dcf51bbba849804fb2855; all 22 production-authority composition tests pass in the real superproject layout.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -14942,8 +14945,9 @@ Normative:
 
 ## SCA-627 Close objective gap: Exact datasets logic and prover binding
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Superproject merge c5f4c781aefe744d8d74154667dd967a38bdfe8c records accelerator 99e7a6a0f99f47433777e434f6085bc89aa1bfcf; all 39 datasets-logic conformance, MCP prover, and logic-obligation tests pass while the proof path remains LLM-free.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -15009,8 +15013,9 @@ Normative:
 
 ## SCA-628 Close objective gap: Canonical multiformats and CID identity bridge
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Accelerator fbf0ea9d1a2a2e9e4831e3b1a39de2bb1540861f retains the canonical content-identity bridge and all 34 CID, multiformats, multihash, canonical-byte, profile-contradiction, lazy-import, and fail-closed tests pass in the real superproject layout.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -15076,8 +15081,9 @@ Normative:
 
 ## SCA-629 Close objective gap: Discovery, execution, transport, and failure parity
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Managed branch merge c5fb6f091 includes the parity analyzer, and accelerator runtime 9945851183ad4235f1e93a4d213ce1faa2339f95 passes the complete contract-analysis suite as part of 54 focused parity, obligation, and prover tests on 2026-07-30.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -15143,8 +15149,9 @@ Normative:
 
 ## SCA-630 Close objective gap: Logic IR and contract obligations
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Managed branch merge cf07c42be includes the canonical logic-IR obligation compiler, and accelerator runtime 9945851183ad4235f1e93a4d213ce1faa2339f95 passes the complete obligation suite as part of 54 focused parity, obligation, and prover tests on 2026-07-30.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -15210,8 +15217,9 @@ Normative:
 
 ## SCA-631 Close objective gap: Solver routing and counterexamples
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Managed branch merge a1667bc1a includes explicit solver capability routing and compact counterexamples, and accelerator runtime 9945851183ad4235f1e93a4d213ce1faa2339f95 passes the complete prover suite, including the no-LLM proof-path assertion, as part of 54 focused tests on 2026-07-30.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -15277,8 +15285,9 @@ Normative:
 
 ## SCA-632 Resolve merge retry-budget failure for SCA-615
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Managed branch merge fef5fa137 and the SCA-632 discovery receipt prove the clean external-checkout reuse guardrail is integrated. The final accelerator runtime 9945851183ad4235f1e93a4d213ce1faa2339f95 passes 477 combined supervisor, provider-route, parity, obligation, and prover tests with one expected isolated-layout artifact skip on 2026-07-30.
 - Priority: P1
 - Track: ops
 - Depends on: SCA-228, SCA-229
@@ -15342,8 +15351,9 @@ Normative:
 
 ## SCA-636 Resolve merge retry-budget failure for SCA-627
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: SCA-627's implementation branch is integrated as parent two of c5f4c781aefe744d8d74154667dd967a38bdfe8c; accelerator union 99e7a6a0f99f47433777e434f6085bc89aa1bfcf contains both SCA-061 and SCA-062 exports and passes all 39 focused logic/prover tests.
 - Priority: P1
 - Track: ops
 - Depends on: SCA-606
@@ -15358,8 +15368,9 @@ Normative:
 
 ## SCA-637 Resolve merge retry-budget failure for SCA-622
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: The SCA-622 implementation branch was semantically reconciled in superproject merge d81dfcf4f498eae6b59fde858c7bef5a1297ddcb with accelerator union fbf0ea9d1a2a2e9e4831e3b1a39de2bb1540861f; all 22 production-authority composition tests pass in the real superproject layout.
 - Priority: P1
 - Track: ops
 - Depends on: SCA-620
@@ -15368,6 +15379,22 @@ Normative:
 - Provider role: grok-implement, codex-review
 - Context budget tokens: 4096
 - Parallel lane: swissknife/contract-assurance/production-authority
-- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-30-sca-637-sca-622-merge-retry-budget.md
 - Conflict policy: This is an aggregate verifier, not a second analyzer or cache; it cannot repair, synthesize, or relabel missing evidence.
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-622. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-30-sca-637-sca-622-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-622 from strategy blocked_tasks.
+
+## SCA-638 Resolve implementation retry-budget failure for SCA-237
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-231, SCA-229, SCA-615
+- Outputs: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-638-sca-237-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 2048
+- Parallel lane: sca-parser-failure-legacy
+- Predicted files: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
+- Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-237. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-638-sca-237-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-237 from strategy blocked_tasks.
