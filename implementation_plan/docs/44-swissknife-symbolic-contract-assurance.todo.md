@@ -16350,3 +16350,21 @@ Normative:
 - Candidate kind: generated_task
 - Todo vector key: b1a06c35f63139e0
 - Acceptance: Objective scan filed this review gap for SCA-G001. Inspect the evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-655-objective-gap-f58bcd39b756.md; either resolve the diagnostic without an implementation change or authorize precise repository-relative edit targets before changing the task status.
+
+## SCA-656 Resolve implementation retry-budget failure for SCA-653
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_catalog.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-656-sca-653-implementation-retry-budget.md
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-656-sca-653-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Context evidence policy: content-addressed-targeted-v1
+- Parallel lane: swissknife/contract-assurance/catalog
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_catalog.py
+- Conflict policy: Adapt code_property_catalog and interface_contract_codegen; do not introduce a parallel assurance lattice.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-653. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-656-sca-653-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-653 from strategy blocked_tasks. The repair provider input must bind content-addressed-targeted-v1 selected evidence through ProductionProviderRoute@1; an identity-only packet does not satisfy this repair contract.
