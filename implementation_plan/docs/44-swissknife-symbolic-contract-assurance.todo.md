@@ -15998,7 +15998,7 @@ Normative:
 
 ## SCA-650 Resolve implementation retry-budget failure for SCA-646
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
