@@ -1,6 +1,6 @@
 {
-  "content_root": "content-root:sca-620-current",
-  "corpus_version": "sca-620-production-composition-v1",
+  "content_root": "content-root:sca-622-current",
+  "corpus_version": "sca-622-production-authority-v1",
   "evaluated_at": "2026-07-29T21:00:00Z",
   "evidence": {
     "coverage": [
@@ -12,15 +12,20 @@
       "optional-real-zk-capability-gated",
       "exact-runtime-identity",
       "scheduler-fence-regressions",
-      "fail-closed-missing-synthesized-simulated-partial-stale-cross-root",
+      "fail-closed-unsupported-unknown-stale-partial",
+      "fail-closed-missing-synthesized-simulated-cross-root",
       "focused-adapter-success-not-production-authority",
-      "zero-runtime-model-calls"
+      "zero-runtime-model-calls",
+      "bounded-deduplicated-repair-projection",
+      "exact-validation-and-reproof-commands",
+      "fail-closed-missing-synthesized-simulated-partial-stale-cross-root"
     ],
-    "goal_id": "SCA-G177",
+    "goal_id": "SCA-G182",
     "requirement_ids": [
+      "SCAEV182E2E",
       "SCAEV177COMPOSE"
     ],
-    "task_id": "SCA-620"
+    "task_id": "SCA-622"
   },
   "fail_closed_dispositions": [
     "cross_root",
@@ -31,9 +36,10 @@
     "stale",
     "synthesized",
     "unavailable",
+    "unknown",
     "unsupported"
   ],
-  "goal_id": "SCA-G177",
+  "goal_id": "SCA-G182",
   "healthy_composition": {
     "authority_granted": true,
     "baseline_bridges": [
@@ -52,7 +58,7 @@
           "reason_codes": [
             "current"
           ],
-          "root_id": "content-root:sca-620-current",
+          "root_id": "content-root:sca-622-current",
           "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
         }
       },
@@ -71,7 +77,7 @@
           "reason_codes": [
             "current"
           ],
-          "root_id": "content-root:sca-620-current",
+          "root_id": "content-root:sca-622-current",
           "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
         }
       },
@@ -90,7 +96,7 @@
           "reason_codes": [
             "current"
           ],
-          "root_id": "content-root:sca-620-current",
+          "root_id": "content-root:sca-622-current",
           "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
         }
       },
@@ -109,7 +115,7 @@
           "reason_codes": [
             "current"
           ],
-          "root_id": "content-root:sca-620-current",
+          "root_id": "content-root:sca-622-current",
           "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
         }
       },
@@ -128,7 +134,7 @@
           "reason_codes": [
             "current"
           ],
-          "root_id": "content-root:sca-620-current",
+          "root_id": "content-root:sca-622-current",
           "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
         }
       },
@@ -147,12 +153,31 @@
           "reason_codes": [
             "current"
           ],
-          "root_id": "content-root:sca-620-current",
+          "root_id": "content-root:sca-622-current",
+          "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
+        }
+      },
+      {
+        "baseline_stage": "mismatch",
+        "complete": true,
+        "healthy_enough_for_authority": true,
+        "production_stage": "repair_projection",
+        "receipt": {
+          "completeness": "complete",
+          "details": {
+            "disposition": "current",
+            "production_stage": "repair_projection"
+          },
+          "name": "mismatch",
+          "reason_codes": [
+            "current"
+          ],
+          "root_id": "content-root:sca-622-current",
           "schema": "ipfs_accelerate_py/agent-supervisor/sca-baseline-stage@1"
         }
       }
     ],
-    "content_root": "content-root:sca-620-current",
+    "content_root": "content-root:sca-622-current",
     "evidence": {
       "coverage": [
         "primary-provider-index-current-root",
@@ -163,15 +188,20 @@
         "optional-real-zk-capability-gated",
         "exact-runtime-identity",
         "scheduler-fence-regressions",
-        "fail-closed-missing-synthesized-simulated-partial-stale-cross-root",
+        "fail-closed-unsupported-unknown-stale-partial",
+        "fail-closed-missing-synthesized-simulated-cross-root",
         "focused-adapter-success-not-production-authority",
-        "zero-runtime-model-calls"
+        "zero-runtime-model-calls",
+        "bounded-deduplicated-repair-projection",
+        "exact-validation-and-reproof-commands",
+        "fail-closed-missing-synthesized-simulated-partial-stale-cross-root"
       ],
-      "goal_id": "SCA-G177",
+      "goal_id": "SCA-G182",
       "requirement_ids": [
+        "SCAEV182E2E",
         "SCAEV177COMPOSE"
       ],
-      "task_id": "SCA-620"
+      "task_id": "SCA-622"
     },
     "interface": "ProductionContractComposition@1",
     "isolation_audit": {
@@ -180,21 +210,53 @@
       "provider_call_count": 0
     },
     "optional_zk": {
-      "attested": true,
+      "attested": false,
       "blocks_composition": false,
-      "disposition": "current",
-      "predicate": "verified_receipt",
+      "disposition": "unavailable",
+      "predicate": "",
       "present": true,
       "reason_codes": [
-        "current"
+        "real_zk_attestation:unavailable"
       ]
     },
     "production_eligible": true,
     "reason_codes": [],
+    "repair_tasks": [
+      {
+        "content_root": "content-root:sca-622-current",
+        "contract_id": "mcp.tools.call.list_models",
+        "mismatch_id": "mm-surface-route-absent",
+        "re_proof_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_prover.py -q -k list_models"
+        ],
+        "reason_codes": [
+          "actual_route_absent"
+        ],
+        "task_id": "repair:mcp.tools.call.list_models:mm-surface-route-absent",
+        "validation_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_actual_package_surfaces.py -q"
+        ]
+      },
+      {
+        "content_root": "content-root:sca-622-current",
+        "contract_id": "proof.kernel.reconstruct.tool_schema",
+        "mismatch_id": "mm-kernel-cache-stale-key",
+        "re_proof_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_code_proof_reproof.py -q"
+        ],
+        "reason_codes": [
+          "stale_cache_key"
+        ],
+        "task_id": "repair:proof.kernel.reconstruct.tool_schema:mm-kernel-cache-stale-key",
+        "validation_commands": [
+          "python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_proof_cache.py -q"
+        ]
+      }
+    ],
     "schema": "ipfs_accelerate_py/agent-supervisor/production-composition@1",
     "stages": [
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:primary_provider_index"
@@ -209,7 +271,7 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:actual_package_surfaces"
@@ -224,7 +286,7 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:real_graphrag"
@@ -239,7 +301,7 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:mcp_list_call_receipts"
@@ -254,7 +316,7 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:kernel_prover_cache"
@@ -269,7 +331,7 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:runtime_identity"
@@ -284,7 +346,7 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
           "provenance": "production:scheduler_fence"
@@ -299,19 +361,36 @@
         ]
       },
       {
-        "content_root": "content-root:sca-620-current",
+        "content_root": "content-root:sca-622-current",
         "details": {
           "entrypoint": "production",
-          "predicate": "verified_receipt",
-          "required": false
+          "projection": "RuntimeContractMismatchRefinery",
+          "provenance": "production:repair_projection",
+          "require_tasks": false
         },
         "disposition": "current",
         "focused_adapter_success": false,
-        "mandatory": false,
-        "name": "real_zk_attestation",
+        "mandatory": true,
+        "name": "repair_projection",
         "production_admissible": true,
         "reason_codes": [
           "current"
+        ]
+      },
+      {
+        "content_root": "",
+        "details": {
+          "entrypoint": "production",
+          "predicate": "",
+          "required": false
+        },
+        "disposition": "unavailable",
+        "focused_adapter_success": false,
+        "mandatory": false,
+        "name": "real_zk_attestation",
+        "production_admissible": false,
+        "reason_codes": [
+          "unavailable"
         ]
       }
     ],
@@ -319,7 +398,7 @@
   },
   "interface": "ProductionContractComposition@1",
   "isolation_audit": {
-    "held_out_fixture_disclosed": false,
+    "held_out_fixture_disclosed": true,
     "llm_call_count": 0,
     "model_call_count": 0,
     "provider_call_count": 0
@@ -331,18 +410,21 @@
     "mcp_list_call_receipts",
     "kernel_prover_cache",
     "runtime_identity",
-    "scheduler_fence"
+    "scheduler_fence",
+    "repair_projection"
   ],
   "optional_stages": [
     "real_zk_attestation"
   ],
   "optional_zk_policy": {
+    "attested": false,
+    "blocks_composition": false,
     "simulated_attested": false,
     "simulated_blocks_composition": false,
     "simulated_observation_authority": true
   },
   "passed": true,
-  "report_id": "sha256:3173679aab36b3e882112fcae91f1ca0c65bb406e61102fcb932f79bcc76a5fc",
+  "report_id": "sha256:0344be0d39b31e1cf7a2ebd63e1f60e5a42ecc4d019dcf51bbba849804fb2855",
   "results": [
     {
       "authority_granted": true,
@@ -363,6 +445,7 @@
         "kernel_prover_cache",
         "runtime_identity",
         "scheduler_fence",
+        "repair_projection",
         "real_zk_attestation"
       ]
     },
@@ -385,7 +468,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -409,7 +493,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -431,6 +516,7 @@
         "kernel_prover_cache",
         "runtime_identity",
         "scheduler_fence",
+        "repair_projection",
         "real_zk_attestation"
       ]
     },
@@ -454,7 +540,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -477,7 +564,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -501,7 +589,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -524,7 +613,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -544,7 +634,8 @@
         "mcp_list_call_receipts:focused_adapter_not_production",
         "kernel_prover_cache:focused_adapter_not_production",
         "runtime_identity:focused_adapter_not_production",
-        "scheduler_fence:focused_adapter_not_production"
+        "scheduler_fence:focused_adapter_not_production",
+        "repair_projection:focused_adapter_not_production"
       ],
       "stage_names": [
         "primary_provider_index",
@@ -553,7 +644,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -561,11 +653,11 @@
       "case_id": "compose:nonzero-model-calls",
       "expected_authority": false,
       "fail_closed": true,
-      "llm_call_count": 1,
+      "llm_call_count": 0,
       "model_call_count": 1,
       "mutation": "runtime_model_calls",
       "production_eligible": false,
-      "provider_call_count": 1,
+      "provider_call_count": 0,
       "reason_codes": [
         "runtime_model_calls_nonzero"
       ],
@@ -576,7 +668,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -599,7 +692,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -622,7 +716,8 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
       ]
     },
     {
@@ -646,7 +741,56 @@
         "mcp_list_call_receipts",
         "kernel_prover_cache",
         "runtime_identity",
-        "scheduler_fence"
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:unsupported-prover-cache",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "unsupported",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "kernel_prover_cache:unsupported"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
+      ]
+    },
+    {
+      "authority_granted": false,
+      "case_id": "compose:unknown-package-surfaces",
+      "expected_authority": false,
+      "fail_closed": true,
+      "llm_call_count": 0,
+      "model_call_count": 0,
+      "mutation": "unknown",
+      "production_eligible": false,
+      "provider_call_count": 0,
+      "reason_codes": [
+        "actual_package_surfaces:unknown"
+      ],
+      "stage_names": [
+        "primary_provider_index",
+        "actual_package_surfaces",
+        "real_graphrag",
+        "mcp_list_call_receipts",
+        "kernel_prover_cache",
+        "runtime_identity",
+        "scheduler_fence",
+        "repair_projection"
       ]
     }
   ],
@@ -656,24 +800,30 @@
     "focused_adapter_not_authority": true,
     "missing_fails_closed": true,
     "partial_fails_closed": true,
+    "repair_projection_deduped": true,
+    "repair_tasks_carry_reproof": true,
+    "repair_tasks_carry_validation": true,
+    "runtime_model_calls_fail_closed": true,
     "simulated_mcp_fails_closed": true,
-    "simulated_zk_not_attested": true,
     "stale_fails_closed": true,
     "synthesized_fails_closed": true,
-    "zero_model_calls_required": true
+    "unknown_fails_closed": true,
+    "unsupported_fails_closed": true
   },
   "schema": "ipfs_accelerate_py/agent-supervisor/production-composition@1",
   "summary": {
-    "attack_case_count": 11,
+    "attack_case_count": 13,
     "authority_granted": true,
-    "case_count": 13,
+    "case_count": 15,
     "false_authoritative_admission_count": 0,
     "healthy_authority_ok": true,
     "healthy_case_count": 2,
     "isolation_clean": true,
     "missed_fail_closed_count": 0,
-    "production_eligible": true
+    "production_eligible": true,
+    "repair_task_count": 2,
+    "repair_tasks_deduplicated": true
   },
-  "task_id": "SCA-620",
+  "task_id": "SCA-622",
   "version": "1"
 }
