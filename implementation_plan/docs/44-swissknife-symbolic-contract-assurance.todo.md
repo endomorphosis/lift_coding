@@ -15398,3 +15398,35 @@ Normative:
 - Predicted files: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
 - Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-237. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-638-sca-237-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-237 from strategy blocked_tasks.
+
+## SCA-639 Resolve implementation retry-budget failure for SCA-232
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-231, SCA-229, SCA-615
+- Outputs: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-639-sca-232-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 2048
+- Parallel lane: sca-parser-failure-unit
+- Predicted files: swissknife/ipfs_accelerate_js/test/unit, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json
+- Conflict policy: Edit only the declared family/analyzer scope and its unique receipts; never weaken health thresholds or introduce a blanket exclusion.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-232. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-639-sca-232-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-232 from strategy blocked_tasks.
+
+## SCA-640 Resolve implementation retry-budget failure for SCA-608
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-220, SCA-229, SCA-615
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-640-sca-608-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 2048
+- Parallel lane: sca-mcplusplus-idl-identity
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py
+- Conflict policy: Do not relabel digest-shaped strings as CIDs or silently equate accelerator, kit, and datasets codec/canonicalization profiles.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-608. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-640-sca-608-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-608 from strategy blocked_tasks.
