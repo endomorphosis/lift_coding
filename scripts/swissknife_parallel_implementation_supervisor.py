@@ -24,6 +24,7 @@ _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=Tr
 
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (  # noqa: E402
     parse_task_file,
+    retry_budget_repair_source,
 )
 
 
@@ -180,6 +181,35 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
                 left_id in task_ancestors(right_id)
                 or right_id in task_ancestors(left_id)
             ):
+                continue
+            left_repair_source, _left_failure_kind = (
+                retry_budget_repair_source(by_id[left_id])
+            )
+            right_repair_source, _right_failure_kind = (
+                retry_budget_repair_source(by_id[right_id])
+            )
+            if (
+                left_repair_source == right_id
+                or right_repair_source == left_id
+                or (
+                    left_repair_source
+                    and (
+                        left_repair_source in task_ancestors(right_id)
+                        or right_id in task_ancestors(left_repair_source)
+                    )
+                )
+                or (
+                    right_repair_source
+                    and (
+                        right_repair_source in task_ancestors(left_id)
+                        or left_id in task_ancestors(right_repair_source)
+                    )
+                )
+            ):
+                # The shared taskboard repair fence prevents a source task
+                # from being reclaimed while its generated repair is active.
+                # Existing dependency relatives remain ordered around that
+                # fenced source even though the repair is a sibling node.
                 continue
             overlaps = sorted(
                 {
