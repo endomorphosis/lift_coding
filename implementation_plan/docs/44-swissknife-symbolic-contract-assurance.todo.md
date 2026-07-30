@@ -15983,3 +15983,19 @@ Normative:
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_mismatch_analyzer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_mismatch_analyzer.py
 - Conflict policy: Findings are evidence, not task completion or mutation authority.
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-645. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-649-sca-645-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-645 from strategy blocked_tasks.
+
+## SCA-650 Resolve implementation retry-budget failure for SCA-646
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_THREAT_MODEL.md, external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_POLICY.md, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-30-sca-650-sca-646-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/zk-policy
+- Predicted files: external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_THREAT_MODEL.md, external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_POLICY.md
+- Conflict policy: Extend existing codebase-proof ZK policy and proof_attestation; do not claim ZK proves arbitrary code correctness.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-646. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-30-sca-650-sca-646-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-646 from strategy blocked_tasks.
