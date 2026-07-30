@@ -15430,3 +15430,556 @@ Normative:
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/idl_registry.py, external/ipfs_accelerate/test/mcp_server/test_mcplusplus_idl_identity_profile.py
 - Conflict policy: Do not relabel digest-shaped strings as CIDs or silently equate accelerator, kit, and datasets codec/canonicalization profiles.
 - Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-608. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-640-sca-608-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-608 from strategy blocked_tasks.
+
+## SCA-641 Close objective gap: Exact snapshot, scope, and coverage accounting
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: snapshot
+- Depends on: SCA-235, SCA-625
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, config/swissknife_symbolic_contract_scope.json, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-641-objective-gap-0691ffdcb7e1.md
+- Bundle: swissknife/contract-assurance/snapshot
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-snapshot.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G000
+- Graph depth: 1
+- Objective heap index: 7
+- Parallel lane: swissknife/contract-assurance/snapshot
+- Conflict policy: Extend analysis identity contracts; do not weaken existing clean-tree or proof-cache bindings.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/repository_snapshot.py, config/swissknife_symbolic_contract_scope.json, external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py
+- Changed paths:
+- AST symbols: SCAEV010SNAP
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G010
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/e244d1b7196a9593d933c8bfe16386eb366109fa795ba4086c629ddf3c966789
+- Canonical task CID: baguqeera4jcndnyznkkzhwjtzc76cy4g5m3gccp2pfn2icdmmko56pewm6eq
+- Semantic identity: objective-evidence-obligation/v1/2984d9b1e0ac008ad3c126a36aaa52faa8537d8fef1a334554c88b9fc7638cf6
+- Acceptance subset: Snapshot identity changes for every behavior-affecting overlay, all 5, 771 baseline tracked paths are accounted for on the seed fixture, recursive gitlinks and exclusions are explicit, node_modules and caches are dependency metadata, not source authority.
+- Preconditions: objective goal SCA-G010 is schedulable
+- Effects: satisfy evidence requirement: SCAEV010SNAP
+- Evidence subset: SCAEV010SNAP
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G010
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/2984d9b1e0ac008ad3c126a36aaa52faa8537d8fef1a334554c88b9fc7638cf6
+- Missing evidence: SCAEV010SNAP
+- Embedding query: Bind Git trees, submodule identities, tracked/staged/modified/deleted paths, and allowlisted untracked overlays into one canonical snapshot and issue exactly one coverage disposition for every tracked SwissKnife path.
+- AST query: SCAEV010SNAP
+- Surplus group: objective/SCA-G010
+- Merge key: 3cf0bff66f22bb2c
+- Merge family: objective/SCA-G010
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: c1d4312267fd00cc
+- Acceptance: Objective scan filed this gap for SCA-G010. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-641-objective-gap-0691ffdcb7e1.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV010SNAP), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-642 Close objective gap: Python package actual-surface extraction
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: actual-contracts
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/python_mcp_surface_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_python_mcp_surface_extractor.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_python_mcp_surface_extractor.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-642-objective-gap-43554c3589fd.md
+- Bundle: swissknife/contract-assurance/actual
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-actual.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G020, SCA-G040
+- Graph depth: 4
+- Objective heap index: 24
+- Parallel lane: swissknife/contract-assurance/actual
+- Conflict policy: Provider paths are exact scoped evidence; no eager optional package import during supervisor discovery.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/python_mcp_surface_extractor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_python_mcp_surface_extractor.py
+- Changed paths:
+- AST symbols: SCAEV042ACTUAL
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G042
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/6de8a3fe872439434897eca167cc6c61e7047e9337c1763eeba393e567874ce0
+- Canonical task CID: baguqeeranxukh7uheq4ugsex5sqwptdmmhtqi7utg7axmpxluoj6kz4hjtqa
+- Semantic identity: objective-evidence-obligation/v1/db511e3ca3ab490411a2fa31c5761744fe4693ee82577e901368c80a0ad0908e
+- Acceptance subset: Package import is not required for static extraction, optional live discovery is separate evidence, aliases and hierarchical facade tools normalize without hiding domain tools, unknown dynamic registration remains unresolved.
+- Preconditions: objective goal SCA-G042 is schedulable
+- Effects: satisfy evidence requirement: SCAEV042ACTUAL
+- Evidence subset: SCAEV042ACTUAL
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G042
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/db511e3ca3ab490411a2fa31c5761744fe4693ee82577e901368c80a0ad0908e
+- Missing evidence: SCAEV042ACTUAL
+- Embedding query: Extract canonical MCP/MCP++ tool registration, schemas, facade dispatch, handlers, policy gates, transports, and implementation symbols from all three Python packages.
+- AST query: SCAEV042ACTUAL
+- Surplus group: objective/SCA-G042
+- Merge key: 5ee3a0ba4a0a9ad9
+- Merge family: objective/SCA-G042
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 578d56ed58f3752a
+- Acceptance: Objective scan filed this gap for SCA-G042. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-642-objective-gap-43554c3589fd.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV042ACTUAL), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-643 Close objective gap: Typed call/effect/contract graph and bounded GraphRAG
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: graph
+- Depends on: SCA-605, SCA-626
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py, external/ipfs_accelerate/test/api/test_agent_supervisor_symbolic_contract_graph.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_symbolic_contract_graph.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-643-objective-gap-6526194d0564.md
+- Bundle: swissknife/contract-assurance/graph
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-graph.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G021
+- Graph depth: 5
+- Objective heap index: 25
+- Parallel lane: swissknife/contract-assurance/graph
+- Conflict policy: Extend CodeEvidenceGraph/semantic_dependency_graph and use the lazy ipfs_datasets analysis provider; no proof authority from graph rank.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/symbolic_contract_graph.py, external/ipfs_accelerate/test/api/test_agent_supervisor_symbolic_contract_graph.py
+- Changed paths:
+- AST symbols: SCAEV030GRAPH
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G030
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/5fb4711a0168d1cb2c6c51aad2192aaf9a16862f73ca11d7fa7f0d6761f54803
+- Canonical task CID: baguqeeral62hcgqbndi4wldmkgvnegjkv6nbnbrpopfbdv72p4gwoypvjabq
+- Semantic identity: objective-evidence-obligation/v1/65cdc65a0f7e2b975a0fd4aa6303096143594f5158c7a93cd6efbbbe45de6bbd
+- Acceptance subset: Every node/edge carries identity, provenance, authority, snapshot, and version, GraphRAG edges are context-only, mandatory closure is deterministic and reports truncation or missing edges.
+- Preconditions: objective goal SCA-G030 is schedulable
+- Effects: satisfy evidence requirement: SCAEV030GRAPH
+- Evidence subset: SCAEV030GRAPH
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G030
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/65cdc65a0f7e2b975a0fd4aa6303096143594f5158c7a93cd6efbbbe45de6bbd
+- Missing evidence: SCAEV030GRAPH
+- Embedding query: Project indexed facts into typed module/symbol/call/effect/schema/tool/handler edges and expose bounded GraphRAG candidate retrieval followed by deterministic mandatory closure.
+- AST query: SCAEV030GRAPH
+- Surplus group: objective/SCA-G030
+- Merge key: 6395b3150b2d2981
+- Merge family: objective/SCA-G030
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 6ac7bc66b4f4e93f
+- Acceptance: Objective scan filed this gap for SCA-G030. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-643-objective-gap-6526194d0564.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV030GRAPH), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-644 Close objective gap: Trust-aware proof cache and exact invalidation
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: proof-cache
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_proof_cache.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_proof_cache.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_proof_cache.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-644-objective-gap-7239fb2a5a28.md
+- Bundle: swissknife/contract-assurance/cache
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-cache.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G015, SCA-G060, SCA-G061
+- Graph depth: 10
+- Objective heap index: 30
+- Parallel lane: swissknife/contract-assurance/cache
+- Conflict policy: TrustAwareProofCache remains the sole proof-receipt memoization authority.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_proof_cache.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_proof_cache.py
+- Changed paths:
+- AST symbols: SCAEV070CACHE
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G070
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/4c840a1ed1f5f336aa10a28b2270634ec12b8ed7bc61f3979a7b34014d74cfe9
+- Canonical task CID: baguqeerajscauhwr6xztnkqqukfse4ddj3asxdwxxrq7hf42pm2actluz7uq
+- Semantic identity: objective-evidence-obligation/v1/f733906e000f69f4070c89e8947903d1c4c4889434aec89fd0b43b9edc1804e8
+- Acceptance subset: Keys bind all semantic dimensions and declared CID identity profiles, retained canonical bytes revalidate against the decoded multihash, hits re-derive assurance, negative/inconclusive TTLs are bounded, stale, poisoned, wrong-snapshot, toolchain-drift, private-material, cross-profile, and candidate-only hits are rejected with reason codes.
+- Preconditions: objective goal SCA-G070 is schedulable
+- Effects: satisfy evidence requirement: SCAEV070CACHE
+- Evidence subset: SCAEV070CACHE
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G070
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/f733906e000f69f4070c89e8947903d1c4c4889434aec89fd0b43b9edc1804e8
+- Missing evidence: SCAEV070CACHE
+- Embedding query: Put every contract proof attempt through the existing trust-aware cache and invalidate exactly on semantic input drift.
+- AST query: SCAEV070CACHE
+- Surplus group: objective/SCA-G070
+- Merge key: 632954c0ee1fc2ab
+- Merge family: objective/SCA-G070
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 0e7094b51991285e
+- Acceptance: Objective scan filed this gap for SCA-G070. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-644-objective-gap-7239fb2a5a28.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV070CACHE), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-645 Close objective gap: Contract mismatch analyzer
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: mismatches
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_mismatch_analyzer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_mismatch_analyzer.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_mismatch_analyzer.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-645-objective-gap-3fee43141ca3.md
+- Bundle: swissknife/contract-assurance/mismatches
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-mismatches.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G051, SCA-G061
+- Graph depth: 10
+- Objective heap index: 31
+- Parallel lane: swissknife/contract-assurance/mismatches
+- Conflict policy: Findings are evidence, not task completion or mutation authority.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_mismatch_analyzer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_mismatch_analyzer.py
+- Changed paths:
+- AST symbols: SCAEV090MISMATCH
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G090
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/77afe2651d0ca7a41242d335ae48f1d2e682437a89628374d24832ca13c956c4
+- Canonical task CID: baguqeerao6x6ezi5bst2iesc2m224shr2ltieq32rfrig5gsjazmue6jk3ca
+- Semantic identity: objective-evidence-obligation/v1/7f15a85abfc354b7938bef91c23f14eb03806cf6bba5a1293abb74d475de1c81
+- Acceptance subset: Finding identity is deterministic, cache miss is not mismatch, dynamic unknown is not refuted, impact paths and invalidation reasons are bounded and reproducible.
+- Preconditions: objective goal SCA-G090 is schedulable
+- Effects: satisfy evidence requirement: SCAEV090MISMATCH
+- Evidence subset: SCAEV090MISMATCH
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G090
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/7f15a85abfc354b7938bef91c23f14eb03806cf6bba5a1293abb74d475de1c81
+- Missing evidence: SCAEV090MISMATCH
+- Embedding query: Convert refuted, stale, contradictory, ambiguous, unsupported, and not-measured contract claims into deterministic findings with compact counterexamples and impact closure.
+- AST query: SCAEV090MISMATCH
+- Surplus group: objective/SCA-G090
+- Merge key: 0dd343e2054b72c2
+- Merge family: objective/SCA-G090
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 162022d059a2406c
+- Acceptance: Objective scan filed this gap for SCA-G090. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-645-objective-gap-3fee43141ca3.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV090MISMATCH), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-646 Close objective gap: ZK threat model and capability policy
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P1
+- Track: zk-policy
+- Depends on:
+- Outputs: external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_THREAT_MODEL.md, external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_POLICY.md
+- Validation: test -f external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_POLICY.md
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-646-objective-gap-ee76bd588722.md
+- Bundle: swissknife/contract-assurance/zk-policy
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-zk-policy.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G060
+- Graph depth: 9
+- Objective heap index: 45
+- Parallel lane: swissknife/contract-assurance/zk-policy
+- Conflict policy: Extend existing codebase-proof ZK policy and proof_attestation; do not claim ZK proves arbitrary code correctness.
+- Predicted files: external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_THREAT_MODEL.md, external/ipfs_accelerate/docs/architecture/SWISSKNIFE_CONTRACT_ZK_POLICY.md
+- Changed paths:
+- AST symbols: SCAEV080ZKPOL
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G080
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/2f8e685e05daf8cf0b37a267e7b8aaf3b8497db4a70ceeac957635654833b4e0
+- Canonical task CID: baguqeeraf6hgqxqf3l4m6czxujt6pofk6o4es7nuu4go5levoy2wksbtwtqa
+- Semantic identity: objective-evidence-obligation/v1/b7714584c1cbd65597d15bc3dd9edb65317c18cb00dc3a77431b823c0b6c8905
+- Acceptance subset: ZK proves only reviewed attestation predicates after property proof, simulation cannot emit ATTESTED, no backend is selected without a qualifying threat boundary and capability report.
+- Preconditions: objective goal SCA-G080 is schedulable
+- Effects: satisfy evidence requirement: SCAEV080ZKPOL
+- Evidence subset: SCAEV080ZKPOL
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G080
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/b7714584c1cbd65597d15bc3dd9edb65317c18cb00dc3a77431b823c0b6c8905
+- Missing evidence: SCAEV080ZKPOL
+- Embedding query: Approve or reject concrete private-witness attestation use cases and define the real-backend, public-input, witness, leakage, replay, setup, and assurance policy.
+- AST query: SCAEV080ZKPOL
+- Surplus group: objective/SCA-G080
+- Merge key: 2278d669e3f451d7
+- Merge family: objective/SCA-G080
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: 084ec8bbd4e776d2
+- Acceptance: Objective scan filed this gap for SCA-G080. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-646-objective-gap-ee76bd588722.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV080ZKPOL), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-647 Close objective gap: Receipt attestation adapter
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P1
+- Track: zk-attestation
+- Depends on:
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_attestation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_attestation.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_attestation.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-647-objective-gap-c9b579913ccb.md
+- Bundle: swissknife/contract-assurance/zk-attestation
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-zk-attestation.todo.md
+- Bundle strategy: explicit
+- Graph parents: SCA-G070, SCA-G080
+- Graph depth: 11
+- Objective heap index: 46
+- Parallel lane: swissknife/contract-assurance/zk-attestation
+- Conflict policy: Use proof_attestation and ipfs_datasets zkp_attestation through lazy adapters.
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_attestation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_mcp_contract_attestation.py
+- Changed paths:
+- AST symbols: SCAEV081ZK
+- Interfaces:
+- Submodules:
+- Generated artifacts:
+- Allow concurrent with:
+- Goal id: SCA-G081
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/a769974230ae92f777d71067b6892096c2a85059e8519be859cf430a9aa10d7b
+- Canonical task CID: baguqeerau5uzoqrqv2jpo56xcbt3ncjas3bkqucz5bizx2czz5bqvgvbbv5q
+- Semantic identity: objective-evidence-obligation/v1/f1339b9f786a43c859029544d9713731eb981473f2b596554c37f41aa01d73b1
+- Acceptance subset: Public inputs bind receipt/cache/snapshot/property roots, private witnesses never enter public receipts or prompts, replay/canonicalization/backend substitution tests fail closed.
+- Preconditions: objective goal SCA-G081 is schedulable
+- Effects: satisfy evidence requirement: SCAEV081ZK
+- Evidence subset: SCAEV081ZK
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: objective/SCA-G081
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-evidence-obligation/v1/f1339b9f786a43c859029544d9713731eb981473f2b596554c37f41aa01d73b1
+- Missing evidence: SCAEV081ZK
+- Embedding query: Bind approved proof receipts to real ZK or signature/commitment backends with explicit degradation when only simulation is available.
+- AST query: SCAEV081ZK
+- Surplus group: objective/SCA-G081
+- Merge key: 0886a0628cbd525e
+- Merge family: objective/SCA-G081
+- Merge role: aggregate
+- Work item count: 1
+- Work scope: goal_subgoal_multi_evidence_batch
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: aggregate
+- Todo vector key: bb88ee85db64a1ad
+- Acceptance: Objective scan filed this gap for SCA-G081. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-647-objective-gap-c9b579913ccb.md, add code/tests/docs or child goals that prove the missing evidence terms are covered (SCAEV081ZK), and keep the supervisor-fed backlog aligned with the objective heap.  Refine the objective heap if the gap needs smaller child goals.
+
+## SCA-648 Review completion-evidence alignment for Adversarial and mutation evaluation
+
+- Status: blocked
+- Blocked reason: manual review required because no precise edit targets were authorized
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Priority: P0
+- Track: evaluation
+- Depends on:
+- Outputs:
+- Validation: git diff --check; python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_contract_assurance_adversarial.py -q
+- Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
+- Discovery evidence: /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-648-objective-gap-2820a1a2d036.md
+- Bundle: swissknife/contract-assurance/evaluation
+- Bundle shard: data/agent_supervisor/swissknife_contract_assurance/bundles/swissknife-contract-assurance-evaluation.todo.md
+- Bundle strategy: bounded_objective_generation
+- Graph parents: SCA-G051, SCA-G061, SCA-G070, SCA-G081, SCA-G090, SCA-G100
+- Graph depth: 1
+- Objective heap index: 0
+- Parallel lane: swissknife/contract-assurance/evaluation
+- Conflict policy: prefer bundle-local changes; invoke the LLM merge resolver for semantic conflicts
+- Predicted files:
+- Changed paths:
+- AST symbols: completion-reconciliation, SCAEV150EVAL
+- Interfaces:
+- Submodules:
+- Generated artifacts: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/objective_generation.json
+- Allow concurrent with:
+- Goal id: SCA-G150
+- Completion authority: local
+- External authority blockers:
+- Canonical task key: task/v1/7f5e47507576b5873df78ca0b18c159257766e588acae4646399353c6d6c3c8c
+- Canonical task CID: baguqeerap5peoudvo22yoppxrsqlddavsjlxm3syrlfoizddte2ty3lmhsga
+- Semantic identity: objective-family/v1/42399425ee1d92cf59103ba5766769c2bbc2ccc63ed5227b39f20ad87ef61df7
+- Acceptance subset: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Zero false authoritative admissions, Reconcile the unverified completion decision with current evidence for: Adversarial and mutation evaluation, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Preconditions: objective goal SCA-G150 is schedulable
+- Effects: satisfy evidence requirement: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., satisfy evidence requirement: Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., satisfy evidence requirement: Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., satisfy evidence requirement: Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., satisfy evidence requirement: Produce completion evidence for: Zero false authoritative admissions, satisfy evidence requirement: Reconcile the unverified completion decision with current evidence for: Adversarial and mutation evaluation, satisfy evidence requirement: Require an explicitly healthy analyzer that is safe for completion reasoning., satisfy evidence requirement: Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., satisfy evidence requirement: Task completion is provisional until every criterion has valid evidence.
+- Evidence subset: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Zero false authoritative admissions, Reconcile the unverified completion decision with current evidence for: Adversarial and mutation evaluation, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Resource class: cpu-medium
+- Token class: medium
+- Estimated tokens: 0
+- Context budget tokens: 4096
+- Provider role: grok-implement, codex-review
+- Resources: cpu-medium
+- Merge fate: SCA-G150
+- Rejection reasons: none (accepted)
+- Evidence obligation key: objective-family/v1/42399425ee1d92cf59103ba5766769c2bbc2ccc63ed5227b39f20ad87ef61df7
+- Missing evidence: Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied., Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one., Manual review required: no precise implementation, affected-document, or validator-source file was authorized as an edit target., Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree., Produce completion evidence for: Zero false authoritative admissions, Reconcile the unverified completion decision with current evidence for: Adversarial and mutation evaluation, Require an explicitly healthy analyzer that is safe for completion reasoning., Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree., Task completion is provisional until every criterion has valid evidence.
+- Embedding query: completion reconciliation completion-evidence alignment SCAEV150EVAL
+- AST query: completion-reconciliation, SCAEV150EVAL
+- Surplus group: SCA-G150
+- Merge key: objective-family/v1/42399425ee1d92cf59103ba5766769c2bbc2ccc63ed5227b39f20ad87ef61df7
+- Merge family: SCA-G150
+- Merge role: completion_gate_gap_manual_review
+- Work item count: 9
+- Work scope: bounded_objective_generation
+- Goal packet:
+- Goal packet role:
+- Goal packet goals:
+- Goal packet task count: 0
+- Goal packet work item count: 0
+- Completion goal bindings: {}
+- Completion task bindings:
+- Candidate kind: generated_task
+- Todo vector key: 42399425ee1d92cf
+- Acceptance: Objective scan filed this review gap for SCA-G150. Inspect the evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/discovery/2026-07-30-sca-648-objective-gap-2820a1a2d036.md; either resolve the diagnostic without an implementation change or authorize precise repository-relative edit targets before changing the task status.
+
+## SCA-649 Resolve implementation retry-budget failure for SCA-645
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_mismatch_analyzer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_mismatch_analyzer.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-649-sca-645-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/mismatches
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_mismatch_analyzer.py, external/ipfs_accelerate/test/api/test_agent_supervisor_contract_mismatch_analyzer.py
+- Conflict policy: Findings are evidence, not task completion or mutation authority.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-645. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-01/discovery/2026-07-30-sca-649-sca-645-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-645 from strategy blocked_tasks.
