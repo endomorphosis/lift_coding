@@ -15015,7 +15015,7 @@ Normative:
 - Review only: false
 - Priority: P0
 - Track: content-identity
-- Depends on:
+- Depends on: SCA-634
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py
 - Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py -q
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -15282,11 +15282,92 @@ Normative:
 - Priority: P1
 - Track: ops
 - Depends on: SCA-228, SCA-229
-- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-provider-route.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/contract_packet_provider_router.py, external/ipfs_accelerate/test/api/test_agent_supervisor_production_provider_route.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-provider-route.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-632-sca-615-merge-retry-budget.md
 - Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-632-sca-615-merge-retry-budget.md
 - Provider role: grok-implement, codex-review
 - Context budget tokens: 4096
 - Parallel lane: sca-production-provider-routing
-- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-632-sca-615-merge-retry-budget.md
 - Conflict policy: A lane assignment, raw provider exit code, unbounded prompt, implementer self-review, or admission boolean is not a provider-chain receipt and cannot satisfy authoritative completion.
 - Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-615. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-29-sca-632-sca-615-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-615 from strategy blocked_tasks.
+
+## SCA-633 Resolve merge retry-budget failure for SCA-619
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-602
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py, external/ipfs_accelerate/test/api/test_agent_supervisor_scheduler.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_protected_paths.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-633-sca-619-merge-retry-budget.md
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-633-sca-619-merge-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/scheduler-recovery
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-633-sca-619-merge-retry-budget.md
+- Conflict policy: Restore reviewed semantics on canonical domain paths; do not weaken or delete tests to fit the partially merged implementation.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-619. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-633-sca-619-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-619 from strategy blocked_tasks.
+
+## SCA-634 Resolve implementation retry-budget failure for SCA-628
+
+- Status: completed
+- Completion: manual
+- Completion evidence: Integrated accelerator commit fbf0ea9d1a2a2e9e4831e3b1a39de2bb1540861f retains the SCA-628 content-identity bridge; all 34 focused CID, multiformats, multihash, canonical-byte, and fail-closed tests pass from the real superproject layout on 2026-07-30.
+- Priority: P1
+- Track: ops
+- Depends on: 
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-634-sca-628-implementation-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/content-identity
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/content_identity_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_content_identity_bridge.py
+- Conflict policy: Reuse datasets canonical identity APIs behind a lazy accelerator bridge; never change identity profile or canonicalization implicitly and never create a second proof-cache authority.
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in SCA-628. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-634-sca-628-implementation-retry-budget.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release SCA-628 from strategy blocked_tasks.
+
+## SCA-635 Resolve merge retry-budget failure for SCA-616
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-218, SCA-225, SCA-603, SCA-604, SCA-605, SCA-609, SCA-625
+- Outputs: external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/contract_assurance_baseline.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-635-sca-616-merge-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/production-index-graph
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery
+- Conflict policy: Keep provider namespaces and graph authority distinct; GraphRAG is retrieval-only and Cypher AST remains syntax-only.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-616. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-00/discovery/2026-07-30-sca-635-sca-616-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-616 from strategy blocked_tasks.
+
+## SCA-636 Resolve merge retry-budget failure for SCA-627
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-606
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_logic_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/mcp_contract_prover.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_logic_conformance.py, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-636-sca-627-merge-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/datasets-logic
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-636-sca-627-merge-retry-budget.md
+- Conflict policy: Do not fork datasets logic IR or treat SAT/model output as a proof; capability labels alone cannot register a backend.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-627. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-03/discovery/2026-07-30-sca-636-sca-627-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-627 from strategy blocked_tasks.
+
+## SCA-637 Resolve merge retry-budget failure for SCA-622
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: SCA-620
+- Outputs: external/ipfs_accelerate/test/api/test_agent_supervisor_production_contract_composition.py, data/agent_supervisor/swissknife_contract_assurance/evaluation/production-composition.json, data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Validation: test -f /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-30-sca-637-sca-622-merge-retry-budget.md
+- Provider role: grok-implement, codex-review
+- Context budget tokens: 4096
+- Parallel lane: swissknife/contract-assurance/production-authority
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery
+- Conflict policy: This is an aggregate verifier, not a second analyzer or cache; it cannot repair, synthesize, or relabel missing evidence.
+- Acceptance: Merge retry-budget guardrail filed this from repeated merge failures in SCA-622. Use evidence in /home/barberb/lift_coding/data/agent_supervisor/swissknife_contract_assurance/parallel/lanes/lane-02/discovery/2026-07-30-sca-637-sca-622-merge-retry-budget.md to fix the merge blocker, verify the intended implementation changes are committed in their owning repository or submodule, run `ipfs-accelerate-agent-merge-resolver --events-path ... --apply` when the conflict is semantic, then mark this repair task completed so the supervisor can release SCA-622 from strategy blocked_tasks.
