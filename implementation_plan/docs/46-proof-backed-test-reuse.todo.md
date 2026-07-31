@@ -193,7 +193,7 @@ their declared dependencies complete.
 
 ## PTR-011 Compile fixtures, hooks, parameters, dependencies, and environment identity
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
