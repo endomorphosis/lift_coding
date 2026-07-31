@@ -1,0 +1,607 @@
+# Proof-Backed Test Reuse Across IPFS Python Repositories
+
+Date: 2026-07-31
+
+Program: `proof-backed-test-reuse-v1`
+
+Task prefix: `PTR-`
+Integration branch: `agent/proof-backed-test-reuse`
+
+## 1. Outcome
+
+Upgrade the test infrastructure shared by `ipfs_accelerate_py`,
+`ipfs_datasets_py`, and `ipfs_kit_py` so a test whose exact prior successful
+execution is still valid can be represented by a verified proof certificate
+and reported by pytest as skipped. The implementation must work for an entire
+collected test suite and for a directly selected node such as
+`pytest tests/test_x.py::test_y`; it must not require a maintained list of test
+files.
+
+The optimization is deliberately conservative:
+
+1. A CID proves the identity of bytes, not that a test passed.
+2. An AST or runtime dependency trace scopes invalidation; similarity is never
+   pass evidence.
+3. A skip is authorized only by an exact trusted pass receipt, a current
+   execution identity, an admitted policy, and a locally verified certificate.
+4. A missing, slow, incompatible, corrupt, expired, or unreachable optional
+   dependency produces `RUN`, never an error and never `SKIP`.
+5. Simulated ZK is test evidence for adapters only and can never authorize a
+   production skip.
+6. Proof creation is deferred until after a complete pass and is never on the
+   critical path that decides whether the test itself passed.
+
+This is proof of a prior execution under an identical admitted context, not a
+proof that arbitrary changed code remains correct. The first production
+release intentionally binds the complete admitted repository forest. Narrower
+dependency-based reuse becomes eligible only after trace-completeness tests and
+mutation evidence establish that it is safe.
+
+## 2. Scope and non-goals
+
+### In scope
+
+- Python tests collected through pytest in all three repositories.
+- Stable identities for test nodes, parameters, code, fixtures, hooks,
+  configuration, dependencies, environment, capabilities, and observed effects.
+- Strict multiformats/multihash CID creation and verification.
+- Static Python AST dependency closure plus bounded runtime dependency traces.
+- Immutable pass receipts, optional real-ZK certificates, local/remote CAS, and
+  mutable lookup indexes with revalidation on every hit.
+- One reusable pytest plugin with package-specific bootstrap only.
+- pytest-xdist coordination, concurrency, corruption, revocation, and downgrade
+  behavior.
+- Fresh supervisor validation evidence for a proof-backed skip.
+- Shadow measurement, forced re-execution sampling, gradual rollout, and rapid
+  rollback.
+
+### Non-goals
+
+- Replacing pytest outcomes with solver scores or model judgments.
+- Treating ordinary pytest skips, xfail, xpass, flaky reruns, coverage runs, or
+  benchmark results as reusable passes.
+- Creating a second proof-cache trust root alongside the accelerator's
+  `TrustAwareProofCache` and `ProverEvidenceStore` contracts.
+- Allowing the legacy test-only hash strings in `ipfs_kit_py.ipfs_multiformats`
+  to cross an authority boundary as CIDs.
+- Starting Kubo, Lotus, Iroh, Groth16, or ProveKit automatically.
+- Reusing tests with uncontrolled network, clock, randomness, mutable external
+  data, subprocess, hardware, or secret-dependent effects unless an explicit
+  snapshot adapter closes and binds that dependency.
+- Claiming a zero-knowledge property when the configured backend is simulated.
+
+## 3. Existing assets and gaps
+
+| Repository | Reuse | Required upgrade |
+| --- | --- | --- |
+| `ipfs_accelerate_py` | `AnalysisASTIndex`, `content_identity_bridge`, proof-cache/evidence contracts, ZK attestation adapter, supervisor validation and objective machinery | Add test identity/trace/certificate domains, the shared pytest plugin, proof-reuse validation, and rollout controls |
+| `ipfs_datasets_py` | Strict `cid_utils`, logic canonical identity, `logic.common.proof_cache`, ZKP statements/backends including ProveKit | Add the test-pass statement, real certificate/issuer adapters, and a lazy pytest bootstrap; repair the existing commit-only cache hook rather than making it another authority |
+| `ipfs_kit_py` | Local/IPFS storage and multiformat integrations | Add an optional immutable certificate transport and capability fingerprint; reject legacy pseudo-CIDs and never start a daemon during collection or verification |
+
+The authoritative orchestration root is the outer superproject. Its current
+submodules are `external/ipfs_accelerate`, `external/ipfs_datasets`, and
+`external/ipfs_kit`. The similarly named nested gitlinks inside the accelerator
+checkout are not substituted for these repositories.
+
+## 4. Trust and safety invariants
+
+The following invariants are release blockers.
+
+- `SKIP` is an allow decision. Unknown, unavailable, timeout, unsupported,
+  malformed, stale, revoked, ambiguous, over-budget, or exception states map to
+  `RUN`.
+- Lookup and proof verification are local, bounded, deterministic operations.
+  A proving service may be remote, but a remote service is never consulted to
+  decide an existing hit when the local verifier can operate.
+- Certificate and receipt CIDs are recomputed from retained canonical bytes.
+  Parsed fields cannot be trusted until the CID multihash matches those bytes.
+- The verifier key CID, circuit CID, proof-system identifier, statement schema,
+  issuer/trust policy, and policy version are public inputs.
+- A real proof establishes possession of an exact trusted pass receipt and the
+  declared statement only. It does not turn an incomplete dependency trace into
+  a complete one.
+- Receipt creation requires passing setup, call, and teardown phases. Skipped,
+  xfailed, xpassed, rerun-only, interrupted, timed-out, leaked-resource, or
+  incomplete-trace executions are not admitted.
+- Test-reuse implementation tests always run with
+  `IPFS_TEST_PROOF_REUSE_MODE=off`, preventing the feature from validating
+  itself through its own cache.
+- Coverage, mutation testing, profiling, leak detection, debugger, and
+  benchmark modes disable proof-backed skips unless a future reviewed policy
+  explicitly defines equivalent semantics.
+- No witness, test secret, environment secret, stdout/stderr body, private path,
+  or source body is placed in a public input or shared lookup index.
+- Mutable indexes are hints. Immutable content plus local verification remains
+  the authority.
+
+## 5. Architecture
+
+```text
+pytest collection
+      |
+      v
+TestLocatorKey ---- static AST/fixture/hook/import/config closure
+      |                              |
+      +---------- current snapshot -+
+                     |
+                     v
+             TestExecutionKey CID
+                     |
+              batched index lookup
+                     |
+       +-------------+--------------+
+       |                            |
+ no candidate / any fault     immutable candidate bytes
+       |                            |
+       v                            v
+     RUN TEST              CID + policy + ZK verification
+       |                            |
+ setup/call/teardown pass      exact current binding?
+       |                       /                 \
+ runtime trace + receipt     no                   yes
+       |                     |                     |
+ immutable CAS write        RUN            pytest standard skip
+       |                                    proof-cache-hit:<cid>
+ deferred real proving
+       |
+ certificate CAS + locator index publication
+```
+
+### 5.1 Shared component placement
+
+The shared plugin and authority decisions live in `ipfs_accelerate_py`:
+
+- `agent_supervisor/proof/test_execution_contracts.py`
+- `agent_supervisor/analysis/test_execution_identity.py`
+- `agent_supervisor/analysis/test_static_dependency_trace.py`
+- `agent_supervisor/analysis/test_runtime_dependency_trace.py`
+- `agent_supervisor/analysis/test_reuse_eligibility.py`
+- `agent_supervisor/proof/test_proof_cache.py`
+- `agent_supervisor/proof/test_certificate_store.py`
+- `agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py`
+- `agent_supervisor/validation/proof_cached_test_validation.py`
+- `testing/proof_reuse/`
+
+The ZK statement, circuit/backend binding, and deferred issuer live in
+`ipfs_datasets_py.logic.zkp`. Optional IPFS-backed certificate transport and
+storage capability fingerprints live in `ipfs_kit_py`. Neither package owns a
+separate decision policy.
+
+### 5.2 Typed decision boundary
+
+All lookups return a `ReuseDecision` with one of two actions:
+
+- `RUN(reason_code, diagnostics)`
+- `SKIP(certificate_cid, receipt_cid, validation_receipt, diagnostics)`
+
+There is no third implicit truthy state. Plugin boundaries catch ordinary
+provider/cache exceptions, normalize them to bounded reason codes, and choose
+`RUN`. A strict `required-audit` mode may fail an explicitly configured audit
+job after collection, but it does not silently change normal developer test
+semantics.
+
+## 6. Canonical identities
+
+### 6.1 CID profile
+
+Authoritative JSON artifacts use:
+
+- canonicalization: strict DAG-JSON profile v1 with sorted keys, UTF-8, finite
+  values only, and no implicit string coercion;
+- CID: CIDv1, lowercase base32;
+- multicodec: `dag-json`;
+- multihash: `sha2-256`;
+- verification: decode through `multiformats.CID`, decode the multihash, and
+  compare its digest to SHA-256 of the retained canonical bytes.
+
+The implementation uses `ipfs_datasets_py.utils.cid_utils` through the
+accelerator's lazy content-identity bridge. Cross-package known vectors must be
+independently reproduced. Missing `multiformats` makes CID-required reuse
+unavailable and runs the test.
+
+### 6.2 `TestLocatorKey@1`
+
+The locator narrows candidate retrieval but cannot authorize reuse. It binds:
+
+- repository/package identity and normalized root;
+- normalized pytest node ID;
+- collection/plugin schema version;
+- canonical parameter ID and values, or an explicit non-reusable reason;
+- selection semantics relevant to the node.
+
+The index maps the locator CID to a bounded set of immutable certificate CIDs.
+
+### 6.3 `TestExecutionKey@1`
+
+The execution key is the exact reusable context and includes:
+
+- locator CID;
+- Git commit/tree/gitlink state and dirty overlay identity;
+- test module, class, function, decorator, and parameter source/AST CIDs;
+- fixture definitions, scopes, values or value adapters, `conftest.py` closure,
+  and pytest hook/plugin code CIDs;
+- static import/call dependency closure and explicit unknown frontier;
+- admitted prior runtime trace root and completeness policy;
+- pytest/Python/plugin versions, command semantics, configuration, and markers;
+- dependency-lock and installed-distribution fingerprints;
+- allowlisted environment, platform, interpreter ABI, hardware/capability, and
+  external snapshot identities;
+- reuse-policy, canonicalization, tracer, and certificate schema CIDs.
+
+For rollout v1, the admitted repository-forest CID is also bound. This avoids a
+false hit caused by an initially incomplete dependency analysis. A later policy
+may replace the forest with a narrower closed dependency root only after the
+mutation population proves completeness for that eligibility class.
+
+### 6.4 Dirty and generated state
+
+Tracked modifications, staged changes, deletions, renames, recursive gitlink
+changes, and allowlisted generated inputs are canonical overlay records. An
+unaccounted untracked source or generated dependency makes the item ineligible.
+Paths are repository-relative; symlinks and path escapes are rejected.
+
+## 7. Static and runtime traces
+
+### 7.1 Static trace
+
+The static tracer extends existing AST index contracts and records:
+
+- test symbol and decorator spans;
+- imports and resolved source/module identities;
+- fixture references and definitions;
+- relevant `conftest.py`, pytest hooks, and registered plugins;
+- configuration and data-file references that can be resolved statically;
+- subprocess/network/filesystem/time/random/hardware effects;
+- an explicit unresolved/dynamic frontier;
+- tracer/parser/tool version and bounded-analysis receipts.
+
+Dynamic import, reflection, native extension, opaque decorator, and unresolved
+fixture cases remain typed unknowns. They do not disappear from the trace.
+
+### 7.2 Runtime trace
+
+The successful cold execution observes, with strict bounds:
+
+- loaded Python modules and code objects;
+- opened/read files and content identities where policy permits;
+- allowlisted environment reads;
+- subprocess executable/arguments/tool identity;
+- service/capability identities supplied by adapters;
+- random seed, clock policy, hardware selection, and accelerator capabilities;
+- trace overflow, unsupported event, and instrumentation health.
+
+Instrumentation must avoid recording secrets or large payloads. A trace is
+complete only for a declared eligibility profile. Incomplete or over-budget
+traces can still be diagnostic and cached, but cannot authorize reuse.
+
+### 7.3 Eligibility classes
+
+- `pure`: deterministic code and immutable fixture/data closure.
+- `snapshot_bound`: controlled external state with an authoritative snapshot
+  adapter and current identity.
+- `repository_forest_bound`: v1 safe default; any admitted repository change
+  invalidates the candidate.
+- `non_reusable`: uncontrolled effects, unsupported parameter serialization,
+  incomplete trace, secrets, or policy exclusion.
+
+## 8. Pass receipt and zero-knowledge certificate
+
+### 8.1 `TestPassReceipt@1`
+
+Created only after terminal teardown, the receipt binds:
+
+- execution-key CID and locator CID;
+- setup/call/teardown outcomes and timings;
+- pytest outcome policy and absence of disqualifying states;
+- static/runtime trace roots and completeness receipt;
+- runner identity, trust-domain/issuer key ID, nonce, and time/epoch policy;
+- captured dependency forest and capability roots;
+- schema and policy CIDs.
+
+The receipt may be signed or otherwise admitted by the configured runner trust
+policy. Its immutable CID is stored before any proving request.
+
+### 8.2 `TestPassStatementV1`
+
+The real-ZK statement proves possession of an admitted receipt satisfying:
+
+1. the private receipt hashes to the public receipt CID;
+2. its execution-key CID equals the public current key;
+3. setup, call, and teardown are all pass;
+4. no disqualifying outcome bit is set;
+5. the trace-completeness and policy identifiers match public admitted values;
+6. the issuer binding/commitment satisfies the approved trust policy.
+
+Public inputs include statement/circuit/verifying-key CIDs, receipt and
+execution-key CIDs, policy CID, outcome bits, issuer commitment, and allowed
+epoch data. Private inputs contain only the minimum receipt witness. The threat
+model must cover replay, substitution, wrong circuit/key, issuer confusion,
+malformed proof, public-input mismatch, witness leakage, and simulated backend
+mislabeling.
+
+### 8.3 Proving and verification
+
+- Verification is local through a pinned real backend and bounded by byte/time
+  limits.
+- Groth16 or ProveKit issuance is asynchronous/deferred. Endpoint absence or
+  failure records `certificate_deferred` and does not change the passed test.
+- A locally retained pass receipt can be proved later by an explicit maintenance
+  command.
+- Simulated proofs have authority `non_attested`; their artifacts may exercise
+  serialization and reporting only.
+- Existing real certificates remain usable when the proving endpoint is down if
+  their local verifier, keys, policy, and current inputs validate.
+
+## 9. Cache and storage model
+
+### 9.1 Layers
+
+1. Process/session memoization for repeated verification within one pytest run.
+2. Local immutable CAS for canonical receipts, certificates, traces, and keys.
+3. Mutable local locator-to-candidate index, treated only as an optimization.
+4. Optional shared/IPFS transport for immutable blobs and index hints.
+
+All authority re-derivation follows the accelerator's trust-aware proof-cache
+contract. Shared cache presence, IPFS connectivity, and pinning are optional.
+
+### 9.2 Admission and lookup
+
+On write, canonical bytes are written atomically, fsynced where supported,
+renamed into a CID path, read back, and rehashed before index publication. On
+read, candidate counts and sizes are bounded; the blob is rehashed, decoded,
+schema checked, trust/policy/revocation checked, and proof verified. Corrupt or
+hostile entries are quarantined where safe and treated as misses.
+
+The mutable index supports TTL, schema migration, issuer/key revocation,
+negative/corruption diagnostics, and fenced single-flight publication. pytest
+workers read; one xdist controller coordinates receipt/index writes to prevent
+partial or competing updates.
+
+### 9.3 Cache keys and invalidation
+
+Lookup begins with `TestLocatorKey`; authorization requires exact
+`TestExecutionKey`. Changes to any bound component invalidate the hit,
+including test, import, fixture, hook, parameter, config, dependency lock,
+environment, hardware/capability, data, repository forest, policy, tracer,
+circuit, verifier key, issuer, or revocation epoch.
+
+## 10. Pytest integration without per-file hardwiring
+
+### 10.1 Shared plugin
+
+`ipfs_accelerate_py.testing.proof_reuse.plugin` owns collection, lookup,
+reporting, and pass-receipt lifecycle through pytest hooks:
+
+- `pytest_addoption` and `pytest_configure` define modes, paths, markers, and
+  policy without importing optional providers.
+- `pytest_collection_modifyitems` computes locators, batches candidate lookup,
+  and attaches typed decisions to collected items.
+- A verified hit adds the standard skip marker with reason
+  `proof-cache-hit:<certificate-cid>` before fixture setup.
+- report hooks collect all setup/call/teardown phases and write a receipt only
+  when the complete outcome is eligible.
+- session/xdist hooks consolidate deferred writes, metrics, diagnostics, and
+  optional proving work.
+
+No test path registry is maintained. Every collected item is evaluated from its
+node ID, source, fixtures, hooks, parameters, and policy. Markers allow local
+opt-out (`proof_reuse_disabled`) and explicit effect adapters, not file lists.
+
+### 10.2 Automatic pickup
+
+The plugin has two complementary registration paths:
+
+1. a `pytest11` packaging entry point for installed/development environments;
+2. a tiny root `conftest.py` bootstrap in each repository that conditionally
+   imports the plugin, catches only the defined unavailable case, and otherwise
+   leaves pytest unchanged.
+
+The bootstrap covers repository-local direct-node invocation even when pytest
+entry-point autoload is disabled by the hermetic supervisor. An explicit
+`-p ipfs_accelerate_py.testing.proof_reuse.plugin` remains supported. Importing
+the plugin performs no network access, daemon startup, cache creation, or ZK
+probe.
+
+### 10.3 Modes
+
+| Mode | Read candidates | Skip | Write receipt | Prove |
+| --- | --- | --- | --- | --- |
+| `off` | no | no | no | no |
+| `shadow` | yes, diagnostic | no | optional local | deferred/off |
+| `read` | yes | verified hits | no | no |
+| `write` | no | no | yes | deferred per policy |
+| `readwrite` | yes | verified hits | yes on executed misses | deferred per policy |
+
+Default rollout is `off`, then `shadow`. `required-audit` is a separate,
+explicit CI policy that may make missing mandatory audit capabilities visible;
+normal modes always degrade to executing tests.
+
+## 11. Graceful degradation matrix
+
+| Condition | Test action | Diagnostic |
+| --- | --- | --- |
+| Plugin absent or disabled | Run | `plugin_unavailable` or no PTR output |
+| Cache absent/unreachable/read-only | Run | `cache_unavailable` |
+| Locator miss | Run | `candidate_missing` |
+| Corrupt/oversized/path-escaping entry | Run, quarantine if safe | `candidate_integrity_failed` |
+| `multiformats` or CID provider missing | Run | `cid_provider_unavailable` |
+| Datasets ZK provider missing/incompatible | Run | `certificate_provider_unavailable` |
+| Groth16/ProveKit issuer missing | Run or retain passed receipt for later proving | `certificate_deferred` |
+| Local verifier/key/circuit missing | Run | typed verifier/key/circuit reason |
+| Simulated proof | Run | `certificate_non_attested` |
+| Expired/revoked/wrong issuer/policy | Run | typed trust reason |
+| Incomplete or changed trace | Run | typed invalidation reason |
+| xdist controller failure | Workers run tests; stop writes | `coordination_unavailable` |
+| Unexpected plugin exception | Run and count bounded diagnostic | `internal_error_fail_open_to_run` |
+
+“Fail open” here means open to executing the real test, never open to accepting a
+pass. Required audit jobs can separately assert that degradation rates remain
+within policy.
+
+## 12. Supervisor validation authority
+
+A proof-backed pytest skip is not an ordinary skip for agent-supervisor
+completion. `ProofCachedTestValidation` re-verifies the exact certificate under
+the current tree and emits a fresh validation receipt containing:
+
+- task/goal and validation-command identity;
+- current commit/tree/recursive gitlinks and dirty-state identity;
+- execution-key, receipt, certificate, policy, circuit, and verifier-key CIDs;
+- verifier result, authority class, timestamp/epoch, and reason codes.
+
+Only this fresh typed receipt may satisfy a supervisor validation requirement.
+Plain pytest skip text, a cache flag, simulated ZK, or a historical status cannot
+satisfy completion. This preserves the existing authoritative completion and
+merge gates.
+
+## 13. Alignment with agent-supervisor goals
+
+| PTR goal | Supervisor alignment | Conformance |
+| --- | --- | --- |
+| `PTR-G010` contracts/threat model | `CBP-G025`, `CBP-G200`, `ASI-G300`, `ASI-G310` | Typed evidence, exact statement authority, pinned identities |
+| `PTR-G020` execution identity | `ASI-G310`, `VFS-G030` | Canonical content identity and recursive snapshot binding |
+| `PTR-G030` traces/eligibility | `ASI-G220`, `ASI-G320` | Software-first AST evidence and bounded semantic context |
+| `PTR-G040` cache/store | `ASI-G250`, `CBP-G015`, `CBP-G050` | Tiered CAS, re-derived trust, exact invalidation |
+| `PTR-G050` datasets ZK | `CBP-G200`, `ASI-G300` | Real proof-carrying evidence; simulated never authoritative |
+| `PTR-G060` pytest plugin | `ASI-G240`, `ASI-G350` | Hermetic validation and exact enforcement |
+| `PTR-G070` supervisor authority | `ASI-G240`, `ASI-G300`, `ASI-G350` | Fresh proof-backed validation receipts |
+| `PTR-G080` datasets integration | `ASI-G220` | Lazy provider integration without import side effects |
+| `PTR-G090` kit integration | `ASI-G250` | Optional immutable transport and capability facts |
+| `PTR-G100` adversarial/e2e | `ASI-G240`, `ASI-G280`, `ASI-G360` | Hermetic tests, recovery, rollout safety |
+| `PTR-G110` rollout/closeout | `ASI-G260`, `ASI-G290`, `ASI-G360` | Parallel operation, measurable efficiency, staged promotion |
+
+The PTR heap is a separate program. It does not silently add children to closed
+ASI or CBP populations. Cross-references describe conformance; PTR completion
+still requires its own current-tree evidence.
+
+## 14. Parallel implementation program
+
+The machine board is
+`implementation_plan/docs/46-proof-backed-test-reuse.todo.md`. Three strict
+numeric task shards run in isolated ephemeral worktrees with one serialized
+merge queue. Every task declares exact files, dependencies, resource class,
+submodule scope, validation, and acceptance. Planning/control files are
+protected from implementation agents.
+
+### Execution waves
+
+| Wave | Tasks | Parallel intent |
+| --- | --- | --- |
+| 0 | `PTR-000` | Plan/control seal, completed before launch |
+| 1 | `PTR-001`, `PTR-002`, `PTR-003` | Contracts, threat model, capability probes on all three shards |
+| 2 | `PTR-010`, `PTR-011`, `PTR-040`, `PTR-050` | Identity, datasets statement, plugin shell where dependencies permit |
+| 3 | `PTR-012`, `PTR-020`, `PTR-021`, `PTR-030`, `PTR-041` | CID vectors, traces, cache, real certificate binding |
+| 4 | `PTR-022`, `PTR-031`, `PTR-042`, `PTR-043` | Eligibility, storage/single-flight, deferred issuance, lazy adapter |
+| 5 | `PTR-051`, `PTR-052` then `PTR-053` | Lookup/receipt paths then xdist/reporting integration |
+| 6 | `PTR-060`, `PTR-080` then `PTR-061`, `PTR-070`, `PTR-081` | Supervisor authority and three repository bootstraps |
+| 7 | `PTR-090`, then `PTR-091`, `PTR-092`, `PTR-093` | Degradation, invalidation, security/concurrency, cross-repo e2e |
+| 8 | `PTR-100`, `PTR-101`, `PTR-102` | Benchmark, staged rollout, current-tree gate |
+
+Tasks that change the same git submodule remain subject to canonical claims and
+the shared serial merge queue. No concurrency override bypasses a gitlink or
+predicted-file conflict.
+
+## 15. Validation strategy
+
+### Unit and contract tests
+
+- Canonical JSON/CID known vectors, finite-value rejection, and cross-module
+  digest reproduction.
+- Locator/execution-key stability and change sensitivity.
+- Fixture/hook/config/parameter/lock/environment/capability identity.
+- Static and runtime trace completeness, overflow, and unknown frontiers.
+- Pass outcome lifecycle and disqualifying pytest states.
+- Real/simulated/unavailable proof authority distinctions.
+- Immutable CAS, mutable index, atomic write, corruption, revocation, and TTL.
+- Plugin cold import and every degradation reason mapping to `RUN`.
+
+### Mutation and adversarial population
+
+Mutate test bodies, imports, indirect dependencies, fixtures, conftests, hooks,
+parameters, locks, installed versions, environment, hardware facts, data files,
+dynamic imports, dirty overlays, policies, circuits, verifier keys, and issuers.
+The required invariant is zero stale authoritative skips.
+
+Security cases cover forged proof/receipt/CID, oversized blobs, private-data
+leakage, symlink/path escape, partial writes, index poisoning, worker crashes,
+restart recovery, parallel publishers, rollback/replay, and revocation races.
+
+### Cross-repository e2e
+
+For a direct node in each repository:
+
+1. empty cache causes execution;
+2. complete pass creates an immutable receipt;
+3. an available real backend creates a certificate, or a deterministic real
+   verifier fixture supplies one without network;
+4. the unchanged warm run verifies and reports one proof-backed skip;
+5. a relevant mutation forces execution;
+6. `off`, coverage, and missing-provider modes execute;
+7. autoload enabled and disabled repository bootstraps behave consistently;
+8. xdist produces no duplicate or partial authority records.
+
+### Performance gates
+
+- Warm verification is materially cheaper than the eligible test execution.
+- Target at least 80% reuse for the explicitly eligible warm fixture population.
+- Collection/lookup overhead is bounded when no candidate exists.
+- The false-admission count is exactly zero; any observed false skip rolls the
+  feature back to shadow/off.
+
+## 16. Rollout
+
+1. Land contracts, identity, traces, stores, provider adapters, and tests with
+   mode `off`.
+2. Enable `shadow` in selected CI jobs; compare predicted hits with actual
+   executions and collect reason-code/latency metrics.
+3. Require a zero-false-admission mutation population and healthy degradation
+   matrix.
+4. Enable `read` for explicit pure, repository-forest-bound tests with forced
+   random re-execution sampling.
+5. Enable opt-in `readwrite` for controlled CI issuers and local cache roots.
+6. Consider eligible-default reuse only after the benchmark and current-tree
+   gate pass across all three repositories.
+7. Automatically revert to shadow/off on any false admission, verifier-policy
+   contradiction, corruption spike, stale-key event, or unexplained mismatch.
+
+Metrics include collected/eligible/lookup/hit/verified/skip/run counts, reason
+codes, verify and execution latency, bytes read/written, deferred proofs,
+quarantine/revocation events, forced rerun mismatches, and saved wall time. No
+test names, paths, parameters, or output bodies are exported as telemetry unless
+explicitly permitted.
+
+## 17. Operational launch contract
+
+- Launch only from the clean isolated worktree on
+  `agent/proof-backed-test-reuse`.
+- Keep state, worktrees, logs, projection artifacts, and merge queue outside the
+  repository under the XDG state root.
+- Initialize exactly the three outer submodules in worker worktrees.
+- Use three strict deterministic shards and a shared serial merge queue.
+- Disable objective/codebase refill initially because the reviewed board is
+  comprehensive; expansion requires a separate reviewed projection.
+- Run the native board validator, objective projection, a non-implementing
+  daemon readiness pass, and reconciliation-only lane preflights before start.
+- Require live supervisor and managed-daemon PIDs, fresh status/task state, no
+  structural blocked tasks, and at least one globally selectable or active task.
+- Groth16, ProveKit, cache, and IPFS are optional capability facts and never
+  startup gates.
+
+The committed controller is `scripts/proof_backed_test_reuse_supervisor.py` and
+the profile is `config/proof_backed_test_reuse_supervisor.json`.
+
+## 18. Definition of done
+
+- All PTR tasks and child goals have current authoritative completion evidence.
+- Direct-node and suite invocation automatically discover the plugin in all
+  three repositories without a test-file registry.
+- Every authoritative skip is backed by an exact current execution key, trusted
+  pass receipt, locally verified real certificate, and fresh supervisor receipt.
+- Every missing or faulty optional dependency executes the test normally.
+- Simulated proofs, legacy pseudo-CIDs, ordinary skips, xfails, and incomplete
+  traces never satisfy skip or supervisor completion authority.
+- Mutation, degradation, security, concurrency, and cross-repository e2e
+  populations pass with proof reuse forced off for their own validation.
+- Shadow and warm benchmarks meet the admitted threshold with zero false skips.
+- Operations can inspect, start, and stop isolated lanes without modifying the
+  original dirty workspace or colliding with other supervisor programs.
