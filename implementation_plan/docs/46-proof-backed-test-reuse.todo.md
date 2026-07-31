@@ -417,7 +417,7 @@ their declared dependencies complete.
 
 ## PTR-040 Define the datasets test-pass ZK statement
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
