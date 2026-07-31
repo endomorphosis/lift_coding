@@ -538,7 +538,10 @@ def validate(
                 f"{task.task_id} has unexpected board namespace "
                 f"{task.board_namespace!r}"
             )
-        expected_schedulable = task.status == "todo"
+        # This field describes whether the task is executable work, not its
+        # current lifecycle state. Completion updates must not rewrite the
+        # task contract or canonical execution role.
+        expected_schedulable = task.task_id != "PTR-000"
         schedulable = _bool_text(task.metadata.get("is schedulable"))
         if schedulable is None or schedulable != expected_schedulable:
             errors.append(
@@ -645,21 +648,47 @@ def validate(
     completed_ids = {
         task.task_id for task in tasks if task.status == "completed"
     }
-    initial_ready = {
+    claimable_task_ids = {
         task.task_id
         for task in tasks
         if task.status == "todo"
         and set(task.depends_on).issubset(completed_ids)
     }
-    if initial_ready != INITIAL_READY:
-        errors.append(
-            "initial claimable tasks mismatch: expected "
-            f"{sorted(INITIAL_READY)}, got {sorted(initial_ready)}"
+    configured_initial_ready = frozenset(
+        str(task_id)
+        for task_id in (
+            parallel.get("initialClaimableTaskIds") or ()
         )
+    )
+    if configured_initial_ready != INITIAL_READY:
+        errors.append(
+            "configured initial claimable tasks mismatch: expected "
+            f"{sorted(INITIAL_READY)}, got "
+            f"{sorted(configured_initial_ready)}"
+        )
+    if completed_ids == {"PTR-000"}:
+        if claimable_task_ids != INITIAL_READY:
+            errors.append(
+                "initial claimable tasks mismatch: expected "
+                f"{sorted(INITIAL_READY)}, got "
+                f"{sorted(claimable_task_ids)}"
+            )
+    else:
+        if "PTR-000" not in completed_ids:
+            errors.append("progressed board must retain PTR-000 completion")
+        for task_id in sorted(completed_ids):
+            missing_completed_dependencies = sorted(
+                set(task_edges.get(task_id, ())).difference(completed_ids)
+            )
+            if missing_completed_dependencies:
+                errors.append(
+                    f"{task_id} completed before dependencies "
+                    f"{missing_completed_dependencies}"
+                )
     lane_count = int(parallel.get("laneCount") or 0)
     initial_shards = {
         int(task_id.rsplit("-", 1)[1]) % lane_count
-        for task_id in initial_ready
+        for task_id in INITIAL_READY
     } if lane_count > 0 else set()
     if initial_shards != {0, 1, 2}:
         errors.append(
@@ -715,8 +744,17 @@ def validate(
         "todo_sha256": _sha256(todo_path),
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
-        "initial_ready_task_ids": sorted(initial_ready),
+        "initial_ready_task_ids": sorted(INITIAL_READY),
         "initial_ready_shards": sorted(initial_shards),
+        "current_claimable_task_ids": sorted(claimable_task_ids),
+        "current_claimable_shards": sorted(
+            {
+                int(task_id.rsplit("-", 1)[1]) % lane_count
+                for task_id in claimable_task_ids
+            }
+            if lane_count > 0
+            else set()
+        ),
         "unordered_predicted_file_conflicts": unordered_conflicts,
         "dependency_graph_id": _canonical_sha256(dependency_graph.to_dict()),
         "configuration_path": str(config_path),

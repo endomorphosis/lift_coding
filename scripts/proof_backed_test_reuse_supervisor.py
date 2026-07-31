@@ -578,12 +578,38 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
     supervisor_owned = _lane_process_owned(lane_name, supervisor_pid)
     daemon_alive = _pid_alive(daemon_pid)
     blocked_count = int(task_state.get("blocked_count") or 0)
+    maintenance_error = str(
+        status.get("last_agentic_maintenance_error") or ""
+    ).strip()
+    control_plane_update_pending = bool(
+        status.get("control_plane_update_pending")
+    )
+    selection_idle_reason = str(
+        task_state.get("selection_idle_reason") or ""
+    )
+    attempts_exhausted = (
+        selection_idle_reason
+        == "all_selectable_ready_tasks_reached_max_task_attempts"
+    )
+    unhealthy_reasons = []
+    if not supervisor_owned:
+        unhealthy_reasons.append("supervisor_not_owned_or_alive")
+    if status.get("status") != "running":
+        unhealthy_reasons.append("supervisor_not_running")
+    if not daemon_alive:
+        unhealthy_reasons.append("daemon_not_alive")
+    if not task_state:
+        unhealthy_reasons.append("task_state_missing")
+    if blocked_count:
+        unhealthy_reasons.append("blocked_tasks")
+    if maintenance_error:
+        unhealthy_reasons.append("agentic_maintenance_failed")
+    if control_plane_update_pending:
+        unhealthy_reasons.append("control_plane_update_pending")
+    if attempts_exhausted:
+        unhealthy_reasons.append("task_attempts_exhausted")
     healthy = bool(
-        supervisor_owned
-        and status.get("status") == "running"
-        and daemon_alive
-        and task_state
-        and blocked_count == 0
+        not unhealthy_reasons
     )
     return {
         "lane": lane_name,
@@ -602,6 +628,26 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "last_agentic_maintenance_error": status.get(
             "last_agentic_maintenance_error"
         ),
+        "control_plane_source_id": status.get(
+            "control_plane_source_id"
+        ),
+        "control_plane_current_source_id": status.get(
+            "control_plane_current_source_id"
+        ),
+        "control_plane_source_revision": status.get(
+            "control_plane_source_revision"
+        ),
+        "control_plane_current_source_revision": status.get(
+            "control_plane_current_source_revision"
+        ),
+        "control_plane_update_pending": control_plane_update_pending,
+        "control_plane_reload_deferred": status.get(
+            "control_plane_reload_deferred"
+        ),
+        "control_plane_reload_deferred_reason": status.get(
+            "control_plane_reload_deferred_reason"
+        ),
+        "unhealthy_reasons": unhealthy_reasons,
         "active_task_id": task_state.get(
             "active_task_id", status.get("active_task_id")
         ),
@@ -617,7 +663,7 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "waiting_count": task_state.get("waiting_count"),
         "blocked_count": blocked_count,
         "blocked_task_ids": task_state.get("blocked_task_ids"),
-        "selection_idle_reason": task_state.get("selection_idle_reason"),
+        "selection_idle_reason": selection_idle_reason,
         "heartbeat_at": task_state.get("heartbeat_at"),
         "active_log_path": task_state.get(
             "active_log_path", status.get("last_log_path")
@@ -628,11 +674,17 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
 
 def _status_payload() -> dict[str, object]:
     lanes = [_lane_status(lane) for lane in LANES]
+    work_complete = bool(lanes) and all(
+        int(item.get("task_count") or 0) > 0
+        and int(item.get("completed_count") or 0)
+        >= int(item.get("task_count") or 0)
+        for item in lanes
+    )
     globally_progressable = any(
         bool(item.get("active_task_id"))
         or int(item.get("selectable_ready_count") or 0) > 0
         for item in lanes
-    )
+    ) or work_complete
     blocked_task_ids = sorted(
         {
             str(task_id)
@@ -653,6 +705,15 @@ def _status_payload() -> dict[str, object]:
             and not blocked_task_ids
         ),
         "globally_progressable": globally_progressable,
+        "work_complete": work_complete,
+        "unhealthy_lanes": [
+            {
+                "lane": item["lane"],
+                "reasons": list(item.get("unhealthy_reasons") or []),
+            }
+            for item in lanes
+            if not item.get("healthy")
+        ],
         "blocked_task_ids": blocked_task_ids,
         "lanes": lanes,
     }

@@ -62,8 +62,9 @@ their declared dependencies complete.
 
 ## PTR-001 Define test-execution proof contracts
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Operator-reviewed accelerator commit 505eb5697; the declared contract suite passed 18/18 with proof reuse forced off, and proposal secret admission was rechecked with an approved scoped synthetic canary while production credential material remained rejected.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -94,8 +95,9 @@ their declared dependencies complete.
 
 ## PTR-002 Publish the ZK receipt threat model and authority doctrine
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Integrated merge d42f4a78a and immutable merge-train receipt 45d96c257af5380dbcfcfe751a524504f0360d2d504b378847e3c8446982051a; the current declared doctrine suite passed 14/14 with proof reuse forced off.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -126,8 +128,9 @@ their declared dependencies complete.
 
 ## PTR-003 Implement lazy test-reuse capability probes
 
-- Status: todo
+- Status: completed
 - Completion: manual
+- Completion evidence: Integrated PTR-003 merge history through 04e9373ac with completed merge-train receipts; the current declared lazy-capability suite passed 24/24 with proof reuse forced off.
 - Is schedulable: true
 - Review only: false
 - Priority: P0
