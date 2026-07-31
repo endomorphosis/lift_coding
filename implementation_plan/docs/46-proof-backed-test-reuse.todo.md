@@ -161,7 +161,7 @@ their declared dependencies complete.
 
 ## PTR-010 Implement core locator and execution identity
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
