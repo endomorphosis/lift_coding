@@ -545,7 +545,7 @@ their declared dependencies complete.
 
 ## PTR-050 Implement the cold pytest plugin shell
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
