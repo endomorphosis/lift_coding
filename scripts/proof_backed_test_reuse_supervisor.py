@@ -155,6 +155,18 @@ def _git_output(*arguments: str, cwd: Path = REPO_ROOT) -> str:
     return result.stdout.strip()
 
 
+def _git_raw_output(*arguments: str, cwd: Path = REPO_ROOT) -> str:
+    result = subprocess.run(
+        ["git", *arguments],
+        cwd=cwd,
+        check=True,
+        text=True,
+        capture_output=True,
+        timeout=120,
+    )
+    return result.stdout
+
+
 def _require_isolated_clean_checkout() -> dict[str, object]:
     branch = _git_output("branch", "--show-current")
     if branch != TARGET_BRANCH:
@@ -164,7 +176,7 @@ def _require_isolated_clean_checkout() -> dict[str, object]:
     dirty = _git_output("status", "--porcelain=v1", "--untracked-files=all")
     if dirty:
         raise RuntimeError(f"refusing dirty integration checkout:\n{dirty}")
-    submodule_status = _git_output(
+    submodule_status = _git_raw_output(
         "submodule",
         "status",
         *[str(item) for item in PARALLEL["worktreeSubmodulePaths"]],
