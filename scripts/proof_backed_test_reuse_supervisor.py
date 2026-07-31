@@ -477,12 +477,20 @@ def _reconciliation_preflight(lane: dict[str, object]) -> None:
     result = _run(
         command,
         environment=_runtime_environment(str(lane["provider"])),
+        check=False,
         timeout=600,
     )
-    (LOG_DIR / f"{lane['name']}_reconciliation_preflight.log").write_text(
-        result.stdout + result.stderr,
-        encoding="utf-8",
-    )
+    output = result.stdout + result.stderr
+    log_path = LOG_DIR / f"{lane['name']}_reconciliation_preflight.log"
+    log_path.write_text(output, encoding="utf-8")
+    if result.returncode != 0:
+        diagnostic = output.strip()
+        if len(diagnostic) > 4000:
+            diagnostic = diagnostic[-4000:]
+        raise RuntimeError(
+            f"{lane['name']} reconciliation preflight exited "
+            f"{result.returncode}; log={log_path}\n{diagnostic}"
+        )
 
 
 def _pid_path(lane_name: str) -> Path:
