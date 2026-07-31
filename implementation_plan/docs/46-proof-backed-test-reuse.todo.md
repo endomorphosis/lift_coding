@@ -53,6 +53,8 @@ their declared dependencies complete.
 - Conflict policy: Own only the PTR planning/control namespace and preserve every prior board and runtime history.
 - Symbolic first: true
 - LLM context budget bytes: 32768
+- Provider role: operator-only
+- Context budget tokens: 0
 - Preconditions: Current outer accelerator, datasets, and kit gitlinks resolve to clean exact commits.
 - Effects: Seals reviewed implementation intent and launch bounds without changing package implementation.
 - Evidence subset: PTR planning seal and board validator receipt
@@ -83,6 +85,8 @@ their declared dependencies complete.
 - Conflict policy: Add finite typed records under the existing proof authority model; do not create a parallel trust root.
 - Symbolic first: true
 - LLM context budget bytes: 32768
+- Provider role: grok-implement
+- Context budget tokens: 8192
 - Preconditions: PTR trust invariants and canonical artifact profile are reviewed.
 - Effects: Defines the only records allowed to cross collection, cache, proving, and supervisor-validation boundaries.
 - Evidence subset: Existing proof dataclasses, canonical serializers, authority enums, and completion-evidence contracts
@@ -113,6 +117,8 @@ their declared dependencies complete.
 - Conflict policy: Preserve CBP proof doctrine; document test-specific attacks and controls without promoting observations into proof.
 - Symbolic first: true
 - LLM context budget bytes: 32768
+- Provider role: codex-implement
+- Context budget tokens: 8192
 - Preconditions: Human PTR plan and existing CBP/SCA proof policies are available.
 - Effects: Makes replay, substitution, trace incompleteness, key/circuit confusion, witness leakage, and downgrade protections executable doctrine.
 - Evidence subset: CBP threat policy, existing ZK adapter tests, proof-attestation authority contracts
@@ -143,6 +149,8 @@ their declared dependencies complete.
 - Conflict policy: Probe imports/configuration/binaries with strict bounds; never install packages, contact endpoints, start daemons, or create caches.
 - Symbolic first: true
 - LLM context budget bytes: 32768
+- Provider role: codex-implement
+- Context budget tokens: 8192
 - Preconditions: Optional provider names and environment contracts are documented.
 - Effects: Reports multiformats, datasets ZK, Groth16, ProveKit, cache, IPFS, and local verifier availability as typed facts.
 - Evidence subset: Import specs, configured paths, backend registries, and cold capability metadata
@@ -173,6 +181,8 @@ their declared dependencies complete.
 - Conflict policy: Extend the canonical content-identity bridge; never label a fallback digest or kit pseudo-hash as a CID.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: grok-implement
+- Context budget tokens: 10240
 - Preconditions: PTR-001 contracts exist and datasets/multiformats adapters remain lazy.
 - Effects: Produces strict locator and execution artifacts binding node ID, forest, source/AST, context roots, and policy.
 - Evidence subset: ContentIdentity bridge, repository snapshots, pytest node IDs, canonical JSON and multiformats vectors
@@ -203,6 +213,8 @@ their declared dependencies complete.
 - Conflict policy: Canonicalize only reviewed finite types; unsupported parameters and uncontrolled inputs become explicit non-reusable reasons.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: codex-implement
+- Context budget tokens: 10240
 - Preconditions: PTR-001 schemas define bounded component records.
 - Effects: Supplies parameter, fixture, conftest, hook, lock/distribution, interpreter, environment, and capability roots to the execution compiler.
 - Evidence subset: Pytest fixture manager, conftest hierarchy, installed distributions, lock files, allowlisted environment and platform facts
@@ -233,6 +245,8 @@ their declared dependencies complete.
 - Conflict policy: Independently reproduce the same bytes/digest/CID through datasets and multiformats; do not merely round-trip one implementation.
 - Symbolic first: true
 - LLM context budget bytes: 32768
+- Provider role: codex-implement
+- Context budget tokens: 8192
 - Preconditions: PTR-010 and PTR-011 expose canonical retained payloads.
 - Effects: Prevents cross-package canonicalization drift and fake CID admission.
 - Evidence subset: Strict DAG-JSON vectors, decoded multihash digests, invalid legacy kit hash strings
@@ -263,6 +277,8 @@ their declared dependencies complete.
 - Conflict policy: Extend existing AST records and import closure; unknown dynamic edges remain visible and block narrow eligibility.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Exact identity components and AST content records exist.
 - Effects: Computes test/import/fixture/conftest/hook/config/data/effect closure with source spans, tool identity, and analyzer health.
 - Evidence subset: AnalysisASTIndex, Python AST, import resolution, fixture graph, configuration and effect references
@@ -293,6 +309,8 @@ their declared dependencies complete.
 - Conflict policy: Observe bounded dependency identities only; never retain secrets, arbitrary output bodies, private paths, or unbounded payloads.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Receipt contracts and execution identity are available.
 - Effects: Records imported modules/code, file reads, allowlisted environment, subprocess tools, services, randomness/clock policy, hardware/capabilities, and tracer health for a cold execution.
 - Evidence subset: Python audit/import hooks, pytest lifecycle, content identity and capability adapters
@@ -323,6 +341,8 @@ their declared dependencies complete.
 - Conflict policy: Prefer safe execution over narrow reuse; trace evidence scopes invalidation and cannot establish correctness.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: grok-implement
+- Context budget tokens: 10240
 - Preconditions: Static and runtime traces expose health, bounds, effects, and unknown frontiers.
 - Effects: Classifies pure, snapshot-bound, repository-forest-bound, and non-reusable items with typed reasons.
 - Evidence subset: Combined trace roots, effect adapters, environment/capability policy, current repository forest
@@ -353,6 +373,8 @@ their declared dependencies complete.
 - Conflict policy: Use existing trust-aware cache and evidence-store authority; test adapters cannot create another trust root or trust serialized status flags.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: codex-implement
+- Context budget tokens: 10240
 - Preconditions: Test proof contracts and exact execution identities exist.
 - Effects: Adds test-specific admission and lookup records while re-deriving current authority on every candidate.
 - Evidence subset: TrustAwareProofCache, ProverEvidenceStore, proof authority and invalidation contracts
@@ -383,6 +405,8 @@ their declared dependencies complete.
 - Conflict policy: Immutable CID blobs are authority inputs and locator indexes are bounded hints; all writes are atomic and controller-fenced.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
 - Preconditions: Exact CID compiler and trust-aware cache admission exist.
 - Effects: Stores receipts/certificates/traces by CID and maps locators to bounded candidates with TTL, revocation, quarantine, restart recovery, and xdist-safe single flight.
 - Evidence subset: Atomic persistence helpers, content-addressed tiers, locking/fencing and revocation patterns
@@ -413,6 +437,8 @@ their declared dependencies complete.
 - Conflict policy: Extend the datasets ZKP statement protocol with the minimum test-specific predicate and no pytest or accelerator dependency.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
 - Preconditions: PTR receipt/certificate schemas and reviewed threat model exist.
 - Effects: Defines public/private inputs and constraints for possession of an exact admitted complete-pass receipt.
 - Evidence subset: Existing datasets statement/canonicalization/backend protocols and PTR authority doctrine
@@ -443,6 +469,8 @@ their declared dependencies complete.
 - Conflict policy: Bind existing real backend interfaces and pinned artifacts; no fallback or simulated backend can report attested authority.
 - Symbolic first: true
 - LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
 - Preconditions: TestPassStatementV1 and typed capability results exist.
 - Effects: Normalizes real Groth16/ProveKit proof artifacts and locally verifies exact public-input, circuit, key, issuer, and policy bindings.
 - Evidence subset: Datasets ZKPProof, Groth16/ProveKit adapters, setup artifacts, verifier-key registry and public-input canonicalization
@@ -473,6 +501,8 @@ their declared dependencies complete.
 - Conflict policy: Proving runs only after immutable pass receipt storage and cannot change pytest pass status; remote communication is explicit and bounded.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Immutable store and real certificate verification contracts are stable.
 - Effects: Queues or executes bounded real proving after a complete pass and stores verified results by CID.
 - Evidence subset: ProveKit CLI/FFI, Groth16 endpoint adapters, witness manager, timeout/retry and artifact validation
@@ -503,6 +533,8 @@ their declared dependencies complete.
 - Conflict policy: Keep datasets import and proving optional/lazy; verification and issuance are separate capabilities with typed failures.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: grok-implement
+- Context budget tokens: 10240
 - Preconditions: Capability, cache/store, and real certificate contracts exist.
 - Effects: Gives the shared plugin a bounded local verification adapter and an optional deferred issuer handle.
 - Evidence subset: Existing ipfs_datasets ZK attestation adapter, optional integration conventions, capability reports
@@ -533,6 +565,8 @@ their declared dependencies complete.
 - Conflict policy: Plugin import/configuration is pure and lazy; it cannot create storage, probe network, import a ZK backend, or start a daemon.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: codex-implement
+- Context budget tokens: 10240
 - Preconditions: Typed contracts define modes, decisions, and reason codes.
 - Effects: Adds off/shadow/read/write/readwrite options, markers, collection metadata, and no-op provider seams.
 - Evidence subset: Pytest hook specifications, hermetic environment controls, existing accelerator conftest and packaging
@@ -563,6 +597,8 @@ their declared dependencies complete.
 - Conflict policy: Index lookup is a hint; recompute current identity and locally validate every immutable candidate before adding a standard pytest skip marker.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Eligibility, store, datasets verifier adapter, and plugin shell are available.
 - Effects: Batches collection lookup and attaches exact typed decisions/user properties to items before fixture setup.
 - Evidence subset: Current execution identity, bounded candidate index, immutable certificates, local verification and policy admission
@@ -593,6 +629,8 @@ their declared dependencies complete.
 - Conflict policy: Receipt capture is post-outcome and cannot override pytest status; proving is deferred beyond immutable receipt admission.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
 - Preconditions: Runtime trace, proof-cache admission, deferred issuer, and plugin shell exist.
 - Effects: Aggregates setup/call/teardown reports and eligible trace/context into a canonical pass receipt and optional deferred proving request.
 - Evidence subset: Pytest TestReport lifecycle, trace health, outcome policy, immutable receipt store
@@ -623,6 +661,8 @@ their declared dependencies complete.
 - Conflict policy: Workers may read verified immutable candidates; one controller publishes receipt/index state and failures disable writes rather than tests.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Lookup and receipt paths pass independently.
 - Effects: Wires final plugin hooks, controller/worker messages, fenced writes, and privacy-safe metrics/reason codes.
 - Evidence subset: Pytest-xdist hooks, store fences, session reports, worker crash/restart behavior
@@ -653,6 +693,8 @@ their declared dependencies complete.
 - Conflict policy: Extend authoritative validation evidence; ordinary skip text, a cache-hit flag, or historical status never satisfies task/goal/merge completion.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Trust cache, datasets verifier, lookup, and receipt contracts exist.
 - Effects: Re-verifies a proof-backed skip against the current tree and emits fresh typed supervisor evidence.
 - Evidence subset: Validation runner, completion authority, merge gates, repository snapshot and proof certificate bindings
@@ -683,6 +725,8 @@ their declared dependencies complete.
 - Conflict policy: Add one packaging entry point and a minimal optional root loader; preserve existing conftest behavior and hermetic plugin controls.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
 - Preconditions: Shared plugin and supervisor validation authority are complete.
 - Effects: Makes suite and directly selected accelerator tests discover the plugin with autoload enabled or disabled.
 - Evidence subset: Packaging metadata, pytest plugin manager, root conftest and hermetic subprocess fixtures
@@ -713,6 +757,8 @@ their declared dependencies complete.
 - Conflict policy: Replace the existing commit-only skip cache as authority and repair its nested hook lifecycle without disturbing unrelated datasets fixtures.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
 - Preconditions: Deferred issuer and complete shared plugin exist.
 - Effects: Adds optional plugin pickup for suite/direct nodes and migrates old cache behavior to exact post-pass receipts.
 - Evidence subset: Datasets tests/conftest commit cache, pyproject, shared plugin and issuer adapter
@@ -743,6 +789,8 @@ their declared dependencies complete.
 - Conflict policy: Local/IPFS storage is optional transport only; accelerator policy remains authority and kit testing pseudo-CIDs are never accepted.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Shared immutable store and capability contracts exist.
 - Effects: Adds strict CID-verified immutable put/get transport and lazy Kubo/Lotus/Iroh capability fingerprints.
 - Evidence subset: Kit storage/backends, multiformats adapter, daemon lifecycle and configuration paths
@@ -773,6 +821,8 @@ their declared dependencies complete.
 - Conflict policy: Add a minimal optional loader and preserve all existing kit test fixtures and daemon safety defaults.
 - Symbolic first: true
 - LLM context budget bytes: 40960
+- Provider role: codex-implement
+- Context budget tokens: 10240
 - Preconditions: Complete plugin and strict optional kit store are available.
 - Effects: Makes suite and directly selected kit tests discover proof reuse without daemon startup.
 - Evidence subset: Kit pyproject, root/tests conftests, plugin/store unavailable fixtures, temporary configuration roots
@@ -803,6 +853,8 @@ their declared dependencies complete.
 - Conflict policy: Exercise failures through fixtures and subprocess isolation; never require live optional services for the mandatory matrix.
 - Symbolic first: true
 - LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
 - Preconditions: Accelerator, datasets, and kit bootstrap paths are implemented.
 - Effects: Locks every optional-dependency and corrupt-state branch to RUN behavior.
 - Evidence subset: Missing/corrupt cache, multiformats/provider/verifier absence, timeouts, wrong circuit/key/issuer/policy/expiry, simulated proof and plugin errors
@@ -833,6 +885,8 @@ their declared dependencies complete.
 - Conflict policy: Use temporary repositories/environments and deterministic fixtures; mutation results cannot be satisfied by proof reuse.
 - Symbolic first: true
 - LLM context budget bytes: 57344
+- Provider role: grok-implement
+- Context budget tokens: 14336
 - Preconditions: CID vectors, eligibility, and degradation behavior pass.
 - Effects: Mutates every identity and dependency class and measures the resulting decision.
 - Evidence subset: Test/import/indirect dependency/fixture/conftest/hook/parameter/lock/environment/hardware/data/dynamic import/dirty tree/policy/circuit/key mutations
@@ -863,6 +917,8 @@ their declared dependencies complete.
 - Conflict policy: Use isolated temporary roots, bounded synthetic artifacts, and controlled worker processes; never inspect or modify user cache/IPFS roots.
 - Symbolic first: true
 - LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
 - Preconditions: Store, provider, and degradation contracts pass.
 - Effects: Exercises forgery, privacy, filesystem safety, crash recovery, races, and revocation.
 - Evidence subset: Forged receipt/proof/CID, secret leakage, oversized blobs, symlink/path escape, partial writes, restart, parallel writers, stale locks, rollback/replay and revocation races
@@ -893,6 +949,8 @@ their declared dependencies complete.
 - Conflict policy: Run disposable subprocess repositories/cache roots; real-verifier fixtures are local and network-free.
 - Symbolic first: true
 - LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
 - Preconditions: Complete plugin and degradation matrix pass; repository bootstrap dependencies are transitively complete.
 - Effects: Exercises miss, pass receipt, real certificate, warm skip, mutation, off/coverage, direct-node, autoload-disabled, and xdist flows in all three repos.
 - Evidence subset: Subprocess pytest reports, canonical cache artifacts, plugin properties, direct-node exit codes and xdist controller records
@@ -923,6 +981,8 @@ their declared dependencies complete.
 - Conflict policy: Benchmark only controlled eligible populations and report exclusions; performance never relaxes authority.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
 - Preconditions: Invalidation, security/concurrency, and cross-repository populations have zero false skips.
 - Effects: Compares off, shadow, cold readwrite, warm read, and forced rerun latency and decisions.
 - Evidence subset: Eligible/ineligible fixture populations, collection/lookup/verification/execution timings, bytes and reason-code counts
@@ -953,6 +1013,8 @@ their declared dependencies complete.
 - Conflict policy: Rollout may narrow or disable reuse but cannot broaden proof authority beyond reviewed eligibility.
 - Symbolic first: true
 - LLM context budget bytes: 49152
+- Provider role: codex-implement
+- Context budget tokens: 12288
 - Preconditions: Benchmark thresholds and zero-false-admission evidence exist.
 - Effects: Encodes off to shadow to read to opt-in readwrite to eligible-default transitions, forced rerun sampling, alerts, and rollback.
 - Evidence subset: Benchmark receipts, degradation/mutation mismatch metrics, key/revocation health and operator controls
@@ -983,6 +1045,8 @@ their declared dependencies complete.
 - Conflict policy: Aggregate current evidence only; an ordinary skip, stale population, incomplete task, simulated proof, or historical benchmark cannot close the root goal.
 - Symbolic first: true
 - LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
 - Preconditions: Mutation, security/concurrency, cross-repository e2e, benchmark, and rollout evidence are complete.
 - Effects: Evaluates the exact closed PTR task population under current repository forest, policy, providers, and validation receipts.
 - Evidence subset: Current commit/tree/recursive gitlinks, task CIDs and merge receipts, child goal evidence, all adversarial populations, benchmark and rollout decision

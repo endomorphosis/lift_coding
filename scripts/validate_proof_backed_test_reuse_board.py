@@ -164,6 +164,8 @@ REQUIRED_TASK_FIELDS = (
     "conflict policy",
     "symbolic first",
     "llm context budget bytes",
+    "provider role",
+    "context budget tokens",
     "preconditions",
     "effects",
     "evidence subset",
@@ -567,6 +569,34 @@ def validate(
                 raise ValueError
         except ValueError:
             errors.append(f"{task.task_id} has invalid LLM context budget")
+        provider_role = str(task.metadata.get("provider role") or "").strip()
+        try:
+            context_budget_tokens = int(
+                str(task.metadata.get("context budget tokens") or "")
+            )
+            if task.task_id == "PTR-000":
+                if context_budget_tokens != 0:
+                    raise ValueError
+            elif context_budget_tokens < 1024 or context_budget_tokens > 16384:
+                raise ValueError
+        except ValueError:
+            errors.append(f"{task.task_id} has invalid context budget tokens")
+        if task.task_id == "PTR-000":
+            if provider_role != "operator-only":
+                errors.append("PTR-000 provider role must be operator-only")
+        elif lane_count := int(parallel.get("laneCount") or 0):
+            shard_index = int(task.task_id.rsplit("-", 1)[1]) % lane_count
+            lane_provider = str(parallel.get("providers", [])[shard_index])
+            expected_role = (
+                "grok-implement"
+                if lane_provider in {"grok", "grok-build"}
+                else "codex-implement"
+            )
+            if provider_role != expected_role:
+                errors.append(
+                    f"{task.task_id} provider role {provider_role!r} does not "
+                    f"match shard {shard_index} provider {lane_provider!r}"
+                )
         submodules = frozenset(_csv(task.metadata.get("submodules")))
         if not submodules.issubset(EXPECTED_SUBMODULES):
             errors.append(

@@ -503,6 +503,14 @@ def _pid_alive(pid: object) -> bool:
         os.kill(pid, 0)
     except OSError:
         return False
+    try:
+        process_state = Path(f"/proc/{pid}/stat").read_text(
+            encoding="utf-8"
+        ).split()[2]
+    except (OSError, IndexError):
+        return False
+    if process_state == "Z":
+        return False
     return True
 
 
