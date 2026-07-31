@@ -23,6 +23,7 @@ LEASED_BOARDS = {
     "refactor": "implementation_plan/docs/38-swissknife-repository-refactoring-plan-2026-07-08.todo.md",
     "mcpplusplus-profile-g": "implementation_plan/docs/38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md",
     "mcpplusplus-profile-h": "implementation_plan/docs/41-mcpplusplus-profile-h-x402-payments-plan-2026-07-12.todo.md",
+    "symbolic-contract-assurance": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md",
 }
 
 

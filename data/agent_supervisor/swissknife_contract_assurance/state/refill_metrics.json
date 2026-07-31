@@ -1,0 +1,38 @@
+{
+  "bounds": {
+    "cooldown_seconds": 10,
+    "max_findings_per_run": 2,
+    "max_open_tasks": 4,
+    "min_open_tasks": 2
+  },
+  "completion_authoritative": false,
+  "evidence": "SCAEV130REFILL",
+  "interface": "ContractAssuranceRefill@1",
+  "llm_call_count": 0,
+  "metrics": {
+    "analyzer_calls": 5,
+    "analyzer_calls_on_cooldown": 1,
+    "analyzer_calls_on_threshold_skip": 0,
+    "cooldown_count": 1,
+    "crash_recovery_idempotent": true,
+    "duplicate_only_count": 1,
+    "finding_limit_hits": 1,
+    "generated_count": 1,
+    "llm_call_count": 0,
+    "model_call_count": 0,
+    "noop_scan_has_no_provider_model_work": true,
+    "open_work_bound_holds": true,
+    "provider_call_count": 0,
+    "replayed_exact": true,
+    "threshold_skip_count": 1
+  },
+  "metrics_id": "sha256:a305ce39b7e6e1469124bbb8e637859efa83f1cf31679791e64b903fe16528b6",
+  "model_call_count": 0,
+  "passed": true,
+  "provider_call_count": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/contract-assurance-refill-metrics@1",
+  "schema_version": 1,
+  "snapshot_id": "git-tree:sca-130",
+  "source_tree": "tree:sca-130-continuous",
+  "task_id": "SCA-130"
+}

@@ -1,0 +1,298 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/swissknife-contract-assurance-profile@1",
+  "profileId": "swissknife-symbolic-contract-assurance-v1",
+  "mode": "shadow_first",
+  "repositoryRoot": ".",
+  "primaryRepository": "swissknife",
+  "objectivePath": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.objectives.md",
+  "todoPath": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md",
+  "taskPrefix": "## SCA-",
+  "statePrefix": "swissknife_contract_assurance",
+  "runtimeRoot": "data/agent_supervisor/swissknife_contract_assurance",
+  "providerScopes": [
+    "external/ipfs_accelerate",
+    "external/ipfs_kit",
+    "external/ipfs_datasets",
+    "Mcp-Plus-Plus"
+  ],
+  "runtimeComponents": {
+    "modelServer": {
+      "componentId": "model-server",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/hf_model_server",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp/ai_model_server.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/ai_model_server.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/model_tools",
+        "swissknife/src/services/mcp/mcp-plus-plus-connector.ts",
+        "swissknife/src/services/apps/swissknife-mcp-capability-registry.ts",
+        "swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs"
+      ]
+    },
+    "orchestrator": {
+      "componentId": "orchestrator",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/orchestrator.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/service.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/datasets_integration",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/lifecycle_orchestrator.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/p2p"
+      ]
+    },
+    "scheduler": {
+      "componentId": "scheduler",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/p2p_tasks/deterministic_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/p2p_workflow_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/workflow_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/risk_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/resource_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/provider_batch_scheduler.py"
+      ]
+    },
+    "agentSupervisor": {
+      "componentId": "agent-supervisor",
+      "paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources",
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon",
+        "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools",
+        "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+        "swissknife/src/shared/service-contracts/agent-supervisor-console.ts",
+        "swissknife/src/services/apps/all-app-executable-backend-contract.ts"
+      ]
+    }
+  },
+  "authority": {
+    "graphRag": "context_only",
+    "staticAnalysis": "observation",
+    "testsAndRuntime": "observation",
+    "solverCandidate": "candidate",
+    "kernelProof": "authoritative_when_exactly_bound",
+    "simulatedZk": "non_attested",
+    "realZk": "attested_only_under_approved_policy",
+    "llmOutput": "proposal_only"
+  },
+  "symbolicProviders": {
+    "graphRag": {
+      "module": "ipfs_datasets_py.logic.intent_ir.graphrag.retrieval",
+      "entrypoint": "IntentGraphRetriever",
+      "authority": "context_only",
+      "exactCapabilityReceiptRequired": true
+    },
+    "graphQueryAst": {
+      "module": "ipfs_datasets_py.knowledge_graphs.cypher.ast",
+      "parserModule": "ipfs_datasets_py.knowledge_graphs.cypher.parser",
+      "entrypoint": "QueryNode",
+      "authority": "syntax_only",
+      "exactCapabilityReceiptRequired": true
+    },
+    "logic": {
+      "modules": [
+        "ipfs_datasets_py.logic.ir_core",
+        "ipfs_datasets_py.logic.TDFOL",
+        "ipfs_datasets_py.logic.CEC",
+        "ipfs_datasets_py.logic.external_provers.smt",
+        "ipfs_datasets_py.logic.hammers"
+      ],
+      "adapterConformanceRequired": true,
+      "fixtureOnlyBackendsAccepted": false
+    },
+    "contentIdentity": {
+      "modules": [
+        "ipfs_datasets_py.utils.cid_utils",
+        "ipfs_datasets_py.logic.ir_core.identity",
+        "ipfs_datasets_py.logic.ipld_cid",
+        "ipfs_datasets_py.logic.profile_g",
+        "multiformats.CID",
+        "multiformats.multihash"
+      ],
+      "decodedMultihashMustMatchCanonicalBytes": true
+    },
+    "missingOrIncompatibleProvider": "typed_blocker",
+    "packageRootFallbackCanSatisfyExactBinding": false
+  },
+  "contentIdentity": {
+    "artifactProfile": {
+      "canonicalization": "strict-dag-json-v1",
+      "cidVersion": 1,
+      "multibase": "base32",
+      "multicodec": "dag-json",
+      "multihash": "sha2-256"
+    },
+    "logicIrProfile": "ir-canonical-identity-v1",
+    "canonicalBytesRetained": true,
+    "decodeAndVerifyMultihash": true,
+    "crossProfileEqualityAllowed": false,
+    "cidRequiredOperationsFailClosed": true,
+    "providers": [
+      "ipfs_datasets_py.utils.cid_utils",
+      "ipfs_datasets_py.logic.ir_core.identity",
+      "ipfs_datasets_py.logic.ipld_cid",
+      "ipfs_datasets_py.logic.profile_g",
+      "multiformats.CID",
+      "multiformats.multihash"
+    ]
+  },
+  "scanPolicy": {
+    "trackedSwissknifeCoverageRequired": 1.0,
+    "workingTreeOverlay": "tracked_plus_allowlisted_untracked_source",
+    "sourceBodies": "cas_only",
+    "silentExclusionsAllowed": false,
+    "semanticLanguages": [
+      "typescript",
+      "tsx",
+      "javascript",
+      "jsx",
+      "python",
+      "json-schema"
+    ],
+    "skipPrefixes": [
+      ".git",
+      "node_modules",
+            "tmp",
+            "data/agent_supervisor",
+            "swissknife/node_modules",
+      "swissknife/playwright-report",
+      "swissknife/test-results",
+      "swissknife/.pytest_cache",
+      "hallucinate_app/node_modules"
+    ]
+  },
+  "proofPolicy": {
+    "cache": "ipfs_accelerate_py.agent_supervisor.proof.formal_verification_cache.TrustAwareProofCache",
+    "cacheHitReDerivesAssurance": true,
+    "capabilityProbeRequired": true,
+    "unsupportedIsNotPass": true,
+    "inconclusiveIsNotPass": true,
+    "realZkThreatModelRequired": true,
+    "simulatedZkCanAttest": false
+  },
+  "runtimeContractPolicy": {
+    "canonicalImplementationRequired": true,
+    "nameOnlyJoinAllowed": false,
+    "mandatoryMcpPlusPlusPipeline": true,
+    "directPackageInvocationCountsAsMcpPlusPlus": false,
+    "mockOrDegradedTransportCanProveReachability": false,
+    "releaseGoRequiresCurrentMandatoryChildReceipts": true,
+    "claimFamilies": [
+      "CanonicalImplementationSelected",
+      "LifecycleStateMachineConforms",
+      "LeaseFenceBeforeEffect",
+      "QueueAccountingConserved",
+      "ModelSelectionPreserved",
+      "GoalTaskClosure",
+      "DeterministicOnlyMeansNoModel",
+      "ProviderContextBounded"
+    ]
+  },
+  "contextPolicy": {
+    "repositoryWideModelContextAllowed": false,
+    "packetInputTokenHardLimit": 8192,
+    "packetInputTokenMedianTarget": 2048,
+    "taskMetadataHardLimitRequired": true,
+    "deterministicOnlyTasksMayInvokeModel": false,
+    "requiredCore": [
+      "task_id",
+      "contract_id",
+      "obligation_id",
+      "snapshot_id",
+      "affected_symbols",
+      "counterexample",
+      "expected_postcondition",
+      "validation",
+      "reproof",
+      "read_write_scope"
+    ],
+    "largeEvidence": "content_addressed_expansion_handle"
+  },
+  "providers": {
+    "implementation": "grok",
+    "review": "codex",
+    "routing": "parallel_isolated_worktrees_serial_merge",
+    "fallback": "typed_defer_or_codex",
+    "modelOutputAuthority": "proposal_only",
+    "laneAssignments": [
+      "grok",
+      "codex",
+      "grok",
+      "codex"
+    ],
+    "commonEnvironment": {
+      "IPFS_ACCELERATE_AGENT_CODEX_CONTEXT_WINDOW": "8192",
+      "IPFS_ACCELERATE_AGENT_CODEX_MAX_THREADS": "1",
+      "IPFS_ACCELERATE_AGENT_CODEX_MAX_DEPTH": "1",
+      "IPFS_ACCELERATE_AGENT_DISABLE_SUBAGENTS": "1",
+      "IPFS_ACCELERATE_AGENT_GROK_BIN": "/home/barberb/.local/bin/grok",
+      "IPFS_ACCELERATE_AGENT_GROK_CONTEXT_WINDOW": "8192",
+      "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_CONTEXT_OUTPUT_RESERVE": "2048",
+      "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_CONTEXT_TOOL_RESERVE": "1024",
+      "IPFS_ACCELERATE_AGENT_REQUIRE_TASK_EXECUTION_METADATA": "1",
+      "IPFS_ACCELERATE_AGENT_TODO_VECTOR_CONTEXT_TOKEN_BUDGET": "600"
+    }
+  },
+  "parallelRuntime": {
+    "enabled": true,
+    "laneCount": 4,
+    "scheduler": "deterministic_task_shards",
+    "strictTaskSharding": true,
+    "isolation": "ephemeral_git_worktree_per_task",
+    "mergeQueue": "shared_serial",
+    "mergeTargetBranch": "agent/swissknife-sca-parallel",
+    "primaryLaneRunsRefill": true,
+    "checkIntervalSeconds": 30,
+    "daemonIntervalSeconds": 60,
+    "worktreeSubmodulePaths": [
+      "swissknife",
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit"
+    ],
+    "protectedPaths": [
+      "implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md",
+      "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.objectives.md",
+      "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md",
+      "config/swissknife_symbolic_contract_assurance_supervisor.json",
+      "config/swissknife_symbolic_contract_assurance_lane_inventory.json",
+      "config/swissknife_symbolic_contract_scope.json"
+    ]
+  },
+  "bounds": {
+    "supervisorLanes": 4,
+    "objectiveRefillMinOpenTasks": 1,
+    "objectiveRefillMaxFindings": 8,
+    "objectiveRefillTimeoutSeconds": 900,
+    "objectiveMaxRefinementChildren": 2,
+    "objectiveMaxRefinementDepth": 3,
+    "codebaseRefillMinOpenTasks": 1,
+    "codebaseRefillMaxFindings": 8,
+    "codebaseRefillTimeoutSeconds": 600,
+    "refillCooldownSeconds": 900,
+    "maxParserFailureRatio": 0.01,
+    "implementationTimeoutSeconds": 7200,
+    "maxTaskAttempts": 3,
+    "maxRestarts": 20
+  },
+  "artifacts": {
+    "graph": "data/agent_supervisor/swissknife_contract_assurance/objective_graph.json",
+    "bundles": "data/agent_supervisor/swissknife_contract_assurance/bundles",
+    "datasets": "data/agent_supervisor/swissknife_contract_assurance/datasets",
+    "discovery": "data/agent_supervisor/swissknife_contract_assurance/discovery",
+    "state": "data/agent_supervisor/swissknife_contract_assurance/state",
+    "worktrees": "data/agent_supervisor/swissknife_contract_assurance/worktrees",
+    "generatedRepairs": "data/agent_supervisor/swissknife_contract_assurance/generated/ipfs_accelerate_contract_repairs.todo.md",
+    "runtimeBaseline": "data/agent_supervisor/swissknife_contract_assurance/baseline/runtime_components",
+    "runtimeEvaluation": "data/agent_supervisor/swissknife_contract_assurance/evaluation/runtime_report.json"
+  },
+  "lease": {
+    "laneId": "symbolic-contract-assurance",
+    "inventory": "config/swissknife_symbolic_contract_assurance_lane_inventory.json",
+    "checkout": "swissknife",
+    "requiredForImplementation": true,
+    "dirtyRecoveryAttempts": 0,
+    "ephemeralWorktree": true,
+    "worktreeReconciliation": true
+  }
+}

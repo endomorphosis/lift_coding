@@ -1,0 +1,43 @@
+{
+  "bounds": {
+    "cooldown_seconds": 10,
+    "max_findings_per_run": 2,
+    "max_open_tasks": 4,
+    "min_open_tasks": 2
+  },
+  "completion_authoritative": false,
+  "evidence": "SCAEV176REFILL",
+  "interface": "RuntimeContractAssuranceRefill@1",
+  "llm_call_count": 0,
+  "metrics": {
+    "analyzer_calls": 8,
+    "analyzer_calls_on_cooldown": 0,
+    "analyzer_calls_on_noop": 0,
+    "analyzer_calls_on_threshold_skip": 0,
+    "cooldown_count": 1,
+    "correct_subgoal_refill": true,
+    "crash_recovery_idempotent": true,
+    "dependents_only_filter_holds": true,
+    "duplicate_only_count": 1,
+    "finding_limit_hits": 1,
+    "generated_count": 1,
+    "llm_call_count": 0,
+    "model_call_count": 0,
+    "noop_count": 1,
+    "noop_scan_has_no_provider_model_work": true,
+    "open_work_bound_holds": true,
+    "passed": true,
+    "provider_call_count": 0,
+    "replayed_exact": true,
+    "threshold_skip_count": 1
+  },
+  "metrics_id": "sha256:70ab4648d12f2ce4be45083adc2dbced7c61a041e305b873f003b64faa9a11ab",
+  "model_call_count": 0,
+  "passed": true,
+  "provider_call_count": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/runtime-contract-assurance-refill-metrics@1",
+  "schema_version": 1,
+  "snapshot_id": "git-tree:sca-179",
+  "source_tree": "tree:sca-179-runtime-refill",
+  "task_id": "SCA-179"
+}
