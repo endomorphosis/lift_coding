@@ -801,7 +801,7 @@ their declared dependencies complete.
 
 ## PTR-081 Bootstrap proof reuse in ipfs_kit_py
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
