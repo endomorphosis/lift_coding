@@ -385,7 +385,7 @@ their declared dependencies complete.
 
 ## PTR-031 Implement immutable certificate storage and fenced indexes
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
