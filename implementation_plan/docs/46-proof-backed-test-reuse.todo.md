@@ -769,7 +769,7 @@ their declared dependencies complete.
 
 ## PTR-080 Add strict optional certificate transport to ipfs_kit_py
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
