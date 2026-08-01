@@ -929,7 +929,7 @@ their declared dependencies complete.
 
 ## PTR-093 Prove cross-repository direct-node and xdist behavior
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
