@@ -577,7 +577,7 @@ their declared dependencies complete.
 
 ## PTR-051 Implement candidate lookup and verified skip decisions
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
