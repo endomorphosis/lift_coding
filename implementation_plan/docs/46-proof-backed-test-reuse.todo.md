@@ -193,7 +193,7 @@ their declared dependencies complete.
 
 ## PTR-011 Compile fixtures, hooks, parameters, dependencies, and environment identity
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -449,7 +449,7 @@ their declared dependencies complete.
 
 ## PTR-041 Implement real test-execution certificate conformance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
