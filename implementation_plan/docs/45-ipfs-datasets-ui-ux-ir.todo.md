@@ -28,7 +28,7 @@ Program rules:
 
 ## UIR-001 Freeze the v1 boundary vocabulary and authority contract
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
