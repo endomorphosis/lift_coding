@@ -993,7 +993,7 @@ their declared dependencies complete.
 
 ## PTR-101 Implement staged rollout, sampling, and rollback
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
