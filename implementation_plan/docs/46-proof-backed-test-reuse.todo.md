@@ -225,7 +225,7 @@ their declared dependencies complete.
 
 ## PTR-012 Add independent cross-package CID identity vectors
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
