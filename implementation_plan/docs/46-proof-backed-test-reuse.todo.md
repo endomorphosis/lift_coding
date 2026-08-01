@@ -501,7 +501,7 @@ their declared dependencies complete.
 - Interfaces: TestCertificateIssuer@1, TestPassStatementV1, TestCertificateStore@1
 - Submodules: external/ipfs_datasets
 - Generated artifacts: none
-- Conflict policy: Proving runs only after immutable pass receipt storage and cannot change pytest pass status; remote communication is explicit and bounded.
+- Conflict policy: Proving runs only after immutable pass receipt storage and cannot change pytest pass status; remote communication is explicit and bounded; negative secret-leak tests use only reviewed synthetic canaries such as should-not-appear or test-only-api-key-value.
 - Symbolic first: true
 - LLM context budget bytes: 49152
 - Provider role: codex-implement
