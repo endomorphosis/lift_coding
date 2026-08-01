@@ -833,7 +833,7 @@ their declared dependencies complete.
 
 ## PTR-090 Prove the complete degradation matrix
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
