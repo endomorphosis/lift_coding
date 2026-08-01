@@ -513,7 +513,7 @@ their declared dependencies complete.
 
 ## PTR-043 Add the lazy datasets certificate provider adapter
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
