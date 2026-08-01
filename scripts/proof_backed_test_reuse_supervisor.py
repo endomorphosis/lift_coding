@@ -13,10 +13,9 @@ import signal
 import subprocess
 import sys
 import time
+from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Iterator, Sequence
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -352,6 +351,12 @@ def _submodule_arguments() -> list[str]:
     return arguments
 
 
+def _task_state_work_complete(payload: dict[str, object]) -> bool:
+    task_count = int(payload.get("task_count") or 0)
+    completed_count = int(payload.get("completed_count") or 0)
+    return task_count > 0 and completed_count >= task_count
+
+
 def _no_agent_readiness() -> dict[str, object]:
     state_dir = STATE_DIR / "preflight" / "board"
     command = [
@@ -390,11 +395,13 @@ def _no_agent_readiness() -> dict[str, object]:
         raise RuntimeError(
             f"board readiness has blocked tasks: {payload.get('blocked_task_ids')}"
         )
-    if int(payload.get("selectable_ready_count") or 0) < 1:
+    work_complete = _task_state_work_complete(payload)
+    if int(payload.get("selectable_ready_count") or 0) < 1 and not work_complete:
         raise RuntimeError(
             "board readiness has no selectable task: "
             f"{payload.get('selection_idle_reason')!r}"
         )
+    payload["work_complete"] = work_complete
     return payload
 
 
@@ -682,12 +689,7 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
 
 def _status_payload() -> dict[str, object]:
     lanes = [_lane_status(lane) for lane in LANES]
-    work_complete = bool(lanes) and all(
-        int(item.get("task_count") or 0) > 0
-        and int(item.get("completed_count") or 0)
-        >= int(item.get("task_count") or 0)
-        for item in lanes
-    )
+    work_complete = bool(lanes) and all(_task_state_work_complete(item) for item in lanes)
     globally_progressable = any(
         bool(item.get("active_task_id"))
         or int(item.get("selectable_ready_count") or 0) > 0
@@ -808,6 +810,7 @@ def _preflight() -> dict[str, object]:
                 "blocked_count",
                 "blocked_task_ids",
                 "selection_idle_reason",
+                "work_complete",
             )
         },
         "optional_proof_infrastructure_is_launch_gate": False,
