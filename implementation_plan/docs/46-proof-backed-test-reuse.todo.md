@@ -509,7 +509,7 @@ their declared dependencies complete.
 - Preconditions: Immutable store and real certificate verification contracts are stable.
 - Effects: Queues or executes bounded real proving after a complete pass and stores verified results by CID.
 - Evidence subset: ProveKit CLI/FFI, Groth16 endpoint adapters, witness manager, timeout/retry and artifact validation
-- Acceptance: Endpoint/binary/cache outage records certificate_deferred without affecting the passed test; witness/public secret leakage is absent; retries are bounded/idempotent; only locally verified real outputs publish an index candidate.
+- Acceptance: Endpoint/binary/cache outage records certificate_deferred without affecting the passed test; witness/public secret leakage is absent; retries are bounded/idempotent; only locally verified real outputs publish an index candidate; negative leakage tests use reviewed synthetic canaries such as should-not-appear or test-only-api-key-value.
 
 ## PTR-043 Add the lazy datasets certificate provider adapter
 
