@@ -353,7 +353,7 @@ their declared dependencies complete.
 
 ## PTR-030 Adapt the trust-aware proof cache for test receipts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
