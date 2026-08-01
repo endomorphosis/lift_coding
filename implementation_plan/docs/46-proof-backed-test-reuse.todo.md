@@ -737,7 +737,7 @@ their declared dependencies complete.
 
 ## PTR-070 Bootstrap proof reuse in ipfs_datasets_py
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
