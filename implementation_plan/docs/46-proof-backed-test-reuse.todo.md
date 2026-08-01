@@ -961,7 +961,7 @@ their declared dependencies complete.
 
 ## PTR-100 Benchmark shadow and warm reuse
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
