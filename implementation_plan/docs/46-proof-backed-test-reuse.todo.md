@@ -609,7 +609,7 @@ their declared dependencies complete.
 
 ## PTR-052 Implement complete-pass receipt capture
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
