@@ -865,7 +865,7 @@ their declared dependencies complete.
 
 ## PTR-091 Run the invalidation mutation population
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
