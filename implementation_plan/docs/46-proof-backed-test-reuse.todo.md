@@ -321,7 +321,7 @@ their declared dependencies complete.
 
 ## PTR-022 Implement conservative reuse eligibility
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
