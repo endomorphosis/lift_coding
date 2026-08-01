@@ -289,7 +289,7 @@ their declared dependencies complete.
 
 ## PTR-021 Implement bounded runtime dependency tracing
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
