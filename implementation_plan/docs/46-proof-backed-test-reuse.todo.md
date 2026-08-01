@@ -641,7 +641,7 @@ their declared dependencies complete.
 
 ## PTR-053 Complete xdist coordination and reporting
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
