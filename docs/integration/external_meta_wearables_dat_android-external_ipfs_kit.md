@@ -14,6 +14,7 @@ runtime handoff behavior, and an integration test:
 - `docs/integration/external_meta_wearables_dat_android-external_ipfs_kit.md`
 - `data/hallucinate_multimodal_control/discovery/2026-07-08-hao-739-objective-validation-repair.md`
 - `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-739-attempt-6-objective-validation-repair.md`
+- `data/hallucinate_multimodal_control/discovery/2026-07-09-hao-739-attempt-8-objective-validation-repair.md`
 - `data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-validation-repair.md`
 - interface contract external/meta-wearables-dat-android external/ipfs_kit
 - `external/meta-wearables-dat-android/.cursor/rules/display-access.mdc`
@@ -105,3 +106,15 @@ Validation command:
 ```bash
 python -m pytest tests/integration -q
 ```
+
+## Attempt 8 Note
+
+Attempt 8 re-verified the proof stack against a clean worktree: the
+`interface contract external/meta-wearables-dat-android external/ipfs_kit`
+descriptors, the importable handoff, the integration test, and this doc all
+remained intact and passing. The only defect found was unrelated stray
+uncommitted WIP in the shared worktree touching a different goal
+(`VAIOS-G707` / HAO-740), which was reverted so that
+`python -m pytest tests/integration -q` collects and passes cleanly. See
+`data/hallucinate_multimodal_control/discovery/2026-07-09-hao-739-attempt-8-objective-validation-repair.md`
+for details.
