@@ -1025,7 +1025,7 @@ their declared dependencies complete.
 
 ## PTR-102 Publish the final current-tree authority gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
