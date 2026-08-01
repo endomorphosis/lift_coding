@@ -673,7 +673,7 @@ their declared dependencies complete.
 
 ## PTR-060 Add proof-backed supervisor validation authority
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
