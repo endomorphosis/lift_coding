@@ -203,6 +203,13 @@ def _write_fixture(
                 {
                     "passed": True,
                     "repository_tree": gate_tree,
+                    "producing_task_id": "PTR-122",
+                    "final_gate_criterion": (
+                        "ptr/final-current-tree-gate@1"
+                    ),
+                    "root_criterion": (
+                        "ptr/cross-repository-current-tree-gate@1"
+                    ),
                     "captured_at_unix_ns": 1_700_000_000_000_000_000,
                 },
                 indent=2,
@@ -624,25 +631,41 @@ def test_normal_diagnosis_requires_gate_and_evidence_artifacts(
     ]
 
 
-def test_ptr120_aggregate_artifacts_pass_and_extract_canonical_evidence(
+def test_ptr122_gate_with_ptr120_evidence_passes_and_extracts_canonical_ids(
     recon_mod: Any, tmp_path: Path
 ) -> None:
     paths = _write_fixture(tmp_path)
     tree = str(paths["tree_id"])
+    final_criterion = "ptr/final-current-tree-gate@1"
+    root_criterion = "ptr/cross-repository-current-tree-gate@1"
+
+    def final_evidence(goal_id: str, criterion: str) -> dict[str, Any]:
+        return {
+            "producing_task_id": "PTR-122",
+            "goal_id": goal_id,
+            "acceptance_criterion": criterion,
+            "satisfied_requirements": [criterion],
+            "authority": "authoritative",
+            "tree_id": tree,
+        }
+
     gate = {
         "schema": (
             "ipfs_accelerate_py/agent-supervisor/"
-            "proof-test-reuse-gate-records@1"
+            "proof-test-reuse-persisted-gate-bundle@1"
         ),
-        "interface": "ProofTestReuseObjectiveEvidence@1",
-        "binding": {
-            "repository_id": "repo:fixture",
-            "tree_id": tree,
-            "git_tree_id": tree,
-        },
-        "goals": {
-            goal_id: {"passed": True}
-            for goal_id in ALL_GOAL_IDS
+        "interface": "ProofTestReusePersistedGateBundle@1",
+        "producing_task_id": "PTR-122",
+        "tree_id": tree,
+        "git_tree_id": tree,
+        "decision": {
+            "passed": True,
+            "final_gate_completion_evidence": final_evidence(
+                "PTR-G110", final_criterion
+            ),
+            "root_completion_evidence": final_evidence(
+                "PTR-G000", root_criterion
+            ),
         },
     }
     evidence = {
@@ -710,19 +733,9 @@ def test_ptr120_aggregate_artifacts_pass_and_extract_canonical_evidence(
     assert rejected["reason_codes"] == ["missing_evidence:PTR-G010"]
 
 
-@pytest.mark.parametrize(
-    ("goal_id", "delete_goal", "expected_reason"),
-    (
-        ("PTR-G100", False, "gate_failed"),
-        ("PTR-G110", True, "incomplete_gate_artifact"),
-    ),
-)
-def test_ptr120_aggregate_gate_requires_every_explicit_pass(
+def test_ptr120_aggregate_gate_cannot_substitute_for_ptr122_final_gate(
     recon_mod: Any,
     tmp_path: Path,
-    goal_id: str,
-    delete_goal: bool,
-    expected_reason: str,
 ) -> None:
     paths = _write_fixture(tmp_path)
     tree = str(paths["tree_id"])
@@ -730,14 +743,11 @@ def test_ptr120_aggregate_gate_requires_every_explicit_pass(
         required_goal_id: {"passed": True}
         for required_goal_id in ALL_GOAL_IDS
     }
-    if delete_goal:
-        del goals[goal_id]
-    else:
-        goals[goal_id]["passed"] = False
     paths["gate"].write_text(
         json.dumps(
             {
                 "binding": {"tree_id": tree, "git_tree_id": tree},
+                "producing_task_id": "PTR-120",
                 "goals": goals,
             },
             indent=2,
@@ -752,7 +762,7 @@ def test_ptr120_aggregate_gate_requires_every_explicit_pass(
     ).diagnose()
 
     assert result["passed"] is False
-    assert result["reason_codes"] == [expected_reason]
+    assert result["reason_codes"] == ["wrong_gate_producer"]
 
 
 def test_report_only_via_cli(

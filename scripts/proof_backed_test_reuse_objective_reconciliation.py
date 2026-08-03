@@ -68,6 +68,11 @@ OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT: Final = (
 
 ROOT_GOAL_ID: Final = "PTR-G000"
 FINAL_GATE_GOAL_ID: Final = "PTR-G110"
+FINAL_GATE_TASK_ID: Final = "PTR-122"
+FINAL_GATE_ACCEPTANCE_CRITERION: Final = "ptr/final-current-tree-gate@1"
+ROOT_ACCEPTANCE_CRITERION: Final = (
+    "ptr/cross-repository-current-tree-gate@1"
+)
 CHILD_GOAL_IDS: Final = tuple(
     f"PTR-G{index:03d}" for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 )
@@ -591,42 +596,98 @@ def _artifact_reason_code(
     return f"invalid_{artifact_kind}_artifact"
 
 
+def _final_gate_completion_evidence_is_admissible(
+    value: Any,
+    *,
+    goal_id: str,
+    criterion: str,
+    expected_tree: str,
+) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    tree = str(
+        value.get("tree_id")
+        or value.get("git_tree_id")
+        or value.get("repository_tree")
+        or ""
+    ).strip()
+    satisfied = value.get("satisfied_requirements")
+    return bool(
+        value.get("producing_task_id") == FINAL_GATE_TASK_ID
+        and value.get("goal_id") == goal_id
+        and value.get("acceptance_criterion") == criterion
+        and value.get("authority") == "authoritative"
+        and isinstance(satisfied, Sequence)
+        and not isinstance(satisfied, (str, bytes))
+        and tuple(satisfied) == (criterion,)
+        and tree
+        and (not expected_tree or tree == expected_tree)
+    )
+
+
 def _gate_artifact_readiness(
     payload: Mapping[str, Any],
+    *,
+    expected_tree: str = "",
 ) -> tuple[bool, str, str]:
-    """Validate either the PTR-120 aggregate gate or strict fixture gate."""
+    """Validate a PTR-122 persisted bundle or strict hermetic fixture gate."""
 
-    if "goals" in payload:
-        goals = payload.get("goals")
-        if not isinstance(goals, Mapping):
+    if "decision" in payload:
+        if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
+            return (
+                False,
+                "wrong_gate_producer",
+                "final gate bundle must be produced by PTR-122",
+            )
+        decision = payload.get("decision")
+        if not isinstance(decision, Mapping):
             return (
                 False,
                 "invalid_gate_artifact",
-                "aggregate gate artifact 'goals' must be an object",
+                "final gate bundle decision must be an object",
             )
-        missing = [goal_id for goal_id in ALL_GOAL_IDS if goal_id not in goals]
-        if missing:
+        if decision.get("passed") is not True:
+            return False, "gate_failed", "final gate decision did not pass"
+        final_evidence = decision.get("final_gate_completion_evidence")
+        root_evidence = decision.get("root_completion_evidence")
+        if not _final_gate_completion_evidence_is_admissible(
+            final_evidence,
+            goal_id=FINAL_GATE_GOAL_ID,
+            criterion=FINAL_GATE_ACCEPTANCE_CRITERION,
+            expected_tree=expected_tree,
+        ):
             return (
                 False,
-                "incomplete_gate_artifact",
-                "aggregate gate artifact is missing required goals: "
-                + ", ".join(missing),
+                "invalid_final_gate_evidence",
+                "PTR-122 bundle lacks admissible PTR-G110 completion evidence",
             )
-        not_passed = [
-            goal_id
-            for goal_id in ALL_GOAL_IDS
-            if not isinstance(goals.get(goal_id), Mapping)
-            or goals[goal_id].get("passed") is not True
-        ]
-        if not_passed:
+        if not _final_gate_completion_evidence_is_admissible(
+            root_evidence,
+            goal_id=ROOT_GOAL_ID,
+            criterion=ROOT_ACCEPTANCE_CRITERION,
+            expected_tree=expected_tree,
+        ):
             return (
                 False,
-                "gate_failed",
-                "aggregate gate artifact lacks explicit passing decisions for: "
-                + ", ".join(not_passed),
+                "invalid_root_gate_evidence",
+                "PTR-122 bundle lacks admissible PTR-G000 completion evidence",
             )
         return True, "", ""
 
+    if "goals" in payload:
+        return (
+            False,
+            "wrong_gate_producer",
+            "PTR-120 aggregate goal records are inputs to, not substitutes "
+            "for, the PTR-122 final current-tree gate",
+        )
+
+    if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
+        return (
+            False,
+            "wrong_gate_producer",
+            "final gate artifact must be produced by PTR-122",
+        )
     if "passed" not in payload:
         return (
             False,
@@ -635,6 +696,16 @@ def _gate_artifact_readiness(
         )
     if payload.get("passed") is not True:
         return False, "gate_failed", "gate artifact does not report passed=true"
+    if (
+        payload.get("final_gate_criterion")
+        != FINAL_GATE_ACCEPTANCE_CRITERION
+        or payload.get("root_criterion") != ROOT_ACCEPTANCE_CRITERION
+    ):
+        return (
+            False,
+            "invalid_gate_criteria",
+            "final gate artifact lacks the exact PTR-G110/PTR-G000 criteria",
+        )
     return True, "", ""
 
 
@@ -1881,7 +1952,10 @@ class ProofTestReuseObjectiveReconciler:
                 payload = _read_json(path)
                 if artifact_kind == "gate":
                     gate_ok, gate_reason, gate_detail = (
-                        _gate_artifact_readiness(payload)
+                        _gate_artifact_readiness(
+                            payload,
+                            expected_tree=tree,
+                        )
                     )
                     if not gate_ok:
                         reason_codes.append(gate_reason)
@@ -2014,7 +2088,10 @@ class ProofTestReuseObjectiveReconciler:
                 ],
             }
         payload = _read_json(self.gate_path)
-        gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(payload)
+        gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(
+            payload,
+            expected_tree=repository_tree,
+        )
         if not gate_ok:
             return {
                 "admitted": False,
