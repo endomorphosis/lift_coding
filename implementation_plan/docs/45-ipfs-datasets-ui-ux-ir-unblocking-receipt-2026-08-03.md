@@ -17,27 +17,31 @@ completion-gate artifacts are reviewed.
 ## Accelerator routing baseline
 
 `ipfs_accelerate_py` commit
-`6f02790280e2a3ac02ebeab853831e5aef3b3f3f` establishes the production route:
+`70f341a16bf983e4117b3caf133a17e4f08ed0f6` establishes the production route.
+It records both the UIIR-recovery and concurrent quota-routing histories while
+retaining the independently audited tree from merge commit
+`87418b98a789d6e7f49ae02e7adb38bfa75d1f43`:
 
 - primary implementation provider: exact `grok-4.5`;
 - fallback provider: exact `gpt-5.6-terra` with medium reasoning;
-- fallback authority: only a bounded, prompt-free, structured result produced
-  by the same native Grok invocation and proving hard quota exhaustion;
+- fallback authority: only the native Grok process's exact structured stdout
+  result proving HTTP 402 balance exhaustion;
 - no fallback for missing CLI, authentication failure, HTTP 429/rate limiting,
   transient failure, malformed result, generic nonzero exit, or incidental
   prompt/tool/log text;
 - no fallback to Copilot, Goose, or any third provider;
 - missing Grok or Terra is a pre-provider, non-consuming deferral;
-- Terra changed, unchanged, and timeout-salvaged outcomes are held as
-  content-addressed proposals and cannot merge or complete a task; and
-- repository-wide rescue refs and durable hold records fail closed across lane,
-  task-display-ID, checkout, and process restarts.
+- Terra is proposal-only and cannot write, merge, consume an attempt, complete
+  a task, or approve its own output;
+- a durable pending latch prevents Terra reinvocation and requires independent
+  non-Codex review before any effect can be admitted; and
+- native Linux `/proc` subreaper confinement prevents detached provider
+  descendants from escaping the bounded invocation.
 
 The production launch recipe pins:
 
 ```text
-IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER=auto
-IPFS_ACCELERATE_AGENT_GROK_MODEL=grok-4.5
+--production-provider-policy grok-implement-codex-independent-review
 ```
 
 The exact independent Codex `gpt-5.6-sol` review remains a separate acceptance
@@ -46,12 +50,15 @@ proposal.
 
 Verification on the committed accelerator bytes:
 
-- 671 supervisor/runner tests passed;
-- 22 routing, quota, hold, restart, and reconciliation tests passed in the
-  focused final matrix;
-- Python compilation passed;
+- 646/646 daemon-port tests passed;
+- 158/158 focused provider-routing, exact-quota, latch, and native-confinement
+  tests passed;
+- the broad 19-file integration matrix passed 410 tests before identifying one
+  stale explicit-provider fixture; the corrected full runner file then passed
+  32/32;
+- Python compilation and critical Ruff `E9,F63,F7,F82` checks passed;
 - `git diff --check` passed; and
-- an independent review approved the corrected timeout-held cleanup path.
+- an independent security re-audit approved the quota-only production route.
 
 ## UIR-010 recovery
 

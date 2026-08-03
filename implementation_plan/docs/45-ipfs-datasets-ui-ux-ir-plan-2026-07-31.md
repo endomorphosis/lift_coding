@@ -695,6 +695,7 @@ python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon 
   --todo-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md \
   --task-source-kind legacy-markdown \
   --task-prefix UIR- \
+  --production-provider-policy grok-implement-codex-independent-review \
   --state-dir data/agent_supervisor/ui_ux_ir/state \
   --state-prefix uiir_dry_run \
   --worktree-root data/agent_supervisor/ui_ux_ir/worktrees/dry-run \
@@ -727,18 +728,19 @@ the supervisor must not silently merge divergent nested histories. Do not rely
 on the daemon's `main`/`master` fallback when the reviewed work lives on another
 branch.
 
-Production implementation routing is fail closed. Set the provider to `auto`
-and pin Grok to `grok-4.5`; this makes Grok the primary implementation provider.
-The only fallback is the supervisor-owned `gpt-5.6-terra` command with medium
-reasoning, and it is eligible only after the same native Grok invocation emits
-a verified structured hard-quota result. Missing executables, authentication
-failures, HTTP 429/rate limiting, transient failures, malformed results,
-generic nonzero exits, and prompt or tool text do not authorize fallback. A
-Terra result is retained as a content-addressed proposal and cannot merge or
-mark a task complete. It remains held until an invocation-bound independent
-non-Codex review-resolution transport is implemented. The separate exact Codex
-`gpt-5.6-sol` implementation review remains an acceptance gate and is neither a
-Terra fallback nor bypassed by one.
+Production implementation routing is fail closed and must select the typed
+`grok-implement-codex-independent-review` policy. Implementation is pinned to
+Grok `grok-4.5`. Grok may yield a Terra proposal only when the native,
+structured Grok result proves an exact HTTP 402 balance exhaustion; stderr
+text, HTTP 429, authentication failures, missing executables, malformed output,
+and generic nonzero exits are not fallback authority. The fallback is pinned to
+`gpt-5.6-terra` with `medium` reasoning and runs proposal-only: it cannot write,
+merge, consume an attempt, or approve its own output. Its durable pending latch
+requires an independent non-Codex review before any effect can be admitted.
+The separate independent implementation review remains pinned to Codex
+`gpt-5.6-sol`; Terra cannot substitute for or bypass it. Raw fallback commands
+are disabled, and production execution requires Linux `/proc` confinement so
+detached provider descendants cannot escape the native subreaper.
 
 The required accelerator baseline includes a fail-closed, pre-provider
 submodule ancestry check. For each configured submodule containing a task-owned
@@ -759,12 +761,12 @@ runs against the actual integration baseline.
 UIIR_MERGE_TARGET_BRANCH=agent/ui-ux-ir  # create and review this branch first
 
 for lane in 0 1 2 3 4 5; do
-  IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER=auto \
-  IPFS_ACCELERATE_AGENT_GROK_MODEL=grok-4.5 \
-  PYTHONPATH=external/ipfs_accelerate \
+  mkdir -p "data/agent_supervisor/ui_ux_ir/state/lane-${lane}"
+  nohup env PYTHONPATH=external/ipfs_accelerate \
   python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor \
     --todo-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md \
     --task-prefix UIR- \
+    --production-provider-policy grok-implement-codex-independent-review \
     --state-dir "data/agent_supervisor/ui_ux_ir/state/lane-${lane}" \
     --state-prefix "uiir_lane_${lane}" \
     --worktree-root "data/agent_supervisor/ui_ux_ir/worktrees/lane-${lane}" \
@@ -785,9 +787,10 @@ for lane in 0 1 2 3 4 5; do
     --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-plan-2026-07-31.md \
     --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.objectives.md \
     --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md \
-    --implement &
+    --implement \
+    >> "data/agent_supervisor/ui_ux_ir/state/lane-${lane}/uiir_lane_${lane}_launcher.log" 2>&1 &
+  echo "lane ${lane} supervisor pid $!"
 done
-wait
 ```
 
 Only launch implementation after inspecting the dry-run dependency,
