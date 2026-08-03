@@ -17,8 +17,9 @@ completion-gate artifacts are reviewed.
 ## Accelerator routing baseline
 
 `ipfs_accelerate_py` commit
-`16fe3e4b938913c18535a564feba22a8a0c0deaf` establishes the production route
-and the final UIIR recovery behavior. It merges the durable passive-hold fix
+`8a68d43d2ca743ef6b70c65ac1ffca3c017ba2f8` is the published production-route
+and recovery checkpoint. It descends from
+`16fe3e4b938913c18535a564feba22a8a0c0deaf`, which merges the passive-hold fix
 `97176e9ee25b7b7bdba18ffcd8574a52a2afb0ec` with the independently audited
 composite-review fix `65aaf4a5d1f33bec799e911ccf3ea1e2d45ddbc1`, on top of the quota-routing
 baseline `70f341a16bf983e4117b3caf133a17e4f08ed0f6`:
@@ -34,13 +35,17 @@ baseline `70f341a16bf983e4117b3caf133a17e4f08ed0f6`:
 - missing Grok or Terra is a pre-provider, non-consuming deferral;
 - Terra is proposal-only and cannot write, merge, consume an attempt, complete
   a task, or approve its own output;
-- a durable pending latch prevents Terra reinvocation and requires independent
-  non-Codex review before any effect can be admitted; and
+- a state-bound pending latch prevents Terra reinvocation while its exact
+  proposal artifact remains present, and no effect can be admitted without a
+  future independent non-Codex review protocol; and
 - native Linux `/proc` subreaper confinement prevents detached provider
   descendants from escaping the bounded invocation.
 
 The recovery additions also:
 
+- fence completed post-merge correction repairs to their exact origin event
+  stream, so the five foreign lanes cannot emit repeated authority deferrals
+  for a capability they cannot consume;
 - passively hold an unchanged, non-retryable post-merge structural failure so
   reconciliation does not rerun validation, invoke a provider, or append the
   same event indefinitely;
@@ -70,11 +75,9 @@ proposal.
 
 Verification on the committed accelerator bytes:
 
-- 652/652 daemon-port tests passed;
-- 58/58 post-merge-review tests and 37/37 authoritative-completion tests passed
-  (95/95 combined);
-- 105/105 production provider/security/confinement tests and 57/57 exact
-  default-route/capacity tests passed (162/162 combined);
+- 653/653 daemon-port tests passed, including the new foreign-lane regression;
+- 251/251 combined production routing, security, confinement, default-route,
+  capacity, post-merge-review, and authoritative-completion tests passed;
 - real malicious replacement-ref and legacy-graft ancestry forgeries were
   rejected, as were mutated event generations, boolean generations, and
   mutated completed-row generations;
@@ -112,29 +115,49 @@ accelerator commit can reconstruct only the exact consumed operator postimage,
 run fresh canonical validation, and request a fresh independent review; it
 cannot reuse the prior structural failure or manufacture acceptance.
 
+The fresh review denied the current schema at event 1921
+(`sha256:3c17e7892cfa804387554be010f5d73e2e6b5818e23f7647d8ff5758fbb1a6b2`)
+with five findings: incomplete reference closure, mutable mappings, unenforced
+set uniqueness, executable/non-JSON bypasses, and modality-direction mismatch.
+Correction attempt 2 then failed at event 1958
+(`sha256:6b2cd775ae74b67b210714157217a9af90eb2da5d2885093eebcb9d531db57fa`)
+because the landed-task guard correctly refused blind reimplementation but the
+typed production packet did not yet carry the bound correction evidence. Its
+durable correction head is `correction_failed`. No attempt 3 is authorized and
+the services remain stopped; adding or completing `UIR-085` before a reviewed
+correction-packet route would only spend another attempt on the same guard.
+
 ## Remaining gates
 
 `UIR-002` is also integrated and freshly validated, but its exact independent
 Codex review is quota-deferred until `2026-08-10T05:23:00Z`. There is no attempt
 6 and the latest durable state remains acceptance-pending.
 
-The Terra proposal registry currently has no authenticated approval/rejection
-resolution lifecycle. This prevents unsafe self-approval, but it also means a
-Terra-produced proposal remains held indefinitely and the bounded registry can
-eventually reach its 1,024-record limit. End-to-end Terra unblocking therefore
-requires a future invocation-bound independent non-Codex review transport with
-durable approve/reject transitions. No caller-supplied content identifier is
-accepted as review authority.
+The Terra proposal state currently has no authenticated approval/rejection
+resolution lifecycle. This prevents unsafe self-approval, but deletion of the
+mutable proposal artifact can clear the latch and permit re-invocation.
+End-to-end Terra unblocking therefore requires an invocation-bound independent
+non-Codex review transport with durable approve/reject transitions and an
+immutable artifact binding. No caller-supplied content identifier is accepted
+as review authority. A larger uncommitted resolver prototype remains
+quarantined because its unsigned rejection event could be forged for denial of
+service; it is not part of the published checkpoint.
 
 ## Deployment checkpoint
 
 The previous six-lane fleet was stopped before changing the protected plan or
-parent accelerator gitlink. A final isolated, non-implementation scheduler pass
-against the new gitlink exited zero with 48 tasks, 2 authoritative completions,
-2 ready tasks, 44 dependency-waiting tasks, and no provider invocation.
+parent accelerator gitlink. The last isolated, non-implementation scheduler
+pass exited zero with 48 tasks and 2 authoritative completions. The durable
+UIR-010 failure was discovered after that projection, so its optimistic ready
+status must not be used to restart the fleet. A new copied-state dry run is
+required after the correction-packet route and exact `UIR-085` repair record
+exist; no provider invocation or production-state mutation is authorized by
+this receipt.
 
 The launch recipe now uses collected transient user-systemd services with
 control-group shutdown and `Restart=on-failure`; it no longer relies on
-unowned `nohup` processes. The six services are started only after the reviewed
-gitlink, plan, and this receipt are committed. Runtime acceptance results remain
-durable state evidence and do not retroactively alter this pre-launch receipt.
+unowned `nohup` processes. The six services remain stopped. They may be
+restarted only after the reviewed gitlink, plan, and receipt are committed and
+copied-state correction recovery passes idempotently on the origin lane without
+foreign-lane events. Runtime acceptance results remain durable state evidence
+and do not retroactively alter this pre-launch receipt.

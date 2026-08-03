@@ -735,12 +735,23 @@ structured Grok result proves an exact HTTP 402 balance exhaustion; stderr
 text, HTTP 429, authentication failures, missing executables, malformed output,
 and generic nonzero exits are not fallback authority. The fallback is pinned to
 `gpt-5.6-terra` with `medium` reasoning and runs proposal-only: it cannot write,
-merge, consume an attempt, or approve its own output. Its durable pending latch
-requires an independent non-Codex review before any effect can be admitted.
+merge, consume an attempt, or approve its own output. Its current state-bound
+pending latch prevents duplicate invocation only while the exact artifact is
+present; an immutable authenticated approve/reject lifecycle remains required
+before any Terra-authored effect can be admitted.
 The separate independent implementation review remains pinned to Codex
 `gpt-5.6-sol`; Terra cannot substitute for or bypass it. Raw fallback commands
 are disabled, and production execution requires Linux `/proc` confinement so
 detached provider descendants cannot escape the native subreaper.
+
+The published accelerator checkpoint for this policy is
+`8a68d43d2ca743ef6b70c65ac1ffca3c017ba2f8`. It also fences completed
+post-merge correction repairs to their origin event stream, preventing foreign
+lanes from amplifying a lane-local authorization failure. The six-lane fleet
+remains stopped: `UIR-010` has a durable `correction_failed` head from attempt
+2, and its exact `UIR-085` repair must not be completed until the typed packet
+route carries the bound five-finding correction evidence through provider
+review and write admission.
 
 The required accelerator baseline includes a fail-closed, pre-provider
 submodule ancestry check. For each configured submodule containing a task-owned
