@@ -1786,7 +1786,7 @@ proof-reuse-off validations and managed merge provenance exist.
 
 ## PTR-143 Attach stable locator-first collection seeds
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
