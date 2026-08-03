@@ -1443,7 +1443,7 @@ test.
 
 ## PTR-133 Harden kit candidate-context artifact transport
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
