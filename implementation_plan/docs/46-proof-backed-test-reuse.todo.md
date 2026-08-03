@@ -2112,7 +2112,7 @@ it never blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-153 Preserve proof-bearing issuance material across the lazy real issuer
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
