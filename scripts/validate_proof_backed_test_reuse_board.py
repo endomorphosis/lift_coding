@@ -368,6 +368,24 @@ def validate(
         errors.append("parallelRuntime.laneCount must be 3")
     if parallel.get("strictTaskSharding") is not True:
         errors.append("parallelRuntime.strictTaskSharding must be true")
+    runtime_providers = tuple(parallel.get("providers") or ())
+    if runtime_providers != ("grok-codex",) * 3:
+        errors.append(
+            "parallelRuntime.providers must configure three Grok-primary, "
+            "Codex-fallback lanes"
+        )
+    canonical_provider_roles = tuple(
+        parallel.get("canonicalTaskProviderRolesByShard") or ()
+    )
+    if canonical_provider_roles != (
+        "codex-implement",
+        "grok-implement",
+        "codex-implement",
+    ):
+        errors.append(
+            "canonicalTaskProviderRolesByShard must retain the sealed task "
+            "identity roles"
+        )
     if parallel.get("objectiveRefillEnabled") is not False:
         errors.append("objective refill must be disabled for the sealed board")
     if parallel.get("codebaseRefillEnabled") is not False:
@@ -693,16 +711,15 @@ def validate(
                 errors.append("PTR-000 provider role must be operator-only")
         elif lane_count := int(parallel.get("laneCount") or 0):
             shard_index = int(task.task_id.rsplit("-", 1)[1]) % lane_count
-            lane_provider = str(parallel.get("providers", [])[shard_index])
             expected_role = (
-                "grok-implement"
-                if lane_provider in {"grok", "grok-build"}
-                else "codex-implement"
+                str(canonical_provider_roles[shard_index])
+                if shard_index < len(canonical_provider_roles)
+                else ""
             )
             if provider_role != expected_role:
                 errors.append(
                     f"{task.task_id} provider role {provider_role!r} does not "
-                    f"match shard {shard_index} provider {lane_provider!r}"
+                    f"match sealed shard {shard_index} role {expected_role!r}"
                 )
         submodules = frozenset(_csv(task.metadata.get("submodules")))
         submodules_by_task[task.task_id] = submodules

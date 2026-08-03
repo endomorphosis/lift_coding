@@ -251,15 +251,20 @@
     "implementationTimeoutSeconds": 7200,
     "implementationMaxTimeoutSeconds": 10800,
     "implementationLogStallSeconds": 1200,
-    "maxTaskAttempts": 3,
+    "maxTaskAttempts": 5,
     "implementationRetryBudget": 3,
     "validationRetryBudget": 3,
     "mergeRetryBudget": 3,
     "mergeReconciliationMaxMerges": 1,
     "providers": [
-      "codex",
-      "grok-build",
-      "codex"
+      "grok-codex",
+      "grok-codex",
+      "grok-codex"
+    ],
+    "canonicalTaskProviderRolesByShard": [
+      "codex-implement",
+      "grok-implement",
+      "codex-implement"
     ],
     "worktreeSubmodulePaths": [
       "external/ipfs_accelerate",

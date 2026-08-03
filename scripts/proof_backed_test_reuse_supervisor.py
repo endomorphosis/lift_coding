@@ -23,6 +23,16 @@ ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 KIT_ROOT = REPO_ROOT / "external" / "ipfs_kit"
 CONFIG_PATH = REPO_ROOT / "config" / "proof_backed_test_reuse_supervisor.json"
+GROK_CODEX_PROVIDER_POLICIES = frozenset(
+    {
+        "grok-codex",
+        "grok_codex",
+        "grok->codex",
+        "grok→codex",
+        "grok-then-codex",
+        "grok_then_codex",
+    }
+)
 
 
 def _load_config() -> dict[str, object]:
@@ -60,6 +70,18 @@ LANES = tuple(
         "name": f"ptr_lane_{index}",
         "shard": index,
         "provider": str(PARALLEL["providers"][index]),
+        "primary_provider": (
+            "grok"
+            if str(PARALLEL["providers"][index])
+            in GROK_CODEX_PROVIDER_POLICIES
+            else str(PARALLEL["providers"][index])
+        ),
+        "fallback_provider": (
+            "codex"
+            if str(PARALLEL["providers"][index])
+            in GROK_CODEX_PROVIDER_POLICIES
+            else ""
+        ),
     }
     for index in range(int(PARALLEL["laneCount"]))
 )
@@ -75,7 +97,10 @@ def _runtime_environment(provider: str | None = None) -> dict[str, str]:
         environment[str(key)] = str(value)
     if provider:
         environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"] = provider
-        if provider == "grok-build":
+        if (
+            provider == "grok-build"
+            or provider in GROK_CODEX_PROVIDER_POLICIES
+        ):
             grok_binary = shutil.which("grok")
             if grok_binary:
                 environment["IPFS_ACCELERATE_AGENT_GROK_BIN"] = grok_binary
@@ -221,21 +246,33 @@ def _provider_preflight() -> dict[str, object]:
     codex_binary = shutil.which("codex")
     grok_binary = shutil.which("grok")
     if not codex_binary:
-        raise RuntimeError("Codex CLI is required by configured PTR lanes")
-    if not grok_binary:
-        raise RuntimeError("Grok CLI is required by configured PTR lanes")
+        raise RuntimeError(
+            "Codex CLI is required as the PTR supervisor fallback provider"
+        )
     codex_status = _run(
         [codex_binary, "login", "status"],
         environment=_runtime_environment(),
         timeout=30,
     )
-    grok_version = _run(
-        [grok_binary, "--version"],
-        environment=_runtime_environment(),
-        timeout=30,
-    )
     if "logged in" not in (codex_status.stdout + codex_status.stderr).lower():
-        raise RuntimeError("Codex CLI did not report an authenticated session")
+        raise RuntimeError(
+            "Codex fallback CLI did not report an authenticated session"
+        )
+
+    grok_version_text = ""
+    if grok_binary:
+        try:
+            grok_version = _run(
+                [grok_binary, "--version"],
+                environment=_runtime_environment(),
+                check=False,
+                timeout=30,
+            )
+            grok_version_text = (
+                grok_version.stdout + grok_version.stderr
+            ).strip()
+        except (OSError, subprocess.SubprocessError) as exc:
+            grok_version_text = f"unavailable: {type(exc).__name__}"
 
     if str(ACCEL_ROOT) not in sys.path:
         sys.path.insert(0, str(ACCEL_ROOT))
@@ -244,11 +281,9 @@ def _provider_preflight() -> dict[str, object]:
             _grok_cli_available,
         )
 
-        grok_authenticated = bool(_grok_cli_available())
+        grok_authenticated = bool(grok_binary and _grok_cli_available())
     except Exception:
         grok_authenticated = False
-    if not grok_authenticated:
-        raise RuntimeError("Grok CLI is configured for a lane but is not authenticated")
 
     optional = {
         "multiformats": importlib.util.find_spec("multiformats") is not None,
@@ -267,9 +302,17 @@ def _provider_preflight() -> dict[str, object]:
         "duckdb": duckdb.__version__,
         "codex": codex_binary,
         "codex_status": (codex_status.stdout + codex_status.stderr).strip(),
-        "grok": grok_binary,
-        "grok_version": (grok_version.stdout + grok_version.stderr).strip(),
+        "grok": grok_binary or "",
+        "grok_version": grok_version_text,
         "grok_authenticated": grok_authenticated,
+        "provider_policy": {
+            "primary": "grok",
+            "fallback": "codex",
+            "effective_first_provider": (
+                "grok" if grok_authenticated else "codex"
+            ),
+            "grok_unavailable_action": "use_codex",
+        },
         "optional_non_blocking_capabilities": optional,
     }
 
@@ -708,6 +751,8 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "lane": lane_name,
         "shard": lane["shard"],
         "provider": lane["provider"],
+        "primary_provider": lane["primary_provider"],
+        "fallback_provider": lane["fallback_provider"],
         "healthy": healthy,
         "supervisor_pid": supervisor_pid or None,
         "supervisor_owned_and_alive": supervisor_owned,
@@ -1059,6 +1104,8 @@ def _start() -> dict[str, object]:
                     "lane": lane["name"],
                     "pid": _launch_lane(lane),
                     "provider": lane["provider"],
+                    "primary_provider": lane["primary_provider"],
+                    "fallback_provider": lane["fallback_provider"],
                 }
             )
         status = _verify_started()
