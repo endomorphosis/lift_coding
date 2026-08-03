@@ -21,7 +21,7 @@
 
 ## Repaired supervisor and published recovery support
 
-- Accelerator commit prepared for final reconciliation: `efed1917260c1bf68483c22e6b21485f9bc53de7` (descendant of `0d8e6f189d772163210b177722a8cf589744d635`)
+- Accelerator commit prepared for final reconciliation: `5495615ba710fb76980957929ca8a2a47ed8f9e8` (descendant of `0d8e6f189d772163210b177722a8cf589744d635`)
 - Accelerator branch: `origin/agent/ui-ux-ir-supervisor-pin-port`
 - Pre-repair UIIR accelerator pin: `753c5fd03db4c0f257fd11ead673a3ad27f1d053`
 - UIIR accelerator pin before final publication: `8506f7ffefb64df255a0de4d7b9886d3057c19a0`
@@ -35,6 +35,8 @@
 - Independent affected regression sweep: `144 passed`, `0 failed`
 - Composite-recovery implementation and review regression: `689 passed`, `0 failed`
 - Final composite post-merge review regression: `45 passed`, `0 failed`
+- Exact-provider/router/child compatibility regression: `204 passed`, `0 failed`, `1` opt-in live test skipped
+- Isolated exact-provider subprocess regression: one failing `codex -m gpt-5.6-sol` invocation, zero Grok invocations
 - Static checks: `py_compile`, Ruff `E9/F63/F7/F82`, and `git diff --check` passed
 
 The repair permanently migrates the legacy denial-consumption witness, anchors the exact contiguous correction high-water, retains and revalidates both root and child recovery refs, fences target movement with an atomically published lease, and permits only the next content-bound correction grant. Its explicit migration path proves the exact historical source-task projection at every bindingless event baseline and at the frozen target, while permitting unrelated later board tasks; the automatic denial-consumption path retains its stricter whole-board rule. It does not turn the anchor itself into retry authority.
@@ -44,6 +46,10 @@ The later recovery commits admit only a ledger-bound zero-edit seed, distinguish
 Commit `c50f4747cc571e3c79244849a3918375b549e499` adds a separate `verified-composite-recovery-implementer-provenance@1` proof for the exact UIR-002 recovery. It binds the original Grok implementation events, the closed one-symbol deterministic correction, repair grant and consumption, immutable seed and integration boundary, current target ancestry and gitlink, and a fresh completed-queue witness. Processing-time witnesses cannot satisfy the proof, and ordinary provider provenance remains unchanged. This support permits the independent provider-review gate to evaluate the recovered implementation; it does not itself approve UIR-002.
 
 Commit `efed1917260c1bf68483c22e6b21485f9bc53de7` fixes the live activation path after a fail-closed dry run exposed a semantic mismatch: durable authority state names the original denied commit, not the later recovery seed. The verifier now requires that denied commit to remain a valid full Git identity while the grant, consumption, seed, and Git-lineage fields continue to bind the recovery commit exactly. The real immutable recovery envelope reconstructs successfully, and malformed denial identities still fail closed.
+
+The next acceptance-only reconciliation successfully minted the completed-queue recovery witness at sequence `2374`, event `sha256:bd1d169d373904842c76ad875c723db6ad05504c226d9ea8909106e5a8bc0249`, after fresh post-merge validation at sequence `2373`. It then failed closed at sequence `2375`: the reviewer requested exact `codex_cli`, but generic router error handling treated that explicit optional provider as eligible for remote failover and launched authenticated Grok after Codex failed. The child rejected the Grok result because its effective provider was not Codex, so no provider output was admitted and UIR-002 remained pending without an attempt 6.
+
+Commit `5a6a0859500e44094b6b11b467555855149c88ba` separates remote cross-provider fallback from local fallback, disables provider and model failover for the exact post-merge reviewer before dispatch, binds both fallback permissions into response-cache identity, pins the isolated child to the exact accelerator source tree, and uses the operator-reviewed `gpt-5.6-sol` Codex model. Commit `5495615ba710fb76980957929ca8a2a47ed8f9e8` preserves version-one envelope and positional-constructor compatibility: an omitted new field retains legacy failover, while the UIR reviewer explicitly records `false`. The real isolated-child regression proves a failed exact Codex call cannot launch Grok.
 
 ## Reviewed UIR-002 rescue
 
@@ -84,5 +90,7 @@ This unit-test receipt was review evidence, not dispatch authority and not a sub
 6. Acceptance reconciliation at sequences `2316` and `2317` confirms merge, freshness, semantic, proof, and deterministic-only gates. Only independent `provider_review` remains pending, so UIR-002 correctly stays `todo` rather than being marked complete early.
 7. No attempt 6 was created and no implementation start exists after sequence `2226`.
 8. The final idempotent queue reconciliation kept the request `completed`, queue attempt `2`, implementation attempt `5`, failure count `1`, and claim generation `7`, while normalizing the obsolete `merge_cleanup_failed` terminal reason to empty in both DuckDB and the completed JSON receipt. It neither claimed work nor changed implementation authority.
+9. After the composite verifier was activated, a later acceptance-only pass minted the exact completed recovery witness at sequence `2374`; this was evidence reconciliation, not an implementation attempt.
+10. The same pass rejected an unintended Grok reviewer fallback at sequence `2375`. Accelerator commits `5a6a0859500e44094b6b11b467555855149c88ba` and `5495615ba710fb76980957929ca8a2a47ed8f9e8` now fence the reviewer to one exact Codex/model route before any provider fallback can run.
 
 The initial post-merge consumer exposed one additional supervisor defect: producer attempt 5 materialized `external/ipfs_datasets`, `external/ipfs_accelerate`, `swissknife`, and `hallucinate_app`, while legacy queue metadata carried only the changed dataset path. The narrower consumer therefore omitted the unchanged accelerator from the first validation checkout and left three exact prunable sibling registrations. A read-only preflight re-proved the exact root, queue, attempt, gitlink, branch-tip, reflog, protection-ref, and porcelain bindings; compare-and-delete cleanup then removed those three registrations and their daemon-only branches plus the exact locked detached validation registration. The root commit and working-tree diff were unchanged, all commit tips remain protected, and no broad worktree prune was used. Producer dependency binding and cleanup lifecycle redesign remain a separately preserved follow-up; the unsafe broad draft was not published. This does not alter the successful integration or authorize another implementation attempt.
