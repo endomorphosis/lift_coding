@@ -1539,7 +1539,7 @@ test.
 
 ## PTR-136 Revalidate current context against retained candidates
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
