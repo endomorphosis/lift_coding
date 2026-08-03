@@ -1475,7 +1475,7 @@ test.
 
 ## PTR-134 Build lazy session-scoped default identity services
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
