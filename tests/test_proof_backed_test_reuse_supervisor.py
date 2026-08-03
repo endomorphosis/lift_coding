@@ -316,6 +316,40 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
     assert "providerPolicy" in errors
 
 
+def test_board_validator_seals_current_63_task_v4_correction_wave() -> None:
+    validator = _load_validator_module()
+
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        validator.TODO_PATH,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is True, result["errors"]
+    assert result["task_count"] == 63
+    assert result["completed_task_count"] == 59
+    assert result["current_claimable_task_ids"] == ["PTR-150", "PTR-151"]
+    assert result["current_claimable_shards"] == [0, 1]
+    assert result["reviewed_production_correction_task_ids"] == [
+        "PTR-150",
+        "PTR-151",
+        "PTR-152",
+    ]
+    assert result[
+        "reviewed_production_correction_wave_one_submodules"
+    ] == {
+        "PTR-150": ["external/ipfs_accelerate"],
+        "PTR-151": ["external/ipfs_datasets"],
+    }
+    assert result[
+        "reviewed_production_correction_wave_one_resource_width"
+    ] == 2
+    assert result["reviewed_production_correction_join_task_id"] == "PTR-152"
+    assert result["reviewed_operator_handoff_task_id"] == "PTR-149"
+    assert result["unordered_predicted_file_conflicts"] == []
+
+
 def test_status_exposes_exact_model_and_quota_only_fallback_policy(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -362,7 +396,7 @@ def test_status_rejects_stopped_completion_snapshot_from_stale_board(
     monkeypatch.setattr(
         supervisor,
         "_current_board_task_ids",
-        lambda: tuple(f"PTR-{index:03d}" for index in range(60)),
+        lambda: tuple(f"PTR-{index:03d}" for index in range(63)),
     )
     monkeypatch.setattr(
         supervisor,
@@ -382,7 +416,7 @@ def test_status_rejects_stopped_completion_snapshot_from_stale_board(
 
     status = supervisor._status_payload()
 
-    assert status["current_board_task_count"] == 60
+    assert status["current_board_task_count"] == 63
     assert status["work_complete"] is False
     assert status["globally_progressable"] is False
     assert all(
@@ -396,7 +430,7 @@ def test_status_rejects_live_selectable_snapshot_from_stale_board(
     monkeypatch.setattr(
         supervisor,
         "_current_board_task_ids",
-        lambda: tuple(f"PTR-{index:03d}" for index in range(60)),
+        lambda: tuple(f"PTR-{index:03d}" for index in range(63)),
     )
     monkeypatch.setattr(
         supervisor,
@@ -424,7 +458,7 @@ def test_status_rejects_live_selectable_snapshot_from_stale_board(
 def test_status_rejects_mixed_current_and_stale_live_lanes(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    current_ids = tuple(f"PTR-{index:03d}" for index in range(60))
+    current_ids = tuple(f"PTR-{index:03d}" for index in range(63))
     current_sha256 = supervisor._task_ids_sha256(current_ids)
     monkeypatch.setattr(
         supervisor, "_current_board_task_ids", lambda: current_ids
@@ -436,7 +470,7 @@ def test_status_rejects_mixed_current_and_stale_live_lanes(
             "lane": lane["name"],
             "healthy": True,
             "unhealthy_reasons": [],
-            "task_count": 53 if stale else 60,
+            "task_count": 53 if stale else 63,
             "completed_count": 53,
             "task_ids_sha256": None if stale else current_sha256,
             "active_task_id": None,
@@ -821,7 +855,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     inventory = supervisor._closeout_production_input_inventory()
 
     assert inventory["inventory_is_completion_authority"] is False
-    assert inventory["task_count"] == 60
+    assert inventory["task_count"] == 63
     assert inventory["goal_count"] == 12
     assert inventory["acceptance_requirement_count"] == 39
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -836,7 +870,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     validations = by_name[
         "fresh_current_tree_proof_reuse_off_validation_receipts"
     ]
-    assert validations["required_count"] == 60
+    assert validations["required_count"] == 63
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
     assert inventory["authoritative_materializer"]["configured"] is False

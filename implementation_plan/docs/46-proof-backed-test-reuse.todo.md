@@ -74,15 +74,18 @@ candidate, the default issuer had no real prover, and the purported e2e built a
 deterministic pseudo-certificate or manually injected item/services rather than
 running two independent direct-node pytest processes.
 
-The bounded corrective wave is `PTR-143` through `PTR-149`, bringing the sealed
-population to 60 tasks. Initially only `PTR-143` and `PTR-144` are claimable on
-numeric shards 2 and 0. After `PTR-143`, `PTR-145` and `PTR-146` become
-claimable on shards 1 and 2 while the datasets task may continue on shard 0;
-their predicted files are disjoint. `PTR-147` joins those three branches,
-followed by the genuine cross-repository e2e/benchmark in `PTR-148` and the
-operator handoff in `PTR-149`. Historical `PTR-142` evidence cannot satisfy the
-new production-activation premise. All seven tasks remain open until their own
-proof-reuse-off validations and managed merge provenance exist.
+The reviewed corrective population now covers `PTR-143` through `PTR-152`, with
+the dependency-ordered `PTR-149` operator handoff deliberately last, bringing
+the sealed population to 63 tasks. `PTR-143` through `PTR-148` retain their
+historical completion identities, but their pre-v4 evidence cannot authorize
+closeout. The current claimable wave is exactly `PTR-150` and `PTR-151` on
+numeric shards 0 and 1, owning accelerator and datasets without predicted-file
+overlap. `PTR-152` joins both branches on shard 2, then `PTR-149` evaluates the
+exact 63-task authority gate. Historical `PTR-142`, 53-task, or pre-v4 60-task
+evidence cannot satisfy this production-activation premise. Missing trusted
+setup, reviewed current v4 keys, native compiler, network, endpoint, cache, or
+optional package always leaves a typed activation gap and runs tests; it never
+blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-000 Seal the supervisor-native program
 
@@ -1976,7 +1979,7 @@ proof-reuse-off validations and managed merge provenance exist.
 - Evidence subset: Installed/source-tree accelerator, datasets and kit bootstrap, direct node selection, persistent isolated cache, real local Groth16 proof, body side-effect log, pytest terminal outcomes, missing-backend fail-open case and perf-counter samples
 - Acceptance: For one unmodified direct node in each repository, with no set_proof_reuse_services call, item monkeypatch, lookup request fixture, fake verifier, pseudo-certificate, or per-test registry, the first independent pytest process reports one pass, executes the body once, captures a complete trace and publishes a locally verified real Groth16 certificate; the second process using the same cache reports exactly one standard proof-cache skip and the body log remains one line; missing Groth16 runs and passes the test on both invocations without blocking; measured subprocess samples derive from actual cold execution and warm verification, retain raw timings, show zero false skips and demonstrate positive saved wall time without synthetic constants; and all three repository bootstraps satisfy the same assertions.
 
-## PTR-149 Refresh live capability reporting, the 60-task gate, and operator handoff
+## PTR-149 Refresh live capability reporting, the 63-task gate, and operator handoff
 
 - Status: todo
 - Completion: manual
@@ -1984,7 +1987,7 @@ proof-reuse-off validations and managed merge provenance exist.
 - Review only: false
 - Priority: P0
 - Track: production-activation-authority-closeout
-- Depends on: PTR-148
+- Depends on: PTR-152
 - Goal id: PTR-G110
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/docs/architecture/TEST_PROOF_REUSE_RUNTIME_ACTIVATION_HANDOFF.md
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_subprocess_benchmark.py -q
@@ -1997,13 +2000,109 @@ proof-reuse-off validations and managed merge provenance exist.
 - Predicted symbols: ProofReuseRuntimeActivationReport, proof_reuse_runtime_activation_report, PRODUCTION_RUNTIME_ACTIVATION_TASK_IDS, production activation operator handoff
 - Interfaces: ProofReuseServices@1, ProofReuseRuntimeActivationReport@1, ProofTestReuseCurrentTreeGateDecision@1, ProofReuseBenchmarkReceipt@1
 - Submodules: external/ipfs_accelerate
-- Generated artifacts: live typed capability report, genuine production-activation evidence packet, exact 60-task gate vectors and corrected operator runbook
+- Generated artifacts: live typed capability report, genuine production-activation evidence packet, exact 63-task gate vectors, truthful activation-gap packet and corrected operator runbook
 - Conflict policy: Report only capabilities actually composed and probed in the current process/tree; source-symbol presence, historical PTR-142 fixtures, task labels, simulated proof and optimistic booleans are inadmissible, and only the existing outer controller may write objective lifecycle state.
 - Symbolic first: true
 - LLM context budget bytes: 65536
 - Provider role: codex-implement
 - Context budget tokens: 16384
-- Preconditions: PTR-148 produced genuine current-tree three-repository cold/warm and measured benchmark evidence after all six implementation branches closed.
-- Effects: Replaces hard-coded activation inventory with live typed service/capability reporting, expands final authority to the exact 60-task population, requires fresh corrective-wave evidence and publishes the explicit operator closeout handoff.
-- Evidence subset: Live default composition and capability probes, all seven corrective task receipts, real Groth16 proof/certificate CIDs, three-repository two-process outcomes, raw benchmark samples, zero-false-skip assurance, supervisor health and current repository/objective identities
-- Acceptance: Reporting derives availability from live typed services and bounded non-mutating probes and never imports/installs merely to claim readiness; it reports native Groth16 installation/readiness separately from test-certificate authority, and the generic pre-PTR-144 knowledge-of-axioms backend can never satisfy the latter; the current-tree gate requires exactly all 60 tasks plus fresh authoritative production-runtime-activation evidence produced by PTR-149 covering PTR-143 through PTR-149; evidence must bind the genuine no-injection three-repository two-process results, locally verified real Groth16 certificate, measured subprocess benchmark, zero false skips, current tree/forest/policy/circuit/key/capability identities and healthy supervisor; any PTR-142, 53-task, injected, pseudo-certificate, synthetic-timing, missing, stale, or mismatched evidence fails closed; all validations run with proof reuse off; and the runbook invokes the existing fenced outer closeout only after the board is closed, the refreshed gate passes, and an operator reviews the protected lifecycle update.
+- Preconditions: PTR-152 joined explicit accelerator provisioning with the reviewed datasets v4 native release and proved fail-closed current source, binary, capability, circuit and key provenance after PTR-148's genuine three-repository cold/warm and measured benchmark evidence.
+- Effects: Replaces hard-coded activation inventory with live typed service/capability reporting, expands final authority to the exact 63-task population, requires fresh ten-task corrective-wave evidence, publishes a truthful activation gap when reviewed authority artifacts are absent, and publishes the explicit operator closeout handoff only when they are present and valid.
+- Evidence subset: Live default composition and capability probes, all ten reviewed correction task receipts, exact reviewed v4 native source/binary/capability and circuit/key manifests, real Groth16 proof/certificate CIDs, three-repository two-process outcomes, raw benchmark samples, zero-false-skip assurance, supervisor health and current repository/objective identities
+- Acceptance: Reporting derives availability from live typed services and bounded non-mutating probes and never imports, installs, builds, downloads NLTK data, runs trusted setup, or generates keys merely to claim readiness; it reports native Groth16 installation/readiness separately from test-certificate authority, and neither the generic pre-PTR-144 knowledge-of-axioms backend nor an unmanifested native binary can satisfy the latter; the current-tree gate requires exactly all 63 tasks plus fresh authoritative production-runtime-activation evidence produced by PTR-149 covering PTR-143 through PTR-152; positive authority must bind the genuine no-injection three-repository two-process results, a locally verified real current-v4 Groth16 certificate, exact reviewed source/binary/capability/circuit/key identities, measured subprocess benchmark, zero false skips, current tree/forest/policy identities and healthy supervisor; absent operator-provided reviewed v4 keys or trusted-setup manifest yields an explicit activation gap, continues running tests, and cannot produce a false warm skip or closeout; any PTR-142, 53-task, pre-v4 60-task, injected, pseudo-certificate, synthetic-timing, missing, stale, substituted, or mismatched evidence fails closed; all validations run with proof reuse off; and the runbook invokes the existing fenced outer closeout only after the board is closed, the refreshed gate passes, and an operator reviews the protected lifecycle update.
+
+## PTR-150 Add explicit setup-facing lazy proof-reuse provisioning
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: dependency-provisioning
+- Depends on: PTR-148
+- Goal id: PTR-G060
+- Outputs: external/ipfs_accelerate/setup.py, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/provisioning_cli.py, external/ipfs_accelerate/test/api/test_proof_reuse_setup_provisioning.py, external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_DEPENDENCY_PROVISIONING.md
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_setup_provisioning.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/setup-provisioning
+- Parallel lane: ptr-setup-provisioning
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/setup.py, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/provisioning_cli.py, external/ipfs_accelerate/test/api/test_proof_reuse_setup_provisioning.py, external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_DEPENDENCY_PROVISIONING.md
+- Predicted symbols: ProofReuseProvisioningCLI, ProvisionProofReuseDependencies, setup-facing proof-reuse provision command
+- Interfaces: LazyDependencyProvisioner@1, ProofReuseDependencySpec@1, ProofReuseProvisioningResult@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: explicit provisioning receipts for Python dependencies, optional NLTK data and the datasets native Groth16 backend
+- Conflict policy: Own only accelerator setup-facing provisioning surfaces; normal setup, build, metadata inspection and import remain side-effect free, and generated dependencies or native artifacts are never committed by the task.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-148 established the genuine three-repository activation harness and the existing accelerator manifests, package bootstrap and bounded lazy provisioner are available at their reviewed revisions.
+- Effects: Adds one explicit setup-facing command and module CLI that delegate to the existing bounded lazy provisioner, document the consent boundary, and report each selected capability without turning package installation or test collection into an implicit installer.
+- Evidence subset: requirements/setup/pyproject parity, allowlisted dependency identifiers, setup command and module CLI argument vectors, environment-policy decisions, bounded subprocess receipts, NLTK package/data cases, datasets native Groth16 build case and unavailable/failure cases
+- Acceptance: `requirements.txt`, setup metadata and `pyproject.toml` retain parity for importable proof-reuse dependencies including NLTK and multiformats; ordinary wheel/sdist metadata generation, `pip install`, `setup.py` invocation without the explicit provisioning command, package import, pytest collection and proof-reuse-off validation perform no network access, pip install, NLTK data download, Rust build, trusted setup or key generation; an explicit operator-selected setup-facing command and equivalent module CLI use the same allowlisted lazy installer as runtime first use, can provision the NLTK package and explicitly selected NLTK data and can request the datasets native Groth16 build without pretending that Groth16 is a PyPI distribution; automatic first-use installation occurs only when the existing package auto-install policy explicitly permits it; arguments, timeouts, environment and artifact roots are bounded; missing network, compiler, Cargo, datasets source, permissions or cache returns a typed unavailable result, keeps the supervisor healthy and runs tests; and individual direct-node tests continue to discover the package-level plugin without any per-test registry or file-list hardwiring.
+
+## PTR-151 Publish an auditable v4-capable native Groth16 backend without automatic trusted setup
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: datasets-native-groth16-v4
+- Depends on: PTR-148
+- Goal id: PTR-G050
+- Outputs: external/ipfs_datasets/MANIFEST.in, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off cargo test --manifest-path external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml && IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/datasets-native-groth16-v4
+- Parallel lane: ptr-datasets-native-groth16-v4
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_datasets/MANIFEST.in, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py
+- Predicted symbols: Groth16NativeCapabilitiesV4, locked native source identity, Groth16NativeReleaseManifestV1
+- Interfaces: Groth16BackendCLI@1, TestPassStatementV4, Groth16NativeReleaseManifest@1
+- Submodules: external/ipfs_datasets
+- Generated artifacts: staged linux-aarch64 native Groth16 binary, exact binary/source capability manifest and reproducible build receipts; no production proving or verifying keys
+- Conflict policy: Own only the datasets native backend/release and packaging surfaces; do not run or publish an automatic production trusted setup, do not add v4 key artifacts, and do not modify the accelerator branch in parallel.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: grok-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-148 exposed that the reviewed test-pass statement profile is v4 while the staged native backend and prior release evidence advertise only older profiles; the reviewed locked Rust source is available and trusted-setup/key ceremony remains operator-owned.
+- Effects: Makes native capability discovery explicit and artifact-free, publishes a current v4-capable staged binary with a digest-bound source/capability manifest, keeps ordinary source/package builds side-effect free, and documents a separate explicit test-only deterministic setup path.
+- Evidence subset: locked Rust dependency/source identity, `capabilities --json` bytes and schema, statement profiles 1 through 4, v4 test-pass circuit identifier, artifact-free probe filesystem diff, default-build side-effect assertions, staged binary SHA-256, release-manifest cross-check and package inclusion
+- Acceptance: `groth16 capabilities --json` is bounded, deterministic and artifact-free and reports supported statement profiles 1 through 4 including the current v4 test-pass profile, exact provider/circuit identity and deterministic locked-source identity; the default Cargo/package build performs no trusted setup and generates no proving or verifying keys; deterministic setup is explicitly test-only and cannot be mistaken for production authority; the staged linux-aarch64 binary and packaged release manifest bind the exact binary digest, locked source identity and capability payload and are independently cross-checked by tests; packaging includes the reviewed binary and manifest; no v4 key artifact is added to source control; and missing Cargo, target toolchain, source, compiler or writable output directory remains a typed unavailable build/provisioning result in consumers rather than blocking test execution or permitting an older backend to authorize a skip.
+
+## PTR-152 Fail-closed accelerator Groth16 v4 authority and lazy-runtime hardening
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: production-v4-authority
+- Depends on: PTR-150, PTR-151
+- Goal id: PTR-G060
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/production-v4-authority
+- Parallel lane: ptr-production-v4-authority
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py
+- Predicted symbols: Groth16V4AuthorityManifest, current native release verifier, effective proof-reuse runtime capability report, isolated lazy pip invocation
+- Interfaces: ProofReuseServices@1, LazyDependencyProvisioner@1, ProofReuseRuntimeActivationReport@1, Groth16NativeReleaseManifest@1, TestExecutionCertificateV2
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: typed current-v4 native release/key authority decisions, sanitized lazy-install receipts and activation reports; no trusted setup or generated keys
+- Conflict policy: Join the reviewed PTR-150 accelerator and PTR-151 datasets contracts only after both merge; never generate trusted setup or keys, trust arbitrary environment paths, promote bundled legacy artifacts, or report source-symbol presence as runtime authority.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-150 exposes explicit setup-facing provisioning through the bounded accelerator lazy installer, and PTR-151 publishes the reviewed artifact-free v4 capability contract plus exact datasets native binary/source release manifest without production keys.
+- Effects: Enforces a two-gate native-release-and-key-manifest authority policy at accelerator issuance/publication, reports installed/readiness/authority states truthfully, and makes lazy pip execution isolated and sanitized while preserving typed RUN/DEFERRED behavior for every optional-capability failure.
+- Evidence subset: manifest schema/version, exact native binary and locked-source digests, artifact-free capability payload, provider/circuit/statement-profile identity, proving/verifying-key byte digests, environment substitution attacks, legacy bundled binary/key cases, installed-wheel source discovery, effective build/install policy, sanitized pip argv/environment and missing-dependency outcomes
+- Acceptance: No arbitrary environment key directory, unverifiable source checkout, unmanifested native binary, or bundled statement-profile v1-v3 binary/key pair can authorize publication or a warm skip; positive current-v4 authority requires both a reviewed native release manifest binding the exact executable digest, locked source identity and artifact-free v4 capability payload and a separate reviewed operator-provided key manifest binding exact proving/verifying-key byte digests, provider, circuit, statement profile and release identity; manifest schema/version and every bound digest are inspected locally before issuance, and the certificate is locally verified against those exact public artifacts before atomic indexing; absent source discovery, binary, capabilities, key files, either manifest, Cargo/compiler/network/cache, or any stale/substituted/mismatched input returns RUN/DEFERRED without losing the original pass, blocking the supervisor, or generating trusted setup/keys; reporting distinguishes package availability, native installation, native v4 readiness and authoritative certificate readiness, includes the effective automatic-build/install policy and precise typed gap, and never claims readiness from source symbols alone; lazy pip uses an isolated interpreter invocation with a sanitized bounded environment and allowlisted requirement rather than inheriting repository import paths or installer-control variables; and the focused zero-configuration tests prove that individual tests still pick up the normal package-level injection while missing capabilities execute normally.

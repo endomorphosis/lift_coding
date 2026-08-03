@@ -349,7 +349,7 @@ mislabeling.
   diagnostic/configuration capability only, not an implemented remote issuer;
   its absence never blocks launch or test execution. A future authenticated
   endpoint client requires a separately reviewed trust/transport task and is
-  not completion evidence for this 60-task board.
+  not completion evidence for this 63-task board.
 - Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
   provider or diagnostic endpoint state records `certificate_deferred` and
   does not change the passed test.
@@ -672,9 +672,16 @@ but supersedes their activation evidence. In particular:
 - dependency reporting is hard-coded source inventory rather than a live typed
   composition/capability result.
 
-The bounded correction is `PTR-143` through `PTR-149`, expanding the sealed
-population from 53 to 60. It implements the same authority sequence as section
-13.2, now with executable proof at every link:
+The first bounded correction, `PTR-143` through `PTR-149`, would have expanded
+the sealed population from 53 to 60. `PTR-143` through `PTR-148` are now
+historically complete, but a final review correctly withheld `PTR-149`: the
+staged native binary does not advertise statement-profile v4, there is no
+reviewed current binary/source/key manifest, and ordinary package setup does not
+offer a single explicit setup-facing route through the same lazy provisioner.
+Those findings do not rewrite the six completed task records or their canonical
+identities. Instead, the reviewed correction now covers `PTR-143` through
+`PTR-152`, with the dependency-ordered `PTR-149` handoff last, and expands the
+exact sealed population from 53 to 63:
 
 1. `PTR-143` attaches a stable locator/static collection seed without requiring
    runtime evidence or inventing a final execution key.
@@ -694,18 +701,28 @@ population from 53 to 60. It implements the same authority sequence as section
    persistent disposable cache for accelerator, datasets and kit, with a real
    local Groth16 certificate, body-once evidence, missing-backend fail-open
    behavior and raw measured cold/warm wall time.
-7. `PTR-149` derives activation reporting from live typed services and refreshes
-   the current-tree gate/handoff for the exact 60-task population.
+7. `PTR-150` exposes explicit setup-facing accelerator provisioning through the
+   same bounded lazy installer, while ordinary build/install/import remains
+   side-effect free and every provisioning failure remains typed and fail-open.
+8. `PTR-151` publishes an auditable v4-capable datasets native backend and
+   release manifest binding locked source, binary digest and capability output,
+   without generating or shipping a production trusted setup or v4 keys.
+9. `PTR-152` makes accelerator issuance and reporting fail closed unless the
+   exact reviewed v4 source, binary, capability payload, circuit and key
+   identities match, and hardens lazy pip execution isolation.
+10. `PTR-149` derives activation reporting from live typed services and
+    refreshes the current-tree gate/handoff for the exact 63-task population.
 
-The minimal safe split is seven tasks because real issuance belongs to datasets
-while controller composition belongs to accelerator. `PTR-143` and `PTR-144`
-are initially claimable on shards 2 and 0. Once `PTR-143` closes, `PTR-145` and
-`PTR-146` may run on shards 1 and 2 while `PTR-144` continues on shard 0; all
-three have disjoint predicted files. The join is `PTR-147`, followed by
-`PTR-148` and `PTR-149`. Initial conflict-free width is therefore two while the
-three-lane runtime and deterministic sharding remain unchanged. Historical
-53-task or `PTR-142` activation packets are explicitly inadmissible at the
-refreshed gate.
+The historical first wave was `PTR-143` and `PTR-144` on shards 2 and 0,
+followed by the disjoint `PTR-144`/`PTR-145`/`PTR-146` wave, `PTR-147`, and
+`PTR-148`. The current corrective wave is exactly `PTR-150` and `PTR-151` on
+numeric shards 0 and 1, owning accelerator and datasets respectively. Their
+predicted files and repository claims are disjoint. `PTR-152` on shard 2 joins
+both branches; only then may `PTR-149` run and evaluate the exact 63-task gate.
+Historical 53-task, `PTR-142`, or pre-v4 60-task activation packets are
+explicitly inadmissible. Absence of operator-provided reviewed v4 keys or a
+trusted-setup manifest is a truthful activation gap: tests continue to run and
+the supervisor continues, but no warm skip or closeout authority is invented.
 
 ## 14. Parallel implementation program
 
@@ -743,7 +760,9 @@ protected from implementation agents.
 | 20 | `PTR-145`, `PTR-146` (while `PTR-144` may continue) | Disjoint accelerator warm revalidation and cold trace/candidate publication branches can fill the remaining two shards |
 | 21 | `PTR-147` | Default service/plugin/controller composition joins real issuance, warm revalidation and cold publication |
 | 22 | `PTR-148` | Genuine no-injection two-process activation and measured subprocess savings across all three repositories |
-| 23 | `PTR-149` | Live reporting, exact 60-task authority gate, corrected handoff and explicit operator closeout premise |
+| 23 | `PTR-150`, `PTR-151` | Explicit accelerator setup-facing lazy provisioning and an auditable datasets v4 native release start in parallel on distinct resources |
+| 24 | `PTR-152` | Join both branches with fail-closed current-v4 source, binary, capability, circuit and key provenance plus truthful runtime reporting |
+| 25 | `PTR-149` | Live reporting, exact 63-task authority gate, corrected handoff and explicit operator closeout premise |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -761,13 +780,15 @@ repository each. Numeric shards determine canonical provider roles and the
 shared merge queue serializes gitlink publication; predicted-file conflicts
 remain dependency ordered and cannot be overridden.
 
-The production-activation correction uses a two-task initial wave rather than
-inventing unrelated kit work merely to occupy a lane. `PTR-143` owns
-accelerator and `PTR-144` owns datasets. After `PTR-143`, the claimable set may
-be `PTR-144`, `PTR-145`, and `PTR-146`, covering all numeric shards with
-pairwise-disjoint predicted files even though two tasks legitimately share the
-accelerator repository. `PTR-147` depends on all three and serializes their
-integration before assurance and authority refresh.
+The historical production-activation wave began with `PTR-143` on accelerator
+and `PTR-144` on datasets, then used the dependency-ordered
+`PTR-144`/`PTR-145`/`PTR-146` parallel set before `PTR-147` and `PTR-148`.
+The current corrective wave again uses two independent repositories rather than
+inventing unrelated kit work: `PTR-150` owns accelerator on shard 0 and
+`PTR-151` owns datasets on shard 1. `PTR-152` joins them on accelerator only
+after both merge, and `PTR-149` remains last. Numeric shards preserve historical
+canonical provider identities; runtime execution remains Grok 4.5 first with
+the configured medium Terra fallback only on exact Grok quota exhaustion.
 
 ## 15. Validation strategy
 

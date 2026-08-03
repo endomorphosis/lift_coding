@@ -213,7 +213,7 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-03",
-    "reviewRevision": "production-runtime-activation-repair-v2",
+    "reviewRevision": "production-runtime-activation-repair-v3",
     "implementationTaskIds": [
       "PTR-143",
       "PTR-144",
@@ -221,11 +221,14 @@
       "PTR-146",
       "PTR-147",
       "PTR-148",
-      "PTR-149"
+      "PTR-149",
+      "PTR-150",
+      "PTR-151",
+      "PTR-152"
     ],
     "initialClaimableTaskIds": [
-      "PTR-143",
-      "PTR-144"
+      "PTR-150",
+      "PTR-151"
     ],
     "authorityWriter": "outer_controller_only",
     "workerLaneReconciliationEnabled": false,
@@ -275,8 +278,8 @@
     "scheduler": "deterministic_numeric_task_shards",
     "strictTaskSharding": true,
     "initialClaimableTaskIds": [
-      "PTR-143",
-      "PTR-144"
+      "PTR-150",
+      "PTR-151"
     ],
     "isolation": "ephemeral_git_worktree_per_task",
     "mergeQueue": "shared_serial",

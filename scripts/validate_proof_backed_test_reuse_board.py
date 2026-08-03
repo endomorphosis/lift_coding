@@ -136,6 +136,9 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-147",
         "PTR-148",
         "PTR-149",
+        "PTR-150",
+        "PTR-151",
+        "PTR-152",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -187,6 +190,13 @@ PRODUCTION_ACTIVATION_TASK_IDS = frozenset(
 PRODUCTION_ACTIVATION_WAVE_ONE = frozenset({"PTR-143", "PTR-144"})
 PRODUCTION_ACTIVATION_PARALLEL_WAVE = frozenset(
     {"PTR-144", "PTR-145", "PTR-146"}
+)
+PRODUCTION_CORRECTION_TASK_IDS = frozenset(
+    {"PTR-150", "PTR-151", "PTR-152"}
+)
+PRODUCTION_CORRECTION_WAVE_ONE = frozenset({"PTR-150", "PTR-151"})
+REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS = frozenset(
+    PRODUCTION_ACTIVATION_TASK_IDS | PRODUCTION_CORRECTION_TASK_IDS
 )
 GOAL_STATES = frozenset(
     {
@@ -279,7 +289,10 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-146": frozenset({"PTR-143"}),
     "PTR-147": frozenset({"PTR-144", "PTR-145", "PTR-146"}),
     "PTR-148": frozenset({"PTR-147"}),
-    "PTR-149": frozenset({"PTR-148"}),
+    "PTR-149": frozenset({"PTR-152"}),
+    "PTR-150": frozenset({"PTR-148"}),
+    "PTR-151": frozenset({"PTR-148"}),
+    "PTR-152": frozenset({"PTR-150", "PTR-151"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -292,6 +305,7 @@ REQUIRED_DATASETS_TASKS = frozenset(
         "PTR-137",
         "PTR-140",
         "PTR-144",
+        "PTR-151",
     }
 )
 REQUIRED_ACCELERATOR_TASKS = frozenset(
@@ -309,6 +323,8 @@ REQUIRED_ACCELERATOR_TASKS = frozenset(
         "PTR-147",
         "PTR-148",
         "PTR-149",
+        "PTR-150",
+        "PTR-152",
     }
 )
 REQUIRED_KIT_TASKS = frozenset(
@@ -455,6 +471,60 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "validation/proof_test_reuse_current_tree_gate.py",
             "external/ipfs_accelerate/test/api/"
             "test_proof_reuse_runtime_activation_report.py",
+        }
+    ),
+    "PTR-150": frozenset(
+        {
+            "external/ipfs_accelerate/setup.py",
+            "external/ipfs_accelerate/pyproject.toml",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/provisioning_cli.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_setup_provisioning.py",
+            "external/ipfs_accelerate/docs/guides/"
+            "TEST_PROOF_REUSE_DEPENDENCY_PROVISIONING.md",
+        }
+    ),
+    "PTR-151": frozenset(
+        {
+            "external/ipfs_datasets/MANIFEST.in",
+            "external/ipfs_datasets/pyproject.toml",
+            "external/ipfs_datasets/setup.py",
+            "external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/Cargo.toml",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/build.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/build.sh",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/RUST_SETUP.md",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/src/main.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/bin/linux-aarch64/groth16",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/bin/linux-aarch64/release-manifest.json",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
+            "test_groth16_native_release.py",
+        }
+    ),
+    "PTR-152": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/publication.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/lazy_dependencies.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/services.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_controller_issuance.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_lazy_provisioning.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_runtime_activation_report.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_default_runtime_services.py",
         }
     ),
 }
@@ -744,21 +814,21 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "production-runtime-activation-repair-v2"
+        "production-runtime-activation-repair-v3"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
             "production runtime activation repair"
         )
     if frozenset(objective_projection.get("implementationTaskIds") or ()) != (
-        PRODUCTION_ACTIVATION_TASK_IDS
+        REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS
     ):
         errors.append(
             "objectiveProjection implementation task inventory mismatch"
         )
     if frozenset(
         objective_projection.get("initialClaimableTaskIds") or ()
-    ) != PRODUCTION_ACTIVATION_WAVE_ONE:
+    ) != PRODUCTION_CORRECTION_WAVE_ONE:
         errors.append(
             "objectiveProjection initial claimable task inventory mismatch"
         )
@@ -1075,7 +1145,9 @@ def validate(
                 f"{task.task_id} has unexpected submodules {sorted(submodules)}"
             )
         if task.task_id in (
-            RUNTIME_REPAIR_TASK_IDS | PRODUCTION_ACTIVATION_TASK_IDS
+            RUNTIME_REPAIR_TASK_IDS
+            | PRODUCTION_ACTIVATION_TASK_IDS
+            | PRODUCTION_CORRECTION_TASK_IDS
         ) and len(submodules) != 1:
             errors.append(
                 f"{task.task_id} reviewed repair task must own exactly one "
@@ -1125,7 +1197,9 @@ def validate(
                 f"{missing_dependencies}"
             )
         if task_id in (
-            RUNTIME_REPAIR_TASK_IDS | PRODUCTION_ACTIVATION_TASK_IDS
+            RUNTIME_REPAIR_TASK_IDS
+            | PRODUCTION_ACTIVATION_TASK_IDS
+            | PRODUCTION_CORRECTION_TASK_IDS
         ) and frozenset(
             task_edges.get(task_id, ())
         ) != required_dependencies:
@@ -1150,10 +1224,10 @@ def validate(
             parallel.get("initialClaimableTaskIds") or ()
         )
     )
-    if configured_initial_ready != PRODUCTION_ACTIVATION_WAVE_ONE:
+    if configured_initial_ready != PRODUCTION_CORRECTION_WAVE_ONE:
         errors.append(
             "configured initial claimable tasks mismatch: expected "
-            f"{sorted(PRODUCTION_ACTIVATION_WAVE_ONE)}, got "
+            f"{sorted(PRODUCTION_CORRECTION_WAVE_ONE)}, got "
             f"{sorted(configured_initial_ready)}"
         )
     if completed_ids == {"PTR-000"}:
@@ -1180,6 +1254,7 @@ def validate(
         - COMPLETION_EXTENSION_TASK_IDS
         - RUNTIME_REPAIR_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
+        - PRODUCTION_CORRECTION_TASK_IDS
     )
     completion_extension_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1196,6 +1271,7 @@ def validate(
         EXPECTED_TASK_IDS
         - RUNTIME_REPAIR_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
+        - PRODUCTION_CORRECTION_TASK_IDS
     )
     runtime_repair_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1209,7 +1285,9 @@ def validate(
                 f"{sorted(claimable_task_ids)}"
             )
     pre_production_activation_task_ids = (
-        EXPECTED_TASK_IDS - PRODUCTION_ACTIVATION_TASK_IDS
+        EXPECTED_TASK_IDS
+        - PRODUCTION_ACTIVATION_TASK_IDS
+        - PRODUCTION_CORRECTION_TASK_IDS
     )
     production_activation_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1223,6 +1301,25 @@ def validate(
         errors.append(
             "reviewed production-runtime activation claimable tasks must be "
             f"{sorted(PRODUCTION_ACTIVATION_WAVE_ONE)}, got "
+            f"{sorted(claimable_task_ids)}"
+        )
+    pre_production_correction_task_ids = (
+        EXPECTED_TASK_IDS
+        - PRODUCTION_CORRECTION_TASK_IDS
+        - {"PTR-149"}
+    )
+    production_correction_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in PRODUCTION_CORRECTION_TASK_IDS | {"PTR-149"}
+    )
+    if (
+        pre_production_correction_task_ids.issubset(completed_ids)
+        and production_correction_unstarted
+        and claimable_task_ids != PRODUCTION_CORRECTION_WAVE_ONE
+    ):
+        errors.append(
+            "reviewed current-v4 correction claimable tasks must be "
+            f"{sorted(PRODUCTION_CORRECTION_WAVE_ONE)}, got "
             f"{sorted(claimable_task_ids)}"
         )
     lane_count = int(parallel.get("laneCount") or 0)
@@ -1412,6 +1509,82 @@ def validate(
                     f"predicted files: {left}/{right} overlap {overlap}"
                 )
 
+    production_correction_wave_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in PRODUCTION_CORRECTION_WAVE_ONE
+    } if lane_count > 0 else set()
+    if production_correction_wave_shards != {0, 1}:
+        errors.append(
+            "current-v4 correction first wave must cover numeric shards 0 and 1, "
+            f"got {sorted(production_correction_wave_shards)}"
+        )
+    expected_production_correction_wave_resources = {
+        "PTR-150": frozenset({"external/ipfs_accelerate"}),
+        "PTR-151": frozenset({"external/ipfs_datasets"}),
+    }
+    production_correction_wave_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(PRODUCTION_CORRECTION_WAVE_ONE)
+    }
+    if production_correction_wave_resources != (
+        expected_production_correction_wave_resources
+    ):
+        errors.append(
+            "current-v4 correction first wave must own independent accelerator "
+            "and datasets resources: expected "
+            f"{expected_production_correction_wave_resources}, got "
+            f"{production_correction_wave_resources}"
+        )
+    production_correction_resource_width = len(
+        set().union(*production_correction_wave_resources.values())
+    )
+    if production_correction_resource_width != 2:
+        errors.append(
+            "current-v4 correction first wave must retain repository resource "
+            f"width 2, got {production_correction_resource_width}"
+        )
+    correction_wave_overlap = sorted(
+        predicted_by_task["PTR-150"] & predicted_by_task["PTR-151"]
+    )
+    if correction_wave_overlap:
+        errors.append(
+            "current-v4 correction first-wave predicted files must be disjoint, "
+            f"got {correction_wave_overlap}"
+        )
+
+    simulated_correction_wave_completed = (
+        pre_production_correction_task_ids | PRODUCTION_CORRECTION_WAVE_ONE
+    )
+    simulated_correction_join_claimable = {
+        task_id
+        for task_id in PRODUCTION_CORRECTION_TASK_IDS | {"PTR-149"}
+        if task_id not in simulated_correction_wave_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_correction_wave_completed
+        )
+    }
+    if simulated_correction_join_claimable != {"PTR-152"}:
+        errors.append(
+            "current-v4 correction join must make only PTR-152 claimable, got "
+            f"{sorted(simulated_correction_join_claimable)}"
+        )
+    simulated_correction_join_completed = (
+        simulated_correction_wave_completed | {"PTR-152"}
+    )
+    simulated_handoff_claimable = {
+        task_id
+        for task_id in PRODUCTION_CORRECTION_TASK_IDS | {"PTR-149"}
+        if task_id not in simulated_correction_join_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_correction_join_completed
+        )
+    }
+    if simulated_handoff_claimable != {"PTR-149"}:
+        errors.append(
+            "current-v4 correction join must make only PTR-149 claimable, got "
+            f"{sorted(simulated_handoff_claimable)}"
+        )
+
     unordered_conflicts: list[dict[str, object]] = []
     task_ancestors = {
         task_id: _ancestors(task_id, task_edges) for task_id in task_ids
@@ -1460,8 +1633,8 @@ def validate(
         "todo_sha256": _sha256(todo_path),
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
-        "initial_ready_task_ids": sorted(PRODUCTION_ACTIVATION_WAVE_ONE),
-        "initial_ready_shards": sorted(production_wave_one_shards),
+        "initial_ready_task_ids": sorted(PRODUCTION_CORRECTION_WAVE_ONE),
+        "initial_ready_shards": sorted(production_correction_wave_shards),
         "sealed_initial_ready_task_ids": sorted(SEALED_INITIAL_READY),
         "sealed_initial_ready_shards": sorted(sealed_initial_shards),
         "reviewed_extension_task_ids": sorted(COMPLETION_EXTENSION_TASK_IDS),
@@ -1500,6 +1673,9 @@ def validate(
             for task_id, resources in runtime_bootstrap_wave_resources.items()
         },
         "reviewed_production_activation_task_ids": sorted(
+            REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS
+        ),
+        "historical_production_activation_task_ids": sorted(
             PRODUCTION_ACTIVATION_TASK_IDS
         ),
         "reviewed_production_activation_wave_one_task_ids": sorted(
@@ -1518,6 +1694,24 @@ def validate(
         "reviewed_production_activation_parallel_wave_shards": sorted(
             production_parallel_shards
         ),
+        "reviewed_production_correction_task_ids": sorted(
+            PRODUCTION_CORRECTION_TASK_IDS
+        ),
+        "reviewed_production_correction_wave_one_task_ids": sorted(
+            PRODUCTION_CORRECTION_WAVE_ONE
+        ),
+        "reviewed_production_correction_wave_one_shards": sorted(
+            production_correction_wave_shards
+        ),
+        "reviewed_production_correction_wave_one_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in production_correction_wave_resources.items()
+        },
+        "reviewed_production_correction_wave_one_resource_width": (
+            production_correction_resource_width
+        ),
+        "reviewed_production_correction_join_task_id": "PTR-152",
+        "reviewed_operator_handoff_task_id": "PTR-149",
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {
