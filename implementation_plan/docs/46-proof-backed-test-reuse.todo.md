@@ -1069,7 +1069,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-108 Emit datasets real-ZK conformance evidence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
