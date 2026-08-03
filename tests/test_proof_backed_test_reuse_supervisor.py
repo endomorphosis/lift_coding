@@ -10,11 +10,24 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "proof_backed_test_reuse_supervisor.py"
+VALIDATOR_SCRIPT = (
+    ROOT / "scripts" / "validate_proof_backed_test_reuse_board.py"
+)
 
 
 def _load_module() -> Any:
     spec = importlib.util.spec_from_file_location(
         "proof_backed_test_reuse_supervisor", SCRIPT
+    )
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_validator_module() -> Any:
+    spec = importlib.util.spec_from_file_location(
+        "validate_proof_backed_test_reuse_board", VALIDATOR_SCRIPT
     )
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -115,10 +128,17 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         "IMPLEMENTATION_DAEMON_COMMAND",
         "python3 /tmp/provider-policy-bypass.py",
     )
+    monkeypatch.setenv(
+        "IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND",
+        "python3 /tmp/direct-codex-merge-resolver-bypass.py",
+    )
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: "/opt/grok/bin/grok" if name == "grok" else None,
+        lambda name: {
+            "grok": "/opt/grok/bin/grok",
+            "codex": "/opt/codex/bin/codex",
+        }.get(name),
     )
 
     assert len(supervisor.LANES) == 3
@@ -132,6 +152,12 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         assert lane["fallback_trigger"] == "grok_quota_exhausted"
         environment = supervisor._runtime_environment(str(lane["provider"]))
         assert "IMPLEMENTATION_DAEMON_COMMAND" not in environment
+        assert environment[
+            supervisor.MERGE_RESOLVER_COMMAND_ENV
+        ] == supervisor._managed_merge_resolver_command()
+        assert "direct-codex-merge-resolver-bypass" not in environment[
+            supervisor.MERGE_RESOLVER_COMMAND_ENV
+        ]
         assert (
             environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"]
             == "grok-codex"
@@ -168,6 +194,128 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         )
 
 
+def test_semantic_merge_resolver_uses_managed_quota_only_provider_chain(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        supervisor.shutil,
+        "which",
+        lambda name: {
+            "grok": "/opt/grok/bin/grok",
+            "codex": "/opt/codex/bin/codex",
+        }.get(name),
+    )
+
+    encoded = supervisor._managed_merge_resolver_command()
+    command = supervisor.shlex.split(encoded)
+
+    def option(name: str) -> str:
+        return command[command.index(name) + 1]
+
+    assert command[:2] == [
+        supervisor.sys.executable,
+        str(supervisor.PROVIDER_FALLBACK_RUNNER),
+    ]
+    assert option("--workspace") == "."
+    assert option("--primary-provider") == "grok"
+    assert option("--fallback-provider") == "codex"
+    assert option("--fallback-policy") == "grok_quota_exhausted"
+    assert "llm_merge_resolver_fallback" not in encoded
+
+    primary = json.loads(option("--primary-command-json"))
+    fallback = json.loads(option("--fallback-command-json"))
+    assert primary == [
+        supervisor.sys.executable,
+        str(supervisor.GROK_CLI_RUNNER),
+        "--workspace",
+        ".",
+        "--grok-bin",
+        "/opt/grok/bin/grok",
+        "--model",
+        "grok-4.5",
+        "--max-turns",
+        "100000",
+        "--mode",
+        "agent",
+    ]
+    assert fallback == [
+        "/opt/codex/bin/codex",
+        "exec",
+        "--dangerously-bypass-approvals-and-sandbox",
+        "-C",
+        ".",
+        "-m",
+        "gpt-5.6-terra",
+        "-c",
+        'model_reasoning_effort="medium"',
+        "-",
+    ]
+
+    for lane in supervisor.LANES:
+        arguments = supervisor._lane_common_arguments(lane, live=True)
+        resolver_index = arguments.index("--llm-merge-resolver-command")
+        assert arguments[resolver_index + 1] == encoded
+
+
+def test_runtime_provider_metadata_preserves_identity_and_routes_grok_first(
+    supervisor: Any,
+) -> None:
+    parallel = supervisor.PARALLEL
+    assert parallel["canonicalTaskProviderRolesByShard"] == [
+        "codex-implement",
+        "grok-implement",
+        "codex-implement",
+    ]
+    assert parallel["canonicalTaskProviderRolesByShardPurpose"] == (
+        "historical_task_identity_only"
+    )
+    assert parallel["runtimeExecutionProviderRolesByShard"] == [
+        "grok-implement",
+        "grok-implement",
+        "grok-implement",
+    ]
+    assert parallel["semanticMergeResolver"] == {
+        "provider": "grok-codex",
+        "fallbackTrigger": "grok_quota_exhausted",
+        "inheritedCommandPolicy": "override_with_managed_provider_chain",
+    }
+    assert supervisor.PROVIDER_POLICY["appliesTo"] == [
+        "implementation",
+        "semantic_merge_resolver",
+    ]
+
+
+def test_board_validator_rejects_runtime_merge_provider_policy_drift(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    config = json.loads(validator.CONFIG_PATH.read_text(encoding="utf-8"))
+    config["parallelRuntime"]["runtimeExecutionProviderRolesByShard"] = [
+        "codex-implement",
+        "grok-implement",
+        "codex-implement",
+    ]
+    config["parallelRuntime"]["semanticMergeResolver"][
+        "fallbackTrigger"
+    ] = "any_failure"
+    config["providerPolicy"]["appliesTo"] = ["implementation"]
+    config_path = tmp_path / "supervisor.json"
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        validator.TODO_PATH,
+        config_path,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    errors = "\n".join(result["errors"])
+    assert "runtimeExecutionProviderRolesByShard" in errors
+    assert "semanticMergeResolver" in errors
+    assert "providerPolicy" in errors
+
+
 def test_status_exposes_exact_model_and_quota_only_fallback_policy(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -197,6 +345,14 @@ def test_status_exposes_exact_model_and_quota_only_fallback_policy(
         },
         "fallback_trigger": "grok_quota_exhausted",
         "non_quota_failure_action": "propagate_without_fallback",
+        "applies_to": ["implementation", "semantic_merge_resolver"],
+        "semantic_merge_resolver": {
+            "provider": "grok-codex",
+            "fallbackTrigger": "grok_quota_exhausted",
+            "inheritedCommandPolicy": (
+                "override_with_managed_provider_chain"
+            ),
+        },
     }
 
 
@@ -373,6 +529,14 @@ def test_provider_preflight_reports_grok_as_effective_primary(
         "fallback_trigger": "grok_quota_exhausted",
         "primary_unavailable_action": "fail_preflight",
         "non_quota_failure_action": "propagate_without_fallback",
+        "applies_to": ["implementation", "semantic_merge_resolver"],
+        "semantic_merge_resolver": {
+            "provider": "grok-codex",
+            "fallbackTrigger": "grok_quota_exhausted",
+            "inheritedCommandPolicy": (
+                "override_with_managed_provider_chain"
+            ),
+        },
         "fallback_forbidden_on": [
             "authentication_failure",
             "launch_failure",

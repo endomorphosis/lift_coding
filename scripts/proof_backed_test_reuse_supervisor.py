@@ -9,6 +9,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import shlex
 import shutil
 import signal
 import subprocess
@@ -59,6 +60,21 @@ PARALLEL = dict(CONFIG["parallelRuntime"])
 PROVIDER_POLICY = dict(CONFIG["providerPolicy"])
 PRIMARY_PROVIDER_POLICY = dict(PROVIDER_POLICY["primary"])
 FALLBACK_PROVIDER_POLICY = dict(PROVIDER_POLICY["fallback"])
+MERGE_RESOLVER_COMMAND_ENV = (
+    "IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND"
+)
+PROVIDER_FALLBACK_RUNNER = (
+    ACCEL_ROOT
+    / "ipfs_accelerate_py"
+    / "agent_supervisor"
+    / "provider_fallback_runner.py"
+)
+GROK_CLI_RUNNER = (
+    ACCEL_ROOT
+    / "ipfs_accelerate_py"
+    / "agent_supervisor"
+    / "grok_cli_runner.py"
+)
 
 state_override = os.environ.get(str(CONFIG["stateRootEnvironment"]), "").strip()
 if state_override:
@@ -104,6 +120,68 @@ LANES = tuple(
 )
 
 
+def _managed_merge_resolver_command() -> str:
+    """Build the profile-owned semantic merge resolver provider chain.
+
+    The generic implementation daemon defaults its merge resolver to a direct
+    Codex invocation.  That is incompatible with this profile's Grok-primary,
+    quota-only fallback contract, so both the supervisor CLI and its runtime
+    environment receive this exact no-shell provider runner command.
+    """
+
+    grok_binary = shutil.which("grok") or "grok"
+    codex_binary = shutil.which("codex") or "codex"
+    # invoke_llm_resolver starts this command in the conflicted repository.
+    # Keeping the workspace relative preserves that exact target for both
+    # main-checkout and isolated-worktree semantic repairs.
+    resolver_workspace = "."
+    primary_command = [
+        sys.executable,
+        str(GROK_CLI_RUNNER),
+        "--workspace",
+        resolver_workspace,
+        "--grok-bin",
+        grok_binary,
+        "--model",
+        str(PRIMARY_PROVIDER_POLICY["model"]),
+        "--max-turns",
+        "100000",
+        "--mode",
+        "agent",
+    ]
+    fallback_command = [
+        codex_binary,
+        "exec",
+        "--dangerously-bypass-approvals-and-sandbox",
+        "-C",
+        resolver_workspace,
+        "-m",
+        str(FALLBACK_PROVIDER_POLICY["model"]),
+        "-c",
+        "model_reasoning_effort=\""
+        + str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"])
+        + "\"",
+        "-",
+    ]
+    command = [
+        sys.executable,
+        str(PROVIDER_FALLBACK_RUNNER),
+        "--workspace",
+        resolver_workspace,
+        "--primary-provider",
+        str(PRIMARY_PROVIDER_POLICY["provider"]),
+        "--fallback-provider",
+        str(FALLBACK_PROVIDER_POLICY["provider"]),
+        "--primary-command-json",
+        json.dumps(primary_command, separators=(",", ":")),
+        "--fallback-command-json",
+        json.dumps(fallback_command, separators=(",", ":")),
+        "--fallback-policy",
+        str(PROVIDER_POLICY["fallbackTrigger"]),
+    ]
+    return shlex.join(command)
+
+
 def _runtime_environment(provider: str | None = None) -> dict[str, str]:
     environment = dict(os.environ)
     # This dedicated profile owns its provider chain.  The implementation
@@ -116,6 +194,11 @@ def _runtime_environment(provider: str | None = None) -> dict[str, str]:
     environment["PYTHONPATH"] = os.pathsep.join(python_paths)
     for key, value in dict(PARALLEL["commonEnvironment"]).items():
         environment[str(key)] = str(value)
+    # Never inherit or configure the generic direct-Codex semantic merge
+    # resolver.  The dedicated profile's managed chain wins last.
+    environment[MERGE_RESOLVER_COMMAND_ENV] = (
+        _managed_merge_resolver_command()
+    )
     dependency_state = STATE_ROOT / "dependencies"
     environment["IPFS_TEST_PROOF_REUSE_NLTK_DATA_DIR"] = str(
         dependency_state / "nltk-data"
@@ -482,6 +565,10 @@ def _provider_preflight() -> dict[str, object]:
             ),
             "non_quota_failure_action": str(
                 PROVIDER_POLICY["nonQuotaFailureAction"]
+            ),
+            "applies_to": list(PROVIDER_POLICY["appliesTo"]),
+            "semantic_merge_resolver": dict(
+                PARALLEL["semanticMergeResolver"]
             ),
             "fallback_forbidden_on": list(
                 PROVIDER_POLICY["fallbackForbiddenOn"]
@@ -1336,6 +1423,8 @@ def _lane_common_arguments(lane: dict[str, object], *, live: bool) -> list[str]:
         str(MERGE_QUEUE_DIR),
         "--merge-reconciliation-max-merges",
         str(PARALLEL["mergeReconciliationMaxMerges"]),
+        "--llm-merge-resolver-command",
+        _managed_merge_resolver_command(),
         *_submodule_arguments(),
         *_protected_arguments(),
         "--no-retry-budget-guardrail",
@@ -1657,6 +1746,10 @@ def _status_payload() -> dict[str, object]:
             "non_quota_failure_action": PROVIDER_POLICY[
                 "nonQuotaFailureAction"
             ],
+            "applies_to": list(PROVIDER_POLICY["appliesTo"]),
+            "semantic_merge_resolver": dict(
+                PARALLEL["semanticMergeResolver"]
+            ),
         },
         "healthy": bool(
             lanes

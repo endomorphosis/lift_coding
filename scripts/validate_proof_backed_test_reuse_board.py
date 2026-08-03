@@ -632,6 +632,59 @@ def validate(
             "canonicalTaskProviderRolesByShard must retain the sealed task "
             "identity roles"
         )
+    if parallel.get("canonicalTaskProviderRolesByShardPurpose") != (
+        "historical_task_identity_only"
+    ):
+        errors.append(
+            "canonical task provider roles must be documented as historical "
+            "task identity metadata"
+        )
+    runtime_execution_roles = tuple(
+        parallel.get("runtimeExecutionProviderRolesByShard") or ()
+    )
+    if runtime_execution_roles != ("grok-implement",) * 3:
+        errors.append(
+            "runtimeExecutionProviderRolesByShard must configure Grok-first "
+            "execution on all three lanes"
+        )
+    semantic_merge_resolver = parallel.get("semanticMergeResolver")
+    if semantic_merge_resolver != {
+        "provider": "grok-codex",
+        "fallbackTrigger": "grok_quota_exhausted",
+        "inheritedCommandPolicy": "override_with_managed_provider_chain",
+    }:
+        errors.append(
+            "semanticMergeResolver must use the managed Grok-primary, "
+            "quota-only Codex fallback chain"
+        )
+    provider_policy = config.get("providerPolicy")
+    expected_provider_policy = {
+        "primary": {"provider": "grok", "model": "grok-4.5"},
+        "fallback": {
+            "provider": "codex",
+            "model": "gpt-5.6-terra",
+            "modelReasoningEffort": "medium",
+        },
+        "fallbackTrigger": "grok_quota_exhausted",
+        "primaryUnavailableAction": "fail_preflight",
+        "nonQuotaFailureAction": "propagate_without_fallback",
+        "appliesTo": ["implementation", "semantic_merge_resolver"],
+        "fallbackForbiddenOn": [
+            "authentication_failure",
+            "launch_failure",
+            "timeout",
+            "transport_failure",
+            "generic_nonzero_exit",
+            "malformed_output",
+            "task_failure",
+        ],
+    }
+    if provider_policy != expected_provider_policy:
+        errors.append(
+            "providerPolicy must retain Grok 4.5 primary and Terra medium "
+            "fallback only on confirmed Grok quota exhaustion for both "
+            "implementation and semantic merge resolution"
+        )
     if parallel.get("objectiveRefillEnabled") is not False:
         errors.append("objective refill must be disabled for the sealed board")
     if parallel.get("codebaseRefillEnabled") is not False:

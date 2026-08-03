@@ -255,6 +255,10 @@
     "fallbackTrigger": "grok_quota_exhausted",
     "primaryUnavailableAction": "fail_preflight",
     "nonQuotaFailureAction": "propagate_without_fallback",
+    "appliesTo": [
+      "implementation",
+      "semantic_merge_resolver"
+    ],
     "fallbackForbiddenOn": [
       "authentication_failure",
       "launch_failure",
@@ -301,6 +305,17 @@
       "grok-implement",
       "codex-implement"
     ],
+    "canonicalTaskProviderRolesByShardPurpose": "historical_task_identity_only",
+    "runtimeExecutionProviderRolesByShard": [
+      "grok-implement",
+      "grok-implement",
+      "grok-implement"
+    ],
+    "semanticMergeResolver": {
+      "provider": "grok-codex",
+      "fallbackTrigger": "grok_quota_exhausted",
+      "inheritedCommandPolicy": "override_with_managed_provider_chain"
+    },
     "worktreeSubmodulePaths": [
       "external/ipfs_accelerate",
       "external/ipfs_datasets",
