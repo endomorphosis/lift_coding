@@ -1818,7 +1818,7 @@ proof-reuse-off validations and managed merge provenance exist.
 
 ## PTR-144 Provide lazy real Groth16 test-certificate issuance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
