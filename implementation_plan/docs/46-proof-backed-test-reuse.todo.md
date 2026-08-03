@@ -1293,7 +1293,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-122 Remove final-gate self-reference and complete current-tree authority
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
