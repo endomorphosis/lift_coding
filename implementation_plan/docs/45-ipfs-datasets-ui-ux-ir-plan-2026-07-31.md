@@ -745,7 +745,8 @@ are disabled, and production execution requires Linux `/proc` confinement so
 detached provider descendants cannot escape the native subreaper.
 
 The published accelerator checkpoint for this policy is
-`8a68d43d2ca743ef6b70c65ac1ffca3c017ba2f8`. It also fences completed
+`fb6ec7f407c4d2f6b99a2c71e5aa242a3feecf6c` (supersedes
+`8a68d43d2ca743ef6b70c65ac1ffca3c017ba2f8`). It also fences completed
 post-merge correction repairs to their origin event stream, preventing foreign
 lanes from amplifying a lane-local authorization failure. The six-lane fleet
 remains stopped: `UIR-010` has a durable `correction_failed` head from attempt
