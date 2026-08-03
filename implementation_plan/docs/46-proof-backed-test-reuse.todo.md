@@ -1850,7 +1850,7 @@ proof-reuse-off validations and managed merge provenance exist.
 
 ## PTR-145 Wire locator-first candidate revalidation and fresh current context
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
