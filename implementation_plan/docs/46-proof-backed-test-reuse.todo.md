@@ -1571,7 +1571,7 @@ test.
 
 ## PTR-137 Add typed deferred certificate requests and lazy issuers
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
