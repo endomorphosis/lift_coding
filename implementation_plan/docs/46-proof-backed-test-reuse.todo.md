@@ -2144,7 +2144,7 @@ it never blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-154 Preserve bounded controller-owned candidate context through xdist
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
