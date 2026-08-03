@@ -1731,7 +1731,7 @@ test.
 
 ## PTR-142 Prove runtime activation, refresh the gate, and publish handoff
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
