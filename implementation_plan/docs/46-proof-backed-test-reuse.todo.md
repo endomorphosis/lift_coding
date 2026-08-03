@@ -1603,7 +1603,7 @@ test.
 
 ## PTR-138 Compose automatic pytest proof-reuse dependency injection
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
