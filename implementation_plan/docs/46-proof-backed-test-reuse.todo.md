@@ -1325,7 +1325,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-130 Prove objective closeout and publish the operator handoff
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
