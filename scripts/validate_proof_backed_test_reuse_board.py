@@ -108,6 +108,8 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-100",
         "PTR-101",
         "PTR-102",
+        "PTR-108",
+        "PTR-109",
         "PTR-110",
         "PTR-111",
         "PTR-112",
@@ -120,6 +122,8 @@ EXPECTED_TASK_IDS = frozenset(
 INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
 EXTENSION_TASK_IDS = frozenset(
     {
+        "PTR-108",
+        "PTR-109",
         "PTR-110",
         "PTR-111",
         "PTR-112",
@@ -129,7 +133,7 @@ EXTENSION_TASK_IDS = frozenset(
         "PTR-130",
     }
 )
-EXTENSION_WAVE_ONE = frozenset({"PTR-110", "PTR-111", "PTR-112"})
+EXTENSION_WAVE_ONE = frozenset({"PTR-108", "PTR-109", "PTR-110"})
 GOAL_STATES = frozenset(
     {
         "active",
@@ -194,15 +198,20 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-090": frozenset({"PTR-061", "PTR-070", "PTR-081"}),
     "PTR-100": frozenset({"PTR-091", "PTR-092", "PTR-093"}),
     "PTR-102": frozenset({"PTR-091", "PTR-092", "PTR-093", "PTR-101"}),
+    "PTR-108": frozenset({"PTR-040", "PTR-041", "PTR-042"}),
+    "PTR-109": frozenset({"PTR-080"}),
+    "PTR-110": frozenset({"PTR-102"}),
+    "PTR-111": frozenset({"PTR-102", "PTR-108"}),
+    "PTR-112": frozenset({"PTR-102", "PTR-109"}),
     "PTR-120": frozenset({"PTR-110", "PTR-111", "PTR-112"}),
     "PTR-121": frozenset({"PTR-110", "PTR-111", "PTR-112"}),
     "PTR-122": frozenset({"PTR-102", "PTR-110", "PTR-111", "PTR-112"}),
     "PTR-130": frozenset({"PTR-120", "PTR-121", "PTR-122"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
-    {"PTR-040", "PTR-041", "PTR-042", "PTR-070"}
+    {"PTR-040", "PTR-041", "PTR-042", "PTR-070", "PTR-108"}
 )
-REQUIRED_KIT_TASKS = frozenset({"PTR-080", "PTR-081"})
+REQUIRED_KIT_TASKS = frozenset({"PTR-080", "PTR-081", "PTR-109"})
 EXPECTED_PROTECTED_PATHS = frozenset(
     {
         "implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md",
@@ -567,6 +576,7 @@ def validate(
     task_by_id = {task.task_id: task for task in tasks}
     task_edges: dict[str, tuple[str, ...]] = {}
     predicted_by_task: dict[str, frozenset[str]] = {}
+    submodules_by_task: dict[str, frozenset[str]] = {}
     task_records: list[dict[str, object]] = []
     canonical_task_cids: list[str] = []
     for task in tasks:
@@ -695,6 +705,7 @@ def validate(
                     f"match shard {shard_index} provider {lane_provider!r}"
                 )
         submodules = frozenset(_csv(task.metadata.get("submodules")))
+        submodules_by_task[task.task_id] = submodules
         if not submodules.issubset(EXPECTED_SUBMODULES):
             errors.append(
                 f"{task.task_id} has unexpected submodules {sorted(submodules)}"
@@ -810,6 +821,30 @@ def validate(
             "objective-completion expansion wave does not cover all three "
             f"numeric shards: {sorted(extension_wave_shards)}"
         )
+    expected_extension_wave_resources = {
+        "PTR-108": frozenset({"external/ipfs_datasets"}),
+        "PTR-109": frozenset({"external/ipfs_kit"}),
+        "PTR-110": frozenset({"external/ipfs_accelerate"}),
+    }
+    extension_wave_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(EXTENSION_WAVE_ONE)
+    }
+    if extension_wave_resources != expected_extension_wave_resources:
+        errors.append(
+            "objective-completion expansion wave must own one distinct "
+            "configured repository resource per task: expected "
+            f"{expected_extension_wave_resources}, got "
+            f"{extension_wave_resources}"
+        )
+    extension_resource_width = len(
+        set().union(*extension_wave_resources.values())
+    )
+    if extension_resource_width != 3:
+        errors.append(
+            "objective-completion expansion wave must retain repository "
+            f"resource width 3, got {extension_resource_width}"
+        )
 
     unordered_conflicts: list[dict[str, object]] = []
     task_ancestors = {
@@ -864,6 +899,11 @@ def validate(
         "reviewed_extension_task_ids": sorted(EXTENSION_TASK_IDS),
         "reviewed_extension_wave_one_task_ids": sorted(EXTENSION_WAVE_ONE),
         "reviewed_extension_wave_one_shards": sorted(extension_wave_shards),
+        "reviewed_extension_wave_one_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in extension_wave_resources.items()
+        },
+        "reviewed_extension_wave_one_resource_width": extension_resource_width,
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {

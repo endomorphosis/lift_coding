@@ -199,6 +199,8 @@
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-03",
     "implementationTaskIds": [
+      "PTR-108",
+      "PTR-109",
       "PTR-110",
       "PTR-111",
       "PTR-112",
@@ -208,9 +210,9 @@
       "PTR-130"
     ],
     "initialClaimableTaskIds": [
-      "PTR-110",
-      "PTR-111",
-      "PTR-112"
+      "PTR-108",
+      "PTR-109",
+      "PTR-110"
     ],
     "authorityWriter": "outer_controller_only",
     "workerLaneReconciliationEnabled": false,

@@ -516,14 +516,15 @@ The reviewed audit found the following bounded completion gaps:
   verifiable reviewed real-certificate fixture or explicitly invoked real
   backend is required for the corresponding closeout criterion.
 
-The reviewed bounded expansion is `PTR-110`, `PTR-111`, `PTR-112`,
-`PTR-120`, `PTR-121`, `PTR-122`, and `PTR-130`. Autonomous objective and
-codebase refill remain disabled. Failed completion gates may describe gaps, but
-may generate work only after the bounded producer/reconciliation path is
-verified and only with stable deduplication and a reviewed finding limit.
+The reviewed bounded expansion is `PTR-108`, `PTR-109`, `PTR-110`,
+`PTR-111`, `PTR-112`, `PTR-120`, `PTR-121`, `PTR-122`, and `PTR-130`.
+Autonomous objective and codebase refill remain disabled. Failed completion
+gates may describe gaps, but may generate work only after the bounded
+producer/reconciliation path is verified and only with stable deduplication and
+a reviewed finding limit.
 
 Completion has one writer. The three implementation lanes continue to run with
-goal reconciliation disabled. After all 39 implementation tasks close, an
+goal reconciliation disabled. After all 41 implementation tasks close, an
 operator invokes a distinct closeout command which:
 
 1. verifies the exact clean integration checkout and complete task population;
@@ -562,13 +563,20 @@ protected from implementation agents.
 | 6 | `PTR-060`, `PTR-080` then `PTR-061`, `PTR-070`, `PTR-081` | Supervisor authority and three repository bootstraps |
 | 7 | `PTR-090`, then `PTR-091`, `PTR-092`, `PTR-093` | Degradation, invalidation, security/concurrency, cross-repo e2e |
 | 8 | `PTR-100`, `PTR-101`, `PTR-102` | Benchmark, staged rollout, current-tree gate |
-| 9 | `PTR-110`, `PTR-111`, `PTR-112` | Task provenance, independent goal/analyzer evidence, and strict objective-artifact contracts on all three shards |
-| 10 | `PTR-120`, `PTR-121`, `PTR-122` | Artifact assembly, single-writer staged reconciliation, and final-gate cycle/authority repair on all three shards |
-| 11 | `PTR-130` | Hermetic closeout proof and operator handoff; the real current-tree closeout is invoked only after this task is completed |
+| 9 | `PTR-108`, `PTR-109`, `PTR-110` | Datasets real-ZK assurance, kit canonical-byte transport, and accelerator task provenance own three distinct repository claims and run concurrently |
+| 10 | `PTR-111`, `PTR-112` | Accelerator goal/analyzer evidence and semantic artifact contracts adapt the repository-native protocols; the conservative shared accelerator claim serializes them safely |
+| 11 | `PTR-120`, `PTR-121`, `PTR-122` | Outer single-writer reconciliation runs beside one accelerator artifact/gate task while the shared accelerator claim serializes the other |
+| 12 | `PTR-130` | Hermetic closeout proof and operator handoff; the real current-tree closeout is invoked only after this task is completed |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
 predicted-file conflict.
+
+The first completion wave is repository-parallel by construction rather than by
+override: `PTR-108` claims only datasets, `PTR-109` only kit, and `PTR-110`
+only accelerator. Datasets and kit expose lazy injected protocols and never
+import the accelerator supervisor; accelerator remains the sole interpreter of
+goal evidence and completion authority.
 
 ## 15. Validation strategy
 
@@ -648,7 +656,7 @@ explicitly permitted.
 - Initialize exactly the three outer submodules in worker worktrees.
 - Use three strict deterministic shards and a shared serial merge queue.
 - Disable objective/codebase refill initially because the reviewed board is
-  comprehensive. The seven-task completion expansion is the separately
+  comprehensive. The nine-task completion expansion is the separately
   reviewed 2026-08-03 projection; it does not enable autonomous refill.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.

@@ -898,11 +898,9 @@ def _closeout() -> dict[str, object]:
         )
 
     module_path = (
-        ACCEL_ROOT
-        / "ipfs_accelerate_py"
-        / "agent_supervisor"
-        / "validation"
-        / "proof_test_reuse_objective_reconciliation.py"
+        REPO_ROOT
+        / "scripts"
+        / "proof_backed_test_reuse_objective_reconciliation.py"
     )
     if not module_path.is_file():
         raise RuntimeError(
@@ -953,11 +951,7 @@ def _closeout() -> dict[str, object]:
     )
     command = [
         sys.executable,
-        "-m",
-        (
-            "ipfs_accelerate_py.agent_supervisor.validation."
-            "proof_test_reuse_objective_reconciliation"
-        ),
+        str(module_path),
         "--repo-root",
         str(REPO_ROOT),
         "--objective-path",

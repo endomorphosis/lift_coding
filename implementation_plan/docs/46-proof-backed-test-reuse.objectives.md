@@ -46,7 +46,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Outputs: implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md, implementation_plan/docs/46-proof-backed-test-reuse.objectives.md, implementation_plan/docs/46-proof-backed-test-reuse.todo.md, config/proof_backed_test_reuse_supervisor.json, scripts/validate_proof_backed_test_reuse_board.py, scripts/proof_backed_test_reuse_supervisor.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py -q
 - Acceptance: Every child goal has current typed evidence; every authoritative skip binds an exact trusted pass receipt and locally verified real certificate; zero stale or false skips occur; optional dependency loss always runs tests; the warm eligible population demonstrates useful savings.
-- Gap task: Complete PTR-110 through PTR-130, then invoke the operator-owned closeout command after every implementation task is closed.
+- Gap task: Complete PTR-108 through PTR-130, then invoke the operator-owned closeout command after every implementation task is closed.
 - Refinement: Preserve one shared policy/plugin and split identity, trace, storage, proving, repository bootstrap, adversarial, and rollout evidence into independently reviewable child goals.
 - Embedding query: exact proof-backed pytest reuse AST trace CID multihash pass receipt ZK cache graceful degradation all three IPFS Python repositories
 - AST query: Find pytest collection and report hooks, proof-cache authority, content-identity bridges, ZKP adapters, repository conftests, and supervisor validation gates affected by reusable pass evidence.
@@ -146,7 +146,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py -q
 - Acceptance: Real Groth16/ProveKit certificates bind exact receipt/execution/policy/circuit/key/issuer public inputs; verification and proving are split; issuance is deferred and leaks no witness data; an unavailable backend is a typed non-blocking result; simulated ZK never authorizes skip.
-- Gap task: PTR-040, PTR-041, PTR-042, PTR-043, PTR-110, PTR-111, PTR-120
+- Gap task: PTR-040, PTR-041, PTR-042, PTR-043, PTR-108, PTR-110, PTR-111, PTR-120
 - Refinement: Build the statement, real certificate conformance, deferred issuer, and lazy cross-package adapter as dependency-ordered units.
 - Embedding query: ipfs_datasets logic zkp test pass statement Groth16 ProveKit public inputs receipt certificate deferred issuance verifier
 - AST query: Locate ZKP statement protocols, ZKPProof, ProveKit circuits/backends, Groth16 adapters, public input validation, capability registries, and lazy imports.
@@ -226,7 +226,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Outputs: external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/conftest.py, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_reuse_capabilities.py external/ipfs_kit/tests/test_proof_reuse_bootstrap.py -q
 - Acceptance: Immutable local/IPFS transport verifies strict external CIDs; Kubo/Lotus/Iroh capabilities are lazy facts; a proof hit starts no daemon and touches no user IPFS directory; legacy fake CIDs are rejected; plugin/store absence runs normally.
-- Gap task: PTR-080, PTR-081, PTR-111, PTR-120
+- Gap task: PTR-080, PTR-081, PTR-109, PTR-111, PTR-112, PTR-120
 - Refinement: Implement optional storage/capability contracts before enabling the kit repository bootstrap.
 - Embedding query: ipfs_kit immutable certificate store strict multiformats CID Kubo Lotus Iroh capability lazy pytest bootstrap
 - AST query: Locate kit multiformat adapters, storage APIs, daemon lifecycle, configuration directories, root/test conftests, and pyproject plugin registration.
@@ -266,7 +266,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_improvement/proof_reuse_benchmark.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/rollout.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_reuse_benchmark.py external/ipfs_accelerate/test/api/test_proof_reuse_rollout.py external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py -q
 - Acceptance: Shadow and warm benchmarks report zero false admissions, at least 80 percent reuse on the eligible warm fixture population, and verification cheaper than execution; rollout has sampling and automatic rollback; the final gate binds the current forest, closed task population, policy, capabilities, and fresh evidence.
-- Gap task: PTR-100, PTR-101, PTR-102, PTR-110, PTR-111, PTR-112, PTR-120, PTR-121, PTR-122, PTR-130
+- Gap task: PTR-100, PTR-101, PTR-102, PTR-108, PTR-109, PTR-110, PTR-111, PTR-112, PTR-120, PTR-121, PTR-122, PTR-130
 - Refinement: Measure first, encode staged policy second, and let an independent final gate aggregate only current authoritative evidence.
 - Embedding query: proof reuse benchmark saved time shadow warm hit rate forced rerun rollback rollout current tree completion evidence
 - AST query: Locate supervisor metrics, rollout policy, validation populations, objective completion gates, repository snapshot identities, and proof-cache performance harnesses.

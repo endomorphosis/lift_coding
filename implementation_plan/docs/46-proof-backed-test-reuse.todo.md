@@ -31,11 +31,12 @@ their declared dependencies complete.
 
 The original 32-task implementation population is complete, while the
 authority projection remains 0 of 12 goals because current bound completion
-artifacts do not yet exist. The reviewed 2026-08-03 expansion adds
-`PTR-110`, `PTR-111`, `PTR-112`, `PTR-120`, `PTR-121`, `PTR-122`, and
-`PTR-130`. Its first claimable wave is exactly `PTR-110`, `PTR-111`, and
-`PTR-112`, one task on each strict numeric shard. Task completion remains only
-implementation progress; the operator-owned closeout command runs after all 39
+artifacts do not yet exist. The reviewed 2026-08-03 expansion adds `PTR-108`,
+`PTR-109`, `PTR-110`, `PTR-111`, `PTR-112`, `PTR-120`, `PTR-121`,
+`PTR-122`, and `PTR-130`. Its first claimable wave is exactly `PTR-108`,
+`PTR-109`, and `PTR-110`, one task and one distinct repository resource on
+each strict numeric shard. Task completion remains only implementation
+progress; the operator-owned closeout command runs after all 41
 tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-000 Seal the supervisor-native program
@@ -1066,6 +1067,70 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Evidence subset: Current commit/tree/recursive gitlinks, task CIDs and merge receipts, child goal evidence, all adversarial populations, benchmark and rollout decision
 - Acceptance: Gate fails closed on missing/stale evidence, open tasks, false skips, unhealthy analyzers, mismatched forest/policy/capability/key/circuit identities, ordinary skips, or simulated authority; success emits the only root completion evidence for PTR-G000.
 
+## PTR-108 Emit datasets real-ZK conformance evidence
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: datasets-zk-assurance
+- Depends on: PTR-040, PTR-041, PTR-042
+- Goal id: PTR-G050
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/datasets-zk-assurance
+- Parallel lane: ptr-datasets-assurance
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py
+- Predicted symbols: TestCertificateAssuranceReceipt, RealZKConformanceReceipt, TestCertificateAssuranceProvider, TestCertificateAssuranceUnavailable
+- Interfaces: TestCertificateAssuranceReceipt@1, RealZKConformanceReceipt@1, TestProofCertificate@1, TestPassStatementV1
+- Submodules: external/ipfs_datasets
+- Generated artifacts: retained real-certificate verification receipts and typed backend-unavailable results
+- Conflict policy: Extend the datasets ZKP authority domain only; never import accelerator or kit, install dependencies during import, treat simulated proof as real, or turn unavailable proving infrastructure into a test failure.
+- Symbolic first: true
+- LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
+- Preconditions: The test-pass statement, execution-certificate verifier, deferred issuer, Groth16/ProveKit adapters, and lazy capability probes are available.
+- Effects: Exposes a repository-native, lazily injectable assurance provider that replays retained certificate bytes and emits exact current verification or typed unavailable evidence for objective closeout.
+- Evidence subset: TestPassStatementV1, canonical public inputs, circuit/verifier-key/issuer/policy identities, retained proof bytes, real backend verifier decision, simulated/unavailable authority distinctions
+- Acceptance: A receipt binds the exact pass receipt, execution key, statement, circuit, verifier key, issuer, backend and policy plus observed/fresh-until window and canonical retained proof bytes; locally replayed real certificates can emit authoritative conformance while simulated certificates never can; Groth16/ProveKit endpoint or binary absence returns a finite typed unavailable result; cold import performs no network, subprocess, installation, cache write or broad package import; and tampered, stale, mismatched, private-witness, fake-CID and unknown-version inputs fail closed.
+
+## PTR-109 Persist canonical artifact bytes by CID
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: kit-content-addressed-artifacts
+- Depends on: PTR-080
+- Goal id: PTR-G090
+- Outputs: external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_content_addressed_artifact_store.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/kit-content-addressed-artifacts
+- Parallel lane: ptr-kit-evidence
+- Resource class: io-artifact
+- Implementation timeout seconds: 9000
+- Predicted files: external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py
+- Predicted symbols: CanonicalArtifactStoreTransport, CanonicalDagJsonBlock, CanonicalArtifactStoreResult, CanonicalArtifactCapability
+- Interfaces: CanonicalArtifactStoreTransport@1, CanonicalDagJsonBlock@1, TestCertificateStoreTransport@1, CIDv1
+- Submodules: external/ipfs_kit
+- Generated artifacts: immutable local objective-evidence blobs and bounded optional transport results
+- Conflict policy: Provide repository-agnostic byte transport only; never interpret CompletionEvidence, import accelerator or datasets, start Kubo/Lotus/Iroh, trust a mutable index, or accept a legacy pseudo-CID.
+- Symbolic first: true
+- LLM context budget bytes: 49152
+- Provider role: grok-implement
+- Context budget tokens: 12288
+- Preconditions: Strict certificate storage, canonical external-CID verification, atomic local persistence and lazy kit capability facts are available.
+- Effects: Adds an injected immutable canonical-block transport over the existing proof-certificate store with retained bytes, readback rehash, bounded lookup hints and typed local/optional-backend capability results.
+- Evidence subset: Strict multiformats CID utilities, proof certificate store atomicity/path safety, local CAS, bounded mutable indexes, Kubo/Lotus/Iroh lazy capability probes
+- Acceptance: Canonical DAG-JSON bytes store and load only under their independently rederived CIDv1/base32/dag-json/sha2-256 identity; decoded multihash matches retained bytes; writes are atomic, fenced and readback-rehashed; stale, corrupt, oversized, partial, symlink/path-escaping, index-poisoned and fake-CID artifacts miss safely; missing multiformats/store/IPFS returns a typed result without installing or starting anything; cold import touches no user IPFS directory; and authority semantics remain solely with the injected caller.
+
 ## PTR-110 Collect authoritative task and validation provenance
 
 - Status: todo
@@ -1106,7 +1171,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Review only: false
 - Priority: P0
 - Track: objective-goal-assurance
-- Depends on: PTR-102
+- Depends on: PTR-102, PTR-108
 - Goal id: PTR-G100
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_goal_evidence.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_goal_evidence.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_goal_evidence.py -q
@@ -1117,7 +1182,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Implementation timeout seconds: 10800
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_goal_evidence.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_goal_evidence.py
 - Predicted symbols: ProofTestReuseGoalEvidence, GoalAssuranceRunner, AcceptanceCoverageReceipt, ProofReuseAnalyzerReceipt, ProofReusePopulationReceipt
-- Interfaces: ProofTestReuseGoalEvidence@1, AcceptanceCoverage@1, AnalyzerHealth, ExhaustionQuorum, ProofReuseBenchmarkReceipt, ProofReuseRollbackDecision
+- Interfaces: ProofTestReuseGoalEvidence@1, TestCertificateAssuranceReceipt@1, AcceptanceCoverage@1, AnalyzerHealth, ExhaustionQuorum, ProofReuseBenchmarkReceipt, ProofReuseRollbackDecision
 - Submodules: external/ipfs_accelerate
 - Generated artifacts: state-root goal, analyzer, adversarial, benchmark, rollout, and quorum receipts
 - Conflict policy: Execute the heap-declared validation commands with proof reuse off; never infer a criterion from task status, duplicate one analyzer as two quorum members, or treat an unavailable proof backend as a pass.
@@ -1127,7 +1192,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Context budget tokens: 16384
 - Preconditions: The typed goal heap, declared validations, analyzer implementations, adversarial populations, benchmark contract, and rollout policy are present on the current checkout.
 - Effects: Produces exact typed evidence for the 39 machine acceptance IDs, three analyzer channels, three adversarial populations, benchmark and rollout premises, and genuinely independent exhaustive/audit quorum members.
-- Evidence subset: Goal Evidence and Acceptance criteria fields, proof-reuse-off validation receipts, static/runtime/eligibility analyzer results, degradation/mutation/security/cross-repository populations, real-certificate verifier records, benchmark and rollout records
+- Evidence subset: Goal Evidence and Acceptance criteria fields, proof-reuse-off validation receipts, static/runtime/eligibility analyzer results, degradation/mutation/security/cross-repository populations, injected datasets real-certificate assurance records, benchmark and rollout records
 - Acceptance: Requirement IDs are discovered from the objective heap rather than a per-test registry; every receipt binds its exact producer channel, canonical proof revision, current identities, observed/fresh-until window and retained validation bytes; all three adversarial population receipts explicitly pass with zero false skips; two quorum members are independent, healthy, exhaustive, conclusive, fresh, and uncontradicted; an unavailable Groth16, ProveKit, cache, or IPFS capability is typed and non-blocking but leaves any real-ZK or production-warm criterion unverified unless a reviewed locally verifiable real certificate is present; synthetic `_AlwaysVerify` benchmark data is never deployment authority.
 
 ## PTR-112 Define strict objective-completion artifact contracts
@@ -1138,7 +1203,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Review only: false
 - Priority: P0
 - Track: objective-artifact-contracts
-- Depends on: PTR-102
+- Depends on: PTR-102, PTR-109
 - Goal id: PTR-G070
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_objective_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_objective_contracts.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_objective_contracts.py -q
@@ -1149,7 +1214,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Implementation timeout seconds: 9000
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_objective_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_objective_contracts.py
 - Predicted symbols: ProofTestReuseObjectiveBinding, ProofTestReuseCompletionArtifact, ProofTestReuseGateBundle, ObjectiveArtifactStore
-- Interfaces: ProofTestReuseObjectiveBinding@1, ProofTestReuseCompletionArtifact@1, ProofTestReuseGateBundle@1, CompletionEvidence
+- Interfaces: ProofTestReuseObjectiveBinding@1, ProofTestReuseCompletionArtifact@1, ProofTestReuseGateBundle@1, CanonicalArtifactStoreTransport@1, CompletionEvidence
 - Submodules: external/ipfs_accelerate
 - Generated artifacts: atomic state-root completion evidence and gate envelopes with retained canonical premise bytes
 - Conflict policy: Extend the existing generic objective authority boundary; do not create a parallel trust root, alias identity domains, accept pseudo-CIDs, or let artifact paths self-authorize.
@@ -1158,7 +1223,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Provider role: grok-implement
 - Context budget tokens: 14336
 - Preconditions: Generic goal completion, strict content-identity bridge, objective revision, repository-forest identity, and completion-control-path exclusion contracts are available.
-- Effects: Defines finite strict envelopes, per-goal bindings, canonical premise retention/resolution, atomic persistence, deserialization, and replay verification for PTR closeout artifacts.
+- Effects: Defines finite strict envelopes, per-goal bindings, canonical premise retention/resolution, deserialization and replay verification while injecting the kit canonical artifact transport lazily for atomic persistence.
 - Evidence subset: CompletionEvidence, objective goal completion revision, completion tree identity, Git tree/commit/gitlink identities, canonical DAG-JSON bytes, CID/multihash validators, source-channel proofs and freshness policy
 - Acceptance: Contracts distinguish git_tree_id, repository_forest_cid, and objective_completion_tree_id; bind repository ID plus exact per-goal objective, analyzer, configuration, policy, capability, circuit and verifier-key revisions; encode authoritative artifacts as CIDv1 lowercase base32 dag-json sha2-256 with retained canonical bytes and decoded-multihash recheck; reject fake or noncanonical CIDs, unknown fields, unsafe paths, partial writes, alias conflicts, stale records and provenance mismatches; exclude only declared state-root control artifacts from completion-tree identity; and fail closed without importing or installing optional packages.
 
@@ -1204,17 +1269,17 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Track: objective-reconciliation
 - Depends on: PTR-110, PTR-111, PTR-112
 - Goal id: PTR-G110
-- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_objective_reconciliation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_objective_reconciliation.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_objective_reconciliation.py -q
+- Outputs: scripts/proof_backed_test_reuse_objective_reconciliation.py, test/test_proof_backed_test_reuse_objective_reconciliation.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest test/test_proof_backed_test_reuse_objective_reconciliation.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/objective-reconciliation
 - Parallel lane: ptr-objective-reconcile
 - Resource class: security-review
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_objective_reconciliation.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_objective_reconciliation.py
+- Predicted files: scripts/proof_backed_test_reuse_objective_reconciliation.py, test/test_proof_backed_test_reuse_objective_reconciliation.py
 - Predicted symbols: ProofTestReuseObjectiveReconciler, ObjectiveCloseoutPhase, ObjectiveCloseoutReceipt, ObjectiveCloseoutFence
 - Interfaces: ProofTestReuseObjectiveReconciler@1, ObjectiveCloseoutReceipt@1, GoalLifecycle, ObjectiveCompletionEvidenceArtifact
-- Submodules: external/ipfs_accelerate
+- Submodules:
 - Generated artifacts: state-root lifecycle projection, phase receipts, writer fence and candidate protected objective update
 - Conflict policy: Use one outer-controller-owned writer with compare-and-swap fencing; worker lanes remain reconciliation-disabled and no phase may skip a legal lifecycle transition.
 - Symbolic first: true
@@ -1222,7 +1287,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Provider role: grok-implement
 - Context budget tokens: 16384
 - Preconditions: Strict objective artifacts, the current validated board and the generic objective reconciliation API are available.
-- Effects: Adds a bounded non-shell CLI and library workflow for report-only diagnosis, state-root lifecycle projection, three-stage reconciliation, replay, restart and candidate operator handoff.
+- Effects: Adds the outer program's bounded non-shell CLI over existing accelerator authority APIs for report-only diagnosis, state-root lifecycle projection, three-stage reconciliation, replay, restart and candidate operator handoff.
 - Evidence subset: Objective and task DAGs, strict completion artifacts, current validation reruns, lifecycle decisions, writer lease/fence, repository identity snapshots and contradiction receipts
 - Acceptance: The module implements the exact bounded argv consumed by `scripts/proof_backed_test_reuse_supervisor.py closeout`; the report-only path never writes the repository; closeout refuses open tasks, a dirty or changed source checkout, concurrent writers, stale artifacts and unhealthy supervisor state; phase one creates only provisional goals, phase two verifies G010 through G100 after current validation, and phase three admits final-gate evidence before verifying G110 then G000; every refresh recomputes bindings; bounded replay converges; interruption resumes safely; mutation or contradiction reopens affected ancestors/dependents; output is a validated candidate objective update that requires explicit operator commit; and missing optional services yield a nonterminal gap rather than blocking normal tests or supervisors.
 
@@ -1254,9 +1319,9 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Provider role: codex-implement
 - Context budget tokens: 16384
 - Preconditions: The original PTR-102 gate, authoritative task/goal evidence contracts, and strict artifact bindings are available.
-- Effects: Expands the sealed task population to all 39 implementation tasks, validates supervisor health, makes persisted gate decisions replayable, and bridges valid gate output into exact G110 and G000 generic completion records.
+- Effects: Expands the sealed task population to all 41 implementation tasks, validates supervisor health, makes persisted gate decisions replayable, and bridges valid gate output into exact G110 and G000 generic completion records.
 - Evidence subset: Full task population, verified G010-G100 children, adversarial/analyzer populations, real benchmark and rollout premises, supervisor launch health, strict objective artifacts and source-channel policy
-- Acceptance: The gate no longer requires G110 as its own child premise; it requires verified G010-G100 plus direct fresh G110 benchmark and rollout premises; the producing task is PTR-122 and the required task population includes PTR-110, PTR-111, PTR-112, PTR-120, PTR-121, PTR-122, and PTR-130; it accepts and verifies a fresh current-tree/config-bound three-lane supervisor-health receipt before claiming that root requirement; it distinguishes Git tree, forest and objective-completion identities; validates every retained premise CID; persisted bundles strictly deserialize and replay the gate; the generic adapter uses allowed producer/source semantics, exact per-goal revisions, canonical channel proof and freshness; and a passing gate emits separate exact evidence for `ptr/final-current-tree-gate@1` on G110 and `ptr/cross-repository-current-tree-gate@1` on G000 without claiming the other root requirements by implication.
+- Acceptance: The gate no longer requires G110 as its own child premise; it requires verified G010-G100 plus direct fresh G110 benchmark and rollout premises; the producing task is PTR-122 and the required task population includes PTR-108, PTR-109, PTR-110, PTR-111, PTR-112, PTR-120, PTR-121, PTR-122, and PTR-130; it accepts and verifies a fresh current-tree/config-bound three-lane supervisor-health receipt before claiming that root requirement; it distinguishes Git tree, forest and objective-completion identities; validates every retained premise CID; persisted bundles strictly deserialize and replay the gate; the generic adapter uses allowed producer/source semantics, exact per-goal revisions, canonical channel proof and freshness; and a passing gate emits separate exact evidence for `ptr/final-current-tree-gate@1` on G110 and `ptr/cross-repository-current-tree-gate@1` on G000 without claiming the other root requirements by implication.
 
 ## PTR-130 Prove objective closeout and publish the operator handoff
 
@@ -1287,5 +1352,5 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Context budget tokens: 16384
 - Preconditions: PTR-120, PTR-121, and PTR-122 provide complete artifact assembly, staged reconciliation, and repaired final-gate authority.
 - Effects: Proves end-to-end legal goal convergence and fail-closed degradation, then documents the explicit live current-tree operator closeout and protected commit/restart sequence.
-- Evidence subset: A synthetic closed 39-task board with cryptographically valid local fixtures, exact 12-goal heap, retained premise bundles, three-phase lifecycle receipts, supervisor-health records, restart and tamper cases
+- Evidence subset: A synthetic closed 41-task board with cryptographically valid local fixtures, exact 12-goal heap, retained premise bundles, three-phase lifecycle receipts, supervisor-health records, restart and tamper cases
 - Acceptance: A disposable exact population reaches provisional goals, verified G010-G100, then verified G110 and G000 only through three staged reconciliations; missing, stale, forged, noncanonical, mismatched, quorum-short, validation-failed, ordinary-skip, simulated-proof, unavailable-backend-without-real-fixture, tree-mutated and restart-interrupted cases never verify; no test-file registry or network service is required; optional capability absence remains a typed non-blocking gap; the runbook identifies genuine approvals needed for historical provenance and makes clear that task completion precedes, and does not itself constitute, the live operator closeout.
