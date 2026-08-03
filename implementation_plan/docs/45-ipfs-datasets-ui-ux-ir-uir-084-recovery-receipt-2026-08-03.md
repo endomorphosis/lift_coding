@@ -3,9 +3,9 @@
 - Schema: `ipfs-datasets-ui-ux-ir/recovery-repair-receipt@1`
 - Repair task: `UIR-084`
 - Source task: `UIR-002`
-- Review timestamp: `2026-08-03T08:01:10Z`
+- Review timestamp: `2026-08-03T10:40:53Z`
 - Reviewer/operator: Codex primary agent with two independent read-only supervisor audits
-- Disposition: operational repair completed; exact migration, grant, and one bounded dispatch remain separately fail-closed
+- Disposition: exact recovery dispatched once, integrated, and freshly validated; independent provider review remains the only UIR-002 acceptance gate
 
 ## Exact source binding
 
@@ -19,17 +19,25 @@
 - Failure kind: `implementation` (`implementation_state_recovered`, reason `inflight_process_missing`)
 - Origin stream: `event-log:sha256:07d0903cfe9a1370cbed08e153c45ce6722e382e2ff9700081075bb69209183e`
 
-## Repaired supervisor
+## Repaired supervisor and published recovery support
 
-- Accelerator commit: `8506f7ffefb64df255a0de4d7b9886d3057c19a0`
+- Accelerator commit at final reconciliation: `574f32898e98b32e07685f82b98967b97c42b383` (descendant of `0d8e6f189d772163210b177722a8cf589744d635`)
 - Accelerator branch: `origin/agent/ui-ux-ir-supervisor-pin-port`
-- Prior UIIR accelerator pin: `753c5fd03db4c0f257fd11ead673a3ad27f1d053`
-- Full daemon regression: `602 passed`, `0 failed`
-- Full merge-queue regression: `56 passed`, `0 failed`
-- Focused migration/consumption regressions: `2 passed`, `0 failed`
-- Static checks: `py_compile`, Ruff `E9/F821/F822/F823`, and `git diff --check` passed
+- Pre-repair UIIR accelerator pin: `753c5fd03db4c0f257fd11ead673a3ad27f1d053`
+- UIIR accelerator pin before final publication: `8506f7ffefb64df255a0de4d7b9886d3057c19a0`
+- Full daemon regression through integrated-recovery hardening: `642 passed`, `0 failed`
+- Full backlog-refinery regression: `65 passed`, `0 failed`
+- Full merge-queue regression after legacy completed-row normalization: `58 passed`, `0 failed`
+- Focused merge-train regression after completed-retry normalization: `20 passed`, `0 failed`
+- Focused integrated-recovery regression after final normalization: `14 passed`, `0 failed`
+- Full post-merge review regression: `37 passed`, `0 failed`
+- Post-merge evidence regression: `16 passed`, `0 failed`
+- Independent affected regression sweep: `144 passed`, `0 failed`
+- Static checks: `py_compile`, Ruff `E9/F63/F7/F82`, and `git diff --check` passed
 
 The repair permanently migrates the legacy denial-consumption witness, anchors the exact contiguous correction high-water, retains and revalidates both root and child recovery refs, fences target movement with an atomically published lease, and permits only the next content-bound correction grant. Its explicit migration path proves the exact historical source-task projection at every bindingless event baseline and at the frozen target, while permitting unrelated later board tasks; the automatic denial-consumption path retains its stricter whole-board rule. It does not turn the anchor itself into retry authority.
+
+The later recovery commits admit only a ledger-bound zero-edit seed, distinguish a queue retry from an implementation attempt, re-fence already-integrated topology under the shared repository mutation lease, defer only an exact dead-owner lifecycle race, and clear stale retry reasons on both new completions and idempotently replayed legacy completed rows. They do not create an attempt beyond the authorized attempt 5.
 
 ## Reviewed UIR-002 rescue
 
@@ -39,7 +47,9 @@ The repair permanently migrates the legacy denial-consumption witness, anchors t
 - Approved recovery child tree: `884ee7a95624fa8d1e908b2fc58fd384bbbdd839`
 - Retention branch: `origin/rescue/uir-002-attempt-2-stable-test-symbol`
 - Evidence-only replay root (never a migration seed): `6f65f3188c3d3e43443a911b466c5b1326c0c59e`
-- Recovery parent `T`: the `agent/ui-ux-ir` commit containing this receipt and the completed UIR-084 block; its exact ID is recorded in the operator backup manifest before migration
+- Frozen recovery baseline `T`: `2c119d08541f8e0783d6138878ff1260130adce4`
+- Immutable recovery seed: `1d2fd4b589ca67f46e5461597c4d2230110b74f9`
+- Immutable recovery seed tree: `cfba92d1fb498e4d8f98aa7cf5838e6a2036faf5`
 
 The approved child is a descendant of the current child gitlink and preserves the reviewed baseline test symbol. It is intentionally a sibling of rejected attempt-3 child `e61e2e0cf2d6ce9cd18f24f5f21ee753eb84d49e`; ancestry from that rejected sibling is neither required nor claimed.
 
@@ -47,23 +57,25 @@ The approved child is a descendant of the current child gitlink and preserves th
 
 - Working tree: clean checkout of `3b6e9cf4d6c055e443cbf652ce829e108bd86b27`
 - Python: `/usr/bin/python3 -P`, Python `3.12.3`
-- Accelerator `PYTHONPATH`: clean `8506f7ffefb64df255a0de4d7b9886d3057c19a0` checkout
+- Accelerator `PYTHONPATH`: clean `0d8e6f189d772163210b177722a8cf589744d635` checkout
 - Command: `python -m pytest tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py -q`
 - Population: `32 collected`, `32 passed`, `0 failed`, `0 skipped`
 - Return code: `0`
 - Test-file SHA-256: `5592ee7b6deba4c8ab4bf5ee11bdae96c707b2ac8cf8cec60aeb83d26d8087d2`
-- Captured-output SHA-256: `5aa0a0a25b2fe7ac2b288089478605787963c634e892f44a1aba444351191919`
+- Captured-output SHA-256: `93232f039d75515bbc53f2588ba31f0751c3492871fb0ab00d86a7161f9eb17f`
 - Captured-output bytes: `1019`
 
-This unit-test receipt is review evidence, not dispatch authority and not a substitute for the proposal gate. Machine authority must still be derived in order from the durable high-water anchor, this completed task's immutable repair binding, the strict `repair_granted` transition, and transactional `grant_consumed` evidence for attempt 5.
+This unit-test receipt was review evidence, not dispatch authority and not a substitute for the proposal gate. Machine authority was subsequently derived in order from the durable high-water anchor, this completed task's immutable repair binding, the strict `repair_granted` transition, and transactional `grant_consumed` evidence for attempt 5.
 
-## Required activation order
+## Executed bounded recovery
 
-1. Keep all UIIR supervisors and generated-board writers stopped.
-2. Freeze `agent/ui-ux-ir` at the commit containing this receipt; do not run a daemon before migration.
-3. Migrate attempts 2 through 4 with approved child `3b6e9cf4d6c055e443cbf652ce829e108bd86b27`.
-4. Verify one `legacy_high_water_anchored` record and an unchanged target `T`.
-5. Run one non-implementing pass to mint the exact attempt-5 repair grant.
-6. Run at most one implementing pass, scoped only to `UIR-002`, from the retained recovery seed.
+1. The sole authorized attempt 5 started at event sequence `2226`, event ID `sha256:dc1e4d42849c6cd67db581ace2bb94d3337a5e5600860d60375f660b404b615a`, with exact command `[/usr/bin/true]`.
+2. Attempt 5 finished successfully at sequence `2258`, event ID `sha256:e78fdf3bbb0d5db8bd2a6d06cca1391998ecbedc08fd80f5c1f6bb942622e5d7`, and handed immutable seed `1d2fd4b589ca67f46e5461597c4d2230110b74f9` to merge request `1785744933984518972-3572011-c7be2096267d`.
+3. The target integrated the seed as merge commit `39f774a7286574b2aeacb1ef98b2f69bc041acbd`, with parents exactly `2c119d08541f8e0783d6138878ff1260130adce4` and `1d2fd4b589ca67f46e5461597c4d2230110b74f9`, tree `cfba92d1fb498e4d8f98aa7cf5838e6a2036faf5`, and dataset gitlink `3b6e9cf4d6c055e443cbf652ce829e108bd86b27`.
+4. A controlled dead-owner lifecycle reclaim advanced the exact attempt-5 record to terminal fence `4`; one non-implementing queue replay then completed the request and deleted the root and changed-dataset worktrees/branches.
+5. Fresh post-merge validation passed the declared `32`-test command at event sequence `2315`, receipt `baguqeera64kngokafpaifzu7rbliz6k6kjxrkcpdoriho2k4qjgudil2cnua`, against exact commit `39f774a7286574b2aeacb1ef98b2f69bc041acbd` and tree `cfba92d1fb498e4d8f98aa7cf5838e6a2036faf5`.
+6. Acceptance reconciliation at sequences `2316` and `2317` confirms merge, freshness, semantic, proof, and deterministic-only gates. Only independent `provider_review` remains pending, so UIR-002 correctly stays `todo` rather than being marked complete early.
+7. No attempt 6 was created and no implementation start exists after sequence `2226`.
+8. The final idempotent queue reconciliation kept the request `completed`, queue attempt `2`, implementation attempt `5`, failure count `1`, and claim generation `7`, while normalizing the obsolete `merge_cleanup_failed` terminal reason to empty in both DuckDB and the completed JSON receipt. It neither claimed work nor changed implementation authority.
 
-Any target movement, binding change, missing retention ref, competing lock, duplicate start, or authority mismatch must stop the recovery without invoking a provider.
+The initial post-merge consumer exposed one additional supervisor defect: producer attempt 5 materialized `external/ipfs_datasets`, `external/ipfs_accelerate`, `swissknife`, and `hallucinate_app`, while legacy queue metadata carried only the changed dataset path. The narrower consumer therefore omitted the unchanged accelerator from the first validation checkout and left three exact prunable sibling registrations. A read-only preflight re-proved the exact root, queue, attempt, gitlink, branch-tip, reflog, protection-ref, and porcelain bindings; compare-and-delete cleanup then removed those three registrations and their daemon-only branches plus the exact locked detached validation registration. The root commit and working-tree diff were unchanged, all commit tips remain protected, and no broad worktree prune was used. The published supervisor now binds the producer dependency set separately from `changed_submodule_paths`; this does not alter the successful integration or authorize another implementation attempt.
