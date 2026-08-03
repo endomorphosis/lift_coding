@@ -56,6 +56,9 @@ CONTROLLER_REL = str(CONFIG["controllerPath"])
 TARGET_BRANCH = str(CONFIG["integrationBranch"])
 TASK_PREFIX = str(CONFIG["taskPrefix"])
 PARALLEL = dict(CONFIG["parallelRuntime"])
+PROVIDER_POLICY = dict(CONFIG["providerPolicy"])
+PRIMARY_PROVIDER_POLICY = dict(PROVIDER_POLICY["primary"])
+FALLBACK_PROVIDER_POLICY = dict(PROVIDER_POLICY["fallback"])
 
 state_override = os.environ.get(str(CONFIG["stateRootEnvironment"]), "").strip()
 if state_override:
@@ -90,6 +93,12 @@ LANES = tuple(
             in GROK_CODEX_PROVIDER_POLICIES
             else ""
         ),
+        "primary_model": str(PRIMARY_PROVIDER_POLICY["model"]),
+        "fallback_model": str(FALLBACK_PROVIDER_POLICY["model"]),
+        "fallback_model_reasoning_effort": str(
+            FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
+        ),
+        "fallback_trigger": str(PROVIDER_POLICY["fallbackTrigger"]),
     }
     for index in range(int(PARALLEL["laneCount"]))
 )
@@ -97,12 +106,35 @@ LANES = tuple(
 
 def _runtime_environment(provider: str | None = None) -> dict[str, str]:
     environment = dict(os.environ)
+    # This dedicated profile owns its provider chain.  The implementation
+    # daemon otherwise gives this generic escape hatch precedence over the
+    # configured Grok primary and quota-only Codex fallback.
+    environment.pop("IMPLEMENTATION_DAEMON_COMMAND", None)
     python_paths = [str(ACCEL_ROOT), str(DATASETS_ROOT), str(KIT_ROOT)]
     if environment.get("PYTHONPATH"):
         python_paths.append(environment["PYTHONPATH"])
     environment["PYTHONPATH"] = os.pathsep.join(python_paths)
     for key, value in dict(PARALLEL["commonEnvironment"]).items():
         environment[str(key)] = str(value)
+    dependency_state = STATE_ROOT / "dependencies"
+    environment["IPFS_TEST_PROOF_REUSE_NLTK_DATA_DIR"] = str(
+        dependency_state / "nltk-data"
+    )
+    environment["IPFS_TEST_PROOF_REUSE_PROVISION_DIR"] = str(
+        dependency_state / "provisioning"
+    )
+    environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"] = str(
+        PRIMARY_PROVIDER_POLICY["model"]
+    )
+    environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"] = str(
+        FALLBACK_PROVIDER_POLICY["model"]
+    )
+    environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"] = str(
+        FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
+    )
+    environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"] = str(
+        PROVIDER_POLICY["fallbackTrigger"]
+    )
     if provider:
         environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"] = provider
         if (
@@ -357,6 +389,12 @@ def _provider_preflight() -> dict[str, object]:
         raise RuntimeError("Python cannot import required DuckDB") from exc
     codex_binary = shutil.which("codex")
     grok_binary = shutil.which("grok")
+    if not grok_binary:
+        raise RuntimeError(
+            "Grok CLI is required as the PTR supervisor primary provider; "
+            "Codex fallback is permitted only after confirmed Grok quota "
+            "exhaustion"
+        )
     if not codex_binary:
         raise RuntimeError(
             "Codex CLI is required as the PTR supervisor fallback provider"
@@ -371,20 +409,23 @@ def _provider_preflight() -> dict[str, object]:
             "Codex fallback CLI did not report an authenticated session"
         )
 
-    grok_version_text = ""
-    if grok_binary:
-        try:
-            grok_version = _run(
-                [grok_binary, "--version"],
-                environment=_runtime_environment(),
-                check=False,
-                timeout=30,
-            )
-            grok_version_text = (
-                grok_version.stdout + grok_version.stderr
-            ).strip()
-        except (OSError, subprocess.SubprocessError) as exc:
-            grok_version_text = f"unavailable: {type(exc).__name__}"
+    try:
+        grok_version = _run(
+            [grok_binary, "--version"],
+            environment=_runtime_environment(),
+            check=False,
+            timeout=30,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        raise RuntimeError(
+            "Grok primary CLI could not execute during preflight"
+        ) from exc
+    grok_version_text = (grok_version.stdout + grok_version.stderr).strip()
+    if grok_version.returncode != 0:
+        raise RuntimeError(
+            "Grok primary CLI --version failed during preflight: "
+            + (grok_version_text or f"exit {grok_version.returncode}")
+        )
 
     if str(ACCEL_ROOT) not in sys.path:
         sys.path.insert(0, str(ACCEL_ROOT))
@@ -393,9 +434,14 @@ def _provider_preflight() -> dict[str, object]:
             _grok_cli_available,
         )
 
-        grok_authenticated = bool(grok_binary and _grok_cli_available())
+        grok_authenticated = bool(_grok_cli_available())
     except Exception:
         grok_authenticated = False
+    if not grok_authenticated:
+        raise RuntimeError(
+            "Grok primary CLI did not report headless authentication; "
+            "Codex fallback is not allowed for authentication failures"
+        )
 
     optional = {
         "multiformats": importlib.util.find_spec("multiformats") is not None,
@@ -419,12 +465,27 @@ def _provider_preflight() -> dict[str, object]:
         "grok_version": grok_version_text,
         "grok_authenticated": grok_authenticated,
         "provider_policy": {
-            "primary": "grok",
-            "fallback": "codex",
-            "effective_first_provider": (
-                "grok" if grok_authenticated else "codex"
+            "primary": {
+                "provider": str(PRIMARY_PROVIDER_POLICY["provider"]),
+                "model": str(PRIMARY_PROVIDER_POLICY["model"]),
+            },
+            "fallback": {
+                "provider": str(FALLBACK_PROVIDER_POLICY["provider"]),
+                "model": str(FALLBACK_PROVIDER_POLICY["model"]),
+                "model_reasoning_effort": str(
+                    FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
+                ),
+            },
+            "fallback_trigger": str(PROVIDER_POLICY["fallbackTrigger"]),
+            "primary_unavailable_action": str(
+                PROVIDER_POLICY["primaryUnavailableAction"]
             ),
-            "grok_unavailable_action": "use_codex",
+            "non_quota_failure_action": str(
+                PROVIDER_POLICY["nonQuotaFailureAction"]
+            ),
+            "fallback_forbidden_on": list(
+                PROVIDER_POLICY["fallbackForbiddenOn"]
+            ),
         },
         "optional_non_blocking_capabilities": optional,
         "test_reuse_discovery_policy": proof_reuse_discovery[
@@ -1144,6 +1205,36 @@ def _task_state_work_complete(payload: dict[str, object]) -> bool:
     return task_count > 0 and completed_count >= task_count
 
 
+def _current_board_task_ids() -> tuple[str, ...]:
+    """Read the exact task population represented by the current TODO file.
+
+    Status is intentionally derived from the live control-plane file instead
+    of trusting a persisted lane count.  A stopped lane can retain a perfectly
+    valid completion snapshot for an older board revision.
+    """
+
+    try:
+        lines = (REPO_ROOT / TODO_REL).read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return ()
+    task_ids: list[str] = []
+    heading_prefix = TASK_PREFIX.strip()
+    task_id_prefix = heading_prefix.lstrip("# ").rstrip("-") + "-"
+    for line in lines:
+        if not line.startswith(heading_prefix):
+            continue
+        task_id = line[3:].split(maxsplit=1)[0]
+        suffix = task_id.removeprefix(task_id_prefix)
+        if task_id.startswith(task_id_prefix) and suffix.isdigit():
+            task_ids.append(task_id)
+    return tuple(task_ids)
+
+
+def _task_ids_sha256(task_ids: Sequence[str]) -> str:
+    canonical = "\n".join(sorted({str(task_id) for task_id in task_ids}))
+    return "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
 def _no_agent_readiness() -> dict[str, object]:
     state_dir = STATE_DIR / "preflight" / "board"
     command = [
@@ -1376,6 +1467,14 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
     task_state_path = STATE_DIR / lane_name / f"{lane_name}_task_state.json"
     status = _load_json(status_path)
     task_state = _load_json(task_state_path)
+    task_identities = task_state.get("task_identities")
+    task_statuses = task_state.get("task_statuses")
+    if isinstance(task_identities, Mapping):
+        observed_task_ids = tuple(str(value) for value in task_identities)
+    elif isinstance(task_statuses, Mapping):
+        observed_task_ids = tuple(str(value) for value in task_statuses)
+    else:
+        observed_task_ids = ()
     daemon_pid = status.get("daemon_pid")
     supervisor_owned = _lane_process_owned(lane_name, supervisor_pid)
     daemon_alive = _pid_alive(daemon_pid)
@@ -1418,7 +1517,13 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "shard": lane["shard"],
         "provider": lane["provider"],
         "primary_provider": lane["primary_provider"],
+        "primary_model": lane["primary_model"],
         "fallback_provider": lane["fallback_provider"],
+        "fallback_model": lane["fallback_model"],
+        "fallback_model_reasoning_effort": lane[
+            "fallback_model_reasoning_effort"
+        ],
+        "fallback_trigger": lane["fallback_trigger"],
         "healthy": healthy,
         "supervisor_pid": supervisor_pid or None,
         "supervisor_owned_and_alive": supervisor_owned,
@@ -1461,6 +1566,9 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
             "implementation_in_progress"
         ),
         "task_count": task_state.get("task_count"),
+        "task_ids_sha256": (
+            _task_ids_sha256(observed_task_ids) if observed_task_ids else None
+        ),
         "completed_count": task_state.get("completed_count"),
         "ready_count": task_state.get("ready_count"),
         "selectable_ready_count": task_state.get("selectable_ready_count"),
@@ -1478,10 +1586,44 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
 
 def _status_payload() -> dict[str, object]:
     lanes = [_lane_status(lane) for lane in LANES]
-    work_complete = bool(lanes) and all(_task_state_work_complete(item) for item in lanes)
+    current_board_task_ids = _current_board_task_ids()
+    current_board_task_count = len(current_board_task_ids)
+    current_board_task_ids_sha256 = (
+        _task_ids_sha256(current_board_task_ids)
+        if current_board_task_ids
+        else None
+    )
+    for item in lanes:
+        count_matches = (
+            current_board_task_count > 0
+            and int(item.get("task_count") or 0) == current_board_task_count
+        )
+        observed_sha256 = item.get("task_ids_sha256")
+        identity_matches = (
+            observed_sha256 == current_board_task_ids_sha256
+            if observed_sha256
+            else count_matches
+        )
+        item["current_board_matches"] = bool(count_matches and identity_matches)
+        if not item["current_board_matches"]:
+            reasons = list(item.get("unhealthy_reasons") or [])
+            if "task_state_board_mismatch" not in reasons:
+                reasons.append("task_state_board_mismatch")
+            item["unhealthy_reasons"] = reasons
+            item["healthy"] = False
+    work_complete = bool(lanes) and all(
+        bool(item.get("healthy"))
+        and bool(item.get("current_board_matches"))
+        and _task_state_work_complete(item)
+        for item in lanes
+    )
     globally_progressable = any(
-        bool(item.get("active_task_id"))
-        or int(item.get("selectable_ready_count") or 0) > 0
+        bool(item.get("healthy"))
+        and bool(item.get("current_board_matches"))
+        and (
+            bool(item.get("active_task_id"))
+            or int(item.get("selectable_ready_count") or 0) > 0
+        )
         for item in lanes
     ) or work_complete
     blocked_task_ids = sorted(
@@ -1497,6 +1639,25 @@ def _status_payload() -> dict[str, object]:
         "repository_root": str(REPO_ROOT),
         "state_root": str(STATE_ROOT),
         "target_branch": TARGET_BRANCH,
+        "current_board_task_count": current_board_task_count,
+        "current_board_task_ids_sha256": current_board_task_ids_sha256,
+        "provider_policy": {
+            "primary": {
+                "provider": PRIMARY_PROVIDER_POLICY["provider"],
+                "model": PRIMARY_PROVIDER_POLICY["model"],
+            },
+            "fallback": {
+                "provider": FALLBACK_PROVIDER_POLICY["provider"],
+                "model": FALLBACK_PROVIDER_POLICY["model"],
+                "model_reasoning_effort": FALLBACK_PROVIDER_POLICY[
+                    "modelReasoningEffort"
+                ],
+            },
+            "fallback_trigger": PROVIDER_POLICY["fallbackTrigger"],
+            "non_quota_failure_action": PROVIDER_POLICY[
+                "nonQuotaFailureAction"
+            ],
+        },
         "healthy": bool(
             lanes
             and all(bool(item["healthy"]) for item in lanes)
@@ -1902,7 +2063,13 @@ def _start() -> dict[str, object]:
                     "pid": _launch_lane(lane),
                     "provider": lane["provider"],
                     "primary_provider": lane["primary_provider"],
+                    "primary_model": lane["primary_model"],
                     "fallback_provider": lane["fallback_provider"],
+                    "fallback_model": lane["fallback_model"],
+                    "fallback_model_reasoning_effort": lane[
+                        "fallback_model_reasoning_effort"
+                    ],
+                    "fallback_trigger": lane["fallback_trigger"],
                 }
             )
         status = _verify_started()

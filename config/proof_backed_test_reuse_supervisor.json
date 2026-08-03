@@ -213,25 +213,19 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-03",
-    "reviewRevision": "runtime-activation-repair-v1",
+    "reviewRevision": "production-runtime-activation-repair-v2",
     "implementationTaskIds": [
-      "PTR-131",
-      "PTR-132",
-      "PTR-133",
-      "PTR-134",
-      "PTR-135",
-      "PTR-136",
-      "PTR-137",
-      "PTR-138",
-      "PTR-139",
-      "PTR-140",
-      "PTR-141",
-      "PTR-142"
+      "PTR-143",
+      "PTR-144",
+      "PTR-145",
+      "PTR-146",
+      "PTR-147",
+      "PTR-148",
+      "PTR-149"
     ],
     "initialClaimableTaskIds": [
-      "PTR-131",
-      "PTR-132",
-      "PTR-133"
+      "PTR-143",
+      "PTR-144"
     ],
     "authorityWriter": "outer_controller_only",
     "workerLaneReconciliationEnabled": false,
@@ -245,8 +239,31 @@
     "statusPathSuffix": "projection/completion/closeout_status.json",
     "reconciliationPhases": 3,
     "closeoutControllerTaskId": "PTR-121",
-    "operatorHandoffTaskId": "PTR-142",
+    "operatorHandoffTaskId": "PTR-149",
     "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
+  },
+  "providerPolicy": {
+    "primary": {
+      "provider": "grok",
+      "model": "grok-4.5"
+    },
+    "fallback": {
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "modelReasoningEffort": "medium"
+    },
+    "fallbackTrigger": "grok_quota_exhausted",
+    "primaryUnavailableAction": "fail_preflight",
+    "nonQuotaFailureAction": "propagate_without_fallback",
+    "fallbackForbiddenOn": [
+      "authentication_failure",
+      "launch_failure",
+      "timeout",
+      "transport_failure",
+      "generic_nonzero_exit",
+      "malformed_output",
+      "task_failure"
+    ]
   },
   "parallelRuntime": {
     "enabled": true,
@@ -254,9 +271,8 @@
     "scheduler": "deterministic_numeric_task_shards",
     "strictTaskSharding": true,
     "initialClaimableTaskIds": [
-      "PTR-131",
-      "PTR-132",
-      "PTR-133"
+      "PTR-143",
+      "PTR-144"
     ],
     "isolation": "ephemeral_git_worktree_per_task",
     "mergeQueue": "shared_serial",
@@ -308,6 +324,10 @@
       "IPFS_AUTO_INSTALL": "false",
       "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
       "IPFS_TEST_PROOF_REUSE_MODE": "off",
+      "IPFS_TEST_PROOF_REUSE_AUTO_INSTALL": "1",
+      "IPFS_ACCEL_AUTO_INSTALL": "1",
+      "IPFS_TEST_PROOF_REUSE_NLTK_DOWNLOAD": "1",
+      "IPFS_TEST_PROOF_REUSE_GROTH16_BUILD": "1",
       "IPFS_ACCELERATE_AGENT_REQUIRE_TASK_EXECUTION_METADATA": "1",
       "IPFS_ACCELERATE_AGENT_CODEX_MAX_THREADS": "1",
       "IPFS_ACCELERATE_AGENT_CODEX_MAX_DEPTH": "1",
@@ -318,7 +338,7 @@
     "requireCleanExactIntegrationCheckout": true,
     "requireCleanExactSubmodules": true,
     "validateGoalAndTaskDags": true,
-    "requireInitialConflictFreeWidth": 3,
+    "requireInitialConflictFreeWidth": 2,
     "projectObjectivesWithoutGeneratingWork": true,
     "runNoAgentReadinessPass": true,
     "runReconciliationOnlyLanePasses": true,

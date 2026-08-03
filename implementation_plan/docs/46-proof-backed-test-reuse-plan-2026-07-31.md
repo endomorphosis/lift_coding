@@ -70,6 +70,27 @@ mutation evidence establish that it is safe.
   snapshot adapter closes and binds that dependency.
 - Claiming a zero-knowledge property when the configured backend is simulated.
 
+### Supervisor provider execution policy
+
+The reviewed proof-reuse supervisor profile always starts implementation work
+with Grok model `grok-4.5`. Grok binary and headless-auth readiness are launch
+preflight requirements; an unavailable or unauthenticated Grok primary is not a
+reason to start Codex.
+
+Codex is a conditional fallback with model `gpt-5.6-terra` and
+`model_reasoning_effort="medium"`. The fallback runner may invoke it only after
+the failed Grok process emits a narrowly recognized, valid quota-exhaustion
+error. Authentication failures, launch failures, timeouts, transport failures,
+generic nonzero exits, rate-limit-only responses, malformed output, and task
+failures preserve the Grok failure without invoking Codex. The supervisor
+projects this model/trigger contract in preflight, start, lane, and status
+payloads.
+
+This stricter behavior is profile-scoped and opt-in through
+`IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY=grok_quota_exhausted`.
+Accelerator supervisors that do not select it retain the compatibility
+`any_failure` policy.
+
 ## 3. Existing assets and gaps
 
 | Repository | Reuse | Required upgrade |
@@ -323,8 +344,15 @@ mislabeling.
 
 - Verification is local through a pinned real backend and bounded by byte/time
   limits.
-- Groth16 or ProveKit issuance is asynchronous/deferred. Endpoint absence or
-  failure records `certificate_deferred` and does not change the passed test.
+- The production-activation correction uses the reviewed local Groth16 backend
+  for issuance. `IPFS_TEST_PROOF_REUSE_GROTH16_ENDPOINT` is currently a bounded
+  diagnostic/configuration capability only, not an implemented remote issuer;
+  its absence never blocks launch or test execution. A future authenticated
+  endpoint client requires a separately reviewed trust/transport task and is
+  not completion evidence for this 60-task board.
+- Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
+  provider or diagnostic endpoint state records `certificate_deferred` and
+  does not change the passed test.
 - A locally retained pass receipt can be proved later by an explicit maintenance
   command.
 - Simulated proofs have authority `non_attested`; their artifacts may exercise
@@ -619,6 +647,66 @@ refreshes the exact final-tree population from 41 to 53 tasks, and hands the
 existing fenced outer closeout controller to the operator. Autonomous gap or
 codebase refill remains disabled.
 
+## 13.3 Reviewed production-runtime activation correction (2026-08-03)
+
+A current-tree implementation audit found that the completed repair did not
+actually satisfy its production-activation acceptance. This finding preserves
+the historical completion provenance of `PTR-138`, `PTR-140`, and `PTR-142`
+but supersedes their activation evidence. In particular:
+
+- collection calls the full identity assembler, which requires unavailable
+  current runtime evidence before it creates the locator needed to retrieve a
+  retained runtime candidate;
+- the default revalidator is constructed over the certificate store, not the
+  dedicated candidate-context store, has no production current-context
+  provider, and is not in the plugin lookup authority sequence;
+- ordinary cold execution attaches lifecycle counters but never starts the
+  existing runtime dependency tracer, cannot compile the final execution key
+  after observation, and does not publish the canonical candidate components;
+- the default datasets issuer factory has no real provider, while its public
+  request path does not turn a returned proof-bearing certificate into
+  controller-publishable issued material;
+- the claimed activation e2e manually creates identity/proof artifacts or
+  injects services/item attributes, uses a deterministic pseudo-certificate,
+  and does not run independent cold and warm pytest subprocesses; and
+- dependency reporting is hard-coded source inventory rather than a live typed
+  composition/capability result.
+
+The bounded correction is `PTR-143` through `PTR-149`, expanding the sealed
+population from 53 to 60. It implements the same authority sequence as section
+13.2, now with executable proof at every link:
+
+1. `PTR-143` attaches a stable locator/static collection seed without requiring
+   runtime evidence or inventing a final execution key.
+2. `PTR-144` supplies a test-pass-specific real Groth16 circuit and lazy local
+   provider; it may defer when explicit native artifacts are absent but never
+   substitutes an unrelated or simulated proof.
+3. `PTR-145` performs locator-only candidate-context lookup, retained-byte
+   rehash, live frontier resolution and fresh current identity reconstruction
+   before certificate-cache verification.
+4. `PTR-146` runs the production tracer around exactly one cold pytest
+   setup/call/teardown lifecycle, then builds the final key, receipt and
+   canonical candidate publication envelope.
+5. `PTR-147` composes those paths as defaults and makes the controller the sole
+   issuer/verifier/index publisher; deferred or interrupted issuance leaves no
+   skip authority.
+6. `PTR-148` uses two independent direct-node pytest subprocesses and one
+   persistent disposable cache for accelerator, datasets and kit, with a real
+   local Groth16 certificate, body-once evidence, missing-backend fail-open
+   behavior and raw measured cold/warm wall time.
+7. `PTR-149` derives activation reporting from live typed services and refreshes
+   the current-tree gate/handoff for the exact 60-task population.
+
+The minimal safe split is seven tasks because real issuance belongs to datasets
+while controller composition belongs to accelerator. `PTR-143` and `PTR-144`
+are initially claimable on shards 2 and 0. Once `PTR-143` closes, `PTR-145` and
+`PTR-146` may run on shards 1 and 2 while `PTR-144` continues on shard 0; all
+three have disjoint predicted files. The join is `PTR-147`, followed by
+`PTR-148` and `PTR-149`. Initial conflict-free width is therefore two while the
+three-lane runtime and deterministic sharding remain unchanged. Historical
+53-task or `PTR-142` activation packets are explicitly inadmissible at the
+refreshed gate.
+
 ## 14. Parallel implementation program
 
 The machine board is
@@ -651,6 +739,11 @@ protected from implementation agents.
 | 16 | `PTR-138` | The plugin composes lookup, revalidation, local verification, terminal pass capture, controller issuance, and xdist fencing |
 | 17 | `PTR-139`, `PTR-140`, `PTR-141` | Accelerator, datasets, and kit add direct-node bootstrap, manifest parity, scoped imports, and bounded lazy installers concurrently |
 | 18 | `PTR-142` | Cross-repository activation assurance, benchmark, exact 53-task gate refresh, and operator handoff |
+| 19 | `PTR-143`, `PTR-144` | Accelerator locator-first collection and datasets real Groth16 test-pass issuance start independently on two numeric shards |
+| 20 | `PTR-145`, `PTR-146` (while `PTR-144` may continue) | Disjoint accelerator warm revalidation and cold trace/candidate publication branches can fill the remaining two shards |
+| 21 | `PTR-147` | Default service/plugin/controller composition joins real issuance, warm revalidation and cold publication |
+| 22 | `PTR-148` | Genuine no-injection two-process activation and measured subprocess savings across all three repositories |
+| 23 | `PTR-149` | Live reporting, exact 60-task authority gate, corrected handoff and explicit operator closeout premise |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -667,6 +760,14 @@ and `PTR-133`, then `PTR-139`, `PTR-140` and `PTR-141`, own one distinct
 repository each. Numeric shards determine canonical provider roles and the
 shared merge queue serializes gitlink publication; predicted-file conflicts
 remain dependency ordered and cannot be overridden.
+
+The production-activation correction uses a two-task initial wave rather than
+inventing unrelated kit work merely to occupy a lane. `PTR-143` owns
+accelerator and `PTR-144` owns datasets. After `PTR-143`, the claimable set may
+be `PTR-144`, `PTR-145`, and `PTR-146`, covering all numeric shards with
+pairwise-disjoint predicted files even though two tasks legitimately share the
+accelerator repository. `PTR-147` depends on all three and serializes their
+integration before assurance and authority refresh.
 
 ## 15. Validation strategy
 
@@ -746,9 +847,10 @@ explicitly permitted.
 - Initialize exactly the three outer submodules in worker worktrees.
 - Use three strict deterministic shards and a shared serial merge queue.
 - Disable objective/codebase refill initially because the reviewed board is
-  comprehensive. The historical nine-task completion expansion and active
-  twelve-task runtime-activation repair are separately reviewed 2026-08-03
-  projections; neither enables autonomous refill.
+  comprehensive. The historical nine-task completion expansion and historical
+  twelve-task runtime-activation repair, plus the active seven-task
+  production-activation correction, are separately reviewed 2026-08-03
+  projections; none enables autonomous refill.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no
@@ -784,11 +886,19 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
   to predict its runtime trace.
 - Every authoritative skip is backed by an exact current execution key, trusted
   pass receipt, locally verified real certificate, and fresh supervisor receipt.
+- The certificate policy and verifier bind content identities computed from the
+  exact reviewed circuit and activated verifying-key bytes; label-derived,
+  certificate-selected, stale, or provenance-mismatched artifact identities
+  remain non-authoritative and execute/defer.
 - Every missing or faulty optional dependency executes the test normally.
 - Simulated proofs, legacy pseudo-CIDs, ordinary skips, xfails, and incomplete
   traces never satisfy skip or supervisor completion authority.
 - Mutation, degradation, security, concurrency, and cross-repository e2e
   populations pass with proof reuse forced off for their own validation.
 - Shadow and warm benchmarks meet the admitted threshold with zero false skips.
+- The authoritative activation benchmark contains raw timings from genuine
+  cold and warm pytest subprocesses; injected in-memory orchestration,
+  deterministic pseudo-certificates, and synthetic timing constants are not
+  closeout evidence.
 - Operations can inspect, start, and stop isolated lanes without modifying the
   original dirty workspace or colliding with other supervisor programs.

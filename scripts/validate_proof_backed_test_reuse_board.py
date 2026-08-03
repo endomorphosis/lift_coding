@@ -129,6 +129,13 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-140",
         "PTR-141",
         "PTR-142",
+        "PTR-143",
+        "PTR-144",
+        "PTR-145",
+        "PTR-146",
+        "PTR-147",
+        "PTR-148",
+        "PTR-149",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -166,6 +173,21 @@ RUNTIME_REPAIR_TASK_IDS = frozenset(
 )
 RUNTIME_REPAIR_WAVE_ONE = frozenset({"PTR-131", "PTR-132", "PTR-133"})
 RUNTIME_BOOTSTRAP_WAVE = frozenset({"PTR-139", "PTR-140", "PTR-141"})
+PRODUCTION_ACTIVATION_TASK_IDS = frozenset(
+    {
+        "PTR-143",
+        "PTR-144",
+        "PTR-145",
+        "PTR-146",
+        "PTR-147",
+        "PTR-148",
+        "PTR-149",
+    }
+)
+PRODUCTION_ACTIVATION_WAVE_ONE = frozenset({"PTR-143", "PTR-144"})
+PRODUCTION_ACTIVATION_PARALLEL_WAVE = frozenset(
+    {"PTR-144", "PTR-145", "PTR-146"}
+)
 GOAL_STATES = frozenset(
     {
         "active",
@@ -251,6 +273,13 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-140": frozenset({"PTR-137", "PTR-138"}),
     "PTR-141": frozenset({"PTR-133", "PTR-138"}),
     "PTR-142": frozenset({"PTR-139", "PTR-140", "PTR-141"}),
+    "PTR-143": frozenset({"PTR-142"}),
+    "PTR-144": frozenset({"PTR-142"}),
+    "PTR-145": frozenset({"PTR-143"}),
+    "PTR-146": frozenset({"PTR-143"}),
+    "PTR-147": frozenset({"PTR-144", "PTR-145", "PTR-146"}),
+    "PTR-148": frozenset({"PTR-147"}),
+    "PTR-149": frozenset({"PTR-148"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -262,6 +291,7 @@ REQUIRED_DATASETS_TASKS = frozenset(
         "PTR-132",
         "PTR-137",
         "PTR-140",
+        "PTR-144",
     }
 )
 REQUIRED_ACCELERATOR_TASKS = frozenset(
@@ -273,6 +303,12 @@ REQUIRED_ACCELERATOR_TASKS = frozenset(
         "PTR-138",
         "PTR-139",
         "PTR-142",
+        "PTR-143",
+        "PTR-145",
+        "PTR-146",
+        "PTR-147",
+        "PTR-148",
+        "PTR-149",
     }
 )
 REQUIRED_KIT_TASKS = frozenset(
@@ -363,6 +399,62 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "test_proof_reuse_runtime_activation_e2e.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
             "validation/proof_test_reuse_current_tree_gate.py",
+        }
+    ),
+    "PTR-143": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/collection_seed.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/default_identity_services.py",
+        }
+    ),
+    "PTR-144": frozenset(
+        {
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
+            "test_pass_groth16_provider.py",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/src/circuit.rs",
+        }
+    ),
+    "PTR-145": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/current_context_provider.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/runtime_revalidation.py",
+        }
+    ),
+    "PTR-146": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/runtime_trace_lifecycle.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/candidate_publication.py",
+        }
+    ),
+    "PTR-147": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/services.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/publication.py",
+        }
+    ),
+    "PTR-148": frozenset(
+        {
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_runtime_activation_e2e.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_subprocess_benchmark.py",
+        }
+    ),
+    "PTR-149": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
+            "validation/proof_test_reuse_current_tree_gate.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_runtime_activation_report.py",
         }
     ),
 }
@@ -544,6 +636,15 @@ def validate(
         errors.append("objective refill must be disabled for the sealed board")
     if parallel.get("codebaseRefillEnabled") is not False:
         errors.append("codebase refill must be disabled for the sealed board")
+    preflight_config = config.get("preflight")
+    if not isinstance(preflight_config, dict):
+        errors.append("configuration preflight must be an object")
+        preflight_config = {}
+    if preflight_config.get("requireInitialConflictFreeWidth") != 2:
+        errors.append(
+            "preflight.requireInitialConflictFreeWidth must match the reviewed "
+            "two-task production-activation first wave"
+        )
     if tuple(parallel.get("worktreeSubmodulePaths") or ()) != EXPECTED_SUBMODULES:
         errors.append(
             "worktreeSubmodulePaths must contain exactly the three outer "
@@ -590,21 +691,21 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "runtime-activation-repair-v1"
+        "production-runtime-activation-repair-v2"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
-            "runtime activation repair"
+            "production runtime activation repair"
         )
     if frozenset(objective_projection.get("implementationTaskIds") or ()) != (
-        RUNTIME_REPAIR_TASK_IDS
+        PRODUCTION_ACTIVATION_TASK_IDS
     ):
         errors.append(
             "objectiveProjection implementation task inventory mismatch"
         )
     if frozenset(
         objective_projection.get("initialClaimableTaskIds") or ()
-    ) != RUNTIME_REPAIR_WAVE_ONE:
+    ) != PRODUCTION_ACTIVATION_WAVE_ONE:
         errors.append(
             "objectiveProjection initial claimable task inventory mismatch"
         )
@@ -622,8 +723,8 @@ def validate(
         errors.append("objective closeout must declare exactly three phases")
     if objective_projection.get("closeoutControllerTaskId") != "PTR-121":
         errors.append("objective closeout controller task must be PTR-121")
-    if objective_projection.get("operatorHandoffTaskId") != "PTR-142":
-        errors.append("objective operator handoff task must be PTR-142")
+    if objective_projection.get("operatorHandoffTaskId") != "PTR-149":
+        errors.append("objective operator handoff task must be PTR-149")
     projection_path_fields = (
         "gatePathSuffix",
         "evidencePathSuffix",
@@ -920,9 +1021,11 @@ def validate(
             errors.append(
                 f"{task.task_id} has unexpected submodules {sorted(submodules)}"
             )
-        if task.task_id in RUNTIME_REPAIR_TASK_IDS and len(submodules) != 1:
+        if task.task_id in (
+            RUNTIME_REPAIR_TASK_IDS | PRODUCTION_ACTIVATION_TASK_IDS
+        ) and len(submodules) != 1:
             errors.append(
-                f"{task.task_id} runtime repair must own exactly one "
+                f"{task.task_id} reviewed repair task must own exactly one "
                 f"repository resource, got {sorted(submodules)}"
             )
         if task.task_id in REQUIRED_ACCELERATOR_TASKS and (
@@ -968,11 +1071,13 @@ def validate(
                 f"{task_id} missing required direct dependencies: "
                 f"{missing_dependencies}"
             )
-        if task_id in RUNTIME_REPAIR_TASK_IDS and frozenset(
+        if task_id in (
+            RUNTIME_REPAIR_TASK_IDS | PRODUCTION_ACTIVATION_TASK_IDS
+        ) and frozenset(
             task_edges.get(task_id, ())
         ) != required_dependencies:
             errors.append(
-                f"{task_id} runtime-repair dependencies must be exact: "
+                f"{task_id} reviewed-repair dependencies must be exact: "
                 f"expected {sorted(required_dependencies)}, got "
                 f"{sorted(task_edges.get(task_id, ()))}"
             )
@@ -992,10 +1097,10 @@ def validate(
             parallel.get("initialClaimableTaskIds") or ()
         )
     )
-    if configured_initial_ready != RUNTIME_REPAIR_WAVE_ONE:
+    if configured_initial_ready != PRODUCTION_ACTIVATION_WAVE_ONE:
         errors.append(
             "configured initial claimable tasks mismatch: expected "
-            f"{sorted(RUNTIME_REPAIR_WAVE_ONE)}, got "
+            f"{sorted(PRODUCTION_ACTIVATION_WAVE_ONE)}, got "
             f"{sorted(configured_initial_ready)}"
         )
     if completed_ids == {"PTR-000"}:
@@ -1021,6 +1126,7 @@ def validate(
         EXPECTED_TASK_IDS
         - COMPLETION_EXTENSION_TASK_IDS
         - RUNTIME_REPAIR_TASK_IDS
+        - PRODUCTION_ACTIVATION_TASK_IDS
     )
     completion_extension_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1033,7 +1139,11 @@ def validate(
                 f"must be {sorted(COMPLETION_EXTENSION_WAVE_ONE)}, got "
                 f"{sorted(claimable_task_ids)}"
             )
-    pre_repair_task_ids = EXPECTED_TASK_IDS - RUNTIME_REPAIR_TASK_IDS
+    pre_repair_task_ids = (
+        EXPECTED_TASK_IDS
+        - RUNTIME_REPAIR_TASK_IDS
+        - PRODUCTION_ACTIVATION_TASK_IDS
+    )
     runtime_repair_unstarted = all(
         task_by_id[task_id].status == "todo"
         for task_id in RUNTIME_REPAIR_TASK_IDS
@@ -1045,6 +1155,23 @@ def validate(
                 f"{sorted(RUNTIME_REPAIR_WAVE_ONE)}, got "
                 f"{sorted(claimable_task_ids)}"
             )
+    pre_production_activation_task_ids = (
+        EXPECTED_TASK_IDS - PRODUCTION_ACTIVATION_TASK_IDS
+    )
+    production_activation_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in PRODUCTION_ACTIVATION_TASK_IDS
+    )
+    if (
+        pre_production_activation_task_ids.issubset(completed_ids)
+        and production_activation_unstarted
+        and claimable_task_ids != PRODUCTION_ACTIVATION_WAVE_ONE
+    ):
+        errors.append(
+            "reviewed production-runtime activation claimable tasks must be "
+            f"{sorted(PRODUCTION_ACTIVATION_WAVE_ONE)}, got "
+            f"{sorted(claimable_task_ids)}"
+        )
     lane_count = int(parallel.get("laneCount") or 0)
     sealed_initial_shards = {
         int(task_id.rsplit("-", 1)[1]) % lane_count
@@ -1170,6 +1297,68 @@ def validate(
             f"{sorted(simulated_bootstrap_claimable)}"
         )
 
+    production_wave_one_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in PRODUCTION_ACTIVATION_WAVE_ONE
+    } if lane_count > 0 else set()
+    if production_wave_one_shards != {0, 2}:
+        errors.append(
+            "production-activation first wave must cover numeric shards 0 and 2, "
+            f"got {sorted(production_wave_one_shards)}"
+        )
+    expected_production_wave_one_resources = {
+        "PTR-143": frozenset({"external/ipfs_accelerate"}),
+        "PTR-144": frozenset({"external/ipfs_datasets"}),
+    }
+    production_wave_one_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(PRODUCTION_ACTIVATION_WAVE_ONE)
+    }
+    if production_wave_one_resources != expected_production_wave_one_resources:
+        errors.append(
+            "production-activation first wave must own independent accelerator "
+            "and datasets resources: expected "
+            f"{expected_production_wave_one_resources}, got "
+            f"{production_wave_one_resources}"
+        )
+
+    simulated_production_completed = (
+        pre_production_activation_task_ids | {"PTR-143"}
+    )
+    simulated_production_claimable = {
+        task_id
+        for task_id in PRODUCTION_ACTIVATION_TASK_IDS
+        if task_id not in simulated_production_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_production_completed
+        )
+    }
+    if simulated_production_claimable != PRODUCTION_ACTIVATION_PARALLEL_WAVE:
+        errors.append(
+            "production-activation post-locator dependency wave must be exactly "
+            f"{sorted(PRODUCTION_ACTIVATION_PARALLEL_WAVE)}, got "
+            f"{sorted(simulated_production_claimable)}"
+        )
+    production_parallel_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in PRODUCTION_ACTIVATION_PARALLEL_WAVE
+    } if lane_count > 0 else set()
+    if production_parallel_shards != {0, 1, 2}:
+        errors.append(
+            "production-activation post-locator wave must cover all numeric "
+            f"shards, got {sorted(production_parallel_shards)}"
+        )
+    for left in sorted(PRODUCTION_ACTIVATION_PARALLEL_WAVE):
+        for right in sorted(PRODUCTION_ACTIVATION_PARALLEL_WAVE):
+            if left >= right:
+                continue
+            overlap = sorted(predicted_by_task[left] & predicted_by_task[right])
+            if overlap:
+                errors.append(
+                    "production-activation post-locator tasks must have disjoint "
+                    f"predicted files: {left}/{right} overlap {overlap}"
+                )
+
     unordered_conflicts: list[dict[str, object]] = []
     task_ancestors = {
         task_id: _ancestors(task_id, task_edges) for task_id in task_ids
@@ -1218,8 +1407,8 @@ def validate(
         "todo_sha256": _sha256(todo_path),
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
-        "initial_ready_task_ids": sorted(RUNTIME_REPAIR_WAVE_ONE),
-        "initial_ready_shards": sorted(runtime_repair_wave_shards),
+        "initial_ready_task_ids": sorted(PRODUCTION_ACTIVATION_WAVE_ONE),
+        "initial_ready_shards": sorted(production_wave_one_shards),
         "sealed_initial_ready_task_ids": sorted(SEALED_INITIAL_READY),
         "sealed_initial_ready_shards": sorted(sealed_initial_shards),
         "reviewed_extension_task_ids": sorted(COMPLETION_EXTENSION_TASK_IDS),
@@ -1257,6 +1446,25 @@ def validate(
             task_id: sorted(resources)
             for task_id, resources in runtime_bootstrap_wave_resources.items()
         },
+        "reviewed_production_activation_task_ids": sorted(
+            PRODUCTION_ACTIVATION_TASK_IDS
+        ),
+        "reviewed_production_activation_wave_one_task_ids": sorted(
+            PRODUCTION_ACTIVATION_WAVE_ONE
+        ),
+        "reviewed_production_activation_wave_one_shards": sorted(
+            production_wave_one_shards
+        ),
+        "reviewed_production_activation_wave_one_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in production_wave_one_resources.items()
+        },
+        "reviewed_production_activation_parallel_wave_task_ids": sorted(
+            PRODUCTION_ACTIVATION_PARALLEL_WAVE
+        ),
+        "reviewed_production_activation_parallel_wave_shards": sorted(
+            production_parallel_shards
+        ),
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {

@@ -108,9 +108,13 @@ def test_completed_board_with_blocked_tasks_is_rejected(
         _run_board_readiness(supervisor, monkeypatch, tmp_path, payload)
 
 
-def test_every_lane_uses_grok_primary_codex_fallback_policy(
+def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    monkeypatch.setenv(
+        "IMPLEMENTATION_DAEMON_COMMAND",
+        "python3 /tmp/provider-policy-bypass.py",
+    )
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
@@ -121,8 +125,13 @@ def test_every_lane_uses_grok_primary_codex_fallback_policy(
     for lane in supervisor.LANES:
         assert lane["provider"] == "grok-codex"
         assert lane["primary_provider"] == "grok"
+        assert lane["primary_model"] == "grok-4.5"
         assert lane["fallback_provider"] == "codex"
+        assert lane["fallback_model"] == "gpt-5.6-terra"
+        assert lane["fallback_model_reasoning_effort"] == "medium"
+        assert lane["fallback_trigger"] == "grok_quota_exhausted"
         environment = supervisor._runtime_environment(str(lane["provider"]))
+        assert "IMPLEMENTATION_DAEMON_COMMAND" not in environment
         assert (
             environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"]
             == "grok-codex"
@@ -131,9 +140,167 @@ def test_every_lane_uses_grok_primary_codex_fallback_policy(
             environment["IPFS_ACCELERATE_AGENT_GROK_BIN"]
             == "/opt/grok/bin/grok"
         )
+        assert (
+            environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"]
+            == "grok-4.5"
+        )
+        assert (
+            environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"]
+            == "gpt-5.6-terra"
+        )
+        assert (
+            environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"]
+            == "medium"
+        )
+        assert (
+            environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"]
+            == "grok_quota_exhausted"
+        )
+        assert environment["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "1"
+        assert environment["IPFS_ACCEL_AUTO_INSTALL"] == "1"
+        assert environment["IPFS_TEST_PROOF_REUSE_NLTK_DOWNLOAD"] == "1"
+        assert environment["IPFS_TEST_PROOF_REUSE_GROTH16_BUILD"] == "1"
+        assert environment["IPFS_TEST_PROOF_REUSE_NLTK_DATA_DIR"] == str(
+            supervisor.STATE_ROOT / "dependencies" / "nltk-data"
+        )
+        assert environment["IPFS_TEST_PROOF_REUSE_PROVISION_DIR"] == str(
+            supervisor.STATE_ROOT / "dependencies" / "provisioning"
+        )
 
 
-def test_provider_preflight_uses_codex_when_grok_is_unavailable(
+def test_status_exposes_exact_model_and_quota_only_fallback_policy(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        supervisor,
+        "_lane_status",
+        lambda lane: {
+            "lane": lane["name"],
+            "healthy": True,
+            "unhealthy_reasons": [],
+            "task_count": 1,
+            "completed_count": 1,
+            "active_task_id": None,
+            "selectable_ready_count": 0,
+            "blocked_task_ids": [],
+        },
+    )
+
+    status = supervisor._status_payload()
+
+    assert status["provider_policy"] == {
+        "primary": {"provider": "grok", "model": "grok-4.5"},
+        "fallback": {
+            "provider": "codex",
+            "model": "gpt-5.6-terra",
+            "model_reasoning_effort": "medium",
+        },
+        "fallback_trigger": "grok_quota_exhausted",
+        "non_quota_failure_action": "propagate_without_fallback",
+    }
+
+
+def test_status_rejects_stopped_completion_snapshot_from_stale_board(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        supervisor,
+        "_current_board_task_ids",
+        lambda: tuple(f"PTR-{index:03d}" for index in range(60)),
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_lane_status",
+        lambda lane: {
+            "lane": lane["name"],
+            "healthy": False,
+            "unhealthy_reasons": ["supervisor_not_running"],
+            "task_count": 53,
+            "completed_count": 53,
+            "task_ids_sha256": None,
+            "active_task_id": None,
+            "selectable_ready_count": 0,
+            "blocked_task_ids": [],
+        },
+    )
+
+    status = supervisor._status_payload()
+
+    assert status["current_board_task_count"] == 60
+    assert status["work_complete"] is False
+    assert status["globally_progressable"] is False
+    assert all(
+        lane["current_board_matches"] is False for lane in status["lanes"]
+    )
+
+
+def test_status_rejects_live_selectable_snapshot_from_stale_board(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        supervisor,
+        "_current_board_task_ids",
+        lambda: tuple(f"PTR-{index:03d}" for index in range(60)),
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_lane_status",
+        lambda lane: {
+            "lane": lane["name"],
+            "healthy": True,
+            "unhealthy_reasons": [],
+            "task_count": 53,
+            "completed_count": 52,
+            "task_ids_sha256": None,
+            "active_task_id": None,
+            "selectable_ready_count": 1,
+            "blocked_task_ids": [],
+        },
+    )
+
+    status = supervisor._status_payload()
+
+    assert status["healthy"] is False
+    assert status["work_complete"] is False
+    assert status["globally_progressable"] is False
+
+
+def test_status_rejects_mixed_current_and_stale_live_lanes(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    current_ids = tuple(f"PTR-{index:03d}" for index in range(60))
+    current_sha256 = supervisor._task_ids_sha256(current_ids)
+    monkeypatch.setattr(
+        supervisor, "_current_board_task_ids", lambda: current_ids
+    )
+
+    def lane_status(lane: dict[str, object]) -> dict[str, object]:
+        stale = lane["name"] == "ptr_lane_1"
+        return {
+            "lane": lane["name"],
+            "healthy": True,
+            "unhealthy_reasons": [],
+            "task_count": 53 if stale else 60,
+            "completed_count": 53,
+            "task_ids_sha256": None if stale else current_sha256,
+            "active_task_id": None,
+            "selectable_ready_count": 1 if not stale else 0,
+            "blocked_task_ids": [],
+        }
+
+    monkeypatch.setattr(supervisor, "_lane_status", lane_status)
+
+    status = supervisor._status_payload()
+
+    stale_lane = next(
+        lane for lane in status["lanes"] if lane["lane"] == "ptr_lane_1"
+    )
+    assert status["healthy"] is False
+    assert stale_lane["healthy"] is False
+    assert "task_state_board_mismatch" in stale_lane["unhealthy_reasons"]
+
+
+def test_provider_preflight_rejects_unavailable_grok_without_using_codex(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(
@@ -142,29 +309,16 @@ def test_provider_preflight_uses_codex_when_grok_is_unavailable(
         lambda name: "/opt/codex/bin/codex" if name == "codex" else None,
     )
 
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
-        assert command == ["/opt/codex/bin/codex", "login", "status"]
-        return subprocess.CompletedProcess(
-            command,
-            returncode=0,
-            stdout="Logged in using ChatGPT\n",
-            stderr="",
-        )
+    monkeypatch.setattr(
+        supervisor,
+        "_run",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("Codex must not replace an unavailable Grok primary")
+        ),
+    )
 
-    monkeypatch.setattr(supervisor, "_run", fake_run)
-
-    providers = supervisor._provider_preflight()
-
-    assert providers["grok"] == ""
-    assert providers["grok_authenticated"] is False
-    assert providers["provider_policy"] == {
-        "primary": "grok",
-        "fallback": "codex",
-        "effective_first_provider": "codex",
-        "grok_unavailable_action": "use_codex",
-    }
+    with pytest.raises(RuntimeError, match="Grok CLI is required.*primary"):
+        supervisor._provider_preflight()
 
 
 def test_provider_preflight_reports_grok_as_effective_primary(
@@ -209,7 +363,67 @@ def test_provider_preflight_reports_grok_as_effective_primary(
     providers = supervisor._provider_preflight()
 
     assert providers["grok_authenticated"] is True
-    assert providers["provider_policy"]["effective_first_provider"] == "grok"
+    assert providers["provider_policy"] == {
+        "primary": {"provider": "grok", "model": "grok-4.5"},
+        "fallback": {
+            "provider": "codex",
+            "model": "gpt-5.6-terra",
+            "model_reasoning_effort": "medium",
+        },
+        "fallback_trigger": "grok_quota_exhausted",
+        "primary_unavailable_action": "fail_preflight",
+        "non_quota_failure_action": "propagate_without_fallback",
+        "fallback_forbidden_on": [
+            "authentication_failure",
+            "launch_failure",
+            "timeout",
+            "transport_failure",
+            "generic_nonzero_exit",
+            "malformed_output",
+            "task_failure",
+        ],
+    }
+
+
+def test_provider_preflight_rejects_grok_auth_failure_without_fallback(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        supervisor.shutil,
+        "which",
+        lambda name: f"/opt/{name}/bin/{name}"
+        if name in {"codex", "grok"}
+        else None,
+    )
+
+    def fake_run(
+        command: list[str], **_kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        stdout = (
+            "Logged in using ChatGPT\n"
+            if command[-2:] == ["login", "status"]
+            else "grok 1.2.3\n"
+        )
+        return subprocess.CompletedProcess(command, 0, stdout, "")
+
+    monkeypatch.setattr(supervisor, "_run", fake_run)
+    if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
+        supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import (
+        implementation_daemon,
+    )
+
+    monkeypatch.setattr(
+        implementation_daemon,
+        "_grok_cli_available",
+        lambda: False,
+    )
+
+    with pytest.raises(
+        RuntimeError,
+        match="Codex fallback is not allowed for authentication failures",
+    ):
+        supervisor._provider_preflight()
 
 
 def test_provider_preflight_uses_inert_shadow_capability_discovery(
@@ -220,7 +434,9 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: "/opt/codex/bin/codex" if name == "codex" else None,
+        lambda name: f"/opt/{name}/bin/{name}"
+        if name in {"codex", "grok"}
+        else None,
     )
     commands: list[list[str]] = []
 
@@ -228,10 +444,15 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
         command: list[str], **_kwargs: object
     ) -> subprocess.CompletedProcess[str]:
         commands.append(command)
+        stdout = (
+            "Logged in using ChatGPT\n"
+            if command[-2:] == ["login", "status"]
+            else "grok 1.2.3\n"
+        )
         return subprocess.CompletedProcess(
             command,
             returncode=0,
-            stdout="Logged in using ChatGPT\n",
+            stdout=stdout,
             stderr="",
         )
 
@@ -240,6 +461,9 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
         supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
     from ipfs_accelerate_py.agent_supervisor.integrations import (
         test_reuse_capabilities,
+    )
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon import (
+        implementation_daemon,
     )
     from ipfs_accelerate_py.testing.proof_reuse import services
 
@@ -276,12 +500,20 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
     monkeypatch.setattr(
         test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe
     )
+    monkeypatch.setattr(
+        implementation_daemon,
+        "_grok_cli_available",
+        lambda: True,
+    )
     monkeypatch.setattr(services, "proof_reuse_dependency_plan", fake_plan)
     original_sys_path = list(supervisor.sys.path)
 
     providers = supervisor._provider_preflight()
 
-    assert commands == [["/opt/codex/bin/codex", "login", "status"]]
+    assert commands == [
+        ["/opt/codex/bin/codex", "login", "status"],
+        ["/opt/grok/bin/grok", "--version"],
+    ]
     assert captured["probe"] == captured["plan"]
     assert captured["probe"]["IPFS_TEST_PROOF_REUSE_MODE"] == "shadow"
     assert captured["probe"]["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "0"
@@ -425,7 +657,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     inventory = supervisor._closeout_production_input_inventory()
 
     assert inventory["inventory_is_completion_authority"] is False
-    assert inventory["task_count"] == 53
+    assert inventory["task_count"] == 60
     assert inventory["goal_count"] == 12
     assert inventory["acceptance_requirement_count"] == 39
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -440,7 +672,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     validations = by_name[
         "fresh_current_tree_proof_reuse_off_validation_receipts"
     ]
-    assert validations["required_count"] == 53
+    assert validations["required_count"] == 60
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
     assert inventory["authoritative_materializer"]["configured"] is False
@@ -673,6 +905,7 @@ def test_report_only_accepts_normal_agentic_maintenance_statuses(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
 ) -> None:
+    board_task_count = len(supervisor._current_board_task_ids())
     statuses = {
         "ptr_lane_0": "running",
         "ptr_lane_1": "agentic_maintenance_started",
@@ -690,8 +923,8 @@ def test_report_only_accepts_normal_agentic_maintenance_statuses(
                 }
             if path.name == f"{lane_name}_task_state.json":
                 return {
-                    "task_count": 41,
-                    "completed_count": 41,
+                    "task_count": board_task_count,
+                    "completed_count": board_task_count,
                     "blocked_count": 0,
                     "blocked_task_ids": [],
                     "selectable_ready_count": 0,
