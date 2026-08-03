@@ -847,3 +847,46 @@ These are bounded design decisions, not reasons to stall foundational work:
    deterministic validation or bounded monitoring; and
 7. revise Neural Band support only when an authoritative capability source
    proves more than normalized Arrow/Enter-style intent input.
+
+## 17. Accelerator pin checkpoint — 2026-08-03T2350Z
+
+Operator checkpoint after the Grok/Terra quota routing and merge-queue
+authority hardening landed. This section does not change task ownership,
+vocabulary, or acceptance criteria.
+
+### Progress
+
+- Authoritative board completions: `UIR-001`, `UIR-084` (2/47).
+- Integration work present but not fully accepted: `UIR-002` (blocked),
+  `UIR-010` (eligible / pending independent review).
+- Objective goal reconciliation remains intentionally disabled.
+
+### Accelerator pin
+
+- `external/ipfs_accelerate` → `fb6ec7f407c4d2f6b99a2c71e5aa242a3feecf6c`
+  (`integration/uiir-grok-terra-20260803`).
+- Prior pin: `8a68d43d2ca743ef6b70c65ac1ffca3c017ba2f8`.
+- Full receipt:
+  `data/agent_supervisor/ui_ux_ir/operator-audit/accelerator-pin-receipt-2026-08-03T2350Z.md`.
+
+### Provider contract (enforced)
+
+1. Primary implementation: exact `grok-4.5`.
+2. Implementation fallback: exact `gpt-5.6-terra` / medium reasoning, only after
+   verified Grok Build HTTP 402 balance exhaustion.
+3. All other Grok failures fail closed without Terra.
+4. Terra proposals stay pending independent non-Codex review; Terra cannot
+   self-review or complete tasks.
+
+### Unblock contents
+
+- First-append rejection of forged durable authority and feedback.
+- Content-bound post-merge correction dispatch authority.
+- Durable recovery / composite review bindings retained from prior pins.
+
+### Next operator actions
+
+1. Restart six `implementation_supervisor` lanes with this pin.
+2. Drain `UIR-010` independent review on lane 4.
+3. Unblock `UIR-002` validation-plan mismatch / acceptance path.
+4. Continue the ready schema and identity tracks only after those gates clear.
