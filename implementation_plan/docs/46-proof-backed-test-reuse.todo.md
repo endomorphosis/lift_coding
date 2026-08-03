@@ -1197,7 +1197,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-112 Define strict objective-completion artifact contracts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
