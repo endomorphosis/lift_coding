@@ -1435,3 +1435,27 @@ Program rules:
 - Estimated validation seconds: 300
 - Merge fate: objective/UIR-G090
 - Acceptance: Enumerate every goal/task producer and current receipt; reject stale/missing/contradictory evidence, skipped mandatory populations, authority substitution, unresolved P0/P1 loss/security/privacy/accessibility findings, or dirty identity mismatch; passing this gate is necessary but objective status changes remain under the supervisor completion policy.
+
+## UIR-084 Resolve implementation retry-budget failure for UIR-002
+
+- Status: completed
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: UIR-001
+- Outputs: external/ipfs_datasets/docs/architecture/UI_UX_IR_MCP_IDL_IDENTITY.md, external/ipfs_datasets/tests/fixtures/ui_ux_ir/v1/mcp_idl_identity_vectors.json, external/ipfs_datasets/tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py, implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-084-recovery-receipt-2026-08-03.md
+- Validation: test -f implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-084-recovery-receipt-2026-08-03.md
+- Parallel lane: uir-idl-identity
+- Predicted files: external/ipfs_datasets/docs/architecture/UI_UX_IR_MCP_IDL_IDENTITY.md, external/ipfs_datasets/tests/fixtures/ui_ux_ir/v1/mcp_idl_identity_vectors.json, external/ipfs_datasets/tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py
+- Conflict policy: Freeze and test identity contracts only; do not rewrite existing MCP registries or normalize legacy IDs in place.
+- Post-merge correction repair schema: post-merge-correction-repair-v1
+- Post-merge correction denial ID: baguqeeralmno2gek33r62naxxenldlqi6ky6hsole47j2pkhfkzhhiauiyra
+- Post-merge correction target attempt: 4
+- Post-merge correction failure event ID: sha256:a164918f64e256d3cb6f75bbc3606021ec3aa0d52f470bb7099b4a22337fde61
+- Post-merge correction failure event sequence: 2165
+- Post-merge correction failure kind: implementation
+- Post-merge correction source task binding ID: baguqeerazbiagz4kwmmpxoxbjfzofndu65nytsumawrqeci4x2bs64wvu46a
+- Post-merge correction source canonical task key: task/v1/2682c0899c7ca57f44b2d88662bb5fec94657edd90f6680c4e98c75fc15b97be
+- Post-merge correction source canonical task CID: baguqeerae2bmbcm4pssx6rfs3cdgfo275skgk7w5sd3gqdcotddv7qk3s67a
+- Post-merge correction origin stream ID: event-log:sha256:07d0903cfe9a1370cbed08e153c45ce6722e382e2ff9700081075bb69209183e
+- Acceptance: Implementation retry-budget guardrail filed this from repeated implementation failures in UIR-002. Use evidence in implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-084-recovery-receipt-2026-08-03.md to fix the setup, runtime, or timeout blocker, then mark this repair task completed so the supervisor can release UIR-002 from strategy blocked_tasks.
