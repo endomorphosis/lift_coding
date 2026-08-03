@@ -1667,7 +1667,7 @@ test.
 
 ## PTR-140 Enable datasets direct-node bootstrap and lazy dependencies
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
