@@ -1133,7 +1133,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-110 Collect authoritative task and validation provenance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
