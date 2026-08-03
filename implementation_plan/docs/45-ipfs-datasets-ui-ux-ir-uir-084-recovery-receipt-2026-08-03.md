@@ -21,7 +21,7 @@
 
 ## Repaired supervisor and published recovery support
 
-- Accelerator commit at final reconciliation: `574f32898e98b32e07685f82b98967b97c42b383` (descendant of `0d8e6f189d772163210b177722a8cf589744d635`)
+- Accelerator commit prepared for final reconciliation: `c50f4747cc571e3c79244849a3918375b549e499` (descendant of `0d8e6f189d772163210b177722a8cf589744d635`)
 - Accelerator branch: `origin/agent/ui-ux-ir-supervisor-pin-port`
 - Pre-repair UIIR accelerator pin: `753c5fd03db4c0f257fd11ead673a3ad27f1d053`
 - UIIR accelerator pin before final publication: `8506f7ffefb64df255a0de4d7b9886d3057c19a0`
@@ -33,11 +33,15 @@
 - Full post-merge review regression: `37 passed`, `0 failed`
 - Post-merge evidence regression: `16 passed`, `0 failed`
 - Independent affected regression sweep: `144 passed`, `0 failed`
+- Composite-recovery implementation and review regression: `688 passed`, `0 failed`
+- Final composite post-merge review regression: `45 passed`, `0 failed`
 - Static checks: `py_compile`, Ruff `E9/F63/F7/F82`, and `git diff --check` passed
 
 The repair permanently migrates the legacy denial-consumption witness, anchors the exact contiguous correction high-water, retains and revalidates both root and child recovery refs, fences target movement with an atomically published lease, and permits only the next content-bound correction grant. Its explicit migration path proves the exact historical source-task projection at every bindingless event baseline and at the frozen target, while permitting unrelated later board tasks; the automatic denial-consumption path retains its stricter whole-board rule. It does not turn the anchor itself into retry authority.
 
 The later recovery commits admit only a ledger-bound zero-edit seed, distinguish a queue retry from an implementation attempt, re-fence already-integrated topology under the shared repository mutation lease, defer only an exact dead-owner lifecycle race, and clear stale retry reasons on both new completions and idempotently replayed legacy completed rows. They do not create an attempt beyond the authorized attempt 5.
+
+Commit `c50f4747cc571e3c79244849a3918375b549e499` adds a separate `verified-composite-recovery-implementer-provenance@1` proof for the exact UIR-002 recovery. It binds the original Grok implementation events, the closed one-symbol deterministic correction, repair grant and consumption, immutable seed and integration boundary, current target ancestry and gitlink, and a fresh completed-queue witness. Processing-time witnesses cannot satisfy the proof, and ordinary provider provenance remains unchanged. This support permits the independent provider-review gate to evaluate the recovered implementation; it does not itself approve UIR-002.
 
 ## Reviewed UIR-002 rescue
 
@@ -64,6 +68,7 @@ The approved child is a descendant of the current child gitlink and preserves th
 - Test-file SHA-256: `5592ee7b6deba4c8ab4bf5ee11bdae96c707b2ac8cf8cec60aeb83d26d8087d2`
 - Captured-output SHA-256: `93232f039d75515bbc53f2588ba31f0751c3492871fb0ab00d86a7161f9eb17f`
 - Captured-output bytes: `1019`
+- Accelerator-pin publication revalidation: the same declared command passed `32/32` against accelerator commit `c50f4747cc571e3c79244849a3918375b549e499`
 
 This unit-test receipt was review evidence, not dispatch authority and not a substitute for the proposal gate. Machine authority was subsequently derived in order from the durable high-water anchor, this completed task's immutable repair binding, the strict `repair_granted` transition, and transactional `grant_consumed` evidence for attempt 5.
 
@@ -78,4 +83,4 @@ This unit-test receipt was review evidence, not dispatch authority and not a sub
 7. No attempt 6 was created and no implementation start exists after sequence `2226`.
 8. The final idempotent queue reconciliation kept the request `completed`, queue attempt `2`, implementation attempt `5`, failure count `1`, and claim generation `7`, while normalizing the obsolete `merge_cleanup_failed` terminal reason to empty in both DuckDB and the completed JSON receipt. It neither claimed work nor changed implementation authority.
 
-The initial post-merge consumer exposed one additional supervisor defect: producer attempt 5 materialized `external/ipfs_datasets`, `external/ipfs_accelerate`, `swissknife`, and `hallucinate_app`, while legacy queue metadata carried only the changed dataset path. The narrower consumer therefore omitted the unchanged accelerator from the first validation checkout and left three exact prunable sibling registrations. A read-only preflight re-proved the exact root, queue, attempt, gitlink, branch-tip, reflog, protection-ref, and porcelain bindings; compare-and-delete cleanup then removed those three registrations and their daemon-only branches plus the exact locked detached validation registration. The root commit and working-tree diff were unchanged, all commit tips remain protected, and no broad worktree prune was used. The published supervisor now binds the producer dependency set separately from `changed_submodule_paths`; this does not alter the successful integration or authorize another implementation attempt.
+The initial post-merge consumer exposed one additional supervisor defect: producer attempt 5 materialized `external/ipfs_datasets`, `external/ipfs_accelerate`, `swissknife`, and `hallucinate_app`, while legacy queue metadata carried only the changed dataset path. The narrower consumer therefore omitted the unchanged accelerator from the first validation checkout and left three exact prunable sibling registrations. A read-only preflight re-proved the exact root, queue, attempt, gitlink, branch-tip, reflog, protection-ref, and porcelain bindings; compare-and-delete cleanup then removed those three registrations and their daemon-only branches plus the exact locked detached validation registration. The root commit and working-tree diff were unchanged, all commit tips remain protected, and no broad worktree prune was used. Producer dependency binding and cleanup lifecycle redesign remain a separately preserved follow-up; the unsafe broad draft was not published. This does not alter the successful integration or authorize another implementation attempt.
