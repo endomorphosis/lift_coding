@@ -698,7 +698,7 @@ python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon 
   --state-dir data/agent_supervisor/ui_ux_ir/state \
   --state-prefix uiir_dry_run \
   --worktree-root data/agent_supervisor/ui_ux_ir/worktrees/dry-run \
-  --merge-queue-dir data/agent_supervisor/ui_ux_ir/merge-queue \
+  --merge-queue-dir data/agent_supervisor/ui_ux_ir/dry-run-merge-queue \
   --worktree-submodule-path external/ipfs_datasets \
   --worktree-submodule-path external/ipfs_accelerate \
   --worktree-submodule-path swissknife \
@@ -710,11 +710,14 @@ python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon 
   --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md
 ```
 
-The dry run must report 47 canonical tasks, one initial ready task (`UIR-001`),
-46 dependency-waiting tasks, and zero blocked tasks. To execute in parallel,
-start six long-running supervisor processes, one for each `lane` value from 0
-through 5. All lanes share the board and merge queue but use isolated state and
-worktree roots:
+The original reviewed board contained 47 canonical tasks, with `UIR-001` ready
+and 46 dependency-waiting tasks. Before each restart, compare the dry run with
+the live board instead of treating those initial counts as immutable: the
+current reviewed projection contains 48 tasks, including the added recovery
+task `UIR-084`, and has two authoritative completions (`UIR-001` and
+`UIR-084`). To execute in parallel, start six long-running supervisor processes,
+one for each `lane` value from 0 through 5. All lanes share the board and merge
+queue but use isolated state and worktree roots:
 
 Before launching, commit the reviewed plan/objective/taskboard and the required
 accelerator baseline, advance the parent gitlinks, and choose an existing clean
@@ -723,6 +726,19 @@ integration branch explicitly. In particular, reconcile the configured
 the supervisor must not silently merge divergent nested histories. Do not rely
 on the daemon's `main`/`master` fallback when the reviewed work lives on another
 branch.
+
+Production implementation routing is fail closed. Set the provider to `auto`
+and pin Grok to `grok-4.5`; this makes Grok the primary implementation provider.
+The only fallback is the supervisor-owned `gpt-5.6-terra` command with medium
+reasoning, and it is eligible only after the same native Grok invocation emits
+a verified structured hard-quota result. Missing executables, authentication
+failures, HTTP 429/rate limiting, transient failures, malformed results,
+generic nonzero exits, and prompt or tool text do not authorize fallback. A
+Terra result is retained as a content-addressed proposal and cannot merge or
+mark a task complete. It remains held until an invocation-bound independent
+non-Codex review-resolution transport is implemented. The separate exact Codex
+`gpt-5.6-sol` implementation review remains an acceptance gate and is neither a
+Terra fallback nor bypassed by one.
 
 The required accelerator baseline includes a fail-closed, pre-provider
 submodule ancestry check. For each configured submodule containing a task-owned
@@ -743,6 +759,8 @@ runs against the actual integration baseline.
 UIIR_MERGE_TARGET_BRANCH=agent/ui-ux-ir  # create and review this branch first
 
 for lane in 0 1 2 3 4 5; do
+  IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER=auto \
+  IPFS_ACCELERATE_AGENT_GROK_MODEL=grok-4.5 \
   PYTHONPATH=external/ipfs_accelerate \
   python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor \
     --todo-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md \
