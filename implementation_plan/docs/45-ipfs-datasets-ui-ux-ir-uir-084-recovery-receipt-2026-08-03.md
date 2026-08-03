@@ -3,7 +3,7 @@
 - Schema: `ipfs-datasets-ui-ux-ir/recovery-repair-receipt@1`
 - Repair task: `UIR-084`
 - Source task: `UIR-002`
-- Review timestamp: `2026-08-03T07:33:49Z`
+- Review timestamp: `2026-08-03T08:01:10Z`
 - Reviewer/operator: Codex primary agent with two independent read-only supervisor audits
 - Disposition: operational repair completed; exact migration, grant, and one bounded dispatch remain separately fail-closed
 
@@ -21,7 +21,7 @@
 
 ## Repaired supervisor
 
-- Accelerator commit: `d9fc951f65f31d04eee3baa7fe12e1bab6f10582`
+- Accelerator commit: `8506f7ffefb64df255a0de4d7b9886d3057c19a0`
 - Accelerator branch: `origin/agent/ui-ux-ir-supervisor-pin-port`
 - Prior UIIR accelerator pin: `753c5fd03db4c0f257fd11ead673a3ad27f1d053`
 - Full daemon regression: `602 passed`, `0 failed`
@@ -29,7 +29,7 @@
 - Focused migration/consumption regressions: `2 passed`, `0 failed`
 - Static checks: `py_compile`, Ruff `E9/F821/F822/F823`, and `git diff --check` passed
 
-The repair permanently migrates the legacy denial-consumption witness, anchors the exact contiguous correction high-water, retains and revalidates both root and child recovery refs, fences target movement with an atomically published lease, and permits only the next content-bound correction grant. It does not turn the anchor itself into retry authority.
+The repair permanently migrates the legacy denial-consumption witness, anchors the exact contiguous correction high-water, retains and revalidates both root and child recovery refs, fences target movement with an atomically published lease, and permits only the next content-bound correction grant. Its explicit migration path proves the exact historical source-task projection at every bindingless event baseline and at the frozen target, while permitting unrelated later board tasks; the automatic denial-consumption path retains its stricter whole-board rule. It does not turn the anchor itself into retry authority.
 
 ## Reviewed UIR-002 rescue
 
@@ -45,14 +45,14 @@ The approved child is a descendant of the current child gitlink and preserves th
 
 ## Test receipt
 
-- Working tree: clean detached checkout of `3b6e9cf4d6c055e443cbf652ce829e108bd86b27`
+- Working tree: clean checkout of `3b6e9cf4d6c055e443cbf652ce829e108bd86b27`
 - Python: `/usr/bin/python3 -P`, Python `3.12.3`
-- Accelerator `PYTHONPATH`: clean `d9fc951f65f31d04eee3baa7fe12e1bab6f10582` checkout
+- Accelerator `PYTHONPATH`: clean `8506f7ffefb64df255a0de4d7b9886d3057c19a0` checkout
 - Command: `python -m pytest tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py -q`
 - Population: `32 collected`, `32 passed`, `0 failed`, `0 skipped`
 - Return code: `0`
 - Test-file SHA-256: `5592ee7b6deba4c8ab4bf5ee11bdae96c707b2ac8cf8cec60aeb83d26d8087d2`
-- Captured-output SHA-256: `91b9b17534ceedcd84dd670b33f10dbad352b0aa8373aee6caa9a65d79d7b172`
+- Captured-output SHA-256: `5aa0a0a25b2fe7ac2b288089478605787963c634e892f44a1aba444351191919`
 - Captured-output bytes: `1019`
 
 This unit-test receipt is review evidence, not dispatch authority and not a substitute for the proposal gate. Machine authority must still be derived in order from the durable high-water anchor, this completed task's immutable repair binding, the strict `repair_granted` transition, and transactional `grant_consumed` evidence for attempt 5.
