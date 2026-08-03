@@ -1914,7 +1914,7 @@ proof-reuse-off validations and managed merge provenance exist.
 
 ## PTR-147 Compose default two-stage lookup and atomic controller issuance/publication
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
