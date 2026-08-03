@@ -145,6 +145,21 @@
     ],
     "unavailableAction": "continue_supervisor_and_run_tests"
   },
+  "lazyDependencyPolicy": {
+    "activation": "first_requested_proof_reuse_capability",
+    "manifestParityRequired": [
+      "requirements.txt",
+      "setup.py",
+      "pyproject.toml"
+    ],
+    "scopedImportsRequired": true,
+    "boundedAllowlistedInstaller": true,
+    "automaticWhenPackageAutoInstallPolicyAllows": true,
+    "offAndImplementationValidationMayInstall": false,
+    "installerFailureAction": "typed_unavailable_and_run_test",
+    "datasetsNativeGroth16BuildRequiresExplicitOptIn": true,
+    "datasetsNltkDownloadRequiresExplicitOptIn": true
+  },
   "goalAlignment": {
     "PTR-G010": [
       "CBP-G025",
@@ -198,21 +213,25 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-03",
+    "reviewRevision": "runtime-activation-repair-v1",
     "implementationTaskIds": [
-      "PTR-108",
-      "PTR-109",
-      "PTR-110",
-      "PTR-111",
-      "PTR-112",
-      "PTR-120",
-      "PTR-121",
-      "PTR-122",
-      "PTR-130"
+      "PTR-131",
+      "PTR-132",
+      "PTR-133",
+      "PTR-134",
+      "PTR-135",
+      "PTR-136",
+      "PTR-137",
+      "PTR-138",
+      "PTR-139",
+      "PTR-140",
+      "PTR-141",
+      "PTR-142"
     ],
     "initialClaimableTaskIds": [
-      "PTR-108",
-      "PTR-109",
-      "PTR-110"
+      "PTR-131",
+      "PTR-132",
+      "PTR-133"
     ],
     "authorityWriter": "outer_controller_only",
     "workerLaneReconciliationEnabled": false,
@@ -226,7 +245,7 @@
     "statusPathSuffix": "projection/completion/closeout_status.json",
     "reconciliationPhases": 3,
     "closeoutControllerTaskId": "PTR-121",
-    "operatorHandoffTaskId": "PTR-130",
+    "operatorHandoffTaskId": "PTR-142",
     "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
   },
   "parallelRuntime": {
@@ -235,9 +254,9 @@
     "scheduler": "deterministic_numeric_task_shards",
     "strictTaskSharding": true,
     "initialClaimableTaskIds": [
-      "PTR-001",
-      "PTR-002",
-      "PTR-003"
+      "PTR-131",
+      "PTR-132",
+      "PTR-133"
     ],
     "isolation": "ephemeral_git_worktree_per_task",
     "mergeQueue": "shared_serial",

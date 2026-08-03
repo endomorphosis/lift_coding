@@ -212,6 +212,106 @@ def test_provider_preflight_reports_grok_as_effective_primary(
     assert providers["provider_policy"]["effective_first_provider"] == "grok"
 
 
+def test_provider_preflight_uses_inert_shadow_capability_discovery(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("IPFS_TEST_PROOF_REUSE_MODE", "readwrite")
+    monkeypatch.setenv("IPFS_TEST_PROOF_REUSE_AUTO_INSTALL", "1")
+    monkeypatch.setattr(
+        supervisor.shutil,
+        "which",
+        lambda name: "/opt/codex/bin/codex" if name == "codex" else None,
+    )
+    commands: list[list[str]] = []
+
+    def fake_run(
+        command: list[str], **_kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        commands.append(command)
+        return subprocess.CompletedProcess(
+            command,
+            returncode=0,
+            stdout="Logged in using ChatGPT\n",
+            stderr="",
+        )
+
+    monkeypatch.setattr(supervisor, "_run", fake_run)
+    if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
+        supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.integrations import (
+        test_reuse_capabilities,
+    )
+    from ipfs_accelerate_py.testing.proof_reuse import services
+
+    captured: dict[str, dict[str, str]] = {}
+
+    class FakeReport:
+        @staticmethod
+        def to_dict() -> dict[str, object]:
+            return {
+                "schema_version": "TestReuseCapabilityReport@1",
+                "mode": "shadow",
+                "side_effect_free": True,
+                "network_attempted": False,
+                "daemon_started": False,
+                "cache_created": False,
+            }
+
+    class FakeProbe:
+        def __init__(self, *, environ: dict[str, str]) -> None:
+            captured["probe"] = dict(environ)
+
+        @staticmethod
+        def probe() -> FakeReport:
+            return FakeReport()
+
+    def fake_plan(environ: dict[str, str]) -> dict[str, object]:
+        captured["plan"] = dict(environ)
+        return {
+            "interface": "ProofReuseDependencyPlan@1",
+            "lazy": True,
+            "automatic_install_enabled": False,
+        }
+
+    monkeypatch.setattr(
+        test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe
+    )
+    monkeypatch.setattr(services, "proof_reuse_dependency_plan", fake_plan)
+    original_sys_path = list(supervisor.sys.path)
+
+    providers = supervisor._provider_preflight()
+
+    assert commands == [["/opt/codex/bin/codex", "login", "status"]]
+    assert captured["probe"] == captured["plan"]
+    assert captured["probe"]["IPFS_TEST_PROOF_REUSE_MODE"] == "shadow"
+    assert captured["probe"]["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "0"
+    assert captured["probe"]["IPFS_TEST_PROOF_REUSE_DATASETS_SOURCE"] == str(
+        supervisor.DATASETS_ROOT
+    )
+    assert captured["probe"]["IPFS_DATASETS_AUTO_INSTALL"] == "false"
+    assert captured["probe"]["IPFS_AUTO_INSTALL"] == "false"
+    assert supervisor.os.environ["IPFS_TEST_PROOF_REUSE_MODE"] == "readwrite"
+    assert supervisor.os.environ["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "1"
+    assert supervisor.sys.path == original_sys_path
+    assert providers["test_reuse_discovery_policy"] == {
+        "mode": "shadow",
+        "environment_is_copy": True,
+        "automatic_install_enabled": False,
+        "installer_invoked": False,
+        "process_started": False,
+        "network_attempted": False,
+        "cache_created": False,
+        "completion_authority": False,
+    }
+    assert providers["test_reuse_capability_report"]["mode"] == "shadow"
+    assert providers["proof_reuse_dependency_plan"] == {
+        "interface": "ProofReuseDependencyPlan@1",
+        "lazy": True,
+        "automatic_install_enabled": False,
+    }
+    assert "optional_non_blocking_capabilities" in providers
+
+
 def test_provider_preflight_requires_codex_fallback(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -310,6 +410,133 @@ def test_closeout_artifact_presence_projects_missing_inputs_without_authority(
     )
 
 
+def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    monkeypatch.setattr(supervisor, "MERGE_QUEUE_DIR", tmp_path / "merge-queue")
+    monkeypatch.setattr(
+        supervisor,
+        "_completion_state_path",
+        lambda field: tmp_path / "completion" / field,
+    )
+
+    inventory = supervisor._closeout_production_input_inventory()
+
+    assert inventory["inventory_is_completion_authority"] is False
+    assert inventory["task_count"] == 53
+    assert inventory["goal_count"] == 12
+    assert inventory["acceptance_requirement_count"] == 39
+    assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
+    by_name = {item["name"]: item for item in inventory["requirements"]}
+    approvals = by_name["genuine_reviewed_approvals_without_queue_records"]
+    assert approvals["missing_ids"] == [
+        "PTR-000",
+        "PTR-001",
+        "PTR-011",
+        "PTR-041",
+    ]
+    validations = by_name[
+        "fresh_current_tree_proof_reuse_off_validation_receipts"
+    ]
+    assert validations["required_count"] == 53
+    assert validations["present_count"] == 0
+    assert validations["presence_is_completion_authority"] is False
+    assert inventory["authoritative_materializer"]["configured"] is False
+    activation = inventory["runtime_reuse_activation"]
+    assert activation["automatic_plugin_discovery"] is True
+    assert activation["ordinary_enabled_run_effective_action"] == "run_test"
+    assert activation["default_identity_service_factory_configured"] is False
+    assert activation["two_stage_candidate_revalidation_configured"] is False
+    assert activation["post_pass_receipt_requires_runtime_trace"] is False
+    assert activation["deferred_request_transport_compatible"] is False
+    assert activation["issuer_in_lazy_service_resolution"] is False
+    assert activation["authoritative_candidate_publication_configured"] is False
+    assert activation["receipt_content_identity_profiles"] == {
+        "accelerator": "cidv1-base32-dag-json-sha2-256",
+        "datasets_statement": "sha256-canonical-json-v1",
+        "exact_conformance": False,
+    }
+    assert len(activation["activation_blocker_codes"]) == 9
+    assert activation["implementation_gap_is_completion_authority"] is False
+    assert activation["required_implementation_sequence"][-1]["goals"] == [
+        "PTR-G110"
+    ]
+    assert not any(tmp_path.rglob("*"))
+
+
+def test_managed_merge_inventory_checks_task_cid_and_current_ancestry(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    task_type = type("Task", (), {})
+    first = task_type()
+    first.task_id = "PTR-001"
+    first.canonical_task_cid = "cid-001"
+    second = task_type()
+    second.task_id = "PTR-002"
+    second.canonical_task_cid = "cid-002"
+    completed = tmp_path / "completed"
+    completed.mkdir()
+    (completed / "one.json").write_text(
+        json.dumps(
+            {
+                "task_id": "PTR-001",
+                "canonical_task_id": "cid-001",
+                "commit_sha": "commit-001",
+                "status": "completed",
+                "enqueued_at": 1,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (completed / "two.json").write_text(
+        json.dumps(
+            {
+                "task_id": "PTR-002",
+                "canonical_task_id": "wrong-cid",
+                "commit_sha": "commit-002",
+                "status": "completed",
+                "enqueued_at": 2,
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(supervisor, "MERGE_QUEUE_DIR", tmp_path)
+    monkeypatch.setattr(
+        supervisor,
+        "_git_commit_is_ancestor",
+        lambda commit: commit == "commit-001",
+    )
+
+    inventory = supervisor._managed_merge_input_inventory((first, second))
+
+    assert inventory["usable_candidate_task_ids"] == ["PTR-001"]
+    assert inventory["missing_candidate_task_ids"] == ["PTR-002"]
+    assert inventory["rejected_candidates"] == {
+        "PTR-002": "canonical_task_cid_mismatch"
+    }
+    assert inventory["presence_is_completion_authority"] is False
+
+
+def test_inventory_does_not_count_unexpected_ids_as_required_inputs(
+    supervisor: Any,
+) -> None:
+    item = supervisor._inventory_requirement(
+        stage="PTR-111",
+        name="analyzers",
+        expected_ids=("required-analyzer",),
+        observed_ids=("foreign-analyzer",),
+    )
+
+    assert item["present_count"] == 0
+    assert item["missing_count"] == 1
+    assert item["missing_ids"] == ["required-analyzer"]
+    assert item["unexpected_ids"] == ["foreign-analyzer"]
+
+
 def _configure_closeout_test(
     supervisor: Any,
     monkeypatch: pytest.MonkeyPatch,
@@ -340,7 +567,10 @@ def _configure_closeout_test(
                 "task_count": 41,
                 "completed_task_count": 41,
                 "open_task_ids": [],
-            }
+            },
+            "closeout_input_inventory": {
+                "inventory_is_completion_authority": False
+            },
         },
     )
     monkeypatch.setattr(
@@ -410,6 +640,9 @@ def test_closeout_report_only_uses_ephemeral_health_and_keeps_lanes_running(
     assert result["diagnosis_passed"] is True
     assert result["lanes_stopped"] is False
     assert result["operator_commit_required"] is False
+    assert result["input_inventory"] == {
+        "inventory_is_completion_authority": False
+    }
     assert len(observed_health_paths) == 1
     assert not observed_health_paths[0].exists()
     assert not any(tmp_path.iterdir())
@@ -433,3 +666,136 @@ def test_closeout_refuses_failed_diagnosis_before_stopping_lanes(
     assert result["precloseout_diagnosis_passed"] is False
     assert result["lanes_stopped"] == []
     assert result["result"]["reason_codes"] == ["missing_artifact"]
+
+
+def test_report_only_accepts_normal_agentic_maintenance_statuses(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    statuses = {
+        "ptr_lane_0": "running",
+        "ptr_lane_1": "agentic_maintenance_started",
+        "ptr_lane_2": "agentic_maintenance_completed",
+    }
+
+    def fake_load(path: Path) -> dict[str, object]:
+        for lane_name, status in statuses.items():
+            if path.name == f"{lane_name}_supervisor_status.json":
+                return {
+                    "status": status,
+                    "daemon_pid": 200,
+                    "last_agentic_maintenance_error": "",
+                    "control_plane_update_pending": False,
+                }
+            if path.name == f"{lane_name}_task_state.json":
+                return {
+                    "task_count": 41,
+                    "completed_count": 41,
+                    "blocked_count": 0,
+                    "blocked_task_ids": [],
+                    "selectable_ready_count": 0,
+                }
+        return {}
+
+    monkeypatch.setattr(supervisor, "_load_json", fake_load)
+    monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 100)
+    monkeypatch.setattr(
+        supervisor, "_lane_process_owned", lambda _lane, _pid: True
+    )
+    monkeypatch.setattr(supervisor, "_pid_alive", lambda _pid: True)
+    monkeypatch.setattr(
+        supervisor,
+        "_require_isolated_clean_checkout",
+        lambda: {
+            "branch": "agent/proof-backed-test-reuse",
+            "commit": "commit-1",
+            "tree": "tree-1",
+            "submodules": {},
+        },
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_validate_board",
+        lambda **_kwargs: {"valid": True, "task_count": 41},
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_reviewed_completion_projection",
+        lambda: {
+            "implementation": {
+                "task_count": 41,
+                "completed_task_count": 41,
+                "open_task_ids": [],
+            },
+            "closeout_input_inventory": {
+                "inventory_is_completion_authority": False
+            },
+        },
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_completion_state_path",
+        lambda field: tmp_path / field,
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_run",
+        lambda command, **_kwargs: subprocess.CompletedProcess(
+            command,
+            0,
+            json.dumps({"passed": True, "reason_codes": []}),
+            "",
+        ),
+    )
+
+    status = supervisor._status_payload()
+    result = supervisor._closeout(report_only=True)
+
+    assert status["healthy"] is True
+    assert status["work_complete"] is True
+    assert result["diagnosis_passed"] is True
+    assert result["lanes_stopped"] is False
+    assert not any(tmp_path.iterdir())
+
+
+@pytest.mark.parametrize(
+    ("maintenance_error", "update_pending", "reason"),
+    [
+        ("reload failed", False, "agentic_maintenance_failed"),
+        ("", True, "control_plane_update_pending"),
+    ],
+)
+def test_maintenance_status_still_fails_closed_on_error_or_pending_update(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    maintenance_error: str,
+    update_pending: bool,
+    reason: str,
+) -> None:
+    def fake_load(path: Path) -> dict[str, object]:
+        if path.name.endswith("_supervisor_status.json"):
+            return {
+                "status": "agentic_maintenance_completed",
+                "daemon_pid": 200,
+                "last_agentic_maintenance_error": maintenance_error,
+                "control_plane_update_pending": update_pending,
+            }
+        return {
+            "task_count": 41,
+            "completed_count": 41,
+            "blocked_count": 0,
+            "blocked_task_ids": [],
+        }
+
+    monkeypatch.setattr(supervisor, "_load_json", fake_load)
+    monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 100)
+    monkeypatch.setattr(
+        supervisor, "_lane_process_owned", lambda _lane, _pid: True
+    )
+    monkeypatch.setattr(supervisor, "_pid_alive", lambda _pid: True)
+
+    lane = supervisor._lane_status(supervisor.LANES[0])
+
+    assert lane["healthy"] is False
+    assert reason in lane["unhealthy_reasons"]

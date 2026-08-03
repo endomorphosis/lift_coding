@@ -15,7 +15,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from collections.abc import Iterator, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -32,6 +32,13 @@ GROK_CODEX_PROVIDER_POLICIES = frozenset(
         "grok→codex",
         "grok-then-codex",
         "grok_then_codex",
+    }
+)
+LIVE_SUPERVISOR_STATUSES = frozenset(
+    {
+        "running",
+        "agentic_maintenance_started",
+        "agentic_maintenance_completed",
     }
 )
 
@@ -260,6 +267,89 @@ def _require_isolated_clean_checkout() -> dict[str, object]:
     }
 
 
+def _proof_reuse_capability_discovery() -> dict[str, object]:
+    """Return inert shadow-mode capability and dependency-plan reports."""
+
+    original_sys_path = list(sys.path)
+    for root in reversed((ACCEL_ROOT, DATASETS_ROOT, KIT_ROOT)):
+        root_text = str(root)
+        if root_text not in sys.path:
+            sys.path.insert(0, root_text)
+    discovery_environment = _runtime_environment()
+    discovery_environment.update(
+        {
+            "IPFS_TEST_PROOF_REUSE_MODE": "shadow",
+            "IPFS_TEST_PROOF_REUSE_AUTO_INSTALL": "0",
+            "IPFS_TEST_PROOF_REUSE_DATASETS_SOURCE": str(DATASETS_ROOT),
+            "IPFS_DATASETS_AUTO_INSTALL": "false",
+            "IPFS_AUTO_INSTALL": "false",
+            "IPFS_DATASETS_PY_AUTO_GROTH16_BUILD": "0",
+            "IPFS_DATASETS_PY_AUTO_NLTK_DOWNLOAD": "0",
+            "IPFS_DATASETS_PY_INCLUDE_VCS_DEPENDENCIES": "0",
+        }
+    )
+    policy = {
+        "mode": "shadow",
+        "environment_is_copy": True,
+        "automatic_install_enabled": False,
+        "installer_invoked": False,
+        "process_started": False,
+        "network_attempted": False,
+        "cache_created": False,
+        "completion_authority": False,
+    }
+    try:
+        try:
+            from ipfs_accelerate_py.agent_supervisor.integrations.test_reuse_capabilities import (
+                TestReuseCapabilityProbe,
+            )
+
+            capability_report = TestReuseCapabilityProbe(
+                environ=discovery_environment
+            ).probe().to_dict()
+        except Exception as exc:
+            capability_report = {
+                "schema_version": "TestReuseCapabilityReport@1",
+                "mode": "shadow",
+                "available": False,
+                "reason_code": "capability_probe_unavailable",
+                "error_kind": type(exc).__name__,
+                "side_effect_free": True,
+                "network_attempted": False,
+                "daemon_started": False,
+                "cache_created": False,
+                "unavailable_is_non_blocking": True,
+            }
+
+        try:
+            from ipfs_accelerate_py.testing.proof_reuse.services import (
+                proof_reuse_dependency_plan,
+            )
+
+            dependency_plan = proof_reuse_dependency_plan(
+                discovery_environment
+            )
+        except Exception as exc:
+            dependency_plan = {
+                "interface": "ProofReuseDependencyPlan@1",
+                "available": False,
+                "reason_code": "dependency_plan_unavailable",
+                "error_kind": type(exc).__name__,
+                "lazy": True,
+                "cold_import_inert": True,
+                "automatic_install_enabled": False,
+                "external_capability_absence_action": "run",
+            }
+    finally:
+        sys.path[:] = original_sys_path
+
+    return {
+        "discovery_policy": policy,
+        "capability_report": capability_report,
+        "dependency_plan": dependency_plan,
+    }
+
+
 def _provider_preflight() -> dict[str, object]:
     try:
         import duckdb  # type: ignore
@@ -319,6 +409,7 @@ def _provider_preflight() -> dict[str, object]:
         "ipfs_binary": shutil.which("ipfs") or "",
         "snarkjs_binary": shutil.which("snarkjs") or "",
     }
+    proof_reuse_discovery = _proof_reuse_capability_discovery()
     return {
         "python": sys.executable,
         "duckdb": duckdb.__version__,
@@ -336,6 +427,15 @@ def _provider_preflight() -> dict[str, object]:
             "grok_unavailable_action": "use_codex",
         },
         "optional_non_blocking_capabilities": optional,
+        "test_reuse_discovery_policy": proof_reuse_discovery[
+            "discovery_policy"
+        ],
+        "test_reuse_capability_report": proof_reuse_discovery[
+            "capability_report"
+        ],
+        "proof_reuse_dependency_plan": proof_reuse_discovery[
+            "dependency_plan"
+        ],
     }
 
 
@@ -381,6 +481,518 @@ def _required_closeout_artifact_presence() -> dict[str, object]:
     }
 
 
+def _git_commit_is_ancestor(commit: str) -> bool:
+    """Return whether *commit* is in the current integration history."""
+
+    if not commit.strip():
+        return False
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", commit, "HEAD"],
+        cwd=REPO_ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+        timeout=120,
+    )
+    return result.returncode == 0
+
+
+def _record_identifier(
+    record: Mapping[str, object], *names: str
+) -> str:
+    for name in names:
+        value = record.get(name)
+        if value is not None and str(value).strip():
+            return str(value).strip()
+    return ""
+
+
+def _record_population(
+    value: object,
+    *,
+    id_names: Sequence[str],
+) -> set[str]:
+    """Extract identifiers from a retained list or keyed population."""
+
+    if isinstance(value, Mapping):
+        return {str(item).strip() for item in value if str(item).strip()}
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        return set()
+    found: set[str] = set()
+    for item in value:
+        if isinstance(item, Mapping):
+            identifier = _record_identifier(item, *id_names)
+        else:
+            identifier = str(item).strip()
+        if identifier:
+            found.add(identifier)
+    return found
+
+
+def _managed_merge_input_inventory(
+    tasks: Sequence[object],
+) -> dict[str, object]:
+    """Inventory usable historical merge candidates without granting authority."""
+
+    task_cids = {
+        str(getattr(task, "task_id", "")): str(
+            getattr(task, "canonical_task_cid", "")
+        )
+        for task in tasks
+        if str(getattr(task, "task_id", "")).strip()
+    }
+    latest: dict[str, tuple[float, Mapping[str, object]]] = {}
+    completed_dir = MERGE_QUEUE_DIR / "completed"
+    for path in sorted(completed_dir.glob("*.json")):
+        record = _load_json(path)
+        task_id = _record_identifier(record, "task_id")
+        if task_id not in task_cids:
+            continue
+        try:
+            order = float(record.get("enqueued_at") or path.stat().st_mtime)
+        except (OSError, TypeError, ValueError):
+            order = 0.0
+        prior = latest.get(task_id)
+        if prior is None or order > prior[0]:
+            latest[task_id] = (order, record)
+
+    accepted: set[str] = set()
+    rejected: dict[str, str] = {}
+    for task_id, (_order, record) in sorted(latest.items()):
+        status = _record_identifier(record, "status", "state").lower()
+        claimed_cid = _record_identifier(
+            record,
+            "task_cid",
+            "canonical_task_cid",
+            "canonical_task_id",
+        )
+        commit = _record_identifier(
+            record, "merged_commit_id", "commit_sha", "commit_id"
+        )
+        if status not in {"completed", "merged"}:
+            rejected[task_id] = "merge_not_completed"
+        elif claimed_cid != task_cids[task_id]:
+            rejected[task_id] = "canonical_task_cid_mismatch"
+        elif not commit:
+            rejected[task_id] = "merged_commit_missing"
+        elif not _git_commit_is_ancestor(commit):
+            rejected[task_id] = "merged_commit_not_current_ancestor"
+        else:
+            accepted.add(task_id)
+
+    expected = set(task_cids)
+    return {
+        "source_directory": str(completed_dir),
+        "required_count": len(expected),
+        "observed_record_task_count": len(latest),
+        "usable_candidate_count": len(accepted),
+        "usable_candidate_task_ids": sorted(accepted),
+        "missing_candidate_task_ids": sorted(expected - accepted),
+        "rejected_candidates": dict(sorted(rejected.items())),
+        "current_head_ancestry_checked": True,
+        "historical_merge_candidate_is_current_tree_validation": False,
+        "presence_is_completion_authority": False,
+    }
+
+
+def _inventory_requirement(
+    *,
+    stage: str,
+    name: str,
+    expected_ids: Sequence[str] = (),
+    expected_count: int | None = None,
+    observed_ids: Sequence[str] = (),
+    observed_count: int | None = None,
+    source: str = "not_configured",
+) -> dict[str, object]:
+    expected = tuple(sorted({str(item) for item in expected_ids if str(item)}))
+    observed = tuple(sorted({str(item) for item in observed_ids if str(item)}))
+    required_count = len(expected) if expected_count is None else expected_count
+    if expected:
+        matched = tuple(sorted(set(expected) & set(observed)))
+        missing_ids = tuple(sorted(set(expected) - set(observed)))
+        unexpected_ids = tuple(sorted(set(observed) - set(expected)))
+        present_count = len(matched)
+        missing_count = len(missing_ids)
+    else:
+        matched = observed
+        missing_ids = ()
+        unexpected_ids = ()
+        present_count = len(observed) if observed_count is None else observed_count
+        missing_count = max(0, required_count - present_count)
+    result: dict[str, object] = {
+        "stage": stage,
+        "name": name,
+        "required_count": required_count,
+        "present_count": present_count,
+        "missing_count": missing_count,
+        "source": source,
+        "presence_is_completion_authority": False,
+    }
+    if expected:
+        result["required_ids"] = list(expected)
+        result["present_ids"] = list(matched)
+        result["missing_ids"] = list(missing_ids)
+        result["unexpected_ids"] = list(unexpected_ids)
+    return result
+
+
+def _closeout_production_input_inventory(
+    tasks: Sequence[object] | None = None,
+) -> dict[str, object]:
+    """Describe every retained input still needed by PTR-110/111/120/122.
+
+    This is deliberately read-only and presence-only.  It never runs a test,
+    synthesizes a receipt, verifies an approval, or promotes a discovered
+    record to completion authority.
+    """
+
+    if str(ACCEL_ROOT) not in sys.path:
+        sys.path.insert(0, str(ACCEL_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
+    from ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_current_tree_gate import (
+        REQUIRED_ADVERSARIAL_POPULATIONS,
+        REQUIRED_ANALYZERS,
+        REQUIRED_CHILD_GOAL_IDS,
+        REQUIRED_SUPERVISOR_LANE_IDS,
+    )
+    from ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_goal_evidence import (
+        REQUIRED_QUORUM_MEMBERS,
+        goal_requirements_by_id,
+        load_objective_goals,
+    )
+    from ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_objective_evidence import (
+        ANALYZER_HEALTH_ARTIFACT_RELATIVE,
+        BUNDLE_ARTIFACT_RELATIVE,
+        COVERAGE_ARTIFACT_RELATIVE,
+        EXHAUSTION_QUORUM_ARTIFACT_RELATIVE,
+    )
+    from ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_task_evidence import (
+        REVIEW_REQUIRED_WITHOUT_QUEUE,
+    )
+
+    parsed_tasks = tuple(tasks or parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX))
+    task_ids = tuple(
+        sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks)
+    )
+    goals = load_objective_goals(REPO_ROOT / OBJECTIVE_REL)
+    goal_ids = tuple(sorted(goal.goal_id for goal in goals))
+    requirement_ids = tuple(
+        sorted(
+            {
+                requirement
+                for values in goal_requirements_by_id(goals).values()
+                for requirement in values
+            }
+        )
+    )
+
+    gate_path = _completion_state_path("gatePathSuffix")
+    evidence_path = _completion_state_path("evidencePathSuffix")
+    completion_dir = gate_path.parent
+    coverage_path = completion_dir / Path(COVERAGE_ARTIFACT_RELATIVE).name
+    analyzer_path = completion_dir / Path(
+        ANALYZER_HEALTH_ARTIFACT_RELATIVE
+    ).name
+    quorum_path = completion_dir / Path(
+        EXHAUSTION_QUORUM_ARTIFACT_RELATIVE
+    ).name
+    bundle_path = completion_dir / Path(BUNDLE_ARTIFACT_RELATIVE).name
+
+    gate = _load_json(gate_path)
+    packet = gate.get("evaluate_packet")
+    packet = packet if isinstance(packet, Mapping) else {}
+    evidence = _load_json(evidence_path)
+    coverage = _load_json(coverage_path)
+    analyzer_health = _load_json(analyzer_path)
+    quorum = _load_json(quorum_path)
+
+    packet_tasks = _record_population(
+        packet.get("task_evidence"), id_names=("task_id",)
+    )
+    packet_children = _record_population(
+        packet.get("child_goal_evidence"), id_names=("goal_id",)
+    )
+    packet_populations = _record_population(
+        packet.get("adversarial_evidence"),
+        id_names=("population", "population_id", "name"),
+    )
+    packet_analyzers = _record_population(
+        packet.get("analyzer_health"),
+        id_names=("analyzer_id", "analyzer", "channel", "name"),
+    )
+    packet_supervisor_lanes: set[str] = set()
+    supervisor_input = packet.get("supervisor_health_evidence")
+    if isinstance(supervisor_input, Mapping):
+        packet_supervisor_lanes = _record_population(
+            supervisor_input.get("lanes"), id_names=("lane_id", "name", "id")
+        )
+
+    coverage_ids: set[str] = set()
+    coverage_goals = coverage.get("goals")
+    if isinstance(coverage_goals, Mapping):
+        for row in coverage_goals.values():
+            if not isinstance(row, Mapping):
+                continue
+            criteria = row.get("criteria")
+            if isinstance(criteria, Sequence) and not isinstance(
+                criteria, (str, bytes)
+            ):
+                coverage_ids.update(
+                    str(item).strip() for item in criteria if str(item).strip()
+                )
+    retained_analyzers = _record_population(
+        analyzer_health.get("analyzers"),
+        id_names=("analyzer_id", "analyzer", "channel", "name"),
+    )
+    retained_quorum = quorum.get("members")
+    retained_quorum_count = (
+        len(retained_quorum)
+        if isinstance(retained_quorum, Sequence)
+        and not isinstance(retained_quorum, (str, bytes))
+        else 0
+    )
+    retained_goal_ids: set[str] = set()
+    evidence_goals = evidence.get("goals")
+    if isinstance(evidence_goals, Mapping):
+        for goal_id, row in evidence_goals.items():
+            if not isinstance(row, Mapping):
+                continue
+            records = row.get("completion_evidence_records")
+            legacy = row.get("evidence_cids")
+            if (
+                isinstance(records, Sequence)
+                and not isinstance(records, (str, bytes))
+                and bool(records)
+            ) or (
+                isinstance(legacy, Sequence)
+                and not isinstance(legacy, (str, bytes))
+                and bool(legacy)
+            ):
+                retained_goal_ids.add(str(goal_id))
+
+    merge_inventory = _managed_merge_input_inventory(parsed_tasks)
+    merge_candidates = set(merge_inventory["usable_candidate_task_ids"])
+    approval_ids = tuple(sorted(REVIEW_REQUIRED_WITHOUT_QUEUE))
+    requirements = [
+        _inventory_requirement(
+            stage="PTR-110",
+            name="managed_merge_or_reviewed_completion_provenance",
+            expected_ids=task_ids,
+            observed_ids=merge_candidates,
+            source=str(MERGE_QUEUE_DIR / "completed"),
+        ),
+        _inventory_requirement(
+            stage="PTR-110",
+            name="genuine_reviewed_approvals_without_queue_records",
+            expected_ids=approval_ids,
+            observed_ids=(),
+            source="not_configured",
+        ),
+        _inventory_requirement(
+            stage="PTR-110",
+            name="fresh_current_tree_proof_reuse_off_validation_receipts",
+            expected_ids=task_ids,
+            observed_ids=packet_tasks,
+            source=str(gate_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-111",
+            name="acceptance_coverage_receipts",
+            expected_ids=requirement_ids,
+            observed_ids=coverage_ids,
+            source=str(coverage_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-111",
+            name="analyzer_health_receipts",
+            expected_ids=tuple(sorted(REQUIRED_ANALYZERS)),
+            observed_ids=retained_analyzers | packet_analyzers,
+            source=str(analyzer_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-111",
+            name="adversarial_population_receipts",
+            expected_ids=tuple(sorted(REQUIRED_ADVERSARIAL_POPULATIONS)),
+            observed_ids=packet_populations,
+            source=str(gate_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-111",
+            name="independent_exhaustion_quorum_members",
+            expected_count=REQUIRED_QUORUM_MEMBERS,
+            observed_count=retained_quorum_count,
+            source=str(quorum_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-122",
+            name="authoritative_child_goal_evidence",
+            expected_ids=tuple(sorted(REQUIRED_CHILD_GOAL_IDS)),
+            observed_ids=packet_children,
+            source=str(gate_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-122",
+            name="real_warm_reuse_benchmark_receipt",
+            expected_count=1,
+            observed_count=int(bool(packet.get("benchmark_evidence"))),
+            source=str(gate_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-122",
+            name="rollout_decision_and_promotion_evidence",
+            expected_count=1,
+            observed_count=int(bool(packet.get("rollout_evidence"))),
+            source=str(gate_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-122",
+            name="fresh_three_lane_supervisor_health_receipt",
+            expected_ids=tuple(sorted(REQUIRED_SUPERVISOR_LANE_IDS)),
+            observed_ids=packet_supervisor_lanes,
+            source=str(gate_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-120",
+            name="assembled_goal_completion_evidence",
+            expected_ids=goal_ids,
+            observed_ids=retained_goal_ids,
+            source=str(evidence_path),
+        ),
+        _inventory_requirement(
+            stage="PTR-122",
+            name="persisted_final_current_tree_gate_bundle",
+            expected_count=1,
+            observed_count=int(
+                gate.get("producing_task_id") == "PTR-122"
+                and isinstance(gate.get("decision"), Mapping)
+            ),
+            source=str(gate_path),
+        ),
+    ]
+    missing = [item for item in requirements if item["missing_count"]]
+    return {
+        "schema": (
+            "ipfs_accelerate_py/proof-backed-test-reuse-"
+            "closeout-input-inventory@1"
+        ),
+        "inventory_is_completion_authority": False,
+        "reporting_only": True,
+        "task_count": len(task_ids),
+        "goal_count": len(goal_ids),
+        "acceptance_requirement_count": len(requirement_ids),
+        "managed_merge_history": merge_inventory,
+        "artifact_paths": {
+            "gate": str(gate_path),
+            "evidence": str(evidence_path),
+            "coverage": str(coverage_path),
+            "analyzer_health": str(analyzer_path),
+            "exhaustion_quorum": str(quorum_path),
+            "objective_evidence_bundle": str(bundle_path),
+        },
+        "authoritative_materializer": {
+            "configured": False,
+            "required_call_sequence": [
+                "PTR-110 ProofTestReuseTaskEvidenceCollector.collect",
+                "PTR-111 GoalAssuranceRunner.collect",
+                "PTR-120 ProofTestReuseObjectiveEvidenceAssembler.assemble",
+                "PTR-122 ProofTestReuseCurrentTreeGate.evaluate",
+                "PTR-122 ProofTestReuseCurrentTreeGate.persist_bundle",
+                "merge PTR-122 evidence into configured gate/evidence outputs",
+            ],
+            "may_synthesize_approvals": False,
+            "may_treat_task_status_as_authority": False,
+        },
+        "runtime_reuse_activation": {
+            "automatic_plugin_discovery": True,
+            "ordinary_enabled_run_effective_action": "run_test",
+            "default_identity_services_injected": False,
+            "default_identity_service_factory_configured": False,
+            "production_identity_injector_configured": False,
+            "missing_production_providers": [
+                "repository_forest_provider",
+                "analysis_index_provider",
+                "component_inputs_provider",
+                "policy_inputs_provider",
+                "runtime_evidence_provider",
+            ],
+            "candidate_context_store_configured": False,
+            "two_stage_candidate_revalidation_configured": False,
+            "lookup_requires_exact_execution_key_before_candidate_read": True,
+            "runtime_trace_attribute_producer_configured": False,
+            "post_pass_runtime_trace_capture_configured": False,
+            "post_pass_receipt_requires_runtime_trace": False,
+            "deferred_request_builder_configured": False,
+            "deferred_request_transport_compatible": False,
+            "deferred_certificate_issuer_configured": False,
+            "issuer_in_lazy_service_bundle": False,
+            "issuer_in_lazy_service_resolution": False,
+            "candidate_certificate_publication_configured": False,
+            "authoritative_candidate_publication_configured": False,
+            "receipt_content_identity_profiles_conformant": False,
+            "receipt_content_identity_gap": (
+                "accelerator_cidv1_dag_json_vs_datasets_sha256"
+            ),
+            "receipt_content_identity_profiles": {
+                "accelerator": "cidv1-base32-dag-json-sha2-256",
+                "datasets_statement": "sha256-canonical-json-v1",
+                "exact_conformance": False,
+            },
+            "ordinary_warm_skip_path_complete": False,
+            "missing_activation_action": "run_test",
+            "implementation_gap_is_completion_authority": False,
+            "activation_blocker_codes": [
+                "identity_services_unconfigured",
+                "candidate_lookup_identity_cycle",
+                "post_pass_runtime_trace_unproduced",
+                "runtime_trace_not_required_for_receipt",
+                "receipt_cid_profile_mismatch",
+                "deferred_request_builder_unconfigured",
+                "deferred_request_transport_type_mismatch",
+                "issuer_unconfigured",
+                "authoritative_candidate_not_published",
+            ],
+            "required_implementation_sequence": [
+                {
+                    "goals": ["PTR-G020", "PTR-G030", "PTR-G060"],
+                    "work": "production_current_identity_provider_factory",
+                },
+                {
+                    "goals": ["PTR-G030", "PTR-G060"],
+                    "work": "controlled_current_runtime_preflight_provider",
+                },
+                {
+                    "goals": ["PTR-G010", "PTR-G040", "PTR-G050"],
+                    "work": "cross_package_receipt_cid_profile_conformance",
+                },
+                {
+                    "goals": ["PTR-G040", "PTR-G050", "PTR-G060"],
+                    "work": "deferred_request_issuer_and_candidate_publication",
+                },
+                {
+                    "goals": [
+                        "PTR-G060",
+                        "PTR-G080",
+                        "PTR-G090",
+                        "PTR-G100",
+                    ],
+                    "work": "unwired_cross_repository_cold_warm_e2e",
+                },
+                {
+                    "goals": ["PTR-G110"],
+                    "work": "activated_warm_benchmark_and_rollout_evidence",
+                },
+            ],
+        },
+        "requirements": requirements,
+        "remaining_inputs": missing,
+        "remaining_input_group_count": len(missing),
+        "all_inputs_present": not missing,
+    }
+
+
 def _reviewed_completion_projection() -> dict[str, object]:
     """Project implementation progress separately from goal authority."""
 
@@ -414,6 +1026,7 @@ def _reviewed_completion_projection() -> dict[str, object]:
         goal_state_counts[goal.status] = goal_state_counts.get(goal.status, 0) + 1
     projection = dict(CONFIG["objectiveProjection"])
     artifact_presence = _required_closeout_artifact_presence()
+    input_inventory = _closeout_production_input_inventory(tasks)
     if open_task_ids:
         next_action = "execute_reviewed_expansion"
     elif not artifact_presence["artifact_presence_ready"]:
@@ -452,6 +1065,7 @@ def _reviewed_completion_projection() -> dict[str, object]:
             ],
         },
         "closeout_readiness": artifact_presence,
+        "closeout_input_inventory": input_inventory,
         "next_action": next_action,
     }
 
@@ -782,7 +1396,7 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
     unhealthy_reasons = []
     if not supervisor_owned:
         unhealthy_reasons.append("supervisor_not_owned_or_alive")
-    if status.get("status") != "running":
+    if status.get("status") not in LIVE_SUPERVISOR_STATUSES:
         unhealthy_reasons.append("supervisor_not_running")
     if not daemon_alive:
         unhealthy_reasons.append("daemon_not_alive")
@@ -1099,6 +1713,9 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
     _validate_board(persist_projection=not report_only)
     projection = _reviewed_completion_projection()
     implementation = dict(projection["implementation"])
+    input_inventory = projection.get("closeout_input_inventory")
+    if not isinstance(input_inventory, Mapping):
+        input_inventory = _closeout_production_input_inventory()
     open_task_ids = list(implementation["open_task_ids"])
     if open_task_ids:
         raise RuntimeError(
@@ -1156,6 +1773,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
             "returncode": diagnosis_result.returncode,
             "lanes_stopped": False,
             "operator_commit_required": False,
+            "input_inventory": input_inventory,
             "result": diagnosis,
         }
     if not diagnosis_passed:
@@ -1168,6 +1786,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
             "returncode": diagnosis_result.returncode,
             "lanes_stopped": [],
             "operator_commit_required": False,
+            "input_inventory": input_inventory,
             "result": diagnosis,
         }
 
@@ -1222,6 +1841,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
         "candidate_objective_path": str(candidate_path),
         "status_path": str(status_path),
         "operator_commit_required": result.returncode == 0,
+        "input_inventory": input_inventory,
         "result": closeout_result,
     }
     if result.returncode == 0 and not candidate_path.is_file():

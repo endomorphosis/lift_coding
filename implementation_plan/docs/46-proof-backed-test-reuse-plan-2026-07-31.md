@@ -523,9 +523,10 @@ gates may describe gaps, but may generate work only after the bounded
 producer/reconciliation path is verified and only with stable deduplication and
 a reviewed finding limit.
 
-Completion has one writer. The three implementation lanes continue to run with
-goal reconciliation disabled. After all 41 implementation tasks close, an
-operator invokes a distinct closeout command which:
+Completion has one writer. At this historical projection revision, the three
+implementation lanes continued with goal reconciliation disabled and, after
+all 41 then-declared implementation tasks closed, an operator could invoke a
+distinct closeout command which:
 
 1. verifies the exact clean integration checkout and complete task population;
 2. collects retained current-tree task, validation, analyzer, adversarial,
@@ -540,6 +541,83 @@ operator invokes a distinct closeout command which:
    mismatched authority input and retains actionable reason codes; and
 8. presents the protected objective lifecycle update for an explicit
    operator-owned commit before normal lane restart.
+
+## 13.2 Reviewed runtime-activation repair (2026-08-03)
+
+The 41-task objective-completion expansion above is implemented, but a runtime
+audit found a separate bounded integration gap: the components are present and
+their isolated contracts pass, while an ordinary direct-node pytest invocation
+cannot yet compose the full authoritative path without test-owned service
+injection. The active reviewed projection is therefore `PTR-131` through
+`PTR-142`; it does not reopen or rewrite the completed task contracts.
+
+The repair closes these concrete gaps:
+
+- The plugin's safe default is intentionally inert. A non-off mode needs a
+  session-scoped factory for repository discovery, forest identity, AST index,
+  identity components, cache, local verifier and deferred issuer, while any
+  explicitly injected test/service implementation must continue to override
+  the default.
+- A locator can find candidates but cannot reconstruct what a certificate
+  attests. Each successful execution must retain immutable canonical candidate
+  context: exact execution key, source/static closure, observed runtime trace,
+  forest/environment/policy facts and pass receipt. A mutable locator index
+  points to those bytes and remains a hint only.
+- The runtime trace is observed during a real setup/call/teardown lifecycle. A
+  warm admission must not run the test once to predict whether it can skip.
+  Instead, the retained trace specifies the dependency frontier to resolve and
+  content-address freshly; unknown or changed facts execute the test. A cold
+  pass executes once and records its observed frontier afterward.
+- Datasets and accelerator need one versioned byte-exact statement profile.
+  CID strings alone are insufficient: retained canonical DAG-JSON bytes must
+  decode and rehash as CIDv1/lowercase-base32/dag-json/sha2-256, and the public
+  statement must pin receipt, execution/candidate context, policy, circuit,
+  verifier key, issuer and epoch.
+- Deferred issuance needs a finite public request reconstructed by the
+  controller. A worker may send admitted public envelope bytes but never
+  witness material or a private request object. Missing packages, native
+  artifacts, keys, circuits, endpoints, binaries, caches and transports retain
+  the receipt and produce typed `DEFERRED`/`RUN` results.
+- Each package needs a narrow lazy bootstrap usable by installed, source-tree
+  and direct-node invocations. Package `__init__` modules may expose/inject a
+  lightweight public protocol shim, but must not eagerly import the accelerator
+  supervisor, datasets ZK stack, kit daemons or installer machinery.
+- Content-addressing, verification and optional proving requirements must agree
+  across `requirements.txt`, `setup.py` and `pyproject.toml`. First-use lazy
+  installation is bounded, allowlisted, fenced, automatic only when package
+  auto-install policy permits, and disabled throughout implementation
+  validation; it is never necessary for pytest to continue. In datasets, native Groth16
+  compilation and NLTK data download are off/lazy by default during setup and
+  installation and require explicit opt-in.
+
+The runtime authority sequence is fixed:
+
+1. Compute a stable locator from the collected item and session identity.
+2. Resolve a bounded candidate descriptor from the mutable index.
+3. Load retained canonical candidate bytes and rehash every CID.
+4. Rebuild the current admitted dependency frontier from live source, AST,
+   fixtures, hooks, locks, environment, capabilities, policy and external
+   snapshots named by the candidate.
+5. Require exact comparison plus local verification of a real, exactly bound
+   certificate before emitting `proof-cache-hit:<cid>`.
+6. Otherwise execute setup/call/teardown exactly once. On terminal pass, retain
+   the observed runtime trace and receipt, then request proof issuance lazily.
+7. Publish candidate/certificate state atomically from the controller; every
+   failure preserves normal pytest behavior.
+
+This ordering prevents both circular runtime-key prediction and duplicate test
+execution. Historical AST/runtime traces narrow revalidation work but never
+assert that the current test passes. Simulated proof, cache presence, installer
+success and repository bootstrap are likewise never authority.
+
+The first repair wave is deliberately repository-parallel: `PTR-131` owns only
+accelerator, `PTR-132` only datasets, and `PTR-133` only kit, covering numeric
+shards 2, 0 and 1 respectively. The second repository-parallel wave is
+`PTR-139`, `PTR-140` and `PTR-141` after the shared composition stabilizes.
+`PTR-142` runs sequential zero-false-skip assurance before benchmarking,
+refreshes the exact final-tree population from 41 to 53 tasks, and hands the
+existing fenced outer closeout controller to the operator. Autonomous gap or
+codebase refill remains disabled.
 
 ## 14. Parallel implementation program
 
@@ -567,6 +645,12 @@ protected from implementation agents.
 | 10 | `PTR-111`, `PTR-112` | Accelerator goal/analyzer evidence and semantic artifact contracts adapt the repository-native protocols; the conservative shared accelerator claim serializes them safely |
 | 11 | `PTR-120`, `PTR-121`, `PTR-122` | Outer single-writer reconciliation runs beside one accelerator artifact/gate task while the shared accelerator claim serializes the other |
 | 12 | `PTR-130` | Hermetic closeout proof and operator handoff; the real current-tree closeout is invoked only after this task is completed |
+| 13 | `PTR-131`, `PTR-132`, `PTR-133` | Runtime contracts, datasets statement/setup safety, and kit candidate transport claim accelerator, datasets, and kit independently on all three shards |
+| 14 | `PTR-134`, `PTR-135`, `PTR-137` | Lazy identity, immutable candidate context, and typed deferred issuance proceed when repository claims permit; shared accelerator changes serialize |
+| 15 | `PTR-136` | Fresh current-context reconstruction joins the identity and candidate-store contracts |
+| 16 | `PTR-138` | The plugin composes lookup, revalidation, local verification, terminal pass capture, controller issuance, and xdist fencing |
+| 17 | `PTR-139`, `PTR-140`, `PTR-141` | Accelerator, datasets, and kit add direct-node bootstrap, manifest parity, scoped imports, and bounded lazy installers concurrently |
+| 18 | `PTR-142` | Cross-repository activation assurance, benchmark, exact 53-task gate refresh, and operator handoff |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -577,6 +661,12 @@ override: `PTR-108` claims only datasets, `PTR-109` only kit, and `PTR-110`
 only accelerator. Datasets and kit expose lazy injected protocols and never
 import the accelerator supervisor; accelerator remains the sole interpreter of
 goal evidence and completion authority.
+
+The active runtime-repair waves preserve the same rule. `PTR-131`, `PTR-132`
+and `PTR-133`, then `PTR-139`, `PTR-140` and `PTR-141`, own one distinct
+repository each. Numeric shards determine canonical provider roles and the
+shared merge queue serializes gitlink publication; predicted-file conflicts
+remain dependency ordered and cannot be overridden.
 
 ## 15. Validation strategy
 
@@ -656,8 +746,9 @@ explicitly permitted.
 - Initialize exactly the three outer submodules in worker worktrees.
 - Use three strict deterministic shards and a shared serial merge queue.
 - Disable objective/codebase refill initially because the reviewed board is
-  comprehensive. The nine-task completion expansion is the separately
-  reviewed 2026-08-03 projection; it does not enable autonomous refill.
+  comprehensive. The historical nine-task completion expansion and active
+  twelve-task runtime-activation repair are separately reviewed 2026-08-03
+  projections; neither enables autonomous refill.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no
@@ -681,6 +772,16 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
   than task labels.
 - Direct-node and suite invocation automatically discover the plugin in all
   three repositories without a test-file registry.
+- Package roots expose only narrow lazy bootstrap/provider protocols; scoped
+  imports avoid pulling accelerator, datasets-ZK, kit-daemon or installer
+  dependency trees until a non-off mode requests them.
+- Content-addressing/ZK dependencies agree across requirements, setup and
+  project metadata; bounded opt-in lazy installers degrade to typed
+  unavailable results, and datasets setup performs no native Groth16 build or
+  NLTK download by default.
+- A warm decision reloads and rehashes immutable candidate-context bytes,
+  rebuilds current dependency facts, and never duplicates the test call merely
+  to predict its runtime trace.
 - Every authoritative skip is backed by an exact current execution key, trusted
   pass receipt, locally verified real certificate, and fresh supervisor receipt.
 - Every missing or faulty optional dependency executes the test normally.

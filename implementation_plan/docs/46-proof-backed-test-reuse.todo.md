@@ -20,12 +20,14 @@ Consumable by `ipfs_accelerate_py.agent_supervisor` with task prefix
 - Planning, objective, board, scheduler profile, validator, and controller files
   are protected from managed implementation agents.
 
-## Initial execution wave
+## Historical initial execution wave
 
-`PTR-000` is the operator-authored planning seal. The initial claimable tasks
-are exactly `PTR-001`, `PTR-002`, and `PTR-003`, mapping one task to each of the
-three numeric shards. Waiting tasks are normal and become selectable only after
-their declared dependencies complete.
+`PTR-000` is the operator-authored planning seal. At the original sealed-board
+launch, the initial claimable tasks were exactly `PTR-001`, `PTR-002`, and
+`PTR-003`, mapping one task to each of the three numeric shards. Waiting tasks
+were normal and became selectable only after their declared dependencies
+completed. The active claimable wave is defined by the reviewed runtime repair
+below.
 
 ## Reviewed objective-completion expansion
 
@@ -35,9 +37,29 @@ artifacts do not yet exist. The reviewed 2026-08-03 expansion adds `PTR-108`,
 `PTR-109`, `PTR-110`, `PTR-111`, `PTR-112`, `PTR-120`, `PTR-121`,
 `PTR-122`, and `PTR-130`. Its first claimable wave is exactly `PTR-108`,
 `PTR-109`, and `PTR-110`, one task and one distinct repository resource on
-each strict numeric shard. Task completion remains only implementation
-progress; the operator-owned closeout command runs after all 41
-tasks are closed and is the only path allowed to project verified goal state.
+each strict numeric shard. At that projection revision, task completion remained
+only implementation progress and the operator-owned closeout command could run
+after all 41 tasks closed. The current 53-task closeout condition is defined by
+the runtime-activation repair below; the outer controller remains the only path
+allowed to project verified goal state.
+
+## Reviewed runtime-activation repair
+
+The completion expansion is now historical and closed. A 2026-08-03 runtime
+audit found that proof-reuse components exist but ordinary direct-node pytest
+execution still lacks a complete default composition path: current execution
+context cannot be reconstructed safely from a locator alone, the exact
+candidate context is not retained as immutable canonical bytes, deferred proof
+issuance is not fully typed across the repository boundary, and repository
+bootstraps still need a tested zero-configuration path. The bounded repair is
+`PTR-131` through `PTR-142`. Its active first wave is exactly `PTR-131`,
+`PTR-132`, and `PTR-133`, one accelerator, datasets, and kit claim on the three
+numeric shards. A second repository-parallel bootstrap wave is `PTR-139`,
+`PTR-140`, and `PTR-141`. `PTR-142` refreshes current-tree assurance and the
+operator handoff after all 53 tasks are closed. Every cache or proof dependency
+remains optional: inability to construct, load, rehash, revalidate, prove, or
+verify a candidate always produces a typed RUN/DEFERRED result and executes the
+test.
 
 ## PTR-000 Seal the supervisor-native program
 
@@ -1354,3 +1376,387 @@ tasks are closed and is the only path allowed to project verified goal state.
 - Effects: Proves end-to-end legal goal convergence and fail-closed degradation, then documents the explicit live current-tree operator closeout and protected commit/restart sequence.
 - Evidence subset: A synthetic closed 41-task board with cryptographically valid local fixtures, exact 12-goal heap, retained premise bundles, three-phase lifecycle receipts, supervisor-health records, restart and tamper cases
 - Acceptance: A disposable exact population reaches provisional goals, verified G010-G100, then verified G110 and G000 only through three staged reconciliations; missing, stale, forged, noncanonical, mismatched, quorum-short, validation-failed, ordinary-skip, simulated-proof, unavailable-backend-without-real-fixture, tree-mutated and restart-interrupted cases never verify; no test-file registry or network service is required; optional capability absence remains a typed non-blocking gap; the runbook identifies genuine approvals needed for historical provenance and makes clear that task completion precedes, and does not itself constitute, the live operator closeout.
+
+## PTR-131 Seal automatic runtime activation and candidate-context contracts
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: runtime-activation-contracts
+- Depends on: PTR-130
+- Goal id: PTR-G010
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/activation_contracts.py, external/ipfs_accelerate/test/api/test_proof_reuse_activation_contracts.py, external/ipfs_accelerate/docs/architecture/TEST_PROOF_REUSE_RUNTIME_ACTIVATION.md
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_activation_contracts.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/runtime-contracts
+- Parallel lane: ptr-runtime-contracts
+- Resource class: security-review
+- Implementation timeout seconds: 9000
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/activation_contracts.py, external/ipfs_accelerate/test/api/test_proof_reuse_activation_contracts.py, external/ipfs_accelerate/docs/architecture/TEST_PROOF_REUSE_RUNTIME_ACTIVATION.md
+- Predicted symbols: ProofReuseActivationContract, CandidateExecutionContext, CurrentExecutionContext, RuntimeReuseDisposition
+- Interfaces: ProofReuseActivationContract@1, CandidateExecutionContext@1, CurrentExecutionContext@1, RuntimeReuseDisposition@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: none
+- Conflict policy: Define one fail-closed runtime composition contract under the existing proof authority model; no item attributes, test registries, environment flags, mutable indexes, or historical traces may become skip authority.
+- Symbolic first: true
+- LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
+- Preconditions: PTR-130 closed the reviewed objective-completion expansion and the current plugin, identity, trace, receipt, cache, and certificate contracts are available for audit.
+- Effects: Fixes the typed boundaries for lazy default activation, exact candidate-context retention, fresh current-context rebuilding, deferred issuance, and fail-open degradation before runtime code is composed.
+- Evidence subset: Existing proof reuse contracts, plugin hook ordering, cache authority doctrine, execution-identity inputs, runtime trace lifecycle and repository bootstrap behavior
+- Acceptance: The contract distinguishes locator hints, immutable candidate context, freshly rebuilt current context, trusted pass receipt, deferred proof request and authoritative certificate; requires canonical bytes plus CID rehash at every content-addressed boundary; requires current AST/static/runtime/environment/policy comparison before SKIP; records post-pass runtime observations without duplicating the test call; and maps every missing, malformed, incompatible, timed-out or exceptional optional capability to RUN or DEFERRED without collection failure.
+
+## PTR-132 Version the datasets test-pass statement and canonical CID profile
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: datasets-statement-binding
+- Depends on: PTR-130
+- Goal id: PTR-G050
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py, external/ipfs_datasets/setup.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/datasets-statement-v2
+- Parallel lane: ptr-datasets-statement-v2
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py, external/ipfs_datasets/setup.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
+- Predicted symbols: TestPassStatementV2, TestExecutionCertificateV2, TEST_PASS_CID_PROFILE
+- Interfaces: TestPassStatementV2, TestExecutionCertificateV2, CanonicalContentIdentity@1
+- Submodules: external/ipfs_datasets
+- Generated artifacts: deterministic independent statement and certificate CID vectors
+- Conflict policy: Version the public-input domain explicitly and preserve V1 verification as a separate compatibility path; never reinterpret legacy bytes, private sha256 labels, or pseudo-CIDs as the new profile.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-108 real-certificate assurance and the current datasets statement, circuit, key and canonicalization implementations are available.
+- Effects: Gives accelerator and datasets one byte-exact public statement whose receipt, execution, candidate-context, policy, circuit, verifier-key, issuer and epoch identities reproduce as CIDv1/base32/dag-json/sha2-256, while removing install-time native-build and data-download side effects from the default package path.
+- Evidence subset: Retained canonical statement bytes, decoded multihash checks, independent multiformats vectors, Groth16 and ProveKit public-input bindings, circuit and verifier-key pins, isolated setup invocation without native build or NLTK network activity
+- Acceptance: The versioned profile accepts only lowercase canonical CIDv1/base32/dag-json/sha2-256 identities whose decoded digest matches retained canonical bytes; binds exact candidate-context and receipt identities plus policy/circuit/key/issuer/epoch; rejects alias encodings, unknown fields, nonfinite values, private inputs, V1/V2 substitution and backend downgrade; remains cold-import safe when multiformats or real proving backends are absent; and makes native Groth16 compilation and NLTK data download disabled/lazy by default during setup/install, available only through explicit opt-in, with missing native artifacts preserved as typed DEFERRED/RUN capability results.
+
+## PTR-133 Harden kit candidate-context artifact transport
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: kit-candidate-context-transport
+- Depends on: PTR-130
+- Goal id: PTR-G090
+- Outputs: external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_candidate_context_artifact_store.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/kit-candidate-context
+- Parallel lane: ptr-kit-candidate-context
+- Resource class: security-review
+- Implementation timeout seconds: 9000
+- Predicted files: external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
+- Predicted symbols: CanonicalArtifactStore, CandidateContextArtifact, ArtifactStoreResult
+- Interfaces: CanonicalArtifactStoreTransport@1, CandidateContextArtifact@1, ArtifactStoreResult@1
+- Submodules: external/ipfs_kit
+- Generated artifacts: immutable local canonical candidate-context fixtures
+- Conflict policy: Keep kit a strict optional byte transport with no proof authority; never import the accelerator, start a daemon, create a user IPFS repository, or trust a path, index value, pseudo-CID, or remote response without rehashing bytes.
+- Symbolic first: true
+- LLM context budget bytes: 57344
+- Provider role: grok-implement
+- Context budget tokens: 14336
+- Preconditions: PTR-109 canonical artifact transport and the current kit proof certificate store are available.
+- Effects: Generalizes the existing strict store contract to bounded candidate-context artifacts while retaining atomic local persistence and optional content-addressed transport.
+- Evidence subset: Canonical byte round trips, CID decode and rehash vectors, atomic write/readback, corruption quarantine, path safety, daemon and user-directory isolation
+- Acceptance: Arbitrary admitted canonical candidate-context bytes round-trip by strict CID without certificate-specific reinterpretation; reads rehash exact bytes and quarantine corrupt, oversized, partial, symlinked, path-escaping or mismatched artifacts; local-store, multiformats, IPFS and daemon absence return typed misses; remote transport never becomes authority; and cold import plus all miss paths create no network connection, daemon, cache, installer or user IPFS state.
+
+## PTR-134 Build lazy session-scoped default identity services
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: runtime-default-identity
+- Depends on: PTR-131
+- Goal id: PTR-G020
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/default_identity_services.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_identity_services.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_default_identity_services.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/default-identity
+- Parallel lane: ptr-default-identity
+- Resource class: cpu-medium
+- Implementation timeout seconds: 9000
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/default_identity_services.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_identity_services.py
+- Predicted symbols: DefaultIdentityServiceFactory, ProofReuseSessionIdentity, build_default_identity_services
+- Interfaces: DefaultIdentityServiceFactory@1, TestExecutionIdentityCompiler@1, AnalysisASTIndexProvider@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: none
+- Conflict policy: Compose only from scoped imports after a non-off mode requests the feature; explicit injected services always win, and dependency installers, network services and repository writes are forbidden during collection and identity construction.
+- Symbolic first: true
+- LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
+- Preconditions: PTR-131 activation contracts and existing identity component collectors, AST index, repository snapshot and capability probes are available.
+- Effects: Supplies every collected item a session-scoped default locator/current-context compiler without per-file wiring while amortizing repository-forest, AST-index, distribution-lock and policy snapshots.
+- Evidence subset: Direct-node collection, repository-root discovery, AST index construction, identity component collection, session memoization, explicit-injection precedence and cold import traces
+- Acceptance: In read, write or readwrite mode a direct pytest node can obtain the full admitted repository-forest identity and exact locator/current static components without conftest service attributes or a test registry; expensive stable inputs are built once per session; dirty overlays and source changes invalidate identities; explicit test injections override defaults; off mode imports no optional provider; and any unavailable, incomplete or exceptional component returns non-reusable rather than aborting pytest.
+
+## PTR-135 Persist immutable candidate execution contexts
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: candidate-context-cache
+- Depends on: PTR-131
+- Goal id: PTR-G040
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_candidate_context_store.py, external/ipfs_accelerate/test/api/test_agent_supervisor_test_candidate_context_store.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_test_candidate_context_store.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/candidate-context-store
+- Parallel lane: ptr-candidate-context-store
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/test_candidate_context_store.py, external/ipfs_accelerate/test/api/test_agent_supervisor_test_candidate_context_store.py
+- Predicted symbols: TestCandidateContextStore, CandidateContextEnvelope, CandidateContextLookupResult
+- Interfaces: TestCandidateContextStore@1, CandidateExecutionContext@1, CanonicalArtifactStoreTransport@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: immutable candidate-context CAS blobs and bounded locator index fixtures
+- Conflict policy: The mutable locator index is a bounded lookup hint only; every candidate blob is immutable, canonically encoded and rehashed before use, and store faults never suppress test execution.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-131 fixes candidate-context semantics and the existing certificate store, trust cache, fencing, revocation and optional kit transport protocols are available.
+- Effects: Retains exact pass-time execution key, static trace, observed runtime trace, repository forest, environment, policy and receipt canonical bytes so a later run can reconstruct what the certificate actually attests.
+- Evidence subset: Candidate canonicalization and CID vectors, locator-index poisoning cases, local CAS atomicity, optional kit transport, revocation/TTL, concurrent publication and corruption quarantine
+- Acceptance: A lookup returns bytes plus a non-authoritative candidate descriptor; admission rehashes every retained component, confirms internal/external CID agreement and checks size/version/expiry/revocation/fence; poisoned indexes, missing blobs, stale generations, partial writes, symlinks, remote failures and transport absence become typed misses; publication is atomic and single-flight; and no mutable metadata, cache presence or historical execution key can authorize SKIP.
+
+## PTR-136 Revalidate current context against retained candidates
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: runtime-context-revalidation
+- Depends on: PTR-134, PTR-135
+- Goal id: PTR-G030
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_revalidation.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_runtime_revalidation.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/runtime-revalidation
+- Parallel lane: ptr-runtime-revalidation
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runtime_revalidation.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_revalidation.py
+- Predicted symbols: RuntimeContextRevalidator, CandidateComparison, PostPassRuntimeTraceCapture
+- Interfaces: RuntimeContextRevalidator@1, CandidateExecutionContext@1, CurrentExecutionContext@1, RuntimeDependencyTrace@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: mutation and current-context comparison vectors
+- Conflict policy: Historical runtime traces identify what must be revalidated but never state that current execution would pass; do not pre-execute a test call, execute fixtures twice, or convert an unknown runtime effect into equivalence.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: grok-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-134 can build fresh session identity services and PTR-135 can return exact immutable candidate context bytes.
+- Effects: Implements locator-to-candidate lookup followed by fresh reconstruction and exact comparison of the candidate's admitted dependency frontier, then records the actual runtime frontier after a real pass for future reuse.
+- Evidence subset: AST/static closure, candidate runtime file/module/environment/subprocess/service observations, fresh content snapshots, unknown-frontier decisions, mutation vectors and one-call lifecycle counters
+- Acceptance: Lookup starts from a stable locator only; every candidate dependency named by the retained trace is freshly resolved and content addressed; current source, AST, fixtures, hooks, parameters, locks, distributions, environment, capabilities, repository forest, policy and external snapshots must match; incomplete, unresolvable, changed or uncontrolled facts return RUN; a verified unchanged context may proceed to certificate verification without executing fixtures or the test body; and a normal miss executes setup/call/teardown exactly once before capturing and publishing its observed runtime trace.
+
+## PTR-137 Add typed deferred certificate requests and lazy issuers
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: deferred-proof-issuance-v2
+- Depends on: PTR-132
+- Goal id: PTR-G050
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/deferred-issuer-v2
+- Parallel lane: ptr-deferred-issuer-v2
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py
+- Predicted symbols: DeferredTestCertificateRequest, TestCertificateIssuerFactory, CertificateIssuanceDisposition
+- Interfaces: DeferredTestCertificateRequest@1, TestCertificateIssuerFactory@1, TestPassStatementV2
+- Submodules: external/ipfs_datasets
+- Generated artifacts: deterministic deferred-request and unavailable-backend fixtures
+- Conflict policy: Construct a public canonical request only after terminal pass and keep witness material process-local; imports, backend discovery and bounded installation occur only when issuance is requested and package auto-install policy allows it, never during package import or collection.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-132 defines exact versioned public inputs and existing Groth16/ProveKit adapters expose lazy capability results.
+- Effects: Lets the accelerator hand datasets a typed public request reconstructed from retained canonical receipt and candidate-context bytes while deferring costly proving outside the pytest worker's pass path.
+- Evidence subset: Public request canonicalization, witness redaction, bounded backend selection, lazy import/install traces, timeout/cancellation, real fixture verification and unavailable-capability reason codes
+- Acceptance: The request binds exact statement, receipt, execution, candidate-context, policy, circuit, verifier-key, issuer and epoch values; unknown/private/noncanonical fields are rejected; factory selection is bounded and lazy; supported package dependencies are exposed as declared extras and are installed automatically only on first requested issuance when package auto-install policy permits; a disable setting is honored; missing installer, package, key, circuit, endpoint, binary, cache or network returns a typed DEFERRED/RUN result with the pass receipt retained; simulated proofs remain non-authoritative; and no secret or witness is serialized into cache, logs, xdist messages or public artifacts.
+
+## PTR-138 Compose automatic pytest proof-reuse dependency injection
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: pytest-runtime-composition
+- Depends on: PTR-136, PTR-137
+- Goal id: PTR-G060
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_composition.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_pytest_proof_reuse_plugin.py external/ipfs_accelerate/test/api/test_proof_reuse_service_injection.py external/ipfs_accelerate/test/api/test_pytest_proof_reuse_receipt.py external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py external/ipfs_accelerate/test/api/test_proof_reuse_runtime_composition.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/runtime-composition
+- Parallel lane: ptr-runtime-composition
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_composition.py
+- Predicted symbols: DefaultProofReuseServices, ProofReuseRuntimeComposition, DeferredIssuanceEnvelope
+- Interfaces: ProofReuseServices@1, RuntimeContextRevalidator@1, DeferredTestCertificateRequest@1, PytestProofReusePlugin@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: hermetic plugin lifecycle, xdist and deferred-issuance fixtures
+- Conflict policy: The plugin owns orchestration but not trust; explicit injected services override lazy defaults, workers transmit only admitted public envelopes, and every hook exception degrades to normal pytest execution.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-136 provides fresh context revalidation and PTR-137 provides a typed datasets issuance request and lazy issuer boundary.
+- Effects: Makes default services the normal plugin path, connects two-stage lookup and local certificate verification before setup, and connects terminal pass receipts plus runtime traces to controller-owned deferred issuance.
+- Evidence subset: Off/shadow/read/write/readwrite hooks, default and explicit DI, local verification, terminal report lifecycle, runtime trace capture, worker/controller serialization and atomic publication
+- Acceptance: Every eligible collected item obtains scoped defaults without item monkeypatches or per-test registries; candidate lookup rehashes context and requires fresh current revalidation plus local real-certificate verification before standard SKIP; receipt creation requires passed setup/call/teardown and a complete observed runtime trace; the controller reconstructs and validates deferred requests from public retained bytes instead of trusting workers; workers never serialize witness or private request data; xdist publication is fenced and atomic; and any import, identity, cache, transport, verifier, issuer or controller failure runs the test or retains a deferred receipt without failing pytest.
+
+## PTR-139 Enable accelerator direct-node bootstrap and lazy dependencies
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: accelerator-zero-config-bootstrap
+- Depends on: PTR-138
+- Goal id: PTR-G070
+- Outputs: external/ipfs_accelerate/conftest.py, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_bootstrap.py external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/accelerator-zero-config
+- Parallel lane: ptr-accelerator-zero-config
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/conftest.py, external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/requirements.txt, external/ipfs_accelerate/ipfs_accelerate_py/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
+- Predicted symbols: AcceleratorProofReuseBootstrap, ProofReuseLazyDependencyInstaller
+- Interfaces: PytestProofReusePlugin@1, ProofReuseLazyDependencyInstaller@1, DefaultProofReuseServices
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: isolated installed/source-tree direct-node and missing-dependency fixtures
+- Conflict policy: Register one lightweight plugin loader and scoped imports; dependency declarations are additive and first-use automatic installation is bounded, allowlisted, package-policy-controlled, lock/fence protected and never required for test execution.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: grok-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-138 composes the full default runtime and the accelerator packaging, conftest and existing bootstrap tests are available.
+- Effects: Makes proof reuse discoverable for accelerator suite and direct-node execution and aligns optional content-addressing/ZK dependencies across requirements, setup metadata and modern project metadata.
+- Evidence subset: Installed pytest11 discovery, source-tree conftest discovery, autoload-disabled direct node, requirements/setup/pyproject dependency parity, lazy installer lock/retry/failure behavior and scoped import graph
+- Acceptance: Off mode and ordinary tests import only the lightweight loader; `ipfs_accelerate_py.__init__` exposes only a narrow lazy proof-reuse bootstrap facade; read/write modes lazily build defaults without manual item attributes or conftest service injection; strict content-addressing and datasets-ZK requirements are declared consistently as core or proof-reuse extras; first-use installation runs automatically only when a requested proof-reuse capability is missing and package auto-install policy permits it, using bounded allowlisted package/version specs and atomic interprocess fencing; disabled installer, offline index, resolver failure, incompatible version, read-only environment or missing dependency emits a typed capability reason and runs tests; and coverage, mutation, profiling, debugger and leak-detection modes remain non-reusing.
+
+## PTR-140 Enable datasets direct-node bootstrap and lazy dependencies
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: datasets-zero-config-bootstrap
+- Depends on: PTR-137, PTR-138
+- Goal id: PTR-G080
+- Outputs: external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/datasets-zero-config
+- Parallel lane: ptr-datasets-zero-config
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py
+- Predicted symbols: DatasetsProofReuseBootstrap, DatasetsProofReuseLazyDependencies
+- Interfaces: PytestProofReusePlugin@1, DeferredTestCertificateRequest@1, TestCertificateIssuerFactory@1
+- Submodules: external/ipfs_datasets
+- Generated artifacts: isolated datasets installed/source-tree direct-node and missing-backend fixtures
+- Conflict policy: The datasets shim exposes only lazy protocols and never imports accelerator internals at package import; legacy commit-cache state, installer success and backend availability never authorize a skip.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-137 defines datasets deferred issuance, PTR-138 defines shared runtime composition, and the current datasets shim/bootstrap and packaging files are available.
+- Effects: Makes individual datasets tests inherit the shared plugin and local ZK provider while declaring the exact content-addressing, verifier and optional proving dependency surface in every supported packaging manifest.
+- Evidence subset: Direct-node and suite discovery, scoped import graph, requirements/setup/pyproject parity, lazy installer/backend probes, legacy commit-cache non-authority and terminal-pass issuance lifecycle
+- Acceptance: Installed and source-tree datasets invocations discover the shared plugin without a file list; `ipfs_datasets_py.__init__` and the shim use narrow lazy imports and inject only public provider protocols; proof-reuse extras and backend-specific extras are consistently pinned in requirements, setup and pyproject metadata; first-use installation is bounded and allowlisted and runs automatically only when package auto-install policy permits, while native Groth16 builds and NLTK data downloads always require separate explicit opt-in; missing accelerator plugin, multiformats, Groth16 endpoint, ProveKit binary, key, circuit, cache, network, installer or write permission runs tests and retains typed deferred state; and no nested legacy hook, commit cache or simulated proof can skip.
+
+## PTR-141 Enable kit direct-node bootstrap and lazy dependencies
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: kit-zero-config-bootstrap
+- Depends on: PTR-133, PTR-138
+- Goal id: PTR-G090
+- Outputs: external/ipfs_kit/conftest.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_reuse_bootstrap.py external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py external/ipfs_kit/tests/test_proof_reuse_zero_config.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/kit-zero-config
+- Parallel lane: ptr-kit-zero-config
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_kit/conftest.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py
+- Predicted symbols: KitProofReuseBootstrap, KitProofReuseLazyDependencies
+- Interfaces: PytestProofReusePlugin@1, CanonicalArtifactStoreTransport@1, TestReuseCapabilityReport@1
+- Submodules: external/ipfs_kit
+- Generated artifacts: isolated kit installed/source-tree direct-node and no-daemon fixtures
+- Conflict policy: Kit injects an optional byte-transport protocol only; narrow lazy imports and installers must never start Kubo, Lotus or Iroh, initialize a repository, or make availability a launch/test gate.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-133 hardens canonical candidate transport, PTR-138 defines shared runtime composition, and current kit shims, bootstrap and packaging files are available.
+- Effects: Makes kit tests automatically discover proof reuse and exposes strict candidate/certificate storage only when requested, with content-addressing dependencies represented consistently in packaging and lazy installation metadata.
+- Evidence subset: Direct-node and suite discovery, scoped import graph, requirements/setup/pyproject parity, installer failure matrix, canonical transport injection, daemon/user-directory/network isolation and missing-plugin fallback
+- Acceptance: Installed and source-tree kit invocations discover the shared plugin without per-test wiring; `ipfs_kit_py.__init__` and the shim import no accelerator or daemon-heavy modules eagerly; exact multiformats/content-addressing requirements are consistently declared; bounded allowlisted installation runs automatically only at first requested transport use when package auto-install policy permits and honors the disable setting; missing plugin, multiformats, store, cache, network, installer or write permission runs tests; all proof-hit and miss paths start no daemon and create no user IPFS state; and kit transport never interprets a certificate or authorizes SKIP.
+
+## PTR-142 Prove runtime activation, refresh the gate, and publish handoff
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: runtime-activation-closeout
+- Depends on: PTR-139, PTR-140, PTR-141
+- Goal id: PTR-G110
+- Outputs: external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_e2e.py, external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py, external/ipfs_accelerate/test/api/test_proof_reuse_invalidation_mutations.py, external/ipfs_accelerate/test/api/test_proof_reuse_security_concurrency.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_reuse_benchmark.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/docs/architecture/TEST_PROOF_REUSE_RUNTIME_ACTIVATION_HANDOFF.md
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_invalidation_mutations.py external/ipfs_accelerate/test/api/test_proof_reuse_security_concurrency.py external/ipfs_accelerate/test/api/test_agent_supervisor_proof_reuse_benchmark.py external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/runtime-closeout
+- Parallel lane: ptr-runtime-closeout
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_e2e.py, external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py, external/ipfs_accelerate/test/api/test_proof_reuse_invalidation_mutations.py, external/ipfs_accelerate/test/api/test_proof_reuse_security_concurrency.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_reuse_benchmark.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/docs/architecture/TEST_PROOF_REUSE_RUNTIME_ACTIVATION_HANDOFF.md
+- Predicted symbols: RuntimeActivationE2E, ProofReuseRuntimeActivationGate, runtime activation operator handoff
+- Interfaces: ProofReuseActivationContract@1, RuntimeContextRevalidator@1, PytestProofReusePlugin@1, ProofTestReuseCurrentTreeGateDecision@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: cross-repository cold/pass/deferred/warm/mutation receipts, zero-false-skip matrix, warm benchmark, refreshed 53-task gate and operator runbook
+- Conflict policy: Exercise disposable repositories, environments, caches and state roots; never use the proof-reuse cache to validate this implementation, treat synthetic proof as deployment authority, mutate live control files, or run the objective closeout before the expanded board is closed.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: grok-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-139, PTR-140 and PTR-141 provide the complete automatic runtime and repository bootstraps; all prior 50 tasks remain closed with replayable provenance.
+- Effects: Proves the default runtime over all three repositories, refreshes adversarial and performance evidence, expands final-tree authority to the exact 53-task population, and documents the final explicit controller closeout.
+- Evidence subset: Installed and source direct-node flows, lazy dependency matrix, canonical candidate bytes, current revalidation, real local certificate verification, deferred issuance, xdist fencing, mutation/security populations, benchmark/rollout receipts and supervisor launch health
+- Acceptance: Without test-file hardwiring or manual service injection, one direct node in each repository executes on cold miss, records exactly one complete pass and runtime trace, retains exact candidate context, accepts a locally verifiable real certificate, then emits one standard proof-backed skip on an unchanged warm run; every admitted source, AST, indirect dependency, fixture, hook, parameter, environment, lock, capability, policy, circuit, key, issuer, epoch, cache and transport mutation forces RUN; missing or failing installers, packages, Groth16, ProveKit, cache, IPFS, network, key or circuit never blocks pytest or the supervisor; xdist publishes no duplicate/partial/private authority; sequential proof-reuse-off assurance reports zero false skips before the benchmark; warm eligible verification is cheaper than execution and meets the configured target; the gate requires all 53 tasks and fresh repair evidence; and the handoff invokes the existing outer closeout controller only after validation succeeds and an operator reviews the protected lifecycle update.

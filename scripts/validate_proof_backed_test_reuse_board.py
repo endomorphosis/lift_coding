@@ -117,10 +117,22 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-121",
         "PTR-122",
         "PTR-130",
+        "PTR-131",
+        "PTR-132",
+        "PTR-133",
+        "PTR-134",
+        "PTR-135",
+        "PTR-136",
+        "PTR-137",
+        "PTR-138",
+        "PTR-139",
+        "PTR-140",
+        "PTR-141",
+        "PTR-142",
     }
 )
-INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
-EXTENSION_TASK_IDS = frozenset(
+SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
+COMPLETION_EXTENSION_TASK_IDS = frozenset(
     {
         "PTR-108",
         "PTR-109",
@@ -133,7 +145,27 @@ EXTENSION_TASK_IDS = frozenset(
         "PTR-130",
     }
 )
-EXTENSION_WAVE_ONE = frozenset({"PTR-108", "PTR-109", "PTR-110"})
+COMPLETION_EXTENSION_WAVE_ONE = frozenset(
+    {"PTR-108", "PTR-109", "PTR-110"}
+)
+RUNTIME_REPAIR_TASK_IDS = frozenset(
+    {
+        "PTR-131",
+        "PTR-132",
+        "PTR-133",
+        "PTR-134",
+        "PTR-135",
+        "PTR-136",
+        "PTR-137",
+        "PTR-138",
+        "PTR-139",
+        "PTR-140",
+        "PTR-141",
+        "PTR-142",
+    }
+)
+RUNTIME_REPAIR_WAVE_ONE = frozenset({"PTR-131", "PTR-132", "PTR-133"})
+RUNTIME_BOOTSTRAP_WAVE = frozenset({"PTR-139", "PTR-140", "PTR-141"})
 GOAL_STATES = frozenset(
     {
         "active",
@@ -207,11 +239,133 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-121": frozenset({"PTR-110", "PTR-111", "PTR-112"}),
     "PTR-122": frozenset({"PTR-102", "PTR-110", "PTR-111", "PTR-112"}),
     "PTR-130": frozenset({"PTR-120", "PTR-121", "PTR-122"}),
+    "PTR-131": frozenset({"PTR-130"}),
+    "PTR-132": frozenset({"PTR-130"}),
+    "PTR-133": frozenset({"PTR-130"}),
+    "PTR-134": frozenset({"PTR-131"}),
+    "PTR-135": frozenset({"PTR-131"}),
+    "PTR-136": frozenset({"PTR-134", "PTR-135"}),
+    "PTR-137": frozenset({"PTR-132"}),
+    "PTR-138": frozenset({"PTR-136", "PTR-137"}),
+    "PTR-139": frozenset({"PTR-138"}),
+    "PTR-140": frozenset({"PTR-137", "PTR-138"}),
+    "PTR-141": frozenset({"PTR-133", "PTR-138"}),
+    "PTR-142": frozenset({"PTR-139", "PTR-140", "PTR-141"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
-    {"PTR-040", "PTR-041", "PTR-042", "PTR-070", "PTR-108"}
+    {
+        "PTR-040",
+        "PTR-041",
+        "PTR-042",
+        "PTR-070",
+        "PTR-108",
+        "PTR-132",
+        "PTR-137",
+        "PTR-140",
+    }
 )
-REQUIRED_KIT_TASKS = frozenset({"PTR-080", "PTR-081", "PTR-109"})
+REQUIRED_ACCELERATOR_TASKS = frozenset(
+    {
+        "PTR-131",
+        "PTR-134",
+        "PTR-135",
+        "PTR-136",
+        "PTR-138",
+        "PTR-139",
+        "PTR-142",
+    }
+)
+REQUIRED_KIT_TASKS = frozenset(
+    {"PTR-080", "PTR-081", "PTR-109", "PTR-133", "PTR-141"}
+)
+REQUIRED_RUNTIME_TASK_PATHS = {
+    "PTR-131": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/activation_contracts.py",
+        }
+    ),
+    "PTR-132": frozenset(
+        {
+            "external/ipfs_datasets/setup.py",
+            "external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py",
+        }
+    ),
+    "PTR-133": frozenset(
+        {"external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py"}
+    ),
+    "PTR-134": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/default_identity_services.py",
+        }
+    ),
+    "PTR-135": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
+            "proof/test_candidate_context_store.py",
+        }
+    ),
+    "PTR-136": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/runtime_revalidation.py",
+        }
+    ),
+    "PTR-137": frozenset(
+        {
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
+            "test_certificate_issuer.py",
+        }
+    ),
+    "PTR-138": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/plugin.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/services.py",
+        }
+    ),
+    "PTR-139": frozenset(
+        {
+            "external/ipfs_accelerate/conftest.py",
+            "external/ipfs_accelerate/requirements.txt",
+            "external/ipfs_accelerate/setup.py",
+            "external/ipfs_accelerate/pyproject.toml",
+            "external/ipfs_accelerate/ipfs_accelerate_py/__init__.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/lazy_dependencies.py",
+        }
+    ),
+    "PTR-140": frozenset(
+        {
+            "external/ipfs_datasets/tests/conftest.py",
+            "external/ipfs_datasets/requirements.txt",
+            "external/ipfs_datasets/setup.py",
+            "external/ipfs_datasets/pyproject.toml",
+            "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+            "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py",
+        }
+    ),
+    "PTR-141": frozenset(
+        {
+            "external/ipfs_kit/conftest.py",
+            "external/ipfs_kit/requirements.txt",
+            "external/ipfs_kit/setup.py",
+            "external/ipfs_kit/pyproject.toml",
+            "external/ipfs_kit/ipfs_kit_py/__init__.py",
+            "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py",
+        }
+    ),
+    "PTR-142": frozenset(
+        {
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_runtime_activation_e2e.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
+            "validation/proof_test_reuse_current_tree_gate.py",
+        }
+    ),
+}
 EXPECTED_PROTECTED_PATHS = frozenset(
     {
         "implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md",
@@ -406,6 +560,27 @@ def validate(
         "launchGate"
     ) is not False:
         errors.append("optional proof infrastructure must not be a launch gate")
+    lazy_dependencies = config.get("lazyDependencyPolicy")
+    expected_lazy_dependencies = {
+        "activation": "first_requested_proof_reuse_capability",
+        "manifestParityRequired": [
+            "requirements.txt",
+            "setup.py",
+            "pyproject.toml",
+        ],
+        "scopedImportsRequired": True,
+        "boundedAllowlistedInstaller": True,
+        "automaticWhenPackageAutoInstallPolicyAllows": True,
+        "offAndImplementationValidationMayInstall": False,
+        "installerFailureAction": "typed_unavailable_and_run_test",
+        "datasetsNativeGroth16BuildRequiresExplicitOptIn": True,
+        "datasetsNltkDownloadRequiresExplicitOptIn": True,
+    }
+    if lazy_dependencies != expected_lazy_dependencies:
+        errors.append(
+            "configuration lazyDependencyPolicy must retain scoped, bounded, "
+            "fail-open first-use installation and datasets setup safety"
+        )
     objective_projection = config.get("objectiveProjection")
     if not isinstance(objective_projection, dict):
         errors.append("configuration objectiveProjection must be an object")
@@ -414,15 +589,22 @@ def validate(
         errors.append(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
+    if objective_projection.get("reviewRevision") != (
+        "runtime-activation-repair-v1"
+    ):
+        errors.append(
+            "objectiveProjection.reviewRevision must identify the reviewed "
+            "runtime activation repair"
+        )
     if frozenset(objective_projection.get("implementationTaskIds") or ()) != (
-        EXTENSION_TASK_IDS
+        RUNTIME_REPAIR_TASK_IDS
     ):
         errors.append(
             "objectiveProjection implementation task inventory mismatch"
         )
     if frozenset(
         objective_projection.get("initialClaimableTaskIds") or ()
-    ) != EXTENSION_WAVE_ONE:
+    ) != RUNTIME_REPAIR_WAVE_ONE:
         errors.append(
             "objectiveProjection initial claimable task inventory mismatch"
         )
@@ -440,8 +622,8 @@ def validate(
         errors.append("objective closeout must declare exactly three phases")
     if objective_projection.get("closeoutControllerTaskId") != "PTR-121":
         errors.append("objective closeout controller task must be PTR-121")
-    if objective_projection.get("operatorHandoffTaskId") != "PTR-130":
-        errors.append("objective operator handoff task must be PTR-130")
+    if objective_projection.get("operatorHandoffTaskId") != "PTR-142":
+        errors.append("objective operator handoff task must be PTR-142")
     projection_path_fields = (
         "gatePathSuffix",
         "evidencePathSuffix",
@@ -646,6 +828,17 @@ def validate(
             errors.append(
                 f"{task.task_id} outputs and predicted files must match exactly"
             )
+        required_runtime_paths = REQUIRED_RUNTIME_TASK_PATHS.get(
+            task.task_id, frozenset()
+        )
+        missing_runtime_paths = sorted(
+            required_runtime_paths.difference(predicted_files)
+        )
+        if missing_runtime_paths:
+            errors.append(
+                f"{task.task_id} missing reviewed runtime repair paths: "
+                f"{missing_runtime_paths}"
+            )
         validation_text = str(task.metadata.get("validation") or "").strip()
         if not task.validation or not validation_text:
             errors.append(f"{task.task_id} has no validation command")
@@ -727,6 +920,15 @@ def validate(
             errors.append(
                 f"{task.task_id} has unexpected submodules {sorted(submodules)}"
             )
+        if task.task_id in RUNTIME_REPAIR_TASK_IDS and len(submodules) != 1:
+            errors.append(
+                f"{task.task_id} runtime repair must own exactly one "
+                f"repository resource, got {sorted(submodules)}"
+            )
+        if task.task_id in REQUIRED_ACCELERATOR_TASKS and (
+            "external/ipfs_accelerate" not in submodules
+        ):
+            errors.append(f"{task.task_id} must declare external/ipfs_accelerate")
         if task.task_id in REQUIRED_DATASETS_TASKS and (
             "external/ipfs_datasets" not in submodules
         ):
@@ -766,6 +968,14 @@ def validate(
                 f"{task_id} missing required direct dependencies: "
                 f"{missing_dependencies}"
             )
+        if task_id in RUNTIME_REPAIR_TASK_IDS and frozenset(
+            task_edges.get(task_id, ())
+        ) != required_dependencies:
+            errors.append(
+                f"{task_id} runtime-repair dependencies must be exact: "
+                f"expected {sorted(required_dependencies)}, got "
+                f"{sorted(task_edges.get(task_id, ()))}"
+            )
 
     completed_ids = {
         task.task_id for task in tasks if task.status == "completed"
@@ -782,17 +992,17 @@ def validate(
             parallel.get("initialClaimableTaskIds") or ()
         )
     )
-    if configured_initial_ready != INITIAL_READY:
+    if configured_initial_ready != RUNTIME_REPAIR_WAVE_ONE:
         errors.append(
             "configured initial claimable tasks mismatch: expected "
-            f"{sorted(INITIAL_READY)}, got "
+            f"{sorted(RUNTIME_REPAIR_WAVE_ONE)}, got "
             f"{sorted(configured_initial_ready)}"
         )
     if completed_ids == {"PTR-000"}:
-        if claimable_task_ids != INITIAL_READY:
+        if claimable_task_ids != SEALED_INITIAL_READY:
             errors.append(
-                "initial claimable tasks mismatch: expected "
-                f"{sorted(INITIAL_READY)}, got "
+                "historical sealed initial claimable tasks mismatch: expected "
+                f"{sorted(SEALED_INITIAL_READY)}, got "
                 f"{sorted(claimable_task_ids)}"
             )
     else:
@@ -807,60 +1017,157 @@ def validate(
                     f"{task_id} completed before dependencies "
                     f"{missing_completed_dependencies}"
                 )
-    legacy_task_ids = EXPECTED_TASK_IDS - EXTENSION_TASK_IDS
-    extension_unstarted = all(
-        task_by_id[task_id].status == "todo"
-        for task_id in EXTENSION_TASK_IDS
+    base_task_ids = (
+        EXPECTED_TASK_IDS
+        - COMPLETION_EXTENSION_TASK_IDS
+        - RUNTIME_REPAIR_TASK_IDS
     )
-    if legacy_task_ids.issubset(completed_ids) and extension_unstarted:
-        if claimable_task_ids != EXTENSION_WAVE_ONE:
+    completion_extension_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in COMPLETION_EXTENSION_TASK_IDS
+    )
+    if base_task_ids.issubset(completed_ids) and completion_extension_unstarted:
+        if claimable_task_ids != COMPLETION_EXTENSION_WAVE_ONE:
             errors.append(
-                "reviewed objective-completion expansion claimable tasks "
-                f"must be {sorted(EXTENSION_WAVE_ONE)}, got "
+                "historical objective-completion expansion claimable tasks "
+                f"must be {sorted(COMPLETION_EXTENSION_WAVE_ONE)}, got "
+                f"{sorted(claimable_task_ids)}"
+            )
+    pre_repair_task_ids = EXPECTED_TASK_IDS - RUNTIME_REPAIR_TASK_IDS
+    runtime_repair_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in RUNTIME_REPAIR_TASK_IDS
+    )
+    if pre_repair_task_ids.issubset(completed_ids) and runtime_repair_unstarted:
+        if claimable_task_ids != RUNTIME_REPAIR_WAVE_ONE:
+            errors.append(
+                "reviewed runtime-activation repair claimable tasks must be "
+                f"{sorted(RUNTIME_REPAIR_WAVE_ONE)}, got "
                 f"{sorted(claimable_task_ids)}"
             )
     lane_count = int(parallel.get("laneCount") or 0)
-    initial_shards = {
+    sealed_initial_shards = {
         int(task_id.rsplit("-", 1)[1]) % lane_count
-        for task_id in INITIAL_READY
+        for task_id in SEALED_INITIAL_READY
     } if lane_count > 0 else set()
-    if initial_shards != {0, 1, 2}:
+    if sealed_initial_shards != {0, 1, 2}:
         errors.append(
-            f"initial tasks do not cover all three numeric shards: "
-            f"{sorted(initial_shards)}"
+            f"sealed initial tasks do not cover all three numeric shards: "
+            f"{sorted(sealed_initial_shards)}"
         )
-    extension_wave_shards = {
+    completion_extension_wave_shards = {
         int(task_id.rsplit("-", 1)[1]) % lane_count
-        for task_id in EXTENSION_WAVE_ONE
+        for task_id in COMPLETION_EXTENSION_WAVE_ONE
     } if lane_count > 0 else set()
-    if extension_wave_shards != {0, 1, 2}:
+    if completion_extension_wave_shards != {0, 1, 2}:
         errors.append(
-            "objective-completion expansion wave does not cover all three "
-            f"numeric shards: {sorted(extension_wave_shards)}"
+            "historical objective-completion expansion wave does not cover "
+            "all three numeric shards: "
+            f"{sorted(completion_extension_wave_shards)}"
         )
-    expected_extension_wave_resources = {
+    expected_completion_extension_wave_resources = {
         "PTR-108": frozenset({"external/ipfs_datasets"}),
         "PTR-109": frozenset({"external/ipfs_kit"}),
         "PTR-110": frozenset({"external/ipfs_accelerate"}),
     }
-    extension_wave_resources = {
+    completion_extension_wave_resources = {
         task_id: submodules_by_task.get(task_id, frozenset())
-        for task_id in sorted(EXTENSION_WAVE_ONE)
+        for task_id in sorted(COMPLETION_EXTENSION_WAVE_ONE)
     }
-    if extension_wave_resources != expected_extension_wave_resources:
+    if completion_extension_wave_resources != (
+        expected_completion_extension_wave_resources
+    ):
         errors.append(
-            "objective-completion expansion wave must own one distinct "
+            "historical objective-completion expansion wave must own one distinct "
             "configured repository resource per task: expected "
-            f"{expected_extension_wave_resources}, got "
-            f"{extension_wave_resources}"
+            f"{expected_completion_extension_wave_resources}, got "
+            f"{completion_extension_wave_resources}"
         )
-    extension_resource_width = len(
-        set().union(*extension_wave_resources.values())
+    completion_extension_resource_width = len(
+        set().union(*completion_extension_wave_resources.values())
     )
-    if extension_resource_width != 3:
+    if completion_extension_resource_width != 3:
         errors.append(
-            "objective-completion expansion wave must retain repository "
-            f"resource width 3, got {extension_resource_width}"
+            "historical objective-completion expansion wave must retain "
+            "repository resource width 3, got "
+            f"{completion_extension_resource_width}"
+        )
+
+    runtime_repair_wave_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in RUNTIME_REPAIR_WAVE_ONE
+    } if lane_count > 0 else set()
+    runtime_bootstrap_wave_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in RUNTIME_BOOTSTRAP_WAVE
+    } if lane_count > 0 else set()
+    for label, shards in (
+        ("runtime repair first wave", runtime_repair_wave_shards),
+        ("runtime repository-bootstrap wave", runtime_bootstrap_wave_shards),
+    ):
+        if shards != {0, 1, 2}:
+            errors.append(
+                f"{label} does not cover all three numeric shards: "
+                f"{sorted(shards)}"
+            )
+    expected_runtime_repair_wave_resources = {
+        "PTR-131": frozenset({"external/ipfs_accelerate"}),
+        "PTR-132": frozenset({"external/ipfs_datasets"}),
+        "PTR-133": frozenset({"external/ipfs_kit"}),
+    }
+    expected_runtime_bootstrap_wave_resources = {
+        "PTR-139": frozenset({"external/ipfs_accelerate"}),
+        "PTR-140": frozenset({"external/ipfs_datasets"}),
+        "PTR-141": frozenset({"external/ipfs_kit"}),
+    }
+    runtime_repair_wave_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(RUNTIME_REPAIR_WAVE_ONE)
+    }
+    runtime_bootstrap_wave_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(RUNTIME_BOOTSTRAP_WAVE)
+    }
+    for label, actual, expected in (
+        (
+            "runtime repair first wave",
+            runtime_repair_wave_resources,
+            expected_runtime_repair_wave_resources,
+        ),
+        (
+            "runtime repository-bootstrap wave",
+            runtime_bootstrap_wave_resources,
+            expected_runtime_bootstrap_wave_resources,
+        ),
+    ):
+        if actual != expected:
+            errors.append(
+                f"{label} must own one distinct configured repository "
+                f"resource per task: expected {expected}, got {actual}"
+            )
+        resource_width = len(set().union(*actual.values()))
+        if resource_width != 3:
+            errors.append(
+                f"{label} must retain repository resource width 3, got "
+                f"{resource_width}"
+            )
+    simulated_bootstrap_completed = (
+        pre_repair_task_ids
+        | (RUNTIME_REPAIR_TASK_IDS - RUNTIME_BOOTSTRAP_WAVE - {"PTR-142"})
+    )
+    simulated_bootstrap_claimable = {
+        task_id
+        for task_id in RUNTIME_REPAIR_TASK_IDS
+        if task_id not in simulated_bootstrap_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_bootstrap_completed
+        )
+    }
+    if simulated_bootstrap_claimable != RUNTIME_BOOTSTRAP_WAVE:
+        errors.append(
+            "runtime repository-bootstrap dependency wave must be exactly "
+            f"{sorted(RUNTIME_BOOTSTRAP_WAVE)}, got "
+            f"{sorted(simulated_bootstrap_claimable)}"
         )
 
     unordered_conflicts: list[dict[str, object]] = []
@@ -911,16 +1218,45 @@ def validate(
         "todo_sha256": _sha256(todo_path),
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
-        "initial_ready_task_ids": sorted(INITIAL_READY),
-        "initial_ready_shards": sorted(initial_shards),
-        "reviewed_extension_task_ids": sorted(EXTENSION_TASK_IDS),
-        "reviewed_extension_wave_one_task_ids": sorted(EXTENSION_WAVE_ONE),
-        "reviewed_extension_wave_one_shards": sorted(extension_wave_shards),
+        "initial_ready_task_ids": sorted(RUNTIME_REPAIR_WAVE_ONE),
+        "initial_ready_shards": sorted(runtime_repair_wave_shards),
+        "sealed_initial_ready_task_ids": sorted(SEALED_INITIAL_READY),
+        "sealed_initial_ready_shards": sorted(sealed_initial_shards),
+        "reviewed_extension_task_ids": sorted(COMPLETION_EXTENSION_TASK_IDS),
+        "reviewed_extension_wave_one_task_ids": sorted(
+            COMPLETION_EXTENSION_WAVE_ONE
+        ),
+        "reviewed_extension_wave_one_shards": sorted(
+            completion_extension_wave_shards
+        ),
         "reviewed_extension_wave_one_submodules": {
             task_id: sorted(resources)
-            for task_id, resources in extension_wave_resources.items()
+            for task_id, resources in completion_extension_wave_resources.items()
         },
-        "reviewed_extension_wave_one_resource_width": extension_resource_width,
+        "reviewed_extension_wave_one_resource_width": (
+            completion_extension_resource_width
+        ),
+        "reviewed_runtime_repair_task_ids": sorted(RUNTIME_REPAIR_TASK_IDS),
+        "reviewed_runtime_repair_wave_one_task_ids": sorted(
+            RUNTIME_REPAIR_WAVE_ONE
+        ),
+        "reviewed_runtime_repair_wave_one_shards": sorted(
+            runtime_repair_wave_shards
+        ),
+        "reviewed_runtime_repair_wave_one_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in runtime_repair_wave_resources.items()
+        },
+        "reviewed_runtime_bootstrap_wave_task_ids": sorted(
+            RUNTIME_BOOTSTRAP_WAVE
+        ),
+        "reviewed_runtime_bootstrap_wave_shards": sorted(
+            runtime_bootstrap_wave_shards
+        ),
+        "reviewed_runtime_bootstrap_wave_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in runtime_bootstrap_wave_resources.items()
+        },
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {
