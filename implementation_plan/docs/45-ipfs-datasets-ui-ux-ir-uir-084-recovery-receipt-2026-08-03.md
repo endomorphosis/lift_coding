@@ -3,7 +3,7 @@
 - Schema: `ipfs-datasets-ui-ux-ir/recovery-repair-receipt@1`
 - Repair task: `UIR-084`
 - Source task: `UIR-002`
-- Review timestamp: `2026-08-03T13:36:43Z`
+- Review timestamp: `2026-08-03T13:39:18Z`
 - Reviewer/operator: Codex primary agent with two independent read-only supervisor audits
 - Disposition: exact recovery dispatched once, integrated, and freshly validated; independent provider review remains the only UIR-002 acceptance gate
 
@@ -56,6 +56,8 @@ The next exact-provider pass freshly validated the target at sequence `2404`, mi
 
 Commit `12c422b0e171ff3262baf1d7aa0443698d769b4a` transports that condition as a prompt-free, allowlisted typed capacity envelope and records only bounded reset metadata. The supervisor now applies an account-wide Codex review latch before bounded candidate selection, preserves unrelated merge work, advertises the durable wake deadline, and uses a one-shot expiry projection so stale events cannot create a hot loop. Unrelated review failures cannot clear the latch; only a later admitted or denied provider review does. This scheduling repair cannot mint completion authority and preserves queue attempt 2 and implementation attempt 5.
 
+The published live pass on root `59884b70e971e75f0367f5c65e7400af23af399d` freshly validated UIR-002 at sequence `2438`, minted the exact witness at `2439`, and recorded the typed capacity event at `2440` with provider `codex_cli`, reasons `usage_limit` and `capacity_unavailable`, and reset `2026-08-10T05:23:00Z`; pending and reconciliation events followed at `2441` and `2442`. An immediate second daemon pass returned `reviewer_provider_capacity_backoff` with `write_count: 0`: the ledger remained at sequence `2442`, validation and review counts were unchanged, queue attempt remained 2, implementation attempt remained 5, and no provider process was invoked.
+
 ## Reviewed UIR-002 rescue
 
 - Current target root before this repair: `0cf371a5e0e9b3691ac84b567d1d4fab33bf2a99`
@@ -99,5 +101,6 @@ This unit-test receipt was review evidence, not dispatch authority and not a sub
 9. After the composite verifier was activated, a later acceptance-only pass minted the exact completed recovery witness at sequence `2374`; this was evidence reconciliation, not an implementation attempt.
 10. The same pass rejected an unintended Grok reviewer fallback at sequence `2375`. Accelerator commits `5a6a0859500e44094b6b11b467555855149c88ba` and `5495615ba710fb76980957929ca8a2a47ed8f9e8` now fence the reviewer to one exact Codex/model route before any provider fallback can run.
 11. A later exact-provider reconciliation at sequences `2404`-`2408` freshly revalidated and preserved every non-provider acceptance gate, then left UIR-002 pending on the external Codex capacity window without launching Grok or creating attempt 6. Accelerator commit `12c422b0e171ff3262baf1d7aa0443698d769b4a` converts that external condition into durable provider-wide scheduling rather than repeated validation and review churn.
+12. The published capacity-aware pass at sequences `2438`-`2442` recorded the same external reset as typed safe metadata. Its immediate repeat appended no event, reran no validation, invoked no reviewer, and preserved exactly five UIR-002 implementation starts with attempt 5 as the high-water.
 
 The initial post-merge consumer exposed one additional supervisor defect: producer attempt 5 materialized `external/ipfs_datasets`, `external/ipfs_accelerate`, `swissknife`, and `hallucinate_app`, while legacy queue metadata carried only the changed dataset path. The narrower consumer therefore omitted the unchanged accelerator from the first validation checkout and left three exact prunable sibling registrations. A read-only preflight re-proved the exact root, queue, attempt, gitlink, branch-tip, reflog, protection-ref, and porcelain bindings; compare-and-delete cleanup then removed those three registrations and their daemon-only branches plus the exact locked detached validation registration. The root commit and working-tree diff were unchanged, all commit tips remain protected, and no broad worktree prune was used. Producer dependency binding and cleanup lifecycle redesign remain a separately preserved follow-up; the unsafe broad draft was not published. This does not alter the successful integration or authorize another implementation attempt.
