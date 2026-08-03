@@ -1882,7 +1882,7 @@ proof-reuse-off validations and managed merge provenance exist.
 
 ## PTR-146 Capture cold runtime trace and assemble final pass candidate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
