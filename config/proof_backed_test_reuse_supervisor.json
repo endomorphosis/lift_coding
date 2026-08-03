@@ -195,6 +195,38 @@
       "ASI-G360"
     ]
   },
+  "objectiveProjection": {
+    "mode": "reviewed_bounded_closeout",
+    "reviewedAt": "2026-08-03",
+    "implementationTaskIds": [
+      "PTR-110",
+      "PTR-111",
+      "PTR-112",
+      "PTR-120",
+      "PTR-121",
+      "PTR-122",
+      "PTR-130"
+    ],
+    "initialClaimableTaskIds": [
+      "PTR-110",
+      "PTR-111",
+      "PTR-112"
+    ],
+    "authorityWriter": "outer_controller_only",
+    "workerLaneReconciliationEnabled": false,
+    "autonomousGapGenerationEnabled": false,
+    "artifactLocation": "state_root",
+    "gatePathSuffix": "projection/completion/goal_completion_gate.json",
+    "evidencePathSuffix": "projection/completion/goal_completion_evidence.json",
+    "lifecycleProjectionPathSuffix": "projection/completion/objective_projection.md",
+    "candidateObjectivePathSuffix": "projection/completion/objective_candidate.md",
+    "supervisorHealthInputPathSuffix": "projection/completion/supervisor_health_input.json",
+    "statusPathSuffix": "projection/completion/closeout_status.json",
+    "reconciliationPhases": 3,
+    "closeoutControllerTaskId": "PTR-121",
+    "operatorHandoffTaskId": "PTR-130",
+    "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
+  },
   "parallelRuntime": {
     "enabled": true,
     "laneCount": 3,

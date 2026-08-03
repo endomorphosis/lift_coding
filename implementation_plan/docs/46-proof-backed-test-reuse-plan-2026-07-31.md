@@ -474,6 +474,72 @@ The PTR heap is a separate program. It does not silently add children to closed
 ASI or CBP populations. Cross-references describe conformance; PTR completion
 still requires its own current-tree evidence.
 
+## 13.1 Reviewed objective-completion projection (2026-08-03)
+
+The original implementation population is complete (`PTR-000` through
+`PTR-102`, 32 of 32), but that is implementation progress rather than goal
+authority. The current objective projection correctly reports 12 active goals
+and zero authority-verified goals because it has no current bound completion
+artifacts and reconciliation is deliberately disabled. Historical task status,
+pytest exit status, merge prose, ordinary skips, and synthetic gate fixtures
+must not be promoted into goal evidence.
+
+The reviewed audit found the following bounded completion gaps:
+
+- Goal reconciliation selected 54 prose `Acceptance` clauses while the heap
+  declares 39 stable typed `Evidence` requirements. Every goal now declares an
+  explicit `Acceptance criteria` field equal to those typed requirement IDs;
+  the human-readable `Acceptance` field remains explanatory.
+- The current-tree gate required `PTR-G110` to be verified even though
+  `PTR-G110` itself requires the final-tree gate. The production gate must
+  instead verify `PTR-G010` through `PTR-G100`, validate G110 benchmark and
+  rollout premises directly, then emit evidence for G110 and the root.
+- The final-gate adapter is not yet admissible by the generic objective
+  completion contract. It must use an allowed task/scan producer kind, exact
+  per-goal objective revisions, explicit freshness, canonical channel proofs,
+  strict source policy, and retained replayable provenance.
+- The gate claims a supervisor-launch-health requirement without currently
+  accepting or checking a current-tree/config-bound launch-health receipt.
+- Git tree identity, recursive repository-forest identity, and the
+  objective-completion scan identity are distinct domains and must be carried
+  and checked independently.
+- Production completion artifacts require strict CIDv1/base32/dag-json/
+  sha2-256 identity over retained canonical bytes. A nonempty string or a
+  private `sha256:` label is not authoritative artifact identity.
+- The merge queue contains historical records for 28 tasks. `PTR-000`,
+  `PTR-001`, `PTR-011`, and `PTR-041` require genuine operator/review or
+  retrospective ancestry plus fresh-validation provenance; `Status:
+  completed` alone cannot fill the gap.
+- Current host absence of Groth16, ProveKit, snarkjs, IPFS, or a shared cache
+  remains non-blocking. It produces typed unavailable evidence and runs tests;
+  it never manufactures real-ZK or warm-production authority. A locally
+  verifiable reviewed real-certificate fixture or explicitly invoked real
+  backend is required for the corresponding closeout criterion.
+
+The reviewed bounded expansion is `PTR-110`, `PTR-111`, `PTR-112`,
+`PTR-120`, `PTR-121`, `PTR-122`, and `PTR-130`. Autonomous objective and
+codebase refill remain disabled. Failed completion gates may describe gaps, but
+may generate work only after the bounded producer/reconciliation path is
+verified and only with stable deduplication and a reviewed finding limit.
+
+Completion has one writer. The three implementation lanes continue to run with
+goal reconciliation disabled. After all 39 implementation tasks close, an
+operator invokes a distinct closeout command which:
+
+1. verifies the exact clean integration checkout and complete task population;
+2. collects retained current-tree task, validation, analyzer, adversarial,
+   benchmark, rollout, capability, policy, and supervisor-health premises;
+3. emits atomic state-root evidence and gate artifacts and replays every
+   premise by canonical CID;
+4. transitions drained goals to provisional without claiming verification;
+5. reruns declared validation with proof reuse off and verifies G010-G100;
+6. evaluates the final gate without a G110 self-reference, then verifies G110
+   and G000 in a third bounded phase;
+7. fails closed on any missing, stale, corrupt, contradictory, unavailable, or
+   mismatched authority input and retains actionable reason codes; and
+8. presents the protected objective lifecycle update for an explicit
+   operator-owned commit before normal lane restart.
+
 ## 14. Parallel implementation program
 
 The machine board is
@@ -496,6 +562,9 @@ protected from implementation agents.
 | 6 | `PTR-060`, `PTR-080` then `PTR-061`, `PTR-070`, `PTR-081` | Supervisor authority and three repository bootstraps |
 | 7 | `PTR-090`, then `PTR-091`, `PTR-092`, `PTR-093` | Degradation, invalidation, security/concurrency, cross-repo e2e |
 | 8 | `PTR-100`, `PTR-101`, `PTR-102` | Benchmark, staged rollout, current-tree gate |
+| 9 | `PTR-110`, `PTR-111`, `PTR-112` | Task provenance, independent goal/analyzer evidence, and strict objective-artifact contracts on all three shards |
+| 10 | `PTR-120`, `PTR-121`, `PTR-122` | Artifact assembly, single-writer staged reconciliation, and final-gate cycle/authority repair on all three shards |
+| 11 | `PTR-130` | Hermetic closeout proof and operator handoff; the real current-tree closeout is invoked only after this task is completed |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -579,13 +648,18 @@ explicitly permitted.
 - Initialize exactly the three outer submodules in worker worktrees.
 - Use three strict deterministic shards and a shared serial merge queue.
 - Disable objective/codebase refill initially because the reviewed board is
-  comprehensive; expansion requires a separate reviewed projection.
+  comprehensive. The seven-task completion expansion is the separately
+  reviewed 2026-08-03 projection; it does not enable autonomous refill.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no
   structural blocked tasks, and at least one globally selectable or active task.
 - Groth16, ProveKit, cache, and IPFS are optional capability facts and never
   startup gates.
+- Keep all worker-lane goal reconciliation disabled. Only the outer controller's
+  explicit, fenced closeout operation may write lifecycle state.
+- Keep ordinary `project`, `preflight`, and `start` report-only with respect to
+  the protected objective heap.
 
 The committed controller is `scripts/proof_backed_test_reuse_supervisor.py` and
 the profile is `config/proof_backed_test_reuse_supervisor.json`.
@@ -593,6 +667,10 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
 ## 18. Definition of done
 
 - All PTR tasks and child goals have current authoritative completion evidence.
+- The objective closeout replays canonical premise bytes, distinguishes Git,
+  forest, and objective-completion identities, checks a fresh supervisor-health
+  receipt, and reaches verified state through staged legal transitions rather
+  than task labels.
 - Direct-node and suite invocation automatically discover the plugin in all
   three repositories without a test-file registry.
 - Every authoritative skip is backed by an exact current execution key, trusted

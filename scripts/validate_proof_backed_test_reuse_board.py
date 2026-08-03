@@ -108,9 +108,28 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-100",
         "PTR-101",
         "PTR-102",
+        "PTR-110",
+        "PTR-111",
+        "PTR-112",
+        "PTR-120",
+        "PTR-121",
+        "PTR-122",
+        "PTR-130",
     }
 )
 INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
+EXTENSION_TASK_IDS = frozenset(
+    {
+        "PTR-110",
+        "PTR-111",
+        "PTR-112",
+        "PTR-120",
+        "PTR-121",
+        "PTR-122",
+        "PTR-130",
+    }
+)
+EXTENSION_WAVE_ONE = frozenset({"PTR-110", "PTR-111", "PTR-112"})
 GOAL_STATES = frozenset(
     {
         "active",
@@ -175,6 +194,10 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-090": frozenset({"PTR-061", "PTR-070", "PTR-081"}),
     "PTR-100": frozenset({"PTR-091", "PTR-092", "PTR-093"}),
     "PTR-102": frozenset({"PTR-091", "PTR-092", "PTR-093", "PTR-101"}),
+    "PTR-120": frozenset({"PTR-110", "PTR-111", "PTR-112"}),
+    "PTR-121": frozenset({"PTR-110", "PTR-111", "PTR-112"}),
+    "PTR-122": frozenset({"PTR-102", "PTR-110", "PTR-111", "PTR-112"}),
+    "PTR-130": frozenset({"PTR-120", "PTR-121", "PTR-122"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {"PTR-040", "PTR-041", "PTR-042", "PTR-070"}
@@ -215,6 +238,11 @@ def _canonical_sha256(value: object) -> str:
 def _csv(value: object) -> tuple[str, ...]:
     text = str(value or "")
     return tuple(item.strip() for item in text.split(",") if item.strip())
+
+
+def _semicolon_terms(value: object) -> tuple[str, ...]:
+    text = str(value or "")
+    return tuple(item.strip() for item in text.split(";") if item.strip())
 
 
 def _safe_relative_paths(values: Iterable[str], *, field: str) -> list[str]:
@@ -351,6 +379,62 @@ def validate(
         "launchGate"
     ) is not False:
         errors.append("optional proof infrastructure must not be a launch gate")
+    objective_projection = config.get("objectiveProjection")
+    if not isinstance(objective_projection, dict):
+        errors.append("configuration objectiveProjection must be an object")
+        objective_projection = {}
+    if objective_projection.get("mode") != "reviewed_bounded_closeout":
+        errors.append(
+            "objectiveProjection.mode must be reviewed_bounded_closeout"
+        )
+    if frozenset(objective_projection.get("implementationTaskIds") or ()) != (
+        EXTENSION_TASK_IDS
+    ):
+        errors.append(
+            "objectiveProjection implementation task inventory mismatch"
+        )
+    if frozenset(
+        objective_projection.get("initialClaimableTaskIds") or ()
+    ) != EXTENSION_WAVE_ONE:
+        errors.append(
+            "objectiveProjection initial claimable task inventory mismatch"
+        )
+    if objective_projection.get("authorityWriter") != "outer_controller_only":
+        errors.append(
+            "objective completion authority writer must be the outer controller"
+        )
+    if objective_projection.get("workerLaneReconciliationEnabled") is not False:
+        errors.append("worker-lane objective reconciliation must remain disabled")
+    if objective_projection.get("autonomousGapGenerationEnabled") is not False:
+        errors.append("autonomous objective-gap generation must remain disabled")
+    if objective_projection.get("artifactLocation") != "state_root":
+        errors.append("objective completion artifacts must live under state root")
+    if objective_projection.get("reconciliationPhases") != 3:
+        errors.append("objective closeout must declare exactly three phases")
+    if objective_projection.get("closeoutControllerTaskId") != "PTR-121":
+        errors.append("objective closeout controller task must be PTR-121")
+    if objective_projection.get("operatorHandoffTaskId") != "PTR-130":
+        errors.append("objective operator handoff task must be PTR-130")
+    projection_path_fields = (
+        "gatePathSuffix",
+        "evidencePathSuffix",
+        "lifecycleProjectionPathSuffix",
+        "candidateObjectivePathSuffix",
+        "supervisorHealthInputPathSuffix",
+        "statusPathSuffix",
+    )
+    projection_paths = tuple(
+        str(objective_projection.get(field) or "")
+        for field in projection_path_fields
+    )
+    errors.extend(
+        _safe_relative_paths(
+            projection_paths,
+            field="objectiveProjection state-root paths",
+        )
+    )
+    if len(set(projection_paths)) != len(projection_paths):
+        errors.append("objectiveProjection state-root paths must be unique")
     common_environment = parallel.get("commonEnvironment") or {}
     if common_environment.get("IPFS_TEST_PROOF_REUSE_MODE") != "off":
         errors.append("implementation validation must force proof reuse off")
@@ -427,6 +511,16 @@ def validate(
         ):
             if not str(goal.fields.get(name) or "").strip():
                 errors.append(f"{goal.goal_id} has empty {name}")
+        required_evidence = _csv(goal.fields.get("evidence"))
+        acceptance_criteria = _semicolon_terms(
+            goal.fields.get("acceptance_criteria")
+        )
+        if acceptance_criteria != required_evidence:
+            errors.append(
+                f"{goal.goal_id} machine acceptance criteria must exactly "
+                "match Evidence in order: expected "
+                f"{list(required_evidence)}, got {list(acceptance_criteria)}"
+            )
     parent_cycles = _cycle_nodes(goal_parent_edges)
     if parent_cycles:
         errors.append(f"goal parent cycle: {list(parent_cycles)}")
@@ -685,6 +779,18 @@ def validate(
                     f"{task_id} completed before dependencies "
                     f"{missing_completed_dependencies}"
                 )
+    legacy_task_ids = EXPECTED_TASK_IDS - EXTENSION_TASK_IDS
+    extension_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in EXTENSION_TASK_IDS
+    )
+    if legacy_task_ids.issubset(completed_ids) and extension_unstarted:
+        if claimable_task_ids != EXTENSION_WAVE_ONE:
+            errors.append(
+                "reviewed objective-completion expansion claimable tasks "
+                f"must be {sorted(EXTENSION_WAVE_ONE)}, got "
+                f"{sorted(claimable_task_ids)}"
+            )
     lane_count = int(parallel.get("laneCount") or 0)
     initial_shards = {
         int(task_id.rsplit("-", 1)[1]) % lane_count
@@ -694,6 +800,15 @@ def validate(
         errors.append(
             f"initial tasks do not cover all three numeric shards: "
             f"{sorted(initial_shards)}"
+        )
+    extension_wave_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in EXTENSION_WAVE_ONE
+    } if lane_count > 0 else set()
+    if extension_wave_shards != {0, 1, 2}:
+        errors.append(
+            "objective-completion expansion wave does not cover all three "
+            f"numeric shards: {sorted(extension_wave_shards)}"
         )
 
     unordered_conflicts: list[dict[str, object]] = []
@@ -746,6 +861,9 @@ def validate(
         "completed_task_count": len(completed_ids),
         "initial_ready_task_ids": sorted(INITIAL_READY),
         "initial_ready_shards": sorted(initial_shards),
+        "reviewed_extension_task_ids": sorted(EXTENSION_TASK_IDS),
+        "reviewed_extension_wave_one_task_ids": sorted(EXTENSION_WAVE_ONE),
+        "reviewed_extension_wave_one_shards": sorted(extension_wave_shards),
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {
