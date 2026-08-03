@@ -1946,7 +1946,7 @@ proof-reuse-off validations and managed merge provenance exist.
 
 ## PTR-148 Prove genuine zero-injection three-repo cold-to-warm reuse and measured subprocess savings
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
