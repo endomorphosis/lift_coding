@@ -1165,7 +1165,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-111 Produce independent goal coverage and analyzer receipts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
