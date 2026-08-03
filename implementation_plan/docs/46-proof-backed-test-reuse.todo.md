@@ -1379,7 +1379,7 @@ test.
 
 ## PTR-131 Seal automatic runtime activation and candidate-context contracts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
