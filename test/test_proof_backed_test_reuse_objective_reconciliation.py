@@ -380,6 +380,381 @@ def test_report_only_never_writes_repository(
     assert not paths["lifecycle"].exists()
 
 
+@pytest.mark.parametrize(
+    ("include_gate", "include_evidence", "expected_reason"),
+    (
+        (False, True, "missing_gate_artifact"),
+        (True, False, "missing_evidence_artifact"),
+    ),
+)
+def test_report_only_fails_closed_when_required_artifact_is_missing(
+    recon_mod: Any,
+    tmp_path: Path,
+    include_gate: bool,
+    include_evidence: bool,
+    expected_reason: str,
+) -> None:
+    paths = _write_fixture(
+        tmp_path,
+        include_gate=include_gate,
+        include_evidence=include_evidence,
+    )
+    files_before = {
+        path.relative_to(paths["repo"]): path.read_bytes()
+        for path in paths["repo"].rglob("*")
+        if path.is_file() and ".git" not in path.parts
+    }
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == [expected_reason]
+    assert result["diagnosis"]["ready_for_closeout"] is False
+    assert result["repository_written"] is False
+    files_after = {
+        path.relative_to(paths["repo"]): path.read_bytes()
+        for path in paths["repo"].rglob("*")
+        if path.is_file() and ".git" not in path.parts
+    }
+    assert files_after == files_before
+    assert not paths["candidate"].exists()
+    assert not paths["status"].exists()
+    assert not paths["lifecycle"].exists()
+
+
+@pytest.mark.parametrize(
+    ("artifact_key", "mutation", "expected_reason"),
+    (
+        (
+            "gate",
+            {"repository_tree": "tree-from-another-checkout"},
+            "mismatched_gate_artifact",
+        ),
+        (
+            "evidence",
+            {"repository_tree": "tree-from-another-checkout"},
+            "mismatched_evidence_artifact",
+        ),
+        ("gate", {"stale": True}, "stale_gate_artifact"),
+        ("evidence", {"stale": True}, "stale_evidence_artifact"),
+    ),
+)
+def test_report_only_detects_stale_or_mismatched_artifacts(
+    recon_mod: Any,
+    tmp_path: Path,
+    artifact_key: str,
+    mutation: dict[str, Any],
+    expected_reason: str,
+) -> None:
+    paths = _write_fixture(tmp_path)
+    artifact_path = paths[artifact_key]
+    artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
+    artifact.update(mutation)
+    artifact_path.write_text(
+        json.dumps(artifact, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    artifact_before = artifact_path.read_bytes()
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == [expected_reason]
+    assert result["diagnosis"]["artifact_notes"]
+    assert artifact_path.read_bytes() == artifact_before
+    assert not paths["candidate"].exists()
+    assert not paths["status"].exists()
+    assert not paths["lifecycle"].exists()
+
+
+def test_report_only_detects_failed_gate(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(tmp_path)
+    gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
+    gate["passed"] = False
+    paths["gate"].write_text(
+        json.dumps(gate, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == ["gate_failed"]
+
+
+def test_report_only_requires_explicit_gate_tree_binding(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(tmp_path)
+    gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
+    del gate["repository_tree"]
+    paths["gate"].write_text(
+        json.dumps(gate, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == ["missing_gate_tree_binding"]
+
+
+def test_report_only_rejects_conflicting_gate_tree_aliases(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(tmp_path)
+    gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
+    gate["binding"] = {"tree_id": "tree-from-another-checkout"}
+    paths["gate"].write_text(
+        json.dumps(gate, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == ["mismatched_gate_artifact"]
+
+
+def test_report_only_requires_explicit_gate_passed_decision(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(tmp_path)
+    gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
+    del gate["passed"]
+    paths["gate"].write_text(
+        json.dumps(gate, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == ["missing_gate_passed"]
+
+
+@pytest.mark.parametrize("missing_goal_id", (None, "PTR-G100"))
+def test_report_only_requires_admissible_evidence_for_every_child_goal(
+    recon_mod: Any,
+    tmp_path: Path,
+    missing_goal_id: str | None,
+) -> None:
+    paths = _write_fixture(tmp_path)
+    evidence = json.loads(paths["evidence"].read_text(encoding="utf-8"))
+    if missing_goal_id is None:
+        evidence["goals"] = {}
+        expected = [
+            f"missing_evidence:{goal_id}" for goal_id in CHILD_GOAL_IDS
+        ]
+    else:
+        del evidence["goals"][missing_goal_id]
+        expected = [f"missing_evidence:{missing_goal_id}"]
+    paths["evidence"].write_text(
+        json.dumps(evidence, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod,
+        paths,
+        report_only=True,
+        allow_synthetic_evidence=False,
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == expected
+
+
+def test_report_only_rejects_present_child_with_empty_evidence(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(tmp_path)
+    evidence = json.loads(paths["evidence"].read_text(encoding="utf-8"))
+    evidence["goals"]["PTR-G010"]["evidence_cids"] = []
+    paths["evidence"].write_text(
+        json.dumps(evidence, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod,
+        paths,
+        report_only=True,
+        allow_synthetic_evidence=False,
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == ["missing_evidence:PTR-G010"]
+
+
+def test_normal_diagnosis_requires_gate_and_evidence_artifacts(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(
+        tmp_path,
+        include_gate=False,
+        include_evidence=False,
+    )
+
+    diagnosis = _make_reconciler(
+        recon_mod,
+        paths,
+        report_only=False,
+        allow_synthetic_evidence=False,
+    )._collect_diagnosis(write_allowed=True)
+
+    assert diagnosis["ready_for_closeout"] is False
+    assert diagnosis["reason_codes"] == [
+        "missing_gate_artifact",
+        *(f"missing_evidence:{goal_id}" for goal_id in CHILD_GOAL_IDS),
+    ]
+
+
+def test_ptr120_aggregate_artifacts_pass_and_extract_canonical_evidence(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    paths = _write_fixture(tmp_path)
+    tree = str(paths["tree_id"])
+    gate = {
+        "schema": (
+            "ipfs_accelerate_py/agent-supervisor/"
+            "proof-test-reuse-gate-records@1"
+        ),
+        "interface": "ProofTestReuseObjectiveEvidence@1",
+        "binding": {
+            "repository_id": "repo:fixture",
+            "tree_id": tree,
+            "git_tree_id": tree,
+        },
+        "goals": {
+            goal_id: {"passed": True}
+            for goal_id in ALL_GOAL_IDS
+        },
+    }
+    evidence = {
+        "schema": (
+            "ipfs_accelerate_py.agent_supervisor.objective_daemon."
+            "completion_evidence.v1"
+        ),
+        "interface": "ObjectiveCompletionEvidenceArtifact",
+        "binding": {
+            "repository_id": "repo:fixture",
+            "tree_id": tree,
+            "git_tree_id": tree,
+        },
+        "goals": {
+            goal_id: {
+                "binding": {
+                    "repository_id": "repo:fixture",
+                    "tree_id": tree,
+                },
+                "completion_evidence_records": [
+                    {
+                        "provenance_cid": f"baguqeera{goal_id[-3:].lower()}ptr120",
+                        "validation_passed": True,
+                        "repository_tree": tree,
+                        "tree_id": tree,
+                        "freshness": {"fresh": True},
+                    }
+                ],
+            }
+            for goal_id in ALL_GOAL_IDS
+        },
+    }
+    paths["gate"].write_text(
+        json.dumps(gate, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    paths["evidence"].write_text(
+        json.dumps(evidence, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    reconciler = _make_reconciler(
+        recon_mod,
+        paths,
+        report_only=True,
+        allow_synthetic_evidence=False,
+    )
+
+    result = reconciler.diagnose()
+
+    assert result["passed"] is True
+    assert result["reason_codes"] == []
+    assert reconciler._evidence_for_goal("PTR-G010") == [
+        "baguqeera010ptr120"
+    ]
+
+    record = evidence["goals"]["PTR-G010"]["completion_evidence_records"][0]
+    del record["repository_tree"]
+    del record["tree_id"]
+    paths["evidence"].write_text(
+        json.dumps(evidence, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    rejected = reconciler.diagnose()
+    assert rejected["passed"] is False
+    assert rejected["reason_codes"] == ["missing_evidence:PTR-G010"]
+
+
+@pytest.mark.parametrize(
+    ("goal_id", "delete_goal", "expected_reason"),
+    (
+        ("PTR-G100", False, "gate_failed"),
+        ("PTR-G110", True, "incomplete_gate_artifact"),
+    ),
+)
+def test_ptr120_aggregate_gate_requires_every_explicit_pass(
+    recon_mod: Any,
+    tmp_path: Path,
+    goal_id: str,
+    delete_goal: bool,
+    expected_reason: str,
+) -> None:
+    paths = _write_fixture(tmp_path)
+    tree = str(paths["tree_id"])
+    goals = {
+        required_goal_id: {"passed": True}
+        for required_goal_id in ALL_GOAL_IDS
+    }
+    if delete_goal:
+        del goals[goal_id]
+    else:
+        goals[goal_id]["passed"] = False
+    paths["gate"].write_text(
+        json.dumps(
+            {
+                "binding": {"tree_id": tree, "git_tree_id": tree},
+                "goals": goals,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    result = _make_reconciler(
+        recon_mod, paths, report_only=True
+    ).diagnose()
+
+    assert result["passed"] is False
+    assert result["reason_codes"] == [expected_reason]
+
+
 def test_report_only_via_cli(
     recon_mod: Any, tmp_path: Path
 ) -> None:
@@ -498,6 +873,7 @@ def test_closeout_refuses_stale_gate_in_phase_three(
         reconciler.closeout()
     # Failure may surface as stale gate or phase3 failure.
     assert exc.value.reason_code in {
+        "mismatched_gate_artifact",
         "stale_or_mismatched_gate",
         "phase3_failed",
         "stale_artifact",

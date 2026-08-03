@@ -13,6 +13,7 @@ import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 import time
 from collections.abc import Iterator, Sequence
 from contextlib import contextmanager
@@ -192,12 +193,33 @@ def _git_raw_output(*arguments: str, cwd: Path = REPO_ROOT) -> str:
     return result.stdout
 
 
+def _initialize_configured_submodules() -> tuple[str, ...]:
+    """Register only configured submodules without fetching or checking out."""
+
+    paths = tuple(str(item) for item in PARALLEL["worktreeSubmodulePaths"])
+    result = subprocess.run(
+        ["git", "submodule", "init", "--", *paths],
+        cwd=REPO_ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+        timeout=120,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            "could not initialize configured submodule metadata: "
+            + (result.stderr.strip() or result.stdout.strip())
+        )
+    return paths
+
+
 def _require_isolated_clean_checkout() -> dict[str, object]:
     branch = _git_output("branch", "--show-current")
     if branch != TARGET_BRANCH:
         raise RuntimeError(
             f"refusing branch {branch!r}; expected {TARGET_BRANCH!r}"
         )
+    _initialize_configured_submodules()
     dirty = _git_output("status", "--porcelain=v1", "--untracked-files=all")
     if dirty:
         raise RuntimeError(f"refusing dirty integration checkout:\n{dirty}")
@@ -317,7 +339,7 @@ def _provider_preflight() -> dict[str, object]:
     }
 
 
-def _validate_board() -> dict[str, object]:
+def _validate_board(*, persist_projection: bool = True) -> dict[str, object]:
     result = _run(
         [sys.executable, str(REPO_ROOT / VALIDATOR_REL)],
         environment=_runtime_environment(),
@@ -326,11 +348,37 @@ def _validate_board() -> dict[str, object]:
     payload = json.loads(result.stdout)
     if payload.get("valid") is not True:
         raise RuntimeError("PTR board validator did not report valid")
-    (PROJECTION_DIR / "native_board_preflight.json").write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    if persist_projection:
+        (PROJECTION_DIR / "native_board_preflight.json").write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
     return payload
+
+
+def _required_closeout_artifact_presence() -> dict[str, object]:
+    """Project configured artifact presence without claiming authority."""
+
+    configured = {
+        "gate": _completion_state_path("gatePathSuffix"),
+        "evidence": _completion_state_path("evidencePathSuffix"),
+    }
+    artifacts = {
+        name: {
+            "path": str(path),
+            "present": path.is_file(),
+        }
+        for name, path in configured.items()
+    }
+    missing = [
+        name for name, item in artifacts.items() if not item["present"]
+    ]
+    return {
+        "required_artifacts": artifacts,
+        "missing_required_artifacts": missing,
+        "artifact_presence_ready": not missing,
+        "artifact_presence_is_completion_authority": False,
+    }
 
 
 def _reviewed_completion_projection() -> dict[str, object]:
@@ -365,6 +413,13 @@ def _reviewed_completion_projection() -> dict[str, object]:
     for goal in goals:
         goal_state_counts[goal.status] = goal_state_counts.get(goal.status, 0) + 1
     projection = dict(CONFIG["objectiveProjection"])
+    artifact_presence = _required_closeout_artifact_presence()
+    if open_task_ids:
+        next_action = "execute_reviewed_expansion"
+    elif not artifact_presence["artifact_presence_ready"]:
+        next_action = "materialize_current_tree_completion_artifacts"
+    else:
+        next_action = "invoke_operator_closeout"
     return {
         "schema": (
             "ipfs_accelerate_py/proof-backed-test-reuse-"
@@ -396,11 +451,8 @@ def _reviewed_completion_projection() -> dict[str, object]:
                 "autonomousGapGenerationEnabled"
             ],
         },
-        "next_action": (
-            "execute_reviewed_expansion"
-            if open_task_ids
-            else "invoke_operator_closeout"
-        ),
+        "closeout_readiness": artifact_presence,
+        "next_action": next_action,
     }
 
 
@@ -922,11 +974,129 @@ def _completion_state_path(field: str) -> Path:
     return path
 
 
-def _closeout() -> dict[str, object]:
+def _closeout_health_input(
+    *,
+    checkout: dict[str, object],
+    status: dict[str, object],
+) -> dict[str, object]:
+    config_bytes = CONFIG_PATH.read_bytes()
+    return {
+        "schema": (
+            "ipfs_accelerate_py/proof-backed-test-reuse-"
+            "supervisor-health-input@1"
+        ),
+        "captured_at_unix_ns": time.time_ns(),
+        "configuration_sha256": (
+            "sha256:" + hashlib.sha256(config_bytes).hexdigest()
+        ),
+        "checkout": checkout,
+        "status": status,
+    }
+
+
+def _closeout_command(
+    *,
+    module_path: Path,
+    gate_path: Path,
+    evidence_path: Path,
+    lifecycle_path: Path,
+    candidate_path: Path,
+    health_path: Path,
+    status_path: Path,
+    report_only: bool,
+) -> list[str]:
+    phase_count = int(
+        dict(CONFIG["objectiveProjection"])["reconciliationPhases"]
+    )
+    command = [
+        sys.executable,
+        str(module_path),
+        "--repo-root",
+        str(REPO_ROOT),
+        "--objective-path",
+        str(REPO_ROOT / OBJECTIVE_REL),
+        "--todo-path",
+        str(REPO_ROOT / TODO_REL),
+        "--gate-path",
+        str(gate_path),
+        "--evidence-path",
+        str(evidence_path),
+        "--lifecycle-projection-path",
+        str(lifecycle_path),
+        "--candidate-objective-path",
+        str(candidate_path),
+        "--supervisor-health-input-path",
+        str(health_path),
+        "--status-path",
+        str(status_path),
+        "--phase-count",
+        str(phase_count),
+    ]
+    if report_only:
+        command.append("--report-only")
+    return command
+
+
+def _decoded_closeout_result(
+    result: subprocess.CompletedProcess[str],
+) -> object:
+    try:
+        return json.loads(result.stdout)
+    except ValueError:
+        return {
+            "stdout": result.stdout.strip(),
+            "stderr": result.stderr.strip(),
+        }
+
+
+def _run_closeout_diagnosis(
+    *,
+    module_path: Path,
+    checkout: dict[str, object],
+    before: dict[str, object],
+    gate_path: Path,
+    evidence_path: Path,
+    lifecycle_path: Path,
+    candidate_path: Path,
+    status_path: Path,
+) -> tuple[subprocess.CompletedProcess[str], object]:
+    """Run the documented no-lane-stop, no-state-output diagnosis."""
+
+    with tempfile.TemporaryDirectory(prefix="ptr-closeout-report-") as temp_dir:
+        health_path = Path(temp_dir) / "supervisor_health_input.json"
+        health_path.write_text(
+            json.dumps(
+                _closeout_health_input(checkout=checkout, status=before),
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        command = _closeout_command(
+            module_path=module_path,
+            gate_path=gate_path,
+            evidence_path=evidence_path,
+            lifecycle_path=lifecycle_path,
+            candidate_path=candidate_path,
+            health_path=health_path,
+            status_path=status_path,
+            report_only=True,
+        )
+        result = _run(
+            command,
+            environment=_runtime_environment(),
+            check=False,
+            timeout=1800,
+        )
+    return result, _decoded_closeout_result(result)
+
+
+def _closeout(*, report_only: bool = False) -> dict[str, object]:
     """Run the reviewed single-writer closeout after all implementation work."""
 
     checkout = _require_isolated_clean_checkout()
-    board = _validate_board()
+    _validate_board(persist_projection=not report_only)
     projection = _reviewed_completion_projection()
     implementation = dict(projection["implementation"])
     open_task_ids = list(implementation["open_task_ids"])
@@ -959,6 +1129,48 @@ def _closeout() -> dict[str, object]:
     candidate_path = _completion_state_path("candidateObjectivePathSuffix")
     health_path = _completion_state_path("supervisorHealthInputPathSuffix")
     status_path = _completion_state_path("statusPathSuffix")
+    diagnosis_result, diagnosis = _run_closeout_diagnosis(
+        module_path=module_path,
+        checkout=checkout,
+        before=before,
+        gate_path=gate_path,
+        evidence_path=evidence_path,
+        lifecycle_path=lifecycle_path,
+        candidate_path=candidate_path,
+        status_path=status_path,
+    )
+    diagnosis_passed = (
+        diagnosis_result.returncode == 0
+        and isinstance(diagnosis, dict)
+        and diagnosis.get("passed") is True
+    )
+    if report_only:
+        return {
+            "schema": (
+                "ipfs_accelerate_py/"
+                "proof-backed-test-reuse-closeout-diagnosis@1"
+            ),
+            "report_only": True,
+            "diagnosis_passed": diagnosis_passed,
+            "closeout_passed": False,
+            "returncode": diagnosis_result.returncode,
+            "lanes_stopped": False,
+            "operator_commit_required": False,
+            "result": diagnosis,
+        }
+    if not diagnosis_passed:
+        return {
+            "schema": (
+                "ipfs_accelerate_py/proof-backed-test-reuse-closeout@1"
+            ),
+            "closeout_passed": False,
+            "precloseout_diagnosis_passed": False,
+            "returncode": diagnosis_result.returncode,
+            "lanes_stopped": [],
+            "operator_commit_required": False,
+            "result": diagnosis,
+        }
+
     for path in (
         gate_path,
         evidence_path,
@@ -969,19 +1181,7 @@ def _closeout() -> dict[str, object]:
     ):
         path.parent.mkdir(parents=True, exist_ok=True)
 
-    config_bytes = CONFIG_PATH.read_bytes()
-    health_input = {
-        "schema": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "supervisor-health-input@1"
-        ),
-        "captured_at_unix_ns": time.time_ns(),
-        "configuration_sha256": (
-            "sha256:" + hashlib.sha256(config_bytes).hexdigest()
-        ),
-        "checkout": checkout,
-        "status": before,
-    }
+    health_input = _closeout_health_input(checkout=checkout, status=before)
     health_path.write_text(
         json.dumps(health_input, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -991,33 +1191,16 @@ def _closeout() -> dict[str, object]:
     if not all(item["stopped"] for item in stopped):
         raise RuntimeError(f"could not fence all PTR lanes: {stopped}")
 
-    phase_count = int(
-        dict(CONFIG["objectiveProjection"])["reconciliationPhases"]
+    command = _closeout_command(
+        module_path=module_path,
+        gate_path=gate_path,
+        evidence_path=evidence_path,
+        lifecycle_path=lifecycle_path,
+        candidate_path=candidate_path,
+        health_path=health_path,
+        status_path=status_path,
+        report_only=False,
     )
-    command = [
-        sys.executable,
-        str(module_path),
-        "--repo-root",
-        str(REPO_ROOT),
-        "--objective-path",
-        str(REPO_ROOT / OBJECTIVE_REL),
-        "--todo-path",
-        str(REPO_ROOT / TODO_REL),
-        "--gate-path",
-        str(gate_path),
-        "--evidence-path",
-        str(evidence_path),
-        "--lifecycle-projection-path",
-        str(lifecycle_path),
-        "--candidate-objective-path",
-        str(candidate_path),
-        "--supervisor-health-input-path",
-        str(health_path),
-        "--status-path",
-        str(status_path),
-        "--phase-count",
-        str(phase_count),
-    ]
     result = _run(
         command,
         environment=_runtime_environment(),
@@ -1028,13 +1211,7 @@ def _closeout() -> dict[str, object]:
         result.stdout + result.stderr,
         encoding="utf-8",
     )
-    try:
-        closeout_result: object = json.loads(result.stdout)
-    except ValueError:
-        closeout_result = {
-            "stdout": result.stdout.strip(),
-            "stderr": result.stderr.strip(),
-        }
+    closeout_result = _decoded_closeout_result(result)
     payload = {
         "schema": (
             "ipfs_accelerate_py/proof-backed-test-reuse-closeout@1"
@@ -1137,7 +1314,17 @@ def main() -> int:
             "closeout",
         ),
     )
+    parser.add_argument(
+        "--report-only",
+        action="store_true",
+        help=(
+            "with closeout, diagnose readiness without stopping lanes or "
+            "writing configured closeout outputs"
+        ),
+    )
     args = parser.parse_args()
+    if args.report_only and args.command != "closeout":
+        parser.error("--report-only is valid only with closeout")
     try:
         if args.command == "status":
             payload = _status_payload()
@@ -1161,8 +1348,11 @@ def main() -> int:
             exit_code = 0
         elif args.command == "closeout":
             with _control_lock():
-                payload = _closeout()
-            exit_code = 0 if payload["closeout_passed"] else 1
+                payload = _closeout(report_only=args.report_only)
+            success_field = (
+                "diagnosis_passed" if args.report_only else "closeout_passed"
+            )
+            exit_code = 0 if payload[success_field] else 1
         else:
             with _control_lock():
                 stopped = [_stop_lane(lane) for lane in LANES]

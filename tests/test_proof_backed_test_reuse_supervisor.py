@@ -223,3 +223,213 @@ def test_provider_preflight_requires_codex_fallback(
 
     with pytest.raises(RuntimeError, match="fallback provider"):
         supervisor._provider_preflight()
+
+
+def test_configured_submodule_initialization_is_scoped_and_non_updating(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    calls: list[tuple[list[str], dict[str, object]]] = []
+
+    def fake_run(
+        command: list[str], **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        calls.append((command, dict(kwargs)))
+        return subprocess.CompletedProcess(command, 0, "", "")
+
+    monkeypatch.setattr(supervisor.subprocess, "run", fake_run)
+
+    initialized = supervisor._initialize_configured_submodules()
+
+    assert initialized == (
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "external/ipfs_kit",
+    )
+    assert calls[0][0] == [
+        "git",
+        "submodule",
+        "init",
+        "--",
+        *initialized,
+    ]
+    assert "update" not in calls[0][0]
+    assert calls[0][1]["cwd"] == supervisor.REPO_ROOT
+
+
+def test_report_only_board_validation_does_not_persist_projection(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    projection_dir = tmp_path / "projection"
+    projection_dir.mkdir()
+    monkeypatch.setattr(supervisor, "PROJECTION_DIR", projection_dir)
+    monkeypatch.setattr(
+        supervisor,
+        "_run",
+        lambda *_args, **_kwargs: subprocess.CompletedProcess(
+            args=[],
+            returncode=0,
+            stdout=json.dumps({"valid": True, "task_count": 41}),
+            stderr="",
+        ),
+    )
+
+    result = supervisor._validate_board(persist_projection=False)
+
+    assert result["valid"] is True
+    assert not (projection_dir / "native_board_preflight.json").exists()
+
+
+def test_closeout_artifact_presence_projects_missing_inputs_without_authority(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    gate_path = tmp_path / "goal_completion_gate.json"
+    evidence_path = tmp_path / "goal_completion_evidence.json"
+    paths = {
+        "gatePathSuffix": gate_path,
+        "evidencePathSuffix": evidence_path,
+    }
+    monkeypatch.setattr(
+        supervisor,
+        "_completion_state_path",
+        lambda field: paths[field],
+    )
+    gate_path.write_text("{}\n", encoding="utf-8")
+
+    projection = supervisor._required_closeout_artifact_presence()
+
+    assert projection["artifact_presence_ready"] is False
+    assert projection["missing_required_artifacts"] == ["evidence"]
+    assert projection["required_artifacts"]["gate"]["present"] is True
+    assert (
+        projection["artifact_presence_is_completion_authority"]
+        is False
+    )
+
+
+def _configure_closeout_test(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    *,
+    diagnosis_passed: bool,
+) -> list[Path]:
+    monkeypatch.setattr(
+        supervisor,
+        "_require_isolated_clean_checkout",
+        lambda: {
+            "branch": "agent/proof-backed-test-reuse",
+            "commit": "commit-1",
+            "tree": "tree-1",
+            "submodules": {},
+        },
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_validate_board",
+        lambda **_kwargs: {"valid": True, "task_count": 41},
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_reviewed_completion_projection",
+        lambda: {
+            "implementation": {
+                "task_count": 41,
+                "completed_task_count": 41,
+                "open_task_ids": [],
+            }
+        },
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_status_payload",
+        lambda: {
+            "healthy": True,
+            "work_complete": True,
+            "lanes": [],
+        },
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_completion_state_path",
+        lambda field: tmp_path / field,
+    )
+    observed_health_paths: list[Path] = []
+
+    def fake_run(
+        command: list[str], **_kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        assert command[-1] == "--report-only"
+        health_path = Path(
+            command[command.index("--supervisor-health-input-path") + 1]
+        )
+        observed_health_paths.append(health_path)
+        health = json.loads(health_path.read_text(encoding="utf-8"))
+        assert health["status"]["healthy"] is True
+        assert health["status"]["work_complete"] is True
+        payload = {
+            "mode": "report_only",
+            "passed": diagnosis_passed,
+            "reason_codes": [] if diagnosis_passed else ["missing_artifact"],
+        }
+        return subprocess.CompletedProcess(
+            command,
+            0 if diagnosis_passed else 1,
+            json.dumps(payload),
+            "",
+        )
+
+    monkeypatch.setattr(supervisor, "_run", fake_run)
+    monkeypatch.setattr(
+        supervisor,
+        "_stop_lane",
+        lambda _lane: (_ for _ in ()).throw(
+            AssertionError("diagnosis must not stop lanes")
+        ),
+    )
+    return observed_health_paths
+
+
+def test_closeout_report_only_uses_ephemeral_health_and_keeps_lanes_running(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    observed_health_paths = _configure_closeout_test(
+        supervisor,
+        monkeypatch,
+        tmp_path,
+        diagnosis_passed=True,
+    )
+
+    result = supervisor._closeout(report_only=True)
+
+    assert result["diagnosis_passed"] is True
+    assert result["lanes_stopped"] is False
+    assert result["operator_commit_required"] is False
+    assert len(observed_health_paths) == 1
+    assert not observed_health_paths[0].exists()
+    assert not any(tmp_path.iterdir())
+
+
+def test_closeout_refuses_failed_diagnosis_before_stopping_lanes(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    _configure_closeout_test(
+        supervisor,
+        monkeypatch,
+        tmp_path,
+        diagnosis_passed=False,
+    )
+
+    result = supervisor._closeout()
+
+    assert result["closeout_passed"] is False
+    assert result["precloseout_diagnosis_passed"] is False
+    assert result["lanes_stopped"] == []
+    assert result["result"]["reason_codes"] == ["missing_artifact"]

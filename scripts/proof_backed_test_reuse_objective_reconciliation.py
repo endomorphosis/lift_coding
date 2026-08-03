@@ -483,6 +483,41 @@ def supervisor_is_healthy(health: Mapping[str, Any]) -> tuple[bool, str]:
     return False, "supervisor health input lacks healthy/work_complete markers"
 
 
+def _artifact_repository_tree_values(
+    payload: Mapping[str, Any],
+) -> tuple[str, ...]:
+    """Return distinct explicit tree aliases from supported producers."""
+
+    candidates = [
+        payload.get("repository_tree"),
+        payload.get("tree_id"),
+        payload.get("git_tree_id"),
+        payload.get("source_tree"),
+    ]
+    binding = payload.get("binding")
+    if isinstance(binding, Mapping):
+        candidates.extend(
+            (
+                binding.get("tree_id"),
+                binding.get("git_tree_id"),
+                binding.get("repository_tree"),
+            )
+        )
+    values: list[str] = []
+    for candidate in candidates:
+        value = str(candidate or "").strip()
+        if value and value not in values:
+            values.append(value)
+    return tuple(values)
+
+
+def _artifact_repository_tree(payload: Mapping[str, Any]) -> str:
+    """Return one unambiguous explicit repository-tree binding, or empty."""
+
+    values = _artifact_repository_tree_values(payload)
+    return values[0] if len(values) == 1 else ""
+
+
 def artifact_freshness(
     *,
     artifact_path: Path,
@@ -497,14 +532,20 @@ def artifact_freshness(
     payload = _read_json(artifact_path)
     if not payload:
         return False, f"artifact unreadable or empty: {artifact_path}"
-    bound_tree = str(
-        payload.get("repository_tree")
-        or payload.get("tree_id")
-        or payload.get("git_tree_id")
-        or payload.get("source_tree")
-        or ""
-    )
-    if expected_tree and bound_tree and bound_tree != expected_tree:
+    tree_values = _artifact_repository_tree_values(payload)
+    if len(tree_values) > 1:
+        return (
+            False,
+            f"artifact tree binding mismatch for {artifact_path.name}: "
+            + ", ".join(repr(value) for value in tree_values),
+        )
+    if not tree_values:
+        return (
+            False,
+            f"artifact repository tree binding missing: {artifact_path.name}",
+        )
+    bound_tree = tree_values[0]
+    if expected_tree and bound_tree != expected_tree:
         return (
             False,
             f"artifact tree mismatch for {artifact_path.name}: "
@@ -525,6 +566,178 @@ def artifact_freshness(
     if payload.get("stale") is True or payload.get("is_stale") is True:
         return False, f"artifact marked stale: {artifact_path.name}"
     return True, ""
+
+
+def _artifact_reason_code(
+    *,
+    artifact_kind: str,
+    detail: str,
+) -> str:
+    """Return a stable, artifact-specific readiness reason."""
+
+    normalized = detail.lower().strip()
+    if normalized.startswith("artifact missing:"):
+        return f"missing_{artifact_kind}_artifact"
+    if normalized.startswith("artifact repository tree binding missing:"):
+        return f"missing_{artifact_kind}_tree_binding"
+    if normalized.startswith(
+        ("artifact tree mismatch", "artifact tree binding mismatch")
+    ):
+        return f"mismatched_{artifact_kind}_artifact"
+    if normalized.startswith(
+        ("artifact stale by age:", "artifact marked stale:")
+    ):
+        return f"stale_{artifact_kind}_artifact"
+    return f"invalid_{artifact_kind}_artifact"
+
+
+def _gate_artifact_readiness(
+    payload: Mapping[str, Any],
+) -> tuple[bool, str, str]:
+    """Validate either the PTR-120 aggregate gate or strict fixture gate."""
+
+    if "goals" in payload:
+        goals = payload.get("goals")
+        if not isinstance(goals, Mapping):
+            return (
+                False,
+                "invalid_gate_artifact",
+                "aggregate gate artifact 'goals' must be an object",
+            )
+        missing = [goal_id for goal_id in ALL_GOAL_IDS if goal_id not in goals]
+        if missing:
+            return (
+                False,
+                "incomplete_gate_artifact",
+                "aggregate gate artifact is missing required goals: "
+                + ", ".join(missing),
+            )
+        not_passed = [
+            goal_id
+            for goal_id in ALL_GOAL_IDS
+            if not isinstance(goals.get(goal_id), Mapping)
+            or goals[goal_id].get("passed") is not True
+        ]
+        if not_passed:
+            return (
+                False,
+                "gate_failed",
+                "aggregate gate artifact lacks explicit passing decisions for: "
+                + ", ".join(not_passed),
+            )
+        return True, "", ""
+
+    if "passed" not in payload:
+        return (
+            False,
+            "missing_gate_passed",
+            "gate artifact lacks an explicit passed decision",
+        )
+    if payload.get("passed") is not True:
+        return False, "gate_failed", "gate artifact does not report passed=true"
+    return True, "", ""
+
+
+def _canonical_record_is_admissible(
+    record: Any,
+    *,
+    expected_tree: str,
+) -> bool:
+    if not isinstance(record, Mapping):
+        return False
+    raw_provenance_cid = (
+        record.get("provenance_cid") or record.get("evidence_cid")
+    )
+    provenance_cid = (
+        raw_provenance_cid.strip()
+        if isinstance(raw_provenance_cid, str)
+        else ""
+    )
+    if not provenance_cid or record.get("validation_passed") is not True:
+        return False
+    record_tree = str(
+        record.get("repository_tree") or record.get("tree_id") or ""
+    ).strip()
+    if expected_tree:
+        if not record_tree or record_tree != expected_tree:
+            return False
+    freshness = record.get("freshness")
+    if isinstance(freshness, Mapping) and freshness.get("fresh") is False:
+        return False
+    if str(freshness or "").strip().lower() in {"stale", "expired", "false"}:
+        return False
+    return True
+
+
+def _evidence_ids_for_goal(
+    payload: Mapping[str, Any],
+    goal_id: str,
+    *,
+    expected_tree: str = "",
+) -> list[str]:
+    """Extract admissible IDs from PTR-120 or strict simplified evidence."""
+
+    has_per_goal_surface = (
+        "goals" in payload or "goal_evidence" in payload
+    )
+    per_goal = (
+        payload.get("goals")
+        if "goals" in payload
+        else payload.get("goal_evidence")
+    )
+    if per_goal is None:
+        per_goal = {}
+    if has_per_goal_surface and not isinstance(per_goal, Mapping):
+        return []
+    if isinstance(per_goal, Mapping):
+        if goal_id not in per_goal:
+            return []
+        value = per_goal[goal_id]
+        if isinstance(value, Mapping):
+            if "completion_evidence_records" in value:
+                records = value.get("completion_evidence_records")
+                if not isinstance(records, Sequence) or isinstance(
+                    records, (str, bytes)
+                ):
+                    return []
+                return [
+                    str(
+                        record.get("provenance_cid")
+                        or record.get("evidence_cid")
+                    ).strip()
+                    for record in records
+                    if _canonical_record_is_admissible(
+                        record, expected_tree=expected_tree
+                    )
+                ]
+            cids = value.get("evidence_cids") or value.get("cids") or []
+            if isinstance(cids, Sequence) and not isinstance(cids, (str, bytes)):
+                return [
+                    item.strip()
+                    for item in cids
+                    if isinstance(item, str) and item.strip()
+                ]
+            return []
+        if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+            return [
+                item.strip()
+                for item in value
+                if isinstance(item, str) and item.strip()
+            ]
+        return []
+
+    records = payload.get("records") or payload.get("evidence") or []
+    cids: list[str] = []
+    if isinstance(records, Sequence) and not isinstance(records, (str, bytes)):
+        for item in records:
+            if not isinstance(item, Mapping):
+                continue
+            if str(item.get("goal_id") or "").strip() != goal_id:
+                continue
+            cid = item.get("provenance_cid") or item.get("cid")
+            if isinstance(cid, str) and cid.strip():
+                cids.append(cid.strip())
+    return cids
 
 
 # ---------------------------------------------------------------------------
@@ -1623,21 +1836,76 @@ class ProofTestReuseObjectiveReconciler:
                 messages.append(health_reason)
 
         artifact_messages: list[str] = []
-        if not self.skip_artifact_check and not self.report_only:
+        if not self.skip_artifact_check:
             tree = str(checkout_payload.get("tree") or "")
-            for path in (self.gate_path, self.evidence_path):
+            for artifact_kind, path in (
+                ("gate", self.gate_path),
+                ("evidence", self.evidence_path),
+            ):
                 if not path.is_file():
-                    # Artifacts may be produced during closeout itself; absence
-                    # before phase three is a soft gap for diagnosis, hard only
-                    # when phase three runs without synthetic evidence.
                     artifact_messages.append(f"absent:{path.name}")
+                    if (
+                        artifact_kind == "evidence"
+                        and not self.report_only
+                        and not self.allow_synthetic_evidence
+                    ):
+                        reason_codes.extend(
+                            f"missing_evidence:{goal_id}"
+                            for goal_id in CHILD_GOAL_IDS
+                        )
+                    else:
+                        reason_codes.append(
+                            f"missing_{artifact_kind}_artifact"
+                        )
+                    messages.append(f"artifact missing: {path}")
                     continue
                 ok, detail = artifact_freshness(
                     artifact_path=path, expected_tree=tree
                 )
                 if not ok:
-                    reason_codes.append("stale_artifact")
+                    reason_code = _artifact_reason_code(
+                        artifact_kind=artifact_kind,
+                        detail=detail,
+                    )
+                    if (
+                        not self.report_only
+                        and reason_code.startswith(
+                            ("mismatched_", "stale_")
+                        )
+                    ):
+                        reason_code = "stale_artifact"
+                    reason_codes.append(reason_code)
                     messages.append(detail)
+                    artifact_messages.append(detail)
+                    continue
+                payload = _read_json(path)
+                if artifact_kind == "gate":
+                    gate_ok, gate_reason, gate_detail = (
+                        _gate_artifact_readiness(payload)
+                    )
+                    if not gate_ok:
+                        reason_codes.append(gate_reason)
+                        messages.append(gate_detail)
+                        artifact_messages.append(gate_detail)
+                elif not self.allow_synthetic_evidence:
+                    missing_goal_evidence = [
+                        goal_id
+                        for goal_id in CHILD_GOAL_IDS
+                        if not _evidence_ids_for_goal(
+                            payload,
+                            goal_id,
+                            expected_tree=tree,
+                        )
+                    ]
+                    for goal_id in missing_goal_evidence:
+                        reason_codes.append(f"missing_evidence:{goal_id}")
+                    if missing_goal_evidence:
+                        detail = (
+                            "evidence artifact lacks admissible evidence for: "
+                            + ", ".join(missing_goal_evidence)
+                        )
+                        messages.append(detail)
+                        artifact_messages.append(detail)
 
         optional_gaps = self._collect_optional_gaps()
         # Optional gaps never block readiness.
@@ -1697,31 +1965,21 @@ class ProofTestReuseObjectiveReconciler:
 
     def _evidence_for_goal(self, goal_id: str) -> list[str]:
         if self.synthetic_evidence_cids and goal_id in self.synthetic_evidence_cids:
-            return [str(item) for item in self.synthetic_evidence_cids[goal_id]]
+            return [
+                str(item)
+                for item in self.synthetic_evidence_cids[goal_id]
+                if str(item).strip()
+            ]
         evidence = _read_json(self.evidence_path)
         if not evidence:
             if self.allow_synthetic_evidence:
                 return [f"synthetic:{goal_id}"]
             return []
-        per_goal = evidence.get("goals") or evidence.get("goal_evidence") or {}
-        if isinstance(per_goal, Mapping) and goal_id in per_goal:
-            value = per_goal[goal_id]
-            if isinstance(value, Mapping):
-                cids = value.get("evidence_cids") or value.get("cids") or []
-                return [str(item) for item in cids]
-            if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
-                return [str(item) for item in value]
-        records = evidence.get("records") or evidence.get("evidence") or []
-        cids: list[str] = []
-        if isinstance(records, Sequence):
-            for item in records:
-                if not isinstance(item, Mapping):
-                    continue
-                if str(item.get("goal_id") or "") not in {"", goal_id}:
-                    continue
-                cid = item.get("provenance_cid") or item.get("cid") or ""
-                if cid:
-                    cids.append(str(cid))
+        cids = _evidence_ids_for_goal(
+            evidence,
+            goal_id,
+            expected_tree=_artifact_repository_tree(evidence),
+        )
         if not cids and self.allow_synthetic_evidence:
             return [f"synthetic:{goal_id}"]
         return cids
@@ -1744,16 +2002,23 @@ class ProofTestReuseObjectiveReconciler:
         ok, detail = artifact_freshness(
             artifact_path=self.gate_path, expected_tree=repository_tree
         )
-        if not ok and not self.allow_synthetic_evidence:
+        if not ok:
             return {
                 "admitted": False,
-                "reason_codes": ["stale_or_mismatched_gate", detail],
+                "reason_codes": [
+                    _artifact_reason_code(
+                        artifact_kind="gate",
+                        detail=detail,
+                    ),
+                    detail,
+                ],
             }
         payload = _read_json(self.gate_path)
-        if payload.get("passed") is False:
+        gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(payload)
+        if not gate_ok:
             return {
                 "admitted": False,
-                "reason_codes": ["gate_failed"],
+                "reason_codes": [gate_reason, gate_detail],
                 "gate": payload,
             }
         # Admit: bind gate digest into evidence path companion record when
@@ -1769,7 +2034,7 @@ class ProofTestReuseObjectiveReconciler:
                 else b""
             ),
             "repository_tree": repository_tree,
-            "passed": payload.get("passed", True),
+            "passed": True,
         }
         return admission
 
