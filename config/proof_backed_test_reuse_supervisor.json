@@ -213,7 +213,7 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-03",
-    "reviewRevision": "production-runtime-activation-repair-v3",
+    "reviewRevision": "production-runtime-activation-repair-v4",
     "implementationTaskIds": [
       "PTR-143",
       "PTR-144",
@@ -224,7 +224,10 @@
       "PTR-149",
       "PTR-150",
       "PTR-151",
-      "PTR-152"
+      "PTR-152",
+      "PTR-153",
+      "PTR-154",
+      "PTR-155"
     ],
     "initialClaimableTaskIds": [
       "PTR-150",
@@ -243,6 +246,11 @@
     "reconciliationPhases": 3,
     "closeoutControllerTaskId": "PTR-121",
     "operatorHandoffTaskId": "PTR-149",
+    "proofMaterialAndContextWaveTaskIds": [
+      "PTR-153",
+      "PTR-154"
+    ],
+    "exactV4PublicationJoinTaskId": "PTR-155",
     "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
   },
   "providerPolicy": {

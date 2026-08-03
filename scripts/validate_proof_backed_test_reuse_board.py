@@ -139,6 +139,9 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-150",
         "PTR-151",
         "PTR-152",
+        "PTR-153",
+        "PTR-154",
+        "PTR-155",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -192,9 +195,10 @@ PRODUCTION_ACTIVATION_PARALLEL_WAVE = frozenset(
     {"PTR-144", "PTR-145", "PTR-146"}
 )
 PRODUCTION_CORRECTION_TASK_IDS = frozenset(
-    {"PTR-150", "PTR-151", "PTR-152"}
+    {"PTR-150", "PTR-151", "PTR-152", "PTR-153", "PTR-154", "PTR-155"}
 )
 PRODUCTION_CORRECTION_WAVE_ONE = frozenset({"PTR-150", "PTR-151"})
+PROOF_MATERIAL_CONTEXT_WAVE = frozenset({"PTR-153", "PTR-154"})
 REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS = frozenset(
     PRODUCTION_ACTIVATION_TASK_IDS | PRODUCTION_CORRECTION_TASK_IDS
 )
@@ -289,10 +293,13 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-146": frozenset({"PTR-143"}),
     "PTR-147": frozenset({"PTR-144", "PTR-145", "PTR-146"}),
     "PTR-148": frozenset({"PTR-147"}),
-    "PTR-149": frozenset({"PTR-152"}),
+    "PTR-149": frozenset({"PTR-155"}),
     "PTR-150": frozenset({"PTR-148"}),
     "PTR-151": frozenset({"PTR-148"}),
     "PTR-152": frozenset({"PTR-150", "PTR-151"}),
+    "PTR-153": frozenset({"PTR-152"}),
+    "PTR-154": frozenset({"PTR-152"}),
+    "PTR-155": frozenset({"PTR-153", "PTR-154"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -325,6 +332,9 @@ REQUIRED_ACCELERATOR_TASKS = frozenset(
         "PTR-149",
         "PTR-150",
         "PTR-152",
+        "PTR-153",
+        "PTR-154",
+        "PTR-155",
     }
 )
 REQUIRED_KIT_TASKS = frozenset(
@@ -376,6 +386,8 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "proof_reuse/plugin.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
             "proof_reuse/services.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/xdist.py",
         }
     ),
     "PTR-139": frozenset(
@@ -511,12 +523,18 @@ REQUIRED_RUNTIME_TASK_PATHS = {
     ),
     "PTR-152": frozenset(
         {
+            "external/ipfs_accelerate/docs/guides/"
+            "TEST_PROOF_REUSE_DEPENDENCY_PROVISIONING.md",
             "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
             "proof_reuse/publication.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
             "proof_reuse/lazy_dependencies.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/reporting.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
             "proof_reuse/services.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/xdist.py",
             "external/ipfs_accelerate/test/api/"
             "test_proof_reuse_controller_issuance.py",
             "external/ipfs_accelerate/test/api/"
@@ -525,6 +543,46 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "test_proof_reuse_runtime_activation_report.py",
             "external/ipfs_accelerate/test/api/"
             "test_proof_reuse_default_runtime_services.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_pytest_proof_reuse_xdist.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_accelerator_zero_config.py",
+        }
+    ),
+    "PTR-153": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/services.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
+            "integrations/ipfs_datasets_test_certificate_provider.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_issued_material_retention.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_agent_supervisor_ipfs_datasets_test_certificate_provider.py",
+        }
+    ),
+    "PTR-154": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/candidate_publication.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/receipt.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/xdist.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_candidate_publication_context.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_pytest_proof_reuse_xdist.py",
+        }
+    ),
+    "PTR-155": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/testing/"
+            "proof_reuse/publication.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_controller_issuance.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_proof_reuse_v4_publication_integration.py",
         }
     ),
 }
@@ -814,7 +872,7 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "production-runtime-activation-repair-v3"
+        "production-runtime-activation-repair-v4"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
@@ -848,6 +906,14 @@ def validate(
         errors.append("objective closeout controller task must be PTR-121")
     if objective_projection.get("operatorHandoffTaskId") != "PTR-149":
         errors.append("objective operator handoff task must be PTR-149")
+    if frozenset(
+        objective_projection.get("proofMaterialAndContextWaveTaskIds") or ()
+    ) != PROOF_MATERIAL_CONTEXT_WAVE:
+        errors.append(
+            "objective proof-material/context wave task inventory mismatch"
+        )
+    if objective_projection.get("exactV4PublicationJoinTaskId") != "PTR-155":
+        errors.append("objective exact-v4 publication join task must be PTR-155")
     projection_path_fields = (
         "gatePathSuffix",
         "evidencePathSuffix",
@@ -1571,7 +1637,7 @@ def validate(
     simulated_correction_join_completed = (
         simulated_correction_wave_completed | {"PTR-152"}
     )
-    simulated_handoff_claimable = {
+    simulated_material_context_claimable = {
         task_id
         for task_id in PRODUCTION_CORRECTION_TASK_IDS | {"PTR-149"}
         if task_id not in simulated_correction_join_completed
@@ -1579,9 +1645,58 @@ def validate(
             simulated_correction_join_completed
         )
     }
+    if simulated_material_context_claimable != PROOF_MATERIAL_CONTEXT_WAVE:
+        errors.append(
+            "current-v4 authority join must make the proof-material/context "
+            f"wave claimable, got {sorted(simulated_material_context_claimable)}"
+        )
+    material_context_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in PROOF_MATERIAL_CONTEXT_WAVE
+    } if lane_count > 0 else set()
+    if material_context_shards != {0, 1}:
+        errors.append(
+            "proof-material/context wave must cover numeric shards 0 and 1, "
+            f"got {sorted(material_context_shards)}"
+        )
+    material_context_overlap = sorted(
+        predicted_by_task["PTR-153"] & predicted_by_task["PTR-154"]
+    )
+    if material_context_overlap:
+        errors.append(
+            "proof-material/context wave predicted files must be disjoint, got "
+            f"{material_context_overlap}"
+        )
+    simulated_material_context_completed = (
+        simulated_correction_join_completed | PROOF_MATERIAL_CONTEXT_WAVE
+    )
+    simulated_publication_join_claimable = {
+        task_id
+        for task_id in PRODUCTION_CORRECTION_TASK_IDS | {"PTR-149"}
+        if task_id not in simulated_material_context_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_material_context_completed
+        )
+    }
+    if simulated_publication_join_claimable != {"PTR-155"}:
+        errors.append(
+            "proof-material/context wave must make only PTR-155 claimable, got "
+            f"{sorted(simulated_publication_join_claimable)}"
+        )
+    simulated_publication_join_completed = (
+        simulated_material_context_completed | {"PTR-155"}
+    )
+    simulated_handoff_claimable = {
+        task_id
+        for task_id in PRODUCTION_CORRECTION_TASK_IDS | {"PTR-149"}
+        if task_id not in simulated_publication_join_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_publication_join_completed
+        )
+    }
     if simulated_handoff_claimable != {"PTR-149"}:
         errors.append(
-            "current-v4 correction join must make only PTR-149 claimable, got "
+            "exact-v4 publication join must make only PTR-149 claimable, got "
             f"{sorted(simulated_handoff_claimable)}"
         )
 
@@ -1711,6 +1826,13 @@ def validate(
             production_correction_resource_width
         ),
         "reviewed_production_correction_join_task_id": "PTR-152",
+        "reviewed_proof_material_context_wave_task_ids": sorted(
+            PROOF_MATERIAL_CONTEXT_WAVE
+        ),
+        "reviewed_proof_material_context_wave_shards": sorted(
+            material_context_shards
+        ),
+        "reviewed_exact_v4_publication_join_task_id": "PTR-155",
         "reviewed_operator_handoff_task_id": "PTR-149",
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(

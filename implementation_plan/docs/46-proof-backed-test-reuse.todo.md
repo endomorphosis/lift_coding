@@ -74,18 +74,21 @@ candidate, the default issuer had no real prover, and the purported e2e built a
 deterministic pseudo-certificate or manually injected item/services rather than
 running two independent direct-node pytest processes.
 
-The reviewed corrective population now covers `PTR-143` through `PTR-152`, with
+The reviewed corrective population now covers `PTR-143` through `PTR-155`, with
 the dependency-ordered `PTR-149` operator handoff deliberately last, bringing
-the sealed population to 63 tasks. `PTR-143` through `PTR-148` retain their
+the sealed population to 66 tasks. `PTR-143` through `PTR-148` retain their
 historical completion identities, but their pre-v4 evidence cannot authorize
-closeout. The current claimable wave is exactly `PTR-150` and `PTR-151` on
+closeout. The initial claimable wave is exactly `PTR-150` and `PTR-151` on
 numeric shards 0 and 1, owning accelerator and datasets without predicted-file
-overlap. `PTR-152` joins both branches on shard 2, then `PTR-149` evaluates the
-exact 63-task authority gate. Historical `PTR-142`, 53-task, or pre-v4 60-task
-evidence cannot satisfy this production-activation premise. Missing trusted
-setup, reviewed current v4 keys, native compiler, network, endpoint, cache, or
-optional package always leaves a typed activation gap and runs tests; it never
-blocks the supervisor or manufactures skip/closeout authority.
+overlap. `PTR-152` joins both branches on shard 2 and establishes the fail-closed
+authority boundary. `PTR-153` and `PTR-154` then preserve proof-bearing issued
+material and controller-owned expected context in parallel on shards 0 and 1;
+`PTR-155` joins them on shard 2 before `PTR-149` evaluates the exact 66-task
+authority gate. Historical `PTR-142`, 53-task, pre-v4 60-task, or pre-material
+63-task evidence cannot satisfy this production-activation premise. Missing
+trusted setup, reviewed current v4 keys, native compiler, network, endpoint,
+cache, or optional package always leaves a typed activation gap and runs tests;
+it never blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-000 Seal the supervisor-native program
 
@@ -1979,7 +1982,7 @@ blocks the supervisor or manufactures skip/closeout authority.
 - Evidence subset: Installed/source-tree accelerator, datasets and kit bootstrap, direct node selection, persistent isolated cache, real local Groth16 proof, body side-effect log, pytest terminal outcomes, missing-backend fail-open case and perf-counter samples
 - Acceptance: For one unmodified direct node in each repository, with no set_proof_reuse_services call, item monkeypatch, lookup request fixture, fake verifier, pseudo-certificate, or per-test registry, the first independent pytest process reports one pass, executes the body once, captures a complete trace and publishes a locally verified real Groth16 certificate; the second process using the same cache reports exactly one standard proof-cache skip and the body log remains one line; missing Groth16 runs and passes the test on both invocations without blocking; measured subprocess samples derive from actual cold execution and warm verification, retain raw timings, show zero false skips and demonstrate positive saved wall time without synthetic constants; and all three repository bootstraps satisfy the same assertions.
 
-## PTR-149 Refresh live capability reporting, the 63-task gate, and operator handoff
+## PTR-149 Refresh live capability reporting, the 66-task gate, and operator handoff
 
 - Status: todo
 - Completion: manual
@@ -1987,7 +1990,7 @@ blocks the supervisor or manufactures skip/closeout authority.
 - Review only: false
 - Priority: P0
 - Track: production-activation-authority-closeout
-- Depends on: PTR-152
+- Depends on: PTR-155
 - Goal id: PTR-G110
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/docs/architecture/TEST_PROOF_REUSE_RUNTIME_ACTIVATION_HANDOFF.md
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_subprocess_benchmark.py -q
@@ -2000,20 +2003,20 @@ blocks the supervisor or manufactures skip/closeout authority.
 - Predicted symbols: ProofReuseRuntimeActivationReport, proof_reuse_runtime_activation_report, PRODUCTION_RUNTIME_ACTIVATION_TASK_IDS, production activation operator handoff
 - Interfaces: ProofReuseServices@1, ProofReuseRuntimeActivationReport@1, ProofTestReuseCurrentTreeGateDecision@1, ProofReuseBenchmarkReceipt@1
 - Submodules: external/ipfs_accelerate
-- Generated artifacts: live typed capability report, genuine production-activation evidence packet, exact 63-task gate vectors, truthful activation-gap packet and corrected operator runbook
+- Generated artifacts: live typed capability report, genuine production-activation evidence packet, exact 66-task gate vectors, truthful activation-gap packet and corrected operator runbook
 - Conflict policy: Report only capabilities actually composed and probed in the current process/tree; source-symbol presence, historical PTR-142 fixtures, task labels, simulated proof and optimistic booleans are inadmissible, and only the existing outer controller may write objective lifecycle state.
 - Symbolic first: true
 - LLM context budget bytes: 65536
 - Provider role: codex-implement
 - Context budget tokens: 16384
-- Preconditions: PTR-152 joined explicit accelerator provisioning with the reviewed datasets v4 native release and proved fail-closed current source, binary, capability, circuit and key provenance after PTR-148's genuine three-repository cold/warm and measured benchmark evidence.
-- Effects: Replaces hard-coded activation inventory with live typed service/capability reporting, expands final authority to the exact 63-task population, requires fresh ten-task corrective-wave evidence, publishes a truthful activation gap when reviewed authority artifacts are absent, and publishes the explicit operator closeout handoff only when they are present and valid.
-- Evidence subset: Live default composition and capability probes, all ten reviewed correction task receipts, exact reviewed v4 native source/binary/capability and circuit/key manifests, real Groth16 proof/certificate CIDs, three-repository two-process outcomes, raw benchmark samples, zero-false-skip assurance, supervisor health and current repository/objective identities
-- Acceptance: Reporting derives availability from live typed services and bounded non-mutating probes and never imports, installs, builds, downloads NLTK data, runs trusted setup, or generates keys merely to claim readiness; it reports native Groth16 installation/readiness separately from test-certificate authority, and neither the generic pre-PTR-144 knowledge-of-axioms backend nor an unmanifested native binary can satisfy the latter; the current-tree gate requires exactly all 63 tasks plus fresh authoritative production-runtime-activation evidence produced by PTR-149 covering PTR-143 through PTR-152; positive authority must bind the genuine no-injection three-repository two-process results, a locally verified real current-v4 Groth16 certificate, exact reviewed source/binary/capability/circuit/key identities, measured subprocess benchmark, zero false skips, current tree/forest/policy identities and healthy supervisor; absent operator-provided reviewed v4 keys or trusted-setup manifest yields an explicit activation gap, continues running tests, and cannot produce a false warm skip or closeout; any PTR-142, 53-task, pre-v4 60-task, injected, pseudo-certificate, synthetic-timing, missing, stale, substituted, or mismatched evidence fails closed; all validations run with proof reuse off; and the runbook invokes the existing fenced outer closeout only after the board is closed, the refreshed gate passes, and an operator reviews the protected lifecycle update.
+- Preconditions: PTR-155 joined the PTR-153/PTR-154 proof-material and controller-context branches into exact local v4 verification and atomic publication after PTR-152 established the fail-closed authority boundary.
+- Effects: Replaces hard-coded activation inventory with live typed service/capability reporting, expands final authority to the exact 66-task population, requires fresh thirteen-task corrective-wave evidence, publishes a truthful activation gap when reviewed authority artifacts are absent, and publishes the explicit operator closeout handoff only when they are present and valid.
+- Evidence subset: Live default composition and capability probes, all thirteen reviewed correction task receipts, exact reviewed v4 native source/binary/capability and circuit/key manifests, real Groth16 proof/certificate CIDs, three-repository two-process outcomes, raw benchmark samples, zero-false-skip assurance, supervisor health and current repository/objective identities
+- Acceptance: Reporting derives availability from live typed services and bounded non-mutating probes and never imports, installs, builds, downloads NLTK data, runs trusted setup, or generates keys merely to claim readiness; it reports native Groth16 installation/readiness separately from test-certificate authority, and neither the generic pre-PTR-144 knowledge-of-axioms backend nor an unmanifested native binary can satisfy the latter; the current-tree gate requires exactly all 66 tasks plus fresh authoritative production-runtime-activation evidence produced by PTR-149 covering PTR-143 through PTR-155; positive authority must bind the genuine no-injection three-repository two-process results, a locally verified real current-v4 Groth16 certificate, controller-owned receipt/candidate context, retained proof-bearing issuance material, exact reviewed source/binary/capability/circuit/key identities, measured subprocess benchmark, zero false skips, current tree/forest/policy identities and healthy supervisor; absent operator-provided reviewed v4 keys or trusted-setup manifest yields an explicit activation gap, continues running tests, and cannot produce a false warm skip or closeout; any PTR-142, 53-task, pre-v4 60-task, pre-material 63-task, injected, pseudo-certificate, structural-only verification, synthetic-timing, missing, stale, substituted, or mismatched evidence fails closed; all validations run with proof reuse off; and the runbook invokes the existing fenced outer closeout only after the board is closed, the refreshed gate passes, and an operator reviews the protected lifecycle update.
 
 ## PTR-150 Add explicit setup-facing lazy proof-reuse provisioning
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -2045,7 +2048,7 @@ blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-151 Publish an auditable v4-capable native Groth16 backend without automatic trusted setup
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -2077,7 +2080,7 @@ blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-152 Fail-closed accelerator Groth16 v4 authority and lazy-runtime hardening
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -2085,14 +2088,14 @@ blocks the supervisor or manufactures skip/closeout authority.
 - Track: production-v4-authority
 - Depends on: PTR-150, PTR-151
 - Goal id: PTR-G060
-- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
+- Outputs: external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_DEPENDENCY_PROVISIONING.md, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py, external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/production-v4-authority
 - Parallel lane: ptr-production-v4-authority
 - Resource class: test-large
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py
+- Predicted files: external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_DEPENDENCY_PROVISIONING.md, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lazy_dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/reporting.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_lazy_provisioning.py, external/ipfs_accelerate/test/api/test_proof_reuse_runtime_activation_report.py, external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py, external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_accelerator_zero_config.py
 - Predicted symbols: Groth16V4AuthorityManifest, current native release verifier, effective proof-reuse runtime capability report, isolated lazy pip invocation
 - Interfaces: ProofReuseServices@1, LazyDependencyProvisioner@1, ProofReuseRuntimeActivationReport@1, Groth16NativeReleaseManifest@1, TestExecutionCertificateV2
 - Submodules: external/ipfs_accelerate
@@ -2103,6 +2106,102 @@ blocks the supervisor or manufactures skip/closeout authority.
 - Provider role: codex-implement
 - Context budget tokens: 16384
 - Preconditions: PTR-150 exposes explicit setup-facing provisioning through the bounded accelerator lazy installer, and PTR-151 publishes the reviewed artifact-free v4 capability contract plus exact datasets native binary/source release manifest without production keys.
-- Effects: Enforces a two-gate native-release-and-key-manifest authority policy at accelerator issuance/publication, reports installed/readiness/authority states truthfully, and makes lazy pip execution isolated and sanitized while preserving typed RUN/DEFERRED behavior for every optional-capability failure.
+- Effects: Enforces a two-gate native-release-and-key-manifest authority policy at accelerator issuance/publication, rejects structural-only or context-free certificate publication, reports installed/readiness/authority states truthfully, and makes lazy pip execution isolated and sanitized while preserving typed RUN/DEFERRED behavior for every optional-capability failure; PTR-153 through PTR-155 complete the positive proof-material/context/V2-publication path without weakening this denial boundary.
 - Evidence subset: manifest schema/version, exact native binary and locked-source digests, artifact-free capability payload, provider/circuit/statement-profile identity, proving/verifying-key byte digests, environment substitution attacks, legacy bundled binary/key cases, installed-wheel source discovery, effective build/install policy, sanitized pip argv/environment and missing-dependency outcomes
-- Acceptance: No arbitrary environment key directory, unverifiable source checkout, unmanifested native binary, or bundled statement-profile v1-v3 binary/key pair can authorize publication or a warm skip; positive current-v4 authority requires both a reviewed native release manifest binding the exact executable digest, locked source identity and artifact-free v4 capability payload and a separate reviewed operator-provided key manifest binding exact proving/verifying-key byte digests, provider, circuit, statement profile and release identity; manifest schema/version and every bound digest are inspected locally before issuance, and the certificate is locally verified against those exact public artifacts before atomic indexing; absent source discovery, binary, capabilities, key files, either manifest, Cargo/compiler/network/cache, or any stale/substituted/mismatched input returns RUN/DEFERRED without losing the original pass, blocking the supervisor, or generating trusted setup/keys; reporting distinguishes package availability, native installation, native v4 readiness and authoritative certificate readiness, includes the effective automatic-build/install policy and precise typed gap, and never claims readiness from source symbols alone; lazy pip uses an isolated interpreter invocation with a sanitized bounded environment and allowlisted requirement rather than inheriting repository import paths or installer-control variables; and the focused zero-configuration tests prove that individual tests still pick up the normal package-level injection while missing capabilities execute normally.
+- Acceptance: No arbitrary environment key directory, unverifiable source checkout, unmanifested native binary, bundled statement-profile v1-v3 binary/key pair, attached xdist certificate, legacy issuer fallback, missing controller context, or structural-only verifier result can authorize publication or a warm skip; current-v4 readiness requires both a reviewed native release manifest binding the exact executable digest, locked source identity and artifact-free v4 capability payload and a separate hardcoded-review-authorized operator key manifest binding exact proving/verifying-key byte digests, provider, circuit, statement profile and release identity; manifest schema/version and every bound digest are inspected locally, and publication is denied unless a provenance-ready binding and cryptographic verifier can consume controller-owned inputs; absent source discovery, binary, capabilities, key files, either manifest, Cargo/compiler/network/cache, publication transaction, issuer, verifier, complete V2 context, or any stale/substituted/mismatched input returns RUN/DEFERRED or retains a non-authoritative receipt without losing the original pass, blocking the supervisor, generating trusted setup/keys, or writing a candidate; reporting distinguishes package availability, native installation, native v4 readiness and authoritative certificate readiness, includes the effective automatic-build/install policy and precise typed gap, and never claims readiness from source symbols alone; lazy pip uses an isolated interpreter invocation with a sanitized bounded environment and allowlisted requirement rather than inheriting repository import paths or installer-control variables; and the focused zero-configuration tests prove that individual tests still pick up the normal package-level injection while missing capabilities execute normally.
+
+## PTR-153 Preserve proof-bearing issuance material across the lazy real issuer
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: proof-material-retention
+- Depends on: PTR-152
+- Goal id: PTR-G050
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py, external/ipfs_accelerate/test/api/test_proof_reuse_issued_material_retention.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider external/ipfs_accelerate/test/api/test_proof_reuse_issued_material_retention.py external/ipfs_accelerate/test/api/test_proof_reuse_default_runtime_services.py external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/proof-material-retention
+- Parallel lane: ptr-proof-material-retention
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/integrations/ipfs_datasets_test_certificate_provider.py, external/ipfs_accelerate/test/api/test_proof_reuse_issued_material_retention.py, external/ipfs_accelerate/test/api/test_agent_supervisor_ipfs_datasets_test_certificate_provider.py
+- Predicted symbols: ProofBearingIssuanceMaterial, LazyRealTestCertificateIssuer.issue_material
+- Interfaces: IssuedTestCertificateMaterial, LazyRealTestCertificateIssuer@1, TestExecutionCertificateV2
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: bounded in-memory public proof/certificate material and typed deferred dispositions; no witness, trusted setup or persisted keys
+- Conflict policy: Preserve only public proof-bearing issuer output behind a typed interface; never serialize private witness material, log proof bytes, trust certificate self-claims, or change controller publication authority.
+- Symbolic first: true
+- LLM context budget bytes: 57344
+- Provider role: codex-implement
+- Context budget tokens: 14336
+- Preconditions: PTR-152 rejects every publication lacking provenance-ready bindings and cryptographic verification.
+- Effects: Binds actual native prove/verify and key consumption to the exact reviewed bytes at the moment of use, then separates the public proof-bearing material returned by that issuer from its lightweight disposition so controller code can reverify the real proof without importing datasets internals eagerly.
+- Evidence subset: Issued/deferred/rejected provider results, prove/verify executable and key substitution races, immutable descriptor or FD-bound execution, proof and certificate byte bounds, witness redaction, exception paths, lazy import/provisioning behavior and material lifetime
+- Acceptance: Actual prove and verify never execute a mutable path merely because an earlier capability probe hashed it: the provider uses an immutable private snapshot/FD-bound executable and exact key bytes or revalidates identity atomically at each use, launches with a strict allowlisted child environment that excludes loader/interpreter injection such as LD_PRELOAD and DYLD variables, overwrites rather than inherits the pinned artifacts root, and every post-binding binary/key replacement, alternate ambient artifacts root, or environment injection defers without executing the substituted input; a successful exact v4 issuance returns one typed public material object containing the complete certificate/proof needed for local verification plus its reviewed artifact bindings, while deferred/rejected/unavailable results contain no authority; no private witness or secret key bytes cross the interface or enter logs/receipts; malformed, oversized, provenance-mismatched or structurally incomplete provider output is rejected; cold import and test collection remain installer/network/build free; and all failures retain the original pass and produce typed RUN/DEFERRED behavior.
+
+## PTR-154 Preserve bounded controller-owned candidate context through xdist
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: controller-verification-context
+- Depends on: PTR-152
+- Goal id: PTR-G060
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/candidate_publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_candidate_publication_context.py, external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider external/ipfs_accelerate/test/api/test_proof_reuse_candidate_publication_context.py external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py external/ipfs_accelerate/test/api/test_proof_reuse_receipt.py
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/controller-verification-context
+- Parallel lane: ptr-controller-verification-context
+- Resource class: test-large
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/candidate_publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_candidate_publication_context.py, external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py
+- Predicted symbols: ControllerOwnedV2VerificationContext, CandidatePublicationEnvelope retained components, bounded xdist context handoff
+- Interfaces: CandidatePublicationEnvelope@1, DeferredTestCertificateRequest, TestPassReceipt@1, TestExecutionKey@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: bounded public receipt/candidate CAS components and CID-bound xdist handoff records; no proof authority or private witness
+- Conflict policy: Workers may propose bounded public bytes and CIDs only; the controller reconstructs and rehashes all context, locator/index data remains non-authoritative, and missing/oversized/malformed context is retained only as a receipt or discarded.
+- Symbolic first: true
+- LLM context budget bytes: 57344
+- Provider role: grok-implement
+- Context budget tokens: 14336
+- Preconditions: PTR-152 routes every serial and xdist publication through one fail-closed controller transaction and forbids direct candidate-store writes.
+- Effects: Retains or retrieves the canonical public receipt, candidate context and V2 request pins required for controller-side reconstruction instead of reducing the handoff to receipt IDs or trusting fields copied from an attached certificate.
+- Evidence subset: Serial and xdist intent codecs, canonical component CIDs, per-field and aggregate byte bounds, mutation/substitution, duplicate/reordered delivery, worker crash, transaction unavailability and receipt-only fallback
+- Acceptance: The controller can reconstruct exact receipt/execution/candidate/policy/statement/circuit/key/issuer/epoch/backend pins from bounded controller-owned or CID-rehashed public bytes; xdist transport never silently truncates a required field, and all transported bytes are size-limited and rehashed before use; certificate fields cannot fill or override missing expected values; direct put_candidate and legacy issuer fallbacks remain unreachable; missing, malformed, oversized, stale or substituted context produces receipt-only RUN/DEFERRED behavior with no candidate publication; and serial/direct-node behavior uses the same context contract without a test-file registry.
+
+## PTR-155 Join exact Groth16 v4 verification and atomic candidate publication
+
+- Status: todo
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: exact-v4-controller-publication
+- Depends on: PTR-153, PTR-154
+- Goal id: PTR-G100
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_v4_publication_integration.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py external/ipfs_accelerate/test/api/test_proof_reuse_v4_publication_integration.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/exact-v4-controller-publication
+- Parallel lane: ptr-exact-v4-controller-publication
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/test/api/test_proof_reuse_controller_issuance.py, external/ipfs_accelerate/test/api/test_proof_reuse_v4_publication_integration.py
+- Predicted symbols: ControllerV2VerificationContext, verify_test_execution_certificate_v2 publication adapter, atomic verified candidate transaction
+- Interfaces: IssuedTestCertificateMaterial, TestPassCircuitBinding, CertificateVerificationStatus.VERIFIED, TestCertificateStore.put_candidate
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: disposable test-only v4 proof/certificate/key fixtures and atomic candidate receipts under temporary roots; no production key or trusted-setup artifact is committed
+- Conflict policy: Build expected public inputs exclusively from controller-owned PTR-154 context, consume PTR-153 public proof material, use only exact provenance-validated datasets modules/backend/artifact roots, and keep deterministic test-only setup explicitly non-production.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: codex-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-153 preserves complete bounded public issuance material and PTR-154 preserves complete bounded controller-owned expected context without granting either branch publication authority.
+- Effects: Reconstructs the exact datasets DeferredTestCertificateRequest and TestPassCircuitBinding, invokes verify_test_execution_certificate_v2 with the pinned backend and expected candidate-context CID, and performs the sole atomic put_candidate only after VERIFIED.
+- Evidence subset: Exact PTR-151 source/module provenance, release/key manifests, controller expected inputs, genuine native proof, local V2 verifier status, artifact substitution, proof tampering, context mutation, atomic store ordering and deterministic test-only versus production authority labels
+- Acceptance: One disposable explicitly test-only current-v4 fixture proves the complete issue-material to controller-context to local-V2-verify to atomic-publication path and is never counted as reviewed production authority; production publication requires the hardcoded-reviewed key-manifest allowlist, exact PTR-151 source/binary/capability/artifact bindings, immutable/FD-bound actual prove and verify inputs, and CertificateVerificationStatus.VERIFIED from verify_test_execution_certificate_v2 with the expected candidate-context CID; no structural boolean, injected verifier, certificate self-claim, alternate module/provider, stale or swapped binary/key artifact, changed context or missing proof can reach put_candidate; put_candidate occurs exactly once and only after verification, while all failures retain non-authoritative receipts and run future tests; and no trusted setup, key generation, build, download or network call occurs during import, collection, ordinary setup, or verification.

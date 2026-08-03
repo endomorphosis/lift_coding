@@ -349,7 +349,7 @@ mislabeling.
   diagnostic/configuration capability only, not an implemented remote issuer;
   its absence never blocks launch or test execution. A future authenticated
   endpoint client requires a separately reviewed trust/transport task and is
-  not completion evidence for this 63-task board.
+  not completion evidence for this 66-task board.
 - Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
   provider or diagnostic endpoint state records `certificate_deferred` and
   does not change the passed test.
@@ -679,9 +679,12 @@ staged native binary does not advertise statement-profile v4, there is no
 reviewed current binary/source/key manifest, and ordinary package setup does not
 offer a single explicit setup-facing route through the same lazy provisioner.
 Those findings do not rewrite the six completed task records or their canonical
-identities. Instead, the reviewed correction now covers `PTR-143` through
-`PTR-152`, with the dependency-ordered `PTR-149` handoff last, and expands the
-exact sealed population from 53 to 63:
+identities. A further controller-path audit found that the lazy issuer could
+drop proof-bearing issued material and the deferred/xdist handoff could drop
+controller-owned candidate context required by the v4 verifier. The reviewed
+correction therefore covers `PTR-143` through `PTR-155`, with the
+dependency-ordered `PTR-149` handoff last, and expands the exact sealed
+population from 53 to 66:
 
 1. `PTR-143` attaches a stable locator/static collection seed without requiring
    runtime evidence or inventing a final execution key.
@@ -709,20 +712,31 @@ exact sealed population from 53 to 63:
    without generating or shipping a production trusted setup or v4 keys.
 9. `PTR-152` makes accelerator issuance and reporting fail closed unless the
    exact reviewed v4 source, binary, capability payload, circuit and key
-   identities match, and hardens lazy pip execution isolation.
-10. `PTR-149` derives activation reporting from live typed services and
-    refreshes the current-tree gate/handoff for the exact 63-task population.
+   identities match, hardens lazy pip execution isolation, and denies every
+   structural-only or context-free publication.
+10. `PTR-153` preserves complete bounded public proof-bearing issuance material
+    across the lazy real issuer without exposing private witness material.
+11. `PTR-154` preserves/reconstructs bounded controller-owned receipt,
+    candidate and V2 request context through serial and xdist handoffs.
+12. `PTR-155` joins both branches, reconstructs the exact datasets V2 binding,
+    requires local `VERIFIED`, and performs the sole atomic candidate write.
+13. `PTR-149` derives activation reporting from live typed services and
+    refreshes the current-tree gate/handoff for the exact 66-task population.
 
 The historical first wave was `PTR-143` and `PTR-144` on shards 2 and 0,
 followed by the disjoint `PTR-144`/`PTR-145`/`PTR-146` wave, `PTR-147`, and
 `PTR-148`. The current corrective wave is exactly `PTR-150` and `PTR-151` on
 numeric shards 0 and 1, owning accelerator and datasets respectively. Their
 predicted files and repository claims are disjoint. `PTR-152` on shard 2 joins
-both branches; only then may `PTR-149` run and evaluate the exact 63-task gate.
-Historical 53-task, `PTR-142`, or pre-v4 60-task activation packets are
-explicitly inadmissible. Absence of operator-provided reviewed v4 keys or a
-trusted-setup manifest is a truthful activation gap: tests continue to run and
-the supervisor continues, but no warm skip or closeout authority is invented.
+both branches and establishes the denial boundary. `PTR-153` and `PTR-154` then
+run on shards 0 and 1 with disjoint accelerator files to preserve proof material
+and expected context; `PTR-155` on shard 2 joins them into exact local V2
+verification. Only then may `PTR-149` run and evaluate the exact 66-task gate.
+Historical 53-task, `PTR-142`, pre-v4 60-task, or pre-material 63-task activation
+packets are explicitly inadmissible. Absence of operator-provided reviewed v4
+keys or a trusted-setup manifest is a truthful activation gap: tests continue to
+run and the supervisor continues, but no warm skip or closeout authority is
+invented.
 
 ## 14. Parallel implementation program
 
@@ -762,7 +776,9 @@ protected from implementation agents.
 | 22 | `PTR-148` | Genuine no-injection two-process activation and measured subprocess savings across all three repositories |
 | 23 | `PTR-150`, `PTR-151` | Explicit accelerator setup-facing lazy provisioning and an auditable datasets v4 native release start in parallel on distinct resources |
 | 24 | `PTR-152` | Join both branches with fail-closed current-v4 source, binary, capability, circuit and key provenance plus truthful runtime reporting |
-| 25 | `PTR-149` | Live reporting, exact 63-task authority gate, corrected handoff and explicit operator closeout premise |
+| 25 | `PTR-153`, `PTR-154` | Preserve proof-bearing issued material and controller-owned V2 context in parallel on disjoint accelerator files and numeric shards |
+| 26 | `PTR-155` | Join exact datasets V2 local verification with the sole atomic candidate publication path |
+| 27 | `PTR-149` | Live reporting, exact 66-task authority gate, corrected handoff and explicit operator closeout premise |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -786,9 +802,12 @@ and `PTR-144` on datasets, then used the dependency-ordered
 The current corrective wave again uses two independent repositories rather than
 inventing unrelated kit work: `PTR-150` owns accelerator on shard 0 and
 `PTR-151` owns datasets on shard 1. `PTR-152` joins them on accelerator only
-after both merge, and `PTR-149` remains last. Numeric shards preserve historical
-canonical provider identities; runtime execution remains Grok 4.5 first with
-the configured medium Terra fallback only on exact Grok quota exhaustion.
+after both merge. `PTR-153` and `PTR-154` then occupy shards 0 and 1 with
+disjoint predicted files; the shared merge queue serializes their accelerator
+gitlink publication before shard-2 `PTR-155` joins them. `PTR-149` remains last.
+Numeric shards preserve historical canonical provider identities; runtime
+execution remains Grok 4.5 first with the configured medium Terra fallback only
+on exact Grok quota exhaustion.
 
 ## 15. Validation strategy
 
@@ -869,7 +888,7 @@ explicitly permitted.
 - Use three strict deterministic shards and a shared serial merge queue.
 - Disable objective/codebase refill initially because the reviewed board is
   comprehensive. The historical nine-task completion expansion and historical
-  twelve-task runtime-activation repair, plus the active seven-task
+  twelve-task runtime-activation repair, plus the active thirteen-task
   production-activation correction, are separately reviewed 2026-08-03
   projections; none enables autonomous refill.
 - Run the native board validator, objective projection, a non-implementing
