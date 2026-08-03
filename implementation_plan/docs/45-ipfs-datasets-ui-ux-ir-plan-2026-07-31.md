@@ -759,11 +759,26 @@ runs against the actual integration baseline.
 
 ```bash
 UIIR_MERGE_TARGET_BRANCH=agent/ui-ux-ir  # create and review this branch first
+UIIR_ROOT="$(pwd -P)"
 
 for lane in 0 1 2 3 4 5; do
+  systemctl --user stop "uiir-lane-${lane}.service" 2>/dev/null || true
+  systemctl --user reset-failed "uiir-lane-${lane}.service" 2>/dev/null || true
   mkdir -p "data/agent_supervisor/ui_ux_ir/state/lane-${lane}"
-  nohup env PYTHONPATH=external/ipfs_accelerate \
-  python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor \
+  systemd-run --user --collect \
+    --unit="uiir-lane-${lane}" \
+    --description="UIIR agent supervisor lane ${lane}" \
+    --property=Type=simple \
+    --property="WorkingDirectory=${UIIR_ROOT}" \
+    --property=Restart=on-failure \
+    --property=RestartSec=5s \
+    --property=KillMode=control-group \
+    --property=TimeoutStopSec=30s \
+    --property="SuccessExitStatus=143 SIGTERM" \
+    --setenv=PYTHONPATH=external/ipfs_accelerate \
+    --setenv=PYTHONUNBUFFERED=1 \
+    /usr/bin/python3 \
+    -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor \
     --todo-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md \
     --task-prefix UIR- \
     --production-provider-policy grok-implement-codex-independent-review \
@@ -787,10 +802,11 @@ for lane in 0 1 2 3 4 5; do
     --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-plan-2026-07-31.md \
     --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.objectives.md \
     --implementation-protected-path implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md \
-    --implement \
-    >> "data/agent_supervisor/ui_ux_ir/state/lane-${lane}/uiir_lane_${lane}_launcher.log" 2>&1 &
-  echo "lane ${lane} supervisor pid $!"
+    --implement
 done
+
+systemctl --user --no-pager --full status \
+  uiir-lane-{0,1,2,3,4,5}.service
 ```
 
 Only launch implementation after inspecting the dry-run dependency,

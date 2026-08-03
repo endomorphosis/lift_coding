@@ -17,10 +17,11 @@ completion-gate artifacts are reviewed.
 ## Accelerator routing baseline
 
 `ipfs_accelerate_py` commit
-`70f341a16bf983e4117b3caf133a17e4f08ed0f6` establishes the production route.
-It records both the UIIR-recovery and concurrent quota-routing histories while
-retaining the independently audited tree from merge commit
-`87418b98a789d6e7f49ae02e7adb38bfa75d1f43`:
+`16fe3e4b938913c18535a564feba22a8a0c0deaf` establishes the production route
+and the final UIIR recovery behavior. It merges the durable passive-hold fix
+`97176e9ee25b7b7bdba18ffcd8574a52a2afb0ec` with the independently audited
+composite-review fix `65aaf4a5d1f33bec799e911ccf3ea1e2d45ddbc1`, on top of the quota-routing
+baseline `70f341a16bf983e4117b3caf133a17e4f08ed0f6`:
 
 - primary implementation provider: exact `grok-4.5`;
 - fallback provider: exact `gpt-5.6-terra` with medium reasoning;
@@ -38,6 +39,25 @@ retaining the independently audited tree from merge commit
 - native Linux `/proc` subreaper confinement prevents detached provider
   descendants from escaping the bounded invocation.
 
+The recovery additions also:
+
+- passively hold an unchanged, non-retryable post-merge structural failure so
+  reconciliation does not rerun validation, invoke a provider, or append the
+  same event indefinitely;
+- recover a consumed operator-approved composite gitlink only from its exact
+  completed queue row, with a non-boolean event generation and the completed
+  row bound to exactly `event_generation + 1`;
+- require the landed child to contain the candidate child and recheck every
+  implementation-owned leaf's mode, object type, and object ID while excluding
+  sibling-only landed changes;
+- disable ambient Git routing, replacement refs, legacy grafts, text-conversion
+  hooks, and external diff hooks at review trust boundaries;
+- verify the canonical post-merge validation receipt rather than trusting a
+  diagnostic envelope; and
+- admit a live review result through a private, concurrency-safe, one-shot
+  capability that cannot be recovered from a copied or JSON-round-tripped
+  mapping.
+
 The production launch recipe pins:
 
 ```text
@@ -50,15 +70,18 @@ proposal.
 
 Verification on the committed accelerator bytes:
 
-- 646/646 daemon-port tests passed;
-- 158/158 focused provider-routing, exact-quota, latch, and native-confinement
-  tests passed;
-- the broad 19-file integration matrix passed 410 tests before identifying one
-  stale explicit-provider fixture; the corrected full runner file then passed
-  32/32;
+- 652/652 daemon-port tests passed;
+- 58/58 post-merge-review tests and 37/37 authoritative-completion tests passed
+  (95/95 combined);
+- 105/105 production provider/security/confinement tests and 57/57 exact
+  default-route/capacity tests passed (162/162 combined);
+- real malicious replacement-ref and legacy-graft ancestry forgeries were
+  rejected, as were mutated event generations, boolean generations, and
+  mutated completed-row generations;
 - Python compilation and critical Ruff `E9,F63,F7,F82` checks passed;
 - `git diff --check` passed; and
-- an independent security re-audit approved the quota-only production route.
+- independent security re-audits approved both the quota-only production route
+  and the final composite-gitlink review boundary.
 
 ## UIR-010 recovery
 
@@ -84,7 +107,10 @@ Validation evidence:
 - the queue's fresh post-merge schema validation passed.
 
 `UIR-010` is integrated but remains `implemented_merged_but_pending` with the
-`provider_review` gate unsatisfied. This is the intended fail-closed state.
+`provider_review` gate unsatisfied at this pre-launch receipt boundary. The new
+accelerator commit can reconstruct only the exact consumed operator postimage,
+run fresh canonical validation, and request a fresh independent review; it
+cannot reuse the prior structural failure or manufacture acceptance.
 
 ## Remaining gates
 
@@ -100,5 +126,15 @@ requires a future invocation-bound independent non-Codex review transport with
 durable approve/reject transitions. No caller-supplied content identifier is
 accepted as review authority.
 
-The six-lane UIIR fleet remains stopped. Resume only after reviewing this
-baseline and deciding how the independent review gates will be serviced.
+## Deployment checkpoint
+
+The previous six-lane fleet was stopped before changing the protected plan or
+parent accelerator gitlink. A final isolated, non-implementation scheduler pass
+against the new gitlink exited zero with 48 tasks, 2 authoritative completions,
+2 ready tasks, 44 dependency-waiting tasks, and no provider invocation.
+
+The launch recipe now uses collected transient user-systemd services with
+control-group shutdown and `Restart=on-failure`; it no longer relies on
+unowned `nohup` processes. The six services are started only after the reviewed
+gitlink, plan, and this receipt are committed. Runtime acceptance results remain
+durable state evidence and do not retroactively alter this pre-launch receipt.
