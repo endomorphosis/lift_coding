@@ -1507,7 +1507,7 @@ test.
 
 ## PTR-135 Persist immutable candidate execution contexts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
