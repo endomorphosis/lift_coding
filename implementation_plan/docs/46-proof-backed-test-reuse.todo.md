@@ -1411,7 +1411,7 @@ test.
 
 ## PTR-132 Version the datasets test-pass statement and canonical CID profile
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
