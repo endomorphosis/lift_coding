@@ -1229,7 +1229,7 @@ tasks are closed and is the only path allowed to project verified goal state.
 
 ## PTR-120 Assemble bound goal evidence and completion-gate bundles
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
