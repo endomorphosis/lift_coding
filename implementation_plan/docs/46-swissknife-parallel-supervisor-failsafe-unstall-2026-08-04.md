@@ -82,3 +82,17 @@ repair authority was checked with `verify-cluster` against a patched fresh index
 reflecting the repaired dispositions. Parser-failure scans now pass
 `--skip-provider-indexes` so SCA-603 multi-root work does not dominate cluster
 validation time.
+
+## Follow-up: SCA-608 / SCA-640 / SCA-639 / SCA-232
+
+### SCA-608 + SCA-640
+- `test_mcplusplus_idl_identity_profile.py`: **9 passed**
+- SCA-640 retry-budget meta closed; discovery evidence already present
+
+### SCA-232 + SCA-639
+- Deterministic family transform regenerated **232** UNIT TypeScript files
+  under `swissknife/ipfs_accelerate_js/test/unit` (botched Python→TS
+  conversions → pure parseable modules)
+- `tsc --noEmit` on all 232 paths: **exit 0**
+- `verify-cluster UNIT`: **232/232** resolutions
+- SCA-639 retry-budget meta closed; discovery evidence already present

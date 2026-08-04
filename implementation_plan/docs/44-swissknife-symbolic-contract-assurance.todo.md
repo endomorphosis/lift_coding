@@ -3315,7 +3315,8 @@ Normative:
 
 ## SCA-232 Repair converted unit-test parser failures without exclusions
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): Deterministic family transform regenerated all 232 UNIT TS conversion artifacts as parseable modules; tsc --noEmit 232/232; verify-cluster UNIT 232/232.
 - Priority: P0
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229, SCA-615
@@ -14004,7 +14005,8 @@ Normative:
 
 ## SCA-608 Normalize MCP++ IDL identities as decodable profile-tagged CIDs
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): test_mcplusplus_idl_identity_profile.py 9 passed; IDL CIDs are decodable profile-tagged CIDv1.
 - Priority: P0
 - Track: mcplusplus-identity
 - Depends on: SCA-220, SCA-229, SCA-615
@@ -15411,7 +15413,8 @@ Normative:
 
 ## SCA-639 Resolve implementation retry-budget failure for SCA-232
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): Retry-budget meta closed after SCA-232 family transform; discovery evidence present.
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -15429,7 +15432,8 @@ Normative:
 
 ## SCA-640 Resolve implementation retry-budget failure for SCA-608
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): Retry-budget meta closed after SCA-608 validation green; discovery evidence present.
 - Completion: manual
 - Priority: P1
 - Track: ops
