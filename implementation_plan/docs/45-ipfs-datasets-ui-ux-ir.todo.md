@@ -102,6 +102,7 @@ Program rules:
 - Bundle: ui-ux-ir/schema
 - Parallel lane: uir-schema
 - Resource class: cpu-medium
+- Production context symbol hints: {"external/ipfs_datasets/ipfs_datasets_py/logic/ui_ux_ir/schema.py":["UIAccessibilityBinding","UIAdaptiveVariant","UIComponent","UIConfiguration","UIDeviceCapabilityRequirement","UIEffect","UIGuard","UIIRDocument","UILayoutConstraint","UILocalizationBinding","UIModalityRequirement","UINamespacedExtension","UIProgramBinding","_deep_freeze_mapping","_reject_executable_payload","_require_known_refs","_require_unique","_validate_cross_references"]}
 - Predicted files: external/ipfs_datasets/ipfs_datasets_py/logic/ui_ux_ir/schema.py, external/ipfs_datasets/ipfs_datasets_py/logic/ui_ux_ir/ui_ux_ir.schema.json, external/ipfs_datasets/tests/unit/logic/ui_ux_ir/test_schema.py
 - Interfaces: UIUXIR@1
 - Allow concurrent with:
