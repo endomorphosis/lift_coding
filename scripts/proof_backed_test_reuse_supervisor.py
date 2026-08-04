@@ -1489,20 +1489,30 @@ def _verify_started(timeout_seconds: int = 55) -> dict[str, object]:
 
 def _stop_lane(lane: dict[str, object]) -> dict[str, object]:
     lane_name = str(lane["name"])
-    pid = _read_pid(_pid_path(lane_name))
+    pid_path = _pid_path(lane_name)
+    pid = _read_pid(pid_path)
     if not pid:
         return {"lane": lane_name, "stopped": True, "reason": "no_pid"}
     if not _lane_process_owned(lane_name, pid):
+        # Stale PID file from a previous session: lane is already fenced.
+        try:
+            pid_path.unlink(missing_ok=True)
+        except OSError:
+            pass
         return {
             "lane": lane_name,
-            "stopped": False,
-            "reason": "pid_not_owned_or_not_alive",
+            "stopped": True,
+            "reason": "stale_pid_cleared",
             "pid": pid,
         }
     os.kill(pid, signal.SIGTERM)
     deadline = time.monotonic() + 30
     while time.monotonic() < deadline:
         if not _pid_alive(pid):
+            try:
+                pid_path.unlink(missing_ok=True)
+            except OSError:
+                pass
             return {"lane": lane_name, "stopped": True, "pid": pid}
         time.sleep(0.5)
     return {
