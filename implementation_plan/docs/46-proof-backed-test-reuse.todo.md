@@ -1984,7 +1984,7 @@ it never blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-149 Refresh live capability reporting, the 66-task gate, and operator handoff
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
