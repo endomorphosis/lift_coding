@@ -2176,7 +2176,7 @@ it never blocks the supervisor or manufactures skip/closeout authority.
 
 ## PTR-155 Join exact Groth16 v4 verification and atomic candidate publication
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
