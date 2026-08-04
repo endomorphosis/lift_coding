@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Reclaim expired/stuck UIIR worktree lifecycle claims.
+"""Optional ops wrapper around agent-supervisor lifecycle reclaim.
 
-Run manually or from the board companion so abandoned nonterminal claims
-cannot stall implementation forever.
+Primary recovery lives in ``ipfs_accelerate_py``:
+
+- ``WorktreeLifecycleStore.reclaim_expired_nonterminal``
+- ``PortalImplementationDaemon._reclaim_expired_worktree_lifecycle_claims``
+  (startup + each ``run_once`` pass + pre-acquire retry)
+
+This script is only for manual/operator intervention or board companions that
+want an explicit reclaim cycle outside a daemon process.
 """
 
 from __future__ import annotations
