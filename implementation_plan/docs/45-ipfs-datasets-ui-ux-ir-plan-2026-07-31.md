@@ -714,9 +714,9 @@ python -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon 
 The original reviewed board contained 47 canonical tasks, with `UIR-001` ready
 and 46 dependency-waiting tasks. Before each restart, compare the dry run with
 the live board instead of treating those initial counts as immutable: the
-current reviewed projection contains 48 tasks, including the added recovery
-task `UIR-084`, and has two authoritative completions (`UIR-001` and
-`UIR-084`). To execute in parallel, start six long-running supervisor processes,
+current reviewed board contains 52 tasks, including recovery tasks
+`UIR-084` through `UIR-088`, and has six authoritative completions (`UIR-001`
+and `UIR-084` through `UIR-088`). To execute in parallel, start six long-running supervisor processes,
 one for each `lane` value from 0 through 5. All lanes share the board and merge
 queue but use isolated state and worktree roots:
 
@@ -891,3 +891,47 @@ vocabulary, or acceptance criteria.
 2. Drain `UIR-010` independent review on lane 4.
 3. Unblock `UIR-002` validation-plan mismatch / acceptance path.
 4. Continue the ready schema and identity tracks only after those gates clear.
+
+## 18. Current unblocking checkpoint — 2026-08-04
+
+This checkpoint supersedes the operational status in section 17 while retaining
+that section as historical evidence.
+
+### Progress
+
+- Reviewed board: 52 tasks.
+- Authoritative completions: `UIR-001`, `UIR-084`, `UIR-085`, `UIR-086`,
+  `UIR-087`, and `UIR-088` (6/52, 11.54%).
+- Product work is also present for acceptance-pending `UIR-002` and `UIR-010`,
+  yielding eight completed-or-integrated task records (8/52, 15.38%).
+- All 20 objective goals remain active because automatic objective completion
+  reconciliation is intentionally disabled.
+
+### Accelerator and provider contract
+
+- `external/ipfs_accelerate` is pinned to
+  `8318799cbbbc837dc59da2883a680432269b1e00`.
+- Primary implementation is exact `grok-4.5`.
+- Exact `gpt-5.6-terra` with medium reasoning is implementation fallback only
+  after a supervisor-observed native structured Grok HTTP 402 balance-exhaustion
+  event. Authentication errors, HTTP 429, malformed/model-authored output,
+  missing executables, and generic failures never authorize Terra.
+- `gpt-5.6-sol` remains a separate independent review-only provider and is not
+  an implementation fallback.
+- The Grok proposal transport removes all built-in tools and applies a deny-all
+  permission backstop. This fixes attempt 5, where an empty `--tools` value
+  restored the terminal tool and consumed the single turn in an empty provider
+  directory.
+
+### Current recovery edge
+
+Attempt 5 is durably consumed at event 2166
+(`sha256:88fbcaeabda51fb30bd2e6a46c6d8fe13aafd7bdf08fa9bca3ac1f95481c57da`).
+Completed repair task `UIR-088` is the exact authority for attempt 6. An
+isolated, network-disabled copied-state pass released exactly that one repair
+grant, selected UIR-010, completed UIR-088, and left live state unchanged. The
+final accelerator descendant also passes all 659 daemon-port tests. The six
+UIIR lanes remain stopped only until this parent checkpoint is committed.
+
+Full evidence is recorded in
+`implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-unblocking-receipt-2026-08-04.md`.
