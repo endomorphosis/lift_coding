@@ -1640,3 +1640,33 @@ Program rules:
 - Post-merge correction source canonical task CID: baguqeeraoxsql7pz3uvfajv3b6okdvprjquzz5d4gwzocptwxgs46k6ia7kq
 - Post-merge correction origin stream ID: event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926
 - Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010 after attempt 7 built the exact packet and dispatched tool-free Grok but the 300s production provider default killed the native CLI before structuredOutput arrived. Land the 600s timeout fix, write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-090-recovery-receipt-2026-08-04.md, then mark this repair task completed so the supervisor can release UIR-010 from strategy blocked_tasks.
+
+## UIR-091 Resolve implementation retry-budget failure for UIR-010
+
+- Status: completed
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: schema
+- Depends on: UIR-001
+- Goal id: UIR-G020
+- Outputs: implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-091-recovery-receipt-2026-08-04.md
+- Validation: test -f implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-091-recovery-receipt-2026-08-04.md
+- Board namespace: ipfs-datasets-ui-ux-ir-v1
+- Bundle: ui-ux-ir/schema
+- Parallel lane: uir-schema
+- Resource class: cpu-small
+- Predicted files: implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-091-recovery-receipt-2026-08-04.md
+- Conflict policy: Sole owner of the UIR-010 correction_failed head after attempt-8 provider_failure; do not edit protected plan files except the recovery receipt.
+- Post-merge correction repair schema: post-merge-correction-repair-v1
+- Post-merge correction denial ID: baguqeerairqc5selrpnvxsuenklnq5oi6e2djjcptvdzpta7hmdvapbai64a
+- Post-merge correction target attempt: 8
+- Post-merge correction failure event ID: sha256:8ffd2d460fc0eca38426a87ac0bfadff768ef1ef113272c84719373746d40df2
+- Post-merge correction failure event sequence: 2335
+- Post-merge correction failure kind: implementation
+- Post-merge correction source task binding ID: baguqeera2kx5o2477yqetrtchdjet3xh3jvymesgbhk572zxopj5kf6uh64q
+- Post-merge correction source canonical task key: task/v1/75e505fdf9dd2a5026bb0f9ca1d5f14c299cf47c35b2e13e76b9a5cf2bc807d5
+- Post-merge correction source canonical task CID: baguqeeraoxsql7pz3uvfajv3b6okdvprjquzz5d4gwzocptwxgs46k6ia7kq
+- Post-merge correction origin stream ID: event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926
+- Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010 after attempt 8 dispatched under the UIR-090 grant then failed closed in ~9s with provider_failure and response_bytes=0 without a preserved native exception message. Land the routing-error detail fix, write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-091-recovery-receipt-2026-08-04.md, then mark this repair task completed so the supervisor can release UIR-010 from strategy blocked_tasks.
