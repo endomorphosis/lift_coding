@@ -719,7 +719,7 @@ Program rules:
 
 ## UIR-041 Implement bounded DOM/ARIA import and web/desktop rendering
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
