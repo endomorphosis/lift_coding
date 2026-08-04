@@ -20,7 +20,7 @@ class TestMCPPlusPlusProtocol:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/src/services/mcp-plus-plus.ts")
+        self.src = read_file("swissknife/src/services/mcp/mcp-plus-plus.ts")
 
     def test_profile_a_interface_descriptor(self):
         """Profile A: MCP-IDL interface descriptors."""

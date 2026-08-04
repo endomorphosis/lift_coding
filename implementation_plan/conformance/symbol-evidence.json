@@ -57,7 +57,7 @@
       "coverageScope": "core",
       "requiredExecutedTargets": [
         "swissknife/src/services/provers/dcec-prover-bridge.ts",
-        "swissknife/src/services/provers/policy-to-dcec.ts"
+        "swissknife/src/services/logic/deontic/policy-to-dcec.ts"
       ]
     },
     {
@@ -67,7 +67,7 @@
       "coverageScope": "core",
       "requiredExecutedTargets": [
         "swissknife/src/services/provers/tdfol-prover-bridge.ts",
-        "swissknife/src/services/provers/policy-to-tdfol.ts",
+        "swissknife/src/services/logic/tdfol/policy-to-tdfol.ts",
         "swissknife/src/services/provers/smt2-serializer.ts"
       ]
     },
@@ -135,7 +135,7 @@
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     },
     {
@@ -144,7 +144,7 @@
       "coveringInputTypes": ["policy", "smt2"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     },
     {
@@ -153,7 +153,7 @@
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     },
     {
@@ -162,7 +162,7 @@
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     },
     {
@@ -171,7 +171,7 @@
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     },
     {
@@ -180,7 +180,7 @@
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     },
     {
@@ -189,7 +189,7 @@
       "coveringInputTypes": ["policy"],
       "coverageScope": "baseline",
       "requiredExecutedTargets": [
-        "swissknife/src/services/mcp-wasm-prover-hub.ts"
+        "swissknife/src/services/mcp/mcp-wasm-prover-hub.ts"
       ]
     }
   ]
