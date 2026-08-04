@@ -177,6 +177,47 @@ missing merge candidates, plus the early planning tasks and genuine approvals.
 - Branch: `integration/proof-backed-test-reuse-66`
 - Doc: `implementation_plan/docs/46-proof-backed-test-reuse-integration-pins-2026-08-04.md`
 
+
+## Validation receipt retention (2026-08-04)
+
+Script: `scripts/retain_proof_backed_test_reuse_validation_receipts.py`
+
+```bash
+python3 scripts/retain_proof_backed_test_reuse_validation_receipts.py --require-clean --workers 2
+python3 scripts/materialize_proof_backed_test_reuse_closeout_inputs.py
+```
+
+Receipts live under
+`~/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/projection/completion/validation_receipts/`.
+
+### Latest full-board run (`939c475ce`, clean)
+
+| Metric | Value |
+| --- | --- |
+| Selected tasks | 66 |
+| Validation receipts retained | **56** |
+| Failed board validation commands | **10** |
+| Task evidence after materialize | **42** (was 0) |
+| Remaining evidence gaps | 24 |
+
+Gap breakdown:
+
+| Kind | Count | Notes |
+| --- | --- | --- |
+| `VALIDATION_MISSING` | 10 | board command failed on current tree: PTR-052, 053, 130, 138, 144, 146, 147, 151, 152, 154 |
+| `APPROVAL_MISSING` | 4 | historic operator/reviewer approvals: PTR-000, 001, 011, 041 |
+| `COMPLETION_PROVENANCE_MISSING` | 10 | no managed-merge row: early tasks + PTR-150–152 bulk-close |
+
+Failed validation highlights:
+
+- PTR-130 hermetic e2e still asserts sealed population **41** vs live **66**
+- PTR-144 validation command flags disagree with current Groth16 CLI
+- PTR-151 one Cargo verifier roundtrip needs local setup artifacts
+- Several PTR-052/053/138/146/147/152/154 failures assert positive v4 authority or zero-config surfaces that currently report activation-gap / provenance-unready behavior
+
+Receipts alone never complete closeout: gate/evidence packets, approvals, and
+merge provenance remain required.
+
 ## Safe next actions (ordered)
 
 1. Keep supervisor healthy or stop intentionally; do **not** run live

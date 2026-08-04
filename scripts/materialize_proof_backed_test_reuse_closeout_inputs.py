@@ -53,6 +53,9 @@ STATE_ROOT = Path(
 )
 OUT_DIR = STATE_ROOT / "projection" / "completion" / "materialization"
 MERGE_COMPLETED = STATE_ROOT / "merge-queue" / "completed"
+VALIDATION_RECEIPT_DIR = (
+    STATE_ROOT / "projection" / "completion" / "validation_receipts"
+)
 
 
 def _run_json(command: list[str]) -> tuple[int, Any, str]:
@@ -181,6 +184,21 @@ def _materialize_forest() -> dict[str, Any]:
 
 
 def _load_merge_records() -> list[dict[str, Any]]:
+    """Load completed merge-queue rows and project collector-safe merge receipts.
+
+    Raw daemon queue files contain floats and non-canonical nested metadata.
+    The task-evidence collector seals merge rows with ``content_identity``, so
+    only integer/string fields from the authoritative completion claim are kept.
+    This does not invent new completion events — it re-expresses retained
+    completed rows in the collector's expected shape.
+    """
+
+    if str(ACCEL_ROOT) not in sys.path:
+        sys.path.insert(0, str(ACCEL_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts import (
+        content_identity,
+    )
+
     records: list[dict[str, Any]] = []
     if not MERGE_COMPLETED.is_dir():
         return records
@@ -189,11 +207,53 @@ def _load_merge_records() -> list[dict[str, Any]]:
             raw = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
-        if isinstance(raw, dict):
-            raw = dict(raw)
-            raw["_source_path"] = str(path)
-            records.append(raw)
+        if not isinstance(raw, dict):
+            continue
+        task_id = str(raw.get("task_id") or "").strip()
+        status = str(raw.get("status") or raw.get("state") or "").strip().lower()
+        commit = str(
+            raw.get("merged_commit_id")
+            or raw.get("commit_sha")
+            or raw.get("commit_id")
+            or ""
+        ).strip()
+        task_cid = str(
+            raw.get("task_cid")
+            or raw.get("canonical_task_cid")
+            or raw.get("canonical_task_id")
+            or ""
+        ).strip()
+        if not task_id.startswith("PTR-") or status not in {"completed", "merged"}:
+            continue
+        if not commit or not task_cid:
+            continue
+        body = {
+            "task_id": task_id,
+            "canonical_task_cid": task_cid,
+            "status": "completed",
+            "commit_sha": commit,
+            "source_path": str(path.name),
+        }
+        sealed = {
+            **body,
+            "merge_receipt_cid": content_identity(body),
+        }
+        records.append(sealed)
     return records
+
+
+def _load_validation_receipts() -> list[dict[str, Any]]:
+    receipts: list[dict[str, Any]] = []
+    if not VALIDATION_RECEIPT_DIR.is_dir():
+        return receipts
+    for path in sorted(VALIDATION_RECEIPT_DIR.glob("PTR-*.json")):
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if isinstance(raw, dict) and raw.get("task_id"):
+            receipts.append(raw)
+    return receipts
 
 
 def _attempt_task_evidence(
@@ -202,6 +262,7 @@ def _attempt_task_evidence(
     checkout: dict[str, Any],
     forest: dict[str, Any],
     merge_records: list[dict[str, Any]],
+    validation_receipts: list[dict[str, Any]],
 ) -> dict[str, Any]:
     if str(ACCEL_ROOT) not in sys.path:
         sys.path.insert(0, str(ACCEL_ROOT))
@@ -228,6 +289,7 @@ def _attempt_task_evidence(
             "forest_keys": sorted(forest.keys()),
             "task_count": len(tasks),
             "merge_record_count": len(merge_records),
+            "validation_receipt_count": len(validation_receipts),
         }
 
     dirty = not bool(checkout.get("clean"))
@@ -243,17 +305,71 @@ def _attempt_task_evidence(
         ).hexdigest()
         dirty_overlay = f"baguqeera{digest[:50]}"
 
+    # Prefer identity snapshot written by the receipt retainer when present so
+    # collector bindings match sealed receipts exactly.
+    identity_snapshot_path = VALIDATION_RECEIPT_DIR / "identity_snapshot.json"
+    if identity_snapshot_path.is_file():
+        try:
+            snap = json.loads(identity_snapshot_path.read_text(encoding="utf-8"))
+            identity = snap.get("identity") if isinstance(snap, dict) else None
+            if isinstance(identity, dict) and identity.get("repository_forest_cid"):
+                forest_cid = str(identity.get("repository_forest_cid") or forest_cid)
+                gitlink = str(identity.get("gitlink_state_cid") or gitlink)
+                dirty = bool(identity.get("dirty"))
+                dirty_overlay = str(
+                    identity.get("dirty_overlay_cid") or dirty_overlay
+                )
+                repository_id = str(
+                    identity.get("repository_id")
+                    or "lift_coding/proof-backed-test-reuse"
+                )
+                repository_state_cid = str(
+                    identity.get("repository_state_cid")
+                    or f"git-commit:{checkout['commit']}"
+                )
+                git_commit_id = str(
+                    identity.get("git_commit_id") or checkout["commit"]
+                )
+                git_tree_id = str(identity.get("git_tree_id") or checkout["tree"])
+            else:
+                repository_id = "lift_coding/proof-backed-test-reuse"
+                repository_state_cid = f"git-commit:{checkout['commit']}"
+                git_commit_id = str(checkout["commit"])
+                git_tree_id = str(checkout["tree"])
+        except (OSError, json.JSONDecodeError):
+            repository_id = "lift_coding/proof-backed-test-reuse"
+            repository_state_cid = f"git-commit:{checkout['commit']}"
+            git_commit_id = str(checkout["commit"])
+            git_tree_id = str(checkout["tree"])
+    else:
+        repository_id = "lift_coding/proof-backed-test-reuse"
+        repository_state_cid = f"git-commit:{checkout['commit']}"
+        git_commit_id = str(checkout["commit"])
+        git_tree_id = str(checkout["tree"])
+
     try:
         collector = ProofTestReuseTaskEvidenceCollector(
-            repository_id="lift_coding/proof-backed-test-reuse",
-            repository_state_cid=f"git-commit:{checkout['commit']}",
-            git_commit_id=str(checkout["commit"]),
-            git_tree_id=str(checkout["tree"]),
+            repository_id=repository_id,
+            repository_state_cid=repository_state_cid,
+            git_commit_id=git_commit_id,
+            git_tree_id=git_tree_id,
             gitlink_state_cid=gitlink,
             repository_forest_cid=forest_cid,
             dirty=dirty,
             dirty_overlay_cid=dirty_overlay,
             board_namespace="proof-backed-test-reuse-v1",
+            freshness_seconds=3_600.0,
+            ancestry_verifier=lambda ancestor, target: bool(ancestor)
+            and (
+                ancestor == target
+                or subprocess.run(
+                    ["git", "merge-base", "--is-ancestor", ancestor, target],
+                    cwd=REPO_ROOT,
+                    check=False,
+                    capture_output=True,
+                ).returncode
+                == 0
+            ),
         )
     except ProofTestReuseTaskEvidenceError as exc:
         return {
@@ -270,9 +386,22 @@ def _attempt_task_evidence(
             **board_payload,
             "valid": not bool(board_payload.get("errors")),
             "board_namespace": "proof-backed-test-reuse-v1",
-            "task_count": board_payload.get("completed_task_count")
-            or len(tasks),
+            "task_count": len(tasks),
             "task_ids": [t.task_id for t in tasks],
+            "task_cids": {
+                t.task_id: t.canonical_task_cid for t in tasks
+            },
+        }
+    else:
+        board_payload = {
+            **board_payload,
+            "board_namespace": board_payload.get("board_namespace")
+            or "proof-backed-test-reuse-v1",
+            "task_count": board_payload.get("task_count") or len(tasks),
+            "task_ids": board_payload.get("task_ids")
+            or [t.task_id for t in tasks],
+            "task_cids": board_payload.get("task_cids")
+            or {t.task_id: t.canonical_task_cid for t in tasks},
         }
 
     try:
@@ -280,6 +409,7 @@ def _attempt_task_evidence(
             validated_board=board_payload,
             task_records=tasks,
             merge_queue_records=merge_records,
+            validation_receipts=validation_receipts,
         )
     except Exception as exc:  # probe
         return {
@@ -290,12 +420,21 @@ def _attempt_task_evidence(
 
     evidence = getattr(collection, "evidence", ()) or ()
     gaps = getattr(collection, "gaps", ()) or ()
+    gap_kinds: dict[str, int] = {}
+    for g in gaps:
+        kind = str(
+            getattr(g, "kind", None)
+            or (g.get("kind") if isinstance(g, dict) else "unknown")
+        )
+        gap_kinds[kind] = gap_kinds.get(kind, 0) + 1
     return {
         "ok": True,
         "board_cid": getattr(collection, "board_cid", ""),
         "required_task_ids": list(getattr(collection, "required_task_ids", ()) or ()),
         "evidence_count": len(tuple(evidence)),
         "gap_count": len(tuple(gaps)),
+        "gap_kinds": gap_kinds,
+        "validation_receipt_count": len(validation_receipts),
         "gaps": [
             {
                 "task_id": getattr(g, "task_id", None)
@@ -379,11 +518,26 @@ def main() -> int:
     }
     _write(OUT_DIR / "merge_records_summary.json", merge_summary)
 
+    validation_receipts = _load_validation_receipts()
+    _write(
+        OUT_DIR / "validation_receipts_summary.json",
+        {
+            "count": len(validation_receipts),
+            "task_ids": sorted(
+                str(r.get("task_id"))
+                for r in validation_receipts
+                if str(r.get("task_id") or "").startswith("PTR-")
+            ),
+            "source_dir": str(VALIDATION_RECEIPT_DIR),
+        },
+    )
+
     task_evidence = _attempt_task_evidence(
         board=board if isinstance(board, dict) else {},
         checkout=checkout,
         forest=forest,
         merge_records=merge_records,
+        validation_receipts=validation_receipts,
     )
     _write(OUT_DIR / "task_evidence_probe.json", task_evidence)
 
@@ -436,11 +590,13 @@ def main() -> int:
         ),
         "forest_ok": bool(forest.get("ok")),
         "merge_record_count": len(merge_records),
+        "validation_receipt_count": len(validation_receipts),
         "task_evidence_probe": {
             "ok": task_evidence.get("ok"),
             "reason": task_evidence.get("reason"),
             "evidence_count": task_evidence.get("evidence_count"),
             "gap_count": task_evidence.get("gap_count"),
+            "gap_kinds": task_evidence.get("gap_kinds"),
         },
         "closeout_report_only_returncode": closeout_rc,
         "closeout_passed": (
