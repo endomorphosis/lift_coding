@@ -235,11 +235,24 @@ def _normalize_validation_command_for_execution(command: str) -> str:
             return match.group(0)
         return f"{prefix}--setup-only --seed {seed}"
 
-    return re.sub(
+    rewritten = re.sub(
         r"(?P<prefix>groth16_backend/build\.sh\s+)(?P<flags>(?:(?!--seed).)*?)--seed\s+(?P<seed>\d+)",
         rewrite_seed,
         command,
     )
+    # Serialise Groth16 Cargo tests: parallel prove/setup can race on temp keys.
+    if (
+        "groth16_backend/Cargo.toml" in rewritten
+        and "cargo test" in rewritten
+        and "--test-threads" not in rewritten
+    ):
+        rewritten = re.sub(
+            r"(cargo test\s+--manifest-path\s+\S+)",
+            r"\1 -- --test-threads=1",
+            rewritten,
+            count=1,
+        )
+    return rewritten
 
 
 def _run_validation(command: str, *, timeout: int) -> dict[str, Any]:
