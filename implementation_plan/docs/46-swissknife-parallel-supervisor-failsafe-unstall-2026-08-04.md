@@ -58,3 +58,27 @@ Implemented production CLI multi-root wiring:
 - `test/api/test_agent_supervisor_production_multi_root_index.py` — **3 passed**
 
 Board: SCA-603 marked **completed**.
+
+## Follow-up: SCA-235 / SCA-236 parser-failure clusters
+
+### SCA-235 (PYTHON)
+- Fixed indentation defects in:
+  - `swissknife/test/fixed_web_platform/cross_browser_model_sharding.py`
+  - `swissknife/test/web_platform_test_output/test_hf_bert.py`
+- Classified `EntryKind.SYMLINK` **before** semantic/structured suffix routing
+  in `repository_snapshot.classify_coverage_kind`
+- Added ten-case semantic-looking symlink fixtures
+- `verify-cluster PYTHON` → 3/3 resolutions
+
+### SCA-236 (STRUCTURED)
+- `swissknife/benchmark-results/sample-baseline.json` → valid `{}`
+- Oversized AST export typed via `generatedPathParts` (`ast_exports`, `full_asts`)
+  and `.ast.json` generated suffix in scope policy
+- `verify-cluster STRUCTURED` → 2/2 resolutions
+
+### Scan note
+Full `scan-cluster` reindexes the monorepo primary tree (long-running). Cluster
+repair authority was checked with `verify-cluster` against a patched fresh index
+reflecting the repaired dispositions. Parser-failure scans now pass
+`--skip-provider-indexes` so SCA-603 multi-root work does not dominate cluster
+validation time.

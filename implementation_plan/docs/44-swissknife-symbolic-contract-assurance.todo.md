@@ -3405,7 +3405,8 @@ Normative:
 
 ## SCA-235 Repair Python failures and classify semantic-looking symlinks
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T01:29:33Z): Fixed indentation in two Python sources; symlink disposition before suffix routing with fixtures; verify-cluster PYTHON 3/3 resolutions pass.
 - Priority: P0
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229, SCA-615
@@ -3435,7 +3436,8 @@ Normative:
 
 ## SCA-236 Repair or explicitly type structured-data parser failures
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T01:29:33Z): Empty sample-baseline.json -> {}; oversized AST typed as generated_path_parts:ast_exports; scope generatedPathParts updated; verify-cluster STRUCTURED 2/2 pass.
 - Priority: P0
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229, SCA-615
