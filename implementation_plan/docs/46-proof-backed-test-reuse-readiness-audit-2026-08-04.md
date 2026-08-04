@@ -134,21 +134,67 @@ unavailable services: tests and supervisor continue; none authorize skip.
    `PTR-150`–`PTR-152` and the early planning tasks listed above (todo
    status is not completion authority).
 
+## Materialization probe (2026-08-04, non-authoritative)
+
+Script: `scripts/materialize_proof_backed_test_reuse_closeout_inputs.py`
+
+```bash
+python3 scripts/materialize_proof_backed_test_reuse_closeout_inputs.py
+```
+
+Outputs under
+`~/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/projection/completion/materialization/`.
+
+Observed on the closed board:
+
+| Input | Status |
+| --- | --- |
+| Board validation | 66/66, 0 errors |
+| Supervisor health capture | healthy + work-complete snapshot retained |
+| Merge-queue completed records | 50 of 66 with usable `task_id` + ancestor commit |
+| Forest materialization | forest_id produced; gitlink closure incomplete (`gitlink_checkout_root_mismatch` on package roots when outer swissknife root is substituted) |
+| Task evidence collect | blocked until forest/gitlink identity is complete **and** missing provenance is restored |
+| Gate / evidence artifacts | still absent (correct fail-closed behavior) |
+
+### PTR-150 / PTR-151 / PTR-152 revalidation (code present, queue missing)
+
+These three tasks were bulk-marked completed in `6d61e8659` without individual
+managed-merge queue rows. Fresh MODE=off revalidation on the closed pins:
+
+| Task | Result |
+| --- | --- |
+| PTR-150 setup provisioning | **17 passed** |
+| PTR-151 Groth16 Cargo | **19 passed** |
+| PTR-151 native release Python | **3 passed** |
+| PTR-152 fail-closed / lazy / runtime subset | **70 passed** |
+
+Revalidation is **not** a substitute for managed-merge or retrospective
+operator provenance. Inventory still lists `PTR-150`–`PTR-152` among the 16
+missing merge candidates, plus the early planning tasks and genuine approvals.
+
+## Integration pins
+
+- Branch: `integration/proof-backed-test-reuse-66`
+- Doc: `implementation_plan/docs/46-proof-backed-test-reuse-integration-pins-2026-08-04.md`
+
 ## Safe next actions (ordered)
 
 1. Keep supervisor healthy or stop intentionally; do **not** run live
    `closeout` until report-only returns `ready_for_closeout: true`.
-2. Run / re-materialize PTR-110 → PTR-122 evidence packs against the closed
+2. Restore managed-merge or retrospective provenance for the 16 missing task
+   IDs (especially bulk-closed `PTR-150`–`PTR-152` and early planning tasks).
+3. Fix forest/gitlink identity for the integration root (complete gitlink
+   closure without inventing swissknife authority) so PTR-110 collection can
+   bind the current tree.
+4. Run / re-materialize PTR-110 → PTR-122 evidence packs against the closed
    66-task board and persist gate/evidence artifacts under
    `~/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/projection/completion/`.
-3. Supply operator-reviewed v4 key/manifest pins (or accept permanent
+5. Supply operator-reviewed v4 key/manifest pins (or accept permanent
    activation gap and continue tests without skip authority).
-4. After report-only is green: run fenced closeout, review state-root
+6. After report-only is green: run fenced closeout, review state-root
    candidate, then human-commit protected objectives only if accepted.
-5. Port the closed stack into other checkouts by merging
-   `agent/proof-backed-test-reuse` (or submodule-pinning the three package
-   revisions above) — do not treat main-checkout todo status as closed until
-   that integration lands.
+7. Use `integration/proof-backed-test-reuse-66` (or the worktree) rather than
+   force-updating unrelated feature branches when applying submodule pins.
 
 ## Port / integration notes
 
