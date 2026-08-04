@@ -111,6 +111,8 @@ def _checkout_identity() -> dict[str, Any]:
 def _materialize_forest() -> dict[str, Any]:
     if str(ACCEL_ROOT) not in sys.path:
         sys.path.insert(0, str(ACCEL_ROOT))
+    if str(DATASETS_ROOT) not in sys.path:
+        sys.path.insert(0, str(DATASETS_ROOT))
     from ipfs_accelerate_py.agent_supervisor.repository_forest_manifest import (
         materialize_initial_four_repository_forest,
     )
@@ -199,6 +201,8 @@ def _load_merge_records() -> list[dict[str, Any]]:
 
     if str(ACCEL_ROOT) not in sys.path:
         sys.path.insert(0, str(ACCEL_ROOT))
+    if str(DATASETS_ROOT) not in sys.path:
+        sys.path.insert(0, str(DATASETS_ROOT))
     from ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts import (
         content_identity,
     )
@@ -290,6 +294,8 @@ def _load_validation_receipts(
             try:
                 if str(ACCEL_ROOT) not in sys.path:
                     sys.path.insert(0, str(ACCEL_ROOT))
+                if str(DATASETS_ROOT) not in sys.path:
+                    sys.path.insert(0, str(DATASETS_ROOT))
                 from ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts import (
                     content_identity,
                 )
@@ -321,6 +327,8 @@ def _attempt_task_evidence(
 ) -> dict[str, Any]:
     if str(ACCEL_ROOT) not in sys.path:
         sys.path.insert(0, str(ACCEL_ROOT))
+    if str(DATASETS_ROOT) not in sys.path:
+        sys.path.insert(0, str(DATASETS_ROOT))
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
         parse_task_file,
     )
@@ -532,6 +540,18 @@ def main() -> int:
     started = datetime.now(timezone.utc).isoformat()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     e2e_env = _ensure_local_dev_e2e_env()
+    # Prefer monorepo external/ipfs_datasets over accelerate nested submodule.
+    datasets_text = str(DATASETS_ROOT)
+    accel_text = str(ACCEL_ROOT)
+    for root in (datasets_text, accel_text, str(KIT_ROOT)):
+        while root in sys.path:
+            sys.path.remove(root)
+    sys.path[:0] = [datasets_text, accel_text, str(KIT_ROOT)]
+    existing = str(os.environ.get("PYTHONPATH", "") or "")
+    os.environ["PYTHONPATH"] = os.pathsep.join(
+        [datasets_text, accel_text, str(KIT_ROOT)]
+        + ([existing] if existing else [])
+    )
 
     checkout = _checkout_identity()
     checkout["local_dev_e2e_env"] = e2e_env
@@ -616,6 +636,8 @@ def main() -> int:
     try:
         if str(ACCEL_ROOT) not in sys.path:
             sys.path.insert(0, str(ACCEL_ROOT))
+        if str(DATASETS_ROOT) not in sys.path:
+            sys.path.insert(0, str(DATASETS_ROOT))
         from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
             parse_task_file,
         )
