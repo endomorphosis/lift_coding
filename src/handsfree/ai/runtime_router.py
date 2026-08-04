@@ -42,7 +42,9 @@ def resolve_virtual_ai_os_runtime_route(
         preferred_surface,
     )
     runtime_surface = placement.runtime_surface
-    handler_ref, cli_command = _resolve_handler(entry.capability_id, execution_mode, runtime_surface)
+    handler_ref, cli_command = _resolve_handler(
+        entry.capability_id, execution_mode, runtime_surface
+    )
     placement = resolve_virtual_ai_os_runtime_placement(
         entry.capability_id,
         execution_mode,

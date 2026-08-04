@@ -29,10 +29,7 @@ from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon impor
 
 
 LANE_ID = "symbolic-contract-assurance"
-BOARD_PATH = (
-    "implementation_plan/docs/"
-    "44-swissknife-symbolic-contract-assurance.todo.md"
-)
+BOARD_PATH = "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md"
 ALLOWED_LANES = {LANE_ID: BOARD_PATH}
 IMPLEMENTATION_PROVIDER_ENV = "IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"
 ALLOWED_PROVIDER_ASSIGNMENTS = {"auto", "grok", "codex"}
@@ -104,18 +101,10 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
         raise ValueError("taskboard contains duplicate task IDs")
 
     missing_dependencies = sorted(
-        {
-            dependency
-            for task in tasks
-            for dependency in task.depends_on
-            if dependency not in by_id
-        }
+        {dependency for task in tasks for dependency in task.depends_on if dependency not in by_id}
     )
     if missing_dependencies:
-        raise ValueError(
-            "taskboard has missing dependencies: "
-            + ", ".join(missing_dependencies)
-        )
+        raise ValueError("taskboard has missing dependencies: " + ", ".join(missing_dependencies))
 
     visiting: set[str] = set()
     visited: set[str] = set()
@@ -160,9 +149,7 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
         paths_by_task[task.task_id] = predicted
         for allowed in _csv(metadata.get("allow concurrent with", "")):
             if allowed not in by_id:
-                raise ValueError(
-                    f"{task.task_id} allows unknown concurrent task {allowed}"
-                )
+                raise ValueError(f"{task.task_id} allows unknown concurrent task {allowed}")
     if missing_parallel_metadata:
         raise ValueError(
             "active tasks lack Parallel lane or Predicted files: "
@@ -170,24 +157,13 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
         )
 
     unordered_overlaps: list[dict[str, Any]] = []
-    task_ids = sorted(
-        task.task_id
-        for task in tasks
-        if task.status not in terminal_statuses
-    )
+    task_ids = sorted(task.task_id for task in tasks if task.status not in terminal_statuses)
     for offset, left_id in enumerate(task_ids):
         for right_id in task_ids[offset + 1 :]:
-            if (
-                left_id in task_ancestors(right_id)
-                or right_id in task_ancestors(left_id)
-            ):
+            if left_id in task_ancestors(right_id) or right_id in task_ancestors(left_id):
                 continue
-            left_repair_source, _left_failure_kind = (
-                retry_budget_repair_source(by_id[left_id])
-            )
-            right_repair_source, _right_failure_kind = (
-                retry_budget_repair_source(by_id[right_id])
-            )
+            left_repair_source, _left_failure_kind = retry_budget_repair_source(by_id[left_id])
+            right_repair_source, _right_failure_kind = retry_budget_repair_source(by_id[right_id])
             if (
                 left_repair_source == right_id
                 or right_repair_source == left_id
@@ -213,9 +189,7 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
                 continue
             overlaps = sorted(
                 {
-                    left_path
-                    if len(left_path) >= len(right_path)
-                    else right_path
+                    left_path if len(left_path) >= len(right_path) else right_path
                     for left_path in paths_by_task[left_id]
                     for right_path in paths_by_task[right_id]
                     if _path_overlap(left_path, right_path)
@@ -237,9 +211,7 @@ def _taskboard_validation(todo_path: Path, task_prefix: str) -> dict[str, Any]:
 
     return {
         "task_count": len(tasks),
-        "completed_count": sum(
-            1 for task in tasks if task.status == "completed"
-        ),
+        "completed_count": sum(1 for task in tasks if task.status == "completed"),
         "dependency_edge_count": sum(len(task.depends_on) for task in tasks),
         "parallel_lane_count": len(
             {
@@ -439,11 +411,7 @@ def _lane_status_failure(
     if process is None or process.poll() is not None:
         return None
     monotonic_now = time.monotonic() if now_monotonic is None else now_monotonic
-    if (
-        lane.spawned_at > 0
-        and monotonic_now - lane.spawned_at
-        < LANE_STATUS_STARTUP_GRACE_SECONDS
-    ):
+    if lane.spawned_at > 0 and monotonic_now - lane.spawned_at < LANE_STATUS_STARTUP_GRACE_SECONDS:
         return None
 
     try:
@@ -459,10 +427,7 @@ def _lane_status_failure(
     except (TypeError, ValueError):
         return f"lane-{lane.index:02d} status has no valid supervisor_pid"
     if status_pid != process.pid:
-        return (
-            f"lane-{lane.index:02d} status belongs to pid {status_pid}, "
-            f"expected {process.pid}"
-        )
+        return f"lane-{lane.index:02d} status belongs to pid {status_pid}, expected {process.pid}"
 
     updated_at = _timestamp_epoch(payload.get("updated_at"))
     if updated_at is None:
@@ -499,9 +464,7 @@ def _status_payload(
     exit_code: int | None = None,
 ) -> dict[str, Any]:
     return {
-        "schema": (
-            "lift-coding/swissknife-parallel-implementation-supervisor@1"
-        ),
+        "schema": ("lift-coding/swissknife-parallel-implementation-supervisor@1"),
         "pid": os.getpid(),
         "process_group": os.getpgrp(),
         "stopping": stopping,
@@ -514,13 +477,8 @@ def _status_payload(
                 "index": lane.index,
                 "pid": lane.process.pid if lane.process is not None else 0,
                 "provider": lane.provider,
-                "running": (
-                    lane.process is not None
-                    and lane.process.poll() is None
-                ),
-                "returncode": (
-                    None if lane.process is None else lane.process.poll()
-                ),
+                "running": (lane.process is not None and lane.process.poll() is None),
+                "returncode": (None if lane.process is None else lane.process.poll()),
                 "restarts": lane.restarts,
                 "state_dir": str(lane.state_dir),
                 "supervisor_status_path": str(lane.supervisor_status_path),
@@ -548,33 +506,23 @@ def run(config_path: Path) -> int:
         raise ValueError("providers must be a JSON object")
     assignments = providers.get("laneAssignments")
     if not isinstance(assignments, list) or len(assignments) != lane_count:
-        raise ValueError(
-            "providers.laneAssignments must contain exactly laneCount entries"
-        )
+        raise ValueError("providers.laneAssignments must contain exactly laneCount entries")
     provider_assignments = [str(item).strip().lower() for item in assignments]
-    unsupported_assignments = sorted(
-        set(provider_assignments) - ALLOWED_PROVIDER_ASSIGNMENTS
-    )
+    unsupported_assignments = sorted(set(provider_assignments) - ALLOWED_PROVIDER_ASSIGNMENTS)
     if unsupported_assignments:
         raise ValueError(
-            "unsupported provider lane assignments: "
-            + ", ".join(unsupported_assignments)
+            "unsupported provider lane assignments: " + ", ".join(unsupported_assignments)
         )
     configured_environment = providers.get("commonEnvironment", {})
     if not isinstance(configured_environment, dict):
         raise ValueError("providers.commonEnvironment must be a JSON object")
-    unknown_environment = sorted(
-        set(configured_environment) - ALLOWED_PROVIDER_ENVIRONMENT
-    )
+    unknown_environment = sorted(set(configured_environment) - ALLOWED_PROVIDER_ENVIRONMENT)
     if unknown_environment:
         raise ValueError(
             "providers.commonEnvironment contains non-allowlisted keys: "
             + ", ".join(unknown_environment)
         )
-    provider_environment = {
-        str(key): str(value)
-        for key, value in configured_environment.items()
-    }
+    provider_environment = {str(key): str(value) for key, value in configured_environment.items()}
 
     require_swissknife_checkout_lease(
         ["--implement"],
@@ -589,17 +537,13 @@ def run(config_path: Path) -> int:
         stderr=subprocess.DEVNULL,
     )
     if branch_check.returncode != 0:
-        raise RuntimeError(
-            f"parallel merge target branch does not exist: {merge_target}"
-        )
+        raise RuntimeError(f"parallel merge target branch does not exist: {merge_target}")
 
     validation = _taskboard_validation(
         todo_path,
         str(profile["taskPrefix"]),
     )
-    validation["strict_task_sharding"] = bool(
-        parallel.get("strictTaskSharding", False)
-    )
+    validation["strict_task_sharding"] = bool(parallel.get("strictTaskSharding", False))
     validation["provider_lane_assignments"] = list(provider_assignments)
     validation["provider_environment_keys"] = sorted(provider_environment)
     parallel_root = runtime_root / "parallel"
@@ -625,18 +569,12 @@ def run(config_path: Path) -> int:
             Lane(
                 index=index,
                 state_dir=state_dir,
-                log_path=(
-                    parallel_root / "logs" / f"lane-{index:02d}.log"
-                ),
+                log_path=(parallel_root / "logs" / f"lane-{index:02d}.log"),
                 command=command,
                 provider=provider_assignments[index],
                 environment=dict(provider_environment),
                 supervisor_status_path=(
-                    state_dir
-                    / (
-                        f"{profile['statePrefix']}_{index:02d}"
-                        "_supervisor_status.json"
-                    )
+                    state_dir / (f"{profile['statePrefix']}_{index:02d}_supervisor_status.json")
                 ),
             )
         )
@@ -675,8 +613,7 @@ def run(config_path: Path) -> int:
             except Exception as exc:
                 if operator_signal is None:
                     fail(
-                        f"lane-{lane.index:02d} initial launch failed: "
-                        f"{type(exc).__name__}: {exc}"
+                        f"lane-{lane.index:02d} initial launch failed: {type(exc).__name__}: {exc}"
                     )
                 break
         _write_json_atomic(
@@ -713,10 +650,7 @@ def run(config_path: Path) -> int:
                 try:
                     _spawn_lane(lane, repo_root=repo_root)
                 except Exception as exc:
-                    fail(
-                        f"lane-{lane.index:02d} restart failed: "
-                        f"{type(exc).__name__}: {exc}"
-                    )
+                    fail(f"lane-{lane.index:02d} restart failed: {type(exc).__name__}: {exc}")
                     break
             if not stopping:
                 for lane in lanes:

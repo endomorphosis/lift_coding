@@ -82,9 +82,7 @@ class TestHallucinateAppIPFSDatasetsInterop:
         from handsfree.ipfs_descriptor_pack import get_ipfs_descriptor_pack
 
         pack = get_ipfs_descriptor_pack()
-        embed_entry = next(
-            (e for e in pack if e.descriptor_id == "ipfs.embed"), None
-        )
+        embed_entry = next((e for e in pack if e.descriptor_id == "ipfs.embed"), None)
         assert embed_entry is not None
         assert "ipfs_datasets" in embed_entry.tags or "embeddings" in embed_entry.tags
 
@@ -177,9 +175,7 @@ class TestHallucinateAppIPFSAccelerateInterop:
         from handsfree.ipfs_descriptor_pack import get_ipfs_descriptor_pack
 
         pack = get_ipfs_descriptor_pack()
-        caps_entry = next(
-            (e for e in pack if e.descriptor_id == "ipfs.capabilities"), None
-        )
+        caps_entry = next((e for e in pack if e.descriptor_id == "ipfs.capabilities"), None)
         assert caps_entry is not None
         assert caps_entry.endpoint_path == "/v1/ipfs/capabilities"
 
@@ -354,9 +350,7 @@ class TestUnifiedFacadeCoherence:
 
         pack = get_ipfs_descriptor_pack()
         for entry in pack:
-            assert "http" in entry.transport_kinds, (
-                f"{entry.descriptor_id} missing http transport"
-            )
+            assert "http" in entry.transport_kinds, f"{entry.descriptor_id} missing http transport"
 
     @requires_pydantic_v2
     def test_capability_registry_covers_all_server_families(self):
@@ -409,9 +403,16 @@ class TestUnifiedFacadeCoherence:
 
         # All IPFS-related capabilities must be in the matrix
         required = {
-            "embedding", "ipfs_pin", "storage", "dataset_discovery",
-            "workflow", "agentic_fetch", "hardware_profile", "inference",
-            "ipfs_add_content", "ipfs_get_content",
+            "embedding",
+            "ipfs_pin",
+            "storage",
+            "dataset_discovery",
+            "workflow",
+            "agentic_fetch",
+            "hardware_profile",
+            "inference",
+            "ipfs_add_content",
+            "ipfs_get_content",
         }
         for req in required:
             assert req in cap_ids, f"Missing capability in execution matrix: {req}"
@@ -444,7 +445,13 @@ class TestExtendedEndpointCoverage:
 
         spec = importlib.util.spec_from_file_location(
             "ipfs_integration",
-            str(Path(__file__).resolve().parents[2] / "src" / "handsfree" / "handlers" / "ipfs_integration.py"),
+            str(
+                Path(__file__).resolve().parents[2]
+                / "src"
+                / "handsfree"
+                / "handlers"
+                / "ipfs_integration.py"
+            ),
         )
         mod = importlib.util.module_from_spec(spec)
         try:
@@ -485,7 +492,13 @@ class TestExtendedEndpointCoverage:
 
     def test_ipc_handler_file_declares_extended_channels(self):
         """ipfs_ipc_handlers.js includes the new IPC channels."""
-        ipc_file = Path(__file__).resolve().parents[2] / "hallucinate_app" / "hallucinate_app" / "node" / "ipfs_ipc_handlers.js"
+        ipc_file = (
+            Path(__file__).resolve().parents[2]
+            / "hallucinate_app"
+            / "hallucinate_app"
+            / "node"
+            / "ipfs_ipc_handlers.js"
+        )
         if not ipc_file.exists():
             pytest.skip("hallucinate_app submodule not available")
 
@@ -505,7 +518,13 @@ class TestExtendedEndpointCoverage:
 
     def test_swissknife_datasets_command_exists(self):
         """SwissKnife has a datasets-command.ts file."""
-        cmd_file = Path(__file__).resolve().parents[2] / "swissknife" / "src" / "commands" / "datasets-command.ts"
+        cmd_file = (
+            Path(__file__).resolve().parents[2]
+            / "swissknife"
+            / "src"
+            / "commands"
+            / "datasets-command.ts"
+        )
         if not cmd_file.exists():
             pytest.skip("swissknife submodule not available")
 
@@ -516,7 +535,13 @@ class TestExtendedEndpointCoverage:
 
     def test_swissknife_accelerate_command_exists(self):
         """SwissKnife has an accelerate-command.ts file."""
-        cmd_file = Path(__file__).resolve().parents[2] / "swissknife" / "src" / "commands" / "accelerate-command.ts"
+        cmd_file = (
+            Path(__file__).resolve().parents[2]
+            / "swissknife"
+            / "src"
+            / "commands"
+            / "accelerate-command.ts"
+        )
         if not cmd_file.exists():
             pytest.skip("swissknife submodule not available")
 
@@ -527,7 +552,14 @@ class TestExtendedEndpointCoverage:
 
     def test_handsfree_backend_bridge_exists(self):
         """SwissKnife has a handsfree-backend-bridge.ts that routes ORB capabilities."""
-        bridge_file = Path(__file__).resolve().parents[2] / "swissknife" / "src" / "integration" / "ipfs" / "handsfree-backend-bridge.ts"
+        bridge_file = (
+            Path(__file__).resolve().parents[2]
+            / "swissknife"
+            / "src"
+            / "integration"
+            / "ipfs"
+            / "handsfree-backend-bridge.ts"
+        )
         if not bridge_file.exists():
             pytest.skip("swissknife submodule not available")
 
@@ -535,5 +567,12 @@ class TestExtendedEndpointCoverage:
         assert "HandsfreeBackendBridge" in content
         assert "routeORBCapability" in content
         # Must map all key operations
-        for op in ["ipfs_add", "ipfs_cat", "embed", "hardware_profile", "inference", "list_datasets"]:
+        for op in [
+            "ipfs_add",
+            "ipfs_cat",
+            "embed",
+            "hardware_profile",
+            "inference",
+            "list_datasets",
+        ]:
             assert op in content, f"Missing ORB route mapping: {op}"

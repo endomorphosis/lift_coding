@@ -102,9 +102,7 @@ def _prepare_run(
         ),
     )
 
-    def fake_signal(
-        signum: int, handler: Callable[[int, object], None]
-    ) -> None:
+    def fake_signal(signum: int, handler: Callable[[int, object], None]) -> None:
         handlers[signum] = handler
 
     def fake_spawn(lane: supervisor.Lane, *, repo_root: Path) -> None:
@@ -183,9 +181,7 @@ def test_unrecoverable_initial_lane_launch_returns_nonzero(
     assert status["stop_reason"].startswith("lane-00 initial launch failed")
 
 
-def test_operator_sigterm_returns_zero(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_operator_sigterm_returns_zero(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     config_path, handlers, _ = _prepare_run(
         monkeypatch,
         tmp_path,
@@ -229,9 +225,7 @@ def test_operator_sigterm_during_restart_backoff_returns_zero(
     assert status["stop_reason"] == "operator_signal:SIGTERM"
 
 
-def test_completed_backlog_returns_zero(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_completed_backlog_returns_zero(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     config_path, _, _ = _prepare_run(
         monkeypatch,
         tmp_path,
@@ -261,13 +255,9 @@ def test_missing_lane_status_is_ignored_only_during_startup_grace(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     lane = _lane(tmp_path, spawned_at=100.0)
-    monkeypatch.setattr(
-        supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 300.0
-    )
+    monkeypatch.setattr(supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 300.0)
 
-    assert (
-        supervisor._lane_status_failure(lane, now_monotonic=399.0) is None
-    )
+    assert supervisor._lane_status_failure(lane, now_monotonic=399.0) is None
     failure = supervisor._lane_status_failure(lane, now_monotonic=401.0)
     assert failure is not None
     assert "status unavailable after startup grace" in failure
@@ -287,9 +277,7 @@ def test_lane_status_must_match_live_supervisor_pid(
         ),
         encoding="utf-8",
     )
-    monkeypatch.setattr(
-        supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 0.0
-    )
+    monkeypatch.setattr(supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 0.0)
 
     failure = supervisor._lane_status_failure(
         lane,
@@ -323,9 +311,7 @@ def test_stale_lane_status_forces_nonzero_shutdown(
         process_factory=running_lane,
     )
     monkeypatch.setattr(supervisor, "_all_tasks_completed", lambda *args: False)
-    monkeypatch.setattr(
-        supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 0.0
-    )
+    monkeypatch.setattr(supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 0.0)
 
     assert supervisor.run(config_path) == supervisor.LANE_FAILURE_EXIT_CODE
     status = _final_status(tmp_path)
@@ -333,9 +319,7 @@ def test_stale_lane_status_forces_nonzero_shutdown(
     assert "status heartbeat is stale" in status["stop_reason"]
 
 
-def test_fresh_lane_status_is_healthy(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_fresh_lane_status_is_healthy(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     lane = _lane(tmp_path, pid=601, spawned_at=1.0)
     lane.supervisor_status_path.write_text(
         json.dumps(
@@ -347,9 +331,7 @@ def test_fresh_lane_status_is_healthy(
         ),
         encoding="utf-8",
     )
-    monkeypatch.setattr(
-        supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 0.0
-    )
+    monkeypatch.setattr(supervisor, "LANE_STATUS_STARTUP_GRACE_SECONDS", 0.0)
 
     assert (
         supervisor._lane_status_failure(

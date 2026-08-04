@@ -35,7 +35,9 @@ def _imports():
 
 def test_supervisor_does_not_recycle_quiet_validation_before_its_timeout(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTaskState
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalTaskState,
+    )
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
         PortalSupervisorConfig,
@@ -143,7 +145,10 @@ def test_objective_task_janitor_blocks_orphans_deprioritizes_noise_and_reopens_l
             "manual",
             "P3",
             "ops",
-            metadata={"missing evidence": "generic symbol match", "bundle shard": "data/old.todo.md"},
+            metadata={
+                "missing evidence": "generic symbol match",
+                "bundle shard": "data/old.todo.md",
+            },
         ),
     ]
     strategy = {
@@ -164,7 +169,9 @@ def test_objective_task_janitor_blocks_orphans_deprioritizes_noise_and_reopens_l
     assert updated["objective_task_janitor_reopen_goal_ids"] == ["VAIOS-G697"]
     assert updated["objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]
     assert updated["heap_goal_retirement_receipt"][0]["retired_task_reason"] == "goal_completed"
-    assert all(receipt["schema"] == schema for receipt in updated["objective_task_janitor_receipts"])
+    assert all(
+        receipt["schema"] == schema for receipt in updated["objective_task_janitor_receipts"]
+    )
 
 
 def test_objective_task_janitor_releases_owned_blocks_when_goal_has_open_work():
@@ -918,7 +925,9 @@ def test_supervisor_materializes_janitor_deprioritization_as_blocked_task(tmp_pa
         encoding="utf-8",
     )
     objective_path.write_text("# Goals\n", encoding="utf-8")
-    strategy_path.write_text(json.dumps({"blocked_tasks": [], "deprioritized_tasks": []}), encoding="utf-8")
+    strategy_path.write_text(
+        json.dumps({"blocked_tasks": [], "deprioritized_tasks": []}), encoding="utf-8"
+    )
     supervisor = PortalImplementationSupervisor(
         PortalSupervisorConfig(
             todo_path=todo_path,
@@ -941,7 +950,10 @@ def test_supervisor_materializes_janitor_deprioritization_as_blocked_task(tmp_pa
     assert result["materialized"]["reason_task_ids"] == ["VAI-001"]
     assert updated_strategy["deprioritized_tasks"] == ["VAI-001"]
     assert "- Status: blocked" in updated_todo
-    assert "- Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task" in updated_todo
+    assert (
+        "- Blocked reason: Deferred by objective-task janitor during launch steering because off_mission_codebase_scan_task"
+        in updated_todo
+    )
 
 
 def test_supervisor_materializes_janitor_unblock_and_remove_reviews(tmp_path):
@@ -1034,14 +1046,21 @@ def test_supervisor_run_forever_defers_refill_before_daemon_loop(tmp_path):
     )
 
     supervisor.ensure_event_log_file = lambda: calls.append("ensure_event_log_file") or {}  # type: ignore[method-assign]
-    supervisor.repair_main_checkout_merge_state = lambda: calls.append("repair_main_checkout_merge_state") or {}  # type: ignore[method-assign]
-    supervisor.ensure_managed_daemon_pid_file = lambda: calls.append("ensure_managed_daemon_pid_file") or {}  # type: ignore[method-assign]
+    supervisor.repair_main_checkout_merge_state = lambda: (
+        calls.append("repair_main_checkout_merge_state") or {}
+    )  # type: ignore[method-assign]
+    supervisor.ensure_managed_daemon_pid_file = lambda: (
+        calls.append("ensure_managed_daemon_pid_file") or {}
+    )  # type: ignore[method-assign]
+
     def fake_run_once(*, include_refill=True):
         calls.append(f"run_once:{include_refill}")
         return {"objective_task_janitor": {}}
 
     supervisor.run_once = fake_run_once  # type: ignore[method-assign]
-    supervisor.build_supervisor_loop_config = lambda: calls.append("build_supervisor_loop_config") or object()  # type: ignore[method-assign]
+    supervisor.build_supervisor_loop_config = lambda: (
+        calls.append("build_supervisor_loop_config") or object()
+    )  # type: ignore[method-assign]
 
     class FakeSupervisorLoop:
         def __init__(self, _config, watchdog_hook=None):
@@ -1076,7 +1095,9 @@ def test_supervisor_run_forever_defers_refill_before_daemon_loop(tmp_path):
 
 def test_supervisor_rewrite_strategy_blocks_stale_merge_reconciliation(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTaskState
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalTaskState,
+    )
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor import (
         PortalImplementationSupervisor,
         PortalSupervisorConfig,

@@ -102,24 +102,33 @@ async def test_control_plane_exposes_complete_durable_lifecycle_without_executin
     assert settled["decision"] == "paid"
     assert calls == {"verify": 1, "settle": 1}
 
-    receipt = await control.dispatch("mcp++/payments/receipt/get", {
-        "receiptCid": settled["receiptCid"],
-        "requestContext": common["requestContext"],
-    })
+    receipt = await control.dispatch(
+        "mcp++/payments/receipt/get",
+        {
+            "receiptCid": settled["receiptCid"],
+            "requestContext": common["requestContext"],
+        },
+    )
     assert receipt["state"] == "settled"
     assert receipt["artifact"]["outcome"] == "settled"
 
-    refund = await control.dispatch("mcp++/payments/refund/request", {
-        "settlementCid": settled["receiptCid"],
-        "reasonCode": "customer_request",
-        "requestContext": common["requestContext"],
-    })
+    refund = await control.dispatch(
+        "mcp++/payments/refund/request",
+        {
+            "settlementCid": settled["receiptCid"],
+            "reasonCode": "customer_request",
+            "requestContext": common["requestContext"],
+        },
+    )
     assert refund["status"] == "pending"
     assert refund["artifact"]["parents"] == [settled["receiptCid"]]
 
-    reconciled = await control.dispatch("mcp++/payments/reconcile", {
-        "requestContext": common["requestContext"],
-    })
+    reconciled = await control.dispatch(
+        "mcp++/payments/reconcile",
+        {
+            "requestContext": common["requestContext"],
+        },
+    )
     assert reconciled == {
         "status": "reconciled",
         "outcomes": [{"idempotencyKey": "request-1", "state": "settled"}],

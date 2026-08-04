@@ -35,12 +35,10 @@ def test_swissknife_orb_binding_uses_registered_virtual_ai_os_capabilities():
         expected_capability_ids
     )
     assert (
-        get_swissknife_orb_handler_ref("dataset_discovery")
-        == "swissknife.orb::dataset_discovery"
+        get_swissknife_orb_handler_ref("dataset_discovery") == "swissknife.orb::dataset_discovery"
     )
     assert (
-        get_swissknife_orb_handler_ref("ui_render_session")
-        == "swissknife.orb::ui_render_session"
+        get_swissknife_orb_handler_ref("ui_render_session") == "swissknife.orb::ui_render_session"
     )
 
 

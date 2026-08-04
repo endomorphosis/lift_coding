@@ -71,9 +71,7 @@ _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 meta_glasses_display_bootstrap_paths = _META_GLASSES_DISPLAY_BOOTSTRAP_PATHS.resolve
 ensure_meta_glasses_display_bootstrap_paths = _META_GLASSES_DISPLAY_BOOTSTRAP_PATHS.ensure
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    META_GLASSES_DISPLAY_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(META_GLASSES_DISPLAY_ENV_PREFIX)
 
 logger = logging.getLogger("meta_glasses_display_todo_daemon")
 _meta_glasses_display_daemon_runner = build_namespace_daemon_bootstrap_runner(

@@ -132,7 +132,9 @@ def test_submodule_worktree_add_retries_invalid_gitlink_ref(tmp_path, monkeypatc
         "_git_ref_exists_in_repo",
         lambda _cwd, ref: ref == bad_ref,
     )
-    monkeypatch.setattr(daemon, "_record_event", lambda event, payload: events.append((event, payload)))
+    monkeypatch.setattr(
+        daemon, "_record_event", lambda event, payload: events.append((event, payload))
+    )
 
     def fake_run_git(command, *, cwd):
         calls.append((tuple(command), Path(cwd)))
@@ -156,7 +158,9 @@ def test_submodule_worktree_add_retries_invalid_gitlink_ref(tmp_path, monkeypatc
     assert events[0][1]["bad_ref"] == bad_ref
 
 
-def test_missing_validation_worktree_is_recorded_without_implementation_exception(tmp_path, monkeypatch):
+def test_missing_validation_worktree_is_recorded_without_implementation_exception(
+    tmp_path, monkeypatch
+):
     module = _daemon_module()
 
     repo_root = tmp_path / "repo"
@@ -172,7 +176,9 @@ def test_missing_validation_worktree_is_recorded_without_implementation_exceptio
         repo_root=repo_root,
         worktree_root=worktree_root,
     )
-    monkeypatch.setattr(daemon, "_record_event", lambda event, payload: events.append((event, payload)))
+    monkeypatch.setattr(
+        daemon, "_record_event", lambda event, payload: events.append((event, payload))
+    )
     monkeypatch.setattr(
         daemon,
         "_build_implementation_command",

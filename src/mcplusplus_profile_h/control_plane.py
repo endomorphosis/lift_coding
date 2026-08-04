@@ -15,10 +15,16 @@ from .runtime import PaymentContext, SellerResult, SellerRuntime
 PROFILE_H = "mcp++/x402-payments"
 PROFILE_H_VERSION = "1.0"
 PROFILE_H_METHODS = (
-    "mcp++/payments/profile", "mcp++/payments/catalog", "mcp++/payments/quote",
-    "mcp++/payments/verify", "mcp++/payments/settle", "mcp++/payments/receipt/get",
-    "mcp++/payments/entitlement/get", "mcp++/payments/usage/get",
-    "mcp++/payments/refund/request", "mcp++/payments/reconcile",
+    "mcp++/payments/profile",
+    "mcp++/payments/catalog",
+    "mcp++/payments/quote",
+    "mcp++/payments/verify",
+    "mcp++/payments/settle",
+    "mcp++/payments/receipt/get",
+    "mcp++/payments/entitlement/get",
+    "mcp++/payments/usage/get",
+    "mcp++/payments/refund/request",
+    "mcp++/payments/reconcile",
 )
 
 
@@ -89,7 +95,9 @@ class ProfileHControlPlane:
             "facilitator": diagnostics.get("facilitator"),
         }
 
-    async def dispatch(self, method: str, params: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    async def dispatch(
+        self, method: str, params: Mapping[str, Any] | None = None
+    ) -> dict[str, Any]:
         values = dict(params or {})
         if method == "mcp++/payments/profile":
             return await self.profile()
@@ -101,14 +109,22 @@ class ProfileHControlPlane:
             operation = str(values.get("operation") or values.get("operationName") or "")
             arguments = values.get("params", values.get("arguments", {}))
             if not operation or not isinstance(arguments, Mapping):
-                raise ProfileHError("H_REQUEST_MISMATCH", "operation and structured params are required")
+                raise ProfileHError(
+                    "H_REQUEST_MISMATCH", "operation and structured params are required"
+                )
             binding = self._bind(operation, context, arguments)
             if method == "mcp++/payments/quote":
-                return self._seller_result(await self.runtime.quote(binding.operation, binding.context))
+                return self._seller_result(
+                    await self.runtime.quote(binding.operation, binding.context)
+                )
             payment = self._payment(values, binding.context)
             if method == "mcp++/payments/verify":
-                return self._seller_result(await self.runtime.verify_only(binding.operation, binding.context, payment))
-            return self._seller_result(await self.runtime.settle_only(binding.operation, binding.context, payment))
+                return self._seller_result(
+                    await self.runtime.verify_only(binding.operation, binding.context, payment)
+                )
+            return self._seller_result(
+                await self.runtime.settle_only(binding.operation, binding.context, payment)
+            )
         if method == "mcp++/payments/receipt/get":
             return self._receipt(self._cid(values, "receipt_cid"), context)
         if method in {"mcp++/payments/entitlement/get", "mcp++/payments/usage/get"}:
@@ -128,7 +144,10 @@ class ProfileHControlPlane:
         raise ProfileHError("H_METHOD_NOT_SUPPORTED", f"unsupported Profile H method: {method}")
 
     async def handle_http(
-        self, method: str, path: str, params: Mapping[str, Any] | None = None,
+        self,
+        method: str,
+        path: str,
+        params: Mapping[str, Any] | None = None,
     ) -> tuple[int, dict[str, str], dict[str, Any]]:
         """Apply the canonical REST bindings without changing decoded objects."""
         verb, values = method.upper(), dict(params or {})
@@ -151,9 +170,14 @@ class ProfileHControlPlane:
                 rpc_method, values[field] = candidate, path.removeprefix(prefix)
                 break
         if rpc_method is None:
-            return 404, {"content-type": "application/json"}, {
-                "error": "H_METHOD_NOT_SUPPORTED", "message": "unknown Profile H route",
-            }
+            return (
+                404,
+                {"content-type": "application/json"},
+                {
+                    "error": "H_METHOD_NOT_SUPPORTED",
+                    "message": "unknown Profile H route",
+                },
+            )
         try:
             result = await self.dispatch(rpc_method, values)
             headers = {"content-type": "application/json"}
@@ -161,27 +185,61 @@ class ProfileHControlPlane:
                 headers["etag"] = str(result["signedCatalogCid"])
             return 200, headers, result
         except ProfileHError as error:
-            status = 403 if error.code == "H_PAYMENT_POLICY_DENIED" else (
-                404 if error.code == "H_EVIDENCE_NOT_FOUND" else
-                409 if error.code in {"H_REQUEST_MISMATCH", "H_PAYMENT_REPLAY", "H_RECONCILIATION_REQUIRED"} else 400
+            status = (
+                403
+                if error.code == "H_PAYMENT_POLICY_DENIED"
+                else (
+                    404
+                    if error.code == "H_EVIDENCE_NOT_FOUND"
+                    else 409
+                    if error.code
+                    in {"H_REQUEST_MISMATCH", "H_PAYMENT_REPLAY", "H_RECONCILIATION_REQUIRED"}
+                    else 400
+                )
             )
-            return status, {"content-type": "application/json"}, {
-                "error": error.code, "message": str(error), "retryable": error.retryable,
-            }
+            return (
+                status,
+                {"content-type": "application/json"},
+                {
+                    "error": error.code,
+                    "message": str(error),
+                    "retryable": error.retryable,
+                },
+            )
 
     @staticmethod
     def _context(values: Mapping[str, Any]) -> RequestContext:
         raw = values.get("requestContext", values.get("request_context", {}))
         raw = raw if isinstance(raw, Mapping) else {}
-        request_cid = str(raw.get("requestCid", raw.get("request_cid", values.get("requestCid", values.get("request_cid", "")))))
-        key = str(raw.get("idempotencyKey", raw.get("idempotency_key", values.get("idempotencyKey", values.get("idempotency_key", "")))))
+        request_cid = str(
+            raw.get(
+                "requestCid",
+                raw.get("request_cid", values.get("requestCid", values.get("request_cid", ""))),
+            )
+        )
+        key = str(
+            raw.get(
+                "idempotencyKey",
+                raw.get(
+                    "idempotency_key",
+                    values.get("idempotencyKey", values.get("idempotency_key", "")),
+                ),
+            )
+        )
         attributes = raw.get("attributes", values.get("attributes", {}))
         if not request_cid or not key or not isinstance(attributes, Mapping):
-            raise ProfileHError("H_REQUEST_MISMATCH", "requestCid, idempotencyKey, and attributes are required")
+            raise ProfileHError(
+                "H_REQUEST_MISMATCH", "requestCid, idempotencyKey, and attributes are required"
+            )
         return RequestContext(
-            request_cid, key,
+            request_cid,
+            key,
             bool(raw.get("authorized", values.get("authorized", True))),
-            bool(raw.get("policyAllowed", raw.get("policy_allowed", values.get("policyAllowed", True)))),
+            bool(
+                raw.get(
+                    "policyAllowed", raw.get("policy_allowed", values.get("policyAllowed", True))
+                )
+            ),
             str(raw.get("entitlementCid")) if raw.get("entitlementCid") else None,
             dict(attributes),
         )
@@ -203,16 +261,20 @@ class ProfileHControlPlane:
 
     @staticmethod
     def _seller_result(result: SellerResult) -> dict[str, Any]:
-        return {key: value for key, value in {
-            "decision": result.decision.decision.value,
-            "reasonCode": result.decision.reason_code,
-            "quote": result.quote,
-            "paymentRequired": result.payment_required,
-            "paymentResponse": result.settlement_response,
-            "receiptCid": result.receipt_cid,
-            "replayed": result.replayed,
-            "result": result.value,
-        }.items() if value is not None}
+        return {
+            key: value
+            for key, value in {
+                "decision": result.decision.decision.value,
+                "reasonCode": result.decision.reason_code,
+                "quote": result.quote,
+                "paymentRequired": result.payment_required,
+                "paymentResponse": result.settlement_response,
+                "receiptCid": result.receipt_cid,
+                "replayed": result.replayed,
+                "result": result.value,
+            }.items()
+            if value is not None
+        }
 
     def _receipt(self, cid: str, context: RequestContext) -> dict[str, Any]:
         entry = self.runtime.ledger.get_by_artifact(cid)
@@ -220,14 +282,24 @@ class ProfileHControlPlane:
             raise ProfileHError("H_EVIDENCE_NOT_FOUND", "receipt was not found for this request")
         artifact = self.runtime.artifacts.get(cid)
         if artifact is None:
-            raise ProfileHError("H_RECONCILIATION_REQUIRED", "receipt index exists but artifact is missing", retryable=True)
+            raise ProfileHError(
+                "H_RECONCILIATION_REQUIRED",
+                "receipt index exists but artifact is missing",
+                retryable=True,
+            )
         return {"receiptCid": cid, "state": entry.state, "artifact": artifact}
 
     def _request_refund(self, values: Mapping[str, Any], context: RequestContext) -> dict[str, Any]:
         settlement_cid = self._cid(values, "settlement_cid")
         entry = self.runtime.ledger.get_by_artifact(settlement_cid)
-        if entry is None or entry.request_cid != context.request_cid or entry.settlement_cid != settlement_cid:
-            raise ProfileHError("H_EVIDENCE_NOT_FOUND", "settlement is not available to this request")
+        if (
+            entry is None
+            or entry.request_cid != context.request_cid
+            or entry.settlement_cid != settlement_cid
+        ):
+            raise ProfileHError(
+                "H_EVIDENCE_NOT_FOUND", "settlement is not available to this request"
+            )
         artifact = {
             "schema": "mcp++/profile-h/refund-request@1.0",
             "createdAt": self.runtime.clock_ms(),
@@ -235,7 +307,9 @@ class ProfileHControlPlane:
             "settlementCid": settlement_cid,
             "requestCid": context.request_cid,
             "subjectCommitment": commitment(context.attributes.get("subject", "anonymous")),
-            "reasonCode": str(values.get("reasonCode", values.get("reason_code", "H_REFUND_REQUESTED")))[:64],
+            "reasonCode": str(
+                values.get("reasonCode", values.get("reason_code", "H_REFUND_REQUESTED"))
+            )[:64],
             "status": "pending",
         }
         refund_cid = self.runtime.artifacts.put(artifact)
@@ -256,6 +330,9 @@ class ProfileHControlPlane:
 
 
 __all__ = [
-    "CommercialBinding", "PROFILE_H", "PROFILE_H_METHODS", "PROFILE_H_VERSION",
+    "CommercialBinding",
+    "PROFILE_H",
+    "PROFILE_H_METHODS",
+    "PROFILE_H_VERSION",
     "ProfileHControlPlane",
 ]

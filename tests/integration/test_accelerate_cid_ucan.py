@@ -9,7 +9,9 @@ import time
 import sys
 import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'external', 'ipfs_accelerate'))
+sys.path.insert(
+    0, os.path.join(os.path.dirname(__file__), "..", "..", "external", "ipfs_accelerate")
+)
 
 
 class TestCIDComputation:
@@ -17,6 +19,7 @@ class TestCIDComputation:
 
     def test_compute_cid_deterministic(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import compute_cid
+
         cid1 = compute_cid({"hello": "world"})
         cid2 = compute_cid({"hello": "world"})
         assert cid1 == cid2
@@ -24,6 +27,7 @@ class TestCIDComputation:
 
     def test_compute_cid_different_data(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import compute_cid
+
         cid1 = compute_cid({"a": 1})
         cid2 = compute_cid({"a": 2})
         assert cid1 != cid2
@@ -34,6 +38,7 @@ class TestProfileB:
 
     def test_intent_object_creation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import IntentObject
+
         intent = IntentObject(method="run_model", params={"model": "bert"})
         assert intent.cid.startswith("bafy")
         assert intent.method == "run_model"
@@ -41,23 +46,34 @@ class TestProfileB:
 
     def test_decision_object_creation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DecisionObject
+
         decision = DecisionObject(intent_cid="bafy123", authorized=True, reason="open_access")
         assert decision.cid.startswith("bafy")
         assert decision.authorized is True
 
     def test_receipt_object_creation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import ReceiptObject
-        receipt = ReceiptObject(intent_cid="bafy1", decision_cid="bafy2", result={"output": "hello"})
+
+        receipt = ReceiptObject(
+            intent_cid="bafy1", decision_cid="bafy2", result={"output": "hello"}
+        )
         assert receipt.success is True
         assert receipt.result == {"output": "hello"}
 
     def test_receipt_with_error(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import ReceiptObject
+
         receipt = ReceiptObject(intent_cid="bafy1", decision_cid="bafy2", error="timeout")
         assert receipt.success is False
 
     def test_execution_envelope(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import IntentObject, DecisionObject, ReceiptObject, ExecutionEnvelope
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
+            IntentObject,
+            DecisionObject,
+            ReceiptObject,
+            ExecutionEnvelope,
+        )
+
         intent = IntentObject(method="infer", params={})
         decision = DecisionObject(intent_cid=intent.cid, authorized=True)
         receipt = ReceiptObject(intent_cid=intent.cid, decision_cid=decision.cid, result="ok")
@@ -70,6 +86,7 @@ class TestProfileB:
 
     def test_event_dag_append_and_frontier(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import EventDAG, DAGEvent
+
         dag = EventDAG()
         e1 = DAGEvent(cid="cid1", event_type="intent")
         e2 = DAGEvent(cid="cid2", event_type="decision", parent_cids=["cid1"])
@@ -81,6 +98,7 @@ class TestProfileB:
 
     def test_event_dag_provenance(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import EventDAG, DAGEvent
+
         dag = EventDAG()
         dag.append(DAGEvent(cid="root", event_type="intent"))
         dag.append(DAGEvent(cid="mid", event_type="decision", parent_cids=["root"]))
@@ -97,6 +115,7 @@ class TestProfileC:
 
     def test_capability_covers(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import Capability
+
         cap = Capability(resource="mcp://tool/run_model", ability="invoke")
         assert cap.covers("mcp://tool/run_model", "invoke") is True
         assert cap.covers("mcp://tool/run_model", "read") is False
@@ -104,11 +123,13 @@ class TestProfileC:
 
     def test_capability_wildcard(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import Capability
+
         cap = Capability(resource="*", ability="*")
         assert cap.covers("mcp://tool/anything", "invoke") is True
 
     def test_delegation_creation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import Delegation, Capability
+
         d = Delegation(
             issuer="did:key:z123",
             audience="did:key:z456",
@@ -121,11 +142,17 @@ class TestProfileC:
 
     def test_delegation_expired(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import Delegation
+
         d = Delegation(issuer="a", audience="b", expiry=time.time() - 100)
         assert d.is_expired() is True
 
     def test_evaluator_can_invoke(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DelegationEvaluator, Delegation, Capability
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
+            DelegationEvaluator,
+            Delegation,
+            Capability,
+        )
+
         evaluator = DelegationEvaluator()
         d = Delegation(
             issuer="did:key:root",
@@ -139,7 +166,12 @@ class TestProfileC:
         assert reason == "authorized"
 
     def test_evaluator_denies_wrong_resource(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DelegationEvaluator, Delegation, Capability
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
+            DelegationEvaluator,
+            Delegation,
+            Capability,
+        )
+
         evaluator = DelegationEvaluator()
         d = Delegation(
             issuer="did:key:root",
@@ -151,7 +183,12 @@ class TestProfileC:
         assert ok is False
 
     def test_evaluator_revocation(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DelegationEvaluator, Delegation, Capability
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
+            DelegationEvaluator,
+            Delegation,
+            Capability,
+        )
+
         evaluator = DelegationEvaluator()
         d = Delegation(
             issuer="did:key:root",
@@ -165,7 +202,12 @@ class TestProfileC:
         assert "revoked" in reason
 
     def test_delegation_chain(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DelegationEvaluator, Delegation, Capability
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
+            DelegationEvaluator,
+            Delegation,
+            Capability,
+        )
+
         evaluator = DelegationEvaluator()
         root = Delegation(
             issuer="did:key:root",
@@ -180,7 +222,9 @@ class TestProfileC:
         )
         evaluator.add(root)
         evaluator.add(leaf)
-        ok, reason = evaluator.can_invoke(leaf.cid, "mcp://tool/infer", "invoke", actor="did:key:user")
+        ok, reason = evaluator.can_invoke(
+            leaf.cid, "mcp://tool/infer", "invoke", actor="did:key:user"
+        )
         assert ok is True
 
 
@@ -195,7 +239,8 @@ class TestExecuteWithEnvelope:
             return {"result": f"executed {method}"}
 
         envelope = await execute_with_envelope(
-            method="run_model", params={"model": "bert"},
+            method="run_model",
+            params={"model": "bert"},
             executor_fn=mock_executor,
         )
         assert envelope.receipt.success is True
@@ -208,7 +253,8 @@ class TestExecuteWithEnvelope:
 
         # Using a non-existent delegation CID should fail
         envelope = await execute_with_envelope(
-            method="run_model", params={},
+            method="run_model",
+            params={},
             delegation_cid="nonexistent_cid",
             executor_fn=lambda m, p: None,
         )
@@ -218,7 +264,10 @@ class TestExecuteWithEnvelope:
     @pytest.mark.asyncio
     async def test_execute_with_valid_delegation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            execute_with_envelope, Delegation, Capability, get_evaluator,
+            execute_with_envelope,
+            Delegation,
+            Capability,
+            get_evaluator,
         )
 
         evaluator = get_evaluator()
@@ -233,7 +282,8 @@ class TestExecuteWithEnvelope:
             return "success"
 
         envelope = await execute_with_envelope(
-            method="run_model", params={},
+            method="run_model",
+            params={},
             requester="did:key:user",
             delegation_cid=d.cid,
             executor_fn=mock_executor,

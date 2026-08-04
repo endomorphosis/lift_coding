@@ -81,9 +81,7 @@ DETACHED_WORKTREE_POLICY = (
     "gitlink commit before merge reconciliation proceeds"
 )
 
-VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS: tuple[
-    VirtualAiOsComponentRepoContract, ...
-] = (
+VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS: tuple[VirtualAiOsComponentRepoContract, ...] = (
     VirtualAiOsComponentRepoContract(
         component_id="ipfs_datasets_py",
         path="external/ipfs_datasets",
@@ -199,8 +197,7 @@ def get_virtual_ai_os_component_repo_contracts(
 
     source = os.environ if environ is None else environ
     return [
-        contract.as_dict(source, repo_root)
-        for contract in VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS
+        contract.as_dict(source, repo_root) for contract in VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS
     ]
 
 

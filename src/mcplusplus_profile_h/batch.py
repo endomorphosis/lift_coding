@@ -66,7 +66,9 @@ class DepositIntent:
             if not getattr(self, name):
                 raise ValueError(f"{name} must be non-empty")
         if self.network not in TESTNET_CHAIN_IDS:
-            raise ProfileHError(BATCH_DISABLED, "batch deposits are restricted to approved testnets")
+            raise ProfileHError(
+                BATCH_DISABLED, "batch deposits are restricted to approved testnets"
+            )
         amount = _canonical_uint(self.atomic_amount, "deposit amount", positive=True)
         maximum = _canonical_uint(self.maximum_exposure, "maximum exposure", positive=True)
         delay = _canonical_uint(self.withdrawal_delay_ms, "withdrawal delay", positive=True)
@@ -173,15 +175,30 @@ class DuckDBVoucherLedger:
                 return saved
             self.connection.execute(
                 """INSERT INTO profile_h_batch_deposits VALUES (?, ?, ?, ?, ?, 0, 0, ?, ?, ?, 'active', ?)""",
-                [intent.deposit_id, canonical_json(artifact).decode(), intent.network, intent.asset,
-                 intent.atomic_amount, intent.maximum_exposure, intent.expires_at_ms,
-                 intent.expires_at_ms + intent.withdrawal_delay_ms, confirmed_at_ms],
+                [
+                    intent.deposit_id,
+                    canonical_json(artifact).decode(),
+                    intent.network,
+                    intent.asset,
+                    intent.atomic_amount,
+                    intent.maximum_exposure,
+                    intent.expires_at_ms,
+                    intent.expires_at_ms + intent.withdrawal_delay_ms,
+                    confirmed_at_ms,
+                ],
             )
         return artifact
 
     def issue_voucher(
-        self, deposit_id: str, *, seller_did: str, nonce: int, atomic_amount: int,
-        expires_at_ms: int, issued_at_ms: int, buyer_signer: ArtifactSigner,
+        self,
+        deposit_id: str,
+        *,
+        seller_did: str,
+        nonce: int,
+        atomic_amount: int,
+        expires_at_ms: int,
+        issued_at_ms: int,
+        buyer_signer: ArtifactSigner,
     ) -> dict[str, Any]:
         if not seller_did.startswith("did:"):
             raise ValueError("seller_did must be a DID")
@@ -190,16 +207,27 @@ class DuckDBVoucherLedger:
         with self._lock:
             row = self.connection.execute(
                 """SELECT network, asset, deposited, reserved, redeemed, expires_at_ms, state,
-                artifact_json FROM profile_h_batch_deposits WHERE deposit_id = ?""", [deposit_id]
+                artifact_json FROM profile_h_batch_deposits WHERE deposit_id = ?""",
+                [deposit_id],
             ).fetchone()
             if not row:
                 raise KeyError(deposit_id)
-            if row[6] != "active" or issued_at_ms > row[5] or expires_at_ms > row[5] or expires_at_ms <= issued_at_ms:
+            if (
+                row[6] != "active"
+                or issued_at_ms > row[5]
+                or expires_at_ms > row[5]
+                or expires_at_ms <= issued_at_ms
+            ):
                 raise ProfileHError(BATCH_EXPIRED, "deposit or voucher validity window is closed")
             unsigned = {
-                "schema": "mcp++/profile-h/batch-voucher@1.0", "depositId": deposit_id,
-                "sellerDid": seller_did, "nonce": sequence, "atomicAmount": str(amount),
-                "network": row[0], "asset": row[1], "issuedAt": issued_at_ms,
+                "schema": "mcp++/profile-h/batch-voucher@1.0",
+                "depositId": deposit_id,
+                "sellerDid": seller_did,
+                "nonce": sequence,
+                "atomicAmount": str(amount),
+                "network": row[0],
+                "asset": row[1],
+                "issuedAt": issued_at_ms,
                 "expiresAt": expires_at_ms,
             }
             voucher = buyer_signer.sign(unsigned)
@@ -211,7 +239,9 @@ class DuckDBVoucherLedger:
             if existing:
                 saved = json.loads(existing[1]) if isinstance(existing[1], str) else existing[1]
                 if saved != voucher:
-                    raise ProfileHError(BATCH_REPLAY, "voucher nonce was reused with different terms")
+                    raise ProfileHError(
+                        BATCH_REPLAY, "voucher nonce was reused with different terms"
+                    )
                 return {**saved, "voucherId": existing[0]}
             if int(row[3]) + int(row[4]) + amount > int(row[2]):
                 raise ProfileHError(BATCH_INSOLVENT, "outstanding vouchers exceed escrow balance")
@@ -219,8 +249,16 @@ class DuckDBVoucherLedger:
                 self.connection.execute("BEGIN TRANSACTION")
                 self.connection.execute(
                     "INSERT INTO profile_h_batch_vouchers VALUES (?, ?, ?, ?, ?, ?, ?, 'issued', NULL, ?)",
-                    [voucher_id, deposit_id, seller_did, sequence, amount, expires_at_ms,
-                     canonical_json(voucher).decode(), issued_at_ms],
+                    [
+                        voucher_id,
+                        deposit_id,
+                        seller_did,
+                        sequence,
+                        amount,
+                        expires_at_ms,
+                        canonical_json(voucher).decode(),
+                        issued_at_ms,
+                    ],
                 )
                 self.connection.execute(
                     "UPDATE profile_h_batch_deposits SET reserved=reserved+?, updated_at_ms=? WHERE deposit_id=?",
@@ -233,8 +271,13 @@ class DuckDBVoucherLedger:
             return {**voucher, "voucherId": voucher_id}
 
     def redeem(
-        self, voucher: Mapping[str, Any], *, seller_did: str, now_ms: int,
-        expected_buyer_public_key: str, outcome: str = "confirmed",
+        self,
+        voucher: Mapping[str, Any],
+        *,
+        seller_did: str,
+        now_ms: int,
+        expected_buyer_public_key: str,
+        outcome: str = "confirmed",
         outcome_reference: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         if outcome not in {"confirmed", "failed", "unknown"}:
@@ -255,8 +298,12 @@ class DuckDBVoucherLedger:
             if not row:
                 raise ProfileHError(BATCH_INVALID, "voucher is not reserved in this ledger")
             if row[3] in {"redeemed", "failed"}:
-                return {"voucherId": voucher_id, "state": row[3], "duplicate": True,
-                        "outcomeReferenceCid": row[4]}
+                return {
+                    "voucherId": voucher_id,
+                    "state": row[3],
+                    "duplicate": True,
+                    "outcomeReferenceCid": row[4],
+                }
             if row[3] == "reconciliation_required":
                 raise ProfileHError(BATCH_RECONCILIATION_REQUIRED, "redemption outcome is unknown")
             if now_ms > row[2]:
@@ -272,26 +319,41 @@ class DuckDBVoucherLedger:
                     "UPDATE profile_h_batch_deposits SET state='reconciliation_required', updated_at_ms=? WHERE deposit_id=?",
                     [now_ms, row[0]],
                 )
-                return {"voucherId": voucher_id, "state": "reconciliation_required", "duplicate": False,
-                        "outcomeReferenceCid": ref_cid}
+                return {
+                    "voucherId": voucher_id,
+                    "state": "reconciliation_required",
+                    "duplicate": False,
+                    "outcomeReferenceCid": ref_cid,
+                }
             if outcome == "failed":
                 # A known failed transaction does not consume or release the still-valid voucher.
                 self.connection.execute(
                     "UPDATE profile_h_batch_vouchers SET outcome_ref_cid=?, updated_at_ms=? WHERE voucher_id=?",
                     [ref_cid, now_ms, voucher_id],
                 )
-                return {"voucherId": voucher_id, "state": "issued", "duplicate": False,
-                        "retryable": True, "outcomeReferenceCid": ref_cid}
+                return {
+                    "voucherId": voucher_id,
+                    "state": "issued",
+                    "duplicate": False,
+                    "retryable": True,
+                    "outcomeReferenceCid": ref_cid,
+                }
             self._confirm(voucher_id, row[0], int(row[1]), now_ms, ref_cid)
-            return {"voucherId": voucher_id, "state": "redeemed", "duplicate": False,
-                    "outcomeReferenceCid": ref_cid}
+            return {
+                "voucherId": voucher_id,
+                "state": "redeemed",
+                "duplicate": False,
+                "outcomeReferenceCid": ref_cid,
+            }
 
-    def reconcile(self, voucher_id: str, *, confirmed: bool, now_ms: int,
-                  outcome_reference: Mapping[str, Any]) -> dict[str, Any]:
+    def reconcile(
+        self, voucher_id: str, *, confirmed: bool, now_ms: int, outcome_reference: Mapping[str, Any]
+    ) -> dict[str, Any]:
         ref_cid = cid_for(outcome_reference)
         with self._lock:
             row = self.connection.execute(
-                "SELECT deposit_id, amount, state FROM profile_h_batch_vouchers WHERE voucher_id=?", [voucher_id]
+                "SELECT deposit_id, amount, state FROM profile_h_batch_vouchers WHERE voucher_id=?",
+                [voucher_id],
             ).fetchone()
             if not row:
                 raise KeyError(voucher_id)
@@ -307,7 +369,8 @@ class DuckDBVoucherLedger:
                 )
                 state = "issued"
             pending = self.connection.execute(
-                "SELECT COUNT(*) FROM profile_h_batch_vouchers WHERE deposit_id=? AND state='reconciliation_required'", [row[0]]
+                "SELECT COUNT(*) FROM profile_h_batch_vouchers WHERE deposit_id=? AND state='reconciliation_required'",
+                [row[0]],
             ).fetchone()[0]
             if not pending:
                 self.connection.execute(
@@ -336,7 +399,10 @@ class DuckDBVoucherLedger:
             if not row:
                 raise KeyError(deposit_id)
             if row[4] == "reconciliation_required" or row[1] != 0 or now_ms < row[3]:
-                raise ProfileHError(BATCH_WITHDRAWAL_BLOCKED, "withdrawal delay, vouchers, or reconciliation still blocks funds")
+                raise ProfileHError(
+                    BATCH_WITHDRAWAL_BLOCKED,
+                    "withdrawal delay, vouchers, or reconciliation still blocks funds",
+                )
             amount = int(row[0]) - int(row[2])
             self.connection.execute(
                 "UPDATE profile_h_batch_deposits SET state='withdrawn', deposited=redeemed, updated_at_ms=? WHERE deposit_id=?",
@@ -352,19 +418,29 @@ class DuckDBVoucherLedger:
         if not row:
             raise KeyError(deposit_id)
         available = int(row[1]) - int(row[2]) - int(row[3])
-        return DepositStatus(deposit_id, row[0], int(row[1]), int(row[2]), int(row[3]),
-                             available, int(row[4]), int(row[5]))
+        return DepositStatus(
+            deposit_id,
+            row[0],
+            int(row[1]),
+            int(row[2]),
+            int(row[3]),
+            available,
+            int(row[4]),
+            int(row[5]),
+        )
 
     def voucher_status(self, voucher_id: str) -> VoucherStatus:
         """Return redacted redemption state suitable for authorized status UX."""
         row = self.connection.execute(
             """SELECT deposit_id, seller_did, nonce, amount, state, expires_at_ms,
-            outcome_ref_cid FROM profile_h_batch_vouchers WHERE voucher_id=?""", [voucher_id]
+            outcome_ref_cid FROM profile_h_batch_vouchers WHERE voucher_id=?""",
+            [voucher_id],
         ).fetchone()
         if not row:
             raise KeyError(voucher_id)
-        return VoucherStatus(voucher_id, row[0], row[1], int(row[2]), int(row[3]), row[4],
-                             int(row[5]), row[6])
+        return VoucherStatus(
+            voucher_id, row[0], row[1], int(row[2]), int(row[3]), row[4], int(row[5]), row[6]
+        )
 
     def audit(self, deposit_id: str) -> dict[str, Any]:
         """Reproduce solvency from durable balances and voucher states."""
@@ -397,8 +473,9 @@ class DuckDBVoucherLedger:
             "solvent": solvent,
         }
 
-    def _confirm(self, voucher_id: str, deposit_id: str, amount: int, now_ms: int,
-                 ref_cid: str | None) -> None:
+    def _confirm(
+        self, voucher_id: str, deposit_id: str, amount: int, now_ms: int, ref_cid: str | None
+    ) -> None:
         try:
             self.connection.execute("BEGIN TRANSACTION")
             self.connection.execute(
@@ -414,8 +491,9 @@ class DuckDBVoucherLedger:
             self.connection.execute("ROLLBACK")
             raise
 
-    def _release(self, voucher_id: str, deposit_id: str, amount: int, now_ms: int,
-                 state: str) -> None:
+    def _release(
+        self, voucher_id: str, deposit_id: str, amount: int, now_ms: int, state: str
+    ) -> None:
         try:
             self.connection.execute("BEGIN TRANSACTION")
             self.connection.execute(

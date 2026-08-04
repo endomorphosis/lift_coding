@@ -93,7 +93,11 @@ def test_prior_attempted_merge_failure_abandons_reconciliation_candidate(tmp_pat
             "branch": "implementation/vai-214-attempt-1",
             "implementation_commit": implementation_commit,
             "resolved": False,
-            "merge_result": {"merged": False, "attempted": True, "reason": "main_checkout_dirty_conflict"},
+            "merge_result": {
+                "merged": False,
+                "attempted": True,
+                "reason": "main_checkout_dirty_conflict",
+            },
         },
     ]
     events_path.write_text("\n".join(json.dumps(event) for event in events), encoding="utf-8")

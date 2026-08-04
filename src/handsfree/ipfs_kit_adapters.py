@@ -90,9 +90,7 @@ class IPFSKitUnavailableError(RuntimeError):
 
 class _UnavailableIPFSKitAdapter:
     def _raise(self, method: str) -> NoReturn:
-        raise IPFSKitUnavailableError(
-            f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py"
-        )
+        raise IPFSKitUnavailableError(f"ipfs_kit_py.{method} is unavailable: install ipfs_kit_py")
 
     def add_bytes(self, data: bytes, **kwargs: Any) -> NoReturn:
         self._raise("add_bytes")
@@ -133,9 +131,7 @@ class _IPFSKitModuleAdapter:
             kit_module = importlib.import_module("ipfs_kit_py.ipfs_kit")
             kit_cls = getattr(kit_module, "ipfs_kit", None)
             if kit_cls is not None:
-                self._kit_instance = kit_cls.create(
-                    role="leecher", auto_start_daemons=False
-                )
+                self._kit_instance = kit_cls.create(role="leecher", auto_start_daemons=False)
                 return self._kit_instance
         except Exception as exc:
             logger.debug("ipfs_kit_py.ipfs_kit.ipfs_kit.create() failed: %s", exc)

@@ -19,7 +19,9 @@ from .errors import ProfileHError
 class ProfileHHttpApp:
     """Expose a :class:`ProfileHControlPlane` as a small, strict ASGI app."""
 
-    def __init__(self, control_plane: ProfileHControlPlane, *, max_body_bytes: int = 1_048_576) -> None:
+    def __init__(
+        self, control_plane: ProfileHControlPlane, *, max_body_bytes: int = 1_048_576
+    ) -> None:
         if max_body_bytes < 1:
             raise ValueError("max_body_bytes must be positive")
         self.control_plane = control_plane
@@ -33,7 +35,9 @@ class ProfileHHttpApp:
             return
         method = str(scope.get("method", "GET")).upper()
         path = str(scope.get("path", ""))
-        query = dict(parse_qsl(bytes(scope.get("query_string", b"")).decode("utf-8"), keep_blank_values=True))
+        query = dict(
+            parse_qsl(bytes(scope.get("query_string", b"")).decode("utf-8"), keep_blank_values=True)
+        )
         try:
             body = await self._body(receive)
             payload = self._json_body(body, method)
@@ -41,9 +45,15 @@ class ProfileHHttpApp:
         except ProfileHError as error:
             status, headers, result = self._error(error)
         except ValueError as error:
-            status, headers, result = 400, {}, {
-                "code": "H_REQUEST_MISMATCH", "message": str(error), "retryable": False,
-            }
+            status, headers, result = (
+                400,
+                {},
+                {
+                    "code": "H_REQUEST_MISMATCH",
+                    "message": str(error),
+                    "retryable": False,
+                },
+            )
         await self._send(send, status, headers, result)
 
     async def handle(
@@ -116,8 +126,8 @@ class ProfileHHttpApp:
         )
         if method == "GET":
             for prefix, name, key in variable:
-                if path.startswith(prefix) and path[len(prefix):]:
-                    return name, {key: path[len(prefix):]}
+                if path.startswith(prefix) and path[len(prefix) :]:
+                    return name, {key: path[len(prefix) :]}
         raise ProfileHError("H_METHOD_NOT_SUPPORTED", "unknown Profile H HTTP route")
 
     @staticmethod
@@ -138,10 +148,20 @@ class ProfileHHttpApp:
         return status, {"cache-control": "no-store"}, error.as_dict()
 
     @staticmethod
-    async def _send(send: Any, status: int, headers: Mapping[str, str], result: Mapping[str, Any]) -> None:
-        body = json.dumps(result, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
-        raw_headers = [(b"content-type", b"application/json"), (b"content-length", str(len(body)).encode("ascii"))]
-        raw_headers.extend((str(name).lower().encode("ascii"), str(value).encode("utf-8")) for name, value in headers.items())
+    async def _send(
+        send: Any, status: int, headers: Mapping[str, str], result: Mapping[str, Any]
+    ) -> None:
+        body = json.dumps(result, sort_keys=True, separators=(",", ":"), default=str).encode(
+            "utf-8"
+        )
+        raw_headers = [
+            (b"content-type", b"application/json"),
+            (b"content-length", str(len(body)).encode("ascii")),
+        ]
+        raw_headers.extend(
+            (str(name).lower().encode("ascii"), str(value).encode("utf-8"))
+            for name, value in headers.items()
+        )
         await send({"type": "http.response.start", "status": status, "headers": raw_headers})
         await send({"type": "http.response.body", "body": body})
 

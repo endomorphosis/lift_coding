@@ -39,11 +39,7 @@ from handsfree.virtual_ai_os_components import get_virtual_ai_os_component_repo_
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 VAI_339_DISCOVERY_PATH = (
-    REPO_ROOT
-    / "data"
-    / "virtual_ai_os"
-    / "discovery"
-    / "2026-06-23-vai-339-launch-replay-gate.md"
+    REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-06-23-vai-339-launch-replay-gate.md"
 )
 VAI_019_DISCOVERY_PATH = (
     REPO_ROOT
@@ -449,8 +445,7 @@ def test_hardware_free_virtual_ai_os_harness_dispatches_offloads_streams_and_rec
                 "tool_name": binding["runtime_binding"]["tool_name"],
                 "output": output,
                 "content": [
-                    {"type": "text", "text": event["text"]}
-                    for event in output["stream_events"]
+                    {"type": "text", "text": event["text"]} for event in output["stream_events"]
                 ],
             }
 

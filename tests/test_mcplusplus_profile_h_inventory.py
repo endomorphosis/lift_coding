@@ -61,9 +61,7 @@ def test_primary_cli_buyer_transport_cannot_be_omitted() -> None:
     validator = _load_validator()
     report = copy.deepcopy(_report())
     report["dispatchers"] = [
-        item
-        for item in report["dispatchers"]
-        if item["id"] != "swissknife-host-sdk-client"
+        item for item in report["dispatchers"] if item["id"] != "swissknife-host-sdk-client"
     ]
 
     failures = validator.validate(report)
@@ -99,8 +97,7 @@ def test_dependency_scan_cannot_omit_an_alternate_lockfile() -> None:
     validator = _load_validator()
     report = copy.deepcopy(_report())
     swissknife = next(
-        item for item in report["dependency_version_matrix"]
-        if item["component"] == "swissknife"
+        item for item in report["dependency_version_matrix"] if item["component"] == "swissknife"
     )
     swissknife["manifests_scanned"].remove("swissknife/yarn.lock")
 
@@ -113,7 +110,8 @@ def test_legacy_paid_access_bypass_surface_cannot_be_omitted() -> None:
     validator = _load_validator()
     report = copy.deepcopy(_report())
     report["non_mcplusplus_execution_surfaces"] = [
-        item for item in report["non_mcplusplus_execution_surfaces"]
+        item
+        for item in report["non_mcplusplus_execution_surfaces"]
         if item["id"] != "accelerate-legacy-fastapi-rollback"
     ]
 

@@ -231,14 +231,22 @@ def get_ipfs_mcp_tool_manifest() -> IPFSMCPToolManifest:
                 tool["inputSchema"]["properties"] = {
                     "texts": {"type": "array", "items": {"type": "string"}},
                     "model_name": {"type": "string", "nullable": True},
-                    "provider": {"type": "string", "enum": ["datasets", "accelerate"], "nullable": True},
+                    "provider": {
+                        "type": "string",
+                        "enum": ["datasets", "accelerate"],
+                        "nullable": True,
+                    },
                 }
                 tool["inputSchema"]["required"] = ["texts"]
             elif "generate" in entry.descriptor_id:
                 tool["inputSchema"]["properties"] = {
                     "prompt": {"type": "string"},
                     "model_name": {"type": "string", "nullable": True},
-                    "provider": {"type": "string", "enum": ["datasets", "accelerate"], "nullable": True},
+                    "provider": {
+                        "type": "string",
+                        "enum": ["datasets", "accelerate"],
+                        "nullable": True,
+                    },
                 }
                 tool["inputSchema"]["required"] = ["prompt"]
         tools.append(tool)

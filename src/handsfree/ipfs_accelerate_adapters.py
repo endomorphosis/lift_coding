@@ -162,15 +162,9 @@ class _IPFSAccelerateModuleAdapter:
 
         return {
             "available": True,
-            "webnn_webgpu_available": getattr(
-                self._root_module, "webnn_webgpu_available", False
-            ),
-            "model_manager_available": getattr(
-                self._root_module, "model_manager_available", False
-            ),
-            "llm_router_available": getattr(
-                self._root_module, "llm_router_available", False
-            ),
+            "webnn_webgpu_available": getattr(self._root_module, "webnn_webgpu_available", False),
+            "model_manager_available": getattr(self._root_module, "model_manager_available", False),
+            "llm_router_available": getattr(self._root_module, "llm_router_available", False),
             "embeddings_router_available": getattr(
                 self._root_module, "embeddings_router_available", False
             ),
@@ -195,6 +189,7 @@ class _IPFSAccelerateModuleAdapter:
             if callable(status_fn):
                 try:
                     import asyncio
+
                     loop = asyncio.get_event_loop()
                     if loop.is_running():
                         result["instance_status"] = "async_status_available"
@@ -205,9 +200,7 @@ class _IPFSAccelerateModuleAdapter:
         result["webnn_webgpu_available"] = getattr(
             self._root_module, "webnn_webgpu_available", False
         )
-        result["llm_router_available"] = getattr(
-            self._root_module, "llm_router_available", False
-        )
+        result["llm_router_available"] = getattr(self._root_module, "llm_router_available", False)
         result["embeddings_router_available"] = getattr(
             self._root_module, "embeddings_router_available", False
         )
@@ -262,9 +255,7 @@ class _IPFSAccelerateModuleAdapter:
         """List available models."""
         instance = self._get_instance()
         if instance is not None:
-            fn = getattr(instance, "list_models", None) or getattr(
-                instance, "get_model_list", None
-            )
+            fn = getattr(instance, "list_models", None) or getattr(instance, "get_model_list", None)
             if callable(fn):
                 return fn(**kwargs)
         caps = self.get_capabilities()

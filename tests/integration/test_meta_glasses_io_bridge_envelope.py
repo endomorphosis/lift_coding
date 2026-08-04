@@ -85,7 +85,9 @@ def make_envelope(
         "permission": {
             "state": permission_state,
             "required_scopes": [f"meta_glasses.{capability}", "meta_glasses.control.route"],
-            "granted_scopes": [] if permission_state == "denied" else ["meta_glasses.control.route"],
+            "granted_scopes": []
+            if permission_state == "denied"
+            else ["meta_glasses.control.route"],
             "denied_scopes": [f"meta_glasses.{capability}"] if permission_state == "denied" else [],
         },
         "flow_control": {
@@ -176,9 +178,16 @@ def validate_envelope(envelope: dict[str, Any] | None) -> list[str]:
         errors.append("ROUTE_DECISION")
     if not permission or "state" not in permission:
         errors.append("PERMISSION_STATE")
-    if flow.get("latency_ms", -1) < 0 or flow.get("backpressure") not in {"none", "soft_limit", "hard_limit", "blocked"}:
+    if flow.get("latency_ms", -1) < 0 or flow.get("backpressure") not in {
+        "none",
+        "soft_limit",
+        "hard_limit",
+        "blocked",
+    }:
         errors.append("FLOW_CONTROL")
-    if limits.get("max_payload_bytes", 0) <= 0 or limits.get("max_content_cid_count", 0) < len(content or []):
+    if limits.get("max_payload_bytes", 0) <= 0 or limits.get("max_content_cid_count", 0) < len(
+        content or []
+    ):
         errors.append("PAYLOAD_LIMITS")
     if not content or any(not str(ref.get("cid", "")).startswith(CID_PREFIX) for ref in content):
         errors.append("CONTENT_CIDS")
@@ -192,9 +201,18 @@ def validate_envelope(envelope: dict[str, Any] | None) -> list[str]:
         for key in ("libp2p_peer_id", "libp2p_remote_peer_id", "libp2p_session_id")
     ):
         errors.append("APP_LAYER_BOUNDARY")
-    if not receipts.get("mcp_tool_receipt_id") or not receipts.get("mcp_event_receipt_id") or not str(receipts.get("envelope_cid", "")).startswith(CID_PREFIX):
+    if (
+        not receipts.get("mcp_tool_receipt_id")
+        or not receipts.get("mcp_event_receipt_id")
+        or not str(receipts.get("envelope_cid", "")).startswith(CID_PREFIX)
+    ):
         errors.append("RECEIPTS")
-    if not policy or not policy.get("decision_id") or policy.get("outcome") not in {"allow", "deny", "fallback", "degrade", "require_confirmation"}:
+    if (
+        not policy
+        or not policy.get("decision_id")
+        or policy.get("outcome")
+        not in {"allow", "deny", "fallback", "degrade", "require_confirmation"}
+    ):
         errors.append("POLICY_DECISION")
     if policy and policy.get("outcome") == "deny" and permission.get("state") != "denied":
         errors.append("UNAUTHORIZED_RELAY")
@@ -228,7 +246,9 @@ def route_status(envelope: dict[str, Any], *, seen: set[str], in_flight: int = 0
 
 @pytest.mark.parametrize("capability", CAPABILITIES)
 def test_bridge_envelopes_carry_required_ipfs_libp2p_mcp_metadata(capability: str) -> None:
-    raw_transport = "bluetooth" if capability in {"microphone.input", "phone_gps.context"} else "wifi"
+    raw_transport = (
+        "bluetooth" if capability in {"microphone.input", "phone_gps.context"} else "wifi"
+    )
     provider = "phone-app" if raw_transport == "bluetooth" else "display-webapp"
     envelope = make_envelope(capability, raw_transport=raw_transport, bridge_provider=provider)
 
@@ -271,7 +291,10 @@ def test_replay_backpressure_payload_limits_and_fallback_states_are_deterministi
     ("mutation", "expected"),
     [
         (lambda env: env.update({"profile": "wrong"}), ["PROFILE"]),
-        (lambda env: env["route"].update({"raw_transport_is_ipfs_libp2p_or_mcp": True}), ["APP_LAYER_BOUNDARY"]),
+        (
+            lambda env: env["route"].update({"raw_transport_is_ipfs_libp2p_or_mcp": True}),
+            ["APP_LAYER_BOUNDARY"],
+        ),
         (lambda env: env.pop("policy"), ["POLICY_DECISION"]),
         (lambda env: env["policy"].update({"outcome": "deny"}), ["UNAUTHORIZED_RELAY"]),
         (lambda env: env["app_layers"].pop("libp2p_session_id"), ["UNAUTHORIZED_RELAY"]),

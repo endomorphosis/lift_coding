@@ -233,9 +233,7 @@ def discover_meta_wearables_dat_android_contract(
         "meta-wearables-dat-android display-access.mdc",
     )
 
-    permissions_registration_source = permissions_registration_doc_path.read_text(
-        encoding="utf-8"
-    )
+    permissions_registration_source = permissions_registration_doc_path.read_text(encoding="utf-8")
     _require_symbols(
         permissions_registration_source,
         (
@@ -281,7 +279,9 @@ def discover_meta_wearables_dat_android_contract(
     )
 
     view_model_source = display_view_model_path.read_text(encoding="utf-8")
-    discovered_icon_names = tuple(sorted(set(re.findall(r"IconName\.([A-Z_]+)", view_model_source))))
+    discovered_icon_names = tuple(
+        sorted(set(re.findall(r"IconName\.([A-Z_]+)", view_model_source)))
+    )
     _require_subset(
         REQUIRED_DISPLAY_ICON_NAMES,
         discovered_icon_names,
@@ -317,9 +317,7 @@ def discover_ipfs_kit_bucket_vfs_contract(root: str | Path) -> IPFSKitBucketVFSC
 
     root_path = Path(root)
     if not root_path.exists():
-        raise MetaWearablesDATAndroidIPFSKitInteropError(
-            f"ipfs_kit root not found: {root_path}"
-        )
+        raise MetaWearablesDATAndroidIPFSKitInteropError(f"ipfs_kit root not found: {root_path}")
 
     fix_mcp_schema_paths = tuple(root_path / rel for rel in REQUIRED_FIX_MCP_SCHEMA_PATHS)
     deprecations_report_schema_path = root_path / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH
@@ -441,7 +439,9 @@ def discover_ipfs_kit_bucket_vfs_contract(root: str | Path) -> IPFSKitBucketVFSC
 
     dag_pb_proto_source = dag_pb_proto_path.read_text(encoding="utf-8")
     discovered_dag_pb_messages = tuple(
-        sorted(set(re.findall(r"^message\s+([A-Za-z0-9_]+)", dag_pb_proto_source, flags=re.MULTILINE)))
+        sorted(
+            set(re.findall(r"^message\s+([A-Za-z0-9_]+)", dag_pb_proto_source, flags=re.MULTILINE))
+        )
     )
     _require_subset(
         REQUIRED_DAG_PB_MESSAGES,
@@ -462,9 +462,13 @@ def discover_ipfs_kit_bucket_vfs_contract(root: str | Path) -> IPFSKitBucketVFSC
         deprecations_report_required_keys=discovered_required_keys,
         bucket_vfs_mcp_tools=discovered_bucket_vfs_tools,
         bucket_vfs_cli_commands=discovered_cli_commands,
-        bucket_types=tuple(symbol for symbol in REQUIRED_BUCKET_TYPES if symbol in discovered_bucket_types),
+        bucket_types=tuple(
+            symbol for symbol in REQUIRED_BUCKET_TYPES if symbol in discovered_bucket_types
+        ),
         vfs_structure_types=tuple(
-            symbol for symbol in REQUIRED_VFS_STRUCTURE_TYPES if symbol in discovered_vfs_structure_types
+            symbol
+            for symbol in REQUIRED_VFS_STRUCTURE_TYPES
+            if symbol in discovered_vfs_structure_types
         ),
         dag_pb_messages=discovered_dag_pb_messages,
     )
@@ -481,9 +485,7 @@ def build_meta_wearables_dat_android_ipfs_kit_handoff(
 ) -> MetaWearablesDATAndroidIPFSKitHandoff:
     """Build a deterministic Android DAT display-event to ipfs_kit handoff receipt."""
 
-    meta_contract = discover_meta_wearables_dat_android_contract(
-        meta_wearables_dat_android_root
-    )
+    meta_contract = discover_meta_wearables_dat_android_contract(meta_wearables_dat_android_root)
     ipfs_kit_contract = discover_ipfs_kit_bucket_vfs_contract(ipfs_kit_root)
 
     payload_bytes = _payload_to_bytes(
@@ -548,9 +550,7 @@ def _require_files(label: str, paths: tuple[Path, ...]) -> None:
 def _require_symbols(source: str, symbols: tuple[str, ...], label: str) -> None:
     missing = [symbol for symbol in symbols if symbol not in source]
     if missing:
-        raise MetaWearablesDATAndroidIPFSKitInteropError(
-            f"{label} is missing symbols: {missing}"
-        )
+        raise MetaWearablesDATAndroidIPFSKitInteropError(f"{label} is missing symbols: {missing}")
 
 
 def _require_subset(required: tuple[str, ...], discovered: tuple[Any, ...], label: str) -> None:
@@ -562,9 +562,7 @@ def _require_subset(required: tuple[str, ...], discovered: tuple[Any, ...], labe
             normalized.add(str(item))
     missing = set(required) - normalized
     if missing:
-        raise MetaWearablesDATAndroidIPFSKitInteropError(
-            f"{label} missing: {sorted(missing)}"
-        )
+        raise MetaWearablesDATAndroidIPFSKitInteropError(f"{label} missing: {sorted(missing)}")
 
 
 def _discover_enum_members(source: str, class_name: str) -> tuple[str, ...]:

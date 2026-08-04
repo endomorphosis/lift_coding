@@ -10,8 +10,15 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
 SCRIPTS_DIR = REPO_ROOT / "scripts"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
-PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+TODO_PATH = (
+    REPO_ROOT
+    / "implementation_plan"
+    / "docs"
+    / "18-swissknife-meta-glasses-display-widgets.todo.md"
+)
+PLAN_PATH = (
+    REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+)
 
 
 def _load_script_module(name: str):
@@ -91,11 +98,30 @@ def test_expanded_meta_glasses_io_tasks_cover_contracts_mocks_transport_and_test
         "MGW-364": ["camera", "microphone", "speaker/headphone", "control-plane route decisions"],
         "MGW-365": ["Hardware-free", "DAT camera", "control-plane event envelopes", "phone GPS"],
         "MGW-366": ["Bluetooth", "Wi-Fi", "control-plane route decision", "libp2p peer IDs"],
-        "MGW-367": ["camera photo", "video stream", "pass normalized capture events", "control plane"],
+        "MGW-367": [
+            "camera photo",
+            "video stream",
+            "pass normalized capture events",
+            "control plane",
+        ],
         "MGW-368": ["microphone", "speaker/headphone", "raw-audio leakage", "control plane"],
-        "MGW-369": ["Meta Neural Band", "captouch", "motion/orientation", "control-plane route decisions"],
-        "MGW-370": ["Swissknife applications", "interaction bindings", "control plane", "MCP++ receipts"],
-        "MGW-371": ["Bluetooth/Wi-Fi", "control-plane route decisions", "unauthorized control-plane handoffs"],
+        "MGW-369": [
+            "Meta Neural Band",
+            "captouch",
+            "motion/orientation",
+            "control-plane route decisions",
+        ],
+        "MGW-370": [
+            "Swissknife applications",
+            "interaction bindings",
+            "control plane",
+            "MCP++ receipts",
+        ],
+        "MGW-371": [
+            "Bluetooth/Wi-Fi",
+            "control-plane route decisions",
+            "unauthorized control-plane handoffs",
+        ],
         "MGW-372": ["Playwright", "app interaction bindings", "control-plane handoff evidence"],
         "MGW-373": ["Launch readiness", "control-plane routing evidence", "Playwright results"],
     }
@@ -211,9 +237,7 @@ def test_meta_glasses_llm_router_preflight_does_not_call_model():
 def test_meta_glasses_supervisor_wrapper_uses_active_accelerate_runner(monkeypatch):
     supervisor_module = _load_script_module("meta_glasses_display_todo_supervisor")
     daemon_module = _load_script_module("meta_glasses_display_todo_daemon")
-    source = (SCRIPTS_DIR / "meta_glasses_display_todo_supervisor.py").read_text(
-        encoding="utf-8"
-    )
+    source = (SCRIPTS_DIR / "meta_glasses_display_todo_supervisor.py").read_text(encoding="utf-8")
     captured: dict[str, list[str] | None] = {}
 
     class FakeRunner:
@@ -240,9 +264,17 @@ def test_meta_glasses_supervisor_wrapper_uses_active_accelerate_runner(monkeypat
     assert supervisor_module.META_GLASSES_DISPLAY_ENV_PREFIX == "HANDSFREE_MGW"
     assert supervisor_module.CODEBASE_SCAN_SETTINGS.min_open_tasks == 8
     assert supervisor_module.CODEBASE_SCAN_SETTINGS.max_findings == 3
-    assert "external/meta-wearables-dat-android" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
-    assert "external/meta-wearables-dat-ios" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
-    assert "Mcp-Plus-Plus" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS
+    assert (
+        "external/meta-wearables-dat-android"
+        in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
+    )
+    assert (
+        "external/meta-wearables-dat-ios"
+        in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS
+    )
+    assert (
+        "Mcp-Plus-Plus" in supervisor_module.META_GLASSES_DISPLAY_INTEROPERABILITY_COMPONENT_PATHS
+    )
     assert "swissknife/cleanup-archive/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert "swissknife/docs/DEVELOPER_GUIDE.md" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert "swissknife/docs/validation/" in supervisor_module.CODEBASE_SCAN_SKIP_PREFIXES

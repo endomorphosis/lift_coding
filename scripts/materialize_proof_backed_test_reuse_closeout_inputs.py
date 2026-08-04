@@ -42,20 +42,12 @@ CONFIG_PATH = REPO_ROOT / "config" / "proof_backed_test_reuse_supervisor.json"
 STATE_ROOT = Path(
     os.environ.get(
         "IPFS_ACCELERATE_PROOF_REUSE_STATE_ROOT",
-        str(
-            Path.home()
-            / ".local"
-            / "state"
-            / "ipfs_accelerate_py"
-            / "proof-backed-test-reuse-v1"
-        ),
+        str(Path.home() / ".local" / "state" / "ipfs_accelerate_py" / "proof-backed-test-reuse-v1"),
     )
 )
 OUT_DIR = STATE_ROOT / "projection" / "completion" / "materialization"
 MERGE_COMPLETED = STATE_ROOT / "merge-queue" / "completed"
-VALIDATION_RECEIPT_DIR = (
-    STATE_ROOT / "projection" / "completion" / "validation_receipts"
-)
+VALIDATION_RECEIPT_DIR = STATE_ROOT / "projection" / "completion" / "validation_receipts"
 
 
 def _run_json(command: list[str]) -> tuple[int, Any, str]:
@@ -78,9 +70,7 @@ def _run_json(command: list[str]) -> tuple[int, Any, str]:
 
 
 def _git(*args: str) -> str:
-    return subprocess.check_output(
-        ["git", *args], cwd=REPO_ROOT, text=True
-    ).strip()
+    return subprocess.check_output(["git", *args], cwd=REPO_ROOT, text=True).strip()
 
 
 def _write(path: Path, payload: Any) -> None:
@@ -158,9 +148,7 @@ def _materialize_forest() -> dict[str, Any]:
         try:
             payload["materialization"] = result.to_dict()
         except Exception as exc:
-            payload["materialization_to_dict_error"] = (
-                f"{type(exc).__name__}: {exc}"
-            )
+            payload["materialization_to_dict_error"] = f"{type(exc).__name__}: {exc}"
 
     # Normalize identity aliases used by task evidence collectors.
     forest_dict = payload.get("forest") if isinstance(payload.get("forest"), dict) else {}
@@ -212,10 +200,7 @@ def _load_merge_records() -> list[dict[str, Any]]:
         task_id = str(raw.get("task_id") or "").strip()
         status = str(raw.get("status") or raw.get("state") or "").strip().lower()
         commit = str(
-            raw.get("merged_commit_id")
-            or raw.get("commit_sha")
-            or raw.get("commit_id")
-            or ""
+            raw.get("merged_commit_id") or raw.get("commit_sha") or raw.get("commit_id") or ""
         ).strip()
         task_cid = str(
             raw.get("task_cid")
@@ -276,11 +261,7 @@ def _attempt_task_evidence(
 
     tasks = parse_task_file(REPO_ROOT / TODO_REL, "## PTR-")
     # Identity: only use real forest fields; otherwise report gap.
-    forest_cid = str(
-        forest.get("repository_forest_cid")
-        or forest.get("forest_cid")
-        or ""
-    )
+    forest_cid = str(forest.get("repository_forest_cid") or forest.get("forest_cid") or "")
     gitlink = str(forest.get("gitlink_state_cid") or "")
     if not forest_cid or not gitlink:
         return {
@@ -293,16 +274,10 @@ def _attempt_task_evidence(
         }
 
     dirty = not bool(checkout.get("clean"))
-    dirty_overlay = (
-        "cid:dirty-overlay:none"
-        if not dirty
-        else "cid:dirty-overlay:present"
-    )
+    dirty_overlay = "cid:dirty-overlay:none" if not dirty else "cid:dirty-overlay:present"
     # content-address dirty overlay if dirty using status text
     if dirty:
-        digest = hashlib.sha256(
-            str(checkout.get("dirty_detail") or "").encode("utf-8")
-        ).hexdigest()
+        digest = hashlib.sha256(str(checkout.get("dirty_detail") or "").encode("utf-8")).hexdigest()
         dirty_overlay = f"baguqeera{digest[:50]}"
 
     # Prefer identity snapshot written by the receipt retainer when present so
@@ -316,20 +291,14 @@ def _attempt_task_evidence(
                 forest_cid = str(identity.get("repository_forest_cid") or forest_cid)
                 gitlink = str(identity.get("gitlink_state_cid") or gitlink)
                 dirty = bool(identity.get("dirty"))
-                dirty_overlay = str(
-                    identity.get("dirty_overlay_cid") or dirty_overlay
-                )
+                dirty_overlay = str(identity.get("dirty_overlay_cid") or dirty_overlay)
                 repository_id = str(
-                    identity.get("repository_id")
-                    or "lift_coding/proof-backed-test-reuse"
+                    identity.get("repository_id") or "lift_coding/proof-backed-test-reuse"
                 )
                 repository_state_cid = str(
-                    identity.get("repository_state_cid")
-                    or f"git-commit:{checkout['commit']}"
+                    identity.get("repository_state_cid") or f"git-commit:{checkout['commit']}"
                 )
-                git_commit_id = str(
-                    identity.get("git_commit_id") or checkout["commit"]
-                )
+                git_commit_id = str(identity.get("git_commit_id") or checkout["commit"])
                 git_tree_id = str(identity.get("git_tree_id") or checkout["tree"])
             else:
                 repository_id = "lift_coding/proof-backed-test-reuse"
@@ -359,16 +328,18 @@ def _attempt_task_evidence(
             dirty_overlay_cid=dirty_overlay,
             board_namespace="proof-backed-test-reuse-v1",
             freshness_seconds=3_600.0,
-            ancestry_verifier=lambda ancestor, target: bool(ancestor)
-            and (
-                ancestor == target
-                or subprocess.run(
-                    ["git", "merge-base", "--is-ancestor", ancestor, target],
-                    cwd=REPO_ROOT,
-                    check=False,
-                    capture_output=True,
-                ).returncode
-                == 0
+            ancestry_verifier=lambda ancestor, target: (
+                bool(ancestor)
+                and (
+                    ancestor == target
+                    or subprocess.run(
+                        ["git", "merge-base", "--is-ancestor", ancestor, target],
+                        cwd=REPO_ROOT,
+                        check=False,
+                        capture_output=True,
+                    ).returncode
+                    == 0
+                )
             ),
         )
     except ProofTestReuseTaskEvidenceError as exc:
@@ -388,18 +359,14 @@ def _attempt_task_evidence(
             "board_namespace": "proof-backed-test-reuse-v1",
             "task_count": len(tasks),
             "task_ids": [t.task_id for t in tasks],
-            "task_cids": {
-                t.task_id: t.canonical_task_cid for t in tasks
-            },
+            "task_cids": {t.task_id: t.canonical_task_cid for t in tasks},
         }
     else:
         board_payload = {
             **board_payload,
-            "board_namespace": board_payload.get("board_namespace")
-            or "proof-backed-test-reuse-v1",
+            "board_namespace": board_payload.get("board_namespace") or "proof-backed-test-reuse-v1",
             "task_count": board_payload.get("task_count") or len(tasks),
-            "task_ids": board_payload.get("task_ids")
-            or [t.task_id for t in tasks],
+            "task_ids": board_payload.get("task_ids") or [t.task_id for t in tasks],
             "task_cids": board_payload.get("task_cids")
             or {t.task_id: t.canonical_task_cid for t in tasks},
         }
@@ -423,8 +390,7 @@ def _attempt_task_evidence(
     gap_kinds: dict[str, int] = {}
     for g in gaps:
         kind = str(
-            getattr(g, "kind", None)
-            or (g.get("kind") if isinstance(g, dict) else "unknown")
+            getattr(g, "kind", None) or (g.get("kind") if isinstance(g, dict) else "unknown")
         )
         gap_kinds[kind] = gap_kinds.get(kind, 0) + 1
     return {
@@ -439,10 +405,11 @@ def _attempt_task_evidence(
             {
                 "task_id": getattr(g, "task_id", None)
                 or (g.get("task_id") if isinstance(g, dict) else None),
-                "kind": str(getattr(g, "kind", None) or (g.get("kind") if isinstance(g, dict) else "")),
+                "kind": str(
+                    getattr(g, "kind", None) or (g.get("kind") if isinstance(g, dict) else "")
+                ),
                 "detail": str(
-                    getattr(g, "detail", None)
-                    or (g.get("detail") if isinstance(g, dict) else "")
+                    getattr(g, "detail", None) or (g.get("detail") if isinstance(g, dict) else "")
                 )[:500],
             }
             for g in list(gaps)[:200]
@@ -490,8 +457,7 @@ def main() -> int:
     health_input = {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-supervisor-health-input@1",
         "captured_at_unix_ns": time.time_ns(),
-        "configuration_sha256": "sha256:"
-        + hashlib.sha256(config_bytes).hexdigest(),
+        "configuration_sha256": "sha256:" + hashlib.sha256(config_bytes).hexdigest(),
         "checkout": checkout,
         "status": status if isinstance(status, dict) else {},
         "materialization_authority": False,
@@ -551,31 +517,25 @@ def main() -> int:
         identity_snapshot_path = VALIDATION_RECEIPT_DIR / "identity_snapshot.json"
         identity_payload: dict[str, object] = {}
         if identity_snapshot_path.is_file():
-            identity_payload = json.loads(
-                identity_snapshot_path.read_text(encoding="utf-8")
-            ).get("identity") or {}
+            identity_payload = (
+                json.loads(identity_snapshot_path.read_text(encoding="utf-8")).get("identity") or {}
+            )
         forest_cid = str(
             identity_payload.get("repository_forest_cid")
             or forest.get("repository_forest_cid")
             or ""
         )
         gitlink = str(
-            identity_payload.get("gitlink_state_cid")
-            or forest.get("gitlink_state_cid")
-            or ""
+            identity_payload.get("gitlink_state_cid") or forest.get("gitlink_state_cid") or ""
         )
         identity = CloseoutMaterializerIdentity(
             repository_id=str(
-                identity_payload.get("repository_id")
-                or "lift_coding/proof-backed-test-reuse"
+                identity_payload.get("repository_id") or "lift_coding/proof-backed-test-reuse"
             ),
             repository_state_cid=str(
-                identity_payload.get("repository_state_cid")
-                or f"git-commit:{checkout['commit']}"
+                identity_payload.get("repository_state_cid") or f"git-commit:{checkout['commit']}"
             ),
-            git_commit_id=str(
-                identity_payload.get("git_commit_id") or checkout["commit"]
-            ),
+            git_commit_id=str(identity_payload.get("git_commit_id") or checkout["commit"]),
             git_tree_id=str(identity_payload.get("git_tree_id") or checkout["tree"]),
             gitlink_state_cid=gitlink,
             repository_forest_cid=forest_cid,
@@ -685,9 +645,7 @@ def main() -> int:
         "supervisor_work_complete": (
             status.get("work_complete") if isinstance(status, dict) else None
         ),
-        "supervisor_healthy": (
-            status.get("healthy") if isinstance(status, dict) else None
-        ),
+        "supervisor_healthy": (status.get("healthy") if isinstance(status, dict) else None),
         "forest_ok": bool(forest.get("ok")),
         "merge_record_count": len(merge_records),
         "validation_receipt_count": len(validation_receipts),

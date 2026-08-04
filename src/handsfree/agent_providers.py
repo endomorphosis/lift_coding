@@ -1775,7 +1775,11 @@ def _todo_daemon_config(trace: dict[str, Any] | None) -> dict[str, str] | None:
         normalized_trace.get("todo_daemon_task_id"),
         normalized_trace.get("virtual_ai_os_task_id"),
     )
-    if state_path is None and task_id is not None and _is_virtual_ai_os_todo_task(task_id, normalized_trace):
+    if (
+        state_path is None
+        and task_id is not None
+        and _is_virtual_ai_os_todo_task(task_id, normalized_trace)
+    ):
         default_paths = _virtual_ai_os_todo_daemon_default_paths()
         if default_paths is not None:
             state_path = default_paths["state_path"]

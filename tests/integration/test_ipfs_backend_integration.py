@@ -363,12 +363,15 @@ class TestIPFSIntegrationAPI:
         accelerate = MagicMock()
         accelerate.embed.return_value = [[0.1, 0.2, 0.3]]
 
-        with patch(
-            "handsfree.handlers.ipfs_integration.get_embeddings_router",
-            side_effect=IPFSDatasetsRouterUnavailableError("datasets unavailable"),
-        ), patch(
-            "handsfree.handlers.ipfs_integration.get_ipfs_accelerate_adapter",
-            return_value=accelerate,
+        with (
+            patch(
+                "handsfree.handlers.ipfs_integration.get_embeddings_router",
+                side_effect=IPFSDatasetsRouterUnavailableError("datasets unavailable"),
+            ),
+            patch(
+                "handsfree.handlers.ipfs_integration.get_ipfs_accelerate_adapter",
+                return_value=accelerate,
+            ),
         ):
             resp = client.post("/v1/ipfs/embed", json={"texts": ["hello world"]})
 
@@ -383,12 +386,15 @@ class TestIPFSIntegrationAPI:
         accelerate = MagicMock()
         accelerate.generate.return_value = "accelerated output"
 
-        with patch(
-            "handsfree.handlers.ipfs_integration.get_llm_router",
-            side_effect=IPFSDatasetsRouterUnavailableError("llm unavailable"),
-        ), patch(
-            "handsfree.handlers.ipfs_integration.get_ipfs_accelerate_adapter",
-            return_value=accelerate,
+        with (
+            patch(
+                "handsfree.handlers.ipfs_integration.get_llm_router",
+                side_effect=IPFSDatasetsRouterUnavailableError("llm unavailable"),
+            ),
+            patch(
+                "handsfree.handlers.ipfs_integration.get_ipfs_accelerate_adapter",
+                return_value=accelerate,
+            ),
         ):
             resp = client.post("/v1/ipfs/generate", json={"prompt": "hello"})
 
@@ -410,7 +416,11 @@ class TestIPFSInteroperabilityProof:
     def test_all_adapters_coexist(self):
         """All three adapter modules import cleanly without conflicts."""
         from handsfree.ipfs_kit_adapters import get_ipfs_kit_adapter
-        from handsfree.ipfs_datasets_routers import get_embeddings_router, get_ipfs_router, get_llm_router
+        from handsfree.ipfs_datasets_routers import (
+            get_embeddings_router,
+            get_ipfs_router,
+            get_llm_router,
+        )
         from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_adapter
 
         # All should return adapters (possibly unavailable stubs)

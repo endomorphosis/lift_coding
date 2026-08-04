@@ -11,7 +11,11 @@ VAI_339_REPLAY_PATH = (
     REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-06-23-vai-339-launch-replay-gate.md"
 )
 VAI_340_RECEIPT_PATH = (
-    REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-06-23-vai-340-launch-readiness-gate.md"
+    REPO_ROOT
+    / "data"
+    / "virtual_ai_os"
+    / "discovery"
+    / "2026-06-23-vai-340-launch-readiness-gate.md"
 )
 HAO_436_RECEIPT_PATH = (
     REPO_ROOT
@@ -156,19 +160,39 @@ HAO_675_REPLAY_FIXTURE_PATH = (
     REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "fixtures" / "hao-675-launch-replay.json"
 )
 HAO_705_HALLUCINATE_FIXTURE_PATH = (
-    REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "fixtures" / "hao-705-cross-device-launch-gate.json"
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-705-cross-device-launch-gate.json"
 )
 HAO_705_SWISSKNIFE_FIXTURE_PATH = (
     REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "hao-705-cross-device-launch-gate.json"
 )
 HAO_682_HALLUCINATE_FIXTURE_PATH = (
-    REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "fixtures" / "hao-682-mcp-dashboard-launch-readiness.json"
+    REPO_ROOT
+    / "hallucinate_app"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-682-mcp-dashboard-launch-readiness.json"
 )
 HAO_682_SWISSKNIFE_FIXTURE_PATH = (
-    REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "hao-682-mcp-dashboard-launch-readiness.json"
+    REPO_ROOT
+    / "swissknife"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "hao-682-mcp-dashboard-launch-readiness.json"
 )
 VAI_502_CROSS_DEVICE_REPLAY_PATH = (
-    REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "vai-502-cross-device-playwright-replay.json"
+    REPO_ROOT
+    / "swissknife"
+    / "test"
+    / "e2e"
+    / "fixtures"
+    / "vai-502-cross-device-playwright-replay.json"
 )
 
 PYTHON_GATE_COMMAND = (
@@ -353,20 +377,19 @@ def test_vai_339_replay_receipt_chain_preserves_session_and_command_identity():
     assert by_receipt["placement_receipt_cid"]["fallback_runtime"] == "phone_local"
     assert by_receipt["desktop_peer_execution_receipt"]["desktop_id"] == join_keys["desktop_id"]
     assert by_receipt["meta_glasses_render_receipt"]["widget_id"] == join_keys["widget_id"]
-    assert by_receipt["meta_glasses_render_receipt"]["descriptor_cid"] == (
-        join_keys["descriptor_cid"]
+    assert (
+        by_receipt["meta_glasses_render_receipt"]["descriptor_cid"] == (join_keys["descriptor_cid"])
     )
-    assert by_receipt["meta_glasses_render_receipt"]["manifest_cid"] == (
-        join_keys["manifest_cid"]
-    )
+    assert by_receipt["meta_glasses_render_receipt"]["manifest_cid"] == (join_keys["manifest_cid"])
     assert by_receipt["meta_glasses_render_receipt"]["terminal_status"] == "rendered"
     assert by_receipt["recovery_receipt_cid"]["recovered_runtime"] == "phone_local"
     assert by_receipt["recovery_receipt_cid"]["terminal_status"] == "recovered"
-    assert by_receipt["capability_receipt_cid"]["receipt_cid"] == (
-        join_keys["capability_receipt_cid"]
+    assert (
+        by_receipt["capability_receipt_cid"]["receipt_cid"] == (join_keys["capability_receipt_cid"])
     )
-    assert by_receipt["capability_receipt_cid"]["capability_actions"] == (
-        replay["widget_capabilities"]
+    assert (
+        by_receipt["capability_receipt_cid"]["capability_actions"]
+        == (replay["widget_capabilities"])
     )
 
 
@@ -408,7 +431,10 @@ def test_swissknife_meta_glasses_playwright_gate_is_runnable_and_specific():
     ).read_text(encoding="utf-8")
     assert "idempotency_key" in helper_source
     assert "setControlSurfacePolicyEvaluator" in helper_source
-    assert "Meta glasses Playwright launch gate permits deterministic display-widget render." in helper_source
+    assert (
+        "Meta glasses Playwright launch gate permits deterministic display-widget render."
+        in helper_source
+    )
 
 
 def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
@@ -428,7 +454,10 @@ def test_hallucinate_multimodal_playwright_gate_is_runnable_and_specific():
     assert "HALLUCINATE_APP_E2E_DISABLE_XVFB" in runner_source
     assert "ensureE2EDependencies();" in runner_source
     assert "repairable launch-environment blocker" in runner_source
-    assert "No graphical display detected; running Hallucinate Electron Playwright tests under xvfb-run." in runner_source
+    assert (
+        "No graphical display detected; running Hallucinate Electron Playwright tests under xvfb-run."
+        in runner_source
+    )
     assert "allowsNoDisplaySpecSkip" not in runner_source
     assert "noDisplaySafeSpecs" not in runner_source
     assert "noDisplayHeadlessGateSpecs" not in runner_source
@@ -485,7 +514,10 @@ def test_meta_glasses_mcp_dashboard_gate_inherits_headless_aware_hallucinate_run
     assert "usesXvfb: true" in runner_source
     assert "process.exit(78)" in runner_source
     assert "missing_xvfb_for_electron_playwright" in runner_source
-    assert "No graphical display detected; running Hallucinate Electron Playwright tests under xvfb-run." in runner_source
+    assert (
+        "No graphical display detected; running Hallucinate Electron Playwright tests under xvfb-run."
+        in runner_source
+    )
     assert "noDisplayHeadlessGateSpecs" not in runner_source
     assert "canRunWithoutVirtualDisplay" not in runner_source
     assert "allowsNoDisplaySpecSkip" not in runner_source
@@ -523,9 +555,7 @@ def test_vai_513_prevents_skipped_electron_coverage_from_satisfying_vaios_g723()
         "reports_missing_xvfb_when_absent": True,
         "allows_no_display_electron_skip_to_satisfy_gate": False,
     }
-    assert vai_receipt["supervisor_focus"] == (
-        "fix_validation_environment_before_production_ready"
-    )
+    assert vai_receipt["supervisor_focus"] == ("fix_validation_environment_before_production_ready")
     assert "run_playwright_test.mjs --help" in vai_receipt["validation_commands"][1]
     assert "missing_xvfb_for_electron_playwright" in runner_source
     assert "headless-compatible launch gate specs" not in runner_source
@@ -566,8 +596,14 @@ def test_vai_533_repairs_vai_531_retry_budget_with_no_display_runnable_gate():
     assert "NO_DISPLAY_RUNNABLE_SPEC_FILES" in runner_source
     assert "isNoDisplayRunnableRequest" in runner_source
     assert "no-display runnable launch gate specs" in runner_source
-    assert "data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md" in heap_source
-    assert "data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md" in readiness_source
+    assert (
+        "data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md"
+        in heap_source
+    )
+    assert (
+        "data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md"
+        in readiness_source
+    )
 
 
 def test_mgw_534_meta_glasses_input_routing_has_launch_playwright_gate():
@@ -624,9 +660,11 @@ def test_mgw_534_meta_glasses_input_routing_has_launch_playwright_gate():
         event["receipts"][0] for event in fixture["events"]
     }
     assert all(item["preserve_for_dat_replay"] is True for item in fixture["replay_receipts"])
-    assert {"external/meta-wearables-dat-android", "external/meta-wearables-dat-ios", "mobile"} == set(
-        receipt["mobile_edges"]
-    )
+    assert {
+        "external/meta-wearables-dat-android",
+        "external/meta-wearables-dat-ios",
+        "mobile",
+    } == set(receipt["mobile_edges"])
 
     for required_term in (
         "MGW-534",
@@ -681,7 +719,9 @@ def test_hao_701_meta_glasses_input_routing_has_hallucinate_owned_gate():
         "captouch",
         "Neural Band",
     }
-    assert set(receipt["required_inputs"]).issubset({event["device"] for event in fixture["events"]})
+    assert set(receipt["required_inputs"]).issubset(
+        {event["device"] for event in fixture["events"]}
+    )
     assert receipt["required_transports"] == [
         "Bluetooth transport",
         "Wi-Fi transport",
@@ -770,7 +810,9 @@ def test_vai_518_meta_glasses_input_routing_has_launch_playwright_gate():
         "keeps_supervisor_fed_backlog_aligned": True,
     }
 
-    assert set(receipt["required_inputs"]).issubset({event["device"] for event in fixture["events"]})
+    assert set(receipt["required_inputs"]).issubset(
+        {event["device"] for event in fixture["events"]}
+    )
     assert all(
         event["control_plane"]["route"] == "swissknife.mobile_orb.publish_glasses_event"
         for event in fixture["events"]
@@ -961,11 +1003,13 @@ def test_vai_522_cross_device_offload_replay_has_launch_playwright_gate():
         "merge_role": "validation_gate",
         "keeps_supervisor_fed_backlog_aligned": True,
     }
-    assert receipt["placement_policy"]["selected_runtime"] == (
-        replay["placement_policy"]["selected_runtime"]
+    assert (
+        receipt["placement_policy"]["selected_runtime"]
+        == (replay["placement_policy"]["selected_runtime"])
     )
-    assert receipt["placement_policy"]["fallback_runtime"] == (
-        replay["placement_policy"]["fallback_runtime"]
+    assert (
+        receipt["placement_policy"]["fallback_runtime"]
+        == (replay["placement_policy"]["fallback_runtime"])
     )
     assert hao_675["pass_fail_receipts"]["desktop_peer_offload"] == "passed"
     assert hao_675["pass_fail_receipts"]["production_launch_readiness"] == "passed"
@@ -1050,29 +1094,37 @@ def test_hao_705_cross_device_offload_replay_has_launch_playwright_gate():
     assert hallucinate_fixture["supervisor_alignment"] == receipt["supervisor_alignment"]
 
     assert replay["schema"] == "cross_device_virtual_desktop_playwright_replay_v1"
-    assert replay["phone_hosted_execution"]["mode"] == (
-        hallucinate_fixture["replay_assertions"]["phone_hosted_mode"]
+    assert (
+        replay["phone_hosted_execution"]["mode"]
+        == (hallucinate_fixture["replay_assertions"]["phone_hosted_mode"])
     )
-    assert replay["phone_hosted_execution"]["control_plane_command"] == (
-        hallucinate_fixture["replay_assertions"]["control_plane_command"]
+    assert (
+        replay["phone_hosted_execution"]["control_plane_command"]
+        == (hallucinate_fixture["replay_assertions"]["control_plane_command"])
     )
-    assert replay["desktop_peer_offload"]["first_attempt"]["placement"] == (
-        hallucinate_fixture["replay_assertions"]["selected_runtime"]
+    assert (
+        replay["desktop_peer_offload"]["first_attempt"]["placement"]
+        == (hallucinate_fixture["replay_assertions"]["selected_runtime"])
     )
-    assert replay["desktop_peer_offload"]["fallback"]["placement"] == (
-        hallucinate_fixture["replay_assertions"]["fallback_runtime"]
+    assert (
+        replay["desktop_peer_offload"]["fallback"]["placement"]
+        == (hallucinate_fixture["replay_assertions"]["fallback_runtime"])
     )
-    assert replay["desktop_peer_offload"]["first_attempt"]["receipt_id"] == (
-        hallucinate_fixture["replay_assertions"]["desktop_peer_receipt"]
+    assert (
+        replay["desktop_peer_offload"]["first_attempt"]["receipt_id"]
+        == (hallucinate_fixture["replay_assertions"]["desktop_peer_receipt"])
     )
-    assert replay["desktop_peer_offload"]["fallback"]["receipt_id"] == (
-        hallucinate_fixture["replay_assertions"]["phone_fallback_receipt"]
+    assert (
+        replay["desktop_peer_offload"]["fallback"]["receipt_id"]
+        == (hallucinate_fixture["replay_assertions"]["phone_fallback_receipt"])
     )
-    assert replay["meta_glasses_status_output"]["render_receipt_id"] == (
-        hallucinate_fixture["replay_assertions"]["meta_glasses_render_receipt"]
+    assert (
+        replay["meta_glasses_status_output"]["render_receipt_id"]
+        == (hallucinate_fixture["replay_assertions"]["meta_glasses_render_receipt"])
     )
-    assert replay["lineage_id"] == (
-        hallucinate_fixture["replay_assertions"]["launch_readiness_lineage"]
+    assert (
+        replay["lineage_id"]
+        == (hallucinate_fixture["replay_assertions"]["launch_readiness_lineage"])
     )
 
     for required_term in (
@@ -1114,7 +1166,10 @@ def test_hao_682_dashboard_interoperability_receipt_aggregates_one_lineage():
     assert receipt["evidence_term"] == "dashboard interoperability launch-readiness receipt"
     assert receipt["session_id"] == "vaios-g723-hallucinate-mcp-dashboard-session"
     assert receipt["daemon_lineage_id"] == "vaios-g723-daemon-lineage-ipfs-kit-datasets-accelerate"
-    assert receipt["swissknife_fixture"] == "swissknife/test/e2e/fixtures/hao-682-mcp-dashboard-launch-readiness.json"
+    assert (
+        receipt["swissknife_fixture"]
+        == "swissknife/test/e2e/fixtures/hao-682-mcp-dashboard-launch-readiness.json"
+    )
     assert hallucinate_fixture["session_id"] == receipt["session_id"]
     assert hallucinate_fixture["daemon_lineage_id"] == receipt["daemon_lineage_id"]
     assert hallucinate_fixture["pass_together_rule"] == receipt["pass_together_rule"]

@@ -218,9 +218,7 @@ def test_discover_ipfs_kit_mcp_schema_contract_finds_expected_surface() -> None:
     )
     for relative_path in REQUIRED_FIX_MCP_SCHEMA_PATHS:
         assert any(path.endswith(relative_path) for path in contract.fix_mcp_schema_paths)
-    assert contract.deprecations_report_schema_path.endswith(
-        "data/deprecations_report.schema.json"
-    )
+    assert contract.deprecations_report_schema_path.endswith("data/deprecations_report.schema.json")
     assert contract.bucket_vfs_doc_path.endswith(
         "docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     )
@@ -252,9 +250,7 @@ def test_build_swissknife_ipfs_kit_handoff_is_deterministic() -> None:
     assert first.payload_size_bytes > 0
     assert set(REQUIRED_BUCKET_VFS_MCP_TOOLS).issubset(set(first.bucket_vfs_mcp_tools))
     assert set(REQUIRED_DAG_PB_MESSAGES).issubset(set(first.dag_pb_messages))
-    assert set(first.required_swissknife_operations) == set(
-        REQUIRED_SWISSKNIFE_IPFS_KIT_OPERATIONS
-    )
+    assert set(first.required_swissknife_operations) == set(REQUIRED_SWISSKNIFE_IPFS_KIT_OPERATIONS)
 
 
 def test_swissknife_descriptor_module_exports_interop_contract() -> None:

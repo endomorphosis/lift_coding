@@ -46,6 +46,8 @@ class EventDAGValidator:
                 seen.add(event_cid)
             for parent in event.get("parents", []) if isinstance(event, dict) else []:
                 if parent not in seen and index > 0:
-                    result.add_warning(f"Event {event_cid or index} references unseen parent: {parent}")
+                    result.add_warning(
+                        f"Event {event_cid or index} references unseen parent: {parent}"
+                    )
 
         return result

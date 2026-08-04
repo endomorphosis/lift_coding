@@ -135,9 +135,7 @@ def test_module_adapter_package_dataset_stores_manifest():
     mock_kit_module.ipfs_kit = mock_kit_cls
 
     with patch("importlib.import_module", return_value=mock_kit_module):
-        result = adapter.package_dataset(
-            [{"cid": "bafy123"}], metadata={"name": "test"}
-        )
+        result = adapter.package_dataset([{"cid": "bafy123"}], metadata={"name": "test"})
         assert result == {"Hash": "QmManifestCID"}
         mock_kit_instance.ipfs_add.assert_called_once()
 
@@ -199,4 +197,3 @@ def test_kit_all_init_paths_fail_raises_unavailable():
     with patch("importlib.import_module", return_value=mock_kit_module):
         with pytest.raises(IPFSKitUnavailableError, match="failed to initialize"):
             adapter.cat("bafy123")
-

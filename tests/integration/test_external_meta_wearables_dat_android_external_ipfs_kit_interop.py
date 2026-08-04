@@ -42,22 +42,18 @@ from handsfree.meta_wearables_dat_android_ipfs_kit_interop import (  # noqa: E40
 META_WEARABLES_DAT_ANDROID_ROOT = REPO_ROOT / "external" / "meta-wearables-dat-android"
 IPFS_KIT_ROOT = REPO_ROOT / "external" / "ipfs_kit"
 DISCOVERY_PATH = (
-    REPO_ROOT
-    / "data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-validation-repair.md"
+    REPO_ROOT / "data/virtual_ai_os/discovery/2026-07-08-vai-670-objective-validation-repair.md"
 )
 HAO_DISCOVERY_PATH = (
-    REPO_ROOT
-    / "data/hallucinate_multimodal_control/discovery/"
+    REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
     "2026-07-08-hao-739-objective-validation-repair.md"
 )
 HAO_ATTEMPT_6_DISCOVERY_PATH = (
-    REPO_ROOT
-    / "data/hallucinate_multimodal_control/discovery/"
+    REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
     "2026-07-09-hao-739-attempt-6-objective-validation-repair.md"
 )
 GAP_PATH = (
-    REPO_ROOT
-    / "data/hallucinate_multimodal_control/discovery/"
+    REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
     "2026-07-08-hao-739-objective-gap-853e023f8d1d.md"
 )
 HEAP_PATH = REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
@@ -123,18 +119,14 @@ def test_discover_ipfs_kit_bucket_vfs_contract_finds_mcp_and_ipld_surface() -> N
         set(contract.deprecations_report_required_keys)
     )
     assert set(REQUIRED_BUCKET_VFS_MCP_TOOLS).issubset(set(contract.bucket_vfs_mcp_tools))
-    assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(
-        set(contract.bucket_vfs_cli_commands)
-    )
+    assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(set(contract.bucket_vfs_cli_commands))
     assert set(REQUIRED_BUCKET_TYPES) == set(contract.bucket_types)
     assert set(REQUIRED_VFS_STRUCTURE_TYPES) == set(contract.vfs_structure_types)
     assert set(contract.bucket_types).isdisjoint(set(contract.vfs_structure_types))
     assert set(REQUIRED_DAG_PB_MESSAGES) == set(contract.dag_pb_messages)
     for relative_path in REQUIRED_FIX_MCP_SCHEMA_PATHS:
         assert any(path.endswith(relative_path) for path in contract.fix_mcp_schema_paths)
-    assert contract.deprecations_report_schema_path.endswith(
-        "data/deprecations_report.schema.json"
-    )
+    assert contract.deprecations_report_schema_path.endswith("data/deprecations_report.schema.json")
     assert contract.bucket_vfs_doc_path.endswith(
         "docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     )
@@ -220,12 +212,8 @@ def test_ipfs_kit_descriptor_scripts_and_sources_are_import_safe() -> None:
     for relative_path in REQUIRED_FIX_MCP_SCHEMA_PATHS:
         py_compile.compile(str(IPFS_KIT_ROOT / relative_path), doraise=True)
 
-    cli_source = (IPFS_KIT_ROOT / "ipfs_kit_py/bucket_vfs_cli.py").read_text(
-        encoding="utf-8"
-    )
-    mcp_source = (IPFS_KIT_ROOT / "mcp/bucket_vfs_mcp_tools.py").read_text(
-        encoding="utf-8"
-    )
+    cli_source = (IPFS_KIT_ROOT / "ipfs_kit_py/bucket_vfs_cli.py").read_text(encoding="utf-8")
+    mcp_source = (IPFS_KIT_ROOT / "mcp/bucket_vfs_mcp_tools.py").read_text(encoding="utf-8")
     doc_source = (
         IPFS_KIT_ROOT / "docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     ).read_text(encoding="utf-8")
@@ -255,9 +243,7 @@ def test_docs_discovery_gap_and_heap_record_objective_validation_repair() -> Non
     doc_source = DOC_PATH.read_text(encoding="utf-8")
     discovery_source = DISCOVERY_PATH.read_text(encoding="utf-8")
     hao_discovery_source = HAO_DISCOVERY_PATH.read_text(encoding="utf-8")
-    hao_attempt_6_discovery_source = HAO_ATTEMPT_6_DISCOVERY_PATH.read_text(
-        encoding="utf-8"
-    )
+    hao_attempt_6_discovery_source = HAO_ATTEMPT_6_DISCOVERY_PATH.read_text(encoding="utf-8")
     gap_source = GAP_PATH.read_text(encoding="utf-8")
     heap_source = HEAP_PATH.read_text(encoding="utf-8")
 
