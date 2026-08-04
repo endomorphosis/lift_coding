@@ -72,14 +72,36 @@ def _write(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def _local_dev_e2e_enabled() -> bool:
+    return str(os.environ.get("PTR_CLOSEOUT_LOCAL_SETUP", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    } or str(os.environ.get("PTR_CLOSEOUT_DEV_E2E", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+        "auto",
+    }
+
+
 def _checkout_identity() -> dict[str, Any]:
-    dirty = bool(_git("status", "--porcelain"))
+    # Development e2e: ignore recursive nested-submodule dirt that this monorepo
+    # cannot fully sanitize. Still fail closed on monorepo-tracked file edits.
+    if _local_dev_e2e_enabled():
+        dirty_text = _git("status", "--porcelain=v1", "--ignore-submodules=dirty")
+    else:
+        dirty_text = _git("status", "--porcelain")
+    dirty = bool(dirty_text.strip())
     return {
         "branch": _git("branch", "--show-current"),
         "commit": _git("rev-parse", "HEAD"),
         "tree": _git("rev-parse", "HEAD^{tree}"),
         "clean": not dirty,
-        "dirty_detail": _git("status", "--short") if dirty else "",
+        "dirty_detail": dirty_text if dirty else "",
+        "ignore_submodule_dirty": _local_dev_e2e_enabled(),
         "accelerator": _git("-C", str(ACCEL_ROOT), "rev-parse", "HEAD"),
         "datasets": _git("-C", str(DATASETS_ROOT), "rev-parse", "HEAD"),
         "kit": _git("-C", str(KIT_ROOT), "rev-parse", "HEAD"),

@@ -297,12 +297,40 @@ def _initialize_configured_submodules() -> tuple[str, ...]:
     return paths
 
 
+def _local_dev_e2e_enabled() -> bool:
+    """Development-branch local nonproduction e2e (local keys + allowlist)."""
+
+    return str(os.environ.get("PTR_CLOSEOUT_LOCAL_SETUP", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    } or str(os.environ.get("PTR_CLOSEOUT_DEV_E2E", "")).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+        "auto",
+    }
+
+
 def _require_isolated_clean_checkout() -> dict[str, object]:
     branch = _git_output("branch", "--show-current")
     if branch != TARGET_BRANCH:
         raise RuntimeError(f"refusing branch {branch!r}; expected {TARGET_BRANCH!r}")
     _initialize_configured_submodules()
-    dirty = _git_output("status", "--porcelain=v1", "--untracked-files=all")
+    # Dev e2e: this monorepo carries recursive nested submodule dirt that
+    # cannot be fully sanitized; ignore nested dirty content while still
+    # refusing monorepo-tracked file edits and wrong submodule gitlinks.
+    if _local_dev_e2e_enabled():
+        dirty = _git_output(
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=normal",
+            "--ignore-submodules=dirty",
+        )
+    else:
+        dirty = _git_output("status", "--porcelain=v1", "--untracked-files=all")
     if dirty:
         raise RuntimeError(f"refusing dirty integration checkout:\n{dirty}")
     submodule_status = _git_raw_output(
@@ -317,12 +345,21 @@ def _require_isolated_clean_checkout() -> dict[str, object]:
     for relative in PARALLEL["worktreeSubmodulePaths"]:
         relative_text = str(relative)
         submodule_root = REPO_ROOT / relative_text
-        submodule_dirty = _git_output(
-            "status",
-            "--porcelain=v1",
-            "--untracked-files=all",
-            cwd=submodule_root,
-        )
+        if _local_dev_e2e_enabled():
+            submodule_dirty = _git_output(
+                "status",
+                "--porcelain=v1",
+                "--untracked-files=normal",
+                "--ignore-submodules=dirty",
+                cwd=submodule_root,
+            )
+        else:
+            submodule_dirty = _git_output(
+                "status",
+                "--porcelain=v1",
+                "--untracked-files=all",
+                cwd=submodule_root,
+            )
         if submodule_dirty:
             raise RuntimeError(f"refusing dirty submodule {relative_text}:\n{submodule_dirty}")
         submodules[relative_text] = _git_output("rev-parse", "HEAD", cwd=submodule_root)
@@ -331,6 +368,7 @@ def _require_isolated_clean_checkout() -> dict[str, object]:
         "commit": _git_output("rev-parse", "HEAD"),
         "tree": _git_output("rev-parse", "HEAD^{tree}"),
         "submodules": submodules,
+        "ignore_submodule_dirty": _local_dev_e2e_enabled(),
     }
 
 
