@@ -9,13 +9,14 @@ MCP++ protocol behavior across all 5 profiles:
 - Profile E: P2P transport (wire format)
 """
 
-import pytest
-import re
-import time
-import sys
-import os
 import importlib
 import importlib.util
+import os
+import re
+import sys
+import time
+
+import pytest
 
 # Base directory for external sources
 _ext_dir = os.path.join(os.path.dirname(__file__), "..", "..")
@@ -132,6 +133,7 @@ class TestProfileBInterop:
     def test_cross_repo_cid_equivalence(self):
         """Same artifact must yield identical, spec-conformant CIDs in both repos."""
         import re
+
         from ipfs_datasets_py.mcp_server.cid_artifacts import artifact_cid
         from ipfs_datasets_py.mcp_server.interface_descriptor import cids_equivalent
 
@@ -154,8 +156,8 @@ class TestProfileCInterop:
 
     def test_datasets_delegation(self):
         from ipfs_datasets_py.mcp_server.ucan_delegation import (
-            Delegation,
             Capability,
+            Delegation,
             DelegationEvaluator,
         )
 
@@ -203,8 +205,6 @@ class TestProfileDInterop:
     def test_datasets_policy_evaluation(self):
         from ipfs_datasets_py.mcp_server.temporal_policy import (
             PolicyEvaluator,
-            PolicyObject,
-            PolicyClause,
             make_simple_permission_policy,
         )
 

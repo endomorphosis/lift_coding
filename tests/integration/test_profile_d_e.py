@@ -8,10 +8,9 @@ Verifies:
 - Integration with execute_with_envelope via policy enforcement
 """
 
-import pytest
-import time
-import sys
 import os
+import sys
+import time
 
 sys.path.insert(
     0, os.path.join(os.path.dirname(__file__), "..", "..", "external", "ipfs_accelerate")
@@ -80,9 +79,9 @@ class TestPolicyEvaluator:
 
     def test_permission_allows(self):
         from ipfs_accelerate_py.mcplusplus_module.temporal_policy import (
+            PolicyClause,
             PolicyEvaluator,
             PolicyObject,
-            PolicyClause,
         )
 
         evaluator = PolicyEvaluator()
@@ -99,9 +98,9 @@ class TestPolicyEvaluator:
 
     def test_prohibition_denies(self):
         from ipfs_accelerate_py.mcplusplus_module.temporal_policy import (
+            PolicyClause,
             PolicyEvaluator,
             PolicyObject,
-            PolicyClause,
         )
 
         evaluator = PolicyEvaluator()
@@ -119,9 +118,9 @@ class TestPolicyEvaluator:
 
     def test_no_matching_permission_denies(self):
         from ipfs_accelerate_py.mcplusplus_module.temporal_policy import (
+            PolicyClause,
             PolicyEvaluator,
             PolicyObject,
-            PolicyClause,
         )
 
         evaluator = PolicyEvaluator()
@@ -137,9 +136,9 @@ class TestPolicyEvaluator:
 
     def test_obligation_with_permission(self):
         from ipfs_accelerate_py.mcplusplus_module.temporal_policy import (
+            PolicyClause,
             PolicyEvaluator,
             PolicyObject,
-            PolicyClause,
         )
 
         evaluator = PolicyEvaluator()
@@ -258,7 +257,7 @@ class TestMCPp2pNode:
         assert node.connected_peers == []
 
     def test_node_to_dict(self):
-        from ipfs_accelerate_py.mcplusplus_module.p2p_transport import MCPp2pNode, MCP_P2P_PROTOCOL
+        from ipfs_accelerate_py.mcplusplus_module.p2p_transport import MCP_P2P_PROTOCOL, MCPp2pNode
 
         node = MCPp2pNode()
         info = node.to_dict()
@@ -267,7 +266,7 @@ class TestMCPp2pNode:
         assert info["connected_peers"] == 0
 
     def test_peer_info(self):
-        from ipfs_accelerate_py.mcplusplus_module.p2p_transport import PeerInfo, MCP_P2P_PROTOCOL
+        from ipfs_accelerate_py.mcplusplus_module.p2p_transport import MCP_P2P_PROTOCOL, PeerInfo
 
         peer = PeerInfo(
             peer_id="QmTest123",

@@ -12,7 +12,8 @@ except ImportError:  # pragma: no cover - exercised only when redis is not insta
     redis = None
 
 import handsfree.sessions as sessions_module
-from handsfree.sessions import SessionTokenManager, redis as session_redis
+from handsfree.sessions import SessionTokenManager
+from handsfree.sessions import redis as session_redis
 
 
 @pytest.fixture

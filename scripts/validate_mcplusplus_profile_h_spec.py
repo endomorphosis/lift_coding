@@ -7,7 +7,6 @@ import re
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTER = ROOT / "Mcp-Plus-Plus/docs/spec/x402-payments.md"
 REGISTRY = ROOT / "Mcp-Plus-Plus/docs/spec/mcp++-profiles-draft.md"

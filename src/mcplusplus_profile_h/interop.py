@@ -16,15 +16,15 @@ import sys
 import tempfile
 import urllib.error
 import urllib.request
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 from .adapters import SettlementResult, VerificationResult
 from .canonical import canonical_json, cid_for, commitment
 from .catalog import RequestContext
 from .errors import ProfileHError
-
 
 NETWORK = "eip155:84532"
 ASSET = "0x0000000000000000000000000000000000000001"

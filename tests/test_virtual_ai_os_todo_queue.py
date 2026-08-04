@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-import json
 import importlib.util
+import json
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -181,7 +180,7 @@ def test_daemon_retries_one_transient_merge_lock_when_reconciliation_is_disabled
         "timestamp": "2026-06-23T15:00:00+00:00",
         "merge_result": {"merged": False, "attempted": False, "reason": "lock_unavailable"},
     }
-    now_ts = datetime(2026, 6, 23, 15, 5, tzinfo=timezone.utc).timestamp()
+    now_ts = datetime(2026, 6, 23, 15, 5, tzinfo=UTC).timestamp()
 
     selected_when_disabled = (
         PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
@@ -219,7 +218,7 @@ def test_daemon_skips_stale_transient_merge_locks_when_reconciliation_is_disable
         "timestamp": "2026-06-09T09:07:16+00:00",
         "merge_result": {"merged": False, "attempted": False, "reason": "lock_exists"},
     }
-    now_ts = datetime(2026, 6, 23, 15, 20, tzinfo=timezone.utc).timestamp()
+    now_ts = datetime(2026, 6, 23, 15, 20, tzinfo=UTC).timestamp()
 
     selected = PortalImplementationDaemon._select_failed_merge_candidates_for_reconciliation(
         [stale_lock_event],
@@ -1046,7 +1045,7 @@ def test_hallucinate_dashboard_objective_tasks_are_launch_mission_aligned():
     from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalTask
 
     goals = parse_goal_heap(OBJECTIVE_HEAP_PATH.read_text(encoding="utf-8"))
-    goal = next(item for item in goals if item.goal_id == "VAIOS-G723")
+    _goal = next(item for item in goals if item.goal_id == "VAIOS-G723")
     task = PortalTask(
         "HAO-900",
         "Close virtual AI OS objective gap: Hallucinate MCP dashboard interoperability console",

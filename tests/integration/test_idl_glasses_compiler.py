@@ -6,8 +6,6 @@ Validates:
 - Deployment readiness validator logic
 """
 
-import json
-import re
 from pathlib import Path
 
 import pytest

@@ -8,7 +8,6 @@ from typing import Any
 
 import pytest
 
-
 CAPABILITIES = [
     "camera.photo_capture",
     "microphone.input",

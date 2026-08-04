@@ -3,10 +3,9 @@ from __future__ import annotations
 import json
 import os
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from types import SimpleNamespace
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -43,7 +42,7 @@ def test_supervisor_does_not_recycle_quiet_validation_before_its_timeout(tmp_pat
         PortalSupervisorConfig,
     )
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     stale_log = tmp_path / "quiet-validation.log"
     stale_log.write_text("validation started\n", encoding="utf-8")
     log_timestamp = (now - timedelta(seconds=600)).timestamp()

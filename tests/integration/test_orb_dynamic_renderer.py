@@ -9,7 +9,6 @@ Validates the complete ORB → IDL → Auto-UI → Desktop + Glasses flow:
 - Integration with virtual desktop and glasses control plane
 """
 
-import re
 from pathlib import Path
 
 import pytest

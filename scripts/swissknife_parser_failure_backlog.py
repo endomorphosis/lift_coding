@@ -16,9 +16,9 @@ import subprocess
 import sys
 import tempfile
 from collections import Counter
+from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import Any, Iterable, Mapping
-
+from typing import Any
 
 SCHEMA = "ipfs_accelerate_py/agent-supervisor/parser-failure-backlog@1"
 RECEIPT_SCHEMA = "ipfs_accelerate_py/agent-supervisor/parser-failure-resolution-receipt@1"

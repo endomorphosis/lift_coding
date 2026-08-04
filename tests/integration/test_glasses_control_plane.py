@@ -11,9 +11,7 @@ Tests the complete glasses integration pipeline before iPhone/Meta Glasses deplo
 - Display profile constraints
 """
 
-import json
 import re
-import sys
 from pathlib import Path
 
 import pytest
@@ -86,8 +84,8 @@ class TestGlassesControlPlane:
     def test_focus_order_defined_for_all_displays(self, source):
         """Every display profile must have focus_order."""
         # Count display defs vs focus_order occurrences
-        display_count = source.count("makeDisplayProfile(")
-        focus_count = source.count("focus_order:")
+        _display_count = source.count("makeDisplayProfile(")
+        _focus_count = source.count("focus_order:")
         # focus_order is in the makeDisplayProfile helper, so it's always set
         assert "focus_order: actions.filter" in source
 
@@ -159,7 +157,7 @@ class TestVoiceIntentRecognition:
 
     def test_voice_patterns_are_case_insensitive(self, source):
         """All regex patterns must use /i flag."""
-        patterns = re.findall(r"/([^/]+)/(\w*)", source)
+        _patterns = re.findall(r"/([^/]+)/(\w*)", source)
         # TypeScript regex with 'i' flag
         assert source.count("/i,") >= 5 or source.count("/i}") >= 5 or source.count("/i ") >= 5
 
@@ -424,7 +422,7 @@ class TestWidgetDescriptorValidation:
     def test_focus_order_matches_actions(self, glasses_widgets_source):
         """focus_order must reference valid action IDs."""
         # Extract action IDs
-        action_ids = re.findall(r"id: '([^']+)'", glasses_widgets_source)
+        _action_ids = re.findall(r"id: '([^']+)'", glasses_widgets_source)
         focus_refs = re.findall(r"focus_order: \[([^\]]+)\]", glasses_widgets_source)
         # Every focus ref should be a valid action ID (simplified check)
         assert len(focus_refs) >= 3  # One per widget
@@ -585,7 +583,7 @@ class TestMobileDeploymentReadiness:
 
     def test_control_plane_exports_consistent(self):
         """Both control plane files must export compatible interfaces."""
-        cp1 = read_ts("src/services/glasses-app-control-plane.ts")
+        _cp1 = read_ts("src/services/glasses-app-control-plane.ts")
         cp2 = read_ts("src/services/glasses-enhanced-control-plane.ts")
         # Enhanced must import from base
         assert "GlassesAppControlPlane" in cp2
@@ -597,7 +595,7 @@ class TestMobileDeploymentReadiness:
         enhanced = read_ts("src/services/glasses-enhanced-control-plane.ts")
 
         # Extract method names from action bindings
-        methods = set(re.findall(r"method:\s*'([^']+)'", cp))
+        _methods = set(re.findall(r"method:\s*'([^']+)'", cp))
 
         # Verify endpoint resolver covers them
         endpoints = re.findall(r"'([^']+)':\s*'/[^']*'", enhanced)

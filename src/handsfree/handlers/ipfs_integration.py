@@ -713,7 +713,7 @@ async def ipfs_endpoints_endpoint() -> dict[str, Any]:
 
 
 @router.post("/vector/index")
-async def vector_index_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def vector_index_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Index content into the vector store."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.vector_store_tools.native_vector_store_tools import (
@@ -733,7 +733,7 @@ async def vector_index_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, A
 
 
 @router.post("/vector/search")
-async def vector_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def vector_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Search the vector store."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.vector_store_tools.native_vector_store_tools import (
@@ -753,7 +753,7 @@ async def vector_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, 
 
 
 @router.post("/vector/metadata")
-async def vector_metadata_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def vector_metadata_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Get vector store metadata."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.vector_store_tools.native_vector_store_tools import (
@@ -771,7 +771,7 @@ async def vector_metadata_endpoint(body: dict[str, Any] = Body(...)) -> dict[str
 
 
 @router.post("/search/semantic")
-async def semantic_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def semantic_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Perform semantic search across indexed content."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.search_tools.native_search_tools import (
@@ -791,7 +791,7 @@ async def semantic_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str
 
 
 @router.post("/search/similarity")
-async def similarity_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def similarity_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Find similar items by content or embedding."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.search_tools.native_search_tools import (
@@ -811,7 +811,7 @@ async def similarity_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[s
 
 
 @router.post("/search/faceted")
-async def faceted_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def faceted_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Perform faceted search with filters and aggregations."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.search_tools.native_search_tools import (
@@ -831,7 +831,7 @@ async def faceted_search_endpoint(body: dict[str, Any] = Body(...)) -> dict[str,
 
 
 @router.post("/scrape/url")
-async def scrape_url_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def scrape_url_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Scrape content from a URL."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.web_scraping_tools.native_web_scraping_tools import (
@@ -852,7 +852,7 @@ async def scrape_url_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any
 
 
 @router.post("/scrape/batch")
-async def scrape_batch_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def scrape_batch_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Scrape content from multiple URLs."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.web_scraping_tools.native_web_scraping_tools import (
@@ -871,7 +871,7 @@ async def scrape_batch_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, A
 
 
 @router.post("/workflow/execute")
-async def workflow_execute_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:
+async def workflow_execute_endpoint(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
     """Execute a workflow step or pipeline."""
     try:
         from ipfs_accelerate_py.mcp_server.tools.workflow_tools.native_workflow_tools_category import (

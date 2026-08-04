@@ -5,7 +5,9 @@ This is the concrete mechanism to drive + verify symbol coverage 71.2% → 100% 
 Reproduce: python3 gen_symbol_ledger.py  (from repo root)
 """
 
-import os, re, json, sys
+import json
+import os
+import re
 
 LOGIC = "external/ipfs_datasets/ipfs_datasets_py/logic"
 TSROOT = "swissknife/src"
@@ -71,7 +73,7 @@ def ts_idents():
             if f.endswith(".ts"):
                 try:
                     txt = open(os.path.join(root, f), encoding="utf-8", errors="ignore").read()
-                except:
+                except Exception:
                     continue
                 toks.update(ident.findall(txt))
     return toks

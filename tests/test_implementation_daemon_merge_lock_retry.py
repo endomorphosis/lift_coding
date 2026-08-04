@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -41,7 +40,7 @@ def test_merge_lock_retry_queue_runs_one_transient_retry_when_generic_reconcilia
         "timestamp": "2026-06-23T15:00:00+00:00",
         "merge_result": {"merged": False, "attempted": False, "reason": "lock_unavailable"},
     }
-    now_ts = datetime(2026, 6, 23, 15, 5, tzinfo=timezone.utc).timestamp()
+    now_ts = datetime(2026, 6, 23, 15, 5, tzinfo=UTC).timestamp()
 
     selected = daemon._select_failed_merge_candidates_for_reconciliation(
         [conflict_event, transient_event],
@@ -59,7 +58,7 @@ def test_stale_transient_merge_lock_is_not_retried_when_reconciliation_is_disabl
         "timestamp": "2026-06-09T09:07:16+00:00",
         "merge_result": {"merged": False, "attempted": False, "reason": "lock_exists"},
     }
-    now_ts = datetime(2026, 6, 23, 15, 20, tzinfo=timezone.utc).timestamp()
+    now_ts = datetime(2026, 6, 23, 15, 20, tzinfo=UTC).timestamp()
 
     selected = daemon._select_failed_merge_candidates_for_reconciliation(
         [transient_event],

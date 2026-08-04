@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from typing import Final
 
-
 META_GLASSES_MULTIMODAL_IO_CONTRACT: Final = (
     "handsfree.meta-glasses/multimodal-io-control-plane@0.1.0"
 )

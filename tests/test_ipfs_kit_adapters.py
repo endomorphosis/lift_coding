@@ -6,9 +6,7 @@ These tests verify the adapter correctly wraps the real ipfs_kit_py API:
 - ipfs_kit_py.backend_config.get_backend_statuses() for health checks
 """
 
-import json
 import sys
-from types import ModuleType
 from unittest.mock import MagicMock, patch
 
 import pytest

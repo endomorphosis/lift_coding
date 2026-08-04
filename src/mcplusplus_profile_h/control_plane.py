@@ -7,10 +7,9 @@ from dataclasses import dataclass
 from typing import Any
 
 from .canonical import commitment
-from .catalog import Decision, RequestContext
+from .catalog import RequestContext
 from .errors import ProfileHError
 from .runtime import PaymentContext, SellerResult, SellerRuntime
-
 
 PROFILE_H = "mcp++/x402-payments"
 PROFILE_H_VERSION = "1.0"

@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
+from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
+from handsfree.swissknife_virtual_ui import get_swissknife_orb_handler_ref
+
 from .capability_registry import (
     get_virtual_ai_os_capability,
     resolve_virtual_ai_os_execution_mode,
@@ -12,10 +16,6 @@ from .models import (
     CapabilityRuntimeSurface,
 )
 from .runtime_placement import resolve_virtual_ai_os_runtime_placement
-from handsfree.ipfs_accelerate_adapters import get_ipfs_accelerate_cli_command
-from handsfree.ipfs_kit_adapters import get_ipfs_kit_cli_command
-from handsfree.swissknife_virtual_ui import get_swissknife_orb_handler_ref
-
 
 _DATASETS_CLI_COMMAND = "python external/ipfs_datasets/ipfs_datasets_cli.py"
 

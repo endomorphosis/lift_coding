@@ -24,7 +24,7 @@ import secrets
 import threading
 import time
 from dataclasses import asdict, dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Literal, Protocol
 
@@ -255,7 +255,7 @@ class FrameHandler(Protocol):
     def __call__(self, peer_ref: str, frame: bytes) -> None: ...
 
 
-class SessionState(str, Enum):
+class SessionState(StrEnum):
     """Lifecycle states for a peer session."""
 
     NEW = "new"

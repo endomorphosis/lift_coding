@@ -9,7 +9,6 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GOAL_PACKET = "goal_packet/interoperability/swissknife/06921590135c"
 GOAL_PACKET_GOALS = {

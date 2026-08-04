@@ -2,7 +2,13 @@
 """XPH-102 schema and Python/TypeScript conformance gate."""
 
 from __future__ import annotations
-import base64, copy, json, subprocess, sys, tempfile
+
+import base64
+import copy
+import json
+import subprocess
+import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]

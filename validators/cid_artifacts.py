@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Dict
+from typing import Any
 
 from .base_mcp import ValidationResult
-
 
 CID_PATTERN = re.compile(r"^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{58})$")
 
@@ -26,7 +25,7 @@ class CIDExecutionValidator:
         "receipt_cid",
     )
 
-    def validate_execution_envelope(self, envelope: Dict[str, Any]) -> ValidationResult:
+    def validate_execution_envelope(self, envelope: dict[str, Any]) -> ValidationResult:
         result = ValidationResult(is_valid=True, message_type="execution_envelope")
         if not isinstance(envelope, dict):
             result.add_error("Envelope must be an object")
@@ -50,7 +49,7 @@ class CIDExecutionValidator:
 
         return result
 
-    def validate_execution_receipt(self, receipt: Dict[str, Any]) -> ValidationResult:
+    def validate_execution_receipt(self, receipt: dict[str, Any]) -> ValidationResult:
         result = ValidationResult(is_valid=True, message_type="execution_receipt")
         if not isinstance(receipt, dict):
             result.add_error("Receipt must be an object")
@@ -68,14 +67,14 @@ class CIDExecutionValidator:
 
         return result
 
-    def _require_cid(self, payload: Dict[str, Any], field: str, result: ValidationResult) -> None:
+    def _require_cid(self, payload: dict[str, Any], field: str, result: ValidationResult) -> None:
         if field not in payload:
             result.add_error(f"Missing required field: {field}")
             return
         self._validate_cid_field(payload, field, result)
 
     def _validate_cid_field(
-        self, payload: Dict[str, Any], field: str, result: ValidationResult
+        self, payload: dict[str, Any], field: str, result: ValidationResult
     ) -> None:
         cid = payload.get(field)
         if not self._is_valid_cid(cid):

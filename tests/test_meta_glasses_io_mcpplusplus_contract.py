@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 JEST_CONFORMANCE = (
     ROOT / "swissknife" / "test" / "mcp-plus-plus" / "meta-glasses-io-conformance.test.ts"
