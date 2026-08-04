@@ -599,7 +599,7 @@ Program rules:
 
 ## UIR-033 Integrate UI/UX IR with the deontic broker and control-surface mediator
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
