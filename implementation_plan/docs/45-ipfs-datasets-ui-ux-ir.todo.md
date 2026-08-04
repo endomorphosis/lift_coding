@@ -58,7 +58,7 @@ Program rules:
 
 ## UIR-002 Freeze the MCP-IDL identity interoperability profile
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -88,7 +88,7 @@ Program rules:
 
 ## UIR-010 Implement the closed UI/UX IR v1 envelope and JSON Schema
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
