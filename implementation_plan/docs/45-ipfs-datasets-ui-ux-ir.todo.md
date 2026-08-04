@@ -329,7 +329,7 @@ Program rules:
 
 ## UIR-022 Implement the event-calculus behavior compiler
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -359,7 +359,7 @@ Program rules:
 
 ## UIR-023 Implement the temporal deontic first-order compiler
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -389,7 +389,7 @@ Program rules:
 
 ## UIR-024 Implement the deontic cognitive event-calculus compiler
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -569,7 +569,7 @@ Program rules:
 
 ## UIR-032 Implement the SwissKnife TypeScript UI/UX IR codec
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
