@@ -46,3 +46,15 @@ Still attempt-limited / open (not closed without product evidence):
 ## Expected supervisor effect
 
 Next daemon passes should drop those three from ready/attempt-limited sets and recompute selectable ready work. Remaining attempt-limited tasks may still force idle on some shards until repaired or budget-reset with evidence.
+
+## Follow-up: SCA-603 production multi-root (same day)
+
+Implemented production CLI multi-root wiring:
+
+- `external/ipfs_accelerate/scripts/index_repository_contracts.py`
+  - `--include-provider-indexes` (default on) / `--skip-provider-indexes`
+  - `--require-provider-authority` → exit **4** when exhaustive multi-root parity fails
+  - writes `provider-index.json` + `multi_root_providers` summary (zero model calls)
+- `test/api/test_agent_supervisor_production_multi_root_index.py` — **3 passed**
+
+Board: SCA-603 marked **completed**.

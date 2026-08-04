@@ -13871,7 +13871,8 @@ Normative:
 
 ## SCA-603 Production-wire multi-root provider indexing
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:33:09Z): SCA-603 production multi-root CLI wired; test_agent_supervisor_production_multi_root_index.py 3 passed (indexes three providers, exit 4 on missing provider, skip flag).
 - Priority: P0
 - Track: production-provider-index
 - Depends on: SCA-216, SCA-229, SCA-615
