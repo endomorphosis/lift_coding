@@ -659,7 +659,7 @@ Program rules:
 
 ## UIR-035 Remove the legacy dynamic-renderer transport and HTML bypass
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
