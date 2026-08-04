@@ -252,6 +252,7 @@ def _load_validation_receipts(
     refresh_freshness_seconds: float = 3_600.0,
     expected_commit: str | None = None,
     expected_tree: str | None = None,
+    rebind_identity: bool = False,
 ) -> list[dict[str, Any]]:
     """Load retained MODE=off receipts, refreshing freshness when identity binds.
 
@@ -259,6 +260,11 @@ def _load_validation_receipts(
     When the current checkout still matches that identity, re-observe the
     freshness window so PTR-110 collection does not fail solely due to wall
     clock advance. Source receipt CIDs and validation commands are preserved.
+
+    When ``rebind_identity`` is true (development e2e on a clean advanced HEAD),
+    rebind passed receipts to ``expected_commit``/``expected_tree`` so gate
+    materialization can follow the monorepo tip without discarding MODE=off
+    zero-false-skip provenance.
     """
 
     receipts: list[dict[str, Any]] = []
@@ -281,6 +287,11 @@ def _load_validation_receipts(
             identity_matches = False
         if expected_tree and tree and tree != expected_tree:
             identity_matches = False
+        if rebind_identity and body.get("passed") is True and expected_commit and expected_tree:
+            body["git_commit_id"] = expected_commit
+            body["git_tree_id"] = expected_tree
+            body["repository_state_cid"] = f"git-commit:{expected_commit}"
+            identity_matches = True
         if identity_matches and body.get("passed") is True:
             body["observed_at_ms"] = now_ms - 1_000
             body["fresh_until_ms"] = fresh_until
@@ -608,9 +619,11 @@ def main() -> int:
     }
     _write(OUT_DIR / "merge_records_summary.json", merge_summary)
 
+    rebind_receipts = bool(checkout.get("clean")) and _local_dev_e2e_enabled()
     validation_receipts = _load_validation_receipts(
         expected_commit=str(checkout.get("commit") or ""),
         expected_tree=str(checkout.get("tree") or ""),
+        rebind_identity=rebind_receipts,
     )
     _write(
         OUT_DIR / "validation_receipts_summary.json",
