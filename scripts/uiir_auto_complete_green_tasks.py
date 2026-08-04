@@ -76,6 +76,17 @@ def run_validation(root: Path, command: str, timeout: int) -> tuple[bool, str]:
         return False, "empty validation"
     env = os.environ.copy()
     env.setdefault("PYTHONPATH", str(root / "external" / "ipfs_accelerate"))
+    # Board Validation commands often use bare `python`; ensure it resolves.
+    python3 = env.get("PYTHON") or env.get("PYTHON3") or "/usr/bin/python3"
+    if Path(python3).exists():
+        env["PATH"] = f"{Path(python3).parent}:{env.get('PATH', '')}"
+        # Rewrite leading `python ` / `python -m` to python3 for hermetic envs.
+        rewritten = command
+        if rewritten.startswith("python "):
+            rewritten = python3 + rewritten[6:]
+        rewritten = rewritten.replace("&& python ", f"&& {python3} ")
+        rewritten = rewritten.replace("; python ", f"; {python3} ")
+        command = rewritten
     try:
         proc = subprocess.run(
             command,

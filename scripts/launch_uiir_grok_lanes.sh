@@ -25,6 +25,9 @@ export IPFS_ACCELERATE_AGENT_GROK_BIN="${IPFS_ACCELERATE_AGENT_GROK_BIN:-${HOME}
 export IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE="${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE:-0}"
 # Allow agent CLI when a task would otherwise claim the typed route.
 export IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND="${IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND:-1}"
+# Auto-unstick: reclaim dead/expired worktree lifecycle claims on daemon start
+# so abandoned attempts cannot stall the board for hours.
+export IPFS_ACCELERATE_AGENT_WORKTREE_LIFECYCLE_RECLAIM_DEAD_ON_STARTUP="${IPFS_ACCELERATE_AGENT_WORKTREE_LIFECYCLE_RECLAIM_DEAD_ON_STARTUP:-1}"
 
 UIIR_MERGE_TARGET_BRANCH="${UIIR_MERGE_TARGET_BRANCH:-agent/ui-ux-ir}"
 TODO_PATH="implementation_plan/docs/45-ipfs-datasets-ui-ux-ir.todo.md"
@@ -141,6 +144,7 @@ start_lane() {
       --setenv=IPFS_ACCELERATE_AGENT_GROK_BIN="${IPFS_ACCELERATE_AGENT_GROK_BIN}" \
       --setenv=IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE="${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE}" \
       --setenv=IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND="${IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND}" \
+      --setenv=IPFS_ACCELERATE_AGENT_WORKTREE_LIFECYCLE_RECLAIM_DEAD_ON_STARTUP="${IPFS_ACCELERATE_AGENT_WORKTREE_LIFECYCLE_RECLAIM_DEAD_ON_STARTUP}" \
       "${cmd[@]}"
     echo "started systemd unit uiir-lane-${lane}"
   else
@@ -153,6 +157,7 @@ start_lane() {
       IPFS_ACCELERATE_AGENT_GROK_BIN="${IPFS_ACCELERATE_AGENT_GROK_BIN}" \
       IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE="${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE}" \
       IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND="${IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND}" \
+      IPFS_ACCELERATE_AGENT_WORKTREE_LIFECYCLE_RECLAIM_DEAD_ON_STARTUP="${IPFS_ACCELERATE_AGENT_WORKTREE_LIFECYCLE_RECLAIM_DEAD_ON_STARTUP}" \
       "${cmd[@]}" >>"$log_path" 2>&1 &
     echo "started background lane ${lane} pid=$! log=$log_path"
   fi
@@ -192,7 +197,8 @@ _start_board_companion() {
   local log_path="${LOG_DIR}/uiir-board-companion.log"
   # Re-check every 3 minutes so newly green landings unlock dependents.
   # Completion: manual + protected todo path otherwise stalls the cascade.
-  local loop_cmd="while true; do /usr/bin/python3 \"${ROOT}/scripts/uiir_auto_complete_green_tasks.py\" --root \"${ROOT}\" || true; sleep 180; done"
+  # Periodically reclaim expired lifecycle claims then auto-complete green tasks.
+  local loop_cmd="while true; do /usr/bin/python3 \"${ROOT}/scripts/uiir_reclaim_stale_lifecycle_claims.py\" --root \"${ROOT}\" || true; /usr/bin/python3 \"${ROOT}/scripts/uiir_auto_complete_green_tasks.py\" --root \"${ROOT}\" || true; sleep 180; done"
   if command -v systemd-run >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then
     systemd-run --user --collect \
       --unit="uiir-board-companion" \
