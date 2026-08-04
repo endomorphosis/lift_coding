@@ -1199,7 +1199,7 @@ Program rules:
 
 ## UIR-071 Build the responsive web and mobile form pilot
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1229,7 +1229,7 @@ Program rules:
 
 ## UIR-072 Build the destructive confirmation rollback and recovery pilot
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1259,7 +1259,7 @@ Program rules:
 
 ## UIR-073 Build the Meta-glasses multimodal and mobile-fallback pilot
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1289,7 +1289,7 @@ Program rules:
 
 ## UIR-074 Build the dynamic program and Agent Supervisor UI pilot
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1319,7 +1319,7 @@ Program rules:
 
 ## UIR-080 Add UI/UX IR scale latency and resource benchmarks
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1349,7 +1349,7 @@ Program rules:
 
 ## UIR-081 Run hardware-free browser mobile and Meta-glasses E2E replay
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1379,7 +1379,7 @@ Program rules:
 
 ## UIR-082 Publish the UI/UX IR API extension and migration guide
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1409,7 +1409,7 @@ Program rules:
 
 ## UIR-083 Add the root current-tree conformance and release gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
