@@ -1,5 +1,11 @@
 # Proof-backed test reuse readiness audit — 2026-08-03
 
+> **Superseded for board/closeout status.** See
+> [`46-proof-backed-test-reuse-readiness-audit-2026-08-04.md`](./46-proof-backed-test-reuse-readiness-audit-2026-08-04.md)
+> for the closed **66/66** board, live capability gap, and report-only closeout
+> diagnosis. Architecture and dependency sections below remain historical
+> context for the pre-close wave.
+
 ## Executive status
 
 - Audited integration revision: `6d61e86594ec70b0ff60a37308fe11ef16f17f95`
