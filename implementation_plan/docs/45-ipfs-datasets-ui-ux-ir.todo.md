@@ -449,7 +449,7 @@ Program rules:
 
 ## UIR-026 Implement semantic decompilation and layered round-trip equivalence
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -749,7 +749,7 @@ Program rules:
 
 ## UIR-042 Implement the mobile companion projection adapter
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -779,7 +779,7 @@ Program rules:
 
 ## UIR-043 Implement the Meta-glasses and spatial projection adapter
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -809,7 +809,7 @@ Program rules:
 
 ## UIR-044 Implement voice audio and headless projections
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -929,7 +929,7 @@ Program rules:
 
 ## UIR-053 Implement deterministic multimodal fusion and arbitration
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
