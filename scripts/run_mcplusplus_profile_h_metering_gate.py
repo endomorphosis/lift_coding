@@ -17,8 +17,11 @@ from mcplusplus_profile_h.metering_gate import run_metering_gate  # noqa: E402
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path,
-                        default=ROOT / "swissknife/test-results/mcpplusplus-profile-h-x402/metering.json")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=ROOT / "swissknife/test-results/mcpplusplus-profile-h-x402/metering.json",
+    )
     parser.add_argument("--state-dir", type=Path)
     args = parser.parse_args()
     if args.state_dir is None:
@@ -31,10 +34,11 @@ def main() -> int:
     temporary = args.output.with_suffix(args.output.suffix + ".tmp")
     temporary.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     temporary.replace(args.output)
-    print(f"PASS: 3 deterministic signed meters, maximum authorization, and bounded quota; evidence: {args.output}")
+    print(
+        f"PASS: 3 deterministic signed meters, maximum authorization, and bounded quota; evidence: {args.output}"
+    )
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

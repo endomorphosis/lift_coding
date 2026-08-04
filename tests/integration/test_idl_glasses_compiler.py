@@ -6,8 +6,6 @@ Validates:
 - Deployment readiness validator logic
 """
 
-import json
-import re
 from pathlib import Path
 
 import pytest
@@ -34,6 +32,7 @@ def read_js(relative_path: str) -> str:
 # ===========================================================================
 # IDL-to-Glasses Compiler Tests
 # ===========================================================================
+
 
 class TestIDLToGlassesCompiler:
     """Verify the auto-compilation pipeline."""
@@ -87,7 +86,7 @@ class TestIDLToGlassesCompiler:
     def test_each_descriptor_has_methods(self, source):
         """Each IPFS descriptor must have realistic method list."""
         # Count method definitions per descriptor
-        kit_methods = source.count("{ name: '") 
+        kit_methods = source.count("{ name: '")
         assert kit_methods >= 20  # 3 services × ~7 methods each
 
     def test_format_label_function(self, source):
@@ -110,6 +109,7 @@ class TestIDLToGlassesCompiler:
 # ===========================================================================
 # State Bridge Tests
 # ===========================================================================
+
 
 class TestGlassesStateBridge:
     """Verify the dashboard-to-glasses WebSocket bridge."""
@@ -179,6 +179,7 @@ class TestGlassesStateBridge:
 # Dashboard Integration Tests
 # ===========================================================================
 
+
 class TestDashboardGlassesIntegration:
     """Verify dashboards include the glasses bridge."""
 
@@ -211,6 +212,7 @@ class TestDashboardGlassesIntegration:
 # Deployment Readiness Validator Tests
 # ===========================================================================
 
+
 class TestDeploymentValidator:
     """Verify the deployment readiness validator structure."""
 
@@ -226,16 +228,16 @@ class TestDeploymentValidator:
 
     def test_all_categories_checked(self, source):
         categories = [
-            '_validateControlPlane',
-            '_validateIDLCompilation',
-            '_validateORBEndpoints',
-            '_validateVoicePatterns',
-            '_validateGestureBindings',
-            '_validateDisplayConstraints',
-            '_validateAppRegistry',
-            '_validateStateSyncBindings',
-            '_validateNotificationPipeline',
-            '_validateMobileBridgeContract',
+            "_validateControlPlane",
+            "_validateIDLCompilation",
+            "_validateORBEndpoints",
+            "_validateVoicePatterns",
+            "_validateGestureBindings",
+            "_validateDisplayConstraints",
+            "_validateAppRegistry",
+            "_validateStateSyncBindings",
+            "_validateNotificationPipeline",
+            "_validateMobileBridgeContract",
         ]
         for cat in categories:
             assert cat in source, f"Missing validation category: {cat}"
@@ -259,11 +261,21 @@ class TestDeploymentValidator:
 
     def test_gesture_test_all_types(self, source):
         """Must test all 13 gesture types."""
-        gestures = ['swipe_left', 'swipe_right', 'swipe_up', 'swipe_down',
-                    'tap', 'double_tap', 'long_press',
-                    'flick_left', 'flick_right',
-                    'pinch_in', 'pinch_out',
-                    'head_nod', 'head_shake']
+        gestures = [
+            "swipe_left",
+            "swipe_right",
+            "swipe_up",
+            "swipe_down",
+            "tap",
+            "double_tap",
+            "long_press",
+            "flick_left",
+            "flick_right",
+            "pinch_in",
+            "pinch_out",
+            "head_nod",
+            "head_shake",
+        ]
         for g in gestures:
             assert f"'{g}'" in source, f"Missing gesture test: {g}"
 
@@ -277,6 +289,7 @@ class TestDeploymentValidator:
 # ===========================================================================
 # Enhanced Control Plane - New Features
 # ===========================================================================
+
 
 class TestEnhancedControlPlaneUpdates:
     """Verify the enhanced control plane improvements."""

@@ -17,6 +17,18 @@ where = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+extend-exclude = [
+  ".worktrees",
+  ".backups",
+  ".recovery-backups",
+  ".cvefixes-build",
+  "external",
+  "hallucinate_app",
+  "swissknife",
+  "Mcp-Plus-Plus",
+  "node_modules",
+  "data",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]

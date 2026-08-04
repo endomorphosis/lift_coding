@@ -4,6 +4,7 @@ The swissknife dashboard manifest must equal the ipfs_kit_py MCP++ server's
 generated registry, so the four surfaces (python/cli/mcp/js dashboard) cannot
 drift. Fails CI if either repo is regenerated without resyncing the other.
 """
+
 import json
 import sys
 from pathlib import Path
@@ -19,4 +20,6 @@ def test_dashboard_manifest_matches_server_registry():
     assert dash.exists(), "dashboard manifest missing"
     server = json.loads(generate.render_manifest())
     dashboard = json.loads(dash.read_text())
-    assert dashboard == server, "swissknife dashboard manifest drifted; run make mcp-sdk in ipfs_kit"
+    assert dashboard == server, (
+        "swissknife dashboard manifest drifted; run make mcp-sdk in ipfs_kit"
+    )

@@ -5,7 +5,6 @@ import json
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).parents[1]
 SPEC = importlib.util.spec_from_file_location(
     "mcp_release_gate", ROOT / "scripts" / "run_mcplusplus_release_gate.py"
@@ -30,7 +29,12 @@ def test_release_evidence_is_fail_closed_and_covers_all_profiles_transports_and_
     assert evidence["transports"] == ["jsonrpc-http", "mcp+p2p"]
     assert any(row.get("peer_count") == 3 for row in evidence["gates"])
     assert {row["state"] for row in evidence["observable_states"]} >= {
-        "degraded", "denied", "conflicted", "expired", "stale_fence", "partitioned"
+        "degraded",
+        "denied",
+        "conflicted",
+        "expired",
+        "stale_fence",
+        "partitioned",
     }
 
     rows[0]["status"] = "fail"
@@ -54,7 +58,10 @@ def test_published_release_packet_is_portable_and_go():
     assert evidence["schema"] == gate.SCHEMA
     assert evidence["decision"] == "GO"
     assert all(row["status"] == "pass" for row in evidence["gates"])
-    assert all("/home/" not in row["command"] and "/tmp/" not in row["command"] for row in evidence["gates"])
+    assert all(
+        "/home/" not in row["command"] and "/tmp/" not in row["command"]
+        for row in evidence["gates"]
+    )
     assert len(evidence["screenshots"]) >= 4
     assert summary["schema"] == gate.GLASSES_SCHEMA
     assert summary["release_decision"] == "GO"

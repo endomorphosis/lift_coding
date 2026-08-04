@@ -12,7 +12,6 @@ from handsfree.virtual_ai_os_components import (
     get_virtual_ai_os_component_repo_contracts,
 )
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -40,12 +39,8 @@ def _gitmodules_entries() -> dict[str, str]:
 
 def test_component_repo_contracts_cover_root_gitmodules() -> None:
     entries = _gitmodules_entries()
-    contracts = {
-        contract.path: contract for contract in VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS
-    }
-    gitmodule_paths = {
-        value for key, value in entries.items() if key.endswith(".path")
-    }
+    contracts = {contract.path: contract for contract in VIRTUAL_AI_OS_COMPONENT_REPO_CONTRACTS}
+    gitmodule_paths = {value for key, value in entries.items() if key.endswith(".path")}
 
     assert set(contracts) == gitmodule_paths
     for submodule_path, contract in contracts.items():
@@ -67,9 +62,7 @@ def test_component_contract_environment_overrides_are_applied(tmp_path) -> None:
         {"HANDSFREE_VAI_IPFS_DATASETS_ROOT": str(override)},
         repo_root=REPO_ROOT,
     )
-    contract_by_id = {
-        str(contract["component_id"]): contract for contract in contracts
-    }
+    contract_by_id = {str(contract["component_id"]): contract for contract in contracts}
 
     assert contract_by_id["ipfs_datasets_py"]["resolved_root"] == str(override)
     assert contract_by_id["ipfs_accelerate_py"]["resolved_root"] == str(
@@ -85,9 +78,7 @@ def test_component_pin_and_bootstrap_contracts_are_guarded() -> None:
     assert ".gitmodules branch metadata tracks" in pins["ipfs_kit_py"]
     assert "superproject gitlink records the reviewed SHA" in pins["ipfs_kit_py"]
     assert "must commit the parent gitlink immediately" in pins["swissknife"]
-    assert bootstrap["ipfs_kit_py"]["bootstrap_mode"] == (
-        "init_root_submodule_status_nested"
-    )
+    assert bootstrap["ipfs_kit_py"]["bootstrap_mode"] == ("init_root_submodule_status_nested")
     assert bootstrap["ipfs_kit_py"]["recursive_bootstrap"] is False
     assert bootstrap["meta_wearables_dat_ios"]["bootstrap_mode"] == (
         "optional_device_validation_submodule"
@@ -97,15 +88,11 @@ def test_component_pin_and_bootstrap_contracts_are_guarded() -> None:
 
 def test_observability_contract_surfaces_component_repo_contracts() -> None:
     contract = get_virtual_ai_os_observability_contract({})
-    component_ids = {
-        str(component["component_id"]) for component in contract["component_repos"]
-    }
+    component_ids = {str(component["component_id"]) for component in contract["component_repos"]}
 
     assert "ipfs_datasets_py" in component_ids
     assert "mcp_plus_plus" in component_ids
-    assert contract["component_environment"]["swissknife"] == (
-        "HANDSFREE_VAI_SWISSKNIFE_ROOT"
-    )
+    assert contract["component_environment"]["swissknife"] == ("HANDSFREE_VAI_SWISSKNIFE_ROOT")
     assert contract["component_bootstrap"]["hallucinate_app"]["bootstrap_mode"] == (
         "init_root_submodule"
     )

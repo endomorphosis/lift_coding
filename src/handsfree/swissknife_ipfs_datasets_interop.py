@@ -44,9 +44,7 @@ GOAL_PACKET_GOALS = (
 )
 
 IPFS_DATASETS_TOOL_ROOT = ".tools/ipfs_kit_py"
-REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = (
-    ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
-)
+REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
 REQUIRED_BUCKET_VFS_DOC_PATH = (
     ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
@@ -56,9 +54,7 @@ BUCKET_VFS_DEMO_PATH_CANDIDATES = (
     ".tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py",
     ".tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py",
 )
-REQUIRED_UNIFIED_BUCKET_DEMO_PATH = (
-    ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
-)
+REQUIRED_UNIFIED_BUCKET_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
 
 REQUIRED_DEPRECATIONS_REPORT_KEYS = (
     "report_version",
@@ -190,9 +186,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
     """
     root_path = Path(root)
     if not root_path.exists():
-        raise SwissKnifeIPFSDatasetsInteropError(
-            f"ipfs_datasets root not found: {root_path}"
-        )
+        raise SwissKnifeIPFSDatasetsInteropError(f"ipfs_datasets root not found: {root_path}")
 
     paths = {
         "deprecations_report_schema": root_path / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH,
@@ -214,9 +208,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         paths["deprecations_report_schema"].read_text(encoding="utf-8")
     )
     discovered_required_keys = tuple(deprecations_report_schema.get("required", ()))
-    missing_required_keys = set(REQUIRED_DEPRECATIONS_REPORT_KEYS) - set(
-        discovered_required_keys
-    )
+    missing_required_keys = set(REQUIRED_DEPRECATIONS_REPORT_KEYS) - set(discovered_required_keys)
     if missing_required_keys:
         raise SwissKnifeIPFSDatasetsInteropError(
             "ipfs_datasets deprecations_report.schema.json is missing required keys: "
@@ -242,7 +234,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         sorted(
             node.name
             for node in bucket_vfs_demo_tree.body
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef)
         )
     )
     demo_classes = tuple(
@@ -392,7 +384,7 @@ def _literal_tuple_assignment(tree: ast.Module, name: str) -> tuple[str, ...]:
             continue
         if not any(isinstance(target, ast.Name) and target.id == name for target in node.targets):
             continue
-        if not isinstance(node.value, (ast.Tuple, ast.List)):
+        if not isinstance(node.value, ast.Tuple | ast.List):
             break
         values = []
         for element in node.value.elts:

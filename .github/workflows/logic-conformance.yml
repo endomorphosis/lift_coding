@@ -15,8 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
+
+      - name: Init conformance submodules
+        run: |
+          git submodule update --init --depth 1 swissknife external/ipfs_datasets || true
 
       - uses: actions/setup-node@v4
         with:

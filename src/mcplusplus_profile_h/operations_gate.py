@@ -49,7 +49,9 @@ def run_operations_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
             # Every operational failure family is distinguishable by stage and stable code.
             metrics.observe("quote", "failure", seller, reason_code="H_QUOTE_EXPIRED")
             metrics.observe("verify", "failure", seller, reason_code="H_VERIFICATION_FAILED")
-            metrics.observe("settlement", "timeout", seller, reason_code="H_FACILITATOR_UNAVAILABLE")
+            metrics.observe(
+                "settlement", "timeout", seller, reason_code="H_FACILITATOR_UNAVAILABLE"
+            )
             metrics.observe("entitlement", "denied", seller, reason_code="H_ENTITLEMENT_EXHAUSTED")
             metrics.observe("access", "denied", seller, reason_code="H_PAYMENT_POLICY_DENIED")
             metrics.observe("execution", "failure", seller, reason_code="H_RECONCILIATION_REQUIRED")
@@ -69,10 +71,22 @@ def run_operations_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
         ledger_path = state_dir / "ledger.duckdb"
         ledger = DuckDBPaymentLedger(ledger_path)
         quote = artifacts.put({"schema": "mcp++/profile-h/ops-fixture@1.0", "kind": "quote"})
-        verification = artifacts.put({"schema": "mcp++/profile-h/ops-fixture@1.0", "kind": "verification", "parent": quote})
-        settlement = artifacts.put({"schema": "mcp++/profile-h/ops-fixture@1.0", "kind": "settlement", "parent": verification})
-        access = artifacts.put({"schema": "mcp++/profile-h/ops-fixture@1.0", "kind": "access", "parent": settlement})
-        ledger.create_quote("ops-idempotency", "request-commitment", "tool:pin", "capability-commitment", quote)
+        verification = artifacts.put(
+            {"schema": "mcp++/profile-h/ops-fixture@1.0", "kind": "verification", "parent": quote}
+        )
+        settlement = artifacts.put(
+            {
+                "schema": "mcp++/profile-h/ops-fixture@1.0",
+                "kind": "settlement",
+                "parent": verification,
+            }
+        )
+        access = artifacts.put(
+            {"schema": "mcp++/profile-h/ops-fixture@1.0", "kind": "access", "parent": settlement}
+        )
+        ledger.create_quote(
+            "ops-idempotency", "request-commitment", "tool:pin", "capability-commitment", quote
+        )
         ledger.bind_payment("ops-idempotency", "payment-commitment")
         ledger.mark_verified("ops-idempotency", verification)
         ledger.begin_settlement("ops-idempotency", "short-lived-lease")
@@ -86,13 +100,17 @@ def run_operations_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
         ledger.begin_settlement("recovery-idempotency", "recovery-lease")
 
         ledger_probe = ledger.health_probe()
-        facilitator_probe = asyncio.run(facilitator_health_probe(asyncio.run(_healthy_facilitator())))
+        facilitator_probe = asyncio.run(
+            facilitator_health_probe(asyncio.run(_healthy_facilitator()))
+        )
         if not ledger_probe["ready"] or not facilitator_probe["ready"]:
             raise AssertionError("healthy dependencies did not pass readiness")
 
         controls = KillSwitches(state_dir / "kill-switches.json", sellers=SELLERS)
         controls.set_pause(paused=True, seller="ipfs-datasets", reason_code="H_INCIDENT_SELLER")
-        seller_isolated = not controls.allows_new_work("ipfs-datasets") and controls.allows_new_work("ipfs-kit")
+        seller_isolated = not controls.allows_new_work(
+            "ipfs-datasets"
+        ) and controls.allows_new_work("ipfs-kit")
         controls.set_pause(paused=True, reason_code="H_INCIDENT_GLOBAL")
         globally_paused = all(not controls.allows_new_work(seller) for seller in SELLERS)
         recovery_while_paused = controls.allows_recovery() and bool(ledger.pending_reconciliation())
@@ -105,8 +123,9 @@ def run_operations_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
 
         restored_ledger_path = state_dir / "restored" / "ledger.duckdb"
         restored_artifacts = state_dir / "restored" / "artifacts"
-        manifest = BackupManager.restore(snapshot.root, ledger_path=restored_ledger_path,
-                                         artifact_root=restored_artifacts)
+        manifest = BackupManager.restore(
+            snapshot.root, ledger_path=restored_ledger_path, artifact_root=restored_artifacts
+        )
         restored = DuckDBPaymentLedger(restored_ledger_path)
         restored_entry = restored.get("ops-idempotency")
         lineage_preserved = restored.history("ops-idempotency") == original_history
@@ -118,32 +137,64 @@ def run_operations_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
             replay_fenced = exc.code == PAYMENT_REPLAY
         restore_ready = restored.health_probe()["ready"]
         restored.close()
-        artifacts_preserved = all((restored_artifacts / cid).exists() for cid in manifest["artifacts"])
-        if not all((restored_entry and restored_entry.state == "executed", lineage_preserved,
-                    recovery_queue_preserved, replay_fenced, restore_ready, artifacts_preserved)):
+        artifacts_preserved = all(
+            (restored_artifacts / cid).exists() for cid in manifest["artifacts"]
+        )
+        if not all(
+            (
+                restored_entry and restored_entry.state == "executed",
+                lineage_preserved,
+                recovery_queue_preserved,
+                replay_fenced,
+                restore_ready,
+                artifacts_preserved,
+            )
+        ):
             raise AssertionError("backup/restore lost payment safety or lineage")
 
         dashboard, alerts = dashboard_definition(), alert_definitions()
         report: dict[str, Any] = {
-            "schema": "mcp++/profile-h/operations-gate@1.0", "task": "XPH-112",
-            "decision": "pass", "sellerCount": len(SELLERS),
+            "schema": "mcp++/profile-h/operations-gate@1.0",
+            "task": "XPH-112",
+            "decision": "pass",
+            "sellerCount": len(SELLERS),
             "observability": {
-                "metrics": metrics.snapshot(), "prometheusExport": metrics.prometheus(),
-                "dashboard": dashboard, "alerts": alerts,
-                "failureStages": ["quote", "verify", "settlement", "entitlement", "access", "execution"],
-                "boundedLabels": True, "sensitiveLabelRejected": rejected_sensitive_label,
+                "metrics": metrics.snapshot(),
+                "prometheusExport": metrics.prometheus(),
+                "dashboard": dashboard,
+                "alerts": alerts,
+                "failureStages": [
+                    "quote",
+                    "verify",
+                    "settlement",
+                    "entitlement",
+                    "access",
+                    "execution",
+                ],
+                "boundedLabels": True,
+                "sensitiveLabelRejected": rejected_sensitive_label,
             },
             "health": {"facilitator": facilitator_probe, "ledger": ledger_probe},
-            "killSwitches": {"sellerIsolation": seller_isolated, "globalPause": globally_paused,
-                             "recoveryAvailableWhilePaused": recovery_while_paused,
-                             "finalState": controls.status()},
+            "killSwitches": {
+                "sellerIsolation": seller_isolated,
+                "globalPause": globally_paused,
+                "recoveryAvailableWhilePaused": recovery_while_paused,
+                "finalState": controls.status(),
+            },
             "incidentRecovery": {
                 "snapshotEvidenceCid": manifest["evidenceCid"],
-                "artifactCount": manifest["artifactCount"], "settledLineagePreserved": lineage_preserved,
+                "artifactCount": manifest["artifactCount"],
+                "settledLineagePreserved": lineage_preserved,
                 "uncertainSettlementPreserved": recovery_queue_preserved,
-                "idempotencyReplayFenced": replay_fenced, "restoredLedgerReady": restore_ready,
+                "idempotencyReplayFenced": replay_fenced,
+                "restoredLedgerReady": restore_ready,
                 "artifactsVerified": artifacts_preserved,
-                "refundWorkflow": ["request", "policy-review", "record-outcome", "reconcile-ledger"],
+                "refundWorkflow": [
+                    "request",
+                    "policy-review",
+                    "record-outcome",
+                    "reconcile-ledger",
+                ],
             },
             "runbook": "docs/mcplusplus-profile-h-incident-recovery.md",
         }
@@ -153,4 +204,3 @@ def run_operations_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
     finally:
         if temporary is not None:
             temporary.cleanup()
-

@@ -9,11 +9,17 @@ import os
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
-TODO_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md"
-PLAN_PATH = REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+TODO_PATH = (
+    REPO_ROOT
+    / "implementation_plan"
+    / "docs"
+    / "18-swissknife-meta-glasses-display-widgets.todo.md"
+)
+PLAN_PATH = (
+    REPO_ROOT / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md"
+)
 ARTIFACT_DIR = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "llm_router"
 
 
@@ -31,13 +37,21 @@ def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Generate an implementation proposal for a Meta glasses display-widget todo with llm_router.",
     )
-    parser.add_argument("--task-id", default="", help="Specific MGW task id. Defaults to the first ready task.")
+    parser.add_argument(
+        "--task-id", default="", help="Specific MGW task id. Defaults to the first ready task."
+    )
     parser.add_argument("--todo-path", type=Path, default=TODO_PATH)
     parser.add_argument("--plan-path", type=Path, default=PLAN_PATH)
     parser.add_argument("--artifact-dir", type=Path, default=ARTIFACT_DIR)
-    parser.add_argument("--generate", action="store_true", help="Actually call llm_router. Default is dry-run/preflight.")
+    parser.add_argument(
+        "--generate",
+        action="store_true",
+        help="Actually call llm_router. Default is dry-run/preflight.",
+    )
     parser.add_argument("--provider", default=os.environ.get("IPFS_DATASETS_PY_LLM_PROVIDER", ""))
-    parser.add_argument("--model", default=os.environ.get("IPFS_DATASETS_PY_LLM_MODEL", "gpt-5.3-codex-spark"))
+    parser.add_argument(
+        "--model", default=os.environ.get("IPFS_DATASETS_PY_LLM_MODEL", "gpt-5.3-codex-spark")
+    )
     parser.add_argument("--max-new-tokens", type=int, default=2048)
     parser.add_argument("--timeout", type=int, default=300)
     parser.add_argument("--allow-local-fallback", action="store_true")

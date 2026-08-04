@@ -67,9 +67,7 @@ def _register_edge() -> dict:
 
 def test_mobile_orb_descriptor_artifact_declares_phone_edge_methods() -> None:
     descriptor = json.loads(
-        Path("spec/meta_glasses_mobile_orb_bridge_interface.json").read_text(
-            encoding="utf-8"
-        )
+        Path("spec/meta_glasses_mobile_orb_bridge_interface.json").read_text(encoding="utf-8")
     )
 
     assert descriptor["name"] == "mobile_orb_bridge"
@@ -142,8 +140,9 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert binding_payload["interaction_envelope"]["normalized_intent"]["method"] == (
         "bind_service"
     )
-    assert binding_payload["mediation_receipt"]["policy_decision"] == (
-        binding_payload["policy_decision"]
+    assert (
+        binding_payload["mediation_receipt"]["policy_decision"]
+        == (binding_payload["policy_decision"])
     )
     assert binding_payload["orb_binding"]["interface_cid"] == "sha256:task-service"
     assert binding_payload["orb_binding"]["service_id"] == "task_status_service"
@@ -207,16 +206,19 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert invoked_payload["display_widget_action"]["action"] == "render"
     assert invoked_payload["display_widget_action"]["widget_id"] == "task-progress-active"
     assert invoked_payload["display_widget_action"]["widget_cid"] == "sha256:widget"
-    assert invoked_payload["display_widget_action"]["orb_receipt_cid"] == (
-        invoked_payload["receipt_cid"]
+    assert (
+        invoked_payload["display_widget_action"]["orb_receipt_cid"]
+        == (invoked_payload["receipt_cid"])
     )
     assert invoked_payload["policy_decision"]["outcome"] == "allow"
-    assert invoked_payload["mediation_receipt"]["policy_decision"] == (
-        invoked_payload["policy_decision"]
+    assert (
+        invoked_payload["mediation_receipt"]["policy_decision"]
+        == (invoked_payload["policy_decision"])
     )
     assert invoked_payload["display_widget_action"]["policy_decision"]["outcome"] == "allow"
-    assert invoked_payload["display_widget_action"]["mediation_receipt"]["policy_decision"] == (
-        invoked_payload["display_widget_action"]["policy_decision"]
+    assert (
+        invoked_payload["display_widget_action"]["mediation_receipt"]["policy_decision"]
+        == (invoked_payload["display_widget_action"]["policy_decision"])
     )
     assert invoked_payload["display_widget_action"]["correlation_id"] == "corr-task-status"
     assert invoked_payload["display_widget_action"]["fallback"]["display"]["available"] is False
@@ -224,8 +226,9 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
         "phone_speaker"
     )
     assert invoked_payload["follow_up_actions"][0]["id"] == "mobile_render_display_widget"
-    assert invoked_payload["follow_up_actions"][0]["params"]["display_widget_action"] == (
-        invoked_payload["display_widget_action"]
+    assert (
+        invoked_payload["follow_up_actions"][0]["params"]["display_widget_action"]
+        == (invoked_payload["display_widget_action"])
     )
     assert invoked_payload["spoken_text"] == "Sync dataset is 42 percent complete."
     assert event_payload["receipt_cid"] in invoked_payload["provenance_refs"]
@@ -256,11 +259,13 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
         "Sync dataset is 42 percent complete."
     )
     assert dispatched_payload["dispatched_actions"][0]["id"] == "mobile_render_display_widget"
-    assert dispatched_payload["dispatched_actions"][0]["params"]["display_widget_action"] == (
-        dispatched_payload["display_widget_action"]
+    assert (
+        dispatched_payload["dispatched_actions"][0]["params"]["display_widget_action"]
+        == (dispatched_payload["display_widget_action"])
     )
-    assert dispatched_payload["dispatched_actions"][0]["mobile_payload"] == (
-        dispatched_payload["display_widget_action"]
+    assert (
+        dispatched_payload["dispatched_actions"][0]["mobile_payload"]
+        == (dispatched_payload["display_widget_action"])
     )
     assert dispatched_payload["spoken_text"] == "Sync dataset is 42 percent complete."
     assert dispatched_payload["receipt_cid"].startswith("sha256:mobile-orb-receipt:")
@@ -277,15 +282,15 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert subscription.status_code == 200
     subscription_payload = subscription.json()
     assert subscription_payload["generation_key"].endswith(":get_task_status:task-status")
-    assert subscription_payload["subscription"]["subscription_id"] == (
-        subscription_payload["subscription_id"]
+    assert (
+        subscription_payload["subscription"]["subscription_id"]
+        == (subscription_payload["subscription_id"])
     )
-    assert subscription_payload["subscription"]["binding_handle"] == (
-        binding_payload["binding_handle"]
+    assert (
+        subscription_payload["subscription"]["binding_handle"]
+        == (binding_payload["binding_handle"])
     )
-    assert subscription_payload["subscription"]["service_interface_cid"] == (
-        "sha256:task-service"
-    )
+    assert subscription_payload["subscription"]["service_interface_cid"] == ("sha256:task-service")
     assert subscription_payload["subscription"]["status"] == "active"
     assert subscription_payload["subscription"]["orb_binding"]["service_id"] == (
         "task_status_service"
@@ -316,28 +321,31 @@ def test_mobile_orb_edge_register_event_bind_invoke_dispatch_revoke_flow() -> No
     assert "sha256:mobile" in diagnostics_contract["descriptor_cids"]
     assert "sha256:display" in diagnostics_contract["descriptor_cids"]
     assert "sha256:task-service" in diagnostics_contract["descriptor_cids"]
-    assert binding_payload["orb_binding"]["descriptor_cid"] in (
-        diagnostics_contract["descriptor_cids"]
+    assert (
+        binding_payload["orb_binding"]["descriptor_cid"]
+        in (diagnostics_contract["descriptor_cids"])
     )
-    assert binding_payload["policy_decision"]["decision_id"] in (
-        diagnostics_contract["policy_cids"]
+    assert (
+        binding_payload["policy_decision"]["decision_id"] in (diagnostics_contract["policy_cids"])
     )
     assert event_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
     assert invoked_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
     assert dispatched_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
     assert subscription_payload["receipt_cid"] in diagnostics_contract["receipt_cids"]
-    assert "Display unavailable. Showing task status on phone." in (
-        diagnostics_contract["fallback_reasons"]
+    assert (
+        "Display unavailable. Showing task status on phone."
+        in (diagnostics_contract["fallback_reasons"])
     )
     assert diagnostics_contract["binding_state"]["active_bindings_count"] == 1
     assert diagnostics_contract["binding_state"]["bindings"][0]["state"] == "bound"
     assert diagnostics_payload["descriptor_cids"] == diagnostics_contract["descriptor_cids"]
     assert diagnostics_payload["receipt_cids"] == diagnostics_contract["receipt_cids"]
-    assert diagnostics_payload["bindings"][0]["binding_handle"] == (
-        binding_payload["binding_handle"]
+    assert (
+        diagnostics_payload["bindings"][0]["binding_handle"] == (binding_payload["binding_handle"])
     )
-    assert diagnostics_payload["subscriptions"][0]["subscription_id"] == (
-        subscription_payload["subscription_id"]
+    assert (
+        diagnostics_payload["subscriptions"][0]["subscription_id"]
+        == (subscription_payload["subscription_id"])
     )
 
     revoked = client.post(
@@ -368,9 +376,7 @@ def test_mobile_orb_diagnostics_reports_policy_receipt_integrity_edges() -> None
 
     event_record = next(iter(api_module.mobile_orb_events.values()))
     event_record["mediation_receipt"]["policy_decision"]["compiled_policy_cid"] = None
-    event_record["mediation_receipt"]["policy_decision"]["policy_bundle_ref"][
-        "policy_cid"
-    ] = None
+    event_record["mediation_receipt"]["policy_decision"]["policy_bundle_ref"]["policy_cid"] = None
 
     diagnostics = client.get(
         "/v1/mobile/orb/diagnostics",
@@ -382,9 +388,10 @@ def test_mobile_orb_diagnostics_reports_policy_receipt_integrity_edges() -> None
     assert diagnostics_payload["receipt_integrity"]["orphan_parent_receipt_cids"] == [
         "sha256:missing-parent"
     ]
-    assert event.json()["receipt_cid"] in diagnostics_payload["receipt_integrity"][
-        "missing_policy_cid_receipts"
-    ]
+    assert (
+        event.json()["receipt_cid"]
+        in diagnostics_payload["receipt_integrity"]["missing_policy_cid_receipts"]
+    )
     assert diagnostics_payload["receipt_integrity"]["outcomes"]["allow"] >= 1
     assert diagnostics_payload["edge_health"]["status"] == "degraded"
     assert "missing_policy_cids" in diagnostics_payload["edge_health"]["degraded_reasons"]

@@ -9,7 +9,6 @@ Validates the complete ORB → IDL → Auto-UI → Desktop + Glasses flow:
 - Integration with virtual desktop and glasses control plane
 """
 
-import re
 from pathlib import Path
 
 import pytest
@@ -28,6 +27,7 @@ def read_ts(relative_path: str) -> str:
 # ===========================================================================
 # ORB Dynamic App Renderer
 # ===========================================================================
+
 
 class TestORBDynamicAppRenderer:
     """Verify the auto-UI renderer for virtual desktop."""
@@ -50,7 +50,7 @@ class TestORBDynamicAppRenderer:
 
     def test_widget_selection_types(self, source):
         """Must support all widget types."""
-        widgets = ['text', 'number', 'checkbox', 'textarea', 'json', 'cid']
+        widgets = ["text", "number", "checkbox", "textarea", "json", "cid"]
         for w in widgets:
             assert f"'{w}'" in source, f"Missing widget type: {w}"
 
@@ -125,6 +125,7 @@ class TestORBDynamicAppRenderer:
 # Virtual Desktop Integration
 # ===========================================================================
 
+
 class TestVirtualDesktopIntegration:
     """Verify the ORB renderer is wired into the virtual desktop."""
 
@@ -161,7 +162,7 @@ class TestVirtualDesktopIntegration:
     def test_descriptors_have_correct_method_counts(self, source):
         """IPFS Kit should have 10 methods, Datasets 6, Accelerate 8."""
         # Find method arrays by checking how many name: entries after each descriptor
-        kit_block = source[source.find("name: 'ipfs-kit'"):source.find("name: 'ipfs-datasets'")]
+        kit_block = source[source.find("name: 'ipfs-kit'") : source.find("name: 'ipfs-datasets'")]
         kit_methods = kit_block.count("{ name: '")
         assert kit_methods >= 10, f"Kit has {kit_methods} methods, expected >= 10"
 
@@ -169,6 +170,7 @@ class TestVirtualDesktopIntegration:
 # ===========================================================================
 # Glasses Registry Update
 # ===========================================================================
+
 
 class TestGlassesRegistryUpdate:
     """Verify the control plane now includes ORB Auto-UI."""

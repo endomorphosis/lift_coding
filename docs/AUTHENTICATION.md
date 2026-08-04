@@ -71,7 +71,7 @@ secret_key = "your-secret-key"
 payload = {
     "user_id": user_id,
     "iat": datetime.now(UTC),
-    "exp": datetime.now(UTC) + timedelta(hours=1)
+    "exp": datetime.now(UTC) + timedelta(hours=1),
 }
 
 token = jwt.encode(payload, secret_key, algorithm="HS256")
@@ -235,14 +235,16 @@ import jwt
 import uuid
 from datetime import datetime, timedelta, UTC
 
+
 def create_user_token(user_id: str, secret_key: str, expires_hours: int = 24) -> str:
     """Create a JWT token for a user."""
     payload = {
         "user_id": user_id,
         "iat": datetime.now(UTC),
-        "exp": datetime.now(UTC) + timedelta(hours=expires_hours)
+        "exp": datetime.now(UTC) + timedelta(hours=expires_hours),
     }
     return jwt.encode(payload, secret_key, algorithm="HS256")
+
 
 # Usage
 user_id = str(uuid.uuid4())

@@ -867,9 +867,9 @@ Congratulations! Your agent runner is now operational.
 ```python
 from prometheus_client import Counter, Histogram, Gauge
 
-tasks_processed = Counter('agent_tasks_processed_total', 'Total tasks processed', ['status'])
-task_duration = Histogram('agent_task_duration_seconds', 'Task processing duration')
-github_rate_limit = Gauge('github_api_rate_limit_remaining', 'GitHub API rate limit remaining')
+tasks_processed = Counter("agent_tasks_processed_total", "Total tasks processed", ["status"])
+task_duration = Histogram("agent_task_duration_seconds", "Task processing duration")
+github_rate_limit = Gauge("github_api_rate_limit_remaining", "GitHub API rate limit remaining")
 ```
 
 ## Next Steps

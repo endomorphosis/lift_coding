@@ -498,9 +498,7 @@ _REGISTRY: dict[str, AICapabilityRegistryEntry] = {
             ),
             input_schema_ref=f"handsfree.capability.vai.glasses_widget.{action}.input",
             result_schema_ref=f"handsfree.capability.vai.glasses_widget.{action}.result",
-            voice_formatter=(
-                f"handsfree.ai.formatters:format_glasses_widget_{action}_summary"
-            ),
+            voice_formatter=(f"handsfree.ai.formatters:format_glasses_widget_{action}_summary"),
             follow_up_action_builder=(
                 f"handsfree.ai.follow_up_actions:build_glasses_widget_{action}_actions"
             ),

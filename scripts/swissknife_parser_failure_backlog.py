@@ -16,45 +16,34 @@ import subprocess
 import sys
 import tempfile
 from collections import Counter
+from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import Any, Iterable, Mapping
-
+from typing import Any
 
 SCHEMA = "ipfs_accelerate_py/agent-supervisor/parser-failure-backlog@1"
-RECEIPT_SCHEMA = (
-    "ipfs_accelerate_py/agent-supervisor/parser-failure-resolution-receipt@1"
-)
+RECEIPT_SCHEMA = "ipfs_accelerate_py/agent-supervisor/parser-failure-resolution-receipt@1"
 BEGIN_MARKER = "<!-- BEGIN GENERATED SCA PARSER FAILURE BACKLOG V1 -->"
 END_MARKER = "<!-- END GENERATED SCA PARSER FAILURE BACKLOG V1 -->"
 BOARD_NAMESPACE = "swissknife-symbolic-contract-assurance-v1"
 GOAL_ID = "SCA-G022"
 EXPECTED_FAILURE_COUNT = 258
-INDEX_FILE_SHA256 = (
-    "0f1282f349c0026b5b9037b185932cfdb13f52ffe9b29a325858a8debc0032cb"
-)
+INDEX_FILE_SHA256 = "0f1282f349c0026b5b9037b185932cfdb13f52ffe9b29a325858a8debc0032cb"
 INDEX_ID = (
-    "sca-repository-index:sha256:"
-    "bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7"
+    "sca-repository-index:sha256:bd7cd357b5bb0cac78d746b3e6f1ba6dd9f9f9451763ba28ea3015825a6491a7"
 )
 SNAPSHOT_ID = (
     "sca-repository-snapshot:sha256:"
     "d092867b88fc3f921d98c235298c4fdf1e928b29e564de68f619db258bdfbfcb"
 )
 AST_INDEX_ID = (
-    "analysis-ast-index:sha256:"
-    "907cc301da1ef80df8a43fce30d76ac083585ca0317db5c8e152281032f775d7"
+    "analysis-ast-index:sha256:907cc301da1ef80df8a43fce30d76ac083585ca0317db5c8e152281032f775d7"
 )
 PARSER_ID = (
-    "sca-repository-parser:sha256:"
-    "5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284"
+    "sca-repository-parser:sha256:5004a038a1761125ab16ce2510262a3b18f687213d25fab342e89cac6439c284"
 )
 HEALTH_CID = "baguqeerawrhoccwxhu6fd53adibcpkv26lqrj5e6hvd2ro3ntqwt5ji5pn3q"
-HEALTH_DIGEST = (
-    "sha256:b44ee10ad73d3c51f7601a0227aabaf2e114f49e3d47a8bb6d9c2d3ea51d7b77"
-)
-MANIFEST_DEFAULT = Path(
-    "implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json"
-)
+HEALTH_DIGEST = "sha256:b44ee10ad73d3c51f7601a0227aabaf2e114f49e3d47a8bb6d9c2d3ea51d7b77"
+MANIFEST_DEFAULT = Path("implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json")
 INDEX_DEFAULT = Path(
     "data/agent_supervisor/swissknife_contract_assurance/"
     "audit/current-index-20260729/repository-index.json"
@@ -63,16 +52,9 @@ HEALTH_DEFAULT = Path(
     "data/agent_supervisor/swissknife_contract_assurance/"
     "audit/unsafe-publication-20260729T171543Z/analyzer_health/report.json"
 )
-TODO_DEFAULT = Path(
-    "implementation_plan/docs/"
-    "44-swissknife-symbolic-contract-assurance.todo.md"
-)
-RECEIPT_ROOT = (
-    "data/agent_supervisor/swissknife_contract_assurance/parser-failures"
-)
-INDEXER_RELATIVE = Path(
-    "external/ipfs_accelerate/scripts/index_repository_contracts.py"
-)
+TODO_DEFAULT = Path("implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md")
+RECEIPT_ROOT = "data/agent_supervisor/swissknife_contract_assurance/parser-failures"
+INDEXER_RELATIVE = Path("external/ipfs_accelerate/scripts/index_repository_contracts.py")
 SCOPE_CONFIG_RELATIVE = Path("config/swissknife_symbolic_contract_scope.json")
 SEMANTIC_SUCCESS_STATUSES = frozenset({"indexed", "cache_hit"})
 TYPED_NONSEMANTIC_STATUSES = frozenset({"not_applicable", "unsupported"})
@@ -93,17 +75,10 @@ REQUIRED_SEMANTIC_PATHS: Mapping[str, frozenset[str]] = {
     "STRUCTURED": frozenset({"benchmark-results/sample-baseline.json"}),
 }
 REVIEWED_NONSEMANTIC_PATHS: Mapping[str, frozenset[str]] = {
-    "ACTIVEJS": frozenset(
-        {"ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js"}
-    ),
-    "PYTHON": frozenset(
-        {"ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py"}
-    ),
+    "ACTIVEJS": frozenset({"ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js"}),
+    "PYTHON": frozenset({"ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py"}),
     "STRUCTURED": frozenset(
-        {
-            "docs/ast_exports/full_asts/python/swissknife_old/"
-            "ipfs_transformers.py.ast.json"
-        }
+        {"docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json"}
     ),
 }
 
@@ -133,9 +108,7 @@ def _cid_for_bytes(value: bytes) -> str:
     try:
         from multiformats import CID, multihash
     except ImportError as exc:  # pragma: no cover - environment gate
-        raise BacklogError(
-            "multiformats is required to mint the strict DAG-JSON CID"
-        ) from exc
+        raise BacklogError("multiformats is required to mint the strict DAG-JSON CID") from exc
     return str(CID("base32", 1, "dag-json", multihash.digest(value, "sha2-256")))
 
 
@@ -202,8 +175,7 @@ def _family(path: str) -> str:
     }
     structured = {
         "benchmark-results/sample-baseline.json",
-        "docs/ast_exports/full_asts/python/swissknife_old/"
-        "ipfs_transformers.py.ast.json",
+        "docs/ast_exports/full_asts/python/swissknife_old/ipfs_transformers.py.ast.json",
     }
     if path.startswith("ipfs_accelerate_js/test/unit/"):
         return "UNIT"
@@ -224,11 +196,7 @@ def _required_resolution(path: str, family: str) -> str:
     if family in {"UNIT", "BROWSER"}:
         return "indexed_semantic_ast"
     if path in REQUIRED_SEMANTIC_PATHS.get(family, frozenset()):
-        return (
-            "indexed_structured_data"
-            if family == "STRUCTURED"
-            else "indexed_semantic_ast"
-        )
+        return "indexed_structured_data" if family == "STRUCTURED" else "indexed_semantic_ast"
     if path in REVIEWED_NONSEMANTIC_PATHS["ACTIVEJS"]:
         return "reviewed_shell_nonsemantic"
     if path in REVIEWED_NONSEMANTIC_PATHS["PYTHON"]:
@@ -268,15 +236,13 @@ CLUSTERS: tuple[dict[str, Any], ...] = (
         "title": "Repair active JavaScript and content-routing parser failures",
         "lane": "sca-parser-failure-active-js",
         "source_scopes": [
-            "swissknife/ipfs_accelerate_js/src/utils/"
-            "run_web_platform_integration_tests.js",
+            "swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js",
             "swissknife/test/mocks/stubs/chai-stub.js",
             "swissknife/test/unit/cli/chat-command.test.js",
             "swissknife/test/utils/mockMCPClient.js",
             "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
             "analysis/polyglot_ast_provider.py",
-            "external/ipfs_accelerate/test/api/"
-            "test_agent_supervisor_polyglot_ast_provider.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py",
         ],
         "acceptance": (
             "Use content/shebang-aware routing for the shell program and real "
@@ -290,15 +256,12 @@ CLUSTERS: tuple[dict[str, Any], ...] = (
         "title": "Repair Python failures and classify semantic-looking symlinks",
         "lane": "sca-parser-failure-python",
         "source_scopes": [
-            "swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/"
-            "run_benchmarks.py",
-            "swissknife/test/fixed_web_platform/"
-            "cross_browser_model_sharding.py",
+            "swissknife/ipfs_accelerate_js/test/performance/webgpu_optimizer/run_benchmarks.py",
+            "swissknife/test/fixed_web_platform/cross_browser_model_sharding.py",
             "swissknife/test/web_platform_test_output/test_hf_bert.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
             "analysis/repository_snapshot.py",
-            "external/ipfs_accelerate/test/api/"
-            "test_agent_supervisor_repository_snapshot.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_repository_snapshot.py",
         ],
         "acceptance": (
             "Classify EntryKind.SYMLINK before suffix routing and add positive "
@@ -380,17 +343,14 @@ def build_payload(index_path: Path, health_path: Path) -> dict[str, Any]:
     health_failures = [
         item
         for item in health.get("dispositions", [])
-        if isinstance(item, Mapping)
-        and item.get("parser_status") == "parse_failure"
+        if isinstance(item, Mapping) and item.get("parser_status") == "parse_failure"
     ]
     if len(failure_rows) != EXPECTED_FAILURE_COUNT:
         raise BacklogError(
             f"expected {EXPECTED_FAILURE_COUNT} failure rows, found {len(failure_rows)}"
         )
     if len(health_failures) != EXPECTED_FAILURE_COUNT:
-        raise BacklogError(
-            "analyzer-health report does not contain exactly 258 failures"
-        )
+        raise BacklogError("analyzer-health report does not contain exactly 258 failures")
 
     by_health_path = {str(item["path"]): item for item in health_failures}
     if len(by_health_path) != EXPECTED_FAILURE_COUNT:
@@ -426,9 +386,7 @@ def build_payload(index_path: Path, health_path: Path) -> dict[str, Any]:
         )
         official_cluster_id = official_clusters.get(health_key)
         if not official_cluster_id:
-            raise BacklogError(
-                f"failure disposition has no official cluster: {path} {health_key}"
-            )
+            raise BacklogError(f"failure disposition has no official cluster: {path} {health_key}")
         row_id = str(row.get("row_id") or "")
         row_digest = _digest_part(row_id)
         task_id = f"SCA-{238 + offset:03d}"
@@ -449,8 +407,7 @@ def build_payload(index_path: Path, health_path: Path) -> dict[str, Any]:
             "parser_identity": PARSER_ID,
             "parser_language": str(disposition.get("language") or ""),
             "parser_reason_code": str(disposition.get("reason_code") or ""),
-            "parser_reason_sha256": "sha256:"
-            + _sha256_text(str(row.get("parser_reason") or "")),
+            "parser_reason_sha256": "sha256:" + _sha256_text(str(row.get("parser_reason") or "")),
             "content_digest": str(row.get("content_digest") or ""),
             "ast_record_id": str(row.get("ast_record_id") or ""),
             "source_ref": dict(source_ref),
@@ -488,12 +445,9 @@ def build_payload(index_path: Path, health_path: Path) -> dict[str, Any]:
         "LEGACY": 8,
     }
     if dict(family_counts) != expected_family_counts:
-        raise BacklogError(
-            f"actionable family counts drifted: {dict(family_counts)}"
-        )
+        raise BacklogError(f"actionable family counts drifted: {dict(family_counts)}")
     reported_official_counts = {
-        str(item["cluster_id"]): int(item["count"])
-        for item in health["clusters"]
+        str(item["cluster_id"]): int(item["count"]) for item in health["clusters"]
     }
     if dict(official_counts) != reported_official_counts:
         raise BacklogError("official cluster membership does not match health counts")
@@ -698,8 +652,7 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
         )
 
     cluster_receipts = {
-        str(cluster["family"]): str(cluster["receipt_path"])
-        for cluster in payload["clusters"]
+        str(cluster["family"]): str(cluster["receipt_path"]) for cluster in payload["clusters"]
     }
     for row in payload["rows"]:
         task_id = str(row["task_id"])
@@ -755,8 +708,7 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
                     "small independently checkable row receipt."
                 ),
                 evidence_subset=(
-                    "Pinned row/path/content/AST/parser identities and family "
-                    "resolution handle"
+                    "Pinned row/path/content/AST/parser identities and family resolution handle"
                 ),
                 acceptance=(
                     "The exact retained failure is assigned once, its fresh "
@@ -844,8 +796,7 @@ def render_tasks(payload: Mapping[str, Any], manifest_path: Path) -> str:
                     json.dumps(
                         {
                             "schema": (
-                                "ipfs_accelerate_py/agent-supervisor/"
-                                "task-artifact-envelope@1"
+                                "ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1"
                             ),
                             "paths": [aggregate_receipt, aggregate_fresh],
                             "max_file_bytes": 8_000_000,
@@ -909,12 +860,8 @@ def _replace_publication_dependency(board: str) -> str:
 
 
 def _replace_triage_authority(board: str) -> str:
-    old_heading = (
-        "## SCA-231 Classify and repair the remaining parser-failure clusters"
-    )
-    heading = (
-        "## SCA-231 Classify remaining parser failures into exact repair families"
-    )
+    old_heading = "## SCA-231 Classify and repair the remaining parser-failure clusters"
+    heading = "## SCA-231 Classify remaining parser failures into exact repair families"
     if old_heading in board:
         board = board.replace(old_heading, heading, 1)
     if heading not in board:
@@ -990,9 +937,7 @@ def check(
     if BEGIN_MARKER not in board or END_MARKER not in board:
         raise BacklogError("taskboard lacks generated parser-failure markers")
     observed = (
-        BEGIN_MARKER
-        + board.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
-        + END_MARKER
+        BEGIN_MARKER + board.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0] + END_MARKER
     ).strip()
     if observed != expected_section:
         raise BacklogError("generated taskboard section differs from regeneration")
@@ -1000,9 +945,7 @@ def check(
         "## SCA-225 Publish one healthy deterministic authoritative index generation",
         1,
     )[1].split("\n## SCA-", 1)[0]
-    expected_dependency = (
-        "- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-512"
-    )
+    expected_dependency = "- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-512"
     if expected_dependency not in publication or "SCA-231" in publication.splitlines()[4]:
         raise BacklogError("SCA-225 is not gated by SCA-512")
     triage = board.split(
@@ -1050,11 +993,7 @@ def _fresh_rows(path: Path) -> tuple[dict[str, Any], dict[str, Mapping[str, Any]
     rows = fresh.get("rows")
     if not isinstance(rows, list):
         raise BacklogError("fresh repository index has no rows")
-    by_path = {
-        str(row.get("path") or ""): row
-        for row in rows
-        if isinstance(row, Mapping)
-    }
+    by_path = {str(row.get("path") or ""): row for row in rows if isinstance(row, Mapping)}
     if len(by_path) != len(rows):
         raise BacklogError("fresh repository index paths are missing or duplicated")
     return fresh, by_path
@@ -1088,15 +1027,11 @@ def _validate_resolution(
         raise BacklogError(f"failure resolution is not explicitly typed: {path}")
     expected_required = _required_resolution(path, family)
     if required != expected_required:
-        raise BacklogError(
-            f"manifest resolution contract drifted for {path}: {required!r}"
-        )
+        raise BacklogError(f"manifest resolution contract drifted for {path}: {required!r}")
 
     if required in {"indexed_semantic_ast", "indexed_structured_data"}:
         if not _is_semantic_success(current, family):
-            raise BacklogError(
-                f"contract-bearing source requires indexed semantic AST: {path}"
-            )
+            raise BacklogError(f"contract-bearing source requires indexed semantic AST: {path}")
         return
 
     if required == "reviewed_shell_nonsemantic":
@@ -1106,9 +1041,7 @@ def _validate_resolution(
             or kind not in {"text_reference", "unsupported"}
             or not any(marker in route_evidence for marker in ("shebang", "shell"))
         ):
-            raise BacklogError(
-                f"shell source lacks an explicit content-aware disposition: {path}"
-            )
+            raise BacklogError(f"shell source lacks an explicit content-aware disposition: {path}")
         return
 
     if required == "reviewed_symlink_nonsemantic":
@@ -1117,9 +1050,7 @@ def _validate_resolution(
             or kind != "text_reference"
             or policy != "entry_kind:symlink"
         ):
-            raise BacklogError(
-                f"semantic-looking symlink lacks entry_kind:symlink: {path}"
-            )
+            raise BacklogError(f"semantic-looking symlink lacks entry_kind:symlink: {path}")
         return
 
     if required not in {
@@ -1129,9 +1060,7 @@ def _validate_resolution(
         raise BacklogError(f"unknown resolution contract for {path}: {required!r}")
     if status not in SEMANTIC_SUCCESS_STATUSES | TYPED_NONSEMANTIC_STATUSES:
         raise BacklogError(f"failure has an unsupported resolution status: {path}")
-    if status in SEMANTIC_SUCCESS_STATUSES and not _is_semantic_success(
-        current, family
-    ):
+    if status in SEMANTIC_SUCCESS_STATUSES and not _is_semantic_success(current, family):
         raise BacklogError(f"semantic resolution has the wrong AST kind: {path}")
 
 
@@ -1158,9 +1087,7 @@ def verify_cluster(
             continue
         current = by_path.get(str(old["path"]))
         if current is None:
-            raise BacklogError(
-                f"{old['path']} disappeared without a typed rename/deletion receipt"
-            )
+            raise BacklogError(f"{old['path']} disappeared without a typed rename/deletion receipt")
         path = str(old["path"])
         required = str(old.get("required_resolution") or "")
         _validate_resolution(
@@ -1281,8 +1208,7 @@ def verify_gate(
             or row_payload.get("task_id") != row["task_id"]
             or row_payload.get("row_id") != row["row_id"]
             or row_payload.get("path") != row["path"]
-            or row_payload.get("source_manifest_digest")
-            != _identity(payload)["digest"]
+            or row_payload.get("source_manifest_digest") != _identity(payload)["digest"]
             or row_payload.get("runtime_model_calls") != 0
             or envelope.get("content_identity") != _identity(dict(row_payload))
         ):
@@ -1295,18 +1221,14 @@ def verify_gate(
             or resolution.get("path") != row["path"]
             or resolution.get("required_resolution") != row["required_resolution"]
         ):
-            raise BacklogError(
-                f"row receipt has invalid fresh resolution for {row['task_id']}"
-            )
+            raise BacklogError(f"row receipt has invalid fresh resolution for {row['task_id']}")
         receipts.append(
             {
                 "task_id": row["task_id"],
                 "row_id": row["row_id"],
                 "path": row["path"],
                 "fresh_row_id": str(resolution.get("fresh_row_id") or ""),
-                "fresh_parser_status": str(
-                    resolution.get("fresh_parser_status") or ""
-                ),
+                "fresh_parser_status": str(resolution.get("fresh_parser_status") or ""),
                 "required_resolution": row["required_resolution"],
                 "receipt_digest": envelope["content_identity"]["digest"],
             }
@@ -1368,22 +1290,17 @@ def verify_all(
     expected = [str(item["row_id"]) for item in payload["rows"]]
     if len(assigned) != 258 or len(set(assigned)) != 258 or set(assigned) != set(expected):
         raise BacklogError("fan-in gates do not cover every retained row exactly once")
-    manifest_by_id = {
-        str(item["row_id"]): item for item in payload["rows"]
-    }
+    manifest_by_id = {str(item["row_id"]): item for item in payload["rows"]}
     for item in assigned_rows:
         retained = manifest_by_id[str(item["row_id"])]
         if (
             item.get("task_id") != retained["task_id"]
             or item.get("path") != retained["path"]
-            or item.get("required_resolution")
-            != retained["required_resolution"]
+            or item.get("required_resolution") != retained["required_resolution"]
             or item.get("fresh_parser_status") == "parse_failure"
             or item.get("receipt_digest") in {"", None}
         ):
-            raise BacklogError(
-                f"fan-in row differs from manifest: {retained['task_id']}"
-            )
+            raise BacklogError(f"fan-in row differs from manifest: {retained['task_id']}")
     fresh, _ = _fresh_rows(fresh_index_path)
     health = fresh.get("health")
     if not isinstance(health, Mapping):
@@ -1406,9 +1323,7 @@ def verify_all(
         if isinstance(row, Mapping) and row.get("parser_status") == "parse_failure"
     )
     if fresh_failure_count != 0:
-        raise BacklogError(
-            "fresh index contains a parser failure after exact reconciliation"
-        )
+        raise BacklogError("fresh index contains a parser failure after exact reconciliation")
     receipt_payload = {
         "kind": "aggregate",
         "task_id": "SCA-512",
@@ -1418,8 +1333,7 @@ def verify_all(
         "unique_assigned_failure_count": len(set(assigned)),
         "fan_in_receipts": gate_receipts,
         "fresh_index_id": str(fresh.get("index_id") or ""),
-        "fresh_index_file_digest": "sha256:"
-        + _sha256_bytes(fresh_index_path.read_bytes()),
+        "fresh_index_file_digest": "sha256:" + _sha256_bytes(fresh_index_path.read_bytes()),
         "fresh_snapshot_id": str((fresh.get("snapshot") or {}).get("snapshot_id") or ""),
         "fresh_failure_count": fresh_failure_count,
         "fresh_failure_ratio": metrics.get("parser_failure_ratio"),
@@ -1432,9 +1346,7 @@ def verify_all(
     return receipt
 
 
-def _bounded_process_output(
-    value: str | bytes | None, *, limit: int = 4000
-) -> str:
+def _bounded_process_output(value: str | bytes | None, *, limit: int = 4000) -> str:
     if isinstance(value, bytes):
         value = value.decode("utf-8", errors="replace")
     text = (value or "").strip()
@@ -1495,12 +1407,9 @@ def _run_fresh_index_scan(
             + _bounded_process_output(timed_out_output + "\n" + timed_out_error)
         ) from exc
     if completed.returncode != 0:
-        detail = _bounded_process_output(
-            completed.stdout + "\n" + completed.stderr
-        )
+        detail = _bounded_process_output(completed.stdout + "\n" + completed.stderr)
         raise BacklogError(
-            f"fresh repository scan failed with status {completed.returncode}: "
-            f"{detail}"
+            f"fresh repository scan failed with status {completed.returncode}: {detail}"
         )
 
     fresh_index_path = output_root / "repository-index.json"
@@ -1522,20 +1431,15 @@ def _run_fresh_index_scan(
     }
     if any(value != 0 for value in call_counts.values()):
         raise BacklogError(
-            f"fresh repository scan reported nonzero or absent call counts: "
-            f"{call_counts}"
+            f"fresh repository scan reported nonzero or absent call counts: {call_counts}"
         )
     evidence = {
-        "schema": (
-            "ipfs_accelerate_py/agent-supervisor/"
-            "parser-failure-fresh-scan-evidence@1"
-        ),
+        "schema": ("ipfs_accelerate_py/agent-supervisor/parser-failure-fresh-scan-evidence@1"),
         "mode": "aggregate_healthy" if require_healthy else "cluster_shadow",
         "indexer_path": INDEXER_RELATIVE.as_posix(),
         "indexer_digest": "sha256:" + _sha256_bytes(indexer.read_bytes()),
         "scope_config_path": SCOPE_CONFIG_RELATIVE.as_posix(),
-        "scope_config_digest": "sha256:"
-        + _sha256_bytes(scope_config.read_bytes()),
+        "scope_config_digest": "sha256:" + _sha256_bytes(scope_config.read_bytes()),
         "flags": [
             "--shadow",
             "--allow-dirty",
@@ -1621,9 +1525,7 @@ def main(argv: list[str] | None = None) -> int:
     cluster_parser.add_argument("--receipt-out", type=Path, required=True)
 
     scan_cluster_parser = subparsers.add_parser("scan-cluster")
-    scan_cluster_parser.add_argument(
-        "--manifest", type=Path, default=MANIFEST_DEFAULT
-    )
+    scan_cluster_parser.add_argument("--manifest", type=Path, default=MANIFEST_DEFAULT)
     scan_cluster_parser.add_argument("--cluster", required=True)
     scan_cluster_parser.add_argument("--receipt-out", type=Path, required=True)
     scan_cluster_parser.add_argument("--repo-root", type=Path, default=Path("."))
@@ -1677,9 +1579,7 @@ def main(argv: list[str] | None = None) -> int:
                 manifest_path=args.manifest,
             )
         elif args.command == "verify-cluster":
-            output = verify_cluster(
-                args.manifest, args.cluster, args.fresh_index, args.receipt_out
-            )
+            output = verify_cluster(args.manifest, args.cluster, args.fresh_index, args.receipt_out)
         elif args.command == "scan-cluster":
             output = scan_cluster(
                 args.manifest,
@@ -1695,13 +1595,9 @@ def main(argv: list[str] | None = None) -> int:
                 args.receipt_out,
             )
         elif args.command == "verify-gate":
-            output = verify_gate(
-                args.manifest, args.nibble, args.receipt_dir, args.receipt_out
-            )
+            output = verify_gate(args.manifest, args.nibble, args.receipt_dir, args.receipt_out)
         elif args.command == "verify-all":
-            output = verify_all(
-                args.manifest, args.gate_dir, args.fresh_index, args.receipt_out
-            )
+            output = verify_all(args.manifest, args.gate_dir, args.fresh_index, args.receipt_out)
         else:
             output = scan_all(
                 args.manifest,

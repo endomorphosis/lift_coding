@@ -63,8 +63,12 @@ def _path_has_files(path: Path) -> bool:
 # transient failures, time-box each attempt, and never let a bootstrap
 # failure abort collection.
 _SUBMODULE_BOOTSTRAP_ATTEMPTS = int(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_ATTEMPTS", "3"))
-_SUBMODULE_BOOTSTRAP_RETRY_SECONDS = float(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_RETRY_SECONDS", "0.5"))
-_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS = float(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS", "120"))
+_SUBMODULE_BOOTSTRAP_RETRY_SECONDS = float(
+    os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_RETRY_SECONDS", "0.5")
+)
+_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS = float(
+    os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS", "120")
+)
 
 
 @contextlib.contextmanager
@@ -125,7 +129,14 @@ def _ensure_external_submodule(name: str) -> None:
     if _path_has_files(target):
         return
 
-    source = next((candidate for candidate in _external_submodule_sources(name) if _path_has_files(candidate)), None)
+    source = next(
+        (
+            candidate
+            for candidate in _external_submodule_sources(name)
+            if _path_has_files(candidate)
+        ),
+        None,
+    )
     if source is None:
         return
 

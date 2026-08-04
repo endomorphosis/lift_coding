@@ -119,18 +119,21 @@ import pytest
 from handsfree.github.auth import FixtureTokenProvider
 from handsfree.github import LiveGitHubProvider
 
+
 def test_with_fixtures():
     """Test using fixtures."""
     provider = LiveGitHubProvider(FixtureTokenProvider())
     prs = provider.list_user_prs("testuser")
     assert len(prs) == 3  # From fixture
 
+
 def test_with_live_mode(monkeypatch):
     """Test with live mode enabled."""
     monkeypatch.setenv("HANDS_FREE_GITHUB_MODE", "live")
     monkeypatch.setenv("GITHUB_TOKEN", "ghp_test_token")
-    
+
     from handsfree.github.auth import get_token_provider
+
     provider = LiveGitHubProvider(get_token_provider())
     # Would make live API calls if implemented
 ```
@@ -268,6 +271,7 @@ Future PRs will add:
 **Before:**
 ```python
 from handsfree.github import GitHubProvider
+
 provider = GitHubProvider()
 prs = provider.list_user_prs("user", user_id="123")
 ```
@@ -275,6 +279,7 @@ prs = provider.list_user_prs("user", user_id="123")
 **After:**
 ```python
 from handsfree.github import LiveGitHubProvider, get_token_provider
+
 provider = LiveGitHubProvider(get_token_provider())
 prs = provider.list_user_prs("user")
 ```
@@ -313,7 +318,10 @@ def test_something(monkeypatch):
 Verify token provider is correctly instantiated:
 ```python
 from handsfree.github.auth import get_token_provider
+
 provider = get_token_provider()
-print(type(provider))  # Could be EnvTokenProvider, GitHubAppTokenProvider, GhCliTokenProvider, or FixtureTokenProvider
+print(
+    type(provider)
+)  # Could be EnvTokenProvider, GitHubAppTokenProvider, GhCliTokenProvider, or FixtureTokenProvider
 print(provider.get_token())  # Should print your token (be careful!)
 ```

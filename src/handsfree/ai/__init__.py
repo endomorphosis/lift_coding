@@ -7,39 +7,24 @@ from .capabilities import (
     list_ai_capabilities,
 )
 from .capability_registry import (
-    build_virtual_ai_os_result_envelope,
     build_virtual_ai_os_execution_matrix,
+    build_virtual_ai_os_result_envelope,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
     resolve_virtual_ai_os_execution_mode,
 )
-from .runtime_placement import (
-    default_virtual_ai_os_runtime_surface,
-    resolve_virtual_ai_os_runtime_placement,
-    supported_virtual_ai_os_runtime_surfaces,
-)
-from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .history import discover_failure_history_cids
-from .observability import (
-    build_ai_backend_policy_config,
-    build_ai_backend_policy_history_report,
-    build_ai_backend_policy_report,
-    build_latest_snapshot_info,
-    build_snapshot_policy_config,
-    build_snapshot_health,
-    build_snapshot_summary,
-)
 from .models import (
-    AICapabilityRequest,
+    AIBackendFamily,
     AICapabilityArtifactRefs,
     AICapabilityExecutionTrace,
     AICapabilityRegistryEntry,
-    AICapabilityResultEnvelope,
-    AICapabilityRuntimePlacement,
-    AICapabilityRoute,
+    AICapabilityRequest,
     AICapabilityResult,
+    AICapabilityResultEnvelope,
+    AICapabilityRoute,
+    AICapabilityRuntimePlacement,
     AICapabilitySpec,
-    AIBackendFamily,
     AIExecutionMode,
     AIRequestContext,
     CapabilityConfirmationPolicy,
@@ -47,12 +32,27 @@ from .models import (
     CapabilityPlacementLayer,
     CapabilityRuntimeSurface,
 )
+from .observability import (
+    build_ai_backend_policy_config,
+    build_ai_backend_policy_history_report,
+    build_ai_backend_policy_report,
+    build_latest_snapshot_info,
+    build_snapshot_health,
+    build_snapshot_policy_config,
+    build_snapshot_summary,
+)
 from .policy import (
     AIBackendPolicy,
     build_policy_resolution,
     get_ai_backend_policy,
     resolve_policy_workflow,
 )
+from .runtime_placement import (
+    default_virtual_ai_os_runtime_surface,
+    resolve_virtual_ai_os_runtime_placement,
+    supported_virtual_ai_os_runtime_surfaces,
+)
+from .runtime_router import resolve_virtual_ai_os_runtime_route
 from .serialization import build_api_execute_response
 
 __all__ = [

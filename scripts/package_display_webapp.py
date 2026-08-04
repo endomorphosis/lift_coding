@@ -14,7 +14,6 @@ from typing import Any
 
 from handsfree.display_webapp_compat import evaluate_display_webapp_readiness
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE_DIR = REPO_ROOT / "dev" / "meta-rayban-display-simulator" / "webapp"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "build" / "meta-rayban-display-webapp"

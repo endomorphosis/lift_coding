@@ -12,7 +12,6 @@ from swissknife_checkout_lease_guard import (
     require_swissknife_checkout_lease,
 )
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
@@ -25,18 +24,28 @@ from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import
 )
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_script_path as _repo_script_path,
 )
 from meta_glasses_display_todo_daemon import (  # noqa: E402
     DEFAULT_TODO_PATH,
-    DISCOVERY_DIR,
     DISCOVERY_OUTPUT_PATH,
-    META_DISPLAY_WORKTREE_SUBMODULE_PATHS,
     META_GLASSES_DISPLAY_CONTEXT,
     META_GLASSES_DISPLAY_DATA_PATHS,
     META_GLASSES_DISPLAY_ENV_PREFIX,
@@ -46,7 +55,6 @@ from meta_glasses_display_todo_daemon import (  # noqa: E402
     TASK_BOARD_PATH_OPTION,
     ensure_meta_glasses_display_bootstrap_paths,
 )
-
 
 _SCRIPT_BOOTSTRAP = _build_repo_script_bootstrap(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _SCRIPT_BOOTSTRAP.script_repo_root
@@ -62,9 +70,7 @@ OBJECTIVE_GRAPH_PATH = META_GLASSES_DISPLAY_DATA_PATHS.objective_graph_path
 OBJECTIVE_BUNDLE_DIR = META_GLASSES_DISPLAY_DATA_PATHS.objective_bundle_dir
 OBJECTIVE_DATASET_DIR = META_GLASSES_DISPLAY_DATA_PATHS.objective_dataset_dir
 OBJECTIVE_TODO_VECTOR_INDEX_PATH = META_GLASSES_DISPLAY_DATA_PATHS.objective_todo_vector_index_path
-OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(
-    META_GLASSES_DISPLAY_ENV_PREFIX
-)
+OBJECTIVE_REFILL_SETTINGS = _prefixed_objective_refill_env_settings(META_GLASSES_DISPLAY_ENV_PREFIX)
 CODEBASE_SCAN_SETTINGS = _prefixed_codebase_scan_env_settings(
     META_GLASSES_DISPLAY_ENV_PREFIX,
     min_open_tasks=8,
@@ -120,9 +126,7 @@ DAEMON_SCRIPT_PATH = _repo_script_path(REPO_ROOT, "meta_glasses_display_todo_dae
 _RUNTIME_ENVIRONMENT = META_GLASSES_DISPLAY_CONTEXT.runtime_environment
 _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    META_GLASSES_DISPLAY_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(META_GLASSES_DISPLAY_ENV_PREFIX)
 META_GLASSES_DISPLAY_INTEROPERABILITY_FOCUS = _prefixed_interoperability_focus(
     META_GLASSES_DISPLAY_ENV_PREFIX,
     "swissknife,hallucinate_app,external/meta-wearables-dat-android,external/meta-wearables-dat-ios",

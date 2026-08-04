@@ -29,7 +29,9 @@ from handsfree.swissknife_meta_wearables_dat_ios_interop import (  # noqa: E402
 )
 
 META_WEARABLES_DAT_IOS_ROOT = REPO_ROOT / "external" / "meta-wearables-dat-ios"
-DESCRIPTOR_TS_PATH = "swissknife/src/services/mcp/meta-wearables-dat-ios-display-interop-descriptor.ts"
+DESCRIPTOR_TS_PATH = (
+    "swissknife/src/services/mcp/meta-wearables-dat-ios-display-interop-descriptor.ts"
+)
 
 GOAL_PACKET_GOALS = {
     "VAIOS-G700",
@@ -155,7 +157,11 @@ def swissknife_meta_wearables_dat_ios_interaction_envelope() -> dict:
         "surface_event": "send_display_view",
         "raw_payload": {
             "device_id": "swissknife-meta-wearables-dat-ios-device",
-            "display_view": {"root": "FlexBox", "button_style": "primary", "icon_name": "checkmark"},
+            "display_view": {
+                "root": "FlexBox",
+                "button_style": "primary",
+                "icon_name": "checkmark",
+            },
         },
         "normalized_intent": {
             "intent": "swissknife.meta_wearables_dat_ios.send_display_view",
@@ -329,7 +335,9 @@ def test_build_swissknife_meta_wearables_dat_ios_handoff_is_deterministic() -> N
     second = build_swissknife_meta_wearables_dat_ios_handoff(META_WEARABLES_DAT_IOS_ROOT)
 
     assert first.as_dict() == second.as_dict()
-    assert first.interface_contract == "interface contract swissknife external/meta-wearables-dat-ios"
+    assert (
+        first.interface_contract == "interface contract swissknife external/meta-wearables-dat-ios"
+    )
     assert first.goal_id == GOAL_ID == "VAIOS-G706"
     assert first.goal_packet == GOAL_PACKET
     assert first.source_repository == "swissknife"
@@ -359,7 +367,9 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "export function createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATIOSInterop" in src
     assert "export function buildSwissKnifeMetaWearablesDATIOSControlSurfaceContract" in src
     assert "export function buildSwissKnifeMetaWearablesDATIOSInteractionEnvelope" in src
-    assert "export function buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt" in src
+    assert (
+        "export function buildSwissKnifeMetaWearablesDATIOSMCPPlusPlusCompatibilityReceipt" in src
+    )
 
     for goal_id in GOAL_PACKET_GOALS:
         assert goal_id in src
@@ -394,7 +404,9 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "arguments_hash" in src
 
 
-def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_wearables_dat_ios() -> None:
+def test_swissknife_control_surface_and_interaction_envelope_validate_for_meta_wearables_dat_ios() -> (
+    None
+):
     control_schema = read_json("swissknife/contracts/control_surface_contract.schema.json")
     envelope_schema = read_json("swissknife/contracts/interaction_envelope.schema.json")
     compatibility_schema = read_json(

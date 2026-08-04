@@ -18,7 +18,9 @@ from .canonical import redact
 from .errors import PAYMENT_REPLAY, RECONCILIATION_REQUIRED, ProfileHError
 
 TERMINAL_STATES = frozenset({"executed", "failed", "declined"})
-RECOVERABLE_STATES = frozenset({"verified", "settling", "settled", "executing", "reconciliation_required"})
+RECOVERABLE_STATES = frozenset(
+    {"verified", "settling", "settled", "executing", "reconciliation_required"}
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -151,7 +153,9 @@ class DuckDBPaymentLedger:
                     operation_key,
                     capability_cid,
                 ):
-                    raise ProfileHError(PAYMENT_REPLAY, "idempotency key is bound to another request")
+                    raise ProfileHError(
+                        PAYMENT_REPLAY, "idempotency key is bound to another request"
+                    )
                 return existing
             now = self._now()
             try:
@@ -161,7 +165,15 @@ class DuckDBPaymentLedger:
                        (idempotency_key, request_cid, operation_key, capability_cid,
                         state, quote_cid, created_at_ms, updated_at_ms)
                        VALUES (?, ?, ?, ?, 'quoted', ?, ?, ?)""",
-                    [idempotency_key, request_cid, operation_key, capability_cid, quote_cid, now, now],
+                    [
+                        idempotency_key,
+                        request_cid,
+                        operation_key,
+                        capability_cid,
+                        quote_cid,
+                        now,
+                        now,
+                    ],
                 )
                 self._transition_row(idempotency_key, None, "quoted", quote_cid, None, now)
                 self.connection.execute("COMMIT")
@@ -169,9 +181,11 @@ class DuckDBPaymentLedger:
                 self.connection.execute("ROLLBACK")
                 # A competing connection may have won the uniqueness race.
                 existing = self.get(idempotency_key)
-                if existing and (existing.request_cid, existing.operation_key, existing.capability_cid) == (
-                    request_cid, operation_key, capability_cid
-                ):
+                if existing and (
+                    existing.request_cid,
+                    existing.operation_key,
+                    existing.capability_cid,
+                ) == (request_cid, operation_key, capability_cid):
                     return existing
                 raise
             result = self.get(idempotency_key)
@@ -184,7 +198,9 @@ class DuckDBPaymentLedger:
             entry = self._require(idempotency_key)
             if entry.payment_commitment:
                 if entry.payment_commitment != payment_commitment:
-                    raise ProfileHError(PAYMENT_REPLAY, "different payment already bound to request")
+                    raise ProfileHError(
+                        PAYMENT_REPLAY, "different payment already bound to request"
+                    )
                 return entry
             if entry.state != "quoted":
                 raise ProfileHError(PAYMENT_REPLAY, f"cannot bind payment in state {entry.state}")
@@ -198,7 +214,13 @@ class DuckDBPaymentLedger:
             return self._require(idempotency_key)
 
     def mark_verified(self, idempotency_key: str, verification_cid: str) -> LedgerEntry:
-        return self._move(idempotency_key, {"quoted"}, "verified", artifact_cid=verification_cid, verification_cid=verification_cid)
+        return self._move(
+            idempotency_key,
+            {"quoted"},
+            "verified",
+            artifact_cid=verification_cid,
+            verification_cid=verification_cid,
+        )
 
     def begin_settlement(self, idempotency_key: str, lease_token: str) -> LedgerEntry:
         return self._move(idempotency_key, {"verified"}, "settling", lease_token=lease_token)
@@ -207,7 +229,14 @@ class DuckDBPaymentLedger:
         entry = self._require(idempotency_key)
         if entry.state == "settled" and entry.settlement_cid == settlement_cid:
             return entry
-        return self._move(idempotency_key, {"settling"}, "settled", artifact_cid=settlement_cid, settlement_cid=settlement_cid, lease_token=None)
+        return self._move(
+            idempotency_key,
+            {"settling"},
+            "settled",
+            artifact_cid=settlement_cid,
+            settlement_cid=settlement_cid,
+            lease_token=None,
+        )
 
     def claim_execution(self, idempotency_key: str, lease_token: str) -> LedgerEntry:
         return self._move(idempotency_key, {"settled"}, "executing", lease_token=lease_token)
@@ -216,16 +245,34 @@ class DuckDBPaymentLedger:
         entry = self._require(idempotency_key)
         if entry.state == "executed" and entry.result_cid == result_cid:
             return entry
-        return self._move(idempotency_key, {"executing"}, "executed", artifact_cid=result_cid, result_cid=result_cid, lease_token=None)
+        return self._move(
+            idempotency_key,
+            {"executing"},
+            "executed",
+            artifact_cid=result_cid,
+            result_cid=result_cid,
+            lease_token=None,
+        )
 
-    def mark_failed(self, idempotency_key: str, error_code: str, *, reconciliation: bool = False) -> LedgerEntry:
+    def mark_failed(
+        self, idempotency_key: str, error_code: str, *, reconciliation: bool = False
+    ) -> LedgerEntry:
         state = "reconciliation_required" if reconciliation else "failed"
         entry = self._require(idempotency_key)
         if entry.state in TERMINAL_STATES:
             return entry
-        return self._move(idempotency_key, {entry.state}, state, reason_code=error_code, error_code=error_code, lease_token=None)
+        return self._move(
+            idempotency_key,
+            {entry.state},
+            state,
+            reason_code=error_code,
+            error_code=error_code,
+            lease_token=None,
+        )
 
-    def reset_for_reconciliation(self, idempotency_key: str, target_state: str, artifact_cid: str | None = None) -> LedgerEntry:
+    def reset_for_reconciliation(
+        self, idempotency_key: str, target_state: str, artifact_cid: str | None = None
+    ) -> LedgerEntry:
         """Operator/reconciler transition after external state has been checked."""
         if target_state not in {"verified", "settled", "failed", "reconciliation_required"}:
             raise ValueError("invalid reconciliation target")
@@ -233,7 +280,9 @@ class DuckDBPaymentLedger:
         fields: dict[str, Any] = {"lease_token": None}
         if target_state == "settled" and artifact_cid:
             fields["settlement_cid"] = artifact_cid
-        return self._move(idempotency_key, {entry.state}, target_state, artifact_cid=artifact_cid, **fields)
+        return self._move(
+            idempotency_key, {entry.state}, target_state, artifact_cid=artifact_cid, **fields
+        )
 
     def paid_evidence(self, request_cid: str, capability_cid: str) -> str | None:
         """Return settled evidence for the exact request and capability."""
@@ -270,7 +319,14 @@ class DuckDBPaymentLedger:
                 [idempotency_key],
             ).fetchall()
         return [
-            {"sequence": row[0], "from": row[1], "to": row[2], "artifactCid": row[3], "reasonCode": row[4], "occurredAt": row[5]}
+            {
+                "sequence": row[0],
+                "from": row[1],
+                "to": row[2],
+                "artifactCid": row[3],
+                "reasonCode": row[4],
+                "occurredAt": row[5],
+            }
             for row in rows
         ]
 
@@ -279,12 +335,16 @@ class DuckDBPaymentLedger:
             rows = self.connection.execute(
                 "SELECT state, count(*) FROM profile_h_payments GROUP BY state ORDER BY state"
             ).fetchall()
-        return redact({
-            "ready": True,
-            "durable": self.path != ":memory:",
-            "states": {state: count for state, count in rows},
-            "reconciliationRequired": sum(count for state, count in rows if state in RECOVERABLE_STATES),
-        })
+        return redact(
+            {
+                "ready": True,
+                "durable": self.path != ":memory:",
+                "states": {state: count for state, count in rows},
+                "reconciliationRequired": sum(
+                    count for state, count in rows if state in RECOVERABLE_STATES
+                ),
+            }
+        )
 
     def health_probe(self) -> dict[str, Any]:
         """Return a redacted structural/readiness probe without payment identifiers."""
@@ -293,7 +353,8 @@ class DuckDBPaymentLedger:
             with self._lock:
                 self.connection.execute("SELECT 1").fetchone()
                 tables = {
-                    row[0] for row in self.connection.execute(
+                    row[0]
+                    for row in self.connection.execute(
                         "SELECT table_name FROM information_schema.tables WHERE table_schema = 'main'"
                     ).fetchall()
                 }
@@ -320,8 +381,11 @@ class DuckDBPaymentLedger:
             }
         except Exception:
             return {
-                "component": "profile-h-ledger", "status": "unavailable", "ready": False,
-                "durable": self.path != ":memory:", "integrity": "unknown",
+                "component": "profile-h-ledger",
+                "status": "unavailable",
+                "ready": False,
+                "durable": self.path != ":memory:",
+                "integrity": "unknown",
                 "pendingReconciliation": None,
                 "latencyMs": max(0, (time.monotonic_ns() - started) // 1_000_000),
             }
@@ -344,7 +408,11 @@ class DuckDBPaymentLedger:
                 os.replace(temporary, target)
             finally:
                 temporary.unlink(missing_ok=True)
-        return {"format": "duckdb-checkpoint-v1", "sha256": digest, "sizeBytes": target.stat().st_size}
+        return {
+            "format": "duckdb-checkpoint-v1",
+            "sha256": digest,
+            "sizeBytes": target.stat().st_size,
+        }
 
     @staticmethod
     def restore_backup(source: str | Path, destination: str | Path, *, sha256: str) -> None:
@@ -364,9 +432,12 @@ class DuckDBPaymentLedger:
             # Reject a corrupt or non-Profile-H database before replacement.
             probe = duckdb.connect(str(temporary), read_only=True)
             try:
-                tables = {row[0] for row in probe.execute(
-                    "SELECT table_name FROM information_schema.tables WHERE table_schema = 'main'"
-                ).fetchall()}
+                tables = {
+                    row[0]
+                    for row in probe.execute(
+                        "SELECT table_name FROM information_schema.tables WHERE table_schema = 'main'"
+                    ).fetchall()
+                }
                 if not {"profile_h_payments", "profile_h_transitions"}.issubset(tables):
                     raise OSError("backup is not a Profile H ledger")
             finally:
@@ -402,7 +473,13 @@ class DuckDBPaymentLedger:
             now = self._now()
             assignments = ["state = ?", "updated_at_ms = ?"]
             params: list[Any] = [target, now]
-            allowed_fields = {"verification_cid", "settlement_cid", "result_cid", "error_code", "lease_token"}
+            allowed_fields = {
+                "verification_cid",
+                "settlement_cid",
+                "result_cid",
+                "error_code",
+                "lease_token",
+            }
             for name, value in fields.items():
                 if name not in allowed_fields:
                     raise ValueError(f"unsupported ledger field: {name}")
@@ -416,18 +493,23 @@ class DuckDBPaymentLedger:
                     params,
                 )
                 current = self.connection.execute(
-                    "SELECT state FROM profile_h_payments WHERE idempotency_key = ?", [idempotency_key]
+                    "SELECT state FROM profile_h_payments WHERE idempotency_key = ?",
+                    [idempotency_key],
                 ).fetchone()
                 if not current or current[0] != target:
                     raise ProfileHError(PAYMENT_REPLAY, "another worker won the payment transition")
-                self._transition_row(idempotency_key, entry.state, target, artifact_cid, reason_code, now)
+                self._transition_row(
+                    idempotency_key, entry.state, target, artifact_cid, reason_code, now
+                )
                 self.connection.execute("COMMIT")
             except Exception:
                 self.connection.execute("ROLLBACK")
                 raise
             return self._require(idempotency_key)
 
-    def _transition_row(self, key: str, old: str | None, new: str, cid: str | None, reason: str | None, now: int) -> None:
+    def _transition_row(
+        self, key: str, old: str | None, new: str, cid: str | None, reason: str | None, now: int
+    ) -> None:
         self.connection.execute(
             """INSERT INTO profile_h_transitions
                VALUES (nextval('profile_h_transition_sequence'), ?, ?, ?, ?, ?, ?)""",

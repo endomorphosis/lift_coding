@@ -72,6 +72,7 @@ Created comprehensive test suite (`tests/test_image_input.py`) with 12 tests:
 ```python
 class ImageInput(BaseModel):
     """Image input schema for camera snapshots."""
+
     type: Literal["image"] = "image"
     uri: str  # Not fetched or processed yet
     content_type: str | None = None

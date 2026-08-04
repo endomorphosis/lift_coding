@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from handsfree.agents.service import AgentService
-from handsfree.agents.runner import process_running_tasks
 from handsfree.agent_providers import IPFSDatasetsMCPAgentProvider
+from handsfree.agents.runner import process_running_tasks
+from handsfree.agents.service import AgentService
 from handsfree.db import init_db
 from handsfree.db.agent_tasks import get_agent_task_by_id
 
@@ -26,7 +26,14 @@ def agent_service(db_conn):
     return AgentService(db_conn)
 
 
-def _write_state(path, *, task_id: str, task_status: str, active_task_id: str | None, active_task_title: str | None):
+def _write_state(
+    path,
+    *,
+    task_id: str,
+    task_status: str,
+    active_task_id: str | None,
+    active_task_title: str | None,
+):
     path.write_text(
         json.dumps(
             {

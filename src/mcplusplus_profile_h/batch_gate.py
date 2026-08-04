@@ -31,36 +31,58 @@ def run_batch_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
     ledger = DuckDBVoucherLedger(state_dir / "batch.duckdb")
     try:
         intent = DepositIntent(
-            "xph-111:deposit:primary", cid_for({"buyer": "SwissKnife"}),
-            "0x1111111111111111111111111111111111111111", "eip155:84532",
+            "xph-111:deposit:primary",
+            cid_for({"buyer": "SwissKnife"}),
+            "0x1111111111111111111111111111111111111111",
+            "eip155:84532",
             "eip155:84532/erc20:0x0000000000000000000000000000000000000001",
-            1_000, 1_000, NOW, NOW + 10_000, 5_000,
+            1_000,
+            1_000,
+            NOW,
+            NOW + 10_000,
+            5_000,
         )
         ledger.record_deposit(intent, confirmed_at_ms=NOW + 1)
         voucher = ledger.issue_voucher(
-            intent.deposit_id, seller_did="did:web:ipfs-kit.test", nonce=0,
-            atomic_amount=300, expires_at_ms=NOW + 8_000, issued_at_ms=NOW + 100,
+            intent.deposit_id,
+            seller_did="did:web:ipfs-kit.test",
+            nonce=0,
+            atomic_amount=300,
+            expires_at_ms=NOW + 8_000,
+            issued_at_ms=NOW + 100,
             buyer_signer=BUYER,
         )
         replayed_issue = ledger.issue_voucher(
-            intent.deposit_id, seller_did="did:web:ipfs-kit.test", nonce=0,
-            atomic_amount=300, expires_at_ms=NOW + 8_000, issued_at_ms=NOW + 100,
+            intent.deposit_id,
+            seller_did="did:web:ipfs-kit.test",
+            nonce=0,
+            atomic_amount=300,
+            expires_at_ms=NOW + 8_000,
+            issued_at_ms=NOW + 100,
             buyer_signer=BUYER,
         )
         redemption = ledger.redeem(
-            voucher, seller_did="did:web:ipfs-kit.test", now_ms=NOW + 200,
+            voucher,
+            seller_did="did:web:ipfs-kit.test",
+            now_ms=NOW + 200,
             expected_buyer_public_key=BUYER.public_key,
             outcome_reference={"testnetReceipt": "confirmed-1"},
         )
         duplicate = ledger.redeem(
-            voucher, seller_did="did:web:ipfs-kit.test", now_ms=NOW + 201,
+            voucher,
+            seller_did="did:web:ipfs-kit.test",
+            now_ms=NOW + 201,
             expected_buyer_public_key=BUYER.public_key,
             outcome_reference={"testnetReceipt": "confirmed-1"},
         )
 
         expiring = ledger.issue_voucher(
-            intent.deposit_id, seller_did="did:web:ipfs-datasets.test", nonce=0,
-            atomic_amount=200, expires_at_ms=NOW + 7_000, issued_at_ms=NOW + 300,
+            intent.deposit_id,
+            seller_did="did:web:ipfs-datasets.test",
+            nonce=0,
+            atomic_amount=200,
+            expires_at_ms=NOW + 7_000,
+            issued_at_ms=NOW + 300,
             buyer_signer=BUYER,
         )
         withdrawal_blocked = False
@@ -73,30 +95,46 @@ def run_batch_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
         insolvent_rejected = False
         try:
             ledger.issue_voucher(
-                intent.deposit_id, seller_did="did:web:ipfs-accelerate.test", nonce=0,
-                atomic_amount=701, expires_at_ms=NOW + 9_000, issued_at_ms=NOW + 400,
+                intent.deposit_id,
+                seller_did="did:web:ipfs-accelerate.test",
+                nonce=0,
+                atomic_amount=701,
+                expires_at_ms=NOW + 9_000,
+                issued_at_ms=NOW + 400,
                 buyer_signer=BUYER,
             )
         except ProfileHError as error:
             insolvent_rejected = error.code == BATCH_INSOLVENT
 
         recovery = ledger.issue_voucher(
-            intent.deposit_id, seller_did="did:web:ipfs-accelerate.test", nonce=1,
-            atomic_amount=100, expires_at_ms=NOW + 9_000, issued_at_ms=NOW + 500,
+            intent.deposit_id,
+            seller_did="did:web:ipfs-accelerate.test",
+            nonce=1,
+            atomic_amount=100,
+            expires_at_ms=NOW + 9_000,
+            issued_at_ms=NOW + 500,
             buyer_signer=BUYER,
         )
         known_failure = ledger.redeem(
-            recovery, seller_did="did:web:ipfs-accelerate.test", now_ms=NOW + 600,
-            expected_buyer_public_key=BUYER.public_key, outcome="failed",
+            recovery,
+            seller_did="did:web:ipfs-accelerate.test",
+            now_ms=NOW + 600,
+            expected_buyer_public_key=BUYER.public_key,
+            outcome="failed",
             outcome_reference={"testnetReceipt": "reverted-1"},
         )
         unknown = ledger.redeem(
-            recovery, seller_did="did:web:ipfs-accelerate.test", now_ms=NOW + 700,
-            expected_buyer_public_key=BUYER.public_key, outcome="unknown",
+            recovery,
+            seller_did="did:web:ipfs-accelerate.test",
+            now_ms=NOW + 700,
+            expected_buyer_public_key=BUYER.public_key,
+            outcome="unknown",
             outcome_reference={"rpcRequest": "timeout-1"},
         )
         reconciled = ledger.reconcile(
-            recovery["voucherId"], confirmed=False, now_ms=NOW + 800,
+            recovery["voucherId"],
+            confirmed=False,
+            now_ms=NOW + 800,
             outcome_reference={"testnetReceipt": "not-found-finalized"},
         )
         ledger.expire_vouchers(intent.deposit_id, now_ms=NOW + 10_001)
@@ -108,34 +146,47 @@ def run_batch_gate(*, state_dir: Path | None = None) -> dict[str, Any]:
             "depositSolvency": insolvent_rejected and audit["solvent"],
             "signedVouchers": voucher["signatureAlg"] == "Ed25519",
             "sellerRedemption": redemption["state"] == "redeemed",
-            "duplicateProtection": replayed_issue["voucherId"] == voucher["voucherId"] and duplicate["duplicate"],
+            "duplicateProtection": replayed_issue["voucherId"] == voucher["voucherId"]
+            and duplicate["duplicate"],
             "expiry": expired_count == 1,
             "withdrawal": withdrawal_blocked and withdrawal["atomicAmount"] == "700",
-            "failureRecovery": known_failure["retryable"] and unknown["state"] == "reconciliation_required",
+            "failureRecovery": known_failure["retryable"]
+            and unknown["state"] == "reconciliation_required",
             "reconciliation": reconciled["state"] == "issued",
             "maximumExposure": intent.atomic_amount <= intent.maximum_exposure,
         }
         if not all(local_controls.values()):
             raise AssertionError(f"batch safety invariant failed: {local_controls}")
         # Local simulation is not testnet deployment evidence or a security review.
-        enablement = evaluate_batch_enablement({
-            **local_controls, "network": intent.network,
-            "testnetDeployment": False, "securityReviewApproved": False,
-        })
+        enablement = evaluate_batch_enablement(
+            {
+                **local_controls,
+                "network": intent.network,
+                "testnetDeployment": False,
+                "securityReviewApproved": False,
+            }
+        )
         if enablement["enabled"]:
             raise AssertionError("batch settlement enabled without external evidence")
         report: dict[str, Any] = {
             "schema": "mcp++/profile-h/batch-gate-report@1.0",
-            "task": "XPH-111", "profile": "mcp++/x402-payments",
-            "profileVersion": "1.0", "gateResult": "pass",
+            "task": "XPH-111",
+            "profile": "mcp++/x402-payments",
+            "profileVersion": "1.0",
+            "gateResult": "pass",
             "rolloutDecision": enablement,
             "escrowDepositUx": intent.approval_view(),
             "ledgerEvidence": {
-                "depositId": intent.deposit_id, "depositAmount": "1000",
-                "redeemedAmount": "300", "withdrawnAmount": withdrawal["atomicAmount"],
-                "voucherCid": voucher["voucherId"], "expiredVoucherCid": expiring["voucherId"],
-                "duplicateRedemptionIdempotent": True, "unknownOutcomeReconciled": True,
-                "finalState": status.state, "solvencyAudit": audit,
+                "depositId": intent.deposit_id,
+                "depositAmount": "1000",
+                "redeemedAmount": "300",
+                "withdrawnAmount": withdrawal["atomicAmount"],
+                "voucherCid": voucher["voucherId"],
+                "expiredVoucherCid": expiring["voucherId"],
+                "duplicateRedemptionIdempotent": True,
+                "unknownOutcomeReconciled": True,
+                "finalState": status.state,
+                "solvencyAudit": audit,
             },
             "localControls": local_controls,
             "threatModel": "docs/mcplusplus-profile-h-batch-threat-model.md",

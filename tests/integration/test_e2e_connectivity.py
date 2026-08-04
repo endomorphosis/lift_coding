@@ -13,10 +13,7 @@ Tests that:
 """
 
 import importlib.util
-import json
-import os
 import re
-import sys
 from pathlib import Path
 
 import pytest
@@ -53,12 +50,28 @@ class TestBackendEndpointCoverage:
         routes = self._get_routes()
         paths = [r[1] for r in routes]
         required = [
-            "/status", "/add", "/cat", "/pin", "/unpin", "/resolve",
-            "/embed", "/generate", "/capabilities", "/hardware_profile",
-            "/list_models", "/list_datasets", "/inference",
-            "/list_pins", "/stat", "/dag/get", "/dag/put",
-            "/name/publish", "/name/resolve",
-            "/search_models", "/metrics", "/endpoints",
+            "/status",
+            "/add",
+            "/cat",
+            "/pin",
+            "/unpin",
+            "/resolve",
+            "/embed",
+            "/generate",
+            "/capabilities",
+            "/hardware_profile",
+            "/list_models",
+            "/list_datasets",
+            "/inference",
+            "/list_pins",
+            "/stat",
+            "/dag/get",
+            "/dag/put",
+            "/name/publish",
+            "/name/resolve",
+            "/search_models",
+            "/metrics",
+            "/endpoints",
         ]
         for ep in required:
             assert ep in paths, f"Missing endpoint: {ep}"
@@ -67,9 +80,15 @@ class TestBackendEndpointCoverage:
         routes = self._get_routes()
         paths = [r[1] for r in routes]
         extended = [
-            "/vector/index", "/vector/search", "/vector/metadata",
-            "/search/semantic", "/search/similarity", "/search/faceted",
-            "/scrape/url", "/scrape/batch", "/workflow/execute",
+            "/vector/index",
+            "/vector/search",
+            "/vector/metadata",
+            "/search/semantic",
+            "/search/similarity",
+            "/search/faceted",
+            "/scrape/url",
+            "/scrape/batch",
+            "/workflow/execute",
         ]
         for ep in extended:
             assert ep in paths, f"Missing extended endpoint: {ep}"
@@ -98,9 +117,15 @@ class TestIPCChannelCoverage:
     def test_extended_channels_exist(self):
         channels = self._get_ipc_channels()
         required = [
-            "VECTOR_INDEX", "VECTOR_SEARCH", "VECTOR_METADATA",
-            "SEMANTIC_SEARCH", "SIMILARITY_SEARCH", "FACETED_SEARCH",
-            "SCRAPE_URL", "SCRAPE_BATCH", "WORKFLOW_EXECUTE",
+            "VECTOR_INDEX",
+            "VECTOR_SEARCH",
+            "VECTOR_METADATA",
+            "SEMANTIC_SEARCH",
+            "SIMILARITY_SEARCH",
+            "FACETED_SEARCH",
+            "SCRAPE_URL",
+            "SCRAPE_BATCH",
+            "WORKFLOW_EXECUTE",
         ]
         for ch in required:
             assert ch in channels, f"Missing IPC channel: {ch}"
@@ -113,7 +138,9 @@ class TestPreloadAPICoverage:
         path = HALLUCINATE_APP / "preload.cjs"
         content = path.read_text()
         # Match pattern: methodName: (args) => ipcRenderer.invoke('ipfs:channel', ...)
-        methods = re.findall(r"(\w+):\s*\([^)]*\)\s*=>\s*ipcRenderer\.invoke\('(ipfs:[^']+)'", content)
+        methods = re.findall(
+            r"(\w+):\s*\([^)]*\)\s*=>\s*ipcRenderer\.invoke\('(ipfs:[^']+)'", content
+        )
         return dict(methods)
 
     def test_minimum_preload_method_count(self):
@@ -126,14 +153,22 @@ class TestPreloadAPICoverage:
         ipc_content = path.read_text()
         methods = self._get_preload_methods()
         for method_name, channel in methods.items():
-            assert channel in ipc_content, f"Preload method '{method_name}' uses channel '{channel}' not found in IPC handlers"
+            assert channel in ipc_content, (
+                f"Preload method '{method_name}' uses channel '{channel}' not found in IPC handlers"
+            )
 
     def test_extended_preload_methods(self):
         methods = self._get_preload_methods()
         required = [
-            "vectorIndex", "vectorSearch", "vectorMetadata",
-            "semanticSearch", "similaritySearch", "facetedSearch",
-            "scrapeUrl", "scrapeBatch", "workflowExecute",
+            "vectorIndex",
+            "vectorSearch",
+            "vectorMetadata",
+            "semanticSearch",
+            "similaritySearch",
+            "facetedSearch",
+            "scrapeUrl",
+            "scrapeBatch",
+            "workflowExecute",
         ]
         for m in required:
             assert m in methods, f"Missing preload method: {m}"
@@ -143,33 +178,71 @@ class TestBackendConnectorSDK:
     """Verify BackendConnector JS SDK exposes all sub-clients."""
 
     def _get_sdk_content(self):
-        path = HALLUCINATE_APP / "hallucinate_app" / "node" / "views" / "components" / "backend-connector.js"
+        path = (
+            HALLUCINATE_APP
+            / "hallucinate_app"
+            / "node"
+            / "views"
+            / "components"
+            / "backend-connector.js"
+        )
         return path.read_text()
 
     def test_sdk_classes_defined(self):
         content = self._get_sdk_content()
-        classes = ["BackendConnector", "IPFSKitClient", "IPFSDatasetsClient",
-                   "IPFSAccelerateClient", "VectorSearchClient", "WebScrapingClient", "WorkflowClient"]
+        classes = [
+            "BackendConnector",
+            "IPFSKitClient",
+            "IPFSDatasetsClient",
+            "IPFSAccelerateClient",
+            "VectorSearchClient",
+            "WebScrapingClient",
+            "WorkflowClient",
+        ]
         for cls in classes:
             assert f"class {cls}" in content, f"Missing SDK class: {cls}"
 
     def test_sdk_sub_routers(self):
         content = self._get_sdk_content()
-        routers = ["this.kit", "this.datasets", "this.accelerate",
-                   "this.vector", "this.scraping", "this.workflow"]
+        routers = [
+            "this.kit",
+            "this.datasets",
+            "this.accelerate",
+            "this.vector",
+            "this.scraping",
+            "this.workflow",
+        ]
         for r in routers:
             assert r in content, f"Missing sub-router: {r}"
 
     def test_kit_methods(self):
         content = self._get_sdk_content()
-        methods = ["add", "cat", "pin", "unpin", "listPins", "stat",
-                   "dagGet", "dagPut", "namePublish", "nameResolve", "resolve"]
+        methods = [
+            "add",
+            "cat",
+            "pin",
+            "unpin",
+            "listPins",
+            "stat",
+            "dagGet",
+            "dagPut",
+            "namePublish",
+            "nameResolve",
+            "resolve",
+        ]
         for m in methods:
             assert f"async {m}(" in content, f"Missing kit method: {m}"
 
     def test_vector_methods(self):
         content = self._get_sdk_content()
-        methods = ["index", "search", "metadata", "semanticSearch", "similaritySearch", "facetedSearch"]
+        methods = [
+            "index",
+            "search",
+            "metadata",
+            "semanticSearch",
+            "similaritySearch",
+            "facetedSearch",
+        ]
         for m in methods:
             assert f"async {m}(" in content, f"Missing vector method: {m}"
 
@@ -180,7 +253,11 @@ class TestDashboardConnectivity:
     VIEWS_DIR = HALLUCINATE_APP / "hallucinate_app" / "node" / "views"
 
     def test_ipfs_dashboards_have_connector(self):
-        for name in ["ipfs_kit_dashboard.html", "ipfs_accelerate_dashboard.html", "ipfs_datasets_dashboard.html"]:
+        for name in [
+            "ipfs_kit_dashboard.html",
+            "ipfs_accelerate_dashboard.html",
+            "ipfs_datasets_dashboard.html",
+        ]:
             content = (self.VIEWS_DIR / name).read_text()
             assert "backend-connector.js" in content, f"{name} missing backend-connector.js"
 

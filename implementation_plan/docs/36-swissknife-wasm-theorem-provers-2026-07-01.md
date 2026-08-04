@@ -43,13 +43,13 @@ parity with the Python prover tier.
 ```python
 @dataclass
 class Z3ProofResult:
-    is_valid: bool          # formula proved (unsat when negated)
-    is_sat: bool            # formula satisfiable
+    is_valid: bool  # formula proved (unsat when negated)
+    is_sat: bool  # formula satisfiable
     is_unsat: bool
-    model: Optional[Any]    # model if sat
+    model: Optional[Any]  # model if sat
     unsat_core: Optional[List[str]]
-    reason: str             # 'proved' | 'refuted' | 'unknown' | 'timeout' | 'error'
-    proof_time: float       # seconds
+    reason: str  # 'proved' | 'refuted' | 'unknown' | 'timeout' | 'error'
+    proof_time: float  # seconds
 ```
 
 ### 2.3 ZKP Layer (ipfs_datasets_py/logic/zkp/)

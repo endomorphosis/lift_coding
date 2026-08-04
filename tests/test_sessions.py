@@ -12,7 +12,8 @@ except ImportError:  # pragma: no cover - exercised only when redis is not insta
     redis = None
 
 import handsfree.sessions as sessions_module
-from handsfree.sessions import SessionTokenManager, redis as session_redis
+from handsfree.sessions import SessionTokenManager
+from handsfree.sessions import redis as session_redis
 
 
 @pytest.fixture
@@ -367,6 +368,7 @@ class TestSessionTokenManagerEdgeCases:
             manager.validate_session("any_token")
 
         mock_redis.delete.assert_not_called()
+
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
         session = session_manager.create_session("user-123", "device-456", metadata={})

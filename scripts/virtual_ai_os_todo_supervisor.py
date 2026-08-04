@@ -12,18 +12,29 @@ from swissknife_checkout_lease_guard import (
     require_swissknife_checkout_lease,
 )
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_script_path as _repo_script_path,
 )
 
@@ -34,8 +45,6 @@ REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 
 from virtual_ai_os_todo_daemon import (  # noqa: E402
     OBJECTIVE_HEAP_PATH,
-    TASK_BOARD_PATH_KEY,
-    TASK_BOARD_PATH_OPTION,
     VIRTUAL_AI_OS_CONTEXT,
     VIRTUAL_AI_OS_ENV_PREFIX,
     VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
@@ -104,9 +113,9 @@ CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
     "tests/test_meta_glasses_display_todo_queue.py",
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_runtime_exports,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
-    build_configured_supervisor_runtime_exports,
     build_script_supervisor_bootstrap_runner,
 )
 
@@ -133,9 +142,7 @@ _enter_runtime_environment = _RUNTIME_ENVIRONMENT.enter
 _ensure_runtime_pythonpath = _RUNTIME_ENVIRONMENT.ensure_pythonpath
 virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.resolve
 ensure_virtual_ai_os_bootstrap_paths = _VIRTUAL_AI_OS_BOOTSTRAP_PATHS.ensure
-_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(
-    VIRTUAL_AI_OS_ENV_PREFIX
-)
+_default_llm_merge_resolver_command = _prefixed_llm_merge_callback(VIRTUAL_AI_OS_ENV_PREFIX)
 logger = logging.getLogger("virtual_ai_os_todo_supervisor")
 
 _virtual_ai_os_objective_defaults = build_namespace_objective_refill_defaults_factory(
@@ -179,7 +186,9 @@ _virtual_ai_os_supervisor_runner = build_script_supervisor_bootstrap_runner(
     repair_runtime_message="Repaired stale virtual-AI-OS supervisor runtime markers: %s",
 )
 _virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_runner.runtime
-_virtual_ai_os_supervisor_exports = build_configured_supervisor_runtime_exports(_virtual_ai_os_supervisor_runtime)
+_virtual_ai_os_supervisor_exports = build_configured_supervisor_runtime_exports(
+    _virtual_ai_os_supervisor_runtime
+)
 VIRTUAL_AI_OS_SUPERVISOR_PROCESS_MARKERS = _virtual_ai_os_supervisor_exports.process_match_any
 repair_virtual_ai_os_supervisor_runtime = _virtual_ai_os_supervisor_exports.repair_runtime
 virtual_ai_os_supervisor_is_running = _virtual_ai_os_supervisor_exports.is_running

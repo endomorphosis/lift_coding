@@ -16,9 +16,7 @@ def test_virtual_ai_os_observability_contract_defaults_are_stable() -> None:
     assert contract["remote_terminal"]["contract_id"] == (
         "handsfree.meta-glasses/remote-terminal@0.1.0"
     )
-    assert [
-        endpoint["endpoint_id"] for endpoint in contract["remote_terminal"]["endpoints"]
-    ] == [
+    assert [endpoint["endpoint_id"] for endpoint in contract["remote_terminal"]["endpoints"]] == [
         "meta_glasses_audio_input",
         "meta_glasses_audio_output",
         "meta_glasses_display_widget",

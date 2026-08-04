@@ -9,8 +9,8 @@ from handsfree.ai import (
     build_virtual_ai_os_result_envelope,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
-    resolve_virtual_ai_os_runtime_route,
     resolve_virtual_ai_os_execution_mode,
+    resolve_virtual_ai_os_runtime_route,
 )
 from handsfree.capability_registry import (
     CAPABILITY_ROUTING_SURFACE_LABELS,
@@ -63,9 +63,7 @@ def test_virtual_ai_os_registry_includes_cross_repo_metadata():
 def test_virtual_ai_os_registry_defines_formatter_and_follow_up_contracts_for_all_capabilities():
     for entry in list_virtual_ai_os_capabilities():
         assert entry.voice_formatter.startswith("handsfree.ai.formatters:format_")
-        assert entry.follow_up_action_builder.startswith(
-            "handsfree.ai.follow_up_actions:build_"
-        )
+        assert entry.follow_up_action_builder.startswith("handsfree.ai.follow_up_actions:build_")
         assert entry.input_schema_ref.startswith("handsfree.capability.")
         assert entry.result_schema_ref.startswith("handsfree.capability.")
 
@@ -90,13 +88,9 @@ def test_virtual_ai_os_registry_covers_plan_initial_families():
     )
     assert capabilities["vai.glasses_widget.render"].owner_repo == "handsfree/mobile"
     assert (
-        capabilities["vai.glasses_widget.render"].provider_name
-        == "handsfree_mobile_display_widget"
+        capabilities["vai.glasses_widget.render"].provider_name == "handsfree_mobile_display_widget"
     )
-    assert (
-        capabilities["vai.glasses_widget.render"].server_family
-        == "meta_glasses_mobile_orb"
-    )
+    assert capabilities["vai.glasses_widget.render"].server_family == "meta_glasses_mobile_orb"
 
 
 def test_virtual_ai_os_summary_formatter_refs_are_importable():
@@ -316,9 +310,7 @@ def test_capability_routing_surface_catalog_names_virtual_ai_os_surfaces():
     assert surfaces["daemon_task"].label == "daemon tasks"
     assert surfaces["mcp_mcp_plus_plus"].label == "MCP/MCP++"
     assert surfaces["swissknife_orb"].label == "SwissKnife ORB"
-    assert surfaces["swissknife_orb"].metadata["virtual_ui_plane"] == (
-        "swissknife.virtual_desktop"
-    )
+    assert surfaces["swissknife_orb"].metadata["virtual_ui_plane"] == ("swissknife.virtual_desktop")
     assert surfaces["swissknife_orb"].metadata["orb_router"] == (
         "swissknife/src/services/mcp-orb-capability-router.ts"
     )

@@ -8,7 +8,6 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
-
 PACKAGE_ROOT_ENV = "LIFT_IPFS_ACCELERATE_PACKAGE_ROOT"
 
 
@@ -46,12 +45,12 @@ def bootstrap_ipfs_accelerate(
         if configured_package_root
         else script_repo_root / "external" / "ipfs_accelerate"
     )
-    if configured_package_root and not (
-        package_root / "ipfs_accelerate_py" / "__init__.py"
-    ).is_file():
+    if (
+        configured_package_root
+        and not (package_root / "ipfs_accelerate_py" / "__init__.py").is_file()
+    ):
         raise RuntimeError(
-            f"{PACKAGE_ROOT_ENV} does not contain ipfs_accelerate_py: "
-            f"{package_root}"
+            f"{PACKAGE_ROOT_ENV} does not contain ipfs_accelerate_py: {package_root}"
         )
     paths: list[Path] = [package_root]
     if include_script_dir:

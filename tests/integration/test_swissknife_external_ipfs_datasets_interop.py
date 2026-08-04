@@ -226,21 +226,11 @@ def test_discover_ipfs_datasets_bucket_vfs_contract_finds_expected_surface() -> 
         set(contract.deprecations_report_required_keys)
     )
     assert set(REQUIRED_BUCKET_VFS_MCP_TOOLS).issubset(set(contract.bucket_vfs_mcp_tools))
-    assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(
-        set(contract.bucket_vfs_cli_commands)
-    )
-    assert {"demo_cli_interface", "demo_mcp_api"}.issubset(
-        set(contract.demo_functions)
-    )
-    assert set(REQUIRED_UNIFIED_BUCKET_CLASSES).issubset(
-        set(contract.unified_bucket_imports)
-    )
-    assert set(REQUIRED_UNIFIED_BUCKET_METHODS).issubset(
-        set(contract.unified_bucket_methods)
-    )
-    assert set(REQUIRED_UNIFIED_BUCKET_BACKENDS).issubset(
-        set(contract.unified_bucket_backends)
-    )
+    assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(set(contract.bucket_vfs_cli_commands))
+    assert {"demo_cli_interface", "demo_mcp_api"}.issubset(set(contract.demo_functions))
+    assert set(REQUIRED_UNIFIED_BUCKET_CLASSES).issubset(set(contract.unified_bucket_imports))
+    assert set(REQUIRED_UNIFIED_BUCKET_METHODS).issubset(set(contract.unified_bucket_methods))
+    assert set(REQUIRED_UNIFIED_BUCKET_BACKENDS).issubset(set(contract.unified_bucket_backends))
     assert contract.deprecations_report_schema_path.endswith(
         ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
     )
@@ -277,12 +267,8 @@ def test_build_swissknife_ipfs_datasets_handoff_is_deterministic() -> None:
     assert first.content_cid == f"sha256:{first.payload_sha256}"
     assert first.payload_size_bytes > 0
     assert set(REQUIRED_BUCKET_VFS_MCP_TOOLS).issubset(set(first.bucket_vfs_mcp_tools))
-    assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(
-        set(first.bucket_vfs_cli_commands)
-    )
-    assert set(REQUIRED_UNIFIED_BUCKET_BACKENDS).issubset(
-        set(first.unified_bucket_backends)
-    )
+    assert set(REQUIRED_BUCKET_VFS_CLI_COMMANDS).issubset(set(first.bucket_vfs_cli_commands))
+    assert set(REQUIRED_UNIFIED_BUCKET_BACKENDS).issubset(set(first.unified_bucket_backends))
     assert set(first.required_swissknife_operations) == set(
         REQUIRED_SWISSKNIFE_IPFS_DATASETS_OPERATIONS
     )
@@ -312,21 +298,14 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "swissknife/contracts/control_surface_contract.schema.json" in src
     assert "swissknife/contracts/interaction_envelope.schema.json" in src
     assert "swissknife/contracts/mediation_receipt.schema.json" in src
-    assert (
-        "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json"
-        in src
-    )
+    assert "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json" in src
     assert (
         "external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/"
         "BUCKET_VFS_INTERFACES_COMPLETE.md"
     ) in src
+    assert "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py" in src
     assert (
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
-        in src
-    )
-    assert (
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
-        in src
+        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py" in src
     )
     assert "MGW-571" in src
     assert "VAIOS-G702" in src
@@ -344,14 +323,15 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_ipfs_d
         assert "MGW-571 objective validation repair" in schema["$comment"]
         assert "interface contract swissknife external/ipfs_datasets" in schema["$comment"]
         assert "goal_packet/interoperability/swissknife/06921590135c" in schema["$comment"]
-        assert "tests/integration/test_swissknife_external_ipfs_datasets_interop.py" in schema["$comment"]
+        assert (
+            "tests/integration/test_swissknife_external_ipfs_datasets_interop.py"
+            in schema["$comment"]
+        )
 
     Draft202012Validator(control_schema).validate(
         swissknife_ipfs_datasets_control_surface_payload()
     )
-    Draft202012Validator(envelope_schema).validate(
-        swissknife_ipfs_datasets_interaction_envelope()
-    )
+    Draft202012Validator(envelope_schema).validate(swissknife_ipfs_datasets_interaction_envelope())
 
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:

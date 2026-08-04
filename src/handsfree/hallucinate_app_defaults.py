@@ -20,7 +20,9 @@ HALLUCINATE_APP_HANDSFREE_PORT = 8080
 # Endpoint templates
 HALLUCINATE_APP_IPFS_KIT_ENDPOINT = f"http://127.0.0.1:{HALLUCINATE_APP_IPFS_KIT_PORT}"
 HALLUCINATE_APP_IPFS_DATASETS_ENDPOINT = f"http://127.0.0.1:{HALLUCINATE_APP_IPFS_DATASETS_PORT}"
-HALLUCINATE_APP_IPFS_ACCELERATE_ENDPOINT = f"http://127.0.0.1:{HALLUCINATE_APP_IPFS_ACCELERATE_PORT}"
+HALLUCINATE_APP_IPFS_ACCELERATE_ENDPOINT = (
+    f"http://127.0.0.1:{HALLUCINATE_APP_IPFS_ACCELERATE_PORT}"
+)
 
 # Health check paths matching daemon configs
 HALLUCINATE_APP_HEALTH_PATHS = {
@@ -109,7 +111,7 @@ def get_hallucinate_app_dashboard_catalog_entry(server_family: str) -> dict:
             "rpc_path": HALLUCINATE_APP_RPC_PATHS["ipfs_datasets"],
             "health_path": HALLUCINATE_APP_HEALTH_PATHS["ipfs_datasets"],
             "menu_dashboard_url": "views/ipfs_datasets_dashboard.html",
-            "native_dashboard_url": f"http://127.0.0.1:8899/mcp",
+            "native_dashboard_url": "http://127.0.0.1:8899/mcp",
             "tool_protocols": HALLUCINATE_APP_TOOL_PROTOCOLS["ipfs_datasets"],
             "swissknife_consumer": "Swissknife dataset, content, index, provenance, and background task surfaces",
         },

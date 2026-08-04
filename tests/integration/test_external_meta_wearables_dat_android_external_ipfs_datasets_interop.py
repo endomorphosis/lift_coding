@@ -41,12 +41,13 @@ from handsfree.meta_wearables_dat_android_ipfs_datasets_interop import (  # noqa
 META_WEARABLES_DAT_ANDROID_ROOT = REPO_ROOT / "external" / "meta-wearables-dat-android"
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 DISCOVERY_PATH = (
-    REPO_ROOT
-    / "data/hallucinate_multimodal_control/discovery/"
+    REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
     "2026-07-08-hao-738-objective-gap-136ccea7b51c.md"
 )
 HEAP_PATH = REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"
-DOC_PATH = REPO_ROOT / "docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md"
+DOC_PATH = (
+    REPO_ROOT / "docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md"
+)
 DEPRECATIONS_SCHEMA_PATH = (
     IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
 )
@@ -54,8 +55,7 @@ BUCKET_VFS_DEMO_PATH = (
     IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
 )
 BUCKET_VFS_DOC_PATH = (
-    IPFS_DATASETS_ROOT
-    / ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+    IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
 BUCKET_VFS_DEMO_SUFFIXES = tuple(
     f".tools/ipfs_kit_py/{candidate.removeprefix('.tools/ipfs_kit_py/')}"
@@ -236,7 +236,10 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         assert INTERFACE_CONTRACT in source
         assert "external/meta-wearables-dat-android" in source
         assert "external/ipfs_datasets" in source
-        assert "tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py" in source
+        assert (
+            "tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py"
+            in source
+        )
 
     assert "Status: completed" in heap_source
     assert "Completion validation: python -m pytest tests/integration -q" in heap_source

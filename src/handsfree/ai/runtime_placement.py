@@ -10,7 +10,6 @@ from .models import (
     CapabilityRuntimeSurface,
 )
 
-
 _MCP_REMOTE_DATA_SURFACES = {
     "embedding",
     "dataset_discovery",
@@ -79,7 +78,9 @@ def resolve_virtual_ai_os_runtime_placement(
         execution_mode=execution_mode,
         runtime_surface=runtime_surface,
         supported_surfaces=supported_surfaces,
-        fallback_surfaces=tuple(surface for surface in supported_surfaces if surface != runtime_surface),
+        fallback_surfaces=tuple(
+            surface for surface in supported_surfaces if surface != runtime_surface
+        ),
         **_placement_metadata(capability_id, execution_mode, runtime_surface),
     )
 

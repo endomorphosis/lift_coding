@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SWISSKNIFE_REPLAY_PATH = (
     REPO_ROOT
@@ -67,12 +66,16 @@ def test_vai_502_replay_fixtures_define_hardware_free_cross_device_path():
     assert offload["first_attempt"]["placement"] == "desktop_peer"
     assert offload["first_attempt"]["status"] == "timeout"
     assert offload["fallback"]["placement"] == "phone_local"
-    assert offload["fallback"]["receipt_id"] == mediation_replay["desktop_peer"]["fallback_receipt_id"]
+    assert (
+        offload["fallback"]["receipt_id"] == mediation_replay["desktop_peer"]["fallback_receipt_id"]
+    )
 
     glasses_status = swissknife_replay["meta_glasses_status_output"]
     assert glasses_status["participant_id"] == "meta_glasses:terminal"
     assert "Meta glasses status" in glasses_status["status_text"]
-    assert glasses_status["render_receipt_id"] in mediation_replay["mediation_receipt"]["must_precede"]
+    assert (
+        glasses_status["render_receipt_id"] in mediation_replay["mediation_receipt"]["must_precede"]
+    )
     assert set(mediation_replay["proof_artifacts"]) <= set(swissknife_replay["proof_artifacts"])
 
 
@@ -89,4 +92,6 @@ def test_vai_502_discovery_receipt_points_supervisor_to_replay_artifacts():
     assert receipt["desktop_peer_offload"]["fallback"]["placement"] == "phone_local"
     assert "Meta glasses status" in receipt["meta_glasses_status_output"]["status_text"]
     assert SWISSKNIFE_REPLAY_PATH.relative_to(REPO_ROOT).as_posix() in receipt["proof_artifacts"]
-    assert HALLUCINATE_MEDIATION_PATH.relative_to(REPO_ROOT).as_posix() in receipt["proof_artifacts"]
+    assert (
+        HALLUCINATE_MEDIATION_PATH.relative_to(REPO_ROOT).as_posix() in receipt["proof_artifacts"]
+    )

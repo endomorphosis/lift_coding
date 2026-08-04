@@ -5,7 +5,6 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 VALIDATOR = ROOT / "scripts/validate_mcplusplus_profile_h_spec.py"
 CHAPTER = ROOT / "Mcp-Plus-Plus/docs/spec/x402-payments.md"
@@ -31,7 +30,11 @@ def test_repository_profile_h_spec_is_valid() -> None:
 def test_libp2p_cannot_be_claimed_as_upstream_x402() -> None:
     chapter, registry = _texts()
     chapter = chapter.replace("not upstream x402 HTTP", "upstream x402 HTTP", 1)
-    registry = registry.replace("MUST NOT be represented as upstream x402 HTTP conformance", "is upstream x402 HTTP conformance", 1)
+    registry = registry.replace(
+        "MUST NOT be represented as upstream x402 HTTP conformance",
+        "is upstream x402 HTTP conformance",
+        1,
+    )
     failures = _module().validate(chapter, registry)
     assert any("upstream x402 and MCP++" in failure for failure in failures)
     assert any("libp2p/upstream distinction" in failure for failure in failures)
