@@ -532,13 +532,113 @@ def main() -> int:
         },
     )
 
-    task_evidence = _attempt_task_evidence(
-        board=board if isinstance(board, dict) else {},
-        checkout=checkout,
-        forest=forest,
-        merge_records=merge_records,
-        validation_receipts=validation_receipts,
-    )
+    # Prefer the agent-supervisor closeout materializer (merge projection +
+    # optional git ancestry recovery) when the package is importable.
+    task_evidence: dict[str, object]
+    try:
+        if str(ACCEL_ROOT) not in sys.path:
+            sys.path.insert(0, str(ACCEL_ROOT))
+        from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+            parse_task_file,
+        )
+        from ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_closeout_materializer import (
+            CloseoutMaterializerIdentity,
+            load_json_rows,
+            materialize_task_evidence,
+            persist_materialization_report,
+        )
+
+        identity_snapshot_path = VALIDATION_RECEIPT_DIR / "identity_snapshot.json"
+        identity_payload: dict[str, object] = {}
+        if identity_snapshot_path.is_file():
+            identity_payload = json.loads(
+                identity_snapshot_path.read_text(encoding="utf-8")
+            ).get("identity") or {}
+        forest_cid = str(
+            identity_payload.get("repository_forest_cid")
+            or forest.get("repository_forest_cid")
+            or ""
+        )
+        gitlink = str(
+            identity_payload.get("gitlink_state_cid")
+            or forest.get("gitlink_state_cid")
+            or ""
+        )
+        identity = CloseoutMaterializerIdentity(
+            repository_id=str(
+                identity_payload.get("repository_id")
+                or "lift_coding/proof-backed-test-reuse"
+            ),
+            repository_state_cid=str(
+                identity_payload.get("repository_state_cid")
+                or f"git-commit:{checkout['commit']}"
+            ),
+            git_commit_id=str(
+                identity_payload.get("git_commit_id") or checkout["commit"]
+            ),
+            git_tree_id=str(identity_payload.get("git_tree_id") or checkout["tree"]),
+            gitlink_state_cid=gitlink,
+            repository_forest_cid=forest_cid,
+            dirty=bool(identity_payload.get("dirty", not checkout.get("clean"))),
+            dirty_overlay_cid=str(
+                identity_payload.get("dirty_overlay_cid")
+                or (
+                    "cid:dirty-overlay:none"
+                    if checkout.get("clean")
+                    else "cid:dirty-overlay:present"
+                )
+            ),
+        )
+        tasks = parse_task_file(REPO_ROOT / TODO_REL, "## PTR-")
+        board_payload = dict(board) if isinstance(board, dict) else {}
+        board_payload = {
+            **board_payload,
+            "valid": not bool(board_payload.get("errors")),
+            "board_namespace": "proof-backed-test-reuse-v1",
+            "task_count": len(tasks),
+            "task_ids": [t.task_id for t in tasks],
+            "task_cids": {t.task_id: t.canonical_task_cid for t in tasks},
+        }
+        # Load raw merge rows (materializer projects them).
+        raw_merges = load_json_rows(MERGE_COMPLETED)
+        report = materialize_task_evidence(
+            identity=identity,
+            validated_board=board_payload,
+            task_records=tasks,
+            merge_queue_records=raw_merges,
+            validation_receipts=validation_receipts,
+            recover_missing_merges_from_git=True,
+            repo_root=REPO_ROOT,
+            freshness_seconds=3_600.0,
+        )
+        persist_materialization_report(report, output_dir=OUT_DIR)
+        task_evidence = {
+            "ok": True,
+            "source": "proof_test_reuse_closeout_materializer",
+            "evidence_count": report.evidence_count,
+            "gap_count": report.gap_count,
+            "gap_kinds": report.gap_kinds,
+            "validation_receipt_count": report.validation_receipt_count,
+            "merge_queue_projected_count": report.merge_queue_projected_count,
+            "merge_recovered_from_git_count": report.merge_recovered_from_git_count,
+            "evidence_task_ids": list(report.evidence_task_ids),
+            "validation_missing_task_ids": list(report.validation_missing_task_ids),
+            "completion_missing_task_ids": list(report.completion_missing_task_ids),
+            "approval_required_task_ids": list(report.approval_required_task_ids),
+            "next_actions": list(report.next_actions),
+        }
+    except Exception as exc:
+        task_evidence = _attempt_task_evidence(
+            board=board if isinstance(board, dict) else {},
+            checkout=checkout,
+            forest=forest,
+            merge_records=merge_records,
+            validation_receipts=validation_receipts,
+        )
+        task_evidence = {
+            **task_evidence,
+            "materializer_fallback_error": f"{type(exc).__name__}: {exc}",
+        }
     _write(OUT_DIR / "task_evidence_probe.json", task_evidence)
 
     closeout_rc, closeout, closeout_err = _run_json(
