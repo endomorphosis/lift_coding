@@ -193,7 +193,7 @@ class FileTransportSessionStore:
                 continue
             if not isinstance(resume_token, str) or not resume_token:
                 continue
-            if not isinstance(capabilities, (list, tuple)) or any(
+            if not isinstance(capabilities, list | tuple) or any(
                 not isinstance(item, str) for item in capabilities
             ):
                 capabilities = ()

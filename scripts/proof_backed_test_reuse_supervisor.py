@@ -586,7 +586,7 @@ def _record_population(
 
     if isinstance(value, Mapping):
         return {str(item).strip() for item in value if str(item).strip()}
-    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+    if not isinstance(value, Sequence) or isinstance(value, str | bytes):
         return set()
     found: set[str] = set()
     for item in value:
@@ -793,7 +793,7 @@ def _closeout_production_input_inventory(
             if not isinstance(row, Mapping):
                 continue
             criteria = row.get("criteria")
-            if isinstance(criteria, Sequence) and not isinstance(criteria, (str, bytes)):
+            if isinstance(criteria, Sequence) and not isinstance(criteria, str | bytes):
                 coverage_ids.update(str(item).strip() for item in criteria if str(item).strip())
     retained_analyzers = _record_population(
         analyzer_health.get("analyzers"),
@@ -802,7 +802,7 @@ def _closeout_production_input_inventory(
     retained_quorum = quorum.get("members")
     retained_quorum_count = (
         len(retained_quorum)
-        if isinstance(retained_quorum, Sequence) and not isinstance(retained_quorum, (str, bytes))
+        if isinstance(retained_quorum, Sequence) and not isinstance(retained_quorum, str | bytes)
         else 0
     )
     retained_goal_ids: set[str] = set()
@@ -815,11 +815,11 @@ def _closeout_production_input_inventory(
             legacy = row.get("evidence_cids")
             if (
                 isinstance(records, Sequence)
-                and not isinstance(records, (str, bytes))
+                and not isinstance(records, str | bytes)
                 and bool(records)
             ) or (
                 isinstance(legacy, Sequence)
-                and not isinstance(legacy, (str, bytes))
+                and not isinstance(legacy, str | bytes)
                 and bool(legacy)
             ):
                 retained_goal_ids.add(str(goal_id))

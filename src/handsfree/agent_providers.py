@@ -1752,7 +1752,7 @@ def _trace_timeout_state(trace: dict[str, Any] | None) -> tuple[bool, int | None
 
     if not isinstance(started_at, str) or not started_at.strip():
         return False, None, None
-    if not isinstance(timeout_s, (int, float)) or timeout_s <= 0:
+    if not isinstance(timeout_s, int | float) or timeout_s <= 0:
         return False, None, None
 
     try:

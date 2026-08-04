@@ -384,7 +384,7 @@ def _all_tasks_completed(todo_path: Path, task_prefix: str) -> bool:
 
 
 def _timestamp_epoch(value: Any) -> float | None:
-    if isinstance(value, (int, float)) and math.isfinite(float(value)):
+    if isinstance(value, int | float) and math.isfinite(float(value)):
         return float(value)
     if not isinstance(value, str) or not value.strip():
         return None

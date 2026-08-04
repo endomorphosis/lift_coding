@@ -1640,10 +1640,10 @@ def _normalize_mcp_task_result(task: Any) -> dict[str, Any] | None:
         except ValueError:
             pass
     timeout_s = trace.get("mcp_timeout_s")
-    if isinstance(timeout_s, (int, float)):
+    if isinstance(timeout_s, int | float):
         normalized["mcp_timeout_s"] = timeout_s
     poll_interval_s = trace.get("mcp_poll_interval_s")
-    if isinstance(poll_interval_s, (int, float)):
+    if isinstance(poll_interval_s, int | float):
         normalized["mcp_poll_interval_s"] = poll_interval_s
 
     if len(normalized) == 3 and not any(normalized.values()):
@@ -1694,9 +1694,9 @@ def _serialize_agent_task(task: Any) -> dict[str, Any]:
                 )
             except ValueError:
                 pass
-        if isinstance(task.trace.get("mcp_timeout_s"), (int, float)):
+        if isinstance(task.trace.get("mcp_timeout_s"), int | float):
             task_data["mcp_timeout_s"] = task.trace["mcp_timeout_s"]
-        if isinstance(task.trace.get("mcp_poll_interval_s"), (int, float)):
+        if isinstance(task.trace.get("mcp_poll_interval_s"), int | float):
             task_data["mcp_poll_interval_s"] = task.trace["mcp_poll_interval_s"]
     normalized_result = _normalize_mcp_task_result(task)
     if normalized_result is not None:
