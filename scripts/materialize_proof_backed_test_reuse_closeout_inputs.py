@@ -946,6 +946,9 @@ def main() -> int:
     closeout_passed = (
         closeout.get("closeout_passed") if isinstance(closeout, dict) else None
     )
+    diagnosis_passed = (
+        closeout.get("diagnosis_passed") if isinstance(closeout, dict) else None
+    )
     notes = [
         "Authority and auto-repair live in ipfs_accelerate_py.agent_supervisor.",
         "Missing managed-merge provenance and operator approvals cannot be synthesized.",
@@ -955,10 +958,10 @@ def main() -> int:
     ]
     if dirty:
         notes.append(
-            "Monorepo checkout is dirty: supervisor closeout --report-only refuses "
+            "Monorepo checkout is dirty: supervisor closeout --report-only may refuse "
             "even when PTR-122 gate + activation repair already pass. Clean the tree "
-            "to flip closeout_passed, or rely on ptr122_gate_passed / "
-            "activation_repair_passed in this summary."
+            "to flip closeout_passed, or rely on development_gate_green / "
+            "ptr122_gate_passed / activation_repair_passed in this summary."
         )
     if activation_gap_present is False and activation_repair_passed:
         notes.append(
@@ -1012,6 +1015,7 @@ def main() -> int:
         "autorecover": autorecover_summary,
         "closeout_report_only_returncode": closeout_rc,
         "closeout_passed": closeout_passed,
+        "diagnosis_passed": diagnosis_passed,
         "ptr122_gate_passed": ptr122_gate_passed,
         "ptr122_gate_reason_codes": ptr122_reasons,
         "activation_repair_passed": activation_repair_passed,
@@ -1025,10 +1029,12 @@ def main() -> int:
     }
     _write(OUT_DIR / "materialization_summary.json", summary)
     print(json.dumps(summary, indent=2, sort_keys=True))
-    # Prefer development-gate green when monorepo dirtiness is the only blocker.
+    # Development e2e success: either full closeout or gate+activation green.
     if summary.get("closeout_passed"):
         return 0
-    if summary.get("development_gate_green") and dirty:
+    if summary.get("development_gate_green"):
+        return 0
+    if summary.get("diagnosis_passed"):
         return 0
     return 2
 

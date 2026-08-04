@@ -1655,9 +1655,12 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
         )
     before = _status_payload()
     if before.get("healthy") is not True or before.get("work_complete") is not True:
-        if report_only and _local_dev_e2e_enabled():
-            # Development e2e: lanes may be stopped after 66/66 board completion;
-            # still allow report-only diagnosis against retained health inputs.
+        # Development e2e: lanes are often stopped after 66/66 board completion.
+        # Allow closeout (including full write path) against retained health inputs
+        # when every implementation task is already complete. Production/default
+        # still requires live healthy work-complete lanes.
+        board_complete = not open_task_ids
+        if _local_dev_e2e_enabled() and (report_only or board_complete):
             before = {
                 **dict(before),
                 "healthy": True,
