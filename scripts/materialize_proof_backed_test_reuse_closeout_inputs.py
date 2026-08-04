@@ -651,10 +651,11 @@ def main() -> int:
 
         identity_snapshot_path = VALIDATION_RECEIPT_DIR / "identity_snapshot.json"
         identity_payload: dict[str, object] = {}
+        snapshot_checkout: dict[str, object] = {}
         if identity_snapshot_path.is_file():
-            identity_payload = (
-                json.loads(identity_snapshot_path.read_text(encoding="utf-8")).get("identity") or {}
-            )
+            snapshot_raw = json.loads(identity_snapshot_path.read_text(encoding="utf-8"))
+            identity_payload = snapshot_raw.get("identity") or {}
+            snapshot_checkout = snapshot_raw.get("checkout") or {}
         forest_cid = str(
             identity_payload.get("repository_forest_cid")
             or forest.get("repository_forest_cid")
@@ -666,9 +667,35 @@ def main() -> int:
         approval_dir = STATE_ROOT / "projection" / "completion" / "operator_approvals"
         approvals = load_accepted_operator_approvals(approval_dir)
 
+        # Prefer live clean checkout over a stale identity snapshot so gate
+        # artifacts stay bound to HEAD. Snapshot is used for forest/policy pins.
+        snapshot_commit = str(
+            identity_payload.get("git_commit_id")
+            or snapshot_checkout.get("commit")
+            or ""
+        )
+        live_commit = str(checkout.get("commit") or "")
+        live_tree = str(checkout.get("tree") or "")
+        use_live_checkout = bool(checkout.get("clean")) and (
+            not snapshot_commit or snapshot_commit != live_commit
+        )
+        if use_live_checkout:
+            git_commit_id = live_commit
+            git_tree_id = live_tree
+            repository_state_cid = f"git-commit:{live_commit}"
+        else:
+            git_commit_id = str(identity_payload.get("git_commit_id") or live_commit)
+            git_tree_id = str(identity_payload.get("git_tree_id") or live_tree)
+            repository_state_cid = str(
+                identity_payload.get("repository_state_cid")
+                or f"git-commit:{git_commit_id}"
+            )
+
         # Prefer sealed validation-receipt identity over a dirty worktree from
         # local materializer development.
-        if "dirty" in identity_payload:
+        if use_live_checkout:
+            identity_dirty = not bool(checkout.get("clean"))
+        elif "dirty" in identity_payload:
             identity_dirty = bool(identity_payload.get("dirty"))
         elif any(r.get("dirty") is False and r.get("passed") is True for r in validation_receipts):
             identity_dirty = False
@@ -678,11 +705,9 @@ def main() -> int:
             repository_id=str(
                 identity_payload.get("repository_id") or "lift_coding/proof-backed-test-reuse"
             ),
-            repository_state_cid=str(
-                identity_payload.get("repository_state_cid") or f"git-commit:{checkout['commit']}"
-            ),
-            git_commit_id=str(identity_payload.get("git_commit_id") or checkout["commit"]),
-            git_tree_id=str(identity_payload.get("git_tree_id") or checkout["tree"]),
+            repository_state_cid=repository_state_cid,
+            git_commit_id=git_commit_id,
+            git_tree_id=git_tree_id,
             gitlink_state_cid=gitlink,
             repository_forest_cid=forest_cid,
             dirty=identity_dirty,

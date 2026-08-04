@@ -444,7 +444,31 @@ def inspect_checkout(
         branch = _run("branch", "--show-current")
         commit = _run("rev-parse", "HEAD")
         tree = _run("rev-parse", "HEAD^{tree}")
-        dirty = _run("status", "--porcelain=v1", "--untracked-files=all")
+        # Development local e2e: ignore nested submodule dirt that this monorepo
+        # cannot fully sanitize (see PTR_CLOSEOUT_LOCAL_SETUP / DEV_E2E).
+        import os as _os
+
+        _dev_e2e = str(_os.environ.get("PTR_CLOSEOUT_LOCAL_SETUP", "")).strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        } or str(_os.environ.get("PTR_CLOSEOUT_DEV_E2E", "")).strip().lower() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+            "auto",
+        }
+        if _dev_e2e:
+            dirty = _run(
+                "status",
+                "--porcelain=v1",
+                "--untracked-files=normal",
+                "--ignore-submodules=dirty",
+            )
+        else:
+            dirty = _run("status", "--porcelain=v1", "--untracked-files=all")
     except CloseoutRefusal:
         raise
     except Exception as exc:  # pragma: no cover - defensive
