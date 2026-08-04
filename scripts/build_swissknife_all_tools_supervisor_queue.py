@@ -25,8 +25,7 @@ PRIMARY_TASKBOARD = (
     "37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
 )
 PROFILE_G_TASKBOARD = (
-    "implementation_plan/docs/"
-    "38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md"
+    "implementation_plan/docs/38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md"
 )
 FIRST_TASK = 27
 LAST_TASK = 116
@@ -188,8 +187,10 @@ def build_queue(previous: dict[str, Any] | None = None) -> dict[str, Any]:
             continue
         task["status"] = (
             "ready"
-            if all(dependency in completed or int(dependency.removeprefix("SVD-")) < FIRST_TASK
-                   for dependency in task["depends_on"])
+            if all(
+                dependency in completed or int(dependency.removeprefix("SVD-")) < FIRST_TASK
+                for dependency in task["depends_on"]
+            )
             else "waiting"
         )
 

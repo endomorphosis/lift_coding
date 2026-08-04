@@ -141,9 +141,7 @@ VAI_MGW_HAO_LAUNCH_MISSION_TERMS = (
 )
 
 VAI_MGW_HAO_LAUNCH_MISSION_ARGS = tuple(
-    item
-    for term in VAI_MGW_HAO_LAUNCH_MISSION_TERMS
-    for item in ("--objective-mission-term", term)
+    item for term in VAI_MGW_HAO_LAUNCH_MISSION_TERMS for item in ("--objective-mission-term", term)
 )
 
 

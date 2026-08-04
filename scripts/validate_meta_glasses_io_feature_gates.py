@@ -22,8 +22,12 @@ DOC_REQUIREMENTS: dict[str, tuple[Requirement, ...]] = {
     "docs/meta-glasses-expanded-io-physical-validation-checklist.md": (
         Requirement("Android DAT v0.7", ("android dat v0.7", "0.7.0")),
         Requirement("iOS DAT v0.7", ("ios dat v0.7", "0.7.0")),
-        Requirement("display-capable device selection", ("display-capable", "selected display target")),
-        Requirement("native optional gates", ("native dat camera", "native dat display", "optional")),
+        Requirement(
+            "display-capable device selection", ("display-capable", "selected display target")
+        ),
+        Requirement(
+            "native optional gates", ("native dat camera", "native dat display", "optional")
+        ),
         Requirement("package credentials", ("package credentials", "sdk linkage")),
         Requirement("Developer Mode or release channel", ("developer mode", "release channel")),
         Requirement("app registration", ("app registration", "dam")),
@@ -31,7 +35,9 @@ DOC_REQUIREMENTS: dict[str, tuple[Requirement, ...]] = {
         Requirement("paired hardware", ("paired hardware", "paired to")),
         Requirement("capability checks", ("capability checks", "runtime diagnostics")),
         Requirement("camera stream/photo capture", ("photo capture", "video stream")),
-        Requirement("Bluetooth route diagnostics", ("bluetooth route", "microphone", "speaker", "headphone")),
+        Requirement(
+            "Bluetooth route diagnostics", ("bluetooth route", "microphone", "speaker", "headphone")
+        ),
         Requirement("Web Apps HTTPS deployment", ("web app", "https", "meta ai app")),
         Requirement("Neural Band input validation", ("neural band", "input")),
         Requirement("captouch input validation", ("captouch", "arrow", "enter")),
@@ -41,12 +47,20 @@ DOC_REQUIREMENTS: dict[str, tuple[Requirement, ...]] = {
         Requirement("rollback", ("rollback", "release channel")),
     ),
     "docs/meta-wearables-dat-display-physical-validation-checklist.md": (
-        Requirement("display native optional gates", ("native dat display remains optional", "disabled by default")),
+        Requirement(
+            "display native optional gates",
+            ("native dat display remains optional", "disabled by default"),
+        ),
         Requirement("package credentials", ("package credentials", "dat_sdk_unlinked")),
         Requirement("Developer Mode or release channel", ("developer mode", "release channel")),
         Requirement("app registration", ("app registration", "dam")),
-        Requirement("firmware/app update state", ("firmware_update_required", "dat_app_update_required")),
-        Requirement("paired display-capable hardware", ("paired display-capable hardware", "target_required")),
+        Requirement(
+            "firmware/app update state", ("firmware_update_required", "dat_app_update_required")
+        ),
+        Requirement(
+            "paired display-capable hardware",
+            ("paired display-capable hardware", "target_required"),
+        ),
         Requirement("capability checks", ("capability checks", "displaySdkLinked")),
         Requirement("DAT v0.7", ("dat v0.7", "0.7.0")),
         Requirement("Web Apps HTTPS fallback", ("web apps https", "fallback")),

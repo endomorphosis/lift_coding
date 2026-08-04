@@ -44,9 +44,7 @@ def test_lift_bootstrap_accepts_explicit_accelerator_runtime(tmp_path, monkeypat
     )
     monkeypatch.setenv("LIFT_IPFS_ACCELERATE_PACKAGE_ROOT", str(runtime_root))
     for module_name in list(sys.modules):
-        if module_name == "ipfs_accelerate_py" or module_name.startswith(
-            "ipfs_accelerate_py."
-        ):
+        if module_name == "ipfs_accelerate_py" or module_name.startswith("ipfs_accelerate_py."):
             monkeypatch.delitem(sys.modules, module_name, raising=False)
     if str(SCRIPTS_DIR) not in sys.path:
         sys.path.insert(0, str(SCRIPTS_DIR))

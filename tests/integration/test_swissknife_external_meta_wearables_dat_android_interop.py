@@ -274,8 +274,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "'goal_packet/interoperability/swissknife/06921590135c'" in src
     assert "export function registerSwissKnifeMetaWearablesDATAndroidDisplayInterop" in src
     assert (
-        "export function createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATAndroidInterop"
-        in src
+        "export function createMCPPlusPlusClientWithSwissKnifeMetaWearablesDATAndroidInterop" in src
     )
     assert "export function buildSwissKnifeMetaWearablesDATAndroidControlSurfaceContract" in src
     assert "export function buildSwissKnifeMetaWearablesDATAndroidInteractionEnvelope" in src
@@ -299,15 +298,9 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "swissknife/contracts/interaction_envelope.schema.json" in src
     assert "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json" in src
     assert "swissknife/contracts/mediation_receipt.schema.json" in src
-    assert (
-        "external/meta-wearables-dat-android/.cursor/rules/display-access.mdc" in src
-    )
-    assert (
-        "external/meta-wearables-dat-android/.cursor/rules/session-lifecycle.mdc" in src
-    )
-    assert (
-        "external/meta-wearables-dat-android/.cursor/rules/permissions-registration.mdc" in src
-    )
+    assert "external/meta-wearables-dat-android/.cursor/rules/display-access.mdc" in src
+    assert "external/meta-wearables-dat-android/.cursor/rules/session-lifecycle.mdc" in src
+    assert "external/meta-wearables-dat-android/.cursor/rules/permissions-registration.mdc" in src
     assert (
         "external/meta-wearables-dat-android/samples/DisplayAccess/app/src/main/AndroidManifest.xml"
         in src

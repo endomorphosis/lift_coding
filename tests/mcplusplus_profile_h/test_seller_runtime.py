@@ -65,7 +65,9 @@ def test_policy_decisions_are_deterministic(tmp_path):
     assert runtime.policy.evaluate("tool:status", ctx).decision == Decision.FREE
     assert runtime.policy.evaluate("tool:unknown", ctx).decision == Decision.FREE
     assert runtime.policy.evaluate("tool:pin", ctx).decision == Decision.PAYMENT_REQUIRED
-    assert runtime.policy.evaluate("tool:pin", context(authorized=False)).decision == Decision.DENIED
+    assert (
+        runtime.policy.evaluate("tool:pin", context(authorized=False)).decision == Decision.DENIED
+    )
     runtime.policy.emergency_pause = True
     assert runtime.policy.evaluate("tool:pin", ctx).decision == Decision.UNAVAILABLE
 
@@ -86,7 +88,11 @@ async def test_paid_dispatch_settles_immediately_before_effect_and_replays_resul
     assert required.decision.decision == Decision.PAYMENT_REQUIRED
     status, headers, _ = http_response(required)
     assert status == 402 and "PAYMENT-REQUIRED" in headers
-    payload = {"x402Version": 2, "accepted": requirement().wire(), "payload": {"signature": "not-persisted"}}
+    payload = {
+        "x402Version": 2,
+        "accepted": requirement().wire(),
+        "payload": {"signature": "not-persisted"},
+    }
     paid = await runtime.dispatch(
         "tool:pin",
         ctx,
@@ -110,9 +116,18 @@ async def test_substitution_rejected_before_verification_or_effect(tmp_path):
     runtime, calls = build(tmp_path)
     ctx = context()
     required = await runtime.dispatch("tool:pin", ctx, lambda: None)
-    payload = {"x402Version": 2, "accepted": {**requirement().wire(), "amount": "999"}, "payload": {"sig": "x"}}
+    payload = {
+        "x402Version": 2,
+        "accepted": {**requirement().wire(), "amount": "999"},
+        "payload": {"sig": "x"},
+    }
     with pytest.raises(ProfileHError) as raised:
-        await runtime.dispatch("tool:pin", ctx, lambda: pytest.fail("effect ran"), payment=PaymentContext(payload, required.receipt_cid, ctx.request_cid))
+        await runtime.dispatch(
+            "tool:pin",
+            ctx,
+            lambda: pytest.fail("effect ran"),
+            payment=PaymentContext(payload, required.receipt_cid, ctx.request_cid),
+        )
     assert raised.value.code == REQUEST_MISMATCH
     assert calls == {"verify": 0, "settle": 0}
 

@@ -21,9 +21,7 @@ GOAL_PACKET_GOALS = {
     "VAIOS-G705",
     "VAIOS-G706",
 }
-OBJECTIVE_GAP_REF = (
-    "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
-)
+OBJECTIVE_GAP_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
 VALIDATION_REPAIR_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md"
 ATTEMPT_REPAIR_REF = (
     "data/virtual_ai_os/discovery/"

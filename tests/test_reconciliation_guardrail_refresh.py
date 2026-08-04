@@ -338,8 +338,14 @@ def test_launch_validation_retry_repair_preserves_playwright_gate(tmp_path):
     assert findings[0]["discovery_path"].endswith("-mgw-537-mgw-536-retry-budget.md")
     assert "launch Playwright validation gate" in updated_board
     assert "npm --prefix swissknife run test:e2e:meta-glasses" in updated_board
-    assert "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts" in updated_board
-    assert "For launch tasks, this repair validation preserves the launch Playwright validation gate." in updated_board
+    assert (
+        "npm --prefix hallucinate_app run test:e2e -- multimodal-control-surface.spec.ts"
+        in updated_board
+    )
+    assert (
+        "For launch tasks, this repair validation preserves the launch Playwright validation gate."
+        in updated_board
+    )
     assert updated_strategy["blocked_tasks"] == ["MGW-536"]
 
 
@@ -407,7 +413,9 @@ def test_retry_repair_generation_unwraps_markdown_failed_command(tmp_path):
     )
 
     updated_board = board.read_text(encoding="utf-8")
-    follow_up_block = updated_board.split("## SVD-134 Resolve validation retry-budget failure for SVD-133", 1)[1]
+    follow_up_block = updated_board.split(
+        "## SVD-134 Resolve validation retry-budget failure for SVD-133", 1
+    )[1]
     assert findings[0]["source_task_id"] == "SVD-133"
     assert f"- Validation: {shell_command}" in follow_up_block
     assert f"- Validation: {markdown_command}" not in follow_up_block

@@ -201,8 +201,7 @@ def discover_meta_wearables_dat_ios_display_contract(
     ):
         if required_symbol not in display_access_source:
             raise SwissKnifeMetaWearablesDATIOSInteropError(
-                f"meta-wearables-dat-ios display-access.mdc is missing symbol: "
-                f"{required_symbol}"
+                f"meta-wearables-dat-ios display-access.mdc is missing symbol: {required_symbol}"
             )
 
     permissions_source = permissions_registration_doc_path.read_text(encoding="utf-8")
@@ -220,12 +219,8 @@ def discover_meta_wearables_dat_ios_display_contract(
             )
 
     session_source = session_lifecycle_doc_path.read_text(encoding="utf-8")
-    discovered_session_states = tuple(
-        sorted(set(re.findall(r"`([a-z]+)`\s*\|", session_source)))
-    )
-    missing_session_states = set(REQUIRED_DEVICE_SESSION_STATES) - set(
-        discovered_session_states
-    )
+    discovered_session_states = tuple(sorted(set(re.findall(r"`([a-z]+)`\s*\|", session_source))))
+    missing_session_states = set(REQUIRED_DEVICE_SESSION_STATES) - set(discovered_session_states)
     if missing_session_states:
         raise SwissKnifeMetaWearablesDATIOSInteropError(
             f"meta-wearables-dat-ios session-lifecycle.mdc is missing states: "
@@ -242,11 +237,11 @@ def discover_meta_wearables_dat_ios_display_contract(
         )
 
     discovered_background_modes = tuple(
-        sorted(mode for mode in REQUIRED_BACKGROUND_MODES if f"<string>{mode}</string>" in plist_source)
+        sorted(
+            mode for mode in REQUIRED_BACKGROUND_MODES if f"<string>{mode}</string>" in plist_source
+        )
     )
-    missing_background_modes = set(REQUIRED_BACKGROUND_MODES) - set(
-        discovered_background_modes
-    )
+    missing_background_modes = set(REQUIRED_BACKGROUND_MODES) - set(discovered_background_modes)
     if missing_background_modes:
         raise SwissKnifeMetaWearablesDATIOSInteropError(
             f"meta-wearables-dat-ios DisplayAccess Info.plist is missing background modes: "
@@ -274,9 +269,7 @@ def discover_meta_wearables_dat_ios_display_contract(
     discovered_button_styles = tuple(
         sorted(set(re.findall(r"style:\s*\.([A-Za-z0-9_]+)", combined_display_source)))
     )
-    missing_button_styles = set(REQUIRED_DISPLAY_BUTTON_STYLES) - set(
-        discovered_button_styles
-    )
+    missing_button_styles = set(REQUIRED_DISPLAY_BUTTON_STYLES) - set(discovered_button_styles)
     if missing_button_styles:
         raise SwissKnifeMetaWearablesDATIOSInteropError(
             f"meta-wearables-dat-ios DisplayAccess Swift source is missing button styles: "
@@ -284,7 +277,11 @@ def discover_meta_wearables_dat_ios_display_contract(
         )
 
     discovered_display_view_types = tuple(
-        sorted(view_type for view_type in REQUIRED_DISPLAY_VIEW_TYPES if view_type in combined_display_source)
+        sorted(
+            view_type
+            for view_type in REQUIRED_DISPLAY_VIEW_TYPES
+            if view_type in combined_display_source
+        )
     )
     missing_display_view_types = set(REQUIRED_DISPLAY_VIEW_TYPES) - set(
         discovered_display_view_types

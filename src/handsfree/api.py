@@ -236,6 +236,7 @@ app = FastAPI(
 
 # Register IPFS integration router
 from handsfree.handlers.ipfs_integration import router as ipfs_router  # noqa: E402
+
 app.include_router(ipfs_router)
 
 # Database connection (initialized lazily)
@@ -559,11 +560,7 @@ def _mobile_orb_binding_state(
     for binding in bindings:
         orb_binding = _mobile_orb_dict(binding.get("orb_binding"))
         runtime_binding = _mobile_orb_dict(binding.get("runtime_binding"))
-        status_value = (
-            binding.get("status")
-            or runtime_binding.get("status")
-            or "active"
-        )
+        status_value = binding.get("status") or runtime_binding.get("status") or "active"
         if status_value in {"active", "ready", "unresolved", "invalid"}:
             active_count += 1
         binding_items.append(
@@ -580,9 +577,7 @@ def _mobile_orb_binding_state(
                 "descriptor_cid": orb_binding.get("descriptor_cid"),
                 "runtime_status": runtime_binding.get("status"),
                 "runtime_reason": runtime_binding.get("reason"),
-                "receipt_cid": _mobile_orb_dict(binding.get("mediation_receipt")).get(
-                    "receipt_id"
-                ),
+                "receipt_cid": _mobile_orb_dict(binding.get("mediation_receipt")).get("receipt_id"),
             }
         )
     revoked_items = [
@@ -948,7 +943,7 @@ NOTIFICATION_EXAMPLES = {
                         "id": "read_cid",
                         "label": "Read Receipt",
                         "phrase": "read the wearables receipt",
-                    }
+                    },
                 ],
             },
         },
@@ -1087,7 +1082,9 @@ def _build_follow_on_task(
     if provider is None and task is not None and isinstance(task.provider, str):
         provider = task.provider
     if provider_label is None and isinstance(serialized_task, dict):
-        trace = serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+        trace = (
+            serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+        )
         if isinstance(trace.get("provider_label"), str):
             provider_label = trace["provider_label"]
     if capability is None and isinstance(serialized_task, dict):
@@ -1096,7 +1093,11 @@ def _build_follow_on_task(
         ):
             capability = serialized_task["result"]["capability"]
         else:
-            trace = serialized_task.get("trace") if isinstance(serialized_task.get("trace"), dict) else {}
+            trace = (
+                serialized_task.get("trace")
+                if isinstance(serialized_task.get("trace"), dict)
+                else {}
+            )
             if isinstance(trace.get("mcp_capability"), str):
                 capability = trace["mcp_capability"]
 
@@ -1341,20 +1342,21 @@ async def _execute_ai_capability_request(
     normalized_context = request.normalized_context()
 
     options = request.build_options_dict()
-    if resolved_capability_id in {
-        "github.check.failure_rag_explain",
-        "github.check.accelerated_failure_explain",
-    } and "github_provider" not in options:
-        options["github_provider"] = _github_provider
-    request_inputs = dict(request.inputs)
     if (
-        "history_cids" not in request_inputs
-        and resolved_capability_id in {
+        resolved_capability_id
+        in {
             "github.check.failure_rag_explain",
             "github.check.accelerated_failure_explain",
-            "github.check.find_similar_failures",
         }
+        and "github_provider" not in options
     ):
+        options["github_provider"] = _github_provider
+    request_inputs = dict(request.inputs)
+    if "history_cids" not in request_inputs and resolved_capability_id in {
+        "github.check.failure_rag_explain",
+        "github.check.accelerated_failure_explain",
+        "github.check.find_similar_failures",
+    }:
         auto_history_cids = discover_failure_history_cids(
             get_db(),
             user_id=user_id,
@@ -1426,7 +1428,8 @@ async def _execute_ai_capability_request(
     )
 
     if (
-        resolved_capability_id in {
+        resolved_capability_id
+        in {
             "github.check.failure_rag_explain",
             "github.check.accelerated_failure_explain",
         }
@@ -1571,7 +1574,9 @@ def _normalize_mcp_task_result(task: Any) -> dict[str, Any] | None:
 
     capability = trace.get("mcp_capability")
     provider_label = trace.get("provider_label")
-    result_output = envelope.get("structured_output") if envelope else trace.get("mcp_result_output")
+    result_output = (
+        envelope.get("structured_output") if envelope else trace.get("mcp_result_output")
+    )
     result_preview = envelope.get("summary") if envelope else trace.get("mcp_result_preview")
 
     normalized: dict[str, Any] = {
@@ -1684,8 +1689,12 @@ def _serialize_agent_task(task: Any) -> dict[str, Any]:
         if isinstance(task.trace.get("mcp_started_at"), str):
             task_data["mcp_started_at"] = task.trace["mcp_started_at"]
             try:
-                started = datetime.fromisoformat(task.trace["mcp_started_at"].replace("Z", "+00:00"))
-                task_data["mcp_elapsed_s"] = max(0, int((datetime.now(UTC) - started).total_seconds()))
+                started = datetime.fromisoformat(
+                    task.trace["mcp_started_at"].replace("Z", "+00:00")
+                )
+                task_data["mcp_elapsed_s"] = max(
+                    0, int((datetime.now(UTC) - started).total_seconds())
+                )
             except ValueError:
                 pass
         if isinstance(task.trace.get("mcp_timeout_s"), (int, float)):
@@ -1755,12 +1764,14 @@ def _filter_agent_tasks_for_results(
     """Apply capability/result availability filtering to a task list."""
     if capability:
         tasks = [
-            task for task in tasks
+            task
+            for task in tasks
             if isinstance(task.trace, dict) and task.trace.get("mcp_capability") == capability
         ]
     if results_only:
         tasks = [
-            task for task in tasks
+            task
+            for task in tasks
             if task.state == "completed"
             and isinstance(task.trace, dict)
             and (
@@ -1775,7 +1786,7 @@ def _filter_agent_tasks_for_results(
 def _paginate_task_list(tasks: list[Any], *, limit: int, offset: int) -> tuple[list[Any], bool]:
     """Paginate an in-memory task list and return page plus has_more flag."""
     has_more = len(tasks) > offset + limit
-    return tasks[offset: offset + limit], has_more
+    return tasks[offset : offset + limit], has_more
 
 
 def _latest_tasks_by_result_key(tasks: list[Any]) -> list[Any]:
@@ -1893,9 +1904,11 @@ def register_mobile_orb_edge_capabilities(
     request: MetaGlassesMobileOrbRegisterRequest,
 ) -> MetaGlassesMobileOrbRegisterResponse:
     """Register the phone as a policy-scoped ORB edge node for Meta glasses."""
-    edge_session_id, control_surface_contract_ref, edge_session = build_mobile_orb_register_artifacts(
-        request=request,
-        registered_at=datetime.now(UTC).isoformat(),
+    edge_session_id, control_surface_contract_ref, edge_session = (
+        build_mobile_orb_register_artifacts(
+            request=request,
+            registered_at=datetime.now(UTC).isoformat(),
+        )
     )
     edge_session["accepted_interface_cids"] = list(request.local_interface_cids)
     mobile_orb_edge_sessions[edge_session_id] = edge_session
@@ -1996,18 +2009,10 @@ def get_mobile_orb_diagnostics(
         ]
     )
     policy_cids = _mobile_orb_unique_strings(
-        [
-            cid
-            for record in diagnostic_records
-            for cid in _mobile_orb_collect_policy_cids(record)
-        ]
+        [cid for record in diagnostic_records for cid in _mobile_orb_collect_policy_cids(record)]
     )
     receipt_cids = _mobile_orb_unique_strings(
-        [
-            cid
-            for record in diagnostic_records
-            for cid in _mobile_orb_collect_receipt_cids(record)
-        ]
+        [cid for record in diagnostic_records for cid in _mobile_orb_collect_receipt_cids(record)]
     )
     fallback_details = [
         detail
@@ -2262,10 +2267,7 @@ async def dev_simulator():
 async def meta_rayban_display_simulator():
     """Serve the Meta Ray-Ban Display browser simulator shell."""
     simulator_path = (
-        Path(__file__).parent.parent.parent
-        / "dev"
-        / "meta-rayban-display-simulator"
-        / "index.html"
+        Path(__file__).parent.parent.parent / "dev" / "meta-rayban-display-simulator" / "index.html"
     )
     if not simulator_path.exists():
         raise HTTPException(
@@ -2812,7 +2814,9 @@ async def dev_send_peer_chat(
     transport = get_peer_transport()
     local_identity = getattr(transport, "get_local_identity", lambda: None)()
     sender_peer_id = getattr(local_identity, "peer_id", None) or "local-dev-peer"
-    conversation_id = request.conversation_id or build_conversation_id(request.peer_id, sender_peer_id)
+    conversation_id = request.conversation_id or build_conversation_id(
+        request.peer_id, sender_peer_id
+    )
     timestamp_ms = int(datetime.now(UTC).timestamp() * 1000)
     task_snapshot = None
     task_snapshot_data = None
@@ -3271,9 +3275,7 @@ async def submit_command(
 
             # Get OCR provider and extract text
             ocr_provider = get_ocr_provider()
-            text = ocr_provider.extract_text(
-                image_data, request.input.content_type or "image/jpeg"
-            )
+            text = ocr_provider.extract_text(image_data, request.input.content_type or "image/jpeg")
 
             log_info(
                 logger,
@@ -3549,7 +3551,7 @@ async def submit_command(
                     }
                 }
             },
-        }
+        },
     },
 )
 async def submit_action_command(
@@ -3636,7 +3638,9 @@ async def submit_action_command(
         from handsfree.db.notifications import build_notification_card, get_notification
 
         db = get_db()
-        notification = get_notification(db, user_id=user_id, notification_id=notification_id.strip())
+        notification = get_notification(
+            db, user_id=user_id, notification_id=notification_id.strip()
+        )
         if notification is None:
             clear_request_id()
             raise HTTPException(
@@ -4030,7 +4034,7 @@ def _convert_router_response_to_command_response(
                     }
                 }
             },
-        }
+        },
     },
 )
 async def confirm_command(
@@ -4091,7 +4095,7 @@ async def confirm_command(
                 issue_num = entities.get("issue_number")
                 pr_num = entities.get("pr_number")
                 provider = entities.get("provider")
-                
+
                 # Check if agent service is available (requires DB connection)
                 if not db:
                     response = CommandResponse(
@@ -4105,9 +4109,9 @@ async def confirm_command(
                     )
                 else:
                     from handsfree.agents.service import AgentService
-                    
+
                     agent_service = AgentService(db)
-                    
+
                     target_type = None
                     target_ref = None
                     if issue_num:
@@ -4116,7 +4120,7 @@ async def confirm_command(
                     elif pr_num:
                         target_type = "pr"
                         target_ref = f"#{pr_num}"
-                    
+
                     # Build trace with confirmation metadata
                     trace = {
                         "intent_name": intent_name,
@@ -4124,7 +4128,7 @@ async def confirm_command(
                         "confirmed_at": datetime.now(UTC).isoformat(),
                         "via_router_token": True,
                     }
-                    
+
                     try:
                         # Create and start the agent task
                         result = agent_service.delegate(
@@ -4135,9 +4139,9 @@ async def confirm_command(
                             target_ref=target_ref,
                             trace=trace,
                         )
-                        
+
                         spoken_text = result.get("spoken_text", "Agent task created.")
-                        
+
                         # Write audit log
                         task_id = result.get("task_id")
                         write_action_log(
@@ -4156,7 +4160,7 @@ async def confirm_command(
                             },
                             idempotency_key=request.idempotency_key,
                         )
-                        
+
                         response = CommandResponse(
                             status=CommandStatus.OK,
                             intent=ParsedIntent(
@@ -4176,7 +4180,7 @@ async def confirm_command(
                         raise
                     except Exception as e:
                         logger.error("Failed to delegate to agent: %s", e)
-                        
+
                         write_action_log(
                             db,
                             user_id=user_id,
@@ -4192,7 +4196,7 @@ async def confirm_command(
                             },
                             idempotency_key=request.idempotency_key,
                         )
-                        
+
                         response = CommandResponse(
                             status=CommandStatus.ERROR,
                             intent=ParsedIntent(
@@ -4202,7 +4206,7 @@ async def confirm_command(
                             ),
                             spoken_text=f"Failed to create agent task: {str(e)}",
                         )
-            
+
             else:
                 # Unknown intent from router - log for debugging
                 write_action_log(
@@ -4220,7 +4224,7 @@ async def confirm_command(
                     },
                     idempotency_key=request.idempotency_key,
                 )
-                
+
                 response = CommandResponse(
                     status=CommandStatus.ERROR,
                     intent=ParsedIntent(
@@ -4398,11 +4402,11 @@ async def get_inbox(
     """Get attention items (PRs, mentions, failing checks)."""
     # Use ProfileConfig for profile-aware filtering and truncation
     profile_config = ProfileConfig.for_profile(profile or Profile.DEFAULT)
-    
+
     # Use a placeholder; live mode resolves the authenticated login.
     # In fixture mode, username doesn't matter because fixtures are static.
     user = "me"
-    
+
     # Call the inbox handler to get rich items with checks summary
     try:
         result = handle_inbox_list(
@@ -4412,7 +4416,7 @@ async def get_inbox(
             profile_config=profile_config,
             user_id=user_id,
         )
-        
+
         # Convert handler items to InboxItem format
         items = []
         for item_data in result.get("items", []):
@@ -4428,17 +4432,17 @@ async def get_inbox(
                 checks_pending=item_data.get("checks_pending"),
             )
             items.append(item)
-        
+
     except Exception as e:
         logger.error("Failed to fetch inbox via handler: %s", str(e))
         # Fall back to fixture items on error
         items = _get_fixture_inbox_items()
-    
+
     # Apply profile-based filtering
     # During workout, only show high priority items for focused attention
     if profile == Profile.WORKOUT:
         items = [item for item in items if item.priority >= 4]
-    
+
     return InboxResponse(items=items)
 
 
@@ -5510,7 +5514,7 @@ def _emit_webhook_notification(normalized: dict[str, Any], raw_payload: dict[str
             },
         },
     },
-) 
+)
 async def get_notifications(
     user_id: CurrentUser,
     x_user_id_raw: str | None = Header(default=None, alias="X-User-ID"),
@@ -5633,9 +5637,6 @@ async def text_to_speech(request: TTSRequest) -> Response:
                 "message": "Failed to synthesize speech",
             },
         ) from e
-
-
-
 
 
 @app.exception_handler(HTTPException)
@@ -6484,13 +6485,15 @@ async def delete_notification_subscription(
             "content": {
                 "application/json": {
                     "examples": {
-                        "notification_not_found": NOTIFICATION_ERROR_EXAMPLES["notification_not_found"],
+                        "notification_not_found": NOTIFICATION_ERROR_EXAMPLES[
+                            "notification_not_found"
+                        ],
                     }
                 }
             },
         },
     },
-) 
+)
 async def get_notification_detail(
     notification_id: str,
     user_id: CurrentUser,
@@ -6666,8 +6669,7 @@ async def list_agent_tasks(
 
     # Format response
     task_list = [
-        _apply_task_result_view(_serialize_agent_task(task), result_view)
-        for task in tasks
+        _apply_task_result_view(_serialize_agent_task(task), result_view) for task in tasks
     ]
 
     return JSONResponse(
@@ -6755,6 +6757,8 @@ async def get_agent_task_detail(
         task_data["result"] = normalized_result
 
     return JSONResponse(status_code=status.HTTP_200_OK, content=task_data)
+
+
 @app.post("/v1/agents/tasks/{task_id}/media")
 async def attach_agent_task_media(
     task_id: str,
@@ -7459,7 +7463,9 @@ async def get_ai_backend_policy_report(
             "created_at": latest_snapshot.created_at,
             "age_seconds": max(
                 0,
-                int((datetime.now(UTC) - latest_snapshot.created_at.astimezone(UTC)).total_seconds()),
+                int(
+                    (datetime.now(UTC) - latest_snapshot.created_at.astimezone(UTC)).total_seconds()
+                ),
             ),
         }
     report.snapshot_summary = build_snapshot_summary(

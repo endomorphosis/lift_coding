@@ -51,9 +51,7 @@ def parse_board(text: str) -> list[Task]:
         elif line.startswith("- Depends on:"):
             deps = line.split(":", 1)[1].strip()
             cur.depends = [
-                d.strip()
-                for d in deps.split(",")
-                if d.strip() and d.strip().lower() != "none"
+                d.strip() for d in deps.split(",") if d.strip() and d.strip().lower() != "none"
             ]
         elif line.startswith("- Validation:"):
             cur.validation = line.split(":", 1)[1].strip()

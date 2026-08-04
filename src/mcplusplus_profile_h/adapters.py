@@ -29,8 +29,12 @@ class SettlementResult:
 
 
 class VerifierFacilitator(Protocol):
-    async def verify(self, payload: Mapping[str, Any], requirement: PaymentRequirement) -> VerificationResult: ...
-    async def settle(self, payload: Mapping[str, Any], requirement: PaymentRequirement) -> SettlementResult: ...
+    async def verify(
+        self, payload: Mapping[str, Any], requirement: PaymentRequirement
+    ) -> VerificationResult: ...
+    async def settle(
+        self, payload: Mapping[str, Any], requirement: PaymentRequirement
+    ) -> SettlementResult: ...
     async def lookup(self, payment_commitment: str) -> SettlementResult | None: ...
     async def health(self) -> bool: ...
 
@@ -44,10 +48,16 @@ class CallbackFacilitator:
 
     def __init__(
         self,
-        verify: Callable[[Mapping[str, Any], PaymentRequirement], VerificationResult | Awaitable[VerificationResult]],
-        settle: Callable[[Mapping[str, Any], PaymentRequirement], SettlementResult | Awaitable[SettlementResult]],
+        verify: Callable[
+            [Mapping[str, Any], PaymentRequirement],
+            VerificationResult | Awaitable[VerificationResult],
+        ],
+        settle: Callable[
+            [Mapping[str, Any], PaymentRequirement], SettlementResult | Awaitable[SettlementResult]
+        ],
         *,
-        lookup: Callable[[str], SettlementResult | None | Awaitable[SettlementResult | None]] | None = None,
+        lookup: Callable[[str], SettlementResult | None | Awaitable[SettlementResult | None]]
+        | None = None,
         health: Callable[[], bool | Awaitable[bool]] | None = None,
     ) -> None:
         self._verify = verify
@@ -55,24 +65,32 @@ class CallbackFacilitator:
         self._lookup = lookup
         self._health = health
 
-    async def verify(self, payload: Mapping[str, Any], requirement: PaymentRequirement) -> VerificationResult:
+    async def verify(
+        self, payload: Mapping[str, Any], requirement: PaymentRequirement
+    ) -> VerificationResult:
         try:
             result = await _await(self._verify(payload, requirement))
         except ProfileHError:
             raise
         except Exception as exc:
-            raise ProfileHError(FACILITATOR_UNAVAILABLE, "payment verifier unavailable", retryable=True) from exc
+            raise ProfileHError(
+                FACILITATOR_UNAVAILABLE, "payment verifier unavailable", retryable=True
+            ) from exc
         if not isinstance(result, VerificationResult):
             raise TypeError("verify callback must return VerificationResult")
         return result
 
-    async def settle(self, payload: Mapping[str, Any], requirement: PaymentRequirement) -> SettlementResult:
+    async def settle(
+        self, payload: Mapping[str, Any], requirement: PaymentRequirement
+    ) -> SettlementResult:
         try:
             result = await _await(self._settle(payload, requirement))
         except ProfileHError:
             raise
         except Exception as exc:
-            raise ProfileHError(FACILITATOR_UNAVAILABLE, "payment facilitator unavailable", retryable=True) from exc
+            raise ProfileHError(
+                FACILITATOR_UNAVAILABLE, "payment facilitator unavailable", retryable=True
+            ) from exc
         if not isinstance(result, SettlementResult):
             raise TypeError("settle callback must return SettlementResult")
         return result
@@ -109,28 +127,41 @@ class X402SDKAdapter:
             return value.dict()
         raise TypeError("unsupported x402 SDK response")
 
-    async def verify(self, payload: Mapping[str, Any], requirement: PaymentRequirement) -> VerificationResult:
+    async def verify(
+        self, payload: Mapping[str, Any], requirement: PaymentRequirement
+    ) -> VerificationResult:
         try:
             raw = await _await(self.client.verify(dict(payload), requirement.wire()))
             value = self._mapping(raw)
         except Exception as exc:
-            raise ProfileHError(FACILITATOR_UNAVAILABLE, "payment verifier unavailable", retryable=True) from exc
+            raise ProfileHError(
+                FACILITATOR_UNAVAILABLE, "payment verifier unavailable", retryable=True
+            ) from exc
         valid = bool(value.get("isValid", value.get("valid", value.get("success", False))))
         reason = str(value.get("invalidReason", value.get("reason", "")))
-        return VerificationResult(valid, reason or ("H_PAYMENT_VERIFIED" if valid else VERIFICATION_FAILED), self.verifier_did)
+        return VerificationResult(
+            valid,
+            reason or ("H_PAYMENT_VERIFIED" if valid else VERIFICATION_FAILED),
+            self.verifier_did,
+        )
 
-    async def settle(self, payload: Mapping[str, Any], requirement: PaymentRequirement) -> SettlementResult:
+    async def settle(
+        self, payload: Mapping[str, Any], requirement: PaymentRequirement
+    ) -> SettlementResult:
         try:
             raw = await _await(self.client.settle(dict(payload), requirement.wire()))
             value = self._mapping(raw)
         except Exception as exc:
-            raise ProfileHError(FACILITATOR_UNAVAILABLE, "payment facilitator unavailable", retryable=True) from exc
+            raise ProfileHError(
+                FACILITATOR_UNAVAILABLE, "payment facilitator unavailable", retryable=True
+            ) from exc
         success = bool(value.get("success", False))
         return SettlementResult(
             success,
             str(value.get("network", requirement.network)),
             str(value["transaction"]) if value.get("transaction") else None,
-            str(value.get("errorReason", "")) or ("H_PAYMENT_SETTLED" if success else SETTLEMENT_FAILED),
+            str(value.get("errorReason", ""))
+            or ("H_PAYMENT_SETTLED" if success else SETTLEMENT_FAILED),
         )
 
     async def lookup(self, payment_commitment: str) -> SettlementResult | None:
@@ -141,7 +172,12 @@ class X402SDKAdapter:
         if raw is None:
             return None
         value = self._mapping(raw)
-        return SettlementResult(bool(value.get("success")), str(value.get("network", "unknown:unknown")), value.get("transaction"), str(value.get("errorReason", "")))
+        return SettlementResult(
+            bool(value.get("success")),
+            str(value.get("network", "unknown:unknown")),
+            value.get("transaction"),
+            str(value.get("errorReason", "")),
+        )
 
     async def health(self) -> bool:
         method = getattr(self.client, "health", None)

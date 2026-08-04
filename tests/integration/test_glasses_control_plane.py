@@ -26,6 +26,7 @@ SWISSKNIFE = REPO_ROOT / "swissknife"
 # Helpers - Parse TypeScript source to verify behavior contracts
 # ---------------------------------------------------------------------------
 
+
 def read_ts(relative_path: str) -> str:
     path = SWISSKNIFE / relative_path
     if not path.exists():
@@ -37,6 +38,7 @@ def read_ts(relative_path: str) -> str:
 # Test Suite 1: Control Plane State Machine
 # ===========================================================================
 
+
 class TestGlassesControlPlane:
     """Verify the GlassesAppControlPlane state machine."""
 
@@ -46,21 +48,38 @@ class TestGlassesControlPlane:
 
     def test_registry_has_all_apps(self, source):
         """All 9+ apps must be in GLASSES_APP_REGISTRY."""
-        required_apps = ['terminal', 'ai-chat', 'file-manager', 'settings',
-                         'code-editor', 'task-manager', 'model-browser',
-                         'idl-explorer', 'glasses-preview']
+        required_apps = [
+            "terminal",
+            "ai-chat",
+            "file-manager",
+            "settings",
+            "code-editor",
+            "task-manager",
+            "model-browser",
+            "idl-explorer",
+            "glasses-preview",
+        ]
         for app in required_apps:
             assert f"id: '{app}'" in source, f"Missing app in registry: {app}"
 
     def test_all_apps_have_display_profile(self, source):
         """Each app must have a display variable defined."""
-        displays = re.findall(r'export const (\w+GlassesDisplay)', source)
+        displays = re.findall(r"export const (\w+GlassesDisplay)", source)
         assert len(displays) >= 9, f"Expected >= 9 display profiles, got {len(displays)}"
 
     def test_control_plane_class_methods(self, source):
         """Control plane must have all lifecycle methods."""
-        methods = ['listApps', 'openApp', 'goBack', 'focusNext', 'focusPrevious',
-                   'activate', 'getCurrentDisplay', 'registerApp', 'getState']
+        methods = [
+            "listApps",
+            "openApp",
+            "goBack",
+            "focusNext",
+            "focusPrevious",
+            "activate",
+            "getCurrentDisplay",
+            "registerApp",
+            "getState",
+        ]
         for method in methods:
             assert f"{method}(" in source, f"Missing method: {method}"
 
@@ -93,6 +112,7 @@ class TestGlassesControlPlane:
 # Test Suite 2: Voice Intent Recognition
 # ===========================================================================
 
+
 class TestVoiceIntentRecognition:
     """Verify voice intent patterns and routing."""
 
@@ -102,22 +122,44 @@ class TestVoiceIntentRecognition:
 
     def test_all_intent_patterns_defined(self, source):
         """Must have patterns for all core intents."""
-        intents = ['app.open', 'app.back', 'focus.next', 'focus.previous',
-                   'action.activate', 'search.semantic', 'generate.text']
+        intents = [
+            "app.open",
+            "app.back",
+            "focus.next",
+            "focus.previous",
+            "action.activate",
+            "search.semantic",
+            "generate.text",
+        ]
         for intent in intents:
             assert f"'{intent}'" in source, f"Missing intent: {intent}"
 
     def test_app_aliases_comprehensive(self, source):
         """Must have aliases for all apps."""
-        aliases = ['terminal', 'console', 'shell', 'chat', 'ai', 'files',
-                   'editor', 'code', 'settings', 'tasks', 'models',
-                   'ipfs', 'datasets', 'accelerate', 'gpu', 'glasses']
+        aliases = [
+            "terminal",
+            "console",
+            "shell",
+            "chat",
+            "ai",
+            "files",
+            "editor",
+            "code",
+            "settings",
+            "tasks",
+            "models",
+            "ipfs",
+            "datasets",
+            "accelerate",
+            "gpu",
+            "glasses",
+        ]
         for alias in aliases:
             assert f"'{alias}'" in source, f"Missing voice alias: {alias}"
 
     def test_voice_patterns_are_case_insensitive(self, source):
         """All regex patterns must use /i flag."""
-        patterns = re.findall(r'/([^/]+)/(\w*)', source)
+        patterns = re.findall(r"/([^/]+)/(\w*)", source)
         # TypeScript regex with 'i' flag
         assert source.count("/i,") >= 5 or source.count("/i}") >= 5 or source.count("/i ") >= 5
 
@@ -139,6 +181,7 @@ class TestVoiceIntentRecognition:
 # Test Suite 3: Gesture Dispatch
 # ===========================================================================
 
+
 class TestGestureDispatch:
     """Verify gesture recognition and dispatch."""
 
@@ -148,17 +191,39 @@ class TestGestureDispatch:
 
     def test_all_gesture_types_defined(self, source):
         """Must support all 13 gesture types."""
-        gestures = ['swipe_left', 'swipe_right', 'swipe_up', 'swipe_down',
-                    'tap', 'double_tap', 'long_press', 'pinch_in', 'pinch_out',
-                    'flick_left', 'flick_right', 'head_nod', 'head_shake']
+        gestures = [
+            "swipe_left",
+            "swipe_right",
+            "swipe_up",
+            "swipe_down",
+            "tap",
+            "double_tap",
+            "long_press",
+            "pinch_in",
+            "pinch_out",
+            "flick_left",
+            "flick_right",
+            "head_nod",
+            "head_shake",
+        ]
         for g in gestures:
             assert f"'{g}'" in source, f"Missing gesture type: {g}"
 
     def test_gesture_bindings_map_to_actions(self, source):
         """Each gesture must map to a control plane action."""
-        actions = ['goBack', 'focusNext', 'focusPrevious', 'activate',
-                   'scrollUp', 'scrollDown', 'openAppSwitcher',
-                   'expandDetail', 'collapseDetail', 'confirm', 'dismiss']
+        actions = [
+            "goBack",
+            "focusNext",
+            "focusPrevious",
+            "activate",
+            "scrollUp",
+            "scrollDown",
+            "openAppSwitcher",
+            "expandDetail",
+            "collapseDetail",
+            "confirm",
+            "dismiss",
+        ]
         for action in actions:
             assert f"'{action}'" in source, f"Missing gesture action: {action}"
 
@@ -182,6 +247,7 @@ class TestGestureDispatch:
 # Test Suite 4: ORB Bridge
 # ===========================================================================
 
+
 class TestORBBridge:
     """Verify ORB invoke bridge endpoint resolution."""
 
@@ -191,20 +257,48 @@ class TestORBBridge:
 
     def test_all_endpoints_mapped(self, source):
         """Must map all IPFS methods to endpoints."""
-        endpoints = ['/add', '/cat', '/pin', '/unpin', '/list_pins', '/stat',
-                     '/resolve', '/dag/get', '/dag/put', '/name/publish',
-                     '/name/resolve', '/embed', '/generate', '/list_datasets',
-                     '/search/semantic', '/vector/search', '/capabilities',
-                     '/hardware_profile', '/inference', '/metrics', '/endpoints',
-                     '/scrape/url', '/workflow/execute']
+        endpoints = [
+            "/add",
+            "/cat",
+            "/pin",
+            "/unpin",
+            "/list_pins",
+            "/stat",
+            "/resolve",
+            "/dag/get",
+            "/dag/put",
+            "/name/publish",
+            "/name/resolve",
+            "/embed",
+            "/generate",
+            "/list_datasets",
+            "/search/semantic",
+            "/vector/search",
+            "/capabilities",
+            "/hardware_profile",
+            "/inference",
+            "/metrics",
+            "/endpoints",
+            "/scrape/url",
+            "/workflow/execute",
+        ]
         for ep in endpoints:
             assert f"'{ep}'" in source, f"Missing ORB endpoint mapping: {ep}"
 
     def test_get_vs_post_distinction(self, source):
         """Must correctly identify GET vs POST methods."""
         # These should be GET
-        get_methods = ['cat', 'list_pins', 'stat', 'resolve', 'capabilities',
-                       'hardware_profile', 'metrics', 'endpoints', 'list_datasets']
+        get_methods = [
+            "cat",
+            "list_pins",
+            "stat",
+            "resolve",
+            "capabilities",
+            "hardware_profile",
+            "metrics",
+            "endpoints",
+            "list_datasets",
+        ]
         assert "getMethods" in source or "GET" in source
         for method in get_methods:
             assert f"'{method}'" in source
@@ -227,6 +321,7 @@ class TestORBBridge:
 # Test Suite 5: Notification Pipeline
 # ===========================================================================
 
+
 class TestNotificationPipeline:
     """Verify the priority notification queue."""
 
@@ -236,7 +331,7 @@ class TestNotificationPipeline:
 
     def test_priority_levels_defined(self, source):
         """Must support 4 priority levels."""
-        priorities = ['critical', 'high', 'normal', 'low']
+        priorities = ["critical", "high", "normal", "low"]
         for p in priorities:
             assert f"'{p}'" in source, f"Missing priority: {p}"
 
@@ -257,7 +352,7 @@ class TestNotificationPipeline:
 
     def test_display_modes(self, source):
         """Must support multiple display modes."""
-        modes = ['banner', 'toast', 'badge', 'audio_only']
+        modes = ["banner", "toast", "badge", "audio_only"]
         for mode in modes:
             assert f"'{mode}'" in source, f"Missing display mode: {mode}"
 
@@ -265,6 +360,7 @@ class TestNotificationPipeline:
 # ===========================================================================
 # Test Suite 6: State Synchronization
 # ===========================================================================
+
 
 class TestStateSynchronization:
     """Verify reactive state sync between apps and display."""
@@ -296,6 +392,7 @@ class TestStateSynchronization:
 # ===========================================================================
 # Test Suite 7: Widget Descriptor Validation
 # ===========================================================================
+
 
 class TestWidgetDescriptorValidation:
     """Verify glasses widget descriptors pass validation."""
@@ -354,6 +451,7 @@ class TestWidgetDescriptorValidation:
 # Test Suite 8: Display Constraints
 # ===========================================================================
 
+
 class TestDisplayConstraints:
     """Verify display constraints are within safe limits."""
 
@@ -363,25 +461,28 @@ class TestDisplayConstraints:
 
     def test_max_update_hz_within_limit(self, source):
         """max_update_hz must not exceed 5 (META_GLASSES_MAX_SAFE_UPDATE_HZ)."""
-        hz_values = re.findall(r'max_update_hz:\s*(\d+)', source)
+        hz_values = re.findall(r"max_update_hz:\s*(\d+)", source)
         for hz in hz_values:
             assert int(hz) <= 5, f"max_update_hz {hz} exceeds safe limit of 5"
 
     def test_max_text_blocks_within_limit(self, source):
         """max_text_blocks must be reasonable (<=6)."""
-        text_values = re.findall(r'max_text_blocks:\s*(\d+)', source)
+        text_values = re.findall(r"max_text_blocks:\s*(\d+)", source)
         for v in text_values:
             assert int(v) <= 6, f"max_text_blocks {v} too high"
 
     def test_max_actions_within_limit(self, source):
         """max_actions must be <= 3 (constrained display)."""
-        action_values = re.findall(r'max_actions:\s*(\d+)', source)
+        action_values = re.findall(r"max_actions:\s*(\d+)", source)
         for v in action_values:
             assert int(v) <= 3, f"max_actions {v} too high for glasses display"
 
     def test_regions_within_viewport(self, source):
         """All region bounds must fit within 600x600 viewport."""
-        bounds = re.findall(r'bounds:\s*\{\s*x:\s*(\d+),\s*y:\s*(\d+),\s*width:\s*(\d+),\s*height:\s*(\d+)\s*\}', source)
+        bounds = re.findall(
+            r"bounds:\s*\{\s*x:\s*(\d+),\s*y:\s*(\d+),\s*width:\s*(\d+),\s*height:\s*(\d+)\s*\}",
+            source,
+        )
         for x, y, w, h in bounds:
             assert int(x) + int(w) <= 600, f"Region exceeds viewport width: x={x} w={w}"
             assert int(y) + int(h) <= 600, f"Region exceeds viewport height: y={y} h={h}"
@@ -394,6 +495,7 @@ class TestDisplayConstraints:
 # ===========================================================================
 # Test Suite 9: IDL Profile Integration
 # ===========================================================================
+
 
 class TestIDLProfileIntegration:
     """Verify IDL descriptors are compatible with glasses widget generation."""
@@ -408,7 +510,7 @@ class TestIDLProfileIntegration:
 
     def test_all_idl_descriptors_have_methods(self, idl_source):
         """Every descriptor must have methods array."""
-        descriptors = re.findall(r'export const (\w+Descriptor)', idl_source)
+        descriptors = re.findall(r"export const (\w+Descriptor)", idl_source)
         assert len(descriptors) >= 3
         for desc in descriptors:
             assert desc in idl_source
@@ -423,9 +525,9 @@ class TestIDLProfileIntegration:
     def test_ui_profiles_have_templates(self, ui_profiles_source):
         """UI profiles must define primary_template."""
         templates = re.findall(r"primary_template:\s*'([^']+)'", ui_profiles_source)
-        assert 'explorer' in templates
-        assert 'dashboard' in templates
-        assert 'job-console' in templates
+        assert "explorer" in templates
+        assert "dashboard" in templates
+        assert "job-console" in templates
 
     def test_ui_profiles_have_workflow_graphs(self, ui_profiles_source):
         """At least 2 profiles must have workflow_graph."""
@@ -441,6 +543,7 @@ class TestIDLProfileIntegration:
 # ===========================================================================
 # Test Suite 10: Mobile Deployment Readiness
 # ===========================================================================
+
 
 class TestMobileDeploymentReadiness:
     """Verify the system is ready for iPhone/Meta Glasses deployment."""
@@ -492,15 +595,17 @@ class TestMobileDeploymentReadiness:
         """Action method names must map to known backend endpoints."""
         cp = read_ts("src/services/glasses-app-control-plane.ts")
         enhanced = read_ts("src/services/glasses-enhanced-control-plane.ts")
-        
+
         # Extract method names from action bindings
         methods = set(re.findall(r"method:\s*'([^']+)'", cp))
-        
+
         # Verify endpoint resolver covers them
         endpoints = re.findall(r"'([^']+)':\s*'/[^']*'", enhanced)
         endpoint_methods = set(endpoints)
-        
+
         # Core IPFS methods should be in the resolver
-        core_methods = {'add', 'cat', 'pin', 'list_pins', 'stat', 'inference', 'metrics'}
+        core_methods = {"add", "cat", "pin", "list_pins", "stat", "inference", "metrics"}
         for m in core_methods:
-            assert m in endpoint_methods or m in enhanced, f"Method '{m}' not resolved in ORB bridge"
+            assert m in endpoint_methods or m in enhanced, (
+                f"Method '{m}' not resolved in ORB bridge"
+            )

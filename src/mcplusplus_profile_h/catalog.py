@@ -107,7 +107,9 @@ class PaidCapability:
 class CapabilityCatalog:
     """A versioned snapshot. Duplicate operation identities are rejected."""
 
-    def __init__(self, capabilities: tuple[PaidCapability, ...] | list[PaidCapability], *, version: str = "1") -> None:
+    def __init__(
+        self, capabilities: tuple[PaidCapability, ...] | list[PaidCapability], *, version: str = "1"
+    ) -> None:
         ordered = sorted(capabilities, key=lambda item: item.operation.key)
         by_key = {item.operation.key: item for item in ordered}
         if len(by_key) != len(ordered):
@@ -115,7 +117,9 @@ class CapabilityCatalog:
         self.version = version
         self._items = tuple(ordered)
         self._by_key = MappingProxyType(by_key)
-        self.cid = cid_for({"version": version, "capabilities": [self._public(item) for item in ordered]})
+        self.cid = cid_for(
+            {"version": version, "capabilities": [self._public(item) for item in ordered]}
+        )
 
     @staticmethod
     def _public(item: PaidCapability) -> dict[str, Any]:
@@ -132,7 +136,11 @@ class CapabilityCatalog:
         return self._by_key.get(Operation.parse(operation).key)
 
     def public_document(self) -> dict[str, Any]:
-        return {"version": self.version, "catalogCid": self.cid, "capabilities": [self._public(i) for i in self._items]}
+        return {
+            "version": self.version,
+            "catalogCid": self.cid,
+            "capabilities": [self._public(i) for i in self._items],
+        }
 
 
 @dataclass(frozen=True, slots=True)
@@ -181,17 +189,23 @@ class PaymentPolicyEngine:
         if not context.authorized or not context.policy_allowed:
             return PaymentDecision(Decision.DENIED, op, "H_PAYMENT_POLICY_DENIED", capability)
         if capability is None:
-            reason = "H_FREE_OPERATION" if self.unlisted == Decision.FREE else "H_PAYMENT_POLICY_DENIED"
+            reason = (
+                "H_FREE_OPERATION" if self.unlisted == Decision.FREE else "H_PAYMENT_POLICY_DENIED"
+            )
             return PaymentDecision(self.unlisted, op, reason)
         if not capability.enabled:
             return PaymentDecision(Decision.DENIED, op, "H_PAYMENT_POLICY_DENIED", capability)
         if capability.free:
             return PaymentDecision(Decision.FREE, op, "H_FREE_OPERATION", capability)
         if not self.enabled or self.emergency_pause:
-            return PaymentDecision(Decision.UNAVAILABLE, op, "H_FACILITATOR_UNAVAILABLE", capability)
+            return PaymentDecision(
+                Decision.UNAVAILABLE, op, "H_FACILITATOR_UNAVAILABLE", capability
+            )
         evidence = self.paid_lookup(context, capability) if self.paid_lookup else None
         if evidence:
-            return PaymentDecision(Decision.PAID, op, "H_PAYMENT_SATISFIED", capability, evidence_cid=evidence)
+            return PaymentDecision(
+                Decision.PAID, op, "H_PAYMENT_SATISFIED", capability, evidence_cid=evidence
+            )
         return PaymentDecision(
             Decision.PAYMENT_REQUIRED,
             op,

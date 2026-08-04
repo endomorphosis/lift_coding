@@ -217,9 +217,7 @@ def discover_meta_wearables_dat_android_display_contract(
                 f"{required_symbol}"
             )
 
-    permissions_registration_source = permissions_registration_doc_path.read_text(
-        encoding="utf-8"
-    )
+    permissions_registration_source = permissions_registration_doc_path.read_text(encoding="utf-8")
     for required_symbol in (
         "Wearables.startRegistration",
         "checkPermissionStatus",
@@ -313,9 +311,7 @@ def build_swissknife_meta_wearables_dat_android_handoff(
     payload: bytes | str | dict[str, Any] | None = None,
 ) -> SwissKnifeMetaWearablesDATAndroidHandoff:
     """Build a deterministic ``external/meta-wearables-dat-android`` to SwissKnife handoff receipt."""
-    contract = discover_meta_wearables_dat_android_display_contract(
-        meta_wearables_dat_android_root
-    )
+    contract = discover_meta_wearables_dat_android_display_contract(meta_wearables_dat_android_root)
 
     payload_bytes = _payload_to_bytes(
         payload

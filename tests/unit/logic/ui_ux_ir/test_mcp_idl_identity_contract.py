@@ -15,12 +15,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[4]
 _DATASETS_ROOT = _REPO_ROOT / "external" / "ipfs_datasets"
 _ACCELERATE_ROOT = _REPO_ROOT / "external" / "ipfs_accelerate"
 _SUITE_PATH = (
-    _DATASETS_ROOT
-    / "tests"
-    / "unit"
-    / "logic"
-    / "ui_ux_ir"
-    / "test_mcp_idl_identity_contract.py"
+    _DATASETS_ROOT / "tests" / "unit" / "logic" / "ui_ux_ir" / "test_mcp_idl_identity_contract.py"
 )
 
 for _path in (_DATASETS_ROOT, _ACCELERATE_ROOT):

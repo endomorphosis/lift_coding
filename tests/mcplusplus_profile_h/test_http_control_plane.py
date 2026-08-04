@@ -5,7 +5,14 @@ from __future__ import annotations
 import pytest
 
 from mcplusplus_profile_h.http import ProfileHHttpApp
-from mcplusplus_profile_h.interop import CASES, FIXED_NOW_MS, MockFacilitator, _authorization, _context, build_service
+from mcplusplus_profile_h.interop import (
+    CASES,
+    FIXED_NOW_MS,
+    MockFacilitator,
+    _authorization,
+    _context,
+    build_service,
+)
 
 
 def _request_context(context):
@@ -50,12 +57,16 @@ async def test_profile_h_http_control_lifecycle_is_durable_and_non_executing(tmp
 
     payment_context = _authorization(quote["paymentRequired"], quote["quote"])
     payment_request = {**quote_request, "paymentContext": payment_context}
-    status, _headers, verification = await app.handle("POST", "/mcp/payments/verify", payload=payment_request)
+    status, _headers, verification = await app.handle(
+        "POST", "/mcp/payments/verify", payload=payment_request
+    )
     assert status == 200
     assert verification["decision"] == "paid"
     assert service.runtime.ledger.get(context.idempotency_key).state == "verified"
 
-    status, _headers, settlement = await app.handle("POST", "/mcp/payments/settle", payload=payment_request)
+    status, _headers, settlement = await app.handle(
+        "POST", "/mcp/payments/settle", payload=payment_request
+    )
     assert status == 200
     assert settlement["decision"] == "paid"
     # Control-plane settlement deliberately stops before the protected callback.
@@ -63,7 +74,7 @@ async def test_profile_h_http_control_lifecycle_is_durable_and_non_executing(tmp
 
     status, _headers, receipt = await app.handle(
         "GET",
-        f'/mcp/payments/receipts/{settlement["receiptCid"]}',
+        f"/mcp/payments/receipts/{settlement['receiptCid']}",
         # Dataset requests derive a canonical commercial request CID from the
         # caller CID and protected query commitment. The quote publishes that
         # CID, so later evidence lookups do not need to expose query content.

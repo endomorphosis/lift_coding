@@ -13,7 +13,12 @@ def test_operations_gate_covers_all_failure_stages_and_restore(tmp_path):
     report = run_operations_gate(state_dir=tmp_path)
     assert report["decision"] == "pass"
     assert report["observability"]["failureStages"] == [
-        "quote", "verify", "settlement", "entitlement", "access", "execution"
+        "quote",
+        "verify",
+        "settlement",
+        "entitlement",
+        "access",
+        "execution",
     ]
     assert report["killSwitches"]["recoveryAvailableWhilePaused"] is True
     assert report["incidentRecovery"]["idempotencyReplayFenced"] is True
@@ -53,4 +58,3 @@ def test_health_probes_collapse_dependency_exceptions(tmp_path):
     result = asyncio.run(facilitator_health_probe(facilitator))
     assert result["ready"] is False
     assert "detail" not in result and "error" not in result
-

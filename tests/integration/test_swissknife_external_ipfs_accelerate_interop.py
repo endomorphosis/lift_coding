@@ -213,9 +213,7 @@ def test_discover_ipfs_accelerate_duckdb_contract_finds_time_series_tables() -> 
     assert {"check_schema", "get_all_tables", "get_performance_results"}.issubset(
         set(contract.check_schema_functions)
     )
-    assert contract.time_series_schema_path.endswith(
-        "data/duckdb/db_schema/time_series_schema.sql"
-    )
+    assert contract.time_series_schema_path.endswith("data/duckdb/db_schema/time_series_schema.sql")
     assert contract.benchmark_schema_script_path.endswith(
         "data/duckdb/scripts/create_benchmark_schema.py"
     )

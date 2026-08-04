@@ -214,7 +214,9 @@ def discover_ipfs_kit_mcp_schema_contract(root: str | Path) -> IPFSKitMCPSchemaC
 
     dag_pb_proto_source = dag_pb_proto_path.read_text(encoding="utf-8")
     discovered_dag_pb_messages = tuple(
-        sorted(set(re.findall(r"^message\s+([A-Za-z0-9_]+)", dag_pb_proto_source, flags=re.MULTILINE)))
+        sorted(
+            set(re.findall(r"^message\s+([A-Za-z0-9_]+)", dag_pb_proto_source, flags=re.MULTILINE))
+        )
     )
     missing_dag_pb_messages = set(REQUIRED_DAG_PB_MESSAGES) - set(discovered_dag_pb_messages)
     if missing_dag_pb_messages:

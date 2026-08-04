@@ -158,6 +158,4 @@ def test_virtual_ai_os_observability_artifact_ids_are_stable() -> None:
     )
 
     assert first == second
-    assert first["artifact_id"].startswith(
-        "sha256:vai-observability:remote_execution_receipt:"
-    )
+    assert first["artifact_id"].startswith("sha256:vai-observability:remote_execution_receipt:")

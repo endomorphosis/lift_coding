@@ -367,6 +367,7 @@ class TestSessionTokenManagerEdgeCases:
             manager.validate_session("any_token")
 
         mock_redis.delete.assert_not_called()
+
     def test_session_with_empty_metadata(self, session_manager):
         """Test creating a session with empty metadata."""
         session = session_manager.create_session("user-123", "device-456", metadata={})

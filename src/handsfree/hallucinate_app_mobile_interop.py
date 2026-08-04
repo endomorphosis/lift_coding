@@ -140,7 +140,12 @@ def discover_hallucinate_app_search_contract(
     )
     test_interface_path = root_path / "hallucinate_app" / "node" / "views" / "test_interface.html"
     time_series_schema_path = (
-        root_path / "ipfs_accelerate_py" / "data" / "duckdb" / "db_schema" / "time_series_schema.sql"
+        root_path
+        / "ipfs_accelerate_py"
+        / "data"
+        / "duckdb"
+        / "db_schema"
+        / "time_series_schema.sql"
     )
 
     missing = [

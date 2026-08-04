@@ -40,10 +40,7 @@ def main() -> int:
     )
     print(f"reclaimed={len(recovered)}")
     for record in recovered:
-        print(
-            f"  {record.task_id} attempt={record.attempt} "
-            f"state={record.state.value}"
-        )
+        print(f"  {record.task_id} attempt={record.attempt} state={record.state.value}")
     return 0
 
 

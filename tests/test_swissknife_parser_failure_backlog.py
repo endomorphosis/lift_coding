@@ -11,16 +11,11 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/swissknife_parser_failure_backlog.py"
-MANIFEST = (
-    ROOT
-    / "implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json"
-)
+MANIFEST = ROOT / "implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json"
 
 
 def _load_module() -> Any:
-    spec = importlib.util.spec_from_file_location(
-        "swissknife_parser_failure_backlog", SCRIPT
-    )
+    spec = importlib.util.spec_from_file_location("swissknife_parser_failure_backlog", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -254,9 +249,7 @@ def _aggregate_payload() -> dict[str, Any]:
     ]
     gates = []
     for offset, nibble in enumerate("0123456789abcdef"):
-        failure_count = sum(
-            1 for value in range(258) if value % 16 == offset
-        )
+        failure_count = sum(1 for value in range(258) if value % 16 == offset)
         gates.append(
             {
                 "nibble": nibble,

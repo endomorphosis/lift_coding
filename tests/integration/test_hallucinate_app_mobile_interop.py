@@ -114,9 +114,7 @@ def test_discover_hallucinate_app_search_contract_finds_receipt_table() -> None:
         "hallucinate_app/node/dashboard/content_browser/search_interface.js"
     )
     assert contract.test_interface_path.endswith("hallucinate_app/node/views/test_interface.html")
-    assert contract.time_series_schema_path.endswith(
-        "data/duckdb/db_schema/time_series_schema.sql"
-    )
+    assert contract.time_series_schema_path.endswith("data/duckdb/db_schema/time_series_schema.sql")
 
 
 def test_discover_hallucinate_app_search_contract_raises_for_missing_root(tmp_path) -> None:
@@ -164,7 +162,9 @@ def test_mobile_descriptor_exports_hallucinate_app_interop_contract() -> None:
     interface = exports["HALLUCINATE_APP_MOBILE_INTEROP_INTERFACE"]
     descriptor = exports["HALLUCINATE_APP_MOBILE_INTEROP_DESCRIPTOR"]
 
-    assert interface["metadata"]["interface_contract"] == "interface contract hallucinate_app mobile"
+    assert (
+        interface["metadata"]["interface_contract"] == "interface contract hallucinate_app mobile"
+    )
     assert interface["metadata"]["goal_id"] == GOAL_ID
     assert interface["metadata"]["source_surface"] == "hallucinate_app"
     assert interface["metadata"]["target_surface"] == "mobile"
@@ -261,8 +261,7 @@ def test_create_benchmark_schema_records_hallucinate_app_mobile_interop_constant
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
     docs = (REPO_ROOT / "docs/integration/hallucinate_app-mobile.md").read_text(encoding="utf-8")
     discovery = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-09-vai-684-objective-validation-repair.md"
+        REPO_ROOT / "data/virtual_ai_os/discovery/2026-07-09-vai-684-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     heap = (
         REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md"

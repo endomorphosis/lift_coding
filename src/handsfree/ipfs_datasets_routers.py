@@ -225,6 +225,7 @@ class _DatasetsRouterAdapter:
         # Fallback: try tool registry
         try:
             from ipfs_datasets_py.mcp_server.tool_registry import get_tool_registry
+
             registry = get_tool_registry()
             fn = registry.get("list_datasets")
             if callable(fn):
@@ -240,9 +241,7 @@ class _DatasetsRouterAdapter:
         return {"name": name, "status": "not_loaded"}
 
     def search_datasets(self, query: str, **kwargs: Any) -> list[Any]:
-        fn = getattr(self._module, "search_datasets", None) or getattr(
-            self._module, "search", None
-        )
+        fn = getattr(self._module, "search_datasets", None) or getattr(self._module, "search", None)
         if callable(fn):
             return fn(query, **kwargs)
         return []

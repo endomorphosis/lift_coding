@@ -800,9 +800,7 @@ def test_resolve_runtime_value_logs_missing_trio_token(caplog):
     assert _is_running_inside_trio(FakeTrio()) is False
 
     token_records = [
-        record
-        for record in caplog.records
-        if record.name == "handsfree.transport.libp2p_bluetooth"
+        record for record in caplog.records if record.name == "handsfree.transport.libp2p_bluetooth"
     ]
     assert [record.getMessage() for record in token_records] == [
         "No active Trio token while resolving py-libp2p runtime value: "

@@ -60,29 +60,17 @@ PARALLEL = dict(CONFIG["parallelRuntime"])
 PROVIDER_POLICY = dict(CONFIG["providerPolicy"])
 PRIMARY_PROVIDER_POLICY = dict(PROVIDER_POLICY["primary"])
 FALLBACK_PROVIDER_POLICY = dict(PROVIDER_POLICY["fallback"])
-MERGE_RESOLVER_COMMAND_ENV = (
-    "IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND"
-)
+MERGE_RESOLVER_COMMAND_ENV = "IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND"
 PROVIDER_FALLBACK_RUNNER = (
-    ACCEL_ROOT
-    / "ipfs_accelerate_py"
-    / "agent_supervisor"
-    / "provider_fallback_runner.py"
+    ACCEL_ROOT / "ipfs_accelerate_py" / "agent_supervisor" / "provider_fallback_runner.py"
 )
-GROK_CLI_RUNNER = (
-    ACCEL_ROOT
-    / "ipfs_accelerate_py"
-    / "agent_supervisor"
-    / "grok_cli_runner.py"
-)
+GROK_CLI_RUNNER = ACCEL_ROOT / "ipfs_accelerate_py" / "agent_supervisor" / "grok_cli_runner.py"
 
 state_override = os.environ.get(str(CONFIG["stateRootEnvironment"]), "").strip()
 if state_override:
     STATE_ROOT = Path(state_override).expanduser().resolve()
 else:
-    state_base = Path(
-        os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local" / "state"))
-    )
+    state_base = Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local" / "state")))
     STATE_ROOT = (state_base / str(CONFIG["defaultStateRootSuffix"])).resolve()
 
 STATE_DIR = STATE_ROOT / "state"
@@ -99,21 +87,15 @@ LANES = tuple(
         "provider": str(PARALLEL["providers"][index]),
         "primary_provider": (
             "grok"
-            if str(PARALLEL["providers"][index])
-            in GROK_CODEX_PROVIDER_POLICIES
+            if str(PARALLEL["providers"][index]) in GROK_CODEX_PROVIDER_POLICIES
             else str(PARALLEL["providers"][index])
         ),
         "fallback_provider": (
-            "codex"
-            if str(PARALLEL["providers"][index])
-            in GROK_CODEX_PROVIDER_POLICIES
-            else ""
+            "codex" if str(PARALLEL["providers"][index]) in GROK_CODEX_PROVIDER_POLICIES else ""
         ),
         "primary_model": str(PRIMARY_PROVIDER_POLICY["model"]),
         "fallback_model": str(FALLBACK_PROVIDER_POLICY["model"]),
-        "fallback_model_reasoning_effort": str(
-            FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
-        ),
+        "fallback_model_reasoning_effort": str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]),
         "fallback_trigger": str(PROVIDER_POLICY["fallbackTrigger"]),
     }
     for index in range(int(PARALLEL["laneCount"]))
@@ -158,9 +140,7 @@ def _managed_merge_resolver_command() -> str:
         "-m",
         str(FALLBACK_PROVIDER_POLICY["model"]),
         "-c",
-        "model_reasoning_effort=\""
-        + str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"])
-        + "\"",
+        'model_reasoning_effort="' + str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]) + '"',
         "-",
     ]
     command = [
@@ -196,22 +176,12 @@ def _runtime_environment(provider: str | None = None) -> dict[str, str]:
         environment[str(key)] = str(value)
     # Never inherit or configure the generic direct-Codex semantic merge
     # resolver.  The dedicated profile's managed chain wins last.
-    environment[MERGE_RESOLVER_COMMAND_ENV] = (
-        _managed_merge_resolver_command()
-    )
+    environment[MERGE_RESOLVER_COMMAND_ENV] = _managed_merge_resolver_command()
     dependency_state = STATE_ROOT / "dependencies"
-    environment["IPFS_TEST_PROOF_REUSE_NLTK_DATA_DIR"] = str(
-        dependency_state / "nltk-data"
-    )
-    environment["IPFS_TEST_PROOF_REUSE_PROVISION_DIR"] = str(
-        dependency_state / "provisioning"
-    )
-    environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"] = str(
-        PRIMARY_PROVIDER_POLICY["model"]
-    )
-    environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"] = str(
-        FALLBACK_PROVIDER_POLICY["model"]
-    )
+    environment["IPFS_TEST_PROOF_REUSE_NLTK_DATA_DIR"] = str(dependency_state / "nltk-data")
+    environment["IPFS_TEST_PROOF_REUSE_PROVISION_DIR"] = str(dependency_state / "provisioning")
+    environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"] = str(PRIMARY_PROVIDER_POLICY["model"])
+    environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"] = str(FALLBACK_PROVIDER_POLICY["model"])
     environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"] = str(
         FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
     )
@@ -220,10 +190,7 @@ def _runtime_environment(provider: str | None = None) -> dict[str, str]:
     )
     if provider:
         environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"] = provider
-        if (
-            provider == "grok-build"
-            or provider in GROK_CODEX_PROVIDER_POLICIES
-        ):
+        if provider == "grok-build" or provider in GROK_CODEX_PROVIDER_POLICIES:
             grok_binary = shutil.which("grok")
             if grok_binary:
                 environment["IPFS_ACCELERATE_AGENT_GROK_BIN"] = grok_binary
@@ -250,12 +217,9 @@ def _prepare_state_dirs() -> None:
         for lane in LANES:
             (STATE_DIR / lane["name"]).mkdir(parents=True, exist_ok=True)
             (WORKTREE_DIR / lane["name"]).mkdir(parents=True, exist_ok=True)
-            (
-                STATE_DIR
-                / "preflight"
-                / "reconciliation"
-                / lane["name"]
-            ).mkdir(parents=True, exist_ok=True)
+            (STATE_DIR / "preflight" / "reconciliation" / lane["name"]).mkdir(
+                parents=True, exist_ok=True
+            )
     finally:
         os.umask(old_umask)
 
@@ -267,9 +231,7 @@ def _control_lock() -> Iterator[None]:
         try:
             fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError as exc:
-            raise RuntimeError(
-                f"another PTR control operation owns {CONTROL_LOCK}"
-            ) from exc
+            raise RuntimeError(f"another PTR control operation owns {CONTROL_LOCK}") from exc
         yield
 
 
@@ -338,9 +300,7 @@ def _initialize_configured_submodules() -> tuple[str, ...]:
 def _require_isolated_clean_checkout() -> dict[str, object]:
     branch = _git_output("branch", "--show-current")
     if branch != TARGET_BRANCH:
-        raise RuntimeError(
-            f"refusing branch {branch!r}; expected {TARGET_BRANCH!r}"
-        )
+        raise RuntimeError(f"refusing branch {branch!r}; expected {TARGET_BRANCH!r}")
     _initialize_configured_submodules()
     dirty = _git_output("status", "--porcelain=v1", "--untracked-files=all")
     if dirty:
@@ -350,15 +310,9 @@ def _require_isolated_clean_checkout() -> dict[str, object]:
         "status",
         *[str(item) for item in PARALLEL["worktreeSubmodulePaths"]],
     )
-    bad_lines = [
-        line
-        for line in submodule_status.splitlines()
-        if not line or line[0] != " "
-    ]
+    bad_lines = [line for line in submodule_status.splitlines() if not line or line[0] != " "]
     if bad_lines:
-        raise RuntimeError(
-            "submodule gitlinks are not exact/initialized: " + repr(bad_lines)
-        )
+        raise RuntimeError("submodule gitlinks are not exact/initialized: " + repr(bad_lines))
     submodules: dict[str, str] = {}
     for relative in PARALLEL["worktreeSubmodulePaths"]:
         relative_text = str(relative)
@@ -370,9 +324,7 @@ def _require_isolated_clean_checkout() -> dict[str, object]:
             cwd=submodule_root,
         )
         if submodule_dirty:
-            raise RuntimeError(
-                f"refusing dirty submodule {relative_text}:\n{submodule_dirty}"
-            )
+            raise RuntimeError(f"refusing dirty submodule {relative_text}:\n{submodule_dirty}")
         submodules[relative_text] = _git_output("rev-parse", "HEAD", cwd=submodule_root)
     return {
         "branch": branch,
@@ -419,9 +371,9 @@ def _proof_reuse_capability_discovery() -> dict[str, object]:
                 TestReuseCapabilityProbe,
             )
 
-            capability_report = TestReuseCapabilityProbe(
-                environ=discovery_environment
-            ).probe().to_dict()
+            capability_report = (
+                TestReuseCapabilityProbe(environ=discovery_environment).probe().to_dict()
+            )
         except Exception as exc:
             capability_report = {
                 "schema_version": "TestReuseCapabilityReport@1",
@@ -441,9 +393,7 @@ def _proof_reuse_capability_discovery() -> dict[str, object]:
                 proof_reuse_dependency_plan,
             )
 
-            dependency_plan = proof_reuse_dependency_plan(
-                discovery_environment
-            )
+            dependency_plan = proof_reuse_dependency_plan(discovery_environment)
         except Exception as exc:
             dependency_plan = {
                 "interface": "ProofReuseDependencyPlan@1",
@@ -479,18 +429,14 @@ def _provider_preflight() -> dict[str, object]:
             "exhaustion"
         )
     if not codex_binary:
-        raise RuntimeError(
-            "Codex CLI is required as the PTR supervisor fallback provider"
-        )
+        raise RuntimeError("Codex CLI is required as the PTR supervisor fallback provider")
     codex_status = _run(
         [codex_binary, "login", "status"],
         environment=_runtime_environment(),
         timeout=30,
     )
     if "logged in" not in (codex_status.stdout + codex_status.stderr).lower():
-        raise RuntimeError(
-            "Codex fallback CLI did not report an authenticated session"
-        )
+        raise RuntimeError("Codex fallback CLI did not report an authenticated session")
 
     try:
         grok_version = _run(
@@ -500,9 +446,7 @@ def _provider_preflight() -> dict[str, object]:
             timeout=30,
         )
     except (OSError, subprocess.SubprocessError) as exc:
-        raise RuntimeError(
-            "Grok primary CLI could not execute during preflight"
-        ) from exc
+        raise RuntimeError("Grok primary CLI could not execute during preflight") from exc
     grok_version_text = (grok_version.stdout + grok_version.stderr).strip()
     if grok_version.returncode != 0:
         raise RuntimeError(
@@ -528,9 +472,7 @@ def _provider_preflight() -> dict[str, object]:
 
     optional = {
         "multiformats": importlib.util.find_spec("multiformats") is not None,
-        "datasets_zkp": (
-            DATASETS_ROOT / "ipfs_datasets_py" / "logic" / "zkp"
-        ).is_dir(),
+        "datasets_zkp": (DATASETS_ROOT / "ipfs_datasets_py" / "logic" / "zkp").is_dir(),
         "groth16_endpoint_configured": bool(
             os.environ.get("IPFS_DATASETS_GROTH16_ENDPOINT", "").strip()
         ),
@@ -555,35 +497,19 @@ def _provider_preflight() -> dict[str, object]:
             "fallback": {
                 "provider": str(FALLBACK_PROVIDER_POLICY["provider"]),
                 "model": str(FALLBACK_PROVIDER_POLICY["model"]),
-                "model_reasoning_effort": str(
-                    FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
-                ),
+                "model_reasoning_effort": str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]),
             },
             "fallback_trigger": str(PROVIDER_POLICY["fallbackTrigger"]),
-            "primary_unavailable_action": str(
-                PROVIDER_POLICY["primaryUnavailableAction"]
-            ),
-            "non_quota_failure_action": str(
-                PROVIDER_POLICY["nonQuotaFailureAction"]
-            ),
+            "primary_unavailable_action": str(PROVIDER_POLICY["primaryUnavailableAction"]),
+            "non_quota_failure_action": str(PROVIDER_POLICY["nonQuotaFailureAction"]),
             "applies_to": list(PROVIDER_POLICY["appliesTo"]),
-            "semantic_merge_resolver": dict(
-                PARALLEL["semanticMergeResolver"]
-            ),
-            "fallback_forbidden_on": list(
-                PROVIDER_POLICY["fallbackForbiddenOn"]
-            ),
+            "semantic_merge_resolver": dict(PARALLEL["semanticMergeResolver"]),
+            "fallback_forbidden_on": list(PROVIDER_POLICY["fallbackForbiddenOn"]),
         },
         "optional_non_blocking_capabilities": optional,
-        "test_reuse_discovery_policy": proof_reuse_discovery[
-            "discovery_policy"
-        ],
-        "test_reuse_capability_report": proof_reuse_discovery[
-            "capability_report"
-        ],
-        "proof_reuse_dependency_plan": proof_reuse_discovery[
-            "dependency_plan"
-        ],
+        "test_reuse_discovery_policy": proof_reuse_discovery["discovery_policy"],
+        "test_reuse_capability_report": proof_reuse_discovery["capability_report"],
+        "proof_reuse_dependency_plan": proof_reuse_discovery["dependency_plan"],
     }
 
 
@@ -618,9 +544,7 @@ def _required_closeout_artifact_presence() -> dict[str, object]:
         }
         for name, path in configured.items()
     }
-    missing = [
-        name for name, item in artifacts.items() if not item["present"]
-    ]
+    missing = [name for name, item in artifacts.items() if not item["present"]]
     return {
         "required_artifacts": artifacts,
         "missing_required_artifacts": missing,
@@ -645,9 +569,7 @@ def _git_commit_is_ancestor(commit: str) -> bool:
     return result.returncode == 0
 
 
-def _record_identifier(
-    record: Mapping[str, object], *names: str
-) -> str:
+def _record_identifier(record: Mapping[str, object], *names: str) -> str:
     for name in names:
         value = record.get(name)
         if value is not None and str(value).strip():
@@ -683,9 +605,7 @@ def _managed_merge_input_inventory(
     """Inventory usable historical merge candidates without granting authority."""
 
     task_cids = {
-        str(getattr(task, "task_id", "")): str(
-            getattr(task, "canonical_task_cid", "")
-        )
+        str(getattr(task, "task_id", "")): str(getattr(task, "canonical_task_cid", ""))
         for task in tasks
         if str(getattr(task, "task_id", "")).strip()
     }
@@ -714,9 +634,7 @@ def _managed_merge_input_inventory(
             "canonical_task_cid",
             "canonical_task_id",
         )
-        commit = _record_identifier(
-            record, "merged_commit_id", "commit_sha", "commit_id"
-        )
+        commit = _record_identifier(record, "merged_commit_id", "commit_sha", "commit_id")
         if status not in {"completed", "merged"}:
             rejected[task_id] = "merge_not_completed"
         elif claimed_cid != task_cids[task_id]:
@@ -822,9 +740,7 @@ def _closeout_production_input_inventory(
     )
 
     parsed_tasks = tuple(tasks or parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX))
-    task_ids = tuple(
-        sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks)
-    )
+    task_ids = tuple(sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks))
     goals = load_objective_goals(REPO_ROOT / OBJECTIVE_REL)
     goal_ids = tuple(sorted(goal.goal_id for goal in goals))
     requirement_ids = tuple(
@@ -841,12 +757,8 @@ def _closeout_production_input_inventory(
     evidence_path = _completion_state_path("evidencePathSuffix")
     completion_dir = gate_path.parent
     coverage_path = completion_dir / Path(COVERAGE_ARTIFACT_RELATIVE).name
-    analyzer_path = completion_dir / Path(
-        ANALYZER_HEALTH_ARTIFACT_RELATIVE
-    ).name
-    quorum_path = completion_dir / Path(
-        EXHAUSTION_QUORUM_ARTIFACT_RELATIVE
-    ).name
+    analyzer_path = completion_dir / Path(ANALYZER_HEALTH_ARTIFACT_RELATIVE).name
+    quorum_path = completion_dir / Path(EXHAUSTION_QUORUM_ARTIFACT_RELATIVE).name
     bundle_path = completion_dir / Path(BUNDLE_ARTIFACT_RELATIVE).name
 
     gate = _load_json(gate_path)
@@ -857,12 +769,8 @@ def _closeout_production_input_inventory(
     analyzer_health = _load_json(analyzer_path)
     quorum = _load_json(quorum_path)
 
-    packet_tasks = _record_population(
-        packet.get("task_evidence"), id_names=("task_id",)
-    )
-    packet_children = _record_population(
-        packet.get("child_goal_evidence"), id_names=("goal_id",)
-    )
+    packet_tasks = _record_population(packet.get("task_evidence"), id_names=("task_id",))
+    packet_children = _record_population(packet.get("child_goal_evidence"), id_names=("goal_id",))
     packet_populations = _record_population(
         packet.get("adversarial_evidence"),
         id_names=("population", "population_id", "name"),
@@ -885,12 +793,8 @@ def _closeout_production_input_inventory(
             if not isinstance(row, Mapping):
                 continue
             criteria = row.get("criteria")
-            if isinstance(criteria, Sequence) and not isinstance(
-                criteria, (str, bytes)
-            ):
-                coverage_ids.update(
-                    str(item).strip() for item in criteria if str(item).strip()
-                )
+            if isinstance(criteria, Sequence) and not isinstance(criteria, (str, bytes)):
+                coverage_ids.update(str(item).strip() for item in criteria if str(item).strip())
     retained_analyzers = _record_population(
         analyzer_health.get("analyzers"),
         id_names=("analyzer_id", "analyzer", "channel", "name"),
@@ -898,8 +802,7 @@ def _closeout_production_input_inventory(
     retained_quorum = quorum.get("members")
     retained_quorum_count = (
         len(retained_quorum)
-        if isinstance(retained_quorum, Sequence)
-        and not isinstance(retained_quorum, (str, bytes))
+        if isinstance(retained_quorum, Sequence) and not isinstance(retained_quorum, (str, bytes))
         else 0
     )
     retained_goal_ids: set[str] = set()
@@ -1022,10 +925,7 @@ def _closeout_production_input_inventory(
     ]
     missing = [item for item in requirements if item["missing_count"]]
     return {
-        "schema": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "closeout-input-inventory@1"
-        ),
+        "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-closeout-input-inventory@1"),
         "inventory_is_completion_authority": False,
         "reporting_only": True,
         "task_count": len(task_ids),
@@ -1080,9 +980,7 @@ def _closeout_production_input_inventory(
             "candidate_certificate_publication_configured": False,
             "authoritative_candidate_publication_configured": False,
             "receipt_content_identity_profiles_conformant": False,
-            "receipt_content_identity_gap": (
-                "accelerator_cidv1_dag_json_vs_datasets_sha256"
-            ),
+            "receipt_content_identity_gap": ("accelerator_cidv1_dag_json_vs_datasets_sha256"),
             "receipt_content_identity_profiles": {
                 "accelerator": "cidv1-base32-dag-json-sha2-256",
                 "datasets_statement": "sha256-canonical-json-v1",
@@ -1154,21 +1052,14 @@ def _reviewed_completion_projection() -> dict[str, object]:
     )
 
     tasks = parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX)
-    completed_task_ids = {
-        task.task_id for task in tasks if task.status == "completed"
-    }
-    open_task_ids = sorted(
-        task.task_id for task in tasks if task.status != "completed"
-    )
+    completed_task_ids = {task.task_id for task in tasks if task.status == "completed"}
+    open_task_ids = sorted(task.task_id for task in tasks if task.status != "completed")
     claimable_task_ids = sorted(
         task.task_id
         for task in tasks
-        if task.status == "todo"
-        and set(task.depends_on).issubset(completed_task_ids)
+        if task.status == "todo" and set(task.depends_on).issubset(completed_task_ids)
     )
-    goals = parse_goal_heap(
-        (REPO_ROOT / OBJECTIVE_REL).read_text(encoding="utf-8")
-    )
+    goals = parse_goal_heap((REPO_ROOT / OBJECTIVE_REL).read_text(encoding="utf-8"))
     goal_state_counts: dict[str, int] = {}
     for goal in goals:
         goal_state_counts[goal.status] = goal_state_counts.get(goal.status, 0) + 1
@@ -1182,10 +1073,7 @@ def _reviewed_completion_projection() -> dict[str, object]:
     else:
         next_action = "invoke_operator_closeout"
     return {
-        "schema": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "reviewed-objective-projection@1"
-        ),
+        "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-reviewed-objective-projection@1"),
         "implementation": {
             "task_count": len(tasks),
             "completed_task_count": len(completed_task_ids),
@@ -1196,21 +1084,15 @@ def _reviewed_completion_projection() -> dict[str, object]:
         "authority": {
             "goal_count": len(goals),
             "goal_state_counts": dict(sorted(goal_state_counts.items())),
-            "verified_goal_count": goal_state_counts.get(
-                "verified_complete", 0
-            ),
+            "verified_goal_count": goal_state_counts.get("verified_complete", 0),
             "task_status_is_completion_authority": False,
         },
         "reviewed_expansion": {
             "task_ids": list(projection["implementationTaskIds"]),
-            "initial_claimable_task_ids": list(
-                projection["initialClaimableTaskIds"]
-            ),
+            "initial_claimable_task_ids": list(projection["initialClaimableTaskIds"]),
             "authority_writer": projection["authorityWriter"],
             "reconciliation_phases": projection["reconciliationPhases"],
-            "autonomous_gap_generation_enabled": projection[
-                "autonomousGapGenerationEnabled"
-            ],
+            "autonomous_gap_generation_enabled": projection["autonomousGapGenerationEnabled"],
         },
         "closeout_readiness": artifact_presence,
         "closeout_input_inventory": input_inventory,
@@ -1259,9 +1141,7 @@ def _project_objectives() -> dict[str, object]:
         payload = json.loads(result.stdout)
     except ValueError:
         payload = {"stdout": result.stdout.strip()}
-    payload["reviewed_completion_projection"] = (
-        _reviewed_completion_projection()
-    )
+    payload["reviewed_completion_projection"] = _reviewed_completion_projection()
     receipt_path = PROJECTION_DIR / "objective_daemon_receipt.json"
     receipt_path.write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n",
@@ -1351,20 +1231,15 @@ def _no_agent_readiness() -> dict[str, object]:
         "INFO",
     ]
     result = _run(command, environment=_runtime_environment(), timeout=600)
-    (LOG_DIR / "board_readiness.log").write_text(
-        result.stdout + result.stderr, encoding="utf-8"
-    )
+    (LOG_DIR / "board_readiness.log").write_text(result.stdout + result.stderr, encoding="utf-8")
     task_state_path = state_dir / "ptr_preflight_task_state.json"
     payload = json.loads(task_state_path.read_text(encoding="utf-8"))
     if int(payload.get("blocked_count") or 0) != 0:
-        raise RuntimeError(
-            f"board readiness has blocked tasks: {payload.get('blocked_task_ids')}"
-        )
+        raise RuntimeError(f"board readiness has blocked tasks: {payload.get('blocked_task_ids')}")
     work_complete = _task_state_work_complete(payload)
     if int(payload.get("selectable_ready_count") or 0) < 1 and not work_complete:
         raise RuntimeError(
-            "board readiness has no selectable task: "
-            f"{payload.get('selection_idle_reason')!r}"
+            f"board readiness has no selectable task: {payload.get('selection_idle_reason')!r}"
         )
     payload["work_complete"] = work_complete
     return payload
@@ -1486,9 +1361,7 @@ def _pid_alive(pid: object) -> bool:
     except OSError:
         return False
     try:
-        process_state = Path(f"/proc/{pid}/stat").read_text(
-            encoding="utf-8"
-        ).split()[2]
+        process_state = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8").split()[2]
     except (OSError, IndexError):
         return False
     if process_state == "Z":
@@ -1500,9 +1373,7 @@ def _lane_process_owned(lane_name: str, pid: int) -> bool:
     if not _pid_alive(pid):
         return False
     try:
-        command_line = Path(f"/proc/{pid}/cmdline").read_bytes().replace(
-            b"\0", b" "
-        )
+        command_line = Path(f"/proc/{pid}/cmdline").read_bytes().replace(b"\0", b" ")
     except OSError:
         return False
     return (
@@ -1568,18 +1439,11 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
     supervisor_owned = _lane_process_owned(lane_name, supervisor_pid)
     daemon_alive = _pid_alive(daemon_pid)
     blocked_count = int(task_state.get("blocked_count") or 0)
-    maintenance_error = str(
-        status.get("last_agentic_maintenance_error") or ""
-    ).strip()
-    control_plane_update_pending = bool(
-        status.get("control_plane_update_pending")
-    )
-    selection_idle_reason = str(
-        task_state.get("selection_idle_reason") or ""
-    )
+    maintenance_error = str(status.get("last_agentic_maintenance_error") or "").strip()
+    control_plane_update_pending = bool(status.get("control_plane_update_pending"))
+    selection_idle_reason = str(task_state.get("selection_idle_reason") or "")
     attempts_exhausted = (
-        selection_idle_reason
-        == "all_selectable_ready_tasks_reached_max_task_attempts"
+        selection_idle_reason == "all_selectable_ready_tasks_reached_max_task_attempts"
     )
     unhealthy_reasons = []
     if not supervisor_owned:
@@ -1598,9 +1462,7 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         unhealthy_reasons.append("control_plane_update_pending")
     if attempts_exhausted:
         unhealthy_reasons.append("task_attempts_exhausted")
-    healthy = bool(
-        not unhealthy_reasons
-    )
+    healthy = bool(not unhealthy_reasons)
     return {
         "lane": lane_name,
         "shard": lane["shard"],
@@ -1609,9 +1471,7 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "primary_model": lane["primary_model"],
         "fallback_provider": lane["fallback_provider"],
         "fallback_model": lane["fallback_model"],
-        "fallback_model_reasoning_effort": lane[
-            "fallback_model_reasoning_effort"
-        ],
+        "fallback_model_reasoning_effort": lane["fallback_model_reasoning_effort"],
         "fallback_trigger": lane["fallback_trigger"],
         "healthy": healthy,
         "supervisor_pid": supervisor_pid or None,
@@ -1623,41 +1483,23 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "restart_count": status.get("restart_count"),
         "last_exit_code": status.get("last_exit_code"),
         "last_recycle_reason": status.get("last_recycle_reason"),
-        "last_agentic_maintenance_error": status.get(
-            "last_agentic_maintenance_error"
-        ),
-        "control_plane_source_id": status.get(
-            "control_plane_source_id"
-        ),
-        "control_plane_current_source_id": status.get(
-            "control_plane_current_source_id"
-        ),
-        "control_plane_source_revision": status.get(
-            "control_plane_source_revision"
-        ),
+        "last_agentic_maintenance_error": status.get("last_agentic_maintenance_error"),
+        "control_plane_source_id": status.get("control_plane_source_id"),
+        "control_plane_current_source_id": status.get("control_plane_current_source_id"),
+        "control_plane_source_revision": status.get("control_plane_source_revision"),
         "control_plane_current_source_revision": status.get(
             "control_plane_current_source_revision"
         ),
         "control_plane_update_pending": control_plane_update_pending,
-        "control_plane_reload_deferred": status.get(
-            "control_plane_reload_deferred"
-        ),
-        "control_plane_reload_deferred_reason": status.get(
-            "control_plane_reload_deferred_reason"
-        ),
+        "control_plane_reload_deferred": status.get("control_plane_reload_deferred"),
+        "control_plane_reload_deferred_reason": status.get("control_plane_reload_deferred_reason"),
         "unhealthy_reasons": unhealthy_reasons,
-        "active_task_id": task_state.get(
-            "active_task_id", status.get("active_task_id")
-        ),
+        "active_task_id": task_state.get("active_task_id", status.get("active_task_id")),
         "active_task_title": task_state.get("active_task_title"),
         "active_phase": task_state.get("active_phase"),
-        "implementation_in_progress": task_state.get(
-            "implementation_in_progress"
-        ),
+        "implementation_in_progress": task_state.get("implementation_in_progress"),
         "task_count": task_state.get("task_count"),
-        "task_ids_sha256": (
-            _task_ids_sha256(observed_task_ids) if observed_task_ids else None
-        ),
+        "task_ids_sha256": (_task_ids_sha256(observed_task_ids) if observed_task_ids else None),
         "completed_count": task_state.get("completed_count"),
         "ready_count": task_state.get("ready_count"),
         "selectable_ready_count": task_state.get("selectable_ready_count"),
@@ -1666,9 +1508,7 @@ def _lane_status(lane: dict[str, object]) -> dict[str, object]:
         "blocked_task_ids": task_state.get("blocked_task_ids"),
         "selection_idle_reason": selection_idle_reason,
         "heartbeat_at": task_state.get("heartbeat_at"),
-        "active_log_path": task_state.get(
-            "active_log_path", status.get("last_log_path")
-        ),
+        "active_log_path": task_state.get("active_log_path", status.get("last_log_path")),
         "supervisor_log_path": str(LOG_DIR / f"{lane_name}_supervisor.log"),
     }
 
@@ -1678,9 +1518,7 @@ def _status_payload() -> dict[str, object]:
     current_board_task_ids = _current_board_task_ids()
     current_board_task_count = len(current_board_task_ids)
     current_board_task_ids_sha256 = (
-        _task_ids_sha256(current_board_task_ids)
-        if current_board_task_ids
-        else None
+        _task_ids_sha256(current_board_task_ids) if current_board_task_ids else None
     )
     for item in lanes:
         count_matches = (
@@ -1689,9 +1527,7 @@ def _status_payload() -> dict[str, object]:
         )
         observed_sha256 = item.get("task_ids_sha256")
         identity_matches = (
-            observed_sha256 == current_board_task_ids_sha256
-            if observed_sha256
-            else count_matches
+            observed_sha256 == current_board_task_ids_sha256 if observed_sha256 else count_matches
         )
         item["current_board_matches"] = bool(count_matches and identity_matches)
         if not item["current_board_matches"]:
@@ -1706,21 +1542,19 @@ def _status_payload() -> dict[str, object]:
         and _task_state_work_complete(item)
         for item in lanes
     )
-    globally_progressable = any(
-        bool(item.get("healthy"))
-        and bool(item.get("current_board_matches"))
-        and (
-            bool(item.get("active_task_id"))
-            or int(item.get("selectable_ready_count") or 0) > 0
-        )
-        for item in lanes
-    ) or work_complete
-    blocked_task_ids = sorted(
-        {
-            str(task_id)
+    globally_progressable = (
+        any(
+            bool(item.get("healthy"))
+            and bool(item.get("current_board_matches"))
+            and (
+                bool(item.get("active_task_id")) or int(item.get("selectable_ready_count") or 0) > 0
+            )
             for item in lanes
-            for task_id in (item.get("blocked_task_ids") or [])
-        }
+        )
+        or work_complete
+    )
+    blocked_task_ids = sorted(
+        {str(task_id) for item in lanes for task_id in (item.get("blocked_task_ids") or [])}
     )
     return {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-control-status@1",
@@ -1738,18 +1572,12 @@ def _status_payload() -> dict[str, object]:
             "fallback": {
                 "provider": FALLBACK_PROVIDER_POLICY["provider"],
                 "model": FALLBACK_PROVIDER_POLICY["model"],
-                "model_reasoning_effort": FALLBACK_PROVIDER_POLICY[
-                    "modelReasoningEffort"
-                ],
+                "model_reasoning_effort": FALLBACK_PROVIDER_POLICY["modelReasoningEffort"],
             },
             "fallback_trigger": PROVIDER_POLICY["fallbackTrigger"],
-            "non_quota_failure_action": PROVIDER_POLICY[
-                "nonQuotaFailureAction"
-            ],
+            "non_quota_failure_action": PROVIDER_POLICY["nonQuotaFailureAction"],
             "applies_to": list(PROVIDER_POLICY["appliesTo"]),
-            "semantic_merge_resolver": dict(
-                PARALLEL["semanticMergeResolver"]
-            ),
+            "semantic_merge_resolver": dict(PARALLEL["semanticMergeResolver"]),
         },
         "healthy": bool(
             lanes
@@ -1779,11 +1607,7 @@ def _verify_started(timeout_seconds: int = 55) -> dict[str, object]:
     while time.monotonic() < deadline:
         last_payload = _status_payload()
         lanes = list(last_payload.get("lanes") or [])
-        dead = [
-            item
-            for item in lanes
-            if not item.get("supervisor_owned_and_alive")
-        ]
+        dead = [item for item in lanes if not item.get("supervisor_owned_and_alive")]
         if dead:
             raise RuntimeError(f"PTR supervisor exited during startup: {dead}")
         if last_payload.get("healthy"):
@@ -1829,16 +1653,12 @@ def _completion_state_path(field: str) -> Path:
     projection = dict(CONFIG["objectiveProjection"])
     suffix = Path(str(projection[field]))
     if suffix.is_absolute() or ".." in suffix.parts:
-        raise RuntimeError(
-            f"objectiveProjection.{field} must be a safe state-root suffix"
-        )
+        raise RuntimeError(f"objectiveProjection.{field} must be a safe state-root suffix")
     path = (STATE_ROOT / suffix).resolve()
     try:
         path.relative_to(STATE_ROOT)
     except ValueError as exc:
-        raise RuntimeError(
-            f"objectiveProjection.{field} escapes the state root"
-        ) from exc
+        raise RuntimeError(f"objectiveProjection.{field} escapes the state root") from exc
     return path
 
 
@@ -1849,14 +1669,9 @@ def _closeout_health_input(
 ) -> dict[str, object]:
     config_bytes = CONFIG_PATH.read_bytes()
     return {
-        "schema": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "supervisor-health-input@1"
-        ),
+        "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-supervisor-health-input@1"),
         "captured_at_unix_ns": time.time_ns(),
-        "configuration_sha256": (
-            "sha256:" + hashlib.sha256(config_bytes).hexdigest()
-        ),
+        "configuration_sha256": ("sha256:" + hashlib.sha256(config_bytes).hexdigest()),
         "checkout": checkout,
         "status": status,
     }
@@ -1873,9 +1688,7 @@ def _closeout_command(
     status_path: Path,
     report_only: bool,
 ) -> list[str]:
-    phase_count = int(
-        dict(CONFIG["objectiveProjection"])["reconciliationPhases"]
-    )
+    phase_count = int(dict(CONFIG["objectiveProjection"])["reconciliationPhases"])
     command = [
         sys.executable,
         str(module_path),
@@ -1983,15 +1796,10 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
             "lanes so launch health can be captured"
         )
 
-    module_path = (
-        REPO_ROOT
-        / "scripts"
-        / "proof_backed_test_reuse_objective_reconciliation.py"
-    )
+    module_path = REPO_ROOT / "scripts" / "proof_backed_test_reuse_objective_reconciliation.py"
     if not module_path.is_file():
         raise RuntimeError(
-            "objective closeout implementation is not installed; "
-            "PTR-121 must complete first"
+            "objective closeout implementation is not installed; PTR-121 must complete first"
         )
 
     gate_path = _completion_state_path("gatePathSuffix")
@@ -2017,10 +1825,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
     )
     if report_only:
         return {
-            "schema": (
-                "ipfs_accelerate_py/"
-                "proof-backed-test-reuse-closeout-diagnosis@1"
-            ),
+            "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-closeout-diagnosis@1"),
             "report_only": True,
             "diagnosis_passed": diagnosis_passed,
             "closeout_passed": False,
@@ -2032,9 +1837,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
         }
     if not diagnosis_passed:
         return {
-            "schema": (
-                "ipfs_accelerate_py/proof-backed-test-reuse-closeout@1"
-            ),
+            "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-closeout@1"),
             "closeout_passed": False,
             "precloseout_diagnosis_passed": False,
             "returncode": diagnosis_result.returncode,
@@ -2086,9 +1889,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
     )
     closeout_result = _decoded_closeout_result(result)
     payload = {
-        "schema": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-closeout@1"
-        ),
+        "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-closeout@1"),
         "closeout_passed": result.returncode == 0,
         "returncode": result.returncode,
         "lanes_stopped": stopped,
@@ -2159,9 +1960,7 @@ def _start() -> dict[str, object]:
                     "primary_model": lane["primary_model"],
                     "fallback_provider": lane["fallback_provider"],
                     "fallback_model": lane["fallback_model"],
-                    "fallback_model_reasoning_effort": lane[
-                        "fallback_model_reasoning_effort"
-                    ],
+                    "fallback_model_reasoning_effort": lane["fallback_model_reasoning_effort"],
                     "fallback_trigger": lane["fallback_trigger"],
                 }
             )
@@ -2229,9 +2028,7 @@ def main() -> int:
         elif args.command == "closeout":
             with _control_lock():
                 payload = _closeout(report_only=args.report_only)
-            success_field = (
-                "diagnosis_passed" if args.report_only else "closeout_passed"
-            )
+            success_field = "diagnosis_passed" if args.report_only else "closeout_passed"
             exit_code = 0 if payload[success_field] else 1
         else:
             with _control_lock():
