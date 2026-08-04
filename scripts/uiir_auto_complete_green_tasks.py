@@ -158,7 +158,7 @@ def main() -> int:
         if not ok:
             print(f"  skip ({detail[:120]})")
             continue
-        print(f"  validation green -> complete")
+        print("  validation green -> complete")
         if not args.dry_run:
             text = mark_completed(text, task)
             # re-parse status_line positions after mutation
