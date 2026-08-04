@@ -8,7 +8,6 @@ from typing import Any
 
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/swissknife_parser_failure_backlog.py"
 MANIFEST = ROOT / "implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json"

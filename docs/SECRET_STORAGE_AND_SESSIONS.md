@@ -60,7 +60,7 @@ secret_manager = get_default_secret_manager()
 token_ref = secret_manager.store_secret(
     key="github_token_user_123",
     value="ghp_xxxxxxxxxxxxxxxxxxxx",
-    metadata={"scopes": "repo,user", "expires_at": "2026-12-31"}
+    metadata={"scopes": "repo,user", "expires_at": "2026-12-31"},
 )
 # Returns: "env://HANDSFREE_SECRET_GITHUB_TOKEN_USER_123"
 
@@ -69,7 +69,7 @@ create_github_connection(
     conn=db_conn,
     user_id="user-123",
     token_ref=token_ref,  # Store the reference, not the token!
-    scopes="repo,user"
+    scopes="repo,user",
 )
 
 # Later, retrieve the secret when needed
@@ -98,15 +98,12 @@ user_id = "user-123"
 token_ref = secret_manager.store_secret(
     key=f"github_token_{user_id}",
     value=github_token,
-    metadata={"source": "oauth", "scopes": "repo,user"}
+    metadata={"source": "oauth", "scopes": "repo,user"},
 )
 
 # Store only the reference in the database
 connection = create_github_connection(
-    conn=db,
-    user_id=user_id,
-    token_ref=token_ref,
-    scopes="repo,user"
+    conn=db, user_id=user_id, token_ref=token_ref, scopes="repo,user"
 )
 
 # When making GitHub API calls, retrieve the token
@@ -480,20 +477,21 @@ Example skeleton:
 ```python
 from .interface import SecretManager
 
+
 class AzureSecretManager(SecretManager):
     def __init__(self):
         # Initialize Azure client
         pass
-    
+
     def store_secret(self, key: str, value: str, metadata: dict | None = None) -> str:
         # Store in Azure Key Vault
         # Return reference like "azure://vault-name/secret-name"
         pass
-    
+
     def get_secret(self, reference: str) -> str | None:
         # Parse reference and retrieve from Azure
         pass
-    
+
     # ... implement other methods
 ```
 
@@ -540,13 +538,13 @@ import redis
 from handsfree.sessions import SessionTokenManager
 
 # Initialize Redis connection
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
+redis_client = redis.Redis(host="localhost", port=6379, db=0)
 
 # Create session manager
 session_manager = SessionTokenManager(
     redis_client=redis_client,
     default_ttl_hours=24,  # 24-hour sessions
-    key_prefix="session:"
+    key_prefix="session:",
 )
 
 # Create a new session for a user
@@ -554,19 +552,12 @@ session = session_manager.create_session(
     user_id="user-123",
     device_id="wearable-456",
     ttl_hours=24,  # Optional, uses default if not specified
-    metadata={
-        "device_type": "wearable",
-        "app_version": "1.0.0",
-        "os": "Android"
-    }
+    metadata={"device_type": "wearable", "app_version": "1.0.0", "os": "Android"},
 )
 
 # Return the token to the client
 # Client stores this and sends it with subsequent requests
-return {
-    "session_token": session.token,
-    "expires_at": session.expires_at.isoformat()
-}
+return {"session_token": session.token, "expires_at": session.expires_at.isoformat()}
 ```
 
 #### Validating Sessions
@@ -574,21 +565,21 @@ return {
 ```python
 from fastapi import Header, HTTPException
 
-async def get_current_user_from_session(
-    authorization: str | None = Header(default=None)
-) -> str:
+
+async def get_current_user_from_session(authorization: str | None = Header(default=None)) -> str:
     """Validate session token and return user_id."""
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Missing session token")
-    
+
     token = authorization[7:]  # Remove "Bearer " prefix
-    
+
     # Validate the session
     session = session_manager.validate_session(token)
     if not session:
         raise HTTPException(status_code=401, detail="Invalid or expired session")
-    
+
     return session.user_id
+
 
 # Use in endpoints
 @app.get("/v1/inbox")
@@ -623,60 +614,54 @@ from handsfree.sessions import SessionTokenManager
 app = FastAPI()
 
 # Initialize session manager
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
+redis_client = redis.Redis(host="localhost", port=6379, db=0)
 session_manager = SessionTokenManager(redis_client)
 
+
 # Dependency for session validation
-async def validate_session_token(
-    authorization: str | None = Header(default=None)
-) -> str:
+async def validate_session_token(authorization: str | None = Header(default=None)) -> str:
     """Validate session token and return user_id."""
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Missing token")
-    
+
     token = authorization[7:]
     session = session_manager.validate_session(token)
-    
+
     if not session:
         raise HTTPException(status_code=401, detail="Invalid or expired session")
-    
+
     return session.user_id
+
 
 # Login endpoint - creates session
 @app.post("/v1/auth/login")
 async def login(credentials: LoginCredentials):
     # Validate credentials (OAuth, password, etc.)
     user_id = validate_user_credentials(credentials)
-    
+
     # Create session
     session = session_manager.create_session(
         user_id=user_id,
         device_id=credentials.device_id,
-        metadata={
-            "device_type": credentials.device_type,
-            "login_method": "oauth"
-        }
+        metadata={"device_type": credentials.device_type, "login_method": "oauth"},
     )
-    
-    return {
-        "session_token": session.token,
-        "expires_at": session.expires_at.isoformat()
-    }
+
+    return {"session_token": session.token, "expires_at": session.expires_at.isoformat()}
+
 
 # Protected endpoint - requires session
 @app.get("/v1/inbox")
 async def get_inbox(user_id: str = Depends(validate_session_token)):
     return {"inbox": get_user_inbox(user_id)}
 
+
 # Logout endpoint - revokes session
 @app.post("/v1/auth/logout")
-async def logout(
-    user_id: str = Depends(validate_session_token),
-    authorization: str = Header()
-):
+async def logout(user_id: str = Depends(validate_session_token), authorization: str = Header()):
     token = authorization[7:]
     session_manager.revoke_session(token)
     return {"message": "Logged out successfully"}
+
 
 # Logout all devices
 @app.post("/v1/auth/logout-all")

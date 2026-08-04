@@ -68,7 +68,7 @@ secret_manager = get_default_secret_manager()
 token_ref = secret_manager.store_secret(
     key="github_token_user_123",
     value="ghp_xxxxxxxxxxxxxxxxxxxx",
-    metadata={"scopes": "repo,user", "expires_at": "2026-12-31"}
+    metadata={"scopes": "repo,user", "expires_at": "2026-12-31"},
 )
 # Returns: "vault://github_token_user_123"
 
@@ -97,7 +97,7 @@ manager = VaultSecretManager(
     vault_addr="https://vault.example.com:8200",
     vault_token="s.xxxxxxxxxxxxxx",
     vault_mount="secret",
-    vault_namespace="my-namespace"
+    vault_namespace="my-namespace",
 )
 
 # Use the manager
@@ -228,10 +228,7 @@ VaultSecretManager(vault_addr="https://vault.example.com")
 
 ```python
 # Invalid Vault address or token
-manager = VaultSecretManager(
-    vault_addr="https://invalid.vault.com",
-    vault_token="invalid-token"
-)
+manager = VaultSecretManager(vault_addr="https://invalid.vault.com", vault_token="invalid-token")
 # Raises: VaultError: Failed to initialize Vault client: <connection error details>
 ```
 
@@ -379,28 +376,27 @@ To migrate from `EnvSecretManager` to `VaultSecretManager`:
 3. **Migrate existing secrets**:
    ```python
    from handsfree.secrets import EnvSecretManager, VaultSecretManager
-   
+
    # Create both managers
    env_manager = EnvSecretManager()
    vault_manager = VaultSecretManager(
-       vault_addr="https://vault.example.com:8200",
-       vault_token="your-token"
+       vault_addr="https://vault.example.com:8200", vault_token="your-token"
    )
-   
+
    # List all env secrets
    env_refs = env_manager.list_secrets()
-   
+
    # Migrate each secret
    for env_ref in env_refs:
        # Get value from env
        value = env_manager.get_secret(env_ref)
-       
+
        # Extract key from reference (strip "env://PREFIX_")
        key = env_ref.replace("env://HANDSFREE_SECRET_", "").lower()
-       
+
        # Store in Vault
        vault_ref = vault_manager.store_secret(key, value)
-       
+
        # Update database to use new vault_ref
        # update_token_ref_in_database(old_ref=env_ref, new_ref=vault_ref)
    ```

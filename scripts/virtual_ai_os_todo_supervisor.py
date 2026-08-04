@@ -12,18 +12,29 @@ from swissknife_checkout_lease_guard import (
     require_swissknife_checkout_lease,
 )
 
-
 _PREIMPORT_BOOTSTRAP = bootstrap_ipfs_accelerate(__file__, include_script_dir=True)
 SCRIPT_REPO_ROOT = _PREIMPORT_BOOTSTRAP.script_repo_root
 IPFS_ACCELERATE_ROOT = _PREIMPORT_BOOTSTRAP.package_root
 
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
+    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
 from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (  # noqa: E402
     build_repo_script_bootstrap as _build_repo_script_bootstrap,
-    build_prefixed_default_llm_merge_resolver_command_callback as _prefixed_llm_merge_callback,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     data_namespace_scan_skip_prefixes as _data_namespace_scan_skip_prefixes,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_codebase_scan_env_settings as _prefixed_codebase_scan_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_interoperability_focus as _prefixed_interoperability_focus,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     prefixed_objective_refill_env_settings as _prefixed_objective_refill_env_settings,
+)
+from ipfs_accelerate_py.agent_supervisor.wrapper_utils import (
     repo_script_path as _repo_script_path,
 )
 
@@ -34,8 +45,6 @@ REPO_ROOT = _SCRIPT_BOOTSTRAP.repo_root
 
 from virtual_ai_os_todo_daemon import (  # noqa: E402
     OBJECTIVE_HEAP_PATH,
-    TASK_BOARD_PATH_KEY,
-    TASK_BOARD_PATH_OPTION,
     VIRTUAL_AI_OS_CONTEXT,
     VIRTUAL_AI_OS_ENV_PREFIX,
     VIRTUAL_AI_OS_WORKTREE_SUBMODULE_PATHS,
@@ -104,9 +113,9 @@ CODEBASE_SCAN_SKIP_PREFIXES = CODEBASE_SCAN_SKIP_PREFIXES + (
     "tests/test_meta_glasses_display_todo_queue.py",
 )
 from ipfs_accelerate_py.agent_supervisor.implementation_supervisor_runner import (  # noqa: E402
+    build_configured_supervisor_runtime_exports,
     build_namespace_codebase_refill_defaults_factory,
     build_namespace_objective_refill_defaults_factory,
-    build_configured_supervisor_runtime_exports,
     build_script_supervisor_bootstrap_runner,
 )
 

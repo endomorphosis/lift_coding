@@ -28,7 +28,7 @@ import os
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -427,7 +427,7 @@ MappingLike = Any
 
 
 def main() -> int:
-    started = datetime.now(timezone.utc).isoformat()
+    started = datetime.now(UTC).isoformat()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     checkout = _checkout_identity()
@@ -632,7 +632,7 @@ def main() -> int:
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-closeout-materialization-probe@1",
         "authority": False,
         "started_at": started,
-        "finished_at": datetime.now(timezone.utc).isoformat(),
+        "finished_at": datetime.now(UTC).isoformat(),
         "checkout": {
             "branch": checkout.get("branch"),
             "commit": checkout.get("commit"),

@@ -12,7 +12,9 @@ Verdict: MISSING | WRAPPER | HOLLOW | THIN | SUBSTANTIVE
 Reproduce: python3 port_substance_audit.py  (from repo root)
 """
 
-import os, re, json
+import json
+import os
+import re
 
 LOGIC = "external/ipfs_datasets/ipfs_datasets_py/logic"
 TSROOTS = ["swissknife/src/services", "swissknife/src"]
@@ -35,8 +37,8 @@ DELEG = re.compile(
 
 def py_eff_loc(txt):
     n = 0
-    for l in txt.splitlines():
-        s = l.strip()
+    for line in txt.splitlines():
+        s = line.strip()
         if not s or s.startswith("#"):
             continue
         n += 1
@@ -45,8 +47,8 @@ def py_eff_loc(txt):
 
 def ts_eff_loc(txt):
     n = 0
-    for l in txt.splitlines():
-        s = l.strip()
+    for line in txt.splitlines():
+        s = line.strip()
         if not s or s.startswith("//") or s.startswith("*") or s.startswith("/*"):
             continue
         n += 1

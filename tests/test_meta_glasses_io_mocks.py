@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SWISSKNIFE_FIXTURE = (
     ROOT / "swissknife" / "test" / "fixtures" / "meta-glasses-io" / "hardware-free-expanded-io.json"

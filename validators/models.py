@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from enum import StrEnum
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
-
 
 CID_PATTERN = r"^(Qm[1-9A-HJ-NP-Za-km-z]{44}|b[a-z2-7]{58})$"
 
@@ -17,10 +16,10 @@ class MethodDescriptor(BaseModel):
     model_config = ConfigDict(extra="allow", strict=True)
 
     name: str = Field(..., min_length=1)
-    input_schema: Dict[str, Any] = Field(default_factory=dict)
-    output_schema: Dict[str, Any] = Field(default_factory=dict)
-    description: Optional[str] = None
-    errors: List[str] = Field(default_factory=list)
+    input_schema: dict[str, Any] = Field(default_factory=dict)
+    output_schema: dict[str, Any] = Field(default_factory=dict)
+    description: str | None = None
+    errors: list[str] = Field(default_factory=list)
     streaming: bool = False
 
 
@@ -32,19 +31,19 @@ class InterfaceDescriptor(BaseModel):
     name: str = Field(..., min_length=1)
     namespace: str = Field(..., min_length=1)
     version: str = Field(..., min_length=1)
-    methods: List[MethodDescriptor] = Field(..., min_length=1)
-    errors: List[str] = Field(default_factory=list)
-    requires: List[str] = Field(default_factory=list)
-    compatibility: Dict[str, Any] = Field(default_factory=dict)
-    semantic_tags: Optional[List[str]] = None
-    observability: Optional[Dict[str, Any]] = None
-    interaction_patterns: Optional[Union[List[str], Dict[str, Any]]] = None
-    resource_cost_hints: Optional[Dict[str, Any]] = None
-    interface_cid: Optional[str] = Field(None, pattern=CID_PATTERN)
-    cid: Optional[str] = Field(None, pattern=CID_PATTERN)
+    methods: list[MethodDescriptor] = Field(..., min_length=1)
+    errors: list[str] = Field(default_factory=list)
+    requires: list[str] = Field(default_factory=list)
+    compatibility: dict[str, Any] = Field(default_factory=dict)
+    semantic_tags: list[str] | None = None
+    observability: dict[str, Any] | None = None
+    interaction_patterns: list[str] | dict[str, Any] | None = None
+    resource_cost_hints: dict[str, Any] | None = None
+    interface_cid: str | None = Field(None, pattern=CID_PATTERN)
+    cid: str | None = Field(None, pattern=CID_PATTERN)
 
 
-class EventType(str, Enum):
+class EventType(StrEnum):
     INVOCATION = "invocation"
     RESULT = "result"
     ERROR = "error"
@@ -62,7 +61,7 @@ class DAGEvent(BaseModel):
     model_config = ConfigDict(extra="allow", strict=True)
 
     event_cid: str = Field(..., pattern=CID_PATTERN)
-    event_type: Union[EventType, str] = Field(...)
-    parents: List[str] = Field(default_factory=list)
-    timestamp: Union[str, float, int] = Field(...)
-    payload: Dict[str, Any] = Field(default_factory=dict)
+    event_type: EventType | str = Field(...)
+    parents: list[str] = Field(default_factory=list)
+    timestamp: str | float | int = Field(...)
+    payload: dict[str, Any] = Field(default_factory=dict)

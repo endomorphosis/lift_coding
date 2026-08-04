@@ -12,7 +12,6 @@ from handsfree.virtual_ai_os_components import (
     get_virtual_ai_os_component_repo_contracts,
 )
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 

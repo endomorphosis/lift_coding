@@ -1,14 +1,14 @@
 """Tests for MCP++ protocol implementation in SwissKnife."""
 
-import pytest
-import json
 import os
+
+import pytest
 
 
 def read_file(path):
     """Read a file relative to repo root."""
     repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    with open(os.path.join(repo_root, path), "r") as f:
+    with open(os.path.join(repo_root, path)) as f:
         return f.read()
 
 

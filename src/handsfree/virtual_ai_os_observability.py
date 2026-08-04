@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Mapping
 from datetime import UTC, datetime
-from typing import Any, Mapping
+from typing import Any
 
 VIRTUAL_AI_OS_OBSERVABILITY_ARTIFACT_CONTRACT_ID = (
     "handsfree.virtual-ai-os/observability-artifacts@0.1.0"

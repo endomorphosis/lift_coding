@@ -5,7 +5,6 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 VALIDATOR = ROOT / "scripts/validate_mcplusplus_profile_h_spec.py"
 CHAPTER = ROOT / "Mcp-Plus-Plus/docs/spec/x402-payments.md"

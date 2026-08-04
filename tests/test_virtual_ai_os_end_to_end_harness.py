@@ -28,14 +28,13 @@ from handsfree.meta_glasses_remote_terminal import (
     build_meta_glasses_remote_terminal_route,
     build_meta_glasses_terminal_session_contract,
 )
+from handsfree.virtual_ai_os_components import get_virtual_ai_os_component_repo_contracts
 from handsfree.virtual_ai_os_observability import (
     build_virtual_ai_os_observability_bundle,
     build_virtual_ai_os_placement_change_artifact,
     build_virtual_ai_os_remote_execution_receipt_artifact,
     build_virtual_ai_os_rollback_event_artifact,
 )
-from handsfree.virtual_ai_os_components import get_virtual_ai_os_component_repo_contracts
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 VAI_339_DISCOVERY_PATH = (

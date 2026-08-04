@@ -10,7 +10,6 @@ from .models import (
     CapabilityRuntimeSurface,
 )
 
-
 _MCP_REMOTE_DATA_SURFACES = {
     "embedding",
     "dataset_discovery",

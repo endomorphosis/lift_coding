@@ -5,7 +5,6 @@ import json
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).parents[1]
 SPEC = importlib.util.spec_from_file_location(
     "mcp_release_gate", ROOT / "scripts" / "run_mcplusplus_release_gate.py"

@@ -4,10 +4,11 @@ Verifies Profile B (CID artifacts, Event DAG) and Profile C (UCAN delegation cha
 with signature verification) implementations.
 """
 
-import pytest
-import time
-import sys
 import os
+import sys
+import time
+
+import pytest
 
 sys.path.insert(
     0, os.path.join(os.path.dirname(__file__), "..", "..", "external", "ipfs_accelerate")
@@ -68,10 +69,10 @@ class TestProfileB:
 
     def test_execution_envelope(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            IntentObject,
             DecisionObject,
-            ReceiptObject,
             ExecutionEnvelope,
+            IntentObject,
+            ReceiptObject,
         )
 
         intent = IntentObject(method="infer", params={})
@@ -85,7 +86,7 @@ class TestProfileB:
         assert d["receipt"]["result"] == "ok"
 
     def test_event_dag_append_and_frontier(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import EventDAG, DAGEvent
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DAGEvent, EventDAG
 
         dag = EventDAG()
         e1 = DAGEvent(cid="cid1", event_type="intent")
@@ -97,7 +98,7 @@ class TestProfileB:
         assert frontier[0].cid == "cid2"
 
     def test_event_dag_provenance(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import EventDAG, DAGEvent
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import DAGEvent, EventDAG
 
         dag = EventDAG()
         dag.append(DAGEvent(cid="root", event_type="intent"))
@@ -128,7 +129,7 @@ class TestProfileC:
         assert cap.covers("mcp://tool/anything", "invoke") is True
 
     def test_delegation_creation(self):
-        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import Delegation, Capability
+        from ipfs_accelerate_py.mcplusplus_module.cid_ucan import Capability, Delegation
 
         d = Delegation(
             issuer="did:key:z123",
@@ -148,9 +149,9 @@ class TestProfileC:
 
     def test_evaluator_can_invoke(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            DelegationEvaluator,
-            Delegation,
             Capability,
+            Delegation,
+            DelegationEvaluator,
         )
 
         evaluator = DelegationEvaluator()
@@ -167,9 +168,9 @@ class TestProfileC:
 
     def test_evaluator_denies_wrong_resource(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            DelegationEvaluator,
-            Delegation,
             Capability,
+            Delegation,
+            DelegationEvaluator,
         )
 
         evaluator = DelegationEvaluator()
@@ -184,9 +185,9 @@ class TestProfileC:
 
     def test_evaluator_revocation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            DelegationEvaluator,
-            Delegation,
             Capability,
+            Delegation,
+            DelegationEvaluator,
         )
 
         evaluator = DelegationEvaluator()
@@ -203,9 +204,9 @@ class TestProfileC:
 
     def test_delegation_chain(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            DelegationEvaluator,
-            Delegation,
             Capability,
+            Delegation,
+            DelegationEvaluator,
         )
 
         evaluator = DelegationEvaluator()
@@ -264,9 +265,9 @@ class TestExecuteWithEnvelope:
     @pytest.mark.asyncio
     async def test_execute_with_valid_delegation(self):
         from ipfs_accelerate_py.mcplusplus_module.cid_ucan import (
-            execute_with_envelope,
-            Delegation,
             Capability,
+            Delegation,
+            execute_with_envelope,
             get_evaluator,
         )
 

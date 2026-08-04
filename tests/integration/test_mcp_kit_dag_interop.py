@@ -27,9 +27,10 @@ def _datasets_cid_fn():
 
 
 def test_kit_dag_event_cids_are_kubo_and_match_datasets():
-    from ipfs_kit_py.mcp_server.server import MCPServer
-    from ipfs_kit_py.mcp_server.mcplusplus import artifacts
     import json
+
+    from ipfs_kit_py.mcp_server.mcplusplus import artifacts
+    from ipfs_kit_py.mcp_server.server import MCPServer
 
     try:
         ds_cid = _datasets_cid_fn()

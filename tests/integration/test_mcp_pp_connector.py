@@ -1,12 +1,13 @@
 """Tests for MCP++ Server Connector linking SwissKnife to real MCP++ servers."""
 
-import pytest
 import os
+
+import pytest
 
 
 def read_file(path):
     repo_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    with open(os.path.join(repo_root, path), "r") as f:
+    with open(os.path.join(repo_root, path)) as f:
         return f.read()
 
 

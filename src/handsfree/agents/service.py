@@ -83,11 +83,11 @@ def _trace_runtime_metadata(trace: dict[str, Any] | None) -> dict[str, Any]:
             pass
 
     timeout_s = normalized_trace.get("mcp_timeout_s")
-    if isinstance(timeout_s, (int, float)):
+    if isinstance(timeout_s, int | float):
         metadata["mcp_timeout_s"] = timeout_s
 
     poll_interval_s = normalized_trace.get("mcp_poll_interval_s")
-    if isinstance(poll_interval_s, (int, float)):
+    if isinstance(poll_interval_s, int | float):
         metadata["mcp_poll_interval_s"] = poll_interval_s
 
     for key in (

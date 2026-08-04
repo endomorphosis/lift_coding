@@ -18,13 +18,11 @@ import argparse
 import hashlib
 import json
 import os
-import shlex
 import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import asdict, is_dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -427,7 +425,7 @@ def main(argv: list[str] | None = None) -> int:
                 "policy_cid": forest.get("policy_cid"),
             },
             "identity": identity,
-            "captured_at": datetime.now(timezone.utc).isoformat(),
+            "captured_at": datetime.now(UTC).isoformat(),
         },
     )
 
@@ -491,7 +489,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-validation-receipt-run@1",
         "authority": False,
-        "captured_at": datetime.now(timezone.utc).isoformat(),
+        "captured_at": datetime.now(UTC).isoformat(),
         "checkout_commit": checkout.get("commit"),
         "checkout_clean": checkout.get("clean"),
         "identity": identity,

@@ -13,7 +13,7 @@ import subprocess
 import sys
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -26,7 +26,6 @@ from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon impor
     parse_task_file,
     retry_budget_repair_source,
 )
-
 
 LANE_ID = "symbolic-contract-assurance"
 BOARD_PATH = "implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md"
@@ -385,7 +384,7 @@ def _all_tasks_completed(todo_path: Path, task_prefix: str) -> bool:
 
 
 def _timestamp_epoch(value: Any) -> float | None:
-    if isinstance(value, (int, float)) and math.isfinite(float(value)):
+    if isinstance(value, int | float) and math.isfinite(float(value)):
         return float(value)
     if not isinstance(value, str) or not value.strip():
         return None
@@ -397,7 +396,7 @@ def _timestamp_epoch(value: Any) -> float | None:
     except ValueError:
         return None
     if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
+        parsed = parsed.replace(tzinfo=UTC)
     return parsed.timestamp()
 
 

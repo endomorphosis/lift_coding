@@ -5,7 +5,6 @@ canonical validator on allow/deny + reason for the unsigned path, so third
 parties get identical authorization decisions regardless of server.
 """
 
-import importlib.util
 import sys
 from pathlib import Path
 

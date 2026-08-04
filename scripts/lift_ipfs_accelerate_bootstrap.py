@@ -8,7 +8,6 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
 
-
 PACKAGE_ROOT_ENV = "LIFT_IPFS_ACCELERATE_PACKAGE_ROOT"
 
 

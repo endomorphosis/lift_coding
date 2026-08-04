@@ -234,7 +234,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         sorted(
             node.name
             for node in bucket_vfs_demo_tree.body
-            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef)
         )
     )
     demo_classes = tuple(
@@ -384,7 +384,7 @@ def _literal_tuple_assignment(tree: ast.Module, name: str) -> tuple[str, ...]:
             continue
         if not any(isinstance(target, ast.Name) and target.id == name for target in node.targets):
             continue
-        if not isinstance(node.value, (ast.Tuple, ast.List)):
+        if not isinstance(node.value, ast.Tuple | ast.List):
             break
         values = []
         for element in node.value.elts:

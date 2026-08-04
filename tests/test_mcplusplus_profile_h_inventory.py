@@ -8,7 +8,6 @@ import json
 import subprocess
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 VALIDATOR_PATH = ROOT / "scripts" / "validate_mcplusplus_profile_h_inventory.py"
 REPORT_PATH = ROOT / "data" / "mcplusplus_profile_h" / "x402-inventory.json"

@@ -1,16 +1,12 @@
 """Tests verifying all virtual desktop apps are integrated with MCP backend tools."""
 
-import pytest
-import json
-import re
-
 
 # --- Test helpers ---
 
 
 def read_browser_main():
     """Read the browser-main.ts source for verification."""
-    with open("swissknife/web/src/browser-main.ts", "r") as f:
+    with open("swissknife/web/src/browser-main.ts") as f:
         return f.read()
 
 

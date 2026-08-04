@@ -165,7 +165,7 @@ def _evaluate_webapp_widgets(
         ) is True
         min_contrast_ratio = widget.get("min_contrast_ratio", data.get("min_contrast_ratio"))
         contrast_ok = (
-            isinstance(min_contrast_ratio, (float, int)) and float(min_contrast_ratio) >= 4.5
+            isinstance(min_contrast_ratio, float | int) and float(min_contrast_ratio) >= 4.5
         )
         preview_ok = browser_preview.get("renderable") is True
         preview_viewport = (
@@ -242,7 +242,7 @@ def evaluate_display_webapp_readiness(payload: dict[str, Any] | None) -> dict[st
         and focusable_elements > 0
         and navigation_order_valid
     )
-    contrast_ok = isinstance(min_contrast_ratio, (float, int)) and float(min_contrast_ratio) >= 4.5
+    contrast_ok = isinstance(min_contrast_ratio, float | int) and float(min_contrast_ratio) >= 4.5
 
     checks = [
         _build_check(

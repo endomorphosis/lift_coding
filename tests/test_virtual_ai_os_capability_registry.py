@@ -9,8 +9,8 @@ from handsfree.ai import (
     build_virtual_ai_os_result_envelope,
     get_virtual_ai_os_capability,
     list_virtual_ai_os_capabilities,
-    resolve_virtual_ai_os_runtime_route,
     resolve_virtual_ai_os_execution_mode,
+    resolve_virtual_ai_os_runtime_route,
 )
 from handsfree.capability_registry import (
     CAPABILITY_ROUTING_SURFACE_LABELS,

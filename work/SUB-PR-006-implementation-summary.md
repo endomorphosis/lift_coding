@@ -69,6 +69,7 @@ Tests automatically use a fresh database in the default location. Each test clea
 3. For explicit migration control, import and call:
    ```python
    from handsfree.db import init_db
+
    init_db()
    ```
 

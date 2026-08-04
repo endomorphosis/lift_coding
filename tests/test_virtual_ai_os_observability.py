@@ -12,7 +12,6 @@ from handsfree.virtual_ai_os_observability import (
     get_virtual_ai_os_observability_artifact_contract,
 )
 
-
 TASK_ID = "VAI-011"
 CORRELATION_ID = "corr-vai-011"
 OBSERVED_AT = "2026-06-23T00:00:00Z"
