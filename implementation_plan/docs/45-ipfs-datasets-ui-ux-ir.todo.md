@@ -269,7 +269,7 @@ Program rules:
 
 ## UIR-020 Define the UI formal ontology cross-view symbols and compiler contracts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -299,7 +299,7 @@ Program rules:
 
 ## UIR-021 Implement the structural FOL and F-logic compiler
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -509,7 +509,7 @@ Program rules:
 
 ## UIR-030 Implement the MCP-IDL to UI/UX IR source adapter
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -539,7 +539,7 @@ Program rules:
 
 ## UIR-031 Implement Intent and Invocation IR adapters
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -839,7 +839,7 @@ Program rules:
 
 ## UIR-050 Define canonical interaction events and conventional input adapters
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
