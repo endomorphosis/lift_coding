@@ -84,7 +84,9 @@ def _run_native_tdfol(axioms: List[str], goal: str) -> Dict[str, Any]:
         "metadata": {
             "route": "tdfol-native-proof",
             "simulated": False,
-            "nativeStatus": proof.status.value if isinstance(proof.status, ProofStatus) else str(proof.status),
+            "nativeStatus": proof.status.value
+            if isinstance(proof.status, ProofStatus)
+            else str(proof.status),
         },
     }
 
@@ -101,7 +103,9 @@ def main() -> int:
     for vector in payload.get("vectors", []):
         input_payload = dict(vector.get("input") or {})
         tdfol = dict(input_payload.get("tdfol") or {})
-        axioms = [str(item or "").strip() for item in tdfol.get("axioms", []) if str(item or "").strip()]
+        axioms = [
+            str(item or "").strip() for item in tdfol.get("axioms", []) if str(item or "").strip()
+        ]
         goal = str(tdfol.get("goal") or "").strip()
         try:
             outcome = _run_native_tdfol(axioms, goal)
@@ -110,7 +114,11 @@ def main() -> int:
                 "status": "error",
                 "reason": "error",
                 "proverId": "tdfol-native",
-                "metadata": {"route": "native-error", "simulated": False, "error": f"{exc.__class__.__name__}: {exc}"},
+                "metadata": {
+                    "route": "native-error",
+                    "simulated": False,
+                    "error": f"{exc.__class__.__name__}: {exc}",
+                },
             }
         rows.append({"id": vector.get("id"), **outcome})
 

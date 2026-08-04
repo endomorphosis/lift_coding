@@ -45,25 +45,38 @@ TRIVIAL_PORTED_SUFFIXES = (
 
 
 TARGET_OVERRIDES = {
-    "api.py": ["swissknife/src/services/logic-api-remainders.ts", "swissknife/src/services/logic-public-api.ts"],
+    "api.py": [
+        "swissknife/src/services/logic-api-remainders.ts",
+        "swissknife/src/services/logic-public-api.ts",
+    ],
     "batch_processing.py": ["swissknife/src/services/logic-batch-processing.ts"],
     "config.py": ["swissknife/src/services/logic-config.ts"],
     "common/errors.py": ["swissknife/src/services/logic-errors.ts"],
     "common/feature_detection.py": ["swissknife/src/services/feature-detection.ts"],
     "common/utility_monitor.py": ["swissknife/src/services/logic-monitor.ts"],
     "CEC/native/exceptions.py": ["swissknife/src/services/logic-errors.ts"],
-    "CEC/native/inference_rules/deontic.py": ["swissknife/src/services/cec-modal-temporal-deontic-rules.ts"],
-    "CEC/native/inference_rules/modal.py": ["swissknife/src/services/cec-modal-temporal-deontic-rules.ts"],
-    "CEC/native/inference_rules/temporal.py": ["swissknife/src/services/cec-modal-temporal-deontic-rules.ts"],
+    "CEC/native/inference_rules/deontic.py": [
+        "swissknife/src/services/cec-modal-temporal-deontic-rules.ts"
+    ],
+    "CEC/native/inference_rules/modal.py": [
+        "swissknife/src/services/cec-modal-temporal-deontic-rules.ts"
+    ],
+    "CEC/native/inference_rules/temporal.py": [
+        "swissknife/src/services/cec-modal-temporal-deontic-rules.ts"
+    ],
     "TDFOL/countermodels.py": ["swissknife/src/services/kripke-structure.ts"],
     "TDFOL/countermodel_visualizer.py": ["swissknife/src/services/kripke-structure.ts"],
     "TDFOL/tdfol_dcec_parser.py": ["swissknife/src/services/tdfol-dcec-parser.ts"],
     "TDFOL/modal_tableaux.py": ["swissknife/src/services/modal-tableaux.ts"],
     "fol/utils/logic_formatter.py": ["swissknife/src/services/fol-utils/logic-formatter.ts"],
     "fol/utils/fol_parser.py": ["swissknife/src/services/fol-utils/fol-parser.ts"],
-    "fol/utils/nlp_predicate_extractor.py": ["swissknife/src/services/fol-utils/nlp-predicate-extractor.ts"],
+    "fol/utils/nlp_predicate_extractor.py": [
+        "swissknife/src/services/fol-utils/nlp-predicate-extractor.ts"
+    ],
     "modal/codec.py": ["swissknife/src/services/modal-logic-codec.ts"],
-    "observability/metrics_prometheus.py": ["swissknife/src/services/observability-metrics-prometheus.ts"],
+    "observability/metrics_prometheus.py": [
+        "swissknife/src/services/observability-metrics-prometheus.ts"
+    ],
     "security/audit_log.py": ["swissknife/src/services/logic-audit-log.ts"],
     "deontic/legal_text_to_deontic.py": ["swissknife/src/services/deontic-legal-text-engine.ts"],
     "zkp/circuits.py": ["swissknife/src/services/zkp-circuits.ts"],
@@ -128,9 +141,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--map", default=str(DEFAULT_MAP_PATH))
     parser.add_argument("--evidence-map", default=str(DEFAULT_EVIDENCE_MAP_PATH))
     parser.add_argument("--vectors-dir", default=str(DEFAULT_VECTORS_DIR))
-    parser.add_argument("--write-map", action="store_true", help="write or refresh the reconciliation map")
-    parser.add_argument("--check", action="store_true", help="validate the current checkout against the map")
-    parser.add_argument("--summary", action="store_true", help="print the regenerated audit summary")
+    parser.add_argument(
+        "--write-map", action="store_true", help="write or refresh the reconciliation map"
+    )
+    parser.add_argument(
+        "--check", action="store_true", help="validate the current checkout against the map"
+    )
+    parser.add_argument(
+        "--summary", action="store_true", help="print the regenerated audit summary"
+    )
     args = parser.parse_args(argv)
 
     py_root = pathlib.Path(args.python_root)
@@ -145,7 +164,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         existing = load_json(map_path) if map_path.exists() else None
         symbol_map = build_symbol_map(symbols, ts_index, py_root, ts_root, existing=existing)
         map_path.parent.mkdir(parents=True, exist_ok=True)
-        map_path.write_text(json.dumps(symbol_map, indent=2, sort_keys=False) + "\n", encoding="utf-8")
+        map_path.write_text(
+            json.dumps(symbol_map, indent=2, sort_keys=False) + "\n", encoding="utf-8"
+        )
         print(format_summary(symbol_map["summary"]))
 
     if args.check:
@@ -248,7 +269,9 @@ def build_symbol_map(
                 "symbols": [],
             },
         )
-        modules[symbol.module]["symbols"].append(resolve_symbol(symbol, ts_index, existing_entries.get(symbol.key)))
+        modules[symbol.module]["symbols"].append(
+            resolve_symbol(symbol, ts_index, existing_entries.get(symbol.key))
+        )
 
     module_rows = []
     for module in sorted(modules):
@@ -272,7 +295,9 @@ def build_symbol_map(
     }
 
 
-def resolve_symbol(symbol: PythonSymbol, ts_index: TypeScriptIndex, existing: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+def resolve_symbol(
+    symbol: PythonSymbol, ts_index: TypeScriptIndex, existing: Optional[Dict[str, Any]]
+) -> Dict[str, Any]:
     candidates = symbol_variants(symbol.name)
     ts_symbol, files = ts_index.resolve_identifier(candidates)
     if ts_symbol:
@@ -290,7 +315,8 @@ def resolve_symbol(symbol: PythonSymbol, ts_index: TypeScriptIndex, existing: Op
             "pythonSymbol": symbol.name,
             "kind": symbol.kind,
             "status": existing["status"],
-            "target": existing.get("target") or module_target_candidates(symbol.module, ts_index)[0],
+            "target": existing.get("target")
+            or module_target_candidates(symbol.module, ts_index)[0],
             "reason": existing.get("reason") or default_reason(symbol.module, existing["status"]),
             "variants": candidates,
         }
@@ -309,7 +335,9 @@ def resolve_symbol(symbol: PythonSymbol, ts_index: TypeScriptIndex, existing: Op
     }
 
 
-def check_symbol_map(symbol_map: Dict[str, Any], symbols: Sequence[PythonSymbol], ts_index: TypeScriptIndex) -> List[str]:
+def check_symbol_map(
+    symbol_map: Dict[str, Any], symbols: Sequence[PythonSymbol], ts_index: TypeScriptIndex
+) -> List[str]:
     failures: List[str] = []
     entries = index_existing_entries(symbol_map)
     current_keys = {symbol.key for symbol in symbols}
@@ -326,7 +354,9 @@ def check_symbol_map(symbol_map: Dict[str, Any], symbols: Sequence[PythonSymbol]
             candidates = entry.get("variants") or symbol_variants(symbol.name)
             ts_symbol, _files = ts_index.resolve_identifier(candidates)
             if not ts_symbol:
-                failures.append(f"{symbol.key} is marked ported but no TS identifier matches {candidates}")
+                failures.append(
+                    f"{symbol.key} is marked ported but no TS identifier matches {candidates}"
+                )
         elif not entry.get("reason"):
             failures.append(f"{symbol.key} status {status!r} must include a reason")
         if status in {"ported", "consolidated"} and not entry.get("target"):
@@ -447,8 +477,12 @@ def index_existing_entries(symbol_map: Optional[Dict[str, Any]]) -> Dict[str, Di
 
 def summarize(modules: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
     total_symbols = sum(len(module["symbols"]) for module in modules)
-    direct = sum(1 for module in modules for entry in module["symbols"] if entry["status"] == "ported")
-    consolidated = sum(1 for module in modules for entry in module["symbols"] if entry["status"] == "consolidated")
+    direct = sum(
+        1 for module in modules for entry in module["symbols"] if entry["status"] == "ported"
+    )
+    consolidated = sum(
+        1 for module in modules for entry in module["symbols"] if entry["status"] == "consolidated"
+    )
     na = sum(1 for module in modules for entry in module["symbols"] if entry["status"] == "n/a")
     sub80 = [module for module in modules if module["coveragePercent"] < 80]
     return {
@@ -459,7 +493,9 @@ def summarize(modules: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         "naSymbols": na,
         "accountedSymbols": direct + consolidated + na,
         "unmappedSymbols": total_symbols - direct - consolidated - na,
-        "directCoveragePercent": round((direct / total_symbols) * 100, 2) if total_symbols else 100.0,
+        "directCoveragePercent": round((direct / total_symbols) * 100, 2)
+        if total_symbols
+        else 100.0,
         "accountedCoveragePercent": round(((direct + consolidated + na) / total_symbols) * 100, 2)
         if total_symbols
         else 100.0,
@@ -496,13 +532,17 @@ def module_target_candidates(module: str, ts_index: TypeScriptIndex) -> List[str
         return [file for _score, file in sorted(scored, key=lambda item: (-item[0], item[1]))[:5]]
 
     first_segment = module_path.parts[0] if module_path.parts else ""
-    fallback = SUBSYSTEM_FALLBACK_TARGETS.get(first_segment, "swissknife/src/services/logic-public-api.ts")
+    fallback = SUBSYSTEM_FALLBACK_TARGETS.get(
+        first_segment, "swissknife/src/services/logic-public-api.ts"
+    )
     return [fallback]
 
 
 def choose_best_file(files: Sequence[str], module: str) -> str:
     if not files:
-        return module_target_candidates(module, TypeScriptIndex(pathlib.Path("."), set(), {}, {}, []))[0]
+        return module_target_candidates(
+            module, TypeScriptIndex(pathlib.Path("."), set(), {}, {}, [])
+        )[0]
     module_norm = normalize(pathlib.PurePosixPath(module).stem)
     scored = []
     for file in files:
@@ -544,7 +584,11 @@ def is_host_native(module: str) -> bool:
         return True
     if module.startswith("zkp/backends/") and any(part in module for part in ("ffi", "provekit")):
         return True
-    if module.startswith("zkp/provekit/") and pathlib.PurePosixPath(module).stem in {"cli", "witness", "trace"}:
+    if module.startswith("zkp/provekit/") and pathlib.PurePosixPath(module).stem in {
+        "cli",
+        "witness",
+        "trace",
+    }:
         return True
     return False
 

@@ -28,11 +28,13 @@ def main() -> int:
     rows: List[Dict[str, Any]] = []
 
     for vector in payload.get("vectors", []):
-      value = vector.get("input", "")
-      rows.append({
-          "id": vector["id"],
-          "output": _canonical_modal_family_token(value),
-      })
+        value = vector.get("input", "")
+        rows.append(
+            {
+                "id": vector["id"],
+                "output": _canonical_modal_family_token(value),
+            }
+        )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(

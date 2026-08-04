@@ -20,7 +20,9 @@ def _evaluate(guidance: Dict[str, Any]) -> Dict[str, Any]:
         "routeFeatures": codec._compiler_guidance_route_features(guidance),
         "viewGapFeatures": codec._compiler_guidance_view_gap_features(guidance),
         "neo4jProjectionTarget": codec._compiler_guidance_implies_neo4j_projection_target(guidance),
-        "frameLogicTargetRoutes": sorted(codec._compiler_guidance_frame_logic_target_routes(guidance)),
+        "frameLogicTargetRoutes": sorted(
+            codec._compiler_guidance_frame_logic_target_routes(guidance)
+        ),
         "frameLogicTarget": codec._compiler_guidance_implies_frame_logic_target(guidance),
         "frameAuditFeatures": codec._compiler_guidance_frame_audit_features(guidance),
         "featureStrings": codec._compiler_guidance_feature_strings(guidance),

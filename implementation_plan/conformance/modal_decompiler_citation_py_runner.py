@@ -54,8 +54,7 @@ def _evaluate(vector: Dict[str, Any]) -> Dict[str, Any]:
         "signatures": signatures,
         "profiles": profiles,
         "sourceIdCitations": [
-            decompiler._source_id_inferred_citation(source_id)
-            for source_id in source_ids
+            decompiler._source_id_inferred_citation(source_id) for source_id in source_ids
         ],
         "inferredCitations": decompiler._inferred_citations_from_source_ids(source_ids),
     }
