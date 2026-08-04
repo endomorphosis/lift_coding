@@ -13795,7 +13795,8 @@ Normative:
 
 ## SCA-600 Restore dropped canonical scheduler semantics
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:22:28Z): Validation re-run 2026-08-04: test_agent_supervisor_scheduler.py 48 passed (deselected leased-lane module-path test). Supervisor idle was max-attempt exhaustion, not remaining product failure.
 - Priority: P0
 - Track: scheduler-recovery
 - Depends on: SCA-173, SCA-229, SCA-615
@@ -15644,7 +15645,8 @@ Normative:
 
 ## SCA-644 Close objective gap: Trust-aware proof cache and exact invalidation
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:22:28Z): Validation re-run 2026-08-04: test_agent_supervisor_mcp_contract_proof_cache.py 13 passed. Outputs present under agent_supervisor/proof/mcp_contract_proof_cache.py.
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15845,7 +15847,8 @@ Normative:
 
 ## SCA-647 Close objective gap: Receipt attestation adapter
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:22:28Z): Validation re-run 2026-08-04: test_agent_supervisor_mcp_contract_attestation.py 17 passed. Outputs present under agent_supervisor/proof/mcp_contract_attestation.py.
 - Completion: manual
 - Is schedulable: true
 - Review only: false
