@@ -564,6 +564,55 @@ def main() -> int:
             or forest.get("gitlink_state_cid")
             or ""
         )
+        # Optional operator-accepted approvals for historic tasks.
+        approval_dir = STATE_ROOT / "projection" / "completion" / "operator_approvals"
+        accepted_path = approval_dir / "accepted.json"
+        approval_records: list[dict[str, object]] = []
+        retrospective_records: list[dict[str, object]] = []
+        approval_policy_cid = ""
+        approval_capability_cid = ""
+        approval_key_cid = ""
+        approval_circuit_cid = ""
+        approval_objective_revision = ""
+        if accepted_path.is_file():
+            accepted = json.loads(accepted_path.read_text(encoding="utf-8"))
+            approval_policy_cid = str(accepted.get("policy_cid") or "")
+            approval_capability_cid = str(accepted.get("capability_cid") or "")
+            approval_key_cid = str(accepted.get("verifying_key_cid") or "")
+            approval_circuit_cid = str(accepted.get("circuit_cid") or "")
+            approval_objective_revision = str(accepted.get("objective_revision") or "")
+            for _tid, row in (accepted.get("approvals") or {}).items():
+                if isinstance(row, dict):
+                    approval_records.append(row)
+            for _tid, row in (accepted.get("retrospectives") or {}).items():
+                if isinstance(row, dict):
+                    retrospective_records.append(row)
+
+        def _approval_verifier(approval: object) -> bool:
+            if not isinstance(approval, dict):
+                return False
+            task_id = str(approval.get("task_id") or "")
+            att_path = approval_dir / f"{task_id}.attestation.json"
+            if not att_path.is_file():
+                return False
+            try:
+                att = json.loads(att_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                return False
+            if att.get("accepted") is not True:
+                return False
+            if str(att.get("operator_id") or "") != str(
+                approval.get("reviewer_id") or approval.get("operator_id") or ""
+            ):
+                return False
+            claimed = str(
+                approval.get("approval_cid")
+                or approval.get("policy_approval_cid")
+                or approval.get("operator_approval_cid")
+                or ""
+            )
+            return bool(claimed) and claimed == str(att.get("approval_cid") or "")
+
         identity = CloseoutMaterializerIdentity(
             repository_id=str(
                 identity_payload.get("repository_id")
@@ -587,6 +636,32 @@ def main() -> int:
                     if checkout.get("clean")
                     else "cid:dirty-overlay:present"
                 )
+            ),
+            policy_cid=str(
+                approval_policy_cid
+                or identity_payload.get("policy_cid")
+                or forest.get("policy_cid")
+                or "policy:proof-backed-test-reuse-v1"
+            ),
+            capability_cid=str(
+                approval_capability_cid
+                or identity_payload.get("capability_cid")
+                or "capability:proof-backed-test-reuse-v1"
+            ),
+            verifying_key_cid=str(
+                approval_key_cid
+                or identity_payload.get("verifying_key_cid")
+                or "key:activation-gap-none"
+            ),
+            circuit_cid=str(
+                approval_circuit_cid
+                or identity_payload.get("circuit_cid")
+                or "circuit:test-pass-v4"
+            ),
+            objective_revision=str(
+                approval_objective_revision
+                or identity_payload.get("objective_revision")
+                or ""
             ),
         )
         tasks = parse_task_file(REPO_ROOT / TODO_REL, "## PTR-")
@@ -638,9 +713,12 @@ def main() -> int:
             task_records=tasks,
             merge_queue_records=raw_merges,
             validation_receipts=validation_receipts,
+            approval_records=approval_records,
+            retrospective_records=retrospective_records,
             recover_missing_merges_from_git=True,
             repo_root=REPO_ROOT,
             freshness_seconds=3_600.0,
+            approval_verifier=_approval_verifier if approval_records else None,
         )
         persist_materialization_report(report, output_dir=OUT_DIR)
         task_evidence = {
