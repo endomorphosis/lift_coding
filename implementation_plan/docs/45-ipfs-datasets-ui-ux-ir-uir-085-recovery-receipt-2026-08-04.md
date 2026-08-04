@@ -1,10 +1,6 @@
 # UIR-085 recovery receipt — 2026-08-04
 
-Status: **open**
-
-This receipt is the operator-facing binder for the durable UIR-010
-`correction_failed` head. It is not acceptance evidence and does not mint a
-repair grant by itself.
+Status: **completed**
 
 ## Bound failure
 
@@ -18,17 +14,23 @@ repair grant by itself.
 | Failure kind | implementation |
 | Origin stream | `event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926` |
 
-## Required findings to close
+## Findings closed
 
-1. incomplete-reference-closure
-2. mutable-mapping-fields
-3. set-semantics-not-enforced
-4. executable-payload-bypass
-5. modality-direction-mismatch
+1. **incomplete-reference-closure** — cross-ref validation now covers modality bindings, localization variables, accessibility relationships, adaptive predicates, expression/constraint refs, local state transitions, and program binding preconditions/effects/verifications.
+2. **mutable-mapping-fields** — `UIConfiguration.settings` and `UINamespacedExtension.payload` are deep-frozen to `MappingProxyType` trees in `__post_init__`.
+3. **set-semantics-not-enforced** — set-like fields (including capability_ids) reject duplicates via `_require_unique` before serialization.
+4. **executable-payload-bypass** — rejects callable class objects and walks set/frozenset containers; forbidden `on_`/`handle_` keys remain blocked.
+5. **modality-direction-mismatch** — `input_modality_requirements` must be `direction=input`; `output_modality_requirements` must be `direction=output`.
 
-## Completion rule
+## Evidence
 
-Only mark `UIR-085` completed after schema/tests address the five findings and
-this receipt is updated with validation evidence. Completing the task then
-allows the supervisor to mint the exact post-merge correction repair grant for
-UIR-010.
+- Datasets commit: `f4e4df61527378e967662a5aa6dc945c0bb9f145`
+- Validation: `cd external/ipfs_datasets && python -m pytest tests/unit/logic/ui_ux_ir/test_schema.py -q` → **25 passed**
+- Accelerator pin for submodule production context: `8cfb572d962f8aae4aa0d68c03a4b460f47ea1eb`
+
+## Operator note
+
+Production typed-packet routing previously rejected submodule effect paths
+(`nested_repository_escape`). The accelerator pin allows registered
+`worktree_submodule_paths` as gitlink-backed nested roots so later UIR-010
+correction attempts can package exact schema source.

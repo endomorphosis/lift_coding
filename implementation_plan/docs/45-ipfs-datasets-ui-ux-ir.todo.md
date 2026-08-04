@@ -1462,7 +1462,7 @@ Program rules:
 
 ## UIR-085 Resolve implementation retry-budget failure for UIR-010
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
