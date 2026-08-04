@@ -1468,6 +1468,9 @@ def _run_fresh_index_scan(
         "--shadow",
         "--allow-dirty",
         "--skip-extraction",
+        # Parser-failure cluster verification is primary-tree authority. Multi-root
+        # provider indexing is SCA-603 and must not dominate cluster repair scans.
+        "--skip-provider-indexes",
         "--max-parser-failures",
         "10",
         "--max-parser-failure-ratio",

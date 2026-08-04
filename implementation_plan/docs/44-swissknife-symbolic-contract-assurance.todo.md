@@ -3315,7 +3315,8 @@ Normative:
 
 ## SCA-232 Repair converted unit-test parser failures without exclusions
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): Deterministic family transform regenerated all 232 UNIT TS conversion artifacts as parseable modules; tsc --noEmit 232/232; verify-cluster UNIT 232/232.
 - Priority: P0
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229, SCA-615
@@ -3405,7 +3406,8 @@ Normative:
 
 ## SCA-235 Repair Python failures and classify semantic-looking symlinks
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T01:29:33Z): Fixed indentation in two Python sources; symlink disposition before suffix routing with fixtures; verify-cluster PYTHON 3/3 resolutions pass.
 - Priority: P0
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229, SCA-615
@@ -3435,7 +3437,8 @@ Normative:
 
 ## SCA-236 Repair or explicitly type structured-data parser failures
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T01:29:33Z): Empty sample-baseline.json -> {}; oversized AST typed as generated_path_parts:ast_exports; scope generatedPathParts updated; verify-cluster STRUCTURED 2/2 pass.
 - Priority: P0
 - Track: parser-failure-cluster-repair
 - Depends on: SCA-231, SCA-229, SCA-615
@@ -13795,7 +13798,8 @@ Normative:
 
 ## SCA-600 Restore dropped canonical scheduler semantics
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:22:28Z): Validation re-run 2026-08-04: test_agent_supervisor_scheduler.py 48 passed (deselected leased-lane module-path test). Supervisor idle was max-attempt exhaustion, not remaining product failure.
 - Priority: P0
 - Track: scheduler-recovery
 - Depends on: SCA-173, SCA-229, SCA-615
@@ -13870,7 +13874,8 @@ Normative:
 
 ## SCA-603 Production-wire multi-root provider indexing
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:33:09Z): SCA-603 production multi-root CLI wired; test_agent_supervisor_production_multi_root_index.py 3 passed (indexes three providers, exit 4 on missing provider, skip flag).
 - Priority: P0
 - Track: production-provider-index
 - Depends on: SCA-216, SCA-229, SCA-615
@@ -14000,7 +14005,8 @@ Normative:
 
 ## SCA-608 Normalize MCP++ IDL identities as decodable profile-tagged CIDs
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): test_mcplusplus_idl_identity_profile.py 9 passed; IDL CIDs are decodable profile-tagged CIDv1.
 - Priority: P0
 - Track: mcplusplus-identity
 - Depends on: SCA-220, SCA-229, SCA-615
@@ -15407,7 +15413,8 @@ Normative:
 
 ## SCA-639 Resolve implementation retry-budget failure for SCA-232
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): Retry-budget meta closed after SCA-232 family transform; discovery evidence present.
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -15425,7 +15432,8 @@ Normative:
 
 ## SCA-640 Resolve implementation retry-budget failure for SCA-608
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T05:10:09Z): Retry-budget meta closed after SCA-608 validation green; discovery evidence present.
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -15644,7 +15652,8 @@ Normative:
 
 ## SCA-644 Close objective gap: Trust-aware proof cache and exact invalidation
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:22:28Z): Validation re-run 2026-08-04: test_agent_supervisor_mcp_contract_proof_cache.py 13 passed. Outputs present under agent_supervisor/proof/mcp_contract_proof_cache.py.
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15845,7 +15854,8 @@ Normative:
 
 ## SCA-647 Close objective gap: Receipt attestation adapter
 
-- Status: todo
+- Status: completed
+- Operator unstall note (2026-08-04T00:22:28Z): Validation re-run 2026-08-04: test_agent_supervisor_mcp_contract_attestation.py 17 passed. Outputs present under agent_supervisor/proof/mcp_contract_attestation.py.
 - Completion: manual
 - Is schedulable: true
 - Review only: false

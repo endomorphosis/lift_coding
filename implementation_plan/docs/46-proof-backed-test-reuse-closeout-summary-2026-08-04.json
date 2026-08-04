@@ -1,0 +1,51 @@
+{
+  "head": "39e8992addf3c742cb02f7bf30eb54534f77a35d",
+  "branch": "agent/proof-backed-test-reuse",
+  "accelerator": "ded3932433f4d08e6eb8eddc1595bfb1c0ddabf0",
+  "datasets": "1894e9dca7dced0690893d468e40751a14f0b15b",
+  "kit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+  "completed": 66,
+  "errors": [],
+  "work_complete": true,
+  "healthy": true,
+  "closeout_passed": false,
+  "diagnosis_passed": false,
+  "reason_codes": [
+    "missing_gate_artifact",
+    "missing_evidence_artifact"
+  ],
+  "remaining_groups": [
+    "managed_merge_or_reviewed_completion_provenance",
+    "genuine_reviewed_approvals_without_queue_records",
+    "fresh_current_tree_proof_reuse_off_validation_receipts",
+    "acceptance_coverage_receipts",
+    "analyzer_health_receipts",
+    "adversarial_population_receipts",
+    "independent_exhaustion_quorum_members",
+    "authoritative_child_goal_evidence",
+    "real_warm_reuse_benchmark_receipt",
+    "rollout_decision_and_promotion_evidence",
+    "fresh_three_lane_supervisor_health_receipt",
+    "assembled_goal_completion_evidence",
+    "persisted_final_current_tree_gate_bundle"
+  ],
+  "usable_merge_candidates": 50,
+  "missing_merge_ids": [
+    "PTR-000",
+    "PTR-001",
+    "PTR-002",
+    "PTR-003",
+    "PTR-010",
+    "PTR-011",
+    "PTR-020",
+    "PTR-021",
+    "PTR-022",
+    "PTR-030",
+    "PTR-040",
+    "PTR-041",
+    "PTR-050",
+    "PTR-150",
+    "PTR-151",
+    "PTR-152"
+  ]
+}
