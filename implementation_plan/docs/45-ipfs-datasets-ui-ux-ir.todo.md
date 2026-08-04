@@ -1700,3 +1700,33 @@ Program rules:
 - Post-merge correction source canonical task CID: baguqeeraoxsql7pz3uvfajv3b6okdvprjquzz5d4gwzocptwxgs46k6ia7kq
 - Post-merge correction origin stream ID: event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926
 - Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010 after attempts 8–9 failed closed because Grok dual-mode files+patch emissions violated CLI oneOf. Land the supervisor normalize fix, write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-092-recovery-receipt-2026-08-04.md, then mark this repair task completed so the supervisor can release UIR-010 from strategy blocked_tasks.
+
+## UIR-093 Resolve implementation retry-budget failure for UIR-010
+
+- Status: completed
+- Completion: manual
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: schema
+- Depends on: UIR-001
+- Goal id: UIR-G020
+- Outputs: implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-093-recovery-receipt-2026-08-04.md
+- Validation: test -f implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-093-recovery-receipt-2026-08-04.md
+- Board namespace: ipfs-datasets-ui-ux-ir-v1
+- Bundle: ui-ux-ir/schema
+- Parallel lane: uir-schema
+- Resource class: cpu-small
+- Predicted files: implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-093-recovery-receipt-2026-08-04.md
+- Conflict policy: Sole owner of the UIR-010 correction_failed head after attempt-10 review-degraded route; do not edit protected plan files except the recovery receipt.
+- Post-merge correction repair schema: post-merge-correction-repair-v1
+- Post-merge correction denial ID: baguqeerairqc5selrpnvxsuenklnq5oi6e2djjcptvdzpta7hmdvapbai64a
+- Post-merge correction target attempt: 10
+- Post-merge correction failure event ID: sha256:870c9b2ef6894c6cdc272a697bc692a637dd131a36e3b8b66f75fb176e19a41f
+- Post-merge correction failure event sequence: 2418
+- Post-merge correction failure kind: implementation
+- Post-merge correction source task binding ID: baguqeera2kx5o2477yqetrtchdjet3xh3jvymesgbhk572zxopj5kf6uh64q
+- Post-merge correction source canonical task key: task/v1/75e505fdf9dd2a5026bb0f9ca1d5f14c299cf47c35b2e13e76b9a5cf2bc807d5
+- Post-merge correction source canonical task CID: baguqeeraoxsql7pz3uvfajv3b6okdvprjquzz5d4gwzocptwxgs46k6ia7kq
+- Post-merge correction origin stream ID: event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926
+- Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010 after attempt 10 admitted a Grok proposal then failed closed on independent Codex review (review_degraded / response_bytes=0). Land the non-streaming Grok JSON capture fix (and related pin), write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-093-recovery-receipt-2026-08-04.md, then mark this repair task completed so the supervisor can release UIR-010 from strategy blocked_tasks.
