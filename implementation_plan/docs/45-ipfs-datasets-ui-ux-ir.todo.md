@@ -629,7 +629,7 @@ Program rules:
 
 ## UIR-034 Align Python and TypeScript mediation to one fail-closed policy
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -989,7 +989,7 @@ Program rules:
 
 ## UIR-055 Implement formal-policy mediation and governed invocation requests
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1019,7 +1019,7 @@ Program rules:
 
 ## UIR-056 Implement feedback result mapping immutable receipts and replay
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1049,7 +1049,7 @@ Program rules:
 
 ## UIR-060 Implement accessibility privacy and security validators
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1079,7 +1079,7 @@ Program rules:
 
 ## UIR-061 Add property fuzz mutation and bounded model-checking gates
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1109,7 +1109,7 @@ Program rules:
 
 ## UIR-062 Build the cross-language canonical and semantic golden corpus
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -1118,7 +1118,7 @@ Program rules:
 - Depends on: UIR-002, UIR-026, UIR-032, UIR-040, UIR-050, UIR-056
 - Goal id: UIR-G070
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/ui_ux_ir/conformance.py, external/ipfs_datasets/tests/fixtures/ui_ux_ir/v1/golden_vectors.json, external/ipfs_datasets/tests/unit/logic/ui_ux_ir/test_conformance.py, swissknife/test/mcp-plus-plus/ui-ux-ir-cross-language.test.ts
-- Validation: cd external/ipfs_datasets && python -m pytest tests/unit/logic/ui_ux_ir/test_conformance.py -q; npm --prefix swissknife run test:run -- test/mcp-plus-plus/ui-ux-ir-cross-language.test.ts
+- Validation: cd external/ipfs_datasets && python -m pytest tests/unit/logic/ui_ux_ir/test_conformance.py -q && cd ../.. && npm --prefix swissknife run test:run -- test/mcp-plus-plus/ui-ux-ir-cross-language.test.ts
 - Board namespace: ipfs-datasets-ui-ux-ir-v1
 - Bundle: ui-ux-ir/conformance-golden
 - Parallel lane: uir-conformance-golden
@@ -1139,7 +1139,7 @@ Program rules:
 
 ## UIR-069 Finalize the internal package export surfaces
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
