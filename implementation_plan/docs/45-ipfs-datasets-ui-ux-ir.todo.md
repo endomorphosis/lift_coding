@@ -419,7 +419,7 @@ Program rules:
 
 ## UIR-025 Integrate the four formal views with complete coverage
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -689,7 +689,7 @@ Program rules:
 
 ## UIR-040 Implement capability negotiation projection solving and loss receipts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -869,7 +869,7 @@ Program rules:
 
 ## UIR-051 Implement speech and microphone intent normalization
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -899,7 +899,7 @@ Program rules:
 
 ## UIR-052 Implement hand gaze head and Neural Band/captouch normalization
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false

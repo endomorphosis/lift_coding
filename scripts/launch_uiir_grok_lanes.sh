@@ -158,6 +158,58 @@ start_lane() {
   fi
 }
 
+_stop_board_companion() {
+  local unit="uiir-board-companion.service"
+  if command -v systemctl >/dev/null 2>&1; then
+    systemctl --user stop "$unit" 2>/dev/null || true
+    systemctl --user reset-failed "$unit" 2>/dev/null || true
+  fi
+  python3 - <<'PY'
+import os, signal
+from pathlib import Path
+me, parent = os.getpid(), os.getppid()
+token = b"uiir_auto_complete_green_tasks"
+for entry in Path("/proc").iterdir():
+    if not entry.name.isdigit():
+        continue
+    pid = int(entry.name)
+    if pid in {me, parent}:
+        continue
+    try:
+        raw = (entry / "cmdline").read_bytes()
+    except (OSError, PermissionError):
+        continue
+    if token in raw:
+        try:
+            os.kill(pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+PY
+}
+
+_start_board_companion() {
+  _stop_board_companion
+  local log_path="${LOG_DIR}/uiir-board-companion.log"
+  # Re-check every 3 minutes so newly green landings unlock dependents.
+  # Completion: manual + protected todo path otherwise stalls the cascade.
+  local loop_cmd="while true; do /usr/bin/python3 \"${ROOT}/scripts/uiir_auto_complete_green_tasks.py\" --root \"${ROOT}\" || true; sleep 180; done"
+  if command -v systemd-run >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then
+    systemd-run --user --collect \
+      --unit="uiir-board-companion" \
+      --description="UIIR board auto-complete green tasks companion" \
+      --property=Type=simple \
+      --property="WorkingDirectory=${ROOT}" \
+      --property=Restart=on-failure \
+      --property=RestartSec=15s \
+      --property=KillMode=control-group \
+      /bin/bash -c "${loop_cmd}"
+    echo "started systemd unit uiir-board-companion"
+  else
+    nohup /bin/bash -c "${loop_cmd}" >>"$log_path" 2>&1 &
+    echo "started board companion pid=$! log=$log_path"
+  fi
+}
+
 MODE="${1:-start}"
 case "$MODE" in
   stop)
@@ -165,19 +217,24 @@ case "$MODE" in
       stop_lane "$lane"
       echo "stopped lane ${lane}"
     done
+    _stop_board_companion
+    echo "stopped board companion"
     ;;
   start|restart)
     for lane in 0 1 2 3 4 5; do
       stop_lane "$lane"
       start_lane "$lane"
     done
+    _start_board_companion
     echo "provider=${IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER} production_route=${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE}"
     echo "merge_target=${UIIR_MERGE_TARGET_BRANCH} shards=${SHARD_COUNT} strict=no max_restarts=${MAX_RESTARTS}"
     echo "implement_timeout=${IMPLEMENT_TIMEOUT}s log_stall=${LOG_STALL_SECONDS}s"
+    echo "board_companion=on (auto-complete green ready tasks every 180s)"
     ;;
   status)
     if command -v systemctl >/dev/null 2>&1; then
       systemctl --user --no-pager --full status uiir-lane-{0,1,2,3,4,5}.service 2>&1 | head -80 || true
+      systemctl --user --no-pager --full status uiir-board-companion.service 2>&1 | head -20 || true
     fi
     python3 - <<'PY'
 from pathlib import Path
@@ -190,7 +247,10 @@ for entry in Path("/proc").iterdir():
         raw = (entry / "cmdline").read_bytes()
     except (OSError, PermissionError):
         continue
-    if b"uiir_lane_" not in raw:
+    if b"uiir_lane_" not in raw and b"uiir_auto_complete_green_tasks" not in raw:
+        continue
+    if b"uiir_auto_complete_green_tasks" in raw:
+        print(f"  pid={entry.name} board_companion")
         continue
     if b"implementation_supervisor" in raw or b"implementation_daemon" in raw:
         m = re.search(rb"uiir_lane_(\d+)", raw)
