@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Launch six UIIR implementation lanes with Grok-first agent dispatch.
 #
-# Intentionally does NOT pass --production-provider-policy.
-# That policy forces typed Grok-implement + independent Codex review, which
-# blocks board progress when Codex is quota-exhausted. Ordinary agent
-# implement uses Grok (grok_quota_codex: Codex only after verified Grok quota).
+# Autonomy defaults for finishing the board without Codex:
+# - No --production-provider-policy (typed Grok+Codex independent review).
+# - PRODUCTION_PROVIDER_ROUTE=0 and ALLOW_RAW_MODEL_COMMAND=1.
+# - Non-strict sharding so idle lanes claim any ready UIR- task.
+# - Long implement timeouts / log-stall so Grok is not recycled mid-tool-call.
+# - High max-restarts for multi-hour unattended runs.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
@@ -14,14 +16,12 @@ export PYTHONPATH="${ROOT}/external/ipfs_accelerate${PYTHONPATH:+:${PYTHONPATH}}
 export PYTHONUNBUFFERED=1
 
 # Force Grok Build agent implement. Do not require independent Codex review.
-# (Typed production packet policy is not used by this launcher.)
 export IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER="${IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER:-grok}"
 export IPFS_ACCELERATE_AGENT_GROK_MODEL="${IPFS_ACCELERATE_AGENT_GROK_MODEL:-grok-4.5}"
 export IPFS_ACCELERATE_AGENT_GROK_PERMISSION_MODE="${IPFS_ACCELERATE_AGENT_GROK_PERMISSION_MODE:-bypassPermissions}"
 export IPFS_ACCELERATE_AGENT_GROK_BIN="${IPFS_ACCELERATE_AGENT_GROK_BIN:-${HOME}/.local/bin/grok}"
 
 # Never force the typed production packet route for this board.
-# (Values 0/false/no/off disable the typed route when a task claims it.)
 export IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE="${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE:-0}"
 # Allow agent CLI when a task would otherwise claim the typed route.
 export IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND="${IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND:-1}"
@@ -33,9 +33,42 @@ STATE_ROOT="data/agent_supervisor/ui_ux_ir/state"
 WORKTREE_ROOT="data/agent_supervisor/ui_ux_ir/worktrees"
 MERGE_QUEUE_DIR="data/agent_supervisor/ui_ux_ir/merge-queue"
 LOG_DIR="data/agent_supervisor/ui_ux_ir/logs"
-SHARD_COUNT=6
+# Soft affinity only: without --strict-task-sharding, empty shards fall back to
+# any ready UIR- task so the board keeps draining with 6 lanes.
+SHARD_COUNT="${UIIR_SHARD_COUNT:-6}"
+MAX_RESTARTS="${UIIR_MAX_RESTARTS:-200}"
+IMPLEMENT_TIMEOUT="${UIIR_IMPLEMENTATION_TIMEOUT:-7200}"
+LOG_STALL_SECONDS="${UIIR_IMPLEMENTATION_LOG_STALL_SECONDS:-3600}"
 
 mkdir -p "$STATE_ROOT" "$WORKTREE_ROOT" "$MERGE_QUEUE_DIR" "$LOG_DIR"
+
+_kill_lane_pids() {
+  local lane="$1"
+  local me=$$ parent=$PPID
+  python3 - "$lane" "$me" "$parent" <<'PY'
+import os, signal, sys
+from pathlib import Path
+lane, me, parent = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
+token = f"uiir_lane_{lane}".encode()
+for entry in Path("/proc").iterdir():
+    if not entry.name.isdigit():
+        continue
+    pid = int(entry.name)
+    if pid in {me, parent}:
+        continue
+    try:
+        raw = (entry / "cmdline").read_bytes()
+    except (OSError, PermissionError):
+        continue
+    if token not in raw:
+        continue
+    if b"implementation_supervisor" in raw or b"implementation_daemon" in raw:
+        try:
+            os.kill(pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+PY
+}
 
 stop_lane() {
   local lane="$1"
@@ -44,9 +77,7 @@ stop_lane() {
     systemctl --user stop "$unit" 2>/dev/null || true
     systemctl --user reset-failed "$unit" 2>/dev/null || true
   fi
-  # Kill any residual unmanaged daemon for this state prefix.
-  pkill -f "state-prefix uiir_lane_${lane}" 2>/dev/null || true
-  pkill -f "state-dir .*ui_ux_ir/state/lane-${lane}" 2>/dev/null || true
+  _kill_lane_pids "$lane"
 }
 
 start_lane() {
@@ -56,6 +87,8 @@ start_lane() {
   local log_path="${LOG_DIR}/uiir-lane-${lane}.log"
   mkdir -p "$state_dir" "$worktree_dir"
 
+  # NOTE: intentionally NO --strict-task-sharding so idle lanes claim any ready
+  # UIR- work when their affinity shard is empty (board drain).
   local -a cmd=(
     /usr/bin/python3
     -m ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor
@@ -68,7 +101,6 @@ start_lane() {
     --merge-target-branch "$UIIR_MERGE_TARGET_BRANCH"
     --task-shard-count "$SHARD_COUNT"
     --task-shard-index "$lane"
-    --strict-task-sharding
     --worktree-submodule-path external/ipfs_datasets
     --worktree-submodule-path external/ipfs_accelerate
     --worktree-submodule-path swissknife
@@ -84,10 +116,10 @@ start_lane() {
     --implement
     --daemon-interval 60
     --check-interval 30
-    # Grok agent implements often go silent in the log while tool-calling;
-    # 300s default worktree_no_child_stall kills them mid-task. Keep 1h.
-    --implementation-log-stall-seconds 3600
-    --implementation-timeout 7200
+    --max-restarts "$MAX_RESTARTS"
+    --max-task-attempts 0
+    --implementation-log-stall-seconds "$LOG_STALL_SECONDS"
+    --implementation-timeout "$IMPLEMENT_TIMEOUT"
   )
 
   if command -v systemd-run >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then
@@ -112,7 +144,16 @@ start_lane() {
       "${cmd[@]}"
     echo "started systemd unit uiir-lane-${lane}"
   else
-    nohup "${cmd[@]}" >>"$log_path" 2>&1 &
+    nohup env \
+      PYTHONPATH="${PYTHONPATH}" \
+      PYTHONUNBUFFERED=1 \
+      IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER="${IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER}" \
+      IPFS_ACCELERATE_AGENT_GROK_MODEL="${IPFS_ACCELERATE_AGENT_GROK_MODEL}" \
+      IPFS_ACCELERATE_AGENT_GROK_PERMISSION_MODE="${IPFS_ACCELERATE_AGENT_GROK_PERMISSION_MODE}" \
+      IPFS_ACCELERATE_AGENT_GROK_BIN="${IPFS_ACCELERATE_AGENT_GROK_BIN}" \
+      IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE="${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE}" \
+      IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND="${IPFS_ACCELERATE_AGENT_ALLOW_RAW_MODEL_COMMAND}" \
+      "${cmd[@]}" >>"$log_path" 2>&1 &
     echo "started background lane ${lane} pid=$! log=$log_path"
   fi
 }
@@ -131,13 +172,31 @@ case "$MODE" in
       start_lane "$lane"
     done
     echo "provider=${IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER} production_route=${IPFS_ACCELERATE_AGENT_PRODUCTION_PROVIDER_ROUTE}"
-    echo "merge_target=${UIIR_MERGE_TARGET_BRANCH}"
+    echo "merge_target=${UIIR_MERGE_TARGET_BRANCH} shards=${SHARD_COUNT} strict=no max_restarts=${MAX_RESTARTS}"
+    echo "implement_timeout=${IMPLEMENT_TIMEOUT}s log_stall=${LOG_STALL_SECONDS}s"
     ;;
   status)
     if command -v systemctl >/dev/null 2>&1; then
       systemctl --user --no-pager --full status uiir-lane-{0,1,2,3,4,5}.service 2>&1 | head -80 || true
     fi
-    pgrep -af 'uiir_lane_|ui_ux_ir/state/lane-' 2>/dev/null | head -20 || echo "no uiir lane processes"
+    python3 - <<'PY'
+from pathlib import Path
+import re
+print("uiir supervisors/daemons:")
+for entry in Path("/proc").iterdir():
+    if not entry.name.isdigit():
+        continue
+    try:
+        raw = (entry / "cmdline").read_bytes()
+    except (OSError, PermissionError):
+        continue
+    if b"uiir_lane_" not in raw:
+        continue
+    if b"implementation_supervisor" in raw or b"implementation_daemon" in raw:
+        m = re.search(rb"uiir_lane_(\d+)", raw)
+        kind = "sup" if b"implementation_supervisor" in raw else "daemon"
+        print(f"  pid={entry.name} {kind} lane={m.group(1).decode() if m else '?'}")
+PY
     ;;
   *)
     echo "usage: $0 {start|stop|restart|status}" >&2
