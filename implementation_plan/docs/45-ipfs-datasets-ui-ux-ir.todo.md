@@ -119,7 +119,7 @@ Program rules:
 
 ## UIR-011 Add canonical identity exact decoding and deterministic migrations
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -149,7 +149,7 @@ Program rules:
 
 ## UIR-012 Implement semantic components composition and abstract layout
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -179,7 +179,7 @@ Program rules:
 
 ## UIR-013 Implement behavior UX accessibility and localization semantics
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -209,7 +209,7 @@ Program rules:
 
 ## UIR-014 Implement modality capability program-binding and protocol contracts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -239,7 +239,7 @@ Program rules:
 
 ## UIR-015 Bind provenance and separate declaration from runtime artifacts
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false

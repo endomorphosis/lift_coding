@@ -84,6 +84,10 @@ start_lane() {
     --implement
     --daemon-interval 60
     --check-interval 30
+    # Grok agent implements often go silent in the log while tool-calling;
+    # 300s default worktree_no_child_stall kills them mid-task. Keep 1h.
+    --implementation-log-stall-seconds 3600
+    --implementation-timeout 7200
   )
 
   if command -v systemd-run >/dev/null 2>&1 && systemctl --user show-environment >/dev/null 2>&1; then
