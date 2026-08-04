@@ -1,0 +1,388 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/proof-backed-test-reuse-profile@1",
+  "profileId": "proof-backed-test-reuse-v1",
+  "mode": "reviewed_fixed_board",
+  "repositoryRoot": ".",
+  "integrationBranch": "agent/proof-backed-test-reuse",
+  "planPath": "implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md",
+  "objectivePath": "implementation_plan/docs/46-proof-backed-test-reuse.objectives.md",
+  "todoPath": "implementation_plan/docs/46-proof-backed-test-reuse.todo.md",
+  "validatorPath": "scripts/validate_proof_backed_test_reuse_board.py",
+  "controllerPath": "scripts/proof_backed_test_reuse_supervisor.py",
+  "taskPrefix": "## PTR-",
+  "goalPrefix": "PTR-G",
+  "boardNamespace": "proof-backed-test-reuse-v1",
+  "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v1",
+  "repositories": {
+    "accelerator": "external/ipfs_accelerate",
+    "datasets": "external/ipfs_datasets",
+    "kit": "external/ipfs_kit"
+  },
+  "authority": {
+    "cid": "content_identity_only",
+    "astTrace": "invalidation_scope_only",
+    "runtimeTrace": "invalidation_scope_and_completeness_only",
+    "passReceipt": "candidate_only_until_trust_and_context_revalidated",
+    "realZkCertificate": "authoritative_only_when_exactly_bound_and_locally_verified",
+    "simulatedZk": "non_attested_never_skip",
+    "mutableCacheIndex": "lookup_hint_only",
+    "llmOutput": "proposal_only",
+    "ordinaryPytestSkip": "non_completion_evidence",
+    "missingOrFaultyDependency": "run_test"
+  },
+  "contentIdentity": {
+    "canonicalization": "strict-dag-json-v1",
+    "cidVersion": 1,
+    "multibase": "base32",
+    "multicodec": "dag-json",
+    "multihash": "sha2-256",
+    "canonicalBytesRetained": true,
+    "decodedMultihashMustMatchCanonicalBytes": true,
+    "providers": [
+      "ipfs_datasets_py.utils.cid_utils",
+      "ipfs_accelerate_py.agent_supervisor.analysis.content_identity_bridge",
+      "multiformats.CID",
+      "multiformats.multihash"
+    ],
+    "legacyKitPseudoCidAccepted": false,
+    "providerUnavailableAction": "run_test"
+  },
+  "executionIdentity": {
+    "schema": "TestExecutionKey@1",
+    "initialScope": "full_admitted_repository_forest",
+    "binds": [
+      "test_locator",
+      "test_source_ast",
+      "parameters",
+      "fixtures",
+      "conftest_and_hooks",
+      "static_dependency_trace",
+      "runtime_dependency_trace",
+      "repository_forest_and_dirty_overlay",
+      "pytest_python_and_plugin_versions",
+      "dependency_locks_and_distributions",
+      "allowlisted_environment_platform_hardware_capabilities",
+      "external_snapshot_adapters",
+      "policy_tracer_statement_circuit_and_key_versions"
+    ],
+    "unknownOrIncompleteAction": "run_test"
+  },
+  "proofPolicy": {
+    "statement": "TestPassStatementV1",
+    "proveOnlyAfterSetupCallTeardownPass": true,
+    "provingIsDeferred": true,
+    "verificationIsLocalAndBounded": true,
+    "realBackends": [
+      "groth16",
+      "provekit"
+    ],
+    "simulatedBackendCanSkip": false,
+    "endpointUnavailableAction": "retain_receipt_and_run_future_test",
+    "cacheHitReDerivesAuthority": true,
+    "verifierKeyCircuitIssuerPolicyAndEpochPinned": true,
+    "privateWitnessOrSecretInPublicArtifactAllowed": false
+  },
+  "cachePolicy": {
+    "authorityAdapters": [
+      "ipfs_accelerate_py.agent_supervisor.proof.formal_verification_cache.TrustAwareProofCache",
+      "ipfs_accelerate_py.agent_supervisor.proof.prover_evidence_store.ProverEvidenceStore"
+    ],
+    "layers": [
+      "session_memo",
+      "local_immutable_cas",
+      "bounded_mutable_locator_index",
+      "optional_shared_or_ipfs_transport"
+    ],
+    "atomicWriteReadbackRehash": true,
+    "locatorIndexIsAuthority": false,
+    "quarantineInvalidArtifacts": true,
+    "ttlRevocationAndFencedSingleflight": true,
+    "cacheUnavailableAction": "run_test"
+  },
+  "pytestPolicy": {
+    "plugin": "ipfs_accelerate_py.testing.proof_reuse.plugin",
+    "registration": [
+      "pytest11_entry_point",
+      "optional_repository_root_conftest_loader"
+    ],
+    "modes": [
+      "off",
+      "shadow",
+      "read",
+      "write",
+      "readwrite"
+    ],
+    "initialDefault": "off",
+    "verifiedSkipReasonPrefix": "proof-cache-hit:",
+    "directNodeInvocationRequired": true,
+    "testFileRegistryAllowed": false,
+    "xdistControllerPublishesWrites": true,
+    "disableReuseUnder": [
+      "coverage",
+      "mutation",
+      "profiling",
+      "benchmarking",
+      "debugger",
+      "leak_detection"
+    ],
+    "implementationValidationEnvironment": {
+      "IPFS_TEST_PROOF_REUSE_MODE": "off"
+    }
+  },
+  "optionalCapabilities": {
+    "launchGate": false,
+    "reportedOnly": [
+      "multiformats",
+      "ipfs_datasets_zkp",
+      "groth16_endpoint",
+      "provekit_binary",
+      "proof_cache",
+      "ipfs_transport",
+      "kubo",
+      "lotus",
+      "iroh"
+    ],
+    "unavailableAction": "continue_supervisor_and_run_tests"
+  },
+  "lazyDependencyPolicy": {
+    "activation": "first_requested_proof_reuse_capability",
+    "manifestParityRequired": [
+      "requirements.txt",
+      "setup.py",
+      "pyproject.toml"
+    ],
+    "scopedImportsRequired": true,
+    "boundedAllowlistedInstaller": true,
+    "automaticWhenPackageAutoInstallPolicyAllows": true,
+    "offAndImplementationValidationMayInstall": false,
+    "installerFailureAction": "typed_unavailable_and_run_test",
+    "datasetsNativeGroth16BuildRequiresExplicitOptIn": true,
+    "datasetsNltkDownloadRequiresExplicitOptIn": true
+  },
+  "goalAlignment": {
+    "PTR-G010": [
+      "CBP-G025",
+      "CBP-G200",
+      "ASI-G300",
+      "ASI-G310"
+    ],
+    "PTR-G020": [
+      "ASI-G310",
+      "VFS-G030"
+    ],
+    "PTR-G030": [
+      "ASI-G220",
+      "ASI-G320"
+    ],
+    "PTR-G040": [
+      "ASI-G250",
+      "CBP-G015",
+      "CBP-G050"
+    ],
+    "PTR-G050": [
+      "CBP-G200",
+      "ASI-G300"
+    ],
+    "PTR-G060": [
+      "ASI-G240",
+      "ASI-G350"
+    ],
+    "PTR-G070": [
+      "ASI-G240",
+      "ASI-G300",
+      "ASI-G350"
+    ],
+    "PTR-G080": [
+      "ASI-G220"
+    ],
+    "PTR-G090": [
+      "ASI-G250"
+    ],
+    "PTR-G100": [
+      "ASI-G240",
+      "ASI-G280",
+      "ASI-G360"
+    ],
+    "PTR-G110": [
+      "ASI-G260",
+      "ASI-G290",
+      "ASI-G360"
+    ]
+  },
+  "objectiveProjection": {
+    "mode": "reviewed_bounded_closeout",
+    "reviewedAt": "2026-08-03",
+    "reviewRevision": "production-runtime-activation-repair-v4",
+    "implementationTaskIds": [
+      "PTR-143",
+      "PTR-144",
+      "PTR-145",
+      "PTR-146",
+      "PTR-147",
+      "PTR-148",
+      "PTR-149",
+      "PTR-150",
+      "PTR-151",
+      "PTR-152",
+      "PTR-153",
+      "PTR-154",
+      "PTR-155"
+    ],
+    "initialClaimableTaskIds": [
+      "PTR-150",
+      "PTR-151"
+    ],
+    "authorityWriter": "outer_controller_only",
+    "workerLaneReconciliationEnabled": false,
+    "autonomousGapGenerationEnabled": false,
+    "artifactLocation": "state_root",
+    "gatePathSuffix": "projection/completion/goal_completion_gate.json",
+    "evidencePathSuffix": "projection/completion/goal_completion_evidence.json",
+    "lifecycleProjectionPathSuffix": "projection/completion/objective_projection.md",
+    "candidateObjectivePathSuffix": "projection/completion/objective_candidate.md",
+    "supervisorHealthInputPathSuffix": "projection/completion/supervisor_health_input.json",
+    "statusPathSuffix": "projection/completion/closeout_status.json",
+    "reconciliationPhases": 3,
+    "closeoutControllerTaskId": "PTR-121",
+    "operatorHandoffTaskId": "PTR-149",
+    "proofMaterialAndContextWaveTaskIds": [
+      "PTR-153",
+      "PTR-154"
+    ],
+    "exactV4PublicationJoinTaskId": "PTR-155",
+    "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
+  },
+  "providerPolicy": {
+    "primary": {
+      "provider": "grok",
+      "model": "grok-4.5"
+    },
+    "fallback": {
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "modelReasoningEffort": "medium"
+    },
+    "fallbackTrigger": "grok_quota_exhausted",
+    "primaryUnavailableAction": "fail_preflight",
+    "nonQuotaFailureAction": "propagate_without_fallback",
+    "appliesTo": [
+      "implementation",
+      "semantic_merge_resolver"
+    ],
+    "fallbackForbiddenOn": [
+      "authentication_failure",
+      "launch_failure",
+      "timeout",
+      "transport_failure",
+      "generic_nonzero_exit",
+      "malformed_output",
+      "task_failure"
+    ]
+  },
+  "parallelRuntime": {
+    "enabled": true,
+    "laneCount": 3,
+    "scheduler": "deterministic_numeric_task_shards",
+    "strictTaskSharding": true,
+    "initialClaimableTaskIds": [
+      "PTR-150",
+      "PTR-151"
+    ],
+    "isolation": "ephemeral_git_worktree_per_task",
+    "mergeQueue": "shared_serial",
+    "mergeTargetBranch": "agent/proof-backed-test-reuse",
+    "objectiveRefillEnabled": false,
+    "codebaseRefillEnabled": false,
+    "checkIntervalSeconds": 30,
+    "daemonIntervalSeconds": 60,
+    "staleSeconds": 1800,
+    "watchdogStartupGraceSeconds": 300,
+    "implementationTimeoutSeconds": 7200,
+    "implementationMaxTimeoutSeconds": 10800,
+    "implementationLogStallSeconds": 1200,
+    "maxTaskAttempts": 5,
+    "implementationRetryBudget": 3,
+    "validationRetryBudget": 3,
+    "mergeRetryBudget": 3,
+    "mergeReconciliationMaxMerges": 1,
+    "providers": [
+      "grok-codex",
+      "grok-codex",
+      "grok-codex"
+    ],
+    "canonicalTaskProviderRolesByShard": [
+      "codex-implement",
+      "grok-implement",
+      "codex-implement"
+    ],
+    "canonicalTaskProviderRolesByShardPurpose": "historical_task_identity_only",
+    "runtimeExecutionProviderRolesByShard": [
+      "grok-implement",
+      "grok-implement",
+      "grok-implement"
+    ],
+    "semanticMergeResolver": {
+      "provider": "grok-codex",
+      "fallbackTrigger": "grok_quota_exhausted",
+      "inheritedCommandPolicy": "override_with_managed_provider_chain"
+    },
+    "worktreeSubmodulePaths": [
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit"
+    ],
+    "protectedPaths": [
+      "implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md",
+      "implementation_plan/docs/46-proof-backed-test-reuse.objectives.md",
+      "implementation_plan/docs/46-proof-backed-test-reuse.todo.md",
+      "config/proof_backed_test_reuse_supervisor.json",
+      "scripts/validate_proof_backed_test_reuse_board.py",
+      "scripts/proof_backed_test_reuse_supervisor.py"
+    ],
+    "commonEnvironment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONHASHSEED": "0",
+      "IPFS_ACCELERATE_DUCKDB_ONLY": "1",
+      "IPFS_ACCEL_SKIP_CORE": "1",
+      "IPFS_KIT_DISABLE": "1",
+      "IPFS_DATASETS_AUTO_INSTALL": "false",
+      "IPFS_AUTO_INSTALL": "false",
+      "IPFS_DATASETS_PY_MINIMAL_IMPORTS": "1",
+      "IPFS_TEST_PROOF_REUSE_MODE": "off",
+      "IPFS_TEST_PROOF_REUSE_AUTO_INSTALL": "1",
+      "IPFS_ACCEL_AUTO_INSTALL": "1",
+      "IPFS_TEST_PROOF_REUSE_NLTK_DOWNLOAD": "1",
+      "IPFS_TEST_PROOF_REUSE_GROTH16_BUILD": "1",
+      "IPFS_ACCELERATE_AGENT_REQUIRE_TASK_EXECUTION_METADATA": "1",
+      "IPFS_ACCELERATE_AGENT_CODEX_MAX_THREADS": "1",
+      "IPFS_ACCELERATE_AGENT_CODEX_MAX_DEPTH": "1",
+      "IPFS_ACCELERATE_AGENT_DISABLE_SUBAGENTS": "1"
+    }
+  },
+  "preflight": {
+    "requireCleanExactIntegrationCheckout": true,
+    "requireCleanExactSubmodules": true,
+    "validateGoalAndTaskDags": true,
+    "requireInitialConflictFreeWidth": 2,
+    "projectObjectivesWithoutGeneratingWork": true,
+    "runNoAgentReadinessPass": true,
+    "runReconciliationOnlyLanePasses": true,
+    "requireBlockedCount": 0,
+    "requireGloballySelectableTask": true,
+    "optionalProofInfrastructureIsLaunchGate": false
+  },
+  "rollout": {
+    "sequence": [
+      "off",
+      "shadow",
+      "read_for_explicit_eligible_population",
+      "opt_in_readwrite",
+      "eligible_default_after_current_tree_gate"
+    ],
+    "forcedRerunSamplingRequired": true,
+    "zeroFalseAdmissionRequired": true,
+    "eligibleWarmReuseTarget": 0.8,
+    "automaticRollbackOnMismatch": true
+  }
+}
