@@ -53,7 +53,7 @@ create_repo_subscription(
     conn=db,
     user_id="user-uuid-here",
     repo_full_name="owner/repo",
-    installation_id=12345  # optional: GitHub App installation ID
+    installation_id=12345,  # optional: GitHub App installation ID
 )
 ```
 
@@ -70,7 +70,7 @@ create_github_connection(
     user_id="user-uuid-here",
     installation_id=12345,
     token_ref="secret-manager-ref",
-    scopes="repo,read:org"
+    scopes="repo,read:org",
 )
 ```
 
