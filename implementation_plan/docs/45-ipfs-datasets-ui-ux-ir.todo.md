@@ -1491,7 +1491,7 @@ Program rules:
 - Post-merge correction origin stream ID: event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926
 - Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010. Address the five independent-review findings (incomplete reference closure, mutable mappings, set semantics, executable payload bypass, modality-direction mismatch), write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-085-recovery-receipt-2026-08-04.md, then mark this repair task completed so the supervisor can release UIR-010 from strategy blocked_tasks.
 
-## UIR-086 Resolve sealed-capability failure on UIR-010 repair-grant attempt 3
+## UIR-086 Resolve implementation retry-budget failure for UIR-010
 
 - Status: completed
 - Completion: manual
@@ -1519,5 +1519,5 @@ Program rules:
 - Post-merge correction source canonical task key: task/v1/75e505fdf9dd2a5026bb0f9ca1d5f14c299cf47c35b2e13e76b9a5cf2bc807d5
 - Post-merge correction source canonical task CID: baguqeeraoxsql7pz3uvfajv3b6okdvprjquzz5d4gwzocptwxgs46k6ia7kq
 - Post-merge correction origin stream ID: event-log:sha256:5d2d9e8dec77b16b1500d5d7fd8cfff8fbf10cf37199bead391db4663ead3926
-- Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010 after repair-grant attempt 3 started, consumed the grant, then failed closed before provider dispatch because landed-route fallthrough never sealed a process-local correction capability. Land the seal-after-start fix, write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-086-recovery-receipt-2026-08-04.md, and mark this repair completed so the supervisor can mint attempt 4.
+- Acceptance: Implementation retry-budget guardrail filed this from the durable correction_failed head on UIR-010 after repair-grant attempt 3 started, consumed the grant, then failed closed before provider dispatch because landed-route fallthrough never sealed a process-local correction capability. Land the seal-after-start fix, write implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-uir-086-recovery-receipt-2026-08-04.md, then mark this repair task completed so the supervisor can release UIR-010 from strategy blocked_tasks.
 
