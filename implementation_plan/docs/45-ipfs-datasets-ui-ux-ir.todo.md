@@ -1169,7 +1169,7 @@ Program rules:
 
 ## UIR-070 Publish the public API and register the schema and bridge
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
