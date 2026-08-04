@@ -479,7 +479,7 @@ Program rules:
 
 ## UIR-027 Implement constrained Intent IDL and formal-to-UI synthesis
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -959,7 +959,7 @@ Program rules:
 
 ## UIR-054 Implement the bounded UI state-machine runtime
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
