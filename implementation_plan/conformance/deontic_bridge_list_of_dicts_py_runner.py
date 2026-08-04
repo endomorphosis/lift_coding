@@ -28,13 +28,13 @@ def main() -> int:
     rows: List[Dict[str, Any]] = []
 
     for vector in payload.get("vectors", []):
-      value = vector.get("input")
-      rows.append(
-          {
-              "id": vector["id"],
-              "output": _list_of_dicts(value),
-          }
-      )
+        value = vector.get("input")
+        rows.append(
+            {
+                "id": vector["id"],
+                "output": _list_of_dicts(value),
+            }
+        )
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(

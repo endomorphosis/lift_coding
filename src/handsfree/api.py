@@ -253,6 +253,9 @@ mobile_orb_service_bindings: dict[str, dict[str, Any]] = {}
 mobile_orb_service_subscriptions: dict[str, dict[str, Any]] = {}
 mobile_orb_events: dict[str, dict[str, Any]] = {}
 mobile_orb_receipts: dict[str, dict[str, Any]] = {}
+mobile_orb_invocations: dict[str, dict[str, Any]] = {}
+mobile_orb_dispatches: dict[str, dict[str, Any]] = {}
+mobile_orb_revocations: dict[str, dict[str, Any]] = {}
 dev_peer_chat_service = PeerChatSessionService(db_conn_factory=lambda: get_db())
 _peer_transport_provider = None
 

@@ -166,7 +166,7 @@ class TestSwissKnifeDesktopUCAN:
 
     @pytest.fixture
     def source(self):
-        return read_file(SWISSKNIFE / "web" / "src" / "browser-main.ts")
+        return read_file(SWISSKNIFE / "web" / "legacy-archive" / "src" / "browser-main.ts")
 
     def test_initializes_ucan_on_desktop_init(self, source):
         assert "initializeUCANIdentity()" in source

@@ -17,8 +17,7 @@ from ipfs_datasets_py.logic.modal import codec
 
 def _evaluate(vector: Dict[str, Any]) -> Dict[str, Any]:
     delimiter_kinds = [
-        codec._citation_section_delimiter_kind(value)
-        for value in vector.get("delimiterKinds", [])
+        codec._citation_section_delimiter_kind(value) for value in vector.get("delimiterKinds", [])
     ]
     signatures = [
         codec._citation_section_component_signature(
@@ -54,8 +53,7 @@ def _evaluate(vector: Dict[str, Any]) -> Dict[str, Any]:
         "signatures": signatures,
         "profiles": profiles,
         "sourceIdCitations": [
-            codec._source_id_inferred_citation(source_id)
-            for source_id in source_ids
+            codec._source_id_inferred_citation(source_id) for source_id in source_ids
         ],
         "inferredCitations": codec._inferred_citations_from_source_ids(source_ids),
     }

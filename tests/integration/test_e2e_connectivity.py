@@ -289,7 +289,7 @@ class TestSwissKnifeIntegration:
     """Verify SwissKnife has IPFS integration."""
 
     def test_desktop_has_ipfs_apps(self):
-        path = SWISSKNIFE / "web" / "src" / "browser-main.ts"
+        path = SWISSKNIFE / "web" / "legacy-archive" / "src" / "browser-main.ts"
         if not path.exists():
             pytest.skip("SwissKnife web source not available")
         content = path.read_text()

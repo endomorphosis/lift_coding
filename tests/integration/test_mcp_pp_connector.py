@@ -16,7 +16,7 @@ class TestMCPPPConnectorStructure:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/src/services/mcp-plus-plus-connector.ts")
+        self.src = read_file("swissknife/src/services/mcp/mcp-plus-plus-connector.ts")
 
     def test_server_configs_defined(self):
         assert "IPFS_DATASETS_SERVER" in self.src
@@ -130,7 +130,7 @@ class TestMCPPPDesktopConnectButton:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/web/src/browser-main.ts")
+        self.src = read_file("swissknife/web/legacy-archive/src/browser-main.ts")
 
     def test_connect_button_exists(self):
         assert "mcppp-connect-btn" in self.src
@@ -214,7 +214,7 @@ class TestRealServerAPIAlignment:
 
     def test_protocol_id_matches(self):
         """Our connector uses the same protocol ID as the servers."""
-        connector_src = read_file("swissknife/src/services/mcp-plus-plus-connector.ts")
+        connector_src = read_file("swissknife/src/services/mcp/mcp-plus-plus-connector.ts")
         server_src = read_file(
             "external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcp_p2p_transport.py"
         )

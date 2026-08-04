@@ -40,10 +40,7 @@ def main() -> int:
     out_path = Path(args.out)
 
     payload = json.loads(vectors_path.read_text(encoding="utf-8"))
-    rows = [
-        {"id": row["id"], "dict": _ambiguity(row)}
-        for row in payload.get("ambiguities", [])
-    ]
+    rows = [{"id": row["id"], "dict": _ambiguity(row)} for row in payload.get("ambiguities", [])]
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(

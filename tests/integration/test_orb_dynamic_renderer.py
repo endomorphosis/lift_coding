@@ -131,7 +131,7 @@ class TestVirtualDesktopIntegration:
 
     @pytest.fixture
     def source(self):
-        return read_ts("web/src/browser-main.ts")
+        return read_ts("web/legacy-archive/src/browser-main.ts")
 
     def test_imports_renderer(self, source):
         assert "orb-dynamic-app-renderer" in source

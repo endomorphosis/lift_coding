@@ -17,18 +17,36 @@ from ipfs_datasets_py.logic.modal import compiler
 
 def _evaluate(predicted: str, target: str) -> Dict[str, Any]:
     return {
-        "priorityTargets": list(compiler._priority_signal_free_adaptive_ambiguity_targets(predicted)),
+        "priorityTargets": list(
+            compiler._priority_signal_free_adaptive_ambiguity_targets(predicted)
+        ),
         "requiredTargets": list(compiler._compiler_required_adaptive_ambiguity_targets(predicted)),
         "signalFreeTargets": list(compiler._signal_free_adaptive_ambiguity_targets(predicted)),
         "policyTargets": list(compiler._compiler_ambiguity_policy_targets(predicted)),
-        "refinedMarginBuffer": compiler._compiler_refined_modal_family_cue_margin_buffer(predicted, target),
-        "weakTypedSelfMarginBuffer": compiler._compiler_weak_typed_self_family_cue_margin_buffer(predicted, target),
-        "isPrioritySignalFreePair": compiler._is_priority_signal_free_adaptive_ambiguity_pair(predicted, target),
-        "isCompilerRequiredPair": compiler._is_compiler_required_adaptive_ambiguity_pair(predicted, target),
-        "isCompilerAmbiguityPolicyPair": compiler._is_compiler_ambiguity_policy_pair(predicted, target),
-        "isSignalFreeAdaptivePair": compiler._is_signal_free_adaptive_ambiguity_pair(predicted, target),
-        "prefersContestedZeroMarginPair": compiler._prefers_contested_zero_margin_adaptive_ambiguity_pair(predicted, target),
-        "supportsSignalFreeAdaptivePair": compiler._supports_signal_free_adaptive_ambiguity_pair(predicted, target),
+        "refinedMarginBuffer": compiler._compiler_refined_modal_family_cue_margin_buffer(
+            predicted, target
+        ),
+        "weakTypedSelfMarginBuffer": compiler._compiler_weak_typed_self_family_cue_margin_buffer(
+            predicted, target
+        ),
+        "isPrioritySignalFreePair": compiler._is_priority_signal_free_adaptive_ambiguity_pair(
+            predicted, target
+        ),
+        "isCompilerRequiredPair": compiler._is_compiler_required_adaptive_ambiguity_pair(
+            predicted, target
+        ),
+        "isCompilerAmbiguityPolicyPair": compiler._is_compiler_ambiguity_policy_pair(
+            predicted, target
+        ),
+        "isSignalFreeAdaptivePair": compiler._is_signal_free_adaptive_ambiguity_pair(
+            predicted, target
+        ),
+        "prefersContestedZeroMarginPair": compiler._prefers_contested_zero_margin_adaptive_ambiguity_pair(
+            predicted, target
+        ),
+        "supportsSignalFreeAdaptivePair": compiler._supports_signal_free_adaptive_ambiguity_pair(
+            predicted, target
+        ),
     }
 
 
