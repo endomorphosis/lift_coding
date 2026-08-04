@@ -218,6 +218,28 @@ Failed validation highlights:
 Receipts alone never complete closeout: gate/evidence packets, approvals, and
 merge provenance remain required.
 
+
+## Agent supervisor unblocks (2026-08-04)
+
+Accelerator revision includes:
+
+- `project_managed_merge_queue_record(s)` — collector-safe merge receipts from
+  daemon queue JSON (strips floats / nested metadata)
+- `proof_test_reuse_closeout_materializer` — PTR-110 materialization with Git
+  ancestry recovery for missing managed-merge rows and typed next-actions
+- Hermetic closeout e2e sealed population aligned to live **66** tasks
+
+Operator flow:
+
+```bash
+python3 scripts/retain_proof_backed_test_reuse_validation_receipts.py --require-clean --workers 2
+python3 scripts/materialize_proof_backed_test_reuse_closeout_inputs.py
+```
+
+Still operator-owned: approvals for PTR-000/001/011/041, repaired board
+validation for the remaining failing tasks, and full PTR-111/120/122 gate
+artifacts.
+
 ## Safe next actions (ordered)
 
 1. Keep supervisor healthy or stop intentionally; do **not** run live
