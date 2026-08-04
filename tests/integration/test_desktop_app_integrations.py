@@ -6,7 +6,7 @@
 
 def read_browser_main():
     """Read the browser-main.ts source for verification."""
-    with open("swissknife/web/src/browser-main.ts") as f:
+    with open("swissknife/web/legacy-archive/src/browser-main.ts") as f:
         return f.read()
 
 

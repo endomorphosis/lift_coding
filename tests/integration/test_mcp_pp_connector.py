@@ -130,7 +130,7 @@ class TestMCPPPDesktopConnectButton:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/web/src/browser-main.ts")
+        self.src = read_file("swissknife/web/legacy-archive/src/browser-main.ts")
 
     def test_connect_button_exists(self):
         assert "mcppp-connect-btn" in self.src
