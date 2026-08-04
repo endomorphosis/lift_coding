@@ -15,8 +15,16 @@ jobs:
       PYTHONPATH: ${{ github.workspace }}/src:${{ github.workspace }}/external/ipfs_accelerate
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
+
+      - name: Init top-level integration submodules
+        run: |
+          # Avoid recursive nested .tools trees under accelerate; only init
+          # first-level submodules needed for package imports and integration tests.
+          git submodule update --init --depth 1 \
+            external/ipfs_accelerate \
+            external/ipfs_kit \
+            external/ipfs_datasets \
+            swissknife || true
 
       - uses: actions/setup-python@v5
         with:
@@ -26,7 +34,6 @@ jobs:
         run: |
           make deps
           python3 -m pip install anyio trio multiformats
-
       - name: Format (check)
         run: make fmt-check
 
