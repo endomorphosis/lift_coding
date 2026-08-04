@@ -184,6 +184,21 @@ def _materialize_forest() -> dict[str, Any]:
 
 
 def _load_merge_records() -> list[dict[str, Any]]:
+    """Load completed merge-queue rows and project collector-safe merge receipts.
+
+    Raw daemon queue files contain floats and non-canonical nested metadata.
+    The task-evidence collector seals merge rows with ``content_identity``, so
+    only integer/string fields from the authoritative completion claim are kept.
+    This does not invent new completion events — it re-expresses retained
+    completed rows in the collector's expected shape.
+    """
+
+    if str(ACCEL_ROOT) not in sys.path:
+        sys.path.insert(0, str(ACCEL_ROOT))
+    from ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts import (
+        content_identity,
+    )
+
     records: list[dict[str, Any]] = []
     if not MERGE_COMPLETED.is_dir():
         return records
@@ -192,10 +207,38 @@ def _load_merge_records() -> list[dict[str, Any]]:
             raw = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
-        if isinstance(raw, dict):
-            raw = dict(raw)
-            raw["_source_path"] = str(path)
-            records.append(raw)
+        if not isinstance(raw, dict):
+            continue
+        task_id = str(raw.get("task_id") or "").strip()
+        status = str(raw.get("status") or raw.get("state") or "").strip().lower()
+        commit = str(
+            raw.get("merged_commit_id")
+            or raw.get("commit_sha")
+            or raw.get("commit_id")
+            or ""
+        ).strip()
+        task_cid = str(
+            raw.get("task_cid")
+            or raw.get("canonical_task_cid")
+            or raw.get("canonical_task_id")
+            or ""
+        ).strip()
+        if not task_id.startswith("PTR-") or status not in {"completed", "merged"}:
+            continue
+        if not commit or not task_cid:
+            continue
+        body = {
+            "task_id": task_id,
+            "canonical_task_cid": task_cid,
+            "status": "completed",
+            "commit_sha": commit,
+            "source_path": str(path.name),
+        }
+        sealed = {
+            **body,
+            "merge_receipt_cid": content_identity(body),
+        }
+        records.append(sealed)
     return records
 
 
