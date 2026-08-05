@@ -28139,42 +28139,46 @@
         {
           "pythonSymbol": "FormulaAnalysis",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaAnalysis",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
             "FormulaAnalysis"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "FormulaAnalyzer",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaAnalyzer",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
             "FormulaAnalyzer"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "FormulaComplexity",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaComplexity",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
             "FormulaComplexity"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "FormulaType",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "FormulaType",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
             "FormulaType"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         }
       ],
       "coveragePercent": 100.0,
@@ -28210,12 +28214,13 @@
         {
           "pythonSymbol": "TDFOLToCoqConverter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "TDFOLToCoqConverter",
           "target": "swissknife/src/services/provers/deontic-to-coq.ts",
           "variants": [
             "TDFOLToCoqConverter"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         }
       ],
       "coveragePercent": 33.33,
@@ -28240,12 +28245,13 @@
         {
           "pythonSymbol": "LeanProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "LeanProverBridge",
           "target": "swissknife/src/services/provers/deontic-to-lean4.ts",
           "variants": [
             "LeanProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "TDFOLToLeanConverter",
@@ -28345,7 +28351,7 @@
         {
           "pythonSymbol": "find_executable",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "findExecutable",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -28353,7 +28359,8 @@
             "findexecutable",
             "findExecutable",
             "FindExecutable"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "import_time_install_forbidden",
@@ -28371,7 +28378,7 @@
         {
           "pythonSymbol": "lazy_install_prover",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "lazyInstallProver",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -28379,7 +28386,8 @@
             "lazyinstallprover",
             "lazyInstallProver",
             "LazyInstallProver"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "lazy_install_strict",
@@ -28410,7 +28418,7 @@
         {
           "pythonSymbol": "normalize_prover_name",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "normalizeProverName",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -28418,7 +28426,8 @@
             "normalizeprovername",
             "normalizeProverName",
             "NormalizeProverName"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "plan_reviewed_install",
@@ -28449,7 +28458,7 @@
         {
           "pythonSymbol": "reset_lazy_install_attempts",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "resetLazyInstallAttempts",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -28457,7 +28466,8 @@
             "resetlazyinstallattempts",
             "resetLazyInstallAttempts",
             "ResetLazyInstallAttempts"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "reviewed_installer_inventory",
@@ -28485,27 +28495,29 @@
         {
           "pythonSymbol": "Monitor",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "Monitor",
           "target": "swissknife/src/services/apps/app-manifest-registry.ts",
           "variants": [
             "Monitor"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "ProofMetrics",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ProofMetrics",
           "target": "swissknife/src/services/logic/tdfol/performance-dashboard.ts",
           "variants": [
             "ProofMetrics"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "get_global_monitor",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "get_global_monitor",
           "target": "swissknife/src/services/logic/shared/logic-monitor.ts",
           "variants": [
@@ -28513,7 +28525,8 @@
             "getglobalmonitor",
             "getGlobalMonitor",
             "GetGlobalMonitor"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         }
       ],
       "coveragePercent": 100.0,
@@ -28572,42 +28585,46 @@
         {
           "pythonSymbol": "ProverRouter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ProverRouter",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
             "ProverRouter"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "ProverStrategy",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ProverStrategy",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
             "ProverStrategy"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "RouterProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "RouterProofResult",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
             "RouterProofResult"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "SyntacticNativeFallbackProver",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "SyntacticNativeFallbackProver",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
             "SyntacticNativeFallbackProver"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "SyntacticProofResult",
@@ -28632,32 +28649,35 @@
         {
           "pythonSymbol": "CVC5ProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "CVC5ProofResult",
           "target": "swissknife/src/services/provers/cvc5-prover-bridge.ts",
           "variants": [
             "CVC5ProofResult"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "CVC5ProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "CVC5ProverBridge",
           "target": "swissknife/src/services/provers/cvc5-prover-bridge.ts",
           "variants": [
             "CVC5ProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "TDFOLToCVC5Converter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "TDFOLToCVC5Converter",
           "target": "swissknife/src/services/provers/cvc5-prover-bridge.ts",
           "variants": [
             "TDFOLToCVC5Converter"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         }
       ],
       "coveragePercent": 100.0,
@@ -28672,37 +28692,40 @@
         {
           "pythonSymbol": "TDFOLToZ3Converter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "TDFOLToZ3Converter",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
             "TDFOLToZ3Converter"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "Z3ProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "Z3ProofResult",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
             "Z3ProofResult"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "Z3ProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "Z3ProverBridge",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
             "Z3ProverBridge"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "prove_with_z3",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "prove_with_z3",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
@@ -28710,7 +28733,8 @@
             "provewithz3",
             "proveWithZ3",
             "ProveWithZ3"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         }
       ],
       "coveragePercent": 100.0,
@@ -29026,17 +29050,18 @@
         {
           "pythonSymbol": "ErgoAIWrapper",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "ErgoAIWrapper",
           "target": "swissknife/src/services/integrations/ergoai-wrapper.ts",
           "variants": [
             "ErgoAIWrapper"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         },
         {
           "pythonSymbol": "ergoai_available",
           "kind": "function",
-          "status": "consolidated",
+          "status": "n/a",
           "target": "swissknife/src/services/integrations/flogic-ergoai-wrapper.ts",
           "reason": "Python helper is represented by the TypeScript flogic service surface rather than a one-symbol-per-file port.",
           "variants": [
@@ -29049,7 +29074,7 @@
         {
           "pythonSymbol": "resolve_ergo_binary",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
           "tsSymbol": "resolve_ergo_binary",
           "target": "swissknife/src/services/integrations/ergoai-wrapper.ts",
           "variants": [
@@ -29057,7 +29082,8 @@
             "resolveergobinary",
             "resolveErgoBinary",
             "ResolveErgoBinary"
-          ]
+          ],
+          "reason": "Host-native prover/bridge surface remains Python-owned under PORT-239; not a TypeScript port target."
         }
       ],
       "coveragePercent": 66.67,
