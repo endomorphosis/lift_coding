@@ -36,8 +36,14 @@ def test_runtime_placement_layer_records_supported_and_fallback_surfaces():
     assert placement.supported_surfaces == (
         CapabilityRuntimeSurface.MCP_PROVIDER,
         CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
+        CapabilityRuntimeSurface.OPERATOR_CONSOLE,
     )
-    assert placement.fallback_surfaces == (CapabilityRuntimeSurface.MCP_PROVIDER,)
+    assert placement.fallback_surfaces == (
+        CapabilityRuntimeSurface.MCP_PROVIDER,
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
+        CapabilityRuntimeSurface.OPERATOR_CONSOLE,
+    )
 
 
 def test_runtime_placement_layer_exposes_daemon_preferred_remote_workflows():
@@ -55,6 +61,7 @@ def test_runtime_placement_layer_exposes_daemon_preferred_remote_workflows():
         CapabilityRuntimeSurface.DAEMON_MEDIATED,
         CapabilityRuntimeSurface.SWISSKNIFE_ORB,
         CapabilityRuntimeSurface.HALLUCINATE_APP,
+        CapabilityRuntimeSurface.OPERATOR_CONSOLE,
     )
 
 
