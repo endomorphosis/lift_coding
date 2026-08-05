@@ -44,7 +44,7 @@ jobs:
         run: npm ci
 
       - name: Run conformance harness
-        run: make conformance
+        run: make conformance-ci
 
       - name: Upload conformance artifacts
         uses: actions/upload-artifact@v4
