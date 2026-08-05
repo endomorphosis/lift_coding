@@ -183,7 +183,10 @@ def test_failed_merge_reconciliation_ignores_removed_todo_tasks(tmp_path):
     daemon._main_branch_name = lambda: "main"
     daemon._git_ref_is_ancestor = lambda _commit, _target: False
 
-    assert daemon._failed_merge_candidates() == [live_event]
+    candidates = daemon._failed_merge_candidates()
+    assert [c.get("task_id") for c in candidates] == [live_event["task_id"]]
+    assert candidates[0]["implementation_commit"] == live_event["implementation_commit"]
+    assert candidates[0]["merge_result"] == live_event["merge_result"]
 
 
 def test_duplicate_attempt_suppression_prioritizes_transient_locks_before_new_conflict_work():
