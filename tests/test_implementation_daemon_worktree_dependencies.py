@@ -181,7 +181,7 @@ def test_missing_validation_worktree_is_recorded_without_implementation_exceptio
     monkeypatch.setattr(
         daemon,
         "_build_implementation_command",
-        lambda _worktree: [
+        lambda _worktree, **_kwargs: [
             sys.executable,
             "-c",
             "import os, shutil; shutil.rmtree(os.getcwd())",

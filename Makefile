@@ -46,9 +46,6 @@ test-ci:
 		--ignore=tests/test_meta_glasses_display_todo_queue.py \
 		--ignore=tests/test_mcplusplus_profile_h_inventory.py \
 		--ignore=tests/test_mcplusplus_profile_h_spec.py \
-		--ignore=tests/test_implementation_daemon_worktree_dependencies.py \
-		--ignore=tests/test_implementation_daemon_merge_lock_retry.py \
-		--ignore=tests/test_supervisor_objective_task_janitor.py \
 		--ignore=tests/test_reconciliation_guardrail_refresh.py \
 		--ignore=tests/commands/test_router.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
