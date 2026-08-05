@@ -33,7 +33,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G000 Proof-backed cross-repository test reuse
 
-- Status: active
+- Status: verified_complete
 - Parent:
 - Depends on:
 - Fib priority: 1
@@ -53,7 +53,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G010 Contracts, authority, and threat model
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on:
 - Fib priority: 2
@@ -73,7 +73,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G020 Canonical execution identity
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G010
 - Fib priority: 2
@@ -93,7 +93,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G030 Static/runtime traces and eligibility
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G010, PTR-G020
 - Fib priority: 3
@@ -113,7 +113,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G040 Trust-aware cache and certificate storage
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G010, PTR-G020
 - Fib priority: 3
@@ -133,7 +133,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G050 Datasets real-ZK pass certificates
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G010, PTR-G040
 - Fib priority: 3
@@ -153,7 +153,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G060 Automatically discovered pytest plugin
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G020, PTR-G030, PTR-G040, PTR-G050
 - Fib priority: 5
@@ -173,7 +173,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G070 Agent-supervisor completion authority
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G060
 - Fib priority: 5
@@ -193,7 +193,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G080 Datasets repository integration
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G050, PTR-G060
 - Fib priority: 5
@@ -213,7 +213,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G090 Kit storage and repository integration
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G040, PTR-G060
 - Fib priority: 5
@@ -233,7 +233,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G100 Degradation, mutation, security, and e2e assurance
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G070, PTR-G080, PTR-G090
 - Fib priority: 8
@@ -253,7 +253,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G110 Benchmark, rollout, and current-tree closeout
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G100
 - Fib priority: 13

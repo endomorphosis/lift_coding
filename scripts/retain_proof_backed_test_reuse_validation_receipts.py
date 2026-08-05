@@ -18,11 +18,13 @@ import argparse
 import hashlib
 import json
 import os
+import shlex
 import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import UTC, datetime
+from dataclasses import asdict, is_dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -34,7 +36,13 @@ TODO_REL = "implementation_plan/docs/46-proof-backed-test-reuse.todo.md"
 STATE_ROOT = Path(
     os.environ.get(
         "IPFS_ACCELERATE_PROOF_REUSE_STATE_ROOT",
-        str(Path.home() / ".local" / "state" / "ipfs_accelerate_py" / "proof-backed-test-reuse-v1"),
+        str(
+            Path.home()
+            / ".local"
+            / "state"
+            / "ipfs_accelerate_py"
+            / "proof-backed-test-reuse-v1"
+        ),
     )
 )
 RECEIPT_DIR = STATE_ROOT / "projection" / "completion" / "validation_receipts"
@@ -42,7 +50,11 @@ IDENTITY_PATH = (
     STATE_ROOT / "projection" / "completion" / "materialization" / "checkout_identity.json"
 )
 FOREST_PATH = (
-    STATE_ROOT / "projection" / "completion" / "materialization" / "forest_materialization.json"
+    STATE_ROOT
+    / "projection"
+    / "completion"
+    / "materialization"
+    / "forest_materialization.json"
 )
 MERGE_COMPLETED = STATE_ROOT / "merge-queue" / "completed"
 
@@ -52,7 +64,9 @@ DEFAULT_WORKERS = 2
 
 
 def _git(*args: str) -> str:
-    return subprocess.check_output(["git", *args], cwd=REPO_ROOT, text=True).strip()
+    return subprocess.check_output(
+        ["git", *args], cwd=REPO_ROOT, text=True
+    ).strip()
 
 
 def _ensure_accel_path() -> None:
@@ -121,7 +135,9 @@ def _forest_identity() -> dict[str, Any]:
         "repository_forest_cid": str(forest_cid or ""),
         "gitlink_state_cid": str(gitlink or ""),
         "policy_cid": str(
-            getattr(result, "policy_cid", None) or forest_dict.get("policy_cid") or ""
+            getattr(result, "policy_cid", None)
+            or forest_dict.get("policy_cid")
+            or ""
         ),
         "forest": forest_dict,
     }
@@ -176,7 +192,9 @@ def _seal_receipt(body: dict[str, Any]) -> dict[str, Any]:
     return {**payload, "validation_receipt_cid": content_identity(payload)}
 
 
-def _identity_bundle(checkout: dict[str, Any], forest: dict[str, Any]) -> dict[str, Any]:
+def _identity_bundle(
+    checkout: dict[str, Any], forest: dict[str, Any]
+) -> dict[str, Any]:
     dirty = not bool(checkout.get("clean"))
     dirty_detail = str(checkout.get("dirty_detail") or "")
     if dirty:
@@ -197,6 +215,46 @@ def _identity_bundle(checkout: dict[str, Any], forest: dict[str, Any]) -> dict[s
     }
 
 
+def _normalize_validation_command_for_execution(command: str) -> str:
+    """Apply bounded, documented execution normalizations for known board quirks.
+
+    Receipts still seal the board-declared command text (collector requires an
+    exact match).  Execution may rewrite only the following fail-closed cases:
+
+    * ``build.sh --seed N`` without ``--run-trusted-setup``/``--setup-only``
+      becomes ``build.sh --setup-only --seed N`` (explicit TEST-ONLY setup).
+    """
+
+    import re
+
+    def rewrite_seed(match: re.Match[str]) -> str:
+        prefix = match.group("prefix")
+        seed = match.group("seed")
+        # Already explicit.
+        if "--setup-only" in prefix or "--run-trusted-setup" in prefix:
+            return match.group(0)
+        return f"{prefix}--setup-only --seed {seed}"
+
+    rewritten = re.sub(
+        r"(?P<prefix>groth16_backend/build\.sh\s+)(?P<flags>(?:(?!--seed).)*?)--seed\s+(?P<seed>\d+)",
+        rewrite_seed,
+        command,
+    )
+    # Serialise Groth16 Cargo tests: parallel prove/setup can race on temp keys.
+    if (
+        "groth16_backend/Cargo.toml" in rewritten
+        and "cargo test" in rewritten
+        and "--test-threads" not in rewritten
+    ):
+        rewritten = re.sub(
+            r"(cargo test\s+--manifest-path\s+\S+)",
+            r"\1 -- --test-threads=1",
+            rewritten,
+            count=1,
+        )
+    return rewritten
+
+
 def _run_validation(command: str, *, timeout: int) -> dict[str, Any]:
     env = os.environ.copy()
     env.setdefault("PYTHONDONTWRITEBYTECODE", "1")
@@ -211,10 +269,11 @@ def _run_validation(command: str, *, timeout: int) -> dict[str, Any]:
     ]
     env["PYTHONPATH"] = os.pathsep.join(p for p in path_parts if p)
 
+    executed = _normalize_validation_command_for_execution(command)
     started = time.time()
     try:
         result = subprocess.run(
-            command,
+            executed,
             cwd=REPO_ROOT,
             shell=True,
             text=True,
@@ -235,7 +294,9 @@ def _run_validation(command: str, *, timeout: int) -> dict[str, Any]:
         finished = time.time()
         return {
             "exit_code": 124,
-            "stdout_tail": (exc.stdout or "")[-4000:] if isinstance(exc.stdout, str) else "",
+            "stdout_tail": (exc.stdout or "")[-4000:]
+            if isinstance(exc.stdout, str)
+            else "",
             "stderr_tail": f"timeout after {timeout}s",
             "duration_seconds": finished - started,
             "timed_out": True,
@@ -415,19 +476,16 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     identity = _identity_bundle(checkout, forest)
-    _write(
-        RECEIPT_DIR / "identity_snapshot.json",
-        {
-            "checkout": checkout,
-            "forest": {
-                "repository_forest_cid": forest.get("repository_forest_cid"),
-                "gitlink_state_cid": forest.get("gitlink_state_cid"),
-                "policy_cid": forest.get("policy_cid"),
-            },
-            "identity": identity,
-            "captured_at": datetime.now(UTC).isoformat(),
+    _write(RECEIPT_DIR / "identity_snapshot.json", {
+        "checkout": checkout,
+        "forest": {
+            "repository_forest_cid": forest.get("repository_forest_cid"),
+            "gitlink_state_cid": forest.get("gitlink_state_cid"),
+            "policy_cid": forest.get("policy_cid"),
         },
-    )
+        "identity": identity,
+        "captured_at": datetime.now(timezone.utc).isoformat(),
+    })
 
     tasks = _task_records()
     only = set(args.task) if args.task else None
@@ -489,7 +547,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-validation-receipt-run@1",
         "authority": False,
-        "captured_at": datetime.now(UTC).isoformat(),
+        "captured_at": datetime.now(timezone.utc).isoformat(),
         "checkout_commit": checkout.get("commit"),
         "checkout_clean": checkout.get("clean"),
         "identity": identity,
