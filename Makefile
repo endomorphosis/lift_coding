@@ -108,7 +108,7 @@ conformance: conformance-python-deprecation
 # CI Logic Conformance gate: core harness only (symbols, TS run, coverage,
 # mutation/fuzz, PORT-239 host-native, substance). Full make conformance and
 # make conformance-crosslang remain for local complete runs.
-conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-python-deprecation
+conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance
 
 conformance-crosslang: conformance-ts conformance-py conformance-compare conformance-self-containment
 
