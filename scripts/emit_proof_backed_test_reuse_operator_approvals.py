@@ -34,22 +34,12 @@ OBJECTIVE_REL = "implementation_plan/docs/46-proof-backed-test-reuse.objectives.
 STATE_ROOT = Path(
     os.environ.get(
         "IPFS_ACCELERATE_PROOF_REUSE_STATE_ROOT",
-        str(
-            Path.home()
-            / ".local"
-            / "state"
-            / "ipfs_accelerate_py"
-            / "proof-backed-test-reuse-v1"
-        ),
+        str(Path.home() / ".local" / "state" / "ipfs_accelerate_py" / "proof-backed-test-reuse-v1"),
     )
 )
 APPROVAL_DIR = STATE_ROOT / "projection" / "completion" / "operator_approvals"
 IDENTITY_SNAPSHOT = (
-    STATE_ROOT
-    / "projection"
-    / "completion"
-    / "validation_receipts"
-    / "identity_snapshot.json"
+    STATE_ROOT / "projection" / "completion" / "validation_receipts" / "identity_snapshot.json"
 )
 
 HISTORIC_TASKS = ("PTR-000", "PTR-001", "PTR-011", "PTR-041")
@@ -155,9 +145,7 @@ def draft_records(
     head = str(identity["git_commit_id"])
     objective_revision = _objective_revision()
     policy_cid = str(identity.get("policy_cid") or "policy:proof-backed-test-reuse-v1")
-    capability_cid = str(
-        identity.get("capability_cid") or "capability:proof-backed-test-reuse-v1"
-    )
+    capability_cid = str(identity.get("capability_cid") or "capability:proof-backed-test-reuse-v1")
     key_cid = str(identity.get("verifying_key_cid") or "key:activation-gap-none")
     circuit_cid = str(identity.get("circuit_cid") or "circuit:test-pass-v4")
 
@@ -210,9 +198,7 @@ def draft_records(
                 "reviewer_id": reviewer_placeholder,
                 "integrated_commit_id": head,
                 "integration_target_commit_id": head,
-                "integration_receipt_cid": _integration_receipt_cid(
-                    task_id, head, head
-                ),
+                "integration_receipt_cid": _integration_receipt_cid(task_id, head, head),
             }
             sealed = _seal(body, "approval_cid")
             drafts["tasks"][task_id] = {
@@ -277,11 +263,7 @@ def accept_drafts(
         approval = dict(payload["approval"])
         approval["reviewer_id"] = operator_id.strip()
         # Re-seal after reviewer_id replacement.
-        field = (
-            "policy_approval_cid"
-            if task_id == "PTR-041"
-            else "approval_cid"
-        )
+        field = "policy_approval_cid" if task_id == "PTR-041" else "approval_cid"
         approval.pop("approval_cid", None)
         approval.pop("policy_approval_cid", None)
         approval.pop("operator_approval_cid", None)

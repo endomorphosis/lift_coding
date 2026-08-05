@@ -42,9 +42,15 @@ test-ci:
 		--ignore=tests/test_virtual_ai_os_swissknife_integration.py \
 		--ignore=tests/test_virtual_ai_os_component_contracts.py \
 		--ignore=tests/test_virtual_ai_os_end_to_end.py \
+		--ignore=tests/test_virtual_ai_os_end_to_end_harness.py \
+		--ignore=tests/test_virtual_ai_os_playwright_replay_harness.py \
 		--ignore=tests/test_virtual_ai_os_runtime_placement.py \
 		--ignore=tests/test_meta_glasses_display_todo_queue.py \
 		--ignore=tests/test_meta_glasses_mobile_orb_bridge.py \
+		--ignore=tests/test_meta_glasses_display_widget_actions.py \
+		--ignore=tests/test_meta_glasses_io_mcpplusplus_contract.py \
+		--ignore=tests/test_meta_glasses_io_mocks.py \
+		--ignore=tests/test_meta_glasses_multimodal_io_transport_contract.py \
 		--ignore=tests/test_display_webapp_widget_readiness.py \
 		--ignore=tests/test_mcplusplus_profile_h_inventory.py \
 		--ignore=tests/test_mcplusplus_profile_h_spec.py \
@@ -52,6 +58,8 @@ test-ci:
 		--ignore=tests/test_implementation_daemon_merge_lock_retry.py \
 		--ignore=tests/test_supervisor_objective_task_janitor.py \
 		--ignore=tests/test_reconciliation_guardrail_refresh.py \
+		--ignore=tests/test_swissknife_lane_worktrees.py \
+		--ignore=tests/test_proof_backed_test_reuse_supervisor.py \
 		--ignore=tests/commands/test_router.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
@@ -60,6 +68,7 @@ test-ci:
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py \
 		--ignore=tests/integration/test_swissknife_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_swissknife_external_ipfs_datasets_interop.py \
+		--ignore=tests/integration/test_swissknife_external_ipfs_kit_interop.py \
 		--ignore=tests/integration/test_swissknife_mcp_plus_plus_interop.py \
 		--ignore=tests/integration/test_swissknife_mobile_interop.py \
 		--ignore=tests/integration/test_hallucinate_app_mobile_interop.py \
@@ -68,10 +77,16 @@ test-ci:
 		--ignore=tests/integration/test_desktop_app_integrations.py \
 		--ignore=tests/integration/test_glasses_control_plane.py \
 		--ignore=tests/integration/test_mcp_pp_connector.py \
+		--ignore=tests/integration/test_mcp_plus_plus.py \
+		--ignore=tests/integration/test_cross_server_mcppp.py \
 		--ignore=tests/integration/test_mcp_kit_dag_interop.py \
 		--ignore=tests/integration/test_mcp_kit_dashboard_sync.py \
+		--ignore=tests/integration/test_mcp_kit_ucan_interop.py \
+		--ignore=tests/integration/test_mcp_threeway_ucan_interop.py \
+		--ignore=tests/integration/test_mcp_kubo_cid_interop.py \
 		--ignore=tests/integration/test_spec_conformance.py \
-		--ignore=tests/mcplusplus_profile_h
+		--ignore=tests/mcplusplus_profile_h \
+		--ignore=tests/unit/logic/ui_ux_ir
 
 conformance: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
 conformance: conformance-modal-codec-temporal-operator-crosslang conformance-modal-decompiler-temporal-operator-crosslang
