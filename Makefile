@@ -1,6 +1,6 @@
 SHELL := /usr/bin/env bash
 
-.PHONY: deps fmt fmt-check lint test test-ci openapi-validate compose-up compose-down dev inotify-check inotify-apply conformance conformance-crosslang conformance-ts conformance-symbol-coverage conformance-py conformance-compare conformance-mutate conformance-symbols conformance-mutation-gate conformance-differential-fuzz conformance-self-containment conformance-self-containment-strict conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
+.PHONY: deps fmt fmt-check lint test test-ci openapi-validate compose-up compose-down dev inotify-check inotify-apply conformance conformance-crosslang conformance-ts conformance-symbol-coverage conformance-py conformance-compare conformance-mutate conformance-symbols conformance-mutation-gate conformance-differential-fuzz conformance-ci conformance-self-containment conformance-self-containment-strict conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
 .PHONY: conformance-modal-codec-temporal-operator-crosslang conformance-modal-codec-guidance-summary-crosslang conformance-modal-codec-stable-embedding-crosslang conformance-modal-decompiler-temporal-operator-crosslang conformance-modal-compiler-ambiguity-policy-crosslang conformance-modal-compiler-formula-ambiguity-crosslang conformance-modal-compiler-regex-compile-crosslang conformance-deontic-formula-builder-crosslang conformance-deontic-bridge-frame-graph-crosslang conformance-bridge-frame-graph-crosslang conformance-multiview-merge-crosslang conformance-browser-purity conformance-tdfol-native-crosslang conformance-zkp-real-browser conformance-groth16-semantic-circuit conformance-python-deprecation
 
 ifeq ($(wildcard .venv/bin/python),.venv/bin/python)
@@ -89,6 +89,11 @@ conformance: conformance-tdfol-native-crosslang
 conformance: conformance-zkp-real-browser
 conformance: conformance-groth16-semantic-circuit
 conformance: conformance-python-deprecation
+
+# CI Logic Conformance gate: core harness only (symbols, TS run, coverage,
+# mutation/fuzz, PORT-239 host-native, substance). Full make conformance and
+# make conformance-crosslang remain for local complete runs.
+conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance
 
 conformance-crosslang: conformance-ts conformance-py conformance-compare conformance-self-containment
 
@@ -256,9 +261,10 @@ conformance-mutation-gate:
 conformance-differential-fuzz:
 	node $(CONFORMANCE_DIR)/differential_fuzz.mjs --root $(PWD) --out-dir $(CONFORMANCE_OUT) --cases-per-engine 20 --seed 1337
 
-conformance-self-containment:
+conformance-self-containment: conformance-py
 	cd swissknife && SWISSKNIFE_CONFORMANCE_STRICT_SELF_CONTAINMENT=1 npx tsx test/conformance/ts-conformance-runner.cli.ts --live-z3 --strict-self-containment --vectors ../$(CONFORMANCE_DIR)/vectors --out ../$(CONFORMANCE_OUT)/ts-results-self-contained.json
-	node $(CONFORMANCE_DIR)/self_containment_gate.mjs --strict --out-dir $(CONFORMANCE_OUT) --ts-results $(CONFORMANCE_OUT)/ts-results-self-contained.json --report $(CONFORMANCE_OUT)/self-contained/report.json
+	node $(CONFORMANCE_DIR)/compare.mjs --strict-self-containment --python $(CONFORMANCE_OUT)/py-results.json --ts $(CONFORMANCE_OUT)/ts-results-self-contained.json --vectors $(CONFORMANCE_DIR)/vectors --out-dir $(CONFORMANCE_OUT)/self-contained
+	node $(CONFORMANCE_DIR)/self_containment_gate.mjs --strict --out-dir $(CONFORMANCE_OUT) --ts-results $(CONFORMANCE_OUT)/ts-results-self-contained.json --report $(CONFORMANCE_OUT)/self-contained/report.json --py-results $(CONFORMANCE_OUT)/py-results.json
 
 conformance-self-containment-strict:
 	node $(CONFORMANCE_DIR)/self_containment_gate.mjs --out-dir $(CONFORMANCE_OUT) --ts-results $(CONFORMANCE_OUT)/ts-results.json --report $(CONFORMANCE_OUT)/report.json --strict
@@ -269,7 +275,9 @@ conformance-port239-host-native:
 conformance-substance:
 	node $(CONFORMANCE_DIR)/substance_gate.mjs --audit implementation_plan/port-audit/port-substance.json --substance-map $(CONFORMANCE_DIR)/substance-map.json --evidence-map $(CONFORMANCE_DIR)/symbol-evidence.json --out $(CONFORMANCE_OUT)/port-substance-gate.json
 
-conformance-behavioral-certificate:
+# Behavioral certificate needs compare report.json/py-results, self-containment
+# gate, and the PORT-239/substance classification artifacts.
+conformance-behavioral-certificate: conformance-compare conformance-self-containment conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance
 	node $(CONFORMANCE_DIR)/behavioral_certificate.mjs --out-dir $(CONFORMANCE_OUT) --parity-threshold $(CONFORMANCE_THRESHOLD)
 
 openapi-validate:
