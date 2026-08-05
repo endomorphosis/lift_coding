@@ -37,7 +37,7 @@ jobs:
       - name: Install deps
         run: |
           make deps
-          python3 -m pip install anyio trio multiformats
+          python3 -m pip install anyio trio multiformats psutil
       - name: Format (check)
         run: make fmt-check
 
@@ -45,7 +45,7 @@ jobs:
         run: make lint
 
       - name: Test
-        run: make test
+        run: make test-ci
 
       - name: MCP++ dashboard sync guard
         run: |
