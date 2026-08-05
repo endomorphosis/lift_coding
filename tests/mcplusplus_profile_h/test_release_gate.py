@@ -54,7 +54,10 @@ def test_secret_scan_reports_location_but_never_copies_secret(tmp_path):
 
 def test_full_release_packet_is_go_and_content_addressed(tmp_path):
     report, sbom = generate_release_packet(ROOT, tmp_path, mode="testnet")
-    assert report["decision"] == "GO"
+    assert report["decision"] == "GO", (
+        f"expected GO, got {report['decision']}; blockers={report.get('observedNoGoConditions')}; "
+        f"gates={[g.get('name') + ':' + g.get('status') for g in report.get('gates', [])]}"
+    )
     assert report["testnetReady"] is True
     assert report["mainnetEnabled"] is False
     assert not report["observedNoGoConditions"]
