@@ -28,13 +28,13 @@ lint:
 	$(PYTHON) -m ruff check .
 
 test:
-	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate $(PYTHON) -m pytest -q
+	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate:$(PWD)/external/ipfs_kit:$(PWD)/external/ipfs_datasets $(PYTHON) -m pytest -q
 
 # CI-required suite: skip monorepo board/fixture/interop tests that need full
 # local agent trees, nested submodule fixtures, or optional external checkouts.
 # MCP++ smoke remains a separate CI step (with deps like psutil).
 test-ci:
-	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate $(PYTHON) -m pytest -q \
+	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate:$(PWD)/external/ipfs_kit:$(PWD)/external/ipfs_datasets $(PYTHON) -m pytest -q \
 		--ignore=tests/test_hallucinate_multimodal_control_todo_queue.py \
 		--ignore=tests/test_virtual_ai_os_todo_queue.py \
 		--ignore=tests/test_virtual_ai_os_launch_readiness_gate.py \
@@ -68,7 +68,6 @@ test-ci:
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py \
 		--ignore=tests/integration/test_swissknife_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_swissknife_external_ipfs_datasets_interop.py \
-		--ignore=tests/integration/test_swissknife_external_ipfs_kit_interop.py \
 		--ignore=tests/integration/test_swissknife_mcp_plus_plus_interop.py \
 		--ignore=tests/integration/test_swissknife_mobile_interop.py \
 		--ignore=tests/integration/test_hallucinate_app_mobile_interop.py \
@@ -76,15 +75,6 @@ test-ci:
 		--ignore=tests/integration/test_e2e_connectivity.py \
 		--ignore=tests/integration/test_desktop_app_integrations.py \
 		--ignore=tests/integration/test_glasses_control_plane.py \
-		--ignore=tests/integration/test_mcp_pp_connector.py \
-		--ignore=tests/integration/test_mcp_plus_plus.py \
-		--ignore=tests/integration/test_cross_server_mcppp.py \
-		--ignore=tests/integration/test_mcp_kit_dag_interop.py \
-		--ignore=tests/integration/test_mcp_kit_dashboard_sync.py \
-		--ignore=tests/integration/test_mcp_kit_ucan_interop.py \
-		--ignore=tests/integration/test_mcp_threeway_ucan_interop.py \
-		--ignore=tests/integration/test_mcp_kubo_cid_interop.py \
-		--ignore=tests/integration/test_spec_conformance.py \
 		--ignore=tests/mcplusplus_profile_h \
 		--ignore=tests/unit/logic/ui_ux_ir
 
@@ -105,10 +95,9 @@ conformance: conformance-zkp-real-browser
 conformance: conformance-groth16-semantic-circuit
 conformance: conformance-python-deprecation
 
-# CI Logic Conformance gate: core harness only (symbols, TS run, coverage,
-# mutation/fuzz, PORT-239 host-native, substance). Full make conformance and
-# make conformance-crosslang remain for local complete runs.
-conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance
+# CI Logic Conformance gate: core harness + py/ts compare. Full make
+# conformance (jest matrix, self-containment, deprecation) remains local.
+conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-py conformance-compare
 
 conformance-crosslang: conformance-ts conformance-py conformance-compare conformance-self-containment
 
