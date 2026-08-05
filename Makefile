@@ -269,7 +269,9 @@ conformance-port239-host-native:
 conformance-substance:
 	node $(CONFORMANCE_DIR)/substance_gate.mjs --audit implementation_plan/port-audit/port-substance.json --substance-map $(CONFORMANCE_DIR)/substance-map.json --evidence-map $(CONFORMANCE_DIR)/symbol-evidence.json --out $(CONFORMANCE_OUT)/port-substance-gate.json
 
-conformance-behavioral-certificate:
+# Behavioral certificate needs compare report.json/py-results, self-containment
+# gate, and the PORT-239/substance classification artifacts.
+conformance-behavioral-certificate: conformance-compare conformance-self-containment conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance
 	node $(CONFORMANCE_DIR)/behavioral_certificate.mjs --out-dir $(CONFORMANCE_OUT) --parity-threshold $(CONFORMANCE_THRESHOLD)
 
 openapi-validate:

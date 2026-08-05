@@ -37,7 +37,7 @@ jobs:
       - name: Install Python conformance engines
         run: |
           python -m pip install -U pip
-          python -m pip install z3-solver
+          python -m pip install z3-solver multiformats
 
       - name: Install SwissKnife dependencies
         working-directory: swissknife
