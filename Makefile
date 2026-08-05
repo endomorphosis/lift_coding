@@ -71,7 +71,8 @@ test-ci:
 		--ignore=tests/integration/test_mcp_kit_dag_interop.py \
 		--ignore=tests/integration/test_mcp_kit_dashboard_sync.py \
 		--ignore=tests/integration/test_spec_conformance.py \
-		--ignore=tests/mcplusplus_profile_h
+		--ignore=tests/mcplusplus_profile_h \
+		--ignore=tests/unit/logic/ui_ux_ir
 
 conformance: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
 conformance: conformance-modal-codec-temporal-operator-crosslang conformance-modal-decompiler-temporal-operator-crosslang
@@ -93,7 +94,7 @@ conformance: conformance-python-deprecation
 # CI Logic Conformance gate: core harness only (symbols, TS run, coverage,
 # mutation/fuzz, PORT-239 host-native, substance). Full make conformance and
 # make conformance-crosslang remain for local complete runs.
-conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance
+conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-python-deprecation
 
 conformance-crosslang: conformance-ts conformance-py conformance-compare conformance-self-containment
 

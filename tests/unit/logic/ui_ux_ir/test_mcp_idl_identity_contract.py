@@ -23,6 +23,15 @@ for _path in (_DATASETS_ROOT, _ACCELERATE_ROOT):
     if _text not in sys.path:
         sys.path.insert(0, _text)
 
+if not _SUITE_PATH.is_file():
+    import pytest
+
+    pytest.skip(
+        f"datasets UIR-002 suite not present at {_SUITE_PATH} "
+        "(submodule pin/checkout missing suite)",
+        allow_module_level=True,
+    )
+
 _spec = importlib.util.spec_from_file_location(
     "uir002_mcp_idl_identity_contract_datasets",
     _SUITE_PATH,
