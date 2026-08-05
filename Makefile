@@ -44,8 +44,6 @@ test-ci:
 		--ignore=tests/test_virtual_ai_os_end_to_end.py \
 		--ignore=tests/test_virtual_ai_os_runtime_placement.py \
 		--ignore=tests/test_meta_glasses_display_todo_queue.py \
-		--ignore=tests/test_mcplusplus_profile_h_inventory.py \
-		--ignore=tests/test_mcplusplus_profile_h_spec.py \
 		--ignore=tests/test_reconciliation_guardrail_refresh.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
