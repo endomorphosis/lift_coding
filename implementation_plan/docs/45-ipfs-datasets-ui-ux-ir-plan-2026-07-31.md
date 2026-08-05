@@ -935,3 +935,17 @@ UIIR lanes remain stopped only until this parent checkpoint is committed.
 
 Full evidence is recorded in
 `implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-unblocking-receipt-2026-08-04.md`.
+
+## 18. Monorepo gitlink re-pin — 2026-08-05T18:35Z
+
+`origin/main` advanced past the merged `agent/ui-ux-ir` PR (#450) and the
+datasets/swissknife gitlinks drifted. Operator re-pin:
+
+- `external/ipfs_datasets` → `9d558ad706e83a944bbf3b66508f969041cc9518`
+- `swissknife` → `d0732bfe0806770ce41c7f9a887b4cba17acf01f`
+- `external/ipfs_accelerate` left at current main pin (includes documentation
+  refresh closeout PR endomorphosis/ipfs_accelerate_py#122)
+
+UIR-033 merge-queue quarantine cancelled as already integrated into SwissKnife
+history. Full receipt:
+`implementation_plan/docs/45-ipfs-datasets-ui-ux-ir-accelerator-pin-2026-08-05T1835Z.md`.
