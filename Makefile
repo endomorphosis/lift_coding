@@ -37,12 +37,6 @@ test-ci:
 	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate:$(PWD)/external/ipfs_kit:$(PWD)/external/ipfs_datasets $(PYTHON) -m pytest -q \
 		--ignore=tests/test_hallucinate_multimodal_control_todo_queue.py \
 		--ignore=tests/test_virtual_ai_os_todo_queue.py \
-		--ignore=tests/test_virtual_ai_os_launch_readiness_gate.py \
-		--ignore=tests/test_virtual_ai_os_capability_registry.py \
-		--ignore=tests/test_virtual_ai_os_swissknife_integration.py \
-		--ignore=tests/test_virtual_ai_os_component_contracts.py \
-		--ignore=tests/test_virtual_ai_os_end_to_end.py \
-		--ignore=tests/test_virtual_ai_os_runtime_placement.py \
 		--ignore=tests/test_meta_glasses_display_todo_queue.py \
 		--ignore=tests/test_reconciliation_guardrail_refresh.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \

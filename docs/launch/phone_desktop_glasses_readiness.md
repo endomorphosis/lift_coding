@@ -1491,3 +1491,7 @@ dispatch occurred.
 No child goal is needed for this deterministic launch gate. Split VAIOS-G697
 only if physical phone, physical desktop peer, or physical Meta glasses capture
 fails independently after the Playwright launch gate is green.
+
+## VAI-533 validation retry-budget repair
+
+- data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md
