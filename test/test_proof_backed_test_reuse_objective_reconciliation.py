@@ -31,9 +31,7 @@ ALL_GOAL_IDS = (
     "PTR-G100",
     "PTR-G110",
 )
-CHILD_GOAL_IDS = tuple(
-    gid for gid in ALL_GOAL_IDS if gid not in {"PTR-G000", "PTR-G110"}
-)
+CHILD_GOAL_IDS = tuple(gid for gid in ALL_GOAL_IDS if gid not in {"PTR-G000", "PTR-G110"})
 
 
 def _load_module() -> Any:
@@ -88,9 +86,7 @@ def _objective_text() -> str:
         _goal_block("PTR-G000", "Root", parent=""),
     ]
     for goal_id in CHILD_GOAL_IDS:
-        blocks.append(
-            _goal_block(goal_id, f"Child {goal_id}", parent="PTR-G000")
-        )
+        blocks.append(_goal_block(goal_id, f"Child {goal_id}", parent="PTR-G000"))
     blocks.append(
         _goal_block(
             "PTR-G110",
@@ -204,12 +200,8 @@ def _write_fixture(
                     "passed": True,
                     "repository_tree": gate_tree,
                     "producing_task_id": "PTR-122",
-                    "final_gate_criterion": (
-                        "ptr/final-current-tree-gate@1"
-                    ),
-                    "root_criterion": (
-                        "ptr/cross-repository-current-tree-gate@1"
-                    ),
+                    "final_gate_criterion": ("ptr/final-current-tree-gate@1"),
+                    "root_criterion": ("ptr/cross-repository-current-tree-gate@1"),
                     "captured_at_unix_ns": 1_700_000_000_000_000_000,
                 },
                 indent=2,
@@ -237,10 +229,7 @@ def _write_fixture(
     health.write_text(
         json.dumps(
             {
-                "schema": (
-                    "ipfs_accelerate_py/proof-backed-test-reuse-"
-                    "supervisor-health-input@1"
-                ),
+                "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-supervisor-health-input@1"),
                 "status": {
                     "healthy": healthy,
                     "work_complete": healthy,
@@ -308,9 +297,7 @@ def test_module_exports_predicted_symbols(recon_mod: Any) -> None:
     assert hasattr(recon_mod, "ObjectiveCloseoutPhase")
     assert hasattr(recon_mod, "ObjectiveCloseoutReceipt")
     assert hasattr(recon_mod, "ObjectiveCloseoutFence")
-    assert recon_mod.PROOF_TEST_REUSE_OBJECTIVE_RECONCILER_INTERFACE.endswith(
-        "@1"
-    )
+    assert recon_mod.PROOF_TEST_REUSE_OBJECTIVE_RECONCILER_INTERFACE.endswith("@1")
     assert recon_mod.OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT == (
         "ObjectiveCompletionEvidenceArtifact"
     )
@@ -368,9 +355,7 @@ def test_cli_accepts_exact_supervisor_closeout_argv(recon_mod: Any) -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_report_only_never_writes_repository(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_report_only_never_writes_repository(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     objective_before = paths["objective"].read_bytes()
     todo_before = paths["todo"].read_bytes()
@@ -412,9 +397,7 @@ def test_report_only_fails_closed_when_required_artifact_is_missing(
         if path.is_file() and ".git" not in path.parts
     }
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == [expected_reason]
@@ -465,9 +448,7 @@ def test_report_only_detects_stale_or_mismatched_artifacts(
     )
     artifact_before = artifact_path.read_bytes()
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == [expected_reason]
@@ -478,9 +459,7 @@ def test_report_only_detects_stale_or_mismatched_artifacts(
     assert not paths["lifecycle"].exists()
 
 
-def test_report_only_detects_failed_gate(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_report_only_detects_failed_gate(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
     gate["passed"] = False
@@ -489,17 +468,13 @@ def test_report_only_detects_failed_gate(
         encoding="utf-8",
     )
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == ["gate_failed"]
 
 
-def test_report_only_requires_explicit_gate_tree_binding(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_report_only_requires_explicit_gate_tree_binding(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
     del gate["repository_tree"]
@@ -508,17 +483,13 @@ def test_report_only_requires_explicit_gate_tree_binding(
         encoding="utf-8",
     )
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == ["missing_gate_tree_binding"]
 
 
-def test_report_only_rejects_conflicting_gate_tree_aliases(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_report_only_rejects_conflicting_gate_tree_aliases(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
     gate["binding"] = {"tree_id": "tree-from-another-checkout"}
@@ -527,17 +498,13 @@ def test_report_only_rejects_conflicting_gate_tree_aliases(
         encoding="utf-8",
     )
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == ["mismatched_gate_artifact"]
 
 
-def test_report_only_requires_explicit_gate_passed_decision(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_report_only_requires_explicit_gate_passed_decision(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     gate = json.loads(paths["gate"].read_text(encoding="utf-8"))
     del gate["passed"]
@@ -546,9 +513,7 @@ def test_report_only_requires_explicit_gate_passed_decision(
         encoding="utf-8",
     )
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == ["missing_gate_passed"]
@@ -564,9 +529,7 @@ def test_report_only_requires_admissible_evidence_for_every_child_goal(
     evidence = json.loads(paths["evidence"].read_text(encoding="utf-8"))
     if missing_goal_id is None:
         evidence["goals"] = {}
-        expected = [
-            f"missing_evidence:{goal_id}" for goal_id in CHILD_GOAL_IDS
-        ]
+        expected = [f"missing_evidence:{goal_id}" for goal_id in CHILD_GOAL_IDS]
     else:
         del evidence["goals"][missing_goal_id]
         expected = [f"missing_evidence:{missing_goal_id}"]
@@ -650,29 +613,19 @@ def test_ptr122_gate_with_ptr120_evidence_passes_and_extracts_canonical_ids(
         }
 
     gate = {
-        "schema": (
-            "ipfs_accelerate_py/agent-supervisor/"
-            "proof-test-reuse-persisted-gate-bundle@1"
-        ),
+        "schema": ("ipfs_accelerate_py/agent-supervisor/proof-test-reuse-persisted-gate-bundle@1"),
         "interface": "ProofTestReusePersistedGateBundle@1",
         "producing_task_id": "PTR-122",
         "tree_id": tree,
         "git_tree_id": tree,
         "decision": {
             "passed": True,
-            "final_gate_completion_evidence": final_evidence(
-                "PTR-G110", final_criterion
-            ),
-            "root_completion_evidence": final_evidence(
-                "PTR-G000", root_criterion
-            ),
+            "final_gate_completion_evidence": final_evidence("PTR-G110", final_criterion),
+            "root_completion_evidence": final_evidence("PTR-G000", root_criterion),
         },
     }
     evidence = {
-        "schema": (
-            "ipfs_accelerate_py.agent_supervisor.objective_daemon."
-            "completion_evidence.v1"
-        ),
+        "schema": ("ipfs_accelerate_py.agent_supervisor.objective_daemon.completion_evidence.v1"),
         "interface": "ObjectiveCompletionEvidenceArtifact",
         "binding": {
             "repository_id": "repo:fixture",
@@ -717,9 +670,7 @@ def test_ptr122_gate_with_ptr120_evidence_passes_and_extracts_canonical_ids(
 
     assert result["passed"] is True
     assert result["reason_codes"] == []
-    assert reconciler._evidence_for_goal("PTR-G010") == [
-        "baguqeera010ptr120"
-    ]
+    assert reconciler._evidence_for_goal("PTR-G010") == ["baguqeera010ptr120"]
 
     record = evidence["goals"]["PTR-G010"]["completion_evidence_records"][0]
     del record["repository_tree"]
@@ -739,10 +690,7 @@ def test_ptr120_aggregate_gate_cannot_substitute_for_ptr122_final_gate(
 ) -> None:
     paths = _write_fixture(tmp_path)
     tree = str(paths["tree_id"])
-    goals = {
-        required_goal_id: {"passed": True}
-        for required_goal_id in ALL_GOAL_IDS
-    }
+    goals = {required_goal_id: {"passed": True} for required_goal_id in ALL_GOAL_IDS}
     paths["gate"].write_text(
         json.dumps(
             {
@@ -757,17 +705,13 @@ def test_ptr120_aggregate_gate_cannot_substitute_for_ptr122_final_gate(
         encoding="utf-8",
     )
 
-    result = _make_reconciler(
-        recon_mod, paths, report_only=True
-    ).diagnose()
+    result = _make_reconciler(recon_mod, paths, report_only=True).diagnose()
 
     assert result["passed"] is False
     assert result["reason_codes"] == ["wrong_gate_producer"]
 
 
-def test_report_only_via_cli(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_report_only_via_cli(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path, open_tasks=True)
     code = recon_mod.main(
         [
@@ -814,9 +758,7 @@ def test_closeout_refuses_open_tasks(recon_mod: Any, tmp_path: Path) -> None:
     assert "PTR-001" in exc.value.message
 
 
-def test_closeout_refuses_dirty_checkout(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_refuses_dirty_checkout(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     # Dirty the real checkout after the fixture commit.
     (paths["repo"] / "extra.txt").write_text("dirty\n", encoding="utf-8")
@@ -826,9 +768,7 @@ def test_closeout_refuses_dirty_checkout(
     assert exc.value.reason_code == "dirty_checkout"
 
 
-def test_closeout_refuses_changed_source_tree(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_refuses_changed_source_tree(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(
         recon_mod,
@@ -840,9 +780,7 @@ def test_closeout_refuses_changed_source_tree(
     assert exc.value.reason_code == "dirty_checkout"
 
 
-def test_closeout_refuses_unhealthy_supervisor(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_refuses_unhealthy_supervisor(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path, healthy=False)
     reconciler = _make_reconciler(recon_mod, paths)
     with pytest.raises(recon_mod.CloseoutRefusal) as exc:
@@ -850,15 +788,11 @@ def test_closeout_refuses_unhealthy_supervisor(
     assert exc.value.reason_code == "unhealthy_supervisor"
 
 
-def test_closeout_refuses_concurrent_writers(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_refuses_concurrent_writers(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     fence_path = paths["state"] / "closeout.fence"
     # Hold the fence exclusively in this process.
-    holder = recon_mod.ObjectiveCloseoutFence(
-        fence_path=fence_path, writer_id="holder-1"
-    )
+    holder = recon_mod.ObjectiveCloseoutFence(fence_path=fence_path, writer_id="holder-1")
     holder.acquire()
     try:
         reconciler = _make_reconciler(
@@ -870,9 +804,7 @@ def test_closeout_refuses_concurrent_writers(
         holder.release()
 
 
-def test_closeout_refuses_stale_gate_in_phase_three(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_refuses_stale_gate_in_phase_three(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path, gate_tree="tree-stale")
     reconciler = _make_reconciler(
         recon_mod,
@@ -907,9 +839,7 @@ def test_closeout_refuses_stale_gate_in_phase_three(
 # ---------------------------------------------------------------------------
 
 
-def test_closeout_three_phases_and_candidate(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_three_phases_and_candidate(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     objective_before = paths["objective"].read_text(encoding="utf-8")
     reconciler = _make_reconciler(recon_mod, paths)
@@ -941,21 +871,13 @@ def test_closeout_three_phases_and_candidate(
     assert "candidate_handoff" in phases
 
     # Phase one receipt must not verify.
-    phase1 = next(
-        item
-        for item in result["receipts"]
-        if item["phase"] == "phase_1_provisional"
-    )
+    phase1 = next(item for item in result["receipts"] if item["phase"] == "phase_1_provisional")
     for transition in phase1["goal_transitions"]:
-        assert transition["state"] != "verified_complete" or not transition.get(
-            "changed"
-        )
+        assert transition["state"] != "verified_complete" or not transition.get("changed")
 
     # Phase two verifies children only.
     phase2 = next(
-        item
-        for item in result["receipts"]
-        if item["phase"] == "phase_2_verify_g010_g100"
+        item for item in result["receipts"] if item["phase"] == "phase_2_verify_g010_g100"
     )
     verified_children = set(phase2["details"]["verified_child_goal_ids"])
     assert set(CHILD_GOAL_IDS) <= verified_children
@@ -964,15 +886,9 @@ def test_closeout_three_phases_and_candidate(
 
     # Phase three verifies G110 then G000.
     phase3 = next(
-        item
-        for item in result["receipts"]
-        if item["phase"] == "phase_3_verify_g110_g000"
+        item for item in result["receipts"] if item["phase"] == "phase_3_verify_g110_g000"
     )
-    order = [
-        item["goal_id"]
-        for item in phase3["goal_transitions"]
-        if item.get("changed")
-    ]
+    order = [item["goal_id"] for item in phase3["goal_transitions"] if item.get("changed")]
     if "PTR-G110" in order and "PTR-G000" in order:
         assert order.index("PTR-G110") < order.index("PTR-G000")
 
@@ -982,14 +898,10 @@ def test_closeout_three_phases_and_candidate(
         assert result["goal_states"][goal_id] == "verified_complete"
 
 
-def test_phase_one_only_provisional(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_phase_one_only_provisional(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(recon_mod, paths)
-    goals = recon_mod.parse_objective_goals(
-        paths["objective"].read_text(encoding="utf-8")
-    )
+    goals = recon_mod.parse_objective_goals(paths["objective"].read_text(encoding="utf-8"))
     states = {goal.goal_id: goal.status for goal in goals}
     receipt = reconciler._phase_one_provisional(goals=goals, states=states)
     assert receipt.passed is True
@@ -1012,14 +924,10 @@ def test_phase_one_only_provisional(
 # ---------------------------------------------------------------------------
 
 
-def test_every_refresh_recomputes_bindings(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_every_refresh_recomputes_bindings(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(recon_mod, paths)
-    goals = recon_mod.parse_objective_goals(
-        paths["objective"].read_text(encoding="utf-8")
-    )
+    goals = recon_mod.parse_objective_goals(paths["objective"].read_text(encoding="utf-8"))
     states = {goal.goal_id: "provisionally_complete" for goal in goals}
     first = reconciler._recompute_all_bindings(
         goals=goals,
@@ -1043,39 +951,27 @@ def test_every_refresh_recomputes_bindings(
     )
     assert third != first
     for goal_id in first:
-        assert first[goal_id]["binding_digest"] != third[goal_id][
-            "binding_digest"
-        ]
+        assert first[goal_id]["binding_digest"] != third[goal_id]["binding_digest"]
 
 
-def test_bounded_replay_converges(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_bounded_replay_converges(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(recon_mod, paths)
     result = reconciler.closeout()
     assert result["passed"] is True
     # A second run with clean state also converges (idempotent handoff).
-    reconciler2 = _make_reconciler(
-        recon_mod, paths, writer_id="second-writer"
-    )
+    reconciler2 = _make_reconciler(recon_mod, paths, writer_id="second-writer")
     result2 = reconciler2.closeout()
     assert result2["passed"] is True
 
 
-def test_interruption_resumes_safely(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_interruption_resumes_safely(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     writer_id = "resume-writer"
     reconciler = _make_reconciler(recon_mod, paths, writer_id=writer_id)
     # Seed a checkpoint as if phase one completed.
-    goals = recon_mod.parse_objective_goals(
-        paths["objective"].read_text(encoding="utf-8")
-    )
-    states = {
-        goal.goal_id: "provisionally_complete" for goal in goals
-    }
+    goals = recon_mod.parse_objective_goals(paths["objective"].read_text(encoding="utf-8"))
+    states = {goal.goal_id: "provisionally_complete" for goal in goals}
     reconciler._save_checkpoint(
         phase=recon_mod.ObjectiveCloseoutPhase.PHASE_2_VERIFY_CHILDREN,
         states=states,
@@ -1087,16 +983,10 @@ def test_interruption_resumes_safely(
     assert result["goal_states"]["PTR-G000"] == "verified_complete"
 
 
-def test_mutation_reopens_ancestors_and_dependents(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_mutation_reopens_ancestors_and_dependents(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
-    goals = recon_mod.parse_objective_goals(
-        paths["objective"].read_text(encoding="utf-8")
-    )
-    states = {
-        goal.goal_id: "verified_complete" for goal in goals
-    }
+    goals = recon_mod.parse_objective_goals(paths["objective"].read_text(encoding="utf-8"))
+    states = {goal.goal_id: "verified_complete" for goal in goals}
     transitions = recon_mod.reopen_affected_goals(
         goals,
         contradicted_goal_ids=["PTR-G100"],
@@ -1114,9 +1004,7 @@ def test_mutation_reopens_ancestors_and_dependents(
     assert states["PTR-G110"] == "reopened"
 
 
-def test_closeout_applies_contradiction_then_reconverges(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_closeout_applies_contradiction_then_reconverges(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(
         recon_mod,
@@ -1129,14 +1017,11 @@ def test_closeout_applies_contradiction_then_reconverges(
     for goal_id in ALL_GOAL_IDS:
         assert result["goal_states"][goal_id] == "verified_complete"
     assert "PTR-G050" in result.get("reopened_goal_ids", []) or any(
-        "PTR-G050" in str(item)
-        for item in result.get("receipts", [])
+        "PTR-G050" in str(item) for item in result.get("receipts", [])
     )
 
 
-def test_missing_optional_services_are_nonterminal_gaps(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_missing_optional_services_are_nonterminal_gaps(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(
         recon_mod,
@@ -1160,9 +1045,7 @@ def test_missing_optional_services_are_nonterminal_gaps(
         assert gap["action"] == "retain_typed_gap_and_continue_tests"
 
 
-def test_candidate_requires_explicit_operator_commit(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_candidate_requires_explicit_operator_commit(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(recon_mod, paths)
     result = reconciler.closeout()
@@ -1179,9 +1062,7 @@ def test_candidate_requires_explicit_operator_commit(
     assert live.count("verified_complete") == 0
 
 
-def test_validation_failure_blocks_phase_two(
-    recon_mod: Any, tmp_path: Path
-) -> None:
+def test_validation_failure_blocks_phase_two(recon_mod: Any, tmp_path: Path) -> None:
     paths = _write_fixture(tmp_path)
     reconciler = _make_reconciler(
         recon_mod,
@@ -1195,9 +1076,7 @@ def test_validation_failure_blocks_phase_two(
 
 def test_fence_compare_and_swap_conflict(recon_mod: Any, tmp_path: Path) -> None:
     fence_path = tmp_path / "fence.json"
-    fence = recon_mod.ObjectiveCloseoutFence(
-        fence_path=fence_path, writer_id="w1"
-    )
+    fence = recon_mod.ObjectiveCloseoutFence(fence_path=fence_path, writer_id="w1")
     fence.acquire()
     try:
         with pytest.raises(recon_mod.ConcurrentWriterError):
@@ -1280,6 +1159,4 @@ def test_subprocess_module_entrypoint(tmp_path: Path) -> None:
     assert result.returncode == 1
     payload = json.loads(result.stdout)
     assert payload["mode"] == "report_only"
-    assert "open_tasks" in payload.get("reason_codes", []) or (
-        payload.get("passed") is False
-    )
+    assert "open_tasks" in payload.get("reason_codes", []) or (payload.get("passed") is False)

@@ -10,15 +10,11 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "proof_backed_test_reuse_supervisor.py"
-VALIDATOR_SCRIPT = (
-    ROOT / "scripts" / "validate_proof_backed_test_reuse_board.py"
-)
+VALIDATOR_SCRIPT = ROOT / "scripts" / "validate_proof_backed_test_reuse_board.py"
 
 
 def _load_module() -> Any:
-    spec = importlib.util.spec_from_file_location(
-        "proof_backed_test_reuse_supervisor", SCRIPT
-    )
+    spec = importlib.util.spec_from_file_location("proof_backed_test_reuse_supervisor", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -48,9 +44,7 @@ def _run_board_readiness(
 ) -> dict[str, object]:
     state_root = tmp_path / "state"
     log_dir = tmp_path / "logs"
-    task_state_path = (
-        state_root / "preflight" / "board" / "ptr_preflight_task_state.json"
-    )
+    task_state_path = state_root / "preflight" / "board" / "ptr_preflight_task_state.json"
     task_state_path.parent.mkdir(parents=True)
     log_dir.mkdir()
     task_state_path.write_text(json.dumps(payload), encoding="utf-8")
@@ -81,9 +75,7 @@ def test_completed_board_is_valid_quiescent_readiness(
         "selection_idle_reason": "no_shard_selectable_ready_tasks",
     }
 
-    readiness = _run_board_readiness(
-        supervisor, monkeypatch, tmp_path, payload
-    )
+    readiness = _run_board_readiness(supervisor, monkeypatch, tmp_path, payload)
 
     assert readiness["work_complete"] is True
     assert readiness["selectable_ready_count"] == 0
@@ -152,35 +144,21 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         assert lane["fallback_trigger"] == "grok_quota_exhausted"
         environment = supervisor._runtime_environment(str(lane["provider"]))
         assert "IMPLEMENTATION_DAEMON_COMMAND" not in environment
-        assert environment[
-            supervisor.MERGE_RESOLVER_COMMAND_ENV
-        ] == supervisor._managed_merge_resolver_command()
-        assert "direct-codex-merge-resolver-bypass" not in environment[
-            supervisor.MERGE_RESOLVER_COMMAND_ENV
-        ]
         assert (
-            environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"]
-            == "grok-codex"
+            environment[supervisor.MERGE_RESOLVER_COMMAND_ENV]
+            == supervisor._managed_merge_resolver_command()
         )
         assert (
-            environment["IPFS_ACCELERATE_AGENT_GROK_BIN"]
-            == "/opt/grok/bin/grok"
+            "direct-codex-merge-resolver-bypass"
+            not in environment[supervisor.MERGE_RESOLVER_COMMAND_ENV]
         )
+        assert environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"] == "grok-codex"
+        assert environment["IPFS_ACCELERATE_AGENT_GROK_BIN"] == "/opt/grok/bin/grok"
+        assert environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"] == "grok-4.5"
+        assert environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"] == "gpt-5.6-terra"
+        assert environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"] == "medium"
         assert (
-            environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"]
-            == "grok-4.5"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"]
-            == "gpt-5.6-terra"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"]
-            == "medium"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"]
-            == "grok_quota_exhausted"
+            environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"] == "grok_quota_exhausted"
         )
         assert environment["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "1"
         assert environment["IPFS_ACCEL_AUTO_INSTALL"] == "1"
@@ -266,9 +244,7 @@ def test_runtime_provider_metadata_preserves_identity_and_routes_grok_first(
         "grok-implement",
         "codex-implement",
     ]
-    assert parallel["canonicalTaskProviderRolesByShardPurpose"] == (
-        "historical_task_identity_only"
-    )
+    assert parallel["canonicalTaskProviderRolesByShardPurpose"] == ("historical_task_identity_only")
     assert parallel["runtimeExecutionProviderRolesByShard"] == [
         "grok-implement",
         "grok-implement",
@@ -295,9 +271,7 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
         "grok-implement",
         "codex-implement",
     ]
-    config["parallelRuntime"]["semanticMergeResolver"][
-        "fallbackTrigger"
-    ] = "any_failure"
+    config["parallelRuntime"]["semanticMergeResolver"]["fallbackTrigger"] = "any_failure"
     config["providerPolicy"]["appliesTo"] = ["implementation"]
     config_path = tmp_path / "supervisor.json"
     config_path.write_text(json.dumps(config), encoding="utf-8")
@@ -339,15 +313,11 @@ def test_board_validator_seals_current_66_task_v4_correction_wave() -> None:
         "PTR-154",
         "PTR-155",
     ]
-    assert result[
-        "reviewed_production_correction_wave_one_submodules"
-    ] == {
+    assert result["reviewed_production_correction_wave_one_submodules"] == {
         "PTR-150": ["external/ipfs_accelerate"],
         "PTR-151": ["external/ipfs_datasets"],
     }
-    assert result[
-        "reviewed_production_correction_wave_one_resource_width"
-    ] == 2
+    assert result["reviewed_production_correction_wave_one_resource_width"] == 2
     assert result["reviewed_production_correction_join_task_id"] == "PTR-152"
     assert result["reviewed_proof_material_context_wave_task_ids"] == [
         "PTR-153",
@@ -392,9 +362,7 @@ def test_status_exposes_exact_model_and_quota_only_fallback_policy(
         "semantic_merge_resolver": {
             "provider": "grok-codex",
             "fallbackTrigger": "grok_quota_exhausted",
-            "inheritedCommandPolicy": (
-                "override_with_managed_provider_chain"
-            ),
+            "inheritedCommandPolicy": ("override_with_managed_provider_chain"),
         },
     }
 
@@ -428,9 +396,7 @@ def test_status_rejects_stopped_completion_snapshot_from_stale_board(
     assert status["current_board_task_count"] == 66
     assert status["work_complete"] is False
     assert status["globally_progressable"] is False
-    assert all(
-        lane["current_board_matches"] is False for lane in status["lanes"]
-    )
+    assert all(lane["current_board_matches"] is False for lane in status["lanes"])
 
 
 def test_status_rejects_live_selectable_snapshot_from_stale_board(
@@ -469,9 +435,7 @@ def test_status_rejects_mixed_current_and_stale_live_lanes(
 ) -> None:
     current_ids = tuple(f"PTR-{index:03d}" for index in range(66))
     current_sha256 = supervisor._task_ids_sha256(current_ids)
-    monkeypatch.setattr(
-        supervisor, "_current_board_task_ids", lambda: current_ids
-    )
+    monkeypatch.setattr(supervisor, "_current_board_task_ids", lambda: current_ids)
 
     def lane_status(lane: dict[str, object]) -> dict[str, object]:
         stale = lane["name"] == "ptr_lane_1"
@@ -491,9 +455,7 @@ def test_status_rejects_mixed_current_and_stale_live_lanes(
 
     status = supervisor._status_payload()
 
-    stale_lane = next(
-        lane for lane in status["lanes"] if lane["lane"] == "ptr_lane_1"
-    )
+    stale_lane = next(lane for lane in status["lanes"] if lane["lane"] == "ptr_lane_1")
     assert status["healthy"] is False
     assert stale_lane["healthy"] is False
     assert "task_state_board_mismatch" in stale_lane["unhealthy_reasons"]
@@ -526,14 +488,10 @@ def test_provider_preflight_reports_grok_as_effective_primary(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
 
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
         if command[-2:] == ["login", "status"]:
             stdout = "Logged in using ChatGPT\n"
         else:
@@ -576,9 +534,7 @@ def test_provider_preflight_reports_grok_as_effective_primary(
         "semantic_merge_resolver": {
             "provider": "grok-codex",
             "fallbackTrigger": "grok_quota_exhausted",
-            "inheritedCommandPolicy": (
-                "override_with_managed_provider_chain"
-            ),
+            "inheritedCommandPolicy": ("override_with_managed_provider_chain"),
         },
         "fallback_forbidden_on": [
             "authentication_failure",
@@ -598,18 +554,12 @@ def test_provider_preflight_rejects_grok_auth_failure_without_fallback(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
 
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
         stdout = (
-            "Logged in using ChatGPT\n"
-            if command[-2:] == ["login", "status"]
-            else "grok 1.2.3\n"
+            "Logged in using ChatGPT\n" if command[-2:] == ["login", "status"] else "grok 1.2.3\n"
         )
         return subprocess.CompletedProcess(command, 0, stdout, "")
 
@@ -641,20 +591,14 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
     commands: list[list[str]] = []
 
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
         commands.append(command)
         stdout = (
-            "Logged in using ChatGPT\n"
-            if command[-2:] == ["login", "status"]
-            else "grok 1.2.3\n"
+            "Logged in using ChatGPT\n" if command[-2:] == ["login", "status"] else "grok 1.2.3\n"
         )
         return subprocess.CompletedProcess(
             command,
@@ -704,9 +648,7 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
             "automatic_install_enabled": False,
         }
 
-    monkeypatch.setattr(
-        test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe
-    )
+    monkeypatch.setattr(test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe)
     monkeypatch.setattr(
         implementation_daemon,
         "_grok_cli_available",
@@ -769,9 +711,7 @@ def test_configured_submodule_initialization_is_scoped_and_non_updating(
 ) -> None:
     calls: list[tuple[list[str], dict[str, object]]] = []
 
-    def fake_run(
-        command: list[str], **kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
         calls.append((command, dict(kwargs)))
         return subprocess.CompletedProcess(command, 0, "", "")
 
@@ -843,10 +783,7 @@ def test_closeout_artifact_presence_projects_missing_inputs_without_authority(
     assert projection["artifact_presence_ready"] is False
     assert projection["missing_required_artifacts"] == ["evidence"]
     assert projection["required_artifacts"]["gate"]["present"] is True
-    assert (
-        projection["artifact_presence_is_completion_authority"]
-        is False
-    )
+    assert projection["artifact_presence_is_completion_authority"] is False
 
 
 def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
@@ -876,9 +813,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "PTR-011",
         "PTR-041",
     ]
-    validations = by_name[
-        "fresh_current_tree_proof_reuse_off_validation_receipts"
-    ]
+    validations = by_name["fresh_current_tree_proof_reuse_off_validation_receipts"]
     assert validations["required_count"] == 66
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
@@ -899,9 +834,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     }
     assert len(activation["activation_blocker_codes"]) == 9
     assert activation["implementation_gap_is_completion_authority"] is False
-    assert activation["required_implementation_sequence"][-1]["goals"] == [
-        "PTR-G110"
-    ]
+    assert activation["required_implementation_sequence"][-1]["goals"] == ["PTR-G110"]
     assert not any(tmp_path.rglob("*"))
 
 
@@ -954,9 +887,7 @@ def test_managed_merge_inventory_checks_task_cid_and_current_ancestry(
 
     assert inventory["usable_candidate_task_ids"] == ["PTR-001"]
     assert inventory["missing_candidate_task_ids"] == ["PTR-002"]
-    assert inventory["rejected_candidates"] == {
-        "PTR-002": "canonical_task_cid_mismatch"
-    }
+    assert inventory["rejected_candidates"] == {"PTR-002": "canonical_task_cid_mismatch"}
     assert inventory["presence_is_completion_authority"] is False
 
 
@@ -1007,9 +938,7 @@ def _configure_closeout_test(
                 "completed_task_count": 41,
                 "open_task_ids": [],
             },
-            "closeout_input_inventory": {
-                "inventory_is_completion_authority": False
-            },
+            "closeout_input_inventory": {"inventory_is_completion_authority": False},
         },
     )
     monkeypatch.setattr(
@@ -1028,13 +957,9 @@ def _configure_closeout_test(
     )
     observed_health_paths: list[Path] = []
 
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
         assert command[-1] == "--report-only"
-        health_path = Path(
-            command[command.index("--supervisor-health-input-path") + 1]
-        )
+        health_path = Path(command[command.index("--supervisor-health-input-path") + 1])
         observed_health_paths.append(health_path)
         health = json.loads(health_path.read_text(encoding="utf-8"))
         assert health["status"]["healthy"] is True
@@ -1055,9 +980,7 @@ def _configure_closeout_test(
     monkeypatch.setattr(
         supervisor,
         "_stop_lane",
-        lambda _lane: (_ for _ in ()).throw(
-            AssertionError("diagnosis must not stop lanes")
-        ),
+        lambda _lane: (_ for _ in ()).throw(AssertionError("diagnosis must not stop lanes")),
     )
     return observed_health_paths
 
@@ -1079,9 +1002,7 @@ def test_closeout_report_only_uses_ephemeral_health_and_keeps_lanes_running(
     assert result["diagnosis_passed"] is True
     assert result["lanes_stopped"] is False
     assert result["operator_commit_required"] is False
-    assert result["input_inventory"] == {
-        "inventory_is_completion_authority": False
-    }
+    assert result["input_inventory"] == {"inventory_is_completion_authority": False}
     assert len(observed_health_paths) == 1
     assert not observed_health_paths[0].exists()
     assert not any(tmp_path.iterdir())
@@ -1140,9 +1061,7 @@ def test_report_only_accepts_normal_agentic_maintenance_statuses(
 
     monkeypatch.setattr(supervisor, "_load_json", fake_load)
     monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 100)
-    monkeypatch.setattr(
-        supervisor, "_lane_process_owned", lambda _lane, _pid: True
-    )
+    monkeypatch.setattr(supervisor, "_lane_process_owned", lambda _lane, _pid: True)
     monkeypatch.setattr(supervisor, "_pid_alive", lambda _pid: True)
     monkeypatch.setattr(
         supervisor,
@@ -1168,9 +1087,7 @@ def test_report_only_accepts_normal_agentic_maintenance_statuses(
                 "completed_task_count": 41,
                 "open_task_ids": [],
             },
-            "closeout_input_inventory": {
-                "inventory_is_completion_authority": False
-            },
+            "closeout_input_inventory": {"inventory_is_completion_authority": False},
         },
     )
     monkeypatch.setattr(
@@ -1230,9 +1147,7 @@ def test_maintenance_status_still_fails_closed_on_error_or_pending_update(
 
     monkeypatch.setattr(supervisor, "_load_json", fake_load)
     monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 100)
-    monkeypatch.setattr(
-        supervisor, "_lane_process_owned", lambda _lane, _pid: True
-    )
+    monkeypatch.setattr(supervisor, "_lane_process_owned", lambda _lane, _pid: True)
     monkeypatch.setattr(supervisor, "_pid_alive", lambda _pid: True)
 
     lane = supervisor._lane_status(supervisor.LANES[0])

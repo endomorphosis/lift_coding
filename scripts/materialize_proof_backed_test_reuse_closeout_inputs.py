@@ -22,7 +22,7 @@ import os
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -541,14 +541,12 @@ def _ensure_local_dev_e2e_env() -> dict[str, str]:
     return {
         "PTR_CLOSEOUT_LOCAL_SETUP": os.environ.get("PTR_CLOSEOUT_LOCAL_SETUP", ""),
         "PTR_CLOSEOUT_DEV_E2E": os.environ.get("PTR_CLOSEOUT_DEV_E2E", ""),
-        "PTR_CLOSEOUT_HEAVY_MEASUREMENTS": os.environ.get(
-            "PTR_CLOSEOUT_HEAVY_MEASUREMENTS", ""
-        ),
+        "PTR_CLOSEOUT_HEAVY_MEASUREMENTS": os.environ.get("PTR_CLOSEOUT_HEAVY_MEASUREMENTS", ""),
     }
 
 
 def main() -> int:
-    started = datetime.now(timezone.utc).isoformat()
+    started = datetime.now(UTC).isoformat()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     e2e_env = _ensure_local_dev_e2e_env()
     # Prefer monorepo external/ipfs_datasets over accelerate nested submodule.
@@ -560,8 +558,7 @@ def main() -> int:
     sys.path[:0] = [datasets_text, accel_text, str(KIT_ROOT)]
     existing = str(os.environ.get("PYTHONPATH", "") or "")
     os.environ["PYTHONPATH"] = os.pathsep.join(
-        [datasets_text, accel_text, str(KIT_ROOT)]
-        + ([existing] if existing else [])
+        [datasets_text, accel_text, str(KIT_ROOT)] + ([existing] if existing else [])
     )
 
     checkout = _checkout_identity()
@@ -683,9 +680,7 @@ def main() -> int:
         # Prefer live clean checkout over a stale identity snapshot so gate
         # artifacts stay bound to HEAD. Snapshot is used for forest/policy pins.
         snapshot_commit = str(
-            identity_payload.get("git_commit_id")
-            or snapshot_checkout.get("commit")
-            or ""
+            identity_payload.get("git_commit_id") or snapshot_checkout.get("commit") or ""
         )
         live_commit = str(checkout.get("commit") or "")
         live_tree = str(checkout.get("tree") or "")
@@ -700,8 +695,7 @@ def main() -> int:
             git_commit_id = str(identity_payload.get("git_commit_id") or live_commit)
             git_tree_id = str(identity_payload.get("git_tree_id") or live_tree)
             repository_state_cid = str(
-                identity_payload.get("repository_state_cid")
-                or f"git-commit:{git_commit_id}"
+                identity_payload.get("repository_state_cid") or f"git-commit:{git_commit_id}"
             )
 
         # Prefer sealed validation-receipt identity over a dirty worktree from
@@ -921,9 +915,7 @@ def main() -> int:
             decision = gate_body.get("decision") if isinstance(gate_body, dict) else {}
             if isinstance(decision, dict):
                 ptr122_gate_passed = bool(decision.get("passed"))
-                ptr122_reasons = [
-                    str(item) for item in (decision.get("reason_codes") or [])[:32]
-                ]
+                ptr122_reasons = [str(item) for item in (decision.get("reason_codes") or [])[:32]]
     except (OSError, json.JSONDecodeError, TypeError):
         pass
     try:
@@ -931,9 +923,7 @@ def main() -> int:
         if probe_path.is_file():
             probe_body = json.loads(probe_path.read_text(encoding="utf-8"))
             repair = (
-                probe_body.get("repair_evidence_summary")
-                if isinstance(probe_body, dict)
-                else {}
+                probe_body.get("repair_evidence_summary") if isinstance(probe_body, dict) else {}
             )
             if isinstance(repair, dict):
                 activation_repair_passed = bool(repair.get("passed"))
@@ -943,12 +933,8 @@ def main() -> int:
         pass
 
     dirty = not bool(checkout.get("clean"))
-    closeout_passed = (
-        closeout.get("closeout_passed") if isinstance(closeout, dict) else None
-    )
-    diagnosis_passed = (
-        closeout.get("diagnosis_passed") if isinstance(closeout, dict) else None
-    )
+    closeout_passed = closeout.get("closeout_passed") if isinstance(closeout, dict) else None
+    diagnosis_passed = closeout.get("diagnosis_passed") if isinstance(closeout, dict) else None
     notes = [
         "Authority and auto-repair live in ipfs_accelerate_py.agent_supervisor.",
         "Missing managed-merge provenance and operator approvals cannot be synthesized.",
@@ -975,7 +961,7 @@ def main() -> int:
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-closeout-materialization-probe@1",
         "authority": False,
         "started_at": started,
-        "finished_at": datetime.now(timezone.utc).isoformat(),
+        "finished_at": datetime.now(UTC).isoformat(),
         "checkout": {
             "branch": checkout.get("branch"),
             "commit": checkout.get("commit"),
