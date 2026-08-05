@@ -123,9 +123,41 @@ def _clone_or_copy_submodule(source: Path, target: Path) -> None:
         shutil.copytree(source, target, symlinks=True)
 
 
+def _git_submodule_update(name: str, target: Path) -> bool:
+    """Populate a first-level submodule via git when no local clone exists."""
+    repo_root = Path(__file__).resolve().parents[1]
+    rel = f"external/{name}" if not name.startswith("external/") else name
+    if name in {"swissknife", "Mcp-Plus-Plus", "hallucinate_app"}:
+        rel = name
+    try:
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repo_root),
+                "submodule",
+                "update",
+                "--init",
+                "--depth",
+                "1",
+                rel,
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        return False
+    return _path_has_files(target)
+
+
 def _ensure_external_submodule(name: str) -> None:
     repo_root = Path(__file__).resolve().parents[1]
-    target = repo_root / "external" / name
+    if name in {"swissknife", "Mcp-Plus-Plus", "hallucinate_app"}:
+        target = repo_root / name
+    else:
+        target = repo_root / "external" / name
     if _path_has_files(target):
         return
 
@@ -138,6 +170,9 @@ def _ensure_external_submodule(name: str) -> None:
         None,
     )
     if source is None:
+        # CI and clean checkouts: try official git submodule init (non-recursive).
+        if _git_submodule_update(name, target):
+            return
         return
 
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -173,8 +208,13 @@ def _ensure_external_submodule(name: str) -> None:
 
 for _submodule_name in (
     "ipfs_kit",
+    "ipfs_accelerate",
+    "ipfs_datasets",
     "meta-wearables-dat-android",
     "meta-wearables-dat-ios",
+    "swissknife",
+    "Mcp-Plus-Plus",
+    "hallucinate_app",
 ):
     try:
         _ensure_external_submodule(_submodule_name)

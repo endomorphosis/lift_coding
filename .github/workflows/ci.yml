@@ -24,7 +24,11 @@ jobs:
             external/ipfs_accelerate \
             external/ipfs_kit \
             external/ipfs_datasets \
-            swissknife || true
+            external/meta-wearables-dat-android \
+            external/meta-wearables-dat-ios \
+            swissknife \
+            Mcp-Plus-Plus \
+            hallucinate_app || true
 
       - uses: actions/setup-python@v5
         with:
