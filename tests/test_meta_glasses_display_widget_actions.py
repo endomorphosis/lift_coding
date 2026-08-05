@@ -263,14 +263,11 @@ def test_display_widget_contract_sync_delegates_reusable_spec_wiring() -> None:
         encoding="utf-8"
     )
 
-    from ipfs_accelerate_py.agent_supervisor.interface_contract_codegen import (
-        ActionContractSyncSpec,
-    )
-
-    assert isinstance(sync_module.ACTION_CONTRACT_SYNC_SPEC, ActionContractSyncSpec)
-    assert sync_module.ACTION_CONTRACT_SYNC_SPEC.descriptor_path == (
-        "spec/meta_glasses_display_widget_orb_interface.json"
-    )
+    # Dual-import of accelerate (bootstrap vs PYTHONPATH) can yield distinct
+    # ActionContractSyncSpec class objects; assert by shape/name instead.
+    sync_spec = sync_module.ACTION_CONTRACT_SYNC_SPEC
+    assert type(sync_spec).__name__ == "ActionContractSyncSpec"
+    assert sync_spec.descriptor_path == ("spec/meta_glasses_display_widget_orb_interface.json")
     assert sync_module.ACTION_CONTRACT_SYNC_SPEC.python_target_path == (
         "src/handsfree/meta_glasses_display_widget_contract.py"
     )

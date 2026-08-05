@@ -47,10 +47,6 @@ test-ci:
 		--ignore=tests/test_virtual_ai_os_runtime_placement.py \
 		--ignore=tests/test_meta_glasses_display_todo_queue.py \
 		--ignore=tests/test_meta_glasses_mobile_orb_bridge.py \
-		--ignore=tests/test_meta_glasses_display_widget_actions.py \
-		--ignore=tests/test_meta_glasses_io_mcpplusplus_contract.py \
-		--ignore=tests/test_meta_glasses_io_mocks.py \
-		--ignore=tests/test_meta_glasses_multimodal_io_transport_contract.py \
 		--ignore=tests/test_display_webapp_widget_readiness.py \
 		--ignore=tests/test_mcplusplus_profile_h_inventory.py \
 		--ignore=tests/test_mcplusplus_profile_h_spec.py \
@@ -58,8 +54,6 @@ test-ci:
 		--ignore=tests/test_implementation_daemon_merge_lock_retry.py \
 		--ignore=tests/test_supervisor_objective_task_janitor.py \
 		--ignore=tests/test_reconciliation_guardrail_refresh.py \
-		--ignore=tests/test_swissknife_lane_worktrees.py \
-		--ignore=tests/test_proof_backed_test_reuse_supervisor.py \
 		--ignore=tests/commands/test_router.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
@@ -97,7 +91,7 @@ conformance: conformance-python-deprecation
 
 # CI Logic Conformance gate: core harness + py/ts compare. Full make
 # conformance (jest matrix, self-containment, deprecation) remains local.
-conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-py conformance-compare
+conformance-ci: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-py conformance-compare conformance-python-deprecation
 
 conformance-crosslang: conformance-ts conformance-py conformance-compare conformance-self-containment
 
@@ -265,7 +259,12 @@ conformance-mutation-gate:
 conformance-differential-fuzz:
 	node $(CONFORMANCE_DIR)/differential_fuzz.mjs --root $(PWD) --out-dir $(CONFORMANCE_OUT) --cases-per-engine 20 --seed 1337
 
-conformance-self-containment: conformance-py
+# PORT-257 strict self-containment: produce py-results inline (not via make
+# prereq) so python_deprecation_gate can require that self-containment does not
+# list conformance-py as a Make dependency. Crosslang remains the explicit
+# opt-in that depends on conformance-py.
+conformance-self-containment:
+	$(MAKE) conformance-py
 	cd swissknife && SWISSKNIFE_CONFORMANCE_STRICT_SELF_CONTAINMENT=1 npx tsx test/conformance/ts-conformance-runner.cli.ts --live-z3 --strict-self-containment --vectors ../$(CONFORMANCE_DIR)/vectors --out ../$(CONFORMANCE_OUT)/ts-results-self-contained.json
 	node $(CONFORMANCE_DIR)/compare.mjs --strict-self-containment --python $(CONFORMANCE_OUT)/py-results.json --ts $(CONFORMANCE_OUT)/ts-results-self-contained.json --vectors $(CONFORMANCE_DIR)/vectors --out-dir $(CONFORMANCE_OUT)/self-contained
 	node $(CONFORMANCE_DIR)/self_containment_gate.mjs --strict --out-dir $(CONFORMANCE_OUT) --ts-results $(CONFORMANCE_OUT)/ts-results-self-contained.json --report $(CONFORMANCE_OUT)/self-contained/report.json --py-results $(CONFORMANCE_OUT)/py-results.json
