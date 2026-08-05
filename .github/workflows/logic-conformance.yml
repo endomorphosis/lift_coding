@@ -18,11 +18,17 @@ jobs:
 
       - name: Init conformance submodules
         run: |
-          git submodule update --init --depth 1 swissknife external/ipfs_datasets || true
+          # Init independently so a missing/unpublished datasets pin does not
+          # abort swissknife checkout (git update with multiple paths is atomic).
+          git submodule update --init --depth 1 swissknife
+          git submodule update --init --depth 1 external/ipfs_datasets || {
+            echo "::warning::external/ipfs_datasets pin unavailable; continuing without it"
+          }
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'swissknife/.nvmrc'
+          # Pin Node explicitly; avoid depending on .nvmrc before submodule is ready.
+          node-version: '22'
           cache: npm
           cache-dependency-path: swissknife/package-lock.json
 
