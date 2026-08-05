@@ -2061,13 +2061,19 @@ def get_mobile_orb_diagnostics(
         [detail.get("reason") for detail in fallback_details]
     )
     # Nested contract mirrors top-level fields so clients/tests can prefer either shape.
+    # capability_counts.backend is the operation tally matrix used by e2e/VAI harnesses;
+    # DAT capability inventory lives alongside it and under backend_capability_counts.
+    nested_capability_counts = {
+        "backend": backend_counts,
+        **capability_counts,
+    }
     diagnostics_contract = {
         "contract": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
         "id": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
         "source": "backend",
         "mode": mode,
         "backend_counts": backend_counts,
-        "capability_counts": capability_counts,
+        "capability_counts": nested_capability_counts,
         "backend_capability_counts": capability_counts,
         "descriptor_cids": descriptor_cids,
         "policy_cids": policy_cids,
