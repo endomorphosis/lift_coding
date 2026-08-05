@@ -47,7 +47,6 @@ test-ci:
 		--ignore=tests/test_mcplusplus_profile_h_inventory.py \
 		--ignore=tests/test_mcplusplus_profile_h_spec.py \
 		--ignore=tests/test_reconciliation_guardrail_refresh.py \
-		--ignore=tests/commands/test_router.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py \
