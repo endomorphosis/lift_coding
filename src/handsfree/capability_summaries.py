@@ -86,8 +86,6 @@ def format_glasses_widget(result: Mapping[str, Any]) -> str:
     return _join_summary("Glasses widget", render_result, receipt_cid)
 
 
-
-
 def format_hardware_profile(result: Mapping[str, Any]) -> str:
     """Summarize hardware profile inventory results."""
     summary = _first_text(result, "summary")
