@@ -274,7 +274,7 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py" in src
     assert "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py" in src
-    assert "MGW-570" in src
+    assert "VAI-662" in src
     assert "VAIOS-G701" in src
     assert "agent_identity" in src
     assert "allowed_surfaces" in src
