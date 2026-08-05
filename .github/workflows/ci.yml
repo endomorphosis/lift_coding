@@ -12,15 +12,17 @@ jobs:
   check:
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: ${{ github.workspace }}/src:${{ github.workspace }}/external/ipfs_accelerate
+      PYTHONPATH: ${{ github.workspace }}/src:${{ github.workspace }}/external/ipfs_accelerate:${{ github.workspace }}/external/ipfs_kit:${{ github.workspace }}/external/ipfs_datasets
     steps:
       - uses: actions/checkout@v4
 
       - name: Init top-level integration submodules
         run: |
-          # Avoid recursive nested .tools trees under accelerate; only init
-          # first-level submodules needed for package imports and integration tests.
-          git submodule update --init --depth 1 \
+          # Init each first-level submodule independently. Multi-path
+          # `git submodule update` aborts all checkouts if any one pin is
+          # unpublished, which was the main source of false path failures.
+          set +e
+          for path in \
             external/ipfs_accelerate \
             external/ipfs_kit \
             external/ipfs_datasets \
@@ -28,7 +30,15 @@ jobs:
             external/meta-wearables-dat-ios \
             swissknife \
             Mcp-Plus-Plus \
-            hallucinate_app || true
+            hallucinate_app
+          do
+            git submodule update --init --depth 1 "$path"
+            status=$?
+            if [ $status -ne 0 ]; then
+              echo "::warning::submodule init failed for $path (exit $status)"
+            fi
+          done
+          set -e
 
       - uses: actions/setup-python@v5
         with:
@@ -47,9 +57,11 @@ jobs:
       - name: Test
         run: make test-ci
 
-      # MCP++ kit interop smoke is temporarily out of the required gate while
-      # swissknife/datasets pins drift (missing mcp-plus-plus.ts / mcp_server).
-      # Re-enable under tests/integration/test_mcp_* once pins stabilize.
+      - name: MCP++ UCAN/CID interop smoke
+        run: |
+          pytest tests/integration/test_mcp_kit_ucan_interop.py \
+            tests/integration/test_mcp_threeway_ucan_interop.py \
+            tests/integration/test_mcp_kubo_cid_interop.py -q
 
       - name: Validate display webapp readiness
         run: python3 scripts/lint_display_webapp_readiness.py config/display_webapp_readiness.example.json

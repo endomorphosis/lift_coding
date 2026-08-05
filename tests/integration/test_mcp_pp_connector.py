@@ -32,7 +32,9 @@ class TestMCPPPConnectorStructure:
     def test_accelerate_server_config(self):
         assert "'ipfs-accelerate-mcp++'" in self.src
         assert "'http://localhost:3003'" in self.src
-        assert "'/api/mcp/status'" in self.src
+        # Accelerate tools/health surface is under /mcp/* (not legacy /api/mcp/status).
+        assert "'/mcp/health'" in self.src or "'/api/mcp/status'" in self.src
+        assert "'/mcp/tools/list'" in self.src or "'/api/mcp/tools'" in self.src
 
     def test_json_rpc_protocol(self):
         assert "MCPJsonRpcRequest" in self.src
