@@ -1,8 +1,8 @@
 """Cross-repo single-source guard.
 
-SwissKnife dashboard tools must not invent entries outside the ipfs_kit_py
-MCP++ server registry. Server may be ahead of the checked-in dashboard pin;
-that is reported as residual drift without failing the required gate.
+The swissknife dashboard manifest must equal the ipfs_kit_py MCP++ server's
+generated registry, so the four surfaces (python/cli/mcp/js dashboard) cannot
+drift. Fails CI if either repo is regenerated without resyncing the other.
 """
 
 import json
@@ -24,21 +24,7 @@ def test_dashboard_manifest_matches_server_registry():
     assert dash is not None, f"dashboard manifest missing; tried {candidates}"
     server = json.loads(generate.render_manifest())
     dashboard = json.loads(dash.read_text())
-
-    server_tools = server.get("tools") or []
-    dashboard_tools = dashboard.get("tools") or []
-    assert server_tools, "server registry produced no tools"
-    assert dashboard_tools, "dashboard manifest has no tools"
-
-    server_names = {tool.get("name") for tool in server_tools if isinstance(tool, dict)}
-    dashboard_names = {tool.get("name") for tool in dashboard_tools if isinstance(tool, dict)}
-    extra = sorted(name for name in dashboard_names if name not in server_names)
-    assert not extra, f"dashboard has tools not in server registry: {extra}"
-    # Required coverage: dashboard still lists a substantial shared surface.
-    overlap = server_names & dashboard_names
-    assert len(overlap) >= min(20, len(server_names)), (
-        f"dashboard/server tool overlap too small: {len(overlap)}"
+    assert dashboard == server, (
+        "swissknife dashboard manifest drifted; run generate.render_manifest() "
+        "in ipfs_kit and resync swissknife src/services/ipfs/mcp-ipfs-kit-tools-manifest.json"
     )
-    missing = sorted(server_names - dashboard_names)
-    if missing:
-        print(f"note: server ahead of dashboard pin; missing tools: {missing}")
