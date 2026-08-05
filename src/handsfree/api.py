@@ -2054,10 +2054,38 @@ def get_mobile_orb_diagnostics(
         "revocations": len(revocations),
     }
 
+    mode = _mobile_orb_diagnostics_mode(edge_sessions)
+    capability_counts = _mobile_orb_capability_counts(edge_sessions)
+    binding_state = _mobile_orb_binding_state(bindings, receipts)
+    fallback_reasons = _mobile_orb_unique_strings(
+        [detail.get("reason") for detail in fallback_details]
+    )
+    # Nested contract mirrors top-level fields so clients/tests can prefer either shape.
+    # capability_counts.backend is the operation tally matrix used by e2e/VAI harnesses;
+    # DAT capability inventory lives alongside it and under backend_capability_counts.
+    nested_capability_counts = {
+        "backend": backend_counts,
+        **capability_counts,
+    }
+    diagnostics_contract = {
+        "contract": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
+        "id": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
+        "source": "backend",
+        "mode": mode,
+        "backend_counts": backend_counts,
+        "capability_counts": nested_capability_counts,
+        "backend_capability_counts": capability_counts,
+        "descriptor_cids": descriptor_cids,
+        "policy_cids": policy_cids,
+        "receipt_cids": receipt_cids,
+        "binding_state": binding_state,
+        "fallback_reasons": fallback_reasons,
+    }
+
     return {
         "contract": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
         "source": "backend",
-        "mode": _mobile_orb_diagnostics_mode(edge_sessions),
+        "mode": mode,
         "edge_session_id": edge_session_id,
         "edge_sessions_count": len(edge_sessions),
         "bindings_count": len(bindings),
@@ -2065,19 +2093,14 @@ def get_mobile_orb_diagnostics(
         "events_count": len(events),
         "receipts_count": len(receipts),
         "backend_counts": backend_counts,
-        "capability_counts": _mobile_orb_capability_counts(edge_sessions),
-        "backend_capability_counts": _mobile_orb_capability_counts(edge_sessions),
+        "capability_counts": capability_counts,
+        "backend_capability_counts": capability_counts,
         "descriptor_cids": descriptor_cids,
         "policy_cids": policy_cids,
         "receipt_cids": receipt_cids,
-        "binding_state": _mobile_orb_binding_state(bindings, receipts),
-        "diagnostics_contract": {
-            "id": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
-            "capability_counts": {"backend": backend_counts},
-        },
-        "fallback_reasons": _mobile_orb_unique_strings(
-            [detail.get("reason") for detail in fallback_details]
-        ),
+        "binding_state": binding_state,
+        "diagnostics_contract": diagnostics_contract,
+        "fallback_reasons": fallback_reasons,
         "fallback_details": fallback_details,
         "edge_sessions": edge_sessions,
         "bindings": bindings,
