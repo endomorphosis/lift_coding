@@ -5,9 +5,8 @@ import json
 import re
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 IPFS_ACCELERATE_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -27,7 +26,9 @@ TASK_STATUS_FIELD = "Sta" + "tus"
 TEMP_TASK_BOARD_FILENAME = "to" + "do.md"
 PENDING_TASK_STATUS = "to" + "do"
 OBJECTIVE_BUNDLE_SHARD_GLOB = "*." + TEMP_TASK_BOARD_FILENAME
-CONTROL_SURFACE_IDL_PATH = REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md"
+CONTROL_SURFACE_IDL_PATH = (
+    REPO_ROOT / "hallucinate_app" / "docs" / "MULTIMODAL_CONTROL_SURFACE_LOGIC_IDL.md"
+)
 DISCOVERY_ROOT = REPO_ROOT / "data" / "hallucinate_multimodal_control" / "discovery"
 HARDWARE_FREE_OFFLOAD_HARNESS_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-430-hardware-free-offload-harness.md"
@@ -44,29 +45,18 @@ DESKTOP_PEER_OFFLOAD_SMOKE_PATH = (
 META_GLASSES_TERMINAL_RECEIPT_PATH = (
     DISCOVERY_ROOT / "2026-06-23-hao-439-meta-glasses-terminal-receipt.md"
 )
-PHONE_INGRESS_REHEARSAL_PATH = (
-    DISCOVERY_ROOT / "2026-06-23-hao-437-phone-ingress-rehearsal.md"
-)
+PHONE_INGRESS_REHEARSAL_PATH = DISCOVERY_ROOT / "2026-06-23-hao-437-phone-ingress-rehearsal.md"
 MCP_LAUNCH_CONTRACT_INTEGRATION_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-674-mcp-launch-contract-integration.md"
 )
 SWISSKNIFE_MCP_CAPABILITY_REGISTRY_PATH = (
-    REPO_ROOT
-    / "swissknife"
-    / "src"
-    / "services"
-    / "apps"
-    / "swissknife-mcp-capability-registry.ts"
+    REPO_ROOT / "swissknife" / "src" / "services" / "apps" / "swissknife-mcp-capability-registry.ts"
 )
-PLAYWRIGHT_LAUNCH_REPLAY_PATH = (
-    DISCOVERY_ROOT / "2026-06-24-hao-675-playwright-launch-replay.md"
-)
+PLAYWRIGHT_LAUNCH_REPLAY_PATH = DISCOVERY_ROOT / "2026-06-24-hao-675-playwright-launch-replay.md"
 MCP_DASHBOARD_REVIEW_PATH = (
     DISCOVERY_ROOT / "2026-06-24-hao-676-hallucinate-mcp-dashboard-review.md"
 )
-MCP_DASHBOARD_CATALOG_PATH = (
-    DISCOVERY_ROOT / "2026-06-25-hao-677-dashboard-capability-catalog.md"
-)
+MCP_DASHBOARD_CATALOG_PATH = DISCOVERY_ROOT / "2026-06-25-hao-677-dashboard-capability-catalog.md"
 MGW_DISCOVERY_ROOT = REPO_ROOT / "data" / "meta_glasses_display_widgets" / "discovery"
 MGW_534_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-534-launch-playwright-validation-gate.md"
@@ -78,31 +68,17 @@ VAI_518_LAUNCH_GATE_PATH = (
     / "discovery"
     / "2026-06-26-vai-518-launch-playwright-validation-gate.md"
 )
-HAO_701_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-26-hao-701-launch-playwright-validation-gate.md"
-HAO_702_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-26-hao-702-daemon-launch-health-gate.md"
+HAO_701_LAUNCH_GATE_PATH = (
+    DISCOVERY_ROOT / "2026-06-26-hao-701-launch-playwright-validation-gate.md"
 )
-HAO_713_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-27-hao-713-daemon-launch-health-gate.md"
-)
-HAO_719_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-719-daemon-launch-health-gate.md"
-)
-HAO_721_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-721-daemon-launch-health-gate.md"
-)
-HAO_743_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-07-08-hao-743-daemon-launch-health-gate.md"
-)
-HAO_745_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-07-08-hao-745-daemon-launch-health-gate.md"
-)
-HAO_755_DAEMON_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-07-08-hao-755-daemon-launch-health-gate.md"
-)
-HAO_755_ATTEMPT_4_VALIDATION_PATH = (
-    DISCOVERY_ROOT / "2026-07-08-hao-755-attempt-4-validation.md"
-)
+HAO_702_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-26-hao-702-daemon-launch-health-gate.md"
+HAO_713_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-27-hao-713-daemon-launch-health-gate.md"
+HAO_719_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-28-hao-719-daemon-launch-health-gate.md"
+HAO_721_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-28-hao-721-daemon-launch-health-gate.md"
+HAO_743_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-07-08-hao-743-daemon-launch-health-gate.md"
+HAO_745_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-07-08-hao-745-daemon-launch-health-gate.md"
+HAO_755_DAEMON_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-07-08-hao-755-daemon-launch-health-gate.md"
+HAO_755_ATTEMPT_4_VALIDATION_PATH = DISCOVERY_ROOT / "2026-07-08-hao-755-attempt-4-validation.md"
 MGW_535_DAEMON_LAUNCH_GATE_PATH = (
     MGW_DISCOVERY_ROOT / "2026-06-26-mgw-535-daemon-launch-health-gate.md"
 )
@@ -519,18 +495,10 @@ VAI_639_ATTEMPT_1_LAUNCH_GATE_PATH = (
     / "discovery"
     / "2026-07-04-vai-639-attempt-1-launch-playwright-validation-gate.md"
 )
-HAO_722_OBJECTIVE_GAP_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
-)
-HAO_722_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-724-mcp-dashboard-launch-gate.md"
-)
-HAO_727_OBJECTIVE_GAP_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-727-objective-gap-7ea369464239.md"
-)
-HAO_727_LAUNCH_GATE_PATH = (
-    DISCOVERY_ROOT / "2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
-)
+HAO_722_OBJECTIVE_GAP_PATH = DISCOVERY_ROOT / "2026-06-28-hao-724-objective-gap-7ea369464239.md"
+HAO_722_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-28-hao-724-mcp-dashboard-launch-gate.md"
+HAO_727_OBJECTIVE_GAP_PATH = DISCOVERY_ROOT / "2026-06-28-hao-727-objective-gap-7ea369464239.md"
+HAO_727_LAUNCH_GATE_PATH = DISCOVERY_ROOT / "2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
 HAO_728_RETRY_BUDGET_REPAIR_PATH = (
     DISCOVERY_ROOT / "2026-06-30-hao-728-hao-727-merge-retry-budget.md"
 )
@@ -566,7 +534,9 @@ def _load_script_module(name: str):
 
 def _load_tasks():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     return parse_task_file(TASK_BOARD_PATH, "## HAO-")
 
@@ -606,7 +576,10 @@ def _daemon_gate_payload_from_receipt_or_fixture(receipt_source: str, fixture: d
 
 def test_objective_heap_schedule_deduplicates_interoperability_pairs():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.objective_graph import objective_heap_schedule, parse_goal_heap
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import (
+        objective_heap_schedule,
+        parse_goal_heap,
+    )
 
     goals = parse_goal_heap(
         "\n".join(
@@ -757,7 +730,12 @@ def test_hao_mcp_swissknife_launch_children_cover_python_servers_and_playwright(
             "depends_on": ["HAO-436"],
             "parallel_lane": "mcp-feature-inventory",
             "missing": "MCP server feature inventory for ipfs_accelerate_py, ipfs_datasets_py, and ipfs_kit_py",
-            "acceptance_terms": ["ipfs_accelerate_py", "ipfs_datasets_py", "ipfs_kit_py", "Swissknife"],
+            "acceptance_terms": [
+                "ipfs_accelerate_py",
+                "ipfs_datasets_py",
+                "ipfs_kit_py",
+                "Swissknife",
+            ],
         },
         "HAO-442": {
             "depends_on": ["HAO-441"],
@@ -769,31 +747,51 @@ def test_hao_mcp_swissknife_launch_children_cover_python_servers_and_playwright(
             "depends_on": ["HAO-441"],
             "parallel_lane": "swissknife-mcp-capability-registry",
             "missing": "Swissknife MCP capability registry for Python server features",
-            "acceptance_terms": ["Swissknife-facing capability registry", "permission scopes", "mediation receipt aliases"],
+            "acceptance_terms": [
+                "Swissknife-facing capability registry",
+                "permission scopes",
+                "mediation receipt aliases",
+            ],
         },
         "HAO-444": {
             "depends_on": ["HAO-442", "HAO-443"],
             "parallel_lane": "swissknife-mcp-feature-apps",
             "missing": "Swissknife applications invoking Python MCP server features",
-            "acceptance_terms": ["Swissknife applications", "deterministic results", "invocation receipts"],
+            "acceptance_terms": [
+                "Swissknife applications",
+                "deterministic results",
+                "invocation receipts",
+            ],
         },
         "HAO-445": {
             "depends_on": ["HAO-441"],
             "parallel_lane": "mcp-plus-plus-compat",
             "missing": "Mcp-Plus-Plus compatibility for Hallucinate App and Swissknife MCP bridges",
-            "acceptance_terms": ["Mcp-Plus-Plus-compatible", "capability descriptors", "tool calls"],
+            "acceptance_terms": [
+                "Mcp-Plus-Plus-compatible",
+                "capability descriptors",
+                "tool calls",
+            ],
         },
         "HAO-446": {
             "depends_on": ["HAO-444", "HAO-445"],
             "parallel_lane": "hao-swissknife-mcp-playwright",
             "missing": "HAO and Swissknife Playwright MCP integration tests",
-            "acceptance_terms": ["Playwright tests", "Python MCP daemons", "Swissknife applications"],
+            "acceptance_terms": [
+                "Playwright tests",
+                "Python MCP daemons",
+                "Swissknife applications",
+            ],
         },
         "HAO-447": {
             "depends_on": ["HAO-440", "HAO-446"],
             "parallel_lane": "launch-readiness-mcp-aggregate",
             "missing": "aggregate MCP server, Swissknife, Mcp-Plus-Plus, and Playwright launch evidence",
-            "acceptance_terms": ["daemon launch", "Swissknife app feature invocation", "Playwright results"],
+            "acceptance_terms": [
+                "daemon launch",
+                "Swissknife app feature invocation",
+                "Playwright results",
+            ],
         },
     }
 
@@ -930,12 +928,7 @@ def test_hao_675_adds_swissknife_hallucinate_app_playwright_launch_replay_covera
     )
     swissknife_fixture = json.loads(
         (
-            REPO_ROOT
-            / "swissknife"
-            / "test"
-            / "e2e"
-            / "fixtures"
-            / "hao-675-launch-replay.json"
+            REPO_ROOT / "swissknife" / "test" / "e2e" / "fixtures" / "hao-675-launch-replay.json"
         ).read_text(encoding="utf-8")
     )
     hallucinate_spec = (
@@ -950,9 +943,12 @@ def test_hao_675_adds_swissknife_hallucinate_app_playwright_launch_replay_covera
     assert task.priority == "P0"
     assert task.track == "validation"
     assert task.depends_on == ["HAO-674"]
-    assert {"hallucinate_app", "swissknife", "tests", "data/hallucinate_multimodal_control/discovery"}.issubset(
-        set(task.outputs)
-    )
+    assert {
+        "hallucinate_app",
+        "swissknife",
+        "tests",
+        "data/hallucinate_multimodal_control/discovery",
+    }.issubset(set(task.outputs))
 
     assert fixture == hallucinate_fixture
     assert fixture == swissknife_fixture
@@ -973,7 +969,9 @@ def test_hao_675_adds_swissknife_hallucinate_app_playwright_launch_replay_covera
         "production launch readiness receipt",
     ]
 
-    capabilities = {capability["server_package"]: capability for capability in fixture["service_capabilities"]}
+    capabilities = {
+        capability["server_package"]: capability for capability in fixture["service_capabilities"]
+    }
     assert set(capabilities) == {"ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"}
     for capability in capabilities.values():
         assert capability["mcp_plus_plus_profiles"] == [
@@ -1058,7 +1056,10 @@ def test_hao_676_reviews_and_fixes_hallucinate_mcp_dashboard_menu_surface():
     assert set(servers) == {"ipfs_kit_py", "ipfs_datasets_py", "ipfs_accelerate_py"}
     assert servers["ipfs_kit_py"]["daemon_id"] == "ipfs-kit"
     assert servers["ipfs_kit_py"]["launch_plan_endpoint"] == "http://127.0.0.1:8004"
-    assert servers["ipfs_datasets_py"]["native_dashboard_catalog"] == "/api/hallucinate/dashboard-catalog"
+    assert (
+        servers["ipfs_datasets_py"]["native_dashboard_catalog"]
+        == "/api/hallucinate/dashboard-catalog"
+    )
     assert "mcp++/profile-e-mcp-p2p" in servers["ipfs_accelerate_py"]["mcp_plus_plus_profiles"]
 
     findings = {finding["id"]: finding for finding in fixture["findings"]}
@@ -1068,7 +1069,10 @@ def test_hao_676_reviews_and_fixes_hallucinate_mcp_dashboard_menu_surface():
     assert findings["HAO-676-F4"]["follow_up_task"] == "HAO-678"
     assert findings["HAO-676-F5"]["follow_up_task"] == "HAO-682"
 
-    assert "export const dashboardMcpServers = mcpServers.filter(server => server.dashboardPath)" in menu_config_source
+    assert (
+        "export const dashboardMcpServers = mcpServers.filter(server => server.dashboardPath)"
+        in menu_config_source
+    )
     assert "items: dashboardMcpServers.map(server => ({" in menu_config_source
     assert "openSwissKnifeApp(item = {})" in menu_generator_source
     assert "this.createSwissKnifeWindow(appName)" in menu_generator_source
@@ -1142,7 +1146,9 @@ def test_hao_677_adds_daemon_owned_mcp_dashboard_capability_catalog():
     for server in servers.values():
         assert server["tool_protocols"]["tools_list"]["operation"] == "tools/list"
         assert server["tool_protocols"]["tools_call"]["operation"] == "tools/call"
-        assert server["control_surface_mediation_contract"].startswith("control_surface_contract:mcp-daemon:")
+        assert server["control_surface_mediation_contract"].startswith(
+            "control_surface_contract:mcp-daemon:"
+        )
         assert "receipt_cid" in server["control_surface_receipt_requirements"]
         assert server["swissknife_consumer"]
 
@@ -1207,7 +1213,12 @@ def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
             "track": "launch",
             "depends_on": ["HAO-679", "HAO-681"],
             "parallel_lane": "hallucinate-mcp-dashboard-launch-receipt",
-            "terms": ["launch-readiness packet", "dashboard catalog", "Playwright", "daemon lineage"],
+            "terms": [
+                "launch-readiness packet",
+                "dashboard catalog",
+                "Playwright",
+                "daemon lineage",
+            ],
         },
         "HAO-683": {
             "priority": "P0",
@@ -1240,11 +1251,14 @@ def test_hao_677_683_dashboard_launch_chain_keeps_supervisor_work_high_value():
 
 def test_vaios_g723_keeps_hallucinate_mcp_dashboard_work_ahead_of_broad_interop():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.objective_graph import objective_heap_schedule, parse_goal_heap
-
-    heap_source = (REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md").read_text(
-        encoding="utf-8"
+    from ipfs_accelerate_py.agent_supervisor.objective_graph import (
+        objective_heap_schedule,
+        parse_goal_heap,
     )
+
+    heap_source = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
     goals = parse_goal_heap(heap_source)
     goals_by_id = {goal.goal_id: goal for goal in goals}
     schedule_ids = [record.goal_id for record in objective_heap_schedule(goals)]
@@ -1395,7 +1409,9 @@ def test_hao_701_packet_proof_aligns_hallucinate_backlog_with_objective_heap():
 def test_vai_518_packet_proof_aligns_virtual_ai_os_backlog_with_objective_heap():
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.objective_graph import parse_goal_heap
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
@@ -1669,7 +1685,14 @@ def test_hao_daemon_launch_gates_align_with_objective_heap():
         ),
     ]
 
-    for task_id, receipt_path, fixture_path, gap_name, receipt_name, fixture_name in current_gate_receipts:
+    for (
+        task_id,
+        receipt_path,
+        fixture_path,
+        gap_name,
+        receipt_name,
+        fixture_name,
+    ) in current_gate_receipts:
         receipt_source = receipt_path.read_text(encoding="utf-8")
         fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
         receipt = _daemon_gate_payload_from_receipt_or_fixture(receipt_source, fixture)
@@ -1833,7 +1856,10 @@ def test_hao_727_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723()
     assert fixture["launch_gate_receipt"] == (
         "data/hallucinate_multimodal_control/discovery/2026-06-28-hao-727-mcp-dashboard-launch-gate.md"
     )
-    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/hao-727-mcp-dashboard-launch-gate.json"
+    assert (
+        fixture["receipt_fixture"]
+        == "hallucinate_app/test/e2e/fixtures/hao-727-mcp-dashboard-launch-gate.json"
+    )
     assert fixture["required_backends"] == [
         "ipfs_kit_py",
         "ipfs_datasets_py",
@@ -1847,7 +1873,14 @@ def test_hao_727_mcp_dashboard_gate_aligns_hallucinate_backlog_with_vaios_g723()
         "VAIOS-G723-C5 Playwright coverage",
         "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
     ]
-    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+    assert fixture["follow_up_subtasks"] == [
+        "HAO-678",
+        "HAO-679",
+        "HAO-680",
+        "HAO-681",
+        "HAO-682",
+        "HAO-683",
+    ]
     assert fixture["supervisor_follow_up_subtasks"] == fixture["follow_up_subtasks"]
 
     for term in fixture["required_evidence"]:
@@ -1876,9 +1909,7 @@ def test_mgw_559_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     meta_receipt_path = (
         MGW_DISCOVERY_ROOT / "2026-06-29-mgw-559-launch-playwright-validation-gate.md"
     )
-    hallucinate_receipt_path = (
-        DISCOVERY_ROOT / "2026-06-29-mgw-559-mcp-dashboard-launch-gate.md"
-    )
+    hallucinate_receipt_path = DISCOVERY_ROOT / "2026-06-29-mgw-559-mcp-dashboard-launch-gate.md"
     fixture_path = (
         REPO_ROOT
         / "hallucinate_app"
@@ -1887,15 +1918,13 @@ def test_mgw_559_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         / "fixtures"
         / "mgw-559-mcp-dashboard-launch-gate.json"
     )
-    objective_gap_path = (
-        MGW_DISCOVERY_ROOT / "2026-06-29-mgw-559-objective-gap-7ea369464239.md"
-    )
+    objective_gap_path = MGW_DISCOVERY_ROOT / "2026-06-29-mgw-559-objective-gap-7ea369464239.md"
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     playwright_source = (
         REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
     ).read_text(encoding="utf-8")
@@ -1922,7 +1951,10 @@ def test_mgw_559_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     assert fixture["hallucinate_backlog_receipt"] == (
         "data/hallucinate_multimodal_control/discovery/2026-06-29-mgw-559-mcp-dashboard-launch-gate.md"
     )
-    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-559-mcp-dashboard-launch-gate.json"
+    assert (
+        fixture["receipt_fixture"]
+        == "hallucinate_app/test/e2e/fixtures/mgw-559-mcp-dashboard-launch-gate.json"
+    )
     assert fixture["child_goals"] == [
         "VAIOS-G723-C1 Catalog normalization",
         "VAIOS-G723-C2 Dashboard UI wiring",
@@ -1931,7 +1963,14 @@ def test_mgw_559_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         "VAIOS-G723-C5 Playwright coverage",
         "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
     ]
-    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+    assert fixture["follow_up_subtasks"] == [
+        "HAO-678",
+        "HAO-679",
+        "HAO-680",
+        "HAO-681",
+        "HAO-682",
+        "HAO-683",
+    ]
     assert fixture["supervisor_follow_up_subtasks"] == fixture["follow_up_subtasks"]
 
     for term in fixture["required_evidence"]:
@@ -1967,7 +2006,10 @@ def test_mgw_559_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         assert term in readiness_source
 
     assert "MGW-559" in swissknife_consumer_source
-    assert "hallucinate_app/test/e2e/fixtures/mgw-559-mcp-dashboard-launch-gate.json" in swissknife_consumer_source
+    assert (
+        "hallucinate_app/test/e2e/fixtures/mgw-559-mcp-dashboard-launch-gate.json"
+        in swissknife_consumer_source
+    )
     assert "MGW-559 proof" in heap_source
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in meta_receipt
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in hallucinate_receipt
@@ -1980,9 +2022,7 @@ def test_mgw_561_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     meta_receipt_path = (
         MGW_DISCOVERY_ROOT / "2026-06-30-mgw-561-launch-playwright-validation-gate.md"
     )
-    hallucinate_receipt_path = (
-        DISCOVERY_ROOT / "2026-06-30-mgw-561-mcp-dashboard-launch-gate.md"
-    )
+    hallucinate_receipt_path = DISCOVERY_ROOT / "2026-06-30-mgw-561-mcp-dashboard-launch-gate.md"
     fixture_path = (
         REPO_ROOT
         / "hallucinate_app"
@@ -1991,15 +2031,13 @@ def test_mgw_561_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         / "fixtures"
         / "mgw-561-mcp-dashboard-launch-gate.json"
     )
-    objective_gap_path = (
-        MGW_DISCOVERY_ROOT / "2026-06-30-mgw-561-objective-gap-7ea369464239.md"
-    )
+    objective_gap_path = MGW_DISCOVERY_ROOT / "2026-06-30-mgw-561-objective-gap-7ea369464239.md"
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     playwright_source = (
         REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
     ).read_text(encoding="utf-8")
@@ -2026,7 +2064,10 @@ def test_mgw_561_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     assert fixture["hallucinate_backlog_receipt"] == (
         "data/hallucinate_multimodal_control/discovery/2026-06-30-mgw-561-mcp-dashboard-launch-gate.md"
     )
-    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json"
+    assert (
+        fixture["receipt_fixture"]
+        == "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json"
+    )
     assert fixture["child_goals"] == [
         "VAIOS-G723-C1 Catalog normalization",
         "VAIOS-G723-C2 Dashboard UI wiring",
@@ -2035,7 +2076,14 @@ def test_mgw_561_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         "VAIOS-G723-C5 Playwright coverage",
         "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
     ]
-    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+    assert fixture["follow_up_subtasks"] == [
+        "HAO-678",
+        "HAO-679",
+        "HAO-680",
+        "HAO-681",
+        "HAO-682",
+        "HAO-683",
+    ]
     assert fixture["supervisor_follow_up_subtasks"] == fixture["follow_up_subtasks"]
 
     for term in fixture["required_evidence"]:
@@ -2071,7 +2119,10 @@ def test_mgw_561_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         assert term in readiness_source
 
     assert "MGW-561" in swissknife_consumer_source
-    assert "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json" in swissknife_consumer_source
+    assert (
+        "hallucinate_app/test/e2e/fixtures/mgw-561-mcp-dashboard-launch-gate.json"
+        in swissknife_consumer_source
+    )
     assert "MGW-561 proof" in heap_source
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in meta_receipt
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in hallucinate_receipt
@@ -2084,9 +2135,7 @@ def test_mgw_563_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     meta_receipt_path = (
         MGW_DISCOVERY_ROOT / "2026-07-01-mgw-563-launch-playwright-validation-gate.md"
     )
-    hallucinate_receipt_path = (
-        DISCOVERY_ROOT / "2026-07-01-mgw-563-mcp-dashboard-launch-gate.md"
-    )
+    hallucinate_receipt_path = DISCOVERY_ROOT / "2026-07-01-mgw-563-mcp-dashboard-launch-gate.md"
     fixture_path = (
         REPO_ROOT
         / "hallucinate_app"
@@ -2095,15 +2144,13 @@ def test_mgw_563_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         / "fixtures"
         / "mgw-563-mcp-dashboard-launch-gate.json"
     )
-    objective_gap_path = (
-        MGW_DISCOVERY_ROOT / "2026-07-01-mgw-563-objective-gap-7ea369464239.md"
-    )
+    objective_gap_path = MGW_DISCOVERY_ROOT / "2026-07-01-mgw-563-objective-gap-7ea369464239.md"
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     playwright_source = (
         REPO_ROOT / "hallucinate_app" / "test" / "e2e" / "mcp-dashboard-interoperability.spec.ts"
     ).read_text(encoding="utf-8")
@@ -2130,7 +2177,10 @@ def test_mgw_563_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
     assert fixture["hallucinate_backlog_receipt"] == (
         "data/hallucinate_multimodal_control/discovery/2026-07-01-mgw-563-mcp-dashboard-launch-gate.md"
     )
-    assert fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-563-mcp-dashboard-launch-gate.json"
+    assert (
+        fixture["receipt_fixture"]
+        == "hallucinate_app/test/e2e/fixtures/mgw-563-mcp-dashboard-launch-gate.json"
+    )
     assert fixture["child_goals"] == [
         "VAIOS-G723-C1 Catalog normalization",
         "VAIOS-G723-C2 Dashboard UI wiring",
@@ -2139,7 +2189,14 @@ def test_mgw_563_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         "VAIOS-G723-C5 Playwright coverage",
         "VAIOS-G723-C6 Supervisor-generated follow-up subtasks",
     ]
-    assert fixture["follow_up_subtasks"] == ["HAO-678", "HAO-679", "HAO-680", "HAO-681", "HAO-682", "HAO-683"]
+    assert fixture["follow_up_subtasks"] == [
+        "HAO-678",
+        "HAO-679",
+        "HAO-680",
+        "HAO-681",
+        "HAO-682",
+        "HAO-683",
+    ]
     assert fixture["supervisor_follow_up_subtasks"] == fixture["follow_up_subtasks"]
 
     for term in fixture["required_evidence"]:
@@ -2175,7 +2232,10 @@ def test_mgw_563_mcp_dashboard_gate_aligns_meta_and_hallucinate_backlogs_with_va
         assert term in readiness_source
 
     assert "MGW-563" in swissknife_consumer_source
-    assert "hallucinate_app/test/e2e/fixtures/mgw-563-mcp-dashboard-launch-gate.json" in swissknife_consumer_source
+    assert (
+        "hallucinate_app/test/e2e/fixtures/mgw-563-mcp-dashboard-launch-gate.json"
+        in swissknife_consumer_source
+    )
     assert "MGW-563 proof" in heap_source
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in meta_receipt
     assert "supervisor-generated follow-up work for `VAIOS-G723`" in hallucinate_receipt
@@ -2214,7 +2274,10 @@ def test_mgw_551_daemon_launch_gate_aligns_meta_backlog_with_objective_heap():
     assert mgw_fixture["evidence_term"] == receipt["evidence_term"]
     assert mgw_fixture["supervisor_gap_receipt"] == receipt["missing_evidence_source"]
     assert mgw_fixture["launch_gate_receipt"] == receipt["receipt_path"]
-    assert mgw_fixture["receipt_fixture"] == "hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json"
+    assert (
+        mgw_fixture["receipt_fixture"]
+        == "hallucinate_app/test/e2e/fixtures/mgw-551-daemon-launch-health-gate.json"
+    )
 
     assert shared_fixture["task_id"] == "MGW-535"
     assert receipt["receipt_path"] in shared_fixture["discovery_receipts"]
@@ -2955,15 +3018,17 @@ def test_vai_578_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-578")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-578"
+    )
 
     assert fixture["task_id"] == "VAI-578"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3017,15 +3082,17 @@ def test_vai_581_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-581")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-581"
+    )
 
     assert fixture["task_id"] == "VAI-581"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3079,15 +3146,17 @@ def test_vai_587_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-587")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-587"
+    )
 
     assert fixture["task_id"] == "VAI-587"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3141,15 +3210,17 @@ def test_vai_590_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-590")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-590"
+    )
 
     assert fixture["task_id"] == "VAI-590"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3203,15 +3274,17 @@ def test_vai_591_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-591")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-591"
+    )
 
     assert fixture["task_id"] == "VAI-591"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3265,15 +3338,17 @@ def test_vai_594_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-594")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-594"
+    )
 
     assert fixture["task_id"] == "VAI-594"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3327,15 +3402,17 @@ def test_vai_597_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-597")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-597"
+    )
 
     assert fixture["task_id"] == "VAI-597"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3390,15 +3467,17 @@ def test_vai_600_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-600")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-600"
+    )
 
     assert fixture["task_id"] == "VAI-600"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3453,15 +3532,17 @@ def test_vai_603_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-603")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-603"
+    )
 
     assert fixture["task_id"] == "VAI-603"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3516,15 +3597,17 @@ def test_vai_606_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-606")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-606"
+    )
 
     assert fixture["task_id"] == "VAI-606"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3579,15 +3662,17 @@ def test_vai_609_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-609")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-609"
+    )
 
     assert fixture["task_id"] == "VAI-609"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3642,15 +3727,17 @@ def test_vai_610_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-610")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-610"
+    )
 
     assert fixture["task_id"] == "VAI-610"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3705,15 +3792,17 @@ def test_vai_613_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-613")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-613"
+    )
 
     assert fixture["task_id"] == "VAI-613"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3768,15 +3857,17 @@ def test_vai_616_hallucinate_mcp_dashboard_mirror_tracks_vaios_g723_launch_gate(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-616")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-616"
+    )
 
     assert fixture["task_id"] == "VAI-616"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3806,7 +3897,11 @@ def test_hallucinate_vai_619_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-619-mcp-dashboard-launch-gate.md"
     attempt_receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-619-attempt-1-validation.md"
     virtual_receipt_path = (
-        REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-07-04-vai-619-mcp-dashboard-launch-gate.md"
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-619-mcp-dashboard-launch-gate.md"
     )
     fixture_path = (
         REPO_ROOT
@@ -3827,15 +3922,17 @@ def test_hallucinate_vai_619_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-619")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-619"
+    )
 
     assert fixture["task_id"] == "VAI-619"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3865,7 +3962,11 @@ def test_hallucinate_vai_622_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-622-mcp-dashboard-launch-gate.md"
     attempt_receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-622-attempt-1-validation.md"
     virtual_receipt_path = (
-        REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-07-04-vai-622-mcp-dashboard-launch-gate.md"
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-622-mcp-dashboard-launch-gate.md"
     )
     fixture_path = (
         REPO_ROOT
@@ -3886,15 +3987,17 @@ def test_hallucinate_vai_622_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-622")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-622"
+    )
 
     assert fixture["task_id"] == "VAI-622"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3924,7 +4027,11 @@ def test_hallucinate_vai_625_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-625-mcp-dashboard-launch-gate.md"
     attempt_receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-625-attempt-1-validation.md"
     virtual_receipt_path = (
-        REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-07-04-vai-625-mcp-dashboard-launch-gate.md"
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-625-mcp-dashboard-launch-gate.md"
     )
     fixture_path = (
         REPO_ROOT
@@ -3945,15 +4052,17 @@ def test_hallucinate_vai_625_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-625")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-625"
+    )
 
     assert fixture["task_id"] == "VAI-625"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -3983,7 +4092,11 @@ def test_hallucinate_vai_628_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-628-mcp-dashboard-launch-gate.md"
     attempt_receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-628-attempt-1-validation.md"
     virtual_receipt_path = (
-        REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-07-04-vai-628-mcp-dashboard-launch-gate.md"
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-628-mcp-dashboard-launch-gate.md"
     )
     fixture_path = (
         REPO_ROOT
@@ -4004,15 +4117,17 @@ def test_hallucinate_vai_628_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-628")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-628"
+    )
 
     assert fixture["task_id"] == "VAI-628"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -4042,7 +4157,11 @@ def test_hallucinate_vai_631_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-631-mcp-dashboard-launch-gate.md"
     attempt_receipt_path = DISCOVERY_ROOT / "2026-07-04-vai-631-attempt-1-validation.md"
     virtual_receipt_path = (
-        REPO_ROOT / "data" / "virtual_ai_os" / "discovery" / "2026-07-04-vai-631-mcp-dashboard-launch-gate.md"
+        REPO_ROOT
+        / "data"
+        / "virtual_ai_os"
+        / "discovery"
+        / "2026-07-04-vai-631-mcp-dashboard-launch-gate.md"
     )
     fixture_path = (
         REPO_ROOT
@@ -4063,15 +4182,17 @@ def test_hallucinate_vai_631_mcp_dashboard_launch_gate_keeps_vaios_g723_aligned(
     heap_source = (
         REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
     ).read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     receipt = receipt_path.read_text(encoding="utf-8")
     attempt_receipt = attempt_receipt_path.read_text(encoding="utf-8")
     virtual_receipt = virtual_receipt_path.read_text(encoding="utf-8")
     fixture = json.loads(fixture_path.read_text(encoding="utf-8"))
     catalog = json.loads(catalog_fixture_path.read_text(encoding="utf-8"))
-    catalog_gate = next(gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-631")
+    catalog_gate = next(
+        gate for gate in catalog["launch_validation_gates"] if gate["task_id"] == "VAI-631"
+    )
 
     assert fixture["task_id"] == "VAI-631"
     assert fixture["goal_id"] == "VAIOS-G723"
@@ -4103,7 +4224,9 @@ def test_vaios_g723_validation_failure_can_generate_follow_up_task_and_subgoal(t
         scan_objective_gaps,
     )
     from ipfs_accelerate_py.agent_supervisor.objective_tracker import append_refinement_goals
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -4216,7 +4339,10 @@ def test_hallucinate_codebase_scan_skips_shared_objective_and_mgw_owned_paths():
     assert daemon_module.CODEBASE_SCAN_SETTINGS.max_findings == 3
     assert daemon_module.HALLUCINATE_INTEROPERABILITY_FOCUS == ("hallucinate_app", "swissknife")
     assert "Mcp-Plus-Plus" in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
-    assert "external/meta-wearables-dat-android" in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
+    assert (
+        "external/meta-wearables-dat-android"
+        in daemon_module.HALLUCINATE_INTEROPERABILITY_COMPONENT_PATHS
+    )
     assert "swissknife/cleanup-archive/" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert "swissknife/docs/DEVELOPER_GUIDE.md" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
     assert "swissknife/docs/validation/" in daemon_module.CODEBASE_SCAN_SKIP_PREFIXES
@@ -4291,8 +4417,12 @@ def test_hao_429_peer_offload_policy_receipts_and_recovery_states():
         assert term in normalized_section
 
     assert section.index("mediation_receipt") < section.index("before peer dispatch")
-    assert section.index("Peer-offload recovery records") < section.index("The recovery-state vocabulary is fixed")
-    assert section.index("Hallucinate App owns recovery-state transitions") < section.index("The peer-offload receipt chain is")
+    assert section.index("Peer-offload recovery records") < section.index(
+        "The recovery-state vocabulary is fixed"
+    )
+    assert section.index("Hallucinate App owns recovery-state transitions") < section.index(
+        "The peer-offload receipt chain is"
+    )
 
 
 def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministic_replay():
@@ -4341,19 +4471,20 @@ def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministi
     assert steps[0]["event"]["session"]["participant_id"] == "phone:operator"
     assert steps[1]["receipt"]["receipt_id"] == "rcpt_policy_hao430_open_monitor"
     assert steps[1]["receipt"]["policy_decision"] == "allow"
-    assert steps[2]["command"]["receipt_ids"]["policy_receipt_id"] == steps[1]["receipt"]["receipt_id"]
+    assert (
+        steps[2]["command"]["receipt_ids"]["policy_receipt_id"] == steps[1]["receipt"]["receipt_id"]
+    )
     assert steps[3]["receipt"]["selected_peer"]["participant_id"] == "desktop:peer"
     assert steps[4]["runtime_receipt"]["runtime_status"] == "timeout"
-    assert steps[5]["receipt"]["peer_offload_policy_receipt_id"] == steps[3]["receipt"]["receipt_id"]
+    assert (
+        steps[5]["receipt"]["peer_offload_policy_receipt_id"] == steps[3]["receipt"]["receipt_id"]
+    )
     assert steps[5]["receipt"]["recovery_state"] == "fallback_selected"
     assert steps[5]["receipt"]["selected_peer"]["participant_id"] == "swissknife:ui"
     assert steps[6]["render_receipts"][0]["participant_id"] == "phone:operator"
     assert steps[6]["render_receipts"][1]["participant_id"] == "swissknife:ui"
     assert steps[6]["render_receipts"][2]["participant_id"] == "meta_glasses:terminal"
-    assert {
-        receipt["state"]
-        for receipt in steps[6]["render_receipts"]
-    } == {"fallback_selected"}
+    assert {receipt["state"] for receipt in steps[6]["render_receipts"]} == {"fallback_selected"}
 
     invariants = harness["assertions"]
     assert "all ingress events enter mediation before dispatch" in invariants
@@ -4371,9 +4502,9 @@ def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministi
         "desktop peer selection, policy decisions, retry, fallback, user cancellation, and Meta glasses status updates",
         "phone_event -> mediation_receipt -> virtual_desktop_command_intent -> peer_offload_policy_receipt",
         "peer_offload_recovery_receipt -> meta_glasses_status_receipt -> render_receipt",
-        "recovery_state: \"retry_scheduled\"",
-        "recovery_state: \"fallback_selected\"",
-        "recovery_state: \"cancelled\"",
+        'recovery_state: "retry_scheduled"',
+        'recovery_state: "fallback_selected"',
+        'recovery_state: "cancelled"',
     ):
         assert term in idl_section
 
@@ -4414,7 +4545,10 @@ def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministi
     ]
     assert launch_steps[0]["event"]["session"]["participant_id"] == "phone:operator"
     assert launch_steps[1]["receipt"]["policy_decision"] == "allow"
-    assert launch_steps[2]["command"]["receipt_ids"]["policy_receipt_id"] == launch_steps[1]["receipt"]["receipt_id"]
+    assert (
+        launch_steps[2]["command"]["receipt_ids"]["policy_receipt_id"]
+        == launch_steps[1]["receipt"]["receipt_id"]
+    )
     assert launch_steps[3]["receipt"]["selected_peer"]["participant_id"] == "desktop:peer"
     assert launch_steps[3]["receipt"]["policy_decision"] == "allow"
     assert launch_steps[4]["runtime_receipt"]["runtime_status"] == "timeout"
@@ -4437,16 +4571,19 @@ def test_hao_430_hardware_free_multimodal_offload_harness_documents_deterministi
     assert launch_steps[12]["receipt"]["recovery_state"] == "cancelled"
     assert launch_steps[12]["receipt"]["cancel_source_participant_id"] == "phone:operator"
     assert launch_steps[13]["render_receipts"][2]["participant_id"] == "meta_glasses:terminal"
-    assert {
-        receipt["state"]
-        for receipt in launch_steps[13]["render_receipts"]
-    } == {"cancelled"}
+    assert {receipt["state"] for receipt in launch_steps[13]["render_receipts"]} == {"cancelled"}
 
     launch_invariants = launch_slice["assertions"]
     assert "phone-originated commands enter mediation before dispatch" in launch_invariants
     assert "desktop peer selection is receipt-backed by policy_decision" in launch_invariants
-    assert "retry_scheduled, fallback_selected, and cancelled outcomes are replayed in one sequence" in launch_invariants
-    assert "Meta glasses status updates use the same recovery receipt IDs as phone and Swissknife renders" in launch_invariants
+    assert (
+        "retry_scheduled, fallback_selected, and cancelled outcomes are replayed in one sequence"
+        in launch_invariants
+    )
+    assert (
+        "Meta glasses status updates use the same recovery receipt IDs as phone and Swissknife renders"
+        in launch_invariants
+    )
 
 
 def test_hao_434_launch_replay_receipts_feed_vai_mgw_shared_evidence_packet():
@@ -4540,9 +4677,9 @@ def test_hao_434_launch_replay_receipts_feed_vai_mgw_shared_evidence_packet():
 
 def test_hao_438_desktop_peer_offload_smoke_receipt_recovers_to_phone_local():
     source = DESKTOP_PEER_OFFLOAD_SMOKE_PATH.read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     packet = _json_block_after(source, "## Desktop-Peer Offload Smoke Fixture")
     normalized_source = " ".join(source.split())
     normalized_readiness = " ".join(readiness_source.split())
@@ -4685,9 +4822,9 @@ def test_hao_438_desktop_peer_offload_smoke_receipt_recovers_to_phone_local():
 
 def test_hao_439_meta_glasses_terminal_receipt_maps_display_actions_through_bridge():
     source = META_GLASSES_TERMINAL_RECEIPT_PATH.read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     packet = _json_block_after(source, "## Meta Glasses Terminal Receipt Fixture")
     normalized_source = " ".join(source.split())
     normalized_readiness = " ".join(readiness_source.split())
@@ -4800,8 +4937,13 @@ def test_hao_439_meta_glasses_terminal_receipt_maps_display_actions_through_brid
     assert confirmation["confirmation"] == "confirm"
 
     assert envelope["bridge_ref"] == "meta_glasses_display_widget_intent_bridge"
-    assert envelope["raw_payload"]["display_action"] == display_action["raw_payload"]["display_action"]
-    assert envelope["raw_payload"]["display_action_receipt_id"] == stable_ids["display_action_receipt_id"]
+    assert (
+        envelope["raw_payload"]["display_action"] == display_action["raw_payload"]["display_action"]
+    )
+    assert (
+        envelope["raw_payload"]["display_action_receipt_id"]
+        == stable_ids["display_action_receipt_id"]
+    )
     assert envelope["normalized_intent"]["intent"] == "terminal.activate_action"
     assert envelope["normalized_intent"]["method"] == "activate_action"
     assert envelope["normalized_intent"]["arguments"]["selected_peer"] == "desktop:peer"
@@ -4819,7 +4961,10 @@ def test_hao_439_meta_glasses_terminal_receipt_maps_display_actions_through_brid
     assert command["mapped_desktop_intent"] == "desktop.open_widget"
     assert command["placement_hint"]["selected_peer"] == "desktop:peer"
     assert command["receipt_ids"]["policy_receipt_id"] == stable_ids["policy_receipt_id"]
-    assert command["receipt_ids"]["display_action_receipt_id"] == stable_ids["display_action_receipt_id"]
+    assert (
+        command["receipt_ids"]["display_action_receipt_id"]
+        == stable_ids["display_action_receipt_id"]
+    )
 
     assert offload["receipt_id"] == stable_ids["peer_offload_policy_receipt_id"]
     assert offload["display_action_receipt_id"] == stable_ids["display_action_receipt_id"]
@@ -4831,7 +4976,9 @@ def test_hao_439_meta_glasses_terminal_receipt_maps_display_actions_through_brid
     assert terminal_render["participant_id"] == "meta_glasses:terminal"
     assert terminal_render["selected_peer"] == "desktop:peer"
     assert terminal_render["state"] == "running_on_peer"
-    assert terminal_render["source_offload_receipt_id"] == stable_ids["peer_offload_policy_receipt_id"]
+    assert (
+        terminal_render["source_offload_receipt_id"] == stable_ids["peer_offload_policy_receipt_id"]
+    )
 
     assert stale_recovery["receipt_id"] == stable_ids["stale_evidence_receipt_id"]
     assert stale_recovery["stale_pairing"] is True
@@ -4861,9 +5008,9 @@ def test_hao_439_meta_glasses_terminal_receipt_maps_display_actions_through_brid
 
 def test_hao_437_real_phone_ingress_rehearsal_receipt_fails_closed_without_adapter():
     source = PHONE_INGRESS_REHEARSAL_PATH.read_text(encoding="utf-8")
-    readiness_source = (REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md").read_text(
-        encoding="utf-8"
-    )
+    readiness_source = (
+        REPO_ROOT / "docs" / "launch" / "phone_desktop_glasses_readiness.md"
+    ).read_text(encoding="utf-8")
     packet = _json_block_after(source, "## Real Phone Ingress Rehearsal Fixture")
     normalized_source = " ".join(source.split())
     normalized_readiness = " ".join(readiness_source.split())
@@ -5014,9 +5161,15 @@ def test_vai_007_operator_console_idl_covers_ui_runtime_boundaries():
     for term in required_terms:
         assert term in normalized_section
 
-    assert section.index("Hallucinate App validates") < section.index("The selected runtime-plane target executes")
-    assert section.index("Stream control is command-scoped") < section.index("Proof capture is also command-scoped")
-    assert section.index("Proof capture is also command-scoped") < section.index("Error recovery fails closed")
+    assert section.index("Hallucinate App validates") < section.index(
+        "The selected runtime-plane target executes"
+    )
+    assert section.index("Stream control is command-scoped") < section.index(
+        "Proof capture is also command-scoped"
+    )
+    assert section.index("Proof capture is also command-scoped") < section.index(
+        "Error recovery fails closed"
+    )
 
 
 def test_vai_007_operator_console_surface_is_runtime_placeable():
@@ -5080,7 +5233,9 @@ def test_hallucinate_multimodal_llm_router_preflight_does_not_call_model():
     assert payload["generate"] is False
     assert payload["llm_router_importable"] is True
     router_module = _load_script_module("hallucinate_multimodal_control_llm_router")
-    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_llm_router.py").read_text(encoding="utf-8")
+    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_llm_router.py").read_text(
+        encoding="utf-8"
+    )
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.task_proposal_router import TaskProposalRouteSpec
 
@@ -5092,10 +5247,12 @@ def test_hallucinate_multimodal_llm_router_preflight_does_not_call_model():
 def test_hallucinate_wrappers_delegate_reusable_namespace_context():
     daemon_module = _load_script_module("hallucinate_multimodal_control_todo_daemon")
     supervisor_module = _load_script_module("hallucinate_multimodal_control_todo_supervisor")
-    daemon_source = (SCRIPTS_DIR / "hallucinate_multimodal_control_todo_daemon.py").read_text(encoding="utf-8")
-    supervisor_source = (SCRIPTS_DIR / "hallucinate_multimodal_control_todo_supervisor.py").read_text(
+    daemon_source = (SCRIPTS_DIR / "hallucinate_multimodal_control_todo_daemon.py").read_text(
         encoding="utf-8"
     )
+    supervisor_source = (
+        SCRIPTS_DIR / "hallucinate_multimodal_control_todo_supervisor.py"
+    ).read_text(encoding="utf-8")
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
     from ipfs_accelerate_py.agent_supervisor.wrapper_utils import AgentSupervisorNamespaceContext
 
@@ -5104,13 +5261,27 @@ def test_hallucinate_wrappers_delegate_reusable_namespace_context():
     assert daemon_module.HALLUCINATE_CONTEXT is daemon_module._HALLUCINATE_CONTEXT
     assert "external/ipfs_accelerate" in daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
     assert "external/ipfs_datasets" in daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
-    assert supervisor_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS == daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
-    assert daemon_module._HALLUCINATE_CONTEXT.namespace_paths.namespace == "hallucinate_multimodal_control"
-    assert supervisor_module.HALLUCINATE_CONTEXT.namespace_paths.namespace == "hallucinate_multimodal_control"
+    assert (
+        supervisor_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
+        == daemon_module.HALLUCINATE_WORKTREE_SUBMODULE_PATHS
+    )
+    assert (
+        daemon_module._HALLUCINATE_CONTEXT.namespace_paths.namespace
+        == "hallucinate_multimodal_control"
+    )
+    assert (
+        supervisor_module.HALLUCINATE_CONTEXT.namespace_paths.namespace
+        == "hallucinate_multimodal_control"
+    )
     assert daemon_module._HALLUCINATE_CONTEXT.task_board_path == TASK_BOARD_PATH
     assert supervisor_module.HALLUCINATE_CONTEXT.task_board_path == TASK_BOARD_PATH
-    assert daemon_module.HALLUCINATE_DATA_PATHS == daemon_module._HALLUCINATE_CONTEXT.namespace_paths
-    assert supervisor_module.HALLUCINATE_DATA_PATHS == supervisor_module.HALLUCINATE_CONTEXT.namespace_paths
+    assert (
+        daemon_module.HALLUCINATE_DATA_PATHS == daemon_module._HALLUCINATE_CONTEXT.namespace_paths
+    )
+    assert (
+        supervisor_module.HALLUCINATE_DATA_PATHS
+        == supervisor_module.HALLUCINATE_CONTEXT.namespace_paths
+    )
     assert "build_agent_supervisor_namespace_context(" in daemon_source
     assert "agent_supervisor_namespace_paths(" not in daemon_source
     assert "build_agent_supervisor_runtime_bootstrap_callbacks(" not in daemon_source
@@ -5130,7 +5301,9 @@ def test_objective_driven_supervisor_loop_evidence_is_tracked():
         "objective_goal_seen_fingerprints": "objective_goal_seen_fingerprints",
         "last_objective_goal_scan_findings": "last_objective_goal_scan_findings",
     }
-    assert supervisor_module.OBJECTIVE_GOAL_SCAN_EVIDENCE == daemon_module.OBJECTIVE_GOAL_SCAN_EVIDENCE
+    assert (
+        supervisor_module.OBJECTIVE_GOAL_SCAN_EVIDENCE == daemon_module.OBJECTIVE_GOAL_SCAN_EVIDENCE
+    )
 
     recorder = daemon_module.record_objective_goal_findings
     assert recorder.objective_path == daemon_module.DEFAULT_OBJECTIVE_GOAL_HEAP_PATH
@@ -5265,7 +5438,9 @@ def test_task_board_path_hides_scanner_visible_fixture_assignment():
     )
 
     assert TASK_BOARD_FILENAME == _canonical_task_board_filename()
-    assert TASK_BOARD_PATH == REPO_ROOT / "hallucinate_app" / "docs" / _canonical_task_board_filename()
+    assert (
+        TASK_BOARD_PATH == REPO_ROOT / "hallucinate_app" / "docs" / _canonical_task_board_filename()
+    )
     assert flagged_assignment not in _source_text()
 
 
@@ -5311,7 +5486,9 @@ def test_pending_task_metadata_hides_scanner_visible_status_keyword():
 
 
 def test_retry_budget_fixture_hides_scanner_visible_board_assignment(tmp_path):
-    flagged_assignment = TASK_BOARD_PATH_KEY + " = tmp_path / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
+    flagged_assignment = (
+        TASK_BOARD_PATH_KEY + " = tmp_path / " + '"' + TEMP_TASK_BOARD_FILENAME + '"'
+    )
 
     assert _temporary_board_path(tmp_path) == tmp_path / TEMP_TASK_BOARD_FILENAME
     assert flagged_assignment not in Path(__file__).read_text(encoding="utf-8")
@@ -5394,18 +5571,25 @@ def test_discovery_expansion_task_waits_for_initial_backlog():
 
 def test_hallucinate_autopilot_defaults_to_implement():
     autopilot = _load_script_module("hallucinate_multimodal_control_autopilot")
-    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_autopilot.py").read_text(encoding="utf-8")
+    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_autopilot.py").read_text(
+        encoding="utf-8"
+    )
 
     assert "build_module_implementation_supervisor_entrypoint(" in source
     assert "def _supervisor_main(" not in source
     assert autopilot.with_autopilot_defaults([]) == ["--implement"]
     assert autopilot.with_autopilot_defaults(["--once"]) == ["--implement", "--once"]
-    assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == ["--no-implement", "--once"]
+    assert autopilot.with_autopilot_defaults(["--no-implement", "--once"]) == [
+        "--no-implement",
+        "--once",
+    ]
 
 
 def test_implementation_daemon_branch_changed_paths_use_merge_base(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+    )
 
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -5517,7 +5701,10 @@ def test_validation_runner_unwraps_markdown_inline_code_commands(tmp_path):
 
 def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon, PortalTask
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+        PortalTask,
+    )
 
     repo = tmp_path / "repo"
     parent = repo / "hallucinate_app"
@@ -5540,7 +5727,9 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
     )
     contracts = nested / "contracts"
     contracts.mkdir()
-    (contracts / "interaction_envelope.schema.json").write_text('{"type":"object"}\n', encoding="utf-8")
+    (contracts / "interaction_envelope.schema.json").write_text(
+        '{"type":"object"}\n', encoding="utf-8"
+    )
 
     daemon = PortalImplementationDaemon(
         **_implementation_daemon_paths(repo),
@@ -5555,17 +5744,23 @@ def test_implementation_daemon_commits_declared_nested_submodule_outputs(tmp_pat
         track="runtime",
     )
 
-    results = daemon._commit_nested_submodule_changes(parent, task, 1, parent_relative="hallucinate_app")
+    results = daemon._commit_nested_submodule_changes(
+        parent, task, 1, parent_relative="hallucinate_app"
+    )
 
     assert results[0]["path"] == "hallucinate_app/swissknife"
     assert results[0]["committed"] is True
     assert _git(nested, "status", "--porcelain") == ""
-    assert "contracts/interaction_envelope.schema.json" in _git(nested, "show", "--name-only", "--format=", "HEAD")
+    assert "contracts/interaction_envelope.schema.json" in _git(
+        nested, "show", "--name-only", "--format=", "HEAD"
+    )
 
 
 def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+    )
 
     repo = tmp_path / "repo"
     parent = repo / "hallucinate_app"
@@ -5594,7 +5789,9 @@ def test_implementation_daemon_skips_missing_nested_submodule_sources(tmp_path):
 
 def test_implementation_daemon_falls_back_when_submodule_gitlink_ref_is_missing(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+    )
 
     repo = tmp_path / "repo"
     source = repo / "ipfs_datasets_py"
@@ -5676,7 +5873,9 @@ def test_implementation_daemon_cleans_partial_worktree_after_setup_failure(tmp_p
         implementation_log_dir=repo / "logs",
     )
 
-    def fail_after_partial_checkout(worktree_path: Path, branch_name: str, *, task: PortalTask) -> str:
+    def fail_after_partial_checkout(
+        worktree_path: Path, branch_name: str, *, task: PortalTask
+    ) -> str:
         _git(repo, "worktree", "add", "-b", branch_name, str(worktree_path), "HEAD")
         (worktree_path / "partial.txt").write_text("partial checkout\n", encoding="utf-8")
         raise RuntimeError("No space left on device")
@@ -5806,7 +6005,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
         }
         for index in range(1, 4)
     ]
-    events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+    events_path.write_text(
+        "\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8"
+    )
 
     findings = daemon_module.record_retry_budget_findings(
         **{TASK_BOARD_PATH_KEY: task_board_path},
@@ -5816,7 +6017,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
         retry_budget=3,
     )
 
-    expected_discovery = discovery_dir / f"{datetime.now(timezone.utc).date().isoformat()}-hao-014-hao-003-retry-budget.md"
+    expected_discovery = (
+        discovery_dir / f"{datetime.now(UTC).date().isoformat()}-hao-014-hao-003-retry-budget.md"
+    )
     assert findings == [
         {
             "source_task_id": "HAO-003",
@@ -5832,7 +6035,9 @@ def test_retry_budget_finding_appends_daemon_parseable_followup(tmp_path):
     assert "Depends on: HAO-013" in updated
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     follow_up_task_id = "HAO-" + "014"
     discovery_task_id = "HAO-" + "013"
@@ -5893,7 +6098,13 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
         "returncode": 2,
         "branch": "implementation/hao-005-attempt-2-1779566133",
         "target_branch": "main",
-        "command": ["git", "merge", "--no-ff", "--no-edit", "implementation/hao-005-attempt-2-1779566133"],
+        "command": [
+            "git",
+            "merge",
+            "--no-ff",
+            "--no-edit",
+            "implementation/hao-005-attempt-2-1779566133",
+        ],
         "reason": "main_checkout_dirty_conflict",
         "dirty_paths": ["swissknife"],
         "main_worktree_path": "/repo",
@@ -5928,7 +6139,9 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
             "merge_result": merge_result,
         },
     ]
-    events_path.write_text("\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8")
+    events_path.write_text(
+        "\n".join(json.dumps(event) for event in events) + "\n", encoding="utf-8"
+    )
 
     findings = daemon_module.record_retry_budget_findings(
         **{TASK_BOARD_PATH_KEY: task_board_path},
@@ -5940,7 +6153,7 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
 
     expected_discovery = (
         discovery_dir
-        / f"{datetime.now(timezone.utc).date().isoformat()}-hao-006-hao-005-merge-retry-budget.md"
+        / f"{datetime.now(UTC).date().isoformat()}-hao-006-hao-005-merge-retry-budget.md"
     )
     expected_findings = [
         {
@@ -5959,7 +6172,9 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
     assert "Depends on: HAO-004" in updated
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## HAO-")}
     assert tasks["HAO-006"].depends_on == ["HAO-004"]
@@ -5976,12 +6191,16 @@ def test_merge_retry_budget_finding_blocks_repeated_merge_failure(tmp_path):
 
 def test_merge_conflict_resolver_builds_dry_run_prompt(tmp_path):
     resolver = _load_script_module("hallucinate_multimodal_control_merge_conflict_resolver")
-    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_merge_conflict_resolver.py").read_text(encoding="utf-8")
+    source = (SCRIPTS_DIR / "hallucinate_multimodal_control_merge_conflict_resolver.py").read_text(
+        encoding="utf-8"
+    )
 
     resolver_spec = resolver.HAO_MERGE_RESOLVER_SPEC
     assert resolver_spec.namespace == "hallucinate_multimodal_control"
     assert resolver_spec.env_prefix == "HANDSFREE_HAO"
-    assert resolver_spec.prompt_heading == "Resolve the HAO daemon merge conflict in this repository."
+    assert (
+        resolver_spec.prompt_heading == "Resolve the HAO daemon merge conflict in this repository."
+    )
     assert "build_namespace_merge_resolver_runner_from_spec(" in source
     assert "build_namespace_merge_resolver_runner(" not in source
     repo = tmp_path / "repo"
@@ -6087,7 +6306,9 @@ def test_codebase_scan_finding_appends_daemon_parseable_followup_from_submodule(
     assert "codebase scan filed this finding" in updated.lower()
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     tasks = {task.task_id: task for task in parse_task_file(task_board_path, "## HAO-")}
     assert tasks["HAO-002"].track == "runtime"
@@ -6182,7 +6403,7 @@ def test_codebase_scan_bypasses_cooldown_when_backlog_is_drained(tmp_path):
         encoding="utf-8",
     )
     strategy_path.write_text(
-        json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
+        json.dumps({"last_codebase_scan_at": datetime.now(UTC).isoformat()}),
         encoding="utf-8",
     )
     _git(repo, "add", TEMP_TASK_BOARD_FILENAME, "hallucinate_app")
@@ -6251,7 +6472,7 @@ def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
         encoding="utf-8",
     )
     strategy_path.write_text(
-        json.dumps({"last_codebase_scan_at": datetime.now(timezone.utc).isoformat()}),
+        json.dumps({"last_codebase_scan_at": datetime.now(UTC).isoformat()}),
         encoding="utf-8",
     )
     _git(repo, "add", "scan_target.py", TEMP_TASK_BOARD_FILENAME)
@@ -6270,7 +6491,9 @@ def test_codebase_scan_uses_daemon_state_when_todo_statuses_lag(tmp_path):
 
     assert len(findings) == 1
     assert findings[0]["source"] == "scan_target.py:2"
-    assert "## HAO-002 Resolve code annotation in scan_target.py:2" in todo_path.read_text(encoding="utf-8")
+    assert "## HAO-002 Resolve code annotation in scan_target.py:2" in todo_path.read_text(
+        encoding="utf-8"
+    )
     strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
     assert strategy["last_codebase_scan_mode"] == "drained_exhaustive"
     assert strategy["last_drained_codebase_scan_task_count"] == 1
@@ -6285,7 +6508,10 @@ def test_codebase_scan_skips_generated_discovery_and_markdown_fences(tmp_path):
     readme = repo / "README.md"
     mgw_owned_paths = (
         repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.md",
-        repo / "implementation_plan" / "docs" / "18-swissknife-meta-glasses-display-widgets.todo.md",
+        repo
+        / "implementation_plan"
+        / "docs"
+        / "18-swissknife-meta-glasses-display-widgets.todo.md",
         repo / "tests" / "test_meta_glasses_display_todo_queue.py",
     )
     source.parent.mkdir(parents=True)
@@ -6450,7 +6676,9 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert "- Graph parents: VAIOS-G000" in updated
 
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        parse_task_file,
+    )
 
     tasks = {task.task_id: task for task in parse_task_file(todo_path, "## HAO-")}
     assert tasks["HAO-002"].priority == "P1"
@@ -6459,7 +6687,9 @@ def test_objective_goal_scan_appends_gap_task_from_missing_evidence(tmp_path):
     assert list((repo / "discovery").glob("*-hao-002-objective-gap-*.md"))
     bundle_shards = list((repo / "bundles").glob(OBJECTIVE_BUNDLE_SHARD_GLOB))
     assert len(bundle_shards) == 1
-    assert "## HAO-002 Close virtual AI OS objective gap" in bundle_shards[0].read_text(encoding="utf-8")
+    assert "## HAO-002 Close virtual AI OS objective gap" in bundle_shards[0].read_text(
+        encoding="utf-8"
+    )
     bundle_index = json.loads((repo / "bundles" / "index.json").read_text(encoding="utf-8"))
     assert findings[0]["bundle_key"] in bundle_index["bundles"]
     assert bundle_index["bundles"][findings[0]["bundle_key"]]["tasks"][0]["task_id"] == "HAO-002"
@@ -6548,7 +6778,9 @@ def test_objective_goal_scan_uses_ast_and_embedding_evidence(tmp_path):
 
     assert len(findings) == 1
     assert findings[0]["missing_evidence"] == ["meta_glasses_terminal_e2e_contract"]
-    discovery = next((repo / "discovery").glob("*-hao-002-objective-gap-*.md")).read_text(encoding="utf-8")
+    discovery = next((repo / "discovery").glob("*-hao-002-objective-gap-*.md")).read_text(
+        encoding="utf-8"
+    )
     assert "CapabilityRouter.dispatch_task: src/runtime_router.py (ast)" in discovery
     assert "meta glasses terminal router: docs/runtime_notes.md (embedding:" in discovery
 
@@ -6847,7 +7079,11 @@ def test_operator_shell_evidence_terms_are_tracked_outside_generated_artifacts()
         REPO_ROOT / "hallucinate_app" / "docs" / "SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md",
     ]
     harness_sources = [
-        REPO_ROOT / "swissknife" / "test" / "mcp-plus-plus" / "meta-glasses-display-harness.test.ts",
+        REPO_ROOT
+        / "swissknife"
+        / "test"
+        / "mcp-plus-plus"
+        / "meta-glasses-display-harness.test.ts",
         REPO_ROOT / "hallucinate_app" / "docs" / "SWISSKNIFE_VIRTUAL_DESKTOP_MOCKUP.md",
     ]
 
@@ -6856,15 +7092,14 @@ def test_operator_shell_evidence_terms_are_tracked_outside_generated_artifacts()
         for path in operator_sources
     )
     assert any(
-        "ORB display harness" in path.read_text(encoding="utf-8")
-        for path in harness_sources
+        "ORB display harness" in path.read_text(encoding="utf-8") for path in harness_sources
     )
 
 
 def test_operator_shell_objective_heap_has_child_goals():
-    heap = (REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md").read_text(
-        encoding="utf-8"
-    )
+    heap = (
+        REPO_ROOT / "implementation_plan" / "docs" / "23-virtual-ai-os-objective-goal-heap.md"
+    ).read_text(encoding="utf-8")
 
     def section_for(goal_id: str) -> str:
         marker = f"## {goal_id} "
@@ -6939,7 +7174,9 @@ def test_objective_goal_scan_waits_until_open_backlog_is_low(tmp_path):
 
 def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+    )
 
     repo = tmp_path / "repo"
     app = repo / "hallucinate_app"
@@ -6999,7 +7236,9 @@ def test_completed_todo_update_commits_submodule_and_parent_gitlink(tmp_path):
 
 def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
     sys.path.insert(0, str(IPFS_ACCELERATE_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        PortalImplementationDaemon,
+    )
 
     repo = tmp_path / "repo"
     discovery = repo / "data" / "hallucinate_multimodal_control" / "discovery" / "finding.md"
@@ -7014,7 +7253,9 @@ def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
 
     _git(repo, "checkout", "-b", "ours")
     discovery.parent.mkdir(parents=True)
-    discovery.write_text("# Finding\n\n## Evidence\n\n- dirty path: hallucinate_app\n", encoding="utf-8")
+    discovery.write_text(
+        "# Finding\n\n## Evidence\n\n- dirty path: hallucinate_app\n", encoding="utf-8"
+    )
     _git(repo, "add", "data/hallucinate_multimodal_control/discovery/finding.md")
     _git(repo, "commit", "-m", "ours finding")
 
@@ -7038,7 +7279,9 @@ def test_generated_add_add_conflict_repair_selects_containing_content(tmp_path):
         check=False,
     )
     assert conflict.returncode != 0
-    assert "AA data/hallucinate_multimodal_control/discovery/finding.md" in _git(repo, "status", "--porcelain")
+    assert "AA data/hallucinate_multimodal_control/discovery/finding.md" in _git(
+        repo, "status", "--porcelain"
+    )
 
     daemon = PortalImplementationDaemon(
         **_implementation_daemon_paths(repo),
@@ -7308,22 +7551,12 @@ def test_submodule_gitlink_conflict_repair_merges_sibling_submodule_heads(tmp_pa
 
 
 def test_objective_wait_fixture_hides_scanner_visible_git_pathspecs():
-    flagged_git_add = (
-        '_git(repo, "add", "'
-        + TEMP_TASK_BOARD_FILENAME
-        + '", "objective-heap.md")'
-    )
+    flagged_git_add = '_git(repo, "add", "' + TEMP_TASK_BOARD_FILENAME + '", "objective-heap.md")'
 
     assert flagged_git_add not in Path(__file__).read_text(encoding="utf-8")
 
 
 def test_daemon_constructor_fixtures_hide_scanner_visible_task_board_path():
-    flagged_constructor_arg = (
-        "to"
-        + "do_path=repo / "
-        + '"'
-        + TEMP_TASK_BOARD_FILENAME
-        + '",'
-    )
+    flagged_constructor_arg = "to" + "do_path=repo / " + '"' + TEMP_TASK_BOARD_FILENAME + '",'
 
     assert flagged_constructor_arg not in Path(__file__).read_text(encoding="utf-8")

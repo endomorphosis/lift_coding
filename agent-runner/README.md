@@ -145,13 +145,13 @@ Example of adding LLM integration:
 # In process_task(), before creating the trace file:
 from openai import OpenAI
 
-client = OpenAI(api_key=os.environ.get('LLM_API_KEY'))
+client = OpenAI(api_key=os.environ.get("LLM_API_KEY"))
 response = client.chat.completions.create(
     model="gpt-4",
     messages=[
         {"role": "system", "content": "You are a helpful coding assistant."},
-        {"role": "user", "content": f"Implement this task: {instruction}"}
-    ]
+        {"role": "user", "content": f"Implement this task: {instruction}"},
+    ],
 )
 
 # Use response.choices[0].message.content to make code changes

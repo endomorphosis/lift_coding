@@ -9,9 +9,20 @@ from collections.abc import Mapping
 from typing import Any
 
 _SENSITIVE = {
-    "privatekey", "seedphrase", "mnemonic", "paymentsignature", "rawsignature",
-    "paymentpayload", "facilitatorresponse", "authorization", "authenticationcookie",
-    "cookie", "walletaddress", "transactionhash", "requestarguments", "fullucan",
+    "privatekey",
+    "seedphrase",
+    "mnemonic",
+    "paymentsignature",
+    "rawsignature",
+    "paymentpayload",
+    "facilitatorresponse",
+    "authorization",
+    "authenticationcookie",
+    "cookie",
+    "walletaddress",
+    "transactionhash",
+    "requestarguments",
+    "fullucan",
 }
 
 

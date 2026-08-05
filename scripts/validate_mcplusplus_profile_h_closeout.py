@@ -11,7 +11,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data/mcplusplus_profile_h/closeout-manifest.json"
-BOARD = ROOT / "implementation_plan/docs/41-mcpplusplus-profile-h-x402-payments-plan-2026-07-12.todo.md"
+BOARD = (
+    ROOT / "implementation_plan/docs/41-mcpplusplus-profile-h-x402-payments-plan-2026-07-12.todo.md"
+)
 TASK_RE = re.compile(r"^## (XPH-\d{3}) (.+?)\n(.*?)(?=^## XPH-|\Z)", re.MULTILINE | re.DOTALL)
 STATUS_RE = re.compile(r"^- Status: (\S+)", re.MULTILINE)
 VALIDATION_RE = re.compile(r"^- Validation: (.+)$", re.MULTILINE)
@@ -64,7 +66,9 @@ def validate_docs(manifest: dict[str, Any], errors: Errors) -> None:
         "docs/mcplusplus-profile-h-migration-rollback.md",
     }
     declared = set(manifest.get("documentation", []))
-    errors.require(required <= declared, f"documentation list is missing {sorted(required - declared)}")
+    errors.require(
+        required <= declared, f"documentation list is missing {sorted(required - declared)}"
+    )
     combined = ""
     for name in sorted(declared):
         path = ROOT / name
@@ -74,22 +78,36 @@ def validate_docs(manifest: dict[str, Any], errors: Errors) -> None:
             errors.require(len(text) >= 500, f"documentation is not substantive: {name}")
             combined += "\n" + text.lower()
     for phrase in (
-        "exact", "upto", "batch", "testnet", "mainnet", "x402 v2",
-        "wallet-provider", "reconciliation", "rollback", "raw key",
+        "exact",
+        "upto",
+        "batch",
+        "testnet",
+        "mainnet",
+        "x402 v2",
+        "wallet-provider",
+        "reconciliation",
+        "rollback",
+        "raw key",
     ):
         errors.require(phrase in combined, f"documentation does not explain {phrase!r}")
     index = (ROOT / "docs/DOCUMENTATION_INDEX.md").read_text(encoding="utf-8")
     protocol_index = (ROOT / "Mcp-Plus-Plus/docs/index.md").read_text(encoding="utf-8")
     for name in required:
         errors.require(Path(name).name in index, f"documentation index does not link {name}")
-        errors.require(Path(name).name in protocol_index, f"MCP++ documentation index does not link {name}")
-    errors.require("closeout-manifest.json" in index and "closeout-manifest.json" in protocol_index,
-                   "documentation indexes do not link the closeout manifest")
+        errors.require(
+            Path(name).name in protocol_index, f"MCP++ documentation index does not link {name}"
+        )
+    errors.require(
+        "closeout-manifest.json" in index and "closeout-manifest.json" in protocol_index,
+        "documentation indexes do not link the closeout manifest",
+    )
 
 
 def validate_examples(manifest: dict[str, Any], errors: Errors) -> None:
     examples = manifest.get("configurationExamples", [])
-    errors.require(len(examples) == 3, "exactly three seller, buyer, and pricing examples are required")
+    errors.require(
+        len(examples) == 3, "exactly three seller, buyer, and pricing examples are required"
+    )
     values: dict[str, dict[str, Any]] = {}
     forbidden_keys = re.compile(r"(?i)(private.?key|mnemonic|seed.?phrase|secret.?key|wallet.?key)")
     for name in examples:
@@ -109,23 +127,34 @@ def validate_examples(manifest: dict[str, Any], errors: Errors) -> None:
     seller = next((v for k, v in values.items() if "seller.testnet" in k), {})
     buyer = next((v for k, v in values.items() if "swissknife-buyer" in k), {})
     pricing = next((v for k, v in values.items() if "pricing.testnet" in k), {})
-    errors.require(seller.get("x402Version") == 2 and seller.get("mode") == "testnet",
-                   "seller example must select x402 v2 testnet")
-    errors.require(str(seller.get("facilitator", {}).get("url", "")).startswith("https://"),
-                   "seller facilitator must use HTTPS")
+    errors.require(
+        seller.get("x402Version") == 2 and seller.get("mode") == "testnet",
+        "seller example must select x402 v2 testnet",
+    )
+    errors.require(
+        str(seller.get("facilitator", {}).get("url", "")).startswith("https://"),
+        "seller facilitator must use HTTPS",
+    )
     provider = buyer.get("walletProvider", {})
-    errors.require(bool(provider.get("type") and provider.get("accountAlias")),
-                   "buyer must select a wallet provider by account alias")
+    errors.require(
+        bool(provider.get("type") and provider.get("accountAlias")),
+        "buyer must select a wallet provider by account alias",
+    )
     modes = {item.get("pricingMode"): item for item in pricing.get("capabilities", [])}
-    errors.require({"exact", "upto", "batch"} <= set(modes), "pricing example must label exact, upto, and batch")
+    errors.require(
+        {"exact", "upto", "batch"} <= set(modes),
+        "pricing example must label exact, upto, and batch",
+    )
     errors.require(modes.get("batch", {}).get("enabled") is False, "batch pricing must be disabled")
 
 
 def validate_screenshots(manifest: dict[str, Any], errors: Errors) -> None:
     screenshots = manifest.get("screenshots", [])
     kinds = {item.get("kind") for item in screenshots if isinstance(item, dict)}
-    errors.require({"api-catalog-quote", "wallet-policy"} <= kinds,
-                   "API catalog/quote and wallet screenshots are required")
+    errors.require(
+        {"api-catalog-quote", "wallet-policy"} <= kinds,
+        "API catalog/quote and wallet screenshots are required",
+    )
     for item in screenshots:
         if not isinstance(item, dict):
             errors.items.append("screenshot entry must be an object")
@@ -137,60 +166,99 @@ def validate_screenshots(manifest: dict[str, Any], errors: Errors) -> None:
             source_text = source.read_text(encoding="utf-8")
             declared_path = str(item.get("path"))
             capture_path = declared_path.removeprefix("swissknife/")
-            errors.require(capture_path in source_text,
-                           f"screenshot is not reproducibly captured: {item.get('path')}")
-        errors.require(item.get("fixture") == "deterministic-not-live",
-                       f"screenshot fixture disclosure is missing: {item.get('kind')}")
+            errors.require(
+                capture_path in source_text,
+                f"screenshot is not reproducibly captured: {item.get('path')}",
+            )
+        errors.require(
+            item.get("fixture") == "deterministic-not-live",
+            f"screenshot fixture disclosure is missing: {item.get('kind')}",
+        )
         # Screenshot artifacts are generated and restored by the supervisor.
         # When present, reject empty, renamed, or non-PNG evidence.
         if target.exists():
-            errors.require(target.is_file() and target.stat().st_size > 1_000,
-                           f"screenshot is empty: {item.get('path')}")
+            errors.require(
+                target.is_file() and target.stat().st_size > 1_000,
+                f"screenshot is empty: {item.get('path')}",
+            )
             if target.is_file():
-                errors.require(target.read_bytes()[:8] == PNG_SIGNATURE,
-                               f"screenshot is not PNG: {item.get('path')}")
+                errors.require(
+                    target.read_bytes()[:8] == PNG_SIGNATURE,
+                    f"screenshot is not PNG: {item.get('path')}",
+                )
 
 
-def validate_tasks(manifest: dict[str, Any], tasks: dict[str, dict[str, str]], errors: Errors) -> None:
+def validate_tasks(
+    manifest: dict[str, Any], tasks: dict[str, dict[str, str]], errors: Errors
+) -> None:
     rows = manifest.get("tasks", [])
     by_id = {row.get("id"): row for row in rows if isinstance(row, dict)}
     errors.require(len(by_id) == len(rows), "manifest has duplicate or malformed task entries")
-    errors.require(set(by_id) == set(tasks),
-                   f"task accounting differs: missing={sorted(set(tasks)-set(by_id))}, extra={sorted(set(by_id)-set(tasks))}")
+    errors.require(
+        set(by_id) == set(tasks),
+        f"task accounting differs: missing={sorted(set(tasks) - set(by_id))}, extra={sorted(set(by_id) - set(tasks))}",
+    )
     for task_id, parsed in tasks.items():
         row = by_id.get(task_id, {})
         expected_status = "active-closeout" if task_id == "XPH-114" else "completed"
-        errors.require(row.get("status") == expected_status, f"{task_id} manifest status is not {expected_status}")
-        errors.require(row.get("validation") == parsed["validation"], f"{task_id} validation command drifted")
+        errors.require(
+            row.get("status") == expected_status,
+            f"{task_id} manifest status is not {expected_status}",
+        )
+        errors.require(
+            row.get("validation") == parsed["validation"], f"{task_id} validation command drifted"
+        )
         evidence = row.get("evidence", [])
         errors.require(bool(evidence), f"{task_id} has no linked validation evidence")
         for name in evidence:
             errors.require((ROOT / name).exists(), f"{task_id} evidence does not exist: {name}")
         if task_id != "XPH-114":
-            errors.require(parsed["status"] == "completed", f"{task_id} is still {parsed['status']} on the board")
+            errors.require(
+                parsed["status"] == "completed",
+                f"{task_id} is still {parsed['status']} on the board",
+            )
     closeout = manifest.get("supervisorCloseout", {})
-    errors.require(closeout.get("requiredTaskCount") == len(tasks), "supervisor task count is stale")
-    errors.require(closeout.get("completedBeforeCloseout") == len(tasks) - 1, "completed count is stale")
+    errors.require(
+        closeout.get("requiredTaskCount") == len(tasks), "supervisor task count is stale"
+    )
+    errors.require(
+        closeout.get("completedBeforeCloseout") == len(tasks) - 1, "completed count is stale"
+    )
     errors.require(closeout.get("activeCloseoutTask") == "XPH-114", "active closeout task is wrong")
-    for field in ("pendingRequiredTasksExcludingCloseout", "blockedRequiredTasks", "silentlySkippedRequiredTasks"):
+    for field in (
+        "pendingRequiredTasksExcludingCloseout",
+        "blockedRequiredTasks",
+        "silentlySkippedRequiredTasks",
+    ):
         errors.require(closeout.get(field) == 0, f"supervisor closeout has nonzero {field}")
-    errors.require(closeout.get("completionMetadataOwner") == "supervisor",
-                   "closeout must leave final task metadata to the supervisor")
+    errors.require(
+        closeout.get("completionMetadataOwner") == "supervisor",
+        "closeout must leave final task metadata to the supervisor",
+    )
 
 
 def main() -> int:
     errors = Errors()
     manifest = load_json(MANIFEST, errors)
     tasks = board_tasks(errors)
-    errors.require(manifest.get("schema") == "mcp++/profile-h/closeout-manifest@1.0", "manifest schema is wrong")
-    errors.require(manifest.get("profileVersion") == "1.0" and manifest.get("x402Version") == 2,
-                   "manifest version selection is wrong")
-    errors.require(manifest.get("releaseScope") == "testnet" and manifest.get("releaseDecision") == "GO",
-                   "closeout is not a testnet GO")
+    errors.require(
+        manifest.get("schema") == "mcp++/profile-h/closeout-manifest@1.0",
+        "manifest schema is wrong",
+    )
+    errors.require(
+        manifest.get("profileVersion") == "1.0" and manifest.get("x402Version") == 2,
+        "manifest version selection is wrong",
+    )
+    errors.require(
+        manifest.get("releaseScope") == "testnet" and manifest.get("releaseDecision") == "GO",
+        "closeout is not a testnet GO",
+    )
     errors.require(manifest.get("mainnetEnabled") is False, "manifest enables mainnet")
-    errors.require(manifest.get("pricingStatus") == {
-        "exact": "testnet-ready", "upto": "testnet-ready", "batch": "disabled"
-    }, "pricing rollout status is unsafe or ambiguous")
+    errors.require(
+        manifest.get("pricingStatus")
+        == {"exact": "testnet-ready", "upto": "testnet-ready", "batch": "disabled"},
+        "pricing rollout status is unsafe or ambiguous",
+    )
     validate_docs(manifest, errors)
     validate_examples(manifest, errors)
     validate_screenshots(manifest, errors)
@@ -200,7 +268,9 @@ def main() -> int:
             print(f"FAIL: {item}", file=sys.stderr)
         print(f"FAIL: {len(errors.items)} Profile H closeout error(s)", file=sys.stderr)
         return 1
-    print(f"PASS: Profile H closeout accounts for {len(tasks)} tasks, testnet seller/buyer setup, docs, examples, and reproducible API/wallet evidence")
+    print(
+        f"PASS: Profile H closeout accounts for {len(tasks)} tasks, testnet seller/buyer setup, docs, examples, and reproducible API/wallet evidence"
+    )
     return 0
 
 

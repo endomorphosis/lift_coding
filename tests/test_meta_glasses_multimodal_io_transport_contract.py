@@ -138,9 +138,7 @@ def test_mgw_519_playwright_fixture_covers_modalities_and_replay_receipts():
 
     for event in events:
         assert event["contract"] == META_GLASSES_MULTIMODAL_IO_CONTRACT
-        assert event["control_plane"]["route"] == (
-            "swissknife.mobile_orb.publish_glasses_event"
-        )
+        assert event["control_plane"]["route"] == ("swissknife.mobile_orb.publish_glasses_event")
         assert event["fallback"]["state"] == "dat_unavailable"
         assert event["receipts"], event
 
@@ -149,9 +147,7 @@ def test_mgw_519_playwright_fixture_covers_modalities_and_replay_receipts():
     assert {receipt["receipt_cid"] for receipt in replay_receipts} == {
         event["receipts"][0] for event in events
     }
-    assert all(
-        receipt["preserve_for_dat_replay"] is True for receipt in replay_receipts
-    )
+    assert all(receipt["preserve_for_dat_replay"] is True for receipt in replay_receipts)
 
 
 def test_mgw_519_checked_in_playwright_fixture_is_replayable():

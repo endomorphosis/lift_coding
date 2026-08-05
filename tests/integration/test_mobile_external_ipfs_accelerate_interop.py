@@ -104,9 +104,7 @@ def test_discover_ipfs_accelerate_duckdb_contract_finds_time_series_tables() -> 
     assert {"check_schema", "get_all_tables", "get_performance_results"}.issubset(
         set(contract.check_schema_functions)
     )
-    assert contract.time_series_schema_path.endswith(
-        "data/duckdb/db_schema/time_series_schema.sql"
-    )
+    assert contract.time_series_schema_path.endswith("data/duckdb/db_schema/time_series_schema.sql")
     assert contract.benchmark_schema_script_path.endswith(
         "data/duckdb/scripts/create_benchmark_schema.py"
     )
@@ -182,9 +180,7 @@ def test_mobile_descriptor_exports_ipfs_accelerate_interop_contract() -> None:
             "external/ipfs_accelerate/data/duckdb/utils/check_database_schema.py"
         ),
         "check_db_schema": "external/ipfs_accelerate/data/duckdb/utils/check_db_schema.py",
-        "benchmark_widget_contract": (
-            "mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js"
-        ),
+        "benchmark_widget_contract": ("mobile/src/utils/ipfsAccelerateBenchmarkWidgetContract.js"),
     }
     assert descriptor["runtime_handoff"]["source_surface"] == "external/ipfs_accelerate"
     assert descriptor["runtime_handoff"]["target_surface"] == "mobile"
@@ -337,81 +333,66 @@ def test_mobile_orb_bridge_module_remains_parseable_after_contract_wiring() -> N
 
 
 def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
-    docs = (
-        REPO_ROOT / "docs/integration/mobile-external_ipfs_accelerate.md"
-    ).read_text(encoding="utf-8")
+    docs = (REPO_ROOT / "docs/integration/mobile-external_ipfs_accelerate.md").read_text(
+        encoding="utf-8"
+    )
     discovery = (
-        REPO_ROOT
-        / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
+        REPO_ROOT / "data/virtual_ai_os/discovery/2026-07-08-vai-672-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     mgw_596_gap = (
-        REPO_ROOT
-        / "data/meta_glasses_display_widgets/discovery/"
+        REPO_ROOT / "data/meta_glasses_display_widgets/discovery/"
         "2026-07-09-mgw-596-objective-gap-c1edafa875e6.md"
     ).read_text(encoding="utf-8")
     mgw_596_repair = (
-        REPO_ROOT
-        / "data/meta_glasses_display_widgets/discovery/"
+        REPO_ROOT / "data/meta_glasses_display_widgets/discovery/"
         "2026-07-09-mgw-596-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_gap = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-741-objective-gap-c1edafa875e6.md"
     ).read_text(encoding="utf-8")
     hao_741_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-741-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_attempt_one_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-1-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_attempt_two_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-2-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_attempt_four_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-4-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_attempt_five_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-5-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_attempt_six_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-6-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_741_attempt_seven_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-741-attempt-7-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_748_merge_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-08-hao-748-hao-741-merge-retry-budget.md"
     ).read_text(encoding="utf-8")
     hao_758_gap = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-objective-gap-c1edafa875e6.md"
     ).read_text(encoding="utf-8")
     hao_758_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     hao_758_attempt_two_repair = (
-        REPO_ROOT
-        / "data/hallucinate_multimodal_control/discovery/"
+        REPO_ROOT / "data/hallucinate_multimodal_control/discovery/"
         "2026-07-09-hao-758-attempt-3-objective-validation-repair.md"
     ).read_text(encoding="utf-8")
     attempt_four = (
@@ -468,16 +449,13 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
             assert term in content, f"missing {term!r}"
 
     attempt_six_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-6-validation-confirmation.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-6-validation-confirmation.md"
     )
     attempt_seven_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-7-validation-confirmation.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-7-validation-confirmation.md"
     )
     attempt_eight_record = (
-        "data/virtual_ai_os/discovery/"
-        "2026-07-08-vai-672-attempt-8-validation-confirmation.md"
+        "data/virtual_ai_os/discovery/2026-07-08-vai-672-attempt-8-validation-confirmation.md"
     )
     assert attempt_six_record in docs
     assert attempt_six_record in heap

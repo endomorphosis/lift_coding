@@ -58,9 +58,7 @@ REQUIRED_DISPLAY_ICON_NAMES = (
 REQUIRED_DISPLAY_BUTTON_STYLES = ("PRIMARY", "SECONDARY")
 
 IPFS_KIT_TOOL_ROOT = ".tools/ipfs_kit_py"
-REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = (
-    ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
-)
+REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
 REQUIRED_BUCKET_VFS_DOC_PATH = (
     ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
@@ -245,9 +243,7 @@ def discover_meta_wearables_dat_android_contract(
         "meta-wearables-dat-android display-access.mdc",
     )
 
-    permissions_registration_source = permissions_registration_doc_path.read_text(
-        encoding="utf-8"
-    )
+    permissions_registration_source = permissions_registration_doc_path.read_text(encoding="utf-8")
     _require_symbols(
         permissions_registration_source,
         (
@@ -293,7 +289,9 @@ def discover_meta_wearables_dat_android_contract(
     )
 
     view_model_source = display_view_model_path.read_text(encoding="utf-8")
-    discovered_icon_names = tuple(sorted(set(re.findall(r"IconName\.([A-Z_]+)", view_model_source))))
+    discovered_icon_names = tuple(
+        sorted(set(re.findall(r"IconName\.([A-Z_]+)", view_model_source)))
+    )
     _require_subset(
         REQUIRED_DISPLAY_ICON_NAMES,
         discovered_icon_names,
@@ -424,7 +422,15 @@ def discover_ipfs_datasets_bucket_vfs_contract(
     )
     _require_subset(
         REQUIRED_BUCKET_VFS_CLI_COMMANDS,
-        tuple(sorted(set(re.findall(r"\b(create|list|delete|add-file|export|query)\b", tool_interface_source)))),
+        tuple(
+            sorted(
+                set(
+                    re.findall(
+                        r"\b(create|list|delete|add-file|export|query)\b", tool_interface_source
+                    )
+                )
+            )
+        ),
         "ipfs_datasets Bucket VFS CLI commands",
     )
     _require_subset(
@@ -483,9 +489,7 @@ def build_meta_wearables_dat_android_ipfs_datasets_handoff(
 ) -> MetaWearablesDATAndroidIPFSDatasetsHandoff:
     """Build a deterministic Display-event to ipfs_datasets handoff receipt."""
 
-    meta_contract = discover_meta_wearables_dat_android_contract(
-        meta_wearables_dat_android_root
-    )
+    meta_contract = discover_meta_wearables_dat_android_contract(meta_wearables_dat_android_root)
     datasets_contract = discover_ipfs_datasets_bucket_vfs_contract(ipfs_datasets_root)
 
     payload_bytes = _payload_to_bytes(
@@ -543,9 +547,7 @@ def build_meta_wearables_dat_android_ipfs_datasets_handoff(
 def _require_files(label: str, paths: tuple[Path, ...]) -> None:
     missing = [str(path) for path in paths if not path.is_file()]
     if missing:
-        raise MetaWearablesDATAndroidIPFSDatasetsInteropError(
-            f"{label} missing: {missing}"
-        )
+        raise MetaWearablesDATAndroidIPFSDatasetsInteropError(f"{label} missing: {missing}")
 
 
 def _require_symbols(source: str, symbols: tuple[str, ...], label: str) -> None:
@@ -565,9 +567,7 @@ def _require_subset(required: tuple[str, ...], discovered: tuple[Any, ...], labe
             normalized.add(str(item))
     missing = set(required) - normalized
     if missing:
-        raise MetaWearablesDATAndroidIPFSDatasetsInteropError(
-            f"{label} missing: {sorted(missing)}"
-        )
+        raise MetaWearablesDATAndroidIPFSDatasetsInteropError(f"{label} missing: {sorted(missing)}")
 
 
 def _payload_to_bytes(payload: bytes | str | dict[str, Any]) -> bytes:

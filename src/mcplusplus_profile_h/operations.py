@@ -25,10 +25,18 @@ from typing import Any
 from .canonical import canonical_json, cid_for
 from .ledger import DuckDBPaymentLedger
 
-STAGES = frozenset({
-    "quote", "verify", "settlement", "entitlement", "access", "execution",
-    "refund", "reconciliation",
-})
+STAGES = frozenset(
+    {
+        "quote",
+        "verify",
+        "settlement",
+        "entitlement",
+        "access",
+        "execution",
+        "refund",
+        "reconciliation",
+    }
+)
 OUTCOMES = frozenset({"success", "failure", "denied", "timeout", "paused", "pending"})
 _SAFE_VALUE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,63}$")
 _SAFE_REASON = re.compile(r"^H_[A-Z0-9_]{1,61}$")
@@ -47,14 +55,23 @@ class RedactedMetrics:
         self._lock = threading.RLock()
 
     def observe(
-        self, stage: str, outcome: str, seller: str, *, duration_ms: int = 0,
+        self,
+        stage: str,
+        outcome: str,
+        seller: str,
+        *,
+        duration_ms: int = 0,
         reason_code: str = "H_NONE",
     ) -> None:
         if stage not in STAGES or outcome not in OUTCOMES or seller not in self._sellers:
             raise ValueError("unbounded Profile H metric dimension")
         if not _SAFE_REASON.fullmatch(reason_code):
             raise ValueError("reason_code must be a stable H_* code, never request data")
-        if isinstance(duration_ms, bool) or not isinstance(duration_ms, int) or not 0 <= duration_ms <= 3_600_000:
+        if (
+            isinstance(duration_ms, bool)
+            or not isinstance(duration_ms, int)
+            or not 0 <= duration_ms <= 3_600_000
+        ):
             raise ValueError("duration_ms is outside the operational bound")
         with self._lock:
             self._events[(stage, outcome, seller, reason_code)] += 1
@@ -67,19 +84,34 @@ class RedactedMetrics:
     def snapshot(self) -> dict[str, Any]:
         with self._lock:
             events = [
-                {"stage": stage, "outcome": outcome, "seller": seller,
-                 "reasonCode": reason, "count": count}
+                {
+                    "stage": stage,
+                    "outcome": outcome,
+                    "seller": seller,
+                    "reasonCode": reason,
+                    "count": count,
+                }
                 for (stage, outcome, seller, reason), count in sorted(self._events.items())
             ]
             latency = []
             for (stage, outcome, seller), values in sorted(self._duration_ms.items()):
                 ordered = sorted(values)
-                latency.append({
-                    "stage": stage, "outcome": outcome, "seller": seller,
-                    "count": len(values), "sumMs": sum(values),
-                    "maxMs": ordered[-1], "p95Ms": ordered[min(len(ordered) - 1, (len(ordered) * 95) // 100)],
-                })
-        return {"schema": "mcp++/profile-h/redacted-metrics@1.0", "events": events, "latency": latency}
+                latency.append(
+                    {
+                        "stage": stage,
+                        "outcome": outcome,
+                        "seller": seller,
+                        "count": len(values),
+                        "sumMs": sum(values),
+                        "maxMs": ordered[-1],
+                        "p95Ms": ordered[min(len(ordered) - 1, (len(ordered) * 95) // 100)],
+                    }
+                )
+        return {
+            "schema": "mcp++/profile-h/redacted-metrics@1.0",
+            "events": events,
+            "latency": latency,
+        }
 
     def prometheus(self) -> str:
         lines = [
@@ -88,15 +120,21 @@ class RedactedMetrics:
         ]
         snapshot = self.snapshot()
         for item in snapshot["events"]:
-            labels = (f'stage="{item["stage"]}",outcome="{item["outcome"]}",'
-                      f'seller="{item["seller"]}",reason_code="{item["reasonCode"]}"')
+            labels = (
+                f'stage="{item["stage"]}",outcome="{item["outcome"]}",'
+                f'seller="{item["seller"]}",reason_code="{item["reasonCode"]}"'
+            )
             lines.append(f"mcplusplus_profile_h_events_total{{{labels}}} {item['count']}")
-        lines.extend([
-            "# HELP mcplusplus_profile_h_stage_latency_ms Profile H bounded stage latency summary.",
-            "# TYPE mcplusplus_profile_h_stage_latency_ms summary",
-        ])
+        lines.extend(
+            [
+                "# HELP mcplusplus_profile_h_stage_latency_ms Profile H bounded stage latency summary.",
+                "# TYPE mcplusplus_profile_h_stage_latency_ms summary",
+            ]
+        )
         for item in snapshot["latency"]:
-            labels = f'stage="{item["stage"]}",outcome="{item["outcome"]}",seller="{item["seller"]}"'
+            labels = (
+                f'stage="{item["stage"]}",outcome="{item["outcome"]}",seller="{item["seller"]}"'
+            )
             lines.append(f"mcplusplus_profile_h_stage_latency_ms_sum{{{labels}}} {item['sumMs']}")
             lines.append(f"mcplusplus_profile_h_stage_latency_ms_count{{{labels}}} {item['count']}")
         return "\n".join(lines) + "\n"
@@ -112,9 +150,16 @@ class KillSwitches:
             raise ValueError("invalid seller set")
         self._lock = threading.RLock()
         if not self.path.exists():
-            self._write({"schema": "mcp++/profile-h/kill-switches@1.0", "generation": 0,
-                         "globalPaused": False, "sellers": {item: False for item in sorted(self.sellers)},
-                         "reasonCode": "H_NONE", "updatedAt": 0})
+            self._write(
+                {
+                    "schema": "mcp++/profile-h/kill-switches@1.0",
+                    "generation": 0,
+                    "globalPaused": False,
+                    "sellers": {item: False for item in sorted(self.sellers)},
+                    "reasonCode": "H_NONE",
+                    "updatedAt": 0,
+                }
+            )
         self._read()
 
     def _read(self) -> dict[str, Any]:
@@ -138,7 +183,9 @@ class KillSwitches:
             if os.path.exists(name):
                 os.unlink(name)
 
-    def set_pause(self, *, paused: bool, seller: str | None = None, reason_code: str = "H_OPERATOR_PAUSE") -> dict[str, Any]:
+    def set_pause(
+        self, *, paused: bool, seller: str | None = None, reason_code: str = "H_OPERATOR_PAUSE"
+    ) -> dict[str, Any]:
         if not _SAFE_REASON.fullmatch(reason_code):
             raise ValueError("invalid public reason code")
         if seller is not None and seller not in self.sellers:
@@ -179,8 +226,12 @@ async def facilitator_health_probe(facilitator: Any, *, timeout_ms: int = 2_000)
         ready, status = False, "timeout"
     except Exception:
         ready, status = False, "unavailable"
-    return {"component": "profile-h-facilitator", "status": status, "ready": ready,
-            "latencyMs": max(0, (time.monotonic_ns() - started) // 1_000_000)}
+    return {
+        "component": "profile-h-facilitator",
+        "status": status,
+        "ready": ready,
+        "latencyMs": max(0, (time.monotonic_ns() - started) // 1_000_000),
+    }
 
 
 def dashboard_definition() -> dict[str, Any]:
@@ -191,10 +242,24 @@ def dashboard_definition() -> dict[str, Any]:
         "privacy": "aggregate-only-no-identifiers-or-protected-content",
         "variables": ["seller", "stage", "outcome", "reason_code"],
         "panels": [
-            {"title": "Lifecycle failures", "type": "timeseries", "metric": "mcplusplus_profile_h_events_total", "groupBy": ["stage", "seller", "reason_code"]},
-            {"title": "Stage latency", "type": "timeseries", "metric": "mcplusplus_profile_h_stage_latency_ms", "groupBy": ["stage", "seller"]},
+            {
+                "title": "Lifecycle failures",
+                "type": "timeseries",
+                "metric": "mcplusplus_profile_h_events_total",
+                "groupBy": ["stage", "seller", "reason_code"],
+            },
+            {
+                "title": "Stage latency",
+                "type": "timeseries",
+                "metric": "mcplusplus_profile_h_stage_latency_ms",
+                "groupBy": ["stage", "seller"],
+            },
             {"title": "Facilitator readiness", "type": "status", "probe": "profile-h-facilitator"},
-            {"title": "Ledger integrity and recovery queue", "type": "status", "probe": "profile-h-ledger"},
+            {
+                "title": "Ledger integrity and recovery queue",
+                "type": "status",
+                "probe": "profile-h-ledger",
+            },
             {"title": "Kill switches", "type": "status", "source": "kill-switches"},
         ],
     }
@@ -202,11 +267,41 @@ def dashboard_definition() -> dict[str, Any]:
 
 def alert_definitions() -> list[dict[str, Any]]:
     return [
-        {"name": "ProfileHFacilitatorUnavailable", "severity": "critical", "for": "2m", "condition": "facilitator_ready == 0", "action": "pause-new-spend-and-reconcile"},
-        {"name": "ProfileHLedgerIntegrity", "severity": "critical", "for": "0m", "condition": "ledger_integrity != 1", "action": "global-pause-preserve-ledger"},
-        {"name": "ProfileHSettlementFailures", "severity": "warning", "for": "5m", "condition": "settlement_failure_rate > 0.05", "action": "seller-pause-and-facilitator-check"},
-        {"name": "ProfileHRecoveryBacklog", "severity": "warning", "for": "15m", "condition": "pending_reconciliation > 0", "action": "run-reconciliation"},
-        {"name": "ProfileHExecutionFailures", "severity": "warning", "for": "5m", "condition": "execution_failure_rate > 0.05", "action": "pause-new-work-preserve-refunds"},
+        {
+            "name": "ProfileHFacilitatorUnavailable",
+            "severity": "critical",
+            "for": "2m",
+            "condition": "facilitator_ready == 0",
+            "action": "pause-new-spend-and-reconcile",
+        },
+        {
+            "name": "ProfileHLedgerIntegrity",
+            "severity": "critical",
+            "for": "0m",
+            "condition": "ledger_integrity != 1",
+            "action": "global-pause-preserve-ledger",
+        },
+        {
+            "name": "ProfileHSettlementFailures",
+            "severity": "warning",
+            "for": "5m",
+            "condition": "settlement_failure_rate > 0.05",
+            "action": "seller-pause-and-facilitator-check",
+        },
+        {
+            "name": "ProfileHRecoveryBacklog",
+            "severity": "warning",
+            "for": "15m",
+            "condition": "pending_reconciliation > 0",
+            "action": "run-reconciliation",
+        },
+        {
+            "name": "ProfileHExecutionFailures",
+            "severity": "warning",
+            "for": "5m",
+            "condition": "execution_failure_rate > 0.05",
+            "action": "pause-new-work-preserve-refunds",
+        },
     ]
 
 
@@ -257,7 +352,9 @@ class BackupManager:
             shutil.rmtree(staging, ignore_errors=True)
 
     @staticmethod
-    def restore(snapshot: str | Path, *, ledger_path: str | Path, artifact_root: str | Path) -> dict[str, Any]:
+    def restore(
+        snapshot: str | Path, *, ledger_path: str | Path, artifact_root: str | Path
+    ) -> dict[str, Any]:
         snapshot = Path(snapshot)
         manifest = json.loads((snapshot / "manifest.json").read_text(encoding="utf-8"))
         if manifest.get("schema") != "mcp++/profile-h/recovery-snapshot@1.0":
@@ -273,7 +370,9 @@ class BackupManager:
             raise FileExistsError("ledger restore target already exists")
         if target_artifacts.exists() and any(target_artifacts.iterdir()):
             raise FileExistsError("artifact restore target is not empty")
-        artifact_staging = target_artifacts.with_name(f".{target_artifacts.name}.restore-{os.getpid()}")
+        artifact_staging = target_artifacts.with_name(
+            f".{target_artifacts.name}.restore-{os.getpid()}"
+        )
         shutil.rmtree(artifact_staging, ignore_errors=True)
         try:
             artifact_staging.mkdir(parents=True)
@@ -282,8 +381,9 @@ class BackupManager:
                 if hashlib.sha256(raw).hexdigest() != digest or cid_for(json.loads(raw)) != cid:
                     raise OSError("artifact snapshot digest mismatch")
                 (artifact_staging / cid).write_bytes(raw)
-            DuckDBPaymentLedger.restore_backup(snapshot / "ledger.duckdb", target_ledger,
-                                                sha256=manifest["ledger"]["sha256"])
+            DuckDBPaymentLedger.restore_backup(
+                snapshot / "ledger.duckdb", target_ledger, sha256=manifest["ledger"]["sha256"]
+            )
             if target_artifacts.exists():
                 target_artifacts.rmdir()
             os.replace(artifact_staging, target_artifacts)
@@ -299,8 +399,17 @@ class BackupManager:
 def assert_redacted_surface(value: Any) -> None:
     """Defense-in-depth gate for generated dashboards, probes, and evidence."""
     encoded = canonical_json(value).lower()
-    forbidden = (b"privatekey", b"seedphrase", b"mnemonic", b"paymentsignature",
-                 b"walletaddress", b"transactionhash", b"requestarguments",
-                 b"protectedinput", b"protectedoutput", b"paymentpayload")
+    forbidden = (
+        b"privatekey",
+        b"seedphrase",
+        b"mnemonic",
+        b"paymentsignature",
+        b"walletaddress",
+        b"transactionhash",
+        b"requestarguments",
+        b"protectedinput",
+        b"protectedoutput",
+        b"paymentpayload",
+    )
     if any(token in encoded for token in forbidden):
         raise ValueError("operational surface contains a forbidden sensitive field")

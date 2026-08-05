@@ -9,7 +9,6 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GOAL_PACKET = "goal_packet/interoperability/swissknife/06921590135c"
 GOAL_PACKET_GOALS = {
@@ -21,9 +20,7 @@ GOAL_PACKET_GOALS = {
     "VAIOS-G705",
     "VAIOS-G706",
 }
-OBJECTIVE_GAP_REF = (
-    "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
-)
+OBJECTIVE_GAP_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md"
 VALIDATION_REPAIR_REF = "data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md"
 ATTEMPT_REPAIR_REF = (
     "data/virtual_ai_os/discovery/"

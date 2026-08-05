@@ -21,7 +21,12 @@ def test_ledger_is_durable_and_records_state_lineage(tmp_path):
     ledger.claim_execution("key", "execution-lease")
     ledger.mark_executed("key", "access-receipt")
     assert [item["to"] for item in ledger.history("key")] == [
-        "quoted", "verified", "settling", "settled", "executing", "executed"
+        "quoted",
+        "verified",
+        "settling",
+        "settled",
+        "executing",
+        "executed",
     ]
     ledger.close()
 
@@ -61,4 +66,3 @@ def test_invalid_transition_fails_closed_and_crash_states_are_reconcilable(tmp_p
     ledger.mark_failed("key", "H_RECONCILIATION_REQUIRED", reconciliation=True)
     assert ledger.get("key").lease_token is None
     assert ledger.diagnostics()["reconciliationRequired"] == 1
-

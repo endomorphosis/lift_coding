@@ -84,7 +84,7 @@ class TestUCANIdentityManager:
         """getPublicInfo must not expose private key."""
         assert "getPublicInfo()" in source
         # Verify it returns did + createdAt but not privateKey
-        info_match = re.search(r'getPublicInfo\(\)\s*\{[^}]+\}', source, re.DOTALL)
+        info_match = re.search(r"getPublicInfo\(\)\s*\{[^}]+\}", source, re.DOTALL)
         if info_match:
             block = info_match.group()
             assert "did:" in block
@@ -107,7 +107,7 @@ class TestHallucinateAppUCANIntegration:
 
     def test_initializes_at_app_ready(self, index_source):
         """UCAN must be initialized in the app.on('ready') handler."""
-        ready_section = index_source[index_source.find("app.on('ready'"):]
+        ready_section = index_source[index_source.find("app.on('ready'") :]
         assert "UCANIdentityManager" in ready_section
         assert "ucanManager.initialize()" in ready_section
 
@@ -147,7 +147,7 @@ class TestSwissKnifeAsMainInterface:
 
     def test_swissknife_server_starts_before_window(self, index_source):
         """Server must start before window is created."""
-        ready_section = index_source[index_source.find("app.on('ready'"):]
+        ready_section = index_source[index_source.find("app.on('ready'") :]
         server_pos = ready_section.find("startSwissKnifeServer")
         window_pos = ready_section.find("createWindow()")
         assert server_pos < window_pos, "Server must start before window"
@@ -166,7 +166,7 @@ class TestSwissKnifeDesktopUCAN:
 
     @pytest.fixture
     def source(self):
-        return read_file(SWISSKNIFE / "web" / "src" / "browser-main.ts")
+        return read_file(SWISSKNIFE / "web" / "legacy-archive" / "src" / "browser-main.ts")
 
     def test_initializes_ucan_on_desktop_init(self, source):
         assert "initializeUCANIdentity()" in source

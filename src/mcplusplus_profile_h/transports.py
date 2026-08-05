@@ -18,7 +18,9 @@ from .http import ProfileHHttpApp
 class ProfileHTransportAdapter:
     """Bind one seller authority to native HTTP and JSON-RPC listeners."""
 
-    def __init__(self, control_plane: ProfileHControlPlane, *, max_body_bytes: int = 1_048_576) -> None:
+    def __init__(
+        self, control_plane: ProfileHControlPlane, *, max_body_bytes: int = 1_048_576
+    ) -> None:
         self.control_plane = control_plane
         self.http = ProfileHHttpApp(control_plane, max_body_bytes=max_body_bytes)
 
@@ -40,15 +42,23 @@ class ProfileHTransportAdapter:
         try:
             result = await self.control_plane.dispatch(method, params)
         except ProfileHError as error:
-            return self._error(request_id, -32070, str(error), {
-                "code": error.code,
-                "retryable": error.retryable,
-            })
+            return self._error(
+                request_id,
+                -32070,
+                str(error),
+                {
+                    "code": error.code,
+                    "retryable": error.retryable,
+                },
+            )
         return {"jsonrpc": "2.0", "id": request_id, "result": result}
 
     @staticmethod
     def _error(
-        request_id: Any, code: int, message: str, data: Mapping[str, Any] | None = None,
+        request_id: Any,
+        code: int,
+        message: str,
+        data: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         error: dict[str, Any] = {"code": code, "message": message}
         if data:

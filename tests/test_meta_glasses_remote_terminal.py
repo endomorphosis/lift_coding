@@ -12,8 +12,7 @@ from handsfree.meta_glasses_remote_terminal import (
 
 def test_remote_terminal_contract_lists_audio_and_display_endpoints() -> None:
     endpoints = {
-        endpoint.endpoint_id: endpoint
-        for endpoint in list_meta_glasses_remote_terminal_endpoints()
+        endpoint.endpoint_id: endpoint for endpoint in list_meta_glasses_remote_terminal_endpoints()
     }
 
     assert set(endpoints) == {
@@ -63,6 +62,7 @@ def test_remote_terminal_audio_and_display_route_helpers_are_separate() -> None:
     assert [endpoint["endpoint_id"] for endpoint in display_route["endpoints"]] == [
         "meta_glasses_display_widget"
     ]
-    assert get_meta_glasses_remote_terminal_endpoint(
-        "meta_glasses_display_widget"
-    ).role == "display_widget_rendering"
+    assert (
+        get_meta_glasses_remote_terminal_endpoint("meta_glasses_display_widget").role
+        == "display_widget_rendering"
+    )

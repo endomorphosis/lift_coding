@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import Enum, StrEnum
+from enum import StrEnum
 from typing import Any
 
 
@@ -61,7 +61,7 @@ class CapabilityRuntimeSurface(StrEnum):
     HALLUCINATE_APP = "hallucinate_app"
 
 
-class CapabilityPlacementLayer(str, Enum):
+class CapabilityPlacementLayer(StrEnum):
     """Virtual runtime layer that owns an execution placement decision."""
 
     SEMANTIC_ROUTING = "semantic_routing"

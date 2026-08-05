@@ -34,7 +34,7 @@ notif1 = create_notification(
     user_id="user123",
     event_type="webhook.pr_opened",
     message="PR #123 opened in owner/repo",
-    metadata={"repo": "owner/repo", "pr_number": 123}
+    metadata={"repo": "owner/repo", "pr_number": 123},
 )
 # Returns: Notification object
 
@@ -44,7 +44,7 @@ notif2 = create_notification(
     user_id="user123",
     event_type="webhook.pr_opened",
     message="PR #123 opened in owner/repo",
-    metadata={"repo": "owner/repo", "pr_number": 123}
+    metadata={"repo": "owner/repo", "pr_number": 123},
 )
 # Returns: None (deduplicated)
 ```
@@ -60,7 +60,7 @@ notif = create_notification(
     event_type="webhook.pr_opened",
     message="PR #123 opened",
     metadata={"repo": "owner/repo", "pr_number": 123},
-    dedupe_window_seconds=600  # 10 minutes
+    dedupe_window_seconds=600,  # 10 minutes
 )
 ```
 
@@ -102,7 +102,7 @@ notif = create_notification(
     user_id="user123",
     event_type="webhook.pr_labeled",  # Priority 2 (low)
     message="PR labeled",
-    profile="workout"  # Requires priority 4+
+    profile="workout",  # Requires priority 4+
 )
 # Returns: None (throttled)
 
@@ -112,7 +112,7 @@ notif = create_notification(
     user_id="user123",
     event_type="webhook.pr_merged",  # Priority 5 (critical)
     message="PR merged",
-    profile="workout"  # Requires priority 4+
+    profile="workout",  # Requires priority 4+
 )
 # Returns: Notification object (allowed)
 ```
@@ -128,7 +128,7 @@ notif = create_notification(
     event_type="webhook.pr_labeled",  # Normally priority 2
     message="Important PR label",
     profile="workout",
-    priority=5  # Manual override to bypass throttling
+    priority=5,  # Manual override to bypass throttling
 )
 # Returns: Notification object (allowed due to override)
 ```

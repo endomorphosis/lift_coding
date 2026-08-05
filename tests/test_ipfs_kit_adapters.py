@@ -6,9 +6,7 @@ These tests verify the adapter correctly wraps the real ipfs_kit_py API:
 - ipfs_kit_py.backend_config.get_backend_statuses() for health checks
 """
 
-import json
 import sys
-from types import ModuleType
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -135,9 +133,7 @@ def test_module_adapter_package_dataset_stores_manifest():
     mock_kit_module.ipfs_kit = mock_kit_cls
 
     with patch("importlib.import_module", return_value=mock_kit_module):
-        result = adapter.package_dataset(
-            [{"cid": "bafy123"}], metadata={"name": "test"}
-        )
+        result = adapter.package_dataset([{"cid": "bafy123"}], metadata={"name": "test"})
         assert result == {"Hash": "QmManifestCID"}
         mock_kit_instance.ipfs_add.assert_called_once()
 
@@ -199,4 +195,3 @@ def test_kit_all_init_paths_fail_raises_unavailable():
     with patch("importlib.import_module", return_value=mock_kit_module):
         with pytest.raises(IPFSKitUnavailableError, match="failed to initialize"):
             adapter.cat("bafy123")
-

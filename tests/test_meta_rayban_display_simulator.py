@@ -247,9 +247,7 @@ def test_webapp_packager_builds_https_hosting_bundle(tmp_path) -> None:
     assert package_manifest["entrypoint"] == "index.html"
     assert package_manifest["deployment_url"] == deployment_url
     assert package_manifest["readiness_file"] == "readiness.json"
-    assert {file["path"] for file in package_manifest["files"]} == set(
-        readiness["static_files"]
-    )
+    assert {file["path"] for file in package_manifest["files"]} == set(readiness["static_files"])
 
     for relative_path in readiness["static_files"]:
         assert (output_dir / relative_path).is_file()

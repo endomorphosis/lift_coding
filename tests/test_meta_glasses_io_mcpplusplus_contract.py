@@ -4,14 +4,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 JEST_CONFORMANCE = (
-    ROOT
-    / "swissknife"
-    / "test"
-    / "mcp-plus-plus"
-    / "meta-glasses-io-conformance.test.ts"
+    ROOT / "swissknife" / "test" / "mcp-plus-plus" / "meta-glasses-io-conformance.test.ts"
 )
 DOC = ROOT / "docs" / "meta-glasses-io-conformance.md"
 
@@ -70,14 +65,8 @@ def test_conformance_doc_names_acceptance_invariants_and_validation_commands() -
     assert "MGW-371" in doc
     for term in REQUIRED_CONFORMANCE_TERMS:
         assert term in doc
-    assert (
-        "PYTHONPATH=./src pytest tests/test_meta_glasses_io_mcpplusplus_contract.py"
-        in doc
-    )
-    assert (
-        "cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-conformance.test.ts"
-        in doc
-    )
+    assert "PYTHONPATH=./src pytest tests/test_meta_glasses_io_mcpplusplus_contract.py" in doc
+    assert "cd swissknife && npx jest test/mcp-plus-plus/meta-glasses-io-conformance.test.ts" in doc
 
 
 def test_conformance_artifacts_are_scoped_to_test_and_doc_outputs() -> None:

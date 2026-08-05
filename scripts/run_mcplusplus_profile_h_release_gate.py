@@ -20,10 +20,14 @@ from mcplusplus_profile_h.release_gate import (  # noqa: E402
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=("testnet", "mainnet"), default="testnet")
-    parser.add_argument("--output-dir", type=Path,
-                        default=ROOT / "swissknife/test-results/mcpplusplus-profile-h-x402/release")
-    parser.add_argument("--state-dir", type=Path,
-                        help="retain non-secret ledger state for gate diagnosis")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=ROOT / "swissknife/test-results/mcpplusplus-profile-h-x402/release",
+    )
+    parser.add_argument(
+        "--state-dir", type=Path, help="retain non-secret ledger state for gate diagnosis"
+    )
     args = parser.parse_args()
     if args.state_dir is None:
         with tempfile.TemporaryDirectory(prefix="xph-113-state-") as directory:

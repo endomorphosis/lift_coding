@@ -5,18 +5,18 @@
   "authority": "implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md",
   "primaryRepository": "swissknife",
   "primaryRoot": "swissknife",
-    "providerScopes": [
-        "external/ipfs_accelerate",
-        "external/ipfs_kit",
-        "external/ipfs_datasets",
-        "Mcp-Plus-Plus"
-    ],
-    "runtimeContractComponents": [
-        "model-server",
-        "orchestrator",
-        "scheduler",
-        "agent-supervisor"
-    ],
+  "providerScopes": [
+    "external/ipfs_accelerate",
+    "external/ipfs_kit",
+    "external/ipfs_datasets",
+    "Mcp-Plus-Plus"
+  ],
+  "runtimeContractComponents": [
+    "model-server",
+    "orchestrator",
+    "scheduler",
+    "agent-supervisor"
+  ],
   "workingTreeOverlay": {
     "mode": "tracked_plus_allowlisted_untracked_source",
     "allowDirtyAnalysis": true,
@@ -134,25 +134,29 @@
     ],
     "generatedSuffixes": [
       ".map",
-      ".d.ts"
+      ".d.ts",
+      ".ast.json"
     ],
     "generatedPathParts": [
       "dist",
       "build",
       "coverage",
       "cleanup-archive",
-      "emergency-archive"
+      "emergency-archive",
+      "ast_exports",
+      "full_asts",
+      "benchmark-results"
     ]
   },
-    "silentExclusionsAllowed": false,
-    "trackedCoverageRequired": 1.0,
-    "analyzerHealthPolicy": {
-        "semanticCoverageRequiredForContractPaths": 1.0,
-        "maximumParserFailureRatio": 0.01,
-        "perLanguageCanaryRequired": true,
-        "regexOnlyJsTsCountsAsSemanticAst": false,
-        "unhealthyBlocksNoDriftAndExhaustion": true
-    },
+  "silentExclusionsAllowed": false,
+  "trackedCoverageRequired": 1.0,
+  "analyzerHealthPolicy": {
+    "semanticCoverageRequiredForContractPaths": 1.0,
+    "maximumParserFailureRatio": 0.01,
+    "perLanguageCanaryRequired": true,
+    "regexOnlyJsTsCountsAsSemanticAst": false,
+    "unhealthyBlocksNoDriftAndExhaustion": true
+  },
   "contentIdentity": {
     "pathDigest": "sha2-256",
     "blobDigest": "sha2-256",

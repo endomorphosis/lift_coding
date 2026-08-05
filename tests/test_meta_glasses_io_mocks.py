@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SWISSKNIFE_FIXTURE = (
     ROOT / "swissknife" / "test" / "fixtures" / "meta-glasses-io" / "hardware-free-expanded-io.json"
@@ -106,7 +105,12 @@ def test_swissknife_meta_glasses_io_fixture_has_bindings_and_control_plane_envel
         assert f"{capability}.binding" in binding_ids
 
     assert {"capability.ready", "display.lifecycle", "route.recovered"} <= envelope_types
-    assert {"camera.photo_capture", "camera.video_capture", "display.output", "microphone.input"} <= envelope_capabilities
+    assert {
+        "camera.photo_capture",
+        "camera.video_capture",
+        "display.output",
+        "microphone.input",
+    } <= envelope_capabilities
     for envelope in fixture["control_plane_envelopes"]:
         assert envelope["correlation_id"]
         assert envelope["receipt"]["receipt_kind"].startswith("mcp++/")
@@ -169,7 +173,10 @@ def test_source_matrix_fixture_mirrors_public_dat_and_webapps_shapes_without_har
     assert "pinch" in web_app_tokens
     assert "swipe_forward" in web_app_tokens
     assert any(entry["id"] == "webapp-local-storage-quota" for entry in matrix["storage_limits"])
-    assert failure_modes["release_channel_missing"]["readiness"] == "package_or_release_channel_unavailable"
+    assert (
+        failure_modes["release_channel_missing"]["readiness"]
+        == "package_or_release_channel_unavailable"
+    )
     assert failure_modes["firmware_update_required"]["readiness"] == "firmware_update_required"
     assert failure_modes["dat_app_update_required"]["readiness"] == "dat_app_update_required"
     assert failure_modes["route_loss"]["recovery"] == "reroute_bluetooth_profile"

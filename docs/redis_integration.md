@@ -60,16 +60,11 @@ from handsfree.commands.session_context import RedisSessionContext
 redis_client = get_redis_client()
 
 # Create Redis-backed manager
-pending_mgr = RedisPendingActionManager(
-    redis_client=redis_client,
-    default_expiry_seconds=60
-)
+pending_mgr = RedisPendingActionManager(redis_client=redis_client, default_expiry_seconds=60)
 
 # Create action (automatically uses fallback if redis_client is None)
 action = pending_mgr.create(
-    intent_name="pr.merge",
-    entities={"pr_number": 123},
-    summary="Merge PR 123"
+    intent_name="pr.merge", entities={"pr_number": 123}, summary="Merge PR 123"
 )
 
 # Confirm action (atomic, exactly-once)

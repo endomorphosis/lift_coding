@@ -13,10 +13,9 @@ import argparse
 import json
 import re
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = REPO_ROOT / "data/swissknife_virtual_desktop/all_tools_supervisor_queue.json"
@@ -25,8 +24,7 @@ PRIMARY_TASKBOARD = (
     "37-swissknife-virtual-desktop-ipfs-mcp-orb-meta-glasses-plan-2026-07-07.md"
 )
 PROFILE_G_TASKBOARD = (
-    "implementation_plan/docs/"
-    "38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md"
+    "implementation_plan/docs/38-mcpplusplus-risk-consensus-scheduling-p2p-plan-2026-07-12.md"
 )
 FIRST_TASK = 27
 LAST_TASK = 116
@@ -183,13 +181,15 @@ def build_queue(previous: dict[str, Any] | None = None) -> dict[str, Any]:
     # remains in provenance so a stale "waiting" or premature "ready" label is
     # observable without making the resumable queue replay it.
     completed = {task_id for task_id, task in tasks.items() if task["status"] == "completed"}
-    for task_id, task in tasks.items():
+    for _, task in tasks.items():
         if task["status"] in {"completed", "active", "failed", "stale"}:
             continue
         task["status"] = (
             "ready"
-            if all(dependency in completed or int(dependency.removeprefix("SVD-")) < FIRST_TASK
-                   for dependency in task["depends_on"])
+            if all(
+                dependency in completed or int(dependency.removeprefix("SVD-")) < FIRST_TASK
+                for dependency in task["depends_on"]
+            )
             else "waiting"
         )
 
@@ -215,7 +215,7 @@ def build_queue(previous: dict[str, Any] | None = None) -> dict[str, Any]:
         None,
     )
 
-    generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    generated_at = datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
     return {
         "schema": "swissknife.all_tools_supervisor_queue.v1",
         "generated_at": generated_at,

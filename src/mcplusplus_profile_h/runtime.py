@@ -112,20 +112,38 @@ class SellerRuntime:
         capability = decision.capability
         assert capability is not None and capability.capability_cid is not None
 
-        if self.kill_switches is not None and not self.kill_switches.allows_new_work(self.seller_name):
+        if self.kill_switches is not None and not self.kill_switches.allows_new_work(
+            self.seller_name
+        ):
             self._observe("access", "paused", "H_OPERATOR_PAUSE")
-            paused = PaymentDecision(Decision.UNAVAILABLE, decision.operation, "H_FACILITATOR_UNAVAILABLE", capability)
+            paused = PaymentDecision(
+                Decision.UNAVAILABLE, decision.operation, "H_FACILITATOR_UNAVAILABLE", capability
+            )
             return SellerResult(paused)
 
         existing = self.ledger.get(context.idempotency_key)
         if existing and existing.request_cid != context.request_cid:
             raise ProfileHError(REQUEST_MISMATCH, "idempotency key is bound to another request")
         if existing and existing.state == "executed":
-            paid = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_SATISFIED", capability, evidence_cid=existing.settlement_cid)
+            paid = PaymentDecision(
+                Decision.PAID,
+                decision.operation,
+                "H_PAYMENT_SATISFIED",
+                capability,
+                evidence_cid=existing.settlement_cid,
+            )
             return SellerResult(paid, receipt_cid=existing.result_cid, replayed=True)
         if existing and existing.state == "settled":
-            paid = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_SATISFIED", capability, evidence_cid=existing.settlement_cid)
-            return await self._execute_settled(paid, context, effect, existing.settlement_cid or commitment({}))
+            paid = PaymentDecision(
+                Decision.PAID,
+                decision.operation,
+                "H_PAYMENT_SATISFIED",
+                capability,
+                evidence_cid=existing.settlement_cid,
+            )
+            return await self._execute_settled(
+                paid, context, effect, existing.settlement_cid or commitment({})
+            )
         if decision.decision == Decision.PAID and existing is None:
             # Reusable/domain entitlements are already validated by paid_lookup.
             # The domain entitlement store owns quota consumption fencing.
@@ -138,14 +156,27 @@ class SellerRuntime:
             # quote payable and is observable as a false request mismatch.
             quote = self.artifacts.get(existing.quote_cid)
             if quote is None:
-                raise ProfileHError("H_RECONCILIATION_REQUIRED", "fenced quote artifact is missing", retryable=True)
+                raise ProfileHError(
+                    "H_RECONCILIATION_REQUIRED", "fenced quote artifact is missing", retryable=True
+                )
             required = {
                 "x402Version": 2,
                 "error": PAYMENT_REQUIRED,
                 "accepts": [item.wire() for item in decision.requirements],
-                "extensions": {"mcp++/profile-h": {"quoteCid": existing.quote_cid, "requestCid": context.request_cid}},
+                "extensions": {
+                    "mcp++/profile-h": {
+                        "quoteCid": existing.quote_cid,
+                        "requestCid": context.request_cid,
+                    }
+                },
             }
-            return SellerResult(decision, quote=quote, payment_required=required, receipt_cid=existing.quote_cid, replayed=True)
+            return SellerResult(
+                decision,
+                quote=quote,
+                payment_required=required,
+                receipt_cid=existing.quote_cid,
+                replayed=True,
+            )
 
         if payment is None:
             quote, quote_cid = self._issue_quote(decision, context)
@@ -160,10 +191,14 @@ class SellerRuntime:
                 "x402Version": 2,
                 "error": PAYMENT_REQUIRED,
                 "accepts": [item.wire() for item in decision.requirements],
-                "extensions": {"mcp++/profile-h": {"quoteCid": quote_cid, "requestCid": context.request_cid}},
+                "extensions": {
+                    "mcp++/profile-h": {"quoteCid": quote_cid, "requestCid": context.request_cid}
+                },
             }
             self._observe("quote", "success")
-            return SellerResult(decision, quote=quote, payment_required=required, receipt_cid=quote_cid)
+            return SellerResult(
+                decision, quote=quote, payment_required=required, receipt_cid=quote_cid
+            )
 
         self._validate_payment_context(existing, context, payment, len(capability.requirements))
         requirement = capability.requirements[payment.requirement_index]
@@ -177,8 +212,12 @@ class SellerRuntime:
             started = time.monotonic_ns()
             verification = await self.facilitator.verify(payment.payload, requirement)
             if not verification.valid:
-                self._observe("verify", "failure", verification.reason_code or VERIFICATION_FAILED, started)
-                self.ledger.mark_failed(context.idempotency_key, verification.reason_code or VERIFICATION_FAILED)
+                self._observe(
+                    "verify", "failure", verification.reason_code or VERIFICATION_FAILED, started
+                )
+                self.ledger.mark_failed(
+                    context.idempotency_key, verification.reason_code or VERIFICATION_FAILED
+                )
                 raise ProfileHError(PAYMENT_DECLINED, "payment verification declined")
             self._observe("verify", "success", "H_PAYMENT_VERIFIED", started)
             verification_artifact = {
@@ -216,17 +255,32 @@ class SellerRuntime:
         except Exception:
             # Outcome is unknown after an I/O failure; reconciliation must query
             # by the non-secret payment commitment before any retry settles.
-            self.ledger.mark_failed(context.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True)
+            self.ledger.mark_failed(
+                context.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True
+            )
             self._observe("settlement", "failure", "H_RECONCILIATION_REQUIRED", settlement_started)
             raise
         if not settlement.success:
-            self._observe("settlement", "failure", settlement.reason_code or SETTLEMENT_FAILED, settlement_started)
-            self.ledger.mark_failed(context.idempotency_key, settlement.reason_code or SETTLEMENT_FAILED)
+            self._observe(
+                "settlement",
+                "failure",
+                settlement.reason_code or SETTLEMENT_FAILED,
+                settlement_started,
+            )
+            self.ledger.mark_failed(
+                context.idempotency_key, settlement.reason_code or SETTLEMENT_FAILED
+            )
             raise ProfileHError(SETTLEMENT_FAILED, "payment settlement failed", retryable=True)
         self._observe("settlement", "success", "H_PAYMENT_SETTLED", settlement_started)
         settlement_cid = self._persist_settlement(verification_cid, requirement, settlement)
         self.ledger.mark_settled(context.idempotency_key, settlement_cid)
-        paid = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_SATISFIED", capability, evidence_cid=settlement_cid)
+        paid = PaymentDecision(
+            Decision.PAID,
+            decision.operation,
+            "H_PAYMENT_SATISFIED",
+            capability,
+            evidence_cid=settlement_cid,
+        )
         return await self._execute_settled(paid, context, effect, settlement_cid, settlement)
 
     def dispatch_sync(self, *args: Any, **kwargs: Any) -> SellerResult:
@@ -240,7 +294,12 @@ class SellerRuntime:
     async def quote(self, operation: Operation | str, context: RequestContext) -> SellerResult:
         """Issue or recover a request-bound quote without invoking an effect."""
         decision = self.policy.evaluate(operation, context)
-        if decision.decision in (Decision.DENIED, Decision.UNAVAILABLE, Decision.FREE, Decision.PAID):
+        if decision.decision in (
+            Decision.DENIED,
+            Decision.UNAVAILABLE,
+            Decision.FREE,
+            Decision.PAID,
+        ):
             return SellerResult(decision, receipt_cid=decision.evidence_cid)
         capability = decision.capability
         assert capability is not None and capability.capability_cid is not None
@@ -249,23 +308,43 @@ class SellerRuntime:
             raise ProfileHError(REQUEST_MISMATCH, "idempotency key is bound to another request")
         if existing:
             if not existing.quote_cid:
-                raise ProfileHError("H_RECONCILIATION_REQUIRED", "payment record has no quote", retryable=True)
+                raise ProfileHError(
+                    "H_RECONCILIATION_REQUIRED", "payment record has no quote", retryable=True
+                )
             quote = self.artifacts.get(existing.quote_cid)
             if quote is None:
-                raise ProfileHError("H_RECONCILIATION_REQUIRED", "fenced quote artifact is missing", retryable=True)
+                raise ProfileHError(
+                    "H_RECONCILIATION_REQUIRED", "fenced quote artifact is missing", retryable=True
+                )
             required = self._payment_required(decision, context, existing.quote_cid)
-            return SellerResult(decision, quote=quote, payment_required=required,
-                                receipt_cid=existing.quote_cid, replayed=True)
+            return SellerResult(
+                decision,
+                quote=quote,
+                payment_required=required,
+                receipt_cid=existing.quote_cid,
+                replayed=True,
+            )
         quote, quote_cid = self._issue_quote(decision, context)
-        self.ledger.create_quote(context.idempotency_key, context.request_cid,
-                                 decision.operation.key, capability.capability_cid, quote_cid)
+        self.ledger.create_quote(
+            context.idempotency_key,
+            context.request_cid,
+            decision.operation.key,
+            capability.capability_cid,
+            quote_cid,
+        )
         self._observe("quote", "success")
-        return SellerResult(decision, quote=quote,
-                            payment_required=self._payment_required(decision, context, quote_cid),
-                            receipt_cid=quote_cid)
+        return SellerResult(
+            decision,
+            quote=quote,
+            payment_required=self._payment_required(decision, context, quote_cid),
+            receipt_cid=quote_cid,
+        )
 
     async def verify_only(
-        self, operation: Operation | str, context: RequestContext, payment: PaymentContext,
+        self,
+        operation: Operation | str,
+        context: RequestContext,
+        payment: PaymentContext,
     ) -> SellerResult:
         """Durably verify a payment. This method never settles or executes."""
         decision = self.policy.evaluate(operation, context)
@@ -275,7 +354,10 @@ class SellerRuntime:
         if capability is None or capability.capability_cid is None:
             return SellerResult(decision)
         entry = self._validate_payment_context(
-            self.ledger.get(context.idempotency_key), context, payment, len(capability.requirements),
+            self.ledger.get(context.idempotency_key),
+            context,
+            payment,
+            len(capability.requirements),
         )
         requirement = capability.requirements[payment.requirement_index]
         self._validate_selected_requirement(payment.payload, requirement)
@@ -285,16 +367,29 @@ class SellerRuntime:
         if not entry.payment_commitment:
             entry = self.ledger.bind_payment(context.idempotency_key, payment_commitment)
         if entry.state in {"verified", "settling", "settled", "executing", "executed"}:
-            paid = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_VERIFIED", capability,
-                                   evidence_cid=entry.verification_cid)
+            paid = PaymentDecision(
+                Decision.PAID,
+                decision.operation,
+                "H_PAYMENT_VERIFIED",
+                capability,
+                evidence_cid=entry.verification_cid,
+            )
             return SellerResult(paid, receipt_cid=entry.verification_cid, replayed=True)
         if entry.state != "quoted":
-            raise ProfileHError("H_RECONCILIATION_REQUIRED", f"payment is fenced in state {entry.state}", retryable=True)
+            raise ProfileHError(
+                "H_RECONCILIATION_REQUIRED",
+                f"payment is fenced in state {entry.state}",
+                retryable=True,
+            )
         started = time.monotonic_ns()
         verification = await self.facilitator.verify(payment.payload, requirement)
         if not verification.valid:
-            self._observe("verify", "failure", verification.reason_code or VERIFICATION_FAILED, started)
-            self.ledger.mark_failed(context.idempotency_key, verification.reason_code or VERIFICATION_FAILED)
+            self._observe(
+                "verify", "failure", verification.reason_code or VERIFICATION_FAILED, started
+            )
+            self.ledger.mark_failed(
+                context.idempotency_key, verification.reason_code or VERIFICATION_FAILED
+            )
             raise ProfileHError(PAYMENT_DECLINED, "payment verification declined")
         artifact = {
             "schema": "mcp++/profile-h/payment-verification@1.0",
@@ -308,12 +403,20 @@ class SellerRuntime:
         verification_cid = self.artifacts.put(artifact)
         self.ledger.mark_verified(context.idempotency_key, verification_cid)
         self._observe("verify", "success", "H_PAYMENT_VERIFIED", started)
-        verified = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_VERIFIED", capability,
-                                   evidence_cid=verification_cid)
+        verified = PaymentDecision(
+            Decision.PAID,
+            decision.operation,
+            "H_PAYMENT_VERIFIED",
+            capability,
+            evidence_cid=verification_cid,
+        )
         return SellerResult(verified, value=artifact, receipt_cid=verification_cid)
 
     async def settle_only(
-        self, operation: Operation | str, context: RequestContext, payment: PaymentContext,
+        self,
+        operation: Operation | str,
+        context: RequestContext,
+        payment: PaymentContext,
     ) -> SellerResult:
         """Durably settle a verified payment without reserving or executing work."""
         verified = await self.verify_only(operation, context, payment)
@@ -328,12 +431,25 @@ class SellerRuntime:
         entry = self.ledger.get(context.idempotency_key)
         assert entry is not None
         if entry.state in {"settled", "executing", "executed"} and entry.settlement_cid:
-            paid = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_SATISFIED", capability,
-                                   evidence_cid=entry.settlement_cid)
-            return SellerResult(paid, value=self.artifacts.get(entry.settlement_cid),
-                                receipt_cid=entry.settlement_cid, replayed=True)
+            paid = PaymentDecision(
+                Decision.PAID,
+                decision.operation,
+                "H_PAYMENT_SATISFIED",
+                capability,
+                evidence_cid=entry.settlement_cid,
+            )
+            return SellerResult(
+                paid,
+                value=self.artifacts.get(entry.settlement_cid),
+                receipt_cid=entry.settlement_cid,
+                replayed=True,
+            )
         if entry.state != "verified":
-            raise ProfileHError("H_RECONCILIATION_REQUIRED", f"payment is fenced in state {entry.state}", retryable=True)
+            raise ProfileHError(
+                "H_RECONCILIATION_REQUIRED",
+                f"payment is fenced in state {entry.state}",
+                retryable=True,
+            )
         requirement = capability.requirements[payment.requirement_index]
         lease = secrets.token_urlsafe(24)
         self.ledger.begin_settlement(context.idempotency_key, lease)
@@ -341,20 +457,37 @@ class SellerRuntime:
         try:
             settlement = await self.facilitator.settle(payment.payload, requirement)
         except Exception:
-            self.ledger.mark_failed(context.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True)
+            self.ledger.mark_failed(
+                context.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True
+            )
             self._observe("settlement", "failure", "H_RECONCILIATION_REQUIRED", started)
             raise
         if not settlement.success:
-            self.ledger.mark_failed(context.idempotency_key, settlement.reason_code or SETTLEMENT_FAILED)
-            self._observe("settlement", "failure", settlement.reason_code or SETTLEMENT_FAILED, started)
+            self.ledger.mark_failed(
+                context.idempotency_key, settlement.reason_code or SETTLEMENT_FAILED
+            )
+            self._observe(
+                "settlement", "failure", settlement.reason_code or SETTLEMENT_FAILED, started
+            )
             raise ProfileHError(SETTLEMENT_FAILED, "payment settlement failed", retryable=True)
-        settlement_cid = self._persist_settlement(entry.verification_cid or commitment({}), requirement, settlement)
+        settlement_cid = self._persist_settlement(
+            entry.verification_cid or commitment({}), requirement, settlement
+        )
         self.ledger.mark_settled(context.idempotency_key, settlement_cid)
         self._observe("settlement", "success", "H_PAYMENT_SETTLED", started)
-        paid = PaymentDecision(Decision.PAID, decision.operation, "H_PAYMENT_SATISFIED", capability,
-                               evidence_cid=settlement_cid)
-        return SellerResult(paid, value=self.artifacts.get(settlement_cid),
-                            settlement_response=dict(settlement.response), receipt_cid=settlement_cid)
+        paid = PaymentDecision(
+            Decision.PAID,
+            decision.operation,
+            "H_PAYMENT_SATISFIED",
+            capability,
+            evidence_cid=settlement_cid,
+        )
+        return SellerResult(
+            paid,
+            value=self.artifacts.get(settlement_cid),
+            settlement_response=dict(settlement.response),
+            receipt_cid=settlement_cid,
+        )
 
     async def reconcile(self, *, stale_before_ms: int | None = None) -> list[dict[str, Any]]:
         """Reconcile uncertain settlement boundaries without re-settling."""
@@ -364,8 +497,12 @@ class SellerRuntime:
                 # Whether the domain effect happened is unknowable here. Keep it
                 # fenced for operator/domain-specific idempotency reconciliation.
                 if entry.state != "reconciliation_required":
-                    self.ledger.mark_failed(entry.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True)
-                outcomes.append({"idempotencyKey": entry.idempotency_key, "state": "reconciliation_required"})
+                    self.ledger.mark_failed(
+                        entry.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True
+                    )
+                outcomes.append(
+                    {"idempotencyKey": entry.idempotency_key, "state": "reconciliation_required"}
+                )
                 continue
             if entry.state in {"settled", "verified"}:
                 outcomes.append({"idempotencyKey": entry.idempotency_key, "state": entry.state})
@@ -377,14 +514,24 @@ class SellerRuntime:
             status = await self.facilitator.lookup(entry.payment_commitment)
             if status and status.success:
                 requirement = self._requirement_for(entry)
-                cid = self._persist_settlement(entry.verification_cid or commitment({}), requirement, status)
+                cid = self._persist_settlement(
+                    entry.verification_cid or commitment({}), requirement, status
+                )
                 self.ledger.reset_for_reconciliation(entry.idempotency_key, "settled", cid)
-                outcomes.append({"idempotencyKey": entry.idempotency_key, "state": "settled", "settlementCid": cid})
+                outcomes.append(
+                    {
+                        "idempotencyKey": entry.idempotency_key,
+                        "state": "settled",
+                        "settlementCid": cid,
+                    }
+                )
             elif status is not None:
                 self.ledger.reset_for_reconciliation(entry.idempotency_key, "failed")
                 outcomes.append({"idempotencyKey": entry.idempotency_key, "state": "failed"})
             else:
-                outcomes.append({"idempotencyKey": entry.idempotency_key, "state": "reconciliation_required"})
+                outcomes.append(
+                    {"idempotencyKey": entry.idempotency_key, "state": "reconciliation_required"}
+                )
         return outcomes
 
     async def diagnostics(self) -> dict[str, Any]:
@@ -401,7 +548,9 @@ class SellerRuntime:
             "killSwitches": self.kill_switches.status() if self.kill_switches else None,
         }
 
-    def _issue_quote(self, decision: PaymentDecision, context: RequestContext) -> tuple[dict[str, Any], str]:
+    def _issue_quote(
+        self, decision: PaymentDecision, context: RequestContext
+    ) -> tuple[dict[str, Any], str]:
         capability = decision.capability
         assert capability is not None
         now = self.clock_ms()
@@ -421,15 +570,25 @@ class SellerRuntime:
         return quote, self.artifacts.put(quote)
 
     @staticmethod
-    def _payment_required(decision: PaymentDecision, context: RequestContext, quote_cid: str) -> dict[str, Any]:
+    def _payment_required(
+        decision: PaymentDecision, context: RequestContext, quote_cid: str
+    ) -> dict[str, Any]:
         return {
             "x402Version": 2,
             "error": PAYMENT_REQUIRED,
             "accepts": [item.wire() for item in decision.requirements],
-            "extensions": {"mcp++/profile-h": {"quoteCid": quote_cid, "requestCid": context.request_cid}},
+            "extensions": {
+                "mcp++/profile-h": {"quoteCid": quote_cid, "requestCid": context.request_cid}
+            },
         }
 
-    def _validate_payment_context(self, entry: LedgerEntry | None, context: RequestContext, payment: PaymentContext, count: int) -> LedgerEntry:
+    def _validate_payment_context(
+        self,
+        entry: LedgerEntry | None,
+        context: RequestContext,
+        payment: PaymentContext,
+        count: int,
+    ) -> LedgerEntry:
         if entry is None:
             raise ProfileHError(PAYMENT_REQUIRED, "a server-issued quote is required")
         if payment.quote_cid != entry.quote_cid or payment.request_cid != context.request_cid:
@@ -444,7 +603,9 @@ class SellerRuntime:
         return entry
 
     @staticmethod
-    def _validate_selected_requirement(payload: Mapping[str, Any], expected: PaymentRequirement) -> None:
+    def _validate_selected_requirement(
+        payload: Mapping[str, Any], expected: PaymentRequirement
+    ) -> None:
         if payload.get("x402Version") != 2:
             raise ProfileHError(VERIFICATION_FAILED, "only x402 v2 payment payloads are accepted")
         accepted = payload.get("accepted")
@@ -453,7 +614,9 @@ class SellerRuntime:
         if not isinstance(payload.get("payload"), Mapping):
             raise ProfileHError(VERIFICATION_FAILED, "signed payment payload is missing")
 
-    def _persist_settlement(self, verification_cid: str, requirement: PaymentRequirement, result: SettlementResult) -> str:
+    def _persist_settlement(
+        self, verification_cid: str, requirement: PaymentRequirement, result: SettlementResult
+    ) -> str:
         artifact = {
             "schema": "mcp++/profile-h/settlement-receipt@1.0",
             "verificationCid": verification_cid,
@@ -486,7 +649,9 @@ class SellerRuntime:
             # or policy work can drift below the final effect boundary.
             value = await self._call(effect)
         except Exception:
-            self.ledger.mark_failed(context.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True)
+            self.ledger.mark_failed(
+                context.idempotency_key, "H_RECONCILIATION_REQUIRED", reconciliation=True
+            )
             self._observe("execution", "failure", "H_RECONCILIATION_REQUIRED", execution_started)
             raise
         access = {
@@ -503,7 +668,9 @@ class SellerRuntime:
         self.ledger.mark_executed(context.idempotency_key, access_cid)
         self._observe("execution", "success", "H_PAYMENT_SATISFIED", execution_started)
         response = self._settlement_response(settlement) if settlement else None
-        return SellerResult(decision, value=value, settlement_response=response, receipt_cid=access_cid)
+        return SellerResult(
+            decision, value=value, settlement_response=response, receipt_cid=access_cid
+        )
 
     @staticmethod
     def _settlement_response(result: SettlementResult) -> dict[str, Any]:
@@ -525,11 +692,21 @@ class SellerRuntime:
         value = callback()
         return await value if inspect.isawaitable(value) else value
 
-    def _observe(self, stage: str, outcome: str, reason_code: str = "H_NONE", started_ns: int | None = None) -> None:
+    def _observe(
+        self, stage: str, outcome: str, reason_code: str = "H_NONE", started_ns: int | None = None
+    ) -> None:
         if self.metrics is not None:
-            duration = 0 if started_ns is None else max(0, (time.monotonic_ns() - started_ns) // 1_000_000)
-            public_code = reason_code if reason_code.startswith("H_") and reason_code.replace("_", "").isalnum() else "H_OTHER"
-            self.metrics.observe(stage, outcome, self.seller_name, duration_ms=duration, reason_code=public_code[:63])
+            duration = (
+                0 if started_ns is None else max(0, (time.monotonic_ns() - started_ns) // 1_000_000)
+            )
+            public_code = (
+                reason_code
+                if reason_code.startswith("H_") and reason_code.replace("_", "").isalnum()
+                else "H_OTHER"
+            )
+            self.metrics.observe(
+                stage, outcome, self.seller_name, duration_ms=duration, reason_code=public_code[:63]
+            )
 
 
 def encode_x402_header(value: Mapping[str, Any]) -> str:
@@ -540,10 +717,14 @@ def http_response(result: SellerResult) -> tuple[int, dict[str, str], Any]:
     """Map a transport-neutral result to normative x402 v2 HTTP fields."""
     if result.decision.decision == Decision.PAYMENT_REQUIRED:
         assert result.payment_required is not None
-        return 402, {"PAYMENT-REQUIRED": encode_x402_header(result.payment_required)}, {
-            "error": result.decision.reason_code,
-            "quote": result.quote,
-        }
+        return (
+            402,
+            {"PAYMENT-REQUIRED": encode_x402_header(result.payment_required)},
+            {
+                "error": result.decision.reason_code,
+                "quote": result.quote,
+            },
+        )
     if result.decision.decision in (Decision.DENIED, Decision.UNAVAILABLE):
         status = 403 if result.decision.decision == Decision.DENIED else 503
         return status, {}, {"error": result.decision.reason_code}
@@ -556,7 +737,17 @@ def http_response(result: SellerResult) -> tuple[int, dict[str, str], Any]:
 def libp2p_response(result: SellerResult) -> dict[str, Any]:
     """Map a result to Profile E's typed (non-upstream) payment envelope."""
     if result.decision.decision == Decision.PAYMENT_REQUIRED:
-        return {"error": {"code": PAYMENT_REQUIRED, "payment_required": result.payment_required, "quote": result.quote}}
+        return {
+            "error": {
+                "code": PAYMENT_REQUIRED,
+                "payment_required": result.payment_required,
+                "quote": result.quote,
+            }
+        }
     if result.decision.decision in (Decision.DENIED, Decision.UNAVAILABLE):
         return {"error": {"code": result.decision.reason_code}}
-    return {"result": result.value, "payment_response": result.settlement_response, "receipt_cid": result.receipt_cid}
+    return {
+        "result": result.value,
+        "payment_response": result.settlement_response,
+        "receipt_cid": result.receipt_cid,
+    }

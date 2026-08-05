@@ -3,6 +3,7 @@
 kit, accelerate, datasets must emit byte-identical CIDs (raw/sha2-256/base32,
 bafkrei…) for the same canonical artifact bytes so receipts/events interoperate.
 """
+
 import importlib.util
 import sys
 from pathlib import Path
@@ -29,7 +30,10 @@ BODY = b'{"a":1,"b":2,"tool":"pin_rm"}'
 def test_kit_accel_kubo_cid_identical():
     sys.path.insert(0, str(ROOT / "external" / "ipfs_kit"))
     from ipfs_kit_py.mcp_server.mcplusplus import artifacts as kit
-    accel = _file_mod("_acc_kubo", "ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/kubo_cid.py")
+
+    accel = _file_mod(
+        "_acc_kubo", "ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/kubo_cid.py"
+    )
     cid = kit.compute_artifact_cid({"a": 1, "b": 2, "tool": "pin_rm"})
     assert cid == accel.cid_for_bytes(BODY)
     assert cid.startswith("bafkrei") and len(cid) == 59
@@ -41,5 +45,7 @@ def test_datasets_kubo_cid_identical():
         cid = ds.cid_for_obj({"a": 1, "b": 2, "tool": "pin_rm"})
     except Exception:
         pytest.skip("multiformats not installed")
-    accel = _file_mod("_acc_kubo2", "ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/kubo_cid.py")
+    accel = _file_mod(
+        "_acc_kubo2", "ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/kubo_cid.py"
+    )
     assert cid == accel.cid_for_bytes(BODY)

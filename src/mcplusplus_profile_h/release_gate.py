@@ -55,7 +55,9 @@ _SECRET_PATTERNS = {
     "private-key-pem": re.compile(rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     "aws-access-key": re.compile(rb"\b(?:AKIA|ASIA)[A-Z0-9]{16}\b"),
     "github-token": re.compile(rb"\b(?:ghp|gho|ghu|ghs|github_pat)_[A-Za-z0-9_]{20,}\b"),
-    "wallet-private-key": re.compile(rb"(?i)\b(?:private[_-]?key|seed[_-]?phrase|mnemonic)\s*[:=]\s*['\"](?:0x)?[a-f0-9 ]{32,}['\"]"),
+    "wallet-private-key": re.compile(
+        rb"(?i)\b(?:private[_-]?key|seed[_-]?phrase|mnemonic)\s*[:=]\s*['\"](?:0x)?[a-f0-9 ]{32,}['\"]"
+    ),
     "extended-private-key": re.compile(rb"\b[xt]prv[1-9A-HJ-NP-Za-km-z]{80,}\b"),
 }
 
@@ -83,32 +85,90 @@ def _percentile(values: list[float], percentile: float) -> float:
 def security_review() -> GateResult:
     """Return the checked threat/control matrix for the release surface."""
     controls = [
-        ("substitution", "request-bound quote and exact requirement equality", "runtime.py:_validate_payment_context"),
-        ("replay-and-double-settlement", "unique payment commitment and atomic state transitions", "ledger.py:bind_payment"),
-        ("double-execution", "durable settlement then execution claim", "runtime.py:_execute_settled"),
-        ("authorization-bypass", "domain authorization precedes price disclosure and settlement", "catalog.py:PaymentPolicyEngine.evaluate"),
-        ("wallet-exfiltration", "seller accepts a payload only; no signer or raw-key API", "runtime.py:PaymentContext"),
-        ("prompt-induced-spend", "policy, maximums, and kill switches are outside model context", "operations.py:KillSwitches"),
-        ("facilitator-failure", "HTTPS allowlist boundary and uncertain settlement reconciliation", "interop.py:TestnetFacilitator"),
-        ("settle-then-crash", "durable states retain settled lineage and fence retry", "operations_gate.py:run_operations_gate"),
-        ("secret-or-receipt-leak", "recursive public-artifact rejection and bounded metrics", "canonical.py:assert_public"),
-        ("transport-downgrade", "x402 v2 objects and semantic parity across both transports", "interop.py:run_interop"),
-        ("supply-chain", "exact dependency lock, SBOM, source digest, and secret scan", "release_gate.py:supply_chain_review"),
-        ("ssrf", "facilitator URL is operator configured and HTTPS-only", "interop.py:TestnetFacilitator.__init__"),
+        (
+            "substitution",
+            "request-bound quote and exact requirement equality",
+            "runtime.py:_validate_payment_context",
+        ),
+        (
+            "replay-and-double-settlement",
+            "unique payment commitment and atomic state transitions",
+            "ledger.py:bind_payment",
+        ),
+        (
+            "double-execution",
+            "durable settlement then execution claim",
+            "runtime.py:_execute_settled",
+        ),
+        (
+            "authorization-bypass",
+            "domain authorization precedes price disclosure and settlement",
+            "catalog.py:PaymentPolicyEngine.evaluate",
+        ),
+        (
+            "wallet-exfiltration",
+            "seller accepts a payload only; no signer or raw-key API",
+            "runtime.py:PaymentContext",
+        ),
+        (
+            "prompt-induced-spend",
+            "policy, maximums, and kill switches are outside model context",
+            "operations.py:KillSwitches",
+        ),
+        (
+            "facilitator-failure",
+            "HTTPS allowlist boundary and uncertain settlement reconciliation",
+            "interop.py:TestnetFacilitator",
+        ),
+        (
+            "settle-then-crash",
+            "durable states retain settled lineage and fence retry",
+            "operations_gate.py:run_operations_gate",
+        ),
+        (
+            "secret-or-receipt-leak",
+            "recursive public-artifact rejection and bounded metrics",
+            "canonical.py:assert_public",
+        ),
+        (
+            "transport-downgrade",
+            "x402 v2 objects and semantic parity across both transports",
+            "interop.py:run_interop",
+        ),
+        (
+            "supply-chain",
+            "exact dependency lock, SBOM, source digest, and secret scan",
+            "release_gate.py:supply_chain_review",
+        ),
+        (
+            "ssrf",
+            "facilitator URL is operator configured and HTTPS-only",
+            "interop.py:TestnetFacilitator.__init__",
+        ),
     ]
-    rows = [{"threat": threat, "control": control, "implementation": implementation,
-             "status": "pass"} for threat, control, implementation in controls]
-    return GateResult("security-review", "pass", {
-        "reviewType": "targeted-financial-and-private-key-code-review",
-        "scope": ["shared Profile H runtime", "three seller adapters", "SwissKnife payment boundary"],
-        "controls": rows,
-        "openCriticalFindings": 0,
-        "openHighFindings": 0,
-        "residualRisk": [
-            "testnet assets have no represented monetary value",
-            "mainnet requires an independent human security approval and capped wallet configuration",
-        ],
-    })
+    rows = [
+        {"threat": threat, "control": control, "implementation": implementation, "status": "pass"}
+        for threat, control, implementation in controls
+    ]
+    return GateResult(
+        "security-review",
+        "pass",
+        {
+            "reviewType": "targeted-financial-and-private-key-code-review",
+            "scope": [
+                "shared Profile H runtime",
+                "three seller adapters",
+                "SwissKnife payment boundary",
+            ],
+            "controls": rows,
+            "openCriticalFindings": 0,
+            "openHighFindings": 0,
+            "residualRisk": [
+                "testnet assets have no represented monetary value",
+                "mainnet requires an independent human security approval and capped wallet configuration",
+            ],
+        },
+    )
 
 
 def _release_source_files(root: Path) -> list[Path]:
@@ -133,15 +193,27 @@ def secret_scan(root: Path) -> GateResult:
         for rule, pattern in _SECRET_PATTERNS.items():
             # Report location and rule only: never copy a potential secret into evidence.
             for match in pattern.finditer(content):
-                findings.append({"path": path.relative_to(root).as_posix(),
-                                 "line": content[:match.start()].count(b"\n") + 1, "rule": rule})
+                findings.append(
+                    {
+                        "path": path.relative_to(root).as_posix(),
+                        "line": content[: match.start()].count(b"\n") + 1,
+                        "rule": rule,
+                    }
+                )
     status = "pass" if not findings else "fail"
-    return GateResult("secret-scan", status, {
-        "scanner": "profile-h-secret-rules@1",
-        "filesScanned": len(files), "bytesScanned": total_bytes,
-        "rules": sorted(_SECRET_PATTERNS), "findingCount": len(findings), "findings": findings,
-        "environmentRead": False,
-    })
+    return GateResult(
+        "secret-scan",
+        status,
+        {
+            "scanner": "profile-h-secret-rules@1",
+            "filesScanned": len(files),
+            "bytesScanned": total_bytes,
+            "rules": sorted(_SECRET_PATTERNS),
+            "findingCount": len(findings),
+            "findings": findings,
+            "environmentRead": False,
+        },
+    )
 
 
 def _locked_dependencies(root: Path) -> tuple[list[dict[str, Any]], list[str]]:
@@ -161,9 +233,15 @@ def _locked_dependencies(root: Path) -> tuple[list[dict[str, Any]], list[str]]:
             installed = importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:
             installed = None
-        components.append({"type": "library", "name": name, "version": version,
-                           "purl": f"pkg:pypi/{name.lower().replace('_', '-')}@{version}",
-                           "installedVersion": installed})
+        components.append(
+            {
+                "type": "library",
+                "name": name,
+                "version": version,
+                "purl": f"pkg:pypi/{name.lower().replace('_', '-')}@{version}",
+                "installedVersion": installed,
+            }
+        )
     return components, errors
 
 
@@ -171,38 +249,64 @@ def supply_chain_review(root: Path) -> tuple[GateResult, dict[str, Any]]:
     lock = root / "requirements-dev.txt"
     components, errors = _locked_dependencies(root)
     source_files = _release_source_files(root)
-    source_manifest = [{"path": path.relative_to(root).as_posix(), "sha256": _sha256(path)}
-                       for path in source_files]
+    source_manifest = [
+        {"path": path.relative_to(root).as_posix(), "sha256": _sha256(path)}
+        for path in source_files
+    ]
     sbom = {
-        "bomFormat": "CycloneDX", "specVersion": "1.5", "version": 1,
-        "metadata": {"component": {"type": "application", "name": "mcpplusplus-profile-h",
-                                     "version": "1.0"},
-                     "properties": [{"name": "profile-h:lock-sha256", "value": _sha256(lock)}]},
-        "components": [{key: value for key, value in row.items() if key != "installedVersion"}
-                       for row in components],
+        "bomFormat": "CycloneDX",
+        "specVersion": "1.5",
+        "version": 1,
+        "metadata": {
+            "component": {"type": "application", "name": "mcpplusplus-profile-h", "version": "1.0"},
+            "properties": [{"name": "profile-h:lock-sha256", "value": _sha256(lock)}],
+        },
+        "components": [
+            {key: value for key, value in row.items() if key != "installedVersion"}
+            for row in components
+        ],
     }
     required_runtime = {"duckdb": "1.4.3"}
-    installed_mismatch = [row["name"] for row in components
-                          if row["name"].lower() in required_runtime
-                          and row["installedVersion"] != required_runtime[row["name"].lower()]]
+    installed_mismatch = [
+        row["name"]
+        for row in components
+        if row["name"].lower() in required_runtime
+        and row["installedVersion"] != required_runtime[row["name"].lower()]
+    ]
     errors += [f"runtime dependency version mismatch: {name}" for name in installed_mismatch]
     status = "pass" if not errors else "fail"
-    result = GateResult("dependency-and-sbom-review", status, {
-        "lockfile": "requirements-dev.txt", "lockSha256": _sha256(lock),
-        "allDirectDependenciesExactlyPinned": not any("not exactly pinned" in item for item in errors),
-        "runtimeVersionVerified": not installed_mismatch,
-        "componentCount": len(components), "sourceFileCount": len(source_manifest),
-        "sourceManifestCid": cid_for(source_manifest),
-        "advisoryReview": {"method": "release-policy-denylist-and-pinned-version-review",
-                           "critical": 0, "high": 0, "unresolved": []},
-        "licenseReview": {"policy": "dependency metadata reviewed before mainnet approval",
-                          "blockingFindings": []},
-        "errors": errors,
-    })
+    result = GateResult(
+        "dependency-and-sbom-review",
+        status,
+        {
+            "lockfile": "requirements-dev.txt",
+            "lockSha256": _sha256(lock),
+            "allDirectDependenciesExactlyPinned": not any(
+                "not exactly pinned" in item for item in errors
+            ),
+            "runtimeVersionVerified": not installed_mismatch,
+            "componentCount": len(components),
+            "sourceFileCount": len(source_manifest),
+            "sourceManifestCid": cid_for(source_manifest),
+            "advisoryReview": {
+                "method": "release-policy-denylist-and-pinned-version-review",
+                "critical": 0,
+                "high": 0,
+                "unresolved": [],
+            },
+            "licenseReview": {
+                "policy": "dependency metadata reviewed before mainnet approval",
+                "blockingFindings": [],
+            },
+            "errors": errors,
+        },
+    )
     return result, sbom
 
 
-def property_and_concurrency_tests(state_dir: Path, *, seed: int = 113, examples: int = 256) -> GateResult:
+def property_and_concurrency_tests(
+    state_dir: Path, *, seed: int = 113, examples: int = 256
+) -> GateResult:
     rng = random.Random(seed)
     canonical_amounts = 0
     malformed_rejected = 0
@@ -261,7 +365,9 @@ def property_and_concurrency_tests(state_dir: Path, *, seed: int = 113, examples
     replay_conflicts = 0
     for index in range(32):
         other = f"replay-{index}"
-        ledger.create_quote(other, f"request-{index}", "tool:paid", "capability-cid", f"quote-{index}")
+        ledger.create_quote(
+            other, f"request-{index}", "tool:paid", "capability-cid", f"quote-{index}"
+        )
         try:
             ledger.bind_payment(other, "payment-commitment")
         except ProfileHError:
@@ -280,12 +386,20 @@ def property_and_concurrency_tests(state_dir: Path, *, seed: int = 113, examples
         "singleExecutionTransition": sum(row["to"] == "executed" for row in history) == 1,
         "ledgerIntegrity": health["ready"],
     }
-    return GateResult("property-and-concurrency", "pass" if all(checks.values()) else "fail", {
-        "seed": seed, "propertyExamples": examples, "concurrentWorkers": 64,
-        "checks": checks, "settlementCount": 1, "executionCount": 1,
-        "unauthorizedSpendCount": unauthorized_spend,
-        "unauthorizedAccessCount": unauthorized_access,
-    })
+    return GateResult(
+        "property-and-concurrency",
+        "pass" if all(checks.values()) else "fail",
+        {
+            "seed": seed,
+            "propertyExamples": examples,
+            "concurrentWorkers": 64,
+            "checks": checks,
+            "settlementCount": 1,
+            "executionCount": 1,
+            "unauthorizedSpendCount": unauthorized_spend,
+            "unauthorizedAccessCount": unauthorized_access,
+        },
+    )
 
 
 def performance_test(state_dir: Path, *, samples: int = 120) -> GateResult:
@@ -310,23 +424,35 @@ def performance_test(state_dir: Path, *, samples: int = 120) -> GateResult:
     elapsed = time.perf_counter() - started_all
     ledger.close()
     measured = {
-        "quoteLookupP50Ms": _percentile(quote_ms, .5), "quoteLookupP95Ms": _percentile(quote_ms, .95),
-        "paymentLifecycleP50Ms": _percentile(lifecycle_ms, .5),
-        "paymentLifecycleP95Ms": _percentile(lifecycle_ms, .95),
-        "throughputOperationsPerSecond": round(samples / max(elapsed, .000001), 2),
+        "quoteLookupP50Ms": _percentile(quote_ms, 0.5),
+        "quoteLookupP95Ms": _percentile(quote_ms, 0.95),
+        "paymentLifecycleP50Ms": _percentile(lifecycle_ms, 0.5),
+        "paymentLifecycleP95Ms": _percentile(lifecycle_ms, 0.95),
+        "throughputOperationsPerSecond": round(samples / max(elapsed, 0.000001), 2),
         "sampleCount": samples,
     }
-    slos = {"quoteLookupP95MsMax": 50.0, "paymentLifecycleP95MsMax": 250.0,
-            "throughputOperationsPerSecondMin": 10.0}
+    slos = {
+        "quoteLookupP95MsMax": 50.0,
+        "paymentLifecycleP95MsMax": 250.0,
+        "throughputOperationsPerSecondMin": 10.0,
+    }
     checks = {
         "quoteLatency": measured["quoteLookupP95Ms"] <= slos["quoteLookupP95MsMax"],
         "lifecycleLatency": measured["paymentLifecycleP95Ms"] <= slos["paymentLifecycleP95MsMax"],
-        "throughput": measured["throughputOperationsPerSecond"] >= slos["throughputOperationsPerSecondMin"],
+        "throughput": measured["throughputOperationsPerSecond"]
+        >= slos["throughputOperationsPerSecondMin"],
     }
-    return GateResult("latency-and-throughput", "pass" if all(checks.values()) else "fail", {
-        "clock": "monotonic", "workload": "durable quote-to-executed ledger lifecycle",
-        "measured": measured, "slos": slos, "checks": checks,
-    })
+    return GateResult(
+        "latency-and-throughput",
+        "pass" if all(checks.values()) else "fail",
+        {
+            "clock": "monotonic",
+            "workload": "durable quote-to-executed ledger lifecycle",
+            "measured": measured,
+            "slos": slos,
+            "checks": checks,
+        },
+    )
 
 
 def soak_test(state_dir: Path, *, hours: int = SOAK_HOURS) -> GateResult:
@@ -344,8 +470,13 @@ def soak_test(state_dir: Path, *, hours: int = SOAK_HOURS) -> GateResult:
         for seller in SELLERS:
             for transport in TRANSPORTS:
                 key = f"soak:{hour}:{seller}:{transport}"
-                ledger.create_quote(key, cid_for({"hour": hour, "seller": seller, "transport": transport}),
-                                    "tool:representative", f"capability:{seller}", f"quote:{key}")
+                ledger.create_quote(
+                    key,
+                    cid_for({"hour": hour, "seller": seller, "transport": transport}),
+                    "tool:representative",
+                    f"capability:{seller}",
+                    f"quote:{key}",
+                )
                 ledger.bind_payment(key, f"payment:{key}")
                 ledger.mark_verified(key, f"verification:{key}")
                 ledger.begin_settlement(key, f"settlement-lease:{key}")
@@ -367,8 +498,14 @@ def soak_test(state_dir: Path, *, hours: int = SOAK_HOURS) -> GateResult:
                 history = ledger.history(key)
                 duplicates += max(0, sum(row["to"] == "settled" for row in history) - 2)
                 duplicates += max(0, sum(row["to"] == "executed" for row in history) - 1)
-        interval_summaries.append({"logicalHour": hour, "transactions": 6,
-                                   "failuresInjected": hour_failures, "recovered": hour_recovered})
+        interval_summaries.append(
+            {
+                "logicalHour": hour,
+                "transactions": 6,
+                "failuresInjected": hour_failures,
+                "recovered": hour_recovered,
+            }
+        )
     pending = len(ledger.pending_reconciliation())
     health = ledger.health_probe()
     ledger.close()
@@ -381,18 +518,31 @@ def soak_test(state_dir: Path, *, hours: int = SOAK_HOURS) -> GateResult:
         "noDuplicateSettlementOrExecution": duplicates == 0,
         "noLedgerDivergence": divergences == 0 and health["ready"],
     }
-    return GateResult("multi-day-testnet-soak", "pass" if all(checks.values()) else "fail", {
-        "method": "accelerated-deterministic-testnet-state-machine-soak",
-        "logicalDurationHours": hours, "logicalDurationDays": round(hours / 24, 2),
-        "network": "eip155:84532", "assetClass": "generated-testnet-only",
-        "sellers": list(SELLERS), "transports": list(TRANSPORTS),
-        "transactions": transactions, "settlements": settlements, "executions": executions,
-        "failuresInjected": injected, "failuresReconciled": reconciled,
-        "pendingReconciliation": pending, "ledgerDivergenceCount": divergences,
-        "duplicateSettlementOrExecutionCount": duplicates,
-        "unauthorizedSpendCount": unauthorized_spend, "unauthorizedAccessCount": unauthorized_access,
-        "checks": checks, "intervals": interval_summaries,
-    })
+    return GateResult(
+        "multi-day-testnet-soak",
+        "pass" if all(checks.values()) else "fail",
+        {
+            "method": "accelerated-deterministic-testnet-state-machine-soak",
+            "logicalDurationHours": hours,
+            "logicalDurationDays": round(hours / 24, 2),
+            "network": "eip155:84532",
+            "assetClass": "generated-testnet-only",
+            "sellers": list(SELLERS),
+            "transports": list(TRANSPORTS),
+            "transactions": transactions,
+            "settlements": settlements,
+            "executions": executions,
+            "failuresInjected": injected,
+            "failuresReconciled": reconciled,
+            "pendingReconciliation": pending,
+            "ledgerDivergenceCount": divergences,
+            "duplicateSettlementOrExecutionCount": duplicates,
+            "unauthorizedSpendCount": unauthorized_spend,
+            "unauthorizedAccessCount": unauthorized_access,
+            "checks": checks,
+            "intervals": interval_summaries,
+        },
+    )
 
 
 def build_release_decision(mode: str, gates: Iterable[GateResult]) -> dict[str, Any]:
@@ -404,21 +554,30 @@ def build_release_decision(mode: str, gates: Iterable[GateResult]) -> dict[str, 
         blockers.append("release-mode-is-not-testnet")
     decision = "GO" if not blockers else "NO_GO"
     report = {
-        "schema": SCHEMA, "task": "XPH-113", "profile": "mcp++/x402-payments",
-        "profileVersion": "1.0", "x402Version": 2, "mode": mode,
-        "decision": decision, "testnetReady": decision == "GO",
-        "mainnetEnabled": False, "mainnetReady": False,
+        "schema": SCHEMA,
+        "task": "XPH-113",
+        "profile": "mcp++/x402-payments",
+        "profileVersion": "1.0",
+        "x402Version": 2,
+        "mode": mode,
+        "decision": decision,
+        "testnetReady": decision == "GO",
+        "mainnetEnabled": False,
+        "mainnetReady": False,
         "mainnetPolicy": "disabled-by-default; separate security approval and capped funding required",
-        "gates": rows, "noGoConditions": list(NO_GO_CONDITIONS),
-        "observedNoGoConditions": blockers, "blockerCount": len(blockers),
+        "gates": rows,
+        "noGoConditions": list(NO_GO_CONDITIONS),
+        "observedNoGoConditions": blockers,
+        "blockerCount": len(blockers),
         "releaseRule": "Every required gate must pass; any observed NO_GO condition fails closed.",
     }
     report["evidenceCid"] = cid_for(report)
     return report
 
 
-def generate_release_packet(root: Path | None = None, state_dir: Path | None = None,
-                            *, mode: str = "testnet") -> tuple[dict[str, Any], dict[str, Any]]:
+def generate_release_packet(
+    root: Path | None = None, state_dir: Path | None = None, *, mode: str = "testnet"
+) -> tuple[dict[str, Any], dict[str, Any]]:
     """Run every gate and return the decision plus its standalone CycloneDX SBOM."""
     root = root or Path(__file__).resolve().parents[2]
     temporary: tempfile.TemporaryDirectory[str] | None = None
@@ -428,16 +587,23 @@ def generate_release_packet(root: Path | None = None, state_dir: Path | None = N
     state_dir.mkdir(parents=True, exist_ok=True)
     try:
         supply_chain, sbom = supply_chain_review(root)
-        gates = [security_review(), supply_chain, secret_scan(root),
-                 property_and_concurrency_tests(state_dir), performance_test(state_dir), soak_test(state_dir)]
+        gates = [
+            security_review(),
+            supply_chain,
+            secret_scan(root),
+            property_and_concurrency_tests(state_dir),
+            performance_test(state_dir),
+            soak_test(state_dir),
+        ]
         return build_release_decision(mode, gates), sbom
     finally:
         if temporary is not None:
             temporary.cleanup()
 
 
-def run_release_gate(state_dir: Path | None = None, *, mode: str = "testnet",
-                     root: Path | None = None) -> dict[str, Any]:
+def run_release_gate(
+    state_dir: Path | None = None, *, mode: str = "testnet", root: Path | None = None
+) -> dict[str, Any]:
     """Compatibility entry point matching the other Profile H gate modules."""
     report, _sbom = generate_release_packet(root, state_dir, mode=mode)
     return report

@@ -69,9 +69,7 @@ def test_discover_ipfs_accelerate_duckdb_contract_finds_schema_surface() -> None
         set(contract.benchmark_schema_functions)
     )
     assert set(REQUIRED_CHECK_SCHEMA_FUNCTIONS).issubset(set(contract.check_schema_functions))
-    assert contract.time_series_schema_path.endswith(
-        "data/duckdb/db_schema/time_series_schema.sql"
-    )
+    assert contract.time_series_schema_path.endswith("data/duckdb/db_schema/time_series_schema.sql")
     assert contract.benchmark_schema_script_path.endswith(
         "data/duckdb/scripts/create_benchmark_schema.py"
     )
@@ -93,8 +91,12 @@ def test_discover_meta_wearables_dat_android_contract_validates_descriptor() -> 
     assert contract.consumer == "external/meta-wearables-dat-android"
     assert set(REQUIRED_DAT_ANDROID_METHODS).issubset(set(contract.dat_display_methods))
     assert contract.table_by_method == DAT_ANDROID_TABLE_BY_METHOD
-    assert any(path.endswith("samples/DisplayAccess/README.md") for path in contract.descriptor_paths)
-    assert any(path.endswith(".cursor/rules/display-access.mdc") for path in contract.descriptor_paths)
+    assert any(
+        path.endswith("samples/DisplayAccess/README.md") for path in contract.descriptor_paths
+    )
+    assert any(
+        path.endswith(".cursor/rules/display-access.mdc") for path in contract.descriptor_paths
+    )
     assert contract.schema_refs == {
         "time_series_schema": (
             "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql"
@@ -150,9 +152,7 @@ def test_build_meta_wearables_dat_android_ipfs_accelerate_handoff_is_determinist
     assert set(REQUIRED_TIME_SERIES_TABLES).issubset(set(first.time_series_tables))
     assert set(REQUIRED_DAT_ANDROID_METHODS).issubset(set(first.dat_display_methods))
     assert first.table_by_method == DAT_ANDROID_TABLE_BY_METHOD
-    assert set(REQUIRED_BENCHMARK_SCHEMA_FUNCTIONS).issubset(
-        set(first.benchmark_schema_functions)
-    )
+    assert set(REQUIRED_BENCHMARK_SCHEMA_FUNCTIONS).issubset(set(first.benchmark_schema_functions))
     assert set(REQUIRED_CHECK_SCHEMA_FUNCTIONS).issubset(set(first.check_schema_functions))
 
 

@@ -127,8 +127,12 @@ def discover_ipfs_accelerate_duckdb_contract(
         raise SwissKnifeIPFSAccelerateInteropError(f"ipfs_accelerate root not found: {root_path}")
 
     time_series_schema_path = root_path / "data" / "duckdb" / "db_schema" / "time_series_schema.sql"
-    benchmark_schema_script_path = root_path / "data" / "duckdb" / "scripts" / "create_benchmark_schema.py"
-    check_database_schema_path = root_path / "data" / "duckdb" / "utils" / "check_database_schema.py"
+    benchmark_schema_script_path = (
+        root_path / "data" / "duckdb" / "scripts" / "create_benchmark_schema.py"
+    )
+    check_database_schema_path = (
+        root_path / "data" / "duckdb" / "utils" / "check_database_schema.py"
+    )
     check_db_schema_path = root_path / "data" / "duckdb" / "utils" / "check_db_schema.py"
 
     missing = [
@@ -166,7 +170,13 @@ def discover_ipfs_accelerate_duckdb_contract(
 
     benchmark_schema_source = benchmark_schema_script_path.read_text(encoding="utf-8")
     benchmark_schema_functions = tuple(
-        sorted(set(re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", benchmark_schema_source, flags=re.MULTILINE)))
+        sorted(
+            set(
+                re.findall(
+                    r"^def\s+([A-Za-z0-9_]+)\s*\(", benchmark_schema_source, flags=re.MULTILINE
+                )
+            )
+        )
     )
     required_benchmark_schema_functions = {
         "create_performance_tables",
@@ -187,9 +197,15 @@ def discover_ipfs_accelerate_duckdb_contract(
     check_schema_functions = tuple(
         sorted(
             set(
-                re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", check_database_schema_source, flags=re.MULTILINE)
+                re.findall(
+                    r"^def\s+([A-Za-z0-9_]+)\s*\(", check_database_schema_source, flags=re.MULTILINE
+                )
             )
-            | set(re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", check_db_schema_source, flags=re.MULTILINE))
+            | set(
+                re.findall(
+                    r"^def\s+([A-Za-z0-9_]+)\s*\(", check_db_schema_source, flags=re.MULTILINE
+                )
+            )
         )
     )
     required_check_functions = {"check_schema", "get_all_tables", "get_performance_results"}

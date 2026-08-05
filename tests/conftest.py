@@ -63,8 +63,12 @@ def _path_has_files(path: Path) -> bool:
 # transient failures, time-box each attempt, and never let a bootstrap
 # failure abort collection.
 _SUBMODULE_BOOTSTRAP_ATTEMPTS = int(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_ATTEMPTS", "3"))
-_SUBMODULE_BOOTSTRAP_RETRY_SECONDS = float(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_RETRY_SECONDS", "0.5"))
-_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS = float(os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS", "120"))
+_SUBMODULE_BOOTSTRAP_RETRY_SECONDS = float(
+    os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_RETRY_SECONDS", "0.5")
+)
+_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS = float(
+    os.environ.get("HANDSFREE_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS", "120")
+)
 
 
 @contextlib.contextmanager
@@ -119,14 +123,56 @@ def _clone_or_copy_submodule(source: Path, target: Path) -> None:
         shutil.copytree(source, target, symlinks=True)
 
 
+def _git_submodule_update(name: str, target: Path) -> bool:
+    """Populate a first-level submodule via git when no local clone exists."""
+    repo_root = Path(__file__).resolve().parents[1]
+    rel = f"external/{name}" if not name.startswith("external/") else name
+    if name in {"swissknife", "Mcp-Plus-Plus", "hallucinate_app"}:
+        rel = name
+    try:
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repo_root),
+                "submodule",
+                "update",
+                "--init",
+                "--depth",
+                "1",
+                rel,
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=_SUBMODULE_BOOTSTRAP_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        return False
+    return _path_has_files(target)
+
+
 def _ensure_external_submodule(name: str) -> None:
     repo_root = Path(__file__).resolve().parents[1]
-    target = repo_root / "external" / name
+    if name in {"swissknife", "Mcp-Plus-Plus", "hallucinate_app"}:
+        target = repo_root / name
+    else:
+        target = repo_root / "external" / name
     if _path_has_files(target):
         return
 
-    source = next((candidate for candidate in _external_submodule_sources(name) if _path_has_files(candidate)), None)
+    source = next(
+        (
+            candidate
+            for candidate in _external_submodule_sources(name)
+            if _path_has_files(candidate)
+        ),
+        None,
+    )
     if source is None:
+        # CI and clean checkouts: try official git submodule init (non-recursive).
+        if _git_submodule_update(name, target):
+            return
         return
 
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -162,8 +208,13 @@ def _ensure_external_submodule(name: str) -> None:
 
 for _submodule_name in (
     "ipfs_kit",
+    "ipfs_accelerate",
+    "ipfs_datasets",
     "meta-wearables-dat-android",
     "meta-wearables-dat-ios",
+    "swissknife",
+    "Mcp-Plus-Plus",
+    "hallucinate_app",
 ):
     try:
         _ensure_external_submodule(_submodule_name)

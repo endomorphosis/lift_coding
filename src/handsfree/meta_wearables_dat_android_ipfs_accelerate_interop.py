@@ -20,7 +20,9 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-INTERFACE_CONTRACT = "interface contract external/meta-wearables-dat-android external/ipfs_accelerate"
+INTERFACE_CONTRACT = (
+    "interface contract external/meta-wearables-dat-android external/ipfs_accelerate"
+)
 TASK_ID = "MGW-576"
 GOAL_ID = "VAIOS-G709"
 GOAL_PACKET = "goal_packet/interoperability/external/6595cbbfadb9"
@@ -144,8 +146,12 @@ def discover_ipfs_accelerate_duckdb_contract(root: str | Path) -> IPFSAccelerate
         )
 
     time_series_schema_path = root_path / "data" / "duckdb" / "db_schema" / "time_series_schema.sql"
-    benchmark_schema_script_path = root_path / "data" / "duckdb" / "scripts" / "create_benchmark_schema.py"
-    check_database_schema_path = root_path / "data" / "duckdb" / "utils" / "check_database_schema.py"
+    benchmark_schema_script_path = (
+        root_path / "data" / "duckdb" / "scripts" / "create_benchmark_schema.py"
+    )
+    check_database_schema_path = (
+        root_path / "data" / "duckdb" / "utils" / "check_database_schema.py"
+    )
     check_db_schema_path = root_path / "data" / "duckdb" / "utils" / "check_db_schema.py"
 
     missing = [
@@ -183,7 +189,13 @@ def discover_ipfs_accelerate_duckdb_contract(root: str | Path) -> IPFSAccelerate
 
     benchmark_schema_source = benchmark_schema_script_path.read_text(encoding="utf-8")
     benchmark_schema_functions = tuple(
-        sorted(set(re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", benchmark_schema_source, flags=re.MULTILINE)))
+        sorted(
+            set(
+                re.findall(
+                    r"^def\s+([A-Za-z0-9_]+)\s*\(", benchmark_schema_source, flags=re.MULTILINE
+                )
+            )
+        )
     )
     _ensure_subset(
         "ipfs_accelerate create_benchmark_schema.py",
@@ -196,9 +208,15 @@ def discover_ipfs_accelerate_duckdb_contract(root: str | Path) -> IPFSAccelerate
     check_schema_functions = tuple(
         sorted(
             set(
-                re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", check_database_schema_source, flags=re.MULTILINE)
+                re.findall(
+                    r"^def\s+([A-Za-z0-9_]+)\s*\(", check_database_schema_source, flags=re.MULTILINE
+                )
             )
-            | set(re.findall(r"^def\s+([A-Za-z0-9_]+)\s*\(", check_db_schema_source, flags=re.MULTILINE))
+            | set(
+                re.findall(
+                    r"^def\s+([A-Za-z0-9_]+)\s*\(", check_db_schema_source, flags=re.MULTILINE
+                )
+            )
         )
     )
     _ensure_subset(

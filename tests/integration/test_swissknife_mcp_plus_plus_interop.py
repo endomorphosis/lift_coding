@@ -164,7 +164,11 @@ def swissknife_mcp_plus_plus_interaction_envelope() -> dict:
             "location_context": {},
             "device_context": {
                 "interface_cid": "bafyswissknifemcpplusplusinterop000000001",
-                "negotiated_profiles": ["mcp++/mcp-idl", "mcp++/cid-envelope", "mcp++/deontic-policy"],
+                "negotiated_profiles": [
+                    "mcp++/mcp-idl",
+                    "mcp++/cid-envelope",
+                    "mcp++/deontic-policy",
+                ],
             },
         },
         "control_surface_contract_ref": "swissknife/contracts/control_surface_contract.schema.json",
@@ -306,22 +310,20 @@ def test_swissknife_control_surface_and_interaction_envelope_validate_for_mcp_pl
     Draft202012Validator(control_schema).validate(
         swissknife_mcp_plus_plus_control_surface_payload()
     )
-    Draft202012Validator(envelope_schema).validate(
-        swissknife_mcp_plus_plus_interaction_envelope()
-    )
+    Draft202012Validator(envelope_schema).validate(swissknife_mcp_plus_plus_interaction_envelope())
 
 
 def test_swissknife_mcp_plus_plus_compatibility_receipt_validates() -> None:
-    receipt_schema = read_json("swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json")
+    receipt_schema = read_json(
+        "swissknife/contracts/mcp_plus_plus_compatibility_receipt.schema.json"
+    )
 
     assert "VAI-665" in receipt_schema["properties"]["task_id"]["enum"]
     assert "MGW-573" in receipt_schema["properties"]["task_id"]["enum"]
     assert "mcp_plus_plus" in receipt_schema["properties"]["daemon_id"]["enum"]
     assert "Mcp-Plus-Plus" in receipt_schema["properties"]["server_package"]["enum"]
 
-    Draft202012Validator(receipt_schema).validate(
-        swissknife_mcp_plus_plus_compatibility_receipt()
-    )
+    Draft202012Validator(receipt_schema).validate(swissknife_mcp_plus_plus_compatibility_receipt())
 
 
 @pytest.fixture(scope="module")
@@ -334,7 +336,9 @@ def mcp_idl_validator():
     return MCPIDLValidator()
 
 
-def test_mcp_plus_plus_idl_validator_accepts_swissknife_interop_descriptor(mcp_idl_validator) -> None:
+def test_mcp_plus_plus_idl_validator_accepts_swissknife_interop_descriptor(
+    mcp_idl_validator,
+) -> None:
     fixture = read_json(
         "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json"
     )
@@ -353,7 +357,9 @@ def test_mcp_plus_plus_idl_validator_accepts_swissknife_interop_descriptor(mcp_i
     assert "interface_cid" in result.metadata
 
 
-def test_mcp_idl_descriptor_fixture_still_validates_with_shared_validator(mcp_idl_validator) -> None:
+def test_mcp_idl_descriptor_fixture_still_validates_with_shared_validator(
+    mcp_idl_validator,
+) -> None:
     fixture = read_json("Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json")
     assert fixture["swissknife_interop_ref"] == (
         "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json"

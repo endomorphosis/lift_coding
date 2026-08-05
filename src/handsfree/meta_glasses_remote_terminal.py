@@ -126,22 +126,15 @@ _REMOTE_TERMINAL_ENDPOINTS: tuple[MetaGlassesRemoteTerminalEndpoint, ...] = (
         channel="display",
         direction="output",
         role="display_widget_rendering",
-        handler_ref=(
-            "handsfree.meta_glasses_mobile_orb_runtime:"
-            "invoke_mobile_orb_runtime_binding"
-        ),
+        handler_ref=("handsfree.meta_glasses_mobile_orb_runtime:invoke_mobile_orb_runtime_binding"),
         fallback_target="display_webapp_or_mobile_card",
     ),
 )
 
-_ENDPOINTS_BY_ID = {
-    endpoint.endpoint_id: endpoint for endpoint in _REMOTE_TERMINAL_ENDPOINTS
-}
+_ENDPOINTS_BY_ID = {endpoint.endpoint_id: endpoint for endpoint in _REMOTE_TERMINAL_ENDPOINTS}
 
 
-def list_meta_glasses_remote_terminal_endpoints() -> tuple[
-    MetaGlassesRemoteTerminalEndpoint, ...
-]:
+def list_meta_glasses_remote_terminal_endpoints() -> tuple[MetaGlassesRemoteTerminalEndpoint, ...]:
     """Return stable Meta glasses remote terminal endpoints."""
     return _REMOTE_TERMINAL_ENDPOINTS
 
@@ -161,9 +154,7 @@ def build_meta_glasses_remote_terminal_route(
     *,
     payload: Mapping[str, Any] | None = None,
     render_targets: tuple[str, ...] = ("audio", "display"),
-    session_contract: (
-        MetaGlassesTerminalSessionContract | Mapping[str, Any] | None
-    ) = None,
+    session_contract: (MetaGlassesTerminalSessionContract | Mapping[str, Any] | None) = None,
 ) -> dict[str, Any]:
     """Build a compact route manifest for audio/display terminal dispatch."""
     requested_targets = set(render_targets)

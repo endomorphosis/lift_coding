@@ -313,8 +313,7 @@ _PRESENTATION_SURFACE_ENDPOINTS = (
             "display_descriptor": "spec/meta_glasses_display_widget_orb_interface.json",
             "transport_preference": "mcp-server",
             "runtime_binding_helper": (
-                "handsfree.meta_glasses_mobile_orb_runtime:"
-                "resolve_mobile_orb_runtime_binding"
+                "handsfree.meta_glasses_mobile_orb_runtime:resolve_mobile_orb_runtime_binding"
             ),
         },
     ),

@@ -87,7 +87,9 @@ def _make_document(payload: Dict[str, Any]) -> ModalIRDocument:
     )
 
 
-def _decoded_document_summary(payload: Dict[str, Any], slot_subset_keys: List[str]) -> Dict[str, Any]:
+def _decoded_document_summary(
+    payload: Dict[str, Any], slot_subset_keys: List[str]
+) -> Dict[str, Any]:
     decoded = decode_modal_ir_document(_make_document(payload))
     data = decoded.to_dict()
     slot_map = decoded_modal_phrase_slot_text_map(decoded)
@@ -101,11 +103,7 @@ def _decoded_document_summary(payload: Dict[str, Any], slot_subset_keys: List[st
         "parser_warnings": data["parser_warnings"],
         "missing_slots": data["missing_slots"],
         "formulas": data["formulas"],
-        "slot_subset": {
-            key: slot_map[key]
-            for key in slot_subset_keys
-            if key in slot_map
-        },
+        "slot_subset": {key: slot_map[key] for key in slot_subset_keys if key in slot_map},
     }
 
 
@@ -124,7 +122,9 @@ def main() -> int:
         similarity_rows.append(
             {
                 "id": case["id"],
-                "similarity": modal_text_token_similarity(case.get("left", ""), case.get("right", "")),
+                "similarity": modal_text_token_similarity(
+                    case.get("left", ""), case.get("right", "")
+                ),
             }
         )
 

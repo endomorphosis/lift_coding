@@ -5,6 +5,7 @@ vs CID-store) but must agree on the boundary decisions: a fully valid root->leaf
 chain grants, and an empty/broken chain denies. Keeps third parties confident a
 delegation accepted by one server is honored by the others.
 """
+
 import importlib.util
 import sys
 from pathlib import Path
@@ -27,14 +28,25 @@ def _load(name, rel):
 
 
 VALID = [
-    {"issuer": "did:a", "audience": "did:b", "capabilities": [{"resource": "ipfs", "ability": "*"}]},
-    {"issuer": "did:b", "audience": "did:c", "capabilities": [{"resource": "ipfs", "ability": "read"}]},
+    {
+        "issuer": "did:a",
+        "audience": "did:b",
+        "capabilities": [{"resource": "ipfs", "ability": "*"}],
+    },
+    {
+        "issuer": "did:b",
+        "audience": "did:c",
+        "capabilities": [{"resource": "ipfs", "ability": "read"}],
+    },
 ]
 
 
 def _kit():
     from ipfs_kit_py.mcp_server.mcplusplus import delegation as kit
-    return lambda ch: kit.validate_raw_delegation_chain(raw_chain=ch, resource="ipfs", ability="read", actor="did:c")["allowed"]
+
+    return lambda ch: kit.validate_raw_delegation_chain(
+        raw_chain=ch, resource="ipfs", ability="read", actor="did:c"
+    )["allowed"]
 
 
 def _load_pkg(root_rel, dotted):
@@ -43,6 +55,7 @@ def _load_pkg(root_rel, dotted):
     if not root.exists():
         pytest.skip(f"{root_rel} not present")
     import importlib
+
     top = dotted.split(".")[0]
     # Evict any copy of the top package cached from a different submodule path
     # (importing kit/datasets can pull in a shadowing partial package).
@@ -60,7 +73,11 @@ def _load_pkg(root_rel, dotted):
 
 def _accel():
     m = _load_pkg("ipfs_accelerate", "ipfs_accelerate_py.mcp_server.mcplusplus.delegation")
-    return lambda ch: m.validate_raw_delegation_chain(raw_chain=ch, resource="ipfs", ability="read", actor="did:c", require_signatures=False).allowed
+    return lambda ch: (
+        m.validate_raw_delegation_chain(
+            raw_chain=ch, resource="ipfs", ability="read", actor="did:c", require_signatures=False
+        ).allowed
+    )
 
 
 def _datasets():
@@ -72,13 +89,25 @@ def _datasets():
         leaf = ""
         for i, d in enumerate(ch):
             cid = f"d{i}"
-            caps = [m.Capability(resource=c["resource"], ability=c["ability"]) for c in d["capabilities"]]
-            ev.add(m.Delegation(cid=cid, issuer=d["issuer"], audience=d["audience"], capabilities=caps, proof_cid=prev))
+            caps = [
+                m.Capability(resource=c["resource"], ability=c["ability"])
+                for c in d["capabilities"]
+            ]
+            ev.add(
+                m.Delegation(
+                    cid=cid,
+                    issuer=d["issuer"],
+                    audience=d["audience"],
+                    capabilities=caps,
+                    proof_cid=prev,
+                )
+            )
             prev, leaf = cid, cid
         if not leaf:
             return False
         ok, _ = ev.can_invoke(leaf, "ipfs", "did:c", ability="read")
         return bool(ok)
+
     return go
 
 

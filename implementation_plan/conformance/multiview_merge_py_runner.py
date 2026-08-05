@@ -28,7 +28,9 @@ def _view_from_payload(name: str, payload: Mapping[str, Any]) -> LogicIRView:
         name=name,
         payload=payload.get("payload") or {},
         format=str(payload.get("format") or ""),
-        source_component=str(payload.get("sourceComponent") or payload.get("source_component") or ""),
+        source_component=str(
+            payload.get("sourceComponent") or payload.get("source_component") or ""
+        ),
         metadata=payload.get("metadata") or {},
     )
 
@@ -55,7 +57,9 @@ def _proof_gate_from_payload(payload: Mapping[str, Any]) -> ProofGateResult:
     return ProofGateResult(
         attempted_count=int(payload.get("attemptedCount") or payload.get("attempted_count") or 0),
         valid_count=int(payload.get("validCount") or payload.get("valid_count") or 0),
-        unavailable_count=int(payload.get("unavailableCount") or payload.get("unavailable_count") or 0),
+        unavailable_count=int(
+            payload.get("unavailableCount") or payload.get("unavailable_count") or 0
+        ),
         error_count=int(payload.get("errorCount") or payload.get("error_count") or 0),
         failed_count=int(payload.get("failedCount") or payload.get("failed_count") or 0),
         verified_by=tuple(payload.get("verifiedBy") or payload.get("verified_by") or ()),
@@ -66,11 +70,17 @@ def _proof_gate_from_payload(payload: Mapping[str, Any]) -> ProofGateResult:
 def _graph_projection_from_payload(payload: Mapping[str, Any]) -> GraphProjectionResult:
     return GraphProjectionResult(
         graph_id=str(payload.get("graphId") or payload.get("graph_id") or ""),
-        neo4j_compatible=bool(payload.get("neo4jCompatible") or payload.get("neo4j_compatible") or False),
+        neo4j_compatible=bool(
+            payload.get("neo4jCompatible") or payload.get("neo4j_compatible") or False
+        ),
         node_count=int(payload.get("nodeCount") or payload.get("node_count") or 0),
-        relationship_count=int(payload.get("relationshipCount") or payload.get("relationship_count") or 0),
+        relationship_count=int(
+            payload.get("relationshipCount") or payload.get("relationship_count") or 0
+        ),
         node_labels=tuple(payload.get("nodeLabels") or payload.get("node_labels") or ()),
-        relationship_types=tuple(payload.get("relationshipTypes") or payload.get("relationship_types") or ()),
+        relationship_types=tuple(
+            payload.get("relationshipTypes") or payload.get("relationship_types") or ()
+        ),
         metadata=payload.get("metadata") or {},
     )
 

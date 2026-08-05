@@ -35,12 +35,10 @@ def test_swissknife_orb_binding_uses_registered_virtual_ai_os_capabilities():
         expected_capability_ids
     )
     assert (
-        get_swissknife_orb_handler_ref("dataset_discovery")
-        == "swissknife.orb::dataset_discovery"
+        get_swissknife_orb_handler_ref("dataset_discovery") == "swissknife.orb::dataset_discovery"
     )
     assert (
-        get_swissknife_orb_handler_ref("ui_render_session")
-        == "swissknife.orb::ui_render_session"
+        get_swissknife_orb_handler_ref("ui_render_session") == "swissknife.orb::ui_render_session"
     )
 
 
@@ -60,7 +58,7 @@ def test_swissknife_orb_dispatch_plan_exposes_virtual_ui_binding_metadata():
     assert swissknife_endpoint.metadata["virtual_ui_app_id"] == "mcp-control"
     assert (
         swissknife_endpoint.metadata["orb_router_module"]
-        == "swissknife/src/services/mcp-orb-capability-router.ts"
+        == "swissknife/src/services/mcp/mcp-orb-capability-router.ts"
     )
     assert swissknife_endpoint.metadata["orb_transport_kinds"] == (
         "local",

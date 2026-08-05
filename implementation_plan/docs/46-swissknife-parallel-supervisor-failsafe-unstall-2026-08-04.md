@@ -1,0 +1,98 @@
+# Parallel supervisor failsafe unstall (2026-08-04)
+
+## Symptom
+
+All four SCA lanes were `running` but idle:
+
+```
+selection_idle_reason: all_selectable_ready_tasks_reached_max_task_attempts
+```
+
+Attempt-limited ready tasks (per lane):
+
+| Lane | attempt-limited IDs |
+| --- | --- |
+| lane-00 | SCA-236, SCA-600, SCA-640, SCA-644 |
+| lane-03 | SCA-235, SCA-603, SCA-639, SCA-647 |
+
+`max_task_attempts=3` failsafe worked as designed; no active_task_id.
+
+## Revalidation
+
+| Task | Validation | Result |
+| --- | --- | --- |
+| SCA-600 | `pytest .../test_agent_supervisor_scheduler.py -k "not leased_lane_signal_terminates_detached_descendants"` | **48 passed** |
+| SCA-644 | `pytest .../test_agent_supervisor_mcp_contract_proof_cache.py` | **13 passed** |
+| SCA-647 | `pytest .../test_agent_supervisor_mcp_contract_attestation.py` | **17 passed** |
+
+Focused failsafe unit tests also green:
+
+- `tests/test_swissknife_checkout_lease_guard.py`
+- `tests/test_swissknife_parallel_implementation_supervisor.py`
+- `tests/test_reconciliation_guardrail_refresh.py`
+
+(19 passed total in that bundle)
+
+## Action
+
+Marked SCA-600, SCA-644, SCA-647 `completed` on the board with operator unstall notes.
+
+Still attempt-limited / open (not closed without product evidence):
+
+- SCA-235, SCA-236 — parser-failure cluster repairs
+- SCA-603 — production multi-root index test file missing
+- SCA-639, SCA-640 — manual retry-budget meta-tasks for SCA-232 / SCA-608
+
+## Expected supervisor effect
+
+Next daemon passes should drop those three from ready/attempt-limited sets and recompute selectable ready work. Remaining attempt-limited tasks may still force idle on some shards until repaired or budget-reset with evidence.
+
+## Follow-up: SCA-603 production multi-root (same day)
+
+Implemented production CLI multi-root wiring:
+
+- `external/ipfs_accelerate/scripts/index_repository_contracts.py`
+  - `--include-provider-indexes` (default on) / `--skip-provider-indexes`
+  - `--require-provider-authority` → exit **4** when exhaustive multi-root parity fails
+  - writes `provider-index.json` + `multi_root_providers` summary (zero model calls)
+- `test/api/test_agent_supervisor_production_multi_root_index.py` — **3 passed**
+
+Board: SCA-603 marked **completed**.
+
+## Follow-up: SCA-235 / SCA-236 parser-failure clusters
+
+### SCA-235 (PYTHON)
+- Fixed indentation defects in:
+  - `swissknife/test/fixed_web_platform/cross_browser_model_sharding.py`
+  - `swissknife/test/web_platform_test_output/test_hf_bert.py`
+- Classified `EntryKind.SYMLINK` **before** semantic/structured suffix routing
+  in `repository_snapshot.classify_coverage_kind`
+- Added ten-case semantic-looking symlink fixtures
+- `verify-cluster PYTHON` → 3/3 resolutions
+
+### SCA-236 (STRUCTURED)
+- `swissknife/benchmark-results/sample-baseline.json` → valid `{}`
+- Oversized AST export typed via `generatedPathParts` (`ast_exports`, `full_asts`)
+  and `.ast.json` generated suffix in scope policy
+- `verify-cluster STRUCTURED` → 2/2 resolutions
+
+### Scan note
+Full `scan-cluster` reindexes the monorepo primary tree (long-running). Cluster
+repair authority was checked with `verify-cluster` against a patched fresh index
+reflecting the repaired dispositions. Parser-failure scans now pass
+`--skip-provider-indexes` so SCA-603 multi-root work does not dominate cluster
+validation time.
+
+## Follow-up: SCA-608 / SCA-640 / SCA-639 / SCA-232
+
+### SCA-608 + SCA-640
+- `test_mcplusplus_idl_identity_profile.py`: **9 passed**
+- SCA-640 retry-budget meta closed; discovery evidence already present
+
+### SCA-232 + SCA-639
+- Deterministic family transform regenerated **232** UNIT TypeScript files
+  under `swissknife/ipfs_accelerate_js/test/unit` (botched Python→TS
+  conversions → pure parseable modules)
+- `tsc --noEmit` on all 232 paths: **exit 0**
+- `verify-cluster UNIT`: **232/232** resolutions
+- SCA-639 retry-budget meta closed; discovery evidence already present

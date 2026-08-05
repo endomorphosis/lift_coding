@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Mapping
 from datetime import UTC, datetime
-from typing import Any, Mapping
+from typing import Any
 
 VIRTUAL_AI_OS_OBSERVABILITY_ARTIFACT_CONTRACT_ID = (
     "handsfree.virtual-ai-os/observability-artifacts@0.1.0"
@@ -74,9 +75,7 @@ def _stable_json(value: Any) -> str:
 
 def _artifact_id(artifact_type: str, payload: Mapping[str, Any]) -> str:
     seed = {
-        key: value
-        for key, value in payload.items()
-        if key not in {"artifact_id", "observed_at"}
+        key: value for key, value in payload.items() if key not in {"artifact_id", "observed_at"}
     }
     digest = hashlib.sha256(_stable_json(seed).encode("utf-8")).hexdigest()
     return f"sha256:vai-observability:{artifact_type}:{digest}"
@@ -309,8 +308,7 @@ def get_virtual_ai_os_observability_artifact_contract() -> dict[str, Any]:
         "contract_id": VIRTUAL_AI_OS_OBSERVABILITY_ARTIFACT_CONTRACT_ID,
         "artifact_types": list(VIRTUAL_AI_OS_OBSERVABILITY_ARTIFACT_TYPES),
         "required_fields": {
-            key: list(value)
-            for key, value in VIRTUAL_AI_OS_OBSERVABILITY_REQUIRED_FIELDS.items()
+            key: list(value) for key, value in VIRTUAL_AI_OS_OBSERVABILITY_REQUIRED_FIELDS.items()
         },
         "reconcile_keys": ["task_id", "correlation_id", "artifact_id"],
     }

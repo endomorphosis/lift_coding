@@ -15,8 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
+
+      - name: Init conformance submodules
+        run: |
+          git submodule update --init --depth 1 swissknife external/ipfs_datasets || true
 
       - uses: actions/setup-node@v4
         with:
@@ -32,12 +34,17 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install Python conformance engines
+        run: |
+          python -m pip install -U pip
+          python -m pip install z3-solver multiformats
+
       - name: Install SwissKnife dependencies
         working-directory: swissknife
         run: npm ci
 
       - name: Run conformance harness
-        run: make conformance
+        run: make conformance-ci
 
       - name: Upload conformance artifacts
         uses: actions/upload-artifact@v4

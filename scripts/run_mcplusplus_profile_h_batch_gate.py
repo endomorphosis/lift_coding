@@ -17,8 +17,11 @@ from mcplusplus_profile_h.batch_gate import run_batch_gate  # noqa: E402
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path,
-                        default=ROOT / "swissknife/test-results/mcplusplus-profile-h-x402/batch.json")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=ROOT / "swissknife/test-results/mcplusplus-profile-h-x402/batch.json",
+    )
     parser.add_argument("--state-dir", type=Path)
     args = parser.parse_args()
     if args.state_dir is None:

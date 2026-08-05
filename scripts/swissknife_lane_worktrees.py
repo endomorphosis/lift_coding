@@ -135,8 +135,7 @@ def validate_browser_toolchain_receipt(
 
     def invalid(reason: str) -> LaneError:
         return LaneError(
-            "browser toolchain verifier produced an invalid receipt "
-            f"({reason}): {receipt_path}"
+            f"browser toolchain verifier produced an invalid receipt ({reason}): {receipt_path}"
         )
 
     if not isinstance(receipt, dict):

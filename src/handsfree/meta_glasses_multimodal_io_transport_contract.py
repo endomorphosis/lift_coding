@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from typing import Final
 
-
 META_GLASSES_MULTIMODAL_IO_CONTRACT: Final = (
     "handsfree.meta-glasses/multimodal-io-control-plane@0.1.0"
 )
@@ -93,9 +92,7 @@ META_GLASSES_MOCK_BOUNDARY_STATES: Final[tuple[str, ...]] = (
     "route_lost",
 )
 
-META_GLASSES_PLAYWRIGHT_FIXTURE_ID: Final = (
-    "mgw-519-meta-glasses-control-plane-playwright-fixture"
-)
+META_GLASSES_PLAYWRIGHT_FIXTURE_ID: Final = "mgw-519-meta-glasses-control-plane-playwright-fixture"
 
 
 def build_meta_glasses_control_plane_event(
