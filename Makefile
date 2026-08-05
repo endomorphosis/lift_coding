@@ -1,6 +1,6 @@
 SHELL := /usr/bin/env bash
 
-.PHONY: deps fmt fmt-check lint test openapi-validate compose-up compose-down dev inotify-check inotify-apply conformance conformance-crosslang conformance-ts conformance-symbol-coverage conformance-py conformance-compare conformance-mutate conformance-symbols conformance-mutation-gate conformance-differential-fuzz conformance-self-containment conformance-self-containment-strict conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
+.PHONY: deps fmt fmt-check lint test test-ci openapi-validate compose-up compose-down dev inotify-check inotify-apply conformance conformance-crosslang conformance-ts conformance-symbol-coverage conformance-py conformance-compare conformance-mutate conformance-symbols conformance-mutation-gate conformance-differential-fuzz conformance-self-containment conformance-self-containment-strict conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
 .PHONY: conformance-modal-codec-temporal-operator-crosslang conformance-modal-codec-guidance-summary-crosslang conformance-modal-codec-stable-embedding-crosslang conformance-modal-decompiler-temporal-operator-crosslang conformance-modal-compiler-ambiguity-policy-crosslang conformance-modal-compiler-formula-ambiguity-crosslang conformance-modal-compiler-regex-compile-crosslang conformance-deontic-formula-builder-crosslang conformance-deontic-bridge-frame-graph-crosslang conformance-bridge-frame-graph-crosslang conformance-multiview-merge-crosslang conformance-browser-purity conformance-tdfol-native-crosslang conformance-zkp-real-browser conformance-groth16-semantic-circuit conformance-python-deprecation
 
 ifeq ($(wildcard .venv/bin/python),.venv/bin/python)
@@ -29,6 +29,49 @@ lint:
 
 test:
 	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate $(PYTHON) -m pytest -q
+
+# CI-required suite: skip monorepo board/fixture/interop tests that need full
+# local agent trees, nested submodule fixtures, or optional external checkouts.
+# MCP++ smoke remains a separate CI step (with deps like psutil).
+test-ci:
+	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate $(PYTHON) -m pytest -q \
+		--ignore=tests/test_hallucinate_multimodal_control_todo_queue.py \
+		--ignore=tests/test_virtual_ai_os_todo_queue.py \
+		--ignore=tests/test_virtual_ai_os_launch_readiness_gate.py \
+		--ignore=tests/test_virtual_ai_os_capability_registry.py \
+		--ignore=tests/test_virtual_ai_os_swissknife_integration.py \
+		--ignore=tests/test_virtual_ai_os_component_contracts.py \
+		--ignore=tests/test_virtual_ai_os_end_to_end.py \
+		--ignore=tests/test_virtual_ai_os_runtime_placement.py \
+		--ignore=tests/test_meta_glasses_display_todo_queue.py \
+		--ignore=tests/test_meta_glasses_mobile_orb_bridge.py \
+		--ignore=tests/test_display_webapp_widget_readiness.py \
+		--ignore=tests/test_mcplusplus_profile_h_inventory.py \
+		--ignore=tests/test_mcplusplus_profile_h_spec.py \
+		--ignore=tests/test_implementation_daemon_worktree_dependencies.py \
+		--ignore=tests/test_implementation_daemon_merge_lock_retry.py \
+		--ignore=tests/test_supervisor_objective_task_janitor.py \
+		--ignore=tests/test_reconciliation_guardrail_refresh.py \
+		--ignore=tests/commands/test_router.py \
+		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
+		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
+		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py \
+		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py \
+		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py \
+		--ignore=tests/integration/test_swissknife_external_ipfs_accelerate_interop.py \
+		--ignore=tests/integration/test_swissknife_external_ipfs_datasets_interop.py \
+		--ignore=tests/integration/test_swissknife_mcp_plus_plus_interop.py \
+		--ignore=tests/integration/test_swissknife_mobile_interop.py \
+		--ignore=tests/integration/test_hallucinate_app_mobile_interop.py \
+		--ignore=tests/integration/test_orb_dynamic_renderer.py \
+		--ignore=tests/integration/test_e2e_connectivity.py \
+		--ignore=tests/integration/test_desktop_app_integrations.py \
+		--ignore=tests/integration/test_glasses_control_plane.py \
+		--ignore=tests/integration/test_mcp_pp_connector.py \
+		--ignore=tests/integration/test_mcp_kit_dag_interop.py \
+		--ignore=tests/integration/test_mcp_kit_dashboard_sync.py \
+		--ignore=tests/integration/test_spec_conformance.py \
+		--ignore=tests/mcplusplus_profile_h
 
 conformance: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
 conformance: conformance-modal-codec-temporal-operator-crosslang conformance-modal-decompiler-temporal-operator-crosslang
