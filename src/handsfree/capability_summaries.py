@@ -86,6 +86,48 @@ def format_glasses_widget(result: Mapping[str, Any]) -> str:
     return _join_summary("Glasses widget", render_result, receipt_cid)
 
 
+
+
+def format_hardware_profile(result: Mapping[str, Any]) -> str:
+    """Summarize hardware profile inventory results."""
+    summary = _first_text(result, "summary")
+    if summary:
+        return summary
+    backend = _first_text(result, "backend", "device", "accelerator")
+    status = _first_text(result, "status")
+    return _join_summary("Hardware profile", backend, status)
+
+
+def format_inference(result: Mapping[str, Any]) -> str:
+    """Summarize model inference results."""
+    summary = _first_text(result, "summary")
+    if summary:
+        return summary
+    model = _first_text(result, "model", "model_id")
+    status = _first_text(result, "status")
+    return _join_summary("Inference", model, status)
+
+
+def format_ipfs_add_content(result: Mapping[str, Any]) -> str:
+    """Summarize IPFS content add results."""
+    summary = _first_text(result, "summary")
+    if summary:
+        return summary
+    cid = _first_text(result, "cid", "result_cid")
+    status = _first_text(result, "status")
+    return _join_summary("IPFS add", cid, status)
+
+
+def format_ipfs_get_content(result: Mapping[str, Any]) -> str:
+    """Summarize IPFS content fetch results."""
+    summary = _first_text(result, "summary")
+    if summary:
+        return summary
+    cid = _first_text(result, "cid", "result_cid")
+    status = _first_text(result, "status")
+    return _join_summary("IPFS get", cid, status)
+
+
 def _format_status_summary(result: Mapping[str, Any], fallback: str) -> str:
     summary = _first_text(result, "summary")
     if summary:
@@ -118,6 +160,10 @@ __all__ = [
     "format_device_render_transport",
     "format_embedding",
     "format_glasses_widget",
+    "format_hardware_profile",
+    "format_inference",
+    "format_ipfs_add_content",
+    "format_ipfs_get_content",
     "format_ipfs_pin",
     "format_llm_generation",
     "format_storage",

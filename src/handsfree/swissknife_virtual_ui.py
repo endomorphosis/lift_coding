@@ -93,15 +93,15 @@ _SWISSKNIFE_BINDING = SwissknifeVirtualAIOSBinding(
     orb_plane=SwissknifeORBPlaneBinding(
         surface_id="swissknife_orb",
         handler_namespace="swissknife.orb",
-        router_module="swissknife/src/services/mcp-orb-capability-router.ts",
-        descriptor_pack_module="swissknife/src/services/mcp-ipfs-datasets-descriptor-pack.ts",
+        router_module="swissknife/src/services/mcp/mcp-orb-capability-router.ts",
+        descriptor_pack_module="swissknife/src/services/ipfs/mcp-ipfs-datasets-descriptor-pack.ts",
         descriptor_pack_export="getIPFSDatasetsDescriptorPackDescriptors",
         transport_kinds=("local", "websocket", "http", "mcp-server"),
         capability_ids=_registered_capability_ids(),
         source_refs=(
-            "swissknife/src/services/mcp-orb-capability-router.ts",
-            "swissknife/src/services/mcp-ipfs-datasets-descriptor-pack.ts",
-            "swissknife/src/services/mcp-ui-profile.ts",
+            "swissknife/src/services/mcp/mcp-orb-capability-router.ts",
+            "swissknife/src/services/ipfs/mcp-ipfs-datasets-descriptor-pack.ts",
+            "swissknife/src/services/mcp/mcp-ui-profile.ts",
         ),
         metadata={
             "control_surface_contract": "swissknife/contracts/control_surface_contract.schema.json",

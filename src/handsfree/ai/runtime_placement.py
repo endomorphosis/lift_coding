@@ -122,7 +122,12 @@ def supported_virtual_ai_os_runtime_surfaces(
             )
         return (CapabilityRuntimeSurface.DAEMON_MEDIATED,)
     if capability_id in _MCP_REMOTE_DATA_SURFACES:
-        return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
+        return (
+            CapabilityRuntimeSurface.MCP_PROVIDER,
+            CapabilityRuntimeSurface.SWISSKNIFE_ORB,
+            CapabilityRuntimeSurface.HALLUCINATE_APP,
+            CapabilityRuntimeSurface.OPERATOR_CONSOLE,
+        )
     if capability_id in _SWISSKNIFE_PREFERRED_REMOTE_CAPABILITIES:
         return (CapabilityRuntimeSurface.MCP_PROVIDER, CapabilityRuntimeSurface.SWISSKNIFE_ORB)
     if capability_id in _HALLUCINATE_OPERATOR_CAPABILITIES:
@@ -131,6 +136,7 @@ def supported_virtual_ai_os_runtime_surfaces(
             CapabilityRuntimeSurface.DAEMON_MEDIATED,
             CapabilityRuntimeSurface.SWISSKNIFE_ORB,
             CapabilityRuntimeSurface.HALLUCINATE_APP,
+            CapabilityRuntimeSurface.OPERATOR_CONSOLE,
         )
     if capability_id in _GLASSES_WIDGET_CAPABILITIES:
         return (
@@ -175,12 +181,26 @@ def _placement_metadata(
             "constraints": ("preserve_capability_id", "receipt_backed_operator_fallback"),
         }
 
-    if runtime_surface == CapabilityRuntimeSurface.HALLUCINATE_APP:
+    if runtime_surface in {
+        CapabilityRuntimeSurface.HALLUCINATE_APP,
+        CapabilityRuntimeSurface.OPERATOR_CONSOLE,
+    }:
         return {
-            "placement_layer": CapabilityPlacementLayer.HANDSFREE_DAEMON,
+            "placement_layer": (
+                CapabilityPlacementLayer.OPERATOR_CONSOLE
+                if runtime_surface == CapabilityRuntimeSurface.OPERATOR_CONSOLE
+                else CapabilityPlacementLayer.HANDSFREE_DAEMON
+            ),
             "target_repo": "endomorphosis/hallucinate_app",
             "reason": "Hallucinate App owns the operator console surface for supervised workflows.",
-            "constraints": ("operator_console_available", "daemon_supervised"),
+            "constraints": (
+                "daemon_manager_receipts_required",
+                "swissknife_virtual_desktop_fallback",
+                "operator_console_available",
+                "daemon_supervised",
+            )
+            if runtime_surface == CapabilityRuntimeSurface.OPERATOR_CONSOLE
+            else ("operator_console_available", "daemon_supervised"),
         }
 
     if runtime_surface == CapabilityRuntimeSurface.MCP_PROVIDER:
