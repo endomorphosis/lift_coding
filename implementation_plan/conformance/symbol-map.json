@@ -14043,7 +14043,8 @@
         {
           "pythonSymbol": "FormulaAnalysis",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "FormulaAnalysis",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
@@ -14053,7 +14054,8 @@
         {
           "pythonSymbol": "FormulaAnalyzer",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "FormulaAnalyzer",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
@@ -14063,7 +14065,8 @@
         {
           "pythonSymbol": "FormulaComplexity",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "FormulaComplexity",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
@@ -14073,7 +14076,8 @@
         {
           "pythonSymbol": "FormulaType",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "FormulaType",
           "target": "swissknife/src/services/logic/shared/formula-analyzer.ts",
           "variants": [
@@ -14114,7 +14118,8 @@
         {
           "pythonSymbol": "TDFOLToCoqConverter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "TDFOLToCoqConverter",
           "target": "swissknife/src/services/provers/deontic-to-coq.ts",
           "variants": [
@@ -14144,7 +14149,8 @@
         {
           "pythonSymbol": "LeanProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "LeanProverBridge",
           "target": "swissknife/src/services/provers/deontic-to-lean4.ts",
           "variants": [
@@ -14197,7 +14203,8 @@
         {
           "pythonSymbol": "find_executable",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "findExecutable",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -14210,7 +14217,8 @@
         {
           "pythonSymbol": "lazy_install_prover",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "lazyInstallProver",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -14249,7 +14257,8 @@
         {
           "pythonSymbol": "normalize_prover_name",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "normalizeProverName",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -14275,7 +14284,8 @@
         {
           "pythonSymbol": "reset_lazy_install_attempts",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "resetLazyInstallAttempts",
           "target": "swissknife/src/services/provers/prover-strategy-runtime.ts",
           "variants": [
@@ -14298,7 +14308,8 @@
         {
           "pythonSymbol": "Monitor",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "Monitor",
           "target": "swissknife/src/services/apps/app-manifest-registry.ts",
           "variants": [
@@ -14308,7 +14319,8 @@
         {
           "pythonSymbol": "ProofMetrics",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "ProofMetrics",
           "target": "swissknife/src/services/logic/tdfol/performance-dashboard.ts",
           "variants": [
@@ -14318,7 +14330,8 @@
         {
           "pythonSymbol": "get_global_monitor",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "get_global_monitor",
           "target": "swissknife/src/services/logic/shared/logic-monitor.ts",
           "variants": [
@@ -14385,7 +14398,8 @@
         {
           "pythonSymbol": "ProverRouter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "ProverRouter",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
@@ -14395,7 +14409,8 @@
         {
           "pythonSymbol": "ProverStrategy",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "ProverStrategy",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
@@ -14405,7 +14420,8 @@
         {
           "pythonSymbol": "RouterProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "RouterProofResult",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
@@ -14415,7 +14431,8 @@
         {
           "pythonSymbol": "SyntacticNativeFallbackProver",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "SyntacticNativeFallbackProver",
           "target": "swissknife/src/services/proof-engine/prover-router.ts",
           "variants": [
@@ -14445,7 +14462,8 @@
         {
           "pythonSymbol": "CVC5ProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "CVC5ProofResult",
           "target": "swissknife/src/services/provers/cvc5-prover-bridge.ts",
           "variants": [
@@ -14455,7 +14473,8 @@
         {
           "pythonSymbol": "CVC5ProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "CVC5ProverBridge",
           "target": "swissknife/src/services/provers/cvc5-prover-bridge.ts",
           "variants": [
@@ -14465,7 +14484,8 @@
         {
           "pythonSymbol": "TDFOLToCVC5Converter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "TDFOLToCVC5Converter",
           "target": "swissknife/src/services/provers/cvc5-prover-bridge.ts",
           "variants": [
@@ -14485,7 +14505,8 @@
         {
           "pythonSymbol": "TDFOLToZ3Converter",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "TDFOLToZ3Converter",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
@@ -14495,7 +14516,8 @@
         {
           "pythonSymbol": "Z3ProofResult",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "Z3ProofResult",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
@@ -14505,7 +14527,8 @@
         {
           "pythonSymbol": "Z3ProverBridge",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "Z3ProverBridge",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
@@ -14515,7 +14538,8 @@
         {
           "pythonSymbol": "prove_with_z3",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "Host-native prover wrapper path. Behavioral parity for this surface is tracked as host-native and must not be counted as a direct TypeScript prover port.",
           "tsSymbol": "prove_with_z3",
           "target": "swissknife/src/services/provers/z3-prover-bridge.ts",
           "variants": [
@@ -14539,7 +14563,8 @@
         {
           "pythonSymbol": "ErgoAIWrapper",
           "kind": "class",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "ErgoAI integration depends on a host-native Ergo binary runtime; PORT-239 tracks this surface as host-native rather than a pure TypeScript port.",
           "tsSymbol": "ErgoAIWrapper",
           "target": "swissknife/src/services/integrations/ergoai-wrapper.ts",
           "variants": [
@@ -14549,7 +14574,8 @@
         {
           "pythonSymbol": "resolve_ergo_binary",
           "kind": "function",
-          "status": "ported",
+          "status": "n/a",
+          "reason": "ErgoAI integration depends on a host-native Ergo binary runtime; PORT-239 tracks this surface as host-native rather than a pure TypeScript port.",
           "tsSymbol": "resolve_ergo_binary",
           "target": "swissknife/src/services/integrations/ergoai-wrapper.ts",
           "variants": [
