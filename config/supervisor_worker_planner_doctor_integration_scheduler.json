@@ -1,0 +1,36 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-scheduler@1",
+  "boardNamespace": "agent-supervisor-worker-planner-doctor-v1",
+  "taskPrefix": "WPD-",
+  "planPath": "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration-plan-2026-08-06.md",
+  "objectivePath": "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.objectives.md",
+  "todoPath": "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.todo.md",
+  "protectedPaths": [
+    "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration-plan-2026-08-06.md",
+    "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.objectives.md",
+    "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.todo.md",
+    "config/supervisor_worker_planner_doctor_integration_scheduler.json"
+  ],
+  "notes": [
+    "Stub scheduler profile sealed by WPD-000.",
+    "Objective/codebase refill must not rewrite protected control artifacts.",
+    "Default mode for Doctor remains report-only until elevated policy admits repair.",
+    "LLM residual path is named and packet-sealed; never an implicit free re-prompt."
+  ],
+  "parallelLanes": [
+    "wpd-control",
+    "wpd-contracts",
+    "wpd-factory",
+    "wpd-worker",
+    "wpd-supervisor",
+    "wpd-metrics",
+    "wpd-release"
+  ],
+  "safetyFloors": {
+    "unauthorized_llm_calls": 0,
+    "deterministic_doctor_network_or_llm_load": 0,
+    "free_reprompt_after_typed_failure": 0,
+    "completion_from_provider_prose": 0,
+    "false_analytical_close_without_byte_mutation": 0
+  }
+}

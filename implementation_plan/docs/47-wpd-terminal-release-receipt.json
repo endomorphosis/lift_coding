@@ -1,0 +1,39 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-release-receipt@1",
+  "contract_version": 1,
+  "interface": "WorkerPlannerDoctorRelease@1",
+  "evidence": "wpd/release@1",
+  "verdict": "pass",
+  "promotion_allowed": true,
+  "safety_floors": {
+    "unauthorized_provider_calls": 0,
+    "scope_escape_writes": 0,
+    "free_reprompt_events": 0
+  },
+  "modules_present": [
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.pre_implementation_kernel",
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.pre_implementation_provider_gate",
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.analytical_close_executor",
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.residual_provider_invocation",
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.failure_replan_policy",
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.task_execution_policy",
+    "ipfs_accelerate_py.agent_supervisor.todo_daemon.worker_doctor_bridge",
+    "ipfs_accelerate_py.agent_supervisor.validation.llm_avoidance_metrics",
+    "ipfs_accelerate_py.agent_supervisor.validation.llm_avoidance_benchmark",
+    "ipfs_accelerate_py.agent_supervisor.control.default_doctor_factory",
+    "ipfs_accelerate_py.agent_supervisor.planning.default_planner_factory"
+  ],
+  "modules_missing": [],
+  "benchmark_verdict": "pass",
+  "benchmark_provider_call_reduction": 6,
+  "reason_codes": [],
+  "interfaces": {
+    "pre_implementation_kernel": "PreImplementationKernel@1",
+    "provider_gate": "ImplementationDaemon@pre_implementation_kernel",
+    "analytical_close": "AnalyticalCloseExecutor@1",
+    "failure_replan": "FailureReplanPolicy@1",
+    "llm_avoidance_metrics": "LlmAvoidanceMetrics@1",
+    "benchmark": "WorkerPlannerDoctorBenchmark@1",
+    "release": "WorkerPlannerDoctorRelease@1"
+  }
+}
