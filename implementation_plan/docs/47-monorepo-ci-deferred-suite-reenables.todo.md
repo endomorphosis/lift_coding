@@ -276,7 +276,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Depends on: CIG-000
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, Makefile
 - Predicted files: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py
-- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android external/ipfs_datasets; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop' Makefile || true)"
+- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop' Makefile || true)"
 - Board namespace: monorepo-ci-deferred-suite-reenables-v1
 - Bundle: cig/meta-android-datasets
 - Parallel lane: cig-meta-android-datasets
@@ -300,7 +300,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Depends on: CIG-000
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py, Makefile
 - Predicted files: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py
-- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android external/ipfs_kit; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop' Makefile || true)"
+- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop' Makefile || true)"
 - Board namespace: monorepo-ci-deferred-suite-reenables-v1
 - Bundle: cig/meta-android-kit
 - Parallel lane: cig-meta-android-kit
