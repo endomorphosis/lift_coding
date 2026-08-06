@@ -171,7 +171,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-015 Re-enable glasses control plane suite in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
