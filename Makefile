@@ -45,7 +45,6 @@ test-ci:
 		--ignore=tests/integration/test_swissknife_mcp_plus_plus_interop.py \
 		--ignore=tests/integration/test_swissknife_mobile_interop.py \
 		--ignore=tests/integration/test_hallucinate_app_mobile_interop.py \
-		--ignore=tests/integration/test_orb_dynamic_renderer.py \
 		--ignore=tests/integration/test_desktop_app_integrations.py \
 		--ignore=tests/integration/test_glasses_control_plane.py
 
