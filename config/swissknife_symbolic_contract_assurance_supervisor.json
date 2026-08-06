@@ -45,9 +45,8 @@
         "external/ipfs_accelerate/ipfs_accelerate_py/p2p_workflow_scheduler.py",
         "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/workflow_scheduler.py",
         "external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/mcplusplus/risk_scheduler.py",
-        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/resource_scheduler.py",
         "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
-        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/provider_batch_scheduler.py"
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/provider_batch_scheduler.py"
       ]
     },
     "agentSupervisor": {
@@ -152,9 +151,9 @@
     "skipPrefixes": [
       ".git",
       "node_modules",
-            "tmp",
-            "data/agent_supervisor",
-            "swissknife/node_modules",
+      "tmp",
+      "data/agent_supervisor",
+      "swissknife/node_modules",
       "swissknife/playwright-report",
       "swissknife/test-results",
       "swissknife/.pytest_cache",
@@ -215,8 +214,6 @@
     "fallback": "typed_defer_or_codex",
     "modelOutputAuthority": "proposal_only",
     "laneAssignments": [
-      "grok",
-      "codex",
       "grok",
       "codex"
     ],

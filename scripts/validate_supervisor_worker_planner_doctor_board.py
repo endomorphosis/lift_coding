@@ -55,15 +55,9 @@ TODO_PATH = (
 SCHEDULER_PATH = (
     REPO_ROOT / "config" / "supervisor_worker_planner_doctor_integration_scheduler.json"
 )
-VALIDATOR_PATH = (
-    REPO_ROOT / "scripts" / "validate_supervisor_worker_planner_doctor_board.py"
-)
-CONTROLLER_PATH = (
-    REPO_ROOT / "scripts" / "supervisor_worker_planner_doctor_supervisor.sh"
-)
-SUPERVISOR_CONFIG_PATH = (
-    REPO_ROOT / "config" / "supervisor_worker_planner_doctor_supervisor.json"
-)
+VALIDATOR_PATH = REPO_ROOT / "scripts" / "validate_supervisor_worker_planner_doctor_board.py"
+CONTROLLER_PATH = REPO_ROOT / "scripts" / "supervisor_worker_planner_doctor_supervisor.sh"
+SUPERVISOR_CONFIG_PATH = REPO_ROOT / "config" / "supervisor_worker_planner_doctor_supervisor.json"
 
 EXPECTED_GOAL_IDS = frozenset(
     {
@@ -226,9 +220,7 @@ def validate() -> dict[str, object]:
             )
     else:
         if set(ready) != {"WPD-000"}:
-            errors.append(
-                f"before bootstrap, only WPD-000 should be ready; got {ready}"
-            )
+            errors.append(f"before bootstrap, only WPD-000 should be ready; got {ready}")
 
     if TERMINAL_TASK_ID not in task_set:
         errors.append(f"missing terminal task {TERMINAL_TASK_ID}")
@@ -275,7 +267,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check-all", action="store_true", help="Full board validation")
     parser.add_argument("--json", action="store_true", help="Emit JSON only")
-    args = parser.parse_args(argv)
+    parser.parse_args(argv)
     payload = validate()
     text = json.dumps(payload, indent=2, sort_keys=True)
     print(text)
