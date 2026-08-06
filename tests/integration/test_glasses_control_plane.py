@@ -42,7 +42,7 @@ class TestGlassesControlPlane:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-app-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-app-control-plane.ts")
 
     def test_registry_has_all_apps(self, source):
         """All 9+ apps must be in GLASSES_APP_REGISTRY."""
@@ -116,7 +116,7 @@ class TestVoiceIntentRecognition:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-enhanced-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
 
     def test_all_intent_patterns_defined(self, source):
         """Must have patterns for all core intents."""
@@ -185,7 +185,7 @@ class TestGestureDispatch:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-enhanced-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
 
     def test_all_gesture_types_defined(self, source):
         """Must support all 13 gesture types."""
@@ -251,7 +251,7 @@ class TestORBBridge:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-enhanced-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
 
     def test_all_endpoints_mapped(self, source):
         """Must map all IPFS methods to endpoints."""
@@ -325,7 +325,7 @@ class TestNotificationPipeline:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-enhanced-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
 
     def test_priority_levels_defined(self, source):
         """Must support 4 priority levels."""
@@ -365,7 +365,7 @@ class TestStateSynchronization:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-enhanced-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
 
     def test_state_binding_interface(self, source):
         """Must define StateBinding with source, regionId, transform."""
@@ -397,11 +397,11 @@ class TestWidgetDescriptorValidation:
 
     @pytest.fixture
     def glasses_widgets_source(self):
-        return read_ts("src/services/ipfs-glasses-widgets.ts")
+        return read_ts("src/services/glasses/ipfs-glasses-widgets.ts")
 
     @pytest.fixture
     def display_profile_source(self):
-        return read_ts("src/services/meta-glasses-display-profile.ts")
+        return read_ts("src/services/glasses/meta-glasses-display-profile.ts")
 
     def test_all_ipfs_widgets_defined(self, glasses_widgets_source):
         """Must have widgets for Kit, Datasets, Accelerate."""
@@ -455,7 +455,7 @@ class TestDisplayConstraints:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-app-control-plane.ts")
+        return read_ts("src/services/glasses/glasses-app-control-plane.ts")
 
     def test_max_update_hz_within_limit(self, source):
         """max_update_hz must not exceed 5 (META_GLASSES_MAX_SAFE_UPDATE_HZ)."""
@@ -500,11 +500,11 @@ class TestIDLProfileIntegration:
 
     @pytest.fixture
     def idl_source(self):
-        return read_ts("src/services/ipfs-idl-descriptors.ts")
+        return read_ts("src/services/ipfs/ipfs-idl-descriptors.ts")
 
     @pytest.fixture
     def ui_profiles_source(self):
-        return read_ts("src/services/ipfs-ui-profiles.ts")
+        return read_ts("src/services/ipfs/ipfs-ui-profiles.ts")
 
     def test_all_idl_descriptors_have_methods(self, idl_source):
         """Every descriptor must have methods array."""
@@ -562,37 +562,42 @@ class TestMobileDeploymentReadiness:
         assert path.exists(), "expo-meta-wearables-dat module not found"
 
     def test_mobile_bridge_exists(self):
-        """Mobile ORB bridge TypeScript must exist."""
-        path = SWISSKNIFE / "src" / "services" / "meta-glasses-mobile-orb-bridge.ts"
-        assert path.exists(), "meta-glasses-mobile-orb-bridge.ts not found"
+        """Mobile ORB bridge TypeScript must exist (compat root + glasses owner)."""
+        compat = SWISSKNIFE / "src" / "services" / "meta-glasses-mobile-orb-bridge.ts"
+        owner = SWISSKNIFE / "src" / "services" / "glasses" / "meta-glasses-mobile-orb-bridge.ts"
+        assert compat.exists() or owner.exists(), "meta-glasses-mobile-orb-bridge.ts not found"
+        if compat.exists() and owner.exists():
+            # Compat path must re-export the glasses-owned implementation.
+            text = compat.read_text()
+            assert "glasses/meta-glasses-mobile-orb-bridge" in text
 
     def test_display_orb_adapter_exists(self):
         """Display ORB adapter must exist."""
-        path = SWISSKNIFE / "src" / "services" / "meta-glasses-display-orb-adapter.ts"
+        path = SWISSKNIFE / "src" / "services" / "glasses" / "meta-glasses-display-orb-adapter.ts"
         assert path.exists(), "meta-glasses-display-orb-adapter.ts not found"
 
     def test_widget_compiler_exists(self):
         """Widget compiler must exist."""
-        path = SWISSKNIFE / "src" / "services" / "meta-glasses-widget-compiler.ts"
+        path = SWISSKNIFE / "src" / "services" / "glasses" / "meta-glasses-widget-compiler.ts"
         assert path.exists(), "meta-glasses-widget-compiler.ts not found"
 
     def test_interface_registry_exists(self):
         """Interface registry must exist."""
-        path = SWISSKNIFE / "src" / "services" / "ipfs-interface-registry.ts"
+        path = SWISSKNIFE / "src" / "services" / "ipfs" / "ipfs-interface-registry.ts"
         assert path.exists(), "ipfs-interface-registry.ts not found"
 
     def test_control_plane_exports_consistent(self):
         """Both control plane files must export compatible interfaces."""
-        _cp1 = read_ts("src/services/glasses-app-control-plane.ts")
-        cp2 = read_ts("src/services/glasses-enhanced-control-plane.ts")
+        _cp1 = read_ts("src/services/glasses/glasses-app-control-plane.ts")
+        cp2 = read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
         # Enhanced must import from base
         assert "GlassesAppControlPlane" in cp2
         assert "GLASSES_APP_REGISTRY" in cp2 or "glasses-app-control-plane" in cp2
 
     def test_all_action_methods_are_valid_backend_endpoints(self):
         """Action method names must map to known backend endpoints."""
-        cp = read_ts("src/services/glasses-app-control-plane.ts")
-        enhanced = read_ts("src/services/glasses-enhanced-control-plane.ts")
+        cp = read_ts("src/services/glasses/glasses-app-control-plane.ts")
+        enhanced = read_ts("src/services/glasses/glasses-enhanced-control-plane.ts")
 
         # Extract method names from action bindings
         _methods = set(re.findall(r"method:\s*'([^']+)'", cp))
