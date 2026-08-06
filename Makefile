@@ -42,13 +42,11 @@ test-ci:
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py \
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py \
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py \
-		--ignore=tests/integration/test_swissknife_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_swissknife_external_ipfs_datasets_interop.py \
 		--ignore=tests/integration/test_swissknife_mcp_plus_plus_interop.py \
 		--ignore=tests/integration/test_swissknife_mobile_interop.py \
 		--ignore=tests/integration/test_hallucinate_app_mobile_interop.py \
 		--ignore=tests/integration/test_orb_dynamic_renderer.py \
-		--ignore=tests/integration/test_e2e_connectivity.py \
 		--ignore=tests/integration/test_desktop_app_integrations.py \
 		--ignore=tests/integration/test_glasses_control_plane.py
 

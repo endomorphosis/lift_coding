@@ -102,7 +102,7 @@ class TestTaskManagerIntegration:
 
     def test_shows_daemon_ports(self):
         src = read_browser_main()
-        assert "8004" in src
+        assert "8014" in src
         assert "3002" in src
         assert "3003" in src
 
@@ -258,7 +258,7 @@ class TestSettingsIntegration:
     def test_shows_mcp_backend_ports(self):
         src = read_browser_main()
         # Settings shows all port assignments
-        assert ":8004" in src
+        assert ":8014" in src
         assert ":3002" in src
         assert ":3003" in src
         assert ":8765" in src
