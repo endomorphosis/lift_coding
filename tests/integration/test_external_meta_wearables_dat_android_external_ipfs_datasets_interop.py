@@ -48,24 +48,18 @@ HEAP_PATH = REPO_ROOT / "implementation_plan/docs/23-virtual-ai-os-objective-goa
 DOC_PATH = (
     REPO_ROOT / "docs/integration/external_meta_wearables_dat_android-external_ipfs_datasets.md"
 )
-DEPRECATIONS_SCHEMA_PATH = (
-    IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
-)
-BUCKET_VFS_DEMO_PATH = (
-    IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
-)
+# Descriptor candidates are monorepo-root-relative under external/ipfs_kit.
+DEPRECATIONS_SCHEMA_PATH = REPO_ROOT / "external/ipfs_kit/data/deprecations_report.schema.json"
+BUCKET_VFS_DEMO_PATH = REPO_ROOT / "external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py"
 BUCKET_VFS_DOC_PATH = (
-    IPFS_DATASETS_ROOT / ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+    REPO_ROOT / "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
-BUCKET_VFS_DEMO_SUFFIXES = tuple(
-    f".tools/ipfs_kit_py/{candidate.removeprefix('.tools/ipfs_kit_py/')}"
-    for candidate in BUCKET_VFS_DEMO_PATH_CANDIDATES
-)
+BUCKET_VFS_DEMO_SUFFIXES = BUCKET_VFS_DEMO_PATH_CANDIDATES
 
 
 def bucket_vfs_demo_path() -> Path:
     for candidate in BUCKET_VFS_DEMO_PATH_CANDIDATES:
-        path = IPFS_DATASETS_ROOT / candidate
+        path = REPO_ROOT / candidate
         if path.is_file() and path.read_text(encoding="utf-8").strip():
             return path
     return BUCKET_VFS_DEMO_PATH
@@ -79,14 +73,11 @@ def test_expected_external_descriptors_exist_on_disk() -> None:
         "external/meta-wearables-dat-android/samples/DisplayAccess/app/src/main/AndroidManifest.xml",
         "external/meta-wearables-dat-android/samples/DisplayAccess/app/src/main/java/com/meta/"
         "wearable/dat/externalsampleapps/displayaccess/display/DisplayViewModel.kt",
-        "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json",
-        (
-            "external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/"
-            "BUCKET_VFS_INTERFACES_COMPLETE.md"
-        ),
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py",
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py",
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/schema_column_optimization_example.py",
+        "external/ipfs_kit/data/deprecations_report.schema.json",
+        "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md",
+        "external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py",
+        "external/ipfs_kit/examples/demo_unified_bucket_interface.py",
+        "external/ipfs_kit/examples/schema_column_optimization_example.py",
         "external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py",
         "external/ipfs_datasets/ipfs_datasets_py/embeddings_router.py",
         "external/ipfs_datasets/ipfs_datasets_py/llm_router.py",
@@ -131,14 +122,14 @@ def test_discover_ipfs_datasets_bucket_vfs_contract_finds_router_and_bucket_surf
         "generate_text",
     }.issubset(set(contract.router_symbols))
     assert contract.deprecations_report_schema_path.endswith(
-        ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
+        "external/ipfs_kit/data/deprecations_report.schema.json"
     )
     assert contract.bucket_vfs_doc_path.endswith(
-        ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+        "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     )
     assert contract.bucket_vfs_demo_path.endswith(BUCKET_VFS_DEMO_SUFFIXES)
     assert contract.unified_bucket_demo_path.endswith(
-        ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
+        "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
     )
 
 

@@ -7,6 +7,11 @@ surface. The proof is intentionally static and deterministic: it validates
 source-tree descriptors, JSON schemas, Bucket VFS interfaces, router entrypoints,
 and then emits a content-addressed handoff receipt without requiring Android,
 Kotlin, Kubo, DuckDB, or live network services.
+
+The pinned monorepo layout keeps Bucket VFS / unified-bucket evidence in the
+sibling ``external/ipfs_kit`` checkout (formerly nested under
+``external/ipfs_datasets/.tools/ipfs_kit_py``). Router entrypoints remain under
+``external/ipfs_datasets/ipfs_datasets_py``.
 """
 
 from __future__ import annotations
@@ -57,24 +62,43 @@ REQUIRED_DISPLAY_ICON_NAMES = (
 )
 REQUIRED_DISPLAY_BUTTON_STYLES = ("PRIMARY", "SECONDARY")
 
-IPFS_KIT_TOOL_ROOT = ".tools/ipfs_kit_py"
-REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
-REQUIRED_BUCKET_VFS_DOC_PATH = (
-    ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+# Repo-root-relative paths into the pinned ``external/ipfs_kit`` surface that
+# this pair uses as scanner-visible Bucket VFS / unified-bucket evidence for
+# the external/ipfs_datasets interop contract.
+IPFS_KIT_TOOL_ROOT = "external/ipfs_kit"
+REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = (
+    "external/ipfs_kit/data/deprecations_report.schema.json"
 )
-REQUIRED_BUCKET_VFS_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
+REQUIRED_BUCKET_VFS_DOC_PATH = (
+    "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+)
+REQUIRED_BUCKET_VFS_DEMO_PATH = "external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py"
 BUCKET_VFS_DEMO_PATH_CANDIDATES = (
     REQUIRED_BUCKET_VFS_DEMO_PATH,
-    ".tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py",
-    ".tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py",
+    "external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py",
 )
-REQUIRED_UNIFIED_BUCKET_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
+REQUIRED_UNIFIED_BUCKET_DEMO_PATH = (
+    "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
+)
 REQUIRED_SCHEMA_COLUMN_OPTIMIZATION_EXAMPLE_PATH = (
-    ".tools/ipfs_kit_py/examples/schema_column_optimization_example.py"
+    "external/ipfs_kit/examples/schema_column_optimization_example.py"
 )
+REQUIRED_UNIFIED_BUCKET_INTERFACE_PATH = (
+    "external/ipfs_kit/ipfs_kit_py/unified_bucket_interface.py"
+)
+# Paths relative to the ``external/ipfs_datasets`` checkout.
 REQUIRED_IPFS_BACKEND_ROUTER_PATH = "ipfs_datasets_py/ipfs_backend_router.py"
 REQUIRED_EMBEDDINGS_ROUTER_PATH = "ipfs_datasets_py/embeddings_router.py"
 REQUIRED_LLM_ROUTER_PATH = "ipfs_datasets_py/llm_router.py"
+# Canonical accelerator implementations re-exported by the datasets router
+# aliases (see ``ipfs_datasets_py._router_alias``). Used only for static symbol
+# discovery so the interop proof does not depend on import-time side effects.
+REQUIRED_ACCELERATE_EMBEDDINGS_ROUTER_PATH = (
+    "external/ipfs_accelerate/ipfs_accelerate_py/embeddings_router.py"
+)
+REQUIRED_ACCELERATE_LLM_ROUTER_PATH = (
+    "external/ipfs_accelerate/ipfs_accelerate_py/llm_router.py"
+)
 
 REQUIRED_DEPRECATIONS_REPORT_KEYS = (
     "report_version",
@@ -322,10 +346,34 @@ def discover_meta_wearables_dat_android_contract(
     )
 
 
+def _monorepo_root_for_ipfs_datasets(root_path: Path) -> Path:
+    """Resolve the monorepo root that owns ``external/ipfs_datasets`` and ``external/ipfs_kit``.
+
+    Accepts either the ``external/ipfs_datasets`` checkout path or the monorepo
+    root itself so callers can pass the datasets pin while Bucket VFS
+    descriptors live in the sibling ``external/ipfs_kit`` checkout.
+    """
+    resolved = root_path.resolve()
+    if resolved.name == "ipfs_datasets" and resolved.parent.name == "external":
+        return resolved.parent.parent
+    if (resolved / "external" / "ipfs_kit").is_dir() or (
+        resolved / "external" / "ipfs_datasets"
+    ).is_dir():
+        return resolved
+    # When only a temporary datasets root is provided (missing-root tests), keep
+    # discovery rooted at that path so absolute descriptor lookups stay local.
+    return resolved
+
+
 def discover_ipfs_datasets_bucket_vfs_contract(
     root: str | Path,
 ) -> IPFSDatasetsBucketVFSContract:
-    """Discover the ipfs_datasets Bucket VFS and router descriptors."""
+    """Discover the ipfs_datasets Bucket VFS and router descriptors.
+
+    Reads (without importing) the scanner-visible Bucket VFS descriptors pinned
+    under ``external/ipfs_kit`` plus the router entrypoints under
+    ``external/ipfs_datasets/ipfs_datasets_py``.
+    """
 
     root_path = Path(root)
     if not root_path.exists():
@@ -333,19 +381,28 @@ def discover_ipfs_datasets_bucket_vfs_contract(
             f"ipfs_datasets root not found: {root_path}"
         )
 
-    ipfs_kit_tool_root = root_path / IPFS_KIT_TOOL_ROOT
-    deprecations_report_schema_path = root_path / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH
-    bucket_vfs_doc_path = root_path / REQUIRED_BUCKET_VFS_DOC_PATH
+    repo_root = _monorepo_root_for_ipfs_datasets(root_path)
+    ipfs_kit_tool_root = repo_root / IPFS_KIT_TOOL_ROOT
+    deprecations_report_schema_path = repo_root / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH
+    bucket_vfs_doc_path = repo_root / REQUIRED_BUCKET_VFS_DOC_PATH
     bucket_vfs_demo_path, bucket_vfs_demo_source = _select_nonempty_file(
-        root_path, BUCKET_VFS_DEMO_PATH_CANDIDATES
+        repo_root, BUCKET_VFS_DEMO_PATH_CANDIDATES
     )
-    unified_bucket_demo_path = root_path / REQUIRED_UNIFIED_BUCKET_DEMO_PATH
+    unified_bucket_demo_path = repo_root / REQUIRED_UNIFIED_BUCKET_DEMO_PATH
     schema_column_optimization_example_path = (
-        root_path / REQUIRED_SCHEMA_COLUMN_OPTIMIZATION_EXAMPLE_PATH
+        repo_root / REQUIRED_SCHEMA_COLUMN_OPTIMIZATION_EXAMPLE_PATH
     )
-    ipfs_backend_router_path = root_path / REQUIRED_IPFS_BACKEND_ROUTER_PATH
-    embeddings_router_path = root_path / REQUIRED_EMBEDDINGS_ROUTER_PATH
-    llm_router_path = root_path / REQUIRED_LLM_ROUTER_PATH
+    unified_bucket_interface_path = repo_root / REQUIRED_UNIFIED_BUCKET_INTERFACE_PATH
+    # Routers stay inside the ipfs_datasets checkout (not the monorepo root).
+    datasets_root = (
+        root_path
+        if (root_path / REQUIRED_IPFS_BACKEND_ROUTER_PATH).is_file()
+        or root_path.name == "ipfs_datasets"
+        else repo_root / "external" / "ipfs_datasets"
+    )
+    ipfs_backend_router_path = datasets_root / REQUIRED_IPFS_BACKEND_ROUTER_PATH
+    embeddings_router_path = datasets_root / REQUIRED_EMBEDDINGS_ROUTER_PATH
+    llm_router_path = datasets_root / REQUIRED_LLM_ROUTER_PATH
 
     _require_files(
         "ipfs_datasets Bucket VFS/router descriptors",
@@ -355,6 +412,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
             bucket_vfs_demo_path,
             unified_bucket_demo_path,
             schema_column_optimization_example_path,
+            unified_bucket_interface_path,
             ipfs_backend_router_path,
             embeddings_router_path,
             llm_router_path,
@@ -368,7 +426,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
     _require_subset(
         REQUIRED_DEPRECATIONS_REPORT_KEYS,
         discovered_required_keys,
-        "ipfs_datasets .tools/ipfs_kit_py deprecations report schema required keys",
+        "ipfs_datasets external/ipfs_kit deprecations report schema required keys",
     )
 
     bucket_vfs_doc_source = bucket_vfs_doc_path.read_text(encoding="utf-8")
@@ -416,9 +474,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         + "\n"
         + unified_bucket_demo_source
         + "\n"
-        + (ipfs_kit_tool_root / "ipfs_kit_py/unified_bucket_interface.py").read_text(
-            encoding="utf-8"
-        )
+        + unified_bucket_interface_path.read_text(encoding="utf-8")
     )
     _require_subset(
         REQUIRED_BUCKET_VFS_CLI_COMMANDS,
@@ -444,9 +500,32 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         "ipfs_datasets VFSStructureType values",
     )
 
+    # Datasets-side embeddings/llm routers are thin aliases that re-export the
+    # accelerator implementations. Scan both the alias entrypoints and the
+    # monorepo-pinned canonical sources so symbols remain statically visible.
+    accelerate_embeddings_router_path = repo_root / REQUIRED_ACCELERATE_EMBEDDINGS_ROUTER_PATH
+    accelerate_llm_router_path = repo_root / REQUIRED_ACCELERATE_LLM_ROUTER_PATH
+    router_source_paths = (
+        ipfs_backend_router_path,
+        embeddings_router_path,
+        llm_router_path,
+        accelerate_embeddings_router_path,
+        accelerate_llm_router_path,
+    )
     router_sources = "\n".join(
         path.read_text(encoding="utf-8")
-        for path in (ipfs_backend_router_path, embeddings_router_path, llm_router_path)
+        for path in router_source_paths
+        if path.is_file()
+    )
+    _require_symbols(
+        embeddings_router_path.read_text(encoding="utf-8"),
+        ("load_accelerator_router", "embeddings_router"),
+        "ipfs_datasets embeddings_router alias",
+    )
+    _require_symbols(
+        llm_router_path.read_text(encoding="utf-8"),
+        ("load_accelerator_router", "llm_router"),
+        "ipfs_datasets llm_router alias",
     )
     discovered_router_symbols = tuple(
         symbol for symbol in REQUIRED_IPFS_DATASETS_ROUTER_SYMBOLS if symbol in router_sources
