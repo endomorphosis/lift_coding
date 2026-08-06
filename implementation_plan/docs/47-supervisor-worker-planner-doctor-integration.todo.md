@@ -484,7 +484,7 @@ W9  WPD-070
 
 ## WPD-042 Refill and backlog guards for residual rules
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -538,7 +538,7 @@ W9  WPD-070
 
 ## WPD-051 Preregistered paired LLM-avoidance benchmark
 
-- Status: active
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -619,7 +619,7 @@ W9  WPD-070
 
 ## WPD-070 Terminal current-tree release gate
 
-- Status: active
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
