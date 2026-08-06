@@ -592,7 +592,7 @@ W9  WPD-070
 
 ## WPD-061 Staged rollout controls for kernel-first default
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
