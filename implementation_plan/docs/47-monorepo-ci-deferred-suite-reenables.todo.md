@@ -123,7 +123,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-013 Re-enable SwissKnife datasets interop in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
