@@ -241,7 +241,7 @@ W9  WPD-070
 
 ## WPD-020 Implement PreImplementationKernel.evaluate
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
