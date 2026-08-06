@@ -1,0 +1,82 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-profile@1",
+  "profileId": "worker-planner-doctor-v1",
+  "mode": "reviewed_fixed_board",
+  "repositoryRoot": ".",
+  "integrationBranch": "agent/worker-planner-doctor-integration",
+  "planPath": "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration-plan-2026-08-06.md",
+  "objectivePath": "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.objectives.md",
+  "todoPath": "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.todo.md",
+  "validatorPath": "scripts/validate_supervisor_worker_planner_doctor_board.py",
+  "controllerPath": "scripts/supervisor_worker_planner_doctor_supervisor.sh",
+  "schedulerPath": "config/supervisor_worker_planner_doctor_integration_scheduler.json",
+  "taskPrefix": "## WPD-",
+  "goalPrefix": "WPD-G",
+  "boardNamespace": "agent-supervisor-worker-planner-doctor-v1",
+  "stateRootEnvironment": "IPFS_WPD_STATE_ROOT",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/worker-planner-doctor-v1",
+  "repositories": {
+    "accelerator": "external/ipfs_accelerate",
+    "datasets": "external/ipfs_datasets",
+    "kit": "external/ipfs_kit"
+  },
+  "providerPolicy": {
+    "primary": {
+      "provider": "grok",
+      "model": "grok-4.5"
+    },
+    "fallback": {
+      "provider": "codex",
+      "model": "gpt-5.6-terra",
+      "modelReasoningEffort": "medium"
+    },
+    "fallbackTrigger": "grok_quota_exhausted",
+    "primaryUnavailableAction": "fail_preflight",
+    "nonQuotaFailureAction": "propagate_without_fallback",
+    "appliesTo": ["implementation", "semantic_merge_resolver"]
+  },
+  "parallelRuntime": {
+    "enabled": true,
+    "laneCount": 3,
+    "scheduler": "deterministic_numeric_task_shards",
+    "strictTaskSharding": true,
+    "initialClaimableTaskIds": ["WPD-001", "WPD-002", "WPD-003"],
+    "isolation": "ephemeral_git_worktree_per_task",
+    "mergeQueue": "shared_serial",
+    "mergeTargetBranch": "agent/worker-planner-doctor-integration",
+    "objectiveRefillEnabled": false,
+    "codebaseRefillEnabled": false,
+    "checkIntervalSeconds": 30,
+    "daemonIntervalSeconds": 60,
+    "staleSeconds": 1800,
+    "watchdogStartupGraceSeconds": 300,
+    "implementationTimeoutSeconds": 7200,
+    "implementationMaxTimeoutSeconds": 10800,
+    "implementationLogStallSeconds": 1200,
+    "maxTaskAttempts": 5,
+    "implementationRetryBudget": 3,
+    "validationRetryBudget": 3,
+    "mergeRetryBudget": 3,
+    "providers": ["grok-codex", "grok-codex", "grok-codex"],
+    "worktreeSubmodulePaths": [
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit"
+    ],
+    "protectedPaths": [
+      "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration-plan-2026-08-06.md",
+      "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.objectives.md",
+      "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.todo.md",
+      "config/supervisor_worker_planner_doctor_integration_scheduler.json",
+      "config/supervisor_worker_planner_doctor_supervisor.json",
+      "scripts/validate_supervisor_worker_planner_doctor_board.py",
+      "scripts/supervisor_worker_planner_doctor_supervisor.sh"
+    ]
+  },
+  "safetyFloors": {
+    "unauthorized_llm_calls": 0,
+    "deterministic_doctor_network_or_llm_load": 0,
+    "free_reprompt_after_typed_failure": 0,
+    "completion_from_provider_prose": 0
+  }
+}
