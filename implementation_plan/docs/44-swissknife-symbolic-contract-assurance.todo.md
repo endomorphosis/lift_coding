@@ -12,6 +12,10 @@ Human plan:
 Runtime profile:
 `config/swissknife_symbolic_contract_assurance_supervisor.json`.
 
+Formal-first improvement plan:
+`implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md`.
+Current selection phase: **formal_first_enablement** (gate: SCA-ENABLE-CLOSE).
+
 ## Objective
 
 Build a whole-tree, content-addressed SwissKnife AST and MCP++ contract graph;
@@ -36,6 +40,8 @@ Normative:
 - Mutation and completion require current-snapshot validation and re-proof.
 
 ## Parallel execution contract
+
+- **Formal-first phase:** until SCA-ENABLE-CLOSE completes, only formal-enablement / proof / index / doctor-bridge tracks are intended for selection; parser-failure-row-verification is deferred.
 
 - Four deterministic task shards may implement ready tasks concurrently.
 - Every active task declares a unique `Parallel lane`, exact `Predicted files`,
@@ -91,6 +97,182 @@ Normative:
 - Effects: Creates reviewed intent and an executable dependency graph; no source implementation mutation.
 - Evidence subset: SCA planning seal
 - Acceptance: Files parse, goal/task IDs are unique, dependencies are acyclic, trust boundaries and full-scan scope are explicit, and launch configuration is bounded.
+
+## Formal-first enablement (2026-08-06)
+
+See `implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md`.
+Until **SCA-ENABLE-CLOSE** is completed, tracks `parser-failure-row-verification`,
+`parser-failure-fan-in`, `parser-failure-cluster-repair`, and `parser-failure-aggregate`
+are not selectable. SCA-225 (authoritative index) no longer hard-depends on SCA-512
+(exact 258-row reconciliation) so the formal path cannot cycle through ENABLE-CLOSE.
+Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
+
+## SCA-ENABLE-000 Seal formal-first selection phase
+
+- Status: completed
+- Completion: manual 2026-08-06
+- Priority: P0
+- Track: formal-enablement
+- Selection band: B0
+- Selection phase: formal_first_enablement
+- Depends on: SCA-000
+- Goal id: SCA-G001
+- Outputs: implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md, config/swissknife_symbolic_contract_assurance_supervisor.json, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
+- Validation: test -f implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md && python3 -m json.tool config/swissknife_symbolic_contract_assurance_supervisor.json >/dev/null && python3 scripts/sca_formal_first_ready.py --expect-phase formal_first_enablement
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/formal-enablement
+- Parallel lane: sca-planning
+- Resource class: cpu-small
+- Resource stage: planning
+- Implementation timeout seconds: 1800
+- Predicted files: implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md, config/swissknife_symbolic_contract_assurance_supervisor.json, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md, scripts/sca_formal_first_ready.py
+- Interfaces: ObjectiveGraph, MarkdownTaskSource
+- Provider role: deterministic-only
+- Runtime model calls: 0
+- Implementation mode: deterministic_only
+- Conflict policy: Own SCA formal-first selection only; do not delete parser-row tasks.
+- Preconditions: SCA-000 sealed.
+- Effects: Declares formal_first_enablement phase and board gate SCA-ENABLE-CLOSE.
+- Evidence subset: Formal-first plan and profile seal
+- Acceptance: Plan file exists; supervisor JSON mode is formal_first_enablement; selectionPolicy.gateTaskId is SCA-ENABLE-CLOSE; sca_formal_first_ready --expect-phase passes.
+
+## SCA-ENABLE-001 Demote parser-row and freeze bulk LLM implementation
+
+- Status: completed
+- Completion: manual 2026-08-06
+- Priority: P0
+- Track: formal-enablement
+- Selection band: B0
+- Selection phase: formal_first_enablement
+- Depends on: SCA-ENABLE-000
+- Goal id: SCA-G001
+- Outputs: implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
+- Validation: python3 scripts/sca_formal_first_ready.py --check-parser-row-deferred
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/formal-enablement
+- Parallel lane: sca-planning
+- Resource class: cpu-small
+- Resource stage: planning
+- Implementation timeout seconds: 1800
+- Predicted files: implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md
+- Interfaces: MarkdownTaskSource
+- Provider role: deterministic-only
+- Runtime model calls: 0
+- Implementation mode: deterministic_only
+- Conflict policy: Do not delete parser-row tasks; only demote and gate them.
+- Effects: Every parser-failure-row-verification task depends on SCA-ENABLE-CLOSE and is Priority P3 / band B3.
+- Evidence subset: Board demotion receipt via sca_formal_first_ready
+- Acceptance: Zero ready parser-failure-row-verification tasks without SCA-ENABLE-CLOSE completed; all such tasks list SCA-ENABLE-CLOSE in Depends on.
+
+## SCA-ENABLE-DOCTOR Bind deterministic doctor into SCA repair path
+
+- Status: todo
+- Priority: P0
+- Track: doctor-bridge
+- Selection band: B0
+- Selection phase: formal_first_enablement
+- Depends on: SCA-ENABLE-000, SCA-645
+- Goal id: SCA-G100
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/sca_doctor_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_sca_doctor_bridge.py
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_sca_doctor_bridge.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/doctor-bridge
+- Parallel lane: sca-proof
+- Resource class: cpu-medium
+- Resource stage: analysis
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/sca_doctor_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_sca_doctor_bridge.py
+- Interfaces: DeterministicDoctor, ContractFinding, transform_receipt@1
+- Provider role: deterministic-only
+- Runtime model calls: 0
+- Implementation mode: deterministic_only
+- Conflict policy: Doctor cannot mint kernel proof; transforms require re-index/re-prove fixed point.
+- Preconditions: Mismatch analyzer path (SCA-645) exists or is landable.
+- Effects: SCA findings map to analytical transform or typed abstention without LLM.
+- Evidence subset: Doctor bridge unit tests
+- Acceptance: Fixture finding produces transform_receipt or analytical_abstention with zero model calls.
+
+## SCA-ENABLE-RPR Bind proof-gated contract repair selection
+
+- Status: todo
+- Priority: P0
+- Track: doctor-bridge
+- Selection band: B0
+- Selection phase: formal_first_enablement
+- Depends on: SCA-ENABLE-DOCTOR, SCA-218
+- Goal id: SCA-G100
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/sca_rpr_admission.py, external/ipfs_accelerate/test/api/test_agent_supervisor_sca_rpr_admission.py, data/agent_supervisor/swissknife_contract_assurance/rpr_admission_ready.json
+- Validation: python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_sca_rpr_admission.py -q
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/rpr-bridge
+- Parallel lane: sca-proof
+- Resource class: cpu-medium
+- Resource stage: analysis
+- Implementation timeout seconds: 7200
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/sca_rpr_admission.py, external/ipfs_accelerate/test/api/test_agent_supervisor_sca_rpr_admission.py, data/agent_supervisor/swissknife_contract_assurance/rpr_admission_ready.json
+- Interfaces: contract_repair_task_source, code_contract_prover, admitted_target_decision
+- Provider role: deterministic-only
+- Runtime model calls: 0
+- Implementation mode: deterministic_only
+- Conflict policy: No LLM implementation without admitted target + current snapshot binding. Do not edit config/swissknife_symbolic_contract_assurance_supervisor.json here (SCA-ENABLE-CLOSE owns profile phase flip).
+- Effects: SCA LLM implement lanes fail closed without RPR admission; write readiness receipt for ENABLE-CLOSE.
+- Evidence subset: RPR admission tests
+- Acceptance: Unbound LLM implement tasks are rejected; admitted packet carries counterexample + reproof command.
+
+## SCA-ENABLE-UIR Bind UI/UX IR for SwissKnife UI contracts
+
+- Status: todo
+- Priority: P0
+- Track: ui-ir-binding
+- Selection band: B1
+- Selection phase: formal_first_enablement
+- Depends on: SCA-ENABLE-DOCTOR, SCA-643
+- Goal id: SCA-G030
+- Outputs: implementation_plan/docs/47-sca-uir-swissknife-ui-mapping.md, tests or conformance fixture under data/agent_supervisor/swissknife_contract_assurance/uir
+- Validation: test -f implementation_plan/docs/47-sca-uir-swissknife-ui-mapping.md
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/ui-ir
+- Parallel lane: sca-graph
+- Resource class: cpu-medium
+- Resource stage: analysis
+- Implementation timeout seconds: 7200
+- Predicted files: implementation_plan/docs/47-sca-uir-swissknife-ui-mapping.md, src/handsfree/swissknife_virtual_ui.py
+- Interfaces: UI/UX IR, SwissknifeVirtualUIBinding, MCP-IDL
+- Provider role: deterministic-only
+- Runtime model calls: 0
+- Implementation mode: deterministic_only
+- Conflict policy: Unsupported UI fragments must be explicit unsupported, never silent pass.
+- Effects: SwissKnife web/virtual/ORB UI claims route through UIR where supported.
+- Evidence subset: Mapping + at least one round-trip or unsupported disposition
+- Acceptance: Mapping covers web apps, virtual UI, and ORB bindings; unsupported paths are typed.
+
+## SCA-ENABLE-CLOSE Formal path gate for deferred B3 work
+
+- Status: todo
+- Priority: P0
+- Track: formal-enablement
+- Selection band: B0
+- Selection phase: formal_first_enablement
+- Depends on: SCA-ENABLE-000, SCA-ENABLE-001, SCA-ENABLE-DOCTOR, SCA-ENABLE-RPR, SCA-218, SCA-645, SCA-606, SCA-221
+- Goal id: SCA-G000
+- Outputs: data/agent_supervisor/swissknife_contract_assurance/formal_first_enablement_closeout.json, config/swissknife_symbolic_contract_assurance_supervisor.json
+- Validation: python3 scripts/sca_formal_first_ready.py --expect-closeout
+- Board namespace: swissknife-symbolic-contract-assurance-v1
+- Bundle: swissknife/contract-assurance/formal-enablement
+- Parallel lane: sca-planning
+- Resource class: cpu-small
+- Resource stage: planning
+- Implementation timeout seconds: 3600
+- Predicted files: data/agent_supervisor/swissknife_contract_assurance/formal_first_enablement_closeout.json, config/swissknife_symbolic_contract_assurance_supervisor.json
+- Interfaces: selectionPolicy
+- Provider role: deterministic-only
+- Runtime model calls: 0
+- Implementation mode: deterministic_only
+- Conflict policy: Do not flip phase until checklist green.
+- Effects: selectionPolicy.phase may move to symbolic_repair; parser-row tasks become selectable under packet rules only.
+- Evidence subset: Closeout checklist receipt
+- Acceptance: Doctor bridge, RPR admission, prover wiring (SCA-218), mismatch analyzer (SCA-645), solver readiness (SCA-606), and repair projection (SCA-221) are completed or explicitly blocked with typed evidence; phase flip recorded.
+
 
 ## SCA-010 Implement exact repository snapshot and coverage contracts
 
@@ -916,7 +1098,7 @@ Normative:
 
 ## SCA-167 Enforce symbolic-only tasks and bounded Grok/Codex routing
 
-- Status: completed
+- Status: todo
 - Priority: P0
 - Track: provider-policy
 - Depends on: SCA-100, SCA-110, SCA-111
@@ -3136,7 +3318,9 @@ Normative:
 - Status: todo
 - Priority: P0
 - Track: authoritative-index-publication
-- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-512, SCA-609
+- Selection band: B0
+- Selection phase: formal_first_enablement
+- Depends on: SCA-120, SCA-215, SCA-216, SCA-229, SCA-609
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/generations, data/agent_supervisor/swissknife_contract_assurance/authoritative, data/agent_supervisor/swissknife_contract_assurance/baseline/repository-index.json, data/agent_supervisor/swissknife_contract_assurance/baseline/current.json, data/agent_supervisor/swissknife_contract_assurance/baseline/handoff.json, data/agent_supervisor/swissknife_contract_assurance/baseline/provider-index.json, data/agent_supervisor/swissknife_contract_assurance/analyzer_health/report.json
 - Validation: test -L data/agent_supervisor/swissknife_contract_assurance/authoritative && python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_repository_index_handoff.py external/ipfs_accelerate/test/api/test_agent_supervisor_multi_root_repository_index.py -q
@@ -3151,8 +3335,8 @@ Normative:
 - Context budget tokens: 0
 - Provider role: deterministic-only
 - Runtime model calls: 0
-- Conflict policy: Run in the foreground from a fresh staging root; never use shadow, skip-extraction, weakened thresholds, copied audit artifacts, or model/provider execution.
-- Preconditions: Parser triage is healthy at the reviewed 10/0.01 budget; implementation completion gates enforce deterministic-only execution receipts.
+- Conflict policy: Run in the foreground from a fresh staging root; never use shadow, skip-extraction, weakened thresholds, copied audit artifacts, or model/provider execution. Do not hard-block on SCA-512 exact 258-row reconciliation during formal_first_enablement (that gate is post-SCA-ENABLE-CLOSE); use the reviewed 10/0.01 failure budget instead.
+- Preconditions: Parser triage is healthy at the reviewed 10/0.01 budget; implementation completion gates enforce deterministic-only execution receipts. Exact zero-failure reconciliation is deferred to SCA-512 after SCA-ENABLE-CLOSE.
 - Effects: Atomically advances one content-addressed generation pointer after full primary/provider extraction and freshness revalidation.
 - Evidence subset: Snapshot/index/AST/coverage/health/provider/toolchain/extraction roots and zero-call execution receipt
 - Acceptance: Full extraction runs with `--require-healthy`, no shadow/skip flags, failure budget at most 10 and 0.01, exact TypeScript 5.9.3, complete provider symbol accounting, and zero model/provider/LLM calls; a failed or interrupted run leaves the prior pointer unchanged.
@@ -3347,9 +3531,11 @@ Normative:
 ## SCA-233 Repair converted browser-test parser failures
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229, SCA-615
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-231, SCA-229, SCA-615, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: swissknife/ipfs_accelerate_js/test/browser, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster BROWSER --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json
@@ -3377,9 +3563,11 @@ Normative:
 ## SCA-234 Repair active JavaScript and content-routing parser failures
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229, SCA-615
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-231, SCA-229, SCA-615, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: swissknife/ipfs_accelerate_js/src/utils/run_web_platform_integration_tests.js, swissknife/test/mocks/stubs/chai-stub.js, swissknife/test/unit/cli/chat-command.test.js, swissknife/test/utils/mockMCPClient.js, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/polyglot_ast_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_polyglot_ast_provider.py, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster ACTIVEJS --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json
@@ -3469,9 +3657,11 @@ Normative:
 ## SCA-237 Repair legacy-archive JavaScript parser failures
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-cluster-repair
-- Depends on: SCA-231, SCA-229, SCA-615
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-231, SCA-229, SCA-615, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: swissknife/web/legacy-archive, data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-cluster --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --cluster LEGACY --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json
@@ -3499,9 +3689,11 @@ Normative:
 ## SCA-238 Verify parser-failure row 003c2dac02ac
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-238 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/003c2dac02ac8557a0662f4463f14ab37701be6466b8c2929313b2a634fd8f96.json
@@ -3537,9 +3729,11 @@ Normative:
 ## SCA-239 Verify parser-failure row 0177f2686c81
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-239 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0177f2686c811e1238242dd0dc8b3065d60c25be388553c2267899f7195b7efe.json
@@ -3575,9 +3769,11 @@ Normative:
 ## SCA-240 Verify parser-failure row 03f436b3595c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-240 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/03f436b3595cc0fe1a2bad9a10838ec312ff6c250684193a7db174b9bf8b91bd.json
@@ -3613,9 +3809,11 @@ Normative:
 ## SCA-241 Verify parser-failure row 048f0c2fbb11
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-241 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/048f0c2fbb11376fcc9f5946de986cbfd20174eaec2659df9ec5b7d3f6d5d0ef.json
@@ -3651,9 +3849,11 @@ Normative:
 ## SCA-242 Verify parser-failure row 0598f4486334
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-242 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0598f44863349ab1b04952460402ff5c83729075fb84e76bdac1e56902606a48.json
@@ -3689,9 +3889,11 @@ Normative:
 ## SCA-243 Verify parser-failure row 077ef3066dc7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-235
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-235, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-243 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/077ef3066dc723b4470a6451a41f798e1fada18609e1deaf0483f4427b455909.json
@@ -3727,9 +3929,11 @@ Normative:
 ## SCA-244 Verify parser-failure row 078cf9ce7af9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-244 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/078cf9ce7af98ba9945767cfca60f9e67f4d7bf7c899314d8d3c4750a4857eba.json
@@ -3765,9 +3969,11 @@ Normative:
 ## SCA-245 Verify parser-failure row 084c80473c4d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-245 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/084c80473c4d68c43466b6f44036c95d8afb91563121fa5c7898fa14dd98fb55.json
@@ -3803,9 +4009,11 @@ Normative:
 ## SCA-246 Verify parser-failure row 09107cd57d69
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-246 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/09107cd57d693a0c58f1b4d2dacc888738b22000cb87280f612f0738a39928f5.json
@@ -3841,9 +4049,11 @@ Normative:
 ## SCA-247 Verify parser-failure row 0b7826822749
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-247 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0b7826822749f19fd101b3b44754cd6af1e7920292e4d0c560b7e20179dd0f03.json
@@ -3879,9 +4089,11 @@ Normative:
 ## SCA-248 Verify parser-failure row 0bb636160e60
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-248 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bb636160e6078b9bbd3fad421280081370f4b1882de68b6bb5be9d06e7e3fa9.json
@@ -3917,9 +4129,11 @@ Normative:
 ## SCA-249 Verify parser-failure row 0bf29217cfa3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-249 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0bf29217cfa30a8991db8455af12566ca8744160c94dc0a76baa5d3f10447b93.json
@@ -3955,9 +4169,11 @@ Normative:
 ## SCA-250 Verify parser-failure row 0c590bdcc62d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-250 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0c590bdcc62d4bfa6652d3531378e537575179f27a9fe329dde367c6eaea9c64.json
@@ -3993,9 +4209,11 @@ Normative:
 ## SCA-251 Verify parser-failure row 0d2f151f4b32
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-251 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d2f151f4b321fcd17a681536ed45fc6282db01066b557cab139da2c94008c0c.json
@@ -4031,9 +4249,11 @@ Normative:
 ## SCA-252 Verify parser-failure row 0d4294f6ee9c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-252 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0d4294f6ee9c40a83ca9a3214dfcbdad0f6f81360bc4894ec8733d475bbc4a89.json
@@ -4069,9 +4289,11 @@ Normative:
 ## SCA-253 Verify parser-failure row 0e73fbbe1af9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-253 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0e73fbbe1af9deb511c1feef7b0a1e20825a29d7bbb26c06a0d4c2cf06827f27.json
@@ -4107,9 +4329,11 @@ Normative:
 ## SCA-254 Verify parser-failure row 0eec7b222ffa
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-254 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0eec7b222ffa40c622cf7b301dfc12e02dd16a0ffb33c4b2c9be5beeb6a1af8f.json
@@ -4145,9 +4369,11 @@ Normative:
 ## SCA-255 Verify parser-failure row 0fd5a5bdeace
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-255 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fd5a5bdeace1884f6f2e7a67ebeb8d3681b0e0bee14345cf9855a1a8311234a.json
@@ -4183,9 +4409,11 @@ Normative:
 ## SCA-256 Verify parser-failure row 0fe69720ea3b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-256 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/0fe69720ea3b02a3487550e5c9f05737db9c505e28e953bb2c89f966ed6e23b3.json
@@ -4221,9 +4449,11 @@ Normative:
 ## SCA-257 Verify parser-failure row 122b7504b5b7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-257 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/122b7504b5b7551a37b51c6e7a5b3c467f799b4f1d89d46360720f7484ba227c.json
@@ -4259,9 +4489,11 @@ Normative:
 ## SCA-258 Verify parser-failure row 12360225071e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-258 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/12360225071e034c35e712f22019cb166ba7112bbb8af40c9d65304b53f67c20.json
@@ -4297,9 +4529,11 @@ Normative:
 ## SCA-259 Verify parser-failure row 1264f32f58a5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-259 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1264f32f58a5a067722f90620b61331d6cd3254f9d29ab6de9412cfba4abff74.json
@@ -4335,9 +4569,11 @@ Normative:
 ## SCA-260 Verify parser-failure row 139e3932005e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-260 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/139e3932005e758d144dfb019de85542bb228ea42d246a80257638030aff8e33.json
@@ -4373,9 +4609,11 @@ Normative:
 ## SCA-261 Verify parser-failure row 150a3df0664e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-261 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/150a3df0664e1582215a7b28d1b1f1f175a9c204f310e288c5445b5daf4bb218.json
@@ -4411,9 +4649,11 @@ Normative:
 ## SCA-262 Verify parser-failure row 15ac6a85c475
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-262 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15ac6a85c475f46d2d48e88a891f25787e8c65010c6c724c68a2d1b988151c60.json
@@ -4449,9 +4689,11 @@ Normative:
 ## SCA-263 Verify parser-failure row 15bf1ecf8014
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-263 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/15bf1ecf80146870f36502ebc9b7dcb787d3c5b6b88112d28dcd7900b19e100f.json
@@ -4487,9 +4729,11 @@ Normative:
 ## SCA-264 Verify parser-failure row 169795f821ca
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-234
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-234, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-264 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/169795f821ca43593b54f38e98eae33270c856e71fbd1d9d818510ab01969005.json
@@ -4525,9 +4769,11 @@ Normative:
 ## SCA-265 Verify parser-failure row 17591a25c598
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-265 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/17591a25c598f68c32f06c0df3880166f1a6c4a2b1f60d9c2a06bc05876a4757.json
@@ -4563,9 +4809,11 @@ Normative:
 ## SCA-266 Verify parser-failure row 1778e060c331
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-266 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1778e060c33126a1e1696bbac4e8a7b68be4d0b76f4e487742c450a2a80e4fc6.json
@@ -4601,9 +4849,11 @@ Normative:
 ## SCA-267 Verify parser-failure row 18ea2b2e7c25
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-267 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/18ea2b2e7c25b0103e0635d77fe41019e1873d8dd7f1e434ea9727192d15197b.json
@@ -4639,9 +4889,11 @@ Normative:
 ## SCA-268 Verify parser-failure row 19514c37db8a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-268 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19514c37db8a67ef14bfa208d6cb5f4d4e0366a640510c702c840a92f4d4c588.json
@@ -4677,9 +4929,11 @@ Normative:
 ## SCA-269 Verify parser-failure row 19c9ac006502
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-269 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/19c9ac006502ef36920456a27d24f4e5faaabe6eca23b66c2c65df7c8ae66b23.json
@@ -4715,9 +4969,11 @@ Normative:
 ## SCA-270 Verify parser-failure row 1ac7f72e7213
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-270 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1ac7f72e721337edc1265a7306f312bf7dc7788665d7412cf5836bad5bb5bf69.json
@@ -4753,9 +5009,11 @@ Normative:
 ## SCA-271 Verify parser-failure row 1adadde9c446
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-271 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1adadde9c44613041468487c3f9cc83f323fe7ef79e411f981ecd0ce00b87b5b.json
@@ -4791,9 +5049,11 @@ Normative:
 ## SCA-272 Verify parser-failure row 1bdd09063deb
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-272 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1bdd09063deb3d938c042aa1ab8bd738953f87c0d2d2b98bac41922d0e10e3db.json
@@ -4829,9 +5089,11 @@ Normative:
 ## SCA-273 Verify parser-failure row 1d3e7e3f28bf
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-273 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1d3e7e3f28bfcdb55afceff4f0c7f6c68d905bc40910f31d8b7644e1b633e2b8.json
@@ -4867,9 +5129,11 @@ Normative:
 ## SCA-274 Verify parser-failure row 1f0eb49ce1b4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-274 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/1f0eb49ce1b45bb82eb436302d00489ba296568061f74f681847d141ae6bd315.json
@@ -4905,9 +5169,11 @@ Normative:
 ## SCA-275 Verify parser-failure row 2088955a5a15
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-275 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2088955a5a15d46c45ad349bdd502d42e7e5ed55149cd147549492deef17e179.json
@@ -4943,9 +5209,11 @@ Normative:
 ## SCA-276 Verify parser-failure row 221c2bab15dd
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-276 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/221c2bab15dde2988768aee4a9048ed8a7d8d2e6b67a4f21844cc35e5d781b4a.json
@@ -4981,9 +5249,11 @@ Normative:
 ## SCA-277 Verify parser-failure row 222bdf85b2bd
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-277 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/222bdf85b2bd66ddd47bf60562d6654c4ea94177c09121e030b21107e3c73d34.json
@@ -5019,9 +5289,11 @@ Normative:
 ## SCA-278 Verify parser-failure row 24096d493233
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-278 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24096d493233efebdf8e51f9aa8cb6c7a6f48b2b7e86e7c9722fc01c518f19f4.json
@@ -5057,9 +5329,11 @@ Normative:
 ## SCA-279 Verify parser-failure row 248965dd4be4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-279 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/248965dd4be41c7b9c19c456ba9a2945d32d32e3a3fda9b3aaa670cb92cfcdad.json
@@ -5095,9 +5369,11 @@ Normative:
 ## SCA-280 Verify parser-failure row 2494639f9270
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-280 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2494639f927030e50a81bd4742be24135842130e6e21edeaf94fde78a286a0c5.json
@@ -5133,9 +5409,11 @@ Normative:
 ## SCA-281 Verify parser-failure row 24f7305b930c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-281 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/24f7305b930c06ba839b8041178c22cce902bcaf82b68e59742e87f52b99508f.json
@@ -5171,9 +5449,11 @@ Normative:
 ## SCA-282 Verify parser-failure row 250a97471fe2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-282 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/250a97471fe261e7ee58e797b2d87f0918f3e6cec8f77c80b42d28e600237625.json
@@ -5209,9 +5489,11 @@ Normative:
 ## SCA-283 Verify parser-failure row 2554e763c483
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-283 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2554e763c483ccfc08a05cf809778bc1e0e0761a4c505529952f2ffc0a5ed3f8.json
@@ -5247,9 +5529,11 @@ Normative:
 ## SCA-284 Verify parser-failure row 26c3ff2e5d03
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-284 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/26c3ff2e5d033e0fa2a704881b0c4f60fa479dcb5b56d49eee50244ecc988c39.json
@@ -5285,9 +5569,11 @@ Normative:
 ## SCA-285 Verify parser-failure row 27438a60efb2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-285 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/27438a60efb24014f3b8c428b2058b7f2a20df77f635de43ef28498e9edeaea8.json
@@ -5323,9 +5609,11 @@ Normative:
 ## SCA-286 Verify parser-failure row 2781ce3ca96c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-286 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2781ce3ca96ca8deb3db4ee309a7b75ea78df02ed841da50825874af4d5acfdd.json
@@ -5361,9 +5649,11 @@ Normative:
 ## SCA-287 Verify parser-failure row 2805459071d6
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-287 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2805459071d6a8338e7b8b7a2e5ce7e539a78c6bec3b3538bc413d64dcf7bcc2.json
@@ -5399,9 +5689,11 @@ Normative:
 ## SCA-288 Verify parser-failure row 2847f89e839f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-288 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2847f89e839f2c5b3c64343ffe9fac487de889a4ad1bcad2a58d7b251830a9d2.json
@@ -5437,9 +5729,11 @@ Normative:
 ## SCA-289 Verify parser-failure row 2892d151b1a9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-289 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2892d151b1a98b7d993e2abce0579586c497d3b413070f77e7c215afb3b9989e.json
@@ -5475,9 +5769,11 @@ Normative:
 ## SCA-290 Verify parser-failure row 2b6a4457dc66
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-290 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2b6a4457dc661a4c565c0bc1bc07b7ab4e98a92a0908db1424c0212b61cfc0ba.json
@@ -5513,9 +5809,11 @@ Normative:
 ## SCA-291 Verify parser-failure row 2be5edfdde98
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-291 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2be5edfdde9807781e8b4e098951131660caf05238707a7f862d81c6f5c50d4a.json
@@ -5551,9 +5849,11 @@ Normative:
 ## SCA-292 Verify parser-failure row 2bebca3f4ba9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-292 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2bebca3f4ba96902d1fc33e9dd6e7fb795357e27b954b2ab429a55dafc38b04e.json
@@ -5589,9 +5889,11 @@ Normative:
 ## SCA-293 Verify parser-failure row 2d460815c8bc
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-293 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d460815c8bcf3fa47a183d040b075c34818da41321e51b03e366a8da400cff7.json
@@ -5627,9 +5929,11 @@ Normative:
 ## SCA-294 Verify parser-failure row 2d7899c5b2e8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-294 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2d7899c5b2e8b77edc642a44107f9a4f70da5f1fcbf842a47d6d51fab37cce25.json
@@ -5665,9 +5969,11 @@ Normative:
 ## SCA-295 Verify parser-failure row 2e1ac6fa1454
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-295 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e1ac6fa14549b1d959942eb2047d3d05f4f98a6e906206b6317ed1efa04e918.json
@@ -5703,9 +6009,11 @@ Normative:
 ## SCA-296 Verify parser-failure row 2e620f9b548f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-296 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2e620f9b548fafd6bf1ca54b979556ff55506f97f3a3b05eb98286a5562327bc.json
@@ -5741,9 +6049,11 @@ Normative:
 ## SCA-297 Verify parser-failure row 2fa25cc4d68f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-297 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fa25cc4d68f360432fc34cf89a3c430f7a987b053e2693b47173f0514d5bcdf.json
@@ -5779,9 +6089,11 @@ Normative:
 ## SCA-298 Verify parser-failure row 2fbf4a7e58b9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-298 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/2fbf4a7e58b95ee8e18679a2331639ffd7ceca5683df0557037e8122796ab972.json
@@ -5817,9 +6129,11 @@ Normative:
 ## SCA-299 Verify parser-failure row 30bd36c75117
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-299 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/30bd36c75117fbceee55b50edbb5b1bcfefd47b3a88dddee6c28e8cade81e1c5.json
@@ -5855,9 +6169,11 @@ Normative:
 ## SCA-300 Verify parser-failure row 31bfdeded19e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-300 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/31bfdeded19ebde48340e391e8bd088208466afdfcfa1880e07f79ea72ee7572.json
@@ -5893,9 +6209,11 @@ Normative:
 ## SCA-301 Verify parser-failure row 3287a95b6189
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-301 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3287a95b61896bf78e21f1b872076316584a175569f8a194bbe82446c98cb9d2.json
@@ -5931,9 +6249,11 @@ Normative:
 ## SCA-302 Verify parser-failure row 32aad07c0b9e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-302 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/32aad07c0b9ee4b370f82db2f9b87c141f1f3e670cc3060094ce66c6749c90dc.json
@@ -5969,9 +6289,11 @@ Normative:
 ## SCA-303 Verify parser-failure row 3354cdb5f185
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-303 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3354cdb5f1858bceb1bbe71d308a2c5ea013ae0197a52343cd7c03ca5e18078b.json
@@ -6007,9 +6329,11 @@ Normative:
 ## SCA-304 Verify parser-failure row 337d2a86e5c4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-304 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/337d2a86e5c4c5d16a3b568db9b63d9e6f0dac6502b5e31b3fc9897068484b07.json
@@ -6045,9 +6369,11 @@ Normative:
 ## SCA-305 Verify parser-failure row 34931ed29838
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-305 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/34931ed29838ed66774228df1d66a8dfea03062d0c556bd28a5d21933d6d611c.json
@@ -6083,9 +6409,11 @@ Normative:
 ## SCA-306 Verify parser-failure row 3729abbfd211
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-234
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-234, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-306 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3729abbfd211fad4fb74de6f26425d84dcf6ec0fa87501750635338fee80f09b.json
@@ -6121,9 +6449,11 @@ Normative:
 ## SCA-307 Verify parser-failure row 3744c6709a96
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-307 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3744c6709a961721fda44d9887e297f26d3f71dd14592a4dd92952941480827e.json
@@ -6159,9 +6489,11 @@ Normative:
 ## SCA-308 Verify parser-failure row 3aa8ec153c93
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-308 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3aa8ec153c933c0e565d838f2114160f4da25afe6681ba73317201175f4f09e3.json
@@ -6197,9 +6529,11 @@ Normative:
 ## SCA-309 Verify parser-failure row 3ab73ec63824
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-309 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ab73ec63824c9c0ef79f3c0d28f25c382b7a31f7078e3877887000b670a54bb.json
@@ -6235,9 +6569,11 @@ Normative:
 ## SCA-310 Verify parser-failure row 3b5871a75d58
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-310 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3b5871a75d587fbb19110e31882a415b292f733dc05157f34f49bcb7292f7ea8.json
@@ -6273,9 +6609,11 @@ Normative:
 ## SCA-311 Verify parser-failure row 3d1a81b9423a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-311 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d1a81b9423a9808e96efa878a05ef0b187403f6c3c7d51e0730a5738bb59499.json
@@ -6311,9 +6649,11 @@ Normative:
 ## SCA-312 Verify parser-failure row 3d9892e7a0a2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-312 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3d9892e7a0a243d32e3000beebb4f3fbbec0901c844a8b26eb6b53b23c5a040a.json
@@ -6349,9 +6689,11 @@ Normative:
 ## SCA-313 Verify parser-failure row 3ebbb8ad96db
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-313 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/3ebbb8ad96db3206bf058633ae350d27e7f17859f75f22759eb2198b2728e8b9.json
@@ -6387,9 +6729,11 @@ Normative:
 ## SCA-314 Verify parser-failure row 418bcd30c6be
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-314 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/418bcd30c6be4df1f0d1ca060bfd896b3fd2e71ed49c617969bd106015a45270.json
@@ -6425,9 +6769,11 @@ Normative:
 ## SCA-315 Verify parser-failure row 4392b0cb300d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-315 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4392b0cb300d34677a65d485730a1ad06e7e9fe9b8685d1dc78b3e8fcba34d32.json
@@ -6463,9 +6809,11 @@ Normative:
 ## SCA-316 Verify parser-failure row 43a856bc480c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-316 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/43a856bc480ce488a26e70b4f2a0c3cdcb44eca76567cbaad4424ea64155df5a.json
@@ -6501,9 +6849,11 @@ Normative:
 ## SCA-317 Verify parser-failure row 4420af95d20d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-317 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4420af95d20d9c45a082858f36fec2b6d96c06abebc93a0090f4a4134d0d9590.json
@@ -6539,9 +6889,11 @@ Normative:
 ## SCA-318 Verify parser-failure row 47196e5eb61f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-318 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47196e5eb61f3a960a82ee104525eaeb933be9a943a553c254f93403269327b2.json
@@ -6577,9 +6929,11 @@ Normative:
 ## SCA-319 Verify parser-failure row 472afb03a0df
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-319 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/472afb03a0df69f28e8808210927849fdacbaad77a97f4ea911cd428299934d6.json
@@ -6615,9 +6969,11 @@ Normative:
 ## SCA-320 Verify parser-failure row 47916b3341ef
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-320 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/47916b3341efc21aaebef26d52a73506df0ce7d4c38ba36bcda835585614ff98.json
@@ -6653,9 +7009,11 @@ Normative:
 ## SCA-321 Verify parser-failure row 4853e4bbc71a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-321 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4853e4bbc71a130afa747535fc6ef7aea14e1735043177afaa6114c97ec230eb.json
@@ -6691,9 +7049,11 @@ Normative:
 ## SCA-322 Verify parser-failure row 4b7db65a4619
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-322 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4b7db65a46197a60c525faac8cd15b122d3443a1da17d41f5668ab3814a4ee3b.json
@@ -6729,9 +7089,11 @@ Normative:
 ## SCA-323 Verify parser-failure row 4ef2c4fc9151
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-323 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/4ef2c4fc91513e29221efa7667bb6db23941defe8d92bdbd5691a058d9405c9d.json
@@ -6767,9 +7129,11 @@ Normative:
 ## SCA-324 Verify parser-failure row 50e808e482bd
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-324 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/50e808e482bd8ae95356359e5e560efffb7be902737f810f3da779c813cff42f.json
@@ -6805,9 +7169,11 @@ Normative:
 ## SCA-325 Verify parser-failure row 51ebe5b267e0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-325 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/51ebe5b267e01de35477f9a9e37d25a21b618c5939f5f53831cb001453c89e19.json
@@ -6843,9 +7209,11 @@ Normative:
 ## SCA-326 Verify parser-failure row 5296ac9e71ed
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-326 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5296ac9e71ed57bdeed3c7ab1608526ef334ecabd7c30656b913bc35512897e4.json
@@ -6881,9 +7249,11 @@ Normative:
 ## SCA-327 Verify parser-failure row 52e3072912ab
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-235
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-235, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-327 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/52e3072912abe7971d743eb4376ee718aed272566b569a34b9c5ac4b163c54d5.json
@@ -6919,9 +7289,11 @@ Normative:
 ## SCA-328 Verify parser-failure row 53facdcbb538
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-328 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/53facdcbb5389c2658b0c4aebcfe5312de53d525036a1aff38725610ff948581.json
@@ -6957,9 +7329,11 @@ Normative:
 ## SCA-329 Verify parser-failure row 551449139769
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-329 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/551449139769b6260e270e3cde40e3dd01af4c9d6eea136db646ef12c83b465e.json
@@ -6995,9 +7369,11 @@ Normative:
 ## SCA-330 Verify parser-failure row 5671fc7c9b4d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-330 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5671fc7c9b4d1849af003dd6e0c51552f74abe09df06a8004aa9d8506e118386.json
@@ -7033,9 +7409,11 @@ Normative:
 ## SCA-331 Verify parser-failure row 575edbd982f3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-331 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/575edbd982f39582d7c5892a1040214403880ab6292f3f4346251493fba50787.json
@@ -7071,9 +7449,11 @@ Normative:
 ## SCA-332 Verify parser-failure row 578afdc4a624
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-332 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/578afdc4a62469a4480f1b4a4666b366853330c5752e3913b3ef205c816b8d6d.json
@@ -7109,9 +7489,11 @@ Normative:
 ## SCA-333 Verify parser-failure row 5908cb4e68e7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-333 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5908cb4e68e7d96182481e32e740d0a82678820acf7406402675a9c665b238d8.json
@@ -7147,9 +7529,11 @@ Normative:
 ## SCA-334 Verify parser-failure row 596f7f193aec
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-334 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/596f7f193aec660b28462526003cafbb7f2a4d3e2b9ebb876f2864070de332de.json
@@ -7185,9 +7569,11 @@ Normative:
 ## SCA-335 Verify parser-failure row 59fbd8e810b4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-335 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/59fbd8e810b46410e522cd6943b978538e56b85121ba459cc42df3696893fd77.json
@@ -7223,9 +7609,11 @@ Normative:
 ## SCA-336 Verify parser-failure row 5a6a0d061ca2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-336 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5a6a0d061ca2f3aecb85c45bd28bfaa20289d704a9754a5bdc3a4eebfa291e8d.json
@@ -7261,9 +7649,11 @@ Normative:
 ## SCA-337 Verify parser-failure row 5b1e2baeb187
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-337 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5b1e2baeb187b4a29ffec96cdc4ea328885ee0eb48a26f679c67b391478dcae3.json
@@ -7299,9 +7689,11 @@ Normative:
 ## SCA-338 Verify parser-failure row 5c16ae8733c2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-338 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5c16ae8733c2069529ac8b58053911dd98e988dc69010d187ca9c5ee56ec60f5.json
@@ -7337,9 +7729,11 @@ Normative:
 ## SCA-339 Verify parser-failure row 5e11e0a22d56
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-339 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/5e11e0a22d560f3d2fea5f7bd98008b91afe7dbe49319aaec0173be2f8c63dd7.json
@@ -7375,9 +7769,11 @@ Normative:
 ## SCA-340 Verify parser-failure row 602f5dcf1d4a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-340 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/602f5dcf1d4a74b59684aaba83538d3a29dd6683dad14ae4d555e3719a0ab65f.json
@@ -7413,9 +7809,11 @@ Normative:
 ## SCA-341 Verify parser-failure row 61752bc4d7b1
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-341 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/61752bc4d7b1f99a91d23f14696f435e3135dda9119b9ea46f7a28f812f8d65d.json
@@ -7451,9 +7849,11 @@ Normative:
 ## SCA-342 Verify parser-failure row 6232e8d9361f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-342 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6232e8d9361f5071ea2d84fcfa280d1dc3db4b18a0b796a292ad5b4e889b34f7.json
@@ -7489,9 +7889,11 @@ Normative:
 ## SCA-343 Verify parser-failure row 62b9bec26182
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-343 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/62b9bec26182b669fe4797f85bf4d9e882890aa9e9c093e7d8e60a22031c8355.json
@@ -7527,9 +7929,11 @@ Normative:
 ## SCA-344 Verify parser-failure row 6354badf69d3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-344 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6354badf69d3fcd370fa54ce4e5021110e3b5e3310d14a7da01234391f392665.json
@@ -7565,9 +7969,11 @@ Normative:
 ## SCA-345 Verify parser-failure row 6359622722ae
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-345 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6359622722aebb612969ae9679b7bfb009a8f6f0f0f927c9bb2941d7b03bba28.json
@@ -7603,9 +8009,11 @@ Normative:
 ## SCA-346 Verify parser-failure row 63d84ee07415
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-346 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/63d84ee074155cb93d176a6371e0b5263729ab3dba42749c691f8af86679bdef.json
@@ -7641,9 +8049,11 @@ Normative:
 ## SCA-347 Verify parser-failure row 653e8f556fff
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-347 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/653e8f556fffdbcf8dd1bcf86f233616b1ea8964c2ec691527f50865d2bbfc95.json
@@ -7679,9 +8089,11 @@ Normative:
 ## SCA-348 Verify parser-failure row 65729ce3fa25
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-348 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/65729ce3fa2577d53a13d932bec76f823d9976ba8bc032ffb221320ef498f904.json
@@ -7717,9 +8129,11 @@ Normative:
 ## SCA-349 Verify parser-failure row 670837bca6e8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-349 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/670837bca6e8f61903c9ad9802106eb816791fa4840aad8a3fda4f278920ff4f.json
@@ -7755,9 +8169,11 @@ Normative:
 ## SCA-350 Verify parser-failure row 67e377e1b04b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-350 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/67e377e1b04b141384caa7f79b78aa8b4cd3aa048868d5637aa919e715285138.json
@@ -7793,9 +8209,11 @@ Normative:
 ## SCA-351 Verify parser-failure row 6963d3261cf9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-351 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6963d3261cf9077f9fa8f2949a5a0cc9dae77b5f4c2bcd28c30f34fe5b27e79b.json
@@ -7831,9 +8249,11 @@ Normative:
 ## SCA-352 Verify parser-failure row 69a832d3a3a9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-352 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/69a832d3a3a94b54841a44ee495022cbb1ce118f208350e6ca46efe0f7fbe8c1.json
@@ -7869,9 +8289,11 @@ Normative:
 ## SCA-353 Verify parser-failure row 6cb26a004d99
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-353 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6cb26a004d99e76a8f234a63a56c574e5e5af5214f8aa498c1aa92e45da92f53.json
@@ -7907,9 +8329,11 @@ Normative:
 ## SCA-354 Verify parser-failure row 6f1ae7df02b6
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-354 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6f1ae7df02b6d393b569ad60ce08e587b644ef194f3acdf0da11939aa25e8a73.json
@@ -7945,9 +8369,11 @@ Normative:
 ## SCA-355 Verify parser-failure row 6fa60992b39a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-355 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/6fa60992b39a982e8c9dcaa97ba36d2a72468a3df91e87de127d265ce356f2ff.json
@@ -7983,9 +8409,11 @@ Normative:
 ## SCA-356 Verify parser-failure row 71311136e6f8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-356 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/71311136e6f80be7675ed1a5d8bf51a8d7bea6fd476c79a7275865e248ed51ac.json
@@ -8021,9 +8449,11 @@ Normative:
 ## SCA-357 Verify parser-failure row 7185649d68c5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-357 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7185649d68c546afa280893d10ad57ce4ea4676fde15f0bfd21dc3edf4215651.json
@@ -8059,9 +8489,11 @@ Normative:
 ## SCA-358 Verify parser-failure row 72f0f1f6d690
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-358 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/72f0f1f6d6903bd93803e01b712d9135e1975c565b3dc80c9eddb9d6aec45746.json
@@ -8097,9 +8529,11 @@ Normative:
 ## SCA-359 Verify parser-failure row 73c24ad31244
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-359 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/73c24ad312444b1f63ed886384960267291833d28e0d129e67be6777a8c485dd.json
@@ -8135,9 +8569,11 @@ Normative:
 ## SCA-360 Verify parser-failure row 766d33aa8e4c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-360 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/766d33aa8e4cd2d887b6895a4e8e7058becd79ea1078143860bc4ede4f58b69c.json
@@ -8173,9 +8609,11 @@ Normative:
 ## SCA-361 Verify parser-failure row 7779e9197739
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-361 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7779e91977390133665cf8768944d087fc65327e2ede13ef291f49fe0d9c9d43.json
@@ -8211,9 +8649,11 @@ Normative:
 ## SCA-362 Verify parser-failure row 785c7f145632
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-362 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/785c7f14563214e777154b811109f4df82fc8a87d439a3bec5094995c3eced8c.json
@@ -8249,9 +8689,11 @@ Normative:
 ## SCA-363 Verify parser-failure row 7a4fb72eb776
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-363 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7a4fb72eb776dd36db0bde3e64b3923703ad9eeefdc2af82d37a0eb1202ad673.json
@@ -8287,9 +8729,11 @@ Normative:
 ## SCA-364 Verify parser-failure row 7b5ad72a69b6
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-364 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7b5ad72a69b6a0045eae17f1a16b4837631b56441c5e1441932efb1229316406.json
@@ -8325,9 +8769,11 @@ Normative:
 ## SCA-365 Verify parser-failure row 7c8e81583edb
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-365 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7c8e81583edba27ef55c8b8873806d333e39ebeccb0b1e09d4015a888fedbcc8.json
@@ -8363,9 +8809,11 @@ Normative:
 ## SCA-366 Verify parser-failure row 7ed1e51831bb
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-366 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/7ed1e51831bb726b5357c7a15a1e4fd005a8e6a5c4c99790519206d56de9ec45.json
@@ -8401,9 +8849,11 @@ Normative:
 ## SCA-367 Verify parser-failure row 829d7d7ceae3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-367 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/829d7d7ceae3fdf63258b8b533884dbf165500d045b01a5ffddef7f83487141c.json
@@ -8439,9 +8889,11 @@ Normative:
 ## SCA-368 Verify parser-failure row 8499d81b2c60
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-368 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8499d81b2c6096a5a09d417a7e20e19268b17be5c493d86f805d6f73bf96081b.json
@@ -8477,9 +8929,11 @@ Normative:
 ## SCA-369 Verify parser-failure row 84f4fcdeeb9b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-369 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/84f4fcdeeb9b6df15ef63c0d0e389ea0b0fced0b59ea2d56d51f9fd5e1ea8e7e.json
@@ -8515,9 +8969,11 @@ Normative:
 ## SCA-370 Verify parser-failure row 854bf68cfadd
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-370 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/854bf68cfadd59890ddcec579025354cba8b66d34d809568ab3ddaa0f7c85c5c.json
@@ -8553,9 +9009,11 @@ Normative:
 ## SCA-371 Verify parser-failure row 864e7d25fdb0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-371 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/864e7d25fdb0f9c749660fe0f7383724e60a590857dae34598f59b88f5082edb.json
@@ -8591,9 +9049,11 @@ Normative:
 ## SCA-372 Verify parser-failure row 86d1926d5e85
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-372 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/86d1926d5e8584019ab209432d5c7069d4a5fedc9f9c708825f22f52b4b7b384.json
@@ -8629,9 +9089,11 @@ Normative:
 ## SCA-373 Verify parser-failure row 871379cfe58b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-373 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/871379cfe58b56f377614a3a31485f6d00b53ce0e842ad42dbd94195e2fa9290.json
@@ -8667,9 +9129,11 @@ Normative:
 ## SCA-374 Verify parser-failure row 880e85d65fdd
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-234
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-234, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-374 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/880e85d65fdd65b3e7d5667187830796a38d1fff34f92f652c796007ba1e2991.json
@@ -8705,9 +9169,11 @@ Normative:
 ## SCA-375 Verify parser-failure row 885c606c1555
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-375 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/885c606c155587728a73fb96e975ed31b46e82c395796ecfd856049643eb91f4.json
@@ -8743,9 +9209,11 @@ Normative:
 ## SCA-376 Verify parser-failure row 88e49fed3372
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-376 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/88e49fed3372acdcba32ea34555d0a9b608593f53a2217f2187f7ac96f59d0f5.json
@@ -8781,9 +9249,11 @@ Normative:
 ## SCA-377 Verify parser-failure row 8a5e4059d39a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-377 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8a5e4059d39ae5549ce2075c5f56eec93ef6e2887bc2bb3bf84fc65fa3bc5cae.json
@@ -8819,9 +9289,11 @@ Normative:
 ## SCA-378 Verify parser-failure row 8b2680a72f75
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-378 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/8b2680a72f75d948dd22b630cb5de7319f8857c284ce6f38409fbe34706b7f59.json
@@ -8857,9 +9329,11 @@ Normative:
 ## SCA-379 Verify parser-failure row 90c1ca1c9b73
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-379 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/90c1ca1c9b735e3445fc857f02501fbcaa0356eee29268587db2949c3533126f.json
@@ -8895,9 +9369,11 @@ Normative:
 ## SCA-380 Verify parser-failure row 9201d729e599
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-380 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9201d729e5994734a6e3a7c7c2058730d310c3c96622cb01cfd2354cb7da246b.json
@@ -8933,9 +9409,11 @@ Normative:
 ## SCA-381 Verify parser-failure row 9534e662baf2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-381 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9534e662baf2d1dbd5a4e4127ed206adc7792adcea5383f8ef6d3cbcb8bd2b0b.json
@@ -8971,9 +9449,11 @@ Normative:
 ## SCA-382 Verify parser-failure row 9538436d8be0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-382 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9538436d8be086cc82c3b0f4d303024f9be1bd83bb5626b4881d701bdcf49489.json
@@ -9009,9 +9489,11 @@ Normative:
 ## SCA-383 Verify parser-failure row 9762db2e4a5e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-383 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9762db2e4a5e64cee538aa6aa38922f94bfb8c64036940d36855fafda78aad7d.json
@@ -9047,9 +9529,11 @@ Normative:
 ## SCA-384 Verify parser-failure row 97a260a3307d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-384 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/97a260a3307dd2b71729f4aedac7231159a5d139d02287b1e9b83e21bbf4830d.json
@@ -9085,9 +9569,11 @@ Normative:
 ## SCA-385 Verify parser-failure row 9a2fc4638b35
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-385 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9a2fc4638b358530f5a817ba6bde6baae8bec4ee680c0926bcb483e0235f3319.json
@@ -9123,9 +9609,11 @@ Normative:
 ## SCA-386 Verify parser-failure row 9acacfedf00a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-386 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9acacfedf00a6508bf579eda78eb841c89fd9b214da5c63c98d740a027785b57.json
@@ -9161,9 +9649,11 @@ Normative:
 ## SCA-387 Verify parser-failure row 9b559675d12d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-387 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9b559675d12d8bda885af60858804311ef0fdffae87cf372c132a2fe5b08acbc.json
@@ -9199,9 +9689,11 @@ Normative:
 ## SCA-388 Verify parser-failure row 9ba2f8c62fb4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-388 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9ba2f8c62fb4b1e27ff198dc995c3f1e92a05a2aeed616ae9d1e7e768c40a160.json
@@ -9237,9 +9729,11 @@ Normative:
 ## SCA-389 Verify parser-failure row 9c4af84dbc5d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-389 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c4af84dbc5d55929cd2d62f2b22409bc0084f0423f614b129c3de64ecc485fc.json
@@ -9275,9 +9769,11 @@ Normative:
 ## SCA-390 Verify parser-failure row 9c52951039e8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-390 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9c52951039e8c8d0db0698cda4bd61697d3535b185e0744d82dbcbbbc13054bb.json
@@ -9313,9 +9809,11 @@ Normative:
 ## SCA-391 Verify parser-failure row 9d4da253d59d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-391 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9d4da253d59d4eb85833d6bf44d9695fc21224a14ac9998a3a16161fa00d758c.json
@@ -9351,9 +9849,11 @@ Normative:
 ## SCA-392 Verify parser-failure row 9e8124419622
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-392 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/9e81244196222e1df22bb8aa798c419e1fe5d6253578b43d6135ecbfd3205e90.json
@@ -9389,9 +9889,11 @@ Normative:
 ## SCA-393 Verify parser-failure row a007b8b42d2d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-393 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a007b8b42d2d97023ed0514f778b16907131f74b5284a503dc09afbfe013209c.json
@@ -9427,9 +9929,11 @@ Normative:
 ## SCA-394 Verify parser-failure row a00ce5fe8155
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-394 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a00ce5fe81559b8bbd16e1bb4b2ae21960128bd765ae75a7449279fd82dd56ef.json
@@ -9465,9 +9969,11 @@ Normative:
 ## SCA-395 Verify parser-failure row a0506d17511b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-395 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a0506d17511b289048a8c63a13d9cfd0731cb278cea4befe2a0477c1cb714086.json
@@ -9503,9 +10009,11 @@ Normative:
 ## SCA-396 Verify parser-failure row a061c9b2c343
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-396 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a061c9b2c343fa98217cae1fa3542e738e54255d1830deeefe81a98f245d620a.json
@@ -9541,9 +10049,11 @@ Normative:
 ## SCA-397 Verify parser-failure row a06c24fec967
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-397 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a06c24fec967d9a6b724363592926326a5eae503fca1f6a9b984d0414f20da0a.json
@@ -9579,9 +10089,11 @@ Normative:
 ## SCA-398 Verify parser-failure row a1eb895fad9e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-398 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a1eb895fad9e6bda4b68f154ac6eb583f25cdfa0a5de2af921ef63c3204b6808.json
@@ -9617,9 +10129,11 @@ Normative:
 ## SCA-399 Verify parser-failure row a4c39a37f0aa
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-399 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a4c39a37f0aaa18020114db5b75dbccfac09369f32882aa0377b8734412be1f3.json
@@ -9655,9 +10169,11 @@ Normative:
 ## SCA-400 Verify parser-failure row a5be4ef843fe
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-400 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a5be4ef843fedc362006f68270e043baca6bffa188368d1489153cfd191bcdce.json
@@ -9693,9 +10209,11 @@ Normative:
 ## SCA-401 Verify parser-failure row a79e35142045
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-401 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a79e35142045c698d47dd089c7cdaadf1dd62b335ce25a4eea9a3c94d995cdc4.json
@@ -9731,9 +10249,11 @@ Normative:
 ## SCA-402 Verify parser-failure row a7f93e4c4dc2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-402 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a7f93e4c4dc299b8a27507de4df6f1dd817abca0ab9ca811bd5ea7432776c6bd.json
@@ -9769,9 +10289,11 @@ Normative:
 ## SCA-403 Verify parser-failure row a819a40fba86
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-234
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-234, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-403 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/activejs.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a819a40fba86b4310830b3691e7d68e305c964c7983a10724cd62aa56bd9cfd6.json
@@ -9807,9 +10329,11 @@ Normative:
 ## SCA-404 Verify parser-failure row a892281a7c52
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-404 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a892281a7c52d7883272c0ac8f1325c82c87afa03e66011d62e312f28d32d63e.json
@@ -9845,9 +10369,11 @@ Normative:
 ## SCA-405 Verify parser-failure row a8c43606d9e8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-405 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a8c43606d9e89a5207118d8a1fa26bd0af1a7eba9a630bb2e4f4f4ad47991db4.json
@@ -9883,9 +10409,11 @@ Normative:
 ## SCA-406 Verify parser-failure row a99ef5ea5351
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-406 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/a99ef5ea53511099d06e5c33c691f82f9f523472c5cbf6f9986e7db6120dc378.json
@@ -9921,9 +10449,11 @@ Normative:
 ## SCA-407 Verify parser-failure row aa0d549356cb
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-407 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/aa0d549356cb45189e5d21c25c064c14b3adc2a5cb891dabb192dd17f35d2c6a.json
@@ -9959,9 +10489,11 @@ Normative:
 ## SCA-408 Verify parser-failure row af69edbec3a9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-408 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af69edbec3a9e461185da1dcbaec9f5857a30bb1a4a77235394210a54e9fe55a.json
@@ -9997,9 +10529,11 @@ Normative:
 ## SCA-409 Verify parser-failure row af9c42605452
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-409 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/af9c42605452f4cd90f0ec5470b15092dbd4a903aa68bbe694295ceb0008606e.json
@@ -10035,9 +10569,11 @@ Normative:
 ## SCA-410 Verify parser-failure row afba14684005
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-410 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/afba14684005003b0d89f6a7c20b2761a7ad25e8a6504dbd9b2f4608b0561d0f.json
@@ -10073,9 +10609,11 @@ Normative:
 ## SCA-411 Verify parser-failure row b0c561456d25
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-411 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b0c561456d257efaccce0ca7b7b080a34602445950d571cf330c3fb31f67293a.json
@@ -10111,9 +10649,11 @@ Normative:
 ## SCA-412 Verify parser-failure row b19c9747c638
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-412 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b19c9747c638b0a39229770888225cb4c6d393129d10a8589d6251b28220c310.json
@@ -10149,9 +10689,11 @@ Normative:
 ## SCA-413 Verify parser-failure row b23d95a901e1
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-413 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b23d95a901e131e6ad3abe966518e03f87888b3d798b91f757dd226b6eddab97.json
@@ -10187,9 +10729,11 @@ Normative:
 ## SCA-414 Verify parser-failure row b3970d200cf5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-414 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b3970d200cf5f6e2b46e7096e7055fb82c6092473bd25bfedbb378cb9430ebb4.json
@@ -10225,9 +10769,11 @@ Normative:
 ## SCA-415 Verify parser-failure row b768bc5f1168
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-415 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b768bc5f11683cd035c5681586c173b81f59b01bd96faa865a92ed787d62e4a6.json
@@ -10263,9 +10809,11 @@ Normative:
 ## SCA-416 Verify parser-failure row b7745037b59b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-416 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b7745037b59bf998308631bef78b60c89c39468463f1ece47ff1ae7319588fc8.json
@@ -10301,9 +10849,11 @@ Normative:
 ## SCA-417 Verify parser-failure row b85658d1ee92
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-417 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/b85658d1ee920b580ddc7ac6177173f5299e46ffefd42e44713d96bd1baac5a8.json
@@ -10339,9 +10889,11 @@ Normative:
 ## SCA-418 Verify parser-failure row ba45058cff41
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-418 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba45058cff41bc4fdc05dd79d87ae53a74ec08b6e5606499910e837763841b47.json
@@ -10377,9 +10929,11 @@ Normative:
 ## SCA-419 Verify parser-failure row ba9e5a83dace
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-419 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ba9e5a83dacea7f874ed25fe6ecae6c2446ec152eee3ec368724e7278c0ac670.json
@@ -10415,9 +10969,11 @@ Normative:
 ## SCA-420 Verify parser-failure row bae80e74e57c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-420 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bae80e74e57ceceefeb20dff6c848273582984021f3a246c457703dc742aa207.json
@@ -10453,9 +11009,11 @@ Normative:
 ## SCA-421 Verify parser-failure row bbb29f5bdfc2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-421 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bbb29f5bdfc25cbe3fba7b89d11c96b2d5c81b7e79392b82da63a2d6add50c40.json
@@ -10491,9 +11049,11 @@ Normative:
 ## SCA-422 Verify parser-failure row bd9dcd72aa4f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-422 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/bd9dcd72aa4fbc553a8762706a6d89fceb42fda650006fba19fbb8bc39435da2.json
@@ -10529,9 +11089,11 @@ Normative:
 ## SCA-423 Verify parser-failure row be266be52595
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-423 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be266be5259572e5f781322aba969385d784d4a80204c871f277e611653d4fa3.json
@@ -10567,9 +11129,11 @@ Normative:
 ## SCA-424 Verify parser-failure row be643d0d59d5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-236
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-236, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-424 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/be643d0d59d5ee6289c78b42d1df2c5c2681862fcc2a343d7a2b0f2e7c0a3644.json
@@ -10605,9 +11169,11 @@ Normative:
 ## SCA-425 Verify parser-failure row becb3908f0b9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-425 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/becb3908f0b95fd25269d69ec3e6b6478244350269ed3443a63487acbf031742.json
@@ -10643,9 +11209,11 @@ Normative:
 ## SCA-426 Verify parser-failure row c1531a4cf34d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-426 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1531a4cf34d10bf62230aa0664d6000878e75b694335115022d30be18cbbb0a.json
@@ -10681,9 +11249,11 @@ Normative:
 ## SCA-427 Verify parser-failure row c1b43a7f8245
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-427 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c1b43a7f82453b6dd845de32e6de9b5009d28752a0d5320aef8dabc920edc33b.json
@@ -10719,9 +11289,11 @@ Normative:
 ## SCA-428 Verify parser-failure row c22331d25665
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-428 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c22331d25665135104a9e782764978ba24dc9ebcf61b2821f0cefef0b6e2dce7.json
@@ -10757,9 +11329,11 @@ Normative:
 ## SCA-429 Verify parser-failure row c3737219a8e4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-429 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c3737219a8e423ace4d1796703523a6670ef2bbae3960bee4d1ecd40a18241be.json
@@ -10795,9 +11369,11 @@ Normative:
 ## SCA-430 Verify parser-failure row c4a1d1ef47b8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-430 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4a1d1ef47b8a9a2963297d5737c50399d4af09046e027e816a05c3a8dc80475.json
@@ -10833,9 +11409,11 @@ Normative:
 ## SCA-431 Verify parser-failure row c4e4b2c58987
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-431 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4e4b2c58987edec431b21cebf4f72b8c6fa836adaf12c207c4b0d66b6ee3839.json
@@ -10871,9 +11449,11 @@ Normative:
 ## SCA-432 Verify parser-failure row c4f6532c4850
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-432 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c4f6532c485049a143f2e1fd6ed64b81968e2501bca9080e389bec7d173424e5.json
@@ -10909,9 +11489,11 @@ Normative:
 ## SCA-433 Verify parser-failure row c5ce378fa84f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-433 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c5ce378fa84f6e7fd73f79e6da400ad1887969ed45cf155fa961da20c0dd0aa0.json
@@ -10947,9 +11529,11 @@ Normative:
 ## SCA-434 Verify parser-failure row c6c1a631905b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-434 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c6c1a631905b19eead4db9098ed666c1bf574e7b744ed861c08522edb944c4e8.json
@@ -10985,9 +11569,11 @@ Normative:
 ## SCA-435 Verify parser-failure row c96b34e92ef1
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-435 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c96b34e92ef1ad0024a2a0d1473b77b2670410ddc6c11a4932ac249611340379.json
@@ -11023,9 +11609,11 @@ Normative:
 ## SCA-436 Verify parser-failure row c9fccebd5f36
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-436 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/c9fccebd5f36d3c99b80b6085dce739fb7a44637ec759d2381ed8157f538e47e.json
@@ -11061,9 +11649,11 @@ Normative:
 ## SCA-437 Verify parser-failure row ca19dbbae400
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-437 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ca19dbbae4005e5af56c7da95957d14ce57d86ebfee0216a1a11040f1697e5b4.json
@@ -11099,9 +11689,11 @@ Normative:
 ## SCA-438 Verify parser-failure row caab0f56e25a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-438 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/caab0f56e25a4ec058de4581af05534118fee1b382d4f31204c15e8011505f4f.json
@@ -11137,9 +11729,11 @@ Normative:
 ## SCA-439 Verify parser-failure row cad18a421123
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-439 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cad18a421123f66ee9da1e8acd091e553a6f80ff4cbe808ab661616edad6fe94.json
@@ -11175,9 +11769,11 @@ Normative:
 ## SCA-440 Verify parser-failure row cb6497d68891
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-440 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cb6497d68891a25324e59bdd3b28b7f086482d4499ae359744a95c571003e2a3.json
@@ -11213,9 +11809,11 @@ Normative:
 ## SCA-441 Verify parser-failure row cc244846e0d0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-441 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc244846e0d0ce8756cc4881cbdca11536055016994ab633344ec1e29f9933ad.json
@@ -11251,9 +11849,11 @@ Normative:
 ## SCA-442 Verify parser-failure row cc6ae910be0b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-442 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cc6ae910be0bc7f1b4f991cbb8ab76253fd7ce9dc2029215193119c84bb0bd3b.json
@@ -11289,9 +11889,11 @@ Normative:
 ## SCA-443 Verify parser-failure row cdd0d1c4e47b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-443 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/cdd0d1c4e47b67c9b791ecafa6933088b0cf24f12ea29537d0824e0be7d79226.json
@@ -11327,9 +11929,11 @@ Normative:
 ## SCA-444 Verify parser-failure row d11f67a5b35c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-444 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d11f67a5b35c60777e5588791009cb611edbcb1d825aeab55cc55e3a9cc7de2e.json
@@ -11365,9 +11969,11 @@ Normative:
 ## SCA-445 Verify parser-failure row d186d85a3159
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-445 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d186d85a315941848f1afc255bea493e35597894638e6964057854734f88fb42.json
@@ -11403,9 +12009,11 @@ Normative:
 ## SCA-446 Verify parser-failure row d1c1b08e94e7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-446 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d1c1b08e94e774a3f2af53a4170abd455151f2134b8d3e6d7c14258e551012b8.json
@@ -11441,9 +12049,11 @@ Normative:
 ## SCA-447 Verify parser-failure row d21127a11f8d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-447 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d21127a11f8d7dfd0816ea94aa9e2f0eb1352e9d68d9e36d2b79a0c3fe1da984.json
@@ -11479,9 +12089,11 @@ Normative:
 ## SCA-448 Verify parser-failure row d28e9352cfc4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-448 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d28e9352cfc4384a496736c113fe4f1e48c4eb5692790351095c645348fc87de.json
@@ -11517,9 +12129,11 @@ Normative:
 ## SCA-449 Verify parser-failure row d37389514ee7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-235
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-235, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-449 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/python.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d37389514ee746bc39053ec3e4a3520a73e2d0a73a941e660cd7b09311b0da6c.json
@@ -11555,9 +12169,11 @@ Normative:
 ## SCA-450 Verify parser-failure row d4999fac77f8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-450 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d4999fac77f800f900d97c29873e476ebfa2370051e7d4728d213cd215ff6462.json
@@ -11593,9 +12209,11 @@ Normative:
 ## SCA-451 Verify parser-failure row d6685ad8f6de
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-451 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d6685ad8f6de1fa61cbe7b6698826ba130a16576334624f048dd8470a8c4f5c1.json
@@ -11631,9 +12249,11 @@ Normative:
 ## SCA-452 Verify parser-failure row d737c546428f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-236
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-236, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-452 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/structured.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d737c546428f80e447f4f2084804828629c1f3de55b016ce5b2367b723670634.json
@@ -11669,9 +12289,11 @@ Normative:
 ## SCA-453 Verify parser-failure row d9ccf41ae2a0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-453 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/d9ccf41ae2a0a64eb397340f0995c81c1112fa3e9e91043d677d8efa909b22e6.json
@@ -11707,9 +12329,11 @@ Normative:
 ## SCA-454 Verify parser-failure row db210e7650cf
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-454 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/db210e7650cfeef2275bf65a14954500d6c13669225a48ca70add1c0716a31d8.json
@@ -11745,9 +12369,11 @@ Normative:
 ## SCA-455 Verify parser-failure row dbc4466ba10b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-455 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dbc4466ba10b0479dba2edb2cfedd8895ea8da7c36530391c90426e8a6daf8c1.json
@@ -11783,9 +12409,11 @@ Normative:
 ## SCA-456 Verify parser-failure row dcc65d7b548c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-456 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dcc65d7b548c78b0312948eb45499804d33c457becb13f7d1715e608a068f77f.json
@@ -11821,9 +12449,11 @@ Normative:
 ## SCA-457 Verify parser-failure row dd4017d68b34
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-457 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/dd4017d68b3421036f3071b18b3a13c2dc7e28de5ec75b5b68e4d74d6fa3b02e.json
@@ -11859,9 +12489,11 @@ Normative:
 ## SCA-458 Verify parser-failure row e1178b6459d5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-458 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e1178b6459d5bb67cfa83bfc3cde5c056cc1901181794e8de34afd5da0b4b943.json
@@ -11897,9 +12529,11 @@ Normative:
 ## SCA-459 Verify parser-failure row e19674b415ee
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-459 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e19674b415ee34d784c735e588f6702b4301a4a45cb87bac0079326e951d30c7.json
@@ -11935,9 +12569,11 @@ Normative:
 ## SCA-460 Verify parser-failure row e3e8cb469e07
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-460 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e3e8cb469e077540d0a35f78caba48b7521c6eae988c8cc2b642da5a208b6366.json
@@ -11973,9 +12609,11 @@ Normative:
 ## SCA-461 Verify parser-failure row e49cc902f442
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-461 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e49cc902f442179161b2c903af91aff2370fab2367ce1c0a71ba0aa58cd22b16.json
@@ -12011,9 +12649,11 @@ Normative:
 ## SCA-462 Verify parser-failure row e4c0fac564b0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-462 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e4c0fac564b03b5b389c324f43b2c3681567c980bed3ae324a5efa8578322adf.json
@@ -12049,9 +12689,11 @@ Normative:
 ## SCA-463 Verify parser-failure row e53cf02f4ff9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-463 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e53cf02f4ff9210138d732ee47c224e00eec1d96ad7d80aa0019ef0a1c97823d.json
@@ -12087,9 +12729,11 @@ Normative:
 ## SCA-464 Verify parser-failure row e56f3b0a4e7e
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-237
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-237, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-464 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/legacy.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e56f3b0a4e7e889a72093d1c03fdf8587b079719d73cd924e3e5f72a66bc1d29.json
@@ -12125,9 +12769,11 @@ Normative:
 ## SCA-465 Verify parser-failure row e570b78c943d
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-465 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e570b78c943dde85b00491e3761fd22538047a55b81322f5489767b32cca509b.json
@@ -12163,9 +12809,11 @@ Normative:
 ## SCA-466 Verify parser-failure row e5a1964969c3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-466 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e5a1964969c3747093619a50b6d67bfe9b1f47c25e6ae8ca99c5d9c1c7553855.json
@@ -12201,9 +12849,11 @@ Normative:
 ## SCA-467 Verify parser-failure row e72ad693b78a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-467 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e72ad693b78aa99e13c502b70e167c96f28850387414224fc13a69d23fb5fc8c.json
@@ -12239,9 +12889,11 @@ Normative:
 ## SCA-468 Verify parser-failure row e77b925c0cf8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-468 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e77b925c0cf8f3a08e5b1fd9c7d9833d4e6eeb108c5e3f96ac574552ff39c29a.json
@@ -12277,9 +12929,11 @@ Normative:
 ## SCA-469 Verify parser-failure row e78e16aecdf7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-469 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e78e16aecdf77dc6e7943f2707b8623516677726bb58d469e709f71aeefdbff5.json
@@ -12315,9 +12969,11 @@ Normative:
 ## SCA-470 Verify parser-failure row e82305ec923a
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-470 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e82305ec923a77ab5d9c50d56110feb2601ed81853d8c83f4e1a5c931b42e8f2.json
@@ -12353,9 +13009,11 @@ Normative:
 ## SCA-471 Verify parser-failure row e9d412255046
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-233
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-233, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-471 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/browser.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/e9d412255046b6534d90fb1ff95d038e0254d3cd05f19175d5f48e9620fd81cd.json
@@ -12391,9 +13049,11 @@ Normative:
 ## SCA-472 Verify parser-failure row eac1ea73671f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-472 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eac1ea73671f7678ad76c502199cc173c202f9bdf28541a1a0ec47d14db35a66.json
@@ -12429,9 +13089,11 @@ Normative:
 ## SCA-473 Verify parser-failure row eb2a00a9d15b
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-473 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/eb2a00a9d15ba1e51e68f5361371fb7f9aa220162abca75c2bc558cb4d655b53.json
@@ -12467,9 +13129,11 @@ Normative:
 ## SCA-474 Verify parser-failure row ec97b77a94bd
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-474 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ec97b77a94bddd827884ff99217dd07e7904adf8ae717f418aefb2e91e1dbd98.json
@@ -12505,9 +13169,11 @@ Normative:
 ## SCA-475 Verify parser-failure row ed8794319a8c
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-475 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ed8794319a8c020bbfab4bd582b4dd22c25648ab0304a83d988582561a65c964.json
@@ -12543,9 +13209,11 @@ Normative:
 ## SCA-476 Verify parser-failure row ee934c4d2bcb
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-476 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ee934c4d2bcbe331a3ba9e2bffe0990b09dae9869de57383622fada28c1906c1.json
@@ -12581,9 +13249,11 @@ Normative:
 ## SCA-477 Verify parser-failure row ef299aeac381
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-477 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/ef299aeac38149587f65c79b993cb9d86da7bcaf898a6715646237d48f284e06.json
@@ -12619,9 +13289,11 @@ Normative:
 ## SCA-478 Verify parser-failure row f077a2c905f7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-478 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f077a2c905f7cc64bbbe1f8ea8f868f47a48a9804eb0273625a05523876f29b3.json
@@ -12657,9 +13329,11 @@ Normative:
 ## SCA-479 Verify parser-failure row f0d7c3b345d0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-479 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0d7c3b345d0d86324073e2e3f8f97c5d3334a53a755099204692a0016158147.json
@@ -12695,9 +13369,11 @@ Normative:
 ## SCA-480 Verify parser-failure row f0eb8e5977c3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-480 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f0eb8e5977c3a8d60f6d1fc8711e786eb101a3cb13c47c54eb150bffa3fa9027.json
@@ -12733,9 +13409,11 @@ Normative:
 ## SCA-481 Verify parser-failure row f11c9100e1fa
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-481 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f11c9100e1fa9d24e9feb59762ba8ba11b9bf9e3c0596a2c0f9525aa617aab23.json
@@ -12771,9 +13449,11 @@ Normative:
 ## SCA-482 Verify parser-failure row f204ff5a2ab4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-482 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f204ff5a2ab47bce0b0e10e660e3c2253839d34603327c064a9786b3784567bd.json
@@ -12809,9 +13489,11 @@ Normative:
 ## SCA-483 Verify parser-failure row f4c91f47a2a7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-483 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f4c91f47a2a78d72a54beeffbba5e991fb270e0c06e98e206e842c81a0386982.json
@@ -12847,9 +13529,11 @@ Normative:
 ## SCA-484 Verify parser-failure row f53b2672d857
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-484 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f53b2672d857be9c708482d8723d30a28db592cfeeda1ce228482a8b842ff02b.json
@@ -12885,9 +13569,11 @@ Normative:
 ## SCA-485 Verify parser-failure row f6c112435997
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-485 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f6c112435997ff26fcd629dd97b46d64da973b007102b09e8455371ef9430509.json
@@ -12923,9 +13609,11 @@ Normative:
 ## SCA-486 Verify parser-failure row f711bbcfdbf5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-486 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f711bbcfdbf555c7250c13ee8903d3f84ab672115281f34fb87aece80c7487ad.json
@@ -12961,9 +13649,11 @@ Normative:
 ## SCA-487 Verify parser-failure row f765bbb40b6f
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-487 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f765bbb40b6fb88290c08471388369c06e4a166a2215efb91817a554aa133108.json
@@ -12999,9 +13689,11 @@ Normative:
 ## SCA-488 Verify parser-failure row f7d9f67920d2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-488 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f7d9f67920d2d3a62f399fbd7f491d2c8ec76afcc9ab77dd902ab3793ee280ce.json
@@ -13037,9 +13729,11 @@ Normative:
 ## SCA-489 Verify parser-failure row f8ca836b23bc
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-489 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/f8ca836b23bc551ab012fb98fe00dfc39f71c7d9402dec067f65e8590018863e.json
@@ -13075,9 +13769,11 @@ Normative:
 ## SCA-490 Verify parser-failure row fa787dc3bde2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-490 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fa787dc3bde2ee9fcfcb585fe2c23e1423cf6f1378884bf6e6746578a89a6540.json
@@ -13113,9 +13809,11 @@ Normative:
 ## SCA-491 Verify parser-failure row fd0641947bdb
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-491 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd0641947bdb244bf2868b262cbc676a05259b54608b78d313a703465c0818f0.json
@@ -13151,9 +13849,11 @@ Normative:
 ## SCA-492 Verify parser-failure row fd1a1a0332df
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-492 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd1a1a0332dfc719290d927a26137c5d07565b0de1a4dd2adb0ffc4f32e13261.json
@@ -13189,9 +13889,11 @@ Normative:
 ## SCA-493 Verify parser-failure row fd364177eb71
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-493 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fd364177eb716befca2572920973e9e8b637f1c3368fa02039d07ba68f0fe04b.json
@@ -13227,9 +13929,11 @@ Normative:
 ## SCA-494 Verify parser-failure row fe73e0e2ff74
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-494 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe73e0e2ff74f64f4e9fa4fd37dd68bf881021e8025fdd426464cf9258731bf3.json
@@ -13265,9 +13969,11 @@ Normative:
 ## SCA-495 Verify parser-failure row fe92ba266817
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-row-verification
-- Depends on: SCA-232
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-232, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-row --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --task-id SCA-495 --cluster-receipt data/agent_supervisor/swissknife_contract_assurance/parser-failures/clusters/unit.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows/fe92ba266817e8fa9df1803b339c3ce6655f3b4d31f125d852b3980981e973cb.json
@@ -13303,9 +14009,11 @@ Normative:
 ## SCA-496 Fan in parser-failure row receipts for nibble 0
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-238, SCA-239, SCA-240, SCA-241, SCA-242, SCA-243, SCA-244, SCA-245, SCA-246, SCA-247, SCA-248, SCA-249, SCA-250, SCA-251, SCA-252, SCA-253, SCA-254, SCA-255, SCA-256
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-238, SCA-239, SCA-240, SCA-241, SCA-242, SCA-243, SCA-244, SCA-245, SCA-246, SCA-247, SCA-248, SCA-249, SCA-250, SCA-251, SCA-252, SCA-253, SCA-254, SCA-255, SCA-256, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/0.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 0 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/0.json
@@ -13331,9 +14039,11 @@ Normative:
 ## SCA-497 Fan in parser-failure row receipts for nibble 1
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-257, SCA-258, SCA-259, SCA-260, SCA-261, SCA-262, SCA-263, SCA-264, SCA-265, SCA-266, SCA-267, SCA-268, SCA-269, SCA-270, SCA-271, SCA-272, SCA-273, SCA-274
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-257, SCA-258, SCA-259, SCA-260, SCA-261, SCA-262, SCA-263, SCA-264, SCA-265, SCA-266, SCA-267, SCA-268, SCA-269, SCA-270, SCA-271, SCA-272, SCA-273, SCA-274, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/1.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 1 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/1.json
@@ -13359,9 +14069,11 @@ Normative:
 ## SCA-498 Fan in parser-failure row receipts for nibble 2
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-275, SCA-276, SCA-277, SCA-278, SCA-279, SCA-280, SCA-281, SCA-282, SCA-283, SCA-284, SCA-285, SCA-286, SCA-287, SCA-288, SCA-289, SCA-290, SCA-291, SCA-292, SCA-293, SCA-294, SCA-295, SCA-296, SCA-297, SCA-298
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-275, SCA-276, SCA-277, SCA-278, SCA-279, SCA-280, SCA-281, SCA-282, SCA-283, SCA-284, SCA-285, SCA-286, SCA-287, SCA-288, SCA-289, SCA-290, SCA-291, SCA-292, SCA-293, SCA-294, SCA-295, SCA-296, SCA-297, SCA-298, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/2.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 2 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/2.json
@@ -13387,9 +14099,11 @@ Normative:
 ## SCA-499 Fan in parser-failure row receipts for nibble 3
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-299, SCA-300, SCA-301, SCA-302, SCA-303, SCA-304, SCA-305, SCA-306, SCA-307, SCA-308, SCA-309, SCA-310, SCA-311, SCA-312, SCA-313
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-299, SCA-300, SCA-301, SCA-302, SCA-303, SCA-304, SCA-305, SCA-306, SCA-307, SCA-308, SCA-309, SCA-310, SCA-311, SCA-312, SCA-313, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/3.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 3 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/3.json
@@ -13415,9 +14129,11 @@ Normative:
 ## SCA-500 Fan in parser-failure row receipts for nibble 4
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-314, SCA-315, SCA-316, SCA-317, SCA-318, SCA-319, SCA-320, SCA-321, SCA-322, SCA-323
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-314, SCA-315, SCA-316, SCA-317, SCA-318, SCA-319, SCA-320, SCA-321, SCA-322, SCA-323, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/4.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 4 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/4.json
@@ -13443,9 +14159,11 @@ Normative:
 ## SCA-501 Fan in parser-failure row receipts for nibble 5
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-324, SCA-325, SCA-326, SCA-327, SCA-328, SCA-329, SCA-330, SCA-331, SCA-332, SCA-333, SCA-334, SCA-335, SCA-336, SCA-337, SCA-338, SCA-339
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-324, SCA-325, SCA-326, SCA-327, SCA-328, SCA-329, SCA-330, SCA-331, SCA-332, SCA-333, SCA-334, SCA-335, SCA-336, SCA-337, SCA-338, SCA-339, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/5.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 5 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/5.json
@@ -13471,9 +14189,11 @@ Normative:
 ## SCA-502 Fan in parser-failure row receipts for nibble 6
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-340, SCA-341, SCA-342, SCA-343, SCA-344, SCA-345, SCA-346, SCA-347, SCA-348, SCA-349, SCA-350, SCA-351, SCA-352, SCA-353, SCA-354, SCA-355
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-340, SCA-341, SCA-342, SCA-343, SCA-344, SCA-345, SCA-346, SCA-347, SCA-348, SCA-349, SCA-350, SCA-351, SCA-352, SCA-353, SCA-354, SCA-355, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/6.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 6 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/6.json
@@ -13499,9 +14219,11 @@ Normative:
 ## SCA-503 Fan in parser-failure row receipts for nibble 7
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-356, SCA-357, SCA-358, SCA-359, SCA-360, SCA-361, SCA-362, SCA-363, SCA-364, SCA-365, SCA-366
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-356, SCA-357, SCA-358, SCA-359, SCA-360, SCA-361, SCA-362, SCA-363, SCA-364, SCA-365, SCA-366, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/7.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 7 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/7.json
@@ -13527,9 +14249,11 @@ Normative:
 ## SCA-504 Fan in parser-failure row receipts for nibble 8
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-367, SCA-368, SCA-369, SCA-370, SCA-371, SCA-372, SCA-373, SCA-374, SCA-375, SCA-376, SCA-377, SCA-378
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-367, SCA-368, SCA-369, SCA-370, SCA-371, SCA-372, SCA-373, SCA-374, SCA-375, SCA-376, SCA-377, SCA-378, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/8.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 8 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/8.json
@@ -13555,9 +14279,11 @@ Normative:
 ## SCA-505 Fan in parser-failure row receipts for nibble 9
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-379, SCA-380, SCA-381, SCA-382, SCA-383, SCA-384, SCA-385, SCA-386, SCA-387, SCA-388, SCA-389, SCA-390, SCA-391, SCA-392
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-379, SCA-380, SCA-381, SCA-382, SCA-383, SCA-384, SCA-385, SCA-386, SCA-387, SCA-388, SCA-389, SCA-390, SCA-391, SCA-392, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/9.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble 9 --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/9.json
@@ -13583,9 +14309,11 @@ Normative:
 ## SCA-506 Fan in parser-failure row receipts for nibble A
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-393, SCA-394, SCA-395, SCA-396, SCA-397, SCA-398, SCA-399, SCA-400, SCA-401, SCA-402, SCA-403, SCA-404, SCA-405, SCA-406, SCA-407, SCA-408, SCA-409, SCA-410
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-393, SCA-394, SCA-395, SCA-396, SCA-397, SCA-398, SCA-399, SCA-400, SCA-401, SCA-402, SCA-403, SCA-404, SCA-405, SCA-406, SCA-407, SCA-408, SCA-409, SCA-410, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/a.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble a --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/a.json
@@ -13611,9 +14339,11 @@ Normative:
 ## SCA-507 Fan in parser-failure row receipts for nibble B
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-411, SCA-412, SCA-413, SCA-414, SCA-415, SCA-416, SCA-417, SCA-418, SCA-419, SCA-420, SCA-421, SCA-422, SCA-423, SCA-424, SCA-425
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-411, SCA-412, SCA-413, SCA-414, SCA-415, SCA-416, SCA-417, SCA-418, SCA-419, SCA-420, SCA-421, SCA-422, SCA-423, SCA-424, SCA-425, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/b.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble b --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/b.json
@@ -13639,9 +14369,11 @@ Normative:
 ## SCA-508 Fan in parser-failure row receipts for nibble C
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-426, SCA-427, SCA-428, SCA-429, SCA-430, SCA-431, SCA-432, SCA-433, SCA-434, SCA-435, SCA-436, SCA-437, SCA-438, SCA-439, SCA-440, SCA-441, SCA-442, SCA-443
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-426, SCA-427, SCA-428, SCA-429, SCA-430, SCA-431, SCA-432, SCA-433, SCA-434, SCA-435, SCA-436, SCA-437, SCA-438, SCA-439, SCA-440, SCA-441, SCA-442, SCA-443, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/c.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble c --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/c.json
@@ -13667,9 +14399,11 @@ Normative:
 ## SCA-509 Fan in parser-failure row receipts for nibble D
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-444, SCA-445, SCA-446, SCA-447, SCA-448, SCA-449, SCA-450, SCA-451, SCA-452, SCA-453, SCA-454, SCA-455, SCA-456, SCA-457
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-444, SCA-445, SCA-446, SCA-447, SCA-448, SCA-449, SCA-450, SCA-451, SCA-452, SCA-453, SCA-454, SCA-455, SCA-456, SCA-457, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/d.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble d --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/d.json
@@ -13695,9 +14429,11 @@ Normative:
 ## SCA-510 Fan in parser-failure row receipts for nibble E
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-458, SCA-459, SCA-460, SCA-461, SCA-462, SCA-463, SCA-464, SCA-465, SCA-466, SCA-467, SCA-468, SCA-469, SCA-470, SCA-471, SCA-472, SCA-473, SCA-474, SCA-475, SCA-476, SCA-477
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-458, SCA-459, SCA-460, SCA-461, SCA-462, SCA-463, SCA-464, SCA-465, SCA-466, SCA-467, SCA-468, SCA-469, SCA-470, SCA-471, SCA-472, SCA-473, SCA-474, SCA-475, SCA-476, SCA-477, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/e.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble e --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/e.json
@@ -13723,9 +14459,11 @@ Normative:
 ## SCA-511 Fan in parser-failure row receipts for nibble F
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-fan-in
-- Depends on: SCA-478, SCA-479, SCA-480, SCA-481, SCA-482, SCA-483, SCA-484, SCA-485, SCA-486, SCA-487, SCA-488, SCA-489, SCA-490, SCA-491, SCA-492, SCA-493, SCA-494, SCA-495
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-478, SCA-479, SCA-480, SCA-481, SCA-482, SCA-483, SCA-484, SCA-485, SCA-486, SCA-487, SCA-488, SCA-489, SCA-490, SCA-491, SCA-492, SCA-493, SCA-494, SCA-495, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/f.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py verify-gate --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --nibble f --receipt-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/rows --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates/f.json
@@ -13751,9 +14489,11 @@ Normative:
 ## SCA-512 Prove exact parser-failure reconciliation and fresh health
 
 - Status: todo
-- Priority: P0
+- Priority: P3
 - Track: parser-failure-aggregate
-- Depends on: SCA-496, SCA-497, SCA-498, SCA-499, SCA-500, SCA-501, SCA-502, SCA-503, SCA-504, SCA-505, SCA-506, SCA-507, SCA-508, SCA-509, SCA-510, SCA-511
+- Selection band: B3
+- Selection phase: deferred_until_formal_path
+- Depends on: SCA-496, SCA-497, SCA-498, SCA-499, SCA-500, SCA-501, SCA-502, SCA-503, SCA-504, SCA-505, SCA-506, SCA-507, SCA-508, SCA-509, SCA-510, SCA-511, SCA-ENABLE-CLOSE
 - Goal id: SCA-G022
 - Outputs: data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json, data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json
 - Validation: python3 scripts/swissknife_parser_failure_backlog.py scan-all --manifest implementation_plan/conformance/swissknife-parser-failure-backlog-v1.json --gate-dir data/agent_supervisor/swissknife_contract_assurance/parser-failures/gates --fresh-index data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json --receipt-out data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json
@@ -13772,9 +14512,9 @@ Normative:
 - Required fresh parser failures: 0
 - Reviewed maximum parser failure ratio: 0.01
 - Proposal artifact envelope: {"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1","paths":["data/agent_supervisor/swissknife_contract_assurance/parser-failures/aggregate.json","data/agent_supervisor/swissknife_contract_assurance/parser-failures/fresh/aggregate/repository-index.json"],"max_file_bytes":8000000,"max_patch_bytes":16000000,"max_output_bytes":32000000}
-- Conflict policy: Run one full fresh deterministic scan; never consume copied authority, weaken thresholds, omit providers, or invoke a model.
-- Preconditions: All sixteen exact fan-in receipts are complete.
-- Effects: Binds the complete old failure set to current dispositions and gates authoritative publication on fresh analyzer health.
+- Conflict policy: Run one full fresh deterministic scan; never consume copied authority, weaken thresholds, omit providers, or invoke a model. Deferred until SCA-ENABLE-CLOSE so formal-first publication (SCA-225) can use the 10/0.01 budget without a dependency cycle.
+- Preconditions: SCA-ENABLE-CLOSE completed; all sixteen exact fan-in receipts are complete.
+- Effects: Binds the complete old failure set to current dispositions; post-enablement exact reconciliation (no longer a hard gate on SCA-225 during formal_first_enablement).
 - Evidence subset: 258 row receipts, 16 fan-in receipts, fresh snapshot/index/AST/parser/health identities
 - Acceptance: Old row assignments are exact with no duplicate or unassigned failure; the fresh full index has complete dispositions, no parser failures at all, and ratio 0; execution records zero model/provider/LLM calls.
 
@@ -13824,7 +14564,7 @@ Normative:
 
 ## SCA-601 Repair canonical leased-lane and legacy P2P scheduler test paths
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: scheduler-compatibility
 - Depends on: SCA-600
@@ -13849,7 +14589,7 @@ Normative:
 
 ## SCA-602 Bind crash reconciliation and maintenance to one shared epoch
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: supervisor-fence
 - Depends on: SCA-227, SCA-229, SCA-601
@@ -13953,7 +14693,7 @@ Normative:
 
 ## SCA-606 Make datasets solver readiness explicit and fail closed
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: proof-readiness
 - Depends on: SCA-214, SCA-604
@@ -13979,7 +14719,7 @@ Normative:
 
 ## SCA-607 Gate ProveKit on exact executable, setup, circuit, and verifier identity
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: zk-readiness
 - Depends on: SCA-223, SCA-229, SCA-606
@@ -14159,7 +14899,7 @@ Normative:
 
 ## SCA-614 Prove the complete production composition or fail closed
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: production-authority
 - Depends on: SCA-181, SCA-221, SCA-225, SCA-600, SCA-601, SCA-602, SCA-603, SCA-604, SCA-605, SCA-606, SCA-607, SCA-608, SCA-609, SCA-610, SCA-611, SCA-612, SCA-613, SCA-615
@@ -14347,7 +15087,7 @@ Normative:
 
 ## SCA-618 Close objective gap: End-to-end proof/cache orchestration
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -14414,7 +15154,7 @@ Normative:
 
 ## SCA-619 Close objective gap: Scheduler and crash-fence semantic recovery
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -14481,7 +15221,7 @@ Normative:
 
 ## SCA-620 Close objective gap: Audit-derived production-composition closure
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -14548,7 +15288,7 @@ Normative:
 
 ## SCA-621 Close objective gap: Solver, proof-cache, and real-ZK readiness
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -14683,7 +15423,7 @@ Normative:
 
 ## SCA-623 Close objective gap: Real datasets ZK receipt backend
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -14750,13 +15490,15 @@ Normative:
 
 ## SCA-624 Close objective gap: Proof-directed SwissKnife contract assurance
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
-- Priority: P0
+- Priority: P1
 - Track: swissknife-contract-assurance
-- Depends on: SCA-230
+- Selection band: B2
+- Selection phase: formal_first_enablement
+- Depends on: SCA-230, SCA-ENABLE-CLOSE
 - Outputs: implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.objectives.md, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md, config/swissknife_symbolic_contract_assurance_supervisor.json, config/swissknife_symbolic_contract_assurance_lane_inventory.json, scripts/swissknife_parallel_implementation_supervisor.py
 - Validation: test -f implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md && python3 -m json.tool config/swissknife_symbolic_contract_assurance_supervisor.json >/dev/null && python3 -m json.tool config/swissknife_symbolic_contract_assurance_lane_inventory.json >/dev/null && python3 -m py_compile scripts/swissknife_parallel_implementation_supervisor.py
 - Evidence inputs: data/agent_supervisor/swissknife_contract_assurance/discovery
@@ -14768,7 +15510,7 @@ Normative:
 - Graph depth: 0
 - Objective heap index: 0
 - Parallel lane: swissknife/contract-assurance/root
-- Conflict policy: Own the SCA planning, configuration, and runtime namespaces; do not rewrite SVD/SWR histories or the CBP proof trust model.
+- Conflict policy: Own the SCA planning, configuration, and runtime namespaces after SCA-ENABLE-CLOSE; do not rewrite SVD/SWR histories or the CBP proof trust model. Ordered after formal-first enablement so supervisor.json is not contested with ENABLE-RPR/ENABLE-CLOSE.
 - Predicted files: implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.objectives.md, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md, config/swissknife_symbolic_contract_assurance_supervisor.json, config/swissknife_symbolic_contract_assurance_lane_inventory.json, scripts/swissknife_parallel_implementation_supervisor.py
 - Changed paths:
 - AST symbols: SCAEV000ROOT
@@ -14817,7 +15559,7 @@ Normative:
 
 ## SCA-625 Close objective gap: Multi-root provider source index
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -14884,7 +15626,7 @@ Normative:
 
 ## SCA-626 Close objective gap: Exact datasets GraphRAG and Cypher-AST binding
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15308,7 +16050,7 @@ Normative:
 
 ## SCA-633 Resolve merge retry-budget failure for SCA-619
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Priority: P1
 - Track: ops
@@ -15451,7 +16193,7 @@ Normative:
 
 ## SCA-641 Close objective gap: Exact snapshot, scope, and coverage accounting
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15518,7 +16260,7 @@ Normative:
 
 ## SCA-642 Close objective gap: Python package actual-surface extraction
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15585,7 +16327,7 @@ Normative:
 
 ## SCA-643 Close objective gap: Typed call/effect/contract graph and bounded GraphRAG
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15720,7 +16462,7 @@ Normative:
 
 ## SCA-645 Close objective gap: Contract mismatch analyzer
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -15787,7 +16529,7 @@ Normative:
 
 ## SCA-646 Close objective gap: ZK threat model and capability policy
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -16026,7 +16768,7 @@ Normative:
 
 ## SCA-651 Close objective gap: Polyglot AST extraction
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -16093,7 +16835,7 @@ Normative:
 
 ## SCA-652 Close objective gap: Whole-tree incremental index
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -16160,7 +16902,7 @@ Normative:
 
 ## SCA-653 Close objective gap: Reviewed contract authority catalog
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
