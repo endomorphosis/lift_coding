@@ -99,7 +99,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-012 Refresh ORB dynamic renderer tests for UIR-035 and re-enable
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
