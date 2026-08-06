@@ -133,7 +133,7 @@ W9  WPD-070
 
 ## WPD-003 Publish threat model and non-compensable safety floors
 
-- Status: active
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
