@@ -1,4 +1,9 @@
-"""Meta Wearables DAT Android / external/ipfs_accelerate interop tests for MGW-576."""
+"""Meta Wearables DAT Android / external/ipfs_accelerate interop tests for MGW-576.
+
+CIG-018 re-enables this suite in Makefile ``test-ci`` (ignore line removed) once
+``external/meta-wearables-dat-android`` is initialized alongside the pinned
+``external/ipfs_accelerate`` DuckDB benchmark descriptors.
+"""
 
 from __future__ import annotations
 
