@@ -403,7 +403,7 @@ W9  WPD-070
 
 ## WPD-032 Task execution policy: ban free re-prompt after typed failure
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
