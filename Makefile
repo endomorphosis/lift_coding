@@ -40,12 +40,12 @@ test:
 # Re-enabled in test-ci (CIG-015): tests/integration/test_glasses_control_plane.py
 # Re-enabled in test-ci (CIG-016): tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py
 # Re-enabled in test-ci (CIG-017): tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py
+# Re-enabled in test-ci (CIG-019): tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py
 test-ci:
 	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate:$(PWD)/external/ipfs_kit:$(PWD)/external/ipfs_datasets $(PYTHON) -m pytest -q \
 		--ignore=tests/test_hallucinate_multimodal_control_todo_queue.py \
 		--ignore=tests/test_virtual_ai_os_todo_queue.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
-		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
 		--ignore=tests/integration/test_desktop_app_integrations.py
 
 conformance: conformance-symbols conformance-ts conformance-symbol-coverage conformance-mutation-gate conformance-differential-fuzz conformance-port239-host-native conformance-substance conformance-behavioral-certificate conformance-temporal-native conformance-ergo conformance-ergo-entailment conformance-ergo-entailment-crosslang conformance-ergo-output-parse-crosslang conformance-modal-codec-ir-crosslang conformance-modal-codec-guidance-crosslang conformance-modal-codec-citation-crosslang conformance-modal-decompiler-crosslang conformance-modal-decompiler-citation-crosslang conformance-deontic-parser-utils-crosslang conformance-deontic-parser-elements-crosslang conformance-modal-compiler-family-token-crosslang conformance-modal-compiler-serialization-crosslang conformance-deontic-bridge-document-id-crosslang conformance-deontic-bridge-normalized-text-crosslang conformance-deontic-bridge-citation-crosslang conformance-deontic-bridge-decoded-text-crosslang conformance-deontic-bridge-guidance-crosslang conformance-deontic-bridge-list-of-dicts-crosslang conformance-deontic-bridge-target-names-crosslang conformance-deontic-bridge-fill-empty-crosslang conformance-deontic-bridge-rate-crosslang conformance-deontic-bridge-guidance-target-gap-crosslang conformance-deontic-bridge-guidance-normalization-crosslang conformance-deontic-bridge-guidance-row-match-crosslang conformance-deontic-bridge-guidance-evidence-rows-crosslang conformance-deontic-bridge-guidance-frame-selection-crosslang conformance-deontic-bridge-json-guidance-crosslang conformance-deontic-bridge-guidance-route-crosslang
