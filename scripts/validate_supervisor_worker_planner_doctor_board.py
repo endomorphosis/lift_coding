@@ -267,7 +267,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check-all", action="store_true", help="Full board validation")
     parser.add_argument("--json", action="store_true", help="Emit JSON only")
-    args = parser.parse_args(argv)
+    parser.parse_args(argv)
     payload = validate()
     text = json.dumps(payload, indent=2, sort_keys=True)
     print(text)
