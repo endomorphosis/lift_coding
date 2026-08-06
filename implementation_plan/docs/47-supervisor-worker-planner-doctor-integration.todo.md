@@ -457,7 +457,7 @@ W9  WPD-070
 
 ## WPD-041 Rescue doctor-first before model rescue
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
