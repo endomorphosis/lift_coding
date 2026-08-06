@@ -252,7 +252,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Depends on: CIG-000
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, Makefile
 - Predicted files: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py
-- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android external/ipfs_accelerate; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop' Makefile || true)"
+- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop' Makefile || true)"
 - Board namespace: monorepo-ci-deferred-suite-reenables-v1
 - Bundle: cig/meta-android-accelerate
 - Parallel lane: cig-meta-android-accelerate
