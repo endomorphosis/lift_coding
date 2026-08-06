@@ -349,7 +349,7 @@ W9  WPD-070
 
 ## WPD-030 Worker Doctor bridge from validation failures
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
