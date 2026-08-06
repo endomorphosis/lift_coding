@@ -17,10 +17,14 @@ runtime handoff behavior, and an integration test:
 - `external/meta-wearables-dat-android/.cursor/rules/permissions-registration.mdc`
 - `external/meta-wearables-dat-android/samples/DisplayAccess/app/src/main/AndroidManifest.xml`
 - `external/meta-wearables-dat-android/samples/DisplayAccess/app/src/main/java/com/meta/wearable/dat/externalsampleapps/displayaccess/display/DisplayViewModel.kt`
-- `external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json`
-- `external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`
-- `external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py`
-- `external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py`
+- `external/ipfs_kit/data/deprecations_report.schema.json`
+- `external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`
+- `external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py`
+- `external/ipfs_kit/examples/demo_unified_bucket_interface.py`
+- `external/ipfs_kit/examples/schema_column_optimization_example.py`
+- `external/ipfs_datasets/ipfs_datasets_py/ipfs_backend_router.py`
+- `external/ipfs_datasets/ipfs_datasets_py/embeddings_router.py`
+- `external/ipfs_datasets/ipfs_datasets_py/llm_router.py`
 
 ## Contract
 
@@ -40,8 +44,9 @@ validated descriptors prove these terms are present:
   `com.meta.wearable.mwdat.CLIENT_TOKEN`
 - Android permissions `BLUETOOTH`, `BLUETOOTH_CONNECT`, and `INTERNET`
 
-The target surface is `external/ipfs_datasets` with its embedded
-`.tools/ipfs_kit_py` Bucket VFS evidence. The validated descriptors prove:
+The target surface is `external/ipfs_datasets` with Bucket VFS evidence pinned
+in the sibling `external/ipfs_kit` checkout (formerly nested under
+`external/ipfs_datasets/.tools/ipfs_kit_py`). The validated descriptors prove:
 
 - deprecations report JSON Schema with required keys `report_version`,
   `generated_at`, `deprecated`, `summary`, `policy`, and `raw`
