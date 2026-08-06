@@ -106,7 +106,7 @@ W9  WPD-070
 
 ## WPD-002 Define residual LLM packet and bounds
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
