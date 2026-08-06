@@ -1098,7 +1098,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-167 Enforce symbolic-only tasks and bounded Grok/Codex routing
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: provider-policy
 - Depends on: SCA-100, SCA-110, SCA-111
@@ -1379,7 +1379,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-179 Integrate runtime contract discovery into continuous refill
 
-- Status: todo
+- Status: completed
 - Completion: automated
 - Completion evidence: 17 focused refill tests passed; commit 848bc2f7111e00f0d177a823504c30d4b3090e04 and its sealed zero-provider-call metrics were integrated into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
@@ -15355,7 +15355,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-622 Close objective gap: End-to-end production authority gate
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Completion evidence: Superproject merge d81dfcf4f498eae6b59fde858c7bef5a1297ddcb binds accelerator fbf0ea9d1a2a2e9e4831e3b1a39de2bb1540861f and sealed report sha256:0344be0d39b31e1cf7a2ebd63e1f60e5a42ecc4d019dcf51bbba849804fb2855; all 22 production-authority composition tests pass in the real superproject layout.
 - Is schedulable: true
