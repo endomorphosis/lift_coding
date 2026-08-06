@@ -187,7 +187,7 @@ W9  WPD-070
 
 ## WPD-011 Production default planner factory
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
