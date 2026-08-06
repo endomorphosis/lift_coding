@@ -51,7 +51,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-010 Re-enable SwissKnife MCP++ interop in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
