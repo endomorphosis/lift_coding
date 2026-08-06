@@ -214,7 +214,7 @@ W9  WPD-070
 
 ## WPD-012 Worker evidence factory for planning and doctor
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
