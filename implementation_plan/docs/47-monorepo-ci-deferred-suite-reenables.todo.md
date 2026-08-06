@@ -51,7 +51,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-010 Re-enable SwissKnife MCP++ interop in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -75,7 +75,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-011 Re-enable SwissKnife mobile interop in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -99,7 +99,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-012 Refresh ORB dynamic renderer tests for UIR-035 and re-enable
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -123,7 +123,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-013 Re-enable SwissKnife datasets interop in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -171,7 +171,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-015 Re-enable glasses control plane suite in test-ci
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -195,7 +195,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-016 Re-enable SwissKnife meta-wearables Android interop
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -219,7 +219,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-017 Re-enable SwissKnife meta-wearables iOS interop
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -252,7 +252,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Depends on: CIG-000
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py, Makefile
 - Predicted files: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py
-- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android external/ipfs_accelerate; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop' Makefile || true)"
+- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop' Makefile || true)"
 - Board namespace: monorepo-ci-deferred-suite-reenables-v1
 - Bundle: cig/meta-android-accelerate
 - Parallel lane: cig-meta-android-accelerate
@@ -276,7 +276,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Depends on: CIG-000
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py, Makefile
 - Predicted files: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py
-- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android external/ipfs_datasets; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop' Makefile || true)"
+- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop' Makefile || true)"
 - Board namespace: monorepo-ci-deferred-suite-reenables-v1
 - Bundle: cig/meta-android-datasets
 - Parallel lane: cig-meta-android-datasets
@@ -291,7 +291,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-020 Re-enable meta-wearables Android × kit interop
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -300,7 +300,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Depends on: CIG-000
 - Outputs: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py, Makefile
 - Predicted files: tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py
-- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android external/ipfs_kit; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop' Makefile || true)"
+- Validation: git submodule update --init --depth 1 external/meta-wearables-dat-android; PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py -q; test -z "$(rg -n 'ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop' Makefile || true)"
 - Board namespace: monorepo-ci-deferred-suite-reenables-v1
 - Bundle: cig/meta-android-kit
 - Parallel lane: cig-meta-android-kit
@@ -384,3 +384,45 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 - Preconditions: All Wave A/B tasks completed or explicitly waived with permanent-ignore rationale recorded in discovery.
 - Effects: Final Makefile ignore audit; documents any intentional long-term exclusions; proves make test-ci green.
 - Acceptance: No deferred suite from this board remains ignored without a permanent-ignore rationale in `data/ci/discovery/cig-040-closeout.md`; `make test-ci` is green on the closeout branch.
+
+## CIG-041 Resolve 1 preflight-conflicting backlogged worktree merges
+
+- Status: blocked
+- Completion: manual
+- Is schedulable: false
+- Review only: true
+- Blocked reason: operator_reconciliation_required
+- Priority: P1
+- Track: ops
+- Generated by: ipfs_accelerate_py.agent_supervisor.reconciliation-guardrail@1
+- Reconciliation kind: preflight_merge_conflict
+- Reconciliation reason: preflight_merge_conflict
+- Reconciliation fingerprint: 0d9db8a4806ed151bc05b3104fe34e94724edf03
+- Reconciliation discovery: data/ci/cig/discovery/2026-08-06-cig-041-reconciliation-0d9db8a4806e.md
+- Canonical board task: false
+- Fingerprint: 0d9db8a4806ed151bc05b3104fe34e94724edf03
+- Dedupe key: reconciliation_guardrail:preflight_merge_conflict
+- Depends on:
+- Outputs: data/ci/cig/discovery, implementation_plan/docs/47-monorepo-ci-deferred-suite-reenables.todo.md
+- Validation: test -f data/ci/cig/discovery/2026-08-06-cig-041-reconciliation-0d9db8a4806e.md
+- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by preflight_merge_conflict. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in data/ci/cig/discovery/2026-08-06-cig-041-reconciliation-0d9db8a4806e.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.
+
+## CIG-042 Resolve validation retry-budget failure for CIG-014
+
+- Status: todo
+- Completion: manual
+- Priority: P1
+- Track: ops
+- Depends on: CIG-000
+- Outputs: tests/integration/test_hallucinate_app_mobile_interop.py, Makefile
+- Validation: PYTHONPATH=src:external/ipfs_accelerate:external/ipfs_kit:external/ipfs_datasets pytest tests/integration/test_hallucinate_app_mobile_interop.py -q
+- Parallel lane: cig-hallucinate-mobile
+- Predicted files: tests/integration/test_hallucinate_app_mobile_interop.py
+- Generated by: ipfs_accelerate_py.agent_supervisor.retry-budget-repair@1
+- Retry repair source: CIG-014
+- Retry failure kind: validation
+- Retry repair discovery: data/ci/cig/discovery/2026-08-06-cig-042-cig-014-retry-budget.md
+- Canonical board task: false
+- Validation failure paths: tests/integration/test_hallucinate_app_mobile_interop.py
+- Validation failure path authority: diagnostic-read-only
+- Acceptance: Retry-budget guardrail filed this from repeated validation failures in CIG-014. Use evidence in data/ci/cig/discovery/2026-08-06-cig-042-cig-014-retry-budget.md to fix the validation blocker, then mark this repair task completed so the supervisor can release CIG-014 from strategy blocked_tasks. The declared validation failure paths (tests/integration/test_hallucinate_app_mobile_interop.py) are bounded diagnostic/read-only metadata: they may be inspected and used to focus validation, but do not grant write authority. Repair edits remain limited to the source task Outputs; do not weaken correct assertions or policy.

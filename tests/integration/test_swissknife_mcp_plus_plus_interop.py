@@ -361,9 +361,20 @@ def test_mcp_idl_descriptor_fixture_still_validates_with_shared_validator(
     mcp_idl_validator,
 ) -> None:
     fixture = read_json("Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json")
-    assert fixture["swissknife_interop_ref"] == (
+    interop_fixture_path = (
         "Mcp-Plus-Plus/tests-py/fixtures/valid/swissknife_mcp_plus_plus_interop_descriptor.json"
     )
+    idl_fixture_path = "Mcp-Plus-Plus/tests-py/fixtures/valid/mcp_idl_descriptor.json"
+    # Discoverability is owned by the monorepo SwissKnife descriptor (and, when
+    # present, an optional upstream back-link on the weather IDL fixture).
+    descriptor_src = read_text(
+        "swissknife/src/services/mcp/mcp-plus-plus-interop-descriptor.ts"
+    )
+    assert idl_fixture_path in descriptor_src
+    assert interop_fixture_path in descriptor_src
+    assert (REPO_ROOT / interop_fixture_path).is_file()
+    if "swissknife_interop_ref" in fixture:
+        assert fixture["swissknife_interop_ref"] == interop_fixture_path
 
     result = mcp_idl_validator.validate_descriptor(fixture["payload"])
 
