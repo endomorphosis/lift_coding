@@ -209,6 +209,9 @@ start() {
       --common-arg=--no-objective-task-janitor \
       --common-arg=--no-objective-goal-refinement \
       --common-arg=--no-objective-goal-migration \
+      --common-arg=--no-reconciliation-guardrail \
+      --common-arg=--no-retry-budget-guardrail \
+      --common-arg=--no-dependency-guardrail \
       --common-arg=--log-level \
       --common-arg=INFO \
       >"${MASTER_LOG_PATH}.launch" 2>&1 &

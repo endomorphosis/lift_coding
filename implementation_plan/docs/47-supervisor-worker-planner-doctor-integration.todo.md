@@ -643,5 +643,3 @@ W9  WPD-070
 - Evidence subset: forest, policy, floors, benchmark, adversarial, rollout
 - Acceptance: Release fails if any safety floor non-zero, benchmark missing, or unauthorized LLM path remains open; receipt is content-addressed and replayable.
 - Embedding query: terminal release worker planner doctor current tree gate
-
-
