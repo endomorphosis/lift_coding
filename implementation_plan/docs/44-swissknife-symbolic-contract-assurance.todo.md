@@ -1379,7 +1379,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-179 Integrate runtime contract discovery into continuous refill
 
-- Status: completed
+- Status: todo
 - Completion: automated
 - Completion evidence: 17 focused refill tests passed; commit 848bc2f7111e00f0d177a823504c30d4b3090e04 and its sealed zero-provider-call metrics were integrated into agent/swissknife-sca-parallel on 2026-07-29
 - Priority: P0
@@ -2064,7 +2064,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-192 Close objective gap: Scheduler authority and concurrency contracts
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Is schedulable: false
 - Review only: false
@@ -2130,7 +2130,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-193 Close objective gap: Agent-supervisor control and goal/task contracts
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Is schedulable: false
 - Review only: false
@@ -2196,7 +2196,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-194 Close objective gap: Scale and context-budget benchmark
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Is schedulable: false
 - Review only: false
@@ -2262,7 +2262,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-195 Close objective gap: Continuous incremental refill
 
-- Status: blocked
+- Status: completed
 - Completion: manual
 - Is schedulable: false
 - Review only: false
@@ -3132,7 +3132,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-218 Wire the baseline through prover, proof cache, and mismatch refinery
 
-- Status: todo
+- Status: completed
 - Priority: P0
 - Track: proof-orchestration
 - Depends on: SCA-070, SCA-090, SCA-214, SCA-217, SCA-220, SCA-225, SCA-604, SCA-605, SCA-606, SCA-612
@@ -3157,7 +3157,7 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-219 Bind a real datasets ZK verified-receipt backend
 
-- Status: todo
+- Status: completed
 - Priority: P1
 - Track: zk-backend
 - Depends on: SCA-081, SCA-214, SCA-218, SCA-220, SCA-223, SCA-607
