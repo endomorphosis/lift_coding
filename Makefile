@@ -37,13 +37,13 @@ test:
 # Re-enabled in test-ci (CIG-011): tests/integration/test_swissknife_mobile_interop.py
 # Re-enabled in test-ci (CIG-013): tests/integration/test_swissknife_external_ipfs_datasets_interop.py
 # Re-enabled in test-ci (CIG-015): tests/integration/test_glasses_control_plane.py
+# Re-enabled in test-ci (CIG-016): tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py
 test-ci:
 	PYTHONPATH=$(PWD)/src:$(PWD)/external/ipfs_accelerate:$(PWD)/external/ipfs_kit:$(PWD)/external/ipfs_datasets $(PYTHON) -m pytest -q \
 		--ignore=tests/test_hallucinate_multimodal_control_todo_queue.py \
 		--ignore=tests/test_virtual_ai_os_todo_queue.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
-		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py \
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py \
 		--ignore=tests/integration/test_hallucinate_app_mobile_interop.py \
 		--ignore=tests/integration/test_desktop_app_integrations.py
