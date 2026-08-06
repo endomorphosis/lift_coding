@@ -511,7 +511,7 @@ W9  WPD-070
 
 ## WPD-050 LLM-avoidance metrics and attempt attribution
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
