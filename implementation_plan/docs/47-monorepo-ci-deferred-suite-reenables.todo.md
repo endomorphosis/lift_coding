@@ -291,7 +291,7 @@ Board namespace: `monorepo-ci-deferred-suite-reenables-v1`.
 
 ## CIG-020 Re-enable meta-wearables Android × kit interop
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
