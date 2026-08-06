@@ -39,7 +39,6 @@ test-ci:
 		--ignore=tests/test_virtual_ai_os_todo_queue.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_accelerate_interop.py \
 		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_datasets_interop.py \
-		--ignore=tests/integration/test_external_meta_wearables_dat_android_external_ipfs_kit_interop.py \
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_android_interop.py \
 		--ignore=tests/integration/test_swissknife_external_meta_wearables_dat_ios_interop.py \
 		--ignore=tests/integration/test_swissknife_external_ipfs_datasets_interop.py \
