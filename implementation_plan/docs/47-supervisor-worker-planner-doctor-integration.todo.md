@@ -322,7 +322,7 @@ W9  WPD-070
 
 ## WPD-023 Residual provider invocation under sealed packet only
 
-- Status: active
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
