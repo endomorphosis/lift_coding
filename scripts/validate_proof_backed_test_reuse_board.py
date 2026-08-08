@@ -756,6 +756,8 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "test_deferred_test_certificate_request.py",
             "external/ipfs_datasets/tests/unit/logic/zkp/"
             "test_test_pass_groth16_provider.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/"
+            "test_test_pass_v5_authority.py",
             "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
             "groth16_wire_vectors.json",
             "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
@@ -804,6 +806,8 @@ EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS = {
     "test_test_pass_cid_profile.py": "PTR-163",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
     "test_test_pass_groth16_provider.py": "PTR-163",
+    "external/ipfs_datasets/tests/unit/logic/zkp/"
+    "test_test_pass_v5_authority.py": "PTR-163",
     "external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py": "PTR-161",
     "external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py": "PTR-161",
     "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py": "PTR-161",

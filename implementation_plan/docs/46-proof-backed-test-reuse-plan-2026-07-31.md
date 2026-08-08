@@ -898,6 +898,15 @@ historical output explicit work with current evidence:
    identity makes those counterexamples mandatory and consumes only PTR-160's
    canonical DAG-CBOR `RunnerPassAttestation@1` and local
    `RunnerTrustPolicy@1`; legacy formats remain readable but can only run.
+
+   The next interrupted draft exposed a subtler composition error before any
+   proposal: it treated the canonical DAG-JSON test receipt as DAG-CBOR and
+   proved knowledge of seven freely chosen 32-byte labels, each reduced into a
+   single scalar, rather than hashing the exact receipt/attestation bytes. The
+   final revised contract therefore seals the codec split explicitly and
+   requires length-bound in-circuit byte hashing, collision-free full-digest
+   public inputs, exact proof-to-statement comparison, one immutable artifact
+   root, and a mandatory real PTR-160 composition regression.
 6. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
    signed-receipt/candidate publication authority.
 7. `PTR-165` validates completed-task outputs, validation targets, exact

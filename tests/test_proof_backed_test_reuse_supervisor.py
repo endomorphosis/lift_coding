@@ -686,7 +686,7 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
     assert result["historical_missing_output_count"] == 11
     assert result["historical_missing_artifact_count"] == 11
     assert result["historical_missing_validation_only_paths"] == []
-    assert len(result["resolved_historical_artifact_paths"]) == 17
+    assert len(result["resolved_historical_artifact_paths"]) == 18
     quarantine = result["historical_missing_artifact_quarantine"]
     assert quarantine[
         "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
@@ -773,20 +773,30 @@ def test_ptr_163_contract_seals_real_v5_authority_counterexamples() -> None:
 
     assert task.status == "todo"
     assert task.canonical_task_cid == (
-        "baguqeeravbagnxggbvp6wyegxuormeb5agbjgbvexzn7pf2sw3fupol7xxlq"
+        "baguqeeragyr5kc3t4meq3hklzxbep7dimfltzdde3umbhv3l6fkkw2unblla"
     )
     for requirement in (
+        "`TestPassReceipt@1` is decoded and re-encoded as its exact canonical DAG-JSON",
         "canonical DAG-CBOR `RunnerPassAttestation@1`",
-        "explicitly local-pinned `RunnerTrustPolicy@1`",
-        "decoded from the exact bytes whose CID is public",
-        "proves a private opening of those bytes",
+        "explicitly local-pinned policy",
+        "bounded exact receipt and attestation bytes plus explicit lengths/padding",
+        "two range-constrained 128-bit limbs",
+        "never one field element reduced modulo Fr",
+        "compares the complete proof public-input vector to the requested statement",
         "lambdas, booleans, generic callable verifier objects",
-        "V1-V4/hash-only/simulated openings always return RUN",
-        "rehashes and compares the actual binary, circuit and verifying-key bytes",
-        "receipt-bytes/field mismatch",
+        "every public verifier entry point sets `can_authorize_skip=false`",
+        "one immutable reviewed artifact root",
+        "`test_test_pass_v5_authority.py` constructs a real PTR-160",
+        "single-field digest alias/reduction",
         "benign injected `True` backend",
     ):
         assert requirement in task.acceptance
+    authority_test = (
+        "external/ipfs_datasets/tests/unit/logic/zkp/"
+        "test_test_pass_v5_authority.py"
+    )
+    assert authority_test in task.outputs
+    assert authority_test in task.validation[0]
     todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
     assert "21282cb8779330724e496f88acdf3ed02cccbca1" in todo_text
     assert "a166f12cd5823416d31a2ebc0f5090ba245b73d5" in todo_text
@@ -1087,7 +1097,7 @@ def test_board_validator_accepts_repaired_audit_as_progressed_state(
     assert result["completed_task_count"] == 71
     assert result["current_claimable_task_ids"] == ["PTR-163"]
     assert result["completed_owner_missing_historical_artifact_paths"] == {}
-    assert len(result["resolved_historical_artifact_paths"]) == 17
+    assert len(result["resolved_historical_artifact_paths"]) == 18
 
 
 def test_board_validator_rejects_an_unexpected_new_historical_gap(
