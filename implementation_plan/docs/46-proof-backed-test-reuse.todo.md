@@ -2561,7 +2561,7 @@ cannot authorize rollout and all uncertain candidates execute normally.
 
 ## PTR-170 Preserve actionable validation failures in bounded retry evidence
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
