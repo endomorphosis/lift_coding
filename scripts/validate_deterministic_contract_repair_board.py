@@ -101,7 +101,7 @@ ORDERED_IMPLEMENTATION_TASK_FIELDS = {
     "runtime model calls": "0",
     "symbolic first": "true",
     "llm context budget bytes": "262144",
-    "provider role": "grok-implement, codex-review",
+    "provider role": "grok-primary-implement, codex-fallback-implement",
     "context budget tokens": "16384",
 }
 PATH_TASK_FIELDS = (
@@ -652,7 +652,7 @@ def _validate_config(
             "primary_model_id": "grok-4.5",
             "fallback_provider_id": "codex",
             "fallback_model_id": "gpt-5.6-terra",
-            "fallback_trigger": "primary_quota_exhausted",
+            "fallback_trigger": "primary_unavailable_or_quota_exhausted",
             "fallback_reasoning_effort": "high",
             "provider_fallback_for_other_failures": False,
         }
@@ -674,14 +674,14 @@ def _validate_config(
     policy = config.get("execution_policy")
     expected_policy = {
         "implementation_authoring_mode": "ordered_provider",
-        "implementation_provider_role": "grok-implement, codex-review",
+        "implementation_provider_role": "grok-primary-implement, codex-fallback-implement",
         "repair_runtime_mode": "deterministic_only",
         "symbolic_first": True,
         "repair_runtime_model_calls": 0,
         "repair_runtime_llm_calls": 0,
         "implementation_llm_context_budget_bytes": 262144,
         "implementation_context_budget_tokens": 16384,
-        "provider_fallback_allowed_only_for_primary_quota_exhaustion": True,
+        "provider_fallback_allowed_only_for_primary_unavailability_or_quota_exhaustion": True,
         "completion_from_task_prose": False,
         "current_tree_reproof_required": True,
     }
@@ -801,8 +801,8 @@ def _validate_config(
             ]:
                 errors.append("bootstrap validation receipt task population is invalid")
             if bootstrap_validation.get("result") != {
-                "collected": 131,
-                "passed": 131,
+                "collected": 150,
+                "passed": 150,
                 "failed": 0,
                 "warnings": 1,
             }:
@@ -937,7 +937,7 @@ def validate() -> dict[str, Any]:
             "fallback_provider_id": "codex",
             "fallback_model_id": "gpt-5.6-terra",
             "fallback_reasoning_effort": "high",
-            "fallback_trigger": "primary_quota_exhausted",
+            "fallback_trigger": "primary_unavailable_or_quota_exhausted",
             "repair_runtime_mode": "deterministic_only",
             "repair_runtime_model_calls": 0,
             "repair_runtime_llm_calls": 0,

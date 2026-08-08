@@ -9,8 +9,9 @@ Companion artifacts:
 - scheduler: `config/deterministic_swissknife_mcplusplus_repair_scheduler.json`
 
 Implementation authoring uses the ordered provider contract: Grok 4.5 primary,
-then Codex GPT-5.6-Terra with high reasoning only when the primary reports quota
-exhaustion. The resulting repair runtime is deterministic-only.
+then Codex GPT-5.6-Terra with high reasoning when the primary is locally
+unavailable or unauthenticated, or reports typed quota exhaustion. The
+resulting repair runtime is deterministic-only.
 `abstain_review` and `defer_capability` are valid repair-runtime dispositions;
 an LLM/provider repair fallback is not. Completion requires current external
 validation and re-proof, never provider or task prose. In each task below,
@@ -56,7 +57,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair-plan-2026-08-08.md, implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.objectives.md, implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md, config/deterministic_swissknife_mcplusplus_repair_scheduler.json, scripts/validate_deterministic_contract_repair_board.py, scripts/ops/agent_supervisor/implementation_supervisor_entry.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/deterministic_repair_provider.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/grok_cli_runner.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_provider.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_ordered_provider_fallback.py
 - Predicted symbols: DCR-G000, DCR-000, validate_board, DeterministicRepairProvider
@@ -93,7 +94,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: config/deterministic_contract_repair_authority.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/no_llm_policy.py, external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_no_llm.py, external/ipfs_accelerate/test/api/test_agent_supervisor_no_llm_runtime_barrier.py
 - Predicted symbols: NoLlmExecutionGuard, DeterministicRepairAuthorityPolicy
@@ -130,7 +131,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_contracts.py
 - Predicted symbols: DeterministicRepairDisposition, RepairEvidenceEnvelope
@@ -167,7 +168,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: config/deterministic_contract_repair_roots.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/root_ownership.py, external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_root_ownership.py
 - Predicted symbols: RepairRootOwnership, SubmodulePinAdmission
@@ -204,7 +205,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/capabilities.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/deterministic_artifacts.py, data/agent_supervisor/deterministic_contract_repair/capabilities.json, external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_capabilities.py, external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py
 - Predicted symbols: DeterministicRepairCapabilities, SolverReadiness, CapabilityEvidenceReceipt, materialize_deterministic_repair_artifacts, verify_deterministic_repair_artifacts
@@ -241,7 +242,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_repair_current_state.py, data/agent_supervisor/deterministic_contract_repair/current-state.json, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_current_evidence.py
 - Predicted symbols: CurrentImplementationEvidence, reconcile_current_evidence
@@ -278,7 +279,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_repair_forest.py, data/agent_supervisor/deterministic_contract_repair/forest.json, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py
 - Predicted symbols: RepositoryForestManifest, DirtyOverlay
@@ -315,7 +316,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_repair_analyzer_health.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_analyzer_health.py, data/agent_supervisor/deterministic_contract_repair/analyzer-health.json
 - Predicted symbols: AnalyzerHealth, RepositoryIndex
@@ -352,7 +353,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_provider_surface_health.py, data/agent_supervisor/deterministic_contract_repair/provider-surfaces.json
 - Predicted symbols: PythonMcpSurfaceExtractor, ProviderSurfaceHealth
@@ -389,7 +390,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Runtime model calls: 0
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_desktop_expectations.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_desktop_expectations.py, data/agent_supervisor/deterministic_contract_repair/desktop-expectations.json
 - Predicted symbols: McpContractCatalog, UIIRDocument, MCPIDL, ORB
@@ -429,7 +430,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Preserve normative MCP++ canonicalization; never trust claimed CIDs without local recomputation.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -463,7 +464,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Unresolved edges and authority conflicts stay explicit; expected descriptors never masquerade as observed implementations.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -497,7 +498,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: One reviewed endpoint per service role; endpoint availability without process/config identity is insufficient.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -531,7 +532,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Local loopback only; do not mutate user data, infer missing calls, or convert transport errors into empty success.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -565,7 +566,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Preserve independent protocol, schema, authority, liveness, identity, mediation, and implementation defects even when names coincide.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -599,7 +600,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Synthetic fixtures may test adapters but cannot establish production capability or proof authority.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -633,7 +634,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Compile reviewed semantics only; unsupported profile fragments remain explicit and cannot be weakened.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -667,7 +668,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Importability, simulated output, SAT without reconstruction, and unknown never count as proof.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -701,7 +702,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Never fabricate proof children or copy an expected outcome into actual detector evidence.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -735,7 +736,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Cache only reconstructed evidence; any input, policy, solver, schema, source, runtime, or capability-root change invalidates it.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -769,7 +770,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Remove required-path exception swallowing, partial-stage pass, bridge-only availability, and default-true safety claims.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -803,7 +804,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Closed reviewed operators only; arbitrary prose, source bodies, shell fragments, and dynamically imported code are inadmissible.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -837,7 +838,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Never choose among multiple anchors by lexical score; ambiguity abstains unless a unique typed edge proves ownership.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -871,7 +872,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Never convert initialize/HTTP/RPC/policy errors to success, trust server verified flags, or downgrade an explicitly required profile.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -905,7 +906,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Match exact signatures/effects; never create a handler body when semantics are absent or route logic to a model.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -939,7 +940,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Mutation must traverse one governed mediator; raw service proxies are read-only allowlisted or rejected.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -973,7 +974,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Full ui_ux_ir and semantic roundtrip required; bridge-only, prose-inferred, or missing target projection abstains.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1007,7 +1008,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Operators may restore reviewed bindings but cannot invent authority, policy semantics, UCAN grants, or effect classifications; those abstain for review.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1041,7 +1042,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Invoke only pinned deterministic generators; generated files must name their authority source and never overwrite hand-owned code.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1075,7 +1076,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Exact checkout/worktree required; empty source bytes and deferred production stages are unavailable, not successful.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1109,7 +1110,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Exact finding enums and graph order replace substring matching and lexical guesses.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1143,7 +1144,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Doctor selects registered operators only and loses transform authority whenever logic, proof, source, or impact validation fails.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1177,7 +1178,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Repeated identical findings/proposals never trigger free retry, weaker gate, or model fallback.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1211,7 +1212,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Required planner IR hooks propagate typed failures; exception swallowing and synthetic capability probes are forbidden.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1245,7 +1246,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Each node has one owner root and exact write set; provider/consumer semantics and submodule pin updates retain explicit order.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1279,7 +1280,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Enumerate registered operators and bounded arguments only; no natural-language implementation candidate or silent IR attachment failure.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1313,7 +1314,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Retry only on typed new evidence or a strictly decreasing measure; never erase counterexamples or relax policy.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1347,7 +1348,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Serialize overlapping paths, roots, endpoints, and solver resources; strict sharding cannot override dependencies.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1381,7 +1382,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Require stored resolvable receipts; synthetic CIDs, booleans, prose, missing plan admission, and stale roots cannot authorize mutation.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1415,7 +1416,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Resolve every path beneath the admitted owner worktree; write only operator-rendered edits with exact old-span hash and unique AST anchor.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1449,7 +1450,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Never touch the user checkout; bind dirty overlays, use isolated owner worktrees, path leases/fences, and explicit cross-root commit order.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1483,7 +1484,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Expected results never substitute for detector output; unsupported/skipped mandatory checks and synthetic release children fail.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1517,7 +1518,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Provider commits precede consumer/pin commits; merges require current validation and never overwrite unrelated user changes.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1551,7 +1552,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Remove allow_legacy_residual, synthetic planner/Doctor/obligation CIDs, availability booleans, and successful empty CompletedProcess behavior.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1585,7 +1586,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Evidence state drives selection; task prose, file existence, missing/analysis-only rows, and skipped gates cannot imply completion.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1619,7 +1620,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Residual/provider invocation is structurally absent; restart replays receipts and journals rather than reconstructing synthetic success.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1653,7 +1654,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Board/objective/baseline/stage/readiness are projections, never independent authorities; contradictory completion reopens.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1687,7 +1688,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Self-improvement may tune deterministic ordering/bounds or propose reviewed operators; it cannot rewrite policy roots, validators, authority, logic semantics, or model guards.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1721,7 +1722,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Monorepo conformance fails if the real connector/import/server is unavailable; standalone-clone skips are separate and cannot make this suite green.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1755,7 +1756,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Require accelerate, datasets, and kit from one manifest; no package is optional and process-local proof cannot substitute for MCP reachability.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1789,7 +1790,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Use a disposable fixture and loopback endpoints; never exercise destructive production tools or bypass execution-time policy.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1823,7 +1824,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Tests mutate fixtures only and demand fail-closed outcomes; no safety threshold may be weakened to improve score.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1857,7 +1858,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Preserve unsupported/review-required findings explicitly; do not close them as repaired or delete historical evidence.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1891,7 +1892,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Count abstention separately from false success; exclude cached/warm artifacts unless the cache is explicitly measured.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1925,7 +1926,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Read-only current checkout; preview patches/worktrees are discarded and never published or projected completed.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1959,7 +1960,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Progress report_only→fixture_apply→auto_safe only; cross-repo semantics, policy/authority, migrations, ambiguous anchors, unsupported logic, and unmodeled effects always abstain for review.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -1993,7 +1994,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Release receipt names unresolved typed gaps and exact auto-safe boundary; no compatibility claim exceeds live/reconstructed evidence.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
@@ -2027,7 +2028,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Conflict policy: Incremental scans may invalidate/reopen but cannot auto-weaken contracts, add operator semantics, or infer service health from stale receipts.
 - Symbolic first: true
 - LLM context budget bytes: 262144
-- Provider role: grok-implement, codex-review
+- Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
 - Implementation mode: ordered_provider
 - Runtime model calls: 0

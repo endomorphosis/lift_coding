@@ -44,17 +44,21 @@ disposition is `abstain_review` or `defer_capability`, with exact evidence. It
 is never an implicit repair-runtime model call.
 
 Implementation of this roadmap uses a separate, explicit ordered authoring
-policy: Grok 4.5 is primary; Codex GPT-5.6-Terra with `high` reasoning runs only
+policy: Grok 4.5 is primary; Codex GPT-5.6-Terra with `high` reasoning runs
+automatically when the primary is locally unavailable or unauthenticated, or
 after a typed primary-quota-exhaustion result. Model output remains
 non-authoritative: tests, current-tree observations, `ipfs_datasets_py.logic`,
 kernel reconstruction, and repair admission decide whether implementation work
-is accepted.
+is accepted. The task metadata names these actual execution roles explicitly:
+`grok-primary-implement, codex-fallback-implement`; it does not imply a
+separate Codex review call after successful Grok authoring.
 
 ### Bootstrap truth
 
 The generic scheduler now accepts the exact DCR ordered-provider contract,
-including `grok-4.5` primary and `gpt-5.6-terra/high` only after typed primary
-quota exhaustion. The root scheduler entry and deterministic target-runtime
+including `grok-4.5` primary and `gpt-5.6-terra/high` only after a reviewed
+primary-unavailable observation or typed quota exhaustion. The root scheduler
+entry and deterministic target-runtime
 adapter exist, and the dedicated board validator accepts all 12 goals, 58
 tasks, 12 waves, five repository roots, and the zero-model repair-runtime
 policy. Grok authoring attempts reached a real spending-limit/quota rejection,
@@ -212,7 +216,8 @@ frameworks.
 For implementation tasks and every resulting repair-runtime epoch:
 
 - implementation authoring uses `grok-4.5`, with `gpt-5.6-terra/high` permitted
-  only on a typed primary quota-exhaustion event;
+  only on a reviewed local primary-unavailability observation or a typed
+  primary quota-exhaustion event;
 - the built runtime uses `repair_runtime_mode = deterministic_only`;
 - `model_calls = 0`, `llm_calls = 0`, and `provider_calls = 0` in authoritative
   repair-runtime receipts;
@@ -532,8 +537,9 @@ foundation, not a production repair release:
 - `scripts/validate_deterministic_contract_repair_board.py --check-all`
   reports 12 goals, 58 tasks, 12 waves, and no errors or warnings;
 - the generic configured-board loader accepts the eight-lane scheduler and the
-  exact `grok-4.5` then quota-only `gpt-5.6-terra/high` authoring route;
-- the clean DCR-000–004 bootstrap suite passes 91 tests, including the
+  exact `grok-4.5` then unavailable-or-quota-triggered
+  `gpt-5.6-terra/high` authoring route;
+- the clean DCR-000–004 bootstrap suite passes 150 tests, including the
   multi-supervisor handoff that preserves Terra `high` while retaining the
   legacy Terra `medium` default;
 - in the preserved development overlay, 265 focused deterministic supervisor
