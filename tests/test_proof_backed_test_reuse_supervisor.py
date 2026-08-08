@@ -191,6 +191,10 @@ def test_every_lane_uses_grok_primary_and_automatic_codex_fallback_policy(
         "IPFS_ACCELERATE_AGENT_LLM_MERGE_RESOLVER_COMMAND",
         "python3 /tmp/direct-codex-merge-resolver-bypass.py",
     )
+    monkeypatch.setenv(
+        "IPFS_PROOF_REUSE_STATE_ROOT",
+        "/tmp/hostile-ambient-proof-reuse-state-root",
+    )
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
@@ -222,6 +226,9 @@ def test_every_lane_uses_grok_primary_and_automatic_codex_fallback_policy(
         assert "direct-codex-merge-resolver-bypass" not in environment[
             supervisor.MERGE_RESOLVER_COMMAND_ENV
         ]
+        assert environment[str(supervisor.CONFIG["stateRootEnvironment"])] == str(
+            supervisor.STATE_ROOT
+        )
         assert (
             environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"]
             == "grok-codex"
@@ -579,6 +586,7 @@ def test_board_validator_rejects_stale_v7_schedule_and_attestation_profile(
     config["defaultStateRootSuffix"] = (
         "ipfs_accelerate_py/proof-backed-test-reuse-v7"
     )
+    config["stateRootEnvironment"] = "UNSEALED_STATE_ROOT"
     projection = config["objectiveProjection"]
     projection["reviewRevision"] = (
         "authenticated-receipt-current-tree-repair-v7"
@@ -611,14 +619,15 @@ def test_board_validator_rejects_stale_v7_schedule_and_attestation_profile(
     assert result["valid"] is False
     errors = "\n".join(result["errors"])
     assert "defaultStateRootSuffix" in errors
+    assert "stateRootEnvironment" in errors
     assert "reviewRevision" in errors
-    assert "stale pre-v8 fields" in errors
+    assert "stale pre-v9 fields" in errors
     assert "initial claimable task" in errors
     assert "requireInitialConflictFreeWidth" in errors
     assert "runnerAttestationProfile" in errors
 
 
-def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> None:
+def test_board_validator_seals_current_78_task_authenticated_receipt_dag() -> None:
     validator = _load_validator_module()
 
     result = validator.validate(
@@ -629,7 +638,7 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
     )
 
     assert result["valid"] is True, result["errors"]
-    assert result["task_count"] == 77
+    assert result["task_count"] == 78
     assert result["completed_task_count"] == 70
     assert result["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
     assert result["current_claimable_shards"] == [0, 1]
@@ -647,6 +656,7 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
         "PTR-168",
         "PTR-169",
         "PTR-170",
+        "PTR-171",
     ]
     assert result["authenticated_receipt_wave_a_task_ids"] == [
         "PTR-160",
@@ -674,6 +684,11 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
         "PTR-165": ["<outer-superproject>"],
     }
     assert result["authenticated_receipt_wave_b_resource_width"] == 2
+    assert result["authenticated_receipt_python_composition_task_id"] == "PTR-171"
+    assert result["authenticated_receipt_python_composition_shard"] == 0
+    assert result["authenticated_receipt_python_composition_submodules"] == [
+        "external/ipfs_datasets"
+    ]
     assert result["authenticated_receipt_runtime_join_task_id"] == "PTR-164"
     assert result["authenticated_receipt_runtime_join_shard"] == 2
     assert result["authenticated_receipt_runtime_join_submodules"] == [
@@ -692,9 +707,9 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
         "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
         "test_certificate_assurance.py"
     ] == {
-        "owner_task_id": "PTR-163",
+        "owner_task_id": "PTR-171",
         "owner_status": "todo",
-        "observed_owner_task_ids": ["PTR-163"],
+        "observed_owner_task_ids": ["PTR-171"],
         "sources": ["output"],
     }
     assert result["uncovered_historical_missing_artifact_paths"] == []
@@ -763,7 +778,7 @@ def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> Non
         assert counterexample in task.validation[0]
 
 
-def test_ptr_163_contract_seals_real_v5_authority_counterexamples() -> None:
+def test_ptr_163_contract_seals_exact_byte_native_v5_relation() -> None:
     validator = _load_validator_module()
     task = next(
         item
@@ -773,22 +788,62 @@ def test_ptr_163_contract_seals_real_v5_authority_counterexamples() -> None:
 
     assert task.status == "todo"
     assert task.canonical_task_cid == (
-        "baguqeeragyr5kc3t4meq3hklzxbep7dimfltzdde3umbhv3l6fkkw2unblla"
+        "baguqeerafovagwpbybbcpfr6ke5ypz2vr7llycbdpohamiqcxamhhbusirva"
     )
     for requirement in (
-        "`TestPassReceipt@1` is decoded and re-encoded as its exact canonical DAG-JSON",
-        "canonical DAG-CBOR `RunnerPassAttestation@1`",
+        "fixed-capacity receipt and attestation byte arrays",
+        "explicit bounded u32 lengths",
+        "every byte after each length is constrained to zero",
+        "in-circuit SHA-256 hashes exactly the selected bytes",
+        "two bit/range-constrained u128 limbs",
+        "never a caller-supplied 32-byte label",
+        "one complete ordered public-input profile",
+        "explicit ephemeral V5 setup/prove/verify",
+        "proof for statement A does not verify with statement B",
+        "Existing wire/schema/vector assertions are retained or strengthened",
+        "truthful manifest rehash the actual executable",
+        "never trigger setup, build, download or network",
+    ):
+        assert requirement in task.acceptance
+    native_test = (
+        "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
+        "test_groth16_native_release.py"
+    )
+    assert native_test in task.outputs
+    assert native_test in task.validation[0]
+    assert (
+        "external/ipfs_datasets/ipfs_datasets_py/processors/"
+        "groth16_backend/src/circuit.rs"
+    ) in task.outputs
+    todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
+    assert "21282cb8779330724e496f88acdf3ed02cccbca1" in todo_text
+    assert "a166f12cd5823416d31a2ebc0f5090ba245b73d5" in todo_text
+
+
+def test_ptr_171_contract_seals_typed_ptr_160_v5_composition() -> None:
+    validator = _load_validator_module()
+    task = next(
+        item
+        for item in validator.parse_task_file(validator.TODO_PATH, "## PTR-")
+        if item.task_id == "PTR-171"
+    )
+
+    assert task.status == "todo"
+    assert task.depends_on == ["PTR-160", "PTR-161", "PTR-163"]
+    assert task.canonical_task_cid == (
+        "baguqeerah3rdjn5g772shubj6spygs5vcgiioue37haq6e6fouhbhlmnmxfa"
+    )
+    for requirement in (
+        "`TestPassReceipt@1` re-encodes byte-for-byte as canonical DAG-JSON",
+        "canonical DAG-CBOR and CIDv1/dag-cbor/sha2-256",
         "explicitly local-pinned policy",
-        "bounded exact receipt and attestation bytes plus explicit lengths/padding",
-        "two range-constrained 128-bit limbs",
-        "never one field element reduced modulo Fr",
-        "compares the complete proof public-input vector to the requested statement",
-        "lambdas, booleans, generic callable verifier objects",
-        "every public verifier entry point sets `can_authorize_skip=false`",
-        "one immutable reviewed artifact root",
-        "`test_test_pass_v5_authority.py` constructs a real PTR-160",
-        "single-field digest alias/reduction",
-        "benign injected `True` backend",
+        "complete ordered native public-input vector byte-for-byte",
+        "Only the concrete immutable-manifest-pinned provider can yield VERIFIED",
+        "forces V1-V4, hash-only and simulated openings",
+        "one real typed PTR-160 composition",
+        "A-to-B substitution",
+        "injected True backend and downgrade",
+        "never automatic setup, build, download or network",
     ):
         assert requirement in task.acceptance
     authority_test = (
@@ -797,9 +852,18 @@ def test_ptr_163_contract_seals_real_v5_authority_counterexamples() -> None:
     )
     assert authority_test in task.outputs
     assert authority_test in task.validation[0]
-    todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
-    assert "21282cb8779330724e496f88acdf3ed02cccbca1" in todo_text
-    assert "a166f12cd5823416d31a2ebc0f5090ba245b73d5" in todo_text
+    assert not (
+        set(task.outputs)
+        & set(
+            next(
+                item
+                for item in validator.parse_task_file(
+                    validator.TODO_PATH, "## PTR-"
+                )
+                if item.task_id == "PTR-163"
+            ).outputs
+        )
+    )
 
 
 def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
@@ -812,17 +876,22 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
 
     assert task.status == "todo"
     assert task.canonical_task_cid == (
-        "baguqeeraw5xti4zdkdtxrespsc6r74kykvoikonb3ybxeu7tyf3nqtzjz6iq"
+        "baguqeeraerpp6lxobckvtub32bs3z3bnkxdhhrg7p5uxdddlv5cscb6wza5a"
     )
     for requirement in (
         "standalone `validate(objective, todo, config, plan)` board gate",
-        "`valid=true`, `errors=[]` and `task_count=77`",
-        "77 unique records in namespace `proof-backed-test-reuse-v1`",
+        "`valid=true`, `errors=[]` and `task_count=78`",
+        "78 unique records in namespace `proof-backed-test-reuse-v1`",
         "exact `(task_id, canonical_task_key, canonical_task_cid)`",
         "never rederives a private task CID",
         "`IPFS_PROOF_REUSE_STATE_ROOT`",
         "`IPFS_PROOF_REUSE_STATE_ROOT` is the complete override",
-        "reviewed sibling `proof-backed-test-reuse-v1` and `proof-backed-test-reuse-v6` roots",
+        "implementation provider receives no state-root capability",
+        "Landlock ABI-3-or-newer boundary",
+        "only the exact candidate worktree and fresh private validation home writable",
+        "current control state and every historical sibling remain read-only",
+        "`proof_authoritative=false` and `completion_authority=false`",
+        "mandatory reviewed sibling `proof-backed-test-reuse-v8`, `proof-backed-test-reuse-v6` and `proof-backed-test-reuse-v1` roots",
         "`project_managed_merge_queue_record`",
         "never as authentication",
         "`dedupe_key` equal to the train filename stem",
@@ -843,11 +912,11 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
         "failed/quarantined rows",
         "pass/exit-zero/zero-skip",
         "sealed historical-missing-artifact quarantine",
-        "including PTR-163",
+        "including native PTR-163 and Python-composition PTR-171",
         "excludes wall-clock time, absolute roots, report paths, mtimes and scan order",
         "`audit_valid` from `ready`",
-        "missing/malformed reviewed root, board, receipt chain, manifest or scan fails closed",
-        "76-, two- and one-task boards",
+        "missing or malformed reviewed root, board, receipt chain, manifest or scan fails closed",
+        "77-, 76-, two- and one-task boards",
         "v1 PTR-011/PTR-041 successful-plus-failed reconciliation chain/manifest",
     ):
         assert requirement in task.acceptance
@@ -858,7 +927,7 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
     assert "baguqeerar47kmz4pukq2hsfzjerdc3tkhm44aw7k62swqg6xzd4c3javw44q" in todo_text
 
 
-def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(
+def test_board_validator_requires_full_ptr_163_native_surface(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
@@ -887,13 +956,42 @@ def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(
     assert cargo_lock in errors
 
 
-def test_board_validator_requires_ptr_164_to_join_ptr_160_and_ptr_163(
+def test_board_validator_requires_full_ptr_171_python_authority_surface(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    authority_test = (
+        "external/ipfs_datasets/tests/unit/logic/zkp/"
+        "test_test_pass_v5_authority.py"
+    )
+
+    def remove_authority_test(block: str) -> str:
+        assert block.count(authority_test) == 3
+        return block.replace(f", {authority_test}", "")
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-171", remove_authority_test
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    errors = "\n".join(result["errors"])
+    assert "PTR-171 missing reviewed runtime repair paths" in errors
+    assert authority_test in errors
+
+
+def test_board_validator_requires_ptr_164_to_join_ptr_160_and_ptr_171(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
 
     def remove_provider_dependency(block: str) -> str:
-        expected = "- Depends on: PTR-160, PTR-163"
+        expected = "- Depends on: PTR-160, PTR-171"
         assert expected in block
         return block.replace(expected, "- Depends on: PTR-160", 1)
 
@@ -909,7 +1007,35 @@ def test_board_validator_requires_ptr_164_to_join_ptr_160_and_ptr_163(
 
     assert result["valid"] is False
     errors = "\n".join(result["errors"])
-    assert "PTR-164 missing required direct dependencies: ['PTR-163']" in errors
+    assert "PTR-164 missing required direct dependencies: ['PTR-171']" in errors
+    assert "wave B must make only PTR-171 Python composition" in errors
+
+
+def test_board_validator_requires_ptr_171_to_follow_native_ptr_163(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+
+    def remove_native_dependency(block: str) -> str:
+        expected = "- Depends on: PTR-160, PTR-161, PTR-163"
+        assert expected in block
+        return block.replace(
+            expected, "- Depends on: PTR-160, PTR-161", 1
+        )
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-171", remove_native_dependency
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    errors = "\n".join(result["errors"])
+    assert "PTR-171 missing required direct dependencies: ['PTR-163']" in errors
     assert "wave B must be exactly" in errors
 
 
@@ -1046,7 +1172,7 @@ def test_board_validator_fails_as_soon_as_gap_owner_completes(
         return block.replace("- Status: todo", "- Status: completed", 1)
 
     todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-163", complete_owner
+        tmp_path, validator, "PTR-171", complete_owner
     )
     result = validator.validate(
         validator.OBJECTIVE_PATH,
@@ -1058,7 +1184,7 @@ def test_board_validator_fails_as_soon_as_gap_owner_completes(
     assert result["valid"] is False
     assert result["completed_owner_missing_historical_artifact_paths"][
         missing_path
-    ] == "PTR-163"
+    ] == "PTR-171"
     assert any(
         "completed correction owners still have quarantined historical artifacts"
         in error
@@ -1124,6 +1250,43 @@ def test_board_validator_accepts_repaired_audit_as_progressed_state(
     assert result["current_claimable_task_ids"] == ["PTR-163"]
     assert result["completed_owner_missing_historical_artifact_paths"] == {}
     assert len(result["resolved_historical_artifact_paths"]) == 18
+
+
+def test_board_validator_orders_native_python_and_runtime_join(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+
+    def complete(block: str) -> str:
+        assert "- Status: todo" in block
+        return block.replace("- Status: todo", "- Status: completed", 1)
+
+    text = validator.TODO_PATH.read_text(encoding="utf-8")
+    text = _mutate_task_block(text, "PTR-163", complete)
+    text = _mutate_task_block(text, "PTR-165", complete)
+    # parse_task_file is pure; this test seals the dependency frontier without
+    # claiming that status-only mutations satisfy output evidence.
+    todo_path = tmp_path / "wave-b-completed.md"
+    todo_path.write_text(text, encoding="utf-8")
+    tasks = validator.parse_task_file(todo_path, "## PTR-")
+    completed = {task.task_id for task in tasks if task.status == "completed"}
+    claimable = sorted(
+        task.task_id
+        for task in tasks
+        if task.status == "todo" and set(task.depends_on).issubset(completed)
+    )
+    assert claimable == ["PTR-171"]
+
+    text = _mutate_task_block(text, "PTR-171", complete)
+    todo_path.write_text(text, encoding="utf-8")
+    tasks = validator.parse_task_file(todo_path, "## PTR-")
+    completed = {task.task_id for task in tasks if task.status == "completed"}
+    claimable = sorted(
+        task.task_id
+        for task in tasks
+        if task.status == "todo" and set(task.depends_on).issubset(completed)
+    )
+    assert claimable == ["PTR-164"]
 
 
 def test_board_validator_rejects_an_unexpected_new_historical_gap(
@@ -1745,11 +1908,12 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     inventory = supervisor._closeout_production_input_inventory()
 
     assert inventory["inventory_is_completion_authority"] is False
-    assert inventory["task_count"] == 77
+    assert inventory["task_count"] == 78
     assert inventory["goal_count"] == 15
     assert inventory["acceptance_requirement_count"] == 50
     assert inventory["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(163, 170)
+        *[f"PTR-{task_id}" for task_id in range(163, 170)],
+        "PTR-171",
     ]
     assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -1764,7 +1928,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     validations = by_name[
         "fresh_current_tree_proof_reuse_off_validation_receipts"
     ]
-    assert validations["required_count"] == 77
+    assert validations["required_count"] == 78
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
     materializer = inventory["authoritative_materializer"]
@@ -1776,13 +1940,17 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "PTR-170 preserve bounded actionable validation retry evidence"
         in materializer["required_call_sequence"]
     )
+    assert (
+        "PTR-171 compose the exact PTR-160 receipt and runner attestation"
+        in materializer["required_call_sequence"]
+    )
     assert materializer["required_call_sequence"][-2:] == [
         "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.evaluate",
         "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.persist_bundle",
     ]
     activation = inventory["runtime_reuse_activation"]
     assert activation["schema"].endswith(
-        "authenticated-v8-runtime-projection@1"
+        "authenticated-v9-runtime-projection@1"
     )
     assert activation["authority"] == "non_authoritative_projection"
     assert activation["runtime_readiness"] == "unknown_live_probe_required"
@@ -1799,10 +1967,11 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "historical_ptr_122_or_v4_gate_is_authority": False,
     }
     assert activation["repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(160, 171)
+        f"PTR-{task_id}" for task_id in range(160, 172)
     ]
     assert activation["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(163, 170)
+        *[f"PTR-{task_id}" for task_id in range(163, 170)],
+        "PTR-171",
     ]
     assert activation["repair_task_status_is_completion_authority"] is False
     assert [
@@ -1813,6 +1982,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         ["PTR-170"],
         ["PTR-161", "PTR-162"],
         ["PTR-163", "PTR-165"],
+        ["PTR-171"],
         ["PTR-164"],
         ["PTR-166"],
         ["PTR-167"],

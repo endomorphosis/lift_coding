@@ -2,7 +2,7 @@
 
 Date: 2026-07-31
 
-Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v8`)
+Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v9`)
 
 Program: `proof-backed-test-reuse-v1`
 
@@ -399,7 +399,7 @@ mislabeling.
   diagnostic/configuration capability only, not an implemented remote issuer;
   its absence never blocks launch or test execution. A future authenticated
   endpoint client requires a separately reviewed trust/transport task and is
-  not completion evidence for this 77-task board.
+  not completion evidence for this 78-task board.
 - Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
   provider or diagnostic endpoint state records `certificate_deferred` and
   does not change the passed test.
@@ -919,8 +919,8 @@ historical output explicit work with current evidence:
    quiesced draft still scanned only v8, invented validation schemas and the
    command-CID projection, and accepted a fabricated one-task universe as
    `audit_valid=true`, `ready=true`. PTR-165 is therefore revised again. The
-   replacement must first validate the exact 77-task board, consume only the
-   reviewed v1/v6/v8 queue, train, flat executed-validation and hash-chain event
+   replacement must first validate the exact 78-task board, consume only the
+   current v9 plus reviewed v8/v6/v1 queue, train, flat executed-validation and hash-chain event
    formats through existing supervisor identity adapters, distinguish an
    invalid audit from a valid non-ready result, preserve explicit pending-owner
    attribution, and produce a byte-deterministic CID-addressed observation.
@@ -934,7 +934,7 @@ historical output explicit work with current evidence:
    injection, tracer monkeypatches or simulated proof authority. A persistent
    body oracle establishes zero false skips under AST, fixture, conftest,
    parameter, dependency, environment and policy mutations.
-11. `PTR-169` joins the exact reachable 77-task inventory, authenticated
+11. `PTR-169` joins the exact reachable 78-task inventory, authenticated
     adversarial evidence, genuine three-repository e2e and measured subprocess
     benchmark into a fresh operator handoff. The old 66-task packet is stale.
 
@@ -956,6 +956,40 @@ to require that audit to be globally green. All implementation validation
 forces proof reuse off so this feature cannot certify itself. Missing optional
 proof/cache/IPFS capabilities remain typed `RUN` or `DEFERRED`, never startup
 failures or synthetic authority.
+
+Revision v9 preserves all v1, v6 and v8 receipts as immutable historical
+evidence but starts a fresh state root for the amended 78-task board. Two
+failed PTR-163 drafts demonstrated that the former 39-file task was not a
+bounded implementation unit: one weakened established wire tests, and neither
+implemented a constrained receipt-opening relation or real V5
+setup/prove/verify. The work is split without reducing its proof contract.
+PTR-163 now owns only the native Rust exact-byte relation, wire profile,
+setup/prove/verify path and truthful immutable release artifacts. PTR-171 runs
+after it and owns only the Python composition that consumes PTR-160's canonical
+DAG-JSON receipt plus canonical DAG-CBOR attestation and locally pinned policy,
+compares the complete public-input vector, and seals all legacy/callback
+downgrades. PTR-164 and PTR-166 depend on PTR-171 rather than accepting a
+partially integrated native backend.
+
+PTR-165 remains parallel with native PTR-163, but its declared live audit must
+run under the controller-selected state root even though validation retains an
+isolated HOME and XDG tree. The controller passes one canonical, existing,
+non-secret state-root directory capability through the validation allowlist;
+the capability participates in validation identity and does not expose any
+operator home, credential or startup hook. The provider subprocess receives
+no root path. A fail-closed inherited Landlock boundary leaves only the exact
+candidate worktree and private validation home writable, makes v9 control
+state plus reviewed v8/v6/v1 siblings read-only to the validation process tree,
+and emits diagnostic-only, non-authoritative boundary evidence. PTR-165 fails
+closed if the boundary, any required root, or any authenticated chain is
+missing.
+
+The v9 population is 78 tasks. Its live first frontier remains PTR-163 on
+numeric shard 1 and PTR-165 on shard 0. When PTR-163 succeeds, PTR-171 becomes
+DAG-ready on shard 0 and waits if PTR-165 still owns that shard. PTR-171 alone
+unlocks PTR-164; the remaining PTR-166 through PTR-169 joins retain their
+ordered trust boundaries. Any v8/77-task, v7/76-task or older packet is
+provenance only and cannot authorize closeout.
 
 ## 14. Parallel implementation program
 
@@ -1000,12 +1034,13 @@ protected from implementation agents.
 | 27 | `PTR-149` | Live reporting, exact 66-task authority gate, corrected handoff and explicit operator closeout premise |
 | 28 | `PTR-170` | V8 first repairs bounded actionable retry evidence on shard 2 so subsequent failed validations cannot be normalized into synthetic setup failures |
 | 29 | `PTR-161`, `PTR-162` | Reopened datasets and kit isolated-bootstrap contracts run concurrently on shards 2 and 0 only after PTR-170 merges; PTR-160 signed-runner work remains complete |
-| 30 | `PTR-163`, `PTR-165` | V5 native real-proof binding and the outer evidence-audit tool run independently on datasets and the outer tree |
-| 31 | `PTR-164` | Accelerator runtime composition pins and consumes the exact merged V5 provider/capability/release identities |
-| 32 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries with zero skipped/xfail assurance cases |
-| 33 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits/gitlinks and requires green current output ancestry |
-| 34 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
-| 35 | `PTR-169` | Exact 77-task authenticated current-tree candidate, benchmark and reconciler update; authority requires a post-merge outer rerun and rejects v7/76-task packets |
+| 30 | `PTR-163`, `PTR-165` | The native exact-byte V5 Rust relation and outer evidence-audit tool run independently on datasets and the outer tree |
+| 31 | `PTR-171` | Python composes PTR-160's signed receipt/attestation into the exact merged native V5 profile and seals every legacy/callback downgrade |
+| 32 | `PTR-164` | Accelerator runtime composition pins and consumes the exact merged typed V5 provider/capability/release identities |
+| 33 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries with zero skipped/xfail assurance cases |
+| 34 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits/gitlinks and requires green current output ancestry |
+| 35 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
+| 36 | `PTR-169` | Exact 78-task authenticated current-tree candidate, benchmark and reconciler update; authority requires a post-merge outer rerun and rejects v8/77-task and v7/76-task packets |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -1128,13 +1163,12 @@ explicitly permitted.
   comprehensive. The historical nine-task completion expansion and historical
   twelve-task runtime-activation repair, plus the active thirteen-task
   production-activation correction, are immutable 2026-08-03 projections. The
-  active eleven-task authenticated-current-tree repair is the bounded 2026-08-08
+  active twelve-task authenticated-current-tree repair is the bounded 2026-08-08
   projection; none enables autonomous refill.
-- Use the fresh `proof-backed-test-reuse-v8` state directory so the stopped v7
-  launch, its repeated non-actionable PTR-162 retry state, superseded
-  PTR-161/PTR-162 completion state, stale earlier lane
-  state, old health failures and historical generated-output checks cannot be
-  mistaken for this run.
+- Use the fresh `proof-backed-test-reuse-v9` state directory so stopped v8
+  implementation attempts and retry budgets cannot be mistaken for this run;
+  retain v8, v6 and v1 roots read-only as explicitly reviewed historical
+  evidence rather than copying their mutable state into v9.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no

@@ -286,6 +286,10 @@ def _runtime_environment(provider: str | None = None) -> dict[str, str]:
     environment["PYTHONPATH"] = os.pathsep.join(python_paths)
     for key, value in dict(PARALLEL["commonEnvironment"]).items():
         environment[str(key)] = str(value)
+    # Validation children receive an isolated HOME/XDG tree, so carry the
+    # controller's already-resolved state root as an explicit capability.
+    # This assignment intentionally wins over inherited ambient state.
+    environment[str(CONFIG["stateRootEnvironment"])] = str(STATE_ROOT)
     # Never inherit or configure the generic direct-Codex semantic merge
     # resolver.  The dedicated profile's managed chain wins last.
     environment[MERGE_RESOLVER_COMMAND_ENV] = _managed_merge_resolver_command()
@@ -860,7 +864,12 @@ def _closeout_production_input_inventory(
 
     parsed_tasks = tuple(tasks or parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX))
     task_ids = tuple(sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks))
-    repair_task_ids = tuple(f"PTR-{task_id}" for task_id in range(160, 171))
+    repair_task_ids = tuple(
+        str(task_id)
+        for task_id in dict(CONFIG["objectiveProjection"])[
+            "implementationTaskIds"
+        ]
+    )
     repair_task_statuses = {
         str(getattr(task, "task_id", "")): str(getattr(task, "status", "")).lower()
         for task in parsed_tasks
@@ -917,6 +926,7 @@ def _closeout_production_input_inventory(
             "PTR-120 ProofTestReuseObjectiveEvidenceAssembler.assemble",
             "PTR-170 preserve bounded actionable validation retry evidence",
             "PTR-165 validate completed-task outputs and current ancestry",
+            "PTR-171 compose the exact PTR-160 receipt and runner attestation",
             "PTR-167 verify reachable history replay and exact gitlinks",
             "PTR-168 validate genuine three-repository cold/warm/replay evidence",
             "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.evaluate",
@@ -936,17 +946,17 @@ def _closeout_production_input_inventory(
         ],
     }
     # Runtime state must not be inferred from source-shape or retained V4
-    # diagnostics.  This projection says what V8 must prove, not what the live
+    # diagnostics.  This projection says what the current revision must prove, not what the live
     # checkout currently supports.  The report-only closeout diagnosis is the
     # live probe and remains fail-closed; ordinary pytest remains fail-open.
     inventory["runtime_reuse_activation"] = {
         "schema": (
             "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "authenticated-v8-runtime-projection@1"
+            "authenticated-v9-runtime-projection@1"
         ),
         "projection_revision": str(
             dict(CONFIG["objectiveProjection"]).get("reviewRevision")
-            or "authenticated-receipt-current-tree-repair-v8"
+            or "authenticated-receipt-current-tree-repair-v9"
         ),
         "authority": "non_authoritative_projection",
         "runtime_readiness": "unknown_live_probe_required",
@@ -996,7 +1006,11 @@ def _closeout_production_input_inventory(
             },
             {
                 "task_ids": ["PTR-163", "PTR-165"],
-                "work": "real_proof_binding_and_completed_task_evidence_validation",
+                "work": "native_exact_byte_proof_and_completed_task_evidence_validation",
+            },
+            {
+                "task_ids": ["PTR-171"],
+                "work": "typed_ptr160_receipt_attestation_composition",
             },
             {
                 "task_ids": ["PTR-164"],

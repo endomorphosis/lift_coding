@@ -13,7 +13,7 @@
   "goalPrefix": "PTR-G",
   "boardNamespace": "proof-backed-test-reuse-v1",
   "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
-  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v8",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v9",
   "repositories": {
     "accelerator": "external/ipfs_accelerate",
     "datasets": "external/ipfs_datasets",
@@ -266,7 +266,7 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-08",
-    "reviewRevision": "authenticated-receipt-current-tree-repair-v8",
+    "reviewRevision": "authenticated-receipt-current-tree-repair-v9",
     "implementationTaskIds": [
       "PTR-160",
       "PTR-161",
@@ -278,7 +278,8 @@
       "PTR-167",
       "PTR-168",
       "PTR-169",
-      "PTR-170"
+      "PTR-170",
+      "PTR-171"
     ],
     "initialClaimableTaskIds": [
       "PTR-170"
@@ -306,8 +307,9 @@
       "PTR-165"
     ],
     "authenticatedReceiptRuntimeJoinTaskId": "PTR-164",
+    "authenticatedReceiptPythonCompositionTaskId": "PTR-171",
     "authenticatedCurrentTreeHandoffTaskId": "PTR-169",
-    "sealedTaskCount": 77,
+    "sealedTaskCount": 78,
     "authenticityJoinTaskId": "PTR-166",
     "outputReplayJoinTaskId": "PTR-167",
     "zeroConfigE2EJoinTaskId": "PTR-168",

@@ -156,6 +156,7 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-168",
         "PTR-169",
         "PTR-170",
+        "PTR-171",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -229,6 +230,7 @@ AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS = frozenset(
         "PTR-168",
         "PTR-169",
         "PTR-170",
+        "PTR-171",
     }
 )
 AUTHENTICATED_RECEIPT_WAVE_A = frozenset({"PTR-160", "PTR-161", "PTR-162"})
@@ -240,6 +242,7 @@ AUTHENTICATED_RECEIPT_REOPENED_READY = frozenset({"PTR-170"})
 AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER = frozenset({"PTR-161", "PTR-162"})
 AUTHENTICATED_RECEIPT_WAVE_B = frozenset({"PTR-163", "PTR-165"})
 AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID = "PTR-164"
+AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID = "PTR-171"
 AUTHENTICITY_JOIN_TASK_ID = "PTR-166"
 OUTPUT_REPLAY_JOIN_TASK_ID = "PTR-167"
 ZERO_CONFIG_E2E_JOIN_TASK_ID = "PTR-168"
@@ -347,13 +350,14 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-161": frozenset({"PTR-149", "PTR-170"}),
     "PTR-162": frozenset({"PTR-149", "PTR-170"}),
     "PTR-163": frozenset({"PTR-160", "PTR-161"}),
-    "PTR-164": frozenset({"PTR-160", "PTR-163"}),
+    "PTR-164": frozenset({"PTR-160", "PTR-171"}),
     "PTR-165": frozenset({"PTR-161", "PTR-162"}),
-    "PTR-166": frozenset({"PTR-163", "PTR-164"}),
+    "PTR-166": frozenset({"PTR-164", "PTR-171"}),
     "PTR-167": frozenset({"PTR-165", "PTR-166"}),
     "PTR-168": frozenset({"PTR-161", "PTR-162", "PTR-166", "PTR-167"}),
     "PTR-169": frozenset({"PTR-168"}),
     "PTR-170": frozenset({"PTR-149"}),
+    "PTR-171": frozenset({"PTR-160", "PTR-161", "PTR-163"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -369,6 +373,7 @@ REQUIRED_DATASETS_TASKS = frozenset(
         "PTR-151",
         "PTR-161",
         "PTR-163",
+        "PTR-171",
     }
 )
 REQUIRED_ACCELERATOR_TASKS = frozenset(
@@ -692,22 +697,6 @@ REQUIRED_RUNTIME_TASK_PATHS = {
     ),
     "PTR-163": frozenset(
         {
-            "external/ipfs_datasets/MANIFEST.in",
-            "external/ipfs_datasets/pyproject.toml",
-            "external/ipfs_datasets/setup.py",
-            "external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt",
-            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/"
-            "test_pass.py",
-            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/"
-            "test_pass_circuit.py",
-            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-            "test_execution_certificate.py",
-            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-            "test_certificate_assurance.py",
-            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-            "test_certificate_issuer.py",
-            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-            "test_pass_groth16_provider.py",
             "external/ipfs_datasets/ipfs_datasets_py/processors/"
             "groth16_backend/Cargo.toml",
             "external/ipfs_datasets/ipfs_datasets_py/processors/"
@@ -742,6 +731,34 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "groth16_backend/bin/linux-aarch64/groth16",
             "external/ipfs_datasets/ipfs_datasets_py/processors/"
             "groth16_backend/bin/linux-aarch64/release-manifest.json",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
+            "groth16_wire_vectors.json",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
+            "test_groth16_wire_schemas.py",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
+            "test_groth16_wire_vectors.py",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
+            "test_groth16_native_release.py",
+        }
+    ),
+    "PTR-171": frozenset(
+        {
+            "external/ipfs_datasets/MANIFEST.in",
+            "external/ipfs_datasets/pyproject.toml",
+            "external/ipfs_datasets/setup.py",
+            "external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/"
+            "test_pass.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/"
+            "test_pass_circuit.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
+            "test_execution_certificate.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
+            "test_certificate_assurance.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
+            "test_certificate_issuer.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
+            "test_pass_groth16_provider.py",
             "external/ipfs_datasets/tests/unit/logic/zkp/"
             "test_test_pass_statement.py",
             "external/ipfs_datasets/tests/unit/logic/zkp/"
@@ -758,14 +775,6 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "test_test_pass_groth16_provider.py",
             "external/ipfs_datasets/tests/unit/logic/zkp/"
             "test_test_pass_v5_authority.py",
-            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
-            "groth16_wire_vectors.json",
-            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
-            "test_groth16_wire_schemas.py",
-            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
-            "test_groth16_wire_vectors.py",
-            "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
-            "test_groth16_native_release.py",
         }
     ),
     "PTR-170": frozenset(
@@ -782,32 +791,32 @@ REQUIRED_RUNTIME_TASK_PATHS = {
     ),
 }
 EXACT_RUNTIME_TASK_PATH_IDS = frozenset(
-    {"PTR-161", "PTR-162", "PTR-163", "PTR-170"}
+    {"PTR-161", "PTR-162", "PTR-163", "PTR-170", "PTR-171"}
 )
 EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS = {
     "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-    "test_certificate_assurance.py": "PTR-163",
+    "test_certificate_assurance.py": "PTR-171",
     "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-    "test_certificate_issuer.py": "PTR-163",
+    "test_certificate_issuer.py": "PTR-171",
     "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-    "test_pass_groth16_provider.py": "PTR-163",
+    "test_pass_groth16_provider.py": "PTR-171",
     "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/"
     "bin/linux-aarch64/release-manifest.json": "PTR-163",
     "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/"
     "build.rs": "PTR-163",
     "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py": "PTR-161",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
-    "test_deferred_test_certificate_request.py": "PTR-163",
+    "test_deferred_test_certificate_request.py": "PTR-171",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
-    "test_test_certificate_assurance.py": "PTR-163",
+    "test_test_certificate_assurance.py": "PTR-171",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
-    "test_test_certificate_issuer.py": "PTR-163",
+    "test_test_certificate_issuer.py": "PTR-171",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
-    "test_test_pass_cid_profile.py": "PTR-163",
+    "test_test_pass_cid_profile.py": "PTR-171",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
-    "test_test_pass_groth16_provider.py": "PTR-163",
+    "test_test_pass_groth16_provider.py": "PTR-171",
     "external/ipfs_datasets/tests/unit/logic/zkp/"
-    "test_test_pass_v5_authority.py": "PTR-163",
+    "test_test_pass_v5_authority.py": "PTR-171",
     "external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py": "PTR-161",
     "external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py": "PTR-161",
     "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py": "PTR-161",
@@ -989,8 +998,9 @@ def validate(
         "integrationBranch": "agent/proof-backed-test-reuse",
         "taskPrefix": "## PTR-",
         "boardNamespace": "proof-backed-test-reuse-v1",
+        "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
         "defaultStateRootSuffix": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-v8"
+            "ipfs_accelerate_py/proof-backed-test-reuse-v9"
         ),
     }
     for field, expected in expected_config.items():
@@ -1191,7 +1201,7 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "authenticated-receipt-current-tree-repair-v8"
+        "authenticated-receipt-current-tree-repair-v9"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
@@ -1242,6 +1252,12 @@ def validate(
         AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID
     ):
         errors.append("objective authenticated-receipt runtime join must be PTR-164")
+    if objective_projection.get(
+        "authenticatedReceiptPythonCompositionTaskId"
+    ) != AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID:
+        errors.append(
+            "objective authenticated-receipt Python composition must be PTR-171"
+        )
     if objective_projection.get("authenticatedCurrentTreeHandoffTaskId") != (
         AUTHENTICATED_HANDOFF_TASK_ID
     ):
@@ -1256,11 +1272,11 @@ def validate(
     )
     if stale_projection_fields:
         errors.append(
-            "objectiveProjection retains stale pre-v8 fields: "
+            "objectiveProjection retains stale pre-v9 fields: "
             f"{stale_projection_fields}"
         )
-    if objective_projection.get("sealedTaskCount") != 77:
-        errors.append("objective sealed task count must be 77")
+    if objective_projection.get("sealedTaskCount") != 78:
+        errors.append("objective sealed task count must be 78")
     if objective_projection.get("authenticityJoinTaskId") != AUTHENTICITY_JOIN_TASK_ID:
         errors.append("objective authenticity join task must be PTR-166")
     if objective_projection.get("outputReplayJoinTaskId") != OUTPUT_REPLAY_JOIN_TASK_ID:
@@ -2251,22 +2267,72 @@ def validate(
             "authenticated-receipt wave-B predicted files must be disjoint, got "
             f"{wave_b_overlap}"
         )
+    native_python_overlap = sorted(
+        predicted_by_task["PTR-163"] & predicted_by_task["PTR-171"]
+    )
+    if native_python_overlap:
+        errors.append(
+            "PTR-163 native and PTR-171 Python V5 predicted files must be "
+            f"disjoint, got {native_python_overlap}"
+        )
 
     simulated_wave_b_completed = (
         simulated_authenticated_wave_a_completed | AUTHENTICATED_RECEIPT_WAVE_B
     )
-    simulated_runtime_join_claimable = {
+    simulated_python_composition_claimable = {
         task_id
         for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
         if task_id not in simulated_wave_b_completed
         and set(task_edges.get(task_id, ())).issubset(simulated_wave_b_completed)
     }
+    if simulated_python_composition_claimable != {
+        AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID
+    }:
+        errors.append(
+            "authenticated-receipt wave B must make only PTR-171 Python "
+            "composition claimable, got "
+            f"{sorted(simulated_python_composition_claimable)}"
+        )
+    authenticated_python_composition_shard = (
+        int(AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID.rsplit("-", 1)[1])
+        % lane_count
+        if lane_count > 0
+        else None
+    )
+    if authenticated_python_composition_shard != 0:
+        errors.append(
+            "authenticated-receipt Python composition must use numeric shard "
+            f"0, got {authenticated_python_composition_shard}"
+        )
+    authenticated_python_composition_submodules = submodules_by_task.get(
+        AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID, frozenset()
+    )
+    if authenticated_python_composition_submodules != frozenset(
+        {"external/ipfs_datasets"}
+    ):
+        errors.append(
+            "authenticated-receipt Python composition must own datasets, got "
+            f"{sorted(authenticated_python_composition_submodules)}"
+        )
+
+    simulated_python_composition_completed = set(
+        simulated_wave_b_completed
+        | {AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID}
+    )
+    simulated_runtime_join_claimable = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_python_composition_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_python_composition_completed
+        )
+    }
     if simulated_runtime_join_claimable != {
         AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID
     }:
         errors.append(
-            "authenticated-receipt wave B must make only the PTR-164 runtime "
-            f"join claimable, got {sorted(simulated_runtime_join_claimable)}"
+            "PTR-171 must make only the PTR-164 runtime join claimable, got "
+            f"{sorted(simulated_runtime_join_claimable)}"
         )
     authenticated_runtime_join_shard = (
         int(AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID.rsplit("-", 1)[1])
@@ -2291,7 +2357,7 @@ def validate(
         )
 
     simulated_stage = set(
-        simulated_wave_b_completed
+        simulated_python_composition_completed
         | {AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID}
     )
     for expected_task_id in (
@@ -2631,6 +2697,15 @@ def validate(
         },
         "authenticated_receipt_wave_b_resource_width": (
             authenticated_wave_b_resource_width
+        ),
+        "authenticated_receipt_python_composition_task_id": (
+            AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID
+        ),
+        "authenticated_receipt_python_composition_shard": (
+            authenticated_python_composition_shard
+        ),
+        "authenticated_receipt_python_composition_submodules": sorted(
+            authenticated_python_composition_submodules
         ),
         "authenticated_receipt_runtime_join_task_id": (
             AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID
