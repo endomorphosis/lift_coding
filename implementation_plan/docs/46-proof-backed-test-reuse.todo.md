@@ -2313,7 +2313,7 @@ uncertain candidates execute normally.
 
 ## PTR-162 Install a safe kit-owned bootstrap and recover canonical artifact transport
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
