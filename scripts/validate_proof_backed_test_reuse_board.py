@@ -155,6 +155,7 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-167",
         "PTR-168",
         "PTR-169",
+        "PTR-170",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -227,20 +228,23 @@ AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS = frozenset(
         "PTR-167",
         "PTR-168",
         "PTR-169",
+        "PTR-170",
     }
 )
 AUTHENTICATED_RECEIPT_WAVE_A = frozenset({"PTR-160", "PTR-161", "PTR-162"})
 # PTR-160 is retained as completed evidence while the two repository bootstrap
-# owners are explicitly reopened.  Keep this distinct from Wave A: the latter
-# is the sealed DAG/scheduling simulation, while this set is the claimable
-# frontier for the fresh current-tree review.
-AUTHENTICATED_RECEIPT_REOPENED_READY = frozenset({"PTR-161", "PTR-162"})
+# owners are explicitly reopened behind PTR-170. Keep this distinct from Wave
+# A: the latter is historical repository-width evidence, while this set is the
+# claimable v8 control-plane frontier.
+AUTHENTICATED_RECEIPT_REOPENED_READY = frozenset({"PTR-170"})
+AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER = frozenset({"PTR-161", "PTR-162"})
 AUTHENTICATED_RECEIPT_WAVE_B = frozenset({"PTR-163", "PTR-165"})
 AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID = "PTR-164"
 AUTHENTICITY_JOIN_TASK_ID = "PTR-166"
 OUTPUT_REPLAY_JOIN_TASK_ID = "PTR-167"
 ZERO_CONFIG_E2E_JOIN_TASK_ID = "PTR-168"
 AUTHENTICATED_HANDOFF_TASK_ID = "PTR-169"
+G140_ACTIONABLE_RETRY_EVIDENCE_ID = "ptr/actionable-retry-evidence@1"
 GOAL_STATES = frozenset(
     {
         "active",
@@ -340,8 +344,8 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-154": frozenset({"PTR-152"}),
     "PTR-155": frozenset({"PTR-153", "PTR-154"}),
     "PTR-160": frozenset({"PTR-149"}),
-    "PTR-161": frozenset({"PTR-149"}),
-    "PTR-162": frozenset({"PTR-149"}),
+    "PTR-161": frozenset({"PTR-149", "PTR-170"}),
+    "PTR-162": frozenset({"PTR-149", "PTR-170"}),
     "PTR-163": frozenset({"PTR-160", "PTR-161"}),
     "PTR-164": frozenset({"PTR-160", "PTR-163"}),
     "PTR-165": frozenset({"PTR-161", "PTR-162"}),
@@ -349,6 +353,7 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-167": frozenset({"PTR-165", "PTR-166"}),
     "PTR-168": frozenset({"PTR-161", "PTR-162", "PTR-166", "PTR-167"}),
     "PTR-169": frozenset({"PTR-168"}),
+    "PTR-170": frozenset({"PTR-149"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -391,6 +396,7 @@ REQUIRED_ACCELERATOR_TASKS = frozenset(
         "PTR-166",
         "PTR-168",
         "PTR-169",
+        "PTR-170",
     }
 )
 REQUIRED_KIT_TASKS = frozenset(
@@ -760,8 +766,22 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "test_groth16_native_release.py",
         }
     ),
+    "PTR-170": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
+            "todo_daemon/implementation_daemon.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_agent_supervisor_implementation_failure_review.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_agent_supervisor_context_delta.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_agent_supervisor_todo_daemon_port.py",
+        }
+    ),
 }
-EXACT_RUNTIME_TASK_PATH_IDS = frozenset({"PTR-161", "PTR-162", "PTR-163"})
+EXACT_RUNTIME_TASK_PATH_IDS = frozenset(
+    {"PTR-161", "PTR-162", "PTR-163", "PTR-170"}
+)
 EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS = {
     "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
     "test_certificate_assurance.py": "PTR-163",
@@ -966,7 +986,7 @@ def validate(
         "taskPrefix": "## PTR-",
         "boardNamespace": "proof-backed-test-reuse-v1",
         "defaultStateRootSuffix": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-v7"
+            "ipfs_accelerate_py/proof-backed-test-reuse-v8"
         ),
     }
     for field, expected in expected_config.items():
@@ -1062,10 +1082,10 @@ def validate(
     if not isinstance(preflight_config, dict):
         errors.append("configuration preflight must be an object")
         preflight_config = {}
-    if preflight_config.get("requireInitialConflictFreeWidth") != 2:
+    if preflight_config.get("requireInitialConflictFreeWidth") != 1:
         errors.append(
             "preflight.requireInitialConflictFreeWidth must match the reviewed "
-            "two-task reopened current-tree frontier"
+            "one-task actionable-retry-evidence frontier"
         )
     if tuple(parallel.get("worktreeSubmodulePaths") or ()) != EXPECTED_SUBMODULES:
         errors.append(
@@ -1156,7 +1176,7 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "authenticated-receipt-current-tree-repair-v7"
+        "authenticated-receipt-current-tree-repair-v8"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
@@ -1221,11 +1241,11 @@ def validate(
     )
     if stale_projection_fields:
         errors.append(
-            "objectiveProjection retains stale pre-v7 fields: "
+            "objectiveProjection retains stale pre-v8 fields: "
             f"{stale_projection_fields}"
         )
-    if objective_projection.get("sealedTaskCount") != 76:
-        errors.append("objective sealed task count must be 76")
+    if objective_projection.get("sealedTaskCount") != 77:
+        errors.append("objective sealed task count must be 77")
     if objective_projection.get("authenticityJoinTaskId") != AUTHENTICITY_JOIN_TASK_ID:
         errors.append("objective authenticity join task must be PTR-166")
     if objective_projection.get("outputReplayJoinTaskId") != OUTPUT_REPLAY_JOIN_TASK_ID:
@@ -1346,6 +1366,13 @@ def validate(
                 f"{goal.goal_id} machine acceptance criteria must exactly "
                 "match Evidence in order: expected "
                 f"{list(required_evidence)}, got {list(acceptance_criteria)}"
+            )
+        if (
+            goal.goal_id == "PTR-G140"
+            and G140_ACTIONABLE_RETRY_EVIDENCE_ID not in required_evidence
+        ):
+            errors.append(
+                "PTR-G140 must require ptr/actionable-retry-evidence@1"
             )
     parent_cycles = _cycle_nodes(goal_parent_edges)
     if parent_cycles:
@@ -1742,11 +1769,11 @@ def validate(
     if (
         pre_authenticated_correction_task_ids.issubset(completed_ids)
         and authenticated_correction_unstarted
-        and claimable_task_ids != AUTHENTICATED_RECEIPT_WAVE_A
+        and claimable_task_ids != frozenset({"PTR-160", "PTR-170"})
     ):
         errors.append(
-            "authenticated-receipt correction claimable tasks must be "
-            f"{sorted(AUTHENTICATED_RECEIPT_WAVE_A)}, got "
+            "fresh v8 authenticated-receipt seed tasks must be "
+            f"{['PTR-160', 'PTR-170']}, got "
             f"{sorted(claimable_task_ids)}"
         )
     authenticated_reopened_frontier = (
@@ -2120,8 +2147,38 @@ def validate(
                 )
 
     pre_authenticated_ids = EXPECTED_TASK_IDS - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    simulated_v8_initial_completed = pre_authenticated_ids | {"PTR-160"}
+    simulated_v8_initial_claimable = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_v8_initial_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_v8_initial_completed
+        )
+    }
+    if simulated_v8_initial_claimable != AUTHENTICATED_RECEIPT_REOPENED_READY:
+        errors.append(
+            "v8 repair must make only actionable retry evidence claimable, got "
+            f"{sorted(simulated_v8_initial_claimable)}"
+        )
+    simulated_retry_repair_completed = (
+        simulated_v8_initial_completed | AUTHENTICATED_RECEIPT_REOPENED_READY
+    )
+    simulated_bootstrap_frontier = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_retry_repair_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_retry_repair_completed
+        )
+    }
+    if simulated_bootstrap_frontier != AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER:
+        errors.append(
+            "PTR-170 must make only the reopened bootstrap frontier claimable, "
+            f"got {sorted(simulated_bootstrap_frontier)}"
+        )
     simulated_authenticated_wave_a_completed = (
-        pre_authenticated_ids | AUTHENTICATED_RECEIPT_WAVE_A
+        simulated_retry_repair_completed | AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER
     )
     simulated_authenticated_wave_b = {
         task_id
@@ -2539,6 +2596,13 @@ def validate(
         },
         "authenticated_receipt_wave_a_resource_width": (
             authenticated_wave_a_resource_width
+        ),
+        "authenticated_receipt_actionable_retry_task_id": "PTR-170",
+        "authenticated_receipt_actionable_retry_shard": (
+            170 % lane_count if lane_count > 0 else None
+        ),
+        "authenticated_receipt_bootstrap_frontier_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER
         ),
         "authenticated_receipt_wave_b_task_ids": sorted(
             AUTHENTICATED_RECEIPT_WAVE_B

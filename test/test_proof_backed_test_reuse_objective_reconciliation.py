@@ -119,10 +119,10 @@ def _objective_text() -> str:
     return "\n".join(blocks)
 
 
-def _todo_text(*, open_tasks: bool = False) -> str:
+def _todo_text(*, open_tasks: bool = False, task_count: int = 3) -> str:
     status = "todo" if open_tasks else "completed"
     tasks = []
-    for index in range(1, 4):
+    for index in range(1, task_count + 1):
         tasks.append(
             textwrap.dedent(
                 f"""\
@@ -194,13 +194,17 @@ def _write_fixture(
     include_gate: bool = True,
     include_evidence: bool = True,
     init_git: bool = True,
+    task_count: int = 3,
 ) -> dict[str, Path]:
     repo = tmp_path / "repo"
     repo.mkdir()
     objective = repo / "objectives.md"
     todo = repo / "todo.md"
     objective.write_text(_objective_text(), encoding="utf-8")
-    todo.write_text(_todo_text(open_tasks=open_tasks), encoding="utf-8")
+    todo.write_text(
+        _todo_text(open_tasks=open_tasks, task_count=task_count),
+        encoding="utf-8",
+    )
     real_tree = "tree-aaa"
     if init_git:
         real_tree = _init_git_repo(repo)
@@ -221,6 +225,10 @@ def _write_fixture(
                     "passed": True,
                     "repository_tree": gate_tree,
                     "producing_task_id": "PTR-169",
+                    "task_count": 77,
+                    "review_revision": (
+                        "authenticated-receipt-current-tree-repair-v8"
+                    ),
                     "final_gate_criterion": (
                         "ptr/authenticated-current-tree-gate-v5@1"
                     ),
@@ -310,6 +318,7 @@ def _make_reconciler(
             "ipfs": True,
         },
         "validation_runner": lambda: {"passed": True, "mode": "off"},
+        "expected_board_task_count": 3,
     }
     kwargs.update(overrides)
     return recon_mod.ProofTestReuseObjectiveReconciler(**kwargs)
@@ -664,6 +673,10 @@ def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
             "satisfied_requirements": [criterion],
             "authority": "authoritative",
             "tree_id": tree,
+            "task_count": 77,
+            "review_revision": (
+                "authenticated-receipt-current-tree-repair-v8"
+            ),
         }
 
     gate = {
@@ -673,6 +686,8 @@ def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
         ),
         "interface": "ProofTestReusePersistedGateBundle@1",
         "producing_task_id": "PTR-169",
+        "task_count": 77,
+        "review_revision": "authenticated-receipt-current-tree-repair-v8",
         "tree_id": tree,
         "git_tree_id": tree,
         "decision": {
@@ -748,6 +763,30 @@ def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
     rejected = reconciler.diagnose()
     assert rejected["passed"] is False
     assert rejected["reason_codes"] == ["missing_evidence:PTR-G010"]
+
+
+def test_ptr169_gate_rejects_v7_and_76_task_evidence(recon_mod: Any) -> None:
+    base = {
+        "passed": True,
+        "producing_task_id": "PTR-169",
+        "task_count": 77,
+        "review_revision": "authenticated-receipt-current-tree-repair-v8",
+        "final_gate_criterion": "ptr/authenticated-current-tree-gate-v5@1",
+        "root_criterion": "ptr/cross-repository-current-tree-gate@1",
+    }
+
+    stale_count = dict(base, task_count=76)
+    assert recon_mod._gate_artifact_readiness(stale_count)[1] == (
+        "stale_gate_task_count"
+    )
+
+    stale_revision = dict(
+        base,
+        review_revision="authenticated-receipt-current-tree-repair-v7",
+    )
+    assert recon_mod._gate_artifact_readiness(stale_revision)[1] == (
+        "stale_gate_review_revision"
+    )
 
 
 def test_ptr120_aggregate_gate_cannot_substitute_for_ptr169_final_gate(
@@ -1275,7 +1314,7 @@ def test_main_closeout_success_exit_code(
     recon_mod: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     # Report-only on a ready board returns 0 without writing outputs.
-    paths_ready = _write_fixture(tmp_path)
+    paths_ready = _write_fixture(tmp_path, task_count=77)
     code = recon_mod.main(
         [
             "--repo-root",

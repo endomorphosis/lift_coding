@@ -341,7 +341,7 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
     assert "providerPolicy" in errors
 
 
-def test_board_validator_rejects_stale_v6_schedule_and_attestation_profile(
+def test_board_validator_rejects_stale_v7_schedule_and_attestation_profile(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
@@ -359,23 +359,22 @@ def test_board_validator_rejects_stale_v6_schedule_and_attestation_profile(
         "trustOnFirstUse": False,
     }
     config["defaultStateRootSuffix"] = (
-        "ipfs_accelerate_py/proof-backed-test-reuse-v6"
+        "ipfs_accelerate_py/proof-backed-test-reuse-v7"
     )
     projection = config["objectiveProjection"]
     projection["reviewRevision"] = (
-        "authenticated-receipt-current-tree-repair-v6"
+        "authenticated-receipt-current-tree-repair-v7"
     )
     projection["initialClaimableTaskIds"] = [
-        "PTR-160",
         "PTR-161",
         "PTR-162",
     ]
     config["parallelRuntime"]["initialClaimableTaskIds"] = [
-        "PTR-160",
         "PTR-161",
         "PTR-162",
     ]
-    config["preflight"]["requireInitialConflictFreeWidth"] = 3
+    config["preflight"]["requireInitialConflictFreeWidth"] = 2
+    projection["sealedTaskCount"] = 76
     projection["proofMaterialAndContextWaveTaskIds"] = ["PTR-163", "PTR-164"]
     projection["exactV4PublicationJoinTaskId"] = "PTR-169"
     config["runnerAttestationProfile"]["trustPolicy"][
@@ -395,13 +394,13 @@ def test_board_validator_rejects_stale_v6_schedule_and_attestation_profile(
     errors = "\n".join(result["errors"])
     assert "defaultStateRootSuffix" in errors
     assert "reviewRevision" in errors
-    assert "stale pre-v7 fields" in errors
+    assert "stale pre-v8 fields" in errors
     assert "initial claimable task" in errors
     assert "requireInitialConflictFreeWidth" in errors
     assert "runnerAttestationProfile" in errors
 
 
-def test_board_validator_seals_current_76_task_authenticated_receipt_dag() -> None:
+def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> None:
     validator = _load_validator_module()
 
     result = validator.validate(
@@ -412,15 +411,12 @@ def test_board_validator_seals_current_76_task_authenticated_receipt_dag() -> No
     )
 
     assert result["valid"] is True, result["errors"]
-    assert result["task_count"] == 76
+    assert result["task_count"] == 77
     assert result["completed_task_count"] == 67
-    assert result["current_claimable_task_ids"] == [
-        "PTR-161",
-        "PTR-162",
-    ]
-    assert result["current_claimable_shards"] == [0, 2]
-    assert result["initial_ready_task_ids"] == ["PTR-161", "PTR-162"]
-    assert result["initial_ready_shards"] == [0, 2]
+    assert result["current_claimable_task_ids"] == ["PTR-170"]
+    assert result["current_claimable_shards"] == [2]
+    assert result["initial_ready_task_ids"] == ["PTR-170"]
+    assert result["initial_ready_shards"] == [2]
     assert result["authenticated_receipt_correction_task_ids"] == [
         "PTR-160",
         "PTR-161",
@@ -432,6 +428,7 @@ def test_board_validator_seals_current_76_task_authenticated_receipt_dag() -> No
         "PTR-167",
         "PTR-168",
         "PTR-169",
+        "PTR-170",
     ]
     assert result["authenticated_receipt_wave_a_task_ids"] == [
         "PTR-160",
@@ -444,6 +441,12 @@ def test_board_validator_seals_current_76_task_authenticated_receipt_dag() -> No
         "PTR-162": ["external/ipfs_kit"],
     }
     assert result["authenticated_receipt_wave_a_resource_width"] == 3
+    assert result["authenticated_receipt_actionable_retry_task_id"] == "PTR-170"
+    assert result["authenticated_receipt_actionable_retry_shard"] == 2
+    assert result["authenticated_receipt_bootstrap_frontier_task_ids"] == [
+        "PTR-161",
+        "PTR-162",
+    ]
     assert result["authenticated_receipt_wave_b_task_ids"] == [
         "PTR-163",
         "PTR-165",
@@ -748,6 +751,23 @@ def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
         return block.replace("- Status: todo", "- Status: completed", 1)
 
     text = validator.TODO_PATH.read_text(encoding="utf-8")
+    text = _mutate_task_block(text, "PTR-170", complete_reopened_owner)
+    retry_repaired_path = tmp_path / "retry-repaired-todo.md"
+    retry_repaired_path.write_text(text, encoding="utf-8")
+
+    retry_repaired = validator.validate(
+        validator.OBJECTIVE_PATH,
+        retry_repaired_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+    assert retry_repaired["valid"] is True, retry_repaired["errors"]
+    assert retry_repaired["completed_task_count"] == 68
+    assert retry_repaired["current_claimable_task_ids"] == [
+        "PTR-161",
+        "PTR-162",
+    ]
+
     text = _mutate_task_block(text, "PTR-161", complete_reopened_owner)
     text = _mutate_task_block(text, "PTR-162", complete_reopened_owner)
     todo_path = tmp_path / "progressed-todo.md"
@@ -761,7 +781,7 @@ def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
     )
 
     assert result["valid"] is True, result["errors"]
-    assert result["completed_task_count"] == 69
+    assert result["completed_task_count"] == 70
     assert result["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
     assert result["completed_owner_missing_historical_artifact_paths"] == {}
     assert len(result["resolved_historical_artifact_paths"]) == 17
@@ -1303,11 +1323,11 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     inventory = supervisor._closeout_production_input_inventory()
 
     assert inventory["inventory_is_completion_authority"] is False
-    assert inventory["task_count"] == 76
+    assert inventory["task_count"] == 77
     assert inventory["goal_count"] == 15
-    assert inventory["acceptance_requirement_count"] == 49
+    assert inventory["acceptance_requirement_count"] == 50
     assert inventory["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(161, 170)
+        f"PTR-{task_id}" for task_id in range(161, 171)
     ]
     assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -1322,7 +1342,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     validations = by_name[
         "fresh_current_tree_proof_reuse_off_validation_receipts"
     ]
-    assert validations["required_count"] == 76
+    assert validations["required_count"] == 77
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
     materializer = inventory["authoritative_materializer"]
@@ -1330,13 +1350,17 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert materializer["materialization_is_completion_authority"] is False
     assert materializer["final_gate_task_id"] == "PTR-169"
     assert materializer["final_gate_goal_id"] == "PTR-G140"
+    assert (
+        "PTR-170 preserve bounded actionable validation retry evidence"
+        in materializer["required_call_sequence"]
+    )
     assert materializer["required_call_sequence"][-2:] == [
         "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.evaluate",
         "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.persist_bundle",
     ]
     activation = inventory["runtime_reuse_activation"]
     assert activation["schema"].endswith(
-        "authenticated-v7-runtime-projection@1"
+        "authenticated-v8-runtime-projection@1"
     )
     assert activation["authority"] == "non_authoritative_projection"
     assert activation["runtime_readiness"] == "unknown_live_probe_required"
@@ -1353,17 +1377,19 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "historical_ptr_122_or_v4_gate_is_authority": False,
     }
     assert activation["repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(160, 170)
+        f"PTR-{task_id}" for task_id in range(160, 171)
     ]
     assert activation["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(161, 170)
+        f"PTR-{task_id}" for task_id in range(161, 171)
     ]
     assert activation["repair_task_status_is_completion_authority"] is False
     assert [
         wave["task_ids"]
         for wave in activation["required_implementation_sequence"]
     ] == [
-        ["PTR-160", "PTR-161", "PTR-162"],
+        ["PTR-160"],
+        ["PTR-170"],
+        ["PTR-161", "PTR-162"],
         ["PTR-163", "PTR-165"],
         ["PTR-164"],
         ["PTR-166"],

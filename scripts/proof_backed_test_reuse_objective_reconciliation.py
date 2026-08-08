@@ -73,6 +73,10 @@ FINAL_GATE_TASK_ID: Final = "PTR-169"
 FINAL_GATE_ACCEPTANCE_CRITERION: Final = (
     "ptr/authenticated-current-tree-gate-v5@1"
 )
+EXPECTED_TASK_COUNT: Final = 77
+FINAL_GATE_REVIEW_REVISION: Final = (
+    "authenticated-receipt-current-tree-repair-v8"
+)
 ROOT_ACCEPTANCE_CRITERION: Final = (
     "ptr/cross-repository-current-tree-gate@1"
 )
@@ -632,6 +636,8 @@ def _final_gate_completion_evidence_is_admissible(
     goal_id: str,
     criterion: str,
     expected_tree: str,
+    expected_task_count: int = EXPECTED_TASK_COUNT,
+    expected_review_revision: str = FINAL_GATE_REVIEW_REVISION,
 ) -> bool:
     if not isinstance(value, Mapping):
         return False
@@ -650,6 +656,8 @@ def _final_gate_completion_evidence_is_admissible(
         and isinstance(satisfied, Sequence)
         and not isinstance(satisfied, (str, bytes))
         and tuple(satisfied) == (criterion,)
+        and value.get("task_count") == expected_task_count
+        and value.get("review_revision") == expected_review_revision
         and tree
         and (not expected_tree or tree == expected_tree)
     )
@@ -659,8 +667,40 @@ def _gate_artifact_readiness(
     payload: Mapping[str, Any],
     *,
     expected_tree: str = "",
+    expected_task_count: int = EXPECTED_TASK_COUNT,
+    expected_review_revision: str = FINAL_GATE_REVIEW_REVISION,
 ) -> tuple[bool, str, str]:
     """Validate a PTR-169 persisted bundle or strict hermetic fixture gate."""
+
+    if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
+        if "goals" in payload:
+            return (
+                False,
+                "wrong_gate_producer",
+                "PTR-120 aggregate goal records are inputs to, not substitutes "
+                "for, the PTR-169 authenticated current-tree gate",
+            )
+        return (
+            False,
+            "wrong_gate_producer",
+            "final gate artifact must be produced by PTR-169",
+        )
+
+    if payload.get("task_count") != expected_task_count:
+        return (
+            False,
+            "stale_gate_task_count",
+            "final gate task inventory must be exactly "
+            f"{expected_task_count}, got {payload.get('task_count')!r}",
+        )
+    if payload.get("review_revision") != expected_review_revision:
+        return (
+            False,
+            "stale_gate_review_revision",
+            "final gate review revision must be "
+            f"{expected_review_revision!r}, got "
+            f"{payload.get('review_revision')!r}",
+        )
 
     if "decision" in payload:
         if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
@@ -685,6 +725,8 @@ def _gate_artifact_readiness(
             goal_id=FINAL_GATE_GOAL_ID,
             criterion=FINAL_GATE_ACCEPTANCE_CRITERION,
             expected_tree=expected_tree,
+            expected_task_count=expected_task_count,
+            expected_review_revision=expected_review_revision,
         ):
             return (
                 False,
@@ -696,6 +738,8 @@ def _gate_artifact_readiness(
             goal_id=ROOT_GOAL_ID,
             criterion=ROOT_ACCEPTANCE_CRITERION,
             expected_tree=expected_tree,
+            expected_task_count=expected_task_count,
+            expected_review_revision=expected_review_revision,
         ):
             return (
                 False,
@@ -704,20 +748,6 @@ def _gate_artifact_readiness(
             )
         return True, "", ""
 
-    if "goals" in payload:
-        return (
-            False,
-            "wrong_gate_producer",
-            "PTR-120 aggregate goal records are inputs to, not substitutes "
-            "for, the PTR-169 authenticated current-tree gate",
-        )
-
-    if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
-        return (
-            False,
-            "wrong_gate_producer",
-            "final gate artifact must be produced by PTR-169",
-        )
     if "passed" not in payload:
         return (
             False,
@@ -1232,6 +1262,9 @@ class ProofTestReuseObjectiveReconciler:
     allow_synthetic_evidence: bool = False
     synthetic_evidence_cids: Mapping[str, Sequence[str]] | None = None
     injected_contradictions: Sequence[str] = ()
+    expected_gate_task_count: int = EXPECTED_TASK_COUNT
+    expected_board_task_count: int = EXPECTED_TASK_COUNT
+    expected_gate_review_revision: str = FINAL_GATE_REVIEW_REVISION
 
     interface: str = PROOF_TEST_REUSE_OBJECTIVE_RECONCILER_INTERFACE
 
@@ -1930,6 +1963,12 @@ class ProofTestReuseObjectiveReconciler:
         open_task_ids = [
             task.task_id for task in tasks if not task.is_closed
         ]
+        if len(tasks) != self.expected_board_task_count:
+            reason_codes.append("stale_task_inventory")
+            messages.append(
+                "task inventory count must be exactly "
+                f"{self.expected_board_task_count}, got {len(tasks)}"
+            )
         if open_task_ids:
             reason_codes.append("open_tasks")
             messages.append(
@@ -2012,6 +2051,10 @@ class ProofTestReuseObjectiveReconciler:
                         _gate_artifact_readiness(
                             payload,
                             expected_tree=tree,
+                            expected_task_count=self.expected_gate_task_count,
+                            expected_review_revision=(
+                                self.expected_gate_review_revision
+                            ),
                         )
                     )
                     if not gate_ok:
@@ -2148,6 +2191,8 @@ class ProofTestReuseObjectiveReconciler:
         gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(
             payload,
             expected_tree=repository_tree,
+            expected_task_count=self.expected_gate_task_count,
+            expected_review_revision=self.expected_gate_review_revision,
         )
         if not gate_ok:
             return {

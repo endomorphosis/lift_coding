@@ -750,7 +750,7 @@ def _closeout_production_input_inventory(
 
     Presence inventory is owned by the agent supervisor
     (``proof_test_reuse_closeout_autorecover.inventory_closeout_inputs``).
-    This wrapper supplies monorepo paths and a non-authoritative V7 repair
+    This wrapper supplies monorepo paths and a non-authoritative V8 repair
     projection.  Static inventory never claims that runtime reuse works; a
     current-tree live probe and the PTR-169 authenticated gate remain required.
     """
@@ -770,7 +770,7 @@ def _closeout_production_input_inventory(
 
     parsed_tasks = tuple(tasks or parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX))
     task_ids = tuple(sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks))
-    repair_task_ids = tuple(f"PTR-{task_id}" for task_id in range(160, 170))
+    repair_task_ids = tuple(f"PTR-{task_id}" for task_id in range(160, 171))
     repair_task_statuses = {
         str(getattr(task, "task_id", "")): str(getattr(task, "status", "")).lower()
         for task in parsed_tasks
@@ -825,6 +825,7 @@ def _closeout_production_input_inventory(
             "PTR-110 ProofTestReuseTaskEvidenceCollector.collect",
             "PTR-111 GoalAssuranceRunner.collect",
             "PTR-120 ProofTestReuseObjectiveEvidenceAssembler.assemble",
+            "PTR-170 preserve bounded actionable validation retry evidence",
             "PTR-165 validate completed-task outputs and current ancestry",
             "PTR-167 verify reachable history replay and exact gitlinks",
             "PTR-168 validate genuine three-repository cold/warm/replay evidence",
@@ -845,17 +846,17 @@ def _closeout_production_input_inventory(
         ],
     }
     # Runtime state must not be inferred from source-shape or retained V4
-    # diagnostics.  This projection says what V7 must prove, not what the live
+    # diagnostics.  This projection says what V8 must prove, not what the live
     # checkout currently supports.  The report-only closeout diagnosis is the
     # live probe and remains fail-closed; ordinary pytest remains fail-open.
     inventory["runtime_reuse_activation"] = {
         "schema": (
             "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "authenticated-v7-runtime-projection@1"
+            "authenticated-v8-runtime-projection@1"
         ),
         "projection_revision": str(
             dict(CONFIG["objectiveProjection"]).get("reviewRevision")
-            or "authenticated-receipt-current-tree-repair-v7"
+            or "authenticated-receipt-current-tree-repair-v8"
         ),
         "authority": "non_authoritative_projection",
         "runtime_readiness": "unknown_live_probe_required",
@@ -892,8 +893,16 @@ def _closeout_production_input_inventory(
         "repair_task_status_is_completion_authority": False,
         "required_implementation_sequence": [
             {
-                "task_ids": ["PTR-160", "PTR-161", "PTR-162"],
-                "work": "signed_receipt_and_zero_configuration_package_surfaces",
+                "task_ids": ["PTR-160"],
+                "work": "signed_runner_pass_receipt_authority",
+            },
+            {
+                "task_ids": ["PTR-170"],
+                "work": "bounded_actionable_validation_retry_evidence",
+            },
+            {
+                "task_ids": ["PTR-161", "PTR-162"],
+                "work": "zero_configuration_package_surfaces_after_retry_repair",
             },
             {
                 "task_ids": ["PTR-163", "PTR-165"],

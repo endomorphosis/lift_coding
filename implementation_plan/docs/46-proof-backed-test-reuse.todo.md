@@ -100,16 +100,21 @@ ordinary locator-only warm lookup is filtered out before two-stage
 revalidation, and the existing test-pass witness does not bind a verifiable
 runner signature. Historical status records remain provenance only.
 
-The bounded corrective population is `PTR-160` through `PTR-169`, bringing the
-sealed population to 76 tasks. Its original v6 claimable wave was `PTR-160`,
+The bounded corrective population is `PTR-160` through `PTR-170`, bringing the
+sealed population to 77 tasks. Its original v6 claimable wave was `PTR-160`,
 `PTR-161`, and `PTR-162`, one accelerator, datasets, and kit task on three
 distinct numeric shards. A post-merge isolated-import audit proved that the
 datasets bridge fails on a namespace-only empty accelerator hierarchy and that
 the kit bridge hides an incomplete regular accelerator package. `PTR-160`
-remains completed; `PTR-161` and `PTR-162` are therefore reopened without new
-task identities or dependency edges. The current v7 claimable wave is exactly
-`PTR-161` and `PTR-162` on numeric shards 2 and 0; `PTR-163` and `PTR-165` remain
-waiting for those declared dependencies. The repair authenticates pass
+remains completed; `PTR-161` and `PTR-162` are therefore reopened. Live v7
+retry evidence then exposed a control-plane defect: oversized nested failure
+reviews are normalized into a synthetic `implementation_setup` exception while
+the real failed validation is relabeled `not_run`, causing exact retries with no
+actionable counterexample. The reviewed v8 refill adds `PTR-170`, and makes both
+reopened bootstrap tasks wait for it. The current v8 claimable wave is exactly
+`PTR-170` on numeric shard 2; after it merges, `PTR-161` and `PTR-162` become the
+parallel frontier on shards 2 and 0. `PTR-163` and `PTR-165` remain waiting for
+those declared dependencies. The repair authenticates pass
 receipts, restores cold-safe package-owned pytest bridges, binds the real proof
 statement to the runner attestation, validates completed-task artifacts and
 gitlinks, replays only verified historical changes, and proves a genuine
@@ -2274,7 +2279,7 @@ cannot authorize rollout and all uncertain candidates execute normally.
 - Review only: false
 - Priority: P0
 - Track: datasets-bootstrap-recovery
-- Depends on: PTR-149
+- Depends on: PTR-149, PTR-170
 - Goal id: PTR-G130
 - Outputs: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py -q
@@ -2306,7 +2311,7 @@ cannot authorize rollout and all uncertain candidates execute normally.
 - Review only: false
 - Priority: P0
 - Track: kit-bootstrap-transport-recovery
-- Depends on: PTR-149
+- Depends on: PTR-149, PTR-170
 - Goal id: PTR-G130
 - Outputs: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_reuse_bootstrap.py external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py external/ipfs_kit/tests/test_proof_reuse_zero_config.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_reuse_capabilities.py external/ipfs_kit/tests/test_content_addressed_artifact_store.py external/ipfs_kit/tests/test_candidate_context_artifact_store.py -q
@@ -2522,7 +2527,7 @@ cannot authorize rollout and all uncertain candidates execute normally.
 - Evidence subset: wheel/source startup, body oracle, immutable candidate bytes, signed real certificate, forced replay and dependency mutation
 - Acceptance: In each repository ordinary `python -m pytest node` runs cold exactly once and reports one pass, an independent warm process locally verifies a real signed proof and reports one `proof-cache-hit` skip with body count unchanged, and forced uncached replay passes and increments once; no `-p` or monkeypatch is used; AST/fixture/conftest/dependency/parameter/environment/policy mutations execute the body; zero false skips are measured by the body oracle.
 
-## PTR-169 Seal the exact 76-task authenticated current-tree handoff
+## PTR-169 Seal the exact 77-task authenticated current-tree handoff
 
 - Status: todo
 - Completion: automatic
@@ -2543,7 +2548,7 @@ cannot authorize rollout and all uncertain candidates execute normally.
 - Predicted symbols: AuthenticatedProofReuseCurrentTreeGateV5, reachable-tree operator handoff
 - Interfaces: AuthenticatedProofReuseCurrentTreeGateV5, ProofReuseBenchmarkReceipt@2
 - Submodules: external/ipfs_accelerate
-- Generated artifacts: fresh 76-task validation receipts, benchmark summary and non-authoritative operator candidate
+- Generated artifacts: fresh 77-task validation receipts, benchmark summary and non-authoritative operator candidate
 - Conflict policy: Final join only; update the outer objective reconciler so G120/G130/G140 remain mandatory, but report gaps without editing this board, approving evidence, generating trust keys or marking goals complete.
 - Symbolic first: true
 - LLM context budget bytes: 65536
@@ -2551,5 +2556,37 @@ cannot authorize rollout and all uncertain candidates execute normally.
 - Context budget tokens: 16384
 - Preconditions: PTR-168 genuine e2e passes after authenticated adversarial assurance and exact reachable replay.
 - Effects: Replaces the historical 66-task premise with current signed-authority, reachable-tree, ordinary-pytest and performance evidence.
-- Evidence subset: exact 76-task inventory, reachable gitlinks, PTR-165 evidence, PTR-166 forgery resistance, PTR-168 cold/warm/replay, zero false skips, measured savings, supervisor health
-- Acceptance: All 76 tasks have current evidence and present outputs on fetchable exact pins; the reconciler refuses root completion while G120, G130 or G140 is active and requires the PTR-169 `ptr/authenticated-current-tree-gate-v5@1` artifact; every warm hit uses a trusted signed receipt and locally verified real proof; genuine three-repo e2e and forced replay agree; adversarial/mutation populations have zero false skips; benchmark meets the reviewed threshold; optional capability gaps remain truthful RUN/DEFERRED. PTR-169 may emit only a pre-merge candidate receipt for itself; authoritative completion requires the outer controller to rerun the exact 76-task gate after the PTR-169 merge commit is present and prove that commit/tree, while the old PTR-149/66-task packet is rejected as stale.
+- Evidence subset: exact 77-task inventory, reachable gitlinks, PTR-165 evidence, PTR-166 forgery resistance, PTR-168 cold/warm/replay, PTR-170 actionable retry evidence, zero false skips, measured savings, supervisor health
+- Acceptance: All 77 tasks have current evidence and present outputs on fetchable exact pins; the reconciler refuses root completion while G120, G130 or G140 is active and requires the PTR-169 `ptr/authenticated-current-tree-gate-v5@1` artifact; every warm hit uses a trusted signed receipt and locally verified real proof; genuine three-repo e2e and forced replay agree; adversarial/mutation populations have zero false skips; benchmark meets the reviewed threshold; optional capability gaps remain truthful RUN/DEFERRED. PTR-169 may emit only a pre-merge candidate receipt for itself; authoritative completion requires the outer controller to rerun the exact 77-task gate after the PTR-169 merge commit is present and prove that commit/tree. Any 76-task, v7, PTR-149 or 66-task packet is rejected as stale.
+
+## PTR-170 Preserve actionable validation failures in bounded retry evidence
+
+- Status: todo
+- Completion: automatic
+- Is schedulable: true
+- Review only: false
+- Priority: P0
+- Track: actionable-retry-evidence
+- Depends on: PTR-149
+- Goal id: PTR-G140
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py, external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py -q
+- Board namespace: proof-backed-test-reuse-v1
+- Bundle: proof-test-reuse/actionable-retry-evidence
+- Parallel lane: ptr-actionable-retry-evidence
+- Resource class: security-review
+- Implementation timeout seconds: 10800
+- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py, external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py
+- Predicted symbols: bounded implementation failure normalizer, authoritative validation retry capsule, deduplicated implementation review projection
+- Interfaces: ActionableRetryEvidence@1, ImplementationDiagnosticReceipt@1, RetryContextCapsule@1
+- Submodules: external/ipfs_accelerate
+- Generated artifacts: deterministic oversized nested review, validation counterexample, and retry-capsule fixtures only
+- Conflict policy: Own only implementation-daemon diagnostic normalization and its focused tests; do not change proof-cache authority, package bootstraps, task acceptance, provider selection, board mutation or retry budgets.
+- Symbolic first: true
+- LLM context budget bytes: 65536
+- Provider role: grok-implement
+- Context budget tokens: 16384
+- Preconditions: PTR-149 historical supervisor provenance and the retained v7 PTR-162 failure-event sequence are available; implementation occurs in an isolated task worktree and accelerator gitlink publication remains serialized by the merge queue.
+- Effects: Replaces recursive failure-review amplification with one deterministic bounded projection while retaining the validation counterexample that a retrying implementation agent must act on.
+- Evidence subset: attempted validation command, passed=false, return code, validation reason, diagnostic receipt id, failed test/command/path, exception type and message, bounded failure head, deduplication counts, truncation hash and original-byte count
+- Acceptance: For an implementation whose real subprocess validation was attempted and failed, normalization is deterministic, finite and at most 16 KiB and never raises; it preserves authoritative `attempted=true`, `passed=false`, return code and reason together with the diagnostic receipt id and the failed command, test, path, exception and bounded `failure_head`. Repeated full review/addendum bodies are deduplicated, and every omitted tail is represented by an original-byte count plus a SHA-256 truncation marker. `implementation_finished` and the next retry capsule retain the same actionable counterexample, validation remains attempted/failed rather than `not_run`, and no synthetic `implementation_setup` exception replaces the subprocess failure. Focused regressions cover oversized nested review normalization, context-delta serialization, and the daemon-port retry/event path; no validation output, private material or unbounded review text is copied into the board.

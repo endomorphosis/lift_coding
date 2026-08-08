@@ -2,7 +2,7 @@
 
 Date: 2026-07-31
 
-Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v7`)
+Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v8`)
 
 Program: `proof-backed-test-reuse-v1`
 
@@ -381,7 +381,7 @@ mislabeling.
   diagnostic/configuration capability only, not an implemented remote issuer;
   its absence never blocks launch or test execution. A future authenticated
   endpoint client requires a separately reviewed trust/transport task and is
-  not completion evidence for this 76-task board.
+  not completion evidence for this 77-task board.
 - Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
   provider or diagnostic endpoint state records `certificate_deferred` and
   does not change the passed test.
@@ -815,11 +815,21 @@ datasets pytest11 bridge raises
 gitlink leaves a namespace-only empty `ipfs_accelerate_py/` hierarchy. The kit
 bridge over-corrects that case by suppressing the same nested error even when an
 installed-style regular `ipfs_accelerate_py/__init__.py` exists, hiding a broken
-accelerator installation. Revision v7 therefore reopens the existing
-repository owners `PTR-161` and `PTR-162`; it adds no task or dependency edge.
+accelerator installation. Revision v7 therefore reopened the existing
+repository owners `PTR-161` and `PTR-162`.
 
-The bounded repair is `PTR-160` through `PTR-169`, taking the reviewed
-population to 76 tasks. It does not pretend that the old unreachable commits
+The stopped v7 lanes then exposed a separate supervisor failure. Real
+subprocess validation failures were present in implementation logs, but nested
+full reviews and addenda recursively exceeded the diagnostic-size limit. The
+normalizer raised, the outer catcher mislabeled the attempt as
+`implementation_setup`, and the retry capsule reported validation `not_run`.
+That destroyed the actionable counterexample and caused an exact repeat.
+Revision v8 adds one reviewed control-plane owner, `PTR-170`, and makes both
+reopened bootstrap tasks depend on it; it does not broaden proof or skip
+authority.
+
+The bounded repair is `PTR-160` through `PTR-170`, taking the reviewed
+population to 77 tasks. It does not pretend that the old unreachable commits
 are valid launch pins. The clean integration branch instead starts from the
 nearest fetchable datasets and kit baselines, preserves the compatible
 accelerator supervisor commit, and makes reconstruction of every missing
@@ -827,42 +837,49 @@ historical output explicit work with current evidence:
 
 1. `PTR-160` defines signed runner pass-attestation, trust-policy, public-key
    multicodec CID, nonce, epoch, rotation and revocation contracts.
-2. `PTR-161` restores the datasets-owned missing outputs and supplies a
+2. `PTR-170` makes failed-validation retry evidence deterministic and at most
+   16 KiB without raising. It preserves attempted/failed state, return code,
+   reason, receipt, failed command/test/path/exception and a bounded failure
+   head, deduplicates repeated review bodies, and records hash-marked
+   truncation instead of replacing the failure with a synthetic setup error.
+3. `PTR-161` restores the datasets-owned missing outputs and supplies a
    `pytest11`/source bootstrap that is inert when accelerator or ZK extras are
    absent. Isolated installed and source direct-node subprocesses must also
    prove that a namespace-only empty accelerator/gitlink hierarchy is optional
    absence and still executes the ordinary test body. This is the versioned
    `DatasetsProofReuseBootstrap@3` boundary; historical V2 evidence is stale.
-3. `PTR-162` restores the kit-owned immutable stores and supplies the same
+4. `PTR-162` restores the kit-owned immutable stores and supplies the same
    cold-safe bootstrap and strict-CID transport boundary. Its isolated
    subprocess matrix must distinguish a namespace-only empty hierarchy, which
    is a safe no-op, from a regular accelerator package with a missing nested
    testing/plugin hierarchy, whose `ModuleNotFoundError` remains visible. This
    is `KitProofReuseBootstrap@3`; historical V2 evidence is stale.
-4. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
+5. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
    the signed attestation CID and requires local signature/trust verification.
-5. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
+6. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
    signed-receipt/candidate publication authority.
-6. `PTR-165` validates completed-task outputs, validation targets, exact
+7. `PTR-165` validates completed-task outputs, validation targets, exact
    gitlinks, commit ancestry and merge receipts instead of trusting board text.
-7. `PTR-166` uses the real backend to prove that unsigned, wrongly signed,
+8. `PTR-166` uses the real backend to prove that unsigned, wrongly signed,
    stale, revoked and proving-key-only forged receipts cannot authorize a skip.
-8. `PTR-167` replays only receipt-identified historical blobs/commits, checks
+9. `PTR-167` replays only receipt-identified historical blobs/commits, checks
    retained tree and blob digests, publishes reachable commits, and reopens any
    material that cannot be reconstructed rather than waiving it.
-9. `PTR-168` installs or source-loads all three packages and runs independent
+10. `PTR-168` installs or source-loads all three packages and runs independent
    ordinary cold, warm and forced-replay pytest processes without `-p`, service
    injection, tracer monkeypatches or simulated proof authority. A persistent
    body oracle establishes zero false skips under AST, fixture, conftest,
    parameter, dependency, environment and policy mutations.
-10. `PTR-169` joins the exact reachable 76-task inventory, authenticated
+11. `PTR-169` joins the exact reachable 77-task inventory, authenticated
     adversarial evidence, genuine three-repository e2e and measured subprocess
     benchmark into a fresh operator handoff. The old 66-task packet is stale.
 
 The original v6 first wave was `PTR-160`, `PTR-161` and `PTR-162`, on three
 numeric shards and three distinct repository claims. `PTR-160` remains
-completed. The fresh v7 claimable set is exactly reopened `PTR-161` and
-`PTR-162`, on numeric shards 2 and 0 with disjoint datasets and kit ownership.
+completed. The fresh v8 claimable set is exactly `PTR-170` on numeric shard 2.
+After its bounded retry-evidence repair merges, reopened `PTR-161` and
+`PTR-162` become the parallel frontier on numeric shards 2 and 0 with disjoint
+datasets and kit ownership.
 `PTR-163` and `PTR-165` remain waiting until their exact bootstrap dependencies
 merge, after which datasets V5 work and the outer audit-tool work run in
 parallel on distinct resources. `PTR-164` then consumes the exact merged V5
@@ -917,13 +934,14 @@ protected from implementation agents.
 | 25 | `PTR-153`, `PTR-154` | Preserve proof-bearing issued material and controller-owned V2 context in parallel on disjoint accelerator files and numeric shards |
 | 26 | `PTR-155` | Join exact datasets V2 local verification with the sole atomic candidate publication path |
 | 27 | `PTR-149` | Live reporting, exact 66-task authority gate, corrected handoff and explicit operator closeout premise |
-| 28 | `PTR-160` complete; `PTR-161`, `PTR-162` reopened | The v6 signed-runner/bootstrap wave used three independent repositories; v7 keeps signed-runner work complete and reruns the strengthened datasets and kit isolated-bootstrap contracts concurrently on shards 2 and 0 |
-| 29 | `PTR-163`, `PTR-165` | V5 native real-proof binding and the outer evidence-audit tool run independently on datasets and the outer tree |
-| 30 | `PTR-164` | Accelerator runtime composition pins and consumes the exact merged V5 provider/capability/release identities |
-| 31 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries with zero skipped/xfail assurance cases |
-| 32 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits/gitlinks and requires green current output ancestry |
-| 33 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
-| 34 | `PTR-169` | Exact 76-task authenticated current-tree candidate, benchmark and reconciler update; authority requires a post-merge outer rerun |
+| 28 | `PTR-170` | V8 first repairs bounded actionable retry evidence on shard 2 so subsequent failed validations cannot be normalized into synthetic setup failures |
+| 29 | `PTR-161`, `PTR-162` | Reopened datasets and kit isolated-bootstrap contracts run concurrently on shards 2 and 0 only after PTR-170 merges; PTR-160 signed-runner work remains complete |
+| 30 | `PTR-163`, `PTR-165` | V5 native real-proof binding and the outer evidence-audit tool run independently on datasets and the outer tree |
+| 31 | `PTR-164` | Accelerator runtime composition pins and consumes the exact merged V5 provider/capability/release identities |
+| 32 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries with zero skipped/xfail assurance cases |
+| 33 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits/gitlinks and requires green current output ancestry |
+| 34 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
+| 35 | `PTR-169` | Exact 77-task authenticated current-tree candidate, benchmark and reconciler update; authority requires a post-merge outer rerun and rejects v7/76-task packets |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -951,8 +969,9 @@ after both merge. `PTR-153` and `PTR-154` then occupy shards 0 and 1 with
 disjoint predicted files; the shared merge queue serializes their accelerator
 gitlink publication before shard-2 `PTR-155` joins them. `PTR-149` remains last.
 That order is retained as historical provenance. The v6 correction started
-with `PTR-160`, `PTR-161` and `PTR-162`; v7 resumes only reopened `PTR-161` and
-`PTR-162`. Their merge admits the disjoint `PTR-163`/`PTR-165` wave, followed by
+with `PTR-160`, `PTR-161` and `PTR-162`; v8 first runs `PTR-170`, then resumes
+reopened `PTR-161` and `PTR-162` in parallel. Their merge admits the disjoint
+`PTR-163`/`PTR-165` wave, followed by
 the dependency-ordered `PTR-164` runtime join. Authenticity, replay, genuine e2e
 and closeout form the ordered `PTR-166` through `PTR-169` joins. Numeric shards
 preserve canonical provider identities; runtime execution remains Grok 4.5
@@ -1044,10 +1063,11 @@ explicitly permitted.
   comprehensive. The historical nine-task completion expansion and historical
   twelve-task runtime-activation repair, plus the active thirteen-task
   production-activation correction, are immutable 2026-08-03 projections. The
-  active ten-task authenticated-current-tree repair is the bounded 2026-08-08
+  active eleven-task authenticated-current-tree repair is the bounded 2026-08-08
   projection; none enables autonomous refill.
-- Use the fresh `proof-backed-test-reuse-v7` state directory so the stopped v6
-  launch, its superseded PTR-161/PTR-162 completion state, stale earlier lane
+- Use the fresh `proof-backed-test-reuse-v8` state directory so the stopped v7
+  launch, its repeated non-actionable PTR-162 retry state, superseded
+  PTR-161/PTR-162 completion state, stale earlier lane
   state, old health failures and historical generated-output checks cannot be
   mistaken for this run.
 - Run the native board validator, objective projection, a non-implementing
