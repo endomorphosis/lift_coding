@@ -4,6 +4,7 @@ import importlib.util
 import json
 import subprocess
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -35,6 +36,33 @@ def _load_validator_module() -> Any:
     return module
 
 
+def _agent_route_readiness(
+    *,
+    grok_ready: bool = True,
+    codex_ready: bool = True,
+    failure_kind: str = "",
+    reason_code: str = "grok_ready",
+) -> SimpleNamespace:
+    effective_provider = (
+        "grok"
+        if grok_ready
+        else "codex"
+        if codex_ready
+        and failure_kind in {"authentication_failure", "launch_failure"}
+        else ""
+    )
+    return SimpleNamespace(
+        grok_ready=grok_ready,
+        codex_ready=codex_ready,
+        effective_provider=effective_provider,
+        reason_code=reason_code,
+        failure_kind=failure_kind or None,
+        grok_model="grok-4.5",
+        codex_model="gpt-5.6-terra",
+        codex_reasoning_effort="high",
+    )
+
+
 def _mutate_task_block(text: str, task_id: str, mutation: Any) -> str:
     start = text.index(f"## {task_id} ")
     end = text.find("\n## PTR-", start + 1)
@@ -61,8 +89,14 @@ def _write_mutated_task_board(
 
 
 @pytest.fixture()
-def supervisor() -> Any:
-    return _load_module()
+def supervisor(monkeypatch: pytest.MonkeyPatch) -> Any:
+    module = _load_module()
+    monkeypatch.setattr(
+        module,
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(),
+    )
+    return module
 
 
 def _run_board_readiness(
@@ -146,7 +180,7 @@ def test_completed_board_with_blocked_tasks_is_rejected(
         _run_board_readiness(supervisor, monkeypatch, tmp_path, payload)
 
 
-def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
+def test_every_lane_uses_grok_primary_and_automatic_codex_fallback_policy(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv(
@@ -165,6 +199,11 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
             "codex": "/opt/codex/bin/codex",
         }.get(name),
     )
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        _agent_route_readiness,
+    )
 
     assert len(supervisor.LANES) == 3
     for lane in supervisor.LANES:
@@ -174,7 +213,7 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         assert lane["fallback_provider"] == "codex"
         assert lane["fallback_model"] == "gpt-5.6-terra"
         assert lane["fallback_model_reasoning_effort"] == "high"
-        assert lane["fallback_trigger"] == "grok_quota_exhausted"
+        assert lane["fallback_trigger"] == "grok_quota_auth_or_unavailable"
         environment = supervisor._runtime_environment(str(lane["provider"]))
         assert "IMPLEMENTATION_DAEMON_COMMAND" not in environment
         assert environment[
@@ -205,7 +244,7 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         )
         assert (
             environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"]
-            == "grok_quota_exhausted"
+            == "grok_quota_auth_or_unavailable"
         )
         assert environment["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "1"
         assert environment["IPFS_ACCEL_AUTO_INSTALL"] == "1"
@@ -219,7 +258,7 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         )
 
 
-def test_semantic_merge_resolver_uses_managed_quota_only_provider_chain(
+def test_semantic_merge_resolver_uses_managed_automatic_provider_chain(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(
@@ -229,6 +268,11 @@ def test_semantic_merge_resolver_uses_managed_quota_only_provider_chain(
             "grok": "/opt/grok/bin/grok",
             "codex": "/opt/codex/bin/codex",
         }.get(name),
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        _agent_route_readiness,
     )
 
     encoded = supervisor._managed_merge_resolver_command()
@@ -244,7 +288,18 @@ def test_semantic_merge_resolver_uses_managed_quota_only_provider_chain(
     assert option("--workspace") == "."
     assert option("--primary-provider") == "grok"
     assert option("--fallback-provider") == "codex"
-    assert option("--fallback-policy") == "grok_quota_exhausted"
+    assert option("--fallback-policy") == "grok_quota_auth_or_unavailable"
+    assert "--probe-route-readiness" in command
+    assert option("--probe-grok-bin") == "/opt/grok/bin/grok"
+    assert option("--probe-codex-bin") == "/opt/codex/bin/codex"
+    assert option("--probe-grok-model") == "grok-4.5"
+    assert option("--probe-codex-model") == "gpt-5.6-terra"
+    assert option("--probe-codex-reasoning-effort") == "high"
+    assert "--route-stage" not in command
+    assert "--route-task-id" not in command
+    assert "--route-attempt" not in command
+    assert "--route-receipt-path" not in command
+    assert "--primary-unavailable-kind" not in command
     assert "llm_merge_resolver_fallback" not in encoded
 
     primary = json.loads(option("--primary-command-json"))
@@ -282,6 +337,168 @@ def test_semantic_merge_resolver_uses_managed_quota_only_provider_chain(
         assert arguments[resolver_index + 1] == encoded
 
 
+@pytest.mark.parametrize(
+    "failure_kind", ("authentication_failure", "launch_failure")
+)
+def test_semantic_merge_resolver_keeps_router_owned_route_when_grok_is_unready(
+    failure_kind: str,
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        supervisor.shutil,
+        "which",
+        lambda name: {
+            "grok": "/opt/grok/bin/grok",
+            "codex": "/opt/codex/bin/codex",
+        }.get(name),
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(
+            grok_ready=False,
+            failure_kind=failure_kind,
+            reason_code=(
+                "grok_authentication_failure"
+                if failure_kind == "authentication_failure"
+                else "grok_cli_unavailable"
+            ),
+        ),
+    )
+
+    encoded = supervisor._managed_merge_resolver_command()
+    command = supervisor.shlex.split(encoded)
+
+    def option(name: str) -> str:
+        return command[command.index(name) + 1]
+
+    assert command[:2] == [
+        supervisor.sys.executable,
+        str(supervisor.PROVIDER_FALLBACK_RUNNER),
+    ]
+    assert option("--primary-provider") == "grok"
+    assert option("--fallback-provider") == "codex"
+    assert option("--fallback-policy") == "grok_quota_auth_or_unavailable"
+    assert "--probe-route-readiness" in command
+    assert option("--probe-grok-bin") == "/opt/grok/bin/grok"
+    assert option("--probe-codex-bin") == "/opt/codex/bin/codex"
+    assert option("--probe-grok-model") == "grok-4.5"
+    assert option("--probe-codex-model") == "gpt-5.6-terra"
+    assert option("--probe-codex-reasoning-effort") == "high"
+    assert "--primary-unavailable-kind" not in command
+    assert "--route-stage" not in command
+    assert "--route-task-id" not in command
+    assert "--route-attempt" not in command
+    assert "--route-receipt-path" not in command
+    assert json.loads(option("--primary-command-json")) == [
+        supervisor.sys.executable,
+        str(supervisor.GROK_CLI_RUNNER),
+        "--workspace",
+        ".",
+        "--grok-bin",
+        "/opt/grok/bin/grok",
+        "--model",
+        "grok-4.5",
+        "--max-turns",
+        "100000",
+        "--mode",
+        "agent",
+    ]
+    fallback = json.loads(option("--fallback-command-json"))
+    assert fallback == [
+        "/opt/codex/bin/codex",
+        "exec",
+        "--dangerously-bypass-approvals-and-sandbox",
+        "-C",
+        ".",
+        "-m",
+        "gpt-5.6-terra",
+        "-c",
+        'model_reasoning_effort="high"',
+        "-",
+    ]
+    assert str(supervisor.GROK_CLI_RUNNER) in encoded
+
+
+@pytest.mark.parametrize(
+    "failure_kind",
+    (
+        "timeout",
+        "transport_failure",
+        "generic_nonzero_exit",
+        "malformed_output",
+        "task_failure",
+    ),
+)
+def test_semantic_merge_resolver_rejects_terminal_grok_probe_failure(
+    failure_kind: str,
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(
+            grok_ready=False,
+            failure_kind=failure_kind,
+            reason_code=f"grok_probe_{failure_kind}",
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="failed terminally"):
+        supervisor._managed_merge_resolver_command()
+
+
+def test_lane_launch_sets_private_umask_for_provider_logs(
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    log_dir = tmp_path / "logs"
+    runtime_dir = tmp_path / "runtime"
+    log_dir.mkdir()
+    runtime_dir.mkdir()
+    observed: dict[str, object] = {}
+
+    class FakeProcess:
+        pid = 4242
+
+    def fake_popen(
+        command: list[str], **kwargs: object
+    ) -> FakeProcess:
+        observed["command"] = command
+        observed.update(kwargs)
+        return FakeProcess()
+
+    monkeypatch.setattr(supervisor, "LOG_DIR", log_dir)
+    monkeypatch.setattr(supervisor, "RUNTIME_DIR", runtime_dir)
+    monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 0)
+    monkeypatch.setattr(
+        supervisor, "_lane_process_owned", lambda _name, _pid: False
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_lane_common_arguments",
+        lambda _lane, *, live: ["--live"] if live else [],
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_runtime_environment",
+        lambda _provider=None: {"TEST_PROVIDER": "codex"},
+    )
+    monkeypatch.setattr(supervisor.subprocess, "Popen", fake_popen)
+
+    pid = supervisor._launch_lane(dict(supervisor.LANES[0]))
+
+    log_path = log_dir / "ptr_lane_0_supervisor.log"
+    assert pid == 4242
+    assert log_path.stat().st_mode & 0o777 == 0o600
+    assert observed["umask"] == 0o077
+    assert observed["start_new_session"] is True
+    assert observed["env"] == {"TEST_PROVIDER": "codex"}
+
+
 def test_runtime_provider_metadata_preserves_identity_and_routes_grok_first(
     supervisor: Any,
 ) -> None:
@@ -301,7 +518,8 @@ def test_runtime_provider_metadata_preserves_identity_and_routes_grok_first(
     ]
     assert parallel["semanticMergeResolver"] == {
         "provider": "grok-codex",
-        "fallbackTrigger": "grok_quota_exhausted",
+        "routingAuthority": "ipfs_accelerate_py.llm_router",
+        "fallbackTrigger": "grok_quota_auth_or_unavailable",
         "inheritedCommandPolicy": "override_with_managed_provider_chain",
     }
     assert supervisor.PROVIDER_POLICY["appliesTo"] == [
@@ -322,7 +540,7 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
     ]
     config["parallelRuntime"]["semanticMergeResolver"][
         "fallbackTrigger"
-    ] = "any_failure"
+    ] = "grok_quota_exhausted"
     config["providerPolicy"]["appliesTo"] = ["implementation"]
     config_path = tmp_path / "supervisor.json"
     config_path.write_text(json.dumps(config), encoding="utf-8")
@@ -835,7 +1053,7 @@ def test_board_validator_rejects_an_unexpected_new_historical_gap(
     assert any("baseline drift" in error for error in result["errors"])
 
 
-def test_status_exposes_exact_model_and_quota_only_fallback_policy(
+def test_status_exposes_exact_model_and_automatic_fallback_policy(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(
@@ -862,16 +1080,38 @@ def test_status_exposes_exact_model_and_quota_only_fallback_policy(
             "model": "gpt-5.6-terra",
             "model_reasoning_effort": "high",
         },
-        "fallback_trigger": "grok_quota_exhausted",
-        "non_quota_failure_action": "propagate_without_fallback",
+        "routing_authority": "ipfs_accelerate_py.llm_router",
+        "fallback_trigger": "grok_quota_auth_or_unavailable",
+        "primary_unavailable_action": "use_codex_fallback",
+        "non_quota_failure_action": (
+            "fallback_on_auth_or_launch_else_propagate"
+        ),
         "applies_to": ["implementation", "semantic_merge_resolver"],
         "semantic_merge_resolver": {
             "provider": "grok-codex",
-            "fallbackTrigger": "grok_quota_exhausted",
+            "routingAuthority": "ipfs_accelerate_py.llm_router",
+            "fallbackTrigger": "grok_quota_auth_or_unavailable",
             "inheritedCommandPolicy": (
                 "override_with_managed_provider_chain"
             ),
         },
+        "fallback_allowed_on": [
+            "grok_quota_exhausted",
+            "authentication_failure",
+            "launch_failure",
+        ],
+        "fallback_requires": [
+            "side_effects_started=false",
+            "workspace_unchanged=true",
+        ],
+        "fallback_forbidden_on": [
+            "timeout",
+            "transport_failure",
+            "generic_nonzero_exit",
+            "malformed_output",
+            "task_failure",
+            "side_effects_started",
+        ],
     }
 
 
@@ -975,7 +1215,7 @@ def test_status_rejects_mixed_current_and_stale_live_lanes(
     assert "task_state_board_mismatch" in stale_lane["unhealthy_reasons"]
 
 
-def test_provider_preflight_rejects_unavailable_grok_without_using_codex(
+def test_provider_preflight_uses_codex_when_grok_is_unavailable(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(
@@ -983,17 +1223,28 @@ def test_provider_preflight_rejects_unavailable_grok_without_using_codex(
         "which",
         lambda name: "/opt/codex/bin/codex" if name == "codex" else None,
     )
-
     monkeypatch.setattr(
         supervisor,
-        "_run",
-        lambda *_args, **_kwargs: (_ for _ in ()).throw(
-            AssertionError("Codex must not replace an unavailable Grok primary")
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(
+            grok_ready=False,
+            failure_kind="launch_failure",
+            reason_code="grok_cli_unavailable",
         ),
     )
 
-    with pytest.raises(RuntimeError, match="Grok CLI is required.*primary"):
-        supervisor._provider_preflight()
+    providers = supervisor._provider_preflight()
+
+    assert providers["grok"] == ""
+    assert providers["codex_authenticated"] is True
+    assert providers["grok_ready"] is False
+    assert providers["grok_failure_kind"] == "launch_failure"
+    assert providers["effective_provider"] == "codex"
+    assert providers["fallback_active"] is True
+    assert providers["fallback_reason"] == "launch_failure"
+    assert providers["route_reason_code"] == "grok_cli_unavailable"
+    assert "codex_status" not in providers
+    assert "grok_version" not in providers
 
 
 def test_provider_preflight_reports_grok_as_effective_primary(
@@ -1006,38 +1257,24 @@ def test_provider_preflight_reports_grok_as_effective_primary(
         if name in {"codex", "grok"}
         else None,
     )
-
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
-        if command[-2:] == ["login", "status"]:
-            stdout = "Logged in using ChatGPT\n"
-        else:
-            assert command == ["/opt/grok/bin/grok", "--version"]
-            stdout = "grok 1.2.3\n"
-        return subprocess.CompletedProcess(
-            command,
-            returncode=0,
-            stdout=stdout,
-            stderr="",
-        )
-
-    monkeypatch.setattr(supervisor, "_run", fake_run)
-    if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
-        supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon import (
-        implementation_daemon,
-    )
-
     monkeypatch.setattr(
-        implementation_daemon,
-        "_grok_cli_available",
-        lambda: True,
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        _agent_route_readiness,
     )
 
     providers = supervisor._provider_preflight()
 
+    assert providers["codex_authenticated"] is True
     assert providers["grok_authenticated"] is True
+    assert providers["grok_ready"] is True
+    assert providers["grok_failure_kind"] == ""
+    assert providers["effective_provider"] == "grok"
+    assert providers["fallback_active"] is False
+    assert providers["fallback_reason"] == ""
+    assert providers["route_reason_code"] == "grok_ready"
+    assert "codex_status" not in providers
+    assert "grok_version" not in providers
     assert providers["provider_policy"] == {
         "primary": {"provider": "grok", "model": "grok-4.5"},
         "fallback": {
@@ -1045,30 +1282,42 @@ def test_provider_preflight_reports_grok_as_effective_primary(
             "model": "gpt-5.6-terra",
             "model_reasoning_effort": "high",
         },
-        "fallback_trigger": "grok_quota_exhausted",
-        "primary_unavailable_action": "fail_preflight",
-        "non_quota_failure_action": "propagate_without_fallback",
+        "routing_authority": "ipfs_accelerate_py.llm_router",
+        "fallback_trigger": "grok_quota_auth_or_unavailable",
+        "primary_unavailable_action": "use_codex_fallback",
+        "non_quota_failure_action": (
+            "fallback_on_auth_or_launch_else_propagate"
+        ),
         "applies_to": ["implementation", "semantic_merge_resolver"],
         "semantic_merge_resolver": {
             "provider": "grok-codex",
-            "fallbackTrigger": "grok_quota_exhausted",
+            "routingAuthority": "ipfs_accelerate_py.llm_router",
+            "fallbackTrigger": "grok_quota_auth_or_unavailable",
             "inheritedCommandPolicy": (
                 "override_with_managed_provider_chain"
             ),
         },
-        "fallback_forbidden_on": [
+        "fallback_allowed_on": [
+            "grok_quota_exhausted",
             "authentication_failure",
             "launch_failure",
+        ],
+        "fallback_requires": [
+            "side_effects_started=false",
+            "workspace_unchanged=true",
+        ],
+        "fallback_forbidden_on": [
             "timeout",
             "transport_failure",
             "generic_nonzero_exit",
             "malformed_output",
             "task_failure",
+            "side_effects_started",
         ],
     }
 
 
-def test_provider_preflight_rejects_grok_auth_failure_without_fallback(
+def test_provider_preflight_uses_codex_for_grok_auth_failure(
     supervisor: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setattr(
@@ -1078,34 +1327,60 @@ def test_provider_preflight_rejects_grok_auth_failure_without_fallback(
         if name in {"codex", "grok"}
         else None,
     )
-
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
-        stdout = (
-            "Logged in using ChatGPT\n"
-            if command[-2:] == ["login", "status"]
-            else "grok 1.2.3\n"
-        )
-        return subprocess.CompletedProcess(command, 0, stdout, "")
-
-    monkeypatch.setattr(supervisor, "_run", fake_run)
-    if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
-        supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon import (
-        implementation_daemon,
-    )
-
     monkeypatch.setattr(
-        implementation_daemon,
-        "_grok_cli_available",
-        lambda: False,
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(
+            grok_ready=False,
+            failure_kind="authentication_failure",
+            reason_code="grok_authentication_failure",
+        ),
     )
 
-    with pytest.raises(
-        RuntimeError,
-        match="Codex fallback is not allowed for authentication failures",
-    ):
+    providers = supervisor._provider_preflight()
+
+    assert providers["grok_authenticated"] is False
+    assert providers["grok_ready"] is False
+    assert providers["grok_failure_kind"] == "authentication_failure"
+    assert providers["effective_provider"] == "codex"
+    assert providers["fallback_active"] is True
+    assert providers["fallback_reason"] == "authentication_failure"
+    assert providers["route_reason_code"] == "grok_authentication_failure"
+
+
+@pytest.mark.parametrize(
+    "failure_kind",
+    (
+        "timeout",
+        "transport_failure",
+        "generic_nonzero_exit",
+        "malformed_output",
+        "task_failure",
+    ),
+)
+def test_provider_preflight_rejects_terminal_grok_probe_failure(
+    failure_kind: str,
+    supervisor: Any,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        supervisor.shutil,
+        "which",
+        lambda name: f"/opt/{name}/bin/{name}"
+        if name in {"codex", "grok"}
+        else None,
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(
+            grok_ready=False,
+            failure_kind=failure_kind,
+            reason_code=f"grok_probe_{failure_kind}",
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="failed terminally"):
         supervisor._provider_preflight()
 
 
@@ -1121,32 +1396,15 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
         if name in {"codex", "grok"}
         else None,
     )
-    commands: list[list[str]] = []
-
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
-        commands.append(command)
-        stdout = (
-            "Logged in using ChatGPT\n"
-            if command[-2:] == ["login", "status"]
-            else "grok 1.2.3\n"
-        )
-        return subprocess.CompletedProcess(
-            command,
-            returncode=0,
-            stdout=stdout,
-            stderr="",
-        )
-
-    monkeypatch.setattr(supervisor, "_run", fake_run)
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        _agent_route_readiness,
+    )
     if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
         supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
     from ipfs_accelerate_py.agent_supervisor.integrations import (
         test_reuse_capabilities,
-    )
-    from ipfs_accelerate_py.agent_supervisor.todo_daemon import (
-        implementation_daemon,
     )
     from ipfs_accelerate_py.testing.proof_reuse import services
 
@@ -1183,20 +1441,11 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
     monkeypatch.setattr(
         test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe
     )
-    monkeypatch.setattr(
-        implementation_daemon,
-        "_grok_cli_available",
-        lambda: True,
-    )
     monkeypatch.setattr(services, "proof_reuse_dependency_plan", fake_plan)
     original_sys_path = list(supervisor.sys.path)
 
     providers = supervisor._provider_preflight()
 
-    assert commands == [
-        ["/opt/codex/bin/codex", "login", "status"],
-        ["/opt/grok/bin/grok", "--version"],
-    ]
     assert captured["probe"] == captured["plan"]
     assert captured["probe"]["IPFS_TEST_PROOF_REUSE_MODE"] == "shadow"
     assert captured["probe"]["IPFS_TEST_PROOF_REUSE_AUTO_INSTALL"] == "0"
@@ -1235,8 +1484,60 @@ def test_provider_preflight_requires_codex_fallback(
         "which",
         lambda name: "/opt/grok/bin/grok" if name == "grok" else None,
     )
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        lambda: _agent_route_readiness(codex_ready=False),
+    )
 
-    with pytest.raises(RuntimeError, match="fallback provider"):
+    with pytest.raises(RuntimeError, match="authenticated Codex CLI fallback"):
+        supervisor._provider_preflight()
+
+
+def test_provider_preflight_rejects_codex_not_logged_in_status(
+    supervisor: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        supervisor.shutil,
+        "which",
+        lambda name: f"/opt/{name}/bin/{name}"
+        if name in {"codex", "grok"}
+        else None,
+    )
+    if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
+        supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
+    from ipfs_accelerate_py import llm_router
+
+    def fake_probe(
+        command: list[str], *, timeout_seconds: float
+    ) -> tuple[int | None, str, object | None]:
+        assert timeout_seconds > 0
+        if command[-2:] == ["login", "status"]:
+            return 0, "Not logged in\n", None
+        assert command == ["/opt/grok/bin/grok", "models"]
+        return 0, "Available models:\n  * grok-4.5\n", None
+
+    monkeypatch.setattr(llm_router, "_bounded_agent_cli_probe", fake_probe)
+    monkeypatch.setattr(
+        supervisor,
+        "_grok_codex_agent_route_readiness",
+        lambda: llm_router.probe_grok_codex_agent_route_readiness(
+            grok_bin="/opt/grok/bin/grok",
+            codex_bin="/opt/codex/bin/codex",
+            grok_model="grok-4.5",
+            codex_model="gpt-5.6-terra",
+            codex_reasoning_effort="high",
+        ),
+    )
+    monkeypatch.setattr(
+        supervisor,
+        "_run",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("outer preflight must not parse raw provider status")
+        ),
+    )
+
+    with pytest.raises(RuntimeError, match="authenticated Codex CLI fallback"):
         supervisor._provider_preflight()
 
 

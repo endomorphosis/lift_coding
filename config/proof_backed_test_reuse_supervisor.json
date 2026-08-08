@@ -323,21 +323,30 @@
       "model": "gpt-5.6-terra",
       "modelReasoningEffort": "high"
     },
-    "fallbackTrigger": "grok_quota_exhausted",
-    "primaryUnavailableAction": "fail_preflight",
-    "nonQuotaFailureAction": "propagate_without_fallback",
+    "routingAuthority": "ipfs_accelerate_py.llm_router",
+    "fallbackTrigger": "grok_quota_auth_or_unavailable",
+    "primaryUnavailableAction": "use_codex_fallback",
+    "nonQuotaFailureAction": "fallback_on_auth_or_launch_else_propagate",
     "appliesTo": [
       "implementation",
       "semantic_merge_resolver"
     ],
-    "fallbackForbiddenOn": [
+    "fallbackAllowedOn": [
+      "grok_quota_exhausted",
       "authentication_failure",
-      "launch_failure",
+      "launch_failure"
+    ],
+    "fallbackRequires": [
+      "side_effects_started=false",
+      "workspace_unchanged=true"
+    ],
+    "fallbackForbiddenOn": [
       "timeout",
       "transport_failure",
       "generic_nonzero_exit",
       "malformed_output",
-      "task_failure"
+      "task_failure",
+      "side_effects_started"
     ]
   },
   "parallelRuntime": {
@@ -383,7 +392,8 @@
     ],
     "semanticMergeResolver": {
       "provider": "grok-codex",
-      "fallbackTrigger": "grok_quota_exhausted",
+      "routingAuthority": "ipfs_accelerate_py.llm_router",
+      "fallbackTrigger": "grok_quota_auth_or_unavailable",
       "inheritedCommandPolicy": "override_with_managed_provider_chain"
     },
     "worktreeSubmodulePaths": [

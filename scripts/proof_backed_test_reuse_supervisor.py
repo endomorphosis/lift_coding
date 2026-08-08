@@ -102,17 +102,116 @@ LANES = tuple(
 )
 
 
+def _grok_cli_binary() -> str:
+    """Resolve Grok through llm_router's public CLI discovery surface."""
+
+    discovered = shutil.which("grok")
+    if discovered:
+        return discovered
+    if str(ACCEL_ROOT) not in sys.path:
+        sys.path.insert(0, str(ACCEL_ROOT))
+    from ipfs_accelerate_py.llm_router import find_grok_cli
+
+    return str(find_grok_cli() or "")
+
+
+def _grok_codex_agent_route_readiness() -> object:
+    """Return llm_router's body-free readiness result for this fixed route."""
+
+    if str(ACCEL_ROOT) not in sys.path:
+        sys.path.insert(0, str(ACCEL_ROOT))
+    from ipfs_accelerate_py.llm_router import (
+        probe_grok_codex_agent_route_readiness,
+    )
+
+    return probe_grok_codex_agent_route_readiness(
+        grok_bin=_grok_cli_binary() or None,
+        codex_bin=shutil.which("codex"),
+        grok_model=str(PRIMARY_PROVIDER_POLICY["model"]),
+        codex_model=str(FALLBACK_PROVIDER_POLICY["model"]),
+        codex_reasoning_effort=str(
+            FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
+        ),
+    )
+
+
+def _route_failure_kind(readiness: object) -> str:
+    failure = getattr(readiness, "failure_kind", None)
+    return str(getattr(failure, "value", failure) or "")
+
+
+def _validated_primary_unavailable_kind(readiness: object) -> str:
+    """Validate the fixed route and return an allowed pre-dispatch kind."""
+
+    expected_models = {
+        "grok_model": str(PRIMARY_PROVIDER_POLICY["model"]),
+        "codex_model": str(FALLBACK_PROVIDER_POLICY["model"]),
+        "codex_reasoning_effort": str(
+            FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
+        ),
+    }
+    for field, expected in expected_models.items():
+        if str(getattr(readiness, field, "")) != expected:
+            raise RuntimeError(
+                f"llm_router readiness returned unexpected {field}"
+            )
+    if getattr(readiness, "codex_ready", None) is not True:
+        raise RuntimeError(
+            "PTR supervisor requires an installed and authenticated Codex "
+            "CLI fallback"
+        )
+
+    grok_ready = getattr(readiness, "grok_ready", None) is True
+    effective_provider = str(
+        getattr(readiness, "effective_provider", "") or ""
+    )
+    failure_kind = _route_failure_kind(readiness)
+    if grok_ready:
+        if effective_provider != str(PRIMARY_PROVIDER_POLICY["provider"]):
+            raise RuntimeError(
+                "llm_router readiness did not retain Grok as the ready primary"
+            )
+        if failure_kind:
+            raise RuntimeError(
+                "llm_router readiness reported a failure for a ready Grok primary"
+            )
+        return ""
+
+    if failure_kind not in {"authentication_failure", "launch_failure"}:
+        reason_code = str(getattr(readiness, "reason_code", "") or "")
+        raise RuntimeError(
+            "Grok primary readiness probe failed terminally: "
+            f"{failure_kind or reason_code or 'unknown_failure'}"
+        )
+    if effective_provider != str(FALLBACK_PROVIDER_POLICY["provider"]):
+        raise RuntimeError(
+            "llm_router readiness did not select Codex for an allowed "
+            "pre-dispatch Grok failure"
+        )
+    return failure_kind
+
+
 def _managed_merge_resolver_command() -> str:
     """Build the profile-owned semantic merge resolver provider chain.
 
     The generic implementation daemon defaults its merge resolver to a direct
     Codex invocation.  That is incompatible with this profile's Grok-primary,
-    quota-only fallback contract, so both the supervisor CLI and its runtime
+    automatic fallback contract, so both the supervisor CLI and its runtime
     environment receive this exact no-shell provider runner command.
     """
 
-    grok_binary = shutil.which("grok") or "grok"
-    codex_binary = shutil.which("codex") or "codex"
+    readiness = _grok_codex_agent_route_readiness()
+    # Validate the launch-time route contract, but do not freeze an
+    # unavailable-primary decision into the long-lived supervisor argv.  The
+    # router adapter repeats this bounded probe for each semantic-merge
+    # invocation so a recovered Grok primary is selected again automatically.
+    _validated_primary_unavailable_kind(readiness)
+    grok_binary = _grok_cli_binary()
+    codex_binary = shutil.which("codex") or ""
+    if not codex_binary:
+        raise RuntimeError(
+            "llm_router reported Codex ready but its executable is unavailable"
+        )
     # invoke_llm_resolver starts this command in the conflicted repository.
     # Keeping the workspace relative preserves that exact target for both
     # main-checkout and isolated-worktree semantic repairs.
@@ -123,7 +222,7 @@ def _managed_merge_resolver_command() -> str:
         "--workspace",
         resolver_workspace,
         "--grok-bin",
-        grok_binary,
+        grok_binary or "grok",
         "--model",
         str(PRIMARY_PROVIDER_POLICY["model"]),
         "--max-turns",
@@ -158,6 +257,17 @@ def _managed_merge_resolver_command() -> str:
         json.dumps(fallback_command, separators=(",", ":")),
         "--fallback-policy",
         str(PROVIDER_POLICY["fallbackTrigger"]),
+        "--probe-route-readiness",
+        "--probe-grok-bin",
+        grok_binary,
+        "--probe-codex-bin",
+        codex_binary,
+        "--probe-grok-model",
+        str(PRIMARY_PROVIDER_POLICY["model"]),
+        "--probe-codex-model",
+        str(FALLBACK_PROVIDER_POLICY["model"]),
+        "--probe-codex-reasoning-effort",
+        str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]),
     ]
     return shlex.join(command)
 
@@ -166,7 +276,7 @@ def _runtime_environment(provider: str | None = None) -> dict[str, str]:
     environment = dict(os.environ)
     # This dedicated profile owns its provider chain.  The implementation
     # daemon otherwise gives this generic escape hatch precedence over the
-    # configured Grok primary and quota-only Codex fallback.
+    # configured Grok primary and automatic Codex fallback.
     environment.pop("IMPLEMENTATION_DAEMON_COMMAND", None)
     # Prefer external/ipfs_datasets over accelerate's nested ipfs_datasets_py
     # submodule so test_pass_groth16_provider resolves for local e2e authority.
@@ -460,55 +570,27 @@ def _provider_preflight() -> dict[str, object]:
         import duckdb  # type: ignore
     except ImportError as exc:
         raise RuntimeError("Python cannot import required DuckDB") from exc
-    codex_binary = shutil.which("codex")
-    grok_binary = shutil.which("grok")
-    if not grok_binary:
-        raise RuntimeError(
-            "Grok CLI is required as the PTR supervisor primary provider; "
-            "Codex fallback is permitted only after confirmed Grok quota "
-            "exhaustion"
-        )
-    if not codex_binary:
-        raise RuntimeError("Codex CLI is required as the PTR supervisor fallback provider")
-    codex_status = _run(
-        [codex_binary, "login", "status"],
-        environment=_runtime_environment(),
-        timeout=30,
+    readiness = _grok_codex_agent_route_readiness()
+    grok_unavailable_reason = _validated_primary_unavailable_kind(readiness)
+    grok_ready = getattr(readiness, "grok_ready", None) is True
+    codex_ready = getattr(readiness, "codex_ready", None) is True
+    effective_provider = str(
+        getattr(readiness, "effective_provider", "") or ""
     )
-    if "logged in" not in (codex_status.stdout + codex_status.stderr).lower():
-        raise RuntimeError("Codex fallback CLI did not report an authenticated session")
-
-    try:
-        grok_version = _run(
-            [grok_binary, "--version"],
-            environment=_runtime_environment(),
-            check=False,
-            timeout=30,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise RuntimeError("Grok primary CLI could not execute during preflight") from exc
-    grok_version_text = (grok_version.stdout + grok_version.stderr).strip()
-    if grok_version.returncode != 0:
+    route_reason_code = str(
+        getattr(readiness, "reason_code", "") or ""
+    )
+    codex_binary = shutil.which("codex") or ""
+    grok_binary = _grok_cli_binary()
+    if not codex_binary:
         raise RuntimeError(
-            "Grok primary CLI --version failed during preflight: "
-            + (grok_version_text or f"exit {grok_version.returncode}")
+            "llm_router reported Codex ready but its executable is unavailable"
         )
-
-    if str(ACCEL_ROOT) not in sys.path:
-        sys.path.insert(0, str(ACCEL_ROOT))
-    try:
-        from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (  # noqa: E501
-            _grok_cli_available,
-        )
-
-        grok_authenticated = bool(_grok_cli_available())
-    except Exception:
-        grok_authenticated = False
-    if not grok_authenticated:
+    if grok_ready and not grok_binary:
         raise RuntimeError(
-            "Grok primary CLI did not report headless authentication; "
-            "Codex fallback is not allowed for authentication failures"
+            "llm_router reported Grok ready but its executable is unavailable"
         )
+    fallback_active = not grok_ready
 
     optional = {
         "multiformats": importlib.util.find_spec("multiformats") is not None,
@@ -525,10 +607,15 @@ def _provider_preflight() -> dict[str, object]:
         "python": sys.executable,
         "duckdb": duckdb.__version__,
         "codex": codex_binary,
-        "codex_status": (codex_status.stdout + codex_status.stderr).strip(),
-        "grok": grok_binary or "",
-        "grok_version": grok_version_text,
-        "grok_authenticated": grok_authenticated,
+        "codex_authenticated": codex_ready,
+        "grok": grok_binary,
+        "grok_authenticated": grok_ready,
+        "grok_ready": grok_ready,
+        "grok_failure_kind": grok_unavailable_reason,
+        "effective_provider": effective_provider,
+        "fallback_active": fallback_active,
+        "fallback_reason": grok_unavailable_reason,
+        "route_reason_code": route_reason_code,
         "provider_policy": {
             "primary": {
                 "provider": str(PRIMARY_PROVIDER_POLICY["provider"]),
@@ -539,11 +626,14 @@ def _provider_preflight() -> dict[str, object]:
                 "model": str(FALLBACK_PROVIDER_POLICY["model"]),
                 "model_reasoning_effort": str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]),
             },
+            "routing_authority": str(PROVIDER_POLICY["routingAuthority"]),
             "fallback_trigger": str(PROVIDER_POLICY["fallbackTrigger"]),
             "primary_unavailable_action": str(PROVIDER_POLICY["primaryUnavailableAction"]),
             "non_quota_failure_action": str(PROVIDER_POLICY["nonQuotaFailureAction"]),
             "applies_to": list(PROVIDER_POLICY["appliesTo"]),
             "semantic_merge_resolver": dict(PARALLEL["semanticMergeResolver"]),
+            "fallback_allowed_on": list(PROVIDER_POLICY["fallbackAllowedOn"]),
+            "fallback_requires": list(PROVIDER_POLICY["fallbackRequires"]),
             "fallback_forbidden_on": list(PROVIDER_POLICY["fallbackForbiddenOn"]),
         },
         "optional_non_blocking_capabilities": optional,
@@ -1226,6 +1316,7 @@ def _reconciliation_preflight(lane: dict[str, object]) -> None:
     output = result.stdout + result.stderr
     log_path = LOG_DIR / f"{lane['name']}_reconciliation_preflight.log"
     log_path.write_text(output, encoding="utf-8")
+    log_path.chmod(0o600)
     if result.returncode != 0:
         diagnostic = output.strip()
         if len(diagnostic) > 4000:
@@ -1289,6 +1380,8 @@ def _launch_lane(lane: dict[str, object]) -> int:
         "ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor",
         *_lane_common_arguments(lane, live=True),
     ]
+    log_path.touch(mode=0o600, exist_ok=True)
+    log_path.chmod(0o600)
     log_handle = log_path.open("ab", buffering=0)
     try:
         process = subprocess.Popen(
@@ -1299,6 +1392,7 @@ def _launch_lane(lane: dict[str, object]) -> int:
             stdout=log_handle,
             stderr=subprocess.STDOUT,
             start_new_session=True,
+            umask=0o077,
         )
     finally:
         log_handle.close()
@@ -1468,10 +1562,15 @@ def _status_payload() -> dict[str, object]:
                 "model": FALLBACK_PROVIDER_POLICY["model"],
                 "model_reasoning_effort": FALLBACK_PROVIDER_POLICY["modelReasoningEffort"],
             },
+            "routing_authority": PROVIDER_POLICY["routingAuthority"],
             "fallback_trigger": PROVIDER_POLICY["fallbackTrigger"],
+            "primary_unavailable_action": PROVIDER_POLICY["primaryUnavailableAction"],
             "non_quota_failure_action": PROVIDER_POLICY["nonQuotaFailureAction"],
             "applies_to": list(PROVIDER_POLICY["appliesTo"]),
             "semantic_merge_resolver": dict(PARALLEL["semanticMergeResolver"]),
+            "fallback_allowed_on": list(PROVIDER_POLICY["fallbackAllowedOn"]),
+            "fallback_requires": list(PROVIDER_POLICY["fallbackRequires"]),
+            "fallback_forbidden_on": list(PROVIDER_POLICY["fallbackForbiddenOn"]),
         },
         "healthy": bool(
             lanes

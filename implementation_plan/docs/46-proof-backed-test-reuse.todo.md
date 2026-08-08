@@ -119,9 +119,17 @@ receipts, restores cold-safe package-owned pytest bridges, binds the real proof
 statement to the runner attestation, validates completed-task artifacts and
 gitlinks, replays only verified historical changes, and proves a genuine
 three-repository cold/warm/forced-replay lifecycle. Every new runtime task uses
-Grok 4.5 first; Codex `gpt-5.6-terra` at high reasoning is permitted only after
-confirmed Grok quota exhaustion. Until `PTR-169` closes, old closeout packets
-cannot authorize rollout and all uncertain candidates execute normally.
+Grok 4.5 first when ready. The canonical `ipfs_accelerate_py.llm_router` agent
+route automatically selects Codex `gpt-5.6-terra` at high reasoning for
+confirmed quota exhaustion, authentication failure, or launch unavailability
+while the worktree remains unchanged. Generic task/process failure, timeout,
+malformed output, transport failure, or any detected side effect remains
+terminal and cannot trigger a second provider. The process runner is only a
+thin stdin/worktree adapter and sanitizer. This provider transition remains
+proposal-only and cannot bypass task validation, merge,
+authenticated-receipt, or current-tree gates. Until
+`PTR-169` closes, old closeout packets cannot authorize rollout and all
+uncertain candidates execute normally.
 
 ## PTR-000 Seal the supervisor-native program
 

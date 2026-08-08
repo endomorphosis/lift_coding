@@ -75,23 +75,41 @@ mutation evidence establish that it is safe.
 ### Supervisor provider execution policy
 
 The reviewed proof-reuse supervisor profile always starts implementation work
-with Grok model `grok-4.5`. Grok binary and headless-auth readiness are launch
-preflight requirements; an unavailable or unauthenticated Grok primary is not a
-reason to start Codex.
+with Grok model `grok-4.5` when that primary is ready. Preflight probes Grok
+binary and headless-auth readiness, but an unavailable, unlaunchable, or
+unauthenticated Grok primary activates the configured Codex fallback instead of
+blocking launch, provided that Codex itself is installed and authenticated.
 
-Codex is a conditional fallback with model `gpt-5.6-terra` and
-`model_reasoning_effort="high"`. The fallback runner may invoke it only after
-the failed Grok process emits a narrowly recognized, valid quota-exhaustion
-error. Authentication failures, launch failures, timeouts, transport failures,
-generic nonzero exits, rate-limit-only responses, malformed output, and task
-failures preserve the Grok failure without invoking Codex. The supervisor
-projects this model/trigger contract in preflight, start, lane, and status
-payloads.
+Codex is the automatic fallback with model `gpt-5.6-terra` and
+`model_reasoning_effort="high"`. The canonical
+`ipfs_accelerate_py.llm_router` owns provider readiness, failure
+classification, fallback selection, and route records. Its explicit agent
+route is separate from `generate_text`: it preserves the router invariant that
+side-effecting work is never replayed through a second provider. Codex is
+selected automatically only for confirmed Grok quota exhaustion,
+authentication failure, or launch unavailability while the worktree remains
+unchanged. Timeout, transport, malformed output, generic nonzero exit, task
+failure, or detected worktree mutation is terminal for that attempt.
 
-This stricter behavior is profile-scoped and opt-in through
-`IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY=grok_quota_exhausted`.
-Accelerator supervisors that do not select it retain the compatibility
-`any_failure` policy.
+Preflight records primary readiness, the effective provider, and fallback
+reason; status records the exact static router policy; and every transition
+emits typed, bounded, task/attempt/stage-bound route telemetry in the private
+runtime state and event stream. That telemetry explicitly has no completion
+authority: proposal, validation, merge, and authenticated closeout receipts
+remain the only acceptance authorities. The stdin/worktree runner is only a
+process adapter and sanitizer; it does not own provider selection. Semantic
+merge invocations repeat the typed readiness probe so a recovered Grok primary
+is selected without restarting the supervisor.
+
+This behavior is profile-scoped and selects
+`IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY=grok_quota_auth_or_unavailable`
+for both implementation and semantic merge resolution. Provider output remains
+a proposal only: automatic routing never bypasses isolated-worktree
+containment, protected-path and proposal checks, declared validation, the
+serial merge queue, authenticated test receipts, or current-tree closeout
+gates. Provider stderr is sanitized before replay or persistence, known
+credential assignments and bearer values are redacted, and spawned lane
+processes use a private file-creation mask.
 
 ## 3. Existing assets and gaps
 
@@ -975,8 +993,9 @@ reopened `PTR-161` and `PTR-162` in parallel. Their merge admits the disjoint
 the dependency-ordered `PTR-164` runtime join. Authenticity, replay, genuine e2e
 and closeout form the ordered `PTR-166` through `PTR-169` joins. Numeric shards
 preserve canonical provider identities; runtime execution remains Grok 4.5
-first with the configured high Terra fallback only on exact Grok quota
-exhaustion.
+first when ready, with automatic Codex `gpt-5.6-terra` high fallback when Grok
+is unavailable, unauthenticated, or quota-exhausted before any worktree side
+effect.
 
 ## 15. Validation strategy
 

@@ -1039,12 +1039,13 @@ def validate(
     semantic_merge_resolver = parallel.get("semanticMergeResolver")
     if semantic_merge_resolver != {
         "provider": "grok-codex",
-        "fallbackTrigger": "grok_quota_exhausted",
+        "routingAuthority": "ipfs_accelerate_py.llm_router",
+        "fallbackTrigger": "grok_quota_auth_or_unavailable",
         "inheritedCommandPolicy": "override_with_managed_provider_chain",
     }:
         errors.append(
-            "semanticMergeResolver must use the managed Grok-primary, "
-            "quota-only Codex fallback chain"
+            "semanticMergeResolver must use the llm_router-owned Grok-primary, "
+            "side-effect-safe Codex fallback chain"
         )
     provider_policy = config.get("providerPolicy")
     expected_provider_policy = {
@@ -1054,24 +1055,34 @@ def validate(
             "model": "gpt-5.6-terra",
             "modelReasoningEffort": "high",
         },
-        "fallbackTrigger": "grok_quota_exhausted",
-        "primaryUnavailableAction": "fail_preflight",
-        "nonQuotaFailureAction": "propagate_without_fallback",
+        "routingAuthority": "ipfs_accelerate_py.llm_router",
+        "fallbackTrigger": "grok_quota_auth_or_unavailable",
+        "primaryUnavailableAction": "use_codex_fallback",
+        "nonQuotaFailureAction": "fallback_on_auth_or_launch_else_propagate",
         "appliesTo": ["implementation", "semantic_merge_resolver"],
-        "fallbackForbiddenOn": [
+        "fallbackAllowedOn": [
+            "grok_quota_exhausted",
             "authentication_failure",
             "launch_failure",
+        ],
+        "fallbackRequires": [
+            "side_effects_started=false",
+            "workspace_unchanged=true",
+        ],
+        "fallbackForbiddenOn": [
             "timeout",
             "transport_failure",
             "generic_nonzero_exit",
             "malformed_output",
             "task_failure",
+            "side_effects_started",
         ],
     }
     if provider_policy != expected_provider_policy:
         errors.append(
-            "providerPolicy must retain Grok 4.5 primary and Terra high "
-            "fallback only on confirmed Grok quota exhaustion for both "
+            "providerPolicy must retain llm_router-owned Grok 4.5 primary "
+            "and Terra high fallback only for quota, authentication, or launch "
+            "unavailability before side effects for both "
             "implementation and semantic merge resolution"
         )
     if parallel.get("objectiveRefillEnabled") is not False:
