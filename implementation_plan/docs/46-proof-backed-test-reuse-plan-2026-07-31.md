@@ -880,6 +880,13 @@ historical output explicit work with current evidence:
    reopened under a new canonical task identity. The merged attempt remains
    provenance only; downstream joins must wait for a checked-in deep-input
    regression and a fresh authoritative completion receipt.
+
+   A second completion was also contradicted before any downstream join ran.
+   It repaired deep JSON but left lone-surrogate CIDs non-total, omitted the
+   required deep candidate-put regression, and allowed an ambient accelerator
+   import to mask suppression of a non-accelerator transitive error. The third
+   identity therefore places those three counterexamples directly in the
+   declared validation command as an isolated, mandatory gate.
 5. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
    the signed attestation CID and requires local signature/trust verification.
 6. `PTR-164` fixes locator-only warm lookup and makes the controller the sole

@@ -738,7 +738,7 @@ def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> Non
     )
 
     assert task.canonical_task_cid == (
-        "baguqeerabzmuizhiyg22py4oqe54shntmjmzlcmvagpzhuwbustlmae2zdaq"
+        "baguqeerak7y5laut7ihi2bfwaxxezko726zjtjofoe5c5zpvyre4lglx7i2q"
     )
     for requirement in (
         "complete accelerator plugin target is undiscoverable",
@@ -748,8 +748,19 @@ def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> Non
         "byte-, shape-, depth- and CID-bounded",
         "force the pure-Python JSON encoder",
         "without any `RecursionError`",
+        "length-valid lone-surrogate CID",
+        "non-accelerator transitive failure",
     ):
         assert requirement in task.acceptance
+    assert len(task.validation) == 1
+    for counterexample in (
+        "/usr/bin/python3 -I",
+        "chr(0xD800)",
+        "deep-put",
+        "missing requests",
+        "transitive failure was suppressed",
+    ):
+        assert counterexample in task.validation[0]
 
 
 def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(
