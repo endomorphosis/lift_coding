@@ -1,0 +1,317 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.deterministic_swissknife_mcplusplus_repair.scheduler_config@1",
+  "taskboard_path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md",
+  "objectives_path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.objectives.md",
+  "plan_path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair-plan-2026-08-08.md",
+  "validator_path": "scripts/validate_deterministic_contract_repair_board.py",
+  "task_prefix": "DCR-",
+  "goal_prefix": "DCR-G",
+  "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
+  "merge_target_branch": "chore/fmt-check-main",
+  "source_binding": {
+    "accelerator_required_ancestor": "ce448eae6ab5706832d3ae88b041f9d38ac82ae8",
+    "accelerator_required_branch": "chore/fmt-check-main",
+    "mcplusplus_submodule_path": "Mcp-Plus-Plus",
+    "mcplusplus_planning_revision": "a63c33e35275e11fd6a85600607e11e8f4c8b5eb",
+    "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
+    "ipfs_accelerate_planning_revision": "b83708afeebc756e44793170f81ce27cbb328db3",
+    "ipfs_datasets_submodule_path": "external/ipfs_datasets",
+    "ipfs_datasets_planning_revision": "fee3bc22c9f073943f82a1d6441f5e19c8350878",
+    "ipfs_kit_submodule_path": "external/ipfs_kit",
+    "ipfs_kit_planning_revision": "00bbcc8504bd5d83fe2b76148db76680b5e716e1",
+    "swissknife_submodule_path": "swissknife",
+    "swissknife_planning_revision": "aea27451602853d191aae9dc3bbaa8771bb06a18",
+    "require_initialized_gitlinks": true,
+    "require_superproject_gitlink_equals_nested_head": true,
+    "require_clean_nested_worktree_at_task_start": true,
+    "record_recursive_repository_forest_at_launch": true,
+    "changed_revision_requires_fresh_inventory_and_baseline": true,
+    "planning_revision_is_runtime_completion_evidence": false
+  },
+  "initial_projection": {
+    "task_count": 58,
+    "completed_task_ids": [],
+    "ready_task_ids": [
+      "DCR-000"
+    ],
+    "blocked_task_ids": [],
+    "terminal_task_id": "DCR-104",
+    "goal_count": 12,
+    "root_goal_id": "DCR-G000"
+  },
+  "max_lanes": 8,
+  "strict_task_sharding": true,
+  "exit_when_all_tracks_terminal": true,
+  "objective_refill_enabled": false,
+  "codebase_refill_enabled": false,
+  "poll_interval_seconds": 5,
+  "daemon_interval_seconds": 60,
+  "check_interval_seconds": 30,
+  "stale_seconds": 1800,
+  "watchdog_startup_grace_seconds": 300,
+  "max_restarts": 3,
+  "max_task_attempts": 3,
+  "implementation_retry_budget": 3,
+  "validation_retry_budget": 3,
+  "merge_retry_budget": 3,
+  "implementation_timeout_seconds": 7200,
+  "implementation_max_timeout_seconds": 21600,
+  "implementation_log_stall_seconds": 1200,
+  "worktree_submodule_paths": [
+    "Mcp-Plus-Plus",
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "swissknife"
+  ],
+  "protected_paths": [
+    "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair-plan-2026-08-08.md",
+    "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.objectives.md",
+    "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md",
+    "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
+    "config/deterministic_contract_repair_authority.json",
+    "config/deterministic_contract_repair_roots.json",
+    "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+    "scripts/validate_deterministic_contract_repair_board.py"
+  ],
+  "runtime_paths": {
+    "root": "data/agent_supervisor/deterministic_contract_repair",
+    "state": "data/agent_supervisor/deterministic_contract_repair/state",
+    "worktrees": "data/agent_supervisor/deterministic_contract_repair/worktrees",
+    "merge_queue": "data/agent_supervisor/deterministic_contract_repair/merge-queue",
+    "logs": "data/agent_supervisor/deterministic_contract_repair/logs",
+    "evidence": "data/agent_supervisor/deterministic_contract_repair/evidence",
+    "generated_runtime_artifacts_are_completion_authority": false
+  },
+  "lanes": [
+    {
+      "index": 0,
+      "name": "dcr-lane-0",
+      "strict_shard_remainder": 0,
+      "initial_task_ids": [
+        "DCR-000"
+      ],
+      "initial_focus": "control-authority"
+    },
+    {
+      "index": 1,
+      "name": "dcr-lane-1",
+      "strict_shard_remainder": 1,
+      "initial_task_ids": [],
+      "initial_focus": "evidence-catalog"
+    },
+    {
+      "index": 2,
+      "name": "dcr-lane-2",
+      "strict_shard_remainder": 2,
+      "initial_task_ids": [],
+      "initial_focus": "logic-proof"
+    },
+    {
+      "index": 3,
+      "name": "dcr-lane-3",
+      "strict_shard_remainder": 3,
+      "initial_task_ids": [],
+      "initial_focus": "repair-operators"
+    },
+    {
+      "index": 4,
+      "name": "dcr-lane-4",
+      "strict_shard_remainder": 4,
+      "initial_task_ids": [],
+      "initial_focus": "doctor-planner"
+    },
+    {
+      "index": 5,
+      "name": "dcr-lane-5",
+      "strict_shard_remainder": 5,
+      "initial_task_ids": [],
+      "initial_focus": "transaction-supervisor"
+    },
+    {
+      "index": 6,
+      "name": "dcr-lane-6",
+      "strict_shard_remainder": 6,
+      "initial_task_ids": [],
+      "initial_focus": "conformance"
+    },
+    {
+      "index": 7,
+      "name": "dcr-lane-7",
+      "strict_shard_remainder": 7,
+      "initial_task_ids": [],
+      "initial_focus": "release-drift"
+    }
+  ],
+  "waves": [
+    {
+      "id": "W0",
+      "task_ids": [
+        "DCR-000"
+      ]
+    },
+    {
+      "id": "W1",
+      "task_ids": [
+        "DCR-001",
+        "DCR-002",
+        "DCR-003",
+        "DCR-004"
+      ]
+    },
+    {
+      "id": "W2",
+      "task_ids": [
+        "DCR-010",
+        "DCR-011",
+        "DCR-012",
+        "DCR-013",
+        "DCR-014"
+      ]
+    },
+    {
+      "id": "W3",
+      "task_ids": [
+        "DCR-020",
+        "DCR-021",
+        "DCR-022",
+        "DCR-023",
+        "DCR-024"
+      ]
+    },
+    {
+      "id": "W4",
+      "task_ids": [
+        "DCR-030",
+        "DCR-031",
+        "DCR-032",
+        "DCR-033",
+        "DCR-034",
+        "DCR-035"
+      ]
+    },
+    {
+      "id": "W5",
+      "task_ids": [
+        "DCR-040",
+        "DCR-041",
+        "DCR-042",
+        "DCR-043",
+        "DCR-044",
+        "DCR-045",
+        "DCR-046",
+        "DCR-047"
+      ]
+    },
+    {
+      "id": "W6",
+      "task_ids": [
+        "DCR-050",
+        "DCR-051",
+        "DCR-052",
+        "DCR-053"
+      ]
+    },
+    {
+      "id": "W7",
+      "task_ids": [
+        "DCR-060",
+        "DCR-061",
+        "DCR-062",
+        "DCR-063",
+        "DCR-064"
+      ]
+    },
+    {
+      "id": "W8",
+      "task_ids": [
+        "DCR-070",
+        "DCR-071",
+        "DCR-072",
+        "DCR-073",
+        "DCR-074"
+      ]
+    },
+    {
+      "id": "W9",
+      "task_ids": [
+        "DCR-080",
+        "DCR-081",
+        "DCR-082",
+        "DCR-083",
+        "DCR-084"
+      ]
+    },
+    {
+      "id": "W10",
+      "task_ids": [
+        "DCR-090",
+        "DCR-091",
+        "DCR-092",
+        "DCR-093",
+        "DCR-094"
+      ]
+    },
+    {
+      "id": "W11",
+      "task_ids": [
+        "DCR-100",
+        "DCR-101",
+        "DCR-102",
+        "DCR-103",
+        "DCR-104"
+      ]
+    }
+  ],
+  "provider": {
+    "primary_provider_id": "grok_cli",
+    "primary_model_id": "grok-4.5",
+    "fallback_provider_id": "codex",
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_trigger": "primary_quota_exhausted",
+    "fallback_reasoning_effort": "high",
+    "max_concurrency": 8,
+    "provider_fallback_for_other_failures": false,
+    "secrets_from_environment_only": true,
+    "secrets_in_argv_prompts_logs_or_receipts": false
+  },
+  "execution_policy": {
+    "implementation_authoring_mode": "ordered_provider",
+    "implementation_provider_role": "grok-implement, codex-review",
+    "repair_runtime_mode": "deterministic_only",
+    "symbolic_first": true,
+    "repair_runtime_model_calls": 0,
+    "repair_runtime_llm_calls": 0,
+    "implementation_llm_context_budget_bytes": 262144,
+    "implementation_context_budget_tokens": 16384,
+    "provider_fallback_allowed_only_for_primary_quota_exhaustion": true,
+    "network_mode": "deny_except_explicit_loopback_conformance",
+    "unknown_or_unsupported_disposition": "defer_capability",
+    "ambiguous_or_unsafe_disposition": "abstain_review",
+    "completion_from_task_prose": false,
+    "current_tree_reproof_required": true
+  },
+  "nested_repository_policy": {
+    "task_specific_nested_branch_required": true,
+    "nested_commit_before_parent_gitlink_update": true,
+    "parent_gitlink_updates_serialized_by_merge_queue": true,
+    "rebase_nested_change_on_latest_accepted_gitlink": true,
+    "rerun_nested_validation_after_rebase": true,
+    "dirty_or_detached_nested_completion_allowed": false,
+    "broad_snapshot_merge_allowed": false,
+    "cross_repository_tasks_require_independent_commits_and_receipts": true
+  },
+  "safety_floors": {
+    "repair_runtime_model_calls": 0,
+    "repair_runtime_llm_calls": 0,
+    "repair_runtime_remote_provider_calls": 0,
+    "implementation_fallback_without_primary_quota_exhaustion": 0,
+    "unapproved_implementation_provider_calls": 0,
+    "synthetic_authority_receipts": 0,
+    "unknown_promoted_to_success": 0,
+    "unproved_mutations": 0,
+    "false_completion_without_current_reproof": 0,
+    "failed_transaction_residue": 0,
+    "out_of_scope_writes": 0
+  }
+}
