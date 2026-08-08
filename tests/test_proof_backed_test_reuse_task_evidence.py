@@ -146,3 +146,86 @@ def test_wrong_gitlink_pin_is_not_treated_as_a_present_output(tmp_path: Path) ->
     validator.snapshot.gitlinks["scripts"] = "0" * 40
     report = validator.audit()
     assert "GITLINK_PIN_MISMATCH" in {gap["kind"] for gap in report["gaps"]}
+
+
+def write_event_log(root: Path, lane: int = 0) -> None:
+    """Write the controller's v1/v6/v8 manifest-and-chain shape."""
+    directory = root / "state" / f"ptr_lane_{lane}"
+    directory.mkdir(parents=True, exist_ok=True)
+    event = {
+        "sequence": 1, "event_id": "sha256:event-1", "previous_event_id": "",
+        "stream_id": "event-log:test", "snapshot_id": "event-log-snapshot:test",
+    }
+    raw = (json.dumps(event, sort_keys=True) + "\n").encode()
+    events = directory / f"ptr_lane_{lane}_events.jsonl"
+    events.write_bytes(raw)
+    manifest = {
+        "schema": "ipfs_accelerate_py.agent_supervisor.event-log-manifest@2",
+        "active_path": events.name, "stream_id": event["stream_id"], "snapshot_id": event["snapshot_id"],
+        "last_event_id": event["event_id"], "files": [{"path": events.name, "size_bytes": len(raw), "event_count": 1,
+        "first_sequence": 1, "last_sequence": 1, "start_previous_event_id": "", "sha256": evidence._sha256(raw)}],
+    }
+    manifest["manifest_digest"] = evidence._sha256(evidence.canonical_json(manifest))
+    (directory / f"ptr_lane_{lane}_events.jsonl.manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+
+
+def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_path: Path) -> None:
+    repo = make_repo(tmp_path)
+    snapshot = evidence.GitSnapshot(repo)
+    parent = tmp_path / "state-home"
+    roots = {name: parent / f"proof-backed-test-reuse-{name}" for name in ("v1", "v6", "v8")}
+    for root in roots.values():
+        for lane in range(3):
+            write_event_log(root, lane)
+    command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
+    task = evidence.Task("PTR-160", "fixture", "completed", (), ("scripts/owned.py",), command,
+                         evidence.validation_targets(command), "G160", "task/v1/fixture", "baguqeerafixture")
+    request, dedupe = "request-160", "dedupe-160"
+    queue = {
+        "task_id": task.task_id, "request_id": request, "dedupe_key": dedupe,
+        "canonical_task_key": task.canonical_task_key, "canonical_task_id": task.canonical_task_cid,
+        "metadata": {"schema": "ipfs_accelerate_py/agent-supervisor/merge-candidate@3", "task": {
+            "board_namespace": evidence.BOARD_NAMESPACE, "canonical_task_key": task.canonical_task_key,
+            "canonical_task_cid": task.canonical_task_cid}},
+    }
+    train = {
+        "request_id": request, "canonical_task_id": task.canonical_task_key, "task_id": task.task_id,
+        "status": "merged", "integrated": True, "merged": True,
+        "merge_result": {"merged": True, "returncode": 0, "integration_commit_proof": {
+            "passed": True, "integration_commit": snapshot.commit}},
+    }
+    (roots["v8"] / "merge-queue" / "completed").mkdir(parents=True)
+    (roots["v8"] / "merge-queue" / "train" / "receipts").mkdir(parents=True)
+    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
+    (roots["v8"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(json.dumps(train), encoding="utf-8")
+    validation = {
+        "schema": "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1",
+        "task_id": task.task_id, "task_cid": task.canonical_task_cid, "goal_id": task.goal_id,
+        "validation_command": command, "validation_command_cid": evidence._validation_command_cid(command),
+    }
+    validation["validation_receipt_cid"] = evidence.canonical_cid(validation)
+    receipt_dir = roots["v1"] / "projection" / "completion" / "validation_receipts"
+    receipt_dir.mkdir(parents=True)
+    (receipt_dir / "PTR-160.json").write_text(json.dumps(validation), encoding="utf-8")
+    receipts, validations, gaps = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    assert gaps == []
+    assert receipts[task.task_id][0].commit == snapshot.commit
+    assert validations[task.task_id][0]["validation_receipt_cid"] == validation["validation_receipt_cid"]
+    # A lookalike nested row cannot replace the sealed completed location.
+    (roots["v8"] / "untrusted.json").write_text(json.dumps(queue), encoding="utf-8")
+    assert evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)[0] == receipts
+    queue["metadata"]["task"]["canonical_task_cid"] = "baguqeera-substituted"
+    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
+    _, _, rejected = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    assert "QUEUE_TASK_IDENTITY_MISMATCH" in {gap.kind for gap in rejected}
+
+
+def test_sealed_queue_rejects_unbound_task_identity_and_broken_event_chain(tmp_path: Path) -> None:
+    root = tmp_path / "proof-backed-test-reuse-v8"
+    write_event_log(root)
+    manifest = root / "state" / "ptr_lane_0" / "ptr_lane_0_events.jsonl.manifest.json"
+    value = json.loads(manifest.read_text())
+    value["last_event_id"] = "sha256:substituted"
+    value["manifest_digest"] = evidence._sha256(evidence.canonical_json({key: item for key, item in value.items() if key != "manifest_digest"}))
+    manifest.write_text(json.dumps(value), encoding="utf-8")
+    assert "STATE_ROOT_EVENT_TAIL_INVALID" in {gap.kind for gap in evidence._verify_event_log("v8", root)}
