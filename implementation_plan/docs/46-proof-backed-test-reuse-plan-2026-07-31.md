@@ -78,7 +78,7 @@ preflight requirements; an unavailable or unauthenticated Grok primary is not a
 reason to start Codex.
 
 Codex is a conditional fallback with model `gpt-5.6-terra` and
-`model_reasoning_effort="medium"`. The fallback runner may invoke it only after
+`model_reasoning_effort="high"`. The fallback runner may invoke it only after
 the failed Grok process emits a narrowly recognized, valid quota-exhaustion
 error. Authentication failures, launch failures, timeouts, transport failures,
 generic nonzero exits, rate-limit-only responses, malformed output, and task
@@ -429,6 +429,15 @@ entry-point autoload is disabled by the hermetic supervisor. An explicit
 `-p ipfs_accelerate_py.testing.proof_reuse.plugin` remains supported. Importing
 the plugin performs no network access, daemon startup, cache creation, or ZK
 probe.
+
+Each package `__init__.py` exposes only a narrow, lazy proof-reuse bootstrap
+facade used by these registration paths; it does not eagerly import pytest,
+proof systems, cache clients, or daemon code. Package `__init__.py` cannot be
+the sole registration mechanism because pytest is not required to import the
+package before collecting an arbitrary test module. The `pytest11` plus root
+`conftest.py` composition therefore provides the requested no-test-rewrite
+injection while the `__init__.py` facade keeps package-specific wiring lazy and
+side-effect free.
 
 ### 10.3 Modes
 
@@ -806,7 +815,7 @@ after both merge. `PTR-153` and `PTR-154` then occupy shards 0 and 1 with
 disjoint predicted files; the shared merge queue serializes their accelerator
 gitlink publication before shard-2 `PTR-155` joins them. `PTR-149` remains last.
 Numeric shards preserve historical canonical provider identities; runtime
-execution remains Grok 4.5 first with the configured medium Terra fallback only
+execution remains Grok 4.5 first with the configured high Terra fallback only
 on exact Grok quota exhaustion.
 
 ## 15. Validation strategy

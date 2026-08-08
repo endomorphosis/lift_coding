@@ -791,7 +791,7 @@ def validate(
         "fallback": {
             "provider": "codex",
             "model": "gpt-5.6-terra",
-            "modelReasoningEffort": "medium",
+            "modelReasoningEffort": "high",
         },
         "fallbackTrigger": "grok_quota_exhausted",
         "primaryUnavailableAction": "fail_preflight",
@@ -809,7 +809,7 @@ def validate(
     }
     if provider_policy != expected_provider_policy:
         errors.append(
-            "providerPolicy must retain Grok 4.5 primary and Terra medium "
+            "providerPolicy must retain Grok 4.5 primary and Terra high "
             "fallback only on confirmed Grok quota exhaustion for both "
             "implementation and semantic merge resolution"
         )
