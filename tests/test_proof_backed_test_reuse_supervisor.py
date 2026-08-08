@@ -812,24 +812,50 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
 
     assert task.status == "todo"
     assert task.canonical_task_cid == (
-        "baguqeeradb7xi62tzbuffd4hcu6xp6avlmqvlnnuvw7zlc5bdfbslscqpvta"
+        "baguqeeraw5xti4zdkdtxrespsc6r74kykvoikonb3ybxeu7tyf3nqtzjz6iq"
     )
     for requirement in (
+        "standalone `validate(objective, todo, config, plan)` board gate",
+        "`valid=true`, `errors=[]` and `task_count=77`",
+        "77 unique records in namespace `proof-backed-test-reuse-v1`",
         "exact `(task_id, canonical_task_key, canonical_task_cid)`",
         "never rederives a private task CID",
         "`IPFS_PROOF_REUSE_STATE_ROOT`",
-        "arbitrary JSON, reports, failed/quarantined rows",
+        "`IPFS_PROOF_REUSE_STATE_ROOT` is the complete override",
+        "reviewed sibling `proof-backed-test-reuse-v1` and `proof-backed-test-reuse-v6` roots",
+        "`project_managed_merge_queue_record`",
+        "never as authentication",
+        "`dedupe_key` equal to the train filename stem",
+        "queue canonical CID/key and train canonical key",
+        "Recovery-only records without request/dedupe/train binding",
+        "manifest/hash-chain-verified JSONL reconciliation events",
+        "never supervisor/preflight logs or a reader that repairs the evidence",
+        "`implementation_branch_already_merged`",
+        "`ipfs_accelerate_py.agent_supervisor.member_completion_receipt@1`",
+        "`ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1`",
+        "`projection/completion/validation_receipts/PTR-*.json`",
+        "`validation_receipt_cid` from the body without the claim",
+        "imports canonical `validation_command_identity`",
+        '`{"command": command.strip()}`',
+        "exact task ID/CID/goal ID",
+        "clean/dirty-overlay binding",
+        "Arbitrary JSON, reports",
+        "failed/quarantined rows",
         "pass/exit-zero/zero-skip",
         "sealed historical-missing-artifact quarantine",
         "including PTR-163",
         "excludes wall-clock time, absolute roots, report paths, mtimes and scan order",
         "`audit_valid` from `ready`",
-        "missing/malformed root, board, receipt chain or scan fails closed",
+        "missing/malformed reviewed root, board, receipt chain, manifest or scan fails closed",
+        "76-, two- and one-task boards",
+        "v1 PTR-011/PTR-041 successful-plus-failed reconciliation chain/manifest",
     ):
         assert requirement in task.acceptance
     todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
     assert "77aea5348cd6675e628454e9975e0937323961b2" in todo_text
     assert "zero of 71 completion/validation receipts" in todo_text
+    assert "accepted just 3 of 70 completions and 0 of 70 validations" in todo_text
+    assert "baguqeerar47kmz4pukq2hsfzjerdc3tkhm44aw7k62swqg6xzd4c3javw44q" in todo_text
 
 
 def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(

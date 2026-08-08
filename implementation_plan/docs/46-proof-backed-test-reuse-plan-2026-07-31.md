@@ -915,9 +915,13 @@ historical output explicit work with current evidence:
    Its first merged collector was itself contradicted: it derived task CIDs
    using a private formula, accepted arbitrary JSON with blank task identity,
    ignored authenticated JSONL reconciliation and the configured state-root
-   base, and returned success for a synthetic 0-of-71/292-gap report. PTR-165
-   is reopened under a new identity. The replacement must consume canonical
-   supervisor task identities and supported receipt schemas, distinguish an
+   base, and returned success for a synthetic 0-of-71/292-gap report. A second,
+   quiesced draft still scanned only v8, invented validation schemas and the
+   command-CID projection, and accepted a fabricated one-task universe as
+   `audit_valid=true`, `ready=true`. PTR-165 is therefore revised again. The
+   replacement must first validate the exact 77-task board, consume only the
+   reviewed v1/v6/v8 queue, train, flat executed-validation and hash-chain event
+   formats through existing supervisor identity adapters, distinguish an
    invalid audit from a valid non-ready result, preserve explicit pending-owner
    attribution, and produce a byte-deterministic CID-addressed observation.
 8. `PTR-166` uses the real backend to prove that unsigned, wrongly signed,
