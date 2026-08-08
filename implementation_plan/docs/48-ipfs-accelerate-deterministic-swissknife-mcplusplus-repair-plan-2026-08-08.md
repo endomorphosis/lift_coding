@@ -533,7 +533,7 @@ foundation, not a production repair release:
   reports 12 goals, 58 tasks, 12 waves, and no errors or warnings;
 - the generic configured-board loader accepts the eight-lane scheduler and the
   exact `grok-4.5` then quota-only `gpt-5.6-terra/high` authoring route;
-- the clean DCR-000–004 bootstrap suite passes 90 tests, including the
+- the clean DCR-000–004 bootstrap suite passes 91 tests, including the
   multi-supervisor handoff that preserves Terra `high` while retaining the
   legacy Terra `medium` default;
 - in the preserved development overlay, 265 focused deterministic supervisor
