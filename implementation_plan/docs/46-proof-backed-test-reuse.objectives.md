@@ -48,7 +48,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Acceptance criteria: ptr/cross-repository-current-tree-gate@1; ptr/zero-false-authoritative-skip@1; ptr/warm-reuse-benchmark@1; ptr/supervisor-launch-health@1
 - Outputs: implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md, implementation_plan/docs/46-proof-backed-test-reuse.objectives.md, implementation_plan/docs/46-proof-backed-test-reuse.todo.md, config/proof_backed_test_reuse_supervisor.json, scripts/validate_proof_backed_test_reuse_board.py, scripts/proof_backed_test_reuse_supervisor.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py -q
-- Acceptance: Every child goal has current typed evidence; every authoritative skip binds an exact trusted pass receipt and locally verified real certificate; zero stale or false skips occur; optional dependency loss always runs tests; the warm eligible population demonstrates useful savings.
+- Acceptance: Every child goal has current typed evidence, including the G130 datasets and kit V3 bootstrap contracts for the current tree; V2 bootstrap receipts cannot satisfy the reopened v7 runtime goal; every authoritative skip binds an exact trusted pass receipt and locally verified real certificate; zero stale or false skips occur; optional dependency loss always runs tests; the warm eligible population demonstrates useful savings.
 - Gap task: Complete authenticated current-tree repair PTR-160 through PTR-169 and invoke operator closeout only after all 76 tasks have current artifact, ancestry, validation, signed-receipt, real-proof and genuine cold/warm/replay evidence; the historical PTR-149/66-task packet is provenance only.
 - Refinement: Preserve one shared policy/plugin and split stable locator seeding, real Groth16 issuance, retained proof-bearing material, controller-owned candidate context, fresh two-stage revalidation, cold trace publication, controller composition, explicit setup-facing lazy provisioning, an auditable v4 native backend, fail-closed key/source/binary provenance, exact V2 local verification, genuine cross-repository e2e, and refreshed authority into independently reviewable child goals.
 - Embedding query: exact proof-backed pytest reuse AST trace CID multihash pass receipt ZK cache graceful degradation all three IPFS Python repositories
@@ -282,7 +282,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Fib priority: 1
 - Priority: P0
 - Track: authenticated-proof-authority
-- Bundle: proof-test-reuse/authenticated-authority-v6
+- Bundle: proof-test-reuse/authenticated-authority-v7
 - Goal: Ensure that a proof-carrying cache hit derives pass authority from a cryptographically authenticated complete runner receipt, not from self-asserted fields or proving-key possession.
 - Evidence: ptr/runner-pass-attestation@1, ptr/test-pass-statement-v5@1, ptr/authenticated-real-backend-adversarial@1
 - Acceptance criteria: ptr/runner-pass-attestation@1; ptr/test-pass-statement-v5@1; ptr/authenticated-real-backend-adversarial@1
@@ -302,13 +302,13 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Fib priority: 2
 - Priority: P0
 - Track: reachable-zero-config-runtime
-- Bundle: proof-test-reuse/reachable-runtime-v6
+- Bundle: proof-test-reuse/reachable-runtime-v7
 - Goal: Make ordinary installed and source-checkout pytest invocations in all three repositories discover a cold-safe bridge and reach exact locator/current-context lookup without test rewrites.
-- Evidence: ptr/datasets-bootstrap-v2@1, ptr/kit-bootstrap-v2@1, ptr/authenticated-runtime-composition@1
-- Acceptance criteria: ptr/datasets-bootstrap-v2@1; ptr/kit-bootstrap-v2@1; ptr/authenticated-runtime-composition@1
-- Outputs: external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_locator_only_warm_path.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py -q
-- Acceptance: Unique `pytest11` bridges plus conditional module-level root `pytest_plugins` load without `-p` or test edits; package-owned bridges are always importable and inert when accelerator is absent; package `__init__` files expose lazy facades only and never install, build, download, start daemons or touch user state; ordinary items reach two-stage lookup; current context and signed authority are revalidated; no plugin/cache/prover/transport failure prevents real test execution.
+- Evidence: ptr/datasets-bootstrap-v3@1, ptr/kit-bootstrap-v3@1, ptr/authenticated-runtime-composition@1
+- Acceptance criteria: ptr/datasets-bootstrap-v3@1; ptr/kit-bootstrap-v3@1; ptr/authenticated-runtime-composition@1
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_locator_only_warm_path.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py -q
+- Acceptance: Only current `ptr/datasets-bootstrap-v3@1` and `ptr/kit-bootstrap-v3@1` evidence satisfies the repository bootstrap boundary; V2 receipts are stale for this goal. Unique `pytest11` bridges plus conditional module-level root `pytest_plugins` load without `-p` or test edits in isolated installed and source direct-node subprocesses; a namespace-only empty accelerator hierarchy left by an uninitialized gitlink is treated as optional absence and remains an inert no-op, while a regular installed-style `ipfs_accelerate_py/__init__.py` whose testing/plugin hierarchy is missing exposes `ModuleNotFoundError` rather than being mistaken for optional absence; package-owned bridges never suppress a transitive failure from an accelerator plugin that was actually found; package `__init__` files expose lazy facades only and never install, build, download, start daemons or touch user state; ordinary items reach two-stage lookup; current context and signed authority are revalidated; no genuinely absent optional plugin/cache/prover/transport prevents real test execution.
 - Gap task: PTR-161, PTR-162, PTR-164
 - Refinement: Recover reachable package surfaces independently, then join them with the accelerator's locator-first and controller-only runtime.
 - Embedding query: pytest11 lazy bridge no test rewrite locator only warm lookup current context xdist controller publication
@@ -322,7 +322,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Fib priority: 3
 - Priority: P0
 - Track: authenticated-current-tree-assurance
-- Bundle: proof-test-reuse/current-tree-assurance-v6
+- Bundle: proof-test-reuse/current-tree-assurance-v7
 - Goal: Reconcile historical implementation onto reachable exact gitlinks and publish fresh 76-task evidence from genuine ordinary pytest cold/warm/replay and adversarial runs.
 - Evidence: ptr/completed-task-artifact-evidence@1, ptr/verified-history-replay@1, ptr/genuine-three-repository-e2e-v2@1, ptr/authenticated-current-tree-gate-v5@1
 - Acceptance criteria: ptr/completed-task-artifact-evidence@1; ptr/verified-history-replay@1; ptr/genuine-three-repository-e2e-v2@1; ptr/authenticated-current-tree-gate-v5@1

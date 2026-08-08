@@ -230,6 +230,11 @@ AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS = frozenset(
     }
 )
 AUTHENTICATED_RECEIPT_WAVE_A = frozenset({"PTR-160", "PTR-161", "PTR-162"})
+# PTR-160 is retained as completed evidence while the two repository bootstrap
+# owners are explicitly reopened.  Keep this distinct from Wave A: the latter
+# is the sealed DAG/scheduling simulation, while this set is the claimable
+# frontier for the fresh current-tree review.
+AUTHENTICATED_RECEIPT_REOPENED_READY = frozenset({"PTR-161", "PTR-162"})
 AUTHENTICATED_RECEIPT_WAVE_B = frozenset({"PTR-163", "PTR-165"})
 AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID = "PTR-164"
 AUTHENTICITY_JOIN_TASK_ID = "PTR-166"
@@ -651,6 +656,8 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "external/ipfs_datasets/tests/unit/"
             "test_proof_reuse_optional_plugin_startup.py",
             "external/ipfs_datasets/tests/unit/"
+            "test_proof_reuse_isolated_bootstrap_subprocess.py",
+            "external/ipfs_datasets/tests/unit/"
             "test_setup_side_effect_defaults.py",
         }
     ),
@@ -669,6 +676,8 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py",
             "external/ipfs_kit/tests/test_proof_reuse_zero_config.py",
             "external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py",
+            "external/ipfs_kit/tests/"
+            "test_proof_reuse_isolated_bootstrap_subprocess.py",
             "external/ipfs_kit/tests/test_proof_certificate_store.py",
             "external/ipfs_kit/tests/test_reuse_capabilities.py",
             "external/ipfs_kit/tests/test_content_addressed_artifact_store.py",
@@ -957,7 +966,7 @@ def validate(
         "taskPrefix": "## PTR-",
         "boardNamespace": "proof-backed-test-reuse-v1",
         "defaultStateRootSuffix": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-v6"
+            "ipfs_accelerate_py/proof-backed-test-reuse-v7"
         ),
     }
     for field, expected in expected_config.items():
@@ -1053,10 +1062,10 @@ def validate(
     if not isinstance(preflight_config, dict):
         errors.append("configuration preflight must be an object")
         preflight_config = {}
-    if preflight_config.get("requireInitialConflictFreeWidth") != 3:
+    if preflight_config.get("requireInitialConflictFreeWidth") != 2:
         errors.append(
             "preflight.requireInitialConflictFreeWidth must match the reviewed "
-            "three-task authenticated-receipt first wave"
+            "two-task reopened current-tree frontier"
         )
     if tuple(parallel.get("worktreeSubmodulePaths") or ()) != EXPECTED_SUBMODULES:
         errors.append(
@@ -1147,7 +1156,7 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "authenticated-receipt-current-tree-repair-v6"
+        "authenticated-receipt-current-tree-repair-v7"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
@@ -1161,7 +1170,7 @@ def validate(
         )
     if frozenset(
         objective_projection.get("initialClaimableTaskIds") or ()
-    ) != AUTHENTICATED_RECEIPT_WAVE_A:
+    ) != AUTHENTICATED_RECEIPT_REOPENED_READY:
         errors.append(
             "objectiveProjection initial claimable task inventory mismatch"
         )
@@ -1212,7 +1221,7 @@ def validate(
     )
     if stale_projection_fields:
         errors.append(
-            "objectiveProjection retains stale pre-v6 fields: "
+            "objectiveProjection retains stale pre-v7 fields: "
             f"{stale_projection_fields}"
         )
     if objective_projection.get("sealedTaskCount") != 76:
@@ -1621,10 +1630,10 @@ def validate(
             parallel.get("initialClaimableTaskIds") or ()
         )
     )
-    if configured_initial_ready != AUTHENTICATED_RECEIPT_WAVE_A:
+    if configured_initial_ready != AUTHENTICATED_RECEIPT_REOPENED_READY:
         errors.append(
             "configured initial claimable tasks mismatch: expected "
-            f"{sorted(AUTHENTICATED_RECEIPT_WAVE_A)}, got "
+            f"{sorted(AUTHENTICATED_RECEIPT_REOPENED_READY)}, got "
             f"{sorted(configured_initial_ready)}"
         )
     if completed_ids == {"PTR-000"}:
@@ -1738,6 +1747,25 @@ def validate(
         errors.append(
             "authenticated-receipt correction claimable tasks must be "
             f"{sorted(AUTHENTICATED_RECEIPT_WAVE_A)}, got "
+            f"{sorted(claimable_task_ids)}"
+        )
+    authenticated_reopened_frontier = (
+        task_by_id["PTR-160"].status == "completed"
+        and all(
+            task_by_id[task_id].status == "todo"
+            for task_id in (
+                AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS - {"PTR-160"}
+            )
+        )
+    )
+    if (
+        pre_authenticated_correction_task_ids.issubset(completed_ids)
+        and authenticated_reopened_frontier
+        and claimable_task_ids != AUTHENTICATED_RECEIPT_REOPENED_READY
+    ):
+        errors.append(
+            "reopened authenticated-receipt correction claimable tasks must be "
+            f"{sorted(AUTHENTICATED_RECEIPT_REOPENED_READY)}, got "
             f"{sorted(claimable_task_ids)}"
         )
     lane_count = int(parallel.get("laneCount") or 0)
@@ -2241,18 +2269,26 @@ def validate(
     expected_historical_missing_artifact_set = set(
         EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS
     )
-    expected_artifacts_no_longer_missing = sorted(
+    resolved_historical_artifacts = sorted(
         expected_historical_missing_artifact_set - historical_missing_artifact_set
     )
     unexpected_historical_missing_artifacts = sorted(
         historical_missing_artifact_set - expected_historical_missing_artifact_set
     )
-    if expected_artifacts_no_longer_missing or unexpected_historical_missing_artifacts:
+    # The literal ledger records the only reviewed historical gaps and their
+    # immutable correction owners; it is not a requirement that those paths
+    # remain absent forever.  A path disappearing from the live missing set is
+    # expected progress.  Only a newly observed gap outside the sealed ledger
+    # is baseline drift.
+    if unexpected_historical_missing_artifacts:
         errors.append(
-            "historical missing output/validation artifact baseline mismatch: "
-            f"expected-but-not-missing={expected_artifacts_no_longer_missing}, "
+            "historical missing output/validation artifact baseline drift: "
             f"unexpected-missing={unexpected_historical_missing_artifacts}"
         )
+    ownership_audit_paths = (
+        expected_historical_missing_artifact_set
+        | set(unexpected_historical_missing_artifacts)
+    )
     correction_owners_by_path = {
         path: tuple(
             sorted(
@@ -2261,7 +2297,7 @@ def validate(
                 if path in predicted_by_task[task_id]
             )
         )
-        for path in sorted(historical_missing_artifact_set)
+        for path in sorted(ownership_audit_paths)
     }
     exact_owner_assignment_mismatches = {
         path: {
@@ -2280,12 +2316,9 @@ def validate(
             + json.dumps(exact_owner_assignment_mismatches, sort_keys=True)
         )
     uncovered_historical_artifacts = sorted(
-        {
-            path
-            for path, owners in correction_owners_by_path.items()
-            if not owners
-        }
-        | set(unexpected_historical_missing_artifacts)
+        path
+        for path, owners in correction_owners_by_path.items()
+        if not owners
     )
     multi_owned_historical_artifacts = {
         path: list(owners)
@@ -2397,9 +2430,16 @@ def validate(
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
         "initial_ready_task_ids": sorted(
-            AUTHENTICATED_RECEIPT_WAVE_A
+            AUTHENTICATED_RECEIPT_REOPENED_READY
         ),
-        "initial_ready_shards": sorted(authenticated_wave_a_shards),
+        "initial_ready_shards": sorted(
+            {
+                int(task_id.rsplit("-", 1)[1]) % lane_count
+                for task_id in AUTHENTICATED_RECEIPT_REOPENED_READY
+            }
+            if lane_count > 0
+            else set()
+        ),
         "sealed_initial_ready_task_ids": sorted(SEALED_INITIAL_READY),
         "sealed_initial_ready_shards": sorted(sealed_initial_shards),
         "reviewed_extension_task_ids": sorted(COMPLETION_EXTENSION_TASK_IDS),
@@ -2554,8 +2594,11 @@ def validate(
         "expected_historical_missing_artifact_owners": dict(
             sorted(EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS.items())
         ),
+        "resolved_historical_artifact_paths": resolved_historical_artifacts,
+        # Retained for report consumers created before the ledger became
+        # progression-aware.
         "expected_historical_artifacts_no_longer_missing": (
-            expected_artifacts_no_longer_missing
+            resolved_historical_artifacts
         ),
         "unexpected_historical_missing_artifact_paths": (
             unexpected_historical_missing_artifacts

@@ -101,16 +101,22 @@ revalidation, and the existing test-pass witness does not bind a verifiable
 runner signature. Historical status records remain provenance only.
 
 The bounded corrective population is `PTR-160` through `PTR-169`, bringing the
-sealed population to 76 tasks. Its first claimable wave is exactly `PTR-160`,
+sealed population to 76 tasks. Its original v6 claimable wave was `PTR-160`,
 `PTR-161`, and `PTR-162`, one accelerator, datasets, and kit task on three
-distinct numeric shards. The repair authenticates pass receipts, restores
-cold-safe package-owned pytest bridges, binds the real proof statement to the
-runner attestation, validates completed-task artifacts and gitlinks, replays
-only verified historical changes, and proves a genuine three-repository
-cold/warm/forced-replay lifecycle. Every new runtime task uses Grok 4.5 first;
-Codex `gpt-5.6-terra` at high reasoning is permitted only after confirmed Grok
-quota exhaustion. Until `PTR-169` closes, old closeout packets cannot authorize
-rollout and all uncertain candidates execute normally.
+distinct numeric shards. A post-merge isolated-import audit proved that the
+datasets bridge fails on a namespace-only empty accelerator hierarchy and that
+the kit bridge hides an incomplete regular accelerator package. `PTR-160`
+remains completed; `PTR-161` and `PTR-162` are therefore reopened without new
+task identities or dependency edges. The current v7 claimable wave is exactly
+`PTR-161` and `PTR-162` on numeric shards 2 and 0; `PTR-163` and `PTR-165` remain
+waiting for those declared dependencies. The repair authenticates pass
+receipts, restores cold-safe package-owned pytest bridges, binds the real proof
+statement to the runner attestation, validates completed-task artifacts and
+gitlinks, replays only verified historical changes, and proves a genuine
+three-repository cold/warm/forced-replay lifecycle. Every new runtime task uses
+Grok 4.5 first; Codex `gpt-5.6-terra` at high reasoning is permitted only after
+confirmed Grok quota exhaustion. Until `PTR-169` closes, old closeout packets
+cannot authorize rollout and all uncertain candidates execute normally.
 
 ## PTR-000 Seal the supervisor-native program
 
@@ -2262,7 +2268,7 @@ rollout and all uncertain candidates execute normally.
 
 ## PTR-161 Install a safe datasets-owned pytest bootstrap
 
-- Status: completed
+- Status: todo
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
@@ -2270,31 +2276,31 @@ rollout and all uncertain candidates execute normally.
 - Track: datasets-bootstrap-recovery
 - Depends on: PTR-149
 - Goal id: PTR-G130
-- Outputs: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py -q
+- Outputs: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/datasets-bootstrap-recovery
 - Parallel lane: ptr-datasets-safe-bootstrap
 - Resource class: test-large
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
-- Predicted symbols: DatasetsProofReuseBootstrap, datasets-owned cold pytest11 bridge, repaired collection hooks
-- Interfaces: PytestProofReusePlugin@1, DatasetsProofReuseBootstrap@2
+- Predicted files: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
+- Predicted symbols: DatasetsProofReuseBootstrapV3, datasets-owned cold pytest11 bridge, repaired collection hooks, isolated namespace/gitlink subprocess bootstrap matrix
+- Interfaces: PytestProofReusePlugin@1, DatasetsProofReuseBootstrap@3
 - Submodules: external/ipfs_datasets
-- Generated artifacts: isolated wheel/source-checkout startup fixtures
+- Generated artifacts: isolated wheel/source-checkout and empty namespace/gitlink subprocess startup fixtures
 - Conflict policy: Own datasets bootstrap and packaging only; legacy commit metadata remains display information and never skip authority.
 - Symbolic first: true
 - LLM context budget bytes: 65536
 - Provider role: grok-implement
 - Context budget tokens: 16384
 - Preconditions: Reachable datasets base tree is clean; its current default dependency metadata still makes accelerator effectively mandatory, so this task must make proof integration optional rather than assuming it already is.
-- Effects: Restores missing datasets bootstrap outputs and repairs the accidentally nested collection hook without eager proof imports.
-- Evidence subset: pytest11 discovery, root/tests conftests, packaging parity, absent optional accelerator, setup/import side effects
-- Acceptance: Wheel and source direct-node runs discover exactly one `ipfs-datasets-proof-reuse = ipfs_datasets_py.pytest_proof_reuse` bridge without `-p` or test edits; source fallback uses conditional module-level `pytest_plugins`, never `pytest_load_initial_conftests`; accelerator is optional in wheel, setup, requirements and pyproject metadata; root conftest never auto-installs pytest dependencies; the collection hook is module-scoped; pytest starts and ordinary tests run when accelerator is absent; only top-level optional absence is suppressed and transitive plugin errors remain visible; importing the parent package or bridge performs no install, build, download or network action; commit hashes alone never skip.
+- Effects: Restores missing datasets bootstrap outputs, repairs the accidentally nested collection hook without eager proof imports, and distinguishes a namespace-only uninitialized accelerator gitlink from a found regular accelerator package.
+- Evidence subset: DatasetsProofReuseBootstrap@3 isolated installed pytest11 and source direct-node subprocesses, empty namespace/gitlink import roots, root/tests conftests, packaging parity, absent optional accelerator, transitive import failure visibility, setup/import side effects; no V2 bootstrap receipt satisfies this task
+- Acceptance: Isolated installed and source-checkout subprocesses run an ordinary direct node without `-p` or test edits, discover exactly one `ipfs-datasets-proof-reuse = ipfs_datasets_py.pytest_proof_reuse` bridge, execute its body once and pass. The same subprocess matrix places a namespace-only empty `ipfs_accelerate_py/` hierarchy representing an uninitialized or empty nested gitlink ahead of imports; importing the datasets bridge and starting pytest remain a safe inert no-op instead of raising `ModuleNotFoundError(name='ipfs_accelerate_py.testing')`. Source fallback uses conditional module-level `pytest_plugins`, never `pytest_load_initial_conftests`; accelerator is optional in wheel, setup, requirements and pyproject metadata; root conftest never auto-installs pytest dependencies; the collection hook is module-scoped. Absence is suppressed only for the exact optional accelerator module chain when no regular accelerator package/plugin is present; an incomplete regular package or a transitive dependency failure from a found plugin remains visible. Importing the parent package or bridge performs no install, build, download or network action; commit hashes alone never skip.
 
 ## PTR-162 Install a safe kit-owned bootstrap and recover canonical artifact transport
 
-- Status: completed
+- Status: todo
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
@@ -2302,27 +2308,27 @@ rollout and all uncertain candidates execute normally.
 - Track: kit-bootstrap-transport-recovery
 - Depends on: PTR-149
 - Goal id: PTR-G130
-- Outputs: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_reuse_bootstrap.py external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py external/ipfs_kit/tests/test_proof_reuse_zero_config.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_reuse_capabilities.py external/ipfs_kit/tests/test_content_addressed_artifact_store.py external/ipfs_kit/tests/test_candidate_context_artifact_store.py -q
+- Outputs: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_reuse_bootstrap.py external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py external/ipfs_kit/tests/test_proof_reuse_zero_config.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_reuse_capabilities.py external/ipfs_kit/tests/test_content_addressed_artifact_store.py external/ipfs_kit/tests/test_candidate_context_artifact_store.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/kit-bootstrap-transport-recovery
 - Parallel lane: ptr-kit-safe-bootstrap
 - Resource class: io-artifact
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
-- Predicted symbols: KitProofReuseBootstrap, KitContentAddressedArtifactStore, KitTestReuseCapabilities
-- Interfaces: KitProofReuseBootstrap@2, CanonicalArtifactStoreTransport@2, TestReuseCapabilityReport@2
+- Predicted files: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
+- Predicted symbols: KitProofReuseBootstrapV3, KitContentAddressedArtifactStore, KitTestReuseCapabilities, isolated namespace-versus-regular-package subprocess import matrix
+- Interfaces: KitProofReuseBootstrap@3, CanonicalArtifactStoreTransport@2, TestReuseCapabilityReport@2
 - Submodules: external/ipfs_kit
-- Generated artifacts: isolated wheel startup, local CAS and hostile CID fixtures
+- Generated artifacts: isolated wheel/source-checkout startup, namespace-versus-regular-package subprocess, local CAS and hostile CID fixtures
 - Conflict policy: Kit owns only lazy bootstrap, byte transport and capability facts; accelerator remains sole proof authority.
 - Symbolic first: true
 - LLM context budget bytes: 65536
 - Provider role: grok-implement
 - Context budget tokens: 16384
 - Preconditions: Reachable kit base tree is clean and shared plugin/storage are optional.
-- Effects: Restores all missing kit proof outputs on a reachable tree and replaces unsafe direct optional plugin loading.
-- Evidence subset: missing historical kit outputs, pytest discovery, multiformats, atomic local storage, daemon/user-directory isolation
-- Acceptance: Installed/source pytest works with accelerator absent and loads exactly one `ipfs-kit-proof-reuse = ipfs_kit_py.pytest_proof_reuse` bridge when present; root source fallback uses conditional module-level `pytest_plugins`, never `pytest_load_initial_conftests`; setup, requirements and pyproject agree on optional accelerator and strict multiformats bounds; exact canonical bytes round-trip under CIDv1/base32/dag-json/sha2-256; corrupt/oversized/path-escaping blobs run and quarantine safely; importing package or bridge never resolves installers, calls `ensure_kubo_binary`, starts a daemon, initializes a repository, touches user state or uses the network even when install environment flags are set; transport never becomes proof authority.
+- Effects: Restores all missing kit proof outputs on a reachable tree, replaces unsafe direct optional plugin loading, and distinguishes namespace-only optional absence from an incomplete regular accelerator installation.
+- Evidence subset: KitProofReuseBootstrap@3 missing historical kit outputs, installed/source pytest discovery, isolated namespace-versus-regular-package subprocess imports, multiformats, atomic local storage, daemon/user-directory isolation; no V2 bootstrap receipt satisfies this task
+- Acceptance: Isolated installed and source-checkout subprocesses run an ordinary direct node without `-p` or test edits and load exactly one `ipfs-kit-proof-reuse = ipfs_kit_py.pytest_proof_reuse` bridge. In the first required import case, a namespace-only empty `ipfs_accelerate_py/` hierarchy representing an absent or uninitialized nested gitlink is a safe inert no-op and pytest still executes the real body. In the second case, an installed-style regular `ipfs_accelerate_py/__init__.py` exists but its `testing` or proof-plugin hierarchy is missing; importing the kit bridge must leave `ModuleNotFoundError(name='ipfs_accelerate_py.testing')` visible rather than suppressing it as optional absence. A transitive dependency error from a found accelerator plugin is likewise visible. Root source fallback uses conditional module-level `pytest_plugins`, never `pytest_load_initial_conftests`; setup, requirements and pyproject agree on optional accelerator and strict multiformats bounds; exact canonical bytes round-trip under CIDv1/base32/dag-json/sha2-256; corrupt/oversized/path-escaping blobs run and quarantine safely; importing package or bridge never resolves installers, calls `ensure_kubo_binary`, starts a daemon, initializes a repository, touches user state or uses the network even when install environment flags are set; transport never becomes proof authority.
 
 ## PTR-163 Bind a real TestPassStatementV5 provider to the runner attestation
 

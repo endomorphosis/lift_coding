@@ -750,7 +750,7 @@ def _closeout_production_input_inventory(
 
     Presence inventory is owned by the agent supervisor
     (``proof_test_reuse_closeout_autorecover.inventory_closeout_inputs``).
-    This wrapper supplies monorepo paths and a non-authoritative V6 repair
+    This wrapper supplies monorepo paths and a non-authoritative V7 repair
     projection.  Static inventory never claims that runtime reuse works; a
     current-tree live probe and the PTR-169 authenticated gate remain required.
     """
@@ -845,17 +845,17 @@ def _closeout_production_input_inventory(
         ],
     }
     # Runtime state must not be inferred from source-shape or retained V4
-    # diagnostics.  This projection says what V6 must prove, not what the live
+    # diagnostics.  This projection says what V7 must prove, not what the live
     # checkout currently supports.  The report-only closeout diagnosis is the
     # live probe and remains fail-closed; ordinary pytest remains fail-open.
     inventory["runtime_reuse_activation"] = {
         "schema": (
             "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "authenticated-v6-runtime-projection@1"
+            "authenticated-v7-runtime-projection@1"
         ),
         "projection_revision": str(
             dict(CONFIG["objectiveProjection"]).get("reviewRevision")
-            or "authenticated-receipt-current-tree-repair-v6"
+            or "authenticated-receipt-current-tree-repair-v7"
         ),
         "authority": "non_authoritative_projection",
         "runtime_readiness": "unknown_live_probe_required",

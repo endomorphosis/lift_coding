@@ -13,7 +13,7 @@
   "goalPrefix": "PTR-G",
   "boardNamespace": "proof-backed-test-reuse-v1",
   "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
-  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v6",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v7",
   "repositories": {
     "accelerator": "external/ipfs_accelerate",
     "datasets": "external/ipfs_datasets",
@@ -266,7 +266,7 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-08",
-    "reviewRevision": "authenticated-receipt-current-tree-repair-v6",
+    "reviewRevision": "authenticated-receipt-current-tree-repair-v7",
     "implementationTaskIds": [
       "PTR-160",
       "PTR-161",
@@ -280,7 +280,6 @@
       "PTR-169"
     ],
     "initialClaimableTaskIds": [
-      "PTR-160",
       "PTR-161",
       "PTR-162"
     ],
@@ -347,7 +346,6 @@
     "scheduler": "deterministic_numeric_task_shards",
     "strictTaskSharding": true,
     "initialClaimableTaskIds": [
-      "PTR-160",
       "PTR-161",
       "PTR-162"
     ],
@@ -426,7 +424,7 @@
     "requireCleanExactIntegrationCheckout": true,
     "requireCleanExactSubmodules": true,
     "validateGoalAndTaskDags": true,
-    "requireInitialConflictFreeWidth": 3,
+    "requireInitialConflictFreeWidth": 2,
     "projectObjectivesWithoutGeneratingWork": true,
     "runNoAgentReadinessPass": true,
     "runReconciliationOnlyLanePasses": true,
