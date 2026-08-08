@@ -240,15 +240,15 @@
     ]
   },
   "baseline": {
-    "baseline_id": "sha256:241b4ac30f62e25f079e1f925e2a88371f95f7f114b40480295f55eb785956c3",
-    "forest_id": "sha256:58f2f606784788c5268d3903def11b2ee5dfe484fc44494a22caf074360a953a",
-    "inventory_id": "sha256:dd90a0013885da724aa275fcdb57109f715b0a70db308c43818324dfe19550b3",
+    "baseline_id": "sha256:48e12b006f1e4b427471279be378902e243dd537080e3e129d1e0ba37ad29ac2",
+    "forest_id": "sha256:ef003b327efe3db447193273dfca33fdd23c750608a21fdd8501e8be194bc7d6",
+    "inventory_id": "sha256:680d7b6f66d9beca36a46740f09be98ad811c800ebbafece25e2334332992cbd",
     "valid": true,
-    "validator_report_id": "sha256:2cbd7a79d6388e08ac10172bbe9254598547998812e6cb5f6d69585fb9ad92b9"
+    "validator_report_id": "sha256:f770cf17c9a7b790fece93fd1a4d40697beca12a005ecfe1c7f54f8b3a99163e"
   },
   "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
   "forest": {
-    "forest_id": "sha256:58f2f606784788c5268d3903def11b2ee5dfe484fc44494a22caf074360a953a",
+    "forest_id": "sha256:ef003b327efe3db447193273dfca33fdd23c750608a21fdd8501e8be194bc7d6",
     "roots": [
       {
         "gitlink_commit": "dc3164653a48d059ae9812078359daeafb451c07",
@@ -260,10 +260,10 @@
         "tree": "6560c3d0c926be12df860afb7d7c82043a1769ba"
       },
       {
-        "gitlink_commit": "900212e5bdec36f9b67bc5f659fa4007a241779b",
-        "head_commit": "900212e5bdec36f9b67bc5f659fa4007a241779b",
+        "gitlink_commit": "2986a3efd7f087bf698c7a2a41f81d71ddb2931e",
+        "head_commit": "2986a3efd7f087bf698c7a2a41f81d71ddb2931e",
         "path": "external/ipfs_accelerate",
-        "planning_revision": "900212e5bdec36f9b67bc5f659fa4007a241779b",
+        "planning_revision": "2986a3efd7f087bf698c7a2a41f81d71ddb2931e",
         "recursive_gitlinks": [
           {
             "commit": "1d932cc778a24cc0bf46fc4baad8306d4fed9c4b",
@@ -306,8 +306,8 @@
             "path": "test/huggingface_transformers"
           }
         ],
-        "root_id": "sha256:69ec1455e6f57c18d3b23843c1e268cf86d8587c19bf4a98ea405ebbb42a44b5",
-        "tree": "c04b2b1dcad351160c6db89003f0d187adb0b7aa"
+        "root_id": "sha256:af2a66ac3c6229324c52d614782e41594b9e4718757aee61c2572820dd4df265",
+        "tree": "36b15915255cfedf0899605c4b0134e15a45b2f7"
       },
       {
         "gitlink_commit": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
@@ -432,7 +432,7 @@
       },
       {
         "path": "config/deterministic_contract_repair_bootstrap_validation.json",
-        "sha256": "f28bbe3b8a5a2df8ff5025c111ff296d5753ca6aa95666a1966349681a10b2fc"
+        "sha256": "1a01d8e73bc23c0ef65bb8c16b895e650ed5abad78c322cda7186843d1fa3059"
       },
       {
         "path": "config/deterministic_contract_repair_roots.json",
@@ -440,7 +440,7 @@
       },
       {
         "path": "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
-        "sha256": "d4d9b1ab1c72b3c6556f6390ebcc5d277798cd07a00bebfad134fb8b686edf4b"
+        "sha256": "da5c8c091271a9dfc6ffa816b8269d55c861a7271f37f69f08f580b64e346993"
       },
       {
         "path": "data/agent_supervisor/deterministic_contract_repair/capabilities.json",
@@ -476,12 +476,12 @@
       },
       {
         "path": "scripts/validate_deterministic_contract_repair_board.py",
-        "sha256": "c8587510c1221f1ede408368b5d4e06707639d5d8880b16b5d51b3e819a11ee8"
+        "sha256": "a849ac7fd0d2a4530ef6c8364a6980c4a856672ae82532fc63d8e31a837a5cd7"
       }
     ],
-    "forest_id": "sha256:58f2f606784788c5268d3903def11b2ee5dfe484fc44494a22caf074360a953a",
-    "inventory_id": "sha256:dd90a0013885da724aa275fcdb57109f715b0a70db308c43818324dfe19550b3"
+    "forest_id": "sha256:ef003b327efe3db447193273dfca33fdd23c750608a21fdd8501e8be194bc7d6",
+    "inventory_id": "sha256:680d7b6f66d9beca36a46740f09be98ad811c800ebbafece25e2334332992cbd"
   },
   "schema": "ipfs_accelerate_py/agent-supervisor/configured-board-bootstrap-seal@2",
-  "seal_id": "sha256:c476b21734f8ad18b544236290a59e53b5f51185fe6bc656d9ca93bc258266db"
+  "seal_id": "sha256:35015cd927c2331aa37fa712ea37d53eb710da4789bad6dc1b31b0478848ddb8"
 }
