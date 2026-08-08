@@ -25,6 +25,8 @@ TODO_REL = (
     "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md"
 )
 CONFIG_REL = "config/deterministic_swissknife_mcplusplus_repair_scheduler.json"
+BOOTSTRAP_SEAL_REL = "config/deterministic_contract_repair_bootstrap_seal.json"
+BOOTSTRAP_VALIDATION_REL = "config/deterministic_contract_repair_bootstrap_validation.json"
 VALIDATOR_REL = "scripts/validate_deterministic_contract_repair_board.py"
 BOARD_NAMESPACE = "deterministic-swissknife-mcplusplus-contract-repair-v1"
 TASK_PREFIX = "DCR-"
@@ -122,7 +124,19 @@ REQUIRED_CONFIG_PATHS = {
     "validator_path": VALIDATOR_REL,
 }
 REQUIRED_PROTECTED_PATHS = frozenset(
-    {PLAN_REL, OBJECTIVES_REL, TODO_REL, CONFIG_REL, VALIDATOR_REL}
+    {
+        PLAN_REL,
+        OBJECTIVES_REL,
+        TODO_REL,
+        CONFIG_REL,
+        VALIDATOR_REL,
+        BOOTSTRAP_SEAL_REL,
+        BOOTSTRAP_VALIDATION_REL,
+        "data/agent_supervisor/deterministic_contract_repair/no-llm-policy.json",
+        "data/agent_supervisor/deterministic_contract_repair/disposition-schema.json",
+        "data/agent_supervisor/deterministic_contract_repair/root-policy.json",
+        "data/agent_supervisor/deterministic_contract_repair/capabilities.json",
+    }
 )
 
 
@@ -136,6 +150,17 @@ def _normalize_field(value: str) -> str:
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _content_id(value: Any) -> str:
+    encoded = json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+        allow_nan=False,
+    ).encode("utf-8")
+    return "sha256:" + hashlib.sha256(encoded).hexdigest()
 
 
 def _read(relative: str) -> str:
@@ -521,6 +546,7 @@ def _validate_config(
         errors.append("codebase refill must remain disabled for the sealed board")
 
     lanes = config.get("lanes")
+    lane_seed_ids: list[str] = []
     if not isinstance(lanes, list) or len(lanes) != 8:
         errors.append("scheduler lanes must contain exactly eight entries")
     else:
@@ -535,6 +561,18 @@ def _validate_config(
             initial_ids = lane.get("initial_task_ids")
             if not isinstance(initial_ids, list) or any(item not in tasks for item in initial_ids):
                 errors.append(f"scheduler lane {index} has invalid initial_task_ids")
+                continue
+            for task_id in initial_ids:
+                expected_shard = int(
+                    hashlib.sha256(task_id.encode("utf-8")).hexdigest()[:8],
+                    16,
+                ) % 8
+                if expected_shard != index:
+                    errors.append(
+                        f"scheduler lane {index} seed {task_id} belongs to shard "
+                        f"{expected_shard}"
+                    )
+                lane_seed_ids.append(task_id)
 
     configured_waves = config.get("waves")
     normalized_configured_waves: list[tuple[str, list[str]]] = []
@@ -567,10 +605,43 @@ def _validate_config(
         for field, expected in expected_projection.items():
             if projection.get(field) != expected:
                 errors.append(f"scheduler initial_projection.{field} must be {expected!r}")
-        for field in ("completed_task_ids", "ready_task_ids", "blocked_task_ids"):
+        task_order = [task_id for _, task_ids in waves for task_id in task_ids]
+        completed = {
+            task_id
+            for task_id, record in tasks.items()
+            if record["fields"].get("status", "").lower() == "completed"
+        }
+        blocked = {
+            task_id
+            for task_id, record in tasks.items()
+            if record["fields"].get("status", "").lower() == "blocked"
+        }
+        ready = {
+            task_id
+            for task_id, record in tasks.items()
+            if record["fields"].get("status", "").lower() == "todo"
+            and record["fields"].get("is schedulable", "").lower() == "true"
+            and set(_refs(record["fields"].get("depends on", ""))) <= completed
+        }
+        expected_lists = {
+            "completed_task_ids": [task_id for task_id in task_order if task_id in completed],
+            "ready_task_ids": [task_id for task_id in task_order if task_id in ready],
+            "blocked_task_ids": [task_id for task_id in task_order if task_id in blocked],
+        }
+        for field, expected in expected_lists.items():
             values = projection.get(field)
-            if not isinstance(values, list) or any(value not in tasks for value in values):
-                errors.append(f"scheduler initial_projection.{field} is invalid")
+            if values != expected or len(expected) != len(set(expected)):
+                errors.append(
+                    f"scheduler initial_projection.{field} must exactly match "
+                    f"task status/dependencies: {expected}"
+                )
+        if len(lane_seed_ids) != len(set(lane_seed_ids)):
+            errors.append("scheduler lane initial_task_ids contain duplicates")
+        if set(lane_seed_ids) != ready:
+            errors.append(
+                "scheduler lane initial_task_ids must exactly cover the ready frontier: "
+                f"{sorted(ready)}"
+            )
 
     provider = config.get("provider")
     if not isinstance(provider, dict):
@@ -676,6 +747,79 @@ def _validate_config(
     if not isinstance(source, dict):
         errors.append("scheduler source_binding must be an object")
         return
+    if source.get("bootstrap_seal_path") != BOOTSTRAP_SEAL_REL:
+        errors.append("source_binding bootstrap_seal_path is not the reviewed seal")
+    for field in (
+        "record_recursive_repository_forest_at_launch",
+        "changed_revision_requires_fresh_inventory_and_baseline",
+    ):
+        if source.get(field) is not True:
+            errors.append(f"source_binding {field} must be true")
+    try:
+        bootstrap_validation = json.loads(
+            _read(BOOTSTRAP_VALIDATION_REL),
+            object_pairs_hook=_reject_duplicate_keys,
+        )
+    except (ValidationFailure, json.JSONDecodeError) as exc:
+        errors.append(f"bootstrap validation receipt is unreadable: {exc}")
+    else:
+        expected_fields = {
+            "schema",
+            "board_namespace",
+            "accelerator_commit",
+            "task_ids",
+            "test_files",
+            "result",
+            "runtime_model_calls",
+            "artifacts_verified",
+            "receipt_id",
+        }
+        if not isinstance(bootstrap_validation, dict) or set(bootstrap_validation) != expected_fields:
+            errors.append("bootstrap validation receipt fields are not exact")
+        else:
+            receipt_body = dict(bootstrap_validation)
+            receipt_id = receipt_body.pop("receipt_id")
+            if receipt_id != _content_id(receipt_body):
+                errors.append("bootstrap validation receipt identity is stale or forged")
+            if bootstrap_validation.get("schema") != (
+                "ipfs_accelerate_py/agent-supervisor/"
+                "deterministic-repair-bootstrap-validation@1"
+            ):
+                errors.append("bootstrap validation receipt schema is invalid")
+            if bootstrap_validation.get("board_namespace") != BOARD_NAMESPACE:
+                errors.append("bootstrap validation receipt board namespace is invalid")
+            if bootstrap_validation.get("accelerator_commit") != source.get(
+                "ipfs_accelerate_planning_revision"
+            ):
+                errors.append("bootstrap validation receipt accelerator revision is stale")
+            if bootstrap_validation.get("task_ids") != [
+                "DCR-000",
+                "DCR-001",
+                "DCR-002",
+                "DCR-003",
+                "DCR-004",
+            ]:
+                errors.append("bootstrap validation receipt task population is invalid")
+            if bootstrap_validation.get("result") != {
+                "collected": 75,
+                "passed": 75,
+                "failed": 0,
+                "warnings": 1,
+            }:
+                errors.append("bootstrap validation receipt result is not passing")
+            if bootstrap_validation.get("runtime_model_calls") != 0:
+                errors.append("bootstrap validation receipt has nonzero runtime model calls")
+            if bootstrap_validation.get("artifacts_verified") is not True:
+                errors.append("bootstrap artifact verification is not sealed")
+            test_files = bootstrap_validation.get("test_files")
+            if (
+                not isinstance(test_files, list)
+                or len(test_files) != 9
+                or len(set(test_files)) != 9
+                or any(not _safe_relative(item) for item in test_files)
+                or any(not (REPO_ROOT / item).is_file() for item in test_files)
+            ):
+                errors.append("bootstrap validation test file set is incomplete")
     branch = _git("branch", "--show-current")
     expected_branch = str(source.get("accelerator_required_branch") or "")
     if branch.returncode != 0 or branch.stdout.strip() != expected_branch:

@@ -2,7 +2,7 @@
 
 **Program:** DCR (Deterministic Contract Repair)  
 **Date:** 2026-08-08  
-**Status:** executable plan; bootstrap implemented, repository sealing required  
+**Status:** executable plan; DCR-000–004 bootstrap sealed, DCR-010 ready  
 **Primary implementation:** `external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor`  
 **Logic authority:** `external/ipfs_datasets/ipfs_datasets_py/logic`  
 **Consumer:** `swissknife` desktop and virtual desktop  
@@ -61,17 +61,17 @@ policy. Grok authoring attempts reached a real spending-limit/quota rejection,
 so the implementation work in this checkpoint used the configured Terra-high
 fallback.
 
-Bootstrap is not sealed yet. The control files and new supervisor modules are
-untracked, the existing checkout contains unrelated dirty work, and the five
-nested checkout revisions do not all match their recorded outer gitlinks. The
-generic preflight therefore remains fail closed as designed. An integrator must
-review and commit the desired nested changes, align each gitlink deliberately,
-track the control package, and rerun preflight; no worker may clean, overwrite,
-or silently bless the current overlays.
+The DCR-000–004 bootstrap is sealed in a dedicated clean integration branch,
+without cleaning, stashing, or rewriting the user's existing dirty checkout.
+The seal binds the tracked controls, exact five-root forest, reviewed no-LLM
+and ownership policies, deterministic artifact projections, and the clean
+bootstrap test result. The initial ready frontier is DCR-010. Every subsequent
+launch must re-run the board validator and content-addressed forest preflight;
+changed controls, gitlinks, nested heads, or overlays fail closed.
 
 ### Implementation checkpoint
 
-The current unsealed checkpoint includes deterministic authority/config
+The separate development overlay includes deterministic authority/config
 materialization, typed repair lifecycle receipts, six-root ownership, offline
 capability evidence, a process-wide zero-LLM audit barrier, current-tree/forest
 and analyzer projections, provider/desktop inventories, canonical contract
@@ -96,9 +96,11 @@ advance an authority stage.
 
 Checkpoint task truth, independent of taskboard completion authority:
 
-- DCR-000 through DCR-004 have unsealed implementation foundations for the
-  ordered authoring route, zero-LLM runtime policy, lifecycle receipts,
-  multi-root ownership, and offline capability evidence.
+- DCR-000 through DCR-004 are sealed for the ordered authoring route, zero-LLM
+  runtime policy, lifecycle receipts, multi-root ownership, and fail-closed
+  offline capability inventory. Capability selection remains unavailable until
+  content-bound `ipfs_datasets_py.logic` initialization, reconstruction, and
+  self-test evidence is current.
 - DCR-010 through DCR-024 have observation/projection implementations, but the
   real indexer, current live service witnesses, and reviewed read-only live
   transcript are still required before a finding is repair-admissible.
@@ -524,23 +526,24 @@ This program does not:
 
 ## 15. Current checkpoint verification
 
-The 2026-08-08 checkpoint is a validated plan and fail-closed implementation
+The 2026-08-08 checkpoint is a sealed bootstrap and fail-closed implementation
 foundation, not a production repair release:
 
 - `scripts/validate_deterministic_contract_repair_board.py --check-all`
   reports 12 goals, 58 tasks, 12 waves, and no errors or warnings;
 - the generic configured-board loader accepts the eight-lane scheduler and the
   exact `grok-4.5` then quota-only `gpt-5.6-terra/high` authoring route;
-- 265 focused deterministic supervisor tests pass, including the zero-LLM
+- in the preserved development overlay, 265 focused deterministic supervisor
+  tests pass, including the zero-LLM
   barrier, authority, observation, logic/proof, operator, Doctor, Planner,
   transaction, daemon, recovery, self-improvement, and conformance foundations;
 - the targeted configured-scheduler/daemon/kernel suite passes 45 tests, and
   the SwissKnife structural DCR-090 Vitest fixture passes one test;
 - focused Ruff, JSON, formatting, and scoped whitespace checks pass.
 
-Launch preflight intentionally remains false on exactly three safety checks:
-the control package is untracked, the shared checkout contains unrelated and
-concurrent dirty work, and configured nested worktrees do not match their
-sealed superproject gitlinks. No checkpoint action cleans, commits, resets,
-stashes, changes gitlinks, opens a live MCP connection, or edits a target
-production contract to manufacture readiness.
+The original shared checkout still fails preflight and remains untouched. The
+dedicated integration branch instead uses tracked controls, exact clean
+gitlinks, and a content-addressed bootstrap forest seal; it must pass preflight
+immediately before launch. No checkpoint action cleans, resets, or stashes the
+shared checkout, opens a live MCP connection, or edits a target production
+contract to manufacture readiness.

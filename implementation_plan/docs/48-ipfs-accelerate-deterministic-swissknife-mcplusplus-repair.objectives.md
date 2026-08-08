@@ -63,7 +63,7 @@ DCR-G000  Deterministic desktop↔MCP++ repair fixed point
 - Evidence: dcr/no-llm-policy@1, dcr/disposition@1, dcr/multi-root-ownership@1, dcr/capability-manifest@1
 - Acceptance criteria: dcr/no-llm-policy@1; dcr/disposition@1; dcr/multi-root-ownership@1; dcr/capability-manifest@1
 - Outputs: config/deterministic_contract_repair_authority.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/autonomous_repair/capabilities.py
-- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_authority.py external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_capabilities.py
+- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_no_llm.py external/ipfs_accelerate/test/api/test_agent_supervisor_no_llm_runtime_barrier.py external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_contracts.py external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_root_ownership.py external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_capabilities.py external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py
 - Acceptance: Model imports and calls are blocked; unknown capability and ambiguous ownership cannot become mutation or completion authority; every receipt binds exact roots.
 - Gap task: DCR-001, DCR-002, DCR-003, DCR-004
 - Refinement: Align with ImplementationDisposition, RPR admission, runtime identity, and existing authority policies.

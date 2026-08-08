@@ -36,7 +36,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-000 Bootstrap and seal the deterministic repair control plane
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
@@ -73,7 +73,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-001 Seal the no-LLM execution and import policy
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -110,7 +110,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-002 Unify deterministic repair dispositions and authority records
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -147,7 +147,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-003 Define multi-root ownership, write scope, and pin policy
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -184,7 +184,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-004 Publish deterministic capability and toolchain inventory
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
