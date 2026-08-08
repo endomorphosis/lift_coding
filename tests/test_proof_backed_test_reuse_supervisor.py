@@ -630,9 +630,9 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
 
     assert result["valid"] is True, result["errors"]
     assert result["task_count"] == 77
-    assert result["completed_task_count"] == 68
-    assert result["current_claimable_task_ids"] == ["PTR-161", "PTR-162"]
-    assert result["current_claimable_shards"] == [0, 2]
+    assert result["completed_task_count"] == 69
+    assert result["current_claimable_task_ids"] == ["PTR-162", "PTR-163"]
+    assert result["current_claimable_shards"] == [0, 1]
     assert result["initial_ready_task_ids"] == ["PTR-170"]
     assert result["initial_ready_shards"] == [2]
     assert result["authenticated_receipt_correction_task_ids"] == [
@@ -738,7 +738,7 @@ def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> Non
     )
 
     assert task.canonical_task_cid == (
-        "baguqeeracxat26lvexgps3bm4mccgm5nmupvwctjvoqg6p7ote65vimzyqia"
+        "baguqeerabzmuizhiyg22py4oqe54shntmjmzlcmvagpzhuwbustlmae2zdaq"
     )
     for requirement in (
         "complete accelerator plugin target is undiscoverable",
@@ -746,6 +746,8 @@ def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> Non
         "recursive, malformed or path-escaping blobs and candidate-index records",
         "protected against symlink substitution",
         "byte-, shape-, depth- and CID-bounded",
+        "force the pure-Python JSON encoder",
+        "without any `RecursionError`",
     ):
         assert requirement in task.acceptance
 
@@ -997,13 +999,12 @@ def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
         validator.PLAN_PATH,
     )
     assert current["valid"] is True, current["errors"]
-    assert current["completed_task_count"] == 68
+    assert current["completed_task_count"] == 69
     assert current["current_claimable_task_ids"] == [
-        "PTR-161",
         "PTR-162",
+        "PTR-163",
     ]
 
-    text = _mutate_task_block(text, "PTR-161", complete_reopened_owner)
     text = _mutate_task_block(text, "PTR-162", complete_reopened_owner)
     todo_path = tmp_path / "progressed-todo.md"
     todo_path.write_text(text, encoding="utf-8")
@@ -1645,7 +1646,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert inventory["goal_count"] == 15
     assert inventory["acceptance_requirement_count"] == 50
     assert inventory["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(161, 170)
+        f"PTR-{task_id}" for task_id in range(162, 170)
     ]
     assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -1698,7 +1699,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         f"PTR-{task_id}" for task_id in range(160, 171)
     ]
     assert activation["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(161, 170)
+        f"PTR-{task_id}" for task_id in range(162, 170)
     ]
     assert activation["repair_task_status_is_completion_authority"] is False
     assert [

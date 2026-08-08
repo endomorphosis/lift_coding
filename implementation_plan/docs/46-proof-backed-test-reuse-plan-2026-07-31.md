@@ -872,6 +872,14 @@ historical output explicit work with current evidence:
    is a safe no-op, from a regular accelerator package with a missing nested
    testing/plugin hierarchy, whose `ModuleNotFoundError` remains visible. This
    is `KitProofReuseBootstrap@3`; historical V2 evidence is stale.
+
+   A post-merge contradiction on 2026-08-08 invalidated PTR-162 attempt 1:
+   its 30-test receipt omitted the explicit recursive-input counterexample, and
+   a roughly 4 KiB, 2,000-level canonical JSON array still raised
+   `RecursionError` through the pure-Python encoder path. PTR-162 is therefore
+   reopened under a new canonical task identity. The merged attempt remains
+   provenance only; downstream joins must wait for a checked-in deep-input
+   regression and a fresh authoritative completion receipt.
 5. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
    the signed attestation CID and requires local signature/trust verification.
 6. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
