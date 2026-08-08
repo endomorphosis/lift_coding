@@ -412,9 +412,9 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
 
     assert result["valid"] is True, result["errors"]
     assert result["task_count"] == 77
-    assert result["completed_task_count"] == 67
-    assert result["current_claimable_task_ids"] == ["PTR-170"]
-    assert result["current_claimable_shards"] == [2]
+    assert result["completed_task_count"] == 68
+    assert result["current_claimable_task_ids"] == ["PTR-161", "PTR-162"]
+    assert result["current_claimable_shards"] == [0, 2]
     assert result["initial_ready_task_ids"] == ["PTR-170"]
     assert result["initial_ready_shards"] == [2]
     assert result["authenticated_receipt_correction_task_ids"] == [
@@ -509,6 +509,27 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
     assert result["reviewed_exact_v4_publication_join_task_id"] == "PTR-155"
     assert result["reviewed_operator_handoff_task_id"] == "PTR-149"
     assert result["unordered_predicted_file_conflicts"] == []
+
+
+def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> None:
+    validator = _load_validator_module()
+    task = next(
+        item
+        for item in validator.parse_task_file(validator.TODO_PATH, "## PTR-")
+        if item.task_id == "PTR-162"
+    )
+
+    assert task.canonical_task_cid == (
+        "baguqeeracxat26lvexgps3bm4mccgm5nmupvwctjvoqg6p7ote65vimzyqia"
+    )
+    for requirement in (
+        "complete accelerator plugin target is undiscoverable",
+        "plugin found beneath PEP 420 namespace parents",
+        "recursive, malformed or path-escaping blobs and candidate-index records",
+        "protected against symlink substitution",
+        "byte-, shape-, depth- and CID-bounded",
+    ):
+        assert requirement in task.acceptance
 
 
 def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(
@@ -751,19 +772,15 @@ def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
         return block.replace("- Status: todo", "- Status: completed", 1)
 
     text = validator.TODO_PATH.read_text(encoding="utf-8")
-    text = _mutate_task_block(text, "PTR-170", complete_reopened_owner)
-    retry_repaired_path = tmp_path / "retry-repaired-todo.md"
-    retry_repaired_path.write_text(text, encoding="utf-8")
-
-    retry_repaired = validator.validate(
+    current = validator.validate(
         validator.OBJECTIVE_PATH,
-        retry_repaired_path,
+        validator.TODO_PATH,
         validator.CONFIG_PATH,
         validator.PLAN_PATH,
     )
-    assert retry_repaired["valid"] is True, retry_repaired["errors"]
-    assert retry_repaired["completed_task_count"] == 68
-    assert retry_repaired["current_claimable_task_ids"] == [
+    assert current["valid"] is True, current["errors"]
+    assert current["completed_task_count"] == 68
+    assert current["current_claimable_task_ids"] == [
         "PTR-161",
         "PTR-162",
     ]
@@ -1327,7 +1344,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert inventory["goal_count"] == 15
     assert inventory["acceptance_requirement_count"] == 50
     assert inventory["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(161, 171)
+        f"PTR-{task_id}" for task_id in range(161, 170)
     ]
     assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -1380,7 +1397,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         f"PTR-{task_id}" for task_id in range(160, 171)
     ]
     assert activation["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(161, 171)
+        f"PTR-{task_id}" for task_id in range(161, 170)
     ]
     assert activation["repair_task_status_is_completion_authority"] is False
     assert [
