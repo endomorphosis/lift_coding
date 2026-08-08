@@ -2577,6 +2577,7 @@ cannot authorize rollout and all uncertain candidates execute normally.
 - Resource class: security-review
 - Implementation timeout seconds: 10800
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py, external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py
+- Proposal artifact envelope: {"max_file_bytes":2000000,"max_output_bytes":8000000,"max_patch_bytes":6000000,"paths":["external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py","external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py","external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py","external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py"],"schema":"ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@1"}
 - Predicted symbols: bounded implementation failure normalizer, authoritative validation retry capsule, deduplicated implementation review projection
 - Interfaces: ActionableRetryEvidence@1, ImplementationDiagnosticReceipt@1, RetryContextCapsule@1
 - Submodules: external/ipfs_accelerate
