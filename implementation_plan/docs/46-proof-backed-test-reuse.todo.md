@@ -2257,8 +2257,8 @@ rollout and all uncertain candidates execute normally.
 - Context budget tokens: 16384
 - Preconditions: Historical PTR-149 evidence is available as non-authoritative provenance.
 - Effects: Binds a complete pass receipt to a canonical runner signature and public-key CID before proof generation.
-- Evidence subset: TestPassReceipt, setup/call/teardown phase roots, multicodec public keys, nonce, epoch, rotation and revocation
-- Acceptance: Canonical signing bytes bind receipt, execution/context, phase, trace and policy CIDs plus nonce and epoch; signer IDs derive from public-key multicodec bytes; unsigned, altered, replayed, expired, revoked or wrong-key receipts are non-authoritative and run; prover-key possession alone cannot fabricate pass authority; no witness, private key or secret enters public cache artifacts.
+- Evidence subset: TestPassReceipt, setup/call/teardown phase roots, Ed25519 public-key multicodec bytes, strict DAG-CBOR, nonce, epoch, rotation and revocation
+- Acceptance: The sole v1 suite is Ed25519 over `b"ipfs-test-pass-attestation/v1\0" + sha256(unsigned_attestation_dag_cbor_bytes)`; the unsigned envelope has one strict canonical DAG-CBOR encoding and its CID is CIDv1/dag-cbor/sha2-256; signer material is `varint(ed25519-pub) || 32-byte-public-key` and its identifier is the lower-base32 CIDv1/raw/sha2-256 of those exact bytes; trust starts only from an explicitly local-pinned CIDv1/dag-cbor/sha2-256 `RunnerTrustPolicy@1`, never TOFU, cache presence or certificate-selected keys; policy enforces pytest-pass-only key usage, trust domain, key epoch, not-before/not-after, rotation and revocation before proof verification. Canonical signing bytes bind receipt, execution/context, phase, trace and policy CIDs plus a unique issuance nonce and epoch. Re-reading the same immutable certificate is legitimate warm reuse while its exact execution/context/policy/epoch remain current; cross-context, cross-policy, revoked/expired-epoch, substituted-attestation or nonce-reissued certificates are prohibited replay, and the nonce is never consumed merely by a valid cache read. Unsigned, altered, replayed, expired, revoked or wrong-key receipts are non-authoritative and run; proving-key possession alone cannot fabricate pass authority; no witness, private key or secret enters public cache artifacts.
 
 ## PTR-161 Install a safe datasets-owned pytest bootstrap
 
@@ -2270,14 +2270,14 @@ rollout and all uncertain candidates execute normally.
 - Track: datasets-bootstrap-recovery
 - Depends on: PTR-149
 - Goal id: PTR-G130
-- Outputs: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py -q
+- Outputs: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/datasets-bootstrap-recovery
 - Parallel lane: ptr-datasets-safe-bootstrap
 - Resource class: test-large
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
+- Predicted files: external/ipfs_datasets/conftest.py, external/ipfs_datasets/tests/conftest.py, external/ipfs_datasets/ipfs_datasets_py/__init__.py, external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/requirements.txt, external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py, external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py, external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py, external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py, external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py
 - Predicted symbols: DatasetsProofReuseBootstrap, datasets-owned cold pytest11 bridge, repaired collection hooks
 - Interfaces: PytestProofReusePlugin@1, DatasetsProofReuseBootstrap@2
 - Submodules: external/ipfs_datasets
@@ -2287,10 +2287,10 @@ rollout and all uncertain candidates execute normally.
 - LLM context budget bytes: 65536
 - Provider role: grok-implement
 - Context budget tokens: 16384
-- Preconditions: Reachable datasets base tree is clean and accelerator remains optional.
+- Preconditions: Reachable datasets base tree is clean; its current default dependency metadata still makes accelerator effectively mandatory, so this task must make proof integration optional rather than assuming it already is.
 - Effects: Restores missing datasets bootstrap outputs and repairs the accidentally nested collection hook without eager proof imports.
 - Evidence subset: pytest11 discovery, root/tests conftests, packaging parity, absent optional accelerator, setup/import side effects
-- Acceptance: Wheel and source direct-node runs discover exactly one bridge without `-p` or test edits; pytest starts and ordinary tests run when accelerator is absent; only top-level optional absence is suppressed; transitive plugin errors remain visible; import performs no install, build, download or network action; commit hashes alone never skip.
+- Acceptance: Wheel and source direct-node runs discover exactly one `ipfs-datasets-proof-reuse = ipfs_datasets_py.pytest_proof_reuse` bridge without `-p` or test edits; source fallback uses conditional module-level `pytest_plugins`, never `pytest_load_initial_conftests`; accelerator is optional in wheel, setup, requirements and pyproject metadata; root conftest never auto-installs pytest dependencies; the collection hook is module-scoped; pytest starts and ordinary tests run when accelerator is absent; only top-level optional absence is suppressed and transitive plugin errors remain visible; importing the parent package or bridge performs no install, build, download or network action; commit hashes alone never skip.
 
 ## PTR-162 Install a safe kit-owned bootstrap and recover canonical artifact transport
 
@@ -2302,14 +2302,14 @@ rollout and all uncertain candidates execute normally.
 - Track: kit-bootstrap-transport-recovery
 - Depends on: PTR-149
 - Goal id: PTR-G130
-- Outputs: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_reuse_bootstrap.py external/ipfs_kit/tests/test_proof_reuse_zero_config.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_reuse_capabilities.py external/ipfs_kit/tests/test_content_addressed_artifact_store.py external/ipfs_kit/tests/test_candidate_context_artifact_store.py -q
+- Outputs: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_kit/tests/test_proof_reuse_bootstrap.py external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py external/ipfs_kit/tests/test_proof_reuse_zero_config.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_certificate_store.py external/ipfs_kit/tests/test_reuse_capabilities.py external/ipfs_kit/tests/test_content_addressed_artifact_store.py external/ipfs_kit/tests/test_candidate_context_artifact_store.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/kit-bootstrap-transport-recovery
 - Parallel lane: ptr-kit-safe-bootstrap
 - Resource class: io-artifact
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
+- Predicted files: external/ipfs_kit/conftest.py, external/ipfs_kit/ipfs_kit_py/__init__.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py, external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py, external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py, external/ipfs_kit/pyproject.toml, external/ipfs_kit/setup.py, external/ipfs_kit/requirements.txt, external/ipfs_kit/tests/test_proof_reuse_bootstrap.py, external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py, external/ipfs_kit/tests/test_proof_reuse_zero_config.py, external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py, external/ipfs_kit/tests/test_proof_certificate_store.py, external/ipfs_kit/tests/test_reuse_capabilities.py, external/ipfs_kit/tests/test_content_addressed_artifact_store.py, external/ipfs_kit/tests/test_candidate_context_artifact_store.py
 - Predicted symbols: KitProofReuseBootstrap, KitContentAddressedArtifactStore, KitTestReuseCapabilities
 - Interfaces: KitProofReuseBootstrap@2, CanonicalArtifactStoreTransport@2, TestReuseCapabilityReport@2
 - Submodules: external/ipfs_kit
@@ -2322,7 +2322,7 @@ rollout and all uncertain candidates execute normally.
 - Preconditions: Reachable kit base tree is clean and shared plugin/storage are optional.
 - Effects: Restores all missing kit proof outputs on a reachable tree and replaces unsafe direct optional plugin loading.
 - Evidence subset: missing historical kit outputs, pytest discovery, multiformats, atomic local storage, daemon/user-directory isolation
-- Acceptance: Installed/source pytest works with accelerator absent and loads one bridge when present; exact canonical bytes round-trip under CIDv1/base32/dag-json/sha2-256; corrupt/oversized/path-escaping blobs run and quarantine safely; no discovery, hit or miss starts a daemon, initializes a repository, uses the network or treats transport as proof authority.
+- Acceptance: Installed/source pytest works with accelerator absent and loads exactly one `ipfs-kit-proof-reuse = ipfs_kit_py.pytest_proof_reuse` bridge when present; root source fallback uses conditional module-level `pytest_plugins`, never `pytest_load_initial_conftests`; setup, requirements and pyproject agree on optional accelerator and strict multiformats bounds; exact canonical bytes round-trip under CIDv1/base32/dag-json/sha2-256; corrupt/oversized/path-escaping blobs run and quarantine safely; importing package or bridge never resolves installers, calls `ensure_kubo_binary`, starts a daemon, initializes a repository, touches user state or uses the network even when install environment flags are set; transport never becomes proof authority.
 
 ## PTR-163 Bind a real TestPassStatementV5 provider to the runner attestation
 
@@ -2334,14 +2334,14 @@ rollout and all uncertain candidates execute normally.
 - Track: authenticated-real-zk
 - Depends on: PTR-160, PTR-161
 - Goal id: PTR-G120
-- Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py, external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py -q
+- Outputs: external/ipfs_datasets/MANIFEST.in, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/test_pass_circuit.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.lock, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/WIRE_FORMAT.md, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/domain.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/lib.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/prover.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/setup.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/verifier.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/schemas/witness_v1.schema.json, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/schemas/proof_v1.schema.json, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py, external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/groth16_wire_vectors.json, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_schemas.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_vectors.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off cargo test --locked --manifest-path external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml && IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_schemas.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_vectors.py external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/authenticated-real-zk
 - Parallel lane: ptr-datasets-statement-v5
 - Resource class: zk-native
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py, external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py
+- Predicted files: external/ipfs_datasets/MANIFEST.in, external/ipfs_datasets/pyproject.toml, external/ipfs_datasets/setup.py, external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/test_pass_circuit.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.lock, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/WIRE_FORMAT.md, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/domain.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/lib.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/prover.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/setup.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/verifier.rs, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/schemas/witness_v1.schema.json, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/schemas/proof_v1.schema.json, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16, external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py, external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py, external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/groth16_wire_vectors.json, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_schemas.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_vectors.py, external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py
 - Predicted symbols: TestPassStatementV5, AuthenticatedTestCertificateIssuer, signed-attestation Groth16 public inputs
 - Interfaces: TestPassStatementV5, TestCertificateIssuerFactory@2, TestCertificateAssurance@2
 - Submodules: external/ipfs_datasets
@@ -2353,8 +2353,8 @@ rollout and all uncertain candidates execute normally.
 - Context budget tokens: 16384
 - Preconditions: PTR-160 attestation schema and PTR-161 cold-safe datasets packaging pass.
 - Effects: Restores real deferred issuance/local verification and binds proof public inputs to the immutable signed attestation and canonical CID profile.
-- Evidence subset: missing historical datasets outputs, Groth16 circuit/provider, runner key/trust policy CIDs, native release provenance
-- Acceptance: TestPassStatementV5 binds exact attestation, receipt, execution, runner-key, trust-policy, circuit and verifier-key CIDs; local signature verification is mandatory before ZK authority; V1-V4/hash-only/simulated openings cannot skip; unavailable binary/key/circuit/compiler yields DEFERRED/RUN; shipped binaries have architecture/source/toolchain/digest provenance and no trusted setup is generated automatically.
+- Evidence subset: missing historical datasets outputs, Groth16 V5 setup/prove/verify/capability routing, runner key/trust policy CIDs, package-data and native release provenance
+- Acceptance: TestPassStatementV5 binds exact attestation, receipt, execution, runner-key, trust-policy, circuit and verifier-key CIDs; local signature verification is mandatory before ZK authority; Cargo setup, prove, verify and capability paths route V5 through one exact circuit/public-input profile while preserving V1-V4 compatibility; V1-V4/hash-only/simulated openings cannot skip; MANIFEST, setup, pyproject, locked Rust source, staged binary and release manifest agree on included V5 artifacts and architecture/source/toolchain/digests; unavailable binary/key/circuit/compiler yields DEFERRED/RUN and no trusted setup is generated automatically.
 
 ## PTR-164 Enforce signed-receipt trust in lookup and controller publication
 
@@ -2364,7 +2364,7 @@ rollout and all uncertain candidates execute normally.
 - Review only: false
 - Priority: P0
 - Track: authenticated-runtime-composition
-- Depends on: PTR-160
+- Depends on: PTR-160, PTR-163
 - Goal id: PTR-G130
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/lookup.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/receipt.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/services.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/xdist.py, external/ipfs_accelerate/test/api/test_proof_reuse_locator_only_warm_path.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_publication.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_locator_only_warm_path.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_publication.py external/ipfs_accelerate/test/api/test_pytest_proof_reuse_xdist.py -q
@@ -2383,7 +2383,7 @@ rollout and all uncertain candidates execute normally.
 - LLM context budget bytes: 65536
 - Provider role: grok-implement
 - Context budget tokens: 16384
-- Preconditions: Runner attestation contracts exist; historical injected-item fixtures remain non-authoritative.
+- Preconditions: Runner attestation contracts and the exact merged TestPassStatementV5 provider, binary capabilities and release manifest from PTR-163 exist; historical injected-item fixtures remain non-authoritative.
 - Effects: Makes ordinary locator-seeded items reach two-stage lookup and revalidates signature/trust before local proof verification and atomic publication.
 - Evidence subset: collection seed, current context, runtime trace, signature/key epoch/revocation, receipt lifecycle, xdist fencing
 - Acceptance: An unmodified item reaches lookup before setup; current AST/fixture/hook/config/dependency/environment/policy context is rebuilt; terminal setup/call/teardown pass is controller-signed; each warm lookup checks immutable bytes, signature, key validity, revocation, epoch and policy before proof verification; any gap runs; workers cannot publish or leak private material; partial/racing writes never authorize reuse.
@@ -2399,7 +2399,7 @@ rollout and all uncertain candidates execute normally.
 - Depends on: PTR-161, PTR-162
 - Goal id: PTR-G140
 - Outputs: scripts/proof_backed_test_reuse_task_evidence.py, tests/test_proof_backed_test_reuse_task_evidence.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_proof_backed_test_reuse_task_evidence.py -q
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_proof_backed_test_reuse_task_evidence.py -q && IPFS_TEST_PROOF_REUSE_MODE=off python3 scripts/proof_backed_test_reuse_task_evidence.py --todo implementation_plan/docs/46-proof-backed-test-reuse.todo.md --expect-incomplete
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/task-evidence-integrity
 - Parallel lane: ptr-outer-task-evidence
@@ -2416,9 +2416,9 @@ rollout and all uncertain candidates execute normally.
 - Provider role: grok-implement
 - Context budget tokens: 12288
 - Preconditions: Reachable datasets/kit repair tasks define the exact expected recovered surfaces.
-- Effects: Converts Markdown completion labels into non-authoritative hints until outputs, validations, receipts and ancestry are independently replayed.
+- Effects: Builds the independent live-tree audit tool and emits a canonical non-ready gap report for the deliberately incomplete Wave-B tree; it never treats its own successful audit execution as proof that historical work is ready.
 - Evidence subset: task outputs, validation targets/command CID, gitlinks, blob digests, merge receipts, commit ancestry, proof-reuse-off receipts
-- Acceptance: Every completed task has present outputs/validation targets at exact current gitlinks and a task/merge receipt whose commit is an ancestor; dependency-ordered later ownership is explicit; missing files, wrong pins, stale receipts and non-ancestor commits fail; no evidence is synthesized; output is canonical, bounded and content addressed.
+- Acceptance: The validator checks every completed task for present outputs and validation targets at exact current gitlinks plus a task/merge receipt whose commit is an ancestor; dependency-ordered later ownership is explicit; missing files, wrong pins, stale receipts and non-ancestor commits are reported as failures of readiness. Completing PTR-165 means the audit tool is tested and its canonical CID-addressed live report accurately says `ready=false` with the then-current owned gaps; only PTR-167 may require and produce a globally green report after replay. No evidence is synthesized.
 
 ## PTR-166 Prove that proving-key possession cannot fabricate a pass
 
@@ -2429,9 +2429,9 @@ rollout and all uncertain candidates execute normally.
 - Priority: P0
 - Track: authenticated-proof-adversarial
 - Depends on: PTR-163, PTR-164
-- Goal id: PTR-G140
+- Goal id: PTR-G120
 - Outputs: external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py, external/ipfs_accelerate/test/api/proof_reuse_authenticated_real_backend_fixture.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py -q
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py -q -rsx --strict-markers
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/authenticated-proof-adversarial
 - Parallel lane: ptr-authenticated-adversarial
@@ -2449,8 +2449,8 @@ rollout and all uncertain candidates execute normally.
 - Context budget tokens: 16384
 - Preconditions: PTR-163 real statement/provider and PTR-164 publication path pass positive conformance.
 - Effects: Establishes a concrete denial boundary between valid ZK syntax and trusted pass authority.
-- Evidence subset: fabricated unsigned receipt, wrong signature/key/policy/attestation CID/nonce/epoch/revocation, real positive vector
-- Acceptance: A genuine proof over a fabricated unsigned receipt may satisfy raw proof math but fails authority before candidate publication; one correctly signed real-backend vector succeeds; every signature, key, trust-policy, CID, nonce, epoch, revocation and downgrade mutation returns RUN; body-oracle evidence, not a skip counter, determines false admissions.
+- Evidence subset: native provider identity/capabilities, one actual ephemeral test-only setup/prove/verify, fabricated unsigned receipt, wrong signature/key/policy/attestation CID/nonce/epoch/revocation, real positive vector, pytest outcome accounting
+- Acceptance: The suite asserts the manifest-pinned native provider identity and performs at least one actual ephemeral test-only setup, prove and verify through the production V5 route; the validation has zero skips, xfails or conditional backend bypasses. A genuine proof over a fabricated unsigned receipt may satisfy raw proof math but fails authority before candidate publication; one correctly signed real-backend vector succeeds; every signature, key, trust-policy, CID, nonce, epoch, revocation and downgrade mutation returns RUN; body-oracle evidence, not a skip counter, determines false admissions.
 
 ## PTR-167 Replay verified historical work onto reachable exact gitlinks
 
@@ -2462,17 +2462,17 @@ rollout and all uncertain candidates execute normally.
 - Track: verified-history-replay
 - Depends on: PTR-165, PTR-166
 - Goal id: PTR-G140
-- Outputs: scripts/proof_backed_test_reuse_replay_verified_tasks.py, tests/test_proof_backed_test_reuse_replay_verified_tasks.py, implementation_plan/docs/46-proof-backed-test-reuse-replay-map-v5.json
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_proof_backed_test_reuse_replay_verified_tasks.py -q
+- Outputs: external/ipfs_datasets, external/ipfs_kit, scripts/proof_backed_test_reuse_replay_verified_tasks.py, tests/test_proof_backed_test_reuse_replay_verified_tasks.py, implementation_plan/docs/46-proof-backed-test-reuse-replay-map-v5.json
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_proof_backed_test_reuse_replay_verified_tasks.py -q && IPFS_TEST_PROOF_REUSE_MODE=off python3 scripts/proof_backed_test_reuse_task_evidence.py --todo implementation_plan/docs/46-proof-backed-test-reuse.todo.md --require-ready
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/verified-history-replay
 - Parallel lane: ptr-verified-history-replay
 - Resource class: io-artifact
 - Implementation timeout seconds: 10800
-- Predicted files: scripts/proof_backed_test_reuse_replay_verified_tasks.py, tests/test_proof_backed_test_reuse_replay_verified_tasks.py, implementation_plan/docs/46-proof-backed-test-reuse-replay-map-v5.json
+- Predicted files: external/ipfs_datasets, external/ipfs_kit, scripts/proof_backed_test_reuse_replay_verified_tasks.py, tests/test_proof_backed_test_reuse_replay_verified_tasks.py, implementation_plan/docs/46-proof-backed-test-reuse-replay-map-v5.json
 - Predicted symbols: VerifiedTaskReplayPlan, ReachableGitlinkReconciler
 - Interfaces: VerifiedTaskReplayPlan@1, CompletedTaskArtifactReceipt@1
-- Submodules:
+- Submodules: external/ipfs_datasets, external/ipfs_kit
 - Generated artifacts: static old-to-new commit/blob replay mapping without approvals
 - Conflict policy: Replay only receipt-named commits/blobs and serialize all gitlink publication; never synthesize history, evidence or completion.
 - Symbolic first: true
@@ -2482,7 +2482,7 @@ rollout and all uncertain candidates execute normally.
 - Preconditions: PTR-165 evidence rules and PTR-166 authority tests are green; recovered repository tasks have merged.
 - Effects: Reconciles historical implementation provenance with reachable repository commits and exposes every unrecoverable gap.
 - Evidence subset: retained supervisor snapshots, merge receipts, expected tree/blob hashes, remote reachability, current submodule ancestry
-- Acceptance: Only content matching trusted task/merge receipts is replayed; recreated tree/blob digests are checked before publication; all three pinned commits are fetchable and exact; PTR-165 passes across all completed tasks; any unrecoverable output reopens its owning work instead of being waived; dated 66-task artifacts remain immutable historical records.
+- Acceptance: Only content matching trusted task/merge receipts is replayed; recreated tree/blob digests are checked before publication; datasets and kit are published as reachable commits and the outer gitlinks are updated to those exact commits; all three pinned commits are fetchable and exact; the live PTR-165 validator now passes across all completed tasks; any unrecoverable output reopens its owning work instead of being waived; dated 66-task artifacts remain immutable historical records.
 
 ## PTR-168 Prove genuine three-repository zero-configuration cold and warm runs
 
@@ -2526,19 +2526,19 @@ rollout and all uncertain candidates execute normally.
 - Track: current-tree-closeout-v5
 - Depends on: PTR-168
 - Goal id: PTR-G140
-- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_subprocess_benchmark.py, external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_OPERATOR_HANDOFF.md
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_subprocess_benchmark.py -q
+- Outputs: scripts/proof_backed_test_reuse_objective_reconciliation.py, test/test_proof_backed_test_reuse_objective_reconciliation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_subprocess_benchmark.py, external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_OPERATOR_HANDOFF.md
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest test/test_proof_backed_test_reuse_objective_reconciliation.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_subprocess_benchmark.py -q
 - Board namespace: proof-backed-test-reuse-v1
 - Bundle: proof-test-reuse/current-tree-closeout-v5
 - Parallel lane: ptr-current-tree-closeout-v5
 - Resource class: test-large
 - Implementation timeout seconds: 10800
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_subprocess_benchmark.py, external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_OPERATOR_HANDOFF.md
+- Predicted files: scripts/proof_backed_test_reuse_objective_reconciliation.py, test/test_proof_backed_test_reuse_objective_reconciliation.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_subprocess_benchmark.py, external/ipfs_accelerate/docs/guides/TEST_PROOF_REUSE_OPERATOR_HANDOFF.md
 - Predicted symbols: AuthenticatedProofReuseCurrentTreeGateV5, reachable-tree operator handoff
 - Interfaces: AuthenticatedProofReuseCurrentTreeGateV5, ProofReuseBenchmarkReceipt@2
 - Submodules: external/ipfs_accelerate
 - Generated artifacts: fresh 76-task validation receipts, benchmark summary and non-authoritative operator candidate
-- Conflict policy: Final join only; report gaps without editing this board, approving evidence, generating trust keys or marking goals complete.
+- Conflict policy: Final join only; update the outer objective reconciler so G120/G130/G140 remain mandatory, but report gaps without editing this board, approving evidence, generating trust keys or marking goals complete.
 - Symbolic first: true
 - LLM context budget bytes: 65536
 - Provider role: grok-implement
@@ -2546,4 +2546,4 @@ rollout and all uncertain candidates execute normally.
 - Preconditions: PTR-168 genuine e2e passes after authenticated adversarial assurance and exact reachable replay.
 - Effects: Replaces the historical 66-task premise with current signed-authority, reachable-tree, ordinary-pytest and performance evidence.
 - Evidence subset: exact 76-task inventory, reachable gitlinks, PTR-165 evidence, PTR-166 forgery resistance, PTR-168 cold/warm/replay, zero false skips, measured savings, supervisor health
-- Acceptance: All 76 tasks have current evidence and present outputs on fetchable exact pins; every warm hit uses a trusted signed receipt and locally verified real proof; genuine three-repo e2e and forced replay agree; adversarial/mutation populations have zero false skips; benchmark meets the reviewed threshold; optional capability gaps remain truthful RUN/DEFERRED; only the outer controller may project goal completion and the old PTR-149/66-task packet is rejected as stale.
+- Acceptance: All 76 tasks have current evidence and present outputs on fetchable exact pins; the reconciler refuses root completion while G120, G130 or G140 is active and requires the PTR-169 `ptr/authenticated-current-tree-gate-v5@1` artifact; every warm hit uses a trusted signed receipt and locally verified real proof; genuine three-repo e2e and forced replay agree; adversarial/mutation populations have zero false skips; benchmark meets the reviewed threshold; optional capability gaps remain truthful RUN/DEFERRED. PTR-169 may emit only a pre-merge candidate receipt for itself; authoritative completion requires the outer controller to rerun the exact 76-task gate after the PTR-169 merge commit is present and prove that commit/tree, while the old PTR-149/66-task packet is rejected as stale.

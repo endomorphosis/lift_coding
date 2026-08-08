@@ -10,8 +10,9 @@ explicit operator commit into the protected objective heap.
 Lifecycle contract (three phases, never skipped):
 
 1. Provisional — drained goals become ``provisionally_complete`` only.
-2. Children — after current validation, verify ``PTR-G010`` … ``PTR-G100``.
-3. Final root — admit final-gate evidence, then verify ``PTR-G110`` then
+2. Children — after current validation, verify ``PTR-G010`` … ``PTR-G130``.
+3. Final root — admit the authenticated current-tree gate, then verify
+   ``PTR-G140`` followed by
    ``PTR-G000``.
 
 Report-only diagnosis never writes the repository.  Closeout refuses open
@@ -67,14 +68,17 @@ OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT: Final = (
 )
 
 ROOT_GOAL_ID: Final = "PTR-G000"
-FINAL_GATE_GOAL_ID: Final = "PTR-G110"
-FINAL_GATE_TASK_ID: Final = "PTR-122"
-FINAL_GATE_ACCEPTANCE_CRITERION: Final = "ptr/final-current-tree-gate@1"
+FINAL_GATE_GOAL_ID: Final = "PTR-G140"
+FINAL_GATE_TASK_ID: Final = "PTR-169"
+FINAL_GATE_ACCEPTANCE_CRITERION: Final = (
+    "ptr/authenticated-current-tree-gate-v5@1"
+)
 ROOT_ACCEPTANCE_CRITERION: Final = (
     "ptr/cross-repository-current-tree-gate@1"
 )
 CHILD_GOAL_IDS: Final = tuple(
-    f"PTR-G{index:03d}" for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+    f"PTR-G{index:03d}"
+    for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130)
 )
 ALL_GOAL_IDS: Final = (ROOT_GOAL_ID, *CHILD_GOAL_IDS, FINAL_GATE_GOAL_ID)
 DEFAULT_PHASE_COUNT: Final = 3
@@ -83,9 +87,11 @@ TASK_HEADER_RE = re.compile(r"^##\s+(PTR-\d{3})\b", re.MULTILINE)
 TASK_STATUS_RE = re.compile(r"^- Status:\s*(\S+)", re.MULTILINE | re.IGNORECASE)
 GOAL_HEADER_RE = re.compile(r"^##\s+(PTR-G\d{3})\s+(.+?)\s*$", re.MULTILINE)
 GOAL_STATUS_RE = re.compile(r"^- Status:\s*(\S+)", re.MULTILINE | re.IGNORECASE)
-GOAL_PARENT_RE = re.compile(r"^- Parent:\s*(.*)$", re.MULTILINE | re.IGNORECASE)
+GOAL_PARENT_RE = re.compile(
+    r"^- Parent:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE
+)
 GOAL_DEPENDS_RE = re.compile(
-    r"^- Depends on:\s*(.*)$", re.MULTILINE | re.IGNORECASE
+    r"^- Depends on:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE
 )
 CLOSED_TASK_STATUSES: Final = frozenset(
     {"completed", "complete", "verified_complete", "done"}
@@ -123,8 +129,8 @@ class ObjectiveCloseoutPhase(str, Enum):
     DIAGNOSE = "diagnose"
     FENCE = "fence"
     PHASE_1_PROVISIONAL = "phase_1_provisional"
-    PHASE_2_VERIFY_CHILDREN = "phase_2_verify_g010_g100"
-    PHASE_3_VERIFY_FINAL = "phase_3_verify_g110_g000"
+    PHASE_2_VERIFY_CHILDREN = "phase_2_verify_g010_g130"
+    PHASE_3_VERIFY_FINAL = "phase_3_verify_g140_g000"
     CANDIDATE_HANDOFF = "candidate_handoff"
     COMPLETE = "complete"
 
@@ -654,14 +660,14 @@ def _gate_artifact_readiness(
     *,
     expected_tree: str = "",
 ) -> tuple[bool, str, str]:
-    """Validate a PTR-122 persisted bundle or strict hermetic fixture gate."""
+    """Validate a PTR-169 persisted bundle or strict hermetic fixture gate."""
 
     if "decision" in payload:
         if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
             return (
                 False,
                 "wrong_gate_producer",
-                "final gate bundle must be produced by PTR-122",
+                "final gate bundle must be produced by PTR-169",
             )
         decision = payload.get("decision")
         if not isinstance(decision, Mapping):
@@ -683,7 +689,7 @@ def _gate_artifact_readiness(
             return (
                 False,
                 "invalid_final_gate_evidence",
-                "PTR-122 bundle lacks admissible PTR-G110 completion evidence",
+                "PTR-169 bundle lacks admissible PTR-G140 completion evidence",
             )
         if not _final_gate_completion_evidence_is_admissible(
             root_evidence,
@@ -694,7 +700,7 @@ def _gate_artifact_readiness(
             return (
                 False,
                 "invalid_root_gate_evidence",
-                "PTR-122 bundle lacks admissible PTR-G000 completion evidence",
+                "PTR-169 bundle lacks admissible PTR-G000 completion evidence",
             )
         return True, "", ""
 
@@ -703,14 +709,14 @@ def _gate_artifact_readiness(
             False,
             "wrong_gate_producer",
             "PTR-120 aggregate goal records are inputs to, not substitutes "
-            "for, the PTR-122 final current-tree gate",
+            "for, the PTR-169 authenticated current-tree gate",
         )
 
     if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
         return (
             False,
             "wrong_gate_producer",
-            "final gate artifact must be produced by PTR-122",
+            "final gate artifact must be produced by PTR-169",
         )
     if "passed" not in payload:
         return (
@@ -728,7 +734,7 @@ def _gate_artifact_readiness(
         return (
             False,
             "invalid_gate_criteria",
-            "final gate artifact lacks the exact PTR-G110/PTR-G000 criteria",
+            "final gate artifact lacks the exact PTR-G140/PTR-G000 criteria",
         )
     return True, "", ""
 
@@ -1720,7 +1726,7 @@ class ProofTestReuseObjectiveReconciler:
         repository_tree: str,
         objective_revision: str,
     ) -> ObjectiveCloseoutReceipt:
-        """Verify G010 through G100 after current validation succeeds."""
+        """Verify G010 through G130 after current validation succeeds."""
 
         if validation.get("passed") is not True:
             return ObjectiveCloseoutReceipt(
@@ -1744,6 +1750,31 @@ class ProofTestReuseObjectiveReconciler:
                 continue
             if current != "provisionally_complete":
                 reasons.append(f"not_provisional:{goal_id}:{current}")
+                continue
+            goal = by_id.get(goal_id)
+            dependencies = goal.depends_on if goal is not None else ()
+            missing_dependencies = [
+                dependency
+                for dependency in dependencies
+                if dependency not in by_id and dependency not in states
+            ]
+            if missing_dependencies:
+                reasons.extend(
+                    f"missing_dependency:{goal_id}:{dependency}"
+                    for dependency in missing_dependencies
+                )
+                continue
+            unverified_dependencies = [
+                dependency
+                for dependency in dependencies
+                if _normalize_status(states.get(dependency, "active"))
+                != "verified_complete"
+            ]
+            if unverified_dependencies:
+                reasons.extend(
+                    f"dependency_not_verified:{goal_id}:{dependency}"
+                    for dependency in unverified_dependencies
+                )
                 continue
             evidence = self._evidence_for_goal(goal_id)
             if not evidence and not self.allow_synthetic_evidence:
@@ -1813,7 +1844,7 @@ class ProofTestReuseObjectiveReconciler:
         repository_tree: str,
         objective_revision: str,
     ) -> ObjectiveCloseoutReceipt:
-        """Admit final-gate evidence, then verify G110 then G000."""
+        """Admit authenticated gate evidence, then verify G140 then G000."""
 
         reasons: list[str] = []
         transitions: list[dict[str, Any]] = []
@@ -1831,7 +1862,9 @@ class ProofTestReuseObjectiveReconciler:
         if not gate_admitted["admitted"]:
             reasons.extend(gate_admitted.get("reason_codes") or ["gate_not_admitted"])
 
-        # Verify G110 before G000.
+        # Verify G140 before G000.  G120 and G130 are phase-two premises, so
+        # an active or otherwise unverified repair goal can never be bypassed
+        # by an otherwise valid final-gate artifact.
         for goal_id in (FINAL_GATE_GOAL_ID, ROOT_GOAL_ID):
             if goal_id not in states and not any(
                 goal.goal_id == goal_id for goal in goals
@@ -1848,11 +1881,11 @@ class ProofTestReuseObjectiveReconciler:
                 # Do not partially verify final goals when premises failed.
                 continue
             if goal_id == ROOT_GOAL_ID:
-                g110 = _normalize_status(
+                g140 = _normalize_status(
                     states.get(FINAL_GATE_GOAL_ID, "active")
                 )
-                if g110 != "verified_complete":
-                    reasons.append("g110_before_g000_required")
+                if g140 != "verified_complete":
+                    reasons.append("g140_before_g000_required")
                     continue
             transition = transition_goal(
                 current,

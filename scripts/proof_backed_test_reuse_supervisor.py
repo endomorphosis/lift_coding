@@ -746,12 +746,13 @@ def _inventory_requirement(
 def _closeout_production_input_inventory(
     tasks: Sequence[object] | None = None,
 ) -> dict[str, object]:
-    """Describe every retained input still needed by PTR-110/111/120/122.
+    """Describe retained inputs for the authenticated PTR-169 closeout.
 
     Presence inventory is owned by the agent supervisor
     (``proof_test_reuse_closeout_autorecover.inventory_closeout_inputs``).
-    This wrapper supplies monorepo paths and attaches runtime-activation
-    diagnostics that remain monorepo-local.
+    This wrapper supplies monorepo paths and a non-authoritative V6 repair
+    projection.  Static inventory never claims that runtime reuse works; a
+    current-tree live probe and the PTR-169 authenticated gate remain required.
     """
 
     if str(ACCEL_ROOT) not in sys.path:
@@ -769,6 +770,18 @@ def _closeout_production_input_inventory(
 
     parsed_tasks = tuple(tasks or parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX))
     task_ids = tuple(sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks))
+    repair_task_ids = tuple(f"PTR-{task_id}" for task_id in range(160, 170))
+    repair_task_statuses = {
+        str(getattr(task, "task_id", "")): str(getattr(task, "status", "")).lower()
+        for task in parsed_tasks
+        if str(getattr(task, "task_id", "")) in repair_task_ids
+    }
+    open_repair_task_ids = [
+        task_id
+        for task_id in repair_task_ids
+        if repair_task_statuses.get(task_id)
+        not in {"completed", "complete", "verified_complete", "done"}
+    ]
     goals = load_objective_goals(REPO_ROOT / OBJECTIVE_REL)
     goal_ids = tuple(sorted(goal.goal_id for goal in goals))
     requirement_ids = tuple(
@@ -792,19 +805,31 @@ def _closeout_production_input_inventory(
         gate_path=gate_path,
         evidence_path=evidence_path,
     )
+    inventory["open_repair_task_ids"] = list(open_repair_task_ids)
+    inventory["repair_task_status_is_completion_authority"] = False
     inventory["managed_merge_history"] = _managed_merge_input_inventory(parsed_tasks)
     inventory["authoritative_materializer"] = {
         "configured": True,
+        "role": "non_authoritative_closeout_input_materializer",
+        "materialization_is_completion_authority": False,
         "module": (
             "ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_closeout_autorecover"
+        ),
+        "final_gate_task_id": "PTR-169",
+        "final_gate_goal_id": "PTR-G140",
+        "final_gate_acceptance_criterion": (
+            "ptr/authenticated-current-tree-gate-v5@1"
         ),
         "required_call_sequence": [
             "run_closeout_autorecover_cycle",
             "PTR-110 ProofTestReuseTaskEvidenceCollector.collect",
             "PTR-111 GoalAssuranceRunner.collect",
             "PTR-120 ProofTestReuseObjectiveEvidenceAssembler.assemble",
-            "PTR-122 ProofTestReuseCurrentTreeGate.evaluate",
-            "PTR-122 ProofTestReuseCurrentTreeGate.persist_bundle",
+            "PTR-165 validate completed-task outputs and current ancestry",
+            "PTR-167 verify reachable history replay and exact gitlinks",
+            "PTR-168 validate genuine three-repository cold/warm/replay evidence",
+            "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.evaluate",
+            "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.persist_bundle",
         ],
         "may_synthesize_approvals": False,
         "may_treat_task_status_as_authority": False,
@@ -819,84 +844,80 @@ def _closeout_production_input_inventory(
             "inventory_recompute",
         ],
     }
-    # Runtime activation remains intentionally fail-closed; presence inventory
-    # never promotes production warm-skip authority.
+    # Runtime state must not be inferred from source-shape or retained V4
+    # diagnostics.  This projection says what V6 must prove, not what the live
+    # checkout currently supports.  The report-only closeout diagnosis is the
+    # live probe and remains fail-closed; ordinary pytest remains fail-open.
     inventory["runtime_reuse_activation"] = {
-        "automatic_plugin_discovery": True,
-        "ordinary_enabled_run_effective_action": "run_test",
-        "default_identity_services_injected": False,
-        "default_identity_service_factory_configured": False,
-        "production_identity_injector_configured": False,
-        "missing_production_providers": [
-            "repository_forest_provider",
-            "analysis_index_provider",
-            "component_inputs_provider",
-            "policy_inputs_provider",
-            "runtime_evidence_provider",
-        ],
-        "candidate_context_store_configured": False,
-        "two_stage_candidate_revalidation_configured": False,
-        "lookup_requires_exact_execution_key_before_candidate_read": True,
-        "runtime_trace_attribute_producer_configured": False,
-        "post_pass_runtime_trace_capture_configured": False,
-        "post_pass_receipt_requires_runtime_trace": False,
-        "deferred_request_builder_configured": False,
-        "deferred_request_transport_compatible": False,
-        "deferred_certificate_issuer_configured": False,
-        "issuer_in_lazy_service_bundle": False,
-        "issuer_in_lazy_service_resolution": False,
-        "candidate_certificate_publication_configured": False,
-        "authoritative_candidate_publication_configured": False,
-        "receipt_content_identity_profiles_conformant": False,
-        "receipt_content_identity_gap": ("accelerator_cidv1_dag_json_vs_datasets_sha256"),
-        "receipt_content_identity_profiles": {
-            "accelerator": "cidv1-base32-dag-json-sha2-256",
-            "datasets_statement": "sha256-canonical-json-v1",
-            "exact_conformance": False,
+        "schema": (
+            "ipfs_accelerate_py/proof-backed-test-reuse-"
+            "authenticated-v6-runtime-projection@1"
+        ),
+        "projection_revision": str(
+            dict(CONFIG["objectiveProjection"]).get("reviewRevision")
+            or "authenticated-receipt-current-tree-repair-v6"
+        ),
+        "authority": "non_authoritative_projection",
+        "runtime_readiness": "unknown_live_probe_required",
+        "static_inventory_is_completion_authority": False,
+        "static_inventory_may_authorize_skip": False,
+        "ordinary_test_fallback_action": "run_test",
+        "optional_capability_gap_action": "deferred_or_run_test",
+        "live_probe": {
+            "required": True,
+            "performed_by_inventory": False,
+            "entrypoint": "proof_backed_test_reuse_supervisor.py closeout --report-only",
+            "must_follow_task_id": "PTR-169",
+            "must_bind_current_tree": True,
+            "must_verify": [
+                "trusted_signed_pass_receipt",
+                "real_proof_verification",
+                "exact_execution_and_context",
+                "reachable_three_repository_gitlinks",
+                "genuine_cold_warm_replay",
+                "zero_false_skips",
+            ],
+            "failure_action": "refuse_closeout_and_run_tests",
         },
-        "ordinary_warm_skip_path_complete": False,
-        "missing_activation_action": "run_test",
-        "implementation_gap_is_completion_authority": False,
-        "activation_blocker_codes": [
-            "identity_services_unconfigured",
-            "candidate_lookup_identity_cycle",
-            "post_pass_runtime_trace_unproduced",
-            "runtime_trace_not_required_for_receipt",
-            "receipt_cid_profile_mismatch",
-            "deferred_request_builder_unconfigured",
-            "deferred_request_transport_type_mismatch",
-            "issuer_unconfigured",
-            "authoritative_candidate_not_published",
-        ],
+        "final_gate": {
+            "task_id": "PTR-169",
+            "goal_id": "PTR-G140",
+            "acceptance_criterion": (
+                "ptr/authenticated-current-tree-gate-v5@1"
+            ),
+            "historical_ptr_122_or_v4_gate_is_authority": False,
+        },
+        "repair_task_ids": list(repair_task_ids),
+        "open_repair_task_ids": open_repair_task_ids,
+        "repair_task_status_is_completion_authority": False,
         "required_implementation_sequence": [
             {
-                "goals": ["PTR-G020", "PTR-G030", "PTR-G060"],
-                "work": "production_current_identity_provider_factory",
+                "task_ids": ["PTR-160", "PTR-161", "PTR-162"],
+                "work": "signed_receipt_and_zero_configuration_package_surfaces",
             },
             {
-                "goals": ["PTR-G030", "PTR-G060"],
-                "work": "controlled_current_runtime_preflight_provider",
+                "task_ids": ["PTR-163", "PTR-165"],
+                "work": "real_proof_binding_and_completed_task_evidence_validation",
             },
             {
-                "goals": ["PTR-G010", "PTR-G040", "PTR-G050"],
-                "work": "cross_package_receipt_cid_profile_conformance",
+                "task_ids": ["PTR-164"],
+                "work": "authenticated_runtime_composition_join",
             },
             {
-                "goals": ["PTR-G040", "PTR-G050", "PTR-G060"],
-                "work": "deferred_request_issuer_and_candidate_publication",
+                "task_ids": ["PTR-166"],
+                "work": "authenticated_real_backend_adversarial_assurance",
             },
             {
-                "goals": [
-                    "PTR-G060",
-                    "PTR-G080",
-                    "PTR-G090",
-                    "PTR-G100",
-                ],
-                "work": "unwired_cross_repository_cold_warm_e2e",
+                "task_ids": ["PTR-167"],
+                "work": "reachable_history_replay_and_exact_gitlinks",
             },
             {
-                "goals": ["PTR-G110"],
-                "work": "activated_warm_benchmark_and_rollout_evidence",
+                "task_ids": ["PTR-168"],
+                "work": "genuine_three_repository_cold_warm_replay_e2e",
+            },
+            {
+                "task_ids": ["PTR-169"],
+                "work": "authenticated_current_tree_live_gate_and_operator_candidate",
             },
         ],
     }
@@ -933,9 +954,9 @@ def _reviewed_completion_projection() -> dict[str, object]:
     if open_task_ids:
         next_action = "execute_reviewed_expansion"
     elif not artifact_presence["artifact_presence_ready"]:
-        next_action = "materialize_current_tree_completion_artifacts"
+        next_action = "materialize_ptr169_authenticated_current_tree_artifacts"
     else:
-        next_action = "invoke_operator_closeout"
+        next_action = "live_probe_ptr169_then_invoke_operator_closeout"
     return {
         "schema": ("ipfs_accelerate_py/proof-backed-test-reuse-reviewed-objective-projection@1"),
         "implementation": {

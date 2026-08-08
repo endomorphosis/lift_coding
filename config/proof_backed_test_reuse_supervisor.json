@@ -13,7 +13,7 @@
   "goalPrefix": "PTR-G",
   "boardNamespace": "proof-backed-test-reuse-v1",
   "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
-  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v5",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v6",
   "repositories": {
     "accelerator": "external/ipfs_accelerate",
     "datasets": "external/ipfs_datasets",
@@ -67,6 +67,40 @@
       "policy_tracer_statement_circuit_and_key_versions"
     ],
     "unknownOrIncompleteAction": "run_test"
+  },
+  "runnerAttestationProfile": {
+    "schema": "RunnerPassAttestationV1",
+    "signatureAlgorithm": "ed25519",
+    "signatureDomain": "ipfs-test-pass-attestation/v1\u0000",
+    "signatureInput": "domain-bytes||sha2-256(unsigned-envelope-bytes)",
+    "unsignedEnvelope": {
+      "canonicalization": "strict-dag-cbor",
+      "cidVersion": 1,
+      "multicodec": "dag-cbor",
+      "multihash": "sha2-256"
+    },
+    "publicKeyMaterial": {
+      "byteEncoding": "varint(ed25519-pub)||32-byte-ed25519-public-key",
+      "cidVersion": 1,
+      "multicodec": "raw",
+      "multihash": "sha2-256",
+      "multibase": "base32-lower"
+    },
+    "trustPolicy": {
+      "authority": "locally-pinned-trust-policy-cid",
+      "cidVersion": 1,
+      "multicodec": "dag-cbor",
+      "multihash": "sha2-256",
+      "multibase": "base32-lower",
+      "trustOnFirstUse": false
+    },
+    "usage": "pytest-pass-only",
+    "checks": {
+      "keyEpochRequired": true,
+      "validityWindowRequired": true,
+      "rotationRequired": true,
+      "revocationRequired": true
+    }
   },
   "proofPolicy": {
     "statement": "TestPassStatementV5",
@@ -232,7 +266,7 @@
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
     "reviewedAt": "2026-08-08",
-    "reviewRevision": "authenticated-receipt-current-tree-repair-v5",
+    "reviewRevision": "authenticated-receipt-current-tree-repair-v6",
     "implementationTaskIds": [
       "PTR-160",
       "PTR-161",
@@ -263,11 +297,17 @@
     "reconciliationPhases": 3,
     "closeoutControllerTaskId": "PTR-121",
     "operatorHandoffTaskId": "PTR-169",
-    "proofMaterialAndContextWaveTaskIds": [
-      "PTR-163",
-      "PTR-164"
+    "authenticatedReceiptWaveATaskIds": [
+      "PTR-160",
+      "PTR-161",
+      "PTR-162"
     ],
-    "exactV4PublicationJoinTaskId": "PTR-169",
+    "authenticatedReceiptWaveBTaskIds": [
+      "PTR-163",
+      "PTR-165"
+    ],
+    "authenticatedReceiptRuntimeJoinTaskId": "PTR-164",
+    "authenticatedCurrentTreeHandoffTaskId": "PTR-169",
     "sealedTaskCount": 76,
     "authenticityJoinTaskId": "PTR-166",
     "outputReplayJoinTaskId": "PTR-167",

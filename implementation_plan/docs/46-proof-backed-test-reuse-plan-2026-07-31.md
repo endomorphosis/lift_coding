@@ -2,7 +2,7 @@
 
 Date: 2026-07-31
 
-Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v5`)
+Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v6`)
 
 Program: `proof-backed-test-reuse-v1`
 
@@ -324,12 +324,27 @@ Created only after terminal teardown, the receipt binds:
 The receipt is not pass authority until a trusted runner has emitted a canonical
 `RunnerPassAttestation@1`. That attestation signs the receipt CID, execution-key
 and candidate-context CIDs, setup/call/teardown and trace-completeness roots,
-fresh nonce, trust domain, key epoch and policy CID. The initial signature
-profile uses an explicitly pinned signing algorithm and represents its public
-key as a strict multicodec/multihash CID. The verifier recomputes every CID,
-verifies the signature locally, checks the trust policy plus key rotation and
-revocation state, and rejects an unknown, expired, revoked, unsigned or legacy
-hash-only receipt. Its immutable canonical bytes are stored before proving.
+fresh issuance nonce, trust domain, key epoch and policy CID. The only v1
+signature suite is Ed25519 over
+`b"ipfs-test-pass-attestation/v1\0" + sha256(unsigned_attestation_dag_cbor_bytes)`.
+The unsigned envelope has one strict canonical DAG-CBOR representation and a
+CIDv1/dag-cbor/sha2-256 identity. Public-key material is exactly
+`varint(ed25519-pub) || raw_32_byte_key`; its identifier is the lower-base32
+CIDv1/raw/sha2-256 of those bytes. The verifier recomputes every CID, verifies
+the signature locally, and starts trust only from an explicitly locally pinned
+CIDv1/dag-cbor/sha2-256 `RunnerTrustPolicy@1`, never TOFU, cache presence, or a
+certificate-selected key. That policy restricts key usage to pytest-pass
+attestation and checks trust domain, key epoch, not-before/not-after, rotation,
+and revocation before proof verification. An unknown, expired, revoked,
+unsigned, ambiguously encoded, or legacy hash-only receipt runs normally. The
+attestation's immutable canonical bytes are stored before proving.
+
+A unique nonce prevents issuance substitution; it is not a consume-on-read
+token. Repeated verification of the same immutable certificate is legitimate
+warm reuse while the exact execution context, policy CID, trust domain, and key
+epoch remain current. Cross-context or cross-policy use, an expired/revoked
+epoch, substituted attestation, or nonce reuse for a different issuance is a
+replay and must run the test.
 
 ### 8.2 `TestPassStatementV5`
 
@@ -828,13 +843,18 @@ historical output explicit work with current evidence:
     benchmark into a fresh operator handoff. The old 66-task packet is stale.
 
 The first wave is exactly `PTR-160`, `PTR-161` and `PTR-162`, on three numeric
-shards and three distinct repository claims. When they merge, `PTR-163`,
-`PTR-164` and `PTR-165` form a second three-lane wave. The authority join
-`PTR-166`, verified replay `PTR-167`, genuine e2e `PTR-168`, and handoff
-`PTR-169` are deliberately ordered because each consumes the preceding trust
-boundary. All implementation validation forces proof reuse off so this feature
-cannot certify itself. Missing optional proof/cache/IPFS capabilities remain
-typed `RUN` or `DEFERRED`, never startup failures or synthetic authority.
+shards and three distinct repository claims. When they merge, datasets V5 work
+`PTR-163` and the outer audit-tool work `PTR-165` run in parallel on distinct
+resources. `PTR-164` then consumes the exact merged V5 provider and release
+manifest to implement accelerator runtime composition. The authority join
+`PTR-166`, verified replay/gitlink publication `PTR-167`, genuine e2e `PTR-168`,
+and handoff `PTR-169` are deliberately ordered because each consumes the
+preceding trust boundary. Completing `PTR-165` means its live audit accurately
+reports the expected Wave-B gaps; `PTR-167` is the first task allowed to require
+that audit to be globally green. All implementation validation forces proof
+reuse off so this feature cannot certify itself. Missing optional proof/cache/
+IPFS capabilities remain typed `RUN` or `DEFERRED`, never startup failures or
+synthetic authority.
 
 ## 14. Parallel implementation program
 
@@ -878,11 +898,12 @@ protected from implementation agents.
 | 26 | `PTR-155` | Join exact datasets V2 local verification with the sole atomic candidate publication path |
 | 27 | `PTR-149` | Live reporting, exact 66-task authority gate, corrected handoff and explicit operator closeout premise |
 | 28 | `PTR-160`, `PTR-161`, `PTR-162` | Signed-runner contracts, datasets recovery/bootstrap and kit recovery/bootstrap start independently on accelerator, datasets and kit |
-| 29 | `PTR-163`, `PTR-164`, `PTR-165` | V5 real-proof binding, runtime publication authority and outer current-tree evidence validation use disjoint repositories/resources |
-| 30 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries |
-| 31 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits and proves current output ancestry |
-| 32 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
-| 33 | `PTR-169` | Exact 76-task authenticated current-tree gate, benchmark and operator handoff |
+| 29 | `PTR-163`, `PTR-165` | V5 native real-proof binding and the outer evidence-audit tool run independently on datasets and the outer tree |
+| 30 | `PTR-164` | Accelerator runtime composition pins and consumes the exact merged V5 provider/capability/release identities |
+| 31 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries with zero skipped/xfail assurance cases |
+| 32 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits/gitlinks and requires green current output ancestry |
+| 33 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
+| 34 | `PTR-169` | Exact 76-task authenticated current-tree candidate, benchmark and reconciler update; authority requires a post-merge outer rerun |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -1000,9 +1021,9 @@ explicitly permitted.
   production-activation correction, are immutable 2026-08-03 projections. The
   active ten-task authenticated-current-tree repair is the bounded 2026-08-08
   projection; none enables autonomous refill.
-- Use the fresh `proof-backed-test-reuse-v5` state directory so stale
-  66-completed lane state, old health failures and historical generated-output
-  checks cannot be mistaken for this run.
+- Use the fresh `proof-backed-test-reuse-v6` state directory so the stopped v5
+  launch attempts, stale 66-completed lane state, old health failures and
+  historical generated-output checks cannot be mistaken for this run.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no

@@ -35,6 +35,31 @@ def _load_validator_module() -> Any:
     return module
 
 
+def _mutate_task_block(text: str, task_id: str, mutation: Any) -> str:
+    start = text.index(f"## {task_id} ")
+    end = text.find("\n## PTR-", start + 1)
+    if end < 0:
+        end = len(text)
+    original_block = text[start:end]
+    mutated_block = mutation(original_block)
+    assert mutated_block != original_block
+    return text[:start] + mutated_block + text[end:]
+
+
+def _write_mutated_task_board(
+    tmp_path: Path,
+    validator: Any,
+    task_id: str,
+    mutation: Any,
+) -> Path:
+    text = validator.TODO_PATH.read_text(encoding="utf-8")
+    todo_path = tmp_path / "todo.md"
+    todo_path.write_text(
+        _mutate_task_block(text, task_id, mutation), encoding="utf-8"
+    )
+    return todo_path
+
+
 @pytest.fixture()
 def supervisor() -> Any:
     return _load_module()
@@ -316,7 +341,54 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
     assert "providerPolicy" in errors
 
 
-def test_board_validator_seals_current_76_task_authenticated_receipt_wave() -> None:
+def test_board_validator_rejects_stale_v5_schedule_and_attestation_profile(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    config = json.loads(validator.CONFIG_PATH.read_text(encoding="utf-8"))
+    profile = config["runnerAttestationProfile"]
+    assert profile["signatureInput"] == (
+        "domain-bytes||sha2-256(unsigned-envelope-bytes)"
+    )
+    assert profile["trustPolicy"] == {
+        "authority": "locally-pinned-trust-policy-cid",
+        "cidVersion": 1,
+        "multicodec": "dag-cbor",
+        "multihash": "sha2-256",
+        "multibase": "base32-lower",
+        "trustOnFirstUse": False,
+    }
+    config["defaultStateRootSuffix"] = (
+        "ipfs_accelerate_py/proof-backed-test-reuse-v5"
+    )
+    projection = config["objectiveProjection"]
+    projection["reviewRevision"] = (
+        "authenticated-receipt-current-tree-repair-v5"
+    )
+    projection["proofMaterialAndContextWaveTaskIds"] = ["PTR-163", "PTR-164"]
+    projection["exactV4PublicationJoinTaskId"] = "PTR-169"
+    config["runnerAttestationProfile"]["trustPolicy"][
+        "trustOnFirstUse"
+    ] = True
+    config_path = tmp_path / "supervisor.json"
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        validator.TODO_PATH,
+        config_path,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    errors = "\n".join(result["errors"])
+    assert "defaultStateRootSuffix" in errors
+    assert "reviewRevision" in errors
+    assert "stale pre-v6 fields" in errors
+    assert "runnerAttestationProfile" in errors
+
+
+def test_board_validator_seals_current_76_task_authenticated_receipt_dag() -> None:
     validator = _load_validator_module()
 
     result = validator.validate(
@@ -347,23 +419,61 @@ def test_board_validator_seals_current_76_task_authenticated_receipt_wave() -> N
         "PTR-168",
         "PTR-169",
     ]
-    assert result["authenticated_receipt_wave_one_submodules"] == {
+    assert result["authenticated_receipt_wave_a_task_ids"] == [
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+    ]
+    assert result["authenticated_receipt_wave_a_submodules"] == {
         "PTR-160": ["external/ipfs_accelerate"],
         "PTR-161": ["external/ipfs_datasets"],
         "PTR-162": ["external/ipfs_kit"],
     }
-    assert result["authenticated_receipt_wave_one_resource_width"] == 3
-    assert result["authenticated_receipt_wave_two_submodules"] == {
+    assert result["authenticated_receipt_wave_a_resource_width"] == 3
+    assert result["authenticated_receipt_wave_b_task_ids"] == [
+        "PTR-163",
+        "PTR-165",
+    ]
+    assert result["authenticated_receipt_wave_b_submodules"] == {
         "PTR-163": ["external/ipfs_datasets"],
-        "PTR-164": ["external/ipfs_accelerate"],
         "PTR-165": ["<outer-superproject>"],
     }
-    assert result["authenticated_receipt_wave_two_resource_width"] == 3
+    assert result["authenticated_receipt_wave_b_resource_width"] == 2
+    assert result["authenticated_receipt_runtime_join_task_id"] == "PTR-164"
+    assert result["authenticated_receipt_runtime_join_shard"] == 2
+    assert result["authenticated_receipt_runtime_join_submodules"] == [
+        "external/ipfs_accelerate"
+    ]
     assert result["authenticated_receipt_authenticity_join_task_id"] == "PTR-166"
     assert result["authenticated_receipt_output_replay_join_task_id"] == "PTR-167"
     assert result["authenticated_receipt_zero_config_e2e_join_task_id"] == "PTR-168"
     assert result["authenticated_receipt_handoff_task_id"] == "PTR-169"
     assert result["historical_missing_output_count"] == 26
+    assert result["historical_missing_artifact_count"] == 28
+    assert result["historical_missing_validation_only_paths"] == [
+        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py",
+        "external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py",
+    ]
+    quarantine = result["historical_missing_artifact_quarantine"]
+    assert quarantine[
+        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
+    ] == {
+        "owner_task_id": "PTR-161",
+        "owner_status": "todo",
+        "observed_owner_task_ids": ["PTR-161"],
+        "sources": ["validation_target"],
+    }
+    assert quarantine[
+        "external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py"
+    ] == {
+        "owner_task_id": "PTR-162",
+        "owner_status": "todo",
+        "observed_owner_task_ids": ["PTR-162"],
+        "sources": ["validation_target"],
+    }
+    assert result["uncovered_historical_missing_artifact_paths"] == []
+    assert result["multi_owned_historical_missing_artifact_paths"] == {}
+    assert result["completed_owner_missing_historical_artifact_paths"] == {}
     assert result["uncovered_historical_missing_output_paths"] == []
     assert result["reviewed_production_correction_task_ids"] == [
         "PTR-150",
@@ -391,6 +501,212 @@ def test_board_validator_seals_current_76_task_authenticated_receipt_wave() -> N
     assert result["reviewed_exact_v4_publication_join_task_id"] == "PTR-155"
     assert result["reviewed_operator_handoff_task_id"] == "PTR-149"
     assert result["unordered_predicted_file_conflicts"] == []
+
+
+def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    cargo_lock = (
+        "external/ipfs_datasets/ipfs_datasets_py/processors/"
+        "groth16_backend/Cargo.lock"
+    )
+
+    def remove_cargo_lock(block: str) -> str:
+        assert block.count(cargo_lock) == 2
+        return block.replace(f", {cargo_lock}", "")
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-163", remove_cargo_lock
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    errors = "\n".join(result["errors"])
+    assert "PTR-163 missing reviewed runtime repair paths" in errors
+    assert cargo_lock in errors
+
+
+def test_board_validator_requires_ptr_164_to_join_ptr_160_and_ptr_163(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+
+    def remove_provider_dependency(block: str) -> str:
+        expected = "- Depends on: PTR-160, PTR-163"
+        assert expected in block
+        return block.replace(expected, "- Depends on: PTR-160", 1)
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-164", remove_provider_dependency
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    errors = "\n".join(result["errors"])
+    assert "PTR-164 missing required direct dependencies: ['PTR-163']" in errors
+    assert "wave B must be exactly" in errors
+
+
+def test_board_validator_rejects_uncovered_historical_validation_gap(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    shim_path = (
+        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
+    )
+
+    def remove_shim_ownership(block: str) -> str:
+        assert block.count(shim_path) == 3
+        mutated = block.replace(f", {shim_path}", "")
+        assert mutated.count(shim_path) == 1
+        return mutated
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-161", remove_shim_ownership
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    assert result["uncovered_historical_missing_artifact_paths"] == [shim_path]
+    mismatch = result[
+        "exact_historical_artifact_owner_assignment_mismatches"
+    ][shim_path]
+    assert mismatch == {
+        "expected_owner_task_id": "PTR-161",
+        "actual_owner_task_ids": [],
+    }
+
+
+def test_board_validator_rejects_multi_owned_historical_gap(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    shim_path = (
+        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
+    )
+
+    def add_second_owner(block: str) -> str:
+        mutated = block.replace(
+            "\n- Validation:", f", {shim_path}\n- Validation:", 1
+        )
+        mutated = mutated.replace(
+            "\n- Predicted symbols:",
+            f", {shim_path}\n- Predicted symbols:",
+            1,
+        )
+        return mutated
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-163", add_second_owner
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    assert result["multi_owned_historical_missing_artifact_paths"] == {
+        shim_path: ["PTR-161", "PTR-163"]
+    }
+    mismatch = result[
+        "exact_historical_artifact_owner_assignment_mismatches"
+    ][shim_path]
+    assert mismatch["expected_owner_task_id"] == "PTR-161"
+
+
+def test_board_validator_rejects_moving_gap_to_arbitrary_correction_task(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    shim_path = (
+        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
+    )
+
+    def remove_named_owner(block: str) -> str:
+        return block.replace(f", {shim_path}", "")
+
+    def add_wrong_owner(block: str) -> str:
+        mutated = block.replace(
+            "\n- Validation:", f", {shim_path}\n- Validation:", 1
+        )
+        return mutated.replace(
+            "\n- Predicted symbols:",
+            f", {shim_path}\n- Predicted symbols:",
+            1,
+        )
+
+    text = validator.TODO_PATH.read_text(encoding="utf-8")
+    text = _mutate_task_block(text, "PTR-161", remove_named_owner)
+    text = _mutate_task_block(text, "PTR-163", add_wrong_owner)
+    todo_path = tmp_path / "todo.md"
+    todo_path.write_text(text, encoding="utf-8")
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    assert result["uncovered_historical_missing_artifact_paths"] == []
+    assert result["multi_owned_historical_missing_artifact_paths"] == {}
+    assert result[
+        "exact_historical_artifact_owner_assignment_mismatches"
+    ][shim_path] == {
+        "expected_owner_task_id": "PTR-161",
+        "actual_owner_task_ids": ["PTR-163"],
+    }
+
+
+def test_board_validator_fails_as_soon_as_gap_owner_completes(
+    tmp_path: Path,
+) -> None:
+    validator = _load_validator_module()
+    shim_path = (
+        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
+    )
+
+    def complete_owner(block: str) -> str:
+        assert "- Status: todo" in block
+        return block.replace("- Status: todo", "- Status: completed", 1)
+
+    todo_path = _write_mutated_task_board(
+        tmp_path, validator, "PTR-161", complete_owner
+    )
+    result = validator.validate(
+        validator.OBJECTIVE_PATH,
+        todo_path,
+        validator.CONFIG_PATH,
+        validator.PLAN_PATH,
+    )
+
+    assert result["valid"] is False
+    assert result["completed_owner_missing_historical_artifact_paths"][
+        shim_path
+    ] == "PTR-161"
+    assert any(
+        "completed correction owners still have quarantined historical artifacts"
+        in error
+        for error in result["errors"]
+    )
 
 
 def test_status_exposes_exact_model_and_quota_only_fallback_policy(
@@ -901,6 +1217,10 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert inventory["task_count"] == 76
     assert inventory["goal_count"] == 15
     assert inventory["acceptance_requirement_count"] == 49
+    assert inventory["open_repair_task_ids"] == [
+        f"PTR-{task_id}" for task_id in range(160, 170)
+    ]
+    assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
     by_name = {item["name"]: item for item in inventory["requirements"]}
     approvals = by_name["genuine_reviewed_approvals_without_queue_records"]
@@ -916,26 +1236,55 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert validations["required_count"] == 76
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
-    assert inventory["authoritative_materializer"]["configured"] is True
-    activation = inventory["runtime_reuse_activation"]
-    assert activation["automatic_plugin_discovery"] is True
-    assert activation["ordinary_enabled_run_effective_action"] == "run_test"
-    assert activation["default_identity_service_factory_configured"] is False
-    assert activation["two_stage_candidate_revalidation_configured"] is False
-    assert activation["post_pass_receipt_requires_runtime_trace"] is False
-    assert activation["deferred_request_transport_compatible"] is False
-    assert activation["issuer_in_lazy_service_resolution"] is False
-    assert activation["authoritative_candidate_publication_configured"] is False
-    assert activation["receipt_content_identity_profiles"] == {
-        "accelerator": "cidv1-base32-dag-json-sha2-256",
-        "datasets_statement": "sha256-canonical-json-v1",
-        "exact_conformance": False,
-    }
-    assert len(activation["activation_blocker_codes"]) == 9
-    assert activation["implementation_gap_is_completion_authority"] is False
-    assert activation["required_implementation_sequence"][-1]["goals"] == [
-        "PTR-G110"
+    materializer = inventory["authoritative_materializer"]
+    assert materializer["configured"] is True
+    assert materializer["materialization_is_completion_authority"] is False
+    assert materializer["final_gate_task_id"] == "PTR-169"
+    assert materializer["final_gate_goal_id"] == "PTR-G140"
+    assert materializer["required_call_sequence"][-2:] == [
+        "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.evaluate",
+        "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.persist_bundle",
     ]
+    activation = inventory["runtime_reuse_activation"]
+    assert activation["schema"].endswith(
+        "authenticated-v6-runtime-projection@1"
+    )
+    assert activation["authority"] == "non_authoritative_projection"
+    assert activation["runtime_readiness"] == "unknown_live_probe_required"
+    assert activation["static_inventory_is_completion_authority"] is False
+    assert activation["static_inventory_may_authorize_skip"] is False
+    assert activation["ordinary_test_fallback_action"] == "run_test"
+    assert activation["live_probe"]["required"] is True
+    assert activation["live_probe"]["performed_by_inventory"] is False
+    assert activation["live_probe"]["must_follow_task_id"] == "PTR-169"
+    assert activation["final_gate"] == {
+        "task_id": "PTR-169",
+        "goal_id": "PTR-G140",
+        "acceptance_criterion": "ptr/authenticated-current-tree-gate-v5@1",
+        "historical_ptr_122_or_v4_gate_is_authority": False,
+    }
+    assert activation["repair_task_ids"] == [
+        f"PTR-{task_id}" for task_id in range(160, 170)
+    ]
+    assert activation["open_repair_task_ids"] == [
+        f"PTR-{task_id}" for task_id in range(160, 170)
+    ]
+    assert activation["repair_task_status_is_completion_authority"] is False
+    assert [
+        wave["task_ids"]
+        for wave in activation["required_implementation_sequence"]
+    ] == [
+        ["PTR-160", "PTR-161", "PTR-162"],
+        ["PTR-163", "PTR-165"],
+        ["PTR-164"],
+        ["PTR-166"],
+        ["PTR-167"],
+        ["PTR-168"],
+        ["PTR-169"],
+    ]
+    # Stale source-shape guesses must not be exposed as observed runtime facts.
+    assert "default_identity_service_factory_configured" not in activation
+    assert "receipt_content_identity_profiles" not in activation
     assert not any(tmp_path.rglob("*"))
 
 

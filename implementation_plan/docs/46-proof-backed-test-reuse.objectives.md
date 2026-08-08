@@ -282,13 +282,13 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Fib priority: 1
 - Priority: P0
 - Track: authenticated-proof-authority
-- Bundle: proof-test-reuse/authenticated-authority-v5
+- Bundle: proof-test-reuse/authenticated-authority-v6
 - Goal: Ensure that a proof-carrying cache hit derives pass authority from a cryptographically authenticated complete runner receipt, not from self-asserted fields or proving-key possession.
 - Evidence: ptr/runner-pass-attestation@1, ptr/test-pass-statement-v5@1, ptr/authenticated-real-backend-adversarial@1
 - Acceptance criteria: ptr/runner-pass-attestation@1; ptr/test-pass-statement-v5@1; ptr/authenticated-real-backend-adversarial@1
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py -q
-- Acceptance: Receipt signatures bind exact execution/context and complete phase/trace roots; signer key CIDs, epochs, rotation and revocation are enforced; TestPassStatementV5 binds the signed attestation; legacy, simulated, unsigned and forged receipts always run; no secret enters public artifacts.
+- Acceptance: Ed25519 signs the domain-separated digest of one canonical DAG-CBOR unsigned envelope; the envelope, multicodec-prefixed public key and locally pinned trust policy have strict CIDv1 identities; receipt signatures bind exact execution/context and complete phase/trace roots; pytest-pass key usage, validity, epochs, rotation and revocation are enforced without TOFU; TestPassStatementV5 binds the signed attestation; a manifest-pinned native setup/prove/verify vector runs without skips; legacy, simulated, unsigned and forged receipts always run; no secret enters public artifacts.
 - Gap task: PTR-160, PTR-163, PTR-166
 - Refinement: Separate runner trust contracts, datasets real-proof binding and adversarial forgery assurance so no component can approve its own evidence.
 - Embedding query: signed pytest pass receipt runner attestation public key multicodec CID Groth16 proof forgery revocation
@@ -302,13 +302,13 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Fib priority: 2
 - Priority: P0
 - Track: reachable-zero-config-runtime
-- Bundle: proof-test-reuse/reachable-runtime-v5
+- Bundle: proof-test-reuse/reachable-runtime-v6
 - Goal: Make ordinary installed and source-checkout pytest invocations in all three repositories discover a cold-safe bridge and reach exact locator/current-context lookup without test rewrites.
 - Evidence: ptr/datasets-bootstrap-v2@1, ptr/kit-bootstrap-v2@1, ptr/authenticated-runtime-composition@1
 - Acceptance criteria: ptr/datasets-bootstrap-v2@1; ptr/kit-bootstrap-v2@1; ptr/authenticated-runtime-composition@1
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_locator_only_warm_path.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py -q
-- Acceptance: Package-owned bridges are always importable and inert when accelerator is absent; package `__init__` files expose lazy facades only; ordinary items reach two-stage lookup; current context and signed authority are revalidated; no plugin/cache/prover/transport failure prevents real test execution.
+- Acceptance: Unique `pytest11` bridges plus conditional module-level root `pytest_plugins` load without `-p` or test edits; package-owned bridges are always importable and inert when accelerator is absent; package `__init__` files expose lazy facades only and never install, build, download, start daemons or touch user state; ordinary items reach two-stage lookup; current context and signed authority are revalidated; no plugin/cache/prover/transport failure prevents real test execution.
 - Gap task: PTR-161, PTR-162, PTR-164
 - Refinement: Recover reachable package surfaces independently, then join them with the accelerator's locator-first and controller-only runtime.
 - Embedding query: pytest11 lazy bridge no test rewrite locator only warm lookup current context xdist controller publication
@@ -322,13 +322,13 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Fib priority: 3
 - Priority: P0
 - Track: authenticated-current-tree-assurance
-- Bundle: proof-test-reuse/current-tree-assurance-v5
+- Bundle: proof-test-reuse/current-tree-assurance-v6
 - Goal: Reconcile historical implementation onto reachable exact gitlinks and publish fresh 76-task evidence from genuine ordinary pytest cold/warm/replay and adversarial runs.
 - Evidence: ptr/completed-task-artifact-evidence@1, ptr/verified-history-replay@1, ptr/genuine-three-repository-e2e-v2@1, ptr/authenticated-current-tree-gate-v5@1
 - Acceptance criteria: ptr/completed-task-artifact-evidence@1; ptr/verified-history-replay@1; ptr/genuine-three-repository-e2e-v2@1; ptr/authenticated-current-tree-gate-v5@1
-- Outputs: scripts/proof_backed_test_reuse_task_evidence.py, scripts/proof_backed_test_reuse_replay_verified_tasks.py, external/ipfs_accelerate/test/api/test_proof_reuse_genuine_three_repo_e2e.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py
-- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_proof_backed_test_reuse_task_evidence.py tests/test_proof_backed_test_reuse_replay_verified_tasks.py external/ipfs_accelerate/test/api/test_proof_reuse_genuine_three_repo_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py -q
-- Acceptance: Completed labels are backed by present outputs, validation targets, receipts and ancestor commits on fetchable pins; cold/warm/replay uses no `-p`, service or tracer injection; body-oracle false skips are zero; performance threshold passes; optional gaps remain RUN/DEFERRED; only the outer controller projects completion.
+- Outputs: scripts/proof_backed_test_reuse_task_evidence.py, scripts/proof_backed_test_reuse_replay_verified_tasks.py, scripts/proof_backed_test_reuse_objective_reconciliation.py, external/ipfs_accelerate/test/api/test_proof_reuse_genuine_three_repo_e2e.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_proof_backed_test_reuse_task_evidence.py tests/test_proof_backed_test_reuse_replay_verified_tasks.py test/test_proof_backed_test_reuse_objective_reconciliation.py external/ipfs_accelerate/test/api/test_proof_reuse_genuine_three_repo_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py -q
+- Acceptance: Completed labels are backed by present outputs and validation targets with exact path owners, task/merge receipts and ancestor commits on fetchable exact gitlinks; cold/warm/replay uses no `-p`, service or tracer injection; body-oracle false skips are zero; performance threshold passes; optional gaps remain RUN/DEFERRED; G120/G130/G140 remain mandatory; PTR-169's self-receipt is only a candidate until the outer controller reruns the 76-task gate on its merged commit and then projects completion.
 - Gap task: PTR-165, PTR-167, PTR-168, PTR-169
 - Refinement: Validate evidence rules first, replay only verified material, prove the public three-repository lifecycle, then perform one final current-tree join.
 - Embedding query: task artifact evidence gitlink reachability replay merge receipt cold warm forced rerun zero false skip benchmark closeout
