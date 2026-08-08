@@ -630,8 +630,8 @@ def test_board_validator_seals_current_77_task_authenticated_receipt_dag() -> No
 
     assert result["valid"] is True, result["errors"]
     assert result["task_count"] == 77
-    assert result["completed_task_count"] == 69
-    assert result["current_claimable_task_ids"] == ["PTR-162", "PTR-163"]
+    assert result["completed_task_count"] == 70
+    assert result["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
     assert result["current_claimable_shards"] == [0, 1]
     assert result["initial_ready_task_ids"] == ["PTR-170"]
     assert result["initial_ready_shards"] == [2]
@@ -761,6 +761,65 @@ def test_ptr_162_contract_seals_adversarial_bootstrap_and_store_repairs() -> Non
         "transitive failure was suppressed",
     ):
         assert counterexample in task.validation[0]
+
+
+def test_ptr_163_contract_seals_real_v5_authority_counterexamples() -> None:
+    validator = _load_validator_module()
+    task = next(
+        item
+        for item in validator.parse_task_file(validator.TODO_PATH, "## PTR-")
+        if item.task_id == "PTR-163"
+    )
+
+    assert task.status == "todo"
+    assert task.canonical_task_cid == (
+        "baguqeeravbagnxggbvp6wyegxuormeb5agbjgbvexzn7pf2sw3fupol7xxlq"
+    )
+    for requirement in (
+        "canonical DAG-CBOR `RunnerPassAttestation@1`",
+        "explicitly local-pinned `RunnerTrustPolicy@1`",
+        "decoded from the exact bytes whose CID is public",
+        "proves a private opening of those bytes",
+        "lambdas, booleans, generic callable verifier objects",
+        "V1-V4/hash-only/simulated openings always return RUN",
+        "rehashes and compares the actual binary, circuit and verifying-key bytes",
+        "receipt-bytes/field mismatch",
+        "benign injected `True` backend",
+    ):
+        assert requirement in task.acceptance
+    todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
+    assert "21282cb8779330724e496f88acdf3ed02cccbca1" in todo_text
+    assert "a166f12cd5823416d31a2ebc0f5090ba245b73d5" in todo_text
+
+
+def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
+    validator = _load_validator_module()
+    task = next(
+        item
+        for item in validator.parse_task_file(validator.TODO_PATH, "## PTR-")
+        if item.task_id == "PTR-165"
+    )
+
+    assert task.status == "todo"
+    assert task.canonical_task_cid == (
+        "baguqeeradb7xi62tzbuffd4hcu6xp6avlmqvlnnuvw7zlc5bdfbslscqpvta"
+    )
+    for requirement in (
+        "exact `(task_id, canonical_task_key, canonical_task_cid)`",
+        "never rederives a private task CID",
+        "`IPFS_PROOF_REUSE_STATE_ROOT`",
+        "arbitrary JSON, reports, failed/quarantined rows",
+        "pass/exit-zero/zero-skip",
+        "sealed historical-missing-artifact quarantine",
+        "including PTR-163",
+        "excludes wall-clock time, absolute roots, report paths, mtimes and scan order",
+        "`audit_valid` from `ready`",
+        "missing/malformed root, board, receipt chain or scan fails closed",
+    ):
+        assert requirement in task.acceptance
+    todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
+    assert "77aea5348cd6675e628454e9975e0937323961b2" in todo_text
+    assert "zero of 71 completion/validation receipts" in todo_text
 
 
 def test_board_validator_requires_full_ptr_163_native_and_packaging_surface(
@@ -993,7 +1052,7 @@ def test_board_validator_accepts_resolved_ledger_paths_as_progress() -> None:
     ] == {}
 
 
-def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
+def test_board_validator_accepts_repaired_audit_as_progressed_state(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
@@ -1010,13 +1069,10 @@ def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
         validator.PLAN_PATH,
     )
     assert current["valid"] is True, current["errors"]
-    assert current["completed_task_count"] == 69
-    assert current["current_claimable_task_ids"] == [
-        "PTR-162",
-        "PTR-163",
-    ]
+    assert current["completed_task_count"] == 70
+    assert current["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
 
-    text = _mutate_task_block(text, "PTR-162", complete_reopened_owner)
+    text = _mutate_task_block(text, "PTR-165", complete_reopened_owner)
     todo_path = tmp_path / "progressed-todo.md"
     todo_path.write_text(text, encoding="utf-8")
 
@@ -1028,8 +1084,8 @@ def test_board_validator_accepts_the_repaired_wave_as_progressed_state(
     )
 
     assert result["valid"] is True, result["errors"]
-    assert result["completed_task_count"] == 70
-    assert result["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
+    assert result["completed_task_count"] == 71
+    assert result["current_claimable_task_ids"] == ["PTR-163"]
     assert result["completed_owner_missing_historical_artifact_paths"] == {}
     assert len(result["resolved_historical_artifact_paths"]) == 17
 
@@ -1657,7 +1713,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert inventory["goal_count"] == 15
     assert inventory["acceptance_requirement_count"] == 50
     assert inventory["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(162, 170)
+        f"PTR-{task_id}" for task_id in range(163, 170)
     ]
     assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
@@ -1710,7 +1766,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         f"PTR-{task_id}" for task_id in range(160, 171)
     ]
     assert activation["open_repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(162, 170)
+        f"PTR-{task_id}" for task_id in range(163, 170)
     ]
     assert activation["repair_task_status_is_completion_authority"] is False
     assert [

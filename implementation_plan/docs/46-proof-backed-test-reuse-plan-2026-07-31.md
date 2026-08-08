@@ -889,10 +889,28 @@ historical output explicit work with current evidence:
    declared validation command as an isolated, mandatory gate.
 5. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
    the signed attestation CID and requires local signature/trust verification.
+
+   A protected-path interruption preserved an attempt-1 candidate, but the
+   subsequent audit contradicted it before integration. It invented an
+   alternate JSON attestation, accepted callable booleans as signature/proof
+   authority, retained an authoritative V1 downgrade, and proved duplicated
+   labels rather than an opening of the exact signed receipt. The revised
+   identity makes those counterexamples mandatory and consumes only PTR-160's
+   canonical DAG-CBOR `RunnerPassAttestation@1` and local
+   `RunnerTrustPolicy@1`; legacy formats remain readable but can only run.
 6. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
    signed-receipt/candidate publication authority.
 7. `PTR-165` validates completed-task outputs, validation targets, exact
    gitlinks, commit ancestry and merge receipts instead of trusting board text.
+
+   Its first merged collector was itself contradicted: it derived task CIDs
+   using a private formula, accepted arbitrary JSON with blank task identity,
+   ignored authenticated JSONL reconciliation and the configured state-root
+   base, and returned success for a synthetic 0-of-71/292-gap report. PTR-165
+   is reopened under a new identity. The replacement must consume canonical
+   supervisor task identities and supported receipt schemas, distinguish an
+   invalid audit from a valid non-ready result, preserve explicit pending-owner
+   attribution, and produce a byte-deterministic CID-addressed observation.
 8. `PTR-166` uses the real backend to prove that unsigned, wrongly signed,
    stale, revoked and proving-key-only forged receipts cannot authorize a skip.
 9. `PTR-167` replays only receipt-identified historical blobs/commits, checks
