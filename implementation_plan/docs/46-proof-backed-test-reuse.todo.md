@@ -2281,7 +2281,7 @@ uncertain candidates execute normally.
 
 ## PTR-161 Install a safe datasets-owned pytest bootstrap
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
