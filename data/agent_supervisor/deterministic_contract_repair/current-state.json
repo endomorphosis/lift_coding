@@ -1,0 +1,329 @@
+{
+  "authoritative": false,
+  "classification_counts": {
+    "conflicting": 2,
+    "implemented_current": 2,
+    "incomplete": 1,
+    "stale": 1,
+    "unwired": 3
+  },
+  "completion_authorized": false,
+  "components": [
+    {
+      "classification": "implemented_current",
+      "component_id": "wpd.implementation_disposition",
+      "evidence": [
+        {
+          "bytes": 34956,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_disposition.py",
+          "sha256": "df9c34a75230a858dfc9038e75d9c6fa51c86fe6d60bf6b0412ea368904e540e"
+        },
+        {
+          "bytes": 16509,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_disposition.py",
+          "sha256": "e80f67ee375cea6f2da1a802c054ac0567b97d97e5515d3950c4e150f04cecc2"
+        }
+      ],
+      "legacy_programs": [
+        "WPD"
+      ],
+      "reason_codes": [
+        "source_and_focused_test_present"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_disposition.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_disposition.py"
+      ]
+    },
+    {
+      "classification": "implemented_current",
+      "component_id": "sca.analyzer_health",
+      "evidence": [
+        {
+          "bytes": 29242,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/analyzer_health.py",
+          "sha256": "223987bcb81944fc68073c42d11fca9298cf1bfed375bbcdd46500a85e69f71f"
+        },
+        {
+          "bytes": 10457,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_analysis_escalation.py",
+          "sha256": "787f5a7955d753f938e093116b08f883e85af5ef17cccab8e14b161817cdef15"
+        }
+      ],
+      "legacy_programs": [
+        "SCA"
+      ],
+      "reason_codes": [
+        "source_and_focused_test_present"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/analyzer_health.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_analysis_escalation.py"
+      ]
+    },
+    {
+      "classification": "stale",
+      "component_id": "sca.stored_baseline",
+      "evidence": [
+        {
+          "bytes": 2478,
+          "exists": true,
+          "path": "data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md",
+          "sha256": "f9d4f475db7f2fcdf9fa2230524ad3d2ffb789590ae66eb1733a7ca83b677926"
+        }
+      ],
+      "legacy_programs": [
+        "SCA"
+      ],
+      "reason_codes": [
+        "historical_baseline_is_not_bound_to_the_current_forest"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "data/agent_supervisor/swissknife_contract_assurance/baseline/summary.md"
+      ],
+      "test_paths": []
+    },
+    {
+      "classification": "unwired",
+      "component_id": "rpr.change_propagation_pipeline",
+      "evidence": [
+        {
+          "bytes": 79419,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/change_propagation_pipeline.py",
+          "sha256": "d10fbebad22006b91661392c1581079514cd518d8b5e065e0e29811c1e3cf837"
+        },
+        {
+          "bytes": 38131,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_change_propagation_integration.py",
+          "sha256": "b27f330a640519fb4eed5c48b4ae91d54b7c9f5b02fab98085d28683250b6e53"
+        }
+      ],
+      "legacy_programs": [
+        "RPR"
+      ],
+      "reason_codes": [
+        "feature_gated_pipeline_has_no_current_live_wiring_receipt"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/change_propagation_pipeline.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_change_propagation_integration.py"
+      ]
+    },
+    {
+      "classification": "conflicting",
+      "component_id": "wpd.pre_implementation_provider_gate",
+      "evidence": [
+        {
+          "bytes": 7166,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_provider_gate.py",
+          "sha256": "2b0480b331e6d5bdde60e74f724c758fb8c081172ab63600b3be74220ec2293b"
+        },
+        {
+          "bytes": 6327,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py",
+          "sha256": "a727e6d021ef52fe7116f8b70f93a146f32f8875c95407f0d8b7009b2d0834d8"
+        }
+      ],
+      "legacy_programs": [
+        "WPD",
+        "Planner",
+        "Doctor"
+      ],
+      "reason_codes": [
+        "legacy_residual_authorization_conflicts_with_deterministic_only_authority"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_provider_gate.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py"
+      ]
+    },
+    {
+      "classification": "conflicting",
+      "component_id": "wpd.pre_implementation_kernel",
+      "evidence": [
+        {
+          "bytes": 20814,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+          "sha256": "5d46cc48968ea2622024c19684051b728f5353bfe2eeec5585bfd075446fa011"
+        },
+        {
+          "bytes": 6327,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py",
+          "sha256": "a727e6d021ef52fe7116f8b70f93a146f32f8875c95407f0d8b7009b2d0834d8"
+        }
+      ],
+      "legacy_programs": [
+        "WPD",
+        "Planner",
+        "Doctor"
+      ],
+      "reason_codes": [
+        "derived_planner_and_doctor_view_ids_are_synthetic_not_service_evidence"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py"
+      ]
+    },
+    {
+      "classification": "unwired",
+      "component_id": "doctor.default_factory",
+      "evidence": [
+        {
+          "bytes": 18543,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/default_doctor_factory.py",
+          "sha256": "a0c75a3fdd9f480cae9f8adf3f59c9bd060d4520b16a3faef43e73e552ea5e41"
+        },
+        {
+          "bytes": 8930,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_doctor_end_to_end.py",
+          "sha256": "4ffdb47203d231636d5b02572122ae9673441b6d03ea201f5d74d620a29f2b10"
+        }
+      ],
+      "legacy_programs": [
+        "WPD",
+        "Doctor"
+      ],
+      "reason_codes": [
+        "factory_exists_but_has_no_current_live_doctor_service_receipt"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/control/default_doctor_factory.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_doctor_end_to_end.py"
+      ]
+    },
+    {
+      "classification": "unwired",
+      "component_id": "planner.default_factory",
+      "evidence": [
+        {
+          "bytes": 35398,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/default_planner_factory.py",
+          "sha256": "bf3b11b76450a42aa888f4519bc7f70691a883e7b967e5b701026c6eb39ccbfc"
+        },
+        {
+          "bytes": 24291,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_formal_planning_contracts.py",
+          "sha256": "d12730e0775f276cca7e71750a3545290f8f1e7029633bf54bb3a6b92d07fbf6"
+        }
+      ],
+      "legacy_programs": [
+        "WPD",
+        "Planner"
+      ],
+      "reason_codes": [
+        "factory_exists_but_has_no_current_live_planner_service_receipt"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/default_planner_factory.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_formal_planning_contracts.py"
+      ]
+    },
+    {
+      "classification": "incomplete",
+      "component_id": "planner_doctor.live_verification",
+      "evidence": [
+        {
+          "bytes": 130939,
+          "exists": true,
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/planner_doctor_live_benchmark.py",
+          "sha256": "4adca34eadd7158c83d0b8a276b6f18893bece2d27a21b354e61e4625031e628"
+        },
+        {
+          "bytes": 24993,
+          "exists": true,
+          "path": "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_doctor_live_fixed_point.py",
+          "sha256": "1870d72109f47f21f106fa224ce0ca61d3be22d95a1bffaf8da6eed1f9b720e4"
+        }
+      ],
+      "legacy_programs": [
+        "Planner",
+        "Doctor"
+      ],
+      "reason_codes": [
+        "required_live_verification_module_or_receipt_is_absent"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-component@1",
+      "source_paths": [
+        "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/planner_doctor_live_benchmark.py"
+      ],
+      "test_paths": [
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_doctor_live_fixed_point.py"
+      ]
+    }
+  ],
+  "report_id": "sha256:4c47cbf69ecf58dd4a16f568119735fa888fbb7094eb70993e85b32da33d85f7",
+  "repository_commit": "06ac45d61bab8a7e96a019c1bceace4eea3be83c",
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-current-state@1",
+  "synthetic_evidence": [
+    {
+      "affects": "provider_authorization",
+      "authoritative": false,
+      "classification": "conflicting",
+      "evidence_id": "legacy_residual_packet",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_provider_gate.py",
+      "present": true,
+      "reason_code": "synthetic_identity_cannot_establish_live_wiring",
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-synthetic-evidence@1",
+      "token": "legacy_worker_prompt_residual"
+    },
+    {
+      "affects": "planner_evidence",
+      "authoritative": false,
+      "classification": "conflicting",
+      "evidence_id": "synthetic_planner_view",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+      "present": true,
+      "reason_code": "synthetic_identity_cannot_establish_live_wiring",
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-synthetic-evidence@1",
+      "token": "\"view\": \"planner\""
+    },
+    {
+      "affects": "doctor_evidence",
+      "authoritative": false,
+      "classification": "conflicting",
+      "evidence_id": "synthetic_doctor_view",
+      "path": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/pre_implementation_kernel.py",
+      "present": true,
+      "reason_code": "synthetic_identity_cannot_establish_live_wiring",
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-synthetic-evidence@1",
+      "token": "\"view\": \"doctor\""
+    }
+  ]
+}
