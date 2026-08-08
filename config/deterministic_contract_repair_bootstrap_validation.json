@@ -1,13 +1,20 @@
 {
-  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-bootstrap-validation@1",
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-bootstrap-validation@2",
   "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
-  "accelerator_commit": "6650de6686e06c7a6391fdca9f78d4335d71b9d5",
+  "repository_commits": {
+    "Mcp-Plus-Plus": "dc3164653a48d059ae9812078359daeafb451c07",
+    "external/ipfs_accelerate": "b4eca030ed94e1214af9f9fa4914c889a3cd8579",
+    "external/ipfs_datasets": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+    "external/ipfs_kit": "ea3b47b72090354c27a9826d14a260d76b5e6914",
+    "swissknife": "26f06277888b09a3e7c9b4a3b844001f1dbc0841"
+  },
   "task_ids": [
     "DCR-000",
     "DCR-001",
     "DCR-002",
     "DCR-003",
-    "DCR-004"
+    "DCR-004",
+    "DCR-010"
   ],
   "test_files": [
     "external/ipfs_accelerate/test/api/test_agent_supervisor_configured_board_scheduler.py",
@@ -22,15 +29,26 @@
     "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py",
     "external/ipfs_accelerate/test/api/test_agent_supervisor_ordered_provider_authoring.py",
     "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py",
-    "external/ipfs_accelerate/test/api/test_agent_supervisor_grok_quota_terra_gate.py"
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_grok_quota_terra_gate.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_current_evidence.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_typescript_validation_image.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_validation_receipt.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_validation_runtime.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_reconciliation_gate.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_merge_train_callback_acceptance.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_manual_completion_authority_runtime.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_attempt_artifact_collision.py",
+    "external/ipfs_accelerate/test/api/test_declared_output_tracking_invariant.py",
+    "external/ipfs_kit/tests/test_tracked_package_syntax_repair.py"
   ],
   "result": {
-    "collected": 150,
-    "passed": 150,
+    "collected": 294,
+    "passed": 294,
     "failed": 0,
     "warnings": 1
   },
   "runtime_model_calls": 0,
   "artifacts_verified": true,
-  "receipt_id": "sha256:d12858670f2e672127b7d454ebf53024c380e1801580010088a886ebc585b6ae"
+  "receipt_id": "sha256:897e24775048eefe4b91a8d453bf512892227192cd83a7b773d75c77f694fb72"
 }

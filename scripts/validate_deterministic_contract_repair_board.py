@@ -35,6 +35,57 @@ SCHEMA = (
     "ipfs_accelerate_py.agent_supervisor."
     "deterministic_swissknife_mcplusplus_repair.scheduler_config@1"
 )
+BOOTSTRAP_VALIDATION_SCHEMA = (
+    "ipfs_accelerate_py/agent-supervisor/"
+    "deterministic-repair-bootstrap-validation@2"
+)
+BOOTSTRAP_REPOSITORY_SOURCE_FIELDS = {
+    "Mcp-Plus-Plus": "mcplusplus_planning_revision",
+    "external/ipfs_accelerate": "ipfs_accelerate_planning_revision",
+    "external/ipfs_datasets": "ipfs_datasets_planning_revision",
+    "external/ipfs_kit": "ipfs_kit_planning_revision",
+    "swissknife": "swissknife_planning_revision",
+}
+BOOTSTRAP_VALIDATION_TASK_IDS = (
+    "DCR-000",
+    "DCR-001",
+    "DCR-002",
+    "DCR-003",
+    "DCR-004",
+    "DCR-010",
+)
+BOOTSTRAP_VALIDATION_TEST_FILES = (
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_configured_board_scheduler.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_multi_supervisor_provider_policy.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_provider.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_ordered_provider_fallback.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_no_llm.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_no_llm_runtime_barrier.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_contracts.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_root_ownership.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_capabilities.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_ordered_provider_authoring.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_grok_quota_terra_gate.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_current_evidence.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_typescript_validation_image.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_validation_receipt.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_validation_runtime.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_reconciliation_gate.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_merge_train_callback_acceptance.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_manual_completion_authority_runtime.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_attempt_artifact_collision.py",
+    "external/ipfs_accelerate/test/api/test_declared_output_tracking_invariant.py",
+    "external/ipfs_kit/tests/test_tracked_package_syntax_repair.py",
+)
+BOOTSTRAP_VALIDATION_RESULT = {
+    "collected": 294,
+    "passed": 294,
+    "failed": 0,
+    "warnings": 1,
+}
 
 TASK_STATES = frozenset({"todo", "in_progress", "blocked", "completed"})
 GOAL_STATES = frozenset(
@@ -766,7 +817,7 @@ def _validate_config(
         expected_fields = {
             "schema",
             "board_namespace",
-            "accelerator_commit",
+            "repository_commits",
             "task_ids",
             "test_files",
             "result",
@@ -781,45 +832,85 @@ def _validate_config(
             receipt_id = receipt_body.pop("receipt_id")
             if receipt_id != _content_id(receipt_body):
                 errors.append("bootstrap validation receipt identity is stale or forged")
-            if bootstrap_validation.get("schema") != (
-                "ipfs_accelerate_py/agent-supervisor/"
-                "deterministic-repair-bootstrap-validation@1"
-            ):
+            if bootstrap_validation.get("schema") != BOOTSTRAP_VALIDATION_SCHEMA:
                 errors.append("bootstrap validation receipt schema is invalid")
             if bootstrap_validation.get("board_namespace") != BOARD_NAMESPACE:
                 errors.append("bootstrap validation receipt board namespace is invalid")
-            if bootstrap_validation.get("accelerator_commit") != source.get(
-                "ipfs_accelerate_planning_revision"
+            expected_repository_commits = {
+                path: source.get(source_field)
+                for path, source_field in BOOTSTRAP_REPOSITORY_SOURCE_FIELDS.items()
+            }
+            repository_commits = bootstrap_validation.get("repository_commits")
+            if repository_commits != expected_repository_commits or any(
+                not isinstance(commit, str)
+                or re.fullmatch(r"[0-9a-f]{40}", commit) is None
+                for commit in expected_repository_commits.values()
             ):
-                errors.append("bootstrap validation receipt accelerator revision is stale")
-            if bootstrap_validation.get("task_ids") != [
-                "DCR-000",
-                "DCR-001",
-                "DCR-002",
-                "DCR-003",
-                "DCR-004",
-            ]:
+                errors.append("bootstrap validation repository revisions are stale")
+            if bootstrap_validation.get("task_ids") != list(
+                BOOTSTRAP_VALIDATION_TASK_IDS
+            ):
                 errors.append("bootstrap validation receipt task population is invalid")
-            if bootstrap_validation.get("result") != {
-                "collected": 150,
-                "passed": 150,
-                "failed": 0,
-                "warnings": 1,
-            }:
+            if bootstrap_validation.get("result") != BOOTSTRAP_VALIDATION_RESULT:
                 errors.append("bootstrap validation receipt result is not passing")
             if bootstrap_validation.get("runtime_model_calls") != 0:
                 errors.append("bootstrap validation receipt has nonzero runtime model calls")
             if bootstrap_validation.get("artifacts_verified") is not True:
                 errors.append("bootstrap artifact verification is not sealed")
             test_files = bootstrap_validation.get("test_files")
-            if (
-                not isinstance(test_files, list)
-                or len(test_files) != 13
-                or len(set(test_files)) != 13
-                or any(not _safe_relative(item) for item in test_files)
-                or any(not (REPO_ROOT / item).is_file() for item in test_files)
-            ):
+            if test_files != list(BOOTSTRAP_VALIDATION_TEST_FILES):
                 errors.append("bootstrap validation test file set is incomplete")
+            elif isinstance(repository_commits, dict):
+                for item in test_files:
+                    path = REPO_ROOT / item
+                    repository = next(
+                        (
+                            root
+                            for root in BOOTSTRAP_REPOSITORY_SOURCE_FIELDS
+                            if item.startswith(f"{root}/")
+                        ),
+                        "",
+                    )
+                    relative = item.removeprefix(f"{repository}/")
+                    if (
+                        not _safe_relative(item)
+                        or not repository
+                        or path.is_symlink()
+                        or not path.is_file()
+                    ):
+                        errors.append(
+                            f"bootstrap validation test file is unsafe: {item}"
+                        )
+                        continue
+                    tracked = _git(
+                        "-c",
+                        "core.quotePath=false",
+                        "-C",
+                        repository,
+                        "ls-tree",
+                        "-z",
+                        str(repository_commits.get(repository, "")),
+                        "--",
+                        relative,
+                    )
+                    entries = [entry for entry in tracked.stdout.split("\0") if entry]
+                    try:
+                        metadata, tracked_path = entries[0].split("\t", 1)
+                        mode, object_type, object_id = metadata.split(" ")
+                    except (IndexError, ValueError):
+                        mode = object_type = object_id = tracked_path = ""
+                    if (
+                        tracked.returncode != 0
+                        or len(entries) != 1
+                        or tracked_path != relative
+                        or mode not in {"100644", "100755"}
+                        or object_type != "blob"
+                        or re.fullmatch(r"[0-9a-f]{40,64}", object_id) is None
+                    ):
+                        errors.append(
+                            "bootstrap validation test file is not an exact tracked "
+                            f"regular blob: {item}"
+                        )
     branch = _git("branch", "--show-current")
     expected_branch = str(source.get("accelerator_required_branch") or "")
     if branch.returncode != 0 or branch.stdout.strip() != expected_branch:

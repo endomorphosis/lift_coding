@@ -2,7 +2,7 @@
 
 **Program:** DCR (Deterministic Contract Repair)  
 **Date:** 2026-08-08  
-**Status:** executable plan; DCR-000–004 bootstrap sealed, DCR-010 ready  
+**Status:** executable plan; DCR-000–004 and DCR-010 completed, DCR-011 ready
 **Primary implementation:** `external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor`  
 **Logic authority:** `external/ipfs_datasets/ipfs_datasets_py/logic`  
 **Consumer:** `swissknife` desktop and virtual desktop  
@@ -69,7 +69,17 @@ The DCR-000–004 bootstrap is sealed in a dedicated clean integration branch,
 without cleaning, stashing, or rewriting the user's existing dirty checkout.
 The seal binds the tracked controls, exact five-root forest, reviewed no-LLM
 and ownership policies, deterministic artifact projections, and the clean
-bootstrap test result. The initial ready frontier is DCR-010. Every subsequent
+bootstrap test result. DCR-010 completed through the sealed Terra-high fallback
+and a managed merge receipt. Its post-merge self-invalidation exposed a missing
+completion gate; this checkpoint adds historical/current evidence validation
+and mandatory exact-target post-merge replay before any later todo completion.
+Before DCR-011, the reviewed ipfs-kit predecessor repairs the exact 22 tracked
+package files that failed Python parsing; all 1,161 tracked package Python
+blobs now parse, and the revision is bound as a five-root bootstrap input. The
+accelerator predecessor also pins an offline validation image containing the
+exact TypeScript 5.9.3 compiler and Node runtime closure, with a live bounded
+canary and the proven Terra-high sandbox smoke. The current ready frontier is
+DCR-011. Every subsequent
 launch must re-run the board validator and content-addressed forest preflight;
 changed controls, gitlinks, nested heads, or overlays fail closed.
 
@@ -539,7 +549,9 @@ foundation, not a production repair release:
 - the generic configured-board loader accepts the eight-lane scheduler and the
   exact `grok-4.5` then unavailable-or-quota-triggered
   `gpt-5.6-terra/high` authoring route;
-- the clean DCR-000–004 bootstrap suite passes 150 tests, including the
+- the clean DCR-000–010 bootstrap/revision suite passes 294 tests, including
+  the exact post-merge checkout proof, ipfs-kit syntax predecessor, and the
+  pinned TypeScript validation-image canary, as well as the
   multi-supervisor handoff that preserves Terra `high` while retaining the
   legacy Terra `medium` default;
 - in the preserved development overlay, 265 focused deterministic supervisor

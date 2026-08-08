@@ -267,8 +267,8 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Track: evidence
 - Depends on: DCR-003, DCR-010
 - Goal id: DCR-G020
-- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_repair_forest.py, data/agent_supervisor/deterministic_contract_repair/forest.json, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py
-- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py
+- Outputs: data/agent_supervisor/deterministic_contract_repair/forest.json
+- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py; python3 -m external.ipfs_accelerate.ipfs_accelerate_py.agent_supervisor.analysis.deterministic_repair_forest validate --workspace . --artifact data/agent_supervisor/deterministic_contract_repair/forest.json
 - Board namespace: deterministic-swissknife-mcplusplus-contract-repair-v1
 - Bundle: dcr/evidence
 - Parallel lane: dcr-forest
@@ -281,16 +281,16 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - LLM context budget bytes: 262144
 - Provider role: grok-primary-implement, codex-fallback-implement
 - Context budget tokens: 16384
-- Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_repair_forest.py, data/agent_supervisor/deterministic_contract_repair/forest.json, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py
+- Predicted files: data/agent_supervisor/deterministic_contract_repair/forest.json
 - Predicted symbols: RepositoryForestManifest, DirtyOverlay
 - Interfaces: RepositoryForestManifest@1, DirtyOverlay@1
 - Submodules: external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, Mcp-Plus-Plus, swissknife
 - Generated artifacts: data/agent_supervisor/deterministic_contract_repair/forest.json
-- Conflict policy: Record dirty state without modifying it; nested/uninitialized roots remain explicit.
-- Preconditions: Root policy validated.
-- Effects: Binds root realpaths, commits, trees, submodule pins, dirty overlays, exclusions, and configuration into one forest CID.
-- Evidence subset: root IDs, head/tree, overlay path/digest, submodule relation, config/policy root
-- Acceptance: Relocation-stable portable identity and host-local projection agree; missing required root or changed overlay invalidates downstream evidence.
+- Conflict policy: Record dirty state without modifying it; the reviewed module and test are sealed predecessor outputs and the artifact-carrier attempt changes only forest.json. A source/test defect abstains for a separate predecessor revision and reseal; nested or uninitialized roots remain explicit.
+- Preconditions: Root policy and the prelanded forest module/test are validated at the pinned accelerator revision.
+- Effects: Materializes only forest.json during task execution and binds root realpaths, commits, trees, recursive submodule pins, complete tracked/index/worktree/untracked/ignored overlays, reviewed exclusions, configuration, and the exact artifact-carrier/merge/todo-status lifecycle into one forest CID.
+- Evidence subset: root IDs, head/tree, recursive gitlinks, overlay path/mode/blob/bytes/digest, ignored state, reviewed exclusions, config/policy root, carrier and completion-transition commits
+- Acceptance: Relocation-stable portable identity and host-local projection agree; the checked-in receipt stays current only across the exact DCR-011 artifact-carrier, no-ff merge, and sole todo-to-completed transition; missing roots, changed overlays, unreviewed exclusions, extra transition paths, or later unrelated commits withhold downstream authority.
 - Embedding query: current multi root forest dirty overlay identity
 - AST query: repository_forest repository_forest_manifest snapshot submodule overlay
 
@@ -305,7 +305,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Depends on: DCR-011
 - Goal id: DCR-G020
 - Outputs: data/agent_supervisor/deterministic_contract_repair/analyzer-health.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_repair_analyzer_health.py, external/ipfs_accelerate/scripts/index_repository_contracts.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_analyzer_health.py
-- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_analyzer_health.py
+- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_analyzer_health.py; python3 -m external.ipfs_accelerate.ipfs_accelerate_py.agent_supervisor.analysis.deterministic_repair_analyzer_health validate --workspace . --forest data/agent_supervisor/deterministic_contract_repair/forest.json --artifact data/agent_supervisor/deterministic_contract_repair/analyzer-health.json --max-bytes 1048576
 - Board namespace: deterministic-swissknife-mcplusplus-contract-repair-v1
 - Bundle: dcr/evidence
 - Parallel lane: dcr-index
@@ -323,11 +323,11 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Interfaces: AnalyzerHealth@1, RepositoryIndex@1
 - Submodules: external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, Mcp-Plus-Plus, swissknife
 - Generated artifacts: data/agent_supervisor/deterministic_contract_repair/analyzer-health.json
-- Conflict policy: Fix parsers or type explicit unsupported rows; never hide failures with exclusions, caps, or threshold weakening.
-- Preconditions: Current forest bound.
-- Effects: Current whole-scope parse/index receipt with exact failure funnel and safe-for-completion decision.
-- Evidence subset: every tracked path disposition, parser version, failures, exclusions, canaries, thresholds
-- Acceptance: Health is safe for completion or all blockers are typed; stored 22-failure stale baseline cannot satisfy this task.
+- Conflict policy: Fix parsers or type explicit unsupported rows; never hide failures with exclusions, caps, threshold weakening, or a package-only scan. JSONC and oversized legitimate data/source files receive typed dispositions rather than false syntax errors. The receipt and test must replay after the implementation commit, gitlink integration, and todo-status commit rather than asserting a transient dirty-worktree HEAD.
+- Preconditions: Current forest bound; the digest-bound TypeScript 5.9.3 canary passes in the pinned offline validation image.
+- Effects: Enumerates all six RepairRootOwnership HEAD trees and emits a current whole-scope parse/index receipt with an exact failure funnel, a lossless deterministically compressed disposition ledger, and a safe-for-completion decision; CAS/index intermediates remain private scratch rather than task outputs.
+- Evidence subset: every tracked path disposition reconstructed from a versioned dictionary/prefix codec and deterministic compression, exact row count, uncompressed digest, per-root Merkle roots, parser/compiler/image versions and digests, failures, exclusions, canaries, thresholds
+- Acceptance: The single canonical regular-file artifact stays below the supervisor file-admission limit while decoding to exactly one disposition for every forest path with no omissions or duplicates; its live CLI replay must pass at the exact merged target before completion; legitimate source/data blobs up to the 32 MiB snapshot bound are inspected directly rather than rejected by the older 16 MiB provider limit; blockers, including unavailable reviewed compiler versions, remain directly typed and inspectable, but compiler-unavailable rows cannot claim completion-safe analyzer health; the stored 22-failure stale baseline cannot satisfy this task.
 - Embedding query: analyzer health parser failures exact coverage current forest
 - AST query: index_repository_contracts analyzer health parser registry coverage funnel
 
@@ -342,7 +342,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Depends on: DCR-011, DCR-012
 - Goal id: DCR-G020
 - Outputs: data/agent_supervisor/deterministic_contract_repair/provider-surfaces.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/provider_surface_health.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_provider_surface_health.py
-- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_provider_surface_health.py
+- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_provider_surface_health.py; python3 -m external.ipfs_accelerate.ipfs_accelerate_py.agent_supervisor.analysis.provider_surface_health validate --workspace . --forest data/agent_supervisor/deterministic_contract_repair/forest.json --artifact data/agent_supervisor/deterministic_contract_repair/provider-surfaces.json --max-bytes 1048576
 - Board namespace: deterministic-swissknife-mcplusplus-contract-repair-v1
 - Bundle: dcr/evidence
 - Parallel lane: dcr-surfaces
@@ -360,11 +360,11 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Interfaces: PythonMcpSurfaceExtractor, ProviderSurfaceHealth@1
 - Submodules: external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, Mcp-Plus-Plus
 - Generated artifacts: data/agent_supervisor/deterministic_contract_repair/provider-surfaces.json
-- Conflict policy: Expected descriptors cannot substitute for actual registrations; duplicate anchors remain ambiguous.
+- Conflict policy: Expected descriptors cannot substitute for actual registrations; duplicate anchors remain ambiguous. The checked-in projection must replay at the exact merged target and may bind its predecessor through an explicit verified transition, never through transient worktree dirt.
 - Preconditions: Healthy or explicitly bounded index exists.
-- Effects: Exact accelerate, datasets, kit, and MCP++ registration/dispatcher/handler/effect surface inventory.
-- Evidence subset: package root, path, symbol, registration, alias, schema, dispatcher, handler, effect, unresolved rows
-- Acceptance: All mandatory package roots scanned; unresolved mandatory or duplicate-equivalence rows block parity; unchanged scan is deterministic.
+- Effects: Exact accelerate, datasets, kit, and MCP++ registration/dispatcher/handler/effect surface inventory encoded as a compact dictionary/Merkle projection rather than the extractor's redundant raw source-file dump.
+- Evidence subset: package root/tree identity, exact scanned-file count and inventory Merkle root, dictionary-coded path/symbol/registration/alias/schema/dispatcher/handler/effect rows, archive/test/generated classifications, unresolved and duplicate-equivalence rows
+- Acceptance: All mandatory package roots are scanned and the canonical regular-file artifact stays below the supervisor file-admission limit without losing any active surface, blocker, or equivalence row; the live CLI decodes and replays it against the exact merged forest before completion; unresolved mandatory or duplicate-equivalence rows block parity; unchanged scan is deterministic.
 - Embedding query: actual MCP provider registration dispatcher handler surface index
 - AST query: PythonMcpSurfaceExtractor provider_surface_health package_mcp_interop tool registries
 
@@ -379,7 +379,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Depends on: DCR-011, DCR-012
 - Goal id: DCR-G020
 - Outputs: data/agent_supervisor/deterministic_contract_repair/desktop-expectations.json, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/deterministic_desktop_expectations.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/mcp_contract_catalog.py, external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_desktop_expectations.py
-- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_desktop_expectations.py
+- Validation: python3 -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_desktop_expectations.py; python3 -m external.ipfs_accelerate.ipfs_accelerate_py.agent_supervisor.analysis.deterministic_desktop_expectations validate --workspace . --forest data/agent_supervisor/deterministic_contract_repair/forest.json --artifact data/agent_supervisor/deterministic_contract_repair/desktop-expectations.json --max-bytes 1048576
 - Board namespace: deterministic-swissknife-mcplusplus-contract-repair-v1
 - Bundle: dcr/evidence
 - Parallel lane: dcr-desktop
@@ -397,11 +397,11 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Interfaces: McpContractCatalog@1, UIIRDocument, MCP-IDL, ORB
 - Submodules: external/ipfs_accelerate, Mcp-Plus-Plus, swissknife
 - Generated artifacts: data/agent_supervisor/deterministic_contract_repair/desktop-expectations.json
-- Conflict policy: Preserve source authority precedence; inferred prose and archived tests cannot silently become reviewed requirements.
+- Conflict policy: Preserve source authority precedence; inferred prose and archived tests cannot silently become reviewed requirements. The checked-in projection must replay at the exact merged target and may bind its predecessor through an explicit verified transition, never through transient worktree dirt.
 - Preconditions: Current SwissKnife root indexed.
-- Effects: Catalogs desktop clients, registries, descriptors, manifests, types, UI/UX IR, ORB/IDL, tests, and call sites with authority classes.
+- Effects: Reuses the existing MCP contract catalog and SwissKnife extractor to catalog desktop clients, registries, descriptors, manifests, types, UI/UX IR, ORB/IDL, tests, and call sites with authority classes; large source inventories use compact dictionary/Merkle bindings.
 - Evidence subset: source span, declaration kind, version, request/result/error, transport, UI action, authority and contradiction
-- Acceptance: Every active desktop MCP consumer is accounted for; conflicts and obsolete/generated/archive sources are typed and do not override reviewed declarations.
+- Acceptance: Every active desktop MCP consumer is accounted for in one canonical regular-file artifact under the supervisor admission limit; the live CLI decodes and replays it against the exact merged forest before completion; conflicts and obsolete/generated/archive sources are typed and do not override reviewed declarations.
 - Embedding query: SwissKnife desktop expected MCP contracts UI ORB IDL catalog
 - AST query: SwissKnife MCP client registry descriptors manifests desktop apps ORB IDL UI IR
 
@@ -426,7 +426,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Predicted symbols: CanonicalContractIdentity, canonical_json_cid, semantic_contract_key
 - Interfaces: CanonicalContractIdentity@1, SemanticContractKey@1
 - Submodules: external/ipfs_accelerate, Mcp-Plus-Plus, swissknife
-- Generated artifacts: data/agent_supervisor/deterministic_contract_repair/mcp_contract_identity_vectors.json
+- Generated artifacts: none
 - Conflict policy: Preserve normative MCP++ canonicalization; never trust claimed CIDs without local recomputation.
 - Symbolic first: true
 - LLM context budget bytes: 262144
@@ -435,9 +435,9 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Implementation mode: ordered_provider
 - Runtime model calls: 0
 - Preconditions: Actual and expected inventories share one forest.
-- Effects: One relocation-stable key for package, operation, direction, schema root, profile, transport, and runtime instance.
+- Effects: One relocation-stable key for package, operation, direction, schema root, profile, transport, and runtime instance; all vectors remain inline or test-local because no standalone vector artifact is declared.
 - Evidence subset: canonical bytes, local CID, claimed CID, semantic key, source roots
-- Acceptance: Equivalent declarations converge; altered bytes, pseudo-CIDs, direction/profile changes, or duplicate aliases remain distinct and typed.
+- Acceptance: Equivalent declarations converge; altered bytes, pseudo-CIDs, direction/profile changes, or duplicate aliases remain distinct and typed; no undeclared vector artifact is written.
 
 ## DCR-021 Build the complete cross-repository contract graph
 
