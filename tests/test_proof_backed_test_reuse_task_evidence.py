@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +23,11 @@ def git(root: Path, *args: str) -> str:
     return subprocess.check_output(("git", *args), cwd=root, text=True).strip()
 
 
+def write_json(path: Path, value: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(evidence.canonical_json(value))
+
+
 def make_repo(tmp_path: Path) -> Path:
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -37,112 +43,138 @@ def make_repo(tmp_path: Path) -> Path:
     return repo
 
 
-def write_board(tmp_path: Path, *, status: str = "completed") -> Path:
+COMMAND = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
+
+
+def write_board(tmp_path: Path, *, owner: bool = False) -> Path:
+    output = "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py" if owner else "scripts/owned.py"
     board = tmp_path / "board.md"
     board.write_text(
         "## PTR-001 First\n\n- Status: completed\n- Depends on:\n- Goal id: G1\n"
-        "- Outputs: scripts/owned.py\n- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q\n\n"
-        f"## PTR-002 Second\n\n- Status: {status}\n- Depends on: PTR-001\n- Goal id: G2\n"
-        "- Outputs: scripts/owned.py\n- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q\n",
+        f"- Outputs: {output}\n- Validation: {COMMAND}\n\n"
+        + ("## PTR-163 Later owner\n\n- Status: todo\n- Depends on: PTR-001\n- Goal id: G2\n"
+           "- Outputs: scripts/future.py\n- Validation: python3 -m pytest tests/test_owned.py -q\n" if owner else ""),
         encoding="utf-8",
     )
     return board
 
 
-def receipt(task_id: str, snapshot: object, command: str, *, commit: str | None = None, fresh: int = 9_999_999_999_999) -> dict[str, object]:
-    return {
-        "task_id": task_id,
-        "merge_receipt_cid": "baguqeera" + task_id.lower(),
-        "git_commit_id": commit or snapshot.commit,
-        "validation_receipt_cid": "baguqeeravalid" + task_id.lower(),
-        "validation_command": command,
-        "passed": True,
-        "proof_reuse_mode": "off",
-        "fresh_until_ms": fresh,
-        "git_tree_id": snapshot.tree,
-        "gitlink_state_cid": snapshot.gitlink_state_cid,
-    }
+def write_event_chain(state: Path, *, tamper: bool = False) -> None:
+    lane = state / "state" / "ptr_lane_0"
+    payload = {"previous_event_id": "", "kind": "reconciled", "request_id": "r1"}
+    payload["event_id"] = evidence._sha256(evidence.canonical_json(payload))
+    if tamper:
+        payload["kind"] = "forged"
+    events = lane / "ptr_lane_0_events.jsonl"
+    events.parent.mkdir(parents=True, exist_ok=True)
+    events.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+    write_json(lane / "ptr_lane_0_events.jsonl.manifest.json", {
+        "schema": evidence.EVENT_MANIFEST_SCHEMA,
+        "files": [{"path": events.name, "canonical_events": True, "event_count": 1, "start_previous_event_id": ""}],
+    })
 
 
-def write_receipts(root: Path, values: list[dict[str, object]]) -> None:
-    root.mkdir(parents=True, exist_ok=True)
-    for index, value in enumerate(values):
-        (root / f"receipt-{index}.json").write_text(json.dumps(value), encoding="utf-8")
+def task(board: Path) -> object:
+    return evidence.parse_board(board)["PTR-001"]
 
 
-def test_canonical_cid_is_stable_and_report_write_is_idempotent(tmp_path: Path) -> None:
-    assert evidence.canonical_cid({"b": 2, "a": 1}) == evidence.canonical_cid({"a": 1, "b": 2})
-    report = {"schema": evidence.REPORT_SCHEMA}
-    report["report_cid"] = evidence.canonical_cid(report)
-    first = evidence.write_report(report, tmp_path)
-    assert first == evidence.write_report(report, tmp_path)
-    assert first.name == f"{report['report_cid']}.json"
-    persisted = json.loads(first.read_text(encoding="utf-8"))
-    claimed = persisted.pop("report_cid")
-    assert claimed == evidence.canonical_cid(persisted)
+def write_authority(state: Path, task: object, snapshot: object, *, fresh: bool = True,
+                    tamper_validation: bool = False, train_status: str = "merged") -> None:
+    dedupe = "a" * 64
+    request = "request-001"
+    identity = {"task_id": task.task_id, "canonical_task_key": task.canonical_task_key,
+                "canonical_task_cid": task.canonical_task_cid}
+    queue = {"status": "completed", "request_id": request, "dedupe_key": dedupe, **identity,
+             "canonical_task_id": task.canonical_task_cid,
+             "metadata": {"schema": evidence.COMPLETION_SCHEMA, "task": identity,
+                          "completion_task_cids": {task.task_id: task.canonical_task_cid}}}
+    write_json(state / "merge-queue" / "completed" / "request-001.json", queue)
+    train = {"status": train_status, "integrated": train_status in {"merged", "already_merged"},
+             "request_id": request, "task_id": task.task_id,
+             "canonical_task_id": task.canonical_task_key, "target_commit": snapshot.commit,
+             "merge_result": {"integration_commit_proof": {"passed": True}}}
+    write_json(state / "merge-queue" / "train" / "receipts" / f"{dedupe}.json", train)
+    payload = {**identity, "validation_command_cid": evidence.canonical_validation_command_cid(task.validation_command),
+               "proof_reuse_mode": "off", "passed": True, "exit_code": 0, "skipped": 0,
+               "git_commit_id": snapshot.commit, "git_tree_id": snapshot.tree,
+               "gitlink_state_cid": snapshot.gitlink_state_cid, "fresh": fresh}
+    record = {"schema": "ipfs_accelerate_py/proof-reuse-validation-receipt@1",
+              "validation_receipt_cid": evidence.canonical_cid(payload), "payload": payload}
+    if tamper_validation:
+        record["payload"]["passed"] = False
+    receipt = state / "state" / "preflight" / "reconciliation" / "ptr_lane_0" / "validation" / "receipts"
+    write_json(receipt / f"{evidence.canonical_cid(record)}.json", record)
 
 
-def test_live_audit_requires_files_ancestor_receipts_and_fresh_exact_validation(tmp_path: Path) -> None:
-    repo = make_repo(tmp_path)
-    board = write_board(tmp_path)
-    state = tmp_path / "state"
-    validator = evidence.ProofReuseTaskEvidenceValidator(board, state, repo, now_ms=100)
-    missing = validator.audit()
-    kinds = {gap["kind"] for gap in missing["gaps"]}
-    assert not missing["ready"]
-    assert {"COMPLETION_RECEIPT_MISSING", "VALIDATION_RECEIPT_MISSING", "DEPENDENCY_OWNERSHIP_UNPROVEN"} <= kinds
+def audit(repo: Path, board: Path, state: Path) -> dict[str, object]:
+    return evidence.ProofReuseTaskEvidenceValidator(board, state, repo).audit()
 
+
+def test_canonical_board_join_and_historical_receipts_make_a_ready_report(tmp_path: Path) -> None:
+    repo, board, state = make_repo(tmp_path), write_board(tmp_path), tmp_path / "v8"
     snapshot = evidence.GitSnapshot(repo)
-    command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
-    write_receipts(state, [receipt("PTR-001", snapshot, command), receipt("PTR-002", snapshot, command)])
-    ready = evidence.ProofReuseTaskEvidenceValidator(board, state, repo, now_ms=100).audit()
-    assert ready["ready"]
-    assert ready["dependency_order"] == [{"later_task": "PTR-002", "dependency": "PTR-001", "later_commit": snapshot.commit, "dependency_commit": snapshot.commit, "ordered": True}]
+    write_event_chain(state)
+    write_authority(state, task(board), snapshot)
+    first, second = audit(repo, board, state), audit(repo, board, state)
+    assert first == second
+    assert first["audit_valid"] and first["ready"]
+    assert first["tasks"][0]["identity"] == {"task_id": "PTR-001", "canonical_task_key": task(board).canonical_task_key,
+                                                   "canonical_task_cid": task(board).canonical_task_cid}
+    assert first["report_cid"] == evidence.canonical_cid({key: value for key, value in first.items() if key != "report_cid"})
 
 
-@pytest.mark.parametrize("mutation, expected", [
-    (lambda value, snapshot: value.update({"fresh_until_ms": 99}), "VALIDATION_RECEIPT_STALE"),
-    (lambda value, snapshot: value.update({"git_tree_id": "0" * 40}), "VALIDATION_PIN_MISMATCH"),
-    (lambda value, snapshot: value.update({"validation_command": "pytest wrong.py"}), "VALIDATION_COMMAND_MISMATCH"),
+@pytest.mark.parametrize(("fresh", "tamper", "expected"), [
+    (False, False, "VALIDATION_RECEIPT_STALE"),
+    (True, True, "VALIDATION_RECEIPT_UNAUTHENTICATED"),
 ])
-def test_invalid_validation_evidence_is_never_ready(tmp_path: Path, mutation: object, expected: str) -> None:
-    repo = make_repo(tmp_path)
-    board = write_board(tmp_path, status="todo")
-    snapshot = evidence.GitSnapshot(repo)
-    command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
-    value = receipt("PTR-001", snapshot, command)
-    mutation(value, snapshot)
-    state = tmp_path / "state"
-    write_receipts(state, [value])
-    report = evidence.ProofReuseTaskEvidenceValidator(board, state, repo, now_ms=100).audit()
-    assert not report["ready"]
+def test_stale_or_forged_validation_is_a_typed_gap(tmp_path: Path, fresh: bool, tamper: bool, expected: str) -> None:
+    repo, board, state = make_repo(tmp_path), write_board(tmp_path), tmp_path / "v8"
+    write_event_chain(state)
+    write_authority(state, task(board), evidence.GitSnapshot(repo), fresh=fresh, tamper_validation=tamper)
+    report = audit(repo, board, state)
+    assert report["audit_valid"] and not report["ready"]
     assert expected in {gap["kind"] for gap in report["gaps"]}
 
 
-def test_non_ancestor_receipt_and_wrong_submodule_pin_are_reported(tmp_path: Path) -> None:
-    repo = make_repo(tmp_path)
-    board = write_board(tmp_path, status="todo")
-    snapshot = evidence.GitSnapshot(repo)
-    command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
-    subprocess.run(("git", "checkout", "-qb", "side"), cwd=repo, check=True)
-    (repo / "side.txt").write_text("side\n", encoding="utf-8")
-    subprocess.run(("git", "add", "side.txt"), cwd=repo, check=True)
-    subprocess.run(("git", "commit", "-qm", "side"), cwd=repo, check=True)
-    side = git(repo, "rev-parse", "HEAD")
-    subprocess.run(("git", "checkout", "-q", "master"), cwd=repo, check=True)
-    state = tmp_path / "state"
-    write_receipts(state, [receipt("PTR-001", snapshot, command, commit=side)])
-    report = evidence.ProofReuseTaskEvidenceValidator(board, state, repo, now_ms=100).audit()
-    assert "RECEIPT_COMMIT_NOT_ANCESTOR" in {gap["kind"] for gap in report["gaps"]}
+def test_failed_and_quarantined_rows_are_not_authority(tmp_path: Path) -> None:
+    repo, board, state = make_repo(tmp_path), write_board(tmp_path), tmp_path / "v8"
+    write_event_chain(state)
+    rogue = {"status": "completed", "task_id": "PTR-001", "metadata": {"schema": evidence.COMPLETION_SCHEMA}}
+    write_json(state / "merge-queue" / "failed" / "rogue.json", rogue)
+    write_json(state / "quarantine" / "validation.json", rogue)
+    report = audit(repo, board, state)
+    assert report["audit_valid"] and "COMPLETION_RECEIPT_MISSING" in {gap["kind"] for gap in report["gaps"]}
 
 
-def test_wrong_gitlink_pin_is_not_treated_as_a_present_output(tmp_path: Path) -> None:
+def test_event_tamper_fails_closed_and_cid_named_report_is_rehashed(tmp_path: Path) -> None:
+    repo, board, state = make_repo(tmp_path), write_board(tmp_path), tmp_path / "v8"
+    write_event_chain(state, tamper=True)
+    assert not audit(repo, board, state)["audit_valid"]
+    report = {"schema": evidence.REPORT_SCHEMA}
+    report["report_cid"] = evidence.canonical_cid(report)
+    path = evidence.write_report(report, state)
+    path.write_text("forged", encoding="utf-8")
+    with pytest.raises(ValueError, match="does not rehash"):
+        evidence.write_report(report, state)
+
+
+def test_configured_root_and_ptr_163_owner_drive_expect_incomplete(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    base = tmp_path / "configured"
+    state = base / evidence.SEALED_STATE_SUFFIX
+    repo, board = make_repo(tmp_path), write_board(tmp_path, owner=True)
+    write_event_chain(state)
+    monkeypatch.setenv(evidence.STATE_ROOT_ENV, str(base))
+    assert evidence.default_state_root() == state
+    report = audit(repo, board, state)
+    owner_gaps = [gap for gap in report["gaps"] if gap["owner_attributed"]]
+    assert report["audit_valid"] and not report["ready"]
+    assert owner_gaps and "PTR-163" in owner_gaps[0]["detail"]
+
+
+def test_missing_state_and_malformed_board_fail_closed(tmp_path: Path) -> None:
     repo = make_repo(tmp_path)
-    board = write_board(tmp_path, status="todo")
-    validator = evidence.ProofReuseTaskEvidenceValidator(board, tmp_path / "state", repo, now_ms=100)
-    # Model a checked-out component whose observed pin cannot equal the board's
-    # expected live gitlink.  The validator must report the pin mismatch rather
-    # than accepting the working-tree file.
-    validator.snapshot.gitlinks["scripts"] = "0" * 40
-    report = validator.audit()
-    assert "GITLINK_PIN_MISMATCH" in {gap["kind"] for gap in report["gaps"]}
+    board = tmp_path / "broken.md"
+    board.write_text("not a board", encoding="utf-8")
+    report = audit(repo, board, tmp_path / "absent")
+    assert not report["audit_valid"]
+    assert {"STATE_ROOT_MISSING", "EVENT_CHAIN_MISSING"} <= set(report["audit_errors"])
