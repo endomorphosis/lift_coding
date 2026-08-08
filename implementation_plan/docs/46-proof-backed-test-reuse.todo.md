@@ -2230,7 +2230,7 @@ rollout and all uncertain candidates execute normally.
 
 ## PTR-160 Authenticate pass receipts with a content-addressed runner attestation
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
