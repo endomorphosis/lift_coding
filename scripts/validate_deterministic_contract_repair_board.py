@@ -801,8 +801,8 @@ def _validate_config(
             ]:
                 errors.append("bootstrap validation receipt task population is invalid")
             if bootstrap_validation.get("result") != {
-                "collected": 123,
-                "passed": 123,
+                "collected": 131,
+                "passed": 131,
                 "failed": 0,
                 "warnings": 1,
             }:
