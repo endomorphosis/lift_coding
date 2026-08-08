@@ -240,15 +240,15 @@
     ]
   },
   "baseline": {
-    "baseline_id": "sha256:497ece90b76c1fcaf0b32d119120ed84561b417e9c860ac50da1fe656d9d541d",
-    "forest_id": "sha256:1a394247e28dd935123747ecab228b6ba27544220ec2b650211fad3bdc48be23",
-    "inventory_id": "sha256:a0f8c9474a84bcaca846d15577c225f675c9bc85a691b4236c3bd266a83a2d66",
+    "baseline_id": "sha256:241b4ac30f62e25f079e1f925e2a88371f95f7f114b40480295f55eb785956c3",
+    "forest_id": "sha256:58f2f606784788c5268d3903def11b2ee5dfe484fc44494a22caf074360a953a",
+    "inventory_id": "sha256:dd90a0013885da724aa275fcdb57109f715b0a70db308c43818324dfe19550b3",
     "valid": true,
-    "validator_report_id": "sha256:982da9ea87c63fe44aa6443314a92e614099d22f6d550f4e76a2b7034790af30"
+    "validator_report_id": "sha256:2cbd7a79d6388e08ac10172bbe9254598547998812e6cb5f6d69585fb9ad92b9"
   },
   "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
   "forest": {
-    "forest_id": "sha256:1a394247e28dd935123747ecab228b6ba27544220ec2b650211fad3bdc48be23",
+    "forest_id": "sha256:58f2f606784788c5268d3903def11b2ee5dfe484fc44494a22caf074360a953a",
     "roots": [
       {
         "gitlink_commit": "dc3164653a48d059ae9812078359daeafb451c07",
@@ -260,10 +260,10 @@
         "tree": "6560c3d0c926be12df860afb7d7c82043a1769ba"
       },
       {
-        "gitlink_commit": "e2770c767b7241985507b00e4c0151c595944d30",
-        "head_commit": "e2770c767b7241985507b00e4c0151c595944d30",
+        "gitlink_commit": "900212e5bdec36f9b67bc5f659fa4007a241779b",
+        "head_commit": "900212e5bdec36f9b67bc5f659fa4007a241779b",
         "path": "external/ipfs_accelerate",
-        "planning_revision": "e2770c767b7241985507b00e4c0151c595944d30",
+        "planning_revision": "900212e5bdec36f9b67bc5f659fa4007a241779b",
         "recursive_gitlinks": [
           {
             "commit": "1d932cc778a24cc0bf46fc4baad8306d4fed9c4b",
@@ -306,8 +306,8 @@
             "path": "test/huggingface_transformers"
           }
         ],
-        "root_id": "sha256:60f473518c9f32dc5035693110fd9a8dd403a56fff81e750f94980ca53a91645",
-        "tree": "ea8cd17c89036a7b9ab88fa6bbd38619b4e1c48a"
+        "root_id": "sha256:69ec1455e6f57c18d3b23843c1e268cf86d8587c19bf4a98ea405ebbb42a44b5",
+        "tree": "c04b2b1dcad351160c6db89003f0d187adb0b7aa"
       },
       {
         "gitlink_commit": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
@@ -432,7 +432,7 @@
       },
       {
         "path": "config/deterministic_contract_repair_bootstrap_validation.json",
-        "sha256": "d6fc0599cf5d02e8a8dd943880f55a7f9954b36a7e69b4ccabd85b0d33e1ba42"
+        "sha256": "f28bbe3b8a5a2df8ff5025c111ff296d5753ca6aa95666a1966349681a10b2fc"
       },
       {
         "path": "config/deterministic_contract_repair_roots.json",
@@ -440,7 +440,7 @@
       },
       {
         "path": "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
-        "sha256": "44374d1ccb497a132802f2210bd290164a0be74cbbb24293d443ebe484985330"
+        "sha256": "d4d9b1ab1c72b3c6556f6390ebcc5d277798cd07a00bebfad134fb8b686edf4b"
       },
       {
         "path": "data/agent_supervisor/deterministic_contract_repair/capabilities.json",
@@ -476,12 +476,12 @@
       },
       {
         "path": "scripts/validate_deterministic_contract_repair_board.py",
-        "sha256": "40b37a6df693cb7dd36e26d9c3f76f2d118d2bba38feafc43c276883ae5777dc"
+        "sha256": "c8587510c1221f1ede408368b5d4e06707639d5d8880b16b5d51b3e819a11ee8"
       }
     ],
-    "forest_id": "sha256:1a394247e28dd935123747ecab228b6ba27544220ec2b650211fad3bdc48be23",
-    "inventory_id": "sha256:a0f8c9474a84bcaca846d15577c225f675c9bc85a691b4236c3bd266a83a2d66"
+    "forest_id": "sha256:58f2f606784788c5268d3903def11b2ee5dfe484fc44494a22caf074360a953a",
+    "inventory_id": "sha256:dd90a0013885da724aa275fcdb57109f715b0a70db308c43818324dfe19550b3"
   },
   "schema": "ipfs_accelerate_py/agent-supervisor/configured-board-bootstrap-seal@2",
-  "seal_id": "sha256:5da2ef08575c59a8549fa1847e0408f3a020dc5070946a511076721223dbed08"
+  "seal_id": "sha256:c476b21734f8ad18b544236290a59e53b5f51185fe6bc656d9ca93bc258266db"
 }
