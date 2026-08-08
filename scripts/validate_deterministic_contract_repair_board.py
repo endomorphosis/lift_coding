@@ -801,8 +801,8 @@ def _validate_config(
             ]:
                 errors.append("bootstrap validation receipt task population is invalid")
             if bootstrap_validation.get("result") != {
-                "collected": 91,
-                "passed": 91,
+                "collected": 108,
+                "passed": 108,
                 "failed": 0,
                 "warnings": 1,
             }:
@@ -814,8 +814,8 @@ def _validate_config(
             test_files = bootstrap_validation.get("test_files")
             if (
                 not isinstance(test_files, list)
-                or len(test_files) != 10
-                or len(set(test_files)) != 10
+                or len(test_files) != 12
+                or len(set(test_files)) != 12
                 or any(not _safe_relative(item) for item in test_files)
                 or any(not (REPO_ROOT / item).is_file() for item in test_files)
             ):

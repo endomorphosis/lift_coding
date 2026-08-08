@@ -1,7 +1,7 @@
 {
   "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-bootstrap-validation@1",
   "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
-  "accelerator_commit": "6b9c04f6c66c2342c97a858df58275a58c398afd",
+  "accelerator_commit": "e2770c767b7241985507b00e4c0151c595944d30",
   "task_ids": [
     "DCR-000",
     "DCR-001",
@@ -19,15 +19,17 @@
     "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_contracts.py",
     "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_root_ownership.py",
     "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_capabilities.py",
-    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py"
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_ordered_provider_authoring.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py"
   ],
   "result": {
-    "collected": 91,
-    "passed": 91,
+    "collected": 108,
+    "passed": 108,
     "failed": 0,
     "warnings": 1
   },
   "runtime_model_calls": 0,
   "artifacts_verified": true,
-  "receipt_id": "sha256:7e12ceac09453c6ef19fc9355be868564a96510b0b4ae40b5b56f7986f3df0a4"
+  "receipt_id": "sha256:1d48d3c5a27e82083fb462c9b9f994b3fc58348ddea7ac2440c50931e44ae894"
 }
