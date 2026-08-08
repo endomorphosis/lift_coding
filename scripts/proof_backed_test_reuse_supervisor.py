@@ -1665,7 +1665,7 @@ def _closeout(*, report_only: bool = False) -> dict[str, object]:
         )
     before = _status_payload()
     if before.get("healthy") is not True or before.get("work_complete") is not True:
-        # Development e2e: lanes are often stopped after 66/66 board completion.
+        # Development e2e: lanes are often stopped after full board completion.
         # Allow closeout (including full write path) against retained health inputs
         # when every implementation task is already complete. Production/default
         # still requires live healthy work-complete lanes.

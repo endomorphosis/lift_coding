@@ -2,6 +2,8 @@
 
 Date: 2026-07-31
 
+Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v5`)
+
 Program: `proof-backed-test-reuse-v1`
 
 Task prefix: `PTR-`
@@ -307,7 +309,7 @@ traces can still be diagnostic and cached, but cannot authorize reuse.
 
 ## 8. Pass receipt and zero-knowledge certificate
 
-### 8.1 `TestPassReceipt@1`
+### 8.1 `SignedTestPassReceipt@2`
 
 Created only after terminal teardown, the receipt binds:
 
@@ -319,37 +321,52 @@ Created only after terminal teardown, the receipt binds:
 - captured dependency forest and capability roots;
 - schema and policy CIDs.
 
-The receipt may be signed or otherwise admitted by the configured runner trust
-policy. Its immutable CID is stored before any proving request.
+The receipt is not pass authority until a trusted runner has emitted a canonical
+`RunnerPassAttestation@1`. That attestation signs the receipt CID, execution-key
+and candidate-context CIDs, setup/call/teardown and trace-completeness roots,
+fresh nonce, trust domain, key epoch and policy CID. The initial signature
+profile uses an explicitly pinned signing algorithm and represents its public
+key as a strict multicodec/multihash CID. The verifier recomputes every CID,
+verifies the signature locally, checks the trust policy plus key rotation and
+revocation state, and rejects an unknown, expired, revoked, unsigned or legacy
+hash-only receipt. Its immutable canonical bytes are stored before proving.
 
-### 8.2 `TestPassStatementV1`
+### 8.2 `TestPassStatementV5`
 
-The real-ZK statement proves possession of an admitted receipt satisfying:
+The real-ZK statement proves possession of the exact receipt committed by a
+separately verified runner attestation and satisfying:
 
 1. the private receipt hashes to the public receipt CID;
 2. its execution-key CID equals the public current key;
 3. setup, call, and teardown are all pass;
 4. no disqualifying outcome bit is set;
 5. the trace-completeness and policy identifiers match public admitted values;
-6. the issuer binding/commitment satisfies the approved trust policy.
+6. its signed-attestation, candidate-context and phase-root commitments equal
+   the public values; and
+7. the proof-system/circuit/key/issuer binding satisfies the approved policy.
 
 Public inputs include statement/circuit/verifying-key CIDs, receipt and
-execution-key CIDs, policy CID, outcome bits, issuer commitment, and allowed
-epoch data. Private inputs contain only the minimum receipt witness. The threat
-model must cover replay, substitution, wrong circuit/key, issuer confusion,
-malformed proof, public-input mismatch, witness leakage, and simulated backend
+execution-key CIDs, signed-attestation CID, runner public-key CID, policy CID,
+outcome and phase-root commitments, issuer commitment, nonce domain and allowed
+epoch data. Private inputs contain only the minimum receipt witness. Signature
+verification is either circuit-native or a mandatory locally verified
+co-condition whose exact attestation CID is a public input; a prover-controlled
+boolean that merely claims a signature was checked is never accepted. The
+threat model covers replay, substitution, wrong circuit/key, runner or issuer
+confusion, proving-key-only forgery, malformed proof, public-input mismatch,
+witness leakage, downgrade, rotation/revocation races, and simulated-backend
 mislabeling.
 
 ### 8.3 Proving and verification
 
 - Verification is local through a pinned real backend and bounded by byte/time
   limits.
-- The production-activation correction uses the reviewed local Groth16 backend
+- The authenticated-current-tree correction uses the reviewed local Groth16 backend
   for issuance. `IPFS_TEST_PROOF_REUSE_GROTH16_ENDPOINT` is currently a bounded
   diagnostic/configuration capability only, not an implemented remote issuer;
   its absence never blocks launch or test execution. A future authenticated
   endpoint client requires a separately reviewed trust/transport task and is
-  not completion evidence for this 66-task board.
+  not completion evidence for this 76-task board.
 - Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
   provider or diagnostic endpoint state records `certificate_deferred` and
   does not change the passed test.
@@ -506,6 +523,9 @@ merge gates.
 | `PTR-G090` kit integration | `ASI-G250` | Optional immutable transport and capability facts |
 | `PTR-G100` adversarial/e2e | `ASI-G240`, `ASI-G280`, `ASI-G360` | Hermetic tests, recovery, rollout safety |
 | `PTR-G110` rollout/closeout | `ASI-G260`, `ASI-G290`, `ASI-G360` | Parallel operation, measurable efficiency, staged promotion |
+| `PTR-G120` authenticated authority | `CBP-G025`, `CBP-G200`, `ASI-G300` | Signed runner pass attestation, key lifecycle, V5 real-proof binding |
+| `PTR-G130` zero-configuration runtime | `ASI-G220`, `ASI-G240`, `ASI-G350` | Safe package bridges and ordinary pytest discovery without test rewrites |
+| `PTR-G140` current-tree assurance | `ASI-G240`, `ASI-G280`, `ASI-G360` | Reachable exact pins, replayable evidence, adversarial and subprocess gates |
 
 The PTR heap is a separate program. It does not silently add children to closed
 ASI or CBP populations. Cross-references describe conformance; PTR completion
@@ -747,6 +767,75 @@ keys or a trusted-setup manifest is a truthful activation gap: tests continue to
 run and the supervisor continues, but no warm skip or closeout authority is
 invented.
 
+## 13.4 Authenticated-receipt and reachable-current-tree repair (2026-08-08)
+
+A final launch audit rejected the 66-task completion packet. Its labels are
+retained as historical facts, but they do not establish a runnable or secure
+current tree:
+
+- the datasets and kit commits named by the historical outer gitlinks are not
+  available from the configured remotes, while the nearest reachable commits
+  predate required proof-reuse outputs;
+- the completion validator accepted a completed Markdown label without proving
+  that every declared output and validation target exists at the exact pinned
+  commit or that a task receipt names an ancestor commit;
+- the V4 statement proves knowledge of internally consistent receipt bytes but
+  does not establish that a trusted pytest runner observed the asserted pass;
+  possession of proving material can therefore create a mathematically valid
+  proof around a self-asserted pass;
+- the warm plugin path filters candidates before the locator-only lookup can
+  recover retained current-context material;
+- datasets has no package-owned cold-safe proof plugin loader and kit's source
+  fallback relies on a pytest hook location that is not guaranteed to load;
+  package `__init__.py` injection alone cannot solve either case because pytest
+  need not import the package before collection; and
+- the prior cross-repository e2e explicitly loaded the plugin or injected
+  services, and its skip counts did not independently prove that a forged hit
+  avoided or executed the actual test body.
+
+The bounded repair is `PTR-160` through `PTR-169`, taking the reviewed
+population to 76 tasks. It does not pretend that the old unreachable commits
+are valid launch pins. The clean integration branch instead starts from the
+nearest fetchable datasets and kit baselines, preserves the compatible
+accelerator supervisor commit, and makes reconstruction of every missing
+historical output explicit work with current evidence:
+
+1. `PTR-160` defines signed runner pass-attestation, trust-policy, public-key
+   multicodec CID, nonce, epoch, rotation and revocation contracts.
+2. `PTR-161` restores the datasets-owned missing outputs and supplies a
+   `pytest11`/source bootstrap that is inert when accelerator or ZK extras are
+   absent.
+3. `PTR-162` restores the kit-owned immutable stores and supplies the same
+   cold-safe bootstrap and strict-CID transport boundary.
+4. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
+   the signed attestation CID and requires local signature/trust verification.
+5. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
+   signed-receipt/candidate publication authority.
+6. `PTR-165` validates completed-task outputs, validation targets, exact
+   gitlinks, commit ancestry and merge receipts instead of trusting board text.
+7. `PTR-166` uses the real backend to prove that unsigned, wrongly signed,
+   stale, revoked and proving-key-only forged receipts cannot authorize a skip.
+8. `PTR-167` replays only receipt-identified historical blobs/commits, checks
+   retained tree and blob digests, publishes reachable commits, and reopens any
+   material that cannot be reconstructed rather than waiving it.
+9. `PTR-168` installs or source-loads all three packages and runs independent
+   ordinary cold, warm and forced-replay pytest processes without `-p`, service
+   injection, tracer monkeypatches or simulated proof authority. A persistent
+   body oracle establishes zero false skips under AST, fixture, conftest,
+   parameter, dependency, environment and policy mutations.
+10. `PTR-169` joins the exact reachable 76-task inventory, authenticated
+    adversarial evidence, genuine three-repository e2e and measured subprocess
+    benchmark into a fresh operator handoff. The old 66-task packet is stale.
+
+The first wave is exactly `PTR-160`, `PTR-161` and `PTR-162`, on three numeric
+shards and three distinct repository claims. When they merge, `PTR-163`,
+`PTR-164` and `PTR-165` form a second three-lane wave. The authority join
+`PTR-166`, verified replay `PTR-167`, genuine e2e `PTR-168`, and handoff
+`PTR-169` are deliberately ordered because each consumes the preceding trust
+boundary. All implementation validation forces proof reuse off so this feature
+cannot certify itself. Missing optional proof/cache/IPFS capabilities remain
+typed `RUN` or `DEFERRED`, never startup failures or synthetic authority.
+
 ## 14. Parallel implementation program
 
 The machine board is
@@ -788,6 +877,12 @@ protected from implementation agents.
 | 25 | `PTR-153`, `PTR-154` | Preserve proof-bearing issued material and controller-owned V2 context in parallel on disjoint accelerator files and numeric shards |
 | 26 | `PTR-155` | Join exact datasets V2 local verification with the sole atomic candidate publication path |
 | 27 | `PTR-149` | Live reporting, exact 66-task authority gate, corrected handoff and explicit operator closeout premise |
+| 28 | `PTR-160`, `PTR-161`, `PTR-162` | Signed-runner contracts, datasets recovery/bootstrap and kit recovery/bootstrap start independently on accelerator, datasets and kit |
+| 29 | `PTR-163`, `PTR-164`, `PTR-165` | V5 real-proof binding, runtime publication authority and outer current-tree evidence validation use disjoint repositories/resources |
+| 30 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries |
+| 31 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits and proves current output ancestry |
+| 32 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
+| 33 | `PTR-169` | Exact 76-task authenticated current-tree gate, benchmark and operator handoff |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -814,9 +909,13 @@ inventing unrelated kit work: `PTR-150` owns accelerator on shard 0 and
 after both merge. `PTR-153` and `PTR-154` then occupy shards 0 and 1 with
 disjoint predicted files; the shared merge queue serializes their accelerator
 gitlink publication before shard-2 `PTR-155` joins them. `PTR-149` remains last.
-Numeric shards preserve historical canonical provider identities; runtime
-execution remains Grok 4.5 first with the configured high Terra fallback only
-on exact Grok quota exhaustion.
+That order is retained as historical provenance. The active correction starts
+with `PTR-160`, `PTR-161` and `PTR-162`, then admits the disjoint
+`PTR-163`/`PTR-164`/`PTR-165` wave. Authenticity, replay, genuine e2e and
+closeout form the ordered `PTR-166` through `PTR-169` joins. Numeric shards
+preserve canonical provider identities; runtime execution remains Grok 4.5
+first with the configured high Terra fallback only on exact Grok quota
+exhaustion.
 
 ## 15. Validation strategy
 
@@ -898,8 +997,12 @@ explicitly permitted.
 - Disable objective/codebase refill initially because the reviewed board is
   comprehensive. The historical nine-task completion expansion and historical
   twelve-task runtime-activation repair, plus the active thirteen-task
-  production-activation correction, are separately reviewed 2026-08-03
-  projections; none enables autonomous refill.
+  production-activation correction, are immutable 2026-08-03 projections. The
+  active ten-task authenticated-current-tree repair is the bounded 2026-08-08
+  projection; none enables autonomous refill.
+- Use the fresh `proof-backed-test-reuse-v5` state directory so stale
+  66-completed lane state, old health failures and historical generated-output
+  checks cannot be mistaken for this run.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no
@@ -934,7 +1037,11 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
   rebuilds current dependency facts, and never duplicates the test call merely
   to predict its runtime trace.
 - Every authoritative skip is backed by an exact current execution key, trusted
-  pass receipt, locally verified real certificate, and fresh supervisor receipt.
+  signed runner pass attestation, locally verified real certificate, current
+  signer trust/rotation/revocation state, and fresh supervisor receipt.
+- Every completed task has present declared outputs and validation targets at
+  fetchable exact gitlinks, plus replayable task/merge evidence whose commit is
+  an ancestor of the current pin; historical labels alone have no authority.
 - The certificate policy and verifier bind content identities computed from the
   exact reviewed circuit and activated verifying-key bytes; label-derived,
   certificate-selected, stale, or provenance-mismatched artifact identities
@@ -949,5 +1056,11 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
   cold and warm pytest subprocesses; injected in-memory orchestration,
   deterministic pseudo-certificates, and synthetic timing constants are not
   closeout evidence.
+- Ordinary installed and source-tree pytest invocations in accelerator,
+  datasets and kit discover the package-owned bridge without `-p` or test
+  rewrites; cold, warm and forced replay agree with an independent body oracle.
+- A real-backend proof around an unsigned, self-signed, wrongly keyed, stale or
+  revoked receipt never skips, even when the prover possesses valid proving
+  material and the raw proof equations verify.
 - Operations can inspect, start, and stop isolated lanes without modifying the
   original dirty workspace or colliding with other supervisor programs.

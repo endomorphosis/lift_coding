@@ -13,7 +13,7 @@
   "goalPrefix": "PTR-G",
   "boardNamespace": "proof-backed-test-reuse-v1",
   "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
-  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v1",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v5",
   "repositories": {
     "accelerator": "external/ipfs_accelerate",
     "datasets": "external/ipfs_datasets",
@@ -23,7 +23,7 @@
     "cid": "content_identity_only",
     "astTrace": "invalidation_scope_only",
     "runtimeTrace": "invalidation_scope_and_completeness_only",
-    "passReceipt": "candidate_only_until_trust_and_context_revalidated",
+    "passReceipt": "candidate_only_until_runner_signature_trust_and_context_revalidated",
     "realZkCertificate": "authoritative_only_when_exactly_bound_and_locally_verified",
     "simulatedZk": "non_attested_never_skip",
     "mutableCacheIndex": "lookup_hint_only",
@@ -69,7 +69,11 @@
     "unknownOrIncompleteAction": "run_test"
   },
   "proofPolicy": {
-    "statement": "TestPassStatementV1",
+    "statement": "TestPassStatementV5",
+    "signedRunnerAttestationRequired": true,
+    "runnerPublicKeyMulticodecCidRequired": true,
+    "runnerKeyEpochRotationAndRevocationRequired": true,
+    "legacyHashOnlyStatementCanSkip": false,
     "proveOnlyAfterSetupCallTeardownPass": true,
     "provingIsDeferred": true,
     "verificationIsLocalAndBounded": true,
@@ -208,30 +212,43 @@
       "ASI-G260",
       "ASI-G290",
       "ASI-G360"
+    ],
+    "PTR-G120": [
+      "CBP-G025",
+      "CBP-G200",
+      "ASI-G300"
+    ],
+    "PTR-G130": [
+      "ASI-G220",
+      "ASI-G240",
+      "ASI-G350"
+    ],
+    "PTR-G140": [
+      "ASI-G240",
+      "ASI-G280",
+      "ASI-G360"
     ]
   },
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
-    "reviewedAt": "2026-08-03",
-    "reviewRevision": "production-runtime-activation-repair-v4",
+    "reviewedAt": "2026-08-08",
+    "reviewRevision": "authenticated-receipt-current-tree-repair-v5",
     "implementationTaskIds": [
-      "PTR-143",
-      "PTR-144",
-      "PTR-145",
-      "PTR-146",
-      "PTR-147",
-      "PTR-148",
-      "PTR-149",
-      "PTR-150",
-      "PTR-151",
-      "PTR-152",
-      "PTR-153",
-      "PTR-154",
-      "PTR-155"
+      "PTR-160",
+      "PTR-161",
+      "PTR-162",
+      "PTR-163",
+      "PTR-164",
+      "PTR-165",
+      "PTR-166",
+      "PTR-167",
+      "PTR-168",
+      "PTR-169"
     ],
     "initialClaimableTaskIds": [
-      "PTR-150",
-      "PTR-151"
+      "PTR-160",
+      "PTR-161",
+      "PTR-162"
     ],
     "authorityWriter": "outer_controller_only",
     "workerLaneReconciliationEnabled": false,
@@ -245,12 +262,16 @@
     "statusPathSuffix": "projection/completion/closeout_status.json",
     "reconciliationPhases": 3,
     "closeoutControllerTaskId": "PTR-121",
-    "operatorHandoffTaskId": "PTR-149",
+    "operatorHandoffTaskId": "PTR-169",
     "proofMaterialAndContextWaveTaskIds": [
-      "PTR-153",
-      "PTR-154"
+      "PTR-163",
+      "PTR-164"
     ],
-    "exactV4PublicationJoinTaskId": "PTR-155",
+    "exactV4PublicationJoinTaskId": "PTR-169",
+    "sealedTaskCount": 76,
+    "authenticityJoinTaskId": "PTR-166",
+    "outputReplayJoinTaskId": "PTR-167",
+    "zeroConfigE2EJoinTaskId": "PTR-168",
     "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
   },
   "providerPolicy": {
@@ -286,8 +307,9 @@
     "scheduler": "deterministic_numeric_task_shards",
     "strictTaskSharding": true,
     "initialClaimableTaskIds": [
-      "PTR-150",
-      "PTR-151"
+      "PTR-160",
+      "PTR-161",
+      "PTR-162"
     ],
     "isolation": "ephemeral_git_worktree_per_task",
     "mergeQueue": "shared_serial",
@@ -364,7 +386,7 @@
     "requireCleanExactIntegrationCheckout": true,
     "requireCleanExactSubmodules": true,
     "validateGoalAndTaskDags": true,
-    "requireInitialConflictFreeWidth": 2,
+    "requireInitialConflictFreeWidth": 3,
     "projectObjectivesWithoutGeneratingWork": true,
     "runNoAgentReadinessPass": true,
     "runReconciliationOnlyLanePasses": true,

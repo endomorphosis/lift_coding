@@ -148,7 +148,7 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         assert lane["primary_model"] == "grok-4.5"
         assert lane["fallback_provider"] == "codex"
         assert lane["fallback_model"] == "gpt-5.6-terra"
-        assert lane["fallback_model_reasoning_effort"] == "medium"
+        assert lane["fallback_model_reasoning_effort"] == "high"
         assert lane["fallback_trigger"] == "grok_quota_exhausted"
         environment = supervisor._runtime_environment(str(lane["provider"]))
         assert "IMPLEMENTATION_DAEMON_COMMAND" not in environment
@@ -176,7 +176,7 @@ def test_every_lane_uses_grok_primary_and_quota_only_codex_fallback_policy(
         )
         assert (
             environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"]
-            == "medium"
+            == "high"
         )
         assert (
             environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"]
@@ -247,7 +247,7 @@ def test_semantic_merge_resolver_uses_managed_quota_only_provider_chain(
         "-m",
         "gpt-5.6-terra",
         "-c",
-        'model_reasoning_effort="medium"',
+        'model_reasoning_effort="high"',
         "-",
     ]
 
@@ -316,7 +316,7 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
     assert "providerPolicy" in errors
 
 
-def test_board_validator_seals_current_66_task_v4_correction_wave() -> None:
+def test_board_validator_seals_current_76_task_authenticated_receipt_wave() -> None:
     validator = _load_validator_module()
 
     result = validator.validate(
@@ -327,10 +327,44 @@ def test_board_validator_seals_current_66_task_v4_correction_wave() -> None:
     )
 
     assert result["valid"] is True, result["errors"]
-    assert result["task_count"] == 66
-    assert result["completed_task_count"] == 62
-    assert result["current_claimable_task_ids"] == ["PTR-153", "PTR-154"]
-    assert result["current_claimable_shards"] == [0, 1]
+    assert result["task_count"] == 76
+    assert result["completed_task_count"] == 66
+    assert result["current_claimable_task_ids"] == [
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+    ]
+    assert result["current_claimable_shards"] == [0, 1, 2]
+    assert result["authenticated_receipt_correction_task_ids"] == [
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+        "PTR-163",
+        "PTR-164",
+        "PTR-165",
+        "PTR-166",
+        "PTR-167",
+        "PTR-168",
+        "PTR-169",
+    ]
+    assert result["authenticated_receipt_wave_one_submodules"] == {
+        "PTR-160": ["external/ipfs_accelerate"],
+        "PTR-161": ["external/ipfs_datasets"],
+        "PTR-162": ["external/ipfs_kit"],
+    }
+    assert result["authenticated_receipt_wave_one_resource_width"] == 3
+    assert result["authenticated_receipt_wave_two_submodules"] == {
+        "PTR-163": ["external/ipfs_datasets"],
+        "PTR-164": ["external/ipfs_accelerate"],
+        "PTR-165": ["<outer-superproject>"],
+    }
+    assert result["authenticated_receipt_wave_two_resource_width"] == 3
+    assert result["authenticated_receipt_authenticity_join_task_id"] == "PTR-166"
+    assert result["authenticated_receipt_output_replay_join_task_id"] == "PTR-167"
+    assert result["authenticated_receipt_zero_config_e2e_join_task_id"] == "PTR-168"
+    assert result["authenticated_receipt_handoff_task_id"] == "PTR-169"
+    assert result["historical_missing_output_count"] == 26
+    assert result["uncovered_historical_missing_output_paths"] == []
     assert result["reviewed_production_correction_task_ids"] == [
         "PTR-150",
         "PTR-151",
@@ -384,7 +418,7 @@ def test_status_exposes_exact_model_and_quota_only_fallback_policy(
         "fallback": {
             "provider": "codex",
             "model": "gpt-5.6-terra",
-            "model_reasoning_effort": "medium",
+            "model_reasoning_effort": "high",
         },
         "fallback_trigger": "grok_quota_exhausted",
         "non_quota_failure_action": "propagate_without_fallback",
@@ -567,7 +601,7 @@ def test_provider_preflight_reports_grok_as_effective_primary(
         "fallback": {
             "provider": "codex",
             "model": "gpt-5.6-terra",
-            "model_reasoning_effort": "medium",
+            "model_reasoning_effort": "high",
         },
         "fallback_trigger": "grok_quota_exhausted",
         "primary_unavailable_action": "fail_preflight",
@@ -864,9 +898,9 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     inventory = supervisor._closeout_production_input_inventory()
 
     assert inventory["inventory_is_completion_authority"] is False
-    assert inventory["task_count"] == 66
-    assert inventory["goal_count"] == 12
-    assert inventory["acceptance_requirement_count"] == 39
+    assert inventory["task_count"] == 76
+    assert inventory["goal_count"] == 15
+    assert inventory["acceptance_requirement_count"] == 49
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
     by_name = {item["name"]: item for item in inventory["requirements"]}
     approvals = by_name["genuine_reviewed_approvals_without_queue_records"]
@@ -879,10 +913,10 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     validations = by_name[
         "fresh_current_tree_proof_reuse_off_validation_receipts"
     ]
-    assert validations["required_count"] == 66
+    assert validations["required_count"] == 76
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
-    assert inventory["authoritative_materializer"]["configured"] is False
+    assert inventory["authoritative_materializer"]["configured"] is True
     activation = inventory["runtime_reuse_activation"]
     assert activation["automatic_plugin_discovery"] is True
     assert activation["ordinary_enabled_run_effective_action"] == "run_test"

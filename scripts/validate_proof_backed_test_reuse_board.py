@@ -72,6 +72,9 @@ EXPECTED_GOAL_IDS = frozenset(
         "PTR-G090",
         "PTR-G100",
         "PTR-G110",
+        "PTR-G120",
+        "PTR-G130",
+        "PTR-G140",
     }
 )
 EXPECTED_TASK_IDS = frozenset(
@@ -142,6 +145,16 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-153",
         "PTR-154",
         "PTR-155",
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+        "PTR-163",
+        "PTR-164",
+        "PTR-165",
+        "PTR-166",
+        "PTR-167",
+        "PTR-168",
+        "PTR-169",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -202,6 +215,26 @@ PROOF_MATERIAL_CONTEXT_WAVE = frozenset({"PTR-153", "PTR-154"})
 REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS = frozenset(
     PRODUCTION_ACTIVATION_TASK_IDS | PRODUCTION_CORRECTION_TASK_IDS
 )
+AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS = frozenset(
+    {
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+        "PTR-163",
+        "PTR-164",
+        "PTR-165",
+        "PTR-166",
+        "PTR-167",
+        "PTR-168",
+        "PTR-169",
+    }
+)
+AUTHENTICATED_RECEIPT_WAVE_ONE = frozenset({"PTR-160", "PTR-161", "PTR-162"})
+AUTHENTICATED_RECEIPT_WAVE_TWO = frozenset({"PTR-163", "PTR-164", "PTR-165"})
+AUTHENTICITY_JOIN_TASK_ID = "PTR-166"
+OUTPUT_REPLAY_JOIN_TASK_ID = "PTR-167"
+ZERO_CONFIG_E2E_JOIN_TASK_ID = "PTR-168"
+AUTHENTICATED_HANDOFF_TASK_ID = "PTR-169"
 GOAL_STATES = frozenset(
     {
         "active",
@@ -300,6 +333,16 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-153": frozenset({"PTR-152"}),
     "PTR-154": frozenset({"PTR-152"}),
     "PTR-155": frozenset({"PTR-153", "PTR-154"}),
+    "PTR-160": frozenset({"PTR-149"}),
+    "PTR-161": frozenset({"PTR-149"}),
+    "PTR-162": frozenset({"PTR-149"}),
+    "PTR-163": frozenset({"PTR-160", "PTR-161"}),
+    "PTR-164": frozenset({"PTR-160"}),
+    "PTR-165": frozenset({"PTR-161", "PTR-162"}),
+    "PTR-166": frozenset({"PTR-163", "PTR-164"}),
+    "PTR-167": frozenset({"PTR-165", "PTR-166"}),
+    "PTR-168": frozenset({"PTR-161", "PTR-162", "PTR-166", "PTR-167"}),
+    "PTR-169": frozenset({"PTR-168"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -313,6 +356,8 @@ REQUIRED_DATASETS_TASKS = frozenset(
         "PTR-140",
         "PTR-144",
         "PTR-151",
+        "PTR-161",
+        "PTR-163",
     }
 )
 REQUIRED_ACCELERATOR_TASKS = frozenset(
@@ -335,10 +380,15 @@ REQUIRED_ACCELERATOR_TASKS = frozenset(
         "PTR-153",
         "PTR-154",
         "PTR-155",
+        "PTR-160",
+        "PTR-164",
+        "PTR-166",
+        "PTR-168",
+        "PTR-169",
     }
 )
 REQUIRED_KIT_TASKS = frozenset(
-    {"PTR-080", "PTR-081", "PTR-109", "PTR-133", "PTR-141"}
+    {"PTR-080", "PTR-081", "PTR-109", "PTR-133", "PTR-141", "PTR-162"}
 )
 REQUIRED_RUNTIME_TASK_PATHS = {
     "PTR-131": frozenset(
@@ -821,10 +871,10 @@ def validate(
     if not isinstance(preflight_config, dict):
         errors.append("configuration preflight must be an object")
         preflight_config = {}
-    if preflight_config.get("requireInitialConflictFreeWidth") != 2:
+    if preflight_config.get("requireInitialConflictFreeWidth") != 3:
         errors.append(
             "preflight.requireInitialConflictFreeWidth must match the reviewed "
-            "two-task production-activation first wave"
+            "three-task authenticated-receipt first wave"
         )
     if tuple(parallel.get("worktreeSubmodulePaths") or ()) != EXPECTED_SUBMODULES:
         errors.append(
@@ -872,21 +922,21 @@ def validate(
             "objectiveProjection.mode must be reviewed_bounded_closeout"
         )
     if objective_projection.get("reviewRevision") != (
-        "production-runtime-activation-repair-v4"
+        "authenticated-receipt-current-tree-repair-v5"
     ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
-            "production runtime activation repair"
+            "authenticated-receipt current-tree repair"
         )
     if frozenset(objective_projection.get("implementationTaskIds") or ()) != (
-        REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS
+        AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     ):
         errors.append(
             "objectiveProjection implementation task inventory mismatch"
         )
     if frozenset(
         objective_projection.get("initialClaimableTaskIds") or ()
-    ) != PRODUCTION_CORRECTION_WAVE_ONE:
+    ) != AUTHENTICATED_RECEIPT_WAVE_ONE:
         errors.append(
             "objectiveProjection initial claimable task inventory mismatch"
         )
@@ -904,16 +954,33 @@ def validate(
         errors.append("objective closeout must declare exactly three phases")
     if objective_projection.get("closeoutControllerTaskId") != "PTR-121":
         errors.append("objective closeout controller task must be PTR-121")
-    if objective_projection.get("operatorHandoffTaskId") != "PTR-149":
-        errors.append("objective operator handoff task must be PTR-149")
+    if objective_projection.get("operatorHandoffTaskId") != AUTHENTICATED_HANDOFF_TASK_ID:
+        errors.append("objective operator handoff task must be PTR-169")
     if frozenset(
         objective_projection.get("proofMaterialAndContextWaveTaskIds") or ()
-    ) != PROOF_MATERIAL_CONTEXT_WAVE:
+    ) != frozenset({"PTR-163", "PTR-164"}):
         errors.append(
             "objective proof-material/context wave task inventory mismatch"
         )
-    if objective_projection.get("exactV4PublicationJoinTaskId") != "PTR-155":
-        errors.append("objective exact-v4 publication join task must be PTR-155")
+    if objective_projection.get("exactV4PublicationJoinTaskId") != AUTHENTICATED_HANDOFF_TASK_ID:
+        errors.append("objective authenticated publication join task must be PTR-169")
+    if objective_projection.get("sealedTaskCount") != 76:
+        errors.append("objective sealed task count must be 76")
+    if objective_projection.get("authenticityJoinTaskId") != AUTHENTICITY_JOIN_TASK_ID:
+        errors.append("objective authenticity join task must be PTR-166")
+    if objective_projection.get("outputReplayJoinTaskId") != OUTPUT_REPLAY_JOIN_TASK_ID:
+        errors.append("objective output replay join task must be PTR-167")
+    if objective_projection.get("zeroConfigE2EJoinTaskId") != ZERO_CONFIG_E2E_JOIN_TASK_ID:
+        errors.append("objective zero-config e2e join task must be PTR-168")
+    proof_policy = config.get("proofPolicy") or {}
+    if (
+        proof_policy.get("statement") != "TestPassStatementV5"
+        or proof_policy.get("signedRunnerAttestationRequired") is not True
+        or proof_policy.get("runnerPublicKeyMulticodecCidRequired") is not True
+        or proof_policy.get("runnerKeyEpochRotationAndRevocationRequired") is not True
+        or proof_policy.get("legacyHashOnlyStatementCanSkip") is not False
+    ):
+        errors.append("proofPolicy must require authenticated TestPassStatementV5 authority")
     projection_path_fields = (
         "gatePathSuffix",
         "evidencePathSuffix",
@@ -1194,11 +1261,12 @@ def validate(
                 errors.append("PTR-000 provider role must be operator-only")
         elif lane_count := int(parallel.get("laneCount") or 0):
             shard_index = int(task.task_id.rsplit("-", 1)[1]) % lane_count
-            expected_role = (
-                str(canonical_provider_roles[shard_index])
-                if shard_index < len(canonical_provider_roles)
-                else ""
+            role_source = (
+                runtime_execution_roles
+                if task.task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+                else canonical_provider_roles
             )
+            expected_role = str(role_source[shard_index]) if shard_index < len(role_source) else ""
             if provider_role != expected_role:
                 errors.append(
                     f"{task.task_id} provider role {provider_role!r} does not "
@@ -1266,6 +1334,7 @@ def validate(
             RUNTIME_REPAIR_TASK_IDS
             | PRODUCTION_ACTIVATION_TASK_IDS
             | PRODUCTION_CORRECTION_TASK_IDS
+            | AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
         ) and frozenset(
             task_edges.get(task_id, ())
         ) != required_dependencies:
@@ -1290,10 +1359,10 @@ def validate(
             parallel.get("initialClaimableTaskIds") or ()
         )
     )
-    if configured_initial_ready != PRODUCTION_CORRECTION_WAVE_ONE:
+    if configured_initial_ready != AUTHENTICATED_RECEIPT_WAVE_ONE:
         errors.append(
             "configured initial claimable tasks mismatch: expected "
-            f"{sorted(PRODUCTION_CORRECTION_WAVE_ONE)}, got "
+            f"{sorted(AUTHENTICATED_RECEIPT_WAVE_ONE)}, got "
             f"{sorted(configured_initial_ready)}"
         )
     if completed_ids == {"PTR-000"}:
@@ -1321,6 +1390,7 @@ def validate(
         - RUNTIME_REPAIR_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
         - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     )
     completion_extension_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1338,6 +1408,7 @@ def validate(
         - RUNTIME_REPAIR_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
         - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     )
     runtime_repair_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1354,6 +1425,7 @@ def validate(
         EXPECTED_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
         - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     )
     production_activation_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1372,6 +1444,7 @@ def validate(
     pre_production_correction_task_ids = (
         EXPECTED_TASK_IDS
         - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
         - {"PTR-149"}
     )
     production_correction_unstarted = all(
@@ -1386,6 +1459,23 @@ def validate(
         errors.append(
             "reviewed current-v4 correction claimable tasks must be "
             f"{sorted(PRODUCTION_CORRECTION_WAVE_ONE)}, got "
+            f"{sorted(claimable_task_ids)}"
+        )
+    pre_authenticated_correction_task_ids = (
+        EXPECTED_TASK_IDS - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    )
+    authenticated_correction_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    )
+    if (
+        pre_authenticated_correction_task_ids.issubset(completed_ids)
+        and authenticated_correction_unstarted
+        and claimable_task_ids != AUTHENTICATED_RECEIPT_WAVE_ONE
+    ):
+        errors.append(
+            "authenticated-receipt correction claimable tasks must be "
+            f"{sorted(AUTHENTICATED_RECEIPT_WAVE_ONE)}, got "
             f"{sorted(claimable_task_ids)}"
         )
     lane_count = int(parallel.get("laneCount") or 0)
@@ -1700,6 +1790,151 @@ def validate(
             f"{sorted(simulated_handoff_claimable)}"
         )
 
+    authenticated_wave_one_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in AUTHENTICATED_RECEIPT_WAVE_ONE
+    } if lane_count > 0 else set()
+    if authenticated_wave_one_shards != {0, 1, 2}:
+        errors.append(
+            "authenticated-receipt first wave must cover all numeric shards, got "
+            f"{sorted(authenticated_wave_one_shards)}"
+        )
+    expected_authenticated_wave_one_resources = {
+        "PTR-160": frozenset({"external/ipfs_accelerate"}),
+        "PTR-161": frozenset({"external/ipfs_datasets"}),
+        "PTR-162": frozenset({"external/ipfs_kit"}),
+    }
+    authenticated_wave_one_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(AUTHENTICATED_RECEIPT_WAVE_ONE)
+    }
+    if authenticated_wave_one_resources != expected_authenticated_wave_one_resources:
+        errors.append(
+            "authenticated-receipt first wave must own accelerator, datasets and kit "
+            f"independently: got {authenticated_wave_one_resources}"
+        )
+    authenticated_wave_one_resource_width = len(
+        set().union(*authenticated_wave_one_resources.values())
+    )
+    if authenticated_wave_one_resource_width != 3:
+        errors.append(
+            "authenticated-receipt first wave must retain repository resource "
+            f"width 3, got {authenticated_wave_one_resource_width}"
+        )
+    for left in sorted(AUTHENTICATED_RECEIPT_WAVE_ONE):
+        for right in sorted(AUTHENTICATED_RECEIPT_WAVE_ONE):
+            if left < right and predicted_by_task[left] & predicted_by_task[right]:
+                errors.append(
+                    "authenticated-receipt first-wave predicted files overlap: "
+                    f"{left}/{right}"
+                )
+
+    pre_authenticated_ids = EXPECTED_TASK_IDS - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    simulated_authenticated_wave_one_completed = (
+        pre_authenticated_ids | AUTHENTICATED_RECEIPT_WAVE_ONE
+    )
+    simulated_authenticated_wave_two = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_authenticated_wave_one_completed
+        and set(task_edges.get(task_id, ())).issubset(
+            simulated_authenticated_wave_one_completed
+        )
+    }
+    if simulated_authenticated_wave_two != AUTHENTICATED_RECEIPT_WAVE_TWO:
+        errors.append(
+            "authenticated-receipt second wave must be exactly "
+            f"{sorted(AUTHENTICATED_RECEIPT_WAVE_TWO)}, got "
+            f"{sorted(simulated_authenticated_wave_two)}"
+        )
+    authenticated_wave_two_shards = {
+        int(task_id.rsplit("-", 1)[1]) % lane_count
+        for task_id in AUTHENTICATED_RECEIPT_WAVE_TWO
+    } if lane_count > 0 else set()
+    if authenticated_wave_two_shards != {0, 1, 2}:
+        errors.append(
+            "authenticated-receipt second wave must cover all numeric shards, got "
+            f"{sorted(authenticated_wave_two_shards)}"
+        )
+    expected_authenticated_wave_two_submodules = {
+        "PTR-163": frozenset({"external/ipfs_datasets"}),
+        "PTR-164": frozenset({"external/ipfs_accelerate"}),
+        "PTR-165": frozenset(),
+    }
+    authenticated_wave_two_submodules = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(AUTHENTICATED_RECEIPT_WAVE_TWO)
+    }
+    if authenticated_wave_two_submodules != expected_authenticated_wave_two_submodules:
+        errors.append(
+            "authenticated-receipt second wave must independently own datasets, "
+            "accelerator and the outer superproject: got "
+            f"{authenticated_wave_two_submodules}"
+        )
+    authenticated_wave_two_resources = {
+        task_id: resources or frozenset({"<outer-superproject>"})
+        for task_id, resources in authenticated_wave_two_submodules.items()
+    }
+    authenticated_wave_two_resource_width = len(
+        set().union(*authenticated_wave_two_resources.values())
+    )
+    if authenticated_wave_two_resource_width != 3:
+        errors.append(
+            "authenticated-receipt second wave must retain scheduling resource "
+            f"width 3, got {authenticated_wave_two_resource_width}"
+        )
+    simulated_stage = set(
+        simulated_authenticated_wave_one_completed
+        | AUTHENTICATED_RECEIPT_WAVE_TWO
+    )
+    for expected_task_id in (
+        AUTHENTICITY_JOIN_TASK_ID,
+        OUTPUT_REPLAY_JOIN_TASK_ID,
+        ZERO_CONFIG_E2E_JOIN_TASK_ID,
+        AUTHENTICATED_HANDOFF_TASK_ID,
+    ):
+        claimable = {
+            task_id
+            for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+            if task_id not in simulated_stage
+            and set(task_edges.get(task_id, ())).issubset(simulated_stage)
+        }
+        if claimable != {expected_task_id}:
+            errors.append(
+                f"authenticated-receipt DAG must make only {expected_task_id} "
+                f"claimable, got {sorted(claimable)}"
+            )
+        simulated_stage.add(expected_task_id)
+
+    historical_missing_outputs = sorted(
+        {
+            path
+            for task in tasks
+            if task.task_id not in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+            and task.status == "completed"
+            for path in task.outputs
+            if not (REPO_ROOT / path).exists()
+        }
+    )
+    recovery_owned_paths = set().union(
+        *(predicted_by_task[task_id] for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS)
+    )
+    uncovered_historical_outputs = sorted(
+        set(historical_missing_outputs) - recovery_owned_paths
+    )
+    if uncovered_historical_outputs:
+        errors.append(
+            "historical missing outputs are not owned by the recovery population: "
+            f"{uncovered_historical_outputs}"
+        )
+    if AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS.issubset(completed_ids) and (
+        historical_missing_outputs
+    ):
+        errors.append(
+            "authenticated closeout cannot retain missing historical outputs: "
+            f"{historical_missing_outputs}"
+        )
+
     unordered_conflicts: list[dict[str, object]] = []
     task_ancestors = {
         task_id: _ancestors(task_id, task_edges) for task_id in task_ids
@@ -1748,8 +1983,10 @@ def validate(
         "todo_sha256": _sha256(todo_path),
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
-        "initial_ready_task_ids": sorted(PRODUCTION_CORRECTION_WAVE_ONE),
-        "initial_ready_shards": sorted(production_correction_wave_shards),
+        "initial_ready_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_WAVE_ONE
+        ),
+        "initial_ready_shards": sorted(authenticated_wave_one_shards),
         "sealed_initial_ready_task_ids": sorted(SEALED_INITIAL_READY),
         "sealed_initial_ready_shards": sorted(sealed_initial_shards),
         "reviewed_extension_task_ids": sorted(COMPLETION_EXTENSION_TASK_IDS),
@@ -1834,6 +2071,48 @@ def validate(
         ),
         "reviewed_exact_v4_publication_join_task_id": "PTR-155",
         "reviewed_operator_handoff_task_id": "PTR-149",
+        "authenticated_receipt_correction_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        ),
+        "authenticated_receipt_wave_one_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_WAVE_ONE
+        ),
+        "authenticated_receipt_wave_one_shards": sorted(
+            authenticated_wave_one_shards
+        ),
+        "authenticated_receipt_wave_one_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in authenticated_wave_one_resources.items()
+        },
+        "authenticated_receipt_wave_one_resource_width": (
+            authenticated_wave_one_resource_width
+        ),
+        "authenticated_receipt_wave_two_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_WAVE_TWO
+        ),
+        "authenticated_receipt_wave_two_shards": sorted(
+            authenticated_wave_two_shards
+        ),
+        "authenticated_receipt_wave_two_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in authenticated_wave_two_resources.items()
+        },
+        "authenticated_receipt_wave_two_resource_width": (
+            authenticated_wave_two_resource_width
+        ),
+        "authenticated_receipt_authenticity_join_task_id": (
+            AUTHENTICITY_JOIN_TASK_ID
+        ),
+        "authenticated_receipt_output_replay_join_task_id": (
+            OUTPUT_REPLAY_JOIN_TASK_ID
+        ),
+        "authenticated_receipt_zero_config_e2e_join_task_id": (
+            ZERO_CONFIG_E2E_JOIN_TASK_ID
+        ),
+        "authenticated_receipt_handoff_task_id": AUTHENTICATED_HANDOFF_TASK_ID,
+        "historical_missing_output_paths": historical_missing_outputs,
+        "historical_missing_output_count": len(historical_missing_outputs),
+        "uncovered_historical_missing_output_paths": uncovered_historical_outputs,
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {
