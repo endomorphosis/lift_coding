@@ -187,7 +187,7 @@
       },
       {
         "path": "config/deterministic_contract_repair_bootstrap_validation.json",
-        "sha256": "6e3a34c2385c7fd87d06ed6875b0c7ef6208b79a21117af2c1d8dd5f1269595b"
+        "sha256": "b305f008eabe0b24f1e9adf24892fdecd2ef6ae1ded072519782e15f17597cf3"
       },
       {
         "path": "config/deterministic_contract_repair_roots.json",
@@ -234,14 +234,14 @@
         "sha256": "5fc045d74585ddcec3334ba8c9225fe61af8c20a7b319a6580f40c40be4a5143"
       }
     ],
-    "inventory_id": "sha256:e11b2d5dab1a8be53dc189aca9f529fadc73b99432195a4c1c5008d63b10fbe3"
+    "inventory_id": "sha256:233fa71e18582eb3033be69a79e698f6e0cd256c07bfb063592496efbe45c5d8"
   },
   "baseline": {
     "forest_id": "sha256:9a5baac3e0ef27aa33061c73d3254842c793e37fb8397bc04a008813e955bfca",
-    "inventory_id": "sha256:e11b2d5dab1a8be53dc189aca9f529fadc73b99432195a4c1c5008d63b10fbe3",
-    "validator_report_id": "sha256:70943f6f23c1b8e64803d265d0d446b5830327236e8d8db7f9d20f428fa71730",
+    "inventory_id": "sha256:233fa71e18582eb3033be69a79e698f6e0cd256c07bfb063592496efbe45c5d8",
+    "validator_report_id": "sha256:a55b2fcb8a70383cce2374efa4a3e85922ef7ce433bab5dfe6bd88e73e5494bd",
     "valid": true,
-    "baseline_id": "sha256:49bf5c10e2447b55cd7b37899b52662f14d677a1c71f85e304d39ca3bc456e58"
+    "baseline_id": "sha256:a43dced055584e29f1db7b3a999bff34f01dfffc01c73687058059726b023c96"
   },
   "authoring_board": {
     "schema": "ipfs_accelerate_py/agent-supervisor/ordered-provider-authoring-board@1",
@@ -483,5 +483,5 @@
     ],
     "authoring_board_id": "sha256:258d2f8b0671d92e838fd26fad4ac672fa4b95ae101b2d9269bd8cfc662db1c2"
   },
-  "seal_id": "sha256:aa4b08854952b583cbac4487923b62698e9f09777c01b8c3702819c7c2292a24"
+  "seal_id": "sha256:5def899fcac5da81038cf967c213f7c1f689fc5edd5060ccfb635e5ef534f879"
 }
