@@ -2462,7 +2462,7 @@ uncertain candidates execute normally.
 
 ## PTR-166 Prove that proving-key possession cannot fabricate a pass
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
