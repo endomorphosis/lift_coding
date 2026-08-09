@@ -1,0 +1,761 @@
+{
+  "evidence_term": "dcr/live-observation@1",
+  "exchanges": [
+    {
+      "details": {
+        "protocol_version": "2024-11-05",
+        "profiles": [
+          "mcp++/profile-a-idl",
+          "mcp++/profile-b-cid-artifacts",
+          "mcp++/profile-c-ucan",
+          "mcp++/profile-d-temporal-deontic",
+          "mcp++/profile-e-mcp-p2p",
+          "mcp++/profile-f-event-dag"
+        ]
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "initialize",
+      "local_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+      "mediated": true,
+      "method": "initialize",
+      "model_calls": 0,
+      "package": "ipfs_accelerate_py",
+      "process_witness_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "reason_codes": [
+        "initialize_observed",
+        "jsonrpc_2_0",
+        "profiles_a_f_advertised"
+      ],
+      "receipt_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "request_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:df74f84ff020a5f3362d9ba7ad0a5bb83d0007e99b04679b7d0bdf3f64a70f1f",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{}}"
+      },
+      "request_id": 1,
+      "response_bytes": {
+        "byte_length": 48,
+        "sha256": "sha256:a2c799262a3ce3c19ef5cdd983bf3d12b43ab3c426227091b909dcb7054738c0",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{}}"
+      },
+      "role": "accelerate",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "tool_count": 1,
+        "tools": [
+          "model_catalog_health"
+        ]
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "tools/list",
+      "local_cid": "baguqeerabivc6aukhi2x72fuuiapasq3isjpkosse5akiexbdjixhvz5plqq",
+      "mediated": true,
+      "method": "tools/list",
+      "model_calls": 0,
+      "package": "ipfs_accelerate_py",
+      "process_witness_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "reason_codes": [
+        "tools_list_mediated",
+        "catalog_nonempty"
+      ],
+      "receipt_cid": "baguqeeraij7mgpiydunpjdlxv4wcjhfgho7t4bldz3pk5z3j6mvqpeewlasa",
+      "request_bytes": {
+        "byte_length": 48,
+        "sha256": "sha256:9e00f9f2fae7621f0093a537a76a548ffee2735508b8d6e940b777c3a2501295",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/list\",\"params\":{}}"
+      },
+      "request_id": 2,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:94b50d7ceb6db6ce0c46912d15708a692854dd86d404d669bab261025918f88e",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{\"tools\":[{\"name\":\"model_catalog_health\"}]}}"
+      },
+      "role": "accelerate",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeerass2q27hlnw3m4dcgsewrk4ekneufjxmg2qcnm2n2wjqqewiy7cha",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "model_invoked": false,
+        "operation": "model_catalog_health"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "tools/call",
+      "local_cid": "baguqeeratyapt4x245rb6aetuu32o2sur77oe42vbc4nn2kaw534hisqckkq",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_accelerate_py",
+      "process_witness_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "reason_codes": [
+        "tools_call_allowlisted",
+        "zero_model_calls",
+        "no_user_data_mutation"
+      ],
+      "receipt_cid": "baguqeeraanugbd4cdit7kdcwiykrx34nxk7ho54sarkxk5xrjgzmwdohg2xa",
+      "request_bytes": {
+        "byte_length": 80,
+        "sha256": "sha256:427ec33d181d1af48d77af2c249ca63bbf3e0563cedeaee769f32b0790965824",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"model_catalog_health\",\"arguments\":{}}}"
+      },
+      "request_id": 3,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:0a2a2f028a3a357fe8b4a200f04a1b4492f53a522740a412e11a5173d73d7ae1",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":3,\"result\":{\"operation\":\"model_catalog_health\"}}"
+      },
+      "role": "accelerate",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeerayythac6kksol4yvx4d7b4xo7oqo3y4pvegim26rjcmveioy5oqha",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "params_type": "str"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "malformed_call",
+      "local_cid": "baguqeeradrt3lifbe6j6xy4y6ltaff2tzpkrlil2ss7lutokzsbc5nihgkba",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_accelerate_py",
+      "process_witness_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "reason_codes": [
+        "malformed_params_fail_closed",
+        "jsonrpc_invalid_params"
+      ],
+      "receipt_cid": "baguqeeray3p32inqlaslc66b5gmcsi3aiyy5wzubmjvndrp2vaeoxk2jgcxq",
+      "request_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:df74f84ff020a5f3362d9ba7ad0a5bb83d0007e99b04679b7d0bdf3f64a70f1f",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":4,\"method\":\"tools/call\",\"params\":\"not-an-object\"}"
+      },
+      "request_id": 4,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:a2c799262a3ce3c19ef5cdd983bf3d12b43ab3c426227091b909dcb7054738c0",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":4,\"error\":{\"code\":-32602,\"message\":\"Invalid params\"}}"
+      },
+      "role": "accelerate",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+      "terminal_state": "refuted",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "operation": "__dcr_unknown_tool__"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "unknown_call",
+      "local_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_accelerate_py",
+      "process_witness_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "reason_codes": [
+        "unknown_operation_fail_closed",
+        "zero_model_calls"
+      ],
+      "receipt_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "request_bytes": {
+        "byte_length": 80,
+        "sha256": "sha256:9e00f9f2fae7621f0093a537a76a548ffee2735508b8d6e940b777c3a2501295",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":5,\"method\":\"tools/call\",\"params\":{\"name\":\"__dcr_unknown_tool__\",\"arguments\":{}}}"
+      },
+      "request_id": 5,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:94b50d7ceb6db6ce0c46912d15708a692854dd86d404d669bab261025918f88e",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":5,\"error\":{\"code\":-32601,\"message\":\"Method not found\"}}"
+      },
+      "role": "accelerate",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeerabivc6aukhi2x72fuuiapasq3isjpkosse5akiexbdjixhvz5plqq",
+      "terminal_state": "refuted",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "tool_count": 1,
+        "tools": [
+          "logic_health"
+        ]
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "tools/list",
+      "local_cid": "baguqeeraij7mgpiydunpjdlxv4wcjhfgho7t4bldz3pk5z3j6mvqpeewlasa",
+      "mediated": true,
+      "method": "tools/list",
+      "model_calls": 0,
+      "package": "ipfs_datasets_py",
+      "process_witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "reason_codes": [
+        "tools_list_process_local",
+        "logic_tools_exported"
+      ],
+      "receipt_cid": "baguqeerass2q27hlnw3m4dcgsewrk4ekneufjxmg2qcnm2n2wjqqewiy7cha",
+      "request_bytes": {
+        "byte_length": 48,
+        "sha256": "sha256:427ec33d181d1af48d77af2c249ca63bbf3e0563cedeaee769f32b0790965824",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":10,\"method\":\"tools/list\",\"params\":{}}"
+      },
+      "request_id": 10,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:0a2a2f028a3a357fe8b4a200f04a1b4492f53a522740a412e11a5173d73d7ae1",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":10,\"result\":{\"tools\":[{\"name\":\"logic_health\"}]}}"
+      },
+      "role": "datasets",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeratyapt4x245rb6aetuu32o2sur77oe42vbc4nn2kaw534hisqckkq",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "operation": "logic_health"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "tools/call",
+      "local_cid": "baguqeeraanugbd4cdit7kdcwiykrx34nxk7ho54sarkxk5xrjgzmwdohg2xa",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_datasets_py",
+      "process_witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "reason_codes": [
+        "tools_call_allowlisted",
+        "logic_health_observed",
+        "zero_model_calls"
+      ],
+      "receipt_cid": "baguqeerayythac6kksol4yvx4d7b4xo7oqo3y4pvegim26rjcmveioy5oqha",
+      "request_bytes": {
+        "byte_length": 80,
+        "sha256": "sha256:df74f84ff020a5f3362d9ba7ad0a5bb83d0007e99b04679b7d0bdf3f64a70f1f",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":11,\"method\":\"tools/call\",\"params\":{\"name\":\"logic_health\",\"arguments\":{}}}"
+      },
+      "request_id": 11,
+      "response_bytes": {
+        "byte_length": 48,
+        "sha256": "sha256:a2c799262a3ce3c19ef5cdd983bf3d12b43ab3c426227091b909dcb7054738c0",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":11,\"result\":{\"operation\":\"logic_health\"}}"
+      },
+      "role": "datasets",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeradrt3lifbe6j6xy4y6ltaff2tzpkrlil2ss7lutokzsbc5nihgkba",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "surface": "process_local",
+        "goal": "True",
+        "result_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "logic_tools/cec_prove",
+      "local_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_datasets_py",
+      "process_witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "reason_codes": [
+        "cec_prove_process_local",
+        "structured_result"
+      ],
+      "receipt_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "request_bytes": {
+        "byte_length": 96,
+        "sha256": "sha256:9e00f9f2fae7621f0093a537a76a548ffee2735508b8d6e940b777c3a2501295",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":20,\"method\":\"tools/call\",\"params\":{\"name\":\"logic_tools/cec_prove\",\"arguments\":{\"goal\":\"True\"}}}"
+      },
+      "request_id": 20,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:94b50d7ceb6db6ce0c46912d15708a692854dd86d404d669bab261025918f88e",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":20,\"result\":{\"success\":true,\"proved\":true,\"goal\":\"True\"}}"
+      },
+      "role": "datasets",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeerabivc6aukhi2x72fuuiapasq3isjpkosse5akiexbdjixhvz5plqq",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "surface": "mcp_tools_call",
+        "goal": "True",
+        "result_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+        "equivalent_to_process_local": true
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "logic_tools/cec_prove",
+      "local_cid": "baguqeeraij7mgpiydunpjdlxv4wcjhfgho7t4bldz3pk5z3j6mvqpeewlasa",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_datasets_py",
+      "process_witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "reason_codes": [
+        "cec_prove_mcp_envelope",
+        "canonical_equivalence_hold"
+      ],
+      "receipt_cid": "baguqeerass2q27hlnw3m4dcgsewrk4ekneufjxmg2qcnm2n2wjqqewiy7cha",
+      "request_bytes": {
+        "byte_length": 96,
+        "sha256": "sha256:427ec33d181d1af48d77af2c249ca63bbf3e0563cedeaee769f32b0790965824",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":21,\"method\":\"tools/call\",\"params\":{\"name\":\"logic_tools/cec_prove\",\"arguments\":{\"goal\":\"True\"}}}"
+      },
+      "request_id": 21,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:0a2a2f028a3a357fe8b4a200f04a1b4492f53a522740a412e11a5173d73d7ae1",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":21,\"result\":{\"result\":{\"success\":true,\"proved\":true,\"goal\":\"True\"}}}"
+      },
+      "role": "datasets",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeratyapt4x245rb6aetuu32o2sur77oe42vbc4nn2kaw534hisqckkq",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "tool_count": 1,
+        "tools": [
+          "iroh_diagnostics"
+        ]
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "tools/list",
+      "local_cid": "baguqeeraanugbd4cdit7kdcwiykrx34nxk7ho54sarkxk5xrjgzmwdohg2xa",
+      "mediated": true,
+      "method": "tools/list",
+      "model_calls": 0,
+      "package": "ipfs_kit_py",
+      "process_witness_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "reason_codes": [
+        "tools_list_process_local"
+      ],
+      "receipt_cid": "baguqeerayythac6kksol4yvx4d7b4xo7oqo3y4pvegim26rjcmveioy5oqha",
+      "request_bytes": {
+        "byte_length": 48,
+        "sha256": "sha256:df74f84ff020a5f3362d9ba7ad0a5bb83d0007e99b04679b7d0bdf3f64a70f1f",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":30,\"method\":\"tools/list\",\"params\":{}}"
+      },
+      "request_id": 30,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:a2c799262a3ce3c19ef5cdd983bf3d12b43ab3c426227091b909dcb7054738c0",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":30,\"result\":{\"tools\":[{\"name\":\"iroh_diagnostics\"}]}}"
+      },
+      "role": "kit",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeradrt3lifbe6j6xy4y6ltaff2tzpkrlil2ss7lutokzsbc5nihgkba",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "operation": "iroh_diagnostics"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "tools/call",
+      "local_cid": "baguqeeray3p32inqlaslc66b5gmcsi3aiyy5wzubmjvndrp2vaeoxk2jgcxq",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_kit_py",
+      "process_witness_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "reason_codes": [
+        "tools_call_allowlisted",
+        "kit_health_observed",
+        "zero_model_calls"
+      ],
+      "receipt_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+      "request_bytes": {
+        "byte_length": 96,
+        "sha256": "sha256:9e00f9f2fae7621f0093a537a76a548ffee2735508b8d6e940b777c3a2501295",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":31,\"method\":\"tools/call\",\"params\":{\"name\":\"iroh_diagnostics\",\"arguments\":{\"format\":\"health\"}}}"
+      },
+      "request_id": 31,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:94b50d7ceb6db6ce0c46912d15708a692854dd86d404d669bab261025918f88e",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":31,\"result\":{\"operation\":\"iroh_diagnostics\"}}"
+      },
+      "role": "kit",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "terminal_state": "passed",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "params_type": "str"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "malformed_call",
+      "local_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_datasets_py",
+      "process_witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "reason_codes": [
+        "malformed_params_fail_closed",
+        "jsonrpc_invalid_params"
+      ],
+      "receipt_cid": "baguqeerabivc6aukhi2x72fuuiapasq3isjpkosse5akiexbdjixhvz5plqq",
+      "request_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:427ec33d181d1af48d77af2c249ca63bbf3e0563cedeaee769f32b0790965824",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":12,\"method\":\"tools/call\",\"params\":\"not-an-object\"}"
+      },
+      "request_id": 12,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:0a2a2f028a3a357fe8b4a200f04a1b4492f53a522740a412e11a5173d73d7ae1",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":12,\"error\":{\"code\":-32602,\"message\":\"Invalid params\"}}"
+      },
+      "role": "datasets",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeraij7mgpiydunpjdlxv4wcjhfgho7t4bldz3pk5z3j6mvqpeewlasa",
+      "terminal_state": "refuted",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "params_type": "str"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "malformed_call",
+      "local_cid": "baguqeerass2q27hlnw3m4dcgsewrk4ekneufjxmg2qcnm2n2wjqqewiy7cha",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_kit_py",
+      "process_witness_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "reason_codes": [
+        "malformed_params_fail_closed",
+        "jsonrpc_invalid_params"
+      ],
+      "receipt_cid": "baguqeeratyapt4x245rb6aetuu32o2sur77oe42vbc4nn2kaw534hisqckkq",
+      "request_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:df74f84ff020a5f3362d9ba7ad0a5bb83d0007e99b04679b7d0bdf3f64a70f1f",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":32,\"method\":\"tools/call\",\"params\":\"not-an-object\"}"
+      },
+      "request_id": 32,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:a2c799262a3ce3c19ef5cdd983bf3d12b43ab3c426227091b909dcb7054738c0",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":32,\"error\":{\"code\":-32602,\"message\":\"Invalid params\"}}"
+      },
+      "role": "kit",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeraanugbd4cdit7kdcwiykrx34nxk7ho54sarkxk5xrjgzmwdohg2xa",
+      "terminal_state": "refuted",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "operation": "__dcr_unknown_tool__"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "unknown_call",
+      "local_cid": "baguqeerayythac6kksol4yvx4d7b4xo7oqo3y4pvegim26rjcmveioy5oqha",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_datasets_py",
+      "process_witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "reason_codes": [
+        "unknown_operation_fail_closed",
+        "zero_model_calls"
+      ],
+      "receipt_cid": "baguqeeradrt3lifbe6j6xy4y6ltaff2tzpkrlil2ss7lutokzsbc5nihgkba",
+      "request_bytes": {
+        "byte_length": 80,
+        "sha256": "sha256:9e00f9f2fae7621f0093a537a76a548ffee2735508b8d6e940b777c3a2501295",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":13,\"method\":\"tools/call\",\"params\":{\"name\":\"__dcr_unknown_tool__\",\"arguments\":{}}}"
+      },
+      "request_id": 13,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:94b50d7ceb6db6ce0c46912d15708a692854dd86d404d669bab261025918f88e",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":13,\"error\":{\"code\":-32601,\"message\":\"Method not found\"}}"
+      },
+      "role": "datasets",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeeray3p32inqlaslc66b5gmcsi3aiyy5wzubmjvndrp2vaeoxk2jgcxq",
+      "terminal_state": "refuted",
+      "transport": "in_process"
+    },
+    {
+      "details": {
+        "operation": "__dcr_unknown_tool__"
+      },
+      "http_status": null,
+      "interface": "McpLiveObservation@1",
+      "jsonrpc_version": "2.0",
+      "kind": "unknown_call",
+      "local_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+      "mediated": true,
+      "method": "tools/call",
+      "model_calls": 0,
+      "package": "ipfs_kit_py",
+      "process_witness_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+      "reason_codes": [
+        "unknown_operation_fail_closed",
+        "zero_model_calls"
+      ],
+      "receipt_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+      "request_bytes": {
+        "byte_length": 80,
+        "sha256": "sha256:427ec33d181d1af48d77af2c249ca63bbf3e0563cedeaee769f32b0790965824",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":33,\"method\":\"tools/call\",\"params\":{\"name\":\"__dcr_unknown_tool__\",\"arguments\":{}}}"
+      },
+      "request_id": 33,
+      "response_bytes": {
+        "byte_length": 64,
+        "sha256": "sha256:0a2a2f028a3a357fe8b4a200f04a1b4492f53a522740a412e11a5173d73d7ae1",
+        "truncated": false,
+        "utf8": "{\"jsonrpc\":\"2.0\",\"id\":33,\"error\":{\"code\":-32601,\"message\":\"Method not found\"}}"
+      },
+      "role": "kit",
+      "schema": "ipfs_accelerate_py/agent-supervisor/mcp-live-observation@1",
+      "schema_identity": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+      "terminal_state": "refuted",
+      "transport": "in_process"
+    }
+  ],
+  "interface": "LiveContractTranscript@1",
+  "logic_equivalence": {
+    "canonically_equivalent": true,
+    "goal": "True",
+    "mcp_result_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+    "mcp_terminal_state": "passed",
+    "process_local_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+    "process_local_terminal_state": "passed",
+    "tool": "logic_tools/cec_prove"
+  },
+  "model_calls": 0,
+  "passed": true,
+  "policies": {
+    "infer_missing_calls": false,
+    "local_loopback_only": true,
+    "model_calls_allowed": false,
+    "mutate_user_data": false,
+    "pseudo_cid_allowed": false,
+    "transport_error_becomes_empty_success": false
+  },
+  "process_witness": {
+    "evidence_term": "dcr/runtime-witness@1",
+    "interface": "RuntimeServiceWitness@1",
+    "passed": true,
+    "roles": [
+      {
+        "role": "accelerate",
+        "witness_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq"
+      },
+      {
+        "role": "datasets",
+        "witness_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza"
+      },
+      {
+        "role": "kit",
+        "witness_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq"
+      }
+    ],
+    "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-contract-repair-runtime-witness@1",
+    "service_id": "deterministic-contract-repair-mcp-runtime-v1",
+    "witness_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq"
+  },
+  "profile_results": {
+    "accelerate": {
+      "mcp++/profile-a-idl": {
+        "receipt_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-b-cid-artifacts": {
+        "receipt_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-c-ucan": {
+        "receipt_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-d-temporal-deontic": {
+        "receipt_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-e-mcp-p2p": {
+        "receipt_cid": "baguqeerabivc6aukhi2x72fuuiapasq3isjpkosse5akiexbdjixhvz5plqq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-f-event-dag": {
+        "receipt_cid": "baguqeeraij7mgpiydunpjdlxv4wcjhfgho7t4bldz3pk5z3j6mvqpeewlasa",
+        "supported": true,
+        "terminal_state": "passed"
+      }
+    },
+    "datasets": {
+      "mcp++/profile-a-idl": {
+        "receipt_cid": "baguqeerass2q27hlnw3m4dcgsewrk4ekneufjxmg2qcnm2n2wjqqewiy7cha",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-b-cid-artifacts": {
+        "receipt_cid": "baguqeeratyapt4x245rb6aetuu32o2sur77oe42vbc4nn2kaw534hisqckkq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-c-ucan": {
+        "receipt_cid": "baguqeeraanugbd4cdit7kdcwiykrx34nxk7ho54sarkxk5xrjgzmwdohg2xa",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-d-temporal-deontic": {
+        "receipt_cid": "baguqeerayythac6kksol4yvx4d7b4xo7oqo3y4pvegim26rjcmveioy5oqha",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-e-mcp-p2p": {
+        "receipt_cid": "baguqeeradrt3lifbe6j6xy4y6ltaff2tzpkrlil2ss7lutokzsbc5nihgkba",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-f-event-dag": {
+        "receipt_cid": "baguqeeray3p32inqlaslc66b5gmcsi3aiyy5wzubmjvndrp2vaeoxk2jgcxq",
+        "supported": true,
+        "terminal_state": "passed"
+      }
+    },
+    "kit": {
+      "mcp++/profile-a-idl": {
+        "receipt_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-b-cid-artifacts": {
+        "receipt_cid": "baguqeera4f6kwkb5mpxh6eug3n4qc4vdrqnhfbb6e7sti3nr6nw2ieq2poza",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-c-ucan": {
+        "receipt_cid": "baguqeera64uco3d2nhkw27alleootgf3vlk3ojebpyvm63mugjatc66wz3rq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-d-temporal-deontic": {
+        "receipt_cid": "baguqeerawhtzkz3nzuotkn2qzlvczkrkgyoklgcuzrgloerv7cjfno32mosq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-e-mcp-p2p": {
+        "receipt_cid": "baguqeerabivc6aukhi2x72fuuiapasq3isjpkosse5akiexbdjixhvz5plqq",
+        "supported": true,
+        "terminal_state": "passed"
+      },
+      "mcp++/profile-f-event-dag": {
+        "receipt_cid": "baguqeeraij7mgpiydunpjdlxv4wcjhfgho7t4bldz3pk5z3j6mvqpeewlasa",
+        "supported": true,
+        "terminal_state": "passed"
+      }
+    }
+  },
+  "reason_codes": [
+    "roles_observed",
+    "initialize_list_call_observed",
+    "malformed_unknown_fail_closed",
+    "profiles_a_f_probed",
+    "process_witness_bound",
+    "local_loopback_only",
+    "zero_model_calls",
+    "logic_cec_prove_canonically_equivalent"
+  ],
+  "roles_observed": [
+    "accelerate",
+    "datasets",
+    "kit"
+  ],
+  "schema": "ipfs_accelerate_py/agent-supervisor/live-contract-transcript@1",
+  "service_id": "deterministic-contract-repair-mcp-runtime-v1",
+  "task_id": "DCR-023",
+  "transcript_cid": "baguqeera352pqt7qecs7gnrntot22cs3xa6qab7jtmcgpg35bppt6zfhb4pq",
+  "version": "1"
+}
