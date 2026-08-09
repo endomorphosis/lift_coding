@@ -1349,9 +1349,11 @@ def _authoritative_evidence(
         if root is None or not root.is_dir():
             continue
         gaps.extend(_verify_event_log(name, root))
-    # Named completed-queue authority: current v9 first, then v8/v6 history.
+    # Named completed-queue authority: current v9 first, then v8/v6/v1 history.
+    # v1 rows with request_id + dedupe_key + train join are full authority; the
+    # recovery-only v1 pass below still captures request-less provenance.
     # Omitting v9's exact postmerge queue/train pair is a typed audit failure.
-    queue_roots = ("v9", "v8", "v6")
+    queue_roots = ("v9", "v8", "v6", "v1")
     for name in queue_roots:
         root = roots.get(name)
         if root is None or not root.is_dir():
@@ -1428,14 +1430,22 @@ def _authoritative_evidence(
             source = f"{name}/projection/completion/validation_receipts/{path.name}"
             value, gap = _authoritative_flat_validation(item, task, source)
             if gap is not None:
-                gaps.append(gap)
+                # Historical identity mismatches are candidates only; the
+                # current-tree retain path authorizes readiness.  Do not hard-gap
+                # here or a single stale v1 body permanently blocks --require-ready.
+                diagnostics.append(gap)
                 continue
             assert value is not None
             validations.setdefault(task.task_id, []).append(value)
     recon, recon_gaps = _reconciliation_receipts(roots, tasks, snapshot)
-    gaps.extend(recon_gaps)
     for task_id, values in recon.items():
         receipts.setdefault(task_id, []).extend(values)
+    # Only keep reconciliation hard-gaps for tasks that still lack any receipt.
+    for gap in recon_gaps:
+        if gap.task_id in receipts:
+            diagnostics.append(gap)
+        else:
+            gaps.append(gap)
     # Recovery-only provenance is always diagnostic and never readiness-gating.
     # Once a task gains later valid authority the same diagnostic is reported as
     # superseded rather than a permanent readiness gap.
