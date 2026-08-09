@@ -121,9 +121,7 @@
       "index": 1,
       "name": "dcr-lane-1",
       "strict_shard_remainder": 1,
-      "initial_task_ids": [
-        "DCR-033"
-      ],
+      "initial_task_ids": [],
       "initial_focus": "evidence-catalog"
     },
     {
@@ -151,7 +149,9 @@
       "index": 5,
       "name": "dcr-lane-5",
       "strict_shard_remainder": 5,
-      "initial_task_ids": [],
+      "initial_task_ids": [
+        "DCR-033"
+      ],
       "initial_focus": "transaction-supervisor"
     },
     {
