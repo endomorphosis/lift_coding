@@ -323,11 +323,11 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Interfaces: AnalyzerHealth@1, RepositoryIndex@1
 - Submodules: external/ipfs_accelerate, external/ipfs_datasets, external/ipfs_kit, Mcp-Plus-Plus, swissknife
 - Generated artifacts: data/agent_supervisor/deterministic_contract_repair/analyzer-health.json
-- Conflict policy: Fix parsers or type explicit unsupported rows; never hide failures with exclusions, caps, threshold weakening, or a package-only scan. JSONC and oversized legitimate data/source files receive typed dispositions rather than false syntax errors. The receipt and test must replay after the implementation commit, gitlink integration, and todo-status commit rather than asserting a transient dirty-worktree HEAD.
-- Preconditions: Current forest bound; the digest-bound TypeScript 5.9.3 canary passes in the pinned offline validation image.
-- Effects: Enumerates all six RepairRootOwnership HEAD trees and emits a current whole-scope parse/index receipt with an exact failure funnel, a lossless deterministically compressed disposition ledger, and a safe-for-completion decision; CAS/index intermediates remain private scratch rather than task outputs.
-- Evidence subset: every tracked path disposition reconstructed from a versioned dictionary/prefix codec and deterministic compression, exact row count, uncompressed digest, per-root Merkle roots, parser/compiler/image versions and digests, failures, exclusions, canaries, thresholds
-- Acceptance: The single canonical regular-file artifact stays below the supervisor file-admission limit while decoding to exactly one disposition for every forest path with no omissions or duplicates; its live CLI replay must pass at the exact merged target before completion; legitimate source/data blobs up to the 32 MiB snapshot bound are inspected directly rather than rejected by the older 16 MiB provider limit; blockers, including unavailable reviewed compiler versions, remain directly typed and inspectable, but compiler-unavailable rows cannot claim completion-safe analyzer health; the stored 22-failure stale baseline cannot satisfy this task.
+- Conflict policy: Fix parsers or type explicit unsupported rows; never hide failures with exclusions, caps, threshold weakening, or a package-only scan. JSONC and oversized legitimate data/source files receive typed dispositions rather than false syntax errors. The analyzer must prove the DCR-011 forest at its exact reviewed completion commit, then bind only the strict DCR-012 carrier, no-ff integration, and todo-status transition; calling the DCR-011 live validator at an arbitrary later descendant is forbidden.
+- Preconditions: The exact DCR-011 completion transition and forest bytes validate historically; the authority sandbox exposes only identity-checked read-only Git metadata for the reviewed linked worktree closure; and the digest-bound TypeScript 5.9.3 canary passes through the sealed `IPFS_ACCELERATE_TYPESCRIPT_JS`, package, version, Node, and image bindings.
+- Effects: Enumerates all six RepairRootOwnership HEAD trees and emits a current whole-scope parse/index receipt with an exact failure funnel, a lossless deterministically compressed disposition ledger, and a safe-for-completion decision; TypeScript-family files are parsed through a bounded persistent worker rather than one Node process per file, and CAS/index intermediates remain private scratch rather than task outputs.
+- Evidence subset: every tracked path disposition reconstructed from a versioned dictionary/prefix codec and deterministic compression, exact row count, uncompressed digest, per-root Merkle roots, DCR-011 historical completion proof, DCR-012 lifecycle commits, parser/compiler/runtime/image versions and digests, compiler canary, failures, reviewed unsupported classifications, exclusions, and thresholds
+- Acceptance: The single canonical regular-file artifact stays below the supervisor file-admission limit while decoding to exactly one disposition for every forest path with no omissions or duplicates; its live CLI replay must pass at the exact merged target before completion and finish within the 900-second authority limit; legitimate source/data blobs up to the 32 MiB snapshot bound are inspected directly rather than rejected by the older 16 MiB provider limit; unavailable or digest-mismatched compiler evidence, active-source parse failures, unreviewed unsupported classifications, lifecycle drift, or missing Git-object authority cannot claim completion-safe analyzer health; the stored 22-failure stale baseline and a transient dirty-worktree projection cannot satisfy this task.
 - Embedding query: analyzer health parser failures exact coverage current forest
 - AST query: index_repository_contracts analyzer health parser registry coverage funnel
 
@@ -2036,30 +2036,3 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 - Effects: Maps source/config/toolchain/runtime changes to affected graph edges, proofs, plans, tasks, goals, and required live probes.
 - Evidence subset: change root, dependency closure, invalidations, rechecks, new findings, status projection
 - Acceptance: Relevant drift reopens exactly affected state; irrelevant changes reuse reconstructed evidence; two unchanged scans remain a no-op with zero model/provider calls.
-
-## DCR-105 Resolve 1 dirty backlogged worktrees blocked by content_not_in_target
-
-- Status: blocked
-- Completion: manual
-- Is schedulable: false
-- Review only: true
-- Blocked reason: operator_reconciliation_required
-- Priority: P2
-- Track: ops
-- Generated by: ipfs_accelerate_py.agent_supervisor.reconciliation-guardrail@1
-- Reconciliation kind: dirty_backlogged_worktree
-- Reconciliation reason: content_not_in_target
-- Reconciliation fingerprint: a923fc1e8dcc55a906b6e227b712072f08144f7e
-- Reconciliation discovery: /tmp/lift-dcr-supervisor-20260808/data/agent_supervisor/deterministic_contract_repair/state/discovery/2026-08-08-dcr-105-reconciliation-a923fc1e8dcc.md
-- Canonical board task: false
-- Fingerprint: a923fc1e8dcc55a906b6e227b712072f08144f7e
-- Dedupe key: reconciliation_guardrail:dirty_backlogged_worktree:content_not_in_target
-- Depends on:
-- Outputs: data/agent_supervisor/deterministic_contract_repair/state/discovery, implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md
-- Board namespace: deterministic-swissknife-mcplusplus-contract-repair-v1
-- Goal id: DCR-G000
-- Bundle: dcr/control
-- Parallel lane: dcr-control
-- Resource class: cpu-small
-- Validation: test -f /tmp/lift-dcr-supervisor-20260808/data/agent_supervisor/deterministic_contract_repair/state/discovery/2026-08-08-dcr-105-reconciliation-a923fc1e8dcc.md
-- Acceptance: Reconciliation guardrail filed this because 1 branch or worktree cleanup candidates are blocked by content_not_in_target. This task is intentionally operator-gated because unknown dirty checkout content must not be committed, stashed, or discarded automatically. Use evidence and the machine-readable reconciliation plan in /tmp/lift-dcr-supervisor-20260808/data/agent_supervisor/deterministic_contract_repair/state/discovery/2026-08-08-dcr-105-reconciliation-a923fc1e8dcc.md, reconcile the dirty checkout or dirty worktree group deliberately, then rerun the supervisor cleanup/reconciliation pass and confirm that the blocked candidate count decreases.

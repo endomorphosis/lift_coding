@@ -471,7 +471,11 @@ The scheduler JSON and taskboard wave block are normative:
 
 - W0 seals this program.
 - W1 defines authority and forbids models.
-- W2 reconciles existing WPD/SCA code with current evidence.
+- W2 reconciles existing WPD/SCA code with current evidence. Its forest is
+  proved at the exact DCR-011 completion commit; later evidence must bind that
+  historical proof through its own strict carrier, no-ff integration, and
+  todo-status transition rather than treating an arbitrary descendant as the
+  same current forest.
 - W3 builds the cross-repository graph, runtime identity, live observations,
   and canonical mismatch backlog.
 - W4 activates deterministic logic and proof/counterexample production.
@@ -494,7 +498,10 @@ remain serialized.
 DCR is complete only when one current release receipt proves all of the
 following against the same forest and policy roots:
 
-- analyzer health is safe for completion reasoning;
+- analyzer health is safe for completion reasoning, decodes to exactly one
+  disposition for every path in all six reviewed roots, and binds the sealed
+  TypeScript compiler/runtime/image canary plus the exact historical-forest and
+  current analyzer lifecycle;
 - all mandatory expected and actual MCP surfaces are accounted for;
 - no unresolved mandatory parser/registration/anchor row is hidden;
 - every mandatory contract is proved, explicitly refuted with an open admitted
