@@ -1,0 +1,139 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-contract-repair-services@1",
+  "interface": "RuntimeServiceManifest@1",
+  "version": "1",
+  "evidence_term": "dcr/runtime-witness@1",
+  "service_id": "deterministic-contract-repair-mcp-runtime-v1",
+  "conflict_policy": "One reviewed endpoint per service role; endpoint availability without process/config identity is insufficient.",
+  "policies": {
+    "one_endpoint_per_service_role": true,
+    "endpoint_availability_without_process_identity_insufficient": true,
+    "health_is_liveness_only": true,
+    "mixed_checkout_state_roots_allowed": false,
+    "port_disagreements_allowed": false,
+    "process_replacement_invalidates": true,
+    "config_state_change_invalidates": true,
+    "wrong_checkout_invalidates": true,
+    "unbound_endpoint_invalidates": true,
+    "pseudo_cid_allowed": false
+  },
+  "environment_allowlist": [
+    "HOME",
+    "PATH",
+    "PYTHONPATH",
+    "PYTHONHOME",
+    "VIRTUAL_ENV",
+    "IPFS_ACCELERATE_AGENT_TASK_CHECKPOINT_DIR",
+    "IPFS_ACCELERATE_AGENT_VALIDATION_PATH"
+  ],
+  "services": [
+    {
+      "role": "accelerate",
+      "package": "ipfs_accelerate_py",
+      "root": "external/ipfs_accelerate",
+      "transport": "in_process",
+      "modules": [
+        "ipfs_accelerate_py",
+        "ipfs_accelerate_py.mcp_server.mcplusplus.idl_registry",
+        "ipfs_accelerate_py.agent_supervisor.analysis.runtime_service_identity"
+      ],
+      "arguments": [
+        "-m",
+        "ipfs_accelerate_py.mcp_server"
+      ],
+      "endpoint": {
+        "kind": "loopback_http",
+        "host": "127.0.0.1",
+        "port": 18765,
+        "path": "/mcp",
+        "url": "http://127.0.0.1:18765/mcp"
+      },
+      "configuration": {
+        "profile": "dcr-mcp-runtime",
+        "package": "ipfs_accelerate_py",
+        "transport": "in_process",
+        "reviewed_endpoint_port": 18765,
+        "capability_mode": "fail_closed"
+      },
+      "state": {
+        "schema": "dcr/runtime-state@1",
+        "package": "ipfs_accelerate_py",
+        "durable_roots": [
+          "data/agent_supervisor/deterministic_contract_repair"
+        ],
+        "ephemeral": true
+      }
+    },
+    {
+      "role": "datasets",
+      "package": "ipfs_datasets_py",
+      "root": "external/ipfs_datasets",
+      "transport": "in_process",
+      "modules": [
+        "ipfs_datasets_py",
+        "ipfs_datasets_py.logic"
+      ],
+      "arguments": [
+        "-m",
+        "ipfs_datasets_py.mcp_server"
+      ],
+      "endpoint": {
+        "kind": "loopback_http",
+        "host": "127.0.0.1",
+        "port": 18766,
+        "path": "/mcp",
+        "url": "http://127.0.0.1:18766/mcp"
+      },
+      "configuration": {
+        "profile": "dcr-mcp-runtime",
+        "package": "ipfs_datasets_py",
+        "transport": "in_process",
+        "reviewed_endpoint_port": 18766,
+        "capability_mode": "fail_closed"
+      },
+      "state": {
+        "schema": "dcr/runtime-state@1",
+        "package": "ipfs_datasets_py",
+        "durable_roots": [
+          "data/agent_supervisor/deterministic_contract_repair"
+        ],
+        "ephemeral": true
+      }
+    },
+    {
+      "role": "kit",
+      "package": "ipfs_kit_py",
+      "root": "external/ipfs_kit",
+      "transport": "in_process",
+      "modules": [
+        "ipfs_kit_py"
+      ],
+      "arguments": [
+        "-m",
+        "ipfs_kit_py.mcp_server"
+      ],
+      "endpoint": {
+        "kind": "loopback_http",
+        "host": "127.0.0.1",
+        "port": 18767,
+        "path": "/mcp",
+        "url": "http://127.0.0.1:18767/mcp"
+      },
+      "configuration": {
+        "profile": "dcr-mcp-runtime",
+        "package": "ipfs_kit_py",
+        "transport": "in_process",
+        "reviewed_endpoint_port": 18767,
+        "capability_mode": "fail_closed"
+      },
+      "state": {
+        "schema": "dcr/runtime-state@1",
+        "package": "ipfs_kit_py",
+        "durable_roots": [
+          "data/agent_supervisor/deterministic_contract_repair"
+        ],
+        "ephemeral": true
+      }
+    }
+  ]
+}
