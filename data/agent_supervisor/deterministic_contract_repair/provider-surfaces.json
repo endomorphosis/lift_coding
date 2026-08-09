@@ -1,0 +1,165 @@
+{
+  "authoritative": false,
+  "completion_authorized": false,
+  "equivalence": {
+    "count": 0,
+    "digest": "sha256:pending",
+    "ledger": {
+      "codec": "dcr-provider-surface-dictionary@1",
+      "dictionary": {},
+      "field_names": [
+        "root_id",
+        "provider",
+        "canonical_name",
+        "anchor_kind",
+        "registration_count",
+        "paths",
+        "handlers",
+        "reason_code"
+      ],
+      "payload": "",
+      "payload_encoding": "zlib+base64",
+      "payload_sha256": "sha256:pending",
+      "row_count": 0,
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-provider-surface-ledger@1",
+      "uncompressed_digest": "sha256:pending"
+    }
+  },
+  "extractor_interface": "PythonMcpSurfaceExtractor@1",
+  "forest_historical_proof": {
+    "completion_commit": "pending",
+    "current_head": "pending",
+    "forest_id": "pending",
+    "integrity_valid": false,
+    "subject_head": "pending"
+  },
+  "forest_id": "pending",
+  "interface": "ProviderSurfaceHealth@1",
+  "inventory": {
+    "classification_counts": {},
+    "merkle_root": "sha256:pending",
+    "root_merkle": {},
+    "scanned_file_count": 0
+  },
+  "lifecycle": {
+    "artifact_path": "data/agent_supervisor/deterministic_contract_repair/provider-surfaces.json",
+    "carrier_subject": "DCR-013: Index complete actual provider registration and handler surfaces",
+    "max_transition_commits": 3,
+    "predecessor_completion_commit": "pending",
+    "predecessor_forest_id": "pending",
+    "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-provider-surface-health-lifecycle@1",
+    "subject_head": "pending",
+    "subject_root_id": "orchestration",
+    "subject_tree": "pending",
+    "task_id": "DCR-013",
+    "todo_path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md",
+    "todo_subject": "DCR-013: mark todo completed"
+  },
+  "package_roots": [
+    {
+      "head": "pending",
+      "inventory_merkle": "sha256:pending",
+      "provider": "ipfs_accelerate_py",
+      "relative_path": "external/ipfs_accelerate",
+      "root_id": "ipfs-accelerate",
+      "scanned_file_count": 0,
+      "tree": "pending"
+    },
+    {
+      "head": "pending",
+      "inventory_merkle": "sha256:pending",
+      "provider": "ipfs_datasets_py",
+      "relative_path": "external/ipfs_datasets",
+      "root_id": "ipfs-datasets",
+      "scanned_file_count": 0,
+      "tree": "pending"
+    },
+    {
+      "head": "pending",
+      "inventory_merkle": "sha256:pending",
+      "provider": "ipfs_kit_py",
+      "relative_path": "external/ipfs_kit",
+      "root_id": "ipfs-kit",
+      "scanned_file_count": 0,
+      "tree": "pending"
+    },
+    {
+      "head": "pending",
+      "inventory_merkle": "sha256:pending",
+      "provider": "mcp_plus_plus",
+      "relative_path": "Mcp-Plus-Plus",
+      "root_id": "mcp-plus-plus",
+      "scanned_file_count": 0,
+      "tree": "pending"
+    }
+  ],
+  "parity": {
+    "authorized": true,
+    "blocked": false,
+    "reason_codes": []
+  },
+  "provider_surface_health_id": "sha256:pending-materialize-via-pytest-or-cli",
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-provider-surface-health@1",
+  "surfaces": {
+    "active_tool_count": 0,
+    "digest": "sha256:pending",
+    "ledger": {
+      "codec": "dcr-provider-surface-dictionary@1",
+      "dictionary": {},
+      "field_names": [
+        "root_id",
+        "provider",
+        "path",
+        "classification",
+        "declared_name",
+        "canonical_name",
+        "kind",
+        "registration_api",
+        "handler_symbol",
+        "handler_state",
+        "schema_state",
+        "schema_digest",
+        "aliases",
+        "start_line",
+        "end_line",
+        "effect_calls",
+        "policy_gates",
+        "transports"
+      ],
+      "payload": "",
+      "payload_encoding": "zlib+base64",
+      "payload_sha256": "sha256:pending",
+      "row_count": 0,
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-provider-surface-ledger@1",
+      "uncompressed_digest": "sha256:pending"
+    },
+    "tool_count": 0
+  },
+  "unresolved": {
+    "count": 0,
+    "digest": "sha256:pending",
+    "ledger": {
+      "codec": "dcr-provider-surface-dictionary@1",
+      "dictionary": {},
+      "field_names": [
+        "root_id",
+        "provider",
+        "path",
+        "classification",
+        "reason",
+        "registration_api",
+        "expression",
+        "detail",
+        "start_line",
+        "mandatory"
+      ],
+      "payload": "",
+      "payload_encoding": "zlib+base64",
+      "payload_sha256": "sha256:pending",
+      "row_count": 0,
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-provider-surface-ledger@1",
+      "uncompressed_digest": "sha256:pending"
+    },
+    "mandatory_count": 0
+  }
+}
