@@ -1,0 +1,75 @@
+{
+  "catalog_contract_count": 0,
+  "compiled_obligation_count": 0,
+  "compiled_obligations": [],
+  "compiler_id": "mcp-contract-obligation-compiler@1",
+  "generated_at": "2026-08-09T20:02:57.049106+00:00",
+  "interface": "McpContractObligations@1",
+  "logic_ir_domain": "ipfs-accelerate/mcp-contract-obligation",
+  "logic_ir_schema_version": "mcp-contract-logic/v1",
+  "notes": [
+    "Compiler and validation surface landed for DCR-031.",
+    "Obligations are compiled on demand from reviewed claims; artifact records compiler identity and SCAEV060LOGIC evidence.",
+    "Circular-import fix unblocks pytest collection for claim/obligation modules."
+  ],
+  "obligation_version": "1",
+  "repository_id": "repository:lift_coding/dcr",
+  "scaev060logic": {
+    "coverage": [
+      "property-premises-assumptions-snapshot-scope-invalidators-required-assurance-supported-fragment-bound",
+      "source-and-graph-dumps-rejected-as-premises",
+      "closed-family-logic-fragments-only",
+      "canonical-shared-logic-view-and-code-proof-obligation",
+      "canonical-round-trip-and-premise-order-invariance",
+      "no-proof-minting-open-until-independently-discharged",
+      "unsupported-analysis-is-explicit-unsupported-fragment"
+    ],
+    "evidence": {
+      "acceptance": "Every obligation binds property, premises, assumptions, snapshot, scope, invalidators, required assurance, and supported logic fragment; source or graph dumps are rejected as premises.",
+      "coverage": [
+        "property-premises-assumptions-snapshot-scope-invalidators-required-assurance-supported-fragment-bound",
+        "source-and-graph-dumps-rejected-as-premises",
+        "closed-family-logic-fragments-only",
+        "canonical-shared-logic-view-and-code-proof-obligation",
+        "canonical-round-trip-and-premise-order-invariance",
+        "no-proof-minting-open-until-independently-discharged",
+        "unsupported-analysis-is-explicit-unsupported-fragment"
+      ],
+      "interface": "McpContractObligations@1",
+      "requirement_ids": [
+        "SCAEV060LOGIC"
+      ]
+    },
+    "term": "SCAEV060LOGIC"
+  },
+  "schema": "ipfs_accelerate_py/agent-supervisor/mcp-contract-obligations-artifact@1",
+  "source_graph": {
+    "bytes": 73448,
+    "edges_count": 48,
+    "keys": [
+      "blocker_count",
+      "blockers",
+      "canonical_digest",
+      "complete",
+      "consumer_count",
+      "consumer_ids",
+      "edge_count",
+      "edges",
+      "evidence_term",
+      "graph_cid",
+      "graph_id",
+      "graph_root",
+      "interface",
+      "node_count",
+      "nodes",
+      "policies",
+      "roots",
+      "schema",
+      "snapshot_id",
+      "version"
+    ],
+    "path": "data/agent_supervisor/deterministic_contract_repair/mcp_contract_graph.json"
+  },
+  "task_id": "DCR-031",
+  "tree_id": "949c0b49629ed583fd43baa08cdd9b17e1d67fd9"
+}
