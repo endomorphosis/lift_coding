@@ -788,7 +788,7 @@ def test_ptr_163_contract_seals_exact_byte_native_v5_relation() -> None:
 
     assert task.status == "todo"
     assert task.canonical_task_cid == (
-        "baguqeerafovagwpbybbcpfr6ke5ypz2vr7llycbdpohamiqcxamhhbusirva"
+        "baguqeerakxhhq45bn5sfpxumpzenosfkms3m273okr4i7hvosgkbq343etnq"
     )
     for requirement in (
         "fixed-capacity receipt and attestation byte arrays",
@@ -797,14 +797,28 @@ def test_ptr_163_contract_seals_exact_byte_native_v5_relation() -> None:
         "in-circuit SHA-256 hashes exactly the selected bytes",
         "two bit/range-constrained u128 limbs",
         "never a caller-supplied 32-byte label",
+        "rejects every non-canonical field encoding",
+        "adding the scalar-field modulus",
         "one complete ordered public-input profile",
         "explicit ephemeral V5 setup/prove/verify",
         "proof for statement A does not verify with statement B",
         "Existing wire/schema/vector assertions are retained or strengthened",
-        "truthful manifest rehash the actual executable",
-        "never trigger setup, build, download or network",
+        "truthful manifest rehash the actual V5-capable checked-in executable",
+        "without any Rust test, build script, import hook or preparatory command editing",
+        "actual V5-capable checked-in executable",
+        "persist and bind the actual manifest",
+        "never trigger setup, build, source/test mutation, download or network",
     ):
         assert requirement in task.acceptance
+    envelope = json.loads(task.metadata["proposal artifact envelope"])
+    assert envelope == {
+        "allow_binary": True,
+        "max_file_bytes": 5_000_000,
+        "max_output_bytes": 16_000_000,
+        "max_patch_bytes": 12_000_000,
+        "paths": task.outputs,
+        "schema": "ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@2",
+    }
     native_test = (
         "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
         "test_groth16_native_release.py"
@@ -876,12 +890,13 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
 
     assert task.status == "todo"
     assert task.canonical_task_cid == (
-        "baguqeeraerpp6lxobckvtub32bs3z3bnkxdhhrg7p5uxdddlv5cscb6wza5a"
+        "baguqeera6yv2kkmedurryjpozxdym72xt4to3r5vibrmxya74ffn525fkk4a"
     )
     for requirement in (
         "standalone `validate(objective, todo, config, plan)` board gate",
         "`valid=true`, `errors=[]` and `task_count=78`",
         "78 unique records in namespace `proof-backed-test-reuse-v1`",
+        "match the canonical digests sealed by the current v9 root's fresh native-board and launch-preflight receipts",
         "exact `(task_id, canonical_task_key, canonical_task_cid)`",
         "never rederives a private task CID",
         "`IPFS_PROOF_REUSE_STATE_ROOT`",
@@ -892,11 +907,13 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
         "current control state and every historical sibling remain read-only",
         "`proof_authoritative=false` and `completion_authority=false`",
         "mandatory reviewed sibling `proof-backed-test-reuse-v8`, `proof-backed-test-reuse-v6` and `proof-backed-test-reuse-v1` roots",
+        "current v9 root's exact completed-queue, train, validation and event locations",
         "`project_managed_merge_queue_record`",
         "never as authentication",
         "`dedupe_key` equal to the train filename stem",
         "queue canonical CID/key and train canonical key",
         "Recovery-only records without request/dedupe/train binding",
+        "non-authoritative provenance diagnostics",
         "manifest/hash-chain-verified JSONL reconciliation events",
         "never supervisor/preflight logs or a reader that repairs the evidence",
         "`implementation_branch_already_merged`",
@@ -915,9 +932,12 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
         "including native PTR-163 and Python-composition PTR-171",
         "excludes wall-clock time, absolute roots, report paths, mtimes and scan order",
         "`audit_valid` from `ready`",
-        "missing or malformed reviewed root, board, receipt chain, manifest or scan fails closed",
+        "superseded historical diagnostics are reported separately",
+        "identity, schema, shape, digest, chain, root or scan failures set `audit_valid=false`",
         "77-, 76-, two- and one-task boards",
         "v1 PTR-011/PTR-041 successful-plus-failed reconciliation chain/manifest",
+        "missing evidence fails rather than calling `pytest.skip`",
+        "declared pytest run has zero skips",
     ):
         assert requirement in task.acceptance
     todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
@@ -925,6 +945,8 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
     assert "zero of 71 completion/validation receipts" in todo_text
     assert "accepted just 3 of 70 completions and 0 of 70 validations" in todo_text
     assert "baguqeerar47kmz4pukq2hsfzjerdc3tkhm44aw7k62swqg6xzd4c3javw44q" in todo_text
+    assert "dddece5cacf63dced8016c5b9a4bf01c0f4647cf" in todo_text
+    assert "5635a7d201f862c1c7e58913c657e034fbf03a29" in todo_text
 
 
 def test_board_validator_requires_full_ptr_163_native_surface(
@@ -937,8 +959,10 @@ def test_board_validator_requires_full_ptr_163_native_surface(
     )
 
     def remove_cargo_lock(block: str) -> str:
-        assert block.count(cargo_lock) == 2
-        return block.replace(f", {cargo_lock}", "")
+        assert block.count(cargo_lock) == 3
+        return block.replace(f", {cargo_lock}", "").replace(
+            f'"{cargo_lock}",', ""
+        )
 
     todo_path = _write_mutated_task_board(
         tmp_path, validator, "PTR-163", remove_cargo_lock
@@ -1088,8 +1112,8 @@ def test_board_validator_rejects_multi_owned_resolved_sealed_path(
             "\n- Validation:", f", {shim_path}\n- Validation:", 1
         )
         mutated = mutated.replace(
-            "\n- Predicted symbols:",
-            f", {shim_path}\n- Predicted symbols:",
+            "\n- Proposal artifact envelope:",
+            f", {shim_path}\n- Proposal artifact envelope:",
             1,
         )
         return mutated
@@ -1130,8 +1154,8 @@ def test_board_validator_rejects_moving_resolved_path_to_arbitrary_task(
             "\n- Validation:", f", {shim_path}\n- Validation:", 1
         )
         return mutated.replace(
-            "\n- Predicted symbols:",
-            f", {shim_path}\n- Predicted symbols:",
+            "\n- Proposal artifact envelope:",
+            f", {shim_path}\n- Proposal artifact envelope:",
             1,
         )
 

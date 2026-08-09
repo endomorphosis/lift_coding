@@ -233,6 +233,7 @@ def _managed_merge_resolver_command() -> str:
     fallback_command = [
         codex_binary,
         "exec",
+        "--ephemeral",
         "--dangerously-bypass-approvals-and-sandbox",
         "-C",
         resolver_workspace,

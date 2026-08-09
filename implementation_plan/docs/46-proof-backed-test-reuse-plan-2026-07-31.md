@@ -984,12 +984,26 @@ and emits diagnostic-only, non-authoritative boundary evidence. PTR-165 fails
 closed if the boundary, any required root, or any authenticated chain is
 missing.
 
-The v9 population is 78 tasks. Its live first frontier remains PTR-163 on
-numeric shard 1 and PTR-165 on shard 0. When PTR-163 succeeds, PTR-171 becomes
-DAG-ready on shard 0 and waits if PTR-165 still owns that shard. PTR-171 alone
-unlocks PTR-164; the remaining PTR-166 through PTR-169 joins retain their
-ordered trust boundaries. Any v8/77-task, v7/76-task or older packet is
-provenance only and cannot authorize closeout.
+The v9 population is 78 tasks. PTR-165's first merged v9 inventory was reopened
+after postmerge review proved that it omitted current v9 queue authority,
+accepted altered boards and underspecified receipts, skipped its mandatory
+real-format fixture under isolated HOME, and made superseded historical
+diagnostics permanent readiness gaps. The live frontier is therefore native
+PTR-163 on numeric shard 1 plus revised PTR-165 on shard 0.
+Stopped PTR-163 attempt 4 is contradictory evidence: its core exact-byte
+circuit was promising, but it rewrote the pytest conftest during `cargo test`,
+accepted non-canonical public-input words through modulo-field decoding, kept
+the legacy pre-V5 executable while claiming a new release, and did not bind
+the manifest and ephemeral keys before prove/verify. The baseline conftest now
+handles an intentionally disabled cache provider without mutation. A reviewed
+task-local binary artifact envelope permits replacement of the one declared
+native executable only together with the exact 21-path candidate, bounded
+materialized/serialized bytes, the manifest, strengthened wire tests, and the
+full declared validation; the ordinary binary prohibition remains in force
+for every other task. When the revised PTR-163 succeeds, PTR-171 becomes
+DAG-ready on shard 0. PTR-171 alone unlocks PTR-164; the remaining PTR-166
+through PTR-169 joins retain their ordered trust boundaries. Any v8/77-task,
+v7/76-task or older packet is provenance only and cannot authorize closeout.
 
 ## 14. Parallel implementation program
 
