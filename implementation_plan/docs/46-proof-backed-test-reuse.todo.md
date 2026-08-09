@@ -2397,7 +2397,7 @@ uncertain candidates execute normally.
 
 ## PTR-164 Enforce signed-receipt trust in lookup and controller publication
 
-- Status: todo
+- Status: done
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
