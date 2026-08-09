@@ -296,7 +296,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-012 Restore analyzer health and exact parser accounting
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
