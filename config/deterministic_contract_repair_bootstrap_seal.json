@@ -195,7 +195,7 @@
       },
       {
         "path": "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
-        "sha256": "754e0bbb3fa908c48cd907d5de87522989a32508e1e3fa71d6e64960be27586c"
+        "sha256": "088e2998f8f67dc7233eb3f1a6bbfd5321809809602ae8621fbfdc8149fcb050"
       },
       {
         "path": "data/agent_supervisor/deterministic_contract_repair/capabilities.json",
@@ -223,7 +223,7 @@
       },
       {
         "path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md",
-        "sha256": "412af851905de57ef3204d2dc486e8ed703aeeb293d06092491684639613c743"
+        "sha256": "ac65edcea04765406b43e1f6941b983eccc8183eabb21c059374210bd8fb23ab"
       },
       {
         "path": "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
@@ -234,14 +234,14 @@
         "sha256": "5fc045d74585ddcec3334ba8c9225fe61af8c20a7b319a6580f40c40be4a5143"
       }
     ],
-    "inventory_id": "sha256:4345c91eb44d4edd427d3558954dbc4e390a15f5be430a5da0b9bb2d35f7787d"
+    "inventory_id": "sha256:77a5aecfd745cfd07dc152289a2a7cf544215cd21073bfb30b03670cf403d7f2"
   },
   "baseline": {
     "forest_id": "sha256:871cb3d6dae0c40d023a6e05f0b108e4115ccf5f56d01624b0ec6d053672c863",
-    "inventory_id": "sha256:4345c91eb44d4edd427d3558954dbc4e390a15f5be430a5da0b9bb2d35f7787d",
-    "validator_report_id": "sha256:1a64687b6999cd866b78850145c91a77e97acbf3b8ec5f19830b0d6692d91830",
+    "inventory_id": "sha256:77a5aecfd745cfd07dc152289a2a7cf544215cd21073bfb30b03670cf403d7f2",
+    "validator_report_id": "sha256:5cfa36cdacb59c8a7508fc66eff671702fcd1d0353104a90cdfc3710a211a88a",
     "valid": true,
-    "baseline_id": "sha256:7dd9a5a7dd3950afb60b2f88ce2b306d6c7b312cb40e7d6cd80db3b0385f215a"
+    "baseline_id": "sha256:151b8eb52d6d81d3699970a46128c2b40ed05dcfe7666285d36278fc187f8488"
   },
   "authoring_board": {
     "schema": "ipfs_accelerate_py/agent-supervisor/ordered-provider-authoring-board@1",
@@ -483,5 +483,5 @@
     ],
     "authoring_board_id": "sha256:258d2f8b0671d92e838fd26fad4ac672fa4b95ae101b2d9269bd8cfc662db1c2"
   },
-  "seal_id": "sha256:81d336e0818baf43be2299f886d1215383288dbb23668933d62e50d49b124d12"
+  "seal_id": "sha256:b14d0dc6dd79b5054aa352c4aec742fa3688011594653e238b907a7e049919ef"
 }

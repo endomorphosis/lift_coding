@@ -37,10 +37,11 @@
       "DCR-002",
       "DCR-003",
       "DCR-004",
-      "DCR-010"
+      "DCR-010",
+      "DCR-011"
     ],
     "ready_task_ids": [
-      "DCR-011"
+      "DCR-012"
     ],
     "blocked_task_ids": [],
     "terminal_task_id": "DCR-104",
@@ -145,7 +146,7 @@
       "name": "dcr-lane-6",
       "strict_shard_remainder": 6,
       "initial_task_ids": [
-        "DCR-011"
+        "DCR-012"
       ],
       "initial_focus": "conformance"
     },
