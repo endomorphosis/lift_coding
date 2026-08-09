@@ -1,0 +1,9 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-provider-surfaces@1",
+  "interface": "ProviderSurfaceHealth@1",
+  "extractor_interface": "PythonMcpSurfaceExtractor@1",
+  "note": "Placeholder replaced by materialize/write_provider_surface_health against the DCR forest. Fixture tests generate authoritative receipts; live CLI materialize must be re-run at the merged target before completion.",
+  "authoritative": false,
+  "completion_authorized": false,
+  "provider_surface_id": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+}
