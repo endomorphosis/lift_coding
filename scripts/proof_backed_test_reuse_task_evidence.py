@@ -662,7 +662,83 @@ def _load_script_module(path: Path, name: str) -> Any:
     return module
 
 
-def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, Any]]:
+def _file_sha256(path: Path) -> str:
+    return _sha256(path.read_bytes())
+
+
+def _ordered_task_identity_digest(tasks: Mapping[str, Task]) -> str:
+    """Byte-stable digest of the ordered parser-supplied task triple inventory."""
+
+    ordered = [
+        {
+            "task_id": task.task_id,
+            "canonical_task_key": task.canonical_task_key,
+            "canonical_task_cid": task.canonical_task_cid,
+        }
+        for task in sorted(tasks.values(), key=lambda item: item.task_id)
+    ]
+    return _sha256(canonical_json(ordered))
+
+
+def _match_sealed_document_digests(
+    state_root: Path, live_preflight: Mapping[str, Any],
+) -> list[Gap]:
+    """Require current document bytes to match v9 native-board and launch receipts.
+
+    Structural preflight success is necessary but insufficient: a title,
+    validation, acceptance or test edit that still validates must be rejected
+    when it no longer matches the digests sealed into the controller's current
+    native-board and launch-preflight projections.
+    """
+
+    gaps: list[Gap] = []
+    native_path = state_root / "projection" / "native_board_preflight.json"
+    launch_path = state_root / "projection" / "launch_preflight.json"
+    native = _read_json(native_path)
+    launch = _read_json(launch_path)
+    if native is None:
+        return [Gap("BOARD", "BOARD_SEALED_PREFLIGHT_MISSING", "native_board_preflight")]
+    if launch is None:
+        return [Gap("BOARD", "BOARD_SEALED_PREFLIGHT_MISSING", "launch_preflight")]
+    board = launch.get("board")
+    if not isinstance(board, Mapping):
+        return [Gap("BOARD", "BOARD_SEALED_PREFLIGHT_INVALID", "launch_preflight.board")]
+    if (
+        native.get("schema") != PREFLIGHT_SCHEMA
+        or native.get("valid") is not True
+        or native.get("errors") != []
+        or native.get("task_count") != SEALED_TASK_COUNT
+        or launch.get("schema") != "ipfs_accelerate_py/proof-backed-test-reuse-launch-preflight@1"
+        or launch.get("valid") is not True
+        or board.get("schema") != PREFLIGHT_SCHEMA
+        or board.get("valid") is not True
+        or board.get("task_count") != SEALED_TASK_COUNT
+    ):
+        gaps.append(Gap("BOARD", "BOARD_SEALED_PREFLIGHT_INVALID", "native/launch receipts did not seal the 78-task board"))
+        return gaps
+    try:
+        # Always rehash the repository-owned sealed paths, not tmp launch paths
+        # that may appear inside a historical receipt body.
+        current = {
+            "todo_sha256": _file_sha256(TODO_PATH),
+            "objective_sha256": _file_sha256(OBJECTIVE_PATH),
+            "plan_sha256": _file_sha256(PLAN_PATH),
+            "configuration_sha256": _file_sha256(CONFIG_PATH),
+        }
+    except OSError as exc:
+        return [Gap("BOARD", "BOARD_DOCUMENT_UNREADABLE", type(exc).__name__)]
+    for label, sealed in (("native", native), ("launch", board), ("live", live_preflight)):
+        for field, observed in current.items():
+            if sealed.get(field) != observed:
+                gaps.append(Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:{field}"))
+        if sealed.get("dependency_graph_id") != live_preflight.get("dependency_graph_id"):
+            gaps.append(Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:dependency_graph_id"))
+        if sealed.get("task_count") != SEALED_TASK_COUNT:
+            gaps.append(Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:task_count"))
+    return gaps
+
+
+def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, Any], Mapping[str, Any]]:
     """Read the program board through its preflight and supervisor parser.
 
     This deliberately does not use the permissive markdown parser above.  The
@@ -678,7 +754,7 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
         )
         preflight = validator.validate(OBJECTIVE_PATH, todo, CONFIG_PATH, PLAN_PATH)
     except Exception as exc:
-        return {}, [Gap("BOARD", "BOARD_PREFLIGHT_UNAVAILABLE", type(exc).__name__)], {}
+        return {}, [Gap("BOARD", "BOARD_PREFLIGHT_UNAVAILABLE", type(exc).__name__)], {}, {}
     if (
         not isinstance(preflight, Mapping)
         or preflight.get("schema") != PREFLIGHT_SCHEMA
@@ -686,7 +762,7 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
         or preflight.get("errors") != []
         or preflight.get("task_count") != SEALED_TASK_COUNT
     ):
-        return {}, [Gap("BOARD", "BOARD_PREFLIGHT_INVALID", "sealed preflight did not validate the 78-task board")], {}
+        return {}, [Gap("BOARD", "BOARD_PREFLIGHT_INVALID", "sealed preflight did not validate the 78-task board")], {}, {}
     try:
         accelerator = REPO_ROOT / "external/ipfs_accelerate"
         if str(accelerator) not in sys.path:
@@ -695,10 +771,11 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
 
         parsed = parse_task_file(todo, "## PTR-")
     except Exception as exc:
-        return {}, [Gap("BOARD", "BOARD_PARSER_UNAVAILABLE", type(exc).__name__)], {}
+        return {}, [Gap("BOARD", "BOARD_PARSER_UNAVAILABLE", type(exc).__name__)], {}, {}
     if len(parsed) != SEALED_TASK_COUNT:
-        return {}, [Gap("BOARD", "BOARD_POPULATION_MISMATCH", str(len(parsed)))], {}
+        return {}, [Gap("BOARD", "BOARD_POPULATION_MISMATCH", str(len(parsed)))], {}, {}
     tasks: dict[str, Task] = {}
+    ordered_ids: list[str] = []
     for item in parsed:
         task_id = str(getattr(item, "task_id", ""))
         metadata = getattr(item, "metadata", {})
@@ -720,12 +797,18 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
             task_id, str(getattr(item, "title", "")), str(getattr(item, "status", "")).lower(),
             depends, outputs, command, validation_targets(command), goal, key, cid,
         )
+        ordered_ids.append(task_id)
     if len(tasks) != SEALED_TASK_COUNT:
         gaps.append(Gap("BOARD", "BOARD_POPULATION_MISMATCH", str(len(tasks))))
+    # Parser order must remain a unique 78-task inventory; the ordered digest is
+    # later matched against the sealed native/launch document digests that bind
+    # the same todo bytes.
+    if len(ordered_ids) != SEALED_TASK_COUNT or len(set(ordered_ids)) != SEALED_TASK_COUNT:
+        gaps.append(Gap("BOARD", "BOARD_POPULATION_MISMATCH", "ordered parser inventory is not 78 unique tasks"))
     quarantine = preflight.get("historical_missing_artifact_quarantine")
     if not isinstance(quarantine, Mapping):
         quarantine = {}
-    return tasks, gaps, quarantine
+    return tasks, gaps, quarantine, preflight
 
 
 class GitSnapshot:
@@ -1062,6 +1145,11 @@ def _join_queue_train_receipt(
 ) -> tuple[CompletedTaskArtifactReceipt | None, Gap | None]:
     """Authenticate one allowlisted completed-queue row against its train receipt."""
 
+    outer_status = row.get("status")
+    if outer_status in {"failed", "quarantined", "quarantine"}:
+        return None, Gap(task.task_id, "QUEUE_ROW_FAILED_OR_QUARANTINED", f"{name}:{queue_path.name}:{outer_status}")
+    if outer_status != "completed":
+        return None, Gap(task.task_id, "QUEUE_ROW_UNAUTHENTICATED", f"{name}:{queue_path.name}:status={outer_status!r}")
     metadata = row.get("metadata")
     nested = metadata.get("task") if isinstance(metadata, Mapping) else None
     if (
@@ -1070,6 +1158,11 @@ def _join_queue_train_receipt(
         or metadata.get("schema") != "ipfs_accelerate_py/agent-supervisor/merge-candidate@3"
     ):
         return None, Gap(task.task_id, "QUEUE_ROW_UNAUTHENTICATED", queue_path.name)
+    # Nested task triple must match the sealed board triple; mismatched nested
+    # identities never authorize even when the outer row looks complete.
+    nested_id = nested.get("task_id")
+    if nested_id not in {None, task.task_id}:
+        return None, Gap(task.task_id, "QUEUE_TASK_IDENTITY_MISMATCH", f"{name}:{queue_path.name}:nested_task_id")
     request_id = row.get("request_id")
     dedupe = row.get("dedupe_key")
     if not isinstance(request_id, str) or not request_id or not isinstance(dedupe, str) or not dedupe:
@@ -1081,6 +1174,7 @@ def _join_queue_train_receipt(
         or nested.get("canonical_task_cid") != task.canonical_task_cid
         or row.get("canonical_task_key") != task.canonical_task_key
         or row.get("canonical_task_id") != task.canonical_task_cid
+        or row.get("task_id") != task.task_id
         or request_id != queue_path.stem
     ):
         return None, Gap(task.task_id, "QUEUE_TASK_IDENTITY_MISMATCH", queue_path.name)
@@ -1126,26 +1220,89 @@ def _join_queue_train_receipt(
     ), None
 
 
+def _authoritative_flat_validation(
+    item: Mapping[str, Any], task: Task, source_label: str,
+) -> tuple[dict[str, Any] | None, Gap | None]:
+    """Accept only the flat executed-validation receipt body with full fields."""
+
+    try:
+        command_cid = _validation_command_cid(task.validation_command)
+    except Exception:
+        return None, Gap(task.task_id, "VALIDATION_COMMAND_IDENTITY_UNAVAILABLE", source_label)
+    immutable = dict(item)
+    claimed = immutable.pop("validation_receipt_cid", "")
+    expected = canonical_cid(immutable)
+    if (
+        item.get("schema") != "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1"
+        or claimed != expected
+        or item.get("task_id") != task.task_id
+        or item.get("task_cid") != task.canonical_task_cid
+        or item.get("goal_id") != task.goal_id
+        or item.get("validation_command") != task.validation_command
+        or item.get("validation_command_cid") != command_cid
+        or item.get("passed") is not True
+        or item.get("proof_reuse_mode") != "off"
+        or item.get("disposition") != "executed"
+        or item.get("exit_code") != 0
+        or item.get("skipped_count") != 0
+        or item.get("status") != "passed"
+        or not isinstance(item.get("fresh_until_ms"), int)
+        or not isinstance(item.get("git_commit_id"), str)
+        or not item.get("git_commit_id")
+        or not isinstance(item.get("git_tree_id"), str)
+        or not item.get("git_tree_id")
+        or not isinstance(item.get("gitlink_state_cid"), str)
+        or not item.get("gitlink_state_cid")
+        or not isinstance(item.get("repository_id"), str)
+        or not item.get("repository_id")
+        or not isinstance(item.get("repository_state_cid"), str)
+        or not item.get("repository_state_cid")
+        or not isinstance(item.get("repository_forest_cid"), str)
+        or not item.get("repository_forest_cid")
+        or item.get("dirty") not in {True, False}
+        or not isinstance(item.get("dirty_overlay_cid"), str)
+        or not item.get("dirty_overlay_cid")
+    ):
+        return None, Gap(task.task_id, "VALIDATION_RECEIPT_IDENTITY_MISMATCH", source_label)
+    value = dict(item)
+    value["source"] = source_label
+    return value, None
+
+
 def _authoritative_evidence(
     roots: Mapping[str, Path], tasks: Mapping[str, Task], snapshot: GitSnapshot,
-) -> tuple[dict[str, list[CompletedTaskArtifactReceipt]], dict[str, list[dict[str, Any]]], list[Gap]]:
+) -> tuple[
+    dict[str, list[CompletedTaskArtifactReceipt]],
+    dict[str, list[dict[str, Any]]],
+    list[Gap],
+    list[Gap],
+]:
     """Load only named authority artifacts and authenticate their joins.
 
     In particular, a raw queue row or a recovery record cannot become a
     completion receipt by itself: it must pair with its train receipt and the
     exact board-issued key/CID tuple.  ``project_managed_merge_queue_record`` is
     only a sealed projection helper and never authenticates a row alone.
+
+    Current v9 completed-queue/train/validation/event locations are scanned
+    before historical v8/v6/v1 joins.  Recovery-only provenance is returned
+    separately so it never permanently blocks readiness after later authority.
     """
 
     gaps: list[Gap] = []
+    diagnostics: list[Gap] = []
     receipts: dict[str, list[CompletedTaskArtifactReceipt]] = {}
     validations: dict[str, list[dict[str, Any]]] = {}
-    for name, root in roots.items():
+    # Always verify event logs for the current root and every reviewed sibling.
+    for name in ("v9", "v8", "v6", "v1"):
+        root = roots.get(name)
+        if root is None or not root.is_dir():
+            continue
         gaps.extend(_verify_event_log(name, root))
-    # Named completed-queue authority: v8 (wave) and v6 (PTR-160 pair).  v1 may
-    # only contribute recovery-only provenance gaps or reconciliation events.
-    queue_roots_required = ("v8", "v6")
-    for name in queue_roots_required:
+    # Named completed-queue authority: current v9 first, then v8/v6 history.
+    # Omitting v9's exact postmerge queue/train pair is a typed audit failure.
+    queue_roots = ("v9", "v8", "v6")
+    for name in queue_roots:
         root = roots.get(name)
         if root is None or not root.is_dir():
             continue
@@ -1168,11 +1325,15 @@ def _authoritative_evidence(
                 name=name, queue_path=queue_path, train_dir=train_dir, row=row, task=task, snapshot=snapshot,
             )
             if gap is not None:
-                gaps.append(gap)
+                if gap.kind == "RECOVERY_PROVENANCE_GAP":
+                    diagnostics.append(gap)
+                else:
+                    gaps.append(gap)
                 continue
             if receipt is not None:
                 receipts.setdefault(task_id, []).append(receipt)
     # Recovery-only completed rows under v1 (no request/dedupe/train binding).
+    # These never authorize; they are provenance diagnostics only.
     v1 = roots.get("v1")
     if v1 is not None and (v1 / "merge-queue" / "completed").is_dir():
         for queue_path in sorted((v1 / "merge-queue" / "completed").glob("*.json")):
@@ -1184,14 +1345,18 @@ def _authoritative_evidence(
                 continue
             if row.get("request_id") and row.get("dedupe_key"):
                 continue
-            gaps.append(Gap(task_id, "RECOVERY_PROVENANCE_GAP", f"v1:{queue_path.name}"))
+            diagnostics.append(Gap(task_id, "RECOVERY_PROVENANCE_GAP", f"v1:{queue_path.name}"))
     # Historical validation is deliberately flat: failed/ subdirectories and
-    # snapshots are non-authoritative and are never scanned.
-    # Retained execution receipts live under the reviewed v1 projection.
-    for name in ("v1",):
-        directory = roots[name] / "projection" / "completion" / "validation_receipts"
+    # snapshots are non-authoritative and are never scanned.  Current v9 is
+    # scanned first when retained, then the reviewed v1 projection.
+    for name in ("v9", "v1"):
+        root = roots.get(name)
+        if root is None or not root.is_dir():
+            continue
+        directory = root / "projection" / "completion" / "validation_receipts"
         if not directory.is_dir():
-            gaps.append(Gap("BOARD", "STATE_ROOT_VALIDATION_AUTHORITY_MISSING", name))
+            if name == "v1":
+                gaps.append(Gap("BOARD", "STATE_ROOT_VALIDATION_AUTHORITY_MISSING", name))
             continue
         for path in sorted(directory.glob("PTR-*.json")):
             item = _read_json(path)
@@ -1202,32 +1367,28 @@ def _authoritative_evidence(
             task = tasks.get(task_id) if isinstance(task_id, str) else None
             if task is None:
                 continue
-            try:
-                command_cid = _validation_command_cid(task.validation_command)
-            except Exception:
-                gaps.append(Gap(task.task_id, "VALIDATION_COMMAND_IDENTITY_UNAVAILABLE", path.name))
+            source = f"{name}/projection/completion/validation_receipts/{path.name}"
+            value, gap = _authoritative_flat_validation(item, task, source)
+            if gap is not None:
+                gaps.append(gap)
                 continue
-            immutable = dict(item)
-            claimed = immutable.pop("validation_receipt_cid", "")
-            expected = canonical_cid(immutable)
-            if (
-                item.get("schema") != "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1"
-                or claimed != expected
-                or item.get("task_cid") != task.canonical_task_cid
-                or item.get("goal_id") != task.goal_id
-                or item.get("validation_command") != task.validation_command
-                or item.get("validation_command_cid") != command_cid
-            ):
-                gaps.append(Gap(task.task_id, "VALIDATION_RECEIPT_IDENTITY_MISMATCH", path.name))
-                continue
-            value = dict(item)
-            value["source"] = f"{name}/projection/completion/validation_receipts/{path.name}"
+            assert value is not None
             validations.setdefault(task.task_id, []).append(value)
     recon, recon_gaps = _reconciliation_receipts(roots, tasks, snapshot)
     gaps.extend(recon_gaps)
     for task_id, values in recon.items():
         receipts.setdefault(task_id, []).extend(values)
-    return receipts, validations, gaps
+    # Recovery-only provenance is always diagnostic and never readiness-gating.
+    # Once a task gains later valid authority the same diagnostic is reported as
+    # superseded rather than a permanent readiness gap.
+    authorized = set(receipts)
+    provenance_diagnostics = [
+        Gap(gap.task_id, "SUPERSEDED_RECOVERY_PROVENANCE", gap.detail)
+        if gap.task_id in authorized
+        else gap
+        for gap in diagnostics
+    ]
+    return receipts, validations, gaps, provenance_diagnostics
 
 
 class ProofReuseTaskEvidenceValidator:
@@ -1245,8 +1406,10 @@ class ProofReuseTaskEvidenceValidator:
         sealed = self.todo.resolve() == TODO_PATH.resolve()
         board_gaps: list[Gap] = []
         quarantine: Mapping[str, Any] = {}
+        live_preflight: Mapping[str, Any] = {}
+        provenance_diagnostics: list[Gap] = []
         if sealed:
-            tasks, board_gaps, quarantine = _sealed_board(self.todo)
+            tasks, board_gaps, quarantine, live_preflight = _sealed_board(self.todo)
         else:
             tasks = parse_board(self.todo)
         completed = {key: value for key, value in tasks.items() if value.status in _COMPLETED}
@@ -1260,11 +1423,17 @@ class ProofReuseTaskEvidenceValidator:
             if not self.state_root.is_dir():
                 board_gaps.append(Gap("BOARD", "STATE_ROOT_MISSING", "current"))
             roots, root_gaps = _reviewed_roots(self.state_root) if self.state_root.is_dir() else ({}, [])
-            if root_gaps or any(g.kind == "STATE_ROOT_MISSING" for g in board_gaps):
+            seal_gaps: list[Gap] = []
+            if self.state_root.is_dir() and live_preflight and not board_gaps:
+                seal_gaps = _match_sealed_document_digests(self.state_root, live_preflight)
+            if root_gaps or seal_gaps or any(g.kind == "STATE_ROOT_MISSING" for g in board_gaps):
                 receipts, validations, evidence_gaps = {}, {}, []
+                provenance_diagnostics = []
             else:
-                receipts, validations, evidence_gaps = _authoritative_evidence(roots, tasks, self.snapshot)
-            gaps: list[Gap] = [*board_gaps, *root_gaps, *evidence_gaps]
+                receipts, validations, evidence_gaps, provenance_diagnostics = _authoritative_evidence(
+                    roots, tasks, self.snapshot,
+                )
+            gaps: list[Gap] = [*board_gaps, *root_gaps, *seal_gaps, *evidence_gaps]
         else:
             # Compatibility fixtures exercise generic observation behavior only;
             # this path is not reachable from the live CLI's sealed board.
@@ -1334,6 +1503,7 @@ class ProofReuseTaskEvidenceValidator:
             task_reports.append({
                 "task_id": task_id,
                 "task_cid": task.task_cid,
+                "canonical_task_key": task.canonical_task_key,
                 "outputs_and_targets": observed,
                 "completion_receipt": asdict(accepted[task_id]) if task_id in accepted else None,
                 "validation_receipt_sources": [item["source"] for item in valid_receipts],
@@ -1391,6 +1561,7 @@ class ProofReuseTaskEvidenceValidator:
             "completion_authority": False,
             "mode": "landlock-abi-3-or-newer-inherited",
         }
+        ordered_identity_digest = _ordered_task_identity_digest(tasks) if sealed and tasks else ""
         body = {
             "schema": REPORT_SCHEMA,
             "interface": "ProofReuseTaskEvidenceValidator@1",
@@ -1400,6 +1571,8 @@ class ProofReuseTaskEvidenceValidator:
                 "gitlinks": self.snapshot.gitlinks,
                 "gitlink_state_cid": self.snapshot.gitlink_state_cid,
             },
+            "board_task_count": len(tasks) if sealed else len(tasks),
+            "ordered_task_identity_digest": ordered_identity_digest,
             "completed_task_count": len(completed),
             "tasks": task_reports,
             "dependency_order": dependency_order,
@@ -1408,6 +1581,11 @@ class ProofReuseTaskEvidenceValidator:
                 key=lambda item: (item["path"], item["owner_task_id"]),
             ),
             "gaps": [asdict(gap) for gap in sorted(gaps, key=lambda item: (item.task_id, item.kind, item.detail))],
+            "provenance_diagnostics": [
+                asdict(gap) for gap in sorted(
+                    provenance_diagnostics, key=lambda item: (item.task_id, item.kind, item.detail),
+                )
+            ],
             "boundary": boundary,
             "audit_valid": audit_valid,
             "ready": audit_valid and not gaps,
