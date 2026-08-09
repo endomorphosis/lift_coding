@@ -577,7 +577,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-030 Normalize observed contracts into real datasets logic IR
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
