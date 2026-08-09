@@ -2363,7 +2363,7 @@ uncertain candidates execute normally.
 
 ## PTR-163 Implement the exact-byte TestPass V5 Groth16 relation and immutable native release
 
-- Status: todo
+- Status: done
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
