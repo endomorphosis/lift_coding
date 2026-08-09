@@ -305,6 +305,50 @@ def _git_read_pack_object(store: Path, oid: str) -> tuple[str, bytes] | None:
     return result
 
 
+def _git_object_store_roots(object_root: Path) -> list[Path]:
+    """Return object roots for *object_root*, including git alternates.
+
+    Implementation worktrees often use ``.git-merge-resolve`` with
+    ``objects/info/alternates`` pointing at the shared main object store.
+    Without following alternates, pure-python tree walks see empty trees and
+    every nested output is reported missing even when git itself resolves it.
+    """
+
+    roots: list[Path] = []
+    seen: set[str] = set()
+
+    def add(path: Path) -> None:
+        try:
+            resolved = path.resolve()
+        except OSError:
+            resolved = path
+        key = str(resolved)
+        if key in seen:
+            return
+        seen.add(key)
+        roots.append(resolved)
+        alternates = resolved / "objects" / "info" / "alternates"
+        try:
+            text = alternates.read_text(encoding="utf-8")
+        except OSError:
+            return
+        for line in text.splitlines():
+            entry = line.strip()
+            if not entry or entry.startswith("#"):
+                continue
+            alt = Path(entry)
+            if not alt.is_absolute():
+                alt = (resolved / "objects" / entry).resolve()
+            # alternates entries point at an objects/ directory; normalize to repo store root
+            if alt.name == "objects":
+                add(alt.parent)
+            else:
+                add(alt)
+
+    add(object_root)
+    return roots
+
+
 def _git_object_raw(gitdir: Path, oid: str, *, store: Path | None = None) -> tuple[str, bytes] | None:
     if not re.fullmatch(r"[0-9a-f]{40}", oid):
         return None
@@ -312,17 +356,23 @@ def _git_object_raw(gitdir: Path, oid: str, *, store: Path | None = None) -> tup
     cache_key = (str(object_root), oid)
     if cache_key in _OBJECT_CACHE:
         return _OBJECT_CACHE[cache_key]
-    path = object_root / "objects" / oid[:2] / oid[2:]
-    try:
-        raw = zlib.decompress(path.read_bytes())
-        header, body = raw.split(b"\0", 1)
-        kind = header.split(b" ", 1)[0].decode("ascii")
-        parsed: tuple[str, bytes] | None = (kind, body)
-        _OBJECT_CACHE[cache_key] = parsed
-        return parsed
-    except (OSError, ValueError, UnicodeDecodeError, IndexError, zlib.error):
-        pass
-    return _git_read_pack_object(object_root, oid)
+    for root in _git_object_store_roots(object_root):
+        path = root / "objects" / oid[:2] / oid[2:]
+        try:
+            raw = zlib.decompress(path.read_bytes())
+            header, body = raw.split(b"\0", 1)
+            kind = header.split(b" ", 1)[0].decode("ascii")
+            parsed: tuple[str, bytes] | None = (kind, body)
+            _OBJECT_CACHE[cache_key] = parsed
+            return parsed
+        except (OSError, ValueError, UnicodeDecodeError, IndexError, zlib.error):
+            pass
+        packed = _git_read_pack_object(root, oid)
+        if packed is not None:
+            _OBJECT_CACHE[cache_key] = packed
+            return packed
+    _OBJECT_CACHE[cache_key] = None
+    return None
 
 
 def _git_loose_object(gitdir: Path, oid: str, *, store: Path | None = None) -> bytes | None:

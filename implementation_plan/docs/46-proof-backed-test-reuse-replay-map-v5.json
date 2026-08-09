@@ -1,0 +1,1984 @@
+{
+  "generated_at_ms": 1786315870430,
+  "immutable_66_task_records": {
+    "historical_pins": {
+      "external/ipfs_accelerate": "ded3932433f4d08e6eb8eddc1595bfb1c0ddabf0",
+      "external/ipfs_datasets": "1894e9dca7dced0690893d468e40751a14f0b15b",
+      "external/ipfs_kit": "2f2fd78505fe7528bb406dbed1123abbb729ce80"
+    },
+    "mutable": false,
+    "paths": [
+      "implementation_plan/docs/46-proof-backed-test-reuse-integration-pins-2026-08-04.md",
+      "implementation_plan/docs/46-proof-backed-test-reuse-closeout-summary-2026-08-04.json",
+      "implementation_plan/docs/46-proof-backed-test-reuse-closeout-report-only-2026-08-04.json"
+    ]
+  },
+  "interface": "VerifiedTaskReplayPlan@1",
+  "map_cid": "baguqeeramzvkc4pxpemnsjprv54u37f77l7stga2o3yv42dwx2pglfc4pnpq",
+  "plan": {
+    "blob_mappings": [
+      {
+        "blob_oid": "75a6c047dfe73d72f76cdabb1ad8af221810e79d",
+        "blob_sha256": "sha256:385f5a9ffe6f3c70bbb96c366417c4ca003c3b8cb00cd738f7d7d9ab16fea923",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-040",
+        "verified": true
+      },
+      {
+        "blob_oid": "f656744c98defc696e0fe29162ef4566f506aa2b",
+        "blob_sha256": "sha256:3a3c3172ed51013b09881726f9538f888be913d192d0ec4a70ccd5ff02c864b6",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-040",
+        "verified": true
+      },
+      {
+        "blob_oid": "f76f413d5366158b790b59d513a334836985f010",
+        "blob_sha256": "sha256:49864edcce0f517c674b486bef0a487af0574301fd1cf79a57f1396b0f409878",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-041",
+        "verified": true
+      },
+      {
+        "blob_oid": "d255f7daa75a45838b39a6cfb390ae5e31b24792",
+        "blob_sha256": "sha256:bce85e9dca49c78271dcc3cb04de4a93f5e1fc24b1902c42c8911fb2ef68d7b8",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/test_pass_circuit.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-041",
+        "verified": true
+      },
+      {
+        "blob_oid": "3263d7bdabf753c4f9a70439f53eded77e2df093",
+        "blob_sha256": "sha256:09c6e8dc26fccb4f591de76bf80b4816c8073ec2ca9247b016c1da8071f67311",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-041",
+        "verified": true
+      },
+      {
+        "blob_oid": "5e0172543711c55d89cd4d774cbe2d8d00105be4",
+        "blob_sha256": "sha256:b3c4fcc41eb3ab8f058858a00efe4a763a1e8bde38fa0d4e6022e124aaa32e7c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-042",
+        "verified": true
+      },
+      {
+        "blob_oid": "ff3a8f9addc3cce2c5067ee820f725006aad305f",
+        "blob_sha256": "sha256:8f6c4334158929b3772be68b41c6e53b37cf721bbcae94a44c183d21d43262c0",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-042",
+        "verified": true
+      },
+      {
+        "blob_oid": "5c2d82d1a3407b8bc9692dab7aa2c18a9fc24961",
+        "blob_sha256": "sha256:e9fe16be8d925a7f9f8afe65690854f1fb07b7ac5df6b199dbe75505f6e52a5c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-070",
+        "verified": true
+      },
+      {
+        "blob_oid": "3527a8583f26652746181754e5149bfae3b8a081",
+        "blob_sha256": "sha256:1c68075e36cbbe8e2fe7e30d363ca4de0c4b54f09c41c4194ea5d469fb33e96c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/conftest.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-070",
+        "verified": true
+      },
+      {
+        "blob_oid": "776f86e42ab362f4311b3e6b01c455922a57ee05",
+        "blob_sha256": "sha256:1c4353f82c0ee5bc86efb6c7a703b425bdc94a2c39dd7d57b233524bec6de82f",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-070",
+        "verified": true
+      },
+      {
+        "blob_oid": "4da9ba86812a9f259c14f02687cf4a0e8170fb9c",
+        "blob_sha256": "sha256:bdd40829f6468ce011503d447b8e0a213c30b09c311e43582c51a12883db9a91",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-080",
+        "verified": true
+      },
+      {
+        "blob_oid": "54a9d4742af68f550faaaa6e0bc150215f84ad35",
+        "blob_sha256": "sha256:7cf7b9997f44efe08bb2e1c66f16b33f070df1d85715bb8a167c3df04129b520",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-080",
+        "verified": true
+      },
+      {
+        "blob_oid": "c9931bd9adf9b6dfb129a7d830513bfb09eb9f33",
+        "blob_sha256": "sha256:5f74310a45f4c0924f6eb3c81f2f38e869541ae2a749ab5fb98821ec6d113171",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_certificate_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-080",
+        "verified": true
+      },
+      {
+        "blob_oid": "2282e87df0087d4a6303c744a869197ea6ff0e46",
+        "blob_sha256": "sha256:b2a9d47ed9335e76df74e55dfb6fa475242cf588cfa2aca886e91dc8cc5ee764",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_reuse_capabilities.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-080",
+        "verified": true
+      },
+      {
+        "blob_oid": "a87870229ff3e1758c4211c889d25c294c91c755",
+        "blob_sha256": "sha256:79aa4f4c4a47a07a6d987b69d398cedd861d842d59cc990d360a34eb357172a0",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/pyproject.toml",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-081",
+        "verified": true
+      },
+      {
+        "blob_oid": "3d2dfb3658e1f2ea44e42d666ab4d61af946c3e7",
+        "blob_sha256": "sha256:5669172d6a56f24e9896975d79d8d0faaab36194d2c6612a246d1d864c2bd139",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/conftest.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-081",
+        "verified": true
+      },
+      {
+        "blob_oid": "981ffd76265be31f76930d6edaddd250154f5edd",
+        "blob_sha256": "sha256:2c378522f752da74b410e597266adfbc3b7e99f076863a03d107800a702d0bb9",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-081",
+        "verified": true
+      },
+      {
+        "blob_oid": "b6680cbd0dd45d67c9e083a45843bacafebbe4d3",
+        "blob_sha256": "sha256:9cbde491e7c989dfa12fb0da9cd09512d266463ff46645f58f55e3344ccfcae6",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-108",
+        "verified": true
+      },
+      {
+        "blob_oid": "e07f9d879ecff69c88cd5a7f6a877abd6cfa5632",
+        "blob_sha256": "sha256:121d86c5f15a7a22474b4c33e2be3a1b18129f16c74f5043bfded1027f77f0bf",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-108",
+        "verified": true
+      },
+      {
+        "blob_oid": "341237bfa29f17114d6d282b8553d172748dcbf5",
+        "blob_sha256": "sha256:47204f21c542ac901d0989864396fc35014f72df8940dc4948d201ae7d66b9ea",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-109",
+        "verified": true
+      },
+      {
+        "blob_oid": "6c66653c05b38f4446c9f7a227bc0c2f7170d1d8",
+        "blob_sha256": "sha256:6bd6b65193d9791189942ddb08b96d25d0fdca5cccd1f774c349debf9bd34861",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_content_addressed_artifact_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-109",
+        "verified": true
+      },
+      {
+        "blob_oid": "75a6c047dfe73d72f76cdabb1ad8af221810e79d",
+        "blob_sha256": "sha256:385f5a9ffe6f3c70bbb96c366417c4ca003c3b8cb00cd738f7d7d9ab16fea923",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-132",
+        "verified": true
+      },
+      {
+        "blob_oid": "f76f413d5366158b790b59d513a334836985f010",
+        "blob_sha256": "sha256:49864edcce0f517c674b486bef0a487af0574301fd1cf79a57f1396b0f409878",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-132",
+        "verified": true
+      },
+      {
+        "blob_oid": "02720e90ffb3c3171815205c94de56eef30e2c6d",
+        "blob_sha256": "sha256:683f12027fb030b31f0bd5ec2c374d1883ae42c8a0a0d19f573248938f35ad6b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/setup.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-132",
+        "verified": true
+      },
+      {
+        "blob_oid": "98cea4a7bec431b16455f735bb4c80dba24a3c80",
+        "blob_sha256": "sha256:98377ba74e5a187a2c44619240bac221e5c7e06f6e0cab4dffac7f6df69b81e8",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-132",
+        "verified": true
+      },
+      {
+        "blob_oid": "d3df5a12b5dd35e3b193a45c849f1d6f777b6600",
+        "blob_sha256": "sha256:5d3378c1de1f82d3ab1c65e5e5d151fe75d4ddf3b4a2c061876c5f11e68c5488",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-132",
+        "verified": true
+      },
+      {
+        "blob_oid": "4da9ba86812a9f259c14f02687cf4a0e8170fb9c",
+        "blob_sha256": "sha256:bdd40829f6468ce011503d447b8e0a213c30b09c311e43582c51a12883db9a91",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-133",
+        "verified": true
+      },
+      {
+        "blob_oid": "68b3bebab983b346acd89da7c67a90455f81f091",
+        "blob_sha256": "sha256:1c07d494a257e41b0ebd7a3af8d65133940b064f44a935b25699de0a122bcc93",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_candidate_context_artifact_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-133",
+        "verified": true
+      },
+      {
+        "blob_oid": "5e0172543711c55d89cd4d774cbe2d8d00105be4",
+        "blob_sha256": "sha256:b3c4fcc41eb3ab8f058858a00efe4a763a1e8bde38fa0d4e6022e124aaa32e7c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-137",
+        "verified": true
+      },
+      {
+        "blob_oid": "d57357fe9ff2a69b0a77d66d1324cc3b5e30ad0d",
+        "blob_sha256": "sha256:c707d824cddb9f912759a1e3cb9189d009431208749a9b0b2d19dd0cb824adb7",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-137",
+        "verified": true
+      },
+      {
+        "blob_oid": "3527a8583f26652746181754e5149bfae3b8a081",
+        "blob_sha256": "sha256:1c68075e36cbbe8e2fe7e30d363ca4de0c4b54f09c41c4194ea5d469fb33e96c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/conftest.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "5c2d82d1a3407b8bc9692dab7aa2c18a9fc24961",
+        "blob_sha256": "sha256:e9fe16be8d925a7f9f8afe65690854f1fb07b7ac5df6b199dbe75505f6e52a5c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "02720e90ffb3c3171815205c94de56eef30e2c6d",
+        "blob_sha256": "sha256:683f12027fb030b31f0bd5ec2c374d1883ae42c8a0a0d19f573248938f35ad6b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/setup.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "07521726ff4f624c309cb2d8ad668cf7f87f61ae",
+        "blob_sha256": "sha256:58c6e96d6e740b6c9e6d0b280fa3947675498cad7c5adc12ea860f724f61bcc2",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/requirements.txt",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "72eeb3b29f9508b779f462fada33047a486f4aea",
+        "blob_sha256": "sha256:e575dd9f1d1839570960c6bd9744ac66f98316a84764f7d298d33a91cdb1c12d",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "f7af707bcb04999b7c00a9af4ec3b4a35d957808",
+        "blob_sha256": "sha256:4341901a38e903d4ad9289950d109cbeafd5d5b85b5fbc8761983ab6c88863a9",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "41d0eb7aeeeedb4a21a574afef33056456491553",
+        "blob_sha256": "sha256:b978197e8143077273e02ab6badb4227c553e865dbd78ca4f1ee9b57e386db93",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-140",
+        "verified": true
+      },
+      {
+        "blob_oid": "3d2dfb3658e1f2ea44e42d666ab4d61af946c3e7",
+        "blob_sha256": "sha256:5669172d6a56f24e9896975d79d8d0faaab36194d2c6612a246d1d864c2bd139",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/conftest.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "a87870229ff3e1758c4211c889d25c294c91c755",
+        "blob_sha256": "sha256:79aa4f4c4a47a07a6d987b69d398cedd861d842d59cc990d360a34eb357172a0",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/pyproject.toml",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "c212e8cbb33a36ca599be2b311832f41cda88fcc",
+        "blob_sha256": "sha256:2c3826fb42a79872dcd10cd992cef51935cb4fcf33f3c546af4a266532b7b4d1",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/setup.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "82a2ee74852c0563241e4743b57801d4ca103a43",
+        "blob_sha256": "sha256:257d11fadcb9458a238da189ddd01a475dc9e6cd6732752b531e0005053b02d5",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/requirements.txt",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "6ef79ee4a96e27144134f73ddb586e39cf124bbc",
+        "blob_sha256": "sha256:e2c3e08be7c1bc6b4d4a248172228f6df445aedeb67a01d13df4275cdb5bfcf5",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/__init__.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "4cfe2145fe8aba88442185ac8c3acefba8dae256",
+        "blob_sha256": "sha256:cb1b442fd9900be2e9a779876d3c115a536af890b1f0dadfb733d96b4745a1a9",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "3b7eac3ea820c64a5a46c47afeaf781e1e14b0de",
+        "blob_sha256": "sha256:ec4032321bf617584ce181d400f830a6d2dab3fa0b7a8e85606f883099eec01e",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_reuse_zero_config.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-141",
+        "verified": true
+      },
+      {
+        "blob_oid": "e5f04a662bf06d5a5ef8a5075e5292dd4c29bbb8",
+        "blob_sha256": "sha256:6bd6aad7d24cb983c42c9b6913257cec26dd492792a53fdfd11ae20769bd8b9f",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "5e0172543711c55d89cd4d774cbe2d8d00105be4",
+        "blob_sha256": "sha256:b3c4fcc41eb3ab8f058858a00efe4a763a1e8bde38fa0d4e6022e124aaa32e7c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "d255f7daa75a45838b39a6cfb390ae5e31b24792",
+        "blob_sha256": "sha256:bce85e9dca49c78271dcc3cb04de4a93f5e1fc24b1902c42c8911fb2ef68d7b8",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/test_pass_circuit.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "138f67344ed8e6fa094a493ef3b2d221cb689e6d",
+        "blob_sha256": "sha256:ea7817c038b24d85b0f11221fb0eaf8d319ae6a034e9cdc1af911344d3a69836",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "11c395f4f1ec0fab48e43d76cdb51083b99afec9",
+        "blob_sha256": "sha256:260a7fb627ba569534df3013bcacc2a1c071e2f1b128a7c36e0309341f21e0f4",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/lib.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "12d412a441cc4a760fc0b304cee1eda91ce9492c",
+        "blob_sha256": "sha256:f24c2d575f0fa816a4a0a3d7737df17d0d85662c5170db88a898d01f1937014a",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/prover.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "e8a385a7229ad6554f650bacc227581c62cc3e5d",
+        "blob_sha256": "sha256:d7ce651aa3742f5f29a187e31019063c411939656f0cf7121a2aab52e701eb26",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/verifier.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "dd794ef96127b496f6879a121f43a6da70b7d343",
+        "blob_sha256": "sha256:819badb4027717b37a12ada0d195e5b24f54c2f0675750283b9862b23d4a7cb7",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/setup.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "2107d5a1c76dc7c09c9ec08dd43b5e1cd0276c8d",
+        "blob_sha256": "sha256:cdb463f74252067423a135457ab8ec54dae45f0fc08ee81fb62b5a19baa3b348",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "ab5922bd2b697af6b65afc53c9208761ca803911",
+        "blob_sha256": "sha256:60a07f0e3491de67925cbe7d953247c0f3d435f005644c05dd10a78f54a86257",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-144",
+        "verified": true
+      },
+      {
+        "blob_oid": "224feb35db5efdde7a891c1be19080faf4267a44",
+        "blob_sha256": "sha256:76a39157efd127bb878452a7b483ee7c19d40623e8303ca9658cceb06487eafa",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/MANIFEST.in",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "5c2d82d1a3407b8bc9692dab7aa2c18a9fc24961",
+        "blob_sha256": "sha256:e9fe16be8d925a7f9f8afe65690854f1fb07b7ac5df6b199dbe75505f6e52a5c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "02720e90ffb3c3171815205c94de56eef30e2c6d",
+        "blob_sha256": "sha256:683f12027fb030b31f0bd5ec2c374d1883ae42c8a0a0d19f573248938f35ad6b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/setup.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "bac620fc67699319d81c39d55b2f27c7aff775d8",
+        "blob_sha256": "sha256:4aa8e24f64eecb08c783922682833336eb3be29af71bd8b6f0b112952700baea",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "e948aa2ebe1832cfa3f167d27dff8210a74c2795",
+        "blob_sha256": "sha256:e334184e1ba901f53e3e9e7dbb4717486ce12691b85da74ef04228b13244fc2d",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "5a8ef9db09e94649498471d62366832f68b23099",
+        "blob_sha256": "sha256:04ca30d15b8b59bbce4ac6c38b35700d41889439a5d9edbad1ff5fcabe130102",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "2107d5a1c76dc7c09c9ec08dd43b5e1cd0276c8d",
+        "blob_sha256": "sha256:cdb463f74252067423a135457ab8ec54dae45f0fc08ee81fb62b5a19baa3b348",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "6968bb25db659eaec9463c9c44b7459d226bb668",
+        "blob_sha256": "sha256:64de01864de73fda2e5824e372bc5bf847b5fe979512577c88d8514463b9446b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "a26f7da816cffb2251757471b0e6578dfaa5dbb6",
+        "blob_sha256": "sha256:ba2edadfff8c503fe6411b6afeeeab7e4d2ddce0538ea259bfea6469837bee26",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "af4d88455e5a460be685fc9360944df7e853b3f9",
+        "blob_sha256": "sha256:1a61cd53f4c7d5d36ac622974d9efa72f07c4a3210671bfe2222bb34600e2eff",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "ce935676ae26661255b913125e3965f3dda860c3",
+        "blob_sha256": "sha256:f6f1398e593c996f1d43d65534916177f7f17488850baca7d7efcad33becca1d",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "30aceec7d9665dc6c0d129d6b6d4b8e1ef09a80f",
+        "blob_sha256": "sha256:cf8e9db5287d4ee999d2ef9681119dfc40a38b31d645b69cbcab43ec8c262fd0",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-151",
+        "verified": true
+      },
+      {
+        "blob_oid": "ab5e8a2c635e6ad7b22edd6f270ee9dfa843027d",
+        "blob_sha256": "sha256:9cc96ed9d3334084c699070597261be8e68c92c34f48f630a12053539bf683c5",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/conftest.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "3527a8583f26652746181754e5149bfae3b8a081",
+        "blob_sha256": "sha256:1c68075e36cbbe8e2fe7e30d363ca4de0c4b54f09c41c4194ea5d469fb33e96c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/conftest.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "72eeb3b29f9508b779f462fada33047a486f4aea",
+        "blob_sha256": "sha256:e575dd9f1d1839570960c6bd9744ac66f98316a84764f7d298d33a91cdb1c12d",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "f7af707bcb04999b7c00a9af4ec3b4a35d957808",
+        "blob_sha256": "sha256:4341901a38e903d4ad9289950d109cbeafd5d5b85b5fbc8761983ab6c88863a9",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "5c2d82d1a3407b8bc9692dab7aa2c18a9fc24961",
+        "blob_sha256": "sha256:e9fe16be8d925a7f9f8afe65690854f1fb07b7ac5df6b199dbe75505f6e52a5c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "02720e90ffb3c3171815205c94de56eef30e2c6d",
+        "blob_sha256": "sha256:683f12027fb030b31f0bd5ec2c374d1883ae42c8a0a0d19f573248938f35ad6b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/setup.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "07521726ff4f624c309cb2d8ad668cf7f87f61ae",
+        "blob_sha256": "sha256:58c6e96d6e740b6c9e6d0b280fa3947675498cad7c5adc12ea860f724f61bcc2",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/requirements.txt",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "776f86e42ab362f4311b3e6b01c455922a57ee05",
+        "blob_sha256": "sha256:1c4353f82c0ee5bc86efb6c7a703b425bdc94a2c39dd7d57b233524bec6de82f",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "0f07c484a02538d5c733c405cb602d3e534601ff",
+        "blob_sha256": "sha256:06ad470c4e20f98f75ecf58274ef9883f4c53b7d57b410bc316704f930d19e1a",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "41d0eb7aeeeedb4a21a574afef33056456491553",
+        "blob_sha256": "sha256:b978197e8143077273e02ab6badb4227c553e865dbd78ca4f1ee9b57e386db93",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "e3e5392c02b6cb83e184a5ef5d0829553c02dd6d",
+        "blob_sha256": "sha256:8c127c8f43ea1e92b2a2c20f0853954f6df005717954b6afb52062f0a0af4e44",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "91d687747010c9a8a92539cd569480ac09fa692a",
+        "blob_sha256": "sha256:84ae33f30c907e1273d381c269a0828bdcc9d057382f23be0ee3dd33662e5f34",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "d3df5a12b5dd35e3b193a45c849f1d6f777b6600",
+        "blob_sha256": "sha256:5d3378c1de1f82d3ab1c65e5e5d151fe75d4ddf3b4a2c061876c5f11e68c5488",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-161",
+        "verified": true
+      },
+      {
+        "blob_oid": "3d2dfb3658e1f2ea44e42d666ab4d61af946c3e7",
+        "blob_sha256": "sha256:5669172d6a56f24e9896975d79d8d0faaab36194d2c6612a246d1d864c2bd139",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/conftest.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "6ef79ee4a96e27144134f73ddb586e39cf124bbc",
+        "blob_sha256": "sha256:e2c3e08be7c1bc6b4d4a248172228f6df445aedeb67a01d13df4275cdb5bfcf5",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/__init__.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "4cfe2145fe8aba88442185ac8c3acefba8dae256",
+        "blob_sha256": "sha256:cb1b442fd9900be2e9a779876d3c115a536af890b1f0dadfb733d96b4745a1a9",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "4da9ba86812a9f259c14f02687cf4a0e8170fb9c",
+        "blob_sha256": "sha256:bdd40829f6468ce011503d447b8e0a213c30b09c311e43582c51a12883db9a91",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "54a9d4742af68f550faaaa6e0bc150215f84ad35",
+        "blob_sha256": "sha256:7cf7b9997f44efe08bb2e1c66f16b33f070df1d85715bb8a167c3df04129b520",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "341237bfa29f17114d6d282b8553d172748dcbf5",
+        "blob_sha256": "sha256:47204f21c542ac901d0989864396fc35014f72df8940dc4948d201ae7d66b9ea",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "a87870229ff3e1758c4211c889d25c294c91c755",
+        "blob_sha256": "sha256:79aa4f4c4a47a07a6d987b69d398cedd861d842d59cc990d360a34eb357172a0",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/pyproject.toml",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "c212e8cbb33a36ca599be2b311832f41cda88fcc",
+        "blob_sha256": "sha256:2c3826fb42a79872dcd10cd992cef51935cb4fcf33f3c546af4a266532b7b4d1",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/setup.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "82a2ee74852c0563241e4743b57801d4ca103a43",
+        "blob_sha256": "sha256:257d11fadcb9458a238da189ddd01a475dc9e6cd6732752b531e0005053b02d5",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/requirements.txt",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "981ffd76265be31f76930d6edaddd250154f5edd",
+        "blob_sha256": "sha256:2c378522f752da74b410e597266adfbc3b7e99f076863a03d107800a702d0bb9",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "9e4e90bdffeeee33be182a8a319d51c36c3efee1",
+        "blob_sha256": "sha256:fd1bd100d04cd90c17d8df55ffb4fcda9c692605f03cb7d238ed4a822dee93b3",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "3b7eac3ea820c64a5a46c47afeaf781e1e14b0de",
+        "blob_sha256": "sha256:ec4032321bf617584ce181d400f830a6d2dab3fa0b7a8e85606f883099eec01e",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_reuse_zero_config.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "47c4a8754fc4c0959784397c1c2b0d8ea99fb56d",
+        "blob_sha256": "sha256:48ee494087166cd006de65545ece7df73365924e8ec0666d6dfdc1e58dc021c5",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "77e4ca19aa8cdd1036d319d686804dfeb0125cdc",
+        "blob_sha256": "sha256:44e875058e691f50add8b0a0c46ee44cd1cbd4db792fca47fd5c0fb90b06668f",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "c9931bd9adf9b6dfb129a7d830513bfb09eb9f33",
+        "blob_sha256": "sha256:5f74310a45f4c0924f6eb3c81f2f38e869541ae2a749ab5fb98821ec6d113171",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_proof_certificate_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "2282e87df0087d4a6303c744a869197ea6ff0e46",
+        "blob_sha256": "sha256:b2a9d47ed9335e76df74e55dfb6fa475242cf588cfa2aca886e91dc8cc5ee764",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_reuse_capabilities.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "6c66653c05b38f4446c9f7a227bc0c2f7170d1d8",
+        "blob_sha256": "sha256:6bd6b65193d9791189942ddb08b96d25d0fdca5cccd1f774c349debf9bd34861",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_content_addressed_artifact_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "68b3bebab983b346acd89da7c67a90455f81f091",
+        "blob_sha256": "sha256:1c07d494a257e41b0ebd7a3af8d65133940b064f44a935b25699de0a122bcc93",
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "path": "external/ipfs_kit/tests/test_candidate_context_artifact_store.py",
+        "repository": "external/ipfs_kit",
+        "source": "task:PTR-162",
+        "verified": true
+      },
+      {
+        "blob_oid": "e948aa2ebe1832cfa3f167d27dff8210a74c2795",
+        "blob_sha256": "sha256:e334184e1ba901f53e3e9e7dbb4717486ce12691b85da74ef04228b13244fc2d",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "b0427897b7dce36e758f11d7eb0cee5ceb1d671d",
+        "blob_sha256": "sha256:9d141e5a7de0010169b04d4507dd48a34ea166c172852ef0349eac69d7d836da",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.lock",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "5a8ef9db09e94649498471d62366832f68b23099",
+        "blob_sha256": "sha256:04ca30d15b8b59bbce4ac6c38b35700d41889439a5d9edbad1ff5fcabe130102",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "2107d5a1c76dc7c09c9ec08dd43b5e1cd0276c8d",
+        "blob_sha256": "sha256:cdb463f74252067423a135457ab8ec54dae45f0fc08ee81fb62b5a19baa3b348",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "6968bb25db659eaec9463c9c44b7459d226bb668",
+        "blob_sha256": "sha256:64de01864de73fda2e5824e372bc5bf847b5fe979512577c88d8514463b9446b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "a3a0ad32b7fc833b24f368fc10529ac29730b9a9",
+        "blob_sha256": "sha256:740db05a6d05f147b944220b00ab966a37acdbdf1c40cdd8434a857b321d4d5b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/WIRE_FORMAT.md",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "138f67344ed8e6fa094a493ef3b2d221cb689e6d",
+        "blob_sha256": "sha256:ea7817c038b24d85b0f11221fb0eaf8d319ae6a034e9cdc1af911344d3a69836",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "4318b56be2190aa9d8cbd76f92744581dab0db08",
+        "blob_sha256": "sha256:ebf8d163568d1a482bd4ed33f1fecdeb3d8e9b1093019ed43b16bd2e3b6a6fe7",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/domain.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "11c395f4f1ec0fab48e43d76cdb51083b99afec9",
+        "blob_sha256": "sha256:260a7fb627ba569534df3013bcacc2a1c071e2f1b128a7c36e0309341f21e0f4",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/lib.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "a26f7da816cffb2251757471b0e6578dfaa5dbb6",
+        "blob_sha256": "sha256:ba2edadfff8c503fe6411b6afeeeab7e4d2ddce0538ea259bfea6469837bee26",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "12d412a441cc4a760fc0b304cee1eda91ce9492c",
+        "blob_sha256": "sha256:f24c2d575f0fa816a4a0a3d7737df17d0d85662c5170db88a898d01f1937014a",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/prover.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "dd794ef96127b496f6879a121f43a6da70b7d343",
+        "blob_sha256": "sha256:819badb4027717b37a12ada0d195e5b24f54c2f0675750283b9862b23d4a7cb7",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/setup.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "e8a385a7229ad6554f650bacc227581c62cc3e5d",
+        "blob_sha256": "sha256:d7ce651aa3742f5f29a187e31019063c411939656f0cf7121a2aab52e701eb26",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/verifier.rs",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "effb5bfe9dfd59cbe2a6357abc1e285e972967cf",
+        "blob_sha256": "sha256:01894c812d41a31302dd3b7153bf792e3526ee40b6ac06a8eb5c39567d63a52b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/schemas/witness_v1.schema.json",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "ef9d9cebc344824efe269551c8b0364ba90ef94c",
+        "blob_sha256": "sha256:c1abc1dcb591e9121881909bc54f5d326bae3454d47608100ae5466086ccc394",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/schemas/proof_v1.schema.json",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "af4d88455e5a460be685fc9360944df7e853b3f9",
+        "blob_sha256": "sha256:1a61cd53f4c7d5d36ac622974d9efa72f07c4a3210671bfe2222bb34600e2eff",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/groth16",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "ce935676ae26661255b913125e3965f3dda860c3",
+        "blob_sha256": "sha256:f6f1398e593c996f1d43d65534916177f7f17488850baca7d7efcad33becca1d",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/bin/linux-aarch64/release-manifest.json",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "213847c887893560952c5f9afa32c46ca09c6ad8",
+        "blob_sha256": "sha256:1ff5e35cb075379dd8ecee8614513c6dd8c05cacad6295ad969fc8529602a02e",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit_tests/logic/zkp/groth16_wire_vectors.json",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "5fb972674a97895c33806e90999c0548c164e22f",
+        "blob_sha256": "sha256:59be611227dc20df75323ebb01e69cd2c99899b5583ac90cdec9049967df0c8a",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_schemas.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "fdc50d524e107e1ae408c806676b5ab2cc3b3690",
+        "blob_sha256": "sha256:653a6cb7852b7c92a4f0d9cbcc3358b883e25dfa0eab3fe895d4c3142fb14e87",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_vectors.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "30aceec7d9665dc6c0d129d6b6d4b8e1ef09a80f",
+        "blob_sha256": "sha256:cf8e9db5287d4ee999d2ef9681119dfc40a38b31d645b69cbcab43ec8c262fd0",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-163",
+        "verified": true
+      },
+      {
+        "blob_oid": "224feb35db5efdde7a891c1be19080faf4267a44",
+        "blob_sha256": "sha256:76a39157efd127bb878452a7b483ee7c19d40623e8303ca9658cceb06487eafa",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/MANIFEST.in",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "5c2d82d1a3407b8bc9692dab7aa2c18a9fc24961",
+        "blob_sha256": "sha256:e9fe16be8d925a7f9f8afe65690854f1fb07b7ac5df6b199dbe75505f6e52a5c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/pyproject.toml",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "02720e90ffb3c3171815205c94de56eef30e2c6d",
+        "blob_sha256": "sha256:683f12027fb030b31f0bd5ec2c374d1883ae42c8a0a0d19f573248938f35ad6b",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/setup.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "bac620fc67699319d81c39d55b2f27c7aff775d8",
+        "blob_sha256": "sha256:4aa8e24f64eecb08c783922682833336eb3be29af71bd8b6f0b112952700baea",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "75a6c047dfe73d72f76cdabb1ad8af221810e79d",
+        "blob_sha256": "sha256:385f5a9ffe6f3c70bbb96c366417c4ca003c3b8cb00cd738f7d7d9ab16fea923",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "d255f7daa75a45838b39a6cfb390ae5e31b24792",
+        "blob_sha256": "sha256:bce85e9dca49c78271dcc3cb04de4a93f5e1fc24b1902c42c8911fb2ef68d7b8",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/test_pass_circuit.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "f76f413d5366158b790b59d513a334836985f010",
+        "blob_sha256": "sha256:49864edcce0f517c674b486bef0a487af0574301fd1cf79a57f1396b0f409878",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "b6680cbd0dd45d67c9e083a45843bacafebbe4d3",
+        "blob_sha256": "sha256:9cbde491e7c989dfa12fb0da9cd09512d266463ff46645f58f55e3344ccfcae6",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "5e0172543711c55d89cd4d774cbe2d8d00105be4",
+        "blob_sha256": "sha256:b3c4fcc41eb3ab8f058858a00efe4a763a1e8bde38fa0d4e6022e124aaa32e7c",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "e5f04a662bf06d5a5ef8a5075e5292dd4c29bbb8",
+        "blob_sha256": "sha256:6bd6aad7d24cb983c42c9b6913257cec26dd492792a53fdfd11ae20769bd8b9f",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "f656744c98defc696e0fe29162ef4566f506aa2b",
+        "blob_sha256": "sha256:3a3c3172ed51013b09881726f9538f888be913d192d0ec4a70ccd5ff02c864b6",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "3263d7bdabf753c4f9a70439f53eded77e2df093",
+        "blob_sha256": "sha256:09c6e8dc26fccb4f591de76bf80b4816c8073ec2ca9247b016c1da8071f67311",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "98cea4a7bec431b16455f735bb4c80dba24a3c80",
+        "blob_sha256": "sha256:98377ba74e5a187a2c44619240bac221e5c7e06f6e0cab4dffac7f6df69b81e8",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "e07f9d879ecff69c88cd5a7f6a877abd6cfa5632",
+        "blob_sha256": "sha256:121d86c5f15a7a22474b4c33e2be3a1b18129f16c74f5043bfded1027f77f0bf",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "ff3a8f9addc3cce2c5067ee820f725006aad305f",
+        "blob_sha256": "sha256:8f6c4334158929b3772be68b41c6e53b37cf721bbcae94a44c183d21d43262c0",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "d57357fe9ff2a69b0a77d66d1324cc3b5e30ad0d",
+        "blob_sha256": "sha256:c707d824cddb9f912759a1e3cb9189d009431208749a9b0b2d19dd0cb824adb7",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "ab5922bd2b697af6b65afc53c9208761ca803911",
+        "blob_sha256": "sha256:60a07f0e3491de67925cbe7d953247c0f3d435f005644c05dd10a78f54a86257",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      },
+      {
+        "blob_oid": "ee78fb0b668eb3458706686c500d6dab674fee7f",
+        "blob_sha256": "sha256:cc108d25fa48508a06580e6a026fbc09b7031d9bf0e1e257f0c6bdedb3fef692",
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "path": "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_v5_authority.py",
+        "repository": "external/ipfs_datasets",
+        "source": "task:PTR-171",
+        "verified": true
+      }
+    ],
+    "board_namespace": "proof-backed-test-reuse-v1",
+    "commit_mappings": [
+      {
+        "disposition": "retained",
+        "exact_outer_gitlink": true,
+        "new_commit": "6cdb065545ce60f950733f7442c7985bba043176",
+        "new_reachable": true,
+        "old_commit": "ded3932433f4d08e6eb8eddc1595bfb1c0ddabf0",
+        "old_reachable": true,
+        "repository": "external/ipfs_accelerate",
+        "source": "outer-gitlink+historical-66-pin"
+      },
+      {
+        "disposition": "rebased_to_reachable",
+        "exact_outer_gitlink": true,
+        "new_commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "new_reachable": true,
+        "old_commit": "1894e9dca7dced0690893d468e40751a14f0b15b",
+        "old_reachable": false,
+        "repository": "external/ipfs_datasets",
+        "source": "outer-gitlink+historical-66-pin"
+      },
+      {
+        "disposition": "rebased_to_reachable",
+        "exact_outer_gitlink": true,
+        "new_commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "new_reachable": true,
+        "old_commit": "2f2fd78505fe7528bb406dbed1123abbb729ce80",
+        "old_reachable": false,
+        "repository": "external/ipfs_kit",
+        "source": "outer-gitlink+historical-66-pin"
+      }
+    ],
+    "current_gitlinks": {
+      "external/ipfs_accelerate": "6cdb065545ce60f950733f7442c7985bba043176",
+      "external/ipfs_datasets": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+      "external/ipfs_kit": "ba5493471e064a59558aad3f474286913b65dd50"
+    },
+    "historical_pins": {
+      "external/ipfs_accelerate": "ded3932433f4d08e6eb8eddc1595bfb1c0ddabf0",
+      "external/ipfs_datasets": "1894e9dca7dced0690893d468e40751a14f0b15b",
+      "external/ipfs_kit": "2f2fd78505fe7528bb406dbed1123abbb729ce80"
+    },
+    "immutable_historical_records": [
+      "implementation_plan/docs/46-proof-backed-test-reuse-integration-pins-2026-08-04.md",
+      "implementation_plan/docs/46-proof-backed-test-reuse-closeout-summary-2026-08-04.json",
+      "implementation_plan/docs/46-proof-backed-test-reuse-closeout-report-only-2026-08-04.json"
+    ],
+    "plan_cid": "baguqeeraw3cg6vdtlzefeig3xyi7lco4itcoxsrte7emqvfiqtezjtvy2d7a",
+    "policy": {
+      "approvals_required_for_publication": false,
+      "static_mapping_only": true,
+      "synthesize_completion": false,
+      "synthesize_evidence": false,
+      "synthesize_history": false,
+      "waive_unrecoverable": false
+    },
+    "receipts_observed": [
+      {
+        "commit": "5635a7d201f862c1c7e58913c657e034fbf03a29",
+        "receipt_cid": "baguqeeraerpp6lxobckvtub32bs3z3bnkxdhhrg7p5uxdddlv5cscb6wza5a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786226223155532510-45136-72f2dd0e4219.json",
+        "task_cid": "baguqeeraerpp6lxobckvtub32bs3z3bnkxdhhrg7p5uxdddlv5cscb6wza5a",
+        "task_id": "PTR-165"
+      },
+      {
+        "commit": "69444cdf5d05f75a1687a6660ed079887fbc5ad7",
+        "receipt_cid": "baguqeera6yv2kkmedurryjpozxdym72xt4to3r5vibrmxya74ffn525fkk4a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786237305341461443-150573-01037de8cdd7.json",
+        "task_cid": "baguqeera6yv2kkmedurryjpozxdym72xt4to3r5vibrmxya74ffn525fkk4a",
+        "task_id": "PTR-165"
+      },
+      {
+        "commit": "a1cad453a6004494612c571102f73aae8b657938",
+        "receipt_cid": "baguqeeradsiwaxxye2owirrnevstd2hrxrwbrm2i334oe6shpq6qdwjqn5dq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786306782961521022-555204-55fb651cdebd.json",
+        "task_cid": "baguqeeradsiwaxxye2owirrnevstd2hrxrwbrm2i334oe6shpq6qdwjqn5dq",
+        "task_id": "PTR-166"
+      },
+      {
+        "commit": "42c42c79fe3d0e1d26c80a01d41d8e189ce54b3c",
+        "receipt_cid": "baguqeera4lgzvz5v3im5uuxmtw2m5kmiuvnhjptcbyafe6aybhjgjg5zh63a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785549810138399634-4047133-b512ca9091d9.json",
+        "task_cid": "baguqeera4lgzvz5v3im5uuxmtw2m5kmiuvnhjptcbyafe6aybhjgjg5zh63a",
+        "task_id": "PTR-031"
+      },
+      {
+        "commit": "135f290a37488b5381d9e1ce564ed108b4e18efe",
+        "receipt_cid": "baguqeera7c36i7zqr34zs2vbwk3emuug3youhpny5iek76qj72wqsixcu23a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785550309440953773-833705-92455ddf5121.json",
+        "task_cid": "baguqeera7c36i7zqr34zs2vbwk3emuug3youhpny5iek76qj72wqsixcu23a",
+        "task_id": "PTR-043"
+      },
+      {
+        "commit": "4baa79df91c4ea25f8b116a77ddd1e9131978ab8",
+        "receipt_cid": "baguqeeraj33kusuujmfphhfpsfmfvfm7zistyhvtbh4atjknjxgran2smxsq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785550501052416233-609117-6b1581bc158c.json",
+        "task_cid": "baguqeeraj33kusuujmfphhfpsfmfvfm7zistyhvtbh4atjknjxgran2smxsq",
+        "task_id": "PTR-080"
+      },
+      {
+        "commit": "82f78a8f47c560adcc1ddd77348ae71526b85caf",
+        "receipt_cid": "baguqeeramnyhgse4ghcx4a7u3c632zfodr25j6bdtvwelvmeofryjp4mgkoa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785552320713485453-1151506-393b26f403a9.json",
+        "task_cid": "baguqeeramnyhgse4ghcx4a7u3c632zfodr25j6bdtvwelvmeofryjp4mgkoa",
+        "task_id": "PTR-051"
+      },
+      {
+        "commit": "bc353397965fabb200c18118d3393ce9be7467a8",
+        "receipt_cid": "baguqeera66woajx3janojidcyztlvfdmfebq6dcxboprtbhpewtngsuuxu5a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785552741848657322-1151506-a54ebe4398b0.json",
+        "task_cid": "baguqeera66woajx3janojidcyztlvfdmfebq6dcxboprtbhpewtngsuuxu5a",
+        "task_id": "PTR-012"
+      },
+      {
+        "commit": "3715da1487cda18947383ce3b2ce7013e575ccaa",
+        "receipt_cid": "baguqeerafvlfrxziulksxlvl2dsbchflzq2ky6mdwu2i5psuptqkhwqnaprq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785573632738336248-727581-bf78e596f328.json",
+        "task_cid": "baguqeerafvlfrxziulksxlvl2dsbchflzq2ky6mdwu2i5psuptqkhwqnaprq",
+        "task_id": "PTR-042"
+      },
+      {
+        "commit": "67884b7fdb2e1434f27fc4d2a0d6ed11f715da35",
+        "receipt_cid": "baguqeeran7lzwxvx3e7cez24pvwgq3rnvuybrrg6mdj2flmcfl4ufun7y5ba",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785574030856393397-728026-e783dcc35841.json",
+        "task_cid": "baguqeeran7lzwxvx3e7cez24pvwgq3rnvuybrrg6mdj2flmcfl4ufun7y5ba",
+        "task_id": "PTR-052"
+      },
+      {
+        "commit": "05f41cab1d4ae092421ded18f28f05d084ce7489",
+        "receipt_cid": "baguqeerarq5552mzvzeagsohnqigltddiegkrzcmgxkem23rpq4t3b3chabq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785575524417669708-727182-31ebb6d03ceb.json",
+        "task_cid": "baguqeerarq5552mzvzeagsohnqigltddiegkrzcmgxkem23rpq4t3b3chabq",
+        "task_id": "PTR-053"
+      },
+      {
+        "commit": "91ff69409c13518cdbb52d523e9e05381eef83e7",
+        "receipt_cid": "baguqeeraa72zlkz7f75nw67j5kov3sslyqgguc3neuvverius2ggont34s7q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785576141178412769-728026-3ff528c78b95.json",
+        "task_cid": "baguqeeraa72zlkz7f75nw67j5kov3sslyqgguc3neuvverius2ggont34s7q",
+        "task_id": "PTR-070"
+      },
+      {
+        "commit": "63d1dab7e563894f69f9b2e8452b0931c13d3211",
+        "receipt_cid": "baguqeeraaogysaomney6koocwifshb2vltstfzkvbi3amjkwcqiglu43b6ha",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785576374424015125-727581-ed5102ea79f9.json",
+        "task_cid": "baguqeeraaogysaomney6koocwifshb2vltstfzkvbi3amjkwcqiglu43b6ha",
+        "task_id": "PTR-081"
+      },
+      {
+        "commit": "c2bf4efe82e4787f6477a8f997f4470a5bfd94ce",
+        "receipt_cid": "baguqeeralszxm3igx4ce2czys3kn2zzpkwofokoafqjxboqugbrx5oxtcnna",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785577554399762267-727581-1aa95e0e2219.json",
+        "task_cid": "baguqeeralszxm3igx4ce2czys3kn2zzpkwofokoafqjxboqugbrx5oxtcnna",
+        "task_id": "PTR-060"
+      },
+      {
+        "commit": "df731014f34c74b1119d052db1f39a58f4d62871",
+        "receipt_cid": "baguqeeradossvwbrzckm63ixvwzlsjt4dmqgbo2bfbwa4fz3jvfzhuhgtmva",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785608401300535233-832544-ed149dff7ea4.json",
+        "task_cid": "baguqeeradossvwbrzckm63ixvwzlsjt4dmqgbo2bfbwa4fz3jvfzhuhgtmva",
+        "task_id": "PTR-061"
+      },
+      {
+        "commit": "2b3b5f8a15d66ff03021d804f1164eaec82eafd7",
+        "receipt_cid": "baguqeeray5buplszaz45swm4a3qabytkg5a3loamtuexkx2vsszte7gjioha",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785608982629489242-833033-f4eb8b9b0542.json",
+        "task_cid": "baguqeeray5buplszaz45swm4a3qabytkg5a3loamtuexkx2vsszte7gjioha",
+        "task_id": "PTR-090"
+      },
+      {
+        "commit": "cae17a0cb8eae0d605dc802c35fc12177113187d",
+        "receipt_cid": "baguqeeraxw5a2i24iybjwngip2grjr2232kol65n57pzvygkpcoue3nbp3ba",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785609423890479711-832544-46c71e6deaf5.json",
+        "task_cid": "baguqeeraxw5a2i24iybjwngip2grjr2232kol65n57pzvygkpcoue3nbp3ba",
+        "task_id": "PTR-091"
+      },
+      {
+        "commit": "da0d8282bd141a25344c9b5449021742e5650e39",
+        "receipt_cid": "baguqeeratcimiowit4etejy2bfbpqt5juch6hoct6sxe6rukz52i235wdsxa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785609991530956022-832423-b191014c7f82.json",
+        "task_cid": "baguqeeratcimiowit4etejy2bfbpqt5juch6hoct6sxe6rukz52i235wdsxa",
+        "task_id": "PTR-092"
+      },
+      {
+        "commit": "e80f66b02f10dc631190df8518c0e24259cf94e2",
+        "receipt_cid": "baguqeerakrrt4fqgy5iypjbytojkvi4bx4zkw5s7ifmadar7cexrgvyaohaq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785611180099026117-833033-c7ceff8ee62e.json",
+        "task_cid": "baguqeerakrrt4fqgy5iypjbytojkvi4bx4zkw5s7ifmadar7cexrgvyaohaq",
+        "task_id": "PTR-093"
+      },
+      {
+        "commit": "dffca28f5e9cf157d3b7447d857c6c3e40ee96aa",
+        "receipt_cid": "baguqeeras6iy5melzun4t5ehjsfhmdswhea55ehpiri3rp34dxsfv2esknyq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785611644309229049-832544-f3efcb8eb0b6.json",
+        "task_cid": "baguqeeras6iy5melzun4t5ehjsfhmdswhea55ehpiri3rp34dxsfv2esknyq",
+        "task_id": "PTR-100"
+      },
+      {
+        "commit": "74696d803690aff6f8de884b53c0d961beb40b59",
+        "receipt_cid": "baguqeeraxp5yhskfcux53to4df2eqj6tk6uc7yozmkx54h4hsvuoi3xrzz5a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785612508228380656-832423-2badbecfa538.json",
+        "task_cid": "baguqeeraxp5yhskfcux53to4df2eqj6tk6uc7yozmkx54h4hsvuoi3xrzz5a",
+        "task_id": "PTR-101"
+      },
+      {
+        "commit": "51709478c65aad49064a5cf9e4864f9917435df3",
+        "receipt_cid": "baguqeerak2yzygnug3bajnqtengoaivj62hiefwfu6cahwlphjj7t6gsbubq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785613237397258757-291175-296aba0d19e5.json",
+        "task_cid": "baguqeerak2yzygnug3bajnqtengoaivj62hiefwfu6cahwlphjj7t6gsbubq",
+        "task_id": "PTR-102"
+      },
+      {
+        "commit": "1b3b6c4899328b64a71519f619f9d72948adda01",
+        "receipt_cid": "baguqeerazvs7fhuo2eqvytap27fekjkw5g7tqdxushow4trbf7na752nxhyq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785718890139581138-4072794-379ba1bb0b5c.json",
+        "task_cid": "baguqeerazvs7fhuo2eqvytap27fekjkw5g7tqdxushow4trbf7na752nxhyq",
+        "task_id": "PTR-109"
+      },
+      {
+        "commit": "c4986d8758bbb33838dd241153c6ca66f1f2b096",
+        "receipt_cid": "baguqeera22ulb2t6qgurfxr5x5mvgns5zviznxrfa5mupd72t25jnue5yaga",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785719808820100973-4072433-4c2720ed930b.json",
+        "task_cid": "baguqeera22ulb2t6qgurfxr5x5mvgns5zviznxrfa5mupd72t25jnue5yaga",
+        "task_id": "PTR-108"
+      },
+      {
+        "commit": "7c737bc1b298fd0d7ff2fa5ec8d3570572a36071",
+        "receipt_cid": "baguqeerawcxwr5ohkpe7p4ltvslke3cg3vkvsmmq4rkudne2ofwdzgzr7vsa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785719810589346857-4073256-c1ff76d15b3f.json",
+        "task_cid": "baguqeerawcxwr5ohkpe7p4ltvslke3cg3vkvsmmq4rkudne2ofwdzgzr7vsa",
+        "task_id": "PTR-110"
+      },
+      {
+        "commit": "4f7ef7c81d369a258f02e29246769f2c805eeaf4",
+        "receipt_cid": "baguqeerac5phat4skn6ytxmqidrkvbpo4t2dyjs2rqwhoiloo6a4tsxh4tla",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785721465279956770-2363045-1f2f1bd1c3b0.json",
+        "task_cid": "baguqeerac5phat4skn6ytxmqidrkvbpo4t2dyjs2rqwhoiloo6a4tsxh4tla",
+        "task_id": "PTR-112"
+      },
+      {
+        "commit": "85934a4f71c736ea2d9b6c08db8a1ae1dac742a3",
+        "receipt_cid": "baguqeera3ddme64vv3rpaezl4rlbiepcllcye7eq45zy54jwi3qo6nh7zxvq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785722065356725303-2362667-1a31db802aa4.json",
+        "task_cid": "baguqeera3ddme64vv3rpaezl4rlbiepcllcye7eq45zy54jwi3qo6nh7zxvq",
+        "task_id": "PTR-111"
+      },
+      {
+        "commit": "4264ec9d7a618eb5f2344e4c85bca56b2ff0ce5a",
+        "receipt_cid": "baguqeerana4qg4elre3sdfcvmxjvva5imdwclhjqo5glmqctmhn3zwtgw7la",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785722630315175649-2813291-e3076a1caabb.json",
+        "task_cid": "baguqeerana4qg4elre3sdfcvmxjvva5imdwclhjqo5glmqctmhn3zwtgw7la",
+        "task_id": "PTR-121"
+      },
+      {
+        "commit": "a36fab2a8e24fd690a14ed01daf70ceebd8b72ad",
+        "receipt_cid": "baguqeerammsmmac63m6jscry3of24hcsd2uldst22z4pr2byyvnqa6zrrvea",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785723483811702205-3554031-418486b1b8a4.json",
+        "task_cid": "baguqeerammsmmac63m6jscry3of24hcsd2uldst22z4pr2byyvnqa6zrrvea",
+        "task_id": "PTR-120"
+      },
+      {
+        "commit": "91e890bb95cb879b78bc2f1283bc7ac34deecf9d",
+        "receipt_cid": "baguqeerac3lyabjqdiztuy5fjpa5frxs4bvdxgc5ikis3ygquy2jebxq4yza",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785723735548949622-3862356-1f2e14da8b73.json",
+        "task_cid": "baguqeerac3lyabjqdiztuy5fjpa5frxs4bvdxgc5ikis3ygquy2jebxq4yza",
+        "task_id": "PTR-122"
+      },
+      {
+        "commit": "079d0b432f4f4429bf748ab29c7bfe0aa5b33561",
+        "receipt_cid": "baguqeeravpvynkxmmxyizwco3jcu6b2xijh7w5wcwdukcqytz6aez2lcqcqq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785724128552898734-459424-a5fa258cd45f.json",
+        "task_cid": "baguqeeravpvynkxmmxyizwco3jcu6b2xijh7w5wcwdukcqytz6aez2lcqcqq",
+        "task_id": "PTR-130"
+      },
+      {
+        "commit": "bea1e16853a3a0f84374731cc9ebb4041aac917e",
+        "receipt_cid": "baguqeeraumvhone3gfqjbs3vj67lyztnw46chaqgk6lsokokac4b4w2ijn7q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739247271812552-1588281-a766c19988c2.json",
+        "task_cid": "baguqeeraumvhone3gfqjbs3vj67lyztnw46chaqgk6lsokokac4b4w2ijn7q",
+        "task_id": "PTR-133"
+      },
+      {
+        "commit": "15971af65e5d001ceb264c7b4f24e074009c7a1e",
+        "receipt_cid": "baguqeeravanvls67r5i6g76hel4utcjdu4u3suebifdb3beglwieqhd64epa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739442949603188-1587812-4051083393d2.json",
+        "task_cid": "baguqeeravanvls67r5i6g76hel4utcjdu4u3suebifdb3beglwieqhd64epa",
+        "task_id": "PTR-131"
+      },
+      {
+        "commit": "a142a8b11efbcb36058bdf275f55e6abcb3d5d52",
+        "receipt_cid": "baguqeerazcal4ocwecahkluoodsopigd6mr4svzdho57og7opavpzlnjs6va",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739564771068179-1588479-d36c64f7fcdd.json",
+        "task_cid": "baguqeerazcal4ocwecahkluoodsopigd6mr4svzdho57og7opavpzlnjs6va",
+        "task_id": "PTR-132"
+      },
+      {
+        "commit": "432810f9d3dd880530dec72455523690263c6fc2",
+        "receipt_cid": "baguqeera4kr7paruvamxzlbzjjxky3qzawypxykwf4wolzrmb5nu6jla32pq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739945964284210-1587812-26bb596255d2.json",
+        "task_cid": "baguqeera4kr7paruvamxzlbzjjxky3qzawypxykwf4wolzrmb5nu6jla32pq",
+        "task_id": "PTR-134"
+      },
+      {
+        "commit": "0bd1536da501758b5fdef231faba0c56bc289947",
+        "receipt_cid": "baguqeeraj2dljyzii7mpyubsjs24ztowvh2yttka5qfivzlbo2ykeg52gc3q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785740470498382229-1588479-efddef553b4e.json",
+        "task_cid": "baguqeeraj2dljyzii7mpyubsjs24ztowvh2yttka5qfivzlbo2ykeg52gc3q",
+        "task_id": "PTR-135"
+      },
+      {
+        "commit": "21f7e9fdccb36162e5b7274657680317c62ee568",
+        "receipt_cid": "baguqeerag72zkdh5kfv7omz76wpppkdqszf77xxsumbtzeu255w6qlalaxxa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785740493263049406-1587812-affbd1cbeed1.json",
+        "task_cid": "baguqeerag72zkdh5kfv7omz76wpppkdqszf77xxsumbtzeu255w6qlalaxxa",
+        "task_id": "PTR-137"
+      },
+      {
+        "commit": "2b748af3f8f16e2935f7945dc6acf88737872a82",
+        "receipt_cid": "baguqeerayj4pe4li25n3autkzboyvuyjys5tkiicerp7mdr7taawiqcxdejq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785741090003031386-1588281-e5dc02d504ce.json",
+        "task_cid": "baguqeerayj4pe4li25n3autkzboyvuyjys5tkiicerp7mdr7taawiqcxdejq",
+        "task_id": "PTR-136"
+      },
+      {
+        "commit": "581a75e222451e49b7a2814d8805fa275d2f07b4",
+        "receipt_cid": "baguqeerajqbe5igsxr2gta3rl6tqdjbejoy3ixxo3a2c3jnqpasuvoplpjzq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785741922823496535-722154-c7d3b6528eb8.json",
+        "task_cid": "baguqeerajqbe5igsxr2gta3rl6tqdjbejoy3ixxo3a2c3jnqpasuvoplpjzq",
+        "task_id": "PTR-138"
+      },
+      {
+        "commit": "6dca85a92cdac1002f573458ed3e480cba3c7d4a",
+        "receipt_cid": "baguqeerazxsbhwvdpw2n253kgami4vklb5u4smhruqdyuwuankaitz3o2g4q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785742498059559165-1959901-27fd2906ea30.json",
+        "task_cid": "baguqeerazxsbhwvdpw2n253kgami4vklb5u4smhruqdyuwuankaitz3o2g4q",
+        "task_id": "PTR-139"
+      },
+      {
+        "commit": "3737c10715246cc4747d9c415b6f364b3e8c26eb",
+        "receipt_cid": "baguqeeraaeuwdplwq2ajeslkk2r2a57hwpbeypufq5tlawyn7qtgcinskfgq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785742824068640925-746885-a2e560bd98fe.json",
+        "task_cid": "baguqeeraaeuwdplwq2ajeslkk2r2a57hwpbeypufq5tlawyn7qtgcinskfgq",
+        "task_id": "PTR-140"
+      },
+      {
+        "commit": "0a651b5246f6113fb5314b78f34934efd6e80698",
+        "receipt_cid": "baguqeeralkrseyo3ianfcqeypo3wgch2bf3ktx5pbhb7pq43777mhd65tqwa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785742986287727381-722154-059d9e23ee95.json",
+        "task_cid": "baguqeeralkrseyo3ianfcqeypo3wgch2bf3ktx5pbhb7pq43777mhd65tqwa",
+        "task_id": "PTR-141"
+      },
+      {
+        "commit": "0094fbb7971615fa02c92202101c5f66caaab7cc",
+        "receipt_cid": "baguqeera3jp3fbznlcd6zdhpybi56ucifpr5w7sjrbcnxh2j6hp2bgg7xprq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785744176099410304-1959901-667c2e92692c.json",
+        "task_cid": "baguqeera3jp3fbznlcd6zdhpybi56ucifpr5w7sjrbcnxh2j6hp2bgg7xprq",
+        "task_id": "PTR-142"
+      },
+      {
+        "commit": "7db54fbf400d9e19a9055fd847256c5eb93908cd",
+        "receipt_cid": "baguqeera3jxpo3x7e5lnyq5vofcwhvpgldql7oizhf7f2ljexizbxw3f7onq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785787437358947707-3902873-f61e1ef9f504.json",
+        "task_cid": "baguqeera3jxpo3x7e5lnyq5vofcwhvpgldql7oizhf7f2ljexizbxw3f7onq",
+        "task_id": "PTR-143"
+      },
+      {
+        "commit": "14a2ebafc59f2ba9ad31e42e10e1b034e44a9936",
+        "receipt_cid": "baguqeeracoyhatz6abxi33vavmnspqh4642bz3g4ab3mftep5ic7ry5hjihq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785788103377778990-3902873-b7bf9eff9b08.json",
+        "task_cid": "baguqeeracoyhatz6abxi33vavmnspqh4642bz3g4ab3mftep5ic7ry5hjihq",
+        "task_id": "PTR-146"
+      },
+      {
+        "commit": "0a945d16b59942036ec36b5072099d39c019a3d5",
+        "receipt_cid": "baguqeerawqr2clrystjbb2lqj7ghwjxqgkmh6agxuayvp47jigovm5m4zexa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785788284436999954-3903035-35f0d6c12b3d.json",
+        "task_cid": "baguqeerawqr2clrystjbb2lqj7ghwjxqgkmh6agxuayvp47jigovm5m4zexa",
+        "task_id": "PTR-144"
+      },
+      {
+        "commit": "f3d1dcddac5d373f14e304a6d9217b5adf15f6b2",
+        "receipt_cid": "baguqeeraryesztzgxmzvkhhckmacvraluj63lp35cnp5yspj2xpgwdzu7i4q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785788831048449728-3902903-5e5036d029c4.json",
+        "task_cid": "baguqeeraryesztzgxmzvkhhckmacvraluj63lp35cnp5yspj2xpgwdzu7i4q",
+        "task_id": "PTR-145"
+      },
+      {
+        "commit": "baab62894fc4f19da90b20ebc1ee592006211c21",
+        "receipt_cid": "baguqeerafwbx4xs25i2gzp3p3l7x6cdkebyotfto2grzntj3ionzjegytsza",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785789718426923556-3903035-de3f4c0d941e.json",
+        "task_cid": "baguqeerafwbx4xs25i2gzp3p3l7x6cdkebyotfto2grzntj3ionzjegytsza",
+        "task_id": "PTR-147"
+      },
+      {
+        "commit": "c79c417c182b12d9c89099fc97f61f37db575c86",
+        "receipt_cid": "baguqeera72wuns4gxucyhrwnoano43q6tlifhpuifilgmlm4gk7rc532fk2a",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785792309069652395-3902903-ac384312fb9f.json",
+        "task_cid": "baguqeera72wuns4gxucyhrwnoano43q6tlifhpuifilgmlm4gk7rc532fk2a",
+        "task_id": "PTR-148"
+      },
+      {
+        "commit": "c1cd06f3929fe82023cd0e783d7f5aa0dd415e55",
+        "receipt_cid": "baguqeeraw6zip2k3ibrzsm6r6o2ymohwh2nzccoibnacpilylbxmugvqj4ma",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785800428370914656-3398353-d942327ccdad.json",
+        "task_cid": "baguqeeraw6zip2k3ibrzsm6r6o2ymohwh2nzccoibnacpilylbxmugvqj4ma",
+        "task_id": "PTR-153"
+      },
+      {
+        "commit": "4e84bc8c965106ad5bc65bc5c0e21c53ffa761b6",
+        "receipt_cid": "baguqeerazupfc4ob6hzp34mxtvmjtxq37boewxhwstudobolca2ay56gziiq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785801075894721268-3398545-bccf17cc95b8.json",
+        "task_cid": "baguqeerazupfc4ob6hzp34mxtvmjtxq37boewxhwstudobolca2ay56gziiq",
+        "task_id": "PTR-154"
+      },
+      {
+        "commit": "1ad9cebda5422a0c216bd95b08b264d7360db17c",
+        "receipt_cid": "baguqeerazmabbuvvjkq3hdoe2zexm5mbj5dvnjpxky3qqkaem4vyigh4yd7q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785802656616796195-3308149-0c1a750ba5e2.json",
+        "task_cid": "baguqeerazmabbuvvjkq3hdoe2zexm5mbj5dvnjpxky3qqkaem4vyigh4yd7q",
+        "task_id": "PTR-155"
+      },
+      {
+        "commit": "62fe0356b8249043594f4d8973a8207a231f2036",
+        "receipt_cid": "baguqeerafufrvhnlzfqnelvdtbvnwc7es5r2sbw2a6f4ony2hcx2jl2f55oq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785803439910113683-3308149-ecb72cd13571.json",
+        "task_cid": "baguqeerafufrvhnlzfqnelvdtbvnwc7es5r2sbw2a6f4ony2hcx2jl2f55oq",
+        "task_id": "PTR-149"
+      },
+      {
+        "commit": "4dd5120c3d7b96bdf3806edc10cbd8b34833bd0a",
+        "receipt_cid": "baguqeera7sy3kustdy7h7uq3oxsh2qfesjsawfxm5nvdmntks7kgq5nikqeq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v6/merge-queue/completed/1786173166611775408-3460884-b4f83776d106.json",
+        "task_cid": "baguqeera7sy3kustdy7h7uq3oxsh2qfesjsawfxm5nvdmntks7kgq5nikqeq",
+        "task_id": "PTR-161"
+      },
+      {
+        "commit": "31a7c1901ee7a2f257fb77514679053c070c1afb",
+        "receipt_cid": "baguqeerarx4ehy5qafocyxvqcllgzpnvgnrbnmclyvrxwt6wj675xtd5uzga",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v6/merge-queue/completed/1786173198566269690-3460983-c616906d694b.json",
+        "task_cid": "baguqeerarx4ehy5qafocyxvqcllgzpnvgnrbnmclyvrxwt6wj675xtd5uzga",
+        "task_id": "PTR-160"
+      },
+      {
+        "commit": "eb19282154bd6aea66834f3c6edf12007affd5f0",
+        "receipt_cid": "baguqeerazlwironv23ba3wja4hqteda2bw3smcsahj2r57uehobr66sc76yq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v6/merge-queue/completed/1786173220122054371-3460648-85619975be15.json",
+        "task_cid": "baguqeerazlwironv23ba3wja4hqteda2bw3smcsahj2r57uehobr66sc76yq",
+        "task_id": "PTR-162"
+      },
+      {
+        "commit": "287aefd9abe779e3d1965c325e93d96e68df8216",
+        "receipt_cid": "baguqeerats3fl63tg5v3ri4afz7hnid6vw4ybl5kgpztdsmrgdvo4vum3rgq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786186249783866060-2207877-3fb58cae3c0d.json",
+        "task_cid": "baguqeerats3fl63tg5v3ri4afz7hnid6vw4ybl5kgpztdsmrgdvo4vum3rgq",
+        "task_id": "PTR-170"
+      },
+      {
+        "commit": "446d4906cae78d0ad53071fbf61aabd25dd0986b",
+        "receipt_cid": "baguqeeraq5d3i4wwueey3dvxqtqltlde5fsey6qojhwvo6qkh26k5rtdhnhq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786204302311869903-3356451-0b1b35211d0a.json",
+        "task_cid": "baguqeeraq5d3i4wwueey3dvxqtqltlde5fsey6qojhwvo6qkh26k5rtdhnhq",
+        "task_id": "PTR-161"
+      },
+      {
+        "commit": "0ef5dea3bf13e0dd8bd732648ca07468b6cf483f",
+        "receipt_cid": "baguqeeracxat26lvexgps3bm4mccgm5nmupvwctjvoqg6p7ote65vimzyqia",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786204687872945866-3352670-3a516daab63f.json",
+        "task_cid": "baguqeeracxat26lvexgps3bm4mccgm5nmupvwctjvoqg6p7ote65vimzyqia",
+        "task_id": "PTR-162"
+      },
+      {
+        "commit": "0e0232815a523c3f14f3c7da0a37b5de2b174209",
+        "receipt_cid": "baguqeerabzmuizhiyg22py4oqe54shntmjmzlcmvagpzhuwbustlmae2zdaq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786205411350427424-34568-ecc2ee0c3607.json",
+        "task_cid": "baguqeerabzmuizhiyg22py4oqe54shntmjmzlcmvagpzhuwbustlmae2zdaq",
+        "task_id": "PTR-162"
+      },
+      {
+        "commit": "be0e2081c848612ad881eda30216ceec9eb6b221",
+        "receipt_cid": "baguqeerak7y5laut7ihi2bfwaxxezko726zjtjofoe5c5zpvyre4lglx7i2q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786206230827679933-944766-d620ecdbd123.json",
+        "task_cid": "baguqeerak7y5laut7ihi2bfwaxxezko726zjtjofoe5c5zpvyre4lglx7i2q",
+        "task_id": "PTR-162"
+      },
+      {
+        "commit": "71bb8efd920280e5fc915da19aa4aaa5fa7bd82a",
+        "receipt_cid": "baguqeerajbpdlk5vkkojmo23vne7vfo2bmwwnispvf5vu55qsc6cs3vgknea",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786207436525713663-944766-a1b4e55f4379.json",
+        "task_cid": "baguqeerajbpdlk5vkkojmo23vne7vfo2bmwwnispvf5vu55qsc6cs3vgknea",
+        "task_id": "PTR-165"
+      }
+    ],
+    "repository_root": "/tmp/lift-ptr-supervisor-high",
+    "schema": "VerifiedTaskReplayPlan@1",
+    "unrecoverable": []
+  },
+  "publication": {
+    "applied_gitlinks": [
+      {
+        "action": "stage_exact_gitlink",
+        "commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+        "disposition": "rebased_to_reachable",
+        "repository": "external/ipfs_datasets"
+      },
+      {
+        "action": "stage_exact_gitlink",
+        "commit": "ba5493471e064a59558aad3f474286913b65dd50",
+        "disposition": "rebased_to_reachable",
+        "repository": "external/ipfs_kit"
+      }
+    ],
+    "apply_requested": true,
+    "blocked_by_unrecoverable": [],
+    "datasets_and_kit_published": true
+  },
+  "readiness_hints": {
+    "blob_mappings_total": 136,
+    "blob_mappings_verified": 136,
+    "completion_receipts_observed": 62,
+    "observation_only": true,
+    "unrecoverable_count": 0
+  },
+  "schema": "ipfs_accelerate_py/proof-backed-test-reuse-replay-map@5",
+  "three_pins": {
+    "external/ipfs_accelerate": {
+      "commit": "6cdb065545ce60f950733f7442c7985bba043176",
+      "exact_outer_gitlink": true,
+      "fetchable": true
+    },
+    "external/ipfs_datasets": {
+      "commit": "f8d1c87b3c3445fdad8e24726910ae55810f7912",
+      "exact_outer_gitlink": true,
+      "fetchable": true
+    },
+    "external/ipfs_kit": {
+      "commit": "ba5493471e064a59558aad3f474286913b65dd50",
+      "exact_outer_gitlink": true,
+      "fetchable": true
+    }
+  }
+}
