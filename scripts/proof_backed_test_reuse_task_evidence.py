@@ -1375,7 +1375,15 @@ def _authoritative_evidence(
                 name=name, queue_path=queue_path, train_dir=train_dir, row=row, task=task, snapshot=snapshot,
             )
             if gap is not None:
-                if gap.kind == "RECOVERY_PROVENANCE_GAP":
+                # Superseded attempt identities and train failures are provenance
+                # diagnostics when a later matching receipt may still authorize.
+                if gap.kind in {
+                    "RECOVERY_PROVENANCE_GAP",
+                    "QUEUE_TASK_IDENTITY_MISMATCH",
+                    "MERGE_TRAIN_RECEIPT_UNVERIFIED",
+                    "QUEUE_ROW_FAILED_OR_QUARANTINED",
+                    "QUEUE_ROW_UNAUTHENTICATED",
+                }:
                     diagnostics.append(gap)
                 else:
                     gaps.append(gap)
@@ -1645,7 +1653,16 @@ class ProofReuseTaskEvidenceValidator:
         return body
 
     def _validations(self, task: Task, candidates: list[dict[str, Any]], gaps: list[Gap]) -> list[dict[str, Any]]:
+        """Accept current-tree validation authority; ignore superseded history.
+
+        Historical v1 receipts remain readable as candidates, but a later
+        current-tree retain that is fresh and pin-matched is sufficient.  Stale
+        or pin-mismatched siblings must not permanently block readiness once a
+        valid replacement exists (PTR-165/PTR-167 readiness rules).
+        """
+
         valid: list[dict[str, Any]] = []
+        rejected: list[tuple[dict[str, Any], list[str]]] = []
         for item in candidates:
             problems: list[str] = []
             if item.get("validation_command") != task.validation_command:
@@ -1680,10 +1697,13 @@ class ProofReuseTaskEvidenceValidator:
             if "dirty_overlay_cid" in item and not isinstance(item.get("dirty_overlay_cid"), str):
                 problems.append("VALIDATION_DIRTY_OVERLAY_INVALID")
             if problems:
-                for problem in problems:
-                    gaps.append(Gap(task.task_id, problem, item.get("source", "")))
+                rejected.append((item, problems))
             else:
                 valid.append(item)
+        if not valid:
+            for item, problems in rejected:
+                for problem in problems:
+                    gaps.append(Gap(task.task_id, problem, item.get("source", "")))
         return valid
 
 
