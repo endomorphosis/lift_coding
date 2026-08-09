@@ -2429,7 +2429,7 @@ uncertain candidates execute normally.
 
 ## PTR-165 Validate completed-task artifacts, exact pins, and replay evidence
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
