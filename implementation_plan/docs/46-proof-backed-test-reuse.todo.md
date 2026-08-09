@@ -2623,7 +2623,7 @@ uncertain candidates execute normally.
 
 ## PTR-171 Compose PTR-160 receipt and runner attestation into the typed V5 provider
 
-- Status: todo
+- Status: done
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
