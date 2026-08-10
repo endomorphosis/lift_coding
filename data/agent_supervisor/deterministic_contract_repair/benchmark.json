@@ -1,0 +1,109 @@
+{
+  "evidence_id": "dcr/deterministic-repair-benchmark@1",
+  "interface": "DeterministicRepairBenchmark@1",
+  "provider_calls": 0,
+  "result": {
+    "cold_import": {
+      "elapsed_ms": 0,
+      "newer_stdlib_leakage": false,
+      "ok": true,
+      "python": "3.12.3"
+    },
+    "content_id": "sha256:5b11ef51638eabe1792621b290cf0247420ebc70e4b704716a25ab6593adf782",
+    "corpus_roots": {
+      "adversarial_content": "sha256:ee67a85a38be25a13d553259d2a719fc46cceb012e9f6336fde84a0de1a33a55",
+      "fixed_point_epoch": "sha256:2a9cfc8a07b1cb90ca6d100d3b28eded65e7beff5407df7bf7f27cfeec231a3e",
+      "repo": "/tmp/lift-dcr-supervisor-20260808"
+    },
+    "declared_python_versions": [
+      "3.10",
+      "3.11",
+      "3.12",
+      "3.13"
+    ],
+    "detection": {
+      "abstention": 1,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision_denominator": 18,
+      "precision_numerator": 18,
+      "recall_denominator": 18,
+      "recall_numerator": 18,
+      "true_negative": 0,
+      "true_positive": 18
+    },
+    "evidence_id": "dcr/deterministic-repair-benchmark@1",
+    "interface": "DeterministicRepairBenchmark@1",
+    "passed": true,
+    "proof_reuse_hits": 0,
+    "proof_reuse_misses": 2,
+    "provider_calls": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "cache_excluded_from_primary_metrics",
+      "dcr_100_benchmark",
+      "abstention_counted_separately",
+      "safety_floors_held",
+      "cold_import_current_interpreter_ok",
+      "zero_llm_enforced",
+      "benchmark_passed_for_review",
+      "rollout_authority_not_granted"
+    ],
+    "repair": {
+      "abstention": 0,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision_denominator": 3,
+      "precision_numerator": 3,
+      "recall_denominator": 3,
+      "recall_numerator": 3,
+      "true_negative": 2,
+      "true_positive": 3
+    },
+    "resources": {
+      "cache_excluded": true,
+      "cold_import_ms": 0,
+      "cpu_system_ms": 1028,
+      "cpu_user_ms": 5801,
+      "max_rss_bytes": 863264768,
+      "wall_time_ms": 9177
+    },
+    "rollout_authority_granted": false,
+    "runtime_model_calls": 0,
+    "safety": {
+      "abstentions": 1,
+      "content_id": "sha256:c64f7ee8464b23b0eea8422c9afefdb04aff17792d8ed6672ff12556a761a6f1",
+      "false_completion": 0,
+      "false_success": 0,
+      "floors": {
+        "false_completion": 0,
+        "mixed_root_publication": 0,
+        "model_calls": 0,
+        "provider_calls": 0,
+        "unauthorized_mutation": 0,
+        "unobserved_transition": 0
+      },
+      "floors_held": true,
+      "interface": "RepairSafetyMetrics@1",
+      "mixed_root_publication": 0,
+      "model_calls": 0,
+      "mutation_survivors": 0,
+      "provider_calls": 0,
+      "reason_codes": [
+        "safety_floors_held"
+      ],
+      "unauthorized_mutation": 0,
+      "unobserved_transition": 0
+    },
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-deterministic-repair-benchmark@1",
+    "task_id": "DCR-100",
+    "version": 1,
+    "zero_llm_enforced": true
+  },
+  "rollout_authority_granted": false,
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-deterministic-repair-benchmark@1",
+  "task_id": "DCR-100",
+  "version": 1
+}
