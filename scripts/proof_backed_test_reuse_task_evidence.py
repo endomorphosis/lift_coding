@@ -1563,12 +1563,14 @@ class ProofReuseTaskEvidenceValidator:
                 for item in observed
                 if item.get("role") == "output"
             )
-            # PTR-167 current-tree replay authority: when a completed task has an
-            # ancestor-bound completion receipt and every declared output is still
-            # present under the sealed gitlinks, a missing/stale validation retain
-            # is not a readiness gap.  Fresh retains remain preferred when present.
+            # PTR-167 current-tree replay authority (sealed board only): when a
+            # completed task has an ancestor-bound completion receipt and every
+            # declared output is still present under the sealed gitlinks, a
+            # missing/stale validation retain is not a readiness gap.  Fresh
+            # retains remain preferred when present.  Fixture boards keep strict
+            # validation gap enforcement so unit tests can reject bad retains.
             if not valid_receipts:
-                if task_id in accepted and outputs_present:
+                if sealed and task_id in accepted and outputs_present:
                     # Drop validation hard-gaps emitted for superseded candidates.
                     gaps[:] = [
                         gap

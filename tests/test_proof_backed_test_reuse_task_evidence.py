@@ -273,7 +273,7 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
             "integration_commit_proof": {"passed": True, "integration_commit": snapshot.commit},
         },
     }
-    for name in ("v8", "v6"):
+    for name in ("v8", "v6", "v1"):
         (roots[name] / "merge-queue" / "completed").mkdir(parents=True, exist_ok=True)
         (roots[name] / "merge-queue" / "train" / "receipts").mkdir(parents=True, exist_ok=True)
     (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
@@ -307,7 +307,7 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
     failed = receipt_dir / "failed"
     failed.mkdir()
     (failed / "PTR-160.json").write_text(json.dumps({"task_id": "PTR-160", "passed": True}), encoding="utf-8")
-    receipts, validations, gaps, _diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    receipts, validations, gaps, diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
     assert not any(g.kind.startswith("STATE_ROOT_") for g in gaps)
     assert receipts[task.task_id]
     assert validations[task.task_id][0]["validation_receipt_cid"] == validation["validation_receipt_cid"]
@@ -315,13 +315,22 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
     (roots["v8"] / "untrusted.json").write_text(json.dumps(queue), encoding="utf-8")
     again, _, _, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
     assert {item.source for item in again[task.task_id]} == {item.source for item in receipts[task.task_id]}
-    # Task-key / task-CID mismatch is rejected.
+    # Task-key / task-CID mismatch is rejected as provenance diagnostic (not
+    # readiness-hard when a later matching row may still authorize).  Drop the
+    # valid v6 twin so the mismatch is not rewritten as SUPERSEDED_*.
+    for path in (roots["v6"] / "merge-queue" / "completed").glob("*.json"):
+        path.unlink()
+    for path in (roots["v6"] / "merge-queue" / "train" / "receipts").glob("*.json"):
+        path.unlink()
     bad = dict(queue)
     bad["metadata"] = dict(queue["metadata"])
     bad["metadata"]["task"] = dict(queue["metadata"]["task"], canonical_task_cid="baguqeera-substituted")
     (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(bad), encoding="utf-8")
-    _, _, rejected, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
-    assert "QUEUE_TASK_IDENTITY_MISMATCH" in {gap.kind for gap in rejected}
+    rejected_receipts, _, _rejected, rejected_diag = evidence._authoritative_evidence(
+        roots, {task.task_id: task}, snapshot,
+    )
+    assert task.task_id not in rejected_receipts
+    assert "QUEUE_TASK_IDENTITY_MISMATCH" in {gap.kind for gap in rejected_diag}
     # Underspecified flat validation body is rejected (missing repository fields).
     thin = {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1",
@@ -331,8 +340,8 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
     }
     thin["validation_receipt_cid"] = evidence.canonical_cid(thin)
     (receipt_dir / "PTR-160.json").write_text(json.dumps(thin), encoding="utf-8")
-    _, _, thin_gaps, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
-    assert "VALIDATION_RECEIPT_IDENTITY_MISMATCH" in {gap.kind for gap in thin_gaps}
+    _, _, _thin_gaps, thin_diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    assert "VALIDATION_RECEIPT_IDENTITY_MISMATCH" in {gap.kind for gap in thin_diag}
 
 
 def test_sealed_queue_rejects_unbound_task_identity_and_broken_event_chain(tmp_path: Path) -> None:
@@ -589,8 +598,10 @@ def test_request_dedupe_filename_mismatches_are_rejected(tmp_path: Path) -> None
         },
     }
     (roots["v8"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(json.dumps(train), encoding="utf-8")
-    _, _, gaps, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
-    assert "QUEUE_TASK_IDENTITY_MISMATCH" in {gap.kind for gap in gaps}
+    _, _, _gaps, diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    # Identity/dedupe mismatches are provenance diagnostics; they never authorize
+    # and must not hard-block readiness when later authority can supersede them.
+    assert "QUEUE_TASK_IDENTITY_MISMATCH" in {gap.kind for gap in diag}
 
 
 def _controller_state_siblings() -> dict[str, Path]:
@@ -788,8 +799,10 @@ def test_failed_and_quarantined_queue_rows_are_rejected(tmp_path: Path) -> None:
         (roots["v9"] / "merge-queue" / "completed" / f"{name}.json").write_text(
             json.dumps(queue), encoding="utf-8",
         )
-    _, _, gaps, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
-    assert "QUEUE_ROW_FAILED_OR_QUARANTINED" in {gap.kind for gap in gaps}
+    _, _, _gaps, diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    # Failed/quarantined rows never authorize; they surface as provenance
+    # diagnostics so a later completed row can still satisfy readiness.
+    assert "QUEUE_ROW_FAILED_OR_QUARANTINED" in {gap.kind for gap in diag}
 
 
 def test_recovery_diagnostic_superseded_after_later_authority(tmp_path: Path) -> None:
