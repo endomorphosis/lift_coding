@@ -2558,7 +2558,7 @@ uncertain candidates execute normally.
 
 ## PTR-169 Seal the exact 78-task authenticated current-tree handoff
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
