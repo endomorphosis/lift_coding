@@ -225,9 +225,9 @@ def _write_fixture(
                     "passed": True,
                     "repository_tree": gate_tree,
                     "producing_task_id": "PTR-169",
-                    "task_count": 77,
+                    "task_count": 78,
                     "review_revision": (
-                        "authenticated-receipt-current-tree-repair-v8"
+                        "authenticated-receipt-current-tree-repair-v9"
                     ),
                     "final_gate_criterion": (
                         "ptr/authenticated-current-tree-gate-v5@1"
@@ -339,6 +339,15 @@ def test_module_exports_predicted_symbols(recon_mod: Any) -> None:
     )
     assert recon_mod.OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT == (
         "ObjectiveCompletionEvidenceArtifact"
+    )
+    assert recon_mod.EXPECTED_TASK_COUNT == 78
+    assert recon_mod.FINAL_GATE_TASK_ID == "PTR-169"
+    assert recon_mod.FINAL_GATE_GOAL_ID == "PTR-G140"
+    assert recon_mod.FINAL_GATE_ACCEPTANCE_CRITERION == (
+        "ptr/authenticated-current-tree-gate-v5@1"
+    )
+    assert recon_mod.FINAL_GATE_REVIEW_REVISION == (
+        "authenticated-receipt-current-tree-repair-v9"
     )
 
 
@@ -673,9 +682,9 @@ def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
             "satisfied_requirements": [criterion],
             "authority": "authoritative",
             "tree_id": tree,
-            "task_count": 77,
+            "task_count": 78,
             "review_revision": (
-                "authenticated-receipt-current-tree-repair-v8"
+                "authenticated-receipt-current-tree-repair-v9"
             ),
         }
 
@@ -686,8 +695,8 @@ def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
         ),
         "interface": "ProofTestReusePersistedGateBundle@1",
         "producing_task_id": "PTR-169",
-        "task_count": 77,
-        "review_revision": "authenticated-receipt-current-tree-repair-v8",
+        "task_count": 78,
+        "review_revision": "authenticated-receipt-current-tree-repair-v9",
         "tree_id": tree,
         "git_tree_id": tree,
         "decision": {
@@ -765,27 +774,41 @@ def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
     assert rejected["reason_codes"] == ["missing_evidence:PTR-G010"]
 
 
-def test_ptr169_gate_rejects_v7_and_76_task_evidence(recon_mod: Any) -> None:
+def test_ptr169_gate_rejects_stale_v8_v7_and_undersized_packets(
+    recon_mod: Any,
+) -> None:
     base = {
         "passed": True,
         "producing_task_id": "PTR-169",
-        "task_count": 77,
-        "review_revision": "authenticated-receipt-current-tree-repair-v8",
+        "task_count": 78,
+        "review_revision": "authenticated-receipt-current-tree-repair-v9",
         "final_gate_criterion": "ptr/authenticated-current-tree-gate-v5@1",
         "root_criterion": "ptr/cross-repository-current-tree-gate@1",
     }
 
-    stale_count = dict(base, task_count=76)
-    assert recon_mod._gate_artifact_readiness(stale_count)[1] == (
-        "stale_gate_task_count"
-    )
+    for stale_count in (77, 76, 66):
+        packet = dict(base, task_count=stale_count)
+        assert recon_mod._gate_artifact_readiness(packet)[1] == (
+            "stale_gate_task_count"
+        )
 
-    stale_revision = dict(
-        base,
-        review_revision="authenticated-receipt-current-tree-repair-v7",
+    for stale_revision in (
+        "authenticated-receipt-current-tree-repair-v8",
+        "authenticated-receipt-current-tree-repair-v7",
+        "production-runtime-activation-v4",
+    ):
+        packet = dict(base, review_revision=stale_revision)
+        assert recon_mod._gate_artifact_readiness(packet)[1] == (
+            "stale_gate_review_revision"
+        )
+
+    assert recon_mod.EXPECTED_TASK_COUNT == 78
+    assert recon_mod.FINAL_GATE_REVIEW_REVISION == (
+        "authenticated-receipt-current-tree-repair-v9"
     )
-    assert recon_mod._gate_artifact_readiness(stale_revision)[1] == (
-        "stale_gate_review_revision"
+    assert recon_mod.FINAL_GATE_TASK_ID == "PTR-169"
+    assert recon_mod.FINAL_GATE_ACCEPTANCE_CRITERION == (
+        "ptr/authenticated-current-tree-gate-v5@1"
     )
 
 
@@ -1314,7 +1337,7 @@ def test_main_closeout_success_exit_code(
     recon_mod: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     # Report-only on a ready board returns 0 without writing outputs.
-    paths_ready = _write_fixture(tmp_path, task_count=77)
+    paths_ready = _write_fixture(tmp_path, task_count=78)
     code = recon_mod.main(
         [
             "--repo-root",
