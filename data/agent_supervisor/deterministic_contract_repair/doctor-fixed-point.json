@@ -1,0 +1,56 @@
+{
+  "bound": 8,
+  "disposition_interface": "DeterministicRepairDisposition@1",
+  "evidence_id": "dcr/doctor-fixed-point@1",
+  "interface": "DoctorFixedPoint@1",
+  "observations": [
+    {
+      "capability_available": true,
+      "interface": "DoctorFixedPoint@1",
+      "model_invocation_count": 0,
+      "progress_key": "key:dcr053-fixed",
+      "provider_invocation_count": 0,
+      "receipt_root": "receipt:dcr053-fixed",
+      "repairable": false,
+      "residual_finding_ids": [],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-doctor/runtime-fixed-point-observation@1",
+      "state_hash": "state:dcr053-fixed",
+      "transition_measure": 0
+    }
+  ],
+  "provider_invocation_count": 0,
+  "result": {
+    "automatic_fallback": false,
+    "bound": 8,
+    "claims_completion": true,
+    "content_id": "baguqeerapqjmd4rmljsplbc463fktuvrs2izl2bsqoxzcz5oiubkilgd4qba",
+    "disposition": "proved_valid",
+    "disposition_interface": "DeterministicRepairDisposition@1",
+    "explanation": "Doctor reached a residual-free proved fixed point",
+    "interface": "DoctorFixedPoint@1",
+    "iteration": 1,
+    "may_call_model": false,
+    "model_invocation_count": 0,
+    "provider_invocation_count": 0,
+    "reason_codes": [
+      "proved_valid",
+      "fixed_point_reached"
+    ],
+    "receipt_roots": [
+      "receipt:dcr053-fixed"
+    ],
+    "repeated_keys": [],
+    "residual_finding_ids": [],
+    "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-doctor/runtime-fixed-point@1",
+    "state_hashes": [
+      "state:dcr053-fixed"
+    ],
+    "terminal": true,
+    "transition_measures": [
+      0
+    ]
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/doctor-fixed-point-catalog@1",
+  "version": 1
+}
