@@ -36,7 +36,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G000 Proof-backed cross-repository test reuse
 
-- Status: reopened
+- Status: verified_complete
 - Parent:
 - Depends on:
 - Fib priority: 1
@@ -276,7 +276,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G120 Authenticated pass-receipt and real-ZK authority repair
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G010, PTR-G040, PTR-G050
 - Fib priority: 1
@@ -296,7 +296,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G130 Reachable zero-configuration runtime integration
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G020, PTR-G030, PTR-G060, PTR-G080, PTR-G090, PTR-G120
 - Fib priority: 2
@@ -316,7 +316,7 @@ PTR-G000  Proof-backed cross-repository test reuse
 
 ## PTR-G140 Current-tree evidence, adversarial assurance, and closeout
 
-- Status: active
+- Status: verified_complete
 - Parent: PTR-G000
 - Depends on: PTR-G070, PTR-G100, PTR-G110, PTR-G120, PTR-G130
 - Fib priority: 3
@@ -333,3 +333,12 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Refinement: Preserve bounded actionable failures before retrying repository repairs, validate evidence rules, replay only verified material, prove the public three-repository lifecycle, then perform one final current-tree join.
 - Embedding query: task artifact evidence gitlink reachability replay merge receipt cold warm forced rerun zero false skip benchmark closeout
 - AST query: Locate task/merge receipts, submodule pins, current-tree gates, subprocess fixtures, body counters, mutation oracles and rollout metrics.
+
+## Closeout candidate metadata
+
+- Operator commit required: true
+- Fence token: 1
+- Fence revision: 3
+- Binding count: 15
+- Optional gaps: 5
+- Artifact: ObjectiveCompletionEvidenceArtifact
