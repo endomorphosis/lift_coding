@@ -1,0 +1,37 @@
+{
+  "evidence_id": "dcr/authority-projection@1",
+  "goal_completion_interface": "GoalCompletion@1",
+  "independent_board_authority": false,
+  "interface": "RepairAuthorityProjection@1",
+  "projection": {
+    "content_id": "baguqeeraxri4vqyhkjttr7r32vphnmovznjotjlxws325mvduqkkao2ibima",
+    "goal_completion_interface": "GoalCompletion@1",
+    "goal_statuses": {
+      "DCR-G090": "reopened"
+    },
+    "independent_board_authority": false,
+    "interface": "RepairAuthorityProjection@1",
+    "projection_id": "baguqeeraozviaabcnnhyhy3mhjoip4mx76frig5boan6xumhzkouh7jglpea",
+    "reason_codes": [
+      "single_authority_projection",
+      "board_not_independent",
+      "contradiction_reopened"
+    ],
+    "reopened_goal_ids": [
+      "DCR-G090"
+    ],
+    "reopened_task_ids": [
+      "DCR-081"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-authority-projection@1",
+    "task_statuses": {
+      "DCR-080": "completed",
+      "DCR-081": "reopened",
+      "DCR-083": "ready"
+    }
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-authority-projection@1",
+  "version": 1
+}

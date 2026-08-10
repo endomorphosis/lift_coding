@@ -1,0 +1,61 @@
+{
+  "evidence_id": "dcr/selection-refill@1",
+  "grants_provider_dispatch": false,
+  "interface": "DeterministicRepairSelection@1",
+  "refill": {
+    "deferred_task_ids": [
+      "DCR-X-defer"
+    ],
+    "evidence_id": "dcr/selection-refill@1",
+    "grants_provider_dispatch": false,
+    "interface": "DeterministicRepairSelection@1",
+    "ready_task_ids": [
+      "DCR-081",
+      "DCR-083"
+    ],
+    "reason_codes": [
+      "typed_disposition_refill",
+      "no_provider_retry",
+      "bounded_ready"
+    ],
+    "residual_task_ids": [
+      "DCR-X-residual"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-selection-refill-catalog@1",
+    "terminal_task_ids": [
+      "DCR-X-done"
+    ],
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-selection-refill-catalog@1",
+  "selection": {
+    "content_id": "baguqeerafwpr2q4very4nnx572ztgcxnjjloce5ozwuxliocs477mzydhzca",
+    "deferred": [
+      "DCR-X-defer"
+    ],
+    "disposition": "selected",
+    "grants_provider_dispatch": false,
+    "interface": "DeterministicRepairSelection@1",
+    "reason_codes": [
+      "typed_disposition_order",
+      "deterministic_priority",
+      "no_provider"
+    ],
+    "residual": [
+      "DCR-X-residual"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-selection-receipt@1",
+    "selectable": [
+      "DCR-081",
+      "DCR-083"
+    ],
+    "selected_task_id": "DCR-081",
+    "terminal": [
+      "DCR-X-done"
+    ]
+  },
+  "version": 1
+}
