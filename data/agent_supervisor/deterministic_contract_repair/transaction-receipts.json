@@ -1,0 +1,62 @@
+{
+  "evidence_id": "dcr/transaction@1",
+  "grants_write_authority": false,
+  "interface": "MultiRootRepairTransaction@1",
+  "promotes_user_checkout": false,
+  "receipt": {
+    "commit_order": [
+      "external/ipfs_accelerate"
+    ],
+    "content_id": "baguqeeramx62tlkscqm5fvbwyggc77ubewumzgnqzpf57csnytro3aiavjvq",
+    "disposition": "committed",
+    "grants_write_authority": false,
+    "interface": "MultiRootRepairTransaction@1",
+    "journal": {
+      "derived_artifacts": [],
+      "entries": [
+        {
+          "after_hash": "sha256:585c93666fcb046b7b264d3fa73202aa2a38254ae82a4b3ba19e873c2d5a9886",
+          "before_hash": "sha256:a06106e01c0ed5a953720fe62093cdd5cc2cbcc2144ca6a260e43a2393c81c0f",
+          "bytes_written": 10,
+          "content_id": "baguqeeraffnl2scsfbi5tnyooerpvy5monozhjddtppymzjw5lth6an2564q",
+          "created": false,
+          "fencing_token": "fence:dcr072-fixture",
+          "interface": "FencedWrite@1",
+          "lease_id": "lease:dcr072-fixture",
+          "node_id": "node:fixture",
+          "owner_root": "external/ipfs_accelerate",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/fixture.py",
+          "schema": "ipfs_accelerate_py/agent-supervisor/dcr-fenced-write@1",
+          "worktree_id": "/tmp/dcr072-tx-vc4crq_9/owners/external/ipfs_accelerate"
+        }
+      ],
+      "entry_count": 1,
+      "interface": "RollbackJournal@1",
+      "process_changes": [
+        {
+          "created": false,
+          "kind": "prior_bytes",
+          "path": "external/ipfs_accelerate/ipfs_accelerate_py/fixture.py",
+          "prior_b64": "76616c7565203d20300a"
+        }
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-rollback-journal@1",
+      "sealed": true,
+      "transaction_id": "baguqeeraaxdhm4eyp4m5ypqkykr5vggnirlsociscethlqap5ncrrqwtx2ua"
+    },
+    "promoted_paths": [],
+    "reason_codes": [],
+    "root_ids": [
+      "external/ipfs_accelerate"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-transaction-receipt@1",
+    "transaction_id": "baguqeeraaxdhm4eyp4m5ypqkykr5vggnirlsociscethlqap5ncrrqwtx2ua",
+    "worktree_ids": [
+      "worktree:external/ipfs_accelerate:/tmp/dcr072-tx-vc4crq_9/owners/external/ipfs_accelerate"
+    ]
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-transaction-receipts-catalog@1",
+  "version": 1
+}
