@@ -73,9 +73,9 @@ FINAL_GATE_TASK_ID: Final = "PTR-169"
 FINAL_GATE_ACCEPTANCE_CRITERION: Final = (
     "ptr/authenticated-current-tree-gate-v5@1"
 )
-EXPECTED_TASK_COUNT: Final = 77
+EXPECTED_TASK_COUNT: Final = 78
 FINAL_GATE_REVIEW_REVISION: Final = (
-    "authenticated-receipt-current-tree-repair-v8"
+    "authenticated-receipt-current-tree-repair-v9"
 )
 ROOT_ACCEPTANCE_CRITERION: Final = (
     "ptr/cross-repository-current-tree-gate@1"
