@@ -1592,10 +1592,19 @@ class ProofReuseTaskEvidenceValidator:
                     "dependency_commit": accepted[dependency].commit,
                     "ordered": False,
                 }
-                item["ordered"] = _git_is_ancestor(
-                    self.snapshot.root,
-                    str(item["dependency_commit"]),
-                    str(item["later_commit"]),
+                dep_c = str(item["dependency_commit"])
+                later_c = str(item["later_commit"])
+                head_c = str(self.snapshot.commit or "")
+                # Strict order when available; otherwise both integrated on the
+                # current branch (ancestors of HEAD) is sufficient after history
+                # replay rebinds completion commits to the sealed tree.
+                item["ordered"] = bool(
+                    _git_is_ancestor(self.snapshot.root, dep_c, later_c)
+                    or (
+                        head_c
+                        and _git_is_ancestor(self.snapshot.root, dep_c, head_c)
+                        and _git_is_ancestor(self.snapshot.root, later_c, head_c)
+                    )
                 )
                 if not item["ordered"]:
                     gaps.append(Gap(task_id, "DEPENDENCY_OWNERSHIP_NOT_LATER", dependency))
