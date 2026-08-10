@@ -1,0 +1,222 @@
+{
+  "evidence_id": "dcr/repair-shadow-report@1",
+  "interface": "RepairShadowReport@1",
+  "provider_calls": 0,
+  "published_completions": 0,
+  "result": {
+    "abstentions": [
+      "shadow:abstain:finding:residual-review-authority-pin",
+      "shadow:abstain:finding:residual-unsupported-profile-g",
+      "shadow:safety:mut:malformed-envelope",
+      "shadow:safety:mut:wrong-status",
+      "shadow:safety:mut:wrong-id"
+    ],
+    "comparisons": [
+      {
+        "comparison": "match",
+        "explainable": true,
+        "proposal_id": "shadow:propose:finding:conformance-adversarial-kill-score",
+        "replayable": true,
+        "truth_label": "repaired"
+      },
+      {
+        "comparison": "match",
+        "explainable": true,
+        "proposal_id": "shadow:propose:finding:conformance-desktop-mediation",
+        "replayable": true,
+        "truth_label": "repaired"
+      },
+      {
+        "comparison": "match",
+        "explainable": true,
+        "proposal_id": "shadow:propose:finding:conformance-live-three-service",
+        "replayable": true,
+        "truth_label": "repaired"
+      },
+      {
+        "comparison": "abstain",
+        "explainable": true,
+        "proposal_id": "shadow:abstain:finding:residual-review-authority-pin",
+        "replayable": true,
+        "truth_label": "residual"
+      },
+      {
+        "comparison": "abstain",
+        "explainable": true,
+        "proposal_id": "shadow:abstain:finding:residual-unsupported-profile-g",
+        "replayable": true,
+        "truth_label": "residual"
+      },
+      {
+        "comparison": "abstain",
+        "explainable": true,
+        "proposal_id": "shadow:safety:mut:malformed-envelope",
+        "replayable": true,
+        "truth_label": "unknown"
+      },
+      {
+        "comparison": "abstain",
+        "explainable": true,
+        "proposal_id": "shadow:safety:mut:wrong-status",
+        "replayable": true,
+        "truth_label": "unknown"
+      },
+      {
+        "comparison": "abstain",
+        "explainable": true,
+        "proposal_id": "shadow:safety:mut:wrong-id",
+        "replayable": true,
+        "truth_label": "unknown"
+      }
+    ],
+    "content_id": "sha256:fbb73b03770d0616a39e72c073536ec301782585dbf41bb5ebf5927c8f3d9075",
+    "evidence_id": "dcr/repair-shadow-report@1",
+    "findings_summary": {
+      "proposal_count": 8,
+      "repaired": 3,
+      "residual": 2,
+      "superseded": 13
+    },
+    "forest_root": "sha256:2a9cfc8a07b1cb90ca6d100d3b28eded65e7beff5407df7bf7f27cfeec231a3e",
+    "interface": "RepairShadowReport@1",
+    "metrics": {
+      "abstention_count": 5,
+      "conflicts": 0,
+      "explainable_replayable": 8,
+      "false_positive_proposals": 0,
+      "model_calls": 0,
+      "proposal_count": 8,
+      "provider_calls": 0,
+      "published_completions": 0,
+      "source_mutations": 0
+    },
+    "mode": "report_only",
+    "passed": true,
+    "projected_completed": false,
+    "proposals": [
+      {
+        "applied": false,
+        "content_id": "sha256:a04dd86aec3b0784cda60e6211bcb8c631b5933f66c000da0b3fa5e1a73a2a98",
+        "disposition": "propose",
+        "explanation": "Acknowledge repaired finding finding:conformance-adversarial-kill-score without applying source edits (report-only).",
+        "operator": "operator:report-only-ack@1",
+        "proposal_id": "shadow:propose:finding:conformance-adversarial-kill-score",
+        "published": false,
+        "replay_seed": "sha256:9f3d7a3576ccf627b550788b93ea56ea48be5a7f01d4ed73b0adeb44ebab72d7",
+        "target_key": "conformance/adversarial-kill-score"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:18b6ac3c4f0f586985ffa46ffbac6a3bf475818fd0e38880ff8e9110300dc340",
+        "disposition": "propose",
+        "explanation": "Acknowledge repaired finding finding:conformance-desktop-mediation without applying source edits (report-only).",
+        "operator": "operator:report-only-ack@1",
+        "proposal_id": "shadow:propose:finding:conformance-desktop-mediation",
+        "published": false,
+        "replay_seed": "sha256:e641df4305656c589ceaf0e7552541d858e077ec936dc6380c256a363e5d2927",
+        "target_key": "conformance/desktop-mediation"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:dfd0e155011f529f5c5d177692ac21cab3cc4fdee106680545a6642143797d03",
+        "disposition": "propose",
+        "explanation": "Acknowledge repaired finding finding:conformance-live-three-service without applying source edits (report-only).",
+        "operator": "operator:report-only-ack@1",
+        "proposal_id": "shadow:propose:finding:conformance-live-three-service",
+        "published": false,
+        "replay_seed": "sha256:143a4cc4fc0274adc5c696faa1bec3fb523e6d6cb77852bd5032618181c67fc3",
+        "target_key": "conformance/live-three-service"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:2518a7b465f984c8964b4ddcf16c4648ecd5896e65c2b4211331b6b1cc38000b",
+        "disposition": "abstain",
+        "explanation": "Abstain on review_required residual finding:residual-review-authority-pin; human review required.",
+        "operator": "operator:review-required-abstain@1",
+        "proposal_id": "shadow:abstain:finding:residual-review-authority-pin",
+        "published": false,
+        "replay_seed": "sha256:594e20bfafe2f8e616e3045223a8543a95d434c5fee469229828b6d5f356158c",
+        "target_key": "residual/review-required-authority-pin"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:782c9d8eccb9912ca34a6201ef44b0ccae9b6ed6111274f180394465a757abee",
+        "disposition": "abstain",
+        "explanation": "Abstain on unsupported residual finding:residual-unsupported-profile-g; human review required.",
+        "operator": "operator:review-required-abstain@1",
+        "proposal_id": "shadow:abstain:finding:residual-unsupported-profile-g",
+        "published": false,
+        "replay_seed": "sha256:694e28a884fa630378506875f1134a43806f46b443559c29b41024c7d64d6abc",
+        "target_key": "residual/unsupported-profile-g"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:f7017e2523b3ae66bcdf2f9dbb0c4d60e1021a84fe49589d06289b02353dcac8",
+        "disposition": "abstain",
+        "explanation": "Safety mutation mut:malformed-envelope observed as killed; no apply.",
+        "operator": "operator:safety-kill-observe@1",
+        "proposal_id": "shadow:safety:mut:malformed-envelope",
+        "published": false,
+        "replay_seed": "sha256:e3607418eaf4b8cf6322232ca1a41c4ba01afc2f5a10571d32236b569fe47538",
+        "target_key": "safety/mut:malformed-envelope"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:72edb1963e3c057dfa532aa7d0d743e4bdc838ff8f84c83ac42ce3ab6c11d0ed",
+        "disposition": "abstain",
+        "explanation": "Safety mutation mut:wrong-status observed as killed; no apply.",
+        "operator": "operator:safety-kill-observe@1",
+        "proposal_id": "shadow:safety:mut:wrong-status",
+        "published": false,
+        "replay_seed": "sha256:aa2f7da7e5fb9054765e8ed46cf585517a703d167870424c04b9313458173622",
+        "target_key": "safety/mut:wrong-status"
+      },
+      {
+        "applied": false,
+        "content_id": "sha256:b4eafc23984907b388df399216dbcf04f937910e189c2ac8588f598842cfa021",
+        "disposition": "abstain",
+        "explanation": "Safety mutation mut:wrong-id observed as killed; no apply.",
+        "operator": "operator:safety-kill-observe@1",
+        "proposal_id": "shadow:safety:mut:wrong-id",
+        "published": false,
+        "replay_seed": "sha256:ba52c3fc11ccbfc63f9661eb604366487e91ef407e793a775d4b4c32fadd3ace",
+        "target_key": "safety/mut:wrong-id"
+      }
+    ],
+    "provider_calls": 0,
+    "published_completions": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "report_only_mode",
+      "no_source_mutation",
+      "dcr_101_shadow",
+      "benchmark_safety_floors_ok",
+      "shadow_thresholds_met",
+      "shadow_passed",
+      "preview_worktrees_discarded",
+      "never_projected_completed"
+    ],
+    "runtime_model_calls": 0,
+    "runtime_root": "sha256:359e7500345d73a4c6b7a7fbfa60cdb9bab5180acb6ecd451cf752878c65d303",
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-repair-shadow-report@1",
+    "source_mutations": 0,
+    "task_id": "DCR-101",
+    "thresholds": {
+      "max_false_positive_proposals": 0,
+      "max_model_calls": 0,
+      "max_provider_calls": 0,
+      "max_source_mutations": 0,
+      "max_unpublished_as_completed": 0,
+      "min_explainable_proposals": 1
+    },
+    "thresholds_met": true,
+    "version": 1,
+    "writes_outside_runtime": 0
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-repair-shadow-report@1",
+  "source_mutations": 0,
+  "task_id": "DCR-101",
+  "version": 1
+}
