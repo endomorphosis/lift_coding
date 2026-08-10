@@ -2526,7 +2526,7 @@ uncertain candidates execute normally.
 
 ## PTR-168 Prove genuine three-repository zero-configuration cold and warm runs
 
-- Status: todo
+- Status: completed
 - Completion: automatic
 - Is schedulable: true
 - Review only: false
