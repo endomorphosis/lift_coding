@@ -686,20 +686,35 @@ def _gate_artifact_readiness(
             "final gate artifact must be produced by PTR-169",
         )
 
-    if payload.get("task_count") != expected_task_count:
+    # Live PTR-169 bundles nest task_count / review_revision on decision;
+    # hermetic fixtures may place them at the top level.  Accept either.
+    _decision_for_inventory = payload.get("decision")
+    _decision_map = (
+        _decision_for_inventory
+        if isinstance(_decision_for_inventory, Mapping)
+        else {}
+    )
+    observed_task_count = payload.get("task_count")
+    if observed_task_count is None:
+        observed_task_count = _decision_map.get("task_count")
+    observed_review_revision = payload.get("review_revision")
+    if observed_review_revision is None:
+        observed_review_revision = _decision_map.get("review_revision")
+
+    if observed_task_count != expected_task_count:
         return (
             False,
             "stale_gate_task_count",
             "final gate task inventory must be exactly "
-            f"{expected_task_count}, got {payload.get('task_count')!r}",
+            f"{expected_task_count}, got {observed_task_count!r}",
         )
-    if payload.get("review_revision") != expected_review_revision:
+    if observed_review_revision != expected_review_revision:
         return (
             False,
             "stale_gate_review_revision",
             "final gate review revision must be "
             f"{expected_review_revision!r}, got "
-            f"{payload.get('review_revision')!r}",
+            f"{observed_review_revision!r}",
         )
 
     if "decision" in payload:
