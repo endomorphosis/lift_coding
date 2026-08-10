@@ -84,18 +84,15 @@ def _seal(body: dict[str, Any], field: str) -> dict[str, Any]:
 
 
 def _load_identity() -> dict[str, Any]:
-    if IDENTITY_SNAPSHOT.is_file():
-        snap = json.loads(IDENTITY_SNAPSHOT.read_text(encoding="utf-8"))
-        identity = snap.get("identity")
-        if isinstance(identity, dict) and identity.get("git_commit_id"):
-            return dict(identity)
-    # Fallback: minimal clean identity
+    # Prefer the live clean checkout. A stale validation-receipt identity
+    # snapshot must not re-bind historic approvals to a previous tip after a
+    # tip advance (otherwise --require-ready fails with APPROVAL_TARGET_NOT_CURRENT).
     dirty = bool(_git("status", "--porcelain"))
     if dirty:
         raise SystemExit("checkout is dirty; rebind validation receipts first")
     commit = _git("rev-parse", "HEAD")
     tree = _git("rev-parse", "HEAD^{tree}")
-    return {
+    live = {
         "repository_id": "lift_coding/proof-backed-test-reuse",
         "repository_state_cid": f"git-commit:{commit}",
         "git_commit_id": commit,
@@ -106,6 +103,30 @@ def _load_identity() -> dict[str, Any]:
         "dirty_overlay_cid": "cid:dirty-overlay:none",
         "policy_cid": "policy:proof-backed-test-reuse-v1",
     }
+    if IDENTITY_SNAPSHOT.is_file():
+        try:
+            snap = json.loads(IDENTITY_SNAPSHOT.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            snap = {}
+        identity = snap.get("identity") if isinstance(snap, dict) else None
+        if isinstance(identity, dict) and identity.get("git_commit_id") == commit:
+            # Same tip: reuse snapshot pins (forest/gitlink/policy) when present.
+            merged = dict(live)
+            for key in (
+                "gitlink_state_cid",
+                "repository_forest_cid",
+                "policy_cid",
+                "capability_cid",
+                "verifying_key_cid",
+                "circuit_cid",
+                "dirty_overlay_cid",
+            ):
+                if identity.get(key):
+                    merged[key] = identity[key]
+            if "dirty" in identity:
+                merged["dirty"] = bool(identity["dirty"])
+            return merged
+    return live
 
 
 def _task_cids() -> dict[str, str]:
