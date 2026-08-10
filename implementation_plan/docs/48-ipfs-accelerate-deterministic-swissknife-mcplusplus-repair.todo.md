@@ -1529,7 +1529,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-080 Wire real Planner, Doctor, logic, and repair services into the live daemon
 
-- Status: todo
+- Status: completed
 - Completion: manual
 - Is schedulable: true
 - Review only: false
