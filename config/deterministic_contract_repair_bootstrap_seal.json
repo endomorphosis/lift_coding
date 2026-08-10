@@ -240,11 +240,11 @@
     ]
   },
   "baseline": {
-    "baseline_id": "sha256:f986df5df6cf722b01b7da4ec79a052311da745b1cfa4624b65ac5cbf0ff88c8",
+    "baseline_id": "sha256:1a504de233bd6d24594f63d581e2c63536a730889f39d25252a1031cb6d5b35c",
     "forest_id": "sha256:8bc22db6ff0ae016e8f18df8a3c0d0f7840e4c56018529353db972b0d5174166",
-    "inventory_id": "sha256:fdc3210cc341e58c5f8486ec6eae95fca63ca5e97bdfc297aa7e1958717298f7",
+    "inventory_id": "sha256:4b0381f7bb6aa73bc3bf24334d33953d8ad2f90bd2e87a6d1fce2979f03bf680",
     "valid": true,
-    "validator_report_id": "sha256:4759fba2281989c61b5e0fb1e918bdaade2570d15668c317340098c5a6ba5322"
+    "validator_report_id": "sha256:9bf37242a2ad4e4e490b71723f821788a50691f0779e1c1d69a4c231e4b7179c"
   },
   "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
   "forest": {
@@ -432,7 +432,7 @@
       },
       {
         "path": "config/deterministic_contract_repair_bootstrap_validation.json",
-        "sha256": "2434a20a1faf5eac0c6d35b72421c077ad3f262dabcefcadd7cb8df8cfc161c9"
+        "sha256": "bc48f11e6b54657ed15b1cff78e8744647138ceda63312d8d153adb9ed0a0769"
       },
       {
         "path": "config/deterministic_contract_repair_roots.json",
@@ -480,8 +480,8 @@
       }
     ],
     "forest_id": "sha256:8bc22db6ff0ae016e8f18df8a3c0d0f7840e4c56018529353db972b0d5174166",
-    "inventory_id": "sha256:fdc3210cc341e58c5f8486ec6eae95fca63ca5e97bdfc297aa7e1958717298f7"
+    "inventory_id": "sha256:4b0381f7bb6aa73bc3bf24334d33953d8ad2f90bd2e87a6d1fce2979f03bf680"
   },
   "schema": "ipfs_accelerate_py/agent-supervisor/configured-board-bootstrap-seal@2",
-  "seal_id": "sha256:6a95388aa03847e4718aabdac6f0f9314e3e6fd04522ccd3673f86f328a6a351"
+  "seal_id": "sha256:9b114a7f3d2a1fc294cec299ede23212c29da037e0709a2b7b49d445928acf22"
 }
