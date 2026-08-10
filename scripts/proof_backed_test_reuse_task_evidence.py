@@ -1558,9 +1558,27 @@ class ProofReuseTaskEvidenceValidator:
                 gaps.append(Gap(task_id, "COMPLETION_RECEIPT_MISSING", "no ancestor-bound task/merge receipt"))
             candidates_validation = validations.get(task_id, [])
             valid_receipts = self._validations(task, candidates_validation, gaps)
+            outputs_present = all(
+                item.get("present") is True
+                for item in observed
+                if item.get("role") == "output"
+            )
+            # PTR-167 current-tree replay authority: when a completed task has an
+            # ancestor-bound completion receipt and every declared output is still
+            # present under the sealed gitlinks, a missing/stale validation retain
+            # is not a readiness gap.  Fresh retains remain preferred when present.
             if not valid_receipts:
-                if candidates_validation:
-                    # Retained but stale/pin-mismatched evidence is not "missing".
+                if task_id in accepted and outputs_present:
+                    # Drop validation hard-gaps emitted for superseded candidates.
+                    gaps[:] = [
+                        gap
+                        for gap in gaps
+                        if not (
+                            gap.task_id == task_id
+                            and gap.kind.startswith("VALIDATION_")
+                        )
+                    ]
+                elif candidates_validation:
                     if not any(
                         gap.task_id == task_id and gap.kind.startswith("VALIDATION_")
                         for gap in gaps
@@ -1575,6 +1593,9 @@ class ProofReuseTaskEvidenceValidator:
                 "outputs_and_targets": observed,
                 "completion_receipt": asdict(accepted[task_id]) if task_id in accepted else None,
                 "validation_receipt_sources": [item["source"] for item in valid_receipts],
+                "current_tree_output_authority": bool(
+                    task_id in accepted and outputs_present and not valid_receipts
+                ),
             })
         # Record ancestry between completed tasks only when both sides have
         # accepted receipts.  Missing receipts are not re-labeled as ownership.
