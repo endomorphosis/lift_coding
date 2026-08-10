@@ -14,10 +14,10 @@
       },
       {
         "path": "external/ipfs_accelerate",
-        "planning_revision": "75c72072e2b67af8a76b286ff71501fa9d253721",
-        "gitlink_commit": "75c72072e2b67af8a76b286ff71501fa9d253721",
-        "head_commit": "75c72072e2b67af8a76b286ff71501fa9d253721",
-        "tree": "2318db9950b47f948a66dbcfb0d097f28c9da07a",
+        "planning_revision": "fc5cc561b3567a5642b0b8a9572c842f919d5742",
+        "gitlink_commit": "fc5cc561b3567a5642b0b8a9572c842f919d5742",
+        "head_commit": "fc5cc561b3567a5642b0b8a9572c842f919d5742",
+        "tree": "9f4e40e9fb088676c41ddbd4cfcbbfbf907a4d18",
         "recursive_gitlinks": [
           {
             "path": "docs/fastmcp",
@@ -60,7 +60,7 @@
             "commit": "44752c8dd99f3fb0da23006dc4fde4a07d9c417f"
           }
         ],
-        "root_id": "sha256:ec036e0e2af98d4f5893bac7f2ad55a44bb8d11889645ded8c654b9c047dd7a6"
+        "root_id": "sha256:a0441d819ed1ed51f792c4927c812f50a2db4014029ca155a602527acd58b0e7"
       },
       {
         "path": "external/ipfs_datasets",
@@ -176,10 +176,10 @@
         "root_id": "sha256:c2b92e21d73eb7ecd57ac7e0648ef06b41ad169988d4b0061f209f6d6b7ccc2e"
       }
     ],
-    "forest_id": "sha256:f85ab51873d61ab0ed3b663ca80ec2b0b0e14731dccc2e4389688288db47346f"
+    "forest_id": "sha256:ff66fd05d0cff905165fabbb52d972f7096b44517bcef88b0c1be1b43bc65a49"
   },
   "inventory": {
-    "forest_id": "sha256:f85ab51873d61ab0ed3b663ca80ec2b0b0e14731dccc2e4389688288db47346f",
+    "forest_id": "sha256:ff66fd05d0cff905165fabbb52d972f7096b44517bcef88b0c1be1b43bc65a49",
     "controls": [
       {
         "path": "config/deterministic_contract_repair_authority.json",
@@ -187,7 +187,7 @@
       },
       {
         "path": "config/deterministic_contract_repair_bootstrap_validation.json",
-        "sha256": "e71c281019fa53fb4ce33babab3b925257e0347b6ff06f6c28272c5dc2217264"
+        "sha256": "c2e67f180ec600958cd6884610f3e5d456c7c27eeef069d2f0711e40fe1d06b7"
       },
       {
         "path": "config/deterministic_contract_repair_roots.json",
@@ -195,7 +195,7 @@
       },
       {
         "path": "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
-        "sha256": "37c8aa64635022f57901415a9ba004a22c498a912d9d37923df45a5224656883"
+        "sha256": "9fa0e63f7b2bd34dc5f401990b93faa22b876616c5c27eb3f6ca17775bbaf169"
       },
       {
         "path": "data/agent_supervisor/deterministic_contract_repair/capabilities.json",
@@ -223,7 +223,7 @@
       },
       {
         "path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md",
-        "sha256": "20bd4a9e2edbf911e4a082cba28e2f0eb76a7605ae9905f5ef6687540f94a754"
+        "sha256": "ff9e9882c5e8ab695508f4a934149f8146bfd6f3b0c3d8f8e520d49dbccec898"
       },
       {
         "path": "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
@@ -234,14 +234,14 @@
         "sha256": "5fc045d74585ddcec3334ba8c9225fe61af8c20a7b319a6580f40c40be4a5143"
       }
     ],
-    "inventory_id": "sha256:2d178b4dc5126e6dd8b6631ff97b74544c26c85af28049140267695c7f9d3a2a"
+    "inventory_id": "sha256:c4c656207f8a95ad5b85060575ae7adeb68190adf00eea660994f67ab6d64684"
   },
   "baseline": {
-    "forest_id": "sha256:f85ab51873d61ab0ed3b663ca80ec2b0b0e14731dccc2e4389688288db47346f",
-    "inventory_id": "sha256:2d178b4dc5126e6dd8b6631ff97b74544c26c85af28049140267695c7f9d3a2a",
-    "validator_report_id": "sha256:cfb5605c5d34cd31cb09bb7646a67e2421db8f956ef4c4f77038c9d88e1869e7",
+    "forest_id": "sha256:ff66fd05d0cff905165fabbb52d972f7096b44517bcef88b0c1be1b43bc65a49",
+    "inventory_id": "sha256:c4c656207f8a95ad5b85060575ae7adeb68190adf00eea660994f67ab6d64684",
+    "validator_report_id": "sha256:f33ddd8f07364d793558c81774f4cf5d7201482986f3fca5310000dfce4f7543",
     "valid": true,
-    "baseline_id": "sha256:89c393e2867e3c89d034551fe59bf0c5b31c26644d125dd1b83692b71c8a6235"
+    "baseline_id": "sha256:c7799d29f3abd18484d27b45a77f944dce87dd492ce0490f820fecbb3e9a864c"
   },
   "authoring_board": {
     "schema": "ipfs_accelerate_py/agent-supervisor/ordered-provider-authoring-board@1",
@@ -370,7 +370,7 @@
       },
       {
         "task_id": "DCR-051",
-        "authoring_task_id": "sha256:15e7d3e9ecb2d8b7c8db928d8876f366c848856065bf32214d1451357000e39b"
+        "authoring_task_id": "sha256:16c7a222f52b7fbc97591b976e993ae31d2512bb9b2b793ebc42b37d6513c8d1"
       },
       {
         "task_id": "DCR-052",
@@ -481,7 +481,7 @@
         "authoring_task_id": "sha256:ac5fa64a61cd431937884473ebf2e0cc1999c0812955878193ffb2a3115a5b30"
       }
     ],
-    "authoring_board_id": "sha256:f878ecfa3429f532af5a409dea416f67485ded1deb796c4ec67d0d98f344af80"
+    "authoring_board_id": "sha256:47396d95a48d061bb37292e8a0138637da3151788ea2a9fd850d0b44731747f3"
   },
-  "seal_id": "sha256:25bcfab04f2b0deee9fb2e7b1d815d0533a544cd090aff667d7912861e904de9"
+  "seal_id": "sha256:e2c86c928672fac2839b0f04a1812edf7ef1b597248fc8a45d8cee39897f4acd"
 }
