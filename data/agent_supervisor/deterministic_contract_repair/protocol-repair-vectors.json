@@ -1,0 +1,234 @@
+{
+  "artifact": {
+    "artifact_digest": "sha256:1f249e2196591f04d3772ef357f37abe0078c2ecd121ce5f724691ea91e409ff",
+    "evidence_id": "dcr/protocol-repair@1",
+    "grants_proof_authority": false,
+    "grants_write_authority": false,
+    "interface": "ProtocolRepairOperators@1",
+    "operator_kinds": [
+      "repair_jsonrpc_schema",
+      "repair_request_adapter",
+      "repair_error_envelope",
+      "repair_profile_binding"
+    ],
+    "profiles": [
+      "mcp++/mcp-idl",
+      "mcp++/cid-envelope",
+      "mcp++/ucan",
+      "mcp++/deontic-policy",
+      "mcp++/p2p-transport",
+      "mcp++/event-dag"
+    ],
+    "proposal_only": true,
+    "roles": [
+      "jsonrpc_validation",
+      "schema_binding",
+      "canonical_cid",
+      "profile_negotiation"
+    ],
+    "schema": "ipfs_accelerate_py/agent-supervisor/protocol-operator-vectors@1",
+    "semantic_authority": false,
+    "version": 1
+  },
+  "cases": [
+    {
+      "disposition": "accepted",
+      "local_verified": false,
+      "name": "jsonrpc_ok",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "ok"
+      ],
+      "receipt_identity": "baguqeera65qltolby3cszcmds4du2vtc332vapv2dmc7rkcf4heypgtn6sla",
+      "role": "jsonrpc_validation",
+      "verdict": "pass"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "http_error",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "http_error"
+      ],
+      "receipt_identity": "baguqeerajkj7uu3s63vuiuck6erp6l3gja5wd4wcp6bfgqintmj4y5acngha",
+      "role": "jsonrpc_validation",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "wrong_version",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "wrong_jsonrpc_version"
+      ],
+      "receipt_identity": "baguqeeraipw3pylyzlzrwctnk2qlpqlase77zhpgrlvrk5d7u6gi2p5vvhba",
+      "role": "jsonrpc_validation",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "wrong_id",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "wrong_id"
+      ],
+      "receipt_identity": "baguqeeraksuajzfo44h3mlnfkq3pzzbkbpwzbcsbhwcp7gueeha3ieu24tya",
+      "role": "jsonrpc_validation",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "both_result_and_error",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "both_result_and_error"
+      ],
+      "receipt_identity": "baguqeerai746fqypfxmwutxrph6se3g4ljuipppoetaqx3x267bakkc3lzmq",
+      "role": "jsonrpc_validation",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "abstain",
+      "local_verified": false,
+      "name": "bad_schema",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "missing_reviewed_schema_binding",
+        "invented_schema"
+      ],
+      "receipt_identity": "baguqeeraar435zqo3mvpq6awai7pcugsy7j3jzxzdfanym4ekla3pjzj5kvq",
+      "role": "schema_binding",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "preview_ready",
+      "local_verified": false,
+      "name": "schema_ok",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "preview_ready",
+        "schema_binding_restored",
+        "ok"
+      ],
+      "receipt_identity": "baguqeerav7fxict4w6nl7orrb2jkah3iumcgu6les3elaqmvtcoqdlvewura",
+      "role": "schema_binding",
+      "verdict": "pass"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "bad_cid_server_verified",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "server_verified_untrusted",
+        "local_cid_mismatch",
+        "bad_cid"
+      ],
+      "receipt_identity": "baguqeera2sew3tbtixxqgjc3xfy5arvke7yxnfwdk63orxiqq7s4wvtzgcsa",
+      "role": "canonical_cid",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "accepted",
+      "local_verified": true,
+      "name": "cid_ok",
+      "negotiated_profiles": [],
+      "reason_codes": [
+        "ok"
+      ],
+      "receipt_identity": "baguqeerapfhkfvkaqwn6dq77mbinfidba5esvtribwgxmkdt2ll672mpgkfa",
+      "role": "canonical_cid",
+      "verdict": "pass"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "unsupported_profile",
+      "negotiated_profiles": [
+        "mcp++/cid-envelope"
+      ],
+      "reason_codes": [
+        "unsupported_profile",
+        "profile_downgrade"
+      ],
+      "receipt_identity": "baguqeeramc3q2y7k4hkc3bcg7sjvnsukxlla5zjajmfsohrj3ttnb4enmxoq",
+      "role": "profile_negotiation",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "denied",
+      "local_verified": false,
+      "name": "policy_outage",
+      "negotiated_profiles": [
+        "mcp++/deontic-policy"
+      ],
+      "reason_codes": [
+        "policy_outage",
+        "policy_allow_from_outage"
+      ],
+      "receipt_identity": "baguqeerak3nwde6qpjfevntucfficmgcma6hejdhmy6gwurfsixcfacq2yta",
+      "role": "profile_negotiation",
+      "verdict": "deny"
+    },
+    {
+      "disposition": "rejected",
+      "local_verified": false,
+      "name": "transport_mismatch",
+      "negotiated_profiles": [
+        "mcp++/p2p-transport"
+      ],
+      "reason_codes": [
+        "transport_mismatch"
+      ],
+      "receipt_identity": "baguqeera3cxnuofbvyyjtsihef4lxhystcj35ojqwbkqcgeetmlu34zg2t3a",
+      "role": "profile_negotiation",
+      "verdict": "reject"
+    },
+    {
+      "disposition": "accepted",
+      "local_verified": false,
+      "name": "profile_ok",
+      "negotiated_profiles": [
+        "mcp++/mcp-idl",
+        "mcp++/cid-envelope",
+        "mcp++/event-dag"
+      ],
+      "reason_codes": [
+        "ok"
+      ],
+      "receipt_identity": "baguqeeraxpn5k5foe6zlrgegoam7oj6j2mp36gjrhzznsf5qnyx3pzpncegq",
+      "role": "profile_negotiation",
+      "verdict": "pass"
+    }
+  ],
+  "content_id": "baguqeerazqq6stz64afbqln6qjhde7tj2ijpck42vocnuiylmgh6yynencaq",
+  "evidence_id": "dcr/protocol-repair@1",
+  "interface": "ProtocolRepairOperators@1",
+  "negative_coverage": [
+    "bad_cid",
+    "bad_receipt",
+    "bad_schema",
+    "http_error",
+    "policy_outage",
+    "transport_mismatch",
+    "unsupported_profile",
+    "wrong_id",
+    "wrong_version"
+  ],
+  "policy_outage_denies": true,
+  "profiles": [
+    "mcp++/mcp-idl",
+    "mcp++/cid-envelope",
+    "mcp++/ucan",
+    "mcp++/deontic-policy",
+    "mcp++/p2p-transport",
+    "mcp++/event-dag"
+  ],
+  "schema": "ipfs_accelerate_py/agent-supervisor/protocol-operator-vectors@1",
+  "server_verified_trusted": false,
+  "vector_digest": "sha256:cc21e94f3ee00a182dbe824e327e69d212f12b9aab84da230b618fec61a46881"
+}

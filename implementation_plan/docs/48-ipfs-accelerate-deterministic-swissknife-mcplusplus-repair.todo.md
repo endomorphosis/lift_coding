@@ -849,7 +849,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-042 Implement fail-closed JSON-RPC, schema, CID, and profile operators
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -917,7 +917,7 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-044 Implement transport, lifecycle, and browser mediation operators
 
-- Status: todo
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
