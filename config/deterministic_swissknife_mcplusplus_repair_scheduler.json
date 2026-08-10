@@ -14,7 +14,7 @@
     "mcplusplus_submodule_path": "Mcp-Plus-Plus",
     "mcplusplus_planning_revision": "dc3164653a48d059ae9812078359daeafb451c07",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "231a24f83061b91a9359ddcdfbf3ab3f1b87b910",
+    "ipfs_accelerate_planning_revision": "0ad48b65456536626d43601167262d61a8e36814",
     "ipfs_datasets_submodule_path": "external/ipfs_datasets",
     "ipfs_datasets_planning_revision": "c330a601364e3fb760db34f98195b506a63f1f26",
     "ipfs_kit_submodule_path": "external/ipfs_kit",
@@ -76,11 +76,12 @@
       "DCR-073",
       "DCR-074",
       "DCR-080",
-      "DCR-082"
+      "DCR-081",
+      "DCR-082",
+      "DCR-083"
     ],
     "ready_task_ids": [
-      "DCR-081",
-      "DCR-083"
+      "DCR-084"
     ],
     "blocked_task_ids": [],
     "terminal_task_id": "DCR-104",
@@ -156,16 +157,16 @@
       "index": 2,
       "name": "dcr-lane-2",
       "strict_shard_remainder": 2,
-      "initial_task_ids": [],
+      "initial_task_ids": [
+        "DCR-084"
+      ],
       "initial_focus": "logic-proof"
     },
     {
       "index": 3,
       "name": "dcr-lane-3",
       "strict_shard_remainder": 3,
-      "initial_task_ids": [
-        "DCR-081"
-      ],
+      "initial_task_ids": [],
       "initial_focus": "repair-operators"
     },
     {
@@ -193,9 +194,7 @@
       "index": 7,
       "name": "dcr-lane-7",
       "strict_shard_remainder": 7,
-      "initial_task_ids": [
-        "DCR-083"
-      ],
+      "initial_task_ids": [],
       "initial_focus": "release-drift"
     }
   ],
