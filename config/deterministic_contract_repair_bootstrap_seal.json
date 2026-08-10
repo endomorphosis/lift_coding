@@ -240,15 +240,15 @@
     ]
   },
   "baseline": {
-    "baseline_id": "sha256:96d6d950f3d95afbf1cd06eacae96fe95a12224a737b650a90caa013ce5e71cb",
-    "forest_id": "sha256:53106c295faa302aa860621dd44838d5bca274d0a8fb488f99c8ea5b9b2e5270",
-    "inventory_id": "sha256:850c7ea380eb1514a91c9443656dc0e47258d8f2c4d9b930c2b281a2c37a15fd",
+    "baseline_id": "sha256:d7f84fc4e521c9fd6cf229688b7353e8ef34c8ca7bb90cae00a8341fc032d482",
+    "forest_id": "sha256:4aa76e293434816e07303913ebfc8464deac35269b209fed2fe5afc7b3165eb7",
+    "inventory_id": "sha256:38611382c50676b97a702f0dba3ed73ccd77d31cba385de178120f3bc5b63441",
     "valid": true,
-    "validator_report_id": "sha256:1bd490804e44157d348fac73cb920a061af60c46e3a1ddc1e2adfce5d001310f"
+    "validator_report_id": "sha256:1ab907bd026b7e23259253e0183961ee05927e2ab29da1b4b28ab5ad7cf1c42d"
   },
   "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
   "forest": {
-    "forest_id": "sha256:53106c295faa302aa860621dd44838d5bca274d0a8fb488f99c8ea5b9b2e5270",
+    "forest_id": "sha256:4aa76e293434816e07303913ebfc8464deac35269b209fed2fe5afc7b3165eb7",
     "roots": [
       {
         "gitlink_commit": "6965f89f066769f3b3ac7b5f753b1a0044562570",
@@ -260,10 +260,10 @@
         "tree": "fd328606da5dae3314a87365987f5052180eb807"
       },
       {
-        "gitlink_commit": "5458255b9d0123c24848ca286b2cf549e26e0b87",
-        "head_commit": "5458255b9d0123c24848ca286b2cf549e26e0b87",
+        "gitlink_commit": "079d3a1ac12607489857e62c814f3a5b1eba7e96",
+        "head_commit": "079d3a1ac12607489857e62c814f3a5b1eba7e96",
         "path": "external/ipfs_accelerate",
-        "planning_revision": "5458255b9d0123c24848ca286b2cf549e26e0b87",
+        "planning_revision": "079d3a1ac12607489857e62c814f3a5b1eba7e96",
         "recursive_gitlinks": [
           {
             "commit": "1d932cc778a24cc0bf46fc4baad8306d4fed9c4b",
@@ -306,8 +306,8 @@
             "path": "test/huggingface_transformers"
           }
         ],
-        "root_id": "sha256:d16fcf71f98372ce463c744aae9d0ae6d8b26045950794c2a022e66132d09b28",
-        "tree": "6482fcda7dff0b9fe033858efba52daf49cec0f5"
+        "root_id": "sha256:19c05b6094db894a03ed5429ed23fc6d0b9a24c54e15638523f7b4d1e8527bac",
+        "tree": "bb663c81758ff070be10219cc90930b59167485a"
       },
       {
         "gitlink_commit": "c330a601364e3fb760db34f98195b506a63f1f26",
@@ -432,7 +432,7 @@
       },
       {
         "path": "config/deterministic_contract_repair_bootstrap_validation.json",
-        "sha256": "cabcd49eb6b7d323d17c4ff205bbb53db5010ff62a11ff97bc90af6088382605"
+        "sha256": "59e673803d004479483c5b202ce150574c45af27da322f30a51d477c9b9e127e"
       },
       {
         "path": "config/deterministic_contract_repair_roots.json",
@@ -440,7 +440,7 @@
       },
       {
         "path": "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
-        "sha256": "44a475f019df8ea8205de2c0a9e4350db59215bdb512edaa1047a952a184134f"
+        "sha256": "5b9cd93924bebb611777d97b3a82d772e1913c5394b4729a07e03bb9a6b5edcb"
       },
       {
         "path": "data/agent_supervisor/deterministic_contract_repair/capabilities.json",
@@ -468,7 +468,7 @@
       },
       {
         "path": "implementation_plan/docs/48-ipfs-accelerate-deterministic-swissknife-mcplusplus-repair.todo.md",
-        "sha256": "43c293a9c393839efe57341c198cdf6f62aee8916e6273cdb5a1bf6a72267cbf"
+        "sha256": "dbd494368781616a6fb86f43a0355d16ee981e77274a9d1ee59fda0ffad75135"
       },
       {
         "path": "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
@@ -479,9 +479,9 @@
         "sha256": "5fc045d74585ddcec3334ba8c9225fe61af8c20a7b319a6580f40c40be4a5143"
       }
     ],
-    "forest_id": "sha256:53106c295faa302aa860621dd44838d5bca274d0a8fb488f99c8ea5b9b2e5270",
-    "inventory_id": "sha256:850c7ea380eb1514a91c9443656dc0e47258d8f2c4d9b930c2b281a2c37a15fd"
+    "forest_id": "sha256:4aa76e293434816e07303913ebfc8464deac35269b209fed2fe5afc7b3165eb7",
+    "inventory_id": "sha256:38611382c50676b97a702f0dba3ed73ccd77d31cba385de178120f3bc5b63441"
   },
   "schema": "ipfs_accelerate_py/agent-supervisor/configured-board-bootstrap-seal@2",
-  "seal_id": "sha256:01d2c1d588edcf2c7cd80079ad488a3d5e71f87044b17308e2f0ce945c037fb8"
+  "seal_id": "sha256:dc9525b9bdf9d1376c25b5b21a57a26919a35f38034a39fec45d408caa566b54"
 }

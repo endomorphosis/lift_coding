@@ -14,7 +14,7 @@
     "mcplusplus_submodule_path": "Mcp-Plus-Plus",
     "mcplusplus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "5458255b9d0123c24848ca286b2cf549e26e0b87",
+    "ipfs_accelerate_planning_revision": "079d3a1ac12607489857e62c814f3a5b1eba7e96",
     "ipfs_datasets_submodule_path": "external/ipfs_datasets",
     "ipfs_datasets_planning_revision": "c330a601364e3fb760db34f98195b506a63f1f26",
     "ipfs_kit_submodule_path": "external/ipfs_kit",
@@ -87,10 +87,11 @@
       "DCR-094",
       "DCR-100",
       "DCR-101",
-      "DCR-102"
+      "DCR-102",
+      "DCR-103"
     ],
     "ready_task_ids": [
-      "DCR-103"
+      "DCR-104"
     ],
     "blocked_task_ids": [],
     "terminal_task_id": "DCR-104",
@@ -159,9 +160,7 @@
       "index": 1,
       "name": "dcr-lane-1",
       "strict_shard_remainder": 1,
-      "initial_task_ids": [
-        "DCR-103"
-      ],
+      "initial_task_ids": [],
       "initial_focus": "evidence-catalog"
     },
     {
@@ -196,7 +195,9 @@
       "index": 6,
       "name": "dcr-lane-6",
       "strict_shard_remainder": 6,
-      "initial_task_ids": [],
+      "initial_task_ids": [
+        "DCR-104"
+      ],
       "initial_focus": "contract-catalog"
     },
     {
