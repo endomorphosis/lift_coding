@@ -1,0 +1,472 @@
+{
+  "artifact_schema": "ipfs_accelerate_py/agent-supervisor/dcr-repair-resource-schedule@1",
+  "evidence_id": "dcr/resource-schedule@1",
+  "evidence_subset": {
+    "budgets": {
+      "assignment_count": 4,
+      "base_fence_epoch": 7,
+      "default_node_duration_ms": 60000,
+      "default_retry_budget": 1,
+      "default_timeout_ms": 120000,
+      "heartbeat_interval_ms": 30000,
+      "lease_duration_ms": 300000,
+      "makespan_ms": 27000,
+      "max_lanes": 2,
+      "max_root_writers": 1,
+      "max_solver_concurrency": 1,
+      "max_validation_concurrency": 1,
+      "max_wave_width": 2,
+      "wave_count": 2
+    },
+    "conflict_graph": [
+      {
+        "evidence": [
+          "external/ipfs_accelerate/pkg/a.py",
+          "root:ipfs-accelerate"
+        ],
+        "kinds": [
+          "path",
+          "root"
+        ],
+        "left_node_id": "node:a",
+        "right_node_id": "node:c"
+      }
+    ],
+    "critical_path": [
+      "node:a",
+      "node:c"
+    ],
+    "critical_path_duration_ms": 25000,
+    "evidence_id": "dcr/resource-schedule@1",
+    "grants_write_authority": false,
+    "lane_shard": [
+      {
+        "lane": 0,
+        "node_id": "node:a",
+        "shard": "shard:w0:l0",
+        "wave": 0
+      },
+      {
+        "lane": 1,
+        "node_id": "node:b",
+        "shard": "shard:w0:l1",
+        "wave": 0
+      },
+      {
+        "lane": 0,
+        "node_id": "node:c",
+        "shard": "shard:w1:l0",
+        "wave": 1
+      },
+      {
+        "lane": 1,
+        "node_id": "node:d",
+        "shard": "shard:w1:l1",
+        "wave": 1
+      }
+    ],
+    "lease_fence": [
+      {
+        "fence_epoch": 7,
+        "fencing_token": "fence:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq",
+        "lease_id": "lease:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq",
+        "node_id": "node:a"
+      },
+      {
+        "fence_epoch": 7,
+        "fencing_token": "fence:baguqeeranovd5girgv4c2ob562r2ywzga7bqvtfxp6zhu5z7vbqmhkls3zra",
+        "lease_id": "lease:baguqeeranovd5girgv4c2ob562r2ywzga7bqvtfxp6zhu5z7vbqmhkls3zra",
+        "node_id": "node:b"
+      },
+      {
+        "fence_epoch": 8,
+        "fencing_token": "fence:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+        "lease_id": "lease:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+        "node_id": "node:c"
+      },
+      {
+        "fence_epoch": 8,
+        "fencing_token": "",
+        "lease_id": "",
+        "node_id": "node:d"
+      }
+    ],
+    "plan_id": "plan:dcr064-fixture",
+    "policy_id": "policy:dcr064-fixture",
+    "runtime_model_calls": 0,
+    "schedule_cid": "baguqeerawhnfubgashc5w4yiy2kjutod65sy6qlwo7ymapxr7lvfpiskrtkq"
+  },
+  "grants_write_authority": false,
+  "interfaces": {
+    "path_lease": "PathLease@1",
+    "repair_resource_schedule": "RepairResourceSchedule@1"
+  },
+  "plan": {
+    "nodes": [
+      {
+        "depends_on": [],
+        "duration_ms": 10000,
+        "kind": "operator_apply",
+        "node_id": "node:a",
+        "owner_root": "ipfs-accelerate",
+        "resource_class": "cpu-proof-solver",
+        "validation_ref": "validation:a",
+        "write_set": [
+          "external/ipfs_accelerate/pkg/a.py"
+        ]
+      },
+      {
+        "depends_on": [],
+        "duration_ms": 12000,
+        "kind": "operator_apply",
+        "node_id": "node:b",
+        "owner_root": "ipfs-datasets",
+        "resource_class": "cpu-medium",
+        "validation_ref": "validation:b",
+        "write_set": [
+          "external/ipfs_datasets/pkg/b.py"
+        ]
+      },
+      {
+        "depends_on": [
+          "node:a"
+        ],
+        "duration_ms": 15000,
+        "kind": "operator_apply",
+        "node_id": "node:c",
+        "owner_root": "ipfs-accelerate",
+        "resource_class": "cpu-proof-solver",
+        "validation_ref": "validation:c",
+        "write_set": [
+          "external/ipfs_accelerate/pkg/a.py",
+          "external/ipfs_accelerate/pkg/c.py"
+        ]
+      },
+      {
+        "depends_on": [
+          "node:b"
+        ],
+        "duration_ms": 8000,
+        "kind": "validation",
+        "node_id": "node:d",
+        "owner_root": "ipfs-datasets",
+        "resource_class": "cpu-validation",
+        "validation_ref": "validation:d",
+        "write_set": []
+      }
+    ],
+    "plan_id": "plan:dcr064-fixture"
+  },
+  "policy": {
+    "base_fence_epoch": 7,
+    "default_node_duration_ms": 60000,
+    "default_retry_budget": 1,
+    "default_timeout_ms": 120000,
+    "evidence_id": "dcr/resource-schedule@1",
+    "heartbeat_interval_ms": 30000,
+    "lease_duration_ms": 300000,
+    "max_lanes": 2,
+    "max_root_writers": 1,
+    "max_solver_concurrency": 1,
+    "max_validation_concurrency": 1,
+    "max_wave_width": 2,
+    "policy_id": "policy:dcr064-fixture",
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-resource-schedule-policy@1",
+    "serialize_endpoints": true,
+    "serialize_shared_roots": true,
+    "serialize_solver_resources": true,
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schedule": {
+    "assignments": [
+      {
+        "depends_on": [],
+        "duration_ms": 10000,
+        "endpoints": [
+          "validation:a"
+        ],
+        "evidence_id": "dcr/resource-schedule@1",
+        "exclusive_group": "",
+        "fence_epoch": 7,
+        "fencing_token": "fence:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq",
+        "lane": 0,
+        "lease_id": "lease:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq",
+        "node_id": "node:a",
+        "owner_root": "ipfs-accelerate",
+        "resource_class": "cpu-proof-solver",
+        "retry_budget": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/dcr-scheduled-node@1",
+        "shard_id": "shard:w0:l0",
+        "start_offset_ms": 0,
+        "timeout_ms": 120000,
+        "validation_resource": "validation:a",
+        "version": 1,
+        "wave": 0,
+        "write_set": [
+          "external/ipfs_accelerate/pkg/a.py"
+        ]
+      },
+      {
+        "depends_on": [],
+        "duration_ms": 12000,
+        "endpoints": [
+          "validation:b"
+        ],
+        "evidence_id": "dcr/resource-schedule@1",
+        "exclusive_group": "",
+        "fence_epoch": 7,
+        "fencing_token": "fence:baguqeeranovd5girgv4c2ob562r2ywzga7bqvtfxp6zhu5z7vbqmhkls3zra",
+        "lane": 1,
+        "lease_id": "lease:baguqeeranovd5girgv4c2ob562r2ywzga7bqvtfxp6zhu5z7vbqmhkls3zra",
+        "node_id": "node:b",
+        "owner_root": "ipfs-datasets",
+        "resource_class": "cpu-medium",
+        "retry_budget": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/dcr-scheduled-node@1",
+        "shard_id": "shard:w0:l1",
+        "start_offset_ms": 0,
+        "timeout_ms": 120000,
+        "validation_resource": "validation:b",
+        "version": 1,
+        "wave": 0,
+        "write_set": [
+          "external/ipfs_datasets/pkg/b.py"
+        ]
+      },
+      {
+        "depends_on": [
+          "node:a"
+        ],
+        "duration_ms": 15000,
+        "endpoints": [
+          "validation:c"
+        ],
+        "evidence_id": "dcr/resource-schedule@1",
+        "exclusive_group": "",
+        "fence_epoch": 8,
+        "fencing_token": "fence:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+        "lane": 0,
+        "lease_id": "lease:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+        "node_id": "node:c",
+        "owner_root": "ipfs-accelerate",
+        "resource_class": "cpu-proof-solver",
+        "retry_budget": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/dcr-scheduled-node@1",
+        "shard_id": "shard:w1:l0",
+        "start_offset_ms": 12000,
+        "timeout_ms": 120000,
+        "validation_resource": "validation:c",
+        "version": 1,
+        "wave": 1,
+        "write_set": [
+          "external/ipfs_accelerate/pkg/a.py",
+          "external/ipfs_accelerate/pkg/c.py"
+        ]
+      },
+      {
+        "depends_on": [
+          "node:b"
+        ],
+        "duration_ms": 8000,
+        "endpoints": [
+          "validation:d"
+        ],
+        "evidence_id": "dcr/resource-schedule@1",
+        "exclusive_group": "",
+        "fence_epoch": 8,
+        "fencing_token": "",
+        "lane": 1,
+        "lease_id": "",
+        "node_id": "node:d",
+        "owner_root": "ipfs-datasets",
+        "resource_class": "cpu-validation",
+        "retry_budget": 1,
+        "schema": "ipfs_accelerate_py/agent-supervisor/dcr-scheduled-node@1",
+        "shard_id": "shard:w1:l1",
+        "start_offset_ms": 12000,
+        "timeout_ms": 120000,
+        "validation_resource": "validation:d",
+        "version": 1,
+        "wave": 1,
+        "write_set": []
+      }
+    ],
+    "budgets": {
+      "assignment_count": 4,
+      "base_fence_epoch": 7,
+      "default_node_duration_ms": 60000,
+      "default_retry_budget": 1,
+      "default_timeout_ms": 120000,
+      "heartbeat_interval_ms": 30000,
+      "lease_duration_ms": 300000,
+      "makespan_ms": 27000,
+      "max_lanes": 2,
+      "max_root_writers": 1,
+      "max_solver_concurrency": 1,
+      "max_validation_concurrency": 1,
+      "max_wave_width": 2,
+      "wave_count": 2
+    },
+    "conflict_graph": [
+      {
+        "evidence": [
+          "external/ipfs_accelerate/pkg/a.py",
+          "root:ipfs-accelerate"
+        ],
+        "kinds": [
+          "path",
+          "root"
+        ],
+        "left_node_id": "node:a",
+        "right_node_id": "node:c"
+      }
+    ],
+    "critical_path": [
+      "node:a",
+      "node:c"
+    ],
+    "critical_path_duration_ms": 25000,
+    "disposition": "scheduled",
+    "evidence_id": "dcr/resource-schedule@1",
+    "grants_write_authority": false,
+    "interface": "RepairResourceSchedule@1",
+    "path_lease_plan": {
+      "conflict_pairs": [
+        [
+          "lease:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+          "lease:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq"
+        ]
+      ],
+      "evidence_id": "dcr/resource-schedule@1",
+      "leases": [
+        {
+          "evidence_id": "dcr/resource-schedule@1",
+          "fence_epoch": 8,
+          "fencing_token": "fence:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+          "heartbeat_interval_ms": 30000,
+          "interface": "PathLease@1",
+          "lease_duration_ms": 300000,
+          "lease_id": "lease:baguqeera4dnvru5f47n7ljmmqwgu52l52vfcjnd2ax2uw5h2aqnf7bcrawqa",
+          "lease_scope": "plan:dcr064-fixture:node:c",
+          "node_ids": [
+            "node:c"
+          ],
+          "owner_root": "ipfs-accelerate",
+          "permitted_write_paths": [
+            "external/ipfs_accelerate/pkg/a.py",
+            "external/ipfs_accelerate/pkg/c.py"
+          ],
+          "schema": "ipfs_accelerate_py/agent-supervisor/dcr-path-lease@1",
+          "version": 1
+        },
+        {
+          "evidence_id": "dcr/resource-schedule@1",
+          "fence_epoch": 7,
+          "fencing_token": "fence:baguqeeranovd5girgv4c2ob562r2ywzga7bqvtfxp6zhu5z7vbqmhkls3zra",
+          "heartbeat_interval_ms": 30000,
+          "interface": "PathLease@1",
+          "lease_duration_ms": 300000,
+          "lease_id": "lease:baguqeeranovd5girgv4c2ob562r2ywzga7bqvtfxp6zhu5z7vbqmhkls3zra",
+          "lease_scope": "plan:dcr064-fixture:node:b",
+          "node_ids": [
+            "node:b"
+          ],
+          "owner_root": "ipfs-datasets",
+          "permitted_write_paths": [
+            "external/ipfs_datasets/pkg/b.py"
+          ],
+          "schema": "ipfs_accelerate_py/agent-supervisor/dcr-path-lease@1",
+          "version": 1
+        },
+        {
+          "evidence_id": "dcr/resource-schedule@1",
+          "fence_epoch": 7,
+          "fencing_token": "fence:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq",
+          "heartbeat_interval_ms": 30000,
+          "interface": "PathLease@1",
+          "lease_duration_ms": 300000,
+          "lease_id": "lease:baguqeeray7jrz7w6i6yjkaaueuheycuxu3og5eqx3hwpfnpvlpelekeqn4eq",
+          "lease_scope": "plan:dcr064-fixture:node:a",
+          "node_ids": [
+            "node:a"
+          ],
+          "owner_root": "ipfs-accelerate",
+          "permitted_write_paths": [
+            "external/ipfs_accelerate/pkg/a.py"
+          ],
+          "schema": "ipfs_accelerate_py/agent-supervisor/dcr-path-lease@1",
+          "version": 1
+        }
+      ],
+      "plan_id": "plan:dcr064-fixture",
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-path-lease-plan@1",
+      "version": 1
+    },
+    "plan_id": "plan:dcr064-fixture",
+    "policy_id": "policy:dcr064-fixture",
+    "reason_codes": [
+      "scheduled"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-repair-resource-schedule@1",
+    "topological_order": [
+      "node:a",
+      "node:b",
+      "node:c",
+      "node:d"
+    ],
+    "version": 1,
+    "waves": [
+      {
+        "duration_ms": 12000,
+        "node_ids": [
+          "node:a",
+          "node:b"
+        ],
+        "resource_usage": {
+          "cpu-medium": 1,
+          "cpu-proof-solver": 1,
+          "root:ipfs-accelerate": 1,
+          "root:ipfs-datasets": 1,
+          "solver_slots": 1
+        },
+        "start_offset_ms": 0,
+        "wave": 0,
+        "width": 2
+      },
+      {
+        "duration_ms": 15000,
+        "node_ids": [
+          "node:c",
+          "node:d"
+        ],
+        "resource_usage": {
+          "cpu-proof-solver": 1,
+          "cpu-validation": 1,
+          "root:ipfs-accelerate": 1,
+          "solver_slots": 1,
+          "validation_slots": 1
+        },
+        "start_offset_ms": 12000,
+        "wave": 1,
+        "width": 2
+      }
+    ]
+  },
+  "simulation": {
+    "completed": [
+      "node:a",
+      "node:b",
+      "node:c",
+      "node:d"
+    ],
+    "concurrent_write_violations": [],
+    "makespan_ms": 27000,
+    "ok": true,
+    "reason": "completed",
+    "steps": 2,
+    "terminated": true
+  },
+  "version": 1
+}
