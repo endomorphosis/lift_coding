@@ -62,10 +62,11 @@
       "DCR-046",
       "DCR-047",
       "DCR-050",
-      "DCR-051"
+      "DCR-051",
+      "DCR-052"
     ],
     "ready_task_ids": [
-      "DCR-052"
+      "DCR-053"
     ],
     "blocked_task_ids": [],
     "terminal_task_id": "DCR-104",
@@ -141,9 +142,7 @@
       "index": 2,
       "name": "dcr-lane-2",
       "strict_shard_remainder": 2,
-      "initial_task_ids": [
-        "DCR-052"
-      ],
+      "initial_task_ids": [],
       "initial_focus": "logic-proof"
     },
     {
@@ -178,7 +177,9 @@
       "index": 7,
       "name": "dcr-lane-7",
       "strict_shard_remainder": 7,
-      "initial_task_ids": [],
+      "initial_task_ids": [
+        "DCR-053"
+      ],
       "initial_focus": "release-drift"
     }
   ],

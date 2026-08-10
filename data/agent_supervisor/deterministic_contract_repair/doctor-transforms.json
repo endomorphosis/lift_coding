@@ -1,0 +1,183 @@
+{
+  "evidence_id": "dcr/doctor-plan@1",
+  "impact": {
+    "disposition": "proposed",
+    "evidence_id": "dcr/doctor-plan@1",
+    "grants_transform_authority": false,
+    "impact": {
+      "candidate_delta_id": "baguqeeraqgo4xcohu3bqgwjvbdl6o3eg7zmubyd6xestf2oa24y3tzxzbafq",
+      "circular_ownership_refs": [],
+      "completeness": "complete",
+      "consumers": [],
+      "contract_version": 1,
+      "current_ast_cid": "ast:dcr052",
+      "current_graph_cid": "graph:dcr052",
+      "current_index_cid": "index:dcr052",
+      "delta_id": "baguqeeraqgo4xcohu3bqgwjvbdl6o3eg7zmubyd6xestf2oa24y3tzxzbafq",
+      "duplicate_consumer_ids": [],
+      "evidence_refs": [
+        "delta:baguqeeraqgo4xcohu3bqgwjvbdl6o3eg7zmubyd6xestf2oa24y3tzxzbafq",
+        "overlay:overlay:dcr052"
+      ],
+      "forbidden_path_hits": [],
+      "frontier_kinds": [],
+      "impact_closure_id": "doctor-impact:baguqeeradompsavz3nurcgtufsxcroqekjkoq4mxoh6mibv622tflqvcefza",
+      "interface": "DeterministicDoctorImpactAnalyzer@1",
+      "missed_consumer_ids": [],
+      "model_invocation_count": 0,
+      "mutation_admissible": true,
+      "no_model_invariant": true,
+      "open_required_frontiers": [],
+      "overlay_id": "overlay:dcr052",
+      "overlay_patch_cid": "",
+      "producer_id": "deterministic-doctor-impact@1",
+      "proof_refs": [],
+      "reason_codes": [
+        "candidate_delta_rebuilt",
+        "complete_closure",
+        "current_cids"
+      ],
+      "roots": {
+        "ast_root_id": "ast:dcr052",
+        "cache_id": "cache:dcr052",
+        "contract_version": 1,
+        "corpus_id": "corpus:dcr052",
+        "environment_id": "environment:dcr052",
+        "file_root_id": "file-root:dcr052",
+        "forest_id": "forest:dcr052",
+        "graph_id": "graph:dcr052",
+        "index_id": "index:dcr052",
+        "kernel_id": "kernel:dcr052",
+        "lease_id": "lease:dcr052",
+        "model_id": "model:dcr052",
+        "operator_registry_id": "operators:dcr052",
+        "overlay_id": "overlay:dcr052",
+        "policy_id": "policy:dcr052",
+        "repository_id": "repository:dcr052",
+        "sandbox_id": "sandbox:dcr052",
+        "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-doctor/authority-roots@1",
+        "solver_id": "solver:dcr052",
+        "toolchain_id": "toolchain:dcr052",
+        "translator_id": "translator:dcr052",
+        "tree_id": "tree:dcr052"
+      },
+      "sccs": [],
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-doctor/impact-closure@1",
+      "second_order_consumer_ids": [],
+      "stale_consumer_ids": [],
+      "underlying_impact_closure_id": ""
+    },
+    "proposal": {
+      "applicability_proof_cid": "baguqeera4xzr2lmvfdser63y4v54yct5ohexjmm2zw3zarrkyyaingxwfzwq",
+      "arguments": {
+        "edge_key": "route_to_dispatcher",
+        "epoch_cid": "baguqeeraigoyvw5bhiwocdlzmfgsoyj4cjro3iivypqlxaz3sax3qdvwwxiq",
+        "finding_enum": "expected_only"
+      },
+      "before_hashes": {},
+      "disposition": "proposed",
+      "evidence_id": "dcr/doctor-plan@1",
+      "expected_after_hashes": {},
+      "expected_proof_transition": "proof:route_to_dispatcher->admitted",
+      "finding_cid": "baguqeeravfypatz3yuksjfrklr7xppid5nbsy3rlzl3c72qrpg3whzl6gj7q",
+      "grants_transform_authority": false,
+      "grants_write_authority": false,
+      "impact_cone": [
+        "route_to_dispatcher"
+      ],
+      "interface": "DoctorTransformProposal@1",
+      "operator": {
+        "catalogue": "doctor",
+        "grants_write_authority": false,
+        "interface": "RepairOperator@1",
+        "kind": "add_constructor_route",
+        "operator_id": "doctor-operator:add_constructor_route@1",
+        "registry_id": "baguqeerai67ozeajka4p45kpacdrxv2nfmk4jpb3ixxdxuuafakn5vpp422a",
+        "schema": "ipfs_accelerate_py/agent-supervisor/repair-operator-ref@1"
+      },
+      "proposal_id": "proposal:baguqeeravfypatz3yuksjfr:add_constructor_route",
+      "reason_codes": [
+        "registered_operator_selected",
+        "add_constructor_route",
+        "body_free",
+        "authority_not_granted"
+      ],
+      "rollback_ref": "rollback:baguqeeravfypatz3yuksjfr",
+      "runtime_model_calls": 0,
+      "schema": "ipfs_accelerate_py/agent-supervisor/doctor-transform-proposal@1",
+      "semantic_authority": false,
+      "version": 1,
+      "write_paths": []
+    },
+    "reason_codes": [
+      "impact_bounded",
+      "registered_operator_only",
+      "authority_not_granted",
+      "runtime_model_calls_0"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/doctor-transform-receipt@1",
+    "version": 1
+  },
+  "interface": "DoctorTransformProposal@1",
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/doctor-transforms-catalog@1",
+  "synthesis": {
+    "disposition": "proposed",
+    "evidence_id": "dcr/doctor-plan@1",
+    "grants_transform_authority": false,
+    "impact": null,
+    "proposal": {
+      "applicability_proof_cid": "baguqeera4xzr2lmvfdser63y4v54yct5ohexjmm2zw3zarrkyyaingxwfzwq",
+      "arguments": {
+        "edge_key": "route_to_dispatcher",
+        "epoch_cid": "baguqeeraigoyvw5bhiwocdlzmfgsoyj4cjro3iivypqlxaz3sax3qdvwwxiq",
+        "finding_enum": "expected_only"
+      },
+      "before_hashes": {},
+      "disposition": "proposed",
+      "evidence_id": "dcr/doctor-plan@1",
+      "expected_after_hashes": {},
+      "expected_proof_transition": "proof:route_to_dispatcher->admitted",
+      "finding_cid": "baguqeeravfypatz3yuksjfrklr7xppid5nbsy3rlzl3c72qrpg3whzl6gj7q",
+      "grants_transform_authority": false,
+      "grants_write_authority": false,
+      "impact_cone": [
+        "route_to_dispatcher"
+      ],
+      "interface": "DoctorTransformProposal@1",
+      "operator": {
+        "catalogue": "doctor",
+        "grants_write_authority": false,
+        "interface": "RepairOperator@1",
+        "kind": "add_constructor_route",
+        "operator_id": "doctor-operator:add_constructor_route@1",
+        "registry_id": "baguqeerai67ozeajka4p45kpacdrxv2nfmk4jpb3ixxdxuuafakn5vpp422a",
+        "schema": "ipfs_accelerate_py/agent-supervisor/repair-operator-ref@1"
+      },
+      "proposal_id": "proposal:baguqeeravfypatz3yuksjfr:add_constructor_route",
+      "reason_codes": [
+        "registered_operator_selected",
+        "add_constructor_route",
+        "body_free",
+        "authority_not_granted"
+      ],
+      "rollback_ref": "rollback:baguqeeravfypatz3yuksjfr",
+      "runtime_model_calls": 0,
+      "schema": "ipfs_accelerate_py/agent-supervisor/doctor-transform-proposal@1",
+      "semantic_authority": false,
+      "version": 1,
+      "write_paths": []
+    },
+    "reason_codes": [
+      "registered_operator_selected",
+      "add_constructor_route",
+      "body_free",
+      "authority_not_granted"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/doctor-transform-receipt@1",
+    "version": 1
+  },
+  "version": 1
+}
