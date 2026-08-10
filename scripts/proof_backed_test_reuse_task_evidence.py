@@ -39,6 +39,10 @@ _TASK = re.compile(r"^##\s+(PTR-\d+)\s+(.+?)\s*$")
 _FIELD = re.compile(r"^-\s+([^:]+):\s*(.*?)\s*$")
 _PATH = re.compile(r"(?<![A-Za-z0-9_./-])((?:external|implementation_plan|config|scripts|tests|test)/[A-Za-z0-9_@%+=:,./-]+)")
 _COMPLETED = frozenset({"complete", "completed", "done", "validated"})
+# Historic tasks close via local operator approvals, not managed-merge alone.
+# Queue rows for these ids must not co-exist with accepted approvals (accelerate
+# collector treats that as COMPLETION_PROVENANCE_CONTRADICTORY).
+HISTORIC_APPROVAL_TASKS = frozenset({"PTR-000", "PTR-001", "PTR-011", "PTR-041"})
 
 
 def canonical_json(value: object) -> bytes:
@@ -1319,6 +1323,92 @@ def _authoritative_flat_validation(
     return value, None
 
 
+def _operator_approval_receipts(
+    state_root: Path,
+    tasks: Mapping[str, Task],
+    snapshot: GitSnapshot,
+) -> tuple[dict[str, list[CompletedTaskArtifactReceipt]], list[Gap]]:
+    """Convert sealed local operator approvals into completion receipts.
+
+    Only historic tasks that still lack queue/train authority may use this path.
+    Approvals must be accepted, tip-bound (integration target == HEAD for
+    reviewed-integration kinds; planning seal binds integrated commit as
+    ancestor), and task-CID matched.  This is local closeout input authority,
+    not production skip-key ceremony.
+    """
+
+    receipts: dict[str, list[CompletedTaskArtifactReceipt]] = {}
+    gaps: list[Gap] = []
+    approval_dir = state_root / "projection" / "completion" / "operator_approvals"
+    accepted_path = approval_dir / "accepted.json"
+    accepted = _read_json(accepted_path)
+    if not isinstance(accepted, Mapping) or accepted.get("status") != "accepted":
+        return receipts, gaps
+    approvals = accepted.get("approvals")
+    if not isinstance(approvals, Mapping):
+        return receipts, gaps
+    head = str(snapshot.commit or "")
+    for task_id, row in approvals.items():
+        if not isinstance(task_id, str) or task_id not in HISTORIC_APPROVAL_TASKS:
+            continue
+        task = tasks.get(task_id)
+        if task is None or not isinstance(row, Mapping):
+            continue
+        att = _read_json(approval_dir / f"{task_id}.attestation.json")
+        if not isinstance(att, Mapping) or att.get("accepted") is not True:
+            gaps.append(Gap(task_id, "APPROVAL_ATTESTATION_MISSING", f"{task_id}.attestation.json"))
+            continue
+        if row.get("approved") is not True:
+            gaps.append(Gap(task_id, "APPROVAL_NOT_APPROVED", task_id))
+            continue
+        if str(row.get("task_cid") or "") != task.task_cid:
+            gaps.append(Gap(task_id, "APPROVAL_TASK_CID_MISMATCH", task.task_cid))
+            continue
+        if str(att.get("task_cid") or "") not in {"", task.task_cid}:
+            gaps.append(Gap(task_id, "APPROVAL_ATTESTATION_TASK_CID_MISMATCH", task.task_cid))
+            continue
+        kind = str(row.get("kind") or "")
+        integrated = str(row.get("integrated_commit_id") or "")
+        target = str(row.get("integration_target_commit_id") or "")
+        receipt_cid = str(
+            row.get("approval_cid")
+            or row.get("policy_approval_cid")
+            or row.get("operator_approval_cid")
+            or ""
+        )
+        if not receipt_cid or not integrated:
+            gaps.append(Gap(task_id, "APPROVAL_MALFORMED", kind or "missing_fields"))
+            continue
+        # Reviewed integration and planning seals emitted by the local tool bind
+        # both integrated and target to the acceptance HEAD; require target==HEAD
+        # when present so tip rebinds force re-approval.
+        if target and target != head:
+            gaps.append(Gap(task_id, "APPROVAL_TARGET_NOT_CURRENT", f"{target}!={head}"))
+            continue
+        if kind in {"operator_planning_seal", "planning_seal"}:
+            if not snapshot.is_ancestor(integrated) and integrated != head:
+                gaps.append(Gap(task_id, "APPROVAL_COMMIT_NOT_ANCESTOR", integrated))
+                continue
+        elif kind in {
+            "operator_reviewed_integration",
+            "reviewed_integration",
+            "retrospective_review",
+        }:
+            if not snapshot.is_ancestor(integrated) and integrated != head:
+                gaps.append(Gap(task_id, "APPROVAL_COMMIT_NOT_ANCESTOR", integrated))
+                continue
+        else:
+            gaps.append(Gap(task_id, "APPROVAL_KIND_UNSUPPORTED", kind))
+            continue
+        source = f"v9/projection/completion/operator_approvals/{task_id}.approval.json"
+        receipts.setdefault(task_id, []).append(
+            CompletedTaskArtifactReceipt(
+                task_id, integrated, receipt_cid, source, task.task_cid,
+            )
+        )
+    return receipts, gaps
+
+
 def _authoritative_evidence(
     roots: Mapping[str, Path], tasks: Mapping[str, Task], snapshot: GitSnapshot,
 ) -> tuple[
@@ -1446,6 +1536,30 @@ def _authoritative_evidence(
             diagnostics.append(gap)
         else:
             gaps.append(gap)
+    # Historic operator approvals fill completion only when queue/train did not.
+    # Never combine both for the same task (accelerate treats that as
+    # COMPLETION_PROVENANCE_CONTRADICTORY).
+    current_root = roots.get("v9")
+    if current_root is not None and current_root.is_dir():
+        approval_receipts, approval_gaps = _operator_approval_receipts(
+            current_root, tasks, snapshot,
+        )
+        for task_id, values in approval_receipts.items():
+            if task_id in receipts:
+                diagnostics.append(
+                    Gap(
+                        task_id,
+                        "APPROVAL_SUPERSEDED_BY_QUEUE",
+                        "queue/train already authorizes this task",
+                    )
+                )
+                continue
+            receipts.setdefault(task_id, []).extend(values)
+        for gap in approval_gaps:
+            if gap.task_id in receipts:
+                diagnostics.append(gap)
+            else:
+                gaps.append(gap)
     # Recovery-only provenance is always diagnostic and never readiness-gating.
     # Once a task gains later valid authority the same diagnostic is reported as
     # superseded rather than a permanent readiness gap.
