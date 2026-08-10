@@ -2494,7 +2494,7 @@ uncertain candidates execute normally.
 
 ## PTR-167 Replay verified historical work onto reachable exact gitlinks
 
-- Status: todo
+- Status: done
 - Completion: automatic
 - Is schedulable: true
 - Review only: false

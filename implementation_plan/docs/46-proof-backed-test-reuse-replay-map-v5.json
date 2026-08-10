@@ -1,5 +1,5 @@
 {
-  "generated_at_ms": 1786315870430,
+  "generated_at_ms": 1786321318987,
   "immutable_66_task_records": {
     "historical_pins": {
       "external/ipfs_accelerate": "ded3932433f4d08e6eb8eddc1595bfb1c0ddabf0",
@@ -14,7 +14,7 @@
     ]
   },
   "interface": "VerifiedTaskReplayPlan@1",
-  "map_cid": "baguqeeramzvkc4pxpemnsjprv54u37f77l7stga2o3yv42dwx2pglfc4pnpq",
+  "map_cid": "baguqeeravteuvejn6rtpl4xe4n6jyyuf7bkdqp7f3g7lja6f7azly6efpk7a",
   "plan": {
     "blob_mappings": [
       {
@@ -1426,7 +1426,7 @@
       "implementation_plan/docs/46-proof-backed-test-reuse-closeout-summary-2026-08-04.json",
       "implementation_plan/docs/46-proof-backed-test-reuse-closeout-report-only-2026-08-04.json"
     ],
-    "plan_cid": "baguqeeraw3cg6vdtlzefeig3xyi7lco4itcoxsrte7emqvfiqtezjtvy2d7a",
+    "plan_cid": "baguqeeratkrtaklhll2o6wi4n2gh2up3mpxbwz2gmb7weah6jxjbjaku6jwa",
     "policy": {
       "approvals_required_for_publication": false,
       "static_mapping_only": true,
@@ -1437,7 +1437,7 @@
     },
     "receipts_observed": [
       {
-        "commit": "5635a7d201f862c1c7e58913c657e034fbf03a29",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraerpp6lxobckvtub32bs3z3bnkxdhhrg7p5uxdddlv5cscb6wza5a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786226223155532510-45136-72f2dd0e4219.json",
@@ -1445,7 +1445,7 @@
         "task_id": "PTR-165"
       },
       {
-        "commit": "69444cdf5d05f75a1687a6660ed079887fbc5ad7",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera6yv2kkmedurryjpozxdym72xt4to3r5vibrmxya74ffn525fkk4a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786237305341461443-150573-01037de8cdd7.json",
@@ -1453,7 +1453,15 @@
         "task_id": "PTR-165"
       },
       {
-        "commit": "a1cad453a6004494612c571102f73aae8b657938",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerafv6h7spaxju5jhvfskelzj4ctoeq5tz7gt3zcy5raj7j6vll32nq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786304333842366116-1646283-22a367fe57ed.json",
+        "task_cid": "baguqeerafv6h7spaxju5jhvfskelzj4ctoeq5tz7gt3zcy5raj7j6vll32nq",
+        "task_id": "PTR-164"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeradsiwaxxye2owirrnevstd2hrxrwbrm2i334oe6shpq6qdwjqn5dq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/1786306782961521022-555204-55fb651cdebd.json",
@@ -1461,7 +1469,143 @@
         "task_id": "PTR-166"
       },
       {
-        "commit": "42c42c79fe3d0e1d26c80a01d41d8e189ce54b3c",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeera4mpq7gx4x2hx3suve6cazbeofha2lbjzwkjj2ski2jo2p7xgueqa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-000-19221264.json",
+        "task_cid": "baguqeera4mpq7gx4x2hx3suve6cazbeofha2lbjzwkjj2ski2jo2p7xgueqa",
+        "task_id": "PTR-000"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeraxpouyn6fgz5bqx5v3zgtzdjkhz63e2gzgu4u5rjmb4fd5efbfmwq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-001-19221264.json",
+        "task_cid": "baguqeeraxpouyn6fgz5bqx5v3zgtzdjkhz63e2gzgu4u5rjmb4fd5efbfmwq",
+        "task_id": "PTR-001"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeraazk7hrfvbqkuihoykysnnse5admxhmthxw6gepbxpu3t25sf7feq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-002-19197565.json",
+        "task_cid": "baguqeeraazk7hrfvbqkuihoykysnnse5admxhmthxw6gepbxpu3t25sf7feq",
+        "task_id": "PTR-002"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerabrgz2u25rcgqrxqx6yy7bec3ozdqadesjujkeutkdwkld5p77spa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-003-19197612.json",
+        "task_cid": "baguqeerabrgz2u25rcgqrxqx6yy7bec3ozdqadesjujkeutkdwkld5p77spa",
+        "task_id": "PTR-003"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeera7fcpqlcit4w4fdbahhazkvergh27q3tmdtfdhyrpunayeiqi5oca",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-010-19197658.json",
+        "task_cid": "baguqeera7fcpqlcit4w4fdbahhazkvergh27q3tmdtfdhyrpunayeiqi5oca",
+        "task_id": "PTR-010"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeraawbodpcp7vi6lcf5rikvbymhosx57nv4eeyu43vsxlsngskfwa5q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-020-19197705.json",
+        "task_cid": "baguqeeraawbodpcp7vi6lcf5rikvbymhosx57nv4eeyu43vsxlsngskfwa5q",
+        "task_id": "PTR-020"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeraxs5bzokfy2j2giv42zieo2sbsntu4sh75yjsnrsze74qhgc3pcdq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-021-19197751.json",
+        "task_cid": "baguqeeraxs5bzokfy2j2giv42zieo2sbsntu4sh75yjsnrsze74qhgc3pcdq",
+        "task_id": "PTR-021"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeera3difos4qcj7nnqzd6fy4buh23h4tgj37mvj4zbdmyhw56kmurrva",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-022-19197796.json",
+        "task_cid": "baguqeera3difos4qcj7nnqzd6fy4buh23h4tgj37mvj4zbdmyhw56kmurrva",
+        "task_id": "PTR-022"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerazw4kdwbzamf3akcqtudi26k24hx34pbbndjttdm7po6rzitggvyq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-030-19197842.json",
+        "task_cid": "baguqeerazw4kdwbzamf3akcqtudi26k24hx34pbbndjttdm7po6rzitggvyq",
+        "task_id": "PTR-030"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerazfdb3w5x4m3gn2tec4m2zkz3yjehpaknx7ckds7gq7ayhu6vvaya",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-040-19197890.json",
+        "task_cid": "baguqeerazfdb3w5x4m3gn2tec4m2zkz3yjehpaknx7ckds7gq7ayhu6vvaya",
+        "task_id": "PTR-040"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerau274v3oh3n2h34h3hvw3kcvfnnq2bbbsjwtr6fsk77fb6ahp7jba",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-050-19197937.json",
+        "task_cid": "baguqeerau274v3oh3n2h34h3hvw3kcvfnnq2bbbsjwtr6fsk77fb6ahp7jba",
+        "task_id": "PTR-050"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeraxd7xvpajrokkzic5xebvwszo7ff37of3kwtry6lwdjug6ieo3aia",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-150-19197984.json",
+        "task_cid": "baguqeeraxd7xvpajrokkzic5xebvwszo7ff37of3kwtry6lwdjug6ieo3aia",
+        "task_id": "PTR-150"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerayesyrlrqwq4q6og2ee3tn2fk3xouovstvpvgeq3fnrzqketbwrga",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-151-19198037.json",
+        "task_cid": "baguqeerayesyrlrqwq4q6og2ee3tn2fk3xouovstvpvgeq3fnrzqketbwrga",
+        "task_id": "PTR-151"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeralhjzyhdnz6kbl3u6ks3eeorsai3sf6iaapo7y6i6kjf2a7to2b3q",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-152-19221266.json",
+        "task_cid": "baguqeeralhjzyhdnz6kbl3u6ks3eeorsai3sf6iaapo7y6i6kjf2a7to2b3q",
+        "task_id": "PTR-152"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeeraw6zip2k3ibrzsm6r6o2ymohwh2nzccoibnacpilylbxmugvqj4ma",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-153-19198126.json",
+        "task_cid": "baguqeeraw6zip2k3ibrzsm6r6o2ymohwh2nzccoibnacpilylbxmugvqj4ma",
+        "task_id": "PTR-153"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerakxhhq45bn5sfpxumpzenosfkms3m273okr4i7hvosgkbq343etnq",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-163-1786319042.json",
+        "task_cid": "baguqeerakxhhq45bn5sfpxumpzenosfkms3m273okr4i7hvosgkbq343etnq",
+        "task_id": "PTR-163"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
+        "receipt_cid": "baguqeerah3rdjn5g772shubj6spygs5vcgiioue37haq6e6fouhbhlmnmxfa",
+        "schema": "CompletedTaskArtifactReceipt@1",
+        "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v9/merge-queue/completed/manual-ptr-171-1786319042.json",
+        "task_cid": "baguqeerah3rdjn5g772shubj6spygs5vcgiioue37haq6e6fouhbhlmnmxfa",
+        "task_id": "PTR-171"
+      },
+      {
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera4lgzvz5v3im5uuxmtw2m5kmiuvnhjptcbyafe6aybhjgjg5zh63a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785549810138399634-4047133-b512ca9091d9.json",
@@ -1469,7 +1613,7 @@
         "task_id": "PTR-031"
       },
       {
-        "commit": "135f290a37488b5381d9e1ce564ed108b4e18efe",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera7c36i7zqr34zs2vbwk3emuug3youhpny5iek76qj72wqsixcu23a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785550309440953773-833705-92455ddf5121.json",
@@ -1477,7 +1621,7 @@
         "task_id": "PTR-043"
       },
       {
-        "commit": "4baa79df91c4ea25f8b116a77ddd1e9131978ab8",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraj33kusuujmfphhfpsfmfvfm7zistyhvtbh4atjknjxgran2smxsq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785550501052416233-609117-6b1581bc158c.json",
@@ -1485,7 +1629,7 @@
         "task_id": "PTR-080"
       },
       {
-        "commit": "82f78a8f47c560adcc1ddd77348ae71526b85caf",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeramnyhgse4ghcx4a7u3c632zfodr25j6bdtvwelvmeofryjp4mgkoa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785552320713485453-1151506-393b26f403a9.json",
@@ -1493,7 +1637,7 @@
         "task_id": "PTR-051"
       },
       {
-        "commit": "bc353397965fabb200c18118d3393ce9be7467a8",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera66woajx3janojidcyztlvfdmfebq6dcxboprtbhpewtngsuuxu5a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785552741848657322-1151506-a54ebe4398b0.json",
@@ -1501,7 +1645,7 @@
         "task_id": "PTR-012"
       },
       {
-        "commit": "3715da1487cda18947383ce3b2ce7013e575ccaa",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerafvlfrxziulksxlvl2dsbchflzq2ky6mdwu2i5psuptqkhwqnaprq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785573632738336248-727581-bf78e596f328.json",
@@ -1509,7 +1653,7 @@
         "task_id": "PTR-042"
       },
       {
-        "commit": "67884b7fdb2e1434f27fc4d2a0d6ed11f715da35",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeran7lzwxvx3e7cez24pvwgq3rnvuybrrg6mdj2flmcfl4ufun7y5ba",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785574030856393397-728026-e783dcc35841.json",
@@ -1517,7 +1661,7 @@
         "task_id": "PTR-052"
       },
       {
-        "commit": "05f41cab1d4ae092421ded18f28f05d084ce7489",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerarq5552mzvzeagsohnqigltddiegkrzcmgxkem23rpq4t3b3chabq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785575524417669708-727182-31ebb6d03ceb.json",
@@ -1525,7 +1669,7 @@
         "task_id": "PTR-053"
       },
       {
-        "commit": "91ff69409c13518cdbb52d523e9e05381eef83e7",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraa72zlkz7f75nw67j5kov3sslyqgguc3neuvverius2ggont34s7q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785576141178412769-728026-3ff528c78b95.json",
@@ -1533,7 +1677,7 @@
         "task_id": "PTR-070"
       },
       {
-        "commit": "63d1dab7e563894f69f9b2e8452b0931c13d3211",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraaogysaomney6koocwifshb2vltstfzkvbi3amjkwcqiglu43b6ha",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785576374424015125-727581-ed5102ea79f9.json",
@@ -1541,7 +1685,7 @@
         "task_id": "PTR-081"
       },
       {
-        "commit": "c2bf4efe82e4787f6477a8f997f4470a5bfd94ce",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeralszxm3igx4ce2czys3kn2zzpkwofokoafqjxboqugbrx5oxtcnna",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785577554399762267-727581-1aa95e0e2219.json",
@@ -1549,7 +1693,7 @@
         "task_id": "PTR-060"
       },
       {
-        "commit": "df731014f34c74b1119d052db1f39a58f4d62871",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeradossvwbrzckm63ixvwzlsjt4dmqgbo2bfbwa4fz3jvfzhuhgtmva",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785608401300535233-832544-ed149dff7ea4.json",
@@ -1557,7 +1701,7 @@
         "task_id": "PTR-061"
       },
       {
-        "commit": "2b3b5f8a15d66ff03021d804f1164eaec82eafd7",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeray5buplszaz45swm4a3qabytkg5a3loamtuexkx2vsszte7gjioha",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785608982629489242-833033-f4eb8b9b0542.json",
@@ -1565,7 +1709,7 @@
         "task_id": "PTR-090"
       },
       {
-        "commit": "cae17a0cb8eae0d605dc802c35fc12177113187d",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraxw5a2i24iybjwngip2grjr2232kol65n57pzvygkpcoue3nbp3ba",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785609423890479711-832544-46c71e6deaf5.json",
@@ -1573,7 +1717,7 @@
         "task_id": "PTR-091"
       },
       {
-        "commit": "da0d8282bd141a25344c9b5449021742e5650e39",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeratcimiowit4etejy2bfbpqt5juch6hoct6sxe6rukz52i235wdsxa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785609991530956022-832423-b191014c7f82.json",
@@ -1581,7 +1725,7 @@
         "task_id": "PTR-092"
       },
       {
-        "commit": "e80f66b02f10dc631190df8518c0e24259cf94e2",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerakrrt4fqgy5iypjbytojkvi4bx4zkw5s7ifmadar7cexrgvyaohaq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785611180099026117-833033-c7ceff8ee62e.json",
@@ -1589,7 +1733,7 @@
         "task_id": "PTR-093"
       },
       {
-        "commit": "dffca28f5e9cf157d3b7447d857c6c3e40ee96aa",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeras6iy5melzun4t5ehjsfhmdswhea55ehpiri3rp34dxsfv2esknyq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785611644309229049-832544-f3efcb8eb0b6.json",
@@ -1597,7 +1741,7 @@
         "task_id": "PTR-100"
       },
       {
-        "commit": "74696d803690aff6f8de884b53c0d961beb40b59",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraxp5yhskfcux53to4df2eqj6tk6uc7yozmkx54h4hsvuoi3xrzz5a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785612508228380656-832423-2badbecfa538.json",
@@ -1605,7 +1749,7 @@
         "task_id": "PTR-101"
       },
       {
-        "commit": "51709478c65aad49064a5cf9e4864f9917435df3",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerak2yzygnug3bajnqtengoaivj62hiefwfu6cahwlphjj7t6gsbubq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785613237397258757-291175-296aba0d19e5.json",
@@ -1613,7 +1757,7 @@
         "task_id": "PTR-102"
       },
       {
-        "commit": "1b3b6c4899328b64a71519f619f9d72948adda01",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerazvs7fhuo2eqvytap27fekjkw5g7tqdxushow4trbf7na752nxhyq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785718890139581138-4072794-379ba1bb0b5c.json",
@@ -1621,7 +1765,7 @@
         "task_id": "PTR-109"
       },
       {
-        "commit": "c4986d8758bbb33838dd241153c6ca66f1f2b096",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera22ulb2t6qgurfxr5x5mvgns5zviznxrfa5mupd72t25jnue5yaga",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785719808820100973-4072433-4c2720ed930b.json",
@@ -1629,7 +1773,7 @@
         "task_id": "PTR-108"
       },
       {
-        "commit": "7c737bc1b298fd0d7ff2fa5ec8d3570572a36071",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerawcxwr5ohkpe7p4ltvslke3cg3vkvsmmq4rkudne2ofwdzgzr7vsa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785719810589346857-4073256-c1ff76d15b3f.json",
@@ -1637,7 +1781,7 @@
         "task_id": "PTR-110"
       },
       {
-        "commit": "4f7ef7c81d369a258f02e29246769f2c805eeaf4",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerac5phat4skn6ytxmqidrkvbpo4t2dyjs2rqwhoiloo6a4tsxh4tla",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785721465279956770-2363045-1f2f1bd1c3b0.json",
@@ -1645,7 +1789,7 @@
         "task_id": "PTR-112"
       },
       {
-        "commit": "85934a4f71c736ea2d9b6c08db8a1ae1dac742a3",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera3ddme64vv3rpaezl4rlbiepcllcye7eq45zy54jwi3qo6nh7zxvq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785722065356725303-2362667-1a31db802aa4.json",
@@ -1653,7 +1797,7 @@
         "task_id": "PTR-111"
       },
       {
-        "commit": "4264ec9d7a618eb5f2344e4c85bca56b2ff0ce5a",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerana4qg4elre3sdfcvmxjvva5imdwclhjqo5glmqctmhn3zwtgw7la",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785722630315175649-2813291-e3076a1caabb.json",
@@ -1661,7 +1805,7 @@
         "task_id": "PTR-121"
       },
       {
-        "commit": "a36fab2a8e24fd690a14ed01daf70ceebd8b72ad",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerammsmmac63m6jscry3of24hcsd2uldst22z4pr2byyvnqa6zrrvea",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785723483811702205-3554031-418486b1b8a4.json",
@@ -1669,7 +1813,7 @@
         "task_id": "PTR-120"
       },
       {
-        "commit": "91e890bb95cb879b78bc2f1283bc7ac34deecf9d",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerac3lyabjqdiztuy5fjpa5frxs4bvdxgc5ikis3ygquy2jebxq4yza",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785723735548949622-3862356-1f2e14da8b73.json",
@@ -1677,7 +1821,7 @@
         "task_id": "PTR-122"
       },
       {
-        "commit": "079d0b432f4f4429bf748ab29c7bfe0aa5b33561",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeravpvynkxmmxyizwco3jcu6b2xijh7w5wcwdukcqytz6aez2lcqcqq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785724128552898734-459424-a5fa258cd45f.json",
@@ -1685,7 +1829,7 @@
         "task_id": "PTR-130"
       },
       {
-        "commit": "bea1e16853a3a0f84374731cc9ebb4041aac917e",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraumvhone3gfqjbs3vj67lyztnw46chaqgk6lsokokac4b4w2ijn7q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739247271812552-1588281-a766c19988c2.json",
@@ -1693,7 +1837,7 @@
         "task_id": "PTR-133"
       },
       {
-        "commit": "15971af65e5d001ceb264c7b4f24e074009c7a1e",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeravanvls67r5i6g76hel4utcjdu4u3suebifdb3beglwieqhd64epa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739442949603188-1587812-4051083393d2.json",
@@ -1701,7 +1845,7 @@
         "task_id": "PTR-131"
       },
       {
-        "commit": "a142a8b11efbcb36058bdf275f55e6abcb3d5d52",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerazcal4ocwecahkluoodsopigd6mr4svzdho57og7opavpzlnjs6va",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739564771068179-1588479-d36c64f7fcdd.json",
@@ -1709,7 +1853,7 @@
         "task_id": "PTR-132"
       },
       {
-        "commit": "432810f9d3dd880530dec72455523690263c6fc2",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera4kr7paruvamxzlbzjjxky3qzawypxykwf4wolzrmb5nu6jla32pq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785739945964284210-1587812-26bb596255d2.json",
@@ -1717,7 +1861,7 @@
         "task_id": "PTR-134"
       },
       {
-        "commit": "0bd1536da501758b5fdef231faba0c56bc289947",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraj2dljyzii7mpyubsjs24ztowvh2yttka5qfivzlbo2ykeg52gc3q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785740470498382229-1588479-efddef553b4e.json",
@@ -1725,7 +1869,7 @@
         "task_id": "PTR-135"
       },
       {
-        "commit": "21f7e9fdccb36162e5b7274657680317c62ee568",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerag72zkdh5kfv7omz76wpppkdqszf77xxsumbtzeu255w6qlalaxxa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785740493263049406-1587812-affbd1cbeed1.json",
@@ -1733,7 +1877,7 @@
         "task_id": "PTR-137"
       },
       {
-        "commit": "2b748af3f8f16e2935f7945dc6acf88737872a82",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerayj4pe4li25n3autkzboyvuyjys5tkiicerp7mdr7taawiqcxdejq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785741090003031386-1588281-e5dc02d504ce.json",
@@ -1741,7 +1885,7 @@
         "task_id": "PTR-136"
       },
       {
-        "commit": "581a75e222451e49b7a2814d8805fa275d2f07b4",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerajqbe5igsxr2gta3rl6tqdjbejoy3ixxo3a2c3jnqpasuvoplpjzq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785741922823496535-722154-c7d3b6528eb8.json",
@@ -1749,7 +1893,7 @@
         "task_id": "PTR-138"
       },
       {
-        "commit": "6dca85a92cdac1002f573458ed3e480cba3c7d4a",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerazxsbhwvdpw2n253kgami4vklb5u4smhruqdyuwuankaitz3o2g4q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785742498059559165-1959901-27fd2906ea30.json",
@@ -1757,7 +1901,7 @@
         "task_id": "PTR-139"
       },
       {
-        "commit": "3737c10715246cc4747d9c415b6f364b3e8c26eb",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraaeuwdplwq2ajeslkk2r2a57hwpbeypufq5tlawyn7qtgcinskfgq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785742824068640925-746885-a2e560bd98fe.json",
@@ -1765,7 +1909,7 @@
         "task_id": "PTR-140"
       },
       {
-        "commit": "0a651b5246f6113fb5314b78f34934efd6e80698",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeralkrseyo3ianfcqeypo3wgch2bf3ktx5pbhb7pq43777mhd65tqwa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785742986287727381-722154-059d9e23ee95.json",
@@ -1773,7 +1917,7 @@
         "task_id": "PTR-141"
       },
       {
-        "commit": "0094fbb7971615fa02c92202101c5f66caaab7cc",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera3jp3fbznlcd6zdhpybi56ucifpr5w7sjrbcnxh2j6hp2bgg7xprq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785744176099410304-1959901-667c2e92692c.json",
@@ -1781,7 +1925,7 @@
         "task_id": "PTR-142"
       },
       {
-        "commit": "7db54fbf400d9e19a9055fd847256c5eb93908cd",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera3jxpo3x7e5lnyq5vofcwhvpgldql7oizhf7f2ljexizbxw3f7onq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785787437358947707-3902873-f61e1ef9f504.json",
@@ -1789,7 +1933,7 @@
         "task_id": "PTR-143"
       },
       {
-        "commit": "14a2ebafc59f2ba9ad31e42e10e1b034e44a9936",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeracoyhatz6abxi33vavmnspqh4642bz3g4ab3mftep5ic7ry5hjihq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785788103377778990-3902873-b7bf9eff9b08.json",
@@ -1797,7 +1941,7 @@
         "task_id": "PTR-146"
       },
       {
-        "commit": "0a945d16b59942036ec36b5072099d39c019a3d5",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerawqr2clrystjbb2lqj7ghwjxqgkmh6agxuayvp47jigovm5m4zexa",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785788284436999954-3903035-35f0d6c12b3d.json",
@@ -1805,7 +1949,7 @@
         "task_id": "PTR-144"
       },
       {
-        "commit": "f3d1dcddac5d373f14e304a6d9217b5adf15f6b2",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraryesztzgxmzvkhhckmacvraluj63lp35cnp5yspj2xpgwdzu7i4q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785788831048449728-3902903-5e5036d029c4.json",
@@ -1813,7 +1957,7 @@
         "task_id": "PTR-145"
       },
       {
-        "commit": "baab62894fc4f19da90b20ebc1ee592006211c21",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerafwbx4xs25i2gzp3p3l7x6cdkebyotfto2grzntj3ionzjegytsza",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785789718426923556-3903035-de3f4c0d941e.json",
@@ -1821,7 +1965,7 @@
         "task_id": "PTR-147"
       },
       {
-        "commit": "c79c417c182b12d9c89099fc97f61f37db575c86",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera72wuns4gxucyhrwnoano43q6tlifhpuifilgmlm4gk7rc532fk2a",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785792309069652395-3902903-ac384312fb9f.json",
@@ -1829,7 +1973,7 @@
         "task_id": "PTR-148"
       },
       {
-        "commit": "c1cd06f3929fe82023cd0e783d7f5aa0dd415e55",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraw6zip2k3ibrzsm6r6o2ymohwh2nzccoibnacpilylbxmugvqj4ma",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785800428370914656-3398353-d942327ccdad.json",
@@ -1837,7 +1981,7 @@
         "task_id": "PTR-153"
       },
       {
-        "commit": "4e84bc8c965106ad5bc65bc5c0e21c53ffa761b6",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerazupfc4ob6hzp34mxtvmjtxq37boewxhwstudobolca2ay56gziiq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785801075894721268-3398545-bccf17cc95b8.json",
@@ -1845,7 +1989,7 @@
         "task_id": "PTR-154"
       },
       {
-        "commit": "1ad9cebda5422a0c216bd95b08b264d7360db17c",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerazmabbuvvjkq3hdoe2zexm5mbj5dvnjpxky3qqkaem4vyigh4yd7q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785802656616796195-3308149-0c1a750ba5e2.json",
@@ -1853,7 +1997,7 @@
         "task_id": "PTR-155"
       },
       {
-        "commit": "62fe0356b8249043594f4d8973a8207a231f2036",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerafufrvhnlzfqnelvdtbvnwc7es5r2sbw2a6f4ony2hcx2jl2f55oq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v1/merge-queue/completed/1785803439910113683-3308149-ecb72cd13571.json",
@@ -1861,7 +2005,7 @@
         "task_id": "PTR-149"
       },
       {
-        "commit": "4dd5120c3d7b96bdf3806edc10cbd8b34833bd0a",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeera7sy3kustdy7h7uq3oxsh2qfesjsawfxm5nvdmntks7kgq5nikqeq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v6/merge-queue/completed/1786173166611775408-3460884-b4f83776d106.json",
@@ -1869,7 +2013,7 @@
         "task_id": "PTR-161"
       },
       {
-        "commit": "31a7c1901ee7a2f257fb77514679053c070c1afb",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerarx4ehy5qafocyxvqcllgzpnvgnrbnmclyvrxwt6wj675xtd5uzga",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v6/merge-queue/completed/1786173198566269690-3460983-c616906d694b.json",
@@ -1877,7 +2021,7 @@
         "task_id": "PTR-160"
       },
       {
-        "commit": "eb19282154bd6aea66834f3c6edf12007affd5f0",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerazlwironv23ba3wja4hqteda2bw3smcsahj2r57uehobr66sc76yq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v6/merge-queue/completed/1786173220122054371-3460648-85619975be15.json",
@@ -1885,7 +2029,7 @@
         "task_id": "PTR-162"
       },
       {
-        "commit": "287aefd9abe779e3d1965c325e93d96e68df8216",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerats3fl63tg5v3ri4afz7hnid6vw4ybl5kgpztdsmrgdvo4vum3rgq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786186249783866060-2207877-3fb58cae3c0d.json",
@@ -1893,7 +2037,7 @@
         "task_id": "PTR-170"
       },
       {
-        "commit": "446d4906cae78d0ad53071fbf61aabd25dd0986b",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeraq5d3i4wwueey3dvxqtqltlde5fsey6qojhwvo6qkh26k5rtdhnhq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786204302311869903-3356451-0b1b35211d0a.json",
@@ -1901,7 +2045,7 @@
         "task_id": "PTR-161"
       },
       {
-        "commit": "0ef5dea3bf13e0dd8bd732648ca07468b6cf483f",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeeracxat26lvexgps3bm4mccgm5nmupvwctjvoqg6p7ote65vimzyqia",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786204687872945866-3352670-3a516daab63f.json",
@@ -1909,7 +2053,7 @@
         "task_id": "PTR-162"
       },
       {
-        "commit": "0e0232815a523c3f14f3c7da0a37b5de2b174209",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerabzmuizhiyg22py4oqe54shntmjmzlcmvagpzhuwbustlmae2zdaq",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786205411350427424-34568-ecc2ee0c3607.json",
@@ -1917,7 +2061,7 @@
         "task_id": "PTR-162"
       },
       {
-        "commit": "be0e2081c848612ad881eda30216ceec9eb6b221",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerak7y5laut7ihi2bfwaxxezko726zjtjofoe5c5zpvyre4lglx7i2q",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786206230827679933-944766-d620ecdbd123.json",
@@ -1925,7 +2069,7 @@
         "task_id": "PTR-162"
       },
       {
-        "commit": "71bb8efd920280e5fc915da19aa4aaa5fa7bd82a",
+        "commit": "0ce7e4f09cce1894143c567b8b69c7619f131896",
         "receipt_cid": "baguqeerajbpdlk5vkkojmo23vne7vfo2bmwwnispvf5vu55qsc6cs3vgknea",
         "schema": "CompletedTaskArtifactReceipt@1",
         "source": "/home/barberb/.local/state/ipfs_accelerate_py/proof-backed-test-reuse-v8/merge-queue/completed/1786207436525713663-944766-a1b4e55f4379.json",
@@ -1959,7 +2103,7 @@
   "readiness_hints": {
     "blob_mappings_total": 136,
     "blob_mappings_verified": 136,
-    "completion_receipts_observed": 62,
+    "completion_receipts_observed": 80,
     "observation_only": true,
     "unrecoverable_count": 0
   },
