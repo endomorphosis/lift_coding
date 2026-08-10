@@ -1019,8 +1019,8 @@ W11  DCR-100 | DCR-101 | DCR-102 | DCR-103 | DCR-104
 
 ## DCR-047 Enforce codegen roundtrip and generated-source synchronization
 
-- Status: todo
-- Completion: auto
+- Status: completed
+- Completion: manual
 - Is schedulable: true
 - Review only: false
 - Priority: P1
