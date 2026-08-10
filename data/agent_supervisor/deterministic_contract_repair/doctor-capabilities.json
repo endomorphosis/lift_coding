@@ -1,0 +1,120 @@
+{
+  "discovery": {
+    "backend_factory_interface": "DeterministicDoctorBackendFactory@1",
+    "database_opened": false,
+    "deterministic": true,
+    "interface": "DeterministicDoctorRuntime@1",
+    "model_routes_allowed": false,
+    "network_routes_allowed": false,
+    "processes_started": false,
+    "providers_started": false,
+    "runtime_interface": "DeterministicDoctorRuntime@1",
+    "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-doctor/runtime-discovery@1",
+    "service_interface": "DeterministicDoctorService@1",
+    "stages": [
+      {
+        "available": null,
+        "declared": true,
+        "interface": "PlanningAnalysisFactory@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "install the repository-analysis package and bind an exact checkout",
+        "stage": "evidence"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DoctorRepositoryDiagnostics@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "install the inert AST adapters or inject a diagnose stage factory",
+        "stage": "diagnose"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DoctorRepairCandidateRetriever@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "bind deterministic candidate signals or inject a retrieval factory",
+        "stage": "retrieve"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DeterministicDoctorTactician@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "bind the local deterministic tactician; model routes are forbidden",
+        "stage": "tactician"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DeterministicDoctorHammer@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "install an approved digest-bound prover/toolchain or remain report-only",
+        "stage": "proof"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DeterministicDoctorSynthesizer@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "bind an admitted operator proposal and proof before synthesis preview",
+        "stage": "synthesis_preview"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DeterministicDoctorImpact@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "bind current program-graph/consumer evidence before impact closure",
+        "stage": "impact"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DeterministicDoctorTransaction@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "bind a real sandbox applicator and a control-plane permit/effect adapter",
+        "stage": "transaction"
+      },
+      {
+        "available": null,
+        "declared": true,
+        "interface": "DeterministicDoctorFixedPoint@1",
+        "loaded": false,
+        "reason_code": "not_probed",
+        "remediation": "bind transaction output and independently produced fixed-point evidence",
+        "stage": "fixed_point"
+      }
+    ]
+  },
+  "evidence_id": "wpd/default-doctor-factory@1",
+  "factory_interface": "DefaultDoctorFactory@1",
+  "interface": "DeterministicDoctorRuntime@1",
+  "mandatory_backends": [
+    "diagnose",
+    "plan",
+    "retrieve",
+    "tactician",
+    "proof",
+    "transaction"
+  ],
+  "model_routes_allowed": false,
+  "network_routes_allowed": false,
+  "optional_deferred_backends": [
+    "synthesis",
+    "impact",
+    "fixed_point",
+    "explain"
+  ],
+  "providers_started": false,
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/doctor-capabilities@1"
+}
