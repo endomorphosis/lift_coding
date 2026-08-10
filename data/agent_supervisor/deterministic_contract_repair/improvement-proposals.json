@@ -1,0 +1,203 @@
+{
+  "allowed_targets": [
+    "lane_priority",
+    "ordering_weight",
+    "resource_bound",
+    "retry_budget",
+    "reviewed_operator",
+    "shadow_metric",
+    "timeout_bound"
+  ],
+  "evaluations": [
+    {
+      "content_id": "sha256:5ad837630ada549437198812fd33ca5b62cd01d7ffd5e930dc59b9d1f927e61a",
+      "creates_new_work": true,
+      "disposition": "admitted_for_review",
+      "grants_self_admission": false,
+      "improved": true,
+      "interface": "BoundedSelfImprovement@1",
+      "proposal_id": "proposal:ordering-utility",
+      "reason_codes": [
+        "improved_under_invariants",
+        "safety_floors_held",
+        "review_required",
+        "no_self_admit"
+      ],
+      "runtime_model_calls": 0,
+      "safety_floor_ok": true,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-evaluation@1",
+      "unchanged": false
+    },
+    {
+      "content_id": "sha256:eab1024b65e7ea63b1ef01097c5b417b29b5662d5f2de0b1f0e705f5c1145921",
+      "creates_new_work": false,
+      "disposition": "rejected",
+      "grants_self_admission": false,
+      "improved": false,
+      "interface": "BoundedSelfImprovement@1",
+      "proposal_id": "proposal:lower-safety",
+      "reason_codes": [
+        "safety_floor_lowered:min_proof_strength",
+        "safety_floor_violation"
+      ],
+      "runtime_model_calls": 0,
+      "safety_floor_ok": false,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-evaluation@1",
+      "unchanged": false
+    },
+    {
+      "content_id": "sha256:7b8c02494376918888c6441d7e203c047ded4a9f5289a069a4290eb7e8e5fad4",
+      "creates_new_work": false,
+      "disposition": "no_op",
+      "grants_self_admission": false,
+      "improved": false,
+      "interface": "BoundedSelfImprovement@1",
+      "proposal_id": "proposal:noop",
+      "reason_codes": [
+        "unchanged_or_noop",
+        "converge_zero_work"
+      ],
+      "runtime_model_calls": 0,
+      "safety_floor_ok": true,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-evaluation@1",
+      "unchanged": true
+    },
+    {
+      "content_id": "sha256:8fa805b882ac969609717ac702d4f87d5f723beba5467f6ac5648339fcfac15f",
+      "creates_new_work": false,
+      "disposition": "rejected",
+      "grants_self_admission": false,
+      "improved": false,
+      "interface": "BoundedSelfImprovement@1",
+      "proposal_id": "proposal:forbidden",
+      "reason_codes": [
+        "forbidden_surface",
+        "validator",
+        "no_policy_rewrite"
+      ],
+      "runtime_model_calls": 0,
+      "safety_floor_ok": false,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-evaluation@1",
+      "unchanged": false
+    }
+  ],
+  "evidence_id": "dcr/self-improvement@1",
+  "forbidden_targets": [
+    "authority",
+    "bootstrap_seal",
+    "logic_semantics",
+    "model_guard",
+    "no_llm_policy",
+    "policy_root",
+    "protected_path_policy",
+    "validator"
+  ],
+  "grants_self_admission": false,
+  "interface": "BoundedSelfImprovement@1",
+  "proposal_interface": "ImprovementProposal@1",
+  "proposals": [
+    {
+      "approval_class": "review_required",
+      "baseline_metrics": {
+        "safety_floor": 10.0,
+        "utility": 1.0
+      },
+      "baseline_value": 1.0,
+      "candidate_metrics": {
+        "safety_floor": 10.0,
+        "utility": 1.3
+      },
+      "candidate_value": 1.2,
+      "content_id": "sha256:97ec55fbb96104ffee58480d3bc5e9243814d265370993630ad3beea16b63e81",
+      "interface": "ImprovementProposal@1",
+      "invariant_ids": [
+        "inv:no-llm",
+        "inv:authority-strict"
+      ],
+      "kind": "ordering",
+      "parameter": "priority_bias",
+      "proposal_id": "proposal:ordering-utility",
+      "rewrites_forbidden_surface": false,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-proposal@1",
+      "self_admit": false,
+      "target": "ordering_weight"
+    },
+    {
+      "approval_class": "review_required",
+      "baseline_metrics": {
+        "min_proof_strength": 5.0,
+        "utility": 1.0
+      },
+      "baseline_value": 5.0,
+      "candidate_metrics": {
+        "min_proof_strength": 3.0,
+        "utility": 2.0
+      },
+      "candidate_value": 3.0,
+      "content_id": "sha256:1c1f1c3d07c83377bf0d865824a2c4ee4de1ac3e96b717925afbd90bfe4791cb",
+      "interface": "ImprovementProposal@1",
+      "invariant_ids": [
+        "inv:no-llm",
+        "inv:authority-strict"
+      ],
+      "kind": "bound",
+      "parameter": "min_proof_strength",
+      "proposal_id": "proposal:lower-safety",
+      "rewrites_forbidden_surface": false,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-proposal@1",
+      "self_admit": false,
+      "target": "resource_bound"
+    },
+    {
+      "approval_class": "review_required",
+      "baseline_metrics": {
+        "utility": 1.0
+      },
+      "baseline_value": 0,
+      "candidate_metrics": {
+        "utility": 1.0
+      },
+      "candidate_value": 0,
+      "content_id": "sha256:f456b489bd5aedecb5acd76522a7743acbe68eb905a310f1b2006a2f4e4ce1f9",
+      "interface": "ImprovementProposal@1",
+      "invariant_ids": [
+        "inv:no-llm",
+        "inv:authority-strict"
+      ],
+      "kind": "no_op",
+      "parameter": "none",
+      "proposal_id": "proposal:noop",
+      "rewrites_forbidden_surface": false,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-proposal@1",
+      "self_admit": false,
+      "target": "shadow_metric"
+    },
+    {
+      "approval_class": "review_required",
+      "baseline_metrics": {
+        "utility": 1.0
+      },
+      "baseline_value": 1,
+      "candidate_metrics": {
+        "utility": 9.0
+      },
+      "candidate_value": 0,
+      "content_id": "sha256:67d6aa9a67f7985cb43785a59416c54545ec152299ea358d661079d249878a62",
+      "interface": "ImprovementProposal@1",
+      "invariant_ids": [
+        "inv:no-llm",
+        "inv:authority-strict"
+      ],
+      "kind": "bound",
+      "parameter": "strictness",
+      "proposal_id": "proposal:forbidden",
+      "rewrites_forbidden_surface": true,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-proposal@1",
+      "self_admit": false,
+      "target": "validator"
+    }
+  ],
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-improvement-proposals-catalog@1",
+  "version": 1
+}
