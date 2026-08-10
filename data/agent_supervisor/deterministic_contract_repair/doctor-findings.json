@@ -1,0 +1,506 @@
+{
+  "diagnosis": {
+    "disposition": "diagnosed",
+    "earliest": {
+      "edge_key": "route_to_dispatcher",
+      "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+      "finding_enum": "expected_only",
+      "grants_transform_authority": false,
+      "interface": "DoctorFinding@1",
+      "logic_family": "",
+      "mismatch": {
+        "blocker_id": "baguqeerahtstrckbtkztftug2em4grr2qwqhcwznwx7io3ofypqgv7t4qyea",
+        "canonical_key": "baguqeeray56eta2nfo5l6mgxlojufly3vu3crw4jkcwblebue4exkf2vc46q",
+        "consumer_id": "c",
+        "counterexample_seed": {
+          "blocker_id": "baguqeerahtstrckbtkztftug2em4grr2qwqhcwznwx7io3ofypqgv7t4qyea",
+          "candidate_node_ids": [
+            "baguqeera5hlriu5yim43brl2uidjf4zxkxzcqb5q47bopfcojfkpqouyh25a"
+          ],
+          "details": {
+            "operation": "tools.call.echo",
+            "package": "ipfs_accelerate_py",
+            "source_stage": "route",
+            "target_stage": "dispatcher"
+          },
+          "edge_kind": "route_to_dispatcher",
+          "kind": "expected_only",
+          "reason_code": "expected_only",
+          "stage": "dispatcher"
+        },
+        "direction": "request",
+        "edge_kind": "route_to_dispatcher",
+        "expected_edge": {
+          "consumer_id": "c",
+          "edge_kind": "route_to_dispatcher",
+          "mandatory": true,
+          "resolution": "resolved",
+          "stage": "dispatcher"
+        },
+        "finding_id": "baguqeerakffh3uyfpflt3kq3sgcbbcznnqkynxv7a46ternddfnhvtyfipqq",
+        "finding_key": {
+          "direction": "request",
+          "edge_kind": "route_to_dispatcher",
+          "interface": "RepairFindingKey@1",
+          "key_id": "baguqeeray56eta2nfo5l6mgxlojufly3vu3crw4jkcwblebue4exkf2vc46q",
+          "mismatch_class": "expected_only",
+          "operation": "tools.call.echo",
+          "package": "ipfs_accelerate_py",
+          "profile": "mcp++/default",
+          "schema": "ipfs_accelerate_py/agent-supervisor/repair-finding-key@1",
+          "schema_root": "schemas/echo.json",
+          "snapshot_id": "snap:dcr051-artifact",
+          "transport": "stdio"
+        },
+        "interface": "ContractMismatch@1",
+        "mismatch_class": "expected_only",
+        "nonpassing": true,
+        "observed_edge": {
+          "authority": "none",
+          "blocker_kind": "expected_only",
+          "consumer_id": "c",
+          "edge_id": "baguqeerauma6k7byb2da5afxyic452ppm6dou33ltfzppaxtppquk3lo5q6a",
+          "kind": "blocked_by",
+          "mandatory": false,
+          "resolution": "expected_only",
+          "source": "baguqeera5hlriu5yim43brl2uidjf4zxkxzcqb5q47bopfcojfkpqouyh25a",
+          "target": "baguqeerarbg77tg7lcrxq5ehnrlxkvbd53vxskuhd7churpl2pub2oehd63q"
+        },
+        "operation": "tools.call.echo",
+        "package": "ipfs_accelerate_py",
+        "reason_code": "expected_only",
+        "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch@1",
+        "stage": "dispatcher"
+      },
+      "reason_codes": [
+        "expected_only"
+      ],
+      "schema": "ipfs_accelerate_py/agent-supervisor/doctor-finding@1",
+      "source_hashes": {},
+      "source_spans": [],
+      "transcript_cid": ""
+    },
+    "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+    "evidence_id": "dcr/doctor-diagnosis@1",
+    "findings": [
+      {
+        "edge_key": "route_to_dispatcher",
+        "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+        "finding_enum": "expected_only",
+        "grants_transform_authority": false,
+        "interface": "DoctorFinding@1",
+        "logic_family": "",
+        "mismatch": {
+          "blocker_id": "baguqeerahtstrckbtkztftug2em4grr2qwqhcwznwx7io3ofypqgv7t4qyea",
+          "canonical_key": "baguqeeray56eta2nfo5l6mgxlojufly3vu3crw4jkcwblebue4exkf2vc46q",
+          "consumer_id": "c",
+          "counterexample_seed": {
+            "blocker_id": "baguqeerahtstrckbtkztftug2em4grr2qwqhcwznwx7io3ofypqgv7t4qyea",
+            "candidate_node_ids": [
+              "baguqeera5hlriu5yim43brl2uidjf4zxkxzcqb5q47bopfcojfkpqouyh25a"
+            ],
+            "details": {
+              "operation": "tools.call.echo",
+              "package": "ipfs_accelerate_py",
+              "source_stage": "route",
+              "target_stage": "dispatcher"
+            },
+            "edge_kind": "route_to_dispatcher",
+            "kind": "expected_only",
+            "reason_code": "expected_only",
+            "stage": "dispatcher"
+          },
+          "direction": "request",
+          "edge_kind": "route_to_dispatcher",
+          "expected_edge": {
+            "consumer_id": "c",
+            "edge_kind": "route_to_dispatcher",
+            "mandatory": true,
+            "resolution": "resolved",
+            "stage": "dispatcher"
+          },
+          "finding_id": "baguqeerakffh3uyfpflt3kq3sgcbbcznnqkynxv7a46ternddfnhvtyfipqq",
+          "finding_key": {
+            "direction": "request",
+            "edge_kind": "route_to_dispatcher",
+            "interface": "RepairFindingKey@1",
+            "key_id": "baguqeeray56eta2nfo5l6mgxlojufly3vu3crw4jkcwblebue4exkf2vc46q",
+            "mismatch_class": "expected_only",
+            "operation": "tools.call.echo",
+            "package": "ipfs_accelerate_py",
+            "profile": "mcp++/default",
+            "schema": "ipfs_accelerate_py/agent-supervisor/repair-finding-key@1",
+            "schema_root": "schemas/echo.json",
+            "snapshot_id": "snap:dcr051-artifact",
+            "transport": "stdio"
+          },
+          "interface": "ContractMismatch@1",
+          "mismatch_class": "expected_only",
+          "nonpassing": true,
+          "observed_edge": {
+            "authority": "none",
+            "blocker_kind": "expected_only",
+            "consumer_id": "c",
+            "edge_id": "baguqeerauma6k7byb2da5afxyic452ppm6dou33ltfzppaxtppquk3lo5q6a",
+            "kind": "blocked_by",
+            "mandatory": false,
+            "resolution": "expected_only",
+            "source": "baguqeera5hlriu5yim43brl2uidjf4zxkxzcqb5q47bopfcojfkpqouyh25a",
+            "target": "baguqeerarbg77tg7lcrxq5ehnrlxkvbd53vxskuhd7churpl2pub2oehd63q"
+          },
+          "operation": "tools.call.echo",
+          "package": "ipfs_accelerate_py",
+          "reason_code": "expected_only",
+          "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch@1",
+          "stage": "dispatcher"
+        },
+        "reason_codes": [
+          "expected_only"
+        ],
+        "schema": "ipfs_accelerate_py/agent-supervisor/doctor-finding@1",
+        "source_hashes": {},
+        "source_spans": [],
+        "transcript_cid": ""
+      },
+      {
+        "edge_key": "dispatcher_to_handler",
+        "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+        "finding_enum": "missing",
+        "grants_transform_authority": false,
+        "interface": "DoctorFinding@1",
+        "logic_family": "",
+        "mismatch": {
+          "blocker_id": "baguqeerawakpnrsmzuyky2uaga5k37yfpban7w6y3r4e4osmym4cedz325oq",
+          "canonical_key": "baguqeerat3jzlaktihhtaobkahgzr2i6ppmqtev745upqhphmnyqjqs6lu4q",
+          "consumer_id": "c",
+          "counterexample_seed": {
+            "blocker_id": "baguqeerawakpnrsmzuyky2uaga5k37yfpban7w6y3r4e4osmym4cedz325oq",
+            "candidate_node_ids": [],
+            "details": {
+              "operation": "tools.call.echo",
+              "package": "ipfs_accelerate_py",
+              "source_stage": "dispatcher",
+              "target_stage": "handler"
+            },
+            "edge_kind": "dispatcher_to_handler",
+            "kind": "unresolved",
+            "reason_code": "unresolved",
+            "stage": "handler"
+          },
+          "direction": "request",
+          "edge_kind": "dispatcher_to_handler",
+          "expected_edge": {
+            "consumer_id": "c",
+            "edge_kind": "dispatcher_to_handler",
+            "mandatory": true,
+            "resolution": "resolved",
+            "stage": "handler"
+          },
+          "finding_id": "baguqeeraopdoqe2xxiw4wpp4gv3qv6nmd23s3yas4ixqivfzo4s4yuo4g6sa",
+          "finding_key": {
+            "direction": "request",
+            "edge_kind": "dispatcher_to_handler",
+            "interface": "RepairFindingKey@1",
+            "key_id": "baguqeerat3jzlaktihhtaobkahgzr2i6ppmqtev745upqhphmnyqjqs6lu4q",
+            "mismatch_class": "missing",
+            "operation": "tools.call.echo",
+            "package": "ipfs_accelerate_py",
+            "profile": "mcp++/default",
+            "schema": "ipfs_accelerate_py/agent-supervisor/repair-finding-key@1",
+            "schema_root": "schemas/echo.json",
+            "snapshot_id": "snap:dcr051-artifact",
+            "transport": "stdio"
+          },
+          "interface": "ContractMismatch@1",
+          "mismatch_class": "missing",
+          "nonpassing": true,
+          "observed_edge": {
+            "authority": "none",
+            "blocker_kind": "unresolved",
+            "consumer_id": "c",
+            "edge_id": "baguqeeravvgrxqmm77mcklt2472jwnvifj4m3pt2xx3ht3ru556abu7okysq",
+            "kind": "blocked_by",
+            "mandatory": false,
+            "resolution": "unresolved",
+            "source": "baguqeerapmmqug2mlhxougum53jac7fluqzhaahrdb7brohxa4cbj5v774dq",
+            "target": "baguqeeravuqhi5nkxssxxosjolmxp2nxv76kcfqipsk5vycxfsjvwbbnlwja"
+          },
+          "operation": "tools.call.echo",
+          "package": "ipfs_accelerate_py",
+          "reason_code": "unresolved",
+          "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch@1",
+          "stage": "handler"
+        },
+        "reason_codes": [
+          "unresolved",
+          "missing"
+        ],
+        "schema": "ipfs_accelerate_py/agent-supervisor/doctor-finding@1",
+        "source_hashes": {},
+        "source_spans": [],
+        "transcript_cid": ""
+      },
+      {
+        "edge_key": "handler_to_effect",
+        "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+        "finding_enum": "missing",
+        "grants_transform_authority": false,
+        "interface": "DoctorFinding@1",
+        "logic_family": "",
+        "mismatch": {
+          "blocker_id": "baguqeeramajjwintwajhljjsbtrvx2dhfnb2kkoygtoquusotfgamjt4smlq",
+          "canonical_key": "baguqeeraq7c5xtlh5yb4rzxihxgllsqhjs4y3kgt5jarnclm3fjwdmjv6pea",
+          "consumer_id": "c",
+          "counterexample_seed": {
+            "blocker_id": "baguqeeramajjwintwajhljjsbtrvx2dhfnb2kkoygtoquusotfgamjt4smlq",
+            "candidate_node_ids": [],
+            "details": {
+              "operation": "tools.call.echo",
+              "package": "ipfs_accelerate_py",
+              "source_stage": "handler",
+              "target_stage": "effect"
+            },
+            "edge_kind": "handler_to_effect",
+            "kind": "unresolved",
+            "reason_code": "unresolved",
+            "stage": "effect"
+          },
+          "direction": "request",
+          "edge_kind": "handler_to_effect",
+          "expected_edge": {
+            "consumer_id": "c",
+            "edge_kind": "handler_to_effect",
+            "mandatory": true,
+            "resolution": "resolved",
+            "stage": "effect"
+          },
+          "finding_id": "baguqeeraph2ebwdiibagsw6c6weqzhaadptm4np5px4lylvlkl7eg2abkdpa",
+          "finding_key": {
+            "direction": "request",
+            "edge_kind": "handler_to_effect",
+            "interface": "RepairFindingKey@1",
+            "key_id": "baguqeeraq7c5xtlh5yb4rzxihxgllsqhjs4y3kgt5jarnclm3fjwdmjv6pea",
+            "mismatch_class": "missing",
+            "operation": "tools.call.echo",
+            "package": "ipfs_accelerate_py",
+            "profile": "mcp++/default",
+            "schema": "ipfs_accelerate_py/agent-supervisor/repair-finding-key@1",
+            "schema_root": "schemas/echo.json",
+            "snapshot_id": "snap:dcr051-artifact",
+            "transport": "stdio"
+          },
+          "interface": "ContractMismatch@1",
+          "mismatch_class": "missing",
+          "nonpassing": true,
+          "observed_edge": {
+            "authority": "none",
+            "blocker_kind": "unresolved",
+            "consumer_id": "c",
+            "edge_id": "baguqeerafme6p6zyhnbmrqpevj64amaivmk7mhndvuharfjshuaus32by42a",
+            "kind": "blocked_by",
+            "mandatory": false,
+            "resolution": "unresolved",
+            "source": "baguqeerayvxpjg7jevllwuzxoxgrvnbjj6ww2asjpp2un3t3f4nkdrgdv7bq",
+            "target": "baguqeerad2tdve7cgxpivgtlu47iksyzdi6y5sctuqsgx7vp4stwi2h2pfzq"
+          },
+          "operation": "tools.call.echo",
+          "package": "ipfs_accelerate_py",
+          "reason_code": "unresolved",
+          "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch@1",
+          "stage": "effect"
+        },
+        "reason_codes": [
+          "unresolved",
+          "missing"
+        ],
+        "schema": "ipfs_accelerate_py/agent-supervisor/doctor-finding@1",
+        "source_hashes": {},
+        "source_spans": [],
+        "transcript_cid": ""
+      },
+      {
+        "edge_key": "effect_to_receipt",
+        "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+        "finding_enum": "missing",
+        "grants_transform_authority": false,
+        "interface": "DoctorFinding@1",
+        "logic_family": "",
+        "mismatch": {
+          "blocker_id": "baguqeerafe2p6snsgoe6eg2sv6uuqjyvhohfqj4sbqt5mwu6m7ibyok4tgbq",
+          "canonical_key": "baguqeerasj7sjg3srzdgupjsfrhpk3uy2ba3v54t7f6to4phkzdfu2ceonda",
+          "consumer_id": "c",
+          "counterexample_seed": {
+            "blocker_id": "baguqeerafe2p6snsgoe6eg2sv6uuqjyvhohfqj4sbqt5mwu6m7ibyok4tgbq",
+            "candidate_node_ids": [],
+            "details": {
+              "operation": "tools.call.echo",
+              "package": "ipfs_accelerate_py",
+              "source_stage": "effect",
+              "target_stage": "receipt"
+            },
+            "edge_kind": "effect_to_receipt",
+            "kind": "unresolved",
+            "reason_code": "unresolved",
+            "stage": "receipt"
+          },
+          "direction": "request",
+          "edge_kind": "effect_to_receipt",
+          "expected_edge": {
+            "consumer_id": "c",
+            "edge_kind": "effect_to_receipt",
+            "mandatory": true,
+            "resolution": "resolved",
+            "stage": "receipt"
+          },
+          "finding_id": "baguqeera5n3jake4fhhnmuzn2d237x3bplldajuczp3q3pls7wkqjs5ba5bq",
+          "finding_key": {
+            "direction": "request",
+            "edge_kind": "effect_to_receipt",
+            "interface": "RepairFindingKey@1",
+            "key_id": "baguqeerasj7sjg3srzdgupjsfrhpk3uy2ba3v54t7f6to4phkzdfu2ceonda",
+            "mismatch_class": "missing",
+            "operation": "tools.call.echo",
+            "package": "ipfs_accelerate_py",
+            "profile": "mcp++/default",
+            "schema": "ipfs_accelerate_py/agent-supervisor/repair-finding-key@1",
+            "schema_root": "schemas/echo.json",
+            "snapshot_id": "snap:dcr051-artifact",
+            "transport": "stdio"
+          },
+          "interface": "ContractMismatch@1",
+          "mismatch_class": "missing",
+          "nonpassing": true,
+          "observed_edge": {
+            "authority": "none",
+            "blocker_kind": "unresolved",
+            "consumer_id": "c",
+            "edge_id": "baguqeerav33xjepmit4ldj2toz3vxeuazjc5bmsaa2ddtini5fgkda2jmlya",
+            "kind": "blocked_by",
+            "mandatory": false,
+            "resolution": "unresolved",
+            "source": "baguqeeras6rzogmdn6fgnowv7wy7uqjocx4kcylvbjv6dxyj37xarajk7i3a",
+            "target": "baguqeera5j5lkeqp42jotdqdnp5utrjslhxokx35s56h7wqx5ood6dlm7yfa"
+          },
+          "operation": "tools.call.echo",
+          "package": "ipfs_accelerate_py",
+          "reason_code": "unresolved",
+          "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch@1",
+          "stage": "receipt"
+        },
+        "reason_codes": [
+          "unresolved",
+          "missing"
+        ],
+        "schema": "ipfs_accelerate_py/agent-supervisor/doctor-finding@1",
+        "source_hashes": {},
+        "source_spans": [],
+        "transcript_cid": ""
+      },
+      {
+        "edge_key": "receipt_to_runtime_identity",
+        "epoch_cid": "baguqeerac5ivyrafk4itvcoyh7swd5mblcdazvvp6opd7ssx6wmmk63zjy4q",
+        "finding_enum": "missing",
+        "grants_transform_authority": false,
+        "interface": "DoctorFinding@1",
+        "logic_family": "",
+        "mismatch": {
+          "blocker_id": "baguqeerafxct5ylz47ll5qjyjpmkkl7zyx5fogufx55dlqfk6gozmwmxvy5q",
+          "canonical_key": "baguqeeraingecplih4oaebeqkeqpezt2x6tkhj2qot5eyvnm7xhnnnp5hkmq",
+          "consumer_id": "c",
+          "counterexample_seed": {
+            "blocker_id": "baguqeerafxct5ylz47ll5qjyjpmkkl7zyx5fogufx55dlqfk6gozmwmxvy5q",
+            "candidate_node_ids": [],
+            "details": {
+              "operation": "tools.call.echo",
+              "package": "ipfs_accelerate_py",
+              "source_stage": "receipt",
+              "target_stage": "runtime_identity"
+            },
+            "edge_kind": "receipt_to_runtime_identity",
+            "kind": "unresolved",
+            "reason_code": "unresolved",
+            "stage": "runtime_identity"
+          },
+          "direction": "request",
+          "edge_kind": "receipt_to_runtime_identity",
+          "expected_edge": {
+            "consumer_id": "c",
+            "edge_kind": "receipt_to_runtime_identity",
+            "mandatory": true,
+            "resolution": "resolved",
+            "stage": "runtime_identity"
+          },
+          "finding_id": "baguqeerafs6pkez4phpunwvlqb67oonxta2r33m5xrxck6csculq273moyra",
+          "finding_key": {
+            "direction": "request",
+            "edge_kind": "receipt_to_runtime_identity",
+            "interface": "RepairFindingKey@1",
+            "key_id": "baguqeeraingecplih4oaebeqkeqpezt2x6tkhj2qot5eyvnm7xhnnnp5hkmq",
+            "mismatch_class": "missing",
+            "operation": "tools.call.echo",
+            "package": "ipfs_accelerate_py",
+            "profile": "mcp++/default",
+            "schema": "ipfs_accelerate_py/agent-supervisor/repair-finding-key@1",
+            "schema_root": "schemas/echo.json",
+            "snapshot_id": "snap:dcr051-artifact",
+            "transport": "stdio"
+          },
+          "interface": "ContractMismatch@1",
+          "mismatch_class": "missing",
+          "nonpassing": true,
+          "observed_edge": {
+            "authority": "none",
+            "blocker_kind": "unresolved",
+            "consumer_id": "c",
+            "edge_id": "baguqeeravepbegq6xogetsxdf4bhto4odypioqtqapen6xa6mnp2ol6vnh3a",
+            "kind": "blocked_by",
+            "mandatory": false,
+            "resolution": "unresolved",
+            "source": "baguqeeraatm4n5foe26i27d7ext7ovgeac2jepzwifyusrbuqwyaciefubhq",
+            "target": "baguqeerawkxpfutml7gmyndcsqeu7x4n4pfbw32bxrhw6onj5d3dnqqs4kgq"
+          },
+          "operation": "tools.call.echo",
+          "package": "ipfs_accelerate_py",
+          "reason_code": "unresolved",
+          "schema": "ipfs_accelerate_py/agent-supervisor/contract-mismatch@1",
+          "stage": "runtime_identity"
+        },
+        "reason_codes": [
+          "unresolved",
+          "missing"
+        ],
+        "schema": "ipfs_accelerate_py/agent-supervisor/doctor-finding@1",
+        "source_hashes": {},
+        "source_spans": [],
+        "transcript_cid": ""
+      }
+    ],
+    "grants_transform_authority": false,
+    "interface": "ScaDoctorBridge@1",
+    "reason_codes": [
+      "earliest_broken_edge",
+      "route_to_dispatcher",
+      "expected_only",
+      "no_transform"
+    ],
+    "schema": "ipfs_accelerate_py/agent-supervisor/doctor-diagnosis@1",
+    "version": 1
+  },
+  "evidence_id": "dcr/doctor-diagnosis@1",
+  "interface": "ScaDoctorBridge@1",
+  "mandatory_path_order": [
+    "ui_action_to_descriptor",
+    "descriptor_to_orb_idl",
+    "orb_idl_to_mcp_method_schema",
+    "mcp_method_schema_to_mediator",
+    "mediator_to_route",
+    "route_to_dispatcher",
+    "dispatcher_to_handler",
+    "handler_to_effect",
+    "effect_to_receipt",
+    "receipt_to_runtime_identity"
+  ],
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/doctor-findings-catalog@1",
+  "version": 1
+}
