@@ -12,15 +12,15 @@
     "accelerator_required_ancestor": "ce448eae6ab5706832d3ae88b041f9d38ac82ae8",
     "accelerator_required_branch": "agent/dcr-supervisor-20260808",
     "mcplusplus_submodule_path": "Mcp-Plus-Plus",
-    "mcplusplus_planning_revision": "dc3164653a48d059ae9812078359daeafb451c07",
+    "mcplusplus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "d1046ff17f27bcbc59de3db4a6cde29ca18444f6",
+    "ipfs_accelerate_planning_revision": "18eac0972fc8b463436ce285da72506a0822acc2",
     "ipfs_datasets_submodule_path": "external/ipfs_datasets",
     "ipfs_datasets_planning_revision": "c330a601364e3fb760db34f98195b506a63f1f26",
     "ipfs_kit_submodule_path": "external/ipfs_kit",
     "ipfs_kit_planning_revision": "ea3b47b72090354c27a9826d14a260d76b5e6914",
     "swissknife_submodule_path": "swissknife",
-    "swissknife_planning_revision": "9c955707e07fdd4e2cb9052ac3e3b65e54f701b3",
+    "swissknife_planning_revision": "1e2021cae2eafcb1d546be3b99fbdb4bc5a36256",
     "bootstrap_seal_path": "config/deterministic_contract_repair_bootstrap_seal.json",
     "require_initialized_gitlinks": true,
     "require_superproject_gitlink_equals_nested_head": true,
@@ -82,10 +82,11 @@
       "DCR-084",
       "DCR-090",
       "DCR-091",
-      "DCR-092"
+      "DCR-092",
+      "DCR-093"
     ],
     "ready_task_ids": [
-      "DCR-093"
+      "DCR-094"
     ],
     "blocked_task_ids": [],
     "terminal_task_id": "DCR-104",
@@ -190,7 +191,7 @@
       "name": "dcr-lane-6",
       "strict_shard_remainder": 6,
       "initial_task_ids": [
-        "DCR-093"
+        "DCR-094"
       ],
       "initial_focus": "contract-catalog"
     },
