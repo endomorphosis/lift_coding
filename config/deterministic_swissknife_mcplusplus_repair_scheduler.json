@@ -14,13 +14,13 @@
     "mcplusplus_submodule_path": "Mcp-Plus-Plus",
     "mcplusplus_planning_revision": "dc3164653a48d059ae9812078359daeafb451c07",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "5c08e6ef091dc3c1b12789cead05d327cf690611",
+    "ipfs_accelerate_planning_revision": "d1046ff17f27bcbc59de3db4a6cde29ca18444f6",
     "ipfs_datasets_submodule_path": "external/ipfs_datasets",
     "ipfs_datasets_planning_revision": "c330a601364e3fb760db34f98195b506a63f1f26",
     "ipfs_kit_submodule_path": "external/ipfs_kit",
     "ipfs_kit_planning_revision": "ea3b47b72090354c27a9826d14a260d76b5e6914",
     "swissknife_submodule_path": "swissknife",
-    "swissknife_planning_revision": "c753a1b326417359a8923e6170de65060bad856c",
+    "swissknife_planning_revision": "9c955707e07fdd4e2cb9052ac3e3b65e54f701b3",
     "bootstrap_seal_path": "config/deterministic_contract_repair_bootstrap_seal.json",
     "require_initialized_gitlinks": true,
     "require_superproject_gitlink_equals_nested_head": true,
@@ -81,10 +81,11 @@
       "DCR-083",
       "DCR-084",
       "DCR-090",
-      "DCR-091"
+      "DCR-091",
+      "DCR-092"
     ],
     "ready_task_ids": [
-      "DCR-092"
+      "DCR-093"
     ],
     "blocked_task_ids": [],
     "terminal_task_id": "DCR-104",
@@ -189,7 +190,7 @@
       "name": "dcr-lane-6",
       "strict_shard_remainder": 6,
       "initial_task_ids": [
-        "DCR-092"
+        "DCR-093"
       ],
       "initial_focus": "contract-catalog"
     },
