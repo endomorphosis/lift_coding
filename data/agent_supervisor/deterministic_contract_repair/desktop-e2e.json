@@ -1,0 +1,277 @@
+{
+  "evidence_id": "dcr/desktop-contract-repair-e2e@1",
+  "interface": "DesktopContractRepairE2E@1",
+  "provider_calls": 0,
+  "result": {
+    "browser_trace": [
+      {
+        "epoch": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+        "event": "counterexample_observed",
+        "path": "/mcp/services/fixture_disposable_service",
+        "policy_id": "policy:fixture-broken-desktop-mediator"
+      },
+      {
+        "epoch": "baguqeeracabziqfdsiidmgvcmctepabgcn462mjbzqguxvdt4ter724rhmka",
+        "event": "policy_preview_applied",
+        "policy_id": "policy:desktop-same-origin-mediator",
+        "route": "/mcp/tools/call"
+      },
+      {
+        "allowed": false,
+        "decision": "reject_unknown",
+        "effect_class": "unknown",
+        "event": "middleware_row",
+        "method": ""
+      },
+      {
+        "allowed": true,
+        "decision": "allow_read",
+        "effect_class": "read",
+        "event": "middleware_row",
+        "method": "initialize"
+      },
+      {
+        "allowed": false,
+        "decision": "require_governed_mediator",
+        "effect_class": "mutate",
+        "event": "middleware_row",
+        "method": "tools/call"
+      },
+      {
+        "allowed": false,
+        "decision": "require_governed_mediator",
+        "effect_class": "mutate",
+        "event": "middleware_row",
+        "method": "tools/call"
+      }
+    ],
+    "content_id": "sha256:4bc5d72c444305b3829a6ff789414293ccd9d1edaeca8b1d5e9666562fc25b8b",
+    "epoch_after": "baguqeeracabziqfdsiidmgvcmctepabgcn462mjbzqguxvdt4ter724rhmka",
+    "epoch_before": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+    "evidence_id": "dcr/desktop-contract-repair-e2e@1",
+    "fixture_id": "fixture:dcr092-disposable-loopback",
+    "governed_mutation_route": "/mcp/tools/call",
+    "graph_proof_roots": {
+      "broken_policy": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+      "epoch_after": "baguqeeracabziqfdsiidmgvcmctepabgcn462mjbzqguxvdt4ter724rhmka",
+      "epoch_before": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+      "request": "baguqeeranrdutbxwooeutfdu46teiacgilsy3gxdne3ibe2mfi3n5s3teb7q",
+      "reviewed_policy": "baguqeeracabziqfdsiidmgvcmctepabgcn462mjbzqguxvdt4ter724rhmka"
+    },
+    "interface": "DesktopContractRepairE2E@1",
+    "live_precondition_ok": true,
+    "mediator_interface": "GovernedMcpMediator@1",
+    "mutation_assertions": [
+      {
+        "allowed": false,
+        "content_id": "sha256:51d042f83e868073e33c1def7c72bbe20dbab4900ed1d9a3452272207c8e61e4",
+        "decision": "reject_unknown",
+        "effect_class": "unknown",
+        "http_method": "GET",
+        "interface": "GovernedMutationAssertion@1",
+        "jsonrpc_method": "",
+        "raw_proxy_denied": true,
+        "reason": "get_path_not_allowlisted",
+        "service_path": "/mcp/services/fixture_disposable_service/health"
+      },
+      {
+        "allowed": true,
+        "content_id": "sha256:cecbcfd033b47005dda8594941ff489e8a44074cd6bc8b49504affe4a930be41",
+        "decision": "allow_read",
+        "effect_class": "read",
+        "http_method": "POST",
+        "interface": "GovernedMutationAssertion@1",
+        "jsonrpc_method": "initialize",
+        "raw_proxy_denied": true,
+        "reason": "read_only_jsonrpc_allowlisted",
+        "service_path": "/mcp/services/fixture_disposable_service"
+      },
+      {
+        "allowed": true,
+        "content_id": "sha256:98aa81cf3cc0a304ddb3a3692fff48a6e2ffe12e99fd50beecd126f421005dec",
+        "decision": "allow_read",
+        "effect_class": "read",
+        "http_method": "POST",
+        "interface": "GovernedMutationAssertion@1",
+        "jsonrpc_method": "tools/list",
+        "raw_proxy_denied": true,
+        "reason": "read_only_jsonrpc_allowlisted",
+        "service_path": "/mcp/services/fixture_disposable_service"
+      },
+      {
+        "allowed": false,
+        "content_id": "sha256:14b80671a2be98c4f7ba5a934f29dae5b7b37dff05ee5e3f2e21831675f2b815",
+        "decision": "require_governed_mediator",
+        "effect_class": "mutate",
+        "http_method": "POST",
+        "interface": "GovernedMutationAssertion@1",
+        "jsonrpc_method": "tools/call",
+        "raw_proxy_denied": true,
+        "reason": "mutation_requires_governed_mediator",
+        "service_path": "/mcp/services/fixture_disposable_service"
+      },
+      {
+        "allowed": false,
+        "content_id": "sha256:c8b5d25ca28dc29cbd7cb5909746f0309cef3c9091d88f5d692049c6a93f13b5",
+        "decision": "require_governed_mediator",
+        "effect_class": "mutate",
+        "http_method": "POST",
+        "interface": "GovernedMutationAssertion@1",
+        "jsonrpc_method": "mcp++/execute",
+        "raw_proxy_denied": true,
+        "reason": "mutation_requires_governed_mediator",
+        "service_path": "/mcp/services/fixture_disposable_service"
+      },
+      {
+        "allowed": false,
+        "content_id": "sha256:c95ba640d8d484fac38ce01d29df85030a48933a9132415aa7abb1817fc738a9",
+        "decision": "require_governed_mediator",
+        "effect_class": "mutate",
+        "http_method": "POST",
+        "interface": "GovernedMutationAssertion@1",
+        "jsonrpc_method": "tools/call",
+        "raw_proxy_denied": true,
+        "reason": "mutation_requires_governed_mediator",
+        "service_path": "/mcp/tools/call"
+      }
+    ],
+    "original_counterexample": {
+      "allow_raw_proxy_mutations": false,
+      "epoch": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+      "fixture_owner": "fixture_disposable_service",
+      "kind": "misaligned_desktop_mediation_policy",
+      "loopback_base": "/mcp/services/fixture_disposable_service",
+      "policy_id": "policy:fixture-broken-desktop-mediator",
+      "reason": "desktop_same_origin_mediator_not_bound"
+    },
+    "passed": true,
+    "phase_receipts": [
+      {
+        "detail": {
+          "live_passed": true,
+          "roles": [
+            "accelerate",
+            "datasets",
+            "kit"
+          ],
+          "transcript_cid": "baguqeera6jtdftcgudgnpq7eo6gkkpbd2gx4al2uf762hrpzha4ifhhvszoa"
+        },
+        "ok": true,
+        "phase": "detect",
+        "receipt_cid": "sha256:cf9b2d32ad10c1696453950711717277661c6783914bdb10f031e3886b786795",
+        "runtime_model_calls": 0
+      },
+      {
+        "detail": {
+          "current_policy_id": "policy:fixture-broken-desktop-mediator",
+          "request_content_id": "baguqeeranrdutbxwooeutfdu46teiacgilsy3gxdne3ibe2mfi3n5s3teb7q",
+          "reviewed_policy_id": "policy:desktop-same-origin-mediator",
+          "role": "browser_mediation"
+        },
+        "ok": true,
+        "phase": "plan",
+        "receipt_cid": "sha256:adc38ff4af3b61c0e412cb807358dbccc6d03a68e1cb33f090f901e8ac2d7809",
+        "runtime_model_calls": 0
+      },
+      {
+        "detail": {
+          "disposition": "preview_ready",
+          "grants_write_authority": false,
+          "operator_id": "dcr-operator:browser_mediation@1",
+          "proposal_only": true,
+          "reasons": [
+            "browser_mediation",
+            "governed_mediator",
+            "no_browser_mutation_bypass",
+            "middleware_transcript",
+            "preview_ready"
+          ]
+        },
+        "ok": true,
+        "phase": "apply_preview",
+        "receipt_cid": "sha256:ec7e96246522abbd4389686aecfc63d5fb7b45be996ac17a1117f3d571526e16",
+        "runtime_model_calls": 0
+      },
+      {
+        "detail": {
+          "middleware_rows": 4,
+          "no_mutation_bypass": true
+        },
+        "ok": true,
+        "phase": "restart_observe",
+        "receipt_cid": "sha256:cc7c045effb20d8e151a0b6bfc8a557d3b0ee5fa84f2a2bfaeb1e691797b8bfe",
+        "runtime_model_calls": 0
+      },
+      {
+        "detail": {
+          "assertion_count": 6,
+          "epoch_advanced": true,
+          "mutate_raw_proxy_denied": true
+        },
+        "ok": true,
+        "phase": "verify",
+        "receipt_cid": "sha256:786b11fffbab7fd6bbb7136330d2048a54266c7f59b7aec1a3063e4b78f6f6b8",
+        "runtime_model_calls": 0
+      },
+      {
+        "detail": {
+          "inverse_epoch": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+          "replay_disposition": "already_aligned"
+        },
+        "ok": true,
+        "phase": "rollback_replay",
+        "receipt_cid": "sha256:1c56b60e5a1815704336b1c6c8c8d3fd9c8a17e6e0bc75bf15e8e798341c81d1",
+        "runtime_model_calls": 0
+      },
+      {
+        "detail": {
+          "passed": true
+        },
+        "ok": true,
+        "phase": "complete",
+        "receipt_cid": "sha256:3674754c709f6a43aaaa73f8ba20f33fde8d00918ac264196706f848060a0712",
+        "runtime_model_calls": 0
+      }
+    ],
+    "provider_calls": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "disposable_fixture_loopback_only",
+      "dcr_092_desktop_e2e",
+      "live_three_service_precondition_ok",
+      "browser_mediation_preview_ready",
+      "restart_observe_no_mutation_bypass",
+      "verified_conformant_on_new_epoch",
+      "rollback_replay_ok",
+      "desktop_contract_repair_e2e_passed"
+    ],
+    "rollback_replay": {
+      "inverse_epoch": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+      "replay_ok": true,
+      "rollback_ok": true
+    },
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-desktop-contract-repair-e2e@1",
+    "source_diff": {
+      "after": {
+        "epoch": "baguqeeracabziqfdsiidmgvcmctepabgcn462mjbzqguxvdt4ter724rhmka",
+        "policy_id": "policy:desktop-same-origin-mediator"
+      },
+      "before": {
+        "epoch": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+        "policy_id": "policy:fixture-broken-desktop-mediator"
+      },
+      "destructive_production_tools": false,
+      "kind": "policy_realignment",
+      "path": "browser_mediation_policy",
+      "write_authority_granted": false
+    },
+    "task_id": "DCR-092",
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-desktop-contract-repair-e2e@1",
+  "task_id": "DCR-092",
+  "version": 1
+}
