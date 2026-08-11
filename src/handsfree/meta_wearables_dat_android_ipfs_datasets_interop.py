@@ -66,9 +66,7 @@ REQUIRED_DISPLAY_BUTTON_STYLES = ("PRIMARY", "SECONDARY")
 # this pair uses as scanner-visible Bucket VFS / unified-bucket evidence for
 # the external/ipfs_datasets interop contract.
 IPFS_KIT_TOOL_ROOT = "external/ipfs_kit"
-REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = (
-    "external/ipfs_kit/data/deprecations_report.schema.json"
-)
+REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = "external/ipfs_kit/data/deprecations_report.schema.json"
 REQUIRED_BUCKET_VFS_DOC_PATH = (
     "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
@@ -77,15 +75,11 @@ BUCKET_VFS_DEMO_PATH_CANDIDATES = (
     REQUIRED_BUCKET_VFS_DEMO_PATH,
     "external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py",
 )
-REQUIRED_UNIFIED_BUCKET_DEMO_PATH = (
-    "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
-)
+REQUIRED_UNIFIED_BUCKET_DEMO_PATH = "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
 REQUIRED_SCHEMA_COLUMN_OPTIMIZATION_EXAMPLE_PATH = (
     "external/ipfs_kit/examples/schema_column_optimization_example.py"
 )
-REQUIRED_UNIFIED_BUCKET_INTERFACE_PATH = (
-    "external/ipfs_kit/ipfs_kit_py/unified_bucket_interface.py"
-)
+REQUIRED_UNIFIED_BUCKET_INTERFACE_PATH = "external/ipfs_kit/ipfs_kit_py/unified_bucket_interface.py"
 # Paths relative to the ``external/ipfs_datasets`` checkout.
 REQUIRED_IPFS_BACKEND_ROUTER_PATH = "ipfs_datasets_py/ipfs_backend_router.py"
 REQUIRED_EMBEDDINGS_ROUTER_PATH = "ipfs_datasets_py/embeddings_router.py"
@@ -96,9 +90,7 @@ REQUIRED_LLM_ROUTER_PATH = "ipfs_datasets_py/llm_router.py"
 REQUIRED_ACCELERATE_EMBEDDINGS_ROUTER_PATH = (
     "external/ipfs_accelerate/ipfs_accelerate_py/embeddings_router.py"
 )
-REQUIRED_ACCELERATE_LLM_ROUTER_PATH = (
-    "external/ipfs_accelerate/ipfs_accelerate_py/llm_router.py"
-)
+REQUIRED_ACCELERATE_LLM_ROUTER_PATH = "external/ipfs_accelerate/ipfs_accelerate_py/llm_router.py"
 
 REQUIRED_DEPRECATIONS_REPORT_KEYS = (
     "report_version",
@@ -513,9 +505,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
         accelerate_llm_router_path,
     )
     router_sources = "\n".join(
-        path.read_text(encoding="utf-8")
-        for path in router_source_paths
-        if path.is_file()
+        path.read_text(encoding="utf-8") for path in router_source_paths if path.is_file()
     )
     _require_symbols(
         embeddings_router_path.read_text(encoding="utf-8"),

@@ -28,7 +28,10 @@ PTR-G000  Proof-backed cross-repository test reuse
 |-- PTR-G080  Datasets repository integration
 |-- PTR-G090  Kit storage and repository integration
 |-- PTR-G100  Degradation, mutation, security, and e2e assurance
-`-- PTR-G110  Benchmark, rollout, and current-tree closeout
+|-- PTR-G110  Benchmark, rollout, and current-tree closeout
+|-- PTR-G120  Authenticated pass-receipt and real-ZK authority repair
+|-- PTR-G130  Reachable zero-configuration runtime integration
+`-- PTR-G140  Current-tree evidence, adversarial assurance, and closeout
 ```
 
 ## PTR-G000 Proof-backed cross-repository test reuse
@@ -45,8 +48,8 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Acceptance criteria: ptr/cross-repository-current-tree-gate@1; ptr/zero-false-authoritative-skip@1; ptr/warm-reuse-benchmark@1; ptr/supervisor-launch-health@1
 - Outputs: implementation_plan/docs/46-proof-backed-test-reuse-plan-2026-07-31.md, implementation_plan/docs/46-proof-backed-test-reuse.objectives.md, implementation_plan/docs/46-proof-backed-test-reuse.todo.md, config/proof_backed_test_reuse_supervisor.json, scripts/validate_proof_backed_test_reuse_board.py, scripts/proof_backed_test_reuse_supervisor.py
 - Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_proof_test_reuse_current_tree_gate.py external/ipfs_accelerate/test/api/test_proof_reuse_cross_repository_e2e.py -q
-- Acceptance: Every child goal has current typed evidence; every authoritative skip binds an exact trusted pass receipt and locally verified real certificate; zero stale or false skips occur; optional dependency loss always runs tests; the warm eligible population demonstrates useful savings.
-- Gap task: Complete the reviewed production-runtime activation correction PTR-143 through PTR-155, including the PTR-150/PTR-151 corrective pair, PTR-152 fail-closed authority join, parallel PTR-153/PTR-154 proof-material/context preservation, PTR-155 exact-v4 publication join, and dependency-ordered PTR-149 handoff, then invoke the operator-owned closeout command after all 66 implementation tasks are closed; historical PTR-138, PTR-140, PTR-142, pre-v4 PTR-148, and pre-material 63-task activation fixtures are not production authority.
+- Acceptance: Every child goal has current typed evidence, including the G130 datasets and kit V3 bootstrap contracts for the current tree and the G140 bounded actionable-retry contract; V2 bootstrap receipts and v7/v8 gate packets cannot satisfy the v9 runtime goal; every authoritative skip binds an exact trusted pass receipt and locally verified real certificate; zero stale or false skips occur; optional dependency loss always runs tests; the warm eligible population demonstrates useful savings.
+- Gap task: Complete authenticated current-tree repair PTR-160 through PTR-171 and invoke operator closeout only after all 78 tasks have current artifact, ancestry, validation, signed-receipt, actionable-retry, real-proof and genuine cold/warm/replay evidence; historical PTR-149/66-task, v7/76-task and v8/77-task packets are provenance only.
 - Refinement: Preserve one shared policy/plugin and split stable locator seeding, real Groth16 issuance, retained proof-bearing material, controller-owned candidate context, fresh two-stage revalidation, cold trace publication, controller composition, explicit setup-facing lazy provisioning, an auditable v4 native backend, fail-closed key/source/binary provenance, exact V2 local verification, genuine cross-repository e2e, and refreshed authority into independently reviewable child goals.
 - Embedding query: exact proof-backed pytest reuse AST trace CID multihash pass receipt ZK cache graceful degradation all three IPFS Python repositories
 - AST query: Find pytest collection and report hooks, proof-cache authority, content-identity bridges, ZKP adapters, repository conftests, and supervisor validation gates affected by reusable pass evidence.
@@ -270,3 +273,63 @@ PTR-G000  Proof-backed cross-repository test reuse
 - Refinement: Measure actual cold and warm subprocesses only after genuine zero-false-skip assurance, expand the final gate to all 66 tasks with a fresh PTR-143 through PTR-155 production-activation premise, reject historical PTR-142, pre-v4 PTR-148 and pre-material 63-task evidence, surface an activation gap instead of false closeout when reviewed current keys are absent, and retain the existing single-writer closeout as an explicit operator action.
 - Embedding query: proof reuse benchmark saved time shadow warm hit rate forced rerun rollback rollout current tree completion evidence
 - AST query: Locate supervisor metrics, rollout policy, validation populations, objective completion gates, repository snapshot identities, and proof-cache performance harnesses.
+
+## PTR-G120 Authenticated pass-receipt and real-ZK authority repair
+
+- Status: verified_complete
+- Parent: PTR-G000
+- Depends on: PTR-G010, PTR-G040, PTR-G050
+- Fib priority: 1
+- Priority: P0
+- Track: authenticated-proof-authority
+- Bundle: proof-test-reuse/authenticated-authority-v7
+- Goal: Ensure that a proof-carrying cache hit derives pass authority from a cryptographically authenticated complete runner receipt, not from self-asserted fields or proving-key possession.
+- Evidence: ptr/runner-pass-attestation@1, ptr/test-pass-statement-v5@1, ptr/authenticated-real-backend-adversarial@1
+- Acceptance criteria: ptr/runner-pass-attestation@1; ptr/test-pass-statement-v5@1; ptr/authenticated-real-backend-adversarial@1
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/runner_pass_attestation.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py, external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py, external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_runner_pass_attestation.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_real_backend_adversarial.py -q
+- Acceptance: Ed25519 signs the domain-separated digest of one canonical DAG-CBOR unsigned envelope; the envelope, multicodec-prefixed public key and locally pinned trust policy have strict CIDv1 identities; receipt signatures bind exact execution/context and complete phase/trace roots; pytest-pass key usage, validity, epochs, rotation and revocation are enforced without TOFU; TestPassStatementV5 binds the signed attestation; a manifest-pinned native setup/prove/verify vector runs without skips; legacy, simulated, unsigned and forged receipts always run; no secret enters public artifacts.
+- Gap task: PTR-160, PTR-163, PTR-166
+- Refinement: Separate runner trust contracts, datasets real-proof binding and adversarial forgery assurance so no component can approve its own evidence.
+- Embedding query: signed pytest pass receipt runner attestation public key multicodec CID Groth16 proof forgery revocation
+- AST query: Locate receipt creation, trust policy, datasets test-pass statement/circuit, certificate issuance and publication authority checks.
+
+## PTR-G130 Reachable zero-configuration runtime integration
+
+- Status: verified_complete
+- Parent: PTR-G000
+- Depends on: PTR-G020, PTR-G030, PTR-G060, PTR-G080, PTR-G090, PTR-G120
+- Fib priority: 2
+- Priority: P0
+- Track: reachable-zero-config-runtime
+- Bundle: proof-test-reuse/reachable-runtime-v7
+- Goal: Make ordinary installed and source-checkout pytest invocations in all three repositories discover a cold-safe bridge and reach exact locator/current-context lookup without test rewrites.
+- Evidence: ptr/datasets-bootstrap-v3@1, ptr/kit-bootstrap-v3@1, ptr/authenticated-runtime-composition@1
+- Acceptance criteria: ptr/datasets-bootstrap-v3@1; ptr/kit-bootstrap-v3@1; ptr/authenticated-runtime-composition@1
+- Outputs: external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py, external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py, external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/plugin.py, external/ipfs_accelerate/ipfs_accelerate_py/testing/proof_reuse/publication.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_proof_reuse_locator_only_warm_path.py external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py -q
+- Acceptance: Only current `ptr/datasets-bootstrap-v3@1` and `ptr/kit-bootstrap-v3@1` evidence satisfies the repository bootstrap boundary; V2 receipts are stale for this goal. Unique `pytest11` bridges plus conditional module-level root `pytest_plugins` load without `-p` or test edits in isolated installed and source direct-node subprocesses; a namespace-only empty accelerator hierarchy left by an uninitialized gitlink is treated as optional absence and remains an inert no-op, while a regular installed-style `ipfs_accelerate_py/__init__.py` whose testing/plugin hierarchy is missing exposes `ModuleNotFoundError` rather than being mistaken for optional absence; package-owned bridges never suppress a transitive failure from an accelerator plugin that was actually found; package `__init__` files expose lazy facades only and never install, build, download, start daemons or touch user state; ordinary items reach two-stage lookup; current context and signed authority are revalidated; no genuinely absent optional plugin/cache/prover/transport prevents real test execution.
+- Gap task: PTR-161, PTR-162, PTR-164
+- Refinement: Recover reachable package surfaces independently, then join them with the accelerator's locator-first and controller-only runtime.
+- Embedding query: pytest11 lazy bridge no test rewrite locator only warm lookup current context xdist controller publication
+- AST query: Locate package entry points/conftests/facades, collection filtering, locator lookup, current context, receipt and xdist publication paths.
+
+## PTR-G140 Current-tree evidence, adversarial assurance, and closeout
+
+- Status: verified_complete
+- Parent: PTR-G000
+- Depends on: PTR-G070, PTR-G100, PTR-G110, PTR-G120, PTR-G130
+- Fib priority: 3
+- Priority: P0
+- Track: authenticated-current-tree-assurance
+- Bundle: proof-test-reuse/current-tree-assurance-v9
+- Goal: Preserve actionable retry counterexamples, reconcile historical implementation onto reachable exact gitlinks, and publish fresh 78-task evidence from genuine ordinary pytest cold/warm/replay and adversarial runs.
+- Evidence: ptr/actionable-retry-evidence@1, ptr/completed-task-artifact-evidence@1, ptr/verified-history-replay@1, ptr/genuine-three-repository-e2e-v2@1, ptr/authenticated-current-tree-gate-v5@1
+- Acceptance criteria: ptr/actionable-retry-evidence@1; ptr/completed-task-artifact-evidence@1; ptr/verified-history-replay@1; ptr/genuine-three-repository-e2e-v2@1; ptr/authenticated-current-tree-gate-v5@1
+- Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py, external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py, external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py, external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py, scripts/proof_backed_test_reuse_task_evidence.py, scripts/proof_backed_test_reuse_replay_verified_tasks.py, scripts/proof_backed_test_reuse_objective_reconciliation.py, external/ipfs_accelerate/test/api/test_proof_reuse_genuine_three_repo_e2e.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/validation/proof_test_reuse_current_tree_gate.py
+- Validation: IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_failure_review.py external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py tests/test_proof_backed_test_reuse_task_evidence.py tests/test_proof_backed_test_reuse_replay_verified_tasks.py test/test_proof_backed_test_reuse_objective_reconciliation.py external/ipfs_accelerate/test/api/test_proof_reuse_genuine_three_repo_e2e.py external/ipfs_accelerate/test/api/test_proof_reuse_authenticated_current_tree_gate.py -q
+- Acceptance: Failed subprocess validation remains attempted/failed and produces deterministic, deduplicated retry evidence of at most 16 KiB with its receipt, command/test/path/exception/failure head and hash-marked truncation intact; no normalizer exception relabels it as setup/not-run. Completed labels are backed by present outputs and validation targets with exact path owners, task/merge receipts and ancestor commits on fetchable exact gitlinks; cold/warm/replay uses no `-p`, service or tracer injection; body-oracle false skips are zero; performance threshold passes; optional gaps remain RUN/DEFERRED; G120/G130/G140 remain mandatory; PTR-169's self-receipt is only a candidate until the outer controller reruns the 78-task gate on its merged commit and then projects completion. Any 77-task, 76-task, v8 or v7 packet is stale.
+- Gap task: PTR-163, PTR-171, PTR-165, PTR-167, PTR-168, PTR-169
+- Refinement: Preserve bounded actionable failures before retrying repository repairs, validate evidence rules, replay only verified material, prove the public three-repository lifecycle, then perform one final current-tree join.
+- Embedding query: task artifact evidence gitlink reachability replay merge receipt cold warm forced rerun zero false skip benchmark closeout
+- AST query: Locate task/merge receipts, submodule pins, current-tree gates, subprocess fixtures, body counters, mutation oracles and rollout metrics.

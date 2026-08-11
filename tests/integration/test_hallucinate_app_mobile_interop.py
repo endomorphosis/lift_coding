@@ -36,9 +36,7 @@ NESTED_BENCHMARK_SCHEMA_SCRIPT = (
     "hallucinate_app/ipfs_accelerate_py/data/duckdb/scripts/create_benchmark_schema.py"
 )
 # Monorepo-pinned accelerate tree (CI does not initialize nested submodules).
-PINNED_TIME_SERIES_SCHEMA = (
-    "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql"
-)
+PINNED_TIME_SERIES_SCHEMA = "external/ipfs_accelerate/data/duckdb/db_schema/time_series_schema.sql"
 PINNED_BENCHMARK_SCHEMA_SCRIPT = (
     "external/ipfs_accelerate/data/duckdb/scripts/create_benchmark_schema.py"
 )
@@ -60,9 +58,7 @@ def _first_existing_repo_path(*relative_paths: str) -> Path:
         candidate = REPO_ROOT / relative_path
         if candidate.is_file():
             return candidate
-    raise AssertionError(
-        "missing required artifact; tried: " + ", ".join(relative_paths)
-    )
+    raise AssertionError("missing required artifact; tried: " + ", ".join(relative_paths))
 
 
 def resolve_time_series_schema_path() -> Path:
@@ -72,9 +68,7 @@ def resolve_time_series_schema_path() -> Path:
 
 def resolve_benchmark_schema_script_path() -> Path:
     """Prefer nested accelerate script; fall back to monorepo pin."""
-    return _first_existing_repo_path(
-        NESTED_BENCHMARK_SCHEMA_SCRIPT, PINNED_BENCHMARK_SCHEMA_SCRIPT
-    )
+    return _first_existing_repo_path(NESTED_BENCHMARK_SCHEMA_SCRIPT, PINNED_BENCHMARK_SCHEMA_SCRIPT)
 
 
 @pytest.fixture(scope="module")
@@ -94,9 +88,7 @@ def hallucinate_app_interop_root(tmp_path_factory: pytest.TempPathFactory) -> Pa
 
     pinned_accelerate = REPO_ROOT / "external" / "ipfs_accelerate"
     pinned_schema = pinned_accelerate / "data/duckdb/db_schema/time_series_schema.sql"
-    assert pinned_schema.is_file(), (
-        f"monorepo-pinned accelerate schema missing: {pinned_schema}"
-    )
+    assert pinned_schema.is_file(), f"monorepo-pinned accelerate schema missing: {pinned_schema}"
 
     root = tmp_path_factory.mktemp("hallucinate_app_interop")
     product_surface = HALLUCINATE_APP_ROOT / "hallucinate_app"

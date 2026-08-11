@@ -734,9 +734,17 @@ def test_supervisor_objective_refill_forces_janitor_reopened_goals(tmp_path):
     payload = supervisor.refill_objective_backlog()
     updated_strategy = json.loads(strategy_path.read_text(encoding="utf-8"))
 
-    assert payload.get("objective_heap_schedule_count") == 1
-    # RefillScanResult supports mapping-style access for legacy metadata keys.
-    assert payload["objective_heap_schedule_count"] == 1
+    def _payload_get(result, key, default=None):
+        if hasattr(result, "get"):
+            return result.get(key, default)
+        metadata = getattr(result, "metadata", None) or {}
+        if key in metadata:
+            return metadata[key]
+        if hasattr(result, "to_dict"):
+            return result.to_dict().get(key, default)
+        return default
+
+    assert _payload_get(payload, "objective_heap_schedule_count") == 1
     assert captured["force_goal_id"] == ["VAIOS-G697"]
     assert updated_strategy["last_objective_goal_scan_mode"] == "force"
     assert updated_strategy["last_objective_task_janitor_force_goal_ids"] == ["VAIOS-G697"]

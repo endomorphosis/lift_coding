@@ -10,8 +10,9 @@ explicit operator commit into the protected objective heap.
 Lifecycle contract (three phases, never skipped):
 
 1. Provisional — drained goals become ``provisionally_complete`` only.
-2. Children — after current validation, verify ``PTR-G010`` … ``PTR-G100``.
-3. Final root — admit final-gate evidence, then verify ``PTR-G110`` then
+2. Children — after current validation, verify ``PTR-G010`` … ``PTR-G130``.
+3. Final root — admit the authenticated current-tree gate, then verify
+   ``PTR-G140`` followed by
    ``PTR-G000``.
 
 Report-only diagnosis never writes the repository.  Closeout refuses open
@@ -37,7 +38,7 @@ import uuid
 from collections.abc import Callable, Mapping, MutableMapping, Sequence
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Final
 
@@ -63,12 +64,14 @@ OBJECTIVE_CLOSEOUT_CHECKPOINT_SCHEMA: Final = (
 OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT: Final = "ObjectiveCompletionEvidenceArtifact"
 
 ROOT_GOAL_ID: Final = "PTR-G000"
-FINAL_GATE_GOAL_ID: Final = "PTR-G110"
-FINAL_GATE_TASK_ID: Final = "PTR-122"
-FINAL_GATE_ACCEPTANCE_CRITERION: Final = "ptr/final-current-tree-gate@1"
+FINAL_GATE_GOAL_ID: Final = "PTR-G140"
+FINAL_GATE_TASK_ID: Final = "PTR-169"
+FINAL_GATE_ACCEPTANCE_CRITERION: Final = "ptr/authenticated-current-tree-gate-v5@1"
+EXPECTED_TASK_COUNT: Final = 78
+FINAL_GATE_REVIEW_REVISION: Final = "authenticated-receipt-current-tree-repair-v9"
 ROOT_ACCEPTANCE_CRITERION: Final = "ptr/cross-repository-current-tree-gate@1"
 CHILD_GOAL_IDS: Final = tuple(
-    f"PTR-G{index:03d}" for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+    f"PTR-G{index:03d}" for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130)
 )
 ALL_GOAL_IDS: Final = (ROOT_GOAL_ID, *CHILD_GOAL_IDS, FINAL_GATE_GOAL_ID)
 DEFAULT_PHASE_COUNT: Final = 3
@@ -77,8 +80,8 @@ TASK_HEADER_RE = re.compile(r"^##\s+(PTR-\d{3})\b", re.MULTILINE)
 TASK_STATUS_RE = re.compile(r"^- Status:\s*(\S+)", re.MULTILINE | re.IGNORECASE)
 GOAL_HEADER_RE = re.compile(r"^##\s+(PTR-G\d{3})\s+(.+?)\s*$", re.MULTILINE)
 GOAL_STATUS_RE = re.compile(r"^- Status:\s*(\S+)", re.MULTILINE | re.IGNORECASE)
-GOAL_PARENT_RE = re.compile(r"^- Parent:\s*(.*)$", re.MULTILINE | re.IGNORECASE)
-GOAL_DEPENDS_RE = re.compile(r"^- Depends on:\s*(.*)$", re.MULTILINE | re.IGNORECASE)
+GOAL_PARENT_RE = re.compile(r"^- Parent:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE)
+GOAL_DEPENDS_RE = re.compile(r"^- Depends on:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE)
 CLOSED_TASK_STATUSES: Final = frozenset({"completed", "complete", "verified_complete", "done"})
 CLOSED_GOAL_STATUSES: Final = frozenset({"verified_complete", "complete", "completed", "done"})
 PROVISIONAL_GOAL_STATUSES: Final = frozenset({"provisionally_complete", "provisional"})
@@ -103,14 +106,14 @@ OPTIONAL_SERVICE_KEYS: Final = frozenset(
 # ---------------------------------------------------------------------------
 
 
-class ObjectiveCloseoutPhase(str, Enum):
+class ObjectiveCloseoutPhase(StrEnum):
     """Ordered closeout phases.  Phases must never skip a legal transition."""
 
     DIAGNOSE = "diagnose"
     FENCE = "fence"
     PHASE_1_PROVISIONAL = "phase_1_provisional"
-    PHASE_2_VERIFY_CHILDREN = "phase_2_verify_g010_g100"
-    PHASE_3_VERIFY_FINAL = "phase_3_verify_g110_g000"
+    PHASE_2_VERIFY_CHILDREN = "phase_2_verify_g010_g130"
+    PHASE_3_VERIFY_FINAL = "phase_3_verify_g140_g000"
     CANDIDATE_HANDOFF = "candidate_handoff"
     COMPLETE = "complete"
 
@@ -600,6 +603,8 @@ def _final_gate_completion_evidence_is_admissible(
     goal_id: str,
     criterion: str,
     expected_tree: str,
+    expected_task_count: int = EXPECTED_TASK_COUNT,
+    expected_review_revision: str = FINAL_GATE_REVIEW_REVISION,
 ) -> bool:
     if not isinstance(value, Mapping):
         return False
@@ -615,6 +620,8 @@ def _final_gate_completion_evidence_is_admissible(
         and isinstance(satisfied, Sequence)
         and not isinstance(satisfied, str | bytes)
         and tuple(satisfied) == (criterion,)
+        and value.get("task_count") == expected_task_count
+        and value.get("review_revision") == expected_review_revision
         and tree
         and (not expected_tree or tree == expected_tree)
     )
@@ -624,15 +631,58 @@ def _gate_artifact_readiness(
     payload: Mapping[str, Any],
     *,
     expected_tree: str = "",
+    expected_task_count: int = EXPECTED_TASK_COUNT,
+    expected_review_revision: str = FINAL_GATE_REVIEW_REVISION,
 ) -> tuple[bool, str, str]:
-    """Validate a PTR-122 persisted bundle or strict hermetic fixture gate."""
+    """Validate a PTR-169 persisted bundle or strict hermetic fixture gate."""
+
+    if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
+        if "goals" in payload:
+            return (
+                False,
+                "wrong_gate_producer",
+                "PTR-120 aggregate goal records are inputs to, not substitutes "
+                "for, the PTR-169 authenticated current-tree gate",
+            )
+        return (
+            False,
+            "wrong_gate_producer",
+            "final gate artifact must be produced by PTR-169",
+        )
+
+    # Live PTR-169 bundles nest task_count / review_revision on decision;
+    # hermetic fixtures may place them at the top level.  Accept either.
+    _decision_for_inventory = payload.get("decision")
+    _decision_map = _decision_for_inventory if isinstance(_decision_for_inventory, Mapping) else {}
+    observed_task_count = payload.get("task_count")
+    if observed_task_count is None:
+        observed_task_count = _decision_map.get("task_count")
+    observed_review_revision = payload.get("review_revision")
+    if observed_review_revision is None:
+        observed_review_revision = _decision_map.get("review_revision")
+
+    if observed_task_count != expected_task_count:
+        return (
+            False,
+            "stale_gate_task_count",
+            "final gate task inventory must be exactly "
+            f"{expected_task_count}, got {observed_task_count!r}",
+        )
+    if observed_review_revision != expected_review_revision:
+        return (
+            False,
+            "stale_gate_review_revision",
+            "final gate review revision must be "
+            f"{expected_review_revision!r}, got "
+            f"{observed_review_revision!r}",
+        )
 
     if "decision" in payload:
         if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
             return (
                 False,
                 "wrong_gate_producer",
-                "final gate bundle must be produced by PTR-122",
+                "final gate bundle must be produced by PTR-169",
             )
         decision = payload.get("decision")
         if not isinstance(decision, Mapping):
@@ -650,39 +700,29 @@ def _gate_artifact_readiness(
             goal_id=FINAL_GATE_GOAL_ID,
             criterion=FINAL_GATE_ACCEPTANCE_CRITERION,
             expected_tree=expected_tree,
+            expected_task_count=expected_task_count,
+            expected_review_revision=expected_review_revision,
         ):
             return (
                 False,
                 "invalid_final_gate_evidence",
-                "PTR-122 bundle lacks admissible PTR-G110 completion evidence",
+                "PTR-169 bundle lacks admissible PTR-G140 completion evidence",
             )
         if not _final_gate_completion_evidence_is_admissible(
             root_evidence,
             goal_id=ROOT_GOAL_ID,
             criterion=ROOT_ACCEPTANCE_CRITERION,
             expected_tree=expected_tree,
+            expected_task_count=expected_task_count,
+            expected_review_revision=expected_review_revision,
         ):
             return (
                 False,
                 "invalid_root_gate_evidence",
-                "PTR-122 bundle lacks admissible PTR-G000 completion evidence",
+                "PTR-169 bundle lacks admissible PTR-G000 completion evidence",
             )
         return True, "", ""
 
-    if "goals" in payload:
-        return (
-            False,
-            "wrong_gate_producer",
-            "PTR-120 aggregate goal records are inputs to, not substitutes "
-            "for, the PTR-122 final current-tree gate",
-        )
-
-    if payload.get("producing_task_id") != FINAL_GATE_TASK_ID:
-        return (
-            False,
-            "wrong_gate_producer",
-            "final gate artifact must be produced by PTR-122",
-        )
     if "passed" not in payload:
         return (
             False,
@@ -698,7 +738,7 @@ def _gate_artifact_readiness(
         return (
             False,
             "invalid_gate_criteria",
-            "final gate artifact lacks the exact PTR-G110/PTR-G000 criteria",
+            "final gate artifact lacks the exact PTR-G140/PTR-G000 criteria",
         )
     return True, "", ""
 
@@ -1158,6 +1198,9 @@ class ProofTestReuseObjectiveReconciler:
     allow_synthetic_evidence: bool = False
     synthetic_evidence_cids: Mapping[str, Sequence[str]] | None = None
     injected_contradictions: Sequence[str] = ()
+    expected_gate_task_count: int = EXPECTED_TASK_COUNT
+    expected_board_task_count: int = EXPECTED_TASK_COUNT
+    expected_gate_review_revision: str = FINAL_GATE_REVIEW_REVISION
 
     interface: str = PROOF_TEST_REUSE_OBJECTIVE_RECONCILER_INTERFACE
 
@@ -1626,7 +1669,7 @@ class ProofTestReuseObjectiveReconciler:
         repository_tree: str,
         objective_revision: str,
     ) -> ObjectiveCloseoutReceipt:
-        """Verify G010 through G100 after current validation succeeds."""
+        """Verify G010 through G130 after current validation succeeds."""
 
         if validation.get("passed") is not True:
             return ObjectiveCloseoutReceipt(
@@ -1650,6 +1693,30 @@ class ProofTestReuseObjectiveReconciler:
                 continue
             if current != "provisionally_complete":
                 reasons.append(f"not_provisional:{goal_id}:{current}")
+                continue
+            goal = by_id.get(goal_id)
+            dependencies = goal.depends_on if goal is not None else ()
+            missing_dependencies = [
+                dependency
+                for dependency in dependencies
+                if dependency not in by_id and dependency not in states
+            ]
+            if missing_dependencies:
+                reasons.extend(
+                    f"missing_dependency:{goal_id}:{dependency}"
+                    for dependency in missing_dependencies
+                )
+                continue
+            unverified_dependencies = [
+                dependency
+                for dependency in dependencies
+                if _normalize_status(states.get(dependency, "active")) != "verified_complete"
+            ]
+            if unverified_dependencies:
+                reasons.extend(
+                    f"dependency_not_verified:{goal_id}:{dependency}"
+                    for dependency in unverified_dependencies
+                )
                 continue
             evidence = self._evidence_for_goal(goal_id)
             if not evidence and not self.allow_synthetic_evidence:
@@ -1714,7 +1781,7 @@ class ProofTestReuseObjectiveReconciler:
         repository_tree: str,
         objective_revision: str,
     ) -> ObjectiveCloseoutReceipt:
-        """Admit final-gate evidence, then verify G110 then G000."""
+        """Admit authenticated gate evidence, then verify G140 then G000."""
 
         reasons: list[str] = []
         transitions: list[dict[str, Any]] = []
@@ -1730,7 +1797,9 @@ class ProofTestReuseObjectiveReconciler:
         if not gate_admitted["admitted"]:
             reasons.extend(gate_admitted.get("reason_codes") or ["gate_not_admitted"])
 
-        # Verify G110 before G000.
+        # Verify G140 before G000.  G120 and G130 are phase-two premises, so
+        # an active or otherwise unverified repair goal can never be bypassed
+        # by an otherwise valid final-gate artifact.
         for goal_id in (FINAL_GATE_GOAL_ID, ROOT_GOAL_ID):
             if goal_id not in states and not any(goal.goal_id == goal_id for goal in goals):
                 reasons.append(f"missing_goal:{goal_id}")
@@ -1745,9 +1814,9 @@ class ProofTestReuseObjectiveReconciler:
                 # Do not partially verify final goals when premises failed.
                 continue
             if goal_id == ROOT_GOAL_ID:
-                g110 = _normalize_status(states.get(FINAL_GATE_GOAL_ID, "active"))
-                if g110 != "verified_complete":
-                    reasons.append("g110_before_g000_required")
+                g140 = _normalize_status(states.get(FINAL_GATE_GOAL_ID, "active"))
+                if g140 != "verified_complete":
+                    reasons.append("g140_before_g000_required")
                     continue
             transition = transition_goal(
                 current,
@@ -1785,6 +1854,12 @@ class ProofTestReuseObjectiveReconciler:
         messages: list[str] = []
         tasks = parse_todo_tasks(self.todo_path.read_text(encoding="utf-8"))
         open_task_ids = [task.task_id for task in tasks if not task.is_closed]
+        if len(tasks) != self.expected_board_task_count:
+            reason_codes.append("stale_task_inventory")
+            messages.append(
+                "task inventory count must be exactly "
+                f"{self.expected_board_task_count}, got {len(tasks)}"
+            )
         if open_task_ids:
             reason_codes.append("open_tasks")
             messages.append("open tasks: " + ", ".join(open_task_ids))
@@ -1854,6 +1929,8 @@ class ProofTestReuseObjectiveReconciler:
                     gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(
                         payload,
                         expected_tree=tree,
+                        expected_task_count=self.expected_gate_task_count,
+                        expected_review_revision=(self.expected_gate_review_revision),
                     )
                     if not gate_ok:
                         reason_codes.append(gate_reason)
@@ -1980,6 +2057,8 @@ class ProofTestReuseObjectiveReconciler:
         gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(
             payload,
             expected_tree=repository_tree,
+            expected_task_count=self.expected_gate_task_count,
+            expected_review_revision=self.expected_gate_review_revision,
         )
         if not gate_ok:
             return {

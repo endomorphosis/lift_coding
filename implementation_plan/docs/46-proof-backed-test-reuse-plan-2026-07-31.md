@@ -2,6 +2,8 @@
 
 Date: 2026-07-31
 
+Current reviewed revision: 2026-08-08 (`authenticated-receipt-current-tree-repair-v9`)
+
 Program: `proof-backed-test-reuse-v1`
 
 Task prefix: `PTR-`
@@ -73,23 +75,41 @@ mutation evidence establish that it is safe.
 ### Supervisor provider execution policy
 
 The reviewed proof-reuse supervisor profile always starts implementation work
-with Grok model `grok-4.5`. Grok binary and headless-auth readiness are launch
-preflight requirements; an unavailable or unauthenticated Grok primary is not a
-reason to start Codex.
+with Grok model `grok-4.5` when that primary is ready. Preflight probes Grok
+binary and headless-auth readiness, but an unavailable, unlaunchable, or
+unauthenticated Grok primary activates the configured Codex fallback instead of
+blocking launch, provided that Codex itself is installed and authenticated.
 
-Codex is a conditional fallback with model `gpt-5.6-terra` and
-`model_reasoning_effort="medium"`. The fallback runner may invoke it only after
-the failed Grok process emits a narrowly recognized, valid quota-exhaustion
-error. Authentication failures, launch failures, timeouts, transport failures,
-generic nonzero exits, rate-limit-only responses, malformed output, and task
-failures preserve the Grok failure without invoking Codex. The supervisor
-projects this model/trigger contract in preflight, start, lane, and status
-payloads.
+Codex is the automatic fallback with model `gpt-5.6-terra` and
+`model_reasoning_effort="high"`. The canonical
+`ipfs_accelerate_py.llm_router` owns provider readiness, failure
+classification, fallback selection, and route records. Its explicit agent
+route is separate from `generate_text`: it preserves the router invariant that
+side-effecting work is never replayed through a second provider. Codex is
+selected automatically only for confirmed Grok quota exhaustion,
+authentication failure, or launch unavailability while the worktree remains
+unchanged. Timeout, transport, malformed output, generic nonzero exit, task
+failure, or detected worktree mutation is terminal for that attempt.
 
-This stricter behavior is profile-scoped and opt-in through
-`IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY=grok_quota_exhausted`.
-Accelerator supervisors that do not select it retain the compatibility
-`any_failure` policy.
+Preflight records primary readiness, the effective provider, and fallback
+reason; status records the exact static router policy; and every transition
+emits typed, bounded, task/attempt/stage-bound route telemetry in the private
+runtime state and event stream. That telemetry explicitly has no completion
+authority: proposal, validation, merge, and authenticated closeout receipts
+remain the only acceptance authorities. The stdin/worktree runner is only a
+process adapter and sanitizer; it does not own provider selection. Semantic
+merge invocations repeat the typed readiness probe so a recovered Grok primary
+is selected without restarting the supervisor.
+
+This behavior is profile-scoped and selects
+`IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY=grok_quota_auth_or_unavailable`
+for both implementation and semantic merge resolution. Provider output remains
+a proposal only: automatic routing never bypasses isolated-worktree
+containment, protected-path and proposal checks, declared validation, the
+serial merge queue, authenticated test receipts, or current-tree closeout
+gates. Provider stderr is sanitized before replay or persistence, known
+credential assignments and bearer values are redacted, and spawned lane
+processes use a private file-creation mask.
 
 ## 3. Existing assets and gaps
 
@@ -307,7 +327,7 @@ traces can still be diagnostic and cached, but cannot authorize reuse.
 
 ## 8. Pass receipt and zero-knowledge certificate
 
-### 8.1 `TestPassReceipt@1`
+### 8.1 `SignedTestPassReceipt@2`
 
 Created only after terminal teardown, the receipt binds:
 
@@ -319,37 +339,67 @@ Created only after terminal teardown, the receipt binds:
 - captured dependency forest and capability roots;
 - schema and policy CIDs.
 
-The receipt may be signed or otherwise admitted by the configured runner trust
-policy. Its immutable CID is stored before any proving request.
+The receipt is not pass authority until a trusted runner has emitted a canonical
+`RunnerPassAttestation@1`. That attestation signs the receipt CID, execution-key
+and candidate-context CIDs, setup/call/teardown and trace-completeness roots,
+fresh issuance nonce, trust domain, key epoch and policy CID. The only v1
+signature suite is Ed25519 over
+`b"ipfs-test-pass-attestation/v1\0" + sha256(unsigned_attestation_dag_cbor_bytes)`.
+The unsigned envelope has one strict canonical DAG-CBOR representation and a
+CIDv1/dag-cbor/sha2-256 identity. Public-key material is exactly
+`varint(ed25519-pub) || raw_32_byte_key`; its identifier is the lower-base32
+CIDv1/raw/sha2-256 of those bytes. The verifier recomputes every CID, verifies
+the signature locally, and starts trust only from an explicitly locally pinned
+CIDv1/dag-cbor/sha2-256 `RunnerTrustPolicy@1`, never TOFU, cache presence, or a
+certificate-selected key. That policy restricts key usage to pytest-pass
+attestation and checks trust domain, key epoch, not-before/not-after, rotation,
+and revocation before proof verification. An unknown, expired, revoked,
+unsigned, ambiguously encoded, or legacy hash-only receipt runs normally. The
+attestation's immutable canonical bytes are stored before proving.
 
-### 8.2 `TestPassStatementV1`
+A unique nonce prevents issuance substitution; it is not a consume-on-read
+token. Repeated verification of the same immutable certificate is legitimate
+warm reuse while the exact execution context, policy CID, trust domain, and key
+epoch remain current. Cross-context or cross-policy use, an expired/revoked
+epoch, substituted attestation, or nonce reuse for a different issuance is a
+replay and must run the test.
 
-The real-ZK statement proves possession of an admitted receipt satisfying:
+### 8.2 `TestPassStatementV5`
+
+The real-ZK statement proves possession of the exact receipt committed by a
+separately verified runner attestation and satisfying:
 
 1. the private receipt hashes to the public receipt CID;
 2. its execution-key CID equals the public current key;
 3. setup, call, and teardown are all pass;
 4. no disqualifying outcome bit is set;
 5. the trace-completeness and policy identifiers match public admitted values;
-6. the issuer binding/commitment satisfies the approved trust policy.
+6. its signed-attestation, candidate-context and phase-root commitments equal
+   the public values; and
+7. the proof-system/circuit/key/issuer binding satisfies the approved policy.
 
 Public inputs include statement/circuit/verifying-key CIDs, receipt and
-execution-key CIDs, policy CID, outcome bits, issuer commitment, and allowed
-epoch data. Private inputs contain only the minimum receipt witness. The threat
-model must cover replay, substitution, wrong circuit/key, issuer confusion,
-malformed proof, public-input mismatch, witness leakage, and simulated backend
+execution-key CIDs, signed-attestation CID, runner public-key CID, policy CID,
+outcome and phase-root commitments, issuer commitment, nonce domain and allowed
+epoch data. Private inputs contain only the minimum receipt witness. Signature
+verification is either circuit-native or a mandatory locally verified
+co-condition whose exact attestation CID is a public input; a prover-controlled
+boolean that merely claims a signature was checked is never accepted. The
+threat model covers replay, substitution, wrong circuit/key, runner or issuer
+confusion, proving-key-only forgery, malformed proof, public-input mismatch,
+witness leakage, downgrade, rotation/revocation races, and simulated-backend
 mislabeling.
 
 ### 8.3 Proving and verification
 
 - Verification is local through a pinned real backend and bounded by byte/time
   limits.
-- The production-activation correction uses the reviewed local Groth16 backend
+- The authenticated-current-tree correction uses the reviewed local Groth16 backend
   for issuance. `IPFS_TEST_PROOF_REUSE_GROTH16_ENDPOINT` is currently a bounded
   diagnostic/configuration capability only, not an implemented remote issuer;
   its absence never blocks launch or test execution. A future authenticated
   endpoint client requires a separately reviewed trust/transport task and is
-  not completion evidence for this 66-task board.
+  not completion evidence for this 78-task board.
 - Groth16 or ProveKit issuance is asynchronous/deferred. Any unavailable local
   provider or diagnostic endpoint state records `certificate_deferred` and
   does not change the passed test.
@@ -430,6 +480,15 @@ entry-point autoload is disabled by the hermetic supervisor. An explicit
 the plugin performs no network access, daemon startup, cache creation, or ZK
 probe.
 
+Each package `__init__.py` exposes only a narrow, lazy proof-reuse bootstrap
+facade used by these registration paths; it does not eagerly import pytest,
+proof systems, cache clients, or daemon code. Package `__init__.py` cannot be
+the sole registration mechanism because pytest is not required to import the
+package before collecting an arbitrary test module. The `pytest11` plus root
+`conftest.py` composition therefore provides the requested no-test-rewrite
+injection while the `__init__.py` facade keeps package-specific wiring lazy and
+side-effect free.
+
 ### 10.3 Modes
 
 | Mode | Read candidates | Skip | Write receipt | Prove |
@@ -497,6 +556,9 @@ merge gates.
 | `PTR-G090` kit integration | `ASI-G250` | Optional immutable transport and capability facts |
 | `PTR-G100` adversarial/e2e | `ASI-G240`, `ASI-G280`, `ASI-G360` | Hermetic tests, recovery, rollout safety |
 | `PTR-G110` rollout/closeout | `ASI-G260`, `ASI-G290`, `ASI-G360` | Parallel operation, measurable efficiency, staged promotion |
+| `PTR-G120` authenticated authority | `CBP-G025`, `CBP-G200`, `ASI-G300` | Signed runner pass attestation, key lifecycle, V5 real-proof binding |
+| `PTR-G130` zero-configuration runtime | `ASI-G220`, `ASI-G240`, `ASI-G350` | Safe package bridges and ordinary pytest discovery without test rewrites |
+| `PTR-G140` current-tree assurance | `ASI-G240`, `ASI-G280`, `ASI-G360` | Reachable exact pins, replayable evidence, adversarial and subprocess gates |
 
 The PTR heap is a separate program. It does not silently add children to closed
 ASI or CBP populations. Cross-references describe conformance; PTR completion
@@ -738,6 +800,211 @@ keys or a trusted-setup manifest is a truthful activation gap: tests continue to
 run and the supervisor continues, but no warm skip or closeout authority is
 invented.
 
+## 13.4 Authenticated-receipt and reachable-current-tree repair (2026-08-08)
+
+A final launch audit rejected the 66-task completion packet. Its labels are
+retained as historical facts, but they do not establish a runnable or secure
+current tree:
+
+- the datasets and kit commits named by the historical outer gitlinks are not
+  available from the configured remotes, while the nearest reachable commits
+  predate required proof-reuse outputs;
+- the completion validator accepted a completed Markdown label without proving
+  that every declared output and validation target exists at the exact pinned
+  commit or that a task receipt names an ancestor commit;
+- the V4 statement proves knowledge of internally consistent receipt bytes but
+  does not establish that a trusted pytest runner observed the asserted pass;
+  possession of proving material can therefore create a mathematically valid
+  proof around a self-asserted pass;
+- the warm plugin path filters candidates before the locator-only lookup can
+  recover retained current-context material;
+- datasets has no package-owned cold-safe proof plugin loader and kit's source
+  fallback relies on a pytest hook location that is not guaranteed to load;
+  package `__init__.py` injection alone cannot solve either case because pytest
+  need not import the package before collection; and
+- the prior cross-repository e2e explicitly loaded the plugin or injected
+  services, and its skip counts did not independently prove that a forged hit
+  avoided or executed the actual test body.
+
+The first v6 repair wave subsequently merged, but an isolated post-merge import
+audit found two acceptance failures that in-process tests had not modeled. The
+datasets pytest11 bridge raises
+`ModuleNotFoundError(name='ipfs_accelerate_py.testing')` when an uninitialized
+gitlink leaves a namespace-only empty `ipfs_accelerate_py/` hierarchy. The kit
+bridge over-corrects that case by suppressing the same nested error even when an
+installed-style regular `ipfs_accelerate_py/__init__.py` exists, hiding a broken
+accelerator installation. Revision v7 therefore reopened the existing
+repository owners `PTR-161` and `PTR-162`.
+
+The stopped v7 lanes then exposed a separate supervisor failure. Real
+subprocess validation failures were present in implementation logs, but nested
+full reviews and addenda recursively exceeded the diagnostic-size limit. The
+normalizer raised, the outer catcher mislabeled the attempt as
+`implementation_setup`, and the retry capsule reported validation `not_run`.
+That destroyed the actionable counterexample and caused an exact repeat.
+Revision v8 adds one reviewed control-plane owner, `PTR-170`, and makes both
+reopened bootstrap tasks depend on it; it does not broaden proof or skip
+authority.
+
+The bounded repair is `PTR-160` through `PTR-170`, taking the reviewed
+population to 77 tasks. It does not pretend that the old unreachable commits
+are valid launch pins. The clean integration branch instead starts from the
+nearest fetchable datasets and kit baselines, preserves the compatible
+accelerator supervisor commit, and makes reconstruction of every missing
+historical output explicit work with current evidence:
+
+1. `PTR-160` defines signed runner pass-attestation, trust-policy, public-key
+   multicodec CID, nonce, epoch, rotation and revocation contracts.
+2. `PTR-170` makes failed-validation retry evidence deterministic and at most
+   16 KiB without raising. It preserves attempted/failed state, return code,
+   reason, receipt, failed command/test/path/exception and a bounded failure
+   head, deduplicates repeated review bodies, and records hash-marked
+   truncation instead of replacing the failure with a synthetic setup error.
+3. `PTR-161` restores the datasets-owned missing outputs and supplies a
+   `pytest11`/source bootstrap that is inert when accelerator or ZK extras are
+   absent. Isolated installed and source direct-node subprocesses must also
+   prove that a namespace-only empty accelerator/gitlink hierarchy is optional
+   absence and still executes the ordinary test body. This is the versioned
+   `DatasetsProofReuseBootstrap@3` boundary; historical V2 evidence is stale.
+4. `PTR-162` restores the kit-owned immutable stores and supplies the same
+   cold-safe bootstrap and strict-CID transport boundary. Its isolated
+   subprocess matrix must distinguish a namespace-only empty hierarchy, which
+   is a safe no-op, from a regular accelerator package with a missing nested
+   testing/plugin hierarchy, whose `ModuleNotFoundError` remains visible. This
+   is `KitProofReuseBootstrap@3`; historical V2 evidence is stale.
+
+   A post-merge contradiction on 2026-08-08 invalidated PTR-162 attempt 1:
+   its 30-test receipt omitted the explicit recursive-input counterexample, and
+   a roughly 4 KiB, 2,000-level canonical JSON array still raised
+   `RecursionError` through the pure-Python encoder path. PTR-162 is therefore
+   reopened under a new canonical task identity. The merged attempt remains
+   provenance only; downstream joins must wait for a checked-in deep-input
+   regression and a fresh authoritative completion receipt.
+
+   A second completion was also contradicted before any downstream join ran.
+   It repaired deep JSON but left lone-surrogate CIDs non-total, omitted the
+   required deep candidate-put regression, and allowed an ambient accelerator
+   import to mask suppression of a non-accelerator transitive error. The third
+   identity therefore places those three counterexamples directly in the
+   declared validation command as an isolated, mandatory gate.
+5. `PTR-163` implements `TestPassStatementV5`, binds the real Groth16 proof to
+   the signed attestation CID and requires local signature/trust verification.
+
+   A protected-path interruption preserved an attempt-1 candidate, but the
+   subsequent audit contradicted it before integration. It invented an
+   alternate JSON attestation, accepted callable booleans as signature/proof
+   authority, retained an authoritative V1 downgrade, and proved duplicated
+   labels rather than an opening of the exact signed receipt. The revised
+   identity makes those counterexamples mandatory and consumes only PTR-160's
+   canonical DAG-CBOR `RunnerPassAttestation@1` and local
+   `RunnerTrustPolicy@1`; legacy formats remain readable but can only run.
+
+   The next interrupted draft exposed a subtler composition error before any
+   proposal: it treated the canonical DAG-JSON test receipt as DAG-CBOR and
+   proved knowledge of seven freely chosen 32-byte labels, each reduced into a
+   single scalar, rather than hashing the exact receipt/attestation bytes. The
+   final revised contract therefore seals the codec split explicitly and
+   requires length-bound in-circuit byte hashing, collision-free full-digest
+   public inputs, exact proof-to-statement comparison, one immutable artifact
+   root, and a mandatory real PTR-160 composition regression.
+6. `PTR-164` fixes locator-only warm lookup and makes the controller the sole
+   signed-receipt/candidate publication authority.
+7. `PTR-165` validates completed-task outputs, validation targets, exact
+   gitlinks, commit ancestry and merge receipts instead of trusting board text.
+
+   Its first merged collector was itself contradicted: it derived task CIDs
+   using a private formula, accepted arbitrary JSON with blank task identity,
+   ignored authenticated JSONL reconciliation and the configured state-root
+   base, and returned success for a synthetic 0-of-71/292-gap report. A second,
+   quiesced draft still scanned only v8, invented validation schemas and the
+   command-CID projection, and accepted a fabricated one-task universe as
+   `audit_valid=true`, `ready=true`. PTR-165 is therefore revised again. The
+   replacement must first validate the exact 78-task board, consume only the
+   current v9 plus reviewed v8/v6/v1 queue, train, flat executed-validation and hash-chain event
+   formats through existing supervisor identity adapters, distinguish an
+   invalid audit from a valid non-ready result, preserve explicit pending-owner
+   attribution, and produce a byte-deterministic CID-addressed observation.
+8. `PTR-166` uses the real backend to prove that unsigned, wrongly signed,
+   stale, revoked and proving-key-only forged receipts cannot authorize a skip.
+9. `PTR-167` replays only receipt-identified historical blobs/commits, checks
+   retained tree and blob digests, publishes reachable commits, and reopens any
+   material that cannot be reconstructed rather than waiving it.
+10. `PTR-168` installs or source-loads all three packages and runs independent
+   ordinary cold, warm and forced-replay pytest processes without `-p`, service
+   injection, tracer monkeypatches or simulated proof authority. A persistent
+   body oracle establishes zero false skips under AST, fixture, conftest,
+   parameter, dependency, environment and policy mutations.
+11. `PTR-169` joins the exact reachable 78-task inventory, authenticated
+    adversarial evidence, genuine three-repository e2e and measured subprocess
+    benchmark into a fresh operator handoff. The old 66-task packet is stale.
+
+The original v6 first wave was `PTR-160`, `PTR-161` and `PTR-162`, on three
+numeric shards and three distinct repository claims. `PTR-160` remains
+completed. The fresh v8 claimable set is exactly `PTR-170` on numeric shard 2.
+After its bounded retry-evidence repair merges, reopened `PTR-161` and
+`PTR-162` become the parallel frontier on numeric shards 2 and 0 with disjoint
+datasets and kit ownership.
+`PTR-163` and `PTR-165` remain waiting until their exact bootstrap dependencies
+merge, after which datasets V5 work and the outer audit-tool work run in
+parallel on distinct resources. `PTR-164` then consumes the exact merged V5
+provider and release manifest to implement accelerator runtime composition. The
+authority join `PTR-166`, verified replay/gitlink publication `PTR-167`, genuine
+e2e `PTR-168`, and handoff `PTR-169` are deliberately ordered because each
+consumes the preceding trust boundary. Completing `PTR-165` means its live audit
+accurately reports the expected Wave-B gaps; `PTR-167` is the first task allowed
+to require that audit to be globally green. All implementation validation
+forces proof reuse off so this feature cannot certify itself. Missing optional
+proof/cache/IPFS capabilities remain typed `RUN` or `DEFERRED`, never startup
+failures or synthetic authority.
+
+Revision v9 preserves all v1, v6 and v8 receipts as immutable historical
+evidence but starts a fresh state root for the amended 78-task board. Two
+failed PTR-163 drafts demonstrated that the former 39-file task was not a
+bounded implementation unit: one weakened established wire tests, and neither
+implemented a constrained receipt-opening relation or real V5
+setup/prove/verify. The work is split without reducing its proof contract.
+PTR-163 now owns only the native Rust exact-byte relation, wire profile,
+setup/prove/verify path and truthful immutable release artifacts. PTR-171 runs
+after it and owns only the Python composition that consumes PTR-160's canonical
+DAG-JSON receipt plus canonical DAG-CBOR attestation and locally pinned policy,
+compares the complete public-input vector, and seals all legacy/callback
+downgrades. PTR-164 and PTR-166 depend on PTR-171 rather than accepting a
+partially integrated native backend.
+
+PTR-165 remains parallel with native PTR-163, but its declared live audit must
+run under the controller-selected state root even though validation retains an
+isolated HOME and XDG tree. The controller passes one canonical, existing,
+non-secret state-root directory capability through the validation allowlist;
+the capability participates in validation identity and does not expose any
+operator home, credential or startup hook. The provider subprocess receives
+no root path. A fail-closed inherited Landlock boundary leaves only the exact
+candidate worktree and private validation home writable, makes v9 control
+state plus reviewed v8/v6/v1 siblings read-only to the validation process tree,
+and emits diagnostic-only, non-authoritative boundary evidence. PTR-165 fails
+closed if the boundary, any required root, or any authenticated chain is
+missing.
+
+The v9 population is 78 tasks. PTR-165's first merged v9 inventory was reopened
+after postmerge review proved that it omitted current v9 queue authority,
+accepted altered boards and underspecified receipts, skipped its mandatory
+real-format fixture under isolated HOME, and made superseded historical
+diagnostics permanent readiness gaps. The live frontier is therefore native
+PTR-163 on numeric shard 1 plus revised PTR-165 on shard 0.
+Stopped PTR-163 attempt 4 is contradictory evidence: its core exact-byte
+circuit was promising, but it rewrote the pytest conftest during `cargo test`,
+accepted non-canonical public-input words through modulo-field decoding, kept
+the legacy pre-V5 executable while claiming a new release, and did not bind
+the manifest and ephemeral keys before prove/verify. The baseline conftest now
+handles an intentionally disabled cache provider without mutation. A reviewed
+task-local binary artifact envelope permits replacement of the one declared
+native executable only together with the exact 21-path candidate, bounded
+materialized/serialized bytes, the manifest, strengthened wire tests, and the
+full declared validation; the ordinary binary prohibition remains in force
+for every other task. When the revised PTR-163 succeeds, PTR-171 becomes
+DAG-ready on shard 0. PTR-171 alone unlocks PTR-164; the remaining PTR-166
+through PTR-169 joins retain their ordered trust boundaries. Any v8/77-task,
+v7/76-task or older packet is provenance only and cannot authorize closeout.
+
 ## 14. Parallel implementation program
 
 The machine board is
@@ -779,6 +1046,15 @@ protected from implementation agents.
 | 25 | `PTR-153`, `PTR-154` | Preserve proof-bearing issued material and controller-owned V2 context in parallel on disjoint accelerator files and numeric shards |
 | 26 | `PTR-155` | Join exact datasets V2 local verification with the sole atomic candidate publication path |
 | 27 | `PTR-149` | Live reporting, exact 66-task authority gate, corrected handoff and explicit operator closeout premise |
+| 28 | `PTR-170` | V8 first repairs bounded actionable retry evidence on shard 2 so subsequent failed validations cannot be normalized into synthetic setup failures |
+| 29 | `PTR-161`, `PTR-162` | Reopened datasets and kit isolated-bootstrap contracts run concurrently on shards 2 and 0 only after PTR-170 merges; PTR-160 signed-runner work remains complete |
+| 30 | `PTR-163`, `PTR-165` | The native exact-byte V5 Rust relation and outer evidence-audit tool run independently on datasets and the outer tree |
+| 31 | `PTR-171` | Python composes PTR-160's signed receipt/attestation into the exact merged native V5 profile and seals every legacy/callback downgrade |
+| 32 | `PTR-164` | Accelerator runtime composition pins and consumes the exact merged typed V5 provider/capability/release identities |
+| 33 | `PTR-166` | Real-backend authenticity join rejects proving-key-only, signature, key-lifecycle and downgrade forgeries with zero skipped/xfail assurance cases |
+| 34 | `PTR-167` | Receipt-verified history replay publishes reachable exact commits/gitlinks and requires green current output ancestry |
+| 35 | `PTR-168` | Genuine installed/source three-repository cold, warm, forced-replay and mutation-oracle e2e |
+| 36 | `PTR-169` | Exact 78-task authenticated current-tree candidate, benchmark and reconciler update; authority requires a post-merge outer rerun and rejects v8/77-task and v7/76-task packets |
 
 Tasks that change the same git submodule remain subject to canonical claims and
 the shared serial merge queue. No concurrency override bypasses a gitlink or
@@ -805,9 +1081,16 @@ inventing unrelated kit work: `PTR-150` owns accelerator on shard 0 and
 after both merge. `PTR-153` and `PTR-154` then occupy shards 0 and 1 with
 disjoint predicted files; the shared merge queue serializes their accelerator
 gitlink publication before shard-2 `PTR-155` joins them. `PTR-149` remains last.
-Numeric shards preserve historical canonical provider identities; runtime
-execution remains Grok 4.5 first with the configured medium Terra fallback only
-on exact Grok quota exhaustion.
+That order is retained as historical provenance. The v6 correction started
+with `PTR-160`, `PTR-161` and `PTR-162`; v8 first runs `PTR-170`, then resumes
+reopened `PTR-161` and `PTR-162` in parallel. Their merge admits the disjoint
+`PTR-163`/`PTR-165` wave, followed by
+the dependency-ordered `PTR-164` runtime join. Authenticity, replay, genuine e2e
+and closeout form the ordered `PTR-166` through `PTR-169` joins. Numeric shards
+preserve canonical provider identities; runtime execution remains Grok 4.5
+first when ready, with automatic Codex `gpt-5.6-terra` high fallback when Grok
+is unavailable, unauthenticated, or quota-exhausted before any worktree side
+effect.
 
 ## 15. Validation strategy
 
@@ -846,7 +1129,11 @@ For a direct node in each repository:
 5. a relevant mutation forces execution;
 6. `off`, coverage, and missing-provider modes execute;
 7. autoload enabled and disabled repository bootstraps behave consistently;
-8. xdist produces no duplicate or partial authority records.
+8. xdist produces no duplicate or partial authority records; and
+9. isolated installed and source direct-node subprocesses treat an empty
+   namespace/gitlink accelerator hierarchy as optional absence but expose a
+   missing nested hierarchy or transitive dependency from a regular accelerator
+   package.
 
 ### Performance gates
 
@@ -889,8 +1176,13 @@ explicitly permitted.
 - Disable objective/codebase refill initially because the reviewed board is
   comprehensive. The historical nine-task completion expansion and historical
   twelve-task runtime-activation repair, plus the active thirteen-task
-  production-activation correction, are separately reviewed 2026-08-03
-  projections; none enables autonomous refill.
+  production-activation correction, are immutable 2026-08-03 projections. The
+  active twelve-task authenticated-current-tree repair is the bounded 2026-08-08
+  projection; none enables autonomous refill.
+- Use the fresh `proof-backed-test-reuse-v9` state directory so stopped v8
+  implementation attempts and retry budgets cannot be mistaken for this run;
+  retain v8, v6 and v1 roots read-only as explicitly reviewed historical
+  evidence rather than copying their mutable state into v9.
 - Run the native board validator, objective projection, a non-implementing
   daemon readiness pass, and reconciliation-only lane preflights before start.
 - Require live supervisor and managed-daemon PIDs, fresh status/task state, no
@@ -925,7 +1217,11 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
   rebuilds current dependency facts, and never duplicates the test call merely
   to predict its runtime trace.
 - Every authoritative skip is backed by an exact current execution key, trusted
-  pass receipt, locally verified real certificate, and fresh supervisor receipt.
+  signed runner pass attestation, locally verified real certificate, current
+  signer trust/rotation/revocation state, and fresh supervisor receipt.
+- Every completed task has present declared outputs and validation targets at
+  fetchable exact gitlinks, plus replayable task/merge evidence whose commit is
+  an ancestor of the current pin; historical labels alone have no authority.
 - The certificate policy and verifier bind content identities computed from the
   exact reviewed circuit and activated verifying-key bytes; label-derived,
   certificate-selected, stale, or provenance-mismatched artifact identities
@@ -940,5 +1236,11 @@ the profile is `config/proof_backed_test_reuse_supervisor.json`.
   cold and warm pytest subprocesses; injected in-memory orchestration,
   deterministic pseudo-certificates, and synthetic timing constants are not
   closeout evidence.
+- Ordinary installed and source-tree pytest invocations in accelerator,
+  datasets and kit discover the package-owned bridge without `-p` or test
+  rewrites; cold, warm and forced replay agree with an independent body oracle.
+- A real-backend proof around an unsigned, self-signed, wrongly keyed, stale or
+  revoked receipt never skips, even when the prover possesses valid proving
+  material and the raw proof equations verify.
 - Operations can inspect, start, and stop isolated lanes without modifying the
   original dirty workspace or colliding with other supervisor programs.

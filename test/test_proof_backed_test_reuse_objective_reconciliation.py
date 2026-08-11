@@ -30,8 +30,11 @@ ALL_GOAL_IDS = (
     "PTR-G090",
     "PTR-G100",
     "PTR-G110",
+    "PTR-G120",
+    "PTR-G130",
+    "PTR-G140",
 )
-CHILD_GOAL_IDS = tuple(gid for gid in ALL_GOAL_IDS if gid not in {"PTR-G000", "PTR-G110"})
+CHILD_GOAL_IDS = tuple(gid for gid in ALL_GOAL_IDS if gid not in {"PTR-G000", "PTR-G140"})
 
 
 def _load_module() -> Any:
@@ -85,23 +88,35 @@ def _objective_text() -> str:
         "# Synthetic PTR objective heap\n",
         _goal_block("PTR-G000", "Root", parent=""),
     ]
+    dependencies = {
+        "PTR-G110": "PTR-G100",
+        "PTR-G120": "PTR-G010, PTR-G040, PTR-G050",
+        "PTR-G130": ("PTR-G020, PTR-G030, PTR-G060, PTR-G080, PTR-G090, PTR-G120"),
+    }
     for goal_id in CHILD_GOAL_IDS:
-        blocks.append(_goal_block(goal_id, f"Child {goal_id}", parent="PTR-G000"))
+        blocks.append(
+            _goal_block(
+                goal_id,
+                f"Child {goal_id}",
+                parent="PTR-G000",
+                depends_on=dependencies.get(goal_id, ""),
+            )
+        )
     blocks.append(
         _goal_block(
-            "PTR-G110",
-            "Final gate",
+            "PTR-G140",
+            "Authenticated final gate",
             parent="PTR-G000",
-            depends_on="PTR-G100",
+            depends_on=("PTR-G070, PTR-G100, PTR-G110, PTR-G120, PTR-G130"),
         )
     )
     return "\n".join(blocks)
 
 
-def _todo_text(*, open_tasks: bool = False) -> str:
+def _todo_text(*, open_tasks: bool = False, task_count: int = 3) -> str:
     status = "todo" if open_tasks else "completed"
     tasks = []
-    for index in range(1, 4):
+    for index in range(1, task_count + 1):
         tasks.append(
             textwrap.dedent(
                 f"""\
@@ -173,13 +188,17 @@ def _write_fixture(
     include_gate: bool = True,
     include_evidence: bool = True,
     init_git: bool = True,
+    task_count: int = 3,
 ) -> dict[str, Path]:
     repo = tmp_path / "repo"
     repo.mkdir()
     objective = repo / "objectives.md"
     todo = repo / "todo.md"
     objective.write_text(_objective_text(), encoding="utf-8")
-    todo.write_text(_todo_text(open_tasks=open_tasks), encoding="utf-8")
+    todo.write_text(
+        _todo_text(open_tasks=open_tasks, task_count=task_count),
+        encoding="utf-8",
+    )
     real_tree = "tree-aaa"
     if init_git:
         real_tree = _init_git_repo(repo)
@@ -199,8 +218,10 @@ def _write_fixture(
                 {
                     "passed": True,
                     "repository_tree": gate_tree,
-                    "producing_task_id": "PTR-122",
-                    "final_gate_criterion": ("ptr/final-current-tree-gate@1"),
+                    "producing_task_id": "PTR-169",
+                    "task_count": 78,
+                    "review_revision": ("authenticated-receipt-current-tree-repair-v9"),
+                    "final_gate_criterion": ("ptr/authenticated-current-tree-gate-v5@1"),
                     "root_criterion": ("ptr/cross-repository-current-tree-gate@1"),
                     "captured_at_unix_ns": 1_700_000_000_000_000_000,
                 },
@@ -282,6 +303,7 @@ def _make_reconciler(
             "ipfs": True,
         },
         "validation_runner": lambda: {"passed": True, "mode": "off"},
+        "expected_board_task_count": 3,
     }
     kwargs.update(overrides)
     return recon_mod.ProofTestReuseObjectiveReconciler(**kwargs)
@@ -301,6 +323,11 @@ def test_module_exports_predicted_symbols(recon_mod: Any) -> None:
     assert recon_mod.OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT == (
         "ObjectiveCompletionEvidenceArtifact"
     )
+    assert recon_mod.EXPECTED_TASK_COUNT == 78
+    assert recon_mod.FINAL_GATE_TASK_ID == "PTR-169"
+    assert recon_mod.FINAL_GATE_GOAL_ID == "PTR-G140"
+    assert recon_mod.FINAL_GATE_ACCEPTANCE_CRITERION == ("ptr/authenticated-current-tree-gate-v5@1")
+    assert recon_mod.FINAL_GATE_REVIEW_REVISION == ("authenticated-receipt-current-tree-repair-v9")
 
 
 def test_cli_accepts_exact_supervisor_closeout_argv(recon_mod: Any) -> None:
@@ -594,33 +621,37 @@ def test_normal_diagnosis_requires_gate_and_evidence_artifacts(
     ]
 
 
-def test_ptr122_gate_with_ptr120_evidence_passes_and_extracts_canonical_ids(
+def test_ptr169_gate_with_current_evidence_passes_and_extracts_canonical_ids(
     recon_mod: Any, tmp_path: Path
 ) -> None:
     paths = _write_fixture(tmp_path)
     tree = str(paths["tree_id"])
-    final_criterion = "ptr/final-current-tree-gate@1"
+    final_criterion = "ptr/authenticated-current-tree-gate-v5@1"
     root_criterion = "ptr/cross-repository-current-tree-gate@1"
 
     def final_evidence(goal_id: str, criterion: str) -> dict[str, Any]:
         return {
-            "producing_task_id": "PTR-122",
+            "producing_task_id": "PTR-169",
             "goal_id": goal_id,
             "acceptance_criterion": criterion,
             "satisfied_requirements": [criterion],
             "authority": "authoritative",
             "tree_id": tree,
+            "task_count": 78,
+            "review_revision": ("authenticated-receipt-current-tree-repair-v9"),
         }
 
     gate = {
         "schema": ("ipfs_accelerate_py/agent-supervisor/proof-test-reuse-persisted-gate-bundle@1"),
         "interface": "ProofTestReusePersistedGateBundle@1",
-        "producing_task_id": "PTR-122",
+        "producing_task_id": "PTR-169",
+        "task_count": 78,
+        "review_revision": "authenticated-receipt-current-tree-repair-v9",
         "tree_id": tree,
         "git_tree_id": tree,
         "decision": {
             "passed": True,
-            "final_gate_completion_evidence": final_evidence("PTR-G110", final_criterion),
+            "final_gate_completion_evidence": final_evidence("PTR-G140", final_criterion),
             "root_completion_evidence": final_evidence("PTR-G000", root_criterion),
         },
     }
@@ -684,7 +715,37 @@ def test_ptr122_gate_with_ptr120_evidence_passes_and_extracts_canonical_ids(
     assert rejected["reason_codes"] == ["missing_evidence:PTR-G010"]
 
 
-def test_ptr120_aggregate_gate_cannot_substitute_for_ptr122_final_gate(
+def test_ptr169_gate_rejects_stale_v8_v7_and_undersized_packets(
+    recon_mod: Any,
+) -> None:
+    base = {
+        "passed": True,
+        "producing_task_id": "PTR-169",
+        "task_count": 78,
+        "review_revision": "authenticated-receipt-current-tree-repair-v9",
+        "final_gate_criterion": "ptr/authenticated-current-tree-gate-v5@1",
+        "root_criterion": "ptr/cross-repository-current-tree-gate@1",
+    }
+
+    for stale_count in (77, 76, 66):
+        packet = dict(base, task_count=stale_count)
+        assert recon_mod._gate_artifact_readiness(packet)[1] == ("stale_gate_task_count")
+
+    for stale_revision in (
+        "authenticated-receipt-current-tree-repair-v8",
+        "authenticated-receipt-current-tree-repair-v7",
+        "production-runtime-activation-v4",
+    ):
+        packet = dict(base, review_revision=stale_revision)
+        assert recon_mod._gate_artifact_readiness(packet)[1] == ("stale_gate_review_revision")
+
+    assert recon_mod.EXPECTED_TASK_COUNT == 78
+    assert recon_mod.FINAL_GATE_REVIEW_REVISION == ("authenticated-receipt-current-tree-repair-v9")
+    assert recon_mod.FINAL_GATE_TASK_ID == "PTR-169"
+    assert recon_mod.FINAL_GATE_ACCEPTANCE_CRITERION == ("ptr/authenticated-current-tree-gate-v5@1")
+
+
+def test_ptr120_aggregate_gate_cannot_substitute_for_ptr169_final_gate(
     recon_mod: Any,
     tmp_path: Path,
 ) -> None:
@@ -866,8 +927,8 @@ def test_closeout_three_phases_and_candidate(recon_mod: Any, tmp_path: Path) -> 
 
     phases = [item["phase"] for item in result["receipts"]]
     assert "phase_1_provisional" in phases
-    assert "phase_2_verify_g010_g100" in phases
-    assert "phase_3_verify_g110_g000" in phases
+    assert "phase_2_verify_g010_g130" in phases
+    assert "phase_3_verify_g140_g000" in phases
     assert "candidate_handoff" in phases
 
     # Phase one receipt must not verify.
@@ -877,23 +938,23 @@ def test_closeout_three_phases_and_candidate(recon_mod: Any, tmp_path: Path) -> 
 
     # Phase two verifies children only.
     phase2 = next(
-        item for item in result["receipts"] if item["phase"] == "phase_2_verify_g010_g100"
+        item for item in result["receipts"] if item["phase"] == "phase_2_verify_g010_g130"
     )
     verified_children = set(phase2["details"]["verified_child_goal_ids"])
     assert set(CHILD_GOAL_IDS) <= verified_children
     for transition in phase2["goal_transitions"]:
         assert transition["goal_id"] in CHILD_GOAL_IDS
 
-    # Phase three verifies G110 then G000.
+    # Phase three verifies G140 then G000.
     phase3 = next(
-        item for item in result["receipts"] if item["phase"] == "phase_3_verify_g110_g000"
+        item for item in result["receipts"] if item["phase"] == "phase_3_verify_g140_g000"
     )
     order = [item["goal_id"] for item in phase3["goal_transitions"] if item.get("changed")]
-    if "PTR-G110" in order and "PTR-G000" in order:
-        assert order.index("PTR-G110") < order.index("PTR-G000")
+    if "PTR-G140" in order and "PTR-G000" in order:
+        assert order.index("PTR-G140") < order.index("PTR-G000")
 
     assert result["goal_states"]["PTR-G000"] == "verified_complete"
-    assert result["goal_states"]["PTR-G110"] == "verified_complete"
+    assert result["goal_states"]["PTR-G140"] == "verified_complete"
     for goal_id in CHILD_GOAL_IDS:
         assert result["goal_states"][goal_id] == "verified_complete"
 
@@ -917,6 +978,43 @@ def test_phase_one_only_provisional(recon_mod: Any, tmp_path: Path) -> None:
                 item["goal_id"] == goal_id and item.get("changed")
                 for item in receipt.goal_transitions
             )
+
+
+def test_active_repair_goal_blocks_authenticated_gate_and_root(
+    recon_mod: Any, tmp_path: Path
+) -> None:
+    """A valid PTR-169 artifact cannot bypass unfinished G120/G130 work."""
+
+    paths = _write_fixture(tmp_path)
+    reconciler = _make_reconciler(recon_mod, paths)
+    goals = recon_mod.parse_objective_goals(paths["objective"].read_text(encoding="utf-8"))
+    states = {goal.goal_id: "provisionally_complete" for goal in goals}
+    states["PTR-G120"] = "active"
+
+    phase2 = reconciler._phase_two_verify_children(
+        goals=goals,
+        states=states,
+        bindings={},
+        validation={"passed": True},
+        repository_tree=str(paths["tree_id"]),
+        objective_revision="objective-revision",
+    )
+    assert phase2.passed is False
+    assert "not_provisional:PTR-G120:active" in phase2.reason_codes
+    assert "dependency_not_verified:PTR-G130:PTR-G120" in phase2.reason_codes
+
+    phase3 = reconciler._phase_three_final(
+        goals=goals,
+        states=states,
+        bindings={},
+        repository_tree=str(paths["tree_id"]),
+        objective_revision="objective-revision",
+    )
+    assert phase3.passed is False
+    assert "child_not_verified:PTR-G120" in phase3.reason_codes
+    assert states["PTR-G140"] == "provisionally_complete"
+    assert states["PTR-G000"] == "provisionally_complete"
+    assert not phase3.goal_transitions
 
 
 # ---------------------------------------------------------------------------
@@ -997,11 +1095,13 @@ def test_mutation_reopens_ancestors_and_dependents(recon_mod: Any, tmp_path: Pat
     assert "PTR-G100" in reopened_ids
     # Ancestor root.
     assert "PTR-G000" in reopened_ids
-    # Dependent final gate depends on G100.
+    # Historical assurance G110 and authenticated final G140 depend on G100.
     assert "PTR-G110" in reopened_ids
+    assert "PTR-G140" in reopened_ids
     assert states["PTR-G100"] == "reopened"
     assert states["PTR-G000"] == "reopened"
     assert states["PTR-G110"] == "reopened"
+    assert states["PTR-G140"] == "reopened"
 
 
 def test_closeout_applies_contradiction_then_reconverges(recon_mod: Any, tmp_path: Path) -> None:
@@ -1091,7 +1191,7 @@ def test_main_closeout_success_exit_code(
     recon_mod: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     # Report-only on a ready board returns 0 without writing outputs.
-    paths_ready = _write_fixture(tmp_path)
+    paths_ready = _write_fixture(tmp_path, task_count=78)
     code = recon_mod.main(
         [
             "--repo-root",
