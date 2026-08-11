@@ -141,7 +141,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-002 Implement the non-executing GUI static scanner core
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
