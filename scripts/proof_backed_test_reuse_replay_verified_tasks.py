@@ -211,11 +211,7 @@ def parse_board(todo: Path) -> dict[str, BoardTask]:
 
 
 def _task_from_fields(task_id: str, title: str, fields: Mapping[str, str]) -> BoardTask:
-    outputs = tuple(
-        item.strip()
-        for item in fields.get("outputs", "").split(",")
-        if item.strip()
-    )
+    outputs = tuple(item.strip() for item in fields.get("outputs", "").split(",") if item.strip())
     return BoardTask(
         task_id=task_id,
         title=title,
@@ -266,7 +262,11 @@ def load_trusted_completion_receipts(
     # merge-queue completed + train pairs under reviewed roots and current root
     candidates = [state_root]
     parent = state_root.parent
-    for name in ("proof-backed-test-reuse-v1", "proof-backed-test-reuse-v6", "proof-backed-test-reuse-v8"):
+    for name in (
+        "proof-backed-test-reuse-v1",
+        "proof-backed-test-reuse-v6",
+        "proof-backed-test-reuse-v8",
+    ):
         sibling = parent / name
         if sibling.is_dir() and sibling != state_root:
             candidates.append(sibling)
@@ -282,7 +282,11 @@ def load_trusted_completion_receipts(
             task_id = row.get("task_id")
             request_id = row.get("request_id")
             dedupe = row.get("dedupe_key")
-            if not isinstance(task_id, str) or not isinstance(request_id, str) or not isinstance(dedupe, str):
+            if (
+                not isinstance(task_id, str)
+                or not isinstance(request_id, str)
+                or not isinstance(dedupe, str)
+            ):
                 continue
             train = _read_json(train_dir / f"{dedupe}.json")
             if train is None:
@@ -309,7 +313,8 @@ def load_trusted_completion_receipts(
                     schema=RECEIPT_SCHEMA,
                     task_id=task_id,
                     commit=integration,
-                    receipt_cid=task_cid or _sha256(canonical_json({"task_id": task_id, "commit": integration})),
+                    receipt_cid=task_cid
+                    or _sha256(canonical_json({"task_id": task_id, "commit": integration})),
                     source=str(queue_path),
                     task_cid=task_cid,
                 )
@@ -644,12 +649,9 @@ class ReachableGitlinkReconciler:
                     {item.get("repository") for item in applied}
                     >= {"external/ipfs_datasets", "external/ipfs_kit"}
                     and all(
-                        str(item.get("action", "")).startswith(
-                            ("confirm_exact", "stage_exact")
-                        )
+                        str(item.get("action", "")).startswith(("confirm_exact", "stage_exact"))
                         for item in applied
-                        if item.get("repository")
-                        in {"external/ipfs_datasets", "external/ipfs_kit"}
+                        if item.get("repository") in {"external/ipfs_datasets", "external/ipfs_kit"}
                     )
                 ),
                 "blocked_by_unrecoverable": [asdict(g) for g in blocking],
@@ -662,7 +664,11 @@ class ReachableGitlinkReconciler:
                         False,
                     ),
                     "exact_outer_gitlink": next(
-                        (m.exact_outer_gitlink for m in plan.commit_mappings if m.repository == path),
+                        (
+                            m.exact_outer_gitlink
+                            for m in plan.commit_mappings
+                            if m.repository == path
+                        ),
                         False,
                     ),
                 }
@@ -737,7 +743,9 @@ def main(argv: list[str] | None = None) -> int:
     reconciler = ReachableGitlinkReconciler(args.repo_root)
     plan = reconciler.build_plan(todo=args.todo, state_root=state_root)
     report = reconciler.reconcile(
-        plan, apply_gitlinks=args.apply_gitlinks, map_path=args.map_path,
+        plan,
+        apply_gitlinks=args.apply_gitlinks,
+        map_path=args.map_path,
     )
     if args.json:
         sys.stdout.write(json.dumps(report, indent=2, sort_keys=True) + "\n")
@@ -749,7 +757,9 @@ def main(argv: list[str] | None = None) -> int:
             "three_pins": report["three_pins"],
             "unrecoverable_count": report["readiness_hints"]["unrecoverable_count"],
             "blob_mappings_verified": report["readiness_hints"]["blob_mappings_verified"],
-            "completion_receipts_observed": report["readiness_hints"]["completion_receipts_observed"],
+            "completion_receipts_observed": report["readiness_hints"][
+                "completion_receipts_observed"
+            ],
         }
         sys.stdout.write(json.dumps(summary, indent=2, sort_keys=True) + "\n")
 

@@ -38,7 +38,9 @@ def init_repo(path: Path) -> Path:
     env.setdefault("GIT_CONFIG_SYSTEM", "/dev/null")
     env.setdefault("GIT_TEMPLATE_DIR", "")
     subprocess.run(("git", "init", "-q"), cwd=path, check=True, env=env)
-    subprocess.run(("git", "config", "user.email", "test@example.invalid"), cwd=path, check=True, env=env)
+    subprocess.run(
+        ("git", "config", "user.email", "test@example.invalid"), cwd=path, check=True, env=env
+    )
     subprocess.run(("git", "config", "user.name", "Test"), cwd=path, check=True, env=env)
     try:
         git(path, "branch", "-M", "master")
@@ -54,7 +56,9 @@ def commit_all(path: Path, message: str) -> str:
     env.setdefault("GIT_CONFIG_SYSTEM", "/dev/null")
     env.setdefault("GIT_TEMPLATE_DIR", "")
     # Clones do not inherit identity; set it on every commit path.
-    subprocess.run(("git", "config", "user.email", "test@example.invalid"), cwd=path, check=True, env=env)
+    subprocess.run(
+        ("git", "config", "user.email", "test@example.invalid"), cwd=path, check=True, env=env
+    )
     subprocess.run(("git", "config", "user.name", "Test"), cwd=path, check=True, env=env)
     subprocess.run(("git", "add", "-A"), cwd=path, check=True, env=env)
     subprocess.run(("git", "commit", "-qm", message), cwd=path, check=True, env=env)
@@ -172,7 +176,9 @@ def test_blob_digests_recorded_for_completed_outputs(replay, tmp_path: Path) -> 
         historical_pins=pins,
     )
     assert plan.blob_mappings
-    assert all(item.verified and item.blob_sha256.startswith("sha256:") for item in plan.blob_mappings)
+    assert all(
+        item.verified and item.blob_sha256.startswith("sha256:") for item in plan.blob_mappings
+    )
     paths = {item.path for item in plan.blob_mappings}
     assert "external/ipfs_datasets/conftest.py" in paths
     assert "external/ipfs_kit/conftest.py" in paths
@@ -226,8 +232,7 @@ def test_missing_output_reopens_owning_task(replay, tmp_path: Path) -> None:
     outer, pins = make_outer_with_submodules(tmp_path)
     board = outer / "implementation_plan/docs/46-proof-backed-test-reuse.todo.md"
     board.write_text(
-        board.read_text(encoding="utf-8")
-        + "\n## PTR-999 Missing surface\n\n"
+        board.read_text(encoding="utf-8") + "\n## PTR-999 Missing surface\n\n"
         "- Status: completed\n"
         "- Outputs: external/ipfs_datasets/does_not_exist.py\n"
         "- Validation: IPFS_TEST_PROOF_REUSE_MODE=off true\n"
@@ -244,7 +249,9 @@ def test_missing_output_reopens_owning_task(replay, tmp_path: Path) -> None:
 
 def test_immutable_66_task_records_required(replay, tmp_path: Path) -> None:
     outer, pins = make_outer_with_submodules(tmp_path)
-    target = outer / "implementation_plan/docs/46-proof-backed-test-reuse-integration-pins-2026-08-04.md"
+    target = (
+        outer / "implementation_plan/docs/46-proof-backed-test-reuse-integration-pins-2026-08-04.md"
+    )
     target.unlink()
     reconciler = replay["ReachableGitlinkReconciler"](outer)
     plan = reconciler.build_plan(
@@ -335,7 +342,9 @@ def test_apply_gitlinks_stages_exact_pins(replay, tmp_path: Path) -> None:
         historical_pins=pins,
     )
     report = reconciler.reconcile(
-        plan, apply_gitlinks=True, map_path=tmp_path / "map.json",
+        plan,
+        apply_gitlinks=True,
+        map_path=tmp_path / "map.json",
     )
     applied = {item["repository"] for item in report["publication"]["applied_gitlinks"]}
     assert "external/ipfs_datasets" in applied

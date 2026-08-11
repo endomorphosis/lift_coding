@@ -129,9 +129,7 @@ def _grok_codex_agent_route_readiness() -> object:
         codex_bin=shutil.which("codex"),
         grok_model=str(PRIMARY_PROVIDER_POLICY["model"]),
         codex_model=str(FALLBACK_PROVIDER_POLICY["model"]),
-        codex_reasoning_effort=str(
-            FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
-        ),
+        codex_reasoning_effort=str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]),
     )
 
 
@@ -146,35 +144,24 @@ def _validated_primary_unavailable_kind(readiness: object) -> str:
     expected_models = {
         "grok_model": str(PRIMARY_PROVIDER_POLICY["model"]),
         "codex_model": str(FALLBACK_PROVIDER_POLICY["model"]),
-        "codex_reasoning_effort": str(
-            FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]
-        ),
+        "codex_reasoning_effort": str(FALLBACK_PROVIDER_POLICY["modelReasoningEffort"]),
     }
     for field, expected in expected_models.items():
         if str(getattr(readiness, field, "")) != expected:
-            raise RuntimeError(
-                f"llm_router readiness returned unexpected {field}"
-            )
+            raise RuntimeError(f"llm_router readiness returned unexpected {field}")
     if getattr(readiness, "codex_ready", None) is not True:
         raise RuntimeError(
-            "PTR supervisor requires an installed and authenticated Codex "
-            "CLI fallback"
+            "PTR supervisor requires an installed and authenticated Codex CLI fallback"
         )
 
     grok_ready = getattr(readiness, "grok_ready", None) is True
-    effective_provider = str(
-        getattr(readiness, "effective_provider", "") or ""
-    )
+    effective_provider = str(getattr(readiness, "effective_provider", "") or "")
     failure_kind = _route_failure_kind(readiness)
     if grok_ready:
         if effective_provider != str(PRIMARY_PROVIDER_POLICY["provider"]):
-            raise RuntimeError(
-                "llm_router readiness did not retain Grok as the ready primary"
-            )
+            raise RuntimeError("llm_router readiness did not retain Grok as the ready primary")
         if failure_kind:
-            raise RuntimeError(
-                "llm_router readiness reported a failure for a ready Grok primary"
-            )
+            raise RuntimeError("llm_router readiness reported a failure for a ready Grok primary")
         return ""
 
     if failure_kind not in {"authentication_failure", "launch_failure"}:
@@ -185,8 +172,7 @@ def _validated_primary_unavailable_kind(readiness: object) -> str:
         )
     if effective_provider != str(FALLBACK_PROVIDER_POLICY["provider"]):
         raise RuntimeError(
-            "llm_router readiness did not select Codex for an allowed "
-            "pre-dispatch Grok failure"
+            "llm_router readiness did not select Codex for an allowed pre-dispatch Grok failure"
         )
     return failure_kind
 
@@ -217,9 +203,7 @@ def _managed_merge_resolver_command() -> str:
     grok_binary = _grok_cli_binary()
     codex_binary = shutil.which("codex") or ""
     if not codex_binary:
-        raise RuntimeError(
-            "llm_router reported Codex ready but its executable is unavailable"
-        )
+        raise RuntimeError("llm_router reported Codex ready but its executable is unavailable")
     # invoke_llm_resolver starts this command in the conflicted repository.
     # Keeping the workspace relative preserves that exact target for both
     # main-checkout and isolated-worktree semantic repairs.
@@ -587,22 +571,14 @@ def _provider_preflight() -> dict[str, object]:
     grok_unavailable_reason = _validated_primary_unavailable_kind(readiness)
     grok_ready = getattr(readiness, "grok_ready", None) is True
     codex_ready = getattr(readiness, "codex_ready", None) is True
-    effective_provider = str(
-        getattr(readiness, "effective_provider", "") or ""
-    )
-    route_reason_code = str(
-        getattr(readiness, "reason_code", "") or ""
-    )
+    effective_provider = str(getattr(readiness, "effective_provider", "") or "")
+    route_reason_code = str(getattr(readiness, "reason_code", "") or "")
     codex_binary = shutil.which("codex") or ""
     grok_binary = _grok_cli_binary()
     if not codex_binary:
-        raise RuntimeError(
-            "llm_router reported Codex ready but its executable is unavailable"
-        )
+        raise RuntimeError("llm_router reported Codex ready but its executable is unavailable")
     if grok_ready and not grok_binary:
-        raise RuntimeError(
-            "llm_router reported Grok ready but its executable is unavailable"
-        )
+        raise RuntimeError("llm_router reported Grok ready but its executable is unavailable")
     fallback_active = not grok_ready
 
     optional = {
@@ -874,10 +850,7 @@ def _closeout_production_input_inventory(
     parsed_tasks = tuple(tasks or parse_task_file(REPO_ROOT / TODO_REL, TASK_PREFIX))
     task_ids = tuple(sorted(str(getattr(task, "task_id", "")) for task in parsed_tasks))
     repair_task_ids = tuple(
-        str(task_id)
-        for task_id in dict(CONFIG["objectiveProjection"])[
-            "implementationTaskIds"
-        ]
+        str(task_id) for task_id in dict(CONFIG["objectiveProjection"])["implementationTaskIds"]
     )
     repair_task_statuses = {
         str(getattr(task, "task_id", "")): str(getattr(task, "status", "")).lower()
@@ -925,9 +898,7 @@ def _closeout_production_input_inventory(
         ),
         "final_gate_task_id": "PTR-169",
         "final_gate_goal_id": "PTR-G140",
-        "final_gate_acceptance_criterion": (
-            "ptr/authenticated-current-tree-gate-v5@1"
-        ),
+        "final_gate_acceptance_criterion": ("ptr/authenticated-current-tree-gate-v5@1"),
         "required_call_sequence": [
             "run_closeout_autorecover_cycle",
             "PTR-110 ProofTestReuseTaskEvidenceCollector.collect",
@@ -960,8 +931,7 @@ def _closeout_production_input_inventory(
     # live probe and remains fail-closed; ordinary pytest remains fail-open.
     inventory["runtime_reuse_activation"] = {
         "schema": (
-            "ipfs_accelerate_py/proof-backed-test-reuse-"
-            "authenticated-v9-runtime-projection@1"
+            "ipfs_accelerate_py/proof-backed-test-reuse-authenticated-v9-runtime-projection@1"
         ),
         "projection_revision": str(
             dict(CONFIG["objectiveProjection"]).get("reviewRevision")
@@ -992,9 +962,7 @@ def _closeout_production_input_inventory(
         "final_gate": {
             "task_id": "PTR-169",
             "goal_id": "PTR-G140",
-            "acceptance_criterion": (
-                "ptr/authenticated-current-tree-gate-v5@1"
-            ),
+            "acceptance_criterion": ("ptr/authenticated-current-tree-gate-v5@1"),
             "historical_ptr_122_or_v4_gate_is_authority": False,
         },
         "repair_task_ids": list(repair_task_ids),

@@ -21,10 +21,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PROFILE = REPO_ROOT / "config" / "swissknife_symbolic_contract_assurance_supervisor.json"
 BOARD = (
-    REPO_ROOT
-    / "implementation_plan"
-    / "docs"
-    / "44-swissknife-symbolic-contract-assurance.todo.md"
+    REPO_ROOT / "implementation_plan" / "docs" / "44-swissknife-symbolic-contract-assurance.todo.md"
 )
 PLAN = (
     REPO_ROOT
@@ -130,27 +127,21 @@ def check_parser_row_deferred() -> list[str]:
         if GATE not in depends:
             bad += 1
             if bad <= 5:
-                errors.append(
-                    f"{task['id']} track={task['track']} missing depends {GATE}"
-                )
+                errors.append(f"{task['id']} track={task['track']} missing depends {GATE}")
         if task["priority"] not in {"P3", "P2"}:
             # allow P2 but prefer P3; flag P0/P1
             if task["priority"] in {"P0", "P1"}:
                 bad += 1
                 if bad <= 8:
-                    errors.append(
-                        f"{task['id']} still priority {task['priority']} (want P3)"
-                    )
+                    errors.append(f"{task['id']} still priority {task['priority']} (want P3)")
     row_open = sum(
         1
         for task in tasks
-        if task["track"] == "parser-failure-row-verification"
-        and task["status"] in openish
+        if task["track"] == "parser-failure-row-verification" and task["status"] in openish
     )
     if row_open and bad:
         errors.append(
-            f"parser-row open={row_open} demotion_issues={bad} "
-            f"(showing up to 8 samples above)"
+            f"parser-row open={row_open} demotion_issues={bad} (showing up to 8 samples above)"
         )
     elif not any(task["track"] == "parser-failure-row-verification" for task in tasks):
         errors.append("no parser-failure-row-verification tasks found on board")

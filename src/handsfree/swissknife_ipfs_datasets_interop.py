@@ -49,9 +49,7 @@ GOAL_PACKET_GOALS = (
 # SwissKnife uses as scanner-visible Bucket VFS / unified-bucket evidence for
 # the external/ipfs_datasets interop contract.
 IPFS_KIT_TOOL_ROOT = "external/ipfs_kit"
-REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = (
-    "external/ipfs_kit/data/deprecations_report.schema.json"
-)
+REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = "external/ipfs_kit/data/deprecations_report.schema.json"
 REQUIRED_BUCKET_VFS_DOC_PATH = (
     "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
 )
@@ -60,9 +58,7 @@ BUCKET_VFS_DEMO_PATH_CANDIDATES = (
     REQUIRED_BUCKET_VFS_DEMO_PATH,
     "external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py",
 )
-REQUIRED_UNIFIED_BUCKET_DEMO_PATH = (
-    "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
-)
+REQUIRED_UNIFIED_BUCKET_DEMO_PATH = "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
 
 REQUIRED_DEPRECATIONS_REPORT_KEYS = (
     "report_version",

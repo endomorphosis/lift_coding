@@ -38,7 +38,9 @@ def make_repo(tmp_path: Path) -> Path:
     env.setdefault("GIT_CONFIG_SYSTEM", "/dev/null")
     env.setdefault("GIT_TEMPLATE_DIR", "")
     subprocess.run(("git", "init", "-q"), cwd=repo, check=True, env=env)
-    subprocess.run(("git", "config", "user.email", "test@example.invalid"), cwd=repo, check=True, env=env)
+    subprocess.run(
+        ("git", "config", "user.email", "test@example.invalid"), cwd=repo, check=True, env=env
+    )
     subprocess.run(("git", "config", "user.name", "Test"), cwd=repo, check=True, env=env)
     (repo / "scripts").mkdir()
     (repo / "tests").mkdir()
@@ -70,7 +72,14 @@ def write_board(tmp_path: Path, *, status: str = "completed", task_count: int = 
     return board
 
 
-def receipt(task_id: str, snapshot: object, command: str, *, commit: str | None = None, fresh: int = 9_999_999_999_999) -> dict[str, object]:
+def receipt(
+    task_id: str,
+    snapshot: object,
+    command: str,
+    *,
+    commit: str | None = None,
+    fresh: int = 9_999_999_999_999,
+) -> dict[str, object]:
     return {
         "task_id": task_id,
         "merge_receipt_cid": "baguqeera" + task_id.lower().replace("-", ""),
@@ -100,10 +109,15 @@ def write_event_log(root: Path, lane: int = 0, events: list[dict] | None = None)
     directory = root / "state" / f"ptr_lane_{lane}"
     directory.mkdir(parents=True, exist_ok=True)
     if events is None:
-        events = [{
-            "sequence": 1, "event_id": "sha256:event-1", "previous_event_id": "",
-            "stream_id": "event-log:test", "snapshot_id": "event-log-snapshot:test",
-        }]
+        events = [
+            {
+                "sequence": 1,
+                "event_id": "sha256:event-1",
+                "previous_event_id": "",
+                "stream_id": "event-log:test",
+                "snapshot_id": "event-log-snapshot:test",
+            }
+        ]
         # Seal the first event identity correctly.
         body = {k: v for k, v in events[0].items() if k != "event_id"}
         events[0]["event_id"] = evidence._sha256(evidence.canonical_json(body))
@@ -129,15 +143,17 @@ def write_event_log(root: Path, lane: int = 0, events: list[dict] | None = None)
         "stream_id": sealed[0]["stream_id"],
         "snapshot_id": sealed[0]["snapshot_id"],
         "last_event_id": sealed[-1]["event_id"],
-        "files": [{
-            "path": events_path.name,
-            "size_bytes": len(raw),
-            "event_count": len(sealed),
-            "first_sequence": 1,
-            "last_sequence": len(sealed),
-            "start_previous_event_id": "",
-            "sha256": evidence._sha256(raw),
-        }],
+        "files": [
+            {
+                "path": events_path.name,
+                "size_bytes": len(raw),
+                "event_count": len(sealed),
+                "first_sequence": 1,
+                "last_sequence": len(sealed),
+                "start_previous_event_id": "",
+                "sha256": evidence._sha256(raw),
+            }
+        ],
     }
     manifest["manifest_digest"] = evidence._sha256(evidence.canonical_json(manifest))
     (directory / f"ptr_lane_{lane}_events.jsonl.manifest.json").write_text(
@@ -160,7 +176,9 @@ def test_canonical_cid_is_stable_and_report_write_is_idempotent(tmp_path: Path) 
     assert again.read_bytes() == first.read_bytes()
 
 
-def test_live_audit_requires_files_ancestor_receipts_and_fresh_exact_validation(tmp_path: Path) -> None:
+def test_live_audit_requires_files_ancestor_receipts_and_fresh_exact_validation(
+    tmp_path: Path,
+) -> None:
     repo = make_repo(tmp_path)
     board = write_board(tmp_path)
     state = tmp_path / "state"
@@ -172,26 +190,47 @@ def test_live_audit_requires_files_ancestor_receipts_and_fresh_exact_validation(
 
     snapshot = evidence.GitSnapshot(repo)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
-    write_receipts(state, [receipt("PTR-001", snapshot, command), receipt("PTR-002", snapshot, command)])
+    write_receipts(
+        state, [receipt("PTR-001", snapshot, command), receipt("PTR-002", snapshot, command)]
+    )
     ready = evidence.ProofReuseTaskEvidenceValidator(board, state, repo, now_ms=100).audit()
     assert ready["ready"]
-    assert ready["dependency_order"] == [{
-        "later_task": "PTR-002",
-        "dependency": "PTR-001",
-        "later_commit": snapshot.commit,
-        "dependency_commit": snapshot.commit,
-        "ordered": True,
-    }]
+    assert ready["dependency_order"] == [
+        {
+            "later_task": "PTR-002",
+            "dependency": "PTR-001",
+            "later_commit": snapshot.commit,
+            "dependency_commit": snapshot.commit,
+            "ordered": True,
+        }
+    ]
 
 
-@pytest.mark.parametrize("mutation, expected", [
-    (lambda value, snapshot: value.update({"fresh_until_ms": 99}), "VALIDATION_RECEIPT_STALE"),
-    (lambda value, snapshot: value.update({"git_tree_id": "0" * 40}), "VALIDATION_PIN_MISMATCH"),
-    (lambda value, snapshot: value.update({"validation_command": "pytest wrong.py"}), "VALIDATION_COMMAND_MISMATCH"),
-    (lambda value, snapshot: value.update({"skipped_count": 1}), "VALIDATION_NOT_PROOF_REUSE_OFF"),
-    (lambda value, snapshot: value.update({"exit_code": 1, "passed": False}), "VALIDATION_NOT_PROOF_REUSE_OFF"),
-])
-def test_invalid_validation_evidence_is_never_ready(tmp_path: Path, mutation: object, expected: str) -> None:
+@pytest.mark.parametrize(
+    "mutation, expected",
+    [
+        (lambda value, snapshot: value.update({"fresh_until_ms": 99}), "VALIDATION_RECEIPT_STALE"),
+        (
+            lambda value, snapshot: value.update({"git_tree_id": "0" * 40}),
+            "VALIDATION_PIN_MISMATCH",
+        ),
+        (
+            lambda value, snapshot: value.update({"validation_command": "pytest wrong.py"}),
+            "VALIDATION_COMMAND_MISMATCH",
+        ),
+        (
+            lambda value, snapshot: value.update({"skipped_count": 1}),
+            "VALIDATION_NOT_PROOF_REUSE_OFF",
+        ),
+        (
+            lambda value, snapshot: value.update({"exit_code": 1, "passed": False}),
+            "VALIDATION_NOT_PROOF_REUSE_OFF",
+        ),
+    ],
+)
+def test_invalid_validation_evidence_is_never_ready(
+    tmp_path: Path, mutation: object, expected: str
+) -> None:
     repo = make_repo(tmp_path)
     board = write_board(tmp_path, status="todo")
     snapshot = evidence.GitSnapshot(repo)
@@ -232,7 +271,9 @@ def test_non_ancestor_receipt_and_wrong_submodule_pin_are_reported(tmp_path: Pat
 def test_wrong_gitlink_pin_is_not_treated_as_a_present_output(tmp_path: Path) -> None:
     repo = make_repo(tmp_path)
     board = write_board(tmp_path, status="todo")
-    validator = evidence.ProofReuseTaskEvidenceValidator(board, tmp_path / "state", repo, now_ms=100)
+    validator = evidence.ProofReuseTaskEvidenceValidator(
+        board, tmp_path / "state", repo, now_ms=100
+    )
     validator.snapshot.gitlinks["scripts"] = "0" * 40
     report = validator.audit()
     assert "GITLINK_PIN_MISMATCH" in {gap["kind"] for gap in report["gaps"]}
@@ -248,13 +289,25 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
             write_event_log(root, lane)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
     task = evidence.Task(
-        "PTR-160", "fixture", "completed", (), ("scripts/owned.py",), command,
-        evidence.validation_targets(command), "G160", "task/v1/fixture", "baguqeerafixture",
+        "PTR-160",
+        "fixture",
+        "completed",
+        (),
+        ("scripts/owned.py",),
+        command,
+        evidence.validation_targets(command),
+        "G160",
+        "task/v1/fixture",
+        "baguqeerafixture",
     )
     request, dedupe = "request-160", "dedupe-160"
     queue = {
-        "task_id": task.task_id, "request_id": request, "dedupe_key": dedupe, "status": "completed",
-        "canonical_task_key": task.canonical_task_key, "canonical_task_id": task.canonical_task_cid,
+        "task_id": task.task_id,
+        "request_id": request,
+        "dedupe_key": dedupe,
+        "status": "completed",
+        "canonical_task_key": task.canonical_task_key,
+        "canonical_task_id": task.canonical_task_cid,
         "commit_sha": snapshot.commit,
         "metadata": {
             "schema": "ipfs_accelerate_py/agent-supervisor/merge-candidate@3",
@@ -266,32 +319,53 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
         },
     }
     train = {
-        "request_id": request, "canonical_task_id": task.canonical_task_key, "task_id": task.task_id,
-        "status": "merged", "integrated": True, "merged": True,
+        "request_id": request,
+        "canonical_task_id": task.canonical_task_key,
+        "task_id": task.task_id,
+        "status": "merged",
+        "integrated": True,
+        "merged": True,
         "merge_result": {
-            "merged": True, "returncode": 0,
+            "merged": True,
+            "returncode": 0,
             "integration_commit_proof": {"passed": True, "integration_commit": snapshot.commit},
         },
     }
     for name in ("v8", "v6", "v1"):
         (roots[name] / "merge-queue" / "completed").mkdir(parents=True, exist_ok=True)
         (roots[name] / "merge-queue" / "train" / "receipts").mkdir(parents=True, exist_ok=True)
-    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
-    (roots["v8"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(json.dumps(train), encoding="utf-8")
+    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(
+        json.dumps(queue), encoding="utf-8"
+    )
+    (roots["v8"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(
+        json.dumps(train), encoding="utf-8"
+    )
     # Real-format v6 PTR-160 pair.
     v6_request, v6_dedupe = "request-v6-160", "dedupe-v6-160"
     v6_queue = dict(queue, request_id=v6_request, dedupe_key=v6_dedupe)
     v6_train = dict(train, request_id=v6_request)
-    (roots["v6"] / "merge-queue" / "completed" / f"{v6_request}.json").write_text(json.dumps(v6_queue), encoding="utf-8")
-    (roots["v6"] / "merge-queue" / "train" / "receipts" / f"{v6_dedupe}.json").write_text(json.dumps(v6_train), encoding="utf-8")
+    (roots["v6"] / "merge-queue" / "completed" / f"{v6_request}.json").write_text(
+        json.dumps(v6_queue), encoding="utf-8"
+    )
+    (roots["v6"] / "merge-queue" / "train" / "receipts" / f"{v6_dedupe}.json").write_text(
+        json.dumps(v6_train), encoding="utf-8"
+    )
     validation = {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1",
-        "task_id": task.task_id, "task_cid": task.canonical_task_cid, "goal_id": task.goal_id,
-        "validation_command": command, "validation_command_cid": evidence._validation_command_cid(command),
-        "passed": True, "proof_reuse_mode": "off", "disposition": "executed",
-        "exit_code": 0, "skipped_count": 0, "status": "passed",
+        "task_id": task.task_id,
+        "task_cid": task.canonical_task_cid,
+        "goal_id": task.goal_id,
+        "validation_command": command,
+        "validation_command_cid": evidence._validation_command_cid(command),
+        "passed": True,
+        "proof_reuse_mode": "off",
+        "disposition": "executed",
+        "exit_code": 0,
+        "skipped_count": 0,
+        "status": "passed",
         "fresh_until_ms": 9_999_999_999_999,
-        "git_commit_id": snapshot.commit, "git_tree_id": snapshot.tree,
+        "git_commit_id": snapshot.commit,
+        "git_tree_id": snapshot.tree,
         "gitlink_state_cid": snapshot.gitlink_state_cid,
         "repository_id": "lift_coding/proof-backed-test-reuse",
         "repository_state_cid": f"git-commit:{snapshot.commit}",
@@ -306,15 +380,24 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
     # failed/ is never authority
     failed = receipt_dir / "failed"
     failed.mkdir()
-    (failed / "PTR-160.json").write_text(json.dumps({"task_id": "PTR-160", "passed": True}), encoding="utf-8")
-    receipts, validations, gaps, diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    (failed / "PTR-160.json").write_text(
+        json.dumps({"task_id": "PTR-160", "passed": True}), encoding="utf-8"
+    )
+    receipts, validations, gaps, diag = evidence._authoritative_evidence(
+        roots, {task.task_id: task}, snapshot
+    )
     assert not any(g.kind.startswith("STATE_ROOT_") for g in gaps)
     assert receipts[task.task_id]
-    assert validations[task.task_id][0]["validation_receipt_cid"] == validation["validation_receipt_cid"]
+    assert (
+        validations[task.task_id][0]["validation_receipt_cid"]
+        == validation["validation_receipt_cid"]
+    )
     # A lookalike nested row cannot replace the sealed completed location.
     (roots["v8"] / "untrusted.json").write_text(json.dumps(queue), encoding="utf-8")
     again, _, _, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
-    assert {item.source for item in again[task.task_id]} == {item.source for item in receipts[task.task_id]}
+    assert {item.source for item in again[task.task_id]} == {
+        item.source for item in receipts[task.task_id]
+    }
     # Task-key / task-CID mismatch is rejected as provenance diagnostic (not
     # readiness-hard when a later matching row may still authorize).  Drop the
     # valid v6 twin so the mismatch is not rewritten as SUPERSEDED_*.
@@ -324,23 +407,35 @@ def test_sealed_authority_uses_only_joined_queue_train_and_flat_v1_receipts(tmp_
         path.unlink()
     bad = dict(queue)
     bad["metadata"] = dict(queue["metadata"])
-    bad["metadata"]["task"] = dict(queue["metadata"]["task"], canonical_task_cid="baguqeera-substituted")
-    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(bad), encoding="utf-8")
+    bad["metadata"]["task"] = dict(
+        queue["metadata"]["task"], canonical_task_cid="baguqeera-substituted"
+    )
+    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(
+        json.dumps(bad), encoding="utf-8"
+    )
     rejected_receipts, _, _rejected, rejected_diag = evidence._authoritative_evidence(
-        roots, {task.task_id: task}, snapshot,
+        roots,
+        {task.task_id: task},
+        snapshot,
     )
     assert task.task_id not in rejected_receipts
     assert "QUEUE_TASK_IDENTITY_MISMATCH" in {gap.kind for gap in rejected_diag}
     # Underspecified flat validation body is rejected (missing repository fields).
     thin = {
         "schema": "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1",
-        "task_id": task.task_id, "task_cid": task.canonical_task_cid, "goal_id": task.goal_id,
-        "validation_command": command, "validation_command_cid": evidence._validation_command_cid(command),
-        "passed": True, "proof_reuse_mode": "off",
+        "task_id": task.task_id,
+        "task_cid": task.canonical_task_cid,
+        "goal_id": task.goal_id,
+        "validation_command": command,
+        "validation_command_cid": evidence._validation_command_cid(command),
+        "passed": True,
+        "proof_reuse_mode": "off",
     }
     thin["validation_receipt_cid"] = evidence.canonical_cid(thin)
     (receipt_dir / "PTR-160.json").write_text(json.dumps(thin), encoding="utf-8")
-    _, _, _thin_gaps, thin_diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
+    _, _, _thin_gaps, thin_diag = evidence._authoritative_evidence(
+        roots, {task.task_id: task}, snapshot
+    )
     assert "VALIDATION_RECEIPT_IDENTITY_MISMATCH" in {gap.kind for gap in thin_diag}
 
 
@@ -355,7 +450,9 @@ def test_sealed_queue_rejects_unbound_task_identity_and_broken_event_chain(tmp_p
         evidence.canonical_json({k: v for k, v in value.items() if k != "manifest_digest"})
     )
     manifest.write_text(json.dumps(value), encoding="utf-8")
-    assert "STATE_ROOT_EVENT_TAIL_INVALID" in {gap.kind for gap in evidence._verify_event_log("v8", root)}
+    assert "STATE_ROOT_EVENT_TAIL_INVALID" in {
+        gap.kind for gap in evidence._verify_event_log("v8", root)
+    }
 
     # Event-id tampering.
     root2 = tmp_path / "proof-backed-test-reuse-v6"
@@ -373,11 +470,17 @@ def test_sealed_queue_rejects_unbound_task_identity_and_broken_event_chain(tmp_p
     mf["manifest_digest"] = evidence._sha256(
         evidence.canonical_json({k: v for k, v in mf.items() if k != "manifest_digest"})
     )
-    (root2 / "state/ptr_lane_0/ptr_lane_0_events.jsonl.manifest.json").write_text(json.dumps(mf), encoding="utf-8")
-    assert "STATE_ROOT_EVENT_ID_INVALID" in {gap.kind for gap in evidence._verify_event_log("v6", root2)}
+    (root2 / "state/ptr_lane_0/ptr_lane_0_events.jsonl.manifest.json").write_text(
+        json.dumps(mf), encoding="utf-8"
+    )
+    assert "STATE_ROOT_EVENT_ID_INVALID" in {
+        gap.kind for gap in evidence._verify_event_log("v6", root2)
+    }
 
 
-def test_default_state_root_honors_complete_override(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_default_state_root_honors_complete_override(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     override = tmp_path / "proof-backed-test-reuse-v9"
     override.mkdir()
     monkeypatch.setenv("IPFS_PROOF_REUSE_STATE_ROOT", str(override))
@@ -392,7 +495,9 @@ def test_default_state_root_honors_complete_override(monkeypatch: pytest.MonkeyP
     assert roots["v1"] == override.parent / "proof-backed-test-reuse-v1"
 
 
-def test_expect_incomplete_fails_closed_without_reviewed_roots(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_expect_incomplete_fails_closed_without_reviewed_roots(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     home = tmp_path / "home"
     home.mkdir()
     monkeypatch.setenv("HOME", str(home))
@@ -438,11 +543,15 @@ def test_main_expect_incomplete_survives_readonly_state_projection(
     try:
         with pytest.raises((PermissionError, OSError, RuntimeError)):
             evidence.write_report(report, state)
-        code = evidence.main([
-            "--todo", str(tmp_path / "board.md"),
-            "--state-root", str(state),
-            "--expect-incomplete",
-        ])
+        code = evidence.main(
+            [
+                "--todo",
+                str(tmp_path / "board.md"),
+                "--state-root",
+                str(state),
+                "--expect-incomplete",
+            ]
+        )
     finally:
         projection.chmod(0o755)
     assert code == 0
@@ -473,9 +582,16 @@ def test_reconciliation_and_queue_fixtures_join_exact_task_triple(tmp_path: Path
             write_event_log(root, lane)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
     task = evidence.Task(
-        "PTR-011", "fixture", "completed", (), ("scripts/owned.py",), command,
-        evidence.validation_targets(command), "G11",
-        "task/v1/fixture-011", "baguqeerafixture011",
+        "PTR-011",
+        "fixture",
+        "completed",
+        (),
+        ("scripts/owned.py",),
+        command,
+        evidence.validation_targets(command),
+        "G11",
+        "task/v1/fixture-011",
+        "baguqeerafixture011",
     )
     # Successful reconciliation event on v1 (PTR-011) plus failed coexistence.
     success = {
@@ -487,14 +603,18 @@ def test_reconciliation_and_queue_fixtures_join_exact_task_triple(tmp_path: Path
         "completion_persistence": {"passed": True, "durable_update": True},
         "integration_commit_proof": {"passed": True, "integration_commit": snapshot.commit},
         "post_merge_declared_output_invariant": {"passed": True},
-        "todo_update_result": {"completion_receipts": [{
-            "schema": evidence.MEMBER_COMPLETION_SCHEMA,
-            "status": "succeeded",
-            "task_id": task.task_id,
-            "canonical_task_cid": task.canonical_task_cid,
-            "canonical_task_key": task.canonical_task_key,
-            "board_namespace": evidence.BOARD_NAMESPACE,
-        }]},
+        "todo_update_result": {
+            "completion_receipts": [
+                {
+                    "schema": evidence.MEMBER_COMPLETION_SCHEMA,
+                    "status": "succeeded",
+                    "task_id": task.task_id,
+                    "canonical_task_cid": task.canonical_task_cid,
+                    "canonical_task_key": task.canonical_task_key,
+                    "board_namespace": evidence.BOARD_NAMESPACE,
+                }
+            ]
+        },
     }
     failed = {
         "type": "merge_reconciled",
@@ -505,14 +625,18 @@ def test_reconciliation_and_queue_fixtures_join_exact_task_triple(tmp_path: Path
     }
     # Rebuild lane 0 with chain-valid success after an initial placeholder.
     first = {
-        "sequence": 1, "previous_event_id": "",
-        "stream_id": "event-log:test", "snapshot_id": "event-log-snapshot:test",
+        "sequence": 1,
+        "previous_event_id": "",
+        "stream_id": "event-log:test",
+        "snapshot_id": "event-log-snapshot:test",
         "type": "bootstrap",
     }
     lane = roots["v1"] / "state" / "ptr_lane_0"
     write_event_log(roots["v1"], 0, [first, success, failed])
     receipts, gaps = evidence._reconciliation_receipts(
-        {k: roots[k] for k in ("v1", "v6", "v8")}, {task.task_id: task}, snapshot,
+        {k: roots[k] for k in ("v1", "v6", "v8")},
+        {task.task_id: task},
+        snapshot,
     )
     assert gaps == []
     assert receipts[task.task_id][0].commit == snapshot.commit
@@ -532,15 +656,25 @@ def test_recovery_only_rows_are_provenance_gaps(tmp_path: Path) -> None:
         (root / "merge-queue" / "train" / "receipts").mkdir(parents=True, exist_ok=True)
     (roots["v1"] / "projection" / "completion" / "validation_receipts").mkdir(parents=True)
     task = evidence.Task(
-        "PTR-150", "recovery", "completed", (), (), "", (), "G150",
-        "task/v1/recovery", "baguqeerarecovery150",
+        "PTR-150",
+        "recovery",
+        "completed",
+        (),
+        (),
+        "",
+        (),
+        "G150",
+        "task/v1/recovery",
+        "baguqeerarecovery150",
     )
     row = {"task_id": "PTR-150", "status": "completed", "commit_sha": snapshot.commit}
     (roots["v1"] / "merge-queue" / "completed" / "recovery-150.json").write_text(
         json.dumps(row), encoding="utf-8"
     )
     receipts, _, gaps, diagnostics = evidence._authoritative_evidence(
-        roots, {task.task_id: task}, snapshot,
+        roots,
+        {task.task_id: task},
+        snapshot,
     )
     assert task.task_id not in receipts
     assert "RECOVERY_PROVENANCE_GAP" not in {gap.kind for gap in gaps}
@@ -571,13 +705,25 @@ def test_request_dedupe_filename_mismatches_are_rejected(tmp_path: Path) -> None
     (roots["v1"] / "projection" / "completion" / "validation_receipts").mkdir(parents=True)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
     task = evidence.Task(
-        "PTR-160", "fixture", "completed", (), ("scripts/owned.py",), command,
-        evidence.validation_targets(command), "G160", "task/v1/fixture", "baguqeerafixture",
+        "PTR-160",
+        "fixture",
+        "completed",
+        (),
+        ("scripts/owned.py",),
+        command,
+        evidence.validation_targets(command),
+        "G160",
+        "task/v1/fixture",
+        "baguqeerafixture",
     )
     request, dedupe = "request-x", "dedupe-x"
     queue = {
-        "task_id": task.task_id, "request_id": "wrong-request", "dedupe_key": dedupe, "status": "completed",
-        "canonical_task_key": task.canonical_task_key, "canonical_task_id": task.canonical_task_cid,
+        "task_id": task.task_id,
+        "request_id": "wrong-request",
+        "dedupe_key": dedupe,
+        "status": "completed",
+        "canonical_task_key": task.canonical_task_key,
+        "canonical_task_id": task.canonical_task_cid,
         "commit_sha": snapshot.commit,
         "metadata": {
             "schema": "ipfs_accelerate_py/agent-supervisor/merge-candidate@3",
@@ -588,16 +734,25 @@ def test_request_dedupe_filename_mismatches_are_rejected(tmp_path: Path) -> None
             },
         },
     }
-    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
+    (roots["v8"] / "merge-queue" / "completed" / f"{request}.json").write_text(
+        json.dumps(queue), encoding="utf-8"
+    )
     train = {
-        "request_id": "wrong-request", "canonical_task_id": task.canonical_task_key, "task_id": task.task_id,
-        "status": "merged", "integrated": True, "merged": True,
+        "request_id": "wrong-request",
+        "canonical_task_id": task.canonical_task_key,
+        "task_id": task.task_id,
+        "status": "merged",
+        "integrated": True,
+        "merged": True,
         "merge_result": {
-            "merged": True, "returncode": 0,
+            "merged": True,
+            "returncode": 0,
             "integration_commit_proof": {"passed": True, "integration_commit": snapshot.commit},
         },
     }
-    (roots["v8"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(json.dumps(train), encoding="utf-8")
+    (roots["v8"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(
+        json.dumps(train), encoding="utf-8"
+    )
     _, _, _gaps, diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
     # Identity/dedupe mismatches are provenance diagnostics; they never authorize
     # and must not hard-block readiness when later authority can supersede them.
@@ -634,9 +789,15 @@ def test_copied_real_format_fixture_shapes(tmp_path: Path) -> None:
     """Copy real-format fixtures for v8 raw/train, v6 PTR-160, v1 receipt, and chain."""
     roots = _controller_state_siblings()
     src_v8, src_v6, src_v1 = roots["v8"], roots["v6"], roots["v1"]
-    assert (src_v8 / "merge-queue/completed").is_dir(), "v8 completed queue missing under controller root"
-    assert (src_v6 / "merge-queue/completed").is_dir(), "v6 completed queue missing under controller root"
-    assert (src_v1 / "projection/completion/validation_receipts").is_dir(), "v1 validation receipts missing"
+    assert (src_v8 / "merge-queue/completed").is_dir(), (
+        "v8 completed queue missing under controller root"
+    )
+    assert (src_v6 / "merge-queue/completed").is_dir(), (
+        "v6 completed queue missing under controller root"
+    )
+    assert (src_v1 / "projection/completion/validation_receipts").is_dir(), (
+        "v1 validation receipts missing"
+    )
 
     dest = tmp_path / "fixtures"
     dest.mkdir(parents=True)
@@ -671,11 +832,23 @@ def test_copied_real_format_fixture_shapes(tmp_path: Path) -> None:
     vr = src_v1 / "projection/completion/validation_receipts/PTR-000.json"
     assert vr.is_file()
     body = json.loads(vr.read_text())
-    assert body["schema"] == "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1"
+    assert (
+        body["schema"] == "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1"
+    )
     for required in (
-        "disposition", "exit_code", "skipped_count", "proof_reuse_mode", "passed",
-        "repository_id", "repository_state_cid", "repository_forest_cid",
-        "dirty", "dirty_overlay_cid", "git_commit_id", "git_tree_id", "gitlink_state_cid",
+        "disposition",
+        "exit_code",
+        "skipped_count",
+        "proof_reuse_mode",
+        "passed",
+        "repository_id",
+        "repository_state_cid",
+        "repository_forest_cid",
+        "dirty",
+        "dirty_overlay_cid",
+        "git_commit_id",
+        "git_tree_id",
+        "gitlink_state_cid",
     ):
         assert required in body
     claimed = body.pop("validation_receipt_cid")
@@ -697,7 +870,9 @@ def test_copied_real_format_fixture_shapes(tmp_path: Path) -> None:
                 continue
             if "PTR-011" in line and "implementation_branch_already_merged" in line:
                 has_011 = True
-            if "PTR-041" in line and ("merge_failed" in line or '"resolved": false' in line or '"resolved":false' in line):
+            if "PTR-041" in line and (
+                "merge_failed" in line or '"resolved": false' in line or '"resolved":false' in line
+            ):
                 has_041_failed = True
     assert has_011, "v1 PTR-011 successful reconciliation missing"
     # Failed coexistence may be on another lane; do not invent it.
@@ -720,7 +895,9 @@ def test_board_population_mutations_are_invalid_when_sealed(tmp_path: Path) -> N
         board_dir = tmp_path / f"n{count}"
         board_dir.mkdir(parents=True, exist_ok=True)
         board = write_board(board_dir, task_count=count)
-        code = evidence.main(["--todo", str(board), "--expect-incomplete", "--state-root", str(tmp_path)])
+        code = evidence.main(
+            ["--todo", str(board), "--expect-incomplete", "--state-root", str(tmp_path)]
+        )
         assert code == 3
 
 
@@ -778,14 +955,25 @@ def test_failed_and_quarantined_queue_rows_are_rejected(tmp_path: Path) -> None:
     (roots["v1"] / "projection" / "completion" / "validation_receipts").mkdir(parents=True)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
     task = evidence.Task(
-        "PTR-160", "fixture", "completed", (), ("scripts/owned.py",), command,
-        evidence.validation_targets(command), "G160", "task/v1/fixture", "baguqeerafixture",
+        "PTR-160",
+        "fixture",
+        "completed",
+        (),
+        ("scripts/owned.py",),
+        command,
+        evidence.validation_targets(command),
+        "G160",
+        "task/v1/fixture",
+        "baguqeerafixture",
     )
     for status, name in (("failed", "failed-req"), ("quarantined", "quar-req")):
         queue = {
-            "task_id": task.task_id, "request_id": name, "dedupe_key": f"dedupe-{name}",
+            "task_id": task.task_id,
+            "request_id": name,
+            "dedupe_key": f"dedupe-{name}",
             "status": status,
-            "canonical_task_key": task.canonical_task_key, "canonical_task_id": task.canonical_task_cid,
+            "canonical_task_key": task.canonical_task_key,
+            "canonical_task_id": task.canonical_task_cid,
             "commit_sha": snapshot.commit,
             "metadata": {
                 "schema": "ipfs_accelerate_py/agent-supervisor/merge-candidate@3",
@@ -797,7 +985,8 @@ def test_failed_and_quarantined_queue_rows_are_rejected(tmp_path: Path) -> None:
             },
         }
         (roots["v9"] / "merge-queue" / "completed" / f"{name}.json").write_text(
-            json.dumps(queue), encoding="utf-8",
+            json.dumps(queue),
+            encoding="utf-8",
         )
     _, _, _gaps, diag = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
     # Failed/quarantined rows never authorize; they surface as provenance
@@ -818,9 +1007,16 @@ def test_recovery_diagnostic_superseded_after_later_authority(tmp_path: Path) ->
     (roots["v1"] / "projection" / "completion" / "validation_receipts").mkdir(parents=True)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
     task = evidence.Task(
-        "PTR-150", "recovery", "completed", (), (), command,
-        evidence.validation_targets(command), "G150",
-        "task/v1/recovery", "baguqeerarecovery150",
+        "PTR-150",
+        "recovery",
+        "completed",
+        (),
+        (),
+        command,
+        evidence.validation_targets(command),
+        "G150",
+        "task/v1/recovery",
+        "baguqeerarecovery150",
     )
     # Old recovery-only row under v1.
     (roots["v1"] / "merge-queue" / "completed" / "recovery-150.json").write_text(
@@ -830,8 +1026,12 @@ def test_recovery_diagnostic_superseded_after_later_authority(tmp_path: Path) ->
     # Later valid v9 queue/train authority for the same exact triple.
     request, dedupe = "request-150-later", "dedupe-150-later"
     queue = {
-        "task_id": task.task_id, "request_id": request, "dedupe_key": dedupe, "status": "completed",
-        "canonical_task_key": task.canonical_task_key, "canonical_task_id": task.canonical_task_cid,
+        "task_id": task.task_id,
+        "request_id": request,
+        "dedupe_key": dedupe,
+        "status": "completed",
+        "canonical_task_key": task.canonical_task_key,
+        "canonical_task_id": task.canonical_task_cid,
         "commit_sha": snapshot.commit,
         "metadata": {
             "schema": "ipfs_accelerate_py/agent-supervisor/merge-candidate@3",
@@ -843,17 +1043,28 @@ def test_recovery_diagnostic_superseded_after_later_authority(tmp_path: Path) ->
         },
     }
     train = {
-        "request_id": request, "canonical_task_id": task.canonical_task_key, "task_id": task.task_id,
-        "status": "merged", "integrated": True, "merged": True,
+        "request_id": request,
+        "canonical_task_id": task.canonical_task_key,
+        "task_id": task.task_id,
+        "status": "merged",
+        "integrated": True,
+        "merged": True,
         "merge_result": {
-            "merged": True, "returncode": 0,
+            "merged": True,
+            "returncode": 0,
             "integration_commit_proof": {"passed": True, "integration_commit": snapshot.commit},
         },
     }
-    (roots["v9"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
-    (roots["v9"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(json.dumps(train), encoding="utf-8")
+    (roots["v9"] / "merge-queue" / "completed" / f"{request}.json").write_text(
+        json.dumps(queue), encoding="utf-8"
+    )
+    (roots["v9"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(
+        json.dumps(train), encoding="utf-8"
+    )
     receipts, _, gaps, diagnostics = evidence._authoritative_evidence(
-        roots, {task.task_id: task}, snapshot,
+        roots,
+        {task.task_id: task},
+        snapshot,
     )
     assert receipts[task.task_id]
     assert "RECOVERY_PROVENANCE_GAP" not in {gap.kind for gap in gaps}
@@ -873,13 +1084,25 @@ def test_v9_queue_pair_is_scanned_before_historical_roots(tmp_path: Path) -> Non
     (roots["v1"] / "projection" / "completion" / "validation_receipts").mkdir(parents=True)
     command = "IPFS_TEST_PROOF_REUSE_MODE=off python3 -m pytest tests/test_owned.py -q"
     task = evidence.Task(
-        "PTR-165", "fixture", "todo", (), ("scripts/owned.py",), command,
-        evidence.validation_targets(command), "G165", "task/v1/fixture165", "baguqeerafixture165",
+        "PTR-165",
+        "fixture",
+        "todo",
+        (),
+        ("scripts/owned.py",),
+        command,
+        evidence.validation_targets(command),
+        "G165",
+        "task/v1/fixture165",
+        "baguqeerafixture165",
     )
     request, dedupe = "request-165", "dedupe-165"
     queue = {
-        "task_id": task.task_id, "request_id": request, "dedupe_key": dedupe, "status": "completed",
-        "canonical_task_key": task.canonical_task_key, "canonical_task_id": task.canonical_task_cid,
+        "task_id": task.task_id,
+        "request_id": request,
+        "dedupe_key": dedupe,
+        "status": "completed",
+        "canonical_task_key": task.canonical_task_key,
+        "canonical_task_id": task.canonical_task_cid,
         "commit_sha": snapshot.commit,
         "metadata": {
             "schema": "ipfs_accelerate_py/agent-supervisor/merge-candidate@3",
@@ -891,17 +1114,28 @@ def test_v9_queue_pair_is_scanned_before_historical_roots(tmp_path: Path) -> Non
         },
     }
     train = {
-        "request_id": request, "canonical_task_id": task.canonical_task_key, "task_id": task.task_id,
-        "status": "merged", "integrated": True, "merged": True,
+        "request_id": request,
+        "canonical_task_id": task.canonical_task_key,
+        "task_id": task.task_id,
+        "status": "merged",
+        "integrated": True,
+        "merged": True,
         "merge_result": {
-            "merged": True, "returncode": 0,
+            "merged": True,
+            "returncode": 0,
             "integration_commit_proof": {"passed": True, "integration_commit": snapshot.commit},
         },
     }
-    (roots["v9"] / "merge-queue" / "completed" / f"{request}.json").write_text(json.dumps(queue), encoding="utf-8")
-    (roots["v9"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(json.dumps(train), encoding="utf-8")
+    (roots["v9"] / "merge-queue" / "completed" / f"{request}.json").write_text(
+        json.dumps(queue), encoding="utf-8"
+    )
+    (roots["v9"] / "merge-queue" / "train" / "receipts" / f"{dedupe}.json").write_text(
+        json.dumps(train), encoding="utf-8"
+    )
     receipts, _, gaps, _ = evidence._authoritative_evidence(roots, {task.task_id: task}, snapshot)
-    assert not any(g.kind == "STATE_ROOT_QUEUE_AUTHORITY_MISSING" and g.detail == "v9" for g in gaps)
+    assert not any(
+        g.kind == "STATE_ROOT_QUEUE_AUTHORITY_MISSING" and g.detail == "v9" for g in gaps
+    )
     assert receipts[task.task_id][0].source.startswith("v9/")
 
 
@@ -940,14 +1174,19 @@ def test_sealed_document_digest_mismatch_is_typed_audit_failure(tmp_path: Path) 
         "valid": True,
         "board": dict(native),
     }
-    (current / "projection" / "native_board_preflight.json").write_text(json.dumps(native), encoding="utf-8")
-    (current / "projection" / "launch_preflight.json").write_text(json.dumps(launch), encoding="utf-8")
+    (current / "projection" / "native_board_preflight.json").write_text(
+        json.dumps(native), encoding="utf-8"
+    )
+    (current / "projection" / "launch_preflight.json").write_text(
+        json.dumps(launch), encoding="utf-8"
+    )
     gaps = evidence._match_sealed_document_digests(current, live)
     assert any(g.kind == "BOARD_DOCUMENT_DIGEST_MISMATCH" for g in gaps)
 
 
 def test_fixture_roots_resolve_from_controller_selected_override(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
     parent = tmp_path / "state-home"
     for name in ("v1", "v6", "v8", "v9"):

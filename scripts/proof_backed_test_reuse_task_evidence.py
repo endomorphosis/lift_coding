@@ -37,7 +37,9 @@ RECEIPT_SCHEMA = "CompletedTaskArtifactReceipt@1"
 GITLINK_SCHEMA = "ExactGitlinkEvidence@1"
 _TASK = re.compile(r"^##\s+(PTR-\d+)\s+(.+?)\s*$")
 _FIELD = re.compile(r"^-\s+([^:]+):\s*(.*?)\s*$")
-_PATH = re.compile(r"(?<![A-Za-z0-9_./-])((?:external|implementation_plan|config|scripts|tests|test)/[A-Za-z0-9_@%+=:,./-]+)")
+_PATH = re.compile(
+    r"(?<![A-Za-z0-9_./-])((?:external|implementation_plan|config|scripts|tests|test)/[A-Za-z0-9_@%+=:,./-]+)"
+)
 _COMPLETED = frozenset({"complete", "completed", "done", "validated"})
 # Historic tasks close via local operator approvals, not managed-merge alone.
 # Queue rows for these ids must not co-exist with accepted approvals (accelerate
@@ -46,7 +48,9 @@ HISTORIC_APPROVAL_TASKS = frozenset({"PTR-000", "PTR-001", "PTR-011", "PTR-041"}
 
 
 def canonical_json(value: object) -> bytes:
-    return json.dumps(value, allow_nan=False, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return json.dumps(
+        value, allow_nan=False, ensure_ascii=False, separators=(",", ":"), sort_keys=True
+    ).encode("utf-8")
 
 
 def _varint(value: int) -> bytes:
@@ -225,10 +229,14 @@ def _git_read_pack_object(store: Path, oid: str) -> tuple[str, bytes] | None:
             continue
         fanout_base = 8
         first = target[0]
-        start_count = 0 if first == 0 else int.from_bytes(
-            idx[fanout_base + (first - 1) * 4 : fanout_base + first * 4], "big"
+        start_count = (
+            0
+            if first == 0
+            else int.from_bytes(idx[fanout_base + (first - 1) * 4 : fanout_base + first * 4], "big")
         )
-        end_count = int.from_bytes(idx[fanout_base + first * 4 : fanout_base + (first + 1) * 4], "big")
+        end_count = int.from_bytes(
+            idx[fanout_base + first * 4 : fanout_base + (first + 1) * 4], "big"
+        )
         sha_table = fanout_base + 256 * 4
         lo, hi = start_count, end_count
         found_i = None
@@ -247,7 +255,9 @@ def _git_read_pack_object(store: Path, oid: str) -> tuple[str, bytes] | None:
         n_objects = int.from_bytes(idx[fanout_base + 255 * 4 : fanout_base + 256 * 4], "big")
         crc_table = sha_table + n_objects * 20
         offset_table = crc_table + n_objects * 4
-        offset = int.from_bytes(idx[offset_table + found_i * 4 : offset_table + (found_i + 1) * 4], "big")
+        offset = int.from_bytes(
+            idx[offset_table + found_i * 4 : offset_table + (found_i + 1) * 4], "big"
+        )
         if offset & 0x80000000:
             large_index = offset & 0x7FFFFFFF
             large_table = offset_table + n_objects * 4
@@ -353,7 +363,9 @@ def _git_object_store_roots(object_root: Path) -> list[Path]:
     return roots
 
 
-def _git_object_raw(gitdir: Path, oid: str, *, store: Path | None = None) -> tuple[str, bytes] | None:
+def _git_object_raw(
+    gitdir: Path, oid: str, *, store: Path | None = None
+) -> tuple[str, bytes] | None:
     if not re.fullmatch(r"[0-9a-f]{40}", oid):
         return None
     object_root = store if store is not None else gitdir
@@ -462,7 +474,9 @@ def _git_commit_parents(cwd: Path, commit: str) -> tuple[str, ...]:
     return tuple(parents)
 
 
-def _git_parse_tree(gitdir: Path, tree_oid: str, *, store: Path | None = None) -> list[tuple[str, str, str]]:
+def _git_parse_tree(
+    gitdir: Path, tree_oid: str, *, store: Path | None = None
+) -> list[tuple[str, str, str]]:
     """Return (mode, name, oid) entries for one tree object."""
 
     body = _git_loose_object(gitdir, tree_oid, store=store)
@@ -489,8 +503,10 @@ def _git_tree_oid_for_revision(cwd: Path, revision: str) -> str:
     if dirs is None or not revision:
         return ""
     gitdir, store = dirs
-    oid = revision if re.fullmatch(r"[0-9a-f]{40}", revision) else (
-        _git_read_ref(gitdir, revision) or _git_read_ref(store, revision)
+    oid = (
+        revision
+        if re.fullmatch(r"[0-9a-f]{40}", revision)
+        else (_git_read_ref(gitdir, revision) or _git_read_ref(store, revision))
     )
     if not oid:
         return ""
@@ -517,7 +533,11 @@ def _git_entry_type(mode: str) -> str:
 
 
 def _git_ls_tree(
-    cwd: Path, revision: str, path: str = "", *, recursive: bool = False,
+    cwd: Path,
+    revision: str,
+    path: str = "",
+    *,
+    recursive: bool = False,
 ) -> list[tuple[str, str, str, str]]:
     """List tree entries as (mode, type, oid, path) like ``git ls-tree``."""
 
@@ -614,7 +634,13 @@ def _git_is_ancestor(cwd: Path, maybe_ancestor: str, descendant: str) -> bool:
 
 def _safe_path(value: str) -> str | None:
     path = PurePosixPath(value.replace("\\", "/"))
-    if not value or "\x00" in value or path.is_absolute() or ".." in path.parts or path.as_posix() in {".", ".."}:
+    if (
+        not value
+        or "\x00" in value
+        or path.is_absolute()
+        or ".." in path.parts
+        or path.as_posix() in {".", ".."}
+    ):
         return None
     return path.as_posix()
 
@@ -623,9 +649,16 @@ def validation_targets(command: str) -> tuple[str, ...]:
     # A quoted import root (for example ``sys.path.insert(..., 'external/pkg')``)
     # is not a validation target.  Board validations name file targets, so require
     # a suffix while retaining non-Python test runners and manifests.
-    return tuple(sorted({target for raw in _PATH.findall(command)
-                         if (target := _safe_path(raw.split("::", 1)[0].rstrip(",;)]}")))
-                         and PurePosixPath(target).suffix}))
+    return tuple(
+        sorted(
+            {
+                target
+                for raw in _PATH.findall(command)
+                if (target := _safe_path(raw.split("::", 1)[0].rstrip(",;)]}")))
+                and PurePosixPath(target).suffix
+            }
+        )
+    )
 
 
 @dataclass(frozen=True)
@@ -647,10 +680,16 @@ class Task:
         # with this compatibility projection when one is available.
         if self.canonical_task_cid:
             return self.canonical_task_cid
-        return canonical_cid({
-            "task_id": self.task_id, "status": self.status, "dependencies": self.dependencies,
-            "outputs": self.outputs, "validation_command": self.validation_command, "goal_id": self.goal_id,
-        })
+        return canonical_cid(
+            {
+                "task_id": self.task_id,
+                "status": self.status,
+                "dependencies": self.dependencies,
+                "outputs": self.outputs,
+                "validation_command": self.validation_command,
+                "goal_id": self.goal_id,
+            }
+        )
 
 
 @dataclass(frozen=True)
@@ -664,6 +703,7 @@ class ExactGitlinkEvidence:
 @dataclass(frozen=True)
 class CompletedTaskArtifactReceipt:
     """The minimum completion proof accepted by this independent auditor."""
+
     task_id: str
     commit: str
     receipt_cid: str
@@ -699,9 +739,20 @@ def parse_board(path: Path) -> dict[str, Task]:
 
 def _make_task(raw: Mapping[str, Any]) -> Task:
     fields = raw["fields"]
-    csv = lambda name: tuple(item.strip() for item in fields.get(name, "").split(",") if item.strip())
+    csv = lambda name: tuple(
+        item.strip() for item in fields.get(name, "").split(",") if item.strip()
+    )
     command = fields.get("validation", "")
-    return Task(str(raw["task_id"]), str(raw["title"]), fields.get("status", "").lower(), csv("depends on"), csv("outputs"), command, validation_targets(command), fields.get("goal id", ""))
+    return Task(
+        str(raw["task_id"]),
+        str(raw["title"]),
+        fields.get("status", "").lower(),
+        csv("depends on"),
+        csv("outputs"),
+        command,
+        validation_targets(command),
+        fields.get("goal id", ""),
+    )
 
 
 def _load_script_module(path: Path, name: str) -> Any:
@@ -735,7 +786,8 @@ def _ordered_task_identity_digest(tasks: Mapping[str, Task]) -> str:
 
 
 def _match_sealed_document_digests(
-    state_root: Path, live_preflight: Mapping[str, Any],
+    state_root: Path,
+    live_preflight: Mapping[str, Any],
 ) -> list[Gap]:
     """Require current document bytes to match v9 native-board and launch receipts.
 
@@ -768,7 +820,13 @@ def _match_sealed_document_digests(
         or board.get("valid") is not True
         or board.get("task_count") != SEALED_TASK_COUNT
     ):
-        gaps.append(Gap("BOARD", "BOARD_SEALED_PREFLIGHT_INVALID", "native/launch receipts did not seal the 78-task board"))
+        gaps.append(
+            Gap(
+                "BOARD",
+                "BOARD_SEALED_PREFLIGHT_INVALID",
+                "native/launch receipts did not seal the 78-task board",
+            )
+        )
         return gaps
     try:
         # Always rehash the repository-owned sealed paths, not tmp launch paths
@@ -786,13 +844,17 @@ def _match_sealed_document_digests(
             if sealed.get(field) != observed:
                 gaps.append(Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:{field}"))
         if sealed.get("dependency_graph_id") != live_preflight.get("dependency_graph_id"):
-            gaps.append(Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:dependency_graph_id"))
+            gaps.append(
+                Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:dependency_graph_id")
+            )
         if sealed.get("task_count") != SEALED_TASK_COUNT:
             gaps.append(Gap("BOARD", "BOARD_DOCUMENT_DIGEST_MISMATCH", f"{label}:task_count"))
     return gaps
 
 
-def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, Any], Mapping[str, Any]]:
+def _sealed_board(
+    todo: Path,
+) -> tuple[dict[str, Task], list[Gap], Mapping[str, Any], Mapping[str, Any]]:
     """Read the program board through its preflight and supervisor parser.
 
     This deliberately does not use the permissive markdown parser above.  The
@@ -816,12 +878,25 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
         or preflight.get("errors") != []
         or preflight.get("task_count") != SEALED_TASK_COUNT
     ):
-        return {}, [Gap("BOARD", "BOARD_PREFLIGHT_INVALID", "sealed preflight did not validate the 78-task board")], {}, {}
+        return (
+            {},
+            [
+                Gap(
+                    "BOARD",
+                    "BOARD_PREFLIGHT_INVALID",
+                    "sealed preflight did not validate the 78-task board",
+                )
+            ],
+            {},
+            {},
+        )
     try:
         accelerator = REPO_ROOT / "external/ipfs_accelerate"
         if str(accelerator) not in sys.path:
             sys.path.insert(0, str(accelerator))
-        from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import parse_task_file
+        from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+            parse_task_file,
+        )
 
         parsed = parse_task_file(todo, "## PTR-")
     except Exception as exc:
@@ -837,19 +912,33 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
         key = str(getattr(item, "canonical_task_key", ""))
         cid = str(getattr(item, "canonical_task_cid", ""))
         if not task_id or task_id in tasks or namespace != BOARD_NAMESPACE or not key or not cid:
-            gaps.append(Gap(task_id or "BOARD", "BOARD_IDENTITY_INVALID", task_id or "missing task identity"))
+            gaps.append(
+                Gap(
+                    task_id or "BOARD", "BOARD_IDENTITY_INVALID", task_id or "missing task identity"
+                )
+            )
             continue
         raw_validation = getattr(item, "validation", None)
         if isinstance(raw_validation, (list, tuple)) and raw_validation:
             command = str(raw_validation[0])
         else:
             command = str(metadata.get("validation", ""))
-        goal = str(metadata.get("goal id") or metadata.get("goal_id") or getattr(item, "goal_id", "") or "")
+        goal = str(
+            metadata.get("goal id") or metadata.get("goal_id") or getattr(item, "goal_id", "") or ""
+        )
         depends = tuple(str(value) for value in (getattr(item, "depends_on", ()) or ()))
         outputs = tuple(str(value) for value in (getattr(item, "outputs", ()) or ()))
         tasks[task_id] = Task(
-            task_id, str(getattr(item, "title", "")), str(getattr(item, "status", "")).lower(),
-            depends, outputs, command, validation_targets(command), goal, key, cid,
+            task_id,
+            str(getattr(item, "title", "")),
+            str(getattr(item, "status", "")).lower(),
+            depends,
+            outputs,
+            command,
+            validation_targets(command),
+            goal,
+            key,
+            cid,
         )
         ordered_ids.append(task_id)
     if len(tasks) != SEALED_TASK_COUNT:
@@ -858,7 +947,13 @@ def _sealed_board(todo: Path) -> tuple[dict[str, Task], list[Gap], Mapping[str, 
     # later matched against the sealed native/launch document digests that bind
     # the same todo bytes.
     if len(ordered_ids) != SEALED_TASK_COUNT or len(set(ordered_ids)) != SEALED_TASK_COUNT:
-        gaps.append(Gap("BOARD", "BOARD_POPULATION_MISMATCH", "ordered parser inventory is not 78 unique tasks"))
+        gaps.append(
+            Gap(
+                "BOARD",
+                "BOARD_POPULATION_MISMATCH",
+                "ordered parser inventory is not 78 unique tasks",
+            )
+        )
     quarantine = preflight.get("historical_missing_artifact_quarantine")
     if not isinstance(quarantine, Mapping):
         quarantine = {}
@@ -895,23 +990,43 @@ class GitSnapshot:
         path = _safe_path(value)
         if path is None:
             return {"path": value, "present": False}, Gap("", "UNSAFE_PATH", repr(value))
-        owner = max((item for item in self.gitlinks if path == item or path.startswith(item + "/")), key=len, default="")
+        owner = max(
+            (item for item in self.gitlinks if path == item or path.startswith(item + "/")),
+            key=len,
+            default="",
+        )
         if not owner:
             entries = _git_ls_tree(self.root, self.commit or "HEAD", path)
             present = bool(entries)
             blob = entries[0][2] if present else ""
-            return {"path": path, "owner": ".", "gitlink": self.commit, "expected_gitlink": self.commit, "exact_gitlink": True,
-                    "present": present, "blob_oid": blob, "blob_sha256": _git_blob_sha256(self.commit or "HEAD", path, self.root) if present else ""}, None
+            return {
+                "path": path,
+                "owner": ".",
+                "gitlink": self.commit,
+                "expected_gitlink": self.commit,
+                "exact_gitlink": True,
+                "present": present,
+                "blob_oid": blob,
+                "blob_sha256": _git_blob_sha256(self.commit or "HEAD", path, self.root)
+                if present
+                else "",
+            }, None
         expected = self.gitlinks[owner]
         repo = self.root / owner
         observed = _git_resolve_head(repo)
         evidence = ExactGitlinkEvidence(owner, expected, observed, observed == expected)
-        relative = path[len(owner):].lstrip("/")
+        relative = path[len(owner) :].lstrip("/")
         entries = _git_ls_tree(repo, expected, relative) if evidence.exact else []
         present = evidence.exact and bool(entries)
         blob = entries[0][2] if present else ""
-        return {"path": path, "owner": owner, "gitlink": asdict(evidence), "present": present,
-                "blob_oid": blob, "blob_sha256": _git_blob_sha256(expected, relative, repo) if present else ""}, None
+        return {
+            "path": path,
+            "owner": owner,
+            "gitlink": asdict(evidence),
+            "present": present,
+            "blob_oid": blob,
+            "blob_sha256": _git_blob_sha256(expected, relative, repo) if present else "",
+        }, None
 
     def is_ancestor(self, commit: str) -> bool:
         return _git_is_ancestor(self.root, commit, self.commit)
@@ -940,13 +1055,31 @@ def _records(state_root: Path) -> Iterable[tuple[Path, Mapping[str, Any]]]:
     return found
 
 
-def _completion_receipt(record: Mapping[str, Any], source: Path) -> CompletedTaskArtifactReceipt | None:
+def _completion_receipt(
+    record: Mapping[str, Any], source: Path
+) -> CompletedTaskArtifactReceipt | None:
     task_id = record.get("task_id")
-    cid = next((str(record[key]) for key in ("merge_receipt_cid", "completion_receipt_cid", "task_receipt_cid") if record.get(key)), "")
-    commit = next((str(record[key]) for key in ("git_commit_id", "merged_commit_id", "merge_commit", "commit_sha", "commit") if record.get(key)), "")
+    cid = next(
+        (
+            str(record[key])
+            for key in ("merge_receipt_cid", "completion_receipt_cid", "task_receipt_cid")
+            if record.get(key)
+        ),
+        "",
+    )
+    commit = next(
+        (
+            str(record[key])
+            for key in ("git_commit_id", "merged_commit_id", "merge_commit", "commit_sha", "commit")
+            if record.get(key)
+        ),
+        "",
+    )
     if not isinstance(task_id, str) or not cid or not commit:
         return None
-    return CompletedTaskArtifactReceipt(task_id, commit, cid, str(source), str(record.get("task_cid", "")))
+    return CompletedTaskArtifactReceipt(
+        task_id, commit, cid, str(source), str(record.get("task_cid", ""))
+    )
 
 
 def _validation_receipt(record: Mapping[str, Any], source: Path) -> dict[str, Any] | None:
@@ -987,7 +1120,11 @@ def _reviewed_roots(current_root: Path) -> tuple[dict[str, Path], list[Gap]]:
         "v8": parent / "proof-backed-test-reuse-v8",
         "v9": current_root,
     }
-    gaps = [Gap("BOARD", "STATE_ROOT_MISSING", f"{name}:{path.name}") for name, path in roots.items() if not path.is_dir()]
+    gaps = [
+        Gap("BOARD", "STATE_ROOT_MISSING", f"{name}:{path.name}")
+        for name, path in roots.items()
+        if not path.is_dir()
+    ]
     return roots, gaps
 
 
@@ -1016,7 +1153,18 @@ def _verify_event_log(root_name: str, root: Path) -> list[Gap]:
             gaps.append(Gap("BOARD", "STATE_ROOT_MANIFEST_INVALID", label))
             continue
         files = manifest.get("files")
-        entry = next((item for item in files if isinstance(item, Mapping) and item.get("path") == events.name), None) if isinstance(files, list) else None
+        entry = (
+            next(
+                (
+                    item
+                    for item in files
+                    if isinstance(item, Mapping) and item.get("path") == events.name
+                ),
+                None,
+            )
+            if isinstance(files, list)
+            else None
+        )
         if entry is None:
             gaps.append(Gap("BOARD", "STATE_ROOT_MANIFEST_SEGMENT_MISSING", label))
             continue
@@ -1038,7 +1186,11 @@ def _verify_event_log(root_name: str, root: Path) -> list[Gap]:
             except json.JSONDecodeError:
                 gaps.append(Gap("BOARD", "STATE_ROOT_EVENT_LOG_INVALID", label))
                 break
-            if not isinstance(event, Mapping) or not event.get("event_id") or event.get("previous_event_id", "") != previous:
+            if (
+                not isinstance(event, Mapping)
+                or not event.get("event_id")
+                or event.get("previous_event_id", "") != previous
+            ):
                 gaps.append(Gap("BOARD", "STATE_ROOT_EVENT_CHAIN_INVALID", label))
                 break
             # Rederive the canonical event identity; never trust the claim alone.
@@ -1049,7 +1201,10 @@ def _verify_event_log(root_name: str, root: Path) -> list[Gap]:
             if expected_sequence is not None and event.get("sequence") != expected_sequence:
                 gaps.append(Gap("BOARD", "STATE_ROOT_EVENT_SEQUENCE_INVALID", label))
                 break
-            if event.get("stream_id") != manifest["stream_id"] or event.get("snapshot_id") != manifest["snapshot_id"]:
+            if (
+                event.get("stream_id") != manifest["stream_id"]
+                or event.get("snapshot_id") != manifest["snapshot_id"]
+            ):
                 gaps.append(Gap("BOARD", "STATE_ROOT_EVENT_IDENTITY_INVALID", label))
                 break
             previous = str(event["event_id"])
@@ -1066,7 +1221,10 @@ def _validation_command_cid(command: str) -> str:
     accelerator = REPO_ROOT / "external/ipfs_accelerate"
     if str(accelerator) not in sys.path:
         sys.path.insert(0, str(accelerator))
-    from ipfs_accelerate_py.agent_supervisor.validation.proof_cached_test_validation import validation_command_identity
+    from ipfs_accelerate_py.agent_supervisor.validation.proof_cached_test_validation import (
+        validation_command_identity,
+    )
+
     return str(validation_command_identity(command))
 
 
@@ -1119,7 +1277,9 @@ def _member_completion_ok(event: Mapping[str, Any], task: Task) -> bool:
 
 
 def _reconciliation_receipts(
-    roots: Mapping[str, Path], tasks: Mapping[str, Task], snapshot: GitSnapshot,
+    roots: Mapping[str, Path],
+    tasks: Mapping[str, Task],
+    snapshot: GitSnapshot,
 ) -> tuple[dict[str, list[CompletedTaskArtifactReceipt]], list[Gap]]:
     """Authority from verified merge_reconciled events (not from failed/quarantined rows)."""
 
@@ -1143,7 +1303,11 @@ def _reconciliation_receipts(
             persistence = event.get("completion_persistence")
             proof = event.get("integration_commit_proof")
             outputs = event.get("post_merge_declared_output_invariant")
-            if not isinstance(completion_cids, Mapping) or not isinstance(persistence, Mapping) or not isinstance(proof, Mapping):
+            if (
+                not isinstance(completion_cids, Mapping)
+                or not isinstance(persistence, Mapping)
+                or not isinstance(proof, Mapping)
+            ):
                 gaps.append(Gap(task.task_id, "RECONCILIATION_RECEIPT_MALFORMED", name))
                 continue
             integration = proof.get("integration_commit")
@@ -1160,10 +1324,15 @@ def _reconciliation_receipts(
             ):
                 gaps.append(Gap(task.task_id, "RECONCILIATION_RECEIPT_UNVERIFIED", name))
                 continue
-            receipts.setdefault(task.task_id, []).append(CompletedTaskArtifactReceipt(
-                task.task_id, integration, task.canonical_task_cid,
-                f"{name}/state/ptr_lane_*/events:merge_reconciled", task.canonical_task_cid,
-            ))
+            receipts.setdefault(task.task_id, []).append(
+                CompletedTaskArtifactReceipt(
+                    task.task_id,
+                    integration,
+                    task.canonical_task_cid,
+                    f"{name}/state/ptr_lane_*/events:merge_reconciled",
+                    task.canonical_task_cid,
+                )
+            )
     return receipts, gaps
 
 
@@ -1182,6 +1351,7 @@ def _project_queue_row(row: Mapping[str, Any]) -> Mapping[str, Any] | None:
         from ipfs_accelerate_py.agent_supervisor.validation.proof_test_reuse_task_evidence import (
             project_managed_merge_queue_record,
         )
+
         projected = project_managed_merge_queue_record(row)
     except Exception:
         return None
@@ -1201,9 +1371,17 @@ def _join_queue_train_receipt(
 
     outer_status = row.get("status")
     if outer_status in {"failed", "quarantined", "quarantine"}:
-        return None, Gap(task.task_id, "QUEUE_ROW_FAILED_OR_QUARANTINED", f"{name}:{queue_path.name}:{outer_status}")
+        return None, Gap(
+            task.task_id,
+            "QUEUE_ROW_FAILED_OR_QUARANTINED",
+            f"{name}:{queue_path.name}:{outer_status}",
+        )
     if outer_status != "completed":
-        return None, Gap(task.task_id, "QUEUE_ROW_UNAUTHENTICATED", f"{name}:{queue_path.name}:status={outer_status!r}")
+        return None, Gap(
+            task.task_id,
+            "QUEUE_ROW_UNAUTHENTICATED",
+            f"{name}:{queue_path.name}:status={outer_status!r}",
+        )
     metadata = row.get("metadata")
     nested = metadata.get("task") if isinstance(metadata, Mapping) else None
     if (
@@ -1216,10 +1394,17 @@ def _join_queue_train_receipt(
     # identities never authorize even when the outer row looks complete.
     nested_id = nested.get("task_id")
     if nested_id not in {None, task.task_id}:
-        return None, Gap(task.task_id, "QUEUE_TASK_IDENTITY_MISMATCH", f"{name}:{queue_path.name}:nested_task_id")
+        return None, Gap(
+            task.task_id, "QUEUE_TASK_IDENTITY_MISMATCH", f"{name}:{queue_path.name}:nested_task_id"
+        )
     request_id = row.get("request_id")
     dedupe = row.get("dedupe_key")
-    if not isinstance(request_id, str) or not request_id or not isinstance(dedupe, str) or not dedupe:
+    if (
+        not isinstance(request_id, str)
+        or not request_id
+        or not isinstance(dedupe, str)
+        or not dedupe
+    ):
         # Recovery-only rows lack request/dedupe/train binding (e.g. PTR-150/151/152).
         return None, Gap(task.task_id, "RECOVERY_PROVENANCE_GAP", queue_path.name)
     if (
@@ -1248,20 +1433,27 @@ def _join_queue_train_receipt(
         and isinstance(handoff, Mapping)
         and handoff.get("passed") is True
     )
-    if not isinstance(train, Mapping) or not isinstance(result, Mapping) or not isinstance(proof, Mapping) or (
-        train.get("request_id") != request_id
-        or train.get("canonical_task_id") != task.canonical_task_key
-        or train.get("task_id") != task.task_id
-        or status not in {"merged", "already_merged"}
-        or train.get("integrated") is not True
-        or result.get("merged") is not True
-        or result.get("returncode") != 0
-        or proof.get("passed") is not True
-        or (status == "already_merged" and not already_merged_ok)
-        or not isinstance(integration_commit, str)
-        or not snapshot.is_ancestor(integration_commit)
+    if (
+        not isinstance(train, Mapping)
+        or not isinstance(result, Mapping)
+        or not isinstance(proof, Mapping)
+        or (
+            train.get("request_id") != request_id
+            or train.get("canonical_task_id") != task.canonical_task_key
+            or train.get("task_id") != task.task_id
+            or status not in {"merged", "already_merged"}
+            or train.get("integrated") is not True
+            or result.get("merged") is not True
+            or result.get("returncode") != 0
+            or proof.get("passed") is not True
+            or (status == "already_merged" and not already_merged_ok)
+            or not isinstance(integration_commit, str)
+            or not snapshot.is_ancestor(integration_commit)
+        )
     ):
-        return None, Gap(task.task_id, "MERGE_TRAIN_RECEIPT_UNVERIFIED", f"{name}:{queue_path.name}")
+        return None, Gap(
+            task.task_id, "MERGE_TRAIN_RECEIPT_UNVERIFIED", f"{name}:{queue_path.name}"
+        )
     projected = _project_queue_row(row)
     receipt_cid = (
         str(projected.get("merge_receipt_cid"))
@@ -1269,13 +1461,18 @@ def _join_queue_train_receipt(
         else task.canonical_task_cid
     )
     return CompletedTaskArtifactReceipt(
-        task.task_id, integration_commit, receipt_cid,
-        f"{name}/merge-queue/train/receipts/{train_path.name}", task.canonical_task_cid,
+        task.task_id,
+        integration_commit,
+        receipt_cid,
+        f"{name}/merge-queue/train/receipts/{train_path.name}",
+        task.canonical_task_cid,
     ), None
 
 
 def _authoritative_flat_validation(
-    item: Mapping[str, Any], task: Task, source_label: str,
+    item: Mapping[str, Any],
+    task: Task,
+    source_label: str,
 ) -> tuple[dict[str, Any] | None, Gap | None]:
     """Accept only the flat executed-validation receipt body with full fields."""
 
@@ -1287,7 +1484,8 @@ def _authoritative_flat_validation(
     claimed = immutable.pop("validation_receipt_cid", "")
     expected = canonical_cid(immutable)
     if (
-        item.get("schema") != "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1"
+        item.get("schema")
+        != "ipfs_accelerate_py/proof-backed-test-reuse-executed-validation-receipt@1"
         or claimed != expected
         or item.get("task_id") != task.task_id
         or item.get("task_cid") != task.canonical_task_cid
@@ -1403,14 +1601,20 @@ def _operator_approval_receipts(
         source = f"v9/projection/completion/operator_approvals/{task_id}.approval.json"
         receipts.setdefault(task_id, []).append(
             CompletedTaskArtifactReceipt(
-                task_id, integrated, receipt_cid, source, task.task_cid,
+                task_id,
+                integrated,
+                receipt_cid,
+                source,
+                task.task_cid,
             )
         )
     return receipts, gaps
 
 
 def _authoritative_evidence(
-    roots: Mapping[str, Path], tasks: Mapping[str, Task], snapshot: GitSnapshot,
+    roots: Mapping[str, Path],
+    tasks: Mapping[str, Task],
+    snapshot: GitSnapshot,
 ) -> tuple[
     dict[str, list[CompletedTaskArtifactReceipt]],
     dict[str, list[dict[str, Any]]],
@@ -1464,7 +1668,12 @@ def _authoritative_evidence(
                 continue
             task = tasks[task_id]
             receipt, gap = _join_queue_train_receipt(
-                name=name, queue_path=queue_path, train_dir=train_dir, row=row, task=task, snapshot=snapshot,
+                name=name,
+                queue_path=queue_path,
+                train_dir=train_dir,
+                row=row,
+                task=task,
+                snapshot=snapshot,
             )
             if gap is not None:
                 # Superseded attempt identities and train failures are provenance
@@ -1542,7 +1751,9 @@ def _authoritative_evidence(
     current_root = roots.get("v9")
     if current_root is not None and current_root.is_dir():
         approval_receipts, approval_gaps = _operator_approval_receipts(
-            current_root, tasks, snapshot,
+            current_root,
+            tasks,
+            snapshot,
         )
         for task_id, values in approval_receipts.items():
             if task_id in receipts:
@@ -1574,7 +1785,9 @@ def _authoritative_evidence(
 
 
 class ProofReuseTaskEvidenceValidator:
-    def __init__(self, todo: Path, state_root: Path, repo_root: Path = REPO_ROOT, now_ms: int | None = None) -> None:
+    def __init__(
+        self, todo: Path, state_root: Path, repo_root: Path = REPO_ROOT, now_ms: int | None = None
+    ) -> None:
         self.todo = todo
         self.state_root = state_root
         self.snapshot = GitSnapshot(repo_root)
@@ -1604,7 +1817,9 @@ class ProofReuseTaskEvidenceValidator:
                 board_gaps.append(Gap("BOARD", "STATE_ROOT_MISSING", "current"))
             if not self.state_root.is_dir():
                 board_gaps.append(Gap("BOARD", "STATE_ROOT_MISSING", "current"))
-            roots, root_gaps = _reviewed_roots(self.state_root) if self.state_root.is_dir() else ({}, [])
+            roots, root_gaps = (
+                _reviewed_roots(self.state_root) if self.state_root.is_dir() else ({}, [])
+            )
             seal_gaps: list[Gap] = []
             if self.state_root.is_dir() and live_preflight and not board_gaps:
                 seal_gaps = _match_sealed_document_digests(self.state_root, live_preflight)
@@ -1612,8 +1827,12 @@ class ProofReuseTaskEvidenceValidator:
                 receipts, validations, evidence_gaps = {}, {}, []
                 provenance_diagnostics = []
             else:
-                receipts, validations, evidence_gaps, provenance_diagnostics = _authoritative_evidence(
-                    roots, tasks, self.snapshot,
+                receipts, validations, evidence_gaps, provenance_diagnostics = (
+                    _authoritative_evidence(
+                        roots,
+                        tasks,
+                        self.snapshot,
+                    )
                 )
             gaps: list[Gap] = [*board_gaps, *root_gaps, *seal_gaps, *evidence_gaps]
         else:
@@ -1639,7 +1858,9 @@ class ProofReuseTaskEvidenceValidator:
                 if unsafe:
                     gaps.append(Gap(task_id, unsafe.kind, unsafe.detail))
                 elif not item["present"]:
-                    kind = "OUTPUT_MISSING" if target in task.outputs else "VALIDATION_TARGET_MISSING"
+                    kind = (
+                        "OUTPUT_MISSING" if target in task.outputs else "VALIDATION_TARGET_MISSING"
+                    )
                     if isinstance(item.get("gitlink"), dict) and not item["gitlink"]["exact"]:
                         kind = "GITLINK_PIN_MISMATCH"
                     # Prefer the sealed quarantine's explicit later owner over
@@ -1647,35 +1868,52 @@ class ProofReuseTaskEvidenceValidator:
                     owner_meta = quarantine.get(target) if isinstance(quarantine, Mapping) else None
                     if isinstance(owner_meta, Mapping) and owner_meta.get("owner_task_id"):
                         owner = str(owner_meta["owner_task_id"])
-                        later_ownership.append({
-                            "path": target,
-                            "roles": list(owner_meta.get("sources") or [item["role"]]),
-                            "owner_task_id": owner,
-                            "owner_status": str(owner_meta.get("owner_status") or ""),
-                        })
+                        later_ownership.append(
+                            {
+                                "path": target,
+                                "roles": list(owner_meta.get("sources") or [item["role"]]),
+                                "owner_task_id": owner,
+                                "owner_status": str(owner_meta.get("owner_status") or ""),
+                            }
+                        )
                         gaps.append(Gap(owner, kind, target))
                     else:
                         gaps.append(Gap(task_id, kind, target))
             candidates = receipts.get(task_id, [])
             usable = [
-                candidate for candidate in candidates
+                candidate
+                for candidate in candidates
                 if self.snapshot.is_ancestor(candidate.commit)
                 and (not candidate.task_cid or candidate.task_cid == task.task_cid)
             ]
             if usable:
                 accepted[task_id] = sorted(usable, key=lambda item: item.commit)[-1]
             else:
-                if candidates and any(not self.snapshot.is_ancestor(item.commit) for item in candidates):
-                    gaps.append(Gap(task_id, "RECEIPT_COMMIT_NOT_ANCESTOR", ", ".join(item.commit for item in candidates)))
-                if candidates and any(item.task_cid and item.task_cid != task.task_cid for item in candidates):
+                if candidates and any(
+                    not self.snapshot.is_ancestor(item.commit) for item in candidates
+                ):
+                    gaps.append(
+                        Gap(
+                            task_id,
+                            "RECEIPT_COMMIT_NOT_ANCESTOR",
+                            ", ".join(item.commit for item in candidates),
+                        )
+                    )
+                if candidates and any(
+                    item.task_cid and item.task_cid != task.task_cid for item in candidates
+                ):
                     gaps.append(Gap(task_id, "RECEIPT_TASK_CID_MISMATCH", task.task_cid))
-                gaps.append(Gap(task_id, "COMPLETION_RECEIPT_MISSING", "no ancestor-bound task/merge receipt"))
+                gaps.append(
+                    Gap(
+                        task_id,
+                        "COMPLETION_RECEIPT_MISSING",
+                        "no ancestor-bound task/merge receipt",
+                    )
+                )
             candidates_validation = validations.get(task_id, [])
             valid_receipts = self._validations(task, candidates_validation, gaps)
             outputs_present = all(
-                item.get("present") is True
-                for item in observed
-                if item.get("role") == "output"
+                item.get("present") is True for item in observed if item.get("role") == "output"
             )
             # PTR-167 current-tree replay authority (sealed board only): when a
             # completed task has an ancestor-bound completion receipt and every
@@ -1689,30 +1927,43 @@ class ProofReuseTaskEvidenceValidator:
                     gaps[:] = [
                         gap
                         for gap in gaps
-                        if not (
-                            gap.task_id == task_id
-                            and gap.kind.startswith("VALIDATION_")
-                        )
+                        if not (gap.task_id == task_id and gap.kind.startswith("VALIDATION_"))
                     ]
                 elif candidates_validation:
                     if not any(
                         gap.task_id == task_id and gap.kind.startswith("VALIDATION_")
                         for gap in gaps
                     ):
-                        gaps.append(Gap(task_id, "VALIDATION_RECEIPT_UNUSABLE", "retained validation is not current-tree authority"))
+                        gaps.append(
+                            Gap(
+                                task_id,
+                                "VALIDATION_RECEIPT_UNUSABLE",
+                                "retained validation is not current-tree authority",
+                            )
+                        )
                 else:
-                    gaps.append(Gap(task_id, "VALIDATION_RECEIPT_MISSING", "no retained exact-command proof-reuse-off receipt"))
-            task_reports.append({
-                "task_id": task_id,
-                "task_cid": task.task_cid,
-                "canonical_task_key": task.canonical_task_key,
-                "outputs_and_targets": observed,
-                "completion_receipt": asdict(accepted[task_id]) if task_id in accepted else None,
-                "validation_receipt_sources": [item["source"] for item in valid_receipts],
-                "current_tree_output_authority": bool(
-                    task_id in accepted and outputs_present and not valid_receipts
-                ),
-            })
+                    gaps.append(
+                        Gap(
+                            task_id,
+                            "VALIDATION_RECEIPT_MISSING",
+                            "no retained exact-command proof-reuse-off receipt",
+                        )
+                    )
+            task_reports.append(
+                {
+                    "task_id": task_id,
+                    "task_cid": task.task_cid,
+                    "canonical_task_key": task.canonical_task_key,
+                    "outputs_and_targets": observed,
+                    "completion_receipt": asdict(accepted[task_id])
+                    if task_id in accepted
+                    else None,
+                    "validation_receipt_sources": [item["source"] for item in valid_receipts],
+                    "current_tree_output_authority": bool(
+                        task_id in accepted and outputs_present and not valid_receipts
+                    ),
+                }
+            )
         # Record ancestry between completed tasks only when both sides have
         # accepted receipts.  Missing receipts are not re-labeled as ownership.
         dependency_order: list[dict[str, Any]] = []
@@ -1754,18 +2005,22 @@ class ProofReuseTaskEvidenceValidator:
             owner = str(meta.get("owner_task_id") or "")
             if not owner or owner in completed:
                 continue
-            later_ownership.append({
-                "path": path,
-                "roles": list(meta.get("sources") or []),
-                "owner_task_id": owner,
-                "owner_status": str(meta.get("owner_status") or ""),
-            })
+            later_ownership.append(
+                {
+                    "path": path,
+                    "roles": list(meta.get("sources") or []),
+                    "owner_task_id": owner,
+                    "owner_status": str(meta.get("owner_status") or ""),
+                }
+            )
             if owner in tasks and not any(
                 gap.task_id == owner and gap.detail == path for gap in gaps
             ):
                 gaps.append(Gap(owner, "HISTORICAL_MISSING_ARTIFACT_PENDING", path))
         audit_valid = not any(
-            gap.task_id == "BOARD" or gap.kind.startswith("STATE_ROOT_") or gap.kind.startswith("BOARD_")
+            gap.task_id == "BOARD"
+            or gap.kind.startswith("STATE_ROOT_")
+            or gap.kind.startswith("BOARD_")
             for gap in gaps
         )
         # Body-free Landlock boundary receipt: diagnostic only, never authority.
@@ -1791,13 +2046,18 @@ class ProofReuseTaskEvidenceValidator:
             "tasks": task_reports,
             "dependency_order": dependency_order,
             "later_ownership": sorted(
-                { (item["path"], item["owner_task_id"]): item for item in later_ownership }.values(),
+                {(item["path"], item["owner_task_id"]): item for item in later_ownership}.values(),
                 key=lambda item: (item["path"], item["owner_task_id"]),
             ),
-            "gaps": [asdict(gap) for gap in sorted(gaps, key=lambda item: (item.task_id, item.kind, item.detail))],
+            "gaps": [
+                asdict(gap)
+                for gap in sorted(gaps, key=lambda item: (item.task_id, item.kind, item.detail))
+            ],
             "provenance_diagnostics": [
-                asdict(gap) for gap in sorted(
-                    provenance_diagnostics, key=lambda item: (item.task_id, item.kind, item.detail),
+                asdict(gap)
+                for gap in sorted(
+                    provenance_diagnostics,
+                    key=lambda item: (item.task_id, item.kind, item.detail),
                 )
             ],
             "boundary": boundary,
@@ -1808,7 +2068,9 @@ class ProofReuseTaskEvidenceValidator:
         body["report_cid"] = canonical_cid(body)
         return body
 
-    def _validations(self, task: Task, candidates: list[dict[str, Any]], gaps: list[Gap]) -> list[dict[str, Any]]:
+    def _validations(
+        self, task: Task, candidates: list[dict[str, Any]], gaps: list[Gap]
+    ) -> list[dict[str, Any]]:
         """Accept current-tree validation authority; ignore superseded history.
 
         Historical v1 receipts remain readable as candidates, but a later
@@ -1823,9 +2085,15 @@ class ProofReuseTaskEvidenceValidator:
             problems: list[str] = []
             if item.get("validation_command") != task.validation_command:
                 problems.append("VALIDATION_COMMAND_MISMATCH")
-            if item.get("goal_id") not in {None, task.goal_id} and item.get("goal_id") != task.goal_id:
+            if (
+                item.get("goal_id") not in {None, task.goal_id}
+                and item.get("goal_id") != task.goal_id
+            ):
                 problems.append("VALIDATION_GOAL_MISMATCH")
-            if item.get("task_cid") not in {None, "", task.task_cid} and item.get("task_cid") != task.task_cid:
+            if (
+                item.get("task_cid") not in {None, "", task.task_cid}
+                and item.get("task_cid") != task.task_cid
+            ):
                 problems.append("VALIDATION_TASK_CID_MISMATCH")
             if (
                 item.get("passed") is not True
@@ -1836,7 +2104,10 @@ class ProofReuseTaskEvidenceValidator:
                 or item.get("status") not in {None, "passed"}
             ):
                 problems.append("VALIDATION_NOT_PROOF_REUSE_OFF")
-            if not isinstance(item.get("fresh_until_ms"), int) or item["fresh_until_ms"] < self.now_ms:
+            if (
+                not isinstance(item.get("fresh_until_ms"), int)
+                or item["fresh_until_ms"] < self.now_ms
+            ):
                 problems.append("VALIDATION_RECEIPT_STALE")
             if (
                 item.get("git_commit_id") != self.snapshot.commit
@@ -1898,7 +2169,9 @@ def write_report(report: Mapping[str, Any], state_root: Path) -> Path:
             # PermissionError so callers can treat projection as best-effort.
             raise PermissionError(str(destination)) from exc
         except (UnicodeDecodeError, json.JSONDecodeError, KeyError, ValueError):
-            raise RuntimeError(f"existing report is not the claimed canonical report: {destination}")
+            raise RuntimeError(
+                f"existing report is not the claimed canonical report: {destination}"
+            )
         return destination
     directory.mkdir(parents=True, exist_ok=True)
     temporary = directory / f".{report['report_cid']}.{os.getpid()}.tmp"
@@ -1911,7 +2184,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--todo", type=Path, default=TODO_PATH)
     parser.add_argument("--state-root", type=Path, default=default_state_root())
-    parser.add_argument("--output", type=Path, help="optional explicit report location (does not create evidence)")
+    parser.add_argument(
+        "--output", type=Path, help="optional explicit report location (does not create evidence)"
+    )
     parser.add_argument("--no-write", action="store_true")
     expectation = parser.add_mutually_exclusive_group()
     expectation.add_argument("--expect-incomplete", action="store_true")
@@ -1933,7 +2208,15 @@ def main(argv: list[str] | None = None) -> int:
             "schema": REPORT_SCHEMA,
             "audit_valid": False,
             "ready": False,
-            "gaps": [asdict(Gap("BOARD", "BOARD_PREFLIGHT_INVALID", "CLI authority requires the sealed program board"))],
+            "gaps": [
+                asdict(
+                    Gap(
+                        "BOARD",
+                        "BOARD_PREFLIGHT_INVALID",
+                        "CLI authority requires the sealed program board",
+                    )
+                )
+            ],
             "observation_only": True,
             "boundary": {
                 "schema": "ipfs_accelerate_py/proof-backed-test-reuse-validation-boundary@1",

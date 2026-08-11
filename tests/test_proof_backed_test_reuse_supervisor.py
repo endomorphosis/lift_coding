@@ -11,15 +11,11 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "proof_backed_test_reuse_supervisor.py"
-VALIDATOR_SCRIPT = (
-    ROOT / "scripts" / "validate_proof_backed_test_reuse_board.py"
-)
+VALIDATOR_SCRIPT = ROOT / "scripts" / "validate_proof_backed_test_reuse_board.py"
 
 
 def _load_module() -> Any:
-    spec = importlib.util.spec_from_file_location(
-        "proof_backed_test_reuse_supervisor", SCRIPT
-    )
+    spec = importlib.util.spec_from_file_location("proof_backed_test_reuse_supervisor", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -47,8 +43,7 @@ def _agent_route_readiness(
         "grok"
         if grok_ready
         else "codex"
-        if codex_ready
-        and failure_kind in {"authentication_failure", "launch_failure"}
+        if codex_ready and failure_kind in {"authentication_failure", "launch_failure"}
         else ""
     )
     return SimpleNamespace(
@@ -82,9 +77,7 @@ def _write_mutated_task_board(
 ) -> Path:
     text = validator.TODO_PATH.read_text(encoding="utf-8")
     todo_path = tmp_path / "todo.md"
-    todo_path.write_text(
-        _mutate_task_block(text, task_id, mutation), encoding="utf-8"
-    )
+    todo_path.write_text(_mutate_task_block(text, task_id, mutation), encoding="utf-8")
     return todo_path
 
 
@@ -107,9 +100,7 @@ def _run_board_readiness(
 ) -> dict[str, object]:
     state_root = tmp_path / "state"
     log_dir = tmp_path / "logs"
-    task_state_path = (
-        state_root / "preflight" / "board" / "ptr_preflight_task_state.json"
-    )
+    task_state_path = state_root / "preflight" / "board" / "ptr_preflight_task_state.json"
     task_state_path.parent.mkdir(parents=True)
     log_dir.mkdir()
     task_state_path.write_text(json.dumps(payload), encoding="utf-8")
@@ -140,9 +131,7 @@ def test_completed_board_is_valid_quiescent_readiness(
         "selection_idle_reason": "no_shard_selectable_ready_tasks",
     }
 
-    readiness = _run_board_readiness(
-        supervisor, monkeypatch, tmp_path, payload
-    )
+    readiness = _run_board_readiness(supervisor, monkeypatch, tmp_path, payload)
 
     assert readiness["work_complete"] is True
     assert readiness["selectable_ready_count"] == 0
@@ -220,35 +209,22 @@ def test_every_lane_uses_grok_primary_and_automatic_codex_fallback_policy(
         assert lane["fallback_trigger"] == "grok_quota_auth_or_unavailable"
         environment = supervisor._runtime_environment(str(lane["provider"]))
         assert "IMPLEMENTATION_DAEMON_COMMAND" not in environment
-        assert environment[
-            supervisor.MERGE_RESOLVER_COMMAND_ENV
-        ] == supervisor._managed_merge_resolver_command()
-        assert "direct-codex-merge-resolver-bypass" not in environment[
-            supervisor.MERGE_RESOLVER_COMMAND_ENV
-        ]
+        assert (
+            environment[supervisor.MERGE_RESOLVER_COMMAND_ENV]
+            == supervisor._managed_merge_resolver_command()
+        )
+        assert (
+            "direct-codex-merge-resolver-bypass"
+            not in environment[supervisor.MERGE_RESOLVER_COMMAND_ENV]
+        )
         assert environment[str(supervisor.CONFIG["stateRootEnvironment"])] == str(
             supervisor.STATE_ROOT
         )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"]
-            == "grok-codex"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_GROK_BIN"]
-            == "/opt/grok/bin/grok"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"]
-            == "grok-4.5"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"]
-            == "gpt-5.6-terra"
-        )
-        assert (
-            environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"]
-            == "high"
-        )
+        assert environment["IPFS_ACCELERATE_AGENT_IMPLEMENTATION_PROVIDER"] == "grok-codex"
+        assert environment["IPFS_ACCELERATE_AGENT_GROK_BIN"] == "/opt/grok/bin/grok"
+        assert environment["IPFS_ACCELERATE_AGENT_GROK_MODEL"] == "grok-4.5"
+        assert environment["IPFS_ACCELERATE_AGENT_CODEX_MODEL"] == "gpt-5.6-terra"
+        assert environment["IPFS_ACCELERATE_AGENT_CODEX_REASONING_EFFORT"] == "high"
         assert (
             environment["IPFS_ACCELERATE_AGENT_PROVIDER_FALLBACK_POLICY"]
             == "grok_quota_auth_or_unavailable"
@@ -344,9 +320,7 @@ def test_semantic_merge_resolver_uses_managed_automatic_provider_chain(
         assert arguments[resolver_index + 1] == encoded
 
 
-@pytest.mark.parametrize(
-    "failure_kind", ("authentication_failure", "launch_failure")
-)
+@pytest.mark.parametrize("failure_kind", ("authentication_failure", "launch_failure"))
 def test_semantic_merge_resolver_keeps_router_owned_route_when_grok_is_unready(
     failure_kind: str,
     supervisor: Any,
@@ -471,9 +445,7 @@ def test_lane_launch_sets_private_umask_for_provider_logs(
     class FakeProcess:
         pid = 4242
 
-    def fake_popen(
-        command: list[str], **kwargs: object
-    ) -> FakeProcess:
+    def fake_popen(command: list[str], **kwargs: object) -> FakeProcess:
         observed["command"] = command
         observed.update(kwargs)
         return FakeProcess()
@@ -481,9 +453,7 @@ def test_lane_launch_sets_private_umask_for_provider_logs(
     monkeypatch.setattr(supervisor, "LOG_DIR", log_dir)
     monkeypatch.setattr(supervisor, "RUNTIME_DIR", runtime_dir)
     monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 0)
-    monkeypatch.setattr(
-        supervisor, "_lane_process_owned", lambda _name, _pid: False
-    )
+    monkeypatch.setattr(supervisor, "_lane_process_owned", lambda _name, _pid: False)
     monkeypatch.setattr(
         supervisor,
         "_lane_common_arguments",
@@ -515,9 +485,7 @@ def test_runtime_provider_metadata_preserves_identity_and_routes_grok_first(
         "grok-implement",
         "codex-implement",
     ]
-    assert parallel["canonicalTaskProviderRolesByShardPurpose"] == (
-        "historical_task_identity_only"
-    )
+    assert parallel["canonicalTaskProviderRolesByShardPurpose"] == ("historical_task_identity_only")
     assert parallel["runtimeExecutionProviderRolesByShard"] == [
         "grok-implement",
         "grok-implement",
@@ -545,9 +513,7 @@ def test_board_validator_rejects_runtime_merge_provider_policy_drift(
         "grok-implement",
         "codex-implement",
     ]
-    config["parallelRuntime"]["semanticMergeResolver"][
-        "fallbackTrigger"
-    ] = "grok_quota_exhausted"
+    config["parallelRuntime"]["semanticMergeResolver"]["fallbackTrigger"] = "grok_quota_exhausted"
     config["providerPolicy"]["appliesTo"] = ["implementation"]
     config_path = tmp_path / "supervisor.json"
     config_path.write_text(json.dumps(config), encoding="utf-8")
@@ -572,9 +538,7 @@ def test_board_validator_rejects_stale_v7_schedule_and_attestation_profile(
     validator = _load_validator_module()
     config = json.loads(validator.CONFIG_PATH.read_text(encoding="utf-8"))
     profile = config["runnerAttestationProfile"]
-    assert profile["signatureInput"] == (
-        "domain-bytes||sha2-256(unsigned-envelope-bytes)"
-    )
+    assert profile["signatureInput"] == ("domain-bytes||sha2-256(unsigned-envelope-bytes)")
     assert profile["trustPolicy"] == {
         "authority": "locally-pinned-trust-policy-cid",
         "cidVersion": 1,
@@ -583,14 +547,10 @@ def test_board_validator_rejects_stale_v7_schedule_and_attestation_profile(
         "multibase": "base32-lower",
         "trustOnFirstUse": False,
     }
-    config["defaultStateRootSuffix"] = (
-        "ipfs_accelerate_py/proof-backed-test-reuse-v7"
-    )
+    config["defaultStateRootSuffix"] = "ipfs_accelerate_py/proof-backed-test-reuse-v7"
     config["stateRootEnvironment"] = "UNSEALED_STATE_ROOT"
     projection = config["objectiveProjection"]
-    projection["reviewRevision"] = (
-        "authenticated-receipt-current-tree-repair-v7"
-    )
+    projection["reviewRevision"] = "authenticated-receipt-current-tree-repair-v7"
     projection["initialClaimableTaskIds"] = [
         "PTR-161",
         "PTR-162",
@@ -603,9 +563,7 @@ def test_board_validator_rejects_stale_v7_schedule_and_attestation_profile(
     projection["sealedTaskCount"] = 76
     projection["proofMaterialAndContextWaveTaskIds"] = ["PTR-163", "PTR-164"]
     projection["exactV4PublicationJoinTaskId"] = "PTR-169"
-    config["runnerAttestationProfile"]["trustPolicy"][
-        "trustOnFirstUse"
-    ] = True
+    config["runnerAttestationProfile"]["trustPolicy"]["trustOnFirstUse"] = True
     config_path = tmp_path / "supervisor.json"
     config_path.write_text(json.dumps(config), encoding="utf-8")
 
@@ -691,9 +649,7 @@ def test_board_validator_seals_current_78_task_authenticated_receipt_dag() -> No
     ]
     assert result["authenticated_receipt_runtime_join_task_id"] == "PTR-164"
     assert result["authenticated_receipt_runtime_join_shard"] == 2
-    assert result["authenticated_receipt_runtime_join_submodules"] == [
-        "external/ipfs_accelerate"
-    ]
+    assert result["authenticated_receipt_runtime_join_submodules"] == ["external/ipfs_accelerate"]
     assert result["authenticated_receipt_authenticity_join_task_id"] == "PTR-166"
     assert result["authenticated_receipt_output_replay_join_task_id"] == "PTR-167"
     assert result["authenticated_receipt_zero_config_e2e_join_task_id"] == "PTR-168"
@@ -704,8 +660,7 @@ def test_board_validator_seals_current_78_task_authenticated_receipt_dag() -> No
     assert len(result["resolved_historical_artifact_paths"]) == 18
     quarantine = result["historical_missing_artifact_quarantine"]
     assert quarantine[
-        "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-        "test_certificate_assurance.py"
+        "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py"
     ] == {
         "owner_task_id": "PTR-171",
         "owner_status": "todo",
@@ -724,15 +679,11 @@ def test_board_validator_seals_current_78_task_authenticated_receipt_dag() -> No
         "PTR-154",
         "PTR-155",
     ]
-    assert result[
-        "reviewed_production_correction_wave_one_submodules"
-    ] == {
+    assert result["reviewed_production_correction_wave_one_submodules"] == {
         "PTR-150": ["external/ipfs_accelerate"],
         "PTR-151": ["external/ipfs_datasets"],
     }
-    assert result[
-        "reviewed_production_correction_wave_one_resource_width"
-    ] == 2
+    assert result["reviewed_production_correction_wave_one_resource_width"] == 2
     assert result["reviewed_production_correction_join_task_id"] == "PTR-152"
     assert result["reviewed_proof_material_context_wave_task_ids"] == [
         "PTR-153",
@@ -819,15 +770,11 @@ def test_ptr_163_contract_seals_exact_byte_native_v5_relation() -> None:
         "paths": task.outputs,
         "schema": "ipfs_accelerate_py/agent-supervisor/task-artifact-envelope@2",
     }
-    native_test = (
-        "external/ipfs_datasets/tests/unit_tests/logic/zkp/"
-        "test_groth16_native_release.py"
-    )
+    native_test = "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py"
     assert native_test in task.outputs
     assert native_test in task.validation[0]
     assert (
-        "external/ipfs_datasets/ipfs_datasets_py/processors/"
-        "groth16_backend/src/circuit.rs"
+        "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs"
     ) in task.outputs
     todo_text = validator.TODO_PATH.read_text(encoding="utf-8")
     assert "21282cb8779330724e496f88acdf3ed02cccbca1" in todo_text
@@ -860,10 +807,7 @@ def test_ptr_171_contract_seals_typed_ptr_160_v5_composition() -> None:
         "never automatic setup, build, download or network",
     ):
         assert requirement in task.acceptance
-    authority_test = (
-        "external/ipfs_datasets/tests/unit/logic/zkp/"
-        "test_test_pass_v5_authority.py"
-    )
+    authority_test = "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_v5_authority.py"
     assert authority_test in task.outputs
     assert authority_test in task.validation[0]
     assert not (
@@ -871,9 +815,7 @@ def test_ptr_171_contract_seals_typed_ptr_160_v5_composition() -> None:
         & set(
             next(
                 item
-                for item in validator.parse_task_file(
-                    validator.TODO_PATH, "## PTR-"
-                )
+                for item in validator.parse_task_file(validator.TODO_PATH, "## PTR-")
                 if item.task_id == "PTR-163"
             ).outputs
         )
@@ -953,20 +895,13 @@ def test_board_validator_requires_full_ptr_163_native_surface(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
-    cargo_lock = (
-        "external/ipfs_datasets/ipfs_datasets_py/processors/"
-        "groth16_backend/Cargo.lock"
-    )
+    cargo_lock = "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.lock"
 
     def remove_cargo_lock(block: str) -> str:
         assert block.count(cargo_lock) == 3
-        return block.replace(f", {cargo_lock}", "").replace(
-            f'"{cargo_lock}",', ""
-        )
+        return block.replace(f", {cargo_lock}", "").replace(f'"{cargo_lock}",', "")
 
-    todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-163", remove_cargo_lock
-    )
+    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-163", remove_cargo_lock)
     result = validator.validate(
         validator.OBJECTIVE_PATH,
         todo_path,
@@ -984,18 +919,13 @@ def test_board_validator_requires_full_ptr_171_python_authority_surface(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
-    authority_test = (
-        "external/ipfs_datasets/tests/unit/logic/zkp/"
-        "test_test_pass_v5_authority.py"
-    )
+    authority_test = "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_v5_authority.py"
 
     def remove_authority_test(block: str) -> str:
         assert block.count(authority_test) == 3
         return block.replace(f", {authority_test}", "")
 
-    todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-171", remove_authority_test
-    )
+    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-171", remove_authority_test)
     result = validator.validate(
         validator.OBJECTIVE_PATH,
         todo_path,
@@ -1043,13 +973,9 @@ def test_board_validator_requires_ptr_171_to_follow_native_ptr_163(
     def remove_native_dependency(block: str) -> str:
         expected = "- Depends on: PTR-160, PTR-161, PTR-163"
         assert expected in block
-        return block.replace(
-            expected, "- Depends on: PTR-160, PTR-161", 1
-        )
+        return block.replace(expected, "- Depends on: PTR-160, PTR-161", 1)
 
-    todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-171", remove_native_dependency
-    )
+    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-171", remove_native_dependency)
     result = validator.validate(
         validator.OBJECTIVE_PATH,
         todo_path,
@@ -1067,9 +993,7 @@ def test_board_validator_rejects_uncovered_resolved_sealed_path(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
-    shim_path = (
-        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
-    )
+    shim_path = "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
 
     def remove_shim_ownership(block: str) -> str:
         assert block.count(shim_path) == 3
@@ -1077,9 +1001,7 @@ def test_board_validator_rejects_uncovered_resolved_sealed_path(
         assert mutated.count(shim_path) == 1
         return mutated
 
-    todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-161", remove_shim_ownership
-    )
+    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-161", remove_shim_ownership)
     result = validator.validate(
         validator.OBJECTIVE_PATH,
         todo_path,
@@ -1090,9 +1012,7 @@ def test_board_validator_rejects_uncovered_resolved_sealed_path(
     assert result["valid"] is False
     assert shim_path in result["resolved_historical_artifact_paths"]
     assert result["uncovered_historical_missing_artifact_paths"] == [shim_path]
-    mismatch = result[
-        "exact_historical_artifact_owner_assignment_mismatches"
-    ][shim_path]
+    mismatch = result["exact_historical_artifact_owner_assignment_mismatches"][shim_path]
     assert mismatch == {
         "expected_owner_task_id": "PTR-161",
         "actual_owner_task_ids": [],
@@ -1103,14 +1023,10 @@ def test_board_validator_rejects_multi_owned_resolved_sealed_path(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
-    shim_path = (
-        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
-    )
+    shim_path = "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
 
     def add_second_owner(block: str) -> str:
-        mutated = block.replace(
-            "\n- Validation:", f", {shim_path}\n- Validation:", 1
-        )
+        mutated = block.replace("\n- Validation:", f", {shim_path}\n- Validation:", 1)
         mutated = mutated.replace(
             "\n- Proposal artifact envelope:",
             f", {shim_path}\n- Proposal artifact envelope:",
@@ -1118,9 +1034,7 @@ def test_board_validator_rejects_multi_owned_resolved_sealed_path(
         )
         return mutated
 
-    todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-163", add_second_owner
-    )
+    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-163", add_second_owner)
     result = validator.validate(
         validator.OBJECTIVE_PATH,
         todo_path,
@@ -1132,9 +1046,7 @@ def test_board_validator_rejects_multi_owned_resolved_sealed_path(
     assert result["multi_owned_historical_missing_artifact_paths"] == {
         shim_path: ["PTR-161", "PTR-163"]
     }
-    mismatch = result[
-        "exact_historical_artifact_owner_assignment_mismatches"
-    ][shim_path]
+    mismatch = result["exact_historical_artifact_owner_assignment_mismatches"][shim_path]
     assert mismatch["expected_owner_task_id"] == "PTR-161"
 
 
@@ -1142,17 +1054,13 @@ def test_board_validator_rejects_moving_resolved_path_to_arbitrary_task(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
-    shim_path = (
-        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
-    )
+    shim_path = "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
 
     def remove_named_owner(block: str) -> str:
         return block.replace(f", {shim_path}", "")
 
     def add_wrong_owner(block: str) -> str:
-        mutated = block.replace(
-            "\n- Validation:", f", {shim_path}\n- Validation:", 1
-        )
+        mutated = block.replace("\n- Validation:", f", {shim_path}\n- Validation:", 1)
         return mutated.replace(
             "\n- Proposal artifact envelope:",
             f", {shim_path}\n- Proposal artifact envelope:",
@@ -1174,9 +1082,7 @@ def test_board_validator_rejects_moving_resolved_path_to_arbitrary_task(
     assert result["valid"] is False
     assert result["uncovered_historical_missing_artifact_paths"] == []
     assert result["multi_owned_historical_missing_artifact_paths"] == {}
-    assert result[
-        "exact_historical_artifact_owner_assignment_mismatches"
-    ][shim_path] == {
+    assert result["exact_historical_artifact_owner_assignment_mismatches"][shim_path] == {
         "expected_owner_task_id": "PTR-161",
         "actual_owner_task_ids": ["PTR-163"],
     }
@@ -1186,18 +1092,13 @@ def test_board_validator_fails_as_soon_as_gap_owner_completes(
     tmp_path: Path,
 ) -> None:
     validator = _load_validator_module()
-    missing_path = (
-        "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/"
-        "test_certificate_assurance.py"
-    )
+    missing_path = "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py"
 
     def complete_owner(block: str) -> str:
         assert "- Status: todo" in block
         return block.replace("- Status: todo", "- Status: completed", 1)
 
-    todo_path = _write_mutated_task_board(
-        tmp_path, validator, "PTR-171", complete_owner
-    )
+    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-171", complete_owner)
     result = validator.validate(
         validator.OBJECTIVE_PATH,
         todo_path,
@@ -1206,21 +1107,16 @@ def test_board_validator_fails_as_soon_as_gap_owner_completes(
     )
 
     assert result["valid"] is False
-    assert result["completed_owner_missing_historical_artifact_paths"][
-        missing_path
-    ] == "PTR-171"
+    assert result["completed_owner_missing_historical_artifact_paths"][missing_path] == "PTR-171"
     assert any(
-        "completed correction owners still have quarantined historical artifacts"
-        in error
+        "completed correction owners still have quarantined historical artifacts" in error
         for error in result["errors"]
     )
 
 
 def test_board_validator_accepts_resolved_ledger_paths_as_progress() -> None:
     validator = _load_validator_module()
-    resolved_path = (
-        "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
-    )
+    resolved_path = "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py"
 
     result = validator.validate(
         validator.OBJECTIVE_PATH,
@@ -1233,9 +1129,7 @@ def test_board_validator_accepts_resolved_ledger_paths_as_progress() -> None:
     assert resolved_path in result["resolved_historical_artifact_paths"]
     assert resolved_path not in result["historical_missing_artifact_paths"]
     assert resolved_path not in result["historical_missing_artifact_quarantine"]
-    assert result[
-        "exact_historical_artifact_owner_assignment_mismatches"
-    ] == {}
+    assert result["exact_historical_artifact_owner_assignment_mismatches"] == {}
 
 
 def test_board_validator_accepts_repaired_audit_as_progressed_state(
@@ -1338,9 +1232,7 @@ def test_board_validator_rejects_an_unexpected_new_historical_gap(
     )
 
     assert result["valid"] is False
-    assert result["unexpected_historical_missing_artifact_paths"] == [
-        unexpected_path
-    ]
+    assert result["unexpected_historical_missing_artifact_paths"] == [unexpected_path]
     assert any("baseline drift" in error for error in result["errors"])
 
 
@@ -1374,17 +1266,13 @@ def test_status_exposes_exact_model_and_automatic_fallback_policy(
         "routing_authority": "ipfs_accelerate_py.llm_router",
         "fallback_trigger": "grok_quota_auth_or_unavailable",
         "primary_unavailable_action": "use_codex_fallback",
-        "non_quota_failure_action": (
-            "fallback_on_auth_or_launch_else_propagate"
-        ),
+        "non_quota_failure_action": ("fallback_on_auth_or_launch_else_propagate"),
         "applies_to": ["implementation", "semantic_merge_resolver"],
         "semantic_merge_resolver": {
             "provider": "grok-codex",
             "routingAuthority": "ipfs_accelerate_py.llm_router",
             "fallbackTrigger": "grok_quota_auth_or_unavailable",
-            "inheritedCommandPolicy": (
-                "override_with_managed_provider_chain"
-            ),
+            "inheritedCommandPolicy": ("override_with_managed_provider_chain"),
         },
         "fallback_allowed_on": [
             "grok_quota_exhausted",
@@ -1435,9 +1323,7 @@ def test_status_rejects_stopped_completion_snapshot_from_stale_board(
     assert status["current_board_task_count"] == 66
     assert status["work_complete"] is False
     assert status["globally_progressable"] is False
-    assert all(
-        lane["current_board_matches"] is False for lane in status["lanes"]
-    )
+    assert all(lane["current_board_matches"] is False for lane in status["lanes"])
 
 
 def test_status_rejects_live_selectable_snapshot_from_stale_board(
@@ -1476,9 +1362,7 @@ def test_status_rejects_mixed_current_and_stale_live_lanes(
 ) -> None:
     current_ids = tuple(f"PTR-{index:03d}" for index in range(66))
     current_sha256 = supervisor._task_ids_sha256(current_ids)
-    monkeypatch.setattr(
-        supervisor, "_current_board_task_ids", lambda: current_ids
-    )
+    monkeypatch.setattr(supervisor, "_current_board_task_ids", lambda: current_ids)
 
     def lane_status(lane: dict[str, object]) -> dict[str, object]:
         stale = lane["name"] == "ptr_lane_1"
@@ -1498,9 +1382,7 @@ def test_status_rejects_mixed_current_and_stale_live_lanes(
 
     status = supervisor._status_payload()
 
-    stale_lane = next(
-        lane for lane in status["lanes"] if lane["lane"] == "ptr_lane_1"
-    )
+    stale_lane = next(lane for lane in status["lanes"] if lane["lane"] == "ptr_lane_1")
     assert status["healthy"] is False
     assert stale_lane["healthy"] is False
     assert "task_state_board_mismatch" in stale_lane["unhealthy_reasons"]
@@ -1544,9 +1426,7 @@ def test_provider_preflight_reports_grok_as_effective_primary(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
     monkeypatch.setattr(
         supervisor,
@@ -1576,17 +1456,13 @@ def test_provider_preflight_reports_grok_as_effective_primary(
         "routing_authority": "ipfs_accelerate_py.llm_router",
         "fallback_trigger": "grok_quota_auth_or_unavailable",
         "primary_unavailable_action": "use_codex_fallback",
-        "non_quota_failure_action": (
-            "fallback_on_auth_or_launch_else_propagate"
-        ),
+        "non_quota_failure_action": ("fallback_on_auth_or_launch_else_propagate"),
         "applies_to": ["implementation", "semantic_merge_resolver"],
         "semantic_merge_resolver": {
             "provider": "grok-codex",
             "routingAuthority": "ipfs_accelerate_py.llm_router",
             "fallbackTrigger": "grok_quota_auth_or_unavailable",
-            "inheritedCommandPolicy": (
-                "override_with_managed_provider_chain"
-            ),
+            "inheritedCommandPolicy": ("override_with_managed_provider_chain"),
         },
         "fallback_allowed_on": [
             "grok_quota_exhausted",
@@ -1614,9 +1490,7 @@ def test_provider_preflight_uses_codex_for_grok_auth_failure(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
     monkeypatch.setattr(
         supervisor,
@@ -1657,9 +1531,7 @@ def test_provider_preflight_rejects_terminal_grok_probe_failure(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
     monkeypatch.setattr(
         supervisor,
@@ -1683,9 +1555,7 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
     monkeypatch.setattr(
         supervisor,
@@ -1729,9 +1599,7 @@ def test_provider_preflight_uses_inert_shadow_capability_discovery(
             "automatic_install_enabled": False,
         }
 
-    monkeypatch.setattr(
-        test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe
-    )
+    monkeypatch.setattr(test_reuse_capabilities, "TestReuseCapabilityProbe", FakeProbe)
     monkeypatch.setattr(services, "proof_reuse_dependency_plan", fake_plan)
     original_sys_path = list(supervisor.sys.path)
 
@@ -1791,9 +1659,7 @@ def test_provider_preflight_rejects_codex_not_logged_in_status(
     monkeypatch.setattr(
         supervisor.shutil,
         "which",
-        lambda name: f"/opt/{name}/bin/{name}"
-        if name in {"codex", "grok"}
-        else None,
+        lambda name: f"/opt/{name}/bin/{name}" if name in {"codex", "grok"} else None,
     )
     if str(supervisor.ACCEL_ROOT) not in supervisor.sys.path:
         supervisor.sys.path.insert(0, str(supervisor.ACCEL_ROOT))
@@ -1837,9 +1703,7 @@ def test_configured_submodule_initialization_is_scoped_and_non_updating(
 ) -> None:
     calls: list[tuple[list[str], dict[str, object]]] = []
 
-    def fake_run(
-        command: list[str], **kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **kwargs: object) -> subprocess.CompletedProcess[str]:
         calls.append((command, dict(kwargs)))
         return subprocess.CompletedProcess(command, 0, "", "")
 
@@ -1911,10 +1775,7 @@ def test_closeout_artifact_presence_projects_missing_inputs_without_authority(
     assert projection["artifact_presence_ready"] is False
     assert projection["missing_required_artifacts"] == ["evidence"]
     assert projection["required_artifacts"]["gate"]["present"] is True
-    assert (
-        projection["artifact_presence_is_completion_authority"]
-        is False
-    )
+    assert projection["artifact_presence_is_completion_authority"] is False
 
 
 def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
@@ -1949,9 +1810,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "PTR-011",
         "PTR-041",
     ]
-    validations = by_name[
-        "fresh_current_tree_proof_reuse_off_validation_receipts"
-    ]
+    validations = by_name["fresh_current_tree_proof_reuse_off_validation_receipts"]
     assert validations["required_count"] == 78
     assert validations["present_count"] == 0
     assert validations["presence_is_completion_authority"] is False
@@ -1973,9 +1832,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "PTR-169 AuthenticatedProofReuseCurrentTreeGateV5.persist_bundle",
     ]
     activation = inventory["runtime_reuse_activation"]
-    assert activation["schema"].endswith(
-        "authenticated-v9-runtime-projection@1"
-    )
+    assert activation["schema"].endswith("authenticated-v9-runtime-projection@1")
     assert activation["authority"] == "non_authoritative_projection"
     assert activation["runtime_readiness"] == "unknown_live_probe_required"
     assert activation["static_inventory_is_completion_authority"] is False
@@ -1990,18 +1847,13 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "acceptance_criterion": "ptr/authenticated-current-tree-gate-v5@1",
         "historical_ptr_122_or_v4_gate_is_authority": False,
     }
-    assert activation["repair_task_ids"] == [
-        f"PTR-{task_id}" for task_id in range(160, 172)
-    ]
+    assert activation["repair_task_ids"] == [f"PTR-{task_id}" for task_id in range(160, 172)]
     assert activation["open_repair_task_ids"] == [
         *[f"PTR-{task_id}" for task_id in range(163, 170)],
         "PTR-171",
     ]
     assert activation["repair_task_status_is_completion_authority"] is False
-    assert [
-        wave["task_ids"]
-        for wave in activation["required_implementation_sequence"]
-    ] == [
+    assert [wave["task_ids"] for wave in activation["required_implementation_sequence"]] == [
         ["PTR-160"],
         ["PTR-170"],
         ["PTR-161", "PTR-162"],
@@ -2068,9 +1920,7 @@ def test_managed_merge_inventory_checks_task_cid_and_current_ancestry(
 
     assert inventory["usable_candidate_task_ids"] == ["PTR-001"]
     assert inventory["missing_candidate_task_ids"] == ["PTR-002"]
-    assert inventory["rejected_candidates"] == {
-        "PTR-002": "canonical_task_cid_mismatch"
-    }
+    assert inventory["rejected_candidates"] == {"PTR-002": "canonical_task_cid_mismatch"}
     assert inventory["presence_is_completion_authority"] is False
 
 
@@ -2121,9 +1971,7 @@ def _configure_closeout_test(
                 "completed_task_count": 41,
                 "open_task_ids": [],
             },
-            "closeout_input_inventory": {
-                "inventory_is_completion_authority": False
-            },
+            "closeout_input_inventory": {"inventory_is_completion_authority": False},
         },
     )
     monkeypatch.setattr(
@@ -2142,13 +1990,9 @@ def _configure_closeout_test(
     )
     observed_health_paths: list[Path] = []
 
-    def fake_run(
-        command: list[str], **_kwargs: object
-    ) -> subprocess.CompletedProcess[str]:
+    def fake_run(command: list[str], **_kwargs: object) -> subprocess.CompletedProcess[str]:
         assert command[-1] == "--report-only"
-        health_path = Path(
-            command[command.index("--supervisor-health-input-path") + 1]
-        )
+        health_path = Path(command[command.index("--supervisor-health-input-path") + 1])
         observed_health_paths.append(health_path)
         health = json.loads(health_path.read_text(encoding="utf-8"))
         assert health["status"]["healthy"] is True
@@ -2169,9 +2013,7 @@ def _configure_closeout_test(
     monkeypatch.setattr(
         supervisor,
         "_stop_lane",
-        lambda _lane: (_ for _ in ()).throw(
-            AssertionError("diagnosis must not stop lanes")
-        ),
+        lambda _lane: (_ for _ in ()).throw(AssertionError("diagnosis must not stop lanes")),
     )
     return observed_health_paths
 
@@ -2193,9 +2035,7 @@ def test_closeout_report_only_uses_ephemeral_health_and_keeps_lanes_running(
     assert result["diagnosis_passed"] is True
     assert result["lanes_stopped"] is False
     assert result["operator_commit_required"] is False
-    assert result["input_inventory"] == {
-        "inventory_is_completion_authority": False
-    }
+    assert result["input_inventory"] == {"inventory_is_completion_authority": False}
     assert len(observed_health_paths) == 1
     assert not observed_health_paths[0].exists()
     assert not any(tmp_path.iterdir())
@@ -2254,9 +2094,7 @@ def test_report_only_accepts_normal_agentic_maintenance_statuses(
 
     monkeypatch.setattr(supervisor, "_load_json", fake_load)
     monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 100)
-    monkeypatch.setattr(
-        supervisor, "_lane_process_owned", lambda _lane, _pid: True
-    )
+    monkeypatch.setattr(supervisor, "_lane_process_owned", lambda _lane, _pid: True)
     monkeypatch.setattr(supervisor, "_pid_alive", lambda _pid: True)
     monkeypatch.setattr(
         supervisor,
@@ -2282,9 +2120,7 @@ def test_report_only_accepts_normal_agentic_maintenance_statuses(
                 "completed_task_count": 41,
                 "open_task_ids": [],
             },
-            "closeout_input_inventory": {
-                "inventory_is_completion_authority": False
-            },
+            "closeout_input_inventory": {"inventory_is_completion_authority": False},
         },
     )
     monkeypatch.setattr(
@@ -2344,9 +2180,7 @@ def test_maintenance_status_still_fails_closed_on_error_or_pending_update(
 
     monkeypatch.setattr(supervisor, "_load_json", fake_load)
     monkeypatch.setattr(supervisor, "_read_pid", lambda _path: 100)
-    monkeypatch.setattr(
-        supervisor, "_lane_process_owned", lambda _lane, _pid: True
-    )
+    monkeypatch.setattr(supervisor, "_lane_process_owned", lambda _lane, _pid: True)
     monkeypatch.setattr(supervisor, "_pid_alive", lambda _pid: True)
 
     lane = supervisor._lane_status(supervisor.LANES[0])

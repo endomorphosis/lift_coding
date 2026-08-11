@@ -46,9 +46,7 @@ from typing import Any, Final
 # Interface / schema constants
 # ---------------------------------------------------------------------------
 
-PROOF_TEST_REUSE_OBJECTIVE_RECONCILER_INTERFACE: Final = (
-    "ProofTestReuseObjectiveReconciler@1"
-)
+PROOF_TEST_REUSE_OBJECTIVE_RECONCILER_INTERFACE: Final = "ProofTestReuseObjectiveReconciler@1"
 OBJECTIVE_CLOSEOUT_RECEIPT_INTERFACE: Final = "ObjectiveCloseoutReceipt@1"
 OBJECTIVE_CLOSEOUT_FENCE_INTERFACE: Final = "ObjectiveCloseoutFence@1"
 OBJECTIVE_CLOSEOUT_RECEIPT_SCHEMA: Final = (
@@ -63,26 +61,17 @@ OBJECTIVE_CLOSEOUT_FENCE_SCHEMA: Final = (
 OBJECTIVE_CLOSEOUT_CHECKPOINT_SCHEMA: Final = (
     "ipfs_accelerate_py/proof-backed-test-reuse-objective-closeout-checkpoint@1"
 )
-OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT: Final = (
-    "ObjectiveCompletionEvidenceArtifact"
-)
+OBJECTIVE_COMPLETION_EVIDENCE_ARTIFACT: Final = "ObjectiveCompletionEvidenceArtifact"
 
 ROOT_GOAL_ID: Final = "PTR-G000"
 FINAL_GATE_GOAL_ID: Final = "PTR-G140"
 FINAL_GATE_TASK_ID: Final = "PTR-169"
-FINAL_GATE_ACCEPTANCE_CRITERION: Final = (
-    "ptr/authenticated-current-tree-gate-v5@1"
-)
+FINAL_GATE_ACCEPTANCE_CRITERION: Final = "ptr/authenticated-current-tree-gate-v5@1"
 EXPECTED_TASK_COUNT: Final = 78
-FINAL_GATE_REVIEW_REVISION: Final = (
-    "authenticated-receipt-current-tree-repair-v9"
-)
-ROOT_ACCEPTANCE_CRITERION: Final = (
-    "ptr/cross-repository-current-tree-gate@1"
-)
+FINAL_GATE_REVIEW_REVISION: Final = "authenticated-receipt-current-tree-repair-v9"
+ROOT_ACCEPTANCE_CRITERION: Final = "ptr/cross-repository-current-tree-gate@1"
 CHILD_GOAL_IDS: Final = tuple(
-    f"PTR-G{index:03d}"
-    for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130)
+    f"PTR-G{index:03d}" for index in (10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130)
 )
 ALL_GOAL_IDS: Final = (ROOT_GOAL_ID, *CHILD_GOAL_IDS, FINAL_GATE_GOAL_ID)
 DEFAULT_PHASE_COUNT: Final = 3
@@ -91,21 +80,11 @@ TASK_HEADER_RE = re.compile(r"^##\s+(PTR-\d{3})\b", re.MULTILINE)
 TASK_STATUS_RE = re.compile(r"^- Status:\s*(\S+)", re.MULTILINE | re.IGNORECASE)
 GOAL_HEADER_RE = re.compile(r"^##\s+(PTR-G\d{3})\s+(.+?)\s*$", re.MULTILINE)
 GOAL_STATUS_RE = re.compile(r"^- Status:\s*(\S+)", re.MULTILINE | re.IGNORECASE)
-GOAL_PARENT_RE = re.compile(
-    r"^- Parent:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE
-)
-GOAL_DEPENDS_RE = re.compile(
-    r"^- Depends on:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE
-)
-CLOSED_TASK_STATUSES: Final = frozenset(
-    {"completed", "complete", "verified_complete", "done"}
-)
-CLOSED_GOAL_STATUSES: Final = frozenset(
-    {"verified_complete", "complete", "completed", "done"}
-)
-PROVISIONAL_GOAL_STATUSES: Final = frozenset(
-    {"provisionally_complete", "provisional"}
-)
+GOAL_PARENT_RE = re.compile(r"^- Parent:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE)
+GOAL_DEPENDS_RE = re.compile(r"^- Depends on:[ \t]*([^\r\n]*)$", re.MULTILINE | re.IGNORECASE)
+CLOSED_TASK_STATUSES: Final = frozenset({"completed", "complete", "verified_complete", "done"})
+CLOSED_GOAL_STATUSES: Final = frozenset({"verified_complete", "complete", "completed", "done"})
+PROVISIONAL_GOAL_STATUSES: Final = frozenset({"provisionally_complete", "provisional"})
 OPTIONAL_SERVICE_KEYS: Final = frozenset(
     {
         "groth16",
@@ -227,9 +206,7 @@ def _atomic_write_text(path: Path, text: str) -> None:
 
 
 def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
-    _atomic_write_text(
-        path, json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    )
+    _atomic_write_text(path, json.dumps(payload, indent=2, sort_keys=True) + "\n")
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -374,9 +351,7 @@ def parse_objective_goals(text: str) -> list[GoalSnapshot]:
     return goals
 
 
-def rewrite_objective_statuses(
-    text: str, status_by_goal: Mapping[str, str]
-) -> str:
+def rewrite_objective_statuses(text: str, status_by_goal: Mapping[str, str]) -> str:
     """Rewrite ``- Status:`` lines for selected goals; preserve other fields."""
 
     if not status_by_goal:
@@ -390,9 +365,7 @@ def rewrite_objective_statuses(
             current_goal = header.group(1)
             rewritten.append(line)
             continue
-        if current_goal in status_by_goal and line.lower().startswith(
-            "- status:"
-        ):
+        if current_goal in status_by_goal and line.lower().startswith("- status:"):
             rewritten.append(f"- Status: {status_by_goal[current_goal]}")
             continue
         rewritten.append(line)
@@ -445,9 +418,7 @@ def inspect_checkout(
             timeout=60,
         )
         if result.returncode != 0:
-            raise DirtyCheckoutError(
-                f"git {' '.join(args)} failed: {result.stderr.strip()}"
-            )
+            raise DirtyCheckoutError(f"git {' '.join(args)} failed: {result.stderr.strip()}")
         return result.stdout.strip()
 
     try:
@@ -619,13 +590,9 @@ def _artifact_reason_code(
         return f"missing_{artifact_kind}_artifact"
     if normalized.startswith("artifact repository tree binding missing:"):
         return f"missing_{artifact_kind}_tree_binding"
-    if normalized.startswith(
-        ("artifact tree mismatch", "artifact tree binding mismatch")
-    ):
+    if normalized.startswith(("artifact tree mismatch", "artifact tree binding mismatch")):
         return f"mismatched_{artifact_kind}_artifact"
-    if normalized.startswith(
-        ("artifact stale by age:", "artifact marked stale:")
-    ):
+    if normalized.startswith(("artifact stale by age:", "artifact marked stale:")):
         return f"stale_{artifact_kind}_artifact"
     return f"invalid_{artifact_kind}_artifact"
 
@@ -642,10 +609,7 @@ def _final_gate_completion_evidence_is_admissible(
     if not isinstance(value, Mapping):
         return False
     tree = str(
-        value.get("tree_id")
-        or value.get("git_tree_id")
-        or value.get("repository_tree")
-        or ""
+        value.get("tree_id") or value.get("git_tree_id") or value.get("repository_tree") or ""
     ).strip()
     satisfied = value.get("satisfied_requirements")
     return bool(
@@ -689,11 +653,7 @@ def _gate_artifact_readiness(
     # Live PTR-169 bundles nest task_count / review_revision on decision;
     # hermetic fixtures may place them at the top level.  Accept either.
     _decision_for_inventory = payload.get("decision")
-    _decision_map = (
-        _decision_for_inventory
-        if isinstance(_decision_for_inventory, Mapping)
-        else {}
-    )
+    _decision_map = _decision_for_inventory if isinstance(_decision_for_inventory, Mapping) else {}
     observed_task_count = payload.get("task_count")
     if observed_task_count is None:
         observed_task_count = _decision_map.get("task_count")
@@ -772,8 +732,7 @@ def _gate_artifact_readiness(
     if payload.get("passed") is not True:
         return False, "gate_failed", "gate artifact does not report passed=true"
     if (
-        payload.get("final_gate_criterion")
-        != FINAL_GATE_ACCEPTANCE_CRITERION
+        payload.get("final_gate_criterion") != FINAL_GATE_ACCEPTANCE_CRITERION
         or payload.get("root_criterion") != ROOT_ACCEPTANCE_CRITERION
     ):
         return (
@@ -791,19 +750,11 @@ def _canonical_record_is_admissible(
 ) -> bool:
     if not isinstance(record, Mapping):
         return False
-    raw_provenance_cid = (
-        record.get("provenance_cid") or record.get("evidence_cid")
-    )
-    provenance_cid = (
-        raw_provenance_cid.strip()
-        if isinstance(raw_provenance_cid, str)
-        else ""
-    )
+    raw_provenance_cid = record.get("provenance_cid") or record.get("evidence_cid")
+    provenance_cid = raw_provenance_cid.strip() if isinstance(raw_provenance_cid, str) else ""
     if not provenance_cid or record.get("validation_passed") is not True:
         return False
-    record_tree = str(
-        record.get("repository_tree") or record.get("tree_id") or ""
-    ).strip()
+    record_tree = str(record.get("repository_tree") or record.get("tree_id") or "").strip()
     if expected_tree:
         if not record_tree or record_tree != expected_tree:
             return False
@@ -823,14 +774,8 @@ def _evidence_ids_for_goal(
 ) -> list[str]:
     """Extract admissible IDs from PTR-120 or strict simplified evidence."""
 
-    has_per_goal_surface = (
-        "goals" in payload or "goal_evidence" in payload
-    )
-    per_goal = (
-        payload.get("goals")
-        if "goals" in payload
-        else payload.get("goal_evidence")
-    )
+    has_per_goal_surface = "goals" in payload or "goal_evidence" in payload
+    per_goal = payload.get("goals") if "goals" in payload else payload.get("goal_evidence")
     if per_goal is None:
         per_goal = {}
     if has_per_goal_surface and not isinstance(per_goal, Mapping):
@@ -842,34 +787,19 @@ def _evidence_ids_for_goal(
         if isinstance(value, Mapping):
             if "completion_evidence_records" in value:
                 records = value.get("completion_evidence_records")
-                if not isinstance(records, Sequence) or isinstance(
-                    records, (str, bytes)
-                ):
+                if not isinstance(records, Sequence) or isinstance(records, (str, bytes)):
                     return []
                 return [
-                    str(
-                        record.get("provenance_cid")
-                        or record.get("evidence_cid")
-                    ).strip()
+                    str(record.get("provenance_cid") or record.get("evidence_cid")).strip()
                     for record in records
-                    if _canonical_record_is_admissible(
-                        record, expected_tree=expected_tree
-                    )
+                    if _canonical_record_is_admissible(record, expected_tree=expected_tree)
                 ]
             cids = value.get("evidence_cids") or value.get("cids") or []
             if isinstance(cids, Sequence) and not isinstance(cids, (str, bytes)):
-                return [
-                    item.strip()
-                    for item in cids
-                    if isinstance(item, str) and item.strip()
-                ]
+                return [item.strip() for item in cids if isinstance(item, str) and item.strip()]
             return []
         if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
-            return [
-                item.strip()
-                for item in value
-                if isinstance(item, str) and item.strip()
-            ]
+            return [item.strip() for item in value if isinstance(item, str) and item.strip()]
         return []
 
     records = payload.get("records") or payload.get("evidence") or []
@@ -921,9 +851,7 @@ class ObjectiveCloseoutFence:
             fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError as exc:
             handle.close()
-            raise ConcurrentWriterError(
-                f"another closeout writer owns {self.fence_path}"
-            ) from exc
+            raise ConcurrentWriterError(f"another closeout writer owns {self.fence_path}") from exc
         handle.seek(0)
         raw = handle.read().strip()
         existing: dict[str, Any] = {}
@@ -941,9 +869,7 @@ class ObjectiveCloseoutFence:
             # the same writer_id).
             if existing.get("active") is True:
                 handle.close()
-                raise ConcurrentWriterError(
-                    f"fence held by writer {existing.get('writer_id')!r}"
-                )
+                raise ConcurrentWriterError(f"fence held by writer {existing.get('writer_id')!r}")
         self.fencing_token = int(existing.get("fencing_token") or 0) + 1
         self.revision = int(existing.get("revision") or 0)
         payload = {
@@ -964,8 +890,7 @@ class ObjectiveCloseoutFence:
             raise ConcurrentWriterError("fence is not held")
         if expected_revision != self.revision:
             raise ConcurrentWriterError(
-                f"fence revision conflict: expected {expected_revision}, "
-                f"have {self.revision}"
+                f"fence revision conflict: expected {expected_revision}, have {self.revision}"
             )
         self.revision += 1
         payload = {
@@ -1120,9 +1045,7 @@ def _normalize_status(value: str) -> str:
 
 
 LEGAL_TRANSITIONS: Final[Mapping[str, frozenset[str]]] = {
-    "active": frozenset(
-        {"provisionally_complete", "analysis_inconclusive", "blocked"}
-    ),
+    "active": frozenset({"provisionally_complete", "analysis_inconclusive", "blocked"}),
     "provisionally_complete": frozenset(
         {
             "verified_complete",
@@ -1132,9 +1055,7 @@ LEGAL_TRANSITIONS: Final[Mapping[str, frozenset[str]]] = {
         }
     ),
     "verified_complete": frozenset({"reopened"}),
-    "analysis_inconclusive": frozenset(
-        {"active", "reopened", "blocked", "provisionally_complete"}
-    ),
+    "analysis_inconclusive": frozenset({"active", "reopened", "blocked", "provisionally_complete"}),
     "blocked": frozenset({"reopened"}),
     "reopened": frozenset(
         {
@@ -1291,9 +1212,7 @@ class ProofTestReuseObjectiveReconciler:
         self.evidence_path = Path(self.evidence_path)
         self.lifecycle_projection_path = Path(self.lifecycle_projection_path)
         self.candidate_objective_path = Path(self.candidate_objective_path)
-        self.supervisor_health_input_path = Path(
-            self.supervisor_health_input_path
-        )
+        self.supervisor_health_input_path = Path(self.supervisor_health_input_path)
         self.status_path = Path(self.status_path)
         if not self.writer_id:
             self.writer_id = f"ptr-closeout-{os.getpid()}-{uuid.uuid4().hex[:8]}"
@@ -1302,16 +1221,13 @@ class ProofTestReuseObjectiveReconciler:
         else:
             self.fence_path = Path(self.fence_path)
         if self.checkpoint_path is None:
-            self.checkpoint_path = (
-                self.status_path.parent / "closeout.checkpoint.json"
-            )
+            self.checkpoint_path = self.status_path.parent / "closeout.checkpoint.json"
         else:
             self.checkpoint_path = Path(self.checkpoint_path)
         if self.phase_count != DEFAULT_PHASE_COUNT:
             raise CloseoutRefusal(
                 "invalid_phase_count",
-                f"phase_count must be {DEFAULT_PHASE_COUNT}, "
-                f"got {self.phase_count}",
+                f"phase_count must be {DEFAULT_PHASE_COUNT}, got {self.phase_count}",
             )
 
     # -- public entry points -------------------------------------------------
@@ -1360,9 +1276,7 @@ class ProofTestReuseObjectiveReconciler:
                 diagnosis = self._collect_diagnosis(write_allowed=True)
                 if not diagnosis["ready_for_closeout"]:
                     raise CloseoutRefusal(
-                        diagnosis["reason_codes"][0]
-                        if diagnosis["reason_codes"]
-                        else "not_ready",
+                        diagnosis["reason_codes"][0] if diagnosis["reason_codes"] else "not_ready",
                         "; ".join(diagnosis.get("messages") or ["not ready"]),
                     )
                 receipts.append(
@@ -1388,9 +1302,7 @@ class ProofTestReuseObjectiveReconciler:
                         "empty_objective",
                         f"no goals parsed from {self.objective_path}",
                     )
-                states = {
-                    goal.goal_id: _normalize_status(goal.status) for goal in goals
-                }
+                states = {goal.goal_id: _normalize_status(goal.status) for goal in goals}
                 checkout = self._require_clean_checkout()
                 tree = checkout.tree
                 objective_revision = _sha256_hex(objective_text)
@@ -1401,9 +1313,7 @@ class ProofTestReuseObjectiveReconciler:
                     states.update(
                         {
                             key: _normalize_status(value)
-                            for key, value in (
-                                checkpoint.get("states") or {}
-                            ).items()
+                            for key, value in (checkpoint.get("states") or {}).items()
                         }
                     )
                     resumed = str(checkpoint.get("next_phase") or "")
@@ -1424,21 +1334,22 @@ class ProofTestReuseObjectiveReconciler:
                     optional_gaps = self._collect_optional_gaps()
                     round_transitions: list[dict[str, Any]] = []
 
-                    if start_phase in {
-                        ObjectiveCloseoutPhase.PHASE_1_PROVISIONAL,
-                        ObjectiveCloseoutPhase.PHASE_2_VERIFY_CHILDREN,
-                        ObjectiveCloseoutPhase.PHASE_3_VERIFY_FINAL,
-                        ObjectiveCloseoutPhase.CANDIDATE_HANDOFF,
-                    } or round_index > 0:
+                    if (
+                        start_phase
+                        in {
+                            ObjectiveCloseoutPhase.PHASE_1_PROVISIONAL,
+                            ObjectiveCloseoutPhase.PHASE_2_VERIFY_CHILDREN,
+                            ObjectiveCloseoutPhase.PHASE_3_VERIFY_FINAL,
+                            ObjectiveCloseoutPhase.CANDIDATE_HANDOFF,
+                        }
+                        or round_index > 0
+                    ):
                         # Phase 1 always re-applied when not yet past it.
                         if (
-                            start_phase
-                            == ObjectiveCloseoutPhase.PHASE_1_PROVISIONAL
+                            start_phase == ObjectiveCloseoutPhase.PHASE_1_PROVISIONAL
                             or round_index > 0
                         ):
-                            phase1 = self._phase_one_provisional(
-                                goals=goals, states=states
-                            )
+                            phase1 = self._phase_one_provisional(goals=goals, states=states)
                             round_transitions.extend(phase1.goal_transitions)
                             if round_index == 0:
                                 receipts.append(phase1.to_dict())
@@ -1527,11 +1438,7 @@ class ProofTestReuseObjectiveReconciler:
                             reopened = sorted(
                                 {
                                     *reopened,
-                                    *(
-                                        item["goal_id"]
-                                        for item in reopen_tx
-                                        if item.get("changed")
-                                    ),
+                                    *(item["goal_id"] for item in reopen_tx if item.get("changed")),
                                 }
                             )
                             round_transitions.extend(reopen_tx)
@@ -1561,21 +1468,17 @@ class ProofTestReuseObjectiveReconciler:
                 else:
                     raise CloseoutRefusal(
                         "replay_did_not_converge",
-                        f"bindings did not converge within "
-                        f"{self.max_replay_rounds} rounds",
+                        f"bindings did not converge within {self.max_replay_rounds} rounds",
                     )
 
                 # Refuse if checkout changed during reconciliation.
                 checkout_after = self._require_clean_checkout()
                 if checkout_after.tree != tree:
                     raise DirtyCheckoutError(
-                        f"tree changed during closeout: "
-                        f"{tree} -> {checkout_after.tree}"
+                        f"tree changed during closeout: {tree} -> {checkout_after.tree}"
                     )
 
-                candidate_text = rewrite_objective_statuses(
-                    objective_text, states
-                )
+                candidate_text = rewrite_objective_statuses(objective_text, states)
                 candidate_text = self._annotate_candidate(
                     candidate_text,
                     bindings=bindings,
@@ -1601,12 +1504,8 @@ class ProofTestReuseObjectiveReconciler:
                         reopened_goal_ids=reopened,
                         operator_commit_required=True,
                         details={
-                            "candidate_objective_path": str(
-                                self.candidate_objective_path
-                            ),
-                            "lifecycle_projection_path": str(
-                                self.lifecycle_projection_path
-                            ),
+                            "candidate_objective_path": str(self.candidate_objective_path),
+                            "lifecycle_projection_path": str(self.lifecycle_projection_path),
                         },
                     ).to_dict()
                 )
@@ -1634,12 +1533,8 @@ class ProofTestReuseObjectiveReconciler:
                     "closeout_passed": True,
                     "operator_commit_required": True,
                     "repository_written": False,
-                    "candidate_objective_path": str(
-                        self.candidate_objective_path
-                    ),
-                    "lifecycle_projection_path": str(
-                        self.lifecycle_projection_path
-                    ),
+                    "candidate_objective_path": str(self.candidate_objective_path),
+                    "lifecycle_projection_path": str(self.lifecycle_projection_path),
                     "status_path": str(self.status_path),
                     "phase_count": self.phase_count,
                     "goal_states": dict(sorted(states.items())),
@@ -1815,8 +1710,7 @@ class ProofTestReuseObjectiveReconciler:
             unverified_dependencies = [
                 dependency
                 for dependency in dependencies
-                if _normalize_status(states.get(dependency, "active"))
-                != "verified_complete"
+                if _normalize_status(states.get(dependency, "active")) != "verified_complete"
             ]
             if unverified_dependencies:
                 reasons.extend(
@@ -1854,15 +1748,11 @@ class ProofTestReuseObjectiveReconciler:
             state = _normalize_status(states.get(rootish, "active"))
             if state == "verified_complete":
                 # Only illegal if phase two just transitioned them.
-                if any(
-                    item["goal_id"] == rootish and item.get("changed")
-                    for item in transitions
-                ):
+                if any(item["goal_id"] == rootish and item.get("changed") for item in transitions):
                     reasons.append(f"phase2_must_not_verify:{rootish}")
 
         passed = not reasons and all(
-            _normalize_status(states.get(goal_id, "active"))
-            == "verified_complete"
+            _normalize_status(states.get(goal_id, "active")) == "verified_complete"
             for goal_id in CHILD_GOAL_IDS
             if goal_id in states or goal_id in by_id
         )
@@ -1877,8 +1767,7 @@ class ProofTestReuseObjectiveReconciler:
                 "verified_child_goal_ids": [
                     goal_id
                     for goal_id in CHILD_GOAL_IDS
-                    if _normalize_status(states.get(goal_id, ""))
-                    == "verified_complete"
+                    if _normalize_status(states.get(goal_id, "")) == "verified_complete"
                 ],
             },
         )
@@ -1904,9 +1793,7 @@ class ProofTestReuseObjectiveReconciler:
             if _normalize_status(states[goal_id]) != "verified_complete":
                 reasons.append(f"child_not_verified:{goal_id}")
 
-        gate_admitted = self._admit_final_gate_evidence(
-            repository_tree=repository_tree
-        )
+        gate_admitted = self._admit_final_gate_evidence(repository_tree=repository_tree)
         if not gate_admitted["admitted"]:
             reasons.extend(gate_admitted.get("reason_codes") or ["gate_not_admitted"])
 
@@ -1914,9 +1801,7 @@ class ProofTestReuseObjectiveReconciler:
         # an active or otherwise unverified repair goal can never be bypassed
         # by an otherwise valid final-gate artifact.
         for goal_id in (FINAL_GATE_GOAL_ID, ROOT_GOAL_ID):
-            if goal_id not in states and not any(
-                goal.goal_id == goal_id for goal in goals
-            ):
+            if goal_id not in states and not any(goal.goal_id == goal_id for goal in goals):
                 reasons.append(f"missing_goal:{goal_id}")
                 continue
             current = _normalize_status(states.get(goal_id, "active"))
@@ -1929,9 +1814,7 @@ class ProofTestReuseObjectiveReconciler:
                 # Do not partially verify final goals when premises failed.
                 continue
             if goal_id == ROOT_GOAL_ID:
-                g140 = _normalize_status(
-                    states.get(FINAL_GATE_GOAL_ID, "active")
-                )
+                g140 = _normalize_status(states.get(FINAL_GATE_GOAL_ID, "active"))
                 if g140 != "verified_complete":
                     reasons.append("g140_before_g000_required")
                     continue
@@ -1939,10 +1822,7 @@ class ProofTestReuseObjectiveReconciler:
                 current,
                 "verified_complete",
                 goal_id=goal_id,
-                reason=(
-                    "phase three: final-gate evidence admitted; verifying "
-                    f"{goal_id}"
-                ),
+                reason=(f"phase three: final-gate evidence admitted; verifying {goal_id}"),
             )
             states[goal_id] = transition["state"]
             transitions.append(transition)
@@ -1954,11 +1834,9 @@ class ProofTestReuseObjectiveReconciler:
             objective_revision=objective_revision,
         )
         passed = not reasons and all(
-            _normalize_status(states.get(goal_id, "active"))
-            == "verified_complete"
+            _normalize_status(states.get(goal_id, "active")) == "verified_complete"
             for goal_id in (FINAL_GATE_GOAL_ID, ROOT_GOAL_ID)
-            if goal_id in states
-            or any(goal.goal_id == goal_id for goal in goals)
+            if goal_id in states or any(goal.goal_id == goal_id for goal in goals)
         )
         return ObjectiveCloseoutReceipt(
             phase=ObjectiveCloseoutPhase.PHASE_3_VERIFY_FINAL,
@@ -1975,9 +1853,7 @@ class ProofTestReuseObjectiveReconciler:
         reason_codes: list[str] = []
         messages: list[str] = []
         tasks = parse_todo_tasks(self.todo_path.read_text(encoding="utf-8"))
-        open_task_ids = [
-            task.task_id for task in tasks if not task.is_closed
-        ]
+        open_task_ids = [task.task_id for task in tasks if not task.is_closed]
         if len(tasks) != self.expected_board_task_count:
             reason_codes.append("stale_task_inventory")
             messages.append(
@@ -1986,9 +1862,7 @@ class ProofTestReuseObjectiveReconciler:
             )
         if open_task_ids:
             reason_codes.append("open_tasks")
-            messages.append(
-                "open tasks: " + ", ".join(open_task_ids)
-            )
+            messages.append("open tasks: " + ", ".join(open_task_ids))
 
         checkout_payload: dict[str, Any] = {}
         if not self.skip_checkout_check:
@@ -2032,29 +1906,19 @@ class ProofTestReuseObjectiveReconciler:
                         and not self.allow_synthetic_evidence
                     ):
                         reason_codes.extend(
-                            f"missing_evidence:{goal_id}"
-                            for goal_id in CHILD_GOAL_IDS
+                            f"missing_evidence:{goal_id}" for goal_id in CHILD_GOAL_IDS
                         )
                     else:
-                        reason_codes.append(
-                            f"missing_{artifact_kind}_artifact"
-                        )
+                        reason_codes.append(f"missing_{artifact_kind}_artifact")
                     messages.append(f"artifact missing: {path}")
                     continue
-                ok, detail = artifact_freshness(
-                    artifact_path=path, expected_tree=tree
-                )
+                ok, detail = artifact_freshness(artifact_path=path, expected_tree=tree)
                 if not ok:
                     reason_code = _artifact_reason_code(
                         artifact_kind=artifact_kind,
                         detail=detail,
                     )
-                    if (
-                        not self.report_only
-                        and reason_code.startswith(
-                            ("mismatched_", "stale_")
-                        )
-                    ):
+                    if not self.report_only and reason_code.startswith(("mismatched_", "stale_")):
                         reason_code = "stale_artifact"
                     reason_codes.append(reason_code)
                     messages.append(detail)
@@ -2062,15 +1926,11 @@ class ProofTestReuseObjectiveReconciler:
                     continue
                 payload = _read_json(path)
                 if artifact_kind == "gate":
-                    gate_ok, gate_reason, gate_detail = (
-                        _gate_artifact_readiness(
-                            payload,
-                            expected_tree=tree,
-                            expected_task_count=self.expected_gate_task_count,
-                            expected_review_revision=(
-                                self.expected_gate_review_revision
-                            ),
-                        )
+                    gate_ok, gate_reason, gate_detail = _gate_artifact_readiness(
+                        payload,
+                        expected_tree=tree,
+                        expected_task_count=self.expected_gate_task_count,
+                        expected_review_revision=(self.expected_gate_review_revision),
                     )
                     if not gate_ok:
                         reason_codes.append(gate_reason)
@@ -2089,9 +1949,8 @@ class ProofTestReuseObjectiveReconciler:
                     for goal_id in missing_goal_evidence:
                         reason_codes.append(f"missing_evidence:{goal_id}")
                     if missing_goal_evidence:
-                        detail = (
-                            "evidence artifact lacks admissible evidence for: "
-                            + ", ".join(missing_goal_evidence)
+                        detail = "evidence artifact lacks admissible evidence for: " + ", ".join(
+                            missing_goal_evidence
                         )
                         messages.append(detail)
                         artifact_messages.append(detail)
@@ -2130,9 +1989,7 @@ class ProofTestReuseObjectiveReconciler:
             git_runner=self.git_runner,
         )
         if not checkout.clean:
-            raise DirtyCheckoutError(
-                checkout.dirty_detail or "dirty or changed checkout"
-            )
+            raise DirtyCheckoutError(checkout.dirty_detail or "dirty or changed checkout")
         return checkout
 
     def _run_current_validation(self) -> dict[str, Any]:
@@ -2155,9 +2012,7 @@ class ProofTestReuseObjectiveReconciler:
     def _evidence_for_goal(self, goal_id: str) -> list[str]:
         if self.synthetic_evidence_cids and goal_id in self.synthetic_evidence_cids:
             return [
-                str(item)
-                for item in self.synthetic_evidence_cids[goal_id]
-                if str(item).strip()
+                str(item) for item in self.synthetic_evidence_cids[goal_id] if str(item).strip()
             ]
         evidence = _read_json(self.evidence_path)
         if not evidence:
@@ -2173,9 +2028,7 @@ class ProofTestReuseObjectiveReconciler:
             return [f"synthetic:{goal_id}"]
         return cids
 
-    def _admit_final_gate_evidence(
-        self, *, repository_tree: str
-    ) -> dict[str, Any]:
+    def _admit_final_gate_evidence(self, *, repository_tree: str) -> dict[str, Any]:
         if self.allow_synthetic_evidence and not self.gate_path.is_file():
             return {
                 "admitted": True,
@@ -2188,9 +2041,7 @@ class ProofTestReuseObjectiveReconciler:
                 "admitted": False,
                 "reason_codes": ["missing_gate_artifact"],
             }
-        ok, detail = artifact_freshness(
-            artifact_path=self.gate_path, expected_tree=repository_tree
-        )
+        ok, detail = artifact_freshness(artifact_path=self.gate_path, expected_tree=repository_tree)
         if not ok:
             return {
                 "admitted": False,
@@ -2223,9 +2074,7 @@ class ProofTestReuseObjectiveReconciler:
             "mode": "artifact",
             "reason_codes": [],
             "gate_digest": _sha256_hex(
-                self.gate_path.read_bytes()
-                if self.gate_path.is_file()
-                else b""
+                self.gate_path.read_bytes() if self.gate_path.is_file() else b""
             ),
             "repository_tree": repository_tree,
             "passed": True,
@@ -2275,9 +2124,7 @@ class ProofTestReuseObjectiveReconciler:
         """Every refresh recomputes bindings from current state + evidence."""
 
         optional_gaps = self._collect_optional_gaps()
-        gap_labels = tuple(
-            str(item.get("service") or "") for item in optional_gaps
-        )
+        gap_labels = tuple(str(item.get("service") or "") for item in optional_gaps)
         bindings: dict[str, dict[str, Any]] = {}
         for goal in goals:
             evidence = self._evidence_for_goal(goal.goal_id)
@@ -2342,8 +2189,7 @@ class ProofTestReuseObjectiveReconciler:
         _atomic_write_text(self.candidate_objective_path, candidate_text)
         projection = {
             "schema": (
-                "ipfs_accelerate_py/proof-backed-test-reuse-"
-                "objective-lifecycle-projection@1"
+                "ipfs_accelerate_py/proof-backed-test-reuse-objective-lifecycle-projection@1"
             ),
             "interface": self.interface,
             "generated_at": _utc_now_iso(),
@@ -2376,22 +2222,16 @@ class ProofTestReuseObjectiveReconciler:
         lines.extend(["", "## Optional gaps", ""])
         if optional_gaps:
             for gap in optional_gaps:
-                lines.append(
-                    f"- `{gap.get('service')}`: nonterminal "
-                    f"({gap.get('action')})"
-                )
+                lines.append(f"- `{gap.get('service')}`: nonterminal ({gap.get('action')})")
         else:
             lines.append("- none")
         lines.extend(["", "## Phase receipts", ""])
         for receipt in receipts:
             lines.append(
-                f"- `{receipt.get('phase')}`: "
-                f"{'passed' if receipt.get('passed') else 'failed'}"
+                f"- `{receipt.get('phase')}`: {'passed' if receipt.get('passed') else 'failed'}"
             )
         lines.append("")
-        _atomic_write_text(
-            self.lifecycle_projection_path, "\n".join(lines)
-        )
+        _atomic_write_text(self.lifecycle_projection_path, "\n".join(lines))
         # JSON twin beside the markdown for machine consumers.
         json_projection = self.lifecycle_projection_path.with_suffix(".json")
         _atomic_write_json(json_projection, projection)
@@ -2455,8 +2295,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(
         description=(
-            "Fenced multi-phase objective reconciliation for proof-backed "
-            "test reuse closeout"
+            "Fenced multi-phase objective reconciliation for proof-backed test reuse closeout"
         )
     )
     parser.add_argument("--repo-root", type=Path, required=True)
@@ -2464,15 +2303,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--todo-path", type=Path, required=True)
     parser.add_argument("--gate-path", type=Path, required=True)
     parser.add_argument("--evidence-path", type=Path, required=True)
-    parser.add_argument(
-        "--lifecycle-projection-path", type=Path, required=True
-    )
-    parser.add_argument(
-        "--candidate-objective-path", type=Path, required=True
-    )
-    parser.add_argument(
-        "--supervisor-health-input-path", type=Path, required=True
-    )
+    parser.add_argument("--lifecycle-projection-path", type=Path, required=True)
+    parser.add_argument("--candidate-objective-path", type=Path, required=True)
+    parser.add_argument("--supervisor-health-input-path", type=Path, required=True)
     parser.add_argument("--status-path", type=Path, required=True)
     parser.add_argument(
         "--phase-count",
@@ -2526,9 +2359,7 @@ def reconciler_from_args(
         report_only=bool(args.report_only),
         writer_id=str(args.writer_id or ""),
         fence_path=args.fence_path,
-        allow_synthetic_evidence=bool(
-            getattr(args, "allow_synthetic_evidence", False)
-        ),
+        allow_synthetic_evidence=bool(getattr(args, "allow_synthetic_evidence", False)),
     )
 
 
