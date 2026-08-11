@@ -268,7 +268,9 @@ def _git_read_pack_object(store: Path, oid: str) -> tuple[str, bytes] | None:
 
         pack_data = pack
 
-        def read_at(obj_offset: int, depth: int = 0, *, _pack: bytes = pack_data) -> tuple[str, bytes] | None:
+        def read_at(
+            obj_offset: int, depth: int = 0, *, _pack: bytes = pack_data
+        ) -> tuple[str, bytes] | None:
             if depth > 64 or obj_offset < 0 or obj_offset >= len(_pack):
                 return None
             pos = obj_offset
@@ -740,10 +742,10 @@ def parse_board(path: Path) -> dict[str, Task]:
 
 def _make_task(raw: Mapping[str, Any]) -> Task:
     fields = raw["fields"]
+
     def csv(name):
-        return tuple(
-            item.strip() for item in fields.get(name, "").split(",") if item.strip()
-        )
+        return tuple(item.strip() for item in fields.get(name, "").split(",") if item.strip())
+
     command = fields.get("validation", "")
     return Task(
         str(raw["task_id"]),
