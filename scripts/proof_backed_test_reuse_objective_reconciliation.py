@@ -565,7 +565,7 @@ def artifact_freshness(
     if max_age_seconds is not None and captured is not None:
         current = now_unix if now_unix is not None else time.time()
         try:
-            if isinstance(captured, (int, float)) and captured > 1e12:
+            if isinstance(captured, int | float) and captured > 1e12:
                 captured_unix = float(captured) / 1e9
             else:
                 captured_unix = float(captured)
@@ -618,7 +618,7 @@ def _final_gate_completion_evidence_is_admissible(
         and value.get("acceptance_criterion") == criterion
         and value.get("authority") == "authoritative"
         and isinstance(satisfied, Sequence)
-        and not isinstance(satisfied, (str, bytes))
+        and not isinstance(satisfied, str | bytes)
         and tuple(satisfied) == (criterion,)
         and value.get("task_count") == expected_task_count
         and value.get("review_revision") == expected_review_revision
@@ -787,7 +787,7 @@ def _evidence_ids_for_goal(
         if isinstance(value, Mapping):
             if "completion_evidence_records" in value:
                 records = value.get("completion_evidence_records")
-                if not isinstance(records, Sequence) or isinstance(records, (str, bytes)):
+                if not isinstance(records, Sequence) or isinstance(records, str | bytes):
                     return []
                 return [
                     str(record.get("provenance_cid") or record.get("evidence_cid")).strip()
@@ -795,16 +795,16 @@ def _evidence_ids_for_goal(
                     if _canonical_record_is_admissible(record, expected_tree=expected_tree)
                 ]
             cids = value.get("evidence_cids") or value.get("cids") or []
-            if isinstance(cids, Sequence) and not isinstance(cids, (str, bytes)):
+            if isinstance(cids, Sequence) and not isinstance(cids, str | bytes):
                 return [item.strip() for item in cids if isinstance(item, str) and item.strip()]
             return []
-        if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        if isinstance(value, Sequence) and not isinstance(value, str | bytes):
             return [item.strip() for item in value if isinstance(item, str) and item.strip()]
         return []
 
     records = payload.get("records") or payload.get("evidence") or []
     cids: list[str] = []
-    if isinstance(records, Sequence) and not isinstance(records, (str, bytes)):
+    if isinstance(records, Sequence) and not isinstance(records, str | bytes):
         for item in records:
             if not isinstance(item, Mapping):
                 continue

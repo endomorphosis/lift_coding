@@ -923,7 +923,7 @@ def _sealed_board(
             )
             continue
         raw_validation = getattr(item, "validation", None)
-        if isinstance(raw_validation, (list, tuple)) and raw_validation:
+        if isinstance(raw_validation, list | tuple) and raw_validation:
             command = str(raw_validation[0])
         else:
             command = str(metadata.get("validation", ""))

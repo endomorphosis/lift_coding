@@ -777,7 +777,7 @@ def _validate_config(
         "implementation_log_stall_seconds",
     ):
         value = config.get(field)
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or value < 0:
+        if isinstance(value, bool) or not isinstance(value, int | float) or value < 0:
             errors.append(f"scheduler {field} must be a nonnegative number")
     for field in (
         "max_restarts",
