@@ -92,7 +92,8 @@ GOAL_IDS = (
 )
 EXPECTED_WAVES = (
     ("VGO-000",),
-    ("VGO-001", "VGO-002", "VGO-009"),
+    ("VGO-001", "VGO-009"),
+    ("VGO-002",),
     ("VGO-003", "VGO-010", "VGO-011"),
     ("VGO-012", "VGO-016"),
     ("VGO-020", "VGO-021", "VGO-023", "VGO-027"),
@@ -612,7 +613,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
 
     raw_waves = config.get("waves")
     if not isinstance(raw_waves, list) or len(raw_waves) != len(EXPECTED_WAVES):
-        errors.append("config.waves must contain the twenty sealed waves")
+        errors.append("config.waves must contain the twenty-one sealed waves")
     else:
         seen: list[str] = []
         for index, (row, expected_ids) in enumerate(zip(raw_waves, EXPECTED_WAVES)):

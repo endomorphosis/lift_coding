@@ -63,29 +63,30 @@ for other screens, but no task may expand into optimizing every application.
 ## Execution waves
 
 - Wave 0: `VGO-000` (lane 3).
-- Wave 1: `VGO-001` (lane 1), `VGO-002` (lane 0), `VGO-009` (lane 3).
-- Wave 2: `VGO-003` (lane 2), `VGO-010` (lane 3), `VGO-011` (lane 0).
-- Wave 3: `VGO-012` (lane 2), `VGO-016` (lane 1).
-- Wave 4: `VGO-020` (lane 1), `VGO-021` (lane 3), `VGO-023` (lane 2),
+- Wave 1: `VGO-001` (lane 1), `VGO-009` (lane 3).
+- Wave 2: `VGO-002` (lane 0).
+- Wave 3: `VGO-003` (lane 2), `VGO-010` (lane 3), `VGO-011` (lane 0).
+- Wave 4: `VGO-012` (lane 2), `VGO-016` (lane 1).
+- Wave 5: `VGO-020` (lane 1), `VGO-021` (lane 3), `VGO-023` (lane 2),
   `VGO-027` (lane 0).
-- Wave 5: `VGO-030` (lane 3), `VGO-031` (lane 1), `VGO-032` (lane 0),
+- Wave 6: `VGO-030` (lane 3), `VGO-031` (lane 1), `VGO-032` (lane 0),
   `VGO-034` (lane 2).
-- Wave 6: `VGO-040` (lane 0), `VGO-043` (lane 2), `VGO-045` (lane 3).
-- Wave 7: `VGO-041` (lane 1), `VGO-050` (lane 1), `VGO-051` (lane 0),
+- Wave 7: `VGO-040` (lane 0), `VGO-043` (lane 2), `VGO-045` (lane 3).
+- Wave 8: `VGO-041` (lane 1), `VGO-050` (lane 1), `VGO-051` (lane 0),
   `VGO-061` (lane 3).
-- Wave 8: `VGO-054` (lane 3), `VGO-062` (lane 2).
-- Wave 9: `VGO-053` (lane 2).
-- Wave 10: `VGO-060` (lane 0), `VGO-070` (lane 1), `VGO-071` (lane 2),
+- Wave 9: `VGO-054` (lane 3), `VGO-062` (lane 2).
+- Wave 10: `VGO-053` (lane 2).
+- Wave 11: `VGO-060` (lane 0), `VGO-070` (lane 1), `VGO-071` (lane 2),
   `VGO-075` (lane 3).
-- Wave 11: `VGO-068` (lane 1).
-- Wave 12: `VGO-072` (lane 0).
-- Wave 13: `VGO-083` (lane 1), `VGO-086` (lane 0).
-- Wave 14: `VGO-080` (lane 2).
-- Wave 15: `VGO-081` (lane 3).
-- Wave 16: `VGO-090` (lane 3), `VGO-096` (lane 1).
-- Wave 17: `VGO-091` (lane 2).
-- Wave 18: `VGO-093` (lane 0).
-- Wave 19: `VGO-099` (lane 0).
+- Wave 12: `VGO-068` (lane 1).
+- Wave 13: `VGO-072` (lane 0).
+- Wave 14: `VGO-083` (lane 1), `VGO-086` (lane 0).
+- Wave 15: `VGO-080` (lane 2).
+- Wave 16: `VGO-081` (lane 3).
+- Wave 17: `VGO-090` (lane 3), `VGO-096` (lane 1).
+- Wave 18: `VGO-091` (lane 2).
+- Wave 19: `VGO-093` (lane 0).
+- Wave 20: `VGO-099` (lane 0).
 
 ## VGO-000 Seal the supervisor-native control plane
 
@@ -111,11 +112,11 @@ for other screens, but no task may expand into optimizing every application.
 - Preconditions: Exact reviewed superproject revision and clean exact SwissKnife, datasets, and accelerator gitlinks are recorded.
 - Effects: Seals scope, shards, authority doctrine, selected target, source bindings, retry bounds, and monitoring paths before implementation starts.
 - Evidence subset: Board-validator JSON, Git revision record, baseline command record, configured-scheduler preflight
-- Acceptance: Validator and scheduler preflight pass; all 42 IDs occur exactly once; protected controls are tracked; the only initially ready implementation claims are VGO-001, VGO-002, and VGO-009, while VGO-003 remains dependency-blocked until VGO-002 completes.
+- Acceptance: Validator and scheduler preflight pass; all 42 IDs occur exactly once; protected controls are tracked; after the audited repair projection the only ready implementation claims are VGO-001 and VGO-009, while VGO-002 is dependency-blocked on the authoritative Python wire contract and VGO-003 remains dependency-blocked until VGO-002 completes.
 
 ## VGO-001 Define closed GUI optimizer data models
 
-- Status: completed
+- Status: pending
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -134,20 +135,20 @@ for other screens, but no task may expand into optimizing every application.
 - Predicted files: external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/__init__.py, external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/models.py, external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/schema.py, external/ipfs_datasets/tests/unit/logic/gui_optimizer/test_models.py
 - Interfaces: GuiApplicationIdentity@1, GuiScreenIdentity@1, UiComponentIdentity@1, UiComponentVersion@1, UiDependencyEdge@1, UiStateDefinition@1, UiEventDefinition@1, UiTransitionDefinition@1, UiActionBinding@1, UiLayoutConstraint@1, UiAccessibilityContract@1, UiSemanticCapsule@1, UiChangeSet@1, UiInvalidationPlan@1, UiEvaluationScenario@1, UiBaseline@1, UiContextPack@1, GuiImprovementProposal@1, VisualRegressionReceipt@1, AccessibilityReceipt@1, InteractionReceipt@1, UiConstraintReceipt@1, GuiImprovementReceipt@1
 - Conflict policy: Own only the new standalone datasets GUI contract package; preserve existing IR and verification packages.
-- Preconditions: VGO schema/version doctrine is sealed and canonical JSON facilities are available.
+- Preconditions: VGO schema/version doctrine is sealed and canonical JSON facilities are available; the first candidate is known to coerce wrong JSON container types through tuple conversion and to contain one undeclared smoke artifact that must not remain in the repository.
 - Effects: Defines versioned finite wire records for every required identity, graph, state, evaluation, proposal, and receipt boundary.
-- Evidence subset: Required-model inventory, closed-schema rejection vectors, enum and finite-bound tests
-- Acceptance: Every required model is versioned, deterministically serializable, rejects unknown fields and invalid enum values, separates analysis class from verification status, and contains no dependency on excluded prior subsystems.
+- Evidence subset: Required-model inventory, closed-schema rejection vectors, enum and finite-bound tests, parameterized wrong-container vectors for every array and mapping field, required schema/interface vectors, registered optimizer-schema vectors, canonical mapping-key collision vectors, cross-field receipt-consistency vectors, exact round-trip type preservation, required capsule/context/visual-receipt field inventory, undeclared-artifact absence
+- Acceptance: Every required model is versioned, deterministically serializable, and requires its exact schema and interface identity on wire input; decoders reject unknown fields, invalid enum values, unregistered optimizer schema versions, non-finite values, non-string mapping keys, canonical-key collisions, and wrong JSON container types before any tuple, list, mapping, string, numeric, or boolean coercion; strings and mappings never decode as arrays and arrays never decode as mappings; round trips preserve exact wire types; cross-field receipt contradictions reject; UiSemanticCapsule includes action side effects, layout and responsive behavior, keyboard and focus behavior; UiContextPack carries the required raw source, style/token, affected-test, state/failure/artifact, and token-accounting payloads; VisualRegressionReceipt carries structural and expected/forbidden-region plus threshold evidence; the Python schema registry is the authoritative wire vocabulary that the dependent TypeScript contract must mirror; analysis class remains separate from verification status; no undeclared artifact or dependency on excluded prior subsystems remains.
 
 ## VGO-002 Implement the non-executing GUI static scanner core
 
-- Status: completed
+- Status: pending
 - Completion: auto
 - Is schedulable: true
 - Review only: false
 - Priority: P0
 - Track: static-analysis
-- Depends on: VGO-000
+- Depends on: VGO-001
 - Goal id: VGO-G030
 - Outputs: swissknife/src/services/gui-optimizer/models.ts, swissknife/src/services/gui-optimizer/scanner.ts, swissknife/test/unit/services/gui-optimizer/scanner.test.ts
 - Validation: cd swissknife && npm run test:run -- test/unit/services/gui-optimizer/scanner.test.ts
@@ -160,10 +161,10 @@ for other screens, but no task may expand into optimizing every application.
 - Predicted files: swissknife/src/services/gui-optimizer/models.ts, swissknife/src/services/gui-optimizer/scanner.ts, swissknife/test/unit/services/gui-optimizer/scanner.test.ts
 - Interfaces: GuiStaticScanner@1, GuiSourceFinding@1, GuiExtractionConfidence@1
 - Conflict policy: Use the TypeScript compiler API for JS/TS/JSX/TSX and bounded non-executing parser/tokenizer adapters for standalone HTML/CSS; never evaluate modules, templates, browser globals, plugins, or repository scripts.
-- Preconditions: The live Agent Supervisor source, manifest, route registration, and test surfaces are identified.
+- Preconditions: The live Agent Supervisor source, manifest, route registration, and test surfaces are identified; VGO-001 has sealed the authoritative Python wire schema; the first candidate is known to diverge from that schema and to misclassify computed actions, delegated events, dynamic imports and components, and unknown widgets as exact, and to emit colliding anonymous-element identities plus unresolved graph targets.
 - Effects: Defines strict TypeScript decoders aligned with the Python wire models and extracts bounded React, TSX, JSX, standalone HTML/CSS, templates, props, state, events, accessibility, style, responsive, localization, action, and host-boundary facts with spans and confidence.
-- Evidence subset: Parser fixtures for JSX and template strings, negative execution canary, extractor-version fixtures
-- Acceptance: Supported facts are deterministic; dynamic HTML, imperative DOM, remote/unknown widgets, computed actions, unresolved globals, and runtime-generated forms downgrade classification; no arbitrary source code executes.
+- Evidence subset: Parser fixtures for JSX and template strings, negative execution canary, extractor-version fixtures, Python/TypeScript wire-schema vocabulary and key conformance, computed-action and delegated-event vectors, dynamic-import/component and unknown-widget vectors, prop/focus/keyboard/policy/action-binding extraction, parent/render linkage, duplicate-anonymous-element identity, emitted-edge target resolution, malformed-source and invalid-option vectors
+- Acceptance: TypeScript schema versions, component kinds, extraction methods, source spans, edge fields, and all shared wire keys and enums mirror the authoritative VGO-001 Python registry; supported facts are deterministic; dynamic HTML, imperative DOM, uncontrolled event delegation, dynamically loaded styles, remote or unknown widgets, dynamically generated components, computed actions, unresolved globals, and runtime-generated forms downgrade classification and record the unresolved cause; props plus focus, keyboard, policy, action, parent, child, contains, and renders facts are emitted when statically present; stable logical identities do not collide for distinct anonymous elements and do not use line numbers as their primary identity; every emitted edge target resolves to an emitted stable identity or is explicitly unresolved; malformed source and invalid language or non-finite option values cannot be labeled exact; no arbitrary source code executes.
 
 ## VGO-003 Define the deterministic evaluation scenario catalog
 
@@ -193,7 +194,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-009 Establish patch and browser-host security authority
 
-- Status: completed
+- Status: pending
 - Completion: auto
 - Is schedulable: true
 - Review only: false
@@ -212,10 +213,10 @@ for other screens, but no task may expand into optimizing every application.
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/authority.py, external/ipfs_accelerate/test/api/test_gui_optimizer_authority.py
 - Interfaces: GuiPatchAuthority@1, GuiHostBoundaryPolicy@1, GuiAcceptanceAuthority@1
 - Conflict policy: Add a fail-closed optimizer authority wrapper without altering backend authorization, credentials, MCP execution, or the canonical browser gateway.
-- Preconditions: SwissKnife gateway and mediator authority boundaries are recorded as canonical dependencies, not replaced.
+- Preconditions: SwissKnife gateway and mediator authority boundaries are recorded as canonical dependencies, not replaced; the first candidate is known to allow seven fail-open vectors involving string booleans, unknown or disguised browser fields, scope-only authority, stale or unbound policy evidence, and caller-supplied decision overrides.
 - Effects: Encodes allowed roots, forbidden change kinds, confirmation/action-binding review gates, fixture-only browser inputs, and evidence required for automatic acceptance.
-- Evidence subset: Host-boundary tests, forbidden-path vectors, stale-policy and exact-confirmation doctrine
-- Acceptance: UI state cannot synthesize authorization; browser content cannot select host paths or commands; sensitive changes require contract verification or human review; missing/invalid authority evidence rejects safely.
+- Evidence subset: Host-boundary tests, forbidden-path vectors, stale-policy and exact-confirmation doctrine, strict-coercion and unknown-field vectors, disguised path/command/credential selectors, exact evidence-binding and freshness vectors, scope-not-authority vector, computed-decision override vectors
+- Acceptance: UI state cannot synthesize authorization; browser content cannot select host paths or commands; sensitive changes require contract verification or human review; missing or invalid authority evidence rejects safely; all mapping inputs are closed and strictly typed so unknown keys and non-boolean boolean values reject; browser envelopes cannot hide path, command, or credential selectors by nesting, placement, casing, or alternate spelling; claim-derived change kinds and computed patch or host decisions override and cannot be replaced by acceptance input; authority evidence has a nonempty identity and any evidence used to authorize an intended action is current and bound to that exact action and canonical argument digest; a scope declaration alone is never host authority.
 
 ## VGO-010 Implement canonical GUI content identity and provenance
 
