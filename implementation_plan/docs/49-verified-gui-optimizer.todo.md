@@ -115,7 +115,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-001 Define closed GUI optimizer data models
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
