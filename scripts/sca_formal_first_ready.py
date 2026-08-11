@@ -17,7 +17,6 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PROFILE = REPO_ROOT / "config" / "swissknife_symbolic_contract_assurance_supervisor.json"
 BOARD = (
@@ -61,8 +60,8 @@ def _parse_tasks(text: str) -> list[dict[str, str]]:
     ):
         body = match.group(2)
 
-        def field(name: str, default: str = "") -> str:
-            found = re.search(rf"^- {re.escape(name)}:\s*(.*)$", body, re.M)
+        def field(name: str, default: str = "", *, _body: str = body) -> str:
+            found = re.search(rf"^- {re.escape(name)}:\s*(.*)$", _body, re.M)
             return found.group(1).strip() if found else default
 
         header = match.group(1).strip()

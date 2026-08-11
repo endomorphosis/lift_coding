@@ -35,10 +35,10 @@ import subprocess
 import sys
 import time
 import uuid
-from collections.abc import Callable, Iterable, Mapping, MutableMapping, Sequence
+from collections.abc import Callable, Mapping, MutableMapping, Sequence
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
-from enum import Enum
+from datetime import UTC, datetime
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, Final
 
@@ -106,7 +106,7 @@ OPTIONAL_SERVICE_KEYS: Final = frozenset(
 # ---------------------------------------------------------------------------
 
 
-class ObjectiveCloseoutPhase(str, Enum):
+class ObjectiveCloseoutPhase(StrEnum):
     """Ordered closeout phases.  Phases must never skip a legal transition."""
 
     DIAGNOSE = "diagnose"
@@ -178,7 +178,7 @@ class DirtyCheckoutError(CloseoutRefusal):
 
 
 def _utc_now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def _sha256_hex(data: bytes | str) -> str:
@@ -844,7 +844,7 @@ class ObjectiveCloseoutFence:
             "fence_path": str(self.fence_path),
         }
 
-    def acquire(self) -> "ObjectiveCloseoutFence":
+    def acquire(self) -> ObjectiveCloseoutFence:
         self.fence_path.parent.mkdir(parents=True, exist_ok=True)
         handle = self.fence_path.open("a+", encoding="utf-8")
         try:
@@ -925,7 +925,7 @@ class ObjectiveCloseoutFence:
         finally:
             self._handle = None
 
-    def __enter__(self) -> "ObjectiveCloseoutFence":
+    def __enter__(self) -> ObjectiveCloseoutFence:
         return self.acquire()
 
     def __exit__(self, *exc: object) -> None:

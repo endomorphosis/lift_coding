@@ -19,10 +19,10 @@ import subprocess
 import sys
 import time
 import zlib
+from collections.abc import Iterable, Mapping
 from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
-from typing import Any, Iterable, Mapping
-
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TODO_PATH = REPO_ROOT / "implementation_plan/docs/46-proof-backed-test-reuse.todo.md"
@@ -88,8 +88,7 @@ def _command(*args: str, cwd: Path = REPO_ROOT) -> tuple[int, str]:
             args,
             cwd=cwd,
             text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            capture_output=True,
             check=False,
         )
     except OSError:
@@ -267,46 +266,48 @@ def _git_read_pack_object(store: Path, oid: str) -> tuple[str, bytes] | None:
         if len(pack) < 8 or pack[:4] != b"PACK":
             continue
 
-        def read_at(obj_offset: int, depth: int = 0) -> tuple[str, bytes] | None:
-            if depth > 64 or obj_offset < 0 or obj_offset >= len(pack):
+        pack_data = pack
+
+        def read_at(obj_offset: int, depth: int = 0, *, _pack: bytes = pack_data) -> tuple[str, bytes] | None:
+            if depth > 64 or obj_offset < 0 or obj_offset >= len(_pack):
                 return None
             pos = obj_offset
             try:
-                c = pack[pos]
+                c = _pack[pos]
                 pos += 1
                 type_id = (c >> 4) & 7
                 size = c & 15
                 shift = 4
                 while c & 0x80:
-                    c = pack[pos]
+                    c = _pack[pos]
                     pos += 1
                     size |= (c & 0x7F) << shift
                     shift += 7
                 if type_id == 6:  # OFS_DELTA
-                    c = pack[pos]
+                    c = _pack[pos]
                     pos += 1
                     base_offset = c & 0x7F
                     while c & 0x80:
-                        c = pack[pos]
+                        c = _pack[pos]
                         pos += 1
                         base_offset = ((base_offset + 1) << 7) | (c & 0x7F)
                     base = read_at(obj_offset - base_offset, depth + 1)
                     if base is None:
                         return None
-                    delta = zlib.decompressobj().decompress(pack[pos:])
+                    delta = zlib.decompressobj().decompress(_pack[pos:])
                     return base[0], _git_apply_delta(base[1], delta)
                 if type_id == 7:  # REF_DELTA
-                    base_oid = pack[pos : pos + 20].hex()
+                    base_oid = _pack[pos : pos + 20].hex()
                     pos += 20
                     base = _git_object_raw(store, base_oid, store=store)
                     if base is None:
                         return None
-                    delta = zlib.decompressobj().decompress(pack[pos:])
+                    delta = zlib.decompressobj().decompress(_pack[pos:])
                     return base[0], _git_apply_delta(base[1], delta)
                 kind = kinds.get(type_id)
                 if kind is None:
                     return None
-                body = zlib.decompressobj().decompress(pack[pos:])
+                body = zlib.decompressobj().decompress(_pack[pos:])
                 return kind, body
             except (IndexError, ValueError, zlib.error):
                 return None
@@ -739,9 +740,10 @@ def parse_board(path: Path) -> dict[str, Task]:
 
 def _make_task(raw: Mapping[str, Any]) -> Task:
     fields = raw["fields"]
-    csv = lambda name: tuple(
-        item.strip() for item in fields.get(name, "").split(",") if item.strip()
-    )
+    def csv(name):
+        return tuple(
+            item.strip() for item in fields.get(name, "").split(",") if item.strip()
+        )
     command = fields.get("validation", "")
     return Task(
         str(raw["task_id"]),
@@ -2171,7 +2173,7 @@ def write_report(report: Mapping[str, Any], state_root: Path) -> Path:
         except (UnicodeDecodeError, json.JSONDecodeError, KeyError, ValueError):
             raise RuntimeError(
                 f"existing report is not the claimed canonical report: {destination}"
-            )
+            ) from None
         return destination
     directory.mkdir(parents=True, exist_ok=True)
     temporary = directory / f".{report['report_cid']}.{os.getpid()}.tmp"

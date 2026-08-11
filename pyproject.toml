@@ -18,6 +18,7 @@ where = ["src"]
 line-length = 100
 target-version = "py311"
 extend-exclude = [
+  ".ptr164-preserved-wip",
   ".worktrees",
   ".backups",
   ".recovery-backups",

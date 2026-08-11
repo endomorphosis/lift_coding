@@ -9,9 +9,8 @@ import json
 import os
 import re
 import sys
+from collections.abc import Iterable
 from pathlib import Path, PurePosixPath
-from typing import Iterable
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ACCEL_ROOT = REPO_ROOT / "external" / "ipfs_accelerate"
@@ -36,7 +35,6 @@ from ipfs_accelerate_py.agent_supervisor.objectives.objective_graph import (  # 
 from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (  # noqa: E402
     parse_task_file,
 )
-
 
 PLAN_PATH = (
     REPO_ROOT / "implementation_plan" / "docs" / "46-proof-backed-test-reuse-plan-2026-07-31.md"

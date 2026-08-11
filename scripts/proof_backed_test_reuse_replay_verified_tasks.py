@@ -27,10 +27,10 @@ import re
 import subprocess
 import sys
 import time
+from collections.abc import Mapping
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Mapping, Sequence
-
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 TODO_PATH = REPO_ROOT / "implementation_plan/docs/46-proof-backed-test-reuse.todo.md"
@@ -110,8 +110,7 @@ def _git(cwd: Path, *args: str, check: bool = True) -> str:
         ("git", *args),
         cwd=cwd,
         text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
+        capture_output=True,
         check=False,
         env=env,
     )
@@ -376,7 +375,7 @@ class VerifiedTaskReplayPlan:
     policy: dict[str, Any] = field(default_factory=dict)
     plan_cid: str = ""
 
-    def seal(self) -> "VerifiedTaskReplayPlan":
+    def seal(self) -> VerifiedTaskReplayPlan:
         body = self.to_dict(include_cid=False)
         self.plan_cid = canonical_cid(body)
         return self
