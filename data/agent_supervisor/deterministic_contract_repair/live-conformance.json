@@ -1,0 +1,159 @@
+{
+  "evidence_id": "dcr/live-service-conformance@1",
+  "interface": "LiveMcpConformance@1",
+  "result": {
+    "content_id": "sha256:07c568aa0096c400aa06dffb9550842ea5522b093fe89c58c1de5e7d589515cc",
+    "counterexamples": [],
+    "evidence_id": "dcr/live-service-conformance@1",
+    "hermetic_precondition_ok": true,
+    "interface": "LiveMcpConformance@1",
+    "logic_equivalence": {
+      "both_surfaces_structured": true,
+      "canonically_equivalent": true,
+      "content_id": "sha256:3fd0400c6b17c3318b6a4f83a35dcae064fcc730fc0e4de69484090e6ad1627d",
+      "interface": "LogicRouteEquivalence@1",
+      "mcp_cid": null,
+      "process_local_cid": "baguqeerax4cfhgplby27jvvjc4ltv63pvtnyqrulsxrq6t2baqffdkxnx46a",
+      "reason_codes": [
+        "logic_cec_prove_canonically_equivalent"
+      ],
+      "tool": "logic_tools/cec_prove"
+    },
+    "passed": true,
+    "profile_matrix": {
+      "live_required_for_green": true,
+      "observer_evidence": "dcr/live-observation@1",
+      "observer_interface": "LiveContractTranscript@1",
+      "profiles": [
+        "mcp++/profile-a-idl",
+        "mcp++/profile-b-cid-artifacts",
+        "mcp++/profile-c-ucan",
+        "mcp++/profile-d-temporal-deontic",
+        "mcp++/profile-e-mcp-p2p",
+        "mcp++/profile-f-event-dag"
+      ],
+      "roles": [
+        "accelerate",
+        "datasets",
+        "kit"
+      ],
+      "safe_tools_call": {
+        "accelerate": "model_catalog_health",
+        "datasets": "logic_health",
+        "kit": "iroh_diagnostics"
+      }
+    },
+    "reachability": {
+      "accelerate": "mcp_in_process",
+      "datasets": "mcp_in_process",
+      "kit": "mcp_in_process"
+    },
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "dcr_091_live_assessment",
+      "three_services_required_from_one_manifest",
+      "hermetic_precondition_ok",
+      "live_conformance_passed"
+    ],
+    "roles_observed": [
+      "accelerate",
+      "datasets",
+      "kit"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-live-service-conformance@1",
+    "service_id": "deterministic-contract-repair-mcp-runtime-v1",
+    "task_id": "DCR-091",
+    "three_service": {
+      "all_roles_required": true,
+      "content_id": "sha256:a5b591471218e45b40176d3afbb641c5294f93e1dab4b37fbb0c5085a873ca60",
+      "empty_success_violations": [],
+      "interface": "LiveThreeServiceConformance@1",
+      "reason_codes": [
+        "all_roles_required",
+        "no_optional_packages",
+        "no_empty_success_from_errors"
+      ],
+      "role_status": {
+        "accelerate": {
+          "conformant": true,
+          "exchange_count": 12,
+          "fail_closed_ok": true,
+          "initialize_ok": true,
+          "kinds_observed": [
+            "initialize",
+            "loopback_probe",
+            "malformed_call",
+            "profile_probe",
+            "tools/call",
+            "tools/list",
+            "unknown_call"
+          ],
+          "missing_kinds": [],
+          "package": "ipfs_accelerate_py",
+          "profile_count": 6,
+          "profiles_ok": true,
+          "safe_tool": "model_catalog_health",
+          "tools_call_ok": true,
+          "tools_list_ok": true
+        },
+        "datasets": {
+          "conformant": true,
+          "exchange_count": 14,
+          "fail_closed_ok": true,
+          "initialize_ok": true,
+          "kinds_observed": [
+            "initialize",
+            "logic_tools/cec_prove",
+            "loopback_probe",
+            "malformed_call",
+            "profile_probe",
+            "tools/call",
+            "tools/list",
+            "unknown_call"
+          ],
+          "missing_kinds": [],
+          "package": "ipfs_datasets_py",
+          "profile_count": 6,
+          "profiles_ok": true,
+          "safe_tool": "logic_health",
+          "tools_call_ok": true,
+          "tools_list_ok": true
+        },
+        "kit": {
+          "conformant": true,
+          "exchange_count": 12,
+          "fail_closed_ok": true,
+          "initialize_ok": true,
+          "kinds_observed": [
+            "initialize",
+            "loopback_probe",
+            "malformed_call",
+            "profile_probe",
+            "tools/call",
+            "tools/list",
+            "unknown_call"
+          ],
+          "missing_kinds": [],
+          "package": "ipfs_kit_py",
+          "profile_count": 6,
+          "profiles_ok": true,
+          "safe_tool": "iroh_diagnostics",
+          "tools_call_ok": true,
+          "tools_list_ok": true
+        }
+      },
+      "roles": [
+        "accelerate",
+        "datasets",
+        "kit"
+      ]
+    },
+    "transcript_cid": "baguqeeralsheucrcna72rr2ijq4o6zlx6y3cihwzqmkqfcubffb2ekllmjlq",
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-live-service-conformance@1",
+  "task_id": "DCR-091",
+  "version": 1
+}

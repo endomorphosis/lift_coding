@@ -1,0 +1,275 @@
+{
+  "evidence_id": "dcr/contract-drift-monitor@1",
+  "interface": "ContractDriftMonitor@1",
+  "provider_calls": 0,
+  "result": {
+    "baseline_root": "sha256:15b534e2a7e9e974d6077459ff71e58a14f0f6708ff595154ccfcd985debe446",
+    "interface": "ContractDriftMonitor@1",
+    "passed": true,
+    "policy": {
+      "content_id": "sha256:1c921a6b61e47a8597ac2b91989dac62b9f30d670daebfceaaf708ef07dd4058",
+      "evidence_dependencies": {
+        "adversarial": [
+          "desktop_e2e",
+          "live_conformance",
+          "hermetic_conformance"
+        ],
+        "benchmark": [
+          "fixed_point",
+          "adversarial"
+        ],
+        "canary": [
+          "shadow",
+          "benchmark",
+          "policy"
+        ],
+        "desktop_e2e": [
+          "live_conformance"
+        ],
+        "fixed_point": [
+          "live_conformance",
+          "desktop_e2e",
+          "adversarial"
+        ],
+        "hermetic_conformance": [],
+        "live_conformance": [
+          "hermetic_conformance"
+        ],
+        "policy": [],
+        "release": [
+          "canary",
+          "shadow",
+          "benchmark",
+          "fixed_point",
+          "adversarial",
+          "desktop_e2e",
+          "live_conformance",
+          "hermetic_conformance",
+          "policy"
+        ],
+        "shadow": [
+          "fixed_point",
+          "benchmark",
+          "adversarial"
+        ]
+      },
+      "forbid_auto_weaken": true,
+      "forbid_health_from_stale_receipts": true,
+      "forbid_operator_semantics": true,
+      "interface": "ContractDriftMonitor@1",
+      "monitored_paths": [
+        "Mcp-Plus-Plus",
+        "config/deterministic_contract_repair_bootstrap_seal.json",
+        "config/deterministic_contract_repair_policy.json",
+        "config/deterministic_contract_repair_services.json",
+        "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
+        "data/agent_supervisor/deterministic_contract_repair/fixed-point.json",
+        "data/agent_supervisor/deterministic_contract_repair/live-conformance.json",
+        "external/ipfs_accelerate",
+        "swissknife"
+      ],
+      "runtime_model_calls": 0,
+      "schema": "ipfs_accelerate_py/agent-supervisor/dcr-drift-policy@1",
+      "task_id": "DCR-104",
+      "unchanged_scan_is_noop": true
+    },
+    "provider_calls": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "dcr_104_drift_monitor",
+      "no_auto_weaken",
+      "no_operator_semantics_from_scan",
+      "no_health_from_stale_receipts",
+      "release_roots_ok",
+      "two_unchanged_scans_noop",
+      "relevant_drift_reopens_affected",
+      "irrelevant_change_reuses_evidence",
+      "drift_monitor_passed"
+    ],
+    "release_id": "release:bbc8885b256879fb",
+    "runtime_model_calls": 0,
+    "scan_irrelevant": {
+      "change_root": "sha256:3a229a67d4d74183a5ec7ad5c2b313df1f53cb23700caa743453bb1c1dc8fb52",
+      "closure": {
+        "change_root": "sha256:3a229a67d4d74183a5ec7ad5c2b313df1f53cb23700caa743453bb1c1dc8fb52",
+        "changed_paths": [
+          "docs/unrelated-readme.md"
+        ],
+        "closure": [],
+        "content_id": "sha256:e50d0f3b09bd1d9359549a0631eb31457c0e7933e91914bc1b794971bdbbaa39",
+        "graph_edges": [],
+        "interface": "AffectedEvidenceClosure@1",
+        "required_live_probes": [],
+        "seed_evidence": []
+      },
+      "content_id": "sha256:e73beebb4b101ba19b5343f34bbda777857baa18a1cc340bd087aaa89a2dc816",
+      "invalidations": [],
+      "kind": "config",
+      "new_findings": [],
+      "noop": false,
+      "provider_calls": 0,
+      "runtime_model_calls": 0,
+      "scan_id": "scan:3a229a67d4d7",
+      "status_projection": {
+        "action": "invalidate_reopen",
+        "affected_count": "0",
+        "drift": "config"
+      }
+    },
+    "scan_relevant": {
+      "change_root": "sha256:fcc13c9802f1fe8e1da6fab0b5092cfdd6d8b53660bd55611e9fc2c4de1550ca",
+      "closure": {
+        "change_root": "sha256:fcc13c9802f1fe8e1da6fab0b5092cfdd6d8b53660bd55611e9fc2c4de1550ca",
+        "changed_paths": [
+          "config/deterministic_contract_repair_policy.json"
+        ],
+        "closure": [
+          "canary",
+          "policy",
+          "release"
+        ],
+        "content_id": "sha256:b30f6113e803621bc093efc9777f2fbc51c1ccb9eba47392af5b6446a5372b72",
+        "graph_edges": [
+          {
+            "from": "canary",
+            "kind": "depends_on",
+            "to": "policy"
+          },
+          {
+            "from": "release",
+            "kind": "depends_on",
+            "to": "canary"
+          },
+          {
+            "from": "release",
+            "kind": "depends_on",
+            "to": "policy"
+          }
+        ],
+        "interface": "AffectedEvidenceClosure@1",
+        "required_live_probes": [
+          "canary"
+        ],
+        "seed_evidence": [
+          "canary",
+          "policy",
+          "release"
+        ]
+      },
+      "content_id": "sha256:3a1e4af3343550e98a9bc6358c3da2ebdfedceb3f92e0acda72a757df5cb3b96",
+      "invalidations": [
+        {
+          "action": "require_live_probe",
+          "contract_weakened": false,
+          "evidence_id": "canary",
+          "health_from_stale_receipt": false,
+          "interface": "ProofInvalidation@1",
+          "operator_semantics_added": false,
+          "prior_cid": "sha256:b2c0d6464adc3de2fcd6f5e84f2fd9471ae4947b78023fa7e501d752a6021677",
+          "reason": "drift_affects_canary",
+          "reopened": true
+        },
+        {
+          "action": "invalidate",
+          "contract_weakened": false,
+          "evidence_id": "policy",
+          "health_from_stale_receipt": false,
+          "interface": "ProofInvalidation@1",
+          "operator_semantics_added": false,
+          "prior_cid": "sha256:75f8736d78f8ea7366f71a0d07a05e37df1e1e0bf723cce414494089835769ba",
+          "reason": "drift_affects_policy",
+          "reopened": false
+        },
+        {
+          "action": "invalidate",
+          "contract_weakened": false,
+          "evidence_id": "release",
+          "health_from_stale_receipt": false,
+          "interface": "ProofInvalidation@1",
+          "operator_semantics_added": false,
+          "prior_cid": null,
+          "reason": "drift_affects_release",
+          "reopened": true
+        }
+      ],
+      "kind": "config",
+      "new_findings": [
+        {
+          "evidence_id": "canary",
+          "finding_id": "drift:reopen:canary",
+          "status": "reopened"
+        },
+        {
+          "evidence_id": "release",
+          "finding_id": "drift:reopen:release",
+          "status": "reopened"
+        }
+      ],
+      "noop": false,
+      "provider_calls": 0,
+      "runtime_model_calls": 0,
+      "scan_id": "scan:fcc13c9802f1",
+      "status_projection": {
+        "action": "invalidate_reopen",
+        "affected_count": "3",
+        "drift": "config"
+      }
+    },
+    "scan_unchanged_a": {
+      "change_root": "sha256:e05674c979f7f6eaa78edd4c0ee955c9867d8e8042a598aa39a2762447b90f46",
+      "closure": {
+        "change_root": "sha256:e05674c979f7f6eaa78edd4c0ee955c9867d8e8042a598aa39a2762447b90f46",
+        "changed_paths": [],
+        "closure": [],
+        "content_id": "sha256:c49b41b233f24a4fd59d91735a0ab3cd554ddd1d0946e17c0c7c63f543b464f6",
+        "graph_edges": [],
+        "interface": "AffectedEvidenceClosure@1",
+        "required_live_probes": [],
+        "seed_evidence": []
+      },
+      "content_id": "sha256:a58de38c6da97ed6c94a9df576c9cb74f9f2359f910b940b240373e21fa46e13",
+      "invalidations": [],
+      "kind": "none",
+      "new_findings": [],
+      "noop": true,
+      "provider_calls": 0,
+      "runtime_model_calls": 0,
+      "scan_id": "scan:noop:f3013f933b9f",
+      "status_projection": {
+        "action": "noop",
+        "drift": "none"
+      }
+    },
+    "scan_unchanged_b": {
+      "change_root": "sha256:e05674c979f7f6eaa78edd4c0ee955c9867d8e8042a598aa39a2762447b90f46",
+      "closure": {
+        "change_root": "sha256:e05674c979f7f6eaa78edd4c0ee955c9867d8e8042a598aa39a2762447b90f46",
+        "changed_paths": [],
+        "closure": [],
+        "content_id": "sha256:c49b41b233f24a4fd59d91735a0ab3cd554ddd1d0946e17c0c7c63f543b464f6",
+        "graph_edges": [],
+        "interface": "AffectedEvidenceClosure@1",
+        "required_live_probes": [],
+        "seed_evidence": []
+      },
+      "content_id": "sha256:a58de38c6da97ed6c94a9df576c9cb74f9f2359f910b940b240373e21fa46e13",
+      "invalidations": [],
+      "kind": "none",
+      "new_findings": [],
+      "noop": true,
+      "provider_calls": 0,
+      "runtime_model_calls": 0,
+      "scan_id": "scan:noop:f3013f933b9f",
+      "status_projection": {
+        "action": "noop",
+        "drift": "none"
+      }
+    },
+    "task_id": "DCR-104"
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-drift-policy@1",
+  "task_id": "DCR-104",
+  "version": 1
+}

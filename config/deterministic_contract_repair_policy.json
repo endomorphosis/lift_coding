@@ -1,0 +1,41 @@
+{
+  "allowlisted_operators": [
+    "operator:report-only-ack@1",
+    "operator:fixture-align-mediation@1",
+    "operator:safety-kill-observe@1"
+  ],
+  "always_abstain_families": [
+    "ambiguous_anchors",
+    "cross_repo_semantics",
+    "migrations",
+    "policy_authority",
+    "unmodeled_effects",
+    "unsupported_logic"
+  ],
+  "apply_enabled": true,
+  "circuit_breaker": {
+    "max_apply_rate_per_window": 5,
+    "max_error_rate_denominator": 10,
+    "max_error_rate_numerator": 0,
+    "max_rollback_events": 1,
+    "review_window_repairs": 3
+  },
+  "content_id": "sha256:bb69a364fcd6cacb19ca1ac40db6bdaeb0b1fd81df6081c68943c8dcc9f62eca",
+  "interface": "DeterministicRepairPolicy@1",
+  "mode": "auto_safe",
+  "progression": [
+    "report_only",
+    "fixture_apply",
+    "auto_safe"
+  ],
+  "runtime_model_calls": 0,
+  "safety_floors": {
+    "false_completion": 0,
+    "mixed_root_publication": 0,
+    "model_calls": 0,
+    "provider_calls": 0,
+    "unauthorized_mutation": 0,
+    "unobserved_transition": 0
+  },
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-policy@1"
+}
