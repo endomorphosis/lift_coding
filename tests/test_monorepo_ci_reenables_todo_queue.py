@@ -77,7 +77,9 @@ def test_cig_wave_a_depends_only_on_bootstrap():
     tasks = {task.task_id: task for task in _load_tasks()}
     for task_id in WAVE_A:
         assert tasks[task_id].depends_on == ["CIG-000"], task_id
-        assert str(tasks[task_id].status).lower() == "todo"
+        # Wave A is sealed complete on the current monorepo tip; retain the
+        # dependency contract and allow completed|todo.
+        assert str(tasks[task_id].status).lower() in {"todo", "completed"}, task_id
 
 
 def test_cig_closeout_depends_on_all_work_items():
@@ -138,10 +140,20 @@ def test_supervisor_wrapper_lists_claimable_wave_a():
     assert result.returncode == 0, result.stderr
     payload = json.loads(result.stdout)
     claimable = set(payload["claimable_task_ids"])
-    for task_id in WAVE_A + WAVE_B:
+    tasks = {task.task_id: task for task in _load_tasks()}
+    open_wave = [
+        task_id
+        for task_id in WAVE_A + WAVE_B
+        if str(tasks[task_id].status).lower() == "todo"
+    ]
+    for task_id in open_wave:
         assert task_id in claimable
+    # Wave A is completed on the current tip; Wave B remains claimable.
+    for task_id in WAVE_B:
+        if str(tasks[task_id].status).lower() == "todo":
+            assert task_id in claimable
     assert CLOSEOUT not in claimable  # blocked until waves complete
-    assert payload["claimable_count"] >= len(WAVE_A)
+    assert payload["claimable_count"] >= len(open_wave)
     # No non-Makefile predicted_file overlaps among claimable tasks
     assert payload["predicted_file_overlap"] == [] or all(
         item["path"] == "Makefile" for item in payload["predicted_file_overlap"]

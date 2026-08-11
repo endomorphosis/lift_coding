@@ -304,6 +304,7 @@ def test_semantic_merge_resolver_uses_managed_automatic_provider_chain(
     assert fallback == [
         "/opt/codex/bin/codex",
         "exec",
+        "--ephemeral",
         "--dangerously-bypass-approvals-and-sandbox",
         "-C",
         ".",
@@ -390,6 +391,7 @@ def test_semantic_merge_resolver_keeps_router_owned_route_when_grok_is_unready(
     assert fallback == [
         "/opt/codex/bin/codex",
         "exec",
+        "--ephemeral",
         "--dangerously-bypass-approvals-and-sandbox",
         "-C",
         ".",
@@ -597,9 +599,9 @@ def test_board_validator_seals_current_78_task_authenticated_receipt_dag() -> No
 
     assert result["valid"] is True, result["errors"]
     assert result["task_count"] == 78
-    assert result["completed_task_count"] == 70
-    assert result["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
-    assert result["current_claimable_shards"] == [0, 1]
+    assert result["completed_task_count"] == 78
+    assert result["current_claimable_task_ids"] == []
+    assert result["current_claimable_shards"] == []
     assert result["initial_ready_task_ids"] == ["PTR-170"]
     assert result["initial_ready_shards"] == [2]
     assert result["authenticated_receipt_correction_task_ids"] == [
@@ -654,19 +656,11 @@ def test_board_validator_seals_current_78_task_authenticated_receipt_dag() -> No
     assert result["authenticated_receipt_output_replay_join_task_id"] == "PTR-167"
     assert result["authenticated_receipt_zero_config_e2e_join_task_id"] == "PTR-168"
     assert result["authenticated_receipt_handoff_task_id"] == "PTR-169"
-    assert result["historical_missing_output_count"] == 11
-    assert result["historical_missing_artifact_count"] == 11
+    assert result["historical_missing_output_count"] == 0
+    assert result["historical_missing_artifact_count"] == 0
     assert result["historical_missing_validation_only_paths"] == []
-    assert len(result["resolved_historical_artifact_paths"]) == 18
-    quarantine = result["historical_missing_artifact_quarantine"]
-    assert quarantine[
-        "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py"
-    ] == {
-        "owner_task_id": "PTR-171",
-        "owner_status": "todo",
-        "observed_owner_task_ids": ["PTR-171"],
-        "sources": ["output"],
-    }
+    assert len(result["resolved_historical_artifact_paths"]) == 29
+    assert result["historical_missing_artifact_quarantine"] == {}
     assert result["uncovered_historical_missing_artifact_paths"] == []
     assert result["multi_owned_historical_missing_artifact_paths"] == {}
     assert result["completed_owner_missing_historical_artifact_paths"] == {}
@@ -737,7 +731,7 @@ def test_ptr_163_contract_seals_exact_byte_native_v5_relation() -> None:
         if item.task_id == "PTR-163"
     )
 
-    assert task.status == "todo"
+    assert task.status == "completed"
     assert task.canonical_task_cid == (
         "baguqeerakxhhq45bn5sfpxumpzenosfkms3m273okr4i7hvosgkbq343etnq"
     )
@@ -789,7 +783,7 @@ def test_ptr_171_contract_seals_typed_ptr_160_v5_composition() -> None:
         if item.task_id == "PTR-171"
     )
 
-    assert task.status == "todo"
+    assert task.status == "completed"
     assert task.depends_on == ["PTR-160", "PTR-161", "PTR-163"]
     assert task.canonical_task_cid == (
         "baguqeerah3rdjn5g772shubj6spygs5vcgiioue37haq6e6fouhbhlmnmxfa"
@@ -830,7 +824,7 @@ def test_ptr_165_contract_rejects_synthetic_or_misbound_evidence() -> None:
         if item.task_id == "PTR-165"
     )
 
-    assert task.status == "todo"
+    assert task.status == "completed"
     assert task.canonical_task_cid == (
         "baguqeera6yv2kkmedurryjpozxdym72xt4to3r5vibrmxya74ffn525fkk4a"
     )
@@ -1091,20 +1085,22 @@ def test_board_validator_rejects_moving_resolved_path_to_arbitrary_task(
 def test_board_validator_fails_as_soon_as_gap_owner_completes(
     tmp_path: Path,
 ) -> None:
+    """Completed owners must keep quarantined historical artifacts tree-reachable."""
     validator = _load_validator_module()
     missing_path = "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py"
-
-    def complete_owner(block: str) -> str:
-        assert "- Status: todo" in block
-        return block.replace("- Status: todo", "- Status: completed", 1)
-
-    todo_path = _write_mutated_task_board(tmp_path, validator, "PTR-171", complete_owner)
-    result = validator.validate(
-        validator.OBJECTIVE_PATH,
-        todo_path,
-        validator.CONFIG_PATH,
-        validator.PLAN_PATH,
-    )
+    artifact = validator.REPO_ROOT / missing_path
+    assert artifact.is_file(), "G140 closeout requires PTR-171 outputs present"
+    backup = artifact.read_bytes()
+    artifact.unlink()
+    try:
+        result = validator.validate(
+            validator.OBJECTIVE_PATH,
+            validator.TODO_PATH,
+            validator.CONFIG_PATH,
+            validator.PLAN_PATH,
+        )
+    finally:
+        artifact.write_bytes(backup)
 
     assert result["valid"] is False
     assert result["completed_owner_missing_historical_artifact_paths"][missing_path] == "PTR-171"
@@ -1135,13 +1131,9 @@ def test_board_validator_accepts_resolved_ledger_paths_as_progress() -> None:
 def test_board_validator_accepts_repaired_audit_as_progressed_state(
     tmp_path: Path,
 ) -> None:
+    """Sealed G140 board remains valid with all historical artifacts resolved."""
     validator = _load_validator_module()
 
-    def complete_reopened_owner(block: str) -> str:
-        assert "- Status: todo" in block
-        return block.replace("- Status: todo", "- Status: completed", 1)
-
-    text = validator.TODO_PATH.read_text(encoding="utf-8")
     current = validator.validate(
         validator.OBJECTIVE_PATH,
         validator.TODO_PATH,
@@ -1149,10 +1141,23 @@ def test_board_validator_accepts_repaired_audit_as_progressed_state(
         validator.PLAN_PATH,
     )
     assert current["valid"] is True, current["errors"]
-    assert current["completed_task_count"] == 70
-    assert current["current_claimable_task_ids"] == ["PTR-163", "PTR-165"]
+    assert current["completed_task_count"] == 78
+    assert current["current_claimable_task_ids"] == []
+    assert current["completed_owner_missing_historical_artifact_paths"] == {}
+    assert len(current["resolved_historical_artifact_paths"]) == 29
+    assert current["historical_missing_artifact_count"] == 0
 
-    text = _mutate_task_block(text, "PTR-165", complete_reopened_owner)
+    # Reopen a leaf handoff owner (no completed dependents) so the board stays
+    # valid and the owner re-enters the claimable frontier.
+    def reopen(block: str) -> str:
+        if "- Status: completed" in block:
+            return block.replace("- Status: completed", "- Status: todo", 1)
+        if "- Status: done" in block:
+            return block.replace("- Status: done", "- Status: todo", 1)
+        raise AssertionError(f"expected completed owner status in block:\n{block[:200]}")
+
+    text = validator.TODO_PATH.read_text(encoding="utf-8")
+    text = _mutate_task_block(text, "PTR-169", reopen)
     todo_path = tmp_path / "progressed-todo.md"
     todo_path.write_text(text, encoding="utf-8")
 
@@ -1164,27 +1169,47 @@ def test_board_validator_accepts_repaired_audit_as_progressed_state(
     )
 
     assert result["valid"] is True, result["errors"]
-    assert result["completed_task_count"] == 71
-    assert result["current_claimable_task_ids"] == ["PTR-163"]
+    assert result["completed_task_count"] == 77
+    assert result["current_claimable_task_ids"] == ["PTR-169"]
     assert result["completed_owner_missing_historical_artifact_paths"] == {}
-    assert len(result["resolved_historical_artifact_paths"]) == 18
+    assert len(result["resolved_historical_artifact_paths"]) == 29
 
 
 def test_board_validator_orders_native_python_and_runtime_join(
     tmp_path: Path,
 ) -> None:
+    """Wave-B ordering remains stable when reopened on the sealed G140 board."""
     validator = _load_validator_module()
 
-    def complete(block: str) -> str:
-        assert "- Status: todo" in block
-        return block.replace("- Status: todo", "- Status: completed", 1)
+    def reopen(block: str) -> str:
+        if "- Status: completed" in block:
+            return block.replace("- Status: completed", "- Status: todo", 1)
+        if "- Status: done" in block:
+            return block.replace("- Status: done", "- Status: todo", 1)
+        raise AssertionError(f"expected completed status in block:\n{block[:200]}")
 
+    def complete(block: str) -> str:
+        if "- Status: todo" in block:
+            return block.replace("- Status: todo", "- Status: completed", 1)
+        raise AssertionError(f"expected todo status in block:\n{block[:200]}")
+
+    # Reopen wave-B and Python composition so the frontier can be observed.
     text = validator.TODO_PATH.read_text(encoding="utf-8")
+    for task_id in ("PTR-163", "PTR-165", "PTR-171", "PTR-164"):
+        text = _mutate_task_block(text, task_id, reopen)
+    todo_path = tmp_path / "wave-b-reopened.md"
+    todo_path.write_text(text, encoding="utf-8")
+    tasks = validator.parse_task_file(todo_path, "## PTR-")
+    completed = {task.task_id for task in tasks if task.status == "completed"}
+    claimable = sorted(
+        task.task_id
+        for task in tasks
+        if task.status == "todo" and set(task.depends_on).issubset(completed)
+    )
+    assert claimable == ["PTR-163", "PTR-165"]
+
     text = _mutate_task_block(text, "PTR-163", complete)
     text = _mutate_task_block(text, "PTR-165", complete)
-    # parse_task_file is pure; this test seals the dependency frontier without
-    # claiming that status-only mutations satisfy output evidence.
-    todo_path = tmp_path / "wave-b-completed.md"
     todo_path.write_text(text, encoding="utf-8")
     tasks = validator.parse_task_file(todo_path, "## PTR-")
     completed = {task.task_id for task in tasks if task.status == "completed"}
@@ -1205,6 +1230,7 @@ def test_board_validator_orders_native_python_and_runtime_join(
         if task.status == "todo" and set(task.depends_on).issubset(completed)
     )
     assert claimable == ["PTR-164"]
+
 
 
 def test_board_validator_rejects_an_unexpected_new_historical_gap(
@@ -1666,7 +1692,7 @@ def test_provider_preflight_rejects_codex_not_logged_in_status(
     from ipfs_accelerate_py import llm_router
 
     def fake_probe(
-        command: list[str], *, timeout_seconds: float
+        command: list[str], *, timeout_seconds: float, **_kwargs: object
     ) -> tuple[int | None, str, object | None]:
         assert timeout_seconds > 0
         if command[-2:] == ["login", "status"]:
@@ -1796,20 +1822,22 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
     assert inventory["task_count"] == 78
     assert inventory["goal_count"] == 15
     assert inventory["acceptance_requirement_count"] == 50
-    assert inventory["open_repair_task_ids"] == [
-        *[f"PTR-{task_id}" for task_id in range(163, 170)],
-        "PTR-171",
-    ]
+    assert inventory["open_repair_task_ids"] == []
     assert inventory["repair_task_status_is_completion_authority"] is False
     assert inventory["managed_merge_history"]["usable_candidate_count"] == 0
     by_name = {item["name"]: item for item in inventory["requirements"]}
     approvals = by_name["genuine_reviewed_approvals_without_queue_records"]
-    assert approvals["missing_ids"] == [
+    assert approvals["required_ids"] == [
         "PTR-000",
         "PTR-001",
         "PTR-011",
         "PTR-041",
     ]
+    assert approvals["required_count"] == 4
+    # Local tips may already retain historic approvals; CI runners start empty.
+    assert set(approvals["missing_ids"]).issubset(set(approvals["required_ids"]))
+    assert set(approvals["present_ids"]).issubset(set(approvals["required_ids"]))
+    assert len(approvals["present_ids"]) + len(approvals["missing_ids"]) == 4
     validations = by_name["fresh_current_tree_proof_reuse_off_validation_receipts"]
     assert validations["required_count"] == 78
     assert validations["present_count"] == 0
@@ -1848,10 +1876,7 @@ def test_closeout_input_inventory_enumerates_exact_unmaterialized_populations(
         "historical_ptr_122_or_v4_gate_is_authority": False,
     }
     assert activation["repair_task_ids"] == [f"PTR-{task_id}" for task_id in range(160, 172)]
-    assert activation["open_repair_task_ids"] == [
-        *[f"PTR-{task_id}" for task_id in range(163, 170)],
-        "PTR-171",
-    ]
+    assert activation["open_repair_task_ids"] == []
     assert activation["repair_task_status_is_completion_authority"] is False
     assert [wave["task_ids"] for wave in activation["required_implementation_sequence"]] == [
         ["PTR-160"],

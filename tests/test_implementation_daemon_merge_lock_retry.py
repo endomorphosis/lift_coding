@@ -92,6 +92,7 @@ def test_prior_attempted_merge_failure_abandons_reconciliation_candidate(tmp_pat
             "branch": "implementation/vai-214-attempt-1",
             "implementation_commit": implementation_commit,
             "resolved": False,
+            "reason": "stale_failed_merge_candidate",
             "merge_result": {
                 "merged": False,
                 "attempted": True,

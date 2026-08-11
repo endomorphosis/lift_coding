@@ -43,6 +43,7 @@ def test_launch_js_node_modules_are_linked_into_validation_worktrees(tmp_path):
         strategy_path=tmp_path / "strategy.json",
         events_path=tmp_path / "events.jsonl",
         repo_root=repo_root,
+        worktree_root=tmp_path,
     )
 
     daemon._link_shared_worktree_paths(worktree_path)
@@ -76,6 +77,7 @@ def test_self_looping_shared_node_modules_path_is_skipped(tmp_path):
         strategy_path=tmp_path / "strategy.json",
         events_path=tmp_path / "events.jsonl",
         repo_root=repo_root,
+        worktree_root=tmp_path,
     )
 
     daemon._link_shared_worktree_paths(worktree_path)
@@ -120,6 +122,7 @@ def test_submodule_worktree_add_retries_invalid_gitlink_ref(tmp_path, monkeypatc
         strategy_path=tmp_path / "strategy.json",
         events_path=tmp_path / "events.jsonl",
         repo_root=repo_root,
+        worktree_root=tmp_path,
     )
     bad_ref = "65d07e486d423b1349b6d26d865db46af3075179"
     calls = []
