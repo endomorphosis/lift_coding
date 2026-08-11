@@ -1,0 +1,99 @@
+{
+  "contract_graph": {
+    "edges": [
+      {
+        "from": "ui_action",
+        "kind": "binds",
+        "to": "orb_idl"
+      },
+      {
+        "from": "orb_idl",
+        "kind": "declares",
+        "to": "mcp_method"
+      },
+      {
+        "from": "mcp_method",
+        "kind": "routes",
+        "to": "handler"
+      }
+    ],
+    "graph_cid": "sha256:c892570622e7b85e0185969d8d7950ec0e783eb51681f4e5af22e0234b566037",
+    "interface": "SwissKnifeMcpContractGraph@1",
+    "live_conformance": false,
+    "nodes": [
+      {
+        "id": "ui_action",
+        "root": "swissknife",
+        "stage": "ui_action"
+      },
+      {
+        "id": "orb_idl",
+        "root": "swissknife",
+        "stage": "orb_idl"
+      },
+      {
+        "id": "mcp_method",
+        "root": "Mcp-Plus-Plus",
+        "stage": "mcp_method_schema"
+      },
+      {
+        "id": "handler",
+        "root": "external/ipfs_accelerate",
+        "stage": "handler"
+      }
+    ],
+    "runtime_model_calls": 0,
+    "snapshot_id": "snap:dcr090"
+  },
+  "evidence_id": "dcr/hermetic-conformance@1",
+  "interface": "HermeticConformance@1",
+  "live_conformance": false,
+  "report": {
+    "content_id": "sha256:fa822a6f3cddcd92de253e316b0cae97ef29cc50d6bcee63cc381241df4e49ca",
+    "counterexamples": [],
+    "interface": "HermeticConformance@1",
+    "live_conformance": false,
+    "mode": "monorepo",
+    "module_origins": {
+      "ipfs_accelerate_py": "external/ipfs_accelerate",
+      "mcp_plus_plus_spec": "Mcp-Plus-Plus",
+      "swissknife_connector": "swissknife/src/services/mcp/mcp-plus-plus-connector.ts"
+    },
+    "profile_matrix": {
+      "families": [
+        "initialize",
+        "tools/list",
+        "tools/call",
+        "logic",
+        "policy"
+      ],
+      "live_required_for_green": true,
+      "profiles": [
+        "mcp++/default",
+        "mcp++/logic",
+        "mcp++/experimental"
+      ],
+      "protocol": "2024-11-05"
+    },
+    "reason_codes": [
+      "hermetic_fixture",
+      "runtime_model_calls_0",
+      "structural_roots_present",
+      "live_conformance_false"
+    ],
+    "roots_missing": [],
+    "roots_present": [
+      "external/ipfs_accelerate",
+      "external/ipfs_datasets",
+      "external/ipfs_kit",
+      "Mcp-Plus-Plus",
+      "swissknife"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-hermetic-conformance@1",
+    "structural_ok": true
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-hermetic-conformance@1",
+  "version": 1
+}

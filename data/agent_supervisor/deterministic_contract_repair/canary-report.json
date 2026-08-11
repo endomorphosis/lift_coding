@@ -1,0 +1,160 @@
+{
+  "evidence_id": "dcr/canary-admission@1",
+  "interface": "CanaryReport@1",
+  "policy_path": "config/deterministic_contract_repair_policy.json",
+  "provider_calls": 0,
+  "result": {
+    "admission": {
+      "admitted": true,
+      "circuit_breaker": {
+        "applies": 3,
+        "errors": 0,
+        "reason": "closed",
+        "rollbacks": 1,
+        "tripped": false
+      },
+      "content_id": "sha256:93a0d75f3c3c3e589ad39e95042a8ddcedf38d0d5f85197c84b22b05ddfb6d5d",
+      "interface": "AutoSafeAdmission@1",
+      "mode": "auto_safe",
+      "policy_root": "sha256:0b131ef1f78ad8825d0859a577aa0d892586efdb0c4e01fd347eeead81ae24ec",
+      "reason_codes": [
+        "auto_safe",
+        "allowlist_enforced",
+        "always_abstain_enforced"
+      ],
+      "repairs": [
+        {
+          "admitted": true,
+          "applied": true,
+          "branch": "canary/dcr-102-fixture-01",
+          "cross_repo": false,
+          "family": "fixture_mediation",
+          "operator": "operator:fixture-align-mediation@1",
+          "reason": "fixture_applied",
+          "repair_id": "canary:repair:01",
+          "rolled_back": false
+        },
+        {
+          "admitted": true,
+          "applied": true,
+          "branch": "canary/dcr-102-fixture-02",
+          "cross_repo": false,
+          "family": "ack",
+          "operator": "operator:report-only-ack@1",
+          "reason": "applied_then_rollback_drill",
+          "repair_id": "canary:repair:02",
+          "rolled_back": true
+        },
+        {
+          "admitted": true,
+          "applied": true,
+          "branch": "canary/dcr-102-fixture-03",
+          "cross_repo": false,
+          "family": "safety_observe",
+          "operator": "operator:safety-kill-observe@1",
+          "reason": "fixture_applied",
+          "repair_id": "canary:repair:03",
+          "rolled_back": false
+        },
+        {
+          "admitted": false,
+          "applied": false,
+          "branch": "canary/dcr-102-fixture-04",
+          "cross_repo": false,
+          "family": "cross_repo_semantics",
+          "operator": "operator:cross-repo-rewrite@1",
+          "reason": "always_abstain_family",
+          "repair_id": "canary:repair:04",
+          "rolled_back": false
+        },
+        {
+          "admitted": false,
+          "applied": false,
+          "branch": "canary/dcr-102-fixture-05",
+          "cross_repo": false,
+          "family": "migrations",
+          "operator": "operator:authority-migration@1",
+          "reason": "always_abstain_family",
+          "repair_id": "canary:repair:05",
+          "rolled_back": false
+        }
+      ],
+      "review_window_ok": true,
+      "rollback_drill_ok": true,
+      "runtime_model_calls": 0,
+      "safety_floors_held": true
+    },
+    "benchmark_precondition_ok": true,
+    "content_id": "sha256:2da73ca1394c942f240d36cdffb16294da27907b9b4fafd98768e8f322385a41",
+    "evidence_id": "dcr/canary-admission@1",
+    "interface": "CanaryReport@1",
+    "mode_transitions": [
+      "start:report_only",
+      "advance:fixture_apply",
+      "advance:auto_safe"
+    ],
+    "passed": true,
+    "policy": {
+      "allowlisted_operators": [
+        "operator:report-only-ack@1",
+        "operator:fixture-align-mediation@1",
+        "operator:safety-kill-observe@1"
+      ],
+      "always_abstain_families": [
+        "ambiguous_anchors",
+        "cross_repo_semantics",
+        "migrations",
+        "policy_authority",
+        "unmodeled_effects",
+        "unsupported_logic"
+      ],
+      "apply_enabled": true,
+      "circuit_breaker": {
+        "max_apply_rate_per_window": 5,
+        "max_error_rate_denominator": 10,
+        "max_error_rate_numerator": 0,
+        "max_rollback_events": 1,
+        "review_window_repairs": 3
+      },
+      "content_id": "sha256:bb69a364fcd6cacb19ca1ac40db6bdaeb0b1fd81df6081c68943c8dcc9f62eca",
+      "interface": "DeterministicRepairPolicy@1",
+      "mode": "auto_safe",
+      "progression": [
+        "report_only",
+        "fixture_apply",
+        "auto_safe"
+      ],
+      "runtime_model_calls": 0,
+      "safety_floors": {
+        "false_completion": 0,
+        "mixed_root_publication": 0,
+        "model_calls": 0,
+        "provider_calls": 0,
+        "unauthorized_mutation": 0,
+        "unobserved_transition": 0
+      },
+      "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-policy@1"
+    },
+    "provider_calls": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "dcr_102_canary",
+      "isolated_canary_branches_only",
+      "shadow_thresholds_ok",
+      "benchmark_safety_floors_ok",
+      "rollback_restart_drill_ok",
+      "auto_safe_admitted",
+      "canary_passed"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-canary-report@1",
+    "shadow_precondition_ok": true,
+    "task_id": "DCR-102",
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-canary-report@1",
+  "task_id": "DCR-102",
+  "version": 1
+}

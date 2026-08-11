@@ -1,0 +1,140 @@
+{
+  "evidence_id": "dcr/deterministic-repair-release@1",
+  "interface": "DeterministicRepairRelease@1",
+  "provider_calls": 0,
+  "result": {
+    "auto_safe_boundary": "auto_safe",
+    "compatibility_claims": {
+      "adversarial_kill_score": true,
+      "canary_auto_safe": true,
+      "claim_scope": "live_and_reconstructed_evidence_only",
+      "desktop_e2e": true,
+      "exceeds_live_evidence": false,
+      "fixed_point": true,
+      "live_three_service": true,
+      "shadow_report_only": true
+    },
+    "content_id": "sha256:da2c6fed624c0702747c439dbc56c05ff1f9f045d6cfca1ad2ba109ba923f15d",
+    "evidence_cids": {
+      "adversarial": "sha256:8bdddab2dd92fcc90fd98f0b1b063d719ffa0dae6728f332137fc0d0cd9dd373",
+      "benchmark": "sha256:128b7c6614ab8a8124cec61214bd18426803c9b560bb56b9e68f844fc5032775",
+      "canary": "sha256:b2c0d6464adc3de2fcd6f5e84f2fd9471ae4947b78023fa7e501d752a6021677",
+      "desktop_e2e": "sha256:2b83eaa1a01f9ba9019649818f8a5566f3181181ad8e06c83b763356d4c04c13",
+      "fixed_point": "sha256:151fc53e9876ea2b1d59ba43956aaaa79a8f579798a442b86cb2dd7efb477645",
+      "hermetic_conformance": "sha256:e8d69f0142aeb4777ccd8b149bf0cabcdf8f82fbf004e3a59b0ba57f4928c619",
+      "live_conformance": "sha256:dbd6b14479cf6531c8d15c1b973786897ccc1671216fb91cb7f990fc7c7a7c3f",
+      "policy": "sha256:75f8736d78f8ea7366f71a0d07a05e37df1e1e0bf723cce414494089835769ba",
+      "shadow": "sha256:2fe712da3c80383c80794cb0765d204d33a6db8b6d4e2278e58d75d37de6a793"
+    },
+    "evidence_id": "dcr/deterministic-repair-release@1",
+    "interface": "DeterministicRepairRelease@1",
+    "operator_policy": {
+      "allowlisted_operators": [
+        "operator:report-only-ack@1",
+        "operator:fixture-align-mediation@1",
+        "operator:safety-kill-observe@1"
+      ],
+      "always_abstain_families": [
+        "ambiguous_anchors",
+        "cross_repo_semantics",
+        "migrations",
+        "policy_authority",
+        "unmodeled_effects",
+        "unsupported_logic"
+      ],
+      "auto_safe_boundary": "auto_safe",
+      "content_id": "sha256:7d3421402fd9b7eeb16c537be99af02f66d81174beb7a5f387cc7deed890acb5",
+      "interface": "OperatorPolicyRoot@1",
+      "mode": "auto_safe",
+      "policy_path": "config/deterministic_contract_repair_policy.json",
+      "policy_sha256": "sha256:75f8736d78f8ea7366f71a0d07a05e37df1e1e0bf723cce414494089835769ba"
+    },
+    "passed": true,
+    "pins": {
+      "Mcp-Plus-Plus": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+      "bootstrap_seal": "config/deterministic_contract_repair_bootstrap_seal.json",
+      "bootstrap_seal_sha256": "sha256:2d855d7db8e2e399624c353db40246e79c821b93e7805f55f1b2baa4182ae4e1",
+      "fixed_point_epoch": "sha256:2a9cfc8a07b1cb90ca6d100d3b28eded65e7beff5407df7bf7f27cfeec231a3e",
+      "ipfs_accelerate": "5458255b9d0123c24848ca286b2cf549e26e0b87",
+      "ipfs_datasets": "c330a601364e3fb760db34f98195b506a63f1f26",
+      "ipfs_kit": "ea3b47b72090354c27a9826d14a260d76b5e6914",
+      "monorepo_head": "2e422fa97423c118627956b31116352edd12e042",
+      "policy": "config/deterministic_contract_repair_policy.json",
+      "policy_sha256": "sha256:75f8736d78f8ea7366f71a0d07a05e37df1e1e0bf723cce414494089835769ba",
+      "scheduler": "config/deterministic_swissknife_mcplusplus_repair_scheduler.json",
+      "scheduler_sha256": "sha256:44a475f019df8ea8205de2c0a9e4350db59215bdb512edaa1047a952a184134f",
+      "services_manifest": "config/deterministic_contract_repair_services.json",
+      "services_manifest_sha256": "sha256:ee7d4c843aad60af87895ac962623b249eb0b844f0cf15656973eb83a8ae9f2e",
+      "swissknife": "1e2021cae2eafcb1d546be3b99fbdb4bc5a36256"
+    },
+    "provider_calls": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "dcr_103_release",
+      "no_untracked_implementation_dependency",
+      "canary_and_safety_floors_ok",
+      "pins_recorded",
+      "evidence_cids_bound",
+      "unresolved_typed_named",
+      "auto_safe_boundary_named",
+      "compatibility_within_live_evidence",
+      "release_passed"
+    ],
+    "release_id": "release:7bffac45912b7c09",
+    "review_decisions": [
+      {
+        "authority": "reviewed",
+        "decision_id": "review:auto-safe-boundary",
+        "summary": "Auto-safe boundary pinned at auto_safe"
+      },
+      {
+        "authority": "reviewed",
+        "decision_id": "review:unresolved-residuals",
+        "summary": "Unsupported/review-required residuals remain open (not repaired)"
+      },
+      {
+        "authority": "reviewed",
+        "decision_id": "review:zero-llm",
+        "summary": "Release verification enforces zero model/provider calls"
+      }
+    ],
+    "rollback_procedure": {
+      "never_auto_weaken_contracts": true,
+      "step_1": "Set policy mode to report_only and apply_enabled=false.",
+      "step_2": "Restore config/deterministic_contract_repair_policy.json from release policy_sha256.",
+      "step_3": "Re-run fixed-point, benchmark, shadow, and canary verifiers.",
+      "step_4": "Re-admit auto_safe only after safety floors hold for a full review window."
+    },
+    "runbook_path": "implementation_plan/docs/deterministic-contract-repair-operations.md",
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-deterministic-repair-release@1",
+    "task_id": "DCR-103",
+    "toolchain": {
+      "executable": "/usr/bin/python3",
+      "platform": "Linux-6.17.0-1014-nvidia-aarch64-with-glibc2.39",
+      "python": "3.12.3",
+      "python_implementation": "CPython"
+    },
+    "unresolved_typed": [
+      {
+        "canonical_key": "residual/review-required-authority-pin",
+        "finding_id": "finding:residual-review-authority-pin",
+        "status": "review_required",
+        "summary": "Authority pin rotation requires human review"
+      },
+      {
+        "canonical_key": "residual/unsupported-profile-g",
+        "finding_id": "finding:residual-unsupported-profile-g",
+        "status": "unsupported",
+        "summary": "MCP++ profile G remains typed unsupported"
+      }
+    ],
+    "untracked_implementation_dependencies": [],
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-deterministic-repair-release@1",
+  "task_id": "DCR-103",
+  "version": 1
+}

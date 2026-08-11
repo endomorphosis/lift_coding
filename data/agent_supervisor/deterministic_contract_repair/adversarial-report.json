@@ -1,0 +1,505 @@
+{
+  "evidence_id": "dcr/adversarial-conformance@1",
+  "interface": "AdversarialConformance@1",
+  "provider_calls": 0,
+  "result": {
+    "authority_suite": {
+      "all_killed": true,
+      "content_id": "sha256:0223d5d0c7b5638c90f1376510d2065639a5e6e8c5b5880974732472d3fc21f4",
+      "interface": "AuthorityMutationSuite@1",
+      "outcomes": [
+        {
+          "actual_disposition": "reject",
+          "content_id": "sha256:9dc42898a0ba677237efee8285c1cd48700e62c5e817aaa2acff9294f3889e95",
+          "detail": {
+            "disposition": "reject",
+            "grants_completion": false,
+            "grants_mutation": false,
+            "reason": "pseudo_cid_rejected"
+          },
+          "disposition": "killed",
+          "expected_disposition": "reject",
+          "family": "bad_cid",
+          "killed": true,
+          "mutation_id": "mut:bad-cid",
+          "provider_calls": 0,
+          "runtime_model_calls": 0
+        },
+        {
+          "actual_disposition": "reject",
+          "content_id": "sha256:16ab6c447c2a9e4ea988d4b25beada611e97ec070034f34fd62db86069c4859b",
+          "detail": {
+            "disposition": "reject",
+            "disposition_value": "preview_ready",
+            "grants_completion": false,
+            "grants_mutation": false,
+            "reason": "proposal_only_no_write_authority"
+          },
+          "disposition": "killed",
+          "expected_disposition": "reject",
+          "family": "bad_receipt",
+          "killed": true,
+          "mutation_id": "mut:bad-receipt",
+          "provider_calls": 0,
+          "runtime_model_calls": 0
+        },
+        {
+          "actual_disposition": "reject",
+          "content_id": "sha256:bf7dcd11a6209055ec57a726550137a21f0bd60c5854214a5a03784a6e98be1f",
+          "detail": {
+            "disposition": "reject",
+            "grants_completion": false,
+            "grants_mutation": false,
+            "reason": "mixed_roots_rejected"
+          },
+          "disposition": "killed",
+          "expected_disposition": "reject",
+          "family": "mixed_roots",
+          "killed": true,
+          "mutation_id": "mut:mixed-roots",
+          "provider_calls": 0,
+          "runtime_model_calls": 0
+        },
+        {
+          "actual_disposition": "reject",
+          "content_id": "sha256:df172a8cc85167dab20f38fd27eac6523c2d0d3b9200b06b4248cb30ab28e23e",
+          "detail": {
+            "disposition": "reject",
+            "grants_completion": false,
+            "grants_mutation": false,
+            "reason": "stale_authority_span"
+          },
+          "disposition": "killed",
+          "expected_disposition": "reject",
+          "family": "stale_span",
+          "killed": true,
+          "mutation_id": "mut:stale-span",
+          "provider_calls": 0,
+          "runtime_model_calls": 0
+        },
+        {
+          "actual_disposition": "reject",
+          "content_id": "sha256:e65bebe7fc8b6a36f293c9334550bdce03300045f9fe0fa353e035980c8f2dce",
+          "detail": {
+            "disposition": "reject",
+            "grants_completion": false,
+            "grants_mutation": false,
+            "live_conformance": false,
+            "reason": "live_conformance_claim_rejected"
+          },
+          "disposition": "killed",
+          "expected_disposition": "reject",
+          "family": "forged_evidence",
+          "killed": true,
+          "mutation_id": "mut:forged-evidence",
+          "provider_calls": 0,
+          "runtime_model_calls": 0
+        },
+        {
+          "actual_disposition": "reject",
+          "content_id": "sha256:1f92e2b6b3d56206fd877b340232d5a4b31b38e741c749d8ec727f600d30e120",
+          "detail": {
+            "disposition": "reject",
+            "grants_completion": false,
+            "grants_mutation": false,
+            "reason": "mock_echo_rejected"
+          },
+          "disposition": "killed",
+          "expected_disposition": "reject",
+          "family": "synthetic_evidence",
+          "killed": true,
+          "mutation_id": "mut:synthetic-evidence",
+          "provider_calls": 0,
+          "runtime_model_calls": 0
+        }
+      ],
+      "reason_codes": [
+        "authority_axis_killed"
+      ]
+    },
+    "content_id": "sha256:ee67a85a38be25a13d553259d2a719fc46cceb012e9f6336fde84a0de1a33a55",
+    "evidence_id": "dcr/adversarial-conformance@1",
+    "interface": "AdversarialConformance@1",
+    "killed_survivor_matrix": {
+      "mut:bad-cid": "killed",
+      "mut:bad-receipt": "killed",
+      "mut:bad-schema": "killed",
+      "mut:crash": "killed",
+      "mut:forged-evidence": "killed",
+      "mut:lease-race": "killed",
+      "mut:malformed-envelope": "killed",
+      "mut:mixed-roots": "killed",
+      "mut:overclaimed-capability": "killed",
+      "mut:policy-outage": "killed",
+      "mut:provider-tripwire": "killed",
+      "mut:raw-proxy-mutation": "killed",
+      "mut:stale-span": "killed",
+      "mut:synthetic-evidence": "killed",
+      "mut:unknown-completion": "killed",
+      "mut:wrong-id": "killed",
+      "mut:wrong-status": "killed",
+      "mut:wrong-version": "killed"
+    },
+    "mutation_score": {
+      "content_id": "sha256:279aef6ae1b93bec79a71701640cf35dee85b7f576baef767df19cd10b122a8b",
+      "errors": 0,
+      "interface": "MutationScore@1",
+      "killed": 18,
+      "perfect": true,
+      "reason_codes": [
+        "perfect_kill_score"
+      ],
+      "score": 1.0,
+      "score_denominator": 18,
+      "score_numerator": 18,
+      "survived": 0,
+      "total": 18
+    },
+    "outcomes": [
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:30b0f76c13a3ad17a9eeae07a1aaba6efc9a854aa0fb6b7fd10d256fc3f8dbf7",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "malformed_jsonrpc_envelope"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "malformed_envelope",
+        "killed": true,
+        "mutation_id": "mut:malformed-envelope",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:427a68627fe6d26d2a8cbdcdde1938105345fa315eff7505ece03b60af4496db",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "transport_error_empty_success"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "wrong_status",
+        "killed": true,
+        "mutation_id": "mut:wrong-status",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:63948ae9c04199c789f4f193585e932bd1528ed737993a544e8e09906fe33634",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "response_id_mismatch"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "wrong_id",
+        "killed": true,
+        "mutation_id": "mut:wrong-id",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:670b598a6fe447ac689dd6b6ca4310142ba201516c5682fc5d34a67e2c05341e",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "protocol_version_forged"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "wrong_version",
+        "killed": true,
+        "mutation_id": "mut:wrong-version",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:b52aceba7efb39b1d611b64515628ee7f165a4197e3f97781b027ac642078a1f",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "overclaim_attempted": true,
+          "reason": "health_only_not_available"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "overclaimed_capability",
+        "killed": true,
+        "mutation_id": "mut:overclaimed-capability",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:9dc42898a0ba677237efee8285c1cd48700e62c5e817aaa2acff9294f3889e95",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "pseudo_cid_rejected"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "bad_cid",
+        "killed": true,
+        "mutation_id": "mut:bad-cid",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "error",
+        "content_id": "sha256:664b59618b370b12ff2ff765ad0173da378e36cc45ac5c0794baee7c527db361",
+        "detail": {
+          "disposition": "error",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "allow_raw_proxy_mutations must remain false"
+        },
+        "disposition": "killed",
+        "expected_disposition": "error",
+        "family": "bad_schema",
+        "killed": true,
+        "mutation_id": "mut:bad-schema",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:16ab6c447c2a9e4ea988d4b25beada611e97ec070034f34fd62db86069c4859b",
+        "detail": {
+          "disposition": "reject",
+          "disposition_value": "preview_ready",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "proposal_only_no_write_authority"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "bad_receipt",
+        "killed": true,
+        "mutation_id": "mut:bad-receipt",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:0aa8343bbee76d4343eaed0419290fd3892ee09dc8f7f583a35a8606190659eb",
+        "detail": {
+          "disposition": "reject",
+          "disposition_value": "abstain",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "missing_reviewed_mediation"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "policy_outage",
+        "killed": true,
+        "mutation_id": "mut:policy-outage",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:bf7dcd11a6209055ec57a726550137a21f0bd60c5854214a5a03784a6e98be1f",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "mixed_roots_rejected"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "mixed_roots",
+        "killed": true,
+        "mutation_id": "mut:mixed-roots",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:df172a8cc85167dab20f38fd27eac6523c2d0d3b9200b06b4248cb30ab28e23e",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "stale_authority_span"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "stale_span",
+        "killed": true,
+        "mutation_id": "mut:stale-span",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:947dba09e6d2ec2875443dd44ab60fdb4d4685ee91ea68fcc502238968503b02",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "holders": [
+            "lane-0:DCR-093",
+            "lane-6:DCR-093"
+          ],
+          "reason": "lease_race_rejected"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "lease_race",
+        "killed": true,
+        "mutation_id": "mut:lease-race",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "error",
+        "content_id": "sha256:3ae0d5c26cbff795326812c4ceb4cf2aa0b32c74973014e18d4560053b81d268",
+        "detail": {
+          "disposition": "error",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "mid_repair_crash_no_receipt"
+        },
+        "disposition": "killed",
+        "expected_disposition": "error",
+        "family": "crash",
+        "killed": true,
+        "mutation_id": "mut:crash",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:e65bebe7fc8b6a36f293c9334550bdce03300045f9fe0fa353e035980c8f2dce",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "live_conformance": false,
+          "reason": "live_conformance_claim_rejected"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "forged_evidence",
+        "killed": true,
+        "mutation_id": "mut:forged-evidence",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:1f92e2b6b3d56206fd877b340232d5a4b31b38e741c749d8ec727f600d30e120",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "mock_echo_rejected"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "synthetic_evidence",
+        "killed": true,
+        "mutation_id": "mut:synthetic-evidence",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:5bc6092c584fb2c4f6c2b89a58adabe431040da2b4fc7af8392cfb1e8a63ba89",
+        "detail": {
+          "disposition": "reject",
+          "governed_route": "/mcp/tools/call",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "mutation_requires_governed_mediator"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "raw_proxy_mutation",
+        "killed": true,
+        "mutation_id": "mut:raw-proxy-mutation",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:c08e14790734181ca1932d3518db87428aa873c946ddce8fc1afb42f1669e8bb",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "reason": "jsonrpc_method_not_allowlisted"
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "unknown_completion",
+        "killed": true,
+        "mutation_id": "mut:unknown-completion",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      },
+      {
+        "actual_disposition": "reject",
+        "content_id": "sha256:1c3a83d2d9ee39d046baf175053c738037c61228e2606d99c68e639957127109",
+        "detail": {
+          "disposition": "reject",
+          "grants_completion": false,
+          "grants_mutation": false,
+          "killed_because_zero": true,
+          "provider_calls": 0,
+          "reason": "tripwires_untouched",
+          "runtime_model_calls": 0
+        },
+        "disposition": "killed",
+        "expected_disposition": "reject",
+        "family": "provider_tripwire",
+        "killed": true,
+        "mutation_id": "mut:provider-tripwire",
+        "provider_calls": 0,
+        "runtime_model_calls": 0
+      }
+    ],
+    "passed": true,
+    "positive_control_ok": true,
+    "provider_calls": 0,
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "provider_calls_0",
+      "fixture_only_mutations",
+      "dcr_093_adversarial",
+      "positive_control_desktop_e2e_ok",
+      "rollback_verification_ok",
+      "no_unknown_grants_mutation_or_completion",
+      "adversarial_conformance_passed"
+    ],
+    "rollback_verification": {
+      "epoch_after": "baguqeeracabziqfdsiidmgvcmctepabgcn462mjbzqguxvdt4ter724rhmka",
+      "epoch_before": "baguqeeraudwxylxcbs7qusu3pbkflzeu6sx3evhaucspdmt65vxgicircwgq",
+      "verified": true
+    },
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-adversarial-report@1",
+    "task_id": "DCR-093",
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-adversarial-report@1",
+  "task_id": "DCR-093",
+  "version": 1
+}

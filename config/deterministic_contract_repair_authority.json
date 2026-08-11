@@ -1,0 +1,14 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-authority-policy@1",
+  "interface": "DeterministicRepairAuthorityPolicy@1",
+  "runtime": "target_repair_runtime",
+  "pin_strategy": "verified_capability_receipt_ids",
+  "local_logic_pins": [],
+  "prover_subprocess_pins": [],
+  "loopback_mcp_pins": [],
+  "model_call_budget": 0,
+  "llm_call_budget": 0,
+  "remote_provider_call_budget": 0,
+  "network_policy": "deny_except_explicit_loopback",
+  "model_or_remote_fallback_authorized": false
+}
