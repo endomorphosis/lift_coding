@@ -10,7 +10,6 @@ from pathlib import Path
 
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts/proof_backed_test_reuse_task_evidence.py"
 SPEC = importlib.util.spec_from_file_location("task_evidence", SCRIPT)
