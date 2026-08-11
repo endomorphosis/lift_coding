@@ -268,7 +268,7 @@ for other screens, but no task may expand into optimizing every application.
 - Preconditions: VGO-002 produces stable source findings with spans and confidence.
 - Effects: Compiles renders, contains, routes_to, opens/closes_dialog, updates/reads_state, submits, validates, invokes_action, requires_confirmation, policy/schema/style/token/localization/test/screenshot/responsive/device edges.
 - Evidence subset: Typed relation vectors, source-span fixtures, confidence and extractor-version assertions
-- Acceptance: Every edge has source/target logical identity, finite relation, extraction method, confidence, extractor version and available span; unsupported targets remain unresolved rather than invented.
+- Acceptance: Every edge has source/target logical identity, finite relation, extraction method, confidence, extractor version and available span; unsupported targets remain unresolved rather than invented; the graph validation and completion receipt bind the exact accepted VGO-002 task CID and current scanner wire schema, so rescued output produced against a superseded scanner revision is never completion evidence.
 
 ## VGO-012 Build standalone GUI semantic capsules
 
