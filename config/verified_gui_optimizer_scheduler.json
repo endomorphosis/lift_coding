@@ -1,0 +1,309 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.verified_gui_optimizer.scheduler_config@1",
+  "taskboard_path": "implementation_plan/docs/49-verified-gui-optimizer.todo.md",
+  "objectives_path": "implementation_plan/docs/49-verified-gui-optimizer.objectives.md",
+  "plan_path": "implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md",
+  "validator_path": "scripts/validate_verified_gui_optimizer_board.py",
+  "task_prefix": "VGO-",
+  "goal_prefix": "VGO-G",
+  "board_namespace": "verified-gui-optimizer-v1",
+  "merge_target_branch": "feature/verified-gui-optimizer",
+  "source_binding": {
+    "accelerator_required_ancestor": "ce448eae6ab5706832d3ae88b041f9d38ac82ae8",
+    "accelerator_required_branch": "feature/verified-gui-optimizer",
+    "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
+    "ipfs_accelerate_planning_revision": "4784c932f87aafbd949714c05439836ab0f446a7",
+    "ipfs_datasets_submodule_path": "external/ipfs_datasets",
+    "ipfs_datasets_planning_revision": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+    "swissknife_submodule_path": "swissknife",
+    "swissknife_planning_revision": "26f06277888b09a3e7c9b4a3b844001f1dbc0841",
+    "require_initialized_gitlinks": true,
+    "require_superproject_gitlink_equals_nested_head": true,
+    "require_clean_nested_worktree_at_task_start": true,
+    "record_recursive_repository_forest_at_launch": true,
+    "changed_revision_requires_fresh_inventory_and_baseline": true,
+    "planning_revision_is_runtime_completion_evidence": false
+  },
+  "initial_projection": {
+    "task_count": 42,
+    "completed_task_ids": [
+      "VGO-000"
+    ],
+    "ready_task_ids": [
+      "VGO-001",
+      "VGO-002",
+      "VGO-009"
+    ],
+    "blocked_task_ids": [],
+    "terminal_task_id": "VGO-099",
+    "goal_count": 12,
+    "root_goal_id": "VGO-G000"
+  },
+  "max_lanes": 4,
+  "strict_task_sharding": true,
+  "exit_when_all_tracks_terminal": true,
+  "objective_refill_enabled": false,
+  "codebase_refill_enabled": false,
+  "retry_budget_guardrail_enabled": false,
+  "dependency_guardrail_enabled": false,
+  "reconciliation_guardrail_enabled": false,
+  "poll_interval_seconds": 5,
+  "daemon_interval_seconds": 30,
+  "check_interval_seconds": 20,
+  "stale_seconds": 900,
+  "watchdog_startup_grace_seconds": 300,
+  "max_restarts": 3,
+  "max_task_attempts": 3,
+  "implementation_retry_budget": 3,
+  "validation_retry_budget": 3,
+  "merge_retry_budget": 3,
+  "implementation_timeout_seconds": 7200,
+  "implementation_max_timeout_seconds": 14400,
+  "implementation_log_stall_seconds": 600,
+  "worktree_submodule_paths": [
+    "external/ipfs_accelerate",
+    "external/ipfs_datasets",
+    "swissknife"
+  ],
+  "protected_paths": [
+    "implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md",
+    "implementation_plan/docs/49-verified-gui-optimizer.objectives.md",
+    "implementation_plan/docs/49-verified-gui-optimizer.todo.md",
+    "config/verified_gui_optimizer_scheduler.json",
+    "scripts/validate_verified_gui_optimizer_board.py",
+    "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+    "scripts/ops/verified_gui_optimizer_status.py"
+  ],
+  "runtime_paths": {
+    "root": "data/agent_supervisor/verified_gui_optimizer",
+    "state": "data/agent_supervisor/verified_gui_optimizer/state",
+    "worktrees": "data/agent_supervisor/verified_gui_optimizer/worktrees",
+    "merge_queue": "data/agent_supervisor/verified_gui_optimizer/merge-queue",
+    "logs": "data/agent_supervisor/verified_gui_optimizer/logs",
+    "evidence": "data/agent_supervisor/verified_gui_optimizer/evidence",
+    "generated_runtime_artifacts_are_completion_authority": false
+  },
+  "lanes": [
+    {
+      "index": 0,
+      "name": "vgo-lane-0",
+      "strict_shard_remainder": 0,
+      "initial_task_ids": [
+        "VGO-002"
+      ],
+      "initial_focus": "scanner-and-static-analysis"
+    },
+    {
+      "index": 1,
+      "name": "vgo-lane-1",
+      "strict_shard_remainder": 1,
+      "initial_task_ids": [
+        "VGO-001"
+      ],
+      "initial_focus": "contracts-and-identities"
+    },
+    {
+      "index": 2,
+      "name": "vgo-lane-2",
+      "strict_shard_remainder": 2,
+      "initial_task_ids": [
+        "VGO-003"
+      ],
+      "initial_focus": "browser-evidence-and-fixtures"
+    },
+    {
+      "index": 3,
+      "name": "vgo-lane-3",
+      "strict_shard_remainder": 3,
+      "initial_task_ids": [
+        "VGO-009"
+      ],
+      "initial_focus": "sealed-baseline-and-security-boundary"
+    }
+  ],
+  "waves": [
+    {
+      "index": 0,
+      "task_ids": [
+        "VGO-000"
+      ]
+    },
+    {
+      "index": 1,
+      "task_ids": [
+        "VGO-001",
+        "VGO-002",
+        "VGO-009"
+      ]
+    },
+    {
+      "index": 2,
+      "task_ids": [
+        "VGO-003",
+        "VGO-010",
+        "VGO-011"
+      ]
+    },
+    {
+      "index": 3,
+      "task_ids": [
+        "VGO-012",
+        "VGO-016"
+      ]
+    },
+    {
+      "index": 4,
+      "task_ids": [
+        "VGO-020",
+        "VGO-021",
+        "VGO-023",
+        "VGO-027"
+      ]
+    },
+    {
+      "index": 5,
+      "task_ids": [
+        "VGO-030",
+        "VGO-031",
+        "VGO-032",
+        "VGO-034"
+      ]
+    },
+    {
+      "index": 6,
+      "task_ids": [
+        "VGO-040",
+        "VGO-043",
+        "VGO-045"
+      ]
+    },
+    {
+      "index": 7,
+      "task_ids": [
+        "VGO-041",
+        "VGO-050",
+        "VGO-051",
+        "VGO-061"
+      ]
+    },
+    {
+      "index": 8,
+      "task_ids": [
+        "VGO-054",
+        "VGO-062"
+      ]
+    },
+    {
+      "index": 9,
+      "task_ids": [
+        "VGO-053"
+      ]
+    },
+    {
+      "index": 10,
+      "task_ids": [
+        "VGO-060",
+        "VGO-070",
+        "VGO-071",
+        "VGO-075"
+      ]
+    },
+    {
+      "index": 11,
+      "task_ids": [
+        "VGO-068"
+      ]
+    },
+    {
+      "index": 12,
+      "task_ids": [
+        "VGO-072"
+      ]
+    },
+    {
+      "index": 13,
+      "task_ids": [
+        "VGO-083",
+        "VGO-086"
+      ]
+    },
+    {
+      "index": 14,
+      "task_ids": [
+        "VGO-080"
+      ]
+    },
+    {
+      "index": 15,
+      "task_ids": [
+        "VGO-081"
+      ]
+    },
+    {
+      "index": 16,
+      "task_ids": [
+        "VGO-090",
+        "VGO-096"
+      ]
+    },
+    {
+      "index": 17,
+      "task_ids": [
+        "VGO-091"
+      ]
+    },
+    {
+      "index": 18,
+      "task_ids": [
+        "VGO-093"
+      ]
+    },
+    {
+      "index": 19,
+      "task_ids": [
+        "VGO-099"
+      ]
+    }
+  ],
+  "provider": {
+    "primary_provider_id": "grok_cli",
+    "primary_model_id": "grok-4.5",
+    "fallback_provider_id": "codex",
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_trigger": "primary_quota_exhausted",
+    "fallback_reasoning_effort": "medium",
+    "max_concurrency": 4,
+    "secrets_from_environment_only": true,
+    "secrets_in_argv_prompts_logs_or_receipts": false
+  },
+  "scope_policy": {
+    "primary_roots": [
+      "swissknife",
+      "external/ipfs_datasets",
+      "external/ipfs_accelerate"
+    ],
+    "narrow_adapter_roots": [
+      "scripts"
+    ],
+    "selected_application": "SwissKnife Agent Supervisor",
+    "selected_screen": "main supervisor console",
+    "selected_source": "swissknife/web/js/apps/agent-supervisor.js",
+    "optimize_all_applications": false,
+    "arbitrary_repository_code_execution_during_scan": false,
+    "production_credentials_or_services_in_tests": false
+  },
+  "dependency_policy": {
+    "standalone_subsystem": true,
+    "semantic_index_dependency_allowed": false,
+    "prior_semantic_capsule_dependency_allowed": false,
+    "proof_cache_dependency_allowed": false,
+    "model_routing_dependency_allowed": false
+  },
+  "toolchain_policy": {
+    "node_version": "v22.19.0",
+    "npm_version": "10.8.2",
+    "bin_path": "data/agent_supervisor/verified_gui_optimizer/toolchain/node_modules/.bin",
+    "swissknife_dependency_source": "swissknife/node_modules",
+    "install_from_committed_lock_only": true
+  }
+}
