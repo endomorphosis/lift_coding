@@ -591,7 +591,9 @@ def _mobile_orb_binding_state(
         for receipt in (receipts or [])
         if receipt.get("operation") == "revoke_binding"
     ]
+    status = "bound" if active_count > 0 else ("revoked" if revoked_items else "unbound")
     return {
+        "status": status,
         "active_count": active_count,
         "revoked_count": len(revoked_items),
         "bindings": [*binding_items, *revoked_items],
@@ -629,7 +631,7 @@ def _record_mobile_orb_receipt(
     response_payload = response.model_dump() if hasattr(response, "model_dump") else response
     response_payload = response_payload if isinstance(response_payload, dict) else {}
     _record_mobile_orb_display_widget_metrics(response_payload)
-    mobile_orb_receipts[receipt_cid] = {
+    record = {
         "operation": operation,
         "receipt_cid": receipt_cid,
         "edge_session_id": edge_session_id,
@@ -642,6 +644,13 @@ def _record_mobile_orb_receipt(
         "policy_decision": response_payload.get("policy_decision"),
         "mediation_receipt": response_payload.get("mediation_receipt"),
     }
+    mobile_orb_receipts[receipt_cid] = record
+    if operation == "invoke_service":
+        mobile_orb_invocations[receipt_cid] = record
+    elif operation == "dispatch_glasses_response":
+        mobile_orb_dispatches[receipt_cid] = record
+    elif operation in {"revoke_service", "revoke_binding", "revoke"}:
+        mobile_orb_revocations[receipt_cid] = record
 
 
 FOLLOW_ON_TASK_INTENTS = {
@@ -2020,25 +2029,78 @@ def get_mobile_orb_diagnostics(
         for detail in _mobile_orb_collect_fallback_details(record)
     ]
 
+    invocations = [
+        invocation
+        for invocation in mobile_orb_invocations.values()
+        if edge_session_id is None or invocation.get("edge_session_id") == edge_session_id
+    ]
+    dispatches = [
+        dispatch
+        for dispatch in mobile_orb_dispatches.values()
+        if edge_session_id is None or dispatch.get("edge_session_id") == edge_session_id
+    ]
+    revocations = [
+        revocation
+        for revocation in mobile_orb_revocations.values()
+        if edge_session_id is None or revocation.get("edge_session_id") == edge_session_id
+    ]
+    backend_counts = {
+        "edge_sessions": len(edge_sessions),
+        "events": len(events),
+        "bindings": len(bindings),
+        "subscriptions": len(subscriptions),
+        "invocations": len(invocations),
+        "dispatches": len(dispatches),
+        "revocations": len(revocations),
+    }
+
+    mode = _mobile_orb_diagnostics_mode(edge_sessions)
+    capability_counts = _mobile_orb_capability_counts(edge_sessions)
+    binding_state = _mobile_orb_binding_state(bindings, receipts)
+    fallback_reasons = _mobile_orb_unique_strings(
+        [detail.get("reason") for detail in fallback_details]
+    )
+    # Nested contract mirrors top-level fields so clients/tests can prefer either shape.
+    # capability_counts.backend is the operation tally matrix used by e2e/VAI harnesses;
+    # DAT capability inventory lives alongside it and under backend_capability_counts.
+    nested_capability_counts = {
+        "backend": backend_counts,
+        **capability_counts,
+    }
+    diagnostics_contract = {
+        "contract": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
+        "id": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
+        "source": "backend",
+        "mode": mode,
+        "backend_counts": backend_counts,
+        "capability_counts": nested_capability_counts,
+        "backend_capability_counts": capability_counts,
+        "descriptor_cids": descriptor_cids,
+        "policy_cids": policy_cids,
+        "receipt_cids": receipt_cids,
+        "binding_state": binding_state,
+        "fallback_reasons": fallback_reasons,
+    }
+
     return {
         "contract": MOBILE_ORB_DIAGNOSTICS_CONTRACT,
         "source": "backend",
-        "mode": _mobile_orb_diagnostics_mode(edge_sessions),
+        "mode": mode,
         "edge_session_id": edge_session_id,
         "edge_sessions_count": len(edge_sessions),
         "bindings_count": len(bindings),
         "subscriptions_count": len(subscriptions),
         "events_count": len(events),
         "receipts_count": len(receipts),
-        "capability_counts": _mobile_orb_capability_counts(edge_sessions),
-        "backend_capability_counts": _mobile_orb_capability_counts(edge_sessions),
+        "backend_counts": backend_counts,
+        "capability_counts": capability_counts,
+        "backend_capability_counts": capability_counts,
         "descriptor_cids": descriptor_cids,
         "policy_cids": policy_cids,
         "receipt_cids": receipt_cids,
-        "binding_state": _mobile_orb_binding_state(bindings, receipts),
-        "fallback_reasons": _mobile_orb_unique_strings(
-            [detail.get("reason") for detail in fallback_details]
-        ),
+        "binding_state": binding_state,
+        "diagnostics_contract": diagnostics_contract,
+        "fallback_reasons": fallback_reasons,
         "fallback_details": fallback_details,
         "edge_sessions": edge_sessions,
         "bindings": bindings,

@@ -399,7 +399,9 @@ def test_swissknife_meta_glasses_playwright_gate_is_runnable_and_specific():
     spec_source = SWISSKNIFE_SPEC_PATH.read_text(encoding="utf-8")
 
     assert package["scripts"]["test:e2e:meta-glasses"] == (
-        "node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.meta-glasses.config.ts"
+        "node scripts/run-with-owned-port.mjs --env-var SWISSKNIFE_META_GLASSES_E2E_PORT "
+        "--preferred 3001 -- node scripts/run_playwright_test.mjs test "
+        "-c build-tools/configs/playwright.meta-glasses.config.ts"
     )
     for runner_term in ("node_modules", "@playwright", "test", "cli.js"):
         assert runner_term in runner_source
@@ -408,8 +410,8 @@ def test_swissknife_meta_glasses_playwright_gate_is_runnable_and_specific():
     assert "--legacy-peer-deps" in runner_source
     assert "runPlaywright(args)" in runner_source
     assert "playwrightEnv(playwrightArgs)" in runner_source
-    assert "usesMetaGlassesConfig" in runner_source
-    assert "stablePortForPath(projectRoot)" in runner_source
+    assert "usesConfigMatching" in runner_source
+    assert "stablePortForPath" in runner_source
     assert "SWISSKNIFE_META_GLASSES_E2E_PORT" in runner_source
     assert "SWISSKNIFE_E2E_PORT" in runner_source
     assert "meta-glasses-virtual-os.spec.ts" in config_source
@@ -417,7 +419,7 @@ def test_swissknife_meta_glasses_playwright_gate_is_runnable_and_specific():
     assert "test-results/meta-glasses-virtual-os/results.json" in config_source
     assert "SWISSKNIFE_META_GLASSES_E2E_PORT" in config_source
     assert "SWISSKNIFE_E2E_PORT" in config_source
-    assert "python3 -m http.server ${metaGlassesPort}" in config_source
+    assert "npm run desktop -- --port ${metaGlassesPort} --strictPort" in config_source
     assert "reuseExistingServer: false" in config_source
     assert "reuseExistingServer: true" not in config_source
     assert "'http://127.0.0.1:3001'" not in config_source

@@ -8,15 +8,17 @@ tests. This is part of the shared
 VAIOS-G700, VAIOS-G701, VAIOS-G702, VAIOS-G703, VAIOS-G704, VAIOS-G705, and
 VAIOS-G706.
 
-`external/ipfs_datasets` vendors an `ipfs_kit_py` tool surface under
-``.tools/ipfs_kit_py``. The stable interoperability evidence for SwissKnife is
-the deprecations report JSON Schema, the Bucket VFS implementation summary,
-the dependency-light Bucket VFS CLI/MCP demo, and the unified bucket interface
-demo that exercises multi-backend bucket creation, content-addressed pins,
-VFS composition, and cross-backend querying. This module statically discovers
-those descriptors (without importing `external/ipfs_datasets` Python) and
-builds a deterministic ``SwissKnifeIPFSDatasetsHandoff`` receipt that mirrors
-the TypeScript descriptor in
+The pinned monorepo layout keeps Bucket VFS / unified-bucket evidence in the
+sibling ``external/ipfs_kit`` checkout (formerly nested under
+``external/ipfs_datasets/.tools/ipfs_kit_py``). The stable interoperability
+evidence for SwissKnife is the deprecations report JSON Schema, the Bucket VFS
+implementation summary, the dependency-light Bucket VFS CLI/MCP demo, and the
+unified bucket interface demo that exercises multi-backend bucket creation,
+content-addressed pins, VFS composition, and cross-backend querying. This
+module statically discovers those descriptors (without importing
+`external/ipfs_datasets` Python) and builds a deterministic
+``SwissKnifeIPFSDatasetsHandoff`` receipt that mirrors the TypeScript
+descriptor in
 ``swissknife/src/services/mcp/ipfs-datasets-bucket-vfs-interop-descriptor.ts``.
 """
 
@@ -43,18 +45,24 @@ GOAL_PACKET_GOALS = (
     "VAIOS-G706",
 )
 
-IPFS_DATASETS_TOOL_ROOT = ".tools/ipfs_kit_py"
-REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
-REQUIRED_BUCKET_VFS_DOC_PATH = (
-    ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+# Repo-root-relative paths into the pinned ``external/ipfs_kit`` surface that
+# SwissKnife uses as scanner-visible Bucket VFS / unified-bucket evidence for
+# the external/ipfs_datasets interop contract.
+IPFS_KIT_TOOL_ROOT = "external/ipfs_kit"
+REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH = (
+    "external/ipfs_kit/data/deprecations_report.schema.json"
 )
-REQUIRED_BUCKET_VFS_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py"
+REQUIRED_BUCKET_VFS_DOC_PATH = (
+    "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+)
+REQUIRED_BUCKET_VFS_DEMO_PATH = "external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py"
 BUCKET_VFS_DEMO_PATH_CANDIDATES = (
     REQUIRED_BUCKET_VFS_DEMO_PATH,
-    ".tools/ipfs_kit_py/examples/demos/demo_bucket_vfs_interfaces.py",
-    ".tools/ipfs_kit_py/reorganization_backup_root/demo_bucket_vfs_interfaces.py",
+    "external/ipfs_kit/examples/demos/demo_bucket_vfs_interfaces.py",
 )
-REQUIRED_UNIFIED_BUCKET_DEMO_PATH = ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
+REQUIRED_UNIFIED_BUCKET_DEMO_PATH = (
+    "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
+)
 
 REQUIRED_DEPRECATIONS_REPORT_KEYS = (
     "report_version",
@@ -170,31 +178,52 @@ class SwissKnifeIPFSDatasetsHandoff:
         return asdict(self)
 
 
+def _monorepo_root_for_ipfs_datasets(root_path: Path) -> Path:
+    """Resolve the monorepo root that owns ``external/ipfs_datasets`` and ``external/ipfs_kit``.
+
+    Accepts either the ``external/ipfs_datasets`` checkout path or the monorepo
+    root itself so callers can pass the datasets pin while descriptors live in
+    the sibling ``external/ipfs_kit`` checkout.
+    """
+    resolved = root_path.resolve()
+    if resolved.name == "ipfs_datasets" and resolved.parent.name == "external":
+        return resolved.parent.parent
+    if (resolved / "external" / "ipfs_kit").is_dir() or (
+        resolved / "external" / "ipfs_datasets"
+    ).is_dir():
+        return resolved
+    # When only a temporary datasets root is provided (missing-root tests), keep
+    # discovery rooted at that path so absolute descriptor lookups stay local.
+    return resolved
+
+
 def discover_ipfs_datasets_bucket_vfs_contract(
     root: str | Path,
 ) -> IPFSDatasetsBucketVFSContract:
     """Discover the Bucket VFS and unified bucket interface contract.
 
-    Reads (without importing) the four scanner-visible descriptors that
-    `external/ipfs_datasets` ships so SwissKnife can rely on a stable,
-    statically-verifiable contract:
+    Reads (without importing) the four scanner-visible descriptors that the
+    monorepo pins under ``external/ipfs_kit`` so SwissKnife can rely on a
+    stable, statically-verifiable contract for the
+    ``external/ipfs_datasets`` interop surface:
 
-    - ``.tools/ipfs_kit_py/data/deprecations_report.schema.json``
-    - ``.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md``
-    - ``.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py``
-    - ``.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py``
+    - ``external/ipfs_kit/data/deprecations_report.schema.json``
+    - ``external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md``
+    - ``external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py``
+    - ``external/ipfs_kit/examples/demo_unified_bucket_interface.py``
     """
     root_path = Path(root)
     if not root_path.exists():
         raise SwissKnifeIPFSDatasetsInteropError(f"ipfs_datasets root not found: {root_path}")
 
+    repo_root = _monorepo_root_for_ipfs_datasets(root_path)
     paths = {
-        "deprecations_report_schema": root_path / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH,
-        "bucket_vfs_doc": root_path / REQUIRED_BUCKET_VFS_DOC_PATH,
-        "unified_bucket_demo": root_path / REQUIRED_UNIFIED_BUCKET_DEMO_PATH,
+        "deprecations_report_schema": repo_root / REQUIRED_DEPRECATIONS_REPORT_SCHEMA_PATH,
+        "bucket_vfs_doc": repo_root / REQUIRED_BUCKET_VFS_DOC_PATH,
+        "unified_bucket_demo": repo_root / REQUIRED_UNIFIED_BUCKET_DEMO_PATH,
     }
     bucket_vfs_demo_path, bucket_vfs_demo_source = _select_nonempty_file(
-        root_path, BUCKET_VFS_DEMO_PATH_CANDIDATES
+        repo_root, BUCKET_VFS_DEMO_PATH_CANDIDATES
     )
     paths["bucket_vfs_demo"] = bucket_vfs_demo_path
 
@@ -296,7 +325,7 @@ def discover_ipfs_datasets_bucket_vfs_contract(
 
     return IPFSDatasetsBucketVFSContract(
         root=str(root_path),
-        tool_root=str(root_path / IPFS_DATASETS_TOOL_ROOT),
+        tool_root=str(repo_root / IPFS_KIT_TOOL_ROOT),
         deprecations_report_schema_path=str(paths["deprecations_report_schema"]),
         bucket_vfs_doc_path=str(paths["bucket_vfs_doc"]),
         bucket_vfs_demo_path=str(paths["bucket_vfs_demo"]),

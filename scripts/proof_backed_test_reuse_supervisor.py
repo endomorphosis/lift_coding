@@ -729,7 +729,7 @@ def _record_population(
 
     if isinstance(value, Mapping):
         return {str(item).strip() for item in value if str(item).strip()}
-    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+    if not isinstance(value, Sequence) or isinstance(value, str | bytes):
         return set()
     found: set[str] = set()
     for item in value:

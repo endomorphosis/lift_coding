@@ -1454,11 +1454,14 @@ class CommandRouter:
         pr_num = intent.entities.get("pr_number")
         repo = intent.entities.get("repo")
         if intent.name not in {"ai.read_cid", "ai.accelerate_generate_and_store"}:
-            if not pr_num:
+            # Always fill missing repo/PR from session (or default repo) so
+            # subsequent AI cards and history discovery have a stable context.
+            if not pr_num or not repo:
                 context = self._session_context.get_repo_pr(
                     session_id, fallback_repo="default/repo"
                 )
-                pr_num = context.get("pr_number")
+                if not pr_num:
+                    pr_num = context.get("pr_number")
                 if not repo:
                     repo = context.get("repo")
             if not pr_num:
@@ -1468,14 +1471,6 @@ class CommandRouter:
                     "intent": intent.to_dict(),
                     "spoken_text": spoken_text,
                 }
-
-        if self._ai_intent_requires_cli(intent.name) and not self._use_cli_for_read_intents():
-            spoken_text = profile_config.truncate_spoken_text("Copilot CLI explain is not enabled.")
-            return {
-                "status": "error",
-                "intent": intent.to_dict(),
-                "spoken_text": spoken_text,
-            }
 
         try:
             config = dict(command_map[intent.name])
@@ -1492,6 +1487,21 @@ class CommandRouter:
                 config.update(self._select_failure_ai_capability(intent))
             if intent.name == "ai.rag_summary":
                 config.update(self._select_pr_summary_ai_capability(intent))
+
+            # Only gate on Copilot CLI when the resolved capability actually uses it.
+            if (
+                self._capability_requires_cli(config["capability_id"])
+                and not self._use_cli_for_read_intents()
+            ):
+                spoken_text = profile_config.truncate_spoken_text(
+                    "Copilot CLI explain is not enabled."
+                )
+                return {
+                    "status": "error",
+                    "intent": intent.to_dict(),
+                    "spoken_text": spoken_text,
+                }
+
             request_options: dict[str, Any] = {}
             request_inputs: dict[str, Any] = {}
             if (
@@ -1564,10 +1574,13 @@ class CommandRouter:
                 result.setdefault("headline", headline)
                 result.setdefault("summary", summary)
                 result.setdefault("spoken_text", spoken_text)
+            resolved_capability_id = (
+                getattr(execution, "capability_id", None) or config["capability_id"]
+            )
             if (
                 self.db_conn
                 and user_id
-                and execution.capability_id
+                and resolved_capability_id
                 in {
                     "github.check.failure_rag_explain",
                     "github.check.accelerated_failure_explain",
@@ -1578,7 +1591,7 @@ class CommandRouter:
                 store_ai_history_record(
                     self.db_conn,
                     user_id=user_id,
-                    capability_id=execution.capability_id,
+                    capability_id=resolved_capability_id,
                     repo=result.get("repo") or repo,
                     pr_number=result.get("pr_number") or pr_num,
                     failure_target=result.get("failure_target")
@@ -1603,6 +1616,8 @@ class CommandRouter:
                 card_lines.append(f"Stored in IPFS as {result['ipfs_cid']}")
             elif result.get("cid"):
                 card_lines.append(f"Stored in IPFS as {result['cid']}")
+            execution_mode = getattr(execution, "execution_mode", None)
+            execution_mode_value = getattr(execution_mode, "value", None)
             return {
                 "status": "ok",
                 "intent": intent.to_dict(),
@@ -1618,7 +1633,7 @@ class CommandRouter:
                     }
                 ],
                 "debug": {
-                    "tool_calls": [result["trace"]],
+                    "tool_calls": [result.get("trace")],
                     "resolved_context": {
                         "pr_number": pr_num,
                         "repo": repo,
@@ -1626,8 +1641,8 @@ class CommandRouter:
                         "history_cids": request_inputs.get("history_cids", []),
                         "prompt": request_inputs.get("prompt"),
                     },
-                    "capability_id": execution.capability_id,
-                    "execution_mode": execution.execution_mode.value,
+                    "capability_id": resolved_capability_id,
+                    "execution_mode": execution_mode_value,
                     "persist_output": bool(intent.entities.get("persist_output")),
                     "ipfs_cid": result.get("ipfs_cid"),
                     "policy_resolution": build_policy_resolution(
@@ -1637,11 +1652,11 @@ class CommandRouter:
                             "github.pr.accelerated_summary": AIWorkflow.ACCELERATED_PR_SUMMARY,
                             "github.check.failure_rag_explain": requested_workflow,
                             "github.check.accelerated_failure_explain": AIWorkflow.ACCELERATED_FAILURE_EXPLAIN,
-                        }.get(execution.capability_id, requested_workflow)
+                        }.get(resolved_capability_id, requested_workflow)
                         if requested_workflow is not None
                         else None,
                         requested_capability_id=None,
-                        resolved_capability_id=execution.capability_id,
+                        resolved_capability_id=resolved_capability_id,
                     ).model_dump(mode="json")
                     if requested_workflow is not None
                     else None,
@@ -1748,12 +1763,22 @@ class CommandRouter:
         }
 
     def _ai_intent_requires_cli(self, intent_name: str) -> bool:
-        """Return whether an AI intent depends on CLI-backed read access."""
+        """Return whether an AI intent name defaults to CLI-backed access.
+
+        Prefer :meth:`_capability_requires_cli` after capability selection so
+        composite/accelerated failure backends are not blocked when CLI is off.
+        """
         return intent_name in {
             "ai.explain_pr",
             "ai.summarize_diff",
             "ai.explain_failure",
         }
+
+    def _capability_requires_cli(self, capability_id: str | None) -> bool:
+        """Return whether the resolved capability depends on Copilot/GH CLI."""
+        if not capability_id:
+            return False
+        return capability_id.startswith("copilot.")
 
     def _use_cli_for_read_intents(self) -> bool:
         """Return whether CLI-backed read intents are enabled."""

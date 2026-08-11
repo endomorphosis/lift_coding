@@ -502,7 +502,7 @@ class TestAIExecutionIntents:
         self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         """Router should handle accelerated failure analysis through the shared AI executor."""
-        intent = parser.parse("accelerated explain workflow CI Linux for pr 123")
+        intent = parser.parse("accelerated explain workflow CI Linux for pr 123 on openai/example")
         router = CommandRouter(PendingActionManager())
 
         class StubExecution:
@@ -515,7 +515,7 @@ class TestAIExecutionIntents:
                 "spoken_text": "Accelerated failure analysis is ready.",
                 "headline": "Accelerated failure analysis",
                 "summary": "CI Linux is failing during setup.",
-                "repo": "default/repo",
+                "repo": "openai/example",
                 "pr_number": 123,
                 "failure_target": "CI Linux",
                 "failure_target_type": "workflow",
@@ -526,6 +526,7 @@ class TestAIExecutionIntents:
             assert request.capability_id == "github.check.accelerated_failure_explain"
             assert request.context.pr_number == 123
             assert request.context.workflow_name == "CI Linux"
+            assert request.context.repo == "openai/example"
             return StubExecution()
 
         monkeypatch.setattr("handsfree.commands.router.execute_ai_request", stub_execute_ai_request)
@@ -1226,7 +1227,7 @@ class TestAIExecutionIntents:
         assert response["spoken_text"] == "Stub explanation"
         assert captured["request"].capability_id == "copilot.pr.explain"
         assert captured["request"].context.pr_number == 123
-        assert response["intent"]["name"] == "ai.summarize_diff"
+        assert response["intent"]["name"] == "ai.explain_pr"
 
     def test_ai_intent_captures_repo_context(
         self, parser: IntentParser, monkeypatch: pytest.MonkeyPatch

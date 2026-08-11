@@ -110,11 +110,29 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
     control_surface_policy_id: 'policy:swissknife:mobile-interop',
   },
   validation: {
-    task_id: 'MGW-569',
+    task_id: 'VAI-661',
+    attempt: 1,
+    objective_gap_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-objective-gap-d33307f93408.md',
+    validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md',
+    attempt_validation_repair_ref:
+      'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md',
+    objective_goals: [
+      'VAIOS-G700',
+      'VAIOS-G701',
+      'VAIOS-G702',
+      'VAIOS-G703',
+      'VAIOS-G704',
+      'VAIOS-G705',
+      'VAIOS-G706',
+    ],
+    evidence: 'objective validation repair',
+    mgw_task_id: 'MGW-569',
     repair_task_id: 'MGW-583',
     hao_task_id: 'HAO-730',
     hao_attempt: 4,
-    objective_gap_ref:
+    mgw_objective_gap_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-569-objective-gap-d33307f93408.md',
     hao_objective_gap_ref:
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md',
@@ -122,7 +140,6 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
       'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-4-validation-confirmation.md',
     retry_budget_ref:
       'data/meta_glasses_display_widgets/discovery/2026-07-08-mgw-583-mgw-569-retry-budget.md',
-    evidence: 'objective validation repair',
   },
 };
 

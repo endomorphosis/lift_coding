@@ -16,10 +16,15 @@ sys.path.insert(0, str(ROOT / "external" / "ipfs_kit"))
 def test_dashboard_manifest_matches_server_registry():
     from ipfs_kit_py.mcp_server.js_sdk import generate
 
-    dash = ROOT / "swissknife" / "src" / "services" / "mcp-ipfs-kit-tools-manifest.json"
-    assert dash.exists(), "dashboard manifest missing"
+    candidates = [
+        ROOT / "swissknife" / "src" / "services" / "ipfs" / "mcp-ipfs-kit-tools-manifest.json",
+        ROOT / "swissknife" / "src" / "services" / "mcp-ipfs-kit-tools-manifest.json",
+    ]
+    dash = next((path for path in candidates if path.exists()), None)
+    assert dash is not None, f"dashboard manifest missing; tried {candidates}"
     server = json.loads(generate.render_manifest())
     dashboard = json.loads(dash.read_text())
     assert dashboard == server, (
-        "swissknife dashboard manifest drifted; run make mcp-sdk in ipfs_kit"
+        "swissknife dashboard manifest drifted; run generate.render_manifest() "
+        "in ipfs_kit and resync swissknife src/services/ipfs/mcp-ipfs-kit-tools-manifest.json"
     )

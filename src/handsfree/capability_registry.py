@@ -372,7 +372,7 @@ def _swissknife_orb_surface_metadata() -> Mapping[str, Any]:
         "virtual_ui_plane": "swissknife.virtual_desktop",
         "orb_plane": "swissknife.orb",
         "descriptor_authoring": "swissknife/src/services/mcp-idl.ts",
-        "orb_router": "swissknife/src/services/mcp-orb-capability-router.ts",
+        "orb_router": "swissknife/src/services/mcp/mcp-orb-capability-router.ts",
         "display_adapter": "swissknife/src/services/meta-glasses-display-orb-adapter.ts",
         "display_descriptor": "spec/meta_glasses_display_widget_orb_interface.json",
         "mobile_edge_descriptor": "spec/meta_glasses_mobile_orb_bridge_interface.json",

@@ -1,0 +1,44 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-promotion-seal@1",
+  "contract_version": 1,
+  "interface": "WorkerPlannerDoctorRelease@1",
+  "evidence": "wpd/release@1",
+  "board_namespace": "agent-supervisor-worker-planner-doctor-v1",
+  "program": "WPD",
+  "terminal_task_id": "WPD-070",
+  "board_status": {
+    "completed_task_count": 22,
+    "total_task_count": 22,
+    "validator_valid": true
+  },
+  "release_evaluation": {
+    "mode": "non_synthetic",
+    "verdict": "pass",
+    "promotion_allowed": true,
+    "benchmark_provider_call_reduction": 6,
+    "safety_floors_zero": true,
+    "modules_missing": [],
+    "receipt_path": "implementation_plan/docs/47-wpd-terminal-release-receipt.json",
+    "summary_path": "implementation_plan/docs/47-wpd-closeout-summary.md"
+  },
+  "kernel_first_defaults": {
+    "pre_implementation_kernel_required_before_provider_call": true,
+    "provider_invocation_requires_disposition": "residual_llm_authorized",
+    "closed_deterministic_provider_calls_forbidden": true,
+    "free_reprompt_after_typed_failure_forbidden": true,
+    "residual_requires_sealed_packet": true,
+    "authority_policy": "config/supervisor_worker_planner_doctor_authority_policy.json",
+    "benchmark_config": "config/supervisor_worker_planner_doctor_benchmark.json"
+  },
+  "operator_actions": [
+    "Merge ipfs_accelerate_py PR #132 (agent/wpd-unstall-doctor-factory) when CI is green",
+    "Keep monorepo pin on agent/worker-planner-doctor-integration or merge to integration trunk",
+    "Enable production launchers with pre-implementation provider gate (already default on sealed WPD path)",
+    "Do not treat synthetic release receipts as promotion authority"
+  ],
+  "sealed_at": "2026-08-06T06:50:00Z",
+  "notes": [
+    "This seal records the non-synthetic WPD-070 pass for operator promotion.",
+    "It does not mutate runtime configuration by itself."
+  ]
+}
