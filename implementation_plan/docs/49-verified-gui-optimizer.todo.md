@@ -193,7 +193,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-009 Establish patch and browser-host security authority
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
