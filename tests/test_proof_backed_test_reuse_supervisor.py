@@ -89,6 +89,16 @@ def supervisor(monkeypatch: pytest.MonkeyPatch) -> Any:
         "_grok_codex_agent_route_readiness",
         lambda: _agent_route_readiness(),
     )
+    # CI runners report Codex ready via the router mock but lack a real binary;
+    # merge-resolver command construction must still resolve a path.
+    monkeypatch.setattr(
+        module.shutil,
+        "which",
+        lambda name: {
+            "grok": "/opt/grok/bin/grok",
+            "codex": "/opt/codex/bin/codex",
+        }.get(name),
+    )
     return module
 
 

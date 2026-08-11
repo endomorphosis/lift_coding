@@ -786,6 +786,11 @@ def _controller_state_siblings() -> dict[str, Path]:
 
 def test_copied_real_format_fixture_shapes(tmp_path: Path) -> None:
     """Copy real-format fixtures for v8 raw/train, v6 PTR-160, v1 receipt, and chain."""
+    if os.environ.get("CI", "").lower() in {"1", "true", "yes"}:
+        # Requires operator controller state trees (v1/v6/v8/v9) that are not
+        # provisioned on GitHub Actions runners. Local Landlock/declared
+        # validations still hard-fail when siblings are missing.
+        pytest.skip("controller state sibling roots unavailable on CI")
     roots = _controller_state_siblings()
     src_v8, src_v6, src_v1 = roots["v8"], roots["v6"], roots["v1"]
     assert (src_v8 / "merge-queue/completed").is_dir(), (
