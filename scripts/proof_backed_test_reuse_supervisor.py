@@ -200,12 +200,20 @@ def _managed_merge_resolver_command() -> str:
     environment receive this exact no-shell provider runner command.
     """
 
-    readiness = _grok_codex_agent_route_readiness()
-    # Validate the launch-time route contract, but do not freeze an
-    # unavailable-primary decision into the long-lived supervisor argv.  The
-    # router adapter repeats this bounded probe for each semantic-merge
-    # invocation so a recovered Grok primary is selected again automatically.
-    _validated_primary_unavailable_kind(readiness)
+    # Local development closeout/board validate does not need a live Grok
+    # primary at env-build time.  A hard timeout on the readiness probe must
+    # not block report-only or full closeout after the board is already sealed.
+    # Semantic merge still probes again at invocation when a merge runs.
+    try:
+        readiness = _grok_codex_agent_route_readiness()
+        # Validate the launch-time route contract, but do not freeze an
+        # unavailable-primary decision into the long-lived supervisor argv.  The
+        # router adapter repeats this bounded probe for each semantic-merge
+        # invocation so a recovered Grok primary is selected again automatically.
+        _validated_primary_unavailable_kind(readiness)
+    except RuntimeError:
+        if not _local_dev_e2e_enabled():
+            raise
     grok_binary = _grok_cli_binary()
     codex_binary = shutil.which("codex") or ""
     if not codex_binary:
