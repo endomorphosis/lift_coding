@@ -246,7 +246,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-011 Build the typed UI dependency graph
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
