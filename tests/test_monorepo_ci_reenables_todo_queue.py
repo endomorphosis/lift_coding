@@ -142,9 +142,7 @@ def test_supervisor_wrapper_lists_claimable_wave_a():
     claimable = set(payload["claimable_task_ids"])
     tasks = {task.task_id: task for task in _load_tasks()}
     open_wave = [
-        task_id
-        for task_id in WAVE_A + WAVE_B
-        if str(tasks[task_id].status).lower() == "todo"
+        task_id for task_id in WAVE_A + WAVE_B if str(tasks[task_id].status).lower() == "todo"
     ]
     for task_id in open_wave:
         assert task_id in claimable

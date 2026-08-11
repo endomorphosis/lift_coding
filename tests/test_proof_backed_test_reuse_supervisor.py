@@ -1232,7 +1232,6 @@ def test_board_validator_orders_native_python_and_runtime_join(
     assert claimable == ["PTR-164"]
 
 
-
 def test_board_validator_rejects_an_unexpected_new_historical_gap(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
