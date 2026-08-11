@@ -36,8 +36,7 @@ SCHEMA = (
     "deterministic_swissknife_mcplusplus_repair.scheduler_config@1"
 )
 BOOTSTRAP_VALIDATION_SCHEMA = (
-    "ipfs_accelerate_py/agent-supervisor/"
-    "deterministic-repair-bootstrap-validation@2"
+    "ipfs_accelerate_py/agent-supervisor/deterministic-repair-bootstrap-validation@2"
 )
 BOOTSTRAP_REPOSITORY_SOURCE_FIELDS = {
     "Mcp-Plus-Plus": "mcplusplus_planning_revision",
@@ -614,14 +613,16 @@ def _validate_config(
                 errors.append(f"scheduler lane {index} has invalid initial_task_ids")
                 continue
             for task_id in initial_ids:
-                expected_shard = int(
-                    hashlib.sha256(task_id.encode("utf-8")).hexdigest()[:8],
-                    16,
-                ) % 8
+                expected_shard = (
+                    int(
+                        hashlib.sha256(task_id.encode("utf-8")).hexdigest()[:8],
+                        16,
+                    )
+                    % 8
+                )
                 if expected_shard != index:
                     errors.append(
-                        f"scheduler lane {index} seed {task_id} belongs to shard "
-                        f"{expected_shard}"
+                        f"scheduler lane {index} seed {task_id} belongs to shard {expected_shard}"
                     )
                 lane_seed_ids.append(task_id)
 
@@ -825,7 +826,10 @@ def _validate_config(
             "artifacts_verified",
             "receipt_id",
         }
-        if not isinstance(bootstrap_validation, dict) or set(bootstrap_validation) != expected_fields:
+        if (
+            not isinstance(bootstrap_validation, dict)
+            or set(bootstrap_validation) != expected_fields
+        ):
             errors.append("bootstrap validation receipt fields are not exact")
         else:
             receipt_body = dict(bootstrap_validation)
@@ -842,14 +846,11 @@ def _validate_config(
             }
             repository_commits = bootstrap_validation.get("repository_commits")
             if repository_commits != expected_repository_commits or any(
-                not isinstance(commit, str)
-                or re.fullmatch(r"[0-9a-f]{40}", commit) is None
+                not isinstance(commit, str) or re.fullmatch(r"[0-9a-f]{40}", commit) is None
                 for commit in expected_repository_commits.values()
             ):
                 errors.append("bootstrap validation repository revisions are stale")
-            if bootstrap_validation.get("task_ids") != list(
-                BOOTSTRAP_VALIDATION_TASK_IDS
-            ):
+            if bootstrap_validation.get("task_ids") != list(BOOTSTRAP_VALIDATION_TASK_IDS):
                 errors.append("bootstrap validation receipt task population is invalid")
             if bootstrap_validation.get("result") != BOOTSTRAP_VALIDATION_RESULT:
                 errors.append("bootstrap validation receipt result is not passing")
@@ -878,9 +879,7 @@ def _validate_config(
                         or path.is_symlink()
                         or not path.is_file()
                     ):
-                        errors.append(
-                            f"bootstrap validation test file is unsafe: {item}"
-                        )
+                        errors.append(f"bootstrap validation test file is unsafe: {item}")
                         continue
                     tracked = _git(
                         "-c",
