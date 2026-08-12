@@ -231,7 +231,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-010 Implement canonical GUI content identity and provenance
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - No-change completion: forbidden
 - Is schedulable: true
