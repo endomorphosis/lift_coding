@@ -171,6 +171,7 @@ CONTROL_PATHS = frozenset(
         "implementation_plan/evidence/verified_gui_optimizer/provider_route/provider_fallback_policy_authorization_20260812.json",
         "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_root_pin_20260812.json",
         "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_witness_20260812.json",
+        "implementation_plan/evidence/verified_gui_optimizer/recovery/provider_capsule_retry_amendment_20260812.json",
     }
 )
 ALLOWED_OUTPUT_PREFIXES = (
@@ -388,7 +389,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
         "stale_seconds": 900,
         "watchdog_startup_grace_seconds": 300,
         "max_restarts": 3,
-        "max_task_attempts": 3,
+        "max_task_attempts": 4,
         "implementation_retry_budget": 3,
         "validation_retry_budget": 3,
         "merge_retry_budget": 3,
@@ -406,7 +407,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
     source = config.get("source_binding")
     expected_source = {
         "accelerator_required_ancestor": (
-            "ce448eae6ab5706832d3ae88b041f9d38ac82ae8"
+            "493f5dc102340a7c271fb44efa6463cc7ac02258"
         ),
         "accelerator_required_branch": MERGE_BRANCH,
         "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",

@@ -1,0 +1,54 @@
+{
+  "schema": "verified-gui-optimizer/provider-capsule-retry-amendment@1",
+  "board_namespace": "verified-gui-optimizer-v1",
+  "authorized_action": "increase_max_task_attempts_from_3_to_4",
+  "authorization_basis": "operator_directed_retry_after_verified_control_plane_failure",
+  "authorized_at": "2026-08-12T04:44:38Z",
+  "attempt_ledger_policy": "append_only_no_refund",
+  "prior_superproject_head": "4feec24b91009f8a1cccf36786f7350f0f4e40dd",
+  "failed_control_plane": {
+    "source_head": "924e83f7db0d013a74620424356afdec7515ca61",
+    "source_tree": "74a836e7fb0e354cff01f0c02352dc0e7b339e16",
+    "capsule_id": "sha256:4fa49383e09b3b6ae129aedf68d45a0600b2942bd768d22a98ded365b1b71eb1",
+    "failure": "FileNotFoundError resolving self_improvement_completion.py through the deleted memfd display path before Grok or Terra execution"
+  },
+  "failed_attempts": [
+    {
+      "task_id": "VGO-001",
+      "task_revision_cid": "baguqeeraakqi5ossvsqhzphnxhzqgqkrp52gwh5myhvysr42mwgw4okjq4pq",
+      "attempt": 3,
+      "implementation_finished_event_id": "sha256:365f0faf13bed5d214900f133e032a28e10fe7266bd1c66c6cbdb7d4429a448e",
+      "implementation_log_sha256": "sha256:a810c126c49709816607dba0e889162ad7530dc1720661567a5511cbffd72c43",
+      "provider_attempt_store_identity": "sha256:b6e621e22ed403ecb7d71298e5490eab034b959e2417f3156b23ccb7db3744dd",
+      "provider_attempt_store_entry_count": 0,
+      "provider_or_fallback_effect_observed": false
+    },
+    {
+      "task_id": "VGO-009",
+      "task_revision_cid": "baguqeerakpjqitcofufonmwedjz3hp6uxq5rjjw3ox3qjsnzmassbosyzacq",
+      "attempt": 2,
+      "implementation_finished_event_id": "sha256:f4ddcac0e0bf67c49c68d3cf413f393f38cdaaa17136c2078a1b281c99f97426",
+      "implementation_log_sha256": "sha256:e6f07be2193c792c56b86c169966ab13451f7e75e480ec046d731159358ac82d",
+      "provider_attempt_store_identity": "sha256:6ff0cc35d4facbbf7c003569e6baa73e4aa0ef7fc73bfad5104e0bcd20ac4ab9",
+      "provider_attempt_store_entry_count": 0,
+      "provider_or_fallback_effect_observed": false
+    }
+  ],
+  "repair": {
+    "accelerator_commit": "493f5dc102340a7c271fb44efa6463cc7ac02258",
+    "canonical_import_restored_from_commit": "1309f46f71db7f0cb6428a9419ebd5e45aaa3893",
+    "focused_test_result": "38 passed",
+    "real_sealed_memfd_runner_startup": "passed",
+    "independent_audit": "go"
+  },
+  "constraints": {
+    "max_task_attempts": 4,
+    "implementation_retry_budget": 3,
+    "validation_retry_budget": 3,
+    "merge_retry_budget": 3,
+    "historical_attempt_events_preserved": true,
+    "manual_attempt_counter_mutation_forbidden": true,
+    "generic_provider_fallback_remains_forbidden": true,
+    "fallback_route": "grok-4.5_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_verified_hard_quota"
+  }
+}
