@@ -165,6 +165,8 @@ CONTROL_PATHS = frozenset(
         CONFIG_PATH.as_posix(),
         "scripts/validate_verified_gui_optimizer_board.py",
         "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
+        "scripts/ops/verified_gui_optimizer_vgo001_oracle.py",
+        "scripts/ops/verified_gui_optimizer_vgo009_oracle.py",
         "scripts/ops/verified_gui_optimizer_status.py",
     }
 )
@@ -671,6 +673,14 @@ def _validate_tasks(
             )
         if metadata.get("completion", "").lower() != expected_completion:
             errors.append(f"{task_id}: completion must be {expected_completion}")
+        no_change_completion = metadata.get(
+            "no-change completion", "forbidden"
+        ).strip().lower()
+        if no_change_completion != "forbidden":
+            errors.append(
+                f"{task_id}: no-change completion must be forbidden on the "
+                "sealed implementation board"
+            )
         if metadata.get("is schedulable", "").lower() != "true":
             errors.append(f"{task_id}: Is schedulable must be true")
         if metadata.get("review only", "").lower() != expected_review_only:

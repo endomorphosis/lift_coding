@@ -43,6 +43,11 @@ for other screens, but no task may expand into optimizing every application.
 - Wave admission is topological: explicit `Depends on` edges are authoritative,
   and tasks in the same wave never acquire an implicit dependency on one
   another.
+- Pending implementation tasks fail closed on an empty candidate. No-change
+  completion is forbidden unless the exact task revision explicitly declares
+  `No-change completion: allowed` and the supervisor issues its separate,
+  attempt-bound no-change policy receipt; a green inherited test suite alone
+  is never completion authority.
 - Every validation command starts at the superproject root and inherits the
   sealed supervisor runtime, including Node 22/npm 10 on `PATH` and the three
   repository import roots on `PYTHONPATH`. Tasks must not install dependencies
@@ -98,7 +103,7 @@ for other screens, but no task may expand into optimizing every application.
 - Track: control-plane
 - Depends on:
 - Goal id: VGO-G010
-- Outputs: implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md, implementation_plan/docs/49-verified-gui-optimizer.objectives.md, implementation_plan/docs/49-verified-gui-optimizer.todo.md, config/verified_gui_optimizer_scheduler.json, scripts/validate_verified_gui_optimizer_board.py, scripts/ops/agent_supervisor/implementation_supervisor_entry.py, scripts/ops/verified_gui_optimizer_status.py
+- Outputs: implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md, implementation_plan/docs/49-verified-gui-optimizer.objectives.md, implementation_plan/docs/49-verified-gui-optimizer.todo.md, config/verified_gui_optimizer_scheduler.json, scripts/validate_verified_gui_optimizer_board.py, scripts/ops/agent_supervisor/implementation_supervisor_entry.py, scripts/ops/verified_gui_optimizer_vgo001_oracle.py, scripts/ops/verified_gui_optimizer_vgo009_oracle.py, scripts/ops/verified_gui_optimizer_status.py
 - Validation: python3 scripts/validate_verified_gui_optimizer_board.py --check-all
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/control-seal
@@ -106,7 +111,7 @@ for other screens, but no task may expand into optimizing every application.
 - Resource class: cpu-small
 - Resource stage: planning
 - Implementation timeout seconds: 1800
-- Predicted files: implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md, implementation_plan/docs/49-verified-gui-optimizer.objectives.md, implementation_plan/docs/49-verified-gui-optimizer.todo.md, config/verified_gui_optimizer_scheduler.json, scripts/validate_verified_gui_optimizer_board.py, scripts/ops/agent_supervisor/implementation_supervisor_entry.py, scripts/ops/verified_gui_optimizer_status.py
+- Predicted files: implementation_plan/docs/49-verified-gui-optimizer-plan-2026-08-11.md, implementation_plan/docs/49-verified-gui-optimizer.objectives.md, implementation_plan/docs/49-verified-gui-optimizer.todo.md, config/verified_gui_optimizer_scheduler.json, scripts/validate_verified_gui_optimizer_board.py, scripts/ops/agent_supervisor/implementation_supervisor_entry.py, scripts/ops/verified_gui_optimizer_vgo001_oracle.py, scripts/ops/verified_gui_optimizer_vgo009_oracle.py, scripts/ops/verified_gui_optimizer_status.py
 - Interfaces: ConfiguredBoardScheduler@1, MarkdownTaskSource@1, VgoGoalHeap@1
 - Conflict policy: Operator-owned protected controls; managed agents must not edit them.
 - Preconditions: Exact reviewed superproject revision and clean exact SwissKnife, datasets, and accelerator gitlinks are recorded.
@@ -116,8 +121,9 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-001 Define closed GUI optimizer data models
 
-- Status: completed
+- Status: pending
 - Completion: auto
+- No-change completion: forbidden
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -125,7 +131,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-000
 - Goal id: VGO-G020
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/__init__.py, external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/models.py, external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/schema.py, external/ipfs_datasets/tests/unit/logic/gui_optimizer/test_models.py
-- Validation: cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_models.py -q
+- Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo001_oracle.py --check-all && cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_models.py -q
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/models
 - Parallel lane: vgo-lane-1
@@ -142,8 +148,9 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-002 Implement the non-executing GUI static scanner core
 
-- Status: completed
+- Status: pending
 - Completion: auto
+- No-change completion: forbidden
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -170,6 +177,7 @@ for other screens, but no task may expand into optimizing every application.
 
 - Status: pending
 - Completion: auto
+- No-change completion: forbidden
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -194,8 +202,9 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-009 Establish patch and browser-host security authority
 
-- Status: completed
+- Status: pending
 - Completion: auto
+- No-change completion: forbidden
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -203,7 +212,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-000
 - Goal id: VGO-G010
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/authority.py, external/ipfs_accelerate/test/api/test_gui_optimizer_authority.py
-- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py -q
+- Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo009_oracle.py --check-all && cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py -q
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/security-authority
 - Parallel lane: vgo-lane-3
@@ -222,6 +231,7 @@ for other screens, but no task may expand into optimizing every application.
 
 - Status: pending
 - Completion: auto
+- No-change completion: forbidden
 - Is schedulable: true
 - Review only: false
 - Priority: P0
@@ -246,8 +256,9 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-011 Build the typed UI dependency graph
 
-- Status: completed
+- Status: pending
 - Completion: auto
+- No-change completion: forbidden
 - Is schedulable: true
 - Review only: false
 - Priority: P0
