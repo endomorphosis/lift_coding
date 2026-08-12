@@ -10,6 +10,7 @@ provider dependencies.
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import re
@@ -19,7 +20,6 @@ import sys
 from collections.abc import Iterable, Mapping
 from pathlib import Path, PurePosixPath
 from typing import Any
-
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = Path("config/verified_gui_optimizer_scheduler.json")
@@ -31,6 +31,16 @@ BOARD_NAMESPACE = "verified-gui-optimizer-v1"
 MERGE_BRANCH = "feature/verified-gui-optimizer"
 TASK_PREFIX = "VGO-"
 TARGET_SOURCE = "swissknife/web/js/apps/agent-supervisor.js"
+RECOVERY_RECEIPT_PATH = Path(
+    "implementation_plan/evidence/verified_gui_optimizer/recovery/"
+    "provider_effect_task_revision_retry_amendment_20260812.json"
+)
+RECOVERY_RECEIPT_SHA256 = (
+    "sha256:15219fc7346422ec83462131611b21c62780c7bcaab868ce04899fcf22ffb7bb"
+)
+RECOVERY_SEMANTIC_KEY_PREFIX = (
+    "verified-gui-optimizer/provider-effect-retry-revision@1"
+)
 
 TASK_IDS = (
     "VGO-000",
@@ -173,6 +183,7 @@ CONTROL_PATHS = frozenset(
         "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_witness_20260812.json",
         "implementation_plan/evidence/verified_gui_optimizer/recovery/provider_capsule_retry_amendment_20260812.json",
         "implementation_plan/evidence/verified_gui_optimizer/recovery/provider_capsule_immutability_retry_amendment_20260812.json",
+        RECOVERY_RECEIPT_PATH.as_posix(),
     }
 )
 ALLOWED_OUTPUT_PREFIXES = (
@@ -198,6 +209,66 @@ PROHIBITED_DEPENDENCY_PATTERNS = (
     "model_router",
     "knowledge_graphs/adapters/code_evidence",
 )
+RECOVERY_TASK_REVISIONS = {
+    "VGO-001": {
+        "old_key": (
+            "task/v1/"
+            "02a08eba52aca07cbcedb9f30341517f746b1facc1eb89479a658d6e3949871f"
+        ),
+        "old_cid": (
+            "baguqeeraakqi5ossvsqhzphnxhzqgqkrp52gwh5myhvysr42mwgw4okjq4pq"
+        ),
+        "new_key": (
+            "task/v1/"
+            "58ee568b77ceb6982901566ad475d04adb5bb49e60b05101ef7ec0d55cc7e5da"
+        ),
+        "new_cid": (
+            "baguqeeraldxfnc3xz23jqkibkzvni5oqjlnvxne6mcyfcappp3ankxgh4xna"
+        ),
+        "contract_sha256": (
+            "sha256:"
+            "71828ac55853cf1fb68f1a0eef164e1a15ebfaecf8b3feac73f5847eaa766411"
+        ),
+        "contract_size": 14028,
+        "display_attempt_count": 5,
+        "revision_attempt_count": 5,
+        "event_sequence": 742,
+        "event_type": "implementation_retry_deferred",
+        "event_id": (
+            "sha256:"
+            "8939c8efce77048fd79fe5b9e8d1d141ae23bea9ac0bfe6b49146435b9a8a2ac"
+        ),
+    },
+    "VGO-009": {
+        "old_key": (
+            "task/v1/"
+            "53d3044c4e2d0ae6b2c41a73b3bfd4bc3b14a6db75f704c9b9602520ba58c805"
+        ),
+        "old_cid": (
+            "baguqeerakpjqitcofufonmwedjz3hp6uxq5rjjw3ox3qjsnzmassbosyzacq"
+        ),
+        "new_key": (
+            "task/v1/"
+            "9a7b6853646e476c7442902c016dba48be4294de539f20aaff86bca93a504660"
+        ),
+        "new_cid": (
+            "baguqeeratj5wqu3enzdwy5ccsawac3n2jc7effg6kopsbkx7q26ksosqizqa"
+        ),
+        "contract_sha256": (
+            "sha256:"
+            "fabfd426ced4a317ae8b7eb3e10a7ef68deaecf7c68142a8c0289be79d2342e7"
+        ),
+        "contract_size": 12919,
+        "display_attempt_count": 4,
+        "revision_attempt_count": 4,
+        "event_sequence": 906,
+        "event_type": "implementation_finished",
+        "event_id": (
+            "sha256:"
+            "0bfd46d60d78386fcc2acd8d6dcf9744db25d5fb97c50019ea690e9f29f61966"
+        ),
+    },
+}
 
 
 class DuplicateKeyError(ValueError):
@@ -232,6 +303,719 @@ def _split_csv(value: str) -> list[str]:
         for item in normalized.split(",")
         if item.strip().strip("`'\"")
     ]
+
+
+def _canonical_identity_json_bytes(value: Any) -> bytes:
+    """Mirror task-identity DAG-JSON bytes without importing product code."""
+
+    def check(item: Any) -> None:
+        if item is None or isinstance(item, (str, bool, int)):
+            return
+        if isinstance(item, float):
+            raise ValueError("task identity cannot contain floats")
+        if isinstance(item, list):
+            for child in item:
+                check(child)
+            return
+        if isinstance(item, dict) and all(
+            isinstance(key, str) for key in item
+        ):
+            for child in item.values():
+                check(child)
+            return
+        raise ValueError(
+            "unsupported task identity value: "
+            f"{type(item).__name__}"
+        )
+
+    check(value)
+    return json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+
+
+def _normalize_identity_text(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip().casefold()
+
+
+def _normalize_identity_path(value: Any) -> str:
+    text = str(value or "").strip().replace("\\", "/")
+    while text.startswith("./"):
+        text = text[2:]
+    return re.sub(r"/+", "/", text).rstrip("/")
+
+
+def _identity_sequence(value: Any) -> list[Any]:
+    if value in (None, ""):
+        return []
+    if isinstance(value, str):
+        return [item.strip() for item in value.split(",") if item.strip()]
+    if isinstance(value, (list, tuple)):
+        return [item for item in value if item not in (None, "")]
+    return [value]
+
+
+def _task_identity_from_record(
+    record: Mapping[str, Any],
+    *,
+    omit_semantic_key: bool,
+) -> tuple[str, str]:
+    """Recompute the daemon's semantic identity for one sealed board row."""
+
+    metadata_value = record.get("metadata")
+    metadata = (
+        dict(metadata_value) if isinstance(metadata_value, Mapping) else {}
+    )
+    if omit_semantic_key:
+        metadata.pop("semantic key", None)
+    title = _normalize_identity_text(record.get("title", ""))
+    outputs = sorted(
+        {
+            _normalize_identity_path(item)
+            for item in _identity_sequence(metadata.get("outputs", ""))
+            if _normalize_identity_path(item)
+        }
+    )
+    acceptance = [
+        _normalize_identity_text(item)
+        for item in _identity_sequence(metadata.get("acceptance", ""))
+        if _normalize_identity_text(item)
+    ]
+    evidence = sorted(
+        {
+            _normalize_identity_text(item)
+            for item in _identity_sequence(
+                metadata.get("missing evidence", "")
+                or metadata.get("evidence", "")
+            )
+            if _normalize_identity_text(item)
+        }
+    )
+    evidence_outputs = sorted(
+        {
+            _normalize_identity_path(item)
+            for item in _identity_sequence(
+                metadata.get("evidence outputs", "")
+            )
+            if _normalize_identity_path(item)
+        }
+    )
+    goal = _normalize_identity_text(
+        metadata.get("goal id", "")
+        or metadata.get("goal packet key", "")
+        or metadata.get("goal", "")
+    )
+    semantic_hint = _normalize_identity_text(
+        metadata.get("semantic key", "")
+        or metadata.get("bundle key", "")
+        or metadata.get("work scope", "")
+        or metadata.get("fingerprint", "")
+    )
+    semantic = {
+        key: value
+        for key, value in {
+            "title": title,
+            "outputs": outputs,
+            "acceptance": acceptance,
+            "evidence": evidence,
+            "evidence_outputs": evidence_outputs,
+            "goal": goal,
+            "semantic_hint": semantic_hint,
+        }.items()
+        if value
+    }
+    material = {
+        "schema": "ipfs_accelerate_py/agent-supervisor/task-identity@1",
+        "semantic": semantic,
+    }
+    raw = _canonical_identity_json_bytes(material)
+    digest = hashlib.sha256(raw).digest()
+    fingerprint = digest.hex()
+    cid_bytes = b"\x01\xa9\x02\x12\x20" + digest
+    cid = (
+        "b"
+        + base64.b32encode(cid_bytes)
+        .decode("ascii")
+        .rstrip("=")
+        .lower()
+    )
+    return f"task/v1/{fingerprint}", cid
+
+
+def _task_contract_bytes(record: Mapping[str, Any], task_id: str) -> bytes:
+    metadata_value = record.get("metadata")
+    metadata = (
+        dict(metadata_value) if isinstance(metadata_value, Mapping) else {}
+    )
+    metadata.pop("status", None)
+    metadata.pop("semantic key", None)
+    material = {
+        "task_id": task_id,
+        "title": str(record.get("title") or ""),
+        "metadata": metadata,
+    }
+    return json.dumps(
+        material,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+
+
+def _exact_object(
+    value: Any,
+    *,
+    expected_keys: set[str],
+    label: str,
+    errors: list[str],
+) -> Mapping[str, Any]:
+    if not isinstance(value, Mapping):
+        errors.append(f"{label} must be an object")
+        return {}
+    actual = set(value)
+    if actual != expected_keys:
+        errors.append(
+            f"{label} fields must equal {sorted(expected_keys)!r}, got "
+            f"{sorted(actual)!r}"
+        )
+    return value
+
+
+def _validate_recovery_amendment(
+    receipt: Mapping[str, Any],
+    receipt_raw: bytes,
+    task_records: Mapping[str, Mapping[str, Any]],
+    config: Mapping[str, Any],
+    errors: list[str],
+) -> None:
+    """Bind the only authorized fresh revisions to frozen failure evidence."""
+
+    receipt_digest = "sha256:" + hashlib.sha256(receipt_raw).hexdigest()
+    if receipt_digest != RECOVERY_RECEIPT_SHA256:
+        errors.append(
+            "recovery receipt digest mismatch: "
+            f"expected {RECOVERY_RECEIPT_SHA256}, got {receipt_digest}"
+        )
+    top = _exact_object(
+        receipt,
+        expected_keys={
+            "schema",
+            "board_namespace",
+            "authorized_action",
+            "authorization_basis",
+            "authorized_at",
+            "attempt_ledger_policy",
+            "prior_amendment",
+            "semantic_revision_policy",
+            "pre_repair_source",
+            "failed_attempts",
+            "repair",
+            "route_policy",
+            "constraints",
+        },
+        label="recovery receipt",
+        errors=errors,
+    )
+    exact_top = {
+        "schema": (
+            "verified-gui-optimizer/"
+            "provider-effect-retry-revision-amendment@1"
+        ),
+        "board_namespace": BOARD_NAMESPACE,
+        "authorized_action": (
+            "add_receipt_bound_semantic_revision_to_exact_tasks"
+        ),
+        "authorization_basis": (
+            "operator_directed_retry_after_verified_no_model_execution_"
+            "control_plane_failures"
+        ),
+        "authorized_at": "2026-08-12T06:41:42Z",
+        "attempt_ledger_policy": "append_only_no_refund",
+    }
+    for field, expected in exact_top.items():
+        if top.get(field) != expected:
+            errors.append(f"recovery receipt {field} is not sealed")
+
+    prior = _exact_object(
+        top.get("prior_amendment"),
+        expected_keys={
+            "path",
+            "sha256",
+            "authorized_action",
+            "authorized_max_task_attempts",
+        },
+        label="recovery receipt prior_amendment",
+        errors=errors,
+    )
+    prior_expected = {
+        "path": (
+            "implementation_plan/evidence/verified_gui_optimizer/recovery/"
+            "provider_capsule_immutability_retry_amendment_20260812.json"
+        ),
+        "sha256": (
+            "sha256:"
+            "b1881c4070aff2f326440c04d59158872627f31eafb5c0f8f00b80e33a8e3b96"
+        ),
+        "authorized_action": "increase_max_task_attempts_from_4_to_5",
+        "authorized_max_task_attempts": 5,
+    }
+    if dict(prior) != prior_expected:
+        errors.append("recovery receipt prior_amendment is not sealed")
+    prior_path = REPO_ROOT / str(prior.get("path") or "")
+    try:
+        prior_digest = "sha256:" + hashlib.sha256(prior_path.read_bytes()).hexdigest()
+    except OSError as exc:
+        errors.append(f"cannot read prior recovery amendment: {exc}")
+    else:
+        if prior_digest != prior_expected["sha256"]:
+            errors.append("prior recovery amendment digest mismatch")
+
+    policy = _exact_object(
+        top.get("semantic_revision_policy"),
+        expected_keys={
+            "metadata_field",
+            "value_template",
+            "receipt_self_hash_embedded",
+            "exact_task_ids",
+            "fresh_revision_attempt_origin",
+            "historical_task_revision_cids_preserved",
+            "old_canonical_cid_attempt_ledgers_preserved",
+            "display_attempt_projection_rebinds_to_new_revision",
+            "runtime_state_mutation_authorized",
+        },
+        label="recovery receipt semantic_revision_policy",
+        errors=errors,
+    )
+    expected_policy = {
+        "metadata_field": "Semantic key",
+        "value_template": (
+            f"{RECOVERY_SEMANTIC_KEY_PREFIX}/"
+            "{task_id}/receipt-sha256:{receipt_sha256}"
+        ),
+        "receipt_self_hash_embedded": False,
+        "exact_task_ids": ["VGO-001", "VGO-009"],
+        "fresh_revision_attempt_origin": 1,
+        "historical_task_revision_cids_preserved": True,
+        "old_canonical_cid_attempt_ledgers_preserved": True,
+        "display_attempt_projection_rebinds_to_new_revision": True,
+        "runtime_state_mutation_authorized": False,
+    }
+    if dict(policy) != expected_policy:
+        errors.append("recovery receipt semantic_revision_policy is not sealed")
+
+    pre_repair = _exact_object(
+        top.get("pre_repair_source"),
+        expected_keys={
+            "superproject_head",
+            "superproject_tree",
+            "accelerator_commit",
+            "accelerator_source_tree",
+            "accepted_control_plane_capsule_id",
+            "accepted_control_plane_archive_sha256",
+            "accepted_control_plane_runner_sha256",
+        },
+        label="recovery receipt pre_repair_source",
+        errors=errors,
+    )
+    expected_pre_repair = {
+        "superproject_head": "fd06de85c78fdadb91fdbf92eb935d311e3b6b65",
+        "superproject_tree": "32e21e55a05e0e26609d1ab27d10de312e60cf4e",
+        "accelerator_commit": "08f5b81d66762bd03816a15d7617c4aa06ea6a4e",
+        "accelerator_source_tree": "048626fcd4e2ccdda81ecf8b593d5f4ddca0eec1",
+        "accepted_control_plane_capsule_id": (
+            "sha256:e26cde672a309b7b9d69a51248ad05d69540458ec85a0d726e1059db7b1f7362"
+        ),
+        "accepted_control_plane_archive_sha256": (
+            "sha256:c4faa75b212a3fa6e3285fedb8aefd31a504733ec4bb0c93f86d0b2a3e055e68"
+        ),
+        "accepted_control_plane_runner_sha256": (
+            "sha256:e71396a5f13e3e21619afa2c850935c49944a20ed2a258aaa58718910eb8350d"
+        ),
+    }
+    if dict(pre_repair) != expected_pre_repair:
+        errors.append("recovery receipt pre_repair_source is not sealed")
+
+    repair = _exact_object(
+        top.get("repair"),
+        expected_keys={
+            "accelerator_commit",
+            "accelerator_source_tree",
+            "commit_patch_sha256",
+            "grok_primary_lifecycle_repair",
+            "sealed_prompt_rescue_repair",
+            "revision_attempt_accounting_repair",
+            "terra_route_and_rescue_test_result",
+            "scheduler_revision_test_result",
+            "daemon_semantic_revision_test_result",
+            "independent_audit",
+        },
+        label="recovery receipt repair",
+        errors=errors,
+    )
+    expected_repair = {
+        "accelerator_commit": "53f42b67442d2ecb28508accc5f98a4fc3cc6e46",
+        "accelerator_source_tree": "220152bb8a371a75ffeb04d080b332f062840a10",
+        "commit_patch_sha256": (
+            "sha256:d7b529b2200ca41099f5e1594aaebe5929d073bdb759432f480f6d2d39da62f9"
+        ),
+        "grok_primary_lifecycle_repair": (
+            "docker_create_is_parsed_as_one_exact_container_id_then_docker_"
+            "start_attach_interactive_is_the_provider_execution"
+        ),
+        "sealed_prompt_rescue_repair": (
+            "provider_rescue_is_refused_for_prompt_commands_bound_to_"
+            "noninheritable_passed_file_descriptors"
+        ),
+        "revision_attempt_accounting_repair": (
+            "display_attempt_counts_are_scoped_to_the_matching_canonical_task_"
+            "revision_while_legacy_identityless_counts_remain_conservative"
+        ),
+        "terra_route_and_rescue_test_result": (
+            "79 passed, 1 real-Docker deselected"
+        ),
+        "scheduler_revision_test_result": "8 passed",
+        "daemon_semantic_revision_test_result": "2 passed",
+        "independent_audit": "go",
+    }
+    if dict(repair) != expected_repair:
+        errors.append("recovery receipt repair tuple is not sealed")
+
+    route = _exact_object(
+        top.get("route_policy"),
+        expected_keys={
+            "route_id",
+            "authorization_id",
+            "primary_provider_id",
+            "primary_model_id",
+            "fallback_provider_id",
+            "fallback_implementer_identity",
+            "fallback_model_id",
+            "fallback_reasoning_effort",
+            "fallback_trigger",
+        },
+        label="recovery receipt route_policy",
+        errors=errors,
+    )
+    expected_route = {
+        "route_id": (
+            "agent-supervisor-prompt-v3-grok45-terra56-high-auth-or-hard-quota-v1"
+        ),
+        "authorization_id": (
+            "sha256:8a9c90a5837e88f8248566e65568410aba460549676490ab914a6e51e7d4d868"
+        ),
+        "primary_provider_id": "grok_cli",
+        "primary_model_id": "grok-4.5",
+        "fallback_provider_id": "codex",
+        "fallback_implementer_identity": "codex",
+        "fallback_model_id": "gpt-5.6-terra",
+        "fallback_reasoning_effort": "high",
+        "fallback_trigger": "primary_quota_or_auth_unavailable",
+    }
+    if dict(route) != expected_route:
+        errors.append("recovery receipt route_policy is not sealed")
+
+    constraints = _exact_object(
+        top.get("constraints"),
+        expected_keys={
+            "max_task_attempts",
+            "implementation_max_repair_rounds",
+            "implementation_retry_budget",
+            "validation_retry_budget",
+            "merge_retry_budget",
+            "historical_attempt_events_preserved",
+            "manual_attempt_counter_mutation_forbidden",
+            "runtime_state_or_counter_edit_forbidden",
+            "generic_provider_fallback_remains_forbidden",
+            "fallback_route",
+        },
+        label="recovery receipt constraints",
+        errors=errors,
+    )
+    expected_constraints = {
+        "max_task_attempts": 5,
+        "implementation_max_repair_rounds": 3,
+        "implementation_retry_budget": 3,
+        "validation_retry_budget": 3,
+        "merge_retry_budget": 3,
+        "historical_attempt_events_preserved": True,
+        "manual_attempt_counter_mutation_forbidden": True,
+        "runtime_state_or_counter_edit_forbidden": True,
+        "generic_provider_fallback_remains_forbidden": True,
+        "fallback_route": (
+            "grok-4.5_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_"
+            "verified_hard_quota"
+        ),
+    }
+    if dict(constraints) != expected_constraints:
+        errors.append("recovery receipt constraints are not sealed")
+    for field in (
+        "max_task_attempts",
+        "implementation_retry_budget",
+        "validation_retry_budget",
+        "merge_retry_budget",
+    ):
+        if config.get(field) != expected_constraints[field]:
+            errors.append(f"config.{field} conflicts with recovery receipt")
+
+    attempts_value = top.get("failed_attempts")
+    attempts = attempts_value if isinstance(attempts_value, list) else []
+    if not isinstance(attempts_value, list):
+        errors.append("recovery receipt failed_attempts must be a list")
+    attempt_ids = [
+        str(item.get("task_id") or "")
+        for item in attempts
+        if isinstance(item, Mapping)
+    ]
+    if attempt_ids != ["VGO-001", "VGO-009"] or len(attempts) != 2:
+        errors.append("recovery receipt failed_attempts must be exact ordered tasks")
+    attempts_by_id = {
+        str(item.get("task_id") or ""): item
+        for item in attempts
+        if isinstance(item, Mapping)
+    }
+    attempt_keys = {
+        "VGO-001": {
+            "task_id", "canonical_task_key", "task_revision_cid",
+            "task_contract_sha256_without_status_or_semantic_key",
+            "task_contract_canonical_json_size_bytes", "display_attempt_count",
+            "revision_attempt_count", "event_sequence", "event_type", "event_id",
+            "previous_event_id", "event_snapshot_id", "event_stream_id",
+            "finished_at", "reason", "attempt", "max_task_attempts",
+            "implementation_max_repair_rounds", "backoff_seconds",
+            "provider_dispatched", "attempt_consumed", "active_task_cleared",
+            "display_counter_pinned", "attempt_5_protected_latch_observed",
+            "attempt_5_provider_effect_observed",
+            "attempt_5_provider_attempt_cas_change_observed",
+        },
+        "VGO-009": {
+            "task_id", "canonical_task_key", "task_revision_cid",
+            "task_contract_sha256_without_status_or_semantic_key",
+            "task_contract_canonical_json_size_bytes", "display_attempt_count",
+            "revision_attempt_count", "event_sequence", "event_type", "event_id",
+            "previous_event_id", "event_snapshot_id", "event_stream_id",
+            "finished_at", "attempt", "returncode", "provider_dispatched",
+            "attempt_consumed", "baseline_commit", "branch", "workspace_path",
+            "workspace_relative_path", "diagnostic_receipt_cid",
+            "implementation_log_relative_path", "implementation_log_sha256",
+            "implementation_log_mode", "implementation_log_size_bytes",
+            "implementation_log_line_count", "docker_create_stdout",
+            "docker_container_started", "docker_container_survived_cleanup",
+            "primary_model_execution_observed", "fallback_model_execution_observed",
+            "failure", "invocation_id", "logical_attempt_id", "worktree_id",
+            "prompt_cid", "scope_cid", "provider_attempt_store",
+        },
+    }
+    for task_id, expected in RECOVERY_TASK_REVISIONS.items():
+        attempt = _exact_object(
+            attempts_by_id.get(task_id),
+            expected_keys=attempt_keys[task_id],
+            label=f"recovery receipt failed_attempts[{task_id}]",
+            errors=errors,
+        )
+        exact_attempt_fields = {
+            "task_id": task_id,
+            "canonical_task_key": expected["old_key"],
+            "task_revision_cid": expected["old_cid"],
+            "task_contract_sha256_without_status_or_semantic_key": (
+                expected["contract_sha256"]
+            ),
+            "task_contract_canonical_json_size_bytes": expected["contract_size"],
+            "display_attempt_count": expected["display_attempt_count"],
+            "revision_attempt_count": expected["revision_attempt_count"],
+            "event_sequence": expected["event_sequence"],
+            "event_type": expected["event_type"],
+            "event_id": expected["event_id"],
+        }
+        for field, value in exact_attempt_fields.items():
+            if attempt.get(field) != value:
+                errors.append(f"recovery receipt {task_id}.{field} is not sealed")
+
+    vgo001 = attempts_by_id.get("VGO-001", {})
+    expected_vgo001 = {
+        "previous_event_id": (
+            "sha256:e12b79a1af0420f882d5cfa1612c8d790d8735b6b4e566c6bc13d2025a1f7db0"
+        ),
+        "event_snapshot_id": (
+            "event-log-snapshot:sha256:9b60460f15ed6afa9366e79e7b827a87d61005e11bf5b1b3c6259a7ee434e7e8"
+        ),
+        "event_stream_id": (
+            "event-log:sha256:9b60460f15ed6afa9366e79e7b827a87d61005e11bf5b1b3c6259a7ee434e7e8"
+        ),
+        "finished_at": "2026-08-12T05:54:04.389270+00:00",
+        "reason": "implementation_repair_round_budget_exhausted",
+        "attempt": 5,
+        "max_task_attempts": 5,
+        "implementation_max_repair_rounds": 3,
+        "backoff_seconds": 7200,
+        "provider_dispatched": False,
+        "attempt_consumed": False,
+        "active_task_cleared": True,
+        "display_counter_pinned": True,
+        "attempt_5_protected_latch_observed": False,
+        "attempt_5_provider_effect_observed": False,
+        "attempt_5_provider_attempt_cas_change_observed": False,
+    }
+    for field, value in expected_vgo001.items():
+        if vgo001.get(field) != value:
+            errors.append(f"recovery receipt VGO-001.{field} is not sealed")
+
+    vgo009 = attempts_by_id.get("VGO-009", {})
+    expected_vgo009 = {
+        "previous_event_id": (
+            "sha256:89eaa06dfc1eb5e0448a2970458db0f1aae297b23768cbc51636e618b73ed83c"
+        ),
+        "event_snapshot_id": (
+            "event-log-snapshot:sha256:a586191c627238a2978ec7f8674a950c833e70be303420b03c0dc0cca6b394ec"
+        ),
+        "event_stream_id": (
+            "event-log:sha256:a586191c627238a2978ec7f8674a950c833e70be303420b03c0dc0cca6b394ec"
+        ),
+        "finished_at": "2026-08-12T05:54:55.941218+00:00",
+        "attempt": 4,
+        "returncode": 78,
+        "provider_dispatched": True,
+        "attempt_consumed": True,
+        "baseline_commit": "fd06de85c78fdadb91fdbf92eb935d311e3b6b65",
+        "branch": "implementation/vgo-009-53d3044c4e2d-attempt-4-1786514045",
+        "workspace_path": (
+            "/home/barberb/lift_coding/.worktrees/verified-gui-optimizer-control/"
+            "data/agent_supervisor/verified_gui_optimizer/worktrees/"
+            "workspace-75a13f8fed7b-68c891b9dc70"
+        ),
+        "workspace_relative_path": (
+            "data/agent_supervisor/verified_gui_optimizer/worktrees/"
+            "workspace-75a13f8fed7b-68c891b9dc70"
+        ),
+        "diagnostic_receipt_cid": (
+            "baguqeerac6mvzkwph3dmbqtgu5blb4ys4xndnn3ru4f2na4pvn2klzij2t5a"
+        ),
+        "implementation_log_relative_path": (
+            "data/agent_supervisor/verified_gui_optimizer/state/lane-3/"
+            "implementation_logs/vgo-009-attempt-4.log"
+        ),
+        "implementation_log_sha256": (
+            "sha256:dc446aa621e4f4d70ad3a160503ec90e7dad2fd6b235928e5489db49cff18656"
+        ),
+        "implementation_log_mode": "0600",
+        "implementation_log_size_bytes": 7519,
+        "implementation_log_line_count": 15,
+        "docker_create_stdout": (
+            "bfa8ff852c1f9c52c6c067bd1d8d2d1af6ccee19ba595f06d4e72e4d814c5d43"
+        ),
+        "docker_container_started": False,
+        "docker_container_survived_cleanup": False,
+        "primary_model_execution_observed": False,
+        "fallback_model_execution_observed": False,
+        "failure": (
+            "docker_create_container_id_stdout_was_mistaken_for_attached_"
+            "primary_provider_success"
+        ),
+        "invocation_id": (
+            "baguqeerawcszsylibexr6j3wvvbejot5lx25kskvrxvtobhvqaexzpijn67a"
+        ),
+        "logical_attempt_id": (
+            "baguqeerainkc65733xab44sastdwqt5z5rouif3zggu2dqriikrtcptskxyq"
+        ),
+        "worktree_id": (
+            "baguqeera6jmdcsvt5r5xdqrzrkjrywtrjdcb5ky5mgpaekalro6gmg6psyoq"
+        ),
+        "prompt_cid": (
+            "sha256:a940f2b56ba7098019c335aa3a9da879177da16670560fb38d51fccc820ef54c"
+        ),
+        "scope_cid": (
+            "baguqeeragz5dmvcmmv376kqk2cwmzqnqa5zd3vdqjq6qdi6vwo7focjovbnq"
+        ),
+    }
+    for field, value in expected_vgo009.items():
+        if vgo009.get(field) != value:
+            errors.append(f"recovery receipt VGO-009.{field} is not sealed")
+    store = _exact_object(
+        vgo009.get("provider_attempt_store"),
+        expected_keys={
+            "path", "identity", "directory_mode", "last_metadata_change_at",
+            "entry_count", "json_count", "lock_count", "provider_effect_count",
+            "provider_route_outcome_count", "sole_entry",
+        },
+        label="recovery receipt VGO-009.provider_attempt_store",
+        errors=errors,
+    )
+    expected_store = {
+        "path": (
+            "/home/barberb/.local/state/ipfs_accelerate_py/provider-attempts/"
+            "ddb61fab93e4775fc4af8a7dff7deeb845e2a03a4925cca66d69bd8006120676"
+        ),
+        "identity": (
+            "sha256:6ff0cc35d4facbbf7c003569e6baa73e4aa0ef7fc73bfad5104e0bcd20ac4ab9"
+        ),
+        "directory_mode": "0700",
+        "last_metadata_change_at": "2026-08-12T05:54:30.284968753+00:00",
+        "entry_count": 1,
+        "json_count": 0,
+        "lock_count": 1,
+        "provider_effect_count": 0,
+        "provider_route_outcome_count": 0,
+        "sole_entry": {
+            "name": (
+                "7cd6cbfbb2680ed950e2846f6209a243b9dded9efba495106c0b396fb54e48ff.lock"
+            ),
+            "mode": "0600",
+            "size_bytes": 0,
+        },
+    }
+    if dict(store) != expected_store:
+        errors.append("recovery receipt VGO-009 provider attempt store is not sealed")
+
+    expected_semantic_keys = {
+        task_id: (
+            f"{RECOVERY_SEMANTIC_KEY_PREFIX}/{task_id}/"
+            f"receipt-sha256:{RECOVERY_RECEIPT_SHA256.removeprefix('sha256:')}"
+        )
+        for task_id in RECOVERY_TASK_REVISIONS
+    }
+    for task_id, record in task_records.items():
+        metadata = record.get("metadata", {})
+        semantic_key = (
+            metadata.get("semantic key", "")
+            if isinstance(metadata, Mapping)
+            else ""
+        )
+        expected_semantic_key = expected_semantic_keys.get(task_id, "")
+        if semantic_key != expected_semantic_key:
+            if task_id in expected_semantic_keys:
+                errors.append(f"{task_id}: recovery Semantic key is not sealed")
+            elif semantic_key:
+                errors.append(f"{task_id}: unauthorized Semantic key")
+    for task_id, expected in RECOVERY_TASK_REVISIONS.items():
+        record = task_records.get(task_id)
+        if not isinstance(record, Mapping):
+            continue
+        contract_raw = _task_contract_bytes(record, task_id)
+        contract_digest = "sha256:" + hashlib.sha256(contract_raw).hexdigest()
+        if contract_digest != expected["contract_sha256"]:
+            errors.append(f"{task_id}: task contract changed beyond Semantic key")
+        if len(contract_raw) != expected["contract_size"]:
+            errors.append(f"{task_id}: task contract canonical byte size changed")
+        try:
+            old_key, old_cid = _task_identity_from_record(
+                record, omit_semantic_key=True
+            )
+            new_key, new_cid = _task_identity_from_record(
+                record, omit_semantic_key=False
+            )
+        except ValueError as exc:
+            errors.append(f"{task_id}: cannot recompute task identity: {exc}")
+            continue
+        if (old_key, old_cid) != (expected["old_key"], expected["old_cid"]):
+            errors.append(f"{task_id}: prior canonical identity is not preserved")
+        if (new_key, new_cid) != (expected["new_key"], expected["new_cid"]):
+            errors.append(f"{task_id}: receipt-bound canonical identity is not sealed")
+        if (new_key, new_cid) == (old_key, old_cid):
+            errors.append(f"{task_id}: recovery must create a fresh task revision")
 
 
 def _parse_markdown_records(
@@ -1171,6 +1955,7 @@ def validate() -> dict[str, Any]:
     _validate_config(config, errors)
     required_paths = {
         CONFIG_PATH.as_posix(),
+        RECOVERY_RECEIPT_PATH.as_posix(),
         str(config.get("taskboard_path") or ""),
         str(config.get("objectives_path") or ""),
         str(config.get("plan_path") or ""),
@@ -1198,6 +1983,34 @@ def validate() -> dict[str, Any]:
         )
         errors.extend(parse_errors)
         _validate_tasks(task_records, config, errors)
+    recovery_receipt_file = REPO_ROOT / RECOVERY_RECEIPT_PATH
+    if recovery_receipt_file.is_file():
+        try:
+            recovery_receipt_raw = recovery_receipt_file.read_bytes()
+            recovery_receipt = json.loads(
+                recovery_receipt_raw.decode("utf-8"),
+                object_pairs_hook=_object_without_duplicates,
+            )
+            if not isinstance(recovery_receipt, dict):
+                raise ValueError("root must be an object")
+        except (
+            OSError,
+            UnicodeError,
+            json.JSONDecodeError,
+            ValueError,
+        ) as exc:
+            errors.append(
+                "cannot load recovery amendment: "
+                f"{type(exc).__name__}: {exc}"
+            )
+        else:
+            _validate_recovery_amendment(
+                recovery_receipt,
+                recovery_receipt_raw,
+                task_records,
+                config,
+                errors,
+            )
     if goal_path.is_file():
         goal_records, parse_errors = _parse_markdown_records(
             goal_path,

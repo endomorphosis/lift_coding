@@ -134,6 +134,7 @@ for other screens, but no task may expand into optimizing every application.
 - Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo001_oracle.py --check-all ; cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_models.py -q
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/models
+- Semantic key: verified-gui-optimizer/provider-effect-retry-revision@1/VGO-001/receipt-sha256:15219fc7346422ec83462131611b21c62780c7bcaab868ce04899fcf22ffb7bb
 - Parallel lane: vgo-lane-1
 - Resource class: cpu-small
 - Resource stage: contracts
@@ -215,6 +216,7 @@ for other screens, but no task may expand into optimizing every application.
 - Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo009_oracle.py --check-all ; cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py -q
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/security-authority
+- Semantic key: verified-gui-optimizer/provider-effect-retry-revision@1/VGO-009/receipt-sha256:15219fc7346422ec83462131611b21c62780c7bcaab868ce04899fcf22ffb7bb
 - Parallel lane: vgo-lane-3
 - Resource class: security-review
 - Resource stage: authority
