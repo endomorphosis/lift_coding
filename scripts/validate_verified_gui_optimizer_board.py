@@ -407,7 +407,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
     source = config.get("source_binding")
     expected_source = {
         "accelerator_required_ancestor": (
-            "493f5dc102340a7c271fb44efa6463cc7ac02258"
+            "ce448eae6ab5706832d3ae88b041f9d38ac82ae8"
         ),
         "accelerator_required_branch": MERGE_BRANCH,
         "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
