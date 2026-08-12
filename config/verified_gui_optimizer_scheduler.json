@@ -74,7 +74,10 @@
     "scripts/ops/agent_supervisor/implementation_supervisor_entry.py",
     "scripts/ops/verified_gui_optimizer_vgo001_oracle.py",
     "scripts/ops/verified_gui_optimizer_vgo009_oracle.py",
-    "scripts/ops/verified_gui_optimizer_status.py"
+    "scripts/ops/verified_gui_optimizer_status.py",
+    "implementation_plan/evidence/verified_gui_optimizer/provider_route/provider_fallback_policy_authorization_20260812.json",
+    "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_root_pin_20260812.json",
+    "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_witness_20260812.json"
   ],
   "runtime_paths": {
     "root": "data/agent_supervisor/verified_gui_optimizer",
@@ -277,8 +280,9 @@
     "primary_model_id": "grok-4.5",
     "fallback_provider_id": "codex",
     "fallback_model_id": "gpt-5.6-terra",
-    "fallback_trigger": "primary_quota_exhausted",
-    "fallback_reasoning_effort": "medium",
+    "fallback_trigger": "primary_quota_or_auth_unavailable",
+    "fallback_reasoning_effort": "high",
+    "route_authorization_path": "implementation_plan/evidence/verified_gui_optimizer/provider_route/provider_fallback_policy_authorization_20260812.json",
     "max_concurrency": 4,
     "secrets_from_environment_only": true,
     "secrets_in_argv_prompts_logs_or_receipts": false
