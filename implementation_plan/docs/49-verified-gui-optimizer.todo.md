@@ -285,7 +285,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-012 Build standalone GUI semantic capsules
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
