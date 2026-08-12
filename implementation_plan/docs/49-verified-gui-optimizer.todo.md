@@ -176,7 +176,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-003 Define the deterministic evaluation scenario catalog
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - No-change completion: forbidden
 - Is schedulable: true
