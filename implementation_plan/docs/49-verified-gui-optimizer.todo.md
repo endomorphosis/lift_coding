@@ -415,7 +415,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-027 Implement incremental GUI invalidation planning
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
