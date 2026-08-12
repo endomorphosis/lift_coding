@@ -1162,6 +1162,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
         "merge_target_branch": MERGE_BRANCH,
         "max_lanes": 4,
         "strict_task_sharding": True,
+        "idle_lane_work_stealing": "virgin-transfer",
         "exit_when_all_tracks_terminal": True,
         "objective_refill_enabled": False,
         "codebase_refill_enabled": False,
