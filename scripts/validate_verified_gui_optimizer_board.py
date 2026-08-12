@@ -706,10 +706,10 @@ def _validate_recovery_amendment(
             "agent-supervisor-prompt-v3-grok45-terra56-high-auth-or-hard-quota-v1"
         ),
         "authorization_id": (
-            "sha256:8a9c90a5837e88f8248566e65568410aba460549676490ab914a6e51e7d4d868"
+            "sha256:10bf8bb19799087c0ecca2abe3112fe07bfeafd76a420c3347ad2ce8989fa316"
         ),
         "primary_provider_id": "grok_cli",
-        "primary_model_id": "grok-4.5",
+        "primary_model_id": "grok-4.6",
         "fallback_provider_id": "codex",
         "fallback_implementer_identity": "codex",
         "fallback_model_id": "gpt-5.6-terra",
@@ -747,7 +747,7 @@ def _validate_recovery_amendment(
         "runtime_state_or_counter_edit_forbidden": True,
         "generic_provider_fallback_remains_forbidden": True,
         "fallback_route": (
-            "grok-4.5_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_"
+            "grok-4.6_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_"
             "verified_hard_quota"
         ),
     }
@@ -1301,7 +1301,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
     provider = config.get("provider")
     expected_provider = {
         "primary_provider_id": "grok_cli",
-        "primary_model_id": "grok-4.5",
+        "primary_model_id": "grok-4.6",
         "fallback_provider_id": "codex",
         "fallback_model_id": "gpt-5.6-terra",
         "fallback_trigger": "primary_quota_or_auth_unavailable",

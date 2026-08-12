@@ -48,13 +48,13 @@
   },
   "route_policy": {
     "route_id": "agent-supervisor-prompt-v3-grok45-terra56-high-auth-or-hard-quota-v1",
-    "authorization_id": "sha256:8a9c90a5837e88f8248566e65568410aba460549676490ab914a6e51e7d4d868",
+    "authorization_id": "sha256:10bf8bb19799087c0ecca2abe3112fe07bfeafd76a420c3347ad2ce8989fa316",
     "authority_cid": "sha256:da02ee385879f4e69447d454fe02addd9ad9264a87ecd08d9975ba852ef2b152",
     "budget_cid": "baguqeera47nyy2f6kesedkrvwdbiyhl3uvozl2cgjvkxxwayh2vomasgvdtq",
     "repository_cid": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
     "resource_cid": "sha256:f14f9a01c7445600f174dc5120fa519969a8f63b0c9c76d4805e6e206fb81046",
     "primary_provider_id": "grok_cli",
-    "primary_model_id": "grok-4.5",
+    "primary_model_id": "grok-4.6",
     "fallback_provider_id": "codex",
     "fallback_implementer_identity": "codex",
     "fallback_model_id": "gpt-5.6-terra",
@@ -179,6 +179,6 @@
     "historical_attempt_events_preserved": true,
     "manual_attempt_counter_mutation_forbidden": true,
     "generic_provider_fallback_remains_forbidden": true,
-    "fallback_route": "grok-4.5_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_verified_hard_quota"
+    "fallback_route": "grok-4.6_to_gpt-5.6-terra_high_only_on_auth_unavailable_or_verified_hard_quota"
   }
 }
