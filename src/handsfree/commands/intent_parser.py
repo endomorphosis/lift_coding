@@ -459,6 +459,18 @@ class IntentParser:
             ),
             (
                 re.compile(
+                    r"\bfind\s+similar\s+workflow\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "workflow_name": lambda m: m.group(1).strip(),
+                    "pr_number": lambda m: int(m.group(2)),
+                    "repo": lambda m: m.group(3),
+                },
+            ),
+            (
+                re.compile(
                     r"\bfind\s+similar\s+workflow\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\b",
                     re.IGNORECASE,
                 ),
@@ -466,6 +478,18 @@ class IntentParser:
                 {
                     "workflow_name": lambda m: m.group(1).strip(),
                     "pr_number": lambda m: int(m.group(2)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\bfind\s+similar\s+check\s+(.+?)\s+failures\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.find_similar_failures",
+                {
+                    "check_name": lambda m: m.group(1).strip(),
+                    "pr_number": lambda m: int(m.group(2)),
+                    "repo": lambda m: m.group(3),
                 },
             ),
             (
@@ -669,6 +693,23 @@ class IntentParser:
                 "ai.accelerated_explain_failure",
                 {
                     "pr_number": lambda m: int(m.group(1)),
+                },
+            ),
+            (
+                re.compile(
+                    r"\baccelerated\s+explain\s+(check|workflow)\s+(.+?)\s+for\s+(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.accelerated_explain_failure",
+                {
+                    "workflow_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "workflow" else None
+                    ),
+                    "check_name": lambda m: (
+                        m.group(2).strip() if m.group(1).lower() == "check" else None
+                    ),
+                    "pr_number": lambda m: int(m.group(3)),
+                    "repo": lambda m: m.group(4),
                 },
             ),
             (
@@ -883,6 +924,17 @@ class IntentParser:
                 {
                     "pr_number": lambda m: int(m.group(1)),
                     "persist_output": True,
+                },
+            ),
+            (
+                re.compile(
+                    r"\b(?:explain|summarize)\s+(?:the\s+)?(?:failing\s+(?:checks?)|failure)\s+(?:for\s+)?(?:pr|pull\s+request)\s+(\d+)\s+(?:on|in)\s+([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)\b",
+                    re.IGNORECASE,
+                ),
+                "ai.explain_failure",
+                {
+                    "pr_number": lambda m: int(m.group(1)),
+                    "repo": lambda m: m.group(2),
                 },
             ),
             (

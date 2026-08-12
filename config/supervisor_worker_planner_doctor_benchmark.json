@@ -1,0 +1,23 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/worker-planner-doctor-benchmark-config@1",
+  "contract_version": 1,
+  "interface": "WorkerPlannerDoctorBenchmark@1",
+  "evidence": "wpd/llm-avoidance-benchmark@1",
+  "board_namespace": "agent-supervisor-worker-planner-doctor-v1",
+  "task_id": "WPD-051",
+  "baseline_arm": "provider-first-mock",
+  "challenger_arm": "kernel-first",
+  "holdout_manifest": "external/ipfs_accelerate/test/fixtures/agent_supervisor/worker_planner_doctor_holdout/manifest.json",
+  "quality_slack": 0.0,
+  "synthetic_only_default": true,
+  "promotion_requires": [
+    "challenger_provider_call_reduction",
+    "quality_non_inferiority",
+    "safety_floors_zero",
+    "non_synthetic_operator_seal"
+  ],
+  "notes": [
+    "Synthetic-only runs may observe reduction but cannot promote kernel-first defaults.",
+    "Holdout denominators are sealed with the manifest content identity."
+  ]
+}

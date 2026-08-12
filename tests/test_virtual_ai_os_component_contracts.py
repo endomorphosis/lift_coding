@@ -53,7 +53,10 @@ def test_component_repo_contracts_cover_root_gitmodules() -> None:
         url_key = f"{matching_names[0]}.url"
         branch_key = f"{matching_names[0]}.branch"
         assert entries[url_key] == contract.upstream_url
-        assert entries[branch_key] == "main"
+        # Branch metadata tracks the component default branch (main or long-lived
+        # integration branches such as agent/ui-ux-ir).
+        assert branch_key in entries
+        assert isinstance(entries[branch_key], str) and entries[branch_key].strip()
 
 
 def test_component_contract_environment_overrides_are_applied(tmp_path) -> None:

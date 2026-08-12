@@ -1,0 +1,54 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/deterministic-repair-bootstrap-validation@2",
+  "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
+  "repository_commits": {
+    "Mcp-Plus-Plus": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+    "external/ipfs_accelerate": "276556b5359b617a7724ec243793d8d9f22b6aca",
+    "external/ipfs_datasets": "c330a601364e3fb760db34f98195b506a63f1f26",
+    "external/ipfs_kit": "ea3b47b72090354c27a9826d14a260d76b5e6914",
+    "swissknife": "1e2021cae2eafcb1d546be3b99fbdb4bc5a36256"
+  },
+  "task_ids": [
+    "DCR-000",
+    "DCR-001",
+    "DCR-002",
+    "DCR-003",
+    "DCR-004",
+    "DCR-010"
+  ],
+  "test_files": [
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_configured_board_scheduler.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_multi_supervisor_provider_policy.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_provider.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_ordered_provider_fallback.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_no_llm.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_no_llm_runtime_barrier.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_contracts.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_root_ownership.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_capabilities.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_deterministic_repair_artifacts.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_ordered_provider_authoring.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_implementation_daemon_planner_doctor_hook.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_grok_quota_terra_gate.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_current_evidence.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_dcr_forest.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_typescript_validation_image.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_validation_receipt.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_validation_runtime.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_post_merge_reconciliation_gate.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_merge_train_callback_acceptance.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_manual_completion_authority_runtime.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_attempt_artifact_collision.py",
+    "external/ipfs_accelerate/test/api/test_declared_output_tracking_invariant.py",
+    "external/ipfs_kit/tests/test_tracked_package_syntax_repair.py"
+  ],
+  "result": {
+    "collected": 294,
+    "passed": 294,
+    "failed": 0,
+    "warnings": 1
+  },
+  "runtime_model_calls": 0,
+  "artifacts_verified": true,
+  "receipt_id": "sha256:6ab6978545a467dbaaf2e9127e0e83bfb9996b67d5114fcab1cbd38d8b6080ed"
+}

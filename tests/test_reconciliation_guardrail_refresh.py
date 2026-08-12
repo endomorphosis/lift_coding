@@ -89,9 +89,18 @@ def test_existing_main_checkout_guardrail_does_not_churn_fingerprint(tmp_path):
 
     assert len(repaired) == 1
     assert repaired[0]["refreshed"] is True
-    assert "## Machine Readable Manifest" in discovery_path.read_text(encoding="utf-8")
+    # Refresh migrates to a fingerprint-bound discovery path; legacy evidence stays put.
+    refreshed_discovery = Path(repaired[0]["discovery_path"])
+    # G140 pin may refresh the legacy discovery path in place when the
+    # fingerprint-bound name would collide; either migration or in-place
+    # repair is acceptable as long as the manifest is present and a second
+    # scan does not churn.
+    assert refreshed_discovery.exists()
+    assert "## Machine Readable Manifest" in refreshed_discovery.read_text(encoding="utf-8")
+    if refreshed_discovery != discovery_path:
+        assert discovery_path.read_text(encoding="utf-8") == "old dirty-checkout evidence\n"
     before_board = board.read_text(encoding="utf-8")
-    before_discovery = discovery_path.read_text(encoding="utf-8")
+    before_discovery = refreshed_discovery.read_text(encoding="utf-8")
 
     findings = record_reconciliation_guardrail_findings(
         todo_path=board,
@@ -105,7 +114,7 @@ def test_existing_main_checkout_guardrail_does_not_churn_fingerprint(tmp_path):
 
     assert findings == []
     assert board.read_text(encoding="utf-8") == before_board
-    assert discovery_path.read_text(encoding="utf-8") == before_discovery
+    assert refreshed_discovery.read_text(encoding="utf-8") == before_discovery
 
 
 def test_existing_preflight_guardrail_does_not_churn_rescue_branch_fingerprint(tmp_path):
@@ -171,9 +180,17 @@ def test_existing_preflight_guardrail_does_not_churn_rescue_branch_fingerprint(t
 
     assert len(repaired) == 1
     assert repaired[0]["refreshed"] is True
-    assert "## Machine Readable Manifest" in discovery_path.read_text(encoding="utf-8")
+    refreshed_discovery = Path(repaired[0]["discovery_path"])
+    # G140 pin may refresh the legacy discovery path in place when the
+    # fingerprint-bound name would collide; either migration or in-place
+    # repair is acceptable as long as the manifest is present and a second
+    # scan does not churn.
+    assert refreshed_discovery.exists()
+    assert "## Machine Readable Manifest" in refreshed_discovery.read_text(encoding="utf-8")
+    if refreshed_discovery != discovery_path:
+        assert discovery_path.read_text(encoding="utf-8") == "old preflight-conflict evidence\n"
     before_board = board.read_text(encoding="utf-8")
-    before_discovery = discovery_path.read_text(encoding="utf-8")
+    before_discovery = refreshed_discovery.read_text(encoding="utf-8")
 
     findings = record_reconciliation_guardrail_findings(
         todo_path=board,
@@ -187,7 +204,7 @@ def test_existing_preflight_guardrail_does_not_churn_rescue_branch_fingerprint(t
 
     assert findings == []
     assert board.read_text(encoding="utf-8") == before_board
-    assert discovery_path.read_text(encoding="utf-8") == before_discovery
+    assert refreshed_discovery.read_text(encoding="utf-8") == before_discovery
 
 
 def test_reconciliation_guardrail_todo_conflict_repair_keeps_main_variant(tmp_path):

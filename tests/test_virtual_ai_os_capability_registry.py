@@ -27,6 +27,10 @@ def test_virtual_ai_os_registry_exposes_initial_capability_set():
         "dataset_discovery",
         "device_render_transport",
         "embedding",
+        "hardware_profile",
+        "inference",
+        "ipfs_add_content",
+        "ipfs_get_content",
         "ipfs_pin",
         "llm_generation",
         "storage",
@@ -213,6 +217,10 @@ def test_top_level_capability_registry_path_resolves_stable_ids():
         "dataset_discovery",
         "device_render_transport",
         "embedding",
+        "hardware_profile",
+        "inference",
+        "ipfs_add_content",
+        "ipfs_get_content",
         "ipfs_pin",
         "llm_generation",
         "storage",
@@ -312,7 +320,7 @@ def test_capability_routing_surface_catalog_names_virtual_ai_os_surfaces():
     assert surfaces["swissknife_orb"].label == "SwissKnife ORB"
     assert surfaces["swissknife_orb"].metadata["virtual_ui_plane"] == ("swissknife.virtual_desktop")
     assert surfaces["swissknife_orb"].metadata["orb_router"] == (
-        "swissknife/src/services/mcp-orb-capability-router.ts"
+        "swissknife/src/services/mcp/mcp-orb-capability-router.ts"
     )
     assert surfaces["swissknife_orb"].metadata["display_descriptor"] == (
         "spec/meta_glasses_display_widget_orb_interface.json"

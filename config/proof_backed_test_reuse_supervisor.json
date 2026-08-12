@@ -13,7 +13,7 @@
   "goalPrefix": "PTR-G",
   "boardNamespace": "proof-backed-test-reuse-v1",
   "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
-  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v1",
+  "defaultStateRootSuffix": "ipfs_accelerate_py/proof-backed-test-reuse-v9",
   "repositories": {
     "accelerator": "external/ipfs_accelerate",
     "datasets": "external/ipfs_datasets",
@@ -23,7 +23,7 @@
     "cid": "content_identity_only",
     "astTrace": "invalidation_scope_only",
     "runtimeTrace": "invalidation_scope_and_completeness_only",
-    "passReceipt": "candidate_only_until_trust_and_context_revalidated",
+    "passReceipt": "candidate_only_until_runner_signature_trust_and_context_revalidated",
     "realZkCertificate": "authoritative_only_when_exactly_bound_and_locally_verified",
     "simulatedZk": "non_attested_never_skip",
     "mutableCacheIndex": "lookup_hint_only",
@@ -68,8 +68,46 @@
     ],
     "unknownOrIncompleteAction": "run_test"
   },
+  "runnerAttestationProfile": {
+    "schema": "RunnerPassAttestationV1",
+    "signatureAlgorithm": "ed25519",
+    "signatureDomain": "ipfs-test-pass-attestation/v1\u0000",
+    "signatureInput": "domain-bytes||sha2-256(unsigned-envelope-bytes)",
+    "unsignedEnvelope": {
+      "canonicalization": "strict-dag-cbor",
+      "cidVersion": 1,
+      "multicodec": "dag-cbor",
+      "multihash": "sha2-256"
+    },
+    "publicKeyMaterial": {
+      "byteEncoding": "varint(ed25519-pub)||32-byte-ed25519-public-key",
+      "cidVersion": 1,
+      "multicodec": "raw",
+      "multihash": "sha2-256",
+      "multibase": "base32-lower"
+    },
+    "trustPolicy": {
+      "authority": "locally-pinned-trust-policy-cid",
+      "cidVersion": 1,
+      "multicodec": "dag-cbor",
+      "multihash": "sha2-256",
+      "multibase": "base32-lower",
+      "trustOnFirstUse": false
+    },
+    "usage": "pytest-pass-only",
+    "checks": {
+      "keyEpochRequired": true,
+      "validityWindowRequired": true,
+      "rotationRequired": true,
+      "revocationRequired": true
+    }
+  },
   "proofPolicy": {
-    "statement": "TestPassStatementV1",
+    "statement": "TestPassStatementV5",
+    "signedRunnerAttestationRequired": true,
+    "runnerPublicKeyMulticodecCidRequired": true,
+    "runnerKeyEpochRotationAndRevocationRequired": true,
+    "legacyHashOnlyStatementCanSkip": false,
     "proveOnlyAfterSetupCallTeardownPass": true,
     "provingIsDeferred": true,
     "verificationIsLocalAndBounded": true,
@@ -208,30 +246,43 @@
       "ASI-G260",
       "ASI-G290",
       "ASI-G360"
+    ],
+    "PTR-G120": [
+      "CBP-G025",
+      "CBP-G200",
+      "ASI-G300"
+    ],
+    "PTR-G130": [
+      "ASI-G220",
+      "ASI-G240",
+      "ASI-G350"
+    ],
+    "PTR-G140": [
+      "ASI-G240",
+      "ASI-G280",
+      "ASI-G360"
     ]
   },
   "objectiveProjection": {
     "mode": "reviewed_bounded_closeout",
-    "reviewedAt": "2026-08-03",
-    "reviewRevision": "production-runtime-activation-repair-v4",
+    "reviewedAt": "2026-08-08",
+    "reviewRevision": "authenticated-receipt-current-tree-repair-v9",
     "implementationTaskIds": [
-      "PTR-143",
-      "PTR-144",
-      "PTR-145",
-      "PTR-146",
-      "PTR-147",
-      "PTR-148",
-      "PTR-149",
-      "PTR-150",
-      "PTR-151",
-      "PTR-152",
-      "PTR-153",
-      "PTR-154",
-      "PTR-155"
+      "PTR-160",
+      "PTR-161",
+      "PTR-162",
+      "PTR-163",
+      "PTR-164",
+      "PTR-165",
+      "PTR-166",
+      "PTR-167",
+      "PTR-168",
+      "PTR-169",
+      "PTR-170",
+      "PTR-171"
     ],
     "initialClaimableTaskIds": [
-      "PTR-150",
-      "PTR-151"
+      "PTR-170"
     ],
     "authorityWriter": "outer_controller_only",
     "workerLaneReconciliationEnabled": false,
@@ -245,12 +296,23 @@
     "statusPathSuffix": "projection/completion/closeout_status.json",
     "reconciliationPhases": 3,
     "closeoutControllerTaskId": "PTR-121",
-    "operatorHandoffTaskId": "PTR-149",
-    "proofMaterialAndContextWaveTaskIds": [
-      "PTR-153",
-      "PTR-154"
+    "operatorHandoffTaskId": "PTR-169",
+    "authenticatedReceiptWaveATaskIds": [
+      "PTR-160",
+      "PTR-161",
+      "PTR-162"
     ],
-    "exactV4PublicationJoinTaskId": "PTR-155",
+    "authenticatedReceiptWaveBTaskIds": [
+      "PTR-163",
+      "PTR-165"
+    ],
+    "authenticatedReceiptRuntimeJoinTaskId": "PTR-164",
+    "authenticatedReceiptPythonCompositionTaskId": "PTR-171",
+    "authenticatedCurrentTreeHandoffTaskId": "PTR-169",
+    "sealedTaskCount": 78,
+    "authenticityJoinTaskId": "PTR-166",
+    "outputReplayJoinTaskId": "PTR-167",
+    "zeroConfigE2EJoinTaskId": "PTR-168",
     "optionalCapabilityFailureAction": "retain_typed_gap_and_continue_tests"
   },
   "providerPolicy": {
@@ -261,23 +323,32 @@
     "fallback": {
       "provider": "codex",
       "model": "gpt-5.6-terra",
-      "modelReasoningEffort": "medium"
+      "modelReasoningEffort": "high"
     },
-    "fallbackTrigger": "grok_quota_exhausted",
-    "primaryUnavailableAction": "fail_preflight",
-    "nonQuotaFailureAction": "propagate_without_fallback",
+    "routingAuthority": "ipfs_accelerate_py.llm_router",
+    "fallbackTrigger": "grok_quota_auth_or_unavailable",
+    "primaryUnavailableAction": "use_codex_fallback",
+    "nonQuotaFailureAction": "fallback_on_auth_or_launch_else_propagate",
     "appliesTo": [
       "implementation",
       "semantic_merge_resolver"
     ],
-    "fallbackForbiddenOn": [
+    "fallbackAllowedOn": [
+      "grok_quota_exhausted",
       "authentication_failure",
-      "launch_failure",
+      "launch_failure"
+    ],
+    "fallbackRequires": [
+      "side_effects_started=false",
+      "workspace_unchanged=true"
+    ],
+    "fallbackForbiddenOn": [
       "timeout",
       "transport_failure",
       "generic_nonzero_exit",
       "malformed_output",
-      "task_failure"
+      "task_failure",
+      "side_effects_started"
     ]
   },
   "parallelRuntime": {
@@ -286,8 +357,7 @@
     "scheduler": "deterministic_numeric_task_shards",
     "strictTaskSharding": true,
     "initialClaimableTaskIds": [
-      "PTR-150",
-      "PTR-151"
+      "PTR-170"
     ],
     "isolation": "ephemeral_git_worktree_per_task",
     "mergeQueue": "shared_serial",
@@ -324,7 +394,8 @@
     ],
     "semanticMergeResolver": {
       "provider": "grok-codex",
-      "fallbackTrigger": "grok_quota_exhausted",
+      "routingAuthority": "ipfs_accelerate_py.llm_router",
+      "fallbackTrigger": "grok_quota_auth_or_unavailable",
       "inheritedCommandPolicy": "override_with_managed_provider_chain"
     },
     "worktreeSubmodulePaths": [
@@ -364,7 +435,7 @@
     "requireCleanExactIntegrationCheckout": true,
     "requireCleanExactSubmodules": true,
     "validateGoalAndTaskDags": true,
-    "requireInitialConflictFreeWidth": 2,
+    "requireInitialConflictFreeWidth": 1,
     "projectObjectivesWithoutGeneratingWork": true,
     "runNoAgentReadinessPass": true,
     "runReconciliationOnlyLanePasses": true,

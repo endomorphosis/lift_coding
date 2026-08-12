@@ -20,7 +20,7 @@ class TestMCPPlusPlusProtocol:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/src/services/mcp-plus-plus.ts")
+        self.src = read_file("swissknife/src/services/mcp/mcp-plus-plus.ts")
 
     def test_profile_a_interface_descriptor(self):
         """Profile A: MCP-IDL interface descriptors."""
@@ -236,7 +236,7 @@ class TestMCPPlusPlusDesktopApp:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/web/src/browser-main.ts")
+        self.src = read_file("swissknife/web/legacy-archive/src/browser-main.ts")
 
     def test_app_registered_in_menu(self):
         assert "mcp-plus-plus" in self.src
@@ -279,7 +279,7 @@ class TestFullEndpointCoverage:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/web/src/browser-main.ts")
+        self.src = read_file("swissknife/web/legacy-archive/src/browser-main.ts")
 
     def test_all_31_endpoints_present(self):
         """Every backend endpoint must appear in the virtual desktop."""

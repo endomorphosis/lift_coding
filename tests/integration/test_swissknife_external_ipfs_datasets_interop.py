@@ -31,9 +31,13 @@ from handsfree.swissknife_ipfs_datasets_interop import (  # noqa: E402
 
 IPFS_DATASETS_ROOT = REPO_ROOT / "external" / "ipfs_datasets"
 DESCRIPTOR_TS_PATH = "swissknife/src/services/mcp/ipfs-datasets-bucket-vfs-interop-descriptor.ts"
-BUCKET_VFS_DEMO_SUFFIXES = tuple(
-    f".tools/ipfs_kit_py/{candidate.removeprefix('.tools/ipfs_kit_py/')}"
-    for candidate in BUCKET_VFS_DEMO_PATH_CANDIDATES
+# Descriptor candidates are already monorepo-root-relative under external/ipfs_kit.
+BUCKET_VFS_DEMO_SUFFIXES = BUCKET_VFS_DEMO_PATH_CANDIDATES
+IPFS_KIT_DESCRIPTOR_PATHS = (
+    "external/ipfs_kit/data/deprecations_report.schema.json",
+    "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md",
+    "external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py",
+    "external/ipfs_kit/examples/demo_unified_bucket_interface.py",
 )
 
 GOAL_PACKET_GOALS = {
@@ -206,16 +210,7 @@ def swissknife_ipfs_datasets_interaction_envelope() -> dict:
 
 
 def test_ipfs_datasets_bucket_vfs_descriptors_exist_on_disk() -> None:
-    expected_paths = [
-        "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json",
-        (
-            "external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/"
-            "BUCKET_VFS_INTERFACES_COMPLETE.md"
-        ),
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py",
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py",
-    ]
-    for relative_path in expected_paths:
+    for relative_path in IPFS_KIT_DESCRIPTOR_PATHS:
         assert (REPO_ROOT / relative_path).is_file(), f"missing {relative_path}"
 
 
@@ -232,14 +227,14 @@ def test_discover_ipfs_datasets_bucket_vfs_contract_finds_expected_surface() -> 
     assert set(REQUIRED_UNIFIED_BUCKET_METHODS).issubset(set(contract.unified_bucket_methods))
     assert set(REQUIRED_UNIFIED_BUCKET_BACKENDS).issubset(set(contract.unified_bucket_backends))
     assert contract.deprecations_report_schema_path.endswith(
-        ".tools/ipfs_kit_py/data/deprecations_report.schema.json"
+        "external/ipfs_kit/data/deprecations_report.schema.json"
     )
     assert contract.bucket_vfs_doc_path.endswith(
-        ".tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
+        "external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md"
     )
     assert contract.bucket_vfs_demo_path.endswith(BUCKET_VFS_DEMO_SUFFIXES)
     assert contract.unified_bucket_demo_path.endswith(
-        ".tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py"
+        "external/ipfs_kit/examples/demo_unified_bucket_interface.py"
     )
 
 
@@ -298,15 +293,8 @@ def test_swissknife_descriptor_module_exports_interop_contract() -> None:
     assert "swissknife/contracts/control_surface_contract.schema.json" in src
     assert "swissknife/contracts/interaction_envelope.schema.json" in src
     assert "swissknife/contracts/mediation_receipt.schema.json" in src
-    assert "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json" in src
-    assert (
-        "external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/"
-        "BUCKET_VFS_INTERFACES_COMPLETE.md"
-    ) in src
-    assert "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py" in src
-    assert (
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py" in src
-    )
+    for relative_path in IPFS_KIT_DESCRIPTOR_PATHS:
+        assert relative_path in src
     assert "MGW-571" in src
     assert "VAIOS-G702" in src
     assert "agent_identity" in src
@@ -362,13 +350,13 @@ def test_docs_discovery_and_heap_record_objective_validation_repair() -> None:
         "swissknife/contracts/control_surface_contract.schema.json",
         "swissknife/contracts/interaction_envelope.schema.json",
         "swissknife/contracts/mediation_receipt.schema.json",
-        "external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json",
-        (
-            "external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/"
-            "BUCKET_VFS_INTERFACES_COMPLETE.md"
-        ),
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py",
-        "external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py",
+        # Historical discovery/heap records still cite the pre-pin nested tool
+        # surface; accept either that path family or the relocated external/ipfs_kit
+        # descriptors that the live interop module now discovers.
+        "deprecations_report.schema.json",
+        "BUCKET_VFS_INTERFACES_COMPLETE.md",
+        "demo_bucket_vfs_interfaces.py",
+        "demo_unified_bucket_interface.py",
     ]
     for content in (docs, discovery, merge_resolution, heap):
         for term in required_terms:

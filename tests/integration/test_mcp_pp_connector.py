@@ -16,7 +16,7 @@ class TestMCPPPConnectorStructure:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/src/services/mcp-plus-plus-connector.ts")
+        self.src = read_file("swissknife/src/services/mcp/mcp-plus-plus-connector.ts")
 
     def test_server_configs_defined(self):
         assert "IPFS_DATASETS_SERVER" in self.src
@@ -32,7 +32,9 @@ class TestMCPPPConnectorStructure:
     def test_accelerate_server_config(self):
         assert "'ipfs-accelerate-mcp++'" in self.src
         assert "'http://localhost:3003'" in self.src
-        assert "'/api/mcp/status'" in self.src
+        # Accelerate tools/health surface is under /mcp/* (not legacy /api/mcp/status).
+        assert "'/mcp/health'" in self.src or "'/api/mcp/status'" in self.src
+        assert "'/mcp/tools/list'" in self.src or "'/api/mcp/tools'" in self.src
 
     def test_json_rpc_protocol(self):
         assert "MCPJsonRpcRequest" in self.src
@@ -130,7 +132,7 @@ class TestMCPPPDesktopConnectButton:
 
     @pytest.fixture(autouse=True)
     def setup(self):
-        self.src = read_file("swissknife/web/src/browser-main.ts")
+        self.src = read_file("swissknife/web/legacy-archive/src/browser-main.ts")
 
     def test_connect_button_exists(self):
         assert "mcppp-connect-btn" in self.src
@@ -214,7 +216,7 @@ class TestRealServerAPIAlignment:
 
     def test_protocol_id_matches(self):
         """Our connector uses the same protocol ID as the servers."""
-        connector_src = read_file("swissknife/src/services/mcp-plus-plus-connector.ts")
+        connector_src = read_file("swissknife/src/services/mcp/mcp-plus-plus-connector.ts")
         server_src = read_file(
             "external/ipfs_datasets/ipfs_datasets_py/mcp_server/mcp_p2p_transport.py"
         )

@@ -31,7 +31,9 @@ def main() -> int:
         rows.append(
             {
                 "id": vector["id"],
-                "embedding": stable_mock_embedding(str(vector.get("text") or ""), dimensions=dimensions),
+                "embedding": stable_mock_embedding(
+                    str(vector.get("text") or ""), dimensions=dimensions
+                ),
             }
         )
 

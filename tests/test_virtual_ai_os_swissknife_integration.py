@@ -58,7 +58,7 @@ def test_swissknife_orb_dispatch_plan_exposes_virtual_ui_binding_metadata():
     assert swissknife_endpoint.metadata["virtual_ui_app_id"] == "mcp-control"
     assert (
         swissknife_endpoint.metadata["orb_router_module"]
-        == "swissknife/src/services/mcp-orb-capability-router.ts"
+        == "swissknife/src/services/mcp/mcp-orb-capability-router.ts"
     )
     assert swissknife_endpoint.metadata["orb_transport_kinds"] == (
         "local",

@@ -1,0 +1,511 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.worker_planner_doctor.authority_policy@1",
+  "interface": "WorkerPlannerDoctorAuthorityPolicy@1",
+  "policy_revision": "1",
+  "board_namespace": "agent-supervisor-worker-planner-doctor-v1",
+  "task_id": "WPD-003",
+  "program_id": "worker-planner-doctor-v1",
+  "lifecycle": {
+    "completion_mode": "manual",
+    "self_sealing_forbidden": true,
+    "immutable_after_manual_completion": true,
+    "candidate_mutation_forbidden": true,
+    "policy_root_protected_after_review": true
+  },
+  "canonicalization": {
+    "encoding": "utf-8",
+    "profile": "sorted-key compact JSON with no insignificant whitespace",
+    "duplicate_keys_forbidden": true,
+    "floating_point_forbidden": true,
+    "non_finite_numbers_forbidden": true,
+    "content_identity": "sha2-256 over canonical UTF-8 policy bytes",
+    "stored_self_identity": false
+  },
+  "contract_bindings": {
+    "control_authorities": [
+      "read",
+      "proposal",
+      "mutation"
+    ],
+    "proof_assurance_levels": [
+      "unverified",
+      "candidate",
+      "solver_checked",
+      "kernel_verified",
+      "attested"
+    ],
+    "implementation_dispositions": [
+      "closed_deterministic",
+      "residual_llm_authorized",
+      "abstain_review",
+      "defer_capability"
+    ],
+    "reuse_existing_control_permits": true,
+    "reuse_existing_proof_cache": true,
+    "reuse_existing_completion_authority": true,
+    "new_authority_lattice_forbidden": true,
+    "composes_planner_doctor_authority_policy": true
+  },
+  "defaults": {
+    "planner_mode": "shadow",
+    "doctor_mode": "report_only",
+    "rollout_mode": "shadow",
+    "mutation_authorized": false,
+    "automatic_promotion_enabled": false,
+    "derived_refill_enabled": false,
+    "completion_authoritative": false,
+    "provider_first_path_enabled": false,
+    "free_reprompt_enabled": false,
+    "unknown_or_unsupported_disposition": "abstain",
+    "ambiguous_disposition": "abstain"
+  },
+  "authority_ladder": [
+    {
+      "name": "nomination",
+      "order": 0,
+      "maximum_assurance": "candidate",
+      "sources": [
+        "ast_index",
+        "bm25",
+        "embedding",
+        "graphrag",
+        "history",
+        "knowledge_graph",
+        "llm_output",
+        "proof_cache_metadata",
+        "synthetic_fixture",
+        "vector_index"
+      ],
+      "may": [
+        "discover",
+        "rank",
+        "retrieve",
+        "suggest_candidate",
+        "suggest_premise"
+      ],
+      "may_not": [
+        "admit",
+        "authorize_write",
+        "certify_self",
+        "claim_completion",
+        "invoke_unauthorized_llm",
+        "promote",
+        "satisfy_proof"
+      ],
+      "semantic_authority": false,
+      "mutation_authority": false,
+      "completion_authority": false
+    },
+    {
+      "name": "observation",
+      "order": 1,
+      "maximum_assurance": "candidate",
+      "sources": [
+        "independent_parser_rebuild",
+        "independent_static_analysis",
+        "independent_test",
+        "runtime_trace"
+      ],
+      "may": [
+        "record_bounded_fact",
+        "record_counterexample_candidate",
+        "support_validation"
+      ],
+      "may_not": [
+        "authorize_write",
+        "claim_kernel_proof",
+        "claim_unbounded_semantics",
+        "declare_completion",
+        "upgrade_own_assurance"
+      ],
+      "semantic_authority": false,
+      "mutation_authority": false,
+      "completion_authority": false
+    },
+    {
+      "name": "bounded_check",
+      "order": 2,
+      "maximum_assurance": "solver_checked",
+      "sources": [
+        "bounded_model_checker",
+        "constraint_solver",
+        "independent_countermodel_validator",
+        "property_test",
+        "sat_solver",
+        "smt_solver"
+      ],
+      "may": [
+        "disprove_with_independently_validated_counterexample",
+        "establish_bounded_property",
+        "emit_solver_checked_receipt"
+      ],
+      "may_not": [
+        "authorize_write_alone",
+        "claim_kernel_verified",
+        "claim_outside_recorded_bounds",
+        "declare_completion_alone"
+      ],
+      "semantic_authority": "bounded_only",
+      "mutation_authority": false,
+      "completion_authority": false
+    },
+    {
+      "name": "kernel_proof",
+      "order": 3,
+      "maximum_assurance": "kernel_verified",
+      "sources": [
+        "independent_native_kernel_reconstruction"
+      ],
+      "may": [
+        "satisfy_scoped_proof_obligation",
+        "support_proof_gated_admission"
+      ],
+      "may_not": [
+        "authorize_write_without_control_permit",
+        "claim_unencoded_property",
+        "declare_goal_completion_without_completion_evidence",
+        "reuse_stale_proof"
+      ],
+      "semantic_authority": "encoded_theorem_only",
+      "mutation_authority": false,
+      "completion_authority": false
+    },
+    {
+      "name": "attestation",
+      "order": 4,
+      "maximum_assurance": "attested",
+      "sources": [
+        "independent_cryptographic_attestation_verifier"
+      ],
+      "may": [
+        "attest_bounded_computation",
+        "attest_receipt_lineage"
+      ],
+      "may_not": [
+        "authorize_write_without_control_permit",
+        "claim_arbitrary_program_correctness",
+        "claim_completion",
+        "upgrade_underlying_semantic_scope"
+      ],
+      "semantic_authority": "inherited_from_verified_statement",
+      "mutation_authority": false,
+      "completion_authority": false
+    }
+  ],
+  "pre_implementation_kernel": {
+    "required_before_provider_call": true,
+    "required_on_validation_or_merge_failure": true,
+    "dispositions_closed": true,
+    "closed_dispositions": [
+      "closed_deterministic",
+      "residual_llm_authorized",
+      "abstain_review",
+      "defer_capability"
+    ],
+    "provider_invocation_requires_disposition": "residual_llm_authorized",
+    "closed_deterministic_provider_calls_forbidden": true,
+    "abstain_review_provider_calls_forbidden": true,
+    "defer_capability_provider_calls_forbidden": true,
+    "free_form_provider_rediscovery_forbidden": true
+  },
+  "deterministic_doctor_boundary": {
+    "mode": "report_only",
+    "enabled_at_bootstrap": false,
+    "mutation_authorized": false,
+    "llm_router_enabled": false,
+    "llm_invocations_allowed": false,
+    "remote_model_provider_calls_allowed": false,
+    "remote_embeddings_allowed": false,
+    "network_access_allowed": false,
+    "network_client_import_allowed": false,
+    "target_code_import_allowed": false,
+    "knowledge_graph_semantic_authority": false,
+    "vector_semantic_authority": false,
+    "embedding_semantic_authority": false,
+    "proof_cache_metadata_semantic_authority": false,
+    "optional_provider_failure_disposition": "typed_abstention",
+    "automatic_fallback_to_model_forbidden": true,
+    "cold_import_must_not_load_network_or_llm_clients": true
+  },
+  "residual_llm_boundary": {
+    "distinct_from_deterministic_doctor": true,
+    "enabled_by_default": false,
+    "requires_sealed_residual_packet": true,
+    "requires_disposition_residual_llm_authorized": true,
+    "model_output_authority": "nomination",
+    "model_write_authority": false,
+    "model_completion_authority": false,
+    "completion_from_provider_prose_forbidden": true,
+    "completion_from_synthetic_doctor_success_forbidden": true,
+    "may_suppress_required_queries": false,
+    "may_select_credentials": false,
+    "may_select_provider_endpoints": false,
+    "unbounded_source_dump_forbidden": true,
+    "secret_bodies_forbidden": true,
+    "inherits_deterministic_doctor_authority": false
+  },
+  "free_reprompt_policy": {
+    "free_reprompt_after_typed_failure_forbidden": true,
+    "typed_failure_requires_doctor_inspect": true,
+    "typed_failure_requires_formal_replan": true,
+    "typed_failure_requires_residual_packet_before_provider": true,
+    "provider_retry_without_residual_packet_forbidden": true,
+    "full_task_prose_reinjection_forbidden": true,
+    "disposition_on_violation": "reject"
+  },
+  "completion_policy": {
+    "task_count_is_completion_authority": false,
+    "task_status_is_completion_authority": false,
+    "candidate_claim_is_completion_authority": false,
+    "provider_exit_zero_is_completion_authority": false,
+    "provider_prose_is_completion_authority": false,
+    "synthetic_doctor_success_is_completion_authority": false,
+    "all_tasks_complete_is_sufficient": false,
+    "fresh_acceptance_evidence_required": true,
+    "independent_validation_required": true,
+    "required_assurance_must_be_satisfied": true,
+    "current_root_binding_required": true,
+    "zero_safety_floors_required": true,
+    "completion_authority_owner": "existing_goal_completion_contract"
+  },
+  "self_certification_policy": {
+    "candidate_self_certification_forbidden": true,
+    "candidate_may_supply_own_proof_flag": false,
+    "candidate_may_supply_own_expected_oracle": false,
+    "candidate_may_issue_own_admission_receipt": false,
+    "candidate_may_mark_own_task_complete": false,
+    "generated_test_may_certify_its_generator": false,
+    "disposition": "reject"
+  },
+  "mutation_boundary": {
+    "write_requires_mutation_permit": true,
+    "write_requires_writer_lease": true,
+    "write_requires_exact_roots": true,
+    "write_requires_fencing_epoch": true,
+    "write_requires_expected_effects": true,
+    "write_requires_checkpoint_and_rollback": true,
+    "path_escape_forbidden": true,
+    "scope_widening_forbidden": true,
+    "delegation_forbidden": true
+  },
+  "protected_anchors": {
+    "paths": [
+      "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration-plan-2026-08-06.md",
+      "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.objectives.md",
+      "implementation_plan/docs/47-supervisor-worker-planner-doctor-integration.todo.md",
+      "config/supervisor_worker_planner_doctor_integration_scheduler.json",
+      "config/supervisor_worker_planner_doctor_supervisor.json",
+      "config/supervisor_worker_planner_doctor_authority_policy.json",
+      "scripts/validate_supervisor_worker_planner_doctor_board.py",
+      "scripts/supervisor_worker_planner_doctor_supervisor.sh",
+      "external/ipfs_accelerate/docs/architecture/agent_supervisor_worker_planner_doctor_threat_model.md",
+      "external/ipfs_accelerate/test/api/test_agent_supervisor_worker_planner_doctor_authority_policy.py"
+    ],
+    "protected_fields": [
+      "authority_policy.safety_floors",
+      "authority_policy.forbidden_transitions",
+      "benchmark.denominators",
+      "benchmark.hidden_oracle",
+      "benchmark.holdout_manifest",
+      "benchmark.safety_floors",
+      "promotion_policy",
+      "task_source.seed"
+    ],
+    "candidate_write_allowed": false,
+    "model_write_allowed": false,
+    "automatic_controller_write_allowed": false,
+    "manual_operator_change_requires_new_policy_revision": true,
+    "post_change_rebaseline_required": true
+  },
+  "promotion_policy": {
+    "default_decision": "shadow",
+    "manual": true,
+    "monotonic": true,
+    "paired_live_evidence_required": true,
+    "fresh_current_tree_evaluation_required": true,
+    "independent_holdout_required": true,
+    "synthetic_evidence_may_promote": false,
+    "skipped_checks_may_promote": false,
+    "quality_non_compensable": true,
+    "noncompensable_gate_failure_disposition": "reject_or_rollback",
+    "candidate_may_change_judge": false
+  },
+  "kill_switch": {
+    "available": true,
+    "engaged_by_default": false,
+    "automatic_engage_on_noncompensable_gate_failure": true,
+    "operator_may_engage": true,
+    "candidate_may_clear": false,
+    "model_may_clear": false,
+    "automatic_controller_may_clear": false,
+    "operator_only_clear": true,
+    "clear_requires_audit_and_current_tree_revalidation": true,
+    "engaged_mode": "report_only",
+    "blocks_new_mutation_dispatch": true,
+    "blocks_promotion": true,
+    "blocks_derived_refill": true,
+    "blocks_model_provider_calls": true
+  },
+  "manual_escalation": {
+    "required": true,
+    "default_disposition": "abstain",
+    "mode_while_pending": "report_only",
+    "operator_decision_binds_fresh_roots": true,
+    "candidate_approval_allowed": false,
+    "model_approval_allowed": false,
+    "automatic_self_approval_allowed": false,
+    "triggers": [
+      "capability_or_provider_loss",
+      "free_reprompt_policy_violation",
+      "kill_switch_clear",
+      "new_network_or_provider_scope",
+      "protected_anchor_change",
+      "repeated_oscillation_or_unchanged_residual",
+      "rollback_or_recovery_failure",
+      "scope_or_effect_expansion",
+      "unauthorized_llm_invocation",
+      "zero_floor_breach"
+    ]
+  },
+  "forbidden_transitions": [
+    {
+      "id": "candidate_or_self_certification_to_authority",
+      "disposition": "reject",
+      "floor_keys": [
+        "candidate_self_certification_count"
+      ]
+    },
+    {
+      "id": "candidate_work_to_protected_anchor_mutation",
+      "disposition": "reject_quarantine_and_escalate",
+      "floor_keys": [
+        "protected_anchor_mutation_count"
+      ]
+    },
+    {
+      "id": "completion_from_provider_prose",
+      "disposition": "reject",
+      "floor_keys": [
+        "completion_from_provider_prose",
+        "false_completion_count"
+      ]
+    },
+    {
+      "id": "completion_from_synthetic_doctor_success",
+      "disposition": "reject",
+      "floor_keys": [
+        "completion_from_synthetic_doctor_success",
+        "false_completion_count"
+      ]
+    },
+    {
+      "id": "deterministic_mode_network_or_llm_load",
+      "disposition": "reject",
+      "floor_keys": [
+        "deterministic_doctor_network_or_llm_load",
+        "deterministic_network_access_count",
+        "deterministic_llm_invocation_count"
+      ]
+    },
+    {
+      "id": "free_reprompt_after_typed_failure",
+      "disposition": "reject",
+      "floor_keys": [
+        "free_reprompt_after_typed_failure"
+      ]
+    },
+    {
+      "id": "model_output_to_write",
+      "disposition": "reject",
+      "floor_keys": [
+        "authority_violation_count"
+      ]
+    },
+    {
+      "id": "prebuilt_or_boolean_fixed_point_to_completion",
+      "disposition": "reject",
+      "floor_keys": [
+        "false_fixed_point_count",
+        "false_fixed_point_rate"
+      ]
+    },
+    {
+      "id": "provider_or_retrieval_result_to_semantic_authority",
+      "disposition": "reject",
+      "floor_keys": [
+        "authority_promotion_rate"
+      ]
+    },
+    {
+      "id": "scope_escape_or_path_escape_to_write",
+      "disposition": "reject_quarantine_and_escalate",
+      "floor_keys": [
+        "policy_scope_escape_count",
+        "path_escape_count",
+        "out_of_scope_sandbox_write_rate"
+      ]
+    },
+    {
+      "id": "task_count_or_task_status_to_completion",
+      "disposition": "reject",
+      "floor_keys": [
+        "false_completion_count"
+      ]
+    },
+    {
+      "id": "unauthorized_llm_invocation",
+      "disposition": "reject",
+      "floor_keys": [
+        "unauthorized_llm_calls",
+        "llm_model_provider_call_rate",
+        "llm_router_invocation_rate"
+      ]
+    },
+    {
+      "id": "write_without_mutation_permit_or_lease_or_exact_roots",
+      "disposition": "reject",
+      "floor_keys": [
+        "authority_violation_count",
+        "policy_scope_escape_count"
+      ]
+    }
+  ],
+  "safety_floors": {
+    "authority_promotion_rate": 0,
+    "authority_violation_count": 0,
+    "candidate_self_certification_count": 0,
+    "completion_from_provider_prose": 0,
+    "completion_from_synthetic_doctor_success": 0,
+    "deterministic_doctor_network_or_llm_load": 0,
+    "deterministic_llm_invocation_count": 0,
+    "deterministic_network_access_count": 0,
+    "deterministic_remote_embedding_call_count": 0,
+    "deterministic_remote_provider_call_count": 0,
+    "false_completion_count": 0,
+    "false_fixed_point_count": 0,
+    "false_fixed_point_rate": 0,
+    "free_reprompt_after_typed_failure": 0,
+    "llm_model_provider_call_rate": 0,
+    "llm_router_invocation_rate": 0,
+    "out_of_scope_sandbox_write_rate": 0,
+    "path_escape_count": 0,
+    "policy_scope_escape_count": 0,
+    "protected_anchor_mutation_count": 0,
+    "secret_exposure_count": 0,
+    "unauthorized_llm_calls": 0
+  },
+  "non_compensable_floors": [
+    "unauthorized_llm_calls",
+    "deterministic_doctor_network_or_llm_load",
+    "completion_from_provider_prose",
+    "free_reprompt_after_typed_failure",
+    "candidate_self_certification_count",
+    "false_fixed_point_count",
+    "policy_scope_escape_count"
+  ],
+  "artifact_bindings": {
+    "authority_policy": "config/supervisor_worker_planner_doctor_authority_policy.json",
+    "threat_model": "external/ipfs_accelerate/docs/architecture/agent_supervisor_worker_planner_doctor_threat_model.md",
+    "authority_test": "external/ipfs_accelerate/test/api/test_agent_supervisor_worker_planner_doctor_authority_policy.py"
+  }
+}

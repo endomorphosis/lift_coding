@@ -59,6 +59,9 @@ EXPECTED_GOAL_IDS = frozenset(
         "PTR-G090",
         "PTR-G100",
         "PTR-G110",
+        "PTR-G120",
+        "PTR-G130",
+        "PTR-G140",
     }
 )
 EXPECTED_TASK_IDS = frozenset(
@@ -129,6 +132,18 @@ EXPECTED_TASK_IDS = frozenset(
         "PTR-153",
         "PTR-154",
         "PTR-155",
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+        "PTR-163",
+        "PTR-164",
+        "PTR-165",
+        "PTR-166",
+        "PTR-167",
+        "PTR-168",
+        "PTR-169",
+        "PTR-170",
+        "PTR-171",
     }
 )
 SEALED_INITIAL_READY = frozenset({"PTR-001", "PTR-002", "PTR-003"})
@@ -185,6 +200,37 @@ PROOF_MATERIAL_CONTEXT_WAVE = frozenset({"PTR-153", "PTR-154"})
 REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS = frozenset(
     PRODUCTION_ACTIVATION_TASK_IDS | PRODUCTION_CORRECTION_TASK_IDS
 )
+AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS = frozenset(
+    {
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
+        "PTR-163",
+        "PTR-164",
+        "PTR-165",
+        "PTR-166",
+        "PTR-167",
+        "PTR-168",
+        "PTR-169",
+        "PTR-170",
+        "PTR-171",
+    }
+)
+AUTHENTICATED_RECEIPT_WAVE_A = frozenset({"PTR-160", "PTR-161", "PTR-162"})
+# PTR-160 is retained as completed evidence while the two repository bootstrap
+# owners are explicitly reopened behind PTR-170. Keep this distinct from Wave
+# A: the latter is historical repository-width evidence, while this set is the
+# claimable v8 control-plane frontier.
+AUTHENTICATED_RECEIPT_REOPENED_READY = frozenset({"PTR-170"})
+AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER = frozenset({"PTR-161", "PTR-162"})
+AUTHENTICATED_RECEIPT_WAVE_B = frozenset({"PTR-163", "PTR-165"})
+AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID = "PTR-164"
+AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID = "PTR-171"
+AUTHENTICITY_JOIN_TASK_ID = "PTR-166"
+OUTPUT_REPLAY_JOIN_TASK_ID = "PTR-167"
+ZERO_CONFIG_E2E_JOIN_TASK_ID = "PTR-168"
+AUTHENTICATED_HANDOFF_TASK_ID = "PTR-169"
+G140_ACTIONABLE_RETRY_EVIDENCE_ID = "ptr/actionable-retry-evidence@1"
 GOAL_STATES = frozenset(
     {
         "active",
@@ -283,6 +329,18 @@ REQUIRED_DIRECT_TASK_DEPENDENCIES = {
     "PTR-153": frozenset({"PTR-152"}),
     "PTR-154": frozenset({"PTR-152"}),
     "PTR-155": frozenset({"PTR-153", "PTR-154"}),
+    "PTR-160": frozenset({"PTR-149"}),
+    "PTR-161": frozenset({"PTR-149", "PTR-170"}),
+    "PTR-162": frozenset({"PTR-149", "PTR-170"}),
+    "PTR-163": frozenset({"PTR-160", "PTR-161"}),
+    "PTR-164": frozenset({"PTR-160", "PTR-171"}),
+    "PTR-165": frozenset({"PTR-161", "PTR-162"}),
+    "PTR-166": frozenset({"PTR-164", "PTR-171"}),
+    "PTR-167": frozenset({"PTR-165", "PTR-166"}),
+    "PTR-168": frozenset({"PTR-161", "PTR-162", "PTR-166", "PTR-167"}),
+    "PTR-169": frozenset({"PTR-168"}),
+    "PTR-170": frozenset({"PTR-149"}),
+    "PTR-171": frozenset({"PTR-160", "PTR-161", "PTR-163"}),
 }
 REQUIRED_DATASETS_TASKS = frozenset(
     {
@@ -296,6 +354,9 @@ REQUIRED_DATASETS_TASKS = frozenset(
         "PTR-140",
         "PTR-144",
         "PTR-151",
+        "PTR-161",
+        "PTR-163",
+        "PTR-171",
     }
 )
 REQUIRED_ACCELERATOR_TASKS = frozenset(
@@ -318,9 +379,15 @@ REQUIRED_ACCELERATOR_TASKS = frozenset(
         "PTR-153",
         "PTR-154",
         "PTR-155",
+        "PTR-160",
+        "PTR-164",
+        "PTR-166",
+        "PTR-168",
+        "PTR-169",
+        "PTR-170",
     }
 )
-REQUIRED_KIT_TASKS = frozenset({"PTR-080", "PTR-081", "PTR-109", "PTR-133", "PTR-141"})
+REQUIRED_KIT_TASKS = frozenset({"PTR-080", "PTR-081", "PTR-109", "PTR-133", "PTR-141", "PTR-162"})
 REQUIRED_RUNTIME_TASK_PATHS = {
     "PTR-131": frozenset(
         {
@@ -520,6 +587,140 @@ REQUIRED_RUNTIME_TASK_PATHS = {
             "external/ipfs_accelerate/test/api/test_proof_reuse_v4_publication_integration.py",
         }
     ),
+    "PTR-161": frozenset(
+        {
+            "external/ipfs_datasets/conftest.py",
+            "external/ipfs_datasets/tests/conftest.py",
+            "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+            "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py",
+            "external/ipfs_datasets/pyproject.toml",
+            "external/ipfs_datasets/setup.py",
+            "external/ipfs_datasets/requirements.txt",
+            "external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py",
+            "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py",
+            "external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py",
+            "external/ipfs_datasets/tests/unit/test_proof_reuse_optional_plugin_startup.py",
+            "external/ipfs_datasets/tests/unit/test_proof_reuse_isolated_bootstrap_subprocess.py",
+            "external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py",
+        }
+    ),
+    "PTR-162": frozenset(
+        {
+            "external/ipfs_kit/conftest.py",
+            "external/ipfs_kit/ipfs_kit_py/__init__.py",
+            "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py",
+            "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py",
+            "external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py",
+            "external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py",
+            "external/ipfs_kit/pyproject.toml",
+            "external/ipfs_kit/setup.py",
+            "external/ipfs_kit/requirements.txt",
+            "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py",
+            "external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py",
+            "external/ipfs_kit/tests/test_proof_reuse_zero_config.py",
+            "external/ipfs_kit/tests/test_proof_reuse_optional_plugin_startup.py",
+            "external/ipfs_kit/tests/test_proof_reuse_isolated_bootstrap_subprocess.py",
+            "external/ipfs_kit/tests/test_proof_certificate_store.py",
+            "external/ipfs_kit/tests/test_reuse_capabilities.py",
+            "external/ipfs_kit/tests/test_content_addressed_artifact_store.py",
+            "external/ipfs_kit/tests/test_candidate_context_artifact_store.py",
+        }
+    ),
+    "PTR-163": frozenset(
+        {
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.toml",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/Cargo.lock",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.sh",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/RUST_SETUP.md",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/WIRE_FORMAT.md",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/circuit.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/domain.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/lib.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/main.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/prover.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/setup.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/src/verifier.rs",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/schemas/witness_v1.schema.json",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/schemas/proof_v1.schema.json",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/bin/linux-aarch64/groth16",
+            "external/ipfs_datasets/ipfs_datasets_py/processors/"
+            "groth16_backend/bin/linux-aarch64/release-manifest.json",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/groth16_wire_vectors.json",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_schemas.py",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_wire_vectors.py",
+            "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py",
+        }
+    ),
+    "PTR-171": frozenset(
+        {
+            "external/ipfs_datasets/MANIFEST.in",
+            "external/ipfs_datasets/pyproject.toml",
+            "external/ipfs_datasets/setup.py",
+            "external/ipfs_datasets/ipfs_datasets_py.egg-info/SOURCES.txt",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/statements/test_pass.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/provekit/test_pass_circuit.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_execution_certificate.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py",
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_statement.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_execution_certificate.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_deferred_test_certificate_request.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py",
+            "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_v5_authority.py",
+        }
+    ),
+    "PTR-170": frozenset(
+        {
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/"
+            "todo_daemon/implementation_daemon.py",
+            "external/ipfs_accelerate/test/api/"
+            "test_agent_supervisor_implementation_failure_review.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_context_delta.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_todo_daemon_port.py",
+        }
+    ),
+}
+EXACT_RUNTIME_TASK_PATH_IDS = frozenset({"PTR-161", "PTR-162", "PTR-163", "PTR-170", "PTR-171"})
+EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS = {
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_assurance.py": "PTR-171",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_certificate_issuer.py": "PTR-171",
+    "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/test_pass_groth16_provider.py": "PTR-171",
+    "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/"
+    "bin/linux-aarch64/release-manifest.json": "PTR-163",
+    "external/ipfs_datasets/ipfs_datasets_py/processors/groth16_backend/build.rs": "PTR-163",
+    "external/ipfs_datasets/ipfs_datasets_py/pytest_proof_reuse.py": "PTR-161",
+    "external/ipfs_datasets/tests/unit/logic/zkp/"
+    "test_deferred_test_certificate_request.py": "PTR-171",
+    "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_assurance.py": "PTR-171",
+    "external/ipfs_datasets/tests/unit/logic/zkp/test_test_certificate_issuer.py": "PTR-171",
+    "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_cid_profile.py": "PTR-171",
+    "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_groth16_provider.py": "PTR-171",
+    "external/ipfs_datasets/tests/unit/logic/zkp/test_test_pass_v5_authority.py": "PTR-171",
+    "external/ipfs_datasets/tests/unit/test_proof_reuse_bootstrap.py": "PTR-161",
+    "external/ipfs_datasets/tests/unit/test_proof_reuse_zero_config.py": "PTR-161",
+    "external/ipfs_datasets/tests/unit/test_pytest_proof_reuse_shim.py": "PTR-161",
+    "external/ipfs_datasets/tests/unit/test_setup_side_effect_defaults.py": "PTR-161",
+    "external/ipfs_datasets/tests/unit_tests/logic/zkp/test_groth16_native_release.py": "PTR-163",
+    "external/ipfs_kit/conftest.py": "PTR-162",
+    "external/ipfs_kit/ipfs_kit_py/content_addressed_artifact_store.py": "PTR-162",
+    "external/ipfs_kit/ipfs_kit_py/proof_certificate_store.py": "PTR-162",
+    "external/ipfs_kit/ipfs_kit_py/pytest_proof_reuse.py": "PTR-162",
+    "external/ipfs_kit/ipfs_kit_py/test_reuse_capabilities.py": "PTR-162",
+    "external/ipfs_kit/tests/test_candidate_context_artifact_store.py": "PTR-162",
+    "external/ipfs_kit/tests/test_content_addressed_artifact_store.py": "PTR-162",
+    "external/ipfs_kit/tests/test_proof_certificate_store.py": "PTR-162",
+    "external/ipfs_kit/tests/test_proof_reuse_bootstrap.py": "PTR-162",
+    "external/ipfs_kit/tests/test_proof_reuse_zero_config.py": "PTR-162",
+    "external/ipfs_kit/tests/test_pytest_proof_reuse_shim.py": "PTR-162",
+    "external/ipfs_kit/tests/test_reuse_capabilities.py": "PTR-162",
 }
 EXPECTED_PROTECTED_PATHS = frozenset(
     {
@@ -626,6 +827,24 @@ def _bool_text(value: object) -> bool | None:
     return None
 
 
+VALIDATION_PATH_TARGET_PATTERN = re.compile(
+    r"(?<![A-Za-z0-9_./-])"
+    r"((?:external|implementation_plan|config|scripts|tests|test)/"
+    r"[A-Za-z0-9_@%+=:,./-]+)"
+)
+
+
+def _validation_path_targets(command: object) -> frozenset[str]:
+    """Extract exact workspace-relative artifact targets without running a shell."""
+
+    targets: set[str] = set()
+    for match in VALIDATION_PATH_TARGET_PATTERN.finditer(str(command or "")):
+        target = match.group(1).split("::", 1)[0].rstrip(",;)]}")
+        if not _safe_relative_paths((target,), field="validation target"):
+            targets.add(PurePosixPath(target).as_posix())
+    return frozenset(targets)
+
+
 def validate(
     objective_path: Path,
     todo_path: Path,
@@ -662,6 +881,8 @@ def validate(
         "integrationBranch": "agent/proof-backed-test-reuse",
         "taskPrefix": "## PTR-",
         "boardNamespace": "proof-backed-test-reuse-v1",
+        "stateRootEnvironment": "IPFS_PROOF_REUSE_STATE_ROOT",
+        "defaultStateRootSuffix": ("ipfs_accelerate_py/proof-backed-test-reuse-v9"),
     }
     for field, expected in expected_config.items():
         if config.get(field) != expected:
@@ -703,12 +924,13 @@ def validate(
     semantic_merge_resolver = parallel.get("semanticMergeResolver")
     if semantic_merge_resolver != {
         "provider": "grok-codex",
-        "fallbackTrigger": "grok_quota_exhausted",
+        "routingAuthority": "ipfs_accelerate_py.llm_router",
+        "fallbackTrigger": "grok_quota_auth_or_unavailable",
         "inheritedCommandPolicy": "override_with_managed_provider_chain",
     }:
         errors.append(
-            "semanticMergeResolver must use the managed Grok-primary, "
-            "quota-only Codex fallback chain"
+            "semanticMergeResolver must use the llm_router-owned Grok-primary, "
+            "side-effect-safe Codex fallback chain"
         )
     provider_policy = config.get("providerPolicy")
     expected_provider_policy = {
@@ -716,26 +938,36 @@ def validate(
         "fallback": {
             "provider": "codex",
             "model": "gpt-5.6-terra",
-            "modelReasoningEffort": "medium",
+            "modelReasoningEffort": "high",
         },
-        "fallbackTrigger": "grok_quota_exhausted",
-        "primaryUnavailableAction": "fail_preflight",
-        "nonQuotaFailureAction": "propagate_without_fallback",
+        "routingAuthority": "ipfs_accelerate_py.llm_router",
+        "fallbackTrigger": "grok_quota_auth_or_unavailable",
+        "primaryUnavailableAction": "use_codex_fallback",
+        "nonQuotaFailureAction": "fallback_on_auth_or_launch_else_propagate",
         "appliesTo": ["implementation", "semantic_merge_resolver"],
-        "fallbackForbiddenOn": [
+        "fallbackAllowedOn": [
+            "grok_quota_exhausted",
             "authentication_failure",
             "launch_failure",
+        ],
+        "fallbackRequires": [
+            "side_effects_started=false",
+            "workspace_unchanged=true",
+        ],
+        "fallbackForbiddenOn": [
             "timeout",
             "transport_failure",
             "generic_nonzero_exit",
             "malformed_output",
             "task_failure",
+            "side_effects_started",
         ],
     }
     if provider_policy != expected_provider_policy:
         errors.append(
-            "providerPolicy must retain Grok 4.5 primary and Terra medium "
-            "fallback only on confirmed Grok quota exhaustion for both "
+            "providerPolicy must retain llm_router-owned Grok 4.5 primary "
+            "and Terra high fallback only for quota, authentication, or launch "
+            "unavailability before side effects for both "
             "implementation and semantic merge resolution"
         )
     if parallel.get("objectiveRefillEnabled") is not False:
@@ -746,10 +978,10 @@ def validate(
     if not isinstance(preflight_config, dict):
         errors.append("configuration preflight must be an object")
         preflight_config = {}
-    if preflight_config.get("requireInitialConflictFreeWidth") != 2:
+    if preflight_config.get("requireInitialConflictFreeWidth") != 1:
         errors.append(
             "preflight.requireInitialConflictFreeWidth must match the reviewed "
-            "two-task production-activation first wave"
+            "one-task actionable-retry-evidence frontier"
         )
     if tuple(parallel.get("worktreeSubmodulePaths") or ()) != EXPECTED_SUBMODULES:
         errors.append(
@@ -788,24 +1020,65 @@ def validate(
             "configuration lazyDependencyPolicy must retain scoped, bounded, "
             "fail-open first-use installation and datasets setup safety"
         )
+    expected_runner_attestation_profile = {
+        "schema": "RunnerPassAttestationV1",
+        "signatureAlgorithm": "ed25519",
+        "signatureDomain": "ipfs-test-pass-attestation/v1\0",
+        "signatureInput": "domain-bytes||sha2-256(unsigned-envelope-bytes)",
+        "unsignedEnvelope": {
+            "canonicalization": "strict-dag-cbor",
+            "cidVersion": 1,
+            "multicodec": "dag-cbor",
+            "multihash": "sha2-256",
+        },
+        "publicKeyMaterial": {
+            "byteEncoding": ("varint(ed25519-pub)||32-byte-ed25519-public-key"),
+            "cidVersion": 1,
+            "multicodec": "raw",
+            "multihash": "sha2-256",
+            "multibase": "base32-lower",
+        },
+        "trustPolicy": {
+            "authority": "locally-pinned-trust-policy-cid",
+            "cidVersion": 1,
+            "multicodec": "dag-cbor",
+            "multihash": "sha2-256",
+            "multibase": "base32-lower",
+            "trustOnFirstUse": False,
+        },
+        "usage": "pytest-pass-only",
+        "checks": {
+            "keyEpochRequired": True,
+            "validityWindowRequired": True,
+            "rotationRequired": True,
+            "revocationRequired": True,
+        },
+    }
+    if config.get("runnerAttestationProfile") != (expected_runner_attestation_profile):
+        errors.append(
+            "runnerAttestationProfile must seal the exact authenticated v1 "
+            "Ed25519/DAG-CBOR/CID/key/trust/usage/epoch policy"
+        )
     objective_projection = config.get("objectiveProjection")
     if not isinstance(objective_projection, dict):
         errors.append("configuration objectiveProjection must be an object")
         objective_projection = {}
     if objective_projection.get("mode") != "reviewed_bounded_closeout":
         errors.append("objectiveProjection.mode must be reviewed_bounded_closeout")
-    if objective_projection.get("reviewRevision") != ("production-runtime-activation-repair-v4"):
+    if objective_projection.get("reviewRevision") != (
+        "authenticated-receipt-current-tree-repair-v9"
+    ):
         errors.append(
             "objectiveProjection.reviewRevision must identify the reviewed "
-            "production runtime activation repair"
+            "authenticated-receipt current-tree repair"
         )
     if frozenset(objective_projection.get("implementationTaskIds") or ()) != (
-        REVIEWED_PRODUCTION_ACTIVATION_TASK_IDS
+        AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     ):
         errors.append("objectiveProjection implementation task inventory mismatch")
     if (
         frozenset(objective_projection.get("initialClaimableTaskIds") or ())
-        != PRODUCTION_CORRECTION_WAVE_ONE
+        != AUTHENTICATED_RECEIPT_REOPENED_READY
     ):
         errors.append("objectiveProjection initial claimable task inventory mismatch")
     if objective_projection.get("authorityWriter") != "outer_controller_only":
@@ -820,15 +1093,59 @@ def validate(
         errors.append("objective closeout must declare exactly three phases")
     if objective_projection.get("closeoutControllerTaskId") != "PTR-121":
         errors.append("objective closeout controller task must be PTR-121")
-    if objective_projection.get("operatorHandoffTaskId") != "PTR-149":
-        errors.append("objective operator handoff task must be PTR-149")
-    if (
-        frozenset(objective_projection.get("proofMaterialAndContextWaveTaskIds") or ())
-        != PROOF_MATERIAL_CONTEXT_WAVE
+    if objective_projection.get("operatorHandoffTaskId") != AUTHENTICATED_HANDOFF_TASK_ID:
+        errors.append("objective operator handoff task must be PTR-169")
+    if tuple(objective_projection.get("authenticatedReceiptWaveATaskIds") or ()) != (
+        "PTR-160",
+        "PTR-161",
+        "PTR-162",
     ):
-        errors.append("objective proof-material/context wave task inventory mismatch")
-    if objective_projection.get("exactV4PublicationJoinTaskId") != "PTR-155":
-        errors.append("objective exact-v4 publication join task must be PTR-155")
+        errors.append("objective authenticated-receipt wave A inventory mismatch")
+    if tuple(objective_projection.get("authenticatedReceiptWaveBTaskIds") or ()) != (
+        "PTR-163",
+        "PTR-165",
+    ):
+        errors.append("objective authenticated-receipt wave B inventory mismatch")
+    if objective_projection.get("authenticatedReceiptRuntimeJoinTaskId") != (
+        AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID
+    ):
+        errors.append("objective authenticated-receipt runtime join must be PTR-164")
+    if (
+        objective_projection.get("authenticatedReceiptPythonCompositionTaskId")
+        != AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID
+    ):
+        errors.append("objective authenticated-receipt Python composition must be PTR-171")
+    if objective_projection.get("authenticatedCurrentTreeHandoffTaskId") != (
+        AUTHENTICATED_HANDOFF_TASK_ID
+    ):
+        errors.append("objective authenticated current-tree handoff must be PTR-169")
+    stale_projection_fields = sorted(
+        field
+        for field in (
+            "proofMaterialAndContextWaveTaskIds",
+            "exactV4PublicationJoinTaskId",
+        )
+        if field in objective_projection
+    )
+    if stale_projection_fields:
+        errors.append(f"objectiveProjection retains stale pre-v9 fields: {stale_projection_fields}")
+    if objective_projection.get("sealedTaskCount") != 78:
+        errors.append("objective sealed task count must be 78")
+    if objective_projection.get("authenticityJoinTaskId") != AUTHENTICITY_JOIN_TASK_ID:
+        errors.append("objective authenticity join task must be PTR-166")
+    if objective_projection.get("outputReplayJoinTaskId") != OUTPUT_REPLAY_JOIN_TASK_ID:
+        errors.append("objective output replay join task must be PTR-167")
+    if objective_projection.get("zeroConfigE2EJoinTaskId") != ZERO_CONFIG_E2E_JOIN_TASK_ID:
+        errors.append("objective zero-config e2e join task must be PTR-168")
+    proof_policy = config.get("proofPolicy") or {}
+    if (
+        proof_policy.get("statement") != "TestPassStatementV5"
+        or proof_policy.get("signedRunnerAttestationRequired") is not True
+        or proof_policy.get("runnerPublicKeyMulticodecCidRequired") is not True
+        or proof_policy.get("runnerKeyEpochRotationAndRevocationRequired") is not True
+        or proof_policy.get("legacyHashOnlyStatementCanSkip") is not False
+    ):
+        errors.append("proofPolicy must require authenticated TestPassStatementV5 authority")
     projection_path_fields = (
         "gatePathSuffix",
         "evidencePathSuffix",
@@ -925,6 +1242,11 @@ def validate(
                 "match Evidence in order: expected "
                 f"{list(required_evidence)}, got {list(acceptance_criteria)}"
             )
+        if (
+            goal.goal_id == "PTR-G140"
+            and G140_ACTIONABLE_RETRY_EVIDENCE_ID not in required_evidence
+        ):
+            errors.append("PTR-G140 must require ptr/actionable-retry-evidence@1")
     parent_cycles = _cycle_nodes(goal_parent_edges)
     if parent_cycles:
         errors.append(f"goal parent cycle: {list(parent_cycles)}")
@@ -1012,6 +1334,18 @@ def validate(
             errors.append(
                 f"{task.task_id} missing reviewed runtime repair paths: {missing_runtime_paths}"
             )
+        if (
+            task.task_id in EXACT_RUNTIME_TASK_PATH_IDS
+            and frozenset(predicted_files) != required_runtime_paths
+        ):
+            unexpected_runtime_paths = sorted(
+                set(predicted_files).difference(required_runtime_paths)
+            )
+            errors.append(
+                f"{task.task_id} reviewed runtime paths must be exact: "
+                f"missing={missing_runtime_paths}, "
+                f"unexpected={unexpected_runtime_paths}"
+            )
         validation_text = str(task.metadata.get("validation") or "").strip()
         if not task.validation or not validation_text:
             errors.append(f"{task.task_id} has no validation command")
@@ -1063,11 +1397,12 @@ def validate(
                 errors.append("PTR-000 provider role must be operator-only")
         elif lane_count := int(parallel.get("laneCount") or 0):
             shard_index = int(task.task_id.rsplit("-", 1)[1]) % lane_count
-            expected_role = (
-                str(canonical_provider_roles[shard_index])
-                if shard_index < len(canonical_provider_roles)
-                else ""
+            role_source = (
+                runtime_execution_roles
+                if task.task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+                else canonical_provider_roles
             )
+            expected_role = str(role_source[shard_index]) if shard_index < len(role_source) else ""
             if provider_role != expected_role:
                 errors.append(
                     f"{task.task_id} provider role {provider_role!r} does not "
@@ -1130,6 +1465,7 @@ def validate(
                 RUNTIME_REPAIR_TASK_IDS
                 | PRODUCTION_ACTIVATION_TASK_IDS
                 | PRODUCTION_CORRECTION_TASK_IDS
+                | AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
             )
             and frozenset(task_edges.get(task_id, ())) != required_dependencies
         ):
@@ -1148,10 +1484,10 @@ def validate(
     configured_initial_ready = frozenset(
         str(task_id) for task_id in (parallel.get("initialClaimableTaskIds") or ())
     )
-    if configured_initial_ready != PRODUCTION_CORRECTION_WAVE_ONE:
+    if configured_initial_ready != AUTHENTICATED_RECEIPT_REOPENED_READY:
         errors.append(
             "configured initial claimable tasks mismatch: expected "
-            f"{sorted(PRODUCTION_CORRECTION_WAVE_ONE)}, got "
+            f"{sorted(AUTHENTICATED_RECEIPT_REOPENED_READY)}, got "
             f"{sorted(configured_initial_ready)}"
         )
     if completed_ids == {"PTR-000"}:
@@ -1178,6 +1514,7 @@ def validate(
         - RUNTIME_REPAIR_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
         - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     )
     completion_extension_unstarted = all(
         task_by_id[task_id].status == "todo" for task_id in COMPLETION_EXTENSION_TASK_IDS
@@ -1194,6 +1531,7 @@ def validate(
         - RUNTIME_REPAIR_TASK_IDS
         - PRODUCTION_ACTIVATION_TASK_IDS
         - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     )
     runtime_repair_unstarted = all(
         task_by_id[task_id].status == "todo" for task_id in RUNTIME_REPAIR_TASK_IDS
@@ -1206,7 +1544,10 @@ def validate(
                 f"{sorted(claimable_task_ids)}"
             )
     pre_production_activation_task_ids = (
-        EXPECTED_TASK_IDS - PRODUCTION_ACTIVATION_TASK_IDS - PRODUCTION_CORRECTION_TASK_IDS
+        EXPECTED_TASK_IDS
+        - PRODUCTION_ACTIVATION_TASK_IDS
+        - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
     )
     production_activation_unstarted = all(
         task_by_id[task_id].status == "todo" for task_id in PRODUCTION_ACTIVATION_TASK_IDS
@@ -1222,7 +1563,10 @@ def validate(
             f"{sorted(claimable_task_ids)}"
         )
     pre_production_correction_task_ids = (
-        EXPECTED_TASK_IDS - PRODUCTION_CORRECTION_TASK_IDS - {"PTR-149"}
+        EXPECTED_TASK_IDS
+        - PRODUCTION_CORRECTION_TASK_IDS
+        - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        - {"PTR-149"}
     )
     production_correction_unstarted = all(
         task_by_id[task_id].status == "todo"
@@ -1236,6 +1580,37 @@ def validate(
         errors.append(
             "reviewed current-v4 correction claimable tasks must be "
             f"{sorted(PRODUCTION_CORRECTION_WAVE_ONE)}, got "
+            f"{sorted(claimable_task_ids)}"
+        )
+    pre_authenticated_correction_task_ids = (
+        EXPECTED_TASK_IDS - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    )
+    authenticated_correction_unstarted = all(
+        task_by_id[task_id].status == "todo"
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    )
+    if (
+        pre_authenticated_correction_task_ids.issubset(completed_ids)
+        and authenticated_correction_unstarted
+        and claimable_task_ids != frozenset({"PTR-160", "PTR-170"})
+    ):
+        errors.append(
+            "fresh v8 authenticated-receipt seed tasks must be "
+            f"{['PTR-160', 'PTR-170']}, got "
+            f"{sorted(claimable_task_ids)}"
+        )
+    authenticated_reopened_frontier = task_by_id["PTR-160"].status == "completed" and all(
+        task_by_id[task_id].status == "todo"
+        for task_id in (AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS - {"PTR-160"})
+    )
+    if (
+        pre_authenticated_correction_task_ids.issubset(completed_ids)
+        and authenticated_reopened_frontier
+        and claimable_task_ids != AUTHENTICATED_RECEIPT_REOPENED_READY
+    ):
+        errors.append(
+            "reopened authenticated-receipt correction claimable tasks must be "
+            f"{sorted(AUTHENTICATED_RECEIPT_REOPENED_READY)}, got "
             f"{sorted(claimable_task_ids)}"
         )
     lane_count = int(parallel.get("laneCount") or 0)
@@ -1528,6 +1903,341 @@ def validate(
             f"{sorted(simulated_handoff_claimable)}"
         )
 
+    authenticated_wave_a_shards = (
+        {int(task_id.rsplit("-", 1)[1]) % lane_count for task_id in AUTHENTICATED_RECEIPT_WAVE_A}
+        if lane_count > 0
+        else set()
+    )
+    if authenticated_wave_a_shards != {0, 1, 2}:
+        errors.append(
+            "authenticated-receipt wave A must cover all numeric shards, got "
+            f"{sorted(authenticated_wave_a_shards)}"
+        )
+    expected_authenticated_wave_a_resources = {
+        "PTR-160": frozenset({"external/ipfs_accelerate"}),
+        "PTR-161": frozenset({"external/ipfs_datasets"}),
+        "PTR-162": frozenset({"external/ipfs_kit"}),
+    }
+    authenticated_wave_a_resources = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(AUTHENTICATED_RECEIPT_WAVE_A)
+    }
+    if authenticated_wave_a_resources != expected_authenticated_wave_a_resources:
+        errors.append(
+            "authenticated-receipt wave A must own accelerator, datasets and kit "
+            f"independently: got {authenticated_wave_a_resources}"
+        )
+    authenticated_wave_a_resource_width = len(set().union(*authenticated_wave_a_resources.values()))
+    if authenticated_wave_a_resource_width != 3:
+        errors.append(
+            "authenticated-receipt wave A must retain repository resource "
+            f"width 3, got {authenticated_wave_a_resource_width}"
+        )
+    for left in sorted(AUTHENTICATED_RECEIPT_WAVE_A):
+        for right in sorted(AUTHENTICATED_RECEIPT_WAVE_A):
+            if left < right and predicted_by_task[left] & predicted_by_task[right]:
+                errors.append(
+                    f"authenticated-receipt wave-A predicted files overlap: {left}/{right}"
+                )
+
+    pre_authenticated_ids = EXPECTED_TASK_IDS - AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+    simulated_v8_initial_completed = pre_authenticated_ids | {"PTR-160"}
+    simulated_v8_initial_claimable = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_v8_initial_completed
+        and set(task_edges.get(task_id, ())).issubset(simulated_v8_initial_completed)
+    }
+    if simulated_v8_initial_claimable != AUTHENTICATED_RECEIPT_REOPENED_READY:
+        errors.append(
+            "v8 repair must make only actionable retry evidence claimable, got "
+            f"{sorted(simulated_v8_initial_claimable)}"
+        )
+    simulated_retry_repair_completed = (
+        simulated_v8_initial_completed | AUTHENTICATED_RECEIPT_REOPENED_READY
+    )
+    simulated_bootstrap_frontier = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_retry_repair_completed
+        and set(task_edges.get(task_id, ())).issubset(simulated_retry_repair_completed)
+    }
+    if simulated_bootstrap_frontier != AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER:
+        errors.append(
+            "PTR-170 must make only the reopened bootstrap frontier claimable, "
+            f"got {sorted(simulated_bootstrap_frontier)}"
+        )
+    simulated_authenticated_wave_a_completed = (
+        simulated_retry_repair_completed | AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER
+    )
+    simulated_authenticated_wave_b = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_authenticated_wave_a_completed
+        and set(task_edges.get(task_id, ())).issubset(simulated_authenticated_wave_a_completed)
+    }
+    if simulated_authenticated_wave_b != AUTHENTICATED_RECEIPT_WAVE_B:
+        errors.append(
+            "authenticated-receipt wave B must be exactly "
+            f"{sorted(AUTHENTICATED_RECEIPT_WAVE_B)}, got "
+            f"{sorted(simulated_authenticated_wave_b)}"
+        )
+    authenticated_wave_b_shards = (
+        {int(task_id.rsplit("-", 1)[1]) % lane_count for task_id in AUTHENTICATED_RECEIPT_WAVE_B}
+        if lane_count > 0
+        else set()
+    )
+    if authenticated_wave_b_shards != {0, 1}:
+        errors.append(
+            "authenticated-receipt wave B must cover numeric shards 0 and 1, got "
+            f"{sorted(authenticated_wave_b_shards)}"
+        )
+    expected_authenticated_wave_b_submodules = {
+        "PTR-163": frozenset({"external/ipfs_datasets"}),
+        "PTR-165": frozenset(),
+    }
+    authenticated_wave_b_submodules = {
+        task_id: submodules_by_task.get(task_id, frozenset())
+        for task_id in sorted(AUTHENTICATED_RECEIPT_WAVE_B)
+    }
+    if authenticated_wave_b_submodules != expected_authenticated_wave_b_submodules:
+        errors.append(
+            "authenticated-receipt wave B must independently own datasets and "
+            f"the outer superproject: got {authenticated_wave_b_submodules}"
+        )
+    authenticated_wave_b_resources = {
+        task_id: resources or frozenset({"<outer-superproject>"})
+        for task_id, resources in authenticated_wave_b_submodules.items()
+    }
+    authenticated_wave_b_resource_width = len(set().union(*authenticated_wave_b_resources.values()))
+    if authenticated_wave_b_resource_width != 2:
+        errors.append(
+            "authenticated-receipt wave B must retain scheduling resource "
+            f"width 2, got {authenticated_wave_b_resource_width}"
+        )
+    wave_b_overlap = sorted(predicted_by_task["PTR-163"] & predicted_by_task["PTR-165"])
+    if wave_b_overlap:
+        errors.append(
+            f"authenticated-receipt wave-B predicted files must be disjoint, got {wave_b_overlap}"
+        )
+    native_python_overlap = sorted(predicted_by_task["PTR-163"] & predicted_by_task["PTR-171"])
+    if native_python_overlap:
+        errors.append(
+            "PTR-163 native and PTR-171 Python V5 predicted files must be "
+            f"disjoint, got {native_python_overlap}"
+        )
+
+    simulated_wave_b_completed = (
+        simulated_authenticated_wave_a_completed | AUTHENTICATED_RECEIPT_WAVE_B
+    )
+    simulated_python_composition_claimable = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_wave_b_completed
+        and set(task_edges.get(task_id, ())).issubset(simulated_wave_b_completed)
+    }
+    if simulated_python_composition_claimable != {AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID}:
+        errors.append(
+            "authenticated-receipt wave B must make only PTR-171 Python "
+            "composition claimable, got "
+            f"{sorted(simulated_python_composition_claimable)}"
+        )
+    authenticated_python_composition_shard = (
+        int(AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID.rsplit("-", 1)[1]) % lane_count
+        if lane_count > 0
+        else None
+    )
+    if authenticated_python_composition_shard != 0:
+        errors.append(
+            "authenticated-receipt Python composition must use numeric shard "
+            f"0, got {authenticated_python_composition_shard}"
+        )
+    authenticated_python_composition_submodules = submodules_by_task.get(
+        AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID, frozenset()
+    )
+    if authenticated_python_composition_submodules != frozenset({"external/ipfs_datasets"}):
+        errors.append(
+            "authenticated-receipt Python composition must own datasets, got "
+            f"{sorted(authenticated_python_composition_submodules)}"
+        )
+
+    simulated_python_composition_completed = set(
+        simulated_wave_b_completed | {AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID}
+    )
+    simulated_runtime_join_claimable = {
+        task_id
+        for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        if task_id not in simulated_python_composition_completed
+        and set(task_edges.get(task_id, ())).issubset(simulated_python_composition_completed)
+    }
+    if simulated_runtime_join_claimable != {AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID}:
+        errors.append(
+            "PTR-171 must make only the PTR-164 runtime join claimable, got "
+            f"{sorted(simulated_runtime_join_claimable)}"
+        )
+    authenticated_runtime_join_shard = (
+        int(AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID.rsplit("-", 1)[1]) % lane_count
+        if lane_count > 0
+        else None
+    )
+    if authenticated_runtime_join_shard != 2:
+        errors.append(
+            "authenticated-receipt runtime join must use numeric shard 2, got "
+            f"{authenticated_runtime_join_shard}"
+        )
+    authenticated_runtime_join_submodules = submodules_by_task.get(
+        AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID, frozenset()
+    )
+    if authenticated_runtime_join_submodules != frozenset({"external/ipfs_accelerate"}):
+        errors.append(
+            "authenticated-receipt runtime join must own the accelerator, got "
+            f"{sorted(authenticated_runtime_join_submodules)}"
+        )
+
+    simulated_stage = set(
+        simulated_python_composition_completed | {AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID}
+    )
+    for expected_task_id in (
+        AUTHENTICITY_JOIN_TASK_ID,
+        OUTPUT_REPLAY_JOIN_TASK_ID,
+        ZERO_CONFIG_E2E_JOIN_TASK_ID,
+        AUTHENTICATED_HANDOFF_TASK_ID,
+    ):
+        claimable = {
+            task_id
+            for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+            if task_id not in simulated_stage
+            and set(task_edges.get(task_id, ())).issubset(simulated_stage)
+        }
+        if claimable != {expected_task_id}:
+            errors.append(
+                f"authenticated-receipt DAG must make only {expected_task_id} "
+                f"claimable, got {sorted(claimable)}"
+            )
+        simulated_stage.add(expected_task_id)
+
+    historical_completed_tasks = tuple(
+        task
+        for task in tasks
+        if task.task_id not in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        and task.status == "completed"
+    )
+    historical_missing_output_set = {
+        path
+        for task in historical_completed_tasks
+        for path in task.outputs
+        if not (REPO_ROOT / path).exists()
+    }
+    historical_validation_target_set = {
+        path
+        for task in historical_completed_tasks
+        for path in _validation_path_targets(task.metadata.get("validation"))
+    }
+    historical_missing_validation_target_set = {
+        path for path in historical_validation_target_set if not (REPO_ROOT / path).exists()
+    }
+    historical_missing_artifact_set = (
+        historical_missing_output_set | historical_missing_validation_target_set
+    )
+    expected_historical_missing_artifact_set = set(EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS)
+    resolved_historical_artifacts = sorted(
+        expected_historical_missing_artifact_set - historical_missing_artifact_set
+    )
+    unexpected_historical_missing_artifacts = sorted(
+        historical_missing_artifact_set - expected_historical_missing_artifact_set
+    )
+    # The literal ledger records the only reviewed historical gaps and their
+    # immutable correction owners; it is not a requirement that those paths
+    # remain absent forever.  A path disappearing from the live missing set is
+    # expected progress.  Only a newly observed gap outside the sealed ledger
+    # is baseline drift.
+    if unexpected_historical_missing_artifacts:
+        errors.append(
+            "historical missing output/validation artifact baseline drift: "
+            f"unexpected-missing={unexpected_historical_missing_artifacts}"
+        )
+    ownership_audit_paths = expected_historical_missing_artifact_set | set(
+        unexpected_historical_missing_artifacts
+    )
+    correction_owners_by_path = {
+        path: tuple(
+            sorted(
+                task_id
+                for task_id in AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+                if path in predicted_by_task[task_id]
+            )
+        )
+        for path in sorted(ownership_audit_paths)
+    }
+    exact_owner_assignment_mismatches = {
+        path: {
+            "expected_owner_task_id": expected_owner,
+            "actual_owner_task_ids": list(correction_owners_by_path.get(path, ())),
+        }
+        for path, expected_owner in sorted(EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS.items())
+        if correction_owners_by_path.get(path, ()) != (expected_owner,)
+    }
+    if exact_owner_assignment_mismatches:
+        errors.append(
+            "historical artifact correction ownership must match the sealed "
+            "exact path-to-owner map: "
+            + json.dumps(exact_owner_assignment_mismatches, sort_keys=True)
+        )
+    uncovered_historical_artifacts = sorted(
+        path for path, owners in correction_owners_by_path.items() if not owners
+    )
+    multi_owned_historical_artifacts = {
+        path: list(owners) for path, owners in correction_owners_by_path.items() if len(owners) > 1
+    }
+    if uncovered_historical_artifacts:
+        errors.append(
+            "historical missing output/validation artifacts lack an exact "
+            f"correction owner: {uncovered_historical_artifacts}"
+        )
+    if multi_owned_historical_artifacts:
+        errors.append(
+            "historical missing output/validation artifacts have multiple "
+            "correction owners: " + json.dumps(multi_owned_historical_artifacts, sort_keys=True)
+        )
+    historical_artifact_quarantine = {
+        path: {
+            "owner_task_id": expected_owner,
+            "owner_status": task_by_id[expected_owner].status,
+            "observed_owner_task_ids": list(correction_owners_by_path.get(path, ())),
+            "sources": sorted(
+                source
+                for source, source_paths in (
+                    ("output", historical_missing_output_set),
+                    (
+                        "validation_target",
+                        historical_missing_validation_target_set,
+                    ),
+                )
+                if path in source_paths
+            ),
+        }
+        for path, expected_owner in sorted(EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS.items())
+        if path in historical_missing_artifact_set
+    }
+    completed_owner_missing_artifacts = {
+        path: record["owner_task_id"]
+        for path, record in historical_artifact_quarantine.items()
+        if record["owner_status"] == "completed"
+    }
+    if completed_owner_missing_artifacts:
+        errors.append(
+            "completed correction owners still have quarantined historical "
+            "artifacts missing from the reachable tree: "
+            + json.dumps(completed_owner_missing_artifacts, sort_keys=True)
+        )
+
+    historical_missing_outputs = sorted(historical_missing_output_set)
+    historical_missing_validation_targets = sorted(historical_missing_validation_target_set)
+    historical_missing_validation_only = sorted(
+        historical_missing_validation_target_set - historical_missing_output_set
+    )
+    historical_missing_artifacts = sorted(historical_missing_artifact_set)
+
     unordered_conflicts: list[dict[str, object]] = []
     task_ancestors = {task_id: _ancestors(task_id, task_edges) for task_id in task_ids}
     for index, left in enumerate(sorted(task_ids)):
@@ -1572,8 +2282,15 @@ def validate(
         "todo_sha256": _sha256(todo_path),
         "task_count": len(tasks),
         "completed_task_count": len(completed_ids),
-        "initial_ready_task_ids": sorted(PRODUCTION_CORRECTION_WAVE_ONE),
-        "initial_ready_shards": sorted(production_correction_wave_shards),
+        "initial_ready_task_ids": sorted(AUTHENTICATED_RECEIPT_REOPENED_READY),
+        "initial_ready_shards": sorted(
+            {
+                int(task_id.rsplit("-", 1)[1]) % lane_count
+                for task_id in AUTHENTICATED_RECEIPT_REOPENED_READY
+            }
+            if lane_count > 0
+            else set()
+        ),
         "sealed_initial_ready_task_ids": sorted(SEALED_INITIAL_READY),
         "sealed_initial_ready_shards": sorted(sealed_initial_shards),
         "reviewed_extension_task_ids": sorted(COMPLETION_EXTENSION_TASK_IDS),
@@ -1624,6 +2341,73 @@ def validate(
         "reviewed_proof_material_context_wave_shards": sorted(material_context_shards),
         "reviewed_exact_v4_publication_join_task_id": "PTR-155",
         "reviewed_operator_handoff_task_id": "PTR-149",
+        "authenticated_receipt_correction_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_CORRECTION_TASK_IDS
+        ),
+        "authenticated_receipt_wave_a_task_ids": sorted(AUTHENTICATED_RECEIPT_WAVE_A),
+        "authenticated_receipt_wave_a_shards": sorted(authenticated_wave_a_shards),
+        "authenticated_receipt_wave_a_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in authenticated_wave_a_resources.items()
+        },
+        "authenticated_receipt_wave_a_resource_width": (authenticated_wave_a_resource_width),
+        "authenticated_receipt_actionable_retry_task_id": "PTR-170",
+        "authenticated_receipt_actionable_retry_shard": (
+            170 % lane_count if lane_count > 0 else None
+        ),
+        "authenticated_receipt_bootstrap_frontier_task_ids": sorted(
+            AUTHENTICATED_RECEIPT_BOOTSTRAP_FRONTIER
+        ),
+        "authenticated_receipt_wave_b_task_ids": sorted(AUTHENTICATED_RECEIPT_WAVE_B),
+        "authenticated_receipt_wave_b_shards": sorted(authenticated_wave_b_shards),
+        "authenticated_receipt_wave_b_submodules": {
+            task_id: sorted(resources)
+            for task_id, resources in authenticated_wave_b_resources.items()
+        },
+        "authenticated_receipt_wave_b_resource_width": (authenticated_wave_b_resource_width),
+        "authenticated_receipt_python_composition_task_id": (
+            AUTHENTICATED_RECEIPT_PYTHON_COMPOSITION_TASK_ID
+        ),
+        "authenticated_receipt_python_composition_shard": (authenticated_python_composition_shard),
+        "authenticated_receipt_python_composition_submodules": sorted(
+            authenticated_python_composition_submodules
+        ),
+        "authenticated_receipt_runtime_join_task_id": (AUTHENTICATED_RECEIPT_RUNTIME_JOIN_TASK_ID),
+        "authenticated_receipt_runtime_join_shard": (authenticated_runtime_join_shard),
+        "authenticated_receipt_runtime_join_submodules": sorted(
+            authenticated_runtime_join_submodules
+        ),
+        "authenticated_receipt_authenticity_join_task_id": (AUTHENTICITY_JOIN_TASK_ID),
+        "authenticated_receipt_output_replay_join_task_id": (OUTPUT_REPLAY_JOIN_TASK_ID),
+        "authenticated_receipt_zero_config_e2e_join_task_id": (ZERO_CONFIG_E2E_JOIN_TASK_ID),
+        "authenticated_receipt_handoff_task_id": AUTHENTICATED_HANDOFF_TASK_ID,
+        "historical_missing_output_paths": historical_missing_outputs,
+        "historical_missing_output_count": len(historical_missing_outputs),
+        "historical_validation_target_paths": sorted(historical_validation_target_set),
+        "historical_validation_target_count": len(historical_validation_target_set),
+        "historical_missing_validation_target_paths": (historical_missing_validation_targets),
+        "historical_missing_validation_target_count": len(historical_missing_validation_targets),
+        "historical_missing_validation_only_paths": (historical_missing_validation_only),
+        "historical_missing_artifact_paths": historical_missing_artifacts,
+        "historical_missing_artifact_count": len(historical_missing_artifacts),
+        "expected_historical_missing_artifact_owners": dict(
+            sorted(EXPECTED_HISTORICAL_MISSING_ARTIFACT_OWNERS.items())
+        ),
+        "resolved_historical_artifact_paths": resolved_historical_artifacts,
+        # Retained for report consumers created before the ledger became
+        # progression-aware.
+        "expected_historical_artifacts_no_longer_missing": (resolved_historical_artifacts),
+        "unexpected_historical_missing_artifact_paths": (unexpected_historical_missing_artifacts),
+        "exact_historical_artifact_owner_assignment_mismatches": (
+            exact_owner_assignment_mismatches
+        ),
+        "historical_missing_artifact_quarantine": (historical_artifact_quarantine),
+        "uncovered_historical_missing_artifact_paths": (uncovered_historical_artifacts),
+        "multi_owned_historical_missing_artifact_paths": (multi_owned_historical_artifacts),
+        "completed_owner_missing_historical_artifact_paths": (completed_owner_missing_artifacts),
+        "uncovered_historical_missing_output_paths": sorted(
+            historical_missing_output_set.intersection(uncovered_historical_artifacts)
+        ),
         "current_claimable_task_ids": sorted(claimable_task_ids),
         "current_claimable_shards": sorted(
             {int(task_id.rsplit("-", 1)[1]) % lane_count for task_id in claimable_task_ids}

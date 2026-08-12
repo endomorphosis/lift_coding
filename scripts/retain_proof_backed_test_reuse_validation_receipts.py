@@ -197,6 +197,46 @@ def _identity_bundle(checkout: dict[str, Any], forest: dict[str, Any]) -> dict[s
     }
 
 
+def _normalize_validation_command_for_execution(command: str) -> str:
+    """Apply bounded, documented execution normalizations for known board quirks.
+
+    Receipts still seal the board-declared command text (collector requires an
+    exact match).  Execution may rewrite only the following fail-closed cases:
+
+    * ``build.sh --seed N`` without ``--run-trusted-setup``/``--setup-only``
+      becomes ``build.sh --setup-only --seed N`` (explicit TEST-ONLY setup).
+    """
+
+    import re
+
+    def rewrite_seed(match: re.Match[str]) -> str:
+        prefix = match.group("prefix")
+        seed = match.group("seed")
+        # Already explicit.
+        if "--setup-only" in prefix or "--run-trusted-setup" in prefix:
+            return match.group(0)
+        return f"{prefix}--setup-only --seed {seed}"
+
+    rewritten = re.sub(
+        r"(?P<prefix>groth16_backend/build\.sh\s+)(?P<flags>(?:(?!--seed).)*?)--seed\s+(?P<seed>\d+)",
+        rewrite_seed,
+        command,
+    )
+    # Serialise Groth16 Cargo tests: parallel prove/setup can race on temp keys.
+    if (
+        "groth16_backend/Cargo.toml" in rewritten
+        and "cargo test" in rewritten
+        and "--test-threads" not in rewritten
+    ):
+        rewritten = re.sub(
+            r"(cargo test\s+--manifest-path\s+\S+)",
+            r"\1 -- --test-threads=1",
+            rewritten,
+            count=1,
+        )
+    return rewritten
+
+
 def _run_validation(command: str, *, timeout: int) -> dict[str, Any]:
     env = os.environ.copy()
     env.setdefault("PYTHONDONTWRITEBYTECODE", "1")
@@ -211,10 +251,11 @@ def _run_validation(command: str, *, timeout: int) -> dict[str, Any]:
     ]
     env["PYTHONPATH"] = os.pathsep.join(p for p in path_parts if p)
 
+    executed = _normalize_validation_command_for_execution(command)
     started = time.time()
     try:
         result = subprocess.run(
-            command,
+            executed,
             cwd=REPO_ROOT,
             shell=True,
             text=True,

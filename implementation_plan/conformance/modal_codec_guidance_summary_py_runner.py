@@ -38,7 +38,9 @@ def _evaluate(vector: Dict[str, Any]) -> Dict[str, Any]:
         ),
         "sourceCopyRewardHackPenalty": codec._source_copy_reward_hack_penalty(
             source_span_copy_ratio=float(penalty.get("sourceSpanCopyRatio") or 0.0),
-            text_reconstruction_similarity=float(penalty.get("textReconstructionSimilarity") or 0.0),
+            text_reconstruction_similarity=float(
+                penalty.get("textReconstructionSimilarity") or 0.0
+            ),
             structural_text_similarity=float(penalty.get("structuralTextSimilarity") or 0.0),
         ),
     }
@@ -51,10 +53,7 @@ def main() -> int:
     args = parser.parse_args()
 
     payload = json.loads(Path(args.vectors).read_text(encoding="utf-8"))
-    rows = [
-        {"id": vector["id"], **_evaluate(vector)}
-        for vector in payload.get("vectors", [])
-    ]
+    rows = [{"id": vector["id"], **_evaluate(vector)} for vector in payload.get("vectors", [])]
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)

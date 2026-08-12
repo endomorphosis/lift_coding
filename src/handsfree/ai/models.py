@@ -59,6 +59,7 @@ class CapabilityRuntimeSurface(StrEnum):
     DAEMON_MEDIATED = "daemon_mediated"
     SWISSKNIFE_ORB = "swissknife_orb"
     HALLUCINATE_APP = "hallucinate_app"
+    OPERATOR_CONSOLE = "operator_console"
 
 
 class CapabilityPlacementLayer(StrEnum):
@@ -70,6 +71,7 @@ class CapabilityPlacementLayer(StrEnum):
     HANDSFREE_DAEMON = "handsfree_daemon"
     MCP_PROTOCOL = "mcp_protocol"
     SWISSKNIFE_ORB = "swissknife_orb"
+    OPERATOR_CONSOLE = "operator_console"
 
 
 @dataclass(frozen=True)

@@ -18,8 +18,7 @@ from ipfs_datasets_py.logic.modal import codec
 def _evaluate(vector: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "operatorFeatureKeys": [
-            codec._modal_operator_feature_key(symbol)
-            for symbol in vector.get("symbols", [])
+            codec._modal_operator_feature_key(symbol) for symbol in vector.get("symbols", [])
         ],
         "operatorPairFeatureKeys": [
             codec._modal_operator_pair_feature_key(pair[0], pair[1])

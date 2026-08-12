@@ -1,0 +1,695 @@
+{
+  "evidence_id": "dcr/contract-repair-fixed-point@1",
+  "interface": "ContractRepairFixedPoint@1",
+  "result": {
+    "backlog": {
+      "board_namespace": "deterministic-swissknife-mcplusplus-contract-repair-v1",
+      "content_id": "sha256:6b6682ed93626823264c7eb142a40e4de57e6ae56df331d504ac5239efbddb17",
+      "findings": [
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:01",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-01",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:02",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-02",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:03",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-03",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (2 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:03",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:legacy-dup-03",
+          "historical": true,
+          "status": "duplicate",
+          "summary": "Duplicate legacy ambiguous anchor row 3",
+          "supersedes": "finding:superseded-03"
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:04",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-04",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:05",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-05",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:06",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-06",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (2 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:06",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:legacy-dup-06",
+          "historical": true,
+          "status": "duplicate",
+          "summary": "Duplicate legacy ambiguous anchor row 6",
+          "supersedes": "finding:superseded-06"
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:07",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-07",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:08",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-08",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:09",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-09",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (2 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:09",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:legacy-dup-09",
+          "historical": true,
+          "status": "duplicate",
+          "summary": "Duplicate legacy ambiguous anchor row 9",
+          "supersedes": "finding:superseded-09"
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:10",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-10",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:11",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-11",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:12",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-12",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (2 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:12",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:legacy-dup-12",
+          "historical": true,
+          "status": "duplicate",
+          "summary": "Duplicate legacy ambiguous anchor row 12",
+          "supersedes": "finding:superseded-12"
+        },
+        {
+          "canonical_key": "anchor/legacy:ambiguous-anchor:13",
+          "family": "ambiguous_anchor",
+          "finding_id": "finding:superseded-13",
+          "historical": true,
+          "status": "superseded",
+          "summary": "Superseded legacy ambiguous anchor (1 rows)",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "conformance/adversarial-kill-score",
+          "family": "adversarial",
+          "finding_id": "finding:conformance-adversarial-kill-score",
+          "historical": false,
+          "status": "repaired",
+          "summary": "Adversarial mutation kill score perfect",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "conformance/desktop-mediation",
+          "family": "desktop_e2e",
+          "finding_id": "finding:conformance-desktop-mediation",
+          "historical": false,
+          "status": "repaired",
+          "summary": "Desktop/browser mediation repair e2e proved",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "conformance/live-three-service",
+          "family": "live_conformance",
+          "finding_id": "finding:conformance-live-three-service",
+          "historical": false,
+          "status": "repaired",
+          "summary": "Live initialize/list/call/logic equivalence proved",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "residual/review-required-authority-pin",
+          "family": "authority",
+          "finding_id": "finding:residual-review-authority-pin",
+          "historical": false,
+          "status": "review_required",
+          "summary": "Authority pin rotation requires human review",
+          "supersedes": null
+        },
+        {
+          "canonical_key": "residual/unsupported-profile-g",
+          "family": "profile_support",
+          "finding_id": "finding:residual-unsupported-profile-g",
+          "historical": false,
+          "status": "unsupported",
+          "summary": "MCP++ profile G remains typed unsupported",
+          "supersedes": null
+        }
+      ],
+      "generated_evidence_authoritative": false,
+      "interface": "RepairBacklogProjection@1",
+      "open_task_count": 2,
+      "schema": "ipfs_accelerate_py/agent-supervisor/contract-repair-board@1",
+      "task_count": 5
+    },
+    "content_id": "sha256:efa8922083031bbf1658499bac2f7dc121412ae360a7e9a1665747869e7a51dd",
+    "epoch_edit_counts": [
+      0,
+      0
+    ],
+    "epoch_roots": [
+      "sha256:2a9cfc8a07b1cb90ca6d100d3b28eded65e7beff5407df7bf7f27cfeec231a3e",
+      "sha256:2a9cfc8a07b1cb90ca6d100d3b28eded65e7beff5407df7bf7f27cfeec231a3e"
+    ],
+    "epoch_task_counts": [
+      0,
+      0
+    ],
+    "evidence_id": "dcr/contract-repair-fixed-point@1",
+    "final_findings": [
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:01",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-01",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:02",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-02",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:03",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-03",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (2 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:03",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-03",
+        "historical": true,
+        "status": "duplicate",
+        "summary": "Duplicate legacy ambiguous anchor row 3",
+        "supersedes": "finding:superseded-03"
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:04",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-04",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:05",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-05",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:06",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-06",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (2 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:06",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-06",
+        "historical": true,
+        "status": "duplicate",
+        "summary": "Duplicate legacy ambiguous anchor row 6",
+        "supersedes": "finding:superseded-06"
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:07",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-07",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:08",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-08",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:09",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-09",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (2 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:09",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-09",
+        "historical": true,
+        "status": "duplicate",
+        "summary": "Duplicate legacy ambiguous anchor row 9",
+        "supersedes": "finding:superseded-09"
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:10",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-10",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:11",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-11",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:12",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-12",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (2 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:12",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-12",
+        "historical": true,
+        "status": "duplicate",
+        "summary": "Duplicate legacy ambiguous anchor row 12",
+        "supersedes": "finding:superseded-12"
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:13",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:superseded-13",
+        "historical": true,
+        "status": "superseded",
+        "summary": "Superseded legacy ambiguous anchor (1 rows)",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "conformance/adversarial-kill-score",
+        "family": "adversarial",
+        "finding_id": "finding:conformance-adversarial-kill-score",
+        "historical": false,
+        "status": "repaired",
+        "summary": "Adversarial mutation kill score perfect",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "conformance/desktop-mediation",
+        "family": "desktop_e2e",
+        "finding_id": "finding:conformance-desktop-mediation",
+        "historical": false,
+        "status": "repaired",
+        "summary": "Desktop/browser mediation repair e2e proved",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "conformance/live-three-service",
+        "family": "live_conformance",
+        "finding_id": "finding:conformance-live-three-service",
+        "historical": false,
+        "status": "repaired",
+        "summary": "Live initialize/list/call/logic equivalence proved",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "residual/review-required-authority-pin",
+        "family": "authority",
+        "finding_id": "finding:residual-review-authority-pin",
+        "historical": false,
+        "status": "review_required",
+        "summary": "Authority pin rotation requires human review",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "residual/unsupported-profile-g",
+        "family": "profile_support",
+        "finding_id": "finding:residual-unsupported-profile-g",
+        "historical": false,
+        "status": "unsupported",
+        "summary": "MCP++ profile G remains typed unsupported",
+        "supersedes": null
+      }
+    ],
+    "initial_findings": [
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:01",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-01",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 1",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:02",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-02",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 2",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:03",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-03",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 3",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:03",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-03",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Duplicate legacy ambiguous anchor row 3",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:04",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-04",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 4",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:05",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-05",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 5",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:06",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-06",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 6",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:06",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-06",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Duplicate legacy ambiguous anchor row 6",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:07",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-07",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 7",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:08",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-08",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 8",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:09",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-09",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 9",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:09",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-09",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Duplicate legacy ambiguous anchor row 9",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:10",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-10",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 10",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:11",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-11",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 11",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:12",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-12",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 12",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:12",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-dup-12",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Duplicate legacy ambiguous anchor row 12",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "anchor/legacy:ambiguous-anchor:13",
+        "family": "ambiguous_anchor",
+        "finding_id": "finding:legacy-13",
+        "historical": true,
+        "status": "repairable",
+        "summary": "Legacy ambiguous anchor row 13",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "conformance/live-three-service",
+        "family": "live_conformance",
+        "finding_id": "finding:conformance-live-three-service",
+        "historical": false,
+        "status": "repairable",
+        "summary": "Live initialize/list/call/logic equivalence proved",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "conformance/desktop-mediation",
+        "family": "desktop_e2e",
+        "finding_id": "finding:conformance-desktop-mediation",
+        "historical": false,
+        "status": "repairable",
+        "summary": "Desktop/browser mediation repair e2e proved",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "conformance/adversarial-kill-score",
+        "family": "adversarial",
+        "finding_id": "finding:conformance-adversarial-kill-score",
+        "historical": false,
+        "status": "repairable",
+        "summary": "Adversarial mutation kill score perfect",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "residual/unsupported-profile-g",
+        "family": "profile_support",
+        "finding_id": "finding:residual-unsupported-profile-g",
+        "historical": false,
+        "status": "unsupported",
+        "summary": "MCP++ profile G remains typed unsupported",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "residual/review-required-authority-pin",
+        "family": "authority",
+        "finding_id": "finding:residual-review-authority-pin",
+        "historical": false,
+        "status": "review_required",
+        "summary": "Authority pin rotation requires human review",
+        "supersedes": null
+      }
+    ],
+    "interface": "ContractRepairFixedPoint@1",
+    "legacy_ambiguous_anchor_count": 13,
+    "passed": true,
+    "preconditions_ok": true,
+    "published_repairs": [
+      "finding:conformance-adversarial-kill-score",
+      "finding:conformance-desktop-mediation",
+      "finding:conformance-live-three-service"
+    ],
+    "reason_codes": [
+      "runtime_model_calls_0",
+      "dcr_094_fixed_point",
+      "preserve_unsupported_review_required",
+      "preconditions_live_desktop_adversarial_ok",
+      "two_unchanged_epochs",
+      "zero_tasks_zero_edits",
+      "superseded_legacy_anchors_13",
+      "fixed_point_passed"
+    ],
+    "runtime_model_calls": 0,
+    "schema": "ipfs_accelerate_py/agent-supervisor/dcr-contract-repair-fixed-point@1",
+    "supersession_map": {
+      "finding:legacy-01": "finding:superseded-01",
+      "finding:legacy-02": "finding:superseded-02",
+      "finding:legacy-03": "finding:superseded-03",
+      "finding:legacy-04": "finding:superseded-04",
+      "finding:legacy-05": "finding:superseded-05",
+      "finding:legacy-06": "finding:superseded-06",
+      "finding:legacy-07": "finding:superseded-07",
+      "finding:legacy-08": "finding:superseded-08",
+      "finding:legacy-09": "finding:superseded-09",
+      "finding:legacy-10": "finding:superseded-10",
+      "finding:legacy-11": "finding:superseded-11",
+      "finding:legacy-12": "finding:superseded-12",
+      "finding:legacy-13": "finding:superseded-13",
+      "finding:legacy-dup-03": "finding:superseded-03",
+      "finding:legacy-dup-06": "finding:superseded-06",
+      "finding:legacy-dup-09": "finding:superseded-09",
+      "finding:legacy-dup-12": "finding:superseded-12"
+    },
+    "task_id": "DCR-094",
+    "unresolved_typed": [
+      {
+        "canonical_key": "residual/review-required-authority-pin",
+        "family": "authority",
+        "finding_id": "finding:residual-review-authority-pin",
+        "historical": false,
+        "status": "review_required",
+        "summary": "Authority pin rotation requires human review",
+        "supersedes": null
+      },
+      {
+        "canonical_key": "residual/unsupported-profile-g",
+        "family": "profile_support",
+        "finding_id": "finding:residual-unsupported-profile-g",
+        "historical": false,
+        "status": "unsupported",
+        "summary": "MCP++ profile G remains typed unsupported",
+        "supersedes": null
+      }
+    ],
+    "version": 1
+  },
+  "runtime_model_calls": 0,
+  "schema": "ipfs_accelerate_py/agent-supervisor/dcr-contract-repair-fixed-point@1",
+  "task_id": "DCR-094",
+  "version": 1
+}

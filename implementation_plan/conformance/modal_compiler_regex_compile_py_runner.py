@@ -68,7 +68,11 @@ def main() -> int:
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(
-        json.dumps({"schemaVersion": payload.get("schemaVersion"), "results": rows}, indent=2, sort_keys=True),
+        json.dumps(
+            {"schemaVersion": payload.get("schemaVersion"), "results": rows},
+            indent=2,
+            sort_keys=True,
+        ),
         encoding="utf-8",
     )
     return 0

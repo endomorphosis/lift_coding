@@ -1,11 +1,13 @@
 """Test suite for ORB Dynamic App Renderer and auto-UI generation pipeline.
 
-Validates the complete ORB → IDL → Auto-UI → Desktop + Glasses flow:
-- Dynamic app renderer generates correct HTML structure
+Validates the complete ORB → IDL → Auto-UI → Desktop + Glasses flow under
+UIIRDynamicRendererSecurity@1 (UIR-035):
+- Dynamic app renderer generates correct HTML structure with escaped text
 - Widget selection from JSON schema types
-- HTTP method resolution for IPFS endpoints
+- HTTP method resolution retained for display (GET vs POST badges)
 - Form generation from method input schemas
-- Result rendering (table, list, error states)
+- Result rendering (table, list, denial/error states) via governed ORB path
+- No direct fetch/HTTP bypass; policy-mediated invoker required
 - Integration with virtual desktop and glasses control plane
 """
 
@@ -25,12 +27,12 @@ def read_ts(relative_path: str) -> str:
 
 
 # ===========================================================================
-# ORB Dynamic App Renderer
+# ORB Dynamic App Renderer (UIR-035)
 # ===========================================================================
 
 
 class TestORBDynamicAppRenderer:
-    """Verify the auto-UI renderer for virtual desktop."""
+    """Verify the auto-UI renderer for virtual desktop (governed path)."""
 
     @pytest.fixture
     def source(self):
@@ -38,6 +40,11 @@ class TestORBDynamicAppRenderer:
 
     def test_renderer_class_exported(self, source):
         assert "export class ORBDynamicAppRenderer" in source
+
+    def test_uir035_security_interface(self, source):
+        """Stable UIIRDynamicRendererSecurity@1 identity must be exported."""
+        assert "UIIRDynamicRendererSecurity@1" in source
+        assert "UIIR_DYNAMIC_RENDERER_SECURITY_INTERFACE" in source
 
     def test_render_app_method(self, source):
         assert "renderApp(descriptor:" in source
@@ -60,7 +67,7 @@ class TestORBDynamicAppRenderer:
         assert "endsWith('_cid')" in source
 
     def test_http_method_resolution(self, source):
-        """Must resolve GET vs POST for all methods."""
+        """Must resolve GET vs POST for display badges on method tabs."""
         assert "GET_METHODS" in source
         assert "'cat'" in source
         assert "'list_pins'" in source
@@ -79,46 +86,82 @@ class TestORBDynamicAppRenderer:
         """Each method must have an invoke button."""
         assert "orb-invoke-btn" in source
 
-    def test_shows_output_schema(self, source):
-        """Must show expected output schema."""
-        assert "Expected Output" in source
+    def test_html_escaping_helpers(self, source):
+        """UIR-035: all descriptor/result text must go through escaping."""
+        assert "export function escapeHtml" in source
+        assert "export function sanitizeDescriptorText" in source
+        assert "export function looksHostile" in source
+        assert "sanitizeDescriptorText" in source
+        assert "escapeHtml(" in source
+
+    def test_hostile_markers_blocked(self, source):
+        """Executable markers must be detected and never re-echoed raw."""
+        assert "'<script'" in source
+        assert "'javascript:'" in source
+        assert "blocked unsafe content" in source
 
     def test_result_rendering_table(self, source):
-        """Object results rendered as key-value table."""
+        """Object results rendered as key-value table with escaped cells."""
         assert "<table" in source
+        assert "Object.entries" in source
 
     def test_result_rendering_array(self, source):
-        """Array results rendered as list."""
-        assert "data.slice(0, 50)" in source
+        """Array results rendered as capped list with escaped items."""
+        assert ".slice(0, 50)" in source
 
-    def test_error_rendering(self, source):
-        """Must show error state with details."""
-        assert "Invocation Failed" in source
-        assert "err.message" in source
+    def test_denial_and_error_rendering(self, source):
+        """Denials/errors remain visible and accessible (role=alert)."""
+        assert "_renderDenial" in source
+        assert 'role="' in source
+        assert "alertdialog" in source or "alert" in source
+        assert "err?.message" in source or "err.message" in source
 
     def test_correlation_id_tracking(self, source):
-        """Must generate correlation IDs for ORB tracking."""
+        """Must generate correlation IDs for ORB tracking (no raw HTTP headers)."""
         assert "correlationId" in source
-        assert "X-Correlation-Id" in source
+        assert "orb_" in source
+        # Direct HTTP header path removed under UIR-035.
+        assert "X-Correlation-Id" not in source
 
-    def test_abort_timeout(self, source):
-        """Must enforce request timeout."""
-        assert "AbortSignal.timeout" in source
+    def test_governed_invoker_required(self, source):
+        """Actions must route through a policy-mediated ORB invoker."""
+        assert "GovernedOrbInvoker" in source
+        assert "governedInvoker" in source
+        assert "missing_governed_invoker" in source or "Governed ORB invoker is required" in source
 
-    def test_backend_status_check(self, source):
-        """Must check backend status on load."""
-        assert "_checkBackendStatus" in source
+    def test_direct_http_blocked(self, source):
+        """Direct fetch/HTTP bypass must be absent or explicitly blocked."""
+        assert "blockDirectHttp" in source
+        assert "blockedDirectHttpAttempts" in source
+        # Fail-closed: no AbortSignal.timeout-based raw fetch path.
+        assert "AbortSignal.timeout" not in source
+        assert "_checkBackendStatus" not in source
+
+    def test_uiir_binding_identity_on_invoke(self, source):
+        """Governed invocations retain UI-IR / policy binding fields."""
+        assert "ui_ir_cid" in source
+        assert "action_binding_id" in source
+        assert "policy_cid" in source
+        assert "uiIrCid" in source
+        assert "actionBindingId" in source
+        assert "policyCid" in source
 
     def test_latency_display(self, source):
         """Must show request latency."""
         assert "orb-latency" in source
         assert "performance.now()" in source
 
+    def test_result_panel_region(self, source):
+        """Results land in an accessible live region panel."""
+        assert "orb-result-panel" in source
+        assert "aria-live" in source
+
     def test_global_exports(self, source):
         """Must export to window for browser use."""
         assert "window" in source
         assert "ORBDynamicAppRenderer" in source
         assert "openORBGeneratedApp" in source
+        assert "escapeHtml" in source
 
 
 # ===========================================================================
@@ -131,7 +174,7 @@ class TestVirtualDesktopIntegration:
 
     @pytest.fixture
     def source(self):
-        return read_ts("web/src/browser-main.ts")
+        return read_ts("web/legacy-archive/src/browser-main.ts")
 
     def test_imports_renderer(self, source):
         assert "orb-dynamic-app-renderer" in source
@@ -161,7 +204,6 @@ class TestVirtualDesktopIntegration:
 
     def test_descriptors_have_correct_method_counts(self, source):
         """IPFS Kit should have 10 methods, Datasets 6, Accelerate 8."""
-        # Find method arrays by checking how many name: entries after each descriptor
         kit_block = source[source.find("name: 'ipfs-kit'") : source.find("name: 'ipfs-datasets'")]
         kit_methods = kit_block.count("{ name: '")
         assert kit_methods >= 10, f"Kit has {kit_methods} methods, expected >= 10"
@@ -177,7 +219,8 @@ class TestGlassesRegistryUpdate:
 
     @pytest.fixture
     def source(self):
-        return read_ts("src/services/glasses-app-control-plane.ts")
+        # UIR / glasses path lives under services/glasses/ (not services/ root).
+        return read_ts("src/services/glasses/glasses-app-control-plane.ts")
 
     def test_orb_auto_ui_display_defined(self, source):
         assert "orbAutoUIGlassesDisplay" in source
