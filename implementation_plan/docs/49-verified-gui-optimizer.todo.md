@@ -311,7 +311,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-016 Extract explicit bounded UI state machines
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
