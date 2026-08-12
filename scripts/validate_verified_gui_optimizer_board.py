@@ -172,6 +172,7 @@ CONTROL_PATHS = frozenset(
         "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_root_pin_20260812.json",
         "implementation_plan/evidence/verified_gui_optimizer/provider_route/local_profile_lifecycle_witness_20260812.json",
         "implementation_plan/evidence/verified_gui_optimizer/recovery/provider_capsule_retry_amendment_20260812.json",
+        "implementation_plan/evidence/verified_gui_optimizer/recovery/provider_capsule_immutability_retry_amendment_20260812.json",
     }
 )
 ALLOWED_OUTPUT_PREFIXES = (
@@ -389,7 +390,7 @@ def _validate_config(config: Mapping[str, Any], errors: list[str]) -> None:
         "stale_seconds": 900,
         "watchdog_startup_grace_seconds": 300,
         "max_restarts": 3,
-        "max_task_attempts": 4,
+        "max_task_attempts": 5,
         "implementation_retry_budget": 3,
         "validation_retry_budget": 3,
         "merge_retry_budget": 3,
