@@ -131,7 +131,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-000
 - Goal id: VGO-G020
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/__init__.py, external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/models.py, external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/schema.py, external/ipfs_datasets/tests/unit/logic/gui_optimizer/test_models.py
-- Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo001_oracle.py --check-all && cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_models.py -q
+- Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo001_oracle.py --check-all ; cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_models.py -q
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/models
 - Parallel lane: vgo-lane-1
@@ -212,7 +212,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-000
 - Goal id: VGO-G010
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/authority.py, external/ipfs_accelerate/test/api/test_gui_optimizer_authority.py
-- Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo009_oracle.py --check-all && cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py -q
+- Validation: PYTHONDONTWRITEBYTECODE=1 python3 -B scripts/ops/verified_gui_optimizer_vgo009_oracle.py --check-all ; cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py -q
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/security-authority
 - Parallel lane: vgo-lane-3
@@ -239,7 +239,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-001, VGO-002
 - Goal id: VGO-G020
 - Outputs: external/ipfs_datasets/ipfs_datasets_py/logic/gui_optimizer/identity.py, external/ipfs_datasets/tests/unit/logic/gui_optimizer/test_identity.py, swissknife/src/services/gui-optimizer/identity.ts, swissknife/test/unit/services/gui-optimizer/identity.test.ts
-- Validation: cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_identity.py -q && cd ../../swissknife && npm run test:run -- test/unit/services/gui-optimizer/identity.test.ts
+- Validation: cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_identity.py -q ; cd swissknife && npm run test:run -- test/unit/services/gui-optimizer/identity.test.ts
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/content-identity
 - Parallel lane: vgo-lane-3
@@ -760,7 +760,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-050, VGO-051, VGO-053, VGO-054
 - Goal id: VGO-G080
 - Outputs: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/gui_optimizer/cli.py, external/ipfs_accelerate/test/api/test_gui_optimizer_cli.py, swissknife/src/services/gui-optimizer/cli.ts, swissknife/test/unit/services/gui-optimizer/cli.test.ts, scripts/gui-opt
-- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_cli.py -q && cd ../../swissknife && npm run test:run -- test/unit/services/gui-optimizer/cli.test.ts && cd .. && scripts/gui-opt --help
+- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_cli.py -q ; cd swissknife && npm run test:run -- test/unit/services/gui-optimizer/cli.test.ts ; scripts/gui-opt --help
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/cli
 - Parallel lane: vgo-lane-0
@@ -942,7 +942,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-010, VGO-012, VGO-041, VGO-062
 - Goal id: VGO-G080
 - Outputs: external/ipfs_datasets/tests/fixtures/gui_optimizer/identity-vectors.json, external/ipfs_datasets/tests/unit/logic/gui_optimizer/test_identity_vectors.py, swissknife/test/fixtures/gui-optimizer/identity-vectors.json, swissknife/test/unit/services/gui-optimizer/identity-vectors.test.ts
-- Validation: cmp external/ipfs_datasets/tests/fixtures/gui_optimizer/identity-vectors.json swissknife/test/fixtures/gui-optimizer/identity-vectors.json && cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_identity_vectors.py -q && cd ../../swissknife && npm run test:run -- test/unit/services/gui-optimizer/identity-vectors.test.ts
+- Validation: cmp external/ipfs_datasets/tests/fixtures/gui_optimizer/identity-vectors.json swissknife/test/fixtures/gui-optimizer/identity-vectors.json ; cd external/ipfs_datasets && python3 -m pytest tests/unit/logic/gui_optimizer/test_identity_vectors.py -q ; cd swissknife && npm run test:run -- test/unit/services/gui-optimizer/identity-vectors.test.ts
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/identity-conformance
 - Parallel lane: vgo-lane-3
@@ -968,7 +968,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-023, VGO-031, VGO-034, VGO-043, VGO-060, VGO-068, VGO-071, VGO-072, VGO-075, VGO-086
 - Goal id: VGO-G090
 - Outputs: swissknife/web/js/apps/agent-supervisor.js, implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-proposal.json, implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json, implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-artifacts.json
-- Validation: scripts/gui-opt verify agent-supervisor-target --receipt implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json && cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts
+- Validation: scripts/gui-opt verify agent-supervisor-target --receipt implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-target-improvement-receipt.json ; cd swissknife && npm run test:run -- test/browser/agent-supervisor-console-gateway.test.ts
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/target-patch
 - Parallel lane: vgo-lane-2
@@ -1098,7 +1098,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-080, VGO-081, VGO-086, VGO-090
 - Goal id: VGO-G100
 - Outputs: implementation_plan/evidence/verified_gui_optimizer/acceptance-security-audit.json
-- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py test/api/test_gui_optimizer_patch_scope.py test/api/test_gui_optimizer_acceptance_adversarial.py -q && cd ../../swissknife && npm run test:run -- test/unit/services/gui-optimizer/policy-validator.test.ts test/browser/all-app-tool-gateway.test.ts test/browser/agent-supervisor-console-gateway.test.ts test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.verified-gui-optimizer.config.ts test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts --reporter=line && cd .. && scripts/gui-opt report acceptance-security-audit --require-complete --verify-receipts
+- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_authority.py test/api/test_gui_optimizer_patch_scope.py test/api/test_gui_optimizer_acceptance_adversarial.py -q ; cd swissknife && npm run test:run -- test/unit/services/gui-optimizer/policy-validator.test.ts test/browser/all-app-tool-gateway.test.ts test/browser/agent-supervisor-console-gateway.test.ts test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts && node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.verified-gui-optimizer.config.ts test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts --reporter=line ; scripts/gui-opt report acceptance-security-audit --require-complete --verify-receipts
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/security-audit
 - Parallel lane: vgo-lane-2
@@ -1150,7 +1150,7 @@ for other screens, but no task may expand into optimizing every application.
 - Depends on: VGO-060, VGO-075, VGO-081, VGO-083, VGO-086
 - Goal id: VGO-G110
 - Outputs: swissknife/docs/gui-optimizer/ARCHITECTURE.md, external/ipfs_datasets/docs/gui_optimizer_contracts.md, external/ipfs_accelerate/docs/architecture/VERIFIED_GUI_OPTIMIZER.md, external/ipfs_accelerate/test/api/test_gui_optimizer_architecture_docs.py
-- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_architecture_docs.py -q && cd ../.. && PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_verified_gui_optimizer_board.py --check-all
+- Validation: cd external/ipfs_accelerate && PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:../ipfs_datasets python3 -m pytest test/api/test_gui_optimizer_architecture_docs.py -q ; PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_verified_gui_optimizer_board.py --check-all
 - Board namespace: verified-gui-optimizer-v1
 - Bundle: vgo/architecture-docs
 - Parallel lane: vgo-lane-1

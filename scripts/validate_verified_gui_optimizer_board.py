@@ -885,42 +885,129 @@ def _validate_goals(
     def referenced_validation_paths(
         command: str,
     ) -> tuple[set[str], list[str]]:
-        """Extract unambiguous paths from the board's sealed `&&` grammar."""
+        """Extract paths from sealed atomic ``;`` / ``&&`` commands.
 
-        cwd = PurePosixPath(".")
+        A semicolon is an explicit scheduler command boundary, so each atom
+        starts at the repository root. Within an atom, only a pure ``&&``
+        chain is accepted and an optional ``cd`` must be its first segment.
+        This mirrors the board's fail-closed validation-command grammar
+        without importing mutable supervisor/product code.
+        """
+
         paths: set[str] = set()
         path_errors: list[str] = []
-        for segment in command.split("&&"):
+
+        atoms: list[str] = []
+        current: list[str] = []
+        in_single_quote = False
+        in_double_quote = False
+        escaped = False
+
+        def flush_atom() -> None:
+            atom = "".join(current).strip()
+            if atom:
+                atoms.append(atom)
+            else:
+                path_errors.append("validation has an empty command atom")
+            current.clear()
+
+        for character in command.strip():
+            if escaped:
+                if character in {"\n", "\r"} and not in_single_quote:
+                    path_errors.append(
+                        "validation must not contain line continuation syntax"
+                    )
+                current.append(character)
+                escaped = False
+                continue
+            if character == "\\" and not in_single_quote:
+                current.append(character)
+                escaped = True
+                continue
+            if character == "'" and not in_double_quote:
+                in_single_quote = not in_single_quote
+                current.append(character)
+                continue
+            if character == '"' and not in_single_quote:
+                in_double_quote = not in_double_quote
+                current.append(character)
+                continue
+            if character == ";" and not in_single_quote and not in_double_quote:
+                flush_atom()
+                continue
+            if character in {"\n", "\r"} and not in_single_quote:
+                path_errors.append("validation must not contain shell newlines")
+            current.append(character)
+        flush_atom()
+        if in_single_quote or in_double_quote or escaped:
+            path_errors.append("validation contains unterminated shell quoting")
+
+        for atom in atoms:
             try:
-                tokens = shlex.split(segment.strip())
+                lexer = shlex.shlex(
+                    atom,
+                    posix=True,
+                    punctuation_chars=";&|()<>",
+                )
+                lexer.whitespace_split = True
+                lexer.commenters = ""
+                tokens = list(lexer)
             except ValueError as exc:
                 path_errors.append(f"cannot parse validation command: {exc}")
                 continue
-            if not tokens:
+            if (
+                not tokens
+                or tokens[0] == "&&"
+                or tokens[-1] == "&&"
+                or any(
+                    token != "&&"
+                    and any(character in token for character in ";&|()<>")
+                    for token in tokens
+                )
+            ):
+                path_errors.append("validation uses unsupported shell structure")
                 continue
-            if tokens[0] == "cd":
-                if len(tokens) != 2:
-                    path_errors.append("validation cd must have exactly one path")
-                    continue
-                normalized, problem = normalize_validation_path(cwd, tokens[1])
-                if problem:
-                    path_errors.append(problem)
-                else:
-                    cwd = PurePosixPath(normalized or ".")
-                continue
+            segments: list[list[str]] = [[]]
+            malformed = False
             for token in tokens:
-                if (
-                    token.startswith("-")
-                    or "/" not in token
-                    or re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", token)
-                    or any(character in token for character in "$*?[]{}")
-                ):
+                if token == "&&":
+                    if not segments[-1]:
+                        malformed = True
+                        break
+                    segments.append([])
                     continue
-                normalized, problem = normalize_validation_path(cwd, token)
-                if problem:
-                    path_errors.append(problem)
-                elif normalized:
-                    paths.add(normalized)
+                segments[-1].append(token)
+            if malformed or not segments[-1]:
+                path_errors.append("validation has a malformed && chain")
+                continue
+
+            cwd = PurePosixPath(".")
+            for index, segment in enumerate(segments):
+                if segment[0] == "cd":
+                    if index != 0 or len(segment) != 2:
+                        path_errors.append(
+                            "validation cd must be the first segment with one path"
+                        )
+                        continue
+                    normalized, problem = normalize_validation_path(cwd, segment[1])
+                    if problem:
+                        path_errors.append(problem)
+                    else:
+                        cwd = PurePosixPath(normalized or ".")
+                    continue
+                for token in segment:
+                    if (
+                        token.startswith("-")
+                        or "/" not in token
+                        or re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", token)
+                        or any(character in token for character in "$*?[]{}")
+                    ):
+                        continue
+                    normalized, problem = normalize_validation_path(cwd, token)
+                    if problem:
+                        path_errors.append(problem)
+                    elif normalized:
+                        paths.add(normalized)
         return paths, path_errors
 
     for goal_id, record in records.items():
