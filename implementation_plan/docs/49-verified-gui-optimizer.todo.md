@@ -753,7 +753,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-060 Expose the standalone `gui-opt` development CLI
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
