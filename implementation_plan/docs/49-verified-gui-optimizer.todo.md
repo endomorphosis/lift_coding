@@ -675,7 +675,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-051 Select affected checks with uncertainty fallback
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
