@@ -597,7 +597,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-043 Enforce bounded patch scope before execution
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
