@@ -1,0 +1,31 @@
+{
+  "analysis_classification": "conservative",
+  "application_id": "app:agent-supervisor",
+  "can_issue_authoritative_allow": false,
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "channel": "chromium",
+  "claim_boundary": {
+    "pixel_change_is_neutral_observation": true,
+    "screen_reader_reviewed": false,
+    "ui_visibility_authorizes": false,
+    "verified_authorization": false,
+    "verified_complete_security": false,
+    "verified_live_accessibility": false,
+    "verified_live_interaction": false,
+    "verified_live_visual": false,
+    "verified_wcag": false
+  },
+  "extractor_interface": "AgentSupervisorBrowserBaseline@1",
+  "extractor_schema_version": "agent-supervisor-browser-baseline/v1",
+  "extractor_version": "1.0.0",
+  "fixture_host_interface": "AgentSupervisorFixtureHost@1",
+  "fixture_services_interface": "AgentSupervisorFixtureServices@1",
+  "headless_shell_used": false,
+  "interface": "AgentSupervisorBrowserBaseline@1",
+  "schema_version": "agent-supervisor-browser-baseline/v1",
+  "screen_id": "screen:agent-supervisor",
+  "task_id": "VGO-068",
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "verification_status": "structurally_valid"
+}
