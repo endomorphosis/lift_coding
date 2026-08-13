@@ -571,7 +571,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-041 Aggregate content-addressed GUI verification receipts
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
