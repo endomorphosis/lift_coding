@@ -1,0 +1,877 @@
+{
+  "analysis_classification_is_closed": true,
+  "application_identity": {
+    "application_id": "app:agent-supervisor",
+    "display_name": "Agent Supervisor",
+    "interface": "GuiApplicationIdentity@1",
+    "package_namespace": "org.hallucinate.swissknife.gui-optimizer",
+    "repository_root": "swissknife",
+    "schema_version": "gui-application-identity/v1"
+  },
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "claim_boundary": {
+    "browser_policy_authoritative": false,
+    "executed_code": false,
+    "pixel_change_is_neutral_observation": true,
+    "ui_visibility_authorizes": false,
+    "verified_authorization": false,
+    "verified_complete_security": false,
+    "verified_live_accessibility": false,
+    "verified_live_interaction": false,
+    "verified_live_visual": false,
+    "verified_wcag": false
+  },
+  "completeness_boundary_is_closed": true,
+  "component_identity_qualified_names": [
+    "AgentSupervisorConsole"
+  ],
+  "dependencies": {
+    "actions": [
+      "action:refresh",
+      "action:empty",
+      "action:error",
+      "action:submit-steering",
+      "action:recover-steering",
+      "action:submit-dispatch",
+      "action:persist-receipt",
+      "action:retrieve-receipt-content",
+      "action:checkpoint-receipt"
+    ],
+    "sources": [
+      "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "swissknife/build-tools/configs/playwright.app-improvement.config.ts",
+      "swissknife/build-tools/configs/vitest.config.ts",
+      "swissknife/contracts/agent-supervisor-console.schema.json",
+      "swissknife/scripts/run-virtual-desktop-app-improvement.mjs",
+      "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+      "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+      "swissknife/src/services/apps/app-capability-policy.ts",
+      "swissknife/src/services/apps/mcp-deontic-ui-manifest.ts",
+      "swissknife/src/services/apps/virtual-desktop-app-audit-playwright-driver.ts",
+      "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+      "swissknife/src/services/glasses/ui-ux-ir-glasses-adapter.ts",
+      "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+      "swissknife/src/services/mcp/mcp-control-surface-mediator.ts",
+      "swissknife/src/services/mcp/mcp-deontic-interface-broker.ts",
+      "swissknife/src/services/mcp/ui-ux-ir-codec.ts",
+      "swissknife/src/services/mcp/ui-ux-ir-web-renderer.ts",
+      "swissknife/src/shared/service-contracts/agent-supervisor-console.ts",
+      "swissknife/web/index.html",
+      "swissknife/web/js/apps/agent-supervisor.js",
+      "swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js",
+      "swissknife/web/js/main-simple.js"
+    ],
+    "styles": [
+      "swissknife/web/js/apps/agent-supervisor.js#embedded-css"
+    ],
+    "tests": [
+      "swissknife/test/browser-compat/browser-deployment-policy.test.js",
+      "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+      "swissknife/test/browser/all-app-tool-gateway.test.ts",
+      "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+      "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+      "swissknife/test/e2e/virtual-desktop-all-app-improvement.spec.ts",
+      "swissknife/test/mcp-plus-plus/ui-ux-ir-orb-mediation.test.ts"
+    ]
+  },
+  "evaluator_receipt": {
+    "automatic_acceptance_blocked": true,
+    "executed_code": false,
+    "interface": "GuiObjectiveEvaluator@1",
+    "unknown_critical_evidence": true,
+    "verification_status": "unverified"
+  },
+  "executed_code": false,
+  "extractor_interface": "AgentSupervisorTarget@1",
+  "extractor_schema_version": "agent-supervisor-target/v1",
+  "extractor_version": "gui-agent-supervisor-target-1.0.0",
+  "graph_receipt": {
+    "accepted_vgo_002_task_cid_bound": true,
+    "executed_code": false,
+    "interface": "UiComponentGraph@1",
+    "schema_version": "ui-component-graph/v1",
+    "verification_status": "unverified"
+  },
+  "interface": "UiSemanticBaseline@1",
+  "invalidation_receipt": {
+    "executed_code": false,
+    "interface": "UiInvalidationPlan@1",
+    "planner_interface": "UiInvalidationPlanner@1",
+    "verification_status": "unverified"
+  },
+  "invariant_receipt": {
+    "capability_gap": "python-ui-invariant-engine-not-invoked-from-static-target",
+    "executed_code": false,
+    "interface": "UiInvariantEngine@1",
+    "invoked": false,
+    "solver_claimed_available": false,
+    "verification_status": "unverified"
+  },
+  "known_pre_change_failures": [
+    {
+      "code": "aria-disabled-instead-of-native-disabled",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": true,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "console-spec-not-discovered-by-reviewed-playwright-config",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "source_supported": true,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "existing-accessibility-coverage-is-not-live-dom-audit",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": false,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "existing-screenshots-are-not-pixel-diff-baseline",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": false,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "missing-field-error-association",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": true,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "outerhtml-root-replace-focus-risk",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": true,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "python-ui-invariant-engine-not-invoked",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": false,
+      "verification_status": "unverified"
+    },
+    {
+      "code": "static-confirmation-is-not-argument-digest-bound",
+      "evidence_level": "structural",
+      "live_confirmed": false,
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "source_supported": true,
+      "verification_status": "unverified"
+    }
+  ],
+  "live_target": {
+    "authority": "live_target",
+    "exists": true,
+    "kind": "file",
+    "path": "swissknife/web/js/apps/agent-supervisor.js",
+    "role": "live_implementation",
+    "scanned": true
+  },
+  "policy_receipt": {
+    "automatic_acceptance_blocked": true,
+    "browser_policy_authoritative": false,
+    "interface": "UiPolicyBindingReport@1",
+    "ui_visibility_authorizes": false
+  },
+  "registration_divergence": {
+    "additional_runtime_maps": [
+      "swissknife/web/js/main.js"
+    ],
+    "canonical_application_definition_count": 45,
+    "canonical_component": "AgentSupervisorConsole",
+    "canonical_manifest_path": "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+    "components_match": true,
+    "counts_derived_from_source": true,
+    "runtime_component": "AgentSupervisorConsole",
+    "runtime_projection_path": "swissknife/web/js/main-simple.js",
+    "runtime_registration_count": 46,
+    "silently_selected_one": false
+  },
+  "scan_receipt": {
+    "executed_code": false,
+    "interface": "GuiStaticScanner@1",
+    "schema_version": "gui-static-scan-result/v1",
+    "sources": [
+      "swissknife/web/js/apps/agent-supervisor.js"
+    ],
+    "verification_status": "unverified"
+  },
+  "schema_version": "ui-semantic-baseline/v1",
+  "screen_identity": {
+    "application_id": "app:agent-supervisor",
+    "interface": "GuiScreenIdentity@1",
+    "route_id": "route:agent-supervisor",
+    "schema_version": "gui-screen-identity/v1",
+    "screen_id": "screen:agent-supervisor"
+  },
+  "source_inventory": [
+    {
+      "authority": "live_target",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "role": "live_implementation",
+      "scanned": true
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+      "role": "application_manifest",
+      "scanned": false
+    },
+    {
+      "authority": "runtime_projection",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/main-simple.js",
+      "role": "runtime_registration",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/index.html",
+      "role": "browser_entry",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js",
+      "role": "descriptor",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "role": "gateway",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+      "role": "gateway",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/mcp-control-surface-mediator.ts",
+      "role": "policy_mediator",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+      "role": "action_contract",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+      "role": "live_tool_binding",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/shared/service-contracts/agent-supervisor-console.ts",
+      "role": "service_contract",
+      "scanned": false
+    },
+    {
+      "authority": "contract",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/contracts/agent-supervisor-console.schema.json",
+      "role": "schema",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/ui-ux-ir-codec.ts",
+      "role": "ui_ux_ir",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/ui-ux-ir-web-renderer.ts",
+      "role": "ui_ux_ir",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/glasses/ui-ux-ir-glasses-adapter.ts",
+      "role": "device_projection",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/mcp-deontic-interface-broker.ts",
+      "role": "device_projection",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "role": "playwright_config",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+      "role": "direct_browser_test",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+      "role": "governed_lifecycle_test",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+      "role": "boundary_test",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/browser/all-app-tool-gateway.test.ts",
+      "role": "boundary_test",
+      "scanned": false
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/app-capability-policy.ts",
+      "role": "policy_source",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/mcp-deontic-ui-manifest.ts",
+      "role": "policy_source",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/browser-compat/browser-deployment-policy.test.js",
+      "role": "boundary_test",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/mcp-plus-plus/ui-ux-ir-orb-mediation.test.ts",
+      "role": "boundary_test",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/build-tools/configs/vitest.config.ts",
+      "role": "unit_config",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/build-tools/configs/playwright.app-improvement.config.ts",
+      "role": "screenshot_workflow",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/scripts/run-virtual-desktop-app-improvement.mjs",
+      "role": "screenshot_workflow",
+      "scanned": false
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/e2e/virtual-desktop-all-app-improvement.spec.ts",
+      "role": "screenshot_workflow",
+      "scanned": false
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/virtual-desktop-app-audit-playwright-driver.ts",
+      "role": "screenshot_workflow",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/web/legacy-archive",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/emergency-archive",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/cleanup-archive",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": false,
+      "kind": "missing",
+      "path": "swissknife/web/emergency-archive",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": false,
+      "kind": "missing",
+      "path": "swissknife/web/cleanup-archive",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/config/archive",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/test/archived",
+      "role": "legacy_archive",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/web/src",
+      "role": "superseded_entry",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/main.js",
+      "role": "runtime_registration",
+      "scanned": false
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/main-working.js",
+      "role": "superseded_entry",
+      "scanned": false
+    },
+    {
+      "authority": "not_authorization_authority",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts",
+      "role": "not_authorization_authority",
+      "scanned": false
+    }
+  ],
+  "state_receipt": {
+    "executed_code": false,
+    "interface": "UiStateMachine@1",
+    "schema_version": "ui-state-machine/v1"
+  },
+  "surfaces": [
+    {
+      "authority": "live_target",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "role": "live_implementation"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+      "role": "application_manifest"
+    },
+    {
+      "authority": "runtime_projection",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/main-simple.js",
+      "role": "runtime_registration"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/index.html",
+      "role": "browser_entry"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js",
+      "role": "descriptor"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "role": "gateway"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+      "role": "gateway"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/mcp-control-surface-mediator.ts",
+      "role": "policy_mediator"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+      "role": "action_contract"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+      "role": "live_tool_binding"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/shared/service-contracts/agent-supervisor-console.ts",
+      "role": "service_contract"
+    },
+    {
+      "authority": "contract",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/contracts/agent-supervisor-console.schema.json",
+      "role": "schema"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/ui-ux-ir-codec.ts",
+      "role": "ui_ux_ir"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/ui-ux-ir-web-renderer.ts",
+      "role": "ui_ux_ir"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/glasses/ui-ux-ir-glasses-adapter.ts",
+      "role": "device_projection"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/mcp-deontic-interface-broker.ts",
+      "role": "device_projection"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "role": "playwright_config"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+      "role": "direct_browser_test"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+      "role": "governed_lifecycle_test"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+      "role": "boundary_test"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/browser/all-app-tool-gateway.test.ts",
+      "role": "boundary_test"
+    },
+    {
+      "authority": "canonical",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/app-capability-policy.ts",
+      "role": "policy_source"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/mcp-deontic-ui-manifest.ts",
+      "role": "policy_source"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/browser-compat/browser-deployment-policy.test.js",
+      "role": "boundary_test"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/mcp-plus-plus/ui-ux-ir-orb-mediation.test.ts",
+      "role": "boundary_test"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/build-tools/configs/vitest.config.ts",
+      "role": "unit_config"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/build-tools/configs/playwright.app-improvement.config.ts",
+      "role": "screenshot_workflow"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/scripts/run-virtual-desktop-app-improvement.mjs",
+      "role": "screenshot_workflow"
+    },
+    {
+      "authority": "test",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/test/e2e/virtual-desktop-all-app-improvement.spec.ts",
+      "role": "screenshot_workflow"
+    },
+    {
+      "authority": "supporting",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/apps/virtual-desktop-app-audit-playwright-driver.ts",
+      "role": "screenshot_workflow"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/web/legacy-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/emergency-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/cleanup-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": false,
+      "kind": "missing",
+      "path": "swissknife/web/emergency-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": false,
+      "kind": "missing",
+      "path": "swissknife/web/cleanup-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/config/archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/test/archived",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "directory",
+      "path": "swissknife/web/src",
+      "role": "superseded_entry"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/main.js",
+      "role": "runtime_registration"
+    },
+    {
+      "authority": "legacy",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/web/js/main-working.js",
+      "role": "superseded_entry"
+    },
+    {
+      "authority": "not_authorization_authority",
+      "exists": true,
+      "kind": "file",
+      "path": "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts",
+      "role": "not_authorization_authority"
+    }
+  ],
+  "task_id": "VGO-062",
+  "unmeasured_live_metrics": [
+    "accessibility_violation_count",
+    "accessibility_critical_count",
+    "accessibility_serious_count",
+    "unlabeled_control_count",
+    "keyboard_unreachable_count",
+    "focus_order_failure_count",
+    "focus_trap_failure_count",
+    "duplicate_id_count",
+    "contrast_failure_count",
+    "horizontal_overflow_count",
+    "clipping_count",
+    "viewport_overflow_count",
+    "interaction_step_count",
+    "keyboard_step_count",
+    "required_action_unreachable_count",
+    "confirmation_failure_count",
+    "policy_violation_count",
+    "security_violation_count",
+    "test_failure_count",
+    "pixel_diff_percent",
+    "structural_diff_percent",
+    "unexpected_layout_shift_count",
+    "screenshot_width",
+    "screenshot_height",
+    "missing_control_count",
+    "extra_control_count",
+    "automated_pass_count"
+  ],
+  "verification_status": "unverified"
+}
