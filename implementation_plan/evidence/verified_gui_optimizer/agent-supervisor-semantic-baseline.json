@@ -1,0 +1,551 @@
+{
+  "analysis_classification_is_not_a_verified_claim": true,
+  "application": {
+    "application_id": "app:agent-supervisor",
+    "display_name": "Agent Supervisor",
+    "interface": "GuiApplicationIdentity@1",
+    "package_namespace": "org.hallucinate.swissknife.gui-optimizer",
+    "repository_root": "swissknife",
+    "schema_version": "gui-application-identity/v1"
+  },
+  "baseline_id": "baseline:semantic:agent-supervisor",
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "canonical_surface_paths": [
+    "swissknife/web/js/apps/agent-supervisor.js",
+    "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+    "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+    "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+    "swissknife/src/services/mcp/mcp-control-surface-mediator.ts",
+    "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+    "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+    "swissknife/contracts/agent-supervisor-console.schema.json",
+    "swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js",
+    "swissknife/web/index.html",
+    "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+    "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+    "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+    "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+    "swissknife/src/services/gui-optimizer/scenario-catalog.ts",
+    "swissknife/test/fixtures/gui-optimizer/agent-supervisor/fixture-host.html",
+    "swissknife/test/fixtures/gui-optimizer/agent-supervisor/fixture-services.js",
+    "swissknife/test/fixtures/gui-optimizer/agent-supervisor/fixture-scenarios.json",
+    "swissknife/docs/agent-supervisor-console-security-model.md",
+    "swissknife/web/css/desktop.css",
+    "swissknife/web/css/apps.css"
+  ],
+  "catalog_id": "catalog:agent-supervisor-scenarios",
+  "component": {
+    "application_id": "app:agent-supervisor",
+    "component_kind": "screen",
+    "interface": "UiComponentIdentity@1",
+    "package_namespace": "org.hallucinate.swissknife.gui-optimizer",
+    "qualified_name": "AgentSupervisorConsole",
+    "schema_version": "ui-component-identity/v1",
+    "screen_id": "screen:agent-supervisor"
+  },
+  "confirmation_required_action_ids": [
+    "supervisor.event-dag.checkpoint",
+    "supervisor.prompt-steering.request",
+    "supervisor.receipts.persist",
+    "supervisor.task-control.request"
+  ],
+  "dependencies": {
+    "actions": [
+      "supervisor.content.retrieve",
+      "supervisor.event-dag.checkpoint",
+      "supervisor.goals.read",
+      "supervisor.health.read",
+      "supervisor.logs.read",
+      "supervisor.policy.assist",
+      "supervisor.prompt-steering.request",
+      "supervisor.queue.read",
+      "supervisor.receipts.persist",
+      "supervisor.receipts.read",
+      "supervisor.run-history.search",
+      "supervisor.semantic-goal.assist",
+      "supervisor.subgoals.read",
+      "supervisor.task-control.request",
+      "supervisor.taskboard.links.read",
+      "ui:checkpoint-receipt",
+      "ui:empty",
+      "ui:error",
+      "ui:persist-receipt",
+      "ui:recover-steering",
+      "ui:refresh",
+      "ui:retrieve-receipt-content",
+      "ui:submit-dispatch",
+      "ui:submit-steering"
+    ],
+    "sources": [
+      "swissknife/contracts/agent-supervisor-console.schema.json",
+      "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+      "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+      "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+      "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+      "swissknife/src/services/mcp/mcp-control-surface-mediator.ts",
+      "swissknife/web/index.html",
+      "swissknife/web/js/apps/agent-supervisor.js",
+      "swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js"
+    ],
+    "styles": [
+      "swissknife/web/css/apps.css",
+      "swissknife/web/css/desktop.css",
+      "swissknife/web/js/apps/agent-supervisor.js#renderStyles"
+    ],
+    "tests": [
+      "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+      "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+      "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts"
+    ]
+  },
+  "executed_code": false,
+  "extractor_interface": "UiSemanticBaselineExtractor@1",
+  "extractor_schema_version": "ui-semantic-baseline-extractor/v1",
+  "extractor_version": "gui-semantic-baseline-1.0.0",
+  "graph_executed_code": false,
+  "interface": "UiSemanticBaseline@1",
+  "known_pre_change_failures": [
+    {
+      "code": "outerhtml_root_replacement",
+      "evidence_level": "structural",
+      "message": "update() replaces the entire root with outerHTML and then rebinds events.",
+      "notes": "Focus loss across deterministic rerenders is a heuristic consequence until live-DOM evaluation records it. This task records the source pattern only.",
+      "source_path": "swissknife/web/js/apps/agent-supervisor.js",
+      "start_line": 409,
+      "subject_id": "AgentSupervisorApp.update",
+      "verification_status": "structurally_valid",
+      "violation_id": "violation:outerhtml-focus-replacement"
+    },
+    {
+      "code": "aria_disabled_without_native_disabled",
+      "evidence_level": "structural",
+      "message": "Governed submit controls use aria-disabled rather than native disabled semantics.",
+      "notes": "Whether native disabled better matches the dispatch guard requires live-DOM evaluation. Not a verified accessibility certification.",
+      "source_path": "swissknife/web/js/apps/agent-supervisor.js",
+      "start_line": 1083,
+      "subject_id": "steering-submit",
+      "verification_status": "structurally_valid",
+      "violation_id": "violation:aria-disabled-submit"
+    },
+    {
+      "code": "field_error_association_unconfirmed",
+      "evidence_level": "structural",
+      "message": "Steering and dispatch validation feedback is rendered without aria-invalid or aria-describedby field association.",
+      "notes": "Exact invalid-state semantics require live-DOM verification. Static absence of association attributes is recorded without claiming a WCAG result.",
+      "source_path": "swissknife/web/js/apps/agent-supervisor.js",
+      "start_line": 479,
+      "subject_id": "steering-prompt",
+      "verification_status": "unverified",
+      "violation_id": "violation:field-error-association-unconfirmed"
+    },
+    {
+      "code": "unresolved_dynamic_identity",
+      "evidence_level": "structural",
+      "message": "Capability invocations mint correlation IDs with Date.now().",
+      "notes": "Dynamic time-based identity is unresolved for deterministic replay.",
+      "source_path": "swissknife/web/js/apps/agent-supervisor.js",
+      "start_line": 330,
+      "subject_id": "invokeCapability.correlation_id",
+      "verification_status": "structurally_valid",
+      "violation_id": "violation:dynamic-correlation-id"
+    },
+    {
+      "code": "unresolved_dynamic_transport",
+      "evidence_level": "structural",
+      "message": "When no injected gateway is present the console issues fetch() against a configured endpoint.",
+      "notes": "Live transport is dynamic. Controlled fixtures must fail closed on unexpected network.",
+      "source_path": "swissknife/web/js/apps/agent-supervisor.js",
+      "start_line": 338,
+      "subject_id": "invokeCapability.fetch",
+      "verification_status": "structurally_valid",
+      "violation_id": "violation:dynamic-fetch-transport"
+    },
+    {
+      "code": "reviewed_playwright_config_omits_console_spec",
+      "evidence_level": "structural",
+      "message": "Reviewed playwright.agent-supervisor.config.ts does not discover agent-supervisor-console.spec.ts.",
+      "notes": "Recorded as a known pre-change configuration fact. Not converted into a product regression.",
+      "source_path": "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "start_line": 16,
+      "subject_id": "playwright.agent-supervisor.config.ts",
+      "verification_status": "structurally_valid",
+      "violation_id": "violation:playwright-console-spec-undiscovered"
+    },
+    {
+      "code": "existing_accessibility_coverage_is_heuristic",
+      "evidence_level": "heuristic",
+      "message": "Existing all-app accessibility coverage is primarily simulator and heuristic based.",
+      "notes": "Useful evidence, but not a full live-DOM accessibility audit and not WCAG certification.",
+      "source_path": "swissknife/test/e2e/all-app-ui-ux-accessibility.spec.ts",
+      "start_line": 1,
+      "subject_id": "all-app-ui-ux-accessibility",
+      "verification_status": "unverified",
+      "violation_id": "violation:existing-a11y-is-heuristic"
+    }
+  ],
+  "legacy_surface_paths": [
+    "swissknife/web/js/main-simple.js",
+    "swissknife/web/js/main-working.js",
+    "swissknife/web/js/main.js",
+    "swissknife/web/src/browser-main-simple.ts",
+    "swissknife/web/src/browser-main-working.ts",
+    "swissknife/web/legacy-archive",
+    "swissknife/emergency-archive",
+    "swissknife/cleanup-archive",
+    "swissknife/config/archive",
+    "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts"
+  ],
+  "live_target_path": "swissknife/web/js/apps/agent-supervisor.js",
+  "policy": {
+    "action_ids": [
+      "supervisor.content.retrieve",
+      "supervisor.event-dag.checkpoint",
+      "supervisor.goals.read",
+      "supervisor.health.read",
+      "supervisor.logs.read",
+      "supervisor.policy.assist",
+      "supervisor.prompt-steering.request",
+      "supervisor.queue.read",
+      "supervisor.receipts.persist",
+      "supervisor.receipts.read",
+      "supervisor.run-history.search",
+      "supervisor.semantic-goal.assist",
+      "supervisor.subgoals.read",
+      "supervisor.task-control.request",
+      "supervisor.taskboard.links.read"
+    ],
+    "automatic_acceptance_blocked": true,
+    "browser_policy_authoritative": false,
+    "confirmation_required_action_ids": [
+      "supervisor.event-dag.checkpoint",
+      "supervisor.prompt-steering.request",
+      "supervisor.receipts.persist",
+      "supervisor.task-control.request"
+    ],
+    "ui_visibility_authorizes": false
+  },
+  "scan_executed_code": false,
+  "scenario_ids": [
+    "scenario:initial-load",
+    "scenario:loading",
+    "scenario:success",
+    "scenario:empty",
+    "scenario:recoverable-failure",
+    "scenario:unrecoverable-failure",
+    "scenario:invalid-submission",
+    "scenario:valid-submission",
+    "scenario:keyboard-only",
+    "scenario:viewport-mobile",
+    "scenario:viewport-desktop",
+    "scenario:viewport-wide",
+    "scenario:text-scale-200",
+    "scenario:reduced-motion",
+    "scenario:dark-mode",
+    "scenario:service-unavailable",
+    "scenario:confirmation-grant",
+    "scenario:confirmation-deny"
+  ],
+  "schema_version": "ui-semantic-baseline/v1",
+  "screen": {
+    "application_id": "app:agent-supervisor",
+    "interface": "GuiScreenIdentity@1",
+    "route_id": "agent-supervisor",
+    "schema_version": "gui-screen-identity/v1",
+    "screen_id": "screen:agent-supervisor"
+  },
+  "source_unresolved_dynamics": [
+    "dynamic:Date.now:correlation_id",
+    "dynamic:Date.toISOString:lastUpdated",
+    "dynamic:fetch:gateway_endpoint",
+    "dynamic:outerHTML:root_replacement",
+    "dynamic:template:aria-disabled-submit"
+  ],
+  "state_machine_executed_code": false,
+  "surfaces": [
+    {
+      "authority": "runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Selected live Agent Supervisor console. Direct Playwright coverage is test/e2e/agent-supervisor-console.spec.ts.",
+      "path": "swissknife/web/js/apps/agent-supervisor.js",
+      "role": "live_target"
+    },
+    {
+      "authority": "inventory",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Canonical application inventory. Counts and claims must be derived from this source, not copied from prose.",
+      "path": "swissknife/src/services/apps/virtual-desktop-app-manifest.ts",
+      "role": "canonical_inventory"
+    },
+    {
+      "authority": "policy",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Browser-safe Agent Supervisor gateway contract and invocation surface.",
+      "path": "swissknife/src/services/mcp/agent-supervisor-console-gateway.ts",
+      "role": "canonical_gateway"
+    },
+    {
+      "authority": "policy",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Browser-to-host choke point. Fixed same-origin routes; rejects credentials, arbitrary host paths, and process commands.",
+      "path": "swissknife/src/services/mcp/all-app-tool-gateway.ts",
+      "role": "canonical_gateway"
+    },
+    {
+      "authority": "policy",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Fail-closed policy mediator. Presentation is not authorization; current actions and arguments are re-evaluated.",
+      "path": "swissknife/src/services/mcp/mcp-control-surface-mediator.ts",
+      "role": "canonical_policy"
+    },
+    {
+      "authority": "contract",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Application action authority for executable backend dispositions.",
+      "path": "swissknife/src/services/apps/all-app-executable-backend-contract.ts",
+      "role": "canonical_contract"
+    },
+    {
+      "authority": "contract",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Live tool bindings for Agent Supervisor governed capabilities.",
+      "path": "swissknife/src/services/apps/all-app-live-tool-bindings.ts",
+      "role": "canonical_contract"
+    },
+    {
+      "authority": "contract",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Canonical console contract schema referenced by the live target.",
+      "path": "swissknife/contracts/agent-supervisor-console.schema.json",
+      "role": "canonical_contract"
+    },
+    {
+      "authority": "inventory",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Browser descriptor registration for the live Agent Supervisor application.",
+      "path": "swissknife/web/js/descriptors/apps/agent-supervisor.descriptor.js",
+      "role": "canonical_descriptor"
+    },
+    {
+      "authority": "runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Live desktop host that mounts web/js/main-simple.js.",
+      "path": "swissknife/web/index.html",
+      "role": "canonical_host"
+    },
+    {
+      "authority": "test",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Direct console Playwright coverage. Reviewed agent-supervisor Playwright config does not discover this file.",
+      "path": "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+      "role": "canonical_test"
+    },
+    {
+      "authority": "test",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Governed lifecycle Playwright coverage included by the reviewed target config.",
+      "path": "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts",
+      "role": "canonical_test"
+    },
+    {
+      "authority": "test",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Gateway boundary unit coverage for the live console contract.",
+      "path": "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+      "role": "canonical_test"
+    },
+    {
+      "authority": "test",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Reviewed Agent Supervisor Playwright configuration. testMatch omits agent-supervisor-console.spec.ts.",
+      "path": "swissknife/build-tools/configs/playwright.agent-supervisor.config.ts",
+      "role": "canonical_test"
+    },
+    {
+      "authority": "fixture",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Deterministic evaluation scenario catalog for the selected screen.",
+      "path": "swissknife/src/services/gui-optimizer/scenario-catalog.ts",
+      "role": "canonical_fixture"
+    },
+    {
+      "authority": "fixture",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Controlled fixture host. Inert; cannot issue an authoritative allow.",
+      "path": "swissknife/test/fixtures/gui-optimizer/agent-supervisor/fixture-host.html",
+      "role": "canonical_fixture"
+    },
+    {
+      "authority": "fixture",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Controlled fixture services. Inert; cannot issue an authoritative allow.",
+      "path": "swissknife/test/fixtures/gui-optimizer/agent-supervisor/fixture-services.js",
+      "role": "canonical_fixture"
+    },
+    {
+      "authority": "fixture",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Controlled fixture scenario document bound to the sealed catalog.",
+      "path": "swissknife/test/fixtures/gui-optimizer/agent-supervisor/fixture-scenarios.json",
+      "role": "canonical_fixture"
+    },
+    {
+      "authority": "documentation",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Security model linked from the live console. Documentation is not runtime authority.",
+      "path": "swissknife/docs/agent-supervisor-console-security-model.md",
+      "role": "canonical_documentation"
+    },
+    {
+      "authority": "runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Host desktop chrome. Not the screen-owned style authority; live styles are inline.",
+      "path": "swissknife/web/css/desktop.css",
+      "role": "canonical_style"
+    },
+    {
+      "authority": "runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "canonical",
+      "notes": "Host app chrome. Not the screen-owned style authority; live styles are inline.",
+      "path": "swissknife/web/css/apps.css",
+      "role": "canonical_style"
+    },
+    {
+      "authority": "inventory",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Manually duplicated runtime registration map. Recorded alongside the canonical manifest; divergence is reported rather than silently selecting one.",
+      "path": "swissknife/web/js/main-simple.js",
+      "role": "legacy_runtime_projection"
+    },
+    {
+      "authority": "not_runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Older working-main variant. Does not replace the live web/index.html and web/js/main-simple.js path.",
+      "path": "swissknife/web/js/main-working.js",
+      "role": "legacy_runtime_projection"
+    },
+    {
+      "authority": "not_runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Older main variant. Not the live desktop loader.",
+      "path": "swissknife/web/js/main.js",
+      "role": "legacy_runtime_projection"
+    },
+    {
+      "authority": "not_runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Older web/src browser-main implementation. Not live runtime authority.",
+      "path": "swissknife/web/src/browser-main-simple.ts",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "not_runtime",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Older web/src working browser-main implementation. Not live runtime authority.",
+      "path": "swissknife/web/src/browser-main-working.ts",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "archive",
+      "entry_kind": "directory",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Legacy web archive. Not runtime authority.",
+      "path": "swissknife/web/legacy-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "archive",
+      "entry_kind": "directory",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Emergency archive. Not runtime authority.",
+      "path": "swissknife/emergency-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "archive",
+      "entry_kind": "directory",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Cleanup archive. Not runtime authority.",
+      "path": "swissknife/cleanup-archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "archive",
+      "entry_kind": "directory",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "Config archive. Not runtime authority.",
+      "path": "swissknife/config/archive",
+      "role": "legacy_archive"
+    },
+    {
+      "authority": "not_authorization",
+      "entry_kind": "file",
+      "exists": true,
+      "kind": "legacy",
+      "notes": "May synthesize a browser-side allow result from consent. Not authorization authority for this project.",
+      "path": "swissknife/src/services/mcp/virtual-desktop-live-gateway.ts",
+      "role": "insufficient_authority"
+    }
+  ],
+  "target_interface": "AgentSupervisorTarget@1",
+  "target_schema_version": "agent-supervisor-target/v1",
+  "verification_status": "unverified"
+}
+
