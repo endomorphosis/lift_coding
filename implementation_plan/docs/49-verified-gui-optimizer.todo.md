@@ -493,7 +493,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-032 Implement deterministic visual-regression receipts
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
