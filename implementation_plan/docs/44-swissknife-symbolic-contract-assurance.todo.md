@@ -105,7 +105,7 @@ Until **SCA-ENABLE-CLOSE** is completed, tracks `parser-failure-row-verification
 `parser-failure-fan-in`, `parser-failure-cluster-repair`, and `parser-failure-aggregate`
 are not selectable. SCA-225 (authoritative index) no longer hard-depends on SCA-512
 (exact 258-row reconciliation) so the formal path cannot cycle through ENABLE-CLOSE.
-Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
+Supervisor profile `mode` is `formal_first_enablement` (8 lanes at current DAG width).
 
 ## SCA-ENABLE-000 Seal formal-first selection phase
 
@@ -166,7 +166,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-ENABLE-DOCTOR Bind deterministic doctor into SCA repair path
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: 3 focused tests passed (test_agent_supervisor_sca_doctor_bridge.py); sca_doctor_bridge.py maps findings to transform_receipt|analytical_abstention with model_calls=0
 - Priority: P0
 - Track: doctor-bridge
 - Selection band: B0
@@ -183,6 +185,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 - Implementation timeout seconds: 7200
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/sca_doctor_bridge.py, external/ipfs_accelerate/test/api/test_agent_supervisor_sca_doctor_bridge.py
 - Interfaces: DeterministicDoctor, ContractFinding, transform_receipt@1
+- Context budget tokens: 4096
+- Estimated tokens: 0
+- Token class: medium
 - Provider role: deterministic-only
 - Runtime model calls: 0
 - Implementation mode: deterministic_only
@@ -194,7 +199,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-ENABLE-RPR Bind proof-gated contract repair selection
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: 4 focused tests passed (test_agent_supervisor_sca_rpr_admission.py); unbound implement rejected; admitted packet binds snapshot+counterexample+reproof; readiness receipt written
 - Priority: P0
 - Track: doctor-bridge
 - Selection band: B0
@@ -211,6 +218,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 - Implementation timeout seconds: 7200
 - Predicted files: external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/sca_rpr_admission.py, external/ipfs_accelerate/test/api/test_agent_supervisor_sca_rpr_admission.py, data/agent_supervisor/swissknife_contract_assurance/rpr_admission_ready.json
 - Interfaces: contract_repair_task_source, code_contract_prover, admitted_target_decision
+- Context budget tokens: 4096
+- Estimated tokens: 0
+- Token class: medium
 - Provider role: deterministic-only
 - Runtime model calls: 0
 - Implementation mode: deterministic_only
@@ -221,7 +231,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-ENABLE-UIR Bind UI/UX IR for SwissKnife UI contracts
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: mapping doc implementation_plan/docs/47-sca-uir-swissknife-ui-mapping.md + uir/ receipt root
 - Priority: P0
 - Track: ui-ir-binding
 - Selection band: B1
@@ -238,6 +250,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 - Implementation timeout seconds: 7200
 - Predicted files: implementation_plan/docs/47-sca-uir-swissknife-ui-mapping.md, src/handsfree/swissknife_virtual_ui.py
 - Interfaces: UI/UX IR, SwissknifeVirtualUIBinding, MCP-IDL
+- Context budget tokens: 4096
+- Estimated tokens: 0
+- Token class: medium
 - Provider role: deterministic-only
 - Runtime model calls: 0
 - Implementation mode: deterministic_only
@@ -248,7 +263,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-ENABLE-CLOSE Formal path gate for deferred B3 work
 
-- Status: todo
+- Status: completed
+- Completion: 2026-08-06
+- Completion evidence: formal_first_enablement_closeout.json gate_closed; selectionPolicy.phase -> symbolic_repair; checklist green (ENABLE-000/001/DOCTOR/RPR, SCA-218/645/606/221)
 - Priority: P0
 - Track: formal-enablement
 - Selection band: B0
@@ -265,6 +282,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 - Implementation timeout seconds: 3600
 - Predicted files: data/agent_supervisor/swissknife_contract_assurance/formal_first_enablement_closeout.json, config/swissknife_symbolic_contract_assurance_supervisor.json
 - Interfaces: selectionPolicy
+- Context budget tokens: 2048
+- Estimated tokens: 0
+- Token class: small
 - Provider role: deterministic-only
 - Runtime model calls: 0
 - Implementation mode: deterministic_only
@@ -955,7 +975,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-160 Publish promotion gates and operations runbook
 
-- Status: active
+- Status: completed
+- Completion: 2026-08-06
+- Completion evidence: docs/launch/swissknife-symbolic-contract-supervisor-runbook.md; completion_gate.json passed=true (healthy index+runtime baseline+SCA-181 eval+ENABLE-CLOSE); shadow default; rollback retains evidence
 - Priority: P1
 - Track: rollout
 - Depends on: SCA-111, SCA-130, SCA-140, SCA-150, SCA-166, SCA-167, SCA-181, SCA-221, SCA-614
@@ -1406,7 +1428,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-180 Run the initialized four-component symbolic baseline
 
-- Status: active
+- Status: completed
+- Completion: 2026-08-06
+- Completion evidence: baseline/runtime_components healthy (parse_failure=0, contracts=3320, llm=0); coverage.json, contracts.json, findings.json, summary.md; shadow --require-healthy exit green
 - Priority: P0
 - Track: runtime-baseline
 - Depends on: SCA-166, SCA-176, SCA-177, SCA-179, SCA-213, SCA-214, SCA-216, SCA-217, SCA-218, SCA-219, SCA-220, SCA-222, SCA-223, SCA-225
@@ -1433,7 +1457,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-181 Evaluate runtime mutations, ZK receipt attestation, and release aggregation
 
-- Status: active
+- Status: completed
+- Completion: 2026-08-06
+- Completion evidence: test_agent_supervisor_runtime_contract_evaluation.py 15/15; evaluation/runtime_report.json sealed (passed=true, simulated_zk_never_attests, release fail-closed); RuntimeContractEvaluation@1
 - Priority: P0
 - Track: runtime-evaluation
 - Depends on: SCA-081, SCA-150, SCA-180, SCA-219
@@ -3262,7 +3288,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-221 Project proven mismatches into bounded accelerator repair tasks
 
-- Status: todo
+- Status: completed
+- Completion: 2026-08-06
+- Completion evidence: runtime integrity projection suite 6/6 passed; generated/ipfs_accelerate_contract_repairs.todo.md + baseline/runtime_integrity_triage.json seeded non-authoritative (0 LLM calls) against healthy snapshot e2663af9
 - Priority: P0
 - Track: runtime-repair-projection
 - Depends on: SCA-101, SCA-177, SCA-178, SCA-179, SCA-180, SCA-218, SCA-219
@@ -3315,7 +3343,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-225 Publish one healthy deterministic authoritative index generation
 
-- Status: todo
+- Status: completed
+- Completion: 2026-08-06
+- Completion evidence: generations/sha256-8d221e4b80ac419cf5785fe1acbd2d729f654205ebb05c905f6bfdbf173516f4; authoritative symlink; analyzer health healthy; parse_failure_count=0; handoff published (SCAEV022INDEX); legacy baseline files migrated to audit/legacy-baseline-files
 - Priority: P0
 - Track: authoritative-index-publication
 - Selection band: B0
@@ -14641,7 +14671,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-604 Require extracted actual package surfaces
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: actual package surfaces fail-closed in runtime_contract_evidence_compiler; 3 focused tests in test_agent_supervisor_actual_package_surfaces.py + evidence compiler suite green
 - Priority: P0
 - Track: actual-surface-composition
 - Depends on: SCA-217, SCA-603
@@ -14771,7 +14803,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-609 Emit a content-addressed provider surface health backlog
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: provider_surface_health.py + 3 tests; backlog.json content-addressed; parity blocked on unresolved rows
 - Priority: P0
 - Track: provider-surface-health
 - Depends on: SCA-603, SCA-604
@@ -14797,7 +14831,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-610 Make datasets MCP++ capability reporting truthful
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: bootstrap/task_queue/peer_registry truthful capability_status; 4 tests pass
 - Priority: P0
 - Track: datasets-mcplusplus
 - Depends on: SCA-042, SCA-229, SCA-615
@@ -14822,7 +14858,9 @@ Supervisor profile `mode` is `formal_first_enablement` (2 lanes).
 
 ## SCA-611 Implement datasets P2P MCP++ tools/list and tools/call parity
 
-- Status: todo
+- Status: completed
+- Completion: manual 2026-08-06
+- Completion evidence: mcplusplus/p2p_libp2p_transport.py tools/list+call parity; 4 unit tests pass
 - Priority: P0
 - Track: datasets-mcplusplus-transport
 - Depends on: SCA-610

@@ -1,13 +1,6 @@
 {
   "completion_authoritative": false,
-  "decisions": [
-    {
-      "detail": "explicitly non-actionable runtime finding is not implementation-ready: repository_index_missing",
-      "finding_id": "sha256:71b508d97dff8dd84c93b41d77efcb2913f51fdb6e771da8fb0e789aa9444382",
-      "reason_code": "unsupported_finding",
-      "task_id": ""
-    }
-  ],
+  "decisions": [],
   "final_open_work": 0,
   "generated_count": 0,
   "initial_open_work": 0,
@@ -18,13 +11,11 @@
   "model_call_count": 0,
   "owner": "external/ipfs_accelerate",
   "provider_call_count": 0,
-  "reason_counts": {
-    "unsupported_finding": 1
-  },
+  "reason_counts": {},
   "schema": "ipfs_accelerate_py/agent-supervisor/runtime-contract-mismatch-triage@1",
-  "snapshot_id": "sca-repository-snapshot:sha256:1bfd265e8f77ee187b9b9095ec863e1e8b91a97e46044d9633cc733cd4a0a10f",
-  "source_record_count": 1,
-  "source_records_id": "sha256:460ed6707a7c11b48b3af3b50e2556264104f28093e718ab5de993367ecc7c70",
-  "triage_id": "sha256:39424e54611fa6acfdb822b4f1b3d2670e6218a044744b246259162446061a48",
+  "snapshot_id": "sca-repository-snapshot:sha256:e2663af94591c1e2d48e464aaa75d08a457b6c9ba251021053c42f5b8e36bb05",
+  "source_record_count": 0,
+  "source_records_id": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "triage_id": "sha256:bddebea6f4ec32fd00116c5fef3a89112d0b805892dc2c74c86c7cf3675d003a",
   "updated_count": 0
 }

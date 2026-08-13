@@ -9,6 +9,36 @@ with task prefix `## SCA-`.
 Human plan:
 `implementation_plan/docs/44-swissknife-symbolic-contract-assurance-plan-2026-07-28.md`.
 
+## Formal-first selection phase (2026-08-06)
+
+Active improvement plan:
+`implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md`.
+
+Until goal **SCA-G200** (formal-first enablement) closes via board task
+`SCA-ENABLE-CLOSE`, the supervisor selection phase is
+`formal_first_enablement`:
+
+1. Prefer static index, graph, prover, proof-cache, mismatch, doctor/RPR, and
+   UI/UX IR binding work.
+2. Defer `parser-failure-row-verification` and related fan-out until the formal
+   repair path is gated open.
+3. LLM implementation is proposal-only and packet-bound after doctor abstention.
+
+## SCA-G200 Formal-first enablement for proof-directed repair
+
+- Status: active
+- Parent: SCA-G000
+- Priority: P0
+- Track: formal-enablement
+- Bundle: swissknife/contract-assurance/formal-enablement
+- Goal: Wire planner/doctor, proof-gated contract repair, datasets provers, and UI/UX IR into SCA selection so contract repair is primarily formal/static before bulk LLM UI/parser work resumes.
+- Evidence: SCAEV200FORMAL
+- Outputs: implementation_plan/docs/47-sca-formal-first-improvement-plan-2026-08-06.md, config/swissknife_symbolic_contract_assurance_supervisor.json, implementation_plan/docs/44-swissknife-symbolic-contract-assurance.todo.md, scripts/sca_formal_first_ready.py
+- Validation: python3 scripts/sca_formal_first_ready.py --expect-phase formal_first_enablement --check-parser-row-deferred
+- Acceptance: SCA-ENABLE-000 and SCA-ENABLE-001 completed; SCA-ENABLE-DOCTOR, SCA-ENABLE-RPR, and SCA-ENABLE-CLOSE drive the remaining enablement; parser-row tracks are not ready until SCA-ENABLE-CLOSE; LLM implement volume is gated.
+- Gap task: Execute SCA-ENABLE-DOCTOR, SCA-ENABLE-RPR, SCA-ENABLE-UIR, and formal path tasks SCA-218/645/606/221 then SCA-ENABLE-CLOSE.
+- Conflict policy: Do not delete deferred parser-row tasks; demote only.
+
 ## North star
 
 Make SwissKnife drift mechanically observable and repairable through a
@@ -73,6 +103,9 @@ SCA-G000  Proof-directed SwissKnife contract assurance
 |   |-- SCA-G180  Solver, proof-cache, and real-ZK readiness
 |   |-- SCA-G181  MCP++ capability, CID, transport, and runtime identity
 |   `-- SCA-G182  End-to-end production authority gate
+|-- SCA-G200  Formal-first enablement for proof-directed repair
+|   |-- SCA-ENABLE-DOCTOR / SCA-ENABLE-RPR / SCA-ENABLE-UIR
+|   `-- SCA-ENABLE-CLOSE
 `-- SCA-G160  Promotion, operations, and closeout
 ```
 
