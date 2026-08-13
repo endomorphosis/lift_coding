@@ -1,0 +1,25 @@
+#!/bin/sh
+# Narrow fixed adapter for the standalone gui-opt development CLI (VGO-060).
+# Seals PATH/PYTHONPATH and dispatches a fixed argument vector to the
+# Python CLI. Target IDs and commands are resolved by the registry; this
+# wrapper never interpolates a shell command string.
+
+set -eu
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONSAFEPATH=1
+export PYTHONNOUSERSITE=1
+export PYTHONPATH="${ROOT}/external/ipfs_accelerate:${ROOT}/external/ipfs_datasets"
+
+if [ -x /usr/bin/python3.12 ]; then
+  PYTHON=/usr/bin/python3.12
+elif [ -x /usr/bin/python3 ]; then
+  PYTHON=/usr/bin/python3
+else
+  printf '%s\n' "gui-opt: sealed interpreter /usr/bin/python3.12 is unavailable" >&2
+  exit 1
+fi
+
+exec "$PYTHON" -B -m ipfs_accelerate_py.agent_supervisor.gui_optimizer.cli "$@"
