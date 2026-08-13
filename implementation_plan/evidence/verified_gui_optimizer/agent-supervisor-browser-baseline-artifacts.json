@@ -1,0 +1,8 @@
+{
+  "artifact_cids": [],
+  "entries": [],
+  "interface": "GuiEvidenceArtifactManifest@1",
+  "note": "Live Playwright capture in verified-gui-optimizer-agent-supervisor-baseline.spec.ts overwrites this durable manifest after storing screenshot, accessibility, and trace artifacts in the VGO-054 host-owned CAS.",
+  "run_id": "vgo-068-agent-supervisor-browser-baseline",
+  "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/evidence-artifact-manifest@1"
+}
