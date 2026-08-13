@@ -727,7 +727,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-054 Persist interruption-safe improvement journals
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
