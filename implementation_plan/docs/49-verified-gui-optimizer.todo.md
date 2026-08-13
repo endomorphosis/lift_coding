@@ -857,7 +857,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-070 Add static-analysis, invalidation, and context fixtures
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
