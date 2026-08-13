@@ -467,7 +467,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-031 Implement live-DOM accessibility evaluation
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
