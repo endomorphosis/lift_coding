@@ -545,7 +545,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-040 Implement baseline and objective evaluator
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
