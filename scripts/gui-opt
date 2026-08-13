@@ -1,0 +1,37 @@
+#!/bin/sh
+# Narrow fixed adapter for the Verified GUI Optimizer CLI (VGO-060).
+# Accepts only the sealed validation PATH and the canonical Python
+# interpreter. Does not create a supervisor, accept arbitrary commands,
+# or inherit a provider toolchain PATH.
+
+set -eu
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+export PATH
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+REPO_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd -P)
+
+PYTHONPATH="${REPO_ROOT}/external/ipfs_accelerate:${REPO_ROOT}/external/ipfs_datasets"
+export PYTHONPATH
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONNOUSERSITE=1
+export PYTHONSAFEPATH=1
+export LC_ALL=C
+export LANG=C
+
+if [ -n "${HOME:-}" ]; then
+  export XDG_CACHE_HOME="${HOME}/.cache"
+  export XDG_CONFIG_HOME="${HOME}/.config"
+  export XDG_DATA_HOME="${HOME}/.local/share"
+  export XDG_STATE_HOME="${HOME}/.local/state"
+fi
+
+PYTHON="/usr/bin/python3.12"
+if [ ! -x "$PYTHON" ]; then
+  printf '%s\n' '{"interface":"GuiOptimizerCliReceipt@1","ok":false,"reason_codes":["python_interpreter_unavailable"],"schema_version":"ipfs_accelerate_py/agent-supervisor/gui-optimizer/cli-receipt@1"}'
+  exit 78
+fi
+
+cd "$REPO_ROOT"
+exec "$PYTHON" -B -m ipfs_accelerate_py.agent_supervisor.gui_optimizer.cli "$@"
