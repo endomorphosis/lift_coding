@@ -623,7 +623,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-045 Define a provider-neutral patch proposal interface
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
