@@ -935,7 +935,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-075 Prove cross-language deterministic GUI identities
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
