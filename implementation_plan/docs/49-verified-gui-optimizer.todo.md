@@ -1039,7 +1039,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-086 Prove adversarial patch acceptance and isolation
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
