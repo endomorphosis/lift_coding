@@ -1,0 +1,57 @@
+{
+  "after_artifact_cids": [],
+  "artifact_cids": [],
+  "before_artifact_cids": [],
+  "entries": [],
+  "interface": "GuiEvidenceArtifactManifest@1",
+  "metrics": {
+    "confirmation_bypass_count": {
+      "after": 0,
+      "before": 0,
+      "improved": false
+    },
+    "critical_accessibility_violations": {
+      "after": 0,
+      "before": 0,
+      "improved": false
+    },
+    "error_association_failure_count": {
+      "after": 0,
+      "before": 1,
+      "improved": true
+    },
+    "focus_loss_count": {
+      "after": 0,
+      "before": 1,
+      "improved": true
+    },
+    "security_violations": {
+      "after": 0,
+      "before": 0,
+      "improved": false
+    }
+  },
+  "proposal_id": "proposal:vgo-080-focus-error",
+  "receipt_id": "receipt:improvement:vgo-080-focus-error",
+  "run_id": "run:vgo-080-agent-supervisor-target",
+  "schema_version": "ipfs_accelerate_py/agent-supervisor/gui-optimizer/evidence-artifact-manifest@1",
+  "source_observations": {
+    "after": {
+      "confirmation_tokens_unchanged": true,
+      "has_aria_describedby": true,
+      "has_aria_errormessage": true,
+      "has_aria_invalid": true,
+      "has_focus_restore": true,
+      "keeps_aria_disabled_submit": true,
+      "keeps_outerhtml_rerender": true
+    },
+    "before": {
+      "has_aria_describedby": false,
+      "has_aria_errormessage": false,
+      "has_aria_invalid": false,
+      "has_focus_restore": false,
+      "keeps_aria_disabled_submit": true,
+      "keeps_outerhtml_rerender": true
+    }
+  }
+}

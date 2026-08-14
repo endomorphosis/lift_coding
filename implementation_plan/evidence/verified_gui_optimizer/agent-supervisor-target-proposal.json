@@ -1,0 +1,38 @@
+{
+  "acceptance_criteria": [
+    "Preserve or restore initiating and active focus across bounded Agent Supervisor rerenders.",
+    "Associate steering and dispatch validation messages with their exact controls using aria-invalid, aria-describedby, and aria-errormessage.",
+    "Keep keyboard behavior, action reachability, and exact confirmation tokens unchanged.",
+    "Do not bypass confirmation, weaken dispatch guards, or change policy, binding, security, or accessibility contracts."
+  ],
+  "analysis_classification": "exact",
+  "application_id": "app:agent-supervisor",
+  "context_pack_id": "pack:agent-supervisor-focus-error",
+  "decision": "accept",
+  "expected_screenshot_ids": [],
+  "expected_test_ids": [
+    "test:browser:agent-supervisor-console-gateway",
+    "test:e2e:agent-supervisor-console",
+    "test:e2e:agent-supervisor-goal-task-lifecycle"
+  ],
+  "intended_component_ids": [
+    "comp:console-root",
+    "comp:goal-form"
+  ],
+  "intended_file_paths": [
+    "swissknife/web/js/apps/agent-supervisor.js"
+  ],
+  "interface": "GuiImprovementProposal@1",
+  "objective": "Preserve focus across controlled Agent Supervisor rerenders and associate steering and dispatch form errors without weakening confirmation or action guards.",
+  "proposal_id": "proposal:vgo-080-focus-error",
+  "route_kind": "deterministic_transform",
+  "schema_version": "gui-improvement-proposal/v1",
+  "screen_id": "screen:agent-supervisor",
+  "state_effect_ids": [
+    "state:focus-restore",
+    "state:steering-error-association",
+    "state:dispatch-error-association"
+  ],
+  "verification_status": "integrity_valid",
+  "visual_effect_summary": "No visual redesign. Focus is restored after the existing outerHTML rerender, and steering/dispatch validation messages are bound to their exact controls."
+}
