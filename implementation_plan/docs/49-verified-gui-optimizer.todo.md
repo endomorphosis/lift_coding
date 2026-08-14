@@ -961,7 +961,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-080 Apply the bounded focus and error-association target patch
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
