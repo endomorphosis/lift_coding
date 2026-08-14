@@ -349,14 +349,14 @@
     }
   ],
   "objective_id": "PCCE-G000",
-  "projection_id": "sha256:26f71b6c7573879a0c8300d3d0de75a3e234d0470052b97df6e78f8382fad8ef",
+  "projection_id": "sha256:880a6527dac88381c72c4518d2b8f118f2af7f4bc95b989119c01085038c1e3c",
   "repository_identity": {
     "branch": "agent/proof-carrying-context-engine-v0.1",
     "repositories": {
       "accelerate": {
         "dirty": false,
-        "gitlink": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
-        "head": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+        "gitlink": "c8e953be8696d47376442c73739eea14fad83113",
+        "head": "c8e953be8696d47376442c73739eea14fad83113",
         "initial_commit": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
         "path": "external/ipfs_accelerate"
       },
@@ -382,8 +382,8 @@
         "path": "Mcp-Plus-Plus"
       }
     },
-    "superproject_commit": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
-    "superproject_tree": "db6c28fdc119fab6cd6c109412c5d1ccda02c0c6"
+    "superproject_commit": "d0ca2a612a2ffa6ba49eca1b88f91a8fe06cc813",
+    "superproject_tree": "7023e93db8584fcbf8b898c158838f118fbea0e9"
   },
   "schema": "ipfs_accelerate_py.agent_supervisor.derived-task-board-projection@1",
   "source": {
