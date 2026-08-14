@@ -489,7 +489,7 @@
     }
   ],
   "objective_id": "PCCE-G000",
-  "projection_id": "sha256:e0b79c7f310d951d543f6f8bc5a121724a0bca77ecc12127c612d4c06619e590",
+  "projection_id": "sha256:de86c2601e0476c414071657c398040e6e80dae5472d4a49d77d9c6127c5eae0",
   "repository_identity": {
     "admission_head_binding": "external-launch-receipt",
     "planning_base_commit": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
@@ -497,8 +497,8 @@
     "repositories": {
       "accelerate": {
         "dirty": false,
-        "gitlink": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
-        "head": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+        "gitlink": "0837254e910221c17b3c8ac8a2a233658de976f1",
+        "head": "0837254e910221c17b3c8ac8a2a233658de976f1",
         "initial_commit": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
         "path": "external/ipfs_accelerate"
       },
@@ -531,58 +531,62 @@
     "objective_path": "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
     "objective_sha256": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
     "todo_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
-    "todo_sha256": "sha256:28395db19dd4f2b1f7b2e22e335ef25f414d5f0ec44245c5eca22b7a77decc2f"
+    "todo_sha256": "sha256:c180f2d3b960068ffe10522eea86afe5614c95ee8a8ef3de5c1c15a8b70d6445"
   },
   "task_count": 67,
   "tasks": [
     {
-      "canonical_task_cid": "baguqeeraqz434q224vqkqjvodxfcittbgiecoxcqvybn4l3e5zb452u3s52a",
-      "canonical_task_key": "task/v1/8679be435ae560a826ae1dca244e613208275c50ae02de2f64ee43ceea9b9774",
+      "canonical_task_cid": "baguqeeraimf7jhmqrrvp6wwza4pfb2djzsjtu43x5v6eds6vxcfhhk3megrq",
+      "canonical_task_key": "task/v1/430bf49d908c6aff5ad9071e50e869cc933a7377ed7c41cbd5b88a73ab6c21a3",
       "dependencies": [],
       "goal_id": "PCCE-G000",
       "metadata": {
-        "acceptance": "One parseable, complete, acyclic, namespace-stable r3 board is admitted as the sole execution source for PCCE-G000, with r2 failure evidence preserved and no inherited runtime authority.",
-        "acceptance criteria": "The board contains exactly PCCE-000, PCCE-001 through PCCE-019, PCCE-020 through PCCE-025, PCCE-030 through PCCE-035, PCCE-040 through PCCE-045, PCCE-050 through PCCE-057, PCCE-060 through PCCE-068, PCCE-070 through PCCE-076, PCCE-079, and PCCE-080 through PCCE-083; every block has every required field; dependencies are acyclic and follow the declared merge order; r2 remains byte-identical; the r2 incident and r3 receipt form a verified supersession chain; r3 requires a fresh-state launch receipt bound to the final control HEAD.",
-        "allowed effects": "Preserve the byte-identical r2 bootstrap receipt; preserve the r2 infrastructure-failure incident; record the reviewed r3 control receipt and immutable current board identities.",
-        "allowed paths": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
-        "assigned worktree": "pcce-control-r3",
+        "acceptance": "One parseable, complete, acyclic, namespace-stable r4 board is sealed as blocked_external_prerequisite, with r2/r3 failure evidence preserved, accelerator 0837254e independently reviewed, no inherited runtime authority, and no launch authority until the external capacity gate passes.",
+        "acceptance criteria": "The board contains exactly PCCE-000, PCCE-001 through PCCE-019, PCCE-020 through PCCE-025, PCCE-030 through PCCE-035, PCCE-040 through PCCE-045, PCCE-050 through PCCE-057, PCCE-060 through PCCE-068, PCCE-070 through PCCE-076, PCCE-079, and PCCE-080 through PCCE-083; every block has every required field; dependencies are acyclic and follow the declared merge order; r2 and r3 control evidence remains byte-identical; the r3 incident records exactly six failed internal attempts, zero model bytes/source effects/validations/commits/merges, and unstarted PCCE-002/PCCE-004; the rejected b0c85d48 candidate and independently approved 0837254e descendant are explicit; r4 is blocked_external_prerequisite and no live launch or external launch receipt is authorized until a fresh exact-argv Grok account-capacity gate passes.",
+        "allowed effects": "Preserve the byte-identical r2/r3 receipts and incident manifests; bind the independently reviewed provider-route repair at accelerator commit 0837254e910221c17b3c8ac8a2a233658de976f1; record immutable r4 control identities and a blocked external prerequisite without creating a launch receipt.",
+        "allowed paths": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+        "assigned worktree": "pcce-control-r4",
         "board namespace": "proof-carrying-context-engine-v0.1",
         "bundle": "pcce/control/bootstrap",
         "completion": "manual",
-        "conflict policy": "Operator-only bootstrap revision. Historical r2 and incident artifacts are immutable; protected control documents are outside every schedulable task mutation permit.",
+        "conflict policy": "Operator-only bootstrap revision. Historical r2/r3 receipts and incident artifacts are immutable; protected control documents are outside every schedulable task mutation permit.",
         "depends on": "",
         "execution mode": "operator-only board bootstrap",
-        "final result cid or artifact identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r3 at artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json#content_id",
+        "final result cid or artifact identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r4 at artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json#content_id",
         "goal id": "PCCE-G000",
         "implementation timeout seconds": "900",
         "is schedulable": "false",
         "objective": "Establish PCCE-G000, the eight epic goals, stable task identities, non-overlapping ownership, dependency waves, fail-closed launch defaults, and an immutable control-revision/incident chain without granting implementation workers control-plane authority.",
-        "outputs": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
-        "owned paths": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+        "outputs": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+        "owned paths": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
         "owning repository": "cross-repository",
         "parallel lane": "pcce-control",
-        "predicted files": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+        "predicted files": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
         "priority": "P0",
-        "prohibited effects": "Rewrite or delete the r2 receipt, incident, Profile-G bootstrap receipt, or r2 forensic state; treat r2 coordination receipts as product evidence; reuse r2 claims, leases, fences, worktrees, logs, or scheduler state; implement product code; let a worker edit protected plan, board, scheduler, or supervisor files.",
-        "required evidence": "Frozen r2 byte digest, Git blob, content ID, projection IDs, and accelerator gitlink; incident digest, content ID, attempt ledger, and stable raw hashes; r3 board/config/validator/projection/gitlink digests; provider repair commit/tree/file identities; implementer and independent-review gate results with baseline limitations; operator approval identity; external launch receipt requirement.",
-        "required tests": "Parse all PCCE headings; verify unique IDs, required fields, exact namespace, acyclic dependencies, non-overlapping concurrent Owned paths, protected-path exclusion, frozen r2 byte/blob/content identities, incident content/raw hashes, current r3 content and projection identities, exact repair pin/evidence, and fresh-r3/no-r2-reuse policy.",
+        "prohibited effects": "Rewrite or delete any historical receipt, incident, Profile-G bootstrap receipt, or r2/r3 forensic state; treat r2/r3 coordination or provider-attempt receipts as product evidence; reuse r2/r3 claims, leases, fences, worktrees, logs, or scheduler state; represent the operator admission budget as provider-reported account capacity; create an external launch receipt before the fresh exact Grok account-capacity gate passes; implement product code; let a worker edit protected plan, board, scheduler, or supervisor files.",
+        "required evidence": "Frozen r2/r3 byte digests, Git blobs, content IDs, projection/control identities, incidents, attempt ledgers, and stable raw hashes; r4 board/config/validator/projection/gitlink digests; rejected b0c85d48 and final 0837254e commit/tree/file identities; implementer 149-test result; independent-review 98/98 changed-file result, broader 59/60 result with the sole failure reproduced at exact 50c0b855, custom negative matrix, and authority-invariant results; explicit operator-admission-budget-not-provider-reported-quota semantics; fresh exact Grok account-capacity gate requirement; confirmation that no external launch receipt exists.",
+        "required tests": "Parse all PCCE headings; verify unique IDs, required fields, exact namespace, acyclic dependencies, non-overlapping concurrent Owned paths, protected-path exclusion, frozen r2/r3 receipt and incident byte/blob/content identities, current r4 content and projection identities, exact 0837254e repair pin/evidence, Profile-G and bundle preflight, fresh-r4/no-r2-or-r3-reuse policy, and fail-closed external-capacity launch gating.",
         "resource class": "cpu-small",
         "review only": "true",
         "risk classification": "control-critical",
-        "rollback procedure": "Preserve r2, the incident, and r3 byte-for-byte; supersede r3 with a new explicitly versioned reviewed receipt and a distinct scheduler generation; never silently rewrite an admitted receipt or repair r2 state in place.",
+        "rollback procedure": "Preserve r2, r3, both incidents, and r4 byte-for-byte; supersede r4 with a new explicitly versioned receipt and a distinct scheduler generation; never silently rewrite an admitted receipt or repair r2/r3 state in place.",
         "status": "completed",
         "validation": "python -m pytest -q external/ipfs_accelerate/test/api/agent_supervisor -k task_board"
       },
       "outputs": [
         "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
         "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
-        "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+        "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json"
       ],
       "owning_repository": "cross-repository",
       "predicted_files": [
         "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
         "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
-        "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+        "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json"
       ],
       "status": "completed",
       "task_id": "PCCE-000",

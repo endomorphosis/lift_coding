@@ -7,6 +7,7 @@
 **Objective heap:** `docs/architecture/proof_carrying_context_engine_v0_1.objectives.md`
 **Machine projections:** `artifacts/proof_carrying_context_engine/control/`
 **Control base:** `lift_coding@b6f40c05e0884867eb8557f8882cd25cb760ca2f`
+**Current launch status:** `blocked_external_prerequisite`
 
 ## Outcome
 
@@ -113,11 +114,55 @@ reported as green:
   generic `grok_cli_runner`. The explicit production route is green; the
   generic/default route is not qualified.
 
-Generation r3 must use fresh `scheduler-r3`, `worktrees-r3`, and `logs-r3`
-roots, fresh claims, leases, fences, and receipts, and a launch receipt binding
-the final committed control HEAD/tree and recursive gitlinks. It must never
-resume, repair in place, compact, delete, or promote r2 state. The historical
-r2 receipt and Profile-G bootstrap receipt remain byte-for-byte immutable.
+### Preserved r3 provider failure and blocked r4 control revision
+
+Generation r3 launched from control commit
+`95a04cbc18d8f4316415fe0aadf32c0747df50a6` and accelerator gitlink
+`50c0b8551397983f664fbaa6ac12c68ba0eda82c`. It started two isolated lanes:
+PCCE-001 and PCCE-003. Each selected task exhausted exactly three internal
+provider attempts. All six typed provider receipts were rejected with
+`provider_failure:legacy native provider command failed`; every structured
+attempt log recorded zero model-response bytes, no raw model command, no
+repository write, no validation, no commit, and no merge. The two outer
+coordination receipts were cancelled and their fencing-token-1 leases released.
+PCCE-002 and PCCE-004 were registered but never started. The final manifest,
+process identity, launch receipt, task/lease/receipt state, clean idle
+worktrees, and 97 twice-hashed R3 artifacts are frozen in
+`control/incidents/scheduler-r3-provider-route.json`. R3 evidence is failure
+evidence only and cannot be resumed or promoted.
+
+A bounded diagnostic after R3 stopped used installed Grok CLI 1.0.3 and the
+same minimal structured invocation shape. It returned rc1 with one structured
+error envelope whose nested wrapper was HTTP 402 balance exhaustion. Only byte
+counts and SHA-256 digests were retained; no raw response text or temporary
+probe file is admitted. The provider-capacity publisher had represented
+operator admission budgets, not provider-reported account quota, so its
+`healthy` state was not evidence of usable Grok account capacity.
+
+The first quota-classification repair,
+`b0c85d48f0a1a3337a5aea2d2698e4c9e28fadf0` (tree
+`490d17028d011b5cc966af8b3762df303f3abfb1`), is retained as a rejected
+ancestor: independent review found that it accepted cross-format envelopes.
+The bounded descendant
+`0837254e910221c17b3c8ac8a2a233658de976f1` (tree
+`6eaf101d471ea2ad1b0c948d2e648ea925b444fe`) binds quota envelopes to their
+declared format and has 149 scoped implementer tests passing with zero failures.
+Independent audit recorded a final pass: all 98 changed-file tests passed; a
+broader slice passed 59 of 60 tests, with the sole failure reproduced
+identically at exact base `50c0b8551397983f664fbaa6ac12c68ba0eda82c` and
+therefore zero candidate regressions; the custom negative matrix and authority
+invariants also passed.
+
+Generation r4 is therefore sealed as `blocked_external_prerequisite`. No live
+scheduler and no external launch receipt may be created until a fresh
+exact-argv Grok account-capacity probe returns usable structured success
+immediately before launch. A generic or operator-authored capacity snapshot
+cannot satisfy this gate. When permitted, r4 must use new `scheduler-r4`,
+`worktrees-r4`, and `logs-r4` roots plus fresh claims, leases, fences, review
+authority, receipts, and launch identities. It must not resume, repair, compact,
+replay, delete, or reuse any r2 or r3 runtime state. The r2 and r3 receipts,
+both incident manifests, and the Profile-G bootstrap receipt remain
+byte-for-byte immutable.
 
 ## Evidence-backed preliminary inventory
 

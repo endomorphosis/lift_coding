@@ -9,14 +9,23 @@
   "board_namespace": "proof-carrying-context-engine-v0.1",
   "merge_target_branch": "agent/proof-carrying-context-engine-v0.1",
   "control_revision": {
-    "active_revision": "r3",
-    "active_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
-    "historical_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
-    "preserved_incident_path": "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+    "active_revision": "r4",
+    "active_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+    "historical_receipt_paths": [
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
+    ],
+    "preserved_incident_paths": [
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json"
+    ],
     "historical_receipt_rewrite_allowed": false,
     "incident_rewrite_allowed": false,
-    "admission_head_binding": "external-launch-receipt",
+    "status": "blocked_external_prerequisite",
+    "blocking_prerequisite": "fresh_exact_grok_account_capacity_gate",
+    "admission_head_binding": "external-launch-receipt-after-account-capacity-gate",
     "external_launch_receipt_required": true,
+    "external_launch_receipt_creation_permitted": false,
     "external_launch_receipt_must_bind_final_control_head": true
   },
   "source_binding": {
@@ -28,7 +37,7 @@
     "ipfs_kit_submodule_path": "external/ipfs_kit",
     "ipfs_kit_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
+    "ipfs_accelerate_planning_revision": "0837254e910221c17b3c8ac8a2a233658de976f1",
     "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
     "mcp_plus_plus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
     "require_initialized_gitlinks": true,
@@ -107,8 +116,10 @@
     "artifacts/proof_carrying_context_engine/control/bundle_index.json",
     "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
     "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+    "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
     "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
-    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json"
   ],
   "runtime_paths": {
     "root": "data/agent_supervisor/proof_carrying_context_engine_v0_1",
@@ -202,6 +213,17 @@
     "production_provider_policy": "grok-implement-codex-independent-review",
     "provider_roles": ["grok-implement", "codex-review"],
     "codex_implementation_fallback_enabled": false,
+    "provider_capacity_semantics": "operator-admission-budget-not-provider-reported-quota",
+    "provider_capacity_snapshot_is_account_capacity_evidence": false,
+    "launch_gate": {
+      "id": "fresh_exact_grok_account_capacity_gate",
+      "status": "blocked_external_prerequisite",
+      "required": true,
+      "evidence_source": "fresh exact-argv live Grok structured probe",
+      "last_observed_provider_result": "http_402_balance_exhausted",
+      "capacity_snapshot_satisfies_gate": false,
+      "external_launch_receipt_creation_permitted": false
+    },
     "provider_note": "The configured-board ordered fallback fields are not completion authority for this bundle route; Codex remains an independent reviewer and cannot self-review a Codex-authored implementation."
   },
   "recovery": {
@@ -212,12 +234,20 @@
     "bounded_retries": true,
     "terminal_on_external_prerequisite": "blocked",
     "terminal_on_required_gate_failure": "no_go",
-    "replacement_generation": "r3",
-    "replacement_scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3",
-    "replacement_worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r3",
-    "replacement_log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r3",
+    "replacement_generation": "r4",
+    "replacement_scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r4",
+    "replacement_worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r4",
+    "replacement_log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r4",
+    "launch_status": "blocked_external_prerequisite",
+    "launch_permitted": false,
+    "required_prelaunch_gate": "fresh_exact_grok_account_capacity_gate",
     "reuse_scheduler_r2_state": false,
     "reuse_scheduler_r2_claims_leases_fences_or_receipts": false,
-    "preserve_scheduler_r2_forensics_read_only": true
+    "preserve_scheduler_r2_forensics_read_only": true,
+    "reuse_scheduler_r3_state": false,
+    "reuse_scheduler_r3_worktrees": false,
+    "reuse_scheduler_r3_logs": false,
+    "reuse_scheduler_r3_claims_leases_fences_or_receipts": false,
+    "preserve_scheduler_r3_forensics_read_only": true
   }
 }
