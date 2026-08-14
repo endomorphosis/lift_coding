@@ -7,7 +7,7 @@
 **Objective heap:** `docs/architecture/proof_carrying_context_engine_v0_1.objectives.md`
 **Machine projections:** `artifacts/proof_carrying_context_engine/control/`
 **Control base:** `lift_coding@b6f40c05e0884867eb8557f8882cd25cb760ca2f`
-**Current launch status:** `blocked_external_prerequisite`
+**Current launch status:** `pending_external_launch_receipt`
 
 ## Outcome
 
@@ -114,7 +114,7 @@ reported as green:
   generic `grok_cli_runner`. The explicit production route is green; the
   generic/default route is not qualified.
 
-### Preserved r3 provider failure and blocked r4 control revision
+### Preserved r3 provider failure, blocked r4, and conditional r5 admission
 
 Generation r3 launched from control commit
 `95a04cbc18d8f4316415fe0aadf32c0747df50a6` and accelerator gitlink
@@ -153,16 +153,34 @@ identically at exact base `50c0b8551397983f664fbaa6ac12c68ba0eda82c` and
 therefore zero candidate regressions; the custom negative matrix and authority
 invariants also passed.
 
-Generation r4 is therefore sealed as `blocked_external_prerequisite`. No live
-scheduler and no external launch receipt may be created until a fresh
-exact-argv Grok account-capacity probe returns usable structured success
-immediately before launch. A generic or operator-authored capacity snapshot
-cannot satisfy this gate. When permitted, r4 must use new `scheduler-r4`,
-`worktrees-r4`, and `logs-r4` roots plus fresh claims, leases, fences, review
-authority, receipts, and launch identities. It must not resume, repair, compact,
-replay, delete, or reuse any r2 or r3 runtime state. The r2 and r3 receipts,
-both incident manifests, and the Profile-G bootstrap receipt remain
-byte-for-byte immutable.
+Generation r4 remains sealed as `blocked_external_prerequisite`. Its gate was
+subsequently satisfied for control preparation by a fresh production-adapter
+structured probe that
+returned usable structured success from `grok-4.5` before
+`2026-08-14T19:11:43Z`. The probe took `5.817397392` seconds, exited zero, and
+is bound by endpoint receipt, prompt, canonical-schema, response, executable,
+version, and adapter-gitlink identities in the r5 control receipt. A generic or
+operator-authored capacity snapshot did not satisfy this gate.
+
+Generation r5 is therefore `pending_external_launch_receipt`, not live-launch
+authority. After the r5 control commit exists, a separate immutable receipt at
+`scheduler-r5/control-launch-receipt.json` must bind the final commit and tree,
+recursive repository forest, clean governed heads, current projection IDs,
+provider policy, the control-preparation probe identity, a second exact-argv
+probe run immediately after the control commit, and fresh `scheduler-r5`,
+`worktrees-r5`, and `logs-r5` roots. Until that receipt exists and validates,
+live launch remains false. The preparation probe retained no exact start time or
+argv digest and therefore has no admission authority; the second probe must
+record exact start/completion timestamps, argv SHA-256, executable identity,
+live/non-replayed/non-simulated classification, and a short TTL plus expiry
+checked at execution. Its TTL may not exceed 60 seconds, and preflight must
+enforce `started_at <= completed_at <= receipt_created_at <= launch_exec_at <=
+expires_at` plus `expires_at - completed_at <= ttl_seconds <= 60`. The first r5 launch is limited to one lane and one model request until
+concurrency evidence permits a separately reviewed expansion. R5 must create
+fresh claims, leases, fences, review authority, receipts, and launch identities
+and must not resume, repair, compact, replay, delete, or reuse r2, r3, or r4
+runtime state. All r2 through r4 receipts, both incident manifests, and the
+Profile-G bootstrap receipt remain byte-for-byte immutable.
 
 ## Evidence-backed preliminary inventory
 
@@ -335,10 +353,11 @@ isolated worktrees, exact gitlinks, shared lease/fence and merge-queue
 namespaces, bounded attempts, and task-specific mutation scopes. Model output
 is a proposal. Validation and merge authority remain independent.
 
-Initial execution uses two lanes because other supervisor programs already
-consume provider and repository resources. Admission may rise to three only
-after fresh CPU, memory, disk, model-capacity, and conflict evidence. Missing
-telemetry grants no extra capacity.
+Initial r5 execution uses one lane because other supervisor programs already
+consume provider and repository resources and the passed probe does not prove
+safe concurrency. Admission may rise only after fresh CPU, memory, disk,
+model-capacity, provider-concurrency, and conflict evidence. Missing telemetry
+grants no extra capacity.
 
 Monitoring classifies each lane from heartbeat, process identity, current
 task, phase, log progress, lease/fence state, merge queue, retry counters, and

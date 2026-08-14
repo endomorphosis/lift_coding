@@ -1,0 +1,234 @@
+{
+  "schema": "proof-carrying-context-engine/task-receipt@1",
+  "task_id": "PCCE-000",
+  "objective_id": "PCCE-G000",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "status": "pending_external_launch_receipt",
+  "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r5",
+  "control_base": "aaed3c3ce7625ba81a7c001a33883d22dbc3fe28",
+  "control_base_tree": "e556658a3c9a6f72e4a6141e53926a21273c8b0d",
+  "supersedes": {
+    "artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r4",
+    "path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+    "content_id": "sha256:f5fd281c7df68630ca36542c83e57d5c20c9eac428a3fc12f82414b9bc8c62ac",
+    "byte_sha256": "sha256:13d3a58418db67c3ee7d55ab3741e527a78bfc199dda0ca0ff12b05be5bf6e53",
+    "git_blob": "f5632d592505d49d7297b3c68bae2949861a2838",
+    "control_commit": "aaed3c3ce7625ba81a7c001a33883d22dbc3fe28",
+    "control_tree": "e556658a3c9a6f72e4a6141e53926a21273c8b0d",
+    "rewrite_allowed": false
+  },
+  "evidence": {
+    "objective_sha256": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
+    "todo_sha256": "sha256:35ce4ec412d008221fc8ff3e71afc472a6c5c7d28ea75b7c1f58091b9b795a7f",
+    "plan_sha256": "sha256:98b22e7ff2761b1202b15cfa7ce87bdfc7db95dbd22546188d5a6f76d5ff97eb",
+    "config_sha256": "sha256:192d18e699dc39599480b76ad0a34168903d3e4f7af9d837c9232cd6b14b6088",
+    "validator_sha256": "sha256:1d554287392ed45e4efb71eba4e2f300fee125e0463fb0a021329847076a8385",
+    "profile_g_bootstrap_sha256": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+    "board_projection_id": "sha256:5a3b74e77f1710edf234532636c7519966da541db9adbcef6785eb412d1800e4",
+    "dependency_graph_id": "sha256:1c2b562d757a5cbb6ec9ae8490061d0df1b49e331fea56b87cab2a4998e79bb6",
+    "bundle_index_id": "sha256:b1ad5672e78682939d24918aed05d8df7dae588f1b2be0c7620a7e4e3f211042",
+    "repository_gitlinks": {
+      "accelerate": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+      "mcp_plus_plus": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+    },
+    "protected_paths": [
+      "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+      "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
+      "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+      "artifacts/proof_carrying_context_engine/control/task_board.json",
+      "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r5.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+      "config/proof_carrying_context_engine_v0_1_supervisor.json",
+      "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+      "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+      "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "scripts/validate_proof_carrying_context_engine_board.py"
+    ],
+    "task_set": {
+      "task_count": 67,
+      "ordered_task_ids_sha256": "sha256:75d34efb01a7429947371042e54f8d6e7192b24125d8b658d495c6075b3e6c08"
+    },
+    "provider_route_repair_ref": {
+      "receipt_artifact_identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r4",
+      "receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+      "receipt_content_id": "sha256:f5fd281c7df68630ca36542c83e57d5c20c9eac428a3fc12f82414b9bc8c62ac",
+      "json_pointer": "/evidence/provider_route_repair",
+      "final_commit": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "final_tree": "6eaf101d471ea2ad1b0c948d2e648ea925b444fe"
+    },
+    "account_capacity_probe": {
+      "gate_id": "fresh_exact_grok_account_capacity_gate",
+      "mode": "production_adapter",
+      "completed_no_later_than": "2026-08-14T19:11:43Z",
+      "elapsed_seconds": 5.817397392,
+      "provider": "grok_cli",
+      "model": "grok-4.5",
+      "adapter_gitlink": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "production_adapter_function": "_grok_native_structured_output",
+      "executable": {
+        "command_path": "/home/barberb/.local/bin/grok",
+        "resolved_path": "/home/barberb/.grok/downloads/grok-1.0.3-linux-aarch64",
+        "version": "grok 1.0.3 (1a29d5bc12) [stable]",
+        "sha256": "sha256:ed44950eab90573b6f475191f5791713a56943939b3b9a62e3f4e95edd14acd9"
+      },
+      "exit_code": 0,
+      "usable_structured_success": true,
+      "result_class": "live",
+      "replayed": false,
+      "simulated": false,
+      "exact_argv_digest_retained": false,
+      "admission_authority": false,
+      "endpoint_receipt_cid": "baguqeerajjm5ujcdwpirsajmir5ueyol54rwr36jyszxlwk4vgpvbalfyodq",
+      "response_sha256": "sha256:31bf75f4c0a97cc1f7b60df824fa390b3be9ba014f29b63c87c698ba63d9a9fd",
+      "raw_response_retained_in_control_receipt": false,
+      "credential_material_retained": false,
+      "prompt": {
+        "byte_size": 48,
+        "sha256": "sha256:9fea71a71cf8c33fcc9c150cc830e4ac50232233acfe182c5937221bc6a9dc54",
+        "raw_retained": false
+      },
+      "canonical_schema": {
+        "byte_size": 127,
+        "sha256": "sha256:a9bb57e4f7f0dd09183bdf6cd6d0915c2d81b4bd37d4b27b48a2030ef34e5afe"
+      },
+      "operator_capacity_snapshot_used_as_account_evidence": false
+    },
+    "frozen_history": {
+      "r2_receipt_byte_sha256": "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4",
+      "r2_incident_file_sha256": "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141",
+      "r3_receipt_byte_sha256": "sha256:f674da5a09d34e0592c21fd32dbb3886cc298d7b0edb4947ea152674c95a6685",
+      "r3_incident_file_sha256": "sha256:50b92024287422ca8b45eb4514aed11adb6508e874f790b405d16d8ec73fb09d",
+      "r4_receipt_byte_sha256": "sha256:13d3a58418db67c3ee7d55ab3741e527a78bfc199dda0ca0ff12b05be5bf6e53",
+      "r4_receipt_content_id": "sha256:f5fd281c7df68630ca36542c83e57d5c20c9eac428a3fc12f82414b9bc8c62ac"
+    }
+  },
+  "parser_report": {
+    "task_count": 67,
+    "goal_count": 9,
+    "unique_task_ids": true,
+    "acyclic": true,
+    "unique_terminal_task_id": "PCCE-083",
+    "initial_ready_task_ids": [
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004"
+    ]
+  },
+  "restart_policy": {
+    "generation": "r5",
+    "scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5",
+    "worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r5",
+    "log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r5",
+    "external_launch_receipt_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/control-launch-receipt.json",
+    "fresh_claims_leases_fences_review_authority_and_receipts": true,
+    "resume_scheduler_r2": false,
+    "resume_scheduler_r3": false,
+    "resume_scheduler_r4": false,
+    "reuse_scheduler_r2_state": false,
+    "reuse_scheduler_r3_state": false,
+    "reuse_scheduler_r4_state": false,
+    "reuse_scheduler_r2_claims_leases_fences_or_receipts": false,
+    "reuse_scheduler_r3_claims_leases_fences_or_receipts": false,
+    "reuse_scheduler_r4_claims_leases_fences_or_receipts": false,
+    "preserve_scheduler_r2_forensics_read_only": true,
+    "preserve_scheduler_r3_forensics_read_only": true,
+    "preserve_scheduler_r4_forensics_read_only": true
+  },
+  "external_launch_gate": {
+    "id": "fresh_exact_grok_account_capacity_gate",
+    "required": true,
+    "status": "passed",
+    "evidence_source": "fresh production-adapter structured probe (non-authoritative preparation evidence)",
+    "capacity_semantics": "operator-admission-budget-not-provider-reported-quota",
+    "capacity_snapshot_satisfies_gate": false,
+    "probe_evidence_ref": "evidence.account_capacity_probe",
+    "external_launch_receipt_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/control-launch-receipt.json",
+    "external_launch_receipt_created": false,
+    "external_launch_receipt_creation_permitted": true,
+    "live_launch_permitted": false,
+    "control_probe_admission_authority": false,
+    "external_launch_receipt_requires_second_fresh_exact_probe": true,
+    "post_commit_probe_required_fields": [
+      "started_at",
+      "completed_at",
+      "argv_sha256",
+      "executable_identity",
+      "live_not_replayed_or_simulated",
+      "ttl_seconds",
+      "expires_at"
+    ],
+    "post_commit_probe_policy": {
+      "max_ttl_seconds": 60,
+      "required_time_order": "started_at <= completed_at <= receipt_created_at <= launch_exec_at <= expires_at",
+      "expiry_bound": "expires_at - completed_at <= ttl_seconds <= 60",
+      "required_adapter_gitlink": "0837254e910221c17b3c8ac8a2a233658de976f1",
+      "required_provider_policy": "grok-implement-codex-independent-review",
+      "exact_bindings": [
+        "argv_sha256",
+        "executable_path",
+        "executable_version",
+        "executable_sha256",
+        "adapter_gitlink",
+        "provider",
+        "model",
+        "endpoint_receipt_cid",
+        "response_sha256"
+      ],
+      "result_requirements": {
+        "exit_code": 0,
+        "usable_structured_success": true,
+        "result_class": "live",
+        "replayed": false,
+        "simulated": false
+      },
+      "enforced_at": [
+        "external_launch_receipt_creation",
+        "immediately_before_launch_exec"
+      ]
+    },
+    "product_task_completion_authority": false,
+    "post_commit_receipt_must_bind": [
+      "final_r5_control_commit",
+      "final_r5_control_tree",
+      "recursive_repository_gitlinks",
+      "nested_repository_heads",
+      "clean_worktree_evidence",
+      "active_r5_receipt_content_id",
+      "board_projection_id",
+      "dependency_graph_id",
+      "bundle_index_id",
+      "operator_identity",
+      "provider_policy",
+      "control_preparation_probe_identity",
+      "post_commit_fresh_exact_grok_probe",
+      "fresh_operator_admission_capacity_snapshot_identity",
+      "operator_admission_snapshot_not_provider_account_evidence",
+      "dry_run_command_argv_sha256",
+      "dry_run_result_identity",
+      "scheduler_launch_argv_contract_version",
+      "exact_scheduler_launch_argv_sha256",
+      "fresh_review_authority",
+      "scheduler_r5_paths",
+      "single_lane_admission"
+    ],
+    "scheduler_process_identity_must_match_prebound_launch_argv": true
+  },
+  "control_decision": {
+    "control_revision_commit_authorized": true,
+    "accelerator_candidate_audit": "final_pass",
+    "account_capacity_gate": "passed",
+    "external_launch_receipt_creation_authorized": true,
+    "external_launch_receipt_created": false,
+    "live_launch_authorized": false,
+    "launch_blocker": "external_launch_receipt",
+    "qualification": "conditional_go_control_revision_only"
+  },
+  "content_id": "sha256:f7fa00309bcb1017d40191a1220774c7c24d12546afdb0bdbcf9ec99a679d37c"
+}

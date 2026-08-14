@@ -9,11 +9,12 @@
   "board_namespace": "proof-carrying-context-engine-v0.1",
   "merge_target_branch": "agent/proof-carrying-context-engine-v0.1",
   "control_revision": {
-    "active_revision": "r4",
-    "active_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+    "active_revision": "r5",
+    "active_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r5.json",
     "historical_receipt_paths": [
       "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
-      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+      "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json"
     ],
     "preserved_incident_paths": [
       "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
@@ -21,11 +22,11 @@
     ],
     "historical_receipt_rewrite_allowed": false,
     "incident_rewrite_allowed": false,
-    "status": "blocked_external_prerequisite",
-    "blocking_prerequisite": "fresh_exact_grok_account_capacity_gate",
-    "admission_head_binding": "external-launch-receipt-after-account-capacity-gate",
+    "status": "pending_external_launch_receipt",
+    "blocking_prerequisite": "external_launch_receipt",
+    "admission_head_binding": "external-launch-receipt-after-r5-control-commit",
     "external_launch_receipt_required": true,
-    "external_launch_receipt_creation_permitted": false,
+    "external_launch_receipt_creation_permitted": true,
     "external_launch_receipt_must_bind_final_control_head": true
   },
   "source_binding": {
@@ -81,7 +82,7 @@
     "goal_count": 9,
     "root_goal_id": "PCCE-G000"
   },
-  "max_lanes": 2,
+  "max_lanes": 1,
   "strict_task_sharding": true,
   "exit_when_all_tracks_terminal": true,
   "objective_refill_enabled": false,
@@ -119,7 +120,8 @@
     "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r3-provider-route.json",
     "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
     "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
-    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json"
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r5.json"
   ],
   "runtime_paths": {
     "root": "data/agent_supervisor/proof_carrying_context_engine_v0_1",
@@ -137,19 +139,11 @@
       "strict_shard_remainder": 0,
       "initial_task_ids": [
         "PCCE-001",
-        "PCCE-003"
-      ],
-      "initial_focus": "datasets-and-accelerate-inventory"
-    },
-    {
-      "index": 1,
-      "name": "pcce-lane-1",
-      "strict_shard_remainder": 1,
-      "initial_task_ids": [
         "PCCE-002",
+        "PCCE-003",
         "PCCE-004"
       ],
-      "initial_focus": "kit-and-mcplusplus-inventory"
+      "initial_focus": "serialized-four-repository-inventory"
     }
   ],
   "provider": {
@@ -159,7 +153,7 @@
     "fallback_model_id": "gpt-5.6-terra",
     "fallback_trigger": "primary_quota_exhausted",
     "fallback_reasoning_effort": "medium",
-    "max_concurrency": 2
+    "max_concurrency": 1
   },
   "waves": [
     {"id": "W00", "task_ids": ["PCCE-000"]},
@@ -201,13 +195,13 @@
     "bundle_index_path": "artifacts/proof_carrying_context_engine/control/bundle_index.json",
     "external_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1",
     "provider_capacity_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/provider/capacity.json",
-    "maximum_lane_count": 2,
+    "maximum_lane_count": 1,
     "max_cpu_percent": 85,
     "max_memory_percent": 85,
     "max_disk_percent": 90,
-    "max_cpu_proof_concurrency": 2,
-    "max_model_concurrency": 2,
-    "max_artifact_concurrency": 2,
+    "max_cpu_proof_concurrency": 1,
+    "max_model_concurrency": 1,
+    "max_artifact_concurrency": 1,
     "lease_ms": 60000,
     "heartbeat_interval_seconds": 5,
     "production_provider_policy": "grok-implement-codex-independent-review",
@@ -217,12 +211,80 @@
     "provider_capacity_snapshot_is_account_capacity_evidence": false,
     "launch_gate": {
       "id": "fresh_exact_grok_account_capacity_gate",
-      "status": "blocked_external_prerequisite",
+      "status": "passed",
       "required": true,
-      "evidence_source": "fresh exact-argv live Grok structured probe",
-      "last_observed_provider_result": "http_402_balance_exhausted",
+      "evidence_source": "fresh production-adapter structured probe (non-authoritative preparation evidence)",
+      "last_observed_provider_result": "usable_structured_success",
       "capacity_snapshot_satisfies_gate": false,
-      "external_launch_receipt_creation_permitted": false
+      "probe_completed_no_later_than": "2026-08-14T19:11:43Z",
+      "external_launch_receipt_creation_permitted": true,
+      "external_launch_receipt_created": false,
+      "live_launch_permitted": false,
+      "control_probe_admission_authority": false,
+      "external_launch_receipt_requires_second_fresh_exact_probe": true,
+      "post_commit_probe_required_fields": [
+        "started_at",
+        "completed_at",
+        "argv_sha256",
+        "executable_identity",
+        "live_not_replayed_or_simulated",
+        "ttl_seconds",
+        "expires_at"
+      ],
+      "post_commit_probe_policy": {
+        "max_ttl_seconds": 60,
+        "required_time_order": "started_at <= completed_at <= receipt_created_at <= launch_exec_at <= expires_at",
+        "expiry_bound": "expires_at - completed_at <= ttl_seconds <= 60",
+        "required_adapter_gitlink": "0837254e910221c17b3c8ac8a2a233658de976f1",
+        "required_provider_policy": "grok-implement-codex-independent-review",
+        "exact_bindings": [
+          "argv_sha256",
+          "executable_path",
+          "executable_version",
+          "executable_sha256",
+          "adapter_gitlink",
+          "provider",
+          "model",
+          "endpoint_receipt_cid",
+          "response_sha256"
+        ],
+        "result_requirements": {
+          "exit_code": 0,
+          "usable_structured_success": true,
+          "result_class": "live",
+          "replayed": false,
+          "simulated": false
+        },
+        "enforced_at": [
+          "external_launch_receipt_creation",
+          "immediately_before_launch_exec"
+        ]
+      },
+      "post_commit_receipt_must_bind": [
+        "final_r5_control_commit",
+        "final_r5_control_tree",
+        "recursive_repository_gitlinks",
+        "nested_repository_heads",
+        "clean_worktree_evidence",
+        "active_r5_receipt_content_id",
+        "board_projection_id",
+        "dependency_graph_id",
+        "bundle_index_id",
+        "operator_identity",
+        "provider_policy",
+        "control_preparation_probe_identity",
+        "post_commit_fresh_exact_grok_probe",
+        "fresh_operator_admission_capacity_snapshot_identity",
+        "operator_admission_snapshot_not_provider_account_evidence",
+        "dry_run_command_argv_sha256",
+        "dry_run_result_identity",
+        "scheduler_launch_argv_contract_version",
+        "exact_scheduler_launch_argv_sha256",
+        "fresh_review_authority",
+        "scheduler_r5_paths",
+        "single_lane_admission"
+      ],
+      "scheduler_process_identity_must_match_prebound_launch_argv": true
     },
     "provider_note": "The configured-board ordered fallback fields are not completion authority for this bundle route; Codex remains an independent reviewer and cannot self-review a Codex-authored implementation."
   },
@@ -234,13 +296,15 @@
     "bounded_retries": true,
     "terminal_on_external_prerequisite": "blocked",
     "terminal_on_required_gate_failure": "no_go",
-    "replacement_generation": "r4",
-    "replacement_scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r4",
-    "replacement_worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r4",
-    "replacement_log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r4",
-    "launch_status": "blocked_external_prerequisite",
+    "replacement_generation": "r5",
+    "replacement_scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5",
+    "replacement_worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r5",
+    "replacement_log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r5",
+    "external_launch_receipt_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r5/control-launch-receipt.json",
+    "launch_status": "pending_external_launch_receipt",
     "launch_permitted": false,
-    "required_prelaunch_gate": "fresh_exact_grok_account_capacity_gate",
+    "provider_capacity_gate_status": "passed",
+    "required_prelaunch_gate": "external_launch_receipt",
     "reuse_scheduler_r2_state": false,
     "reuse_scheduler_r2_claims_leases_fences_or_receipts": false,
     "preserve_scheduler_r2_forensics_read_only": true,
@@ -248,6 +312,11 @@
     "reuse_scheduler_r3_worktrees": false,
     "reuse_scheduler_r3_logs": false,
     "reuse_scheduler_r3_claims_leases_fences_or_receipts": false,
-    "preserve_scheduler_r3_forensics_read_only": true
+    "preserve_scheduler_r3_forensics_read_only": true,
+    "reuse_scheduler_r4_state": false,
+    "reuse_scheduler_r4_worktrees": false,
+    "reuse_scheduler_r4_logs": false,
+    "reuse_scheduler_r4_claims_leases_fences_or_receipts": false,
+    "preserve_scheduler_r4_forensics_read_only": true
   }
 }

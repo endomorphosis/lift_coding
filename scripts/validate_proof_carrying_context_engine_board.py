@@ -50,8 +50,11 @@ HISTORICAL_R2_RECEIPT_PATH = (
 HISTORICAL_R3_RECEIPT_PATH = (
     REPO_ROOT / "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
 )
-ACTIVE_R4_RECEIPT_PATH = (
+HISTORICAL_R4_RECEIPT_PATH = (
     REPO_ROOT / "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r4.json"
+)
+ACTIVE_R5_RECEIPT_PATH = (
+    REPO_ROOT / "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r5.json"
 )
 R2_INCIDENT_PATH = (
     REPO_ROOT
@@ -67,7 +70,8 @@ PROFILE_G_BOOTSTRAP_RECEIPT_PATH = (
 )
 HISTORICAL_R2_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r2"
 HISTORICAL_R3_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r3"
-ACTIVE_R4_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r4"
+HISTORICAL_R4_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r4"
+ACTIVE_R5_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r5"
 R2_INCIDENT_IDENTITY = "urn:pcce:control-incident:scheduler-r2-provider-handoff"
 R3_INCIDENT_IDENTITY = "urn:pcce:control-incident:scheduler-r3-provider-route"
 HISTORICAL_R2_ADMISSION_COMMIT = "d498faad8b75321a6981d6dfb944bb589581b333"
@@ -98,9 +102,18 @@ R3_INCIDENT_GIT_BLOB = "e6d68b42c4a55b4f5dc238b66f22dbfc6396f3c4"
 R3_INCIDENT_CONTENT_ID = (
     "sha256:6f06d9dd6cffe17484028f468618eb9000edd6de34adc550285a0bb603b52702"
 )
+HISTORICAL_R4_RECEIPT_BYTE_SHA256 = (
+    "sha256:13d3a58418db67c3ee7d55ab3741e527a78bfc199dda0ca0ff12b05be5bf6e53"
+)
+HISTORICAL_R4_RECEIPT_GIT_BLOB = "f5632d592505d49d7297b3c68bae2949861a2838"
+HISTORICAL_R4_RECEIPT_CONTENT_ID = (
+    "sha256:f5fd281c7df68630ca36542c83e57d5c20c9eac428a3fc12f82414b9bc8c62ac"
+)
 R3_CONTROL_COMMIT = "95a04cbc18d8f4316415fe0aadf32c0747df50a6"
 R3_CONTROL_TREE = "293c704f2bd6e588b89903f7ac9b6bb3aeb6b87e"
 R3_INCIDENT_COMMIT = "5f962ac16768b16febbfc434c1fcd44c6c5bc8f9"
+R4_CONTROL_COMMIT = "aaed3c3ce7625ba81a7c001a33883d22dbc3fe28"
+R4_CONTROL_TREE = "e556658a3c9a6f72e4a6141e53926a21273c8b0d"
 HISTORICAL_R3_ACCELERATOR_COMMIT = "50c0b8551397983f664fbaa6ac12c68ba0eda82c"
 HISTORICAL_R3_ACCELERATOR_TREE = "a16781386689845c1162c85c0f5c899a673d48e6"
 REJECTED_ACCELERATOR_COMMIT = "b0c85d48f0a1a3337a5aea2d2698e4c9e28fadf0"
@@ -991,7 +1004,127 @@ def _verify_r3_incident(*, errors: list[str]) -> None:
         errors.append("scheduler-r3 incident capacity semantics changed")
 
 
-def _verify_active_r4_receipt(
+def _verify_historical_r4_receipt(*, goal_count: int, errors: list[str]) -> None:
+    """Verify the blocked r4 control receipt only against frozen evidence."""
+
+    receipt = _load_json_object(
+        HISTORICAL_R4_RECEIPT_PATH,
+        label="historical PCCE-000 r4 receipt",
+        errors=errors,
+    )
+    if receipt is None:
+        return
+    if HISTORICAL_R4_RECEIPT_PATH.stat().st_size != 11340:
+        errors.append("historical PCCE-000 r4 receipt byte size changed")
+    if _file_sha256(HISTORICAL_R4_RECEIPT_PATH) != HISTORICAL_R4_RECEIPT_BYTE_SHA256:
+        errors.append("historical PCCE-000 r4 receipt bytes changed")
+    if _git("hash-object", str(HISTORICAL_R4_RECEIPT_PATH)) != HISTORICAL_R4_RECEIPT_GIT_BLOB:
+        errors.append("historical PCCE-000 r4 receipt Git blob changed")
+    _verify_content_id(
+        receipt,
+        expected=HISTORICAL_R4_RECEIPT_CONTENT_ID,
+        label="historical PCCE-000 r4 receipt",
+        errors=errors,
+    )
+    fixed = {
+        "schema": "proof-carrying-context-engine/task-receipt@1",
+        "task_id": "PCCE-000",
+        "objective_id": OBJECTIVE_ID,
+        "board_namespace": BOARD_NAMESPACE,
+        "status": "blocked_external_prerequisite",
+        "artifact_identity": HISTORICAL_R4_ARTIFACT_IDENTITY,
+        "control_base": R3_INCIDENT_COMMIT,
+    }
+    for field, expected in fixed.items():
+        if receipt.get(field) != expected:
+            errors.append(f"historical PCCE-000 r4 receipt {field} mismatch")
+    if receipt.get("parser_report") != _expected_parser_report(goal_count):
+        errors.append("historical PCCE-000 r4 parser_report changed")
+    if subprocess.run(
+        ["git", "merge-base", "--is-ancestor", R4_CONTROL_COMMIT, "HEAD"],
+        cwd=REPO_ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    ).returncode != 0:
+        errors.append("historical r4 control commit is not an ancestor of control HEAD")
+
+
+def _expected_account_capacity_probe() -> dict[str, Any]:
+    return {
+        "gate_id": "fresh_exact_grok_account_capacity_gate",
+        "mode": "production_adapter",
+        "completed_no_later_than": "2026-08-14T19:11:43Z",
+        "elapsed_seconds": 5.817397392,
+        "provider": "grok_cli",
+        "model": "grok-4.5",
+        "adapter_gitlink": FINAL_ACCELERATOR_COMMIT,
+        "production_adapter_function": "_grok_native_structured_output",
+        "executable": {
+            "command_path": "/home/barberb/.local/bin/grok",
+            "resolved_path": "/home/barberb/.grok/downloads/grok-1.0.3-linux-aarch64",
+            "version": "grok 1.0.3 (1a29d5bc12) [stable]",
+            "sha256": "sha256:ed44950eab90573b6f475191f5791713a56943939b3b9a62e3f4e95edd14acd9",
+        },
+        "exit_code": 0,
+        "usable_structured_success": True,
+        "result_class": "live",
+        "replayed": False,
+        "simulated": False,
+        "exact_argv_digest_retained": False,
+        "admission_authority": False,
+        "endpoint_receipt_cid": "baguqeerajjm5ujcdwpirsajmir5ueyol54rwr36jyszxlwk4vgpvbalfyodq",
+        "response_sha256": "sha256:31bf75f4c0a97cc1f7b60df824fa390b3be9ba014f29b63c87c698ba63d9a9fd",
+        "raw_response_retained_in_control_receipt": False,
+        "credential_material_retained": False,
+        "prompt": {
+            "byte_size": 48,
+            "sha256": "sha256:9fea71a71cf8c33fcc9c150cc830e4ac50232233acfe182c5937221bc6a9dc54",
+            "raw_retained": False,
+        },
+        "canonical_schema": {
+            "byte_size": 127,
+            "sha256": "sha256:a9bb57e4f7f0dd09183bdf6cd6d0915c2d81b4bd37d4b27b48a2030ef34e5afe",
+        },
+        "operator_capacity_snapshot_used_as_account_evidence": False,
+    }
+
+
+def _expected_post_commit_probe_policy() -> dict[str, Any]:
+    return {
+        "max_ttl_seconds": 60,
+        "required_time_order": (
+            "started_at <= completed_at <= receipt_created_at <= launch_exec_at <= expires_at"
+        ),
+        "expiry_bound": "expires_at - completed_at <= ttl_seconds <= 60",
+        "required_adapter_gitlink": FINAL_ACCELERATOR_COMMIT,
+        "required_provider_policy": "grok-implement-codex-independent-review",
+        "exact_bindings": [
+            "argv_sha256",
+            "executable_path",
+            "executable_version",
+            "executable_sha256",
+            "adapter_gitlink",
+            "provider",
+            "model",
+            "endpoint_receipt_cid",
+            "response_sha256",
+        ],
+        "result_requirements": {
+            "exit_code": 0,
+            "usable_structured_success": True,
+            "result_class": "live",
+            "replayed": False,
+            "simulated": False,
+        },
+        "enforced_at": [
+            "external_launch_receipt_creation",
+            "immediately_before_launch_exec",
+        ],
+    }
+
+
+def _verify_active_r5_receipt(
     *,
     config: dict[str, Any],
     projection: dict[str, Any],
@@ -1000,46 +1133,42 @@ def _verify_active_r4_receipt(
     goal_count: int,
     errors: list[str],
 ) -> None:
-    receipt = _load_json_object(ACTIVE_R4_RECEIPT_PATH, label="active PCCE-000 r4 receipt", errors=errors)
+    receipt = _load_json_object(ACTIVE_R5_RECEIPT_PATH, label="active PCCE-000 r5 receipt", errors=errors)
     if receipt is None:
         return
     if not PROFILE_G_BOOTSTRAP_RECEIPT_PATH.is_file():
         errors.append("Profile-G bootstrap receipt is missing")
         return
-    _verify_content_id(receipt, expected=None, label="active PCCE-000 r4 receipt", errors=errors)
+    _verify_content_id(receipt, expected=None, label="active PCCE-000 r5 receipt", errors=errors)
     fixed = {
         "schema": "proof-carrying-context-engine/task-receipt@1",
         "task_id": "PCCE-000",
         "objective_id": OBJECTIVE_ID,
         "board_namespace": BOARD_NAMESPACE,
-        "status": "blocked_external_prerequisite",
-        "artifact_identity": ACTIVE_R4_ARTIFACT_IDENTITY,
-        "control_base": R3_INCIDENT_COMMIT,
+        "status": "pending_external_launch_receipt",
+        "artifact_identity": ACTIVE_R5_ARTIFACT_IDENTITY,
+        "control_base": R4_CONTROL_COMMIT,
+        "control_base_tree": R4_CONTROL_TREE,
     }
     for field, expected in fixed.items():
         if receipt.get(field) != expected:
-            errors.append(f"active PCCE-000 r4 receipt {field} mismatch")
+            errors.append(f"active PCCE-000 r5 receipt {field} mismatch")
     expected_supersedes = {
-        "artifact_identity": HISTORICAL_R3_ARTIFACT_IDENTITY,
-        "path": str(HISTORICAL_R3_RECEIPT_PATH.relative_to(REPO_ROOT)),
-        "content_id": HISTORICAL_R3_RECEIPT_CONTENT_ID,
-        "byte_sha256": HISTORICAL_R3_RECEIPT_BYTE_SHA256,
-        "git_blob": HISTORICAL_R3_RECEIPT_GIT_BLOB,
+        "artifact_identity": HISTORICAL_R4_ARTIFACT_IDENTITY,
+        "path": str(HISTORICAL_R4_RECEIPT_PATH.relative_to(REPO_ROOT)),
+        "content_id": HISTORICAL_R4_RECEIPT_CONTENT_ID,
+        "byte_sha256": HISTORICAL_R4_RECEIPT_BYTE_SHA256,
+        "git_blob": HISTORICAL_R4_RECEIPT_GIT_BLOB,
+        "control_commit": R4_CONTROL_COMMIT,
+        "control_tree": R4_CONTROL_TREE,
         "rewrite_allowed": False,
-        "incident_id": R3_INCIDENT_IDENTITY,
-        "incident_path": str(R3_INCIDENT_PATH.relative_to(REPO_ROOT)),
-        "incident_content_id": R3_INCIDENT_CONTENT_ID,
-        "incident_file_sha256": R3_INCIDENT_FILE_SHA256,
-        "incident_git_blob": R3_INCIDENT_GIT_BLOB,
-        "incident_commit": R3_INCIDENT_COMMIT,
-        "incident_rewrite_allowed": False,
     }
     if receipt.get("supersedes") != expected_supersedes:
-        errors.append("active PCCE-000 r4 supersession binding mismatch")
+        errors.append("active PCCE-000 r5 supersession binding mismatch")
 
     evidence = receipt.get("evidence")
     if not isinstance(evidence, dict):
-        errors.append("active PCCE-000 r4 receipt evidence must be an object")
+        errors.append("active PCCE-000 r5 receipt evidence must be an object")
         return
     repository_gitlinks = {
         name: str(record.get("gitlink") or "")
@@ -1057,78 +1186,139 @@ def _verify_active_r4_receipt(
         "bundle_index_id": bundle_index["projection_id"],
         "repository_gitlinks": repository_gitlinks,
         "protected_paths": sorted(str(item) for item in config["protected_paths"]),
-        "task_ids": list(EXPECTED_TASK_IDS),
-        "provider_route_repair": _expected_r4_provider_route_repair(),
+        "task_set": {
+            "task_count": len(EXPECTED_TASK_IDS),
+            "ordered_task_ids_sha256": _sha256_json(list(EXPECTED_TASK_IDS)),
+        },
+        "provider_route_repair_ref": {
+            "receipt_artifact_identity": HISTORICAL_R4_ARTIFACT_IDENTITY,
+            "receipt_path": str(HISTORICAL_R4_RECEIPT_PATH.relative_to(REPO_ROOT)),
+            "receipt_content_id": HISTORICAL_R4_RECEIPT_CONTENT_ID,
+            "json_pointer": "/evidence/provider_route_repair",
+            "final_commit": FINAL_ACCELERATOR_COMMIT,
+            "final_tree": FINAL_ACCELERATOR_TREE,
+        },
+        "account_capacity_probe": _expected_account_capacity_probe(),
         "frozen_history": {
             "r2_receipt_byte_sha256": HISTORICAL_R2_RECEIPT_BYTE_SHA256,
             "r2_incident_file_sha256": R2_INCIDENT_FILE_SHA256,
             "r3_receipt_byte_sha256": HISTORICAL_R3_RECEIPT_BYTE_SHA256,
             "r3_incident_file_sha256": R3_INCIDENT_FILE_SHA256,
+            "r4_receipt_byte_sha256": HISTORICAL_R4_RECEIPT_BYTE_SHA256,
+            "r4_receipt_content_id": HISTORICAL_R4_RECEIPT_CONTENT_ID,
         },
     }
     for field, expected in expected_evidence.items():
         if evidence.get(field) != expected:
-            errors.append(f"active PCCE-000 r4 evidence mismatch: {field}")
+            errors.append(f"active PCCE-000 r5 evidence mismatch: {field}")
     if repository_gitlinks.get("accelerate") != FINAL_ACCELERATOR_COMMIT:
-        errors.append("active PCCE-000 r4 accelerator gitlink is not the independently reviewed repair pin")
+        errors.append("active PCCE-000 r5 accelerator gitlink is not the reviewed repair pin")
     if receipt.get("parser_report") != _expected_parser_report(goal_count):
-        errors.append("active PCCE-000 r4 parser_report mismatch")
+        errors.append("active PCCE-000 r5 parser_report mismatch")
 
     expected_restart = {
-        "generation": "r4",
-        "scheduler_state_root": str(REPLACEMENT_STATE_ROOT / "scheduler-r4"),
-        "worktree_root": str(REPLACEMENT_STATE_ROOT / "worktrees-r4"),
-        "log_root": str(REPLACEMENT_STATE_ROOT / "logs-r4"),
-        "fresh_claims_leases_fences_and_receipts": True,
+        "generation": "r5",
+        "scheduler_state_root": str(REPLACEMENT_STATE_ROOT / "scheduler-r5"),
+        "worktree_root": str(REPLACEMENT_STATE_ROOT / "worktrees-r5"),
+        "log_root": str(REPLACEMENT_STATE_ROOT / "logs-r5"),
+        "external_launch_receipt_path": str(
+            REPLACEMENT_STATE_ROOT / "scheduler-r5" / "control-launch-receipt.json"
+        ),
+        "fresh_claims_leases_fences_review_authority_and_receipts": True,
         "resume_scheduler_r2": False,
         "resume_scheduler_r3": False,
+        "resume_scheduler_r4": False,
         "reuse_scheduler_r2_state": False,
         "reuse_scheduler_r3_state": False,
+        "reuse_scheduler_r4_state": False,
         "reuse_scheduler_r2_claims_leases_fences_or_receipts": False,
         "reuse_scheduler_r3_claims_leases_fences_or_receipts": False,
+        "reuse_scheduler_r4_claims_leases_fences_or_receipts": False,
         "preserve_scheduler_r2_forensics_read_only": True,
         "preserve_scheduler_r3_forensics_read_only": True,
+        "preserve_scheduler_r4_forensics_read_only": True,
     }
     if receipt.get("restart_policy") != expected_restart:
-        errors.append("active PCCE-000 r4 restart policy mismatch")
+        errors.append("active PCCE-000 r5 restart policy mismatch")
     expected_launch_gate = {
         "id": "fresh_exact_grok_account_capacity_gate",
         "required": True,
-        "status": "blocked_external_prerequisite",
-        "evidence_source": "fresh exact-argv live Grok structured probe",
-        "last_observed_provider_result": "http_402_balance_exhausted",
+        "status": "passed",
+        "evidence_source": (
+            "fresh production-adapter structured probe (non-authoritative preparation evidence)"
+        ),
         "capacity_semantics": "operator-admission-budget-not-provider-reported-quota",
         "capacity_snapshot_satisfies_gate": False,
+        "probe_evidence_ref": "evidence.account_capacity_probe",
+        "external_launch_receipt_path": str(
+            REPLACEMENT_STATE_ROOT / "scheduler-r5" / "control-launch-receipt.json"
+        ),
         "external_launch_receipt_created": False,
-        "external_launch_receipt_creation_permitted": False,
+        "external_launch_receipt_creation_permitted": True,
         "live_launch_permitted": False,
+        "control_probe_admission_authority": False,
+        "external_launch_receipt_requires_second_fresh_exact_probe": True,
+        "post_commit_probe_required_fields": [
+            "started_at",
+            "completed_at",
+            "argv_sha256",
+            "executable_identity",
+            "live_not_replayed_or_simulated",
+            "ttl_seconds",
+            "expires_at",
+        ],
+        "post_commit_probe_policy": _expected_post_commit_probe_policy(),
         "product_task_completion_authority": False,
-        "on_pass_must_bind": [
-            "final_control_commit",
-            "final_control_tree",
+        "post_commit_receipt_must_bind": [
+            "final_r5_control_commit",
+            "final_r5_control_tree",
             "recursive_repository_gitlinks",
             "nested_repository_heads",
             "clean_worktree_evidence",
-            "active_r4_receipt_content_id",
+            "active_r5_receipt_content_id",
             "board_projection_id",
             "dependency_graph_id",
             "bundle_index_id",
+            "operator_identity",
             "provider_policy",
-            "fresh_exact_grok_account_capacity_evidence",
-            "scheduler_r4_paths",
+            "control_preparation_probe_identity",
+            "post_commit_fresh_exact_grok_probe",
+            "fresh_operator_admission_capacity_snapshot_identity",
+            "operator_admission_snapshot_not_provider_account_evidence",
+            "dry_run_command_argv_sha256",
+            "dry_run_result_identity",
+            "scheduler_launch_argv_contract_version",
+            "exact_scheduler_launch_argv_sha256",
+            "fresh_review_authority",
+            "scheduler_r5_paths",
+            "single_lane_admission",
         ],
+        "scheduler_process_identity_must_match_prebound_launch_argv": True,
     }
     if receipt.get("external_launch_gate") != expected_launch_gate:
-        errors.append("active PCCE-000 r4 external launch gate mismatch")
+        errors.append("active PCCE-000 r5 external launch gate mismatch")
+    expected_decision = {
+        "control_revision_commit_authorized": True,
+        "accelerator_candidate_audit": "final_pass",
+        "account_capacity_gate": "passed",
+        "external_launch_receipt_creation_authorized": True,
+        "external_launch_receipt_created": False,
+        "live_launch_authorized": False,
+        "launch_blocker": "external_launch_receipt",
+        "qualification": "conditional_go_control_revision_only",
+    }
+    if receipt.get("control_decision") != expected_decision:
+        errors.append("active PCCE-000 r5 control decision mismatch")
 
 
 def _verify_control_revision_config(config: dict[str, Any], errors: list[str]) -> None:
     expected = {
-        "active_revision": "r4",
-        "active_receipt_path": str(ACTIVE_R4_RECEIPT_PATH.relative_to(REPO_ROOT)),
+        "active_revision": "r5",
+        "active_receipt_path": str(ACTIVE_R5_RECEIPT_PATH.relative_to(REPO_ROOT)),
         "historical_receipt_paths": [
             str(HISTORICAL_R2_RECEIPT_PATH.relative_to(REPO_ROOT)),
             str(HISTORICAL_R3_RECEIPT_PATH.relative_to(REPO_ROOT)),
+            str(HISTORICAL_R4_RECEIPT_PATH.relative_to(REPO_ROOT)),
         ],
         "preserved_incident_paths": [
             str(R2_INCIDENT_PATH.relative_to(REPO_ROOT)),
@@ -1136,11 +1326,11 @@ def _verify_control_revision_config(config: dict[str, Any], errors: list[str]) -
         ],
         "historical_receipt_rewrite_allowed": False,
         "incident_rewrite_allowed": False,
-        "status": "blocked_external_prerequisite",
-        "blocking_prerequisite": "fresh_exact_grok_account_capacity_gate",
-        "admission_head_binding": "external-launch-receipt-after-account-capacity-gate",
+        "status": "pending_external_launch_receipt",
+        "blocking_prerequisite": "external_launch_receipt",
+        "admission_head_binding": "external-launch-receipt-after-r5-control-commit",
         "external_launch_receipt_required": True,
-        "external_launch_receipt_creation_permitted": False,
+        "external_launch_receipt_creation_permitted": True,
         "external_launch_receipt_must_bind_final_control_head": True,
     }
     if config.get("control_revision") != expected:
@@ -1152,13 +1342,17 @@ def _verify_control_revision_config(config: dict[str, Any], errors: list[str]) -
         errors.append("accelerator initial inventory identity must remain unchanged")
     recovery = config.get("recovery") or {}
     expected_recovery = {
-        "replacement_generation": "r4",
-        "replacement_scheduler_state_root": str(REPLACEMENT_STATE_ROOT / "scheduler-r4"),
-        "replacement_worktree_root": str(REPLACEMENT_STATE_ROOT / "worktrees-r4"),
-        "replacement_log_root": str(REPLACEMENT_STATE_ROOT / "logs-r4"),
-        "launch_status": "blocked_external_prerequisite",
+        "replacement_generation": "r5",
+        "replacement_scheduler_state_root": str(REPLACEMENT_STATE_ROOT / "scheduler-r5"),
+        "replacement_worktree_root": str(REPLACEMENT_STATE_ROOT / "worktrees-r5"),
+        "replacement_log_root": str(REPLACEMENT_STATE_ROOT / "logs-r5"),
+        "external_launch_receipt_path": str(
+            REPLACEMENT_STATE_ROOT / "scheduler-r5" / "control-launch-receipt.json"
+        ),
+        "launch_status": "pending_external_launch_receipt",
         "launch_permitted": False,
-        "required_prelaunch_gate": "fresh_exact_grok_account_capacity_gate",
+        "provider_capacity_gate_status": "passed",
+        "required_prelaunch_gate": "external_launch_receipt",
         "reuse_scheduler_r2_state": False,
         "reuse_scheduler_r2_claims_leases_fences_or_receipts": False,
         "preserve_scheduler_r2_forensics_read_only": True,
@@ -1167,20 +1361,92 @@ def _verify_control_revision_config(config: dict[str, Any], errors: list[str]) -
         "reuse_scheduler_r3_logs": False,
         "reuse_scheduler_r3_claims_leases_fences_or_receipts": False,
         "preserve_scheduler_r3_forensics_read_only": True,
+        "reuse_scheduler_r4_state": False,
+        "reuse_scheduler_r4_worktrees": False,
+        "reuse_scheduler_r4_logs": False,
+        "reuse_scheduler_r4_claims_leases_fences_or_receipts": False,
+        "preserve_scheduler_r4_forensics_read_only": True,
     }
     for field, expected_value in expected_recovery.items():
         if recovery.get(field) != expected_value:
-            errors.append(f"r4 recovery policy mismatch: {field}")
+            errors.append(f"r5 recovery policy mismatch: {field}")
     bundle = config.get("bundle_scheduler") or {}
+    launch_gate = bundle.get("launch_gate") or {}
+    expected_launch_gate = {
+        "id": "fresh_exact_grok_account_capacity_gate",
+        "status": "passed",
+        "required": True,
+        "evidence_source": (
+            "fresh production-adapter structured probe (non-authoritative preparation evidence)"
+        ),
+        "last_observed_provider_result": "usable_structured_success",
+        "capacity_snapshot_satisfies_gate": False,
+        "probe_completed_no_later_than": "2026-08-14T19:11:43Z",
+        "external_launch_receipt_creation_permitted": True,
+        "external_launch_receipt_created": False,
+        "live_launch_permitted": False,
+        "control_probe_admission_authority": False,
+        "external_launch_receipt_requires_second_fresh_exact_probe": True,
+        "post_commit_probe_required_fields": [
+            "started_at",
+            "completed_at",
+            "argv_sha256",
+            "executable_identity",
+            "live_not_replayed_or_simulated",
+            "ttl_seconds",
+            "expires_at",
+        ],
+        "post_commit_probe_policy": _expected_post_commit_probe_policy(),
+        "post_commit_receipt_must_bind": [
+            "final_r5_control_commit",
+            "final_r5_control_tree",
+            "recursive_repository_gitlinks",
+            "nested_repository_heads",
+            "clean_worktree_evidence",
+            "active_r5_receipt_content_id",
+            "board_projection_id",
+            "dependency_graph_id",
+            "bundle_index_id",
+            "operator_identity",
+            "provider_policy",
+            "control_preparation_probe_identity",
+            "post_commit_fresh_exact_grok_probe",
+            "fresh_operator_admission_capacity_snapshot_identity",
+            "operator_admission_snapshot_not_provider_account_evidence",
+            "dry_run_command_argv_sha256",
+            "dry_run_result_identity",
+            "scheduler_launch_argv_contract_version",
+            "exact_scheduler_launch_argv_sha256",
+            "fresh_review_authority",
+            "scheduler_r5_paths",
+            "single_lane_admission",
+        ],
+        "scheduler_process_identity_must_match_prebound_launch_argv": True,
+    }
     if (
         bundle.get("provider_capacity_semantics")
         != "operator-admission-budget-not-provider-reported-quota"
         or bundle.get("provider_capacity_snapshot_is_account_capacity_evidence") is not False
-        or (bundle.get("launch_gate") or {}).get("status") != "blocked_external_prerequisite"
-        or (bundle.get("launch_gate") or {}).get("external_launch_receipt_creation_permitted")
-        is not False
+        or launch_gate != expected_launch_gate
     ):
-        errors.append("r4 provider-capacity launch gate mismatch")
+        errors.append("r5 provider-capacity launch gate mismatch")
+    lanes = config.get("lanes") or []
+    if (
+        config.get("max_lanes") != 1
+        or len(lanes) != 1
+        or lanes[0].get("index") != 0
+        or lanes[0].get("name") != "pcce-lane-0"
+        or lanes[0].get("strict_shard_remainder") != 0
+        or lanes[0].get("initial_focus") != "serialized-four-repository-inventory"
+        or sorted(lanes[0].get("initial_task_ids") or [])
+        != ["PCCE-001", "PCCE-002", "PCCE-003", "PCCE-004"]
+        or (config.get("provider") or {}).get("max_concurrency") != 1
+        or bundle.get("maximum_lane_count") != 1
+        or bundle.get("max_cpu_proof_concurrency") != 1
+        or bundle.get("max_model_concurrency") != 1
+        or bundle.get("max_artifact_concurrency") != 1
+    ):
+        errors.append("r5 single-lane admission policy mismatch")
 
 
 def validate(*, output_dir: Path, write: bool) -> dict[str, Any]:
@@ -1342,7 +1608,8 @@ def validate(*, output_dir: Path, write: bool) -> dict[str, Any]:
     _verify_r2_incident(errors=errors)
     _verify_historical_r3_receipt(goal_count=len(goals), errors=errors)
     _verify_r3_incident(errors=errors)
-    _verify_active_r4_receipt(
+    _verify_historical_r4_receipt(goal_count=len(goals), errors=errors)
+    _verify_active_r5_receipt(
         config=config,
         projection=projection,
         graph=graph,
