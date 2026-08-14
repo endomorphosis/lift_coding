@@ -883,7 +883,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-071 Add formal, form, modal, policy, and security fixtures
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
