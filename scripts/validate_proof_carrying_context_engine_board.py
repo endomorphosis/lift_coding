@@ -490,9 +490,12 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check-all", action="store_true", help="Validate the sealed full board")
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
-    parser.add_argument("--no-write", action="store_true", help="Validate without updating JSON projections")
+    parser.add_argument("--write", action="store_true", help="Update derived JSON/query projections after validation")
+    parser.add_argument("--no-write", action="store_true", help="Deprecated explicit read-only validation flag")
     args = parser.parse_args()
-    result = validate(output_dir=args.output_dir.resolve(), write=not args.no_write)
+    if args.write and args.no_write:
+        parser.error("--write and --no-write are mutually exclusive")
+    result = validate(output_dir=args.output_dir.resolve(), write=args.write)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["valid"] else 1
 
