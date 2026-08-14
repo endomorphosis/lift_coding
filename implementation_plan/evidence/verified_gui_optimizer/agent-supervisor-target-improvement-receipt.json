@@ -1,0 +1,28 @@
+{
+  "accessibility_receipt_ids": [
+    "receipt:a11y:vgo-080-target"
+  ],
+  "analysis_classification": "exact",
+  "application_id": "app:agent-supervisor",
+  "constraint_receipt_ids": [
+    "receipt:constraint:vgo-080-target"
+  ],
+  "context_pack_id": "pack:agent-supervisor-focus-error",
+  "decision": "accept",
+  "interaction_receipt_ids": [
+    "receipt:interaction:vgo-080-target"
+  ],
+  "interface": "GuiImprovementReceipt@1",
+  "invalidation_plan_id": "invalidate:agent-supervisor-focus-error",
+  "patch_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+  "proposal_id": "proposal:vgo-080-focus-error",
+  "receipt_id": "receipt:improvement:vgo-080-focus-error",
+  "rejection_reasons": [],
+  "repository_revision": "4045acd8f2df5ba90377fb48ec33382fe72e346a",
+  "schema_version": "gui-improvement-receipt/v1",
+  "screen_id": "screen:agent-supervisor",
+  "verification_status": "integrity_valid",
+  "visual_receipt_ids": [
+    "receipt:visual:vgo-080-target"
+  ]
+}
