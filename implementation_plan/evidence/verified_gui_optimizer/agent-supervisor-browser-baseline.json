@@ -1,0 +1,2543 @@
+{
+  "analysis_classification": "conservative",
+  "application_id": "app:agent-supervisor",
+  "artifact_manifest_cid": "bafkreibswlqxejb5wlnnubaqmxd7b2pk5ivwnetoxuovt2wgeq3oka4eyq",
+  "artifact_manifest_digest": "sha256:ee909b29ca9ca7e3a5dbb66eddcccd5c0034c48d0364bb27531a64bf9055b7fb",
+  "baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+  "browser": "chromium",
+  "browser_version": "151.0.7922.108",
+  "can_issue_authoritative_allow": false,
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "channel": "chromium",
+  "claim_boundary": {
+    "pixel_change_is_neutral_observation": true,
+    "screen_reader_reviewed": false,
+    "ui_visibility_authorizes": false,
+    "verified_authorization": false,
+    "verified_complete_security": false,
+    "verified_live_accessibility": true,
+    "verified_live_interaction": true,
+    "verified_live_visual": true,
+    "verified_wcag": false
+  },
+  "deterministic_rerun": {
+    "accessibility_identities_match": true,
+    "baseline_identities_match": true,
+    "first_accessibility_identity": "sha256:72ed5d901797271337d8bda1661af44bef43c8c1f1383c0f20c352050c70d0ca",
+    "first_baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+    "first_interaction_identity": "sha256:61ae4d28ce17059dfc6f3758c998f105d5472cdb7cceef911c81bbcd750d030c",
+    "interaction_identities_match": true,
+    "second_accessibility_identity": "sha256:72ed5d901797271337d8bda1661af44bef43c8c1f1383c0f20c352050c70d0ca",
+    "second_baseline_identity": "sha256:7172d7ef1587e57295670cd355a4b6feb577f0dc54919045ebdebf02d4c75553",
+    "second_interaction_identity": "sha256:61ae4d28ce17059dfc6f3758c998f105d5472cdb7cceef911c81bbcd750d030c"
+  },
+  "extractor_interface": "AgentSupervisorBrowserBaseline@1",
+  "extractor_schema_version": "agent-supervisor-browser-baseline/v1",
+  "extractor_version": "1.0.0",
+  "fixture_host_interface": "AgentSupervisorFixtureHost@1",
+  "fixture_services_interface": "AgentSupervisorFixtureServices@1",
+  "headless_shell_used": false,
+  "interaction_receipts": [
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:0cf051a1a15a0e34",
+      "receipt_identity": "sha256:61ae4d28ce17059dfc6f3758c998f105d5472cdb7cceef911c81bbcd750d030c",
+      "scenario_id": "scenario:initial-load",
+      "trace_cid": "bafkreidhdiahrwvvzlx3mdkd3xx2xlmu2t24kyjknsvypoqn6lrn5js5w4"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:6e80c1366675c17f",
+      "receipt_identity": "sha256:00195e7d75b253c0db0edc0da31f987cccf12120f536c6c211cf9c45653cd829",
+      "scenario_id": "scenario:loading",
+      "trace_cid": "bafkreifa7a3rqtgw3i57krvk6scycyrch6dfvp5cyelshgmnpqpoadzq5u"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:ac69737eb69bb0d0",
+      "receipt_identity": "sha256:273bf37339612a9d72dc4c38e4e33d90b86905147cfa6ffe38180ea5829fc786",
+      "scenario_id": "scenario:success",
+      "trace_cid": "bafkreib4ezjg2qzquh2vxu23m43apkl4dr5qbcx4v7xel5r6e4t22nk64i"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:eb0ef1936203f2ac",
+      "receipt_identity": "sha256:598f720e7d908f71f202b66d043b7830e969dd34e3fe195769fb401034040507",
+      "scenario_id": "scenario:empty",
+      "trace_cid": "bafkreigdema4brcoc7xynhi2jbig6q7oiapzc7wp25khfyxg5odx7f4vl4"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:188e8b8fb235d92d",
+      "receipt_identity": "sha256:795bb4383c59f53c67e1d2b893e4dc56b1ef58f7029af91de045eda8a61042c9",
+      "scenario_id": "scenario:recoverable-failure",
+      "trace_cid": "bafkreiegd7z3lem6zkyftowitgp7yaucl4bnsfni23h45ies5h3uzrkmjy"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:2be6cd1838d0f30c",
+      "receipt_identity": "sha256:3b222f6e79c5a3913417a742094980f660d0edfa17bd67a7534f2029de6b8550",
+      "scenario_id": "scenario:unrecoverable-failure",
+      "trace_cid": "bafkreialzayhwhkvfl6djxd4mqeirstcvabjfql2oj4c4jm5o4xpuvwlxm"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:ecbb359789b6a3cf",
+      "receipt_identity": "sha256:8d043c870957e2f2f8207425d98e63dfd825fb1263ee535a3ce3e97849de9dc6",
+      "scenario_id": "scenario:invalid-submission",
+      "trace_cid": "bafkreicer7hnp653mxia4w5ofh4j7hvrgoe5t4lvzcbcruorilo7atkdfq"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:d8d9cade3b1cc624",
+      "receipt_identity": "sha256:c34a9b012a3d5ede320c02fd8f8f363cc30c76c9f038a7c3439506cf99ee71b8",
+      "scenario_id": "scenario:valid-submission",
+      "trace_cid": "bafkreievlnljyojpahwxn6zotkyvpy37vldctx4sfa3mkkdacypbq2zq2e"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree",
+        "control:queue"
+      ],
+      "receipt_id": "receipt:interaction:3e63d25805867a89",
+      "receipt_identity": "sha256:4a3636a5720bd5ddda3513009b6c07c6cf69ae01491a5c457a5060494688458b",
+      "scenario_id": "scenario:keyboard-only",
+      "trace_cid": "bafkreiapnvsky5ebrvll5hnui5luh7fqmvqmjzedvbphfzeccsc6pky5ny"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:3868b9309baf86ea",
+      "receipt_identity": "sha256:115c8491045bb10212bde484a19316d0bc427dac96195bd6dc031f551b12653b",
+      "scenario_id": "scenario:viewport-mobile",
+      "trace_cid": "bafkreie2z2mutqilhxy3afepntiom636jvm73sbc66rbqrpastl4v7bbeu"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:92f592f6485c37a2",
+      "receipt_identity": "sha256:f9cbd1a9b857598f33f9857fa690e7eff9dc6fc66d92ed6cd5733c7b3f4dce20",
+      "scenario_id": "scenario:viewport-desktop",
+      "trace_cid": "bafkreicti4ng5kw73eyyr4ir4lmvakv4bedajfh4g5zsba6r2iebzjq6xm"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:96d3bc257f91901b",
+      "receipt_identity": "sha256:4803bb594474d69317dbd19cd2735166bd52ef6fabfbcd54ec1a62846db5a20e",
+      "scenario_id": "scenario:viewport-wide",
+      "trace_cid": "bafkreidh24dcmlqfx3ujvzgiuxcwxfqxfg77bh5g34a2tsx5dj7aglzydy"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:edcec3beb1faf1ad",
+      "receipt_identity": "sha256:7cc4fac570aa5db8592f6cb6373a7ea32fabe0e0f4787669a8b40199ff02de8c",
+      "scenario_id": "scenario:text-scale-200",
+      "trace_cid": "bafkreihevpiawu4l7jhjjs2vcksmxwug6zfm4rcbpwblmlytempjd5aphe"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:9403ab948d2b099c",
+      "receipt_identity": "sha256:42fc089ac3f619a6ed6886510e96e57c331a566c73790f737ba3fd8e5475da4b",
+      "scenario_id": "scenario:reduced-motion",
+      "trace_cid": "bafkreifgydxmzhd56ab6outhnpo56lg72pwembezf463crskcih7w42hrm"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:5c114b757ddc2426",
+      "receipt_identity": "sha256:4824648c6f42cedb084fcd3bd1f17bda32b98d753c82b975e3125ea02eb324c9",
+      "scenario_id": "scenario:dark-mode",
+      "trace_cid": "bafkreih2siek7cdv5cqs236fqc554dq34nauqs6ol5wz6kilqydzkynqde"
+    },
+    {
+      "focus_sequence": [
+        "control:goals-tree"
+      ],
+      "receipt_id": "receipt:interaction:672fa0b0b47b9440",
+      "receipt_identity": "sha256:b7ea74538f3ec0e83e9feede5efcf9716719cf7372638c7d0534159cdd134cd6",
+      "scenario_id": "scenario:service-unavailable",
+      "trace_cid": "bafkreib53vnoswqjg2uzaeiavhzs3t2og6iqrztnrj3463v7pqepf7cugy"
+    },
+    {
+      "focus_sequence": [],
+      "receipt_id": "receipt:interaction:2bbb02efc9529609",
+      "receipt_identity": "sha256:eb612880b66d3e51000ab8bea61ed2a61f657540de60e6a19f4d72b7ef8f5323",
+      "scenario_id": "scenario:confirmation-grant",
+      "trace_cid": "bafkreie25zdgfaf24nvc5r6nh26gmhbowjznea3c7nhrtvz5pu464kmglu"
+    },
+    {
+      "focus_sequence": [],
+      "receipt_id": "receipt:interaction:1c24531d41372859",
+      "receipt_identity": "sha256:a59360766e5e84e60fd388819feb573a1931d2ef9302cfb2d56417d961623f35",
+      "scenario_id": "scenario:confirmation-deny",
+      "trace_cid": "bafkreidcwcrzgn6zkoaguoluknmtmdzkucmxuztuc6573vg7qa5527o3sy"
+    }
+  ],
+  "interface": "AgentSupervisorBrowserBaseline@1",
+  "manual_check_ids": [
+    "manual:screen-reader-review",
+    "manual:alt-text-quality",
+    "manual:heading-label-quality",
+    "manual:use-of-color",
+    "manual:consistent-navigation",
+    "manual:error-suggestion"
+  ],
+  "metric_snapshot": {
+    "interface": "UiMetricSnapshot@1",
+    "schema_version": "ui-metric-snapshot/v1",
+    "metrics": {
+      "accessibility_violation_count": 117,
+      "accessibility_critical_count": 0,
+      "accessibility_serious_count": 0,
+      "unlabeled_control_count": 41,
+      "keyboard_unreachable_count": 0,
+      "focus_order_failure_count": 0,
+      "focus_trap_failure_count": 0,
+      "duplicate_id_count": 0,
+      "contrast_failure_count": 0,
+      "horizontal_overflow_count": 13,
+      "clipping_count": 0,
+      "viewport_overflow_count": 34,
+      "missing_loading_error_behavior_count": 0,
+      "interaction_step_count": 17,
+      "keyboard_step_count": 2,
+      "required_action_unreachable_count": 0,
+      "confirmation_failure_count": 1,
+      "action_binding_invalid_count": 0,
+      "policy_violation_count": 0,
+      "security_violation_count": 0,
+      "invariant_violation_count": 0,
+      "unsupported_check_count": 23,
+      "test_failure_count": 0,
+      "pixel_diff_percent": 0,
+      "structural_diff_percent": 0,
+      "unexpected_layout_shift_count": 0,
+      "screenshot_width": 1280,
+      "screenshot_height": 824,
+      "missing_control_count": 0,
+      "extra_control_count": 0,
+      "unresolved_observation_count": 124,
+      "automated_pass_count": 2436
+    }
+  },
+  "problems": [
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:loading",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:success",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:empty",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:recoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:unrecoverable-failure",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "missing-field-error-association",
+      "scenario_id": "scenario:invalid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "Steering validation feedback is rendered without aria-invalid/aria-describedby/aria-errormessage."
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:valid-submission",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:keyboard-only",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "horizontal-overflow",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "5 horizontal overflow regions"
+    },
+    {
+      "code": "viewport-overflow",
+      "scenario_id": "scenario:viewport-mobile",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "32 viewport overflow regions"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:viewport-desktop",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:viewport-wide",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "horizontal-overflow",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "8 horizontal overflow regions"
+    },
+    {
+      "code": "viewport-overflow",
+      "scenario_id": "scenario:text-scale-200",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "2 viewport overflow regions"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:reduced-motion",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:dark-mode",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:service-unavailable",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "focus-trap",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "open modal does not contain the tab order"
+    },
+    {
+      "code": "static-confirmation-is-not-argument-digest-bound",
+      "scenario_id": "scenario:confirmation-grant",
+      "evidence_level": "structural",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "Fixture confirmation is not an authoritative allow and is not bound to a current argument digest."
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "accessible-name",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive div control has no accessible name"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-activation",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "custom treeitem control is not keyboard activatable"
+    },
+    {
+      "code": "keyboard-reachability",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "interactive control is not in the tab order"
+    },
+    {
+      "code": "keyboard-order",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "tab order does not match the declared sequence"
+    },
+    {
+      "code": "focus-trap",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "automated",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "open modal does not contain the tab order"
+    },
+    {
+      "code": "static-confirmation-is-not-argument-digest-bound",
+      "scenario_id": "scenario:confirmation-deny",
+      "evidence_level": "structural",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "Fixture confirmation is not an authoritative allow and is not bound to a current argument digest."
+    },
+    {
+      "code": "existing-accessibility-coverage-is-not-live-dom-audit",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "structural",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "Automated success is not WCAG certification; screen-reader review was not performed."
+    },
+    {
+      "code": "visual-baseline-missing-comparison-target",
+      "scenario_id": "scenario:initial-load",
+      "evidence_level": "structural",
+      "live_confirmed": true,
+      "hidden": false,
+      "message": "This capture establishes the visual baseline. Pixel difference is an observation, not an automatic regression."
+    }
+  ],
+  "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+  "repository_revision": "a56822e74a88fc15b98bdb957ca0a32bb8c4409d",
+  "schema_version": "agent-supervisor-browser-baseline/v1",
+  "screen_id": "screen:agent-supervisor",
+  "screenshot_observations": [
+    {
+      "cid": "bafkreidty4qyfumixx3qpozvs2mp373ddfyvbjddnnhs5gmu67wlishu7i",
+      "digest": "sha256:73c72182d188bdf707bb359698fdff63197150a4636b4f2e9994f7ecb448f4fa",
+      "height": 824,
+      "scenario_id": "scenario:initial-load",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreigqgnyx2fflzsr2pmtcepgm74gnwkof3pkbv45yttm7wcxa2jawnu",
+      "digest": "sha256:d033717d14abcca3a7b26223cccff0cdb29c5dbd41af3b89cd9fb0ae0d24166d",
+      "height": 800,
+      "scenario_id": "scenario:loading",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreibcccgbfbuia7wz6shzisrdypjkyvroeoet6bszk6sqwevrrno2em",
+      "digest": "sha256:22108c12868807ed9f48f944a23c3d2ac562e23893f065957a50b12b18b5da23",
+      "height": 800,
+      "scenario_id": "scenario:success",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreigkjc3c3blo5efn22ykmdml7t7pdm7pjj44speolfndzu4yeu72fe",
+      "digest": "sha256:ca48b62d856ee90add6b0a60d8bfcfef1b3ef4a79c93c8e595a3cd398253fa29",
+      "height": 800,
+      "scenario_id": "scenario:empty",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreievlqwi6jqchkmzf5qkjsngsotjcepsx3yznvpav6aevjq35l24zi",
+      "digest": "sha256:955c2c8f26023a9992f60a4c9a693a69111f2bef196d5e0af804aa61beaf5cca",
+      "height": 901,
+      "scenario_id": "scenario:recoverable-failure",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreiccs5ch27ibakasqfifrxdmrdcgx65q5istoczb44gsd254agfeee",
+      "digest": "sha256:4297447d7d0102812815058dc6c88c46bfbb0ea25370b21e70d21ebbc018a421",
+      "height": 800,
+      "scenario_id": "scenario:unrecoverable-failure",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreibwhsacsxwjikde6olzo3sk5tkauv6p6hp2xmlam4qx2j7dhbcrna",
+      "digest": "sha256:363c80295ec942864f397976e4aecd40a57cff1dfabb16067217d27e33845168",
+      "height": 835,
+      "scenario_id": "scenario:invalid-submission",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreiepr4y7nr5dfm35awftj2jrsfy42shbrlzsnqlbetgppozrjaeery",
+      "digest": "sha256:8f8f31f6c7a32b37d058b34e9319171cd48e18af326c16124ccf7bb31480848e",
+      "height": 832,
+      "scenario_id": "scenario:valid-submission",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreig4cn6bbfhpihd3nuczcasxuh4rr6l2c3d2kflyzj2sv3cqoiocya",
+      "digest": "sha256:dc137c1094ef41c7b6d05910257a1f918f97a16c7a51578ca752aec50721c2c0",
+      "height": 824,
+      "scenario_id": "scenario:keyboard-only",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreid6xtspjaokb3mgtq5lvx2ericbbc7q5qa3hvuctylbzvhmrk3fpa",
+      "digest": "sha256:7ebce4f481ca0ed869c3abadf448a04108bf0ec01b3d6829e161cd4ec8ab6578",
+      "height": 1183,
+      "scenario_id": "scenario:viewport-mobile",
+      "width": 390
+    },
+    {
+      "cid": "bafkreidty4qyfumixx3qpozvs2mp373ddfyvbjddnnhs5gmu67wlishu7i",
+      "digest": "sha256:73c72182d188bdf707bb359698fdff63197150a4636b4f2e9994f7ecb448f4fa",
+      "height": 824,
+      "scenario_id": "scenario:viewport-desktop",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreibd5h4cs6jfjmu7ylrslgzwaxjhfqwa6xpd4i2huoif2zcdrzeebu",
+      "digest": "sha256:23e9f82979254b29fc2e3259b3605d272c2c0f5de3e2347a3905d64438e4840d",
+      "height": 1000,
+      "scenario_id": "scenario:viewport-wide",
+      "width": 1600
+    },
+    {
+      "cid": "bafkreidokzwyk7tgmlw5jhdgqbfk6gv5b5wchh7teopo4ln3fxah3edfaa",
+      "digest": "sha256:6e566d857e6662edd49c66804aaf1abd0f6c239ff3239eee2dbb2dc07d906500",
+      "height": 955,
+      "scenario_id": "scenario:text-scale-200",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreick4quzpzlipx2kj6zur4a5gr6fhaeaeclp7wjfhaosc7c5ehplty",
+      "digest": "sha256:4ae42997e5687df4a4fb348f01d347c5380802096ffd925381d217c5d21deb9e",
+      "height": 800,
+      "scenario_id": "scenario:reduced-motion",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreihhsiv6xl4ylfkx724kd3xd5q3k2coc5hpts7keaitcdhetczibc4",
+      "digest": "sha256:e7922bebaf9859557feb8a1eee3ec36ad09c2e9df397d440226219c931650117",
+      "height": 800,
+      "scenario_id": "scenario:dark-mode",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreiexpybx6x5n5xppxypyttrpqpeby74zwggtorpq5nryxbp4sdtwd4",
+      "digest": "sha256:977e037f5fadeddefbe1f89ce2f83c81c7f99b18d3745f0eb638b85fc90e761f",
+      "height": 800,
+      "scenario_id": "scenario:service-unavailable",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreieywhdmgrccduqeomuurhsda2tudcq6mrvvhoho556t4zdvpiynnm",
+      "digest": "sha256:98b1c6c344421d2047329489e4306a7418a1e646b53b8eeef7d3e64757a30d6b",
+      "height": 832,
+      "scenario_id": "scenario:confirmation-grant",
+      "width": 1280
+    },
+    {
+      "cid": "bafkreiagiut5wdi2t6lxjlwguz7yyuu5eq7s6diziqpfziaif4lyw3idcu",
+      "digest": "sha256:064527db0d1a9f9774aec6a67f8c529d243f2f0d19441e5ca0082f178b6d0315",
+      "height": 835,
+      "scenario_id": "scenario:confirmation-deny",
+      "width": 1280
+    }
+  ],
+  "task_id": "VGO-068",
+  "ui_baseline": {
+    "interface": "UiBaseline@1",
+    "schema_version": "ui-baseline/v1",
+    "baseline_id": "baseline:3ecb29fc94102c05",
+    "application_id": "app:agent-supervisor",
+    "screen_id": "screen:agent-supervisor",
+    "repository_revision": "a56822e74a88fc15b98bdb957ca0a32bb8c4409d",
+    "scenario_ids": [
+      "scenario:initial-load",
+      "scenario:loading",
+      "scenario:success",
+      "scenario:empty",
+      "scenario:recoverable-failure",
+      "scenario:unrecoverable-failure",
+      "scenario:invalid-submission",
+      "scenario:valid-submission",
+      "scenario:keyboard-only",
+      "scenario:viewport-mobile",
+      "scenario:viewport-desktop",
+      "scenario:viewport-wide",
+      "scenario:text-scale-200",
+      "scenario:reduced-motion",
+      "scenario:dark-mode",
+      "scenario:service-unavailable",
+      "scenario:confirmation-grant",
+      "scenario:confirmation-deny"
+    ],
+    "metric_digest": "sha256:09b560ed070df943e1114f9f8f24b59af76cbeaa5a8508d35e5f44338d32cfca",
+    "artifact_digests": [
+      "sha256:73c72182d188bdf707bb359698fdff63197150a4636b4f2e9994f7ecb448f4fa",
+      "sha256:cb055aca6773b3f7a0871f0e55296e881550357743fa3fe155a4340934efa284",
+      "sha256:671a0078dab5caefb60d43ddefabad94d4f5c5612a6cab87ba0df2e2dea65db7",
+      "sha256:d033717d14abcca3a7b26223cccff0cdb29c5dbd41af3b89cd9fb0ae0d24166d",
+      "sha256:7dac109c2007d8542bcf17faab00ddc25b82c976e5b795187ce6c31da41934c6",
+      "sha256:a0f837184cd6da3bf546aaf4858162223f865abfa2c11723998d7c1ee00f30ed",
+      "sha256:22108c12868807ed9f48f944a23c3d2ac562e23893f065957a50b12b18b5da23",
+      "sha256:37bcbeaefbd401d3d831b45e34fa553d57a6d47a068ab6edaff26c9fb10917cb",
+      "sha256:3c26526d4330a1f55bd35b673607a97c1c7b008afcafee45f63e2727ad355ee2",
+      "sha256:ca48b62d856ee90add6b0a60d8bfcfef1b3ef4a79c93c8e595a3cd398253fa29",
+      "sha256:48bb9575bf1d871587c27d43307b9b21c16b2fedf17eb4ab128e0800b96b4b0d",
+      "sha256:c32301c0c44e17ef869d1a48506f43ee401f917ecfd75472e2e6eb877f97955f",
+      "sha256:955c2c8f26023a9992f60a4c9a693a69111f2bef196d5e0af804aa61beaf5cca",
+      "sha256:a209f6c5315376e137471e6e5f79dab34a534a2c78e6de4d34109e8e74da81a2",
+      "sha256:861ff3b5919ecab059bac8999ffc02825f02d915a8d6cfcea092e9f74cc54c4e",
+      "sha256:4297447d7d0102812815058dc6c88c46bfbb0ea25370b21e70d21ebbc018a421",
+      "sha256:df31518122de65ee53e7f23a069193f1e2cb4b142439196c53e1a9816410b3c9",
+      "sha256:0bc8307b1d552afc34dc7c640888ca62a80292c17a72782e259d772efa56cbbb",
+      "sha256:363c80295ec942864f397976e4aecd40a57cff1dfabb16067217d27e33845168",
+      "sha256:dcd56e8c8a1d7ee540ea6092355fec150ddfeb45afe223f6094fc11a8f29292a",
+      "sha256:448fced7fbbb65d00e5bae29f89f9eb13389d9f175c88228d1d142ddf04d432c",
+      "sha256:8f8f31f6c7a32b37d058b34e9319171cd48e18af326c16124ccf7bb31480848e",
+      "sha256:5fe6a5f7dbd5b60bc413c695f2d7c676e96d37cc5a215a37f449131583c5a982",
+      "sha256:955b569c392f01ed76fb2e9ab157e37faac629df922836c52860161e186b30d1",
+      "sha256:dc137c1094ef41c7b6d05910257a1f918f97a16c7a51578ca752aec50721c2c0",
+      "sha256:bb1ab81c2f029dea4a33ea473cf28697eae17e466f73fe6b5d5162ae83e354dc",
+      "sha256:0f6d64ac74818d56be9db4475743fcb06560c4e483a85e72e4821485e7ab1d6e",
+      "sha256:7ebce4f481ca0ed869c3abadf448a04108bf0ec01b3d6829e161cd4ec8ab6578",
+      "sha256:4b92095ad990ee8b3da61059a83673f8b969c65cd9071ccb0a61d532ed1607b1",
+      "sha256:9ace9949c10b3df1b0148f6cd0e67b7e4d59fdc822f7a21845e094d7cafc2125",
+      "sha256:51ee2691436e5fdaaee9f612295f47bbf246d937846aa9839a8e2c077c40b987",
+      "sha256:53471a6eaadfd93188f111e2d9502abc09060494fc37732083d1d2081ca61ebb",
+      "sha256:23e9f82979254b29fc2e3259b3605d272c2c0f5de3e2347a3905d64438e4840d",
+      "sha256:8780127b230f9a8d80d5f41024886edc9ad5daf3ee8e487df1004bb80cd54d7a",
+      "sha256:67d706262e05bee89ae4c8a5c56b961729bff09fa6df01a9cafd1a7e032f381e",
+      "sha256:6e566d857e6662edd49c66804aaf1abd0f6c239ff3239eee2dbb2dc07d906500",
+      "sha256:04c294fe471374fdbad9d1c76da097d72cd32a2e0b7f8edac4e15051a34a82e2",
+      "sha256:e4abd00b538bfa4e94cb5512a4cbda86f64ace44417d82b62f13231e91f40f39",
+      "sha256:4ae42997e5687df4a4fb348f01d347c5380802096ffd925381d217c5d21deb9e",
+      "sha256:c23c99258cecb9f6b77a0e909ecc0504d551b4ddbf46601ca6e50becca268bf3",
+      "sha256:a6c0eecc9c7df003e752676bdddf2cdfd3ec4604992f3db1464a120ffb73478b",
+      "sha256:e7922bebaf9859557feb8a1eee3ec36ad09c2e9df397d440226219c931650117",
+      "sha256:7402ac3a63479c086b5915f8cc46bbe2cbd12b5ee4793ad1c09353bb47d05870",
+      "sha256:fa9208af8875e8a12d6fc580bbde0e1be341484bce5f6d9f290b86079561b019",
+      "sha256:977e037f5fadeddefbe1f89ce2f83c81c7f99b18d3745f0eb638b85fc90e761f",
+      "sha256:31d323101010e3494e57637fb6ff0bceb0c8ee5c135b60d09348524ac38eee84",
+      "sha256:3ddd5ae95a0936a9901100a9f32dcf4e379108e66d8a77cf6ebf7c08f2fc5436",
+      "sha256:98b1c6c344421d2047329489e4306a7418a1e646b53b8eeef7d3e64757a30d6b",
+      "sha256:d3bced47604636b4ab23871c41f688228ebc8f70c39b266f4b4a21e6f1977f53",
+      "sha256:9aee466280bae36a2ec7cd3ebc661c2eb272d20362fb4f19d73d7d39ee29865d",
+      "sha256:064527db0d1a9f9774aec6a67f8c529d243f2f0d19441e5ca0082f178b6d0315",
+      "sha256:0d626254b2e0f62f031e57a99bef9255dc4473ef170243466f9ac5ecf6b57b8b",
+      "sha256:62b0a39337d953806a39745359360f2aa0997a667417bbfdd4df803bdd7ddb96"
+    ],
+    "extractor_version": "1.0.0"
+  },
+  "unsupported_criteria": [
+    "WCAG2.2:1.2.1",
+    "WCAG2.2:1.2.2",
+    "WCAG2.2:1.2.3",
+    "WCAG2.2:1.2.4",
+    "WCAG2.2:1.2.5",
+    "WCAG2.2:1.3.3",
+    "WCAG2.2:1.4.1",
+    "WCAG2.2:1.4.2",
+    "WCAG2.2:1.4.10",
+    "WCAG2.2:1.4.12",
+    "WCAG2.2:1.4.13",
+    "WCAG2.2:2.3.1",
+    "WCAG2.2:2.4.1",
+    "WCAG2.2:2.4.4",
+    "WCAG2.2:2.4.5",
+    "WCAG2.2:2.4.6",
+    "WCAG2.2:2.5.3",
+    "WCAG2.2:3.1.2",
+    "WCAG2.2:3.2.3",
+    "WCAG2.2:3.2.4",
+    "WCAG2.2:3.3.3",
+    "WCAG2.2:3.3.4",
+    "WCAG2.2:4.1.3"
+  ],
+  "uses_production_credentials": false,
+  "uses_production_services": false,
+  "verification_status": "structurally_valid",
+  "visual_receipts": [
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:8003b22cafa52723",
+      "scenario_id": "scenario:initial-load",
+      "screenshot_digest": "sha256:ce606400b0801c17836ff2e7d97e530d8708e1f7cf2e116ef33a49ed3bcf29b3",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:35bc10056130ef89",
+      "scenario_id": "scenario:loading",
+      "screenshot_digest": "sha256:788baf8cf7ecab0ebe2f92722b7b8282666252ac5838d9edd4e06224a88c8cce",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:c82917b3a3756906",
+      "scenario_id": "scenario:success",
+      "screenshot_digest": "sha256:1c5d21c4ea18610ae8b7d2620cbad350eb833c594d891e6585cdfc339b6cb2f1",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:5dfd27ac73b791ff",
+      "scenario_id": "scenario:empty",
+      "screenshot_digest": "sha256:a9a8f104d6af5404c5dc364cf64609315f7c679c060f43af0279711b04b72b22",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:d485a55b8cf12cc4",
+      "scenario_id": "scenario:recoverable-failure",
+      "screenshot_digest": "sha256:40161f3b1e658996da07b0d619a0039f8febd188d6de8a174c4db43a6e8a0a0b",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:f87692f564c8376d",
+      "scenario_id": "scenario:unrecoverable-failure",
+      "screenshot_digest": "sha256:f432547561d3b049d6f2fd524b63016a092e1388797aaae938d2c207f2eb1220",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:456bfdd8d3fe03c6",
+      "scenario_id": "scenario:invalid-submission",
+      "screenshot_digest": "sha256:bab18ccefc803fb445826c2488869a2b993f52d5aaad99ca6a710b9e3a48777d",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:2207b7caeab1b518",
+      "scenario_id": "scenario:valid-submission",
+      "screenshot_digest": "sha256:2776e3adfb90a401bb2ac7c2e75b1beb63f89e3a6a40d7dda8efade3654adcf4",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:748c11a2c93c1985",
+      "scenario_id": "scenario:keyboard-only",
+      "screenshot_digest": "sha256:bbc42cec45c9eda4357492f7da61a95e0a121fd4ec20739af56780f344b937cd",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:912992abe8b1f59d",
+      "scenario_id": "scenario:viewport-mobile",
+      "screenshot_digest": "sha256:64dcbb90e148acf42eacaa4a9c07eeb47ca4c948baafd02fab1c9673b63ed886",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:934f72f99766bd05",
+      "scenario_id": "scenario:viewport-desktop",
+      "screenshot_digest": "sha256:ce606400b0801c17836ff2e7d97e530d8708e1f7cf2e116ef33a49ed3bcf29b3",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:aabca7de9c7ad6d0",
+      "scenario_id": "scenario:viewport-wide",
+      "screenshot_digest": "sha256:b023cb278e964faeae5903e58c9d999aefb431340a55abfa7e37d72c9ef0af72",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:f66046c87f21aa81",
+      "scenario_id": "scenario:text-scale-200",
+      "screenshot_digest": "sha256:319266b75c25c49f2a5b06baa7d4058d730a59b52c1caf9b97e8c32ee0dc9a3b",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:fe11dfd4ed8314e7",
+      "scenario_id": "scenario:reduced-motion",
+      "screenshot_digest": "sha256:9d772f7f1d90908b22a3441dd461517cc8668d0ca03ef2f8bff766cc4ac66794",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:d8428f12162a2cfd",
+      "scenario_id": "scenario:dark-mode",
+      "screenshot_digest": "sha256:27687067c347a794c424032ae479bb92ebdbf2d8e90f23b76b1074b439f6f160",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:9f42cfa70520a1e6",
+      "scenario_id": "scenario:service-unavailable",
+      "screenshot_digest": "sha256:4c20e0ce107b0b3caa832736445cc8840bfbde0d8e64848d9c6898e7ffacecdc",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:e58566fe4df5a83c",
+      "scenario_id": "scenario:confirmation-grant",
+      "screenshot_digest": "sha256:5555569b42008a57109b63c20911681264b9a432c26eaa7c414712e05573df27",
+      "structural_diff_percent": 0
+    },
+    {
+      "decision": "baseline_missing",
+      "pixel_diff_percent": 0,
+      "receipt_id": "receipt:visual:24194384e7ccd832",
+      "scenario_id": "scenario:confirmation-deny",
+      "screenshot_digest": "sha256:9ffc2ebbdd354179dcd0563e0e3e4ae51226a35649101a36cb8c0b0522a1badf",
+      "structural_diff_percent": 0
+    }
+  ],
+  "accessibility_receipts": [
+    {
+      "automated_pass_count": 147,
+      "cid": "bafkreiglavnmuz3twp32bby7bzkss3uicvidk52d7i76cvnegqetj35cqq",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:initial-load",
+      "receipt_identity": "sha256:72ed5d901797271337d8bda1661af44bef43c8c1f1383c0f20c352050c70d0ca",
+      "scenario_id": "scenario:initial-load",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 109,
+      "cid": "bafkreid5vqijyiah3bkcxtyx7kvqbxoclobms5xfw6krq7hgymo2igjuyy",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:loading",
+      "receipt_identity": "sha256:bc4285e0e84df8f045f5c79322d5fa39ff05b750631c4a646381fffff353137d",
+      "scenario_id": "scenario:loading",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:keyboard-order:document"
+      ]
+    },
+    {
+      "automated_pass_count": 125,
+      "cid": "bafkreibxxs7k566uahj5qmnuly2puvj5k6tni6qgrk3o3l7snsp3ccixzm",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:success",
+      "receipt_identity": "sha256:9701826c86f6e32ed98dab43298890ac3b41c6318ef679507248235765d63a5d",
+      "scenario_id": "scenario:success",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 108,
+      "cid": "bafkreicixokxlpy5q4kypqt5imyhxgzbyfvs73prp22kweuobaals22lbu",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:empty",
+      "receipt_identity": "sha256:9d10fc9cc36e5ff794fb75124eafa1beffc61a73297b966dfad2a6c842e42313",
+      "scenario_id": "scenario:empty",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:keyboard-order:document"
+      ]
+    },
+    {
+      "automated_pass_count": 144,
+      "cid": "bafkreifcbh3mkmkto3qtory6nzpxtwvtjjjuuldy43pe2naqt2hhjwubui",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:recoverable-failure",
+      "receipt_identity": "sha256:af7937962791e77ddf9251ba9959f387a1574e575a38430df1131188cf5a2fba",
+      "scenario_id": "scenario:recoverable-failure",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:36",
+        "violation:accessible-name:node:div:41",
+        "violation:keyboard-activation:node:div:36",
+        "violation:keyboard-activation:node:div:41",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:36",
+        "violation:keyboard-reachability:node:div:41"
+      ]
+    },
+    {
+      "automated_pass_count": 109,
+      "cid": "bafkreig7gfiyciw6mxxfhz7shidjde7r4lfuwfbehemwyu7bvgawieftze",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:unrecoverable-failure",
+      "receipt_identity": "sha256:3f42b5bfd8387d77d995f6b84b8e605913c5f781446f3e1a2a253644937de320",
+      "scenario_id": "scenario:unrecoverable-failure",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:keyboard-order:document"
+      ]
+    },
+    {
+      "automated_pass_count": 138,
+      "cid": "bafkreig42vxizcq5p3sub2tasi2v73avbxp6wrnp4ir7mckpyeni6kjjfi",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:invalid-submission",
+      "receipt_identity": "sha256:ea2e806d7e548123d2ec5f9cc4fef81818025d0a5e3ca1ce9e610d50f897df08",
+      "scenario_id": "scenario:invalid-submission",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 138,
+      "cid": "bafkreic742s7pw6vwyf4ie6gsxznprtw5fwtptc2efndp5cjcmkyhrnjqi",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:valid-submission",
+      "receipt_identity": "sha256:c0ee0572eed0df6e8a59f31fa875738ff1d822ab75925841d1c5a93b5ae4e546",
+      "scenario_id": "scenario:valid-submission",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 147,
+      "cid": "bafkreif3dk4bylyctxveum7ki46pfbux5lqx4rtpop7gwxkrmkxihy2u3q",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:keyboard-only",
+      "receipt_identity": "sha256:971d2ccb87183bd9786c99165a2542c3c3b658ab54fa70ee9c60ecc444cc3bac",
+      "scenario_id": "scenario:keyboard-only",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 147,
+      "cid": "bafkreiclsievvwmq52ft3jqqlgudm47yxfu4mxgza4omwctb2uzo2fqhwe",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:viewport-mobile",
+      "receipt_identity": "sha256:fb6d0455c8ad4821b4ce3bcf2671750aa40d71d886fe45f1650ff8eef9984d6e",
+      "scenario_id": "scenario:viewport-mobile",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 147,
+      "cid": "bafkreicr5ytjcq3ol7nk52pwciuv6r536jdnsn4enkuyhguofqdxyqfzq4",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:viewport-desktop",
+      "receipt_identity": "sha256:ce635a51139939fafae65f72eb77591fefa03560d4ce076a05a2e687f7fd816c",
+      "scenario_id": "scenario:viewport-desktop",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 147,
+      "cid": "bafkreiehqajhwiyptkgybvpucasiq3w4tlk5v47orzeh34iajo4azvknpi",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:viewport-wide",
+      "receipt_identity": "sha256:f1888e11ceeef0eef08e0d51d334b85b5eb0263a4bb4273ae08e10992e6d118c",
+      "scenario_id": "scenario:viewport-wide",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 147,
+      "cid": "bafkreiaeykkp4rytot63vwory5w2bf6xftjsulqlp6hnvrhbkbi2gsuc4i",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:text-scale-200",
+      "receipt_identity": "sha256:0a582192792fd9d30dedda9895b465ac2be8fd07fb4a78015091bf06772b9a39",
+      "scenario_id": "scenario:text-scale-200",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 137,
+      "cid": "bafkreigchsmsldhmxh3lo6qoscpmybie2vi3jxn7izqbzjxfbpwmujul6m",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:reduced-motion",
+      "receipt_identity": "sha256:55eb5a26ac943282e4ec6ecd0d68b2424d9f0ad9b791ad4fba572e7c7153c1e8",
+      "scenario_id": "scenario:reduced-motion",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 137,
+      "cid": "bafkreiduakwduy2htqegwwiv7dgeno7czpiswxxepe5ndqetko5upucyoa",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:dark-mode",
+      "receipt_identity": "sha256:2a0fdd5e8e2f705c80445ebae1a4cf00b77a7b99c0302c42e07d56bfa008870c",
+      "scenario_id": "scenario:dark-mode",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:32",
+        "violation:accessible-name:node:div:37",
+        "violation:keyboard-activation:node:div:32",
+        "violation:keyboard-activation:node:div:37",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:32",
+        "violation:keyboard-reachability:node:div:37"
+      ]
+    },
+    {
+      "automated_pass_count": 109,
+      "cid": "bafkreibr2mrraeaq4neu4v3dp63p6c6owdeo4xatlnqnbe2ikjfmhdxoqq",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:service-unavailable",
+      "receipt_identity": "sha256:546e2be203acdb5fec1d5b2719ebc9baf253d39ab2968fdba62b6541e822ce84",
+      "scenario_id": "scenario:service-unavailable",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:keyboard-order:document"
+      ]
+    },
+    {
+      "automated_pass_count": 150,
+      "cid": "bafkreigtxtwuoycgg22kwi4hdra7ncbcr26i64gdtmtg6s2kehtpdf37km",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:confirmation-grant",
+      "receipt_identity": "sha256:332c923ac1312be5bb432c7c6052b8bebad92d48f11c1dacec8b1b42253250a5",
+      "scenario_id": "scenario:confirmation-grant",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:38",
+        "violation:accessible-name:node:div:43",
+        "violation:focus-trap:confirmation-dialog",
+        "violation:keyboard-activation:node:div:38",
+        "violation:keyboard-activation:node:div:43",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:38",
+        "violation:keyboard-reachability:node:div:43"
+      ]
+    },
+    {
+      "automated_pass_count": 150,
+      "cid": "bafkreianmjrfjmxa6yxqghsxvgn67esv3rchh3yxajbum342yxwpnnl3rm",
+      "keyboard_result": "violated",
+      "manual_check_ids": [
+        "manual:screen-reader-review",
+        "manual:alt-text-quality",
+        "manual:heading-label-quality",
+        "manual:use-of-color",
+        "manual:consistent-navigation",
+        "manual:error-suggestion"
+      ],
+      "receipt_id": "receipt:a11y:scenario:confirmation-deny",
+      "receipt_identity": "sha256:a8126b3e2cbe9a23948b2f5a00f7aaaa40f8eaa487fd6d942c260281e7c7acfd",
+      "scenario_id": "scenario:confirmation-deny",
+      "unsupported_criteria": [
+        "WCAG2.2:1.2.1",
+        "WCAG2.2:1.2.2",
+        "WCAG2.2:1.2.3",
+        "WCAG2.2:1.2.4",
+        "WCAG2.2:1.2.5",
+        "WCAG2.2:1.3.3",
+        "WCAG2.2:1.4.1",
+        "WCAG2.2:1.4.2",
+        "WCAG2.2:1.4.10",
+        "WCAG2.2:1.4.12",
+        "WCAG2.2:1.4.13",
+        "WCAG2.2:2.3.1",
+        "WCAG2.2:2.4.1",
+        "WCAG2.2:2.4.4",
+        "WCAG2.2:2.4.5",
+        "WCAG2.2:2.4.6",
+        "WCAG2.2:2.5.3",
+        "WCAG2.2:3.1.2",
+        "WCAG2.2:3.2.3",
+        "WCAG2.2:3.2.4",
+        "WCAG2.2:3.3.3",
+        "WCAG2.2:3.3.4",
+        "WCAG2.2:4.1.3"
+      ],
+      "violation_ids": [
+        "violation:accessible-name:control:queue",
+        "violation:accessible-name:node:div:38",
+        "violation:accessible-name:node:div:43",
+        "violation:focus-trap:confirmation-dialog",
+        "violation:keyboard-activation:node:div:38",
+        "violation:keyboard-activation:node:div:43",
+        "violation:keyboard-order:document",
+        "violation:keyboard-reachability:node:div:38",
+        "violation:keyboard-reachability:node:div:43"
+      ]
+    }
+  ]
+}
