@@ -75,7 +75,7 @@ Git objects before any candidate is adopted.
 | Model Route Planner | `external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/model_route.py::ModelRoutePlanner` | Present; selects capability tier, not provider credentials or mutation authority. |
 | Semantic Compression Governor | `external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_governor/governor.py::SemanticCompressionGovernor` | Present at the exact accelerator pin; depends on datasets/kit adapters. |
 | Verified GUI Optimizer | candidate code under a separate `feature/verified-gui-optimizer` superproject worktree | Not in the pinned baseline; unpublished/dirty candidate state is non-authoritative. It is inventory input only and is not a v0.1 product requirement unless a narrow reusable contract is proven necessary. |
-| Incremental Proof Sealer | local candidate branch `agent/incremental-proof-sealer-v1@60499eb458e927369fdc7975915bb6a060eea580` with open `IPS-042` and later work | WIP, not canonical. Convergence and current-tree tests are required before use. |
+| Incremental Proof Sealer | local candidate branch `agent/incremental-proof-sealer-v1@e73e6fa44c7936b07ca526a879afcd45322835e8` with IPS-044 and IPS-047 through IPS-056 still open | WIP, not canonical. Its referenced datasets/kit objects require exact acquisition; convergence and current-tree tests are required before use. |
 | Adversarial Assurance Engine | local candidate branch `agent/adversarial-assurance-engine-v1@3c2a0b0036329a3e4bb0144e8ca1442458ec74f8` with open runtime/release work | WIP, not canonical. Reuse only after bounded migration and acceptance evidence. |
 | Self-Hosting Qualification Harness | candidate line `agent/self-hosting-qualification-v1@17e19a8e5db327a18dc9437a8de2be299599ecf2` plus dirty plan history | Prerequisite observers and plans exist; no completed canonical harness facade is assumed. |
 
@@ -84,6 +84,15 @@ success paths, recursive submodules, editable sibling dependencies, mutable
 branch dependencies, circular imports, and package metadata gaps. Path presence,
 historical green boards, branch names, and documentation claims are not
 completion evidence.
+
+The preliminary WIP audit found that the sealer and assurance branches bind
+four nested candidate commits not present in the clean pinned object stores:
+datasets `1480ea2b...` and kit `da3947f6...` for sealing, plus datasets
+`2334135a...` and kit `523fc9b3...` for assurance. PCCE-017 through
+PCCE-019 and PCCE-013 must acquire exact immutable objects before adopting
+code. If an object is unpublished or unreachable, the owning task records a
+typed external-prerequisite block; agents may not reconstruct proof or
+assurance implementations from plans.
 
 ## Canonical ownership target
 
@@ -131,17 +140,30 @@ PCCE-000 board seal
   -> PCCE-001..004 repository inventories (parallel)
   -> PCCE-005 ownership/canonical reconciliation
   -> PCCE-006 shared contract freeze
-  -> PCCE-007..010 parity and blocker repairs (parallel)
+  -> PCCE-007..010 parity and blocker repairs
+  -> {PCCE-012 datasets ContextPack ownership ||
+      PCCE-017 datasets proof contracts ||
+      PCCE-018 datasets assurance contracts}
+  -> {PCCE-013 kit proof/receipt store || PCCE-019 kit assurance store}
+  -> {PCCE-014 public proof-sealer convergence ||
+      PCCE-016 selected-test soundness repair}
+  -> PCCE-015 assurance-runtime convergence
   -> PCCE-011 Epic A acceptance gate
   -> PCCE-020 runtime contracts
   -> PCCE-021..023 semantic, persistence, lifecycle slices (parallel)
   -> PCCE-024 facade composition
   -> PCCE-025 governed-runtime gate
   -> {PCCE-030..035 adapters || PCCE-040..044 CLI}
-  -> PCCE-050..053 package profiles (parallel)
-  -> {PCCE-054 reproducibility || PCCE-055 example}
+  -> {PCCE-045 self-hosting harness || PCCE-050/PCCE-051 providers ||
+      PCCE-055 example || PCCE-057 MCP++ contract artifact}
+  -> PCCE-052 runtime profiles
+  -> PCCE-053 locks, hashes, SBOM, and environment
+  -> PCCE-054 clean-install/container verification
   -> PCCE-056 clean-install gate
-  -> {PCCE-060..068 benchmark || PCCE-070..076 security}
+  -> {PCCE-060..066 benchmark setup || PCCE-070..075 security}
+  -> PCCE-079 bounded self-hosting qualification
+  -> PCCE-067..068 benchmark execution and gate
+  -> PCCE-076 security gate
   -> PCCE-080 CI
   -> PCCE-081 release candidate
   -> PCCE-082 qualification
@@ -155,10 +177,11 @@ and release manifests have serialized integration tasks.
 ## Contract freeze
 
 `PCCE-006` freezes versioned definitions for repository state, semantic
-capsule, ContextPack, invalidation plan, verification plan, model-route
-decision, patch proposal, execution receipt, proof unit, incremental seal,
-qualification result, error/status taxonomies, canonicalization, and CID
-behavior. Any later incompatible change requires a new schema version,
+capsule, ContextPack, TaskSpecification, coding-agent invocation, patch
+proposal, invalidation plan, verification plan, model-route decision,
+execution receipt, proof unit, incremental seal, qualification result,
+error/status taxonomies, canonicalization, and CID behavior. Any later
+incompatible change requires a new schema version,
 migration, vectors, compatibility-matrix update, and invalidation of every
 dependent task receipt.
 
@@ -178,9 +201,11 @@ The minimum terminal/status vocabulary is `succeeded`, `rejected`,
 ## Installation and benchmark gates
 
 Core installation must not pull every model, browser, prover, or storage
-backend. Immutable artifacts and hashes are required for core, verification,
-Codex adapter, an already-supported local adapter, and full evaluation
-profiles. Editable paths, specially placed siblings, recursive submodule
+backend. Immutable datasets, kit, accelerator, and data-only MCP++ contract
+artifacts and hashes are required for core, verification, Codex adapter, an
+already-supported local adapter, and full evaluation profiles. The MCP++
+artifact carries schemas/vectors through package resources and has no runtime
+authority. Editable paths, specially placed siblings, recursive submodule
 requirements, source-path injection, and mutable branch dependencies are
 release blockers.
 

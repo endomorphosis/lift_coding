@@ -46,7 +46,7 @@
     }
   },
   "initial_projection": {
-    "task_count": 56,
+    "task_count": 67,
     "completed_task_ids": [
       "PCCE-000"
     ],
@@ -94,7 +94,8 @@
     "artifacts/proof_carrying_context_engine/control/task_board.json",
     "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
     "artifacts/proof_carrying_context_engine/control/bundle_index.json",
-    "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json"
+    "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json"
   ],
   "runtime_paths": {
     "root": "data/agent_supervisor/proof_carrying_context_engine_v0_1",
@@ -143,28 +144,34 @@
     {"id": "W03", "task_ids": ["PCCE-006"]},
     {"id": "W04", "task_ids": ["PCCE-007"]},
     {"id": "W05", "task_ids": ["PCCE-008", "PCCE-009", "PCCE-010"]},
-    {"id": "W06", "task_ids": ["PCCE-011"]},
-    {"id": "W07", "task_ids": ["PCCE-020", "PCCE-022", "PCCE-023"]},
-    {"id": "W08", "task_ids": ["PCCE-021"]},
-    {"id": "W09", "task_ids": ["PCCE-024"]},
-    {"id": "W10", "task_ids": ["PCCE-025"]},
-    {"id": "W11", "task_ids": ["PCCE-030", "PCCE-040", "PCCE-043"]},
-    {"id": "W12", "task_ids": ["PCCE-031", "PCCE-032", "PCCE-033", "PCCE-034", "PCCE-042"]},
-    {"id": "W13", "task_ids": ["PCCE-035"]},
-    {"id": "W14", "task_ids": ["PCCE-041"]},
-    {"id": "W15", "task_ids": ["PCCE-044"]},
-    {"id": "W16", "task_ids": ["PCCE-050", "PCCE-051", "PCCE-052", "PCCE-055"]},
-    {"id": "W17", "task_ids": ["PCCE-053"]},
-    {"id": "W18", "task_ids": ["PCCE-054"]},
-    {"id": "W19", "task_ids": ["PCCE-056"]},
-    {"id": "W20", "task_ids": ["PCCE-060", "PCCE-070"]},
-    {"id": "W21", "task_ids": ["PCCE-061", "PCCE-062", "PCCE-063", "PCCE-064", "PCCE-065", "PCCE-066", "PCCE-071", "PCCE-072", "PCCE-073", "PCCE-074"]},
-    {"id": "W22", "task_ids": ["PCCE-067", "PCCE-075"]},
-    {"id": "W23", "task_ids": ["PCCE-068", "PCCE-076"]},
-    {"id": "W24", "task_ids": ["PCCE-080"]},
-    {"id": "W25", "task_ids": ["PCCE-081"]},
-    {"id": "W26", "task_ids": ["PCCE-082"]},
-    {"id": "W27", "task_ids": ["PCCE-083"]}
+    {"id": "W06", "task_ids": ["PCCE-012", "PCCE-017", "PCCE-018"]},
+    {"id": "W07", "task_ids": ["PCCE-013", "PCCE-019"]},
+    {"id": "W08", "task_ids": ["PCCE-014", "PCCE-016"]},
+    {"id": "W09", "task_ids": ["PCCE-015"]},
+    {"id": "W10", "task_ids": ["PCCE-011"]},
+    {"id": "W11", "task_ids": ["PCCE-020", "PCCE-022", "PCCE-023"]},
+    {"id": "W12", "task_ids": ["PCCE-021"]},
+    {"id": "W13", "task_ids": ["PCCE-024"]},
+    {"id": "W14", "task_ids": ["PCCE-025"]},
+    {"id": "W15", "task_ids": ["PCCE-030", "PCCE-040", "PCCE-043"]},
+    {"id": "W16", "task_ids": ["PCCE-031", "PCCE-032", "PCCE-033", "PCCE-034", "PCCE-042"]},
+    {"id": "W17", "task_ids": ["PCCE-035"]},
+    {"id": "W18", "task_ids": ["PCCE-041"]},
+    {"id": "W19", "task_ids": ["PCCE-044"]},
+    {"id": "W20", "task_ids": ["PCCE-045", "PCCE-050", "PCCE-051", "PCCE-055", "PCCE-057"]},
+    {"id": "W21", "task_ids": ["PCCE-052"]},
+    {"id": "W22", "task_ids": ["PCCE-053"]},
+    {"id": "W23", "task_ids": ["PCCE-054"]},
+    {"id": "W24", "task_ids": ["PCCE-056"]},
+    {"id": "W25", "task_ids": ["PCCE-060", "PCCE-070"]},
+    {"id": "W26", "task_ids": ["PCCE-061", "PCCE-062", "PCCE-063", "PCCE-064", "PCCE-065", "PCCE-066", "PCCE-071", "PCCE-072", "PCCE-073", "PCCE-074"]},
+    {"id": "W27", "task_ids": ["PCCE-075", "PCCE-079"]},
+    {"id": "W28", "task_ids": ["PCCE-067"]},
+    {"id": "W29", "task_ids": ["PCCE-068", "PCCE-076"]},
+    {"id": "W30", "task_ids": ["PCCE-080"]},
+    {"id": "W31", "task_ids": ["PCCE-081"]},
+    {"id": "W32", "task_ids": ["PCCE-082"]},
+    {"id": "W33", "task_ids": ["PCCE-083"]}
   ],
   "bundle_scheduler": {
     "bundle_index_path": "artifacts/proof_carrying_context_engine/control/bundle_index.json",
@@ -179,7 +186,10 @@
     "max_artifact_concurrency": 2,
     "lease_ms": 60000,
     "heartbeat_interval_seconds": 5,
-    "production_provider_policy": "grok-implement-codex-independent-review"
+    "production_provider_policy": "grok-implement-codex-independent-review",
+    "provider_roles": ["grok-implement", "codex-review"],
+    "codex_implementation_fallback_enabled": false,
+    "provider_note": "The configured-board ordered fallback fields are not completion authority for this bundle route; Codex remains an independent reviewer and cannot self-review a Codex-authored implementation."
   },
   "recovery": {
     "reconcile_before_restart": true,

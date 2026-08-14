@@ -41,8 +41,17 @@ from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon impor
 
 OBJECTIVE_PATH = REPO_ROOT / "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md"
 TODO_PATH = REPO_ROOT / "docs/architecture/proof_carrying_context_engine_v0_1.todo.md"
+PLAN_PATH = REPO_ROOT / "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md"
 CONFIG_PATH = REPO_ROOT / "config/proof_carrying_context_engine_v0_1_supervisor.json"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "artifacts/proof_carrying_context_engine/control"
+BOOTSTRAP_RECEIPT_PATH = (
+    REPO_ROOT / "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json"
+)
+PROFILE_G_BOOTSTRAP_RECEIPT_PATH = (
+    REPO_ROOT
+    / "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json"
+)
+BOOTSTRAP_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r2"
 TASK_PREFIX = "## PCCE-"
 BOARD_NAMESPACE = "proof-carrying-context-engine-v0.1"
 OBJECTIVE_ID = "PCCE-G000"
@@ -50,13 +59,14 @@ PLANNING_GENERATED_AT = "2026-08-14T00:00:00+00:00"
 
 EXPECTED_TASK_IDS = (
     ["PCCE-000"]
-    + [f"PCCE-{value:03d}" for value in range(1, 12)]
+    + [f"PCCE-{value:03d}" for value in range(1, 20)]
     + [f"PCCE-{value:03d}" for value in range(20, 26)]
     + [f"PCCE-{value:03d}" for value in range(30, 36)]
-    + [f"PCCE-{value:03d}" for value in range(40, 45)]
-    + [f"PCCE-{value:03d}" for value in range(50, 57)]
+    + [f"PCCE-{value:03d}" for value in range(40, 46)]
+    + [f"PCCE-{value:03d}" for value in range(50, 58)]
     + [f"PCCE-{value:03d}" for value in range(60, 69)]
     + [f"PCCE-{value:03d}" for value in range(70, 77)]
+    + ["PCCE-079"]
     + [f"PCCE-{value:03d}" for value in range(80, 84)]
 )
 EXPECTED_GOAL_IDS = ["PCCE-G000"] + [f"PCCE-G{value}" for value in range(100, 900, 100)]
@@ -171,10 +181,15 @@ def _topological_order(task_ids: Iterable[str], edges: dict[str, list[str]]) -> 
 
 
 def _repository_identity(config: dict[str, Any], errors: list[str]) -> dict[str, Any]:
+    source_binding = dict(config.get("source_binding") or {})
     result: dict[str, Any] = {
-        "superproject_commit": _git("rev-parse", "HEAD"),
-        "superproject_tree": _git("rev-parse", "HEAD^{tree}"),
-        "branch": _git("branch", "--show-current"),
+        "planning_base_commit": str(
+            source_binding.get("accelerator_required_ancestor") or ""
+        ),
+        "planning_branch": str(
+            source_binding.get("accelerator_required_branch") or ""
+        ),
+        "admission_head_binding": "external-launch-receipt",
         "repositories": {},
     }
     for name, record in config["repositories"].items():
@@ -302,6 +317,113 @@ def _bundle_index_projection(
     }
     payload["projection_id"] = _sha256_json(payload)
     return payload
+
+
+def _verify_bootstrap_receipt(
+    *,
+    config: dict[str, Any],
+    projection: dict[str, Any],
+    graph: dict[str, Any],
+    bundle_index: dict[str, Any],
+    goal_count: int,
+    errors: list[str],
+) -> None:
+    """Require completion evidence before PCCE-000 may unlock work."""
+
+    if not BOOTSTRAP_RECEIPT_PATH.is_file():
+        errors.append(
+            "completed PCCE-000 is missing its declared bootstrap receipt: "
+            + str(BOOTSTRAP_RECEIPT_PATH.relative_to(REPO_ROOT))
+        )
+        return
+    if not PROFILE_G_BOOTSTRAP_RECEIPT_PATH.is_file():
+        errors.append("Profile-G bootstrap receipt is missing")
+        return
+    try:
+        receipt = json.loads(BOOTSTRAP_RECEIPT_PATH.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        errors.append(f"PCCE-000 receipt is unreadable: {exc}")
+        return
+    if not isinstance(receipt, dict):
+        errors.append("PCCE-000 receipt must be a JSON object")
+        return
+
+    content_id = str(receipt.get("content_id") or "")
+    content_payload = dict(receipt)
+    content_payload.pop("content_id", None)
+    if content_id != _sha256_json(content_payload):
+        errors.append("PCCE-000 receipt content_id does not match canonical content")
+    fixed_expectations = {
+        "schema": "proof-carrying-context-engine/task-receipt@1",
+        "task_id": "PCCE-000",
+        "objective_id": OBJECTIVE_ID,
+        "board_namespace": BOARD_NAMESPACE,
+        "status": "completed",
+        "artifact_identity": BOOTSTRAP_ARTIFACT_IDENTITY,
+    }
+    for field, expected in fixed_expectations.items():
+        if receipt.get(field) != expected:
+            errors.append(
+                f"PCCE-000 receipt {field} mismatch: "
+                f"{receipt.get(field)!r} != {expected!r}"
+            )
+
+    evidence = receipt.get("evidence")
+    if not isinstance(evidence, dict):
+        errors.append("PCCE-000 receipt evidence must be an object")
+        return
+    repository_gitlinks = {
+        name: str(record.get("gitlink") or "")
+        for name, record in sorted(
+            projection["repository_identity"]["repositories"].items()
+        )
+    }
+    expected_evidence = {
+        "objective_sha256": projection["source"]["objective_sha256"],
+        "todo_sha256": projection["source"]["todo_sha256"],
+        "plan_sha256": "sha256:" + hashlib.sha256(PLAN_PATH.read_bytes()).hexdigest(),
+        "config_sha256": "sha256:"
+        + hashlib.sha256(CONFIG_PATH.read_bytes()).hexdigest(),
+        "validator_sha256": "sha256:"
+        + hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "profile_g_bootstrap_sha256": "sha256:"
+        + hashlib.sha256(PROFILE_G_BOOTSTRAP_RECEIPT_PATH.read_bytes()).hexdigest(),
+        "board_projection_id": projection["projection_id"],
+        "dependency_graph_id": graph["graph_id"],
+        "bundle_index_id": bundle_index["projection_id"],
+        "repository_gitlinks": repository_gitlinks,
+        "protected_paths": sorted(str(item) for item in config["protected_paths"]),
+        "task_ids": list(EXPECTED_TASK_IDS),
+    }
+    for field, expected in expected_evidence.items():
+        if evidence.get(field) != expected:
+            errors.append(f"PCCE-000 receipt evidence mismatch: {field}")
+
+    parser_report = receipt.get("parser_report")
+    expected_report = {
+        "task_count": len(EXPECTED_TASK_IDS),
+        "goal_count": goal_count,
+        "unique_task_ids": True,
+        "acyclic": True,
+        "unique_terminal_task_id": "PCCE-083",
+        "initial_ready_task_ids": [
+            "PCCE-001",
+            "PCCE-002",
+            "PCCE-003",
+            "PCCE-004",
+        ],
+    }
+    if parser_report != expected_report:
+        errors.append("PCCE-000 receipt parser_report mismatch")
+    approval = receipt.get("operator_approval")
+    if not isinstance(approval, dict):
+        errors.append("PCCE-000 receipt operator_approval must be an object")
+    elif (
+        approval.get("approved") is not True
+        or not str(approval.get("identity") or "").strip()
+        or not str(approval.get("approved_at") or "").strip()
+    ):
+        errors.append("PCCE-000 receipt lacks an explicit operator approval identity")
 
 
 def validate(*, output_dir: Path, write: bool) -> dict[str, Any]:
@@ -457,6 +579,14 @@ def validate(*, output_dir: Path, write: bool) -> dict[str, Any]:
         projected_tasks,
         config=config,
         source_sha256=projection["source"]["todo_sha256"],
+    )
+    _verify_bootstrap_receipt(
+        config=config,
+        projection=projection,
+        graph=graph,
+        bundle_index=bundle_index,
+        goal_count=len(goals),
+        errors=errors,
     )
 
     if write and not errors:

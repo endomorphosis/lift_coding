@@ -34,7 +34,7 @@ PCCE-G000  Installable Proof-Carrying Context Engine v0.1
 - Parallel lane: coordinator
 - Resource class: coordinator
 - Goal: Integrate the existing semantic-compression, incremental-verification, model-routing, assurance, and proof-sealing candidates into one installable provider-neutral sidecar runtime and CLI, then qualify it no higher than current evidence permits.
-- Producing tasks: PCCE-000, PCCE-001, PCCE-002, PCCE-003, PCCE-004, PCCE-005, PCCE-006, PCCE-007, PCCE-008, PCCE-009, PCCE-010, PCCE-011, PCCE-020, PCCE-021, PCCE-022, PCCE-023, PCCE-024, PCCE-025, PCCE-030, PCCE-031, PCCE-032, PCCE-033, PCCE-034, PCCE-035, PCCE-040, PCCE-041, PCCE-042, PCCE-043, PCCE-044, PCCE-050, PCCE-051, PCCE-052, PCCE-053, PCCE-054, PCCE-055, PCCE-056, PCCE-060, PCCE-061, PCCE-062, PCCE-063, PCCE-064, PCCE-065, PCCE-066, PCCE-067, PCCE-068, PCCE-070, PCCE-071, PCCE-072, PCCE-073, PCCE-074, PCCE-075, PCCE-076, PCCE-080, PCCE-081, PCCE-082, PCCE-083
+- Producing tasks: PCCE-000, PCCE-001, PCCE-002, PCCE-003, PCCE-004, PCCE-005, PCCE-006, PCCE-007, PCCE-008, PCCE-009, PCCE-010, PCCE-011, PCCE-012, PCCE-013, PCCE-014, PCCE-015, PCCE-016, PCCE-017, PCCE-018, PCCE-019, PCCE-020, PCCE-021, PCCE-022, PCCE-023, PCCE-024, PCCE-025, PCCE-030, PCCE-031, PCCE-032, PCCE-033, PCCE-034, PCCE-035, PCCE-040, PCCE-041, PCCE-042, PCCE-043, PCCE-044, PCCE-045, PCCE-050, PCCE-051, PCCE-052, PCCE-053, PCCE-054, PCCE-055, PCCE-056, PCCE-057, PCCE-060, PCCE-061, PCCE-062, PCCE-063, PCCE-064, PCCE-065, PCCE-066, PCCE-067, PCCE-068, PCCE-070, PCCE-071, PCCE-072, PCCE-073, PCCE-074, PCCE-075, PCCE-076, PCCE-079, PCCE-080, PCCE-081, PCCE-082, PCCE-083
 - Evidence: artifacts/proof_carrying_context_engine/release/final_supervisor_report.json
 - Evidence requirements JSON: ["exact four-repository source manifest", "installable package artifacts", "runtime and CLI conformance", "frozen benchmark results", "security gate", "release manifest", "qualification decision"]
 - Evidence criteria: Every accepted operation follows the governed lifecycle; production and supervised modes reject stale, simulated, invalid, forged, unavailable, or insufficient evidence; package installation requires no sibling source trees; and the final level and recommendation are computed from current-tree evidence.
@@ -60,9 +60,9 @@ PCCE-G000  Installable Proof-Carrying Context Engine v0.1
 - Parallel lane: inventory-contracts
 - Resource class: io-analysis
 - Goal: Establish exact canonical implementations and ownership, freeze v0.1 contracts, and remove only integration blockers required by the runtime.
-- Producing tasks: PCCE-000, PCCE-001, PCCE-002, PCCE-003, PCCE-004, PCCE-005, PCCE-006, PCCE-007, PCCE-008, PCCE-009, PCCE-010, PCCE-011
+- Producing tasks: PCCE-000, PCCE-001, PCCE-002, PCCE-003, PCCE-004, PCCE-005, PCCE-006, PCCE-007, PCCE-008, PCCE-009, PCCE-010, PCCE-011, PCCE-012, PCCE-013, PCCE-014, PCCE-015, PCCE-016, PCCE-017, PCCE-018, PCCE-019
 - Evidence: artifacts/proof_carrying_context_engine/contracts/epic_a_gate.json
-- Evidence requirements JSON: ["four repository inventories", "candidate-ref disposition map", "ownership violation and migration map", "schema/version matrix", "canonical vectors", "install blocker report", "Epic A acceptance receipt"]
+- Evidence requirements JSON: ["four repository inventories", "candidate-ref disposition map", "ownership violation and migration map", "schema/version matrix", "canonical vectors", "exact-object acquisition or external-block receipts", "datasets proof and assurance foundations", "kit proof and assurance stores", "public sealer and assurance convergence", "selected-test soundness repair", "install blocker report", "Epic A acceptance receipt"]
 - Evidence criteria: Code, imports, tests, packaging, and exact Git objects support every selected implementation; WIP candidates are not promoted by name; all frozen contracts have version, canonicalization, CID, vector, and migration rules.
 - Evidence source policy: README and historical task claims are corroboration only; missing code/tests or dirty/unpublished candidate state is reported unavailable or WIP.
 - Outputs: artifacts/proof_carrying_context_engine/contracts/epic_a_gate.json
@@ -164,9 +164,9 @@ PCCE-G000  Installable Proof-Carrying Context Engine v0.1
 - Parallel lane: packaging
 - Resource class: io-build
 - Goal: Produce immutable installable artifacts, narrow extras, reproducible manifests, and a credential-free synthetic example without sibling/source-path assumptions.
-- Producing tasks: PCCE-050, PCCE-051, PCCE-052, PCCE-053, PCCE-054, PCCE-055, PCCE-056
+- Producing tasks: PCCE-045, PCCE-050, PCCE-051, PCCE-052, PCCE-053, PCCE-054, PCCE-055, PCCE-056, PCCE-057
 - Evidence: artifacts/proof_carrying_context_engine/install/epic_e_gate.json
-- Evidence requirements JSON: ["four package profiles", "artifact hashes", "dependency locks", "SBOM", "environment manifest", "example workflow", "clean-install matrix"]
+- Evidence requirements JSON: ["four package profiles", "datasets, kit, accelerator, and data-only MCP++ contract artifacts", "SelfHostingQualificationHarness package surface", "artifact hashes", "dependency locks", "SBOM", "environment manifest", "example workflow", "clean-install matrix"]
 - Evidence criteria: Core, verification, Codex, supported local, and evaluation profiles install from immutable artifacts in a clean environment; core remains narrow; no editable, sibling, recursive-submodule, arbitrary path, or mutable-main requirement remains.
 - Evidence source policy: Editable source installs and already-populated developer environments are diagnostic only, not release evidence.
 - Outputs: artifacts/proof_carrying_context_engine/install/epic_e_gate.json
@@ -190,9 +190,9 @@ PCCE-G000  Installable Proof-Carrying Context Engine v0.1
 - Parallel lane: benchmark
 - Resource class: evaluation-large
 - Goal: Freeze a leakage-resistant three-class corpus, run configurations A-D, measure context/quality/routing/verification/assurance/economics, and evaluate predeclared thresholds.
-- Producing tasks: PCCE-060, PCCE-061, PCCE-062, PCCE-063, PCCE-064, PCCE-065, PCCE-066, PCCE-067, PCCE-068
+- Producing tasks: PCCE-060, PCCE-061, PCCE-062, PCCE-063, PCCE-064, PCCE-065, PCCE-066, PCCE-067, PCCE-068, PCCE-079
 - Evidence: artifacts/proof_carrying_context_engine/benchmark/epic_f_report.json
-- Evidence requirements JSON: ["corpus manifest", "hidden-answer isolation", "A-D configuration manifests", "metric schemas", "pre-run threshold seal", "raw attempt records", "aggregate benchmark report"]
+- Evidence requirements JSON: ["corpus manifest", "hidden-answer isolation", "A-D configuration manifests", "metric schemas", "pre-run threshold seal", "bounded self-hosting attempts and longitudinal disposition", "raw attempt records", "aggregate benchmark report"]
 - Evidence criteria: At least typed structured, dynamic/plugin-heavy, and larger mature Python classes are revision-pinned; failed attempts and unavailable metrics remain visible; threshold misses lower qualification.
 - Evidence source policy: Synthetic smoke, replay, or estimated provider/cost data cannot be labelled observed live-model quality or economics.
 - Outputs: artifacts/proof_carrying_context_engine/benchmark/epic_f_report.json

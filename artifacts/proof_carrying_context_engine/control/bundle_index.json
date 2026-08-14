@@ -17,12 +17,14 @@
           "allowed_paths": [
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py",
             "external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py",
             "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json"
           ],
           "board_namespace": "proof-carrying-context-engine-v0.1",
-          "canonical_task_cid": "baguqeerajqyqcbn4fwxqvkqkwa2zajohjmfu2uvtypvlgag7zsfqdrzcqc3q",
-          "canonical_task_key": "task/v1/4c310105bc2daf0aaa0ab0359025c74b0b4d52b3c3eab300dfcc8b01c72280b7",
+          "canonical_task_cid": "baguqeeradkpozzij72xtpawkpg6jk5y3k7iejinfz5axd3j3yjuezi4tky5q",
+          "canonical_task_key": "task/v1/1a9eece509feaf3782ca79bc95771b57d044a1a5cf4171ed3bc2684ca393563b",
           "dependencies": [
             "PCCE-007"
           ],
@@ -36,7 +38,9 @@
           "files": [
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py",
             "external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py",
             "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json"
           ],
           "goal_id": "PCCE-G100",
@@ -45,9 +49,9 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "Accelerator resolves the frozen v0.1 dependency surface cleanly and fails closed when any required installed authority is absent or incompatible.",
-            "acceptance criteria": "Cold import performs no network/process/filesystem mutation; capability loading uses installed package metadata and the compatibility matrix; absent or mismatched capabilities return typed unavailable/invalid; production rejects mocks, pseudo-CIDs, and mutable-ref dependencies.",
+            "acceptance criteria": "Cold import performs no network/process/filesystem mutation; capability loading uses installed package metadata/importlib resources and the compatibility matrix; source MCP++ is consulted only by bound conformance tests; absent resources or byte, CID, or version mismatch return typed unavailable/invalid without searching sibling paths; production rejects mocks, pseudo-CIDs, and mutable-ref dependencies.",
             "allowed effects": "Add lazy capability discovery, compatibility checks, focused tests, and the unique receipt.",
-            "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+            "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
             "assigned worktree": "pcce-PCCE-010",
             "board namespace": "proof-carrying-context-engine-v0.1",
             "bundle": "pcce/a/accelerate-blockers",
@@ -59,29 +63,31 @@
             "goal id": "PCCE-G100",
             "implementation timeout seconds": "7200",
             "is schedulable": "true",
-            "objective": "Add the smallest accelerator dependency/compatibility loader that resolves installed datasets, kit, and MCP++ contract capabilities without editable siblings, import-time installation, circular imports, mutable branches, or simulated production fallbacks.",
-            "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
-            "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+            "objective": "Add the smallest accelerator dependency/compatibility loader that resolves installed datasets and kit capabilities plus the versioned data-only mcp-plus-plus-contracts resource interface without editable siblings, import-time installation, circular imports, mutable branches, or simulated production fallbacks.",
+            "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+            "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
             "owning repository": "endomorphosis/ipfs_accelerate_py",
             "parallel lane": "pcce-a-accelerate",
-            "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
+            "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py, external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py, external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py, artifacts/proof_carrying_context_engine/receipts/PCCE-010.json",
             "priority": "P0",
             "prohibited effects": "Vendor sibling packages; mutate sys.path to arbitrary sources; install at import time; accept incompatible versions; convert unavailable dependencies into success; refactor unrelated supervisor code.",
             "required evidence": "Import side-effect trace; clean environment resolution tests; incompatible/missing dependency tests; canonical-vector parity; migration-map closure.",
-            "required tests": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "required tests": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py",
             "resource class": "cpu-medium",
             "review only": "false",
             "risk classification": "high-runtime-integration",
             "rollback procedure": "Revert only this dependency-loader commit and invalidate runtime tasks; do not alter external package installations.",
             "status": "todo",
-            "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py"
+            "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py"
           },
-          "objective": "Add the smallest accelerator dependency/compatibility loader that resolves installed datasets, kit, and MCP++ contract capabilities without editable siblings, import-time installation, circular imports, mutable branches, or simulated production fallbacks.",
+          "objective": "Add the smallest accelerator dependency/compatibility loader that resolves installed datasets and kit capabilities plus the versioned data-only mcp-plus-plus-contracts resource interface without editable siblings, import-time installation, circular imports, mutable branches, or simulated production fallbacks.",
           "objective_priority": 100,
           "outputs": [
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py",
             "external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py",
             "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json"
           ],
           "parent_goal_ids": [
@@ -90,13 +96,17 @@
           "predicted_files": [
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py",
             "external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py",
             "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json"
           ],
           "predicted_paths": [
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/dependencies.py",
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/compatibility.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/contract_resources.py",
             "external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py",
             "artifacts/proof_carrying_context_engine/receipts/PCCE-010.json"
           ],
           "priority": "P0",
@@ -108,7 +118,384 @@
           "task_id": "PCCE-010",
           "title": "Remove accelerator v0.1 integration blockers",
           "validation_commands": [
-            "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py"
+            "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py external/ipfs_accelerate/test/proof_context/test_v01_contract_resources.py"
+          ]
+        }
+      ]
+    },
+    "pcce/a/adversarial-assurance": {
+      "bundle_key": "pcce/a/adversarial-assurance",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "The accelerator assurance runtime and bridge are one fenced migration; datasets specifications and kit persistence are read-only upstream authorities supplied by PCCE-018/PCCE-019 and may be changed only by their owning tasks; this task cannot modify benchmark hidden data, engine lifecycle files, or shared policy outside declared paths.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-assurance",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance",
+            "external/ipfs_accelerate/test/api/adversarial_assurance",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeeravnhidhdptmldm4oocu64bav7kcb3afe3nhprd4qqegyhc4k2jylq",
+          "canonical_task_key": "task/v1/ab4e819c6f9b163671ce153dc082bf5083b0149b69df11f21021b071715a4e17",
+          "dependencies": [
+            "PCCE-010",
+            "PCCE-014",
+            "PCCE-018",
+            "PCCE-019"
+          ],
+          "dependency_task_ids": [
+            "PCCE-010",
+            "PCCE-014",
+            "PCCE-018",
+            "PCCE-019"
+          ],
+          "depends_on": [
+            "PCCE-010",
+            "PCCE-014",
+            "PCCE-018",
+            "PCCE-019"
+          ],
+          "execution_mode": "supervised candidate convergence and qualification",
+          "files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance",
+            "external/ipfs_accelerate/test/api/adversarial_assurance",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 14400,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "AdversarialAssuranceEngine is a bounded, current-tree accelerator service with typed evidence and no authority to approve its own outcomes.",
+            "acceptance criteria": "Exact candidate provenance and retained/rejected portions are recorded; policy-bounded mutations produce typed omission, vacuity, critical-survivor, context-expansion, timeout, unavailable, and infrastructure outcomes; critical survivors fail acceptance; campaign sampling is deterministic from bound identity; no result self-approves or promotes simulation.",
+            "allowed effects": "Selectively adopt reviewed accelerator candidate code and fixtures into the declared paths, compose the admitted datasets/kit foundations, implement the missing bounded campaign/runtime surface and stable bridge, run focused tests, and write the receipt.",
+            "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance, external/ipfs_accelerate/test/api/adversarial_assurance, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py, external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+            "assigned worktree": "pcce-PCCE-015",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/adversarial-assurance",
+            "completion": "auto",
+            "conflict policy": "The accelerator assurance runtime and bridge are one fenced migration; datasets specifications and kit persistence are read-only upstream authorities supplied by PCCE-018/PCCE-019 and may be changed only by their owning tasks; this task cannot modify benchmark hidden data, engine lifecycle files, or shared policy outside declared paths.",
+            "depends on": "PCCE-010, PCCE-014, PCCE-018, PCCE-019",
+            "execution mode": "supervised candidate convergence and qualification",
+            "final result cid or artifact identity": "pending accelerator assurance subsystem, bridge, and qualification identities bound to the admitted PCCE-018/PCCE-019 upstream identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "14400",
+            "is schedulable": "true",
+            "objective": "Converge the inventoried AdversarialAssuranceEngine candidate into an accelerator-owned production service over datasets-owned assurance/task specifications and expose its bounded outcomes to the governed lifecycle.",
+            "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance, external/ipfs_accelerate/test/api/adversarial_assurance, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py, external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+            "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance, external/ipfs_accelerate/test/api/adversarial_assurance, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py, external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+            "owning repository": "endomorphosis/ipfs_accelerate_py",
+            "parallel lane": "pcce-a-assurance",
+            "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance, external/ipfs_accelerate/test/api/adversarial_assurance, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py, external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-015.json",
+            "priority": "P0",
+            "prohibited effects": "Create a second assurance engine when candidate code is adoptable; import candidate board/state/evidence; let mutations escape policy/sandbox; expose hidden benchmark answers; allow the assurance engine or patch agent to self-approve; manufacture success for unavailable detectors.",
+            "required evidence": "Candidate/diff ledger; fixture and detector identities; bounded process/network trace; mutation outcome matrix; critical-survivor and unavailable negatives; context-expansion receipt; independent review.",
+            "required tests": "python -m pytest -q external/ipfs_accelerate/test/api/adversarial_assurance external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-assurance-integrity",
+            "rollback procedure": "Revert only the accelerator assurance runtime and bridge task commit, terminate only owned campaign processes, quarantine partial mutation artifacts, and invalidate dependent assurance/seal receipts; if an upstream datasets specification or kit persistence defect is implicated, request owner-led rollback through PCCE-018 or PCCE-019 and invalidate this task rather than editing their paths.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_accelerate/test/api/adversarial_assurance external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py"
+          },
+          "objective": "Converge the inventoried AdversarialAssuranceEngine candidate into an accelerator-owned production service over datasets-owned assurance/task specifications and expose its bounded outcomes to the governed lifecycle.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance",
+            "external/ipfs_accelerate/test/api/adversarial_assurance",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance",
+            "external/ipfs_accelerate/test/api/adversarial_assurance",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/adversarial_assurance",
+            "external/ipfs_accelerate/test/api/adversarial_assurance",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/assurance_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-015.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-assurance-integrity",
+          "status": "todo",
+          "task_id": "PCCE-015",
+          "title": "Converge and qualify AdversarialAssuranceEngine",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_accelerate/test/api/adversarial_assurance external/ipfs_accelerate/test/proof_context/test_assurance_bridge.py"
+          ]
+        }
+      ]
+    },
+    "pcce/a/context-pack-ownership": {
+      "bundle_key": "pcce/a/context-pack-ownership",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "Datasets implementation and accelerator bridge are one fenced migration unit; no concurrent task owns these files, and both commits merge or roll back together.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-context-pack",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeera5pzcoybdqrofkuq75navfm2sdhux4j3fyxwjhxpr5xghmhdv4dcq",
+          "canonical_task_key": "task/v1/ebf2276023845c55521feb4152b35219e97e2765c5ec93ddf1edcc761c75e0c5",
+          "dependencies": [
+            "PCCE-008",
+            "PCCE-010"
+          ],
+          "dependency_task_ids": [
+            "PCCE-008",
+            "PCCE-010"
+          ],
+          "depends_on": [
+            "PCCE-008",
+            "PCCE-010"
+          ],
+          "execution_mode": "supervised bounded cross-repository migration",
+          "files": [
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "ContextPack construction, sufficiency, expansion inputs, and semantic comparison have one datasets-owned v0.1 authority with a thin accelerator consumer.",
+            "acceptance criteria": "Datasets is the sole v0.1 ContextPack builder and semantic authority; accelerator delegates without reconstructing packs; legacy ContextPacker entry points are explicitly compatibility-only; canonical stale, opaque, insufficiency, expansion, and semantic-outcome vectors pass; no sibling layout or import-time effects are required.",
+            "allowed effects": "Selectively transpose or adapt only the inventoried ContextPack logic into the declared datasets module, add an accelerator delegation bridge, focused tests, and the task receipt.",
+            "allowed paths": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py, external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py, external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py, external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+            "assigned worktree": "pcce-PCCE-012",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/context-pack-ownership",
+            "completion": "auto",
+            "conflict policy": "Datasets implementation and accelerator bridge are one fenced migration unit; no concurrent task owns these files, and both commits merge or roll back together.",
+            "depends on": "PCCE-008, PCCE-010",
+            "execution mode": "supervised bounded cross-repository migration",
+            "final result cid or artifact identity": "pending datasets ContextPack authority and bridge tree identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Move the inventoried ContextPack construction, context-sufficiency, and semantic-outcome authority required by v0.1 behind a datasets-owned implementation while reducing the accelerator ContextPacker to a compatibility/delegation surface.",
+            "outputs": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py, external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py, external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py, external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+            "owned paths": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py, external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py, external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py, external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+            "owning repository": "cross-repository",
+            "parallel lane": "pcce-a-context-pack",
+            "predicted files": "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py, external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py, external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py, external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py, external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-012.json",
+            "priority": "P0",
+            "prohibited effects": "Implement another analyzer or capsule compiler; leave accelerator as production ContextPack authority; copy stale WIP control artifacts; weaken opaque-source, freshness, sufficiency, or source-tree binding.",
+            "required evidence": "PCCE-005 migration item; exact source/candidate blob identities; before/after import graph; compatibility vectors; focused and legacy regression logs; delegation trace.",
+            "required tests": "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-ownership-migration",
+            "rollback procedure": "Revert the datasets authority and accelerator bridge task commits together, invalidate dependent receipts, and restore the previous compatibility path as non-v0.1 authority; do not retain split writers.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py"
+          },
+          "objective": "Move the inventoried ContextPack construction, context-sufficiency, and semantic-outcome authority required by v0.1 behind a datasets-owned implementation while reducing the accelerator ContextPacker to a compatibility/delegation surface.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/context_pack.py",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/semantic_outcome.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py",
+            "external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/context_pack.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/contracts.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/semantic_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-012.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-ownership-migration",
+          "status": "todo",
+          "task_id": "PCCE-012",
+          "title": "Establish datasets-owned ContextPack construction authority",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_datasets/tests/proof_context/test_v01_context_pack.py external/ipfs_datasets/tests/proof_context/test_v01_semantic_outcome.py external/ipfs_accelerate/test/proof_context/test_semantic_bridge.py"
+          ]
+        }
+      ]
+    },
+    "pcce/a/datasets-assurance-foundation": {
+      "bundle_key": "pcce/a/datasets-assurance-foundation",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "Datasets assurance semantics are isolated from ContextPack and proof-contract paths; accelerator runtime and kit persistence remain separate dependent tasks.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-datasets-assurance",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py",
+            "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeerac3omz66hh5svlgm6xkhk3hu63o6yxtbw4rhb7ivapw7g4wwoo6fa",
+          "canonical_task_key": "task/v1/16dcccfbc73f6555999eba8ead9e9edbbd8bcc36e44e1fa2a07dbe6e5ace778a",
+          "dependencies": [
+            "PCCE-007"
+          ],
+          "dependency_task_ids": [
+            "PCCE-007"
+          ],
+          "depends_on": [
+            "PCCE-007"
+          ],
+          "execution_mode": "supervised immutable-candidate recovery",
+          "files": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py",
+            "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "Assurance has one exact datasets-owned semantic/specification foundation or a typed external block, with no runtime-authority leakage.",
+            "acceptance criteria": "Candidate commit/tree/blob provenance is exact or the task records a typed external block; recovered specifications cover bounded mutation, omission, vacuity, critical survivor, context expansion, negative human review, and typed unavailable outcomes; schemas/vectors are closed and no runtime/persistence authority enters datasets.",
+            "allowed effects": "Acquire the exact candidate object, selectively recover only the datasets assurance package/tests, add the narrow proof-context specification binding, run focused tests, and write the receipt.",
+            "allowed paths": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py, external/ipfs_datasets/tests/proof_context/test_assurance_specification.py, artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+            "assigned worktree": "pcce-PCCE-018",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/datasets-assurance-foundation",
+            "completion": "auto",
+            "conflict policy": "Datasets assurance semantics are isolated from ContextPack and proof-contract paths; accelerator runtime and kit persistence remain separate dependent tasks.",
+            "depends on": "PCCE-007",
+            "execution mode": "supervised immutable-candidate recovery",
+            "final result cid or artifact identity": "pending datasets assurance foundation and acquisition identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Recover the exact datasets assurance-specification, mutation-description, outcome-comparison, and fixture-contract foundation required by the accelerator assurance candidate and bind it to the v0.1 datasets port.",
+            "outputs": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py, external/ipfs_datasets/tests/proof_context/test_assurance_specification.py, artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+            "owned paths": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py, external/ipfs_datasets/tests/proof_context/test_assurance_specification.py, artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+            "owning repository": "endomorphosis/ipfs_datasets_py",
+            "parallel lane": "pcce-a-datasets-assurance",
+            "predicted files": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance, external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py, external/ipfs_datasets/tests/proof_context/test_assurance_specification.py, artifacts/proof_carrying_context_engine/receipts/PCCE-018.json",
+            "priority": "P0",
+            "prohibited effects": "Implement an accelerator campaign engine here; reconstruct missing candidate logic from plans; expose hidden answers; embed executor or persistence authority; mutate semantic analyzers; label an unavailable candidate as complete.",
+            "required evidence": "Immutable acquisition receipt; selective diff ledger; specification/vector CIDs; negative/hidden-data isolation tests; focused logs; explicit blocker evidence if objects are unavailable.",
+            "required tests": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-assurance-contract-recovery",
+            "rollback procedure": "Revert only the recovered datasets package/specification commit, invalidate PCCE-019/PCCE-015 and downstream assurance receipts, and preserve failed acquisition evidence.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance external/ipfs_datasets/tests/proof_context/test_assurance_specification.py"
+          },
+          "objective": "Recover the exact datasets assurance-specification, mutation-description, outcome-comparison, and fixture-contract foundation required by the accelerator assurance candidate and bind it to the v0.1 datasets port.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py",
+            "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py",
+            "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance",
+            "external/ipfs_datasets/ipfs_datasets_py/proof_context/assurance_specification.py",
+            "external/ipfs_datasets/tests/proof_context/test_assurance_specification.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-018.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-assurance-contract-recovery",
+          "status": "todo",
+          "task_id": "PCCE-018",
+          "title": "Recover datasets adversarial-assurance semantic foundations",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_datasets/tests/unit/logic/software_contracts/adversarial_assurance external/ipfs_datasets/tests/proof_context/test_assurance_specification.py"
           ]
         }
       ]
@@ -223,6 +610,116 @@
         }
       ]
     },
+    "pcce/a/datasets-incremental-sealing": {
+      "bundle_key": "pcce/a/datasets-incremental-sealing",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "This task exclusively owns datasets proof contracts; it runs beside ContextPack/assurance work only because their paths and authorities do not overlap.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-datasets-proof-contracts",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeera6qpjgr5nqwbrdcquoeyguhflpja3apcwv3m7qzhltne27ddcqvwq",
+          "canonical_task_key": "task/v1/f41e9347ad8583118a1471306a1cab7a41b03c56aed9f864eb9b49af8c62856d",
+          "dependencies": [
+            "PCCE-007"
+          ],
+          "dependency_task_ids": [
+            "PCCE-007"
+          ],
+          "depends_on": [
+            "PCCE-007"
+          ],
+          "execution_mode": "supervised immutable-candidate recovery",
+          "files": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "Accelerator sealer dependencies have an exact, datasets-owned, vector-qualified proof-contract foundation or an explicit external block.",
+            "acceptance criteria": "Exact candidate commit/tree/blob provenance is verified before mutation; if the immutable object cannot be acquired, the task terminates with a typed external-prerequisite block and no substitute implementation; recovered proof units/forests/canonical bytes match PCCE-006/PCCE-007, reject malformed/stale/simulated inputs, and pass their full focused suite.",
+            "allowed effects": "Acquire the exact candidate commit by immutable identity, selectively recover only the declared proof-contract package/tests/vector, reconcile it to frozen v0.1 contracts, and write the task receipt.",
+            "allowed paths": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json, artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+            "assigned worktree": "pcce-PCCE-017",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/datasets-incremental-sealing",
+            "completion": "auto",
+            "conflict policy": "This task exclusively owns datasets proof contracts; it runs beside ContextPack/assurance work only because their paths and authorities do not overlap.",
+            "depends on": "PCCE-007",
+            "execution mode": "supervised immutable-candidate recovery",
+            "final result cid or artifact identity": "pending recovered proof-contract tree and candidate-acquisition identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Recover and qualify the exact datasets-owned incremental-sealing proof-contract primitives referenced by the inventoried sealer candidate without inventing a new ZK system, prover, cache, or semantic analyzer.",
+            "outputs": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json, artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+            "owned paths": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json, artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+            "owning repository": "endomorphosis/ipfs_datasets_py",
+            "parallel lane": "pcce-a-datasets-proof-contracts",
+            "predicted files": "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing, external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json, artifacts/proof_carrying_context_engine/receipts/PCCE-017.json",
+            "priority": "P0",
+            "prohibited effects": "Reconstruct missing proof logic from prose; fetch a mutable branch as authority; add a new prover/ZK/cache; import candidate board/evidence; change semantic analyzers; treat an unavailable candidate object as passed.",
+            "required evidence": "Immutable acquisition receipt; candidate/source/target diff ledger; schema/vector parity; positive and negative forest vectors; focused regression log; explicit external-block receipt if unavailable.",
+            "required tests": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-proof-contract-recovery",
+            "rollback procedure": "Revert only the recovered package/test/vector commit, invalidate PCCE-013/PCCE-014 and downstream receipts, and preserve acquisition/failure evidence; never replace it with prose-derived code.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing"
+          },
+          "objective": "Recover and qualify the exact datasets-owned incremental-sealing proof-contract primitives referenced by the inventoried sealer candidate without inventing a new ZK system, prover, cache, or semantic analyzer.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_datasets/ipfs_datasets_py/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing",
+            "external/ipfs_datasets/tests/fixtures/incremental_proof_sealer/forest_vectors.json",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-017.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-proof-contract-recovery",
+          "status": "todo",
+          "task_id": "PCCE-017",
+          "title": "Recover datasets incremental-sealing proof contracts",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_datasets/tests/unit/logic/zkp/incremental_sealing"
+          ]
+        }
+      ]
+    },
     "pcce/a/freeze-gate": {
       "bundle_key": "pcce/a/freeze-gate",
       "bundle_strategy": "reviewed-manual-task-slice-v1",
@@ -242,19 +739,34 @@
           "canonical_task_cid": "baguqeerabn5u2iqjqygfoaojmyp55rxcus4ad5aqftnoqf6r6grxt3wakrqq",
           "canonical_task_key": "task/v1/0b7b4d2209860c5701c9661fdec6e2a4b801f4102cdae817d1f1a379eec05461",
           "dependencies": [
-            "PCCE-008",
-            "PCCE-009",
-            "PCCE-010"
+            "PCCE-012",
+            "PCCE-013",
+            "PCCE-014",
+            "PCCE-015",
+            "PCCE-016",
+            "PCCE-017",
+            "PCCE-018",
+            "PCCE-019"
           ],
           "dependency_task_ids": [
-            "PCCE-008",
-            "PCCE-009",
-            "PCCE-010"
+            "PCCE-012",
+            "PCCE-013",
+            "PCCE-014",
+            "PCCE-015",
+            "PCCE-016",
+            "PCCE-017",
+            "PCCE-018",
+            "PCCE-019"
           ],
           "depends_on": [
-            "PCCE-008",
-            "PCCE-009",
-            "PCCE-010"
+            "PCCE-012",
+            "PCCE-013",
+            "PCCE-014",
+            "PCCE-015",
+            "PCCE-016",
+            "PCCE-017",
+            "PCCE-018",
+            "PCCE-019"
           ],
           "execution_mode": "supervised acceptance gate",
           "files": [
@@ -275,7 +787,7 @@
             "bundle": "pcce/a/freeze-gate",
             "completion": "auto",
             "conflict policy": "Gate is evidence-only; any mismatch blocks PCCE-020, PCCE-022, and PCCE-023 and reopens only its owning antecedent.",
-            "depends on": "PCCE-008, PCCE-009, PCCE-010",
+            "depends on": "PCCE-012, PCCE-013, PCCE-014, PCCE-015, PCCE-016, PCCE-017, PCCE-018, PCCE-019",
             "execution mode": "supervised acceptance gate",
             "final result cid or artifact identity": "pending CID for artifacts/proof_carrying_context_engine/contracts/epic_a_gate.json",
             "goal id": "PCCE-G100",
@@ -289,14 +801,14 @@
             "predicted files": "artifacts/proof_carrying_context_engine/contracts/epic_a_gate.json, artifacts/proof_carrying_context_engine/receipts/PCCE-011.json",
             "priority": "P0",
             "prohibited effects": "Repair implementation during the gate; waive mismatch; mutate contracts; report unavailable checks as passed.",
-            "required evidence": "Verified PCCE-001 through PCCE-010 receipt CIDs; exact source matrix; full gate logs; negative-test results; explicit go or documented no-go.",
-            "required tests": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py external/ipfs_datasets/tests/proof_context/test_v01_provider.py external/ipfs_kit/tests/proof_context/test_v01_state_store.py external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py",
+            "required evidence": "Verified PCCE-001 through PCCE-019 receipt CIDs; exact source matrix; full gate logs; negative-test results; explicit go or documented no-go.",
+            "required tests": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py external/ipfs_datasets/tests/proof_context external/ipfs_kit/tests/proof_context external/ipfs_accelerate/test/proof_context external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py",
             "resource class": "cpu-medium",
             "review only": "false",
             "risk classification": "release-gate-critical",
             "rollback procedure": "Publish a failed gate, invalidate dependents, and return only the failing owner task to repair; never patch source from the gate worktree.",
             "status": "todo",
-            "validation": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py external/ipfs_datasets/tests/proof_context/test_v01_provider.py external/ipfs_kit/tests/proof_context/test_v01_state_store.py external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py"
+            "validation": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py external/ipfs_datasets/tests/proof_context external/ipfs_kit/tests/proof_context external/ipfs_accelerate/test/proof_context external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py"
           },
           "objective": "Revalidate exact repository/tree identities, inventory completeness, ownership, migrations, schema/vector parity, dependency imports, and blocker repairs before releasing the frozen contracts to runtime work.",
           "objective_priority": 100,
@@ -324,7 +836,263 @@
           "task_id": "PCCE-011",
           "title": "Seal Epic A implementation and contract gate",
           "validation_commands": [
-            "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py external/ipfs_datasets/tests/proof_context/test_v01_provider.py external/ipfs_kit/tests/proof_context/test_v01_state_store.py external/ipfs_accelerate/test/proof_context/test_v01_dependencies.py"
+            "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py external/ipfs_datasets/tests/proof_context external/ipfs_kit/tests/proof_context external/ipfs_accelerate/test/proof_context external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py"
+          ]
+        }
+      ]
+    },
+    "pcce/a/incremental-proof-sealer": {
+      "bundle_key": "pcce/a/incremental-proof-sealer",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "The sealer package, public bridge, and kit store are one fenced convergence unit; the task may not modify shared planner or supervisor modules outside these paths.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-proof-sealer",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+            "external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeerasbmy2fxn4ohmo3aelvlyjp5xvkhgenhhaibzp5lslfwsfipv4rsq",
+          "canonical_task_key": "task/v1/90598d16ede38ec76c045d5784bfb7aa8e6234e7020397f572596d22a1f5e465",
+          "dependencies": [
+            "PCCE-013",
+            "PCCE-017"
+          ],
+          "dependency_task_ids": [
+            "PCCE-013",
+            "PCCE-017"
+          ],
+          "depends_on": [
+            "PCCE-013",
+            "PCCE-017"
+          ],
+          "execution_mode": "supervised candidate convergence and qualification",
+          "files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+            "external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 14400,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "IncrementalProofSealer is current-tree, test-backed, fail-closed, persisted by kit, and reuses only still-valid proof units.",
+            "acceptance criteria": "The exact adopted candidate provenance and object availability are recorded, with an unavailable immutable candidate producing a typed external block instead of reimplementation; the released public capability no longer probes unavailable; unaffected valid proof units are reused, invalidated units recompute, and seals bind repository/task/patch/plan/toolchain/environment/policy/parent identities; wrong parent, stale, forged, pseudo-CID, unavailable, or simulated evidence cannot create an accepted seal; public and current-tree regression suites pass.",
+            "allowed effects": "Recover or transplant only exact reviewed candidate sealing objects into the declared datasets proof primitives and accelerator subsystem, add the released public capability module, stable bridge and kit persistence adapter, focused/current-tree tests, and the task receipt.",
+            "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py, external/ipfs_accelerate/test/api/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py, external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py, external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py, external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py, artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+            "assigned worktree": "pcce-PCCE-014",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/incremental-proof-sealer",
+            "completion": "auto",
+            "conflict policy": "The sealer package, public bridge, and kit store are one fenced convergence unit; the task may not modify shared planner or supervisor modules outside these paths.",
+            "depends on": "PCCE-013, PCCE-017",
+            "execution mode": "supervised candidate convergence and qualification",
+            "final result cid or artifact identity": "pending sealer subsystem, bridge, store, and qualification identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "14400",
+            "is schedulable": "true",
+            "objective": "Selectively converge the inventoried IncrementalProofSealer candidate into a current-tree accelerator authority and persist its proof units, parent chain, and incremental seals through the kit v0.1 store.",
+            "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py, external/ipfs_accelerate/test/api/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py, external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py, external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py, external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py, artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+            "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py, external/ipfs_accelerate/test/api/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py, external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py, external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py, external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py, artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+            "owning repository": "cross-repository",
+            "parallel lane": "pcce-a-proof-sealer",
+            "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py, external/ipfs_accelerate/test/api/incremental_sealing, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py, external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py, external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py, external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py, artifacts/proof_carrying_context_engine/receipts/PCCE-014.json",
+            "priority": "P0",
+            "prohibited effects": "Create a new prover, ZK system, or proof cache; import candidate control boards or historical evidence; accept simulated or unavailable proof; discard failed candidate tests; bypass parent, environment, freshness, or authority checks.",
+            "required evidence": "Candidate commit/blob and selective-diff ledger; pre-change proof tests; positive reuse/recompute traces; stale/wrong-parent/simulated negatives; kit publication and recovery receipts; current-tree regression log.",
+            "required tests": "python -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-proof-integrity",
+            "rollback procedure": "Revert the converged subsystem, bridge, and kit store commits as one merge plan, restore the prior kit CAS root, mark emitted seals invalid, and preserve candidate/failed-attempt evidence.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py"
+          },
+          "objective": "Selectively converge the inventoried IncrementalProofSealer candidate into a current-tree accelerator authority and persist its proof units, parent chain, and incremental seals through the kit v0.1 store.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+            "external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+            "external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/incremental_proof_sealer.py",
+            "external/ipfs_accelerate/test/api/incremental_sealing",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/sealing_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/incremental_seal_store.py",
+            "external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-014.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-proof-integrity",
+          "status": "todo",
+          "task_id": "PCCE-014",
+          "title": "Converge and qualify IncrementalProofSealer",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_accelerate/test/api/incremental_sealing external/ipfs_accelerate/test/proof_context/test_incremental_sealing_bridge.py external/ipfs_kit/tests/proof_context/test_incremental_seal_store.py"
+          ]
+        }
+      ]
+    },
+    "pcce/a/incremental-verification-conformance": {
+      "bundle_key": "pcce/a/incremental-verification-conformance",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "This task exclusively owns the canonical selection files and fixtures; proof sealing may run concurrently only because it owns disjoint paths and consumes the prior planner contract.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-verification-conformance",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py",
+            "external/ipfs_accelerate/test/fixtures/incremental_verification",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeeramqjwsezgavmbtupvco6cdzojbsj756fxxghca6thzlaqxwjglisq",
+          "canonical_task_key": "task/v1/6413691326055819d1f513bc21e5c90c93fef8b7b98e207a67cac10bd9265a25",
+          "dependencies": [
+            "PCCE-010",
+            "PCCE-013"
+          ],
+          "dependency_task_ids": [
+            "PCCE-010",
+            "PCCE-013"
+          ],
+          "depends_on": [
+            "PCCE-010",
+            "PCCE-013"
+          ],
+          "execution_mode": "supervised focused canonical repair",
+          "files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py",
+            "external/ipfs_accelerate/test/fixtures/incremental_verification",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "Incremental verification is conservative on ambiguity and demonstrates zero selected-test false negatives on the controlled v0.1 fixtures.",
+            "acceptance criteria": "Controlled fixtures have zero selected-test false negatives; unknown, dynamic, plugin, opaque, or insufficient semantic impact conservatively selects the full affected boundary or requires review; valid unaffected receipts may be reused only through the kit store; all existing planner, scheduler, report, and benchmark smoke tests remain green.",
+            "allowed effects": "Minimize the known counterexample, make the smallest planner/selection repair, add controlled fixtures and regression tests, and write the receipt.",
+            "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py, external/ipfs_accelerate/test/fixtures/incremental_verification, artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+            "assigned worktree": "pcce-PCCE-016",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/incremental-verification-conformance",
+            "completion": "auto",
+            "conflict policy": "This task exclusively owns the canonical selection files and fixtures; proof sealing may run concurrently only because it owns disjoint paths and consumes the prior planner contract.",
+            "depends on": "PCCE-010, PCCE-013",
+            "execution mode": "supervised focused canonical repair",
+            "final result cid or artifact identity": "pending repaired planner tree and conformance receipt identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Repair the inventoried selected-test false negative and freeze conservative incremental-verification conformance before the v0.1 lifecycle can rely on test selection or proof reuse.",
+            "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py, external/ipfs_accelerate/test/fixtures/incremental_verification, artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+            "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py, external/ipfs_accelerate/test/fixtures/incremental_verification, artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+            "owning repository": "endomorphosis/ipfs_accelerate_py",
+            "parallel lane": "pcce-a-verification-conformance",
+            "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py, external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py, external/ipfs_accelerate/test/fixtures/incremental_verification, artifacts/proof_carrying_context_engine/receipts/PCCE-016.json",
+            "priority": "P0",
+            "prohibited effects": "Implement another planner or analyzer; weaken full-suite fallback; encode fixture-specific paths; classify unavailable static/proof checks as passed; hide failed selection attempts.",
+            "required evidence": "Minimized false-negative fixture; pre/post selected/full test sets; existing-suite log; dynamic/plugin fallback matrix; kit receipt-reuse trace; independent soundness review.",
+            "required tests": "python -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_scheduler.py",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-verification-soundness",
+            "rollback procedure": "Revert the focused planner/selection task commit, invalidate every downstream verification/proof receipt, and force full verification until a replacement repair is admitted.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_scheduler.py"
+          },
+          "objective": "Repair the inventoried selected-test false negative and freeze conservative incremental-verification conformance before the v0.1 lifecycle can rely on test selection or proof reuse.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py",
+            "external/ipfs_accelerate/test/fixtures/incremental_verification",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py",
+            "external/ipfs_accelerate/test/fixtures/incremental_verification",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/planner.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/selection.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py",
+            "external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py",
+            "external/ipfs_accelerate/test/fixtures/incremental_verification",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-016.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-verification-soundness",
+          "status": "todo",
+          "task_id": "PCCE-016",
+          "title": "Repair known incremental-verification selection conformance",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_planner.py external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_conformance.py external/ipfs_accelerate/test/api/test_agent_supervisor_incremental_verification_scheduler.py"
           ]
         }
       ]
@@ -729,6 +1497,114 @@
         }
       ]
     },
+    "pcce/a/kit-assurance-store": {
+      "bundle_key": "pcce/a/kit-assurance-store",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "Kit assurance persistence is separate from proof-seal storage and can run concurrently only because owned directories and schemas are disjoint.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-kit-assurance",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store",
+            "external/ipfs_kit/tests/adversarial_assurance_store",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeeranbjpbxomytyb3mpfmvasvcopohtydf35htwd5wfjbs7y7bizzb6q",
+          "canonical_task_key": "task/v1/6852f0ddccc4f01db1e565412a89cf71e781977d3cec3ed8a90cbf8f8519c87d",
+          "dependencies": [
+            "PCCE-009",
+            "PCCE-018"
+          ],
+          "dependency_task_ids": [
+            "PCCE-009",
+            "PCCE-018"
+          ],
+          "depends_on": [
+            "PCCE-009",
+            "PCCE-018"
+          ],
+          "execution_mode": "supervised immutable-candidate recovery",
+          "files": [
+            "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store",
+            "external/ipfs_kit/tests/adversarial_assurance_store",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "Assurance campaign evidence has one exact, hermetic, generation-safe kit store or a documented immutable-candidate blocker.",
+            "acceptance criteria": "Candidate object provenance is exact or produces a typed external block; local mode is hermetic; campaign/finding bytes and CIDs agree; WAL recovery and generation CAS produce one valid root; stale/concurrent/corrupt writers fail closed; optional IPFS transport is explicit and never required by core.",
+            "allowed effects": "Acquire the exact candidate object, selectively recover only the declared store/tests, bind schemas to PCCE-018, run crash/concurrency/corruption tests, and write the receipt.",
+            "allowed paths": "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store, external/ipfs_kit/tests/adversarial_assurance_store, artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+            "assigned worktree": "pcce-PCCE-019",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/kit-assurance-store",
+            "completion": "auto",
+            "conflict policy": "Kit assurance persistence is separate from proof-seal storage and can run concurrently only because owned directories and schemas are disjoint.",
+            "depends on": "PCCE-009, PCCE-018",
+            "execution mode": "supervised immutable-candidate recovery",
+            "final result cid or artifact identity": "pending kit assurance-store and acquisition identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Recover and qualify the exact kit-owned immutable assurance campaign, mutation, finding, and current-root persistence candidate required by the v0.1 assurance runtime.",
+            "outputs": "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store, external/ipfs_kit/tests/adversarial_assurance_store, artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+            "owned paths": "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store, external/ipfs_kit/tests/adversarial_assurance_store, artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+            "owning repository": "endomorphosis/ipfs_kit_py",
+            "parallel lane": "pcce-a-kit-assurance",
+            "predicted files": "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store, external/ipfs_kit/tests/adversarial_assurance_store, artifacts/proof_carrying_context_engine/receipts/PCCE-019.json",
+            "priority": "P0",
+            "prohibited effects": "Rebuild the store from prose; add campaign execution or semantic authority; accept pseudo-CIDs, stale/ABA roots, corrupt history, partial publication, or simulated findings as live; contact IPFS unless an optional test is explicitly admitted.",
+            "required evidence": "Immutable acquisition receipt; selective diff ledger; datasets schema parity; WAL/CAS crash and race logs; corruption/stale negatives; no-network trace; explicit blocker evidence if unavailable.",
+            "required tests": "python -m pytest -q external/ipfs_kit/tests/adversarial_assurance_store",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-assurance-persistence-recovery",
+            "rollback procedure": "Revert only the recovered store/test commit, restore the previous current root through generation CAS, quarantine partial artifacts, and invalidate PCCE-015/downstream assurance receipts.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_kit/tests/adversarial_assurance_store"
+          },
+          "objective": "Recover and qualify the exact kit-owned immutable assurance campaign, mutation, finding, and current-root persistence candidate required by the v0.1 assurance runtime.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store",
+            "external/ipfs_kit/tests/adversarial_assurance_store",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store",
+            "external/ipfs_kit/tests/adversarial_assurance_store",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_kit/ipfs_kit_py/adversarial_assurance_store",
+            "external/ipfs_kit/tests/adversarial_assurance_store",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-019.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-assurance-persistence-recovery",
+          "status": "todo",
+          "task_id": "PCCE-019",
+          "title": "Recover kit adversarial-assurance persistence",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_kit/tests/adversarial_assurance_store"
+          ]
+        }
+      ]
+    },
     "pcce/a/kit-blockers": {
       "bundle_key": "pcce/a/kit-blockers",
       "bundle_strategy": "reviewed-manual-task-slice-v1",
@@ -968,6 +1844,9 @@
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json",
@@ -983,8 +1862,8 @@
             "artifacts/proof_carrying_context_engine/receipts/PCCE-006.json"
           ],
           "board_namespace": "proof-carrying-context-engine-v0.1",
-          "canonical_task_cid": "baguqeeramunwbjddb656zyyzndm2kbfcqg27byulohxotgjhbf7z5l6vw2aq",
-          "canonical_task_key": "task/v1/651b60a4630fbbece31968d9a504a281b5f0e28b71eee99927097f9eafd5b681",
+          "canonical_task_cid": "baguqeerac75kqoabfulypuitkbknzk62m2nun2tybqve4nlaoonkcddvljgq",
+          "canonical_task_key": "task/v1/17faa838012d1787d1135054dcabda669b46ea780c2a4e3560739aa10c755a4d",
           "dependencies": [
             "PCCE-005"
           ],
@@ -999,6 +1878,9 @@
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json",
@@ -1019,9 +1901,9 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "All v0.1 wire contracts have exact versions and reject unknown, stale, simulated-as-live, malformed, and identity-inconsistent values.",
-            "acceptance criteria": "Schemas are closed, versioned 0.1, bounded, provider-neutral, consistent with actual APIs, and distinguish succeeded, rejected, verification_failed, proof_failed, assurance_failed, context_insufficient, model_escalation_required, human_review_required, unavailable, timeout, cancelled, invalid, stale, simulated, infrastructure_failure, partial_effect, and repair_required.",
+            "acceptance criteria": "Schemas are closed, versioned 0.1, bounded, provider-neutral, and consistent with actual APIs; task/invocation/proposal contracts bind repository, task, and route identities plus provider, model, revision, tier, patch, declared files, token and cached-token counts, latency, cost, response artifact, and live, replayed, or simulated provenance; statuses distinguish succeeded, rejected, verification_failed, proof_failed, assurance_failed, context_insufficient, model_escalation_required, human_review_required, unavailable, timeout, cancelled, invalid, stale, simulated, infrastructure_failure, partial_effect, and repair_required.",
             "allowed effects": "Add the versioned MCP++ schemas, schema tests, and unique receipt.",
-            "allowed paths": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+            "allowed paths": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
             "assigned worktree": "pcce-PCCE-006",
             "board namespace": "proof-carrying-context-engine-v0.1",
             "bundle": "pcce/a/schema-freeze",
@@ -1033,12 +1915,12 @@
             "goal id": "PCCE-G100",
             "implementation timeout seconds": "7200",
             "is schedulable": "true",
-            "objective": "Freeze exact v0.1 narrow interoperability contracts derived from canonical implementations for repository state, capsules, ContextPacks, plans, routes, receipts, proof units, seals, qualification, taxonomies, canonicalization, and CID behavior.",
-            "outputs": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
-            "owned paths": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+            "objective": "Freeze exact v0.1 narrow interoperability contracts derived from canonical implementations for repository state, capsules, ContextPacks, task specifications, coding-agent invocations, patch proposals, plans, routes, receipts, proof units, seals, qualification, taxonomies, canonicalization, and CID behavior.",
+            "outputs": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+            "owned paths": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
             "owning repository": "endomorphosis/Mcp-Plus-Plus",
             "parallel lane": "pcce-a-schema",
-            "predicted files": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
+            "predicted files": "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/execution-receipt.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/proof-unit.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/incremental-seal.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/qualification-result.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/error-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/status-taxonomy.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/canonicalization.schema.json, Mcp-Plus-Plus/schemas/proof-context/v0.1/cid-behavior.schema.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py, artifacts/proof_carrying_context_engine/receipts/PCCE-006.json",
             "priority": "P0",
             "prohibited effects": "Create production runtime logic; silently rename canonical fields; accept unknown status/error values; define pseudo-CIDs; change a frozen schema without version and migration.",
             "required evidence": "Ownership-map CID; schema digests; validator results; field-by-field implementation trace; explicit migration/versioning rule.",
@@ -1050,12 +1932,15 @@
             "status": "todo",
             "validation": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_schemas.py"
           },
-          "objective": "Freeze exact v0.1 narrow interoperability contracts derived from canonical implementations for repository state, capsules, ContextPacks, plans, routes, receipts, proof units, seals, qualification, taxonomies, canonicalization, and CID behavior.",
+          "objective": "Freeze exact v0.1 narrow interoperability contracts derived from canonical implementations for repository state, capsules, ContextPacks, task specifications, coding-agent invocations, patch proposals, plans, routes, receipts, proof units, seals, qualification, taxonomies, canonicalization, and CID behavior.",
           "objective_priority": 100,
           "outputs": [
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json",
@@ -1077,6 +1962,9 @@
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json",
@@ -1095,6 +1983,9 @@
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/repository-state.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/semantic-capsule.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/context-pack.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/task-specification.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/coding-agent-invocation.schema.json",
+            "Mcp-Plus-Plus/schemas/proof-context/v0.1/patch-proposal.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/invalidation-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/verification-plan.schema.json",
             "Mcp-Plus-Plus/schemas/proof-context/v0.1/model-route-decision.schema.json",
@@ -1167,7 +2058,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "Cross-repository contract and identity compatibility is executable, pinned, fail-closed, and migration-aware.",
-            "acceptance criteria": "Equivalent values have identical canonical bytes and CIDv1 identities across consumers; unknown fields, NaN/Infinity, wrong parents, stale roots, malformed CIDs, and simulated promotion fail; the matrix pins commit/tree, schema support, migration, and producer/consumer direction for all four repositories.",
+            "acceptance criteria": "Equivalent values, including TaskSpecification, coding-agent invocation, and PatchProposal examples, have identical canonical bytes and CIDv1 identities across consumers; unknown fields, NaN/Infinity, wrong parents, stale roots, malformed CIDs, and simulated promotion fail; the matrix pins commit/tree, schema support, migration, and producer/consumer direction for all four repositories.",
             "allowed effects": "Add canonical vectors, vector tests, interop documentation, compatibility matrix, and receipt.",
             "allowed paths": "Mcp-Plus-Plus/conformance/vectors/proof-context-v0.1.json, Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py, Mcp-Plus-Plus/docs/interop/proof-context-v0.1.md, artifacts/proof_carrying_context_engine/contracts/compatibility_matrix.json, artifacts/proof_carrying_context_engine/receipts/PCCE-007.json",
             "assigned worktree": "pcce-PCCE-007",
@@ -1234,6 +2125,142 @@
           "title": "Freeze canonical vectors and compatibility matrix",
           "validation_commands": [
             "python -m pytest -q Mcp-Plus-Plus/tests-py/test_proof_context_v01_vectors.py && python -m json.tool artifacts/proof_carrying_context_engine/contracts/compatibility_matrix.json"
+          ]
+        }
+      ]
+    },
+    "pcce/a/verification-store-ownership": {
+      "bundle_key": "pcce/a/verification-store-ownership",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "Kit store and accelerator bridge form one fenced migration with a single production writer; no concurrent task may modify legacy receipt authorities.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-a-verification-store",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_kit/ipfs_kit_py/proof_seal_store",
+            "external/ipfs_kit/tests/proof_seal_store",
+            "external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+            "external/ipfs_kit/tests/proof_context/test_verification_store.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeeranswphctvsqcwkoigiio5qzvx26erjs3y3eo7gdj3u27skqxeu7ia",
+          "canonical_task_key": "task/v1/6cacf38a759405653906421dd866b7d78914cb78d91df30d3ba6bf2542e4a7d0",
+          "dependencies": [
+            "PCCE-009",
+            "PCCE-010",
+            "PCCE-017"
+          ],
+          "dependency_task_ids": [
+            "PCCE-009",
+            "PCCE-010",
+            "PCCE-017"
+          ],
+          "depends_on": [
+            "PCCE-009",
+            "PCCE-010",
+            "PCCE-017"
+          ],
+          "execution_mode": "supervised bounded cross-repository migration",
+          "files": [
+            "external/ipfs_kit/ipfs_kit_py/proof_seal_store",
+            "external/ipfs_kit/tests/proof_seal_store",
+            "external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+            "external/ipfs_kit/tests/proof_context/test_verification_store.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json"
+          ],
+          "goal_id": "PCCE-G100",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "Receipt and proof-forest persistence has one durable kit-owned authority and evidence reuse remains exact, fresh, and generation-safe.",
+            "acceptance criteria": "Exact candidate object availability/provenance is recorded or produces a typed external block; production PCCE writes verification receipts, proof forests, proof receipts, pointer generations, and WAL/recovery state only through kit APIs; accelerator duplicate formats are versioned read-only migration inputs; unaffected evidence crosses tree generations only when source, toolchain, obligation, parent, environment, and policy identities remain bound; stale/corrupt/ABA writers fail closed.",
+            "allowed effects": "Recover only the exact inventoried kit proof_seal_store candidate when its immutable objects are available, add the declared stable kit port and accelerator delegation bridge, deterministic migrations for compatible legacy receipts, corruption/concurrency tests, and the task receipt.",
+            "allowed paths": "external/ipfs_kit/ipfs_kit_py/proof_seal_store, external/ipfs_kit/tests/proof_seal_store, external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md, external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py, external/ipfs_kit/tests/proof_context/test_verification_store.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py, external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+            "assigned worktree": "pcce-PCCE-013",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/a/verification-store-ownership",
+            "completion": "auto",
+            "conflict policy": "Kit store and accelerator bridge form one fenced migration with a single production writer; no concurrent task may modify legacy receipt authorities.",
+            "depends on": "PCCE-009, PCCE-010, PCCE-017",
+            "execution mode": "supervised bounded cross-repository migration",
+            "final result cid or artifact identity": "pending kit verification-store and bridge tree identities",
+            "goal id": "PCCE-G100",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Establish kit as the sole v0.1 persistence authority for verification receipts, proof forests, generation-bearing current roots, and cross-tree unaffected-evidence reuse while keeping accelerator responsible only for scheduling.",
+            "outputs": "external/ipfs_kit/ipfs_kit_py/proof_seal_store, external/ipfs_kit/tests/proof_seal_store, external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md, external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py, external/ipfs_kit/tests/proof_context/test_verification_store.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py, external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+            "owned paths": "external/ipfs_kit/ipfs_kit_py/proof_seal_store, external/ipfs_kit/tests/proof_seal_store, external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md, external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py, external/ipfs_kit/tests/proof_context/test_verification_store.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py, external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+            "owning repository": "cross-repository",
+            "parallel lane": "pcce-a-verification-store",
+            "predicted files": "external/ipfs_kit/ipfs_kit_py/proof_seal_store, external/ipfs_kit/tests/proof_seal_store, external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md, external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py, external/ipfs_kit/tests/proof_context/test_verification_store.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py, external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py, artifacts/proof_carrying_context_engine/receipts/PCCE-013.json",
+            "priority": "P0",
+            "prohibited effects": "Add another block store or WAL; preserve a second production writer in accelerator; reuse evidence when any input changed; accept stale, corrupt, ABA, pseudo-CID, partial, or simulated artifacts.",
+            "required evidence": "PCCE-005 migration item; exact candidate commit/blob recovery ledger; exact legacy schema inventory; WAL/CAS crash and writer-race logs; migration vectors; cross-tree reuse positive/negative receipts; no-network trace.",
+            "required tests": "python -m pytest -q external/ipfs_kit/tests/proof_seal_store external/ipfs_kit/tests/proof_context/test_verification_store.py external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "critical-persistence-migration",
+            "rollback procedure": "Revert both bridge/store commits, restore the prior CAS root with the canonical generation check, quarantine any partial publication, and invalidate all dependent proof or verification receipts.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_kit/tests/proof_seal_store external/ipfs_kit/tests/proof_context/test_verification_store.py external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py"
+          },
+          "objective": "Establish kit as the sole v0.1 persistence authority for verification receipts, proof forests, generation-bearing current roots, and cross-tree unaffected-evidence reuse while keeping accelerator responsible only for scheduling.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_kit/ipfs_kit_py/proof_seal_store",
+            "external/ipfs_kit/tests/proof_seal_store",
+            "external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+            "external/ipfs_kit/tests/proof_context/test_verification_store.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_kit/ipfs_kit_py/proof_seal_store",
+            "external/ipfs_kit/tests/proof_seal_store",
+            "external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+            "external/ipfs_kit/tests/proof_context/test_verification_store.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_kit/ipfs_kit_py/proof_seal_store",
+            "external/ipfs_kit/tests/proof_seal_store",
+            "external/ipfs_kit/docs/architecture/INCREMENTAL_PROOF_SEAL_STORE.md",
+            "external/ipfs_kit/ipfs_kit_py/proof_context/verification_store.py",
+            "external/ipfs_kit/tests/proof_context/test_verification_store.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/verification_store_bridge.py",
+            "external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-013.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-persistence-migration",
+          "status": "todo",
+          "task_id": "PCCE-013",
+          "title": "Establish kit-owned verification receipt and proof-forest persistence",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_kit/tests/proof_seal_store external/ipfs_kit/tests/proof_context/test_verification_store.py external/ipfs_accelerate/test/proof_context/test_verification_store_bridge.py"
           ]
         }
       ]
@@ -1943,7 +2970,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "One bounded, provider-neutral proposal interface carries complete identity, usage, cost, cancellation, and provenance data.",
-            "acceptance criteria": "The interface consumes frozen ContextPack, TaskSpecification, and ModelRouteDecision identities; proposals are bounded, schema-valid, cancellable, cost/token explicit, and cannot self-approve or claim live status without live evidence.",
+            "acceptance criteria": "Python records round-trip byte-for-byte through frozen task-specification, coding-agent-invocation, patch-proposal, ContextPack, and ModelRouteDecision schemas; proposals are bounded, schema-valid, cancellable, cost/token explicit, and cannot self-approve or claim live status without live evidence.",
             "allowed effects": "Add protocols, immutable records, validators, and focused contract tests.",
             "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/base.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/models.py, external/ipfs_accelerate/test/proof_context/adapters/test_base.py, artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
             "assigned worktree": "pcce-PCCE-030",
@@ -1957,14 +2984,14 @@
             "goal id": "PCCE-G300",
             "implementation timeout seconds": "5400",
             "is schedulable": "true",
-            "objective": "Define CodingAgentAdapter and PatchProposal contracts for provider, model/revision, route tier, patch, declared files, token/cache counts, latency, cost, response identity, cancellation, and live/replayed/simulated provenance.",
+            "objective": "Implement the Python CodingAgentAdapter, TaskSpecification binding, invocation, and PatchProposal records as exact bindings of the frozen MCP++ wire schemas for provider, model/revision, route tier, patch, declared files, token/cache counts, latency, cost, response identity, cancellation, and live/replayed/simulated provenance.",
             "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/base.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/models.py, external/ipfs_accelerate/test/proof_context/adapters/test_base.py, artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
             "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/base.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/models.py, external/ipfs_accelerate/test/proof_context/adapters/test_base.py, artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
             "owning repository": "endomorphosis/ipfs_accelerate_py",
             "parallel lane": "pcce-c-contract",
             "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/base.py, external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/models.py, external/ipfs_accelerate/test/proof_context/adapters/test_base.py, artifacts/proof_carrying_context_engine/receipts/PCCE-030.json",
             "priority": "P0",
-            "prohibited effects": "Invoke a provider; approve a patch; expose canonical-branch authority; accept undeclared files, unbounded patches/logs, hidden evaluation data, or provenance-free results.",
+            "prohibited effects": "Create a competing wire schema or canonicalizer; invoke a provider; approve a patch; expose canonical-branch authority; accept undeclared files, unbounded patches/logs, hidden evaluation data, or provenance-free results.",
             "required evidence": "Protocol signature; schema round trips; invalid-scope/provenance tests; cancellation contract; contract CID.",
             "required tests": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_base.py",
             "resource class": "cpu-small",
@@ -1974,7 +3001,7 @@
             "status": "todo",
             "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/adapters/test_base.py"
           },
-          "objective": "Define CodingAgentAdapter and PatchProposal contracts for provider, model/revision, route tier, patch, declared files, token/cache counts, latency, cost, response identity, cancellation, and live/replayed/simulated provenance.",
+          "objective": "Implement the Python CodingAgentAdapter, TaskSpecification binding, invocation, and PatchProposal records as exact bindings of the frozen MCP++ wire schemas for provider, model/revision, route tier, patch, declared files, token/cache counts, latency, cost, response identity, cancellation, and live/replayed/simulated provenance.",
           "objective_priority": 100,
           "outputs": [
             "external/ipfs_accelerate/ipfs_accelerate_py/proof_context/adapters/base.py",
@@ -2585,7 +3612,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "One parseable, complete, acyclic, namespace-stable board is admitted as the sole execution source for PCCE-G000.",
-            "acceptance criteria": "The board contains exactly PCCE-000, PCCE-001 through PCCE-011, PCCE-020 through PCCE-025, PCCE-030 through PCCE-035, PCCE-040 through PCCE-044, PCCE-050 through PCCE-056, PCCE-060 through PCCE-068, PCCE-070 through PCCE-076, and PCCE-080 through PCCE-083; every block has every required field; dependencies are acyclic and follow the declared merge order.",
+            "acceptance criteria": "The board contains exactly PCCE-000, PCCE-001 through PCCE-019, PCCE-020 through PCCE-025, PCCE-030 through PCCE-035, PCCE-040 through PCCE-045, PCCE-050 through PCCE-057, PCCE-060 through PCCE-068, PCCE-070 through PCCE-076, PCCE-079, and PCCE-080 through PCCE-083; every block has every required field; dependencies are acyclic and follow the declared merge order.",
             "allowed effects": "Record the reviewed board bootstrap receipt and immutable board content identity.",
             "allowed paths": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
             "assigned worktree": "proof-carrying-context-engine-control",
@@ -2595,7 +3622,7 @@
             "conflict policy": "Operator-only bootstrap. Protected control documents are outside every schedulable task mutation permit.",
             "depends on": "",
             "execution mode": "operator-only board bootstrap",
-            "final result cid or artifact identity": "board Git blob and artifacts/proof_carrying_context_engine/receipts/PCCE-000.json; resolved by launch seal",
+            "final result cid or artifact identity": "urn:pcce:task-receipt:PCCE-000:v0.1-r2 at artifacts/proof_carrying_context_engine/receipts/PCCE-000.json#content_id",
             "goal id": "PCCE-G000",
             "implementation timeout seconds": "900",
             "is schedulable": "false",
@@ -3258,7 +4285,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "Clean installs and the optional container are reproducible from immutable artifacts without source-layout assumptions.",
-            "acceptance criteria": "Each supported Python/profile matrix installs from wheels with hashes, imports, runs CLI smoke, and proves no sibling requirement; container uses pinned base and non-root runtime where supported; any unsupported runner is explicitly failed/no-go.",
+            "acceptance criteria": "Each supported Python/profile matrix installs all required distributions from wheels with hashes after every source tree is removed from import reach, imports, validates schema/vector resource bytes, runs CLI smoke, and proves no sibling requirement; container uses pinned base and non-root runtime where supported; any unsupported runner is explicitly failed/no-go.",
             "allowed effects": "Add required clean-install workflow, pinned Dockerfile, clean-install harness/tests, and receipt; build disposable environments/images.",
             "allowed paths": "external/ipfs_accelerate/.github/workflows/proof-context-clean-install.yml, external/ipfs_accelerate/docker/proof-context/Dockerfile, external/ipfs_accelerate/scripts/proof_context/test_clean_install.py, external/ipfs_accelerate/test/proof_context/test_clean_install.py, artifacts/proof_carrying_context_engine/receipts/PCCE-054.json",
             "assigned worktree": "pcce-PCCE-054",
@@ -3477,7 +4504,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "The v0.1 runtime is proven installable and demonstrable from immutable artifacts, or a precise no-go blocks qualification work.",
-            "acceptance criteria": "Dataset, kit, and accelerator artifacts and hashes verify; core/verification/Codex/evaluation and inventory-supported local profile resolve as declared; clean install and example pass; SBOM/manifest are complete; sibling/editable/mutable dependencies are absent; optional unsupported items are clearly limited.",
+            "acceptance criteria": "Datasets, kit, accelerator, and mcp-plus-plus-contracts artifacts and hashes verify; core/verification/Codex/evaluation and inventory-supported local profile resolve as declared; clean install after source-tree removal proves schema/vector byte parity and the example passes; SBOM/manifest are complete; sibling/editable/mutable dependencies are absent; optional unsupported items are clearly limited.",
             "allowed effects": "Add the gate test; run read-only artifact/install/example validation; write qualification and receipt.",
             "allowed paths": "external/ipfs_accelerate/test/proof_context/test_installability_gate.py, artifacts/proof_carrying_context_engine/installation/qualification.json, artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
             "assigned worktree": "pcce-PCCE-056",
@@ -3499,7 +4526,7 @@
             "predicted files": "external/ipfs_accelerate/test/proof_context/test_installability_gate.py, artifacts/proof_carrying_context_engine/installation/qualification.json, artifacts/proof_carrying_context_engine/receipts/PCCE-056.json",
             "priority": "P0",
             "prohibited effects": "Repair packaging/example code in the gate; use source imports; waive failed profiles; represent an unavailable required check as passed.",
-            "required evidence": "PCCE-050 through PCCE-055 receipts; artifact/lock/SBOM/environment CIDs; clean-install logs; example seal; explicit go or documented no-go.",
+            "required evidence": "PCCE-045, PCCE-050 through PCCE-055, and PCCE-057 receipts; all four package artifact/lock/SBOM/environment CIDs; clean-install logs; packaged self-hosting import; schema/vector resource parity; example seal; explicit go or documented no-go.",
             "required tests": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_installability_gate.py external/ipfs_accelerate/test/proof_context/test_example_repository.py",
             "resource class": "cpu-large",
             "review only": "false",
@@ -3772,6 +4799,126 @@
         }
       ]
     },
+    "pcce/e/package-mcplusplus-contracts": {
+      "bundle_key": "pcce/e/package-mcplusplus-contracts",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "This package is an immutable data projection of already-frozen contracts; it cannot become a fifth runtime authority or modify source schemas/vectors.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-e-mcplusplus",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "Mcp-Plus-Plus/pyproject.toml",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+            "Mcp-Plus-Plus/tests-py/test_contract_package.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeeracx32cztlbeepukztx2dwnnkhkdeyi55qe2nn6tpmqahdwwtvtxja",
+          "canonical_task_key": "task/v1/15f7a1666b0908fa2b33be8766b54750c98477b0269adf4dec800e3b5a759dd2",
+          "dependencies": [
+            "PCCE-044"
+          ],
+          "dependency_task_ids": [
+            "PCCE-044"
+          ],
+          "depends_on": [
+            "PCCE-044"
+          ],
+          "execution_mode": "supervised data-only packaging",
+          "files": [
+            "Mcp-Plus-Plus/pyproject.toml",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+            "Mcp-Plus-Plus/tests-py/test_contract_package.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json"
+          ],
+          "goal_id": "PCCE-G500",
+          "implementation_timeout_seconds": 7200,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "MCP++ contracts install as a narrow immutable resource artifact, and all production behavior remains owned by datasets, kit, or accelerator.",
+            "acceptance criteria": "Wheel and sdist expose exact v0.1 schema and vector bytes through importlib.resources with byte and CID parity to PCCE-006/PCCE-007; the package contains no production canonicalization, orchestration, persistence, or provider logic; imports are side-effect-free and work after the MCP++ source tree is absent.",
+            "allowed effects": "Add minimal package metadata, a resource accessor, the generated immutable contract bundle, parity tests, build wheel/sdist artifacts, and the task receipt.",
+            "allowed paths": "Mcp-Plus-Plus/pyproject.toml, Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json, Mcp-Plus-Plus/tests-py/test_contract_package.py, artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+            "assigned worktree": "pcce-PCCE-057",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/e/package-mcplusplus-contracts",
+            "completion": "auto",
+            "conflict policy": "This package is an immutable data projection of already-frozen contracts; it cannot become a fifth runtime authority or modify source schemas/vectors.",
+            "depends on": "PCCE-044",
+            "execution mode": "supervised data-only packaging",
+            "final result cid or artifact identity": "pending mcp-plus-plus-contracts wheel/sdist and resource identities",
+            "goal id": "PCCE-G500",
+            "implementation timeout seconds": "7200",
+            "is schedulable": "true",
+            "objective": "Package the frozen MCP++ schemas and canonical vectors as one immutable data-only Python distribution consumable through importlib resources without granting MCP++ production runtime authority.",
+            "outputs": "Mcp-Plus-Plus/pyproject.toml, Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json, Mcp-Plus-Plus/tests-py/test_contract_package.py, artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+            "owned paths": "Mcp-Plus-Plus/pyproject.toml, Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json, Mcp-Plus-Plus/tests-py/test_contract_package.py, artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+            "owning repository": "endomorphosis/Mcp-Plus-Plus",
+            "parallel lane": "pcce-e-mcplusplus",
+            "predicted files": "Mcp-Plus-Plus/pyproject.toml, Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py, Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json, Mcp-Plus-Plus/tests-py/test_contract_package.py, artifacts/proof_carrying_context_engine/receipts/PCCE-057.json",
+            "priority": "P0",
+            "prohibited effects": "Add a new MCP++ profile, canonicalizer, executor, persistence service, network behavior, model authority, mutable dependency, source-path lookup, or import-time installation.",
+            "required evidence": "Schema/vector CIDs; generated-resource provenance; wheel/sdist hashes and contents; clean-environment resource transcript; no-code-authority audit.",
+            "required tests": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_contract_package.py; python -m build Mcp-Plus-Plus",
+            "resource class": "cpu-medium",
+            "review only": "false",
+            "risk classification": "high-contract-packaging",
+            "rollback procedure": "Revert only package metadata/accessor/resource changes, withdraw unpromoted artifacts, preserve the underlying frozen schemas/vectors, and invalidate dependent runtime locks.",
+            "status": "todo",
+            "validation": "python -m pytest -q Mcp-Plus-Plus/tests-py/test_contract_package.py && python -m build Mcp-Plus-Plus"
+          },
+          "objective": "Package the frozen MCP++ schemas and canonical vectors as one immutable data-only Python distribution consumable through importlib resources without granting MCP++ production runtime authority.",
+          "objective_priority": 100,
+          "outputs": [
+            "Mcp-Plus-Plus/pyproject.toml",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+            "Mcp-Plus-Plus/tests-py/test_contract_package.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "Mcp-Plus-Plus/pyproject.toml",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+            "Mcp-Plus-Plus/tests-py/test_contract_package.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json"
+          ],
+          "predicted_paths": [
+            "Mcp-Plus-Plus/pyproject.toml",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/__init__.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/proof_context.py",
+            "Mcp-Plus-Plus/mcp_plus_plus_contracts/resources/proof-context-v0.1.json",
+            "Mcp-Plus-Plus/tests-py/test_contract_package.py",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-057.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-medium",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "high-contract-packaging",
+          "status": "todo",
+          "task_id": "PCCE-057",
+          "title": "Package the immutable MCP++ v0.1 contract artifact",
+          "validation_commands": [
+            "python -m pytest -q Mcp-Plus-Plus/tests-py/test_contract_package.py && python -m build Mcp-Plus-Plus"
+          ]
+        }
+      ]
+    },
     "pcce/e/package-runtime": {
       "bundle_key": "pcce/e/package-runtime",
       "bundle_strategy": "reviewed-manual-task-slice-v1",
@@ -3793,13 +4940,22 @@
           "canonical_task_cid": "baguqeerallz7muq6n4ajtkejvesayqhdv7t4db7jomgqm7zi4knh3pdsgxwq",
           "canonical_task_key": "task/v1/5af3f6521e6f0099a889a9240c40e3afe7c187e9730d067f28e29a7dbc7235ed",
           "dependencies": [
-            "PCCE-044"
+            "PCCE-045",
+            "PCCE-050",
+            "PCCE-051",
+            "PCCE-057"
           ],
           "dependency_task_ids": [
-            "PCCE-044"
+            "PCCE-045",
+            "PCCE-050",
+            "PCCE-051",
+            "PCCE-057"
           ],
           "depends_on": [
-            "PCCE-044"
+            "PCCE-045",
+            "PCCE-050",
+            "PCCE-051",
+            "PCCE-057"
           ],
           "execution_mode": "supervised packaging implementation",
           "files": [
@@ -3814,7 +4970,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "Immutable accelerator artifacts expose a lean core and explicit optional profiles with a working proof-context console entry point.",
-            "acceptance criteria": "Core installs datasets/kit runtime minima only; verification/Codex/local-model/evaluation extras are separated; local-model extra exists only if inventory proves support; proof-context entrypoint resolves; every dependency is version-bounded and immutable-artifact compatible.",
+            "acceptance criteria": "Core installs compatible datasets, kit, and data-only mcp-plus-plus-contracts distributions only; verification/Codex/local-model/evaluation extras are separated; the evaluation profile exposes the bounded SelfHostingQualificationHarness; local-model extra exists only if inventory proves support; proof-context entrypoint resolves; every dependency is version-bounded and immutable-artifact compatible.",
             "allowed effects": "Add minimal package metadata/extras/entrypoint changes, build wheel/sdist, run profile resolution tests, and write receipt.",
             "allowed paths": "external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/test/proof_context/test_install_profiles.py, artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
             "assigned worktree": "pcce-PCCE-052",
@@ -3822,13 +4978,13 @@
             "bundle": "pcce/e/package-runtime",
             "completion": "auto",
             "conflict policy": "This task is the sole owner of accelerator packaging metadata for the board; profile composition cannot widen runtime authority.",
-            "depends on": "PCCE-044",
+            "depends on": "PCCE-045, PCCE-050, PCCE-051, PCCE-057",
             "execution mode": "supervised packaging implementation",
             "final result cid or artifact identity": "pending accelerator wheel/sdist identities and task receipt",
             "goal id": "PCCE-G500",
             "implementation timeout seconds": "10800",
             "is schedulable": "true",
-            "objective": "Package the accelerator runtime and proof-context console script with supported core, verification, Codex adapter, already-supported local-model adapter, and full-evaluation profiles.",
+            "objective": "Package the accelerator runtime, proof-context console script, and SelfHostingQualificationHarness with supported core, verification, Codex adapter, already-supported local-model adapter, and full-evaluation profiles.",
             "outputs": "external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/test/proof_context/test_install_profiles.py, artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
             "owned paths": "external/ipfs_accelerate/pyproject.toml, external/ipfs_accelerate/setup.py, external/ipfs_accelerate/test/proof_context/test_install_profiles.py, artifacts/proof_carrying_context_engine/receipts/PCCE-052.json",
             "owning repository": "endomorphosis/ipfs_accelerate_py",
@@ -3845,7 +5001,7 @@
             "status": "todo",
             "validation": "python -m pytest -q external/ipfs_accelerate/test/proof_context/test_install_profiles.py && python -m build external/ipfs_accelerate"
           },
-          "objective": "Package the accelerator runtime and proof-context console script with supported core, verification, Codex adapter, already-supported local-model adapter, and full-evaluation profiles.",
+          "objective": "Package the accelerator runtime, proof-context console script, and SelfHostingQualificationHarness with supported core, verification, Codex adapter, already-supported local-model adapter, and full-evaluation profiles.",
           "objective_priority": 100,
           "outputs": [
             "external/ipfs_accelerate/pyproject.toml",
@@ -3936,7 +5092,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "Supported environments are reproducible, hash-bound, inventoried, and honest about platform and optional-capability limits.",
-            "acceptance criteria": "Locks are profile/platform explicit and hash-bound; SBOM covers direct/transitive distributions and licenses; manifest pins sources/artifacts/toolchain; regeneration is deterministic; unsupported OS/Python combinations are explicit rather than passed.",
+            "acceptance criteria": "Locks are profile/platform explicit and hash-bound; datasets, kit, accelerator, and mcp-plus-plus-contracts wheel/sdist identities are recorded; SBOM covers direct/transitive distributions and licenses; manifest pins sources/artifacts/toolchain; regeneration is deterministic; unsupported OS/Python combinations are explicit rather than passed.",
             "allowed effects": "Add lock files and a deterministic manifest builder; write generated environment evidence and receipt.",
             "allowed paths": "external/ipfs_accelerate/packaging/proof_context/locks, external/ipfs_accelerate/scripts/proof_context/build_environment_manifest.py, artifacts/proof_carrying_context_engine/environment/dependency_locks.json, artifacts/proof_carrying_context_engine/environment/artifact_hashes.json, artifacts/proof_carrying_context_engine/environment/sbom.spdx.json, artifacts/proof_carrying_context_engine/environment/manifest.json, artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
             "assigned worktree": "pcce-PCCE-053",
@@ -3950,7 +5106,7 @@
             "goal id": "PCCE-G500",
             "implementation timeout seconds": "10800",
             "is schedulable": "true",
-            "objective": "Resolve reproducible dependency locks and hashes for supported profiles and produce an SBOM/environment manifest declaring exact source commits, package artifacts, Python versions, operating systems, tools, and optional capabilities.",
+            "objective": "Resolve reproducible dependency locks and hashes for all four package artifacts and supported profiles, and produce an SBOM/environment manifest declaring exact source commits, package artifacts, Python versions, operating systems, tools, and optional capabilities.",
             "outputs": "external/ipfs_accelerate/packaging/proof_context/locks, external/ipfs_accelerate/scripts/proof_context/build_environment_manifest.py, artifacts/proof_carrying_context_engine/environment/dependency_locks.json, artifacts/proof_carrying_context_engine/environment/artifact_hashes.json, artifacts/proof_carrying_context_engine/environment/sbom.spdx.json, artifacts/proof_carrying_context_engine/environment/manifest.json, artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
             "owned paths": "external/ipfs_accelerate/packaging/proof_context/locks, external/ipfs_accelerate/scripts/proof_context/build_environment_manifest.py, artifacts/proof_carrying_context_engine/environment/dependency_locks.json, artifacts/proof_carrying_context_engine/environment/artifact_hashes.json, artifacts/proof_carrying_context_engine/environment/sbom.spdx.json, artifacts/proof_carrying_context_engine/environment/manifest.json, artifacts/proof_carrying_context_engine/receipts/PCCE-053.json",
             "owning repository": "cross-repository",
@@ -3967,7 +5123,7 @@
             "status": "todo",
             "validation": "python external/ipfs_accelerate/scripts/proof_context/build_environment_manifest.py --check && python -m json.tool artifacts/proof_carrying_context_engine/environment/sbom.spdx.json && python -m json.tool artifacts/proof_carrying_context_engine/environment/manifest.json"
           },
-          "objective": "Resolve reproducible dependency locks and hashes for supported profiles and produce an SBOM/environment manifest declaring exact source commits, package artifacts, Python versions, operating systems, tools, and optional capabilities.",
+          "objective": "Resolve reproducible dependency locks and hashes for all four package artifacts and supported profiles, and produce an SBOM/environment manifest declaring exact source commits, package artifacts, Python versions, operating systems, tools, and optional capabilities.",
           "objective_priority": 100,
           "outputs": [
             "external/ipfs_accelerate/packaging/proof_context/locks",
@@ -4009,6 +5165,139 @@
           "title": "Produce locks, hashes, SBOM, and environment manifest",
           "validation_commands": [
             "python external/ipfs_accelerate/scripts/proof_context/build_environment_manifest.py --check && python -m json.tool artifacts/proof_carrying_context_engine/environment/sbom.spdx.json && python -m json.tool artifacts/proof_carrying_context_engine/environment/manifest.json"
+          ]
+        }
+      ]
+    },
+    "pcce/e/self-hosting-harness": {
+      "bundle_key": "pcce/e/self-hosting-harness",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "Harness files and fixtures are exclusive to this task; it consumes the frozen engine/CLI and may not alter their authority or package metadata.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-e-self-hosting",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py",
+            "external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_harness.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py",
+            "external/ipfs_accelerate/test/fixtures/proof_context_self_hosting",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeera4tltx2s3ycvdddm5t2pg5h4pewmsarbr4eyebo32iheftyxoshsa",
+          "canonical_task_key": "task/v1/e4d73bea5bc0aa318d9d9e9e6e9f8f2599204431e13040bb7a41c859e2ee91e4",
+          "dependencies": [
+            "PCCE-035",
+            "PCCE-044"
+          ],
+          "dependency_task_ids": [
+            "PCCE-035",
+            "PCCE-044"
+          ],
+          "depends_on": [
+            "PCCE-035",
+            "PCCE-044"
+          ],
+          "execution_mode": "supervised qualification-harness implementation",
+          "files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py",
+            "external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_harness.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py",
+            "external/ipfs_accelerate/test/fixtures/proof_context_self_hosting",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json"
+          ],
+          "goal_id": "PCCE-G500",
+          "implementation_timeout_seconds": 10800,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "A real, bounded SelfHostingQualificationHarness exists, preserves provenance and failure evidence, and can support but never self-award qualification.",
+            "acceptance criteria": "Harness binds engine/package/repository/task/configuration identities, invokes the governed lifecycle through public APIs in disposable worktrees, records attempts and typed failures, separates live/replay/simulated evidence, computes no qualification itself, and emits deterministic machine-readable evidence consumable by PCCE-079/PCCE-082.",
+            "allowed effects": "Add the harness, bounded runner, synthetic fixtures, focused tests, and task receipt; run only disposable isolated self-hosting fixtures during this implementation task.",
+            "allowed paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py, external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py, external/ipfs_accelerate/test/api/self_hosting/test_harness.py, external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py, external/ipfs_accelerate/test/fixtures/proof_context_self_hosting, artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+            "assigned worktree": "pcce-PCCE-045",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/e/self-hosting-harness",
+            "completion": "auto",
+            "conflict policy": "Harness files and fixtures are exclusive to this task; it consumes the frozen engine/CLI and may not alter their authority or package metadata.",
+            "depends on": "PCCE-035, PCCE-044",
+            "execution mode": "supervised qualification-harness implementation",
+            "final result cid or artifact identity": "pending SelfHostingQualificationHarness tree and conformance receipt identities",
+            "goal id": "PCCE-G500",
+            "implementation timeout seconds": "10800",
+            "is schedulable": "true",
+            "objective": "Implement the previously absent SelfHostingQualificationHarness as a bounded consumer of the stable runtime/CLI and frozen task specifications, suitable for current-head and later longitudinal qualification without becoming execution authority.",
+            "outputs": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py, external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py, external/ipfs_accelerate/test/api/self_hosting/test_harness.py, external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py, external/ipfs_accelerate/test/fixtures/proof_context_self_hosting, artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+            "owned paths": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py, external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py, external/ipfs_accelerate/test/api/self_hosting/test_harness.py, external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py, external/ipfs_accelerate/test/fixtures/proof_context_self_hosting, artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+            "owning repository": "endomorphosis/ipfs_accelerate_py",
+            "parallel lane": "pcce-e-self-hosting",
+            "predicted files": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py, external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py, external/ipfs_accelerate/test/api/self_hosting/test_harness.py, external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py, external/ipfs_accelerate/test/fixtures/proof_context_self_hosting, artifacts/proof_carrying_context_engine/receipts/PCCE-045.json",
+            "priority": "P0",
+            "prohibited effects": "Create another supervisor or coding agent; mutate the canonical branch automatically; self-approve patches; count replay/simulation as live quality; access hidden benchmark answers; manufacture longitudinal history.",
+            "required evidence": "Absence/candidate inventory disposition; harness API and schema; isolated fixture transcripts; interruption/resume and bad-patch negatives; provenance-label tests; no-self-approval audit.",
+            "required tests": "python -m pytest -q external/ipfs_accelerate/test/api/self_hosting",
+            "resource class": "cpu-large",
+            "review only": "false",
+            "risk classification": "high-qualification-integrity",
+            "rollback procedure": "Revert only harness/runner/fixture changes, discard disposable self-hosting worktrees, retain failed evidence, and mark longitudinal qualification unavailable until replacement.",
+            "status": "todo",
+            "validation": "python -m pytest -q external/ipfs_accelerate/test/api/self_hosting"
+          },
+          "objective": "Implement the previously absent SelfHostingQualificationHarness as a bounded consumer of the stable runtime/CLI and frozen task specifications, suitable for current-head and later longitudinal qualification without becoming execution authority.",
+          "objective_priority": 100,
+          "outputs": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py",
+            "external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_harness.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py",
+            "external/ipfs_accelerate/test/fixtures/proof_context_self_hosting",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py",
+            "external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_harness.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py",
+            "external/ipfs_accelerate/test/fixtures/proof_context_self_hosting",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json"
+          ],
+          "predicted_paths": [
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/__init__.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/harness.py",
+            "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/self_hosting/experiment.py",
+            "external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_harness.py",
+            "external/ipfs_accelerate/test/api/self_hosting/test_experiment_plan.py",
+            "external/ipfs_accelerate/test/fixtures/proof_context_self_hosting",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-045.json"
+          ],
+          "priority": "P0",
+          "resource_class": "cpu-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "high-qualification-integrity",
+          "status": "todo",
+          "task_id": "PCCE-045",
+          "title": "Implement the SelfHostingQualificationHarness",
+          "validation_commands": [
+            "python -m pytest -q external/ipfs_accelerate/test/api/self_hosting"
           ]
         }
       ]
@@ -4679,7 +5968,8 @@
             "PCCE-063",
             "PCCE-064",
             "PCCE-065",
-            "PCCE-066"
+            "PCCE-066",
+            "PCCE-079"
           ],
           "dependency_task_ids": [
             "PCCE-061",
@@ -4687,7 +5977,8 @@
             "PCCE-063",
             "PCCE-064",
             "PCCE-065",
-            "PCCE-066"
+            "PCCE-066",
+            "PCCE-079"
           ],
           "depends_on": [
             "PCCE-061",
@@ -4695,7 +5986,8 @@
             "PCCE-063",
             "PCCE-064",
             "PCCE-065",
-            "PCCE-066"
+            "PCCE-066",
+            "PCCE-079"
           ],
           "execution_mode": "supervised bounded evaluation",
           "files": [
@@ -4718,7 +6010,7 @@
             "bundle": "pcce/f/execute",
             "completion": "auto",
             "conflict policy": "One fenced writer owns each run identity; corpus, hidden answers, configurations, thresholds, and raw terminal rows are immutable.",
-            "depends on": "PCCE-061, PCCE-062, PCCE-063, PCCE-064, PCCE-065, PCCE-066",
+            "depends on": "PCCE-061, PCCE-062, PCCE-063, PCCE-064, PCCE-065, PCCE-066, PCCE-079",
             "execution mode": "supervised bounded evaluation",
             "final result cid or artifact identity": "pending raw-result population CID and benchmark execution receipt",
             "goal id": "PCCE-G600",
@@ -4994,6 +6286,136 @@
           "title": "Aggregate benchmark results and evaluate thresholds",
           "validation_commands": [
             "python -m pytest -q external/ipfs_datasets/tests/proof_context/benchmarks/test_metrics.py && python -m json.tool artifacts/proof_carrying_context_engine/benchmark/metrics.json && python -m json.tool artifacts/proof_carrying_context_engine/benchmark/qualification.json"
+          ]
+        }
+      ]
+    },
+    "pcce/f/self-hosting-qualification": {
+      "bundle_key": "pcce/f/self-hosting-qualification",
+      "bundle_strategy": "reviewed-manual-task-slice-v1",
+      "conflict_policy": "This task is evidence-only over frozen packages/configurations and may run alongside security gate work because it owns unique artifacts and disposable worktrees.",
+      "execution_authority": "agent-supervisor/v1",
+      "is_schedulable": true,
+      "parallel_lane": "pcce-f-self-hosting",
+      "review_only": false,
+      "shard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+      "tasks": [
+        {
+          "allowed_paths": [
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json"
+          ],
+          "board_namespace": "proof-carrying-context-engine-v0.1",
+          "canonical_task_cid": "baguqeeraeyzlruzl7j5cw5bzfsa7z63gjydabt3oqxjq53qq2lqdvvvv7mwq",
+          "canonical_task_key": "task/v1/2632b8d32bfa7a2b74392c81fcfb664e0600cf6e85d30eee10d2e03ad6b5fb2d",
+          "dependencies": [
+            "PCCE-015",
+            "PCCE-025",
+            "PCCE-035",
+            "PCCE-045",
+            "PCCE-064",
+            "PCCE-065"
+          ],
+          "dependency_task_ids": [
+            "PCCE-015",
+            "PCCE-025",
+            "PCCE-035",
+            "PCCE-045",
+            "PCCE-064",
+            "PCCE-065"
+          ],
+          "depends_on": [
+            "PCCE-015",
+            "PCCE-025",
+            "PCCE-035",
+            "PCCE-045",
+            "PCCE-064",
+            "PCCE-065"
+          ],
+          "execution_mode": "supervised bounded self-hosting evaluation",
+          "files": [
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json"
+          ],
+          "goal_id": "PCCE-G600",
+          "implementation_timeout_seconds": 21600,
+          "is_schedulable": true,
+          "max_attempts": 3,
+          "metadata": {
+            "acceptance": "Self-hosting evidence is real, provenance-complete, failure-preserving, and incapable of overstating current-head or longitudinal qualification.",
+            "acceptance criteria": "Every attempt binds exact engine/package/repository/task/configuration/provider/evidence identities and retains failures; current-head results are separate from genuinely time-separated longitudinal epochs and historical replay; interrupted runs resume idempotently; insufficient elapsed longitudinal evidence is typed unavailable and caps qualification rather than passing; the harness does not issue the final product qualification.",
+            "allowed effects": "Invoke the packaged harness and governed runtime in isolated disposable worktrees, run admitted A\u2013D configurations and checks, and write only the declared attempts/manifest/qualification/report/receipt artifacts.",
+            "allowed paths": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl, artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md, artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+            "assigned worktree": "pcce-PCCE-079",
+            "board namespace": "proof-carrying-context-engine-v0.1",
+            "bundle": "pcce/f/self-hosting-qualification",
+            "completion": "auto",
+            "conflict policy": "This task is evidence-only over frozen packages/configurations and may run alongside security gate work because it owns unique artifacts and disposable worktrees.",
+            "depends on": "PCCE-015, PCCE-025, PCCE-035, PCCE-045, PCCE-064, PCCE-065",
+            "execution mode": "supervised bounded self-hosting evaluation",
+            "final result cid or artifact identity": "pending self-hosting manifest, raw-attempt, and qualification CIDs",
+            "goal id": "PCCE-G600",
+            "implementation timeout seconds": "21600",
+            "is schedulable": "true",
+            "objective": "Run the packaged SelfHostingQualificationHarness against current-head and pinned historical/self-hosting tasks under frozen benchmark configurations, preserving attempt provenance and producing only the longitudinal qualification supported by real elapsed evidence.",
+            "outputs": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl, artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md, artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+            "owned paths": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl, artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md, artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+            "owning repository": "cross-repository",
+            "parallel lane": "pcce-f-self-hosting",
+            "predicted files": "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl, artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json, artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md, artifacts/proof_carrying_context_engine/receipts/PCCE-079.json",
+            "priority": "P0",
+            "prohibited effects": "Modify source, runtime, corpus, configuration, thresholds, or canonical branches; call replay/simulation live; self-approve; omit failures; access hidden benchmark answers; manufacture time-separated epochs or longitudinal duration.",
+            "required evidence": "PCCE-045 harness/package identity; exact task/configuration manifests; raw attempt records including failures; provider/cost/test/proof/assurance receipts; epoch/time provenance; resume trace; explicit unavailable or pass decision.",
+            "required tests": "python external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py --check artifacts/proof_carrying_context_engine/benchmark/self_hosting; python -m json.tool artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json; python -m json.tool artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+            "resource class": "evaluation-large",
+            "review only": "false",
+            "risk classification": "critical-self-hosting-evaluation",
+            "rollback procedure": "Discard only disposable self-hosting worktrees, preserve raw attempts and failure receipts, supersede projections without rewriting observations, and rerun only from a new admitted manifest.",
+            "status": "todo",
+            "validation": "python external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py --check artifacts/proof_carrying_context_engine/benchmark/self_hosting && python -m json.tool artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json && python -m json.tool artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json"
+          },
+          "objective": "Run the packaged SelfHostingQualificationHarness against current-head and pinned historical/self-hosting tasks under frozen benchmark configurations, preserving attempt provenance and producing only the longitudinal qualification supported by real elapsed evidence.",
+          "objective_priority": 100,
+          "outputs": [
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json"
+          ],
+          "parent_goal_ids": [
+            "PCCE-G000"
+          ],
+          "predicted_files": [
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json"
+          ],
+          "predicted_paths": [
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/attempts.jsonl",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json",
+            "artifacts/proof_carrying_context_engine/benchmark/self_hosting/report.md",
+            "artifacts/proof_carrying_context_engine/receipts/PCCE-079.json"
+          ],
+          "priority": "P0",
+          "resource_class": "evaluation-large",
+          "resource_stage": "implementation",
+          "review_only": false,
+          "risk_classification": "critical-self-hosting-evaluation",
+          "status": "todo",
+          "task_id": "PCCE-079",
+          "title": "Execute bounded self-hosting qualification",
+          "validation_commands": [
+            "python external/ipfs_accelerate/scripts/proof_context/run_self_hosting_qualification.py --check artifacts/proof_carrying_context_engine/benchmark/self_hosting && python -m json.tool artifacts/proof_carrying_context_engine/benchmark/self_hosting/manifest.json && python -m json.tool artifacts/proof_carrying_context_engine/benchmark/self_hosting/qualification.json"
           ]
         }
       ]
@@ -6125,7 +7547,7 @@
           "max_attempts": 3,
           "metadata": {
             "acceptance": "One independently verifiable RC bundle contains every required source, package, contract, evaluation, security, limitation, and rollback artifact.",
-            "acceptance criteria": "Manifest transitively binds exact source commits/trees, wheel/sdist hashes, dependency locks, SBOM, environment, all v0.1 schemas/vectors, example tree, visible corpus identity plus sealed hidden identity, benchmark/security/CI results, known limitations, rollback, and independent seal-verification commands; missing required input yields no-go.",
+            "acceptance criteria": "Manifest transitively binds exact source commits/trees, all four wheel/sdist hashes including the data-only MCP++ contract artifact, dependency locks, SBOM, environment, all v0.1 schemas/vectors, packaged harness plus bounded self-hosting disposition, example tree, visible corpus identity plus sealed hidden identity, benchmark/security/CI results, known limitations, rollback, and independent seal-verification commands; missing required input yields no-go.",
             "allowed effects": "Add deterministic release builder; copy/link verified immutable inputs into the declared RC directory; write manifest, instructions, and receipt.",
             "allowed paths": "external/ipfs_accelerate/scripts/proof_context/build_release_candidate.py, artifacts/proof_carrying_context_engine/release/v0.1-rc1, artifacts/proof_carrying_context_engine/receipts/PCCE-081.json",
             "assigned worktree": "pcce-PCCE-081",
@@ -6193,7 +7615,7 @@
   },
   "generated_at": "2026-08-14T00:00:00+00:00",
   "objective_id": "PCCE-G000",
-  "projection_id": "sha256:e28d2ae1b487173167f6f7b3a85d384afc4dec1b2fa6d3a6f7d27c0e4ebc5e9f",
+  "projection_id": "sha256:9ecaacfaf4e6f311666d72659f84fa12f92fa563474ef97108c6d3e20f0ac253",
   "query_store": {
     "artifact_kind": "bundle_planning_index",
     "catalog_table": "artifact_catalog",
@@ -6202,5 +7624,5 @@
   },
   "schema": "ipfs_accelerate_py.agent_supervisor.reviewed-bundle-index@1",
   "source_todo": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
-  "source_todo_sha256": "sha256:4add2d7bfadc30c3c5eecb652c6c3c74f9f156dae4c4a9e55f853ab9aa5de129"
+  "source_todo_sha256": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e"
 }
