@@ -1,0 +1,46 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.control-bootstrap-receipt@1",
+  "control_task_id": "PCCE-BOOTSTRAP-PROFILE-G",
+  "objective_id": "PCCE-G000",
+  "status": "succeeded",
+  "owning_repository": "endomorphosis/ipfs_accelerate_py",
+  "base_commit": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+  "result_commit": "c8e953be8696d47376442c73739eea14fad83113",
+  "result_tree": "887d1b7895bc446e857558f64875a7e59975bddc",
+  "isolated_worktree": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/bootstrap-worktrees/ipfs-accelerate-profile-g",
+  "owned_paths": [
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/merge/lease_coordination.py",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_lease_coordination.py"
+  ],
+  "allowed_effects": [
+    "remove supervisor extensions from strict Profile-G v1 TaskSpec",
+    "restore bounded and unlimited attempt translation",
+    "propagate the operator attempt ceiling into bundle planning",
+    "add focused exact-pin regression tests"
+  ],
+  "prohibited_effects": [
+    "change datasets-owned Profile-G v1 schema",
+    "weaken artifact validation",
+    "mutate any shared visible checkout",
+    "start product implementation before the gate passes"
+  ],
+  "evidence": {
+    "import_origins_verified": [
+      "external/ipfs_accelerate/ipfs_accelerate_py/__init__.py",
+      "external/ipfs_datasets/ipfs_datasets_py/__init__.py",
+      "external/ipfs_kit/ipfs_kit_py/__init__.py"
+    ],
+    "datasets_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "kit_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "focused_test_result": "127 passed, 0 failed",
+    "bundle_projection_result": "56 bundles; PCCE-001 through PCCE-004 are the only initial ready tasks",
+    "profile_g_attempt_translation": {
+      "supervisor_unlimited": 0,
+      "profile_g_boundary": 100,
+      "configured_finite_limit": 3
+    }
+  },
+  "partial_effects": [],
+  "rollback": "Revert accelerator commit c8e953be8696d47376442c73739eea14fad83113 and restore the superproject gitlink to 485edc0871c55b0e2ef21d83bece9fa12c2c8d84; retain this receipt as failed-launch history."
+}

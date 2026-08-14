@@ -41,6 +41,24 @@ Each task receipt must bind the then-current superproject commit/tree, recursive
 gitlinks, dirty overlay, objective and canonical task identities, policy,
 lease, fencing epoch, worktree, validations, and final artifact identity.
 
+### Supervisor bootstrap compatibility gate
+
+Pinned-import preflight found that the accelerator pin reintroduced
+supervisor-only `canonical_task_key` and `canonical_task_cid` fields inside a
+strict datasets-owned Profile-G v1 TaskSpec. It also overwrote the canonical
+unlimited-attempt translation and failed to propagate a finite lane attempt
+ceiling into immutable task specs. These faults made lease admission invalid
+at the exact repository pins even though ambient editable-package tests passed.
+
+Before product-task admission, the isolated control repair
+`ipfs_accelerate_py@c8e953be8696d47376442c73739eea14fad83113` removed the two
+extension fields, restored `0 -> 100` only at the Profile-G boundary, preserved
+finite limits, and propagated the configured three-attempt ceiling. The change
+is limited to lease coordination, bundle planning, and focused tests. Exact-pin
+verification passed 127 lease, worktree, resource, and attempt-boundary tests.
+The initial inventory identity remains `485edc087...`; the launch gitlink is the
+descendant bootstrap commit and is recorded separately in the control receipt.
+
 ## Evidence-backed preliminary inventory
 
 This inventory is a launch input, not the contract freeze. `PCCE-001` through

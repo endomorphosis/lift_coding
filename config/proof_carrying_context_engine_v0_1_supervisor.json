@@ -17,7 +17,7 @@
     "ipfs_kit_submodule_path": "external/ipfs_kit",
     "ipfs_kit_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+    "ipfs_accelerate_planning_revision": "c8e953be8696d47376442c73739eea14fad83113",
     "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
     "mcp_plus_plus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
     "require_initialized_gitlinks": true,
@@ -93,7 +93,8 @@
     "scripts/validate_proof_carrying_context_engine_board.py",
     "artifacts/proof_carrying_context_engine/control/task_board.json",
     "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
-    "artifacts/proof_carrying_context_engine/control/bundle_index.json"
+    "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+    "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json"
   ],
   "runtime_paths": {
     "root": "data/agent_supervisor/proof_carrying_context_engine_v0_1",
