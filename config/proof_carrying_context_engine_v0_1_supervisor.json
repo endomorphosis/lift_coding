@@ -8,6 +8,17 @@
   "goal_prefix": "PCCE-G",
   "board_namespace": "proof-carrying-context-engine-v0.1",
   "merge_target_branch": "agent/proof-carrying-context-engine-v0.1",
+  "control_revision": {
+    "active_revision": "r3",
+    "active_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json",
+    "historical_receipt_path": "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+    "preserved_incident_path": "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+    "historical_receipt_rewrite_allowed": false,
+    "incident_rewrite_allowed": false,
+    "admission_head_binding": "external-launch-receipt",
+    "external_launch_receipt_required": true,
+    "external_launch_receipt_must_bind_final_control_head": true
+  },
   "source_binding": {
     "accelerator_required_ancestor": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
     "accelerator_required_branch": "agent/proof-carrying-context-engine-v0.1",
@@ -17,7 +28,7 @@
     "ipfs_kit_submodule_path": "external/ipfs_kit",
     "ipfs_kit_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
     "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
-    "ipfs_accelerate_planning_revision": "c8e953be8696d47376442c73739eea14fad83113",
+    "ipfs_accelerate_planning_revision": "50c0b8551397983f664fbaa6ac12c68ba0eda82c",
     "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
     "mcp_plus_plus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
     "require_initialized_gitlinks": true,
@@ -95,7 +106,9 @@
     "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
     "artifacts/proof_carrying_context_engine/control/bundle_index.json",
     "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
-    "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json"
+    "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+    "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
   ],
   "runtime_paths": {
     "root": "data/agent_supervisor/proof_carrying_context_engine_v0_1",
@@ -198,6 +211,13 @@
     "delete_evidence_to_unstall": false,
     "bounded_retries": true,
     "terminal_on_external_prerequisite": "blocked",
-    "terminal_on_required_gate_failure": "no_go"
+    "terminal_on_required_gate_failure": "no_go",
+    "replacement_generation": "r3",
+    "replacement_scheduler_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/scheduler-r3",
+    "replacement_worktree_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/worktrees-r3",
+    "replacement_log_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/logs-r3",
+    "reuse_scheduler_r2_state": false,
+    "reuse_scheduler_r2_claims_leases_fences_or_receipts": false,
+    "preserve_scheduler_r2_forensics_read_only": true
   }
 }

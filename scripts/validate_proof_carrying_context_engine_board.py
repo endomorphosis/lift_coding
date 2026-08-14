@@ -44,18 +44,79 @@ TODO_PATH = REPO_ROOT / "docs/architecture/proof_carrying_context_engine_v0_1.to
 PLAN_PATH = REPO_ROOT / "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md"
 CONFIG_PATH = REPO_ROOT / "config/proof_carrying_context_engine_v0_1_supervisor.json"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "artifacts/proof_carrying_context_engine/control"
-BOOTSTRAP_RECEIPT_PATH = (
+HISTORICAL_R2_RECEIPT_PATH = (
     REPO_ROOT / "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json"
+)
+ACTIVE_R3_RECEIPT_PATH = (
+    REPO_ROOT / "artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json"
+)
+R2_INCIDENT_PATH = (
+    REPO_ROOT
+    / "artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json"
 )
 PROFILE_G_BOOTSTRAP_RECEIPT_PATH = (
     REPO_ROOT
     / "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json"
 )
-BOOTSTRAP_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r2"
+HISTORICAL_R2_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r2"
+ACTIVE_R3_ARTIFACT_IDENTITY = "urn:pcce:task-receipt:PCCE-000:v0.1-r3"
+R2_INCIDENT_IDENTITY = "urn:pcce:control-incident:scheduler-r2-provider-handoff"
+HISTORICAL_R2_ADMISSION_COMMIT = "d498faad8b75321a6981d6dfb944bb589581b333"
+HISTORICAL_R2_RECEIPT_BYTE_SHA256 = (
+    "sha256:b3f51cd71ba6d31804047469aa03a198205b3e7a75e607929c07709a46f8d3e4"
+)
+HISTORICAL_R2_RECEIPT_GIT_BLOB = "fff24f12acbb1d3edf0206916d343d27e189128f"
+HISTORICAL_R2_RECEIPT_CONTENT_ID = (
+    "sha256:491f3edea7febc4306e297082f60ca1e46677c38d60427015302622dc912c029"
+)
+R2_INCIDENT_FILE_SHA256 = (
+    "sha256:98c5c8c3b1f038962a55698524f10feee0fd29568e36b52c09ca020cc77dd141"
+)
+R2_INCIDENT_CONTENT_ID = (
+    "sha256:2c3ff2b51de842d5349d5518a5240ed37780062702ba6aa68d39485202016215"
+)
+FINAL_ACCELERATOR_COMMIT = "50c0b8551397983f664fbaa6ac12c68ba0eda82c"
+FINAL_ACCELERATOR_TREE = "a16781386689845c1162c85c0f5c899a673d48e6"
+REPLACEMENT_STATE_ROOT = Path(
+    "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1"
+)
 TASK_PREFIX = "## PCCE-"
 BOARD_NAMESPACE = "proof-carrying-context-engine-v0.1"
 OBJECTIVE_ID = "PCCE-G000"
 PLANNING_GENERATED_AT = "2026-08-14T00:00:00+00:00"
+
+HISTORICAL_R2_PROJECTION_IDS = {
+    "board_projection_id": "sha256:680932d46a903b5ceb305708b99ff351ff55b32259ddea515922406dcb3ee0ae",
+    "dependency_graph_id": "sha256:83f4aade99e0dd44b503dcc6696707ed93c43b7a2b6769682f81f068f23bf25f",
+    "bundle_index_id": "sha256:9ecaacfaf4e6f311666d72659f84fa12f92fa563474ef97108c6d3e20f0ac253",
+}
+HISTORICAL_R2_GITLINKS = {
+    "accelerate": "c8e953be8696d47376442c73739eea14fad83113",
+    "datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "mcp_plus_plus": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+}
+R2_RAW_ARTIFACTS = {
+    "logs-r2/pcce-a-inventory-accelerate.log": (24730, "sha256:5cd5ad2f53f9758202b00957a7821ba4bc553a60fa792a33e21ccb436a4cf066"),
+    "logs-r2/pcce-a-inventory-datasets.log": (37095, "sha256:ec556cc7ce68412207e8f8ac3fd3bbd2177fc8361d05c18d7b945277e03b5a9c"),
+    "logs-r2/pcce-a-inventory-kit.log": (12365, "sha256:cfee6541e0623eacfdba7289f2112d3cc204f99afd4eb0854f085d504f12d9c1"),
+    "scheduler-r2/.bundle_lanes.duckdb.lock": (0, "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
+    "scheduler-r2/.coordination.duckdb.lock": (0, "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"),
+    "scheduler-r2/bundle_lanes.duckdb": (10760192, "sha256:c60ec7e70e7e140beadcd3080316ea3ec1aeb4e2bdc0a5995e10d86b43224a0e"),
+    "scheduler-r2/bundle_lanes.json": (3543573, "sha256:d63f0605c1f1ca43ca16b27c572d52aeebf417a4632b384cbac37e0c300df087"),
+    "scheduler-r2/coordination.duckdb": (15478784, "sha256:5d939da8f54eaa39df033a8e085b65f033fa8b3f9126deb23f9e65702999f992"),
+    "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_bundle_supervisor.pid": (8, "sha256:f16d806da35c4d9544a3b38310521beec4e6da603463a3be98bf285a3757215e"),
+    "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_runtime.todo.md": (258316, "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e"),
+    "scheduler-r2/pcce-a-inventory-accelerate/state/agent_pcce_a_inventory_accelerate_taskboard_input.json": (685, "sha256:6003ff7ae134bece37de3b1eff7c33172a1357da96a5e3f8bea0ba192da2e8f1"),
+    "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_bundle_supervisor.pid": (8, "sha256:4bad5fdff14c84d3abbe5d47e3be7ea15bf4dedb54fb2e70f71f529b2e0c2af9"),
+    "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_runtime.todo.md": (258316, "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e"),
+    "scheduler-r2/pcce-a-inventory-datasets/state/agent_pcce_a_inventory_datasets_taskboard_input.json": (679, "sha256:613df9f0b73be723d85f9283853ef41c0938cb01195ab81682284fcfd2c89d1f"),
+    "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_bundle_supervisor.pid": (8, "sha256:95cb5bb1a29b235dc5287151d1506bf090082bc1efd7ca84306a06e601aaef55"),
+    "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_runtime.todo.md": (258316, "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e"),
+    "scheduler-r2/pcce-a-inventory-kit/state/agent_pcce_a_inventory_kit_taskboard_input.json": (664, "sha256:f16a47ccb353710bd8edf5013fb05f962c4f770ae0c3468a82eda6bd8b569033"),
+    "scheduler-r2/scheduler_decision_metrics.json": (163119, "sha256:866b88ff2b510098fb9a7d909a9a3c2ea8dd695d5849ff6463e4722d6b9ae24c"),
+    "scheduler-r2/scheduler_metrics.json": (163119, "sha256:866b88ff2b510098fb9a7d909a9a3c2ea8dd695d5849ff6463e4722d6b9ae24c"),
+}
 
 EXPECTED_TASK_IDS = (
     ["PCCE-000"]
@@ -198,7 +259,10 @@ def _repository_identity(config: dict[str, Any], errors: list[str]) -> dict[str,
         if not (path / ".git").exists():
             errors.append(f"uninitialized repository: {relative}")
             continue
-        gitlink = _git("rev-parse", f"HEAD:{relative}")
+        # Resolve the candidate control tree from the index.  This permits a
+        # protected control revision to validate its staged gitlink before the
+        # atomic superproject commit; after commit the same object is in HEAD.
+        gitlink = _git("rev-parse", f":{relative}")
         head = _git("rev-parse", "HEAD", cwd=path)
         dirty = _git("status", "--porcelain=v1", "--untracked-files=all", cwd=path)
         if gitlink != head:
@@ -319,88 +383,40 @@ def _bundle_index_projection(
     return payload
 
 
-def _verify_bootstrap_receipt(
-    *,
-    config: dict[str, Any],
-    projection: dict[str, Any],
-    graph: dict[str, Any],
-    bundle_index: dict[str, Any],
-    goal_count: int,
-    errors: list[str],
-) -> None:
-    """Require completion evidence before PCCE-000 may unlock work."""
+def _file_sha256(path: Path) -> str:
+    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
 
-    if not BOOTSTRAP_RECEIPT_PATH.is_file():
-        errors.append(
-            "completed PCCE-000 is missing its declared bootstrap receipt: "
-            + str(BOOTSTRAP_RECEIPT_PATH.relative_to(REPO_ROOT))
-        )
-        return
-    if not PROFILE_G_BOOTSTRAP_RECEIPT_PATH.is_file():
-        errors.append("Profile-G bootstrap receipt is missing")
-        return
+
+def _load_json_object(path: Path, *, label: str, errors: list[str]) -> dict[str, Any] | None:
+    if not path.is_file():
+        errors.append(f"{label} is missing: {path.relative_to(REPO_ROOT)}")
+        return None
     try:
-        receipt = json.loads(BOOTSTRAP_RECEIPT_PATH.read_text(encoding="utf-8"))
+        payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        errors.append(f"PCCE-000 receipt is unreadable: {exc}")
-        return
-    if not isinstance(receipt, dict):
-        errors.append("PCCE-000 receipt must be a JSON object")
-        return
+        errors.append(f"{label} is unreadable: {exc}")
+        return None
+    if not isinstance(payload, dict):
+        errors.append(f"{label} must be a JSON object")
+        return None
+    return payload
 
-    content_id = str(receipt.get("content_id") or "")
-    content_payload = dict(receipt)
+
+def _verify_content_id(
+    payload: dict[str, Any], *, expected: str | None, label: str, errors: list[str]
+) -> None:
+    content_id = str(payload.get("content_id") or "")
+    content_payload = dict(payload)
     content_payload.pop("content_id", None)
-    if content_id != _sha256_json(content_payload):
-        errors.append("PCCE-000 receipt content_id does not match canonical content")
-    fixed_expectations = {
-        "schema": "proof-carrying-context-engine/task-receipt@1",
-        "task_id": "PCCE-000",
-        "objective_id": OBJECTIVE_ID,
-        "board_namespace": BOARD_NAMESPACE,
-        "status": "completed",
-        "artifact_identity": BOOTSTRAP_ARTIFACT_IDENTITY,
-    }
-    for field, expected in fixed_expectations.items():
-        if receipt.get(field) != expected:
-            errors.append(
-                f"PCCE-000 receipt {field} mismatch: "
-                f"{receipt.get(field)!r} != {expected!r}"
-            )
+    calculated = _sha256_json(content_payload)
+    if content_id != calculated:
+        errors.append(f"{label} content_id does not match canonical content")
+    if expected is not None and content_id != expected:
+        errors.append(f"{label} content_id differs from its frozen identity")
 
-    evidence = receipt.get("evidence")
-    if not isinstance(evidence, dict):
-        errors.append("PCCE-000 receipt evidence must be an object")
-        return
-    repository_gitlinks = {
-        name: str(record.get("gitlink") or "")
-        for name, record in sorted(
-            projection["repository_identity"]["repositories"].items()
-        )
-    }
-    expected_evidence = {
-        "objective_sha256": projection["source"]["objective_sha256"],
-        "todo_sha256": projection["source"]["todo_sha256"],
-        "plan_sha256": "sha256:" + hashlib.sha256(PLAN_PATH.read_bytes()).hexdigest(),
-        "config_sha256": "sha256:"
-        + hashlib.sha256(CONFIG_PATH.read_bytes()).hexdigest(),
-        "validator_sha256": "sha256:"
-        + hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        "profile_g_bootstrap_sha256": "sha256:"
-        + hashlib.sha256(PROFILE_G_BOOTSTRAP_RECEIPT_PATH.read_bytes()).hexdigest(),
-        "board_projection_id": projection["projection_id"],
-        "dependency_graph_id": graph["graph_id"],
-        "bundle_index_id": bundle_index["projection_id"],
-        "repository_gitlinks": repository_gitlinks,
-        "protected_paths": sorted(str(item) for item in config["protected_paths"]),
-        "task_ids": list(EXPECTED_TASK_IDS),
-    }
-    for field, expected in expected_evidence.items():
-        if evidence.get(field) != expected:
-            errors.append(f"PCCE-000 receipt evidence mismatch: {field}")
 
-    parser_report = receipt.get("parser_report")
-    expected_report = {
+def _expected_parser_report(goal_count: int) -> dict[str, Any]:
+    return {
         "task_count": len(EXPECTED_TASK_IDS),
         "goal_count": goal_count,
         "unique_task_ids": True,
@@ -413,17 +429,475 @@ def _verify_bootstrap_receipt(
             "PCCE-004",
         ],
     }
-    if parser_report != expected_report:
-        errors.append("PCCE-000 receipt parser_report mismatch")
+
+
+def _verify_historical_r2_receipt(*, goal_count: int, errors: list[str]) -> None:
+    """Verify the admitted r2 receipt only against frozen r2 identities.
+
+    This verifier intentionally does not compare r2 evidence with the current
+    board, config, validator, projections, protected paths, or gitlinks.
+    """
+
+    receipt = _load_json_object(
+        HISTORICAL_R2_RECEIPT_PATH, label="historical PCCE-000 r2 receipt", errors=errors
+    )
+    if receipt is None:
+        return
+    if HISTORICAL_R2_RECEIPT_PATH.stat().st_size != 4373:
+        errors.append("historical PCCE-000 r2 receipt byte size changed")
+    if _file_sha256(HISTORICAL_R2_RECEIPT_PATH) != HISTORICAL_R2_RECEIPT_BYTE_SHA256:
+        errors.append("historical PCCE-000 r2 receipt bytes changed")
+    if _git("hash-object", str(HISTORICAL_R2_RECEIPT_PATH)) != HISTORICAL_R2_RECEIPT_GIT_BLOB:
+        errors.append("historical PCCE-000 r2 receipt Git blob changed")
+    _verify_content_id(
+        receipt,
+        expected=HISTORICAL_R2_RECEIPT_CONTENT_ID,
+        label="historical PCCE-000 r2 receipt",
+        errors=errors,
+    )
+    fixed_expectations = {
+        "schema": "proof-carrying-context-engine/task-receipt@1",
+        "task_id": "PCCE-000",
+        "objective_id": OBJECTIVE_ID,
+        "board_namespace": BOARD_NAMESPACE,
+        "status": "completed",
+        "artifact_identity": HISTORICAL_R2_ARTIFACT_IDENTITY,
+        "control_base": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+    }
+    for field, expected in fixed_expectations.items():
+        if receipt.get(field) != expected:
+            errors.append(f"historical PCCE-000 r2 receipt {field} mismatch")
+
+    evidence = receipt.get("evidence")
+    if not isinstance(evidence, dict):
+        errors.append("historical PCCE-000 r2 receipt evidence must be an object")
+        return
+    fixed_evidence = {
+        **HISTORICAL_R2_PROJECTION_IDS,
+        "objective_sha256": "sha256:bdd0b3e16ced4a1b54f991c8d983259a92bb892c67f21a19e8ccf46841086a3d",
+        "todo_sha256": "sha256:a60be7d4108c988b35fdc7ae9ebc32e24ce1c9731cb2d1a91f109663d81c276e",
+        "plan_sha256": "sha256:f75693f2d863b65de7886b004e65bfb0aa2b494fc9db493f0c17750d1bbe2ff5",
+        "config_sha256": "sha256:21e4cba02c34ca186904c958742c0f7adf4e94a633cc73ab4ee4ae3e0a0b15ac",
+        "validator_sha256": "sha256:5202ad1042ad35762a7cf8f8cc86a66f5f82b8cda230e764fd5cd31062e46536",
+        "profile_g_bootstrap_sha256": "sha256:37ae92791a4a2705bf97c83cbdeb383b1dec97e8604daf4f138bbde9692f37f5",
+        "repository_gitlinks": HISTORICAL_R2_GITLINKS,
+        "task_ids": list(EXPECTED_TASK_IDS),
+    }
+    for field, expected in fixed_evidence.items():
+        if evidence.get(field) != expected:
+            errors.append(f"historical PCCE-000 r2 evidence mismatch: {field}")
+    historical_protected_paths = [
+        "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+        "artifacts/proof_carrying_context_engine/control/profile_g_bootstrap_receipt.json",
+        "artifacts/proof_carrying_context_engine/control/task_board.json",
+        "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+        "artifacts/proof_carrying_context_engine/receipts/PCCE-000.json",
+        "config/proof_carrying_context_engine_v0_1_supervisor.json",
+        "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+        "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+        "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+        "scripts/validate_proof_carrying_context_engine_board.py",
+    ]
+    if evidence.get("protected_paths") != historical_protected_paths:
+        errors.append("historical PCCE-000 r2 protected-path evidence changed")
+    if receipt.get("parser_report") != _expected_parser_report(goal_count):
+        errors.append("historical PCCE-000 r2 parser_report changed")
+    if subprocess.run(
+        ["git", "merge-base", "--is-ancestor", HISTORICAL_R2_ADMISSION_COMMIT, "HEAD"],
+        cwd=REPO_ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    ).returncode != 0:
+        errors.append("historical r2 admission commit is not an ancestor of control HEAD")
+
+
+def _verify_r2_incident(*, errors: list[str]) -> None:
+    incident = _load_json_object(R2_INCIDENT_PATH, label="scheduler-r2 incident", errors=errors)
+    if incident is None:
+        return
+    if _file_sha256(R2_INCIDENT_PATH) != R2_INCIDENT_FILE_SHA256:
+        errors.append("scheduler-r2 incident bytes changed")
+    _verify_content_id(
+        incident,
+        expected=R2_INCIDENT_CONTENT_ID,
+        label="scheduler-r2 incident",
+        errors=errors,
+    )
+    fixed = {
+        "schema": "proof-carrying-context-engine/control-incident@1",
+        "incident_id": R2_INCIDENT_IDENTITY,
+        "status": "preserved_infrastructure_failure",
+        "source_control_commit": HISTORICAL_R2_ADMISSION_COMMIT,
+    }
+    for field, expected in fixed.items():
+        if incident.get(field) != expected:
+            errors.append(f"scheduler-r2 incident {field} mismatch")
+    source_receipt = incident.get("source_board_receipt")
+    expected_source_receipt = {
+        "admission_commit": HISTORICAL_R2_ADMISSION_COMMIT,
+        "artifact_identity": HISTORICAL_R2_ARTIFACT_IDENTITY,
+        "byte_sha256": HISTORICAL_R2_RECEIPT_BYTE_SHA256,
+        "byte_size": 4373,
+        "content_id": HISTORICAL_R2_RECEIPT_CONTENT_ID,
+        "git_blob": HISTORICAL_R2_RECEIPT_GIT_BLOB,
+        "path": str(HISTORICAL_R2_RECEIPT_PATH.relative_to(REPO_ROOT)),
+        "preserved_byte_for_byte": True,
+        "rehash_byte_sha256": HISTORICAL_R2_RECEIPT_BYTE_SHA256,
+    }
+    if source_receipt != expected_source_receipt:
+        errors.append("scheduler-r2 incident source receipt binding mismatch")
+    expected_incident_gitlinks = {
+        "Mcp-Plus-Plus": HISTORICAL_R2_GITLINKS["mcp_plus_plus"],
+        "ipfs_accelerate_py": HISTORICAL_R2_GITLINKS["accelerate"],
+        "ipfs_datasets_py": HISTORICAL_R2_GITLINKS["datasets"],
+        "ipfs_kit_py": HISTORICAL_R2_GITLINKS["kit"],
+    }
+    if incident.get("source_repository_gitlinks") != expected_incident_gitlinks:
+        errors.append("scheduler-r2 incident source gitlinks mismatch")
+
+    raw = incident.get("raw_artifacts")
+    if not isinstance(raw, dict):
+        errors.append("scheduler-r2 incident raw_artifacts must be an object")
+    else:
+        if raw.get("hash_algorithm") != "sha256" or raw.get("hash_passes") != 2:
+            errors.append("scheduler-r2 incident raw hash policy mismatch")
+        if raw.get("file_count") != len(R2_RAW_ARTIFACTS) or raw.get("all_hashes_stable") is not True:
+            errors.append("scheduler-r2 incident raw hash summary mismatch")
+        actual_raw: dict[str, tuple[int, str, str, bool]] = {}
+        for record in raw.get("files") or []:
+            if not isinstance(record, dict) or not str(record.get("path") or ""):
+                errors.append("scheduler-r2 incident has an invalid raw-artifact record")
+                continue
+            actual_raw[str(record["path"])] = (
+                int(record.get("size_bytes", -1)),
+                str(record.get("sha256_pass_1") or ""),
+                str(record.get("sha256_pass_2") or ""),
+                record.get("stable") is True,
+            )
+        expected_raw = {
+            path: (size, digest, digest, True)
+            for path, (size, digest) in R2_RAW_ARTIFACTS.items()
+        }
+        if actual_raw != expected_raw:
+            errors.append("scheduler-r2 incident preserved raw hashes mismatch")
+
+    snapshot = incident.get("scheduler_snapshot")
+    if not isinstance(snapshot, dict):
+        errors.append("scheduler-r2 incident scheduler_snapshot must be an object")
+    else:
+        zero_fields = (
+            "active_worker_count",
+            "completed_count",
+            "implementation_attempt_count",
+            "provider_invocation_count",
+            "started_count",
+        )
+        if any(snapshot.get(field) != 0 for field in zero_fields):
+            errors.append("scheduler-r2 incident falsely records accepted execution")
+        worker_evidence = snapshot.get("worker_evidence") or {}
+        if worker_evidence.get("zero_r2_owned_workers_verified") is not True:
+            errors.append("scheduler-r2 incident lacks zero-worker evidence")
+    partial = incident.get("partial_effects") or {}
+    for field in (
+        "implementation_workspace_created",
+        "source_repository_mutated",
+        "submodule_gitlink_mutated",
+        "provider_invoked",
+        "patch_generated",
+        "validation_run",
+        "merge_attempted",
+        "product_task_completed",
+    ):
+        if partial.get(field) is not False:
+            errors.append(f"scheduler-r2 incident partial effect mismatch: {field}")
+    retention = incident.get("retention") or {}
+    for field in (
+        "resume_scheduler_r2",
+        "reuse_scheduler_r2_state",
+        "reuse_claims_leases_or_fences",
+        "reuse_receipts_as_product_evidence",
+    ):
+        if retention.get(field) is not False:
+            errors.append(f"scheduler-r2 incident retention mismatch: {field}")
+
+
+def _expected_provider_route_repair() -> dict[str, Any]:
+    return {
+        "base_commit": "c8e953be8696d47376442c73739eea14fad83113",
+        "commits": [
+            {
+                "commit": "99a329a34dc2625468de5138e12fdb90892076eb",
+                "tree": "1f27da000b7b50167646a8dffb3214833a38e9d3",
+                "purpose": "production provider argv handoff",
+            },
+            {
+                "commit": "912ecf895717b68abc78545a4f5dfe7f88b69413",
+                "tree": "a96edf1db206d6a7dd0eeed0fff1403a3aa0e6cb",
+                "purpose": "governed production provider route",
+            },
+            {
+                "commit": FINAL_ACCELERATOR_COMMIT,
+                "tree": FINAL_ACCELERATOR_TREE,
+                "purpose": "bounded bundle lane controls",
+            },
+        ],
+        "final_commit": FINAL_ACCELERATOR_COMMIT,
+        "final_tree": FINAL_ACCELERATOR_TREE,
+        "changed_files": [
+            {
+                "path": "ipfs_accelerate_py/agent_supervisor/objectives/bundle_supervisor.py",
+                "sha256": "sha256:d2b89e9330a28a29603bc165a2736003a731563cb95bf4510a35b570a260dc1e",
+                "git_blob": "0dc3b1c645b0525b30f57e23b103a953a1178b4d",
+            },
+            {
+                "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+                "sha256": "sha256:fe577ad6abecd444150a2aa510aa4ea95a8a676a771f188da95af7bab7221bf8",
+                "git_blob": "c3e8600cf4e33de33100689f24c9cf3f2444d978",
+            },
+            {
+                "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+                "sha256": "sha256:63fc57fee91cc28a982b312d7a81aec6559d8f819772603387be36f42e2b5f28",
+                "git_blob": "c049f0c25cb08553f0f3db3d5accdd9ba75dc913",
+            },
+            {
+                "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py",
+                "sha256": "sha256:64ac48f6ee11f061c0e004366a826e4811f37bde201e26294dde477818f9983a",
+                "git_blob": "b07f8c9cade96e7b35390595b673502a346add5b",
+            },
+            {
+                "path": "test/api/test_agent_supervisor_planner.py",
+                "sha256": "sha256:9f9634626e685721e084055b018cc9079f65c40dcda25cfb9eda649536c64e33",
+                "git_blob": "3dcdd09faf24080a3deaa247c454908daf153a7b",
+            },
+            {
+                "path": "test/api/test_agent_supervisor_production_provider_cli.py",
+                "sha256": "sha256:c106ed9946b3180f359550cccf530d98e8a5100f7175d7441144535160545251",
+                "git_blob": "ce5f3c52ba49563f6ffd7114493ff3a2214545e5",
+            },
+        ],
+        "implementation_gates": {
+            "disposition": "passed_for_explicit_pcce_production_policy_route",
+            "passed": 216,
+            "failed": 0,
+            "skipped": 0,
+            "xfailed": 0,
+            "groups": [
+                {"name": "production_cli", "passed": 40},
+                {"name": "production_route_security_reviewed_effect_context_slice", "passed": 66},
+                {"name": "legacy_landed", "passed": 26},
+                {"name": "authority_recovery_post_merge", "passed": 83},
+                {"name": "timeout_envelope_planner", "passed": 1},
+            ],
+            "py_compile": "passed",
+            "git_diff_check": "passed",
+        },
+        "independent_review": {
+            "disposition": "pass_with_documented_baseline_exceptions",
+            "scope": "exact explicit PCCE governed production-policy implement route",
+            "passed": 240,
+            "failed": 0,
+            "warnings": 3,
+            "groups": [
+                {"name": "planner", "passed": 33, "warnings": 1},
+                {"name": "authority_acceptance_post_merge_legacy", "passed": 101, "warnings": 1},
+                {"name": "production_route_cli_security_reviewed_effect_context", "passed": 106, "warnings": 1},
+            ],
+            "static_findings": {
+                "transitive_production_method_closure": {"methods": 48, "missing": 0},
+                "canonical_post_merge_acceptance_funnels": 4,
+                "legacy_direct_completion_sink_callers": 0,
+                "capacity_evidence_redaction": "present",
+                "lifecycle_cas": "fail_closed",
+                "git_ancestry_binding": "sanitized",
+                "worktree_clean_before_and_after": True,
+                "git_diff_check": "passed",
+            },
+        },
+        "baseline_limitations": [
+            {
+                "suite": "implementation_daemon_runner",
+                "result": "collection_error",
+                "return_code": 2,
+                "collected": 0,
+                "errors": 1,
+                "uncollected_functions": 35,
+                "cause": "missing later generic-fallback helper _configured_agent_implementation_route_plan",
+                "scope": "not called by the typed PCCE production route",
+            },
+            {
+                "suite": "implementation_supervisor_runner",
+                "result": "baseline_failures",
+                "passed": 25,
+                "failed": 4,
+                "cases": [
+                    "plan-bound sparse repo_root",
+                    "repeated objective-scan-exclude parser",
+                    "missing manual_completion_authority_revalidation_only parser field",
+                    "no-implement reconciliation worktree-root",
+                ],
+                "scope": "not exercised by the exact standard PCCE implement command",
+            },
+            {
+                "suite": "default_provider_route",
+                "result": "baseline_failures",
+                "passed": 2,
+                "failed": 21,
+                "reproduced_at": "99a329a34dc2625468de5138e12fdb90892076eb",
+                "cause": "untouched generic grok_cli_runner",
+                "scope": "generic/default route is not qualified or used by the explicit PCCE production route",
+            },
+        ],
+        "qualification_boundary": "explicit PCCE production-policy route only; no blanket full-suite, managed-identity, task-attempt, generic-fallback, or default-provider clearance",
+    }
+
+
+def _verify_active_r3_receipt(
+    *,
+    config: dict[str, Any],
+    projection: dict[str, Any],
+    graph: dict[str, Any],
+    bundle_index: dict[str, Any],
+    goal_count: int,
+    errors: list[str],
+) -> None:
+    receipt = _load_json_object(ACTIVE_R3_RECEIPT_PATH, label="active PCCE-000 r3 receipt", errors=errors)
+    if receipt is None:
+        return
+    if not PROFILE_G_BOOTSTRAP_RECEIPT_PATH.is_file():
+        errors.append("Profile-G bootstrap receipt is missing")
+        return
+    _verify_content_id(receipt, expected=None, label="active PCCE-000 r3 receipt", errors=errors)
+    fixed = {
+        "schema": "proof-carrying-context-engine/task-receipt@1",
+        "task_id": "PCCE-000",
+        "objective_id": OBJECTIVE_ID,
+        "board_namespace": BOARD_NAMESPACE,
+        "status": "completed",
+        "artifact_identity": ACTIVE_R3_ARTIFACT_IDENTITY,
+        "control_base": "8abaa5af47743b0d3d3258adfbbb76d9898e1c70",
+    }
+    for field, expected in fixed.items():
+        if receipt.get(field) != expected:
+            errors.append(f"active PCCE-000 r3 receipt {field} mismatch")
+    supersedes = receipt.get("supersedes")
+    expected_supersedes = {
+        "artifact_identity": HISTORICAL_R2_ARTIFACT_IDENTITY,
+        "path": str(HISTORICAL_R2_RECEIPT_PATH.relative_to(REPO_ROOT)),
+        "content_id": HISTORICAL_R2_RECEIPT_CONTENT_ID,
+        "byte_sha256": HISTORICAL_R2_RECEIPT_BYTE_SHA256,
+        "rewrite_allowed": False,
+        "incident_id": R2_INCIDENT_IDENTITY,
+        "incident_path": str(R2_INCIDENT_PATH.relative_to(REPO_ROOT)),
+        "incident_content_id": R2_INCIDENT_CONTENT_ID,
+        "incident_file_sha256": R2_INCIDENT_FILE_SHA256,
+        "incident_rewrite_allowed": False,
+    }
+    if supersedes != expected_supersedes:
+        errors.append("active PCCE-000 r3 supersession binding mismatch")
+
+    evidence = receipt.get("evidence")
+    if not isinstance(evidence, dict):
+        errors.append("active PCCE-000 r3 receipt evidence must be an object")
+        return
+    repository_gitlinks = {
+        name: str(record.get("gitlink") or "")
+        for name, record in sorted(projection["repository_identity"]["repositories"].items())
+    }
+    expected_evidence = {
+        "objective_sha256": projection["source"]["objective_sha256"],
+        "todo_sha256": projection["source"]["todo_sha256"],
+        "plan_sha256": _file_sha256(PLAN_PATH),
+        "config_sha256": _file_sha256(CONFIG_PATH),
+        "validator_sha256": _file_sha256(Path(__file__)),
+        "profile_g_bootstrap_sha256": _file_sha256(PROFILE_G_BOOTSTRAP_RECEIPT_PATH),
+        "board_projection_id": projection["projection_id"],
+        "dependency_graph_id": graph["graph_id"],
+        "bundle_index_id": bundle_index["projection_id"],
+        "repository_gitlinks": repository_gitlinks,
+        "protected_paths": sorted(str(item) for item in config["protected_paths"]),
+        "task_ids": list(EXPECTED_TASK_IDS),
+        "provider_route_repair": _expected_provider_route_repair(),
+    }
+    for field, expected in expected_evidence.items():
+        if evidence.get(field) != expected:
+            errors.append(f"active PCCE-000 r3 evidence mismatch: {field}")
+    if repository_gitlinks.get("accelerate") != FINAL_ACCELERATOR_COMMIT:
+        errors.append("active PCCE-000 r3 accelerator gitlink is not the reviewed repair pin")
+    if receipt.get("parser_report") != _expected_parser_report(goal_count):
+        errors.append("active PCCE-000 r3 parser_report mismatch")
+
+    restart = receipt.get("restart_policy")
+    expected_restart = {
+        "generation": "r3",
+        "scheduler_state_root": str(REPLACEMENT_STATE_ROOT / "scheduler-r3"),
+        "worktree_root": str(REPLACEMENT_STATE_ROOT / "worktrees-r3"),
+        "log_root": str(REPLACEMENT_STATE_ROOT / "logs-r3"),
+        "fresh_claims_leases_fences_and_receipts": True,
+        "resume_scheduler_r2": False,
+        "reuse_scheduler_r2_state": False,
+        "reuse_scheduler_r2_worktrees": False,
+        "reuse_scheduler_r2_logs": False,
+        "reuse_scheduler_r2_claims_leases_fences_or_receipts": False,
+        "preserve_scheduler_r2_forensics_read_only": True,
+    }
+    if restart != expected_restart:
+        errors.append("active PCCE-000 r3 restart policy mismatch")
+    launch = receipt.get("external_launch_receipt")
+    expected_launch = {
+        "required": True,
+        "status": "pending_final_control_head",
+        "generation": "r3",
+        "path": str(REPLACEMENT_STATE_ROOT / "scheduler-r3/control-launch-receipt.json"),
+        "generated_after_control_commit": True,
+        "must_bind": [
+            "final_control_commit",
+            "final_control_tree",
+            "recursive_repository_gitlinks",
+            "nested_repository_heads",
+            "clean_worktree_evidence",
+            "active_r3_receipt_content_id",
+            "board_projection_id",
+            "dependency_graph_id",
+            "bundle_index_id",
+            "provider_policy",
+            "provider_capacity_snapshot_id",
+            "scheduler_r3_paths",
+        ],
+        "product_task_completion_authority": False,
+    }
+    if launch != expected_launch:
+        errors.append("active PCCE-000 r3 external-launch receipt contract mismatch")
     approval = receipt.get("operator_approval")
     if not isinstance(approval, dict):
-        errors.append("PCCE-000 receipt operator_approval must be an object")
+        errors.append("active PCCE-000 r3 operator_approval must be an object")
     elif (
         approval.get("approved") is not True
         or not str(approval.get("identity") or "").strip()
         or not str(approval.get("approved_at") or "").strip()
     ):
-        errors.append("PCCE-000 receipt lacks an explicit operator approval identity")
+        errors.append("active PCCE-000 r3 lacks explicit operator approval")
+
+
+def _verify_control_revision_config(config: dict[str, Any], errors: list[str]) -> None:
+    expected = {
+        "active_revision": "r3",
+        "active_receipt_path": str(ACTIVE_R3_RECEIPT_PATH.relative_to(REPO_ROOT)),
+        "historical_receipt_path": str(HISTORICAL_R2_RECEIPT_PATH.relative_to(REPO_ROOT)),
+        "preserved_incident_path": str(R2_INCIDENT_PATH.relative_to(REPO_ROOT)),
+        "historical_receipt_rewrite_allowed": False,
+        "incident_rewrite_allowed": False,
+        "admission_head_binding": "external-launch-receipt",
+        "external_launch_receipt_required": True,
+        "external_launch_receipt_must_bind_final_control_head": True,
+    }
+    if config.get("control_revision") != expected:
+        errors.append("control_revision config mismatch")
+    source = config.get("source_binding") or {}
+    if source.get("ipfs_accelerate_planning_revision") != FINAL_ACCELERATOR_COMMIT:
+        errors.append("accelerator planning revision is not the reviewed r3 repair pin")
+    if (config.get("repositories") or {}).get("accelerate", {}).get("initial_commit") != "485edc0871c55b0e2ef21d83bece9fa12c2c8d84":
+        errors.append("accelerator initial inventory identity must remain unchanged")
 
 
 def validate(*, output_dir: Path, write: bool) -> dict[str, Any]:
@@ -580,7 +1054,10 @@ def validate(*, output_dir: Path, write: bool) -> dict[str, Any]:
         config=config,
         source_sha256=projection["source"]["todo_sha256"],
     )
-    _verify_bootstrap_receipt(
+    _verify_control_revision_config(config, errors)
+    _verify_historical_r2_receipt(goal_count=len(goals), errors=errors)
+    _verify_r2_incident(errors=errors)
+    _verify_active_r3_receipt(
         config=config,
         projection=projection,
         graph=graph,

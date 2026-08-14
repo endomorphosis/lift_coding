@@ -105,32 +105,32 @@ Goal tree:
 - Is schedulable: false
 - Review only: true
 - Owning repository: cross-repository
-- Owned paths: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json
-- Objective: Establish PCCE-G000, the eight epic goals, stable task identities, non-overlapping ownership, dependency waves, and fail-closed launch defaults without granting implementation workers control-plane authority.
+- Owned paths: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json
+- Objective: Establish PCCE-G000, the eight epic goals, stable task identities, non-overlapping ownership, dependency waves, fail-closed launch defaults, and an immutable control-revision/incident chain without granting implementation workers control-plane authority.
 - Depends on:
 - Priority: P0
 - Risk classification: control-critical
 - Execution mode: operator-only board bootstrap
-- Allowed effects: Record the reviewed board bootstrap receipt and immutable board content identity.
-- Prohibited effects: Implement product code; mutate any external repository; let a worker edit protected plan, board, scheduler, or supervisor files.
-- Acceptance criteria: The board contains exactly PCCE-000, PCCE-001 through PCCE-019, PCCE-020 through PCCE-025, PCCE-030 through PCCE-035, PCCE-040 through PCCE-045, PCCE-050 through PCCE-057, PCCE-060 through PCCE-068, PCCE-070 through PCCE-076, PCCE-079, and PCCE-080 through PCCE-083; every block has every required field; dependencies are acyclic and follow the declared merge order.
-- Required tests: Parse all PCCE headings; verify unique IDs, required fields, exact namespace, acyclic dependencies, non-overlapping concurrent Owned paths, and protected-path exclusion.
-- Required evidence: Board byte digest; parser report; dependency graph; protected-path audit; operator approval identity.
-- Rollback procedure: Supersede with a new explicitly versioned reviewed board; never silently rewrite an admitted board identity.
-- Assigned worktree: proof-carrying-context-engine-control
-- Final result CID or artifact identity: urn:pcce:task-receipt:PCCE-000:v0.1-r2 at artifacts/proof_carrying_context_engine/receipts/PCCE-000.json#content_id
+- Allowed effects: Preserve the byte-identical r2 bootstrap receipt; preserve the r2 infrastructure-failure incident; record the reviewed r3 control receipt and immutable current board identities.
+- Prohibited effects: Rewrite or delete the r2 receipt, incident, Profile-G bootstrap receipt, or r2 forensic state; treat r2 coordination receipts as product evidence; reuse r2 claims, leases, fences, worktrees, logs, or scheduler state; implement product code; let a worker edit protected plan, board, scheduler, or supervisor files.
+- Acceptance criteria: The board contains exactly PCCE-000, PCCE-001 through PCCE-019, PCCE-020 through PCCE-025, PCCE-030 through PCCE-035, PCCE-040 through PCCE-045, PCCE-050 through PCCE-057, PCCE-060 through PCCE-068, PCCE-070 through PCCE-076, PCCE-079, and PCCE-080 through PCCE-083; every block has every required field; dependencies are acyclic and follow the declared merge order; r2 remains byte-identical; the r2 incident and r3 receipt form a verified supersession chain; r3 requires a fresh-state launch receipt bound to the final control HEAD.
+- Required tests: Parse all PCCE headings; verify unique IDs, required fields, exact namespace, acyclic dependencies, non-overlapping concurrent Owned paths, protected-path exclusion, frozen r2 byte/blob/content identities, incident content/raw hashes, current r3 content and projection identities, exact repair pin/evidence, and fresh-r3/no-r2-reuse policy.
+- Required evidence: Frozen r2 byte digest, Git blob, content ID, projection IDs, and accelerator gitlink; incident digest, content ID, attempt ledger, and stable raw hashes; r3 board/config/validator/projection/gitlink digests; provider repair commit/tree/file identities; implementer and independent-review gate results with baseline limitations; operator approval identity; external launch receipt requirement.
+- Rollback procedure: Preserve r2, the incident, and r3 byte-for-byte; supersede r3 with a new explicitly versioned reviewed receipt and a distinct scheduler generation; never silently rewrite an admitted receipt or repair r2 state in place.
+- Assigned worktree: pcce-control-r3
+- Final result CID or artifact identity: urn:pcce:task-receipt:PCCE-000:v0.1-r3 at artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json#content_id
 - Goal id: PCCE-G000
-- Outputs: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json
+- Outputs: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json
 - Validation: python -m pytest -q external/ipfs_accelerate/test/api/agent_supervisor -k task_board
 - Board namespace: proof-carrying-context-engine-v0.1
 - Bundle: pcce/control/bootstrap
 - Parallel lane: pcce-control
 - Resource class: cpu-small
 - Implementation timeout seconds: 900
-- Predicted files: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json
-- Allowed paths: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json
-- Conflict policy: Operator-only bootstrap. Protected control documents are outside every schedulable task mutation permit.
-- Acceptance: One parseable, complete, acyclic, namespace-stable board is admitted as the sole execution source for PCCE-G000.
+- Predicted files: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json
+- Allowed paths: artifacts/proof_carrying_context_engine/receipts/PCCE-000.json, artifacts/proof_carrying_context_engine/control/incidents/scheduler-r2-provider-handoff.json, artifacts/proof_carrying_context_engine/receipts/PCCE-000-r3.json
+- Conflict policy: Operator-only bootstrap revision. Historical r2 and incident artifacts are immutable; protected control documents are outside every schedulable task mutation permit.
+- Acceptance: One parseable, complete, acyclic, namespace-stable r3 board is admitted as the sole execution source for PCCE-G000, with r2 failure evidence preserved and no inherited runtime authority.
 
 ## PCCE-001 Inventory datasets semantic and evaluation authorities
 

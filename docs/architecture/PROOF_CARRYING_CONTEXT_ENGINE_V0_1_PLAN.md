@@ -56,8 +56,68 @@ extension fields, restored `0 -> 100` only at the Profile-G boundary, preserved
 finite limits, and propagated the configured three-attempt ceiling. The change
 is limited to lease coordination, bundle planning, and focused tests. Exact-pin
 verification passed 127 lease, worktree, resource, and attempt-boundary tests.
-The initial inventory identity remains `485edc087...`; the launch gitlink is the
-descendant bootstrap commit and is recorded separately in the control receipt.
+The initial inventory identity remains `485edc087...`; the r2 launch gitlink
+was the descendant bootstrap commit and is preserved separately in the r2
+control receipt and incident record.
+
+### Preserved r2 launch failure and r3 control revision
+
+The first live scheduler generation, `scheduler-r2`, reached the bundle-to-
+implementation-supervisor boundary but accepted no product-task start. The
+child rejected four governed provider options before daemon startup:
+`--production-provider-policy`,
+`--production-provider-context-budget-tokens`,
+`--production-provider-timeout-seconds`, and
+`--production-provider-review-authority-key-path`. No provider ran, no patch or
+implementation worktree was created, no validation ran, and no source or
+gitlink was mutated. Eight failed or cancelled coordination receipts and all
+r2 state/log hashes are retained in
+`control/incidents/scheduler-r2-provider-handoff.json`; they are failure
+evidence only and cannot be reused as product evidence.
+
+The bounded accelerator repair is the three-commit descendant
+`99a329a34dc2625468de5138e12fdb90892076eb` (provider argv handoff),
+`912ecf895717b68abc78545a4f5dfe7f88b69413` (governed production route), and
+`50c0b8551397983f664fbaa6ac12c68ba0eda82c` (bounded lane controls), with final
+tree `a16781386689845c1162c85c0f5c899a673d48e6`. The initial accelerator commit
+remains `485edc087...`; only the planning/launch gitlink advances to `50c0b855...`.
+
+Implementer evidence at the final pin reports 216 passed, zero failed, zero
+skipped, and zero xfailed across production CLI, production route/security/
+reviewed-effect/context-slice, legacy-landed, authority/recovery/post-merge,
+and timeout-envelope planner gates. `py_compile` and `git diff --check` also
+passed. Independent final-pin review passed 240 critical tests: 33 planner,
+101 authoritative-completion/acceptance-recovery/post-merge/legacy-landed, and
+106 production route/CLI/security/reviewed-effect/context-slice tests. It also
+verified a complete 48-method production closure, four canonical
+post-merge-acceptance funnels with no caller of the legacy direct sink,
+capacity-evidence redaction, fail-closed lifecycle CAS, and sanitized Git
+ancestry binding. That disposition is a pass for the exact PCCE governed
+production-policy implement route, not blanket full-suite or default-provider
+clearance.
+
+The following reproduced baseline limitations remain explicit and must not be
+reported as green:
+
+- `implementation_daemon_runner` exits with collection error rc2 because the
+  later generic-fallback helper `_configured_agent_implementation_route_plan`
+  is absent; 35 functions are uncollected. The helper is not called by the
+  typed PCCE production route.
+- `implementation_supervisor_runner` remains at 25 passed and four pre-existing
+  failures covering sparse plan-bound `repo_root`, repeated objective exclusion
+  parsing, a missing manual-revalidation-only parser field, and no-implement
+  reconciliation worktree-root handling. The exact PCCE implement command does
+  not exercise those cases.
+- `default_provider_route` remains at two passed and 21 failures, reproduced
+  identically at the `99a329a34...` baseline and concentrated in the untouched
+  generic `grok_cli_runner`. The explicit production route is green; the
+  generic/default route is not qualified.
+
+Generation r3 must use fresh `scheduler-r3`, `worktrees-r3`, and `logs-r3`
+roots, fresh claims, leases, fences, and receipts, and a launch receipt binding
+the final committed control HEAD/tree and recursive gitlinks. It must never
+resume, repair in place, compact, delete, or promote r2 state. The historical
+r2 receipt and Profile-G bootstrap receipt remain byte-for-byte immutable.
 
 ## Evidence-backed preliminary inventory
 
