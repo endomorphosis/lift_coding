@@ -10,6 +10,7 @@ dist/
 *.egg-info/
 .DS_Store
 *.duckdb
+*.duckdb.lock
 *.duckdb.wal
 *.duckdb.tmp
 .env

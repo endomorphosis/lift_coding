@@ -1,0 +1,192 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.proof_carrying_context_engine.scheduler_config@1",
+  "taskboard_path": "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+  "objectives_path": "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+  "plan_path": "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+  "validator_path": "scripts/validate_proof_carrying_context_engine_board.py",
+  "task_prefix": "PCCE-",
+  "goal_prefix": "PCCE-G",
+  "board_namespace": "proof-carrying-context-engine-v0.1",
+  "merge_target_branch": "agent/proof-carrying-context-engine-v0.1",
+  "source_binding": {
+    "accelerator_required_ancestor": "b6f40c05e0884867eb8557f8882cd25cb760ca2f",
+    "accelerator_required_branch": "agent/proof-carrying-context-engine-v0.1",
+    "bootstrap_task_source": "legacy-markdown",
+    "ipfs_datasets_submodule_path": "external/ipfs_datasets",
+    "ipfs_datasets_planning_revision": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "ipfs_kit_submodule_path": "external/ipfs_kit",
+    "ipfs_kit_planning_revision": "6196017ca3df016c7159dce43af60f2a0d96a9ae",
+    "ipfs_accelerate_submodule_path": "external/ipfs_accelerate",
+    "ipfs_accelerate_planning_revision": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84",
+    "mcp_plus_plus_submodule_path": "Mcp-Plus-Plus",
+    "mcp_plus_plus_planning_revision": "6965f89f066769f3b3ac7b5f753b1a0044562570",
+    "require_initialized_gitlinks": true,
+    "require_superproject_gitlink_equals_nested_head": true,
+    "require_clean_nested_worktree_at_task_start": true,
+    "record_recursive_repository_forest_at_launch": true,
+    "changed_revision_requires_fresh_inventory_and_baseline": true,
+    "planning_revision_is_runtime_completion_evidence": false
+  },
+  "repositories": {
+    "datasets": {
+      "path": "external/ipfs_datasets",
+      "initial_commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6"
+    },
+    "kit": {
+      "path": "external/ipfs_kit",
+      "initial_commit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+    },
+    "accelerate": {
+      "path": "external/ipfs_accelerate",
+      "initial_commit": "485edc0871c55b0e2ef21d83bece9fa12c2c8d84"
+    },
+    "mcp_plus_plus": {
+      "path": "Mcp-Plus-Plus",
+      "initial_commit": "6965f89f066769f3b3ac7b5f753b1a0044562570"
+    }
+  },
+  "initial_projection": {
+    "task_count": 56,
+    "completed_task_ids": [
+      "PCCE-000"
+    ],
+    "ready_task_ids": [
+      "PCCE-001",
+      "PCCE-002",
+      "PCCE-003",
+      "PCCE-004"
+    ],
+    "blocked_task_ids": [],
+    "terminal_task_id": "PCCE-083",
+    "goal_count": 9,
+    "root_goal_id": "PCCE-G000"
+  },
+  "max_lanes": 2,
+  "strict_task_sharding": true,
+  "exit_when_all_tracks_terminal": true,
+  "objective_refill_enabled": false,
+  "codebase_refill_enabled": false,
+  "poll_interval_seconds": 10,
+  "daemon_interval_seconds": 30,
+  "check_interval_seconds": 30,
+  "stale_seconds": 900,
+  "watchdog_startup_grace_seconds": 900,
+  "max_restarts": 4,
+  "max_task_attempts": 3,
+  "implementation_retry_budget": 2,
+  "validation_retry_budget": 2,
+  "merge_retry_budget": 2,
+  "implementation_timeout_seconds": 5400,
+  "implementation_max_timeout_seconds": 10800,
+  "implementation_log_stall_seconds": 1200,
+  "worktree_submodule_paths": [
+    "external/ipfs_datasets",
+    "external/ipfs_kit",
+    "external/ipfs_accelerate",
+    "Mcp-Plus-Plus"
+  ],
+  "protected_paths": [
+    "docs/architecture/PROOF_CARRYING_CONTEXT_ENGINE_V0_1_PLAN.md",
+    "docs/architecture/proof_carrying_context_engine_v0_1.objectives.md",
+    "docs/architecture/proof_carrying_context_engine_v0_1.todo.md",
+    "config/proof_carrying_context_engine_v0_1_supervisor.json",
+    "scripts/validate_proof_carrying_context_engine_board.py",
+    "artifacts/proof_carrying_context_engine/control/task_board.json",
+    "artifacts/proof_carrying_context_engine/control/task_dependency_graph.json",
+    "artifacts/proof_carrying_context_engine/control/bundle_index.json"
+  ],
+  "runtime_paths": {
+    "root": "data/agent_supervisor/proof_carrying_context_engine_v0_1",
+    "state": "data/agent_supervisor/proof_carrying_context_engine_v0_1/state",
+    "worktrees": "data/agent_supervisor/proof_carrying_context_engine_v0_1/worktrees",
+    "merge_queue": "data/agent_supervisor/proof_carrying_context_engine_v0_1/merge-queue",
+    "logs": "data/agent_supervisor/proof_carrying_context_engine_v0_1/logs",
+    "evidence": "data/agent_supervisor/proof_carrying_context_engine_v0_1/evidence",
+    "generated_runtime_artifacts_are_completion_authority": false
+  },
+  "lanes": [
+    {
+      "index": 0,
+      "name": "pcce-lane-0",
+      "strict_shard_remainder": 0,
+      "initial_task_ids": [
+        "PCCE-001",
+        "PCCE-003"
+      ],
+      "initial_focus": "datasets-and-accelerate-inventory"
+    },
+    {
+      "index": 1,
+      "name": "pcce-lane-1",
+      "strict_shard_remainder": 1,
+      "initial_task_ids": [
+        "PCCE-002",
+        "PCCE-004"
+      ],
+      "initial_focus": "kit-and-mcplusplus-inventory"
+    }
+  ],
+  "provider": {
+    "primary_provider_id": "grok_cli",
+    "primary_model_id": "grok-4.5",
+    "fallback_provider_id": "codex",
+    "fallback_model_id": "gpt-5.6-terra",
+    "fallback_trigger": "primary_quota_exhausted",
+    "fallback_reasoning_effort": "medium",
+    "max_concurrency": 2
+  },
+  "waves": [
+    {"id": "W00", "task_ids": ["PCCE-000"]},
+    {"id": "W01", "task_ids": ["PCCE-001", "PCCE-002", "PCCE-003", "PCCE-004"]},
+    {"id": "W02", "task_ids": ["PCCE-005"]},
+    {"id": "W03", "task_ids": ["PCCE-006"]},
+    {"id": "W04", "task_ids": ["PCCE-007"]},
+    {"id": "W05", "task_ids": ["PCCE-008", "PCCE-009", "PCCE-010"]},
+    {"id": "W06", "task_ids": ["PCCE-011"]},
+    {"id": "W07", "task_ids": ["PCCE-020", "PCCE-022", "PCCE-023"]},
+    {"id": "W08", "task_ids": ["PCCE-021"]},
+    {"id": "W09", "task_ids": ["PCCE-024"]},
+    {"id": "W10", "task_ids": ["PCCE-025"]},
+    {"id": "W11", "task_ids": ["PCCE-030", "PCCE-040", "PCCE-043"]},
+    {"id": "W12", "task_ids": ["PCCE-031", "PCCE-032", "PCCE-033", "PCCE-034", "PCCE-042"]},
+    {"id": "W13", "task_ids": ["PCCE-035"]},
+    {"id": "W14", "task_ids": ["PCCE-041"]},
+    {"id": "W15", "task_ids": ["PCCE-044"]},
+    {"id": "W16", "task_ids": ["PCCE-050", "PCCE-051", "PCCE-052", "PCCE-055"]},
+    {"id": "W17", "task_ids": ["PCCE-053"]},
+    {"id": "W18", "task_ids": ["PCCE-054"]},
+    {"id": "W19", "task_ids": ["PCCE-056"]},
+    {"id": "W20", "task_ids": ["PCCE-060", "PCCE-070"]},
+    {"id": "W21", "task_ids": ["PCCE-061", "PCCE-062", "PCCE-063", "PCCE-064", "PCCE-065", "PCCE-066", "PCCE-071", "PCCE-072", "PCCE-073", "PCCE-074"]},
+    {"id": "W22", "task_ids": ["PCCE-067", "PCCE-075"]},
+    {"id": "W23", "task_ids": ["PCCE-068", "PCCE-076"]},
+    {"id": "W24", "task_ids": ["PCCE-080"]},
+    {"id": "W25", "task_ids": ["PCCE-081"]},
+    {"id": "W26", "task_ids": ["PCCE-082"]},
+    {"id": "W27", "task_ids": ["PCCE-083"]}
+  ],
+  "bundle_scheduler": {
+    "bundle_index_path": "artifacts/proof_carrying_context_engine/control/bundle_index.json",
+    "external_state_root": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1",
+    "provider_capacity_path": "/home/barberb/.local/state/ipfs_accelerate_py/proof-carrying-context-engine-v0.1/provider/capacity.json",
+    "maximum_lane_count": 2,
+    "max_cpu_percent": 85,
+    "max_memory_percent": 85,
+    "max_disk_percent": 90,
+    "max_cpu_proof_concurrency": 2,
+    "max_model_concurrency": 2,
+    "max_artifact_concurrency": 2,
+    "lease_ms": 60000,
+    "heartbeat_interval_seconds": 5,
+    "production_provider_policy": "grok-implement-codex-independent-review"
+  },
+  "recovery": {
+    "reconcile_before_restart": true,
+    "require_owned_process_identity": true,
+    "require_expired_lease_and_dead_owner_for_reclaim": true,
+    "delete_evidence_to_unstall": false,
+    "bounded_retries": true,
+    "terminal_on_external_prerequisite": "blocked",
+    "terminal_on_required_gate_failure": "no_go"
+  }
+}
