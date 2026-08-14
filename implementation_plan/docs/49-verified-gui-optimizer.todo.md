@@ -831,7 +831,7 @@ for other screens, but no task may expand into optimizing every application.
 
 ## VGO-068 Capture the live Agent Supervisor browser baseline
 
-- Status: pending
+- Status: completed
 - Completion: auto
 - Is schedulable: true
 - Review only: false
