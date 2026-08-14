@@ -1,0 +1,57 @@
+{
+  "adversarial_vectors": {
+    "association": "fail",
+    "confirmation": "fail",
+    "focus": "fail",
+    "policy": "fail"
+  },
+  "application_id": "app:agent-supervisor",
+  "archived_baseline": {
+    "browser_baseline_path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-browser-baseline.json",
+    "live_confirmed_error_association": true,
+    "original_defect_codes": [
+      "missing-field-error-association",
+      "outerhtml-root-replace-focus-risk"
+    ],
+    "semantic_baseline_path": "implementation_plan/evidence/verified_gui_optimizer/agent-supervisor-semantic-baseline.json",
+    "target_path": "swissknife/web/js/apps/agent-supervisor.js"
+  },
+  "artifact_cids": [],
+  "artifacts": [],
+  "canonical_json_profile": "gui-optimizer-canonical-json/v1",
+  "claim_boundary": {
+    "browser_generated_authorization": false,
+    "can_issue_authoritative_allow": false,
+    "ui_visibility_authorizes": false,
+    "uses_production_credentials": false,
+    "uses_production_services": false,
+    "verified_authorization": false
+  },
+  "current_contracts": {
+    "confirmation_tokens_unchanged": true,
+    "disabled_dispatch": true,
+    "error_association": true,
+    "error_association_failure_count": 0,
+    "focus_loss_count": 0,
+    "focus_restore": true
+  },
+  "interface": "AgentSupervisorRegressionSuite@1",
+  "lifecycle_suite_references": [
+    "swissknife/test/browser/agent-supervisor-console-gateway.test.ts",
+    "swissknife/test/browser/all-app-tool-gateway.test.ts",
+    "swissknife/test/e2e/agent-supervisor-console.spec.ts",
+    "swissknife/test/e2e/agent-supervisor-goal-task-lifecycle.spec.ts"
+  ],
+  "named_suites": [
+    "swissknife/test/browser/verified-gui-optimizer-agent-supervisor-boundary.test.ts",
+    "swissknife/test/e2e/verified-gui-optimizer-agent-supervisor-regression.spec.ts"
+  ],
+  "receipt_cid": "bafkreibplaceholderreceiptcidvgo081xxxxxxxxxxxxxxxxxxxx",
+  "receipt_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "receipt_id": "receipt:regression:vgo-081-agent-supervisor",
+  "repository_id": "repository:sha256:4e580c9c70ff41fdb7d1ace5f049df8d73c5dd7ea0d7fdfa5977b35b13476ee3",
+  "schema_version": "agent-supervisor-regression-receipt/v1",
+  "screen_id": "screen:agent-supervisor",
+  "task_id": "VGO-081",
+  "verification_status": "integrity_valid"
+}
